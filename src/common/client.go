@@ -197,6 +197,13 @@ func (c *Client) PrepareRequest(
 	localVarRequest.Header.Add("User-Agent", c.Cfg.UserAgent)
 	localVarRequest.Header.Add("Cache-Control", "no-cache")
 
+	// Add authentication headers
+	if c.Cfg.ApiKey != "" {
+		localVarRequest.Header.Add("x-API-key", c.Cfg.ApiKey)
+	} else if c.Cfg.Username != "" && c.Cfg.Password != "" {
+		localVarRequest.SetBasicAuth(c.Cfg.Username, c.Cfg.Password)
+	}
+
 	if ctx != nil {
 		// add context to the request
 		localVarRequest = localVarRequest.WithContext(ctx)

@@ -7,7 +7,6 @@
 package main
 
 import (
-	"encoding/base64"
 	"fmt"
 	"net/http"
 	"time"
@@ -25,19 +24,19 @@ const (
 	HppLive                         = "https://live.adyen.com/hpp"
 	MarketpayEndpointTest           = "https://cal-test.adyen.com/cal/services"
 	MarketpayEndpointLive           = "https://cal-live.adyen.com/cal/services"
-	ApiVersion                      = "v52"
-	RecurringApiVersion             = "v49"
-	MarketpayAccountApiVersion      = "v5"
-	MarketpayFundApiVersion         = "v5"
-	MarketpayNotificationApiVersion = "v5"
+	MarketpayAccountAPIVersion      = "v5"
+	MarketpayFundAPIVersion         = "v5"
+	MarketpayNotificationAPIVersion = "v5"
+	APIVersion                      = "v52"
+	RecurringAPIVersion             = "v49"
 	CheckoutEndpointTest            = "https://checkout-test.adyen.com/checkout"
 	CheckoutEndpointLiveSuffix      = "-checkout-live.adyenpayments.com/checkout"
-	CheckoutApiVersion              = "v52"
+	CheckoutAPIVersion              = "v52"
 	BinLookupPalSuffix              = "/pal/servlet/BinLookup/"
-	BinLookupApiVersion             = "v50"
-	CheckoutUtilityApiVersion       = "v1"
-	TerminalApiEndpointTest         = "https://terminal-api-test.adyen.com"
-	TerminalApiEndpointLive         = "https://terminal-api-live.adyen.com"
+	BinLookupAPIVersion             = "v50"
+	CheckoutUtilityAPIVersion       = "v1"
+	TerminalAPIEndpointTest         = "https://terminal-api-test.adyen.com"
+	TerminalAPIEndpointLive         = "https://terminal-api-live.adyen.com"
 	EndpointProtocol                = "https://"
 	LibName                         = "adyen-go-api-library"
 	LibVersion                      = "0.0.1"
@@ -118,12 +117,7 @@ func NewAPIClient(cfg *common.Config) *APIClient {
 	if cfg.UserAgent == "" {
 		cfg.UserAgent = fmt.Sprintf("%s %s/%s", cfg.ApplicationName, LibName, LibVersion)
 	}
-	if cfg.ApiKey != "" {
-		cfg.AddDefaultHeader("x-API-key", cfg.ApiKey)
-	} else if cfg.Username != "" && cfg.Password != "" {
-		auth := fmt.Sprintf("%s:%s", cfg.Username, cfg.Password)
-		cfg.AddDefaultHeader("Authorization", fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(auth))))
-	}
+	
 	c := &APIClient{}
 	c.client = &common.Client{}
 	c.client.Cfg = cfg
@@ -137,7 +131,7 @@ func NewAPIClient(cfg *common.Config) *APIClient {
 	// API Services
 	c.Checkout = (*checkout.Checkout)(&c.client.Common)
 	c.Checkout.BasePath = func() string {
-		return getURL(c.client.Cfg.CheckoutEndpoint, CheckoutApiVersion)
+		return getURL(c.client.Cfg.CheckoutEndpoint, CheckoutAPIVersion)
 	}
 
 	return c
@@ -161,14 +155,14 @@ func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix
 			c.client.Cfg.Endpoint = EndpointLive
 			c.client.Cfg.CheckoutEndpoint = ""
 		}
-		c.client.Cfg.TerminalApiCloudEndpoint = TerminalApiEndpointLive
+		c.client.Cfg.TerminalApiCloudEndpoint = TerminalAPIEndpointLive
 	} else {
 		c.client.Cfg.Environment = env
 		c.client.Cfg.Endpoint = EndpointTest
 		c.client.Cfg.MarketPayEndpoint = MarketpayEndpointTest
 		c.client.Cfg.HppEndpoint = HppTest
 		c.client.Cfg.CheckoutEndpoint = CheckoutEndpointTest
-		c.client.Cfg.TerminalApiCloudEndpoint = TerminalApiEndpointTest
+		c.client.Cfg.TerminalApiCloudEndpoint = TerminalAPIEndpointTest
 	}
 }
 
