@@ -34,6 +34,21 @@ go get github.com/adyen/adyen-go-api-library
 - https://docs.adyen.com/developers/development-resources/libraries
 - https://docs.adyen.com/developers/checkout
 
+## Sample Usage
+
+```go
+import (
+	"github.com/adyen/adyen-go-api-library/src/checkout"
+	adyen "github.com/adyen/adyen-go-api-library/src/api"
+)
+
+client := adyen.NewAPIClientWithAPIKey("your api key", "TEST")
+
+res, httpRes, err := client.Checkout.PaymentMethodsPost(&checkout.PaymentMethodsRequest{
+    MerchantAccount: "your merchant account",
+})
+```
+
 ## HTTP Client Configuration
 
 By default, Go [`http.DefaultClient`](https://golang.org/pkg/net/http/) will be used to submit requests to the API. But you can change that by injecting your own HttpClient on your client instance.
@@ -160,8 +175,8 @@ func NewAPIClient(cfg *common.Config) *APIClient {
 }
 ```
 
-**Step 4**: Run `go build src/main.go` and Fix any issues found
+**Step 4**: Run `go run main.go` and Fix any issues found
 
 **Step 5**: Add tests for the new APIs created under `./src/<Api namespace in lowercase>`
 
-**Step 6**: Run `go test ./src` and Fix any issues found
+**Step 6**: Run `go test ./...` and Fix any issues found
