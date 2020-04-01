@@ -12,6 +12,7 @@ import (
 	"time"
 
 	checkout "github.com/adyen/adyen-go-api-library/src/checkout"
+	checkoututility "github.com/adyen/adyen-go-api-library/src/checkoututility"
 	common "github.com/adyen/adyen-go-api-library/src/common"
 )
 
@@ -47,7 +48,8 @@ const (
 type APIClient struct {
 	client *common.Client
 	// API Services
-	Checkout *checkout.Checkout
+	Checkout        *checkout.Checkout
+	CheckoutUtility *checkoututility.CheckoutUtility
 }
 
 // NewAPIClientWithCredentials creates a new API client based on provided credentials and environment
@@ -131,6 +133,12 @@ func NewAPIClient(cfg *common.Config) *APIClient {
 		Client: c.client,
 		BasePath: func() string {
 			return getURL(c.client.Cfg.CheckoutEndpoint, CheckoutAPIVersion)
+		},
+	}
+	c.CheckoutUtility = &checkoututility.CheckoutUtility{
+		Client: c.client,
+		BasePath: func() string {
+			return getURL(c.client.Cfg.CheckoutEndpoint, CheckoutUtilityAPIVersion)
 		},
 	}
 
