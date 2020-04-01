@@ -41,7 +41,8 @@ var (
 )
 
 type Service struct {
-	Client *Client
+	Client   *Client
+	BasePath func() string
 }
 
 // Client manages communication with the Adyen Checkout API API v51
@@ -49,91 +50,6 @@ type Service struct {
 type Client struct {
 	Cfg    *Config
 	Common Service // Reuse a single struct instead of allocating one for each service on the heap.
-}
-
-func atoi(in string) (int, error) {
-	return strconv.Atoi(in)
-}
-
-// SelectHeaderContentType select a content type from the available list.
-func SelectHeaderContentType(contentTypes []string) string {
-	if len(contentTypes) == 0 {
-		return ""
-	}
-	if contains(contentTypes, "application/json") {
-		return "application/json"
-	}
-	return contentTypes[0] // use the first content type specified in 'consumes'
-}
-
-// SelectHeaderAccept join all accept types and return
-func SelectHeaderAccept(accepts []string) string {
-	if len(accepts) == 0 {
-		return ""
-	}
-
-	if contains(accepts, "application/json") {
-		return "application/json"
-	}
-
-	return strings.Join(accepts, ",")
-}
-
-// contains is a case insenstive match, finding needle in a haystack
-func contains(haystack []string, needle string) bool {
-	for _, a := range haystack {
-		if strings.ToLower(a) == strings.ToLower(needle) {
-			return true
-		}
-	}
-	return false
-}
-
-// Verify optional parameters are of the correct type.
-func typeCheckParameter(obj interface{}, expected string, name string) error {
-	// Make sure there is an object.
-	if obj == nil {
-		return nil
-	}
-
-	// Check the type is as expected.
-	if reflect.TypeOf(obj).String() != expected {
-		return fmt.Errorf("Expected %s to be of type %s but received %s.", name, expected, reflect.TypeOf(obj).String())
-	}
-	return nil
-}
-
-// parameterToString convert interface{} parameters to string, using a delimiter if format is provided.
-func parameterToString(obj interface{}, collectionFormat string) string {
-	var delimiter string
-
-	switch collectionFormat {
-	case "pipes":
-		delimiter = "|"
-	case "ssv":
-		delimiter = " "
-	case "tsv":
-		delimiter = "\t"
-	case "csv":
-		delimiter = ","
-	}
-
-	if reflect.TypeOf(obj).Kind() == reflect.Slice {
-		return strings.Trim(strings.Replace(fmt.Sprint(obj), " ", delimiter, -1), "[]")
-	} else if t, ok := obj.(time.Time); ok {
-		return t.Format(time.RFC3339)
-	}
-
-	return fmt.Sprintf("%v", obj)
-}
-
-// parameterToJson is helper for converting interface{} parameters to json strings
-func parameterToJson(obj interface{}) (string, error) {
-	jsonBuf, err := json.Marshal(obj)
-	if err != nil {
-		return "", err
-	}
-	return string(jsonBuf), err
 }
 
 // CallAPI do the request.
@@ -247,16 +163,6 @@ func (c *Client) PrepareRequest(
 		return nil, err
 	}
 
-	// Override request host, if applicable
-	if c.Cfg.Host != "" {
-		url.Host = c.Cfg.Host
-	}
-
-	// Override request scheme, if applicable
-	if c.Cfg.Scheme != "" {
-		url.Scheme = c.Cfg.Scheme
-	}
-
 	// Adding Query Param
 	query := url.Query()
 	for k, v := range queryParams {
@@ -289,6 +195,7 @@ func (c *Client) PrepareRequest(
 
 	// Add the user agent to the request.
 	localVarRequest.Header.Add("User-Agent", c.Cfg.UserAgent)
+	localVarRequest.Header.Add("Cache-Control", "no-cache")
 
 	if ctx != nil {
 		// add context to the request
@@ -347,6 +254,91 @@ func (c *Client) Decode(v interface{}, b []byte, contentType string) (err error)
 		return nil
 	}
 	return errors.New("undefined response type")
+}
+
+func atoi(in string) (int, error) {
+	return strconv.Atoi(in)
+}
+
+// SelectHeaderContentType select a content type from the available list.
+func SelectHeaderContentType(contentTypes []string) string {
+	if len(contentTypes) == 0 {
+		return ""
+	}
+	if contains(contentTypes, "application/json") {
+		return "application/json"
+	}
+	return contentTypes[0] // use the first content type specified in 'consumes'
+}
+
+// SelectHeaderAccept join all accept types and return
+func SelectHeaderAccept(accepts []string) string {
+	if len(accepts) == 0 {
+		return ""
+	}
+
+	if contains(accepts, "application/json") {
+		return "application/json"
+	}
+
+	return strings.Join(accepts, ",")
+}
+
+// contains is a case insenstive match, finding needle in a haystack
+func contains(haystack []string, needle string) bool {
+	for _, a := range haystack {
+		if strings.ToLower(a) == strings.ToLower(needle) {
+			return true
+		}
+	}
+	return false
+}
+
+// Verify optional parameters are of the correct type.
+func typeCheckParameter(obj interface{}, expected string, name string) error {
+	// Make sure there is an object.
+	if obj == nil {
+		return nil
+	}
+
+	// Check the type is as expected.
+	if reflect.TypeOf(obj).String() != expected {
+		return fmt.Errorf("Expected %s to be of type %s but received %s.", name, expected, reflect.TypeOf(obj).String())
+	}
+	return nil
+}
+
+// parameterToString convert interface{} parameters to string, using a delimiter if format is provided.
+func parameterToString(obj interface{}, collectionFormat string) string {
+	var delimiter string
+
+	switch collectionFormat {
+	case "pipes":
+		delimiter = "|"
+	case "ssv":
+		delimiter = " "
+	case "tsv":
+		delimiter = "\t"
+	case "csv":
+		delimiter = ","
+	}
+
+	if reflect.TypeOf(obj).Kind() == reflect.Slice {
+		return strings.Trim(strings.Replace(fmt.Sprint(obj), " ", delimiter, -1), "[]")
+	} else if t, ok := obj.(time.Time); ok {
+		return t.Format(time.RFC3339)
+	}
+
+	return fmt.Sprintf("%v", obj)
+}
+
+// parameterToJson is helper for converting interface{} parameters to json strings
+func parameterToJson(obj interface{}) (string, error) {
+	jsonBuf, err := json.Marshal(obj)
+	if err != nil {
+		return "", err
+	}
+	return string(jsonBuf), err
 }
 
 // Add a file to the multipart request

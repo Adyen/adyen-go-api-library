@@ -13,7 +13,7 @@ package common
 import (
 	"fmt"
 	"net/http"
-	"strings"
+	"time"
 )
 
 // contextKeys are used to identify the type of value in the context.
@@ -52,61 +52,57 @@ type APIKey struct {
 	Prefix string
 }
 
-// ServerVariable stores the information about a server variable
-type ServerVariable struct {
-	Description  string
-	DefaultValue string
-	EnumValues   []string
-}
+type Environment string
 
-// ServerConfiguration stores the information about a server
-type ServerConfiguration struct {
-	Url         string
-	Description string
-	Variables   map[string]ServerVariable
-}
+const (
+	Test Environment = "TEST"
+	Live             = "LIVE"
+)
 
 // Config stores the configuration of the API client
 type Config struct {
-	BasePath      string            `json:"basePath,omitempty"`
-	Host          string            `json:"host,omitempty"`
-	Scheme        string            `json:"scheme,omitempty"`
-	DefaultHeader map[string]string `json:"defaultHeader,omitempty"`
-	UserAgent     string            `json:"userAgent,omitempty"`
-	Debug         bool              `json:"debug,omitempty"`
-	Servers       []ServerConfiguration
-	HTTPClient    *http.Client
+	Username          string      `json:"username,omitempty"`
+	Password          string      `json:"password,omitempty"`
+	MerchantAccount   string      `json:"merchantAccount,omitempty"`
+	Environment       Environment `json:"environment,omitempty"`
+	Endpoint          string      `json:"endpoint,omitempty"`
+	MarketPayEndpoint string      `json:"marketPayEndpoint,omitempty"`
+	// Application name: used as HTTP client User-Agent
+	ApplicationName         string        `json:"applicationName,omitempty"`
+	ApiKey                  string        `json:"apiKey,omitempty"`
+	ConnectionTimeoutMillis time.Duration `json:"connectionTimeoutMillis,omitempty"`
+	ReadTimeoutMillis       time.Duration `json:"readTimeoutMillis,omitempty"`
+	CertificatePath         string        `json:"certificatePath,omitempty"`
+
+	//HPP specific
+	HppEndpoint string `json:"hppEndpoint,omitempty"`
+	SkinCode    string `json:"skinCode,omitempty"`
+	HmacKey     string `json:"hmacKey,omitempty"`
+
+	//Checkout Specific
+	CheckoutEndpoint string `json:"checkoutEndpoint,omitempty"`
+
+	//Terminal API Specific
+	TerminalApiCloudEndpoint string `json:"terminalApiCloudEndpoint,omitempty"`
+	TerminalApiLocalEndpoint string `json:"terminalApiLocalEndpoint,omitempty"`
+	TerminalCertificatePath  string `json:"terminalCertificatePath,omitempty"`
+
+	LiveEndpointURLPrefix string            `json:"liveEndpointURLPrefix,omitempty"`
+	DefaultHeader         map[string]string `json:"defaultHeader,omitempty"`
+	Debug                 bool              `json:"debug,omitempty"`
+	UserAgent             string            `json:"userAgent,omitempty"`
+	HTTPClient            *http.Client
+}
+
+func (c *Config) GetCheckoutEndpoint() (string, error) {
+	if c.CheckoutEndpoint == "" {
+		message := "Please provide your unique live url prefix on the SetEnvironment() call on the APIClient or provide checkoutEndpoint in your config object."
+		return "", fmt.Errorf(message)
+	}
+	return c.CheckoutEndpoint, nil
 }
 
 // AddDefaultHeader adds a new HTTP header to the default header in the request
 func (c *Config) AddDefaultHeader(key string, value string) {
 	c.DefaultHeader[key] = value
-}
-
-// ServerUrl returns URL based on server settings
-func (c *Config) ServerUrl(index int, variables map[string]string) (string, error) {
-	if index < 0 || len(c.Servers) <= index {
-		return "", fmt.Errorf("Index %v out of range %v", index, len(c.Servers)-1)
-	}
-	server := c.Servers[index]
-	url := server.Url
-
-	// go through variables and replace placeholders
-	for name, variable := range server.Variables {
-		if value, ok := variables[name]; ok {
-			found := bool(len(variable.EnumValues) == 0)
-			for _, enumValue := range variable.EnumValues {
-				if value == enumValue {
-					found = true
-				}
-			}
-			if !found {
-				return "", fmt.Errorf("The variable %s in the server URL has invalid value %v. Must be %v", name, value, variable.EnumValues)
-			}
-			url = strings.Replace(url, "{"+name+"}", value, -1)
-		} else {
-			url = strings.Replace(url, "{"+name+"}", variable.DefaultValue, -1)
-		}
-	}
-	return url, nil
 }
