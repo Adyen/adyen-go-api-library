@@ -106,7 +106,17 @@ openapi-generator-cli generate \
     -o /src/checkout
 ```
 
-**Step 2**: Delete the following files from `./src/<api package folder name in lowercase>` - `configuration.go` - `client.go` - `utils.go` - `travis.yml` - `git_push.sh` - `go.mod` - `go.sum` - `go.sum`
+**Step 2**: Delete the following files from `./src/<api package folder name in lowercase>`
+
+- `configuration.go`
+- `client.go`
+- `utils.go`
+- `response.go`
+- `travis.yml`
+- `git_push.sh`
+- `go.mod`
+- `go.sum`
+- `go.sum`
 
 **Step 3**: Add the new service to `APIClient` struct in `./main.go` and add import for the same
 
