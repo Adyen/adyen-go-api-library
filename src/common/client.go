@@ -84,11 +84,7 @@ func (c *Client) PrepareRequest(
 	path string, method string,
 	postBody interface{},
 	headerParams map[string]string,
-	queryParams url.Values,
-	formParams url.Values,
-	formFileName string,
-	fileName string,
-	fileBytes []byte) (localVarRequest *http.Request, err error) {
+	queryParams url.Values) (localVarRequest *http.Request, err error) {
 
 	var body *bytes.Buffer
 
