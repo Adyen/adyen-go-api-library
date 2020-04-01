@@ -145,7 +145,6 @@ openapi-generator-cli generate \
 - `git_push.sh`
 - `go.mod`
 - `go.sum`
-- `go.sum`
 
 **Step 3**: Add the new service to `APIClient` struct in `./main.go` and add import for the same
 
@@ -164,13 +163,17 @@ Init service in the `NewAPIClient` method
 func NewAPIClient(cfg *common.Config) *APIClient {
     ...
     // API Services
-	c.Checkout = (*checkout.Checkout)(&c.client.Common)
-	c.Checkout.BasePath = func() string {
-		return getURL(c.client.Cfg.CheckoutEndpoint, CheckoutApiVersion)
-    }
-    c.<Api namespace in StartCase> = (*<Api namespace in lowercase>.<Api namespace in StartCase>)(&c.client.Common)
-    c.<Api namespace in StartCase>.BasePath = func() string {
-		return getURL(c.client.Cfg.<API end point>, <API version constant>)
+	c.Checkout = &checkout.Checkout{
+		Client: c.client,
+		BasePath: func() string {
+			return getURL(c.client.Cfg.CheckoutEndpoint, CheckoutAPIVersion)
+		},
+	}
+    c.<Api namespace in StartCase> = &<Api namespace in lowercase>.<Api namespace in StartCase>{
+        Client: c.client,
+        BasePath: func() string {
+            return getURL(c.client.Cfg.<API end point>, <API version constant>)
+        },
     }
 }
 ```

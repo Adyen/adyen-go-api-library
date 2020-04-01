@@ -126,12 +126,12 @@ func NewAPIClient(cfg *common.Config) *APIClient {
 		c.SetEnvironment(cfg.Environment, cfg.LiveEndpointURLPrefix)
 	}
 
-	c.client.Common.Client = c.client
-
 	// API Services
-	c.Checkout = (*checkout.Checkout)(&c.client.Common)
-	c.Checkout.BasePath = func() string {
-		return getURL(c.client.Cfg.CheckoutEndpoint, CheckoutAPIVersion)
+	c.Checkout = &checkout.Checkout{
+		Client: c.client,
+		BasePath: func() string {
+			return getURL(c.client.Cfg.CheckoutEndpoint, CheckoutAPIVersion)
+		},
 	}
 
 	return c
