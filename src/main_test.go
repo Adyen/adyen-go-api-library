@@ -13,7 +13,6 @@ import (
 	"testing"
 
 	"github.com/adyen/adyen-go-api-library/src/common"
-
 	"github.com/adyen/adyen-go-api-library/src/checkout"
 	"github.com/joho/godotenv"
 
@@ -45,7 +44,7 @@ func Test_main(t *testing.T) {
 			assert.Equal(t, "401 Unauthorized", httpRes.Status)
 		})
 
-		godotenv.Load("./.env")
+		godotenv.Load("./../.env")
 
 		var (
 			MerchantAccount = os.Getenv("ADYEN_MERCHANT")
