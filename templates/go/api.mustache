@@ -53,7 +53,7 @@ func (a *{{{packageName}}}) {{{nickname}}}({{#allParams}}request *{{{dataType}}}
 	)
 
 	// create path and map variables
-	localVarPath := a.Client.Cfg.BasePath + "{{{path}}}"{{#pathParams}}
+	localVarPath := a.BasePath() + "{{{path}}}"{{#pathParams}}
 	localVarPath = strings.Replace(localVarPath, "{"+"{{baseName}}"+"}", _neturl.QueryEscape(parameterToString({{paramName}}, "{{#collectionFormat}}{{collectionFormat}}{{/collectionFormat}}")) , -1)
 	{{/pathParams}}
 
@@ -287,8 +287,8 @@ func (a *{{{packageName}}}) {{{nickname}}}({{#allParams}}request *{{{dataType}}}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := common.GenericOpenAPIError{
-			BodyBytes:  localVarBody,
-			Err: localVarHTTPResponse.Status,
+			BodyBytes: localVarBody,
+			Err:       localVarHTTPResponse.Status,
 		}
 		{{#responses}}
 		{{#dataType}}
@@ -317,8 +317,8 @@ func (a *{{{packageName}}}) {{{nickname}}}({{#allParams}}request *{{{dataType}}}
 	err = a.Client.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
 		newErr := common.GenericOpenAPIError{
-			BodyBytes:  localVarBody,
-			Err: err.Error(),
+			BodyBytes: localVarBody,
+			Err:       err.Error(),
 		}
 		return {{#returnType}}localVarReturnValue, {{/returnType}}localVarHTTPResponse, newErr
 	}
