@@ -4,23 +4,21 @@
  * Contact: support@adyen.com
  */
 
-package main
+package api
 
 import (
-	"net/http"
-	"net/url"
 	"os"
 	"testing"
 
-	"github.com/adyen/adyen-go-api-library/src/common"
 	"github.com/adyen/adyen-go-api-library/src/checkout"
+	"github.com/adyen/adyen-go-api-library/src/common"
 	"github.com/joho/godotenv"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
-func Test_main(t *testing.T) {
+func Test_api(t *testing.T) {
 	t.Run("Create a new APIClient", func(t *testing.T) {
 
 		client := NewAPIClient(&common.Config{
@@ -44,7 +42,7 @@ func Test_main(t *testing.T) {
 			assert.Equal(t, "401 Unauthorized", httpRes.Status)
 		})
 
-		godotenv.Load("./../.env")
+		godotenv.Load("./../../.env")
 
 		var (
 			MerchantAccount = os.Getenv("ADYEN_MERCHANT")
@@ -66,19 +64,6 @@ func Test_main(t *testing.T) {
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 200, httpRes.StatusCode)
 			assert.Equal(t, "200 OK", httpRes.Status)
-		})
-
-		//creating the proxyURL
-		proxyURL, _ := url.Parse("http://localhost:7000")
-		transport := &http.Transport{
-			Proxy: http.ProxyURL(proxyURL),
-		}
-		client = NewAPIClient(&common.Config{
-			HTTPClient: &http.Client{
-				Transport: transport,
-			},
-			Environment: "TEST",
-			ApiKey:      "your api key",
 		})
 	})
 }

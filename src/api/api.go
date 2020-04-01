@@ -4,7 +4,7 @@
  * Contact: support@adyen.com
  */
 
-package main
+package api
 
 import (
 	"fmt"
@@ -117,7 +117,7 @@ func NewAPIClient(cfg *common.Config) *APIClient {
 	if cfg.UserAgent == "" {
 		cfg.UserAgent = fmt.Sprintf("%s %s/%s", cfg.ApplicationName, LibName, LibVersion)
 	}
-	
+
 	c := &APIClient{}
 	c.client = &common.Client{}
 	c.client.Cfg = cfg
@@ -195,8 +195,4 @@ func (c *APIClient) setTimeouts(connectionTimeoutMillis, readTimeoutMillis time.
 
 func getURL(endpoint, version string) string {
 	return fmt.Sprintf("%s/%s", endpoint, version)
-}
-
-func main() {
-	fmt.Println("Welcome to Adyen API Client")
 }
