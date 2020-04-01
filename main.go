@@ -11,7 +11,7 @@ import (
 	"net/http"
 
 	checkout "github.com/adyen/adyen-go-api-library/src/checkout"
-	checkoutUtility "github.com/adyen/adyen-go-api-library/src/checkoutUtility"
+	checkoututility "github.com/adyen/adyen-go-api-library/src/checkoututility"
 	common "github.com/adyen/adyen-go-api-library/src/common"
 )
 
@@ -21,7 +21,7 @@ type APIClient struct {
 	client *common.Client
 	// API Services
 	Checkout        *checkout.Checkout
-	CheckoutUtility *checkoutUtility.CheckoutUtility
+	CheckoutUtility *checkoututility.CheckoutUtility
 }
 
 // NewConfig returns a new Config object
