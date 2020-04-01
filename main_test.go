@@ -7,6 +7,8 @@
 package main
 
 import (
+	"net/http"
+	"net/url"
 	"os"
 	"testing"
 
@@ -65,6 +67,19 @@ func Test_main(t *testing.T) {
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 200, httpRes.StatusCode)
 			assert.Equal(t, "200 OK", httpRes.Status)
+		})
+
+		//creating the proxyURL
+		proxyURL, _ := url.Parse("http://localhost:7000")
+		transport := &http.Transport{
+			Proxy: http.ProxyURL(proxyURL),
+		}
+		client = NewAPIClient(&common.Config{
+			HTTPClient: &http.Client{
+				Transport: transport,
+			},
+			Environment: "TEST",
+			ApiKey:      "your api key",
 		})
 	})
 }
