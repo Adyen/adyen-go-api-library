@@ -25,26 +25,22 @@ type CheckoutUtility common.Service
 /*
 OriginKeysPost Create originKey values for one or more merchant domains.
 This operation takes the origin domains and returns a JSON object containing the corresponding origin keys for the domains.
- * @param request CheckoutUtilityRequest - reference of CheckoutUtilityRequest). 
+ * @param request CheckoutUtilityRequest - reference of CheckoutUtilityRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return CheckoutUtilityResponse
 */
 
 func (a *CheckoutUtility) OriginKeysPost(request *CheckoutUtilityRequest, ctxs ..._context.Context) (CheckoutUtilityResponse, *_nethttp.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CheckoutUtilityResponse
+		localVarHTTPMethod  = _nethttp.MethodPost
+		localVarPostBody    interface{}
+		localVarReturnValue CheckoutUtilityResponse
 	)
 
 	// create path and map variables
-	localVarPath := a.Client.Cfg.BasePath + "/originKeys"
+	localVarPath := a.BasePath() + "/originKeys"
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -73,7 +69,7 @@ func (a *CheckoutUtility) OriginKeysPost(request *CheckoutUtilityRequest, ctxs .
 		ctx = ctxs[0]
 	}
 
-	r, err := a.Client.PrepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	r, err := a.Client.PrepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -91,8 +87,8 @@ func (a *CheckoutUtility) OriginKeysPost(request *CheckoutUtilityRequest, ctxs .
 
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := common.GenericOpenAPIError{
-			BodyBytes:  localVarBody,
-			Err: localVarHTTPResponse.Status,
+			BodyBytes: localVarBody,
+			Err:       localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 200 {
 			var v CheckoutUtilityResponse
@@ -110,8 +106,8 @@ func (a *CheckoutUtility) OriginKeysPost(request *CheckoutUtilityRequest, ctxs .
 	err = a.Client.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
 		newErr := common.GenericOpenAPIError{
-			BodyBytes:  localVarBody,
-			Err: err.Error(),
+			BodyBytes: localVarBody,
+			Err:       err.Error(),
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

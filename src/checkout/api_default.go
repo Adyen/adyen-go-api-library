@@ -34,17 +34,13 @@ func (a *Checkout) PaymentLinksPost(request *CreatePaymentLinkRequest, ctxs ..._
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
 		localVarReturnValue  CreatePaymentLinkResponse
 	)
 
 	// create path and map variables
-	localVarPath := a.Client.Cfg.BasePath + "/paymentLinks"
+	localVarPath := a.BasePath() + "/paymentLinks"
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -73,7 +69,7 @@ func (a *Checkout) PaymentLinksPost(request *CreatePaymentLinkRequest, ctxs ..._
 		ctx = ctxs[0]
 	}
 
-	r, err := a.Client.PrepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	r, err := a.Client.PrepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -91,8 +87,8 @@ func (a *Checkout) PaymentLinksPost(request *CreatePaymentLinkRequest, ctxs ..._
 
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := common.GenericOpenAPIError{
-			BodyBytes:  localVarBody,
-			Err: localVarHTTPResponse.Status,
+			BodyBytes: localVarBody,
+			Err:       localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 200 {
 			var v CreatePaymentLinkResponse
@@ -110,8 +106,8 @@ func (a *Checkout) PaymentLinksPost(request *CreatePaymentLinkRequest, ctxs ..._
 	err = a.Client.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
 		newErr := common.GenericOpenAPIError{
-			BodyBytes:  localVarBody,
-			Err: err.Error(),
+			BodyBytes: localVarBody,
+			Err:       err.Error(),
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -131,17 +127,13 @@ func (a *Checkout) PaymentMethodsPost(request *PaymentMethodsRequest, ctxs ..._c
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
 		localVarReturnValue  PaymentMethodsResponse
 	)
 
 	// create path and map variables
-	localVarPath := a.Client.Cfg.BasePath + "/paymentMethods"
+	localVarPath := a.BasePath() + "/paymentMethods"
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -170,7 +162,7 @@ func (a *Checkout) PaymentMethodsPost(request *PaymentMethodsRequest, ctxs ..._c
 		ctx = ctxs[0]
 	}
 
-	r, err := a.Client.PrepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	r, err := a.Client.PrepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -188,8 +180,8 @@ func (a *Checkout) PaymentMethodsPost(request *PaymentMethodsRequest, ctxs ..._c
 
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := common.GenericOpenAPIError{
-			BodyBytes:  localVarBody,
-			Err: localVarHTTPResponse.Status,
+			BodyBytes: localVarBody,
+			Err:       localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 200 {
 			var v PaymentMethodsResponse
@@ -207,8 +199,8 @@ func (a *Checkout) PaymentMethodsPost(request *PaymentMethodsRequest, ctxs ..._c
 	err = a.Client.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
 		newErr := common.GenericOpenAPIError{
-			BodyBytes:  localVarBody,
-			Err: err.Error(),
+			BodyBytes: localVarBody,
+			Err:       err.Error(),
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -228,17 +220,13 @@ func (a *Checkout) PaymentSessionPost(request *PaymentSetupRequest, ctxs ..._con
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
 		localVarReturnValue  PaymentSetupResponse
 	)
 
 	// create path and map variables
-	localVarPath := a.Client.Cfg.BasePath + "/paymentSession"
+	localVarPath := a.BasePath() + "/paymentSession"
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -267,7 +255,7 @@ func (a *Checkout) PaymentSessionPost(request *PaymentSetupRequest, ctxs ..._con
 		ctx = ctxs[0]
 	}
 
-	r, err := a.Client.PrepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	r, err := a.Client.PrepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -285,8 +273,8 @@ func (a *Checkout) PaymentSessionPost(request *PaymentSetupRequest, ctxs ..._con
 
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := common.GenericOpenAPIError{
-			BodyBytes:  localVarBody,
-			Err: localVarHTTPResponse.Status,
+			BodyBytes: localVarBody,
+			Err:       localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 200 {
 			var v PaymentSetupResponse
@@ -304,8 +292,8 @@ func (a *Checkout) PaymentSessionPost(request *PaymentSetupRequest, ctxs ..._con
 	err = a.Client.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
 		newErr := common.GenericOpenAPIError{
-			BodyBytes:  localVarBody,
-			Err: err.Error(),
+			BodyBytes: localVarBody,
+			Err:       err.Error(),
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -325,17 +313,13 @@ func (a *Checkout) PaymentsDetailsPost(request *DetailsRequest, ctxs ..._context
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
 		localVarReturnValue  PaymentResponse
 	)
 
 	// create path and map variables
-	localVarPath := a.Client.Cfg.BasePath + "/payments/details"
+	localVarPath := a.BasePath() + "/payments/details"
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -364,7 +348,7 @@ func (a *Checkout) PaymentsDetailsPost(request *DetailsRequest, ctxs ..._context
 		ctx = ctxs[0]
 	}
 
-	r, err := a.Client.PrepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	r, err := a.Client.PrepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -382,8 +366,8 @@ func (a *Checkout) PaymentsDetailsPost(request *DetailsRequest, ctxs ..._context
 
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := common.GenericOpenAPIError{
-			BodyBytes:  localVarBody,
-			Err: localVarHTTPResponse.Status,
+			BodyBytes: localVarBody,
+			Err:       localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 200 {
 			var v PaymentResponse
@@ -401,8 +385,8 @@ func (a *Checkout) PaymentsDetailsPost(request *DetailsRequest, ctxs ..._context
 	err = a.Client.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
 		newErr := common.GenericOpenAPIError{
-			BodyBytes:  localVarBody,
-			Err: err.Error(),
+			BodyBytes: localVarBody,
+			Err:       err.Error(),
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -422,17 +406,13 @@ func (a *Checkout) PaymentsPost(request *PaymentRequest, ctxs ..._context.Contex
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
 		localVarReturnValue  PaymentResponse
 	)
 
 	// create path and map variables
-	localVarPath := a.Client.Cfg.BasePath + "/payments"
+	localVarPath := a.BasePath() + "/payments"
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -461,7 +441,7 @@ func (a *Checkout) PaymentsPost(request *PaymentRequest, ctxs ..._context.Contex
 		ctx = ctxs[0]
 	}
 
-	r, err := a.Client.PrepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	r, err := a.Client.PrepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -479,8 +459,8 @@ func (a *Checkout) PaymentsPost(request *PaymentRequest, ctxs ..._context.Contex
 
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := common.GenericOpenAPIError{
-			BodyBytes:  localVarBody,
-			Err: localVarHTTPResponse.Status,
+			BodyBytes: localVarBody,
+			Err:       localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 200 {
 			var v PaymentResponse
@@ -498,8 +478,8 @@ func (a *Checkout) PaymentsPost(request *PaymentRequest, ctxs ..._context.Contex
 	err = a.Client.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
 		newErr := common.GenericOpenAPIError{
-			BodyBytes:  localVarBody,
-			Err: err.Error(),
+			BodyBytes: localVarBody,
+			Err:       err.Error(),
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -519,17 +499,13 @@ func (a *Checkout) PaymentsResultPost(request *PaymentVerificationRequest, ctxs 
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
 		localVarReturnValue  PaymentVerificationResponse
 	)
 
 	// create path and map variables
-	localVarPath := a.Client.Cfg.BasePath + "/payments/result"
+	localVarPath := a.BasePath() + "/payments/result"
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -558,7 +534,7 @@ func (a *Checkout) PaymentsResultPost(request *PaymentVerificationRequest, ctxs 
 		ctx = ctxs[0]
 	}
 
-	r, err := a.Client.PrepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	r, err := a.Client.PrepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -576,8 +552,8 @@ func (a *Checkout) PaymentsResultPost(request *PaymentVerificationRequest, ctxs 
 
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := common.GenericOpenAPIError{
-			BodyBytes:  localVarBody,
-			Err: localVarHTTPResponse.Status,
+			BodyBytes: localVarBody,
+			Err:       localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 200 {
 			var v PaymentVerificationResponse
@@ -595,8 +571,8 @@ func (a *Checkout) PaymentsResultPost(request *PaymentVerificationRequest, ctxs 
 	err = a.Client.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
 		newErr := common.GenericOpenAPIError{
-			BodyBytes:  localVarBody,
-			Err: err.Error(),
+			BodyBytes: localVarBody,
+			Err:       err.Error(),
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
