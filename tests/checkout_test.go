@@ -42,7 +42,7 @@ func Test_Checkout(t *testing.T) {
 				ShopperReference: "12345678",
 				ShopperEmail:     "test@email.com",
 				ShopperLocale:    "nl_NL",
-				BillingAddress: checkout.Address{
+				BillingAddress: &checkout.Address{
 					Street:            "Roque Petroni Jr",
 					PostalCode:        "59000060",
 					City:              "São Paulo",
@@ -58,7 +58,7 @@ func Test_Checkout(t *testing.T) {
 			assert.Equal(t, 200, httpRes.StatusCode)
 			assert.Equal(t, "200 OK", httpRes.Status)
 			require.NotNil(t, res)
-			assert.Equal(t, "", res.Amount)
+			assert.Equal(t, &checkout.Amount{Currency: "EUR", Value: 1250}, res.Amount)
 		})
 	})
 
@@ -74,8 +74,8 @@ func Test_Checkout(t *testing.T) {
 			assert.Equal(t, 200, httpRes.StatusCode)
 			assert.Equal(t, "200 OK", httpRes.Status)
 			require.NotNil(t, res)
-			assert.True(t, len(res.Groups) > 1)
-			assert.True(t, len(res.PaymentMethods) > 1)
+			assert.True(t, len(*res.Groups) > 1)
+			assert.True(t, len(*res.PaymentMethods) > 1)
 		})
 	})
 

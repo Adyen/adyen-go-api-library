@@ -38,7 +38,8 @@ func Test_CheckoutUtility(t *testing.T) {
 			assert.Equal(t, 200, httpRes.StatusCode)
 			assert.Equal(t, "200 OK", httpRes.Status)
 			require.NotNil(t, res)
-			assert.NotEmpty(t, res.OriginKeys[domain])
+			originKeys := *res.OriginKeys
+			assert.NotEmpty(t, originKeys[domain])
 		})
 	})
 }
