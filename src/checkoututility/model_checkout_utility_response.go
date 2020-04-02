@@ -12,5 +12,5 @@ package checkoututility
 // CheckoutUtilityResponse struct for CheckoutUtilityResponse
 type CheckoutUtilityResponse struct {
 	// The list of origin keys for all requested domains. For each list item, the key is the domain and the value is the origin key.
-	OriginKeys map[string]string `json:"originKeys,omitempty"`
+	OriginKeys *map[string]interface{} `json:"originKeys,omitempty"`
 }
