@@ -30,6 +30,23 @@ func Test_Checkout(t *testing.T) {
 	client := adyen.NewAPIClientWithAPIKey(APIKey, "TEST")
 
 	t.Run("PaymentLinks", func(t *testing.T) {
+		t.Run("Create an API request that should fail", func(t *testing.T) {
+
+			res, httpRes, err := client.Checkout.PaymentLinksPost(&checkout.CreatePaymentLinkRequest{
+				Amount: checkout.Amount{
+					Value:    1250,
+					Currency: "EUR",
+				},
+				MerchantAccount: MerchantAccount,
+			})
+
+			require.NotNil(t, err)
+			assert.Equal(t, "422 Unprocessable Entity", err.Error())
+			require.NotNil(t, httpRes)
+			assert.Equal(t, 422, httpRes.StatusCode)
+			assert.Equal(t, "422 Unprocessable Entity", httpRes.Status)
+			require.NotNil(t, res)
+		})
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 
 			res, httpRes, err := client.Checkout.PaymentLinksPost(&checkout.CreatePaymentLinkRequest{
@@ -64,6 +81,17 @@ func Test_Checkout(t *testing.T) {
 	})
 
 	t.Run("PaymentMethods", func(t *testing.T) {
+		t.Run("Create an API request that should fail", func(t *testing.T) {
+
+			res, httpRes, err := client.Checkout.PaymentMethodsPost(&checkout.PaymentMethodsRequest{})
+
+			require.NotNil(t, err)
+			assert.Equal(t, "403 Forbidden", err.Error())
+			require.NotNil(t, httpRes)
+			assert.Equal(t, 403, httpRes.StatusCode)
+			assert.Equal(t, "403 Forbidden", httpRes.Status)
+			require.NotNil(t, res)
+		})
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 
 			res, httpRes, err := client.Checkout.PaymentMethodsPost(&checkout.PaymentMethodsRequest{
@@ -81,6 +109,19 @@ func Test_Checkout(t *testing.T) {
 	})
 
 	t.Run("Payments", func(t *testing.T) {
+		t.Run("Create an API request that should fail", func(t *testing.T) {
+
+			res, httpRes, err := client.Checkout.PaymentsPost(&checkout.PaymentRequest{
+				MerchantAccount: MerchantAccount,
+			})
+
+			require.NotNil(t, err)
+			assert.Equal(t, "422 Unprocessable Entity", err.Error())
+			require.NotNil(t, httpRes)
+			assert.Equal(t, 422, httpRes.StatusCode)
+			assert.Equal(t, "422 Unprocessable Entity", httpRes.Status)
+			require.NotNil(t, res)
+		})
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 
 			res, httpRes, err := client.Checkout.PaymentsPost(&checkout.PaymentRequest{
@@ -91,6 +132,12 @@ func Test_Checkout(t *testing.T) {
 				},
 				CountryCode:     "NL",
 				MerchantAccount: MerchantAccount,
+				Channel:         "Web",
+				ReturnUrl:       "http://localhost:3000/redirect",
+				PaymentMethod: map[string]interface{}{
+					"type":   "ideal",
+					"issuer": "1121",
+				},
 			})
 
 			require.Nil(t, err)
@@ -98,15 +145,48 @@ func Test_Checkout(t *testing.T) {
 			assert.Equal(t, 200, httpRes.StatusCode)
 			assert.Equal(t, "200 OK", httpRes.Status)
 			require.NotNil(t, res)
-			assert.Equal(t, "Authorised", res.ResultCode)
+			assert.Equal(t, "RedirectShopper", res.ResultCode)
+			require.NotNil(t, res.Action)
+			assert.Equal(t, "ideal", res.Action.PaymentMethodType)
+			require.NotNil(t, res.PaymentData)
 		})
 	})
 
 	t.Run("PaymentDetails", func(t *testing.T) {
-		t.Run("Create an API request that should pass", func(t *testing.T) {
-
+		t.Run("Create an API request that should fail", func(t *testing.T) {
 			res, httpRes, err := client.Checkout.PaymentsDetailsPost(&checkout.DetailsRequest{
-				PaymentData: "123456781235",
+				PaymentData: "1234",
+				Details: map[string]interface{}{
+					"MD":    "Ab02b4c0!BQABAgCW5sxB4e/==",
+					"PaRes": "eNrNV0mTo7gS...",
+				},
+			})
+
+			require.NotNil(t, err)
+			assert.Equal(t, "422 Unprocessable Entity", httpRes.Status)
+			require.NotNil(t, httpRes)
+			assert.Equal(t, 422, httpRes.StatusCode)
+			assert.Equal(t, "422 Unprocessable Entity", httpRes.Status)
+			require.NotNil(t, res)
+		})
+		t.Run("Create an API request that should pass", func(t *testing.T) {
+			payRes, _, _ := client.Checkout.PaymentsPost(&checkout.PaymentRequest{
+				Reference: "123456781235",
+				Amount: checkout.Amount{
+					Value:    1250,
+					Currency: "EUR",
+				},
+				CountryCode:     "NL",
+				MerchantAccount: MerchantAccount,
+				Channel:         "Web",
+				ReturnUrl:       "http://localhost:3000/redirect",
+				PaymentMethod: map[string]interface{}{
+					"type":   "ideal",
+					"issuer": "1121",
+				},
+			})
+			res, httpRes, err := client.Checkout.PaymentsDetailsPost(&checkout.DetailsRequest{
+				PaymentData: payRes.PaymentData,
 				Details: map[string]interface{}{
 					"MD":    "Ab02b4c0!BQABAgCW5sxB4e/==",
 					"PaRes": "eNrNV0mTo7gS...",
