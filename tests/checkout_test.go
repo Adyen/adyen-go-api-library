@@ -7,10 +7,12 @@
 package tests
 
 import (
+	"encoding/json"
 	"os"
 	"testing"
 
 	"github.com/adyen/adyen-go-api-library/src/checkout"
+	"github.com/adyen/adyen-go-api-library/src/common"
 
 	adyen "github.com/adyen/adyen-go-api-library/src/api"
 	"github.com/joho/godotenv"
@@ -28,7 +30,7 @@ func Test_Checkout(t *testing.T) {
 	)
 
 	client := adyen.NewAPIClientWithAPIKey(APIKey, "TEST")
-	client.GetConfig().Debug = true
+	// client.GetConfig().Debug = true
 
 	t.Run("PaymentLinks", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
@@ -172,7 +174,8 @@ func Test_Checkout(t *testing.T) {
 		})
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 
-			t.SkipNow()
+			// t.SkipNow() // TODO fix this
+			client.GetConfig().Debug = true
 
 			payRes, _, _ := client.Checkout.PaymentsPost(&checkout.PaymentRequest{
 				Reference: "123456781235",
@@ -192,8 +195,7 @@ func Test_Checkout(t *testing.T) {
 			res, httpRes, err := client.Checkout.PaymentsDetailsPost(&checkout.DetailsRequest{
 				PaymentData: payRes.PaymentData,
 				Details: map[string]interface{}{
-					"MD":    "Ab02b4c0!BQABAgCW5sxB4e/==",
-					"PaRes": "eNrNV0mTo7gS...",
+					"payload": "eNrNV0mTo7gS...",
 				},
 			})
 
@@ -229,8 +231,6 @@ func Test_Checkout(t *testing.T) {
 		})
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 
-			t.SkipNow()
-
 			res, httpRes, err := client.Checkout.PaymentSessionPost(&checkout.PaymentSetupRequest{
 				Reference: "123456781235",
 				Amount: checkout.Amount{
@@ -241,7 +241,7 @@ func Test_Checkout(t *testing.T) {
 				MerchantAccount: MerchantAccount,
 				Channel:         "Web",
 				ReturnUrl:       "http://localhost:3000/redirect",
-				// Token:           "12345",
+				SdkVersion:      "1.9.5",
 			})
 
 			require.Nil(t, err)
@@ -249,35 +249,23 @@ func Test_Checkout(t *testing.T) {
 			assert.Equal(t, 200, httpRes.StatusCode)
 			assert.Equal(t, "200 OK", httpRes.Status)
 			require.NotNil(t, res)
-			assert.Equal(t, "Authorised", res.PaymentSession)
+			assert.NotEmpty(t, res.PaymentSession)
 		})
 	})
 
 	t.Run("PaymentsResult", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
-			res, httpRes, err := client.Checkout.PaymentsResultPost(&checkout.PaymentVerificationRequest{})
+			res, httpRes, err := client.Checkout.PaymentsResultPost(&checkout.PaymentVerificationRequest{Payload: "dummyPayload"})
 
 			require.NotNil(t, err)
 			assert.Equal(t, "422 Unprocessable Entity", httpRes.Status)
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 422, httpRes.StatusCode)
 			assert.Equal(t, "422 Unprocessable Entity", httpRes.Status)
+			errBody := map[string]string{}
+			json.Unmarshal(err.(common.GenericOpenAPIError).Body(), &errBody)
+			assert.Equal(t, "Invalid payload provided", errBody["message"])
 			require.NotNil(t, res)
-		})
-		t.Run("Create an API request that should pass", func(t *testing.T) {
-
-			t.SkipNow()
-
-			res, httpRes, err := client.Checkout.PaymentsResultPost(&checkout.PaymentVerificationRequest{
-				Payload: "",
-			})
-
-			require.Nil(t, err)
-			require.NotNil(t, httpRes)
-			assert.Equal(t, 200, httpRes.StatusCode)
-			assert.Equal(t, "200 OK", httpRes.Status)
-			require.NotNil(t, res)
-			assert.Equal(t, "Authorised", res.ResultCode)
 		})
 	})
 }

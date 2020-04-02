@@ -7,7 +7,7 @@ The Adyen API Library for golang enables you to work with Adyen APIs.
 The Library supports all APIs under the following services:
 
 - [x] checkout
-- [ ] checkout utility
+- [x] checkout utility
 - [ ] payments
 - [ ] modifications
 - [ ] payouts
@@ -47,6 +47,45 @@ client := adyen.NewAPIClientWithAPIKey("your api key", "TEST")
 res, httpRes, err := client.Checkout.PaymentMethodsPost(&checkout.PaymentMethodsRequest{
     MerchantAccount: "your merchant account",
 })
+```
+
+## Getting error details
+
+```go
+import (
+	"github.com/adyen/adyen-go-api-library/src/common"
+	"github.com/adyen/adyen-go-api-library/src/checkout"
+	adyen "github.com/adyen/adyen-go-api-library/src/api"
+)
+
+client := adyen.NewAPIClientWithAPIKey("your api key", "TEST")
+
+res, httpRes, err := client.Checkout.PaymentsPost(&checkout.PaymentRequest{
+    Reference: "123456781235",
+    Amount: checkout.Amount{
+        Value:    1250,
+        Currency: "EUR",
+    },
+    CountryCode:     "NL",
+    MerchantAccount: MerchantAccount,
+    Channel:         "Web",
+    ReturnUrl:       "http://localhost:3000/redirect",
+    PaymentMethod: map[string]interface{}{
+        "type":   "ideal",
+        "issuer": "1121",
+    },
+})
+
+errBody := map[string]string{}
+json.Unmarshal(err.(common.GenericOpenAPIError).Body(), &errBody)
+
+errorText := err.Error()
+errorMessage := errBody["message"]
+errorCode := errBody["errorCode"]
+errorType := errBody["errorType"]
+
+httpStatusCode := httpRes.StatusCode
+httpStatus := httpRes.Status
 ```
 
 ## HTTP Client Configuration
