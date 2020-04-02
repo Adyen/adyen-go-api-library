@@ -28,6 +28,7 @@ func Test_Checkout(t *testing.T) {
 	)
 
 	client := adyen.NewAPIClientWithAPIKey(APIKey, "TEST")
+	client.GetConfig().Debug = true
 
 	t.Run("PaymentLinks", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
@@ -170,6 +171,9 @@ func Test_Checkout(t *testing.T) {
 			require.NotNil(t, res)
 		})
 		t.Run("Create an API request that should pass", func(t *testing.T) {
+
+			t.SkipNow()
+
 			payRes, _, _ := client.Checkout.PaymentsPost(&checkout.PaymentRequest{
 				Reference: "123456781235",
 				Amount: checkout.Amount{
@@ -191,6 +195,81 @@ func Test_Checkout(t *testing.T) {
 					"MD":    "Ab02b4c0!BQABAgCW5sxB4e/==",
 					"PaRes": "eNrNV0mTo7gS...",
 				},
+			})
+
+			require.Nil(t, err)
+			require.NotNil(t, httpRes)
+			assert.Equal(t, 200, httpRes.StatusCode)
+			assert.Equal(t, "200 OK", httpRes.Status)
+			require.NotNil(t, res)
+			assert.Equal(t, "Authorised", res.ResultCode)
+		})
+	})
+
+	t.Run("PaymentSession", func(t *testing.T) {
+		t.Run("Create an API request that should fail", func(t *testing.T) {
+			res, httpRes, err := client.Checkout.PaymentSessionPost(&checkout.PaymentSetupRequest{
+				Reference: "123456781235",
+				Amount: checkout.Amount{
+					Value:    1250,
+					Currency: "EUR",
+				},
+				CountryCode:     "NL",
+				MerchantAccount: MerchantAccount,
+				Channel:         "iOS",
+				ReturnUrl:       "http://localhost:3000/redirect",
+			})
+
+			require.NotNil(t, err)
+			assert.Equal(t, "422 Unprocessable Entity", httpRes.Status)
+			require.NotNil(t, httpRes)
+			assert.Equal(t, 422, httpRes.StatusCode)
+			assert.Equal(t, "422 Unprocessable Entity", httpRes.Status)
+			require.NotNil(t, res)
+		})
+		t.Run("Create an API request that should pass", func(t *testing.T) {
+
+			t.SkipNow()
+
+			res, httpRes, err := client.Checkout.PaymentSessionPost(&checkout.PaymentSetupRequest{
+				Reference: "123456781235",
+				Amount: checkout.Amount{
+					Value:    1250,
+					Currency: "EUR",
+				},
+				CountryCode:     "NL",
+				MerchantAccount: MerchantAccount,
+				Channel:         "Web",
+				ReturnUrl:       "http://localhost:3000/redirect",
+				// Token:           "12345",
+			})
+
+			require.Nil(t, err)
+			require.NotNil(t, httpRes)
+			assert.Equal(t, 200, httpRes.StatusCode)
+			assert.Equal(t, "200 OK", httpRes.Status)
+			require.NotNil(t, res)
+			assert.Equal(t, "Authorised", res.PaymentSession)
+		})
+	})
+
+	t.Run("PaymentsResult", func(t *testing.T) {
+		t.Run("Create an API request that should fail", func(t *testing.T) {
+			res, httpRes, err := client.Checkout.PaymentsResultPost(&checkout.PaymentVerificationRequest{})
+
+			require.NotNil(t, err)
+			assert.Equal(t, "422 Unprocessable Entity", httpRes.Status)
+			require.NotNil(t, httpRes)
+			assert.Equal(t, 422, httpRes.StatusCode)
+			assert.Equal(t, "422 Unprocessable Entity", httpRes.Status)
+			require.NotNil(t, res)
+		})
+		t.Run("Create an API request that should pass", func(t *testing.T) {
+
+			t.SkipNow()
+
+			res, httpRes, err := client.Checkout.PaymentsResultPost(&checkout.PaymentVerificationRequest{
+				Payload: "",
 			})
 
 			require.Nil(t, err)
