@@ -22,11 +22,11 @@ type MerchantRiskIndicator struct {
 	DeliveryEmail string `json:"deliveryEmail,omitempty"`
 	// The estimated delivery time for the shopper to receive the goods. Allowed values: * `electronicDelivery` * `sameDayShipping` * `overnightShipping` * `twoOrMoreDaysShipping`
 	DeliveryTimeframe string `json:"deliveryTimeframe,omitempty"`
-	GiftCardAmount Amount `json:"giftCardAmount,omitempty"`
+	GiftCardAmount *Amount `json:"giftCardAmount,omitempty"`
 	// Number of individual prepaid or gift cards used for this purchase.
 	GiftCardCount int32 `json:"giftCardCount,omitempty"`
 	// For pre-order purchases, the expected date this product will be available to the shopper.
-	PreOrderDate time.Time `json:"preOrderDate,omitempty"`
+	PreOrderDate *time.Time `json:"preOrderDate,omitempty"`
 	// Indicator for whether this transaction is for pre-ordering a product.
 	PreOrderPurchase bool `json:"preOrderPurchase,omitempty"`
 	// Indicator for whether the shopper has already purchased the same items in the past.

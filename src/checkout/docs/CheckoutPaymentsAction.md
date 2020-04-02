@@ -5,10 +5,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AlternativeReference** | **string** | The voucher alternative reference code. | [optional] 
-**Data** | [**map[string]interface{}**](.md) | When the redirect URL must be accessed via POST, use this data to post to the redirect URL. | [optional] 
+**Data** |  Pointer to [**map[string]interface{}**](.md) | When the redirect URL must be accessed via POST, use this data to post to the redirect URL. | [optional] 
 **DownloadUrl** | **string** | The URL to download the voucher. | [optional] 
 **ExpiresAt** | **string** | The date time of the voucher expiry. | [optional] 
-**InitialAmount** | [**Amount**](Amount.md) |  | [optional] 
+**InitialAmount** |  Pointer to [**Amount**](Amount.md) |  | [optional] 
 **InstructionsUrl** | **string** | The URL to the detailed instructions to make payment using the voucher. | [optional] 
 **Issuer** | **string** | The issuer of the voucher. | [optional] 
 **MaskedTelephoneNumber** | **string** | The shopper telephone number (partially masked). | [optional] 
@@ -21,9 +21,9 @@ Name | Type | Description | Notes
 **Reference** | **string** | The voucher reference code. | [optional] 
 **ShopperEmail** | **string** | The shopper email. | [optional] 
 **ShopperName** | **string** | The shopper name. | [optional] 
-**Surcharge** | [**Amount**](Amount.md) |  | [optional] 
+**Surcharge** |  Pointer to [**Amount**](Amount.md) |  | [optional] 
 **Token** | **string** | A token to pass to the 3DS2 Component to get the fingerprint/challenge. | [optional] 
-**TotalAmount** | [**Amount**](Amount.md) |  | [optional] 
+**TotalAmount** |  Pointer to [**Amount**](Amount.md) |  | [optional] 
 **Type** | **string** | Enum that specifies the action that needs to be taken by the client. | [optional] 
 **Url** | **string** | Specifies the URL to redirect to. | [optional] 
 

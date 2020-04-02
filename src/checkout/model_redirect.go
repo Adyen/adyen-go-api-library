@@ -12,7 +12,7 @@ package checkout
 // Redirect struct for Redirect
 type Redirect struct {
 	// When the redirect URL must be accessed via POST, use this data to post to the redirect URL.
-	Data map[string]interface{} `json:"data,omitempty"`
+	Data *map[string]interface{} `json:"data,omitempty"`
 	// The web method that you must use to access the redirect URL.  Possible values: GET, POST.
 	Method string `json:"method,omitempty"`
 	// The URL, to which you must redirect a shopper to complete a payment.

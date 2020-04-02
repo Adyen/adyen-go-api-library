@@ -11,10 +11,10 @@
 package checkout
 // ApplicationInfo struct for ApplicationInfo
 type ApplicationInfo struct {
-	AdyenLibrary CommonField `json:"adyenLibrary,omitempty"`
-	AdyenPaymentSource CommonField `json:"adyenPaymentSource,omitempty"`
-	ExternalPlatform ExternalPlatform `json:"externalPlatform,omitempty"`
-	MerchantApplication CommonField `json:"merchantApplication,omitempty"`
-	MerchantDevice MerchantDevice `json:"merchantDevice,omitempty"`
-	ShopperInteractionDevice ShopperInteractionDevice `json:"shopperInteractionDevice,omitempty"`
+	AdyenLibrary *CommonField `json:"adyenLibrary,omitempty"`
+	AdyenPaymentSource *CommonField `json:"adyenPaymentSource,omitempty"`
+	ExternalPlatform *ExternalPlatform `json:"externalPlatform,omitempty"`
+	MerchantApplication *CommonField `json:"merchantApplication,omitempty"`
+	MerchantDevice *MerchantDevice `json:"merchantDevice,omitempty"`
+	ShopperInteractionDevice *ShopperInteractionDevice `json:"shopperInteractionDevice,omitempty"`
 }

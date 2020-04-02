@@ -12,23 +12,23 @@ package checkout
 
 // PaymentResponse struct for PaymentResponse
 type PaymentResponse struct {
-	Action CheckoutPaymentsAction `json:"action,omitempty"`
+	Action *CheckoutPaymentsAction `json:"action,omitempty"`
 	// This field contains additional data, which may be required to return in a particular payment response. To choose data fields to be returned, go to **Customer Area** > **Account** > **API URLs** > **Additional data settings**.
 	AdditionalData interface{} `json:"additionalData,omitempty"`
 	// Contains `threeds2.fingerprint` or `threeds2.challengeToken` values to be used in further calls to `/payments/details` endpoint.
-	Authentication map[string]interface{} `json:"authentication,omitempty"`
+	Authentication *map[string]interface{} `json:"authentication,omitempty"`
 	// When non-empty, contains all the fields that you must submit to the `/payments/details` endpoint.
-	Details     []InputDetail `json:"details,omitempty"`
-	FraudResult FraudResult   `json:"fraudResult,omitempty"`
+	Details     *[]InputDetail `json:"details,omitempty"`
+	FraudResult *FraudResult   `json:"fraudResult,omitempty"`
 	// The reference to uniquely identify a payment. This reference is used in all communication with you about the payment status. We recommend using a unique value per payment; however, it is not a requirement. If you need to provide multiple references for a transaction, separate them with hyphens (\"-\"). Maximum length: 80 characters.
 	MerchantReference string `json:"merchantReference,omitempty"`
 	// Contains the details that will be presented to the shopper.
-	OutputDetails map[string]interface{} `json:"outputDetails,omitempty"`
+	OutputDetails *map[string]interface{} `json:"outputDetails,omitempty"`
 	// When non-empty, contains a value that you must submit to the `/payments/details` endpoint.
 	PaymentData string `json:"paymentData,omitempty"`
 	// Adyen's 16-character string reference associated with the transaction/request. This value is globally unique; quote it when communicating with us about this request.  > `pspReference` is returned only for non-redirect payment methods.
-	PspReference string   `json:"pspReference,omitempty"`
-	Redirect     Redirect `json:"redirect,omitempty"`
+	PspReference string    `json:"pspReference,omitempty"`
+	Redirect     *Redirect `json:"redirect,omitempty"`
 	// If the payment's authorisation is refused or an error occurs during authorisation, this field holds Adyen's mapped reason for the refusal or a description of the error.  When a transaction fails, the authorisation response includes `resultCode` and `refusalReason` values.
 	RefusalReason string `json:"refusalReason,omitempty"`
 	// Code that specifies the refusal reason. For more information, see [Authorisation refusal reasons](https://docs.adyen.com/development-resources/refusal-reasons).

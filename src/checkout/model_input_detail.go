@@ -12,15 +12,15 @@ package checkout
 // InputDetail struct for InputDetail
 type InputDetail struct {
 	// Configuration parameters for the required input.
-	Configuration map[string]interface{} `json:"configuration,omitempty"`
+	Configuration *map[string]interface{} `json:"configuration,omitempty"`
 	// Input details can also be provided recursively.
-	Details []SubInputDetail `json:"details,omitempty"`
+	Details *[]SubInputDetail `json:"details,omitempty"`
 	// Input details can also be provided recursively (deprecated).
-	InputDetails []SubInputDetail `json:"inputDetails,omitempty"`
+	InputDetails *[]SubInputDetail `json:"inputDetails,omitempty"`
 	// In case of a select, the URL from which to query the items.
 	ItemSearchUrl string `json:"itemSearchUrl,omitempty"`
 	// In case of a select, the items to choose from.
-	Items []Item `json:"items,omitempty"`
+	Items *[]Item `json:"items,omitempty"`
 	// The value to provide in the result.
 	Key string `json:"key,omitempty"`
 	// True if this input value is optional.

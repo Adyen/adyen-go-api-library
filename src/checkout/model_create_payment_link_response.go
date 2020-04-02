@@ -11,7 +11,7 @@
 package checkout
 // CreatePaymentLinkResponse struct for CreatePaymentLinkResponse
 type CreatePaymentLinkResponse struct {
-	Amount Amount `json:"amount,omitempty"`
+	Amount *Amount `json:"amount,omitempty"`
 	// The date that the Pay By Link expires; e.g. 2019-03-23T12:25:28Z.
 	ExpiresAt string `json:"expiresAt"`
 	// The reference that was specified when the Pay By Link URL was created.

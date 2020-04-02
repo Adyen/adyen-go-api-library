@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Configuration** | [**map[string]interface{}**](.md) | Configuration parameters for the required input. | [optional] 
-**Items** | [**[]Item**](Item.md) | In case of a select, the items to choose from. | [optional] 
+**Configuration** |  Pointer to [**map[string]interface{}**](.md) | Configuration parameters for the required input. | [optional] 
+**Items** |  Pointer to [**[]Item**](Item.md) | In case of a select, the items to choose from. | [optional] 
 **Key** | **string** | The value to provide in the result. | [optional] 
 **Optional** | **bool** | True if this input is optional to provide. | [optional] 
 **Type** | **string** | The type of the required input. | [optional] 

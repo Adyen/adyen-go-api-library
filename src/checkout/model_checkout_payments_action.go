@@ -14,12 +14,12 @@ type CheckoutPaymentsAction struct {
 	// The voucher alternative reference code.
 	AlternativeReference string `json:"alternativeReference,omitempty"`
 	// When the redirect URL must be accessed via POST, use this data to post to the redirect URL.
-	Data map[string]interface{} `json:"data,omitempty"`
+	Data *map[string]interface{} `json:"data,omitempty"`
 	// The URL to download the voucher.
 	DownloadUrl string `json:"downloadUrl,omitempty"`
 	// The date time of the voucher expiry.
 	ExpiresAt string `json:"expiresAt,omitempty"`
-	InitialAmount Amount `json:"initialAmount,omitempty"`
+	InitialAmount *Amount `json:"initialAmount,omitempty"`
 	// The URL to the detailed instructions to make payment using the voucher.
 	InstructionsUrl string `json:"instructionsUrl,omitempty"`
 	// The issuer of the voucher.
@@ -44,10 +44,10 @@ type CheckoutPaymentsAction struct {
 	ShopperEmail string `json:"shopperEmail,omitempty"`
 	// The shopper name.
 	ShopperName string `json:"shopperName,omitempty"`
-	Surcharge Amount `json:"surcharge,omitempty"`
+	Surcharge *Amount `json:"surcharge,omitempty"`
 	// A token to pass to the 3DS2 Component to get the fingerprint/challenge.
 	Token string `json:"token,omitempty"`
-	TotalAmount Amount `json:"totalAmount,omitempty"`
+	TotalAmount *Amount `json:"totalAmount,omitempty"`
 	// Enum that specifies the action that needs to be taken by the client.
 	Type string `json:"type,omitempty"`
 	// Specifies the URL to redirect to.

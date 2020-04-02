@@ -5,11 +5,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AllowedPaymentMethods** | **[]string** | List of payments methods to be presented to the shopper. To refer to payment methods, use their &#x60;paymentMethod.type&#x60; from [Payment methods overview](https://docs.adyen.com/payment-methods).  Example: &#x60;\&quot;allowedPaymentMethods\&quot;:[\&quot;ideal\&quot;,\&quot;giropay\&quot;]&#x60; | [optional] 
-**Amount** | [**Amount**](Amount.md) |  | 
-**BillingAddress** | [**Address**](Address.md) |  | [optional] 
+**Amount** |  Pointer to [**Amount**](Amount.md) |  | 
+**BillingAddress** |  Pointer to [**Address**](Address.md) |  | [optional] 
 **BlockedPaymentMethods** | **[]string** | List of payments methods to be hidden from the shopper. To refer to payment methods, use their &#x60;paymentMethod.type&#x60; from [Payment methods overview](https://docs.adyen.com/payment-methods).  Example: &#x60;\&quot;blockedPaymentMethods\&quot;:[\&quot;ideal\&quot;,\&quot;giropay\&quot;]&#x60; | [optional] 
 **CountryCode** | **string** | The shopper&#39;s country code. | 
-**DeliveryAddress** | [**Address**](Address.md) |  | [optional] 
+**DeliveryAddress** |  Pointer to [**Address**](Address.md) |  | [optional] 
 **Description** | **string** | A short description visible on the Pay By Link page. Maximum length: 280 characters. | [optional] 
 **ExpiresAt** | **string** | The date that the Pay By Link expires, in ISO 8601 format. For example, 2019-11-23T12:25:28Z. Maximum expiry date should be 30 days from when the payment link is created. If not provided, the default expiry duration is 24 hours. | [optional] 
 **MerchantAccount** | **string** | The merchant account identifier, with which you want to process the transaction. | 

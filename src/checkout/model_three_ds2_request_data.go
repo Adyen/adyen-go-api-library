@@ -21,7 +21,7 @@ type ThreeDS2RequestData struct {
 	ChallengeIndicator string `json:"challengeIndicator,omitempty"`
 	// The environment of the shopper. Allowed values: * `app` * `browser`
 	DeviceChannel string `json:"deviceChannel"`
-	DeviceRenderOptions DeviceRenderOptions `json:"deviceRenderOptions,omitempty"`
+	DeviceRenderOptions *DeviceRenderOptions `json:"deviceRenderOptions,omitempty"`
 	// Required for merchants that have been enrolled for 3D Secure 2 by another party than Adyen, mostly [authentication-only integrations](https://docs.adyen.com/checkout/3d-secure/other-3ds-flows/authentication-only). The `mcc` is a four-digit code with which the previously given `acquirerMerchantID` is registered at the scheme.
 	Mcc string `json:"mcc,omitempty"`
 	// Required for [authentication-only integration](https://docs.adyen.com/checkout/3d-secure/other-3ds-flows/authentication-only). The merchant name that the issuer presents to the shopper if they get a challenge. We recommend to use the same value that you will use in the authorization. Maximum length is 40 characters. > Optional for a [full 3D Secure 2 integration](https://docs.adyen.com/checkout/3d-secure/native-3ds2/api-integration). Use this field if you are enrolled for 3D Secure 2 with us and want to override the merchant name already configured on your account.
@@ -34,7 +34,7 @@ type ThreeDS2RequestData struct {
 	SdkAppID string `json:"sdkAppID,omitempty"`
 	// The `sdkEncData` value as received from the 3D Secure 2 SDK. Required for `deviceChannel` set to **app**.
 	SdkEncData string `json:"sdkEncData,omitempty"`
-	SdkEphemPubKey SDKEphemPubKey `json:"sdkEphemPubKey,omitempty"`
+	SdkEphemPubKey *SDKEphemPubKey `json:"sdkEphemPubKey,omitempty"`
 	// The maximum amount of time in minutes for the 3D Secure 2 authentication process. Optional and only for `deviceChannel` set to **app**. Defaults to **60** minutes.
 	SdkMaxTimeout int32 `json:"sdkMaxTimeout,omitempty"`
 	// The `sdkReferenceNumber` value as received from the 3D Secure 2 SDK. Only for `deviceChannel` set to **app**.

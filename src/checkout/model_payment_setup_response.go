@@ -14,5 +14,5 @@ type PaymentSetupResponse struct {
 	// The encoded payment session that you need to pass to the SDK.
 	PaymentSession string `json:"paymentSession,omitempty"`
 	// The detailed list of stored payment details required to generate payment forms. Will be empty if oneClick is set to false in the request.
-	RecurringDetails []RecurringDetail `json:"recurringDetails,omitempty"`
+	RecurringDetails *[]RecurringDetail `json:"recurringDetails,omitempty"`
 }

@@ -19,28 +19,28 @@ type PaymentSetupRequest struct {
 	// This field contains additional data, which may be required for a particular payment request.  The `additionalData` object consists of entries, each of which includes the key and value.
 	AdditionalData interface{} `json:"additionalData,omitempty"`
 	// List of payments methods to be presented to the shopper. To refer to payment methods, use their `paymentMethod.type` from [Payment methods overview](https://docs.adyen.com/payment-methods).  Example: `\"allowedPaymentMethods\":[\"ideal\",\"giropay\"]`
-	AllowedPaymentMethods []string        `json:"allowedPaymentMethods,omitempty"`
-	Amount                Amount          `json:"amount"`
-	ApplicationInfo       ApplicationInfo `json:"applicationInfo,omitempty"`
-	BillingAddress        Address         `json:"billingAddress,omitempty"`
+	AllowedPaymentMethods []string         `json:"allowedPaymentMethods,omitempty"`
+	Amount                Amount           `json:"amount"`
+	ApplicationInfo       *ApplicationInfo `json:"applicationInfo,omitempty"`
+	BillingAddress        *Address         `json:"billingAddress,omitempty"`
 	// List of payments methods to be hidden from the shopper. To refer to payment methods, use their `paymentMethod.type` from [Payment methods overview](https://docs.adyen.com/payment-methods).  Example: `\"blockedPaymentMethods\":[\"ideal\",\"giropay\"]`
 	BlockedPaymentMethods []string `json:"blockedPaymentMethods,omitempty"`
 	// The delay between the authorisation and scheduled auto-capture, specified in hours.
 	CaptureDelayHours int32 `json:"captureDelayHours,omitempty"`
 	// The platform where a payment transaction takes place. This field is optional for filtering out payment methods that are only available on specific platforms. If this value is not set, then we will try to infer it from the `sdkVersion` or `token`.  Possible values: * iOS * Android * Web
-	Channel       string        `json:"channel,omitempty"`
-	Company       Company       `json:"company,omitempty"`
-	Configuration Configuration `json:"configuration,omitempty"`
+	Channel       string         `json:"channel,omitempty"`
+	Company       *Company       `json:"company,omitempty"`
+	Configuration *Configuration `json:"configuration,omitempty"`
 	// Conversion ID that corresponds to the Id generated for tracking user payment journey.
 	ConversionId string `json:"conversionId,omitempty"`
 	// The shopper country.  Format: [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) Example: NL or DE
 	CountryCode string `json:"countryCode"`
 	// The shopper's date of birth.  Format [ISO-8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DD
-	DateOfBirth     time.Time  `json:"dateOfBirth,omitempty"`
-	DccQuote        ForexQuote `json:"dccQuote,omitempty"`
-	DeliveryAddress Address    `json:"deliveryAddress,omitempty"`
+	DateOfBirth     *time.Time  `json:"dateOfBirth,omitempty"`
+	DccQuote        *ForexQuote `json:"dccQuote,omitempty"`
+	DeliveryAddress *Address    `json:"deliveryAddress,omitempty"`
 	// The date and time the purchased goods should be delivered.  Format [ISO 8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DDThh:mm:ss.sssTZD  Example: 2017-07-17T13:42:40.428+01:00
-	DeliveryDate time.Time `json:"deliveryDate,omitempty"`
+	DeliveryDate *time.Time `json:"deliveryDate,omitempty"`
 	// When true and `shopperReference` is provided, the shopper will be asked if the payment details should be stored for future one-click payments.
 	EnableOneClick bool `json:"enableOneClick,omitempty"`
 	// When true and `shopperReference` is provided, the payment details will be tokenized for payouts.
@@ -52,10 +52,10 @@ type PaymentSetupRequest struct {
 	// The type of the entity the payment is processed for.
 	EntityType string `json:"entityType,omitempty"`
 	// An integer value that is added to the normal fraud score. The value can be either positive or negative.
-	FraudOffset  int32        `json:"fraudOffset,omitempty"`
-	Installments Installments `json:"installments,omitempty"`
+	FraudOffset  int32         `json:"fraudOffset,omitempty"`
+	Installments *Installments `json:"installments,omitempty"`
 	// Price and product information about the purchased items, to be included on the invoice sent to the shopper. > This field is required for Klarna, AfterPay, and RatePay.
-	LineItems []LineItem `json:"lineItems,omitempty"`
+	LineItems *[]LineItem `json:"lineItems,omitempty"`
 	// The [merchant category code](https://en.wikipedia.org/wiki/Merchant_category_code) (MCC) is a four-digit number, which relates to a particular market segment. This code reflects the predominant activity that is conducted by the merchant.
 	Mcc string `json:"mcc,omitempty"`
 	// The merchant account identifier, with which you want to process the transaction.
@@ -63,7 +63,7 @@ type PaymentSetupRequest struct {
 	// This reference allows linking multiple transactions to each other for reporting purposes (i.e. order auth-rate). The reference should be unique per billing cycle. The same merchant order reference should never be reused after the first authorised attempt. If used, this field should be supplied for all incoming authorisations. > We strongly recommend you send the `merchantOrderReference` value to benefit from linking payment requests when authorisation retries take place. In addition, we recommend you provide `retry.orderAttemptNumber`, `retry.chainAttemptNumber`, and `retry.skipRetry` values in `PaymentRequest.additionalData`.
 	MerchantOrderReference string `json:"merchantOrderReference,omitempty"`
 	// Metadata consists of entries, each of which includes a key and a value. Limitations: Maximum 20 key-value pairs per request. When exceeding, the \"177\" error occurs: \"Metadata size exceeds limit\".
-	Metadata map[string]interface{} `json:"metadata,omitempty"`
+	Metadata *map[string]interface{} `json:"metadata,omitempty"`
 	// When you are doing multiple partial (gift card) payments, this is the `pspReference` of the first payment. We use this to link the multiple payments to each other. As your own reference for linking multiple payments, use the `merchantOrderReference`instead.
 	OrderReference string `json:"orderReference,omitempty"`
 	// Required for the Web integration.  Set this parameter to the origin URL of the page that you are loading the SDK from.
@@ -75,8 +75,8 @@ type PaymentSetupRequest struct {
 	// The reference to uniquely identify a payment. This reference is used in all communication with you about the payment status. We recommend using a unique value per payment; however, it is not a requirement. If you need to provide multiple references for a transaction, separate them with hyphens (\"-\"). Maximum length: 80 characters.
 	Reference string `json:"reference"`
 	// The URL to return to.
-	ReturnUrl string   `json:"returnUrl"`
-	RiskData  RiskData `json:"riskData,omitempty"`
+	ReturnUrl string    `json:"returnUrl"`
+	RiskData  *RiskData `json:"riskData,omitempty"`
 	// The version of the SDK you are using (for Web SDK integrations only).
 	SdkVersion string `json:"sdkVersion,omitempty"`
 	// The maximum validity of the session.
@@ -89,7 +89,7 @@ type PaymentSetupRequest struct {
 	ShopperInteraction string `json:"shopperInteraction,omitempty"`
 	// The combination of a language code and a country code to specify the language to be used in the payment.
 	ShopperLocale string `json:"shopperLocale,omitempty"`
-	ShopperName   Name   `json:"shopperName,omitempty"`
+	ShopperName   *Name  `json:"shopperName,omitempty"`
 	// The shopper's reference to uniquely identify this shopper (e.g. user ID or account ID). > This field is required for recurring payments.
 	ShopperReference string `json:"shopperReference,omitempty"`
 	// The text to appear on the shopper's bank statement.
@@ -97,7 +97,7 @@ type PaymentSetupRequest struct {
 	// The shopper's social security number.
 	SocialSecurityNumber string `json:"socialSecurityNumber,omitempty"`
 	// The details of how the payment should be split when distributing a payment to a MarketPay Marketplace and its Accounts.
-	Splits []Split `json:"splits,omitempty"`
+	Splits *[]Split `json:"splits,omitempty"`
 	// When true and `shopperReference` is provided, the payment details will be stored.
 	StorePaymentMethod bool `json:"storePaymentMethod,omitempty"`
 	// The shopper's telephone number.

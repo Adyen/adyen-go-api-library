@@ -12,11 +12,11 @@ package checkout
 // PaymentMethodsResponse struct for PaymentMethodsResponse
 type PaymentMethodsResponse struct {
 	// Groups of payment methods.
-	Groups []PaymentMethodsGroup `json:"groups,omitempty"`
+	Groups *[]PaymentMethodsGroup `json:"groups,omitempty"`
 	// Detailed list of one-click payment methods.
-	OneClickPaymentMethods []RecurringDetail `json:"oneClickPaymentMethods,omitempty"`
+	OneClickPaymentMethods *[]RecurringDetail `json:"oneClickPaymentMethods,omitempty"`
 	// Detailed list of payment methods required to generate payment forms.
-	PaymentMethods []PaymentMethod `json:"paymentMethods,omitempty"`
+	PaymentMethods *[]PaymentMethod `json:"paymentMethods,omitempty"`
 	// List of all stored payment methods.
-	StoredPaymentMethods []StoredPaymentMethod `json:"storedPaymentMethods,omitempty"`
+	StoredPaymentMethods *[]StoredPaymentMethod `json:"storedPaymentMethods,omitempty"`
 }

@@ -19,7 +19,7 @@ type Recurring struct {
 	// A descriptive name for this detail.
 	RecurringDetailName string `json:"recurringDetailName,omitempty"`
 	// Date after which no further authorisations shall be performed. Only for 3D Secure 2.
-	RecurringExpiry time.Time `json:"recurringExpiry,omitempty"`
+	RecurringExpiry *time.Time `json:"recurringExpiry,omitempty"`
 	// Minimum number of days between authorisations. Only for 3D Secure 2.
 	RecurringFrequency string `json:"recurringFrequency,omitempty"`
 	// The name of the token service.

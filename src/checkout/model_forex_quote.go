@@ -18,14 +18,14 @@ type ForexQuote struct {
 	Account string `json:"account,omitempty"`
 	// The account type.
 	AccountType string `json:"accountType,omitempty"`
-	BaseAmount Amount `json:"baseAmount,omitempty"`
+	BaseAmount *Amount `json:"baseAmount,omitempty"`
 	// The base points.
 	BasePoints int32 `json:"basePoints"`
-	Buy Amount `json:"buy,omitempty"`
-	Interbank Amount `json:"interbank,omitempty"`
+	Buy *Amount `json:"buy,omitempty"`
+	Interbank *Amount `json:"interbank,omitempty"`
 	// The reference assigned to the forex quote request.
 	Reference string `json:"reference,omitempty"`
-	Sell Amount `json:"sell,omitempty"`
+	Sell *Amount `json:"sell,omitempty"`
 	// The signature to validate the integrity.
 	Signature string `json:"signature,omitempty"`
 	// The source of the forex quote.

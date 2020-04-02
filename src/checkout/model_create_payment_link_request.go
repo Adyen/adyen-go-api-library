@@ -14,12 +14,12 @@ type CreatePaymentLinkRequest struct {
 	// List of payments methods to be presented to the shopper. To refer to payment methods, use their `paymentMethod.type` from [Payment methods overview](https://docs.adyen.com/payment-methods).  Example: `\"allowedPaymentMethods\":[\"ideal\",\"giropay\"]`
 	AllowedPaymentMethods []string `json:"allowedPaymentMethods,omitempty"`
 	Amount Amount `json:"amount"`
-	BillingAddress Address `json:"billingAddress,omitempty"`
+	BillingAddress *Address `json:"billingAddress,omitempty"`
 	// List of payments methods to be hidden from the shopper. To refer to payment methods, use their `paymentMethod.type` from [Payment methods overview](https://docs.adyen.com/payment-methods).  Example: `\"blockedPaymentMethods\":[\"ideal\",\"giropay\"]`
 	BlockedPaymentMethods []string `json:"blockedPaymentMethods,omitempty"`
 	// The shopper's country code.
 	CountryCode string `json:"countryCode"`
-	DeliveryAddress Address `json:"deliveryAddress,omitempty"`
+	DeliveryAddress *Address `json:"deliveryAddress,omitempty"`
 	// A short description visible on the Pay By Link page. Maximum length: 280 characters.
 	Description string `json:"description,omitempty"`
 	// The date that the Pay By Link expires, in ISO 8601 format. For example, 2019-11-23T12:25:28Z. Maximum expiry date should be 30 days from when the payment link is created. If not provided, the default expiry duration is 24 hours.

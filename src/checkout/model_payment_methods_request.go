@@ -9,14 +9,13 @@
  */
 
 package checkout
-
 // PaymentMethodsRequest struct for PaymentMethodsRequest
 type PaymentMethodsRequest struct {
 	// This field contains additional data, which may be required for a particular payment request.  The `additionalData` object consists of entries, each of which includes the key and value.
 	AdditionalData interface{} `json:"additionalData,omitempty"`
 	// List of payments methods to be presented to the shopper. To refer to payment methods, use their `paymentMethod.type` from [Payment methods overview](https://docs.adyen.com/payment-methods).  Example: `\"allowedPaymentMethods\":[\"ideal\",\"giropay\"]`
 	AllowedPaymentMethods []string `json:"allowedPaymentMethods,omitempty"`
-	Amount                Amount   `json:"amount,omitempty"`
+	Amount *Amount `json:"amount,omitempty"`
 	// List of payments methods to be hidden from the shopper. To refer to payment methods, use their `paymentMethod.type` from [Payment methods overview](https://docs.adyen.com/payment-methods).  Example: `\"blockedPaymentMethods\":[\"ideal\",\"giropay\"]`
 	BlockedPaymentMethods []string `json:"blockedPaymentMethods,omitempty"`
 	// The platform where a payment transaction takes place. This field can be used for filtering out payment methods that are only available on specific platforms. Possible values: * iOS * Android * Web

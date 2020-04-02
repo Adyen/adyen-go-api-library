@@ -14,12 +14,12 @@ type PaymentMethod struct {
 	// List of possible brands. For example: visa, mc.
 	Brands []string `json:"brands,omitempty"`
 	// The configuration of the payment method.
-	Configuration map[string]interface{} `json:"configuration,omitempty"`
+	Configuration *map[string]interface{} `json:"configuration,omitempty"`
 	// All input details to be provided to complete the payment with this payment method.
-	Details []InputDetail `json:"details,omitempty"`
-	Group PaymentMethodGroup `json:"group,omitempty"`
+	Details *[]InputDetail `json:"details,omitempty"`
+	Group *PaymentMethodGroup `json:"group,omitempty"`
 	// All input details to be provided to complete the payment with this payment method.
-	InputDetails []InputDetail `json:"inputDetails,omitempty"`
+	InputDetails *[]InputDetail `json:"inputDetails,omitempty"`
 	// The displayable name of this payment method.
 	Name string `json:"name,omitempty"`
 	// Echo data required to send in next calls.

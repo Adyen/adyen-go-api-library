@@ -11,8 +11,8 @@
 package checkout
 // StoredDetails struct for StoredDetails
 type StoredDetails struct {
-	Bank BankAccount `json:"bank,omitempty"`
-	Card Card `json:"card,omitempty"`
+	Bank *BankAccount `json:"bank,omitempty"`
+	Card *Card `json:"card,omitempty"`
 	// The email associated with stored payment details.
 	EmailAddress string `json:"emailAddress,omitempty"`
 }

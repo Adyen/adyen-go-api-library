@@ -12,9 +12,9 @@ package checkout
 // SubInputDetail struct for SubInputDetail
 type SubInputDetail struct {
 	// Configuration parameters for the required input.
-	Configuration map[string]interface{} `json:"configuration,omitempty"`
+	Configuration *map[string]interface{} `json:"configuration,omitempty"`
 	// In case of a select, the items to choose from.
-	Items []Item `json:"items,omitempty"`
+	Items *[]Item `json:"items,omitempty"`
 	// The value to provide in the result.
 	Key string `json:"key,omitempty"`
 	// True if this input is optional to provide.
