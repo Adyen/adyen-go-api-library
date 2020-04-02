@@ -27,18 +27,34 @@ const (
 	{{/enumVars}}
 	{{/allowableValues}}
 )
+
+// Ptr returns reference to {{{name}}} value
+func (v {{{classname}}}) Ptr() *{{{classname}}} {
+	return &v
+}
+
 {{/isEnum}}
 {{^isEnum}}
 // {{classname}}{{#description}} {{{description}}}{{/description}}{{^description}} struct for {{{classname}}}{{/description}}
 type {{classname}} struct {
-{{#allVars}}
+{{#vendorExtensions.x-is-one-of-interface}}
+	{{classname}}Interface interface { {{#discriminator}}{{propertyGetter}}() {{propertyType}}{{/discriminator}} }
+{{/vendorExtensions.x-is-one-of-interface}}
+{{^vendorExtensions.x-is-one-of-interface}}
+{{#parent}}
+{{^isMapModel}}
+	{{{parent}}}
+{{/isMapModel}}
+{{/parent}}
+{{#vars}}
 {{^-first}}
 {{/-first}}
 {{#description}}
 	// {{{description}}}
 {{/description}}
-	{{name}} {{#isNullable}}*{{/isNullable}}{{{dataType}}} `json:"{{baseName}}{{^required}},omitempty{{/required}}"{{#withXml}} xml:"{{baseName}}{{#isXmlAttribute}},attr{{/isXmlAttribute}}"{{/withXml}}{{#vendorExtensions.x-go-custom-tag}} {{{.}}}{{/vendorExtensions.x-go-custom-tag}}`
-{{/allVars}}
+	{{name}} {{^required}}{{^isNullable}}{{^isPrimitiveType}}*{{/isPrimitiveType}}{{/isNullable}}{{/required}}{{{dataType}}} `json:"{{baseName}}{{^required}},omitempty{{/required}}"{{#withXml}} xml:"{{baseName}}{{#isXmlAttribute}},attr{{/isXmlAttribute}}"{{/withXml}}{{#vendorExtensions.x-go-custom-tag}} {{{.}}}{{/vendorExtensions.x-go-custom-tag}}`
+{{/vars}}
+{{/vendorExtensions.x-is-one-of-interface}}
 }
 {{/isEnum}}
 {{/model}}
