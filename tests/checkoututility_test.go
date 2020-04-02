@@ -28,8 +28,17 @@ func Test_CheckoutUtility(t *testing.T) {
 	client := adyen.NewAPIClientWithAPIKey(APIKey, "TEST")
 
 	t.Run("OriginKeys", func(t *testing.T) {
+		t.Run("Create an API request that should fail", func(t *testing.T) {
+			res, httpRes, err := client.CheckoutUtility.OriginKeysPost(&checkoututility.CheckoutUtilityRequest{})
+			require.NotNil(t, err)
+			require.NotNil(t, httpRes)
+			assert.Equal(t, "401 Unauthorized", err.Error())
+			assert.Equal(t, 401, httpRes.StatusCode)
+			assert.Equal(t, "401 Unauthorized", httpRes.Status)
+			require.NotNil(t, res)
+		})
 		t.Run("Create an API request that should pass", func(t *testing.T) {
-			domain := "http.example.com"
+			domain := "http://example.com"
 			res, httpRes, err := client.CheckoutUtility.OriginKeysPost(&checkoututility.CheckoutUtilityRequest{
 				OriginDomains: []string{domain},
 			})
