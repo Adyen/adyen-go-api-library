@@ -59,6 +59,7 @@ func Test_Checkout(t *testing.T) {
 			assert.Equal(t, "200 OK", httpRes.Status)
 			require.NotNil(t, res)
 			assert.Equal(t, &checkout.Amount{Currency: "EUR", Value: 1250}, res.Amount)
+			assert.NotNil(t, res.Url)
 		})
 	})
 
