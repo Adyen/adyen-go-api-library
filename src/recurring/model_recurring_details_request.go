@@ -13,7 +13,7 @@ package recurring
 type RecurringDetailsRequest struct {
 	// The merchant account identifier you want to process the (transaction) request with.
 	MerchantAccount string `json:"merchantAccount"`
-	Recurring *Recurring `json:"recurring,omitempty"`
+	Recurring *RecurringType `json:"recurring,omitempty"`
 	// The reference you use to uniquely identify the shopper (e.g. user ID or account ID).
 	ShopperReference string `json:"shopperReference"`
 }

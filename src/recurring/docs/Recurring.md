@@ -1,4 +1,4 @@
-# Recurring
+# RecurringType
 
 ## Properties
 

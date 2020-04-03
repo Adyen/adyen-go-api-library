@@ -66,7 +66,7 @@ Class | Method | HTTP request | Description
  - [DisableRequest](docs/DisableRequest.md)
  - [DisableResult](docs/DisableResult.md)
  - [Name](docs/Name.md)
- - [Recurring](docs/Recurring.md)
+ - [RecurringType](docs/Recurring.md)
  - [RecurringDetail](docs/RecurringDetail.md)
  - [RecurringDetailsRequest](docs/RecurringDetailsRequest.md)
  - [RecurringDetailsResult](docs/RecurringDetailsResult.md)
