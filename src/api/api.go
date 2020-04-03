@@ -14,6 +14,7 @@ import (
 	checkout "github.com/adyen/adyen-go-api-library/src/checkout"
 	checkoututility "github.com/adyen/adyen-go-api-library/src/checkoututility"
 	common "github.com/adyen/adyen-go-api-library/src/common"
+	payment "github.com/adyen/adyen-go-api-library/src/payment"
 )
 
 // Constants used for the client API
@@ -50,6 +51,7 @@ type APIClient struct {
 	// API Services
 	Checkout        *checkout.Checkout
 	CheckoutUtility *checkoututility.CheckoutUtility
+	Payment         *payment.Payment
 }
 
 // NewAPIClientWithCredentials creates a new API client based on provided credentials and environment
@@ -139,6 +141,12 @@ func NewAPIClient(cfg *common.Config) *APIClient {
 		Client: c.client,
 		BasePath: func() string {
 			return getURL(c.client.Cfg.CheckoutEndpoint, CheckoutUtilityAPIVersion)
+		},
+	}
+	c.Payment = &payment.Payment{
+		Client: c.client,
+		BasePath: func() string {
+			return fmt.Sprintf("%s/pal/servlet/Payment/%s", c.client.Cfg.Endpoint, APIVersion)
 		},
 	}
 
