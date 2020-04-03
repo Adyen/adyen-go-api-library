@@ -217,8 +217,8 @@ func NewAPIClient(cfg *common.Config) *APIClient {
 }
 ```
 
-**Step 4**: Run `go run main.go` and Fix any issues found
+**Step 4**: Run `make run` or `go run main.go` and Fix any issues found
 
 **Step 5**: Add tests for the new APIs created under `./src/<Api namespace in lowercase>`
 
-**Step 6**: Run `go test ./...` and Fix any issues found
+**Step 6**: Run `make test` or `go test ./...` and Fix any issues found
