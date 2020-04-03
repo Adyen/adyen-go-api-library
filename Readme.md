@@ -8,10 +8,10 @@ The Library supports all APIs under the following services:
 
 - [x] checkout
 - [x] checkout utility
-- [ ] payments
+- [x] payments
 - [ ] modifications
 - [ ] payouts
-- [ ] recurring
+- [x] recurring
 - [ ] notifications
 - [ ] BIN lookup
 
