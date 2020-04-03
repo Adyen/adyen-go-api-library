@@ -12,6 +12,7 @@ import (
 
 	"github.com/adyen/adyen-go-api-library/src/checkout"
 	"github.com/adyen/adyen-go-api-library/src/common"
+	"github.com/adyen/adyen-go-api-library/src/payment"
 	"github.com/joho/godotenv"
 
 	"github.com/stretchr/testify/assert"
@@ -72,6 +73,7 @@ func Test_api(t *testing.T) {
 
 		client = NewAPIClient(&common.Config{
 			Environment: "TEST",
+			// ApiKey:      APIKey,
 			Username:    USER,
 			Password:    PASS,
 		})
@@ -79,14 +81,24 @@ func Test_api(t *testing.T) {
 
 		t.Run("Create a API request that uses basic auth and should pass", func(t *testing.T) {
 
-			res, httpRes, err := client.Checkout.PaymentMethodsPost(&checkout.PaymentMethodsRequest{
+			res, httpRes, err := client.Payment.AuthorisePost(&payment.PaymentRequest{
 				MerchantAccount: MerchantAccount,
+				Card: &payment.Card{
+					Number:      "3700 0000 0000 002",
+					ExpiryMonth: "03",
+					ExpiryYear:  "2030",
+					Cvc:         "7373",
+					HolderName:  "John Smith",
+				},
+				Amount: payment.Amount{
+					Value:    1500,
+					Currency: "EUR",
+				},
+				Reference: "123466989879",
 			})
 
 			require.Nil(t, err)
 			require.NotNil(t, res)
-			assert.True(t, len(*res.Groups) > 1)
-			assert.True(t, len(*res.PaymentMethods) > 1)
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 200, httpRes.StatusCode)
 			assert.Equal(t, "200 OK", httpRes.Status)
