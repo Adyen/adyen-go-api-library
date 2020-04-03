@@ -19,17 +19,27 @@ import (
 )
 
 func Test_CheckoutUtility(t *testing.T) {
-	godotenv.Load("./../env")
+	godotenv.Load("./../.env")
 
 	var (
 		APIKey = os.Getenv("ADYEN_API_KEY")
 	)
 
 	client := adyen.NewAPIClientWithAPIKey(APIKey, "TEST")
+	// client.GetConfig().Debug = true
 
 	t.Run("OriginKeys", func(t *testing.T) {
+		t.Run("Create an API request that should fail", func(t *testing.T) {
+			res, httpRes, err := client.CheckoutUtility.OriginKeysPost(&checkoututility.CheckoutUtilityRequest{})
+			require.NotNil(t, err)
+			require.NotNil(t, httpRes)
+			assert.Equal(t, "500 Internal Server Error", err.Error())
+			assert.Equal(t, 500, httpRes.StatusCode)
+			assert.Equal(t, "500 Internal Server Error", httpRes.Status)
+			require.NotNil(t, res)
+		})
 		t.Run("Create an API request that should pass", func(t *testing.T) {
-			domain := "http.example.com"
+			domain := "http://example.com"
 			res, httpRes, err := client.CheckoutUtility.OriginKeysPost(&checkoututility.CheckoutUtilityRequest{
 				OriginDomains: []string{domain},
 			})
