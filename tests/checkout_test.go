@@ -172,40 +172,6 @@ func Test_Checkout(t *testing.T) {
 			assert.Equal(t, "422 Unprocessable Entity", httpRes.Status)
 			require.NotNil(t, res)
 		})
-		t.Run("Create an API request that should pass", func(t *testing.T) {
-
-			// t.SkipNow() // TODO fix this
-			client.GetConfig().Debug = true
-
-			payRes, _, _ := client.Checkout.PaymentsPost(&checkout.PaymentRequest{
-				Reference: "123456781235",
-				Amount: checkout.Amount{
-					Value:    1250,
-					Currency: "EUR",
-				},
-				CountryCode:     "NL",
-				MerchantAccount: MerchantAccount,
-				Channel:         "Web",
-				ReturnUrl:       "http://localhost:3000/redirect",
-				PaymentMethod: map[string]interface{}{
-					"type":   "ideal",
-					"issuer": "1121",
-				},
-			})
-			res, httpRes, err := client.Checkout.PaymentsDetailsPost(&checkout.DetailsRequest{
-				PaymentData: payRes.PaymentData,
-				Details: map[string]interface{}{
-					"payload": "eNrNV0mTo7gS...",
-				},
-			})
-
-			require.Nil(t, err)
-			require.NotNil(t, httpRes)
-			assert.Equal(t, 200, httpRes.StatusCode)
-			assert.Equal(t, "200 OK", httpRes.Status)
-			require.NotNil(t, res)
-			assert.Equal(t, "Authorised", res.ResultCode)
-		})
 	})
 
 	t.Run("PaymentSession", func(t *testing.T) {
