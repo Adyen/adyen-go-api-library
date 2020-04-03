@@ -43,7 +43,7 @@ Name | Type | Description | Notes
 **RedirectFromIssuerMethod** | **string** | Specifies the redirect method (GET or POST) when redirecting back from the issuer. | [optional] 
 **RedirectToIssuerMethod** | **string** | Specifies the redirect method (GET or POST) when redirecting to the issuer. | [optional] 
 **Reference** | **string** | The reference to uniquely identify a payment. This reference is used in all communication with you about the payment status. We recommend using a unique value per payment; however, it is not a requirement. If you need to provide multiple references for a transaction, separate them with hyphens (\&quot;-\&quot;). Maximum length: 80 characters. | 
-**ReturnUrl** | **string** | The URL to return to. | 
+**ReturnUrl** | **string** | The URL to return to in case of a redirection. The format depends on the channel. * For web, include the protocol &#x60;http://&#x60; or &#x60;https://&#x60;. You can also include your own additional query parameters, for example, shopper ID or order reference number. Example: &#x60;https://your-company.com/checkout?shopperOrder&#x3D;12xy&#x60; * For iOS, use the custom URL for your app. To know more about setting custom URL schemes, refer to the [Apple Developer documentation](https://developer.apple.com/documentation/uikit/inter-process_communication/allowing_apps_and_websites_to_link_to_your_content/defining_a_custom_url_scheme_for_your_app). Example: &#x60;my-app://&#x60; * For Android, use a custom URL handled by an Activity on your app. You can configure it with an [intent filter](https://developer.android.com/guide/components/intents-filters). Example: &#x60;my-app://your.package.name&#x60; | 
 **RiskData** |  Pointer to [**RiskData**](RiskData.md) |  | [optional] 
 **SessionValidity** | **string** | The maximum validity of the session. | [optional] 
 **ShopperEmail** | **string** | The shopper&#39;s email address. We recommend that you provide this data, as it is used in velocity fraud checks. &gt; For 3D Secure 2 transactions, schemes require the &#x60;shopperEmail&#x60; for both &#x60;deviceChannel&#x60; **browser** and **app**. | [optional] 
@@ -54,8 +54,9 @@ Name | Type | Description | Notes
 **ShopperReference** | **string** | The shopper&#39;s reference to uniquely identify this shopper (e.g. user ID or account ID). &gt; This field is required for recurring payments. | [optional] 
 **ShopperStatement** | **string** | The text to appear on the shopper&#39;s bank statement. | [optional] 
 **SocialSecurityNumber** | **string** | The shopper&#39;s social security number. | [optional] 
-**Splits** |  Pointer to [**[]Split**](Split.md) | The details of how the payment should be split when distributing a payment to a MarketPay Marketplace and its Accounts. | [optional] 
+**Splits** |  Pointer to [**[]Split**](Split.md) | Information on how the payment should be split between accounts when using [Adyen for Platforms](https://docs.adyen.com/marketpay/processing-payments#providing-split-information). | [optional] 
 **StorePaymentMethod** | **bool** | When true and &#x60;shopperReference&#x60; is provided, the payment details will be stored. | [optional] 
+**Store** | **string** | The physical store, for which this payment is processed. | [optional] 
 **TelephoneNumber** | **string** | The shopper&#39;s telephone number. | [optional] 
 **ThreeDS2RequestData** |  Pointer to [**ThreeDS2RequestData**](ThreeDS2RequestData.md) |  | [optional] 
 **ThreeDSAuthenticationOnly** | **bool** | If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/checkout/3d-secure/other-3ds-flows/authentication-only), and not the payment authorisation. | [optional] 

@@ -1,6 +1,6 @@
 # \DefaultApi
 
-All URIs are relative to *https://checkout-test.adyen.com/v51*
+All URIs are relative to *https://checkout-test.adyen.com/v52*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -191,7 +191,7 @@ No authorization required
 
 Starts a transaction.
 
-Sends payment parameters (like amount, country, and currency) together with the input details collected from the shopper. The response returns the result of the payment request: * For some payment methods (e.g. Visa, Mastercard, and SEPA Direct Debits) you'll get a final state in the `resultCode` (e.g. `authorised` or `refused`). * For other payment methods, you'll receive `redirectShopper` as `resultCode` together with a `redirectUrl`. In this case, the shopper must finalize the payment on the page behind the `redirectUrl`.
+Sends payment parameters (like amount, country, and currency) together with the input details collected from the shopper. The response returns the result of the payment request: * For some payment methods (e.g. Visa, Mastercard, and SEPA Direct Debits) you'll get a final state in the `resultCode` (e.g. `Authorised` or `Refused`). * For other payment methods, you'll receive `redirectShopper` as `resultCode` together with a `redirectUrl`. In this case, the shopper must finalize the payment on the page behind the `redirectUrl`.
 
 ### Required Parameters
 

@@ -5,7 +5,7 @@ info:
     name: Adyen Support
     url: https://support.adyen.com/
   description: |-
-    Adyen Checkout API provides a simple and flexible way to initiate and authorise online payments. You can use the same integration for payments made with cards (including One-Click and 3D Secure), mobile wallets, and local payment methods (e.g. iDEAL and Sofort).
+    Adyen Checkout API provides a simple and flexible way to initiate and authorise online payments. You can use the same integration for payments made with cards (including 3D Secure), mobile wallets, and local payment methods (for example, iDEAL and Sofort).
 
     This API reference provides information on available endpoints and how to interact with them. To learn more about the API, visit [Checkout documentation](https://docs.adyen.com/checkout).
 
@@ -25,13 +25,13 @@ info:
 
     For example:
     ```
-    https://checkout-test.adyen.com/v51/payments
+    https://checkout-test.adyen.com/v52/payments
     ```
   termsOfService: https://www.adyen.com/legal/terms-and-conditions
   title: Adyen Checkout API
-  version: "51"
+  version: "52"
 servers:
-- url: https://checkout-test.adyen.com/v51
+- url: https://checkout-test.adyen.com/v52
 paths:
   /paymentLinks:
     post:
@@ -130,7 +130,7 @@ paths:
     post:
       description: |-
         Sends payment parameters (like amount, country, and currency) together with the input details collected from the shopper. The response returns the result of the payment request:
-        * For some payment methods (e.g. Visa, Mastercard, and SEPA Direct Debits) you'll get a final state in the `resultCode` (e.g. `authorised` or `refused`).
+        * For some payment methods (e.g. Visa, Mastercard, and SEPA Direct Debits) you'll get a final state in the `resultCode` (e.g. `Authorised` or `Refused`).
         * For other payment methods, you'll receive `redirectShopper` as `resultCode` together with a `redirectUrl`. In this case, the shopper must finalize the payment on the page behind the `redirectUrl`.
       requestBody:
         content:
@@ -1753,6 +1753,19 @@ components:
         installmentPaymentData.option[itemNr].totalAmountDue:
           description: Total amount in minor units.
           type: string
+    ResponseAdditionalDataNetworkTokens:
+      properties:
+        networkToken.available:
+          description: Indicates whether a network token is available for the specified
+            card.
+          type: string
+        networkToken.bin:
+          description: The Bank Identification Number of a tokenized card, which is
+            the first six digits of a card number.
+          type: string
+        networkToken.tokenSummary:
+          description: The last four digits of a card number.
+          type: string
     ResponseAdditionalDataPayPal:
       properties:
         paypalPayerStatus:
@@ -2146,6 +2159,7 @@ components:
         alternativeReference: alternativeReference
         merchantReference: merchantReference
         paymentMethodType: paymentMethodType
+        entity: entity
       properties:
         alternativeReference:
           description: The voucher alternative reference code.
@@ -2156,6 +2170,9 @@ components:
           type: object
         downloadUrl:
           description: The URL to download the voucher.
+          type: string
+        entity:
+          description: An entity number of Multibanco.
           type: string
         expiresAt:
           description: The date time of the voucher expiry.
@@ -3596,6 +3613,7 @@ components:
         - blockedPaymentMethods
         - blockedPaymentMethods
         shopperLocale: shopperLocale
+        store: store
         allowedPaymentMethods:
         - allowedPaymentMethods
         - allowedPaymentMethods
@@ -3669,6 +3687,11 @@ components:
           description: |-
             The shopper's reference to uniquely identify this shopper (e.g. user ID or account ID).
             > This field is required for recurring payments.
+          type: string
+        store:
+          description: The physical store, for which this payment is processed.
+          maxLength: 16
+          minLength: 1
           type: string
         threeDSAuthenticationOnly:
           description: If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/checkout/3d-secure/other-3ds-flows/authentication-only),
@@ -4898,6 +4921,7 @@ components:
           value: 0
         redirectFromIssuerMethod: redirectFromIssuerMethod
         dateOfBirth: 2000-01-23T04:56:07.000+00:00
+        store: store
         riskData:
           clientData: clientData
         storePaymentMethod: true
@@ -5116,7 +5140,15 @@ components:
             Maximum length: 80 characters.
           type: string
         returnUrl:
-          description: The URL to return to.
+          description: |-
+            The URL to return to in case of a redirection.
+            The format depends on the channel.
+            * For web, include the protocol `http://` or `https://`. You can also include your own additional query parameters, for example, shopper ID or order reference number.
+            Example: `https://your-company.com/checkout?shopperOrder=12xy`
+            * For iOS, use the custom URL for your app. To know more about setting custom URL schemes, refer to the [Apple Developer documentation](https://developer.apple.com/documentation/uikit/inter-process_communication/allowing_apps_and_websites_to_link_to_your_content/defining_a_custom_url_scheme_for_your_app).
+            Example: `my-app://`
+            * For Android, use a custom URL handled by an Activity on your app. You can configure it with an [intent filter](https://developer.android.com/guide/components/intents-filters).
+            Example: `my-app://your.package.name`
           type: string
         riskData:
           $ref: '#/components/schemas/RiskData'
@@ -5167,8 +5199,8 @@ components:
           description: The shopper's social security number.
           type: string
         splits:
-          description: The details of how the payment should be split when distributing
-            a payment to a MarketPay Marketplace and its Accounts.
+          description: Information on how the payment should be split between accounts
+            when using [Adyen for Platforms](https://docs.adyen.com/marketpay/processing-payments#providing-split-information).
           items:
             $ref: '#/components/schemas/Split'
           type: array
@@ -5176,6 +5208,11 @@ components:
           description: When true and `shopperReference` is provided, the payment details
             will be stored.
           type: boolean
+        store:
+          description: The physical store, for which this payment is processed.
+          maxLength: 16
+          minLength: 1
+          type: string
         telephoneNumber:
           description: The shopper's telephone number.
           type: string
@@ -5200,6 +5237,9 @@ components:
           data: '{}'
           method: GET
           url: url
+        amount:
+          currency: currency
+          value: 0
         outputDetails: '{}'
         resultCode: AuthenticationFinished
         fraudResult:
@@ -5242,6 +5282,7 @@ components:
           alternativeReference: alternativeReference
           merchantReference: merchantReference
           paymentMethodType: paymentMethodType
+          entity: entity
         details:
         - configuration: '{}'
           details:
@@ -5364,12 +5405,15 @@ components:
           - $ref: '#/components/schemas/ResponseAdditionalDataCard'
           - $ref: '#/components/schemas/ResponseAdditionalDataDeliveryAddress'
           - $ref: '#/components/schemas/ResponseAdditionalDataInstallments'
+          - $ref: '#/components/schemas/ResponseAdditionalDataNetworkTokens'
           - $ref: '#/components/schemas/ResponseAdditionalDataPayPal'
           - $ref: '#/components/schemas/ResponseAdditionalDataSepa'
           description: This field contains additional data, which may be required
             to return in a particular payment response. To choose data fields to be
             returned, go to **Customer Area** > **Account** > **API URLs** > **Additional
             data settings**.
+        amount:
+          $ref: '#/components/schemas/Amount'
         authentication:
           description: 'Contains `threeds2.fingerprint` or `threeds2.challengeToken`
             values to be used in further calls to `/payments/details` endpoint. '
@@ -5784,7 +5828,15 @@ components:
             Maximum length: 80 characters.
           type: string
         returnUrl:
-          description: The URL to return to.
+          description: |-
+            The URL to return to in case of a redirection.
+            The format depends on the channel.
+            * For web, include the protocol `http://` or `https://`. You can also include your own additional query parameters, for example, shopper ID or order reference number.
+            Example: `https://your-company.com/checkout?shopperOrder=12xy`
+            * For iOS, use the custom URL for your app. To know more about setting custom URL schemes, refer to the [Apple Developer documentation](https://developer.apple.com/documentation/uikit/inter-process_communication/allowing_apps_and_websites_to_link_to_your_content/defining_a_custom_url_scheme_for_your_app).
+            Example: `my-app://`
+            * For Android, use a custom URL handled by an Activity on your app. You can configure it with an [intent filter](https://developer.android.com/guide/components/intents-filters).
+            Example: `my-app://your.package.name`
           type: string
         riskData:
           $ref: '#/components/schemas/RiskData'
@@ -5839,8 +5891,8 @@ components:
           description: The shopper's social security number.
           type: string
         splits:
-          description: The details of how the payment should be split when distributing
-            a payment to a MarketPay Marketplace and its Accounts.
+          description: Information on how the payment should be split between accounts
+            when using [Adyen for Platforms](https://docs.adyen.com/marketpay/processing-payments#providing-split-information).
           items:
             $ref: '#/components/schemas/Split'
           type: array
@@ -6422,6 +6474,7 @@ components:
           - $ref: '#/components/schemas/ResponseAdditionalDataCard'
           - $ref: '#/components/schemas/ResponseAdditionalDataDeliveryAddress'
           - $ref: '#/components/schemas/ResponseAdditionalDataInstallments'
+          - $ref: '#/components/schemas/ResponseAdditionalDataNetworkTokens'
           - $ref: '#/components/schemas/ResponseAdditionalDataPayPal'
           - $ref: '#/components/schemas/ResponseAdditionalDataSepa'
           description: This field contains additional data, which may be required

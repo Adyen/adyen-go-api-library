@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Action** |  Pointer to [**CheckoutPaymentsAction**](CheckoutPaymentsAction.md) |  | [optional] 
 **AdditionalData** | **interface{}** [**ResponseAdditionalData | CommonResponseAdditionalData | BillingAddressResponseAdditionalData | CardResponseAdditionalData | DeliveryAddressResponseAdditionalData | InstallmentsResponseAdditionalData | PayPalResponseAdditionalData | Sepa**]() | This field contains additional data, which may be required to return in a particular payment response. To choose data fields to be returned, go to **Customer Area** &gt; **Account** &gt; **API URLs** &gt; **Additional data settings**. | [optional] 
+**Amount** |  Pointer to [**Amount**](Amount.md) |  | [optional] 
 **Authentication** |  Pointer to [**map[string]interface{}**](.md) | Contains &#x60;threeds2.fingerprint&#x60; or &#x60;threeds2.challengeToken&#x60; values to be used in further calls to &#x60;/payments/details&#x60; endpoint.  | [optional] 
 **Details** |  Pointer to [**[]InputDetail**](InputDetail.md) | When non-empty, contains all the fields that you must submit to the &#x60;/payments/details&#x60; endpoint. | [optional] 
 **FraudResult** |  Pointer to [**FraudResult**](FraudResult.md) |  | [optional] 

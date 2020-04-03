@@ -9,10 +9,12 @@
  */
 
 package checkout
-// PaymentMethodDragonpayEBanking struct for PaymentMethodDragonpayEBanking
-type PaymentMethodDragonpayEBanking struct {
-	// Must be set to **dragonpay_ebanking**.
-	Type string `json:"type"`
-	// The Dragonpay issuer value of the shopper's selected bank. Set this to an **id** of a Dragonpay issuer to preselect it.
-	Issuer string `json:"issuer"`
+// ResponseAdditionalDataNetworkTokens struct for ResponseAdditionalDataNetworkTokens
+type ResponseAdditionalDataNetworkTokens struct {
+	// Indicates whether a network token is available for the specified card.
+	NetworkTokenAvailable string `json:"networkToken.available,omitempty"`
+	// The Bank Identification Number of a tokenized card, which is the first six digits of a card number.
+	NetworkTokenBin string `json:"networkToken.bin,omitempty"`
+	// The last four digits of a card number.
+	NetworkTokenTokenSummary string `json:"networkToken.tokenSummary,omitempty"`
 }

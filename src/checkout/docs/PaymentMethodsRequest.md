@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **MerchantAccount** | **string** | The merchant account identifier, with which you want to process the transaction. | 
 **ShopperLocale** | **string** | The combination of a language code and a country code to specify the language to be used in the payment. | [optional] 
 **ShopperReference** | **string** | The shopper&#39;s reference to uniquely identify this shopper (e.g. user ID or account ID). &gt; This field is required for recurring payments. | [optional] 
+**Store** | **string** | The physical store, for which this payment is processed. | [optional] 
 **ThreeDSAuthenticationOnly** | **bool** | If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/checkout/3d-secure/other-3ds-flows/authentication-only), and not the payment authorisation. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

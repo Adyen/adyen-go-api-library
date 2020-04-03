@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **AlternativeReference** | **string** | The voucher alternative reference code. | [optional] 
 **Data** |  Pointer to [**map[string]interface{}**](.md) | When the redirect URL must be accessed via POST, use this data to post to the redirect URL. | [optional] 
 **DownloadUrl** | **string** | The URL to download the voucher. | [optional] 
+**Entity** | **string** | An entity number of Multibanco. | [optional] 
 **ExpiresAt** | **string** | The date time of the voucher expiry. | [optional] 
 **InitialAmount** |  Pointer to [**Amount**](Amount.md) |  | [optional] 
 **InstructionsUrl** | **string** | The URL to the detailed instructions to make payment using the voucher. | [optional] 
