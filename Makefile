@@ -10,4 +10,4 @@ test:
 	@echo "Testing Adyen Go API library"
 	go test ./...
 
-verify: run test
+verify: build run test
