@@ -8,7 +8,6 @@ package api
 
 import (
 	"fmt"
-	"github.com/adyen/adyen-go-api-library/src/payout"
 	"net/http"
 	"time"
 
@@ -16,6 +15,7 @@ import (
 	checkoututility "github.com/adyen/adyen-go-api-library/src/checkoututility"
 	common "github.com/adyen/adyen-go-api-library/src/common"
 	payment "github.com/adyen/adyen-go-api-library/src/payment"
+	payout "github.com/adyen/adyen-go-api-library/src/payout"
 	recurring "github.com/adyen/adyen-go-api-library/src/recurring"
 )
 
