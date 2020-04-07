@@ -15,6 +15,7 @@ import (
 	checkoututility "github.com/adyen/adyen-go-api-library/src/checkoututility"
 	common "github.com/adyen/adyen-go-api-library/src/common"
 	payment "github.com/adyen/adyen-go-api-library/src/payment"
+	payout "github.com/adyen/adyen-go-api-library/src/payout"
 	recurring "github.com/adyen/adyen-go-api-library/src/recurring"
 )
 
@@ -53,6 +54,7 @@ type APIClient struct {
 	Checkout        *checkout.Checkout
 	CheckoutUtility *checkoututility.CheckoutUtility
 	Payment         *payment.Payment
+	Payout          *payout.Payout
 	Recurring       *recurring.Recurring
 }
 
@@ -99,6 +101,14 @@ func NewAPIClient(cfg *common.Config) *APIClient {
 			return fmt.Sprintf("%s/pal/servlet/Payment/%s", c.client.Cfg.Endpoint, APIVersion)
 		},
 	}
+
+	c.Payout = &payout.Payout{
+		Client: c.client,
+		BasePath: func() string {
+			return fmt.Sprintf("%s/pal/servlet/Payout/%s", c.client.Cfg.Endpoint, APIVersion)
+		},
+	}
+
 	c.Recurring = &recurring.Recurring{
 		Client: c.client,
 		BasePath: func() string {
