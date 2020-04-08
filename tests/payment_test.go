@@ -70,19 +70,19 @@ func Test_Payment(t *testing.T) {
 		t.Run("Authorise3d", func(t *testing.T) {
 			t.Skip("skipping since 3d requires manual user authentication")
 			res, httpRes, err := client.Payment.Authorise3dPost(&payment.PaymentRequest3d{})
-			testRequest(res, httpRes, err)
+			assertForSuccessResponse(res, httpRes, err)
 		})
 
 		t.Run("Authorise3ds2", func(t *testing.T) {
 			t.Skip("skipping since 3d requires manual user authentication")
 			res, httpRes, err := client.Payment.Authorise3ds2Post(&payment.PaymentRequest3ds2{})
-			testRequest(res, httpRes, err)
+			assertForSuccessResponse(res, httpRes, err)
 		})
 
 		t.Run("Authorise", func(t *testing.T) {
 			res, httpRes, err := authorisePost()
 
-			testRequest(res, httpRes, err)
+			assertForSuccessResponse(res, httpRes, err)
 			assert.NotNil(t, res.PspReference)
 			assert.Equal(t, res.ResultCode, "Authorised")
 		})
@@ -90,13 +90,13 @@ func Test_Payment(t *testing.T) {
 		t.Run("GetAuthenticationResult", func(t *testing.T) {
 			t.Skip("skipping since this returns auth result after a 3d auth")
 			res, httpRes, err := client.Payment.GetAuthenticationResultPost(&payment.AuthenticationResultRequest{})
-			testRequest(res, httpRes, err)
+			assertForSuccessResponse(res, httpRes, err)
 		})
 
 		t.Run("Retrieve3ds2Result", func(t *testing.T) {
 			t.Skip("skipping since this returns auth result after a 3d auth")
 			res, httpRes, err := client.Payment.Retrieve3ds2ResultPost(&payment.ThreeDS2ResultRequest{})
-			testRequest(res, httpRes, err)
+			assertForSuccessResponse(res, httpRes, err)
 		})
 	})
 
@@ -112,7 +112,7 @@ func Test_Payment(t *testing.T) {
 				Reference:       time.Now().String(),
 				MerchantAccount: MerchantAccount,
 			})
-			testRequest(res, httpRes, err)
+			assertForSuccessResponse(res, httpRes, err)
 			assert.Equal(t, "[adjustAuthorisation-received]", res.Response)
 		})
 
@@ -123,7 +123,7 @@ func Test_Payment(t *testing.T) {
 				Reference:         time.Now().String(),
 				MerchantAccount:   MerchantAccount,
 			})
-			testRequest(res, httpRes, err)
+			assertForSuccessResponse(res, httpRes, err)
 			assert.Equal(t, "[cancelOrRefund-received]", res.Response)
 		})
 
@@ -134,7 +134,7 @@ func Test_Payment(t *testing.T) {
 				Reference:         time.Now().String(),
 				MerchantAccount:   MerchantAccount,
 			})
-			testRequest(res, httpRes, err)
+			assertForSuccessResponse(res, httpRes, err)
 			assert.Equal(t, "[cancel-received]", res.Response)
 		})
 
@@ -149,7 +149,7 @@ func Test_Payment(t *testing.T) {
 				Reference:       time.Now().String(),
 				MerchantAccount: MerchantAccount,
 			})
-			testRequest(res, httpRes, err)
+			assertForSuccessResponse(res, httpRes, err)
 			assert.Equal(t, "[capture-received]", res.Response)
 		})
 
@@ -164,7 +164,7 @@ func Test_Payment(t *testing.T) {
 				Reference:       time.Now().String(),
 				MerchantAccount: MerchantAccount,
 			})
-			testRequest(res, httpRes, err)
+			assertForSuccessResponse(res, httpRes, err)
 			assert.Equal(t, "[refund-received]", res.Response)
 		})
 
@@ -175,7 +175,7 @@ func Test_Payment(t *testing.T) {
 				Reference:         time.Now().String(),
 				MerchantAccount:   MerchantAccount,
 			})
-			testRequest(res, httpRes, err)
+			assertForSuccessResponse(res, httpRes, err)
 			assert.Equal(t, "[technical-cancel-received]", res.Response)
 		})
 
@@ -186,7 +186,7 @@ func Test_Payment(t *testing.T) {
 				Reference:         time.Now().String(),
 				MerchantAccount:   MerchantAccount,
 			})
-			testRequest(res, httpRes, err)
+			assertForSuccessResponse(res, httpRes, err)
 			assert.Equal(t, "[voidPendingRefund-received]", res.Response)
 		})
 	})
