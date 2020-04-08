@@ -1,15 +1,16 @@
 package tests
 
 import (
+	"net/http"
+	"os"
+	"testing"
+	"time"
+
 	adyen "github.com/adyen/adyen-go-api-library/src/api"
 	"github.com/adyen/adyen-go-api-library/src/payment"
 	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"net/http"
-	"os"
-	"testing"
-	"time"
 )
 
 func Test_Payment(t *testing.T) {
