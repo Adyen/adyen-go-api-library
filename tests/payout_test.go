@@ -160,7 +160,7 @@ func Test_Payout(t *testing.T) {
 				require.NotNil(t, res)
 				assert.NotEmpty(t, res.PspReference)
 				assert.NotEmpty(t, res.ResultCode)
-				assert.Equal(t, res.ResultCode, "[payout-submit-received]")
+				assert.Equal(t, "[payout-submit-received]", res.ResultCode)
 			})
 		})
 
