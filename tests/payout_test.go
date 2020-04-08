@@ -200,5 +200,23 @@ func Test_Payout(t *testing.T) {
 				assert.Equal(t, "[payout-confirm-received]", res.Response)
 			})
 		})
+		t.Run("DeclineThirdParty", func(t *testing.T) {
+			t.Run("Create an API request that should pass", func(t *testing.T) {
+				ref := time.Now().String()
+				payoutDetail, _, _ := createStoreDetailAndSubmitThirdParty(ref)
+				res, httpRes, err := clientReview.Payout.DeclineThirdPartyPost(&payout.ModifyRequest{
+					MerchantAccount:   MerchantAccount,
+					OriginalReference: payoutDetail.PspReference,
+				})
+
+				require.Nil(t, err)
+				require.NotNil(t, httpRes)
+				assert.Equal(t, 200, httpRes.StatusCode)
+				assert.Equal(t, "200 OK", httpRes.Status)
+				require.NotNil(t, res)
+				assert.NotEmpty(t, res.PspReference)
+				assert.Equal(t, "[payout-decline-received]", res.Response)
+			})
+		})
 	})
 }
