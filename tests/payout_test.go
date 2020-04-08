@@ -197,7 +197,7 @@ func Test_Payout(t *testing.T) {
 				assert.Equal(t, "200 OK", httpRes.Status)
 				require.NotNil(t, res)
 				assert.NotEmpty(t, res.PspReference)
-				assert.Equal(t, res.Response, "[payout-confirm-received]")
+				assert.Equal(t, "[payout-confirm-received]", res.Response)
 			})
 		})
 	})
