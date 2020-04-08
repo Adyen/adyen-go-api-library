@@ -19,7 +19,7 @@ type PayoutRequest struct {
 	AccountInfo      *AccountInfo `json:"accountInfo,omitempty"`
 	AdditionalAmount *Amount      `json:"additionalAmount,omitempty"`
 	// This field contains additional data, which may be required for a particular payment request.  The `additionalData` object consists of entries, each of which includes the key and value.
-	AdditionalData  *interface{}
+	AdditionalData  *interface{}     `json:"additionalData,omitempty"`
 	Amount          Amount           `json:"amount"`
 	ApplicationInfo *ApplicationInfo `json:"applicationInfo,omitempty"`
 	BankAccount     *BankAccount     `json:"bankAccount,omitempty"`
