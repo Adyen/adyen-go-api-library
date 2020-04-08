@@ -47,7 +47,7 @@ func Test_Payment(t *testing.T) {
 	//}
 
 	client := adyen.NewAPIClientWithAPIKey(APIKey, "TEST")
-	client.GetConfig().Debug = true
+	// client.GetConfig().Debug = true
 
 	assertForSuccessResponse := func(res interface{}, httpRes *http.Response, err error) {
 		require.Nil(t, err)
