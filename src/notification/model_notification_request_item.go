@@ -3,11 +3,12 @@ package notification
 import "time"
 
 type NotificationRequestItem struct {
-	AdditionalData      interface{} `json:"additionalData"`
+	AdditionalData      interface{} `json:"additionalData,omitEmpty"`
 	Amount              Amount      `json:"amount"`
 	EventCode           string      `json:"eventCode"`
 	EventDate           *time.Time  `json:"eventDate"`
 	MerchantAccountCode string      `json:"merchantAccountCode"`
+	MerchantReference   string      `json:"merchantReference"`
 	Operations          []string    `json:"operations,omitEmpty"`
 	OriginalReference   string      `json:"originalReference,omitEmpty"`
 	PaymentMethod       string      `json:"paymentMethod"`
