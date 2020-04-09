@@ -9,9 +9,11 @@ package api
 import (
 	"os"
 	"testing"
+	"time"
 
 	"github.com/adyen/adyen-go-api-library/src/checkout"
 	"github.com/adyen/adyen-go-api-library/src/common"
+	"github.com/adyen/adyen-go-api-library/src/recurring"
 	"github.com/joho/godotenv"
 
 	"github.com/stretchr/testify/assert"
@@ -49,11 +51,13 @@ func Test_api(t *testing.T) {
 		var (
 			MerchantAccount = os.Getenv("ADYEN_MERCHANT")
 			APIKey          = os.Getenv("ADYEN_API_KEY")
+			USER            = os.Getenv("ADYEN_USER")
+			PASS            = os.Getenv("ADYEN_PASSWORD")
 		)
 
 		client = NewAPIClientWithAPIKey(APIKey, "TEST")
 
-		t.Run("Create a API request that should pass", func(t *testing.T) {
+		t.Run("Create a API request that uses API key auth and should pass", func(t *testing.T) {
 
 			res, httpRes, err := client.Checkout.PaymentMethodsPost(&checkout.PaymentMethodsRequest{
 				MerchantAccount: MerchantAccount,
@@ -63,6 +67,25 @@ func Test_api(t *testing.T) {
 			require.NotNil(t, res)
 			assert.True(t, len(*res.Groups) > 1)
 			assert.True(t, len(*res.PaymentMethods) > 1)
+			require.NotNil(t, httpRes)
+			assert.Equal(t, 200, httpRes.StatusCode)
+			assert.Equal(t, "200 OK", httpRes.Status)
+		})
+
+		client = NewAPIClientWithCredentials(USER, PASS, "TEST", "adyen-api-go-library")
+		client.GetConfig().Debug = true
+
+		t.Run("Create a API request that uses basic auth and should pass", func(t *testing.T) {
+			res, httpRes, err := client.Recurring.ListRecurringDetailsPost(&recurring.RecurringDetailsRequest{
+				MerchantAccount: MerchantAccount,
+				Recurring: &recurring.RecurringType{
+					Contract: "RECURRING",
+				},
+				ShopperReference: time.Now().String(),
+			})
+
+			require.Nil(t, err)
+			require.NotNil(t, res)
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 200, httpRes.StatusCode)
 			assert.Equal(t, "200 OK", httpRes.Status)
