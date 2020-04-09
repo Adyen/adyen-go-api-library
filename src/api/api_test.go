@@ -9,10 +9,11 @@ package api
 import (
 	"os"
 	"testing"
+	"time"
 
 	"github.com/adyen/adyen-go-api-library/src/checkout"
 	"github.com/adyen/adyen-go-api-library/src/common"
-	"github.com/adyen/adyen-go-api-library/src/payment"
+	"github.com/adyen/adyen-go-api-library/src/recurring"
 	"github.com/joho/godotenv"
 
 	"github.com/stretchr/testify/assert"
@@ -71,30 +72,16 @@ func Test_api(t *testing.T) {
 			assert.Equal(t, "200 OK", httpRes.Status)
 		})
 
-		client = NewAPIClient(&common.Config{
-			Environment: "TEST",
-			// ApiKey:      APIKey,
-			Username:    USER,
-			Password:    PASS,
-		})
+		client = NewAPIClientWithCredentials(USER, PASS, "TEST", "adyen-api-go-library")
 		client.GetConfig().Debug = true
 
 		t.Run("Create a API request that uses basic auth and should pass", func(t *testing.T) {
-
-			res, httpRes, err := client.Payment.AuthorisePost(&payment.PaymentRequest{
+			res, httpRes, err := client.Recurring.ListRecurringDetailsPost(&recurring.RecurringDetailsRequest{
 				MerchantAccount: MerchantAccount,
-				Card: &payment.Card{
-					Number:      "3700 0000 0000 002",
-					ExpiryMonth: "03",
-					ExpiryYear:  "2030",
-					Cvc:         "7373",
-					HolderName:  "John Smith",
+				Recurring: &recurring.RecurringType{
+					Contract: "RECURRING",
 				},
-				Amount: payment.Amount{
-					Value:    1500,
-					Currency: "EUR",
-				},
-				Reference: "123466989879",
+				ShopperReference: time.Now().String(),
 			})
 
 			require.Nil(t, err)
