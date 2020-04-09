@@ -11,10 +11,12 @@ import (
 	"net/http"
 	"time"
 
+	binlookup "github.com/adyen/adyen-go-api-library/src/binlookup"
 	checkout "github.com/adyen/adyen-go-api-library/src/checkout"
 	checkoututility "github.com/adyen/adyen-go-api-library/src/checkoututility"
 	common "github.com/adyen/adyen-go-api-library/src/common"
 	payment "github.com/adyen/adyen-go-api-library/src/payment"
+	payout "github.com/adyen/adyen-go-api-library/src/payout"
 	recurring "github.com/adyen/adyen-go-api-library/src/recurring"
 )
 
@@ -53,7 +55,9 @@ type APIClient struct {
 	Checkout        *checkout.Checkout
 	CheckoutUtility *checkoututility.CheckoutUtility
 	Payment         *payment.Payment
+	Payout          *payout.Payout
 	Recurring       *recurring.Recurring
+	BinLookup       *binlookup.BinLookup
 }
 
 // NewAPIClient creates a new API client. Requires a userAgent string describing your application.
@@ -84,13 +88,13 @@ func NewAPIClient(cfg *common.Config) *APIClient {
 	c.Checkout = &checkout.Checkout{
 		Client: c.client,
 		BasePath: func() string {
-			return getURL(c.client.Cfg.CheckoutEndpoint, CheckoutAPIVersion)
+			return fmt.Sprintf("%s/%s", c.client.Cfg.CheckoutEndpoint, CheckoutAPIVersion)
 		},
 	}
 	c.CheckoutUtility = &checkoututility.CheckoutUtility{
 		Client: c.client,
 		BasePath: func() string {
-			return getURL(c.client.Cfg.CheckoutEndpoint, CheckoutUtilityAPIVersion)
+			return fmt.Sprintf("%s/%s", c.client.Cfg.CheckoutEndpoint, CheckoutUtilityAPIVersion)
 		},
 	}
 	c.Payment = &payment.Payment{
@@ -99,10 +103,25 @@ func NewAPIClient(cfg *common.Config) *APIClient {
 			return fmt.Sprintf("%s/pal/servlet/Payment/%s", c.client.Cfg.Endpoint, APIVersion)
 		},
 	}
+
+	c.Payout = &payout.Payout{
+		Client: c.client,
+		BasePath: func() string {
+			return fmt.Sprintf("%s/pal/servlet/Payout/%s", c.client.Cfg.Endpoint, APIVersion)
+		},
+	}
+
 	c.Recurring = &recurring.Recurring{
 		Client: c.client,
 		BasePath: func() string {
 			return fmt.Sprintf("%s/pal/servlet/Recurring/%s", c.client.Cfg.Endpoint, RecurringAPIVersion)
+		},
+	}
+
+	c.BinLookup = &binlookup.BinLookup{
+		Client: c.client,
+		BasePath: func() string {
+			return fmt.Sprintf("%s/%s/%s", c.client.Cfg.Endpoint, BinLookupPalSuffix, BinLookupAPIVersion)
 		},
 	}
 
@@ -215,8 +234,4 @@ func (c *APIClient) setApplicationName(applicationName string) {
 func (c *APIClient) setTimeouts(connectionTimeoutMillis, readTimeoutMillis time.Duration) {
 	c.client.Cfg.ConnectionTimeoutMillis = connectionTimeoutMillis
 	c.client.Cfg.ReadTimeoutMillis = readTimeoutMillis
-}
-
-func getURL(endpoint, version string) string {
-	return fmt.Sprintf("%s/%s", endpoint, version)
 }

@@ -10,10 +10,10 @@ The Library supports all APIs under the following services:
 - [x] checkout utility
 - [x] payments
 - [ ] modifications
-- [ ] payouts
+- [x] payouts
 - [x] recurring
 - [ ] notifications
-- [ ] BIN lookup
+- [x] BIN lookup
 
 ## Requirements
 
@@ -205,13 +205,13 @@ func NewAPIClient(cfg *common.Config) *APIClient {
 	c.Checkout = &checkout.Checkout{
 		Client: c.client,
 		BasePath: func() string {
-			return getURL(c.client.Cfg.CheckoutEndpoint, CheckoutAPIVersion)
+			return fmt.Sprintf("%s/%s", c.client.Cfg.CheckoutEndpoint, CheckoutAPIVersion)
 		},
 	}
     c.<Api namespace in StartCase> = &<Api namespace in lowercase>.<Api namespace in StartCase>{
         Client: c.client,
         BasePath: func() string {
-            return getURL(c.client.Cfg.<API end point>, <API version constant>)
+            return fmt.Sprintf("%s/%s", c.client.Cfg.<API end point>, <API version constant>)
         },
     }
 }
