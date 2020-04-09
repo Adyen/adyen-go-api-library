@@ -56,7 +56,7 @@ type Environment string
 
 const (
 	Test Environment = "TEST"
-	Live             = "LIVE"
+	Live Environment = "LIVE"
 )
 
 // Config stores the configuration of the API client
