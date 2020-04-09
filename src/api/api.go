@@ -15,6 +15,7 @@ import (
 	checkoututility "github.com/adyen/adyen-go-api-library/src/checkoututility"
 	common "github.com/adyen/adyen-go-api-library/src/common"
 	payment "github.com/adyen/adyen-go-api-library/src/payment"
+	recurring "github.com/adyen/adyen-go-api-library/src/recurring"
 )
 
 // Constants used for the client API
@@ -52,6 +53,60 @@ type APIClient struct {
 	Checkout        *checkout.Checkout
 	CheckoutUtility *checkoututility.CheckoutUtility
 	Payment         *payment.Payment
+	Recurring       *recurring.Recurring
+}
+
+// NewAPIClient creates a new API client. Requires a userAgent string describing your application.
+// optionally a custom http.Client to allow for advanced features such as caching.
+func NewAPIClient(cfg *common.Config) *APIClient {
+	if cfg.HTTPClient == nil {
+		cfg.HTTPClient = http.DefaultClient
+	}
+	if cfg.ConnectionTimeoutMillis != 0 {
+		cfg.HTTPClient.Timeout = cfg.ConnectionTimeoutMillis
+	}
+	if cfg.DefaultHeader == nil {
+		cfg.DefaultHeader = make(map[string]string)
+	}
+	if cfg.UserAgent == "" {
+		cfg.UserAgent = fmt.Sprintf("%s %s/%s", cfg.ApplicationName, LibName, LibVersion)
+	}
+
+	c := &APIClient{}
+	c.client = &common.Client{}
+	c.client.Cfg = cfg
+
+	if cfg.Environment != "" {
+		c.SetEnvironment(cfg.Environment, cfg.LiveEndpointURLPrefix)
+	}
+
+	// API Services
+	c.Checkout = &checkout.Checkout{
+		Client: c.client,
+		BasePath: func() string {
+			return getURL(c.client.Cfg.CheckoutEndpoint, CheckoutAPIVersion)
+		},
+	}
+	c.CheckoutUtility = &checkoututility.CheckoutUtility{
+		Client: c.client,
+		BasePath: func() string {
+			return getURL(c.client.Cfg.CheckoutEndpoint, CheckoutUtilityAPIVersion)
+		},
+	}
+	c.Payment = &payment.Payment{
+		Client: c.client,
+		BasePath: func() string {
+			return fmt.Sprintf("%s/pal/servlet/Payment/%s", c.client.Cfg.Endpoint, APIVersion)
+		},
+	}
+	c.Recurring = &recurring.Recurring{
+		Client: c.client,
+		BasePath: func() string {
+			return fmt.Sprintf("%s/pal/servlet/Recurring/%s", c.client.Cfg.Endpoint, RecurringAPIVersion)
+		},
+	}
+
+	return c
 }
 
 // NewAPIClientWithCredentials creates a new API client based on provided credentials and environment
@@ -104,53 +159,6 @@ func NewAPIClientWithLiveAPIKey(apiKey string, environment common.Environment, l
 		Environment:           environment,
 		LiveEndpointURLPrefix: liveEndpointURLPrefix,
 	})
-}
-
-// NewAPIClient creates a new API client. Requires a userAgent string describing your application.
-// optionally a custom http.Client to allow for advanced features such as caching.
-func NewAPIClient(cfg *common.Config) *APIClient {
-	if cfg.HTTPClient == nil {
-		cfg.HTTPClient = http.DefaultClient
-	}
-	if cfg.ConnectionTimeoutMillis != 0 {
-		cfg.HTTPClient.Timeout = cfg.ConnectionTimeoutMillis
-	}
-	if cfg.DefaultHeader == nil {
-		cfg.DefaultHeader = make(map[string]string)
-	}
-	if cfg.UserAgent == "" {
-		cfg.UserAgent = fmt.Sprintf("%s %s/%s", cfg.ApplicationName, LibName, LibVersion)
-	}
-
-	c := &APIClient{}
-	c.client = &common.Client{}
-	c.client.Cfg = cfg
-
-	if cfg.Environment != "" {
-		c.SetEnvironment(cfg.Environment, cfg.LiveEndpointURLPrefix)
-	}
-
-	// API Services
-	c.Checkout = &checkout.Checkout{
-		Client: c.client,
-		BasePath: func() string {
-			return getURL(c.client.Cfg.CheckoutEndpoint, CheckoutAPIVersion)
-		},
-	}
-	c.CheckoutUtility = &checkoututility.CheckoutUtility{
-		Client: c.client,
-		BasePath: func() string {
-			return getURL(c.client.Cfg.CheckoutEndpoint, CheckoutUtilityAPIVersion)
-		},
-	}
-	c.Payment = &payment.Payment{
-		Client: c.client,
-		BasePath: func() string {
-			return fmt.Sprintf("%s/pal/servlet/Payment/%s", c.client.Cfg.Endpoint, APIVersion)
-		},
-	}
-
-	return c
 }
 
 /*

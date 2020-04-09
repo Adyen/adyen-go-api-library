@@ -8,10 +8,10 @@ The Library supports all APIs under the following services:
 
 - [x] checkout
 - [x] checkout utility
-- [ ] payments
+- [x] payments
 - [ ] modifications
 - [ ] payouts
-- [ ] recurring
+- [x] recurring
 - [ ] notifications
 - [ ] BIN lookup
 
@@ -185,7 +185,7 @@ openapi-generator-cli generate \
 - `go.mod`
 - `go.sum`
 
-**Step 3**: Add the new service to `APIClient` struct in `./main.go` and add import for the same
+**Step 3**: Add the new service to `APIClient` struct in `./src/api/api.go` and add import for the same
 
 ```go
 type APIClient struct {
