@@ -26,7 +26,7 @@ func Test_Binlookup(t *testing.T) {
 	)
 
 	client := adyen.NewAPIClientWithAPIKey(APIKey, "TEST")
-	client.GetConfig().Debug = true
+	// client.GetConfig().Debug = true
 
 	t.Run("Get 3DS Availability", func(t *testing.T) {
 		t.Run("Create an API request that should support only 3DS1", func(t *testing.T) {
