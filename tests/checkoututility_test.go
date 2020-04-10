@@ -34,7 +34,7 @@ func Test_CheckoutUtility(t *testing.T) {
 
 	t.Run("OriginKeys", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
-			res, httpRes, err := client.CheckoutUtility.OriginKeysPost(&checkoututility.CheckoutUtilityRequest{})
+			res, httpRes, err := client.CheckoutUtility.OriginKeys(&checkoututility.CheckoutUtilityRequest{})
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
 			assert.Equal(t, "500 Internal Server Error: Required field 'originDomains' is null (validation: 702)", err.Error())
@@ -44,7 +44,7 @@ func Test_CheckoutUtility(t *testing.T) {
 		})
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 			domain := "http://example.com"
-			res, httpRes, err := client.CheckoutUtility.OriginKeysPost(&checkoututility.CheckoutUtilityRequest{
+			res, httpRes, err := client.CheckoutUtility.OriginKeys(&checkoututility.CheckoutUtilityRequest{
 				OriginDomains: []string{domain},
 			})
 			require.Nil(t, err)

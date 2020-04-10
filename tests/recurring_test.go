@@ -36,7 +36,7 @@ func Test_Recurring(t *testing.T) {
 
 	t.Run("ListRecurringDetails", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
-			res, httpRes, err := client.Recurring.ListRecurringDetailsPost(&recurring.RecurringDetailsRequest{})
+			res, httpRes, err := client.Recurring.ListRecurringDetails(&recurring.RecurringDetailsRequest{})
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
 			assert.Equal(t, "403 Forbidden: Invalid Merchant Account (security: 901)", err.Error())
@@ -46,7 +46,7 @@ func Test_Recurring(t *testing.T) {
 			assert.Equal(t, "Invalid Merchant Account", err.(common.APIError).Message)
 		})
 		t.Run("Create an API request that should pass", func(t *testing.T) {
-			res, httpRes, err := client.Recurring.ListRecurringDetailsPost(&recurring.RecurringDetailsRequest{
+			res, httpRes, err := client.Recurring.ListRecurringDetails(&recurring.RecurringDetailsRequest{
 				MerchantAccount:  MerchantAccount,
 				ShopperReference: "4343553GFGFYFY4654654675765",
 				Recurring: &recurring.RecurringType{
@@ -65,7 +65,7 @@ func Test_Recurring(t *testing.T) {
 
 	t.Run("Disable", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
-			res, httpRes, err := client.Recurring.DisablePost(&recurring.DisableRequest{
+			res, httpRes, err := client.Recurring.Disable(&recurring.DisableRequest{
 				MerchantAccount:          MerchantAccount,
 				ShopperReference:         "4343553GFGFYFY4654654675765",
 				RecurringDetailReference: "8314442372419167",
@@ -82,7 +82,7 @@ func Test_Recurring(t *testing.T) {
 
 	t.Run("ScheduleAccountUpdater", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
-			res, httpRes, err := client.Recurring.ScheduleAccountUpdaterPost(&recurring.ScheduleAccountUpdaterRequest{
+			res, httpRes, err := client.Recurring.ScheduleAccountUpdater(&recurring.ScheduleAccountUpdaterRequest{
 				MerchantAccount: MerchantAccount,
 				Reference:       "4343553GFGFYFY4654654675765",
 				// RecurringDetailReference: "8314442372419167",
@@ -96,7 +96,7 @@ func Test_Recurring(t *testing.T) {
 			assert.Equal(t, "Missing card or shopperReference & selectedRecurringDetailReference", err.(common.APIError).Message)
 		})
 		t.Run("Create an API request that should fail with card", func(t *testing.T) {
-			res, httpRes, err := client.Recurring.ScheduleAccountUpdaterPost(&recurring.ScheduleAccountUpdaterRequest{
+			res, httpRes, err := client.Recurring.ScheduleAccountUpdater(&recurring.ScheduleAccountUpdaterRequest{
 				MerchantAccount: MerchantAccount,
 				Reference:       "4343553GFGFYFY4654654675765",
 				Card: &recurring.Card{

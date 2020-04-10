@@ -189,7 +189,10 @@ openapi-generator-cli generate \
 - `go.sum`
 - `docs`
 
-**Step 3**: Add the new service to `APIClient` struct in `./src/api/api.go` and add import for the same
+
+**Step 3**: Remove the HTTP method(Post, Get, Put, Patch) suffix on API endpoint methods (Regex to find them `([A-Z][a-zA-Z0-9]*)Post\(request`)
+
+**Step 4**: Add the new service to `APIClient` struct in `./src/api/api.go` and add import for the same
 
 ```go
 type APIClient struct {
@@ -221,8 +224,8 @@ func NewClient(cfg *common.Config) *APIClient {
 }
 ```
 
-**Step 4**: Run `make run` or `go run main.go` and Fix any issues found
+**Step 5**: Run `make run` or `go run main.go` and Fix any issues found
 
-**Step 5**: Add tests for the new APIs created under `./src/<Api namespace in lowercase>`
+**Step 6**: Add tests for the new APIs created under `./src/<Api namespace in lowercase>`
 
-**Step 6**: Run `make test` or `go test ./...` and Fix any issues found
+**Step 7**: Run `make test` or `go test ./...` and Fix any issues found

@@ -37,7 +37,7 @@ func Test_Checkout(t *testing.T) {
 	t.Run("PaymentLinks", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 
-			res, httpRes, err := client.Checkout.PaymentLinksPost(&checkout.CreatePaymentLinkRequest{
+			res, httpRes, err := client.Checkout.PaymentLinks(&checkout.CreatePaymentLinkRequest{
 				Amount: checkout.Amount{
 					Value:    1250,
 					Currency: "EUR",
@@ -54,7 +54,7 @@ func Test_Checkout(t *testing.T) {
 		})
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 
-			res, httpRes, err := client.Checkout.PaymentLinksPost(&checkout.CreatePaymentLinkRequest{
+			res, httpRes, err := client.Checkout.PaymentLinks(&checkout.CreatePaymentLinkRequest{
 				Reference: "123456781235",
 				Amount: checkout.Amount{
 					Value:    1250,
@@ -88,7 +88,7 @@ func Test_Checkout(t *testing.T) {
 	t.Run("PaymentMethods", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 
-			res, httpRes, err := client.Checkout.PaymentMethodsPost(&checkout.PaymentMethodsRequest{})
+			res, httpRes, err := client.Checkout.PaymentMethods(&checkout.PaymentMethodsRequest{})
 
 			require.NotNil(t, err)
 			assert.Equal(t, "403 Forbidden: Invalid Merchant Account (security: 901)", err.Error())
@@ -99,7 +99,7 @@ func Test_Checkout(t *testing.T) {
 		})
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 
-			res, httpRes, err := client.Checkout.PaymentMethodsPost(&checkout.PaymentMethodsRequest{
+			res, httpRes, err := client.Checkout.PaymentMethods(&checkout.PaymentMethodsRequest{
 				MerchantAccount: MerchantAccount,
 			})
 
@@ -116,7 +116,7 @@ func Test_Checkout(t *testing.T) {
 	t.Run("Payments", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 
-			res, httpRes, err := client.Checkout.PaymentsPost(&checkout.PaymentRequest{
+			res, httpRes, err := client.Checkout.Payments(&checkout.PaymentRequest{
 				MerchantAccount: MerchantAccount,
 			})
 
@@ -129,7 +129,7 @@ func Test_Checkout(t *testing.T) {
 		})
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 
-			res, httpRes, err := client.Checkout.PaymentsPost(&checkout.PaymentRequest{
+			res, httpRes, err := client.Checkout.Payments(&checkout.PaymentRequest{
 				Reference: "123456781235",
 				Amount: checkout.Amount{
 					Value:    1250,
@@ -159,7 +159,7 @@ func Test_Checkout(t *testing.T) {
 
 	t.Run("PaymentDetails", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
-			res, httpRes, err := client.Checkout.PaymentsDetailsPost(&checkout.DetailsRequest{
+			res, httpRes, err := client.Checkout.PaymentsDetails(&checkout.DetailsRequest{
 				PaymentData: "1234",
 				Details: map[string]interface{}{
 					"MD":    "Ab02b4c0!BQABAgCW5sxB4e/==",
@@ -178,7 +178,7 @@ func Test_Checkout(t *testing.T) {
 
 	t.Run("PaymentSession", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
-			res, httpRes, err := client.Checkout.PaymentSessionPost(&checkout.PaymentSetupRequest{
+			res, httpRes, err := client.Checkout.PaymentSession(&checkout.PaymentSetupRequest{
 				Reference: "123456781235",
 				Amount: checkout.Amount{
 					Value:    1250,
@@ -199,7 +199,7 @@ func Test_Checkout(t *testing.T) {
 		})
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 
-			res, httpRes, err := client.Checkout.PaymentSessionPost(&checkout.PaymentSetupRequest{
+			res, httpRes, err := client.Checkout.PaymentSession(&checkout.PaymentSetupRequest{
 				Reference: "123456781235",
 				Amount: checkout.Amount{
 					Value:    1250,
@@ -223,7 +223,7 @@ func Test_Checkout(t *testing.T) {
 
 	t.Run("PaymentsResult", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
-			res, httpRes, err := client.Checkout.PaymentsResultPost(&checkout.PaymentVerificationRequest{Payload: "dummyPayload"})
+			res, httpRes, err := client.Checkout.PaymentsResult(&checkout.PaymentVerificationRequest{Payload: "dummyPayload"})
 
 			require.NotNil(t, err)
 			assert.Equal(t, "422 Unprocessable Entity: Invalid payload provided (validation: 14_018)", err.Error())

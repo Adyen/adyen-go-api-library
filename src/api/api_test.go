@@ -36,7 +36,7 @@ func Test_api(t *testing.T) {
 		assert.Equal(t, "https://checkout-test.adyen.com/checkout/v1", client.CheckoutUtility.BasePath())
 
 		t.Run("Create a API request that should fail", func(t *testing.T) {
-			res, httpRes, err := client.Checkout.PaymentMethodsPost(&checkout.PaymentMethodsRequest{})
+			res, httpRes, err := client.Checkout.PaymentMethods(&checkout.PaymentMethodsRequest{})
 			require.NotNil(t, err)
 			assert.Equal(t, "401 Unauthorized: HTTP Status Response - Unauthorized (security: 000)", err.Error())
 			require.NotNil(t, res)
@@ -62,7 +62,7 @@ func Test_api(t *testing.T) {
 
 		t.Run("Create a API request that uses API key auth and should pass", func(t *testing.T) {
 
-			res, httpRes, err := client.Checkout.PaymentMethodsPost(&checkout.PaymentMethodsRequest{
+			res, httpRes, err := client.Checkout.PaymentMethods(&checkout.PaymentMethodsRequest{
 				MerchantAccount: MerchantAccount,
 			})
 
@@ -83,7 +83,7 @@ func Test_api(t *testing.T) {
 		})
 
 		t.Run("Create a API request that uses basic auth and should pass", func(t *testing.T) {
-			res, httpRes, err := client.Recurring.ListRecurringDetailsPost(&recurring.RecurringDetailsRequest{
+			res, httpRes, err := client.Recurring.ListRecurringDetails(&recurring.RecurringDetailsRequest{
 				MerchantAccount: MerchantAccount,
 				Recurring: &recurring.RecurringType{
 					Contract: "RECURRING",

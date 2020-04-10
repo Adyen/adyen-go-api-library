@@ -31,7 +31,7 @@ func Test_main(t *testing.T) {
 		assert.Equal(t, "https://checkout-test.adyen.com/checkout/v52", client.Checkout.BasePath())
 
 		t.Run("Create a API request that should fail", func(t *testing.T) {
-			res, httpRes, err := client.Checkout.PaymentMethodsPost(&checkout.PaymentMethodsRequest{})
+			res, httpRes, err := client.Checkout.PaymentMethods(&checkout.PaymentMethodsRequest{})
 			require.NotNil(t, err)
 			assert.Equal(t, "401 Unauthorized: HTTP Status Response - Unauthorized (security: 000)", err.Error())
 			require.NotNil(t, res)
