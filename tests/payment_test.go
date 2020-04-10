@@ -6,7 +6,8 @@ import (
 	"testing"
 	"time"
 
-	adyen "github.com/adyen/adyen-go-api-library/src/api"
+	"github.com/adyen/adyen-go-api-library/src/api"
+	"github.com/adyen/adyen-go-api-library/src/common"
 	"github.com/adyen/adyen-go-api-library/src/payment"
 	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
@@ -47,7 +48,10 @@ func Test_Payment(t *testing.T) {
 	//    UserAgent:         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36",
 	//}
 
-	client := adyen.NewAPIClientWithAPIKey(APIKey, "TEST")
+	client := api.NewClient(&common.Config{
+		ApiKey:      APIKey,
+		Environment: "TEST",
+	})
 	// client.GetConfig().Debug = true
 
 	assertForSuccessResponse := func(res interface{}, httpRes *http.Response, err error) {
@@ -59,7 +63,7 @@ func Test_Payment(t *testing.T) {
 	}
 
 	authorisePost := func() (payment.PaymentResult, *http.Response, error) {
-		return client.Payment.AuthorisePost(&payment.PaymentRequest{
+		return client.Payment.Authorise(&payment.PaymentRequest{
 			Card:            &card,
 			Amount:          amount,
 			Reference:       time.Now().String(),
@@ -70,13 +74,13 @@ func Test_Payment(t *testing.T) {
 	t.Run("General", func(t *testing.T) {
 		t.Run("Authorise3d", func(t *testing.T) {
 			t.Skip("skipping since 3d requires manual user authentication")
-			res, httpRes, err := client.Payment.Authorise3dPost(&payment.PaymentRequest3d{})
+			res, httpRes, err := client.Payment.Authorise3d(&payment.PaymentRequest3d{})
 			assertForSuccessResponse(res, httpRes, err)
 		})
 
 		t.Run("Authorise3ds2", func(t *testing.T) {
 			t.Skip("skipping since 3d requires manual user authentication")
-			res, httpRes, err := client.Payment.Authorise3ds2Post(&payment.PaymentRequest3ds2{})
+			res, httpRes, err := client.Payment.Authorise3ds2(&payment.PaymentRequest3ds2{})
 			assertForSuccessResponse(res, httpRes, err)
 		})
 
@@ -90,13 +94,13 @@ func Test_Payment(t *testing.T) {
 
 		t.Run("GetAuthenticationResult", func(t *testing.T) {
 			t.Skip("skipping since this returns auth result after a 3d auth")
-			res, httpRes, err := client.Payment.GetAuthenticationResultPost(&payment.AuthenticationResultRequest{})
+			res, httpRes, err := client.Payment.GetAuthenticationResult(&payment.AuthenticationResultRequest{})
 			assertForSuccessResponse(res, httpRes, err)
 		})
 
 		t.Run("Retrieve3ds2Result", func(t *testing.T) {
 			t.Skip("skipping since this returns auth result after a 3d auth")
-			res, httpRes, err := client.Payment.Retrieve3ds2ResultPost(&payment.ThreeDS2ResultRequest{})
+			res, httpRes, err := client.Payment.Retrieve3ds2Result(&payment.ThreeDS2ResultRequest{})
 			assertForSuccessResponse(res, httpRes, err)
 		})
 	})
@@ -104,7 +108,7 @@ func Test_Payment(t *testing.T) {
 	t.Run("Modifications", func(t *testing.T) {
 		t.Run("AdjustAuthorisation", func(t *testing.T) {
 			authRes, _, _ := authorisePost()
-			res, httpRes, err := client.Payment.AdjustAuthorisationPost(&payment.ModificationRequest{
+			res, httpRes, err := client.Payment.AdjustAuthorisation(&payment.ModificationRequest{
 				OriginalReference: authRes.PspReference,
 				ModificationAmount: &payment.Amount{
 					Currency: "EUR",
@@ -119,7 +123,7 @@ func Test_Payment(t *testing.T) {
 
 		t.Run("CancelOrRefund", func(t *testing.T) {
 			authRes, _, _ := authorisePost()
-			res, httpRes, err := client.Payment.CancelOrRefundPost(&payment.ModificationRequest{
+			res, httpRes, err := client.Payment.CancelOrRefund(&payment.ModificationRequest{
 				OriginalReference: authRes.PspReference,
 				Reference:         time.Now().String(),
 				MerchantAccount:   MerchantAccount,
@@ -130,7 +134,7 @@ func Test_Payment(t *testing.T) {
 
 		t.Run("Cancel", func(t *testing.T) {
 			authRes, _, _ := authorisePost()
-			res, httpRes, err := client.Payment.CancelPost(&payment.ModificationRequest{
+			res, httpRes, err := client.Payment.Cancel(&payment.ModificationRequest{
 				OriginalReference: authRes.PspReference,
 				Reference:         time.Now().String(),
 				MerchantAccount:   MerchantAccount,
@@ -141,7 +145,7 @@ func Test_Payment(t *testing.T) {
 
 		t.Run("Capture", func(t *testing.T) {
 			authRes, _, _ := authorisePost()
-			res, httpRes, err := client.Payment.CapturePost(&payment.ModificationRequest{
+			res, httpRes, err := client.Payment.Capture(&payment.ModificationRequest{
 				OriginalReference: authRes.PspReference,
 				ModificationAmount: &payment.Amount{
 					Currency: "EUR",
@@ -156,7 +160,7 @@ func Test_Payment(t *testing.T) {
 
 		t.Run("Refund", func(t *testing.T) {
 			authRes, _, _ := authorisePost()
-			res, httpRes, err := client.Payment.RefundPost(&payment.ModificationRequest{
+			res, httpRes, err := client.Payment.Refund(&payment.ModificationRequest{
 				OriginalReference: authRes.PspReference,
 				ModificationAmount: &payment.Amount{
 					Currency: "EUR",
@@ -171,7 +175,7 @@ func Test_Payment(t *testing.T) {
 
 		t.Run("TechnicalCancel", func(t *testing.T) {
 			authRes, _, _ := authorisePost()
-			res, httpRes, err := client.Payment.TechnicalCancelPost(&payment.ModificationRequest{
+			res, httpRes, err := client.Payment.TechnicalCancel(&payment.ModificationRequest{
 				OriginalReference: authRes.PspReference,
 				Reference:         time.Now().String(),
 				MerchantAccount:   MerchantAccount,
@@ -182,7 +186,7 @@ func Test_Payment(t *testing.T) {
 
 		t.Run("VoidPendingRefund", func(t *testing.T) {
 			authRes, _, _ := authorisePost()
-			res, httpRes, err := client.Payment.VoidPendingRefundPost(&payment.ModificationRequest{
+			res, httpRes, err := client.Payment.VoidPendingRefund(&payment.ModificationRequest{
 				OriginalReference: authRes.PspReference,
 				Reference:         time.Now().String(),
 				MerchantAccount:   MerchantAccount,

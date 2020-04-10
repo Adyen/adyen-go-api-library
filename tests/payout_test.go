@@ -12,8 +12,9 @@ import (
 	"testing"
 	"time"
 
-	adyen "github.com/adyen/adyen-go-api-library/src/api"
+	"github.com/adyen/adyen-go-api-library/src/api"
 	"github.com/adyen/adyen-go-api-library/src/checkout"
+	"github.com/adyen/adyen-go-api-library/src/common"
 	"github.com/adyen/adyen-go-api-library/src/payout"
 	"github.com/joho/godotenv"
 
@@ -31,9 +32,18 @@ func Test_Payout(t *testing.T) {
 		MerchantAccount = os.Getenv("ADYEN_MERCHANT")
 	)
 
-	client := adyen.NewAPIClientWithAPIKey(APIKey, "TEST")
-	clientStore := adyen.NewAPIClientWithAPIKey(StoreAPIKey, "TEST")
-	clientReview := adyen.NewAPIClientWithAPIKey(ReviewAPIKey, "TEST")
+	client := api.NewClient(&common.Config{
+		ApiKey:      APIKey,
+		Environment: "TEST",
+	})
+	clientStore := api.NewClient(&common.Config{
+		ApiKey:      StoreAPIKey,
+		Environment: "TEST",
+	})
+	clientReview := api.NewClient(&common.Config{
+		ApiKey:      ReviewAPIKey,
+		Environment: "TEST",
+	})
 
 	dateOfBirth := time.Date(1990, 1, 1, 0, 0, 0, 0, time.UTC)
 	card := &payout.Card{
@@ -64,7 +74,7 @@ func Test_Payout(t *testing.T) {
 	nationality := "NL"
 
 	createStoreDetail := func(ref string) (payout.StoreDetailResponse, *_nethttp.Response, error) {
-		return clientStore.Payout.StoreDetailPost(&payout.StoreDetailRequest{
+		return clientStore.Payout.StoreDetail(&payout.StoreDetailRequest{
 			Bank:             &bank,
 			DateOfBirth:      dateOfBirth,
 			EntityType:       entityType,
@@ -78,7 +88,7 @@ func Test_Payout(t *testing.T) {
 	}
 
 	createStoreDetailAndSubmitThirdParty := func(ref string) (payout.StoreDetailAndSubmitResponse, *_nethttp.Response, error) {
-		return clientStore.Payout.StoreDetailAndSubmitThirdPartyPost(&payout.StoreDetailAndSubmitRequest{
+		return clientStore.Payout.StoreDetailAndSubmitThirdParty(&payout.StoreDetailAndSubmitRequest{
 			Amount:           amount,
 			Bank:             &bank,
 			DateOfBirth:      dateOfBirth,
@@ -96,7 +106,7 @@ func Test_Payout(t *testing.T) {
 	t.Run("Instant Payouts", func(t *testing.T) {
 		t.Run("Payout", func(t *testing.T) {
 			t.Run("Create an API request that should pass", func(t *testing.T) {
-				paymentRes, _, _ := client.Checkout.PaymentsPost(&checkout.PaymentRequest{
+				paymentRes, _, _ := client.Checkout.Payments(&checkout.PaymentRequest{
 					Reference: "123456781235",
 					Amount: checkout.Amount{
 						Value:    12500,
@@ -113,7 +123,7 @@ func Test_Payout(t *testing.T) {
 					},
 				})
 
-				res, httpRes, err := client.Payout.PayoutPost(&payout.PayoutRequest{
+				res, httpRes, err := client.Payout.Payout(&payout.PayoutRequest{
 					Amount:          amount,
 					MerchantAccount: MerchantAccount,
 					Reference:       paymentRes.PspReference,
@@ -154,7 +164,7 @@ func Test_Payout(t *testing.T) {
 			t.Run("Create an API request that should pass", func(t *testing.T) {
 				ref := time.Now().String()
 				storeDetail, _, _ := createStoreDetail(ref)
-				res, httpRes, err := clientStore.Payout.SubmitThirdPartyPost(&payout.SubmitRequest{
+				res, httpRes, err := clientStore.Payout.SubmitThirdParty(&payout.SubmitRequest{
 					Amount:          amount,
 					MerchantAccount: MerchantAccount,
 					Recurring: payout.Recurring{
@@ -203,7 +213,7 @@ func Test_Payout(t *testing.T) {
 			t.Run("Create an API request that should pass", func(t *testing.T) {
 				ref := time.Now().String()
 				payoutDetail, _, _ := createStoreDetailAndSubmitThirdParty(ref)
-				res, httpRes, err := clientReview.Payout.ConfirmThirdPartyPost(&payout.ModifyRequest{
+				res, httpRes, err := clientReview.Payout.ConfirmThirdParty(&payout.ModifyRequest{
 					MerchantAccount:   MerchantAccount,
 					OriginalReference: payoutDetail.PspReference,
 				})
@@ -221,7 +231,7 @@ func Test_Payout(t *testing.T) {
 			t.Run("Create an API request that should pass", func(t *testing.T) {
 				ref := time.Now().String()
 				payoutDetail, _, _ := createStoreDetailAndSubmitThirdParty(ref)
-				res, httpRes, err := clientReview.Payout.DeclineThirdPartyPost(&payout.ModifyRequest{
+				res, httpRes, err := clientReview.Payout.DeclineThirdParty(&payout.ModifyRequest{
 					MerchantAccount:   MerchantAccount,
 					OriginalReference: payoutDetail.PspReference,
 				})

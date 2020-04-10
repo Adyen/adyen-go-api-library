@@ -55,8 +55,8 @@ type APIKey struct {
 type Environment string
 
 const (
-	Test Environment = "TEST"
-	Live Environment = "LIVE"
+	TestEnv Environment = "TEST"
+	LiveEnv Environment = "LIVE"
 )
 
 // Config stores the configuration of the API client

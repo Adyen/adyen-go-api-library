@@ -7,12 +7,13 @@ import (
 	"github.com/stretchr/testify/require"
 
 	adyen "github.com/adyen/adyen-go-api-library/src/api"
+	"github.com/adyen/adyen-go-api-library/src/common"
 	"github.com/adyen/adyen-go-api-library/src/notification"
 )
 
 func TestNotificationService_HandleNotificationRequest(t *testing.T) {
 
-	client := adyen.NewAPIClientWithAPIKey("", "TEST")
+	client := adyen.NewClient(&common.Config{})
 
 	tests := []struct {
 		name    string

@@ -20,18 +20,18 @@ import (
 func Test_main(t *testing.T) {
 	t.Run("Create a new APIClient", func(t *testing.T) {
 
-		client := api.NewAPIClient(&common.Config{
+		client := api.NewClient(&common.Config{
 			Environment: "TEST",
 		})
 		require.NotNil(t, client)
 		require.NotNil(t, client.Checkout)
 		require.NotNil(t, client.Checkout.Client)
 		require.NotNil(t, client.Checkout.Client.Cfg)
-		require.Equal(t, common.Test, client.Checkout.Client.Cfg.Environment)
+		require.Equal(t, common.TestEnv, client.Checkout.Client.Cfg.Environment)
 		assert.Equal(t, "https://checkout-test.adyen.com/checkout/v52", client.Checkout.BasePath())
 
 		t.Run("Create a API request that should fail", func(t *testing.T) {
-			res, httpRes, err := client.Checkout.PaymentMethodsPost(&checkout.PaymentMethodsRequest{})
+			res, httpRes, err := client.Checkout.PaymentMethods(&checkout.PaymentMethodsRequest{})
 			require.NotNil(t, err)
 			assert.Equal(t, "401 Unauthorized: HTTP Status Response - Unauthorized (security: 000)", err.Error())
 			require.NotNil(t, res)

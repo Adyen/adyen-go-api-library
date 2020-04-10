@@ -12,7 +12,7 @@ The Library supports all APIs under the following services:
     - [x] modifications
 - [x] payouts
 - [x] recurring
-- [ ] notifications
+- [x] notifications
 - [x] BIN lookup
 
 ## Requirements
@@ -42,9 +42,12 @@ import (
 	adyen "github.com/adyen/adyen-go-api-library/src/api"
 )
 
-client := adyen.NewAPIClientWithAPIKey("your api key", "TEST")
+client := api.NewClient(&common.Config{
+    ApiKey:      "your api key",
+    Environment: common.TestEnv,
+})
 
-res, httpRes, err := client.Checkout.PaymentMethodsPost(&checkout.PaymentMethodsRequest{
+res, httpRes, err := client.Checkout.PaymentMethods(&checkout.PaymentMethodsRequest{
     MerchantAccount: "your merchant account",
 })
 ```
@@ -58,9 +61,12 @@ import (
 	adyen "github.com/adyen/adyen-go-api-library/src/api"
 )
 
-client := adyen.NewAPIClientWithAPIKey("your api key", "TEST")
+client := api.NewClient(&common.Config{
+    ApiKey:      "your api key",
+    Environment: common.TestEnv,
+})
 
-res, httpRes, err := client.Checkout.PaymentsPost(&checkout.PaymentRequest{
+res, httpRes, err := client.Checkout.Payments(&checkout.PaymentRequest{
     Reference: "123456781235",
     Amount: checkout.Amount{
         Value:    1250,
@@ -90,13 +96,13 @@ httpStatus := httpRes.Status
 By default, Go [`http.DefaultClient`](https://golang.org/pkg/net/http/) will be used to submit requests to the API. But you can change that by injecting your own HttpClient on your client instance.
 
 ```go
-client := NewAPIClient(&common.Config{
-    HTTPClient: &http.Client{
+client := adyen.NewClient(&common.Config{
+    HTTPClient:  &http.Client{
         CheckRedirect: redirectPolicyFunc,
         Timeout: 10 * time.MilliSeconds,
     },
-    Environment: "TEST",
-    ApiKey: "your api key",
+    Environment: common.TestEnv,
+    ApiKey:      "your api key",
 })
 ```
 
@@ -112,11 +118,11 @@ proxyURL, _ := url.Parse("http://localhost:7000")
 transport := &http.Transport{
     Proxy: http.ProxyURL(proxyURL),
 }
-client = NewAPIClient(&common.Config{
-    HTTPClient: &http.Client{
+client = adyen.NewClient(&common.Config{
+    HTTPClient:  &http.Client{
         Transport: transport,
     },
-    Environment: "TEST",
+    Environment: common.TestEnv,
     ApiKey:      "your api key",
 })
 ```
@@ -171,7 +177,7 @@ openapi-generator-cli generate \
     -o /src/checkout
 ```
 
-**Step 2**: Delete the following files from `./src/<api package folder name in lowercase>`. If the foldername is not in lowercase, rename it
+**Step 2**: Delete the following files/folders from `./src/<api package folder name in lowercase>`. If the foldername is not in lowercase, rename it
 
 - `configuration.go`
 - `client.go`
@@ -181,8 +187,12 @@ openapi-generator-cli generate \
 - `git_push.sh`
 - `go.mod`
 - `go.sum`
+- `docs`
 
-**Step 3**: Add the new service to `APIClient` struct in `./src/api/api.go` and add import for the same
+
+**Step 3**: Remove the HTTP method(Post, Get, Put, Patch) suffix on API endpoint methods (Regex to find them `([A-Z][a-zA-Z0-9]*)Post\(request`)
+
+**Step 4**: Add the new service to `APIClient` struct in `./src/api/api.go` and add import for the same
 
 ```go
 type APIClient struct {
@@ -193,10 +203,10 @@ type APIClient struct {
 }
 ```
 
-Init service in the `NewAPIClient` method
+Init service in the `NewClient` method
 
 ```go
-func NewAPIClient(cfg *common.Config) *APIClient {
+func NewClient(cfg *common.Config) *APIClient {
     ...
     // API Services
 	c.Checkout = &checkout.Checkout{
@@ -214,8 +224,8 @@ func NewAPIClient(cfg *common.Config) *APIClient {
 }
 ```
 
-**Step 4**: Run `make run` or `go run main.go` and Fix any issues found
+**Step 5**: Run `make run` or `go run main.go` and Fix any issues found
 
-**Step 5**: Add tests for the new APIs created under `./src/<Api namespace in lowercase>`
+**Step 6**: Add tests for the new APIs created under `./src/<Api namespace in lowercase>`
 
-**Step 6**: Run `make test` or `go test ./...` and Fix any issues found
+**Step 7**: Run `make test` or `go test ./...` and Fix any issues found

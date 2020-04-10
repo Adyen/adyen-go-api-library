@@ -23,14 +23,14 @@ import (
 type CheckoutUtility common.Service
 
 /*
-OriginKeysPost Create originKey values for one or more merchant domains.
+OriginKeys Create originKey values for one or more merchant domains.
 This operation takes the origin domains and returns a JSON object containing the corresponding origin keys for the domains.
  * @param request CheckoutUtilityRequest - reference of CheckoutUtilityRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return CheckoutUtilityResponse
 */
 
-func (a *CheckoutUtility) OriginKeysPost(request *CheckoutUtilityRequest, ctxs ..._context.Context) (CheckoutUtilityResponse, *_nethttp.Response, error) {
+func (a *CheckoutUtility) OriginKeys(request *CheckoutUtilityRequest, ctxs ..._context.Context) (CheckoutUtilityResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod  = _nethttp.MethodPost
 		localVarPostBody    interface{}

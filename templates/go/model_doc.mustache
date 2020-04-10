@@ -1,17 +1,1 @@
-{{#models}}{{#model}}# {{classname}}
-
-## Properties
-
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-{{#vendorExtensions.x-is-one-of-interface}}
-**{{classname}}Interface** | **interface { {{#discriminator}}{{propertyGetter}}() {{propertyType}}{{/discriminator}} }** | An interface that can hold any of the proper implementing types |
-{{/vendorExtensions.x-is-one-of-interface}}
-{{^vendorExtensions.x-is-one-of-interface}}
-{{#vars}}**{{name}}** | {{#isPrimitiveType}}**{{{dataType}}}**{{/isPrimitiveType}}{{^isPrimitiveType}} Pointer to [**{{{dataType}}}**]({{complexType}}.md){{/isPrimitiveType}} | {{description}} | {{^required}}[optional] {{/required}}{{#isReadOnly}}[readonly] {{/isReadOnly}}{{#defaultValue}}[default to {{{.}}}]{{/defaultValue}}
-{{/vars}}
-{{/vendorExtensions.x-is-one-of-interface}}
-
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-{{/model}}{{/models}}
+// delete me

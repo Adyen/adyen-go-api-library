@@ -9,7 +9,6 @@ package api
 import (
 	"fmt"
 	"net/http"
-	"time"
 
 	binlookup "github.com/adyen/adyen-go-api-library/src/binlookup"
 	checkout "github.com/adyen/adyen-go-api-library/src/checkout"
@@ -62,9 +61,67 @@ type APIClient struct {
 	Notification    *notification.NotificationService
 }
 
-// NewAPIClient creates a new API client. Requires a userAgent string describing your application.
-// optionally a custom http.Client to allow for advanced features such as caching.
-func NewAPIClient(cfg *common.Config) *APIClient {
+// NewClient creates a new API client. Requires Config object.
+//
+// @param config              A reference to common.Config object
+//
+// create a new API client based on provided api key & url prefix for LIVE environment
+//
+//  client := NewClient(&common.Config{
+//     ApiKey:                "apiKey",
+//     Environment:           common.LiveEnv,
+//     LiveEndpointURLPrefix: "liveEndpointURLPrefix",
+//  })
+//
+//  ApiKey                Defines the api key that can be retrieved by back office
+//  Environment           This defines the payment environment live or test
+//  LiveEndpointURLPrefix Provide the unique live url prefix from the "API URLs and Response" menu in the Adyen Customer Area
+//
+//
+// create a new API client based on provided api key for TEST environment
+//
+//  client := NewClient(&common.Config{
+//     ApiKey:                "apiKey",
+//     Environment:           common.TestEnv,
+//  })
+//
+//  ApiKey                Defines the api key that can be retrieved by back office
+//  Environment           This defines the payment environment live or test
+//
+//
+// creates a new API client based on provided credentials &  url prefix for LIVE environment
+//
+//  client := NewClient(&common.Config{
+//      Username:              "username",
+//      Password:              "password",
+//      ApplicationName:       "applicationName",
+//      Environment:           common.LiveEnv,
+//      LiveEndpointURLPrefix: "liveEndpointURLPrefix",
+//  })
+//
+//  Username              Your merchant account Username
+//  Password              Your merchant accont Password
+//  Environment           This defines the payment environment live or test
+//  ApplicationName       Application name to be used in user agent
+//  LiveEndpointUrlPrefix Provide the unique live url prefix from the "API URLs and Response" menu in the Adyen Customer Area
+//
+//
+// creates a new API client based on provided credentials for TEST environment
+//
+//  client := NewClient(&common.Config{
+//      Username:              "username",
+//      Password:              "password",
+//      ApplicationName:       "applicationName",
+//      Environment:           common.TestEnv,
+//  })
+//
+//  Username              Your merchant account Username
+//  Password              Your merchant accont Password
+//  Environment           This defines the payment environment live or test
+//  ApplicationName       Application name to be used in user agent
+//
+// optionally a custom http.Client can be passed via the Config allow for advanced features such as caching.
+func NewClient(cfg *common.Config) *APIClient {
 	if cfg.HTTPClient == nil {
 		cfg.HTTPClient = http.DefaultClient
 	}
@@ -130,58 +187,6 @@ func NewAPIClient(cfg *common.Config) *APIClient {
 	return c
 }
 
-// NewAPIClientWithCredentials creates a new API client based on provided credentials and environment
-/*
- * @param username              Your merchant account Username
- * @param password              Your merchant accont Password
- * @param environment           This defines the payment environment live or test
- * @param applicationName       Application name to be used in user agent
- */
-func NewAPIClientWithCredentials(username string, password string, environment common.Environment, applicationName string) *APIClient {
-	return NewAPIClientWithLiveCredentials(username, password, environment, applicationName, "")
-}
-
-// NewAPIClientWithLiveCredentials creates a new API client based on provided credentials, environment & live environment url
-/*
- * @param username              Your merchant account Username
- * @param password              Your merchant accont Password
- * @param environment           This defines the payment environment live or test
- * @param applicationName       Application name to be used in user agent
- * @param liveEndpointUrlPrefix Provide the unique live url prefix from the "API URLs and Response" menu in the Adyen Customer Area
- */
-func NewAPIClientWithLiveCredentials(username string, password string, environment common.Environment, applicationName string, liveEndpointURLPrefix string) *APIClient {
-	return NewAPIClient(&common.Config{
-		Username:              username,
-		Password:              password,
-		ApplicationName:       applicationName,
-		Environment:           environment,
-		LiveEndpointURLPrefix: liveEndpointURLPrefix,
-	})
-}
-
-// NewAPIClientWithAPIKey creates a new API client based on provided api key and environment
-/*
- * @param apiKey                Defines the api key that can be retrieved by back office
- * @param environment           This defines the payment environment live or test
- */
-func NewAPIClientWithAPIKey(apiKey string, environment common.Environment) *APIClient {
-	return NewAPIClientWithLiveAPIKey(apiKey, environment, "")
-}
-
-// NewAPIClientWithLiveAPIKey creates a new API client based on provided api key, environment & live environment url
-/*
- * @param apiKey                Defines the api key that can be retrieved by back office
- * @param environment           This defines the payment environment live or test
- * @param liveEndpointUrlPrefix Provide the unique live url prefix from the "API URLs and Response" menu in the Adyen Customer Area
- */
-func NewAPIClientWithLiveAPIKey(apiKey string, environment common.Environment, liveEndpointURLPrefix string) *APIClient {
-	return NewAPIClient(&common.Config{
-		ApiKey:                apiKey,
-		Environment:           environment,
-		LiveEndpointURLPrefix: liveEndpointURLPrefix,
-	})
-}
-
 /*
 SetEnvironment This defines the payment environment for live or test
 
@@ -189,7 +194,7 @@ SetEnvironment This defines the payment environment for live or test
  * @param liveEndpointUrlPrefix Provide the unique live url prefix from the "API URLs and Response" menu in the Adyen Customer Area
 */
 func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix string) {
-	if env == common.Live {
+	if env == common.LiveEnv {
 		c.client.Cfg.Environment = env
 		c.client.Cfg.MarketPayEndpoint = MarketpayEndpointLive
 		c.client.Cfg.HppEndpoint = HppLive
@@ -215,25 +220,4 @@ func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix
 // Caution: modifying the configuration while live can cause data races and potentially unwanted behavior
 func (c *APIClient) GetConfig() *common.Config {
 	return c.client.Cfg
-}
-
-func (c *APIClient) getHTTPClient() *http.Client {
-	if c.client.Cfg.HTTPClient == nil {
-		c.client.Cfg.HTTPClient = http.DefaultClient
-	}
-
-	return c.client.Cfg.HTTPClient
-}
-
-func (c *APIClient) setHTTPClient(httpClient *http.Client) {
-	c.client.Cfg.HTTPClient = httpClient
-}
-
-func (c *APIClient) setApplicationName(applicationName string) {
-	c.client.Cfg.ApplicationName = applicationName
-}
-
-func (c *APIClient) setTimeouts(connectionTimeoutMillis, readTimeoutMillis time.Duration) {
-	c.client.Cfg.ConnectionTimeoutMillis = connectionTimeoutMillis
-	c.client.Cfg.ReadTimeoutMillis = readTimeoutMillis
 }

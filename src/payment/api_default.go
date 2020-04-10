@@ -23,14 +23,14 @@ import (
 type Payment common.Service
 
 /*
-AdjustAuthorisationPost Increases or decreases the authorised amount.
+AdjustAuthorisation Increases or decreases the authorised amount.
 Allows you to increase or decrease the authorised amount after the initial authorisation has taken place. This functionality enables tipping, improving the chances your authorisation will be valid, charging the shopper when they have already left the merchant premises, etc.  For more information, refer to [Adjust Authorisation](https://docs.adyen.com/checkout/adjust-authorisation).
  * @param request ModificationRequest - reference of ModificationRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ModificationResult
 */
 
-func (a *Payment) AdjustAuthorisationPost(request *ModificationRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
+func (a *Payment) AdjustAuthorisation(request *ModificationRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod  = _nethttp.MethodPost
 		localVarPostBody    interface{}
@@ -100,14 +100,14 @@ func (a *Payment) AdjustAuthorisationPost(request *ModificationRequest, ctxs ...
 }
 
 /*
-Authorise3dPost Completes a 3D Secure payment authorisation.
+Authorise3d Completes a 3D Secure payment authorisation.
 For an authenticated 3D Secure session, completes the payment authorisation. This endpoint must receive the &#x60;md&#x60; and &#x60;paResponse&#x60; parameters that you get from the card issuer after a shopper pays via 3D Secure.  For more information, refer to [3D Secure](https://docs.adyen.com/classic-integration/3d-secure).
  * @param request PaymentRequest3d - reference of PaymentRequest3d).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return PaymentResult
 */
 
-func (a *Payment) Authorise3dPost(request *PaymentRequest3d, ctxs ..._context.Context) (PaymentResult, *_nethttp.Response, error) {
+func (a *Payment) Authorise3d(request *PaymentRequest3d, ctxs ..._context.Context) (PaymentResult, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod  = _nethttp.MethodPost
 		localVarPostBody    interface{}
@@ -177,14 +177,14 @@ func (a *Payment) Authorise3dPost(request *PaymentRequest3d, ctxs ..._context.Co
 }
 
 /*
-Authorise3ds2Post Completes a 3D Secure 2 payment authorisation.
+Authorise3ds2 Completes a 3D Secure 2 payment authorisation.
 For an authenticated 3D Secure 2 session, completes the payment authorisation. This endpoint must receive the &#x60;threeDS2Token&#x60; and &#x60;threeDS2Result&#x60; parameters.  For more information, refer to [3D Secure 2](https://docs.adyen.com/checkout/3d-secure/native-3ds2).
  * @param request PaymentRequest3ds2 - reference of PaymentRequest3ds2).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return PaymentResult
 */
 
-func (a *Payment) Authorise3ds2Post(request *PaymentRequest3ds2, ctxs ..._context.Context) (PaymentResult, *_nethttp.Response, error) {
+func (a *Payment) Authorise3ds2(request *PaymentRequest3ds2, ctxs ..._context.Context) (PaymentResult, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod  = _nethttp.MethodPost
 		localVarPostBody    interface{}
@@ -254,14 +254,14 @@ func (a *Payment) Authorise3ds2Post(request *PaymentRequest3ds2, ctxs ..._contex
 }
 
 /*
-AuthorisePost Creates a payment authorisation.
+Authorise Creates a payment authorisation.
 Creates a payment with a unique reference (&#x60;pspReference&#x60;) and attempts to obtain an authorisation hold. For cards, this amount can be captured or cancelled later. Non-card payment methods typically don&#39;t support this and will automatically capture as part of the authorisation.  For more information, refer to [Classic integration](https://docs.adyen.com/classic-integration).
  * @param request PaymentRequest - reference of PaymentRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return PaymentResult
 */
 
-func (a *Payment) AuthorisePost(request *PaymentRequest, ctxs ..._context.Context) (PaymentResult, *_nethttp.Response, error) {
+func (a *Payment) Authorise(request *PaymentRequest, ctxs ..._context.Context) (PaymentResult, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod  = _nethttp.MethodPost
 		localVarPostBody    interface{}
@@ -331,14 +331,14 @@ func (a *Payment) AuthorisePost(request *PaymentRequest, ctxs ..._context.Contex
 }
 
 /*
-CancelOrRefundPost Cancels or refunds a payment.
+CancelOrRefund Cancels or refunds a payment.
 Cancels a payment if it has not been captured yet, or refunds it if it has already been captured. This is useful when it is not certain if the payment has been captured or not (for example, when using auto-capture).  &gt; Do not use this request for payments that involve (multiple) partial captures.  For more information, refer to [Cancel or refund](https://docs.adyen.com/checkout/cancel-or-refund).
  * @param request ModificationRequest - reference of ModificationRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ModificationResult
 */
 
-func (a *Payment) CancelOrRefundPost(request *ModificationRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
+func (a *Payment) CancelOrRefund(request *ModificationRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod  = _nethttp.MethodPost
 		localVarPostBody    interface{}
@@ -408,14 +408,14 @@ func (a *Payment) CancelOrRefundPost(request *ModificationRequest, ctxs ..._cont
 }
 
 /*
-CancelPost Cancels an authorised payment.
+Cancel Cancels an authorised payment.
 Cancels the authorisation hold on a payment, returning a unique reference for this request. You can cancel payments after authorisation only for payment methods that support distinct authorisations and captures.  For more information, refer to [Cancel](https://docs.adyen.com/checkout/cancel).
  * @param request ModificationRequest - reference of ModificationRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ModificationResult
 */
 
-func (a *Payment) CancelPost(request *ModificationRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
+func (a *Payment) Cancel(request *ModificationRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod  = _nethttp.MethodPost
 		localVarPostBody    interface{}
@@ -485,14 +485,14 @@ func (a *Payment) CancelPost(request *ModificationRequest, ctxs ..._context.Cont
 }
 
 /*
-CapturePost Captures an authorised payment.
+Capture Captures an authorised payment.
 Captures the authorisation hold on a payment, returning a unique reference for this request. Usually the full authorisation amount is captured, however it&#39;s also possible to capture a smaller amount, which results in cancelling the remaining authorisation balance.  Payment methods, which automatically capture as part of authorisation, don&#39;t need to be captured, but submitting a capture request on these transactions will not result in double charges. If immediate or delayed auto-capture is enabled, calling the capture method is not neccessary.  For more information, refer to [Capture](https://docs.adyen.com/checkout/capture).
  * @param request ModificationRequest - reference of ModificationRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ModificationResult
 */
 
-func (a *Payment) CapturePost(request *ModificationRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
+func (a *Payment) Capture(request *ModificationRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod  = _nethttp.MethodPost
 		localVarPostBody    interface{}
@@ -562,14 +562,14 @@ func (a *Payment) CapturePost(request *ModificationRequest, ctxs ..._context.Con
 }
 
 /*
-GetAuthenticationResultPost Return the authentication result after doing a 3D Secure authentication only.
+GetAuthenticationResult Return the authentication result after doing a 3D Secure authentication only.
 Return the authentication result after doing a 3D Secure authentication only.
  * @param request AuthenticationResultRequest - reference of AuthenticationResultRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return AuthenticationResultResponse
 */
 
-func (a *Payment) GetAuthenticationResultPost(request *AuthenticationResultRequest, ctxs ..._context.Context) (AuthenticationResultResponse, *_nethttp.Response, error) {
+func (a *Payment) GetAuthenticationResult(request *AuthenticationResultRequest, ctxs ..._context.Context) (AuthenticationResultResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod  = _nethttp.MethodPost
 		localVarPostBody    interface{}
@@ -639,14 +639,14 @@ func (a *Payment) GetAuthenticationResultPost(request *AuthenticationResultReque
 }
 
 /*
-RefundPost Refunds a captured payment.
+Refund Refunds a captured payment.
 Refunds a payment that has previously been captured, returning a unique reference for this request. Refunding can be done on the full captured amount or a partial amount. Multiple (partial) refunds will be accepted as long as their sum doesn&#39;t exceed the captured amount. Payments which have been authorised, but not captured, cannot be refunded, use the /cancel method instead.  &gt; Some payment methods/gateways do not support partial/multiple refunds. &gt; A margin above the captured limit can be configured to cover shipping/handling costs.  For more information, refer to [Refund](https://docs.adyen.com/checkout/refund).
  * @param request ModificationRequest - reference of ModificationRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ModificationResult
 */
 
-func (a *Payment) RefundPost(request *ModificationRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
+func (a *Payment) Refund(request *ModificationRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod  = _nethttp.MethodPost
 		localVarPostBody    interface{}
@@ -716,14 +716,14 @@ func (a *Payment) RefundPost(request *ModificationRequest, ctxs ..._context.Cont
 }
 
 /*
-Retrieve3ds2ResultPost Retrieves the `threeDS2Result` after doing a 3D Secure 2 authentication only.
+Retrieve3ds2Result Retrieves the `threeDS2Result` after doing a 3D Secure 2 authentication only.
 Retrieves the &#x60;threeDS2Result&#x60; after doing a 3D Secure 2 authentication only.
  * @param request ThreeDS2ResultRequest - reference of ThreeDS2ResultRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ThreeDS2ResultResponse
 */
 
-func (a *Payment) Retrieve3ds2ResultPost(request *ThreeDS2ResultRequest, ctxs ..._context.Context) (ThreeDS2ResultResponse, *_nethttp.Response, error) {
+func (a *Payment) Retrieve3ds2Result(request *ThreeDS2ResultRequest, ctxs ..._context.Context) (ThreeDS2ResultResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod  = _nethttp.MethodPost
 		localVarPostBody    interface{}
@@ -793,14 +793,14 @@ func (a *Payment) Retrieve3ds2ResultPost(request *ThreeDS2ResultRequest, ctxs ..
 }
 
 /*
-TechnicalCancelPost Cancels a payment using your custom reference.
+TechnicalCancel Cancels a payment using your custom reference.
 This endpoint allows you to cancel a payment if you do not have the PSP reference of the original payment request available.  In your call, refer to the original payment by using the &#x60;reference&#x60; that you specified in your payment request.  For more information, see [Technical cancel](https://docs.adyen.com/checkout/cancel#technical-cancel).
  * @param request ModificationRequest - reference of ModificationRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ModificationResult
 */
 
-func (a *Payment) TechnicalCancelPost(request *ModificationRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
+func (a *Payment) TechnicalCancel(request *ModificationRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod  = _nethttp.MethodPost
 		localVarPostBody    interface{}
@@ -870,14 +870,14 @@ func (a *Payment) TechnicalCancelPost(request *ModificationRequest, ctxs ..._con
 }
 
 /*
-VoidPendingRefundPost Cancels a POS refund request before it has been completed.
+VoidPendingRefund Cancels a POS refund request before it has been completed.
 This endpoint allows you to cancel the refund request before it has been completed.  In your call, you can refer to the original refund request either by using the &#x60;tenderReference&#x60;, or the &#x60;pspReference&#x60;. We recommend implementing based on the &#x60;tenderReference&#x60;, as this is generated for both offline and online transactions.  For more information, refer to [Cancel a refund](https://docs.adyen.com/point-of-sale/refund-payment/cancel-a-pos-refund-request).
  * @param request ModificationRequest - reference of ModificationRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ModificationResult
 */
 
-func (a *Payment) VoidPendingRefundPost(request *ModificationRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
+func (a *Payment) VoidPendingRefund(request *ModificationRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod  = _nethttp.MethodPost
 		localVarPostBody    interface{}

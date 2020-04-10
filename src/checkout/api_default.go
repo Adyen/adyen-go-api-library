@@ -23,14 +23,14 @@ import (
 type Checkout common.Service
 
 /*
-PaymentLinksPost Creates a payment link.
+PaymentLinks Creates a payment link.
 Creates a payment link to our hosted payment form where shoppers can pay. The list of payment methods presented to the shopper depends on the &#x60;currency&#x60; and &#x60;country&#x60; parameters sent in the request.  For more information, refer to [Pay by Link documentation](https://docs.adyen.com/checkout/pay-by-link#create-payment-links-through-api).
  * @param request CreatePaymentLinkRequest - reference of CreatePaymentLinkRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return CreatePaymentLinkResponse
 */
 
-func (a *Checkout) PaymentLinksPost(request *CreatePaymentLinkRequest, ctxs ..._context.Context) (CreatePaymentLinkResponse, *_nethttp.Response, error) {
+func (a *Checkout) PaymentLinks(request *CreatePaymentLinkRequest, ctxs ..._context.Context) (CreatePaymentLinkResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod  = _nethttp.MethodPost
 		localVarPostBody    interface{}
@@ -100,14 +100,14 @@ func (a *Checkout) PaymentLinksPost(request *CreatePaymentLinkRequest, ctxs ..._
 }
 
 /*
-PaymentMethodsPost Returns available payment methods.
+PaymentMethods Returns available payment methods.
 Queries the available payment methods for a transaction based on the transaction context (like amount, country, and currency). Besides giving back a list of the available payment methods, the response also returns which input details you need to collect from the shopper (to be submitted to &#x60;/payments&#x60;).  Although we highly recommend using this endpoint to ensure you are always offering the most up-to-date list of payment methods, its usage is optional. You can, for example, also cache the &#x60;/paymentMethods&#x60; response and update it once a week.
  * @param request PaymentMethodsRequest - reference of PaymentMethodsRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return PaymentMethodsResponse
 */
 
-func (a *Checkout) PaymentMethodsPost(request *PaymentMethodsRequest, ctxs ..._context.Context) (PaymentMethodsResponse, *_nethttp.Response, error) {
+func (a *Checkout) PaymentMethods(request *PaymentMethodsRequest, ctxs ..._context.Context) (PaymentMethodsResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod  = _nethttp.MethodPost
 		localVarPostBody    interface{}
@@ -177,14 +177,14 @@ func (a *Checkout) PaymentMethodsPost(request *PaymentMethodsRequest, ctxs ..._c
 }
 
 /*
-PaymentSessionPost Creates a payment session.
+PaymentSession Creates a payment session.
 Provides the data object that can be used to start the Checkout SDK. To set up the payment, pass its amount, currency, and other required parameters. We use this to optimise the payment flow and perform better risk assessment of the transaction.  For more information, refer to [How it works](https://docs.adyen.com/checkout#howitworks).
  * @param request PaymentSetupRequest - reference of PaymentSetupRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return PaymentSetupResponse
 */
 
-func (a *Checkout) PaymentSessionPost(request *PaymentSetupRequest, ctxs ..._context.Context) (PaymentSetupResponse, *_nethttp.Response, error) {
+func (a *Checkout) PaymentSession(request *PaymentSetupRequest, ctxs ..._context.Context) (PaymentSetupResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod  = _nethttp.MethodPost
 		localVarPostBody    interface{}
@@ -254,14 +254,14 @@ func (a *Checkout) PaymentSessionPost(request *PaymentSetupRequest, ctxs ..._con
 }
 
 /*
-PaymentsDetailsPost Submits details for a payment.
+PaymentsDetails Submits details for a payment.
 Submits details for a payment created using &#x60;/payments&#x60;. This step is only needed when no final state has been reached on the &#x60;/payments&#x60; request (for example for 3D Secure, or when getting redirected back directly from a payment method using an app switch).  The exact details, which need to be sent to this endpoint, are always specified in the response of the associated &#x60;/payments&#x60; request.  In addition, the endpoint can be used to verify a &#x60;payload&#x60;, which is returned after coming back from the Checkout SDK or any of the redirect based methods on the Checkout API.
  * @param request DetailsRequest - reference of DetailsRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return PaymentResponse
 */
 
-func (a *Checkout) PaymentsDetailsPost(request *DetailsRequest, ctxs ..._context.Context) (PaymentResponse, *_nethttp.Response, error) {
+func (a *Checkout) PaymentsDetails(request *DetailsRequest, ctxs ..._context.Context) (PaymentResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod  = _nethttp.MethodPost
 		localVarPostBody    interface{}
@@ -331,14 +331,14 @@ func (a *Checkout) PaymentsDetailsPost(request *DetailsRequest, ctxs ..._context
 }
 
 /*
-PaymentsPost Starts a transaction.
+Payments Starts a transaction.
 Sends payment parameters (like amount, country, and currency) together with the input details collected from the shopper. The response returns the result of the payment request: * For some payment methods (e.g. Visa, Mastercard, and SEPA Direct Debits) you&#39;ll get a final state in the &#x60;resultCode&#x60; (e.g. &#x60;Authorised&#x60; or &#x60;Refused&#x60;). * For other payment methods, you&#39;ll receive &#x60;redirectShopper&#x60; as &#x60;resultCode&#x60; together with a &#x60;redirectUrl&#x60;. In this case, the shopper must finalize the payment on the page behind the &#x60;redirectUrl&#x60;.
  * @param request PaymentRequest - reference of PaymentRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return PaymentResponse
 */
 
-func (a *Checkout) PaymentsPost(request *PaymentRequest, ctxs ..._context.Context) (PaymentResponse, *_nethttp.Response, error) {
+func (a *Checkout) Payments(request *PaymentRequest, ctxs ..._context.Context) (PaymentResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod  = _nethttp.MethodPost
 		localVarPostBody    interface{}
@@ -408,14 +408,14 @@ func (a *Checkout) PaymentsPost(request *PaymentRequest, ctxs ..._context.Contex
 }
 
 /*
-PaymentsResultPost Verifies payment result.
+PaymentsResult Verifies payment result.
 Verifies the payment result using the payload returned from the Checkout SDK.  For more information, refer to [How it works](https://docs.adyen.com/checkout#howitworks).
  * @param request PaymentVerificationRequest - reference of PaymentVerificationRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return PaymentVerificationResponse
 */
 
-func (a *Checkout) PaymentsResultPost(request *PaymentVerificationRequest, ctxs ..._context.Context) (PaymentVerificationResponse, *_nethttp.Response, error) {
+func (a *Checkout) PaymentsResult(request *PaymentVerificationRequest, ctxs ..._context.Context) (PaymentVerificationResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod  = _nethttp.MethodPost
 		localVarPostBody    interface{}

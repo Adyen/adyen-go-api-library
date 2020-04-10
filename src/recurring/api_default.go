@@ -23,14 +23,14 @@ import (
 type Recurring common.Service
 
 /*
-DisablePost Disables stored payment details.
+Disable Disables stored payment details.
 Disables stored payment details to stop charging a shopper with this particular recurring detail ID.  For more information, refer to [Disable stored details](https://docs.adyen.com/classic-integration/recurring-payments/disable-stored-details/).
  * @param request DisableRequest - reference of DisableRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return DisableResult
 */
 
-func (a *Recurring) DisablePost(request *DisableRequest, ctxs ..._context.Context) (DisableResult, *_nethttp.Response, error) {
+func (a *Recurring) Disable(request *DisableRequest, ctxs ..._context.Context) (DisableResult, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod  = _nethttp.MethodPost
 		localVarPostBody    interface{}
@@ -100,14 +100,14 @@ func (a *Recurring) DisablePost(request *DisableRequest, ctxs ..._context.Contex
 }
 
 /*
-ListRecurringDetailsPost Retrieves stored payment details for a shopper.
+ListRecurringDetails Retrieves stored payment details for a shopper.
 Lists the stored payment details for a shopper, if there are any available. The recurring detail ID can be used with a regular authorisation request to charge the shopper. A summary of the payment detail is returned for presentation to the shopper.  For more information, refer to [Retrieve stored details](https://docs.adyen.com/classic-integration/recurring-payments/retrieve-stored-details/).
  * @param request RecurringDetailsRequest - reference of RecurringDetailsRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return RecurringDetailsResult
 */
 
-func (a *Recurring) ListRecurringDetailsPost(request *RecurringDetailsRequest, ctxs ..._context.Context) (RecurringDetailsResult, *_nethttp.Response, error) {
+func (a *Recurring) ListRecurringDetails(request *RecurringDetailsRequest, ctxs ..._context.Context) (RecurringDetailsResult, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod  = _nethttp.MethodPost
 		localVarPostBody    interface{}
@@ -177,14 +177,14 @@ func (a *Recurring) ListRecurringDetailsPost(request *RecurringDetailsRequest, c
 }
 
 /*
-ScheduleAccountUpdaterPost Schedules running of the Account Updater.
+ScheduleAccountUpdater Schedules running of the Account Updater.
 When making the API call, you can submit either the credit card information, or the recurring detail reference and the shopper reference: * If the card information is provided, all the sub-fields for &#x60;card&#x60; are mandatory. * If the recurring detail reference is provided, the fields for &#x60;shopperReference&#x60; and &#x60;selectedRecurringDetailReference&#x60; are mandatory.
  * @param request ScheduleAccountUpdaterRequest - reference of ScheduleAccountUpdaterRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ScheduleAccountUpdaterResult
 */
 
-func (a *Recurring) ScheduleAccountUpdaterPost(request *ScheduleAccountUpdaterRequest, ctxs ..._context.Context) (ScheduleAccountUpdaterResult, *_nethttp.Response, error) {
+func (a *Recurring) ScheduleAccountUpdater(request *ScheduleAccountUpdaterRequest, ctxs ..._context.Context) (ScheduleAccountUpdaterResult, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod  = _nethttp.MethodPost
 		localVarPostBody    interface{}
