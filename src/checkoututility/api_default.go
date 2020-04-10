@@ -25,16 +25,16 @@ type CheckoutUtility common.Service
 /*
 OriginKeysPost Create originKey values for one or more merchant domains.
 This operation takes the origin domains and returns a JSON object containing the corresponding origin keys for the domains.
- * @param request CheckoutUtilityRequest - reference of CheckoutUtilityRequest). 
+ * @param request CheckoutUtilityRequest - reference of CheckoutUtilityRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return CheckoutUtilityResponse
 */
 
 func (a *CheckoutUtility) OriginKeysPost(request *CheckoutUtilityRequest, ctxs ..._context.Context) (CheckoutUtilityResponse, *_nethttp.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarReturnValue  CheckoutUtilityResponse
+		localVarHTTPMethod  = _nethttp.MethodPost
+		localVarPostBody    interface{}
+		localVarReturnValue CheckoutUtilityResponse
 	)
 
 	// create path and map variables
@@ -86,29 +86,13 @@ func (a *CheckoutUtility) OriginKeysPost(request *CheckoutUtilityRequest, ctxs .
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := common.GenericOpenAPIError{
-			BodyBytes: localVarBody,
-			Err:       localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 200 {
-			var v CheckoutUtilityResponse
-			err = a.Client.Decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.Err = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.ModelI = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
+		newErr := common.NewAPIError(localVarBody, localVarHTTPResponse.Status)
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.Client.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := common.GenericOpenAPIError{
-			BodyBytes: localVarBody,
-			Err:       err.Error(),
-		}
+		newErr := common.NewAPIError(localVarBody, err.Error())
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 

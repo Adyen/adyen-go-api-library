@@ -7,7 +7,6 @@
 package tests
 
 import (
-	"encoding/json"
 	"os"
 	"testing"
 
@@ -44,7 +43,7 @@ func Test_Checkout(t *testing.T) {
 			})
 
 			require.NotNil(t, err)
-			assert.Equal(t, "422 Unprocessable Entity", err.Error())
+			assert.Equal(t, "422 Unprocessable Entity: Required field countryCode not specified (validation: 158)", err.Error())
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 422, httpRes.StatusCode)
 			assert.Equal(t, "422 Unprocessable Entity", httpRes.Status)
@@ -89,7 +88,7 @@ func Test_Checkout(t *testing.T) {
 			res, httpRes, err := client.Checkout.PaymentMethodsPost(&checkout.PaymentMethodsRequest{})
 
 			require.NotNil(t, err)
-			assert.Equal(t, "403 Forbidden", err.Error())
+			assert.Equal(t, "403 Forbidden: Invalid Merchant Account (security: 901)", err.Error())
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 403, httpRes.StatusCode)
 			assert.Equal(t, "403 Forbidden", httpRes.Status)
@@ -119,7 +118,7 @@ func Test_Checkout(t *testing.T) {
 			})
 
 			require.NotNil(t, err)
-			assert.Equal(t, "422 Unprocessable Entity", err.Error())
+			assert.Equal(t, "422 Unprocessable Entity: Unsupported currency specified (validation: 138)", err.Error())
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 422, httpRes.StatusCode)
 			assert.Equal(t, "422 Unprocessable Entity", httpRes.Status)
@@ -166,7 +165,7 @@ func Test_Checkout(t *testing.T) {
 			})
 
 			require.NotNil(t, err)
-			assert.Equal(t, "422 Unprocessable Entity", httpRes.Status)
+			assert.Equal(t, "422 Unprocessable Entity: Invalid paymentData (validation: 14_003)", err.Error())
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 422, httpRes.StatusCode)
 			assert.Equal(t, "422 Unprocessable Entity", httpRes.Status)
@@ -189,7 +188,7 @@ func Test_Checkout(t *testing.T) {
 			})
 
 			require.NotNil(t, err)
-			assert.Equal(t, "422 Unprocessable Entity", httpRes.Status)
+			assert.Equal(t, "422 Unprocessable Entity: Token is missing. (validation: 14_015)", err.Error())
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 422, httpRes.StatusCode)
 			assert.Equal(t, "422 Unprocessable Entity", httpRes.Status)
@@ -224,13 +223,11 @@ func Test_Checkout(t *testing.T) {
 			res, httpRes, err := client.Checkout.PaymentsResultPost(&checkout.PaymentVerificationRequest{Payload: "dummyPayload"})
 
 			require.NotNil(t, err)
-			assert.Equal(t, "422 Unprocessable Entity", httpRes.Status)
+			assert.Equal(t, "422 Unprocessable Entity: Invalid payload provided (validation: 14_018)", err.Error())
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 422, httpRes.StatusCode)
 			assert.Equal(t, "422 Unprocessable Entity", httpRes.Status)
-			errBody := map[string]string{}
-			json.Unmarshal(err.(common.GenericOpenAPIError).Body(), &errBody)
-			assert.Equal(t, "Invalid payload provided", errBody["message"])
+			assert.Equal(t, "Invalid payload provided", err.(common.APIError).Message)
 			require.NotNil(t, res)
 		})
 	})

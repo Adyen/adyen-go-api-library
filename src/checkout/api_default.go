@@ -25,16 +25,16 @@ type Checkout common.Service
 /*
 PaymentLinksPost Creates a payment link.
 Creates a payment link to our hosted payment form where shoppers can pay. The list of payment methods presented to the shopper depends on the &#x60;currency&#x60; and &#x60;country&#x60; parameters sent in the request.  For more information, refer to [Pay by Link documentation](https://docs.adyen.com/checkout/pay-by-link#create-payment-links-through-api).
- * @param request CreatePaymentLinkRequest - reference of CreatePaymentLinkRequest). 
+ * @param request CreatePaymentLinkRequest - reference of CreatePaymentLinkRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return CreatePaymentLinkResponse
 */
 
 func (a *Checkout) PaymentLinksPost(request *CreatePaymentLinkRequest, ctxs ..._context.Context) (CreatePaymentLinkResponse, *_nethttp.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarReturnValue  CreatePaymentLinkResponse
+		localVarHTTPMethod  = _nethttp.MethodPost
+		localVarPostBody    interface{}
+		localVarReturnValue CreatePaymentLinkResponse
 	)
 
 	// create path and map variables
@@ -86,29 +86,13 @@ func (a *Checkout) PaymentLinksPost(request *CreatePaymentLinkRequest, ctxs ..._
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := common.GenericOpenAPIError{
-			BodyBytes: localVarBody,
-			Err:       localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 200 {
-			var v CreatePaymentLinkResponse
-			err = a.Client.Decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.Err = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.ModelI = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
+		newErr := common.NewAPIError(localVarBody, localVarHTTPResponse.Status)
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.Client.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := common.GenericOpenAPIError{
-			BodyBytes: localVarBody,
-			Err:       err.Error(),
-		}
+		newErr := common.NewAPIError(localVarBody, err.Error())
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -118,16 +102,16 @@ func (a *Checkout) PaymentLinksPost(request *CreatePaymentLinkRequest, ctxs ..._
 /*
 PaymentMethodsPost Returns available payment methods.
 Queries the available payment methods for a transaction based on the transaction context (like amount, country, and currency). Besides giving back a list of the available payment methods, the response also returns which input details you need to collect from the shopper (to be submitted to &#x60;/payments&#x60;).  Although we highly recommend using this endpoint to ensure you are always offering the most up-to-date list of payment methods, its usage is optional. You can, for example, also cache the &#x60;/paymentMethods&#x60; response and update it once a week.
- * @param request PaymentMethodsRequest - reference of PaymentMethodsRequest). 
+ * @param request PaymentMethodsRequest - reference of PaymentMethodsRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return PaymentMethodsResponse
 */
 
 func (a *Checkout) PaymentMethodsPost(request *PaymentMethodsRequest, ctxs ..._context.Context) (PaymentMethodsResponse, *_nethttp.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarReturnValue  PaymentMethodsResponse
+		localVarHTTPMethod  = _nethttp.MethodPost
+		localVarPostBody    interface{}
+		localVarReturnValue PaymentMethodsResponse
 	)
 
 	// create path and map variables
@@ -179,29 +163,13 @@ func (a *Checkout) PaymentMethodsPost(request *PaymentMethodsRequest, ctxs ..._c
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := common.GenericOpenAPIError{
-			BodyBytes: localVarBody,
-			Err:       localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 200 {
-			var v PaymentMethodsResponse
-			err = a.Client.Decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.Err = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.ModelI = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
+		newErr := common.NewAPIError(localVarBody, localVarHTTPResponse.Status)
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.Client.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := common.GenericOpenAPIError{
-			BodyBytes: localVarBody,
-			Err:       err.Error(),
-		}
+		newErr := common.NewAPIError(localVarBody, err.Error())
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -211,16 +179,16 @@ func (a *Checkout) PaymentMethodsPost(request *PaymentMethodsRequest, ctxs ..._c
 /*
 PaymentSessionPost Creates a payment session.
 Provides the data object that can be used to start the Checkout SDK. To set up the payment, pass its amount, currency, and other required parameters. We use this to optimise the payment flow and perform better risk assessment of the transaction.  For more information, refer to [How it works](https://docs.adyen.com/checkout#howitworks).
- * @param request PaymentSetupRequest - reference of PaymentSetupRequest). 
+ * @param request PaymentSetupRequest - reference of PaymentSetupRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return PaymentSetupResponse
 */
 
 func (a *Checkout) PaymentSessionPost(request *PaymentSetupRequest, ctxs ..._context.Context) (PaymentSetupResponse, *_nethttp.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarReturnValue  PaymentSetupResponse
+		localVarHTTPMethod  = _nethttp.MethodPost
+		localVarPostBody    interface{}
+		localVarReturnValue PaymentSetupResponse
 	)
 
 	// create path and map variables
@@ -272,29 +240,13 @@ func (a *Checkout) PaymentSessionPost(request *PaymentSetupRequest, ctxs ..._con
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := common.GenericOpenAPIError{
-			BodyBytes: localVarBody,
-			Err:       localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 200 {
-			var v PaymentSetupResponse
-			err = a.Client.Decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.Err = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.ModelI = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
+		newErr := common.NewAPIError(localVarBody, localVarHTTPResponse.Status)
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.Client.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := common.GenericOpenAPIError{
-			BodyBytes: localVarBody,
-			Err:       err.Error(),
-		}
+		newErr := common.NewAPIError(localVarBody, err.Error())
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -304,16 +256,16 @@ func (a *Checkout) PaymentSessionPost(request *PaymentSetupRequest, ctxs ..._con
 /*
 PaymentsDetailsPost Submits details for a payment.
 Submits details for a payment created using &#x60;/payments&#x60;. This step is only needed when no final state has been reached on the &#x60;/payments&#x60; request (for example for 3D Secure, or when getting redirected back directly from a payment method using an app switch).  The exact details, which need to be sent to this endpoint, are always specified in the response of the associated &#x60;/payments&#x60; request.  In addition, the endpoint can be used to verify a &#x60;payload&#x60;, which is returned after coming back from the Checkout SDK or any of the redirect based methods on the Checkout API.
- * @param request DetailsRequest - reference of DetailsRequest). 
+ * @param request DetailsRequest - reference of DetailsRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return PaymentResponse
 */
 
 func (a *Checkout) PaymentsDetailsPost(request *DetailsRequest, ctxs ..._context.Context) (PaymentResponse, *_nethttp.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarReturnValue  PaymentResponse
+		localVarHTTPMethod  = _nethttp.MethodPost
+		localVarPostBody    interface{}
+		localVarReturnValue PaymentResponse
 	)
 
 	// create path and map variables
@@ -365,29 +317,13 @@ func (a *Checkout) PaymentsDetailsPost(request *DetailsRequest, ctxs ..._context
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := common.GenericOpenAPIError{
-			BodyBytes: localVarBody,
-			Err:       localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 200 {
-			var v PaymentResponse
-			err = a.Client.Decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.Err = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.ModelI = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
+		newErr := common.NewAPIError(localVarBody, localVarHTTPResponse.Status)
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.Client.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := common.GenericOpenAPIError{
-			BodyBytes: localVarBody,
-			Err:       err.Error(),
-		}
+		newErr := common.NewAPIError(localVarBody, err.Error())
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -397,16 +333,16 @@ func (a *Checkout) PaymentsDetailsPost(request *DetailsRequest, ctxs ..._context
 /*
 PaymentsPost Starts a transaction.
 Sends payment parameters (like amount, country, and currency) together with the input details collected from the shopper. The response returns the result of the payment request: * For some payment methods (e.g. Visa, Mastercard, and SEPA Direct Debits) you&#39;ll get a final state in the &#x60;resultCode&#x60; (e.g. &#x60;Authorised&#x60; or &#x60;Refused&#x60;). * For other payment methods, you&#39;ll receive &#x60;redirectShopper&#x60; as &#x60;resultCode&#x60; together with a &#x60;redirectUrl&#x60;. In this case, the shopper must finalize the payment on the page behind the &#x60;redirectUrl&#x60;.
- * @param request PaymentRequest - reference of PaymentRequest). 
+ * @param request PaymentRequest - reference of PaymentRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return PaymentResponse
 */
 
 func (a *Checkout) PaymentsPost(request *PaymentRequest, ctxs ..._context.Context) (PaymentResponse, *_nethttp.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarReturnValue  PaymentResponse
+		localVarHTTPMethod  = _nethttp.MethodPost
+		localVarPostBody    interface{}
+		localVarReturnValue PaymentResponse
 	)
 
 	// create path and map variables
@@ -458,29 +394,13 @@ func (a *Checkout) PaymentsPost(request *PaymentRequest, ctxs ..._context.Contex
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := common.GenericOpenAPIError{
-			BodyBytes: localVarBody,
-			Err:       localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 200 {
-			var v PaymentResponse
-			err = a.Client.Decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.Err = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.ModelI = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
+		newErr := common.NewAPIError(localVarBody, localVarHTTPResponse.Status)
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.Client.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := common.GenericOpenAPIError{
-			BodyBytes: localVarBody,
-			Err:       err.Error(),
-		}
+		newErr := common.NewAPIError(localVarBody, err.Error())
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -490,16 +410,16 @@ func (a *Checkout) PaymentsPost(request *PaymentRequest, ctxs ..._context.Contex
 /*
 PaymentsResultPost Verifies payment result.
 Verifies the payment result using the payload returned from the Checkout SDK.  For more information, refer to [How it works](https://docs.adyen.com/checkout#howitworks).
- * @param request PaymentVerificationRequest - reference of PaymentVerificationRequest). 
+ * @param request PaymentVerificationRequest - reference of PaymentVerificationRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return PaymentVerificationResponse
 */
 
 func (a *Checkout) PaymentsResultPost(request *PaymentVerificationRequest, ctxs ..._context.Context) (PaymentVerificationResponse, *_nethttp.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarReturnValue  PaymentVerificationResponse
+		localVarHTTPMethod  = _nethttp.MethodPost
+		localVarPostBody    interface{}
+		localVarReturnValue PaymentVerificationResponse
 	)
 
 	// create path and map variables
@@ -551,29 +471,13 @@ func (a *Checkout) PaymentsResultPost(request *PaymentVerificationRequest, ctxs 
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := common.GenericOpenAPIError{
-			BodyBytes: localVarBody,
-			Err:       localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 200 {
-			var v PaymentVerificationResponse
-			err = a.Client.Decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.Err = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.ModelI = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
+		newErr := common.NewAPIError(localVarBody, localVarHTTPResponse.Status)
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.Client.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := common.GenericOpenAPIError{
-			BodyBytes: localVarBody,
-			Err:       err.Error(),
-		}
+		newErr := common.NewAPIError(localVarBody, err.Error())
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 

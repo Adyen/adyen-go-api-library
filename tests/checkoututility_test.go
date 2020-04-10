@@ -33,7 +33,7 @@ func Test_CheckoutUtility(t *testing.T) {
 			res, httpRes, err := client.CheckoutUtility.OriginKeysPost(&checkoututility.CheckoutUtilityRequest{})
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
-			assert.Equal(t, "500 Internal Server Error", err.Error())
+			assert.Equal(t, "500 Internal Server Error: Required field 'originDomains' is null (validation: 702)", err.Error())
 			assert.Equal(t, 500, httpRes.StatusCode)
 			assert.Equal(t, "500 Internal Server Error", httpRes.Status)
 			require.NotNil(t, res)

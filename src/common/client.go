@@ -418,24 +418,48 @@ func strlen(s string) int {
 	return utf8.RuneCountInString(s)
 }
 
-// GenericOpenAPIError Provides access to the body, error and model on returned errors.
-type GenericOpenAPIError struct {
-	BodyBytes []byte
-	Err       string
-	ModelI    interface{}
+// APIError Provides access to the body, error and model on returned errors.
+type APIError struct {
+	RawBody []byte
+	Err     string
+	Status  float64
+	Message string
+	Code    string
+	Type    string
+}
+
+// NewAPIError returns a new error instance
+func NewAPIError(body []byte, errMsg string) APIError {
+	errBody := map[string]interface{}{}
+	apiError := APIError{
+		Err:     errMsg,
+		RawBody: body,
+	}
+	if len(body) != 0 {
+		err := json.Unmarshal(body, &errBody)
+		if err != nil {
+			log.Printf("\nError while parsing error body for %s: %s\n", errMsg, err.Error())
+		}
+		if val, ok := errBody["message"]; ok {
+			apiError.Message = val.(string)
+		}
+		if val, ok := errBody["errorCode"]; ok {
+			apiError.Code = fmt.Sprintf("%v", val)
+		}
+		if val, ok := errBody["errorType"]; ok {
+			apiError.Type = val.(string)
+		}
+		if val, ok := errBody["status"]; ok {
+			apiError.Status = val.(float64)
+		}
+	}
+	return apiError
 }
 
 // Error returns non-empty string if there was an error.
-func (e GenericOpenAPIError) Error() string {
+func (e APIError) Error() string {
+	if e.Message != "" {
+		return fmt.Sprintf("%s: %s (%s: %s)", e.Err, e.Message, e.Type, e.Code)
+	}
 	return e.Err
-}
-
-// Body returns the raw bytes of the response
-func (e GenericOpenAPIError) Body() []byte {
-	return e.BodyBytes
-}
-
-// Model returns the unpacked model of the error
-func (e GenericOpenAPIError) Model() interface{} {
-	return e.ModelI
 }

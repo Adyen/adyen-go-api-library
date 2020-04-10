@@ -7,7 +7,6 @@
 package tests
 
 import (
-	"encoding/json"
 	"os"
 	"testing"
 
@@ -37,13 +36,11 @@ func Test_Recurring(t *testing.T) {
 			res, httpRes, err := client.Recurring.ListRecurringDetailsPost(&recurring.RecurringDetailsRequest{})
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
-			assert.Equal(t, "403 Forbidden", err.Error())
+			assert.Equal(t, "403 Forbidden: Invalid Merchant Account (security: 901)", err.Error())
 			assert.Equal(t, 403, httpRes.StatusCode)
 			assert.Equal(t, "403 Forbidden", httpRes.Status)
 			require.NotNil(t, res)
-			errBody := map[string]string{}
-			json.Unmarshal(err.(common.GenericOpenAPIError).Body(), &errBody)
-			assert.Equal(t, "Invalid Merchant Account", errBody["message"])
+			assert.Equal(t, "Invalid Merchant Account", err.(common.APIError).Message)
 		})
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 			res, httpRes, err := client.Recurring.ListRecurringDetailsPost(&recurring.RecurringDetailsRequest{
@@ -72,13 +69,11 @@ func Test_Recurring(t *testing.T) {
 			})
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
-			assert.Equal(t, "422 Unprocessable Entity", err.Error())
+			assert.Equal(t, "422 Unprocessable Entity: Contract not found (validation: 800)", err.Error())
 			assert.Equal(t, 422, httpRes.StatusCode)
 			assert.Equal(t, "422 Unprocessable Entity", httpRes.Status)
 			require.NotNil(t, res)
-			errBody := map[string]string{}
-			json.Unmarshal(err.(common.GenericOpenAPIError).Body(), &errBody)
-			assert.Equal(t, "Contract not found", errBody["message"])
+			assert.Equal(t, "Contract not found", err.(common.APIError).Message)
 		})
 	})
 
@@ -91,13 +86,11 @@ func Test_Recurring(t *testing.T) {
 			})
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
-			assert.Equal(t, "422 Unprocessable Entity", err.Error())
+			assert.Equal(t, "422 Unprocessable Entity: Missing card or shopperReference & selectedRecurringDetailReference (validation: 000)", err.Error())
 			assert.Equal(t, 422, httpRes.StatusCode)
 			assert.Equal(t, "422 Unprocessable Entity", httpRes.Status)
 			require.NotNil(t, res)
-			errBody := map[string]string{}
-			json.Unmarshal(err.(common.GenericOpenAPIError).Body(), &errBody)
-			assert.Equal(t, "Missing card or shopperReference & selectedRecurringDetailReference", errBody["message"])
+			assert.Equal(t, "Missing card or shopperReference & selectedRecurringDetailReference", err.(common.APIError).Message)
 		})
 		t.Run("Create an API request that should fail with card", func(t *testing.T) {
 			res, httpRes, err := client.Recurring.ScheduleAccountUpdaterPost(&recurring.ScheduleAccountUpdaterRequest{
@@ -112,13 +105,11 @@ func Test_Recurring(t *testing.T) {
 			})
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
-			assert.Equal(t, "422 Unprocessable Entity", err.Error())
+			assert.Equal(t, "422 Unprocessable Entity: validation 000 No registered account for AccountUpdater (validation: 000)", err.Error())
 			assert.Equal(t, 422, httpRes.StatusCode)
 			assert.Equal(t, "422 Unprocessable Entity", httpRes.Status)
 			require.NotNil(t, res)
-			errBody := map[string]string{}
-			json.Unmarshal(err.(common.GenericOpenAPIError).Body(), &errBody)
-			assert.Equal(t, "validation 000 No registered account for AccountUpdater", errBody["message"])
+			assert.Equal(t, "validation 000 No registered account for AccountUpdater", err.(common.APIError).Message)
 		})
 	})
 }

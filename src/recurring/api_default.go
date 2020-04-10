@@ -25,16 +25,16 @@ type Recurring common.Service
 /*
 DisablePost Disables stored payment details.
 Disables stored payment details to stop charging a shopper with this particular recurring detail ID.  For more information, refer to [Disable stored details](https://docs.adyen.com/classic-integration/recurring-payments/disable-stored-details/).
- * @param request DisableRequest - reference of DisableRequest). 
+ * @param request DisableRequest - reference of DisableRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return DisableResult
 */
 
 func (a *Recurring) DisablePost(request *DisableRequest, ctxs ..._context.Context) (DisableResult, *_nethttp.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarReturnValue  DisableResult
+		localVarHTTPMethod  = _nethttp.MethodPost
+		localVarPostBody    interface{}
+		localVarReturnValue DisableResult
 	)
 
 	// create path and map variables
@@ -86,29 +86,13 @@ func (a *Recurring) DisablePost(request *DisableRequest, ctxs ..._context.Contex
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := common.GenericOpenAPIError{
-			BodyBytes: localVarBody,
-			Err:       localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 200 {
-			var v DisableResult
-			err = a.Client.Decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.Err = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.ModelI = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
+		newErr := common.NewAPIError(localVarBody, localVarHTTPResponse.Status)
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.Client.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := common.GenericOpenAPIError{
-			BodyBytes: localVarBody,
-			Err:       err.Error(),
-		}
+		newErr := common.NewAPIError(localVarBody, err.Error())
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -118,16 +102,16 @@ func (a *Recurring) DisablePost(request *DisableRequest, ctxs ..._context.Contex
 /*
 ListRecurringDetailsPost Retrieves stored payment details for a shopper.
 Lists the stored payment details for a shopper, if there are any available. The recurring detail ID can be used with a regular authorisation request to charge the shopper. A summary of the payment detail is returned for presentation to the shopper.  For more information, refer to [Retrieve stored details](https://docs.adyen.com/classic-integration/recurring-payments/retrieve-stored-details/).
- * @param request RecurringDetailsRequest - reference of RecurringDetailsRequest). 
+ * @param request RecurringDetailsRequest - reference of RecurringDetailsRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return RecurringDetailsResult
 */
 
 func (a *Recurring) ListRecurringDetailsPost(request *RecurringDetailsRequest, ctxs ..._context.Context) (RecurringDetailsResult, *_nethttp.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarReturnValue  RecurringDetailsResult
+		localVarHTTPMethod  = _nethttp.MethodPost
+		localVarPostBody    interface{}
+		localVarReturnValue RecurringDetailsResult
 	)
 
 	// create path and map variables
@@ -179,29 +163,13 @@ func (a *Recurring) ListRecurringDetailsPost(request *RecurringDetailsRequest, c
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := common.GenericOpenAPIError{
-			BodyBytes: localVarBody,
-			Err:       localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 200 {
-			var v RecurringDetailsResult
-			err = a.Client.Decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.Err = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.ModelI = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
+		newErr := common.NewAPIError(localVarBody, localVarHTTPResponse.Status)
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.Client.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := common.GenericOpenAPIError{
-			BodyBytes: localVarBody,
-			Err:       err.Error(),
-		}
+		newErr := common.NewAPIError(localVarBody, err.Error())
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -211,16 +179,16 @@ func (a *Recurring) ListRecurringDetailsPost(request *RecurringDetailsRequest, c
 /*
 ScheduleAccountUpdaterPost Schedules running of the Account Updater.
 When making the API call, you can submit either the credit card information, or the recurring detail reference and the shopper reference: * If the card information is provided, all the sub-fields for &#x60;card&#x60; are mandatory. * If the recurring detail reference is provided, the fields for &#x60;shopperReference&#x60; and &#x60;selectedRecurringDetailReference&#x60; are mandatory.
- * @param request ScheduleAccountUpdaterRequest - reference of ScheduleAccountUpdaterRequest). 
+ * @param request ScheduleAccountUpdaterRequest - reference of ScheduleAccountUpdaterRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ScheduleAccountUpdaterResult
 */
 
 func (a *Recurring) ScheduleAccountUpdaterPost(request *ScheduleAccountUpdaterRequest, ctxs ..._context.Context) (ScheduleAccountUpdaterResult, *_nethttp.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarReturnValue  ScheduleAccountUpdaterResult
+		localVarHTTPMethod  = _nethttp.MethodPost
+		localVarPostBody    interface{}
+		localVarReturnValue ScheduleAccountUpdaterResult
 	)
 
 	// create path and map variables
@@ -272,29 +240,13 @@ func (a *Recurring) ScheduleAccountUpdaterPost(request *ScheduleAccountUpdaterRe
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := common.GenericOpenAPIError{
-			BodyBytes: localVarBody,
-			Err:       localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 200 {
-			var v ScheduleAccountUpdaterResult
-			err = a.Client.Decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.Err = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.ModelI = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
+		newErr := common.NewAPIError(localVarBody, localVarHTTPResponse.Status)
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.Client.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := common.GenericOpenAPIError{
-			BodyBytes: localVarBody,
-			Err:       err.Error(),
-		}
+		newErr := common.NewAPIError(localVarBody, err.Error())
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 

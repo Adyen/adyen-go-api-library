@@ -38,7 +38,7 @@ func Test_api(t *testing.T) {
 		t.Run("Create a API request that should fail", func(t *testing.T) {
 			res, httpRes, err := client.Checkout.PaymentMethodsPost(&checkout.PaymentMethodsRequest{})
 			require.NotNil(t, err)
-			assert.Equal(t, "401 Unauthorized", err.Error())
+			assert.Equal(t, "401 Unauthorized: HTTP Status Response - Unauthorized (security: 000)", err.Error())
 			require.NotNil(t, res)
 			assert.Equal(t, checkout.PaymentMethodsResponse{}, res)
 			require.NotNil(t, httpRes)

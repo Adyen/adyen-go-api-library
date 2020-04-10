@@ -76,13 +76,10 @@ res, httpRes, err := client.Checkout.PaymentsPost(&checkout.PaymentRequest{
     },
 })
 
-errBody := map[string]string{}
-json.Unmarshal(err.(common.GenericOpenAPIError).Body(), &errBody)
-
 errorText := err.Error()
-errorMessage := errBody["message"]
-errorCode := errBody["errorCode"]
-errorType := errBody["errorType"]
+errorMessage := err.(common.APIError).Message
+errorCode := err.(common.APIError).Code
+errorType := err.(common.APIError).Type
 
 httpStatusCode := httpRes.StatusCode
 httpStatus := httpRes.Status

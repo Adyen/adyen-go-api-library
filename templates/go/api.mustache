@@ -42,10 +42,10 @@ type {{packageName}} common.Service
 
 func (a *{{{packageName}}}) {{{nickname}}}({{#allParams}}request *{{{dataType}}}{{/allParams}}, ctxs ..._context.Context) ({{#returnType}}{{{returnType}}}, {{/returnType}}*_nethttp.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.Method{{httpMethod}}
-		localVarPostBody     interface{}
+		localVarHTTPMethod  = _nethttp.Method{{httpMethod}}
+		localVarPostBody    interface{}
 		{{#returnType}}
-		localVarReturnValue  {{{returnType}}}
+		localVarReturnValue {{{returnType}}}
 		{{/returnType}}
 	)
 
@@ -282,40 +282,14 @@ func (a *{{{packageName}}}) {{{nickname}}}({{#allParams}}request *{{{dataType}}}
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := common.GenericOpenAPIError{
-			BodyBytes: localVarBody,
-			Err:       localVarHTTPResponse.Status,
-		}
-		{{#responses}}
-		{{#dataType}}
-		{{^wildcard}}
-		if localVarHTTPResponse.StatusCode == {{{code}}} {
-		{{/wildcard}}
-			var v {{{dataType}}}
-			err = a.Client.Decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.Err = err.Error()
-				return {{#returnType}}localVarReturnValue, {{/returnType}}localVarHTTPResponse, newErr
-			}
-			newErr.ModelI = v
-			{{#hasMore}}
-			return {{#returnType}}localVarReturnValue, {{/returnType}}localVarHTTPResponse, newErr
-			{{/hasMore}}
-		{{^wildcard}}
-		}
-		{{/wildcard}}
-		{{/dataType}}
-		{{/responses}}
+		newErr := common.NewAPIError(localVarBody, localVarHTTPResponse.Status)
 		return {{#returnType}}localVarReturnValue, {{/returnType}}localVarHTTPResponse, newErr
 	}
 
 	{{#returnType}}
 	err = a.Client.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := common.GenericOpenAPIError{
-			BodyBytes: localVarBody,
-			Err:       err.Error(),
-		}
+		newErr := common.NewAPIError(localVarBody, err.Error())
 		return {{#returnType}}localVarReturnValue, {{/returnType}}localVarHTTPResponse, newErr
 	}
 
