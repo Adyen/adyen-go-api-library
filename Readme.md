@@ -188,7 +188,6 @@ openapi-generator-cli generate \
 - `go.mod`
 - `go.sum`
 - `docs`
-- `README.md`
 
 **Step 3**: Add the new service to `APIClient` struct in `./src/api/api.go` and add import for the same
 
