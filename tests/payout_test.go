@@ -13,6 +13,7 @@ import (
 	"time"
 
 	"github.com/adyen/adyen-go-api-library/src/api"
+	"github.com/adyen/adyen-go-api-library/src/checkout"
 	"github.com/adyen/adyen-go-api-library/src/common"
 	"github.com/adyen/adyen-go-api-library/src/payout"
 	"github.com/joho/godotenv"
@@ -105,7 +106,7 @@ func Test_Payout(t *testing.T) {
 	t.Run("Instant Payouts", func(t *testing.T) {
 		t.Run("Payout", func(t *testing.T) {
 			t.Run("Create an API request that should pass", func(t *testing.T) {
-				paymentRes, _, _ := client.Checkout.PaymentsPost(&checkout.PaymentRequest{
+				paymentRes, _, _ := client.Checkout.Payments(&checkout.PaymentRequest{
 					Reference: "123456781235",
 					Amount: checkout.Amount{
 						Value:    12500,
