@@ -23,7 +23,7 @@ import (
 func Test_api(t *testing.T) {
 	t.Run("Create a new APIClient", func(t *testing.T) {
 
-		client := NewAPIClient(&common.Config{
+		client := NewClient(&common.Config{
 			Environment: "TEST",
 		})
 		require.NotNil(t, client)
@@ -55,7 +55,10 @@ func Test_api(t *testing.T) {
 			PASS            = os.Getenv("ADYEN_PASSWORD")
 		)
 
-		client = NewAPIClientWithAPIKey(APIKey, "TEST")
+		client = NewClient(&common.Config{
+			ApiKey:      APIKey,
+			Environment: "TEST",
+		})
 
 		t.Run("Create a API request that uses API key auth and should pass", func(t *testing.T) {
 
@@ -72,7 +75,12 @@ func Test_api(t *testing.T) {
 			assert.Equal(t, "200 OK", httpRes.Status)
 		})
 
-		client = NewAPIClientWithCredentials(USER, PASS, "TEST", "adyen-api-go-library")
+		client = NewClient(&common.Config{
+			Username:        USER,
+			Password:        PASS,
+			Environment:     "TEST",
+			ApplicationName: "adyen-api-go-library",
+		})
 
 		t.Run("Create a API request that uses basic auth and should pass", func(t *testing.T) {
 			res, httpRes, err := client.Recurring.ListRecurringDetailsPost(&recurring.RecurringDetailsRequest{

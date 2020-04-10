@@ -12,7 +12,8 @@ import (
 	"testing"
 	"time"
 
-	adyen "github.com/adyen/adyen-go-api-library/src/api"
+	"github.com/adyen/adyen-go-api-library/src/api"
+	"github.com/adyen/adyen-go-api-library/src/common"
 	"github.com/adyen/adyen-go-api-library/src/payout"
 	"github.com/joho/godotenv"
 
@@ -30,9 +31,18 @@ func Test_Payout(t *testing.T) {
 		MerchantAccount = os.Getenv("ADYEN_MERCHANT")
 	)
 
-	client := adyen.NewAPIClientWithAPIKey(APIKey, "TEST")
-	clientStore := adyen.NewAPIClientWithAPIKey(StoreAPIKey, "TEST")
-	clientReview := adyen.NewAPIClientWithAPIKey(ReviewAPIKey, "TEST")
+	client := api.NewClient(&common.Config{
+		ApiKey:      APIKey,
+		Environment: "TEST",
+	})
+	clientStore := api.NewClient(&common.Config{
+		ApiKey:      StoreAPIKey,
+		Environment: "TEST",
+	})
+	clientReview := api.NewClient(&common.Config{
+		ApiKey:      ReviewAPIKey,
+		Environment: "TEST",
+	})
 
 	dateOfBirth := time.Date(1990, 1, 1, 0, 0, 0, 0, time.UTC)
 	card := &payout.Card{

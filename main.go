@@ -14,6 +14,6 @@ import (
 )
 
 func main() {
-	client := api.NewAPIClient(&common.Config{Environment: common.Test})
+	client := api.NewClient(&common.Config{Environment: common.TestEnv})
 	fmt.Println("Welcome to Adyen API Client. Env: " + client.GetConfig().Environment)
 }

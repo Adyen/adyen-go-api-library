@@ -10,10 +10,10 @@ import (
 	"os"
 	"testing"
 
+	"github.com/adyen/adyen-go-api-library/src/api"
 	"github.com/adyen/adyen-go-api-library/src/checkout"
 	"github.com/adyen/adyen-go-api-library/src/common"
 
-	adyen "github.com/adyen/adyen-go-api-library/src/api"
 	"github.com/joho/godotenv"
 
 	"github.com/stretchr/testify/assert"
@@ -28,7 +28,10 @@ func Test_Checkout(t *testing.T) {
 		APIKey          = os.Getenv("ADYEN_API_KEY")
 	)
 
-	client := adyen.NewAPIClientWithAPIKey(APIKey, "TEST")
+	client := api.NewClient(&common.Config{
+		ApiKey:      APIKey,
+		Environment: "TEST",
+	})
 	// client.GetConfig().Debug = true
 
 	t.Run("PaymentLinks", func(t *testing.T) {

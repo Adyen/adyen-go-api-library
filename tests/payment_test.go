@@ -6,7 +6,8 @@ import (
 	"testing"
 	"time"
 
-	adyen "github.com/adyen/adyen-go-api-library/src/api"
+	"github.com/adyen/adyen-go-api-library/src/api"
+	"github.com/adyen/adyen-go-api-library/src/common"
 	"github.com/adyen/adyen-go-api-library/src/payment"
 	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
@@ -47,7 +48,10 @@ func Test_Payment(t *testing.T) {
 	//    UserAgent:         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36",
 	//}
 
-	client := adyen.NewAPIClientWithAPIKey(APIKey, "TEST")
+	client := api.NewClient(&common.Config{
+		ApiKey:      APIKey,
+		Environment: "TEST",
+	})
 	// client.GetConfig().Debug = true
 
 	assertForSuccessResponse := func(res interface{}, httpRes *http.Response, err error) {
