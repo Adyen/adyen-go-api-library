@@ -86,13 +86,13 @@ func (a *Payout) ConfirmThirdPartyPost(request *ModifyRequest, ctxs ..._context.
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := common.NewApiError(localVarBody, localVarHTTPResponse.Status)
+		newErr := common.NewAPIError(localVarBody, localVarHTTPResponse.Status)
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.Client.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := common.NewApiError(localVarBody, err.Error())
+		newErr := common.NewAPIError(localVarBody, err.Error())
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -163,13 +163,13 @@ func (a *Payout) DeclineThirdPartyPost(request *ModifyRequest, ctxs ..._context.
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := common.NewApiError(localVarBody, localVarHTTPResponse.Status)
+		newErr := common.NewAPIError(localVarBody, localVarHTTPResponse.Status)
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.Client.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := common.NewApiError(localVarBody, err.Error())
+		newErr := common.NewAPIError(localVarBody, err.Error())
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -240,13 +240,13 @@ func (a *Payout) PayoutPost(request *PayoutRequest, ctxs ..._context.Context) (P
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := common.NewApiError(localVarBody, localVarHTTPResponse.Status)
+		newErr := common.NewAPIError(localVarBody, localVarHTTPResponse.Status)
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.Client.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := common.NewApiError(localVarBody, err.Error())
+		newErr := common.NewAPIError(localVarBody, err.Error())
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -317,13 +317,13 @@ func (a *Payout) StoreDetailAndSubmitThirdPartyPost(request *StoreDetailAndSubmi
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := common.NewApiError(localVarBody, localVarHTTPResponse.Status)
+		newErr := common.NewAPIError(localVarBody, localVarHTTPResponse.Status)
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.Client.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := common.NewApiError(localVarBody, err.Error())
+		newErr := common.NewAPIError(localVarBody, err.Error())
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -394,13 +394,13 @@ func (a *Payout) StoreDetailPost(request *StoreDetailRequest, ctxs ..._context.C
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := common.NewApiError(localVarBody, localVarHTTPResponse.Status)
+		newErr := common.NewAPIError(localVarBody, localVarHTTPResponse.Status)
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.Client.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := common.NewApiError(localVarBody, err.Error())
+		newErr := common.NewAPIError(localVarBody, err.Error())
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -471,13 +471,13 @@ func (a *Payout) SubmitThirdPartyPost(request *SubmitRequest, ctxs ..._context.C
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := common.NewApiError(localVarBody, localVarHTTPResponse.Status)
+		newErr := common.NewAPIError(localVarBody, localVarHTTPResponse.Status)
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.Client.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := common.NewApiError(localVarBody, err.Error())
+		newErr := common.NewAPIError(localVarBody, err.Error())
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 

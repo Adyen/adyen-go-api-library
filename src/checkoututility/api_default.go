@@ -86,13 +86,13 @@ func (a *CheckoutUtility) OriginKeysPost(request *CheckoutUtilityRequest, ctxs .
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := common.NewApiError(localVarBody, localVarHTTPResponse.Status)
+		newErr := common.NewAPIError(localVarBody, localVarHTTPResponse.Status)
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.Client.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := common.NewApiError(localVarBody, err.Error())
+		newErr := common.NewAPIError(localVarBody, err.Error())
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
