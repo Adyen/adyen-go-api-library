@@ -15,6 +15,7 @@ import (
 	checkout "github.com/adyen/adyen-go-api-library/src/checkout"
 	checkoututility "github.com/adyen/adyen-go-api-library/src/checkoututility"
 	common "github.com/adyen/adyen-go-api-library/src/common"
+	notification "github.com/adyen/adyen-go-api-library/src/notification"
 	payment "github.com/adyen/adyen-go-api-library/src/payment"
 	payout "github.com/adyen/adyen-go-api-library/src/payout"
 	recurring "github.com/adyen/adyen-go-api-library/src/recurring"
@@ -58,6 +59,7 @@ type APIClient struct {
 	Payout          *payout.Payout
 	Recurring       *recurring.Recurring
 	BinLookup       *binlookup.BinLookup
+	Notification    *notification.NotificationService
 }
 
 // NewAPIClient creates a new API client. Requires a userAgent string describing your application.

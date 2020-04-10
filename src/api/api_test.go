@@ -73,7 +73,6 @@ func Test_api(t *testing.T) {
 		})
 
 		client = NewAPIClientWithCredentials(USER, PASS, "TEST", "adyen-api-go-library")
-		client.GetConfig().Debug = true
 
 		t.Run("Create a API request that uses basic auth and should pass", func(t *testing.T) {
 			res, httpRes, err := client.Recurring.ListRecurringDetailsPost(&recurring.RecurringDetailsRequest{
