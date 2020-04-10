@@ -13,6 +13,7 @@ import (
 	"time"
 
 	adyen "github.com/adyen/adyen-go-api-library/src/api"
+	"github.com/adyen/adyen-go-api-library/src/checkout"
 	"github.com/adyen/adyen-go-api-library/src/payout"
 	"github.com/joho/godotenv"
 
@@ -48,7 +49,7 @@ func Test_Payout(t *testing.T) {
 	}
 	amount := payout.Amount{
 		Currency: "EUR",
-		Value:    2501,
+		Value:    1,
 	}
 	bank := payout.BankAccount{
 		CountryCode: "NL",
@@ -95,11 +96,27 @@ func Test_Payout(t *testing.T) {
 	t.Run("Instant Payouts", func(t *testing.T) {
 		t.Run("Payout", func(t *testing.T) {
 			t.Run("Create an API request that should pass", func(t *testing.T) {
-				ref := time.Now().String()
+				paymentRes, _, _ := client.Checkout.PaymentsPost(&checkout.PaymentRequest{
+					Reference: "123456781235",
+					Amount: checkout.Amount{
+						Value:    12500,
+						Currency: "EUR",
+					},
+					MerchantAccount: MerchantAccount,
+					PaymentMethod: map[string]interface{}{
+						"type":        "scheme",
+						"number":      "4111111111111111",
+						"expiryMonth": "03",
+						"expiryYear":  "2030",
+						"holderName":  "John Smith",
+						"cvc":         "737",
+					},
+				})
+
 				res, httpRes, err := client.Payout.PayoutPost(&payout.PayoutRequest{
 					Amount:          amount,
 					MerchantAccount: MerchantAccount,
-					Reference:       ref,
+					Reference:       paymentRes.PspReference,
 					Card:            card,
 					ShopperName:     shopperName,
 					DateOfBirth:     &dateOfBirth,
