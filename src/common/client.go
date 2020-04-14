@@ -51,29 +51,29 @@ type Client struct {
 }
 
 // MakeHTTPPostRequest is a generic method used to make HTTP POST requests
-func (c *Client) MakeHTTPPostRequest(req interface{}, res interface{}, localVarPath string, ctxs ...context.Context) (*http.Response, error) {
-	localVarHTTPMethod := http.MethodPost
+func (c *Client) MakeHTTPPostRequest(req interface{}, res interface{}, path string, ctxs ...context.Context) (*http.Response, error) {
+	httpMethod := http.MethodPost
 
 	// create path and map variables
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
+	headerParams := make(map[string]string)
+	queryParams := url.Values{}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	contentTypes := []string{"application/json"}
 
 	// set Content-Type header
-	localVarHTTPContentType := SelectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	contentType := SelectHeaderContentType(contentTypes)
+	if contentType != "" {
+		headerParams["Content-Type"] = contentType
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
+	headerAccepts := []string{"application/json"}
 
 	// set Accept header
-	localVarHTTPHeaderAccept := SelectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	headerAccept := SelectHeaderAccept(headerAccepts)
+	if headerAccept != "" {
+		headerParams["Accept"] = headerAccept
 	}
 
 	var ctx context.Context
@@ -81,34 +81,34 @@ func (c *Client) MakeHTTPPostRequest(req interface{}, res interface{}, localVarP
 		ctx = ctxs[0]
 	}
 
-	r, err := c.PrepareRequest(ctx, localVarPath, localVarHTTPMethod, req, localVarHeaderParams, localVarQueryParams)
+	r, err := c.PrepareRequest(ctx, path, httpMethod, req, headerParams, queryParams)
 	if err != nil {
 		return nil, err
 	}
 
-	localVarHTTPResponse, err := c.CallAPI(r)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+	httpResponse, err := c.CallAPI(r)
+	if err != nil || httpResponse == nil {
+		return httpResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
+	body, err := _ioutil.ReadAll(httpResponse.Body)
+	httpResponse.Body.Close()
 	if err != nil {
-		return localVarHTTPResponse, err
+		return httpResponse, err
 	}
 
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := NewAPIError(localVarBody, localVarHTTPResponse.Status)
-		return localVarHTTPResponse, newErr
+	if httpResponse.StatusCode >= 300 {
+		newErr := NewAPIError(body, httpResponse.Status)
+		return httpResponse, newErr
 	}
 
-	err = c.Decode(&res, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = c.Decode(&res, body, httpResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := NewAPIError(localVarBody, err.Error())
-		return localVarHTTPResponse, newErr
+		newErr := NewAPIError(body, err.Error())
+		return httpResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return httpResponse, nil
 }
 
 // CallAPI do the Request.
