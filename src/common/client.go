@@ -52,10 +52,7 @@ type Client struct {
 
 // MakeHTTPPostRequest is a generic method used to make HTTP POST requests
 func (c *Client) MakeHTTPPostRequest(req interface{}, res interface{}, localVarPath string, ctxs ...context.Context) (*http.Response, error) {
-	var (
-		localVarHTTPMethod = http.MethodPost
-		localVarPostBody   interface{}
-	)
+	var localVarHTTPMethod = http.MethodPost
 
 	// create path and map variables
 	localVarHeaderParams := make(map[string]string)
@@ -78,17 +75,13 @@ func (c *Client) MakeHTTPPostRequest(req interface{}, res interface{}, localVarP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	if req != nil {
-		localVarPostBody = req
-	}
 
 	var ctx context.Context
-	if len(ctxs) == 1 {
+	if len(ctxs) > 0 {
 		ctx = ctxs[0]
 	}
 
-	r, err := c.PrepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	r, err := c.PrepareRequest(ctx, localVarPath, localVarHTTPMethod, req, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return nil, err
 	}
