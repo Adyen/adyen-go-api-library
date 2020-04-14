@@ -15,6 +15,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	_ioutil "io/ioutil"
 	"log"
 	"mime/multipart"
 	"net/http"
@@ -39,6 +40,7 @@ var (
 
 // Service type is the struct implemented by individual API services
 type Service struct {
+	apiCaller
 	Client   *Client
 	BasePath func() string
 }
@@ -49,7 +51,79 @@ type Client struct {
 	Cfg *Config
 }
 
-// CallAPI do the request.
+type apiCaller interface {
+	Call(req interface{}, res interface{}, path string, ctxs ...context.Context) (*http.Response, error)
+}
+
+func (a Service) Call(req interface{}, res interface{}, path string, ctxs ...context.Context) (*http.Response, error) {
+	var (
+		localVarHTTPMethod = http.MethodPost
+		localVarPostBody   interface{}
+	)
+
+	// create path and map variables
+	localVarPath := a.BasePath() + path
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := SelectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := SelectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	if req != nil {
+		localVarPostBody = req
+	}
+
+	var ctx context.Context
+	if len(ctxs) == 1 {
+		ctx = ctxs[0]
+	}
+
+	r, err := a.Client.PrepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.Client.CallAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := NewAPIError(localVarBody, localVarHTTPResponse.Status)
+		return localVarHTTPResponse, newErr
+	}
+
+	err = a.Client.Decode(&res, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := NewAPIError(localVarBody, err.Error())
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+// CallAPI do the Request.
 func (c *Client) CallAPI(request *http.Request) (*http.Response, error) {
 	if c.Cfg.Debug {
 		dump, err := httputil.DumpRequestOut(request, true)
@@ -75,7 +149,7 @@ func (c *Client) CallAPI(request *http.Request) (*http.Response, error) {
 	return resp, err
 }
 
-// PrepareRequest build the request
+// PrepareRequest build the Request
 func (c *Client) PrepareRequest(
 	ctx context.Context,
 	path string, method string,
@@ -116,7 +190,7 @@ func (c *Client) PrepareRequest(
 	// Encode the parameters.
 	url.RawQuery = query.Encode()
 
-	// Generate a new request
+	// Generate a new Request
 	if body != nil {
 		localVarRequest, err = http.NewRequest(method, url.String(), body)
 	} else {
@@ -135,7 +209,7 @@ func (c *Client) PrepareRequest(
 		localVarRequest.Header = headers
 	}
 
-	// Add the user agent to the request.
+	// Add the user agent to the Request.
 	localVarRequest.Header.Add("User-Agent", c.Cfg.UserAgent)
 	localVarRequest.Header.Add("Cache-Control", "no-cache")
 
@@ -147,7 +221,7 @@ func (c *Client) PrepareRequest(
 	}
 
 	if ctx != nil {
-		// add context to the request
+		// add context to the Request
 		localVarRequest = localVarRequest.WithContext(ctx)
 
 		// Walk through any authentication.
@@ -202,7 +276,7 @@ func (c *Client) Decode(v interface{}, b []byte, contentType string) (err error)
 		}
 		return nil
 	}
-	return errors.New("undefined response type")
+	return errors.New("undefined Response type")
 }
 
 func atoi(in string) (int, error) {
@@ -290,7 +364,7 @@ func parameterToJson(obj interface{}) (string, error) {
 	return string(jsonBuf), err
 }
 
-// Add a file to the multipart request
+// Add a file to the multipart Request
 func addFile(w *multipart.Writer, fieldName, path string) error {
 	file, err := os.Open(path)
 	if err != nil {
@@ -312,7 +386,7 @@ func reportError(format string, a ...interface{}) error {
 	return fmt.Errorf(format, a...)
 }
 
-// Set request body from an interface{}
+// Set Request body from an interface{}
 func setBody(body interface{}, contentType string) (bodyBuf *bytes.Buffer, err error) {
 	if bodyBuf == nil {
 		bodyBuf = &bytes.Buffer{}
@@ -343,7 +417,7 @@ func setBody(body interface{}, contentType string) (bodyBuf *bytes.Buffer, err e
 	return bodyBuf, nil
 }
 
-// detectContentType method is used to figure out `Request.Body` content type for request header
+// detectContentType method is used to figure out `Request.Body` content type for Request header
 func detectContentType(body interface{}) string {
 	contentType := "text/plain; charset=utf-8"
 	kind := reflect.TypeOf(body).Kind()
@@ -385,7 +459,7 @@ func parseCacheControl(headers http.Header) cacheControl {
 	return cc
 }
 
-// CacheExpires helper function to determine remaining time before repeating a request.
+// CacheExpires helper function to determine remaining time before repeating a Request.
 func CacheExpires(r *http.Response) time.Time {
 	// Figure out when the cache expires.
 	var expires time.Time

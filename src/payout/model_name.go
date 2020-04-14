@@ -15,7 +15,7 @@ type Name struct {
 	// The first name.
 	FirstName string `json:"firstName"`
 	// The gender. >The following values are permitted: `MALE`, `FEMALE`, `UNKNOWN`.
-	Gender string `json:"gender,omitempty"`
+	Gender string `json:"gender"`
 	// The name's infix, if applicable. >A maximum length of twenty (20) characters is imposed.
 	Infix string `json:"infix,omitempty"`
 	// The last name.
