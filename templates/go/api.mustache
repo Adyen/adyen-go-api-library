@@ -37,10 +37,9 @@ type {{packageName}} common.Service
 @return {{{returnType}}}
 {{/returnType}}
 */
-
 func (a {{{packageName}}}) {{{nickname}}}({{#allParams}}req *{{{dataType}}}{{/allParams}}, ctxs ..._context.Context) ({{#returnType}}{{{returnType}}}, {{/returnType}}*_nethttp.Response, error) {
-    res := new({{{returnType}}})
-    httpRes, err := common.Service(a).Call(req, res, "{{{path}}}", ctxs...)
+    res := &{{{returnType}}}{}
+    httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath() + "{{{path}}}", ctxs...)
     return *res, httpRes, err
 }
 {{/operation}}

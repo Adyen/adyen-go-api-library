@@ -12,8 +12,9 @@ package checkout
 
 import (
 	_context "context"
-	"github.com/adyen/adyen-go-api-library/src/common"
 	_nethttp "net/http"
+
+	"github.com/adyen/adyen-go-api-library/src/common"
 )
 
 // Checkout Checkout service
@@ -26,10 +27,9 @@ Creates a payment link to our hosted payment form where shoppers can pay. The li
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return CreatePaymentLinkResponse
 */
-
 func (a Checkout) PaymentLinks(req *CreatePaymentLinkRequest, ctxs ..._context.Context) (CreatePaymentLinkResponse, *_nethttp.Response, error) {
-	res := new(CreatePaymentLinkResponse)
-	httpRes, err := common.Service(a).Call(req, res, "/paymentLinks", ctxs...)
+	res := &CreatePaymentLinkResponse{}
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath() + "/paymentLinks", ctxs...)
 	return *res, httpRes, err
 }
 
@@ -40,10 +40,9 @@ Queries the available payment methods for a transaction based on the transaction
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return PaymentMethodsResponse
 */
-
 func (a Checkout) PaymentMethods(req *PaymentMethodsRequest, ctxs ..._context.Context) (PaymentMethodsResponse, *_nethttp.Response, error) {
-	res := new(PaymentMethodsResponse)
-	httpRes, err := common.Service(a).Call(req, res, "/paymentMethods", ctxs...)
+	res := &PaymentMethodsResponse{}
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath() + "/paymentMethods", ctxs...)
 	return *res, httpRes, err
 }
 
@@ -54,10 +53,9 @@ Provides the data object that can be used to start the Checkout SDK. To set up t
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return PaymentSetupResponse
 */
-
 func (a Checkout) PaymentSession(req *PaymentSetupRequest, ctxs ..._context.Context) (PaymentSetupResponse, *_nethttp.Response, error) {
-	res := new(PaymentSetupResponse)
-	httpRes, err := common.Service(a).Call(req, res, "/paymentSession", ctxs...)
+	res := &PaymentSetupResponse{}
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath() + "/paymentSession", ctxs...)
 	return *res, httpRes, err
 }
 
@@ -68,10 +66,9 @@ Submits details for a payment created using &#x60;/payments&#x60;. This step is 
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return PaymentResponse
 */
-
 func (a Checkout) PaymentsDetails(req *DetailsRequest, ctxs ..._context.Context) (PaymentResponse, *_nethttp.Response, error) {
-	res := new(PaymentResponse)
-	httpRes, err := common.Service(a).Call(req, res, "/payments/details", ctxs...)
+	res := &PaymentResponse{}
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath() + "/payments/details", ctxs...)
 	return *res, httpRes, err
 }
 
@@ -82,10 +79,9 @@ Sends payment parameters (like amount, country, and currency) together with the 
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return PaymentResponse
 */
-
 func (a Checkout) Payments(req *PaymentRequest, ctxs ..._context.Context) (PaymentResponse, *_nethttp.Response, error) {
-	res := new(PaymentResponse)
-	httpRes, err := common.Service(a).Call(req, res, "/payments", ctxs...)
+	res := &PaymentResponse{}
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath() + "/payments", ctxs...)
 	return *res, httpRes, err
 }
 
@@ -96,9 +92,8 @@ Verifies the payment result using the payload returned from the Checkout SDK.  F
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return PaymentVerificationResponse
 */
-
 func (a Checkout) PaymentsResult(req *PaymentVerificationRequest, ctxs ..._context.Context) (PaymentVerificationResponse, *_nethttp.Response, error) {
-	res := new(PaymentVerificationResponse)
-	httpRes, err := common.Service(a).Call(req, res, "/payments/result", ctxs...)
+	res := &PaymentVerificationResponse{}
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath() + "/payments/result", ctxs...)
 	return *res, httpRes, err
 }

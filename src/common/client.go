@@ -40,7 +40,6 @@ var (
 
 // Service type is the struct implemented by individual API services
 type Service struct {
-	apiCaller
 	Client   *Client
 	BasePath func() string
 }
@@ -51,18 +50,14 @@ type Client struct {
 	Cfg *Config
 }
 
-type apiCaller interface {
-	Call(req interface{}, res interface{}, path string, ctxs ...context.Context) (*http.Response, error)
-}
-
-func (a Service) Call(req interface{}, res interface{}, path string, ctxs ...context.Context) (*http.Response, error) {
+// MakeHTTPPostRequest is a generic method used to make HTTP POST requests
+func (c *Client) MakeHTTPPostRequest(req interface{}, res interface{}, localVarPath string, ctxs ...context.Context) (*http.Response, error) {
 	var (
 		localVarHTTPMethod = http.MethodPost
 		localVarPostBody   interface{}
 	)
 
 	// create path and map variables
-	localVarPath := a.BasePath() + path
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 
@@ -93,12 +88,12 @@ func (a Service) Call(req interface{}, res interface{}, path string, ctxs ...con
 		ctx = ctxs[0]
 	}
 
-	r, err := a.Client.PrepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	r, err := c.PrepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return nil, err
 	}
 
-	localVarHTTPResponse, err := a.Client.CallAPI(r)
+	localVarHTTPResponse, err := c.CallAPI(r)
 	if err != nil || localVarHTTPResponse == nil {
 		return localVarHTTPResponse, err
 	}
@@ -114,7 +109,7 @@ func (a Service) Call(req interface{}, res interface{}, path string, ctxs ...con
 		return localVarHTTPResponse, newErr
 	}
 
-	err = a.Client.Decode(&res, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = c.Decode(&res, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
 		newErr := NewAPIError(localVarBody, err.Error())
 		return localVarHTTPResponse, newErr

@@ -29,7 +29,6 @@ Verifies whether 3D Secure is available for the specified BIN or card brand. For
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ThreeDSAvailabilityResponse
 */
-
 func (a *BinLookup) Get3dsAvailability(request *ThreeDSAvailabilityRequest, ctxs ..._context.Context) (ThreeDSAvailabilityResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod  = _nethttp.MethodPost
