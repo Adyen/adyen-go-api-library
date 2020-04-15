@@ -13,7 +13,7 @@ package payments
 // ModificationResult struct for ModificationResult
 type ModificationResult struct {
 	// This field contains additional data, which may be returned in a particular modification response.
-	AdditionalData *map[string]interface{} `json:"additionalData,omitempty"`
+	AdditionalData interface{} `json:"additionalData,omitempty"`
 	// Adyen's 16-character string reference associated with the transaction/request. This value is globally unique; quote it when communicating with us about this request.
 	PspReference string `json:"pspReference,omitempty"`
 	// Indicates if the modification request has been received for processing.
