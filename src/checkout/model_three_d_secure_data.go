@@ -9,15 +9,16 @@
  */
 
 package checkout
+
 // ThreeDSecureData struct for ThreeDSecureData
 type ThreeDSecureData struct {
-	// In 3D Secure 1, the authentication response if the shopper was redirected.  In 3D Secure 2, this is the `transStatus` from the challenge result. If the transaction was frictionless, set this value to **Y**.
+	// In 3D Secure 1, the authentication response if the shopper was redirected.  In 3D Secure 2, this is the `transStatus` from the challenge result. If the transaction was frictionless, omit this parameter.
 	AuthenticationResponse string `json:"authenticationResponse,omitempty"`
 	// The cardholder authentication value (base64 encoded, 20 bytes in a decoded form).
 	Cavv string `json:"cavv,omitempty"`
 	// The CAVV algorithm used. Include this only for 3D Secure 1.
 	CavvAlgorithm string `json:"cavvAlgorithm,omitempty"`
-	// In 3D Secure 1, this is the enrollment response from the 3D directory server.  In 3D Secure 2, this is the `transStatus` from the `ARes`. The possible values are **A** or **Y** for a frictionless flow, or **C** for a challenge flow.
+	// In 3D Secure 1, this is the enrollment response from the 3D directory server.    In 3D Secure 2, this is the `transStatus` from the `ARes`.
 	DirectoryResponse string `json:"directoryResponse,omitempty"`
 	// Supported for 3D Secure 2. The unique transaction identifier assigned by the Directory Server (DS) to identify a single transaction.
 	DsTransID string `json:"dsTransID,omitempty"`

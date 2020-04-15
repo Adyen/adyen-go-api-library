@@ -9,6 +9,7 @@
  */
 
 package checkout
+
 // ResponseAdditionalDataCard struct for ResponseAdditionalDataCard
 type ResponseAdditionalDataCard struct {
 	// The Bank Identification Number of a credit card, which is the first six digits of a card number.  Example: 521234
@@ -19,7 +20,7 @@ type ResponseAdditionalDataCard struct {
 	CardIssuingBank string `json:"cardIssuingBank,omitempty"`
 	// The country where the card was issued.  Example: US
 	CardIssuingCountry string `json:"cardIssuingCountry,omitempty"`
-	// The currency in which the card is issued, if this information is available.  Example: USD
+	// The currency in which the card is issued, if this information is available. Provided as the currency code or currency number from the ISO-4217 standard.   Example: USD
 	CardIssuingCurrency string `json:"cardIssuingCurrency,omitempty"`
 	// The card payment method used for the transaction.  Example: amex
 	CardPaymentMethod string `json:"cardPaymentMethod,omitempty"`

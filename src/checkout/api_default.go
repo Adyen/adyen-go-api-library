@@ -29,7 +29,7 @@ Creates a payment link to our hosted payment form where shoppers can pay. The li
 */
 func (a Checkout) PaymentLinks(req *CreatePaymentLinkRequest, ctxs ..._context.Context) (CreatePaymentLinkResponse, *_nethttp.Response, error) {
 	res := &CreatePaymentLinkResponse{}
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath() + "/paymentLinks", ctxs...)
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/paymentLinks", ctxs...)
 	return *res, httpRes, err
 }
 
@@ -42,7 +42,7 @@ Queries the available payment methods for a transaction based on the transaction
 */
 func (a Checkout) PaymentMethods(req *PaymentMethodsRequest, ctxs ..._context.Context) (PaymentMethodsResponse, *_nethttp.Response, error) {
 	res := &PaymentMethodsResponse{}
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath() + "/paymentMethods", ctxs...)
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/paymentMethods", ctxs...)
 	return *res, httpRes, err
 }
 
@@ -55,7 +55,7 @@ Provides the data object that can be used to start the Checkout SDK. To set up t
 */
 func (a Checkout) PaymentSession(req *PaymentSetupRequest, ctxs ..._context.Context) (PaymentSetupResponse, *_nethttp.Response, error) {
 	res := &PaymentSetupResponse{}
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath() + "/paymentSession", ctxs...)
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/paymentSession", ctxs...)
 	return *res, httpRes, err
 }
 
@@ -68,7 +68,7 @@ Submits details for a payment created using &#x60;/payments&#x60;. This step is 
 */
 func (a Checkout) PaymentsDetails(req *DetailsRequest, ctxs ..._context.Context) (PaymentResponse, *_nethttp.Response, error) {
 	res := &PaymentResponse{}
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath() + "/payments/details", ctxs...)
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/payments/details", ctxs...)
 	return *res, httpRes, err
 }
 
@@ -81,7 +81,7 @@ Sends payment parameters (like amount, country, and currency) together with the 
 */
 func (a Checkout) Payments(req *PaymentRequest, ctxs ..._context.Context) (PaymentResponse, *_nethttp.Response, error) {
 	res := &PaymentResponse{}
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath() + "/payments", ctxs...)
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/payments", ctxs...)
 	return *res, httpRes, err
 }
 
@@ -94,6 +94,6 @@ Verifies the payment result using the payload returned from the Checkout SDK.  F
 */
 func (a Checkout) PaymentsResult(req *PaymentVerificationRequest, ctxs ..._context.Context) (PaymentVerificationResponse, *_nethttp.Response, error) {
 	res := &PaymentVerificationResponse{}
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath() + "/payments/result", ctxs...)
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/payments/result", ctxs...)
 	return *res, httpRes, err
 }

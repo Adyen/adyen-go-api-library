@@ -9,16 +9,17 @@
  */
 
 package checkout
+
 // CreatePaymentLinkRequest struct for CreatePaymentLinkRequest
 type CreatePaymentLinkRequest struct {
 	// List of payments methods to be presented to the shopper. To refer to payment methods, use their `paymentMethod.type` from [Payment methods overview](https://docs.adyen.com/payment-methods).  Example: `\"allowedPaymentMethods\":[\"ideal\",\"giropay\"]`
 	AllowedPaymentMethods []string `json:"allowedPaymentMethods,omitempty"`
-	Amount Amount `json:"amount"`
-	BillingAddress *Address `json:"billingAddress,omitempty"`
+	Amount                Amount   `json:"amount"`
+	BillingAddress        *Address `json:"billingAddress,omitempty"`
 	// List of payments methods to be hidden from the shopper. To refer to payment methods, use their `paymentMethod.type` from [Payment methods overview](https://docs.adyen.com/payment-methods).  Example: `\"blockedPaymentMethods\":[\"ideal\",\"giropay\"]`
 	BlockedPaymentMethods []string `json:"blockedPaymentMethods,omitempty"`
 	// The shopper's country code.
-	CountryCode string `json:"countryCode"`
+	CountryCode     string   `json:"countryCode"`
 	DeliveryAddress *Address `json:"deliveryAddress,omitempty"`
 	// A short description visible on the Pay By Link page. Maximum length: 280 characters.
 	Description string `json:"description,omitempty"`
@@ -30,12 +31,16 @@ type CreatePaymentLinkRequest struct {
 	Reference string `json:"reference"`
 	// Website URL used for redirection after payment is completed. If provided, a **Continue** button will be shown on the page. If shoppers select the button, they are redirected to the specified URL.
 	ReturnUrl string `json:"returnUrl,omitempty"`
+	// Indicates whether the payment link can be reused for multiple payments. If not provided, this defaults to **false** which means the link can be used for one successful payment only.
+	Reusable bool `json:"reusable,omitempty"`
 	// The shopper's email address. We recommend that you provide this data, as it is used in velocity fraud checks. > For 3D Secure 2 transactions, schemes require the `shopperEmail` for both `deviceChannel` **browser** and **app**.
 	ShopperEmail string `json:"shopperEmail,omitempty"`
 	// The combination of a language code and a country code to specify the language to be used in the payment.
 	ShopperLocale string `json:"shopperLocale,omitempty"`
 	// The shopper's reference to uniquely identify this shopper (e.g. user ID or account ID). > This field is required for recurring payments.
 	ShopperReference string `json:"shopperReference,omitempty"`
+	// The physical store, for which this payment is processed.
+	Store string `json:"store,omitempty"`
 	// When true and `shopperReference` is provided, the payment details will be stored.
 	StorePaymentMethod bool `json:"storePaymentMethod,omitempty"`
 }
