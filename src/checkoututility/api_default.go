@@ -12,11 +12,9 @@ package checkoututility
 
 import (
 	_context "context"
-	_ioutil "io/ioutil"
 	_nethttp "net/http"
-	_neturl "net/url"
 
-	common "github.com/adyen/adyen-go-api-library/src/common"
+	"github.com/adyen/adyen-go-api-library/src/common"
 )
 
 // CheckoutUtility CheckoutUtility service
@@ -29,72 +27,8 @@ This operation takes the origin domains and returns a JSON object containing the
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return CheckoutUtilityResponse
 */
-
-func (a *CheckoutUtility) OriginKeys(request *CheckoutUtilityRequest, ctxs ..._context.Context) (CheckoutUtilityResponse, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod  = _nethttp.MethodPost
-		localVarPostBody    interface{}
-		localVarReturnValue CheckoutUtilityResponse
-	)
-
-	// create path and map variables
-	localVarPath := a.BasePath() + "/originKeys"
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := common.SelectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := common.SelectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	if request != nil {
-		localVarPostBody = request
-	}
-
-	var ctx _context.Context
-	if len(ctxs) == 1 {
-		ctx = ctxs[0]
-	}
-
-	r, err := a.Client.PrepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.Client.CallAPI(r)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := common.NewAPIError(localVarBody, localVarHTTPResponse.Status)
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.Client.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := common.NewAPIError(localVarBody, err.Error())
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
+func (a CheckoutUtility) OriginKeys(req *CheckoutUtilityRequest, ctxs ..._context.Context) (CheckoutUtilityResponse, *_nethttp.Response, error) {
+	res := &CheckoutUtilityResponse{}
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/originKeys", ctxs...)
+	return *res, httpRes, err
 }

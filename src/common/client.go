@@ -15,6 +15,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	_ioutil "io/ioutil"
 	"log"
 	"mime/multipart"
 	"net/http"
@@ -49,7 +50,68 @@ type Client struct {
 	Cfg *Config
 }
 
-// CallAPI do the request.
+// MakeHTTPPostRequest is a generic method used to make HTTP POST requests
+func (c *Client) MakeHTTPPostRequest(req interface{}, res interface{}, path string, ctxs ...context.Context) (*http.Response, error) {
+	httpMethod := http.MethodPost
+
+	// create path and map variables
+	headerParams := make(map[string]string)
+	queryParams := url.Values{}
+
+	// to determine the Content-Type header
+	contentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	contentType := SelectHeaderContentType(contentTypes)
+	if contentType != "" {
+		headerParams["Content-Type"] = contentType
+	}
+
+	// to determine the Accept header
+	headerAccepts := []string{"application/json"}
+
+	// set Accept header
+	headerAccept := SelectHeaderAccept(headerAccepts)
+	if headerAccept != "" {
+		headerParams["Accept"] = headerAccept
+	}
+
+	var ctx context.Context
+	if len(ctxs) > 0 {
+		ctx = ctxs[0]
+	}
+
+	r, err := c.PrepareRequest(ctx, path, httpMethod, req, headerParams, queryParams)
+	if err != nil {
+		return nil, err
+	}
+
+	httpResponse, err := c.CallAPI(r)
+	if err != nil || httpResponse == nil {
+		return httpResponse, err
+	}
+
+	body, err := _ioutil.ReadAll(httpResponse.Body)
+	httpResponse.Body.Close()
+	if err != nil {
+		return httpResponse, err
+	}
+
+	if httpResponse.StatusCode >= 300 {
+		newErr := NewAPIError(body, httpResponse.Status)
+		return httpResponse, newErr
+	}
+
+	err = c.Decode(&res, body, httpResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := NewAPIError(body, err.Error())
+		return httpResponse, newErr
+	}
+
+	return httpResponse, nil
+}
+
+// CallAPI do the Request.
 func (c *Client) CallAPI(request *http.Request) (*http.Response, error) {
 	if c.Cfg.Debug {
 		dump, err := httputil.DumpRequestOut(request, true)
@@ -75,7 +137,7 @@ func (c *Client) CallAPI(request *http.Request) (*http.Response, error) {
 	return resp, err
 }
 
-// PrepareRequest build the request
+// PrepareRequest build the Request
 func (c *Client) PrepareRequest(
 	ctx context.Context,
 	path string, method string,
@@ -116,7 +178,7 @@ func (c *Client) PrepareRequest(
 	// Encode the parameters.
 	url.RawQuery = query.Encode()
 
-	// Generate a new request
+	// Generate a new Request
 	if body != nil {
 		localVarRequest, err = http.NewRequest(method, url.String(), body)
 	} else {
@@ -135,7 +197,7 @@ func (c *Client) PrepareRequest(
 		localVarRequest.Header = headers
 	}
 
-	// Add the user agent to the request.
+	// Add the user agent to the Request.
 	localVarRequest.Header.Add("User-Agent", c.Cfg.UserAgent)
 	localVarRequest.Header.Add("Cache-Control", "no-cache")
 
@@ -147,7 +209,7 @@ func (c *Client) PrepareRequest(
 	}
 
 	if ctx != nil {
-		// add context to the request
+		// add context to the Request
 		localVarRequest = localVarRequest.WithContext(ctx)
 
 		// Walk through any authentication.
@@ -202,7 +264,7 @@ func (c *Client) Decode(v interface{}, b []byte, contentType string) (err error)
 		}
 		return nil
 	}
-	return errors.New("undefined response type")
+	return errors.New("undefined Response type")
 }
 
 func atoi(in string) (int, error) {
@@ -290,7 +352,7 @@ func parameterToJson(obj interface{}) (string, error) {
 	return string(jsonBuf), err
 }
 
-// Add a file to the multipart request
+// Add a file to the multipart Request
 func addFile(w *multipart.Writer, fieldName, path string) error {
 	file, err := os.Open(path)
 	if err != nil {
@@ -312,7 +374,7 @@ func reportError(format string, a ...interface{}) error {
 	return fmt.Errorf(format, a...)
 }
 
-// Set request body from an interface{}
+// Set Request body from an interface{}
 func setBody(body interface{}, contentType string) (bodyBuf *bytes.Buffer, err error) {
 	if bodyBuf == nil {
 		bodyBuf = &bytes.Buffer{}
@@ -343,7 +405,7 @@ func setBody(body interface{}, contentType string) (bodyBuf *bytes.Buffer, err e
 	return bodyBuf, nil
 }
 
-// detectContentType method is used to figure out `Request.Body` content type for request header
+// detectContentType method is used to figure out `Request.Body` content type for Request header
 func detectContentType(body interface{}) string {
 	contentType := "text/plain; charset=utf-8"
 	kind := reflect.TypeOf(body).Kind()
@@ -385,7 +447,7 @@ func parseCacheControl(headers http.Header) cacheControl {
 	return cc
 }
 
-// CacheExpires helper function to determine remaining time before repeating a request.
+// CacheExpires helper function to determine remaining time before repeating a Request.
 func CacheExpires(r *http.Response) time.Time {
 	// Figure out when the cache expires.
 	var expires time.Time

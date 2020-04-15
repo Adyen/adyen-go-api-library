@@ -15,8 +15,8 @@ import (
 	checkoututility "github.com/adyen/adyen-go-api-library/src/checkoututility"
 	common "github.com/adyen/adyen-go-api-library/src/common"
 	notification "github.com/adyen/adyen-go-api-library/src/notification"
-	payment "github.com/adyen/adyen-go-api-library/src/payment"
-	payout "github.com/adyen/adyen-go-api-library/src/payout"
+	payments "github.com/adyen/adyen-go-api-library/src/payments"
+	payouts "github.com/adyen/adyen-go-api-library/src/payouts"
 	recurring "github.com/adyen/adyen-go-api-library/src/recurring"
 )
 
@@ -54,8 +54,8 @@ type APIClient struct {
 	// API Services
 	Checkout        *checkout.Checkout
 	CheckoutUtility *checkoututility.CheckoutUtility
-	Payment         *payment.Payment
-	Payout          *payout.Payout
+	Payments        *payments.Payments
+	Payouts         *payouts.Payouts
 	Recurring       *recurring.Recurring
 	BinLookup       *binlookup.BinLookup
 	Notification    *notification.NotificationService
@@ -156,14 +156,14 @@ func NewClient(cfg *common.Config) *APIClient {
 			return fmt.Sprintf("%s/%s", c.client.Cfg.CheckoutEndpoint, CheckoutUtilityAPIVersion)
 		},
 	}
-	c.Payment = &payment.Payment{
+	c.Payments = &payments.Payments{
 		Client: c.client,
 		BasePath: func() string {
 			return fmt.Sprintf("%s/pal/servlet/Payment/%s", c.client.Cfg.Endpoint, APIVersion)
 		},
 	}
 
-	c.Payout = &payout.Payout{
+	c.Payouts = &payouts.Payouts{
 		Client: c.client,
 		BasePath: func() string {
 			return fmt.Sprintf("%s/pal/servlet/Payout/%s", c.client.Cfg.Endpoint, APIVersion)

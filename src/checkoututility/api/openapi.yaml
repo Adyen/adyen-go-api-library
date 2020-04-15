@@ -48,14 +48,14 @@ paths:
           description: OK - the request has succeeded.
         "400":
           description: Bad Request - a problem reading or understanding the request.
-        "401":
-          description: Unauthorized - authentication required.
-        "403":
-          description: Forbidden - insufficient permissions to process the request.
         "422":
           description: Unprocessable Entity - a request validation error.
+        "401":
+          description: Unauthorized - authentication required.
         "500":
           description: Internal Server Error - the server could not process the request.
+        "403":
+          description: Forbidden - insufficient permissions to process the request.
       summary: Create originKey values for one or more merchant domains.
       x-groupName: General
       x-sortIndex: 0

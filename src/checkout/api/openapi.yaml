@@ -53,14 +53,14 @@ paths:
           description: OK - the request has succeeded.
         "400":
           description: Bad Request - a problem reading or understanding the request.
-        "401":
-          description: Unauthorized - authentication required.
-        "403":
-          description: Forbidden - insufficient permissions to process the request.
         "422":
           description: Unprocessable Entity - a request validation error.
+        "401":
+          description: Unauthorized - authentication required.
         "500":
           description: Internal Server Error - the server could not process the request.
+        "403":
+          description: Forbidden - insufficient permissions to process the request.
       summary: Creates a payment link.
       x-groupName: API Integration
       x-sortIndex: 8
@@ -84,14 +84,14 @@ paths:
           description: OK - the request has succeeded.
         "400":
           description: Bad Request - a problem reading or understanding the request.
-        "401":
-          description: Unauthorized - authentication required.
-        "403":
-          description: Forbidden - insufficient permissions to process the request.
         "422":
           description: Unprocessable Entity - a request validation error.
+        "401":
+          description: Unauthorized - authentication required.
         "500":
           description: Internal Server Error - the server could not process the request.
+        "403":
+          description: Forbidden - insufficient permissions to process the request.
       summary: Returns available payment methods.
       x-groupName: API Integration
       x-sortIndex: 1
@@ -115,14 +115,14 @@ paths:
           description: OK - the request has succeeded.
         "400":
           description: Bad Request - a problem reading or understanding the request.
-        "401":
-          description: Unauthorized - authentication required.
-        "403":
-          description: Forbidden - insufficient permissions to process the request.
         "422":
           description: Unprocessable Entity - a request validation error.
+        "401":
+          description: Unauthorized - authentication required.
         "500":
           description: Internal Server Error - the server could not process the request.
+        "403":
+          description: Forbidden - insufficient permissions to process the request.
       summary: Creates a payment session.
       x-groupName: SDK Integration
       x-sortIndex: 1
@@ -146,14 +146,14 @@ paths:
           description: OK - the request has succeeded.
         "400":
           description: Bad Request - a problem reading or understanding the request.
-        "401":
-          description: Unauthorized - authentication required.
-        "403":
-          description: Forbidden - insufficient permissions to process the request.
         "422":
           description: Unprocessable Entity - a request validation error.
+        "401":
+          description: Unauthorized - authentication required.
         "500":
           description: Internal Server Error - the server could not process the request.
+        "403":
+          description: Forbidden - insufficient permissions to process the request.
       summary: Starts a transaction.
       x-groupName: API Integration
       x-sortIndex: 2
@@ -179,14 +179,14 @@ paths:
           description: OK - the request has succeeded.
         "400":
           description: Bad Request - a problem reading or understanding the request.
-        "401":
-          description: Unauthorized - authentication required.
-        "403":
-          description: Forbidden - insufficient permissions to process the request.
         "422":
           description: Unprocessable Entity - a request validation error.
+        "401":
+          description: Unauthorized - authentication required.
         "500":
           description: Internal Server Error - the server could not process the request.
+        "403":
+          description: Forbidden - insufficient permissions to process the request.
       summary: Submits details for a payment.
       x-groupName: API Integration
       x-sortIndex: 3
@@ -210,14 +210,14 @@ paths:
           description: OK - the request has succeeded.
         "400":
           description: Bad Request - a problem reading or understanding the request.
-        "401":
-          description: Unauthorized - authentication required.
-        "403":
-          description: Forbidden - insufficient permissions to process the request.
         "422":
           description: Unprocessable Entity - a request validation error.
+        "401":
+          description: Unauthorized - authentication required.
         "500":
           description: Internal Server Error - the server could not process the request.
+        "403":
+          description: Forbidden - insufficient permissions to process the request.
       summary: Verifies payment result.
       x-groupName: SDK Integration
       x-sortIndex: 2
@@ -456,12 +456,9 @@ components:
           description: In case of Secure+, this field must be set to **CUPSecurePlus**.
           type: string
         scaExemption:
-          description: |-
-            Indicates the [exemption type](https://docs-admin.is.adyen.com/payments-fundamentals/psd2-sca-compliance-and-implementation-guide#specifypreferenceinyourapirequest) that you want to request for the transaction. Possible values:
-            * **lowValue**
-            * **secureCorporate**
-            * **trustedBeneficiary**
-            * **transactionRiskAnalysis**
+          description: "Indicates the [exemption type](https://docs-admin.is.adyen.com/payments-fundamentals/psd2-sca-compliance-and-implementation-guide#specifypreferenceinyourapirequest)\
+            \ that you want to request for the transaction. Possible values:\n* **lowValue**\
+            \ \n* **secureCorporate** \n* **trustedBeneficiary** \n* **transactionRiskAnalysis** "
           type: string
     AdditionalDataAirline:
       properties:
@@ -1660,10 +1657,9 @@ components:
             Example: US
           type: string
         cardIssuingCurrency:
-          description: |-
-            The currency in which the card is issued, if this information is available.
-
-            Example: USD
+          description: "The currency in which the card is issued, if this information\
+            \ is available. Provided as the currency code or currency number from\
+            \ the ISO-4217 standard. \n\nExample: USD"
           type: string
         cardPaymentMethod:
           description: |-
@@ -2318,10 +2314,12 @@ components:
           value: 0
         description: description
         shopperEmail: shopperEmail
+        store: store
         allowedPaymentMethods:
         - allowedPaymentMethods
         - allowedPaymentMethods
         expiresAt: expiresAt
+        reusable: true
         reference: reference
         storePaymentMethod: true
         merchantAccount: merchantAccount
@@ -2398,6 +2396,11 @@ components:
             Website URL used for redirection after payment is completed.
             If provided, a **Continue** button will be shown on the page. If shoppers select the button, they are redirected to the specified URL.
           type: string
+        reusable:
+          description: Indicates whether the payment link can be reused for multiple
+            payments. If not provided, this defaults to **false** which means the
+            link can be used for one successful payment only.
+          type: boolean
         shopperEmail:
           description: |-
             The shopper's email address. We recommend that you provide this data, as it is used in velocity fraud checks.
@@ -2411,6 +2414,9 @@ components:
           description: |-
             The shopper's reference to uniquely identify this shopper (e.g. user ID or account ID).
             > This field is required for recurring payments.
+          type: string
+        store:
+          description: The physical store, for which this payment is processed.
           type: string
         storePaymentMethod:
           description: When true and `shopperReference` is provided, the payment details
@@ -5142,7 +5148,7 @@ components:
         returnUrl:
           description: |-
             The URL to return to in case of a redirection.
-            The format depends on the channel.
+            The format depends on the channel. This URL can have a maximum of 1024 characters.
             * For web, include the protocol `http://` or `https://`. You can also include your own additional query parameters, for example, shopper ID or order reference number.
             Example: `https://your-company.com/checkout?shopperOrder=12xy`
             * For iOS, use the custom URL for your app. To know more about setting custom URL schemes, refer to the [Apple Developer documentation](https://developer.apple.com/documentation/uikit/inter-process_communication/allowing_apps_and_websites_to_link_to_your_content/defining_a_custom_url_scheme_for_your_app).
@@ -5830,7 +5836,7 @@ components:
         returnUrl:
           description: |-
             The URL to return to in case of a redirection.
-            The format depends on the channel.
+            The format depends on the channel. This URL can have a maximum of 1024 characters.
             * For web, include the protocol `http://` or `https://`. You can also include your own additional query parameters, for example, shopper ID or order reference number.
             Example: `https://your-company.com/checkout?shopperOrder=12xy`
             * For iOS, use the custom URL for your app. To know more about setting custom URL schemes, refer to the [Apple Developer documentation](https://developer.apple.com/documentation/uikit/inter-process_communication/allowing_apps_and_websites_to_link_to_your_content/defining_a_custom_url_scheme_for_your_app).
@@ -7334,7 +7340,7 @@ components:
           description: |-
             In 3D Secure 1, the authentication response if the shopper was redirected.
 
-            In 3D Secure 2, this is the `transStatus` from the challenge result. If the transaction was frictionless, set this value to **Y**.
+            In 3D Secure 2, this is the `transStatus` from the challenge result. If the transaction was frictionless, omit this parameter.
           enum:
           - "Y"
           - "N"
@@ -7353,7 +7359,9 @@ components:
           description: |-
             In 3D Secure 1, this is the enrollment response from the 3D directory server.
 
-            In 3D Secure 2, this is the `transStatus` from the `ARes`. The possible values are **A** or **Y** for a frictionless flow, or **C** for a challenge flow.
+
+
+            In 3D Secure 2, this is the `transStatus` from the `ARes`.
           enum:
           - A
           - C

@@ -12,11 +12,9 @@ package recurring
 
 import (
 	_context "context"
-	_ioutil "io/ioutil"
 	_nethttp "net/http"
-	_neturl "net/url"
 
-	common "github.com/adyen/adyen-go-api-library/src/common"
+	"github.com/adyen/adyen-go-api-library/src/common"
 )
 
 // Recurring Recurring service
@@ -29,74 +27,10 @@ Disables stored payment details to stop charging a shopper with this particular 
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return DisableResult
 */
-
-func (a *Recurring) Disable(request *DisableRequest, ctxs ..._context.Context) (DisableResult, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod  = _nethttp.MethodPost
-		localVarPostBody    interface{}
-		localVarReturnValue DisableResult
-	)
-
-	// create path and map variables
-	localVarPath := a.BasePath() + "/disable"
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := common.SelectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := common.SelectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	if request != nil {
-		localVarPostBody = request
-	}
-
-	var ctx _context.Context
-	if len(ctxs) == 1 {
-		ctx = ctxs[0]
-	}
-
-	r, err := a.Client.PrepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.Client.CallAPI(r)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := common.NewAPIError(localVarBody, localVarHTTPResponse.Status)
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.Client.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := common.NewAPIError(localVarBody, err.Error())
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
+func (a Recurring) Disable(req *DisableRequest, ctxs ..._context.Context) (DisableResult, *_nethttp.Response, error) {
+	res := &DisableResult{}
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/disable", ctxs...)
+	return *res, httpRes, err
 }
 
 /*
@@ -106,74 +40,10 @@ Lists the stored payment details for a shopper, if there are any available. The 
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return RecurringDetailsResult
 */
-
-func (a *Recurring) ListRecurringDetails(request *RecurringDetailsRequest, ctxs ..._context.Context) (RecurringDetailsResult, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod  = _nethttp.MethodPost
-		localVarPostBody    interface{}
-		localVarReturnValue RecurringDetailsResult
-	)
-
-	// create path and map variables
-	localVarPath := a.BasePath() + "/listRecurringDetails"
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := common.SelectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := common.SelectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	if request != nil {
-		localVarPostBody = request
-	}
-
-	var ctx _context.Context
-	if len(ctxs) == 1 {
-		ctx = ctxs[0]
-	}
-
-	r, err := a.Client.PrepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.Client.CallAPI(r)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := common.NewAPIError(localVarBody, localVarHTTPResponse.Status)
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.Client.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := common.NewAPIError(localVarBody, err.Error())
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
+func (a Recurring) ListRecurringDetails(req *RecurringDetailsRequest, ctxs ..._context.Context) (RecurringDetailsResult, *_nethttp.Response, error) {
+	res := &RecurringDetailsResult{}
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/listRecurringDetails", ctxs...)
+	return *res, httpRes, err
 }
 
 /*
@@ -183,72 +53,8 @@ When making the API call, you can submit either the credit card information, or 
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ScheduleAccountUpdaterResult
 */
-
-func (a *Recurring) ScheduleAccountUpdater(request *ScheduleAccountUpdaterRequest, ctxs ..._context.Context) (ScheduleAccountUpdaterResult, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod  = _nethttp.MethodPost
-		localVarPostBody    interface{}
-		localVarReturnValue ScheduleAccountUpdaterResult
-	)
-
-	// create path and map variables
-	localVarPath := a.BasePath() + "/scheduleAccountUpdater"
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := common.SelectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := common.SelectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	if request != nil {
-		localVarPostBody = request
-	}
-
-	var ctx _context.Context
-	if len(ctxs) == 1 {
-		ctx = ctxs[0]
-	}
-
-	r, err := a.Client.PrepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.Client.CallAPI(r)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := common.NewAPIError(localVarBody, localVarHTTPResponse.Status)
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.Client.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := common.NewAPIError(localVarBody, err.Error())
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
+func (a Recurring) ScheduleAccountUpdater(req *ScheduleAccountUpdaterRequest, ctxs ..._context.Context) (ScheduleAccountUpdaterResult, *_nethttp.Response, error) {
+	res := &ScheduleAccountUpdaterResult{}
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/scheduleAccountUpdater", ctxs...)
+	return *res, httpRes, err
 }
