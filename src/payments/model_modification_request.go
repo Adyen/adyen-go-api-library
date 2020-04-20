@@ -18,6 +18,7 @@ type ModificationRequest struct {
 	MerchantAccount    string            `json:"merchantAccount"`
 	ModificationAmount *Amount           `json:"modificationAmount,omitempty"`
 	MpiData            *ThreeDSecureData `json:"mpiData,omitempty"`
+	ApplicationInfo    *ApplicationInfo  `json:"applicationInfo,omitempty"`
 	// The original merchant reference to cancel.
 	OriginalMerchantReference string `json:"originalMerchantReference,omitempty"`
 	// The original pspReference of the payment to modify. This reference is returned in: * authorisation response * authorisation notification
