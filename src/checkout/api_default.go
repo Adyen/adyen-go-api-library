@@ -86,10 +86,9 @@ func (a Checkout) Payments(req *PaymentRequest, ctxs ..._context.Context) (Payme
 		Version: common.LibVersion,
 	}
 	if req.ApplicationInfo == nil {
-		req.ApplicationInfo = &ApplicationInfo{AdyenLibrary: adyenLib}
-	} else if req.ApplicationInfo.AdyenLibrary == nil {
-		req.ApplicationInfo.AdyenLibrary = adyenLib
+		req.ApplicationInfo = &ApplicationInfo{}
 	}
+	req.ApplicationInfo.AdyenLibrary = adyenLib
 	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/payments", ctxs...)
 	return *res, httpRes, err
 }

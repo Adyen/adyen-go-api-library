@@ -186,10 +186,12 @@ func Test_Checkout(t *testing.T) {
 						Name:    "test",
 						Version: "v50",
 					},
+					AdyenLibrary: &checkout.CommonField{
+						Name:    "test",
+						Version: "v50",
+					},
 				},
 			}
-
-			require.Nil(t, req.ApplicationInfo.AdyenLibrary)
 
 			res, httpRes, err := client.Checkout.Payments(req)
 

@@ -27,10 +27,9 @@ var adyenLib = &CommonField{
 
 func setModificationRequestApplicationInfo(req *ModificationRequest) {
 	if req.ApplicationInfo == nil {
-		req.ApplicationInfo = &ApplicationInfo{AdyenLibrary: adyenLib}
-	} else if req.ApplicationInfo.AdyenLibrary == nil {
-		req.ApplicationInfo.AdyenLibrary = adyenLib
+		req.ApplicationInfo = &ApplicationInfo{}
 	}
+	req.ApplicationInfo.AdyenLibrary = adyenLib
 }
 
 /*
@@ -57,10 +56,9 @@ For an authenticated 3D Secure session, completes the payment authorisation. Thi
 func (a Payments) Authorise3d(req *PaymentRequest3d, ctxs ..._context.Context) (PaymentResult, *_nethttp.Response, error) {
 	res := &PaymentResult{}
 	if req.ApplicationInfo == nil {
-		req.ApplicationInfo = &ApplicationInfo{AdyenLibrary: adyenLib}
-	} else if req.ApplicationInfo.AdyenLibrary == nil {
-		req.ApplicationInfo.AdyenLibrary = adyenLib
+		req.ApplicationInfo = &ApplicationInfo{}
 	}
+	req.ApplicationInfo.AdyenLibrary = adyenLib
 	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/authorise3d", ctxs...)
 	return *res, httpRes, err
 }
@@ -75,10 +73,9 @@ For an authenticated 3D Secure 2 session, completes the payment authorisation. T
 func (a Payments) Authorise3ds2(req *PaymentRequest3ds2, ctxs ..._context.Context) (PaymentResult, *_nethttp.Response, error) {
 	res := &PaymentResult{}
 	if req.ApplicationInfo == nil {
-		req.ApplicationInfo = &ApplicationInfo{AdyenLibrary: adyenLib}
-	} else if req.ApplicationInfo.AdyenLibrary == nil {
-		req.ApplicationInfo.AdyenLibrary = adyenLib
+		req.ApplicationInfo = &ApplicationInfo{}
 	}
+	req.ApplicationInfo.AdyenLibrary = adyenLib
 	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/authorise3ds2", ctxs...)
 	return *res, httpRes, err
 }
@@ -93,10 +90,9 @@ Creates a payment with a unique reference (&#x60;pspReference&#x60;) and attempt
 func (a Payments) Authorise(req *PaymentRequest, ctxs ..._context.Context) (PaymentResult, *_nethttp.Response, error) {
 	res := &PaymentResult{}
 	if req.ApplicationInfo == nil {
-		req.ApplicationInfo = &ApplicationInfo{AdyenLibrary: adyenLib}
-	} else if req.ApplicationInfo.AdyenLibrary == nil {
-		req.ApplicationInfo.AdyenLibrary = adyenLib
+		req.ApplicationInfo = &ApplicationInfo{}
 	}
+	req.ApplicationInfo.AdyenLibrary = adyenLib
 	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/authorise", ctxs...)
 	return *res, httpRes, err
 }
