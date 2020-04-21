@@ -59,6 +59,11 @@ const (
 	LiveEnv Environment = "LIVE"
 )
 
+const (
+	LibName    = "adyen-go-api-library"
+	LibVersion = "0.0.1"
+)
+
 // Config stores the configuration of the API client
 type Config struct {
 	Username          string      `json:"username,omitempty"`

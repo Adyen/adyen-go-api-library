@@ -43,8 +43,6 @@ const (
 	TerminalAPIEndpointTest         = "https://terminal-api-test.adyen.com"
 	TerminalAPIEndpointLive         = "https://terminal-api-live.adyen.com"
 	EndpointProtocol                = "https://"
-	LibName                         = "adyen-go-api-library"
-	LibVersion                      = "0.0.1"
 )
 
 // APIClient manages communication with the Adyen Checkout API API v51
@@ -132,7 +130,7 @@ func NewClient(cfg *common.Config) *APIClient {
 		cfg.DefaultHeader = make(map[string]string)
 	}
 	if cfg.UserAgent == "" {
-		cfg.UserAgent = fmt.Sprintf("%s %s/%s", cfg.ApplicationName, LibName, LibVersion)
+		cfg.UserAgent = fmt.Sprintf("%s %s/%s", cfg.ApplicationName, common.LibName, common.LibVersion)
 	}
 
 	c := &APIClient{}

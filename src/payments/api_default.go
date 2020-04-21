@@ -20,6 +20,18 @@ import (
 // Payments Payments service
 type Payments common.Service
 
+var adyenLib = &CommonField{
+	Name:    common.LibName,
+	Version: common.LibVersion,
+}
+
+func setModificationRequestApplicationInfo(req *ModificationRequest) {
+	if req.ApplicationInfo == nil {
+		req.ApplicationInfo = &ApplicationInfo{}
+	}
+	req.ApplicationInfo.AdyenLibrary = adyenLib
+}
+
 /*
 AdjustAuthorisation Increases or decreases the authorised amount.
 Allows you to increase or decrease the authorised amount after the initial authorisation has taken place. This functionality enables tipping, improving the chances your authorisation will be valid, charging the shopper when they have already left the merchant premises, etc.  For more information, refer to [Adjust Authorisation](https://docs.adyen.com/checkout/adjust-authorisation).
@@ -29,6 +41,7 @@ Allows you to increase or decrease the authorised amount after the initial autho
 */
 func (a Payments) AdjustAuthorisation(req *ModificationRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
 	res := &ModificationResult{}
+	setModificationRequestApplicationInfo(req)
 	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/adjustAuthorisation", ctxs...)
 	return *res, httpRes, err
 }
@@ -42,6 +55,10 @@ For an authenticated 3D Secure session, completes the payment authorisation. Thi
 */
 func (a Payments) Authorise3d(req *PaymentRequest3d, ctxs ..._context.Context) (PaymentResult, *_nethttp.Response, error) {
 	res := &PaymentResult{}
+	if req.ApplicationInfo == nil {
+		req.ApplicationInfo = &ApplicationInfo{}
+	}
+	req.ApplicationInfo.AdyenLibrary = adyenLib
 	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/authorise3d", ctxs...)
 	return *res, httpRes, err
 }
@@ -55,6 +72,10 @@ For an authenticated 3D Secure 2 session, completes the payment authorisation. T
 */
 func (a Payments) Authorise3ds2(req *PaymentRequest3ds2, ctxs ..._context.Context) (PaymentResult, *_nethttp.Response, error) {
 	res := &PaymentResult{}
+	if req.ApplicationInfo == nil {
+		req.ApplicationInfo = &ApplicationInfo{}
+	}
+	req.ApplicationInfo.AdyenLibrary = adyenLib
 	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/authorise3ds2", ctxs...)
 	return *res, httpRes, err
 }
@@ -68,6 +89,10 @@ Creates a payment with a unique reference (&#x60;pspReference&#x60;) and attempt
 */
 func (a Payments) Authorise(req *PaymentRequest, ctxs ..._context.Context) (PaymentResult, *_nethttp.Response, error) {
 	res := &PaymentResult{}
+	if req.ApplicationInfo == nil {
+		req.ApplicationInfo = &ApplicationInfo{}
+	}
+	req.ApplicationInfo.AdyenLibrary = adyenLib
 	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/authorise", ctxs...)
 	return *res, httpRes, err
 }
@@ -81,6 +106,7 @@ Cancels a payment if it has not been captured yet, or refunds it if it has alrea
 */
 func (a Payments) CancelOrRefund(req *ModificationRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
 	res := &ModificationResult{}
+	setModificationRequestApplicationInfo(req)
 	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/cancelOrRefund", ctxs...)
 	return *res, httpRes, err
 }
@@ -94,6 +120,7 @@ Cancels the authorisation hold on a payment, returning a unique reference for th
 */
 func (a Payments) Cancel(req *ModificationRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
 	res := &ModificationResult{}
+	setModificationRequestApplicationInfo(req)
 	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/cancel", ctxs...)
 	return *res, httpRes, err
 }
@@ -107,6 +134,7 @@ Captures the authorisation hold on a payment, returning a unique reference for t
 */
 func (a Payments) Capture(req *ModificationRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
 	res := &ModificationResult{}
+	setModificationRequestApplicationInfo(req)
 	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/capture", ctxs...)
 	return *res, httpRes, err
 }
@@ -133,6 +161,7 @@ Refunds a payment that has previously been captured, returning a unique referenc
 */
 func (a Payments) Refund(req *ModificationRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
 	res := &ModificationResult{}
+	setModificationRequestApplicationInfo(req)
 	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/refund", ctxs...)
 	return *res, httpRes, err
 }
@@ -159,6 +188,7 @@ This endpoint allows you to cancel a payment if you do not have the PSP referenc
 */
 func (a Payments) TechnicalCancel(req *ModificationRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
 	res := &ModificationResult{}
+	setModificationRequestApplicationInfo(req)
 	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/technicalCancel", ctxs...)
 	return *res, httpRes, err
 }
@@ -172,6 +202,7 @@ This endpoint allows you to cancel the refund request before it has been complet
 */
 func (a Payments) VoidPendingRefund(req *ModificationRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
 	res := &ModificationResult{}
+	setModificationRequestApplicationInfo(req)
 	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/voidPendingRefund", ctxs...)
 	return *res, httpRes, err
 }

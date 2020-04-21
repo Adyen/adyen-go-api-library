@@ -81,6 +81,14 @@ Sends payment parameters (like amount, country, and currency) together with the 
 */
 func (a Checkout) Payments(req *PaymentRequest, ctxs ..._context.Context) (PaymentResponse, *_nethttp.Response, error) {
 	res := &PaymentResponse{}
+	adyenLib := &CommonField{
+		Name:    common.LibName,
+		Version: common.LibVersion,
+	}
+	if req.ApplicationInfo == nil {
+		req.ApplicationInfo = &ApplicationInfo{}
+	}
+	req.ApplicationInfo.AdyenLibrary = adyenLib
 	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/payments", ctxs...)
 	return *res, httpRes, err
 }
