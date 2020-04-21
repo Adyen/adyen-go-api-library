@@ -129,7 +129,7 @@ func Test_Checkout(t *testing.T) {
 		})
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 
-			res, httpRes, err := client.Checkout.Payments(&checkout.PaymentRequest{
+			req := &checkout.PaymentRequest{
 				Reference: "123456781235",
 				Amount: checkout.Amount{
 					Value:    1250,
@@ -143,7 +143,11 @@ func Test_Checkout(t *testing.T) {
 					"type":   "ideal",
 					"issuer": "1121",
 				},
-			})
+			}
+
+			require.Nil(t, req.ApplicationInfo)
+
+			res, httpRes, err := client.Checkout.Payments(req)
 
 			require.Nil(t, err)
 			require.NotNil(t, httpRes)
@@ -154,6 +158,12 @@ func Test_Checkout(t *testing.T) {
 			require.NotNil(t, res.Action)
 			assert.Equal(t, "ideal", res.Action.PaymentMethodType)
 			require.NotNil(t, res.PaymentData)
+
+			// check if req has ApplicationInfo added to it
+			require.NotNil(t, req.ApplicationInfo)
+			require.NotNil(t, req.ApplicationInfo.AdyenLibrary)
+			require.Equal(t, common.LibName, req.ApplicationInfo.AdyenLibrary.Name)
+			require.Equal(t, common.LibVersion, req.ApplicationInfo.AdyenLibrary.Version)
 		})
 	})
 

@@ -62,6 +62,14 @@ func Test_Payment(t *testing.T) {
 		require.NotNil(t, res)
 	}
 
+	assertForApplicationInfo := func(req *payments.ModificationRequest) {
+		// check if req has ApplicationInfo added to it
+		require.NotNil(t, req.ApplicationInfo)
+		require.NotNil(t, req.ApplicationInfo.AdyenLibrary)
+		require.Equal(t, common.LibName, req.ApplicationInfo.AdyenLibrary.Name)
+		require.Equal(t, common.LibVersion, req.ApplicationInfo.AdyenLibrary.Version)
+	}
+
 	authorisePost := func() (payments.PaymentResult, *http.Response, error) {
 		return client.Payments.Authorise(&payments.PaymentRequest{
 			Card:            &card,
@@ -108,7 +116,7 @@ func Test_Payment(t *testing.T) {
 	t.Run("Modifications", func(t *testing.T) {
 		t.Run("AdjustAuthorisation", func(t *testing.T) {
 			authRes, _, _ := authorisePost()
-			res, httpRes, err := client.Payments.AdjustAuthorisation(&payments.ModificationRequest{
+			req := &payments.ModificationRequest{
 				OriginalReference: authRes.PspReference,
 				ModificationAmount: &payments.Amount{
 					Currency: "EUR",
@@ -116,36 +124,45 @@ func Test_Payment(t *testing.T) {
 				},
 				Reference:       time.Now().String(),
 				MerchantAccount: MerchantAccount,
-			})
+			}
+			require.Nil(t, req.ApplicationInfo)
+			res, httpRes, err := client.Payments.AdjustAuthorisation(req)
 			assertForSuccessResponse(res, httpRes, err)
 			assert.Equal(t, "[adjustAuthorisation-received]", res.Response)
+			assertForApplicationInfo(req)
 		})
 
 		t.Run("CancelOrRefund", func(t *testing.T) {
 			authRes, _, _ := authorisePost()
-			res, httpRes, err := client.Payments.CancelOrRefund(&payments.ModificationRequest{
+			req := &payments.ModificationRequest{
 				OriginalReference: authRes.PspReference,
 				Reference:         time.Now().String(),
 				MerchantAccount:   MerchantAccount,
-			})
+			}
+			require.Nil(t, req.ApplicationInfo)
+			res, httpRes, err := client.Payments.CancelOrRefund(req)
 			assertForSuccessResponse(res, httpRes, err)
 			assert.Equal(t, "[cancelOrRefund-received]", res.Response)
+			assertForApplicationInfo(req)
 		})
 
 		t.Run("Cancel", func(t *testing.T) {
 			authRes, _, _ := authorisePost()
-			res, httpRes, err := client.Payments.Cancel(&payments.ModificationRequest{
+			req := &payments.ModificationRequest{
 				OriginalReference: authRes.PspReference,
 				Reference:         time.Now().String(),
 				MerchantAccount:   MerchantAccount,
-			})
+			}
+			require.Nil(t, req.ApplicationInfo)
+			res, httpRes, err := client.Payments.Cancel(req)
 			assertForSuccessResponse(res, httpRes, err)
 			assert.Equal(t, "[cancel-received]", res.Response)
+			assertForApplicationInfo(req)
 		})
 
 		t.Run("Capture", func(t *testing.T) {
 			authRes, _, _ := authorisePost()
-			res, httpRes, err := client.Payments.Capture(&payments.ModificationRequest{
+			req := &payments.ModificationRequest{
 				OriginalReference: authRes.PspReference,
 				ModificationAmount: &payments.Amount{
 					Currency: "EUR",
@@ -153,14 +170,17 @@ func Test_Payment(t *testing.T) {
 				},
 				Reference:       time.Now().String(),
 				MerchantAccount: MerchantAccount,
-			})
+			}
+			require.Nil(t, req.ApplicationInfo)
+			res, httpRes, err := client.Payments.Capture(req)
 			assertForSuccessResponse(res, httpRes, err)
 			assert.Equal(t, "[capture-received]", res.Response)
+			assertForApplicationInfo(req)
 		})
 
 		t.Run("Refund", func(t *testing.T) {
 			authRes, _, _ := authorisePost()
-			res, httpRes, err := client.Payments.Refund(&payments.ModificationRequest{
+			req := &payments.ModificationRequest{
 				OriginalReference: authRes.PspReference,
 				ModificationAmount: &payments.Amount{
 					Currency: "EUR",
@@ -168,31 +188,40 @@ func Test_Payment(t *testing.T) {
 				},
 				Reference:       time.Now().String(),
 				MerchantAccount: MerchantAccount,
-			})
+			}
+			require.Nil(t, req.ApplicationInfo)
+			res, httpRes, err := client.Payments.Refund(req)
 			assertForSuccessResponse(res, httpRes, err)
 			assert.Equal(t, "[refund-received]", res.Response)
+			assertForApplicationInfo(req)
 		})
 
 		t.Run("TechnicalCancel", func(t *testing.T) {
 			authRes, _, _ := authorisePost()
-			res, httpRes, err := client.Payments.TechnicalCancel(&payments.ModificationRequest{
+			req := &payments.ModificationRequest{
 				OriginalReference: authRes.PspReference,
 				Reference:         time.Now().String(),
 				MerchantAccount:   MerchantAccount,
-			})
+			}
+			require.Nil(t, req.ApplicationInfo)
+			res, httpRes, err := client.Payments.TechnicalCancel(req)
 			assertForSuccessResponse(res, httpRes, err)
 			assert.Equal(t, "[technical-cancel-received]", res.Response)
+			assertForApplicationInfo(req)
 		})
 
 		t.Run("VoidPendingRefund", func(t *testing.T) {
 			authRes, _, _ := authorisePost()
-			res, httpRes, err := client.Payments.VoidPendingRefund(&payments.ModificationRequest{
+			req := &payments.ModificationRequest{
 				OriginalReference: authRes.PspReference,
 				Reference:         time.Now().String(),
 				MerchantAccount:   MerchantAccount,
-			})
+			}
+			require.Nil(t, req.ApplicationInfo)
+			res, httpRes, err := client.Payments.VoidPendingRefund(req)
 			assertForSuccessResponse(res, httpRes, err)
 			assert.Equal(t, "[voidPendingRefund-received]", res.Response)
+			assertForApplicationInfo(req)
 		})
 	})
 }
