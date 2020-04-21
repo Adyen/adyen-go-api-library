@@ -165,6 +165,52 @@ func Test_Checkout(t *testing.T) {
 			require.Equal(t, common.LibName, req.ApplicationInfo.AdyenLibrary.Name)
 			require.Equal(t, common.LibVersion, req.ApplicationInfo.AdyenLibrary.Version)
 		})
+		t.Run("Create an API request that should merge ApplicationInfo", func(t *testing.T) {
+
+			req := &checkout.PaymentRequest{
+				Reference: "123456781235",
+				Amount: checkout.Amount{
+					Value:    1250,
+					Currency: "EUR",
+				},
+				CountryCode:     "NL",
+				MerchantAccount: MerchantAccount,
+				Channel:         "Web",
+				ReturnUrl:       "http://localhost:3000/redirect",
+				PaymentMethod: map[string]interface{}{
+					"type":   "ideal",
+					"issuer": "1121",
+				},
+				ApplicationInfo: &checkout.ApplicationInfo{
+					AdyenPaymentSource: &checkout.CommonField{
+						Name:    "test",
+						Version: "v50",
+					},
+				},
+			}
+
+			require.Nil(t, req.ApplicationInfo.AdyenLibrary)
+
+			res, httpRes, err := client.Checkout.Payments(req)
+
+			require.Nil(t, err)
+			require.NotNil(t, httpRes)
+			assert.Equal(t, 200, httpRes.StatusCode)
+			assert.Equal(t, "200 OK", httpRes.Status)
+			require.NotNil(t, res)
+			assert.Equal(t, "RedirectShopper", res.ResultCode)
+			require.NotNil(t, res.Action)
+			assert.Equal(t, "ideal", res.Action.PaymentMethodType)
+			require.NotNil(t, res.PaymentData)
+
+			// check if req has ApplicationInfo added to it
+			require.NotNil(t, req.ApplicationInfo)
+			require.NotNil(t, req.ApplicationInfo.AdyenLibrary)
+			require.Equal(t, common.LibName, req.ApplicationInfo.AdyenLibrary.Name)
+			require.Equal(t, common.LibVersion, req.ApplicationInfo.AdyenLibrary.Version)
+			require.Equal(t, "test", req.ApplicationInfo.AdyenPaymentSource.Name)
+			require.Equal(t, "v50", req.ApplicationInfo.AdyenPaymentSource.Version)
+		})
 	})
 
 	t.Run("PaymentDetails", func(t *testing.T) {
