@@ -12,7 +12,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/adyen/adyen-go-api-library/src/api"
+	"github.com/adyen/adyen-go-api-library/src/adyen"
 	"github.com/adyen/adyen-go-api-library/src/checkout"
 	"github.com/adyen/adyen-go-api-library/src/common"
 	"github.com/adyen/adyen-go-api-library/src/payouts"
@@ -32,15 +32,15 @@ func Test_Payout(t *testing.T) {
 		MerchantAccount = os.Getenv("ADYEN_MERCHANT")
 	)
 
-	client := api.NewClient(&common.Config{
+	client := adyen.NewClient(&common.Config{
 		ApiKey:      APIKey,
 		Environment: "TEST",
 	})
-	clientStore := api.NewClient(&common.Config{
+	clientStore := adyen.NewClient(&common.Config{
 		ApiKey:      StoreAPIKey,
 		Environment: "TEST",
 	})
-	clientReview := api.NewClient(&common.Config{
+	clientReview := adyen.NewClient(&common.Config{
 		ApiKey:      ReviewAPIKey,
 		Environment: "TEST",
 	})

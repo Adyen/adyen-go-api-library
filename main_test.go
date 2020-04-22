@@ -9,7 +9,7 @@ package main
 import (
 	"testing"
 
-	"github.com/adyen/adyen-go-api-library/src/api"
+	"github.com/adyen/adyen-go-api-library/src/adyen"
 	"github.com/adyen/adyen-go-api-library/src/checkout"
 	"github.com/adyen/adyen-go-api-library/src/common"
 
@@ -20,7 +20,7 @@ import (
 func Test_main(t *testing.T) {
 	t.Run("Create a new APIClient", func(t *testing.T) {
 
-		client := api.NewClient(&common.Config{
+		client := adyen.NewClient(&common.Config{
 			Environment: "TEST",
 		})
 		require.NotNil(t, client)
