@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	adyen "github.com/adyen/adyen-go-api-library/src/api"
+	"github.com/adyen/adyen-go-api-library/src/adyen"
 	"github.com/adyen/adyen-go-api-library/src/common"
 	"github.com/adyen/adyen-go-api-library/src/notification"
 )

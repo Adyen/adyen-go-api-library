@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/adyen/adyen-go-api-library/src/api"
+	"github.com/adyen/adyen-go-api-library/src/adyen"
 	"github.com/adyen/adyen-go-api-library/src/common"
 	"github.com/adyen/adyen-go-api-library/src/payments"
 	"github.com/joho/godotenv"
@@ -48,7 +48,7 @@ func Test_Payment(t *testing.T) {
 	//    UserAgent:         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36",
 	//}
 
-	client := api.NewClient(&common.Config{
+	client := adyen.NewClient(&common.Config{
 		ApiKey:      APIKey,
 		Environment: "TEST",
 	})
