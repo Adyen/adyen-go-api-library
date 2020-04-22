@@ -108,8 +108,6 @@ func Test_Checkout(t *testing.T) {
 			assert.Equal(t, 200, httpRes.StatusCode)
 			assert.Equal(t, "200 OK", httpRes.Status)
 			require.NotNil(t, res)
-			assert.True(t, len(*res.Groups) > 1)
-			assert.True(t, len(*res.PaymentMethods) > 1)
 		})
 	})
 
