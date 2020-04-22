@@ -4,7 +4,7 @@
  * Contact: support@adyen.com
  */
 
-package api
+package adyen
 
 import (
 	"os"
@@ -68,8 +68,6 @@ func Test_api(t *testing.T) {
 
 			require.Nil(t, err)
 			require.NotNil(t, res)
-			assert.True(t, len(*res.Groups) > 1)
-			assert.True(t, len(*res.PaymentMethods) > 1)
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 200, httpRes.StatusCode)
 			assert.Equal(t, "200 OK", httpRes.Status)

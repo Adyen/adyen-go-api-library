@@ -10,7 +10,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/adyen/adyen-go-api-library/src/api"
+	"github.com/adyen/adyen-go-api-library/src/adyen"
 	"github.com/adyen/adyen-go-api-library/src/binlookup"
 	"github.com/adyen/adyen-go-api-library/src/common"
 	"github.com/joho/godotenv"
@@ -26,7 +26,7 @@ func Test_Binlookup(t *testing.T) {
 		APIKey          = os.Getenv("ADYEN_API_KEY")
 	)
 
-	client := api.NewClient(&common.Config{
+	client := adyen.NewClient(&common.Config{
 		ApiKey:      APIKey,
 		Environment: "TEST",
 	})

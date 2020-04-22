@@ -10,7 +10,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/adyen/adyen-go-api-library/src/api"
+	"github.com/adyen/adyen-go-api-library/src/adyen"
 	"github.com/adyen/adyen-go-api-library/src/common"
 
 	"github.com/adyen/adyen-go-api-library/src/recurring"
@@ -28,7 +28,7 @@ func Test_Recurring(t *testing.T) {
 		MerchantAccount = os.Getenv("ADYEN_MERCHANT")
 	)
 
-	client := api.NewClient(&common.Config{
+	client := adyen.NewClient(&common.Config{
 		ApiKey:      APIKey,
 		Environment: "TEST",
 	})
