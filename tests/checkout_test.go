@@ -46,7 +46,7 @@ func Test_Checkout(t *testing.T) {
 			})
 
 			require.NotNil(t, err)
-			assert.Equal(t, "422 Unprocessable Entity: Required field countryCode not specified (validation: 158)", err.Error())
+			assert.Equal(t, "422 Unprocessable Entity: Reference Missing (validation: 130)", err.Error())
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 422, httpRes.StatusCode)
 			assert.Equal(t, "422 Unprocessable Entity", httpRes.Status)
