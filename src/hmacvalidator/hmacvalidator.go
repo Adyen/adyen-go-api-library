@@ -7,12 +7,14 @@ import (
 	"encoding/hex"
 	"fmt"
 	"regexp"
+	"sort"
 	"strconv"
 	"strings"
 
 	"github.com/adyen/adyen-go-api-library/src/notification"
 )
 
+// calculates the SHA-256 HMAC for the given data and key
 func CalculateHmac(data interface{}, secret string) (string, error) {
 	switch val := data.(type) {
 	case string:
@@ -23,6 +25,7 @@ func CalculateHmac(data interface{}, secret string) (string, error) {
 	}
 }
 
+// calculates the HMAC of the notification request item and checks if it matches with the given key
 func ValidateHmac(notificationRequestItem notification.NotificationRequestItem, key string) bool {
 	expectedSign, err := CalculateHmac(notificationRequestItem, key)
 	if err != nil {
@@ -32,6 +35,7 @@ func ValidateHmac(notificationRequestItem notification.NotificationRequestItem, 
 	return expectedSign == merchantSign
 }
 
+// converts a notification request item to string, which later on can be used for calculating a HMAC
 func GetDataToSign(notificationRequestItem interface{}) string {
 	switch item := notificationRequestItem.(type) {
 	case notification.NotificationRequestItem:
@@ -50,9 +54,12 @@ func GetDataToSign(notificationRequestItem interface{}) string {
 		keys := make([]string, 0)
 		values := make([]string, 0)
 
-		for k, v := range item {
+		for k := range item {
 			keys = append(keys, replacer(k))
-			values = append(values, replacer(v))
+		}
+		sort.Strings(keys)
+		for _, k := range keys {
+			values = append(values, replacer(item[k]))
 		}
 
 		return strings.Join(keys, ":") + ":" + strings.Join(values, ":")
