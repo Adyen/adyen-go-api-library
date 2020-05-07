@@ -6,16 +6,17 @@ import (
 	"encoding/base64"
 	"encoding/hex"
 	"fmt"
-	"github.com/adyen/adyen-go-api-library/src/notification"
 	"regexp"
 	"strconv"
 	"strings"
+
+	"github.com/adyen/adyen-go-api-library/src/notification"
 )
 
 func CalculateHmac(data interface{}, secret string) (string, error) {
-	switch data.(type) {
+	switch val := data.(type) {
 	case string:
-		return encode(data.(string), secret)
+		return encode(val, secret)
 	default:
 		src := GetDataToSign(data)
 		return encode(src, secret)
@@ -31,10 +32,9 @@ func ValidateHmac(notificationRequestItem notification.NotificationRequestItem, 
 	return expectedSign == merchantSign
 }
 
-func GetDataToSign(notificationRequestItem interface{}) (res string) {
-	switch isNotificationRequestItem(notificationRequestItem) {
-	case true:
-		item := notificationRequestItem.(notification.NotificationRequestItem)
+func GetDataToSign(notificationRequestItem interface{}) string {
+	switch item := notificationRequestItem.(type) {
+	case notification.NotificationRequestItem:
 		signedDataList := []string{
 			item.PspReference,
 			item.OriginalReference,
@@ -45,9 +45,8 @@ func GetDataToSign(notificationRequestItem interface{}) (res string) {
 			item.EventCode,
 			item.Success,
 		}
-		res = strings.Join(signedDataList, ":")
-	case false:
-		item := notificationRequestItem.(map[string]string)
+		return strings.Join(signedDataList, ":")
+	case map[string]string:
 		keys := make([]string, 0)
 		values := make([]string, 0)
 
@@ -56,9 +55,10 @@ func GetDataToSign(notificationRequestItem interface{}) (res string) {
 			values = append(values, replacer(v))
 		}
 
-		res = strings.Join(keys, ":") + ":" + strings.Join(values, ":")
+		return strings.Join(keys, ":") + ":" + strings.Join(values, ":")
+	default:
+		return ""
 	}
-	return
 }
 
 func encode(data string, secret string) (string, error) {
@@ -71,19 +71,10 @@ func encode(data string, secret string) (string, error) {
 	return base64.StdEncoding.EncodeToString(h.Sum(nil)), nil
 }
 
-func isNotificationRequestItem(item interface{}) bool {
-	switch item.(type) {
-	case notification.NotificationRequestItem:
-		return true
-	default:
-		return false
-	}
-}
-
-func replacer(s string) (str string) {
-	var re1 = regexp.MustCompile(`\\`)
-	var re2 = regexp.MustCompile(`:`)
-	str = re1.ReplaceAllString(s, "\\\\")
+func replacer(s string) string {
+	re1 := regexp.MustCompile(`\\`)
+	re2 := regexp.MustCompile(`:`)
+	str := re1.ReplaceAllString(s, "\\\\")
 	str = re2.ReplaceAllString(str, "\\:")
-	return
+	return str
 }

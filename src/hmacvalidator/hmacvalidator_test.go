@@ -1,10 +1,11 @@
 package hmacvalidator
 
 import (
-	"github.com/adyen/adyen-go-api-library/src/notification"
-	"github.com/stretchr/testify/assert"
 	"testing"
 	"time"
+
+	"github.com/adyen/adyen-go-api-library/src/notification"
+	"github.com/stretchr/testify/assert"
 )
 
 const key = "DFB1EB5485895CFA84146406857104ABB4CBCABDC8AAF103A624C8F6A3EAAB00"
