@@ -74,7 +74,6 @@ type Config struct {
 	MarketPayEndpoint       string        `json:"marketPayEndpoint,omitempty"`
 	ApiKey                  string        `json:"apiKey,omitempty"`
 	ConnectionTimeoutMillis time.Duration `json:"connectionTimeoutMillis,omitempty"`
-	ReadTimeoutMillis       time.Duration `json:"readTimeoutMillis,omitempty"`
 	CertificatePath         string        `json:"certificatePath,omitempty"`
 
 	//Checkout Specific
