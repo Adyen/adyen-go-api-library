@@ -11,7 +11,7 @@ import (
 	"regexp"
 	"testing"
 
-	"github.com/adyen/adyen-go-api-library/src/api"
+	"github.com/adyen/adyen-go-api-library/src/adyen"
 	"github.com/adyen/adyen-go-api-library/src/checkout"
 	"github.com/adyen/adyen-go-api-library/src/common"
 
@@ -29,7 +29,7 @@ func Test_Checkout(t *testing.T) {
 		APIKey          = os.Getenv("ADYEN_API_KEY")
 	)
 
-	client := api.NewClient(&common.Config{
+	client := adyen.NewClient(&common.Config{
 		ApiKey:      APIKey,
 		Environment: "TEST",
 	})
@@ -107,8 +107,6 @@ func Test_Checkout(t *testing.T) {
 			assert.Equal(t, 200, httpRes.StatusCode)
 			assert.Equal(t, "200 OK", httpRes.Status)
 			require.NotNil(t, res)
-			assert.True(t, len(*res.Groups) >= 1)
-			assert.True(t, len(*res.PaymentMethods) >= 1)
 		})
 	})
 

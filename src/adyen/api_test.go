@@ -4,7 +4,7 @@
  * Contact: support@adyen.com
  */
 
-package api
+package adyen
 
 import (
 	"os"
@@ -61,14 +61,13 @@ func Test_api(t *testing.T) {
 		})
 
 		t.Run("Create a API request that uses API key auth and should pass", func(t *testing.T) {
+
 			res, httpRes, err := client.Checkout.PaymentMethods(&checkout.PaymentMethodsRequest{
 				MerchantAccount: MerchantAccount,
 			})
 
 			require.Nil(t, err)
 			require.NotNil(t, res)
-			assert.True(t, len(*res.Groups) >= 1)
-			assert.True(t, len(*res.PaymentMethods) >= 1)
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 200, httpRes.StatusCode)
 			assert.Equal(t, "200 OK", httpRes.Status)

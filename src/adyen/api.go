@@ -4,7 +4,7 @@
  * Contact: support@adyen.com
  */
 
-package api
+package adyen
 
 import (
 	"fmt"
