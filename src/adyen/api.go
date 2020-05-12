@@ -25,8 +25,6 @@ const (
 	EndpointTest                    = "https://pal-test.adyen.com"
 	EndpointLive                    = "https://pal-live.adyen.com"
 	EndpointLiveSuffix              = "-pal-live.adyenpayments.com"
-	HppTest                         = "https://test.adyen.com/hpp"
-	HppLive                         = "https://live.adyen.com/hpp"
 	MarketpayEndpointTest           = "https://cal-test.adyen.com/cal/services"
 	MarketpayEndpointLive           = "https://cal-live.adyen.com/cal/services"
 	MarketpayAccountAPIVersion      = "v5"
