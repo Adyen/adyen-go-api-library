@@ -25,8 +25,6 @@ const (
 	EndpointTest                    = "https://pal-test.adyen.com"
 	EndpointLive                    = "https://pal-live.adyen.com"
 	EndpointLiveSuffix              = "-pal-live.adyenpayments.com"
-	HppTest                         = "https://test.adyen.com/hpp"
-	HppLive                         = "https://live.adyen.com/hpp"
 	MarketpayEndpointTest           = "https://cal-test.adyen.com/cal/services"
 	MarketpayEndpointLive           = "https://cal-live.adyen.com/cal/services"
 	MarketpayAccountAPIVersion      = "v5"
@@ -130,7 +128,7 @@ func NewClient(cfg *common.Config) *APIClient {
 		cfg.DefaultHeader = make(map[string]string)
 	}
 	if cfg.UserAgent == "" {
-		cfg.UserAgent = fmt.Sprintf("%s %s/%s", cfg.ApplicationName, common.LibName, common.LibVersion)
+		cfg.UserAgent = fmt.Sprintf("%s/%s", common.LibName, common.LibVersion)
 	}
 
 	c := &APIClient{}
@@ -195,7 +193,6 @@ func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix
 	if env == common.LiveEnv {
 		c.client.Cfg.Environment = env
 		c.client.Cfg.MarketPayEndpoint = MarketpayEndpointLive
-		c.client.Cfg.HppEndpoint = HppLive
 		if liveEndpointURLPrefix != "" {
 			c.client.Cfg.Endpoint = EndpointProtocol + liveEndpointURLPrefix + EndpointLiveSuffix
 			c.client.Cfg.CheckoutEndpoint = EndpointProtocol + liveEndpointURLPrefix + CheckoutEndpointLiveSuffix
@@ -208,7 +205,6 @@ func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix
 		c.client.Cfg.Environment = env
 		c.client.Cfg.Endpoint = EndpointTest
 		c.client.Cfg.MarketPayEndpoint = MarketpayEndpointTest
-		c.client.Cfg.HppEndpoint = HppTest
 		c.client.Cfg.CheckoutEndpoint = CheckoutEndpointTest
 		c.client.Cfg.TerminalApiCloudEndpoint = TerminalAPIEndpointTest
 	}

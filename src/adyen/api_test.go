@@ -74,10 +74,9 @@ func Test_api(t *testing.T) {
 		})
 
 		client = NewClient(&common.Config{
-			Username:        USER,
-			Password:        PASS,
-			Environment:     "TEST",
-			ApplicationName: "adyen-api-go-library",
+			Username:    USER,
+			Password:    PASS,
+			Environment: "TEST",
 		})
 
 		t.Run("Create a API request that uses basic auth and should pass", func(t *testing.T) {

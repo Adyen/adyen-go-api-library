@@ -41,6 +41,7 @@ go get github.com/adyen/adyen-go-api-library
 ```go
 import (
 	"github.com/adyen/adyen-go-api-library/src/checkout"
+	"github.com/adyen/adyen-go-api-library/src/common"
 	"github.com/adyen/adyen-go-api-library/src/adyen"
 )
 
@@ -58,7 +59,8 @@ res, httpRes, err := client.Checkout.PaymentMethods(&checkout.PaymentMethodsRequ
 
 ```go
 import (
-	"github.com/adyen/adyen-go-api-library/src/checkout"
+    "github.com/adyen/adyen-go-api-library/src/checkout"
+    "github.com/adyen/adyen-go-api-library/src/common"
 	"github.com/adyen/adyen-go-api-library/src/adyen"
 )
 
@@ -77,7 +79,8 @@ res, httpRes, err := client.Checkout.PaymentMethods(&checkout.PaymentMethodsRequ
 
 ```go
 import (
-	"github.com/adyen/adyen-go-api-library/src/recurring"
+    "github.com/adyen/adyen-go-api-library/src/recurring"
+    "github.com/adyen/adyen-go-api-library/src/common"
 	"github.com/adyen/adyen-go-api-library/src/adyen"
 )
 
@@ -101,7 +104,8 @@ res, httpRes, err := client.Recurring.ListRecurringDetails(&recurring.RecurringD
 
 ```go
 import (
-	"github.com/adyen/adyen-go-api-library/src/adyen"
+    "github.com/adyen/adyen-go-api-library/src/adyen"
+    "github.com/adyen/adyen-go-api-library/src/common"
 )
 
 client := adyen.NewClient(&common.Config{
@@ -189,7 +193,7 @@ client = adyen.NewClient(&common.Config{
 
 ## Support
 
-If you have any problems, questions or suggestions, create an issue here or send your inquiry to support@adyen.com.
+If you have a feature request, or spotted a bug or a technical problem, create a github issue. For other questions, contact our [support team](https://support.adyen.com/hc/en-us/requests/new?ticket_form_id=360000705420m).
 
 ## Contributing
 

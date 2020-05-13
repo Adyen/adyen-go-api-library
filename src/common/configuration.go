@@ -61,28 +61,20 @@ const (
 
 const (
 	LibName    = "adyen-go-api-library"
-	LibVersion = "0.0.1"
+	LibVersion = "1.0.0"
 )
 
 // Config stores the configuration of the API client
 type Config struct {
-	Username          string      `json:"username,omitempty"`
-	Password          string      `json:"password,omitempty"`
-	MerchantAccount   string      `json:"merchantAccount,omitempty"`
-	Environment       Environment `json:"environment,omitempty"`
-	Endpoint          string      `json:"endpoint,omitempty"`
-	MarketPayEndpoint string      `json:"marketPayEndpoint,omitempty"`
-	// Application name: used as HTTP client User-Agent
-	ApplicationName         string        `json:"applicationName,omitempty"`
+	Username                string        `json:"username,omitempty"`
+	Password                string        `json:"password,omitempty"`
+	MerchantAccount         string        `json:"merchantAccount,omitempty"`
+	Environment             Environment   `json:"environment,omitempty"`
+	Endpoint                string        `json:"endpoint,omitempty"`
+	MarketPayEndpoint       string        `json:"marketPayEndpoint,omitempty"`
 	ApiKey                  string        `json:"apiKey,omitempty"`
 	ConnectionTimeoutMillis time.Duration `json:"connectionTimeoutMillis,omitempty"`
-	ReadTimeoutMillis       time.Duration `json:"readTimeoutMillis,omitempty"`
 	CertificatePath         string        `json:"certificatePath,omitempty"`
-
-	//HPP specific
-	HppEndpoint string `json:"hppEndpoint,omitempty"`
-	SkinCode    string `json:"skinCode,omitempty"`
-	HmacKey     string `json:"hmacKey,omitempty"`
 
 	//Checkout Specific
 	CheckoutEndpoint string `json:"checkoutEndpoint,omitempty"`
