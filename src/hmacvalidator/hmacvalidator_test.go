@@ -13,7 +13,7 @@ const expectedSign = "ipnxGCaUZ4l8TUW75a71/ghd2Fe5ffvX0pV4TLTntIc="
 
 var eventDate = time.Date(1970, time.January, 01, 0, 0, 0, 0, time.UTC)
 var notificationRequestItem = notification.NotificationRequestItem{
-	AdditionalData: &map[string]interface{}{"HmacSignature": expectedSign},
+	AdditionalData: &map[string]interface{}{"hmacSignature": expectedSign},
 	Amount: notification.Amount{
 		Currency: "EUR",
 		Value:    1000,
@@ -64,7 +64,7 @@ func Test_Hmacvalidator(t *testing.T) {
 			assert.True(t, ValidateHmac(notificationRequestItem, key))
 		})
 		t.Run("Get Invalid HMAC", func(t *testing.T) {
-			notificationRequestItem.AdditionalData = &map[string]interface{}{"HmacSignature": "InvalidSignature"}
+			notificationRequestItem.AdditionalData = &map[string]interface{}{"hmacSignature": "InvalidSignature"}
 			assert.False(t, ValidateHmac(notificationRequestItem, key))
 		})
 	})
