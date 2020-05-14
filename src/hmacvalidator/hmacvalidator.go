@@ -31,7 +31,7 @@ func ValidateHmac(notificationRequestItem notification.NotificationRequestItem, 
 	if err != nil {
 		return false
 	}
-	merchantSign := (*notificationRequestItem.AdditionalData)["HmacSignature"]
+	merchantSign := (*notificationRequestItem.AdditionalData)["hmacSignature"]
 	return expectedSign == merchantSign
 }
 

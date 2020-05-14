@@ -61,7 +61,7 @@ const (
 
 const (
 	LibName    = "adyen-go-api-library"
-	LibVersion = "1.0.0"
+	LibVersion = "1.0.1"
 )
 
 // Config stores the configuration of the API client
