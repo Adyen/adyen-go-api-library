@@ -56,7 +56,7 @@ func ResultCodeFromString(value string) (ResultCode, error) {
 			return ResultCode(p), nil
 		}
 	}
-	return ResultCode(0), fmt.Errorf("ResultCode enum not found for given value")
+	return ResultCode(0), fmt.Errorf("ResultCode enum not found for %s", value)
 }
 
 // MarshalJSON marshals the enum as a quoted json string
@@ -74,7 +74,6 @@ func (s *ResultCode) UnmarshalJSON(b []byte) error {
 	if err != nil {
 		return err
 	}
-	// Note that if the string cannot be found then it will be set to the zero value, 'Created' in this case.
 	r, err := ResultCodeFromString(j)
 	if err != nil {
 		return err
