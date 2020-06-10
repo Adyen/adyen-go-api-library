@@ -7,6 +7,7 @@
 package tests
 
 import (
+	"github.com/adyen/adyen-go-api-library/src/resultcode"
 	"os"
 	"regexp"
 	"testing"
@@ -33,7 +34,7 @@ func Test_Checkout(t *testing.T) {
 		ApiKey:      APIKey,
 		Environment: "TEST",
 	})
-	// client.GetConfig().Debug = true
+	client.GetConfig().Debug = true
 
 	t.Run("PaymentLinks", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
@@ -151,7 +152,8 @@ func Test_Checkout(t *testing.T) {
 			assert.Equal(t, 200, httpRes.StatusCode)
 			assert.Equal(t, "200 OK", httpRes.Status)
 			require.NotNil(t, res)
-			assert.Equal(t, "RedirectShopper", res.ResultCode)
+			assert.Equal(t, resultcode.RedirectShopper, string(res.ResultCode))
+			assert.Equal(t, resultcode.Enum(resultcode.RedirectShopper), res.ResultCode)
 			require.NotNil(t, res.Action)
 			assert.Equal(t, "ideal", res.Action.PaymentMethodType)
 			require.NotNil(t, res.PaymentData)
