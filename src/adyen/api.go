@@ -10,14 +10,14 @@ import (
 	"fmt"
 	"net/http"
 
-	binlookup "github.com/adyen/adyen-go-api-library/src/binlookup"
-	checkout "github.com/adyen/adyen-go-api-library/src/checkout"
-	checkoututility "github.com/adyen/adyen-go-api-library/src/checkoututility"
-	common "github.com/adyen/adyen-go-api-library/src/common"
-	notification "github.com/adyen/adyen-go-api-library/src/notification"
-	payments "github.com/adyen/adyen-go-api-library/src/payments"
-	payouts "github.com/adyen/adyen-go-api-library/src/payouts"
-	recurring "github.com/adyen/adyen-go-api-library/src/recurring"
+	binlookup "github.com/adyen/adyen-go-api-library/v2/src/binlookup"
+	checkout "github.com/adyen/adyen-go-api-library/v2/src/checkout"
+	checkoututility "github.com/adyen/adyen-go-api-library/v2/src/checkoututility"
+	common "github.com/adyen/adyen-go-api-library/v2/src/common"
+	notification "github.com/adyen/adyen-go-api-library/v2/src/notification"
+	payments "github.com/adyen/adyen-go-api-library/v2/src/payments"
+	payouts "github.com/adyen/adyen-go-api-library/v2/src/payouts"
+	recurring "github.com/adyen/adyen-go-api-library/v2/src/recurring"
 )
 
 // Constants used for the client API
