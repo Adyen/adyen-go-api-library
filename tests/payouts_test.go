@@ -7,15 +7,16 @@
 package tests
 
 import (
+	"fmt"
 	_nethttp "net/http"
 	"os"
 	"testing"
 	"time"
 
-	"github.com/adyen/adyen-go-api-library/src/adyen"
-	"github.com/adyen/adyen-go-api-library/src/checkout"
-	"github.com/adyen/adyen-go-api-library/src/common"
-	"github.com/adyen/adyen-go-api-library/src/payouts"
+	"github.com/adyen/adyen-go-api-library/v2/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v2/src/checkout"
+	"github.com/adyen/adyen-go-api-library/v2/src/common"
+	"github.com/adyen/adyen-go-api-library/v2/src/payouts"
 	"github.com/joho/godotenv"
 
 	"github.com/stretchr/testify/assert"
@@ -139,7 +140,7 @@ func Test_Payout(t *testing.T) {
 				assert.Equal(t, "200 OK", httpRes.Status)
 				require.NotNil(t, res)
 				assert.NotEmpty(t, res.PspReference)
-				assert.NotEmpty(t, res.ResultCode)
+				assert.Equal(t, common.Received, res.ResultCode)
 			})
 		})
 	})
@@ -150,6 +151,7 @@ func Test_Payout(t *testing.T) {
 				ref := time.Now().String()
 				res, httpRes, err := createStoreDetail(ref)
 
+				fmt.Println(err)
 				require.Nil(t, err)
 				require.NotNil(t, httpRes)
 				assert.Equal(t, 200, httpRes.StatusCode)

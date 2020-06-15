@@ -6,9 +6,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/adyen/adyen-go-api-library/src/adyen"
-	"github.com/adyen/adyen-go-api-library/src/common"
-	"github.com/adyen/adyen-go-api-library/src/payments"
+	"github.com/adyen/adyen-go-api-library/v2/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v2/src/common"
+	"github.com/adyen/adyen-go-api-library/v2/src/payments"
 	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -97,7 +97,7 @@ func Test_Payment(t *testing.T) {
 
 			assertForSuccessResponse(res, httpRes, err)
 			assert.NotNil(t, res.PspReference)
-			assert.Equal(t, res.ResultCode, "Authorised")
+			assert.Equal(t, res.ResultCode, common.Authorised)
 		})
 
 		t.Run("GetAuthenticationResult", func(t *testing.T) {

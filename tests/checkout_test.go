@@ -11,9 +11,9 @@ import (
 	"regexp"
 	"testing"
 
-	"github.com/adyen/adyen-go-api-library/src/adyen"
-	"github.com/adyen/adyen-go-api-library/src/checkout"
-	"github.com/adyen/adyen-go-api-library/src/common"
+	"github.com/adyen/adyen-go-api-library/v2/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v2/src/checkout"
+	"github.com/adyen/adyen-go-api-library/v2/src/common"
 
 	"github.com/joho/godotenv"
 
@@ -151,7 +151,7 @@ func Test_Checkout(t *testing.T) {
 			assert.Equal(t, 200, httpRes.StatusCode)
 			assert.Equal(t, "200 OK", httpRes.Status)
 			require.NotNil(t, res)
-			assert.Equal(t, "RedirectShopper", res.ResultCode)
+			assert.Equal(t, common.RedirectShopper, res.ResultCode)
 			require.NotNil(t, res.Action)
 			assert.Equal(t, "ideal", res.Action.PaymentMethodType)
 			require.NotNil(t, res.PaymentData)
@@ -197,7 +197,7 @@ func Test_Checkout(t *testing.T) {
 			assert.Equal(t, 200, httpRes.StatusCode)
 			assert.Equal(t, "200 OK", httpRes.Status)
 			require.NotNil(t, res)
-			assert.Equal(t, "RedirectShopper", res.ResultCode)
+			assert.Equal(t, common.RedirectShopper, res.ResultCode)
 			require.NotNil(t, res.Action)
 			assert.Equal(t, "ideal", res.Action.PaymentMethodType)
 			require.NotNil(t, res.PaymentData)
