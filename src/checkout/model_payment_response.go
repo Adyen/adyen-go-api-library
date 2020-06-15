@@ -11,7 +11,7 @@
 package checkout
 
 import (
-	"github.com/adyen/adyen-go-api-library/v2/src/common"
+	"github.com/adyen/adyen-go-api-library/src/common"
 )
 
 // PaymentResponse struct for PaymentResponse

@@ -11,7 +11,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/adyen/adyen-go-api-library/v2/src/notification"
+	"github.com/adyen/adyen-go-api-library/src/notification"
 )
 
 // CalculateHmac calculates the SHA-256 HMAC for the given data and key
