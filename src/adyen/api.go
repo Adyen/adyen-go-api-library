@@ -17,6 +17,10 @@ import (
 	notification "github.com/adyen/adyen-go-api-library/src/notification"
 	payments "github.com/adyen/adyen-go-api-library/src/payments"
 	payouts "github.com/adyen/adyen-go-api-library/src/payouts"
+	platformsaccount "github.com/adyen/adyen-go-api-library/src/platformsaccount"
+	platformsfund "github.com/adyen/adyen-go-api-library/src/platformsfund"
+	platformshostedonboardingpage "github.com/adyen/adyen-go-api-library/src/platformshostedonboardingpage"
+	platformsnotificationconfiguration "github.com/adyen/adyen-go-api-library/src/platformsnotificationconfiguration"
 	recurring "github.com/adyen/adyen-go-api-library/src/recurring"
 )
 
@@ -30,6 +34,7 @@ const (
 	MarketpayAccountAPIVersion      = "v5"
 	MarketpayFundAPIVersion         = "v5"
 	MarketpayNotificationAPIVersion = "v5"
+	MarketpayHopAPIVersion          = "v1"
 	APIVersion                      = "v52"
 	RecurringAPIVersion             = "v49"
 	CheckoutEndpointTest            = "https://checkout-test.adyen.com/checkout"
@@ -48,13 +53,17 @@ const (
 type APIClient struct {
 	client *common.Client
 	// API Services
-	Checkout        *checkout.Checkout
-	CheckoutUtility *checkoututility.CheckoutUtility
-	Payments        *payments.Payments
-	Payouts         *payouts.Payouts
-	Recurring       *recurring.Recurring
-	BinLookup       *binlookup.BinLookup
-	Notification    *notification.NotificationService
+	Checkout                           *checkout.Checkout
+	CheckoutUtility                    *checkoututility.CheckoutUtility
+	Payments                           *payments.Payments
+	Payouts                            *payouts.Payouts
+	Recurring                          *recurring.Recurring
+	BinLookup                          *binlookup.BinLookup
+	Notification                       *notification.NotificationService
+	PlatformsAccount                   *platformsaccount.PlatformsAccount
+	PlatformsFund                      *platformsfund.PlatformsFund
+	PlatformsHostedOnboardingPage      *platformshostedonboardingpage.PlatformsHostedOnboardingPage
+	PlatformsNotificationConfiguration *platformsnotificationconfiguration.PlatformsNotificationConfiguration
 }
 
 // NewClient creates a new API client. Requires Config object.
@@ -177,6 +186,34 @@ func NewClient(cfg *common.Config) *APIClient {
 		Client: c.client,
 		BasePath: func() string {
 			return fmt.Sprintf("%s/%s/%s", c.client.Cfg.Endpoint, BinLookupPalSuffix, BinLookupAPIVersion)
+		},
+	}
+
+	c.PlatformsAccount = &platformsaccount.PlatformsAccount{
+		Client: c.client,
+		BasePath: func() string {
+			return fmt.Sprintf("%s/Account/%s", c.client.Cfg.MarketPayEndpoint, MarketpayAccountAPIVersion)
+		},
+	}
+
+	c.PlatformsFund = &platformsfund.PlatformsFund{
+		Client: c.client,
+		BasePath: func() string {
+			return fmt.Sprintf("%s/Fund/%s", c.client.Cfg.MarketPayEndpoint, MarketpayFundAPIVersion)
+		},
+	}
+
+	c.PlatformsHostedOnboardingPage = &platformshostedonboardingpage.PlatformsHostedOnboardingPage{
+		Client: c.client,
+		BasePath: func() string {
+			return fmt.Sprintf("%s/Hop/%s", c.client.Cfg.MarketPayEndpoint, MarketpayHopAPIVersion)
+		},
+	}
+
+	c.PlatformsNotificationConfiguration = &platformsnotificationconfiguration.PlatformsNotificationConfiguration{
+		Client: c.client,
+		BasePath: func() string {
+			return fmt.Sprintf("%s/Notification/%s", c.client.Cfg.MarketPayEndpoint, MarketpayNotificationAPIVersion)
 		},
 	}
 

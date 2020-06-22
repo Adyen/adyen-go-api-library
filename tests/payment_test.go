@@ -97,7 +97,7 @@ func Test_Payment(t *testing.T) {
 
 			assertForSuccessResponse(res, httpRes, err)
 			assert.NotNil(t, res.PspReference)
-			assert.Equal(t, res.ResultCode, "Authorised")
+			assert.Equal(t, res.ResultCode, common.Authorised)
 		})
 
 		t.Run("GetAuthenticationResult", func(t *testing.T) {

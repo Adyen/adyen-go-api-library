@@ -7,6 +7,7 @@
 package tests
 
 import (
+	"fmt"
 	_nethttp "net/http"
 	"os"
 	"testing"
@@ -139,7 +140,7 @@ func Test_Payout(t *testing.T) {
 				assert.Equal(t, "200 OK", httpRes.Status)
 				require.NotNil(t, res)
 				assert.NotEmpty(t, res.PspReference)
-				assert.NotEmpty(t, res.ResultCode)
+				assert.Equal(t, common.Received, res.ResultCode)
 			})
 		})
 	})
@@ -150,6 +151,7 @@ func Test_Payout(t *testing.T) {
 				ref := time.Now().String()
 				res, httpRes, err := createStoreDetail(ref)
 
+				fmt.Println(err)
 				require.Nil(t, err)
 				require.NotNil(t, httpRes)
 				assert.Equal(t, 200, httpRes.StatusCode)
