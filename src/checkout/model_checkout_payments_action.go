@@ -54,4 +54,6 @@ type CheckoutPaymentsAction struct {
 	Type string `json:"type,omitempty"`
 	// Specifies the URL to redirect to.
 	Url string `json:"url,omitempty"`
+    // SDK data for type "sdk"
+	SDKData *SDKData `json:"sdkData,omitempty"`
 }
