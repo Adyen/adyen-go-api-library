@@ -11,9 +11,9 @@ import (
 	"regexp"
 	"testing"
 
-	"github.com/adyen/adyen-go-api-library/src/adyen"
-	"github.com/adyen/adyen-go-api-library/src/checkout"
-	"github.com/adyen/adyen-go-api-library/src/common"
+	"github.com/adyen/adyen-go-api-library/v2/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v2/src/checkout"
+	"github.com/adyen/adyen-go-api-library/v2/src/common"
 
 	"github.com/joho/godotenv"
 
