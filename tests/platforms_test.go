@@ -112,7 +112,6 @@ func Test_Platforms(t *testing.T) {
 
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
-			assert.Equal(t, "200 OK", httpRes.Status)
 			assert.NotNil(t, res.PspReference)
 		})
 		t.Run("Create account", func(t *testing.T) {
@@ -120,7 +119,6 @@ func Test_Platforms(t *testing.T) {
 
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
-			assert.Equal(t, "200 OK", httpRes.Status)
 			assert.NotNil(t, res.PspReference)
 		})
 		t.Run("Get account holder", func(t *testing.T) {
@@ -139,7 +137,6 @@ func Test_Platforms(t *testing.T) {
 
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
-			assert.Equal(t, "200 OK", httpRes.Status)
 			assert.Equal(t, res.AccountHolderDetails.Email, "go_library@test.com")
 		})
 		t.Run("Update account holder", func(t *testing.T) {
@@ -152,7 +149,6 @@ func Test_Platforms(t *testing.T) {
 
 			require.Nil(t, err)
 			assert.Equal(t, 202, httpRes.StatusCode)
-			assert.Equal(t, "202 Accepted", httpRes.Status)
 			assert.Equal(t, res.AccountHolderDetails.Address.Country, "BE")
 		})
 		t.Run("Check account holder", func(t *testing.T) {
@@ -166,7 +162,6 @@ func Test_Platforms(t *testing.T) {
 
 			require.Nil(t, err)
 			assert.Equal(t, 202, httpRes.StatusCode)
-			assert.Equal(t, "202 Accepted", httpRes.Status)
 			assert.Equal(t, res.ResultCode, "Success")
 		})
 
@@ -177,7 +172,6 @@ func Test_Platforms(t *testing.T) {
 
 			require.Nil(t, err)
 			assert.Equal(t, 202, httpRes.StatusCode)
-			assert.Equal(t, "202 Accepted", httpRes.Status)
 			assert.NotNil(t, res.PspReference)
 		})
 
@@ -198,7 +192,6 @@ func Test_Platforms(t *testing.T) {
 
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
-			assert.Equal(t, "200 OK", httpRes.Status)
 			assert.NotNil(t, res.PspReference)
 		})
 		t.Run("Close account", func(t *testing.T) {
@@ -216,7 +209,6 @@ func Test_Platforms(t *testing.T) {
 
 			require.Nil(t, err)
 			assert.Equal(t, 202, httpRes.StatusCode)
-			assert.Equal(t, "202 Accepted", httpRes.Status)
 			assert.Equal(t, res.Status, "Closed")
 		})
 		t.Run("Suspend account holder", func(t *testing.T) {
@@ -229,7 +221,6 @@ func Test_Platforms(t *testing.T) {
 
 			require.Nil(t, err)
 			assert.Equal(t, 202, httpRes.StatusCode)
-			assert.Equal(t, "202 Accepted", httpRes.Status)
 			assert.NotNil(t, res.PspReference)
 		})
 		t.Run("Unsuspend account holder", func(t *testing.T) {
@@ -246,7 +237,6 @@ func Test_Platforms(t *testing.T) {
 
 			require.Nil(t, err)
 			assert.Equal(t, 202, httpRes.StatusCode)
-			assert.Equal(t, "202 Accepted", httpRes.Status)
 			assert.NotNil(t, res.PspReference)
 		})
 		t.Run("Update account holder state", func(t *testing.T) {
@@ -261,7 +251,6 @@ func Test_Platforms(t *testing.T) {
 
 			require.Nil(t, err)
 			assert.Equal(t, 202, httpRes.StatusCode)
-			assert.Equal(t, "202 Accepted", httpRes.Status)
 			assert.NotNil(t, res.PspReference)
 		})
 		t.Run("Close account holder", func(t *testing.T) {
@@ -274,7 +263,6 @@ func Test_Platforms(t *testing.T) {
 
 			require.Nil(t, err)
 			assert.Equal(t, 202, httpRes.StatusCode)
-			assert.Equal(t, "202 Accepted", httpRes.Status)
 			assert.NotNil(t, res.PspReference)
 		})
 	})
@@ -291,7 +279,6 @@ func Test_Platforms(t *testing.T) {
 
 			require.Nil(t, err)
 			assert.Equal(t, 202, httpRes.StatusCode)
-			assert.Equal(t, "202 Accepted", httpRes.Status)
 			assert.Equal(t, res.BalancePerAccount, "")
 		})
 		t.Run("Retrieve list of transactions", func(t *testing.T) {
@@ -306,7 +293,6 @@ func Test_Platforms(t *testing.T) {
 
 			require.Nil(t, err)
 			assert.Equal(t, 202, httpRes.StatusCode)
-			assert.Equal(t, "202 Accepted", httpRes.Status)
 			assert.Equal(t, res.AccountTransactionLists, "")
 		})
 		t.Run("Transfer between accounts", func(t *testing.T) {
@@ -324,7 +310,6 @@ func Test_Platforms(t *testing.T) {
 
 			require.Nil(t, err)
 			assert.Equal(t, 202, httpRes.StatusCode)
-			assert.Equal(t, "202 Accepted", httpRes.Status)
 			assert.NotNil(t, res.PspReference)
 		})
 	})
@@ -333,7 +318,6 @@ func Test_Platforms(t *testing.T) {
 			res, httpRes, err := createConfiguration()
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
-			assert.Equal(t, "200 OK", httpRes.Status)
 			assert.True(t, res.ConfigurationDetails.Active)
 		})
 		t.Run("Retrieve configurations", func(t *testing.T) {
@@ -342,7 +326,6 @@ func Test_Platforms(t *testing.T) {
 
 			require.Nil(t, err)
 			assert.Equal(t, 202, httpRes.StatusCode)
-			assert.Equal(t, "202 Accepted", httpRes.Status)
 			assert.NotNil(t, res.PspReference)
 		})
 		t.Run("Retrieve configuration", func(t *testing.T) {
@@ -354,7 +337,6 @@ func Test_Platforms(t *testing.T) {
 
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
-			assert.Equal(t, "200 OK", httpRes.Status)
 			assert.True(t, res.ConfigurationDetails.Active)
 		})
 		t.Run("Update configuration", func(t *testing.T) {
@@ -375,7 +357,6 @@ func Test_Platforms(t *testing.T) {
 
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
-			assert.Equal(t, "200 OK", httpRes.Status)
 			assert.Equal(t, res.ResultCode, "")
 		})
 		t.Run("Delete configuration", func(t *testing.T) {
@@ -387,7 +368,6 @@ func Test_Platforms(t *testing.T) {
 
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
-			assert.Equal(t, "200 OK", httpRes.Status)
 			assert.Equal(t, res.ResultCode, "")
 		})
 	})

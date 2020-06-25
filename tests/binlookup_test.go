@@ -41,7 +41,6 @@ func Test_Binlookup(t *testing.T) {
 
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
-			assert.Equal(t, "200 OK", httpRes.Status)
 			assert.Equal(t, false, res.ThreeDS2supported)
 			assert.Equal(t, true, res.ThreeDS1Supported)
 		})
@@ -53,7 +52,6 @@ func Test_Binlookup(t *testing.T) {
 
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
-			assert.Equal(t, "200 OK", httpRes.Status)
 			assert.Equal(t, true, res.ThreeDS2supported)
 			assert.Equal(t, true, res.ThreeDS1Supported)
 		})
@@ -65,7 +63,6 @@ func Test_Binlookup(t *testing.T) {
 
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
-			assert.Equal(t, "200 OK", httpRes.Status)
 			assert.Equal(t, false, res.ThreeDS2supported)
 			assert.Equal(t, false, res.ThreeDS1Supported)
 		})
@@ -82,7 +79,6 @@ func Test_Binlookup(t *testing.T) {
 			})
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
-			assert.Equal(t, "200 OK", httpRes.Status)
 			assert.Equal(t, "Unsupported", res.ResultCode)
 		})
 		t.Run("Create an API request that should get success cost estimate", func(t *testing.T) {
@@ -96,7 +92,6 @@ func Test_Binlookup(t *testing.T) {
 			})
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
-			assert.Equal(t, "200 OK", httpRes.Status)
 			assert.Equal(t, "Success", res.ResultCode)
 		})
 	})

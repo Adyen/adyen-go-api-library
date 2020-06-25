@@ -58,7 +58,6 @@ func Test_Payment(t *testing.T) {
 		require.Nil(t, err)
 		require.NotNil(t, httpRes)
 		assert.Equal(t, 200, httpRes.StatusCode)
-		assert.Equal(t, "200 OK", httpRes.Status)
 		require.NotNil(t, res)
 	}
 
