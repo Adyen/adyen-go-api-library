@@ -8,7 +8,6 @@ package tests
 
 import (
 	"os"
-	"regexp"
 	"strings"
 	"testing"
 
@@ -48,7 +47,7 @@ func Test_Checkout(t *testing.T) {
 			})
 
 			require.NotNil(t, err)
-			assert.Regexp(t, regexp.MustCompile("Reference Missing (validation: 130)"), err.Error())
+			assert.Equal(t, true, strings.Contains(err.Error(), "Reference Missing"))
 			require.NotNil(t, httpRes)
 			require.NotNil(t, res)
 		})
