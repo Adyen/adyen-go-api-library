@@ -70,7 +70,6 @@ func Test_api(t *testing.T) {
 			require.NotNil(t, res)
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 200, httpRes.StatusCode)
-			assert.Equal(t, "200 OK", httpRes.Status)
 		})
 
 		client = NewClient(&common.Config{
@@ -92,7 +91,6 @@ func Test_api(t *testing.T) {
 			require.NotNil(t, res)
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 200, httpRes.StatusCode)
-			assert.Equal(t, "200 OK", httpRes.Status)
 		})
 	})
 }
