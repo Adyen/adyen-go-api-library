@@ -10,7 +10,7 @@
 
 package payouts
 
-import "github.com/adyen/adyen-go-api-library/src/common"
+import "github.com/adyen/adyen-go-api-library/v2/src/common"
 
 // PayoutResponse struct for PayoutResponse
 type PayoutResponse struct {
