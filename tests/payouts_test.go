@@ -13,10 +13,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/adyen/adyen-go-api-library/src/adyen"
-	"github.com/adyen/adyen-go-api-library/src/checkout"
-	"github.com/adyen/adyen-go-api-library/src/common"
-	"github.com/adyen/adyen-go-api-library/src/payouts"
+	"github.com/adyen/adyen-go-api-library/v2/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v2/src/checkout"
+	"github.com/adyen/adyen-go-api-library/v2/src/common"
+	"github.com/adyen/adyen-go-api-library/v2/src/payouts"
 	"github.com/joho/godotenv"
 
 	"github.com/stretchr/testify/assert"
@@ -137,7 +137,6 @@ func Test_Payout(t *testing.T) {
 				require.Nil(t, err)
 				require.NotNil(t, httpRes)
 				assert.Equal(t, 200, httpRes.StatusCode)
-				assert.Equal(t, "200 OK", httpRes.Status)
 				require.NotNil(t, res)
 				assert.NotEmpty(t, res.PspReference)
 				assert.Equal(t, common.Received, res.ResultCode)
@@ -155,7 +154,6 @@ func Test_Payout(t *testing.T) {
 				require.Nil(t, err)
 				require.NotNil(t, httpRes)
 				assert.Equal(t, 200, httpRes.StatusCode)
-				assert.Equal(t, "200 OK", httpRes.Status)
 				require.NotNil(t, res)
 				assert.NotEmpty(t, res.PspReference)
 				assert.NotEmpty(t, res.ResultCode)
@@ -185,7 +183,6 @@ func Test_Payout(t *testing.T) {
 				require.Nil(t, err)
 				require.NotNil(t, httpRes)
 				assert.Equal(t, 200, httpRes.StatusCode)
-				assert.Equal(t, "200 OK", httpRes.Status)
 				require.NotNil(t, res)
 				assert.NotEmpty(t, res.PspReference)
 				assert.NotEmpty(t, res.ResultCode)
@@ -201,7 +198,6 @@ func Test_Payout(t *testing.T) {
 				require.Nil(t, err)
 				require.NotNil(t, httpRes)
 				assert.Equal(t, 200, httpRes.StatusCode)
-				assert.Equal(t, "200 OK", httpRes.Status)
 				require.NotNil(t, res)
 				assert.NotEmpty(t, res.PspReference)
 				assert.NotEmpty(t, res.ResultCode)
@@ -223,7 +219,6 @@ func Test_Payout(t *testing.T) {
 				require.Nil(t, err)
 				require.NotNil(t, httpRes)
 				assert.Equal(t, 200, httpRes.StatusCode)
-				assert.Equal(t, "200 OK", httpRes.Status)
 				require.NotNil(t, res)
 				assert.NotEmpty(t, res.PspReference)
 				assert.Equal(t, "[payout-confirm-received]", res.Response)
@@ -241,7 +236,6 @@ func Test_Payout(t *testing.T) {
 				require.Nil(t, err)
 				require.NotNil(t, httpRes)
 				assert.Equal(t, 200, httpRes.StatusCode)
-				assert.Equal(t, "200 OK", httpRes.Status)
 				require.NotNil(t, res)
 				assert.NotEmpty(t, res.PspReference)
 				assert.Equal(t, "[payout-decline-received]", res.Response)

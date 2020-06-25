@@ -8,12 +8,13 @@ package adyen
 
 import (
 	"os"
+	"strings"
 	"testing"
 	"time"
 
-	"github.com/adyen/adyen-go-api-library/src/checkout"
-	"github.com/adyen/adyen-go-api-library/src/common"
-	"github.com/adyen/adyen-go-api-library/src/recurring"
+	"github.com/adyen/adyen-go-api-library/v2/src/checkout"
+	"github.com/adyen/adyen-go-api-library/v2/src/common"
+	"github.com/adyen/adyen-go-api-library/v2/src/recurring"
 	"github.com/joho/godotenv"
 
 	"github.com/stretchr/testify/assert"
@@ -38,12 +39,11 @@ func Test_api(t *testing.T) {
 		t.Run("Create a API request that should fail", func(t *testing.T) {
 			res, httpRes, err := client.Checkout.PaymentMethods(&checkout.PaymentMethodsRequest{})
 			require.NotNil(t, err)
-			assert.Equal(t, "401 Unauthorized: HTTP Status Response - Unauthorized (security: 000)", err.Error())
+			assert.Equal(t, true, strings.Contains(err.Error(), "Unauthorized"))
 			require.NotNil(t, res)
 			assert.Equal(t, checkout.PaymentMethodsResponse{}, res)
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 401, httpRes.StatusCode)
-			assert.Equal(t, "401 Unauthorized", httpRes.Status)
 		})
 
 		godotenv.Load("./../../.env")
@@ -70,7 +70,6 @@ func Test_api(t *testing.T) {
 			require.NotNil(t, res)
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 200, httpRes.StatusCode)
-			assert.Equal(t, "200 OK", httpRes.Status)
 		})
 
 		client = NewClient(&common.Config{
@@ -92,7 +91,6 @@ func Test_api(t *testing.T) {
 			require.NotNil(t, res)
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 200, httpRes.StatusCode)
-			assert.Equal(t, "200 OK", httpRes.Status)
 		})
 	})
 }

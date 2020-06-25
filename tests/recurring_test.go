@@ -8,12 +8,13 @@ package tests
 
 import (
 	"os"
+	"strings"
 	"testing"
 
-	"github.com/adyen/adyen-go-api-library/src/adyen"
-	"github.com/adyen/adyen-go-api-library/src/common"
+	"github.com/adyen/adyen-go-api-library/v2/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v2/src/common"
 
-	"github.com/adyen/adyen-go-api-library/src/recurring"
+	"github.com/adyen/adyen-go-api-library/v2/src/recurring"
 	"github.com/joho/godotenv"
 
 	"github.com/stretchr/testify/assert"
@@ -39,9 +40,8 @@ func Test_Recurring(t *testing.T) {
 			res, httpRes, err := client.Recurring.ListRecurringDetails(&recurring.RecurringDetailsRequest{})
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
-			assert.Equal(t, "403 Forbidden: Invalid Merchant Account (security: 901)", err.Error())
+			assert.Equal(t, true, strings.Contains(err.Error(), "Invalid Merchant Account"))
 			assert.Equal(t, 403, httpRes.StatusCode)
-			assert.Equal(t, "403 Forbidden", httpRes.Status)
 			require.NotNil(t, res)
 			assert.Equal(t, "Invalid Merchant Account", err.(common.APIError).Message)
 		})
@@ -56,7 +56,6 @@ func Test_Recurring(t *testing.T) {
 			require.Nil(t, err)
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 200, httpRes.StatusCode)
-			assert.Equal(t, "200 OK", httpRes.Status)
 			require.NotNil(t, res)
 			assert.Empty(t, res.ShopperReference)
 			assert.Empty(t, res.Details)
@@ -72,9 +71,8 @@ func Test_Recurring(t *testing.T) {
 			})
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
-			assert.Equal(t, "422 Unprocessable Entity: Contract not found (validation: 800)", err.Error())
+			assert.Equal(t, true, strings.Contains(err.Error(), "Contract not found"))
 			assert.Equal(t, 422, httpRes.StatusCode)
-			assert.Equal(t, "422 Unprocessable Entity", httpRes.Status)
 			require.NotNil(t, res)
 			assert.Equal(t, "Contract not found", err.(common.APIError).Message)
 		})
@@ -89,9 +87,8 @@ func Test_Recurring(t *testing.T) {
 			})
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
-			assert.Equal(t, "422 Unprocessable Entity: Missing card or shopperReference & selectedRecurringDetailReference (validation: 000)", err.Error())
+			assert.Equal(t, true, strings.Contains(err.Error(), "Missing card or shopperReference & selectedRecurringDetailReference"))
 			assert.Equal(t, 422, httpRes.StatusCode)
-			assert.Equal(t, "422 Unprocessable Entity", httpRes.Status)
 			require.NotNil(t, res)
 			assert.Equal(t, "Missing card or shopperReference & selectedRecurringDetailReference", err.(common.APIError).Message)
 		})
@@ -108,9 +105,8 @@ func Test_Recurring(t *testing.T) {
 			})
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
-			assert.Equal(t, "422 Unprocessable Entity: validation 000 No registered account for AccountUpdater (validation: 000)", err.Error())
+			assert.Equal(t, true, strings.Contains(err.Error(), "validation 000 No registered account for AccountUpdater"))
 			assert.Equal(t, 422, httpRes.StatusCode)
-			assert.Equal(t, "422 Unprocessable Entity", httpRes.Status)
 			require.NotNil(t, res)
 			assert.Equal(t, "validation 000 No registered account for AccountUpdater", err.(common.APIError).Message)
 		})

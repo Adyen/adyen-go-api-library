@@ -8,11 +8,12 @@ package tests
 
 import (
 	"os"
+	"strings"
 	"testing"
 
-	"github.com/adyen/adyen-go-api-library/src/adyen"
-	"github.com/adyen/adyen-go-api-library/src/checkoututility"
-	"github.com/adyen/adyen-go-api-library/src/common"
+	"github.com/adyen/adyen-go-api-library/v2/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v2/src/checkoututility"
+	"github.com/adyen/adyen-go-api-library/v2/src/common"
 	"github.com/joho/godotenv"
 
 	"github.com/stretchr/testify/assert"
@@ -37,9 +38,8 @@ func Test_CheckoutUtility(t *testing.T) {
 			res, httpRes, err := client.CheckoutUtility.OriginKeys(&checkoututility.CheckoutUtilityRequest{})
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
-			assert.Equal(t, "500 Internal Server Error: Required field 'originDomains' is null (validation: 702)", err.Error())
+			assert.Equal(t, true, strings.Contains(err.Error(), "Required field 'originDomains' is null"))
 			assert.Equal(t, 500, httpRes.StatusCode)
-			assert.Equal(t, "500 Internal Server Error", httpRes.Status)
 			require.NotNil(t, res)
 		})
 		t.Run("Create an API request that should pass", func(t *testing.T) {
@@ -50,7 +50,6 @@ func Test_CheckoutUtility(t *testing.T) {
 			require.Nil(t, err)
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 200, httpRes.StatusCode)
-			assert.Equal(t, "200 OK", httpRes.Status)
 			require.NotNil(t, res)
 			originKeys := *res.OriginKeys
 			assert.NotEmpty(t, originKeys[domain])

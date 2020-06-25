@@ -10,9 +10,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/adyen/adyen-go-api-library/src/adyen"
-	"github.com/adyen/adyen-go-api-library/src/binlookup"
-	"github.com/adyen/adyen-go-api-library/src/common"
+	"github.com/adyen/adyen-go-api-library/v2/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v2/src/binlookup"
+	"github.com/adyen/adyen-go-api-library/v2/src/common"
 	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -41,7 +41,6 @@ func Test_Binlookup(t *testing.T) {
 
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
-			assert.Equal(t, "200 OK", httpRes.Status)
 			assert.Equal(t, false, res.ThreeDS2supported)
 			assert.Equal(t, true, res.ThreeDS1Supported)
 		})
@@ -53,7 +52,6 @@ func Test_Binlookup(t *testing.T) {
 
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
-			assert.Equal(t, "200 OK", httpRes.Status)
 			assert.Equal(t, true, res.ThreeDS2supported)
 			assert.Equal(t, true, res.ThreeDS1Supported)
 		})
@@ -65,7 +63,6 @@ func Test_Binlookup(t *testing.T) {
 
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
-			assert.Equal(t, "200 OK", httpRes.Status)
 			assert.Equal(t, false, res.ThreeDS2supported)
 			assert.Equal(t, false, res.ThreeDS1Supported)
 		})
@@ -82,7 +79,6 @@ func Test_Binlookup(t *testing.T) {
 			})
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
-			assert.Equal(t, "200 OK", httpRes.Status)
 			assert.Equal(t, "Unsupported", res.ResultCode)
 		})
 		t.Run("Create an API request that should get success cost estimate", func(t *testing.T) {
@@ -96,7 +92,6 @@ func Test_Binlookup(t *testing.T) {
 			})
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
-			assert.Equal(t, "200 OK", httpRes.Status)
 			assert.Equal(t, "Success", res.ResultCode)
 		})
 	})
