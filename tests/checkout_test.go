@@ -7,6 +7,7 @@
 package tests
 
 import (
+	"github.com/google/uuid"
 	"os"
 	"strings"
 	"testing"
@@ -33,7 +34,7 @@ func Test_Checkout(t *testing.T) {
 		ApiKey:      APIKey,
 		Environment: "TEST",
 	})
-	// client.GetConfig().Debug = true
+	//client.GetConfig().Debug = true
 
 	t.Run("PaymentLinks", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
@@ -157,6 +158,45 @@ func Test_Checkout(t *testing.T) {
 			require.Equal(t, common.LibName, req.ApplicationInfo.AdyenLibrary.Name)
 			require.Equal(t, common.LibVersion, req.ApplicationInfo.AdyenLibrary.Version)
 		})
+
+		t.Run("Create two APIs requests that should be identical when using the same Idempotency Key", func(t *testing.T) {
+
+			req := &checkout.PaymentRequest{
+				Reference: "123456781235",
+				Amount: checkout.Amount{
+					Value:    1250,
+					Currency: "EUR",
+				},
+				CountryCode:     "NL",
+				MerchantAccount: MerchantAccount,
+				Channel:         "Web",
+				ReturnUrl:       "http://localhost:3000/redirect",
+				PaymentMethod: map[string]interface{}{
+					"type":        "scheme",
+					"number":      "4111111111111111",
+					"cvc":         "737",
+					"expiryMonth": "03",
+					"expiryYear":  "2030",
+					"holderName":  "John Smith",
+				},
+			}
+
+			require.Nil(t, req.ApplicationInfo)
+
+			iKey := uuid.New().String()
+			client.SetIdempotencyKey(iKey)
+			res, _, _ := client.Checkout.Payments(req)
+			pspRef := res.PspReference
+
+			client.SetIdempotencyKey(iKey)
+			res, _, _ = client.Checkout.Payments(req)
+			require.Equal(t, pspRef, res.PspReference)
+
+			// Idempotency Key is not set for this request. Should have a new PspReference.
+			res, _, _ = client.Checkout.Payments(req)
+			require.NotEqual(t, pspRef, res.PspReference)
+		})
+
 		t.Run("Create an API request that should merge ApplicationInfo", func(t *testing.T) {
 
 			req := &checkout.PaymentRequest{
