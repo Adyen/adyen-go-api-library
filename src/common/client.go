@@ -87,6 +87,12 @@ func (c *Client) MakeHTTPPostRequest(req interface{}, res interface{}, path stri
 	}
 
 	httpResponse, err := c.CallAPI(r)
+
+	_, ok := c.Cfg.DefaultHeader["Idempotency-Key"]
+	if ok {
+		delete(c.Cfg.DefaultHeader, "Idempotency-Key")
+	}
+
 	if err != nil || httpResponse == nil {
 		return httpResponse, err
 	}
