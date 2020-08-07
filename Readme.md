@@ -26,7 +26,7 @@ You can use go modules to add our library to your project
 ### Go module
 
 ```bash
-go get github.com/adyen/adyen-go-api-library
+go get github.com/adyen/adyen-go-api-library/v2
 ```
 
 ## Documentation

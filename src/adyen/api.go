@@ -252,3 +252,13 @@ func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix
 func (c *APIClient) GetConfig() *common.Config {
 	return c.client.Cfg
 }
+
+/*
+SetIdempotencyKey A idempotency key is added to the request headers once. A subsequent request using the same
+idempotency key will be processed as if it was the first request.
+This header option is not persistent which means that whenever you want to use a idempotency key, you need to
+"SetIdempotencyKey" again before each request.
+*/
+func (c *APIClient) SetIdempotencyKey(i string) {
+	c.client.Cfg.AddDefaultHeader("Idempotency-Key", i)
+}
