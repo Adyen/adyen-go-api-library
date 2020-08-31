@@ -39,7 +39,7 @@ func Test_CheckoutUtility(t *testing.T) {
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
 			assert.Equal(t, true, strings.Contains(err.Error(), "Required field 'originDomains' is null"))
-			assert.Equal(t, 500, httpRes.StatusCode)
+			assert.Equal(t, 400, httpRes.StatusCode)
 			require.NotNil(t, res)
 		})
 		t.Run("Create an API request that should pass", func(t *testing.T) {
