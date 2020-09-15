@@ -7,10 +7,12 @@
 package tests
 
 import (
-	"github.com/google/uuid"
+	"context"
 	"os"
 	"strings"
 	"testing"
+
+	"github.com/google/uuid"
 
 	"github.com/adyen/adyen-go-api-library/v2/src/adyen"
 	"github.com/adyen/adyen-go-api-library/v2/src/checkout"
@@ -184,12 +186,13 @@ func Test_Checkout(t *testing.T) {
 			require.Nil(t, req.ApplicationInfo)
 
 			iKey := uuid.New().String()
-			client.SetIdempotencyKey(iKey)
-			res, _, _ := client.Checkout.Payments(req)
+			ctx := context.Background()
+			ctx = common.WithIdempotencyKey(ctx, iKey)
+			res, _, _ := client.Checkout.Payments(req, ctx)
 			pspRef := res.PspReference
 
-			client.SetIdempotencyKey(iKey)
-			res, _, _ = client.Checkout.Payments(req)
+			ctx = common.WithIdempotencyKey(ctx, iKey)
+			res, _, _ = client.Checkout.Payments(req, ctx)
 			require.Equal(t, pspRef, res.PspReference)
 
 			// Idempotency Key is not set for this request. Should have a new PspReference.
