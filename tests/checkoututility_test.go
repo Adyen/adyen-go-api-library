@@ -11,9 +11,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/adyen/adyen-go-api-library/v2/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v2/src/checkoututility"
-	"github.com/adyen/adyen-go-api-library/v2/src/common"
+	"github.com/adyen/adyen-go-api-library/v3/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v3/src/checkoututility"
+	"github.com/adyen/adyen-go-api-library/v3/src/common"
 	"github.com/joho/godotenv"
 
 	"github.com/stretchr/testify/assert"
@@ -39,7 +39,7 @@ func Test_CheckoutUtility(t *testing.T) {
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
 			assert.Equal(t, true, strings.Contains(err.Error(), "Required field 'originDomains' is null"))
-			assert.Equal(t, 500, httpRes.StatusCode)
+			assert.Equal(t, 400, httpRes.StatusCode)
 			require.NotNil(t, res)
 		})
 		t.Run("Create an API request that should pass", func(t *testing.T) {

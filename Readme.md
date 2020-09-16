@@ -26,7 +26,7 @@ You can use go modules to add our library to your project
 ### Go module
 
 ```bash
-go get github.com/adyen/adyen-go-api-library/v2
+go get github.com/adyen/adyen-go-api-library/v3
 ```
 
 ## Documentation
@@ -40,9 +40,9 @@ go get github.com/adyen/adyen-go-api-library/v2
 
 ```go
 import (
-	"github.com/adyen/adyen-go-api-library/v2/src/checkout"
-	"github.com/adyen/adyen-go-api-library/v2/src/common"
-	"github.com/adyen/adyen-go-api-library/v2/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v3/src/checkout"
+	"github.com/adyen/adyen-go-api-library/v3/src/common"
+	"github.com/adyen/adyen-go-api-library/v3/src/adyen"
 )
 
 client := adyen.NewClient(&common.Config{
@@ -59,9 +59,9 @@ res, httpRes, err := client.Checkout.PaymentMethods(&checkout.PaymentMethodsRequ
 
 ```go
 import (
-    "github.com/adyen/adyen-go-api-library/v2/src/checkout"
-    "github.com/adyen/adyen-go-api-library/v2/src/common"
-	"github.com/adyen/adyen-go-api-library/v2/src/adyen"
+    "github.com/adyen/adyen-go-api-library/v3/src/checkout"
+    "github.com/adyen/adyen-go-api-library/v3/src/common"
+	"github.com/adyen/adyen-go-api-library/v3/src/adyen"
 )
 
 client := adyen.NewClient(&common.Config{
@@ -79,9 +79,9 @@ res, httpRes, err := client.Checkout.PaymentMethods(&checkout.PaymentMethodsRequ
 
 ```go
 import (
-    "github.com/adyen/adyen-go-api-library/v2/src/recurring"
-    "github.com/adyen/adyen-go-api-library/v2/src/common"
-	"github.com/adyen/adyen-go-api-library/v2/src/adyen"
+    "github.com/adyen/adyen-go-api-library/v3/src/recurring"
+    "github.com/adyen/adyen-go-api-library/v3/src/common"
+	"github.com/adyen/adyen-go-api-library/v3/src/adyen"
 )
 
 client := adyen.NewClient(&common.Config{
@@ -104,8 +104,8 @@ res, httpRes, err := client.Recurring.ListRecurringDetails(&recurring.RecurringD
 
 ```go
 import (
-    "github.com/adyen/adyen-go-api-library/v2/src/adyen"
-    "github.com/adyen/adyen-go-api-library/v2/src/common"
+    "github.com/adyen/adyen-go-api-library/v3/src/adyen"
+    "github.com/adyen/adyen-go-api-library/v3/src/common"
 )
 
 client := adyen.NewClient(&common.Config{
@@ -120,9 +120,9 @@ notification, err := client.Notification.HandleNotificationRequest(jsonRequestSt
 
 ```go
 import (
-	"github.com/adyen/adyen-go-api-library/v2/src/common"
-	"github.com/adyen/adyen-go-api-library/v2/src/checkout"
-	"github.com/adyen/adyen-go-api-library/v2/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v3/src/common"
+	"github.com/adyen/adyen-go-api-library/v3/src/checkout"
+	"github.com/adyen/adyen-go-api-library/v3/src/adyen"
 )
 
 client := adyen.NewClient(&common.Config{

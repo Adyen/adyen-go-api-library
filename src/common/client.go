@@ -88,11 +88,6 @@ func (c *Client) MakeHTTPPostRequest(req interface{}, res interface{}, path stri
 
 	httpResponse, err := c.CallAPI(r)
 
-	_, ok := c.Cfg.DefaultHeader["Idempotency-Key"]
-	if ok {
-		delete(c.Cfg.DefaultHeader, "Idempotency-Key")
-	}
-
 	if err != nil || httpResponse == nil {
 		return httpResponse, err
 	}
@@ -245,6 +240,10 @@ func (c *Client) PrepareRequest(
 
 	for header, value := range c.Cfg.DefaultHeader {
 		localVarRequest.Header.Add(header, value)
+	}
+
+	if key, ok := IdempotencyKey(ctx); ok {
+		localVarRequest.Header.Add("Idempotency-Key", key)
 	}
 
 	return localVarRequest, nil
@@ -530,4 +529,24 @@ func (e APIError) Error() string {
 		return fmt.Sprintf("%s: %s (%s: %s)", e.Err, e.Message, e.Type, e.Code)
 	}
 	return e.Err
+}
+
+var ctxKeyIdempotencyKey = 1
+
+/*
+WithIdempotencyKey returns a context with an Idempotency-Key added to the provided context.
+Pass this context as the first context to a call to Adyen, and the idempotency
+key will be added to the header
+*/
+func WithIdempotencyKey(ctx context.Context, idempotencyKey string) context.Context {
+	return context.WithValue(ctx, ctxKeyIdempotencyKey, idempotencyKey)
+}
+
+func IdempotencyKey(ctx context.Context) (string, bool) {
+	if ctx == nil {
+		return "", false
+	}
+	ikey := ctx.Value(ctxKeyIdempotencyKey)
+	key, ok := ikey.(string)
+	return key, ok
 }

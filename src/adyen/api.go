@@ -10,18 +10,18 @@ import (
 	"fmt"
 	"net/http"
 
-	binlookup "github.com/adyen/adyen-go-api-library/v2/src/binlookup"
-	checkout "github.com/adyen/adyen-go-api-library/v2/src/checkout"
-	checkoututility "github.com/adyen/adyen-go-api-library/v2/src/checkoututility"
-	common "github.com/adyen/adyen-go-api-library/v2/src/common"
-	notification "github.com/adyen/adyen-go-api-library/v2/src/notification"
-	payments "github.com/adyen/adyen-go-api-library/v2/src/payments"
-	payouts "github.com/adyen/adyen-go-api-library/v2/src/payouts"
-	platformsaccount "github.com/adyen/adyen-go-api-library/v2/src/platformsaccount"
-	platformsfund "github.com/adyen/adyen-go-api-library/v2/src/platformsfund"
-	platformshostedonboardingpage "github.com/adyen/adyen-go-api-library/v2/src/platformshostedonboardingpage"
-	platformsnotificationconfiguration "github.com/adyen/adyen-go-api-library/v2/src/platformsnotificationconfiguration"
-	recurring "github.com/adyen/adyen-go-api-library/v2/src/recurring"
+	binlookup "github.com/adyen/adyen-go-api-library/v3/src/binlookup"
+	checkout "github.com/adyen/adyen-go-api-library/v3/src/checkout"
+	checkoututility "github.com/adyen/adyen-go-api-library/v3/src/checkoututility"
+	common "github.com/adyen/adyen-go-api-library/v3/src/common"
+	notification "github.com/adyen/adyen-go-api-library/v3/src/notification"
+	payments "github.com/adyen/adyen-go-api-library/v3/src/payments"
+	payouts "github.com/adyen/adyen-go-api-library/v3/src/payouts"
+	platformsaccount "github.com/adyen/adyen-go-api-library/v3/src/platformsaccount"
+	platformsfund "github.com/adyen/adyen-go-api-library/v3/src/platformsfund"
+	platformshostedonboardingpage "github.com/adyen/adyen-go-api-library/v3/src/platformshostedonboardingpage"
+	platformsnotificationconfiguration "github.com/adyen/adyen-go-api-library/v3/src/platformsnotificationconfiguration"
+	recurring "github.com/adyen/adyen-go-api-library/v3/src/recurring"
 )
 
 // Constants used for the client API
@@ -251,14 +251,4 @@ func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix
 // Caution: modifying the configuration while live can cause data races and potentially unwanted behavior
 func (c *APIClient) GetConfig() *common.Config {
 	return c.client.Cfg
-}
-
-/*
-SetIdempotencyKey A idempotency key is added to the request headers once. A subsequent request using the same
-idempotency key will be processed as if it was the first request.
-This header option is not persistent which means that whenever you want to use a idempotency key, you need to
-"SetIdempotencyKey" again before each request.
-*/
-func (c *APIClient) SetIdempotencyKey(i string) {
-	c.client.Cfg.AddDefaultHeader("Idempotency-Key", i)
 }

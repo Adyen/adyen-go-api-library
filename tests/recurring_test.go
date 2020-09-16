@@ -11,10 +11,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/adyen/adyen-go-api-library/v2/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v2/src/common"
+	"github.com/adyen/adyen-go-api-library/v3/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v3/src/common"
 
-	"github.com/adyen/adyen-go-api-library/v2/src/recurring"
+	"github.com/adyen/adyen-go-api-library/v3/src/recurring"
 	"github.com/joho/godotenv"
 
 	"github.com/stretchr/testify/assert"

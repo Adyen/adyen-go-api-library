@@ -61,7 +61,7 @@ const (
 
 const (
 	LibName    = "adyen-go-api-library"
-	LibVersion = "2.2.0"
+	LibVersion = "3.0.0"
 )
 
 // Config stores the configuration of the API client
@@ -97,9 +97,4 @@ func (c *Config) GetCheckoutEndpoint() (string, error) {
 		return "", fmt.Errorf(message)
 	}
 	return c.CheckoutEndpoint, nil
-}
-
-// AddDefaultHeader adds a new HTTP header to the default header in the Request
-func (c *Config) AddDefaultHeader(key string, value string) {
-	c.DefaultHeader[key] = value
 }
