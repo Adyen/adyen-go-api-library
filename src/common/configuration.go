@@ -98,8 +98,3 @@ func (c *Config) GetCheckoutEndpoint() (string, error) {
 	}
 	return c.CheckoutEndpoint, nil
 }
-
-// AddDefaultHeader adds a new HTTP header to the default header in the Request
-func (c *Config) AddDefaultHeader(key string, value string) {
-	c.DefaultHeader[key] = value
-}
