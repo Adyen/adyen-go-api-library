@@ -10,7 +10,7 @@
 
 package payments
 
-import "github.com/adyen/adyen-go-api-library/v2/src/common"
+import "github.com/adyen/adyen-go-api-library/v3/src/common"
 
 // PaymentResult struct for PaymentResult
 type PaymentResult struct {

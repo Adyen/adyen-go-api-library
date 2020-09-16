@@ -3,7 +3,7 @@ package notification
 import (
 	"encoding/json"
 
-	"github.com/adyen/adyen-go-api-library/v2/src/common"
+	"github.com/adyen/adyen-go-api-library/v3/src/common"
 )
 
 // NotificationService used to namespace this util under the client for consistency and for future prooffing if this ever requires api access

@@ -14,9 +14,9 @@ import (
 
 	"github.com/google/uuid"
 
-	"github.com/adyen/adyen-go-api-library/v2/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v2/src/checkout"
-	"github.com/adyen/adyen-go-api-library/v2/src/common"
+	"github.com/adyen/adyen-go-api-library/v3/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v3/src/checkout"
+	"github.com/adyen/adyen-go-api-library/v3/src/common"
 
 	"github.com/joho/godotenv"
 

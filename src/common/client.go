@@ -531,17 +531,15 @@ func (e APIError) Error() string {
 	return e.Err
 }
 
-type ctxKey int
-
-var ctxKeyIdempotencyKey ctxKey = 1
+var ctxKeyIdempotencyKey = 1
 
 /*
 WithIdempotencyKey returns a context with an Idempotency-Key added to the provided context.
 Pass this context as the first context to a call to Adyen, and the idempotency
 key will be added to the header
 */
-func WithIdempotencyKey(ctx context.Context, i string) context.Context {
-	return context.WithValue(ctx, ctxKeyIdempotencyKey, i)
+func WithIdempotencyKey(ctx context.Context, idempotencyKey string) context.Context {
+	return context.WithValue(ctx, ctxKeyIdempotencyKey, idempotencyKey)
 }
 
 func IdempotencyKey(ctx context.Context) (string, bool) {
