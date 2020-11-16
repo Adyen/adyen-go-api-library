@@ -68,7 +68,7 @@ type APIClient struct {
 	PlatformsFund                      *platformsfund.PlatformsFund
 	PlatformsHostedOnboardingPage      *platformshostedonboardingpage.PlatformsHostedOnboardingPage
 	PlatformsNotificationConfiguration *platformsnotificationconfiguration.PlatformsNotificationConfiguration
-	Disputes													 *disputes.Disputes
+	Disputes                           *disputes.Disputes
 }
 
 // NewClient creates a new API client. Requires Config object.
