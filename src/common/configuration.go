@@ -75,6 +75,7 @@ type Config struct {
 	ApiKey                  string        `json:"apiKey,omitempty"`
 	ConnectionTimeoutMillis time.Duration `json:"connectionTimeoutMillis,omitempty"`
 	CertificatePath         string        `json:"certificatePath,omitempty"`
+	DisputesEndpoint				string				`json:"disputesEndpoint,omitempty"`
 
 	//Checkout Specific
 	CheckoutEndpoint string `json:"checkoutEndpoint,omitempty"`
