@@ -15,11 +15,11 @@ import (
 	"os"
 	"testing"
 
-	"github.com/adyen/adyen-go-api-library/v3/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v3/src/common"
-	"github.com/adyen/adyen-go-api-library/v3/src/platformsaccount"
-	"github.com/adyen/adyen-go-api-library/v3/src/platformsfund"
-	"github.com/adyen/adyen-go-api-library/v3/src/platformsnotificationconfiguration"
+	"github.com/adyen/adyen-go-api-library/v4/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v4/src/common"
+	"github.com/adyen/adyen-go-api-library/v4/src/platformsaccount"
+	"github.com/adyen/adyen-go-api-library/v4/src/platformsfund"
+	"github.com/adyen/adyen-go-api-library/v4/src/platformsnotificationconfiguration"
 	"github.com/google/uuid"
 	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
@@ -46,7 +46,7 @@ func Test_Platforms(t *testing.T) {
 			AccountHolderCode: id,
 			AccountHolderDetails: platformsaccount.AccountHolderDetails{
 				Email:           "go_library@test.com",
-				FullPhoneNumber: "312030291928",
+				FullPhoneNumber: "+312030291928",
 				WebAddress:      "http://example.com",
 				IndividualDetails: &platformsaccount.IndividualDetails{
 					Name: &platformsaccount.ViasName{

@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.0.3
 info:
   contact:
     email: support@adyen.com
@@ -18,6 +18,7 @@ paths:
         Verifies whether 3D Secure is available for the specified BIN or card brand. For 3D Secure 2, this endpoint also returns device fingerprinting keys.
 
         For more information, refer to [3D Secure 2](https://docs.adyen.com/checkout/3d-secure/native-3ds2).
+      operationId: post-get3dsAvailability
       requestBody:
         content:
           application/json:
@@ -32,14 +33,14 @@ paths:
           description: OK - the request has succeeded.
         "400":
           description: Bad Request - a problem reading or understanding the request.
-        "422":
-          description: Unprocessable Entity - a request validation error.
         "401":
           description: Unauthorized - authentication required.
-        "500":
-          description: Internal Server Error - the server could not process the request.
         "403":
           description: Forbidden - insufficient permissions to process the request.
+        "422":
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          description: Internal Server Error - the server could not process the request.
       summary: Checks 3D Secure availability.
       x-groupName: General
       x-sortIndex: 0
@@ -51,6 +52,7 @@ paths:
         To retrieve this information, make the call to the `/getCostEstimate` endpoint. The response to this call contains the amount of the interchange and scheme fees charged by the network for this transaction, and also which surcharging policy is possible (based on current regulations).
 
         > Since not all information is known in advance (for example, if the cardholder will successfully authenticate via 3D Secure or if you also plan to provide additional Level 2/3 data), the returned amounts are based on a set of assumption criteria you define in the `assumptions` parameter.
+      operationId: post-getCostEstimate
       requestBody:
         content:
           application/json:
@@ -65,14 +67,14 @@ paths:
           description: OK - the request has succeeded.
         "400":
           description: Bad Request - a problem reading or understanding the request.
-        "422":
-          description: Unprocessable Entity - a request validation error.
         "401":
           description: Unauthorized - authentication required.
-        "500":
-          description: Internal Server Error - the server could not process the request.
         "403":
           description: Forbidden - insufficient permissions to process the request.
+        "422":
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          description: Internal Server Error - the server could not process the request.
       summary: Gets a cost estimate.
       x-groupName: General
       x-sortIndex: 0
@@ -89,10 +91,7 @@ components:
           minLength: 3
           type: string
         value:
-          description: |-
-            The payable amount that can be charged for the transaction.
-
-            The transaction amount needs to be represented in minor units according to the [following table](https://docs.adyen.com/development-resources/currency-codes).
+          description: The amount of the transaction, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
           format: int64
           type: integer
       required:
@@ -202,10 +201,10 @@ components:
           type: integer
     CostEstimateRequest:
       example:
-        encryptedCard: encryptedCard
         amount:
           currency: currency
           value: 0
+        encryptedCardNumber: encryptedCardNumber
         merchantAccount: merchantAccount
         recurring:
           recurringExpiry: 2000-01-23T04:56:07.000+00:00
@@ -234,15 +233,15 @@ components:
           description: |-
             The card number (4-19 characters) for PCI compliant use cases. Do not use any separators.
 
-            > Either the `cardNumber` or `encryptedCard` field must be provided in a payment request.
+            > Either the `cardNumber` or `encryptedCardNumber` field must be provided in a payment request.
           maxLength: 19
           minLength: 4
           type: string
-        encryptedCard:
+        encryptedCardNumber:
           description: |-
             Encrypted data that stores card information for non PCI-compliant use cases. The encrypted data must be created with the Checkout Card Component or Secured Fields Component, and must contain the `encryptedCardNumber` field.
 
-            > Either the `cardNumber` or `encryptedCard` field must be provided in a payment request.
+            > Either the `cardNumber` or `encryptedCardNumber` field must be provided in a payment request.
           type: string
         merchantAccount:
           description: The merchant account identifier you want to process the (transaction)
@@ -275,7 +274,7 @@ components:
           type: string
         shopperReference:
           description: |-
-            The shopper's reference to uniquely identify this shopper (e.g. user ID or account ID).
+            Your reference to uniquely identify this shopper (for example, user ID or account ID). Minimum length: 3 characters.
             > This field is required for recurring payments.
           type: string
       required:
@@ -424,11 +423,14 @@ components:
         - brands
         merchantAccount: merchantAccount
         recurringDetailReference: recurringDetailReference
-        additionalData: '{}'
+        additionalData:
+          key: additionalData
         cardNumber: cardNumber
         shopperReference: shopperReference
       properties:
         additionalData:
+          additionalProperties:
+            type: string
           description: |-
             This field contains additional data, which may be required for a particular request.
 
@@ -453,7 +455,6 @@ components:
             user ID or account ID).
           type: string
       required:
-      - brands
       - merchantAccount
     ThreeDSAvailabilityResponse:
       example:
@@ -498,5 +499,13 @@ components:
         threeDS2supported:
           description: Indicator if 3D Secure 2 is supported.
           type: boolean
+  securitySchemes:
+    ApiKeyAuth:
+      in: header
+      name: X-API-Key
+      type: apiKey
+    BasicAuth:
+      scheme: basic
+      type: http
 x-groups:
 - General

@@ -10,9 +10,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/adyen/adyen-go-api-library/v3/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v3/src/checkout"
-	"github.com/adyen/adyen-go-api-library/v3/src/common"
+	"github.com/adyen/adyen-go-api-library/v4/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v4/src/checkout"
+	"github.com/adyen/adyen-go-api-library/v4/src/common"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

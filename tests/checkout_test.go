@@ -14,9 +14,9 @@ import (
 
 	"github.com/google/uuid"
 
-	"github.com/adyen/adyen-go-api-library/v3/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v3/src/checkout"
-	"github.com/adyen/adyen-go-api-library/v3/src/common"
+	"github.com/adyen/adyen-go-api-library/v4/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v4/src/checkout"
+	"github.com/adyen/adyen-go-api-library/v4/src/common"
 
 	"github.com/joho/godotenv"
 
@@ -36,7 +36,7 @@ func Test_Checkout(t *testing.T) {
 		ApiKey:      APIKey,
 		Environment: "TEST",
 	})
-	//client.GetConfig().Debug = true
+	// client.GetConfig().Debug = true
 
 	t.Run("PaymentLinks", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
@@ -79,9 +79,9 @@ func Test_Checkout(t *testing.T) {
 
 			require.Nil(t, err)
 			require.NotNil(t, httpRes)
-			assert.Equal(t, 200, httpRes.StatusCode)
+			assert.Equal(t, 201, httpRes.StatusCode)
 			require.NotNil(t, res)
-			assert.Equal(t, &checkout.Amount{Currency: "EUR", Value: 1250}, res.Amount)
+			assert.Equal(t, checkout.Amount{Currency: "EUR", Value: 1250}, res.Amount)
 			assert.NotNil(t, res.Url)
 		})
 	})
@@ -89,7 +89,8 @@ func Test_Checkout(t *testing.T) {
 	t.Run("PaymentMethods", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 
-			res, httpRes, err := client.Checkout.PaymentMethods(&checkout.PaymentMethodsRequest{})
+			res, httpRes, err :=
+				client.Checkout.PaymentMethods(&checkout.PaymentMethodsRequest{})
 
 			require.NotNil(t, err)
 			assert.Equal(t, true, strings.Contains(err.Error(), "Invalid Merchant Account (security: 901)"))
@@ -118,13 +119,12 @@ func Test_Checkout(t *testing.T) {
 			})
 
 			require.NotNil(t, err)
-			assert.Equal(t, true, strings.Contains(err.Error(), "Unsupported currency specified (validation: 138)"))
+			assert.Equal(t, true, strings.Contains(err.Error(), "paymentMethod object has not been provided"))
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 422, httpRes.StatusCode)
 			require.NotNil(t, res)
 		})
 		t.Run("Create an API request that should pass", func(t *testing.T) {
-
 			req := &checkout.PaymentRequest{
 				Reference: "123456781235",
 				Amount: checkout.Amount{
@@ -151,7 +151,6 @@ func Test_Checkout(t *testing.T) {
 			require.NotNil(t, res)
 			assert.Equal(t, common.RedirectShopper, res.ResultCode)
 			require.NotNil(t, res.Action)
-			assert.Equal(t, "ideal", res.Action.PaymentMethodType)
 			require.NotNil(t, res.PaymentData)
 
 			// check if req has ApplicationInfo added to it
@@ -219,11 +218,11 @@ func Test_Checkout(t *testing.T) {
 				ApplicationInfo: &checkout.ApplicationInfo{
 					AdyenPaymentSource: &checkout.CommonField{
 						Name:    "test",
-						Version: "v50",
+						Version: "v65",
 					},
 					AdyenLibrary: &checkout.CommonField{
 						Name:    "test",
-						Version: "v50",
+						Version: "v65",
 					},
 				},
 			}
@@ -236,7 +235,6 @@ func Test_Checkout(t *testing.T) {
 			require.NotNil(t, res)
 			assert.Equal(t, common.RedirectShopper, res.ResultCode)
 			require.NotNil(t, res.Action)
-			assert.Equal(t, "ideal", res.Action.PaymentMethodType)
 			require.NotNil(t, res.PaymentData)
 
 			// check if req has ApplicationInfo added to it
@@ -245,7 +243,7 @@ func Test_Checkout(t *testing.T) {
 			require.Equal(t, common.LibName, req.ApplicationInfo.AdyenLibrary.Name)
 			require.Equal(t, common.LibVersion, req.ApplicationInfo.AdyenLibrary.Version)
 			require.Equal(t, "test", req.ApplicationInfo.AdyenPaymentSource.Name)
-			require.Equal(t, "v50", req.ApplicationInfo.AdyenPaymentSource.Version)
+			require.Equal(t, "v65", req.ApplicationInfo.AdyenPaymentSource.Version)
 		})
 	})
 
@@ -253,9 +251,9 @@ func Test_Checkout(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 			res, httpRes, err := client.Checkout.PaymentsDetails(&checkout.DetailsRequest{
 				PaymentData: "1234",
-				Details: map[string]interface{}{
-					"MD":    "Ab02b4c0!BQABAgCW5sxB4e/==",
-					"PaRes": "eNrNV0mTo7gS...",
+				Details: checkout.PaymentCompletionDetails{
+					MD:    "Ab02b4c0!BQABAgCW5sxB4e/==",
+					PaRes: "eNrNV0mTo7gS...",
 				},
 			})
 
