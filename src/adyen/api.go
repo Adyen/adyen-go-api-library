@@ -47,9 +47,9 @@ const (
 	TerminalAPIEndpointTest         = "https://terminal-api-test.adyen.com"
 	TerminalAPIEndpointLive         = "https://terminal-api-live.adyen.com"
 	EndpointProtocol                = "https://"
-	DisputesEndpointTest            = "https://ca-test.adyen.com/ca/services/DisputeService/v1"
-	DisputesEndpointLive            = "https://ca-live.adyen.com/ca/services/DisputeService/v1"
-	DisputesAPIVersion              = "v1"
+	DisputesEndpointTest            = "https://ca-test.adyen.com/ca/services/DisputeService"
+	DisputesEndpointLive            = "https://ca-live.adyen.com/ca/services/DisputeService"
+	DisputesAPIVersion              = "v30"
 )
 
 // APIClient manages communication with the Adyen Checkout API API v51
