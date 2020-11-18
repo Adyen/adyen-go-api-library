@@ -9,9 +9,11 @@
  */
 
 package recurring
+
 import (
 	"time"
 )
+
 // RecurringDetail struct for RecurringDetail
 type RecurringDetail struct {
 	// This field contains additional data, which may be returned in a particular response.  The additionalData object consists of entries, each of which includes the key and value.

@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.0.3
 info:
   contact:
     email: support@adyen.com
@@ -7,7 +7,7 @@ info:
   description: |-
     The Fund API provides endpoints for managing the funds in the accounts on your platform. These management operations include actions such as the transfer of funds from one account to another, the payout of funds to an account holder, and the retrieval of balances in an account.
 
-    For more information, refer to our [documentation](https://docs.adyen.com/marketpay).
+    For more information, refer to our [documentation](https://docs.adyen.com/platforms).
     ## Authentication
     To connect to the Fund API, you must use basic authentication credentials of your web service user. If you don't have one, please contact the [Adyen Support Team](https://support.adyen.com/hc/en-us/requests/new). Then use its credentials to authenticate your request, for example:
 
@@ -24,19 +24,20 @@ info:
 
     For example:
     ```
-    https://cal-test.adyen.com/cal/services/Fund/v5/accountHolderBalance
+    https://cal-test.adyen.com/cal/services/Fund/v6/accountHolderBalance
     ```
   termsOfService: https://www.adyen.com/legal/terms-and-conditions
   title: 'Adyen for Platforms: Fund API'
-  version: "5"
+  version: "6"
 servers:
-- url: https://cal-test.adyen.com/cal/services/Fund/v5
+- url: https://cal-test.adyen.com/cal/services/Fund/v6
 paths:
   /accountHolderBalance:
     post:
       description: 'This endpoint is used to retrieve the balance(s) of the accounts
         of an account holder. An account''s balances are on a per-currency basis (i.e.,
         an account may have multiple balances: one per currency).'
+      operationId: post-accountHolderBalance
       requestBody:
         content:
           application/json:
@@ -51,14 +52,14 @@ paths:
           description: OK - the request has succeeded.
         "400":
           description: Bad Request - a problem reading or understanding the request.
-        "422":
-          description: Unprocessable Entity - a request validation error.
         "401":
           description: Unauthorized - authentication required.
-        "500":
-          description: Internal Server Error - the server could not process the request.
         "403":
           description: Forbidden - insufficient permissions to process the request.
+        "422":
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          description: Internal Server Error - the server could not process the request.
       summary: Retrieve the balance(s) of an account holder.
       x-groupName: General
       x-sortIndex: 1
@@ -70,6 +71,7 @@ paths:
         Transactions per account; in order to retrieve the following set of Transactions
         another call should be made with the 'page' value incremented. Note that Transactions
         are ordered with most recent first.
+      operationId: post-accountHolderTransactionList
       requestBody:
         content:
           application/json:
@@ -84,14 +86,14 @@ paths:
           description: OK - the request has succeeded.
         "400":
           description: Bad Request - a problem reading or understanding the request.
-        "422":
-          description: Unprocessable Entity - a request validation error.
         "401":
           description: Unauthorized - authentication required.
-        "500":
-          description: Internal Server Error - the server could not process the request.
         "403":
           description: Forbidden - insufficient permissions to process the request.
+        "422":
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          description: Internal Server Error - the server could not process the request.
       summary: Retrieve a list of transactions.
       x-groupName: General
       x-sortIndex: 2
@@ -99,6 +101,7 @@ paths:
     post:
       description: This endpoint is used to pay out a specified amount from an account
         to the bank account of the account's account holder.
+      operationId: post-payoutAccountHolder
       requestBody:
         content:
           application/json:
@@ -113,14 +116,14 @@ paths:
           description: OK - the request has succeeded.
         "400":
           description: Bad Request - a problem reading or understanding the request.
-        "422":
-          description: Unprocessable Entity - a request validation error.
         "401":
           description: Unauthorized - authentication required.
-        "500":
-          description: Internal Server Error - the server could not process the request.
         "403":
           description: Forbidden - insufficient permissions to process the request.
+        "422":
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          description: Internal Server Error - the server could not process the request.
       summary: Disburse a specified amount from an account to the account holder.
       x-groupName: General
       x-sortIndex: 3
@@ -129,6 +132,7 @@ paths:
       description: 'This endpoint is used to refund funds transferred from one account
         to another. Both accounts must be in the same marketplace, but can have different
         account holders. '
+      operationId: post-refundFundsTransfer
       requestBody:
         content:
           application/json:
@@ -143,14 +147,14 @@ paths:
           description: OK - the request has succeeded.
         "400":
           description: Bad Request - a problem reading or understanding the request.
-        "422":
-          description: Unprocessable Entity - a request validation error.
         "401":
           description: Unauthorized - authentication required.
-        "500":
-          description: Internal Server Error - the server could not process the request.
         "403":
           description: Forbidden - insufficient permissions to process the request.
+        "422":
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          description: Internal Server Error - the server could not process the request.
       summary: Make a refund of the existing transfer funds transfer.
       x-groupName: General
       x-sortIndex: 5
@@ -163,6 +167,7 @@ paths:
         commission(s), fee(s), and payment(s) to other account(s), will remain in
         the accounts to which they were sent as designated by the original payment's
         split details.
+      operationId: post-refundNotPaidOutTransfers
       requestBody:
         content:
           application/json:
@@ -177,14 +182,14 @@ paths:
           description: OK - the request has succeeded.
         "400":
           description: Bad Request - a problem reading or understanding the request.
-        "422":
-          description: Unprocessable Entity - a request validation error.
         "401":
           description: Unauthorized - authentication required.
-        "500":
-          description: Internal Server Error - the server could not process the request.
         "403":
           description: Forbidden - insufficient permissions to process the request.
+        "422":
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          description: Internal Server Error - the server could not process the request.
       summary: Refund all transactions of an account since the most recent payout.
       x-groupName: General
       x-sortIndex: 7
@@ -196,6 +201,7 @@ paths:
         and any further payments to the benefactor account are automatically sent
         to the beneficiary account. Note that a series of benefactor/beneficiaries
         may not exceed four (4) beneficiaries and may not have a cycle in it.
+      operationId: post-setupBeneficiary
       requestBody:
         content:
           application/json:
@@ -210,14 +216,14 @@ paths:
           description: OK - the request has succeeded.
         "400":
           description: Bad Request - a problem reading or understanding the request.
-        "422":
-          description: Unprocessable Entity - a request validation error.
         "401":
           description: Unauthorized - authentication required.
-        "500":
-          description: Internal Server Error - the server could not process the request.
         "403":
           description: Forbidden - insufficient permissions to process the request.
+        "422":
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          description: Internal Server Error - the server could not process the request.
       summary: Designate an account to be the beneficiary of a separate account and
         transfer the benefactor's current balance to the beneficiary.
       x-groupName: General
@@ -228,6 +234,7 @@ paths:
         account. Both accounts must be in the same marketplace, but can have different
         account holders. The transfer must include a transfer code, which should be
         determined by the marketplace, in compliance with local regulations.
+      operationId: post-transferFunds
       requestBody:
         content:
           application/json:
@@ -242,14 +249,14 @@ paths:
           description: OK - the request has succeeded.
         "400":
           description: Bad Request - a problem reading or understanding the request.
-        "422":
-          description: Unprocessable Entity - a request validation error.
         "401":
           description: Unauthorized - authentication required.
-        "500":
-          description: Internal Server Error - the server could not process the request.
         "403":
           description: Forbidden - insufficient permissions to process the request.
+        "422":
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          description: Internal Server Error - the server could not process the request.
       summary: Transfer funds from one platform account to another.
       x-groupName: General
       x-sortIndex: 4
@@ -370,7 +377,7 @@ components:
             $ref: '#/components/schemas/ErrorFieldType'
           type: array
         pspReference:
-          description: The reference of a request.  Can be used to uniquely identify
+          description: The reference of a request. Can be used to uniquely identify
             the request.
           type: string
         resultCode:
@@ -378,8 +385,6 @@ components:
           type: string
         totalBalance:
           $ref: '#/components/schemas/DetailBalance'
-      required:
-      - pspReference
     AccountHolderTransactionListRequest:
       example:
         transactionListsPerAccount:
@@ -411,6 +416,8 @@ components:
             >* `CreditFailed` - a pending credit failure; the balance will not be credited.
             >* `Credited` - a credited balance.
             >* `PendingDebit` - a pending balance debit (e.g., a refund).
+            >* `CreditClosed` - a pending credit closed; the balance will not be credited.
+            >* `CreditSuspended` - a pending credit closed; the balance will not be credited.
             >* `DebitFailed` - a pending debit failure; the balance will not be debited.
             >* `Debited` - a debited balance (e.g., a refund).
             >* `DebitReversedReceived` - a pending refund reversal.
@@ -432,11 +439,15 @@ components:
             - ChargebackCorrectionReceived
             - ChargebackReceived
             - ChargebackReversed
+            - ChargebackReversedCorrection
+            - ChargebackReversedCorrectionReceived
             - ChargebackReversedReceived
             - Converted
+            - CreditClosed
             - CreditFailed
             - CreditReversed
             - CreditReversedReceived
+            - CreditSuspended
             - Credited
             - DebitFailed
             - DebitReversedReceived
@@ -446,6 +457,8 @@ components:
             - FundTransfer
             - FundTransferReversed
             - ManualCorrected
+            - ManualCorrectionCredited
+            - ManualCorrectionDebited
             - Payout
             - PayoutReversed
             - PendingCredit
@@ -670,14 +683,12 @@ components:
             $ref: '#/components/schemas/ErrorFieldType'
           type: array
         pspReference:
-          description: The reference of a request.  Can be used to uniquely identify
+          description: The reference of a request. Can be used to uniquely identify
             the request.
           type: string
         resultCode:
           description: The result code.
           type: string
-      required:
-      - pspReference
     AccountTransactionList:
       example:
         accountCode: accountCode
@@ -794,10 +805,7 @@ components:
           minLength: 3
           type: string
         value:
-          description: |-
-            The payable amount that can be charged for the transaction.
-
-            The transaction amount needs to be represented in minor units according to the [following table](https://docs.adyen.com/development-resources/currency-codes).
+          description: The amount of the transaction, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
           format: int64
           type: integer
       required:
@@ -835,7 +843,7 @@ components:
         accountNumber:
           description: |-
             The bank account number (without separators).
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         accountType:
           description: |-
@@ -843,7 +851,7 @@ components:
             Only applicable to bank accounts held in the USA.
             The permitted values are: `checking`, `savings`.
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         bankAccountName:
           description: The name of the bank account.
@@ -865,25 +873,25 @@ components:
         bankBicSwift:
           description: |-
             The bank identifier code.
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         bankCity:
           description: |-
             The city in which the bank branch is located.
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         bankCode:
           description: |-
             The bank code of the banking institution with which the bank account is registered.
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         bankName:
           description: |-
             The name of the banking institution with which the bank account is held.
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         branchCode:
           description: |-
@@ -891,46 +899,46 @@ components:
             * United States - Routing number
             * United Kingdom - Sort code
             * Germany - Bankleitzahl
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         checkCode:
           description: |-
             The check code of the bank account.
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         countryCode:
           description: |-
             The two-letter country code in which the bank account is registered.
             >The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         currencyCode:
           description: |-
             The currency in which the bank account deals.
             >The permitted currency codes are defined in ISO-4217 (e.g. 'EUR').
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         iban:
           description: |-
             The international bank account number.
             >The IBAN standard is defined in ISO-13616.
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         ownerCity:
           description: |-
             The city of residence of the bank account owner.
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         ownerCountryCode:
           description: |-
             The country code of the country of residence of the bank account owner.
             >The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         ownerDateOfBirth:
           description: |
@@ -939,34 +947,34 @@ components:
         ownerHouseNumberOrName:
           description: |-
             The house name or number of the residence of the bank account owner.
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         ownerName:
           description: |-
             The name of the bank account owner.
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         ownerNationality:
           description: |-
             The country code of the country of nationality of the bank account owner.
             >The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         ownerPostalCode:
           description: |-
             The postal code of the residence of the bank account owner.
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         ownerState:
           description: |-
             The state of residence of the bank account owner.
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         ownerStreet:
           description: |-
             The street name of the residence of the bank account owner.
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         primaryAccount:
           description: If set to true, the bank account is a primary account.
@@ -975,14 +983,14 @@ components:
           description: |-
             The tax ID number.
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         urlForVerification:
           description: |-
             The URL to be used for bank account verification.
             This may be generated on bank account creation.
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
     DetailBalance:
       example:
@@ -1090,6 +1098,7 @@ components:
           - drivingLicense
           - email
           - firstName
+          - formType
           - fullPhoneNumber
           - gender
           - hopWebserviceUser
@@ -1137,6 +1146,9 @@ components:
           - sourceAccountCode
           - stateOrProvince
           - status
+          - stockExchange
+          - stockNumber
+          - stockTicker
           - store
           - storeDetail
           - storeName
@@ -1151,6 +1163,7 @@ components:
           - virtualAccount
           - visaNumber
           - webAddress
+          - year
           type: string
         shareholderCode:
           description: The code of the shareholder that the field belongs to. If empty,
@@ -1167,6 +1180,7 @@ components:
         payoutMethodCode: payoutMethodCode
         description: description
         merchantReference: merchantReference
+        payoutSpeed: STANDARD
       properties:
         accountCode:
           description: The code of the account from which the payout is to be made.
@@ -1197,6 +1211,14 @@ components:
             The unique ID of the payout method held by the Account Holder to which the payout is to be made.
             If left blank, a payout instrument is automatically selected.
           type: string
+        payoutSpeed:
+          default: STANDARD
+          description: 'Speed with which payouts for this account are processed. Permitted
+            values: `STANDARD`, `SAME_DAY`.'
+          enum:
+          - SAME_DAY
+          - STANDARD
+          type: string
       required:
       - accountCode
       - accountHolderCode
@@ -1220,6 +1242,7 @@ components:
         resultCode: resultCode
         merchantReference: merchantReference
         pspReference: pspReference
+        payoutSpeed: STANDARD
       properties:
         bankAccountUUID:
           description: The unique ID of the Bank Account to which the payout was made.
@@ -1234,15 +1257,21 @@ components:
           description: The value supplied by the executing user when initiating the
             transfer; may be used to link multiple transactions.
           type: string
+        payoutSpeed:
+          default: STANDARD
+          description: 'Speed with which payouts for this account are processed. Permitted
+            values: `STANDARD`, `SAME_DAY`.'
+          enum:
+          - SAME_DAY
+          - STANDARD
+          type: string
         pspReference:
-          description: The reference of a request.  Can be used to uniquely identify
+          description: The reference of a request. Can be used to uniquely identify
             the request.
           type: string
         resultCode:
           description: The result code.
           type: string
-      required:
-      - pspReference
     RefundFundsTransferRequest:
       example:
         originalReference: originalReference
@@ -1300,14 +1329,12 @@ components:
           description: A PSP reference of the original fund transfer.
           type: string
         pspReference:
-          description: The reference of a request.  Can be used to uniquely identify
+          description: The reference of a request. Can be used to uniquely identify
             the request.
           type: string
         resultCode:
           description: The result code.
           type: string
-      required:
-      - pspReference
     RefundNotPaidOutTransfersRequest:
       example:
         accountCode: accountCode
@@ -1348,14 +1375,12 @@ components:
             $ref: '#/components/schemas/ErrorFieldType'
           type: array
         pspReference:
-          description: The reference of a request.  Can be used to uniquely identify
+          description: The reference of a request. Can be used to uniquely identify
             the request.
           type: string
         resultCode:
           description: The result code.
           type: string
-      required:
-      - pspReference
     SetupBeneficiaryRequest:
       example:
         sourceAccountCode: sourceAccountCode
@@ -1374,7 +1399,6 @@ components:
           type: string
       required:
       - destinationAccountCode
-      - merchantReference
       - sourceAccountCode
     SetupBeneficiaryResponse:
       example:
@@ -1401,14 +1425,12 @@ components:
             $ref: '#/components/schemas/ErrorFieldType'
           type: array
         pspReference:
-          description: The reference of a request.  Can be used to uniquely identify
+          description: The reference of a request. Can be used to uniquely identify
             the request.
           type: string
         resultCode:
           description: The result code.
           type: string
-      required:
-      - pspReference
     Transaction:
       example:
         captureMerchantReference: captureMerchantReference
@@ -1502,18 +1524,22 @@ components:
         transactionStatus:
           description: |-
             The status of the transaction.
-            >Permitted values: `PendingCredit`, `CreditFailed`, `Credited`, `Converted`, `PendingDebit`, `DebitFailed`, `Debited`, `DebitReversedReceived`, `DebitedReversed`, `ChargebackReceived`, `Chargeback`, `ChargebackReversedReceived`, `ChargebackReversed`, `Payout`, `PayoutReversed`, `FundTransfer`, `PendingFundTransfer`, `ManualCorrected`.
+            >Permitted values: `PendingCredit`, `CreditFailed`, `CreditClosed`, `CreditSuspended`, `Credited`, `Converted`, `PendingDebit`, `DebitFailed`, `Debited`, `DebitReversedReceived`, `DebitedReversed`, `ChargebackReceived`, `Chargeback`, `ChargebackReversedReceived`, `ChargebackReversed`, `Payout`, `PayoutReversed`, `FundTransfer`, `PendingFundTransfer`, `ManualCorrected`.
           enum:
           - Chargeback
           - ChargebackCorrection
           - ChargebackCorrectionReceived
           - ChargebackReceived
           - ChargebackReversed
+          - ChargebackReversedCorrection
+          - ChargebackReversedCorrectionReceived
           - ChargebackReversedReceived
           - Converted
+          - CreditClosed
           - CreditFailed
           - CreditReversed
           - CreditReversedReceived
+          - CreditSuspended
           - Credited
           - DebitFailed
           - DebitReversedReceived
@@ -1523,6 +1549,8 @@ components:
           - FundTransfer
           - FundTransferReversed
           - ManualCorrected
+          - ManualCorrectionCredited
+          - ManualCorrectionDebited
           - Payout
           - PayoutReversed
           - PendingCredit
@@ -1617,13 +1645,19 @@ components:
             transfer; may be used to link multiple transactions.
           type: string
         pspReference:
-          description: The reference of a request.  Can be used to uniquely identify
+          description: The reference of a request. Can be used to uniquely identify
             the request.
           type: string
         resultCode:
           description: The result code.
           type: string
-      required:
-      - pspReference
+  securitySchemes:
+    ApiKeyAuth:
+      in: header
+      name: X-API-Key
+      type: apiKey
+    BasicAuth:
+      scheme: basic
+      type: http
 x-groups:
 - General

@@ -10,19 +10,18 @@ import (
 	"fmt"
 	"net/http"
 
-	binlookup "github.com/adyen/adyen-go-api-library/v3/src/binlookup"
-	checkout "github.com/adyen/adyen-go-api-library/v3/src/checkout"
-	checkoututility "github.com/adyen/adyen-go-api-library/v3/src/checkoututility"
-	common "github.com/adyen/adyen-go-api-library/v3/src/common"
-	disputes "github.com/adyen/adyen-go-api-library/v3/src/disputes"
-	notification "github.com/adyen/adyen-go-api-library/v3/src/notification"
-	payments "github.com/adyen/adyen-go-api-library/v3/src/payments"
-	payouts "github.com/adyen/adyen-go-api-library/v3/src/payouts"
-	platformsaccount "github.com/adyen/adyen-go-api-library/v3/src/platformsaccount"
-	platformsfund "github.com/adyen/adyen-go-api-library/v3/src/platformsfund"
-	platformshostedonboardingpage "github.com/adyen/adyen-go-api-library/v3/src/platformshostedonboardingpage"
-	platformsnotificationconfiguration "github.com/adyen/adyen-go-api-library/v3/src/platformsnotificationconfiguration"
-	recurring "github.com/adyen/adyen-go-api-library/v3/src/recurring"
+	binlookup "github.com/adyen/adyen-go-api-library/v4/src/binlookup"
+	checkout "github.com/adyen/adyen-go-api-library/v4/src/checkout"
+	common "github.com/adyen/adyen-go-api-library/v4/src/common"
+  disputes "github.com/adyen/adyen-go-api-library/v4/src/disputes"
+	notification "github.com/adyen/adyen-go-api-library/v4/src/notification"
+	payments "github.com/adyen/adyen-go-api-library/v4/src/payments"
+	payouts "github.com/adyen/adyen-go-api-library/v4/src/payouts"
+	platformsaccount "github.com/adyen/adyen-go-api-library/v4/src/platformsaccount"
+	platformsfund "github.com/adyen/adyen-go-api-library/v4/src/platformsfund"
+	platformshostedonboardingpage "github.com/adyen/adyen-go-api-library/v4/src/platformshostedonboardingpage"
+	platformsnotificationconfiguration "github.com/adyen/adyen-go-api-library/v4/src/platformsnotificationconfiguration"
+	recurring "github.com/adyen/adyen-go-api-library/v4/src/recurring"
 )
 
 // Constants used for the client API
@@ -32,18 +31,17 @@ const (
 	EndpointLiveSuffix              = "-pal-live.adyenpayments.com"
 	MarketpayEndpointTest           = "https://cal-test.adyen.com/cal/services"
 	MarketpayEndpointLive           = "https://cal-live.adyen.com/cal/services"
-	MarketpayAccountAPIVersion      = "v5"
-	MarketpayFundAPIVersion         = "v5"
-	MarketpayNotificationAPIVersion = "v5"
-	MarketpayHopAPIVersion          = "v1"
-	APIVersion                      = "v52"
+	MarketpayAccountAPIVersion      = "v6"
+	MarketpayFundAPIVersion         = "v6"
+	MarketpayNotificationAPIVersion = "v6"
+	MarketpayHopAPIVersion          = "v6"
+	APIVersion                      = "v64"
 	RecurringAPIVersion             = "v49"
 	CheckoutEndpointTest            = "https://checkout-test.adyen.com/checkout"
 	CheckoutEndpointLiveSuffix      = "-checkout-live.adyenpayments.com/checkout"
-	CheckoutAPIVersion              = "v52"
+	CheckoutAPIVersion              = "v65"
 	BinLookupPalSuffix              = "/pal/servlet/BinLookup/"
 	BinLookupAPIVersion             = "v50"
-	CheckoutUtilityAPIVersion       = "v1"
 	TerminalAPIEndpointTest         = "https://terminal-api-test.adyen.com"
 	TerminalAPIEndpointLive         = "https://terminal-api-live.adyen.com"
 	EndpointProtocol                = "https://"
@@ -58,7 +56,6 @@ type APIClient struct {
 	client *common.Client
 	// API Services
 	Checkout                           *checkout.Checkout
-	CheckoutUtility                    *checkoututility.CheckoutUtility
 	Payments                           *payments.Payments
 	Payouts                            *payouts.Payouts
 	Recurring                          *recurring.Recurring
@@ -158,12 +155,6 @@ func NewClient(cfg *common.Config) *APIClient {
 		Client: c.client,
 		BasePath: func() string {
 			return fmt.Sprintf("%s/%s", c.client.Cfg.CheckoutEndpoint, CheckoutAPIVersion)
-		},
-	}
-	c.CheckoutUtility = &checkoututility.CheckoutUtility{
-		Client: c.client,
-		BasePath: func() string {
-			return fmt.Sprintf("%s/%s", c.client.Cfg.CheckoutEndpoint, CheckoutUtilityAPIVersion)
 		},
 	}
 	c.Payments = &payments.Payments{

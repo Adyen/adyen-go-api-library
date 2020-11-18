@@ -9,12 +9,13 @@
  */
 
 package binlookup
+
 // ThreeDSAvailabilityRequest struct for ThreeDSAvailabilityRequest
 type ThreeDSAvailabilityRequest struct {
 	// This field contains additional data, which may be required for a particular request.  The `additionalData` object consists of entries, each of which includes the key and value.
 	AdditionalData *map[string]interface{} `json:"additionalData,omitempty"`
 	// List of brands.
-	Brands []string `json:"brands"`
+	Brands []string `json:"brands,omitempty"`
 	// Card number or BIN.
 	CardNumber string `json:"cardNumber,omitempty"`
 	// The merchant account identifier.

@@ -9,6 +9,7 @@
  */
 
 package recurring
+
 // RecurringDetailsRequest struct for RecurringDetailsRequest
 type RecurringDetailsRequest struct {
 	// The merchant account identifier you want to process the (transaction) request with.

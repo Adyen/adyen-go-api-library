@@ -6,9 +6,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/adyen/adyen-go-api-library/v3/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v3/src/common"
-	"github.com/adyen/adyen-go-api-library/v3/src/payments"
+	"github.com/adyen/adyen-go-api-library/v4/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v4/src/common"
+	"github.com/adyen/adyen-go-api-library/v4/src/payments"
 	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -59,14 +59,6 @@ func Test_Payment(t *testing.T) {
 		require.NotNil(t, httpRes)
 		assert.Equal(t, 200, httpRes.StatusCode)
 		require.NotNil(t, res)
-	}
-
-	assertForApplicationInfo := func(req *payments.ModificationRequest) {
-		// check if req has ApplicationInfo added to it
-		require.NotNil(t, req.ApplicationInfo)
-		require.NotNil(t, req.ApplicationInfo.AdyenLibrary)
-		require.Equal(t, common.LibName, req.ApplicationInfo.AdyenLibrary.Name)
-		require.Equal(t, common.LibVersion, req.ApplicationInfo.AdyenLibrary.Version)
 	}
 
 	authorisePost := func() (payments.PaymentResult, *http.Response, error) {
@@ -124,11 +116,9 @@ func Test_Payment(t *testing.T) {
 				Reference:       time.Now().String(),
 				MerchantAccount: MerchantAccount,
 			}
-			require.Nil(t, req.ApplicationInfo)
 			res, httpRes, err := client.Payments.AdjustAuthorisation(req)
 			assertForSuccessResponse(res, httpRes, err)
 			assert.Equal(t, "[adjustAuthorisation-received]", res.Response)
-			assertForApplicationInfo(req)
 		})
 
 		t.Run("CancelOrRefund", func(t *testing.T) {
@@ -138,11 +128,9 @@ func Test_Payment(t *testing.T) {
 				Reference:         time.Now().String(),
 				MerchantAccount:   MerchantAccount,
 			}
-			require.Nil(t, req.ApplicationInfo)
 			res, httpRes, err := client.Payments.CancelOrRefund(req)
 			assertForSuccessResponse(res, httpRes, err)
 			assert.Equal(t, "[cancelOrRefund-received]", res.Response)
-			assertForApplicationInfo(req)
 		})
 
 		t.Run("Cancel", func(t *testing.T) {
@@ -152,11 +140,9 @@ func Test_Payment(t *testing.T) {
 				Reference:         time.Now().String(),
 				MerchantAccount:   MerchantAccount,
 			}
-			require.Nil(t, req.ApplicationInfo)
 			res, httpRes, err := client.Payments.Cancel(req)
 			assertForSuccessResponse(res, httpRes, err)
 			assert.Equal(t, "[cancel-received]", res.Response)
-			assertForApplicationInfo(req)
 		})
 
 		t.Run("Capture", func(t *testing.T) {
@@ -170,11 +156,9 @@ func Test_Payment(t *testing.T) {
 				Reference:       time.Now().String(),
 				MerchantAccount: MerchantAccount,
 			}
-			require.Nil(t, req.ApplicationInfo)
 			res, httpRes, err := client.Payments.Capture(req)
 			assertForSuccessResponse(res, httpRes, err)
 			assert.Equal(t, "[capture-received]", res.Response)
-			assertForApplicationInfo(req)
 		})
 
 		t.Run("Refund", func(t *testing.T) {
@@ -188,11 +172,9 @@ func Test_Payment(t *testing.T) {
 				Reference:       time.Now().String(),
 				MerchantAccount: MerchantAccount,
 			}
-			require.Nil(t, req.ApplicationInfo)
 			res, httpRes, err := client.Payments.Refund(req)
 			assertForSuccessResponse(res, httpRes, err)
 			assert.Equal(t, "[refund-received]", res.Response)
-			assertForApplicationInfo(req)
 		})
 
 		t.Run("TechnicalCancel", func(t *testing.T) {
@@ -202,11 +184,9 @@ func Test_Payment(t *testing.T) {
 				Reference:         time.Now().String(),
 				MerchantAccount:   MerchantAccount,
 			}
-			require.Nil(t, req.ApplicationInfo)
 			res, httpRes, err := client.Payments.TechnicalCancel(req)
 			assertForSuccessResponse(res, httpRes, err)
 			assert.Equal(t, "[technical-cancel-received]", res.Response)
-			assertForApplicationInfo(req)
 		})
 
 		t.Run("VoidPendingRefund", func(t *testing.T) {
@@ -216,11 +196,9 @@ func Test_Payment(t *testing.T) {
 				Reference:         time.Now().String(),
 				MerchantAccount:   MerchantAccount,
 			}
-			require.Nil(t, req.ApplicationInfo)
 			res, httpRes, err := client.Payments.VoidPendingRefund(req)
 			assertForSuccessResponse(res, httpRes, err)
 			assert.Equal(t, "[voidPendingRefund-received]", res.Response)
-			assertForApplicationInfo(req)
 		})
 	})
 }

@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.0.3
 info:
   contact:
     email: support@adyen.com
@@ -38,6 +38,7 @@ paths:
         Disables stored payment details to stop charging a shopper with this particular recurring detail ID.
 
         For more information, refer to [Disable stored details](https://docs.adyen.com/classic-integration/recurring-payments/disable-stored-details/).
+      operationId: post-disable
       requestBody:
         content:
           application/json:
@@ -52,14 +53,14 @@ paths:
           description: OK - the request has succeeded.
         "400":
           description: Bad Request - a problem reading or understanding the request.
-        "422":
-          description: Unprocessable Entity - a request validation error.
         "401":
           description: Unauthorized - authentication required.
-        "500":
-          description: Internal Server Error - the server could not process the request.
         "403":
           description: Forbidden - insufficient permissions to process the request.
+        "422":
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          description: Internal Server Error - the server could not process the request.
       summary: Disables stored payment details.
       x-groupName: General
       x-sortIndex: 2
@@ -69,6 +70,7 @@ paths:
         Lists the stored payment details for a shopper, if there are any available. The recurring detail ID can be used with a regular authorisation request to charge the shopper. A summary of the payment detail is returned for presentation to the shopper.
 
         For more information, refer to [Retrieve stored details](https://docs.adyen.com/classic-integration/recurring-payments/retrieve-stored-details/).
+      operationId: post-listRecurringDetails
       requestBody:
         content:
           application/json:
@@ -83,14 +85,14 @@ paths:
           description: OK - the request has succeeded.
         "400":
           description: Bad Request - a problem reading or understanding the request.
-        "422":
-          description: Unprocessable Entity - a request validation error.
         "401":
           description: Unauthorized - authentication required.
-        "500":
-          description: Internal Server Error - the server could not process the request.
         "403":
           description: Forbidden - insufficient permissions to process the request.
+        "422":
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          description: Internal Server Error - the server could not process the request.
       summary: Retrieves stored payment details for a shopper.
       x-groupName: General
       x-sortIndex: 1
@@ -100,6 +102,7 @@ paths:
         When making the API call, you can submit either the credit card information, or the recurring detail reference and the shopper reference:
         * If the card information is provided, all the sub-fields for `card` are mandatory.
         * If the recurring detail reference is provided, the fields for `shopperReference` and `selectedRecurringDetailReference` are mandatory.
+      operationId: post-scheduleAccountUpdater
       requestBody:
         content:
           application/json:
@@ -114,14 +117,14 @@ paths:
           description: OK - the request has succeeded.
         "400":
           description: Bad Request - a problem reading or understanding the request.
-        "422":
-          description: Unprocessable Entity - a request validation error.
         "401":
           description: Unauthorized - authentication required.
-        "500":
-          description: Internal Server Error - the server could not process the request.
         "403":
           description: Forbidden - insufficient permissions to process the request.
+        "422":
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          description: Internal Server Error - the server could not process the request.
       summary: Schedules running of the Account Updater.
       x-groupName: General
       x-sortIndex: 3
@@ -439,7 +442,8 @@ components:
         contractTypes:
         - contractTypes
         - contractTypes
-        additionalData: '{}'
+        additionalData:
+          key: additionalData
         billingAddress:
           country: country
           stateOrProvince: stateOrProvince
@@ -459,6 +463,8 @@ components:
           expiryYear: expiryYear
       properties:
         additionalData:
+          additionalProperties:
+            type: string
           description: |-
             This field contains additional data, which may be returned in a particular response.
 
@@ -571,7 +577,8 @@ components:
           contractTypes:
           - contractTypes
           - contractTypes
-          additionalData: '{}'
+          additionalData:
+            key: additionalData
           billingAddress:
             country: country
             stateOrProvince: stateOrProvince
@@ -615,7 +622,8 @@ components:
           contractTypes:
           - contractTypes
           - contractTypes
-          additionalData: '{}'
+          additionalData:
+            key: additionalData
           billingAddress:
             country: country
             stateOrProvince: stateOrProvince
@@ -657,7 +665,8 @@ components:
         reference: reference
         merchantAccount: merchantAccount
         selectedRecurringDetailReference: selectedRecurringDetailReference
-        additionalData: '{}'
+        additionalData:
+          key: additionalData
         card:
           cvc: cvc
           number: number
@@ -670,6 +679,8 @@ components:
         shopperReference: shopperReference
       properties:
         additionalData:
+          additionalProperties:
+            type: string
           description: This field contains additional data, which may be required
             for a particular request.
           type: object
@@ -714,5 +725,13 @@ components:
       required:
       - pspReference
       - result
+  securitySchemes:
+    ApiKeyAuth:
+      in: header
+      name: X-API-Key
+      type: apiKey
+    BasicAuth:
+      scheme: basic
+      type: http
 x-groups:
 - General
