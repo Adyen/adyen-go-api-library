@@ -1,0 +1,446 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: support@adyen.com
+    name: Adyen Support
+    url: https://support.adyen.com/
+  description: |-
+    This API provides endpoints for dispute management. You can use the API to retrieve defense reasons, supply defense ducoments, delete defense documents, upload chargebacks or accept disputes.
+
+    For more information on using the APIs, refer to [Dispute service](https://docs.adyen.com/risk-management/disputes-api).
+
+    ## Authentication
+    Each request to the Dispute API must be signed with an API key. For this, obtain an API Key from your Customer Area, as described in [How to get the API key](https://docs.adyen.com/user-management/how-to-get-the-api-key). Then set this key to the `X-API-Key` header value, for example:
+
+    ```
+    curl
+    -H "Content-Type: application/json" \
+    -H "X-API-Key: Your_API_key" \
+    ...
+    ```
+    Note that when going live, you need to generate new web service user credentials to access the [live endpoints](https://docs.adyen.com/development-resources/live-endpoints).
+
+    ```
+  termsOfService: https://www.adyen.com/legal/terms-and-conditions
+  title: Dispute service API
+  version: "1"
+servers:
+- url: /
+paths:
+  /defendDispute:
+    post:
+      description: Defend the dispute with the given reason code.
+      operationId: post-defendDispute
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefendDisputeRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefendDisputeResponse'
+          description: OK - the request has succeeded.
+        "400":
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          description: Unauthorized - authentication required.
+        "403":
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          description: Internal Server Error - the server could not process the request.
+      summary: Defend dispute
+      x-groupName: General
+      x-sortIndex: 1
+  /deleteDisputeDefenseDocument:
+    post:
+      description: Delete a dispute defense document.
+      operationId: post-deleteDisputeDefenseDocument
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteDefenseDocumentRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteDefenseDocumentResponse'
+          description: OK - the request has succeeded.
+        "400":
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          description: Unauthorized - authentication required.
+        "403":
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          description: Internal Server Error - the server could not process the request.
+      summary: Delete dispute defense document
+      x-groupName: General
+      x-sortIndex: 1
+  /downloadDisputeDefenseDocument:
+    get:
+      description: Download a dispute defense document.
+      operationId: get-downloadDisputeDefenseDocument
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DownloadDefenseDocumentRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DownloadDefenseDocumentResponse'
+          description: OK - the request has succeeded.
+        "400":
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          description: Unauthorized - authentication required.
+        "403":
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          description: Internal Server Error - the server could not process the request.
+      summary: Download Dispute defense document
+      x-groupName: General
+      x-sortIndex: 1
+  /retrieveApplicableDefenseReasons:
+    get:
+      description: Retrieve a list of possible defense reasons with required documents
+        for the given dispute.
+      operationId: get-retrieveApplicableDefenseReasons
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefenseReasonsRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefenseReasonsResponse'
+          description: OK - the request has succeeded.
+        "400":
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          description: Unauthorized - authentication required.
+        "403":
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          description: Internal Server Error - the server could not process the request.
+      summary: Retrieve applicable defense reasons
+      x-groupName: General
+      x-sortIndex: 1
+  /supplyDefenseDocument:
+    post:
+      description: Supply a dispute defense document.
+      operationId: post-supplyDefenseDocument
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SupplyDefenseDocumentRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupplyDefenseDocumentResponse'
+          description: OK - the request has succeeded.
+        "400":
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          description: Unauthorized - authentication required.
+        "403":
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          description: Internal Server Error - the server could not process the request.
+      summary: Supply defense document
+      x-groupName: General
+      x-sortIndex: 1
+components:
+  schemas:
+    DefendDisputeRequest:
+      example:
+        merchantAccountCode: merchantAccountCode
+        defenseReasonCode: defenseReasonCode
+        disputePspReference: disputePspReference
+      properties:
+        defenseReasonCode:
+          description: The reasoncode for this dispute
+          type: string
+        disputePspReference:
+          description: The psp reference of the dispute
+          type: string
+        merchantAccountCode:
+          description: The merchant account identifier
+          type: string
+      required:
+      - defenseReasonCode
+      - disputePspReference
+      - merchantAccountCode
+    DefendDisputeResponse:
+      example:
+        disputeServiceResult:
+          success: true
+          errorMessage: errorMessage
+      properties:
+        disputeServiceResult:
+          $ref: '#/components/schemas/DisputeServiceResult'
+      required:
+      - disputeServiceResult
+    DefenseDocument:
+      example:
+        defenseDocumentTypeCode: defenseDocumentTypeCode
+        contentType: contentType
+        content: content
+      properties:
+        content:
+          description: The content of the defense document
+          format: byte
+          type: string
+        contentType:
+          description: The content type of the defense document
+          type: string
+        defenseDocumentTypeCode:
+          description: The typecode for the defense document type
+          type: string
+      required:
+      - content
+      - contentType
+      - defenseDocumentTypeCode
+    DefenseDocumentType:
+      example:
+        requirementLevel: requirementLevel
+        available: true
+        defenseDocumentTypeCode: defenseDocumentTypeCode
+      properties:
+        available:
+          description: Indicates if this document type is available
+          type: boolean
+        defenseDocumentTypeCode:
+          description: The typecode for the defense document type
+          type: string
+        requirementLevel:
+          description: The requirement level for the defense document type
+          type: string
+      required:
+      - available
+      - defenseDocumentTypeCode
+      - requirementLevel
+    DefenseReason:
+      example:
+        defenseReasonCode: defenseReasonCode
+        defenseDocumentTypes:
+        - requirementLevel: requirementLevel
+          available: true
+          defenseDocumentTypeCode: defenseDocumentTypeCode
+        - requirementLevel: requirementLevel
+          available: true
+          defenseDocumentTypeCode: defenseDocumentTypeCode
+        satisfied: true
+      properties:
+        defenseDocumentTypes:
+          description: Defense ducoment types
+          items:
+            $ref: '#/components/schemas/DefenseDocumentType'
+          type: array
+        defenseReasonCode:
+          description: The reason code for this specific defense
+          type: string
+        satisfied:
+          description: Indicates if this defense reason is satisfied
+          type: boolean
+      required:
+      - defenseReasonCode
+      - satisfied
+    DefenseReasonsRequest:
+      example:
+        merchantAccountCode: merchantAccountCode
+        disputePspReference: disputePspReference
+      properties:
+        disputePspReference:
+          description: The psp reference of the dispute
+          type: string
+        merchantAccountCode:
+          description: The merchant account identifier
+          type: string
+      required:
+      - disputePspReference
+      - merchantAccountCode
+    DefenseReasonsResponse:
+      example:
+        defenseReasons:
+        - defenseReasonCode: defenseReasonCode
+          defenseDocumentTypes:
+          - requirementLevel: requirementLevel
+            available: true
+            defenseDocumentTypeCode: defenseDocumentTypeCode
+          - requirementLevel: requirementLevel
+            available: true
+            defenseDocumentTypeCode: defenseDocumentTypeCode
+          satisfied: true
+        - defenseReasonCode: defenseReasonCode
+          defenseDocumentTypes:
+          - requirementLevel: requirementLevel
+            available: true
+            defenseDocumentTypeCode: defenseDocumentTypeCode
+          - requirementLevel: requirementLevel
+            available: true
+            defenseDocumentTypeCode: defenseDocumentTypeCode
+          satisfied: true
+        disputeServiceResult:
+          success: true
+          errorMessage: errorMessage
+      properties:
+        defenseReasons:
+          description: Defense reasons
+          items:
+            $ref: '#/components/schemas/DefenseReason'
+          type: array
+        disputeServiceResult:
+          $ref: '#/components/schemas/DisputeServiceResult'
+      required:
+      - disputeServiceResult
+    DeleteDefenseDocumentRequest:
+      example:
+        merchantAccountCode: merchantAccountCode
+        disputePspReference: disputePspReference
+        defenseDocumentType: defenseDocumentType
+      properties:
+        defenseDocumentType:
+          description: The specific type of the defense document
+          type: string
+        disputePspReference:
+          description: The psp reference of the dispute
+          type: string
+        merchantAccountCode:
+          description: The merchant account identifier
+          type: string
+      required:
+      - defenseDocumentType
+      - disputePspReference
+      - merchantAccountCode
+    DeleteDefenseDocumentResponse:
+      example:
+        disputeServiceResult:
+          success: true
+          errorMessage: errorMessage
+      properties:
+        disputeServiceResult:
+          $ref: '#/components/schemas/DisputeServiceResult'
+      required:
+      - disputeServiceResult
+    DisputeServiceResult:
+      example:
+        success: true
+        errorMessage: errorMessage
+      properties:
+        errorMessage:
+          description: error message, empty if request was successfull
+          type: string
+        success:
+          description: Indicates whether or not the request succeeded
+          type: boolean
+      required:
+      - success
+    DownloadDefenseDocumentRequest:
+      example:
+        merchantAccountCode: merchantAccountCode
+        disputePspReference: disputePspReference
+        defenseDocumentType: defenseDocumentType
+      properties:
+        defenseDocumentType:
+          description: The specific type of the defense document
+          type: string
+        disputePspReference:
+          description: The psp reference of the dispute
+          type: string
+        merchantAccountCode:
+          description: The merchant account identifier
+          type: string
+      required:
+      - defenseDocumentType
+      - disputePspReference
+      - merchantAccountCode
+    DownloadDefenseDocumentResponse:
+      example:
+        disputeServiceResult:
+          success: true
+          errorMessage: errorMessage
+        contentType: contentType
+        content: content
+      properties:
+        content:
+          description: The content of the dispute defense document
+          format: byte
+          type: string
+        contentType:
+          description: The content type of the dispute defense document
+          type: string
+        disputeServiceResult:
+          $ref: '#/components/schemas/DisputeServiceResult'
+      required:
+      - disputeServiceResult
+    SupplyDefenseDocumentRequest:
+      example:
+        merchantAccountCode: merchantAccountCode
+        disputePspReference: disputePspReference
+        defenseDocuments:
+        - defenseDocumentTypeCode: defenseDocumentTypeCode
+          contentType: contentType
+          content: content
+        - defenseDocumentTypeCode: defenseDocumentTypeCode
+          contentType: contentType
+          content: content
+      properties:
+        defenseDocuments:
+          description: The defense documents to be supplied
+          items:
+            $ref: '#/components/schemas/DefenseDocument'
+          type: array
+        disputePspReference:
+          description: The psp reference of the dispute
+          type: string
+        merchantAccountCode:
+          description: The merchant account identifier
+          type: string
+      required:
+      - defenseDocuments
+      - disputePspReference
+      - merchantAccountCode
+    SupplyDefenseDocumentResponse:
+      example:
+        disputeServiceResult:
+          success: true
+          errorMessage: errorMessage
+      properties:
+        disputeServiceResult:
+          $ref: '#/components/schemas/DisputeServiceResult'
+      required:
+      - disputeServiceResult
+  securitySchemes:
+    ApiKeyAuth:
+      in: header
+      name: X-API-Key
+      type: apiKey
+    BasicAuth:
+      scheme: basic
+      type: http
+x-groups:
+- General

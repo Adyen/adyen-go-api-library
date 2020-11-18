@@ -13,6 +13,7 @@ import (
 	binlookup "github.com/adyen/adyen-go-api-library/v4/src/binlookup"
 	checkout "github.com/adyen/adyen-go-api-library/v4/src/checkout"
 	common "github.com/adyen/adyen-go-api-library/v4/src/common"
+  disputes "github.com/adyen/adyen-go-api-library/v4/src/disputes"
 	notification "github.com/adyen/adyen-go-api-library/v4/src/notification"
 	payments "github.com/adyen/adyen-go-api-library/v4/src/payments"
 	payouts "github.com/adyen/adyen-go-api-library/v4/src/payouts"
@@ -44,6 +45,9 @@ const (
 	TerminalAPIEndpointTest         = "https://terminal-api-test.adyen.com"
 	TerminalAPIEndpointLive         = "https://terminal-api-live.adyen.com"
 	EndpointProtocol                = "https://"
+	DisputesEndpointTest            = "https://ca-test.adyen.com/ca/services/DisputeService"
+	DisputesEndpointLive            = "https://ca-live.adyen.com/ca/services/DisputeService"
+	DisputesAPIVersion              = "v30"
 )
 
 // APIClient manages communication with the Adyen Checkout API API v51
@@ -61,6 +65,7 @@ type APIClient struct {
 	PlatformsFund                      *platformsfund.PlatformsFund
 	PlatformsHostedOnboardingPage      *platformshostedonboardingpage.PlatformsHostedOnboardingPage
 	PlatformsNotificationConfiguration *platformsnotificationconfiguration.PlatformsNotificationConfiguration
+	Disputes                           *disputes.Disputes
 }
 
 // NewClient creates a new API client. Requires Config object.
@@ -208,6 +213,13 @@ func NewClient(cfg *common.Config) *APIClient {
 		},
 	}
 
+	c.Disputes = &disputes.Disputes{
+		Client: c.client,
+		BasePath: func() string {
+			return fmt.Sprintf("%s/%s", c.client.Cfg.DisputesEndpoint, DisputesAPIVersion)
+		},
+	}
+
 	return c
 }
 
@@ -221,6 +233,7 @@ func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix
 	if env == common.LiveEnv {
 		c.client.Cfg.Environment = env
 		c.client.Cfg.MarketPayEndpoint = MarketpayEndpointLive
+		c.client.Cfg.DisputesEndpoint = DisputesEndpointLive
 		if liveEndpointURLPrefix != "" {
 			c.client.Cfg.Endpoint = EndpointProtocol + liveEndpointURLPrefix + EndpointLiveSuffix
 			c.client.Cfg.CheckoutEndpoint = EndpointProtocol + liveEndpointURLPrefix + CheckoutEndpointLiveSuffix
@@ -235,6 +248,7 @@ func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix
 		c.client.Cfg.MarketPayEndpoint = MarketpayEndpointTest
 		c.client.Cfg.CheckoutEndpoint = CheckoutEndpointTest
 		c.client.Cfg.TerminalApiCloudEndpoint = TerminalAPIEndpointTest
+		c.client.Cfg.DisputesEndpoint = DisputesEndpointTest
 	}
 }
 
