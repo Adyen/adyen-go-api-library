@@ -320,4 +320,21 @@ func Test_Checkout(t *testing.T) {
 			require.NotNil(t, res)
 		})
 	})
+
+	t.Run("Utility", func(t *testing.T) {
+		t.Run("Get origin keys", func(t *testing.T) {
+			domain := "https://adyen.com"
+			res, httpRes, err := client.Checkout.OriginKeys(&checkout.CheckoutUtilityRequest{
+				OriginDomains: []string{
+					domain,
+				},
+			})
+			require.Nil(t, err)
+			require.NotNil(t, httpRes)
+			assert.Equal(t, 200, httpRes.StatusCode)
+			require.NotNil(t, res)
+			originKeys := res.OriginKeys
+			assert.NotEmpty(t, originKeys[domain])
+		})
+	})
 }
