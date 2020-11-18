@@ -9,6 +9,7 @@
  */
 
 package recurring
+
 // ScheduleAccountUpdaterRequest struct for ScheduleAccountUpdaterRequest
 type ScheduleAccountUpdaterRequest struct {
 	// This field contains additional data, which may be required for a particular request.

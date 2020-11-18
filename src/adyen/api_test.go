@@ -12,9 +12,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/adyen/adyen-go-api-library/v3/src/checkout"
-	"github.com/adyen/adyen-go-api-library/v3/src/common"
-	"github.com/adyen/adyen-go-api-library/v3/src/recurring"
+	"github.com/adyen/adyen-go-api-library/v4/src/checkout"
+	"github.com/adyen/adyen-go-api-library/v4/src/common"
+	"github.com/adyen/adyen-go-api-library/v4/src/recurring"
 	"github.com/joho/godotenv"
 
 	"github.com/stretchr/testify/assert"
@@ -32,9 +32,7 @@ func Test_api(t *testing.T) {
 		require.NotNil(t, client.client.Cfg)
 		require.NotNil(t, client.client.Cfg.HTTPClient)
 		require.NotNil(t, client.Checkout)
-		require.NotNil(t, client.CheckoutUtility)
-		assert.Equal(t, "https://checkout-test.adyen.com/checkout/v52", client.Checkout.BasePath())
-		assert.Equal(t, "https://checkout-test.adyen.com/checkout/v1", client.CheckoutUtility.BasePath())
+		assert.Equal(t, "https://checkout-test.adyen.com/checkout/v65", client.Checkout.BasePath())
 
 		t.Run("Create a API request that should fail", func(t *testing.T) {
 			res, httpRes, err := client.Checkout.PaymentMethods(&checkout.PaymentMethodsRequest{})
