@@ -14,7 +14,7 @@ import (
 	_context "context"
 	_nethttp "net/http"
 
-	"github.com/adyen/adyen-go-api-library/v3/src/common"
+	"github.com/adyen/adyen-go-api-library/v4/src/common"
 )
 
 // Disputes Disputes service
@@ -23,64 +23,64 @@ type Disputes common.Service
 /*
 GetDownloadDisputeDefenseDocument Download Dispute defense document
 Download a dispute defense document.
- * @param request DownloadDefenseDocumentRequest - reference of DownloadDefenseDocumentRequest). 
+ * @param request DownloadDefenseDocumentRequest - reference of DownloadDefenseDocumentRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return DownloadDefenseDocumentResponse
 */
 func (a Disputes) DownloadDisputeDefenseDocument(req *DownloadDefenseDocumentRequest, ctxs ..._context.Context) (DownloadDefenseDocumentResponse, *_nethttp.Response, error) {
-    res := &DownloadDefenseDocumentResponse{}
-    httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath() + "/downloadDisputeDefenseDocument", ctxs...)
-    return *res, httpRes, err
+	res := &DownloadDefenseDocumentResponse{}
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/downloadDisputeDefenseDocument", ctxs...)
+	return *res, httpRes, err
 }
 
 /*
 GetRetrieveApplicableDefenseReasons Retrieve applicable defense reasons
 Retrieve a list of possible defense reasons with required documents for the given dispute.
- * @param request DefenseReasonsRequest - reference of DefenseReasonsRequest). 
+ * @param request DefenseReasonsRequest - reference of DefenseReasonsRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return DefenseReasonsResponse
 */
 func (a Disputes) RetrieveApplicableDefenseReasons(req *DefenseReasonsRequest, ctxs ..._context.Context) (DefenseReasonsResponse, *_nethttp.Response, error) {
-    res := &DefenseReasonsResponse{}
-    httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath() + "/retrieveApplicableDefenseReasons", ctxs...)
-    return *res, httpRes, err
+	res := &DefenseReasonsResponse{}
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/retrieveApplicableDefenseReasons", ctxs...)
+	return *res, httpRes, err
 }
 
 /*
 PostDefendDispute Defend dispute
 Defend the dispute with the given reason code.
- * @param request DefendDisputeRequest - reference of DefendDisputeRequest). 
+ * @param request DefendDisputeRequest - reference of DefendDisputeRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return DefendDisputeResponse
 */
 func (a Disputes) DefendDispute(req *DefendDisputeRequest, ctxs ..._context.Context) (DefendDisputeResponse, *_nethttp.Response, error) {
-    res := &DefendDisputeResponse{}
-    httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath() + "/defendDispute", ctxs...)
-    return *res, httpRes, err
+	res := &DefendDisputeResponse{}
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/defendDispute", ctxs...)
+	return *res, httpRes, err
 }
 
 /*
 PostDeleteDisputeDefenseDocument Delete dispute defense document
 Delete a dispute defense document.
- * @param request DeleteDefenseDocumentRequest - reference of DeleteDefenseDocumentRequest). 
+ * @param request DeleteDefenseDocumentRequest - reference of DeleteDefenseDocumentRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return DeleteDefenseDocumentResponse
 */
 func (a Disputes) DeleteDisputeDefenseDocument(req *DeleteDefenseDocumentRequest, ctxs ..._context.Context) (DeleteDefenseDocumentResponse, *_nethttp.Response, error) {
-    res := &DeleteDefenseDocumentResponse{}
-    httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath() + "/deleteDisputeDefenseDocument", ctxs...)
-    return *res, httpRes, err
+	res := &DeleteDefenseDocumentResponse{}
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/deleteDisputeDefenseDocument", ctxs...)
+	return *res, httpRes, err
 }
 
 /*
 PostSupplyDefenseDocument Supply defense document
 Supply a dispute defense document.
- * @param request SupplyDefenseDocumentRequest - reference of SupplyDefenseDocumentRequest). 
+ * @param request SupplyDefenseDocumentRequest - reference of SupplyDefenseDocumentRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return SupplyDefenseDocumentResponse
 */
 func (a Disputes) SupplyDefenseDocument(req *SupplyDefenseDocumentRequest, ctxs ..._context.Context) (SupplyDefenseDocumentResponse, *_nethttp.Response, error) {
-    res := &SupplyDefenseDocumentResponse{}
-    httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath() + "/supplyDefenseDocument", ctxs...)
-    return *res, httpRes, err
+	res := &SupplyDefenseDocumentResponse{}
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/supplyDefenseDocument", ctxs...)
+	return *res, httpRes, err
 }
