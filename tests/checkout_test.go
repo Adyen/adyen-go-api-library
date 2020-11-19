@@ -368,4 +368,70 @@ func Test_Checkout(t *testing.T) {
 			assert.NotEmpty(t, originKeys[domain])
 		})
 	})
+
+	t.Run("Orders", func(t *testing.T) {
+		t.Run("Get balance", func(t *testing.T) {
+			res, httpRes, err := client.Checkout.PaymentMethodsBalance(&checkout.CheckoutBalanceCheckRequest{
+				MerchantAccount: MerchantAccount,
+				PaymentMethod: map[string]interface{}{
+					"type":       "giftcard",
+					"brand":      "givex",
+					"number":     "603628672882001915092",
+					"holderName": "balance EUR 100",
+					"cvc":        "5754",
+				},
+				Amount: checkout.Amount{
+					Currency: "EUR",
+					Value:    0,
+				},
+				Reference: "BALANCE_REF",
+			})
+
+			require.Nil(t, err)
+			require.NotNil(t, httpRes)
+			assert.Equal(t, 200, httpRes.StatusCode)
+			require.NotNil(t, res)
+			assert.Equal(t, int64(100), res.Balance.Value)
+		})
+		t.Run("Create order", func(t *testing.T) {
+			res, httpRes, err := client.Checkout.Orders(&checkout.CheckoutCreateOrderRequest{
+				Amount: checkout.Amount{
+					Currency: "EUR",
+					Value:    1000,
+				},
+				MerchantAccount: MerchantAccount,
+				Reference:       "CREATE_ORDER_REF",
+			})
+
+			require.Nil(t, err)
+			require.NotNil(t, httpRes)
+			assert.Equal(t, 200, httpRes.StatusCode)
+			require.NotNil(t, res)
+			assert.Equal(t, int64(1000), res.RemainingAmount.Value)
+		})
+		t.Run("Cancel order", func(t *testing.T) {
+			order, _, _ := client.Checkout.Orders(&checkout.CheckoutCreateOrderRequest{
+				Amount: checkout.Amount{
+					Currency: "EUR",
+					Value:    1000,
+				},
+				MerchantAccount: MerchantAccount,
+				Reference:       "CREATE_ORDER_REF",
+			})
+
+			res, httpRes, err := client.Checkout.OrdersCancel(&checkout.CheckoutCancelOrderRequest{
+				MerchantAccount: MerchantAccount,
+				Order: checkout.CheckoutOrder{
+					OrderData:    order.OrderData,
+					PspReference: order.PspReference,
+				},
+			})
+
+			require.Nil(t, err)
+			require.NotNil(t, httpRes)
+			assert.Equal(t, 200, httpRes.StatusCode)
+			require.NotNil(t, res)
+			assert.Equal(t, "Received", res.ResultCode)
+		})
+	})
 }
