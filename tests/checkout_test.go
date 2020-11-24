@@ -371,6 +371,7 @@ func Test_Checkout(t *testing.T) {
 
 	t.Run("Orders", func(t *testing.T) {
 		t.Run("Get balance", func(t *testing.T) {
+			t.Skip("Payment method not correctly configured in the backoffice")
 			res, httpRes, err := client.Checkout.PaymentMethodsBalance(&checkout.CheckoutBalanceCheckRequest{
 				MerchantAccount: MerchantAccount,
 				PaymentMethod: map[string]interface{}{
@@ -379,12 +380,11 @@ func Test_Checkout(t *testing.T) {
 					"number":     "603628672882001915092",
 					"holderName": "balance EUR 100",
 					"cvc":        "5754",
+					"additionalAmount": map[string]interface{}{
+						"currency": "EUR",
+						"value":    0,
+					},
 				},
-				Amount: checkout.Amount{
-					Currency: "EUR",
-					Value:    0,
-				},
-				Reference: "BALANCE_REF",
 			})
 
 			require.Nil(t, err)

@@ -20,7 +20,7 @@ type CheckoutBalanceCheckRequest struct {
 	AdditionalAmount *Amount      `json:"additionalAmount,omitempty"`
 	// This field contains additional data, which may be required for a particular payment request.  The `additionalData` object consists of entries, each of which includes the key and value.
 	AdditionalData  *map[string]interface{} `json:"additionalData,omitempty"`
-	Amount          Amount                  `json:"amount"`
+	Amount          *Amount                 `json:"amount,omitempty"`
 	ApplicationInfo *ApplicationInfo        `json:"applicationInfo,omitempty"`
 	BillingAddress  *Address                `json:"billingAddress,omitempty"`
 	BrowserInfo     *BrowserInfo            `json:"browserInfo,omitempty"`
@@ -54,7 +54,7 @@ type CheckoutBalanceCheckRequest struct {
 	// Defines a recurring payment type. Allowed values: * `Subscription` – A transaction for a fixed or variable amount, which follows a fixed schedule. * `CardOnFile` – With a card-on-file (CoF) transaction, card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction. * `UnscheduledCardOnFile` – An unscheduled card-on-file (UCoF) transaction is a transaction that occurs on a non-fixed schedule and/or have variable amounts. For example, automatic top-ups when a cardholder's balance drops below a certain amount.
 	RecurringProcessingModel string `json:"recurringProcessingModel,omitempty"`
 	// The reference to uniquely identify a payment. This reference is used in all communication with you about the payment status. We recommend using a unique value per payment; however, it is not a requirement. If you need to provide multiple references for a transaction, separate them with hyphens (\"-\"). Maximum length: 80 characters.
-	Reference string `json:"reference"`
+	Reference string `json:"reference,omitempty"`
 	// Some payment methods require defining a value for this field to specify how to process the transaction.  For the Bancontact payment method, it can be set to: * `maestro` (default), to be processed like a Maestro card, or * `bcmc`, to be processed like a Bancontact card.
 	SelectedBrand string `json:"selectedBrand,omitempty"`
 	// The `recurringDetailReference` you want to use for this payment. The value `LATEST` can be used to select the most recently stored recurring detail.
