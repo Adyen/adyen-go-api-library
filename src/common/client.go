@@ -50,10 +50,8 @@ type Client struct {
 	Cfg *Config
 }
 
-// MakeHTTPPostRequest is a generic method used to make HTTP POST requests
-func (c *Client) MakeHTTPPostRequest(req interface{}, res interface{}, path string, ctxs ...context.Context) (*http.Response, error) {
-	httpMethod := http.MethodPost
-
+// CreateHTTPRequest is used as base to create HTTP request for all methods (GET, POST, PATCH...)
+func CreateHTTPRequest(c *Client, httpMethod string, req interface{}, res interface{}, path string, ctxs []context.Context) (*http.Response, error) {
 	// create path and map variables
 	headerParams := make(map[string]string)
 	queryParams := url.Values{}
@@ -110,6 +108,22 @@ func (c *Client) MakeHTTPPostRequest(req interface{}, res interface{}, path stri
 	}
 
 	return httpResponse, nil
+}
+
+// MakeHTTPPostRequest is a generic method used to make HTTP POST requests
+func (c *Client) MakeHTTPPostRequest(req interface{}, res interface{}, path string, ctxs ...context.Context) (*http.Response, error) {
+	return CreateHTTPRequest(c, http.MethodPost, req, res, path, ctxs)
+}
+
+// MakeHTTPGetRequest is a generic method used to make HTTP GET requests
+func (c *Client) MakeHTTPGetRequest(res interface{}, path string, ctxs ...context.Context) (*http.Response, error) {
+	var req interface{}
+	return CreateHTTPRequest(c, http.MethodGet, req, res, path, ctxs)
+}
+
+// MakeHTTPPatchRequest is a generic method used to make HTTP PATCH requests
+func (c *Client) MakeHTTPPatchRequest(req interface{}, res interface{}, path string, ctxs ...context.Context) (*http.Response, error) {
+	return CreateHTTPRequest(c, http.MethodPatch, req, res, path, ctxs)
 }
 
 // CallAPI do the Request.
