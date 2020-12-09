@@ -115,4 +115,19 @@ type PaymentRequest struct {
 	ThreeDSAuthenticationOnly bool `json:"threeDSAuthenticationOnly,omitempty"`
 	// Set to true if the payment should be routed to a trusted MID.
 	TrustedShopper bool `json:"trustedShopper,omitempty"`
+    AuthenticationData *AuthenticationData `json:"authenticationData,omitempty"`
 }
+
+type AuthenticationData struct {
+    DelegatedAuthenticationRequested bool                 `json:"delegatedAuthenticationRequested"`
+    FirstAuthenticationFactor        AuthenticationFactor `json:"firstAuthenticationFactor,omitempty"`
+    SecondAuthenticationFactor       AuthenticationFactor `json:"secondAuthenticationFactor,omitempty"`
+}
+
+type AuthenticationFactor string
+
+const (
+    AuthenticationFactorPossessionOnly                       AuthenticationFactor = "PossesionOnly"
+    AuthenticationFactorUserVerificationBiometricFingerprint AuthenticationFactor = "UserVerificationBiometricFingerprint"
+    AuthenticationFactorUserVerificationPinOrPassword        AuthenticationFactor = "UserVerificationPinOrPassword"
+)
