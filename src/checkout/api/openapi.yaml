@@ -25,13 +25,13 @@ info:
 
     For example:
     ```
-    https://checkout-test.adyen.com/v65/payments
+    https://checkout-test.adyen.com/v67/payments
     ```
   termsOfService: https://www.adyen.com/legal/terms-and-conditions
   title: Adyen Checkout API
   version: "65"
 servers:
-- url: https://checkout-test.adyen.com/v65
+- url: https://checkout-test.adyen.com/v67
 paths:
   /orders:
     post:

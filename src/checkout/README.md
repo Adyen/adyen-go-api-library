@@ -20,7 +20,7 @@ Checkout API supports versioning of its endpoints through a version suffix in th
 
 For example:
 ```
-https://checkout-test.adyen.com/v65/payments
+https://checkout-test.adyen.com/v67/payments
 ```
 
 ## Overview

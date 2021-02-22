@@ -39,7 +39,7 @@ const (
 	RecurringAPIVersion             = "v49"
 	CheckoutEndpointTest            = "https://checkout-test.adyen.com/checkout"
 	CheckoutEndpointLiveSuffix      = "-checkout-live.adyenpayments.com/checkout"
-	CheckoutAPIVersion              = "v65"
+	CheckoutAPIVersion              = "v67"
 	BinLookupPalSuffix              = "/pal/servlet/BinLookup/"
 	BinLookupAPIVersion             = "v50"
 	TerminalAPIEndpointTest         = "https://terminal-api-test.adyen.com"
