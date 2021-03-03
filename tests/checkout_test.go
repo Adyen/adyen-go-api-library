@@ -63,7 +63,6 @@ func Test_Checkout(t *testing.T) {
 			})
 		}
 		t.Run("Create an API request that should fail", func(t *testing.T) {
-
 			res, httpRes, err := client.Checkout.PaymentLinks(&checkout.CreatePaymentLinkRequest{
 				Amount: checkout.Amount{
 					Value:    1250,
@@ -119,7 +118,6 @@ func Test_Checkout(t *testing.T) {
 
 	t.Run("PaymentMethods", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
-
 			res, httpRes, err :=
 				client.Checkout.PaymentMethods(&checkout.PaymentMethodsRequest{})
 
@@ -130,7 +128,6 @@ func Test_Checkout(t *testing.T) {
 			require.NotNil(t, res)
 		})
 		t.Run("Create an API request that should pass", func(t *testing.T) {
-
 			res, httpRes, err := client.Checkout.PaymentMethods(&checkout.PaymentMethodsRequest{
 				MerchantAccount: MerchantAccount,
 			})
@@ -144,7 +141,6 @@ func Test_Checkout(t *testing.T) {
 
 	t.Run("Payments", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
-
 			res, httpRes, err := client.Checkout.Payments(&checkout.PaymentRequest{
 				MerchantAccount: MerchantAccount,
 			})
@@ -184,6 +180,13 @@ func Test_Checkout(t *testing.T) {
 			require.NotNil(t, res.Action)
 			require.NotNil(t, res.PaymentData)
 
+			// Make sure the actions is there
+			action := *res.Action
+			redirectAction := action.(map[string]interface{})
+			require.NotNil(t, redirectAction)
+			require.NotNil(t, redirectAction["url"])
+			require.Equal(t, "GET", redirectAction["method"])
+
 			// check if req has ApplicationInfo added to it
 			require.NotNil(t, req.ApplicationInfo)
 			require.NotNil(t, req.ApplicationInfo.AdyenLibrary)
@@ -192,7 +195,6 @@ func Test_Checkout(t *testing.T) {
 		})
 
 		t.Run("Create two APIs requests that should be identical when using the same Idempotency Key", func(t *testing.T) {
-
 			req := &checkout.PaymentRequest{
 				Reference: "123456781235",
 				Amount: checkout.Amount{
@@ -231,7 +233,6 @@ func Test_Checkout(t *testing.T) {
 		})
 
 		t.Run("Create an API request that should merge ApplicationInfo", func(t *testing.T) {
-
 			req := &checkout.PaymentRequest{
 				Reference: "123456781235",
 				Amount: checkout.Amount{
@@ -317,7 +318,6 @@ func Test_Checkout(t *testing.T) {
 			require.NotNil(t, res)
 		})
 		t.Run("Create an API request that should pass", func(t *testing.T) {
-
 			res, httpRes, err := client.Checkout.PaymentSession(&checkout.PaymentSetupRequest{
 				Reference: "123456781235",
 				Amount: checkout.Amount{
