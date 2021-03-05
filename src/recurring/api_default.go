@@ -14,7 +14,7 @@ import (
 	_context "context"
 	_nethttp "net/http"
 
-	"github.com/adyen/adyen-go-api-library/v4/src/common"
+	"github.com/adyen/adyen-go-api-library/v5/src/common"
 )
 
 // Recurring Recurring service
@@ -23,38 +23,38 @@ type Recurring common.Service
 /*
 PostDisable Disables stored payment details.
 Disables stored payment details to stop charging a shopper with this particular recurring detail ID.  For more information, refer to [Disable stored details](https://docs.adyen.com/classic-integration/recurring-payments/disable-stored-details/).
- * @param request DisableRequest - reference of DisableRequest). 
+ * @param request DisableRequest - reference of DisableRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return DisableResult
 */
 func (a Recurring) Disable(req *DisableRequest, ctxs ..._context.Context) (DisableResult, *_nethttp.Response, error) {
-    res := &DisableResult{}
-    httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath() + "/disable", ctxs...)
-    return *res, httpRes, err
+	res := &DisableResult{}
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/disable", ctxs...)
+	return *res, httpRes, err
 }
 
 /*
 PostListRecurringDetails Retrieves stored payment details for a shopper.
 Lists the stored payment details for a shopper, if there are any available. The recurring detail ID can be used with a regular authorisation request to charge the shopper. A summary of the payment detail is returned for presentation to the shopper.  For more information, refer to [Retrieve stored details](https://docs.adyen.com/classic-integration/recurring-payments/retrieve-stored-details/).
- * @param request RecurringDetailsRequest - reference of RecurringDetailsRequest). 
+ * @param request RecurringDetailsRequest - reference of RecurringDetailsRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return RecurringDetailsResult
 */
 func (a Recurring) ListRecurringDetails(req *RecurringDetailsRequest, ctxs ..._context.Context) (RecurringDetailsResult, *_nethttp.Response, error) {
-    res := &RecurringDetailsResult{}
-    httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath() + "/listRecurringDetails", ctxs...)
-    return *res, httpRes, err
+	res := &RecurringDetailsResult{}
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/listRecurringDetails", ctxs...)
+	return *res, httpRes, err
 }
 
 /*
 PostScheduleAccountUpdater Schedules running of the Account Updater.
 When making the API call, you can submit either the credit card information, or the recurring detail reference and the shopper reference: * If the card information is provided, all the sub-fields for &#x60;card&#x60; are mandatory. * If the recurring detail reference is provided, the fields for &#x60;shopperReference&#x60; and &#x60;selectedRecurringDetailReference&#x60; are mandatory.
- * @param request ScheduleAccountUpdaterRequest - reference of ScheduleAccountUpdaterRequest). 
+ * @param request ScheduleAccountUpdaterRequest - reference of ScheduleAccountUpdaterRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ScheduleAccountUpdaterResult
 */
 func (a Recurring) ScheduleAccountUpdater(req *ScheduleAccountUpdaterRequest, ctxs ..._context.Context) (ScheduleAccountUpdaterResult, *_nethttp.Response, error) {
-    res := &ScheduleAccountUpdaterResult{}
-    httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath() + "/scheduleAccountUpdater", ctxs...)
-    return *res, httpRes, err
+	res := &ScheduleAccountUpdaterResult{}
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/scheduleAccountUpdater", ctxs...)
+	return *res, httpRes, err
 }
