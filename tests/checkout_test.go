@@ -249,11 +249,11 @@ func Test_Checkout(t *testing.T) {
 				ApplicationInfo: &checkout.ApplicationInfo{
 					AdyenPaymentSource: &checkout.CommonField{
 						Name:    "test",
-						Version: "v65",
+						Version: "v67",
 					},
 					AdyenLibrary: &checkout.CommonField{
 						Name:    "test",
-						Version: "v65",
+						Version: "v67",
 					},
 				},
 			}
@@ -273,7 +273,7 @@ func Test_Checkout(t *testing.T) {
 			require.Equal(t, common.LibName, req.ApplicationInfo.AdyenLibrary.Name)
 			require.Equal(t, common.LibVersion, req.ApplicationInfo.AdyenLibrary.Version)
 			require.Equal(t, "test", req.ApplicationInfo.AdyenPaymentSource.Name)
-			require.Equal(t, "v65", req.ApplicationInfo.AdyenPaymentSource.Version)
+			require.Equal(t, "v67", req.ApplicationInfo.AdyenPaymentSource.Version)
 		})
 	})
 
