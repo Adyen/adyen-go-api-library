@@ -13,7 +13,7 @@ import (
 	binlookup "github.com/adyen/adyen-go-api-library/v4/src/binlookup"
 	checkout "github.com/adyen/adyen-go-api-library/v4/src/checkout"
 	common "github.com/adyen/adyen-go-api-library/v4/src/common"
-  disputes "github.com/adyen/adyen-go-api-library/v4/src/disputes"
+	disputes "github.com/adyen/adyen-go-api-library/v4/src/disputes"
 	notification "github.com/adyen/adyen-go-api-library/v4/src/notification"
 	payments "github.com/adyen/adyen-go-api-library/v4/src/payments"
 	payouts "github.com/adyen/adyen-go-api-library/v4/src/payouts"
@@ -35,11 +35,11 @@ const (
 	MarketpayFundAPIVersion         = "v6"
 	MarketpayNotificationAPIVersion = "v6"
 	MarketpayHopAPIVersion          = "v6"
-	APIVersion                      = "v64"
+	PaymentAPIVersion               = "v64"
 	RecurringAPIVersion             = "v49"
 	CheckoutEndpointTest            = "https://checkout-test.adyen.com/checkout"
 	CheckoutEndpointLiveSuffix      = "-checkout-live.adyenpayments.com/checkout"
-	CheckoutAPIVersion              = "v65"
+	CheckoutAPIVersion              = "v67"
 	BinLookupPalSuffix              = "/pal/servlet/BinLookup/"
 	BinLookupAPIVersion             = "v50"
 	TerminalAPIEndpointTest         = "https://terminal-api-test.adyen.com"
@@ -160,14 +160,14 @@ func NewClient(cfg *common.Config) *APIClient {
 	c.Payments = &payments.Payments{
 		Client: c.client,
 		BasePath: func() string {
-			return fmt.Sprintf("%s/pal/servlet/Payment/%s", c.client.Cfg.Endpoint, APIVersion)
+			return fmt.Sprintf("%s/pal/servlet/Payment/%s", c.client.Cfg.Endpoint, PaymentAPIVersion)
 		},
 	}
 
 	c.Payouts = &payouts.Payouts{
 		Client: c.client,
 		BasePath: func() string {
-			return fmt.Sprintf("%s/pal/servlet/Payout/%s", c.client.Cfg.Endpoint, APIVersion)
+			return fmt.Sprintf("%s/pal/servlet/Payout/%s", c.client.Cfg.Endpoint, PaymentAPIVersion)
 		},
 	}
 
