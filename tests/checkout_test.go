@@ -89,7 +89,7 @@ func Test_Checkout(t *testing.T) {
 
 		t.Run("Get payment link", func(t *testing.T) {
 			paymentLink, _, _ := createPaymentLink()
-			res, httpRes, err := client.Checkout.GetPaymentLink(paymentLink.Id)
+			res, httpRes, err := client.Checkout.GetPaymentLinks(paymentLink.Id)
 
 			require.Nil(t, err)
 			require.NotNil(t, httpRes)
@@ -102,7 +102,7 @@ func Test_Checkout(t *testing.T) {
 
 		t.Run("Update payment link", func(t *testing.T) {
 			paymentLink, _, _ := createPaymentLink()
-			res, httpRes, err := client.Checkout.UpdatePaymentLink(paymentLink.Id, &checkout.UpdatePaymentLinkRequest{
+			res, httpRes, err := client.Checkout.UpdatePaymentLinks(paymentLink.Id, &checkout.UpdatePaymentLinkRequest{
 				Status: "expired",
 			})
 
@@ -178,7 +178,6 @@ func Test_Checkout(t *testing.T) {
 			require.NotNil(t, res)
 			assert.Equal(t, common.RedirectShopper, res.ResultCode)
 			require.NotNil(t, res.Action)
-			require.NotNil(t, res.PaymentData)
 
 			// Make sure the actions is there
 			action := *res.Action
@@ -267,7 +266,6 @@ func Test_Checkout(t *testing.T) {
 			require.NotNil(t, res)
 			assert.Equal(t, common.RedirectShopper, res.ResultCode)
 			require.NotNil(t, res.Action)
-			require.NotNil(t, res.PaymentData)
 
 			// check if req has ApplicationInfo added to it
 			require.NotNil(t, req.ApplicationInfo)
