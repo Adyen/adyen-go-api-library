@@ -127,7 +127,7 @@ func (a Checkout) PaymentMethodsBalance(req *CheckoutBalanceCheckRequest, ctxs .
 
 /*
 PaymentSession Creates a payment session.
-Provides the data object that can be used to start the Checkout SDK. To set up the payment, pass its amount, currency, and other required parameters. We use this to optimise the payment flow and perform better risk assessment of the transaction.  For more information, refer to [How it works](https://docs.adyen.com/online-payments#howitworks).
+Provides the data object that can be used to start the Checkout SDK. To set up the payment, pass its amount, currency, and other required parameters. We use this to optimise the payment flow and perform better risk assessment of the transaction.  For more information, refer to [How it works](https://docs.adyen.com/online-payments).
  * @param request PaymentSetupRequest - reference of PaymentSetupRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return PaymentSetupResponse
