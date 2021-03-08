@@ -175,7 +175,7 @@ func (a Checkout) PaymentsDetails(req *DetailsRequest, ctxs ..._context.Context)
 
 /*
 PaymentsResult Verifies payment result.
-Verifies the payment result using the payload returned from the Checkout SDK.  For more information, refer to [How it works](https://docs.adyen.com/online-payments#howitworks).
+Verifies the payment result using the payload returned from the Checkout SDK.  For more information, refer to [How it works](https://docs.adyen.com/online-payments).
  * @param request PaymentVerificationRequest - reference of PaymentVerificationRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return PaymentVerificationResponse
