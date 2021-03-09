@@ -6,15 +6,15 @@ We use custom mustache templates to generate the open api client for the API spe
 
 - `-i` path to open api spec yaml
 - `-t` path to custom templates in `./templates/go`
-- `-g` generator type `go-experimental`
+- `-g` generator type `go`
 - `-p packageName= <Api namespace in StartCase>`
 - `-o` output path `./src/<Api namespace in lowercase>`
 
 ```
 docker run --rm -v ${PWD}:/local openapitools/openapi-generator-cli generate \
-    -i /local/schema/CheckoutService-v51.yaml \
+    -i /local/schema/CheckoutService-v67.yaml \
     -t /local/templates/go \
-    -g go-experimental \
+    -g go \
     -p packageName=Checkout \
     -o /local/src/checkout
 ```
@@ -23,9 +23,9 @@ or
 
 ```
 openapi-generator-cli generate \
-    -i /schema/CheckoutService-v51.yaml
+    -i /schema/CheckoutService-v67.yaml
     -t /templates/go \
-    -g go-experimental \
+    -g go \
     -p packageName=Checkout \
     -o /src/checkout
 ```
