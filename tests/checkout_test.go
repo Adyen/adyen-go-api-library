@@ -15,9 +15,9 @@ import (
 
 	"github.com/google/uuid"
 
-	"github.com/adyen/adyen-go-api-library/v4/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v4/src/checkout"
-	"github.com/adyen/adyen-go-api-library/v4/src/common"
+	"github.com/adyen/adyen-go-api-library/v5/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v5/src/checkout"
+	"github.com/adyen/adyen-go-api-library/v5/src/common"
 
 	"github.com/joho/godotenv"
 
@@ -178,7 +178,6 @@ func Test_Checkout(t *testing.T) {
 			require.NotNil(t, res)
 			assert.Equal(t, common.RedirectShopper, res.ResultCode)
 			require.NotNil(t, res.Action)
-			require.NotNil(t, res.PaymentData)
 
 			// Make sure the actions is there
 			action := *res.Action
@@ -250,11 +249,11 @@ func Test_Checkout(t *testing.T) {
 				ApplicationInfo: &checkout.ApplicationInfo{
 					AdyenPaymentSource: &checkout.CommonField{
 						Name:    "test",
-						Version: "v65",
+						Version: "v67",
 					},
 					AdyenLibrary: &checkout.CommonField{
 						Name:    "test",
-						Version: "v65",
+						Version: "v67",
 					},
 				},
 			}
@@ -267,7 +266,6 @@ func Test_Checkout(t *testing.T) {
 			require.NotNil(t, res)
 			assert.Equal(t, common.RedirectShopper, res.ResultCode)
 			require.NotNil(t, res.Action)
-			require.NotNil(t, res.PaymentData)
 
 			// check if req has ApplicationInfo added to it
 			require.NotNil(t, req.ApplicationInfo)
@@ -275,7 +273,7 @@ func Test_Checkout(t *testing.T) {
 			require.Equal(t, common.LibName, req.ApplicationInfo.AdyenLibrary.Name)
 			require.Equal(t, common.LibVersion, req.ApplicationInfo.AdyenLibrary.Version)
 			require.Equal(t, "test", req.ApplicationInfo.AdyenPaymentSource.Name)
-			require.Equal(t, "v65", req.ApplicationInfo.AdyenPaymentSource.Version)
+			require.Equal(t, "v67", req.ApplicationInfo.AdyenPaymentSource.Version)
 		})
 	})
 
