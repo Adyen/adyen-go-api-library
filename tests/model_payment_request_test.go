@@ -38,7 +38,7 @@ func TestPaymentRequest_UnmarshalJSON(t *testing.T) {
 			},
 		},
 		{
-			"unmarshalls an payment request without payment method correctly",
+			"unmarshalls a payment request without payment method correctly",
 			checkout.PaymentRequest{},
 			`{
                 "riskData":{"clientData":"eyJ2ZXJzaW9uIjoiMS4w"},

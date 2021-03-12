@@ -118,15 +118,15 @@ type PaymentRequest struct {
 	TrustedShopper bool `json:"trustedShopper,omitempty"`
 }
 
-type paymentRequestAlias PaymentRequest
-
-// UnmarshalJSON unmarshals a quoted json string to the enum value
+// UnmarshalJSON unmarshals a quoted json string to PaymentRequest struct
 func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 
+	type PaymentRequestAlias PaymentRequest
+
 	temp := &struct {
-		*paymentRequestAlias
+		*PaymentRequestAlias
 	}{
-		paymentRequestAlias: (*paymentRequestAlias)(req),
+		PaymentRequestAlias: (*PaymentRequestAlias)(req),
 	}
 	if err := json.Unmarshal(b, &temp); err != nil {
 		return err
@@ -139,9 +139,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "scheme":
 			intermediate := &struct {
 				PaymentMethod *CardDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -151,9 +151,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "ach":
 			intermediate := &struct {
 				PaymentMethod *AchDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -164,9 +164,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "amazonpay":
 			intermediate := &struct {
 				PaymentMethod *AmazonPayDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -177,9 +177,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "androidpay":
 			intermediate := &struct {
 				PaymentMethod *AndroidPayDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -190,9 +190,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "applepay":
 			intermediate := &struct {
 				PaymentMethod *ApplePayDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -203,9 +203,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "directdebit_GB":
 			intermediate := &struct {
 				PaymentMethod *BacsDirectDebitDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -216,9 +216,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "billdesk_online":
 			intermediate := &struct {
 				PaymentMethod *BillDeskOnlineDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -229,9 +229,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "billdesk_wallet":
 			intermediate := &struct {
 				PaymentMethod *BillDeskWalletDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -242,9 +242,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "blik":
 			intermediate := &struct {
 				PaymentMethod *BlikDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -255,9 +255,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "cellulant":
 			intermediate := &struct {
 				PaymentMethod *CellulantDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -278,9 +278,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "doku_sinarmas_va":
 			intermediate := &struct {
 				PaymentMethod *DokuDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -291,9 +291,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "dotpay":
 			intermediate := &struct {
 				PaymentMethod *DotpayDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -307,9 +307,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "dragonpay_otc_philippines":
 			intermediate := &struct {
 				PaymentMethod *DragonpayDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -321,9 +321,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "econtext_stores":
 			intermediate := &struct {
 				PaymentMethod *EcontextVoucherDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -334,9 +334,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "entercash":
 			intermediate := &struct {
 				PaymentMethod *EntercashDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -347,9 +347,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "giropay":
 			intermediate := &struct {
 				PaymentMethod *GiropayDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -360,9 +360,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "paywithgoogle":
 			intermediate := &struct {
 				PaymentMethod *GooglePayDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -373,9 +373,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "ideal":
 			intermediate := &struct {
 				PaymentMethod *IdealDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -392,9 +392,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "klarna_b2b":
 			intermediate := &struct {
 				PaymentMethod *KlarnaDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -407,9 +407,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "lianlianpay_ebanking_debit":
 			intermediate := &struct {
 				PaymentMethod *LianLianPayDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -420,9 +420,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "masterpass":
 			intermediate := &struct {
 				PaymentMethod *MasterpassDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -433,9 +433,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "mbway":
 			intermediate := &struct {
 				PaymentMethod *MbwayDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -451,9 +451,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "molpay_fpx":
 			intermediate := &struct {
 				PaymentMethod *MolPayDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -464,9 +464,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "mobilepay":
 			intermediate := &struct {
 				PaymentMethod *MobilePayDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -477,9 +477,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "paypal":
 			intermediate := &struct {
 				PaymentMethod *PayPalDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -490,9 +490,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "payu_IN_upi":
 			intermediate := &struct {
 				PaymentMethod *PayUUpiDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -503,9 +503,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "qiwiwallet":
 			intermediate := &struct {
 				PaymentMethod *QiwiWalletDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -516,9 +516,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "samsungpay":
 			intermediate := &struct {
 				PaymentMethod *SamsungPayDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -529,9 +529,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "sepadirectdebit":
 			intermediate := &struct {
 				PaymentMethod *SepaDirectDebitDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -542,9 +542,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "upi":
 			intermediate := &struct {
 				PaymentMethod *UpiDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -555,9 +555,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "vipps":
 			intermediate := &struct {
 				PaymentMethod *VippsDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -568,9 +568,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "visacheckout":
 			intermediate := &struct {
 				PaymentMethod *VisaCheckoutDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -581,9 +581,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "wechatpay":
 			intermediate := &struct {
 				PaymentMethod *WeChatPayDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -594,9 +594,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "wechatpayMiniProgram":
 			intermediate := &struct {
 				PaymentMethod *WeChatPayMiniProgramDetails `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
@@ -607,9 +607,9 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		default:
 			intermediate := &struct {
 				PaymentMethod map[string]interface{} `json:"paymentMethod"`
-				*paymentRequestAlias
+				*PaymentRequestAlias
 			}{
-				paymentRequestAlias: (*paymentRequestAlias)(req),
+				PaymentRequestAlias: (*PaymentRequestAlias)(req),
 			}
 
 			if err := json.Unmarshal(b, &intermediate); err != nil {
