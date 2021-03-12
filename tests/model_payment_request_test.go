@@ -91,6 +91,25 @@ func TestPaymentRequest_UnmarshalJSON(t *testing.T) {
 			},
 		},
 		{
+			"unmarshalls a payment request with ach correctly",
+			checkout.PaymentRequest{},
+			`{
+                "riskData":{"clientData":"eyJ2ZX"},
+                "paymentMethod":{"type":"ach","encryptedBankAccountNumber":"adyenjs_0_1_25","encryptedBankLocationId":"adyenjs_0_1_25","ownerName":"test"},
+                "billingAddress":{"street":"test","houseNumberOrName":"2","postalCode":"123456","city":"porto rico","stateOrProvince":"N/A","country":"PR"}
+            }`,
+			false,
+			func(got checkout.PaymentRequest, t *testing.T) {
+				require.NotNil(t, got)
+				require.NotNil(t, got.PaymentMethod)
+				require.NotNil(t, got.RiskData)
+				require.NotNil(t, got.BillingAddress)
+				assert.Equal(t, "test", got.BillingAddress.Street)
+				assert.Equal(t, "ach", got.PaymentMethod.(*checkout.AchDetails).Type)
+				assert.Equal(t, "adyenjs_0_1_25", got.PaymentMethod.(*checkout.AchDetails).EncryptedBankAccountNumber)
+			},
+		},
+		{
 			"unmarshalls a payment request with a payment type not defined with concrete struct correctly",
 			checkout.PaymentRequest{},
 			`{
