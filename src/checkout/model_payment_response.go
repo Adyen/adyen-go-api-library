@@ -15,7 +15,7 @@ import "github.com/adyen/adyen-go-api-library/v5/src/common"
 // PaymentResponse struct for PaymentResponse
 type PaymentResponse struct {
 	// Action to be taken for completing the payment.
-	Action *interface{} `json:"action,omitempty"`
+	Action interface{} `json:"action,omitempty"`
 	// This field contains additional data, which may be required to return in a particular payment response. To choose data fields to be returned, go to **Customer Area** > **Account** > **API URLs** > **Additional data settings**.
 	AdditionalData map[string]string `json:"additionalData,omitempty"`
 	Amount         *Amount           `json:"amount,omitempty"`

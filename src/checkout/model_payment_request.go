@@ -11,6 +11,7 @@
 package checkout
 
 import (
+	"encoding/json"
 	"time"
 )
 
@@ -115,4 +116,508 @@ type PaymentRequest struct {
 	ThreeDSAuthenticationOnly bool `json:"threeDSAuthenticationOnly,omitempty"`
 	// Set to true if the payment should be routed to a trusted MID.
 	TrustedShopper bool `json:"trustedShopper,omitempty"`
+}
+
+type paymentRequestAlias PaymentRequest
+
+// UnmarshalJSON unmarshals a quoted json string to the enum value
+func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
+
+	temp := &struct {
+		*paymentRequestAlias
+	}{
+		paymentRequestAlias: (*paymentRequestAlias)(req),
+	}
+	if err := json.Unmarshal(b, &temp); err != nil {
+		return err
+	}
+	if temp.PaymentMethod != nil {
+
+		pmtype := temp.PaymentMethod.(map[string]interface{})["type"].(string)
+
+		switch pmtype {
+		case "scheme":
+			intermediate := &struct {
+				PaymentMethod *CardDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+		case "ach":
+			intermediate := &struct {
+				PaymentMethod *AchDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+
+		case "amazonpay":
+			intermediate := &struct {
+				PaymentMethod *AmazonPayDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+
+		case "androidpay":
+			intermediate := &struct {
+				PaymentMethod *AndroidPayDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+
+		case "applepay":
+			intermediate := &struct {
+				PaymentMethod *ApplePayDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+
+		case "directdebit_GB":
+			intermediate := &struct {
+				PaymentMethod *BacsDirectDebitDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+
+		case "billdesk_online":
+			intermediate := &struct {
+				PaymentMethod *BillDeskOnlineDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+
+		case "billdesk_wallet":
+			intermediate := &struct {
+				PaymentMethod *BillDeskWalletDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+
+		case "blik":
+			intermediate := &struct {
+				PaymentMethod *BlikDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+
+		case "cellulant":
+			intermediate := &struct {
+				PaymentMethod *CellulantDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+
+		case "doku_mandiri_va":
+		case "doku_cimb_va":
+		case "doku_danamon_va":
+		case "doku_bni_va":
+		case "doku_permata_lite_atm":
+		case "doku_permata_atm":
+		case "doku_bri_va":
+		case "doku_bca_va":
+		case "doku_alfamart":
+		case "doku_indomaret":
+		case "doku_sinarmas_va":
+			intermediate := &struct {
+				PaymentMethod *DokuDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+
+		case "dotpay":
+			intermediate := &struct {
+				PaymentMethod *DotpayDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+
+		case "dragonpay_ebanking":
+		case "dragonpay_otc_banking":
+		case "dragonpay_otc_non_banking":
+		case "dragonpay_otc_philippines":
+			intermediate := &struct {
+				PaymentMethod *DragonpayDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+
+		case "econtext_seveneleven":
+		case "econtext_stores":
+			intermediate := &struct {
+				PaymentMethod *EcontextVoucherDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+
+		case "entercash":
+			intermediate := &struct {
+				PaymentMethod *EntercashDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+
+		case "giropay":
+			intermediate := &struct {
+				PaymentMethod *GiropayDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+
+		case "paywithgoogle":
+			intermediate := &struct {
+				PaymentMethod *GooglePayDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+
+		case "ideal":
+			intermediate := &struct {
+				PaymentMethod *IdealDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+
+		case "klarna":
+		case "klarnapayments":
+		case "klarnapayments_account":
+		case "klarnapayments_b2b":
+		case "klarna_paynow":
+		case "klarna_account":
+		case "klarna_b2b":
+			intermediate := &struct {
+				PaymentMethod *KlarnaDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+
+		case "lianlianpay_ebanking_enterprise":
+		case "lianlianpay_ebanking_credit":
+		case "lianlianpay_ebanking_debit":
+			intermediate := &struct {
+				PaymentMethod *LianLianPayDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+
+		case "masterpass":
+			intermediate := &struct {
+				PaymentMethod *MasterpassDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+
+		case "mbway":
+			intermediate := &struct {
+				PaymentMethod *MbwayDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+
+		case "molpay_ebanking_fpx_MY":
+		case "molpay_ebanking_TH":
+		case "molpay_ebanking_VN":
+		case "molpay_ebanking_MY":
+		case "molpay_ebanking_direct_MY":
+		case "molpay_fpx":
+			intermediate := &struct {
+				PaymentMethod *MolPayDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+
+		case "mobilepay":
+			intermediate := &struct {
+				PaymentMethod *MobilePayDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+
+		case "paypal":
+			intermediate := &struct {
+				PaymentMethod *PayPalDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+
+		case "payu_IN_upi":
+			intermediate := &struct {
+				PaymentMethod *PayUUpiDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+
+		case "qiwiwallet":
+			intermediate := &struct {
+				PaymentMethod *QiwiWalletDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+
+		case "samsungpay":
+			intermediate := &struct {
+				PaymentMethod *SamsungPayDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+
+		case "sepadirectdebit":
+			intermediate := &struct {
+				PaymentMethod *SepaDirectDebitDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+
+		case "upi":
+			intermediate := &struct {
+				PaymentMethod *UpiDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+
+		case "vipps":
+			intermediate := &struct {
+				PaymentMethod *VippsDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+
+		case "visacheckout":
+			intermediate := &struct {
+				PaymentMethod *VisaCheckoutDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+
+		case "wechatpay":
+			intermediate := &struct {
+				PaymentMethod *WeChatPayDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+
+		case "wechatpayMiniProgram":
+			intermediate := &struct {
+				PaymentMethod *WeChatPayMiniProgramDetails `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+
+		default:
+			intermediate := &struct {
+				PaymentMethod map[string]interface{} `json:"paymentMethod"`
+				*paymentRequestAlias
+			}{
+				paymentRequestAlias: (*paymentRequestAlias)(req),
+			}
+
+			if err := json.Unmarshal(b, &intermediate); err != nil {
+				return err
+			}
+			req.PaymentMethod = intermediate.PaymentMethod
+		}
+	}
+
+	return nil
 }

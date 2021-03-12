@@ -162,9 +162,9 @@ func Test_Checkout(t *testing.T) {
 				MerchantAccount: MerchantAccount,
 				Channel:         "Web",
 				ReturnUrl:       "http://localhost:3000/redirect",
-				PaymentMethod: map[string]interface{}{
-					"type":   "ideal",
-					"issuer": "1121",
+				PaymentMethod: checkout.IdealDetails{
+					Type:   "ideal",
+					Issuer: "1121",
 				},
 			}
 
@@ -180,8 +180,7 @@ func Test_Checkout(t *testing.T) {
 			require.NotNil(t, res.Action)
 
 			// Make sure the actions is there
-			action := *res.Action
-			redirectAction := action.(map[string]interface{})
+			redirectAction := res.Action.(map[string]interface{})
 			require.NotNil(t, redirectAction)
 			require.NotNil(t, redirectAction["url"])
 			require.Equal(t, "GET", redirectAction["method"])
@@ -292,6 +291,7 @@ func Test_Checkout(t *testing.T) {
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 422, httpRes.StatusCode)
 			require.NotNil(t, res)
+			assert.Equal(t, common.AuthenticationFinished, res.ResultCode)
 		})
 	})
 

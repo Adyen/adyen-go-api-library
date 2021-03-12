@@ -66,7 +66,7 @@ This endpoint is used to retrieve the details of the configurations of all of th
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return GetNotificationConfigurationListResponse
 */
-func (a PlatformsNotificationConfiguration) GetNotificationConfigurationList(req *interface{}, ctxs ..._context.Context) (GetNotificationConfigurationListResponse, *_nethttp.Response, error) {
+func (a PlatformsNotificationConfiguration) GetNotificationConfigurationList(req interface{}, ctxs ..._context.Context) (GetNotificationConfigurationListResponse, *_nethttp.Response, error) {
 	res := &GetNotificationConfigurationListResponse{}
 	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/getNotificationConfigurationList", ctxs...)
 	return *res, httpRes, err

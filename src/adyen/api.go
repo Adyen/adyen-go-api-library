@@ -26,27 +26,31 @@ import (
 
 // Constants used for the client API
 const (
-	EndpointTest                    = "https://pal-test.adyen.com"
-	EndpointLive                    = "https://pal-live.adyen.com"
-	EndpointLiveSuffix              = "-pal-live.adyenpayments.com"
-	MarketpayEndpointTest           = "https://cal-test.adyen.com/cal/services"
-	MarketpayEndpointLive           = "https://cal-live.adyen.com/cal/services"
+	EndpointTest               = "https://pal-test.adyen.com"
+	EndpointLive               = "https://pal-live.adyen.com"
+	EndpointLiveSuffix         = "-pal-live.adyenpayments.com"
+	MarketpayEndpointTest      = "https://cal-test.adyen.com/cal/services"
+	MarketpayEndpointLive      = "https://cal-live.adyen.com/cal/services"
+	CheckoutEndpointTest       = "https://checkout-test.adyen.com/checkout"
+	CheckoutEndpointLiveSuffix = "-checkout-live.adyenpayments.com/checkout"
+	BinLookupPalSuffix         = "/pal/servlet/BinLookup/"
+	TerminalAPIEndpointTest    = "https://terminal-api-test.adyen.com"
+	TerminalAPIEndpointLive    = "https://terminal-api-live.adyen.com"
+	DisputesEndpointTest       = "https://ca-test.adyen.com/ca/services/DisputeService"
+	DisputesEndpointLive       = "https://ca-live.adyen.com/ca/services/DisputeService"
+)
+
+// also update LibVersion in src/common/configuration.go when a version is updated and a major lib version is released
+const (
 	MarketpayAccountAPIVersion      = "v6"
 	MarketpayFundAPIVersion         = "v6"
 	MarketpayNotificationAPIVersion = "v6"
 	MarketpayHopAPIVersion          = "v6"
 	PaymentAPIVersion               = "v64"
 	RecurringAPIVersion             = "v49"
-	CheckoutEndpointTest            = "https://checkout-test.adyen.com/checkout"
-	CheckoutEndpointLiveSuffix      = "-checkout-live.adyenpayments.com/checkout"
 	CheckoutAPIVersion              = "v67"
-	BinLookupPalSuffix              = "/pal/servlet/BinLookup/"
 	BinLookupAPIVersion             = "v50"
-	TerminalAPIEndpointTest         = "https://terminal-api-test.adyen.com"
-	TerminalAPIEndpointLive         = "https://terminal-api-live.adyen.com"
 	EndpointProtocol                = "https://"
-	DisputesEndpointTest            = "https://ca-test.adyen.com/ca/services/DisputeService"
-	DisputesEndpointLive            = "https://ca-live.adyen.com/ca/services/DisputeService"
 	DisputesAPIVersion              = "v30"
 )
 
