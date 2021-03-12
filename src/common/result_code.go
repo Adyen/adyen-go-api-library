@@ -28,6 +28,7 @@ const (
 	Received
 	RedirectShopper
 	Refused
+	Success
 )
 
 // ResultCodeValues should be in same order as the const defined above
@@ -44,6 +45,7 @@ var ResultCodeValues = [...]string{
 	"Received",
 	"RedirectShopper",
 	"Refused",
+	"Success",
 }
 
 func (s ResultCode) String() string {
