@@ -11,6 +11,7 @@
 package tests
 
 import (
+	"encoding/json"
 	"testing"
 
 	"github.com/adyen/adyen-go-api-library/v5/src/checkout"
@@ -83,6 +84,10 @@ func TestPaymentRequest_UnmarshalJSON(t *testing.T) {
 				require.NotNil(t, got.BrowserInfo)
 				assert.Equal(t, "scheme", got.PaymentMethod.(*checkout.CardDetails).Type)
 				assert.Equal(t, "adyenjs_0_1_25$J8/5xp5l6DjYVPokO6FwAQj", got.PaymentMethod.(*checkout.CardDetails).EncryptedCardNumber)
+
+				jsonString, err := json.Marshal(got)
+				assert.Nil(t, err)
+				assert.Equal(t, `{"amount":{"currency":"","value":0},"browserInfo":{"acceptHeader":"*/*","colorDepth":24,"javaEnabled":false,"language":"en-US","screenHeight":1080,"screenWidth":1920,"timeZoneOffset":-60,"userAgent":"Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:85.0) Gecko/20100101 Firefox/85.0"},"merchantAccount":"","paymentMethod":{"encryptedCardNumber":"adyenjs_0_1_25$J8/5xp5l6DjYVPokO6FwAQj","encryptedExpiryMonth":"adyenjs_0_1_25$bLCWe/ZHR37Okz0d28bzrDBYXw","encryptedExpiryYear":"adyenjs_0_1_25$nqasksbOSfn0grzrmna2vpWkQMhOHT6Cd","encryptedSecurityCode":"adyenjs_0_1_25$TbomjrfaGwHFfxpPuf","holderName":"d","type":"scheme"},"reference":"","returnUrl":"","riskData":{"clientData":"eyJ2ZXJzaW9uIjoiMS4w"}}`, string(jsonString))
 			},
 		},
 		{
@@ -102,13 +107,17 @@ func TestPaymentRequest_UnmarshalJSON(t *testing.T) {
 				assert.Equal(t, "mypay", got.PaymentMethod.(map[string]interface{})["type"].(string))
 				assert.Equal(t, "1234", got.PaymentMethod.(map[string]interface{})["number"])
 				assert.Equal(t, "amex", got.PaymentMethod.(map[string]interface{})["brand"])
+
+				jsonString, err := json.Marshal(got)
+				assert.Nil(t, err)
+				assert.Equal(t, `{"amount":{"currency":"","value":0},"browserInfo":{"acceptHeader":"*/*","colorDepth":24,"javaEnabled":false,"language":"en-US","screenHeight":1080,"screenWidth":1920,"timeZoneOffset":-60,"userAgent":"Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:85.0) Gecko/20100101 Firefox/85.0"},"merchantAccount":"","paymentMethod":{"brand":"amex","holderName":"d","number":"1234","type":"mypay"},"reference":"","returnUrl":"","riskData":{"clientData":"eyJ2ZXJzaW9uIjoiMS4w"}}`, string(jsonString))
 			},
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			pm := checkout.PaymentRequest{}
-			err := pm.UnmarshalJSON([]byte(tt.json))
+			err := json.Unmarshal([]byte(tt.json), &pm)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("PaymentRequest.UnmarshalJSON() error = %v, wantErr %v", err, tt.wantErr)
 				return
