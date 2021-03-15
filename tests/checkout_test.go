@@ -72,7 +72,7 @@ func Test_Checkout(t *testing.T) {
 			})
 
 			require.NotNil(t, err)
-			assert.Equal(t, true, strings.Contains(err.Error(), "Reference Missing"))
+			assert.Contains(t, err.Error(), "'reference' is not provided")
 			require.NotNil(t, httpRes)
 			require.NotNil(t, res)
 		})
@@ -146,7 +146,7 @@ func Test_Checkout(t *testing.T) {
 			})
 
 			require.NotNil(t, err)
-			assert.Equal(t, true, strings.Contains(err.Error(), "paymentMethod object has not been provided"))
+			assert.Contains(t, err.Error(), "'paymentMethod' is not provided")
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 422, httpRes.StatusCode)
 			require.NotNil(t, res)
@@ -162,9 +162,9 @@ func Test_Checkout(t *testing.T) {
 				MerchantAccount: MerchantAccount,
 				Channel:         "Web",
 				ReturnUrl:       "http://localhost:3000/redirect",
-				PaymentMethod: map[string]interface{}{
-					"type":   "ideal",
-					"issuer": "1121",
+				PaymentMethod: checkout.IdealDetails{
+					Type:   "ideal",
+					Issuer: "1121",
 				},
 			}
 
@@ -176,15 +176,14 @@ func Test_Checkout(t *testing.T) {
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 200, httpRes.StatusCode)
 			require.NotNil(t, res)
-			assert.Equal(t, common.RedirectShopper, res.ResultCode)
+			assert.Equal(t, common.RedirectShopper, *res.ResultCode)
 			require.NotNil(t, res.Action)
 
 			// Make sure the actions is there
-			action := *res.Action
-			redirectAction := action.(map[string]interface{})
+			redirectAction := res.Action.(*checkout.CheckoutRedirectAction)
 			require.NotNil(t, redirectAction)
-			require.NotNil(t, redirectAction["url"])
-			require.Equal(t, "GET", redirectAction["method"])
+			require.NotNil(t, redirectAction.Url)
+			require.Equal(t, "GET", redirectAction.Method)
 
 			// check if req has ApplicationInfo added to it
 			require.NotNil(t, req.ApplicationInfo)
@@ -264,7 +263,7 @@ func Test_Checkout(t *testing.T) {
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 200, httpRes.StatusCode)
 			require.NotNil(t, res)
-			assert.Equal(t, common.RedirectShopper, res.ResultCode)
+			assert.Equal(t, common.RedirectShopper, *res.ResultCode)
 			require.NotNil(t, res.Action)
 
 			// check if req has ApplicationInfo added to it
@@ -288,10 +287,11 @@ func Test_Checkout(t *testing.T) {
 			})
 
 			require.NotNil(t, err)
-			assert.Equal(t, true, strings.Contains(err.Error(), "Invalid paymentData (validation: 14_003)"))
+			assert.Contains(t, err.Error(), "'paymentData' is not valid")
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 422, httpRes.StatusCode)
 			require.NotNil(t, res)
+			require.Nil(t, res.ResultCode)
 		})
 	})
 
@@ -310,7 +310,7 @@ func Test_Checkout(t *testing.T) {
 			})
 
 			require.NotNil(t, err)
-			assert.Equal(t, true, strings.Contains(err.Error(), "Token is missing"))
+			assert.Contains(t, err.Error(), "'token' is not provided.")
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 422, httpRes.StatusCode)
 			require.NotNil(t, res)
