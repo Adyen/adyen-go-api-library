@@ -130,8 +130,7 @@ func (req *PaymentResponse) UnmarshalJSON(b []byte) error {
 				return err
 			}
 			req.Action = intermediate.Action
-		case "threeDS2Action":
-		case "threeDS2":
+		case "threeDS2Action", "threeDS2":
 			intermediate := &struct {
 				Action *CheckoutThreeDS2Action `json:"action"`
 				*PaymentResponseAlias

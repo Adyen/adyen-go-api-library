@@ -110,6 +110,44 @@ func TestPaymentRequest_UnmarshalJSON(t *testing.T) {
 			},
 		},
 		{
+			"unmarshalls a payment request with klarna correctly",
+			checkout.PaymentRequest{},
+			`{
+                "riskData":{"clientData":"eyJ2ZX"},
+                "paymentMethod":{"type":"klarna","billingAddress":"adyenjs_0_1_25"},
+                "billingAddress":{"street":"test","houseNumberOrName":"2","postalCode":"123456","city":"porto rico","stateOrProvince":"N/A","country":"PR"}
+            }`,
+			false,
+			func(got checkout.PaymentRequest, t *testing.T) {
+				require.NotNil(t, got)
+				require.NotNil(t, got.PaymentMethod)
+				require.NotNil(t, got.RiskData)
+				require.NotNil(t, got.BillingAddress)
+				assert.Equal(t, "test", got.BillingAddress.Street)
+				assert.Equal(t, "klarna", got.PaymentMethod.(*checkout.KlarnaDetails).Type)
+				assert.Equal(t, "adyenjs_0_1_25", got.PaymentMethod.(*checkout.KlarnaDetails).BillingAddress)
+			},
+		},
+		{
+			"unmarshalls a payment request with klarna_paynow correctly",
+			checkout.PaymentRequest{},
+			`{
+                "riskData":{"clientData":"eyJ2ZX"},
+                "paymentMethod":{"type":"klarna_paynow","billingAddress":"adyenjs_0_1_25"},
+                "billingAddress":{"street":"test","houseNumberOrName":"2","postalCode":"123456","city":"porto rico","stateOrProvince":"N/A","country":"PR"}
+            }`,
+			false,
+			func(got checkout.PaymentRequest, t *testing.T) {
+				require.NotNil(t, got)
+				require.NotNil(t, got.PaymentMethod)
+				require.NotNil(t, got.RiskData)
+				require.NotNil(t, got.BillingAddress)
+				assert.Equal(t, "test", got.BillingAddress.Street)
+				assert.Equal(t, "klarna_paynow", got.PaymentMethod.(*checkout.KlarnaDetails).Type)
+				assert.Equal(t, "adyenjs_0_1_25", got.PaymentMethod.(*checkout.KlarnaDetails).BillingAddress)
+			},
+		},
+		{
 			"unmarshalls a payment request with a payment type not defined with concrete struct correctly",
 			checkout.PaymentRequest{},
 			`{
