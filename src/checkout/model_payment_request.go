@@ -265,17 +265,7 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 			}
 			req.PaymentMethod = intermediate.PaymentMethod
 
-		case "doku_mandiri_va":
-		case "doku_cimb_va":
-		case "doku_danamon_va":
-		case "doku_bni_va":
-		case "doku_permata_lite_atm":
-		case "doku_permata_atm":
-		case "doku_bri_va":
-		case "doku_bca_va":
-		case "doku_alfamart":
-		case "doku_indomaret":
-		case "doku_sinarmas_va":
+		case "doku_mandiri_va", "doku_cimb_va", "doku_danamon_va", "doku_bni_va", "doku_permata_lite_atm", "doku_permata_atm", "doku_bri_va", "doku_bca_va", "doku_alfamart", "doku_indomaret", "doku_sinarmas_va":
 			intermediate := &struct {
 				PaymentMethod *DokuDetails `json:"paymentMethod"`
 				*PaymentRequestAlias
@@ -301,10 +291,7 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 			}
 			req.PaymentMethod = intermediate.PaymentMethod
 
-		case "dragonpay_ebanking":
-		case "dragonpay_otc_banking":
-		case "dragonpay_otc_non_banking":
-		case "dragonpay_otc_philippines":
+		case "dragonpay_ebanking", "dragonpay_otc_banking", "dragonpay_otc_non_banking", "dragonpay_otc_philippines":
 			intermediate := &struct {
 				PaymentMethod *DragonpayDetails `json:"paymentMethod"`
 				*PaymentRequestAlias
@@ -317,8 +304,7 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 			}
 			req.PaymentMethod = intermediate.PaymentMethod
 
-		case "econtext_seveneleven":
-		case "econtext_stores":
+		case "econtext_seveneleven", "econtext_stores":
 			intermediate := &struct {
 				PaymentMethod *EcontextVoucherDetails `json:"paymentMethod"`
 				*PaymentRequestAlias
@@ -383,13 +369,7 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 			}
 			req.PaymentMethod = intermediate.PaymentMethod
 
-		case "klarna":
-		case "klarnapayments":
-		case "klarnapayments_account":
-		case "klarnapayments_b2b":
-		case "klarna_paynow":
-		case "klarna_account":
-		case "klarna_b2b":
+		case "klarna", "klarnapayments", "klarnapayments_account", "klarnapayments_b2b", "klarna_paynow", "klarna_account", "klarna_b2b":
 			intermediate := &struct {
 				PaymentMethod *KlarnaDetails `json:"paymentMethod"`
 				*PaymentRequestAlias
@@ -402,9 +382,7 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 			}
 			req.PaymentMethod = intermediate.PaymentMethod
 
-		case "lianlianpay_ebanking_enterprise":
-		case "lianlianpay_ebanking_credit":
-		case "lianlianpay_ebanking_debit":
+		case "lianlianpay_ebanking_enterprise", "lianlianpay_ebanking_credit", "lianlianpay_ebanking_debit":
 			intermediate := &struct {
 				PaymentMethod *LianLianPayDetails `json:"paymentMethod"`
 				*PaymentRequestAlias
@@ -443,12 +421,7 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 			}
 			req.PaymentMethod = intermediate.PaymentMethod
 
-		case "molpay_ebanking_fpx_MY":
-		case "molpay_ebanking_TH":
-		case "molpay_ebanking_VN":
-		case "molpay_ebanking_MY":
-		case "molpay_ebanking_direct_MY":
-		case "molpay_fpx":
+		case "molpay_ebanking_fpx_MY", "molpay_ebanking_TH", "molpay_ebanking_VN", "molpay_ebanking_MY", "molpay_ebanking_direct_MY", "molpay_fpx":
 			intermediate := &struct {
 				PaymentMethod *MolPayDetails `json:"paymentMethod"`
 				*PaymentRequestAlias
