@@ -11,6 +11,7 @@
 package checkout
 // CheckoutOrderResponse struct for CheckoutOrderResponse
 type CheckoutOrderResponse struct {
+	Amount *Amount `json:"amount,omitempty"`
 	// The expiry date for the order.
 	ExpiresAt string `json:"expiresAt,omitempty"`
 	// The encrypted order data.

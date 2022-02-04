@@ -41,6 +41,8 @@ type ThreeDS2RequestData struct {
 	SdkReferenceNumber string `json:"sdkReferenceNumber,omitempty"`
 	// The `sdkTransID` value as received from the 3D Secure 2 SDK. Only for `deviceChannel` set to **app**.
 	SdkTransID string `json:"sdkTransID,omitempty"`
+	// Version of the 3D Secure 2 mobile SDK.  Only for `deviceChannel` set to **app**.
+	SdkVersion string `json:"sdkVersion,omitempty"`
 	// Completion indicator for the device fingerprinting.
 	ThreeDSCompInd string `json:"threeDSCompInd,omitempty"`
 	// Required for [authentication-only integration](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only) for Visa. Unique 3D Secure requestor identifier assigned by the Directory Server when you enrol for 3D Secure 2.

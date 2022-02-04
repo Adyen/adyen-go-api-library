@@ -9,26 +9,16 @@
  */
 
 package checkout
-// LineItem struct for LineItem
-type LineItem struct {
-	// Item amount excluding the tax, in minor units.
-	AmountExcludingTax int64 `json:"amountExcludingTax,omitempty"`
-	// Item amount including the tax, in minor units.
-	AmountIncludingTax int64 `json:"amountIncludingTax,omitempty"`
-	// Description of the line item.
-	Description string `json:"description,omitempty"`
-	// ID of the line item.
-	Id string `json:"id,omitempty"`
-	// Link to the picture of the purchased item.
-	ImageUrl string `json:"imageUrl,omitempty"`
-	// Item category, used by the RatePay payment method.
-	ItemCategory string `json:"itemCategory,omitempty"`
-	// Link to the purchased item.
-	ProductUrl string `json:"productUrl,omitempty"`
-	// Number of items.
-	Quantity int64 `json:"quantity,omitempty"`
-	// Tax amount, in minor units.
-	TaxAmount int64 `json:"taxAmount,omitempty"`
-	// Tax percentage, in minor units.
-	TaxPercentage int64 `json:"taxPercentage,omitempty"`
+// PayWithGoogleDetails struct for PayWithGoogleDetails
+type PayWithGoogleDetails struct {
+	// The funding source that should be used when multiple sources are available. For Brazilian combo cards, by default the funding source is credit. To use debit, set this value to **debit**.
+	FundingSource string `json:"fundingSource,omitempty"`
+	// The `token` that you obtained from the [Google Pay API](https://developers.google.com/pay/api/web/reference/response-objects#PaymentData) `PaymentData` response.
+	GooglePayToken string `json:"googlePayToken"`
+	// This is the `recurringDetailReference` returned in the response when you created the token.
+	RecurringDetailReference string `json:"recurringDetailReference,omitempty"`
+	// This is the `recurringDetailReference` returned in the response when you created the token.
+	StoredPaymentMethodId string `json:"storedPaymentMethodId,omitempty"`
+	// **paywithgoogle**
+	Type string `json:"type,omitempty"`
 }

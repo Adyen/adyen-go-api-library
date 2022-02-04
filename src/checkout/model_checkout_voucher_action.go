@@ -32,7 +32,7 @@ type CheckoutVoucherAction struct {
 	MerchantName string `json:"merchantName,omitempty"`
 	// The merchant reference.
 	MerchantReference string `json:"merchantReference,omitempty"`
-	// A value that must be submitted to the `/payments/details` endpoint to verify this payment. In v67 and later, you will always get this value from the Component.
+	// A value that must be submitted to the `/payments/details` endpoint to verify this payment.
 	PaymentData string `json:"paymentData,omitempty"`
 	// Specifies the payment method.
 	PaymentMethodType string `json:"paymentMethodType,omitempty"`

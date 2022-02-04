@@ -19,6 +19,6 @@ type GooglePayDetails struct {
 	RecurringDetailReference string `json:"recurringDetailReference,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
 	StoredPaymentMethodId string `json:"storedPaymentMethodId,omitempty"`
-	// **paywithgoogle**
+	// **googlepay**, **paywithgoogle**
 	Type string `json:"type,omitempty"`
 }

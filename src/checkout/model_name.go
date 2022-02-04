@@ -13,8 +13,6 @@ package checkout
 type Name struct {
 	// The first name.
 	FirstName string `json:"firstName"`
-	// The name's infix, if applicable. >A maximum length of twenty (20) characters is imposed.
-	Infix string `json:"infix,omitempty"`
 	// The last name.
 	LastName string `json:"lastName"`
 }

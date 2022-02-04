@@ -9,26 +9,25 @@
  */
 
 package checkout
-// LineItem struct for LineItem
-type LineItem struct {
-	// Item amount excluding the tax, in minor units.
-	AmountExcludingTax int64 `json:"amountExcludingTax,omitempty"`
-	// Item amount including the tax, in minor units.
-	AmountIncludingTax int64 `json:"amountIncludingTax,omitempty"`
-	// Description of the line item.
-	Description string `json:"description,omitempty"`
-	// ID of the line item.
-	Id string `json:"id,omitempty"`
-	// Link to the picture of the purchased item.
-	ImageUrl string `json:"imageUrl,omitempty"`
-	// Item category, used by the RatePay payment method.
-	ItemCategory string `json:"itemCategory,omitempty"`
-	// Link to the purchased item.
-	ProductUrl string `json:"productUrl,omitempty"`
-	// Number of items.
-	Quantity int64 `json:"quantity,omitempty"`
-	// Tax amount, in minor units.
-	TaxAmount int64 `json:"taxAmount,omitempty"`
-	// Tax percentage, in minor units.
-	TaxPercentage int64 `json:"taxPercentage,omitempty"`
+// ThreeDS2ResponseData struct for ThreeDS2ResponseData
+type ThreeDS2ResponseData struct {
+	AcsChallengeMandated string `json:"acsChallengeMandated,omitempty"`
+	AcsOperatorID string `json:"acsOperatorID,omitempty"`
+	AcsReferenceNumber string `json:"acsReferenceNumber,omitempty"`
+	AcsSignedContent string `json:"acsSignedContent,omitempty"`
+	AcsTransID string `json:"acsTransID,omitempty"`
+	AcsURL string `json:"acsURL,omitempty"`
+	AuthenticationType string `json:"authenticationType,omitempty"`
+	CardHolderInfo string `json:"cardHolderInfo,omitempty"`
+	CavvAlgorithm string `json:"cavvAlgorithm,omitempty"`
+	ChallengeIndicator string `json:"challengeIndicator,omitempty"`
+	DsReferenceNumber string `json:"dsReferenceNumber,omitempty"`
+	DsTransID string `json:"dsTransID,omitempty"`
+	ExemptionIndicator string `json:"exemptionIndicator,omitempty"`
+	MessageVersion string `json:"messageVersion,omitempty"`
+	RiskScore string `json:"riskScore,omitempty"`
+	SdkEphemPubKey string `json:"sdkEphemPubKey,omitempty"`
+	ThreeDSServerTransID string `json:"threeDSServerTransID,omitempty"`
+	TransStatus string `json:"transStatus,omitempty"`
+	TransStatusReason string `json:"transStatusReason,omitempty"`
 }

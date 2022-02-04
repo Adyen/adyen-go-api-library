@@ -14,6 +14,6 @@ type Configuration struct {
 	Avs *Avs `json:"avs,omitempty"`
 	// Determines whether the cardholder name should be provided or not.  Permitted values: * NONE * OPTIONAL * REQUIRED
 	CardHolderName string `json:"cardHolderName,omitempty"`
-	Installments *Installments2 `json:"installments,omitempty"`
+	Installments *InstallmentsNumber `json:"installments,omitempty"`
 	ShopperInput *ShopperInput `json:"shopperInput,omitempty"`
 }

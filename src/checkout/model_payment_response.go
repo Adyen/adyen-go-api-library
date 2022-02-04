@@ -9,190 +9,29 @@
  */
 
 package checkout
-
-import (
-	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v5/src/common"
-)
-
 // PaymentResponse struct for PaymentResponse
 type PaymentResponse struct {
 	// Action to be taken for completing the payment.
-	Action interface{} `json:"action,omitempty"`
-	// This field contains additional data, which may be required to return in a particular payment response. To choose data fields to be returned, go to **Customer Area** > **Account** > **API URLs** > **Additional data settings**.
+	// Action *OneOfCheckoutAwaitActionCheckoutBankTransferActionCheckoutDonationActionCheckoutOneTimePasscodeActionCheckoutQrCodeActionCheckoutRedirectActionCheckoutSDKActionCheckoutThreeDS2ActionCheckoutVoucherAction `json:"action,omitempty"`
+	// Contains additional information about the payment. Some data fields are included only if you select them first: Go to **Customer Area** > **Account** > **API URLs** > **Additional data settings**.
 	AdditionalData map[string]string `json:"additionalData,omitempty"`
-	Amount         *Amount           `json:"amount,omitempty"`
+	Amount *Amount `json:"amount,omitempty"`
 	// Donation Token containing payment details for Adyen Giving.
-	DonationToken string       `json:"donationToken,omitempty"`
-	FraudResult   *FraudResult `json:"fraudResult,omitempty"`
+	DonationToken string `json:"donationToken,omitempty"`
+	FraudResult *FraudResult `json:"fraudResult,omitempty"`
 	// The reference to uniquely identify a payment. This reference is used in all communication with you about the payment status. We recommend using a unique value per payment; however, it is not a requirement. If you need to provide multiple references for a transaction, separate them with hyphens (\"-\"). Maximum length: 80 characters.
-	MerchantReference string                 `json:"merchantReference,omitempty"`
-	Order             *CheckoutOrderResponse `json:"order,omitempty"`
-	// Adyen's 16-character string reference associated with the transaction/request. This value is globally unique; quote it when communicating with us about this request.  > `pspReference` is returned only for non-redirect payment methods.
+	MerchantReference string `json:"merchantReference,omitempty"`
+	Order *CheckoutOrderResponse `json:"order,omitempty"`
+	// Adyen's 16-character string reference associated with the transaction/request. This value is globally unique; quote it when communicating with us about this request.  > For payment methods that require a redirect or additional action, you will get this value in the `/payments/details` response.
 	PspReference string `json:"pspReference,omitempty"`
 	// If the payment's authorisation is refused or an error occurs during authorisation, this field holds Adyen's mapped reason for the refusal or a description of the error. When a transaction fails, the authorisation response includes `resultCode` and `refusalReason` values.  For more information, see [Refusal reasons](https://docs.adyen.com/development-resources/refusal-reasons).
 	RefusalReason string `json:"refusalReason,omitempty"`
 	// Code that specifies the refusal reason. For more information, see [Authorisation refusal reasons](https://docs.adyen.com/development-resources/refusal-reasons).
 	RefusalReasonCode string `json:"refusalReasonCode,omitempty"`
 	// The result of the payment. For more information, see [Result codes](https://docs.adyen.com/online-payments/payment-result-codes).  Possible values:  * **AuthenticationFinished** – The payment has been successfully authenticated with 3D Secure 2. Returned for 3D Secure 2 authentication-only transactions. * **AuthenticationNotRequired** – The transaction does not require 3D Secure authentication. Returned for [standalone authentication-only integrations](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only). * **Authorised** – The payment was successfully authorised. This state serves as an indicator to proceed with the delivery of goods and services. This is a final state. * **Cancelled** – Indicates the payment has been cancelled (either by the shopper or the merchant) before processing was completed. This is a final state. * **ChallengeShopper** – The issuer requires further shopper interaction before the payment can be authenticated. Returned for 3D Secure 2 transactions. * **Error** – There was an error when the payment was being processed. The reason is given in the `refusalReason` field. This is a final state. * **IdentifyShopper** – The issuer requires the shopper's device fingerprint before the payment can be authenticated. Returned for 3D Secure 2 transactions. * **Pending** – Indicates that it is not possible to obtain the final status of the payment. This can happen if the systems providing final status information for the payment are unavailable, or if the shopper needs to take further action to complete the payment. * **PresentToShopper** – Indicates that the response contains additional information that you need to present to a shopper, so that they can use it to complete a payment. * **Received** – Indicates the payment has successfully been received by Adyen, and will be processed. This is the initial state for all payments. * **RedirectShopper** – Indicates the shopper should be redirected to an external web page or app to complete the authorisation. * **Refused** – Indicates the payment was refused. The reason is given in the `refusalReason` field. This is a final state.
-	ResultCode     *common.ResultCode `json:"resultCode,omitempty"`
-	ThreeDS2Result *ThreeDS2Result    `json:"threeDS2Result,omitempty"`
-}
-
-// UnmarshalJSON unmarshals a quoted json string to PaymentResponse struct
-func (req *PaymentResponse) UnmarshalJSON(b []byte) error {
-
-	type PaymentResponseAlias PaymentResponse
-
-	temp := &struct {
-		*PaymentResponseAlias
-	}{
-		PaymentResponseAlias: (*PaymentResponseAlias)(req),
-	}
-	if err := json.Unmarshal(b, &temp); err != nil {
-		return err
-	}
-	if temp.Action != nil {
-
-		actiontype := temp.Action.(map[string]interface{})["type"].(string)
-
-		switch actiontype {
-		case "donation":
-			intermediate := &struct {
-				Action *CheckoutDonationAction `json:"action"`
-				*PaymentResponseAlias
-			}{
-				PaymentResponseAlias: (*PaymentResponseAlias)(req),
-			}
-
-			if err := json.Unmarshal(b, &intermediate); err != nil {
-				return err
-			}
-			req.Action = intermediate.Action
-		case "qrCode":
-			intermediate := &struct {
-				Action *CheckoutQrCodeAction `json:"action"`
-				*PaymentResponseAlias
-			}{
-				PaymentResponseAlias: (*PaymentResponseAlias)(req),
-			}
-
-			if err := json.Unmarshal(b, &intermediate); err != nil {
-				return err
-			}
-			req.Action = intermediate.Action
-		case "redirect":
-			intermediate := &struct {
-				Action *CheckoutRedirectAction `json:"action"`
-				*PaymentResponseAlias
-			}{
-				PaymentResponseAlias: (*PaymentResponseAlias)(req),
-			}
-
-			if err := json.Unmarshal(b, &intermediate); err != nil {
-				return err
-			}
-			req.Action = intermediate.Action
-		case "sdk":
-			intermediate := &struct {
-				Action *CheckoutSDKAction `json:"action"`
-				*PaymentResponseAlias
-			}{
-				PaymentResponseAlias: (*PaymentResponseAlias)(req),
-			}
-
-			if err := json.Unmarshal(b, &intermediate); err != nil {
-				return err
-			}
-			req.Action = intermediate.Action
-		case "threeDS2Challenge":
-			intermediate := &struct {
-				Action *CheckoutThreeDS2ChallengeAction `json:"action"`
-				*PaymentResponseAlias
-			}{
-				PaymentResponseAlias: (*PaymentResponseAlias)(req),
-			}
-
-			if err := json.Unmarshal(b, &intermediate); err != nil {
-				return err
-			}
-			req.Action = intermediate.Action
-		case "threeDS2Fingerprint":
-			intermediate := &struct {
-				Action *CheckoutThreeDS2FingerPrintAction `json:"action"`
-				*PaymentResponseAlias
-			}{
-				PaymentResponseAlias: (*PaymentResponseAlias)(req),
-			}
-
-			if err := json.Unmarshal(b, &intermediate); err != nil {
-				return err
-			}
-			req.Action = intermediate.Action
-		case "threeDS2Action", "threeDS2":
-			intermediate := &struct {
-				Action *CheckoutThreeDS2Action `json:"action"`
-				*PaymentResponseAlias
-			}{
-				PaymentResponseAlias: (*PaymentResponseAlias)(req),
-			}
-
-			if err := json.Unmarshal(b, &intermediate); err != nil {
-				return err
-			}
-			req.Action = intermediate.Action
-		case "await":
-			intermediate := &struct {
-				Action *CheckoutAwaitAction `json:"action"`
-				*PaymentResponseAlias
-			}{
-				PaymentResponseAlias: (*PaymentResponseAlias)(req),
-			}
-
-			if err := json.Unmarshal(b, &intermediate); err != nil {
-				return err
-			}
-			req.Action = intermediate.Action
-		case "voucher":
-			intermediate := &struct {
-				Action *CheckoutVoucherAction `json:"action"`
-				*PaymentResponseAlias
-			}{
-				PaymentResponseAlias: (*PaymentResponseAlias)(req),
-			}
-
-			if err := json.Unmarshal(b, &intermediate); err != nil {
-				return err
-			}
-			req.Action = intermediate.Action
-		case "oneTimePasscode":
-			intermediate := &struct {
-				Action *CheckoutOneTimePasscodeAction `json:"action"`
-				*PaymentResponseAlias
-			}{
-				PaymentResponseAlias: (*PaymentResponseAlias)(req),
-			}
-
-			if err := json.Unmarshal(b, &intermediate); err != nil {
-				return err
-			}
-			req.Action = intermediate.Action
-
-		default:
-			intermediate := &struct {
-				Action map[string]interface{} `json:"action"`
-				*PaymentResponseAlias
-			}{
-				PaymentResponseAlias: (*PaymentResponseAlias)(req),
-			}
-
-			if err := json.Unmarshal(b, &intermediate); err != nil {
-				return err
-			}
-			req.Action = intermediate.Action
-		}
-	}
-
-	return nil
+	ResultCode string `json:"resultCode,omitempty"`
+	ThreeDS2ResponseData *ThreeDS2ResponseData `json:"threeDS2ResponseData,omitempty"`
+	ThreeDS2Result *ThreeDS2Result `json:"threeDS2Result,omitempty"`
+	// When non-empty, contains a value that you must submit to the `/payments/details` endpoint as `paymentData`.
+	ThreeDSPaymentData string `json:"threeDSPaymentData,omitempty"`
 }

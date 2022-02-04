@@ -13,18 +13,21 @@ package checkout
 type ThreeDS2Result struct {
 	// The `authenticationValue` value as defined in the 3D Secure 2 specification.
 	AuthenticationValue string `json:"authenticationValue,omitempty"`
-	// The algorithm used by the ACS to calculate the authentication value, only for CartesBancaires integrations.
+	// The algorithm used by the ACS to calculate the authentication value, only for Cartes Bancaires integrations.
 	CavvAlgorithm string `json:"cavvAlgorithm,omitempty"`
-	// Indicator informing the ACS and the DS that the authentication has been canceled.
+	// Indicator informing the Access Control Server (ACS) and the Directory Server (DS) that the authentication has been cancelled. For possible values, refer to [3D Secure API reference](https://docs.adyen.com/online-payments/3d-secure/api-reference#mpidata).
 	ChallengeCancel string `json:"challengeCancel,omitempty"`
+	// Specifies a preference for receiving a challenge from the issuer. Allowed values: * `noPreference` * `requestNoChallenge` * `requestChallenge` * `requestChallengeAsMandate` 
 	ChallengeIndicator string `json:"challengeIndicator,omitempty"`
 	// The `dsTransID` value as defined in the 3D Secure 2 specification.
 	DsTransID string `json:"dsTransID,omitempty"`
 	// The `eci` value as defined in the 3D Secure 2 specification.
 	Eci string `json:"eci,omitempty"`
+	// Indicates the exemption type that was applied by the issuer to the authentication, if exemption applied. Allowed values: * `lowValue` * `secureCorporate` * `trustedBeneficiary` * `transactionRiskAnalysis` 
 	ExemptionIndicator string `json:"exemptionIndicator,omitempty"`
 	// The `messageVersion` value as defined in the 3D Secure 2 specification.
 	MessageVersion string `json:"messageVersion,omitempty"`
+	// Risk score calculated by Cartes Bancaires Directory Server (DS).
 	RiskScore string `json:"riskScore,omitempty"`
 	// The `threeDSServerTransID` value as defined in the 3D Secure 2 specification.
 	ThreeDSServerTransID string `json:"threeDSServerTransID,omitempty"`
@@ -32,7 +35,7 @@ type ThreeDS2Result struct {
 	Timestamp string `json:"timestamp,omitempty"`
 	// The `transStatus` value as defined in the 3D Secure 2 specification.
 	TransStatus string `json:"transStatus,omitempty"`
-	// The `transStatusReason` value as defined in the 3D Secure 2 specification.
+	// Provides information on why the `transStatus` field has the specified value. For possible values, refer to [our docs](https://docs.adyen.com/online-payments/3d-secure/api-reference#possible-transstatusreason-values).
 	TransStatusReason string `json:"transStatusReason,omitempty"`
 	// The `whiteListStatus` value as defined in the 3D Secure 2 specification.
 	WhiteListStatus string `json:"whiteListStatus,omitempty"`

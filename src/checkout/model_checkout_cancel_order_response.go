@@ -13,6 +13,6 @@ package checkout
 type CheckoutCancelOrderResponse struct {
 	// A unique reference of the cancellation request.
 	PspReference string `json:"pspReference"`
-	// The result of the cancellation request.
+	// The result of the cancellation request.  Possible values:  * **Received** – Indicates the cancellation has successfully been received by Adyen, and will be processed.
 	ResultCode string `json:"resultCode"`
 }

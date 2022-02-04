@@ -11,7 +11,7 @@
 package checkout
 // ServiceError struct for ServiceError
 type ServiceError struct {
-	// This field contains additional data, which may be required to return in a particular payment response. To choose data fields to be returned, go to **Customer Area** > **Account** > **API URLs**.
+	// Contains additional information about the payment. Some data fields are included only if you select them first: Go to **Customer Area** > **Account** > **API URLs**.
 	AdditionalData map[string]string `json:"additionalData,omitempty"`
 	// The error code mapped to the error message.
 	ErrorCode string `json:"errorCode,omitempty"`
@@ -21,4 +21,6 @@ type ServiceError struct {
 	Message string `json:"message,omitempty"`
 	// The PSP reference of the payment.
 	PspReference string `json:"pspReference,omitempty"`
+	// The HTTP response status.
+	Status int32 `json:"status,omitempty"`
 }

@@ -17,22 +17,6 @@ type AdditionalDataSubMerchant struct {
 	SubMerchantSubSellerSubSellerNrCity string `json:"subMerchant.subSeller[subSellerNr].city,omitempty"`
 	// Required for transactions performed by registered payment facilitators. The three-letter country code of the sub-merchant's address. For example, **BRA** for Brazil.  * Format: [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) * Fixed length: 3 characters
 	SubMerchantSubSellerSubSellerNrCountry string `json:"subMerchant.subSeller[subSellerNr].country,omitempty"`
-	// The sub-merchant's bank account number with the check digit number and without punctuations or dashes. * Format: Numeric * Maximum length: 12 digits
-	SubMerchantSubSellerSubSellerNrCreditSettlementAccount string `json:"subMerchant.subSeller[subSellerNr].creditSettlementAccount,omitempty"`
-	// A two-letter indicator of the type of the sub-merchant's bank account. Possible values:   - **CC** - Checking account  - **CD** - Deposit account  - **PG** - Payments account  - **PP** - Savings account 
-	SubMerchantSubSellerSubSellerNrCreditSettlementAccountType string `json:"subMerchant.subSeller[subSellerNr].creditSettlementAccountType,omitempty"`
-	// The four-digit branch code of the sub-merchant's bank, without the check digit, slashes, or dashes. * Format: Numeric * Fixed length: 4 digits
-	SubMerchantSubSellerSubSellerNrCreditSettlementAgency string `json:"subMerchant.subSeller[subSellerNr].creditSettlementAgency,omitempty"`
-	// The identifier of the sub-merchant's bank. In Brazil, this is the three-digit bank number format specified by the Central Bank of Brazil (BACEN). * Format: Numeric * Fixed length: 3 digits
-	SubMerchantSubSellerSubSellerNrCreditSettlementBank string `json:"subMerchant.subSeller[subSellerNr].creditSettlementBank,omitempty"`
-	// The sub-merchant's bank account number with the check digit number and without punctuations or dashes. * Format: Numeric * Maximum length: 12 digits
-	SubMerchantSubSellerSubSellerNrDebitSettlementAccount string `json:"subMerchant.subSeller[subSellerNr].debitSettlementAccount,omitempty"`
-	// A two-letter indicator of the type of the sub-merchant's bank account. Possible values:   - **CC** - Checking account  - **CD** - Deposit account  - **PG** - Payments account  - **PP** - Savings account 
-	SubMerchantSubSellerSubSellerNrDebitSettlementAccountType string `json:"subMerchant.subSeller[subSellerNr].debitSettlementAccountType,omitempty"`
-	// The four-digit branch code of the sub-merchant's bank, without the check digit, slashes, or dashes. * Format: Numeric * Fixed length: 4 digits
-	SubMerchantSubSellerSubSellerNrDebitSettlementAgency string `json:"subMerchant.subSeller[subSellerNr].debitSettlementAgency,omitempty"`
-	// The identifier of the sub-merchant's bank. In Brazil, this is the three-digit bank number format specified by the Central Bank of Brazil (BACEN). * Format: Numeric * Fixed length: 3 digits
-	SubMerchantSubSellerSubSellerNrDebitSettlementBank string `json:"subMerchant.subSeller[subSellerNr].debitSettlementBank,omitempty"`
 	// Required for transactions performed by registered payment facilitators. A unique identifier that you create for the sub-merchant, used by schemes to identify the sub-merchant.  * Format: Alphanumeric * Maximum length: 15 characters
 	SubMerchantSubSellerSubSellerNrId string `json:"subMerchant.subSeller[subSellerNr].id,omitempty"`
 	// Required for transactions performed by registered payment facilitators. The sub-merchant's 4-digit Merchant Category Code (MCC).  * Format: Numeric * Fixed length: 4 digits

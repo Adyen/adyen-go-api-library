@@ -9,26 +9,16 @@
  */
 
 package checkout
-// LineItem struct for LineItem
-type LineItem struct {
-	// Item amount excluding the tax, in minor units.
-	AmountExcludingTax int64 `json:"amountExcludingTax,omitempty"`
-	// Item amount including the tax, in minor units.
-	AmountIncludingTax int64 `json:"amountIncludingTax,omitempty"`
-	// Description of the line item.
-	Description string `json:"description,omitempty"`
-	// ID of the line item.
-	Id string `json:"id,omitempty"`
-	// Link to the picture of the purchased item.
-	ImageUrl string `json:"imageUrl,omitempty"`
-	// Item category, used by the RatePay payment method.
-	ItemCategory string `json:"itemCategory,omitempty"`
-	// Link to the purchased item.
-	ProductUrl string `json:"productUrl,omitempty"`
-	// Number of items.
-	Quantity int64 `json:"quantity,omitempty"`
-	// Tax amount, in minor units.
-	TaxAmount int64 `json:"taxAmount,omitempty"`
-	// Tax percentage, in minor units.
-	TaxPercentage int64 `json:"taxPercentage,omitempty"`
+// PaymentCancelResource struct for PaymentCancelResource
+type PaymentCancelResource struct {
+	// The merchant account that is used to process the payment.
+	MerchantAccount string `json:"merchantAccount"`
+	// The [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference) of the payment to cancel. 
+	PaymentPspReference string `json:"paymentPspReference"`
+	// Adyen's 16-character reference associated with the cancel request.
+	PspReference string `json:"pspReference"`
+	// Your reference for the cancel request.
+	Reference string `json:"reference,omitempty"`
+	// The status of your request. This will always have the value **received**.
+	Status string `json:"status"`
 }

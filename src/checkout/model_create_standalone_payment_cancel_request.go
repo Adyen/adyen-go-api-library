@@ -9,26 +9,12 @@
  */
 
 package checkout
-// LineItem struct for LineItem
-type LineItem struct {
-	// Item amount excluding the tax, in minor units.
-	AmountExcludingTax int64 `json:"amountExcludingTax,omitempty"`
-	// Item amount including the tax, in minor units.
-	AmountIncludingTax int64 `json:"amountIncludingTax,omitempty"`
-	// Description of the line item.
-	Description string `json:"description,omitempty"`
-	// ID of the line item.
-	Id string `json:"id,omitempty"`
-	// Link to the picture of the purchased item.
-	ImageUrl string `json:"imageUrl,omitempty"`
-	// Item category, used by the RatePay payment method.
-	ItemCategory string `json:"itemCategory,omitempty"`
-	// Link to the purchased item.
-	ProductUrl string `json:"productUrl,omitempty"`
-	// Number of items.
-	Quantity int64 `json:"quantity,omitempty"`
-	// Tax amount, in minor units.
-	TaxAmount int64 `json:"taxAmount,omitempty"`
-	// Tax percentage, in minor units.
-	TaxPercentage int64 `json:"taxPercentage,omitempty"`
+// CreateStandalonePaymentCancelRequest struct for CreateStandalonePaymentCancelRequest
+type CreateStandalonePaymentCancelRequest struct {
+	// The merchant account that is used to process the payment.
+	MerchantAccount string `json:"merchantAccount"`
+	// The [`reference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__reqParam_reference) of the payment that you want to cancel.
+	PaymentReference string `json:"paymentReference"`
+	// Your reference for the cancel request. Maximum length: 80 characters.
+	Reference string `json:"reference,omitempty"`
 }

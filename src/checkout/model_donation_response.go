@@ -9,26 +9,18 @@
  */
 
 package checkout
-// LineItem struct for LineItem
-type LineItem struct {
-	// Item amount excluding the tax, in minor units.
-	AmountExcludingTax int64 `json:"amountExcludingTax,omitempty"`
-	// Item amount including the tax, in minor units.
-	AmountIncludingTax int64 `json:"amountIncludingTax,omitempty"`
-	// Description of the line item.
-	Description string `json:"description,omitempty"`
-	// ID of the line item.
+// DonationResponse struct for DonationResponse
+type DonationResponse struct {
+	Amount *Amount `json:"amount,omitempty"`
+	// The Adyen account name of your charity. We will provide you with this account name once your chosen charity has been [onboarded](https://docs.adyen.com/online-payments/donations#onboarding).
+	DonationAccount string `json:"donationAccount,omitempty"`
+	// Your unique resource identifier.
 	Id string `json:"id,omitempty"`
-	// Link to the picture of the purchased item.
-	ImageUrl string `json:"imageUrl,omitempty"`
-	// Item category, used by the RatePay payment method.
-	ItemCategory string `json:"itemCategory,omitempty"`
-	// Link to the purchased item.
-	ProductUrl string `json:"productUrl,omitempty"`
-	// Number of items.
-	Quantity int64 `json:"quantity,omitempty"`
-	// Tax amount, in minor units.
-	TaxAmount int64 `json:"taxAmount,omitempty"`
-	// Tax percentage, in minor units.
-	TaxPercentage int64 `json:"taxPercentage,omitempty"`
+	// The merchant account identifier, with which you want to process the transaction.
+	MerchantAccount string `json:"merchantAccount,omitempty"`
+	Payment *PaymentResponse `json:"payment,omitempty"`
+	// The reference to uniquely identify a payment. This reference is used in all communication with you about the payment status. We recommend using a unique value per payment; however, it is not a requirement. If you need to provide multiple references for a transaction, separate them with hyphens (\"-\"). Maximum length: 80 characters.
+	Reference string `json:"reference,omitempty"`
+	// The status of the donation transaction.  Possible values: * **completed** * **pending** * **refused**
+	Status string `json:"status,omitempty"`
 }

@@ -11,16 +11,16 @@
 package checkout
 // Address struct for Address
 type Address struct {
-	// The name of the city.
+	// The name of the city. Maximum length: 3000 characters.
 	City string `json:"city"`
 	// The two-character country code as defined in ISO-3166-1 alpha-2. For example, **US**. > If you don't know the country or are not collecting the country from the shopper, provide `country` as `ZZ`.
 	Country string `json:"country"`
-	// The number or name of the house.
+	// The number or name of the house. Maximum length: 3000 characters.
 	HouseNumberOrName string `json:"houseNumberOrName"`
 	// A maximum of five digits for an address in the US, or a maximum of ten characters for an address in all other countries.
 	PostalCode string `json:"postalCode"`
 	// State or province codes as defined in ISO 3166-2. For example, **CA** in the US or **ON** in Canada. > Required for the US and Canada.
 	StateOrProvince string `json:"stateOrProvince,omitempty"`
-	// The name of the street. > The house number should not be included in this field; it should be separately provided via `houseNumberOrName`.
+	// The name of the street. Maximum length: 3000 characters. > The house number should not be included in this field; it should be separately provided via `houseNumberOrName`.
 	Street string `json:"street"`
 }

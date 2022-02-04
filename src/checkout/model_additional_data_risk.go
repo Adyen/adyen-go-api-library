@@ -51,4 +51,6 @@ type AdditionalDataRisk struct {
 	RiskdataPromotionsPromotionItemNrPromotionName string `json:"riskdata.promotions.promotion[itemNr].promotionName,omitempty"`
 	// Reference number of the risk profile that you want to apply to the payment. If not provided or left blank, the merchant-level account's default risk profile will be applied to the payment. For more information, see [dynamically assign a risk profile to a payment](https://docs.adyen.com/risk-management/create-and-use-risk-profiles#dynamically-assign-a-risk-profile-to-a-payment).
 	RiskdataRiskProfileReference string `json:"riskdata.riskProfileReference,omitempty"`
+	// If this parameter is provided with the value **true**, risk checks for the payment request are skipped and the transaction will not get a risk score.
+	RiskdataSkipRisk string `json:"riskdata.skipRisk,omitempty"`
 }

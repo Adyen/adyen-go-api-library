@@ -17,6 +17,7 @@ type ThreeDSecureData struct {
 	Cavv string `json:"cavv,omitempty"`
 	// The CAVV algorithm used. Include this only for 3D Secure 1.
 	CavvAlgorithm string `json:"cavvAlgorithm,omitempty"`
+	// Indicator informing the Access Control Server (ACS) and the Directory Server (DS) that the authentication has been cancelled. For possible values, refer to [3D Secure API reference](https://docs.adyen.com/online-payments/3d-secure/api-reference#mpidata).
 	ChallengeCancel string `json:"challengeCancel,omitempty"`
 	// In 3D Secure 1, this is the enrollment response from the 3D directory server.  In 3D Secure 2, this is the `transStatus` from the `ARes`.
 	DirectoryResponse string `json:"directoryResponse,omitempty"`
@@ -24,9 +25,11 @@ type ThreeDSecureData struct {
 	DsTransID string `json:"dsTransID,omitempty"`
 	// The electronic commerce indicator.
 	Eci string `json:"eci,omitempty"`
+	// Risk score calculated by Directory Server (DS). Required for Cartes Bancaires integrations.
 	RiskScore string `json:"riskScore,omitempty"`
 	// The version of the 3D Secure protocol.
 	ThreeDSVersion string `json:"threeDSVersion,omitempty"`
+	// Provides information on why the `transStatus` field has the specified value. For possible values, refer to [our docs](https://docs.adyen.com/online-payments/3d-secure/api-reference#possible-transstatusreason-values).
 	TransStatusReason string `json:"transStatusReason,omitempty"`
 	// Supported for 3D Secure 1. The transaction identifier (Base64-encoded, 20 bytes in a decoded form).
 	Xid string `json:"xid,omitempty"`

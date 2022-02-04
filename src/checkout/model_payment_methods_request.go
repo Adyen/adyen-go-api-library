@@ -27,10 +27,10 @@ type PaymentMethodsRequest struct {
 	Order *CheckoutOrder `json:"order,omitempty"`
 	// The combination of a language code and a country code to specify the language to be used in the payment.
 	ShopperLocale string `json:"shopperLocale,omitempty"`
-	// Your reference to uniquely identify this shopper (for example, user ID or account ID). Minimum length: 3 characters. > This field is required for recurring payments.
+	// Required for recurring payments.  Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters. > Your reference must not include personally identifiable information (PII), for example name or email address.
 	ShopperReference string `json:"shopperReference,omitempty"`
 	// Boolean value indicating whether the card payment method should be split into separate debit and credit options.
 	SplitCardFundingSources bool `json:"splitCardFundingSources,omitempty"`
-	// The physical store, for which this payment is processed.
+	// The ecommerce or point-of-sale store that is processing the payment. Used in [partner arrangement integrations](https://docs.adyen.com/platforms/platforms-for-partners#route-payments) for Adyen for Platforms.
 	Store string `json:"store,omitempty"`
 }

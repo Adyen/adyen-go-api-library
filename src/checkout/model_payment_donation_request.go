@@ -12,10 +12,9 @@ package checkout
 import (
 	"time"
 )
-// CheckoutBalanceCheckRequest struct for CheckoutBalanceCheckRequest
-type CheckoutBalanceCheckRequest struct {
+// PaymentDonationRequest struct for PaymentDonationRequest
+type PaymentDonationRequest struct {
 	AccountInfo *AccountInfo `json:"accountInfo,omitempty"`
-	AdditionalAmount *Amount `json:"additionalAmount,omitempty"`
 	// This field contains additional data, which may be required for a particular payment request.  The `additionalData` object consists of entries, each of which includes the key and value.
 	AdditionalData map[string]string `json:"additionalData,omitempty"`
 	Amount Amount `json:"amount"`
@@ -24,6 +23,13 @@ type CheckoutBalanceCheckRequest struct {
 	BrowserInfo *BrowserInfo `json:"browserInfo,omitempty"`
 	// The delay between the authorisation and scheduled auto-capture, specified in hours.
 	CaptureDelayHours int32 `json:"captureDelayHours,omitempty"`
+	// The platform where a payment transaction takes place. This field is optional for filtering out payment methods that are only available on specific platforms. If this value is not set, then we will try to infer it from the `sdkVersion` or `token`.  Possible values: * iOS * Android * Web
+	Channel string `json:"channel,omitempty"`
+	Company *Company `json:"company,omitempty"`
+	// Conversion ID that corresponds to the Id generated for tracking user payment journey.
+	ConversionId string `json:"conversionId,omitempty"`
+	// The shopper country.  Format: [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) Example: NL or DE
+	CountryCode string `json:"countryCode,omitempty"`
 	// The shopper's date of birth.  Format [ISO-8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DD
 	DateOfBirth *time.Time `json:"dateOfBirth,omitempty"`
 	DccQuote *ForexQuote `json:"dccQuote,omitempty"`
@@ -32,9 +38,26 @@ type CheckoutBalanceCheckRequest struct {
 	DeliveryDate *time.Time `json:"deliveryDate,omitempty"`
 	// A string containing the shopper's device fingerprint. For more information, refer to [Device fingerprinting](https://docs.adyen.com/risk-management/device-fingerprinting).
 	DeviceFingerprint string `json:"deviceFingerprint,omitempty"`
+	// Donation account to which the transaction is credited.
+	DonationAccount string `json:"donationAccount"`
+	// PSP reference of the transaction from which the donation token is generated.
+	DonationOriginalPspReference string `json:"donationOriginalPspReference,omitempty"`
+	// Donation token received in the `/payments` call.
+	DonationToken string `json:"donationToken,omitempty"`
+	// When true and `shopperReference` is provided, the shopper will be asked if the payment details should be stored for future one-click payments.
+	EnableOneClick bool `json:"enableOneClick,omitempty"`
+	// When true and `shopperReference` is provided, the payment details will be tokenized for payouts.
+	EnablePayOut bool `json:"enablePayOut,omitempty"`
+	// When true and `shopperReference` is provided, the payment details will be tokenized for recurring payments.
+	EnableRecurring bool `json:"enableRecurring,omitempty"`
+	// The type of the entity the payment is processed for.
+	EntityType string `json:"entityType,omitempty"`
 	// An integer value that is added to the normal fraud score. The value can be either positive or negative.
 	FraudOffset int32 `json:"fraudOffset,omitempty"`
 	Installments *Installments `json:"installments,omitempty"`
+	// Price and product information about the purchased items, to be included on the invoice sent to the shopper. > This field is required for 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, Zip and Atome.
+	LineItems *[]LineItem `json:"lineItems,omitempty"`
+	Mandate *Mandate `json:"mandate,omitempty"`
 	// The [merchant category code](https://en.wikipedia.org/wiki/Merchant_category_code) (MCC) is a four-digit number, which relates to a particular market segment. This code reflects the predominant activity that is conducted by the merchant.
 	Mcc string `json:"mcc,omitempty"`
 	// The merchant account identifier, with which you want to process the transaction.
@@ -44,21 +67,31 @@ type CheckoutBalanceCheckRequest struct {
 	MerchantRiskIndicator *MerchantRiskIndicator `json:"merchantRiskIndicator,omitempty"`
 	// Metadata consists of entries, each of which includes a key and a value. Limits: * Maximum 20 key-value pairs per request. When exceeding, the \"177\" error occurs: \"Metadata size exceeds limit\". * Maximum 20 characters per key. * Maximum 80 characters per value. 
 	Metadata map[string]string `json:"metadata,omitempty"`
+	MpiData *ThreeDSecureData `json:"mpiData,omitempty"`
+	Order *CheckoutOrder `json:"order,omitempty"`
 	// When you are doing multiple partial (gift card) payments, this is the `pspReference` of the first payment. We use this to link the multiple payments to each other. As your own reference for linking multiple payments, use the `merchantOrderReference`instead.
 	OrderReference string `json:"orderReference,omitempty"`
-	// The collection that contains the type of the payment method and its specific information.
-	PaymentMethod map[string]string `json:"paymentMethod"`
-	Recurring *Recurring `json:"recurring,omitempty"`
+	// Required for the 3D Secure 2 `channel` **Web** integration.  Set this parameter to the origin URL of the page that you are loading the 3D Secure Component from.
+	Origin string `json:"origin,omitempty"`
+	// The type and required details of a payment method to use.
+	// PaymentMethod OneOfAchDetailsAfterpayDetailsAmazonPayDetailsAndroidPayDetailsApplePayDetailsBacsDirectDebitDetailsBillDeskDetailsBlikDetailsCardDetailsCellulantDetailsDokuDetailsDotpayDetailsDragonpayDetailsEcontextVoucherDetailsGenericIssuerPaymentMethodDetailsGiropayDetailsGooglePayDetailsIdealDetailsKlarnaDetailsLianLianPayDetailsMasterpassDetailsMbwayDetailsMobilePayDetailsMolPayDetailsOpenInvoiceDetailsPayPalDetailsPayUUpiDetailsPayWithGoogleDetailsPaymentDetailsRatepayDetailsSamsungPayDetailsSepaDirectDebitDetailsStoredPaymentMethodDetailsUpiDetailsVippsDetailsVisaCheckoutDetailsWeChatPayDetailsWeChatPayMiniProgramDetailsZipDetails `json:"paymentMethod"`
+	// Date after which no further authorisations shall be performed. Only for 3D Secure 2.
+	RecurringExpiry string `json:"recurringExpiry,omitempty"`
+	// Minimum number of days between authorisations. Only for 3D Secure 2.
+	RecurringFrequency string `json:"recurringFrequency,omitempty"`
 	// Defines a recurring payment type. Allowed values: * `Subscription` – A transaction for a fixed or variable amount, which follows a fixed schedule. * `CardOnFile` – With a card-on-file (CoF) transaction, card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction. * `UnscheduledCardOnFile` – An unscheduled card-on-file (UCoF) transaction is a transaction that occurs on a non-fixed schedule and/or have variable amounts. For example, automatic top-ups when a cardholder's balance drops below a certain amount. 
 	RecurringProcessingModel string `json:"recurringProcessingModel,omitempty"`
+	// Specifies the redirect method (GET or POST) when redirecting back from the issuer.
+	RedirectFromIssuerMethod string `json:"redirectFromIssuerMethod,omitempty"`
+	// Specifies the redirect method (GET or POST) when redirecting to the issuer.
+	RedirectToIssuerMethod string `json:"redirectToIssuerMethod,omitempty"`
 	// The reference to uniquely identify a payment. This reference is used in all communication with you about the payment status. We recommend using a unique value per payment; however, it is not a requirement. If you need to provide multiple references for a transaction, separate them with hyphens (\"-\"). Maximum length: 80 characters.
 	Reference string `json:"reference"`
-	// Some payment methods require defining a value for this field to specify how to process the transaction.  For the Bancontact payment method, it can be set to: * `maestro` (default), to be processed like a Maestro card, or * `bcmc`, to be processed like a Bancontact card.
-	SelectedBrand string `json:"selectedBrand,omitempty"`
-	// The `recurringDetailReference` you want to use for this payment. The value `LATEST` can be used to select the most recently stored recurring detail.
-	SelectedRecurringDetailReference string `json:"selectedRecurringDetailReference,omitempty"`
-	// A session ID used to identify a payment session.
-	SessionId string `json:"sessionId,omitempty"`
+	// The URL to return to in case of a redirection. The format depends on the channel. This URL can have a maximum of 1024 characters. * For web, include the protocol `http://` or `https://`. You can also include your own additional query parameters, for example, shopper ID or order reference number. Example: `https://your-company.com/checkout?shopperOrder=12xy` * For iOS, use the custom URL for your app. To know more about setting custom URL schemes, refer to the [Apple Developer documentation](https://developer.apple.com/documentation/uikit/inter-process_communication/allowing_apps_and_websites_to_link_to_your_content/defining_a_custom_url_scheme_for_your_app). Example: `my-app://` * For Android, use a custom URL handled by an Activity on your app. You can configure it with an [intent filter](https://developer.android.com/guide/components/intents-filters). Example: `my-app://your.package.name`
+	ReturnUrl string `json:"returnUrl"`
+	RiskData *RiskData `json:"riskData,omitempty"`
+	// The date and time until when the session remains valid, in [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format.  For example: 2020-07-18T15:42:40.428+01:00
+	SessionValidity string `json:"sessionValidity,omitempty"`
 	// The shopper's email address. We recommend that you provide this data, as it is used in velocity fraud checks. > For 3D Secure 2 transactions, schemes require `shopperEmail` for all browser-based and mobile implementations.
 	ShopperEmail string `json:"shopperEmail,omitempty"`
 	// The shopper's IP address. In general, we recommend that you provide this data, as it is used in a number of risk checks (for instance, number of payment attempts or location-based checks). > For 3D Secure 2 transactions, schemes require `shopperIP` for all browser-based implementations. This field is also mandatory for some merchants depending on your business model. For more information, [contact Support](https://support.adyen.com/hc/en-us/requests/new).
@@ -78,13 +111,13 @@ type CheckoutBalanceCheckRequest struct {
 	Splits *[]Split `json:"splits,omitempty"`
 	// The ecommerce or point-of-sale store that is processing the payment. Used in [partner arrangement integrations](https://docs.adyen.com/platforms/platforms-for-partners#route-payments) for Adyen for Platforms.
 	Store string `json:"store,omitempty"`
+	// When true and `shopperReference` is provided, the payment details will be stored.
+	StorePaymentMethod bool `json:"storePaymentMethod,omitempty"`
 	// The shopper's telephone number.
 	TelephoneNumber string `json:"telephoneNumber,omitempty"`
 	ThreeDS2RequestData *ThreeDS2RequestData `json:"threeDS2RequestData,omitempty"`
 	// If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only), and not the payment authorisation.
 	ThreeDSAuthenticationOnly bool `json:"threeDSAuthenticationOnly,omitempty"`
-	// The reference value to aggregate sales totals in reporting. When not specified, the store field is used (if available).
-	TotalsGroup string `json:"totalsGroup,omitempty"`
 	// Set to true if the payment should be routed to a trusted MID.
 	TrustedShopper bool `json:"trustedShopper,omitempty"`
 }

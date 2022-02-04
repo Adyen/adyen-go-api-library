@@ -12,7 +12,7 @@ package checkout
 // DetailsRequest struct for DetailsRequest
 type DetailsRequest struct {
 	Details PaymentCompletionDetails `json:"details"`
-	// The `paymentData` value from the `/payments` response. In v67 and later, you will always get this value from the Component.
+	// The `paymentData` value from the `/payments` response. Required if the `/payments` response returns this value. 
 	PaymentData string `json:"paymentData,omitempty"`
 	// Change the `authenticationOnly` indicator originally set in the `/payments` request. Only needs to be set if you want to modify the value set previously.
 	ThreeDSAuthenticationOnly bool `json:"threeDSAuthenticationOnly,omitempty"`

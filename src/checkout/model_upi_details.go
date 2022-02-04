@@ -11,13 +11,15 @@
 package checkout
 // UpiDetails struct for UpiDetails
 type UpiDetails struct {
+	// The sequence number for the debit. For example, send **2** if this is the second debit for the subscription. The sequence number is included in the notification sent to the shopper.
+	BillingSequenceNumber string `json:"billingSequenceNumber"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
 	RecurringDetailReference string `json:"recurringDetailReference,omitempty"`
 	// The `shopperNotificationReference` returned in the response when you requested to notify the shopper. Used for recurring payment only.
 	ShopperNotificationReference string `json:"shopperNotificationReference,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
 	StoredPaymentMethodId string `json:"storedPaymentMethodId,omitempty"`
-	// **upi**
+	// **upi_collect**
 	Type string `json:"type"`
 	// The virtual payment address for UPI.
 	VirtualPaymentAddress string `json:"virtualPaymentAddress,omitempty"`

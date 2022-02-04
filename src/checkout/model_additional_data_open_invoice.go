@@ -43,6 +43,4 @@ type AdditionalDataOpenInvoice struct {
 	OpeninvoicedataLineItemNrTrackingNumber string `json:"openinvoicedataLine[itemNr].trackingNumber,omitempty"`
 	// URI where the customer can track their shipment.
 	OpeninvoicedataLineItemNrTrackingUri string `json:"openinvoicedataLine[itemNr].trackingUri,omitempty"`
-	// Required for AfterPay. The country-specific VAT category a product falls under.  Allowed values: * High * Low * None.
-	OpeninvoicedataLineItemNrVatCategory string `json:"openinvoicedataLine[itemNr].vatCategory,omitempty"`
 }

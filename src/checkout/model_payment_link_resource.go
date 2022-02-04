@@ -32,7 +32,7 @@ type PaymentLinkResource struct {
 	ExpiresAt string `json:"expiresAt,omitempty"`
 	// A unique identifier of the payment link.
 	Id string `json:"id"`
-	// Price and product information about the purchased items, to be included on the invoice sent to the shopper. This parameter is required for open invoice (_buy now, pay later_) payment methods such AfterPay, Klarna, RatePay, and Zip.
+	// Price and product information about the purchased items, to be included on the invoice sent to the shopper. This parameter is required for open invoice (_buy now, pay later_) payment methods such Afterpay, Clearpay, Klarna, RatePay, and Zip.
 	LineItems *[]LineItem `json:"lineItems,omitempty"`
 	// The merchant account identifier for which the payment link is created.
 	MerchantAccount string `json:"merchantAccount"`
@@ -56,12 +56,14 @@ type PaymentLinkResource struct {
 	ShopperReference string `json:"shopperReference,omitempty"`
 	// An array of objects specifying how the payment should be split between accounts when using Adyen for Platforms. For details, refer to [Providing split information](https://docs.adyen.com/platforms/processing-payments#providing-split-information).
 	Splits *[]Split `json:"splits,omitempty"`
-	// Status of the payment link. Possible values: * **active**  * **expired** * **completed** (v66 and above)  * **paid** (v65 and below)
+	// Status of the payment link. Possible values: * **active** * **expired** * **paymentPending** (v68 and later) * **completed** (v66 and later) * **paid** (v65 and earlier)
 	Status string `json:"status"`
 	// The physical store, for which this payment is processed.
 	Store string `json:"store,omitempty"`
 	// When this is set to **true** and the `shopperReference` is provided, the payment details will be stored.
 	StorePaymentMethod bool `json:"storePaymentMethod,omitempty"`
+	// A [theme](https://docs.adyen.com/unified-commerce/pay-by-link/api#themes) to customize the appearance of the payment page.If not specified, the payment page is rendered according to the theme set as default in your Customer Area.
+	ThemeId string `json:"themeId,omitempty"`
 	// The URL at which the shopper can complete the payment.
 	Url string `json:"url"`
 }
