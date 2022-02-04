@@ -96,6 +96,40 @@ paths:
       summary: Retrieves stored payment details for a shopper.
       x-groupName: General
       x-sortIndex: 1
+  /notifyShopper:
+    post:
+      description: |-
+        Sends a request to the issuer so they can inform the shopper about the
+        upcoming recurring payment. This endpoint is used only for local
+        acquiring in India. For more information, refer to [Recurring card
+        payments in
+        India](https://docs.adyen.com/payment-methods/cards/cards-recurring-india).
+      operationId: post-notifyShopper
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotifyShopperRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotifyShopperResult'
+          description: OK - the request has succeeded.
+        '400':
+          description: Bad Request - a problem reading or understanding the request.
+        '401':
+          description: Unauthorized - authentication required.
+        '403':
+          description: Forbidden - insufficient permissions to process the request.
+        '422':
+          description: Unprocessable Entity - a request validation error.
+        '500':
+          description: Internal Server Error - the server could not process the request.
+      summary: Ask the issuer to inform shopper of upcoming payment
+      x-groupName: General
+      x-sortIndex: 4
   /scheduleAccountUpdater:
     post:
       description: |-
@@ -170,6 +204,24 @@ components:
       - houseNumberOrName
       - postalCode
       - street
+    Amount:
+      properties:
+        currency:
+          description: |-
+            The three-character [ISO currency
+            code](https://docs.adyen.com/development-resources/currency-codes).
+          maxLength: 3
+          minLength: 3
+          type: string
+        value:
+          description: |-
+            The amount of the transaction, in [minor
+            units](https://docs.adyen.com/development-resources/currency-codes).
+          format: int64
+          type: integer
+      required:
+        - value
+        - currency
     BankAccount:
       example:
         ownerName: ownerName
@@ -659,6 +711,83 @@ components:
         shopperReference:
           description: The reference you use to uniquely identify the shopper (e.g.
             user ID or account ID).
+          type: string
+    NotifyShopperRequest:
+      properties:
+        amount:
+          description: The amount of the upcoming payment.
+          $ref: '#/components/schemas/Amount'
+        billingDate:
+          description: |-
+            Date on which the subscription amount will be debited from the
+            shopper. In YYYY-MM-DD format
+          format: date-time
+          type: string
+        billingSequenceNumber:
+          description: |-
+            Sequence of the debit. Depends on Frequency and Billing Attempts
+            Rule.
+          type: string
+        displayedReference:
+          description: |-
+            Reference of Pre-debit notification that is displayed to the
+            shopper. Optional field. Maps to reference if missing
+          type: string
+        merchantAccount:
+          description: |-
+            The merchant account identifier with which you want to process the
+            transaction.
+          type: string
+        recurringDetailReference:
+          description: |-
+            This is the `recurringDetailReference` returned in the response when
+            you created the token.
+          type: string
+        reference:
+          description: |-
+            Pre-debit notification reference sent by the merchant. This is a
+            mandatory field
+          type: string
+        shopperReference:
+          description: |-
+            The ID that uniquely identifies the shopper.
+            This `shopperReference` must be the same as the `shopperReference`
+            used in the initial payment.
+          type: string
+        storedPaymentMethodId:
+          description: |-
+            This is the `recurringDetailReference` returned in the response when
+            you created the token.
+          type: string
+      required:
+        - merchantAccount
+        - shopperReference
+        - amount
+        - reference
+    NotifyShopperResult:
+      properties:
+        displayedReference:
+          description: Reference of Pre-debit notification that is displayed to the shopper
+          type: string
+        message:
+          description: A simple description of the `resultCode`.
+          type: string
+        pspReference:
+          description: The unique reference that is associated with the request.
+          type: string
+        reference:
+          description: Reference of Pre-debit notification sent in my the merchant
+          type: string
+        resultCode:
+          description: The code indicating the status of notification.
+          type: string
+        shopperNotificationReference:
+          description: The unique reference for the request sent downstream.
+          type: string
+        storedPaymentMethodId:
+          description: |-
+            This is the recurringDetailReference returned in the response when
+            token was created
           type: string
     ScheduleAccountUpdaterRequest:
       example:
