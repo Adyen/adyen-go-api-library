@@ -10,14 +10,12 @@
 
 package recurring
 
-import "time"
-
 // NotifyShopperRequest struct for NotifyShopperRequest
 type NotifyShopperRequest struct {
 	// The amount of the upcoming payment.
 	Amount *Amount `json:"amount"`
 	// Date on which the subscription amount will be debited from the shopper. In YYYY-MM-DD format
-	BillingDate *time.Time `json:"billingDate,omitempty"`
+	BillingDate string `json:"billingDate,omitempty"`
 	// Sequence of the debit. Depends on Frequency and Billing Attempts Rule.
 	BillingSequenceNumber string `json:"billingSequenceNumber,omitempty"`
 	// Reference of Pre-debit notification that is displayed to the shopper. Optional field. Maps to reference if missing

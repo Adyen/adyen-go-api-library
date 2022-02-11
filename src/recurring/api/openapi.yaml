@@ -721,7 +721,6 @@ components:
           description: |-
             Date on which the subscription amount will be debited from the
             shopper. In YYYY-MM-DD format
-          format: date-time
           type: string
         billingSequenceNumber:
           description: |-

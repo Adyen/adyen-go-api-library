@@ -54,6 +54,8 @@ type PaymentRequest struct {
 	Installments *Installments `json:"installments,omitempty"`
 	// Price and product information about the purchased items, to be included on the invoice sent to the shopper. > This field is required for 3x 4x Oney, Affirm, AfterPay, Klarna, RatePay, and Zip.
 	LineItems *[]LineItem `json:"lineItems,omitempty"`
+	// The mandate details to initiate recurring transaction.
+	Mandate *Mandate `json:"mandate,omitempty"`
 	// The [merchant category code](https://en.wikipedia.org/wiki/Merchant_category_code) (MCC) is a four-digit number, which relates to a particular market segment. This code reflects the predominant activity that is conducted by the merchant.
 	Mcc string `json:"mcc,omitempty"`
 	// The merchant account identifier, with which you want to process the transaction.
