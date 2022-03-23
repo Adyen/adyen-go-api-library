@@ -1,6 +1,6 @@
 ## Steps for Release of this library
 
-Release is done on GitHub on the `master` branch all development is done on the `develop` branch only
+Release is done on GitHub on the `main` branch all development is done on the `develop` branch only
 
 **Step 1**: Update the exact library version to be released in `LibVersion` constant on `src/common/configuration.go`
 
@@ -12,6 +12,6 @@ Release is done on GitHub on the `master` branch all development is done on the 
 
 **Step 5**: Find and replace `github.com/adyen/adyen-go-api-library/v<current major version>` with `github.com/adyen/adyen-go-api-library/v<new major version>` through out the project including test files and readme. For example `github.com/adyen/adyen-go-api-library/v5` will become `github.com/adyen/adyen-go-api-library/v6`
 
-**Step 6**: create a PR form `develop` to `master` and wait for all tests to pass and for approvals
+**Step 6**: create a PR form `develop` to `main` and wait for all tests to pass and for approvals
 
-**Step 7**: once ready merge the PR to master and create a GitHub release with changelog and a new tag corresponding to the version
+**Step 7**: once ready merge the PR to main and create a GitHub release with changelog and a new tag corresponding to the version
