@@ -1,6 +1,6 @@
 ## Steps for Release of this library
 
-Releases are done on GitHub on the `main` branch. All development is done on the `develop` branch only
+Releases are done on GitHub on the `main` branch. All development is done on the `develop` branch only.
 
 **Step 1**: Update the exact library version to be released in `LibVersion` constant on `src/common/configuration.go`
 
