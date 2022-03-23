@@ -65,7 +65,7 @@ res, httpRes, err := client.Checkout.PaymentMethods(&checkout.PaymentMethodsRequ
 import (
     "github.com/adyen/adyen-go-api-library/v5/src/checkout"
     "github.com/adyen/adyen-go-api-library/v5/src/common"
-	"github.com/adyen/adyen-go-api-library/v5/src/adyen"
+    "github.com/adyen/adyen-go-api-library/v5/src/adyen"
 )
 
 client := adyen.NewClient(&common.Config{
@@ -85,7 +85,7 @@ res, httpRes, err := client.Checkout.PaymentMethods(&checkout.PaymentMethodsRequ
 import (
     "github.com/adyen/adyen-go-api-library/v5/src/recurring"
     "github.com/adyen/adyen-go-api-library/v5/src/common"
-	"github.com/adyen/adyen-go-api-library/v5/src/adyen"
+    "github.com/adyen/adyen-go-api-library/v5/src/adyen"
 )
 
 client := adyen.NewClient(&common.Config{
