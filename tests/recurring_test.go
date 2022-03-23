@@ -105,10 +105,10 @@ func Test_Recurring(t *testing.T) {
 			})
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
-			assert.Equal(t, true, strings.Contains(err.Error(), "validation 000 No registered account for AccountUpdater"))
+			assert.Equal(t, true, strings.Contains(err.Error(), "No registered account for AccountUpdater"))
 			assert.Equal(t, 422, httpRes.StatusCode)
 			require.NotNil(t, res)
-			assert.Equal(t, "No registered account for AccountUpdater", err.(common.APIError).Message)
+			assert.Equal(t, "No registered account for AccountUpdater.", err.(common.APIError).Message)
 		})
 	})
 }
