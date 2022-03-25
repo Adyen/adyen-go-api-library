@@ -41,7 +41,7 @@ func Test_Recurring(t *testing.T) {
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
 			assert.Equal(t, true, strings.Contains(err.Error(), "Invalid Merchant Account"))
-			assert.Equal(t, 403, httpRes.StatusCode)
+			assert.Equal(t, 422, httpRes.StatusCode)
 			require.NotNil(t, res)
 			assert.Equal(t, "Invalid Merchant Account", err.(common.APIError).Message)
 		})
@@ -78,6 +78,52 @@ func Test_Recurring(t *testing.T) {
 		})
 	})
 
+	t.Run("NotifyShopper", func(t *testing.T) {
+		t.Run("Create an API request that should fail", func(t *testing.T) {
+			res, httpRes, err := client.Recurring.NotifyShopper(&recurring.NotifyShopperRequest{
+				Amount: &recurring.Amount{
+					Currency: "INR",
+					Value:    1234,
+				},
+				BillingDate:              "2030-12-31",
+				BillingSequenceNumber:    "adhoc",
+				MerchantAccount:          MerchantAccount,
+				Reference:                "4343553GFGFYFY4654654675765",
+				ShopperReference:         "4343553GFGFYFY4654654675765",
+				RecurringDetailReference: "8314442372419167",
+				StoredPaymentMethodID:    "8314442372419167",
+			})
+			require.NotNil(t, err)
+			require.NotNil(t, httpRes)
+			assert.Equal(t, true, strings.Contains(err.Error(), "PaymentDetail not found"))
+			assert.Equal(t, 500, httpRes.StatusCode)
+			require.NotNil(t, res)
+			assert.Equal(t, "PaymentDetail not found", err.(common.APIError).Message)
+		})
+
+		t.Run("Create an API request that should fail because of invalid date", func(t *testing.T) {
+			res, httpRes, err := client.Recurring.NotifyShopper(&recurring.NotifyShopperRequest{
+				Amount: &recurring.Amount{
+					Currency: "INR",
+					Value:    1234,
+				},
+				BillingDate:              "2",
+				BillingSequenceNumber:    "adhoc",
+				MerchantAccount:          MerchantAccount,
+				Reference:                "4343553GFGFYFY4654654675765",
+				ShopperReference:         "4343553GFGFYFY4654654675765",
+				RecurringDetailReference: "8314442372419167",
+				StoredPaymentMethodID:    "8314442372419167",
+			})
+			require.NotNil(t, err)
+			require.NotNil(t, httpRes)
+			assert.Equal(t, true, strings.Contains(err.Error(), "Inner validation error(s) occurred: billingDate should be in yyyy-MM-dd format"))
+			assert.Equal(t, 422, httpRes.StatusCode)
+			require.NotNil(t, res)
+			assert.Equal(t, "Inner validation error(s) occurred: billingDate should be in yyyy-MM-dd format", err.(common.APIError).Message)
+		})
+	})
+
 	t.Run("ScheduleAccountUpdater", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 			res, httpRes, err := client.Recurring.ScheduleAccountUpdater(&recurring.ScheduleAccountUpdaterRequest{
@@ -105,10 +151,10 @@ func Test_Recurring(t *testing.T) {
 			})
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
-			assert.Equal(t, true, strings.Contains(err.Error(), "validation 000 No registered account for AccountUpdater"))
+			assert.Equal(t, true, strings.Contains(err.Error(), "No registered account for AccountUpdater"))
 			assert.Equal(t, 422, httpRes.StatusCode)
 			require.NotNil(t, res)
-			assert.Equal(t, "validation 000 No registered account for AccountUpdater", err.(common.APIError).Message)
+			assert.Equal(t, "No registered account for AccountUpdater.", err.(common.APIError).Message)
 		})
 	})
 }

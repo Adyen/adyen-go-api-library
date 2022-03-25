@@ -47,6 +47,18 @@ func (a Recurring) ListRecurringDetails(req *RecurringDetailsRequest, ctxs ..._c
 }
 
 /*
+PostNotifyShopper ask the issuer to inform shopper of upcoming payment
+ * @param request NotifyShopperRequest - reference of NotifyShopperRequest).
+ * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return NotifyShopperResult
+*/
+func (a Recurring) NotifyShopper(req *NotifyShopperRequest, ctxs ..._context.Context) (NotifyShopperResult, *_nethttp.Response, error) {
+	res := &NotifyShopperResult{}
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/notifyShopper", ctxs...)
+	return *res, httpRes, err
+}
+
+/*
 PostScheduleAccountUpdater Schedules running of the Account Updater.
 When making the API call, you can submit either the credit card information, or the recurring detail reference and the shopper reference: * If the card information is provided, all the sub-fields for &#x60;card&#x60; are mandatory. * If the recurring detail reference is provided, the fields for &#x60;shopperReference&#x60; and &#x60;selectedRecurringDetailReference&#x60; are mandatory.
  * @param request ScheduleAccountUpdaterRequest - reference of ScheduleAccountUpdaterRequest).

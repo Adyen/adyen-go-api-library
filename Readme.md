@@ -1,38 +1,42 @@
 ## Adyen Golang API Client Library
 
-The Adyen API Library for golang enables you to work with Adyen APIs.
+This is the officially supported golang library for using Adyen's APIs.
 
 ## Integration
 
 The Library supports all APIs under the following services:
 
--   [x] checkout
--   [x] checkout utility
--   [x] payments
-    -   [x] modifications
--   [x] payouts
--   [x] recurring
--   [x] notifications
--   [x] BIN lookup
+* [Checkout API](https://docs.adyen.com/api-explorer/#/CheckoutService/v67/overview): Our latest integration for accepting online payments. Current supported version: **v67**
+* [Payments API](https://docs.adyen.com/api-explorer/#/Payment/v64/overview): Our classic integration for online payments. Current supported version: **v64**
+* [Recurring API](https://docs.adyen.com/api-explorer/#/Recurring/v49/overview): Endpoints for managing saved payment details. Current supported version: **v49**
+* [Payouts API](https://docs.adyen.com/api-explorer/#/Payout/v64/overview): Endpoints for sending funds to your customers. Current supported version: **v64**
+* [Platforms APIs](https://docs.adyen.com/platforms/api): Set of APIs when using Adyen for Platforms.
+    * [Account API](https://docs.adyen.com/api-explorer/#/Account/v6/overview) Current supported version: **v6**
+    * [Fund API](https://docs.adyen.com/api-explorer/#/Fund/v6/overview) Current supported version: **v6**
+    * [Notification Configuration API](https://docs.adyen.com/api-explorer/#/NotificationConfigurationService/v6/overview) Current supported version: **v6**
+* [Cloud-based Terminal API](https://docs.adyen.com/point-of-sale/terminal-api-reference): Our point-of-sale integration.
 
-## Requirements
+For more information, refer to our [documentation](https://docs.adyen.com/) or the [API Explorer](https://docs.adyen.com/api-explorer/).
+
+## Prerequisites
 
 -   Go 1.13 or higher
+-   [Adyen test account](https://docs.adyen.com/get-started-with-adyen)
+-   [API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key). For testing, your API credential needs to have the [API PCI Payments role](https://docs.adyen.com/development-resources/api-credentials#roles).
 
-## Installation
-
-You can use go modules to add our library to your project
-
-### Go module
-
-```bash
-go get github.com/adyen/adyen-go-api-library/v5
-```
 
 ## Documentation
 
 -   https://docs.adyen.com/developers/development-resources/libraries
 -   https://docs.adyen.com/developers/checkout
+
+## Installation
+
+You can use go modules to add our library to your project
+
+```bash
+go get github.com/adyen/adyen-go-api-library/v5
+```
 
 ## Usage examples
 
@@ -61,7 +65,7 @@ res, httpRes, err := client.Checkout.PaymentMethods(&checkout.PaymentMethodsRequ
 import (
     "github.com/adyen/adyen-go-api-library/v5/src/checkout"
     "github.com/adyen/adyen-go-api-library/v5/src/common"
-	"github.com/adyen/adyen-go-api-library/v5/src/adyen"
+    "github.com/adyen/adyen-go-api-library/v5/src/adyen"
 )
 
 client := adyen.NewClient(&common.Config{
@@ -81,7 +85,7 @@ res, httpRes, err := client.Checkout.PaymentMethods(&checkout.PaymentMethodsRequ
 import (
     "github.com/adyen/adyen-go-api-library/v5/src/recurring"
     "github.com/adyen/adyen-go-api-library/v5/src/common"
-	"github.com/adyen/adyen-go-api-library/v5/src/adyen"
+    "github.com/adyen/adyen-go-api-library/v5/src/adyen"
 )
 
 client := adyen.NewClient(&common.Config{
@@ -193,7 +197,8 @@ client = adyen.NewClient(&common.Config{
 
 ## Support
 
-If you have a feature request, or spotted a bug or a technical problem, create a github issue. For other questions, contact our [support team](https://support.adyen.com/hc/en-us/requests/new?ticket_form_id=360000705420).
+If you have a feature request, or spotted a bug or a technical problem, create a github issue. 
+For other questions, contact our [support team](https://support.adyen.com/hc/en-us/requests/new?ticket_form_id=360000705420).
 
 ## Contributing
 
