@@ -110,7 +110,7 @@ type PaymentRequest struct {
 	// The physical store, for which this payment is processed.
 	Store string `json:"store,omitempty"`
 	// When true and `shopperReference` is provided, the payment details will be stored.
-	StorePaymentMethod bool `json:"storePaymentMethod,omitempty"`
+	StorePaymentMethod *bool `json:"storePaymentMethod,omitempty"`
 	// The shopper's telephone number.
 	TelephoneNumber     string               `json:"telephoneNumber,omitempty"`
 	ThreeDS2RequestData *ThreeDS2RequestData `json:"threeDS2RequestData,omitempty"`
