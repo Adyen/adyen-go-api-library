@@ -87,7 +87,7 @@ func TestPaymentRequest_UnmarshalJSON(t *testing.T) {
 
 				jsonString, err := json.Marshal(got)
 				assert.Nil(t, err)
-				assert.Equal(t, `{"amount":{"currency":"","value":0},"browserInfo":{"acceptHeader":"*/*","colorDepth":24,"javaEnabled":false,"language":"en-US","screenHeight":1080,"screenWidth":1920,"timeZoneOffset":-60,"userAgent":"Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:85.0) Gecko/20100101 Firefox/85.0"},"merchantAccount":"","paymentMethod":{"encryptedCardNumber":"adyenjs_0_1_25$J8/5xp5l6DjYVPokO6FwAQj","encryptedExpiryMonth":"adyenjs_0_1_25$bLCWe/ZHR37Okz0d28bzrDBYXw","encryptedExpiryYear":"adyenjs_0_1_25$nqasksbOSfn0grzrmna2vpWkQMhOHT6Cd","encryptedSecurityCode":"adyenjs_0_1_25$TbomjrfaGwHFfxpPuf","holderName":"d","type":"scheme"},"reference":"","returnUrl":"","riskData":{"clientData":"eyJ2ZXJzaW9uIjoiMS4w"}}`, string(jsonString))
+				assert.Equal(t, `{"amount":{"currency":"","value":0},"browserInfo":{"acceptHeader":"*/*","colorDepth":24,"javaEnabled":false,"language":"en-US","screenHeight":1080,"screenWidth":1920,"timeZoneOffset":-60,"userAgent":"Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:85.0) Gecko/20100101 Firefox/85.0"},"merchantAccount":"","paymentMethod":{"brand":"amex","encryptedCardNumber":"adyenjs_0_1_25$J8/5xp5l6DjYVPokO6FwAQj","encryptedExpiryMonth":"adyenjs_0_1_25$bLCWe/ZHR37Okz0d28bzrDBYXw","encryptedExpiryYear":"adyenjs_0_1_25$nqasksbOSfn0grzrmna2vpWkQMhOHT6Cd","encryptedSecurityCode":"adyenjs_0_1_25$TbomjrfaGwHFfxpPuf","holderName":"d","type":"scheme"},"reference":"","returnUrl":"","riskData":{"clientData":"eyJ2ZXJzaW9uIjoiMS4w"}}`, string(jsonString))
 			},
 		},
 		{
