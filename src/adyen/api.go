@@ -48,7 +48,7 @@ const (
 	MarketpayHopAPIVersion          = "v6"
 	PaymentAPIVersion               = "v64"
 	RecurringAPIVersion             = "v49"
-	CheckoutAPIVersion              = "v67"
+	CheckoutAPIVersion              = "v68"
 	BinLookupAPIVersion             = "v50"
 	EndpointProtocol                = "https://"
 	DisputesAPIVersion              = "v30"
@@ -133,6 +133,7 @@ type APIClient struct {
 //
 // optionally a custom http.Client can be passed via the Config allow for advanced features such as caching.
 func NewClient(cfg *common.Config) *APIClient {
+
 	if cfg.HTTPClient == nil {
 		cfg.HTTPClient = http.DefaultClient
 	}
