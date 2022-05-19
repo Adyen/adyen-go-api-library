@@ -111,7 +111,7 @@ type PaymentRequest struct {
 	// The ecommerce or point-of-sale store that is processing the payment. Used in [partner arrangement integrations](https://docs.adyen.com/platforms/platforms-for-partners#route-payments) for Adyen for Platforms.
 	Store string `json:"store,omitempty"`
 	// When true and `shopperReference` is provided, the payment details will be stored.
-	StorePaymentMethod bool `json:"storePaymentMethod"`
+	StorePaymentMethod bool `json:"storePaymentMethod,omitempty"`
 	// The shopper's telephone number.
 	TelephoneNumber     string               `json:"telephoneNumber,omitempty"`
 	ThreeDS2RequestData *ThreeDS2RequestData `json:"threeDS2RequestData,omitempty"`
