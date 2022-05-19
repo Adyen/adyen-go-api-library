@@ -16,27 +16,27 @@ import (
 )
 
 /*
-GetPaymentLinksLinkId Get a payment link
+GetPaymentLink Get a payment link
 Retrieves the payment link details using the payment link &#x60;id&#x60;.
  * @param linkId Unique identifier of the payment link.
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return PaymentLinkResource
 */
-func (a Checkout) GetPaymentLinksLinkId(linkId string, ctxs ..._context.Context) (PaymentLinkResource, *_nethttp.Response, error) {
+func (a Checkout) GetPaymentLink(linkId string, ctxs ..._context.Context) (PaymentLinkResource, *_nethttp.Response, error) {
     res := &PaymentLinkResource{}
     httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath() + "/paymentLinks/" + linkId, ctxs...)    
     return *res, httpRes, err
 }
 
 /*
-UpdatePaymentLinksLinkId Update the status of a payment link
+UpdatePaymentLink Update the status of a payment link
 Updates the status of a payment link. Use this endpoint to [force the expiry of a payment link](https://docs.adyen.com/online-payments/pay-by-link#update-payment-link-status).
  * @param linkId Unique identifier of the payment link.
  * @param request UpdatePaymentLinkRequest - reference of UpdatePaymentLinkRequest). 
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return PaymentLinkResource
 */
-func (a Checkout) UpdatePaymentLinksLinkId(linkId string, req *UpdatePaymentLinkRequest, ctxs ..._context.Context) (PaymentLinkResource, *_nethttp.Response, error) {
+func (a Checkout) UpdatePaymentLink(linkId string, req *UpdatePaymentLinkRequest, ctxs ..._context.Context) (PaymentLinkResource, *_nethttp.Response, error) {
     res := &PaymentLinkResource{}
     httpRes, err := a.Client.MakeHTTPPatchRequest(req, res, a.BasePath() + "/paymentLinks/" + linkId, ctxs...)
     return *res, httpRes, err

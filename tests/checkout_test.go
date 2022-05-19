@@ -89,7 +89,7 @@ func Test_Checkout(t *testing.T) {
 
 		t.Run("Get payment link", func(t *testing.T) {
 			paymentLink, _, _ := createPaymentLink()
-			res, httpRes, err := client.Checkout.GetPaymentLinksLinkId(paymentLink.Id)
+			res, httpRes, err := client.Checkout.GetPaymentLink(paymentLink.Id)
 
 			require.Nil(t, err)
 			require.NotNil(t, httpRes)
@@ -102,7 +102,7 @@ func Test_Checkout(t *testing.T) {
 
 		t.Run("Update payment link", func(t *testing.T) {
 			paymentLink, _, _ := createPaymentLink()
-			res, httpRes, err := client.Checkout.UpdatePaymentLinksLinkId(paymentLink.Id, &checkout.UpdatePaymentLinkRequest{
+			res, httpRes, err := client.Checkout.UpdatePaymentLink(paymentLink.Id, &checkout.UpdatePaymentLinkRequest{
 				Status: "expired",
 			})
 
