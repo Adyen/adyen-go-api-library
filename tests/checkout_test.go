@@ -156,7 +156,6 @@ func Test_Checkout(t *testing.T) {
 				Reference: "123456781235",
 				Amount: checkout.Amount{
 					Value:    1250,
-					Value:    1257,
 					Currency: "EUR",
 				},
 				CountryCode:     "NL",
