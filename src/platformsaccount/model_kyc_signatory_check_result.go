@@ -9,13 +9,10 @@
  */
 
 package platformsaccount
-// KYCVerificationResult struct for KYCVerificationResult
-type KYCVerificationResult struct {
-	AccountHolder *KYCCheckResult `json:"accountHolder,omitempty"`
-	// The result(s) of the checks on the payout method(s).
-	PayoutMethods *[]KYCPayoutMethodCheckResult `json:"payoutMethods,omitempty"`
-	// The result(s) of the checks on the shareholder(s).
-	Shareholders *[]KYCShareholderCheckResult `json:"shareholders,omitempty"`
-	// The result(s) of the checks on the signatory(s).
-	Signatories *[]KYCSignatoryCheckResult `json:"signatories,omitempty"`
+// KYCSignatoryCheckResult struct for KYCSignatoryCheckResult
+type KYCSignatoryCheckResult struct {
+	// A list of the checks and their statuses.
+	Checks *[]KYCCheckStatusData `json:"checks,omitempty"`
+	// The code of the signatory to which the check applies.
+	SignatoryCode string `json:"signatoryCode,omitempty"`
 }
