@@ -21,3 +21,14 @@
 #docs/*.md
 # Then explicitly reverse the ignore rule for a single file:
 #!docs/README.md
+
+# ignore during code generation
+docs/*.md
+.travis.yml
+client.go
+configuration.go
+git_push.sh
+go.mod
+go.sum
+response.go
+utils.go
