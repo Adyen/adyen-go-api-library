@@ -36,7 +36,7 @@ openapi-generator-cli generate \
 -   `client.go`
 -   `utils.go`
 -   `response.go`
--   `travis.yml`
+-   `.travis.yml`
 -   `git_push.sh`
 -   `go.mod`
 -   `go.sum`

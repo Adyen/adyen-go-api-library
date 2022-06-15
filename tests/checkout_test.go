@@ -432,4 +432,48 @@ func Test_Checkout(t *testing.T) {
 			assert.Equal(t, "Received", res.ResultCode)
 		})
 	})
+
+	t.Run("Sessions", func(t *testing.T) {
+		t.Run("Create an API request that should pass", func(t *testing.T) {
+
+			req := &checkout.CreateCheckoutSessionRequest{
+				Reference: "123456781235",
+				Amount: checkout.Amount{
+					Value:    1250,
+					Currency: "EUR",
+				},
+				CountryCode:     "NL",
+				MerchantAccount: MerchantAccount,
+				Channel:         "Web",
+				ReturnUrl:       "http://localhost:3000/redirect",
+			}
+
+			require.Nil(t, req.ApplicationInfo)
+
+			res, httpRes, err :=
+				client.Checkout.Sessions(req)
+
+			require.Nil(t, err)
+			require.NotNil(t, httpRes)
+			assert.Equal(t, 201, httpRes.StatusCode)
+			require.NotNil(t, res)
+
+			// check if req has ApplicationInfo added to it
+			require.NotNil(t, req.ApplicationInfo)
+			require.NotNil(t, req.ApplicationInfo.AdyenLibrary)
+			require.Equal(t, common.LibName, req.ApplicationInfo.AdyenLibrary.Name)
+			require.Equal(t, common.LibVersion, req.ApplicationInfo.AdyenLibrary.Version)
+
+		})
+		t.Run("Create an API request that should fail", func(t *testing.T) {
+			res, httpRes, err :=
+				client.Checkout.Sessions(&checkout.CreateCheckoutSessionRequest{})
+
+			require.NotNil(t, err)
+			assert.Equal(t, true, strings.Contains(err.Error(), "Invalid Merchant Account (validation: 901)"))
+			require.NotNil(t, httpRes)
+			assert.Equal(t, 422, httpRes.StatusCode)
+			require.NotNil(t, res)
+		})
+	})
 }
