@@ -37,7 +37,7 @@ import (
 */
 func (a {{{packageName}}}) {{{operationId}}}({{#pathParams}}{{paramName}} *{{{dataType}}}{{^last}}, {{/last}}{{/pathParams}}{{#bodyParams}}req *{{{dataType}}}{{^last}}, {{/last}}{{/bodyParams}}ctxs ..._context.Context) ({{#returnType}}{{{returnType}}}, {{/returnType}}*_nethttp.Response, error) {
     res := &{{{returnType}}}{}
-    httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath() + "{{{path}}}", ctxs...)
+    httpRes, err := a.Client.MakeHTTP{{httpMethod}}Request(req, res, a.BasePath() + "{{{path}}}", ctxs...)
     return *res, httpRes, err
 }
 {{/operation}}
