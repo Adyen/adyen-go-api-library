@@ -18,17 +18,27 @@ import (
 {{#notes}}
 {{notes}}
 {{/notes}}
-{{#allParams}}
+{{#pathParams}}
 {{#required}}
  * @param {{paramName}}{{#description}} {{{.}}}{{/description}}
 {{/required}}
-{{/allParams}}
+{{/pathParams}}
+{{#bodyParams}}
+{{#required}}
+ * @param req{{#description}} {{{.}}}{{/description}}
+{{/required}}
+{{/bodyParams}}
 {{#hasOptionalParams}}
-{{#allParams}}
+{{#pathParams}}
 {{^required}}
  * @param request {{vendorExtensions.x-export-param-name}} - reference of {{dataType}}). {{#description}} {{{.}}}{{/description}}
 {{/required}}
-{{/allParams}}
+{{/pathParams}}
+{{#bodyParams}}
+{{^required}}
+ * @param req {{vendorExtensions.x-export-param-name}} - reference of {{dataType}}). {{#description}} {{{.}}}{{/description}}
+{{/required}}
+{{/bodyParams}}
 {{/hasOptionalParams}}
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 {{#returnType}}
