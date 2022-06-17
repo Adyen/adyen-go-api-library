@@ -35,10 +35,22 @@ import (
 @return {{{returnType}}}
 {{/returnType}}
 */
+{{#bodyParams}}
+{{! implementation when body param is provided (POST, PATCH, etc..)}}
 func (a {{{packageName}}}) {{{operationId}}}({{#pathParams}}{{paramName}} *{{{dataType}}}{{^last}}, {{/last}}{{/pathParams}}{{#bodyParams}}req *{{{dataType}}}{{^last}}, {{/last}}{{/bodyParams}}ctxs ..._context.Context) ({{#returnType}}{{{returnType}}}, {{/returnType}}*_nethttp.Response, error) {
     res := &{{{returnType}}}{}
     httpRes, err := a.Client.MakeHTTP{{httpMethod}}Request(req, res, a.BasePath() + "{{{path}}}", ctxs...)
     return *res, httpRes, err
 }
+{{/bodyParams}}
+{{^bodyParams}}
+{{! implementation when body param is NOT provided (GET method) }}
+func (a {{{packageName}}}) {{{operationId}}}({{#pathParams}}{{paramName}} *{{{dataType}}}{{^last}}, {{/last}}{{/pathParams}}ctxs ..._context.Context) ({{#returnType}}{{{returnType}}}, {{/returnType}}*_nethttp.Response, error) {
+    res := &{{{returnType}}}{}
+    httpRes, err := a.Client.MakeHTTP{{httpMethod}}Request(res, a.BasePath() + "{{{path}}}", ctxs...)
+    return *res, httpRes, err
+}
+{{/bodyParams}}
+
 {{/operation}}
 {{/operations}}
