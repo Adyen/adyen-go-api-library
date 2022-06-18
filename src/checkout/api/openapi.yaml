@@ -25,14 +25,18 @@ info:
 
     For example:
     ```
-    https://checkout-test.adyen.com/v68/payments
+    https://checkout-test.adyen.com/v69/payments
     ```
+
+    ## Release notes
+    Have a look at the [release notes](https://docs.adyen.com/online-payments/release-notes?integration_type=api&version=69) to find out what changed in this version!
   termsOfService: https://www.adyen.com/legal/terms-and-conditions
   title: Adyen Checkout API
-  version: "68"
+  version: "69"
   x-publicVersion: true
+  x-timestamp: 2022-05-24T15:28:44Z
 servers:
-- url: https://checkout-test.adyen.com/v68
+- url: https://checkout-test.adyen.com/v69
 tags:
 - name: Modifications
 - name: Orders
@@ -144,6 +148,58 @@ paths:
       - Modifications
       x-groupName: Modifications
       x-sortIndex: 3
+  /cardDetails:
+    post:
+      description: |+
+        Send a request with at least the first 6 digits of the card number to get a response with an array of brands on the card. If you include [your supported brands](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/cardDetails__reqParam_supportedBrands) in the request, the response also tells you if you support each [brand that was identified](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/cardDetails__resParam_details).
+
+        If you have an API-only integration and collect card data, use this endpoint to find out if the shopper's card is co-branded. For co-branded cards, you must let the shopper choose the brand to pay with  if you support both brands.
+
+      operationId: post-cardDetails
+      parameters:
+      - description: A unique identifier for the message with a maximum of 64 characters
+          (we recommend a UUID).
+        example: 37ca9c97-d1d1-4c62-89e8-706891a563ed
+        explode: false
+        in: header
+        name: Idempotency-Key
+        required: false
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            examples:
+              basic:
+                $ref: '#/components/examples/post-cardDetails-basic'
+              supported-brands:
+                $ref: '#/components/examples/post-cardDetails-supported-brands'
+            schema:
+              $ref: '#/components/schemas/CardDetailsRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                basic:
+                  $ref: '#/components/examples/post-cardDetails-basic-200'
+                supported-brands:
+                  $ref: '#/components/examples/post-cardDetails-supported-brands-200'
+              schema:
+                $ref: '#/components/schemas/CardDetailsResponse'
+          description: OK - the request has succeeded.
+          headers:
+            Idempotency-Key:
+              $ref: '#/components/headers/Idempotency-Key'
+      security:
+      - BasicAuth: []
+      - ApiKeyAuth: []
+      summary: Get the list of brands on the card
+      tags:
+      - Payments
+      x-groupName: Payments
+      x-sortIndex: 6
   /donations:
     post:
       description: |-
@@ -239,7 +295,6 @@ paths:
       summary: Start a transaction for donations
       tags:
       - Payments
-      x-addedInVersion: "67"
       x-groupName: Payments
       x-sortIndex: 5
   /orders:
@@ -564,7 +619,7 @@ paths:
                 basic:
                   $ref: '#/components/examples/post-paymentLinks-basic-200'
               schema:
-                $ref: '#/components/schemas/PaymentLinkResource'
+                $ref: '#/components/schemas/PaymentLinkResponse'
           description: OK - the request has succeeded.
           headers:
             Idempotency-Key:
@@ -573,7 +628,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaymentLinkResource'
+                $ref: '#/components/schemas/PaymentLinkResponse'
           description: Created - the request has succeeded.
           headers:
             Idempotency-Key:
@@ -665,7 +720,7 @@ paths:
                 basic:
                   $ref: '#/components/examples/get-paymentLinks-linkId-basic-200'
               schema:
-                $ref: '#/components/schemas/PaymentLinkResource'
+                $ref: '#/components/schemas/PaymentLinkResponse'
           description: OK - the request has succeeded.
           headers:
             Idempotency-Key:
@@ -765,7 +820,7 @@ paths:
                 basic:
                   $ref: '#/components/examples/patch-paymentLinks-linkId-basic-200'
               schema:
-                $ref: '#/components/schemas/PaymentLinkResource'
+                $ref: '#/components/schemas/PaymentLinkResponse'
           description: OK - the request has succeeded.
           headers:
             Idempotency-Key:
@@ -2159,6 +2214,43 @@ components:
         shopperReference: shopper-reference-LZfdWZ
         status: expired
         url: https://test.adyen.link/PL61C53A8B97E6915A
+    post-cardDetails-basic:
+      description: Example request for getting a list of brands on a card using the
+        first 6 digits of the card number.
+      summary: Get a list of brands on a card
+      value:
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        cardNumber: "411111"
+    post-cardDetails-basic-200:
+      description: Example response when the card is co-branded.
+      summary: List of brands on the card
+      value:
+        brands:
+        - type: visa
+          supported: "true"
+        - type: cartebancaire
+          supported: "true"
+    post-cardDetails-supported-brands:
+      description: Example request for getting a list of brands on a card using the
+        first 6 digits of the card number and including the card brands you support.
+      summary: Get a list of brands on a card specifying your supported card brands
+      value:
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        cardNumber: "411111"
+        supportedBrands:
+        - visa
+        - mc
+        - amex
+    post-cardDetails-supported-brands-200:
+      description: Example response when the card is co-branded, and you only support
+        Visa.
+      summary: List of brands on the card when you specify your supported card brands
+      value:
+        brands:
+        - type: visa
+          supported: "true"
+        - type: cartebancaire
+          supported: "false"
     post-donations-donations:
       summary: Start a donation transaction
       value:
@@ -2168,13 +2260,12 @@ components:
         reference: YOUR_DONATION_REFERENCE
         paymentMethod:
           type: scheme
-          cvc: "123"
         donationToken: YOUR_DONATION_TOKEN
         donationOriginalPspReference: 991559660454807J
         donationAccount: CHARITY_ACCOUNT
         returnUrl: https://your-company.com/...
         merchantAccount: YOUR_MERCHANT_ACCOUNT
-        shopperInteraction: Ecommerce
+        shopperInteraction: ContAuth
     post-donations-donations-200:
       summary: Example response
       value:
@@ -2206,7 +2297,7 @@ components:
         returnUrl: https://your-company.com/...
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         donationAccount: CHARITY_ACCOUNT
-        shopperInteraction: Ecommerce
+        shopperInteraction: ContAuth
         shopperReference: YOUR_UNIQUE_SHOPPER_ID
         recurringProcessingModel: CardOnFile
     post-orders-basic:
@@ -3767,7 +3858,7 @@ components:
           type: yandex_money
         - name: Promsvyazbank
           type: yandex_promsvyazbank
-        - name: Sberbank Online
+        - name: SberPay
           type: yandex_sberbank
         - name: WebMoney
           type: yandex_webmoney
@@ -5618,6 +5709,7 @@ components:
     AdditionalData3DSecure:
       properties:
         allow3DS2:
+          deprecated: true
           description: |
             Indicates if you are able to process 3D Secure 2 transactions natively on your payment page. Send this parameter when you are using `/payments` endpoint with any of our [native 3D Secure 2 solutions](https://docs.adyen.com/online-payments/3d-secure/native-3ds2).
 
@@ -5627,7 +5719,11 @@ components:
             * **true** - Ready to support native 3D Secure 2 authentication. Setting this to true does not mean always applying 3D Secure 2. Adyen still selects the version of 3D Secure based on configuration to optimize authorisation rates and improve the shopper's experience.
             * **false** – Not ready to support native 3D Secure 2 authentication. Adyen will not offer 3D Secure 2 to your shopper regardless of your configuration.
           type: string
+          x-deprecatedInVersion: "69"
+          x-deprecatedMessage: Use `authenticationData.threeDSRequestData.nativeThreeDS`
+            instead.
         executeThreeD:
+          deprecated: true
           description: "Indicates if you want to perform 3D Secure authentication\
             \ on a transaction.\n\n > Alternatively, you can use [Dynamic 3D Secure](/risk-management/dynamic-3d-secure)\
             \ to configure rules for applying 3D Secure.\n\nPossible values:\n* **true**\
@@ -5636,6 +5732,8 @@ components:
             \ the issuer mandates 3D Secure because of the PSD2 directive  or other,\
             \ national regulations. \n"
           type: string
+          x-deprecatedInVersion: "69"
+          x-deprecatedMessage: Use `authenticationData.attemptAuthentication` instead
         mpiImplementationType:
           description: In case of Secure+, this field must be set to **CUPSecurePlus**.
           type: string
@@ -6951,6 +7049,47 @@ components:
           $ref: '#/components/schemas/MerchantDevice'
         shopperInteractionDevice:
           $ref: '#/components/schemas/ShopperInteractionDevice'
+    AuthenticationData:
+      example:
+        authenticationOnly: false
+        threeDSRequestData:
+          threeDSVersion: 2.1.0
+          nativeThreeDS: preferred
+        attemptAuthentication: always
+      properties:
+        attemptAuthentication:
+          description: |-
+            Indicates when 3D Secure authentication should be attempted. This overrides all other rules, including [Dynamic 3D Secure settings](https://docs.adyen.com/risk-management/dynamic-3d-secure).
+
+            Possible values:
+
+            * **always**: Perform 3D Secure authentication.
+            * **never**: Don't perform 3D Secure authentication. If PSD2 SCA or other national regulations require authentication, the transaction gets declined.
+            * **preferNo**: Do not perform 3D Secure authentication if not required by PSD2 SCA or other national regulations.
+          enum:
+          - always
+          - never
+          - preferNo
+          type: string
+          x-addedInVersion: "69"
+          x-enum:
+          - description: Perform 3D Secure authentication.
+            value: always
+          - description: Don't perform 3D Secure authentication. If PSD2 SCA or other
+              national regulations require authentication, the transaction gets declined.
+            value: never
+          - description: Do not perform 3D Secure authentication if not required by
+              PSD2 SCA or other national regulations.
+            value: preferNo
+        authenticationOnly:
+          default: false
+          description: |-
+            If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only), and not the payment authorisation.
+            Default: *false**.
+          type: boolean
+          x-addedInVersion: "69"
+        threeDSRequestData:
+          $ref: '#/components/schemas/ThreeDSRequestData'
     Avs:
       example:
         addressEditable: true
@@ -7254,6 +7393,17 @@ components:
       - expiryYear
       - holderName
       - number
+    CardBrandDetails:
+      example:
+        type: type
+        supported: true
+      properties:
+        supported:
+          description: Indicates if you support the card brand.
+          type: boolean
+        type:
+          description: The name of the card brand.
+          type: string
     CardDetails:
       additionalProperties: false
       properties:
@@ -7301,6 +7451,10 @@ components:
         holderName:
           description: The name of the card holder.
           type: string
+        networkPaymentReference:
+          description: The network token reference. This is the [`networkTxReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_additionalData-ResponseAdditionalDataCommon-networkTxReference)
+            from the response to the first payment.
+          type: string
         number:
           description: The card number. Only collect raw card data if you are [fully
             PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide).
@@ -7337,6 +7491,9 @@ components:
           - alliancedata
           - card
           - qiwiwallet
+          - lianlianpay_ebanking_enterprise
+          - lianlianpay_ebanking_credit
+          - lianlianpay_ebanking_debit
           - entercash
           type: string
       required:
@@ -7345,6 +7502,56 @@ components:
       - encryptedExpiryYear
       title: Card
       type: object
+    CardDetailsRequest:
+      example:
+        merchantAccount: merchantAccount
+        countryCode: countryCode
+        supportedBrands:
+        - supportedBrands
+        - supportedBrands
+        cardNumber: cardNumber
+      properties:
+        cardNumber:
+          description: "A minimum of the first 8 digits of the card number and a maximum\
+            \ of the full card number. 11 digits gives the best result. \n\nYou must\
+            \ be [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide)\
+            \ to collect raw card data."
+          type: string
+        countryCode:
+          description: |-
+            The shopper country.
+
+            Format: [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+            Example: NL or DE
+          type: string
+        merchantAccount:
+          description: The merchant account identifier, with which you want to process
+            the transaction.
+          type: string
+        supportedBrands:
+          description: "The card brands you support. This is the [`brands`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/paymentMethods__resParam_paymentMethods-brands)\
+            \ array from your [`/paymentMethods`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/paymentMethods)\
+            \ response. \n\nIf not included, our API uses the ones configured for\
+            \ your merchant account and, if provided, the country code."
+          items:
+            type: string
+          type: array
+      required:
+      - cardNumber
+      - merchantAccount
+    CardDetailsResponse:
+      example:
+        brands:
+        - type: type
+          supported: true
+        - type: type
+          supported: true
+      properties:
+        brands:
+          description: The list of brands identified for the card.
+          items:
+            $ref: '#/components/schemas/CardBrandDetails'
+          type: array
     CellulantDetails:
       additionalProperties: false
       properties:
@@ -7825,8 +8032,9 @@ components:
           type: string
         shopperStatement:
           description: |-
-            The text to be shown on the shopper's bank statement. To enable this field, contact our [Support Team](https://support.adyen.com/hc/en-us/requests/new).
+            The text to be shown on the shopper's bank statement.
              We recommend sending a maximum of 22 characters, otherwise banks might truncate the string.
+             Allowed characters: **a-z**, **A-Z**, **0-9**, spaces, and special characters **. , ' _ - ? + * /**.
           type: string
         socialSecurityNumber:
           description: The shopper's social security number.
@@ -7856,10 +8064,13 @@ components:
           $ref: '#/components/schemas/ThreeDS2RequestData'
         threeDSAuthenticationOnly:
           default: false
+          deprecated: true
           description: If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only),
             and not the payment authorisation.
           type: boolean
           x-addedInVersion: "50"
+          x-deprecatedInVersion: "69"
+          x-deprecatedMessage: Use `authenticationData.authenticationOnly` instead.
         totalsGroup:
           description: The reference value to aggregate sales totals in reporting.
             When not specified, the store field is used (if available).
@@ -7911,7 +8122,6 @@ components:
           - $ref: '#/components/schemas/ResponseAdditionalDataBillingAddress'
           - $ref: '#/components/schemas/ResponseAdditionalDataCard'
           - $ref: '#/components/schemas/ResponseAdditionalDataCommon'
-          - $ref: '#/components/schemas/ResponseAdditionalDataDeliveryAddress'
           - $ref: '#/components/schemas/ResponseAdditionalDataInstallments'
           - $ref: '#/components/schemas/ResponseAdditionalDataNetworkTokens'
           - $ref: '#/components/schemas/ResponseAdditionalDataOpi'
@@ -8088,7 +8298,6 @@ components:
           - $ref: '#/components/schemas/ResponseAdditionalDataBillingAddress'
           - $ref: '#/components/schemas/ResponseAdditionalDataCard'
           - $ref: '#/components/schemas/ResponseAdditionalDataCommon'
-          - $ref: '#/components/schemas/ResponseAdditionalDataDeliveryAddress'
           - $ref: '#/components/schemas/ResponseAdditionalDataInstallments'
           - $ref: '#/components/schemas/ResponseAdditionalDataNetworkTokens'
           - $ref: '#/components/schemas/ResponseAdditionalDataOpi'
@@ -8510,18 +8719,8 @@ components:
           $ref: '#/components/schemas/ShopperInput'
     CreateCheckoutSessionRequest:
       example:
-        mandate:
-          amount: amount
-          amountRule: max
-          billingDay: billingDay
-          startsAt: startsAt
-          billingAttemptsRule: "on"
-          endsAt: endsAt
-          remarks: remarks
-          frequency: adhoc
         metadata:
           key: metadata
-        recurringFrequency: recurringFrequency
         splits:
         - reference: reference
           amount:
@@ -8537,12 +8736,8 @@ components:
           description: description
           type: BalanceAccount
           account: account
-        telephoneNumber: telephoneNumber
-        socialSecurityNumber: socialSecurityNumber
-        splitCardFundingSources: false
         redirectToIssuerMethod: redirectToIssuerMethod
         channel: iOS
-        shopperIP: shopperIP
         mcc: mcc
         threeDSAuthenticationOnly: false
         lineItems:
@@ -8566,11 +8761,7 @@ components:
           amountIncludingTax: 1
           productUrl: productUrl
           taxAmount: 6
-        recurringExpiry: recurringExpiry
         reference: reference
-        shopperName:
-          firstName: firstName
-          lastName: lastName
         deliveryAddress:
           country: country
           stateOrProvince: stateOrProvince
@@ -8578,75 +8769,20 @@ components:
           houseNumberOrName: houseNumberOrName
           street: street
           postalCode: postalCode
-        countryCode: countryCode
         recurringProcessingModel: CardOnFile
-        shopperInteraction: Ecommerce
-        company:
-          registrationNumber: registrationNumber
-          registryLocation: registryLocation
-          taxId: taxId
-          name: name
-          type: type
-          homepage: homepage
         additionalData:
           key: additionalData
         blockedPaymentMethods:
         - blockedPaymentMethods
         - blockedPaymentMethods
-        returnUrl: returnUrl
         trustedShopper: true
-        accountInfo:
-          passwordChangeDate: 2000-01-23T04:56:07.000+00:00
-          paymentAccountIndicator: notApplicable
-          suspiciousActivity: true
-          deliveryAddressUsageIndicator: thisTransaction
-          pastTransactionsYear: 1
-          accountType: notApplicable
-          homePhone: homePhone
-          paymentAccountAge: 2000-01-23T04:56:07.000+00:00
-          accountAgeIndicator: notApplicable
-          deliveryAddressUsageDate: 2000-01-23T04:56:07.000+00:00
-          accountChangeDate: 2000-01-23T04:56:07.000+00:00
-          accountCreationDate: 2000-01-23T04:56:07.000+00:00
-          mobilePhone: mobilePhone
-          pastTransactionsDay: 6
-          accountChangeIndicator: thisTransaction
-          passwordChangeIndicator: notApplicable
-          addCardAttemptsDay: 0
-          workPhone: workPhone
-          purchasesLast6Months: 5
         enablePayOut: true
-        merchantOrderReference: merchantOrderReference
-        amount:
-          currency: currency
-          value: 0
         additionalAmount:
           currency: currency
           value: 0
-        redirectFromIssuerMethod: redirectFromIssuerMethod
-        dateOfBirth: 2000-01-23T04:56:07.000+00:00
         shopperEmail: shopperEmail
-        store: store
-        allowedPaymentMethods:
-        - allowedPaymentMethods
-        - allowedPaymentMethods
-        riskData:
-          fraudOffset: 4
-          customFields:
-            key: customFields
-          profileReference: profileReference
-          clientData: clientData
         enableOneClick: true
-        expiresAt: 2000-01-23T04:56:07.000+00:00
-        storePaymentMethod: true
-        merchantAccount: merchantAccount
-        billingAddress:
-          country: country
-          stateOrProvince: stateOrProvince
-          city: city
-          houseNumberOrName: houseNumberOrName
-          street: street
-          postalCode: postalCode
+        deliverAt: 2000-01-23T04:56:07.000+00:00
         shopperLocale: shopperLocale
         captureDelayHours: 0
         applicationInfo:
@@ -8671,6 +8807,88 @@ components:
             name: name
             integrator: integrator
             version: version
+        shopperReference: shopperReference
+        shopperStatement: shopperStatement
+        mandate:
+          amount: amount
+          amountRule: max
+          billingDay: billingDay
+          startsAt: startsAt
+          billingAttemptsRule: "on"
+          endsAt: endsAt
+          remarks: remarks
+          frequency: adhoc
+        recurringFrequency: recurringFrequency
+        telephoneNumber: telephoneNumber
+        socialSecurityNumber: socialSecurityNumber
+        splitCardFundingSources: false
+        shopperIP: shopperIP
+        recurringExpiry: recurringExpiry
+        shopperName:
+          firstName: firstName
+          lastName: lastName
+        countryCode: countryCode
+        shopperInteraction: Ecommerce
+        company:
+          registrationNumber: registrationNumber
+          registryLocation: registryLocation
+          taxId: taxId
+          name: name
+          type: type
+          homepage: homepage
+        returnUrl: returnUrl
+        accountInfo:
+          passwordChangeDate: 2000-01-23T04:56:07.000+00:00
+          paymentAccountIndicator: notApplicable
+          suspiciousActivity: true
+          deliveryAddressUsageIndicator: thisTransaction
+          pastTransactionsYear: 1
+          accountType: notApplicable
+          homePhone: homePhone
+          paymentAccountAge: 2000-01-23T04:56:07.000+00:00
+          accountAgeIndicator: notApplicable
+          deliveryAddressUsageDate: 2000-01-23T04:56:07.000+00:00
+          accountChangeDate: 2000-01-23T04:56:07.000+00:00
+          accountCreationDate: 2000-01-23T04:56:07.000+00:00
+          mobilePhone: mobilePhone
+          pastTransactionsDay: 6
+          accountChangeIndicator: thisTransaction
+          passwordChangeIndicator: notApplicable
+          addCardAttemptsDay: 0
+          workPhone: workPhone
+          purchasesLast6Months: 5
+        authenticationData:
+          authenticationOnly: false
+          threeDSRequestData:
+            threeDSVersion: 2.1.0
+            nativeThreeDS: preferred
+          attemptAuthentication: always
+        merchantOrderReference: merchantOrderReference
+        amount:
+          currency: currency
+          value: 0
+        redirectFromIssuerMethod: redirectFromIssuerMethod
+        dateOfBirth: 2000-01-23T04:56:07.000+00:00
+        store: store
+        allowedPaymentMethods:
+        - allowedPaymentMethods
+        - allowedPaymentMethods
+        riskData:
+          fraudOffset: 4
+          customFields:
+            key: customFields
+          profileReference: profileReference
+          clientData: clientData
+        expiresAt: 2000-01-23T04:56:07.000+00:00
+        storePaymentMethod: true
+        merchantAccount: merchantAccount
+        billingAddress:
+          country: country
+          stateOrProvince: stateOrProvince
+          city: city
+          houseNumberOrName: houseNumberOrName
+          street: street
+          postalCode: postalCode
         enableRecurring: true
         mpiData:
           cavv: cavv
@@ -8685,8 +8903,6 @@ components:
           eci: eci
           riskScore: riskScore
           threeDSVersion: threeDSVersion
-        shopperReference: shopperReference
-        shopperStatement: shopperStatement
       properties:
         accountInfo:
           $ref: '#/components/schemas/AccountInfo'
@@ -8728,6 +8944,8 @@ components:
           $ref: '#/components/schemas/Amount'
         applicationInfo:
           $ref: '#/components/schemas/ApplicationInfo'
+        authenticationData:
+          $ref: '#/components/schemas/AuthenticationData'
         billingAddress:
           $ref: '#/components/schemas/Address'
         blockedPaymentMethods:
@@ -8744,13 +8962,14 @@ components:
           format: int32
           type: integer
         channel:
-          description: |-
+          description: |+
             The platform where a payment transaction takes place. This field is optional for filtering out payment methods that are only available on specific platforms. If this value is not set, then we will try to infer it from the `sdkVersion` or `token`.
 
             Possible values:
-            * iOS
-            * Android
-            * Web
+            * **iOS**
+            * **Android**
+            * **Web**
+
           enum:
           - iOS
           - Android
@@ -8766,6 +8985,13 @@ components:
             The shopper's date of birth.
 
             Format [ISO-8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DD
+          format: date-time
+          type: string
+        deliverAt:
+          description: |-
+            The date and time when the purchased goods should be delivered.
+
+            [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format: YYYY-MM-DDThh:mm:ss+TZD, for example, **2020-12-18T10:15:30+01:00**.
           format: date-time
           type: string
         deliveryAddress:
@@ -8818,8 +9044,8 @@ components:
           additionalProperties:
             type: string
           description: "Metadata consists of entries, each of which includes a key\
-            \ and a value.\nLimits:\n* Maximum 20 key-value pairs per request.* Maximum\
-            \ 20 characters per key.\n* Maximum 80 characters per value. "
+            \ and a value.\nLimits:\n* Maximum 20 key-value pairs per request.\n*\
+            \ Maximum 20 characters per key.\n* Maximum 80 characters per value. "
           type: object
         mpiData:
           $ref: '#/components/schemas/ThreeDSecureData'
@@ -8897,8 +9123,9 @@ components:
           type: string
         shopperStatement:
           description: |-
-            The text to be shown on the shopper's bank statement. To enable this field, contact our [Support Team](https://support.adyen.com/hc/en-us/requests/new).
+            The text to be shown on the shopper's bank statement.
              We recommend sending a maximum of 22 characters, otherwise banks might truncate the string.
+             Allowed characters: **a-z**, **A-Z**, **0-9**, spaces, and special characters **. , ' _ - ? + * /**.
           type: string
         socialSecurityNumber:
           description: The shopper's social security number.
@@ -9005,6 +9232,7 @@ components:
           value: 0
         shopperEmail: shopperEmail
         enableOneClick: true
+        deliverAt: 2000-01-23T04:56:07.000+00:00
         shopperLocale: shopperLocale
         captureDelayHours: 0
         applicationInfo:
@@ -9080,6 +9308,12 @@ components:
           addCardAttemptsDay: 0
           workPhone: workPhone
           purchasesLast6Months: 5
+        authenticationData:
+          authenticationOnly: false
+          threeDSRequestData:
+            threeDSVersion: 2.1.0
+            nativeThreeDS: preferred
+          attemptAuthentication: always
         merchantOrderReference: merchantOrderReference
         amount:
           currency: currency
@@ -9161,6 +9395,8 @@ components:
           $ref: '#/components/schemas/Amount'
         applicationInfo:
           $ref: '#/components/schemas/ApplicationInfo'
+        authenticationData:
+          $ref: '#/components/schemas/AuthenticationData'
         billingAddress:
           $ref: '#/components/schemas/Address'
         blockedPaymentMethods:
@@ -9177,13 +9413,14 @@ components:
           format: int32
           type: integer
         channel:
-          description: |-
+          description: |+
             The platform where a payment transaction takes place. This field is optional for filtering out payment methods that are only available on specific platforms. If this value is not set, then we will try to infer it from the `sdkVersion` or `token`.
 
             Possible values:
-            * iOS
-            * Android
-            * Web
+            * **iOS**
+            * **Android**
+            * **Web**
+
           enum:
           - iOS
           - Android
@@ -9199,6 +9436,13 @@ components:
             The shopper's date of birth.
 
             Format [ISO-8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DD
+          format: date-time
+          type: string
+        deliverAt:
+          description: |-
+            The date and time when the purchased goods should be delivered.
+
+            [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format: YYYY-MM-DDThh:mm:ss+TZD, for example, **2020-12-18T10:15:30+01:00**.
           format: date-time
           type: string
         deliveryAddress:
@@ -9255,8 +9499,8 @@ components:
           additionalProperties:
             type: string
           description: "Metadata consists of entries, each of which includes a key\
-            \ and a value.\nLimits:\n* Maximum 20 key-value pairs per request.* Maximum\
-            \ 20 characters per key.\n* Maximum 80 characters per value. "
+            \ and a value.\nLimits:\n* Maximum 20 key-value pairs per request.\n*\
+            \ Maximum 20 characters per key.\n* Maximum 80 characters per value. "
           type: object
         mpiData:
           $ref: '#/components/schemas/ThreeDSecureData'
@@ -9297,6 +9541,7 @@ components:
         riskData:
           $ref: '#/components/schemas/RiskData'
         sessionData:
+          description: The payment session data you need to pass to your front end.
           type: string
         shopperEmail:
           description: The shopper's email address.
@@ -9336,8 +9581,9 @@ components:
           type: string
         shopperStatement:
           description: |-
-            The text to be shown on the shopper's bank statement. To enable this field, contact our [Support Team](https://support.adyen.com/hc/en-us/requests/new).
+            The text to be shown on the shopper's bank statement.
              We recommend sending a maximum of 22 characters, otherwise banks might truncate the string.
+             Allowed characters: **a-z**, **A-Z**, **0-9**, spaces, and special characters **. , ' _ - ? + * /**.
           type: string
         socialSecurityNumber:
           description: The shopper's social security number.
@@ -9446,6 +9692,27 @@ components:
       - merchantAccount
     CreatePaymentCaptureRequest:
       example:
+        lineItems:
+        - quantity: 1
+          itemCategory: itemCategory
+          amountExcludingTax: 1
+          imageUrl: imageUrl
+          taxPercentage: 7
+          description: description
+          id: id
+          amountIncludingTax: 1
+          productUrl: productUrl
+          taxAmount: 6
+        - quantity: 1
+          itemCategory: itemCategory
+          amountExcludingTax: 1
+          imageUrl: imageUrl
+          taxPercentage: 7
+          description: description
+          id: id
+          amountIncludingTax: 1
+          productUrl: productUrl
+          taxAmount: 6
         reference: reference
         amount:
           currency: currency
@@ -9469,6 +9736,13 @@ components:
       properties:
         amount:
           $ref: '#/components/schemas/Amount'
+        lineItems:
+          description: |-
+            Price and product information of the captured items, required for [partial captures](https://docs.adyen.com/online-payments/capture#partial-capture).
+            > This field is required for partial captures with 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, Zip and Atome.
+          items:
+            $ref: '#/components/schemas/LineItem'
+          type: array
         merchantAccount:
           description: The merchant account that is used to process the payment.
           type: string
@@ -9506,8 +9780,11 @@ components:
           type: BalanceAccount
           account: account
         telephoneNumber: telephoneNumber
+        socialSecurityNumber: socialSecurityNumber
+        splitCardFundingSources: false
         description: description
         themeId: themeId
+        mcc: mcc
         lineItems:
         - quantity: 1
           itemCategory: itemCategory
@@ -9550,6 +9827,7 @@ components:
         amount:
           currency: currency
           value: 0
+        dateOfBirth: 2000-01-23T04:56:07.000+00:00
         shopperEmail: shopperEmail
         store: store
         allowedPaymentMethods:
@@ -9567,14 +9845,14 @@ components:
         merchantAccount: merchantAccount
         installmentOptions:
           key:
-            preselectedValue: 6
-            maxValue: 0
+            preselectedValue: 1
+            maxValue: 6
             plans:
             - regular
             - regular
             values:
-            - 1
-            - 1
+            - 5
+            - 5
         deliverAt: 2000-01-23T04:56:07.000+00:00
         requiredShopperFields:
         - billingAddress
@@ -9587,6 +9865,7 @@ components:
           street: street
           postalCode: postalCode
         shopperLocale: shopperLocale
+        captureDelayHours: 0
         applicationInfo:
           adyenLibrary:
             name: name
@@ -9610,6 +9889,7 @@ components:
             integrator: integrator
             version: version
         shopperReference: shopperReference
+        shopperStatement: shopperStatement
       properties:
         allowedPaymentMethods:
           description: |-
@@ -9633,11 +9913,28 @@ components:
           items:
             type: string
           type: array
+        captureDelayHours:
+          description: The delay between the authorisation and scheduled auto-capture,
+            specified in hours.
+          format: int32
+          type: integer
+          x-addedInVersion: "69"
         countryCode:
           description: The shopper's two-letter country code.
           type: string
+        dateOfBirth:
+          description: |-
+            The shopper's date of birth.
+
+            Format [ISO-8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DD
+          format: date-time
+          type: string
+          x-addedInVersion: "69"
         deliverAt:
-          description: The date and time the purchased goods should be delivered.
+          description: |-
+            The date and time when the purchased goods should be delivered.
+
+            [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format: YYYY-MM-DDThh:mm:ss+TZD, for example, **2020-12-18T10:15:30+01:00**.
           format: date-time
           type: string
         deliveryAddress:
@@ -9648,11 +9945,14 @@ components:
             Maximum length: 280 characters.
           type: string
         expiresAt:
-          description: The date that the payment link expires, in ISO 8601 format.
-            For example `2019-11-23T12:25:28Z`, or `2020-05-27T20:25:28+08:00`. Maximum
-            expiry date should be 70 days from when the payment link is created. If
-            not provided, the default expiry is set to 24 hours after the payment
-            link is created.
+          description: |-
+            The date when the payment link expires.
+
+            [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format: YYYY-MM-DDThh:mm:ss+TZD, for example, **2020-12-18T10:15:30+01:00**.
+
+            The maximum expiry date is 70 days after the payment link is created.
+
+            If not provided, the payment link expires 24 hours after it was created.
           type: string
         installmentOptions:
           additionalProperties:
@@ -9670,6 +9970,12 @@ components:
           items:
             $ref: '#/components/schemas/LineItem'
           type: array
+        mcc:
+          description: The [merchant category code](https://en.wikipedia.org/wiki/Merchant_category_code)
+            (MCC) is a four-digit number, which relates to a particular market segment.
+            This code reflects the predominant activity that is conducted by the merchant.
+          type: string
+          x-addedInVersion: "69"
         merchantAccount:
           description: The merchant account identifier for which the payment link
             is created.
@@ -9753,6 +10059,23 @@ components:
             Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters.
             > Your reference must not include personally identifiable information (PII), for example name or email address.
           type: string
+        shopperStatement:
+          description: |-
+            The text to be shown on the shopper's bank statement.
+             We recommend sending a maximum of 22 characters, otherwise banks might truncate the string.
+             Allowed characters: **a-z**, **A-Z**, **0-9**, spaces, and special characters **. , ' _ - ? + * /**.
+          type: string
+          x-addedInVersion: "69"
+        socialSecurityNumber:
+          description: The shopper's social security number.
+          type: string
+          x-addedInVersion: "69"
+        splitCardFundingSources:
+          default: false
+          description: Boolean value indicating whether the card payment method should
+            be split into separate debit and credit options.
+          type: boolean
+          x-addedInVersion: "69"
         splits:
           description: An array of objects specifying how the payment should be split
             between accounts when using Adyen for Platforms. For details, refer to
@@ -9780,7 +10103,10 @@ components:
           type: string
           x-addedInVersion: "68"
         themeId:
-          description: Use to set a theme to shopper other than default
+          description: A [theme](https://docs.adyen.com/unified-commerce/pay-by-link/api#themes)
+            to customize the appearance of the payment page. If not specified, the
+            payment page is rendered according to the theme set as default in your
+            Customer Area.
           type: string
           x-addedInVersion: "67"
       required:
@@ -9789,6 +10115,27 @@ components:
       - reference
     CreatePaymentRefundRequest:
       example:
+        lineItems:
+        - quantity: 1
+          itemCategory: itemCategory
+          amountExcludingTax: 1
+          imageUrl: imageUrl
+          taxPercentage: 7
+          description: description
+          id: id
+          amountIncludingTax: 1
+          productUrl: productUrl
+          taxAmount: 6
+        - quantity: 1
+          itemCategory: itemCategory
+          amountExcludingTax: 1
+          imageUrl: imageUrl
+          taxPercentage: 7
+          description: description
+          id: id
+          amountIncludingTax: 1
+          productUrl: productUrl
+          taxAmount: 6
         reference: reference
         amount:
           currency: currency
@@ -9812,6 +10159,13 @@ components:
       properties:
         amount:
           $ref: '#/components/schemas/Amount'
+        lineItems:
+          description: |-
+            Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment).
+            > This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, Zip and Atome.
+          items:
+            $ref: '#/components/schemas/LineItem'
+          type: array
         merchantAccount:
           description: The merchant account that is used to process the payment.
           type: string
@@ -10010,6 +10364,9 @@ components:
           refusalReasonCode: refusalReasonCode
           threeDSPaymentData: threeDSPaymentData
           action: ""
+          paymentMethod:
+            type: type
+            brand: brand
           threeDS2ResponseData:
             acsTransID: acsTransID
             exemptionIndicator: exemptionIndicator
@@ -10056,16 +10413,13 @@ components:
           description: The Adyen account name of your charity. We will provide you
             with this account name once your chosen charity has been [onboarded](https://docs.adyen.com/online-payments/donations#onboarding).
           type: string
-          x-addedInVersion: "67"
         id:
           description: Your unique resource identifier.
           type: string
-          x-addedInVersion: "67"
         merchantAccount:
           description: The merchant account identifier, with which you want to process
             the transaction.
           type: string
-          x-addedInVersion: "67"
         payment:
           $ref: '#/components/schemas/PaymentResponse'
         reference:
@@ -10075,7 +10429,6 @@ components:
             you need to provide multiple references for a transaction, separate them
             with hyphens ("-"). Maximum length: 80 characters.'
           type: string
-          x-addedInVersion: "67"
         status:
           description: |-
             The status of the donation transaction.
@@ -10089,7 +10442,6 @@ components:
           - pending
           - refused
           type: string
-          x-addedInVersion: "67"
     DotpayDetails:
       additionalProperties: false
       properties:
@@ -10302,6 +10654,7 @@ components:
           enum:
           - eps
           - onlineBanking_SK
+          - onlineBanking_CZ
           type: string
       required:
       - issuer
@@ -10495,14 +10848,14 @@ components:
           type: string
     InstallmentOption:
       example:
-        preselectedValue: 6
-        maxValue: 0
+        preselectedValue: 1
+        maxValue: 6
         plans:
         - regular
         - regular
         values:
-        - 1
-        - 1
+        - 5
+        - 5
       properties:
         maxValue:
           description: The maximum number of installments offered for this payment
@@ -10622,23 +10975,6 @@ components:
       required:
       - type
       title: Klarna
-      type: object
-    LianLianPayDetails:
-      additionalProperties: false
-      properties:
-        telephoneNumber:
-          type: string
-        type:
-          description: '**lianlianpay**'
-          enum:
-          - lianlianpay_ebanking_enterprise
-          - lianlianpay_ebanking_credit
-          - lianlianpay_ebanking_debit
-          type: string
-      required:
-      - telephoneNumber
-      - type
-      title: Lianlian Pay
       type: object
     LineItem:
       example:
@@ -11005,6 +11341,7 @@ components:
           enum:
           - openinvoice
           - afterpay_directdebit
+          - atome_pos
           type: string
       title: Open Invoice
       type: object
@@ -11218,6 +11555,27 @@ components:
       - status
     PaymentCaptureResource:
       example:
+        lineItems:
+        - quantity: 1
+          itemCategory: itemCategory
+          amountExcludingTax: 1
+          imageUrl: imageUrl
+          taxPercentage: 7
+          description: description
+          id: id
+          amountIncludingTax: 1
+          productUrl: productUrl
+          taxAmount: 6
+        - quantity: 1
+          itemCategory: itemCategory
+          amountExcludingTax: 1
+          imageUrl: imageUrl
+          taxPercentage: 7
+          description: description
+          id: id
+          amountIncludingTax: 1
+          productUrl: productUrl
+          taxAmount: 6
         reference: reference
         amount:
           currency: currency
@@ -11244,6 +11602,13 @@ components:
       properties:
         amount:
           $ref: '#/components/schemas/Amount'
+        lineItems:
+          description: |-
+            Price and product information of the captured items, required for [partial captures](https://docs.adyen.com/online-payments/capture#partial-capture).
+            > This field is required for partial captures with 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, Zip and Atome.
+          items:
+            $ref: '#/components/schemas/LineItem'
+          type: array
         merchantAccount:
           description: The merchant account that is used to process the payment.
           type: string
@@ -11368,6 +11733,7 @@ components:
           - paybright
           - affirm
           - affirm_pos
+          - trustlyvector
           - oney
           - facilypay
           - facilypay_3x
@@ -11382,8 +11748,11 @@ components:
           - wechatpaySDK
           - wechatpayQR
           - wechatpayWeb
+          - wallet_IN
           - payu_IN_cashcard
           - payu_IN_nb
+          - upi_qr
+          - paytm
           - molpay_ebanking_VN
           - openbanking_UK
           - ebanking_FI
@@ -11392,6 +11761,8 @@ components:
           - swish
           - twint
           - pix
+          - walley
+          - walley_b2b
           - molpay_fpx
           - konbini
           - directEbanking
@@ -11416,7 +11787,6 @@ components:
           - onlinebanking_IN
           - fawry
           - atome
-          - atome_pos
           - moneybookers
           - naps
           - nordea
@@ -11434,7 +11804,9 @@ components:
           - molpay_bankislam
           - molpay_publicbank
           - fpx_agrobank
-          - wallet_IN
+          - touchngo
+          - maybank2u_mae
+          - duitnow
           - twint_pos
           - alipay_hk
           - alipay_hk_web
@@ -11476,7 +11848,9 @@ components:
         donationToken: donationToken
         refusalReasonCode: refusalReasonCode
         threeDSPaymentData: threeDSPaymentData
-        paymentMethod: paymentMethod
+        paymentMethod:
+          type: type
+          brand: brand
         threeDS2ResponseData:
           acsTransID: acsTransID
           exemptionIndicator: exemptionIndicator
@@ -11527,7 +11901,6 @@ components:
           - $ref: '#/components/schemas/ResponseAdditionalDataBillingAddress'
           - $ref: '#/components/schemas/ResponseAdditionalDataCard'
           - $ref: '#/components/schemas/ResponseAdditionalDataCommon'
-          - $ref: '#/components/schemas/ResponseAdditionalDataDeliveryAddress'
           - $ref: '#/components/schemas/ResponseAdditionalDataInstallments'
           - $ref: '#/components/schemas/ResponseAdditionalDataNetworkTokens'
           - $ref: '#/components/schemas/ResponseAdditionalDataOpi'
@@ -11547,8 +11920,7 @@ components:
         order:
           $ref: '#/components/schemas/CheckoutOrderResponse'
         paymentMethod:
-          description: The payment method used in the transaction.
-          type: string
+          $ref: '#/components/schemas/ResponsePaymentMethod'
         pspReference:
           description: Adyen's 16-character string reference associated with the transaction/request.
             This value is globally unique; quote it when communicating with us about
@@ -11884,6 +12256,12 @@ components:
           addCardAttemptsDay: 0
           workPhone: workPhone
           purchasesLast6Months: 5
+        authenticationData:
+          authenticationOnly: false
+          threeDSRequestData:
+            threeDSVersion: 2.1.0
+            nativeThreeDS: preferred
+          attemptAuthentication: always
         merchantOrderReference: merchantOrderReference
         amount:
           currency: currency
@@ -11952,6 +12330,8 @@ components:
           $ref: '#/components/schemas/Amount'
         applicationInfo:
           $ref: '#/components/schemas/ApplicationInfo'
+        authenticationData:
+          $ref: '#/components/schemas/AuthenticationData'
         billingAddress:
           $ref: '#/components/schemas/Address'
         browserInfo:
@@ -12027,7 +12407,7 @@ components:
           type: string
         donationOriginalPspReference:
           description: PSP reference of the transaction from which the donation token
-            is generated.
+            is generated. Required when `donationToken` is provided.
           type: string
         donationToken:
           description: Donation token received in the `/payments` call.
@@ -12140,7 +12520,6 @@ components:
           - $ref: '#/components/schemas/GooglePayDetails'
           - $ref: '#/components/schemas/IdealDetails'
           - $ref: '#/components/schemas/KlarnaDetails'
-          - $ref: '#/components/schemas/LianLianPayDetails'
           - $ref: '#/components/schemas/MasterpassDetails'
           - $ref: '#/components/schemas/MbwayDetails'
           - $ref: '#/components/schemas/MobilePayDetails'
@@ -12260,8 +12639,9 @@ components:
           type: string
         shopperStatement:
           description: |-
-            The text to be shown on the shopper's bank statement. To enable this field, contact our [Support Team](https://support.adyen.com/hc/en-us/requests/new).
+            The text to be shown on the shopper's bank statement.
              We recommend sending a maximum of 22 characters, otherwise banks might truncate the string.
+             Allowed characters: **a-z**, **A-Z**, **0-9**, spaces, and special characters **. , ' _ - ? + * /**.
           type: string
         socialSecurityNumber:
           description: The shopper's social security number.
@@ -12296,10 +12676,13 @@ components:
           $ref: '#/components/schemas/ThreeDS2RequestData'
         threeDSAuthenticationOnly:
           default: false
+          deprecated: true
           description: If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only),
             and not the payment authorisation.
           type: boolean
           x-addedInVersion: "50"
+          x-deprecatedInVersion: "69"
+          x-deprecatedMessage: Use `authenticationData.authenticationOnly` instead.
         trustedShopper:
           description: Set to true if the payment should be routed to a trusted MID.
           type: boolean
@@ -12311,7 +12694,7 @@ components:
       - paymentMethod
       - reference
       - returnUrl
-    PaymentLinkResource:
+    PaymentLinkResponse:
       example:
         metadata:
           key: metadata
@@ -12331,8 +12714,11 @@ components:
           type: BalanceAccount
           account: account
         telephoneNumber: telephoneNumber
+        socialSecurityNumber: socialSecurityNumber
+        splitCardFundingSources: false
         description: description
         themeId: themeId
+        mcc: mcc
         lineItems:
         - quantity: 1
           itemCategory: itemCategory
@@ -12376,6 +12762,7 @@ components:
         amount:
           currency: currency
           value: 0
+        dateOfBirth: 2000-01-23T04:56:07.000+00:00
         shopperEmail: shopperEmail
         store: store
         allowedPaymentMethods:
@@ -12392,7 +12779,20 @@ components:
         reusable: true
         storePaymentMethodMode: askForConsent
         merchantAccount: merchantAccount
+        installmentOptions:
+          key:
+            preselectedValue: 1
+            maxValue: 6
+            plans:
+            - regular
+            - regular
+            values:
+            - 5
+            - 5
         deliverAt: 2000-01-23T04:56:07.000+00:00
+        requiredShopperFields:
+        - billingAddress
+        - billingAddress
         billingAddress:
           country: country
           stateOrProvince: stateOrProvince
@@ -12401,6 +12801,7 @@ components:
           street: street
           postalCode: postalCode
         shopperLocale: shopperLocale
+        captureDelayHours: 0
         applicationInfo:
           adyenLibrary:
             name: name
@@ -12424,6 +12825,7 @@ components:
             integrator: integrator
             version: version
         shopperReference: shopperReference
+        shopperStatement: shopperStatement
         status: active
       properties:
         allowedPaymentMethods:
@@ -12448,12 +12850,28 @@ components:
           items:
             type: string
           type: array
+        captureDelayHours:
+          description: The delay between the authorisation and scheduled auto-capture,
+            specified in hours.
+          format: int32
+          type: integer
+          x-addedInVersion: "69"
         countryCode:
           description: The shopper's two-letter country code.
           type: string
+        dateOfBirth:
+          description: |-
+            The shopper's date of birth.
+
+            Format [ISO-8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DD
+          format: date-time
+          type: string
+          x-addedInVersion: "69"
         deliverAt:
-          description: The date and time the purchased goods should be delivered.
-            In ISO 8601 format. For example `2019-11-23T12:25:28Z`, or `2020-05-27T20:25:28+08:00`.
+          description: |-
+            The date and time when the purchased goods should be delivered.
+
+            [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format: YYYY-MM-DDThh:mm:ss+TZD, for example, **2020-12-18T10:15:30+01:00**.
           format: date-time
           type: string
         deliveryAddress:
@@ -12464,17 +12882,29 @@ components:
             Maximum length: 280 characters.
           type: string
         expiresAt:
-          description: The date that the payment link expires, in ISO 8601 format.
-            For example `2019-11-23T12:25:28Z`, or `2020-05-27T20:25:28+08:00`. Maximum
-            expiry date should be 70 days from when the payment link is created. If
-            not provided, the default expiry is set to 24 hours after the payment
-            link is created.
+          description: |-
+            The date when the payment link expires.
+
+            [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format: YYYY-MM-DDThh:mm:ss+TZD, for example, **2020-12-18T10:15:30+01:00**.
+
+            The maximum expiry date is 70 days after the payment link is created.
+
+            If not provided, the payment link expires 24 hours after it was created.
           type: string
         id:
           description: A unique identifier of the payment link.
           readOnly: true
           type: string
           x-addedInVersion: "51"
+        installmentOptions:
+          additionalProperties:
+            $ref: '#/components/schemas/InstallmentOption'
+          description: A set of key-value pairs that specifies the installment options
+            available per payment method. The key must be a payment method name in
+            lowercase. For example, **card** to specify installment options for all
+            cards, or **visa** or **mc**. The value must be an object containing the
+            installment options.
+          type: object
         lineItems:
           description: |-
             Price and product information about the purchased items, to be included on the invoice sent to the shopper.
@@ -12482,6 +12912,12 @@ components:
           items:
             $ref: '#/components/schemas/LineItem'
           type: array
+        mcc:
+          description: The [merchant category code](https://en.wikipedia.org/wiki/Merchant_category_code)
+            (MCC) is a four-digit number, which relates to a particular market segment.
+            This code reflects the predominant activity that is conducted by the merchant.
+          type: string
+          x-addedInVersion: "69"
         merchantAccount:
           description: The merchant account identifier for which the payment link
             is created.
@@ -12494,16 +12930,20 @@ components:
         metadata:
           additionalProperties:
             type: string
-          description: Metadata settings to apply to the payment.
+          description: |-
+            Metadata consists of entries, each of which includes a key and a value.
+            Limitations:
+            * Maximum 20 key-value pairs per request. Otherwise, error "177" occurs: "Metadata size exceeds limit"
+            * Maximum 20 characters per key. Otherwise, error "178" occurs: "Metadata key size exceeds limit"
+            * A key cannot have the name `checkout.linkId`. Any value that you provide with this key is going to be replaced by the real payment link ID.
           type: object
-          x-addedInVersion: "68"
         recurringProcessingModel:
           description: |
             Defines a recurring payment type.
-            Allowed values:
-            * `Subscription` – A transaction for a fixed or variable amount, which follows a fixed schedule.
-            * `CardOnFile` – With a card-on-file (CoF) transaction, card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction.
-            * `UnscheduledCardOnFile` – An unscheduled card-on-file (UCoF) transaction is a transaction that occurs on a non-fixed schedule and/or has variable amounts. For example, automatic top-ups when a cardholder's balance drops below a certain amount.
+            Possible values:
+            * **Subscription** – A transaction for a fixed or variable amount, which follows a fixed schedule.
+            * **CardOnFile** – With a card-on-file (CoF) transaction, card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction.
+            * **UnscheduledCardOnFile** – An unscheduled card-on-file (UCoF) transaction is a transaction that occurs on a non-fixed schedule and/or has variable amounts. For example, automatic top-ups when a cardholder's balance drops below a certain amount.
           enum:
           - CardOnFile
           - Subscription
@@ -12513,6 +12953,26 @@ components:
           description: A reference that is used to uniquely identify the payment in
             future communications about the payment status.
           type: string
+        requiredShopperFields:
+          description: |
+            List of fields that the shopper has to provide on the payment page before completing the payment. For more information, refer to [Provide shopper information](https://docs.adyen.com/unified-commerce/pay-by-link/payment-links/api#shopper-information).
+
+            Possible values:
+            * **billingAddress** – The address where to send the invoice.
+            * **deliveryAddress** – The address where the purchased goods should be delivered.
+            * **shopperEmail** – The shopper's email address.
+            * **shopperName** – The shopper's full name.
+            * **telephoneNumber** – The shopper's phone number.
+          items:
+            enum:
+            - billingAddress
+            - deliveryAddress
+            - shopperEmail
+            - shopperName
+            - telephoneNumber
+            type: string
+          type: array
+          x-addedInVersion: "67"
         returnUrl:
           description: |-
             Website URL used for redirection after payment is completed.
@@ -12537,9 +12997,27 @@ components:
         shopperName:
           $ref: '#/components/schemas/Name'
         shopperReference:
-          description: A unique identifier for the shopper (for example, user ID or
-            account ID).
+          description: |-
+            Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters.
+            > Your reference must not include personally identifiable information (PII), for example name or email address.
           type: string
+        shopperStatement:
+          description: |-
+            The text to be shown on the shopper's bank statement.
+             We recommend sending a maximum of 22 characters, otherwise banks might truncate the string.
+             Allowed characters: **a-z**, **A-Z**, **0-9**, spaces, and special characters **. , ' _ - ? + * /**.
+          type: string
+          x-addedInVersion: "69"
+        socialSecurityNumber:
+          description: The shopper's social security number.
+          type: string
+          x-addedInVersion: "69"
+        splitCardFundingSources:
+          default: false
+          description: Boolean value indicating whether the card payment method should
+            be split into separate debit and credit options.
+          type: boolean
+          x-addedInVersion: "69"
         splits:
           description: An array of objects specifying how the payment should be split
             between accounts when using Adyen for Platforms. For details, refer to
@@ -12550,17 +13028,38 @@ components:
         status:
           description: |-
             Status of the payment link. Possible values:
-            * **active**
-            * **expired**
-            * **paymentPending** (v68 and later)
-            * **completed** (v66 and later)
-            * **paid** (v65 and earlier)
+            * **active**: The link can be used to make payments.
+            * **expired**: The expiry date for the payment link has passed. Shoppers can no longer use the link to make payments.
+            * **completed**: The shopper completed the payment.
+            * **paymentPending**: The shopper is in the process of making the payment. Applies to payment methods with an asynchronous flow.
           enum:
           - active
           - completed
           - expired
+          - paid
           - paymentPending
           type: string
+          x-enum:
+          - description: The link can be used to make payments.
+            value: active
+          - description: |-
+              The shopper is in the process of making the payment. Applies to payment methods with an asynchronous flow.
+
+              Added in v68.
+            value: paymentPending
+          - description: |-
+              The shopper completed the payment.
+
+              Removed in v66 and replaced with **completed**.
+            value: paid
+          - description: The expiry date for the payment link has passed. Shoppers
+              can no longer use the link to make payments.
+            value: expired
+          - description: |-
+              The shopper completed the payment.
+
+              Added in v66 and replaces **paid**.
+            value: completed
         store:
           description: The physical store, for which this payment is processed.
           type: string
@@ -12582,7 +13081,7 @@ components:
           x-addedInVersion: "68"
         themeId:
           description: A [theme](https://docs.adyen.com/unified-commerce/pay-by-link/api#themes)
-            to customize the appearance of the payment page.If not specified, the
+            to customize the appearance of the payment page. If not specified, the
             payment page is rendered according to the theme set as default in your
             Customer Area.
           type: string
@@ -13255,6 +13754,27 @@ components:
           x-addedInVersion: "49"
     PaymentRefundResource:
       example:
+        lineItems:
+        - quantity: 1
+          itemCategory: itemCategory
+          amountExcludingTax: 1
+          imageUrl: imageUrl
+          taxPercentage: 7
+          description: description
+          id: id
+          amountIncludingTax: 1
+          productUrl: productUrl
+          taxAmount: 6
+        - quantity: 1
+          itemCategory: itemCategory
+          amountExcludingTax: 1
+          imageUrl: imageUrl
+          taxPercentage: 7
+          description: description
+          id: id
+          amountIncludingTax: 1
+          productUrl: productUrl
+          taxAmount: 6
         reference: reference
         amount:
           currency: currency
@@ -13281,6 +13801,13 @@ components:
       properties:
         amount:
           $ref: '#/components/schemas/Amount'
+        lineItems:
+          description: |-
+            Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment).
+            > This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, Zip and Atome.
+          items:
+            $ref: '#/components/schemas/LineItem'
+          type: array
         merchantAccount:
           description: The merchant account that is used to process the payment.
           type: string
@@ -13586,6 +14113,12 @@ components:
           addCardAttemptsDay: 0
           workPhone: workPhone
           purchasesLast6Months: 5
+        authenticationData:
+          authenticationOnly: false
+          threeDSRequestData:
+            threeDSVersion: 2.1.0
+            nativeThreeDS: preferred
+          attemptAuthentication: always
         merchantOrderReference: merchantOrderReference
         amount:
           currency: currency
@@ -13653,6 +14186,8 @@ components:
           $ref: '#/components/schemas/Amount'
         applicationInfo:
           $ref: '#/components/schemas/ApplicationInfo'
+        authenticationData:
+          $ref: '#/components/schemas/AuthenticationData'
         billingAddress:
           $ref: '#/components/schemas/Address'
         browserInfo:
@@ -13831,7 +14366,6 @@ components:
           - $ref: '#/components/schemas/GooglePayDetails'
           - $ref: '#/components/schemas/IdealDetails'
           - $ref: '#/components/schemas/KlarnaDetails'
-          - $ref: '#/components/schemas/LianLianPayDetails'
           - $ref: '#/components/schemas/MasterpassDetails'
           - $ref: '#/components/schemas/MbwayDetails'
           - $ref: '#/components/schemas/MobilePayDetails'
@@ -13951,8 +14485,9 @@ components:
           type: string
         shopperStatement:
           description: |-
-            The text to be shown on the shopper's bank statement. To enable this field, contact our [Support Team](https://support.adyen.com/hc/en-us/requests/new).
+            The text to be shown on the shopper's bank statement.
              We recommend sending a maximum of 22 characters, otherwise banks might truncate the string.
+             Allowed characters: **a-z**, **A-Z**, **0-9**, spaces, and special characters **. , ' _ - ? + * /**.
           type: string
         socialSecurityNumber:
           description: The shopper's social security number.
@@ -13987,10 +14522,13 @@ components:
           $ref: '#/components/schemas/ThreeDS2RequestData'
         threeDSAuthenticationOnly:
           default: false
+          deprecated: true
           description: If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only),
             and not the payment authorisation.
           type: boolean
           x-addedInVersion: "50"
+          x-deprecatedInVersion: "69"
+          x-deprecatedMessage: Use `authenticationData.authenticationOnly` instead.
         trustedShopper:
           description: Set to true if the payment should be routed to a trusted MID.
           type: boolean
@@ -14035,6 +14573,9 @@ components:
         refusalReasonCode: refusalReasonCode
         threeDSPaymentData: threeDSPaymentData
         action: ""
+        paymentMethod:
+          type: type
+          brand: brand
         threeDS2ResponseData:
           acsTransID: acsTransID
           exemptionIndicator: exemptionIndicator
@@ -14097,7 +14638,6 @@ components:
           - $ref: '#/components/schemas/ResponseAdditionalDataBillingAddress'
           - $ref: '#/components/schemas/ResponseAdditionalDataCard'
           - $ref: '#/components/schemas/ResponseAdditionalDataCommon'
-          - $ref: '#/components/schemas/ResponseAdditionalDataDeliveryAddress'
           - $ref: '#/components/schemas/ResponseAdditionalDataInstallments'
           - $ref: '#/components/schemas/ResponseAdditionalDataNetworkTokens'
           - $ref: '#/components/schemas/ResponseAdditionalDataOpi'
@@ -14119,6 +14659,8 @@ components:
           x-addedInVersion: "49"
         order:
           $ref: '#/components/schemas/CheckoutOrderResponse'
+        paymentMethod:
+          $ref: '#/components/schemas/ResponsePaymentMethod'
         pspReference:
           description: |-
             Adyen's 16-character string reference associated with the transaction/request. This value is globally unique; quote it when communicating with us about this request.
@@ -14663,8 +15205,9 @@ components:
           type: string
         shopperStatement:
           description: |-
-            The text to be shown on the shopper's bank statement. To enable this field, contact our [Support Team](https://support.adyen.com/hc/en-us/requests/new).
+            The text to be shown on the shopper's bank statement.
              We recommend sending a maximum of 22 characters, otherwise banks might truncate the string.
+             Allowed characters: **a-z**, **A-Z**, **0-9**, spaces, and special characters **. , ' _ - ? + * /**.
           type: string
         socialSecurityNumber:
           description: The shopper's social security number.
@@ -14697,10 +15240,13 @@ components:
           x-addedInVersion: "7"
         threeDSAuthenticationOnly:
           default: false
+          deprecated: true
           description: If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only),
             and not the payment authorisation.
           type: boolean
           x-addedInVersion: "50"
+          x-deprecatedInVersion: "69"
+          x-deprecatedMessage: Use `authenticationData.authenticationOnly` instead.
         token:
           description: |-
             The token obtained when initializing the SDK.
@@ -15068,8 +15614,8 @@ components:
           errorType: errorType
           errorCode: errorCode
           message: message
+          pspReference: pspReference
         resultCode: AuthenticationFinished
-        paymentMethod: paymentMethod
         refusalReason: refusalReason
         additionalData:
           key: additionalData
@@ -15109,7 +15655,6 @@ components:
           - $ref: '#/components/schemas/ResponseAdditionalDataBillingAddress'
           - $ref: '#/components/schemas/ResponseAdditionalDataCard'
           - $ref: '#/components/schemas/ResponseAdditionalDataCommon'
-          - $ref: '#/components/schemas/ResponseAdditionalDataDeliveryAddress'
           - $ref: '#/components/schemas/ResponseAdditionalDataInstallments'
           - $ref: '#/components/schemas/ResponseAdditionalDataNetworkTokens'
           - $ref: '#/components/schemas/ResponseAdditionalDataOpi'
@@ -15122,9 +15667,6 @@ components:
           type: string
         order:
           $ref: '#/components/schemas/CheckoutOrderResponse'
-        paymentMethod:
-          description: The payment method used in the transaction.
-          type: string
         pspReference:
           description: Adyen's 16-character reference associated with the transaction/request.
             This value is globally unique; quote it when communicating with us about
@@ -15180,7 +15722,6 @@ components:
           type: string
       required:
       - merchantReference
-      - paymentMethod
       - shopperLocale
     Phone:
       example:
@@ -15558,7 +16099,9 @@ components:
       properties:
         cardBin:
           description: |-
-            The Bank Identification Number of a credit card, which is the first six digits of a card number.
+            The first six digits of the card number.
+
+            This is the [Bank Identification Number (BIN)](https://docs.adyen.com/get-started-with-adyen/payment-glossary#bank-identification-number-bin) for card numbers with a six-digit BIN.
 
             Example: 521234
           type: string
@@ -15592,6 +16135,14 @@ components:
             The last four digits of a card number.
 
             > Returned only in case of a card payment.
+          type: string
+        issuerBin:
+          description: |-
+            The first eight digits of the card number. Only returned if the card number is 16 digits or more.
+
+            This is the [Bank Identification Number (BIN)](https://docs.adyen.com/get-started-with-adyen/payment-glossary#bank-identification-number-bin) for card numbers with an eight-digit BIN.
+
+            Example: 52123423
           type: string
     ResponseAdditionalDataCommon:
       properties:
@@ -15972,36 +16523,6 @@ components:
 
             Example: ODgxNDc2MDg2MDExODk5MAAAAAA=
           type: string
-    ResponseAdditionalDataDeliveryAddress:
-      properties:
-        deliveryAddress.city:
-          description: The delivery address city passed in the payment request.
-          type: string
-        deliveryAddress.country:
-          description: |-
-            The delivery address country passed in the payment request.
-
-            Example: NL
-          type: string
-        deliveryAddress.houseNumberOrName:
-          description: The delivery address house number or name passed in the payment
-            request.
-          type: string
-        deliveryAddress.postalCode:
-          description: |-
-            The delivery address postal code passed in the payment request.
-
-            Example: 1011 DJ
-          type: string
-        deliveryAddress.stateOrProvince:
-          description: |-
-            The delivery address state or province passed in the payment request.
-
-            Example: NH
-          type: string
-        deliveryAddress.street:
-          description: The delivery address street passed in the payment request.
-          type: string
     ResponseAdditionalDataInstallments:
       properties:
         installmentPaymentData.installmentType:
@@ -16093,6 +16614,18 @@ components:
 
             Example: OOFF
           type: string
+    ResponsePaymentMethod:
+      example:
+        type: type
+        brand: brand
+      properties:
+        brand:
+          description: The card brand. Only returned for card payments.
+          type: string
+        type:
+          description: The payment method type.
+          type: string
+      title: paymentResponse
     RiskData:
       example:
         fraudOffset: 4
@@ -16241,12 +16774,15 @@ components:
         errorType: errorType
         errorCode: errorCode
         message: message
+        pspReference: pspReference
       properties:
         errorCode:
           type: string
         errorType:
           type: string
         message:
+          type: string
+        pspReference:
           type: string
     ShopperInput:
       example:
@@ -16338,13 +16874,14 @@ components:
         type:
           description: |-
             The type of split.
-            Possible values: **Default**, **PaymentFee**, **VAT**, **Commission**, **MarketPlace**, **BalanceAccount**.
+            Possible values: **Default**, **PaymentFee**, **VAT**, **Commission**, **MarketPlace**, **BalanceAccount**, **Remainder**.
           enum:
           - BalanceAccount
           - Commission
           - Default
           - MarketPlace
           - PaymentFee
+          - Remainder
           - VAT
           - Verification
           type: string
@@ -16457,7 +16994,8 @@ components:
           description: The month the card expires.
           type: string
         expiryYear:
-          description: The year the card expires.
+          description: The last two digits of the year the card expires. For example,
+            **22** for the year 2022.
           type: string
         holderName:
           description: The unique payment method code.
@@ -16825,7 +17363,7 @@ components:
           $ref: '#/components/schemas/ThreeDSRequestorAuthenticationInfo'
         threeDSRequestorChallengeInd:
           description: |-
-            Indicates whether a challenge is requested for this transaction.Possible values:
+            Indicates whether a challenge is requested for this transaction. Possible values:
             * **01** — No preference
             * **02** — No challenge requested
             * **03** — Challenge requested (3DS Requestor preference)
@@ -17066,6 +17604,42 @@ components:
           description: The `whiteListStatus` value as defined in the 3D Secure 2 specification.
           type: string
           x-addedInVersion: "49"
+    ThreeDSRequestData:
+      example:
+        threeDSVersion: 2.1.0
+        nativeThreeDS: preferred
+      properties:
+        nativeThreeDS:
+          description: |-
+            Indicates if [native 3D Secure authentication](https://docs.adyen.com/online-payments/3d-secure/native-3ds2) should be used when available.
+
+            Possible values:
+            * **preferred**: Use native 3D Secure authentication when available.
+          enum:
+          - preferred
+          type: string
+          x-addedInVersion: "69"
+          x-enum:
+          - description: Use native 3D Secure authentication when available.
+            value: preferred
+        threeDSVersion:
+          description: |-
+            The version of 3D Secure to use.
+
+            Possible values:
+
+            * **2.1.0**
+            * **2.2.0**
+          enum:
+          - 2.1.0
+          - 2.2.0
+          type: string
+          x-addedInVersion: "69"
+          x-enum:
+          - description: Version 2.1.0
+            value: 2.1.0
+          - description: Version 2.2.0
+            value: 2.2.0
     ThreeDSRequestorAuthenticationInfo:
       example:
         threeDSReqAuthMethod: "01"
@@ -17249,6 +17823,27 @@ components:
           enum:
           - expired
           type: string
+          x-enum:
+          - description: The link can be used to make payments.
+            value: active
+          - description: |-
+              The shopper is in the process of making the payment. Applies to payment methods with an asynchronous flow.
+
+              Added in v68.
+            value: paymentPending
+          - description: |-
+              The shopper completed the payment.
+
+              Removed in v66 and replaced with **completed**.
+            value: paid
+          - description: The expiry date for the payment link has passed. Shoppers
+              can no longer use the link to make payments.
+            value: expired
+          - description: |-
+              The shopper completed the payment.
+
+              Added in v66 and replaces **paid**.
+            value: completed
       required:
       - status
     UpiCollectDetails:
