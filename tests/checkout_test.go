@@ -476,4 +476,41 @@ func Test_Checkout(t *testing.T) {
 			require.NotNil(t, res)
 		})
 	})
+
+	t.Run("Card Details", func(t *testing.T) {
+		t.Run("Create an API request that should pass", func(t *testing.T) {
+
+			req := &checkout.CardDetailsRequest{
+				CardNumber:     "37000000",				
+				CountryCode:     "NL",
+				MerchantAccount: MerchantAccount,
+			}
+
+			res, httpRes, err :=
+				client.Checkout.CardDetails(req)
+
+			require.Nil(t, err)
+			require.NotNil(t, httpRes)
+			assert.Equal(t, 200, httpRes.StatusCode)
+			require.NotNil(t, res)
+			assert.Equal(t, "amex", (*res.Brands)[0].Type)
+
+		})
+		t.Run("Create an API request that should fail", func(t *testing.T) {
+			req := &checkout.CardDetailsRequest{
+				CardNumber:     "3700",				
+				CountryCode:     "NL",
+				MerchantAccount: MerchantAccount,
+			}
+
+			res, httpRes, err :=
+				client.Checkout.CardDetails(req)
+
+			require.NotNil(t, err)
+			require.NotNil(t, httpRes)
+			assert.Equal(t, 422, httpRes.StatusCode)
+			require.NotNil(t, res)
+		})
+	})
+
 }
