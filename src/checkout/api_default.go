@@ -15,3 +15,17 @@ package checkout
 // Shared Checkout service
 type Checkout common.Service
 
+/*
+Returns Adyen library info
+*/
+func getAdyenLibInfo() *CommonField {
+
+	adyenLib := &CommonField{
+		Name:    common.LibName,
+		Version: common.LibVersion,
+	}
+
+	return adyenLib
+}
+
+
