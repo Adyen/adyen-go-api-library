@@ -32,7 +32,7 @@ func Test_api(t *testing.T) {
 		require.NotNil(t, client.client.Cfg)
 		require.NotNil(t, client.client.Cfg.HTTPClient)
 		require.NotNil(t, client.Checkout)
-		assert.Equal(t, "https://checkout-test.adyen.com/checkout/v68", client.Checkout.BasePath())
+		assert.Equal(t, "https://checkout-test.adyen.com/checkout/"+ CheckoutAPIVersion, client.Checkout.BasePath())
 
 		t.Run("Create a API request that should fail", func(t *testing.T) {
 			res, httpRes, err := client.Checkout.PaymentMethods(&checkout.PaymentMethodsRequest{})

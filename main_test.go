@@ -29,7 +29,7 @@ func Test_main(t *testing.T) {
 		require.NotNil(t, client.Checkout.Client)
 		require.NotNil(t, client.Checkout.Client.Cfg)
 		require.Equal(t, common.TestEnv, client.Checkout.Client.Cfg.Environment)
-		assert.Equal(t, "https://checkout-test.adyen.com/checkout/v68", client.Checkout.BasePath())
+		assert.Equal(t, "https://checkout-test.adyen.com/checkout/" + adyen.CheckoutAPIVersion, client.Checkout.BasePath())
 
 		t.Run("Create a API request that should fail", func(t *testing.T) {
 			res, httpRes, err := client.Checkout.PaymentMethods(&checkout.PaymentMethodsRequest{})
