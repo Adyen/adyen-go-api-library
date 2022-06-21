@@ -8,6 +8,7 @@ package tests
 
 import (
 	"context"
+	"encoding/json"
 	_nethttp "net/http"
 	"os"
 	"strings"
@@ -340,13 +341,21 @@ func Test_Checkout(t *testing.T) {
 	t.Run("PaymentsResult", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 			res, httpRes, err := client.Checkout.PaymentsResult(&checkout.PaymentVerificationRequest{Payload: "dummyPayload"})
-
+			
 			require.NotNil(t, err)
 			assert.Equal(t, true, strings.Contains(err.Error(), "Invalid payload provided"))
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 422, httpRes.StatusCode)
 			assert.Equal(t, "Invalid payload provided", err.(common.APIError).Message)
 			require.NotNil(t, res)
+
+			// verify ServiceError2 includes PspReference
+			require.NotNil(t, err.(common.APIError).RawBody)
+
+			var serviceError checkout.ServiceError2
+			json.Unmarshal(err.(common.APIError).RawBody, &serviceError)
+			require.NotNil(t, serviceError)
+			require.NotNil(t, serviceError.PspReference)
 		})
 	})
 
