@@ -440,7 +440,7 @@ components:
           description: In case of Secure+, this field must be set to **CUPSecurePlus**.
           type: string
         scaExemption:
-          description: "Indicates the [exemption type](https://docs-admin.is.adyen.com/payments-fundamentals/psd2-sca-compliance-and-implementation-guide#specifypreferenceinyourapirequest)\
+          description: "Indicates the [exemption type](https://docs.adyen.com/online-payments/psd2-sca-compliance-and-implementation-guide/sca-options#specifypreferenceinyourapirequest)\
             \ that you want to request for the transaction. Possible values:\n* **lowValue**\
             \ \n* **secureCorporate** \n* **trustedBeneficiary** \n* **transactionRiskAnalysis** "
           type: string

@@ -18,6 +18,6 @@ type AdditionalData3DSecure struct {
 	ExecuteThreeD string `json:"executeThreeD,omitempty"`
 	// In case of Secure+, this field must be set to **CUPSecurePlus**.
 	MpiImplementationType string `json:"mpiImplementationType,omitempty"`
-	// Indicates the [exemption type](https://docs-admin.is.adyen.com/payments-fundamentals/psd2-sca-compliance-and-implementation-guide#specifypreferenceinyourapirequest) that you want to request for the transaction. Possible values: * **lowValue**  * **secureCorporate**  * **trustedBeneficiary**  * **transactionRiskAnalysis**
+	// Indicates the [exemption type](https://docs.adyen.com/online-payments/psd2-sca-compliance-and-implementation-guide/sca-options#specifypreferenceinyourapirequest) that you want to request for the transaction. Possible values: * **lowValue**  * **secureCorporate**  * **trustedBeneficiary**  * **transactionRiskAnalysis**
 	ScaExemption string `json:"scaExemption,omitempty"`
 }
