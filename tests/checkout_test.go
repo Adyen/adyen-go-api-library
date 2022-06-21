@@ -431,6 +431,22 @@ func Test_Checkout(t *testing.T) {
 			require.NotNil(t, res)
 			assert.Equal(t, "Received", res.ResultCode)
 		})
+		t.Run("Create an API request that should fail", func(t *testing.T) {
+			res, httpRes, err := client.Checkout.Orders(&checkout.CheckoutCreateOrderRequest{
+				Amount: checkout.Amount{
+					Currency: "EUR",
+					Value:    1000,
+				},
+				MerchantAccount: MerchantAccount,
+				//Reference:       "CREATE_ORDER_REF", // create order without Reference
+			})
+
+			require.NotNil(t, err)
+			assert.Equal(t, "validation", err.(common.APIError).Type)
+			require.NotNil(t, httpRes)
+			assert.Equal(t, 422, httpRes.StatusCode)
+			require.NotNil(t, res)
+		})
 	})
 
 	t.Run("Sessions", func(t *testing.T) {
