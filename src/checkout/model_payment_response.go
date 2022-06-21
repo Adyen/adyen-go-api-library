@@ -28,6 +28,7 @@ type PaymentResponse struct {
 	// The reference to uniquely identify a payment. This reference is used in all communication with you about the payment status. We recommend using a unique value per payment; however, it is not a requirement. If you need to provide multiple references for a transaction, separate them with hyphens (\"-\"). Maximum length: 80 characters.
 	MerchantReference string `json:"merchantReference,omitempty"`
 	Order *CheckoutOrderResponse `json:"order,omitempty"`
+	PaymentMethod *ResponsePaymentMethod `json:"paymentMethod,omitempty"`
 	// Adyen's 16-character string reference associated with the transaction/request. This value is globally unique; quote it when communicating with us about this request.  > For payment methods that require a redirect or additional action, you will get this value in the `/payments/details` response.
 	PspReference string `json:"pspReference,omitempty"`
 	// If the payment's authorisation is refused or an error occurs during authorisation, this field holds Adyen's mapped reason for the refusal or a description of the error. When a transaction fails, the authorisation response includes `resultCode` and `refusalReason` values.  For more information, see [Refusal reasons](https://docs.adyen.com/development-resources/refusal-reasons).
