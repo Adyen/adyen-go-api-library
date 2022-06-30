@@ -9,9 +9,23 @@
 package checkout
 
  import (
- 	"github.com/adyen/adyen-go-api-library/v5/src/common"
+ 	"github.com/adyen/adyen-go-api-library/v6/src/common"
  )
 
 // Shared Checkout service
 type Checkout common.Service
+
+/*
+Returns Adyen library info
+*/
+func getAdyenLibInfo() *CommonField {
+
+	adyenLib := &CommonField{
+		Name:    common.LibName,
+		Version: common.LibVersion,
+	}
+
+	return adyenLib
+}
+
 

@@ -7,12 +7,8 @@ package {{packageName}}
 import (
 	_context "context"
     _nethttp "net/http"
-
-	"github.com/adyen/adyen-go-api-library/v5/src/common"
 )
 
-// {{packageName}} {{packageName}} service
-type {{packageName}} common.Service
 {{#operation}}
 
 /*
@@ -20,27 +16,49 @@ type {{packageName}} common.Service
 {{#notes}}
 {{notes}}
 {{/notes}}
-{{#allParams}}
+{{#pathParams}}
 {{#required}}
  * @param {{paramName}}{{#description}} {{{.}}}{{/description}}
 {{/required}}
-{{/allParams}}
+{{/pathParams}}
+{{#bodyParams}}
+{{#required}}
+ * @param req{{#description}} {{{.}}}{{/description}}
+{{/required}}
+{{/bodyParams}}
 {{#hasOptionalParams}}
-{{#allParams}}
+{{#pathParams}}
 {{^required}}
  * @param request {{vendorExtensions.x-export-param-name}} - reference of {{dataType}}). {{#description}} {{{.}}}{{/description}}
 {{/required}}
-{{/allParams}}
+{{/pathParams}}
+{{#bodyParams}}
+{{^required}}
+ * @param req {{vendorExtensions.x-export-param-name}} - reference of {{dataType}}). {{#description}} {{{.}}}{{/description}}
+{{/required}}
+{{/bodyParams}}
 {{/hasOptionalParams}}
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 {{#returnType}}
 @return {{{returnType}}}
 {{/returnType}}
 */
-func (a {{{packageName}}}) {{{nickname}}}({{#allParams}}req *{{{dataType}}}{{/allParams}}, ctxs ..._context.Context) ({{#returnType}}{{{returnType}}}, {{/returnType}}*_nethttp.Response, error) {
+{{#bodyParams}}
+{{! implementation when body param is provided (POST, PATCH, etc..)}}
+func (a {{{packageName}}}) {{{operationId}}}({{#pathParams}}{{paramName}} *{{{dataType}}}{{^last}}, {{/last}}{{/pathParams}}{{#bodyParams}}req *{{{dataType}}}{{^last}}, {{/last}}{{/bodyParams}}ctxs ..._context.Context) ({{#returnType}}{{{returnType}}}, {{/returnType}}*_nethttp.Response, error) {
     res := &{{{returnType}}}{}
-    httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath() + "{{{path}}}", ctxs...)
+    httpRes, err := a.Client.MakeHTTP{{httpMethod}}Request(req, res, a.BasePath() + "{{{path}}}", ctxs...)
     return *res, httpRes, err
 }
+{{/bodyParams}}
+{{^bodyParams}}
+{{! implementation when body param is NOT provided (GET method) }}
+func (a {{{packageName}}}) {{{operationId}}}({{#pathParams}}{{paramName}} *{{{dataType}}}{{^last}}, {{/last}}{{/pathParams}}ctxs ..._context.Context) ({{#returnType}}{{{returnType}}}, {{/returnType}}*_nethttp.Response, error) {
+    res := &{{{returnType}}}{}
+    httpRes, err := a.Client.MakeHTTP{{httpMethod}}Request(res, a.BasePath() + "{{{path}}}", ctxs...)
+    return *res, httpRes, err
+}
+{{/bodyParams}}
+
 {{/operation}}
 {{/operations}}
