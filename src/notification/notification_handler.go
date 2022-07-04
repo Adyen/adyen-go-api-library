@@ -33,7 +33,7 @@ const (
 	EventCodePrearbitrationLost       = "PREARBITRATION_LOST"
 	EventCodePrearbitrationWon        = "PREARBITRATION_WON"
 	EventCodeRequestForInformation    = "REQUEST_FOR_INFORMATION"
-	EvenctCodeSecondChargeback        = "SECOND_CHARGEBACK"
+	EventCodeSecondChargeback         = "SECOND_CHARGEBACK"
 	EventCodePayoutExpire             = "PAYOUT_EXPIRE"
 	EventCodePayoutDecline            = "PAYOUT_DECLINE"
 	EventCodePayoutThirdparty         = "PAYOUT_THIRDPARTY"
