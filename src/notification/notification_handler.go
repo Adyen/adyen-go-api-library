@@ -3,7 +3,7 @@ package notification
 import (
 	"encoding/json"
 
-	"github.com/adyen/adyen-go-api-library/v5/src/common"
+	"github.com/adyen/adyen-go-api-library/v6/src/common"
 )
 
 // NotificationService used to namespace this util under the client for consistency and for future prooffing if this ever requires api access
@@ -33,7 +33,7 @@ const (
 	EventCodePrearbitrationLost       = "PREARBITRATION_LOST"
 	EventCodePrearbitrationWon        = "PREARBITRATION_WON"
 	EventCodeRequestForInformation    = "REQUEST_FOR_INFORMATION"
-	EvenctCodeSecondChargeback        = "SECOND_CHARGEBACK"
+	EventCodeSecondChargeback         = "SECOND_CHARGEBACK"
 	EventCodePayoutExpire             = "PAYOUT_EXPIRE"
 	EventCodePayoutDecline            = "PAYOUT_DECLINE"
 	EventCodePayoutThirdparty         = "PAYOUT_THIRDPARTY"

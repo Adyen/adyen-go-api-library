@@ -10,18 +10,18 @@ import (
 	"fmt"
 	"net/http"
 
-	binlookup "github.com/adyen/adyen-go-api-library/v5/src/binlookup"
-	checkout "github.com/adyen/adyen-go-api-library/v5/src/checkout"
-	common "github.com/adyen/adyen-go-api-library/v5/src/common"
-	disputes "github.com/adyen/adyen-go-api-library/v5/src/disputes"
-	notification "github.com/adyen/adyen-go-api-library/v5/src/notification"
-	payments "github.com/adyen/adyen-go-api-library/v5/src/payments"
-	payouts "github.com/adyen/adyen-go-api-library/v5/src/payouts"
-	platformsaccount "github.com/adyen/adyen-go-api-library/v5/src/platformsaccount"
-	platformsfund "github.com/adyen/adyen-go-api-library/v5/src/platformsfund"
-	platformshostedonboardingpage "github.com/adyen/adyen-go-api-library/v5/src/platformshostedonboardingpage"
-	platformsnotificationconfiguration "github.com/adyen/adyen-go-api-library/v5/src/platformsnotificationconfiguration"
-	recurring "github.com/adyen/adyen-go-api-library/v5/src/recurring"
+	binlookup "github.com/adyen/adyen-go-api-library/v6/src/binlookup"
+	checkout "github.com/adyen/adyen-go-api-library/v6/src/checkout"
+	common "github.com/adyen/adyen-go-api-library/v6/src/common"
+	disputes "github.com/adyen/adyen-go-api-library/v6/src/disputes"
+	notification "github.com/adyen/adyen-go-api-library/v6/src/notification"
+	payments "github.com/adyen/adyen-go-api-library/v6/src/payments"
+	payouts "github.com/adyen/adyen-go-api-library/v6/src/payouts"
+	platformsaccount "github.com/adyen/adyen-go-api-library/v6/src/platformsaccount"
+	platformsfund "github.com/adyen/adyen-go-api-library/v6/src/platformsfund"
+	platformshostedonboardingpage "github.com/adyen/adyen-go-api-library/v6/src/platformshostedonboardingpage"
+	platformsnotificationconfiguration "github.com/adyen/adyen-go-api-library/v6/src/platformsnotificationconfiguration"
+	recurring "github.com/adyen/adyen-go-api-library/v6/src/recurring"
 )
 
 // Constants used for the client API
@@ -48,7 +48,7 @@ const (
 	MarketpayHopAPIVersion          = "v6"
 	PaymentAPIVersion               = "v64"
 	RecurringAPIVersion             = "v49"
-	CheckoutAPIVersion              = "v67"
+	CheckoutAPIVersion              = "v68"
 	BinLookupAPIVersion             = "v50"
 	EndpointProtocol                = "https://"
 	DisputesAPIVersion              = "v30"
@@ -133,6 +133,7 @@ type APIClient struct {
 //
 // optionally a custom http.Client can be passed via the Config allow for advanced features such as caching.
 func NewClient(cfg *common.Config) *APIClient {
+
 	if cfg.HTTPClient == nil {
 		cfg.HTTPClient = http.DefaultClient
 	}

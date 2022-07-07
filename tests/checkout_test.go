@@ -8,6 +8,7 @@ package tests
 
 import (
 	"context"
+	"encoding/json"
 	_nethttp "net/http"
 	"os"
 	"strings"
@@ -15,9 +16,9 @@ import (
 
 	"github.com/google/uuid"
 
-	"github.com/adyen/adyen-go-api-library/v5/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v5/src/checkout"
-	"github.com/adyen/adyen-go-api-library/v5/src/common"
+	"github.com/adyen/adyen-go-api-library/v6/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v6/src/checkout"
+	"github.com/adyen/adyen-go-api-library/v6/src/common"
 
 	"github.com/joho/godotenv"
 
@@ -40,7 +41,7 @@ func Test_Checkout(t *testing.T) {
 	// client.GetConfig().Debug = true
 
 	t.Run("PaymentLinks", func(t *testing.T) {
-		createPaymentLink := func() (checkout.PaymentLinkResource, *_nethttp.Response, error) {
+		createPaymentLink := func() (checkout.PaymentLinkResponse, *_nethttp.Response, error) {
 			return client.Checkout.PaymentLinks(&checkout.CreatePaymentLinkRequest{
 				Reference: "123456781235",
 				Amount: checkout.Amount{
@@ -340,13 +341,21 @@ func Test_Checkout(t *testing.T) {
 	t.Run("PaymentsResult", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 			res, httpRes, err := client.Checkout.PaymentsResult(&checkout.PaymentVerificationRequest{Payload: "dummyPayload"})
-
+			
 			require.NotNil(t, err)
 			assert.Equal(t, true, strings.Contains(err.Error(), "Invalid payload provided"))
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 422, httpRes.StatusCode)
 			assert.Equal(t, "Invalid payload provided", err.(common.APIError).Message)
 			require.NotNil(t, res)
+
+			// verify ServiceError2 includes PspReference
+			require.NotNil(t, err.(common.APIError).RawBody)
+
+			var serviceError checkout.ServiceError2
+			json.Unmarshal(err.(common.APIError).RawBody, &serviceError)
+			require.NotNil(t, serviceError)
+			require.NotNil(t, serviceError.PspReference)
 		})
 	})
 
@@ -431,5 +440,102 @@ func Test_Checkout(t *testing.T) {
 			require.NotNil(t, res)
 			assert.Equal(t, "Received", res.ResultCode)
 		})
+		t.Run("Create an API request that should fail", func(t *testing.T) {
+			res, httpRes, err := client.Checkout.Orders(&checkout.CheckoutCreateOrderRequest{
+				Amount: checkout.Amount{
+					Currency: "EUR",
+					Value:    1000,
+				},
+				MerchantAccount: MerchantAccount,
+				//Reference:       "CREATE_ORDER_REF", // create order without Reference
+			})
+
+			require.NotNil(t, err)
+			assert.Equal(t, "validation", err.(common.APIError).Type)
+			require.NotNil(t, httpRes)
+			assert.Equal(t, 422, httpRes.StatusCode)
+			require.NotNil(t, res)
+		})
 	})
+
+	t.Run("Sessions", func(t *testing.T) {
+		t.Run("Create an API request that should pass", func(t *testing.T) {
+
+			req := &checkout.CreateCheckoutSessionRequest{
+				Reference: "123456781235",
+				Amount: checkout.Amount{
+					Value:    1250,
+					Currency: "EUR",
+				},
+				CountryCode:     "NL",
+				MerchantAccount: MerchantAccount,
+				Channel:         "Web",
+				ReturnUrl:       "http://localhost:3000/redirect",
+			}
+
+			require.Nil(t, req.ApplicationInfo)
+
+			res, httpRes, err :=
+				client.Checkout.Sessions(req)
+
+			require.Nil(t, err)
+			require.NotNil(t, httpRes)
+			assert.Equal(t, 201, httpRes.StatusCode)
+			require.NotNil(t, res)
+
+			// check if req has ApplicationInfo added to it
+			require.NotNil(t, req.ApplicationInfo)
+			require.NotNil(t, req.ApplicationInfo.AdyenLibrary)
+			require.Equal(t, common.LibName, req.ApplicationInfo.AdyenLibrary.Name)
+			require.Equal(t, common.LibVersion, req.ApplicationInfo.AdyenLibrary.Version)
+
+		})
+		t.Run("Create an API request that should fail", func(t *testing.T) {
+			res, httpRes, err :=
+				client.Checkout.Sessions(&checkout.CreateCheckoutSessionRequest{})
+
+			require.NotNil(t, err)
+			assert.Equal(t, true, strings.Contains(err.Error(), "Invalid Merchant Account (validation: 901)"))
+			require.NotNil(t, httpRes)
+			assert.Equal(t, 422, httpRes.StatusCode)
+			require.NotNil(t, res)
+		})
+	})
+
+	t.Run("Card Details", func(t *testing.T) {
+		t.Run("Create an API request that should pass", func(t *testing.T) {
+
+			req := &checkout.CardDetailsRequest{
+				CardNumber:     "37000000",				
+				CountryCode:     "NL",
+				MerchantAccount: MerchantAccount,
+			}
+
+			res, httpRes, err :=
+				client.Checkout.CardDetails(req)
+
+			require.Nil(t, err)
+			require.NotNil(t, httpRes)
+			assert.Equal(t, 200, httpRes.StatusCode)
+			require.NotNil(t, res)
+			assert.Equal(t, "amex", (*res.Brands)[0].Type)
+
+		})
+		t.Run("Create an API request that should fail", func(t *testing.T) {
+			req := &checkout.CardDetailsRequest{
+				CardNumber:     "3700",				
+				CountryCode:     "NL",
+				MerchantAccount: MerchantAccount,
+			}
+
+			res, httpRes, err :=
+				client.Checkout.CardDetails(req)
+
+			require.NotNil(t, err)
+			require.NotNil(t, httpRes)
+			assert.Equal(t, 422, httpRes.StatusCode)
+			require.NotNil(t, res)
+		})
+	})
+
 }
