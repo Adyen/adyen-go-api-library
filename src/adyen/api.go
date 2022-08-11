@@ -48,7 +48,7 @@ const (
 	MarketpayHopAPIVersion          = "v6"
 	PaymentAPIVersion               = "v64"
 	RecurringAPIVersion             = "v49"
-	CheckoutAPIVersion              = "v68"
+	CheckoutAPIVersion              = "v69"
 	BinLookupAPIVersion             = "v50"
 	EndpointProtocol                = "https://"
 	DisputesAPIVersion              = "v30"
