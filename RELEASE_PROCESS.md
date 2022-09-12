@@ -2,7 +2,9 @@
 
 Releases are done on GitHub on the `main` branch. All development is done on the `develop` branch only.
 
-**Step 1**: Update the exact library version to be released in `LibVersion` constant on `src/common/configuration.go`
+**Step 0**: Update the exact API version to be supported (ie `CheckoutAPIVersion = v69`) in `src/adyen/api.go`
+
+**Step 1**: Update the exact library version to be released in `LibVersion` constant in `src/common/configuration.go`
 
 **Step 2**: If an open-api spec update was done, make sure the to follow [GENERATING_MODELS.md](/GENERATING_MODELS.md) and make sure appropriate versions and URLs are updated on `src/adyen/api.go`
 
