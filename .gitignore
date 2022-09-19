@@ -19,3 +19,5 @@ vendor/
 .env
 error.txt
 /schema
+
+.tool-versions
