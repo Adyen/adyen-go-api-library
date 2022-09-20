@@ -204,7 +204,7 @@ You can make this request with any of the Management API roles.
 func (a *MyAPICredentialApiService) GetMe(ctx context.Context) ApiGetMeRequest {
 
 	// add APIKey to Context
-	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
 		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
 	})
@@ -218,7 +218,7 @@ func (a *MyAPICredentialApiService) GetMe(ctx context.Context) ApiGetMeRequest {
 // Execute executes the request
 //  @return MeApiCredential
 func (a *MyAPICredentialApiService) GetMeExecute(r ApiGetMeRequest) (*MeApiCredential, *http.Response, error) {
-	
+
 	log.Println("GetMeExecute")
 
 	var (
@@ -377,11 +377,11 @@ You can make this request with any of the Management API roles.
 */
 func (a *MyAPICredentialApiService) GetMeAllowedOrigins(ctx context.Context) ApiGetMeAllowedOriginsRequest {
 		// add APIKey to Context
-		ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+		ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 		map[string]APIKey {
 			"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
 		})
-	
+
 		return ApiGetMeAllowedOriginsRequest{
 		ApiService: a,
 		ctx: ctxWithApiKey,
@@ -722,9 +722,15 @@ You can make this request with any of the Management API roles.
  @return ApiPostMeAllowedOriginsRequest
 */
 func (a *MyAPICredentialApiService) PostMeAllowedOrigins(ctx context.Context) ApiPostMeAllowedOriginsRequest {
-	return ApiPostMeAllowedOriginsRequest{
+    // add APIKey to Context
+    ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
+        map[string]APIKey {
+            "ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+        })
+
+    return ApiPostMeAllowedOriginsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 	}
 }
 
