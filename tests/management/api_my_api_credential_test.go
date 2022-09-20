@@ -9,20 +9,20 @@ package management
 import (
 	"context"
 	"fmt"
-	"os"
-	"testing"
 	Management "github.com/adyen/adyen-go-api-library/v6/src/management"
 	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"os"
+	"testing"
 )
 
 func Test_ManagementAPI_MyAPICredentialApiService(t *testing.T) {
 	godotenv.Load("./../../.env")
 
 	var (
-		APIKey          = os.Getenv("ADYEN_API_KEY")
-		env 			= Management.TestEnv
+		APIKey = os.Getenv("ADYEN_API_KEY")
+		env    = Management.TestEnv
 	)
 
 	configuration, err := Management.NewManagementAPIConfiguration(APIKey, env)
@@ -58,9 +58,9 @@ func Test_ManagementAPI_MyAPICredentialApiService(t *testing.T) {
 
 			assert.Equal(t, 401, httpRes.StatusCode)
 			require.NotNil(t, err)
-		})		
+		})
 	})
-	
+
 	t.Run("Test MyAPICredentialApiService GetMeAllowedOrigins", func(t *testing.T) {
 
 		t.Run("Create an API request that should pass", func(t *testing.T) {
@@ -81,9 +81,10 @@ func Test_ManagementAPI_MyAPICredentialApiService(t *testing.T) {
 
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 
-			apiPostMeAllowedOriginsRequest := apiClient.MyAPICredentialApi.PostMeAllowedOrigins(context.Background())
-			apiPostMeAllowedOriginsRequest.CreateAllowedOriginRequest().Domain = "a"
-			resp, httpRes, err := apiPostMeAllowedOriginsRequest.Execute()
+			createAllowedOriginRequest := Management.NewCreateAllowedOriginRequest("https://adyen.com")
+
+			resp, httpRes, err := apiClient.MyAPICredentialApi.PostMeAllowedOrigins(context.Background()).CreateAllowedOriginRequest(*createAllowedOriginRequest).Execute()
+
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "Error when calling `PostMeAllowedOrigins.GetMeAllowedOrigins``: %v\n", err)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)
