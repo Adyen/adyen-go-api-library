@@ -1,6 +1,4 @@
 .gitignore
-.openapi-generator-ignore
-.travis.yml
 README.md
 api/openapi.yaml
 api_account_company_level.go
@@ -30,7 +28,6 @@ api_users_merchant_level.go
 api_webhooks_company_level.go
 api_webhooks_merchant_level.go
 client.go
-configuration.go
 docs/APICredentialsCompanyLevelApi.md
 docs/APICredentialsMerchantLevelApi.md
 docs/APIKeyCompanyLevelApi.md
@@ -186,9 +183,6 @@ docs/WebhookLinks.md
 docs/WebhooksCompanyLevelApi.md
 docs/WebhooksMerchantLevelApi.md
 docs/WifiProfiles.md
-git_push.sh
-go.mod
-go.sum
 model_additional_settings.go
 model_additional_settings_response.go
 model_address.go
