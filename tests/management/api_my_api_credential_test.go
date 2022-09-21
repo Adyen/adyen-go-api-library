@@ -1,5 +1,5 @@
 /*
- * Adyen API Client
+ * Testing MyAPICredentialApiService
  *
  * Contact: support@adyen.com
  */
