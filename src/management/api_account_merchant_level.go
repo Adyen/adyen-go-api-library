@@ -59,9 +59,15 @@ To make this request, your API credential must have the following [roles](https:
  @return ApiGetMerchantsRequest
 */
 func (a *AccountMerchantLevelApiService) GetMerchants(ctx context.Context) ApiGetMerchantsRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetMerchantsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 	}
 }
 
@@ -232,9 +238,15 @@ To make this request, your API credential must have the following [roles](https:
  @return ApiGetMerchantsIdRequest
 */
 func (a *AccountMerchantLevelApiService) GetMerchantsId(ctx context.Context, id string) ApiGetMerchantsIdRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetMerchantsIdRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		id: id,
 	}
 }

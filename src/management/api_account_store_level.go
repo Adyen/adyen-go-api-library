@@ -69,9 +69,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetMerchantsMerchantIdStoresRequest
 */
 func (a *AccountStoreLevelApiService) GetMerchantsMerchantIdStores(ctx context.Context, merchantId string) ApiGetMerchantsMerchantIdStoresRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetMerchantsMerchantIdStoresRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		merchantId: merchantId,
 	}
 }
@@ -250,9 +256,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetMerchantsMerchantIdStoresStoreIdRequest
 */
 func (a *AccountStoreLevelApiService) GetMerchantsMerchantIdStoresStoreId(ctx context.Context, merchantId string, storeId string) ApiGetMerchantsMerchantIdStoresStoreIdRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetMerchantsMerchantIdStoresStoreIdRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		merchantId: merchantId,
 		storeId: storeId,
 	}
@@ -448,9 +460,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetStoresRequest
 */
 func (a *AccountStoreLevelApiService) GetStores(ctx context.Context) ApiGetStoresRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetStoresRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 	}
 }
 
@@ -628,9 +646,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetStoresStoreIdRequest
 */
 func (a *AccountStoreLevelApiService) GetStoresStoreId(ctx context.Context, storeId string) ApiGetStoresStoreIdRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetStoresStoreIdRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		storeId: storeId,
 	}
 }
@@ -805,9 +829,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiPatchMerchantsMerchantIdStoresStoreIdRequest
 */
 func (a *AccountStoreLevelApiService) PatchMerchantsMerchantIdStoresStoreId(ctx context.Context, merchantId string, storeId string) ApiPatchMerchantsMerchantIdStoresStoreIdRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPatchMerchantsMerchantIdStoresStoreIdRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		merchantId: merchantId,
 		storeId: storeId,
 	}
@@ -985,9 +1015,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiPatchStoresStoreIdRequest
 */
 func (a *AccountStoreLevelApiService) PatchStoresStoreId(ctx context.Context, storeId string) ApiPatchStoresStoreIdRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPatchStoresStoreIdRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		storeId: storeId,
 	}
 }
@@ -1162,9 +1198,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiPostMerchantsMerchantIdStoresRequest
 */
 func (a *AccountStoreLevelApiService) PostMerchantsMerchantIdStores(ctx context.Context, merchantId string) ApiPostMerchantsMerchantIdStoresRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPostMerchantsMerchantIdStoresRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		merchantId: merchantId,
 	}
 }
@@ -1337,9 +1379,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiPostStoresRequest
 */
 func (a *AccountStoreLevelApiService) PostStores(ctx context.Context) ApiPostStoresRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPostStoresRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 	}
 }
 

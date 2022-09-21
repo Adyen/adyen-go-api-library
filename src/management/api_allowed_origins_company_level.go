@@ -51,9 +51,15 @@ To make this request, your API credential must have the following [roles](https:
  @return ApiDeleteCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsOriginIdRequest
 */
 func (a *AllowedOriginsCompanyLevelApiService) DeleteCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsOriginId(ctx context.Context, companyId string, apiCredentialId string, originId string) ApiDeleteCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsOriginIdRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiDeleteCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsOriginIdRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 		apiCredentialId: apiCredentialId,
 		originId: originId,
@@ -215,9 +221,15 @@ To make this request, your API credential must have the following [roles](https:
  @return ApiGetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsRequest
 */
 func (a *AllowedOriginsCompanyLevelApiService) GetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOrigins(ctx context.Context, companyId string, apiCredentialId string) ApiGetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 		apiCredentialId: apiCredentialId,
 	}
@@ -390,9 +402,15 @@ To make this request, your API credential must have the following [roles](https:
  @return ApiGetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsOriginIdRequest
 */
 func (a *AllowedOriginsCompanyLevelApiService) GetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsOriginId(ctx context.Context, companyId string, apiCredentialId string, originId string) ApiGetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsOriginIdRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsOriginIdRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 		apiCredentialId: apiCredentialId,
 		originId: originId,
@@ -571,9 +589,15 @@ To make this request, your API credential must have the following [roles](https:
  @return ApiPostCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsRequest
 */
 func (a *AllowedOriginsCompanyLevelApiService) PostCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOrigins(ctx context.Context, companyId string, apiCredentialId string) ApiPostCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPostCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 		apiCredentialId: apiCredentialId,
 	}

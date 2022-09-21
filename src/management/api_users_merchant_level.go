@@ -62,9 +62,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiGetMerchantsIdUsersRequest
 */
 func (a *UsersMerchantLevelApiService) GetMerchantsIdUsers(ctx context.Context, id string) ApiGetMerchantsIdUsersRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetMerchantsIdUsersRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		id: id,
 	}
 }
@@ -240,9 +246,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiGetMerchantsIdUsersUserIdRequest
 */
 func (a *UsersMerchantLevelApiService) GetMerchantsIdUsersUserId(ctx context.Context, id string, userId string) ApiGetMerchantsIdUsersUserIdRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetMerchantsIdUsersUserIdRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		id: id,
 		userId: userId,
 	}
@@ -420,9 +432,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiPatchMerchantsIdUsersUserIdRequest
 */
 func (a *UsersMerchantLevelApiService) PatchMerchantsIdUsersUserId(ctx context.Context, id string, userId string) ApiPatchMerchantsIdUsersUserIdRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPatchMerchantsIdUsersUserIdRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		id: id,
 		userId: userId,
 	}
@@ -600,9 +618,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiPostMerchantsIdUsersRequest
 */
 func (a *UsersMerchantLevelApiService) PostMerchantsIdUsers(ctx context.Context, id string) ApiPostMerchantsIdUsersRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPostMerchantsIdUsersRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		id: id,
 	}
 }

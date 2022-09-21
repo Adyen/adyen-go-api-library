@@ -49,9 +49,15 @@ To make this request, your API credential must have the following [roles](https:
  @return ApiPostCompaniesCompanyIdApiCredentialsApiCredentialIdGenerateApiKeyRequest
 */
 func (a *APIKeyCompanyLevelApiService) PostCompaniesCompanyIdApiCredentialsApiCredentialIdGenerateApiKey(ctx context.Context, companyId string, apiCredentialId string) ApiPostCompaniesCompanyIdApiCredentialsApiCredentialIdGenerateApiKeyRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPostCompaniesCompanyIdApiCredentialsApiCredentialIdGenerateApiKeyRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 		apiCredentialId: apiCredentialId,
 	}

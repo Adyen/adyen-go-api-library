@@ -49,9 +49,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetTerminalsTerminalIdTerminalLogosRequest
 */
 func (a *TerminalSettingsTerminalLevelApiService) GetTerminalsTerminalIdTerminalLogos(ctx context.Context, terminalId string) ApiGetTerminalsTerminalIdTerminalLogosRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetTerminalsTerminalIdTerminalLogosRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		terminalId: terminalId,
 	}
 }
@@ -219,9 +225,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetTerminalsTerminalIdTerminalSettingsRequest
 */
 func (a *TerminalSettingsTerminalLevelApiService) GetTerminalsTerminalIdTerminalSettings(ctx context.Context, terminalId string) ApiGetTerminalsTerminalIdTerminalSettingsRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetTerminalsTerminalIdTerminalSettingsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		terminalId: terminalId,
 	}
 }
@@ -397,9 +409,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiPatchTerminalsTerminalIdTerminalLogosRequest
 */
 func (a *TerminalSettingsTerminalLevelApiService) PatchTerminalsTerminalIdTerminalLogos(ctx context.Context, terminalId string) ApiPatchTerminalsTerminalIdTerminalLogosRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPatchTerminalsTerminalIdTerminalLogosRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		terminalId: terminalId,
 	}
 }
@@ -578,9 +596,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiPatchTerminalsTerminalIdTerminalSettingsRequest
 */
 func (a *TerminalSettingsTerminalLevelApiService) PatchTerminalsTerminalIdTerminalSettings(ctx context.Context, terminalId string) ApiPatchTerminalsTerminalIdTerminalSettingsRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPatchTerminalsTerminalIdTerminalSettingsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		terminalId: terminalId,
 	}
 }

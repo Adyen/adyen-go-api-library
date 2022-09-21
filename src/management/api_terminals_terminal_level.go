@@ -95,9 +95,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetTerminalsRequest
 */
 func (a *TerminalsTerminalLevelApiService) GetTerminals(ctx context.Context) ApiGetTerminalsRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetTerminalsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 	}
 }
 

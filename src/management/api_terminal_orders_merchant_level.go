@@ -56,9 +56,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetMerchantsMerchantIdBillingEntitiesRequest
 */
 func (a *TerminalOrdersMerchantLevelApiService) GetMerchantsMerchantIdBillingEntities(ctx context.Context, merchantId string) ApiGetMerchantsMerchantIdBillingEntitiesRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetMerchantsMerchantIdBillingEntitiesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		merchantId: merchantId,
 	}
 }
@@ -251,9 +257,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetMerchantsMerchantIdShippingLocationsRequest
 */
 func (a *TerminalOrdersMerchantLevelApiService) GetMerchantsMerchantIdShippingLocations(ctx context.Context, merchantId string) ApiGetMerchantsMerchantIdShippingLocationsRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetMerchantsMerchantIdShippingLocationsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		merchantId: merchantId,
 	}
 }
@@ -430,9 +442,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetMerchantsMerchantIdTerminalModelsRequest
 */
 func (a *TerminalOrdersMerchantLevelApiService) GetMerchantsMerchantIdTerminalModels(ctx context.Context, merchantId string) ApiGetMerchantsMerchantIdTerminalModelsRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetMerchantsMerchantIdTerminalModelsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		merchantId: merchantId,
 	}
 }
@@ -628,9 +646,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetMerchantsMerchantIdTerminalOrdersRequest
 */
 func (a *TerminalOrdersMerchantLevelApiService) GetMerchantsMerchantIdTerminalOrders(ctx context.Context, merchantId string) ApiGetMerchantsMerchantIdTerminalOrdersRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetMerchantsMerchantIdTerminalOrdersRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		merchantId: merchantId,
 	}
 }
@@ -812,9 +836,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetMerchantsMerchantIdTerminalOrdersOrderIdRequest
 */
 func (a *TerminalOrdersMerchantLevelApiService) GetMerchantsMerchantIdTerminalOrdersOrderId(ctx context.Context, merchantId string, orderId string) ApiGetMerchantsMerchantIdTerminalOrdersOrderIdRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetMerchantsMerchantIdTerminalOrdersOrderIdRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		merchantId: merchantId,
 		orderId: orderId,
 	}
@@ -1013,9 +1043,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetMerchantsMerchantIdTerminalProductsRequest
 */
 func (a *TerminalOrdersMerchantLevelApiService) GetMerchantsMerchantIdTerminalProducts(ctx context.Context, merchantId string) ApiGetMerchantsMerchantIdTerminalProductsRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetMerchantsMerchantIdTerminalProductsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		merchantId: merchantId,
 	}
 }
@@ -1207,9 +1243,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiPatchMerchantsMerchantIdTerminalOrdersOrderIdRequest
 */
 func (a *TerminalOrdersMerchantLevelApiService) PatchMerchantsMerchantIdTerminalOrdersOrderId(ctx context.Context, merchantId string, orderId string) ApiPatchMerchantsMerchantIdTerminalOrdersOrderIdRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPatchMerchantsMerchantIdTerminalOrdersOrderIdRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		merchantId: merchantId,
 		orderId: orderId,
 	}
@@ -1386,9 +1428,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiPostMerchantsMerchantIdShippingLocationsRequest
 */
 func (a *TerminalOrdersMerchantLevelApiService) PostMerchantsMerchantIdShippingLocations(ctx context.Context, merchantId string) ApiPostMerchantsMerchantIdShippingLocationsRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPostMerchantsMerchantIdShippingLocationsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		merchantId: merchantId,
 	}
 }
@@ -1563,9 +1611,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiPostMerchantsMerchantIdTerminalOrdersRequest
 */
 func (a *TerminalOrdersMerchantLevelApiService) PostMerchantsMerchantIdTerminalOrders(ctx context.Context, merchantId string) ApiPostMerchantsMerchantIdTerminalOrdersRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPostMerchantsMerchantIdTerminalOrdersRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		merchantId: merchantId,
 	}
 }
@@ -1738,9 +1792,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiPostMerchantsMerchantIdTerminalOrdersOrderIdCancelRequest
 */
 func (a *TerminalOrdersMerchantLevelApiService) PostMerchantsMerchantIdTerminalOrdersOrderIdCancel(ctx context.Context, merchantId string, orderId string) ApiPostMerchantsMerchantIdTerminalOrdersOrderIdCancelRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPostMerchantsMerchantIdTerminalOrdersOrderIdCancelRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		merchantId: merchantId,
 		orderId: orderId,
 	}

@@ -49,9 +49,15 @@ To make this request, your API credential must have the following [roles](https:
  @return ApiDeleteMerchantsIdWebhooksWebhookIdRequest
 */
 func (a *WebhooksMerchantLevelApiService) DeleteMerchantsIdWebhooksWebhookId(ctx context.Context, id string, webhookId string) ApiDeleteMerchantsIdWebhooksWebhookIdRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiDeleteMerchantsIdWebhooksWebhookIdRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		id: id,
 		webhookId: webhookId,
 	}
@@ -224,9 +230,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetMerchantsIdWebhooksRequest
 */
 func (a *WebhooksMerchantLevelApiService) GetMerchantsIdWebhooks(ctx context.Context, id string) ApiGetMerchantsIdWebhooksRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetMerchantsIdWebhooksRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		id: id,
 	}
 }
@@ -402,9 +414,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetMerchantsIdWebhooksWebhookIdRequest
 */
 func (a *WebhooksMerchantLevelApiService) GetMerchantsIdWebhooksWebhookId(ctx context.Context, id string, webhookId string) ApiGetMerchantsIdWebhooksWebhookIdRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetMerchantsIdWebhooksWebhookIdRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		id: id,
 		webhookId: webhookId,
 	}
@@ -581,9 +599,15 @@ To make this request, your API credential must have the following [roles](https:
  @return ApiPatchMerchantsIdWebhooksWebhookIdRequest
 */
 func (a *WebhooksMerchantLevelApiService) PatchMerchantsIdWebhooksWebhookId(ctx context.Context, id string, webhookId string) ApiPatchMerchantsIdWebhooksWebhookIdRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPatchMerchantsIdWebhooksWebhookIdRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		id: id,
 		webhookId: webhookId,
 	}
@@ -760,9 +784,15 @@ To make this request, your API credential must have the following [roles](https:
  @return ApiPostMerchantsIdWebhooksRequest
 */
 func (a *WebhooksMerchantLevelApiService) PostMerchantsIdWebhooks(ctx context.Context, id string) ApiPostMerchantsIdWebhooksRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPostMerchantsIdWebhooksRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		id: id,
 	}
 }
@@ -933,9 +963,15 @@ To make this request, your API credential must have the following [roles](https:
  @return ApiPostMerchantsIdWebhooksWebhookIdGenerateHmacRequest
 */
 func (a *WebhooksMerchantLevelApiService) PostMerchantsIdWebhooksWebhookIdGenerateHmac(ctx context.Context, id string, webhookId string) ApiPostMerchantsIdWebhooksWebhookIdGenerateHmacRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPostMerchantsIdWebhooksWebhookIdGenerateHmacRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		id: id,
 		webhookId: webhookId,
 	}
@@ -1116,9 +1152,15 @@ To make this request, your API credential must have the following [roles](https:
  @return ApiPostMerchantsIdWebhooksWebhookIdTestRequest
 */
 func (a *WebhooksMerchantLevelApiService) PostMerchantsIdWebhooksWebhookIdTest(ctx context.Context, id string, webhookId string) ApiPostMerchantsIdWebhooksWebhookIdTestRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPostMerchantsIdWebhooksWebhookIdTestRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		id: id,
 		webhookId: webhookId,
 	}

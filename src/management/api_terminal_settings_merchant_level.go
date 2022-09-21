@@ -58,9 +58,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetMerchantsMerchantIdTerminalLogosRequest
 */
 func (a *TerminalSettingsMerchantLevelApiService) GetMerchantsMerchantIdTerminalLogos(ctx context.Context, merchantId string) ApiGetMerchantsMerchantIdTerminalLogosRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetMerchantsMerchantIdTerminalLogosRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		merchantId: merchantId,
 	}
 }
@@ -231,9 +237,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetMerchantsMerchantIdTerminalSettingsRequest
 */
 func (a *TerminalSettingsMerchantLevelApiService) GetMerchantsMerchantIdTerminalSettings(ctx context.Context, merchantId string) ApiGetMerchantsMerchantIdTerminalSettingsRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetMerchantsMerchantIdTerminalSettingsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		merchantId: merchantId,
 	}
 }
@@ -417,9 +429,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiPatchMerchantsMerchantIdTerminalLogosRequest
 */
 func (a *TerminalSettingsMerchantLevelApiService) PatchMerchantsMerchantIdTerminalLogos(ctx context.Context, merchantId string) ApiPatchMerchantsMerchantIdTerminalLogosRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPatchMerchantsMerchantIdTerminalLogosRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		merchantId: merchantId,
 	}
 }
@@ -602,9 +620,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiPatchMerchantsMerchantIdTerminalSettingsRequest
 */
 func (a *TerminalSettingsMerchantLevelApiService) PatchMerchantsMerchantIdTerminalSettings(ctx context.Context, merchantId string) ApiPatchMerchantsMerchantIdTerminalSettingsRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPatchMerchantsMerchantIdTerminalSettingsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		merchantId: merchantId,
 	}
 }

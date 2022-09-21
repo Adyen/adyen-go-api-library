@@ -49,9 +49,15 @@ To make this request, your API credential must have the following [roles](https:
  @return ApiDeleteCompaniesCompanyIdWebhooksWebhookIdRequest
 */
 func (a *WebhooksCompanyLevelApiService) DeleteCompaniesCompanyIdWebhooksWebhookId(ctx context.Context, companyId string, webhookId string) ApiDeleteCompaniesCompanyIdWebhooksWebhookIdRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiDeleteCompaniesCompanyIdWebhooksWebhookIdRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 		webhookId: webhookId,
 	}
@@ -224,9 +230,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetCompaniesCompanyIdWebhooksRequest
 */
 func (a *WebhooksCompanyLevelApiService) GetCompaniesCompanyIdWebhooks(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdWebhooksRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetCompaniesCompanyIdWebhooksRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 	}
 }
@@ -402,9 +414,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetCompaniesCompanyIdWebhooksWebhookIdRequest
 */
 func (a *WebhooksCompanyLevelApiService) GetCompaniesCompanyIdWebhooksWebhookId(ctx context.Context, companyId string, webhookId string) ApiGetCompaniesCompanyIdWebhooksWebhookIdRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetCompaniesCompanyIdWebhooksWebhookIdRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 		webhookId: webhookId,
 	}
@@ -581,9 +599,15 @@ To make this request, your API credential must have the following [roles](https:
  @return ApiPatchCompaniesCompanyIdWebhooksWebhookIdRequest
 */
 func (a *WebhooksCompanyLevelApiService) PatchCompaniesCompanyIdWebhooksWebhookId(ctx context.Context, companyId string, webhookId string) ApiPatchCompaniesCompanyIdWebhooksWebhookIdRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPatchCompaniesCompanyIdWebhooksWebhookIdRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 		webhookId: webhookId,
 	}
@@ -760,9 +784,15 @@ To make this request, your API credential must have the following [roles](https:
  @return ApiPostCompaniesCompanyIdWebhooksRequest
 */
 func (a *WebhooksCompanyLevelApiService) PostCompaniesCompanyIdWebhooks(ctx context.Context, companyId string) ApiPostCompaniesCompanyIdWebhooksRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPostCompaniesCompanyIdWebhooksRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 	}
 }
@@ -933,9 +963,15 @@ To make this request, your API credential must have the following [roles](https:
  @return ApiPostCompaniesCompanyIdWebhooksWebhookIdGenerateHmacRequest
 */
 func (a *WebhooksCompanyLevelApiService) PostCompaniesCompanyIdWebhooksWebhookIdGenerateHmac(ctx context.Context, companyId string, webhookId string) ApiPostCompaniesCompanyIdWebhooksWebhookIdGenerateHmacRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPostCompaniesCompanyIdWebhooksWebhookIdGenerateHmacRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 		webhookId: webhookId,
 	}
@@ -1118,9 +1154,15 @@ To make this request, your API credential must have the following [roles](https:
  @return ApiPostCompaniesCompanyIdWebhooksWebhookIdTestRequest
 */
 func (a *WebhooksCompanyLevelApiService) PostCompaniesCompanyIdWebhooksWebhookIdTest(ctx context.Context, companyId string, webhookId string) ApiPostCompaniesCompanyIdWebhooksWebhookIdTestRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPostCompaniesCompanyIdWebhooksWebhookIdTestRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 		webhookId: webhookId,
 	}

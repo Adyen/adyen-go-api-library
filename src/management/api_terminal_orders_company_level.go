@@ -56,9 +56,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetCompaniesCompanyIdBillingEntitiesRequest
 */
 func (a *TerminalOrdersCompanyLevelApiService) GetCompaniesCompanyIdBillingEntities(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdBillingEntitiesRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetCompaniesCompanyIdBillingEntitiesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 	}
 }
@@ -251,9 +257,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetCompaniesCompanyIdShippingLocationsRequest
 */
 func (a *TerminalOrdersCompanyLevelApiService) GetCompaniesCompanyIdShippingLocations(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdShippingLocationsRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetCompaniesCompanyIdShippingLocationsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 	}
 }
@@ -431,9 +443,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetCompaniesCompanyIdTerminalModelsRequest
 */
 func (a *TerminalOrdersCompanyLevelApiService) GetCompaniesCompanyIdTerminalModels(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdTerminalModelsRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetCompaniesCompanyIdTerminalModelsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 	}
 }
@@ -630,9 +648,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetCompaniesCompanyIdTerminalOrdersRequest
 */
 func (a *TerminalOrdersCompanyLevelApiService) GetCompaniesCompanyIdTerminalOrders(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdTerminalOrdersRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetCompaniesCompanyIdTerminalOrdersRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 	}
 }
@@ -814,9 +838,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetCompaniesCompanyIdTerminalOrdersOrderIdRequest
 */
 func (a *TerminalOrdersCompanyLevelApiService) GetCompaniesCompanyIdTerminalOrdersOrderId(ctx context.Context, companyId string, orderId string) ApiGetCompaniesCompanyIdTerminalOrdersOrderIdRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetCompaniesCompanyIdTerminalOrdersOrderIdRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 		orderId: orderId,
 	}
@@ -1015,9 +1045,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetCompaniesCompanyIdTerminalProductsRequest
 */
 func (a *TerminalOrdersCompanyLevelApiService) GetCompaniesCompanyIdTerminalProducts(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdTerminalProductsRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetCompaniesCompanyIdTerminalProductsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 	}
 }
@@ -1209,9 +1245,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiPatchCompaniesCompanyIdTerminalOrdersOrderIdRequest
 */
 func (a *TerminalOrdersCompanyLevelApiService) PatchCompaniesCompanyIdTerminalOrdersOrderId(ctx context.Context, companyId string, orderId string) ApiPatchCompaniesCompanyIdTerminalOrdersOrderIdRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPatchCompaniesCompanyIdTerminalOrdersOrderIdRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 		orderId: orderId,
 	}
@@ -1388,9 +1430,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiPostCompaniesCompanyIdShippingLocationsRequest
 */
 func (a *TerminalOrdersCompanyLevelApiService) PostCompaniesCompanyIdShippingLocations(ctx context.Context, companyId string) ApiPostCompaniesCompanyIdShippingLocationsRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPostCompaniesCompanyIdShippingLocationsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 	}
 }
@@ -1565,9 +1613,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiPostCompaniesCompanyIdTerminalOrdersRequest
 */
 func (a *TerminalOrdersCompanyLevelApiService) PostCompaniesCompanyIdTerminalOrders(ctx context.Context, companyId string) ApiPostCompaniesCompanyIdTerminalOrdersRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPostCompaniesCompanyIdTerminalOrdersRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 	}
 }
@@ -1740,9 +1794,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiPostCompaniesCompanyIdTerminalOrdersOrderIdCancelRequest
 */
 func (a *TerminalOrdersCompanyLevelApiService) PostCompaniesCompanyIdTerminalOrdersOrderIdCancel(ctx context.Context, companyId string, orderId string) ApiPostCompaniesCompanyIdTerminalOrdersOrderIdCancelRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPostCompaniesCompanyIdTerminalOrdersOrderIdCancelRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 		orderId: orderId,
 	}

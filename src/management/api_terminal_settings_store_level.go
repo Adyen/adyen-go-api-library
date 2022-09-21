@@ -60,9 +60,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetMerchantsMerchantIdStoresReferenceTerminalLogosRequest
 */
 func (a *TerminalSettingsStoreLevelApiService) GetMerchantsMerchantIdStoresReferenceTerminalLogos(ctx context.Context, merchantId string, reference string) ApiGetMerchantsMerchantIdStoresReferenceTerminalLogosRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetMerchantsMerchantIdStoresReferenceTerminalLogosRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		merchantId: merchantId,
 		reference: reference,
 	}
@@ -237,9 +243,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetMerchantsMerchantIdStoresReferenceTerminalSettingsRequest
 */
 func (a *TerminalSettingsStoreLevelApiService) GetMerchantsMerchantIdStoresReferenceTerminalSettings(ctx context.Context, merchantId string, reference string) ApiGetMerchantsMerchantIdStoresReferenceTerminalSettingsRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetMerchantsMerchantIdStoresReferenceTerminalSettingsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		merchantId: merchantId,
 		reference: reference,
 	}
@@ -419,9 +431,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetStoresStoreIdTerminalLogosRequest
 */
 func (a *TerminalSettingsStoreLevelApiService) GetStoresStoreIdTerminalLogos(ctx context.Context, storeId string) ApiGetStoresStoreIdTerminalLogosRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetStoresStoreIdTerminalLogosRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		storeId: storeId,
 	}
 }
@@ -592,9 +610,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetStoresStoreIdTerminalSettingsRequest
 */
 func (a *TerminalSettingsStoreLevelApiService) GetStoresStoreIdTerminalSettings(ctx context.Context, storeId string) ApiGetStoresStoreIdTerminalSettingsRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetStoresStoreIdTerminalSettingsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		storeId: storeId,
 	}
 }
@@ -780,9 +804,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiPatchMerchantsMerchantIdStoresReferenceTerminalLogosRequest
 */
 func (a *TerminalSettingsStoreLevelApiService) PatchMerchantsMerchantIdStoresReferenceTerminalLogos(ctx context.Context, merchantId string, reference string) ApiPatchMerchantsMerchantIdStoresReferenceTerminalLogosRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPatchMerchantsMerchantIdStoresReferenceTerminalLogosRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		merchantId: merchantId,
 		reference: reference,
 	}
@@ -968,9 +998,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiPatchMerchantsMerchantIdStoresReferenceTerminalSettingsRequest
 */
 func (a *TerminalSettingsStoreLevelApiService) PatchMerchantsMerchantIdStoresReferenceTerminalSettings(ctx context.Context, merchantId string, reference string) ApiPatchMerchantsMerchantIdStoresReferenceTerminalSettingsRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPatchMerchantsMerchantIdStoresReferenceTerminalSettingsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		merchantId: merchantId,
 		reference: reference,
 	}
@@ -1158,9 +1194,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiPatchStoresStoreIdTerminalLogosRequest
 */
 func (a *TerminalSettingsStoreLevelApiService) PatchStoresStoreIdTerminalLogos(ctx context.Context, storeId string) ApiPatchStoresStoreIdTerminalLogosRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPatchStoresStoreIdTerminalLogosRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		storeId: storeId,
 	}
 }
@@ -1342,9 +1384,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiPatchStoresStoreIdTerminalSettingsRequest
 */
 func (a *TerminalSettingsStoreLevelApiService) PatchStoresStoreIdTerminalSettings(ctx context.Context, storeId string) ApiPatchStoresStoreIdTerminalSettingsRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPatchStoresStoreIdTerminalSettingsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		storeId: storeId,
 	}
 }

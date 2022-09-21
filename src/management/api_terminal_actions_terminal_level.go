@@ -55,9 +55,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiPostTerminalsScheduleActionsRequest
 */
 func (a *TerminalActionsTerminalLevelApiService) PostTerminalsScheduleActions(ctx context.Context) ApiPostTerminalsScheduleActionsRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPostTerminalsScheduleActionsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 	}
 }
 

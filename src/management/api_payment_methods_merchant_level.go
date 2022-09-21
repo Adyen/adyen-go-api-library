@@ -76,9 +76,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiGetMerchantsIdPaymentMethodSettingsRequest
 */
 func (a *PaymentMethodsMerchantLevelApiService) GetMerchantsIdPaymentMethodSettings(ctx context.Context, id string) ApiGetMerchantsIdPaymentMethodSettingsRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetMerchantsIdPaymentMethodSettingsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		id: id,
 	}
 }
@@ -260,9 +266,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiGetMerchantsIdPaymentMethodSettingsPaymentMethodIdRequest
 */
 func (a *PaymentMethodsMerchantLevelApiService) GetMerchantsIdPaymentMethodSettingsPaymentMethodId(ctx context.Context, id string, paymentMethodId string) ApiGetMerchantsIdPaymentMethodSettingsPaymentMethodIdRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetMerchantsIdPaymentMethodSettingsPaymentMethodIdRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		id: id,
 		paymentMethodId: paymentMethodId,
 	}
@@ -440,9 +452,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiPatchMerchantsIdPaymentMethodSettingsPaymentMethodIdRequest
 */
 func (a *PaymentMethodsMerchantLevelApiService) PatchMerchantsIdPaymentMethodSettingsPaymentMethodId(ctx context.Context, id string, paymentMethodId string) ApiPatchMerchantsIdPaymentMethodSettingsPaymentMethodIdRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPatchMerchantsIdPaymentMethodSettingsPaymentMethodIdRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		id: id,
 		paymentMethodId: paymentMethodId,
 	}
@@ -620,9 +638,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiPostMerchantsIdPaymentMethodSettingsRequest
 */
 func (a *PaymentMethodsMerchantLevelApiService) PostMerchantsIdPaymentMethodSettings(ctx context.Context, id string) ApiPostMerchantsIdPaymentMethodSettingsRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPostMerchantsIdPaymentMethodSettingsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		id: id,
 	}
 }

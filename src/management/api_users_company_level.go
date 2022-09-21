@@ -62,9 +62,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiGetCompaniesCompanyIdUsersRequest
 */
 func (a *UsersCompanyLevelApiService) GetCompaniesCompanyIdUsers(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdUsersRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetCompaniesCompanyIdUsersRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 	}
 }
@@ -240,9 +246,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiGetCompaniesCompanyIdUsersUserIdRequest
 */
 func (a *UsersCompanyLevelApiService) GetCompaniesCompanyIdUsersUserId(ctx context.Context, companyId string, userId string) ApiGetCompaniesCompanyIdUsersUserIdRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetCompaniesCompanyIdUsersUserIdRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 		userId: userId,
 	}
@@ -420,9 +432,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiPatchCompaniesCompanyIdUsersUserIdRequest
 */
 func (a *UsersCompanyLevelApiService) PatchCompaniesCompanyIdUsersUserId(ctx context.Context, companyId string, userId string) ApiPatchCompaniesCompanyIdUsersUserIdRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPatchCompaniesCompanyIdUsersUserIdRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 		userId: userId,
 	}
@@ -600,9 +618,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiPostCompaniesCompanyIdUsersRequest
 */
 func (a *UsersCompanyLevelApiService) PostCompaniesCompanyIdUsers(ctx context.Context, companyId string) ApiPostCompaniesCompanyIdUsersRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPostCompaniesCompanyIdUsersRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 	}
 }

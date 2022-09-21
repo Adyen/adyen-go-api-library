@@ -61,9 +61,15 @@ To make this request, your API credential must have the following [roles](https:
  @return ApiGetMerchantsIdApiCredentialsRequest
 */
 func (a *APICredentialsMerchantLevelApiService) GetMerchantsIdApiCredentials(ctx context.Context, id string) ApiGetMerchantsIdApiCredentialsRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetMerchantsIdApiCredentialsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		id: id,
 	}
 }
@@ -238,9 +244,15 @@ To make this request, your API credential must have the following [roles](https:
  @return ApiGetMerchantsIdApiCredentialsApiCredentialIdRequest
 */
 func (a *APICredentialsMerchantLevelApiService) GetMerchantsIdApiCredentialsApiCredentialId(ctx context.Context, id string, apiCredentialId string) ApiGetMerchantsIdApiCredentialsApiCredentialIdRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetMerchantsIdApiCredentialsApiCredentialIdRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		id: id,
 		apiCredentialId: apiCredentialId,
 	}
@@ -417,9 +429,15 @@ To make this request, your API credential must have the following [roles](https:
  @return ApiPatchMerchantsIdApiCredentialsApiCredentialIdRequest
 */
 func (a *APICredentialsMerchantLevelApiService) PatchMerchantsIdApiCredentialsApiCredentialId(ctx context.Context, id string, apiCredentialId string) ApiPatchMerchantsIdApiCredentialsApiCredentialIdRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPatchMerchantsIdApiCredentialsApiCredentialIdRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		id: id,
 		apiCredentialId: apiCredentialId,
 	}
@@ -605,9 +623,15 @@ To make this request, your API credential must have the following [roles](https:
  @return ApiPostMerchantsIdApiCredentialsRequest
 */
 func (a *APICredentialsMerchantLevelApiService) PostMerchantsIdApiCredentials(ctx context.Context, id string) ApiPostMerchantsIdApiCredentialsRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPostMerchantsIdApiCredentialsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		id: id,
 	}
 }

@@ -60,9 +60,15 @@ To make this request, your API credential must have the following [roles](https:
  @return ApiGetCompaniesRequest
 */
 func (a *AccountCompanyLevelApiService) GetCompanies(ctx context.Context) ApiGetCompaniesRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetCompaniesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 	}
 }
 
@@ -233,9 +239,15 @@ To make this request, your API credential must have the following [roles](https:
  @return ApiGetCompaniesCompanyIdRequest
 */
 func (a *AccountCompanyLevelApiService) GetCompaniesCompanyId(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetCompaniesCompanyIdRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 	}
 }
@@ -416,9 +428,15 @@ To make this request, your API credential must have the following [roles](https:
  @return ApiGetCompaniesCompanyIdMerchantsRequest
 */
 func (a *AccountCompanyLevelApiService) GetCompaniesCompanyIdMerchants(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdMerchantsRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetCompaniesCompanyIdMerchantsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 	}
 }

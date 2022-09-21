@@ -58,9 +58,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetCompaniesCompanyIdTerminalLogosRequest
 */
 func (a *TerminalSettingsCompanyLevelApiService) GetCompaniesCompanyIdTerminalLogos(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdTerminalLogosRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetCompaniesCompanyIdTerminalLogosRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 	}
 }
@@ -231,9 +237,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetCompaniesCompanyIdTerminalSettingsRequest
 */
 func (a *TerminalSettingsCompanyLevelApiService) GetCompaniesCompanyIdTerminalSettings(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdTerminalSettingsRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetCompaniesCompanyIdTerminalSettingsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 	}
 }
@@ -416,9 +428,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiPatchCompaniesCompanyIdTerminalLogosRequest
 */
 func (a *TerminalSettingsCompanyLevelApiService) PatchCompaniesCompanyIdTerminalLogos(ctx context.Context, companyId string) ApiPatchCompaniesCompanyIdTerminalLogosRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPatchCompaniesCompanyIdTerminalLogosRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 	}
 }
@@ -600,9 +618,15 @@ To make this request, your API credential must have the following [role](https:/
  @return ApiPatchCompaniesCompanyIdTerminalSettingsRequest
 */
 func (a *TerminalSettingsCompanyLevelApiService) PatchCompaniesCompanyIdTerminalSettings(ctx context.Context, companyId string) ApiPatchCompaniesCompanyIdTerminalSettingsRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPatchCompaniesCompanyIdTerminalSettingsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 	}
 }

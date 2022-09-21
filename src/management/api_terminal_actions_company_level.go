@@ -63,9 +63,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetCompaniesCompanyIdAndroidAppsRequest
 */
 func (a *TerminalActionsCompanyLevelApiService) GetCompaniesCompanyIdAndroidApps(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdAndroidAppsRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetCompaniesCompanyIdAndroidAppsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 	}
 }
@@ -254,9 +260,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetCompaniesCompanyIdAndroidCertificatesRequest
 */
 func (a *TerminalActionsCompanyLevelApiService) GetCompaniesCompanyIdAndroidCertificates(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdAndroidCertificatesRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetCompaniesCompanyIdAndroidCertificatesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 	}
 }
@@ -457,9 +469,15 @@ To make this request, your API credential must have one of the following [roles]
  @return ApiGetCompaniesCompanyIdTerminalActionsRequest
 */
 func (a *TerminalActionsCompanyLevelApiService) GetCompaniesCompanyIdTerminalActions(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdTerminalActionsRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetCompaniesCompanyIdTerminalActionsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		companyId: companyId,
 	}
 }

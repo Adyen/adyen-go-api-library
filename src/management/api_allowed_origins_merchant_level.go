@@ -51,9 +51,15 @@ To make this request, your API credential must have the following [roles](https:
  @return ApiDeleteMerchantsIdApiCredentialsApiCredentialIdAllowedOriginsOriginIdRequest
 */
 func (a *AllowedOriginsMerchantLevelApiService) DeleteMerchantsIdApiCredentialsApiCredentialIdAllowedOriginsOriginId(ctx context.Context, id string, apiCredentialId string, originId string) ApiDeleteMerchantsIdApiCredentialsApiCredentialIdAllowedOriginsOriginIdRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiDeleteMerchantsIdApiCredentialsApiCredentialIdAllowedOriginsOriginIdRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		id: id,
 		apiCredentialId: apiCredentialId,
 		originId: originId,
@@ -215,9 +221,15 @@ To make this request, your API credential must have the following [roles](https:
  @return ApiGetMerchantsIdApiCredentialsApiCredentialIdAllowedOriginsRequest
 */
 func (a *AllowedOriginsMerchantLevelApiService) GetMerchantsIdApiCredentialsApiCredentialIdAllowedOrigins(ctx context.Context, id string, apiCredentialId string) ApiGetMerchantsIdApiCredentialsApiCredentialIdAllowedOriginsRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetMerchantsIdApiCredentialsApiCredentialIdAllowedOriginsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		id: id,
 		apiCredentialId: apiCredentialId,
 	}
@@ -390,9 +402,15 @@ To make this request, your API credential must have the following [roles](https:
  @return ApiGetMerchantsIdApiCredentialsApiCredentialIdAllowedOriginsOriginIdRequest
 */
 func (a *AllowedOriginsMerchantLevelApiService) GetMerchantsIdApiCredentialsApiCredentialIdAllowedOriginsOriginId(ctx context.Context, id string, apiCredentialId string, originId string) ApiGetMerchantsIdApiCredentialsApiCredentialIdAllowedOriginsOriginIdRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiGetMerchantsIdApiCredentialsApiCredentialIdAllowedOriginsOriginIdRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		id: id,
 		apiCredentialId: apiCredentialId,
 		originId: originId,
@@ -571,9 +589,15 @@ To make this request, your API credential must have the following [roles](https:
  @return ApiPostMerchantsIdApiCredentialsApiCredentialIdAllowedOriginsRequest
 */
 func (a *AllowedOriginsMerchantLevelApiService) PostMerchantsIdApiCredentialsApiCredentialIdAllowedOrigins(ctx context.Context, id string, apiCredentialId string) ApiPostMerchantsIdApiCredentialsApiCredentialIdAllowedOriginsRequest {
+	// add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys, 
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+	
 	return ApiPostMerchantsIdApiCredentialsApiCredentialIdAllowedOriginsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx: ctxWithApiKey,
 		id: id,
 		apiCredentialId: apiCredentialId,
 	}
