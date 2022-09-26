@@ -4,15 +4,19 @@ info:
     email: developer-experience@adyen.com
     name: Adyen Developer Experience team
     url: https://www.adyen.help/hc/en-us/community/topics
-  description: "Configure and manage your Adyen company and merchant accounts, stores,\
-    \ and payment terminals.\n## Authentication\nEach request to the Management API\
-    \ must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key)\
-    \ in the Customer Area and then set this key to the `X-API-Key` header value.\n\
-    \nTo access the live endpoints, you need to generate a new API key in your live\
-    \ Customer Area.\n## Versioning\n\nManagement API handles versioning as part of\
-    \ the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks`\
-    \ endpoint, use:\n\n```text\nhttps://management-test.adyen.com/v1/companies/{companyId}/webhooks\n\
-    ```"
+  description: |-
+    Configure and manage your Adyen company and merchant accounts, stores, and payment terminals.
+    ## Authentication
+    Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.
+
+    To access the live endpoints, you need to generate a new API key in your live Customer Area.
+    ## Versioning
+
+    Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:
+
+    ```text
+    https://management-test.adyen.com/v1/companies/{companyId}/webhooks
+    ```
   termsOfService: https://www.adyen.com/legal/terms-and-conditions
   title: Management API
   version: "1"
@@ -50,10 +54,12 @@ tags:
 paths:
   /companies:
     get:
-      description: "Returns the list of company accounts that your API credential\
-        \ has access to. The list is grouped into pages as defined by the query parameters.\n\
-        \nTo make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        \n* Management API—Account read"
+      description: |-
+        Returns the list of company accounts that your API credential has access to. The list is grouped into pages as defined by the query parameters.
+
+        To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+
+        * Management API—Account read
       operationId: get-companies
       parameters:
       - description: The number of the page to fetch.
@@ -276,15 +282,13 @@ paths:
       x-sortIndex: 1
   /companies/{companyId}/androidCertificates:
     get:
-      description: "Returns a list of the Android certificates that are available\
-        \ for the company identified in the path.\nTypically, these certificates enable\
-        \ running apps on Android payment terminals. The certifcates in the list have\
-        \ been uploaded to Adyen and can be installed or uninstalled on Android terminals\
-        \ through [terminal actions](https://docs.adyen.com/point-of-sale/automating-terminal-management/terminal-actions-api).\n\
-        \nTo make this request, your API credential must have one of the following\
-        \ [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Terminal actions read\n* Management API—Terminal actions\
-        \ read and write"
+      description: |-
+        Returns a list of the Android certificates that are available for the company identified in the path.
+        Typically, these certificates enable running apps on Android payment terminals. The certifcates in the list have been uploaded to Adyen and can be installed or uninstalled on Android terminals through [terminal actions](https://docs.adyen.com/point-of-sale/automating-terminal-management/terminal-actions-api).
+
+        To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Terminal actions read
+        * Management API—Terminal actions read and write
       operationId: get-companies-companyId-androidCertificates
       parameters:
       - description: The unique identifier of the company account.
@@ -364,11 +368,11 @@ paths:
       x-sortIndex: 2
   /companies/{companyId}/apiCredentials:
     get:
-      description: "Returns the list of [API credentials](https://docs.adyen.com/development-resources/api-credentials)\
-        \ for the company account. The list is grouped into pages as defined by the\
-        \ query parameters.\n\nTo make this request, your API credential must have\
-        \ the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—API credentials read and write"
+      description: |-
+        Returns the list of [API credentials](https://docs.adyen.com/development-resources/api-credentials) for the company account. The list is grouped into pages as defined by the query parameters.
+
+        To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—API credentials read and write
       operationId: get-companies-companyId-apiCredentials
       parameters:
       - description: The unique identifier of the company account.
@@ -447,18 +451,20 @@ paths:
       x-groupName: API credentials - company level
       x-sortIndex: 0
     post:
-      description: "Creates an [API credential](https://docs.adyen.com/development-resources/api-credentials)\
-        \ for the company account identified in the path. In the request, you can\
-        \ specify which merchant accounts the new API credential will have access\
-        \ to, as well as its roles and allowed origins.\n\nThe response includes several\
-        \ types of authentication details:\n* [API key](https://docs.adyen.com/development-resources/api-authentication#api-key-authentication):\
-        \ used for API request authentication.\n* [Client key](https://docs.adyen.com/development-resources/client-side-authentication#how-it-works):\
-        \ public key used for client-side authentication.\n* [Username and password](https://docs.adyen.com/development-resources/api-authentication#using-basic-authentication):\
-        \ used for basic authentication.\n\n> Make sure you store the API key securely\
-        \ in your system. You won't be able to retrieve it later.\n\nIf your API key\
-        \ is lost or compromised, you need to [generate a new API key](https://docs.adyen.com/api-explorer/#/ManagementService/v1/post/companies/{companyId}/apiCredentials/{apiCredentialId}/generateApiKey).\n\
-        \nTo make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—API credentials read and write"
+      description: |-
+        Creates an [API credential](https://docs.adyen.com/development-resources/api-credentials) for the company account identified in the path. In the request, you can specify which merchant accounts the new API credential will have access to, as well as its roles and allowed origins.
+
+        The response includes several types of authentication details:
+        * [API key](https://docs.adyen.com/development-resources/api-authentication#api-key-authentication): used for API request authentication.
+        * [Client key](https://docs.adyen.com/development-resources/client-side-authentication#how-it-works): public key used for client-side authentication.
+        * [Username and password](https://docs.adyen.com/development-resources/api-authentication#using-basic-authentication): used for basic authentication.
+
+        > Make sure you store the API key securely in your system. You won't be able to retrieve it later.
+
+        If your API key is lost or compromised, you need to [generate a new API key](https://docs.adyen.com/api-explorer/#/ManagementService/v1/post/companies/{companyId}/apiCredentials/{apiCredentialId}/generateApiKey).
+
+        To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—API credentials read and write
       operationId: post-companies-companyId-apiCredentials
       parameters:
       - description: The unique identifier of the company account.
@@ -521,10 +527,11 @@ paths:
       x-sortIndex: 0
   /companies/{companyId}/apiCredentials/{apiCredentialId}:
     get:
-      description: "Returns the [API credential](https://docs.adyen.com/development-resources/api-credentials)\
-        \ identified in the path.\n\nTo make this request, your API credential must\
-        \ have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—API credentials read and write"
+      description: |-
+        Returns the [API credential](https://docs.adyen.com/development-resources/api-credentials) identified in the path.
+
+        To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—API credentials read and write
       operationId: get-companies-companyId-apiCredentials-apiCredentialId
       parameters:
       - description: The unique identifier of the company account.
@@ -665,10 +672,11 @@ paths:
       x-sortIndex: 0
   /companies/{companyId}/apiCredentials/{apiCredentialId}/allowedOrigins:
     get:
-      description: "Returns the list of [allowed origins](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins)\
-        \ for the API credential identified in the path.\n\nTo make this request,\
-        \ your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—API credentials read and write"
+      description: |-
+        Returns the list of [allowed origins](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins) for the API credential identified in the path.
+
+        To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—API credentials read and write
       operationId: get-companies-companyId-apiCredentials-apiCredentialId-allowedOrigins
       parameters:
       - description: The unique identifier of the company account.
@@ -733,10 +741,11 @@ paths:
       x-groupName: Allowed origins - company level
       x-sortIndex: 0
     post:
-      description: "Adds a new [allowed origin](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins)\
-        \ to the API credential's list of allowed origins.\n\nTo make this request,\
-        \ your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—API credentials read and write"
+      description: |-
+        Adds a new [allowed origin](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins) to the API credential's list of allowed origins.
+
+        To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—API credentials read and write
       operationId: post-companies-companyId-apiCredentials-apiCredentialId-allowedOrigins
       parameters:
       - description: The unique identifier of the company account.
@@ -807,11 +816,11 @@ paths:
       x-sortIndex: 0
   /companies/{companyId}/apiCredentials/{apiCredentialId}/allowedOrigins/{originId}:
     delete:
-      description: "Removes the [allowed origin](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins)\
-        \ identified in the path. As soon as an allowed origin is removed, we no longer\
-        \ accept client-side requests from that domain.\n\nTo make this request, your\
-        \ API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—API credentials read and write"
+      description: |-
+        Removes the [allowed origin](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins) identified in the path. As soon as an allowed origin is removed, we no longer accept client-side requests from that domain.
+
+        To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—API credentials read and write
       operationId: delete-companies-companyId-apiCredentials-apiCredentialId-allowedOrigins-originId
       parameters:
       - description: The unique identifier of the company account.
@@ -881,10 +890,11 @@ paths:
       x-groupName: Allowed origins - company level
       x-sortIndex: 0
     get:
-      description: "Returns the [allowed origin](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins)\
-        \ identified in the path.\n\nTo make this request, your API credential must\
-        \ have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—API credentials read and write"
+      description: |-
+        Returns the [allowed origin](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins) identified in the path.
+
+        To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—API credentials read and write
       operationId: get-companies-companyId-apiCredentials-apiCredentialId-allowedOrigins-originId
       parameters:
       - description: The unique identifier of the company account.
@@ -958,11 +968,11 @@ paths:
       x-sortIndex: 0
   /companies/{companyId}/apiCredentials/{apiCredentialId}/generateApiKey:
     post:
-      description: "Returns a new API key for the API credential. You can use the\
-        \ new API key a few minutes after generating it. The old API key stops working\
-        \ 24 hours after generating a new one.\n\nTo make this request, your API credential\
-        \ must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—API credentials read and write"
+      description: |-
+        Returns a new API key for the API credential. You can use the new API key a few minutes after generating it. The old API key stops working 24 hours after generating a new one.
+
+        To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—API credentials read and write
       operationId: post-companies-companyId-apiCredentials-apiCredentialId-generateApiKey
       parameters:
       - description: The unique identifier of the company account.
@@ -1028,12 +1038,11 @@ paths:
       x-sortIndex: 0
   /companies/{companyId}/apiCredentials/{apiCredentialId}/generateClientKey:
     post:
-      description: "Returns a new [client key](https://docs.adyen.com/development-resources/client-side-authentication#how-it-works)\
-        \ for the API credential identified in the path. You can use the new client\
-        \ key a few minutes after generating it. The old client key stops working\
-        \ 24 hours after generating a new one.\n\nTo make this request, your API credential\
-        \ must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—API credentials read and write"
+      description: |-
+        Returns a new [client key](https://docs.adyen.com/development-resources/client-side-authentication#how-it-works) for the API credential identified in the path. You can use the new client key a few minutes after generating it. The old client key stops working 24 hours after generating a new one.
+
+        To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—API credentials read and write
       operationId: post-companies-companyId-apiCredentials-apiCredentialId-generateClientKey
       parameters:
       - description: The unique identifier of the company account.
@@ -1099,13 +1108,13 @@ paths:
       x-sortIndex: 0
   /companies/{companyId}/billingEntities:
     get:
-      description: "Returns the billing entities of the company identified in the\
-        \ path and all merchant accounts belonging to the company.\nA billing entity\
-        \ is a legal entity where we charge orders to. An order for terminal products\
-        \ must contain the ID of a billing entity.\n\nTo make this request, your API\
-        \ credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Terminal ordering read\n* Management API—Terminal ordering\
-        \ read and write"
+      description: |-
+        Returns the billing entities of the company identified in the path and all merchant accounts belonging to the company.
+        A billing entity is a legal entity where we charge orders to. An order for terminal products must contain the ID of a billing entity.
+
+        To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Terminal ordering read
+        * Management API—Terminal ordering read and write
       operationId: get-companies-companyId-billingEntities
       parameters:
       - description: The unique identifier of the company account.
@@ -1259,13 +1268,13 @@ paths:
       x-sortIndex: 0
   /companies/{companyId}/shippingLocations:
     get:
-      description: "Returns the shipping locations for the company identified in the\
-        \ path and all merchant accounts belonging to the company.\nA shipping location\
-        \ includes the address where orders can be delivered, and an ID which you\
-        \ need to specify when ordering terminal products.\n\nTo make this request,\
-        \ your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Terminal ordering read\n* Management API—Terminal ordering\
-        \ read and write"
+      description: |-
+        Returns the shipping locations for the company identified in the path and all merchant accounts belonging to the company.
+        A shipping location includes the address where orders can be delivered, and an ID which you need to specify when ordering terminal products.
+
+        To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Terminal ordering read
+        * Management API—Terminal ordering read and write
       operationId: get-companies-companyId-shippingLocations
       parameters:
       - description: The unique identifier of the company account.
@@ -1351,10 +1360,11 @@ paths:
       x-groupName: Terminal orders - company level
       x-sortIndex: 4
     post:
-      description: "Creates a shipping location for the company identified in the\
-        \ path. A shipping location defines an address where orders can be delivered.\n\
-        \nTo make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Terminal ordering read and write"
+      description: |-
+        Creates a shipping location for the company identified in the path. A shipping location defines an address where orders can be delivered.
+
+        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Terminal ordering read and write
       operationId: post-companies-companyId-shippingLocations
       parameters:
       - description: The unique identifier of the company account.
@@ -1423,12 +1433,11 @@ paths:
       x-sortIndex: 5
   /companies/{companyId}/terminalActions:
     get:
-      description: "Returns the [terminal actions](https://docs.adyen.com/point-of-sale/automating-terminal-management/terminal-actions-api)\
-        \ that have been scheduled for the company identified in the path.The response\
-        \ doesn't include actions that are scheduled by Adyen.\nTo make this request,\
-        \ your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Terminal actions read\n* Management API—Terminal actions\
-        \ read and write"
+      description: |-
+        Returns the [terminal actions](https://docs.adyen.com/point-of-sale/automating-terminal-management/terminal-actions-api) that have been scheduled for the company identified in the path.The response doesn't include actions that are scheduled by Adyen.
+        To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Terminal actions read
+        * Management API—Terminal actions read and write
       operationId: get-companies-companyId-terminalActions
       parameters:
       - description: The unique identifier of the company account.
@@ -1698,13 +1707,13 @@ paths:
       x-sortIndex: 4
   /companies/{companyId}/terminalModels:
     get:
-      description: "Returns a list of payment terminal models that the company identified\
-        \ in the path has access to.\nThe response includes the terminal model ID,\
-        \ which can be used as a query parameter when getting a list of terminals\
-        \ or a list of products for ordering.\n\nTo make this request, your API credential\
-        \ must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Terminal ordering read\n* Management API—Terminal ordering\
-        \ read and write"
+      description: |-
+        Returns a list of payment terminal models that the company identified in the path has access to.
+        The response includes the terminal model ID, which can be used as a query parameter when getting a list of terminals or a list of products for ordering.
+
+        To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Terminal ordering read
+        * Management API—Terminal ordering read and write
       operationId: get-companies-companyId-terminalModels
       parameters:
       - description: The unique identifier of the company account.
@@ -1765,12 +1774,13 @@ paths:
       x-sortIndex: 1
   /companies/{companyId}/terminalOrders:
     get:
-      description: "Returns a lists of terminal products orders for the company identified\
-        \ in the path.\nTo filter the list, use one or more of the query parameters.\n\
-        \nTo make this request, your API credential must have one of the following\
-        \ [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Terminal ordering read\n* Management API—Terminal ordering\
-        \ read and write"
+      description: |-
+        Returns a lists of terminal products orders for the company identified in the path.
+        To filter the list, use one or more of the query parameters.
+
+        To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Terminal ordering read
+        * Management API—Terminal ordering read and write
       operationId: get-companies-companyId-terminalOrders
       parameters:
       - description: The unique identifier of the company account.
@@ -1865,10 +1875,11 @@ paths:
       x-groupName: Terminal orders - company level
       x-sortIndex: 7
     post:
-      description: "Creates an order for payment terminal products for the company\
-        \ identified in the path.\n\nTo make this request, your API credential must\
-        \ have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Terminal ordering read and write"
+      description: |-
+        Creates an order for payment terminal products for the company identified in the path.
+
+        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Terminal ordering read and write
       operationId: post-companies-companyId-terminalOrders
       parameters:
       - description: The unique identifier of the company account.
@@ -1937,11 +1948,12 @@ paths:
       x-sortIndex: 6
   /companies/{companyId}/terminalOrders/{orderId}:
     get:
-      description: "Returns the details of the terminal products order identified\
-        \ in the path.\n\nTo make this request, your API credential must have one\
-        \ of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Terminal ordering read\n* Management API—Terminal ordering\
-        \ read and write"
+      description: |-
+        Returns the details of the terminal products order identified in the path.
+
+        To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Terminal ordering read
+        * Management API—Terminal ordering read and write
       operationId: get-companies-companyId-terminalOrders-orderId
       parameters:
       - description: The unique identifier of the company account.
@@ -2094,12 +2106,13 @@ paths:
       x-sortIndex: 9
   /companies/{companyId}/terminalOrders/{orderId}/cancel:
     post:
-      description: "Cancels the terminal products order identified in the path.\n\
-        Cancelling is only possible while the order has the status **Placed**.\nTo\
-        \ cancel an order, make a POST call without a request body. The response returns\
-        \ the full order details, but with the status changed to **Cancelled**.\n\n\
-        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Terminal ordering read and write"
+      description: |-
+        Cancels the terminal products order identified in the path.
+        Cancelling is only possible while the order has the status **Placed**.
+        To cancel an order, make a POST call without a request body. The response returns the full order details, but with the status changed to **Cancelled**.
+
+        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Terminal ordering read and write
       operationId: post-companies-companyId-terminalOrders-orderId-cancel
       parameters:
       - description: The unique identifier of the company account.
@@ -2168,13 +2181,13 @@ paths:
       x-sortIndex: 10
   /companies/{companyId}/terminalProducts:
     get:
-      description: "Returns a list of payment terminal packages and parts that the\
-        \ company identified in the path has access to.\n To filter the list, use\
-        \ one or more of the query parameters. The `country` query parameter is required.\n\
-        \nTo make this request, your API credential must have one of the following\
-        \ [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Terminal ordering read\n* Management API—Terminal ordering\
-        \ read and write"
+      description: |-
+        Returns a list of payment terminal packages and parts that the company identified in the path has access to.
+         To filter the list, use one or more of the query parameters. The `country` query parameter is required.
+
+        To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Terminal ordering read
+        * Management API—Terminal ordering read and write
       operationId: get-companies-companyId-terminalProducts
       parameters:
       - description: The unique identifier of the company account.
@@ -2272,13 +2285,12 @@ paths:
       x-sortIndex: 2
   /companies/{companyId}/terminalSettings:
     get:
-      description: "Returns the payment terminal settings that are configured for\
-        \ the company identified in the path. These settings apply to all terminals\
-        \ under the company, unless different values are configured at a lower level\
-        \ (merchant account, store, or individual terminal).\n\nTo make this request,\
-        \ your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Terminal settings read\n* Management API—Terminal settings\
-        \ read and write"
+      description: |-
+        Returns the payment terminal settings that are configured for the company identified in the path. These settings apply to all terminals under the company, unless different values are configured at a lower level (merchant account, store, or individual terminal).
+
+        To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Terminal settings read
+        * Management API—Terminal settings read and write
       operationId: get-companies-companyId-terminalSettings
       parameters:
       - description: The unique identifier of the company account.
@@ -2338,17 +2350,15 @@ paths:
       x-groupName: Terminal settings - company level
       x-sortIndex: 1
     patch:
-      description: "Updates payment terminal settings for the company identified in\
-        \ the path. These settings apply to all terminals under the company, unless\
-        \ different values are configured at a lower level (merchant account, store,\
-        \ or individual terminal).\n\n* To change a parameter value, include the full\
-        \ object that contains the parameter, even if you don't want to change all\
-        \ parameters in the object.\n* To restore a parameter value inherited from\
-        \ the Adyen PSP level, include the full object that contains the parameter,\
-        \ and specify an empty value for the parameter or omit the parameter.\n* Objects\
-        \ that are not included in the request are not updated.\n\nTo make this request,\
-        \ your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Terminal settings read and write"
+      description: |-
+        Updates payment terminal settings for the company identified in the path. These settings apply to all terminals under the company, unless different values are configured at a lower level (merchant account, store, or individual terminal).
+
+        * To change a parameter value, include the full object that contains the parameter, even if you don't want to change all parameters in the object.
+        * To restore a parameter value inherited from the Adyen PSP level, include the full object that contains the parameter, and specify an empty value for the parameter or omit the parameter.
+        * Objects that are not included in the request are not updated.
+
+        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Terminal settings read and write
       operationId: patch-companies-companyId-terminalSettings
       parameters:
       - description: The unique identifier of the company account.
@@ -2421,10 +2431,11 @@ paths:
       x-sortIndex: 3
   /companies/{companyId}/users:
     get:
-      description: "Returns the list of users for the `companyId` identified in the\
-        \ path.\n\nTo make this request, your API credential must have the following\
-        \ [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Users read and write\n"
+      description: |
+        Returns the list of users for the `companyId` identified in the path.
+
+        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Users read and write
       operationId: get-companies-companyId-users
       parameters:
       - description: The unique identifier of the company account.
@@ -2500,9 +2511,11 @@ paths:
       x-groupName: Users - company level
       x-sortIndex: 0
     post:
-      description: "Creates the user for the `companyId` identified in the path.\n\
-        \nTo make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Users read and write\n"
+      description: |
+        Creates the user for the `companyId` identified in the path.
+
+        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Users read and write
       operationId: post-companies-companyId-users
       parameters:
       - description: The unique identifier of the company account.
@@ -2571,10 +2584,11 @@ paths:
       x-sortIndex: 0
   /companies/{companyId}/users/{userId}:
     get:
-      description: "Returns user details for the `userId` and the `companyId` identified\
-        \ in the path.\n\nTo make this request, your API credential must have the\
-        \ following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Users read and write\n"
+      description: |
+        Returns user details for the `userId` and the `companyId` identified in the path.
+
+        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Users read and write
       operationId: get-companies-companyId-users-userId
       parameters:
       - description: The unique identifier of the company account.
@@ -2639,10 +2653,11 @@ paths:
       x-groupName: Users - company level
       x-sortIndex: 0
     patch:
-      description: "Updates user details for the `userId` and the `companyId` identified\
-        \ in the path.\n\nTo make this request, your API credential must have the\
-        \ following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Users read and write\n"
+      description: |
+        Updates user details for the `userId` and the `companyId` identified in the path.
+
+        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Users read and write
       operationId: patch-companies-companyId-users-userId
       parameters:
       - description: The unique identifier of the company account.
@@ -2713,9 +2728,12 @@ paths:
       x-sortIndex: 0
   /companies/{companyId}/webhooks:
     get:
-      description: "Lists all webhook configurations for the company account.\n\n\
-        To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Webhooks read\n* Management API—Webhooks read and write"
+      description: |-
+        Lists all webhook configurations for the company account.
+
+        To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Webhooks read
+        * Management API—Webhooks read and write
       operationId: get-companies-companyId-webhooks
       parameters:
       - description: "Unique identifier of the [company account](https://docs.adyen.com/account/account-structure#company-account)."
@@ -2791,11 +2809,11 @@ paths:
       x-groupName: Webhooks - company level
       x-sortIndex: 2
     post:
-      description: "Subscribe to receive webhook notifications about events related\
-        \ to your company account. You can add basic authentication to make sure the\
-        \ data is secure.\n\nTo make this request, your API credential must have the\
-        \ following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Webhooks read and write"
+      description: |-
+        Subscribe to receive webhook notifications about events related to your company account. You can add basic authentication to make sure the data is secure.
+
+        To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Webhooks read and write
       operationId: post-companies-companyId-webhooks
       parameters:
       - description: "Unique identifier of the [company account](https://docs.adyen.com/account/account-structure#company-account)."
@@ -2858,9 +2876,11 @@ paths:
       x-sortIndex: 1
   /companies/{companyId}/webhooks/{webhookId}:
     delete:
-      description: "Remove the configuration for the webhook identified in the path.\n\
-        \nTo make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Webhooks read and write"
+      description: |-
+        Remove the configuration for the webhook identified in the path.
+
+        To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Webhooks read and write
       operationId: delete-companies-companyId-webhooks-webhookId
       parameters:
       - description: The unique identifier of the company account.
@@ -2922,10 +2942,12 @@ paths:
       x-groupName: Webhooks - company level
       x-sortIndex: 5
     get:
-      description: "Returns the configuration for the webhook identified in the path.\n\
-        \nTo make this request, your API credential must have one of the following\
-        \ [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Webhooks read\n* Management API—Webhooks read and write"
+      description: |-
+        Returns the configuration for the webhook identified in the path.
+
+        To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Webhooks read
+        * Management API—Webhooks read and write
       operationId: get-companies-companyId-webhooks-webhookId
       parameters:
       - description: "Unique identifier of the [company account](https://docs.adyen.com/account/account-structure#company-account)."
@@ -2990,12 +3012,11 @@ paths:
       x-groupName: Webhooks - company level
       x-sortIndex: 3
     patch:
-      description: "Make changes to the configuration of the webhook identified in\
-        \ the path. The request contains the new values you want to have in the webhook\
-        \ configuration. The response contains the full configuration for the webhook,\
-        \ which includes the new values from the request.\n\nTo make this request,\
-        \ your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Webhooks read and write"
+      description: |-
+        Make changes to the configuration of the webhook identified in the path. The request contains the new values you want to have in the webhook configuration. The response contains the full configuration for the webhook, which includes the new values from the request.
+
+        To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Webhooks read and write
       operationId: patch-companies-companyId-webhooks-webhookId
       parameters:
       - description: The unique identifier of the company account.
@@ -3066,13 +3087,11 @@ paths:
       x-sortIndex: 4
   /companies/{companyId}/webhooks/{webhookId}/generateHmac:
     post:
-      description: "Returns an [HMAC key](https://en.wikipedia.org/wiki/HMAC) for\
-        \ the webhook identified in the path. This key allows you to check the integrity\
-        \ and the origin of the notifications you receive.By creating an HMAC key,\
-        \ you start receiving [HMAC-signed notifications](https://docs.adyen.com/development-resources/webhooks/verify-hmac-signatures#enable-hmac-signatures)\
-        \ from Adyen. Find out more about how to [verify HMAC signatures](https://docs.adyen.com/development-resources/webhooks/verify-hmac-signatures).\n\
-        \nTo make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Webhooks read and write"
+      description: |-
+        Returns an [HMAC key](https://en.wikipedia.org/wiki/HMAC) for the webhook identified in the path. This key allows you to check the integrity and the origin of the notifications you receive.By creating an HMAC key, you start receiving [HMAC-signed notifications](https://docs.adyen.com/development-resources/webhooks/verify-hmac-signatures#enable-hmac-signatures) from Adyen. Find out more about how to [verify HMAC signatures](https://docs.adyen.com/development-resources/webhooks/verify-hmac-signatures).
+
+        To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Webhooks read and write
       operationId: post-companies-companyId-webhooks-webhookId-generateHmac
       parameters:
       - description: The unique identifier of the company account.
@@ -3138,20 +3157,17 @@ paths:
       x-sortIndex: 6
   /companies/{companyId}/webhooks/{webhookId}/test:
     post:
-      description: "Sends sample notifications to test if the webhook is set up correctly.\n\
-        \nWe send sample notifications for maximum 20 of the merchant accounts that\
-        \ the webhook is configured for. If the webhook is configured for more than\
-        \ 20 merchant accounts, use the `merchantIds` array to specify a subset of\
-        \ the merchant accounts for which to send test notifications.\n\nWe send four\
-        \ test notifications for each event code you choose. They cover success and\
-        \ failure scenarios for the hard-coded currencies EUR and GBP, regardless\
-        \ of the currencies configured in the merchant accounts. For custom notifications,\
-        \ we only send the specified custom notification.\n\nThe response describes\
-        \ the result of the test. The `status` field tells you if the test was successful\
-        \ or not. You can use the other response fields to troubleshoot unsuccessful\
-        \ tests.\n\nTo make this request, your API credential must have the following\
-        \ [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Webhooks read and write"
+      description: |-
+        Sends sample notifications to test if the webhook is set up correctly.
+
+        We send sample notifications for maximum 20 of the merchant accounts that the webhook is configured for. If the webhook is configured for more than 20 merchant accounts, use the `merchantIds` array to specify a subset of the merchant accounts for which to send test notifications.
+
+        We send four test notifications for each event code you choose. They cover success and failure scenarios for the hard-coded currencies EUR and GBP, regardless of the currencies configured in the merchant accounts. For custom notifications, we only send the specified custom notification.
+
+        The response describes the result of the test. The `status` field tells you if the test was successful or not. You can use the other response fields to troubleshoot unsuccessful tests.
+
+        To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Webhooks read and write
       operationId: post-companies-companyId-webhooks-webhookId-test
       parameters:
       - description: The unique identifier of the company account.
@@ -3222,9 +3238,10 @@ paths:
       x-sortIndex: 7
   /me:
     get:
-      description: "Returns your [API credential](https://docs.adyen.com/development-resources/api-credentials)\
-        \ details based on the API Key you used in the request.\n\nYou can make this\
-        \ request with any of the Management API roles."
+      description: |-
+        Returns your [API credential](https://docs.adyen.com/development-resources/api-credentials) details based on the API Key you used in the request.
+
+        You can make this request with any of the Management API roles.
       operationId: get-me
       responses:
         "200":
@@ -3273,10 +3290,10 @@ paths:
       x-sortIndex: 0
   /me/allowedOrigins:
     get:
-      description: "Returns the list of [allowed origins](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins)\
-        \ of your [API credential](https://docs.adyen.com/development-resources/api-credentials)\
-        \ based on the API key you used in the request.\n\nYou can make this request\
-        \ with any of the Management API roles."
+      description: |-
+        Returns the list of [allowed origins](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins) of your [API credential](https://docs.adyen.com/development-resources/api-credentials) based on the API key you used in the request.
+
+        You can make this request with any of the Management API roles.
       operationId: get-me-allowedOrigins
       responses:
         "200":
@@ -3324,10 +3341,11 @@ paths:
       x-groupName: My API credential
       x-sortIndex: 0
     post:
-      description: "Adds an allowed origin to the list of [allowed origins](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins)\
-        \ of your API credential.\nThe API key from the request is used to identify\
-        \ the [API credential](https://docs.adyen.com/development-resources/api-credentials).\n\
-        \nYou can make this request with any of the Management API roles."
+      description: |-
+        Adds an allowed origin to the list of [allowed origins](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins) of your API credential.
+        The API key from the request is used to identify the [API credential](https://docs.adyen.com/development-resources/api-credentials).
+
+        You can make this request with any of the Management API roles.
       operationId: post-me-allowedOrigins
       requestBody:
         content:
@@ -3381,10 +3399,11 @@ paths:
       x-sortIndex: 0
   /me/allowedOrigins/{originId}:
     delete:
-      description: "Removes the [allowed origin](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins)\
-        \ specified in the path.\nThe API key from the request is used to identify\
-        \ the [API credential](https://docs.adyen.com/development-resources/api-credentials).\n\
-        \nYou can make this request with any of the Management API roles."
+      description: |-
+        Removes the [allowed origin](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins) specified in the path.
+        The API key from the request is used to identify the [API credential](https://docs.adyen.com/development-resources/api-credentials).
+
+        You can make this request with any of the Management API roles.
       operationId: delete-me-allowedOrigins-originId
       parameters:
       - description: Unique identifier of the allowed origin.
@@ -3438,10 +3457,11 @@ paths:
       x-groupName: My API credential
       x-sortIndex: 0
     get:
-      description: "Returns the details of the [allowed origin](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins)\
-        \ specified in the path.\nThe API key from the request is used to identify\
-        \ the [API credential](https://docs.adyen.com/development-resources/api-credentials).\n\
-        \nYou can make this request with any of the Management API roles."
+      description: |-
+        Returns the details of the [allowed origin](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins) specified in the path.
+        The API key from the request is used to identify the [API credential](https://docs.adyen.com/development-resources/api-credentials).
+
+        You can make this request with any of the Management API roles.
       operationId: get-me-allowedOrigins-originId
       parameters:
       - description: Unique identifier of the allowed origin.
@@ -3577,10 +3597,11 @@ paths:
       x-sortIndex: 0
   /merchants/{id}:
     get:
-      description: "Returns the merchant account specified in the path. Your API credential\
-        \ must have access to the merchant account.\n\nTo make this request, your\
-        \ API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Account read"
+      description: |-
+        Returns the merchant account specified in the path. Your API credential must have access to the merchant account.
+
+        To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Account read
       operationId: get-merchants-id
       parameters:
       - description: The unique identifier of the merchant account.
@@ -3641,11 +3662,11 @@ paths:
       x-sortIndex: 0
   /merchants/{id}/apiCredentials:
     get:
-      description: "Returns the list of [API credentials](https://docs.adyen.com/development-resources/api-credentials)\
-        \ for the merchant account. The list is grouped into pages as defined by the\
-        \ query parameters.\n\nTo make this request, your API credential must have\
-        \ the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—API credentials read and write"
+      description: |-
+        Returns the list of [API credentials](https://docs.adyen.com/development-resources/api-credentials) for the merchant account. The list is grouped into pages as defined by the query parameters.
+
+        To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—API credentials read and write
       operationId: get-merchants-id-apiCredentials
       parameters:
       - description: The unique identifier of the merchant account.
@@ -3724,17 +3745,20 @@ paths:
       x-groupName: API credentials - merchant level
       x-sortIndex: 0
     post:
-      description: "Creates an [API credential](https://docs.adyen.com/development-resources/api-credentials)\
-        \ for the company account identified in the path. In the request, you can\
-        \ specify the roles and allowed origins for the new API credential.\n\nThe\
-        \ response includes the:\n* [API key](https://docs.adyen.com/development-resources/api-authentication#api-key-authentication):\
-        \ used for API request authentication.\n* [Client key](https://docs.adyen.com/development-resources/client-side-authentication#how-it-works):\
-        \ public key used for client-side authentication.\n* [Username and password](https://docs.adyen.com/development-resources/api-authentication#using-basic-authentication):\
-        \ used for basic authentication.\n\n> Make sure you store the API key securely\
-        \ in your system. You won't be able to retrieve it later.\n\nIf your API key\
-        \ is lost or compromised, you need to [generate a new API key](https://docs.adyen.com/api-explorer/#/ManagementService/v1/post/merchants/{id}/apiCredentials/{apiCredentialId}/generateApiKey).\n\
-        \nTo make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—API credentials read and write"
+      description: |-
+        Creates an [API credential](https://docs.adyen.com/development-resources/api-credentials) for the company account identified in the path. In the request, you can specify the roles and allowed origins for the new API credential.
+
+        The response includes the:
+        * [API key](https://docs.adyen.com/development-resources/api-authentication#api-key-authentication): used for API request authentication.
+        * [Client key](https://docs.adyen.com/development-resources/client-side-authentication#how-it-works): public key used for client-side authentication.
+        * [Username and password](https://docs.adyen.com/development-resources/api-authentication#using-basic-authentication): used for basic authentication.
+
+        > Make sure you store the API key securely in your system. You won't be able to retrieve it later.
+
+        If your API key is lost or compromised, you need to [generate a new API key](https://docs.adyen.com/api-explorer/#/ManagementService/v1/post/merchants/{id}/apiCredentials/{apiCredentialId}/generateApiKey).
+
+        To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—API credentials read and write
       operationId: post-merchants-id-apiCredentials
       parameters:
       - description: The unique identifier of the merchant account.
@@ -3800,10 +3824,11 @@ paths:
       x-sortIndex: 0
   /merchants/{id}/apiCredentials/{apiCredentialId}:
     get:
-      description: "Returns the [API credential](https://docs.adyen.com/development-resources/api-credentials)\
-        \ identified in the path.\n\nTo make this request, your API credential must\
-        \ have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—API credentials read and write"
+      description: |-
+        Returns the [API credential](https://docs.adyen.com/development-resources/api-credentials) identified in the path.
+
+        To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—API credentials read and write
       operationId: get-merchants-id-apiCredentials-apiCredentialId
       parameters:
       - description: The unique identifier of the merchant account.
@@ -3949,10 +3974,11 @@ paths:
       x-sortIndex: 0
   /merchants/{id}/apiCredentials/{apiCredentialId}/allowedOrigins:
     get:
-      description: "Returns the list of [allowed origins](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins)\
-        \ for the API credential identified in the path.\n\nTo make this request,\
-        \ your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—API credentials read and write"
+      description: |-
+        Returns the list of [allowed origins](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins) for the API credential identified in the path.
+
+        To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—API credentials read and write
       operationId: get-merchants-id-apiCredentials-apiCredentialId-allowedOrigins
       parameters:
       - description: The unique identifier of the merchant account.
@@ -4020,10 +4046,11 @@ paths:
       x-groupName: Allowed origins - merchant level
       x-sortIndex: 0
     post:
-      description: "Adds a new [allowed origin](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins)\
-        \ to the API credential's list of allowed origins.\n\nTo make this request,\
-        \ your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—API credentials read and write"
+      description: |-
+        Adds a new [allowed origin](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins) to the API credential's list of allowed origins.
+
+        To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—API credentials read and write
       operationId: post-merchants-id-apiCredentials-apiCredentialId-allowedOrigins
       parameters:
       - description: The unique identifier of the merchant account.
@@ -4097,11 +4124,11 @@ paths:
       x-sortIndex: 0
   /merchants/{id}/apiCredentials/{apiCredentialId}/allowedOrigins/{originId}:
     delete:
-      description: "Removes the [allowed origin](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins)\
-        \ identified in the path. As soon as an allowed origin is removed, we no longer\
-        \ accept client-side requests from that domain.\n\nTo make this request, your\
-        \ API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—API credentials read and write"
+      description: |-
+        Removes the [allowed origin](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins) identified in the path. As soon as an allowed origin is removed, we no longer accept client-side requests from that domain.
+
+        To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—API credentials read and write
       operationId: delete-merchants-id-apiCredentials-apiCredentialId-allowedOrigins-originId
       parameters:
       - description: The unique identifier of the merchant account.
@@ -4171,10 +4198,11 @@ paths:
       x-groupName: Allowed origins - merchant level
       x-sortIndex: 0
     get:
-      description: "Returns the [allowed origin](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins)\
-        \ identified in the path.\n\nTo make this request, your API credential must\
-        \ have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—API credentials read and write"
+      description: |-
+        Returns the [allowed origin](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins) identified in the path.
+
+        To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—API credentials read and write
       operationId: get-merchants-id-apiCredentials-apiCredentialId-allowedOrigins-originId
       parameters:
       - description: The unique identifier of the merchant account.
@@ -4251,11 +4279,11 @@ paths:
       x-sortIndex: 0
   /merchants/{id}/apiCredentials/{apiCredentialId}/generateApiKey:
     post:
-      description: "Returns a new API key for the API credential. You can use the\
-        \ new API key a few minutes after generating it. The old API key stops working\
-        \ 24 hours after generating a new one.\n\nTo make this request, your API credential\
-        \ must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—API credentials read and write"
+      description: |-
+        Returns a new API key for the API credential. You can use the new API key a few minutes after generating it. The old API key stops working 24 hours after generating a new one.
+
+        To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—API credentials read and write
       operationId: post-merchants-id-apiCredentials-apiCredentialId-generateApiKey
       parameters:
       - description: The unique identifier of the merchant account.
@@ -4324,12 +4352,11 @@ paths:
       x-sortIndex: 0
   /merchants/{id}/apiCredentials/{apiCredentialId}/generateClientKey:
     post:
-      description: "Returns a new [client key](https://docs.adyen.com/development-resources/client-side-authentication#how-it-works)\
-        \ for the API credential identified in the path. You can use the new client\
-        \ key a few minutes after generating it. The old client key stops working\
-        \ 24 hours after generating a new one.\n\nTo make this request, your API credential\
-        \ must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—API credentials read and write"
+      description: |-
+        Returns a new [client key](https://docs.adyen.com/development-resources/client-side-authentication#how-it-works) for the API credential identified in the path. You can use the new client key a few minutes after generating it. The old client key stops working 24 hours after generating a new one.
+
+        To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—API credentials read and write
       operationId: post-merchants-id-apiCredentials-apiCredentialId-generateClientKey
       parameters:
       - description: The unique identifier of the merchant account.
@@ -4398,10 +4425,11 @@ paths:
       x-sortIndex: 0
   /merchants/{id}/paymentMethodSettings:
     get:
-      description: "Returns details for all payment methods of the merchant account\
-        \ identified in the path.\n\nTo make this request, your API credential must\
-        \ have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Payment methods read\n"
+      description: |
+        Returns details for all payment methods of the merchant account identified in the path.
+
+        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Payment methods read
       operationId: get-merchants-id-paymentMethodSettings
       parameters:
       - description: The unique identifier of the merchant account.
@@ -4498,10 +4526,11 @@ paths:
       x-groupName: Payment methods - merchant level
       x-sortIndex: 2
     post:
-      description: "Sends a request to add a new payment method to the merchant account\
-        \ identified in the path.\n\nTo make this request, your API credential must\
-        \ have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Payment methods read and write\n"
+      description: |
+        Sends a request to add a new payment method to the merchant account identified in the path.
+
+        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Payment methods read and write
       operationId: post-merchants-id-paymentMethodSettings
       parameters:
       - description: The unique identifier of the merchant account.
@@ -4567,10 +4596,11 @@ paths:
       x-sortIndex: 1
   /merchants/{id}/paymentMethodSettings/{paymentMethodId}:
     get:
-      description: "Returns details for the merchant account and the payment method\
-        \ identified in the path.\n\nTo make this request, your API credential must\
-        \ have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Payment methods read\n"
+      description: |
+        Returns details for the merchant account and the payment method identified in the path.
+
+        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Payment methods read
       operationId: get-merchants-id-paymentMethodSettings-paymentMethodId
       parameters:
       - description: The unique identifier of the merchant account.
@@ -4638,10 +4668,11 @@ paths:
       x-groupName: Payment methods - merchant level
       x-sortIndex: 3
     patch:
-      description: "Updates payment method details for the merchant account and the\
-        \ payment method identified in the path.\n\nTo make this request, your API\
-        \ credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Payment methods read and write\n"
+      description: |
+        Updates payment method details for the merchant account and the payment method identified in the path.
+
+        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Payment methods read and write
       operationId: patch-merchants-id-paymentMethodSettings-paymentMethodId
       parameters:
       - description: The unique identifier of the merchant account.
@@ -4715,10 +4746,11 @@ paths:
       x-sortIndex: 4
   /merchants/{id}/users:
     get:
-      description: "Returns a list of users associated with the `id` specified in\
-        \ the path.\n\nTo make this request, your API credential must have the following\
-        \ [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Users read and write\n"
+      description: |
+        Returns a list of users associated with the `id` specified in the path.
+
+        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Users read and write
       operationId: get-merchants-id-users
       parameters:
       - description: Unique identifier of the merchant.
@@ -4797,9 +4829,11 @@ paths:
       x-groupName: Users - merchant level
       x-sortIndex: 0
     post:
-      description: "Creates a user for the `id` specified in the path.\n\nTo make\
-        \ this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Users read and write\n"
+      description: |
+        Creates a user for the `id` specified in the path.
+
+        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Users read and write
       operationId: post-merchants-id-users
       parameters:
       - description: Unique identifier of the merchant.
@@ -4865,10 +4899,11 @@ paths:
       x-sortIndex: 0
   /merchants/{id}/users/{userId}:
     get:
-      description: "Returns user details for the `userId` and the `id` specified in\
-        \ the path.\n\nTo make this request, your API credential must have the following\
-        \ [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Users read and write\n"
+      description: |
+        Returns user details for the `userId` and the `id` specified in the path.
+
+        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Users read and write
       operationId: get-merchants-id-users-userId
       parameters:
       - description: Unique identifier of the merchant.
@@ -4936,10 +4971,11 @@ paths:
       x-groupName: Users - merchant level
       x-sortIndex: 0
     patch:
-      description: "Updates user details for the `userId` and the `id` specified in\
-        \ the path.\n\nTo make this request, your API credential must have the following\
-        \ [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Users read and write\n"
+      description: |
+        Updates user details for the `userId` and the `id` specified in the path.
+
+        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Users read and write
       operationId: patch-merchants-id-users-userId
       parameters:
       - description: Unique identifier of the merchant.
@@ -5013,9 +5049,12 @@ paths:
       x-sortIndex: 0
   /merchants/{id}/webhooks:
     get:
-      description: "Lists all webhook configurations for the merchant account.\n\n\
-        To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Webhooks read\n* Management API—Webhooks read and write"
+      description: |-
+        Lists all webhook configurations for the merchant account.
+
+        To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Webhooks read
+        * Management API—Webhooks read and write
       operationId: get-merchants-id-webhooks
       parameters:
       - description: The unique identifier of the merchant account.
@@ -5094,11 +5133,11 @@ paths:
       x-groupName: Webhooks - merchant level
       x-sortIndex: 2
     post:
-      description: "Subscribe to receive webhook notifications about events related\
-        \ to your merchant account. You can add basic authentication to make sure\
-        \ the data is secure.\n\nTo make this request, your API credential must have\
-        \ the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Webhooks read and write"
+      description: |-
+        Subscribe to receive webhook notifications about events related to your merchant account. You can add basic authentication to make sure the data is secure.
+
+        To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Webhooks read and write
       operationId: post-merchants-id-webhooks
       parameters:
       - description: The unique identifier of the merchant account.
@@ -5164,9 +5203,11 @@ paths:
       x-sortIndex: 1
   /merchants/{id}/webhooks/{webhookId}:
     delete:
-      description: "Remove the configuration for the webhook identified in the path.\n\
-        \nTo make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Webhooks read and write"
+      description: |-
+        Remove the configuration for the webhook identified in the path.
+
+        To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Webhooks read and write
       operationId: delete-merchants-id-webhooks-webhookId
       parameters:
       - description: The unique identifier of the merchant account.
@@ -5228,10 +5269,12 @@ paths:
       x-groupName: Webhooks - merchant level
       x-sortIndex: 5
     get:
-      description: "Returns the configuration for the webhook identified in the path.\n\
-        \nTo make this request, your API credential must have one of the following\
-        \ [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Webhooks read\n* Management API—Webhooks read and write"
+      description: |-
+        Returns the configuration for the webhook identified in the path.
+
+        To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Webhooks read
+        * Management API—Webhooks read and write
       operationId: get-merchants-id-webhooks-webhookId
       parameters:
       - description: The unique identifier of the merchant account.
@@ -5299,12 +5342,11 @@ paths:
       x-groupName: Webhooks - merchant level
       x-sortIndex: 3
     patch:
-      description: "Make changes to the configuration of the webhook identified in\
-        \ the path. The request contains the new values you want to have in the webhook\
-        \ configuration. The response contains the full configuration for the webhook,\
-        \ which includes the new values from the request.\n\nTo make this request,\
-        \ your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Webhooks read and write"
+      description: |-
+        Make changes to the configuration of the webhook identified in the path. The request contains the new values you want to have in the webhook configuration. The response contains the full configuration for the webhook, which includes the new values from the request.
+
+        To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Webhooks read and write
       operationId: patch-merchants-id-webhooks-webhookId
       parameters:
       - description: The unique identifier of the merchant account.
@@ -5378,13 +5420,11 @@ paths:
       x-sortIndex: 4
   /merchants/{id}/webhooks/{webhookId}/generateHmac:
     post:
-      description: "Returns an [HMAC key](https://en.wikipedia.org/wiki/HMAC) for\
-        \ the webhook identified in the path. This key allows you to check the integrity\
-        \ and the origin of the notifications you receive.By creating an HMAC key,\
-        \ you start receiving [HMAC-signed notifications](https://docs.adyen.com/development-resources/webhooks/verify-hmac-signatures#enable-hmac-signatures)\
-        \ from Adyen. Find out more about how to [verify HMAC signatures](https://docs.adyen.com/development-resources/webhooks/verify-hmac-signatures).\n\
-        \nTo make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Webhooks read and write"
+      description: |-
+        Returns an [HMAC key](https://en.wikipedia.org/wiki/HMAC) for the webhook identified in the path. This key allows you to check the integrity and the origin of the notifications you receive.By creating an HMAC key, you start receiving [HMAC-signed notifications](https://docs.adyen.com/development-resources/webhooks/verify-hmac-signatures#enable-hmac-signatures) from Adyen. Find out more about how to [verify HMAC signatures](https://docs.adyen.com/development-resources/webhooks/verify-hmac-signatures).
+
+        To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Webhooks read and write
       operationId: post-merchants-id-webhooks-webhookId-generateHmac
       parameters:
       - description: The unique identifier of the merchant account.
@@ -5452,16 +5492,15 @@ paths:
       x-sortIndex: 6
   /merchants/{id}/webhooks/{webhookId}/test:
     post:
-      description: "Sends sample notifications to test if the webhook is set up correctly.\n\
-        \nWe send four test notifications for each event code you choose. They cover\
-        \ success and failure scenarios for the hard-coded currencies EUR and GBP,\
-        \ regardless of the currencies configured in the merchant accounts. For custom\
-        \ notifications, we only send the specified custom notification.\n\nThe response\
-        \ describes the result of the test. The `status` field tells you if the test\
-        \ was successful or not. You can use the other fields to troubleshoot unsuccessful\
-        \ tests.\n\nTo make this request, your API credential must have the following\
-        \ [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Webhooks read and write"
+      description: |-
+        Sends sample notifications to test if the webhook is set up correctly.
+
+        We send four test notifications for each event code you choose. They cover success and failure scenarios for the hard-coded currencies EUR and GBP, regardless of the currencies configured in the merchant accounts. For custom notifications, we only send the specified custom notification.
+
+        The response describes the result of the test. The `status` field tells you if the test was successful or not. You can use the other fields to troubleshoot unsuccessful tests.
+
+        To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Webhooks read and write
       operationId: post-merchants-id-webhooks-webhookId-test
       parameters:
       - description: The unique identifier of the merchant account.
@@ -5535,13 +5574,13 @@ paths:
       x-sortIndex: 7
   /merchants/{merchantId}/billingEntities:
     get:
-      description: "Returns the billing entities of the merchant account identified\
-        \ in the path.\nA billing entity is a legal entity where we charge orders\
-        \ to. An order for terminal products must contain the ID of a billing entity.\n\
-        \nTo make this request, your API credential must have one of the following\
-        \ [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Terminal ordering read\n* Management API—Terminal ordering\
-        \ read and write"
+      description: |-
+        Returns the billing entities of the merchant account identified in the path.
+        A billing entity is a legal entity where we charge orders to. An order for terminal products must contain the ID of a billing entity.
+
+        To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Terminal ordering read
+        * Management API—Terminal ordering read and write
       operationId: get-merchants-merchantId-billingEntities
       parameters:
       - description: The unique identifier of the merchant account.
@@ -5613,13 +5652,13 @@ paths:
       x-sortIndex: 3
   /merchants/{merchantId}/shippingLocations:
     get:
-      description: "Returns the shipping locations for the merchant account identified\
-        \ in the path.\nA shipping location includes the address where orders can\
-        \ be delivered, and an ID which you need to specify when ordering terminal\
-        \ products.\n\nTo make this request, your API credential must have one of\
-        \ the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Terminal ordering read\n* Management API—Terminal ordering\
-        \ read and write"
+      description: |-
+        Returns the shipping locations for the merchant account identified in the path.
+        A shipping location includes the address where orders can be delivered, and an ID which you need to specify when ordering terminal products.
+
+        To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Terminal ordering read
+        * Management API—Terminal ordering read and write
       operationId: get-merchants-merchantId-shippingLocations
       parameters:
       - description: The unique identifier of the merchant account.
@@ -5784,11 +5823,12 @@ paths:
       x-sortIndex: 5
   /merchants/{merchantId}/stores:
     get:
-      description: "Returns a list of stores for the merchant account identified in\
-        \ the path. The list is grouped into pages as defined by the query parameters.\n\
-        \nTo make this request, your API credential must have one of the following\
-        \ [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Stores read\n* Management API—Stores read and write"
+      description: |-
+        Returns a list of stores for the merchant account identified in the path. The list is grouped into pages as defined by the query parameters.
+
+        To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Stores read
+        * Management API—Stores read and write
       operationId: get-merchants-merchantId-stores
       parameters:
       - description: The unique identifier of the merchant account.
@@ -5878,9 +5918,11 @@ paths:
       x-groupName: Account - store level
       x-sortIndex: 1
     post:
-      description: "Creates a store for the merchant account identified in the path.\n\
-        \nTo make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Stores read and write"
+      description: |-
+        Creates a store for the merchant account identified in the path.
+
+        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Stores read and write
       operationId: post-merchants-merchantId-stores
       parameters:
       - description: The unique identifier of the merchant account.
@@ -6144,13 +6186,12 @@ paths:
       x-sortIndex: 4
   /merchants/{merchantId}/stores/{reference}/terminalSettings:
     get:
-      description: "Returns the payment terminal settings that are configured for\
-        \ the store identified in the path. These settings apply to all terminals\
-        \ under the store unless different values are configured for an individual\
-        \ terminal.\n\nTo make this request, your API credential must have one of\
-        \ the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Terminal settings read\n* Management API—Terminal settings\
-        \ read and write"
+      description: |-
+        Returns the payment terminal settings that are configured for the store identified in the path. These settings apply to all terminals under the store unless different values are configured for an individual terminal.
+
+        To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Terminal settings read
+        * Management API—Terminal settings read and write
       operationId: get-merchants-merchantId-stores-reference-terminalSettings
       parameters:
       - description: The unique identifier of the merchant account.
@@ -6221,17 +6262,15 @@ paths:
       x-groupName: Terminal settings - store level
       x-sortIndex: 1
     patch:
-      description: "Updates payment terminal settings for the store identified in\
-        \ the path. These settings apply to all terminals under the store, unless\
-        \ different values are configured for an individual terminal.\n\n* To change\
-        \ a parameter value, include the full object that contains the parameter,\
-        \ even if you don't want to change all parameters in the object.\n* To restore\
-        \ a parameter value inherited from a higher level, include the full object\
-        \ that contains the parameter, and specify an empty value for the parameter\
-        \ or omit the parameter.\n* Objects that are not included in the request are\
-        \ not updated.\n\nTo make this request, your API credential must have the\
-        \ following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Terminal settings read and write"
+      description: |-
+        Updates payment terminal settings for the store identified in the path. These settings apply to all terminals under the store, unless different values are configured for an individual terminal.
+
+        * To change a parameter value, include the full object that contains the parameter, even if you don't want to change all parameters in the object.
+        * To restore a parameter value inherited from a higher level, include the full object that contains the parameter, and specify an empty value for the parameter or omit the parameter.
+        * Objects that are not included in the request are not updated.
+
+        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Terminal settings read and write
       operationId: patch-merchants-merchantId-stores-reference-terminalSettings
       parameters:
       - description: The unique identifier of the merchant account.
@@ -6315,9 +6354,12 @@ paths:
       x-sortIndex: 3
   /merchants/{merchantId}/stores/{storeId}:
     get:
-      description: "Returns the details of the store identified in the path.\n\nTo\
-        \ make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Stores read\n* Management API—Stores read and write"
+      description: |-
+        Returns the details of the store identified in the path.
+
+        To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Stores read
+        * Management API—Stores read and write
       operationId: get-merchants-merchantId-stores-storeId
       parameters:
       - description: The unique identifier of the merchant account.
@@ -6388,10 +6430,11 @@ paths:
       x-groupName: Account - store level
       x-sortIndex: 2
     patch:
-      description: "Updates the store identified in the path. You can only update\
-        \ some store parameters.\n\nTo make this request, your API credential must\
-        \ have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Stores read and write"
+      description: |-
+        Updates the store identified in the path. You can only update some store parameters.
+
+        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Stores read and write
       operationId: patch-merchants-merchantId-stores-storeId
       parameters:
       - description: The unique identifier of the merchant account.
@@ -6648,13 +6691,12 @@ paths:
       x-sortIndex: 4
   /merchants/{merchantId}/terminalModels:
     get:
-      description: "Returns the payment terminal models that merchant account identified\
-        \ in the path has access to. The response includes the terminal model ID,\
-        \ which can be used as a query parameter when getting a list of terminals\
-        \ or a list of products for ordering.\n\nTo make this request, your API credential\
-        \ must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Terminal ordering read\n* Management API—Terminal ordering\
-        \ read and write"
+      description: |-
+        Returns the payment terminal models that merchant account identified in the path has access to. The response includes the terminal model ID, which can be used as a query parameter when getting a list of terminals or a list of products for ordering.
+
+        To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Terminal ordering read
+        * Management API—Terminal ordering read and write
       operationId: get-merchants-merchantId-terminalModels
       parameters:
       - description: The unique identifier of the merchant account.
@@ -6718,11 +6760,12 @@ paths:
       x-sortIndex: 1
   /merchants/{merchantId}/terminalOrders:
     get:
-      description: "Returns a list of terminal products orders for the merchant account\
-        \ identified in the path.\n\nTo make this request, your API credential must\
-        \ have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Terminal ordering read\n* Management API—Terminal ordering\
-        \ read and write"
+      description: |-
+        Returns a list of terminal products orders for the merchant account identified in the path.
+
+        To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Terminal ordering read
+        * Management API—Terminal ordering read and write
       operationId: get-merchants-merchantId-terminalOrders
       parameters:
       - explode: false
@@ -6819,10 +6862,11 @@ paths:
       x-groupName: Terminal orders - merchant level
       x-sortIndex: 7
     post:
-      description: "Creates an order for payment terminal products for the merchant\
-        \ account identified in the path.\n\nTo make this request, your API credential\
-        \ must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Terminal ordering read and write"
+      description: |-
+        Creates an order for payment terminal products for the merchant account identified in the path.
+
+        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Terminal ordering read and write
       operationId: post-merchants-merchantId-terminalOrders
       parameters:
       - description: The unique identifier of the merchant account.
@@ -6894,11 +6938,12 @@ paths:
       x-sortIndex: 6
   /merchants/{merchantId}/terminalOrders/{orderId}:
     get:
-      description: "Returns the details of the terminal products order identified\
-        \ in the path.\n\nTo make this request, your API credential must have one\
-        \ of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Terminal ordering read\n* Management API—Terminal ordering\
-        \ read and write"
+      description: |-
+        Returns the details of the terminal products order identified in the path.
+
+        To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Terminal ordering read
+        * Management API—Terminal ordering read and write
       operationId: get-merchants-merchantId-terminalOrders-orderId
       parameters:
       - description: The unique identifier of the merchant account.
@@ -7057,12 +7102,13 @@ paths:
       x-sortIndex: 9
   /merchants/{merchantId}/terminalOrders/{orderId}/cancel:
     post:
-      description: "Cancels the terminal products order identified in the path.\n\
-        Cancelling is only possible while the order has the status **Placed**.\nTo\
-        \ cancel an order, make a POST call without a request body. The response returns\
-        \ the full order details, but with the status changed to **Cancelled**.\n\n\
-        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Terminal ordering read and write"
+      description: |-
+        Cancels the terminal products order identified in the path.
+        Cancelling is only possible while the order has the status **Placed**.
+        To cancel an order, make a POST call without a request body. The response returns the full order details, but with the status changed to **Cancelled**.
+
+        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Terminal ordering read and write
       operationId: post-merchants-merchantId-terminalOrders-orderId-cancel
       parameters:
       - description: The unique identifier of the merchant account.
@@ -7134,13 +7180,13 @@ paths:
       x-sortIndex: 10
   /merchants/{merchantId}/terminalProducts:
     get:
-      description: "Returns a list of payment terminal packages and parts that the\
-        \ merchant account identified in the path has access to.\nTo filter the list,\
-        \ use one or more of the query parameters. The `country` query parameter is\
-        \ required.\n\nTo make this request, your API credential must have one of\
-        \ the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Terminal ordering read\n* Management API—Terminal ordering\
-        \ read and write"
+      description: |-
+        Returns a list of payment terminal packages and parts that the merchant account identified in the path has access to.
+        To filter the list, use one or more of the query parameters. The `country` query parameter is required.
+
+        To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Terminal ordering read
+        * Management API—Terminal ordering read and write
       operationId: get-merchants-merchantId-terminalProducts
       parameters:
       - description: The unique identifier of the merchant account.
@@ -7241,13 +7287,12 @@ paths:
       x-sortIndex: 2
   /merchants/{merchantId}/terminalSettings:
     get:
-      description: "Returns the payment terminal settings that are configured for\
-        \ the merchant account identified in the path. These settings apply to all\
-        \ terminals under the merchant account unless different values are configured\
-        \ at a lower level (store or individual terminal).\n\nTo make this request,\
-        \ your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Terminal settings read\n* Management API—Terminal settings\
-        \ read and write"
+      description: |-
+        Returns the payment terminal settings that are configured for the merchant account identified in the path. These settings apply to all terminals under the merchant account unless different values are configured at a lower level (store or individual terminal).
+
+        To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Terminal settings read
+        * Management API—Terminal settings read and write
       operationId: get-merchants-merchantId-terminalSettings
       parameters:
       - description: The unique identifier of the merchant account.
@@ -7310,17 +7355,16 @@ paths:
       x-groupName: Terminal settings - merchant level
       x-sortIndex: 1
     patch:
-      description: "Updates payment terminal settings for the merchant account identified\
-        \ in the path.\nThese settings apply to all terminals under the merchant account,\
-        \ unless different values are configured at a lower level (store or individual\
-        \ terminal).\n\n* To change a parameter value, include the full object that\
-        \ contains the parameter, even if you don't want to change all parameters\
-        \ in the object.\n* To restore a parameter value inherited from a higher level,\
-        \ include the full object that contains the parameter, and specify an empty\
-        \ value for the parameter or omit the parameter.\n* Objects that are not included\
-        \ in the request are not updated.\n\nTo make this request, your API credential\
-        \ must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Terminal settings read and write"
+      description: |-
+        Updates payment terminal settings for the merchant account identified in the path.
+        These settings apply to all terminals under the merchant account, unless different values are configured at a lower level (store or individual terminal).
+
+        * To change a parameter value, include the full object that contains the parameter, even if you don't want to change all parameters in the object.
+        * To restore a parameter value inherited from a higher level, include the full object that contains the parameter, and specify an empty value for the parameter or omit the parameter.
+        * Objects that are not included in the request are not updated.
+
+        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Terminal settings read and write
       operationId: patch-merchants-merchantId-terminalSettings
       parameters:
       - description: The unique identifier of the merchant account.
@@ -7396,10 +7440,12 @@ paths:
       x-sortIndex: 3
   /stores:
     get:
-      description: "Returns a list of stores. The list is grouped into pages as defined\
-        \ by the query parameters.\n\nTo make this request, your API credential must\
-        \ have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Stores read\n* Management API—Stores read and write"
+      description: |-
+        Returns a list of stores. The list is grouped into pages as defined by the query parameters.
+
+        To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Stores read
+        * Management API—Stores read and write
       operationId: get-stores
       parameters:
       - description: The number of the page to fetch.
@@ -7486,9 +7532,11 @@ paths:
       x-groupName: Account - store level
       x-sortIndex: 4
     post:
-      description: "Creates a store for the merchant account specified in the request.\n\
-        \nTo make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Stores read and write"
+      description: |-
+        Creates a store for the merchant account specified in the request.
+
+        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Stores read and write
       operationId: post-stores
       requestBody:
         content:
@@ -7548,9 +7596,12 @@ paths:
       x-sortIndex: 5
   /stores/{storeId}:
     get:
-      description: "Returns the details of the store identified in the path.\n\nTo\
-        \ make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Stores read\n* Management API—Stores read and write"
+      description: |-
+        Returns the details of the store identified in the path.
+
+        To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Stores read
+        * Management API—Stores read and write
       operationId: get-stores-storeId
       parameters:
       - description: The unique identifier of the store.
@@ -7610,10 +7661,12 @@ paths:
       x-groupName: Account - store level
       x-sortIndex: 6
     patch:
-      description: "Updates the store identified in the path.\nYou can only update\
-        \ some store parameters.\n\nTo make this request, your API credential must\
-        \ have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Stores read and write"
+      description: |-
+        Updates the store identified in the path.
+        You can only update some store parameters.
+
+        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Stores read and write
       operationId: patch-stores-storeId
       parameters:
       - description: The unique identifier of the store.
@@ -7852,13 +7905,12 @@ paths:
       x-sortIndex: 4
   /stores/{storeId}/terminalSettings:
     get:
-      description: "Returns the payment terminal settings that are configured for\
-        \ the store identified in the path. These settings apply to all terminals\
-        \ under the store unless different values are configured for an individual\
-        \ terminal.\n\nTo make this request, your API credential must have one of\
-        \ the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Terminal settings read\n* Management API—Terminal settings\
-        \ read and write"
+      description: |-
+        Returns the payment terminal settings that are configured for the store identified in the path. These settings apply to all terminals under the store unless different values are configured for an individual terminal.
+
+        To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Terminal settings read
+        * Management API—Terminal settings read and write
       operationId: get-stores-storeId-terminalSettings
       parameters:
       - description: The unique identifier of the store.
@@ -7918,17 +7970,15 @@ paths:
       x-groupName: Terminal settings - store level
       x-sortIndex: 1
     patch:
-      description: "Updates payment terminal settings for the store identified in\
-        \ the path. These settings apply to all terminals under the store, unless\
-        \ different values are configured for an individual terminal.\n\n* To change\
-        \ a parameter value, include the full object that contains the parameter,\
-        \ even if you don't want to change all parameters in the object.\n* To restore\
-        \ a parameter value inherited from a higher level, include the full object\
-        \ that contains the parameter, and specify an empty value for the parameter\
-        \ or omit the parameter.\n* Objects that are not included in the request are\
-        \ not updated.\n\nTo make this request, your API credential must have the\
-        \ following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Terminal settings read and write"
+      description: |-
+        Updates payment terminal settings for the store identified in the path. These settings apply to all terminals under the store, unless different values are configured for an individual terminal.
+
+        * To change a parameter value, include the full object that contains the parameter, even if you don't want to change all parameters in the object.
+        * To restore a parameter value inherited from a higher level, include the full object that contains the parameter, and specify an empty value for the parameter or omit the parameter.
+        * Objects that are not included in the request are not updated.
+
+        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Terminal settings read and write
       operationId: patch-stores-storeId-terminalSettings
       parameters:
       - description: The unique identifier of the store.
@@ -8199,12 +8249,13 @@ paths:
       x-sortIndex: 1
   /terminals/{terminalId}/terminalLogos:
     get:
-      description: "Returns the logo that is configured for the payment terminal identified\
-        \ in the path.\nThe logo is returned as a Base64-encoded string. You need\
-        \ to Base64-decode the string to get the actual image file.\n\nTo make this\
-        \ request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Terminal settings read\n* Management API—Terminal settings\
-        \ read and write"
+      description: |-
+        Returns the logo that is configured for the payment terminal identified in the path.
+        The logo is returned as a Base64-encoded string. You need to Base64-decode the string to get the actual image file.
+
+        To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Terminal settings read
+        * Management API—Terminal settings read and write
       operationId: get-terminals-terminalId-terminalLogos
       parameters:
       - description: The unique identifier of the payment terminal.
@@ -8264,12 +8315,14 @@ paths:
       x-groupName: Terminal settings - terminal level
       x-sortIndex: 4
     patch:
-      description: "Updates the logo for the payment terminal identified in the path.\n\
-        \n* To change the logo, specify the image file as a Base64-encoded string.\n\
-        * To restore the logo inherited from a higher level (store, merchant account,\
-        \ or company account), specify an empty logo value.\n\nTo make this request,\
-        \ your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Terminal settings read and write"
+      description: |-
+        Updates the logo for the payment terminal identified in the path.
+
+        * To change the logo, specify the image file as a Base64-encoded string.
+        * To restore the logo inherited from a higher level (store, merchant account, or company account), specify an empty logo value.
+
+        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Terminal settings read and write
       operationId: patch-terminals-terminalId-terminalLogos
       parameters:
       - description: The unique identifier of the payment terminal.
@@ -8342,11 +8395,12 @@ paths:
       x-sortIndex: 6
   /terminals/{terminalId}/terminalSettings:
     get:
-      description: "Returns the settings that are configured for the payment terminal\
-        \ identified in the path.\n\nTo make this request, your API credential must\
-        \ have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Terminal settings read\n* Management API—Terminal settings\
-        \ read and write"
+      description: |-
+        Returns the settings that are configured for the payment terminal identified in the path.
+
+        To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Terminal settings read
+        * Management API—Terminal settings read and write
       operationId: get-terminals-terminalId-terminalSettings
       parameters:
       - description: The unique identifier of the payment terminal.
@@ -8406,15 +8460,15 @@ paths:
       x-groupName: Terminal settings - terminal level
       x-sortIndex: 3
     patch:
-      description: "Updates the settings that are configured for the payment terminal\
-        \ identified in the path.\n\n* To change a parameter value, include the full\
-        \ object that contains the parameter, even if you don't want to change all\
-        \ parameters in the object.\n* To restore a parameter value inherited from\
-        \ a higher level, include the full object that contains the parameter, and\
-        \ specify an empty value for the parameter or omit the parameter.\n* Objects\
-        \ that are not included in the request are not updated.\n\nTo make this request,\
-        \ your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):\n\
-        * Management API—Terminal settings read and write"
+      description: |-
+        Updates the settings that are configured for the payment terminal identified in the path.
+
+        * To change a parameter value, include the full object that contains the parameter, even if you don't want to change all parameters in the object.
+        * To restore a parameter value inherited from a higher level, include the full object that contains the parameter, and specify an empty value for the parameter or omit the parameter.
+        * Objects that are not included in the request are not updated.
+
+        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Terminal settings read and write
       operationId: patch-terminals-terminalId-terminalSettings
       parameters:
       - description: The unique identifier of the payment terminal.
@@ -10736,7 +10790,7 @@ components:
           address:
             companyName: YOUR_COMPANY
             streetAddress: El quinto pino 42
-            postalCode: 8012.0
+            postalCode: "08012"
             city: Barcelona
             stateOrProvince: ""
             country: ES
@@ -11608,7 +11662,7 @@ components:
         address:
           companyName: YOUR_COMPANY
           streetAddress: El quinto pino 42
-          postalCode: 8012.0
+          postalCode: "08012"
           city: Barcelona
           stateOrProvince: ""
           country: ES
@@ -11631,7 +11685,7 @@ components:
         address:
           companyName: YOUR_COMPANY
           streetAddress: El quinto pino 42
-          postalCode: 8012.0
+          postalCode: "08012"
           city: Barcelona
           stateOrProvince: ""
     post-merchants-merchantId-stores-post-stores:
@@ -11911,11 +11965,9 @@ components:
         properties:
           additionalProperties:
             type: boolean
-          description: "Object containing boolean key-value pairs. The key can be\
-            \ any [standard webhook additional setting](https://docs.adyen.com/development-resources/webhooks/additional-settings),\
-            \ and the value indicates if the setting is enabled.\nFor example, `captureDelayHours`:\
-            \ **true** means the standard notifications you get will contain the number\
-            \ of hours remaining until the payment will be captured."
+          description: |-
+            Object containing boolean key-value pairs. The key can be any [standard webhook additional setting](https://docs.adyen.com/development-resources/webhooks/additional-settings), and the value indicates if the setting is enabled.
+            For example, `captureDelayHours`: **true** means the standard notifications you get will contain the number of hours remaining until the payment will be captured.
           type: object
     AdditionalSettingsResponse:
       example:
@@ -11943,11 +11995,9 @@ components:
         properties:
           additionalProperties:
             type: boolean
-          description: "Object containing boolean key-value pairs. The key can be\
-            \ any [standard webhook additional setting](https://docs.adyen.com/development-resources/webhooks/additional-settings),\
-            \ and the value indicates if the setting is enabled.\nFor example, `captureDelayHours`:\
-            \ **true** means the standard notifications you get will contain the number\
-            \ of hours remaining until the payment will be captured."
+          description: |-
+            Object containing boolean key-value pairs. The key can be any [standard webhook additional setting](https://docs.adyen.com/development-resources/webhooks/additional-settings), and the value indicates if the setting is enabled.
+            For example, `captureDelayHours`: **true** means the standard notifications you get will contain the number of hours remaining until the payment will be captured.
           type: object
     Address:
       example:
@@ -12014,10 +12064,17 @@ components:
           description: The postal code.
           type: string
         stateOrProvince:
-          description: "The state or province code as defined in [ISO 3166-2](https://www.iso.org/standard/72483.html).\
-            \ For example, **ON** for Ontario, Canada.\n\nRequired for the following\
-            \ countries:\n - Australia\n- Brazil\n- Canada\n- India\n- Mexico\n- New\
-            \ Zealand\n- United States"
+          description: |-
+            The state or province code as defined in [ISO 3166-2](https://www.iso.org/standard/72483.html). For example, **ON** for Ontario, Canada.
+
+            Required for the following countries:
+             - Australia
+            - Brazil
+            - Canada
+            - India
+            - Mexico
+            - New Zealand
+            - United States
           type: string
       required:
       - country
@@ -12254,10 +12311,11 @@ components:
             **true** to use the credential in your integration.
           type: boolean
         allowedIpAddresses:
-          description: "List of IP addresses from which your client can make requests.\n\
-            \nIf the list is empty, we allow requests from any IP.\nIf the list is\
-            \ not empty and we get a request from an IP which is not on the list,\
-            \ you get a security error."
+          description: |-
+            List of IP addresses from which your client can make requests.
+
+            If the list is empty, we allow requests from any IP.
+            If the list is not empty and we get a request from an IP which is not on the list, you get a security error.
           items:
             type: string
           type: array
@@ -12443,10 +12501,10 @@ components:
         _links:
           $ref: '#/components/schemas/CompanyLinks'
         dataCenters:
-          description: "List of available data centers.\n\nAdyen has several data\
-            \ centers around the world.In the URL that you use for making API requests,\
-            \ we recommend you use the live URL prefix from the data center closest\
-            \ to your shoppers."
+          description: |-
+            List of available data centers.
+
+            Adyen has several data centers around the world.In the URL that you use for making API requests, we recommend you use the live URL prefix from the data center closest to your shoppers.
           items:
             $ref: '#/components/schemas/DataCenter'
           type: array
@@ -12457,12 +12515,14 @@ components:
           description: The legal or trading name of the company.
           type: string
         status:
-          description: "The status of the company account.\n\nPossible values:\n\n\
-            * **Active**: Users can log in. Processing and payout capabilities depend\
-            \ on the status of the merchant account.\n* **Inactive**: Users can log\
-            \ in. Payment processing and payouts are disabled.\n* **Closed**: The\
-            \ company account is closed and this cannot be reversed. Users cannot\
-            \ log in. Payment processing and payouts are disabled."
+          description: |-
+            The status of the company account.
+
+            Possible values:
+
+            * **Active**: Users can log in. Processing and payout capabilities depend on the status of the merchant account.
+            * **Inactive**: Users can log in. Payment processing and payouts are disabled.
+            * **Closed**: The company account is closed and this cannot be reversed. Users cannot log in. Payment processing and payouts are disabled.
           type: string
     CompanyApiCredential:
       example:
@@ -12512,10 +12572,11 @@ components:
             **true** to use the credential in your integration.
           type: boolean
         allowedIpAddresses:
-          description: "List of IP addresses from which your client can make requests.\n\
-            \nIf the list is empty, we allow requests from any IP.\nIf the list is\
-            \ not empty and we get a request from an IP which is not on the list,\
-            \ you get a security error."
+          description: |-
+            List of IP addresses from which your client can make requests.
+
+            If the list is empty, we allow requests from any IP.
+            If the list is not empty and we get a request from an IP which is not on the list, you get a security error.
           items:
             type: string
           type: array
@@ -12691,12 +12752,12 @@ components:
         simcardStatus: ACTIVATED
       properties:
         simcardStatus:
-          description: "Indicates the status of the SIM card in the payment terminal.\
-            \ Can be updated and received only at terminal level, and only for models\
-            \ that support cellular connectivity.\n\nPossible values:\n* **ACTIVATED**:\
-            \ the SIM card is activated. Cellular connectivity may still need to be\
-            \ enabled on the terminal itself, in the **Network** settings.\n* **INVENTORY**:\
-            \ the SIM card is not activated. The terminal can't use cellular connectivity."
+          description: |-
+            Indicates the status of the SIM card in the payment terminal. Can be updated and received only at terminal level, and only for models that support cellular connectivity.
+
+            Possible values:
+            * **ACTIVATED**: the SIM card is activated. Cellular connectivity may still need to be enabled on the terminal itself, in the **Network** settings.
+            * **INVENTORY**: the SIM card is not activated. The terminal can't use cellular connectivity.
           enum:
           - ACTIVATED
           - INVENTORY
@@ -12791,10 +12852,11 @@ components:
             **true** to use the credential in your integration.
           type: boolean
         allowedIpAddresses:
-          description: "List of IP addresses from which your client can make requests.\n\
-            \nIf the list is empty, we allow requests from any IP.\nIf the list is\
-            \ not empty and we get a request from an IP which is not on the list,\
-            \ you get a security error."
+          description: |-
+            List of IP addresses from which your client can make requests.
+
+            If the list is empty, we allow requests from any IP.
+            If the list is not empty and we get a request from an IP which is not on the list, you get a security error.
           items:
             type: string
           type: array
@@ -12924,10 +12986,11 @@ components:
             **true** to use the credential in your integration.
           type: boolean
         allowedIpAddresses:
-          description: "List of IP addresses from which your client can make requests.\n\
-            \nIf the list is empty, we allow requests from any IP.\nIf the list is\
-            \ not empty and we get a request from an IP which is not on the list,\
-            \ you get a security error."
+          description: |-
+            List of IP addresses from which your client can make requests.
+
+            If the list is empty, we allow requests from any IP.
+            If the list is not empty and we get a request from an IP which is not on the list, you get a security error.
           items:
             type: string
           type: array
@@ -13161,29 +13224,35 @@ components:
           description: Your description for this webhook configuration.
           type: string
         filterMerchantAccountType:
-          description: "Shows how merchant accounts are filtered when configuring\
-            \ the webhook. Possible values:\n* **includeAccounts**: The webhook is\
-            \ configured for the merchant accounts listed in `filterMerchantAccounts`.\n\
-            * **excludeAccounts**: The webhook is not configured for the merchant\
-            \ accounts listed in `filterMerchantAccounts`.\n* **allAccounts**: Includes\
-            \ all merchant accounts, and does not require specifying `filterMerchantAccounts`."
+          description: |-
+            Shows how merchant accounts are filtered when configuring the webhook. Possible values:
+            * **includeAccounts**: The webhook is configured for the merchant accounts listed in `filterMerchantAccounts`.
+            * **excludeAccounts**: The webhook is not configured for the merchant accounts listed in `filterMerchantAccounts`.
+            * **allAccounts**: Includes all merchant accounts, and does not require specifying `filterMerchantAccounts`.
           enum:
           - EXCLUDE_LIST
           - INCLUDE_ALL
           - INCLUDE_LIST
           type: string
         filterMerchantAccounts:
-          description: "A list of merchant account names that are included or excluded\
-            \ from receiving the webhook. Inclusion or exclusion is based on the value\
-            \ defined for `filterMerchantAccountType`.\n\nRequired if `filterMerchantAccountType`\
-            \ is either:\n* **includeAccounts**\n* **excludeAccounts**\n\nNot needed\
-            \ for `filterMerchantAccountType`: **allAccounts**."
+          description: |-
+            A list of merchant account names that are included or excluded from receiving the webhook. Inclusion or exclusion is based on the value defined for `filterMerchantAccountType`.
+
+            Required if `filterMerchantAccountType` is either:
+            * **includeAccounts**
+            * **excludeAccounts**
+
+            Not needed for `filterMerchantAccountType`: **allAccounts**.
           items:
             type: string
           type: array
         networkType:
-          description: "Network type for Terminal API notification webhooks. Possible\
-            \ values:\n* **public**\n* **local**\n\nDefault Value: **public**."
+          description: |-
+            Network type for Terminal API notification webhooks. Possible values:
+            * **public**
+            * **local**
+
+            Default Value: **public**.
           enum:
           - LOCAL
           - PUBLIC
@@ -13192,15 +13261,22 @@ components:
           description: Password to access the webhook URL.
           type: string
         populateSoapActionHeader:
-          description: "Indicates if the SOAP action header needs to be populated.\
-            \ Default value: **false**.\n\nOnly applies if `communicationFormat`:\
-            \ **soap**."
+          description: |-
+            Indicates if the SOAP action header needs to be populated. Default value: **false**.
+
+            Only applies if `communicationFormat`: **soap**.
           type: boolean
         sslVersion:
-          description: "SSL version to access the public webhook URL specified in\
-            \ the `url` field. Possible values:\n* **TLSv1.2**\n* **SSL**\n* **SSLv3**\n\
-            * **TLS**\n* **TLSv1**\n* **TLSv1.1**\n\nIf not specified, the webhook\
-            \ will use `sslVersion`: **TLSv1.2**."
+          description: |-
+            SSL version to access the public webhook URL specified in the `url` field. Possible values:
+            * **TLSv1.2**
+            * **SSL**
+            * **SSLv3**
+            * **TLS**
+            * **TLSv1**
+            * **TLSv1.1**
+
+            If not specified, the webhook will use `sslVersion`: **TLSv1.2**.
           enum:
           - HTTP
           - SSL
@@ -13214,13 +13290,21 @@ components:
           example: SSL
           type: string
         type:
-          description: "The type of webhook that is being created. Possible values\
-            \ are:\n\n- **standard**\n- **account-settings-notification**\n- **banktransfer-notification**\n\
-            - **boletobancario-notification**\n- **directdebit-notification**\n- **pending-notification**\n\
-            - **ideal-notification**\n- **ideal-pending-notification**\n- **report-notification**\n\
-            - **rreq-notification**\n\nFind out more about [standard notification\
-            \ webhooks](https://docs.adyen.com/development-resources/webhooks/understand-notifications#event-codes)\
-            \ and [other types of notifications](https://docs.adyen.com/development-resources/webhooks/understand-notifications#other-notifications)."
+          description: |-
+            The type of webhook that is being created. Possible values are:
+
+            - **standard**
+            - **account-settings-notification**
+            - **banktransfer-notification**
+            - **boletobancario-notification**
+            - **directdebit-notification**
+            - **pending-notification**
+            - **ideal-notification**
+            - **ideal-pending-notification**
+            - **report-notification**
+            - **rreq-notification**
+
+            Find out more about [standard notification webhooks](https://docs.adyen.com/development-resources/webhooks/understand-notifications#event-codes) and [other types of notifications](https://docs.adyen.com/development-resources/webhooks/understand-notifications#other-notifications).
           type: string
         url:
           description: "Public URL where webhooks will be sent, for example **https://www.domain.com/webhook-endpoint**."
@@ -13361,8 +13445,12 @@ components:
           description: Your description for this webhook configuration.
           type: string
         networkType:
-          description: "Network type for Terminal API notification webhooks. Possible\
-            \ values:\n* **public**\n* **local**\n\nDefault Value: **public**."
+          description: |-
+            Network type for Terminal API notification webhooks. Possible values:
+            * **public**
+            * **local**
+
+            Default Value: **public**.
           enum:
           - LOCAL
           - PUBLIC
@@ -13371,15 +13459,22 @@ components:
           description: Password to access the webhook URL.
           type: string
         populateSoapActionHeader:
-          description: "Indicates if the SOAP action header needs to be populated.\
-            \ Default value: **false**.\n\nOnly applies if `communicationFormat`:\
-            \ **soap**."
+          description: |-
+            Indicates if the SOAP action header needs to be populated. Default value: **false**.
+
+            Only applies if `communicationFormat`: **soap**.
           type: boolean
         sslVersion:
-          description: "SSL version to access the public webhook URL specified in\
-            \ the `url` field. Possible values:\n* **TLSv1.2**\n* **SSL**\n* **SSLv3**\n\
-            * **TLS**\n* **TLSv1**\n* **TLSv1.1**\n\nIf not specified, the webhook\
-            \ will use `sslVersion`: **TLSv1.2**."
+          description: |-
+            SSL version to access the public webhook URL specified in the `url` field. Possible values:
+            * **TLSv1.2**
+            * **SSL**
+            * **SSLv3**
+            * **TLS**
+            * **TLSv1**
+            * **TLSv1.1**
+
+            If not specified, the webhook will use `sslVersion`: **TLSv1.2**.
           enum:
           - HTTP
           - SSL
@@ -13393,13 +13488,21 @@ components:
           example: SSL
           type: string
         type:
-          description: "The type of webhook that is being created. Possible values\
-            \ are:\n\n- **standard**\n- **account-settings-notification**\n- **banktransfer-notification**\n\
-            - **boletobancario-notification**\n- **directdebit-notification**\n- **pending-notification**\n\
-            - **ideal-notification**\n- **ideal-pending-notification**\n- **report-notification**\n\
-            - **rreq-notification**\n\nFind out more about [standard notification\
-            \ webhooks](https://docs.adyen.com/development-resources/webhooks/understand-notifications#event-codes)\
-            \ and [other types of notifications](https://docs.adyen.com/development-resources/webhooks/understand-notifications#other-notifications)."
+          description: |-
+            The type of webhook that is being created. Possible values are:
+
+            - **standard**
+            - **account-settings-notification**
+            - **banktransfer-notification**
+            - **boletobancario-notification**
+            - **directdebit-notification**
+            - **pending-notification**
+            - **ideal-notification**
+            - **ideal-pending-notification**
+            - **report-notification**
+            - **rreq-notification**
+
+            Find out more about [standard notification webhooks](https://docs.adyen.com/development-resources/webhooks/understand-notifications#event-codes) and [other types of notifications](https://docs.adyen.com/development-resources/webhooks/understand-notifications#other-notifications).
           type: string
         url:
           description: "Public URL where webhooks will be sent, for example **https://www.domain.com/webhook-endpoint**."
@@ -13566,9 +13669,10 @@ components:
         name: name
       properties:
         livePrefix:
-          description: "The unique [live URL prefix](https://docs.adyen.com/development-resources/live-endpoints#live-url-prefix)\
-            \ for your live endpoint. Each data center has its own live URL prefix.\n\
-            \nThis field is empty for requests made in the test environment."
+          description: |-
+            The unique [live URL prefix](https://docs.adyen.com/development-resources/live-endpoints#live-url-prefix) for your live endpoint. Each data center has its own live URL prefix.
+
+            This field is empty for requests made in the test environment.
           type: string
         name:
           description: "The name assigned to a data center, for example **EU** for\
@@ -13712,11 +13816,12 @@ components:
           description: The currency that the tipping settings apply to.
           type: string
         predefinedTipEntries:
-          description: "Tipping options the shopper can choose from if `usePredefinedTipEntries`\
-            \ is **true**. The maximum number of predefined options is four, or three\
-            \ plus the option to enter a custom tip.\nThe options can be a mix of:\n\
-            \n- A percentage of the transaction amount. Example: **5%**\n- A tip amount\
-            \ in minor units. Example: **500** for a EUR 5 tip."
+          description: |-
+            Tipping options the shopper can choose from if `usePredefinedTipEntries` is **true**. The maximum number of predefined options is four, or three plus the option to enter a custom tip.
+            The options can be a mix of:
+
+            - A percentage of the transaction amount. Example: **5%**
+            - A tip amount in minor units. Example: **500** for a EUR 5 tip.
           items:
             type: string
           type: array
@@ -14645,10 +14750,11 @@ components:
             **true** to use the credential in your integration.
           type: boolean
         allowedIpAddresses:
-          description: "List of IP addresses from which your client can make requests.\n\
-            \nIf the list is empty, we allow requests from any IP.\nIf the list is\
-            \ not empty and we get a request from an IP which is not on the list,\
-            \ you get a security error."
+          description: |-
+            List of IP addresses from which your client can make requests.
+
+            If the list is empty, we allow requests from any IP.
+            If the list is not empty and we get a request from an IP which is not on the list, you get a security error.
           items:
             type: string
           type: array
@@ -14719,9 +14825,13 @@ components:
         _links:
           $ref: '#/components/schemas/MerchantLinks'
         captureDelay:
-          description: "The [capture delay](https://docs.adyen.com/online-payments/capture#capture-delay)\
-            \ set for the merchant account.\n\nPossible values:\n* **Immediate**\n\
-            * **Manual**\n* Number of days from **1** to **29**"
+          description: |-
+            The [capture delay](https://docs.adyen.com/online-payments/capture#capture-delay) set for the merchant account.
+
+            Possible values:
+            * **Immediate**
+            * **Manual**
+            * Number of days from **1** to **29**
           type: string
         defaultShopperInteraction:
           description: "The default [`shopperInteraction`](https://docs.adyen.com/api-explorer/#/CheckoutService/v68/post/payments__reqParam_shopperInteraction)\
@@ -14751,19 +14861,16 @@ components:
           description: The URL for the ecommerce website used with this merchant account.
           type: string
         status:
-          description: "The status of the merchant account.\n\nPossible values:\n\n\
-            * **PreActive**: The merchant account has been created. Users cannot access\
-            \ the merchant account in the Customer Area. The account cannot process\
-            \ payments.\n* **Active**: Users can access the merchant account in the\
-            \ Customer Area. If the company account is also **Active**, then payment\
-            \ processing and payouts are enabled.\n* **InactiveWithModifications**:\
-            \ Users can access the merchant account in the Customer Area. You cannot\
-            \ process new payments but you can still modify payments, for example\
-            \ issue refunds. You can still receive payouts.\n* **Inactive**: Users\
-            \ can access the merchant account in the Customer Area. Payment processing\
-            \ and payouts are disabled.\n* **Closed**: The account is closed and this\
-            \ cannot be reversed. Users cannot log in. Payment processing and payouts\
-            \ are disabled."
+          description: |-
+            The status of the merchant account.
+
+            Possible values:
+
+            * **PreActive**: The merchant account has been created. Users cannot access the merchant account in the Customer Area. The account cannot process payments.
+            * **Active**: Users can access the merchant account in the Customer Area. If the company account is also **Active**, then payment processing and payouts are enabled.
+            * **InactiveWithModifications**: Users can access the merchant account in the Customer Area. You cannot process new payments but you can still modify payments, for example issue refunds. You can still receive payouts.
+            * **Inactive**: Users can access the merchant account in the Customer Area. Payment processing and payouts are disabled.
+            * **Closed**: The account is closed and this cannot be reversed. Users cannot log in. Payment processing and payouts are disabled.
           type: string
     MerchantLinks:
       example:
@@ -15672,10 +15779,9 @@ components:
         address:
           $ref: '#/components/schemas/Address2'
         businessLineIds:
-          description: "The unique identifiers of the [business lines](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/businesslines__resParam_id)\
-            \ that the store is associated with.\n If not specified, the business\
-            \ line of the merchant account is used. Required when there are multiple\
-            \ business lines under the merchant account."
+          description: |-
+            The unique identifiers of the [business lines](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/businesslines__resParam_id) that the store is associated with.
+             If not specified, the business line of the merchant account is used. Required when there are multiple business lines under the merchant account.
           items:
             type: string
           type: array
@@ -15698,9 +15804,9 @@ components:
           description: "The phone number of the store, including '+' and country code."
           type: string
         reference:
-          description: "A reference to recognize the store by. Also known as the store\
-            \ code.\n Allowed characters: Lowercase and uppercase letters without\
-            \ diacritics, numbers 0 through 9, hyphen (-), and underscore (_)"
+          description: |-
+            A reference to recognize the store by. Also known as the store code.
+             Allowed characters: Lowercase and uppercase letters without diacritics, numbers 0 through 9, hyphen (-), and underscore (_)
           type: string
         shopperStatement:
           description: The store name shown on the shopper's bank or credit card statement
@@ -15745,10 +15851,9 @@ components:
         address:
           $ref: '#/components/schemas/Address2'
         businessLineIds:
-          description: "The unique identifiers of the [business lines](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/businesslines__resParam_id)\
-            \ that the store is associated with.\nIf not specified, the business line\
-            \ of the merchant account is used. Required when there are multiple business\
-            \ lines under the merchant account."
+          description: |-
+            The unique identifiers of the [business lines](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/businesslines__resParam_id) that the store is associated with.
+            If not specified, the business line of the merchant account is used. Required when there are multiple business lines under the merchant account.
           items:
             type: string
           type: array
@@ -15763,14 +15868,14 @@ components:
           description: "The phone number of the store, including '+' and country code."
           type: string
         reference:
-          description: "Your reference to recognize the store by. Also known as the\
-            \ store code.\n Allowed characters: Lowercase and uppercase letters without\
-            \ diacritics, numbers 0 through 9, hyphen (-), and underscore (_)."
+          description: |-
+            Your reference to recognize the store by. Also known as the store code.
+             Allowed characters: Lowercase and uppercase letters without diacritics, numbers 0 through 9, hyphen (-), and underscore (_).
           type: string
         shopperStatement:
-          description: "The store name to be shown on the shopper's bank or credit\
-            \ card statement and on the shopper receipt.\nMaximum length: 22 characters;\
-            \ can't be all numbers."
+          description: |-
+            The store name to be shown on the shopper's bank or credit card statement and on the shopper receipt.
+            Maximum length: 22 characters; can't be all numbers.
           type: string
         splitConfiguration:
           $ref: '#/components/schemas/StoreSplitConfiguration'
@@ -15805,10 +15910,9 @@ components:
         address:
           $ref: '#/components/schemas/Address2'
         businessLineIds:
-          description: "The unique identifiers of the [business lines](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/businesslines__resParam_id)\
-            \ that the store is associated with.\nIf not specified, the business line\
-            \ of the merchant account is used. Required when there are multiple business\
-            \ lines under the merchant account."
+          description: |-
+            The unique identifiers of the [business lines](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/businesslines__resParam_id) that the store is associated with.
+            If not specified, the business line of the merchant account is used. Required when there are multiple business lines under the merchant account.
           items:
             type: string
           type: array
@@ -15827,14 +15931,14 @@ components:
           description: "The phone number of the store, including '+' and country code."
           type: string
         reference:
-          description: "Your reference to recognize the store by. Also known as the\
-            \ store code.\n Allowed characters: Lowercase and uppercase letters without\
-            \ diacritics, numbers 0 through 9, hyphen (-), and underscore (_)."
+          description: |-
+            Your reference to recognize the store by. Also known as the store code.
+             Allowed characters: Lowercase and uppercase letters without diacritics, numbers 0 through 9, hyphen (-), and underscore (_).
           type: string
         shopperStatement:
-          description: "The store name to be shown on the shopper's bank or credit\
-            \ card statement and on the shopper receipt.\nMaximum length: 22 characters;\
-            \ can't be all numbers."
+          description: |-
+            The store name to be shown on the shopper's bank or credit card statement and on the shopper receipt.
+            Maximum length: 22 characters; can't be all numbers.
           type: string
         splitConfiguration:
           $ref: '#/components/schemas/StoreSplitConfiguration'
@@ -16392,12 +16496,10 @@ components:
         - merchantIds
       properties:
         merchantIds:
-          description: "List of `merchantId` values for which test webhooks will be\
-            \ sent. The list can have a maximum of 20 `merchantId` values.\n\nIf not\
-            \ specified, we send sample notifications to all the merchant accounts\
-            \ that the webhook is configured for. If this is more than 20 merchant\
-            \ accounts, use this list to specify a subset of the merchant accounts\
-            \ for which to send test notifications."
+          description: |-
+            List of `merchantId` values for which test webhooks will be sent. The list can have a maximum of 20 `merchantId` values.
+
+            If not specified, we send sample notifications to all the merchant accounts that the webhook is configured for. If this is more than 20 merchant accounts, use this list to specify a subset of the merchant accounts for which to send test notifications.
           items:
             type: string
           type: array
@@ -16432,22 +16534,22 @@ components:
             is about.
           type: string
         output:
-          description: "The response your server returned for the test webhook.\n\n\
-            Your server must respond with **[accepted]** for the test webhook to be\
-            \ successful (`data.status`: **success**). Find out more about [accepting\
-            \ notifications](https://docs.adyen.com/development-resources/webhooks#accept-notifications)\n\
-            \nYou can use the value of this field together with the [`responseCode`](https://docs.adyen.com/api-explorer/#/ManagementService/v1/post/merchants/{merchantId}/webhooks/{id}/test__resParam_data-responseCode)\
-            \ value to troubleshoot unsuccessful test webhooks."
+          description: |-
+            The response your server returned for the test webhook.
+
+            Your server must respond with **[accepted]** for the test webhook to be successful (`data.status`: **success**). Find out more about [accepting notifications](https://docs.adyen.com/development-resources/webhooks#accept-notifications)
+
+            You can use the value of this field together with the [`responseCode`](https://docs.adyen.com/api-explorer/#/ManagementService/v1/post/merchants/{merchantId}/webhooks/{id}/test__resParam_data-responseCode) value to troubleshoot unsuccessful test webhooks.
           type: string
         requestSent:
           description: "The [body of the notification webhook](https://docs.adyen.com/development-resources/webhooks/understand-notifications#notification-structure)\
             \ that was sent to your server."
           type: string
         responseCode:
-          description: "The HTTP response code for your server's response to the test\
-            \ webhook.\n\nYou can use the value of this field together with the the\
-            \ [`output`](https://docs.adyen.com/api-explorer/#/ManagementService/v1/post/merchants/{merchantId}/webhooks/{id}/test__resParam_data-output)\
-            \ field value to troubleshoot failed test webhooks."
+          description: |-
+            The HTTP response code for your server's response to the test webhook.
+
+            You can use the value of this field together with the the [`output`](https://docs.adyen.com/api-explorer/#/ManagementService/v1/post/merchants/{merchantId}/webhooks/{id}/test__resParam_data-output) field value to troubleshoot failed test webhooks.
           example: "200"
           type: string
         responseTime:
@@ -16457,11 +16559,12 @@ components:
             \ for example **304 ms**."
           type: string
         status:
-          description: "The status of the test request. Possible values are:\n* **success**,\
-            \ if `data.output`: **[accepted]** and `data.responseCode`: **200**.\n\
-            * **failed**, in all other cases.\n\nYou can use the value of the [`output`](https://docs.adyen.com/api-explorer/#/ManagementService/v1/post/merchants/{merchantId}/webhooks/{id}/test__resParam_data-output)\
-            \ field together with the [`responseCode`](https://docs.adyen.com/api-explorer/#/ManagementService/v1/post/merchants/{merchantId}/webhooks/{id}/test__resParam_data-responseCode)\
-            \ value to troubleshoot failed test webhooks."
+          description: |-
+            The status of the test request. Possible values are:
+            * **success**, if `data.output`: **[accepted]** and `data.responseCode`: **200**.
+            * **failed**, in all other cases.
+
+            You can use the value of the [`output`](https://docs.adyen.com/api-explorer/#/ManagementService/v1/post/merchants/{merchantId}/webhooks/{id}/test__resParam_data-output) field together with the [`responseCode`](https://docs.adyen.com/api-explorer/#/ManagementService/v1/post/merchants/{merchantId}/webhooks/{id}/test__resParam_data-responseCode) value to troubleshoot failed test webhooks.
           type: string
       required:
       - status
@@ -16580,10 +16683,17 @@ components:
           description: The postal code.
           type: string
         stateOrProvince:
-          description: "The state or province code as defined in [ISO 3166-2](https://www.iso.org/standard/72483.html).\
-            \ For example, **ON** for Ontario, Canada.\n\nRequired for the following\
-            \ countries:\n - Australia\n- Brazil\n- Canada\n- India\n- Mexico\n- New\
-            \ Zealand\n- United States"
+          description: |-
+            The state or province code as defined in [ISO 3166-2](https://www.iso.org/standard/72483.html). For example, **ON** for Ontario, Canada.
+
+            Required for the following countries:
+             - Australia
+            - Brazil
+            - Canada
+            - India
+            - Mexico
+            - New Zealand
+            - United States
           type: string
     UpdateCompanyApiCredentialRequest:
       example:
@@ -16727,29 +16837,35 @@ components:
           description: Your description for this webhook configuration.
           type: string
         filterMerchantAccountType:
-          description: "Shows how merchant accounts are filtered when configuring\
-            \ the webhook. Possible values:\n* **includeAccounts**: The webhook is\
-            \ configured for the merchant accounts listed in `filterMerchantAccounts`.\n\
-            * **excludeAccounts**: The webhook is not configured for the merchant\
-            \ accounts listed in `filterMerchantAccounts`.\n* **allAccounts**: Includes\
-            \ all merchant accounts, and does not require specifying `filterMerchantAccounts`."
+          description: |-
+            Shows how merchant accounts are filtered when configuring the webhook. Possible values:
+            * **includeAccounts**: The webhook is configured for the merchant accounts listed in `filterMerchantAccounts`.
+            * **excludeAccounts**: The webhook is not configured for the merchant accounts listed in `filterMerchantAccounts`.
+            * **allAccounts**: Includes all merchant accounts, and does not require specifying `filterMerchantAccounts`.
           enum:
           - EXCLUDE_LIST
           - INCLUDE_ALL
           - INCLUDE_LIST
           type: string
         filterMerchantAccounts:
-          description: "A list of merchant account names that are included or excluded\
-            \ from receiving the webhook. Inclusion or exclusion is based on the value\
-            \ defined for `filterMerchantAccountType`.\n\nRequired if `filterMerchantAccountType`\
-            \ is either:\n* **includeAccounts**\n* **excludeAccounts**\n\nNot needed\
-            \ for `filterMerchantAccountType`: **allAccounts**."
+          description: |-
+            A list of merchant account names that are included or excluded from receiving the webhook. Inclusion or exclusion is based on the value defined for `filterMerchantAccountType`.
+
+            Required if `filterMerchantAccountType` is either:
+            * **includeAccounts**
+            * **excludeAccounts**
+
+            Not needed for `filterMerchantAccountType`: **allAccounts**.
           items:
             type: string
           type: array
         networkType:
-          description: "Network type for Terminal API notification webhooks. Possible\
-            \ values:\n* **public**\n* **local**\n\nDefault Value: **public**."
+          description: |-
+            Network type for Terminal API notification webhooks. Possible values:
+            * **public**
+            * **local**
+
+            Default Value: **public**.
           enum:
           - LOCAL
           - PUBLIC
@@ -16758,15 +16874,22 @@ components:
           description: Password to access the webhook URL.
           type: string
         populateSoapActionHeader:
-          description: "Indicates if the SOAP action header needs to be populated.\
-            \ Default value: **false**.\n\nOnly applies if `communicationFormat`:\
-            \ **soap**."
+          description: |-
+            Indicates if the SOAP action header needs to be populated. Default value: **false**.
+
+            Only applies if `communicationFormat`: **soap**.
           type: boolean
         sslVersion:
-          description: "SSL version to access the public webhook URL specified in\
-            \ the `url` field. Possible values:\n* **TLSv1.2**\n* **SSL**\n* **SSLv3**\n\
-            * **TLS**\n* **TLSv1**\n* **TLSv1.1**\n\nIf not specified, the webhook\
-            \ will use `sslVersion`: **TLSv1.2**."
+          description: |-
+            SSL version to access the public webhook URL specified in the `url` field. Possible values:
+            * **TLSv1.2**
+            * **SSL**
+            * **SSLv3**
+            * **TLS**
+            * **TLSv1**
+            * **TLSv1.1**
+
+            If not specified, the webhook will use `sslVersion`: **TLSv1.2**.
           enum:
           - HTTP
           - SSL
@@ -16910,8 +17033,12 @@ components:
           description: Your description for this webhook configuration.
           type: string
         networkType:
-          description: "Network type for Terminal API notification webhooks. Possible\
-            \ values:\n* **public**\n* **local**\n\nDefault Value: **public**."
+          description: |-
+            Network type for Terminal API notification webhooks. Possible values:
+            * **public**
+            * **local**
+
+            Default Value: **public**.
           enum:
           - LOCAL
           - PUBLIC
@@ -16920,15 +17047,22 @@ components:
           description: Password to access the webhook URL.
           type: string
         populateSoapActionHeader:
-          description: "Indicates if the SOAP action header needs to be populated.\
-            \ Default value: **false**.\n\nOnly applies if `communicationFormat`:\
-            \ **soap**."
+          description: |-
+            Indicates if the SOAP action header needs to be populated. Default value: **false**.
+
+            Only applies if `communicationFormat`: **soap**.
           type: boolean
         sslVersion:
-          description: "SSL version to access the public webhook URL specified in\
-            \ the `url` field. Possible values:\n* **TLSv1.2**\n* **SSL**\n* **SSLv3**\n\
-            * **TLS**\n* **TLSv1**\n* **TLSv1.1**\n\nIf not specified, the webhook\
-            \ will use `sslVersion`: **TLSv1.2**."
+          description: |-
+            SSL version to access the public webhook URL specified in the `url` field. Possible values:
+            * **TLSv1.2**
+            * **SSL**
+            * **SSLv3**
+            * **TLS**
+            * **TLSv1**
+            * **TLSv1.1**
+
+            If not specified, the webhook will use `sslVersion`: **TLSv1.2**.
           enum:
           - HTTP
           - SSL
@@ -17186,21 +17320,25 @@ components:
           description: Your description for this webhook configuration.
           type: string
         filterMerchantAccountType:
-          description: "Shows how merchant accounts are included in company-level\
-            \ webhooks. Possible values:\n* **includeAccounts**\n* **excludeAccounts**\n\
-            * **allAccounts**: Includes all merchant accounts, and does not require\
-            \ specifying `filterMerchantAccounts`."
+          description: |-
+            Shows how merchant accounts are included in company-level webhooks. Possible values:
+            * **includeAccounts**
+            * **excludeAccounts**
+            * **allAccounts**: Includes all merchant accounts, and does not require specifying `filterMerchantAccounts`.
           enum:
           - EXCLUDE_LIST
           - INCLUDE_ALL
           - INCLUDE_LIST
           type: string
         filterMerchantAccounts:
-          description: "A list of merchant account names that are included or excluded\
-            \ from receiving the webhook. Inclusion or exclusion is based on the value\
-            \ defined for `filterMerchantAccountType`.\n\nRequired if `filterMerchantAccountType`\
-            \ is either:\n* **includeAccounts**\n* **excludeAccounts**\n\nNot needed\
-            \ for `filterMerchantAccountType`: **allAccounts**."
+          description: |-
+            A list of merchant account names that are included or excluded from receiving the webhook. Inclusion or exclusion is based on the value defined for `filterMerchantAccountType`.
+
+            Required if `filterMerchantAccountType` is either:
+            * **includeAccounts**
+            * **excludeAccounts**
+
+            Not needed for `filterMerchantAccountType`: **allAccounts**.
           items:
             type: string
           type: array
@@ -17227,15 +17365,22 @@ components:
           - PUBLIC
           type: string
         populateSoapActionHeader:
-          description: "Indicates if the SOAP action header needs to be populated.\
-            \ Default value: **false**.\n\nOnly applies if `communicationFormat`:\
-            \ **soap**."
+          description: |-
+            Indicates if the SOAP action header needs to be populated. Default value: **false**.
+
+            Only applies if `communicationFormat`: **soap**.
           type: boolean
         sslVersion:
-          description: "SSL version to access the public webhook URL specified in\
-            \ the `url` field. Possible values:\n* **TLSv1.2**\n* **SSL**\n* **SSLv3**\n\
-            * **TLS**\n* **TLSv1**\n* **TLSv1.1**\n\nIf not specified, the webhook\
-            \ will use `sslVersion`: **TLSv1.2**."
+          description: |-
+            SSL version to access the public webhook URL specified in the `url` field. Possible values:
+            * **TLSv1.2**
+            * **SSL**
+            * **SSLv3**
+            * **TLS**
+            * **TLSv1**
+            * **TLSv1.1**
+
+            If not specified, the webhook will use `sslVersion`: **TLSv1.2**.
           enum:
           - HTTP
           - SSL
@@ -17249,13 +17394,21 @@ components:
           example: SSL
           type: string
         type:
-          description: "The type of webhook. Possible values are:\n\n- **standard**\n\
-            - **account-settings-notification**\n- **banktransfer-notification**\n\
-            - **boletobancario-notification**\n- **directdebit-notification**\n- **pending-notification**\n\
-            - **ideal-notification**\n- **ideal-pending-notification**\n- **report-notification**\n\
-            - **terminal-api-notification**\n\nFind out more about [standard notification\
-            \ webhooks](https://docs.adyen.com/development-resources/webhooks/understand-notifications#event-codes)\
-            \ and [other types of notifications](https://docs.adyen.com/development-resources/webhooks/understand-notifications#other-notifications)."
+          description: |-
+            The type of webhook. Possible values are:
+
+            - **standard**
+            - **account-settings-notification**
+            - **banktransfer-notification**
+            - **boletobancario-notification**
+            - **directdebit-notification**
+            - **pending-notification**
+            - **ideal-notification**
+            - **ideal-pending-notification**
+            - **report-notification**
+            - **terminal-api-notification**
+
+            Find out more about [standard notification webhooks](https://docs.adyen.com/development-resources/webhooks/understand-notifications#event-codes) and [other types of notifications](https://docs.adyen.com/development-resources/webhooks/understand-notifications#other-notifications).
           type: string
         url:
           description: "Public URL where webhooks will be sent, for example **https://www.domain.com/webhook-endpoint**."
