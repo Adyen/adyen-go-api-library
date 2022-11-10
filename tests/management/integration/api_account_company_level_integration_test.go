@@ -1,3 +1,6 @@
+//go:build integration
+// +build integration
+
 /*
  * Testing AccountCompanyLevelApiService
  *
@@ -15,11 +18,10 @@ import (
 	"github.com/stretchr/testify/require"
 	"os"
 	"testing"
-	
 )
 
-func Test_ManagementAPI_AccountCompanyLevelApiService(t *testing.T) {
-	godotenv.Load("./../../.env")
+func Test_Integration_ManagementAPI_AccountCompanyLevelApiService(t *testing.T) {
+	godotenv.Load("./../../../.env")
 
 	var (
 		APIKey = os.Getenv("ADYEN_API_KEY")

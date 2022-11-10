@@ -1,5 +1,8 @@
+//go:build integration
+// +build integration
+
 /*
- * Testing AllowedOriginsCompanyLevelApiService
+ * Testing AccountMerchantLevelApiService
  *
  * Contact: support@adyen.com
  */
@@ -17,8 +20,8 @@ import (
 	"testing"
 )
 
-func Test_ManagementAPI_AllowedOriginsCompanyLevelApiService(t *testing.T) {
-	godotenv.Load("./../../.env")
+func Test_Integration_ManagementAPI_AccountMerchantLevelApiService(t *testing.T) {
+	godotenv.Load("./../../../.env")
 
 	var (
 		APIKey = os.Getenv("ADYEN_API_KEY")
@@ -29,16 +32,11 @@ func Test_ManagementAPI_AllowedOriginsCompanyLevelApiService(t *testing.T) {
 	require.Nil(t, err, "Error creating Config object")
 	apiClient := Management.NewAPIClient(configuration)
 
-	t.Run("Test AllowedOriginsCompanyLevelApiService GetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOrigins", func(t *testing.T) {
+	t.Run("Test AccountMerchantLevelApiService GetMerchants", func(t *testing.T) {
 
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 
-			t.Skip("skipping test: add new ApiCredential TODO")
-
-			companyId := "TestCompany123"
-			apiCredentialId := "na"
-
-			resp, httpRes, err := apiClient.AllowedOriginsCompanyLevelApi.GetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOrigins(context.Background(), companyId, apiCredentialId).Execute()
+			resp, httpRes, err := apiClient.AccountMerchantLevelApi.GetMerchants(context.Background()).Execute()
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "Error : %v\n", err)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)
@@ -49,17 +47,13 @@ func Test_ManagementAPI_AllowedOriginsCompanyLevelApiService(t *testing.T) {
 		})
 	})
 
-	t.Run("Test AllowedOriginsCompanyLevelApiService GetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsOriginId", func(t *testing.T) {
+	t.Run("Test AccountMerchantLevelApiService GetMerchantsId", func(t *testing.T) {
 
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 
-			t.Skip("skipping test: add new AllowOrigin TODO")
+			merchantId := "TestMerchantAccount"
 
-			companyId := "TestCompany123"
-			apiCredentialId := "na"
-			originId := "na"
-
-			resp, httpRes, err := apiClient.AllowedOriginsCompanyLevelApi.GetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsOriginId(context.Background(), companyId, apiCredentialId, originId).Execute()
+			resp, httpRes, err := apiClient.AccountMerchantLevelApi.GetMerchantsId(context.Background(), merchantId).Execute()
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "Error : %v\n", err)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)

@@ -13,7 +13,10 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"net/http"
+	"net/http/httptest"
 	"os"
+	"strings"
 	"testing"
 )
 
@@ -21,11 +24,35 @@ func Test_ManagementAPI_APICredentialsMerchantLevelApiService(t *testing.T) {
 	godotenv.Load("./../../.env")
 
 	var (
-		APIKey = os.Getenv("ADYEN_API_KEY")
+		APIKey = "n/a"
 		env    = Management.TestEnv
+		server *httptest.Server
 	)
 
+	server = httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// mock here
+		switch strings.TrimSpace(r.URL.Path) {
+		case "/merchants/TestMerchantAccount/apiCredentials":
+			model := Management.ListMerchantApiCredentialsResponse{Data: []Management.ApiCredential{{Id: "TestMerchantAccount"}}}
+			mockResponse(http.StatusOK, w, model)
+		case "/merchants/notExisting/apiCredentials":
+			model := Management.ListMerchantApiCredentialsResponse{Data: []Management.ApiCredential{{Id: "TestMerchantAccount"}}}
+			mockResponse(http.StatusForbidden, w, model)
+		default:
+			t.Errorf("Mock not found")
+			http.NotFoundHandler().ServeHTTP(w, r)
+		}
+
+	}))
+
 	configuration, err := Management.NewManagementAPIConfiguration(APIKey, env)
+	configuration.Servers = Management.ServerConfigurations{
+		{
+			URL:         server.URL,
+			Description: "Mock Server",
+		},
+	}
+
 	require.Nil(t, err, "Error creating Config object")
 	apiClient := Management.NewAPIClient(configuration)
 
@@ -54,6 +81,7 @@ func Test_ManagementAPI_APICredentialsMerchantLevelApiService(t *testing.T) {
 
 			assert.Equal(t, 403, httpRes.StatusCode)
 			require.NotNil(t, err)
+			assert.Equal(t, "403 Forbidden", err.Error())
 		})
 	})
 

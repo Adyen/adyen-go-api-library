@@ -1,10 +1,13 @@
+//go:build integration
+// +build integration
+
 /*
  * Testing UsersCompanyLevelApiService
  *
  * Contact: support@adyen.com
  */
 
-package management
+package integration
 
 import (
 	"context"
@@ -17,8 +20,8 @@ import (
 	"testing"
 )
 
-func Test_ManagementAPI_UsersCompanyLevelApiService(t *testing.T) {
-	godotenv.Load("./../../.env")
+func Test_Integration_ManagementAPI_UsersCompanyLevelApiService(t *testing.T) {
+	godotenv.Load("./../../../.env")
 
 	var (
 		APIKey = os.Getenv("ADYEN_API_KEY")
@@ -36,27 +39,6 @@ func Test_ManagementAPI_UsersCompanyLevelApiService(t *testing.T) {
 			companyId := "TestCompany123"
 
 			resp, httpRes, err := apiClient.UsersCompanyLevelApi.GetCompaniesCompanyIdUsers(context.Background(), companyId).Execute()
-			if err != nil {
-				fmt.Fprintf(os.Stderr, "Error : %v\n", err)
-				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)
-			}
-
-			require.Nil(t, err)
-			assert.Equal(t, 200, httpRes.StatusCode)
-			require.NotNil(t, resp)
-		})
-	})
-
-	t.Run("Test UsersCompanyLevelApiService GetCompaniesCompanyIdUsers", func(t *testing.T) {
-
-		t.Run("Create an API request that should pass", func(t *testing.T) {
-
-			t.Skip("skipping test: add new User TODO")
-
-			companyId := "TestCompany123"
-			userId := "S2-3E50415B3237"
-
-			resp, httpRes, err := apiClient.UsersCompanyLevelApi.GetCompaniesCompanyIdUsersUserId(context.Background(), companyId, userId).Execute()
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "Error : %v\n", err)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)
