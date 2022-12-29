@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**DisplayUrls** | Pointer to [**NotificationUrl**](NotificationUrl.md) |  | [optional] 
+**EncryptionKey** | Pointer to [**Key**](Key.md) |  | [optional] 
 **EventUrls** | Pointer to [**EventUrl**](EventUrl.md) |  | [optional] 
 **NexoEventUrls** | Pointer to **[]string** | @deprecated One or more URLs to send event messages to when using Terminal API. | [optional] 
 
@@ -25,6 +27,56 @@ will change when the set of required properties is changed
 NewNexoWithDefaults instantiates a new Nexo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetDisplayUrls
+
+`func (o *Nexo) GetDisplayUrls() NotificationUrl`
+
+GetDisplayUrls returns the DisplayUrls field if non-nil, zero value otherwise.
+
+### GetDisplayUrlsOk
+
+`func (o *Nexo) GetDisplayUrlsOk() (*NotificationUrl, bool)`
+
+GetDisplayUrlsOk returns a tuple with the DisplayUrls field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisplayUrls
+
+`func (o *Nexo) SetDisplayUrls(v NotificationUrl)`
+
+SetDisplayUrls sets DisplayUrls field to given value.
+
+### HasDisplayUrls
+
+`func (o *Nexo) HasDisplayUrls() bool`
+
+HasDisplayUrls returns a boolean if a field has been set.
+
+### GetEncryptionKey
+
+`func (o *Nexo) GetEncryptionKey() Key`
+
+GetEncryptionKey returns the EncryptionKey field if non-nil, zero value otherwise.
+
+### GetEncryptionKeyOk
+
+`func (o *Nexo) GetEncryptionKeyOk() (*Key, bool)`
+
+GetEncryptionKeyOk returns a tuple with the EncryptionKey field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEncryptionKey
+
+`func (o *Nexo) SetEncryptionKey(v Key)`
+
+SetEncryptionKey sets EncryptionKey field to given value.
+
+### HasEncryptionKey
+
+`func (o *Nexo) HasEncryptionKey() bool`
+
+HasEncryptionKey returns a boolean if a field has been set.
 
 ### GetEventUrls
 

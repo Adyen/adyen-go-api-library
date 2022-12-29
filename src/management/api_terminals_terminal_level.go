@@ -1,7 +1,7 @@
 /*
 Management API
 
-Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```
+Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```  ## Going live  To access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:  ```text https://management-live.adyen.com/v1 ```
 
 API version: 1
 Contact: developer-experience@adyen.com
@@ -78,23 +78,23 @@ func (r ApiGetTerminalsRequest) PageSize(pageSize int32) ApiGetTerminalsRequest 
 }
 
 func (r ApiGetTerminalsRequest) Execute() (*ListTerminalsResponse, *http.Response, error) {
-	return r.ApiService.GetTerminalsExecute(r)
+	return r.ApiService.ListTerminalsExecute(r)
 }
 
 /*
-GetTerminals Get a list of terminals
+ListTerminals Get a list of terminals
 
 Returns the payment terminals that the API credential has access to and that match the query parameters. 
 When using `searchQuery`, other query parameters are ignored.
 
-To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
-* Management API—Terminal actions read
-* Management API—Terminal actions read and write
+To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+* POS Terminal Management API
+* Management API—Terminal settings read
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetTerminalsRequest
 */
-func (a *TerminalsTerminalLevelApiService) GetTerminals(ctx context.Context) ApiGetTerminalsRequest {
+func (a *TerminalsTerminalLevelApiService) ListTerminals(ctx context.Context) ApiGetTerminalsRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -109,7 +109,7 @@ func (a *TerminalsTerminalLevelApiService) GetTerminals(ctx context.Context) Api
 
 // Execute executes the request
 //  @return ListTerminalsResponse
-func (a *TerminalsTerminalLevelApiService) GetTerminalsExecute(r ApiGetTerminalsRequest) (*ListTerminalsResponse, *http.Response, error) {
+func (a *TerminalsTerminalLevelApiService) ListTerminalsExecute(r ApiGetTerminalsRequest) (*ListTerminalsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}

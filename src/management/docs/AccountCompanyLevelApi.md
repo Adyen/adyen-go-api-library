@@ -7,6 +7,8 @@ Method | HTTP request | Description
 [**GetCompanies**](AccountCompanyLevelApi.md#GetCompanies) | **Get** /companies | Get a list of company accounts
 [**GetCompaniesCompanyId**](AccountCompanyLevelApi.md#GetCompaniesCompanyId) | **Get** /companies/{companyId} | Get a company account
 [**GetCompaniesCompanyIdMerchants**](AccountCompanyLevelApi.md#GetCompaniesCompanyIdMerchants) | **Get** /companies/{companyId}/merchants | Get a list of merchant accounts
+[**PatchCompaniesId**](AccountCompanyLevelApi.md#PatchCompaniesId) | **Patch** /companies/{id} | Update legal entity of specific company.
+[**PostCompanies**](AccountCompanyLevelApi.md#PostCompanies) | **Post** /companies | Create a Company.
 
 
 
@@ -215,6 +217,144 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchCompaniesId
+
+> SetLegalEntityToAccountResponse PatchCompaniesId(ctx, id).SetLegalEntityToAccountRequest(setLegalEntityToAccountRequest).Execute()
+
+Update legal entity of specific company.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    id := "id_example" // string | The unique identifier of the company account.
+    setLegalEntityToAccountRequest := *openapiclient.NewSetLegalEntityToAccountRequest() // SetLegalEntityToAccountRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AccountCompanyLevelApi.PatchCompaniesId(context.Background(), id).SetLegalEntityToAccountRequest(setLegalEntityToAccountRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AccountCompanyLevelApi.PatchCompaniesId``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchCompaniesId`: SetLegalEntityToAccountResponse
+    fmt.Fprintf(os.Stdout, "Response from `AccountCompanyLevelApi.PatchCompaniesId`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | The unique identifier of the company account. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchCompaniesIdRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **setLegalEntityToAccountRequest** | [**SetLegalEntityToAccountRequest**](SetLegalEntityToAccountRequest.md) |  | 
+
+### Return type
+
+[**SetLegalEntityToAccountResponse**](SetLegalEntityToAccountResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PostCompanies
+
+> CreateCompanyResponse PostCompanies(ctx).CreateCompanyRequest(createCompanyRequest).Execute()
+
+Create a Company.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    createCompanyRequest := *openapiclient.NewCreateCompanyRequest() // CreateCompanyRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AccountCompanyLevelApi.PostCompanies(context.Background()).CreateCompanyRequest(createCompanyRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AccountCompanyLevelApi.PostCompanies``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PostCompanies`: CreateCompanyResponse
+    fmt.Fprintf(os.Stdout, "Response from `AccountCompanyLevelApi.PostCompanies`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPostCompaniesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **createCompanyRequest** | [**CreateCompanyRequest**](CreateCompanyRequest.md) |  | 
+
+### Return type
+
+[**CreateCompanyResponse**](CreateCompanyResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

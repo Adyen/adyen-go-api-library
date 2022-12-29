@@ -1,7 +1,7 @@
 /*
 Management API
 
-Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```
+Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```  ## Going live  To access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:  ```text https://management-live.adyen.com/v1 ```
 
 API version: 1
 Contact: developer-experience@adyen.com
@@ -31,11 +31,11 @@ type ApiGetTerminalsTerminalIdTerminalLogosRequest struct {
 }
 
 func (r ApiGetTerminalsTerminalIdTerminalLogosRequest) Execute() (*Logo, *http.Response, error) {
-	return r.ApiService.GetTerminalsTerminalIdTerminalLogosExecute(r)
+	return r.ApiService.GetTerminalLogoExecute(r)
 }
 
 /*
-GetTerminalsTerminalIdTerminalLogos Get the terminal logo
+GetTerminalLogo Get the terminal logo
 
 Returns the logo that is configured for the payment terminal identified in the path.
 The logo is returned as a Base64-encoded string. You need to Base64-decode the string to get the actual image file.
@@ -48,7 +48,7 @@ To make this request, your API credential must have one of the following [roles]
  @param terminalId The unique identifier of the payment terminal.
  @return ApiGetTerminalsTerminalIdTerminalLogosRequest
 */
-func (a *TerminalSettingsTerminalLevelApiService) GetTerminalsTerminalIdTerminalLogos(ctx context.Context, terminalId string) ApiGetTerminalsTerminalIdTerminalLogosRequest {
+func (a *TerminalSettingsTerminalLevelApiService) GetTerminalLogo(ctx context.Context, terminalId string) ApiGetTerminalsTerminalIdTerminalLogosRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -64,7 +64,7 @@ func (a *TerminalSettingsTerminalLevelApiService) GetTerminalsTerminalIdTerminal
 
 // Execute executes the request
 //  @return Logo
-func (a *TerminalSettingsTerminalLevelApiService) GetTerminalsTerminalIdTerminalLogosExecute(r ApiGetTerminalsTerminalIdTerminalLogosRequest) (*Logo, *http.Response, error) {
+func (a *TerminalSettingsTerminalLevelApiService) GetTerminalLogoExecute(r ApiGetTerminalsTerminalIdTerminalLogosRequest) (*Logo, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -213,11 +213,11 @@ type ApiGetTerminalsTerminalIdTerminalSettingsRequest struct {
 }
 
 func (r ApiGetTerminalsTerminalIdTerminalSettingsRequest) Execute() (*TerminalSettings, *http.Response, error) {
-	return r.ApiService.GetTerminalsTerminalIdTerminalSettingsExecute(r)
+	return r.ApiService.GetTerminalSettingsExecute(r)
 }
 
 /*
-GetTerminalsTerminalIdTerminalSettings Get terminal settings
+GetTerminalSettings Get terminal settings
 
 Returns the settings that are configured for the payment terminal identified in the path.
 
@@ -229,7 +229,7 @@ To make this request, your API credential must have one of the following [roles]
  @param terminalId The unique identifier of the payment terminal.
  @return ApiGetTerminalsTerminalIdTerminalSettingsRequest
 */
-func (a *TerminalSettingsTerminalLevelApiService) GetTerminalsTerminalIdTerminalSettings(ctx context.Context, terminalId string) ApiGetTerminalsTerminalIdTerminalSettingsRequest {
+func (a *TerminalSettingsTerminalLevelApiService) GetTerminalSettings(ctx context.Context, terminalId string) ApiGetTerminalsTerminalIdTerminalSettingsRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -245,7 +245,7 @@ func (a *TerminalSettingsTerminalLevelApiService) GetTerminalsTerminalIdTerminal
 
 // Execute executes the request
 //  @return TerminalSettings
-func (a *TerminalSettingsTerminalLevelApiService) GetTerminalsTerminalIdTerminalSettingsExecute(r ApiGetTerminalsTerminalIdTerminalSettingsRequest) (*TerminalSettings, *http.Response, error) {
+func (a *TerminalSettingsTerminalLevelApiService) GetTerminalSettingsExecute(r ApiGetTerminalsTerminalIdTerminalSettingsRequest) (*TerminalSettings, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -400,11 +400,11 @@ func (r ApiPatchTerminalsTerminalIdTerminalLogosRequest) Logo(logo Logo) ApiPatc
 }
 
 func (r ApiPatchTerminalsTerminalIdTerminalLogosRequest) Execute() (*Logo, *http.Response, error) {
-	return r.ApiService.PatchTerminalsTerminalIdTerminalLogosExecute(r)
+	return r.ApiService.UpdateLogoExecute(r)
 }
 
 /*
-PatchTerminalsTerminalIdTerminalLogos Update the logo
+UpdateLogo Update the logo
 
 Updates the logo for the payment terminal identified in the path.
 
@@ -418,7 +418,7 @@ To make this request, your API credential must have the following [role](https:/
  @param terminalId The unique identifier of the payment terminal.
  @return ApiPatchTerminalsTerminalIdTerminalLogosRequest
 */
-func (a *TerminalSettingsTerminalLevelApiService) PatchTerminalsTerminalIdTerminalLogos(ctx context.Context, terminalId string) ApiPatchTerminalsTerminalIdTerminalLogosRequest {
+func (a *TerminalSettingsTerminalLevelApiService) UpdateLogo(ctx context.Context, terminalId string) ApiPatchTerminalsTerminalIdTerminalLogosRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -434,7 +434,7 @@ func (a *TerminalSettingsTerminalLevelApiService) PatchTerminalsTerminalIdTermin
 
 // Execute executes the request
 //  @return Logo
-func (a *TerminalSettingsTerminalLevelApiService) PatchTerminalsTerminalIdTerminalLogosExecute(r ApiPatchTerminalsTerminalIdTerminalLogosRequest) (*Logo, *http.Response, error) {
+func (a *TerminalSettingsTerminalLevelApiService) UpdateLogoExecute(r ApiPatchTerminalsTerminalIdTerminalLogosRequest) (*Logo, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
@@ -591,11 +591,11 @@ func (r ApiPatchTerminalsTerminalIdTerminalSettingsRequest) TerminalSettings(ter
 }
 
 func (r ApiPatchTerminalsTerminalIdTerminalSettingsRequest) Execute() (*TerminalSettings, *http.Response, error) {
-	return r.ApiService.PatchTerminalsTerminalIdTerminalSettingsExecute(r)
+	return r.ApiService.UpdateTerminalSettingsExecute(r)
 }
 
 /*
-PatchTerminalsTerminalIdTerminalSettings Update terminal settings
+UpdateTerminalSettings Update terminal settings
 
 Updates the settings that are configured for the payment terminal identified in the path.
 
@@ -610,7 +610,7 @@ To make this request, your API credential must have the following [role](https:/
  @param terminalId The unique identifier of the payment terminal.
  @return ApiPatchTerminalsTerminalIdTerminalSettingsRequest
 */
-func (a *TerminalSettingsTerminalLevelApiService) PatchTerminalsTerminalIdTerminalSettings(ctx context.Context, terminalId string) ApiPatchTerminalsTerminalIdTerminalSettingsRequest {
+func (a *TerminalSettingsTerminalLevelApiService) UpdateTerminalSettings(ctx context.Context, terminalId string) ApiPatchTerminalsTerminalIdTerminalSettingsRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -626,7 +626,7 @@ func (a *TerminalSettingsTerminalLevelApiService) PatchTerminalsTerminalIdTermin
 
 // Execute executes the request
 //  @return TerminalSettings
-func (a *TerminalSettingsTerminalLevelApiService) PatchTerminalsTerminalIdTerminalSettingsExecute(r ApiPatchTerminalsTerminalIdTerminalSettingsRequest) (*TerminalSettings, *http.Response, error) {
+func (a *TerminalSettingsTerminalLevelApiService) UpdateTerminalSettingsExecute(r ApiPatchTerminalsTerminalIdTerminalSettingsRequest) (*TerminalSettings, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}

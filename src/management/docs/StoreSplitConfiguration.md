@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BalanceAccountId** | Pointer to **string** | The [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balanceAccounts/{id}__queryParam_id) linked to the account holder. | [optional] 
-**SplitConfigurationId** | Pointer to **string** | The UUID of the [split configuration](https://docs.adyen.com/platforms/split-configuration-for-stores) from the Customer Area. | [optional] 
+**SplitConfigurationId** | Pointer to **string** | The UUID of the [split configuration](https://docs.adyen.com/marketplaces-and-platforms/classic/split-configuration-for-stores) from the Customer Area. | [optional] 
 
 ## Methods
 

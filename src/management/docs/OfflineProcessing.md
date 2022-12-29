@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ChipFloorLimit** | Pointer to **int32** | The (inclusive) limit for accepting chip cards offline, in the processing currency, in minor units | [optional] 
-**OfflineSwipeLimits** | Pointer to [**[]MinorUnitsMonetaryValue**](MinorUnitsMonetaryValue.md) | The maximum amount up to which swiped credit cards can be accepted offline, in the specified currency | [optional] 
+**ChipFloorLimit** | Pointer to **int32** | The maximum offline transaction amount for chip cards, in the processing currency and specified in [minor units](https://docs.adyen.com/development-resources/currency-codes). | [optional] 
+**OfflineSwipeLimits** | Pointer to [**[]MinorUnitsMonetaryValue**](MinorUnitsMonetaryValue.md) | The maximum offline transaction amount for swiped cards, in the specified currency. | [optional] 
 
 ## Methods
 

@@ -1,7 +1,7 @@
 /*
 Management API
 
-Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```
+Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```  ## Going live  To access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:  ```text https://management-live.adyen.com/v1 ```
 
 API version: 1
 Contact: developer-experience@adyen.com
@@ -59,11 +59,11 @@ func (r ApiGetMerchantsMerchantIdPaymentMethodSettingsRequest) PageNumber(pageNu
 }
 
 func (r ApiGetMerchantsMerchantIdPaymentMethodSettingsRequest) Execute() (*PaymentMethodResponse, *http.Response, error) {
-	return r.ApiService.GetMerchantsMerchantIdPaymentMethodSettingsExecute(r)
+	return r.ApiService.GetAllPaymentMethodsExecute(r)
 }
 
 /*
-GetMerchantsMerchantIdPaymentMethodSettings Get all payment methods
+GetAllPaymentMethods Get all payment methods
 
 Returns details for all payment methods of the merchant account identified in the path.
 
@@ -75,7 +75,7 @@ To make this request, your API credential must have the following [role](https:/
  @param merchantId The unique identifier of the merchant account.
  @return ApiGetMerchantsMerchantIdPaymentMethodSettingsRequest
 */
-func (a *PaymentMethodsMerchantLevelApiService) GetMerchantsMerchantIdPaymentMethodSettings(ctx context.Context, merchantId string) ApiGetMerchantsMerchantIdPaymentMethodSettingsRequest {
+func (a *PaymentMethodsMerchantLevelApiService) GetAllPaymentMethods(ctx context.Context, merchantId string) ApiGetMerchantsMerchantIdPaymentMethodSettingsRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -91,7 +91,7 @@ func (a *PaymentMethodsMerchantLevelApiService) GetMerchantsMerchantIdPaymentMet
 
 // Execute executes the request
 //  @return PaymentMethodResponse
-func (a *PaymentMethodsMerchantLevelApiService) GetMerchantsMerchantIdPaymentMethodSettingsExecute(r ApiGetMerchantsMerchantIdPaymentMethodSettingsRequest) (*PaymentMethodResponse, *http.Response, error) {
+func (a *PaymentMethodsMerchantLevelApiService) GetAllPaymentMethodsExecute(r ApiGetMerchantsMerchantIdPaymentMethodSettingsRequest) (*PaymentMethodResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -253,11 +253,11 @@ type ApiGetMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdRequest struct
 }
 
 func (r ApiGetMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdRequest) Execute() (*PaymentMethod, *http.Response, error) {
-	return r.ApiService.GetMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdExecute(r)
+	return r.ApiService.GetPaymentMethodDetailsExecute(r)
 }
 
 /*
-GetMerchantsMerchantIdPaymentMethodSettingsPaymentMethodId Get payment method details
+GetPaymentMethodDetails Get payment method details
 
 Returns details for the merchant account and the payment method identified in the path.
 
@@ -270,7 +270,7 @@ To make this request, your API credential must have the following [role](https:/
  @param paymentMethodId The unique identifier of the payment method.
  @return ApiGetMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdRequest
 */
-func (a *PaymentMethodsMerchantLevelApiService) GetMerchantsMerchantIdPaymentMethodSettingsPaymentMethodId(ctx context.Context, merchantId string, paymentMethodId string) ApiGetMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdRequest {
+func (a *PaymentMethodsMerchantLevelApiService) GetPaymentMethodDetails(ctx context.Context, merchantId string, paymentMethodId string) ApiGetMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -287,7 +287,7 @@ func (a *PaymentMethodsMerchantLevelApiService) GetMerchantsMerchantIdPaymentMet
 
 // Execute executes the request
 //  @return PaymentMethod
-func (a *PaymentMethodsMerchantLevelApiService) GetMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdExecute(r ApiGetMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdRequest) (*PaymentMethod, *http.Response, error) {
+func (a *PaymentMethodsMerchantLevelApiService) GetPaymentMethodDetailsExecute(r ApiGetMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdRequest) (*PaymentMethod, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -301,6 +301,191 @@ func (a *PaymentMethodsMerchantLevelApiService) GetMerchantsMerchantIdPaymentMet
 	}
 
 	localVarPath := localBasePath + "/merchants/{merchantId}/paymentMethodSettings/{paymentMethodId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"merchantId"+"}", url.PathEscape(parameterToString(r.merchantId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"paymentMethodId"+"}", url.PathEscape(parameterToString(r.paymentMethodId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v RestServiceError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v RestServiceError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v RestServiceError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v RestServiceError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v RestServiceError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdGetApplePayDomainsRequest struct {
+	ctx context.Context
+	ApiService *PaymentMethodsMerchantLevelApiService
+	merchantId string
+	paymentMethodId string
+}
+
+func (r ApiGetMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdGetApplePayDomainsRequest) Execute() (*ApplePayInfo, *http.Response, error) {
+	return r.ApiService.GetApplePayDomainsExecute(r)
+}
+
+/*
+GetApplePayDomains Get Apple Pay domains
+
+Returns all Apple Pay domains that are registered with the merchant account and the payment method identified in the path. For more information, see [Apple Pay documentation](https://docs.adyen.com/payment-methods/apple-pay/enable-apple-pay#register-merchant-domain).
+
+To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+* Management API—Payment methods read
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param merchantId The unique identifier of the merchant account.
+ @param paymentMethodId The unique identifier of the payment method.
+ @return ApiGetMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdGetApplePayDomainsRequest
+*/
+func (a *PaymentMethodsMerchantLevelApiService) GetApplePayDomains(ctx context.Context, merchantId string, paymentMethodId string) ApiGetMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdGetApplePayDomainsRequest {
+    // add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+
+	return ApiGetMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdGetApplePayDomainsRequest{
+		ApiService: a,
+		ctx: ctxWithApiKey,
+		merchantId: merchantId,
+		paymentMethodId: paymentMethodId,
+	}
+}
+
+// Execute executes the request
+//  @return ApplePayInfo
+func (a *PaymentMethodsMerchantLevelApiService) GetApplePayDomainsExecute(r ApiGetMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdGetApplePayDomainsRequest) (*ApplePayInfo, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ApplePayInfo
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PaymentMethodsMerchantLevelApiService.GetMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdGetApplePayDomains")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/merchants/{merchantId}/paymentMethodSettings/{paymentMethodId}/getApplePayDomains"
 	localVarPath = strings.Replace(localVarPath, "{"+"merchantId"+"}", url.PathEscape(parameterToString(r.merchantId, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"paymentMethodId"+"}", url.PathEscape(parameterToString(r.paymentMethodId, "")), -1)
 
@@ -444,11 +629,11 @@ func (r ApiPatchMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdRequest) 
 }
 
 func (r ApiPatchMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdRequest) Execute() (*PaymentMethod, *http.Response, error) {
-	return r.ApiService.PatchMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdExecute(r)
+	return r.ApiService.UpdatePaymentMethodExecute(r)
 }
 
 /*
-PatchMerchantsMerchantIdPaymentMethodSettingsPaymentMethodId Update a payment method
+UpdatePaymentMethod Update a payment method
 
 Updates payment method details for the merchant account and the payment method identified in the path.
 
@@ -461,7 +646,7 @@ To make this request, your API credential must have the following [role](https:/
  @param paymentMethodId The unique identifier of the payment method.
  @return ApiPatchMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdRequest
 */
-func (a *PaymentMethodsMerchantLevelApiService) PatchMerchantsMerchantIdPaymentMethodSettingsPaymentMethodId(ctx context.Context, merchantId string, paymentMethodId string) ApiPatchMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdRequest {
+func (a *PaymentMethodsMerchantLevelApiService) UpdatePaymentMethod(ctx context.Context, merchantId string, paymentMethodId string) ApiPatchMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -478,7 +663,7 @@ func (a *PaymentMethodsMerchantLevelApiService) PatchMerchantsMerchantIdPaymentM
 
 // Execute executes the request
 //  @return PaymentMethod
-func (a *PaymentMethodsMerchantLevelApiService) PatchMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdExecute(r ApiPatchMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdRequest) (*PaymentMethod, *http.Response, error) {
+func (a *PaymentMethodsMerchantLevelApiService) UpdatePaymentMethodExecute(r ApiPatchMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdRequest) (*PaymentMethod, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
@@ -636,11 +821,11 @@ func (r ApiPostMerchantsMerchantIdPaymentMethodSettingsRequest) PaymentMethodSet
 }
 
 func (r ApiPostMerchantsMerchantIdPaymentMethodSettingsRequest) Execute() (*PaymentMethod, *http.Response, error) {
-	return r.ApiService.PostMerchantsMerchantIdPaymentMethodSettingsExecute(r)
+	return r.ApiService.RequestPaymentMethodExecute(r)
 }
 
 /*
-PostMerchantsMerchantIdPaymentMethodSettings Request a payment method
+RequestPaymentMethod Request a payment method
 
 Sends a request to add a new payment method to the merchant account identified in the path.
 
@@ -652,7 +837,7 @@ To make this request, your API credential must have the following [role](https:/
  @param merchantId The unique identifier of the merchant account.
  @return ApiPostMerchantsMerchantIdPaymentMethodSettingsRequest
 */
-func (a *PaymentMethodsMerchantLevelApiService) PostMerchantsMerchantIdPaymentMethodSettings(ctx context.Context, merchantId string) ApiPostMerchantsMerchantIdPaymentMethodSettingsRequest {
+func (a *PaymentMethodsMerchantLevelApiService) RequestPaymentMethod(ctx context.Context, merchantId string) ApiPostMerchantsMerchantIdPaymentMethodSettingsRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -668,7 +853,7 @@ func (a *PaymentMethodsMerchantLevelApiService) PostMerchantsMerchantIdPaymentMe
 
 // Execute executes the request
 //  @return PaymentMethod
-func (a *PaymentMethodsMerchantLevelApiService) PostMerchantsMerchantIdPaymentMethodSettingsExecute(r ApiPostMerchantsMerchantIdPaymentMethodSettingsRequest) (*PaymentMethod, *http.Response, error) {
+func (a *PaymentMethodsMerchantLevelApiService) RequestPaymentMethodExecute(r ApiPostMerchantsMerchantIdPaymentMethodSettingsRequest) (*PaymentMethod, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -810,4 +995,186 @@ func (a *PaymentMethodsMerchantLevelApiService) PostMerchantsMerchantIdPaymentMe
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiPostMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdAddApplePayDomainsRequest struct {
+	ctx context.Context
+	ApiService *PaymentMethodsMerchantLevelApiService
+	merchantId string
+	paymentMethodId string
+	applePayInfo *ApplePayInfo
+}
+
+func (r ApiPostMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdAddApplePayDomainsRequest) ApplePayInfo(applePayInfo ApplePayInfo) ApiPostMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdAddApplePayDomainsRequest {
+	r.applePayInfo = &applePayInfo
+	return r
+}
+
+func (r ApiPostMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdAddApplePayDomainsRequest) Execute() (*http.Response, error) {
+	return r.ApiService.AddApplePayDomainExecute(r)
+}
+
+/*
+AddApplePayDomain Add an Apple Pay domain
+
+Adds the new domain to the list of Apple Pay domains that are registered with the merchant account and the payment method identified in the path. For more information, see [Apple Pay documentation](https://docs.adyen.com/payment-methods/apple-pay/enable-apple-pay#register-merchant-domain).
+
+To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+* Management API—Payment methods read and write
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param merchantId The unique identifier of the merchant account.
+ @param paymentMethodId The unique identifier of the payment method.
+ @return ApiPostMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdAddApplePayDomainsRequest
+*/
+func (a *PaymentMethodsMerchantLevelApiService) AddApplePayDomain(ctx context.Context, merchantId string, paymentMethodId string) ApiPostMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdAddApplePayDomainsRequest {
+    // add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+
+	return ApiPostMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdAddApplePayDomainsRequest{
+		ApiService: a,
+		ctx: ctxWithApiKey,
+		merchantId: merchantId,
+		paymentMethodId: paymentMethodId,
+	}
+}
+
+// Execute executes the request
+func (a *PaymentMethodsMerchantLevelApiService) AddApplePayDomainExecute(r ApiPostMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdAddApplePayDomainsRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PaymentMethodsMerchantLevelApiService.PostMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdAddApplePayDomains")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/merchants/{merchantId}/paymentMethodSettings/{paymentMethodId}/addApplePayDomains"
+	localVarPath = strings.Replace(localVarPath, "{"+"merchantId"+"}", url.PathEscape(parameterToString(r.merchantId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"paymentMethodId"+"}", url.PathEscape(parameterToString(r.paymentMethodId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.applePayInfo
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v RestServiceError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+            newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v RestServiceError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+            newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v RestServiceError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+            newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v RestServiceError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+            newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v RestServiceError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+            newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            newErr.model = v
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
 }

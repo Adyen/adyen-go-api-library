@@ -1,7 +1,7 @@
 /*
 Management API
 
-Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```
+Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```  ## Going live  To access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:  ```text https://management-live.adyen.com/v1 ```
 
 API version: 1
 Contact: developer-experience@adyen.com
@@ -38,11 +38,11 @@ func (r ApiGetCompaniesCompanyIdTerminalLogosRequest) Model(model string) ApiGet
 }
 
 func (r ApiGetCompaniesCompanyIdTerminalLogosRequest) Execute() (*Logo, *http.Response, error) {
-	return r.ApiService.GetCompaniesCompanyIdTerminalLogosExecute(r)
+	return r.ApiService.GetTerminalLogoExecute(r)
 }
 
 /*
-GetCompaniesCompanyIdTerminalLogos Get the terminal logo
+GetTerminalLogo Get the terminal logo
 
 Returns the logo that is configured for a specific payment terminal model at the company identified in the path. You must specify the terminal model as a query parameter. 
 
@@ -57,7 +57,7 @@ To make this request, your API credential must have one of the following [roles]
  @param companyId The unique identifier of the company account.
  @return ApiGetCompaniesCompanyIdTerminalLogosRequest
 */
-func (a *TerminalSettingsCompanyLevelApiService) GetCompaniesCompanyIdTerminalLogos(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdTerminalLogosRequest {
+func (a *TerminalSettingsCompanyLevelApiService) GetTerminalLogo(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdTerminalLogosRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -73,7 +73,7 @@ func (a *TerminalSettingsCompanyLevelApiService) GetCompaniesCompanyIdTerminalLo
 
 // Execute executes the request
 //  @return Logo
-func (a *TerminalSettingsCompanyLevelApiService) GetCompaniesCompanyIdTerminalLogosExecute(r ApiGetCompaniesCompanyIdTerminalLogosRequest) (*Logo, *http.Response, error) {
+func (a *TerminalSettingsCompanyLevelApiService) GetTerminalLogoExecute(r ApiGetCompaniesCompanyIdTerminalLogosRequest) (*Logo, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -225,11 +225,11 @@ type ApiGetCompaniesCompanyIdTerminalSettingsRequest struct {
 }
 
 func (r ApiGetCompaniesCompanyIdTerminalSettingsRequest) Execute() (*TerminalSettings, *http.Response, error) {
-	return r.ApiService.GetCompaniesCompanyIdTerminalSettingsExecute(r)
+	return r.ApiService.GetTerminalSettingsExecute(r)
 }
 
 /*
-GetCompaniesCompanyIdTerminalSettings Get terminal settings
+GetTerminalSettings Get terminal settings
 
 Returns the payment terminal settings that are configured for the company identified in the path. These settings apply to all terminals under the company, unless different values are configured at a lower level (merchant account, store, or individual terminal).
 
@@ -241,7 +241,7 @@ To make this request, your API credential must have one of the following [roles]
  @param companyId The unique identifier of the company account.
  @return ApiGetCompaniesCompanyIdTerminalSettingsRequest
 */
-func (a *TerminalSettingsCompanyLevelApiService) GetCompaniesCompanyIdTerminalSettings(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdTerminalSettingsRequest {
+func (a *TerminalSettingsCompanyLevelApiService) GetTerminalSettings(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdTerminalSettingsRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -257,7 +257,7 @@ func (a *TerminalSettingsCompanyLevelApiService) GetCompaniesCompanyIdTerminalSe
 
 // Execute executes the request
 //  @return TerminalSettings
-func (a *TerminalSettingsCompanyLevelApiService) GetCompaniesCompanyIdTerminalSettingsExecute(r ApiGetCompaniesCompanyIdTerminalSettingsRequest) (*TerminalSettings, *http.Response, error) {
+func (a *TerminalSettingsCompanyLevelApiService) GetTerminalSettingsExecute(r ApiGetCompaniesCompanyIdTerminalSettingsRequest) (*TerminalSettings, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -419,11 +419,11 @@ func (r ApiPatchCompaniesCompanyIdTerminalLogosRequest) Logo(logo Logo) ApiPatch
 }
 
 func (r ApiPatchCompaniesCompanyIdTerminalLogosRequest) Execute() (*Logo, *http.Response, error) {
-	return r.ApiService.PatchCompaniesCompanyIdTerminalLogosExecute(r)
+	return r.ApiService.UpdateTerminalLogoExecute(r)
 }
 
 /*
-PatchCompaniesCompanyIdTerminalLogos Update the terminal logo
+UpdateTerminalLogo Update the terminal logo
 
 Updates the logo that is configured for a specific payment terminal model at the company identified in the path. You must specify the terminal model as a query parameter. You can update the logo for only one terminal model at a time.
 This logo applies to all terminals of the specified model under the company, unless a different logo is configured at a lower level (merchant account, store, or individual terminal). 
@@ -437,7 +437,7 @@ To make this request, your API credential must have the following [role](https:/
  @param companyId The unique identifier of the company account.
  @return ApiPatchCompaniesCompanyIdTerminalLogosRequest
 */
-func (a *TerminalSettingsCompanyLevelApiService) PatchCompaniesCompanyIdTerminalLogos(ctx context.Context, companyId string) ApiPatchCompaniesCompanyIdTerminalLogosRequest {
+func (a *TerminalSettingsCompanyLevelApiService) UpdateTerminalLogo(ctx context.Context, companyId string) ApiPatchCompaniesCompanyIdTerminalLogosRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -453,7 +453,7 @@ func (a *TerminalSettingsCompanyLevelApiService) PatchCompaniesCompanyIdTerminal
 
 // Execute executes the request
 //  @return Logo
-func (a *TerminalSettingsCompanyLevelApiService) PatchCompaniesCompanyIdTerminalLogosExecute(r ApiPatchCompaniesCompanyIdTerminalLogosRequest) (*Logo, *http.Response, error) {
+func (a *TerminalSettingsCompanyLevelApiService) UpdateTerminalLogoExecute(r ApiPatchCompaniesCompanyIdTerminalLogosRequest) (*Logo, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
@@ -613,11 +613,11 @@ func (r ApiPatchCompaniesCompanyIdTerminalSettingsRequest) TerminalSettings(term
 }
 
 func (r ApiPatchCompaniesCompanyIdTerminalSettingsRequest) Execute() (*TerminalSettings, *http.Response, error) {
-	return r.ApiService.PatchCompaniesCompanyIdTerminalSettingsExecute(r)
+	return r.ApiService.UpdateTerminalSettingsExecute(r)
 }
 
 /*
-PatchCompaniesCompanyIdTerminalSettings Update terminal settings
+UpdateTerminalSettings Update terminal settings
 
 Updates payment terminal settings for the company identified in the path. These settings apply to all terminals under the company, unless different values are configured at a lower level (merchant account, store, or individual terminal).
 
@@ -632,7 +632,7 @@ To make this request, your API credential must have the following [role](https:/
  @param companyId The unique identifier of the company account.
  @return ApiPatchCompaniesCompanyIdTerminalSettingsRequest
 */
-func (a *TerminalSettingsCompanyLevelApiService) PatchCompaniesCompanyIdTerminalSettings(ctx context.Context, companyId string) ApiPatchCompaniesCompanyIdTerminalSettingsRequest {
+func (a *TerminalSettingsCompanyLevelApiService) UpdateTerminalSettings(ctx context.Context, companyId string) ApiPatchCompaniesCompanyIdTerminalSettingsRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -648,7 +648,7 @@ func (a *TerminalSettingsCompanyLevelApiService) PatchCompaniesCompanyIdTerminal
 
 // Execute executes the request
 //  @return TerminalSettings
-func (a *TerminalSettingsCompanyLevelApiService) PatchCompaniesCompanyIdTerminalSettingsExecute(r ApiPatchCompaniesCompanyIdTerminalSettingsRequest) (*TerminalSettings, *http.Response, error) {
+func (a *TerminalSettingsCompanyLevelApiService) UpdateTerminalSettingsExecute(r ApiPatchCompaniesCompanyIdTerminalSettingsRequest) (*TerminalSettings, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}

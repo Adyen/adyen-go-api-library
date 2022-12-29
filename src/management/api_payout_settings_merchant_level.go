@@ -1,7 +1,7 @@
 /*
 Management API
 
-Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```
+Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```  ## Going live  To access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:  ```text https://management-live.adyen.com/v1 ```
 
 API version: 1
 Contact: developer-experience@adyen.com
@@ -31,12 +31,12 @@ type ApiDeleteMerchantsMerchantIdPayoutSettingsPayoutSettingsIdRequest struct {
 	payoutSettingsId string
 }
 
-func (r ApiDeleteMerchantsMerchantIdPayoutSettingsPayoutSettingsIdRequest) Execute() (interface{}, *http.Response, error) {
-	return r.ApiService.DeleteMerchantsMerchantIdPayoutSettingsPayoutSettingsIdExecute(r)
+func (r ApiDeleteMerchantsMerchantIdPayoutSettingsPayoutSettingsIdRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeletePayoutSettingExecute(r)
 }
 
 /*
-DeleteMerchantsMerchantIdPayoutSettingsPayoutSettingsId Delete a payout setting
+DeletePayoutSetting Delete a payout setting
 
 Deletes the payout setting identified in the path.
 
@@ -51,7 +51,7 @@ To make this request, your API credential must have the following [roles](https:
  @param payoutSettingsId The unique identifier of the payout setting.
  @return ApiDeleteMerchantsMerchantIdPayoutSettingsPayoutSettingsIdRequest
 */
-func (a *PayoutSettingsMerchantLevelApiService) DeleteMerchantsMerchantIdPayoutSettingsPayoutSettingsId(ctx context.Context, merchantId string, payoutSettingsId string) ApiDeleteMerchantsMerchantIdPayoutSettingsPayoutSettingsIdRequest {
+func (a *PayoutSettingsMerchantLevelApiService) DeletePayoutSetting(ctx context.Context, merchantId string, payoutSettingsId string) ApiDeleteMerchantsMerchantIdPayoutSettingsPayoutSettingsIdRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -67,18 +67,16 @@ func (a *PayoutSettingsMerchantLevelApiService) DeleteMerchantsMerchantIdPayoutS
 }
 
 // Execute executes the request
-//  @return interface{}
-func (a *PayoutSettingsMerchantLevelApiService) DeleteMerchantsMerchantIdPayoutSettingsPayoutSettingsIdExecute(r ApiDeleteMerchantsMerchantIdPayoutSettingsPayoutSettingsIdRequest) (interface{}, *http.Response, error) {
+func (a *PayoutSettingsMerchantLevelApiService) DeletePayoutSettingExecute(r ApiDeleteMerchantsMerchantIdPayoutSettingsPayoutSettingsIdRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PayoutSettingsMerchantLevelApiService.DeleteMerchantsMerchantIdPayoutSettingsPayoutSettingsId")
 	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/merchants/{merchantId}/payoutSettings/{payoutSettingsId}"
@@ -122,19 +120,19 @@ func (a *PayoutSettingsMerchantLevelApiService) DeleteMerchantsMerchantIdPayoutS
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -147,68 +145,59 @@ func (a *PayoutSettingsMerchantLevelApiService) DeleteMerchantsMerchantIdPayoutS
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
             newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
             newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v RestServiceError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
             newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
             newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
 			var v RestServiceError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
             newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
             newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
 			var v RestServiceError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
             newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
             newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v RestServiceError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
             newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
             newErr.model = v
 		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarHTTPResponse, nil
 }
 
 type ApiGetMerchantsMerchantIdPayoutSettingsRequest struct {
@@ -218,11 +207,11 @@ type ApiGetMerchantsMerchantIdPayoutSettingsRequest struct {
 }
 
 func (r ApiGetMerchantsMerchantIdPayoutSettingsRequest) Execute() (*PayoutSettingsResponse, *http.Response, error) {
-	return r.ApiService.GetMerchantsMerchantIdPayoutSettingsExecute(r)
+	return r.ApiService.ListPayoutSettingsExecute(r)
 }
 
 /*
-GetMerchantsMerchantIdPayoutSettings Get a list of payout settings
+ListPayoutSettings Get a list of payout settings
 
 Returns the list of payout settings for the merchant account identified in the path.
 
@@ -235,7 +224,7 @@ To make this request, your API credential must have the following [roles](https:
  @param merchantId The unique identifier of the merchant account.
  @return ApiGetMerchantsMerchantIdPayoutSettingsRequest
 */
-func (a *PayoutSettingsMerchantLevelApiService) GetMerchantsMerchantIdPayoutSettings(ctx context.Context, merchantId string) ApiGetMerchantsMerchantIdPayoutSettingsRequest {
+func (a *PayoutSettingsMerchantLevelApiService) ListPayoutSettings(ctx context.Context, merchantId string) ApiGetMerchantsMerchantIdPayoutSettingsRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -251,7 +240,7 @@ func (a *PayoutSettingsMerchantLevelApiService) GetMerchantsMerchantIdPayoutSett
 
 // Execute executes the request
 //  @return PayoutSettingsResponse
-func (a *PayoutSettingsMerchantLevelApiService) GetMerchantsMerchantIdPayoutSettingsExecute(r ApiGetMerchantsMerchantIdPayoutSettingsRequest) (*PayoutSettingsResponse, *http.Response, error) {
+func (a *PayoutSettingsMerchantLevelApiService) ListPayoutSettingsExecute(r ApiGetMerchantsMerchantIdPayoutSettingsRequest) (*PayoutSettingsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -401,11 +390,11 @@ type ApiGetMerchantsMerchantIdPayoutSettingsPayoutSettingsIdRequest struct {
 }
 
 func (r ApiGetMerchantsMerchantIdPayoutSettingsPayoutSettingsIdRequest) Execute() (*PayoutSettings, *http.Response, error) {
-	return r.ApiService.GetMerchantsMerchantIdPayoutSettingsPayoutSettingsIdExecute(r)
+	return r.ApiService.GetPayoutSettingExecute(r)
 }
 
 /*
-GetMerchantsMerchantIdPayoutSettingsPayoutSettingsId Get a payout setting
+GetPayoutSetting Get a payout setting
 
 Returns the payout setting identified in the path.
 
@@ -419,7 +408,7 @@ To make this request, your API credential must have the following [roles](https:
  @param payoutSettingsId The unique identifier of the payout setting.
  @return ApiGetMerchantsMerchantIdPayoutSettingsPayoutSettingsIdRequest
 */
-func (a *PayoutSettingsMerchantLevelApiService) GetMerchantsMerchantIdPayoutSettingsPayoutSettingsId(ctx context.Context, merchantId string, payoutSettingsId string) ApiGetMerchantsMerchantIdPayoutSettingsPayoutSettingsIdRequest {
+func (a *PayoutSettingsMerchantLevelApiService) GetPayoutSetting(ctx context.Context, merchantId string, payoutSettingsId string) ApiGetMerchantsMerchantIdPayoutSettingsPayoutSettingsIdRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -436,7 +425,7 @@ func (a *PayoutSettingsMerchantLevelApiService) GetMerchantsMerchantIdPayoutSett
 
 // Execute executes the request
 //  @return PayoutSettings
-func (a *PayoutSettingsMerchantLevelApiService) GetMerchantsMerchantIdPayoutSettingsPayoutSettingsIdExecute(r ApiGetMerchantsMerchantIdPayoutSettingsPayoutSettingsIdRequest) (*PayoutSettings, *http.Response, error) {
+func (a *PayoutSettingsMerchantLevelApiService) GetPayoutSettingExecute(r ApiGetMerchantsMerchantIdPayoutSettingsPayoutSettingsIdRequest) (*PayoutSettings, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -593,11 +582,11 @@ func (r ApiPatchMerchantsMerchantIdPayoutSettingsPayoutSettingsIdRequest) Update
 }
 
 func (r ApiPatchMerchantsMerchantIdPayoutSettingsPayoutSettingsIdRequest) Execute() (*PayoutSettings, *http.Response, error) {
-	return r.ApiService.PatchMerchantsMerchantIdPayoutSettingsPayoutSettingsIdExecute(r)
+	return r.ApiService.UpdatePayoutSettingExecute(r)
 }
 
 /*
-PatchMerchantsMerchantIdPayoutSettingsPayoutSettingsId Update a payout setting
+UpdatePayoutSetting Update a payout setting
 
 Updates the payout setting identified in the path. You can enable or disable the payout setting.
 
@@ -612,7 +601,7 @@ To make this request, your API credential must have the following [roles](https:
  @param payoutSettingsId The unique identifier of the payout setting.
  @return ApiPatchMerchantsMerchantIdPayoutSettingsPayoutSettingsIdRequest
 */
-func (a *PayoutSettingsMerchantLevelApiService) PatchMerchantsMerchantIdPayoutSettingsPayoutSettingsId(ctx context.Context, merchantId string, payoutSettingsId string) ApiPatchMerchantsMerchantIdPayoutSettingsPayoutSettingsIdRequest {
+func (a *PayoutSettingsMerchantLevelApiService) UpdatePayoutSetting(ctx context.Context, merchantId string, payoutSettingsId string) ApiPatchMerchantsMerchantIdPayoutSettingsPayoutSettingsIdRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -629,7 +618,7 @@ func (a *PayoutSettingsMerchantLevelApiService) PatchMerchantsMerchantIdPayoutSe
 
 // Execute executes the request
 //  @return PayoutSettings
-func (a *PayoutSettingsMerchantLevelApiService) PatchMerchantsMerchantIdPayoutSettingsPayoutSettingsIdExecute(r ApiPatchMerchantsMerchantIdPayoutSettingsPayoutSettingsIdRequest) (*PayoutSettings, *http.Response, error) {
+func (a *PayoutSettingsMerchantLevelApiService) UpdatePayoutSettingExecute(r ApiPatchMerchantsMerchantIdPayoutSettingsPayoutSettingsIdRequest) (*PayoutSettings, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
@@ -787,11 +776,11 @@ func (r ApiPostMerchantsMerchantIdPayoutSettingsRequest) PayoutSettingsRequest(p
 }
 
 func (r ApiPostMerchantsMerchantIdPayoutSettingsRequest) Execute() (*PayoutSettings, *http.Response, error) {
-	return r.ApiService.PostMerchantsMerchantIdPayoutSettingsExecute(r)
+	return r.ApiService.AddPayoutSettingExecute(r)
 }
 
 /*
-PostMerchantsMerchantIdPayoutSettings Add a payout setting
+AddPayoutSetting Add a payout setting
 
 Sends a request to add a payout setting for the merchant account specified in the path. A payout setting links the merchant account to the [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments) that contains the details of the payout bank account. Adyen verifies the bank account before allowing and enabling the payout setting.
 
@@ -807,7 +796,7 @@ To make this request, your API credential must have the following [roles](https:
  @param merchantId The unique identifier of the merchant account.
  @return ApiPostMerchantsMerchantIdPayoutSettingsRequest
 */
-func (a *PayoutSettingsMerchantLevelApiService) PostMerchantsMerchantIdPayoutSettings(ctx context.Context, merchantId string) ApiPostMerchantsMerchantIdPayoutSettingsRequest {
+func (a *PayoutSettingsMerchantLevelApiService) AddPayoutSetting(ctx context.Context, merchantId string) ApiPostMerchantsMerchantIdPayoutSettingsRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -823,7 +812,7 @@ func (a *PayoutSettingsMerchantLevelApiService) PostMerchantsMerchantIdPayoutSet
 
 // Execute executes the request
 //  @return PayoutSettings
-func (a *PayoutSettingsMerchantLevelApiService) PostMerchantsMerchantIdPayoutSettingsExecute(r ApiPostMerchantsMerchantIdPayoutSettingsRequest) (*PayoutSettings, *http.Response, error) {
+func (a *PayoutSettingsMerchantLevelApiService) AddPayoutSettingExecute(r ApiPostMerchantsMerchantIdPayoutSettingsRequest) (*PayoutSettings, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}

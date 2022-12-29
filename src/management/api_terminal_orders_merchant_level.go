@@ -1,7 +1,7 @@
 /*
 Management API
 
-Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```
+Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```  ## Going live  To access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:  ```text https://management-live.adyen.com/v1 ```
 
 API version: 1
 Contact: developer-experience@adyen.com
@@ -38,11 +38,11 @@ func (r ApiGetMerchantsMerchantIdBillingEntitiesRequest) Name(name string) ApiGe
 }
 
 func (r ApiGetMerchantsMerchantIdBillingEntitiesRequest) Execute() (*BillingEntitiesResponse, *http.Response, error) {
-	return r.ApiService.GetMerchantsMerchantIdBillingEntitiesExecute(r)
+	return r.ApiService.ListBillingEntitiesExecute(r)
 }
 
 /*
-GetMerchantsMerchantIdBillingEntities Get a list of billing entities
+ListBillingEntities Get a list of billing entities
 
 Returns the billing entities of the merchant account identified in the path.
 A billing entity is a legal entity where we charge orders to. An order for terminal products must contain the ID of a billing entity.
@@ -55,7 +55,7 @@ To make this request, your API credential must have one of the following [roles]
  @param merchantId The unique identifier of the merchant account.
  @return ApiGetMerchantsMerchantIdBillingEntitiesRequest
 */
-func (a *TerminalOrdersMerchantLevelApiService) GetMerchantsMerchantIdBillingEntities(ctx context.Context, merchantId string) ApiGetMerchantsMerchantIdBillingEntitiesRequest {
+func (a *TerminalOrdersMerchantLevelApiService) ListBillingEntities(ctx context.Context, merchantId string) ApiGetMerchantsMerchantIdBillingEntitiesRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -71,7 +71,7 @@ func (a *TerminalOrdersMerchantLevelApiService) GetMerchantsMerchantIdBillingEnt
 
 // Execute executes the request
 //  @return BillingEntitiesResponse
-func (a *TerminalOrdersMerchantLevelApiService) GetMerchantsMerchantIdBillingEntitiesExecute(r ApiGetMerchantsMerchantIdBillingEntitiesRequest) (*BillingEntitiesResponse, *http.Response, error) {
+func (a *TerminalOrdersMerchantLevelApiService) ListBillingEntitiesExecute(r ApiGetMerchantsMerchantIdBillingEntitiesRequest) (*BillingEntitiesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -244,11 +244,11 @@ func (r ApiGetMerchantsMerchantIdShippingLocationsRequest) Limit(limit int32) Ap
 }
 
 func (r ApiGetMerchantsMerchantIdShippingLocationsRequest) Execute() (*ShippingLocationsResponse, *http.Response, error) {
-	return r.ApiService.GetMerchantsMerchantIdShippingLocationsExecute(r)
+	return r.ApiService.ListShippingLocationsExecute(r)
 }
 
 /*
-GetMerchantsMerchantIdShippingLocations Get a list of shipping locations
+ListShippingLocations Get a list of shipping locations
 
 Returns the shipping locations for the merchant account identified in the path.
 A shipping location includes the address where orders can be delivered, and an ID which you need to specify when ordering terminal products.
@@ -261,7 +261,7 @@ To make this request, your API credential must have one of the following [roles]
  @param merchantId The unique identifier of the merchant account.
  @return ApiGetMerchantsMerchantIdShippingLocationsRequest
 */
-func (a *TerminalOrdersMerchantLevelApiService) GetMerchantsMerchantIdShippingLocations(ctx context.Context, merchantId string) ApiGetMerchantsMerchantIdShippingLocationsRequest {
+func (a *TerminalOrdersMerchantLevelApiService) ListShippingLocations(ctx context.Context, merchantId string) ApiGetMerchantsMerchantIdShippingLocationsRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -277,7 +277,7 @@ func (a *TerminalOrdersMerchantLevelApiService) GetMerchantsMerchantIdShippingLo
 
 // Execute executes the request
 //  @return ShippingLocationsResponse
-func (a *TerminalOrdersMerchantLevelApiService) GetMerchantsMerchantIdShippingLocationsExecute(r ApiGetMerchantsMerchantIdShippingLocationsRequest) (*ShippingLocationsResponse, *http.Response, error) {
+func (a *TerminalOrdersMerchantLevelApiService) ListShippingLocationsExecute(r ApiGetMerchantsMerchantIdShippingLocationsRequest) (*ShippingLocationsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -435,11 +435,11 @@ type ApiGetMerchantsMerchantIdTerminalModelsRequest struct {
 }
 
 func (r ApiGetMerchantsMerchantIdTerminalModelsRequest) Execute() (*TerminalModelsResponse, *http.Response, error) {
-	return r.ApiService.GetMerchantsMerchantIdTerminalModelsExecute(r)
+	return r.ApiService.ListTerminalModelsExecute(r)
 }
 
 /*
-GetMerchantsMerchantIdTerminalModels Get a list of terminal models
+ListTerminalModels Get a list of terminal models
 
 Returns the payment terminal models that merchant account identified in the path has access to. The response includes the terminal model ID, which can be used as a query parameter when getting a list of terminals or a list of products for ordering.
 
@@ -451,7 +451,7 @@ To make this request, your API credential must have one of the following [roles]
  @param merchantId The unique identifier of the merchant account.
  @return ApiGetMerchantsMerchantIdTerminalModelsRequest
 */
-func (a *TerminalOrdersMerchantLevelApiService) GetMerchantsMerchantIdTerminalModels(ctx context.Context, merchantId string) ApiGetMerchantsMerchantIdTerminalModelsRequest {
+func (a *TerminalOrdersMerchantLevelApiService) ListTerminalModels(ctx context.Context, merchantId string) ApiGetMerchantsMerchantIdTerminalModelsRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -467,7 +467,7 @@ func (a *TerminalOrdersMerchantLevelApiService) GetMerchantsMerchantIdTerminalMo
 
 // Execute executes the request
 //  @return TerminalModelsResponse
-func (a *TerminalOrdersMerchantLevelApiService) GetMerchantsMerchantIdTerminalModelsExecute(r ApiGetMerchantsMerchantIdTerminalModelsRequest) (*TerminalModelsResponse, *http.Response, error) {
+func (a *TerminalOrdersMerchantLevelApiService) ListTerminalModelsExecute(r ApiGetMerchantsMerchantIdTerminalModelsRequest) (*TerminalModelsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -644,11 +644,11 @@ func (r ApiGetMerchantsMerchantIdTerminalOrdersRequest) Limit(limit int32) ApiGe
 }
 
 func (r ApiGetMerchantsMerchantIdTerminalOrdersRequest) Execute() (*TerminalOrdersResponse, *http.Response, error) {
-	return r.ApiService.GetMerchantsMerchantIdTerminalOrdersExecute(r)
+	return r.ApiService.ListOrdersExecute(r)
 }
 
 /*
-GetMerchantsMerchantIdTerminalOrders Get a list of orders
+ListOrders Get a list of orders
 
 Returns a list of terminal products orders for the merchant account identified in the path.
 
@@ -660,7 +660,7 @@ To make this request, your API credential must have one of the following [roles]
  @param merchantId
  @return ApiGetMerchantsMerchantIdTerminalOrdersRequest
 */
-func (a *TerminalOrdersMerchantLevelApiService) GetMerchantsMerchantIdTerminalOrders(ctx context.Context, merchantId string) ApiGetMerchantsMerchantIdTerminalOrdersRequest {
+func (a *TerminalOrdersMerchantLevelApiService) ListOrders(ctx context.Context, merchantId string) ApiGetMerchantsMerchantIdTerminalOrdersRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -676,7 +676,7 @@ func (a *TerminalOrdersMerchantLevelApiService) GetMerchantsMerchantIdTerminalOr
 
 // Execute executes the request
 //  @return TerminalOrdersResponse
-func (a *TerminalOrdersMerchantLevelApiService) GetMerchantsMerchantIdTerminalOrdersExecute(r ApiGetMerchantsMerchantIdTerminalOrdersRequest) (*TerminalOrdersResponse, *http.Response, error) {
+func (a *TerminalOrdersMerchantLevelApiService) ListOrdersExecute(r ApiGetMerchantsMerchantIdTerminalOrdersRequest) (*TerminalOrdersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -838,11 +838,11 @@ type ApiGetMerchantsMerchantIdTerminalOrdersOrderIdRequest struct {
 }
 
 func (r ApiGetMerchantsMerchantIdTerminalOrdersOrderIdRequest) Execute() (*TerminalOrder, *http.Response, error) {
-	return r.ApiService.GetMerchantsMerchantIdTerminalOrdersOrderIdExecute(r)
+	return r.ApiService.GetOrderExecute(r)
 }
 
 /*
-GetMerchantsMerchantIdTerminalOrdersOrderId Get an order
+GetOrder Get an order
 
 Returns the details of the terminal products order identified in the path.
 
@@ -855,7 +855,7 @@ To make this request, your API credential must have one of the following [roles]
  @param orderId The unique identifier of the order.
  @return ApiGetMerchantsMerchantIdTerminalOrdersOrderIdRequest
 */
-func (a *TerminalOrdersMerchantLevelApiService) GetMerchantsMerchantIdTerminalOrdersOrderId(ctx context.Context, merchantId string, orderId string) ApiGetMerchantsMerchantIdTerminalOrdersOrderIdRequest {
+func (a *TerminalOrdersMerchantLevelApiService) GetOrder(ctx context.Context, merchantId string, orderId string) ApiGetMerchantsMerchantIdTerminalOrdersOrderIdRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -872,7 +872,7 @@ func (a *TerminalOrdersMerchantLevelApiService) GetMerchantsMerchantIdTerminalOr
 
 // Execute executes the request
 //  @return TerminalOrder
-func (a *TerminalOrdersMerchantLevelApiService) GetMerchantsMerchantIdTerminalOrdersOrderIdExecute(r ApiGetMerchantsMerchantIdTerminalOrdersOrderIdRequest) (*TerminalOrder, *http.Response, error) {
+func (a *TerminalOrdersMerchantLevelApiService) GetOrderExecute(r ApiGetMerchantsMerchantIdTerminalOrdersOrderIdRequest) (*TerminalOrder, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -1050,11 +1050,11 @@ func (r ApiGetMerchantsMerchantIdTerminalProductsRequest) Limit(limit int32) Api
 }
 
 func (r ApiGetMerchantsMerchantIdTerminalProductsRequest) Execute() (*TerminalProductsResponse, *http.Response, error) {
-	return r.ApiService.GetMerchantsMerchantIdTerminalProductsExecute(r)
+	return r.ApiService.ListTerminalProductsExecute(r)
 }
 
 /*
-GetMerchantsMerchantIdTerminalProducts Get a list of terminal products
+ListTerminalProducts Get a list of terminal products
 
 Returns a list of payment terminal packages and parts that the merchant account identified in the path has access to.
 To filter the list, use one or more of the query parameters. The `country` query parameter is required.
@@ -1067,7 +1067,7 @@ To make this request, your API credential must have one of the following [roles]
  @param merchantId The unique identifier of the merchant account.
  @return ApiGetMerchantsMerchantIdTerminalProductsRequest
 */
-func (a *TerminalOrdersMerchantLevelApiService) GetMerchantsMerchantIdTerminalProducts(ctx context.Context, merchantId string) ApiGetMerchantsMerchantIdTerminalProductsRequest {
+func (a *TerminalOrdersMerchantLevelApiService) ListTerminalProducts(ctx context.Context, merchantId string) ApiGetMerchantsMerchantIdTerminalProductsRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -1083,7 +1083,7 @@ func (a *TerminalOrdersMerchantLevelApiService) GetMerchantsMerchantIdTerminalPr
 
 // Execute executes the request
 //  @return TerminalProductsResponse
-func (a *TerminalOrdersMerchantLevelApiService) GetMerchantsMerchantIdTerminalProductsExecute(r ApiGetMerchantsMerchantIdTerminalProductsRequest) (*TerminalProductsResponse, *http.Response, error) {
+func (a *TerminalOrdersMerchantLevelApiService) ListTerminalProductsExecute(r ApiGetMerchantsMerchantIdTerminalProductsRequest) (*TerminalProductsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -1251,11 +1251,11 @@ func (r ApiPatchMerchantsMerchantIdTerminalOrdersOrderIdRequest) TerminalOrderRe
 }
 
 func (r ApiPatchMerchantsMerchantIdTerminalOrdersOrderIdRequest) Execute() (*TerminalOrder, *http.Response, error) {
-	return r.ApiService.PatchMerchantsMerchantIdTerminalOrdersOrderIdExecute(r)
+	return r.ApiService.UpdateOrderExecute(r)
 }
 
 /*
-PatchMerchantsMerchantIdTerminalOrdersOrderId Update an order
+UpdateOrder Update an order
 
 Updates the terminal products order identified in the path.
 Updating is only possible while the order has the status **Placed**.
@@ -1272,7 +1272,7 @@ To make this request, your API credential must have the following [role](https:/
  @param orderId The unique identifier of the order.
  @return ApiPatchMerchantsMerchantIdTerminalOrdersOrderIdRequest
 */
-func (a *TerminalOrdersMerchantLevelApiService) PatchMerchantsMerchantIdTerminalOrdersOrderId(ctx context.Context, merchantId string, orderId string) ApiPatchMerchantsMerchantIdTerminalOrdersOrderIdRequest {
+func (a *TerminalOrdersMerchantLevelApiService) UpdateOrder(ctx context.Context, merchantId string, orderId string) ApiPatchMerchantsMerchantIdTerminalOrdersOrderIdRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -1289,7 +1289,7 @@ func (a *TerminalOrdersMerchantLevelApiService) PatchMerchantsMerchantIdTerminal
 
 // Execute executes the request
 //  @return TerminalOrder
-func (a *TerminalOrdersMerchantLevelApiService) PatchMerchantsMerchantIdTerminalOrdersOrderIdExecute(r ApiPatchMerchantsMerchantIdTerminalOrdersOrderIdRequest) (*TerminalOrder, *http.Response, error) {
+func (a *TerminalOrdersMerchantLevelApiService) UpdateOrderExecute(r ApiPatchMerchantsMerchantIdTerminalOrdersOrderIdRequest) (*TerminalOrder, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
@@ -1447,11 +1447,11 @@ func (r ApiPostMerchantsMerchantIdShippingLocationsRequest) ShippingLocation(shi
 }
 
 func (r ApiPostMerchantsMerchantIdShippingLocationsRequest) Execute() (*ShippingLocation, *http.Response, error) {
-	return r.ApiService.PostMerchantsMerchantIdShippingLocationsExecute(r)
+	return r.ApiService.CreateShippingLocationExecute(r)
 }
 
 /*
-PostMerchantsMerchantIdShippingLocations Create a shipping location
+CreateShippingLocation Create a shipping location
 
 Creates a shipping location for the merchant account identified in the path. A shipping location defines an address where orders can be shipped to. 
 
@@ -1462,7 +1462,7 @@ To make this request, your API credential must have the following [role](https:/
  @param merchantId The unique identifier of the merchant account.
  @return ApiPostMerchantsMerchantIdShippingLocationsRequest
 */
-func (a *TerminalOrdersMerchantLevelApiService) PostMerchantsMerchantIdShippingLocations(ctx context.Context, merchantId string) ApiPostMerchantsMerchantIdShippingLocationsRequest {
+func (a *TerminalOrdersMerchantLevelApiService) CreateShippingLocation(ctx context.Context, merchantId string) ApiPostMerchantsMerchantIdShippingLocationsRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -1478,7 +1478,7 @@ func (a *TerminalOrdersMerchantLevelApiService) PostMerchantsMerchantIdShippingL
 
 // Execute executes the request
 //  @return ShippingLocation
-func (a *TerminalOrdersMerchantLevelApiService) PostMerchantsMerchantIdShippingLocationsExecute(r ApiPostMerchantsMerchantIdShippingLocationsRequest) (*ShippingLocation, *http.Response, error) {
+func (a *TerminalOrdersMerchantLevelApiService) CreateShippingLocationExecute(r ApiPostMerchantsMerchantIdShippingLocationsRequest) (*ShippingLocation, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1635,11 +1635,11 @@ func (r ApiPostMerchantsMerchantIdTerminalOrdersRequest) TerminalOrderRequest(te
 }
 
 func (r ApiPostMerchantsMerchantIdTerminalOrdersRequest) Execute() (*TerminalOrder, *http.Response, error) {
-	return r.ApiService.PostMerchantsMerchantIdTerminalOrdersExecute(r)
+	return r.ApiService.CreateOrderExecute(r)
 }
 
 /*
-PostMerchantsMerchantIdTerminalOrders Create an order
+CreateOrder Create an order
 
 Creates an order for payment terminal products for the merchant account identified in the path.
 
@@ -1650,7 +1650,7 @@ To make this request, your API credential must have the following [role](https:/
  @param merchantId The unique identifier of the merchant account.
  @return ApiPostMerchantsMerchantIdTerminalOrdersRequest
 */
-func (a *TerminalOrdersMerchantLevelApiService) PostMerchantsMerchantIdTerminalOrders(ctx context.Context, merchantId string) ApiPostMerchantsMerchantIdTerminalOrdersRequest {
+func (a *TerminalOrdersMerchantLevelApiService) CreateOrder(ctx context.Context, merchantId string) ApiPostMerchantsMerchantIdTerminalOrdersRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -1666,7 +1666,7 @@ func (a *TerminalOrdersMerchantLevelApiService) PostMerchantsMerchantIdTerminalO
 
 // Execute executes the request
 //  @return TerminalOrder
-func (a *TerminalOrdersMerchantLevelApiService) PostMerchantsMerchantIdTerminalOrdersExecute(r ApiPostMerchantsMerchantIdTerminalOrdersRequest) (*TerminalOrder, *http.Response, error) {
+func (a *TerminalOrdersMerchantLevelApiService) CreateOrderExecute(r ApiPostMerchantsMerchantIdTerminalOrdersRequest) (*TerminalOrder, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1818,11 +1818,11 @@ type ApiPostMerchantsMerchantIdTerminalOrdersOrderIdCancelRequest struct {
 }
 
 func (r ApiPostMerchantsMerchantIdTerminalOrdersOrderIdCancelRequest) Execute() (*TerminalOrder, *http.Response, error) {
-	return r.ApiService.PostMerchantsMerchantIdTerminalOrdersOrderIdCancelExecute(r)
+	return r.ApiService.CancelOrderExecute(r)
 }
 
 /*
-PostMerchantsMerchantIdTerminalOrdersOrderIdCancel Cancel an order
+CancelOrder Cancel an order
 
 Cancels the terminal products order identified in the path.
 Cancelling is only possible while the order has the status **Placed**.
@@ -1836,7 +1836,7 @@ To make this request, your API credential must have the following [role](https:/
  @param orderId The unique identifier of the order.
  @return ApiPostMerchantsMerchantIdTerminalOrdersOrderIdCancelRequest
 */
-func (a *TerminalOrdersMerchantLevelApiService) PostMerchantsMerchantIdTerminalOrdersOrderIdCancel(ctx context.Context, merchantId string, orderId string) ApiPostMerchantsMerchantIdTerminalOrdersOrderIdCancelRequest {
+func (a *TerminalOrdersMerchantLevelApiService) CancelOrder(ctx context.Context, merchantId string, orderId string) ApiPostMerchantsMerchantIdTerminalOrdersOrderIdCancelRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -1853,7 +1853,7 @@ func (a *TerminalOrdersMerchantLevelApiService) PostMerchantsMerchantIdTerminalO
 
 // Execute executes the request
 //  @return TerminalOrder
-func (a *TerminalOrdersMerchantLevelApiService) PostMerchantsMerchantIdTerminalOrdersOrderIdCancelExecute(r ApiPostMerchantsMerchantIdTerminalOrdersOrderIdCancelRequest) (*TerminalOrder, *http.Response, error) {
+func (a *TerminalOrdersMerchantLevelApiService) CancelOrderExecute(r ApiPostMerchantsMerchantIdTerminalOrdersOrderIdCancelRequest) (*TerminalOrder, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}

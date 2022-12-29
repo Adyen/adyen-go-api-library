@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Links** | Pointer to [**PaginationLinks**](PaginationLinks.md) |  | [optional] 
-**Data** | Pointer to [**[]Store**](Store.md) |  | [optional] 
+**Data** | Pointer to [**[]Store**](Store.md) | List of stores | [optional] 
 **ItemsTotal** | **int32** | Total number of items. | 
 **PagesTotal** | **int32** | Total number of pages. | 
 

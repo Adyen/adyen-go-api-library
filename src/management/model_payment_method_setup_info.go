@@ -1,7 +1,7 @@
 /*
 Management API
 
-Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```
+Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```  ## Going live  To access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:  ```text https://management-live.adyen.com/v1 ```
 
 API version: 1
 Contact: developer-experience@adyen.com
@@ -26,11 +26,18 @@ type PaymentMethodSetupInfo struct {
 	Countries []string `json:"countries,omitempty"`
 	// The list of currencies that a payment method supports. By default, all currencies supported by the payment method.
 	Currencies []string `json:"currencies,omitempty"`
+	// The list of custom routing flags to route payment to the intended acquirer.
+	CustomRoutingFlags []string `json:"customRoutingFlags,omitempty"`
 	GiroPay *GiroPayInfo `json:"giroPay,omitempty"`
+	GooglePay *GooglePayInfo `json:"googlePay,omitempty"`
 	Klarna *KlarnaInfo `json:"klarna,omitempty"`
+	MealVoucherFR *MealVoucherFRInfo `json:"mealVoucher_FR,omitempty"`
 	Paypal *PayPalInfo `json:"paypal,omitempty"`
+	// Your reference for the payment method. Supported characters a-z, A-Z, 0-9.
+	Reference *string `json:"reference,omitempty"`
 	// The sales channel. Required if the merchant account does not have a sales channel. When you provide this field, it overrides the default sales channel set on the merchant account.  Possible values: **eCommerce**, **pos**, **contAuth**, and **moto**. 
 	ShopperInteraction *string `json:"shopperInteraction,omitempty"`
+	ShopperStatement *ShopperStatement `json:"shopperStatement,omitempty"`
 	Sofort *SofortInfo `json:"sofort,omitempty"`
 	// The ID of the [store](https://docs.adyen.com/api-explorer/#/ManagementService/latest/post/stores__resParam_id), if any.
 	StoreId *string `json:"storeId,omitempty"`
@@ -249,6 +256,38 @@ func (o *PaymentMethodSetupInfo) SetCurrencies(v []string) {
 	o.Currencies = v
 }
 
+// GetCustomRoutingFlags returns the CustomRoutingFlags field value if set, zero value otherwise.
+func (o *PaymentMethodSetupInfo) GetCustomRoutingFlags() []string {
+	if o == nil || isNil(o.CustomRoutingFlags) {
+		var ret []string
+		return ret
+	}
+	return o.CustomRoutingFlags
+}
+
+// GetCustomRoutingFlagsOk returns a tuple with the CustomRoutingFlags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodSetupInfo) GetCustomRoutingFlagsOk() ([]string, bool) {
+	if o == nil || isNil(o.CustomRoutingFlags) {
+		return nil, false
+	}
+	return o.CustomRoutingFlags, true
+}
+
+// HasCustomRoutingFlags returns a boolean if a field has been set.
+func (o *PaymentMethodSetupInfo) HasCustomRoutingFlags() bool {
+	if o != nil && !isNil(o.CustomRoutingFlags) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomRoutingFlags gets a reference to the given []string and assigns it to the CustomRoutingFlags field.
+func (o *PaymentMethodSetupInfo) SetCustomRoutingFlags(v []string) {
+	o.CustomRoutingFlags = v
+}
+
 // GetGiroPay returns the GiroPay field value if set, zero value otherwise.
 func (o *PaymentMethodSetupInfo) GetGiroPay() GiroPayInfo {
 	if o == nil || isNil(o.GiroPay) {
@@ -279,6 +318,38 @@ func (o *PaymentMethodSetupInfo) HasGiroPay() bool {
 // SetGiroPay gets a reference to the given GiroPayInfo and assigns it to the GiroPay field.
 func (o *PaymentMethodSetupInfo) SetGiroPay(v GiroPayInfo) {
 	o.GiroPay = &v
+}
+
+// GetGooglePay returns the GooglePay field value if set, zero value otherwise.
+func (o *PaymentMethodSetupInfo) GetGooglePay() GooglePayInfo {
+	if o == nil || isNil(o.GooglePay) {
+		var ret GooglePayInfo
+		return ret
+	}
+	return *o.GooglePay
+}
+
+// GetGooglePayOk returns a tuple with the GooglePay field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodSetupInfo) GetGooglePayOk() (*GooglePayInfo, bool) {
+	if o == nil || isNil(o.GooglePay) {
+		return nil, false
+	}
+	return o.GooglePay, true
+}
+
+// HasGooglePay returns a boolean if a field has been set.
+func (o *PaymentMethodSetupInfo) HasGooglePay() bool {
+	if o != nil && !isNil(o.GooglePay) {
+		return true
+	}
+
+	return false
+}
+
+// SetGooglePay gets a reference to the given GooglePayInfo and assigns it to the GooglePay field.
+func (o *PaymentMethodSetupInfo) SetGooglePay(v GooglePayInfo) {
+	o.GooglePay = &v
 }
 
 // GetKlarna returns the Klarna field value if set, zero value otherwise.
@@ -313,6 +384,38 @@ func (o *PaymentMethodSetupInfo) SetKlarna(v KlarnaInfo) {
 	o.Klarna = &v
 }
 
+// GetMealVoucherFR returns the MealVoucherFR field value if set, zero value otherwise.
+func (o *PaymentMethodSetupInfo) GetMealVoucherFR() MealVoucherFRInfo {
+	if o == nil || isNil(o.MealVoucherFR) {
+		var ret MealVoucherFRInfo
+		return ret
+	}
+	return *o.MealVoucherFR
+}
+
+// GetMealVoucherFROk returns a tuple with the MealVoucherFR field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodSetupInfo) GetMealVoucherFROk() (*MealVoucherFRInfo, bool) {
+	if o == nil || isNil(o.MealVoucherFR) {
+		return nil, false
+	}
+	return o.MealVoucherFR, true
+}
+
+// HasMealVoucherFR returns a boolean if a field has been set.
+func (o *PaymentMethodSetupInfo) HasMealVoucherFR() bool {
+	if o != nil && !isNil(o.MealVoucherFR) {
+		return true
+	}
+
+	return false
+}
+
+// SetMealVoucherFR gets a reference to the given MealVoucherFRInfo and assigns it to the MealVoucherFR field.
+func (o *PaymentMethodSetupInfo) SetMealVoucherFR(v MealVoucherFRInfo) {
+	o.MealVoucherFR = &v
+}
+
 // GetPaypal returns the Paypal field value if set, zero value otherwise.
 func (o *PaymentMethodSetupInfo) GetPaypal() PayPalInfo {
 	if o == nil || isNil(o.Paypal) {
@@ -345,6 +448,38 @@ func (o *PaymentMethodSetupInfo) SetPaypal(v PayPalInfo) {
 	o.Paypal = &v
 }
 
+// GetReference returns the Reference field value if set, zero value otherwise.
+func (o *PaymentMethodSetupInfo) GetReference() string {
+	if o == nil || isNil(o.Reference) {
+		var ret string
+		return ret
+	}
+	return *o.Reference
+}
+
+// GetReferenceOk returns a tuple with the Reference field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodSetupInfo) GetReferenceOk() (*string, bool) {
+	if o == nil || isNil(o.Reference) {
+		return nil, false
+	}
+	return o.Reference, true
+}
+
+// HasReference returns a boolean if a field has been set.
+func (o *PaymentMethodSetupInfo) HasReference() bool {
+	if o != nil && !isNil(o.Reference) {
+		return true
+	}
+
+	return false
+}
+
+// SetReference gets a reference to the given string and assigns it to the Reference field.
+func (o *PaymentMethodSetupInfo) SetReference(v string) {
+	o.Reference = &v
+}
+
 // GetShopperInteraction returns the ShopperInteraction field value if set, zero value otherwise.
 func (o *PaymentMethodSetupInfo) GetShopperInteraction() string {
 	if o == nil || isNil(o.ShopperInteraction) {
@@ -375,6 +510,38 @@ func (o *PaymentMethodSetupInfo) HasShopperInteraction() bool {
 // SetShopperInteraction gets a reference to the given string and assigns it to the ShopperInteraction field.
 func (o *PaymentMethodSetupInfo) SetShopperInteraction(v string) {
 	o.ShopperInteraction = &v
+}
+
+// GetShopperStatement returns the ShopperStatement field value if set, zero value otherwise.
+func (o *PaymentMethodSetupInfo) GetShopperStatement() ShopperStatement {
+	if o == nil || isNil(o.ShopperStatement) {
+		var ret ShopperStatement
+		return ret
+	}
+	return *o.ShopperStatement
+}
+
+// GetShopperStatementOk returns a tuple with the ShopperStatement field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodSetupInfo) GetShopperStatementOk() (*ShopperStatement, bool) {
+	if o == nil || isNil(o.ShopperStatement) {
+		return nil, false
+	}
+	return o.ShopperStatement, true
+}
+
+// HasShopperStatement returns a boolean if a field has been set.
+func (o *PaymentMethodSetupInfo) HasShopperStatement() bool {
+	if o != nil && !isNil(o.ShopperStatement) {
+		return true
+	}
+
+	return false
+}
+
+// SetShopperStatement gets a reference to the given ShopperStatement and assigns it to the ShopperStatement field.
+func (o *PaymentMethodSetupInfo) SetShopperStatement(v ShopperStatement) {
+	o.ShopperStatement = &v
 }
 
 // GetSofort returns the Sofort field value if set, zero value otherwise.
@@ -517,17 +684,32 @@ func (o PaymentMethodSetupInfo) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Currencies) {
 		toSerialize["currencies"] = o.Currencies
 	}
+	if !isNil(o.CustomRoutingFlags) {
+		toSerialize["customRoutingFlags"] = o.CustomRoutingFlags
+	}
 	if !isNil(o.GiroPay) {
 		toSerialize["giroPay"] = o.GiroPay
+	}
+	if !isNil(o.GooglePay) {
+		toSerialize["googlePay"] = o.GooglePay
 	}
 	if !isNil(o.Klarna) {
 		toSerialize["klarna"] = o.Klarna
 	}
+	if !isNil(o.MealVoucherFR) {
+		toSerialize["mealVoucher_FR"] = o.MealVoucherFR
+	}
 	if !isNil(o.Paypal) {
 		toSerialize["paypal"] = o.Paypal
 	}
+	if !isNil(o.Reference) {
+		toSerialize["reference"] = o.Reference
+	}
 	if !isNil(o.ShopperInteraction) {
 		toSerialize["shopperInteraction"] = o.ShopperInteraction
+	}
+	if !isNil(o.ShopperStatement) {
+		toSerialize["shopperStatement"] = o.ShopperStatement
 	}
 	if !isNil(o.Sofort) {
 		toSerialize["sofort"] = o.Sofort

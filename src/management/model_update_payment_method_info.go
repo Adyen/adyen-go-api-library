@@ -1,7 +1,7 @@
 /*
 Management API
 
-Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```
+Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```  ## Going live  To access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:  ```text https://management-live.adyen.com/v1 ```
 
 API version: 1
 Contact: developer-experience@adyen.com
@@ -21,8 +21,11 @@ type UpdatePaymentMethodInfo struct {
 	Countries []string `json:"countries,omitempty"`
 	// The list of currencies that a payment method supports. By default, all currencies supported by the payment method.
 	Currencies []string `json:"currencies,omitempty"`
+	// Custom routing flags for acquirer routing.
+	CustomRoutingFlags []string `json:"customRoutingFlags,omitempty"`
 	// Indicates whether the payment method is enabled (**true**) or disabled (**false**).
 	Enabled *bool `json:"enabled,omitempty"`
+	ShopperStatement *ShopperStatement `json:"shopperStatement,omitempty"`
 }
 
 // NewUpdatePaymentMethodInfo instantiates a new UpdatePaymentMethodInfo object
@@ -106,6 +109,38 @@ func (o *UpdatePaymentMethodInfo) SetCurrencies(v []string) {
 	o.Currencies = v
 }
 
+// GetCustomRoutingFlags returns the CustomRoutingFlags field value if set, zero value otherwise.
+func (o *UpdatePaymentMethodInfo) GetCustomRoutingFlags() []string {
+	if o == nil || isNil(o.CustomRoutingFlags) {
+		var ret []string
+		return ret
+	}
+	return o.CustomRoutingFlags
+}
+
+// GetCustomRoutingFlagsOk returns a tuple with the CustomRoutingFlags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdatePaymentMethodInfo) GetCustomRoutingFlagsOk() ([]string, bool) {
+	if o == nil || isNil(o.CustomRoutingFlags) {
+		return nil, false
+	}
+	return o.CustomRoutingFlags, true
+}
+
+// HasCustomRoutingFlags returns a boolean if a field has been set.
+func (o *UpdatePaymentMethodInfo) HasCustomRoutingFlags() bool {
+	if o != nil && !isNil(o.CustomRoutingFlags) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomRoutingFlags gets a reference to the given []string and assigns it to the CustomRoutingFlags field.
+func (o *UpdatePaymentMethodInfo) SetCustomRoutingFlags(v []string) {
+	o.CustomRoutingFlags = v
+}
+
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
 func (o *UpdatePaymentMethodInfo) GetEnabled() bool {
 	if o == nil || isNil(o.Enabled) {
@@ -138,6 +173,38 @@ func (o *UpdatePaymentMethodInfo) SetEnabled(v bool) {
 	o.Enabled = &v
 }
 
+// GetShopperStatement returns the ShopperStatement field value if set, zero value otherwise.
+func (o *UpdatePaymentMethodInfo) GetShopperStatement() ShopperStatement {
+	if o == nil || isNil(o.ShopperStatement) {
+		var ret ShopperStatement
+		return ret
+	}
+	return *o.ShopperStatement
+}
+
+// GetShopperStatementOk returns a tuple with the ShopperStatement field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdatePaymentMethodInfo) GetShopperStatementOk() (*ShopperStatement, bool) {
+	if o == nil || isNil(o.ShopperStatement) {
+		return nil, false
+	}
+	return o.ShopperStatement, true
+}
+
+// HasShopperStatement returns a boolean if a field has been set.
+func (o *UpdatePaymentMethodInfo) HasShopperStatement() bool {
+	if o != nil && !isNil(o.ShopperStatement) {
+		return true
+	}
+
+	return false
+}
+
+// SetShopperStatement gets a reference to the given ShopperStatement and assigns it to the ShopperStatement field.
+func (o *UpdatePaymentMethodInfo) SetShopperStatement(v ShopperStatement) {
+	o.ShopperStatement = &v
+}
+
 func (o UpdatePaymentMethodInfo) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Countries) {
@@ -146,8 +213,14 @@ func (o UpdatePaymentMethodInfo) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Currencies) {
 		toSerialize["currencies"] = o.Currencies
 	}
+	if !isNil(o.CustomRoutingFlags) {
+		toSerialize["customRoutingFlags"] = o.CustomRoutingFlags
+	}
 	if !isNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
+	}
+	if !isNil(o.ShopperStatement) {
+		toSerialize["shopperStatement"] = o.ShopperStatement
 	}
 	return json.Marshal(toSerialize)
 }

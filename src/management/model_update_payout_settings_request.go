@@ -1,7 +1,7 @@
 /*
 Management API
 
-Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```
+Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```  ## Going live  To access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:  ```text https://management-live.adyen.com/v1 ```
 
 API version: 1
 Contact: developer-experience@adyen.com
@@ -19,6 +19,10 @@ import (
 type UpdatePayoutSettingsRequest struct {
 	// Indicates if payouts to this bank account are enabled. Default: **true**.  To receive payouts into this bank account, both `enabled` and `allowed` must be **true**.
 	Enabled *bool `json:"enabled,omitempty"`
+	// The date when Adyen starts paying out to this bank account.  Format: [ISO 8601](https://www.w3.org/TR/NOTE-datetime), for example, **2019-11-23T12:25:28Z** or **2020-05-27T20:25:28+08:00**.  If not specified, the `enabled` field indicates if payouts are enabled for this bank account.  If a date is specified and:  * `enabled`: **true**, payouts are enabled starting the specified date. * `enabled`: **false**, payouts are disabled until the specified date. On the specified date, `enabled` changes to **true** and this field is reset to **null**.
+	EnabledFromDate *string `json:"enabledFromDate,omitempty"`
+	// Determines how long it takes for the funds to reach the bank account. Adyen pays out based on the [payout frequency](https://docs.adyen.com/account/getting-paid#payout-frequency). Depending on the currencies and banks involved in transferring the money, it may take up to three days for the payout funds to arrive in the bank account.   Possible values: * **first**: same day. * **urgent**: the next day. * **normal**: between 1 and 3 days.
+	Priority *string `json:"priority,omitempty"`
 }
 
 // NewUpdatePayoutSettingsRequest instantiates a new UpdatePayoutSettingsRequest object
@@ -70,10 +74,80 @@ func (o *UpdatePayoutSettingsRequest) SetEnabled(v bool) {
 	o.Enabled = &v
 }
 
+// GetEnabledFromDate returns the EnabledFromDate field value if set, zero value otherwise.
+func (o *UpdatePayoutSettingsRequest) GetEnabledFromDate() string {
+	if o == nil || isNil(o.EnabledFromDate) {
+		var ret string
+		return ret
+	}
+	return *o.EnabledFromDate
+}
+
+// GetEnabledFromDateOk returns a tuple with the EnabledFromDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdatePayoutSettingsRequest) GetEnabledFromDateOk() (*string, bool) {
+	if o == nil || isNil(o.EnabledFromDate) {
+		return nil, false
+	}
+	return o.EnabledFromDate, true
+}
+
+// HasEnabledFromDate returns a boolean if a field has been set.
+func (o *UpdatePayoutSettingsRequest) HasEnabledFromDate() bool {
+	if o != nil && !isNil(o.EnabledFromDate) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnabledFromDate gets a reference to the given string and assigns it to the EnabledFromDate field.
+func (o *UpdatePayoutSettingsRequest) SetEnabledFromDate(v string) {
+	o.EnabledFromDate = &v
+}
+
+// GetPriority returns the Priority field value if set, zero value otherwise.
+func (o *UpdatePayoutSettingsRequest) GetPriority() string {
+	if o == nil || isNil(o.Priority) {
+		var ret string
+		return ret
+	}
+	return *o.Priority
+}
+
+// GetPriorityOk returns a tuple with the Priority field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdatePayoutSettingsRequest) GetPriorityOk() (*string, bool) {
+	if o == nil || isNil(o.Priority) {
+		return nil, false
+	}
+	return o.Priority, true
+}
+
+// HasPriority returns a boolean if a field has been set.
+func (o *UpdatePayoutSettingsRequest) HasPriority() bool {
+	if o != nil && !isNil(o.Priority) {
+		return true
+	}
+
+	return false
+}
+
+// SetPriority gets a reference to the given string and assigns it to the Priority field.
+func (o *UpdatePayoutSettingsRequest) SetPriority(v string) {
+	o.Priority = &v
+}
+
 func (o UpdatePayoutSettingsRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
+	}
+	if !isNil(o.EnabledFromDate) {
+		toSerialize["enabledFromDate"] = o.EnabledFromDate
+	}
+	if !isNil(o.Priority) {
+		toSerialize["priority"] = o.Priority
 	}
 	return json.Marshal(toSerialize)
 }

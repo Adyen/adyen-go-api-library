@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Data** | Pointer to [**[]PaymentMethod**](PaymentMethod.md) | Payment methods details. | [optional] 
 **ItemsTotal** | **int32** | Total number of items. | 
 **PagesTotal** | **int32** | Total number of pages. | 
+**TypesWithErrors** | Pointer to **[]string** | Payment method types with errors. | [optional] 
 
 ## Methods
 
@@ -117,6 +118,31 @@ and a boolean to check if the value has been set.
 
 SetPagesTotal sets PagesTotal field to given value.
 
+
+### GetTypesWithErrors
+
+`func (o *PaymentMethodResponse) GetTypesWithErrors() []string`
+
+GetTypesWithErrors returns the TypesWithErrors field if non-nil, zero value otherwise.
+
+### GetTypesWithErrorsOk
+
+`func (o *PaymentMethodResponse) GetTypesWithErrorsOk() (*[]string, bool)`
+
+GetTypesWithErrorsOk returns a tuple with the TypesWithErrors field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTypesWithErrors
+
+`func (o *PaymentMethodResponse) SetTypesWithErrors(v []string)`
+
+SetTypesWithErrors sets TypesWithErrors field to given value.
+
+### HasTypesWithErrors
+
+`func (o *PaymentMethodResponse) HasTypesWithErrors() bool`
+
+HasTypesWithErrors returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

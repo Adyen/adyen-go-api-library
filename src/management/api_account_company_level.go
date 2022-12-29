@@ -1,7 +1,7 @@
 /*
 Management API
 
-Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```
+Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```  ## Going live  To access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:  ```text https://management-live.adyen.com/v1 ```
 
 API version: 1
 Contact: developer-experience@adyen.com
@@ -44,11 +44,11 @@ func (r ApiGetCompaniesRequest) PageSize(pageSize int32) ApiGetCompaniesRequest 
 }
 
 func (r ApiGetCompaniesRequest) Execute() (*ListCompanyResponse, *http.Response, error) {
-	return r.ApiService.GetCompaniesExecute(r)
+	return r.ApiService.ListCompanyAccountsExecute(r)
 }
 
 /*
-GetCompanies Get a list of company accounts
+ListCompanyAccounts Get a list of company accounts
 
 Returns the list of company accounts that your API credential has access to. The list is grouped into pages as defined by the query parameters.
 
@@ -59,7 +59,7 @@ To make this request, your API credential must have the following [roles](https:
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetCompaniesRequest
 */
-func (a *AccountCompanyLevelApiService) GetCompanies(ctx context.Context) ApiGetCompaniesRequest {
+func (a *AccountCompanyLevelApiService) ListCompanyAccounts(ctx context.Context) ApiGetCompaniesRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -74,7 +74,7 @@ func (a *AccountCompanyLevelApiService) GetCompanies(ctx context.Context) ApiGet
 
 // Execute executes the request
 //  @return ListCompanyResponse
-func (a *AccountCompanyLevelApiService) GetCompaniesExecute(r ApiGetCompaniesRequest) (*ListCompanyResponse, *http.Response, error) {
+func (a *AccountCompanyLevelApiService) ListCompanyAccountsExecute(r ApiGetCompaniesRequest) (*ListCompanyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -228,11 +228,11 @@ type ApiGetCompaniesCompanyIdRequest struct {
 }
 
 func (r ApiGetCompaniesCompanyIdRequest) Execute() (*Company, *http.Response, error) {
-	return r.ApiService.GetCompaniesCompanyIdExecute(r)
+	return r.ApiService.GetCompanyAccountExecute(r)
 }
 
 /*
-GetCompaniesCompanyId Get a company account
+GetCompanyAccount Get a company account
 
 Returns the company account specified in the path. Your API credential must have access to the company account. 
 
@@ -243,7 +243,7 @@ To make this request, your API credential must have the following [roles](https:
  @param companyId The unique identifier of the company account.
  @return ApiGetCompaniesCompanyIdRequest
 */
-func (a *AccountCompanyLevelApiService) GetCompaniesCompanyId(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdRequest {
+func (a *AccountCompanyLevelApiService) GetCompanyAccount(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -259,7 +259,7 @@ func (a *AccountCompanyLevelApiService) GetCompaniesCompanyId(ctx context.Contex
 
 // Execute executes the request
 //  @return Company
-func (a *AccountCompanyLevelApiService) GetCompaniesCompanyIdExecute(r ApiGetCompaniesCompanyIdRequest) (*Company, *http.Response, error) {
+func (a *AccountCompanyLevelApiService) GetCompanyAccountExecute(r ApiGetCompaniesCompanyIdRequest) (*Company, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -422,11 +422,11 @@ func (r ApiGetCompaniesCompanyIdMerchantsRequest) PageSize(pageSize int32) ApiGe
 }
 
 func (r ApiGetCompaniesCompanyIdMerchantsRequest) Execute() (*ListMerchantResponse, *http.Response, error) {
-	return r.ApiService.GetCompaniesCompanyIdMerchantsExecute(r)
+	return r.ApiService.ListMerchantAccountsExecute(r)
 }
 
 /*
-GetCompaniesCompanyIdMerchants Get a list of merchant accounts
+ListMerchantAccounts Get a list of merchant accounts
 
 Returns the list of merchant accounts under the company account specified in the path. The list only includes merchant accounts that your API credential has access to. The list is grouped into pages as defined by the query parameters. 
 
@@ -437,7 +437,7 @@ To make this request, your API credential must have the following [roles](https:
  @param companyId The unique identifier of the company account.
  @return ApiGetCompaniesCompanyIdMerchantsRequest
 */
-func (a *AccountCompanyLevelApiService) GetCompaniesCompanyIdMerchants(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdMerchantsRequest {
+func (a *AccountCompanyLevelApiService) ListMerchantAccounts(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdMerchantsRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -453,7 +453,7 @@ func (a *AccountCompanyLevelApiService) GetCompaniesCompanyIdMerchants(ctx conte
 
 // Execute executes the request
 //  @return ListMerchantResponse
-func (a *AccountCompanyLevelApiService) GetCompaniesCompanyIdMerchantsExecute(r ApiGetCompaniesCompanyIdMerchantsRequest) (*ListMerchantResponse, *http.Response, error) {
+func (a *AccountCompanyLevelApiService) ListMerchantAccountsExecute(r ApiGetCompaniesCompanyIdMerchantsRequest) (*ListMerchantResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -496,6 +496,372 @@ func (a *AccountCompanyLevelApiService) GetCompaniesCompanyIdMerchantsExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v RestServiceError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v RestServiceError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v RestServiceError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v RestServiceError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v RestServiceError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiPatchCompaniesIdRequest struct {
+	ctx context.Context
+	ApiService *AccountCompanyLevelApiService
+	id string
+	setLegalEntityToAccountRequest *SetLegalEntityToAccountRequest
+}
+
+func (r ApiPatchCompaniesIdRequest) SetLegalEntityToAccountRequest(setLegalEntityToAccountRequest SetLegalEntityToAccountRequest) ApiPatchCompaniesIdRequest {
+	r.setLegalEntityToAccountRequest = &setLegalEntityToAccountRequest
+	return r
+}
+
+func (r ApiPatchCompaniesIdRequest) Execute() (*SetLegalEntityToAccountResponse, *http.Response, error) {
+	return r.ApiService.UpdateLegalEntityOfSpecificCompanyExecute(r)
+}
+
+/*
+UpdateLegalEntityOfSpecificCompany Update legal entity of specific company.
+
+Update legal entity of specific company.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier of the company account.
+ @return ApiPatchCompaniesIdRequest
+*/
+func (a *AccountCompanyLevelApiService) UpdateLegalEntityOfSpecificCompany(ctx context.Context, id string) ApiPatchCompaniesIdRequest {
+    // add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+
+	return ApiPatchCompaniesIdRequest{
+		ApiService: a,
+		ctx: ctxWithApiKey,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return SetLegalEntityToAccountResponse
+func (a *AccountCompanyLevelApiService) UpdateLegalEntityOfSpecificCompanyExecute(r ApiPatchCompaniesIdRequest) (*SetLegalEntityToAccountResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPatch
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *SetLegalEntityToAccountResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountCompanyLevelApiService.PatchCompaniesId")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/companies/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterToString(r.id, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.setLegalEntityToAccountRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v RestServiceError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v RestServiceError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v RestServiceError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v RestServiceError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v RestServiceError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiPostCompaniesRequest struct {
+	ctx context.Context
+	ApiService *AccountCompanyLevelApiService
+	createCompanyRequest *CreateCompanyRequest
+}
+
+func (r ApiPostCompaniesRequest) CreateCompanyRequest(createCompanyRequest CreateCompanyRequest) ApiPostCompaniesRequest {
+	r.createCompanyRequest = &createCompanyRequest
+	return r
+}
+
+func (r ApiPostCompaniesRequest) Execute() (*CreateCompanyResponse, *http.Response, error) {
+	return r.ApiService.CreateCompanyExecute(r)
+}
+
+/*
+CreateCompany Create a Company.
+
+Create a Company.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiPostCompaniesRequest
+*/
+func (a *AccountCompanyLevelApiService) CreateCompany(ctx context.Context) ApiPostCompaniesRequest {
+    // add APIKey to Context
+	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
+	map[string]APIKey {
+		"ApiKeyAuth" : {Key: a.client.cfg.ApiKey},
+	})
+
+	return ApiPostCompaniesRequest{
+		ApiService: a,
+		ctx: ctxWithApiKey,
+	}
+}
+
+// Execute executes the request
+//  @return CreateCompanyResponse
+func (a *AccountCompanyLevelApiService) CreateCompanyExecute(r ApiPostCompaniesRequest) (*CreateCompanyResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateCompanyResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountCompanyLevelApiService.PostCompanies")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/companies"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.createCompanyRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

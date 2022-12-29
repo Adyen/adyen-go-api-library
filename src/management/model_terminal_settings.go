@@ -1,7 +1,7 @@
 /*
 Management API
 
-Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```
+Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```  ## Going live  To access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:  ```text https://management-live.adyen.com/v1 ```
 
 API version: 1
 Contact: developer-experience@adyen.com
@@ -25,9 +25,11 @@ type TerminalSettings struct {
 	Nexo *Nexo `json:"nexo,omitempty"`
 	OfflineProcessing *OfflineProcessing `json:"offlineProcessing,omitempty"`
 	Opi *Opi `json:"opi,omitempty"`
+	Passcodes *Passcodes `json:"passcodes,omitempty"`
 	ReceiptOptions *ReceiptOptions `json:"receiptOptions,omitempty"`
 	ReceiptPrinting *ReceiptPrinting `json:"receiptPrinting,omitempty"`
 	Signature *Signature `json:"signature,omitempty"`
+	Standalone *Standalone `json:"standalone,omitempty"`
 	Surcharge *Surcharge `json:"surcharge,omitempty"`
 	Timeouts *Timeouts `json:"timeouts,omitempty"`
 	WifiProfiles *WifiProfiles `json:"wifiProfiles,omitempty"`
@@ -274,6 +276,38 @@ func (o *TerminalSettings) SetOpi(v Opi) {
 	o.Opi = &v
 }
 
+// GetPasscodes returns the Passcodes field value if set, zero value otherwise.
+func (o *TerminalSettings) GetPasscodes() Passcodes {
+	if o == nil || isNil(o.Passcodes) {
+		var ret Passcodes
+		return ret
+	}
+	return *o.Passcodes
+}
+
+// GetPasscodesOk returns a tuple with the Passcodes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TerminalSettings) GetPasscodesOk() (*Passcodes, bool) {
+	if o == nil || isNil(o.Passcodes) {
+		return nil, false
+	}
+	return o.Passcodes, true
+}
+
+// HasPasscodes returns a boolean if a field has been set.
+func (o *TerminalSettings) HasPasscodes() bool {
+	if o != nil && !isNil(o.Passcodes) {
+		return true
+	}
+
+	return false
+}
+
+// SetPasscodes gets a reference to the given Passcodes and assigns it to the Passcodes field.
+func (o *TerminalSettings) SetPasscodes(v Passcodes) {
+	o.Passcodes = &v
+}
+
 // GetReceiptOptions returns the ReceiptOptions field value if set, zero value otherwise.
 func (o *TerminalSettings) GetReceiptOptions() ReceiptOptions {
 	if o == nil || isNil(o.ReceiptOptions) {
@@ -368,6 +402,38 @@ func (o *TerminalSettings) HasSignature() bool {
 // SetSignature gets a reference to the given Signature and assigns it to the Signature field.
 func (o *TerminalSettings) SetSignature(v Signature) {
 	o.Signature = &v
+}
+
+// GetStandalone returns the Standalone field value if set, zero value otherwise.
+func (o *TerminalSettings) GetStandalone() Standalone {
+	if o == nil || isNil(o.Standalone) {
+		var ret Standalone
+		return ret
+	}
+	return *o.Standalone
+}
+
+// GetStandaloneOk returns a tuple with the Standalone field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TerminalSettings) GetStandaloneOk() (*Standalone, bool) {
+	if o == nil || isNil(o.Standalone) {
+		return nil, false
+	}
+	return o.Standalone, true
+}
+
+// HasStandalone returns a boolean if a field has been set.
+func (o *TerminalSettings) HasStandalone() bool {
+	if o != nil && !isNil(o.Standalone) {
+		return true
+	}
+
+	return false
+}
+
+// SetStandalone gets a reference to the given Standalone and assigns it to the Standalone field.
+func (o *TerminalSettings) SetStandalone(v Standalone) {
+	o.Standalone = &v
 }
 
 // GetSurcharge returns the Surcharge field value if set, zero value otherwise.
@@ -489,6 +555,9 @@ func (o TerminalSettings) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Opi) {
 		toSerialize["opi"] = o.Opi
 	}
+	if !isNil(o.Passcodes) {
+		toSerialize["passcodes"] = o.Passcodes
+	}
 	if !isNil(o.ReceiptOptions) {
 		toSerialize["receiptOptions"] = o.ReceiptOptions
 	}
@@ -497,6 +566,9 @@ func (o TerminalSettings) MarshalJSON() ([]byte, error) {
 	}
 	if !isNil(o.Signature) {
 		toSerialize["signature"] = o.Signature
+	}
+	if !isNil(o.Standalone) {
+		toSerialize["standalone"] = o.Standalone
 	}
 	if !isNil(o.Surcharge) {
 		toSerialize["surcharge"] = o.Surcharge

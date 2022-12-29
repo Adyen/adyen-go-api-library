@@ -1,7 +1,7 @@
 /*
 Management API
 
-Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```
+Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```  ## Going live  To access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:  ```text https://management-live.adyen.com/v1 ```
 
 API version: 1
 Contact: developer-experience@adyen.com
@@ -17,12 +17,11 @@ import (
 
 // Currency struct for Currency
 type Currency struct {
-	// Surcharge amount per transaction, in minor units.
+	// Surcharge amount per transaction, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
 	Amount *int32 `json:"amount,omitempty"`
 	// Three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes). For example, **AUD**.
 	CurrencyCode string `json:"currencyCode"`
-	// Surcharge percentage per transaction. The maximum number of decimal places is two. For example, **1%** or **2.27%**.
-	Percentage *float64 `json:"percentage,omitempty"`
+	Percentage interface{} `json:"percentage,omitempty"`
 }
 
 // NewCurrency instantiates a new Currency object
@@ -99,36 +98,37 @@ func (o *Currency) SetCurrencyCode(v string) {
 	o.CurrencyCode = v
 }
 
-// GetPercentage returns the Percentage field value if set, zero value otherwise.
-func (o *Currency) GetPercentage() float64 {
-	if o == nil || isNil(o.Percentage) {
-		var ret float64
+// GetPercentage returns the Percentage field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Currency) GetPercentage() interface{} {
+	if o == nil {
+		var ret interface{}
 		return ret
 	}
-	return *o.Percentage
+	return o.Percentage
 }
 
 // GetPercentageOk returns a tuple with the Percentage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Currency) GetPercentageOk() (*float64, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Currency) GetPercentageOk() (*interface{}, bool) {
 	if o == nil || isNil(o.Percentage) {
 		return nil, false
 	}
-	return o.Percentage, true
+	return &o.Percentage, true
 }
 
 // HasPercentage returns a boolean if a field has been set.
 func (o *Currency) HasPercentage() bool {
-	if o != nil && !isNil(o.Percentage) {
+	if o != nil && isNil(o.Percentage) {
 		return true
 	}
 
 	return false
 }
 
-// SetPercentage gets a reference to the given float64 and assigns it to the Percentage field.
-func (o *Currency) SetPercentage(v float64) {
-	o.Percentage = &v
+// SetPercentage gets a reference to the given interface{} and assigns it to the Percentage field.
+func (o *Currency) SetPercentage(v interface{}) {
+	o.Percentage = v
 }
 
 func (o Currency) MarshalJSON() ([]byte, error) {
@@ -139,7 +139,7 @@ func (o Currency) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["currencyCode"] = o.CurrencyCode
 	}
-	if !isNil(o.Percentage) {
+	if o.Percentage != nil {
 		toSerialize["percentage"] = o.Percentage
 	}
 	return json.Marshal(toSerialize)

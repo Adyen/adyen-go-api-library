@@ -6,8 +6,10 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetMerchantsMerchantIdPaymentMethodSettings**](PaymentMethodsMerchantLevelApi.md#GetMerchantsMerchantIdPaymentMethodSettings) | **Get** /merchants/{merchantId}/paymentMethodSettings | Get all payment methods
 [**GetMerchantsMerchantIdPaymentMethodSettingsPaymentMethodId**](PaymentMethodsMerchantLevelApi.md#GetMerchantsMerchantIdPaymentMethodSettingsPaymentMethodId) | **Get** /merchants/{merchantId}/paymentMethodSettings/{paymentMethodId} | Get payment method details
+[**GetMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdGetApplePayDomains**](PaymentMethodsMerchantLevelApi.md#GetMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdGetApplePayDomains) | **Get** /merchants/{merchantId}/paymentMethodSettings/{paymentMethodId}/getApplePayDomains | Get Apple Pay domains
 [**PatchMerchantsMerchantIdPaymentMethodSettingsPaymentMethodId**](PaymentMethodsMerchantLevelApi.md#PatchMerchantsMerchantIdPaymentMethodSettingsPaymentMethodId) | **Patch** /merchants/{merchantId}/paymentMethodSettings/{paymentMethodId} | Update a payment method
 [**PostMerchantsMerchantIdPaymentMethodSettings**](PaymentMethodsMerchantLevelApi.md#PostMerchantsMerchantIdPaymentMethodSettings) | **Post** /merchants/{merchantId}/paymentMethodSettings | Request a payment method
+[**PostMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdAddApplePayDomains**](PaymentMethodsMerchantLevelApi.md#PostMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdAddApplePayDomains) | **Post** /merchants/{merchantId}/paymentMethodSettings/{paymentMethodId}/addApplePayDomains | Add an Apple Pay domain
 
 
 
@@ -162,6 +164,79 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdGetApplePayDomains
+
+> ApplePayInfo GetMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdGetApplePayDomains(ctx, merchantId, paymentMethodId).Execute()
+
+Get Apple Pay domains
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    merchantId := "merchantId_example" // string | The unique identifier of the merchant account.
+    paymentMethodId := "paymentMethodId_example" // string | The unique identifier of the payment method.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PaymentMethodsMerchantLevelApi.GetMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdGetApplePayDomains(context.Background(), merchantId, paymentMethodId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PaymentMethodsMerchantLevelApi.GetMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdGetApplePayDomains``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdGetApplePayDomains`: ApplePayInfo
+    fmt.Fprintf(os.Stdout, "Response from `PaymentMethodsMerchantLevelApi.GetMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdGetApplePayDomains`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**merchantId** | **string** | The unique identifier of the merchant account. | 
+**paymentMethodId** | **string** | The unique identifier of the payment method. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdGetApplePayDomainsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**ApplePayInfo**](ApplePayInfo.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## PatchMerchantsMerchantIdPaymentMethodSettingsPaymentMethodId
 
 > PaymentMethod PatchMerchantsMerchantIdPaymentMethodSettingsPaymentMethodId(ctx, merchantId, paymentMethodId).UpdatePaymentMethodInfo(updatePaymentMethodInfo).Execute()
@@ -294,6 +369,79 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**PaymentMethod**](PaymentMethod.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PostMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdAddApplePayDomains
+
+> PostMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdAddApplePayDomains(ctx, merchantId, paymentMethodId).ApplePayInfo(applePayInfo).Execute()
+
+Add an Apple Pay domain
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    merchantId := "merchantId_example" // string | The unique identifier of the merchant account.
+    paymentMethodId := "paymentMethodId_example" // string | The unique identifier of the payment method.
+    applePayInfo := *openapiclient.NewApplePayInfo([]string{"Domains_example"}) // ApplePayInfo |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PaymentMethodsMerchantLevelApi.PostMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdAddApplePayDomains(context.Background(), merchantId, paymentMethodId).ApplePayInfo(applePayInfo).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PaymentMethodsMerchantLevelApi.PostMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdAddApplePayDomains``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**merchantId** | **string** | The unique identifier of the merchant account. | 
+**paymentMethodId** | **string** | The unique identifier of the payment method. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPostMerchantsMerchantIdPaymentMethodSettingsPaymentMethodIdAddApplePayDomainsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **applePayInfo** | [**ApplePayInfo**](ApplePayInfo.md) |  | 
+
+### Return type
+
+ (empty response body)
 
 ### Authorization
 

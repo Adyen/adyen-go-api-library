@@ -1,7 +1,7 @@
 /*
 Management API
 
-Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```
+Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```  ## Going live  To access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:  ```text https://management-live.adyen.com/v1 ```
 
 API version: 1
 Contact: developer-experience@adyen.com
@@ -38,11 +38,11 @@ func (r ApiGetCompaniesCompanyIdBillingEntitiesRequest) Name(name string) ApiGet
 }
 
 func (r ApiGetCompaniesCompanyIdBillingEntitiesRequest) Execute() (*BillingEntitiesResponse, *http.Response, error) {
-	return r.ApiService.GetCompaniesCompanyIdBillingEntitiesExecute(r)
+	return r.ApiService.ListBillingEntitiesExecute(r)
 }
 
 /*
-GetCompaniesCompanyIdBillingEntities Get a list of billing entities
+ListBillingEntities Get a list of billing entities
 
 Returns the billing entities of the company identified in the path and all merchant accounts belonging to the company.
 A billing entity is a legal entity where we charge orders to. An order for terminal products must contain the ID of a billing entity.
@@ -55,7 +55,7 @@ To make this request, your API credential must have one of the following [roles]
  @param companyId The unique identifier of the company account.
  @return ApiGetCompaniesCompanyIdBillingEntitiesRequest
 */
-func (a *TerminalOrdersCompanyLevelApiService) GetCompaniesCompanyIdBillingEntities(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdBillingEntitiesRequest {
+func (a *TerminalOrdersCompanyLevelApiService) ListBillingEntities(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdBillingEntitiesRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -71,7 +71,7 @@ func (a *TerminalOrdersCompanyLevelApiService) GetCompaniesCompanyIdBillingEntit
 
 // Execute executes the request
 //  @return BillingEntitiesResponse
-func (a *TerminalOrdersCompanyLevelApiService) GetCompaniesCompanyIdBillingEntitiesExecute(r ApiGetCompaniesCompanyIdBillingEntitiesRequest) (*BillingEntitiesResponse, *http.Response, error) {
+func (a *TerminalOrdersCompanyLevelApiService) ListBillingEntitiesExecute(r ApiGetCompaniesCompanyIdBillingEntitiesRequest) (*BillingEntitiesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -244,11 +244,11 @@ func (r ApiGetCompaniesCompanyIdShippingLocationsRequest) Limit(limit int32) Api
 }
 
 func (r ApiGetCompaniesCompanyIdShippingLocationsRequest) Execute() (*ShippingLocationsResponse, *http.Response, error) {
-	return r.ApiService.GetCompaniesCompanyIdShippingLocationsExecute(r)
+	return r.ApiService.ListShippingLocationsExecute(r)
 }
 
 /*
-GetCompaniesCompanyIdShippingLocations Get a list of shipping locations
+ListShippingLocations Get a list of shipping locations
 
 Returns the shipping locations for the company identified in the path and all merchant accounts belonging to the company.
 A shipping location includes the address where orders can be delivered, and an ID which you need to specify when ordering terminal products.
@@ -261,7 +261,7 @@ To make this request, your API credential must have one of the following [roles]
  @param companyId The unique identifier of the company account.
  @return ApiGetCompaniesCompanyIdShippingLocationsRequest
 */
-func (a *TerminalOrdersCompanyLevelApiService) GetCompaniesCompanyIdShippingLocations(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdShippingLocationsRequest {
+func (a *TerminalOrdersCompanyLevelApiService) ListShippingLocations(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdShippingLocationsRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -277,7 +277,7 @@ func (a *TerminalOrdersCompanyLevelApiService) GetCompaniesCompanyIdShippingLoca
 
 // Execute executes the request
 //  @return ShippingLocationsResponse
-func (a *TerminalOrdersCompanyLevelApiService) GetCompaniesCompanyIdShippingLocationsExecute(r ApiGetCompaniesCompanyIdShippingLocationsRequest) (*ShippingLocationsResponse, *http.Response, error) {
+func (a *TerminalOrdersCompanyLevelApiService) ListShippingLocationsExecute(r ApiGetCompaniesCompanyIdShippingLocationsRequest) (*ShippingLocationsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -435,11 +435,11 @@ type ApiGetCompaniesCompanyIdTerminalModelsRequest struct {
 }
 
 func (r ApiGetCompaniesCompanyIdTerminalModelsRequest) Execute() (*TerminalModelsResponse, *http.Response, error) {
-	return r.ApiService.GetCompaniesCompanyIdTerminalModelsExecute(r)
+	return r.ApiService.ListTerminalModelsExecute(r)
 }
 
 /*
-GetCompaniesCompanyIdTerminalModels Get a list of terminal models
+ListTerminalModels Get a list of terminal models
 
 Returns a list of payment terminal models that the company identified in the path has access to.
 The response includes the terminal model ID, which can be used as a query parameter when getting a list of terminals or a list of products for ordering.
@@ -452,7 +452,7 @@ To make this request, your API credential must have one of the following [roles]
  @param companyId The unique identifier of the company account.
  @return ApiGetCompaniesCompanyIdTerminalModelsRequest
 */
-func (a *TerminalOrdersCompanyLevelApiService) GetCompaniesCompanyIdTerminalModels(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdTerminalModelsRequest {
+func (a *TerminalOrdersCompanyLevelApiService) ListTerminalModels(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdTerminalModelsRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -468,7 +468,7 @@ func (a *TerminalOrdersCompanyLevelApiService) GetCompaniesCompanyIdTerminalMode
 
 // Execute executes the request
 //  @return TerminalModelsResponse
-func (a *TerminalOrdersCompanyLevelApiService) GetCompaniesCompanyIdTerminalModelsExecute(r ApiGetCompaniesCompanyIdTerminalModelsRequest) (*TerminalModelsResponse, *http.Response, error) {
+func (a *TerminalOrdersCompanyLevelApiService) ListTerminalModelsExecute(r ApiGetCompaniesCompanyIdTerminalModelsRequest) (*TerminalModelsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -645,11 +645,11 @@ func (r ApiGetCompaniesCompanyIdTerminalOrdersRequest) Limit(limit int32) ApiGet
 }
 
 func (r ApiGetCompaniesCompanyIdTerminalOrdersRequest) Execute() (*TerminalOrdersResponse, *http.Response, error) {
-	return r.ApiService.GetCompaniesCompanyIdTerminalOrdersExecute(r)
+	return r.ApiService.ListOrdersExecute(r)
 }
 
 /*
-GetCompaniesCompanyIdTerminalOrders Get a list of orders
+ListOrders Get a list of orders
 
 Returns a lists of terminal products orders for the company identified in the path.
 To filter the list, use one or more of the query parameters.
@@ -662,7 +662,7 @@ To make this request, your API credential must have one of the following [roles]
  @param companyId The unique identifier of the company account.
  @return ApiGetCompaniesCompanyIdTerminalOrdersRequest
 */
-func (a *TerminalOrdersCompanyLevelApiService) GetCompaniesCompanyIdTerminalOrders(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdTerminalOrdersRequest {
+func (a *TerminalOrdersCompanyLevelApiService) ListOrders(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdTerminalOrdersRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -678,7 +678,7 @@ func (a *TerminalOrdersCompanyLevelApiService) GetCompaniesCompanyIdTerminalOrde
 
 // Execute executes the request
 //  @return TerminalOrdersResponse
-func (a *TerminalOrdersCompanyLevelApiService) GetCompaniesCompanyIdTerminalOrdersExecute(r ApiGetCompaniesCompanyIdTerminalOrdersRequest) (*TerminalOrdersResponse, *http.Response, error) {
+func (a *TerminalOrdersCompanyLevelApiService) ListOrdersExecute(r ApiGetCompaniesCompanyIdTerminalOrdersRequest) (*TerminalOrdersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -840,11 +840,11 @@ type ApiGetCompaniesCompanyIdTerminalOrdersOrderIdRequest struct {
 }
 
 func (r ApiGetCompaniesCompanyIdTerminalOrdersOrderIdRequest) Execute() (*TerminalOrder, *http.Response, error) {
-	return r.ApiService.GetCompaniesCompanyIdTerminalOrdersOrderIdExecute(r)
+	return r.ApiService.GetOrderExecute(r)
 }
 
 /*
-GetCompaniesCompanyIdTerminalOrdersOrderId Get an order
+GetOrder Get an order
 
 Returns the details of the terminal products order identified in the path.
 
@@ -857,7 +857,7 @@ To make this request, your API credential must have one of the following [roles]
  @param orderId The unique identifier of the order.
  @return ApiGetCompaniesCompanyIdTerminalOrdersOrderIdRequest
 */
-func (a *TerminalOrdersCompanyLevelApiService) GetCompaniesCompanyIdTerminalOrdersOrderId(ctx context.Context, companyId string, orderId string) ApiGetCompaniesCompanyIdTerminalOrdersOrderIdRequest {
+func (a *TerminalOrdersCompanyLevelApiService) GetOrder(ctx context.Context, companyId string, orderId string) ApiGetCompaniesCompanyIdTerminalOrdersOrderIdRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -874,7 +874,7 @@ func (a *TerminalOrdersCompanyLevelApiService) GetCompaniesCompanyIdTerminalOrde
 
 // Execute executes the request
 //  @return TerminalOrder
-func (a *TerminalOrdersCompanyLevelApiService) GetCompaniesCompanyIdTerminalOrdersOrderIdExecute(r ApiGetCompaniesCompanyIdTerminalOrdersOrderIdRequest) (*TerminalOrder, *http.Response, error) {
+func (a *TerminalOrdersCompanyLevelApiService) GetOrderExecute(r ApiGetCompaniesCompanyIdTerminalOrdersOrderIdRequest) (*TerminalOrder, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -1052,11 +1052,11 @@ func (r ApiGetCompaniesCompanyIdTerminalProductsRequest) Limit(limit int32) ApiG
 }
 
 func (r ApiGetCompaniesCompanyIdTerminalProductsRequest) Execute() (*TerminalProductsResponse, *http.Response, error) {
-	return r.ApiService.GetCompaniesCompanyIdTerminalProductsExecute(r)
+	return r.ApiService.ListTerminalProductsExecute(r)
 }
 
 /*
-GetCompaniesCompanyIdTerminalProducts Get a list of terminal products
+ListTerminalProducts Get a list of terminal products
 
 Returns a list of payment terminal packages and parts that the company identified in the path has access to.
  To filter the list, use one or more of the query parameters. The `country` query parameter is required.
@@ -1069,7 +1069,7 @@ To make this request, your API credential must have one of the following [roles]
  @param companyId The unique identifier of the company account.
  @return ApiGetCompaniesCompanyIdTerminalProductsRequest
 */
-func (a *TerminalOrdersCompanyLevelApiService) GetCompaniesCompanyIdTerminalProducts(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdTerminalProductsRequest {
+func (a *TerminalOrdersCompanyLevelApiService) ListTerminalProducts(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdTerminalProductsRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -1085,7 +1085,7 @@ func (a *TerminalOrdersCompanyLevelApiService) GetCompaniesCompanyIdTerminalProd
 
 // Execute executes the request
 //  @return TerminalProductsResponse
-func (a *TerminalOrdersCompanyLevelApiService) GetCompaniesCompanyIdTerminalProductsExecute(r ApiGetCompaniesCompanyIdTerminalProductsRequest) (*TerminalProductsResponse, *http.Response, error) {
+func (a *TerminalOrdersCompanyLevelApiService) ListTerminalProductsExecute(r ApiGetCompaniesCompanyIdTerminalProductsRequest) (*TerminalProductsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -1253,11 +1253,11 @@ func (r ApiPatchCompaniesCompanyIdTerminalOrdersOrderIdRequest) TerminalOrderReq
 }
 
 func (r ApiPatchCompaniesCompanyIdTerminalOrdersOrderIdRequest) Execute() (*TerminalOrder, *http.Response, error) {
-	return r.ApiService.PatchCompaniesCompanyIdTerminalOrdersOrderIdExecute(r)
+	return r.ApiService.UpdateOrderExecute(r)
 }
 
 /*
-PatchCompaniesCompanyIdTerminalOrdersOrderId Update an order
+UpdateOrder Update an order
 
 Updates the terminal products order identified in the path.
 Updating is only possible while the order has the status **Placed**.
@@ -1274,7 +1274,7 @@ To make this request, your API credential must have the following [role](https:/
  @param orderId The unique identifier of the order.
  @return ApiPatchCompaniesCompanyIdTerminalOrdersOrderIdRequest
 */
-func (a *TerminalOrdersCompanyLevelApiService) PatchCompaniesCompanyIdTerminalOrdersOrderId(ctx context.Context, companyId string, orderId string) ApiPatchCompaniesCompanyIdTerminalOrdersOrderIdRequest {
+func (a *TerminalOrdersCompanyLevelApiService) UpdateOrder(ctx context.Context, companyId string, orderId string) ApiPatchCompaniesCompanyIdTerminalOrdersOrderIdRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -1291,7 +1291,7 @@ func (a *TerminalOrdersCompanyLevelApiService) PatchCompaniesCompanyIdTerminalOr
 
 // Execute executes the request
 //  @return TerminalOrder
-func (a *TerminalOrdersCompanyLevelApiService) PatchCompaniesCompanyIdTerminalOrdersOrderIdExecute(r ApiPatchCompaniesCompanyIdTerminalOrdersOrderIdRequest) (*TerminalOrder, *http.Response, error) {
+func (a *TerminalOrdersCompanyLevelApiService) UpdateOrderExecute(r ApiPatchCompaniesCompanyIdTerminalOrdersOrderIdRequest) (*TerminalOrder, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
@@ -1449,11 +1449,11 @@ func (r ApiPostCompaniesCompanyIdShippingLocationsRequest) ShippingLocation(ship
 }
 
 func (r ApiPostCompaniesCompanyIdShippingLocationsRequest) Execute() (*ShippingLocation, *http.Response, error) {
-	return r.ApiService.PostCompaniesCompanyIdShippingLocationsExecute(r)
+	return r.ApiService.CreateShippingLocationExecute(r)
 }
 
 /*
-PostCompaniesCompanyIdShippingLocations Create a shipping location
+CreateShippingLocation Create a shipping location
 
 Creates a shipping location for the company identified in the path. A shipping location defines an address where orders can be delivered.
 
@@ -1464,7 +1464,7 @@ To make this request, your API credential must have the following [role](https:/
  @param companyId The unique identifier of the company account.
  @return ApiPostCompaniesCompanyIdShippingLocationsRequest
 */
-func (a *TerminalOrdersCompanyLevelApiService) PostCompaniesCompanyIdShippingLocations(ctx context.Context, companyId string) ApiPostCompaniesCompanyIdShippingLocationsRequest {
+func (a *TerminalOrdersCompanyLevelApiService) CreateShippingLocation(ctx context.Context, companyId string) ApiPostCompaniesCompanyIdShippingLocationsRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -1480,7 +1480,7 @@ func (a *TerminalOrdersCompanyLevelApiService) PostCompaniesCompanyIdShippingLoc
 
 // Execute executes the request
 //  @return ShippingLocation
-func (a *TerminalOrdersCompanyLevelApiService) PostCompaniesCompanyIdShippingLocationsExecute(r ApiPostCompaniesCompanyIdShippingLocationsRequest) (*ShippingLocation, *http.Response, error) {
+func (a *TerminalOrdersCompanyLevelApiService) CreateShippingLocationExecute(r ApiPostCompaniesCompanyIdShippingLocationsRequest) (*ShippingLocation, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1637,11 +1637,11 @@ func (r ApiPostCompaniesCompanyIdTerminalOrdersRequest) TerminalOrderRequest(ter
 }
 
 func (r ApiPostCompaniesCompanyIdTerminalOrdersRequest) Execute() (*TerminalOrder, *http.Response, error) {
-	return r.ApiService.PostCompaniesCompanyIdTerminalOrdersExecute(r)
+	return r.ApiService.CreateOrderExecute(r)
 }
 
 /*
-PostCompaniesCompanyIdTerminalOrders Create an order
+CreateOrder Create an order
 
 Creates an order for payment terminal products for the company identified in the path.
 
@@ -1652,7 +1652,7 @@ To make this request, your API credential must have the following [role](https:/
  @param companyId The unique identifier of the company account.
  @return ApiPostCompaniesCompanyIdTerminalOrdersRequest
 */
-func (a *TerminalOrdersCompanyLevelApiService) PostCompaniesCompanyIdTerminalOrders(ctx context.Context, companyId string) ApiPostCompaniesCompanyIdTerminalOrdersRequest {
+func (a *TerminalOrdersCompanyLevelApiService) CreateOrder(ctx context.Context, companyId string) ApiPostCompaniesCompanyIdTerminalOrdersRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -1668,7 +1668,7 @@ func (a *TerminalOrdersCompanyLevelApiService) PostCompaniesCompanyIdTerminalOrd
 
 // Execute executes the request
 //  @return TerminalOrder
-func (a *TerminalOrdersCompanyLevelApiService) PostCompaniesCompanyIdTerminalOrdersExecute(r ApiPostCompaniesCompanyIdTerminalOrdersRequest) (*TerminalOrder, *http.Response, error) {
+func (a *TerminalOrdersCompanyLevelApiService) CreateOrderExecute(r ApiPostCompaniesCompanyIdTerminalOrdersRequest) (*TerminalOrder, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1820,11 +1820,11 @@ type ApiPostCompaniesCompanyIdTerminalOrdersOrderIdCancelRequest struct {
 }
 
 func (r ApiPostCompaniesCompanyIdTerminalOrdersOrderIdCancelRequest) Execute() (*TerminalOrder, *http.Response, error) {
-	return r.ApiService.PostCompaniesCompanyIdTerminalOrdersOrderIdCancelExecute(r)
+	return r.ApiService.CancelOrderExecute(r)
 }
 
 /*
-PostCompaniesCompanyIdTerminalOrdersOrderIdCancel Cancel an order
+CancelOrder Cancel an order
 
 Cancels the terminal products order identified in the path.
 Cancelling is only possible while the order has the status **Placed**.
@@ -1838,7 +1838,7 @@ To make this request, your API credential must have the following [role](https:/
  @param orderId The unique identifier of the order.
  @return ApiPostCompaniesCompanyIdTerminalOrdersOrderIdCancelRequest
 */
-func (a *TerminalOrdersCompanyLevelApiService) PostCompaniesCompanyIdTerminalOrdersOrderIdCancel(ctx context.Context, companyId string, orderId string) ApiPostCompaniesCompanyIdTerminalOrdersOrderIdCancelRequest {
+func (a *TerminalOrdersCompanyLevelApiService) CancelOrder(ctx context.Context, companyId string, orderId string) ApiPostCompaniesCompanyIdTerminalOrdersOrderIdCancelRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -1855,7 +1855,7 @@ func (a *TerminalOrdersCompanyLevelApiService) PostCompaniesCompanyIdTerminalOrd
 
 // Execute executes the request
 //  @return TerminalOrder
-func (a *TerminalOrdersCompanyLevelApiService) PostCompaniesCompanyIdTerminalOrdersOrderIdCancelExecute(r ApiPostCompaniesCompanyIdTerminalOrdersOrderIdCancelRequest) (*TerminalOrder, *http.Response, error) {
+func (a *TerminalOrdersCompanyLevelApiService) CancelOrderExecute(r ApiPostCompaniesCompanyIdTerminalOrdersOrderIdCancelRequest) (*TerminalOrder, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}

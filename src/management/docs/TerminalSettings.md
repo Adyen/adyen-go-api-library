@@ -11,9 +11,11 @@ Name | Type | Description | Notes
 **Nexo** | Pointer to [**Nexo**](Nexo.md) |  | [optional] 
 **OfflineProcessing** | Pointer to [**OfflineProcessing**](OfflineProcessing.md) |  | [optional] 
 **Opi** | Pointer to [**Opi**](Opi.md) |  | [optional] 
+**Passcodes** | Pointer to [**Passcodes**](Passcodes.md) |  | [optional] 
 **ReceiptOptions** | Pointer to [**ReceiptOptions**](ReceiptOptions.md) |  | [optional] 
 **ReceiptPrinting** | Pointer to [**ReceiptPrinting**](ReceiptPrinting.md) |  | [optional] 
 **Signature** | Pointer to [**Signature**](Signature.md) |  | [optional] 
+**Standalone** | Pointer to [**Standalone**](Standalone.md) |  | [optional] 
 **Surcharge** | Pointer to [**Surcharge**](Surcharge.md) |  | [optional] 
 **Timeouts** | Pointer to [**Timeouts**](Timeouts.md) |  | [optional] 
 **WifiProfiles** | Pointer to [**WifiProfiles**](WifiProfiles.md) |  | [optional] 
@@ -212,6 +214,31 @@ SetOpi sets Opi field to given value.
 
 HasOpi returns a boolean if a field has been set.
 
+### GetPasscodes
+
+`func (o *TerminalSettings) GetPasscodes() Passcodes`
+
+GetPasscodes returns the Passcodes field if non-nil, zero value otherwise.
+
+### GetPasscodesOk
+
+`func (o *TerminalSettings) GetPasscodesOk() (*Passcodes, bool)`
+
+GetPasscodesOk returns a tuple with the Passcodes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPasscodes
+
+`func (o *TerminalSettings) SetPasscodes(v Passcodes)`
+
+SetPasscodes sets Passcodes field to given value.
+
+### HasPasscodes
+
+`func (o *TerminalSettings) HasPasscodes() bool`
+
+HasPasscodes returns a boolean if a field has been set.
+
 ### GetReceiptOptions
 
 `func (o *TerminalSettings) GetReceiptOptions() ReceiptOptions`
@@ -286,6 +313,31 @@ SetSignature sets Signature field to given value.
 `func (o *TerminalSettings) HasSignature() bool`
 
 HasSignature returns a boolean if a field has been set.
+
+### GetStandalone
+
+`func (o *TerminalSettings) GetStandalone() Standalone`
+
+GetStandalone returns the Standalone field if non-nil, zero value otherwise.
+
+### GetStandaloneOk
+
+`func (o *TerminalSettings) GetStandaloneOk() (*Standalone, bool)`
+
+GetStandaloneOk returns a tuple with the Standalone field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStandalone
+
+`func (o *TerminalSettings) SetStandalone(v Standalone)`
+
+SetStandalone sets Standalone field to given value.
+
+### HasStandalone
+
+`func (o *TerminalSettings) HasStandalone() bool`
+
+HasStandalone returns a boolean if a field has been set.
 
 ### GetSurcharge
 

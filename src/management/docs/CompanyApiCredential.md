@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Active** | **bool** | Indicates if the API credential is enabled. Must be set to **true** to use the credential in your integration. | 
 **AllowedIpAddresses** | **[]string** | List of IP addresses from which your client can make requests.  If the list is empty, we allow requests from any IP. If the list is not empty and we get a request from an IP which is not on the list, you get a security error. | 
 **AllowedOrigins** | Pointer to [**[]AllowedOrigin**](AllowedOrigin.md) | List containing the [allowed origins](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins) linked to the API credential. | [optional] 
-**AssociatedMerchantAccounts** | Pointer to **[]string** | List of merchant accounts that the API credential has access to. | [optional] 
+**AssociatedMerchantAccounts** | Pointer to **[]string** | List of merchant accounts that the API credential has explicit access to.   If the credential has access to a company, this implies access to all merchant accounts and no merchants for that company will be included. | [optional] 
 **ClientKey** | **string** | Public key used for [client-side authentication](https://docs.adyen.com/development-resources/client-side-authentication). The client key is required for Drop-in and Components integrations. | 
 **Description** | Pointer to **string** | Description of the API credential. | [optional] 
 **Id** | **string** | Unique identifier of the API credential. | 

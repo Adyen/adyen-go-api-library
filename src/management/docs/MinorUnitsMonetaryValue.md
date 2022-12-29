@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Amount** | Pointer to **int32** |  Amount of this monetary value, in minor units | [optional] 
-**CurrencyCode** | Pointer to **string** |  Currency of this monetary value, Format: [ISO currency code](https://docs.adyen.com/development-resources/currency-codes). | [optional] 
+**Amount** | Pointer to **int32** | The transaction amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes). | [optional] 
+**CurrencyCode** | Pointer to **string** | The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes). | [optional] 
 
 ## Methods
 

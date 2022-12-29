@@ -1,7 +1,7 @@
 /*
 Management API
 
-Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```
+Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```  ## Going live  To access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:  ```text https://management-live.adyen.com/v1 ```
 
 API version: 1
 Contact: developer-experience@adyen.com
@@ -45,11 +45,11 @@ func (r ApiGetMerchantsMerchantIdApiCredentialsRequest) PageSize(pageSize int32)
 }
 
 func (r ApiGetMerchantsMerchantIdApiCredentialsRequest) Execute() (*ListMerchantApiCredentialsResponse, *http.Response, error) {
-	return r.ApiService.GetMerchantsMerchantIdApiCredentialsExecute(r)
+	return r.ApiService.ListApiCredentialsExecute(r)
 }
 
 /*
-GetMerchantsMerchantIdApiCredentials Get a list of API credentials
+ListApiCredentials Get a list of API credentials
 
 Returns the list of [API credentials](https://docs.adyen.com/development-resources/api-credentials) for the merchant account. The list is grouped into pages as defined by the query parameters.
 
@@ -60,7 +60,7 @@ To make this request, your API credential must have the following [roles](https:
  @param merchantId The unique identifier of the merchant account.
  @return ApiGetMerchantsMerchantIdApiCredentialsRequest
 */
-func (a *APICredentialsMerchantLevelApiService) GetMerchantsMerchantIdApiCredentials(ctx context.Context, merchantId string) ApiGetMerchantsMerchantIdApiCredentialsRequest {
+func (a *APICredentialsMerchantLevelApiService) ListApiCredentials(ctx context.Context, merchantId string) ApiGetMerchantsMerchantIdApiCredentialsRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -76,7 +76,7 @@ func (a *APICredentialsMerchantLevelApiService) GetMerchantsMerchantIdApiCredent
 
 // Execute executes the request
 //  @return ListMerchantApiCredentialsResponse
-func (a *APICredentialsMerchantLevelApiService) GetMerchantsMerchantIdApiCredentialsExecute(r ApiGetMerchantsMerchantIdApiCredentialsRequest) (*ListMerchantApiCredentialsResponse, *http.Response, error) {
+func (a *APICredentialsMerchantLevelApiService) ListApiCredentialsExecute(r ApiGetMerchantsMerchantIdApiCredentialsRequest) (*ListMerchantApiCredentialsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -232,11 +232,11 @@ type ApiGetMerchantsMerchantIdApiCredentialsApiCredentialIdRequest struct {
 }
 
 func (r ApiGetMerchantsMerchantIdApiCredentialsApiCredentialIdRequest) Execute() (*ApiCredential, *http.Response, error) {
-	return r.ApiService.GetMerchantsMerchantIdApiCredentialsApiCredentialIdExecute(r)
+	return r.ApiService.GetApiCredentialExecute(r)
 }
 
 /*
-GetMerchantsMerchantIdApiCredentialsApiCredentialId Get an API credential
+GetApiCredential Get an API credential
 
 Returns the [API credential](https://docs.adyen.com/development-resources/api-credentials) identified in the path.
 
@@ -248,7 +248,7 @@ To make this request, your API credential must have the following [roles](https:
  @param apiCredentialId Unique identifier of the API credential.
  @return ApiGetMerchantsMerchantIdApiCredentialsApiCredentialIdRequest
 */
-func (a *APICredentialsMerchantLevelApiService) GetMerchantsMerchantIdApiCredentialsApiCredentialId(ctx context.Context, merchantId string, apiCredentialId string) ApiGetMerchantsMerchantIdApiCredentialsApiCredentialIdRequest {
+func (a *APICredentialsMerchantLevelApiService) GetApiCredential(ctx context.Context, merchantId string, apiCredentialId string) ApiGetMerchantsMerchantIdApiCredentialsApiCredentialIdRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -265,7 +265,7 @@ func (a *APICredentialsMerchantLevelApiService) GetMerchantsMerchantIdApiCredent
 
 // Execute executes the request
 //  @return ApiCredential
-func (a *APICredentialsMerchantLevelApiService) GetMerchantsMerchantIdApiCredentialsApiCredentialIdExecute(r ApiGetMerchantsMerchantIdApiCredentialsApiCredentialIdRequest) (*ApiCredential, *http.Response, error) {
+func (a *APICredentialsMerchantLevelApiService) GetApiCredentialExecute(r ApiGetMerchantsMerchantIdApiCredentialsApiCredentialIdRequest) (*ApiCredential, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -422,11 +422,11 @@ func (r ApiPatchMerchantsMerchantIdApiCredentialsApiCredentialIdRequest) UpdateM
 }
 
 func (r ApiPatchMerchantsMerchantIdApiCredentialsApiCredentialIdRequest) Execute() (*ApiCredential, *http.Response, error) {
-	return r.ApiService.PatchMerchantsMerchantIdApiCredentialsApiCredentialIdExecute(r)
+	return r.ApiService.UpdateApiCredentialExecute(r)
 }
 
 /*
-PatchMerchantsMerchantIdApiCredentialsApiCredentialId Update an API credential
+UpdateApiCredential Update an API credential
 
 Changes the API credential's roles, or allowed origins. The request has the new values for the fields you want to change. The response contains the full updated API credential, including the new values from the request. 
 
@@ -438,7 +438,7 @@ To make this request, your API credential must have the following [roles](https:
  @param apiCredentialId Unique identifier of the API credential.
  @return ApiPatchMerchantsMerchantIdApiCredentialsApiCredentialIdRequest
 */
-func (a *APICredentialsMerchantLevelApiService) PatchMerchantsMerchantIdApiCredentialsApiCredentialId(ctx context.Context, merchantId string, apiCredentialId string) ApiPatchMerchantsMerchantIdApiCredentialsApiCredentialIdRequest {
+func (a *APICredentialsMerchantLevelApiService) UpdateApiCredential(ctx context.Context, merchantId string, apiCredentialId string) ApiPatchMerchantsMerchantIdApiCredentialsApiCredentialIdRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -455,7 +455,7 @@ func (a *APICredentialsMerchantLevelApiService) PatchMerchantsMerchantIdApiCrede
 
 // Execute executes the request
 //  @return ApiCredential
-func (a *APICredentialsMerchantLevelApiService) PatchMerchantsMerchantIdApiCredentialsApiCredentialIdExecute(r ApiPatchMerchantsMerchantIdApiCredentialsApiCredentialIdRequest) (*ApiCredential, *http.Response, error) {
+func (a *APICredentialsMerchantLevelApiService) UpdateApiCredentialExecute(r ApiPatchMerchantsMerchantIdApiCredentialsApiCredentialIdRequest) (*ApiCredential, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
@@ -613,11 +613,11 @@ func (r ApiPostMerchantsMerchantIdApiCredentialsRequest) CreateMerchantApiCreden
 }
 
 func (r ApiPostMerchantsMerchantIdApiCredentialsRequest) Execute() (*CreateApiCredentialResponse, *http.Response, error) {
-	return r.ApiService.PostMerchantsMerchantIdApiCredentialsExecute(r)
+	return r.ApiService.CreateApiCredentialExecute(r)
 }
 
 /*
-PostMerchantsMerchantIdApiCredentials Create an API credential
+CreateApiCredential Create an API credential
 
 Creates an [API credential](https://docs.adyen.com/development-resources/api-credentials) for the company account identified in the path. In the request, you can specify the roles and allowed origins for the new API credential.
 
@@ -637,7 +637,7 @@ To make this request, your API credential must have the following [roles](https:
  @param merchantId The unique identifier of the merchant account.
  @return ApiPostMerchantsMerchantIdApiCredentialsRequest
 */
-func (a *APICredentialsMerchantLevelApiService) PostMerchantsMerchantIdApiCredentials(ctx context.Context, merchantId string) ApiPostMerchantsMerchantIdApiCredentialsRequest {
+func (a *APICredentialsMerchantLevelApiService) CreateApiCredential(ctx context.Context, merchantId string) ApiPostMerchantsMerchantIdApiCredentialsRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -653,7 +653,7 @@ func (a *APICredentialsMerchantLevelApiService) PostMerchantsMerchantIdApiCreden
 
 // Execute executes the request
 //  @return CreateApiCredentialResponse
-func (a *APICredentialsMerchantLevelApiService) PostMerchantsMerchantIdApiCredentialsExecute(r ApiPostMerchantsMerchantIdApiCredentialsRequest) (*CreateApiCredentialResponse, *http.Response, error) {
+func (a *APICredentialsMerchantLevelApiService) CreateApiCredentialExecute(r ApiPostMerchantsMerchantIdApiCredentialsRequest) (*CreateApiCredentialResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}

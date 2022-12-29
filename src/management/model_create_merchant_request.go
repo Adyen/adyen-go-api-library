@@ -1,7 +1,7 @@
 /*
 Management API
 
-Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```
+Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```  ## Going live  To access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:  ```text https://management-live.adyen.com/v1 ```
 
 API version: 1
 Contact: developer-experience@adyen.com
@@ -29,6 +29,8 @@ type CreateMerchantRequest struct {
 	PricingPlan *string `json:"pricingPlan,omitempty"`
 	// Your reference for the merchant account. To make this reference the unique identifier of the merchant account, your Adyen contact can set up a template on your company account. The template can have 6 to 255 characters with upper- and lower-case letters, underscores, and numbers. When your company account has a template, then the `reference` is required and must be unique within the company account.
 	Reference *string `json:"reference,omitempty"`
+	// List of sales channels that the merchant will process payments with
+	SalesChannels []string `json:"salesChannels,omitempty"`
 }
 
 // NewCreateMerchantRequest instantiates a new CreateMerchantRequest object
@@ -233,6 +235,38 @@ func (o *CreateMerchantRequest) SetReference(v string) {
 	o.Reference = &v
 }
 
+// GetSalesChannels returns the SalesChannels field value if set, zero value otherwise.
+func (o *CreateMerchantRequest) GetSalesChannels() []string {
+	if o == nil || isNil(o.SalesChannels) {
+		var ret []string
+		return ret
+	}
+	return o.SalesChannels
+}
+
+// GetSalesChannelsOk returns a tuple with the SalesChannels field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateMerchantRequest) GetSalesChannelsOk() ([]string, bool) {
+	if o == nil || isNil(o.SalesChannels) {
+		return nil, false
+	}
+	return o.SalesChannels, true
+}
+
+// HasSalesChannels returns a boolean if a field has been set.
+func (o *CreateMerchantRequest) HasSalesChannels() bool {
+	if o != nil && !isNil(o.SalesChannels) {
+		return true
+	}
+
+	return false
+}
+
+// SetSalesChannels gets a reference to the given []string and assigns it to the SalesChannels field.
+func (o *CreateMerchantRequest) SetSalesChannels(v []string) {
+	o.SalesChannels = v
+}
+
 func (o CreateMerchantRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.BusinessLineId) {
@@ -252,6 +286,9 @@ func (o CreateMerchantRequest) MarshalJSON() ([]byte, error) {
 	}
 	if !isNil(o.Reference) {
 		toSerialize["reference"] = o.Reference
+	}
+	if !isNil(o.SalesChannels) {
+		toSerialize["salesChannels"] = o.SalesChannels
 	}
 	return json.Marshal(toSerialize)
 }

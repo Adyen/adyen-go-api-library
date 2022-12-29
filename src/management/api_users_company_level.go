@@ -1,7 +1,7 @@
 /*
 Management API
 
-Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```
+Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```  ## Going live  To access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:  ```text https://management-live.adyen.com/v1 ```
 
 API version: 1
 Contact: developer-experience@adyen.com
@@ -45,11 +45,11 @@ func (r ApiGetCompaniesCompanyIdUsersRequest) PageSize(pageSize int32) ApiGetCom
 }
 
 func (r ApiGetCompaniesCompanyIdUsersRequest) Execute() (*ListCompanyUsersResponse, *http.Response, error) {
-	return r.ApiService.GetCompaniesCompanyIdUsersExecute(r)
+	return r.ApiService.ListUsersExecute(r)
 }
 
 /*
-GetCompaniesCompanyIdUsers Get a list of users
+ListUsers Get a list of users
 
 Returns the list of users for the `companyId` identified in the path.
 
@@ -61,7 +61,7 @@ To make this request, your API credential must have the following [role](https:/
  @param companyId The unique identifier of the company account.
  @return ApiGetCompaniesCompanyIdUsersRequest
 */
-func (a *UsersCompanyLevelApiService) GetCompaniesCompanyIdUsers(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdUsersRequest {
+func (a *UsersCompanyLevelApiService) ListUsers(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdUsersRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -77,7 +77,7 @@ func (a *UsersCompanyLevelApiService) GetCompaniesCompanyIdUsers(ctx context.Con
 
 // Execute executes the request
 //  @return ListCompanyUsersResponse
-func (a *UsersCompanyLevelApiService) GetCompaniesCompanyIdUsersExecute(r ApiGetCompaniesCompanyIdUsersRequest) (*ListCompanyUsersResponse, *http.Response, error) {
+func (a *UsersCompanyLevelApiService) ListUsersExecute(r ApiGetCompaniesCompanyIdUsersRequest) (*ListCompanyUsersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -233,11 +233,11 @@ type ApiGetCompaniesCompanyIdUsersUserIdRequest struct {
 }
 
 func (r ApiGetCompaniesCompanyIdUsersUserIdRequest) Execute() (*CompanyUser, *http.Response, error) {
-	return r.ApiService.GetCompaniesCompanyIdUsersUserIdExecute(r)
+	return r.ApiService.GetUserDetailsExecute(r)
 }
 
 /*
-GetCompaniesCompanyIdUsersUserId Get user details
+GetUserDetails Get user details
 
 Returns user details for the `userId` and the `companyId` identified in the path.
 
@@ -250,7 +250,7 @@ To make this request, your API credential must have the following [role](https:/
  @param userId The unique identifier of the user.
  @return ApiGetCompaniesCompanyIdUsersUserIdRequest
 */
-func (a *UsersCompanyLevelApiService) GetCompaniesCompanyIdUsersUserId(ctx context.Context, companyId string, userId string) ApiGetCompaniesCompanyIdUsersUserIdRequest {
+func (a *UsersCompanyLevelApiService) GetUserDetails(ctx context.Context, companyId string, userId string) ApiGetCompaniesCompanyIdUsersUserIdRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -267,7 +267,7 @@ func (a *UsersCompanyLevelApiService) GetCompaniesCompanyIdUsersUserId(ctx conte
 
 // Execute executes the request
 //  @return CompanyUser
-func (a *UsersCompanyLevelApiService) GetCompaniesCompanyIdUsersUserIdExecute(r ApiGetCompaniesCompanyIdUsersUserIdRequest) (*CompanyUser, *http.Response, error) {
+func (a *UsersCompanyLevelApiService) GetUserDetailsExecute(r ApiGetCompaniesCompanyIdUsersUserIdRequest) (*CompanyUser, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -424,11 +424,11 @@ func (r ApiPatchCompaniesCompanyIdUsersUserIdRequest) UpdateCompanyUserRequest(u
 }
 
 func (r ApiPatchCompaniesCompanyIdUsersUserIdRequest) Execute() (*CompanyUser, *http.Response, error) {
-	return r.ApiService.PatchCompaniesCompanyIdUsersUserIdExecute(r)
+	return r.ApiService.UpdateUserDetailsExecute(r)
 }
 
 /*
-PatchCompaniesCompanyIdUsersUserId Update user details
+UpdateUserDetails Update user details
 
 Updates user details for the `userId` and the `companyId` identified in the path.
 
@@ -441,7 +441,7 @@ To make this request, your API credential must have the following [role](https:/
  @param userId The unique identifier of the user.
  @return ApiPatchCompaniesCompanyIdUsersUserIdRequest
 */
-func (a *UsersCompanyLevelApiService) PatchCompaniesCompanyIdUsersUserId(ctx context.Context, companyId string, userId string) ApiPatchCompaniesCompanyIdUsersUserIdRequest {
+func (a *UsersCompanyLevelApiService) UpdateUserDetails(ctx context.Context, companyId string, userId string) ApiPatchCompaniesCompanyIdUsersUserIdRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -458,7 +458,7 @@ func (a *UsersCompanyLevelApiService) PatchCompaniesCompanyIdUsersUserId(ctx con
 
 // Execute executes the request
 //  @return CompanyUser
-func (a *UsersCompanyLevelApiService) PatchCompaniesCompanyIdUsersUserIdExecute(r ApiPatchCompaniesCompanyIdUsersUserIdRequest) (*CompanyUser, *http.Response, error) {
+func (a *UsersCompanyLevelApiService) UpdateUserDetailsExecute(r ApiPatchCompaniesCompanyIdUsersUserIdRequest) (*CompanyUser, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
@@ -616,11 +616,11 @@ func (r ApiPostCompaniesCompanyIdUsersRequest) CreateCompanyUserRequest(createCo
 }
 
 func (r ApiPostCompaniesCompanyIdUsersRequest) Execute() (*CreateCompanyUserResponse, *http.Response, error) {
-	return r.ApiService.PostCompaniesCompanyIdUsersExecute(r)
+	return r.ApiService.CreateNewUserExecute(r)
 }
 
 /*
-PostCompaniesCompanyIdUsers Create a new user
+CreateNewUser Create a new user
 
 Creates the user for the `companyId` identified in the path.
 
@@ -632,7 +632,7 @@ To make this request, your API credential must have the following [role](https:/
  @param companyId The unique identifier of the company account.
  @return ApiPostCompaniesCompanyIdUsersRequest
 */
-func (a *UsersCompanyLevelApiService) PostCompaniesCompanyIdUsers(ctx context.Context, companyId string) ApiPostCompaniesCompanyIdUsersRequest {
+func (a *UsersCompanyLevelApiService) CreateNewUser(ctx context.Context, companyId string) ApiPostCompaniesCompanyIdUsersRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -648,7 +648,7 @@ func (a *UsersCompanyLevelApiService) PostCompaniesCompanyIdUsers(ctx context.Co
 
 // Execute executes the request
 //  @return CreateCompanyUserResponse
-func (a *UsersCompanyLevelApiService) PostCompaniesCompanyIdUsersExecute(r ApiPostCompaniesCompanyIdUsersRequest) (*CreateCompanyUserResponse, *http.Response, error) {
+func (a *UsersCompanyLevelApiService) CreateNewUserExecute(r ApiPostCompaniesCompanyIdUsersRequest) (*CreateCompanyUserResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}

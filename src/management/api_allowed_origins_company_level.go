@@ -1,7 +1,7 @@
 /*
 Management API
 
-Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```
+Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```  ## Going live  To access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:  ```text https://management-live.adyen.com/v1 ```
 
 API version: 1
 Contact: developer-experience@adyen.com
@@ -33,11 +33,11 @@ type ApiDeleteCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsOrigi
 }
 
 func (r ApiDeleteCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsOriginIdRequest) Execute() (*http.Response, error) {
-	return r.ApiService.DeleteCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsOriginIdExecute(r)
+	return r.ApiService.DeleteAllowedOriginExecute(r)
 }
 
 /*
-DeleteCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsOriginId Delete an allowed origin
+DeleteAllowedOrigin Delete an allowed origin
 
 Removes the [allowed origin](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins) identified in the path. As soon as an allowed origin is removed, we no longer accept client-side requests from that domain.
 
@@ -50,7 +50,7 @@ To make this request, your API credential must have the following [roles](https:
  @param originId Unique identifier of the allowed origin.
  @return ApiDeleteCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsOriginIdRequest
 */
-func (a *AllowedOriginsCompanyLevelApiService) DeleteCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsOriginId(ctx context.Context, companyId string, apiCredentialId string, originId string) ApiDeleteCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsOriginIdRequest {
+func (a *AllowedOriginsCompanyLevelApiService) DeleteAllowedOrigin(ctx context.Context, companyId string, apiCredentialId string, originId string) ApiDeleteCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsOriginIdRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -67,7 +67,7 @@ func (a *AllowedOriginsCompanyLevelApiService) DeleteCompaniesCompanyIdApiCreden
 }
 
 // Execute executes the request
-func (a *AllowedOriginsCompanyLevelApiService) DeleteCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsOriginIdExecute(r ApiDeleteCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsOriginIdRequest) (*http.Response, error) {
+func (a *AllowedOriginsCompanyLevelApiService) DeleteAllowedOriginExecute(r ApiDeleteCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsOriginIdRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
@@ -209,11 +209,11 @@ type ApiGetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsRequest 
 }
 
 func (r ApiGetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsRequest) Execute() (*AllowedOriginsResponse, *http.Response, error) {
-	return r.ApiService.GetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsExecute(r)
+	return r.ApiService.ListAllowedOriginsExecute(r)
 }
 
 /*
-GetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOrigins Get a list of allowed origins
+ListAllowedOrigins Get a list of allowed origins
 
 Returns the list of [allowed origins](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins) for the API credential identified in the path.
 
@@ -225,7 +225,7 @@ To make this request, your API credential must have the following [roles](https:
  @param apiCredentialId Unique identifier of the API credential.
  @return ApiGetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsRequest
 */
-func (a *AllowedOriginsCompanyLevelApiService) GetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOrigins(ctx context.Context, companyId string, apiCredentialId string) ApiGetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsRequest {
+func (a *AllowedOriginsCompanyLevelApiService) ListAllowedOrigins(ctx context.Context, companyId string, apiCredentialId string) ApiGetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -242,7 +242,7 @@ func (a *AllowedOriginsCompanyLevelApiService) GetCompaniesCompanyIdApiCredentia
 
 // Execute executes the request
 //  @return AllowedOriginsResponse
-func (a *AllowedOriginsCompanyLevelApiService) GetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsExecute(r ApiGetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsRequest) (*AllowedOriginsResponse, *http.Response, error) {
+func (a *AllowedOriginsCompanyLevelApiService) ListAllowedOriginsExecute(r ApiGetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsRequest) (*AllowedOriginsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -394,11 +394,11 @@ type ApiGetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsOriginId
 }
 
 func (r ApiGetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsOriginIdRequest) Execute() (*AllowedOrigin, *http.Response, error) {
-	return r.ApiService.GetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsOriginIdExecute(r)
+	return r.ApiService.GetAllowedOriginExecute(r)
 }
 
 /*
-GetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsOriginId Get an allowed origin
+GetAllowedOrigin Get an allowed origin
 
 Returns the [allowed origin](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins) identified in the path.
 
@@ -411,7 +411,7 @@ To make this request, your API credential must have the following [roles](https:
  @param originId Unique identifier of the allowed origin.
  @return ApiGetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsOriginIdRequest
 */
-func (a *AllowedOriginsCompanyLevelApiService) GetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsOriginId(ctx context.Context, companyId string, apiCredentialId string, originId string) ApiGetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsOriginIdRequest {
+func (a *AllowedOriginsCompanyLevelApiService) GetAllowedOrigin(ctx context.Context, companyId string, apiCredentialId string, originId string) ApiGetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsOriginIdRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -429,7 +429,7 @@ func (a *AllowedOriginsCompanyLevelApiService) GetCompaniesCompanyIdApiCredentia
 
 // Execute executes the request
 //  @return AllowedOrigin
-func (a *AllowedOriginsCompanyLevelApiService) GetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsOriginIdExecute(r ApiGetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsOriginIdRequest) (*AllowedOrigin, *http.Response, error) {
+func (a *AllowedOriginsCompanyLevelApiService) GetAllowedOriginExecute(r ApiGetCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsOriginIdRequest) (*AllowedOrigin, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -587,11 +587,11 @@ func (r ApiPostCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsRequ
 }
 
 func (r ApiPostCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsRequest) Execute() (*AllowedOriginsResponse, *http.Response, error) {
-	return r.ApiService.PostCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsExecute(r)
+	return r.ApiService.CreateAllowedOriginExecute(r)
 }
 
 /*
-PostCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOrigins Create an allowed origin
+CreateAllowedOrigin Create an allowed origin
 
 Adds a new [allowed origin](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins) to the API credential's list of allowed origins.
 
@@ -603,7 +603,7 @@ To make this request, your API credential must have the following [roles](https:
  @param apiCredentialId Unique identifier of the API credential.
  @return ApiPostCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsRequest
 */
-func (a *AllowedOriginsCompanyLevelApiService) PostCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOrigins(ctx context.Context, companyId string, apiCredentialId string) ApiPostCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsRequest {
+func (a *AllowedOriginsCompanyLevelApiService) CreateAllowedOrigin(ctx context.Context, companyId string, apiCredentialId string) ApiPostCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -620,7 +620,7 @@ func (a *AllowedOriginsCompanyLevelApiService) PostCompaniesCompanyIdApiCredenti
 
 // Execute executes the request
 //  @return AllowedOriginsResponse
-func (a *AllowedOriginsCompanyLevelApiService) PostCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsExecute(r ApiPostCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsRequest) (*AllowedOriginsResponse, *http.Response, error) {
+func (a *AllowedOriginsCompanyLevelApiService) CreateAllowedOriginExecute(r ApiPostCompaniesCompanyIdApiCredentialsApiCredentialIdAllowedOriginsRequest) (*AllowedOriginsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}

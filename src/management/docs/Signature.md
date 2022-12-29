@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AskSignatureOnScreen** | Pointer to **bool** | If &#x60;skipSignature&#x60; is false, indicates whether the shopper should provide a signature on the display (**true**) or on the merchant receipt (**false**). | [optional] 
 **DeviceName** | Pointer to **string** | Name that identifies the terminal. | [optional] 
+**DeviceSlogan** | Pointer to **string** | Slogan shown on the start screen of the device. | [optional] 
 **SkipSignature** | Pointer to **bool** | Skip asking for a signature. This is possible because all global card schemes (American Express, Diners, Discover, JCB, MasterCard, VISA, and UnionPay) regard a signature as optional. | [optional] 
 
 ## Methods
@@ -76,6 +77,31 @@ SetDeviceName sets DeviceName field to given value.
 `func (o *Signature) HasDeviceName() bool`
 
 HasDeviceName returns a boolean if a field has been set.
+
+### GetDeviceSlogan
+
+`func (o *Signature) GetDeviceSlogan() string`
+
+GetDeviceSlogan returns the DeviceSlogan field if non-nil, zero value otherwise.
+
+### GetDeviceSloganOk
+
+`func (o *Signature) GetDeviceSloganOk() (*string, bool)`
+
+GetDeviceSloganOk returns a tuple with the DeviceSlogan field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeviceSlogan
+
+`func (o *Signature) SetDeviceSlogan(v string)`
+
+SetDeviceSlogan sets DeviceSlogan field to given value.
+
+### HasDeviceSlogan
+
+`func (o *Signature) HasDeviceSlogan() bool`
+
+HasDeviceSlogan returns a boolean if a field has been set.
 
 ### GetSkipSignature
 

@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **LegalEntityId** | Pointer to **string** | The unique identifier of the [legal entity](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/legalEntities). Required for an Adyen for Platforms Manage integration. | [optional] 
 **PricingPlan** | Pointer to **string** | Sets the pricing plan for the merchant account. Required for an Adyen for Platforms Manage integration. Your Adyen contact will provide the values that you can use. | [optional] 
 **Reference** | Pointer to **string** | Your reference for the merchant account. To make this reference the unique identifier of the merchant account, your Adyen contact can set up a template on your company account. The template can have 6 to 255 characters with upper- and lower-case letters, underscores, and numbers. When your company account has a template, then the &#x60;reference&#x60; is required and must be unique within the company account. | [optional] 
+**SalesChannels** | Pointer to **[]string** | List of sales channels that the merchant will process payments with | [optional] 
 
 ## Methods
 
@@ -174,6 +175,31 @@ SetReference sets Reference field to given value.
 `func (o *CreateMerchantRequest) HasReference() bool`
 
 HasReference returns a boolean if a field has been set.
+
+### GetSalesChannels
+
+`func (o *CreateMerchantRequest) GetSalesChannels() []string`
+
+GetSalesChannels returns the SalesChannels field if non-nil, zero value otherwise.
+
+### GetSalesChannelsOk
+
+`func (o *CreateMerchantRequest) GetSalesChannelsOk() (*[]string, bool)`
+
+GetSalesChannelsOk returns a tuple with the SalesChannels field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSalesChannels
+
+`func (o *CreateMerchantRequest) SetSalesChannels(v []string)`
+
+SetSalesChannels sets SalesChannels field to given value.
+
+### HasSalesChannels
+
+`func (o *CreateMerchantRequest) HasSalesChannels() bool`
+
+HasSalesChannels returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

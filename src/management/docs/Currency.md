@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Amount** | Pointer to **int32** | Surcharge amount per transaction, in minor units. | [optional] 
+**Amount** | Pointer to **int32** | Surcharge amount per transaction, in [minor units](https://docs.adyen.com/development-resources/currency-codes). | [optional] 
 **CurrencyCode** | **string** | Three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes). For example, **AUD**. | 
-**Percentage** | Pointer to **float64** | Surcharge percentage per transaction. The maximum number of decimal places is two. For example, **1%** or **2.27%**. | [optional] 
+**Percentage** | Pointer to **interface{}** |  | [optional] 
 
 ## Methods
 
@@ -74,20 +74,20 @@ SetCurrencyCode sets CurrencyCode field to given value.
 
 ### GetPercentage
 
-`func (o *Currency) GetPercentage() float64`
+`func (o *Currency) GetPercentage() interface{}`
 
 GetPercentage returns the Percentage field if non-nil, zero value otherwise.
 
 ### GetPercentageOk
 
-`func (o *Currency) GetPercentageOk() (*float64, bool)`
+`func (o *Currency) GetPercentageOk() (*interface{}, bool)`
 
 GetPercentageOk returns a tuple with the Percentage field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPercentage
 
-`func (o *Currency) SetPercentage(v float64)`
+`func (o *Currency) SetPercentage(v interface{})`
 
 SetPercentage sets Percentage field to given value.
 
@@ -97,6 +97,16 @@ SetPercentage sets Percentage field to given value.
 
 HasPercentage returns a boolean if a field has been set.
 
+### SetPercentageNil
+
+`func (o *Currency) SetPercentageNil(b bool)`
+
+ SetPercentageNil sets the value for Percentage to be an explicit nil
+
+### UnsetPercentage
+`func (o *Currency) UnsetPercentage()`
+
+UnsetPercentage ensures that no value is present for Percentage, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

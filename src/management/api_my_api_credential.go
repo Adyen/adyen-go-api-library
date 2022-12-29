@@ -1,7 +1,7 @@
 /*
 Management API
 
-Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```
+Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```  ## Going live  To access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:  ```text https://management-live.adyen.com/v1 ```
 
 API version: 1
 Contact: developer-experience@adyen.com
@@ -31,11 +31,11 @@ type ApiDeleteMeAllowedOriginsOriginIdRequest struct {
 }
 
 func (r ApiDeleteMeAllowedOriginsOriginIdRequest) Execute() (*http.Response, error) {
-	return r.ApiService.DeleteMeAllowedOriginsOriginIdExecute(r)
+	return r.ApiService.RemoveAllowedOriginExecute(r)
 }
 
 /*
-DeleteMeAllowedOriginsOriginId Remove allowed origin
+RemoveAllowedOrigin Remove allowed origin
 
 Removes the [allowed origin](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins) specified in the path.
 The API key from the request is used to identify the [API credential](https://docs.adyen.com/development-resources/api-credentials).
@@ -46,7 +46,7 @@ You can make this request with any of the Management API roles.
  @param originId Unique identifier of the allowed origin.
  @return ApiDeleteMeAllowedOriginsOriginIdRequest
 */
-func (a *MyAPICredentialApiService) DeleteMeAllowedOriginsOriginId(ctx context.Context, originId string) ApiDeleteMeAllowedOriginsOriginIdRequest {
+func (a *MyAPICredentialApiService) RemoveAllowedOrigin(ctx context.Context, originId string) ApiDeleteMeAllowedOriginsOriginIdRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -61,7 +61,7 @@ func (a *MyAPICredentialApiService) DeleteMeAllowedOriginsOriginId(ctx context.C
 }
 
 // Execute executes the request
-func (a *MyAPICredentialApiService) DeleteMeAllowedOriginsOriginIdExecute(r ApiDeleteMeAllowedOriginsOriginIdRequest) (*http.Response, error) {
+func (a *MyAPICredentialApiService) RemoveAllowedOriginExecute(r ApiDeleteMeAllowedOriginsOriginIdRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
@@ -199,11 +199,11 @@ type ApiGetMeRequest struct {
 }
 
 func (r ApiGetMeRequest) Execute() (*MeApiCredential, *http.Response, error) {
-	return r.ApiService.GetMeExecute(r)
+	return r.ApiService.GetApiCredentialDetailsExecute(r)
 }
 
 /*
-GetMe Get API credential details
+GetApiCredentialDetails Get API credential details
 
 Returns your [API credential](https://docs.adyen.com/development-resources/api-credentials) details based on the API Key you used in the request.
 
@@ -212,7 +212,7 @@ You can make this request with any of the Management API roles.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetMeRequest
 */
-func (a *MyAPICredentialApiService) GetMe(ctx context.Context) ApiGetMeRequest {
+func (a *MyAPICredentialApiService) GetApiCredentialDetails(ctx context.Context) ApiGetMeRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -227,7 +227,7 @@ func (a *MyAPICredentialApiService) GetMe(ctx context.Context) ApiGetMeRequest {
 
 // Execute executes the request
 //  @return MeApiCredential
-func (a *MyAPICredentialApiService) GetMeExecute(r ApiGetMeRequest) (*MeApiCredential, *http.Response, error) {
+func (a *MyAPICredentialApiService) GetApiCredentialDetailsExecute(r ApiGetMeRequest) (*MeApiCredential, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -374,11 +374,11 @@ type ApiGetMeAllowedOriginsRequest struct {
 }
 
 func (r ApiGetMeAllowedOriginsRequest) Execute() (*AllowedOriginsResponse, *http.Response, error) {
-	return r.ApiService.GetMeAllowedOriginsExecute(r)
+	return r.ApiService.GetAllowedOriginsExecute(r)
 }
 
 /*
-GetMeAllowedOrigins Get allowed origins
+GetAllowedOrigins Get allowed origins
 
 Returns the list of [allowed origins](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins) of your [API credential](https://docs.adyen.com/development-resources/api-credentials) based on the API key you used in the request.
 
@@ -387,7 +387,7 @@ You can make this request with any of the Management API roles.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetMeAllowedOriginsRequest
 */
-func (a *MyAPICredentialApiService) GetMeAllowedOrigins(ctx context.Context) ApiGetMeAllowedOriginsRequest {
+func (a *MyAPICredentialApiService) GetAllowedOrigins(ctx context.Context) ApiGetMeAllowedOriginsRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -402,7 +402,7 @@ func (a *MyAPICredentialApiService) GetMeAllowedOrigins(ctx context.Context) Api
 
 // Execute executes the request
 //  @return AllowedOriginsResponse
-func (a *MyAPICredentialApiService) GetMeAllowedOriginsExecute(r ApiGetMeAllowedOriginsRequest) (*AllowedOriginsResponse, *http.Response, error) {
+func (a *MyAPICredentialApiService) GetAllowedOriginsExecute(r ApiGetMeAllowedOriginsRequest) (*AllowedOriginsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -550,11 +550,11 @@ type ApiGetMeAllowedOriginsOriginIdRequest struct {
 }
 
 func (r ApiGetMeAllowedOriginsOriginIdRequest) Execute() (*AllowedOrigin, *http.Response, error) {
-	return r.ApiService.GetMeAllowedOriginsOriginIdExecute(r)
+	return r.ApiService.GetAllowedOriginDetailsExecute(r)
 }
 
 /*
-GetMeAllowedOriginsOriginId Get allowed origin details
+GetAllowedOriginDetails Get allowed origin details
 
 Returns the details of the [allowed origin](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins) specified in the path.
 The API key from the request is used to identify the [API credential](https://docs.adyen.com/development-resources/api-credentials).
@@ -565,7 +565,7 @@ You can make this request with any of the Management API roles.
  @param originId Unique identifier of the allowed origin.
  @return ApiGetMeAllowedOriginsOriginIdRequest
 */
-func (a *MyAPICredentialApiService) GetMeAllowedOriginsOriginId(ctx context.Context, originId string) ApiGetMeAllowedOriginsOriginIdRequest {
+func (a *MyAPICredentialApiService) GetAllowedOriginDetails(ctx context.Context, originId string) ApiGetMeAllowedOriginsOriginIdRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -581,7 +581,7 @@ func (a *MyAPICredentialApiService) GetMeAllowedOriginsOriginId(ctx context.Cont
 
 // Execute executes the request
 //  @return AllowedOrigin
-func (a *MyAPICredentialApiService) GetMeAllowedOriginsOriginIdExecute(r ApiGetMeAllowedOriginsOriginIdRequest) (*AllowedOrigin, *http.Response, error) {
+func (a *MyAPICredentialApiService) GetAllowedOriginDetailsExecute(r ApiGetMeAllowedOriginsOriginIdRequest) (*AllowedOrigin, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -735,11 +735,11 @@ func (r ApiPostMeAllowedOriginsRequest) CreateAllowedOriginRequest(createAllowed
 }
 
 func (r ApiPostMeAllowedOriginsRequest) Execute() (*AllowedOriginsResponse, *http.Response, error) {
-	return r.ApiService.PostMeAllowedOriginsExecute(r)
+	return r.ApiService.AddAllowedOriginExecute(r)
 }
 
 /*
-PostMeAllowedOrigins Add allowed origin
+AddAllowedOrigin Add allowed origin
 
 Adds an allowed origin to the list of [allowed origins](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins) of your API credential.
 The API key from the request is used to identify the [API credential](https://docs.adyen.com/development-resources/api-credentials).
@@ -749,7 +749,7 @@ You can make this request with any of the Management API roles.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPostMeAllowedOriginsRequest
 */
-func (a *MyAPICredentialApiService) PostMeAllowedOrigins(ctx context.Context) ApiPostMeAllowedOriginsRequest {
+func (a *MyAPICredentialApiService) AddAllowedOrigin(ctx context.Context) ApiPostMeAllowedOriginsRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -764,7 +764,7 @@ func (a *MyAPICredentialApiService) PostMeAllowedOrigins(ctx context.Context) Ap
 
 // Execute executes the request
 //  @return AllowedOriginsResponse
-func (a *MyAPICredentialApiService) PostMeAllowedOriginsExecute(r ApiPostMeAllowedOriginsRequest) (*AllowedOriginsResponse, *http.Response, error) {
+func (a *MyAPICredentialApiService) AddAllowedOriginExecute(r ApiPostMeAllowedOriginsRequest) (*AllowedOriginsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}

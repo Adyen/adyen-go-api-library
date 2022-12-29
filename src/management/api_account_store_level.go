@@ -1,7 +1,7 @@
 /*
 Management API
 
-Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```
+Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```  ## Going live  To access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:  ```text https://management-live.adyen.com/v1 ```
 
 API version: 1
 Contact: developer-experience@adyen.com
@@ -52,11 +52,11 @@ func (r ApiGetMerchantsMerchantIdStoresRequest) Reference(reference string) ApiG
 }
 
 func (r ApiGetMerchantsMerchantIdStoresRequest) Execute() (*ListStoresResponse, *http.Response, error) {
-	return r.ApiService.GetMerchantsMerchantIdStoresExecute(r)
+	return r.ApiService.ListStoresByMerchantIdExecute(r)
 }
 
 /*
-GetMerchantsMerchantIdStores Get a list of stores
+ListStoresByMerchantId Get a list of stores
 
 Returns a list of stores for the merchant account identified in the path. The list is grouped into pages as defined by the query parameters.
 
@@ -68,7 +68,7 @@ To make this request, your API credential must have one of the following [roles]
  @param merchantId The unique identifier of the merchant account.
  @return ApiGetMerchantsMerchantIdStoresRequest
 */
-func (a *AccountStoreLevelApiService) GetMerchantsMerchantIdStores(ctx context.Context, merchantId string) ApiGetMerchantsMerchantIdStoresRequest {
+func (a *AccountStoreLevelApiService) ListStoresByMerchantId(ctx context.Context, merchantId string) ApiGetMerchantsMerchantIdStoresRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -84,7 +84,7 @@ func (a *AccountStoreLevelApiService) GetMerchantsMerchantIdStores(ctx context.C
 
 // Execute executes the request
 //  @return ListStoresResponse
-func (a *AccountStoreLevelApiService) GetMerchantsMerchantIdStoresExecute(r ApiGetMerchantsMerchantIdStoresRequest) (*ListStoresResponse, *http.Response, error) {
+func (a *AccountStoreLevelApiService) ListStoresByMerchantIdExecute(r ApiGetMerchantsMerchantIdStoresRequest) (*ListStoresResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -243,11 +243,11 @@ type ApiGetMerchantsMerchantIdStoresStoreIdRequest struct {
 }
 
 func (r ApiGetMerchantsMerchantIdStoresStoreIdRequest) Execute() (*Store, *http.Response, error) {
-	return r.ApiService.GetMerchantsMerchantIdStoresStoreIdExecute(r)
+	return r.ApiService.GetStoreExecute(r)
 }
 
 /*
-GetMerchantsMerchantIdStoresStoreId Get a store
+GetStore Get a store
 
 Returns the details of the store identified in the path.
 
@@ -260,7 +260,7 @@ To make this request, your API credential must have one of the following [roles]
  @param storeId The unique identifier of the store.
  @return ApiGetMerchantsMerchantIdStoresStoreIdRequest
 */
-func (a *AccountStoreLevelApiService) GetMerchantsMerchantIdStoresStoreId(ctx context.Context, merchantId string, storeId string) ApiGetMerchantsMerchantIdStoresStoreIdRequest {
+func (a *AccountStoreLevelApiService) GetStore(ctx context.Context, merchantId string, storeId string) ApiGetMerchantsMerchantIdStoresStoreIdRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -277,7 +277,7 @@ func (a *AccountStoreLevelApiService) GetMerchantsMerchantIdStoresStoreId(ctx co
 
 // Execute executes the request
 //  @return Store
-func (a *AccountStoreLevelApiService) GetMerchantsMerchantIdStoresStoreIdExecute(r ApiGetMerchantsMerchantIdStoresStoreIdRequest) (*Store, *http.Response, error) {
+func (a *AccountStoreLevelApiService) GetStoreExecute(r ApiGetMerchantsMerchantIdStoresStoreIdRequest) (*Store, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -454,11 +454,11 @@ func (r ApiGetStoresRequest) MerchantId(merchantId string) ApiGetStoresRequest {
 }
 
 func (r ApiGetStoresRequest) Execute() (*ListStoresResponse, *http.Response, error) {
-	return r.ApiService.GetStoresExecute(r)
+	return r.ApiService.ListStoresExecute(r)
 }
 
 /*
-GetStores Get a list of stores
+ListStores Get a list of stores
 
 Returns a list of stores. The list is grouped into pages as defined by the query parameters.
 
@@ -469,7 +469,7 @@ To make this request, your API credential must have one of the following [roles]
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetStoresRequest
 */
-func (a *AccountStoreLevelApiService) GetStores(ctx context.Context) ApiGetStoresRequest {
+func (a *AccountStoreLevelApiService) ListStores(ctx context.Context) ApiGetStoresRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -484,7 +484,7 @@ func (a *AccountStoreLevelApiService) GetStores(ctx context.Context) ApiGetStore
 
 // Execute executes the request
 //  @return ListStoresResponse
-func (a *AccountStoreLevelApiService) GetStoresExecute(r ApiGetStoresRequest) (*ListStoresResponse, *http.Response, error) {
+func (a *AccountStoreLevelApiService) ListStoresExecute(r ApiGetStoresRequest) (*ListStoresResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -644,11 +644,11 @@ type ApiGetStoresStoreIdRequest struct {
 }
 
 func (r ApiGetStoresStoreIdRequest) Execute() (*Store, *http.Response, error) {
-	return r.ApiService.GetStoresStoreIdExecute(r)
+	return r.ApiService.GetStoreByIdExecute(r)
 }
 
 /*
-GetStoresStoreId Get a store
+GetStoreById Get a store
 
 Returns the details of the store identified in the path.
 
@@ -660,7 +660,7 @@ To make this request, your API credential must have one of the following [roles]
  @param storeId The unique identifier of the store.
  @return ApiGetStoresStoreIdRequest
 */
-func (a *AccountStoreLevelApiService) GetStoresStoreId(ctx context.Context, storeId string) ApiGetStoresStoreIdRequest {
+func (a *AccountStoreLevelApiService) GetStoreById(ctx context.Context, storeId string) ApiGetStoresStoreIdRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -676,7 +676,7 @@ func (a *AccountStoreLevelApiService) GetStoresStoreId(ctx context.Context, stor
 
 // Execute executes the request
 //  @return Store
-func (a *AccountStoreLevelApiService) GetStoresStoreIdExecute(r ApiGetStoresStoreIdRequest) (*Store, *http.Response, error) {
+func (a *AccountStoreLevelApiService) GetStoreByIdExecute(r ApiGetStoresStoreIdRequest) (*Store, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -832,11 +832,11 @@ func (r ApiPatchMerchantsMerchantIdStoresStoreIdRequest) UpdateStoreRequest(upda
 }
 
 func (r ApiPatchMerchantsMerchantIdStoresStoreIdRequest) Execute() (*Store, *http.Response, error) {
-	return r.ApiService.PatchMerchantsMerchantIdStoresStoreIdExecute(r)
+	return r.ApiService.UpdateStoreExecute(r)
 }
 
 /*
-PatchMerchantsMerchantIdStoresStoreId Update a store
+UpdateStore Update a store
 
 Updates the store identified in the path. You can only update some store parameters.
 
@@ -848,7 +848,7 @@ To make this request, your API credential must have the following [role](https:/
  @param storeId The unique identifier of the store.
  @return ApiPatchMerchantsMerchantIdStoresStoreIdRequest
 */
-func (a *AccountStoreLevelApiService) PatchMerchantsMerchantIdStoresStoreId(ctx context.Context, merchantId string, storeId string) ApiPatchMerchantsMerchantIdStoresStoreIdRequest {
+func (a *AccountStoreLevelApiService) UpdateStore(ctx context.Context, merchantId string, storeId string) ApiPatchMerchantsMerchantIdStoresStoreIdRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -865,7 +865,7 @@ func (a *AccountStoreLevelApiService) PatchMerchantsMerchantIdStoresStoreId(ctx 
 
 // Execute executes the request
 //  @return Store
-func (a *AccountStoreLevelApiService) PatchMerchantsMerchantIdStoresStoreIdExecute(r ApiPatchMerchantsMerchantIdStoresStoreIdRequest) (*Store, *http.Response, error) {
+func (a *AccountStoreLevelApiService) UpdateStoreExecute(r ApiPatchMerchantsMerchantIdStoresStoreIdRequest) (*Store, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
@@ -1023,11 +1023,11 @@ func (r ApiPatchStoresStoreIdRequest) UpdateStoreRequest(updateStoreRequest Upda
 }
 
 func (r ApiPatchStoresStoreIdRequest) Execute() (*Store, *http.Response, error) {
-	return r.ApiService.PatchStoresStoreIdExecute(r)
+	return r.ApiService.UpdateStoreByIdExecute(r)
 }
 
 /*
-PatchStoresStoreId Update a store
+UpdateStoreById Update a store
 
 Updates the store identified in the path.
 You can only update some store parameters.
@@ -1039,7 +1039,7 @@ To make this request, your API credential must have the following [role](https:/
  @param storeId The unique identifier of the store.
  @return ApiPatchStoresStoreIdRequest
 */
-func (a *AccountStoreLevelApiService) PatchStoresStoreId(ctx context.Context, storeId string) ApiPatchStoresStoreIdRequest {
+func (a *AccountStoreLevelApiService) UpdateStoreById(ctx context.Context, storeId string) ApiPatchStoresStoreIdRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -1055,7 +1055,7 @@ func (a *AccountStoreLevelApiService) PatchStoresStoreId(ctx context.Context, st
 
 // Execute executes the request
 //  @return Store
-func (a *AccountStoreLevelApiService) PatchStoresStoreIdExecute(r ApiPatchStoresStoreIdRequest) (*Store, *http.Response, error) {
+func (a *AccountStoreLevelApiService) UpdateStoreByIdExecute(r ApiPatchStoresStoreIdRequest) (*Store, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
@@ -1212,11 +1212,11 @@ func (r ApiPostMerchantsMerchantIdStoresRequest) StoreCreationRequest(storeCreat
 }
 
 func (r ApiPostMerchantsMerchantIdStoresRequest) Execute() (*Store, *http.Response, error) {
-	return r.ApiService.PostMerchantsMerchantIdStoresExecute(r)
+	return r.ApiService.CreateStoreByMerchantIdExecute(r)
 }
 
 /*
-PostMerchantsMerchantIdStores Create a store
+CreateStoreByMerchantId Create a store
 
 Creates a store for the merchant account identified in the path.
 
@@ -1227,7 +1227,7 @@ To make this request, your API credential must have the following [role](https:/
  @param merchantId The unique identifier of the merchant account.
  @return ApiPostMerchantsMerchantIdStoresRequest
 */
-func (a *AccountStoreLevelApiService) PostMerchantsMerchantIdStores(ctx context.Context, merchantId string) ApiPostMerchantsMerchantIdStoresRequest {
+func (a *AccountStoreLevelApiService) CreateStoreByMerchantId(ctx context.Context, merchantId string) ApiPostMerchantsMerchantIdStoresRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -1243,7 +1243,7 @@ func (a *AccountStoreLevelApiService) PostMerchantsMerchantIdStores(ctx context.
 
 // Execute executes the request
 //  @return Store
-func (a *AccountStoreLevelApiService) PostMerchantsMerchantIdStoresExecute(r ApiPostMerchantsMerchantIdStoresRequest) (*Store, *http.Response, error) {
+func (a *AccountStoreLevelApiService) CreateStoreByMerchantIdExecute(r ApiPostMerchantsMerchantIdStoresRequest) (*Store, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1399,11 +1399,11 @@ func (r ApiPostStoresRequest) StoreCreationWithMerchantCodeRequest(storeCreation
 }
 
 func (r ApiPostStoresRequest) Execute() (*Store, *http.Response, error) {
-	return r.ApiService.PostStoresExecute(r)
+	return r.ApiService.CreateStoreExecute(r)
 }
 
 /*
-PostStores Create a store
+CreateStore Create a store
 
 Creates a store for the merchant account specified in the request.
 
@@ -1413,7 +1413,7 @@ To make this request, your API credential must have the following [role](https:/
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPostStoresRequest
 */
-func (a *AccountStoreLevelApiService) PostStores(ctx context.Context) ApiPostStoresRequest {
+func (a *AccountStoreLevelApiService) CreateStore(ctx context.Context) ApiPostStoresRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -1428,7 +1428,7 @@ func (a *AccountStoreLevelApiService) PostStores(ctx context.Context) ApiPostSto
 
 // Execute executes the request
 //  @return Store
-func (a *AccountStoreLevelApiService) PostStoresExecute(r ApiPostStoresRequest) (*Store, *http.Response, error) {
+func (a *AccountStoreLevelApiService) CreateStoreExecute(r ApiPostStoresRequest) (*Store, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}

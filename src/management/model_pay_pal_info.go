@@ -1,7 +1,7 @@
 /*
 Management API
 
-Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```
+Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```  ## Going live  To access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:  ```text https://management-live.adyen.com/v1 ```
 
 API version: 1
 Contact: developer-experience@adyen.com
@@ -19,8 +19,6 @@ import (
 type PayPalInfo struct {
 	// Indicates if direct (immediate) capture for PayPal is enabled. If set to **true**, this setting overrides the [capture](https://docs.adyen.com/online-payments/capture) settings of your merchant account. Default value: **true**.
 	DirectCapture *bool `json:"directCapture,omitempty"`
-	// Must be set to **true** to confirm that the settlement to your bank account is performed directly by PayPal. Default value: **null**.
-	DirectSettlement bool `json:"directSettlement"`
 	// PayPal Merchant ID. Character length and limitations: 13 single-byte alphanumeric characters.
 	PayerId string `json:"payerId"`
 	// Your business email address.
@@ -31,9 +29,8 @@ type PayPalInfo struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPayPalInfo(directSettlement bool, payerId string, subject string) *PayPalInfo {
+func NewPayPalInfo(payerId string, subject string) *PayPalInfo {
 	this := PayPalInfo{}
-	this.DirectSettlement = directSettlement
 	this.PayerId = payerId
 	this.Subject = subject
 	return &this
@@ -77,30 +74,6 @@ func (o *PayPalInfo) HasDirectCapture() bool {
 // SetDirectCapture gets a reference to the given bool and assigns it to the DirectCapture field.
 func (o *PayPalInfo) SetDirectCapture(v bool) {
 	o.DirectCapture = &v
-}
-
-// GetDirectSettlement returns the DirectSettlement field value
-func (o *PayPalInfo) GetDirectSettlement() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.DirectSettlement
-}
-
-// GetDirectSettlementOk returns a tuple with the DirectSettlement field value
-// and a boolean to check if the value has been set.
-func (o *PayPalInfo) GetDirectSettlementOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.DirectSettlement, true
-}
-
-// SetDirectSettlement sets field value
-func (o *PayPalInfo) SetDirectSettlement(v bool) {
-	o.DirectSettlement = v
 }
 
 // GetPayerId returns the PayerId field value
@@ -155,9 +128,6 @@ func (o PayPalInfo) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.DirectCapture) {
 		toSerialize["directCapture"] = o.DirectCapture
-	}
-	if true {
-		toSerialize["directSettlement"] = o.DirectSettlement
 	}
 	if true {
 		toSerialize["payerId"] = o.PayerId

@@ -10,10 +10,15 @@ Name | Type | Description | Notes
 **CartesBancaires** | Pointer to [**CartesBancairesInfo**](CartesBancairesInfo.md) |  | [optional] 
 **Countries** | Pointer to **[]string** | The list of countries where a payment method is available. By default, all countries supported by the payment method. | [optional] 
 **Currencies** | Pointer to **[]string** | The list of currencies that a payment method supports. By default, all currencies supported by the payment method. | [optional] 
+**CustomRoutingFlags** | Pointer to **[]string** | The list of custom routing flags to route payment to the intended acquirer. | [optional] 
 **GiroPay** | Pointer to [**GiroPayInfo**](GiroPayInfo.md) |  | [optional] 
+**GooglePay** | Pointer to [**GooglePayInfo**](GooglePayInfo.md) |  | [optional] 
 **Klarna** | Pointer to [**KlarnaInfo**](KlarnaInfo.md) |  | [optional] 
+**MealVoucherFR** | Pointer to [**MealVoucherFRInfo**](MealVoucherFRInfo.md) |  | [optional] 
 **Paypal** | Pointer to [**PayPalInfo**](PayPalInfo.md) |  | [optional] 
+**Reference** | Pointer to **string** | Your reference for the payment method. Supported characters a-z, A-Z, 0-9. | [optional] 
 **ShopperInteraction** | Pointer to **string** | The sales channel. Required if the merchant account does not have a sales channel. When you provide this field, it overrides the default sales channel set on the merchant account.  Possible values: **eCommerce**, **pos**, **contAuth**, and **moto**.  | [optional] 
+**ShopperStatement** | Pointer to [**ShopperStatement**](ShopperStatement.md) |  | [optional] 
 **Sofort** | Pointer to [**SofortInfo**](SofortInfo.md) |  | [optional] 
 **StoreId** | Pointer to **string** | The ID of the [store](https://docs.adyen.com/api-explorer/#/ManagementService/latest/post/stores__resParam_id), if any. | [optional] 
 **Swish** | Pointer to [**SwishInfo**](SwishInfo.md) |  | [optional] 
@@ -188,6 +193,31 @@ SetCurrencies sets Currencies field to given value.
 
 HasCurrencies returns a boolean if a field has been set.
 
+### GetCustomRoutingFlags
+
+`func (o *PaymentMethodSetupInfo) GetCustomRoutingFlags() []string`
+
+GetCustomRoutingFlags returns the CustomRoutingFlags field if non-nil, zero value otherwise.
+
+### GetCustomRoutingFlagsOk
+
+`func (o *PaymentMethodSetupInfo) GetCustomRoutingFlagsOk() (*[]string, bool)`
+
+GetCustomRoutingFlagsOk returns a tuple with the CustomRoutingFlags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomRoutingFlags
+
+`func (o *PaymentMethodSetupInfo) SetCustomRoutingFlags(v []string)`
+
+SetCustomRoutingFlags sets CustomRoutingFlags field to given value.
+
+### HasCustomRoutingFlags
+
+`func (o *PaymentMethodSetupInfo) HasCustomRoutingFlags() bool`
+
+HasCustomRoutingFlags returns a boolean if a field has been set.
+
 ### GetGiroPay
 
 `func (o *PaymentMethodSetupInfo) GetGiroPay() GiroPayInfo`
@@ -212,6 +242,31 @@ SetGiroPay sets GiroPay field to given value.
 `func (o *PaymentMethodSetupInfo) HasGiroPay() bool`
 
 HasGiroPay returns a boolean if a field has been set.
+
+### GetGooglePay
+
+`func (o *PaymentMethodSetupInfo) GetGooglePay() GooglePayInfo`
+
+GetGooglePay returns the GooglePay field if non-nil, zero value otherwise.
+
+### GetGooglePayOk
+
+`func (o *PaymentMethodSetupInfo) GetGooglePayOk() (*GooglePayInfo, bool)`
+
+GetGooglePayOk returns a tuple with the GooglePay field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGooglePay
+
+`func (o *PaymentMethodSetupInfo) SetGooglePay(v GooglePayInfo)`
+
+SetGooglePay sets GooglePay field to given value.
+
+### HasGooglePay
+
+`func (o *PaymentMethodSetupInfo) HasGooglePay() bool`
+
+HasGooglePay returns a boolean if a field has been set.
 
 ### GetKlarna
 
@@ -238,6 +293,31 @@ SetKlarna sets Klarna field to given value.
 
 HasKlarna returns a boolean if a field has been set.
 
+### GetMealVoucherFR
+
+`func (o *PaymentMethodSetupInfo) GetMealVoucherFR() MealVoucherFRInfo`
+
+GetMealVoucherFR returns the MealVoucherFR field if non-nil, zero value otherwise.
+
+### GetMealVoucherFROk
+
+`func (o *PaymentMethodSetupInfo) GetMealVoucherFROk() (*MealVoucherFRInfo, bool)`
+
+GetMealVoucherFROk returns a tuple with the MealVoucherFR field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMealVoucherFR
+
+`func (o *PaymentMethodSetupInfo) SetMealVoucherFR(v MealVoucherFRInfo)`
+
+SetMealVoucherFR sets MealVoucherFR field to given value.
+
+### HasMealVoucherFR
+
+`func (o *PaymentMethodSetupInfo) HasMealVoucherFR() bool`
+
+HasMealVoucherFR returns a boolean if a field has been set.
+
 ### GetPaypal
 
 `func (o *PaymentMethodSetupInfo) GetPaypal() PayPalInfo`
@@ -263,6 +343,31 @@ SetPaypal sets Paypal field to given value.
 
 HasPaypal returns a boolean if a field has been set.
 
+### GetReference
+
+`func (o *PaymentMethodSetupInfo) GetReference() string`
+
+GetReference returns the Reference field if non-nil, zero value otherwise.
+
+### GetReferenceOk
+
+`func (o *PaymentMethodSetupInfo) GetReferenceOk() (*string, bool)`
+
+GetReferenceOk returns a tuple with the Reference field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReference
+
+`func (o *PaymentMethodSetupInfo) SetReference(v string)`
+
+SetReference sets Reference field to given value.
+
+### HasReference
+
+`func (o *PaymentMethodSetupInfo) HasReference() bool`
+
+HasReference returns a boolean if a field has been set.
+
 ### GetShopperInteraction
 
 `func (o *PaymentMethodSetupInfo) GetShopperInteraction() string`
@@ -287,6 +392,31 @@ SetShopperInteraction sets ShopperInteraction field to given value.
 `func (o *PaymentMethodSetupInfo) HasShopperInteraction() bool`
 
 HasShopperInteraction returns a boolean if a field has been set.
+
+### GetShopperStatement
+
+`func (o *PaymentMethodSetupInfo) GetShopperStatement() ShopperStatement`
+
+GetShopperStatement returns the ShopperStatement field if non-nil, zero value otherwise.
+
+### GetShopperStatementOk
+
+`func (o *PaymentMethodSetupInfo) GetShopperStatementOk() (*ShopperStatement, bool)`
+
+GetShopperStatementOk returns a tuple with the ShopperStatement field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetShopperStatement
+
+`func (o *PaymentMethodSetupInfo) SetShopperStatement(v ShopperStatement)`
+
+SetShopperStatement sets ShopperStatement field to given value.
+
+### HasShopperStatement
+
+`func (o *PaymentMethodSetupInfo) HasShopperStatement() bool`
+
+HasShopperStatement returns a boolean if a field has been set.
 
 ### GetSofort
 

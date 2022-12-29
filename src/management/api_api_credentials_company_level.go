@@ -1,7 +1,7 @@
 /*
 Management API
 
-Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```
+Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```  ## Going live  To access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:  ```text https://management-live.adyen.com/v1 ```
 
 API version: 1
 Contact: developer-experience@adyen.com
@@ -45,11 +45,11 @@ func (r ApiGetCompaniesCompanyIdApiCredentialsRequest) PageSize(pageSize int32) 
 }
 
 func (r ApiGetCompaniesCompanyIdApiCredentialsRequest) Execute() (*ListCompanyApiCredentialsResponse, *http.Response, error) {
-	return r.ApiService.GetCompaniesCompanyIdApiCredentialsExecute(r)
+	return r.ApiService.ListApiCredentialsExecute(r)
 }
 
 /*
-GetCompaniesCompanyIdApiCredentials Get a list of API credentials
+ListApiCredentials Get a list of API credentials
 
 Returns the list of [API credentials](https://docs.adyen.com/development-resources/api-credentials) for the company account. The list is grouped into pages as defined by the query parameters.
 
@@ -60,7 +60,7 @@ To make this request, your API credential must have the following [roles](https:
  @param companyId The unique identifier of the company account.
  @return ApiGetCompaniesCompanyIdApiCredentialsRequest
 */
-func (a *APICredentialsCompanyLevelApiService) GetCompaniesCompanyIdApiCredentials(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdApiCredentialsRequest {
+func (a *APICredentialsCompanyLevelApiService) ListApiCredentials(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdApiCredentialsRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -76,7 +76,7 @@ func (a *APICredentialsCompanyLevelApiService) GetCompaniesCompanyIdApiCredentia
 
 // Execute executes the request
 //  @return ListCompanyApiCredentialsResponse
-func (a *APICredentialsCompanyLevelApiService) GetCompaniesCompanyIdApiCredentialsExecute(r ApiGetCompaniesCompanyIdApiCredentialsRequest) (*ListCompanyApiCredentialsResponse, *http.Response, error) {
+func (a *APICredentialsCompanyLevelApiService) ListApiCredentialsExecute(r ApiGetCompaniesCompanyIdApiCredentialsRequest) (*ListCompanyApiCredentialsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -232,11 +232,11 @@ type ApiGetCompaniesCompanyIdApiCredentialsApiCredentialIdRequest struct {
 }
 
 func (r ApiGetCompaniesCompanyIdApiCredentialsApiCredentialIdRequest) Execute() (*CompanyApiCredential, *http.Response, error) {
-	return r.ApiService.GetCompaniesCompanyIdApiCredentialsApiCredentialIdExecute(r)
+	return r.ApiService.GetApiCredentialExecute(r)
 }
 
 /*
-GetCompaniesCompanyIdApiCredentialsApiCredentialId Get an API credential
+GetApiCredential Get an API credential
 
 Returns the [API credential](https://docs.adyen.com/development-resources/api-credentials) identified in the path.
 
@@ -248,7 +248,7 @@ To make this request, your API credential must have the following [roles](https:
  @param apiCredentialId Unique identifier of the API credential.
  @return ApiGetCompaniesCompanyIdApiCredentialsApiCredentialIdRequest
 */
-func (a *APICredentialsCompanyLevelApiService) GetCompaniesCompanyIdApiCredentialsApiCredentialId(ctx context.Context, companyId string, apiCredentialId string) ApiGetCompaniesCompanyIdApiCredentialsApiCredentialIdRequest {
+func (a *APICredentialsCompanyLevelApiService) GetApiCredential(ctx context.Context, companyId string, apiCredentialId string) ApiGetCompaniesCompanyIdApiCredentialsApiCredentialIdRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -265,7 +265,7 @@ func (a *APICredentialsCompanyLevelApiService) GetCompaniesCompanyIdApiCredentia
 
 // Execute executes the request
 //  @return CompanyApiCredential
-func (a *APICredentialsCompanyLevelApiService) GetCompaniesCompanyIdApiCredentialsApiCredentialIdExecute(r ApiGetCompaniesCompanyIdApiCredentialsApiCredentialIdRequest) (*CompanyApiCredential, *http.Response, error) {
+func (a *APICredentialsCompanyLevelApiService) GetApiCredentialExecute(r ApiGetCompaniesCompanyIdApiCredentialsApiCredentialIdRequest) (*CompanyApiCredential, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -422,11 +422,11 @@ func (r ApiPatchCompaniesCompanyIdApiCredentialsApiCredentialIdRequest) UpdateCo
 }
 
 func (r ApiPatchCompaniesCompanyIdApiCredentialsApiCredentialIdRequest) Execute() (*CompanyApiCredential, *http.Response, error) {
-	return r.ApiService.PatchCompaniesCompanyIdApiCredentialsApiCredentialIdExecute(r)
+	return r.ApiService.UpdateApiCredentialExecute(r)
 }
 
 /*
-PatchCompaniesCompanyIdApiCredentialsApiCredentialId Update an API credential.
+UpdateApiCredential Update an API credential.
 
 Changes the API credential's roles, merchant account access, or allowed origins. The request has the new values for the fields you want to change. The response contains the full updated API credential, including the new values from the request. 
 
@@ -438,7 +438,7 @@ To make this request, your API credential must have the following [roles](https:
  @param apiCredentialId Unique identifier of the API credential.
  @return ApiPatchCompaniesCompanyIdApiCredentialsApiCredentialIdRequest
 */
-func (a *APICredentialsCompanyLevelApiService) PatchCompaniesCompanyIdApiCredentialsApiCredentialId(ctx context.Context, companyId string, apiCredentialId string) ApiPatchCompaniesCompanyIdApiCredentialsApiCredentialIdRequest {
+func (a *APICredentialsCompanyLevelApiService) UpdateApiCredential(ctx context.Context, companyId string, apiCredentialId string) ApiPatchCompaniesCompanyIdApiCredentialsApiCredentialIdRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -455,7 +455,7 @@ func (a *APICredentialsCompanyLevelApiService) PatchCompaniesCompanyIdApiCredent
 
 // Execute executes the request
 //  @return CompanyApiCredential
-func (a *APICredentialsCompanyLevelApiService) PatchCompaniesCompanyIdApiCredentialsApiCredentialIdExecute(r ApiPatchCompaniesCompanyIdApiCredentialsApiCredentialIdRequest) (*CompanyApiCredential, *http.Response, error) {
+func (a *APICredentialsCompanyLevelApiService) UpdateApiCredentialExecute(r ApiPatchCompaniesCompanyIdApiCredentialsApiCredentialIdRequest) (*CompanyApiCredential, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
@@ -613,11 +613,11 @@ func (r ApiPostCompaniesCompanyIdApiCredentialsRequest) CreateCompanyApiCredenti
 }
 
 func (r ApiPostCompaniesCompanyIdApiCredentialsRequest) Execute() (*CreateCompanyApiCredentialResponse, *http.Response, error) {
-	return r.ApiService.PostCompaniesCompanyIdApiCredentialsExecute(r)
+	return r.ApiService.CreateApiCredentialExecute(r)
 }
 
 /*
-PostCompaniesCompanyIdApiCredentials Create an API credential.
+CreateApiCredential Create an API credential.
 
 Creates an [API credential](https://docs.adyen.com/development-resources/api-credentials) for the company account identified in the path. In the request, you can specify which merchant accounts the new API credential will have access to, as well as its roles and allowed origins.
 
@@ -637,7 +637,7 @@ To make this request, your API credential must have the following [roles](https:
  @param companyId The unique identifier of the company account.
  @return ApiPostCompaniesCompanyIdApiCredentialsRequest
 */
-func (a *APICredentialsCompanyLevelApiService) PostCompaniesCompanyIdApiCredentials(ctx context.Context, companyId string) ApiPostCompaniesCompanyIdApiCredentialsRequest {
+func (a *APICredentialsCompanyLevelApiService) CreateApiCredential(ctx context.Context, companyId string) ApiPostCompaniesCompanyIdApiCredentialsRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -653,7 +653,7 @@ func (a *APICredentialsCompanyLevelApiService) PostCompaniesCompanyIdApiCredenti
 
 // Execute executes the request
 //  @return CreateCompanyApiCredentialResponse
-func (a *APICredentialsCompanyLevelApiService) PostCompaniesCompanyIdApiCredentialsExecute(r ApiPostCompaniesCompanyIdApiCredentialsRequest) (*CreateCompanyApiCredentialResponse, *http.Response, error) {
+func (a *APICredentialsCompanyLevelApiService) CreateApiCredentialExecute(r ApiPostCompaniesCompanyIdApiCredentialsRequest) (*CreateCompanyApiCredentialResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}

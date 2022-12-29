@@ -6,7 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Countries** | Pointer to **[]string** | The list of countries where a payment method is available. By default, all countries supported by the payment method. | [optional] 
 **Currencies** | Pointer to **[]string** | The list of currencies that a payment method supports. By default, all currencies supported by the payment method. | [optional] 
+**CustomRoutingFlags** | Pointer to **[]string** | Custom routing flags for acquirer routing. | [optional] 
 **Enabled** | Pointer to **bool** | Indicates whether the payment method is enabled (**true**) or disabled (**false**). | [optional] 
+**ShopperStatement** | Pointer to [**ShopperStatement**](ShopperStatement.md) |  | [optional] 
 
 ## Methods
 
@@ -77,6 +79,31 @@ SetCurrencies sets Currencies field to given value.
 
 HasCurrencies returns a boolean if a field has been set.
 
+### GetCustomRoutingFlags
+
+`func (o *UpdatePaymentMethodInfo) GetCustomRoutingFlags() []string`
+
+GetCustomRoutingFlags returns the CustomRoutingFlags field if non-nil, zero value otherwise.
+
+### GetCustomRoutingFlagsOk
+
+`func (o *UpdatePaymentMethodInfo) GetCustomRoutingFlagsOk() (*[]string, bool)`
+
+GetCustomRoutingFlagsOk returns a tuple with the CustomRoutingFlags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomRoutingFlags
+
+`func (o *UpdatePaymentMethodInfo) SetCustomRoutingFlags(v []string)`
+
+SetCustomRoutingFlags sets CustomRoutingFlags field to given value.
+
+### HasCustomRoutingFlags
+
+`func (o *UpdatePaymentMethodInfo) HasCustomRoutingFlags() bool`
+
+HasCustomRoutingFlags returns a boolean if a field has been set.
+
 ### GetEnabled
 
 `func (o *UpdatePaymentMethodInfo) GetEnabled() bool`
@@ -101,6 +128,31 @@ SetEnabled sets Enabled field to given value.
 `func (o *UpdatePaymentMethodInfo) HasEnabled() bool`
 
 HasEnabled returns a boolean if a field has been set.
+
+### GetShopperStatement
+
+`func (o *UpdatePaymentMethodInfo) GetShopperStatement() ShopperStatement`
+
+GetShopperStatement returns the ShopperStatement field if non-nil, zero value otherwise.
+
+### GetShopperStatementOk
+
+`func (o *UpdatePaymentMethodInfo) GetShopperStatementOk() (*ShopperStatement, bool)`
+
+GetShopperStatementOk returns a tuple with the ShopperStatement field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetShopperStatement
+
+`func (o *UpdatePaymentMethodInfo) SetShopperStatement(v ShopperStatement)`
+
+SetShopperStatement sets ShopperStatement field to given value.
+
+### HasShopperStatement
+
+`func (o *UpdatePaymentMethodInfo) HasShopperStatement() bool`
+
+HasShopperStatement returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

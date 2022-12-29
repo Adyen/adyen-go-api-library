@@ -1,7 +1,7 @@
 /*
 Management API
 
-Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```
+Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```  ## Going live  To access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:  ```text https://management-live.adyen.com/v1 ```
 
 API version: 1
 Contact: developer-experience@adyen.com
@@ -45,11 +45,11 @@ func (r ApiGetMerchantsMerchantIdUsersRequest) PageSize(pageSize int32) ApiGetMe
 }
 
 func (r ApiGetMerchantsMerchantIdUsersRequest) Execute() (*ListMerchantUsersResponse, *http.Response, error) {
-	return r.ApiService.GetMerchantsMerchantIdUsersExecute(r)
+	return r.ApiService.ListUsersExecute(r)
 }
 
 /*
-GetMerchantsMerchantIdUsers Get a list of users
+ListUsers Get a list of users
 
 Returns a list of users associated with the `merchantId` specified in the path.
 
@@ -61,7 +61,7 @@ To make this request, your API credential must have the following [role](https:/
  @param merchantId Unique identifier of the merchant.
  @return ApiGetMerchantsMerchantIdUsersRequest
 */
-func (a *UsersMerchantLevelApiService) GetMerchantsMerchantIdUsers(ctx context.Context, merchantId string) ApiGetMerchantsMerchantIdUsersRequest {
+func (a *UsersMerchantLevelApiService) ListUsers(ctx context.Context, merchantId string) ApiGetMerchantsMerchantIdUsersRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -77,7 +77,7 @@ func (a *UsersMerchantLevelApiService) GetMerchantsMerchantIdUsers(ctx context.C
 
 // Execute executes the request
 //  @return ListMerchantUsersResponse
-func (a *UsersMerchantLevelApiService) GetMerchantsMerchantIdUsersExecute(r ApiGetMerchantsMerchantIdUsersRequest) (*ListMerchantUsersResponse, *http.Response, error) {
+func (a *UsersMerchantLevelApiService) ListUsersExecute(r ApiGetMerchantsMerchantIdUsersRequest) (*ListMerchantUsersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -233,11 +233,11 @@ type ApiGetMerchantsMerchantIdUsersUserIdRequest struct {
 }
 
 func (r ApiGetMerchantsMerchantIdUsersUserIdRequest) Execute() (*User, *http.Response, error) {
-	return r.ApiService.GetMerchantsMerchantIdUsersUserIdExecute(r)
+	return r.ApiService.GetUserDetailsExecute(r)
 }
 
 /*
-GetMerchantsMerchantIdUsersUserId Get user details
+GetUserDetails Get user details
 
 Returns user details for the `userId` and the `merchantId` specified in the path.
 
@@ -250,7 +250,7 @@ To make this request, your API credential must have the following [role](https:/
  @param userId Unique identifier of the user.
  @return ApiGetMerchantsMerchantIdUsersUserIdRequest
 */
-func (a *UsersMerchantLevelApiService) GetMerchantsMerchantIdUsersUserId(ctx context.Context, merchantId string, userId string) ApiGetMerchantsMerchantIdUsersUserIdRequest {
+func (a *UsersMerchantLevelApiService) GetUserDetails(ctx context.Context, merchantId string, userId string) ApiGetMerchantsMerchantIdUsersUserIdRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -267,7 +267,7 @@ func (a *UsersMerchantLevelApiService) GetMerchantsMerchantIdUsersUserId(ctx con
 
 // Execute executes the request
 //  @return User
-func (a *UsersMerchantLevelApiService) GetMerchantsMerchantIdUsersUserIdExecute(r ApiGetMerchantsMerchantIdUsersUserIdRequest) (*User, *http.Response, error) {
+func (a *UsersMerchantLevelApiService) GetUserDetailsExecute(r ApiGetMerchantsMerchantIdUsersUserIdRequest) (*User, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -424,11 +424,11 @@ func (r ApiPatchMerchantsMerchantIdUsersUserIdRequest) UpdateMerchantUserRequest
 }
 
 func (r ApiPatchMerchantsMerchantIdUsersUserIdRequest) Execute() (*User, *http.Response, error) {
-	return r.ApiService.PatchMerchantsMerchantIdUsersUserIdExecute(r)
+	return r.ApiService.UpdateUserExecute(r)
 }
 
 /*
-PatchMerchantsMerchantIdUsersUserId Update a user
+UpdateUser Update a user
 
 Updates user details for the `userId` and the `merchantId` specified in the path.
 
@@ -441,7 +441,7 @@ To make this request, your API credential must have the following [role](https:/
  @param userId Unique identifier of the user.
  @return ApiPatchMerchantsMerchantIdUsersUserIdRequest
 */
-func (a *UsersMerchantLevelApiService) PatchMerchantsMerchantIdUsersUserId(ctx context.Context, merchantId string, userId string) ApiPatchMerchantsMerchantIdUsersUserIdRequest {
+func (a *UsersMerchantLevelApiService) UpdateUser(ctx context.Context, merchantId string, userId string) ApiPatchMerchantsMerchantIdUsersUserIdRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -458,7 +458,7 @@ func (a *UsersMerchantLevelApiService) PatchMerchantsMerchantIdUsersUserId(ctx c
 
 // Execute executes the request
 //  @return User
-func (a *UsersMerchantLevelApiService) PatchMerchantsMerchantIdUsersUserIdExecute(r ApiPatchMerchantsMerchantIdUsersUserIdRequest) (*User, *http.Response, error) {
+func (a *UsersMerchantLevelApiService) UpdateUserExecute(r ApiPatchMerchantsMerchantIdUsersUserIdRequest) (*User, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
@@ -616,11 +616,11 @@ func (r ApiPostMerchantsMerchantIdUsersRequest) CreateMerchantUserRequest(create
 }
 
 func (r ApiPostMerchantsMerchantIdUsersRequest) Execute() (*CreateUserResponse, *http.Response, error) {
-	return r.ApiService.PostMerchantsMerchantIdUsersExecute(r)
+	return r.ApiService.CreateNewUserExecute(r)
 }
 
 /*
-PostMerchantsMerchantIdUsers Create a new user
+CreateNewUser Create a new user
 
 Creates a user for the `merchantId` specified in the path.
 
@@ -632,7 +632,7 @@ To make this request, your API credential must have the following [role](https:/
  @param merchantId Unique identifier of the merchant.
  @return ApiPostMerchantsMerchantIdUsersRequest
 */
-func (a *UsersMerchantLevelApiService) PostMerchantsMerchantIdUsers(ctx context.Context, merchantId string) ApiPostMerchantsMerchantIdUsersRequest {
+func (a *UsersMerchantLevelApiService) CreateNewUser(ctx context.Context, merchantId string) ApiPostMerchantsMerchantIdUsersRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -648,7 +648,7 @@ func (a *UsersMerchantLevelApiService) PostMerchantsMerchantIdUsers(ctx context.
 
 // Execute executes the request
 //  @return CreateUserResponse
-func (a *UsersMerchantLevelApiService) PostMerchantsMerchantIdUsersExecute(r ApiPostMerchantsMerchantIdUsersRequest) (*CreateUserResponse, *http.Response, error) {
+func (a *UsersMerchantLevelApiService) CreateNewUserExecute(r ApiPostMerchantsMerchantIdUsersRequest) (*CreateUserResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}

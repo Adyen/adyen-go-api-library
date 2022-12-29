@@ -1,7 +1,7 @@
 /*
 Management API
 
-Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```
+Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```  ## Going live  To access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:  ```text https://management-live.adyen.com/v1 ```
 
 API version: 1
 Contact: developer-experience@adyen.com
@@ -26,27 +26,27 @@ type Terminal struct {
 	BluetoothMac *string `json:"bluetoothMac,omitempty"`
 	// The city where the terminal is located.
 	City *string `json:"city,omitempty"`
-	// The company account of the terminal.
+	// The company account that the terminal is associated with. If this is the only account level shown in the response, the terminal is assigned to the inventory of the company account.
 	CompanyAccount *string `json:"companyAccount,omitempty"`
-	// The country code where the terminal is located.
+	// The country code of the country where the terminal is located.
 	CountryCode *string `json:"countryCode,omitempty"`
-	// The terminal model of the device.
+	// The model name of the terminal.
 	DeviceModel *string `json:"deviceModel,omitempty"`
 	// The ethernet IP address of the terminal.
 	EthernetIp *string `json:"ethernetIp,omitempty"`
 	// The ethernet MAC address of the terminal.
 	EthernetMac *string `json:"ethernetMac,omitempty"`
-	// The firmware Version of the terminal.
+	// The software release currently in use on the terminal.
 	FirmwareVersion *string `json:"firmwareVersion,omitempty"`
-	// The ICCID number of the cellular communications card.
+	// The integrated circuit card identifier (ICCID) of the SIM card in the terminal.
 	Iccid *string `json:"iccid,omitempty"`
 	// The unique identifier of the terminal.
 	Id *string `json:"id,omitempty"`
-	// The last Activity Date and Time of the terminal.
+	// Date and time of the last activity on the terminal. Not included when the last activity was more than 14 days ago.
 	LastActivityDateTime *time.Time `json:"lastActivityDateTime,omitempty"`
-	// The last Transaction Date and Time of the terminal.
+	// Date and time of the last transaction on the terminal. Not included when the last transaction was more than 14 days ago.
 	LastTransactionDateTime *time.Time `json:"lastTransactionDateTime,omitempty"`
-	// The ethernet link speed of the terminal that was negotiated.
+	// The Ethernet link negotiation that the terminal uses:  - `auto`: Auto-negotiation  - `100full`: 100 Mbps full duplex
 	LinkNegotiation *string `json:"linkNegotiation,omitempty"`
 	// The serial number of the terminal.
 	SerialNumber *string `json:"serialNumber,omitempty"`
@@ -54,13 +54,13 @@ type Terminal struct {
 	SimStatus *string `json:"simStatus,omitempty"`
 	// Indicates when the terminal was last online, whether the terminal is being reassigned, or whether the terminal is turned off. If the terminal was last online more that a week ago, it is also shown as turned off.
 	Status *string `json:"status,omitempty"`
-	// The Status of store where the terminal is located.
+	// The status of the store that the terminal is assigned to.
 	StoreStatus *string `json:"storeStatus,omitempty"`
-	// The WiFi IP address of the terminal.
+	// The terminal's IP address in your Wi-Fi network.
 	WifiIp *string `json:"wifiIp,omitempty"`
-	// The WiFi MAC address of the terminal.
+	// The terminal's MAC address in your Wi-Fi network.
 	WifiMac *string `json:"wifiMac,omitempty"`
-	// The WIFI SSID of the terminal.
+	// The SSID of the Wi-Fi network that your terminal is connected to.
 	WifiSsid *string `json:"wifiSsid,omitempty"`
 }
 

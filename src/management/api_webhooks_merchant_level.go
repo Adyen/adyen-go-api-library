@@ -1,7 +1,7 @@
 /*
 Management API
 
-Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```
+Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```  ## Going live  To access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:  ```text https://management-live.adyen.com/v1 ```
 
 API version: 1
 Contact: developer-experience@adyen.com
@@ -32,11 +32,11 @@ type ApiDeleteMerchantsMerchantIdWebhooksWebhookIdRequest struct {
 }
 
 func (r ApiDeleteMerchantsMerchantIdWebhooksWebhookIdRequest) Execute() (*http.Response, error) {
-	return r.ApiService.DeleteMerchantsMerchantIdWebhooksWebhookIdExecute(r)
+	return r.ApiService.RemoveWebhookExecute(r)
 }
 
 /*
-DeleteMerchantsMerchantIdWebhooksWebhookId Remove a webhook
+RemoveWebhook Remove a webhook
 
 Remove the configuration for the webhook identified in the path.
 
@@ -48,7 +48,7 @@ To make this request, your API credential must have the following [roles](https:
  @param webhookId Unique identifier of the webhook configuration.
  @return ApiDeleteMerchantsMerchantIdWebhooksWebhookIdRequest
 */
-func (a *WebhooksMerchantLevelApiService) DeleteMerchantsMerchantIdWebhooksWebhookId(ctx context.Context, merchantId string, webhookId string) ApiDeleteMerchantsMerchantIdWebhooksWebhookIdRequest {
+func (a *WebhooksMerchantLevelApiService) RemoveWebhook(ctx context.Context, merchantId string, webhookId string) ApiDeleteMerchantsMerchantIdWebhooksWebhookIdRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -64,7 +64,7 @@ func (a *WebhooksMerchantLevelApiService) DeleteMerchantsMerchantIdWebhooksWebho
 }
 
 // Execute executes the request
-func (a *WebhooksMerchantLevelApiService) DeleteMerchantsMerchantIdWebhooksWebhookIdExecute(r ApiDeleteMerchantsMerchantIdWebhooksWebhookIdRequest) (*http.Response, error) {
+func (a *WebhooksMerchantLevelApiService) RemoveWebhookExecute(r ApiDeleteMerchantsMerchantIdWebhooksWebhookIdRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
@@ -218,11 +218,11 @@ func (r ApiGetMerchantsMerchantIdWebhooksRequest) PageSize(pageSize int32) ApiGe
 }
 
 func (r ApiGetMerchantsMerchantIdWebhooksRequest) Execute() (*ListWebhooksResponse, *http.Response, error) {
-	return r.ApiService.GetMerchantsMerchantIdWebhooksExecute(r)
+	return r.ApiService.ListAllWebhooksExecute(r)
 }
 
 /*
-GetMerchantsMerchantIdWebhooks List all webhooks
+ListAllWebhooks List all webhooks
 
 Lists all webhook configurations for the merchant account.
 
@@ -234,7 +234,7 @@ To make this request, your API credential must have one of the following [roles]
  @param merchantId The unique identifier of the merchant account.
  @return ApiGetMerchantsMerchantIdWebhooksRequest
 */
-func (a *WebhooksMerchantLevelApiService) GetMerchantsMerchantIdWebhooks(ctx context.Context, merchantId string) ApiGetMerchantsMerchantIdWebhooksRequest {
+func (a *WebhooksMerchantLevelApiService) ListAllWebhooks(ctx context.Context, merchantId string) ApiGetMerchantsMerchantIdWebhooksRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -250,7 +250,7 @@ func (a *WebhooksMerchantLevelApiService) GetMerchantsMerchantIdWebhooks(ctx con
 
 // Execute executes the request
 //  @return ListWebhooksResponse
-func (a *WebhooksMerchantLevelApiService) GetMerchantsMerchantIdWebhooksExecute(r ApiGetMerchantsMerchantIdWebhooksRequest) (*ListWebhooksResponse, *http.Response, error) {
+func (a *WebhooksMerchantLevelApiService) ListAllWebhooksExecute(r ApiGetMerchantsMerchantIdWebhooksRequest) (*ListWebhooksResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -406,11 +406,11 @@ type ApiGetMerchantsMerchantIdWebhooksWebhookIdRequest struct {
 }
 
 func (r ApiGetMerchantsMerchantIdWebhooksWebhookIdRequest) Execute() (*Webhook, *http.Response, error) {
-	return r.ApiService.GetMerchantsMerchantIdWebhooksWebhookIdExecute(r)
+	return r.ApiService.GetWebhookExecute(r)
 }
 
 /*
-GetMerchantsMerchantIdWebhooksWebhookId Get a webhook
+GetWebhook Get a webhook
 
 Returns the configuration for the webhook identified in the path.
 
@@ -423,7 +423,7 @@ To make this request, your API credential must have one of the following [roles]
  @param webhookId Unique identifier of the webhook configuration.
  @return ApiGetMerchantsMerchantIdWebhooksWebhookIdRequest
 */
-func (a *WebhooksMerchantLevelApiService) GetMerchantsMerchantIdWebhooksWebhookId(ctx context.Context, merchantId string, webhookId string) ApiGetMerchantsMerchantIdWebhooksWebhookIdRequest {
+func (a *WebhooksMerchantLevelApiService) GetWebhook(ctx context.Context, merchantId string, webhookId string) ApiGetMerchantsMerchantIdWebhooksWebhookIdRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -440,7 +440,7 @@ func (a *WebhooksMerchantLevelApiService) GetMerchantsMerchantIdWebhooksWebhookI
 
 // Execute executes the request
 //  @return Webhook
-func (a *WebhooksMerchantLevelApiService) GetMerchantsMerchantIdWebhooksWebhookIdExecute(r ApiGetMerchantsMerchantIdWebhooksWebhookIdRequest) (*Webhook, *http.Response, error) {
+func (a *WebhooksMerchantLevelApiService) GetWebhookExecute(r ApiGetMerchantsMerchantIdWebhooksWebhookIdRequest) (*Webhook, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -597,11 +597,11 @@ func (r ApiPatchMerchantsMerchantIdWebhooksWebhookIdRequest) UpdateMerchantWebho
 }
 
 func (r ApiPatchMerchantsMerchantIdWebhooksWebhookIdRequest) Execute() (*Webhook, *http.Response, error) {
-	return r.ApiService.PatchMerchantsMerchantIdWebhooksWebhookIdExecute(r)
+	return r.ApiService.UpdateWebhookExecute(r)
 }
 
 /*
-PatchMerchantsMerchantIdWebhooksWebhookId Update a webhook
+UpdateWebhook Update a webhook
 
 Make changes to the configuration of the webhook identified in the path. The request contains the new values you want to have in the webhook configuration. The response contains the full configuration for the webhook, which includes the new values from the request.
 
@@ -613,7 +613,7 @@ To make this request, your API credential must have the following [roles](https:
  @param webhookId Unique identifier of the webhook configuration.
  @return ApiPatchMerchantsMerchantIdWebhooksWebhookIdRequest
 */
-func (a *WebhooksMerchantLevelApiService) PatchMerchantsMerchantIdWebhooksWebhookId(ctx context.Context, merchantId string, webhookId string) ApiPatchMerchantsMerchantIdWebhooksWebhookIdRequest {
+func (a *WebhooksMerchantLevelApiService) UpdateWebhook(ctx context.Context, merchantId string, webhookId string) ApiPatchMerchantsMerchantIdWebhooksWebhookIdRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -630,7 +630,7 @@ func (a *WebhooksMerchantLevelApiService) PatchMerchantsMerchantIdWebhooksWebhoo
 
 // Execute executes the request
 //  @return Webhook
-func (a *WebhooksMerchantLevelApiService) PatchMerchantsMerchantIdWebhooksWebhookIdExecute(r ApiPatchMerchantsMerchantIdWebhooksWebhookIdRequest) (*Webhook, *http.Response, error) {
+func (a *WebhooksMerchantLevelApiService) UpdateWebhookExecute(r ApiPatchMerchantsMerchantIdWebhooksWebhookIdRequest) (*Webhook, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
@@ -788,11 +788,11 @@ func (r ApiPostMerchantsMerchantIdWebhooksRequest) CreateMerchantWebhookRequest(
 }
 
 func (r ApiPostMerchantsMerchantIdWebhooksRequest) Execute() (*Webhook, *http.Response, error) {
-	return r.ApiService.PostMerchantsMerchantIdWebhooksExecute(r)
+	return r.ApiService.SetUpWebhookExecute(r)
 }
 
 /*
-PostMerchantsMerchantIdWebhooks Set up a webhook
+SetUpWebhook Set up a webhook
 
 Subscribe to receive webhook notifications about events related to your merchant account. You can add basic authentication to make sure the data is secure.
 
@@ -803,7 +803,7 @@ To make this request, your API credential must have the following [roles](https:
  @param merchantId The unique identifier of the merchant account.
  @return ApiPostMerchantsMerchantIdWebhooksRequest
 */
-func (a *WebhooksMerchantLevelApiService) PostMerchantsMerchantIdWebhooks(ctx context.Context, merchantId string) ApiPostMerchantsMerchantIdWebhooksRequest {
+func (a *WebhooksMerchantLevelApiService) SetUpWebhook(ctx context.Context, merchantId string) ApiPostMerchantsMerchantIdWebhooksRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -819,7 +819,7 @@ func (a *WebhooksMerchantLevelApiService) PostMerchantsMerchantIdWebhooks(ctx co
 
 // Execute executes the request
 //  @return Webhook
-func (a *WebhooksMerchantLevelApiService) PostMerchantsMerchantIdWebhooksExecute(r ApiPostMerchantsMerchantIdWebhooksRequest) (*Webhook, *http.Response, error) {
+func (a *WebhooksMerchantLevelApiService) SetUpWebhookExecute(r ApiPostMerchantsMerchantIdWebhooksRequest) (*Webhook, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -971,11 +971,11 @@ type ApiPostMerchantsMerchantIdWebhooksWebhookIdGenerateHmacRequest struct {
 }
 
 func (r ApiPostMerchantsMerchantIdWebhooksWebhookIdGenerateHmacRequest) Execute() (*GenerateHmacKeyResponse, *http.Response, error) {
-	return r.ApiService.PostMerchantsMerchantIdWebhooksWebhookIdGenerateHmacExecute(r)
+	return r.ApiService.GenerateHmacKeyExecute(r)
 }
 
 /*
-PostMerchantsMerchantIdWebhooksWebhookIdGenerateHmac Generate an HMAC key
+GenerateHmacKey Generate an HMAC key
 
 Returns an [HMAC key](https://en.wikipedia.org/wiki/HMAC) for the webhook identified in the path. This key allows you to check the integrity and the origin of the notifications you receive.By creating an HMAC key, you start receiving [HMAC-signed notifications](https://docs.adyen.com/development-resources/webhooks/verify-hmac-signatures#enable-hmac-signatures) from Adyen. Find out more about how to [verify HMAC signatures](https://docs.adyen.com/development-resources/webhooks/verify-hmac-signatures).
 
@@ -987,7 +987,7 @@ To make this request, your API credential must have the following [roles](https:
  @param webhookId
  @return ApiPostMerchantsMerchantIdWebhooksWebhookIdGenerateHmacRequest
 */
-func (a *WebhooksMerchantLevelApiService) PostMerchantsMerchantIdWebhooksWebhookIdGenerateHmac(ctx context.Context, merchantId string, webhookId string) ApiPostMerchantsMerchantIdWebhooksWebhookIdGenerateHmacRequest {
+func (a *WebhooksMerchantLevelApiService) GenerateHmacKey(ctx context.Context, merchantId string, webhookId string) ApiPostMerchantsMerchantIdWebhooksWebhookIdGenerateHmacRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -1004,7 +1004,7 @@ func (a *WebhooksMerchantLevelApiService) PostMerchantsMerchantIdWebhooksWebhook
 
 // Execute executes the request
 //  @return GenerateHmacKeyResponse
-func (a *WebhooksMerchantLevelApiService) PostMerchantsMerchantIdWebhooksWebhookIdGenerateHmacExecute(r ApiPostMerchantsMerchantIdWebhooksWebhookIdGenerateHmacRequest) (*GenerateHmacKeyResponse, *http.Response, error) {
+func (a *WebhooksMerchantLevelApiService) GenerateHmacKeyExecute(r ApiPostMerchantsMerchantIdWebhooksWebhookIdGenerateHmacRequest) (*GenerateHmacKeyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1161,11 +1161,11 @@ func (r ApiPostMerchantsMerchantIdWebhooksWebhookIdTestRequest) TestWebhookReque
 }
 
 func (r ApiPostMerchantsMerchantIdWebhooksWebhookIdTestRequest) Execute() (*TestWebhookResponse, *http.Response, error) {
-	return r.ApiService.PostMerchantsMerchantIdWebhooksWebhookIdTestExecute(r)
+	return r.ApiService.TestWebhookExecute(r)
 }
 
 /*
-PostMerchantsMerchantIdWebhooksWebhookIdTest Test a webhook
+TestWebhook Test a webhook
 
 Sends sample notifications to test if the webhook is set up correctly.
 
@@ -1181,7 +1181,7 @@ To make this request, your API credential must have the following [roles](https:
  @param webhookId Unique identifier of the webhook configuration.
  @return ApiPostMerchantsMerchantIdWebhooksWebhookIdTestRequest
 */
-func (a *WebhooksMerchantLevelApiService) PostMerchantsMerchantIdWebhooksWebhookIdTest(ctx context.Context, merchantId string, webhookId string) ApiPostMerchantsMerchantIdWebhooksWebhookIdTestRequest {
+func (a *WebhooksMerchantLevelApiService) TestWebhook(ctx context.Context, merchantId string, webhookId string) ApiPostMerchantsMerchantIdWebhooksWebhookIdTestRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -1198,7 +1198,7 @@ func (a *WebhooksMerchantLevelApiService) PostMerchantsMerchantIdWebhooksWebhook
 
 // Execute executes the request
 //  @return TestWebhookResponse
-func (a *WebhooksMerchantLevelApiService) PostMerchantsMerchantIdWebhooksWebhookIdTestExecute(r ApiPostMerchantsMerchantIdWebhooksWebhookIdTestRequest) (*TestWebhookResponse, *http.Response, error) {
+func (a *WebhooksMerchantLevelApiService) TestWebhookExecute(r ApiPostMerchantsMerchantIdWebhooksWebhookIdTestRequest) (*TestWebhookResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}

@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** |  | [optional] 
-**TerminalId** | Pointer to **string** |  | [optional] 
+**Id** | Pointer to **string** | The ID of the action on the specified terminal. | [optional] 
+**TerminalId** | Pointer to **string** | The unique ID of the terminal that the action applies to. | [optional] 
 
 ## Methods
 

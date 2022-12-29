@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AllowCustomAmount** | Pointer to **bool** | Indicates whether one of the predefined tipping options is to let the shopper enter a custom tip. If **true**, only three of the other options defined in &#x60;predefinedTipEntries&#x60; are shown. | [optional] 
 **Currency** | Pointer to **string** | The currency that the tipping settings apply to. | [optional] 
-**PredefinedTipEntries** | Pointer to **[]string** | Tipping options the shopper can choose from if &#x60;usePredefinedTipEntries&#x60; is **true**. The maximum number of predefined options is four, or three plus the option to enter a custom tip. The options can be a mix of:  - A percentage of the transaction amount. Example: **5%** - A tip amount in minor units. Example: **500** for a EUR 5 tip. | [optional] 
+**PredefinedTipEntries** | Pointer to **[]string** | Tipping options the shopper can choose from if &#x60;usePredefinedTipEntries&#x60; is **true**. The maximum number of predefined options is four, or three plus the option to enter a custom tip. The options can be a mix of:  - A percentage of the transaction amount. Example: **5%** - A tip amount in [minor units](https://docs.adyen.com/development-resources/currency-codes). Example: **500** for a EUR 5 tip. | [optional] 
 **UsePredefinedTipEntries** | Pointer to **bool** | Indicates whether the terminal shows a prompt to enter a tip (**false**), or predefined tipping options to choose from (**true**). | [optional] 
 
 ## Methods

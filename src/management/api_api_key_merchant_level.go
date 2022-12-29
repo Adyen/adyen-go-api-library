@@ -1,7 +1,7 @@
 /*
 Management API
 
-Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```
+Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```  ## Going live  To access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:  ```text https://management-live.adyen.com/v1 ```
 
 API version: 1
 Contact: developer-experience@adyen.com
@@ -32,11 +32,11 @@ type ApiPostMerchantsMerchantIdApiCredentialsApiCredentialIdGenerateApiKeyReques
 }
 
 func (r ApiPostMerchantsMerchantIdApiCredentialsApiCredentialIdGenerateApiKeyRequest) Execute() (*GenerateApiKeyResponse, *http.Response, error) {
-	return r.ApiService.PostMerchantsMerchantIdApiCredentialsApiCredentialIdGenerateApiKeyExecute(r)
+	return r.ApiService.GenerateNewApiKeyExecute(r)
 }
 
 /*
-PostMerchantsMerchantIdApiCredentialsApiCredentialIdGenerateApiKey Generate new API key
+GenerateNewApiKey Generate new API key
 
 Returns a new API key for the API credential. You can use the new API key a few minutes after generating it. The old API key stops working 24 hours after generating a new one.
 
@@ -48,7 +48,7 @@ To make this request, your API credential must have the following [roles](https:
  @param apiCredentialId Unique identifier of the API credential.
  @return ApiPostMerchantsMerchantIdApiCredentialsApiCredentialIdGenerateApiKeyRequest
 */
-func (a *APIKeyMerchantLevelApiService) PostMerchantsMerchantIdApiCredentialsApiCredentialIdGenerateApiKey(ctx context.Context, merchantId string, apiCredentialId string) ApiPostMerchantsMerchantIdApiCredentialsApiCredentialIdGenerateApiKeyRequest {
+func (a *APIKeyMerchantLevelApiService) GenerateNewApiKey(ctx context.Context, merchantId string, apiCredentialId string) ApiPostMerchantsMerchantIdApiCredentialsApiCredentialIdGenerateApiKeyRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -65,7 +65,7 @@ func (a *APIKeyMerchantLevelApiService) PostMerchantsMerchantIdApiCredentialsApi
 
 // Execute executes the request
 //  @return GenerateApiKeyResponse
-func (a *APIKeyMerchantLevelApiService) PostMerchantsMerchantIdApiCredentialsApiCredentialIdGenerateApiKeyExecute(r ApiPostMerchantsMerchantIdApiCredentialsApiCredentialIdGenerateApiKeyRequest) (*GenerateApiKeyResponse, *http.Response, error) {
+func (a *APIKeyMerchantLevelApiService) GenerateNewApiKeyExecute(r ApiPostMerchantsMerchantIdApiCredentialsApiCredentialIdGenerateApiKeyRequest) (*GenerateApiKeyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}

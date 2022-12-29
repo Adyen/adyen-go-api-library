@@ -1,7 +1,7 @@
 /*
 Management API
 
-Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```
+Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```  ## Going live  To access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:  ```text https://management-live.adyen.com/v1 ```
 
 API version: 1
 Contact: developer-experience@adyen.com
@@ -32,11 +32,11 @@ type ApiPostMerchantsMerchantIdApiCredentialsApiCredentialIdGenerateClientKeyReq
 }
 
 func (r ApiPostMerchantsMerchantIdApiCredentialsApiCredentialIdGenerateClientKeyRequest) Execute() (*GenerateClientKeyResponse, *http.Response, error) {
-	return r.ApiService.PostMerchantsMerchantIdApiCredentialsApiCredentialIdGenerateClientKeyExecute(r)
+	return r.ApiService.GenerateNewClientKeyExecute(r)
 }
 
 /*
-PostMerchantsMerchantIdApiCredentialsApiCredentialIdGenerateClientKey Generate new client key
+GenerateNewClientKey Generate new client key
 
 Returns a new [client key](https://docs.adyen.com/development-resources/client-side-authentication#how-it-works) for the API credential identified in the path. You can use the new client key a few minutes after generating it. The old client key stops working 24 hours after generating a new one.
 
@@ -48,7 +48,7 @@ To make this request, your API credential must have the following [roles](https:
  @param apiCredentialId Unique identifier of the API credential.
  @return ApiPostMerchantsMerchantIdApiCredentialsApiCredentialIdGenerateClientKeyRequest
 */
-func (a *ClientKeyMerchantLevelApiService) PostMerchantsMerchantIdApiCredentialsApiCredentialIdGenerateClientKey(ctx context.Context, merchantId string, apiCredentialId string) ApiPostMerchantsMerchantIdApiCredentialsApiCredentialIdGenerateClientKeyRequest {
+func (a *ClientKeyMerchantLevelApiService) GenerateNewClientKey(ctx context.Context, merchantId string, apiCredentialId string) ApiPostMerchantsMerchantIdApiCredentialsApiCredentialIdGenerateClientKeyRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -65,7 +65,7 @@ func (a *ClientKeyMerchantLevelApiService) PostMerchantsMerchantIdApiCredentials
 
 // Execute executes the request
 //  @return GenerateClientKeyResponse
-func (a *ClientKeyMerchantLevelApiService) PostMerchantsMerchantIdApiCredentialsApiCredentialIdGenerateClientKeyExecute(r ApiPostMerchantsMerchantIdApiCredentialsApiCredentialIdGenerateClientKeyRequest) (*GenerateClientKeyResponse, *http.Response, error) {
+func (a *ClientKeyMerchantLevelApiService) GenerateNewClientKeyExecute(r ApiPostMerchantsMerchantIdApiCredentialsApiCredentialIdGenerateClientKeyRequest) (*GenerateClientKeyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}

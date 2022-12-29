@@ -1,7 +1,7 @@
 /*
 Management API
 
-Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```
+Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```  ## Going live  To access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:  ```text https://management-live.adyen.com/v1 ```
 
 API version: 1
 Contact: developer-experience@adyen.com
@@ -21,6 +21,8 @@ type Signature struct {
 	AskSignatureOnScreen *bool `json:"askSignatureOnScreen,omitempty"`
 	// Name that identifies the terminal.
 	DeviceName *string `json:"deviceName,omitempty"`
+	// Slogan shown on the start screen of the device.
+	DeviceSlogan *string `json:"deviceSlogan,omitempty"`
 	// Skip asking for a signature. This is possible because all global card schemes (American Express, Diners, Discover, JCB, MasterCard, VISA, and UnionPay) regard a signature as optional.
 	SkipSignature *bool `json:"skipSignature,omitempty"`
 }
@@ -106,6 +108,38 @@ func (o *Signature) SetDeviceName(v string) {
 	o.DeviceName = &v
 }
 
+// GetDeviceSlogan returns the DeviceSlogan field value if set, zero value otherwise.
+func (o *Signature) GetDeviceSlogan() string {
+	if o == nil || isNil(o.DeviceSlogan) {
+		var ret string
+		return ret
+	}
+	return *o.DeviceSlogan
+}
+
+// GetDeviceSloganOk returns a tuple with the DeviceSlogan field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Signature) GetDeviceSloganOk() (*string, bool) {
+	if o == nil || isNil(o.DeviceSlogan) {
+		return nil, false
+	}
+	return o.DeviceSlogan, true
+}
+
+// HasDeviceSlogan returns a boolean if a field has been set.
+func (o *Signature) HasDeviceSlogan() bool {
+	if o != nil && !isNil(o.DeviceSlogan) {
+		return true
+	}
+
+	return false
+}
+
+// SetDeviceSlogan gets a reference to the given string and assigns it to the DeviceSlogan field.
+func (o *Signature) SetDeviceSlogan(v string) {
+	o.DeviceSlogan = &v
+}
+
 // GetSkipSignature returns the SkipSignature field value if set, zero value otherwise.
 func (o *Signature) GetSkipSignature() bool {
 	if o == nil || isNil(o.SkipSignature) {
@@ -145,6 +179,9 @@ func (o Signature) MarshalJSON() ([]byte, error) {
 	}
 	if !isNil(o.DeviceName) {
 		toSerialize["deviceName"] = o.DeviceName
+	}
+	if !isNil(o.DeviceSlogan) {
+		toSerialize["deviceSlogan"] = o.DeviceSlogan
 	}
 	if !isNil(o.SkipSignature) {
 		toSerialize["skipSignature"] = o.SkipSignature

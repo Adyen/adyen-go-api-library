@@ -1,7 +1,7 @@
 /*
 Management API
 
-Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```
+Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```  ## Going live  To access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:  ```text https://management-live.adyen.com/v1 ```
 
 API version: 1
 Contact: developer-experience@adyen.com
@@ -32,11 +32,11 @@ type ApiDeleteCompaniesCompanyIdWebhooksWebhookIdRequest struct {
 }
 
 func (r ApiDeleteCompaniesCompanyIdWebhooksWebhookIdRequest) Execute() (*http.Response, error) {
-	return r.ApiService.DeleteCompaniesCompanyIdWebhooksWebhookIdExecute(r)
+	return r.ApiService.RemoveWebhookExecute(r)
 }
 
 /*
-DeleteCompaniesCompanyIdWebhooksWebhookId Remove a webhook
+RemoveWebhook Remove a webhook
 
 Remove the configuration for the webhook identified in the path.
 
@@ -48,7 +48,7 @@ To make this request, your API credential must have the following [roles](https:
  @param webhookId Unique identifier of the webhook configuration.
  @return ApiDeleteCompaniesCompanyIdWebhooksWebhookIdRequest
 */
-func (a *WebhooksCompanyLevelApiService) DeleteCompaniesCompanyIdWebhooksWebhookId(ctx context.Context, companyId string, webhookId string) ApiDeleteCompaniesCompanyIdWebhooksWebhookIdRequest {
+func (a *WebhooksCompanyLevelApiService) RemoveWebhook(ctx context.Context, companyId string, webhookId string) ApiDeleteCompaniesCompanyIdWebhooksWebhookIdRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -64,7 +64,7 @@ func (a *WebhooksCompanyLevelApiService) DeleteCompaniesCompanyIdWebhooksWebhook
 }
 
 // Execute executes the request
-func (a *WebhooksCompanyLevelApiService) DeleteCompaniesCompanyIdWebhooksWebhookIdExecute(r ApiDeleteCompaniesCompanyIdWebhooksWebhookIdRequest) (*http.Response, error) {
+func (a *WebhooksCompanyLevelApiService) RemoveWebhookExecute(r ApiDeleteCompaniesCompanyIdWebhooksWebhookIdRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
@@ -218,11 +218,11 @@ func (r ApiGetCompaniesCompanyIdWebhooksRequest) PageSize(pageSize int32) ApiGet
 }
 
 func (r ApiGetCompaniesCompanyIdWebhooksRequest) Execute() (*ListWebhooksResponse, *http.Response, error) {
-	return r.ApiService.GetCompaniesCompanyIdWebhooksExecute(r)
+	return r.ApiService.ListAllWebhooksExecute(r)
 }
 
 /*
-GetCompaniesCompanyIdWebhooks List all webhooks
+ListAllWebhooks List all webhooks
 
 Lists all webhook configurations for the company account.
 
@@ -234,7 +234,7 @@ To make this request, your API credential must have one of the following [roles]
  @param companyId Unique identifier of the [company account](https://docs.adyen.com/account/account-structure#company-account).
  @return ApiGetCompaniesCompanyIdWebhooksRequest
 */
-func (a *WebhooksCompanyLevelApiService) GetCompaniesCompanyIdWebhooks(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdWebhooksRequest {
+func (a *WebhooksCompanyLevelApiService) ListAllWebhooks(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdWebhooksRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -250,7 +250,7 @@ func (a *WebhooksCompanyLevelApiService) GetCompaniesCompanyIdWebhooks(ctx conte
 
 // Execute executes the request
 //  @return ListWebhooksResponse
-func (a *WebhooksCompanyLevelApiService) GetCompaniesCompanyIdWebhooksExecute(r ApiGetCompaniesCompanyIdWebhooksRequest) (*ListWebhooksResponse, *http.Response, error) {
+func (a *WebhooksCompanyLevelApiService) ListAllWebhooksExecute(r ApiGetCompaniesCompanyIdWebhooksRequest) (*ListWebhooksResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -406,11 +406,11 @@ type ApiGetCompaniesCompanyIdWebhooksWebhookIdRequest struct {
 }
 
 func (r ApiGetCompaniesCompanyIdWebhooksWebhookIdRequest) Execute() (*Webhook, *http.Response, error) {
-	return r.ApiService.GetCompaniesCompanyIdWebhooksWebhookIdExecute(r)
+	return r.ApiService.GetWebhookExecute(r)
 }
 
 /*
-GetCompaniesCompanyIdWebhooksWebhookId Get a webhook
+GetWebhook Get a webhook
 
 Returns the configuration for the webhook identified in the path.
 
@@ -423,7 +423,7 @@ To make this request, your API credential must have one of the following [roles]
  @param webhookId Unique identifier of the webhook configuration.
  @return ApiGetCompaniesCompanyIdWebhooksWebhookIdRequest
 */
-func (a *WebhooksCompanyLevelApiService) GetCompaniesCompanyIdWebhooksWebhookId(ctx context.Context, companyId string, webhookId string) ApiGetCompaniesCompanyIdWebhooksWebhookIdRequest {
+func (a *WebhooksCompanyLevelApiService) GetWebhook(ctx context.Context, companyId string, webhookId string) ApiGetCompaniesCompanyIdWebhooksWebhookIdRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -440,7 +440,7 @@ func (a *WebhooksCompanyLevelApiService) GetCompaniesCompanyIdWebhooksWebhookId(
 
 // Execute executes the request
 //  @return Webhook
-func (a *WebhooksCompanyLevelApiService) GetCompaniesCompanyIdWebhooksWebhookIdExecute(r ApiGetCompaniesCompanyIdWebhooksWebhookIdRequest) (*Webhook, *http.Response, error) {
+func (a *WebhooksCompanyLevelApiService) GetWebhookExecute(r ApiGetCompaniesCompanyIdWebhooksWebhookIdRequest) (*Webhook, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -597,11 +597,11 @@ func (r ApiPatchCompaniesCompanyIdWebhooksWebhookIdRequest) UpdateCompanyWebhook
 }
 
 func (r ApiPatchCompaniesCompanyIdWebhooksWebhookIdRequest) Execute() (*Webhook, *http.Response, error) {
-	return r.ApiService.PatchCompaniesCompanyIdWebhooksWebhookIdExecute(r)
+	return r.ApiService.UpdateWebhookExecute(r)
 }
 
 /*
-PatchCompaniesCompanyIdWebhooksWebhookId Update a webhook
+UpdateWebhook Update a webhook
 
 Make changes to the configuration of the webhook identified in the path. The request contains the new values you want to have in the webhook configuration. The response contains the full configuration for the webhook, which includes the new values from the request.
 
@@ -613,7 +613,7 @@ To make this request, your API credential must have the following [roles](https:
  @param webhookId Unique identifier of the webhook configuration.
  @return ApiPatchCompaniesCompanyIdWebhooksWebhookIdRequest
 */
-func (a *WebhooksCompanyLevelApiService) PatchCompaniesCompanyIdWebhooksWebhookId(ctx context.Context, companyId string, webhookId string) ApiPatchCompaniesCompanyIdWebhooksWebhookIdRequest {
+func (a *WebhooksCompanyLevelApiService) UpdateWebhook(ctx context.Context, companyId string, webhookId string) ApiPatchCompaniesCompanyIdWebhooksWebhookIdRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -630,7 +630,7 @@ func (a *WebhooksCompanyLevelApiService) PatchCompaniesCompanyIdWebhooksWebhookI
 
 // Execute executes the request
 //  @return Webhook
-func (a *WebhooksCompanyLevelApiService) PatchCompaniesCompanyIdWebhooksWebhookIdExecute(r ApiPatchCompaniesCompanyIdWebhooksWebhookIdRequest) (*Webhook, *http.Response, error) {
+func (a *WebhooksCompanyLevelApiService) UpdateWebhookExecute(r ApiPatchCompaniesCompanyIdWebhooksWebhookIdRequest) (*Webhook, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
@@ -788,11 +788,11 @@ func (r ApiPostCompaniesCompanyIdWebhooksRequest) CreateCompanyWebhookRequest(cr
 }
 
 func (r ApiPostCompaniesCompanyIdWebhooksRequest) Execute() (*Webhook, *http.Response, error) {
-	return r.ApiService.PostCompaniesCompanyIdWebhooksExecute(r)
+	return r.ApiService.SetUpWebhookExecute(r)
 }
 
 /*
-PostCompaniesCompanyIdWebhooks Set up a webhook
+SetUpWebhook Set up a webhook
 
 Subscribe to receive webhook notifications about events related to your company account. You can add basic authentication to make sure the data is secure.
 
@@ -803,7 +803,7 @@ To make this request, your API credential must have the following [roles](https:
  @param companyId Unique identifier of the [company account](https://docs.adyen.com/account/account-structure#company-account).
  @return ApiPostCompaniesCompanyIdWebhooksRequest
 */
-func (a *WebhooksCompanyLevelApiService) PostCompaniesCompanyIdWebhooks(ctx context.Context, companyId string) ApiPostCompaniesCompanyIdWebhooksRequest {
+func (a *WebhooksCompanyLevelApiService) SetUpWebhook(ctx context.Context, companyId string) ApiPostCompaniesCompanyIdWebhooksRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -819,7 +819,7 @@ func (a *WebhooksCompanyLevelApiService) PostCompaniesCompanyIdWebhooks(ctx cont
 
 // Execute executes the request
 //  @return Webhook
-func (a *WebhooksCompanyLevelApiService) PostCompaniesCompanyIdWebhooksExecute(r ApiPostCompaniesCompanyIdWebhooksRequest) (*Webhook, *http.Response, error) {
+func (a *WebhooksCompanyLevelApiService) SetUpWebhookExecute(r ApiPostCompaniesCompanyIdWebhooksRequest) (*Webhook, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -971,11 +971,11 @@ type ApiPostCompaniesCompanyIdWebhooksWebhookIdGenerateHmacRequest struct {
 }
 
 func (r ApiPostCompaniesCompanyIdWebhooksWebhookIdGenerateHmacRequest) Execute() (*GenerateHmacKeyResponse, *http.Response, error) {
-	return r.ApiService.PostCompaniesCompanyIdWebhooksWebhookIdGenerateHmacExecute(r)
+	return r.ApiService.GenerateHmacKeyExecute(r)
 }
 
 /*
-PostCompaniesCompanyIdWebhooksWebhookIdGenerateHmac Generate an HMAC key
+GenerateHmacKey Generate an HMAC key
 
 Returns an [HMAC key](https://en.wikipedia.org/wiki/HMAC) for the webhook identified in the path. This key allows you to check the integrity and the origin of the notifications you receive.By creating an HMAC key, you start receiving [HMAC-signed notifications](https://docs.adyen.com/development-resources/webhooks/verify-hmac-signatures#enable-hmac-signatures) from Adyen. Find out more about how to [verify HMAC signatures](https://docs.adyen.com/development-resources/webhooks/verify-hmac-signatures).
 
@@ -987,7 +987,7 @@ To make this request, your API credential must have the following [roles](https:
  @param webhookId Unique identifier of the webhook configuration.
  @return ApiPostCompaniesCompanyIdWebhooksWebhookIdGenerateHmacRequest
 */
-func (a *WebhooksCompanyLevelApiService) PostCompaniesCompanyIdWebhooksWebhookIdGenerateHmac(ctx context.Context, companyId string, webhookId string) ApiPostCompaniesCompanyIdWebhooksWebhookIdGenerateHmacRequest {
+func (a *WebhooksCompanyLevelApiService) GenerateHmacKey(ctx context.Context, companyId string, webhookId string) ApiPostCompaniesCompanyIdWebhooksWebhookIdGenerateHmacRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -1004,7 +1004,7 @@ func (a *WebhooksCompanyLevelApiService) PostCompaniesCompanyIdWebhooksWebhookId
 
 // Execute executes the request
 //  @return GenerateHmacKeyResponse
-func (a *WebhooksCompanyLevelApiService) PostCompaniesCompanyIdWebhooksWebhookIdGenerateHmacExecute(r ApiPostCompaniesCompanyIdWebhooksWebhookIdGenerateHmacRequest) (*GenerateHmacKeyResponse, *http.Response, error) {
+func (a *WebhooksCompanyLevelApiService) GenerateHmacKeyExecute(r ApiPostCompaniesCompanyIdWebhooksWebhookIdGenerateHmacRequest) (*GenerateHmacKeyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1161,11 +1161,11 @@ func (r ApiPostCompaniesCompanyIdWebhooksWebhookIdTestRequest) TestCompanyWebhoo
 }
 
 func (r ApiPostCompaniesCompanyIdWebhooksWebhookIdTestRequest) Execute() (*TestWebhookResponse, *http.Response, error) {
-	return r.ApiService.PostCompaniesCompanyIdWebhooksWebhookIdTestExecute(r)
+	return r.ApiService.TestWebhookExecute(r)
 }
 
 /*
-PostCompaniesCompanyIdWebhooksWebhookIdTest Test a webhook
+TestWebhook Test a webhook
 
 Sends sample notifications to test if the webhook is set up correctly.
 
@@ -1183,7 +1183,7 @@ To make this request, your API credential must have the following [roles](https:
  @param webhookId Unique identifier of the webhook configuration.
  @return ApiPostCompaniesCompanyIdWebhooksWebhookIdTestRequest
 */
-func (a *WebhooksCompanyLevelApiService) PostCompaniesCompanyIdWebhooksWebhookIdTest(ctx context.Context, companyId string, webhookId string) ApiPostCompaniesCompanyIdWebhooksWebhookIdTestRequest {
+func (a *WebhooksCompanyLevelApiService) TestWebhook(ctx context.Context, companyId string, webhookId string) ApiPostCompaniesCompanyIdWebhooksWebhookIdTestRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -1200,7 +1200,7 @@ func (a *WebhooksCompanyLevelApiService) PostCompaniesCompanyIdWebhooksWebhookId
 
 // Execute executes the request
 //  @return TestWebhookResponse
-func (a *WebhooksCompanyLevelApiService) PostCompaniesCompanyIdWebhooksWebhookIdTestExecute(r ApiPostCompaniesCompanyIdWebhooksWebhookIdTestRequest) (*TestWebhookResponse, *http.Response, error) {
+func (a *WebhooksCompanyLevelApiService) TestWebhookExecute(r ApiPostCompaniesCompanyIdWebhooksWebhookIdTestRequest) (*TestWebhookResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}

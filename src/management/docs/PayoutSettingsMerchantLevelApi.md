@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## DeleteMerchantsMerchantIdPayoutSettingsPayoutSettingsId
 
-> interface{} DeleteMerchantsMerchantIdPayoutSettingsPayoutSettingsId(ctx, merchantId, payoutSettingsId).Execute()
+> DeleteMerchantsMerchantIdPayoutSettingsPayoutSettingsId(ctx, merchantId, payoutSettingsId).Execute()
 
 Delete a payout setting
 
@@ -43,8 +43,6 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PayoutSettingsMerchantLevelApi.DeleteMerchantsMerchantIdPayoutSettingsPayoutSettingsId``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `DeleteMerchantsMerchantIdPayoutSettingsPayoutSettingsId`: interface{}
-    fmt.Fprintf(os.Stdout, "Response from `PayoutSettingsMerchantLevelApi.DeleteMerchantsMerchantIdPayoutSettingsPayoutSettingsId`: %v\n", resp)
 }
 ```
 
@@ -69,7 +67,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**interface{}**
+ (empty response body)
 
 ### Authorization
 

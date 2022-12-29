@@ -1,7 +1,7 @@
 /*
 Management API
 
-Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```
+Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```  ## Going live  To access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:  ```text https://management-live.adyen.com/v1 ```
 
 API version: 1
 Contact: developer-experience@adyen.com
@@ -17,6 +17,8 @@ import (
 
 // Nexo struct for Nexo
 type Nexo struct {
+	DisplayUrls *NotificationUrl `json:"displayUrls,omitempty"`
+	EncryptionKey *Key `json:"encryptionKey,omitempty"`
 	EventUrls *EventUrl `json:"eventUrls,omitempty"`
 	// @deprecated One or more URLs to send event messages to when using Terminal API.
 	// Deprecated
@@ -38,6 +40,70 @@ func NewNexo() *Nexo {
 func NewNexoWithDefaults() *Nexo {
 	this := Nexo{}
 	return &this
+}
+
+// GetDisplayUrls returns the DisplayUrls field value if set, zero value otherwise.
+func (o *Nexo) GetDisplayUrls() NotificationUrl {
+	if o == nil || isNil(o.DisplayUrls) {
+		var ret NotificationUrl
+		return ret
+	}
+	return *o.DisplayUrls
+}
+
+// GetDisplayUrlsOk returns a tuple with the DisplayUrls field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Nexo) GetDisplayUrlsOk() (*NotificationUrl, bool) {
+	if o == nil || isNil(o.DisplayUrls) {
+		return nil, false
+	}
+	return o.DisplayUrls, true
+}
+
+// HasDisplayUrls returns a boolean if a field has been set.
+func (o *Nexo) HasDisplayUrls() bool {
+	if o != nil && !isNil(o.DisplayUrls) {
+		return true
+	}
+
+	return false
+}
+
+// SetDisplayUrls gets a reference to the given NotificationUrl and assigns it to the DisplayUrls field.
+func (o *Nexo) SetDisplayUrls(v NotificationUrl) {
+	o.DisplayUrls = &v
+}
+
+// GetEncryptionKey returns the EncryptionKey field value if set, zero value otherwise.
+func (o *Nexo) GetEncryptionKey() Key {
+	if o == nil || isNil(o.EncryptionKey) {
+		var ret Key
+		return ret
+	}
+	return *o.EncryptionKey
+}
+
+// GetEncryptionKeyOk returns a tuple with the EncryptionKey field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Nexo) GetEncryptionKeyOk() (*Key, bool) {
+	if o == nil || isNil(o.EncryptionKey) {
+		return nil, false
+	}
+	return o.EncryptionKey, true
+}
+
+// HasEncryptionKey returns a boolean if a field has been set.
+func (o *Nexo) HasEncryptionKey() bool {
+	if o != nil && !isNil(o.EncryptionKey) {
+		return true
+	}
+
+	return false
+}
+
+// SetEncryptionKey gets a reference to the given Key and assigns it to the EncryptionKey field.
+func (o *Nexo) SetEncryptionKey(v Key) {
+	o.EncryptionKey = &v
 }
 
 // GetEventUrls returns the EventUrls field value if set, zero value otherwise.
@@ -109,6 +175,12 @@ func (o *Nexo) SetNexoEventUrls(v []string) {
 
 func (o Nexo) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if !isNil(o.DisplayUrls) {
+		toSerialize["displayUrls"] = o.DisplayUrls
+	}
+	if !isNil(o.EncryptionKey) {
+		toSerialize["encryptionKey"] = o.EncryptionKey
+	}
 	if !isNil(o.EventUrls) {
 		toSerialize["eventUrls"] = o.EventUrls
 	}

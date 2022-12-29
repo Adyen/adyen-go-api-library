@@ -1,7 +1,7 @@
 /*
 Management API
 
-Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```
+Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```  ## Going live  To access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:  ```text https://management-live.adyen.com/v1 ```
 
 API version: 1
 Contact: developer-experience@adyen.com
@@ -39,11 +39,11 @@ func (r ApiGetMerchantsMerchantIdStoresReferenceTerminalLogosRequest) Model(mode
 }
 
 func (r ApiGetMerchantsMerchantIdStoresReferenceTerminalLogosRequest) Execute() (*Logo, *http.Response, error) {
-	return r.ApiService.GetMerchantsMerchantIdStoresReferenceTerminalLogosExecute(r)
+	return r.ApiService.GetTerminalLogoExecute(r)
 }
 
 /*
-GetMerchantsMerchantIdStoresReferenceTerminalLogos Get the terminal logo
+GetTerminalLogo Get the terminal logo
 
 Returns the logo that is configured for a specific payment terminal model at the store identified in the path. You must specify the terminal model as a query parameter.
 
@@ -59,7 +59,7 @@ To make this request, your API credential must have one of the following [roles]
  @param reference The reference that identifies the store.
  @return ApiGetMerchantsMerchantIdStoresReferenceTerminalLogosRequest
 */
-func (a *TerminalSettingsStoreLevelApiService) GetMerchantsMerchantIdStoresReferenceTerminalLogos(ctx context.Context, merchantId string, reference string) ApiGetMerchantsMerchantIdStoresReferenceTerminalLogosRequest {
+func (a *TerminalSettingsStoreLevelApiService) GetTerminalLogo(ctx context.Context, merchantId string, reference string) ApiGetMerchantsMerchantIdStoresReferenceTerminalLogosRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -76,7 +76,7 @@ func (a *TerminalSettingsStoreLevelApiService) GetMerchantsMerchantIdStoresRefer
 
 // Execute executes the request
 //  @return Logo
-func (a *TerminalSettingsStoreLevelApiService) GetMerchantsMerchantIdStoresReferenceTerminalLogosExecute(r ApiGetMerchantsMerchantIdStoresReferenceTerminalLogosRequest) (*Logo, *http.Response, error) {
+func (a *TerminalSettingsStoreLevelApiService) GetTerminalLogoExecute(r ApiGetMerchantsMerchantIdStoresReferenceTerminalLogosRequest) (*Logo, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -230,11 +230,11 @@ type ApiGetMerchantsMerchantIdStoresReferenceTerminalSettingsRequest struct {
 }
 
 func (r ApiGetMerchantsMerchantIdStoresReferenceTerminalSettingsRequest) Execute() (*TerminalSettings, *http.Response, error) {
-	return r.ApiService.GetMerchantsMerchantIdStoresReferenceTerminalSettingsExecute(r)
+	return r.ApiService.GetTerminalSettingsExecute(r)
 }
 
 /*
-GetMerchantsMerchantIdStoresReferenceTerminalSettings Get terminal settings
+GetTerminalSettings Get terminal settings
 
 Returns the payment terminal settings that are configured for the store identified in the path. These settings apply to all terminals under the store unless different values are configured for an individual terminal.
 
@@ -247,7 +247,7 @@ To make this request, your API credential must have one of the following [roles]
  @param reference The reference that identifies the store.
  @return ApiGetMerchantsMerchantIdStoresReferenceTerminalSettingsRequest
 */
-func (a *TerminalSettingsStoreLevelApiService) GetMerchantsMerchantIdStoresReferenceTerminalSettings(ctx context.Context, merchantId string, reference string) ApiGetMerchantsMerchantIdStoresReferenceTerminalSettingsRequest {
+func (a *TerminalSettingsStoreLevelApiService) GetTerminalSettings(ctx context.Context, merchantId string, reference string) ApiGetMerchantsMerchantIdStoresReferenceTerminalSettingsRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -264,7 +264,7 @@ func (a *TerminalSettingsStoreLevelApiService) GetMerchantsMerchantIdStoresRefer
 
 // Execute executes the request
 //  @return TerminalSettings
-func (a *TerminalSettingsStoreLevelApiService) GetMerchantsMerchantIdStoresReferenceTerminalSettingsExecute(r ApiGetMerchantsMerchantIdStoresReferenceTerminalSettingsRequest) (*TerminalSettings, *http.Response, error) {
+func (a *TerminalSettingsStoreLevelApiService) GetTerminalSettingsExecute(r ApiGetMerchantsMerchantIdStoresReferenceTerminalSettingsRequest) (*TerminalSettings, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -421,11 +421,11 @@ func (r ApiGetStoresStoreIdTerminalLogosRequest) Model(model string) ApiGetStore
 }
 
 func (r ApiGetStoresStoreIdTerminalLogosRequest) Execute() (*Logo, *http.Response, error) {
-	return r.ApiService.GetStoresStoreIdTerminalLogosExecute(r)
+	return r.ApiService.GetTerminalLogoByStoreIdExecute(r)
 }
 
 /*
-GetStoresStoreIdTerminalLogos Get the terminal logo
+GetTerminalLogoByStoreId Get the terminal logo
 
 Returns the logo that is configured for a specific payment terminal model at the store identified in the path. The terminal model must be specified as a query parameter.
  
@@ -440,7 +440,7 @@ To make this request, your API credential must have one of the following [roles]
  @param storeId The unique identifier of the store.
  @return ApiGetStoresStoreIdTerminalLogosRequest
 */
-func (a *TerminalSettingsStoreLevelApiService) GetStoresStoreIdTerminalLogos(ctx context.Context, storeId string) ApiGetStoresStoreIdTerminalLogosRequest {
+func (a *TerminalSettingsStoreLevelApiService) GetTerminalLogoByStoreId(ctx context.Context, storeId string) ApiGetStoresStoreIdTerminalLogosRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -456,7 +456,7 @@ func (a *TerminalSettingsStoreLevelApiService) GetStoresStoreIdTerminalLogos(ctx
 
 // Execute executes the request
 //  @return Logo
-func (a *TerminalSettingsStoreLevelApiService) GetStoresStoreIdTerminalLogosExecute(r ApiGetStoresStoreIdTerminalLogosRequest) (*Logo, *http.Response, error) {
+func (a *TerminalSettingsStoreLevelApiService) GetTerminalLogoByStoreIdExecute(r ApiGetStoresStoreIdTerminalLogosRequest) (*Logo, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -608,11 +608,11 @@ type ApiGetStoresStoreIdTerminalSettingsRequest struct {
 }
 
 func (r ApiGetStoresStoreIdTerminalSettingsRequest) Execute() (*TerminalSettings, *http.Response, error) {
-	return r.ApiService.GetStoresStoreIdTerminalSettingsExecute(r)
+	return r.ApiService.GetTerminalSettingsByStoreIdExecute(r)
 }
 
 /*
-GetStoresStoreIdTerminalSettings Get terminal settings
+GetTerminalSettingsByStoreId Get terminal settings
 
 Returns the payment terminal settings that are configured for the store identified in the path. These settings apply to all terminals under the store unless different values are configured for an individual terminal.
 
@@ -624,7 +624,7 @@ To make this request, your API credential must have one of the following [roles]
  @param storeId The unique identifier of the store.
  @return ApiGetStoresStoreIdTerminalSettingsRequest
 */
-func (a *TerminalSettingsStoreLevelApiService) GetStoresStoreIdTerminalSettings(ctx context.Context, storeId string) ApiGetStoresStoreIdTerminalSettingsRequest {
+func (a *TerminalSettingsStoreLevelApiService) GetTerminalSettingsByStoreId(ctx context.Context, storeId string) ApiGetStoresStoreIdTerminalSettingsRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -640,7 +640,7 @@ func (a *TerminalSettingsStoreLevelApiService) GetStoresStoreIdTerminalSettings(
 
 // Execute executes the request
 //  @return TerminalSettings
-func (a *TerminalSettingsStoreLevelApiService) GetStoresStoreIdTerminalSettingsExecute(r ApiGetStoresStoreIdTerminalSettingsRequest) (*TerminalSettings, *http.Response, error) {
+func (a *TerminalSettingsStoreLevelApiService) GetTerminalSettingsByStoreIdExecute(r ApiGetStoresStoreIdTerminalSettingsRequest) (*TerminalSettings, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -803,11 +803,11 @@ func (r ApiPatchMerchantsMerchantIdStoresReferenceTerminalLogosRequest) Logo(log
 }
 
 func (r ApiPatchMerchantsMerchantIdStoresReferenceTerminalLogosRequest) Execute() (*Logo, *http.Response, error) {
-	return r.ApiService.PatchMerchantsMerchantIdStoresReferenceTerminalLogosExecute(r)
+	return r.ApiService.UpdateTerminalLogoExecute(r)
 }
 
 /*
-PatchMerchantsMerchantIdStoresReferenceTerminalLogos Update the terminal logo
+UpdateTerminalLogo Update the terminal logo
 
 Updates the logo that is configured for a specific payment terminal model at the store identified in the path. You must specify the terminal model as a query parameter. You can update the logo for only one terminal model at a time.
 This logo applies to all terminals of the specified model under the store, unless a different logo is configured for an individual terminal. 
@@ -823,7 +823,7 @@ To make this request, your API credential must have the following [role](https:/
  @param reference The reference that identifies the store.
  @return ApiPatchMerchantsMerchantIdStoresReferenceTerminalLogosRequest
 */
-func (a *TerminalSettingsStoreLevelApiService) PatchMerchantsMerchantIdStoresReferenceTerminalLogos(ctx context.Context, merchantId string, reference string) ApiPatchMerchantsMerchantIdStoresReferenceTerminalLogosRequest {
+func (a *TerminalSettingsStoreLevelApiService) UpdateTerminalLogo(ctx context.Context, merchantId string, reference string) ApiPatchMerchantsMerchantIdStoresReferenceTerminalLogosRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -840,7 +840,7 @@ func (a *TerminalSettingsStoreLevelApiService) PatchMerchantsMerchantIdStoresRef
 
 // Execute executes the request
 //  @return Logo
-func (a *TerminalSettingsStoreLevelApiService) PatchMerchantsMerchantIdStoresReferenceTerminalLogosExecute(r ApiPatchMerchantsMerchantIdStoresReferenceTerminalLogosRequest) (*Logo, *http.Response, error) {
+func (a *TerminalSettingsStoreLevelApiService) UpdateTerminalLogoExecute(r ApiPatchMerchantsMerchantIdStoresReferenceTerminalLogosRequest) (*Logo, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
@@ -1002,11 +1002,11 @@ func (r ApiPatchMerchantsMerchantIdStoresReferenceTerminalSettingsRequest) Termi
 }
 
 func (r ApiPatchMerchantsMerchantIdStoresReferenceTerminalSettingsRequest) Execute() (*TerminalSettings, *http.Response, error) {
-	return r.ApiService.PatchMerchantsMerchantIdStoresReferenceTerminalSettingsExecute(r)
+	return r.ApiService.UpdateTerminalSettingsExecute(r)
 }
 
 /*
-PatchMerchantsMerchantIdStoresReferenceTerminalSettings Update terminal settings
+UpdateTerminalSettings Update terminal settings
 
 Updates payment terminal settings for the store identified in the path. These settings apply to all terminals under the store, unless different values are configured for an individual terminal.
 
@@ -1022,7 +1022,7 @@ To make this request, your API credential must have the following [role](https:/
  @param reference The reference that identifies the store.
  @return ApiPatchMerchantsMerchantIdStoresReferenceTerminalSettingsRequest
 */
-func (a *TerminalSettingsStoreLevelApiService) PatchMerchantsMerchantIdStoresReferenceTerminalSettings(ctx context.Context, merchantId string, reference string) ApiPatchMerchantsMerchantIdStoresReferenceTerminalSettingsRequest {
+func (a *TerminalSettingsStoreLevelApiService) UpdateTerminalSettings(ctx context.Context, merchantId string, reference string) ApiPatchMerchantsMerchantIdStoresReferenceTerminalSettingsRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -1039,7 +1039,7 @@ func (a *TerminalSettingsStoreLevelApiService) PatchMerchantsMerchantIdStoresRef
 
 // Execute executes the request
 //  @return TerminalSettings
-func (a *TerminalSettingsStoreLevelApiService) PatchMerchantsMerchantIdStoresReferenceTerminalSettingsExecute(r ApiPatchMerchantsMerchantIdStoresReferenceTerminalSettingsRequest) (*TerminalSettings, *http.Response, error) {
+func (a *TerminalSettingsStoreLevelApiService) UpdateTerminalSettingsExecute(r ApiPatchMerchantsMerchantIdStoresReferenceTerminalSettingsRequest) (*TerminalSettings, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
@@ -1204,11 +1204,11 @@ func (r ApiPatchStoresStoreIdTerminalLogosRequest) Logo(logo Logo) ApiPatchStore
 }
 
 func (r ApiPatchStoresStoreIdTerminalLogosRequest) Execute() (*Logo, *http.Response, error) {
-	return r.ApiService.PatchStoresStoreIdTerminalLogosExecute(r)
+	return r.ApiService.UpdateTerminalLogoByStoreIdExecute(r)
 }
 
 /*
-PatchStoresStoreIdTerminalLogos Update the terminal logo
+UpdateTerminalLogoByStoreId Update the terminal logo
 
 Updates the logo that is configured for a specific payment terminal model at the store identified in the path. You must specify the terminal model as a query parameter. You can update the logo for only one terminal model at a time.
 This logo applies to all terminals of the specified model under the store, unless a different logo is configured for an individual terminal. 
@@ -1223,7 +1223,7 @@ To make this request, your API credential must have the following [role](https:/
  @param storeId The unique identifier of the store.
  @return ApiPatchStoresStoreIdTerminalLogosRequest
 */
-func (a *TerminalSettingsStoreLevelApiService) PatchStoresStoreIdTerminalLogos(ctx context.Context, storeId string) ApiPatchStoresStoreIdTerminalLogosRequest {
+func (a *TerminalSettingsStoreLevelApiService) UpdateTerminalLogoByStoreId(ctx context.Context, storeId string) ApiPatchStoresStoreIdTerminalLogosRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -1239,7 +1239,7 @@ func (a *TerminalSettingsStoreLevelApiService) PatchStoresStoreIdTerminalLogos(c
 
 // Execute executes the request
 //  @return Logo
-func (a *TerminalSettingsStoreLevelApiService) PatchStoresStoreIdTerminalLogosExecute(r ApiPatchStoresStoreIdTerminalLogosRequest) (*Logo, *http.Response, error) {
+func (a *TerminalSettingsStoreLevelApiService) UpdateTerminalLogoByStoreIdExecute(r ApiPatchStoresStoreIdTerminalLogosRequest) (*Logo, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
@@ -1399,11 +1399,11 @@ func (r ApiPatchStoresStoreIdTerminalSettingsRequest) TerminalSettings(terminalS
 }
 
 func (r ApiPatchStoresStoreIdTerminalSettingsRequest) Execute() (*TerminalSettings, *http.Response, error) {
-	return r.ApiService.PatchStoresStoreIdTerminalSettingsExecute(r)
+	return r.ApiService.UpdateTerminalSettingsByStoreIdExecute(r)
 }
 
 /*
-PatchStoresStoreIdTerminalSettings Update terminal settings
+UpdateTerminalSettingsByStoreId Update terminal settings
 
 Updates payment terminal settings for the store identified in the path. These settings apply to all terminals under the store, unless different values are configured for an individual terminal.
 
@@ -1418,7 +1418,7 @@ To make this request, your API credential must have the following [role](https:/
  @param storeId The unique identifier of the store.
  @return ApiPatchStoresStoreIdTerminalSettingsRequest
 */
-func (a *TerminalSettingsStoreLevelApiService) PatchStoresStoreIdTerminalSettings(ctx context.Context, storeId string) ApiPatchStoresStoreIdTerminalSettingsRequest {
+func (a *TerminalSettingsStoreLevelApiService) UpdateTerminalSettingsByStoreId(ctx context.Context, storeId string) ApiPatchStoresStoreIdTerminalSettingsRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -1434,7 +1434,7 @@ func (a *TerminalSettingsStoreLevelApiService) PatchStoresStoreIdTerminalSetting
 
 // Execute executes the request
 //  @return TerminalSettings
-func (a *TerminalSettingsStoreLevelApiService) PatchStoresStoreIdTerminalSettingsExecute(r ApiPatchStoresStoreIdTerminalSettingsRequest) (*TerminalSettings, *http.Response, error) {
+func (a *TerminalSettingsStoreLevelApiService) UpdateTerminalSettingsByStoreIdExecute(r ApiPatchStoresStoreIdTerminalSettingsRequest) (*TerminalSettings, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}

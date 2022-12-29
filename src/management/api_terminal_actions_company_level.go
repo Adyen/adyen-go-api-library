@@ -1,7 +1,7 @@
 /*
 Management API
 
-Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```
+Configure and manage your Adyen company and merchant accounts, stores, and payment terminals. ## Authentication Each request to the Management API must be signed with an API key. [Generate your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) in the Customer Area and then set this key to the `X-API-Key` header value.  To access the live endpoints, you need to generate a new API key in your live Customer Area. ## Versioning  Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:  ```text https://management-test.adyen.com/v1/companies/{companyId}/webhooks ```  ## Going live  To access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:  ```text https://management-live.adyen.com/v1 ```
 
 API version: 1
 Contact: developer-experience@adyen.com
@@ -45,11 +45,11 @@ func (r ApiGetCompaniesCompanyIdAndroidAppsRequest) PageSize(pageSize int32) Api
 }
 
 func (r ApiGetCompaniesCompanyIdAndroidAppsRequest) Execute() (*AndroidAppsResponse, *http.Response, error) {
-	return r.ApiService.GetCompaniesCompanyIdAndroidAppsExecute(r)
+	return r.ApiService.ListAndroidAppsExecute(r)
 }
 
 /*
-GetCompaniesCompanyIdAndroidApps Get a list of Android apps
+ListAndroidApps Get a list of Android apps
 
 Returns a list of the Android apps that are available for the company identified in the path. 
 These apps have been uploaded to Adyen and can be installed or uninstalled on Android payment terminals through [terminal actions](https://docs.adyen.com/point-of-sale/automating-terminal-management/terminal-actions-api).
@@ -62,7 +62,7 @@ To make this request, your API credential must have one of the following [roles]
  @param companyId The unique identifier of the company account.
  @return ApiGetCompaniesCompanyIdAndroidAppsRequest
 */
-func (a *TerminalActionsCompanyLevelApiService) GetCompaniesCompanyIdAndroidApps(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdAndroidAppsRequest {
+func (a *TerminalActionsCompanyLevelApiService) ListAndroidApps(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdAndroidAppsRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -78,7 +78,7 @@ func (a *TerminalActionsCompanyLevelApiService) GetCompaniesCompanyIdAndroidApps
 
 // Execute executes the request
 //  @return AndroidAppsResponse
-func (a *TerminalActionsCompanyLevelApiService) GetCompaniesCompanyIdAndroidAppsExecute(r ApiGetCompaniesCompanyIdAndroidAppsRequest) (*AndroidAppsResponse, *http.Response, error) {
+func (a *TerminalActionsCompanyLevelApiService) ListAndroidAppsExecute(r ApiGetCompaniesCompanyIdAndroidAppsRequest) (*AndroidAppsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -247,11 +247,11 @@ func (r ApiGetCompaniesCompanyIdAndroidCertificatesRequest) PageSize(pageSize in
 }
 
 func (r ApiGetCompaniesCompanyIdAndroidCertificatesRequest) Execute() (*AndroidCertificatesResponse, *http.Response, error) {
-	return r.ApiService.GetCompaniesCompanyIdAndroidCertificatesExecute(r)
+	return r.ApiService.ListAndroidCertificatesExecute(r)
 }
 
 /*
-GetCompaniesCompanyIdAndroidCertificates Get a list of Android certificates
+ListAndroidCertificates Get a list of Android certificates
 
 Returns a list of the Android certificates that are available for the company identified in the path.
 Typically, these certificates enable running apps on Android payment terminals. The certifcates in the list have been uploaded to Adyen and can be installed or uninstalled on Android terminals through [terminal actions](https://docs.adyen.com/point-of-sale/automating-terminal-management/terminal-actions-api).
@@ -264,7 +264,7 @@ To make this request, your API credential must have one of the following [roles]
  @param companyId The unique identifier of the company account.
  @return ApiGetCompaniesCompanyIdAndroidCertificatesRequest
 */
-func (a *TerminalActionsCompanyLevelApiService) GetCompaniesCompanyIdAndroidCertificates(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdAndroidCertificatesRequest {
+func (a *TerminalActionsCompanyLevelApiService) ListAndroidCertificates(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdAndroidCertificatesRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -280,7 +280,7 @@ func (a *TerminalActionsCompanyLevelApiService) GetCompaniesCompanyIdAndroidCert
 
 // Execute executes the request
 //  @return AndroidCertificatesResponse
-func (a *TerminalActionsCompanyLevelApiService) GetCompaniesCompanyIdAndroidCertificatesExecute(r ApiGetCompaniesCompanyIdAndroidCertificatesRequest) (*AndroidCertificatesResponse, *http.Response, error) {
+func (a *TerminalActionsCompanyLevelApiService) ListAndroidCertificatesExecute(r ApiGetCompaniesCompanyIdAndroidCertificatesRequest) (*AndroidCertificatesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -463,11 +463,11 @@ func (r ApiGetCompaniesCompanyIdTerminalActionsRequest) Type_(type_ string) ApiG
 }
 
 func (r ApiGetCompaniesCompanyIdTerminalActionsRequest) Execute() (*ListExternalTerminalActionsResponse, *http.Response, error) {
-	return r.ApiService.GetCompaniesCompanyIdTerminalActionsExecute(r)
+	return r.ApiService.ListTerminalActionsExecute(r)
 }
 
 /*
-GetCompaniesCompanyIdTerminalActions Get a list of terminal actions
+ListTerminalActions Get a list of terminal actions
 
 Returns the [terminal actions](https://docs.adyen.com/point-of-sale/automating-terminal-management/terminal-actions-api) that have been scheduled for the company identified in the path.The response doesn't include actions that are scheduled by Adyen.
 To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
@@ -478,7 +478,7 @@ To make this request, your API credential must have one of the following [roles]
  @param companyId The unique identifier of the company account.
  @return ApiGetCompaniesCompanyIdTerminalActionsRequest
 */
-func (a *TerminalActionsCompanyLevelApiService) GetCompaniesCompanyIdTerminalActions(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdTerminalActionsRequest {
+func (a *TerminalActionsCompanyLevelApiService) ListTerminalActions(ctx context.Context, companyId string) ApiGetCompaniesCompanyIdTerminalActionsRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -494,7 +494,7 @@ func (a *TerminalActionsCompanyLevelApiService) GetCompaniesCompanyIdTerminalAct
 
 // Execute executes the request
 //  @return ListExternalTerminalActionsResponse
-func (a *TerminalActionsCompanyLevelApiService) GetCompaniesCompanyIdTerminalActionsExecute(r ApiGetCompaniesCompanyIdTerminalActionsRequest) (*ListExternalTerminalActionsResponse, *http.Response, error) {
+func (a *TerminalActionsCompanyLevelApiService) ListTerminalActionsExecute(r ApiGetCompaniesCompanyIdTerminalActionsRequest) (*ListExternalTerminalActionsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -656,11 +656,11 @@ type ApiGetCompaniesCompanyIdTerminalActionsActionIdRequest struct {
 }
 
 func (r ApiGetCompaniesCompanyIdTerminalActionsActionIdRequest) Execute() (*ExternalTerminalAction, *http.Response, error) {
-	return r.ApiService.GetCompaniesCompanyIdTerminalActionsActionIdExecute(r)
+	return r.ApiService.GetTerminalActionExecute(r)
 }
 
 /*
-GetCompaniesCompanyIdTerminalActionsActionId Get terminal action
+GetTerminalAction Get terminal action
 
 Returns the details of the [terminal action](https://docs.adyen.com/point-of-sale/automating-terminal-management/terminal-actions-api) identified in the path.
 To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
@@ -672,7 +672,7 @@ To make this request, your API credential must have one of the following [roles]
  @param actionId The unique identifier of the terminal action.
  @return ApiGetCompaniesCompanyIdTerminalActionsActionIdRequest
 */
-func (a *TerminalActionsCompanyLevelApiService) GetCompaniesCompanyIdTerminalActionsActionId(ctx context.Context, companyId string, actionId string) ApiGetCompaniesCompanyIdTerminalActionsActionIdRequest {
+func (a *TerminalActionsCompanyLevelApiService) GetTerminalAction(ctx context.Context, companyId string, actionId string) ApiGetCompaniesCompanyIdTerminalActionsActionIdRequest {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -689,7 +689,7 @@ func (a *TerminalActionsCompanyLevelApiService) GetCompaniesCompanyIdTerminalAct
 
 // Execute executes the request
 //  @return ExternalTerminalAction
-func (a *TerminalActionsCompanyLevelApiService) GetCompaniesCompanyIdTerminalActionsActionIdExecute(r ApiGetCompaniesCompanyIdTerminalActionsActionIdRequest) (*ExternalTerminalAction, *http.Response, error) {
+func (a *TerminalActionsCompanyLevelApiService) GetTerminalActionExecute(r ApiGetCompaniesCompanyIdTerminalActionsActionIdRequest) (*ExternalTerminalAction, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
