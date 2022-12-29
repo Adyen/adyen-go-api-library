@@ -75,11 +75,11 @@ func (r {{#structPrefix}}{{&classname}}{{/structPrefix}}{{^structPrefix}}Api{{/s
 {{/isPathParam}}
 {{/allParams}}
 func (r {{#structPrefix}}{{&classname}}{{/structPrefix}}{{^structPrefix}}Api{{/structPrefix}}{{operationId}}Request) Execute() ({{#returnType}}{{^isArray}}{{^returnTypeIsPrimitive}}*{{/returnTypeIsPrimitive}}{{/isArray}}{{{.}}}, {{/returnType}}*http.Response, error) {
-	return r.ApiService.{{nickname}}Execute(r)
+	return r.ApiService.{{#vendorExtensions.x-methodName}}{{#lambda.titlecase}}{{.}}{{/lambda.titlecase}}{{/vendorExtensions.x-methodName}}{{^vendorExtensions.x-methodName}}{{{nickname}}}{{/vendorExtensions.x-methodName}}Execute(r)
 }
 
 /*
-{{operationId}} {{{summary}}}{{^summary}}Method for {{operationId}}{{/summary}}
+{{#vendorExtensions.x-methodName}}{{#lambda.titlecase}}{{.}}{{/lambda.titlecase}}{{/vendorExtensions.x-methodName}}{{^vendorExtensions.x-methodName}}{{{nickname}}}{{/vendorExtensions.x-methodName}} {{{summary}}}{{^summary}}Method for {{operationId}}{{/summary}}
 {{#notes}}
 
 {{{unescapedNotes}}}
@@ -93,7 +93,7 @@ func (r {{#structPrefix}}{{&classname}}{{/structPrefix}}{{^structPrefix}}Api{{/s
 Deprecated
 {{/isDeprecated}}
 */
-func (a *{{{classname}}}Service) {{{nickname}}}(ctx context.Context{{#pathParams}}, {{paramName}} {{{dataType}}}{{/pathParams}}) {{#structPrefix}}{{&classname}}{{/structPrefix}}{{^structPrefix}}Api{{/structPrefix}}{{operationId}}Request {
+func (a *{{{classname}}}Service) {{#vendorExtensions.x-methodName}}{{#lambda.titlecase}}{{.}}{{/lambda.titlecase}}{{/vendorExtensions.x-methodName}}{{^vendorExtensions.x-methodName}}{{{nickname}}}{{/vendorExtensions.x-methodName}}(ctx context.Context{{#pathParams}}, {{paramName}} {{{dataType}}}{{/pathParams}}) {{#structPrefix}}{{&classname}}{{/structPrefix}}{{^structPrefix}}Api{{/structPrefix}}{{operationId}}Request {
     // add APIKey to Context
 	ctxWithApiKey := context.WithValue(context.Background(), ContextAPIKeys,
 	map[string]APIKey {
@@ -114,7 +114,7 @@ func (a *{{{classname}}}Service) {{{nickname}}}(ctx context.Context{{#pathParams
 {{#isDeprecated}}
 // Deprecated
 {{/isDeprecated}}
-func (a *{{{classname}}}Service) {{nickname}}Execute(r {{#structPrefix}}{{&classname}}{{/structPrefix}}{{^structPrefix}}Api{{/structPrefix}}{{operationId}}Request) ({{#returnType}}{{^isArray}}{{^returnTypeIsPrimitive}}*{{/returnTypeIsPrimitive}}{{/isArray}}{{{.}}}, {{/returnType}}*http.Response, error) {
+func (a *{{{classname}}}Service) {{#vendorExtensions.x-methodName}}{{#lambda.titlecase}}{{.}}{{/lambda.titlecase}}{{/vendorExtensions.x-methodName}}{{^vendorExtensions.x-methodName}}{{{nickname}}}{{/vendorExtensions.x-methodName}}Execute(r {{#structPrefix}}{{&classname}}{{/structPrefix}}{{^structPrefix}}Api{{/structPrefix}}{{operationId}}Request) ({{#returnType}}{{^isArray}}{{^returnTypeIsPrimitive}}*{{/returnTypeIsPrimitive}}{{/isArray}}{{{.}}}, {{/returnType}}*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.Method{{httpMethod}}
 		localVarPostBody     interface{}
