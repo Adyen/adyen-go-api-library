@@ -38,7 +38,7 @@ func Test_Integration_ManagementAPI_UsersCompanyLevelApiService(t *testing.T) {
 
 			companyId := "TestCompany123"
 
-			resp, httpRes, err := apiClient.UsersCompanyLevelApi.GetCompaniesCompanyIdUsers(context.Background(), companyId).Execute()
+			resp, httpRes, err := apiClient.UsersCompanyLevelApi.ListUsers(context.Background(), companyId).Execute()
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "Error : %v\n", err)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)

@@ -38,7 +38,7 @@ func Test_Integration_ManagementAPI_UsersMerchantLevelApiService(t *testing.T) {
 
 			merchantId := "TestMerchantAccount"
 
-			resp, httpRes, err := apiClient.UsersMerchantLevelApi.GetMerchantsMerchantIdUsers(context.Background(), merchantId).Execute()
+			resp, httpRes, err := apiClient.UsersMerchantLevelApi.ListUsers(context.Background(), merchantId).Execute()
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "Error : %v\n", err)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)

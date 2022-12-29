@@ -36,7 +36,7 @@ func Test_Integration_ManagementAPI_AccountMerchantLevelApiService(t *testing.T)
 
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 
-			resp, httpRes, err := apiClient.AccountMerchantLevelApi.GetMerchants(context.Background()).Execute()
+			resp, httpRes, err := apiClient.AccountMerchantLevelApi.ListMerchantAccounts(context.Background()).Execute()
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "Error : %v\n", err)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)
@@ -53,7 +53,7 @@ func Test_Integration_ManagementAPI_AccountMerchantLevelApiService(t *testing.T)
 
 			merchantId := "TestMerchantAccount"
 
-			resp, httpRes, err := apiClient.AccountMerchantLevelApi.GetMerchantsMerchantId(context.Background(), merchantId).Execute()
+			resp, httpRes, err := apiClient.AccountMerchantLevelApi.GetMerchantAccount(context.Background(), merchantId).Execute()
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "Error : %v\n", err)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)

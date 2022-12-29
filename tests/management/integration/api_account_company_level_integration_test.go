@@ -36,7 +36,7 @@ func Test_Integration_ManagementAPI_AccountCompanyLevelApiService(t *testing.T) 
 
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 
-			resp, httpRes, err := apiClient.AccountCompanyLevelApi.GetCompanies(context.Background()).Execute()
+			resp, httpRes, err := apiClient.AccountCompanyLevelApi.ListCompanyAccounts(context.Background()).Execute()
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "Error : %v\n", err)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)
@@ -49,7 +49,7 @@ func Test_Integration_ManagementAPI_AccountCompanyLevelApiService(t *testing.T) 
 
 			var invalidPageNumber int32 = 0
 
-			resp, httpRes, err := apiClient.AccountCompanyLevelApi.GetCompanies(context.Background()).PageNumber(invalidPageNumber).Execute()
+			resp, httpRes, err := apiClient.AccountCompanyLevelApi.ListCompanyAccounts(context.Background()).PageNumber(invalidPageNumber).Execute()
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "Error : %v\n", err)
 				fmt.Fprintf(os.Stderr, "Full response: %v\n", resp)
@@ -67,7 +67,7 @@ func Test_Integration_ManagementAPI_AccountCompanyLevelApiService(t *testing.T) 
 
 			companyId := "TestCompany123"
 
-			resp, httpRes, err := apiClient.AccountCompanyLevelApi.GetCompaniesCompanyId(context.Background(), companyId).Execute()
+			resp, httpRes, err := apiClient.AccountCompanyLevelApi.GetCompanyAccount(context.Background(), companyId).Execute()
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "Error : %v\n", err)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)
@@ -84,7 +84,7 @@ func Test_Integration_ManagementAPI_AccountCompanyLevelApiService(t *testing.T) 
 
 			companyId := "TestCompany123"
 
-			resp, httpRes, err := apiClient.AccountCompanyLevelApi.GetCompaniesCompanyIdMerchants(context.Background(), companyId).Execute()
+			resp, httpRes, err := apiClient.AccountCompanyLevelApi.ListMerchantAccounts(context.Background(), companyId).Execute()
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "Error : %v\n", err)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)

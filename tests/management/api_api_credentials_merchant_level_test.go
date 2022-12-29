@@ -61,7 +61,7 @@ func Test_ManagementAPI_APICredentialsMerchantLevelApiService(t *testing.T) {
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 
 			id := "TestMerchantAccount"
-			resp, httpRes, err := apiClient.APICredentialsMerchantLevelApi.GetMerchantsMerchantIdApiCredentials(context.Background(), id).Execute()
+			resp, httpRes, err := apiClient.APICredentialsMerchantLevelApi.ListApiCredentials(context.Background(), id).Execute()
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "Error when calling `APICredentialsMerchantLevelApi.GetMerchantsIdApiCredentials``: %v\n", err)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)
@@ -73,7 +73,7 @@ func Test_ManagementAPI_APICredentialsMerchantLevelApiService(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 
 			id := "notExisting"
-			resp, httpRes, err := apiClient.APICredentialsMerchantLevelApi.GetMerchantsMerchantIdApiCredentials(context.Background(), id).Execute()
+			resp, httpRes, err := apiClient.APICredentialsMerchantLevelApi.ListApiCredentials(context.Background(), id).Execute()
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "Error when calling `APICredentialsMerchantLevelApi.GetMerchantsIdApiCredentials``: %v\n", err)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)

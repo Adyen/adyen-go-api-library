@@ -36,7 +36,7 @@ func Test_Integration_ManagementAPI_MyAPICredentialApiService(t *testing.T) {
 
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 
-			resp, httpRes, err := apiClient.MyAPICredentialApi.GetMe(context.Background()).Execute()
+			resp, httpRes, err := apiClient.MyAPICredentialApi.GetApiCredentialDetails(context.Background()).Execute()
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "Error when calling `MyAPICredentialApi.GetMe``: %v\n", err)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)
@@ -53,7 +53,7 @@ func Test_Integration_ManagementAPI_MyAPICredentialApiService(t *testing.T) {
 			require.Nil(t, err, "Error creating Config object")
 			apiInvalidKeyClient := Management.NewAPIClient(misconfig)
 
-			resp, httpRes, err := apiInvalidKeyClient.MyAPICredentialApi.GetMe(context.Background()).Execute()
+			resp, httpRes, err := apiInvalidKeyClient.MyAPICredentialApi.GetApiCredentialDetails(context.Background()).Execute()
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "Error when calling `MyAPICredentialApi.GetMe``: %v\n", err)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)
@@ -68,7 +68,7 @@ func Test_Integration_ManagementAPI_MyAPICredentialApiService(t *testing.T) {
 
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 
-			resp, httpRes, err := apiClient.MyAPICredentialApi.GetMeAllowedOrigins(context.Background()).Execute()
+			resp, httpRes, err := apiClient.MyAPICredentialApi.GetAllowedOrigins(context.Background()).Execute()
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "Error when calling `MyAPICredentialApi.GetMeAllowedOrigins``: %v\n", err)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)

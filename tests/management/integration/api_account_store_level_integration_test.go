@@ -38,7 +38,7 @@ func Test_Integration_ManagementAPI_AccountStoreLevelApiService(t *testing.T) {
 
 			merchantId := "TestMerchantAccount"
 
-			resp, httpRes, err := apiClient.AccountStoreLevelApi.GetMerchantsMerchantIdStores(context.Background(), merchantId).Execute()
+			resp, httpRes, err := apiClient.AccountStoreLevelApi.ListStoresByMerchantId(context.Background(), merchantId).Execute()
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "Error : %v\n", err)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)
@@ -53,7 +53,7 @@ func Test_Integration_ManagementAPI_AccountStoreLevelApiService(t *testing.T) {
 
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 
-			resp, httpRes, err := apiClient.AccountStoreLevelApi.GetStores(context.Background()).Execute()
+			resp, httpRes, err := apiClient.AccountStoreLevelApi.ListStores(context.Background()).Execute()
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "Error : %v\n", err)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)
@@ -70,7 +70,7 @@ func Test_Integration_ManagementAPI_AccountStoreLevelApiService(t *testing.T) {
 
 			storeId := "notExisting"
 
-			resp, httpRes, err := apiClient.AccountStoreLevelApi.GetStoresStoreId(context.Background(), storeId).Execute()
+			resp, httpRes, err := apiClient.AccountStoreLevelApi.GetStoreById(context.Background(), storeId).Execute()
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "Error : %v\n", err.Error())
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)
