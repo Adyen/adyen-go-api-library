@@ -36,7 +36,7 @@ func Test_ManagementAPI_APICredentialsMerchantLevelApiService(t *testing.T) {
 			model := Management.ListMerchantApiCredentialsResponse{Data: []Management.ApiCredential{{Id: "TestMerchantAccount"}}}
 			mockResponse(http.StatusOK, w, model)
 		case "/merchants/notExisting/apiCredentials":
-			model := Management.ListMerchantApiCredentialsResponse{Data: []Management.ApiCredential{{Id: "TestMerchantAccount"}}}
+			model := Management.NewRestServiceErrorWithDefaults()
 			mockResponse(http.StatusForbidden, w, model)
 		default:
 			t.Errorf("Mock not found")
