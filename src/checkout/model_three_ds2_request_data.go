@@ -1,7 +1,7 @@
 /*
  * Adyen Checkout API
  *
- * Adyen Checkout API provides a simple and flexible way to initiate and authorise online payments. You can use the same integration for payments made with cards (including 3D Secure), mobile wallets, and local payment methods (for example, iDEAL and Sofort).  This API reference provides information on available endpoints and how to interact with them. To learn more about the API, visit [Checkout documentation](https://docs.adyen.com/online-payments).  ## Authentication Each request to the Checkout API must be signed with an API key. For this, obtain an API Key from your Customer Area, as described in [How to get the API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key). Then set this key to the `X-API-Key` header value, for example:  ``` curl -H \"Content-Type: application/json\" \\ -H \"X-API-Key: Your_Checkout_API_key\" \\ ... ``` Note that when going live, you need to generate a new API Key to access the [live endpoints](https://docs.adyen.com/development-resources/live-endpoints).  ## Versioning Checkout API supports [versioning](https://docs.adyen.com/development-resources/versioning) using a version suffix in the endpoint URL. This suffix has the following format: \"vXX\", where XX is the version number.  For example: ``` https://checkout-test.adyen.com/v69/payments ```  ## Release notes Have a look at the [release notes](https://docs.adyen.com/online-payments/release-notes?integration_type=api&version=69) to find out what changed in this version!
+ * Adyen Checkout API provides a simple and flexible way to initiate and authorise online payments. You can use the same integration for payments made with cards (including 3D Secure), mobile wallets, and local payment methods (for example, iDEAL and Sofort).  This API reference provides information on available endpoints and how to interact with them. To learn more about the API, visit [online payments documentation](https://docs.adyen.com/online-payments).  ## Authentication Each request to Checkout API must be signed with an API key. For this, [get your API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key) from your Customer Area, and set this key to the `X-API-Key` header value, for example:  ``` curl -H \"Content-Type: application/json\" \\ -H \"X-API-Key: YOUR_API_KEY\" \\ ... ``` ## Versioning Checkout API supports [versioning](https://docs.adyen.com/development-resources/versioning) using a version suffix in the endpoint URL. This suffix has the following format: \"vXX\", where XX is the version number.  For example: ``` https://checkout-test.adyen.com/v69/payments ```  ## Going live  To access the live endpoints, you need an API key from your live Customer Area.  The live endpoint URLs contain a prefix which is unique to your company account, for example: ``` https://{PREFIX}-checkout-live.adyenpayments.com/checkout/v69/payments ```  Get your `{PREFIX}` from your live Customer Area under **Developers** > **API URLs** > **Prefix**.  When preparing to do live transactions with Checkout API, follow the [go-live checklist](https://docs.adyen.com/online-payments/go-live-checklist) to make sure you've got all the required configuration in place.  ## Release notes Have a look at the [release notes](https://docs.adyen.com/online-payments/release-notes?integration_type=api&version=69) to find out what changed in this version!
  *
  * API version: 69
  * Contact: developer-experience@adyen.com
@@ -9,6 +9,7 @@
  */
 
 package checkout
+
 // ThreeDS2RequestData struct for ThreeDS2RequestData
 type ThreeDS2RequestData struct {
 	AcctInfo *AcctInfo `json:"acctInfo,omitempty"`
@@ -22,19 +23,19 @@ type ThreeDS2RequestData struct {
 	AddrMatch string `json:"addrMatch,omitempty"`
 	// If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only), and not the payment authorisation.
 	AuthenticationOnly bool `json:"authenticationOnly,omitempty"`
-	// Possibility to specify a preference for receiving a challenge from the issuer. Allowed values: * `noPreference` * `requestNoChallenge` * `requestChallenge` * `requestChallengeAsMandate` 
+	// Possibility to specify a preference for receiving a challenge from the issuer. Allowed values: * `noPreference` * `requestNoChallenge` * `requestChallenge` * `requestChallengeAsMandate`
 	ChallengeIndicator string `json:"challengeIndicator,omitempty"`
 	// The environment of the shopper. Allowed values: * `app` * `browser`
-	DeviceChannel string `json:"deviceChannel"`
+	DeviceChannel       string               `json:"deviceChannel"`
 	DeviceRenderOptions *DeviceRenderOptions `json:"deviceRenderOptions,omitempty"`
-	HomePhone *Phone `json:"homePhone,omitempty"`
+	HomePhone           *Phone               `json:"homePhone,omitempty"`
 	// Required for merchants that have been enrolled for 3D Secure 2 by another party than Adyen, mostly [authentication-only integrations](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only). The `mcc` is a four-digit code with which the previously given `acquirerMerchantID` is registered at the scheme.
 	Mcc string `json:"mcc,omitempty"`
 	// Required for [authentication-only integration](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only). The merchant name that the issuer presents to the shopper if they get a challenge. We recommend to use the same value that you will use in the authorization. Maximum length is 40 characters. > Optional for a [full 3D Secure 2 integration](https://docs.adyen.com/online-payments/3d-secure/native-3ds2/api-integration). Use this field if you are enrolled for 3D Secure 2 with us and want to override the merchant name already configured on your account.
 	MerchantName string `json:"merchantName,omitempty"`
 	// The `messageVersion` value indicating the 3D Secure 2 protocol version.
 	MessageVersion string `json:"messageVersion,omitempty"`
-	MobilePhone *Phone `json:"mobilePhone,omitempty"`
+	MobilePhone    *Phone `json:"mobilePhone,omitempty"`
 	// URL to where the issuer should send the `CRes`. Required if you are not using components for `channel` **Web** or if you are using classic integration `deviceChannel` **browser**.
 	NotificationURL string `json:"notificationURL,omitempty"`
 	// Value **true** indicates that the transaction was de-tokenised prior to being received by the ACS.
@@ -50,7 +51,7 @@ type ThreeDS2RequestData struct {
 	// The `sdkAppID` value as received from the 3D Secure 2 SDK. Required for `deviceChannel` set to **app**.
 	SdkAppID string `json:"sdkAppID,omitempty"`
 	// The `sdkEncData` value as received from the 3D Secure 2 SDK. Required for `deviceChannel` set to **app**.
-	SdkEncData string `json:"sdkEncData,omitempty"`
+	SdkEncData     string          `json:"sdkEncData,omitempty"`
 	SdkEphemPubKey *SDKEphemPubKey `json:"sdkEphemPubKey,omitempty"`
 	// The maximum amount of time in minutes for the 3D Secure 2 authentication process. Optional and only for `deviceChannel` set to **app**. Defaults to **60** minutes.
 	SdkMaxTimeout int32 `json:"sdkMaxTimeout,omitempty"`
@@ -63,14 +64,14 @@ type ThreeDS2RequestData struct {
 	// Completion indicator for the device fingerprinting.
 	ThreeDSCompInd string `json:"threeDSCompInd,omitempty"`
 	// Indicates the type of Authentication request.
-	ThreeDSRequestorAuthenticationInd string `json:"threeDSRequestorAuthenticationInd,omitempty"`
+	ThreeDSRequestorAuthenticationInd  string                              `json:"threeDSRequestorAuthenticationInd,omitempty"`
 	ThreeDSRequestorAuthenticationInfo *ThreeDSRequestorAuthenticationInfo `json:"threeDSRequestorAuthenticationInfo,omitempty"`
-	// Indicates whether a challenge is requested for this transaction. Possible values: * **01** — No preference * **02** — No challenge requested * **03** — Challenge requested (3DS Requestor preference) * **04** — Challenge requested (Mandate) * **05** — No challenge (transactional risk analysis is already performed)
+	// Indicates whether a challenge is requested for this transaction. Possible values: * **01** — No preference * **02** — No challenge requested * **03** — Challenge requested (3DS Requestor preference) * **04** — Challenge requested (Mandate) * **05** — No challenge (transactional risk analysis is already performed) * **06** — Data Only
 	ThreeDSRequestorChallengeInd string `json:"threeDSRequestorChallengeInd,omitempty"`
 	// Required for [authentication-only integration](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only) for Visa. Unique 3D Secure requestor identifier assigned by the Directory Server when you enrol for 3D Secure 2.
 	ThreeDSRequestorID string `json:"threeDSRequestorID,omitempty"`
 	// Required for [authentication-only integration](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only) for Visa. Unique 3D Secure requestor name assigned by the Directory Server when you enrol for 3D Secure 2.
-	ThreeDSRequestorName string `json:"threeDSRequestorName,omitempty"`
+	ThreeDSRequestorName                    string                                   `json:"threeDSRequestorName,omitempty"`
 	ThreeDSRequestorPriorAuthenticationInfo *ThreeDSRequestorPriorAuthenticationInfo `json:"threeDSRequestorPriorAuthenticationInfo,omitempty"`
 	// URL of the (customer service) website that will be shown to the shopper in case of technical errors during the 3D Secure 2 process.
 	ThreeDSRequestorURL string `json:"threeDSRequestorURL,omitempty"`
@@ -80,5 +81,5 @@ type ThreeDS2RequestData struct {
 	TransactionType string `json:"transactionType,omitempty"`
 	// The `whiteListStatus` value returned from a previous 3D Secure 2 transaction, only applicable for 3D Secure 2 protocol version 2.2.0.
 	WhiteListStatus string `json:"whiteListStatus,omitempty"`
-	WorkPhone *Phone `json:"workPhone,omitempty"`
+	WorkPhone       *Phone `json:"workPhone,omitempty"`
 }

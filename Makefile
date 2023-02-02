@@ -32,12 +32,13 @@ Checkout: service=checkout
 
 # Generate a full client (models and service classes)
 Checkout: schema $(openapi-generator-jar)
-	$(openapi-generator-cli) generate \
+	GO_POST_PROCESS_FILE="gofmt -w" $(openapi-generator-cli) generate \
 		-i schema/json/$(spec).json \
 		-g $(generator) \
 		-t $(templates) \
 		-o $(output) \
 		-p packageName=Checkout \
+		--enable-post-process-file \
 		--global-property models \
 		--global-property modelDocs=false \
 		--global-property modelTests=false \
