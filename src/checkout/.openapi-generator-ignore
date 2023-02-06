@@ -32,3 +32,6 @@ go.mod
 go.sum
 response.go
 utils.go
+
+model_payment_request_helper.go
+model_payment_response_helper.go
