@@ -28,13 +28,13 @@ import (
     "context"
     "fmt"
     "os"
-	openapiclient "github.com/adyen/adyen-go-api-library/v6/src/legalentity"
+    openapiclient "github.com/adyen/adyen-go-api-library/v6/src/legalentity"
 )
 
 func main() {
     id := "id_example" // string | The unique identifier of the business line.
 
-	username := "YOUR_USERNAME"
+    username := "YOUR_USERNAME"
     password := "YOUR_PASSWORD"
     env := openapiclient.TestEnv
 
@@ -101,13 +101,13 @@ import (
     "context"
     "fmt"
     "os"
-	openapiclient "github.com/adyen/adyen-go-api-library/v6/src/legalentity"
+    openapiclient "github.com/adyen/adyen-go-api-library/v6/src/legalentity"
 )
 
 func main() {
     id := "id_example" // string | The unique identifier of the business line.
 
-	username := "YOUR_USERNAME"
+    username := "YOUR_USERNAME"
     password := "YOUR_PASSWORD"
     env := openapiclient.TestEnv
 
@@ -176,14 +176,14 @@ import (
     "context"
     "fmt"
     "os"
-	openapiclient "github.com/adyen/adyen-go-api-library/v6/src/legalentity"
+    openapiclient "github.com/adyen/adyen-go-api-library/v6/src/legalentity"
 )
 
 func main() {
     id := "id_example" // string | The unique identifier of the business line.
     businessLineInfoUpdate := *openapiclient.NewBusinessLineInfoUpdate() // BusinessLineInfoUpdate |  (optional)
 
-	username := "YOUR_USERNAME"
+    username := "YOUR_USERNAME"
     password := "YOUR_PASSWORD"
     env := openapiclient.TestEnv
 
@@ -253,13 +253,13 @@ import (
     "context"
     "fmt"
     "os"
-	openapiclient "github.com/adyen/adyen-go-api-library/v6/src/legalentity"
+    openapiclient "github.com/adyen/adyen-go-api-library/v6/src/legalentity"
 )
 
 func main() {
     businessLineInfo := *openapiclient.NewBusinessLineInfo("Capability_example", "IndustryCode_example", "LegalEntityId_example") // BusinessLineInfo |  (optional)
 
-	username := "YOUR_USERNAME"
+    username := "YOUR_USERNAME"
     password := "YOUR_PASSWORD"
     env := openapiclient.TestEnv
 

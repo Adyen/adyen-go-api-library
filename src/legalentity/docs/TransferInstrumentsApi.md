@@ -28,13 +28,13 @@ import (
     "context"
     "fmt"
     "os"
-	openapiclient "github.com/adyen/adyen-go-api-library/v6/src/legalentity"
+    openapiclient "github.com/adyen/adyen-go-api-library/v6/src/legalentity"
 )
 
 func main() {
     id := "id_example" // string | The unique identifier of the transfer instrument to be deleted.
 
-	username := "YOUR_USERNAME"
+    username := "YOUR_USERNAME"
     password := "YOUR_PASSWORD"
     env := openapiclient.TestEnv
 
@@ -103,13 +103,13 @@ import (
     "context"
     "fmt"
     "os"
-	openapiclient "github.com/adyen/adyen-go-api-library/v6/src/legalentity"
+    openapiclient "github.com/adyen/adyen-go-api-library/v6/src/legalentity"
 )
 
 func main() {
     id := "id_example" // string | The unique identifier of the transfer instrument.
 
-	username := "YOUR_USERNAME"
+    username := "YOUR_USERNAME"
     password := "YOUR_PASSWORD"
     env := openapiclient.TestEnv
 
@@ -178,14 +178,14 @@ import (
     "context"
     "fmt"
     "os"
-	openapiclient "github.com/adyen/adyen-go-api-library/v6/src/legalentity"
+    openapiclient "github.com/adyen/adyen-go-api-library/v6/src/legalentity"
 )
 
 func main() {
     id := "id_example" // string | The unique identifier of the transfer instrument.
     transferInstrumentInfo := *openapiclient.NewTransferInstrumentInfo(*openapiclient.NewBankAccountInfo("CountryCode_example", "CurrencyCode_example"), "LegalEntityId_example", "Type_example") // TransferInstrumentInfo |  (optional)
 
-	username := "YOUR_USERNAME"
+    username := "YOUR_USERNAME"
     password := "YOUR_PASSWORD"
     env := openapiclient.TestEnv
 
@@ -255,13 +255,13 @@ import (
     "context"
     "fmt"
     "os"
-	openapiclient "github.com/adyen/adyen-go-api-library/v6/src/legalentity"
+    openapiclient "github.com/adyen/adyen-go-api-library/v6/src/legalentity"
 )
 
 func main() {
     transferInstrumentInfo := *openapiclient.NewTransferInstrumentInfo(*openapiclient.NewBankAccountInfo("CountryCode_example", "CurrencyCode_example"), "LegalEntityId_example", "Type_example") // TransferInstrumentInfo |  (optional)
 
-	username := "YOUR_USERNAME"
+    username := "YOUR_USERNAME"
     password := "YOUR_PASSWORD"
     env := openapiclient.TestEnv
 

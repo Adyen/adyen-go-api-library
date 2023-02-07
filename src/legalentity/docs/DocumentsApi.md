@@ -28,13 +28,13 @@ import (
     "context"
     "fmt"
     "os"
-	openapiclient "github.com/adyen/adyen-go-api-library/v6/src/legalentity"
+    openapiclient "github.com/adyen/adyen-go-api-library/v6/src/legalentity"
 )
 
 func main() {
     id := "id_example" // string | The unique identifier of the document to be deleted.
 
-	username := "YOUR_USERNAME"
+    username := "YOUR_USERNAME"
     password := "YOUR_PASSWORD"
     env := openapiclient.TestEnv
 
@@ -103,13 +103,13 @@ import (
     "context"
     "fmt"
     "os"
-	openapiclient "github.com/adyen/adyen-go-api-library/v6/src/legalentity"
+    openapiclient "github.com/adyen/adyen-go-api-library/v6/src/legalentity"
 )
 
 func main() {
     id := "id_example" // string | The unique identifier of the document.
 
-	username := "YOUR_USERNAME"
+    username := "YOUR_USERNAME"
     password := "YOUR_PASSWORD"
     env := openapiclient.TestEnv
 
@@ -178,14 +178,14 @@ import (
     "context"
     "fmt"
     "os"
-	openapiclient "github.com/adyen/adyen-go-api-library/v6/src/legalentity"
+    openapiclient "github.com/adyen/adyen-go-api-library/v6/src/legalentity"
 )
 
 func main() {
     id := "id_example" // string | The unique identifier of the document to be updated.
     document := *openapiclient.NewDocument([]openapiclient.Attachment{*openapiclient.NewAttachment(string(123))}, "Description_example", "Id_example", *openapiclient.NewOwnerEntity("Id_example", "Type_example"), "Type_example") // Document |  (optional)
 
-	username := "YOUR_USERNAME"
+    username := "YOUR_USERNAME"
     password := "YOUR_PASSWORD"
     env := openapiclient.TestEnv
 
@@ -255,13 +255,13 @@ import (
     "context"
     "fmt"
     "os"
-	openapiclient "github.com/adyen/adyen-go-api-library/v6/src/legalentity"
+    openapiclient "github.com/adyen/adyen-go-api-library/v6/src/legalentity"
 )
 
 func main() {
     document := *openapiclient.NewDocument([]openapiclient.Attachment{*openapiclient.NewAttachment(string(123))}, "Description_example", "Id_example", *openapiclient.NewOwnerEntity("Id_example", "Type_example"), "Type_example") // Document |  (optional)
 
-	username := "YOUR_USERNAME"
+    username := "YOUR_USERNAME"
     password := "YOUR_PASSWORD"
     env := openapiclient.TestEnv
 
