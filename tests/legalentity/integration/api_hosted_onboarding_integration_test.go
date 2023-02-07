@@ -1,3 +1,6 @@
+//go:build integration
+// +build integration
+
 /*
 Legal Entity Management API
 
@@ -19,7 +22,7 @@ import (
 	"testing"
 )
 
-func Test_LegalEntity_HostedOnboardingApiService(t *testing.T) {
+func Test_Integration_LegalEntity_HostedOnboardingApiService(t *testing.T) {
 
 	godotenv.Load("./../../../.env")
 
