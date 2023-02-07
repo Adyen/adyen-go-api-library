@@ -29,10 +29,10 @@ import (
     "context"
     "fmt"
     "os"
+    {{goImportAlias}} "{{gitHost}}/{{gitUserId}}/{{gitRepoId}}{{#isGoSubmodule}}/{{packageName}}{{/isGoSubmodule}}/src/{{#lambda.lowercase}}{{packageName}}{{/lambda.lowercase}}"
 {{#vendorExtensions.x-go-import}}
 {{{vendorExtensions.x-go-import}}}
 {{/vendorExtensions.x-go-import}}
-	{{goImportAlias}} "{{gitHost}}/{{gitUserId}}/{{gitRepoId}}{{#isGoSubmodule}}/{{packageName}}{{/isGoSubmodule}}/src/{{#lambda.lowercase}}{{packageName}}{{/lambda.lowercase}}"
 )
 
 func main() {
@@ -40,7 +40,7 @@ func main() {
     {{paramName}} := {{{vendorExtensions.x-go-example}}} // {{{dataType}}} | {{{description}}}{{^required}} (optional){{/required}}{{#defaultValue}} (default to {{{.}}}){{/defaultValue}}
     {{/allParams}}
 
-	username := "YOUR_USERNAME"
+    username := "YOUR_USERNAME"
     password := "YOUR_PASSWORD"
     env := {{goImportAlias}}.TestEnv
 
