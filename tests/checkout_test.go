@@ -341,7 +341,7 @@ func Test_Checkout(t *testing.T) {
 	t.Run("PaymentsResult", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 			res, httpRes, err := client.Checkout.PaymentsResult(&checkout.PaymentVerificationRequest{Payload: "dummyPayload"})
-			
+
 			require.NotNil(t, err)
 			assert.Equal(t, true, strings.Contains(err.Error(), "Invalid payload provided"))
 			require.NotNil(t, httpRes)
@@ -495,9 +495,9 @@ func Test_Checkout(t *testing.T) {
 				client.Checkout.Sessions(&checkout.CreateCheckoutSessionRequest{})
 
 			require.NotNil(t, err)
-			assert.Equal(t, true, strings.Contains(err.Error(), "Invalid Merchant Account (validation: 901)"))
+			assert.Equal(t, true, strings.Contains(err.Error(), "Invalid Merchant Account (security: 901)"))
 			require.NotNil(t, httpRes)
-			assert.Equal(t, 422, httpRes.StatusCode)
+			assert.Equal(t, 403, httpRes.StatusCode)
 			require.NotNil(t, res)
 		})
 	})
@@ -506,7 +506,7 @@ func Test_Checkout(t *testing.T) {
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 
 			req := &checkout.CardDetailsRequest{
-				CardNumber:     "37000000",				
+				CardNumber:      "37000000",
 				CountryCode:     "NL",
 				MerchantAccount: MerchantAccount,
 			}
@@ -523,7 +523,7 @@ func Test_Checkout(t *testing.T) {
 		})
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 			req := &checkout.CardDetailsRequest{
-				CardNumber:     "3700",				
+				CardNumber:      "3700",
 				CountryCode:     "NL",
 				MerchantAccount: MerchantAccount,
 			}

@@ -143,7 +143,7 @@ func Test_Recurring(t *testing.T) {
 				MerchantAccount: MerchantAccount,
 				Reference:       "4343553GFGFYFY4654654675765",
 				Card: &recurring.Card{
-					ExpiryMonth: "03",
+					ExpiryMonth: "99",
 					ExpiryYear:  "2030",
 					HolderName:  "Adyen test",
 					Number:      "4111111111111111",
@@ -151,10 +151,10 @@ func Test_Recurring(t *testing.T) {
 			})
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
-			assert.Equal(t, true, strings.Contains(err.Error(), "No registered account for AccountUpdater"))
+			assert.Equal(t, true, strings.Contains(err.Error(), "Expiry month should be between 1 and 12 inclusive: 99"))
 			assert.Equal(t, 422, httpRes.StatusCode)
 			require.NotNil(t, res)
-			assert.Equal(t, "No registered account for AccountUpdater.", err.(common.APIError).Message)
+			assert.Equal(t, "Expiry month should be between 1 and 12 inclusive: 99", err.(common.APIError).Message)
 		})
 	})
 }
