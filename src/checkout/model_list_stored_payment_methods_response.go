@@ -10,12 +10,12 @@
 
 package checkout
 
-// WeChatPayMiniProgramDetails struct for WeChatPayMiniProgramDetails
-type WeChatPayMiniProgramDetails struct {
-	AppId string `json:"appId,omitempty"`
-	// The checkout attempt identifier.
-	CheckoutAttemptId string `json:"checkoutAttemptId,omitempty"`
-	Openid            string `json:"openid,omitempty"`
-	// **wechatpayMiniProgram**
-	Type string `json:"type,omitempty"`
+// ListStoredPaymentMethodsResponse struct for ListStoredPaymentMethodsResponse
+type ListStoredPaymentMethodsResponse struct {
+	// Your merchant account.
+	MerchantAccount string `json:"merchantAccount,omitempty"`
+	// Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters. > Your reference must not include personally identifiable information (PII), for example name or email address.
+	ShopperReference string `json:"shopperReference,omitempty"`
+	// List of all stored payment methods.
+	StoredPaymentMethods *[]StoredPaymentMethodResource `json:"storedPaymentMethods,omitempty"`
 }

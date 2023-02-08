@@ -10,12 +10,8 @@
 
 package checkout
 
-// WeChatPayMiniProgramDetails struct for WeChatPayMiniProgramDetails
-type WeChatPayMiniProgramDetails struct {
-	AppId string `json:"appId,omitempty"`
-	// The checkout attempt identifier.
-	CheckoutAttemptId string `json:"checkoutAttemptId,omitempty"`
-	Openid            string `json:"openid,omitempty"`
-	// **wechatpayMiniProgram**
-	Type string `json:"type,omitempty"`
+// DetailsRequestAuthenticationData struct for DetailsRequestAuthenticationData
+type DetailsRequestAuthenticationData struct {
+	// If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only), and not the payment authorisation. Default: *false**.
+	AuthenticationOnly bool `json:"authenticationOnly,omitempty"`
 }

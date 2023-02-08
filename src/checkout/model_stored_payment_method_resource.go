@@ -10,20 +10,26 @@
 
 package checkout
 
-// StoredPaymentMethod struct for StoredPaymentMethod
-type StoredPaymentMethod struct {
+// StoredPaymentMethodResource struct for StoredPaymentMethodResource
+type StoredPaymentMethodResource struct {
 	// The brand of the card.
 	Brand string `json:"brand,omitempty"`
 	// The month the card expires.
 	ExpiryMonth string `json:"expiryMonth,omitempty"`
 	// The last two digits of the year the card expires. For example, **22** for the year 2022.
 	ExpiryYear string `json:"expiryYear,omitempty"`
+	// The response code returned by an external system (for example after a provisioning operation).
+	ExternalResponseCode string `json:"externalResponseCode,omitempty"`
+	// The token reference of a linked token in an external system (for example a network token reference).
+	ExternalTokenReference string `json:"externalTokenReference,omitempty"`
 	// The unique payment method code.
 	HolderName string `json:"holderName,omitempty"`
 	// The IBAN of the bank account.
 	Iban string `json:"iban,omitempty"`
 	// A unique identifier of this stored payment method.
 	Id string `json:"id,omitempty"`
+	// The name of the issuer of token or card.
+	IssuerName string `json:"issuerName,omitempty"`
 	// The last four digits of the PAN.
 	LastFour string `json:"lastFour,omitempty"`
 	// The display name of the stored payment method.
@@ -34,10 +40,10 @@ type StoredPaymentMethod struct {
 	OwnerName string `json:"ownerName,omitempty"`
 	// The shopper’s email address.
 	ShopperEmail string `json:"shopperEmail,omitempty"`
-	// The supported recurring processing models for this stored payment method.
+	// Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters. > Your reference must not include personally identifiable information (PII), for example name or email address.
+	ShopperReference string `json:"shopperReference,omitempty"`
+	// Defines a recurring payment type. Allowed values: * `Subscription` – A transaction for a fixed or variable amount, which follows a fixed schedule. * `CardOnFile` – With a card-on-file (CoF) transaction, card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction. * `UnscheduledCardOnFile` – An unscheduled card-on-file (UCoF) transaction is a transaction that occurs on a non-fixed schedule and/or have variable amounts. For example, automatic top-ups when a cardholder's balance drops below a certain amount.
 	SupportedRecurringProcessingModels []string `json:"supportedRecurringProcessingModels,omitempty"`
-	// The supported shopper interactions for this stored payment method.
-	SupportedShopperInteractions []string `json:"supportedShopperInteractions,omitempty"`
 	// The type of payment method.
 	Type string `json:"type,omitempty"`
 }

@@ -495,9 +495,9 @@ func Test_Checkout(t *testing.T) {
 				client.Checkout.Sessions(&checkout.CreateCheckoutSessionRequest{})
 
 			require.NotNil(t, err)
-			assert.Equal(t, true, strings.Contains(err.Error(), "Invalid Merchant Account (security: 901)"))
+			assert.Equal(t, true, strings.Contains(err.Error(), "Required field 'reference' is not provided. (validation: 130)"))
 			require.NotNil(t, httpRes)
-			assert.Equal(t, 403, httpRes.StatusCode)
+			assert.Equal(t, 422, httpRes.StatusCode)
 			require.NotNil(t, res)
 		})
 	})

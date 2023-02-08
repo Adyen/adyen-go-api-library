@@ -27,7 +27,7 @@ templates:=templates/go
 # Generate models (for each service)
 models: $(services)
 
-Checkout: spec=CheckoutService-v69
+Checkout: spec=CheckoutService-v70
 Checkout: service=checkout
 
 # Generate a full client (models and service classes)
