@@ -15,6 +15,7 @@ The Library supports all APIs under the following services:
     * [Fund API](https://docs.adyen.com/api-explorer/#/Fund/v6/overview) Current supported version: **v6**
     * [Notification Configuration API](https://docs.adyen.com/api-explorer/#/NotificationConfigurationService/v6/overview) Current supported version: **v6**
 * [Cloud-based Terminal API](https://docs.adyen.com/point-of-sale/terminal-api-reference): Our point-of-sale integration.
+* [Legal Entity Management API](https://docs.adyen.com/api-explorer/#/legalentity/v2/overview): Manage legal entities that contain information required for verification. Current supported version: **v2**  
 
 For more information, refer to our [documentation](https://docs.adyen.com/) or the [API Explorer](https://docs.adyen.com/api-explorer/).
 
@@ -23,6 +24,7 @@ For more information, refer to our [documentation](https://docs.adyen.com/) or t
 -   Go 1.13 or higher
 -   [Adyen test account](https://docs.adyen.com/get-started-with-adyen)
 -   [API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key). For testing, your API credential needs to have the [API PCI Payments role](https://docs.adyen.com/development-resources/api-credentials#roles).
+-   [Basic Authentication](https://docs.adyen.com/development-resources/api-credentials#basic-authentication) (for Legal Entity Management API only). 
 
 
 ## Documentation
