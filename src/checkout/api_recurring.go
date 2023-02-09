@@ -17,52 +17,33 @@ import (
 )
 
 /*
-GetPaymentLinksLinkId Get a payment link
-Retrieves the payment link details using the payment link &#x60;id&#x60;.
- * @param linkId Unique identifier of the payment link.
+DeleteStoredPaymentMethodsRecurringId Delete a token for stored payment details
+Deletes the token identified in the path. The token can no longer be used with payment requests.
+ * @param recurringId The unique identifier of the token.
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return PaymentLinkResponse
+@return StoredPaymentMethodResource
 */
-func (a Checkout) GetPaymentLink(linkId *string, ctxs ..._context.Context) (PaymentLinkResponse, *_nethttp.Response, error) {
-	res := &PaymentLinkResponse{}
+func (a Checkout) DeleteTokenForStoredPaymentDetails(recurringId *string, ctxs ..._context.Context) (StoredPaymentMethodResource, *_nethttp.Response, error) {
+	res := &StoredPaymentMethodResource{}
 
-	path := "/paymentLinks/{linkId}"
-	path = strings.ReplaceAll(path, "{"+"linkId"+"}", *linkId)
+	path := "/storedPaymentMethods/{recurringId}"
+	path = strings.ReplaceAll(path, "{"+"recurringId"+"}", *recurringId)
+
+	httpRes, err := a.Client.MakeHTTPDeleteRequest(res, a.BasePath()+path, ctxs...)
+	return *res, httpRes, err
+}
+
+/*
+GetStoredPaymentMethods Get tokens for stored payment details
+Lists the tokens for stored payment details for the shopper identified in the path, if there are any available. The token ID can be used with payment requests for the shopper&#39;s payment. A summary of the stored details is included.
+ * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return ListStoredPaymentMethodsResponse
+*/
+func (a Checkout) GetTokensForStoredPaymentDetails(ctxs ..._context.Context) (ListStoredPaymentMethodsResponse, *_nethttp.Response, error) {
+	res := &ListStoredPaymentMethodsResponse{}
+
+	path := "/storedPaymentMethods"
 
 	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path, ctxs...)
-	return *res, httpRes, err
-}
-
-/*
-PatchPaymentLinksLinkId Update the status of a payment link
-Updates the status of a payment link. Use this endpoint to [force the expiry of a payment link](https://docs.adyen.com/online-payments/pay-by-link#update-payment-link-status).
- * @param linkId Unique identifier of the payment link.
- * @param req UpdatePaymentLinkRequest - reference of UpdatePaymentLinkRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return PaymentLinkResponse
-*/
-func (a Checkout) UpdatePaymentLink(linkId *string, req *UpdatePaymentLinkRequest, ctxs ..._context.Context) (PaymentLinkResponse, *_nethttp.Response, error) {
-	res := &PaymentLinkResponse{}
-
-	path := "/paymentLinks/{linkId}"
-	path = strings.ReplaceAll(path, "{"+"linkId"+"}", *linkId)
-
-	httpRes, err := a.Client.MakeHTTPPatchRequest(req, res, a.BasePath()+path, ctxs...)
-	return *res, httpRes, err
-}
-
-/*
-PostPaymentLinks Create a payment link
-Creates a payment link to our hosted payment form where shoppers can pay. The list of payment methods presented to the shopper depends on the &#x60;currency&#x60; and &#x60;country&#x60; parameters sent in the request.  For more information, refer to [Pay by Link documentation](https://docs.adyen.com/online-payments/pay-by-link#create-payment-links-through-api).
- * @param req CreatePaymentLinkRequest - reference of CreatePaymentLinkRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return PaymentLinkResponse
-*/
-func (a Checkout) CreatePaymentLink(req *CreatePaymentLinkRequest, ctxs ..._context.Context) (PaymentLinkResponse, *_nethttp.Response, error) {
-	res := &PaymentLinkResponse{}
-
-	path := "/paymentLinks"
-
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
 	return *res, httpRes, err
 }

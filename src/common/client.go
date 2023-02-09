@@ -120,6 +120,12 @@ func (c *Client) MakeHTTPGetRequest(res interface{}, path string, ctxs ...contex
 	return CreateHTTPRequest(c, http.MethodGet, req, res, path, ctxs)
 }
 
+// MakeHTTPDeleteRequest is a generic method used to make HTTP DELETE requests
+func (c *Client) MakeHTTPDeleteRequest(res interface{}, path string, ctxs ...context.Context) (*http.Response, error) {
+	var req interface{}
+	return CreateHTTPRequest(c, http.MethodGet, req, res, path, ctxs)
+}
+
 // MakeHTTPPatchRequest is a generic method used to make HTTP PATCH requests
 func (c *Client) MakeHTTPPatchRequest(req interface{}, res interface{}, path string, ctxs ...context.Context) (*http.Response, error) {
 	return CreateHTTPRequest(c, http.MethodPatch, req, res, path, ctxs)

@@ -39,7 +39,7 @@ Checkout: schema $(openapi-generator-jar)
 		-o $(output) \
 		-p packageName=Checkout \
 		--enable-post-process-file \
-		--global-property models \
+		--global-property apis \
 		--global-property modelDocs=false \
 		--global-property modelTests=false \
 		--additional-properties=serviceName=$@
