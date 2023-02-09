@@ -72,9 +72,12 @@ Sends payment parameters (like amount, country, and currency) together with othe
 */
 func (a Checkout) Payments(req *PaymentRequest, ctxs ..._context.Context) (PaymentResponse, *_nethttp.Response, error) {
 	res := &PaymentResponse{}
+	if req.ApplicationInfo == nil {
+		req.ApplicationInfo = &ApplicationInfo{}
+	}
+	req.ApplicationInfo.AdyenLibrary = getAdyenLibInfo()
 
 	path := "/payments"
-
 	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
 	return *res, httpRes, err
 }
@@ -104,9 +107,12 @@ Creates a payment session for [Web Drop-in](https://docs.adyen.com/online-paymen
 */
 func (a Checkout) Sessions(req *CreateCheckoutSessionRequest, ctxs ..._context.Context) (CreateCheckoutSessionResponse, *_nethttp.Response, error) {
 	res := &CreateCheckoutSessionResponse{}
+	if req.ApplicationInfo == nil {
+		req.ApplicationInfo = &ApplicationInfo{}
+	}
+	req.ApplicationInfo.AdyenLibrary = getAdyenLibInfo()
 
 	path := "/sessions"
-
 	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
 	return *res, httpRes, err
 }
