@@ -1,16 +1,15 @@
 /*
  * PaymentRequest helper
  *
- * Adyen Checkout API provides a simple and flexible way to initiate and authorise online payments. 
+ * Adyen Checkout API provides a simple and flexible way to initiate and authorise online payments.
  *
  */
 
- package checkout
+package checkout
 
- import (
-	 "encoding/json"
- )
-
+import (
+	"encoding/json"
+)
 
 // UnmarshalJSON unmarshals a quoted json string to PaymentRequest struct
 func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
@@ -109,7 +108,7 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 
 		case "billdesk_online":
 			intermediate := &struct {
-				PaymentMethod *BillDeskOnlineDetails `json:"paymentMethod"`
+				PaymentMethod *BillDeskDetails `json:"paymentMethod"`
 				*PaymentRequestAlias
 			}{
 				PaymentRequestAlias: (*PaymentRequestAlias)(req),
@@ -122,7 +121,7 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 
 		case "billdesk_wallet":
 			intermediate := &struct {
-				PaymentMethod *BillDeskWalletDetails `json:"paymentMethod"`
+				PaymentMethod *BillDeskDetails `json:"paymentMethod"`
 				*PaymentRequestAlias
 			}{
 				PaymentRequestAlias: (*PaymentRequestAlias)(req),
@@ -211,19 +210,6 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 			}
 			req.PaymentMethod = intermediate.PaymentMethod
 
-		case "entercash":
-			intermediate := &struct {
-				PaymentMethod *EntercashDetails `json:"paymentMethod"`
-				*PaymentRequestAlias
-			}{
-				PaymentRequestAlias: (*PaymentRequestAlias)(req),
-			}
-
-			if err := json.Unmarshal(b, &intermediate); err != nil {
-				return err
-			}
-			req.PaymentMethod = intermediate.PaymentMethod
-
 		case "giropay":
 			intermediate := &struct {
 				PaymentMethod *GiropayDetails `json:"paymentMethod"`
@@ -266,19 +252,6 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "klarna", "klarnapayments", "klarnapayments_account", "klarnapayments_b2b", "klarna_paynow", "klarna_account", "klarna_b2b":
 			intermediate := &struct {
 				PaymentMethod *KlarnaDetails `json:"paymentMethod"`
-				*PaymentRequestAlias
-			}{
-				PaymentRequestAlias: (*PaymentRequestAlias)(req),
-			}
-
-			if err := json.Unmarshal(b, &intermediate); err != nil {
-				return err
-			}
-			req.PaymentMethod = intermediate.PaymentMethod
-
-		case "lianlianpay_ebanking_enterprise", "lianlianpay_ebanking_credit", "lianlianpay_ebanking_debit":
-			intermediate := &struct {
-				PaymentMethod *LianLianPayDetails `json:"paymentMethod"`
 				*PaymentRequestAlias
 			}{
 				PaymentRequestAlias: (*PaymentRequestAlias)(req),
@@ -367,19 +340,6 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 			}
 			req.PaymentMethod = intermediate.PaymentMethod
 
-		case "qiwiwallet":
-			intermediate := &struct {
-				PaymentMethod *QiwiWalletDetails `json:"paymentMethod"`
-				*PaymentRequestAlias
-			}{
-				PaymentRequestAlias: (*PaymentRequestAlias)(req),
-			}
-
-			if err := json.Unmarshal(b, &intermediate); err != nil {
-				return err
-			}
-			req.PaymentMethod = intermediate.PaymentMethod
-
 		case "samsungpay":
 			intermediate := &struct {
 				PaymentMethod *SamsungPayDetails `json:"paymentMethod"`
@@ -396,19 +356,6 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 		case "sepadirectdebit":
 			intermediate := &struct {
 				PaymentMethod *SepaDirectDebitDetails `json:"paymentMethod"`
-				*PaymentRequestAlias
-			}{
-				PaymentRequestAlias: (*PaymentRequestAlias)(req),
-			}
-
-			if err := json.Unmarshal(b, &intermediate); err != nil {
-				return err
-			}
-			req.PaymentMethod = intermediate.PaymentMethod
-
-		case "upi":
-			intermediate := &struct {
-				PaymentMethod *UpiDetails `json:"paymentMethod"`
 				*PaymentRequestAlias
 			}{
 				PaymentRequestAlias: (*PaymentRequestAlias)(req),
@@ -488,4 +435,3 @@ func (req *PaymentRequest) UnmarshalJSON(b []byte) error {
 
 	return nil
 }
-

@@ -42,7 +42,7 @@ func Test_Checkout(t *testing.T) {
 
 	t.Run("PaymentLinks", func(t *testing.T) {
 		createPaymentLink := func() (checkout.PaymentLinkResponse, *_nethttp.Response, error) {
-			return client.Checkout.PaymentLinks(&checkout.CreatePaymentLinkRequest{
+			return client.Checkout.CreatePaymentLink(&checkout.CreatePaymentLinkRequest{
 				Reference: "123456781235",
 				Amount: checkout.Amount{
 					Value:    1250,
@@ -64,7 +64,7 @@ func Test_Checkout(t *testing.T) {
 			})
 		}
 		t.Run("Create an API request that should fail", func(t *testing.T) {
-			res, httpRes, err := client.Checkout.PaymentLinks(&checkout.CreatePaymentLinkRequest{
+			res, httpRes, err := client.Checkout.CreatePaymentLink(&checkout.CreatePaymentLinkRequest{
 				Amount: checkout.Amount{
 					Value:    1250,
 					Currency: "EUR",
@@ -90,7 +90,7 @@ func Test_Checkout(t *testing.T) {
 
 		t.Run("Get payment link", func(t *testing.T) {
 			paymentLink, _, _ := createPaymentLink()
-			res, httpRes, err := client.Checkout.GetPaymentLink(paymentLink.Id)
+			res, httpRes, err := client.Checkout.GetPaymentLink(&paymentLink.Id)
 
 			require.Nil(t, err)
 			require.NotNil(t, httpRes)
@@ -103,7 +103,7 @@ func Test_Checkout(t *testing.T) {
 
 		t.Run("Update payment link", func(t *testing.T) {
 			paymentLink, _, _ := createPaymentLink()
-			res, httpRes, err := client.Checkout.UpdatePaymentLink(paymentLink.Id, &checkout.UpdatePaymentLinkRequest{
+			res, httpRes, err := client.Checkout.UpdatePaymentLink(&paymentLink.Id, &checkout.UpdatePaymentLinkRequest{
 				Status: "expired",
 			})
 
@@ -340,8 +340,8 @@ func Test_Checkout(t *testing.T) {
 
 	t.Run("PaymentsResult", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
-			res, httpRes, err := client.Checkout.PaymentsResult(&checkout.PaymentVerificationRequest{Payload: "dummyPayload"})
-			
+			res, httpRes, err := client.Checkout.VerifyPaymentResult(&checkout.PaymentVerificationRequest{Payload: "dummyPayload"})
+
 			require.NotNil(t, err)
 			assert.Equal(t, true, strings.Contains(err.Error(), "Invalid payload provided"))
 			require.NotNil(t, httpRes)
@@ -362,7 +362,7 @@ func Test_Checkout(t *testing.T) {
 	t.Run("Utility", func(t *testing.T) {
 		t.Run("Get origin keys", func(t *testing.T) {
 			domain := "https://adyen.com"
-			res, httpRes, err := client.Checkout.OriginKeys(&checkout.CheckoutUtilityRequest{
+			res, httpRes, err := client.Checkout.CreateOriginkeyValuesForDomains(&checkout.CheckoutUtilityRequest{
 				OriginDomains: []string{
 					domain,
 				},
@@ -379,7 +379,7 @@ func Test_Checkout(t *testing.T) {
 	t.Run("Orders", func(t *testing.T) {
 		t.Run("Get balance", func(t *testing.T) {
 			t.Skip("Payment method not correctly configured in the backoffice")
-			res, httpRes, err := client.Checkout.PaymentMethodsBalance(&checkout.CheckoutBalanceCheckRequest{
+			res, httpRes, err := client.Checkout.GetBalanceOfGiftCard(&checkout.CheckoutBalanceCheckRequest{
 				MerchantAccount: MerchantAccount,
 				PaymentMethod: map[string]interface{}{
 					"type":       "giftcard",
@@ -401,7 +401,7 @@ func Test_Checkout(t *testing.T) {
 			assert.Equal(t, int64(100), res.Balance.Value)
 		})
 		t.Run("Create order", func(t *testing.T) {
-			res, httpRes, err := client.Checkout.Orders(&checkout.CheckoutCreateOrderRequest{
+			res, httpRes, err := client.Checkout.CreateOrder(&checkout.CheckoutCreateOrderRequest{
 				Amount: checkout.Amount{
 					Currency: "EUR",
 					Value:    1000,
@@ -417,7 +417,7 @@ func Test_Checkout(t *testing.T) {
 			assert.Equal(t, int64(1000), res.RemainingAmount.Value)
 		})
 		t.Run("Cancel order", func(t *testing.T) {
-			order, _, _ := client.Checkout.Orders(&checkout.CheckoutCreateOrderRequest{
+			order, _, _ := client.Checkout.CreateOrder(&checkout.CheckoutCreateOrderRequest{
 				Amount: checkout.Amount{
 					Currency: "EUR",
 					Value:    1000,
@@ -426,7 +426,7 @@ func Test_Checkout(t *testing.T) {
 				Reference:       "CREATE_ORDER_REF",
 			})
 
-			res, httpRes, err := client.Checkout.OrdersCancel(&checkout.CheckoutCancelOrderRequest{
+			res, httpRes, err := client.Checkout.CancelOrder(&checkout.CheckoutCancelOrderRequest{
 				MerchantAccount: MerchantAccount,
 				Order: checkout.CheckoutOrder{
 					OrderData:    order.OrderData,
@@ -441,7 +441,7 @@ func Test_Checkout(t *testing.T) {
 			assert.Equal(t, "Received", res.ResultCode)
 		})
 		t.Run("Create an API request that should fail", func(t *testing.T) {
-			res, httpRes, err := client.Checkout.Orders(&checkout.CheckoutCreateOrderRequest{
+			res, httpRes, err := client.Checkout.CreateOrder(&checkout.CheckoutCreateOrderRequest{
 				Amount: checkout.Amount{
 					Currency: "EUR",
 					Value:    1000,
@@ -495,7 +495,7 @@ func Test_Checkout(t *testing.T) {
 				client.Checkout.Sessions(&checkout.CreateCheckoutSessionRequest{})
 
 			require.NotNil(t, err)
-			assert.Equal(t, true, strings.Contains(err.Error(), "Invalid Merchant Account (validation: 901)"))
+			assert.Equal(t, true, strings.Contains(err.Error(), "Required field 'reference' is not provided. (validation: 130)"))
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 422, httpRes.StatusCode)
 			require.NotNil(t, res)
@@ -506,13 +506,13 @@ func Test_Checkout(t *testing.T) {
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 
 			req := &checkout.CardDetailsRequest{
-				CardNumber:     "37000000",				
+				CardNumber:      "37000000",
 				CountryCode:     "NL",
 				MerchantAccount: MerchantAccount,
 			}
 
 			res, httpRes, err :=
-				client.Checkout.CardDetails(req)
+				client.Checkout.ListBrandsOnCard(req)
 
 			require.Nil(t, err)
 			require.NotNil(t, httpRes)
@@ -523,13 +523,13 @@ func Test_Checkout(t *testing.T) {
 		})
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 			req := &checkout.CardDetailsRequest{
-				CardNumber:     "3700",				
+				CardNumber:      "3700",
 				CountryCode:     "NL",
 				MerchantAccount: MerchantAccount,
 			}
 
 			res, httpRes, err :=
-				client.Checkout.CardDetails(req)
+				client.Checkout.ListBrandsOnCard(req)
 
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)

@@ -36,8 +36,9 @@ func Test_API_Modifications(t *testing.T) {
 	t.Run("API Modifications - Captures", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 
+			pspReference := "psp0001"
 			res, httpRes, err :=
-				client.Checkout.PaymentsPaymentPspReferenceCaptures("psp0001",
+				client.Checkout.CaptureAuthorisedPayment(&pspReference,
 					&checkout.CreatePaymentCaptureRequest{
 						MerchantAccount: MerchantAccount,
 						Amount: checkout.Amount{
@@ -58,7 +59,7 @@ func Test_API_Modifications(t *testing.T) {
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 
 			res, httpRes, err :=
-				client.Checkout.Cancels(
+				client.Checkout.CancelAuthorisedPayment(
 					&checkout.CreateStandalonePaymentCancelRequest{
 						MerchantAccount:  MerchantAccount,
 						PaymentReference: "paymentReference01",
@@ -74,7 +75,7 @@ func Test_API_Modifications(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 
 			_, httpRes, err :=
-				client.Checkout.Cancels(
+				client.Checkout.CancelAuthorisedPayment(
 					&checkout.CreateStandalonePaymentCancelRequest{
 						MerchantAccount:  MerchantAccount,
 						PaymentReference: "",
@@ -90,8 +91,9 @@ func Test_API_Modifications(t *testing.T) {
 	t.Run("API Modifications - Refunds", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 
+			pspReference := "psp0001"
 			_, httpRes, err :=
-				client.Checkout.PaymentsPaymentPspReferenceRefunds("psp0001",
+				client.Checkout.RefundCapturedPayment(&pspReference,
 					&checkout.CreatePaymentRefundRequest{
 						MerchantAccount: MerchantAccount,
 						Reference:       "reference01",
@@ -110,8 +112,9 @@ func Test_API_Modifications(t *testing.T) {
 	t.Run("API Modifications - Reversals", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 
+			pspReference := "psp0001"
 			_, httpRes, err :=
-				client.Checkout.PaymentsPaymentPspReferenceReversals("psp0001",
+				client.Checkout.RefundOrCancelPayment(&pspReference,
 					&checkout.CreatePaymentReversalRequest{
 						MerchantAccount: MerchantAccount,
 						Reference:       "reference01",
