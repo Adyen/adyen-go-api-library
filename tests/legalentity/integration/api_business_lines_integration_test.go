@@ -29,7 +29,7 @@ func Test_Integration_LegalEntity_BusinessLinesApiService(t *testing.T) {
 
 	t.Run("Test BusinessLinesApiService GetBusinessLine", func(t *testing.T) {
 
-		var id = "SE322JV223222J5HFLTWQ5XLD"
+		var id = os.Getenv("LEM_BUSINESS_LINE_ID")
 
 		resp, httpRes, err := apiClient.BusinessLinesApi.GetBusinessLine(context.Background(), id).Execute()
 

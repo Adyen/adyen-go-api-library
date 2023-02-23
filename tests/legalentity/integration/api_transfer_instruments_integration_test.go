@@ -29,7 +29,7 @@ func Test_LegalEntity_TransferInstrumentsApiService(t *testing.T) {
 
 	t.Run("Test TransferInstrumentsApiService GetTransferInstrument", func(t *testing.T) {
 
-		var id = "SE322KH223222J5HFLT8R5LKJ"
+		var id = os.Getenv("LEM_TRANSFER_INSTRUMENT_ID")
 
 		resp, httpRes, err := apiClient.TransferInstrumentsApi.GetTransferInstrument(context.Background(), id).Execute()
 

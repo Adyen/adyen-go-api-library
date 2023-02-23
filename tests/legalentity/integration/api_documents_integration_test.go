@@ -26,7 +26,7 @@ func Test_Integration_LegalEntity_DocumentsApiService(t *testing.T) {
 
 	t.Run("Test DocumentsApiService GetDocument", func(t *testing.T) {
 
-		var id = "SE322JV223222J5HFMFRR6JWS"
+		var id = os.Getenv("LEM_DOCUMENT_ID")
 
 		resp, httpRes, err := apiClient.DocumentsApi.GetDocument(context.Background(), id).Execute()
 

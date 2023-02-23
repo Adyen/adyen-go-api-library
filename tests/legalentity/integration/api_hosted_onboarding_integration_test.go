@@ -39,7 +39,7 @@ func Test_Integration_LegalEntity_HostedOnboardingApiService(t *testing.T) {
 
 	t.Run("Test HostedOnboardingApiService GetOnboardingLinkTheme", func(t *testing.T) {
 
-		themeId := "ONBT422KH223222D5FWVDXN2PT6PFJ"
+		themeId := os.Getenv("LEM_THEME_ID")
 
 		resp, httpRes, err := apiClient.HostedOnboardingApi.GetOnboardingLinkTheme(context.Background(), themeId).Execute()
 

@@ -30,7 +30,7 @@ func Test_Integration_LegalEntity_LegalEntitiesApiService(t *testing.T) {
 	t.Run("Test LegalEntitiesApiService GetLegalEntity", func(t *testing.T) {
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 
-			var id = "LE322JV223222J5HFLRNL5VZ3"
+			var id = os.Getenv("LEM_LEGAL_ENTITY_ID")
 
 			resp, httpRes, err := apiClient.LegalEntitiesApi.GetLegalEntity(context.Background(), id).Execute()
 
@@ -66,7 +66,7 @@ func Test_Integration_LegalEntity_LegalEntitiesApiService(t *testing.T) {
 
 	t.Run("Test LegalEntitiesApiService GetAllBusinessLinesUnderLegalEntity", func(t *testing.T) {
 
-		var id = "LE322JV223222J5HFLRNL5VZ3"
+		var id = os.Getenv("LEM_LEGAL_ENTITY_ID")
 
 		resp, httpRes, err := apiClient.LegalEntitiesApi.GetAllBusinessLinesUnderLegalEntity(context.Background(), id).Execute()
 

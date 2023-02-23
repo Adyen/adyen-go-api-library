@@ -29,7 +29,7 @@ func Test_Integration_LegalEntity_TermsOfServiceApiService(t *testing.T) {
 
 	t.Run("Test TermsOfServiceApiService GetTermsOfServiceInformationForLegalEntity", func(t *testing.T) {
 
-		var id = "LE322JV223222J5HFLRNL5VZ3"
+		var id = os.Getenv("LEM_LEGAL_ENTITY_ID")
 
 		resp, httpRes, err := apiClient.TermsOfServiceApi.GetTermsOfServiceInformationForLegalEntity(context.Background(), id).Execute()
 
@@ -43,8 +43,7 @@ func Test_Integration_LegalEntity_TermsOfServiceApiService(t *testing.T) {
 
 		// endpoint error - re-enable the test and verify server-side fix
 		t.SkipNow()
-
-		var id = "LE322JV223222J5HFLRNL5VZ3"
+		var id = os.Getenv("LEM_LEGAL_ENTITY_ID")
 
 		resp, httpRes, err := apiClient.TermsOfServiceApi.GetTermsOfServiceStatus(context.Background(), id).Execute()
 
