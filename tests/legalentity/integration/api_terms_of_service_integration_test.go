@@ -13,7 +13,7 @@ import (
 	"testing"
 )
 
-func Test_Integration_LegalEntity_HostedOnboardingApiService(t *testing.T) {
+func Test_Integration_LegalEntity_TermsOfServiceApiService(t *testing.T) {
 
 	godotenv.Load("./../../../.env")
 
@@ -27,9 +27,11 @@ func Test_Integration_LegalEntity_HostedOnboardingApiService(t *testing.T) {
 	require.Nil(t, err, "Error creating Config object")
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test HostedOnboardingApiService ListHostedOnboardingPageThemes", func(t *testing.T) {
+	t.Run("Test TermsOfServiceApiService GetTermsOfServiceInformationForLegalEntity", func(t *testing.T) {
 
-		resp, httpRes, err := apiClient.HostedOnboardingApi.ListHostedOnboardingPageThemes(context.Background()).Execute()
+		var id = os.Getenv("LEM_LEGAL_ENTITY_ID")
+
+		resp, httpRes, err := apiClient.TermsOfServiceApi.GetTermsOfServiceInformationForLegalEntity(context.Background(), id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -37,11 +39,13 @@ func Test_Integration_LegalEntity_HostedOnboardingApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test HostedOnboardingApiService GetOnboardingLinkTheme", func(t *testing.T) {
+	t.Run("Test TermsOfServiceApiService GetTermsOfServiceStatus", func(t *testing.T) {
 
-		themeId := os.Getenv("LEM_THEME_ID")
+		// endpoint error - re-enable the test and verify server-side fix
+		t.SkipNow()
+		var id = os.Getenv("LEM_LEGAL_ENTITY_ID")
 
-		resp, httpRes, err := apiClient.HostedOnboardingApi.GetOnboardingLinkTheme(context.Background(), themeId).Execute()
+		resp, httpRes, err := apiClient.TermsOfServiceApi.GetTermsOfServiceStatus(context.Background(), id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

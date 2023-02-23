@@ -13,7 +13,7 @@ import (
 	"testing"
 )
 
-func Test_Integration_LegalEntity_HostedOnboardingApiService(t *testing.T) {
+func Test_LegalEntity_TransferInstrumentsApiService(t *testing.T) {
 
 	godotenv.Load("./../../../.env")
 
@@ -27,21 +27,11 @@ func Test_Integration_LegalEntity_HostedOnboardingApiService(t *testing.T) {
 	require.Nil(t, err, "Error creating Config object")
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test HostedOnboardingApiService ListHostedOnboardingPageThemes", func(t *testing.T) {
+	t.Run("Test TransferInstrumentsApiService GetTransferInstrument", func(t *testing.T) {
 
-		resp, httpRes, err := apiClient.HostedOnboardingApi.ListHostedOnboardingPageThemes(context.Background()).Execute()
+		var id = os.Getenv("LEM_TRANSFER_INSTRUMENT_ID")
 
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test HostedOnboardingApiService GetOnboardingLinkTheme", func(t *testing.T) {
-
-		themeId := os.Getenv("LEM_THEME_ID")
-
-		resp, httpRes, err := apiClient.HostedOnboardingApi.GetOnboardingLinkTheme(context.Background(), themeId).Execute()
+		resp, httpRes, err := apiClient.TransferInstrumentsApi.GetTransferInstrument(context.Background(), id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
