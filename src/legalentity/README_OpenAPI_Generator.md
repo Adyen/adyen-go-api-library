@@ -56,12 +56,19 @@ go test -v ./tests/legalentity/...
 
 **Step 4**: Run LegalEntity unit and integration tests
 
-**Note:** integration tests require `username` and `password` for Basic Authentication.
+**Note:** integration tests require `username` and `password` for Basic Authentication as well as
+the IDs of entities to test
 
 In the `.env` file configure the following
 ``````
 ADYEN_LEM_USERNAME=your_lem_username
 ADYEN_LEM_PASSWORD=your_lem_password
+
+LEM_LEGAL_ENTITY_ID=your_legal_entity_id
+LEM_BUSINESS_LINE_ID=your_business_line_id
+LEM_DOCUMENT_ID=your_document_id
+LEM_THEME_ID=your_theme_id
+LEM_TRANSFER_INSTRUMENT_ID=your_transfer_instrument_id
 
 ``````
 Run all tests
