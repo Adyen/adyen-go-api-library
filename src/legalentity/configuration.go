@@ -20,7 +20,7 @@ import (
 const (
 	LegalEntityApiVersion      = "v2"
 	LegalEntityApiEndpointTest = "https://kyc-test.adyen.com/lem/" + LegalEntityApiVersion
-	LegalEntityApiEndpointLive = "https://kyc-test.adyen.com/lem/" + LegalEntityApiVersion
+	LegalEntityApiEndpointLive = "https://kyc-live.adyen.com/lem/" + LegalEntityApiVersion
 )
 
 // contextKeys are used to identify the type of value in the context.
