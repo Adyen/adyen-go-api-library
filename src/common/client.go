@@ -219,6 +219,8 @@ func (c *Client) PrepareRequest(
 
 	// Add the user agent to the Request.
 	localVarRequest.Header.Add("User-Agent", c.Cfg.UserAgent)
+	localVarRequest.Header.Add("adyen-library-name", LibName)
+	localVarRequest.Header.Add("adyen-library-version", LibVersion)
 	localVarRequest.Header.Add("Cache-Control", "no-cache")
 
 	// Add authentication headers
