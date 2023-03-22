@@ -14,35 +14,35 @@ verify: build run test
 
 # Automation
 
-openapi-generator-version:=5.4.0
+openapi-generator-version:=6.4.0
 openapi-generator-url:=https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/$(openapi-generator-version)/openapi-generator-cli-$(openapi-generator-version).jar
 openapi-generator-jar:=bin/openapi-generator-cli.jar
 openapi-generator-cli:=java -jar $(openapi-generator-jar)
 
 generator:=go
-services:=Checkout
-output:=src/checkout
-templates:=templates/go
+services:=checkout
+output:=checkout
+templates:=templates/go-v6.4.0
 
 # Generate models (for each service)
 models: $(services)
 
-Checkout: spec=CheckoutService-v70
-Checkout: service=checkout
+checkout: spec=CheckoutService-v70
+checkout: service=checkout
 
 # Generate a full client (models and service classes)
-Checkout: schema $(openapi-generator-jar)
+checkout: schema $(openapi-generator-jar)
 	GO_POST_PROCESS_FILE="gofmt -w" $(openapi-generator-cli) generate \
 		-i schema/json/$(spec).json \
 		-g $(generator) \
 		-t $(templates) \
 		-o $(output) \
-		-p packageName=Checkout \
+		-p packageName=$(@) \
+		--global-property apiTests=false \
+		--git-repo-id adyen-go-api-library/v6 --git-user-id adyen \
 		--enable-post-process-file \
-		--global-property apis \
-		--global-property modelDocs=false \
-		--global-property modelTests=false \
 		--additional-properties=serviceName=$@
+	rm -rf $(output)/go.{mod,sum}
 
 # Checkout spec (and patch version)
 schema:
