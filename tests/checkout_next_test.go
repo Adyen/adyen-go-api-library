@@ -21,7 +21,7 @@ func Test_Checkout_Next(t *testing.T) {
 		APIKey          = os.Getenv("ADYEN_API_KEY")
 	)
 
-	configuration := checkout.NewConfiguration()
+	configuration := checkout.NewClientConfig()
 	client := checkout.NewAPIClient(configuration)
 	// client.GetConfig().Debug = true
 
