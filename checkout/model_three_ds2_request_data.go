@@ -1533,3 +1533,58 @@ func (v *NullableThreeDS2RequestData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *ThreeDS2RequestData) isValidAcctType() bool {
+	var allowedEnumValues = []string{"01", "02", "03"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetAcctType() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *ThreeDS2RequestData) isValidAddrMatch() bool {
+	var allowedEnumValues = []string{"Y", "N"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetAddrMatch() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *ThreeDS2RequestData) isValidChallengeIndicator() bool {
+	var allowedEnumValues = []string{"noPreference", "requestNoChallenge", "requestChallenge", "requestChallengeAsMandate"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetChallengeIndicator() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *ThreeDS2RequestData) isValidThreeDSRequestorChallengeInd() bool {
+	var allowedEnumValues = []string{"01", "02", "03", "04", "05", "06"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetThreeDSRequestorChallengeInd() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *ThreeDS2RequestData) isValidTransType() bool {
+	var allowedEnumValues = []string{"01", "03", "10", "11", "28"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetTransType() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *ThreeDS2RequestData) isValidTransactionType() bool {
+	var allowedEnumValues = []string{"goodsOrServicePurchase", "checkAcceptance", "accountFunding", "quasiCashTransaction", "prepaidActivationAndLoad"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetTransactionType() == allowed {
+			return true
+		}
+	}
+	return false
+}

@@ -22,8 +22,8 @@ func Test_Checkout_Next(t *testing.T) {
 	)
 
 	configuration := checkout.NewClientConfig()
+	//configuration.Debug = true
 	client := checkout.NewAPIClient(configuration)
-	// client.GetConfig().Debug = true
 
 	t.Run("PaymentMethods", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
@@ -84,6 +84,7 @@ func Test_Checkout_Next(t *testing.T) {
 		})
 
 		t.Run("iDEAL payment", func(t *testing.T) {
+			idempotencyKey := "b9c3947f-b282-4059-a645-56ddbbd2fef3"
 			ideal := checkout.NewIdealDetails("1121")
 			paymentRequest := *checkout.NewPaymentRequest(
 				*checkout.NewAmount("EUR", int64(1234)),
@@ -95,7 +96,7 @@ func Test_Checkout_Next(t *testing.T) {
 			contextKey := map[string]checkout.APIKey{"ApiKeyAuth": {Key: APIKey}}
 			auth := context.WithValue(context.Background(), checkout.ContextAPIKeys, contextKey)
 
-			res, httpRes, err := client.PaymentsApi.Payments(auth).PaymentRequest(paymentRequest).Execute()
+			res, httpRes, err := client.PaymentsApi.Payments(auth).IdempotencyKey(idempotencyKey).PaymentRequest(paymentRequest).Execute()
 
 			require.NotNil(t, res)
 			require.NotNil(t, httpRes)
@@ -104,7 +105,7 @@ func Test_Checkout_Next(t *testing.T) {
 			assert.Equal(t, 200, httpRes.StatusCode)
 			assert.Equal(t, "RedirectShopper", res.GetResultCode())
 			require.True(t, res.HasAction())
-			assert.Equal(t, "ideal", res.GetAction().CheckoutRedirectAction.PaymentMethodType)
+			assert.Equal(t, "ideal", res.GetAction().CheckoutRedirectAction.GetPaymentMethodType())
 			assert.NotEmpty(t, res.GetResultCode())
 		})
 	})

@@ -328,3 +328,22 @@ func (v *NullablePaymentAmountUpdateResource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *PaymentAmountUpdateResource) isValidIndustryUsage() bool {
+	var allowedEnumValues = []string{"delayedCharge", "installment", "noShow"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetIndustryUsage() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *PaymentAmountUpdateResource) isValidStatus() bool {
+	var allowedEnumValues = []string{"received"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetStatus() == allowed {
+			return true
+		}
+	}
+	return false
+}

@@ -263,3 +263,13 @@ func (v *NullableCheckoutRedirectAction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *CheckoutRedirectAction) isValidType() bool {
+	var allowedEnumValues = []string{"redirect"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
+}

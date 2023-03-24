@@ -803,3 +803,58 @@ func (v *NullableAccountInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *AccountInfo) isValidAccountAgeIndicator() bool {
+	var allowedEnumValues = []string{"notApplicable", "thisTransaction", "lessThan30Days", "from30To60Days", "moreThan60Days"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetAccountAgeIndicator() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *AccountInfo) isValidAccountChangeIndicator() bool {
+	var allowedEnumValues = []string{"thisTransaction", "lessThan30Days", "from30To60Days", "moreThan60Days"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetAccountChangeIndicator() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *AccountInfo) isValidAccountType() bool {
+	var allowedEnumValues = []string{"notApplicable", "credit", "debit"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetAccountType() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *AccountInfo) isValidDeliveryAddressUsageIndicator() bool {
+	var allowedEnumValues = []string{"thisTransaction", "lessThan30Days", "from30To60Days", "moreThan60Days"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetDeliveryAddressUsageIndicator() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *AccountInfo) isValidPasswordChangeIndicator() bool {
+	var allowedEnumValues = []string{"notApplicable", "thisTransaction", "lessThan30Days", "from30To60Days", "moreThan60Days"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetPasswordChangeIndicator() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *AccountInfo) isValidPaymentAccountIndicator() bool {
+	var allowedEnumValues = []string{"notApplicable", "thisTransaction", "lessThan30Days", "from30To60Days", "moreThan60Days"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetPaymentAccountIndicator() == allowed {
+			return true
+		}
+	}
+	return false
+}

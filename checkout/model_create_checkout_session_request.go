@@ -2044,3 +2044,40 @@ func (v *NullableCreateCheckoutSessionRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *CreateCheckoutSessionRequest) isValidChannel() bool {
+	var allowedEnumValues = []string{"iOS", "Android", "Web"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetChannel() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *CreateCheckoutSessionRequest) isValidRecurringProcessingModel() bool {
+	var allowedEnumValues = []string{"CardOnFile", "Subscription", "UnscheduledCardOnFile"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetRecurringProcessingModel() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *CreateCheckoutSessionRequest) isValidShopperInteraction() bool {
+	var allowedEnumValues = []string{"Ecommerce", "ContAuth", "Moto", "POS"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetShopperInteraction() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *CreateCheckoutSessionRequest) isValidStorePaymentMethodMode() bool {
+	var allowedEnumValues = []string{"askForConsent", "disabled", "enabled"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetStorePaymentMethodMode() == allowed {
+			return true
+		}
+	}
+	return false
+}

@@ -308,3 +308,22 @@ func (v *NullablePayWithGoogleDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *PayWithGoogleDetails) isValidFundingSource() bool {
+	var allowedEnumValues = []string{"debit"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetFundingSource() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *PayWithGoogleDetails) isValidType() bool {
+	var allowedEnumValues = []string{"paywithgoogle"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
+}

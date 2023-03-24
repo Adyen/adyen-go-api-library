@@ -201,3 +201,13 @@ func (v *NullableAuthenticationData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *AuthenticationData) isValidAttemptAuthentication() bool {
+	var allowedEnumValues = []string{"always", "never"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetAttemptAuthentication() == allowed {
+			return true
+		}
+	}
+	return false
+}

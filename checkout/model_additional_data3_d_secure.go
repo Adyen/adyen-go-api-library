@@ -317,3 +317,13 @@ func (v *NullableAdditionalData3DSecure) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *AdditionalData3DSecure) isValidChallengeWindowSize() bool {
+	var allowedEnumValues = []string{"01", "02", "03", "04", "05"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetChallengeWindowSize() == allowed {
+			return true
+		}
+	}
+	return false
+}

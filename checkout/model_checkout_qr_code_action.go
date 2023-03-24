@@ -300,3 +300,13 @@ func (v *NullableCheckoutQrCodeAction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *CheckoutQrCodeAction) isValidType() bool {
+	var allowedEnumValues = []string{"qrCode"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
+}

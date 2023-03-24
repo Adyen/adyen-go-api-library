@@ -1693,3 +1693,22 @@ func (v *NullableCheckoutBalanceCheckRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *CheckoutBalanceCheckRequest) isValidRecurringProcessingModel() bool {
+	var allowedEnumValues = []string{"CardOnFile", "Subscription", "UnscheduledCardOnFile"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetRecurringProcessingModel() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *CheckoutBalanceCheckRequest) isValidShopperInteraction() bool {
+	var allowedEnumValues = []string{"Ecommerce", "ContAuth", "Moto", "POS"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetShopperInteraction() == allowed {
+			return true
+		}
+	}
+	return false
+}

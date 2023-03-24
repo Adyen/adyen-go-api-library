@@ -41,6 +41,7 @@ checkout: schema $(openapi-generator-jar)
 		--global-property apiTests=false \
 		--git-repo-id adyen-go-api-library/v6 --git-user-id adyen \
 		--enable-post-process-file \
+		--additional-properties=useOneOfDiscriminatorLookup=true \
 		--additional-properties=serviceName=$@
 	rm -rf $(output)/go.{mod,sum}
 

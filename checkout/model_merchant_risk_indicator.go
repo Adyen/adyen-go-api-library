@@ -609,3 +609,22 @@ func (v *NullableMerchantRiskIndicator) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *MerchantRiskIndicator) isValidDeliveryAddressIndicator() bool {
+	var allowedEnumValues = []string{"shipToBillingAddress", "shipToVerifiedAddress", "shipToNewAddress", "shipToStore", "digitalGoods", "goodsNotShipped", "other"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetDeliveryAddressIndicator() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *MerchantRiskIndicator) isValidDeliveryTimeframe() bool {
+	var allowedEnumValues = []string{"electronicDelivery", "sameDayShipping", "overnightShipping", "twoOrMoreDaysShipping"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetDeliveryTimeframe() == allowed {
+			return true
+		}
+	}
+	return false
+}

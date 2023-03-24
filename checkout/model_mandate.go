@@ -356,3 +356,31 @@ func (v *NullableMandate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *Mandate) isValidAmountRule() bool {
+	var allowedEnumValues = []string{"max", "exact"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetAmountRule() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *Mandate) isValidBillingAttemptsRule() bool {
+	var allowedEnumValues = []string{"on", "before", "after"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetBillingAttemptsRule() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *Mandate) isValidFrequency() bool {
+	var allowedEnumValues = []string{"adhoc", "daily", "weekly", "biWeekly", "monthly", "quarterly", "halfYearly", "yearly"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetFrequency() == allowed {
+			return true
+		}
+	}
+	return false
+}

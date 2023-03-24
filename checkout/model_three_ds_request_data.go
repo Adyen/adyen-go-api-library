@@ -235,3 +235,40 @@ func (v *NullableThreeDSRequestData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *ThreeDSRequestData) isValidChallengeWindowSize() bool {
+	var allowedEnumValues = []string{"01", "02", "03", "04", "05"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetChallengeWindowSize() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *ThreeDSRequestData) isValidDataOnly() bool {
+	var allowedEnumValues = []string{"false", "true"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetDataOnly() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *ThreeDSRequestData) isValidNativeThreeDS() bool {
+	var allowedEnumValues = []string{"preferred"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetNativeThreeDS() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *ThreeDSRequestData) isValidThreeDSVersion() bool {
+	var allowedEnumValues = []string{"2.1.0", "2.2.0"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetThreeDSVersion() == allowed {
+			return true
+		}
+	}
+	return false
+}

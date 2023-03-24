@@ -230,3 +230,22 @@ func (v *NullableMasterpassDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *MasterpassDetails) isValidFundingSource() bool {
+	var allowedEnumValues = []string{"debit"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetFundingSource() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *MasterpassDetails) isValidType() bool {
+	var allowedEnumValues = []string{"masterpass"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
+}

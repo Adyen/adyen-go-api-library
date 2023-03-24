@@ -235,3 +235,13 @@ func (v *NullableThreeDSRequestorPriorAuthenticationInfo) UnmarshalJSON(src []by
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *ThreeDSRequestorPriorAuthenticationInfo) isValidThreeDSReqPriorAuthMethod() bool {
+	var allowedEnumValues = []string{"01", "02", "03", "04"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetThreeDSReqPriorAuthMethod() == allowed {
+			return true
+		}
+	}
+	return false
+}

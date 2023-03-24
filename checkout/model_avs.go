@@ -161,3 +161,13 @@ func (v *NullableAvs) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *Avs) isValidEnabled() bool {
+	var allowedEnumValues = []string{"yes", "no", "automatic"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetEnabled() == allowed {
+			return true
+		}
+	}
+	return false
+}

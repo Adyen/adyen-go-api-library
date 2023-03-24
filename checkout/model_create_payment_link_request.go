@@ -1433,3 +1433,22 @@ func (v *NullableCreatePaymentLinkRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *CreatePaymentLinkRequest) isValidRecurringProcessingModel() bool {
+	var allowedEnumValues = []string{"CardOnFile", "Subscription", "UnscheduledCardOnFile"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetRecurringProcessingModel() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *CreatePaymentLinkRequest) isValidStorePaymentMethodMode() bool {
+	var allowedEnumValues = []string{"askForConsent", "disabled", "enabled"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetStorePaymentMethodMode() == allowed {
+			return true
+		}
+	}
+	return false
+}

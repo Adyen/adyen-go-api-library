@@ -165,3 +165,13 @@ func (v *NullableDeviceRenderOptions) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *DeviceRenderOptions) isValidSdkInterface() bool {
+	var allowedEnumValues = []string{"native", "html", "both"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetSdkInterface() == allowed {
+			return true
+		}
+	}
+	return false
+}

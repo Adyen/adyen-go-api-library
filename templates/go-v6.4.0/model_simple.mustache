@@ -453,3 +453,19 @@ func (o *{{{classname}}}) UnmarshalJSON(bytes []byte) (err error) {
 
 {{/isArray}}
 {{>nullable_model}}
+
+{{#vars}}
+{{#allowableValues}}
+{{#isString}}
+func (o *{{classname}}) isValid{{name}}() bool {
+    var allowedEnumValues = []string{ {{#allowableValues}}{{#enumVars}}{{{value}}}{{^-last}}, {{/-last}}{{/enumVars}}{{/allowableValues}} }
+    for _, allowed := range allowedEnumValues {
+        if o.Get{{name}}() == allowed {
+            return true
+        }
+    }
+    return false
+}
+{{/isString}}
+{{/allowableValues}}
+{{/vars}}

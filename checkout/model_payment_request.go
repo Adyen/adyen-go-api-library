@@ -2363,3 +2363,49 @@ func (v *NullablePaymentRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *PaymentRequest) isValidChannel() bool {
+	var allowedEnumValues = []string{"iOS", "Android", "Web"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetChannel() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *PaymentRequest) isValidEntityType() bool {
+	var allowedEnumValues = []string{"NaturalPerson", "CompanyName"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetEntityType() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *PaymentRequest) isValidIndustryUsage() bool {
+	var allowedEnumValues = []string{"delayedCharge", "installment", "noShow"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetIndustryUsage() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *PaymentRequest) isValidRecurringProcessingModel() bool {
+	var allowedEnumValues = []string{"CardOnFile", "Subscription", "UnscheduledCardOnFile"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetRecurringProcessingModel() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *PaymentRequest) isValidShopperInteraction() bool {
+	var allowedEnumValues = []string{"Ecommerce", "ContAuth", "Moto", "POS"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetShopperInteraction() == allowed {
+			return true
+		}
+	}
+	return false
+}

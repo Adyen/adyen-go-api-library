@@ -273,3 +273,22 @@ func (v *NullableRecurring) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *Recurring) isValidContract() bool {
+	var allowedEnumValues = []string{"ONECLICK", "RECURRING", "PAYOUT"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetContract() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *Recurring) isValidTokenService() bool {
+	var allowedEnumValues = []string{"VISATOKENSERVICE", "MCTOKENSERVICE"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetTokenService() == allowed {
+			return true
+		}
+	}
+	return false
+}

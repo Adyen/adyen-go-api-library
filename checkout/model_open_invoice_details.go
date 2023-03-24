@@ -354,3 +354,13 @@ func (v *NullableOpenInvoiceDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *OpenInvoiceDetails) isValidType() bool {
+	var allowedEnumValues = []string{"openinvoice", "afterpay_directdebit", "atome_pos"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
+}

@@ -152,3 +152,13 @@ func (v *NullableInstallments) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *Installments) isValidPlan() bool {
+	var allowedEnumValues = []string{"regular", "revolving"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetPlan() == allowed {
+			return true
+		}
+	}
+	return false
+}

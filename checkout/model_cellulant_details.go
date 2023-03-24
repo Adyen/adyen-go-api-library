@@ -202,3 +202,13 @@ func (v *NullableCellulantDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *CellulantDetails) isValidType() bool {
+	var allowedEnumValues = []string{"cellulant"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
+}

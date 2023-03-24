@@ -232,3 +232,13 @@ func (v *NullableConfiguration) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *Configuration) isValidCardHolderName() bool {
+	var allowedEnumValues = []string{"NONE", "OPTIONAL", "REQUIRED"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetCardHolderName() == allowed {
+			return true
+		}
+	}
+	return false
+}

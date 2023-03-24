@@ -679,3 +679,13 @@ func (v *NullableAdditionalDataCommon) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *AdditionalDataCommon) isValidIndustryUsage() bool {
+	var allowedEnumValues = []string{"NoShow", "DelayedCharge"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetIndustryUsage() == allowed {
+			return true
+		}
+	}
+	return false
+}

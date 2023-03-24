@@ -198,3 +198,13 @@ func (v *NullableThreeDSRequestorAuthenticationInfo) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *ThreeDSRequestorAuthenticationInfo) isValidThreeDSReqAuthMethod() bool {
+	var allowedEnumValues = []string{"01", "02", "03", "04", "05", "06"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetThreeDSReqAuthMethod() == allowed {
+			return true
+		}
+	}
+	return false
+}

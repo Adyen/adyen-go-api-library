@@ -198,3 +198,31 @@ func (v *NullableShopperInput) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *ShopperInput) isValidBillingAddress() bool {
+	var allowedEnumValues = []string{"editable", "hidden", "readOnly"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetBillingAddress() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *ShopperInput) isValidDeliveryAddress() bool {
+	var allowedEnumValues = []string{"editable", "hidden", "readOnly"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetDeliveryAddress() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *ShopperInput) isValidPersonalDetails() bool {
+	var allowedEnumValues = []string{"editable", "hidden", "readOnly"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetPersonalDetails() == allowed {
+			return true
+		}
+	}
+	return false
+}

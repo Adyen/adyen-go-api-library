@@ -230,3 +230,22 @@ func (v *NullableVisaCheckoutDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *VisaCheckoutDetails) isValidFundingSource() bool {
+	var allowedEnumValues = []string{"debit"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetFundingSource() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *VisaCheckoutDetails) isValidType() bool {
+	var allowedEnumValues = []string{"visacheckout"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
+}

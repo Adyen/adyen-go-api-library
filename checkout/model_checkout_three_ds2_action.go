@@ -337,3 +337,13 @@ func (v *NullableCheckoutThreeDS2Action) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *CheckoutThreeDS2Action) isValidType() bool {
+	var allowedEnumValues = []string{"threeDS2"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
+}

@@ -2270,3 +2270,22 @@ func (v *NullableResponseAdditionalDataCommon) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *ResponseAdditionalDataCommon) isValidFraudResultType() bool {
+	var allowedEnumValues = []string{"GREEN", "FRAUD"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetFraudResultType() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *ResponseAdditionalDataCommon) isValidRecurringProcessingModel() bool {
+	var allowedEnumValues = []string{"CardOnFile", "Subscription", "UnscheduledCardOnFile"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetRecurringProcessingModel() == allowed {
+			return true
+		}
+	}
+	return false
+}

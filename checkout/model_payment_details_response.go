@@ -636,3 +636,13 @@ func (v *NullablePaymentDetailsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *PaymentDetailsResponse) isValidResultCode() bool {
+	var allowedEnumValues = []string{"AuthenticationFinished", "AuthenticationNotRequired", "Authorised", "Cancelled", "ChallengeShopper", "Error", "IdentifyShopper", "Pending", "PresentToShopper", "Received", "RedirectShopper", "Refused", "Success"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetResultCode() == allowed {
+			return true
+		}
+	}
+	return false
+}

@@ -337,12 +337,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	var err error
 	match := 0
 	// try to unmarshal data into AchDetails
-	err = newStrictDecoder(data).Decode(&dst.AchDetails)
+	err = json.Unmarshal(data, &dst.AchDetails)
 	if err == nil {
 		jsonAchDetails, _ := json.Marshal(dst.AchDetails)
 		if string(jsonAchDetails) == "{}" { // empty struct
 			dst.AchDetails = nil
-		} else {
+		} else if dst.AchDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -350,12 +350,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into AfterpayDetails
-	err = newStrictDecoder(data).Decode(&dst.AfterpayDetails)
+	err = json.Unmarshal(data, &dst.AfterpayDetails)
 	if err == nil {
 		jsonAfterpayDetails, _ := json.Marshal(dst.AfterpayDetails)
 		if string(jsonAfterpayDetails) == "{}" { // empty struct
 			dst.AfterpayDetails = nil
-		} else {
+		} else if dst.AfterpayDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -363,12 +363,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into AmazonPayDetails
-	err = newStrictDecoder(data).Decode(&dst.AmazonPayDetails)
+	err = json.Unmarshal(data, &dst.AmazonPayDetails)
 	if err == nil {
 		jsonAmazonPayDetails, _ := json.Marshal(dst.AmazonPayDetails)
 		if string(jsonAmazonPayDetails) == "{}" { // empty struct
 			dst.AmazonPayDetails = nil
-		} else {
+		} else if dst.AmazonPayDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -376,12 +376,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into AndroidPayDetails
-	err = newStrictDecoder(data).Decode(&dst.AndroidPayDetails)
+	err = json.Unmarshal(data, &dst.AndroidPayDetails)
 	if err == nil {
 		jsonAndroidPayDetails, _ := json.Marshal(dst.AndroidPayDetails)
 		if string(jsonAndroidPayDetails) == "{}" { // empty struct
 			dst.AndroidPayDetails = nil
-		} else {
+		} else if dst.AndroidPayDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -389,12 +389,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into ApplePayDetails
-	err = newStrictDecoder(data).Decode(&dst.ApplePayDetails)
+	err = json.Unmarshal(data, &dst.ApplePayDetails)
 	if err == nil {
 		jsonApplePayDetails, _ := json.Marshal(dst.ApplePayDetails)
 		if string(jsonApplePayDetails) == "{}" { // empty struct
 			dst.ApplePayDetails = nil
-		} else {
+		} else if dst.ApplePayDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -402,12 +402,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into BacsDirectDebitDetails
-	err = newStrictDecoder(data).Decode(&dst.BacsDirectDebitDetails)
+	err = json.Unmarshal(data, &dst.BacsDirectDebitDetails)
 	if err == nil {
 		jsonBacsDirectDebitDetails, _ := json.Marshal(dst.BacsDirectDebitDetails)
 		if string(jsonBacsDirectDebitDetails) == "{}" { // empty struct
 			dst.BacsDirectDebitDetails = nil
-		} else {
+		} else if dst.BacsDirectDebitDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -415,12 +415,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into BillDeskDetails
-	err = newStrictDecoder(data).Decode(&dst.BillDeskDetails)
+	err = json.Unmarshal(data, &dst.BillDeskDetails)
 	if err == nil {
 		jsonBillDeskDetails, _ := json.Marshal(dst.BillDeskDetails)
 		if string(jsonBillDeskDetails) == "{}" { // empty struct
 			dst.BillDeskDetails = nil
-		} else {
+		} else if dst.BillDeskDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -428,12 +428,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into BlikDetails
-	err = newStrictDecoder(data).Decode(&dst.BlikDetails)
+	err = json.Unmarshal(data, &dst.BlikDetails)
 	if err == nil {
 		jsonBlikDetails, _ := json.Marshal(dst.BlikDetails)
 		if string(jsonBlikDetails) == "{}" { // empty struct
 			dst.BlikDetails = nil
-		} else {
+		} else if dst.BlikDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -441,12 +441,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into CardDetails
-	err = newStrictDecoder(data).Decode(&dst.CardDetails)
+	err = json.Unmarshal(data, &dst.CardDetails)
 	if err == nil {
 		jsonCardDetails, _ := json.Marshal(dst.CardDetails)
 		if string(jsonCardDetails) == "{}" { // empty struct
 			dst.CardDetails = nil
-		} else {
+		} else if dst.CardDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -454,12 +454,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into CellulantDetails
-	err = newStrictDecoder(data).Decode(&dst.CellulantDetails)
+	err = json.Unmarshal(data, &dst.CellulantDetails)
 	if err == nil {
 		jsonCellulantDetails, _ := json.Marshal(dst.CellulantDetails)
 		if string(jsonCellulantDetails) == "{}" { // empty struct
 			dst.CellulantDetails = nil
-		} else {
+		} else if dst.CellulantDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -467,12 +467,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into DokuDetails
-	err = newStrictDecoder(data).Decode(&dst.DokuDetails)
+	err = json.Unmarshal(data, &dst.DokuDetails)
 	if err == nil {
 		jsonDokuDetails, _ := json.Marshal(dst.DokuDetails)
 		if string(jsonDokuDetails) == "{}" { // empty struct
 			dst.DokuDetails = nil
-		} else {
+		} else if dst.DokuDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -480,12 +480,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into DotpayDetails
-	err = newStrictDecoder(data).Decode(&dst.DotpayDetails)
+	err = json.Unmarshal(data, &dst.DotpayDetails)
 	if err == nil {
 		jsonDotpayDetails, _ := json.Marshal(dst.DotpayDetails)
 		if string(jsonDotpayDetails) == "{}" { // empty struct
 			dst.DotpayDetails = nil
-		} else {
+		} else if dst.DotpayDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -493,12 +493,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into DragonpayDetails
-	err = newStrictDecoder(data).Decode(&dst.DragonpayDetails)
+	err = json.Unmarshal(data, &dst.DragonpayDetails)
 	if err == nil {
 		jsonDragonpayDetails, _ := json.Marshal(dst.DragonpayDetails)
 		if string(jsonDragonpayDetails) == "{}" { // empty struct
 			dst.DragonpayDetails = nil
-		} else {
+		} else if dst.DragonpayDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -506,12 +506,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into EcontextVoucherDetails
-	err = newStrictDecoder(data).Decode(&dst.EcontextVoucherDetails)
+	err = json.Unmarshal(data, &dst.EcontextVoucherDetails)
 	if err == nil {
 		jsonEcontextVoucherDetails, _ := json.Marshal(dst.EcontextVoucherDetails)
 		if string(jsonEcontextVoucherDetails) == "{}" { // empty struct
 			dst.EcontextVoucherDetails = nil
-		} else {
+		} else if dst.EcontextVoucherDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -519,12 +519,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into GenericIssuerPaymentMethodDetails
-	err = newStrictDecoder(data).Decode(&dst.GenericIssuerPaymentMethodDetails)
+	err = json.Unmarshal(data, &dst.GenericIssuerPaymentMethodDetails)
 	if err == nil {
 		jsonGenericIssuerPaymentMethodDetails, _ := json.Marshal(dst.GenericIssuerPaymentMethodDetails)
 		if string(jsonGenericIssuerPaymentMethodDetails) == "{}" { // empty struct
 			dst.GenericIssuerPaymentMethodDetails = nil
-		} else {
+		} else if dst.GenericIssuerPaymentMethodDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -532,12 +532,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into GiropayDetails
-	err = newStrictDecoder(data).Decode(&dst.GiropayDetails)
+	err = json.Unmarshal(data, &dst.GiropayDetails)
 	if err == nil {
 		jsonGiropayDetails, _ := json.Marshal(dst.GiropayDetails)
 		if string(jsonGiropayDetails) == "{}" { // empty struct
 			dst.GiropayDetails = nil
-		} else {
+		} else if dst.GiropayDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -545,12 +545,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into GooglePayDetails
-	err = newStrictDecoder(data).Decode(&dst.GooglePayDetails)
+	err = json.Unmarshal(data, &dst.GooglePayDetails)
 	if err == nil {
 		jsonGooglePayDetails, _ := json.Marshal(dst.GooglePayDetails)
 		if string(jsonGooglePayDetails) == "{}" { // empty struct
 			dst.GooglePayDetails = nil
-		} else {
+		} else if dst.GooglePayDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -558,12 +558,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into IdealDetails
-	err = newStrictDecoder(data).Decode(&dst.IdealDetails)
+	err = json.Unmarshal(data, &dst.IdealDetails)
 	if err == nil {
 		jsonIdealDetails, _ := json.Marshal(dst.IdealDetails)
 		if string(jsonIdealDetails) == "{}" { // empty struct
 			dst.IdealDetails = nil
-		} else {
+		} else if dst.IdealDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -571,12 +571,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into KlarnaDetails
-	err = newStrictDecoder(data).Decode(&dst.KlarnaDetails)
+	err = json.Unmarshal(data, &dst.KlarnaDetails)
 	if err == nil {
 		jsonKlarnaDetails, _ := json.Marshal(dst.KlarnaDetails)
 		if string(jsonKlarnaDetails) == "{}" { // empty struct
 			dst.KlarnaDetails = nil
-		} else {
+		} else if dst.KlarnaDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -584,12 +584,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into MasterpassDetails
-	err = newStrictDecoder(data).Decode(&dst.MasterpassDetails)
+	err = json.Unmarshal(data, &dst.MasterpassDetails)
 	if err == nil {
 		jsonMasterpassDetails, _ := json.Marshal(dst.MasterpassDetails)
 		if string(jsonMasterpassDetails) == "{}" { // empty struct
 			dst.MasterpassDetails = nil
-		} else {
+		} else if dst.MasterpassDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -597,12 +597,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into MbwayDetails
-	err = newStrictDecoder(data).Decode(&dst.MbwayDetails)
+	err = json.Unmarshal(data, &dst.MbwayDetails)
 	if err == nil {
 		jsonMbwayDetails, _ := json.Marshal(dst.MbwayDetails)
 		if string(jsonMbwayDetails) == "{}" { // empty struct
 			dst.MbwayDetails = nil
-		} else {
+		} else if dst.MbwayDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -610,12 +610,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into MobilePayDetails
-	err = newStrictDecoder(data).Decode(&dst.MobilePayDetails)
+	err = json.Unmarshal(data, &dst.MobilePayDetails)
 	if err == nil {
 		jsonMobilePayDetails, _ := json.Marshal(dst.MobilePayDetails)
 		if string(jsonMobilePayDetails) == "{}" { // empty struct
 			dst.MobilePayDetails = nil
-		} else {
+		} else if dst.MobilePayDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -623,12 +623,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into MolPayDetails
-	err = newStrictDecoder(data).Decode(&dst.MolPayDetails)
+	err = json.Unmarshal(data, &dst.MolPayDetails)
 	if err == nil {
 		jsonMolPayDetails, _ := json.Marshal(dst.MolPayDetails)
 		if string(jsonMolPayDetails) == "{}" { // empty struct
 			dst.MolPayDetails = nil
-		} else {
+		} else if dst.MolPayDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -636,12 +636,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into OpenInvoiceDetails
-	err = newStrictDecoder(data).Decode(&dst.OpenInvoiceDetails)
+	err = json.Unmarshal(data, &dst.OpenInvoiceDetails)
 	if err == nil {
 		jsonOpenInvoiceDetails, _ := json.Marshal(dst.OpenInvoiceDetails)
 		if string(jsonOpenInvoiceDetails) == "{}" { // empty struct
 			dst.OpenInvoiceDetails = nil
-		} else {
+		} else if dst.OpenInvoiceDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -649,12 +649,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into PayPalDetails
-	err = newStrictDecoder(data).Decode(&dst.PayPalDetails)
+	err = json.Unmarshal(data, &dst.PayPalDetails)
 	if err == nil {
 		jsonPayPalDetails, _ := json.Marshal(dst.PayPalDetails)
 		if string(jsonPayPalDetails) == "{}" { // empty struct
 			dst.PayPalDetails = nil
-		} else {
+		} else if dst.PayPalDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -662,12 +662,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into PayUUpiDetails
-	err = newStrictDecoder(data).Decode(&dst.PayUUpiDetails)
+	err = json.Unmarshal(data, &dst.PayUUpiDetails)
 	if err == nil {
 		jsonPayUUpiDetails, _ := json.Marshal(dst.PayUUpiDetails)
 		if string(jsonPayUUpiDetails) == "{}" { // empty struct
 			dst.PayUUpiDetails = nil
-		} else {
+		} else if dst.PayUUpiDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -675,12 +675,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into PayWithGoogleDetails
-	err = newStrictDecoder(data).Decode(&dst.PayWithGoogleDetails)
+	err = json.Unmarshal(data, &dst.PayWithGoogleDetails)
 	if err == nil {
 		jsonPayWithGoogleDetails, _ := json.Marshal(dst.PayWithGoogleDetails)
 		if string(jsonPayWithGoogleDetails) == "{}" { // empty struct
 			dst.PayWithGoogleDetails = nil
-		} else {
+		} else if dst.PayWithGoogleDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -688,12 +688,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into PaymentDetails
-	err = newStrictDecoder(data).Decode(&dst.PaymentDetails)
+	err = json.Unmarshal(data, &dst.PaymentDetails)
 	if err == nil {
 		jsonPaymentDetails, _ := json.Marshal(dst.PaymentDetails)
 		if string(jsonPaymentDetails) == "{}" { // empty struct
 			dst.PaymentDetails = nil
-		} else {
+		} else if dst.PaymentDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -701,12 +701,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into RatepayDetails
-	err = newStrictDecoder(data).Decode(&dst.RatepayDetails)
+	err = json.Unmarshal(data, &dst.RatepayDetails)
 	if err == nil {
 		jsonRatepayDetails, _ := json.Marshal(dst.RatepayDetails)
 		if string(jsonRatepayDetails) == "{}" { // empty struct
 			dst.RatepayDetails = nil
-		} else {
+		} else if dst.RatepayDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -714,12 +714,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into SamsungPayDetails
-	err = newStrictDecoder(data).Decode(&dst.SamsungPayDetails)
+	err = json.Unmarshal(data, &dst.SamsungPayDetails)
 	if err == nil {
 		jsonSamsungPayDetails, _ := json.Marshal(dst.SamsungPayDetails)
 		if string(jsonSamsungPayDetails) == "{}" { // empty struct
 			dst.SamsungPayDetails = nil
-		} else {
+		} else if dst.SamsungPayDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -727,12 +727,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into SepaDirectDebitDetails
-	err = newStrictDecoder(data).Decode(&dst.SepaDirectDebitDetails)
+	err = json.Unmarshal(data, &dst.SepaDirectDebitDetails)
 	if err == nil {
 		jsonSepaDirectDebitDetails, _ := json.Marshal(dst.SepaDirectDebitDetails)
 		if string(jsonSepaDirectDebitDetails) == "{}" { // empty struct
 			dst.SepaDirectDebitDetails = nil
-		} else {
+		} else if dst.SepaDirectDebitDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -740,12 +740,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into StoredPaymentMethodDetails
-	err = newStrictDecoder(data).Decode(&dst.StoredPaymentMethodDetails)
+	err = json.Unmarshal(data, &dst.StoredPaymentMethodDetails)
 	if err == nil {
 		jsonStoredPaymentMethodDetails, _ := json.Marshal(dst.StoredPaymentMethodDetails)
 		if string(jsonStoredPaymentMethodDetails) == "{}" { // empty struct
 			dst.StoredPaymentMethodDetails = nil
-		} else {
+		} else if dst.StoredPaymentMethodDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -753,12 +753,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into UpiCollectDetails
-	err = newStrictDecoder(data).Decode(&dst.UpiCollectDetails)
+	err = json.Unmarshal(data, &dst.UpiCollectDetails)
 	if err == nil {
 		jsonUpiCollectDetails, _ := json.Marshal(dst.UpiCollectDetails)
 		if string(jsonUpiCollectDetails) == "{}" { // empty struct
 			dst.UpiCollectDetails = nil
-		} else {
+		} else if dst.UpiCollectDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -766,12 +766,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into UpiIntentDetails
-	err = newStrictDecoder(data).Decode(&dst.UpiIntentDetails)
+	err = json.Unmarshal(data, &dst.UpiIntentDetails)
 	if err == nil {
 		jsonUpiIntentDetails, _ := json.Marshal(dst.UpiIntentDetails)
 		if string(jsonUpiIntentDetails) == "{}" { // empty struct
 			dst.UpiIntentDetails = nil
-		} else {
+		} else if dst.UpiIntentDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -779,12 +779,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into VippsDetails
-	err = newStrictDecoder(data).Decode(&dst.VippsDetails)
+	err = json.Unmarshal(data, &dst.VippsDetails)
 	if err == nil {
 		jsonVippsDetails, _ := json.Marshal(dst.VippsDetails)
 		if string(jsonVippsDetails) == "{}" { // empty struct
 			dst.VippsDetails = nil
-		} else {
+		} else if dst.VippsDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -792,12 +792,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into VisaCheckoutDetails
-	err = newStrictDecoder(data).Decode(&dst.VisaCheckoutDetails)
+	err = json.Unmarshal(data, &dst.VisaCheckoutDetails)
 	if err == nil {
 		jsonVisaCheckoutDetails, _ := json.Marshal(dst.VisaCheckoutDetails)
 		if string(jsonVisaCheckoutDetails) == "{}" { // empty struct
 			dst.VisaCheckoutDetails = nil
-		} else {
+		} else if dst.VisaCheckoutDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -805,12 +805,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into WeChatPayDetails
-	err = newStrictDecoder(data).Decode(&dst.WeChatPayDetails)
+	err = json.Unmarshal(data, &dst.WeChatPayDetails)
 	if err == nil {
 		jsonWeChatPayDetails, _ := json.Marshal(dst.WeChatPayDetails)
 		if string(jsonWeChatPayDetails) == "{}" { // empty struct
 			dst.WeChatPayDetails = nil
-		} else {
+		} else if dst.WeChatPayDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -818,12 +818,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into WeChatPayMiniProgramDetails
-	err = newStrictDecoder(data).Decode(&dst.WeChatPayMiniProgramDetails)
+	err = json.Unmarshal(data, &dst.WeChatPayMiniProgramDetails)
 	if err == nil {
 		jsonWeChatPayMiniProgramDetails, _ := json.Marshal(dst.WeChatPayMiniProgramDetails)
 		if string(jsonWeChatPayMiniProgramDetails) == "{}" { // empty struct
 			dst.WeChatPayMiniProgramDetails = nil
-		} else {
+		} else if dst.WeChatPayMiniProgramDetails.isValidType() {
 			match++
 		}
 	} else {
@@ -831,12 +831,12 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 	}
 
 	// try to unmarshal data into ZipDetails
-	err = newStrictDecoder(data).Decode(&dst.ZipDetails)
+	err = json.Unmarshal(data, &dst.ZipDetails)
 	if err == nil {
 		jsonZipDetails, _ := json.Marshal(dst.ZipDetails)
 		if string(jsonZipDetails) == "{}" { // empty struct
 			dst.ZipDetails = nil
-		} else {
+		} else if dst.ZipDetails.isValidType() {
 			match++
 		}
 	} else {

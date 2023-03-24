@@ -159,3 +159,13 @@ func (v *NullablePlatformChargebackLogic) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *PlatformChargebackLogic) isValidBehavior() bool {
+	var allowedEnumValues = []string{"deductAccordingToSplitRatio", "deductFromLiableAccount", "deductFromOneBalanceAccount"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetBehavior() == allowed {
+			return true
+		}
+	}
+	return false
+}

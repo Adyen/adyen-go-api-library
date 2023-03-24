@@ -343,3 +343,22 @@ func (v *NullablePayPalDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *PayPalDetails) isValidSubtype() bool {
+	var allowedEnumValues = []string{"redirect", "sdk"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetSubtype() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *PayPalDetails) isValidType() bool {
+	var allowedEnumValues = []string{"paypal"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
+}

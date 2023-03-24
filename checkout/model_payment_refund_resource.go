@@ -374,3 +374,22 @@ func (v *NullablePaymentRefundResource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *PaymentRefundResource) isValidMerchantRefundReason() bool {
+	var allowedEnumValues = []string{"FRAUD", "CUSTOMER REQUEST", "RETURN", "DUPLICATE", "OTHER"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetMerchantRefundReason() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *PaymentRefundResource) isValidStatus() bool {
+	var allowedEnumValues = []string{"received"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetStatus() == allowed {
+			return true
+		}
+	}
+	return false
+}

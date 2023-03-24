@@ -299,3 +299,13 @@ func (v *NullableSepaDirectDebitDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *SepaDirectDebitDetails) isValidType() bool {
+	var allowedEnumValues = []string{"sepadirectdebit", "sepadirectdebit_amazonpay"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
+}

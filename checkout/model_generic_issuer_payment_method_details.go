@@ -258,3 +258,13 @@ func (v *NullableGenericIssuerPaymentMethodDetails) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *GenericIssuerPaymentMethodDetails) isValidType() bool {
+	var allowedEnumValues = []string{"onlineBanking_PL", "eps", "onlineBanking_SK", "onlineBanking_CZ"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
+}

@@ -524,3 +524,13 @@ func (v *NullablePaymentMethodsRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *PaymentMethodsRequest) isValidChannel() bool {
+	var allowedEnumValues = []string{"iOS", "Android", "Web"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetChannel() == allowed {
+			return true
+		}
+	}
+	return false
+}

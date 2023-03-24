@@ -308,3 +308,22 @@ func (v *NullableApplePayDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *ApplePayDetails) isValidFundingSource() bool {
+	var allowedEnumValues = []string{"debit"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetFundingSource() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *ApplePayDetails) isValidType() bool {
+	var allowedEnumValues = []string{"applepay"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
+}

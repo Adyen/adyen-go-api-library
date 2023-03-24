@@ -236,3 +236,13 @@ func (v *NullableStandalonePaymentCancelResource) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *StandalonePaymentCancelResource) isValidStatus() bool {
+	var allowedEnumValues = []string{"received"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetStatus() == allowed {
+			return true
+		}
+	}
+	return false
+}

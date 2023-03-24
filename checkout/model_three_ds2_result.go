@@ -605,3 +605,31 @@ func (v *NullableThreeDS2Result) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *ThreeDS2Result) isValidChallengeCancel() bool {
+	var allowedEnumValues = []string{"01", "02", "03", "04", "05", "06", "07"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetChallengeCancel() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *ThreeDS2Result) isValidChallengeIndicator() bool {
+	var allowedEnumValues = []string{"noPreference", "requestNoChallenge", "requestChallenge", "requestChallengeAsMandate"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetChallengeIndicator() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *ThreeDS2Result) isValidExemptionIndicator() bool {
+	var allowedEnumValues = []string{"lowValue", "secureCorporate", "trustedBeneficiary", "transactionRiskAnalysis"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetExemptionIndicator() == allowed {
+			return true
+		}
+	}
+	return false
+}

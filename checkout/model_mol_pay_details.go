@@ -180,3 +180,13 @@ func (v *NullableMolPayDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *MolPayDetails) isValidType() bool {
+	var allowedEnumValues = []string{"molpay_ebanking_fpx_MY", "molpay_ebanking_TH"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
+}

@@ -143,3 +143,13 @@ func (v *NullableCheckoutCancelOrderResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *CheckoutCancelOrderResponse) isValidResultCode() bool {
+	var allowedEnumValues = []string{"Received"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetResultCode() == allowed {
+			return true
+		}
+	}
+	return false
+}

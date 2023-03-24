@@ -115,3 +115,13 @@ func (v *NullableUpdatePaymentLinkRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *UpdatePaymentLinkRequest) isValidStatus() bool {
+	var allowedEnumValues = []string{"expired"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetStatus() == allowed {
+			return true
+		}
+	}
+	return false
+}

@@ -61,7 +61,7 @@ func (dst *{{classname}}) UnmarshalJSON(data []byte) error {
 		json{{{.}}}, _ := json.Marshal(dst.{{#lambda.type-to-name}}{{{.}}}{{/lambda.type-to-name}})
 		if string(json{{{.}}}) == "{}" { // empty struct
 			dst.{{#lambda.type-to-name}}{{{.}}}{{/lambda.type-to-name}} = nil
-		} else {
+        } else if dst.{{#lambda.type-to-name}}{{{.}}}{{/lambda.type-to-name}}.isValidType() {
 			match++
 		}
 	} else {

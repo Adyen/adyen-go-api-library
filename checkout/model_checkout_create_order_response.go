@@ -409,3 +409,13 @@ func (v *NullableCheckoutCreateOrderResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *CheckoutCreateOrderResponse) isValidResultCode() bool {
+	var allowedEnumValues = []string{"Success"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetResultCode() == allowed {
+			return true
+		}
+	}
+	return false
+}

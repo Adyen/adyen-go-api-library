@@ -815,3 +815,13 @@ func (v *NullableCheckoutVoucherAction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *CheckoutVoucherAction) isValidType() bool {
+	var allowedEnumValues = []string{"voucher"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
+}

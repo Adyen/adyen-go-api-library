@@ -253,3 +253,13 @@ func (v *NullableCreatePaymentAmountUpdateRequest) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *CreatePaymentAmountUpdateRequest) isValidIndustryUsage() bool {
+	var allowedEnumValues = []string{"delayedCharge", "installment", "noShow"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetIndustryUsage() == allowed {
+			return true
+		}
+	}
+	return false
+}

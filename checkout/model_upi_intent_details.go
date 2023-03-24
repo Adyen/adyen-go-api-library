@@ -269,3 +269,13 @@ func (v *NullableUpiIntentDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *UpiIntentDetails) isValidType() bool {
+	var allowedEnumValues = []string{"upi_intent"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
+}

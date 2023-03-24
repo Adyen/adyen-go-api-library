@@ -531,3 +531,31 @@ func (v *NullableThreeDSecureData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *ThreeDSecureData) isValidAuthenticationResponse() bool {
+	var allowedEnumValues = []string{"Y", "N", "U", "A"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetAuthenticationResponse() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *ThreeDSecureData) isValidChallengeCancel() bool {
+	var allowedEnumValues = []string{"01", "02", "03", "04", "05", "06", "07"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetChallengeCancel() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *ThreeDSecureData) isValidDirectoryResponse() bool {
+	var allowedEnumValues = []string{"A", "C", "D", "I", "N", "R", "U", "Y"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetDirectoryResponse() == allowed {
+			return true
+		}
+	}
+	return false
+}
