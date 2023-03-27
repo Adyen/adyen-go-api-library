@@ -109,6 +109,11 @@ func (a *RecurringApiService) DeleteStoredPaymentMethodsRecurringIdExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// attempt to fetch API key from configuration first
+	if a.client.cfg.ApiKey != "" {
+		localVarHeaderParams["X-API-Key"] = a.client.cfg.ApiKey
+	}
+
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -244,6 +249,11 @@ func (a *RecurringApiService) GetStoredPaymentMethodsExecute(r ApiGetStoredPayme
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// attempt to fetch API key from configuration first
+	if a.client.cfg.ApiKey != "" {
+		localVarHeaderParams["X-API-Key"] = a.client.cfg.ApiKey
+	}
+
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

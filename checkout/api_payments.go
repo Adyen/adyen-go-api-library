@@ -106,6 +106,11 @@ func (a *PaymentsApiService) PostCardDetailsExecute(r ApiPostCardDetailsRequest)
 	}
 	// body params
 	localVarPostBody = r.cardDetailsRequest
+	// attempt to fetch API key from configuration first
+	if a.client.cfg.ApiKey != "" {
+		localVarHeaderParams["X-API-Key"] = a.client.cfg.ApiKey
+	}
+
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -239,6 +244,11 @@ func (a *PaymentsApiService) PostDonationsExecute(r ApiPostDonationsRequest) (*D
 	}
 	// body params
 	localVarPostBody = r.paymentDonationRequest
+	// attempt to fetch API key from configuration first
+	if a.client.cfg.ApiKey != "" {
+		localVarHeaderParams["X-API-Key"] = a.client.cfg.ApiKey
+	}
+
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -426,6 +436,11 @@ func (a *PaymentsApiService) PostPaymentMethodsExecute(r ApiPostPaymentMethodsRe
 	}
 	// body params
 	localVarPostBody = r.paymentMethodsRequest
+	// attempt to fetch API key from configuration first
+	if a.client.cfg.ApiKey != "" {
+		localVarHeaderParams["X-API-Key"] = a.client.cfg.ApiKey
+	}
+
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -614,6 +629,11 @@ func (a *PaymentsApiService) PostPaymentsExecute(r ApiPostPaymentsRequest) (*Pay
 	}
 	// body params
 	localVarPostBody = r.paymentRequest
+	// attempt to fetch API key from configuration first
+	if a.client.cfg.ApiKey != "" {
+		localVarHeaderParams["X-API-Key"] = a.client.cfg.ApiKey
+	}
+
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -801,6 +821,11 @@ func (a *PaymentsApiService) PostPaymentsDetailsExecute(r ApiPostPaymentsDetails
 	}
 	// body params
 	localVarPostBody = r.detailsRequest
+	// attempt to fetch API key from configuration first
+	if a.client.cfg.ApiKey != "" {
+		localVarHeaderParams["X-API-Key"] = a.client.cfg.ApiKey
+	}
+
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -990,6 +1015,11 @@ func (a *PaymentsApiService) PostSessionsExecute(r ApiPostSessionsRequest) (*Cre
 	}
 	// body params
 	localVarPostBody = r.createCheckoutSessionRequest
+	// attempt to fetch API key from configuration first
+	if a.client.cfg.ApiKey != "" {
+		localVarHeaderParams["X-API-Key"] = a.client.cfg.ApiKey
+	}
+
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

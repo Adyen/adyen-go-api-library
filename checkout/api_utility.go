@@ -104,6 +104,11 @@ func (a *UtilityApiService) PostApplePaySessionsExecute(r ApiPostApplePaySession
 	}
 	// body params
 	localVarPostBody = r.createApplePaySessionRequest
+	// attempt to fetch API key from configuration first
+	if a.client.cfg.ApiKey != "" {
+		localVarHeaderParams["X-API-Key"] = a.client.cfg.ApiKey
+	}
+
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -239,6 +244,11 @@ func (a *UtilityApiService) PostOriginKeysExecute(r ApiPostOriginKeysRequest) (*
 	}
 	// body params
 	localVarPostBody = r.checkoutUtilityRequest
+	// attempt to fetch API key from configuration first
+	if a.client.cfg.ApiKey != "" {
+		localVarHeaderParams["X-API-Key"] = a.client.cfg.ApiKey
+	}
+
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

@@ -299,7 +299,12 @@ func (a *{{{classname}}}Service) {{nickname}}Execute(r {{#structPrefix}}{{&class
 {{#authMethods}}
 {{#isApiKey}}
 {{^isKeyInCookie}}
-	if r.ctx != nil {
+    // attempt to fetch API key from configuration first
+    if a.client.cfg.ApiKey != "" {
+        localVarHeaderParams["X-API-Key"] = a.client.cfg.ApiKey
+    }
+
+    if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			{{#vendorExtensions.x-auth-id-alias}}

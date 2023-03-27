@@ -102,6 +102,11 @@ func (a *OrdersApiService) PostOrdersExecute(r ApiPostOrdersRequest) (*CheckoutC
 	}
 	// body params
 	localVarPostBody = r.checkoutCreateOrderRequest
+	// attempt to fetch API key from configuration first
+	if a.client.cfg.ApiKey != "" {
+		localVarHeaderParams["X-API-Key"] = a.client.cfg.ApiKey
+	}
+
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -287,6 +292,11 @@ func (a *OrdersApiService) PostOrdersCancelExecute(r ApiPostOrdersCancelRequest)
 	}
 	// body params
 	localVarPostBody = r.checkoutCancelOrderRequest
+	// attempt to fetch API key from configuration first
+	if a.client.cfg.ApiKey != "" {
+		localVarHeaderParams["X-API-Key"] = a.client.cfg.ApiKey
+	}
+
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -472,6 +482,11 @@ func (a *OrdersApiService) PostPaymentMethodsBalanceExecute(r ApiPostPaymentMeth
 	}
 	// body params
 	localVarPostBody = r.checkoutBalanceCheckRequest
+	// attempt to fetch API key from configuration first
+	if a.client.cfg.ApiKey != "" {
+		localVarHeaderParams["X-API-Key"] = a.client.cfg.ApiKey
+	}
+
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

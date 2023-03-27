@@ -89,6 +89,11 @@ func (a *PaymentLinksApiService) GetPaymentLinksLinkIdExecute(r ApiGetPaymentLin
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// attempt to fetch API key from configuration first
+	if a.client.cfg.ApiKey != "" {
+		localVarHeaderParams["X-API-Key"] = a.client.cfg.ApiKey
+	}
+
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -268,6 +273,11 @@ func (a *PaymentLinksApiService) PatchPaymentLinksLinkIdExecute(r ApiPatchPaymen
 	}
 	// body params
 	localVarPostBody = r.updatePaymentLinkRequest
+	// attempt to fetch API key from configuration first
+	if a.client.cfg.ApiKey != "" {
+		localVarHeaderParams["X-API-Key"] = a.client.cfg.ApiKey
+	}
+
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -455,6 +465,11 @@ func (a *PaymentLinksApiService) PostPaymentLinksExecute(r ApiPostPaymentLinksRe
 	}
 	// body params
 	localVarPostBody = r.createPaymentLinkRequest
+	// attempt to fetch API key from configuration first
+	if a.client.cfg.ApiKey != "" {
+		localVarHeaderParams["X-API-Key"] = a.client.cfg.ApiKey
+	}
+
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

@@ -107,6 +107,11 @@ func (a *ClassicCheckoutSDKApiService) PostPaymentSessionExecute(r ApiPostPaymen
 	}
 	// body params
 	localVarPostBody = r.paymentSetupRequest
+	// attempt to fetch API key from configuration first
+	if a.client.cfg.ApiKey != "" {
+		localVarHeaderParams["X-API-Key"] = a.client.cfg.ApiKey
+	}
+
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -297,6 +302,11 @@ func (a *ClassicCheckoutSDKApiService) PostPaymentsResultExecute(r ApiPostPaymen
 	}
 	// body params
 	localVarPostBody = r.paymentVerificationRequest
+	// attempt to fetch API key from configuration first
+	if a.client.cfg.ApiKey != "" {
+		localVarHeaderParams["X-API-Key"] = a.client.cfg.ApiKey
+	}
+
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

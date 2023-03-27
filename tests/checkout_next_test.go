@@ -16,14 +16,33 @@ import (
 func Test_Checkout_Next(t *testing.T) {
 	godotenv.Load("./../.env")
 
-	var (
-		MerchantAccount = os.Getenv("ADYEN_MERCHANT")
-		APIKey          = os.Getenv("ADYEN_API_KEY")
-	)
+	MerchantAccount := os.Getenv("ADYEN_MERCHANT")
 
 	configuration := checkout.NewClientConfig()
+	configuration.ApiKey = os.Getenv("ADYEN_API_KEY")
 	//configuration.Debug = true
 	client := checkout.NewAPIClient(configuration)
+
+	t.Run("Live URL with prefix", func(t *testing.T) {
+		configuration := checkout.NewClientConfig()
+		configuration.Servers = checkout.ServerConfigurations{
+			{
+				URL: "https://{prefix}-checkout-live.adyenpayments.com/checkout/v70",
+				Variables: map[string]checkout.ServerVariable{
+					"prefix": {
+						Description: "A string composed of a hex-encoded random part and your company name. Get the prefix from your live Customer Area under Developers > API URLs > Prefix",
+					},
+				},
+			},
+		}
+		variables := map[string]string{"prefix": "1797a841fbb37ca7-AdyenDemo"}
+		live := context.WithValue(context.Background(), checkout.ContextServerVariables, variables)
+
+		url, err := configuration.ServerURLWithContext(live, "PaymentsApiService.PostPaymentMethods")
+
+		require.NoError(t, err)
+		assert.Equal(t, "https://1797a841fbb37ca7-AdyenDemo-checkout-live.adyenpayments.com/checkout/v70", url)
+	})
 
 	t.Run("PaymentMethods", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
@@ -40,10 +59,7 @@ func Test_Checkout_Next(t *testing.T) {
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 			paymentMethodsRequest := *checkout.NewPaymentMethodsRequest(MerchantAccount)
 
-			contextKey := map[string]checkout.APIKey{"ApiKeyAuth": {Key: APIKey}}
-			auth := context.WithValue(context.Background(), checkout.ContextAPIKeys, contextKey)
-
-			res, httpRes, err := client.PaymentsApi.PaymentMethods(auth).PaymentMethodsRequest(paymentMethodsRequest).Execute()
+			res, httpRes, err := client.PaymentsApi.PaymentMethods(context.Background()).PaymentMethodsRequest(paymentMethodsRequest).Execute()
 
 			require.NotNil(t, res)
 			require.NotNil(t, httpRes)
@@ -67,10 +83,8 @@ func Test_Checkout_Next(t *testing.T) {
 				"ReturnUrl_example",
 			) // PaymentRequest |  (optional)
 			paymentRequest.SetCaptureDelayHours(0) // assert int zero value is sent
-			contextKey := map[string]checkout.APIKey{"ApiKeyAuth": {Key: APIKey}}
-			auth := context.WithValue(context.Background(), checkout.ContextAPIKeys, contextKey)
 
-			res, httpRes, err := client.PaymentsApi.Payments(auth).PaymentRequest(paymentRequest).Execute()
+			res, httpRes, err := client.PaymentsApi.Payments(context.Background()).PaymentRequest(paymentRequest).Execute()
 
 			require.NotNil(t, res)
 			require.NotNil(t, httpRes)
@@ -93,10 +107,8 @@ func Test_Checkout_Next(t *testing.T) {
 				"Reference_example",
 				"ReturnUrl_example",
 			) // PaymentRequest |  (optional)
-			contextKey := map[string]checkout.APIKey{"ApiKeyAuth": {Key: APIKey}}
-			auth := context.WithValue(context.Background(), checkout.ContextAPIKeys, contextKey)
 
-			res, httpRes, err := client.PaymentsApi.Payments(auth).IdempotencyKey(idempotencyKey).PaymentRequest(paymentRequest).Execute()
+			res, httpRes, err := client.PaymentsApi.Payments(context.Background()).IdempotencyKey(idempotencyKey).PaymentRequest(paymentRequest).Execute()
 
 			require.NotNil(t, res)
 			require.NotNil(t, httpRes)

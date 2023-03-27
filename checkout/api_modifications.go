@@ -109,6 +109,11 @@ func (a *ModificationsApiService) PostCancelsExecute(r ApiPostCancelsRequest) (*
 	}
 	// body params
 	localVarPostBody = r.createStandalonePaymentCancelRequest
+	// attempt to fetch API key from configuration first
+	if a.client.cfg.ApiKey != "" {
+		localVarHeaderParams["X-API-Key"] = a.client.cfg.ApiKey
+	}
+
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -304,6 +309,11 @@ func (a *ModificationsApiService) PostPaymentsPaymentPspReferenceAmountUpdatesEx
 	}
 	// body params
 	localVarPostBody = r.createPaymentAmountUpdateRequest
+	// attempt to fetch API key from configuration first
+	if a.client.cfg.ApiKey != "" {
+		localVarHeaderParams["X-API-Key"] = a.client.cfg.ApiKey
+	}
+
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -499,6 +509,11 @@ func (a *ModificationsApiService) PostPaymentsPaymentPspReferenceCancelsExecute(
 	}
 	// body params
 	localVarPostBody = r.createPaymentCancelRequest
+	// attempt to fetch API key from configuration first
+	if a.client.cfg.ApiKey != "" {
+		localVarHeaderParams["X-API-Key"] = a.client.cfg.ApiKey
+	}
+
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -694,6 +709,11 @@ func (a *ModificationsApiService) PostPaymentsPaymentPspReferenceCapturesExecute
 	}
 	// body params
 	localVarPostBody = r.createPaymentCaptureRequest
+	// attempt to fetch API key from configuration first
+	if a.client.cfg.ApiKey != "" {
+		localVarHeaderParams["X-API-Key"] = a.client.cfg.ApiKey
+	}
+
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -891,6 +911,11 @@ func (a *ModificationsApiService) PostPaymentsPaymentPspReferenceRefundsExecute(
 	}
 	// body params
 	localVarPostBody = r.createPaymentRefundRequest
+	// attempt to fetch API key from configuration first
+	if a.client.cfg.ApiKey != "" {
+		localVarHeaderParams["X-API-Key"] = a.client.cfg.ApiKey
+	}
+
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1085,6 +1110,11 @@ func (a *ModificationsApiService) PostPaymentsPaymentPspReferenceReversalsExecut
 	}
 	// body params
 	localVarPostBody = r.createPaymentReversalRequest
+	// attempt to fetch API key from configuration first
+	if a.client.cfg.ApiKey != "" {
+		localVarHeaderParams["X-API-Key"] = a.client.cfg.ApiKey
+	}
+
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

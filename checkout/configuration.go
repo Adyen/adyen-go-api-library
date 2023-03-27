@@ -87,6 +87,8 @@ type ClientConfig struct {
 	Servers          ServerConfigurations
 	OperationServers map[string]ServerConfigurations
 	HTTPClient       *http.Client
+    // Custom Adyen properties
+    ApiKey           string            `json:"apiKey,omitempty"`
 }
 
 // NewConfiguration returns a new ClientConfig object
