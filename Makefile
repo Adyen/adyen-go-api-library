@@ -18,6 +18,7 @@ openapi-generator-version:=6.4.0
 openapi-generator-url:=https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/$(openapi-generator-version)/openapi-generator-cli-$(openapi-generator-version).jar
 openapi-generator-jar:=bin/openapi-generator-cli.jar
 openapi-generator-cli:=java -jar $(openapi-generator-jar)
+goimports:=$(GOPATH)/bin/goimports
 
 generator:=go
 services:=checkout
@@ -31,8 +32,8 @@ checkout: spec=CheckoutService-v70
 checkout: service=checkout
 
 # Generate a full client (models and service classes)
-checkout: schema $(openapi-generator-jar)
-	GO_POST_PROCESS_FILE=$(GOPATH)"/bin/goimports -w" $(openapi-generator-cli) generate \
+checkout: schema $(openapi-generator-jar) $(goimports)
+	GO_POST_PROCESS_FILE="$(goimports) -w" $(openapi-generator-cli) generate \
 		-i schema/json/$(spec).json \
 		-g $(generator) \
 		-t $(templates) \
@@ -59,6 +60,10 @@ templates: $(openapi-generator-jar)
 # Download the generator
 $(openapi-generator-jar):
 	wget --quiet -o /dev/null $(openapi-generator-url) -O $(openapi-generator-jar)
+
+# Download the import optimizer (and code formatter)
+$(goimports):
+	go install golang.org/x/tools/cmd/goimports@latest
 
 # Discard generated artifacts and changed models
 clean:
