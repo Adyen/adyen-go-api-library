@@ -21,8 +21,8 @@ openapi-generator-cli:=java -jar $(openapi-generator-jar)
 
 generator:=go
 services:=checkout
-output:=checkout
-templates:=templates/go-v6.4.0
+output:=src/checkout
+templates:=templates/small
 
 # Generate models (for each service)
 models: $(services)
@@ -32,16 +32,18 @@ checkout: service=checkout
 
 # Generate a full client (models and service classes)
 checkout: schema $(openapi-generator-jar)
-	GO_POST_PROCESS_FILE="gofmt -w" $(openapi-generator-cli) generate \
+	GO_POST_PROCESS_FILE=$(GOPATH)"/bin/goimports -w" $(openapi-generator-cli) generate \
 		-i schema/json/$(spec).json \
 		-g $(generator) \
 		-t $(templates) \
 		-o $(output) \
 		-p packageName=$(@) \
 		--global-property apiTests=false \
+		--global-property apis,models \
 		--git-repo-id adyen-go-api-library/v6 --git-user-id adyen \
 		--enable-post-process-file \
 		--additional-properties=useOneOfDiscriminatorLookup=true \
+		--additional-properties=appDescription="" \
 		--additional-properties=serviceName=$@
 	rm -rf $(output)/go.{mod,sum}
 
@@ -60,7 +62,6 @@ $(openapi-generator-jar):
 
 # Discard generated artifacts and changed models
 clean:
-	rm -rf $(output)
 	git checkout src/checkout
 	git clean -f -d src/checkout
 

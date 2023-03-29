@@ -2,10 +2,13 @@ package tests
 
 import (
 	"context"
+	"github.com/adyen/adyen-go-api-library/v6/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v6/src/checkout"
+	"github.com/adyen/adyen-go-api-library/v6/src/common"
 	"os"
 	"testing"
 
-	"github.com/adyen/adyen-go-api-library/v6/checkout"
+	newcheckout "github.com/adyen/adyen-go-api-library/v6/checkout"
 
 	"github.com/joho/godotenv"
 
@@ -18,17 +21,18 @@ func Test_Checkout_Next(t *testing.T) {
 
 	MerchantAccount := os.Getenv("ADYEN_MERCHANT")
 
-	configuration := checkout.NewClientConfig()
-	configuration.ApiKey = os.Getenv("ADYEN_API_KEY")
-	//configuration.Debug = true
-	client := checkout.NewAPIClient(configuration)
+	client := adyen.NewClient(&common.Config{
+		ApiKey:      os.Getenv("ADYEN_API_KEY"),
+		Environment: "TEST",
+	})
+	client.GetConfig().Debug = true
 
 	t.Run("Live URL with prefix", func(t *testing.T) {
-		configuration := checkout.NewClientConfig()
-		configuration.Servers = checkout.ServerConfigurations{
+		configuration := newcheckout.NewClientConfig()
+		configuration.Servers = newcheckout.ServerConfigurations{
 			{
 				URL: "https://{prefix}-checkout-live.adyenpayments.com/checkout/v70",
-				Variables: map[string]checkout.ServerVariable{
+				Variables: map[string]newcheckout.ServerVariable{
 					"prefix": {
 						Description: "A string composed of a hex-encoded random part and your company name. Get the prefix from your live Customer Area under Developers > API URLs > Prefix",
 					},
@@ -36,7 +40,7 @@ func Test_Checkout_Next(t *testing.T) {
 			},
 		}
 		variables := map[string]string{"prefix": "1797a841fbb37ca7-AdyenDemo"}
-		live := context.WithValue(context.Background(), checkout.ContextServerVariables, variables)
+		live := context.WithValue(context.Background(), newcheckout.ContextServerVariables, variables)
 
 		url, err := configuration.ServerURLWithContext(live, "PaymentsApiService.PostPaymentMethods")
 
@@ -48,18 +52,19 @@ func Test_Checkout_Next(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 			paymentMethodsRequest := checkout.PaymentMethodsRequest{}
 
-			res, httpRes, err := client.PaymentsApi.PaymentMethods(context.Background()).PaymentMethodsRequest(paymentMethodsRequest).Execute()
+			res, httpRes, err := client.Checkout.PaymentMethods(&paymentMethodsRequest)
 
-			require.Nil(t, res)
+			require.NotNil(t, res)
 			require.NotNil(t, httpRes)
 			require.NotNil(t, err)
-			assert.Equal(t, 401, httpRes.StatusCode)
+			assert.Equal(t, 403, httpRes.StatusCode)
+			assert.Equal(t, "403 : Invalid Merchant Account (security: 901)", err.Error())
 		})
 
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 			paymentMethodsRequest := *checkout.NewPaymentMethodsRequest(MerchantAccount)
 
-			res, httpRes, err := client.PaymentsApi.PaymentMethods(context.Background()).PaymentMethodsRequest(paymentMethodsRequest).Execute()
+			res, httpRes, err := client.Checkout.PaymentMethods(&paymentMethodsRequest)
 
 			require.NotNil(t, res)
 			require.NotNil(t, httpRes)
@@ -84,7 +89,7 @@ func Test_Checkout_Next(t *testing.T) {
 			) // PaymentRequest |  (optional)
 			paymentRequest.SetCaptureDelayHours(0) // assert int zero value is sent
 
-			res, httpRes, err := client.PaymentsApi.Payments(context.Background()).PaymentRequest(paymentRequest).Execute()
+			res, httpRes, err := client.Checkout.Payments(&paymentRequest)
 
 			require.NotNil(t, res)
 			require.NotNil(t, httpRes)
@@ -99,6 +104,7 @@ func Test_Checkout_Next(t *testing.T) {
 
 		t.Run("iDEAL payment", func(t *testing.T) {
 			idempotencyKey := "b9c3947f-b282-4059-a645-56ddbbd2fef3"
+			ctx := common.WithIdempotencyKey(context.Background(), idempotencyKey)
 			ideal := checkout.NewIdealDetails("1121")
 			paymentRequest := *checkout.NewPaymentRequest(
 				*checkout.NewAmount("EUR", int64(1234)),
@@ -108,7 +114,7 @@ func Test_Checkout_Next(t *testing.T) {
 				"ReturnUrl_example",
 			) // PaymentRequest |  (optional)
 
-			res, httpRes, err := client.PaymentsApi.Payments(context.Background()).IdempotencyKey(idempotencyKey).PaymentRequest(paymentRequest).Execute()
+			res, httpRes, err := client.Checkout.Payments(&paymentRequest, ctx)
 
 			require.NotNil(t, res)
 			require.NotNil(t, httpRes)

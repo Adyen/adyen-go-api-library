@@ -63,7 +63,7 @@ func Test_API_Modifications(t *testing.T) {
 					&checkout.CreateStandalonePaymentCancelRequest{
 						MerchantAccount:  MerchantAccount,
 						PaymentReference: "paymentReference01",
-						Reference:        "reference01",
+						Reference:        common.PtrString("reference01"),
 					})
 
 			require.Nil(t, err)
@@ -79,7 +79,7 @@ func Test_API_Modifications(t *testing.T) {
 					&checkout.CreateStandalonePaymentCancelRequest{
 						MerchantAccount:  MerchantAccount,
 						PaymentReference: "",
-						Reference:        "reference01",
+						Reference:        common.PtrString("reference01"),
 					})
 
 			require.NotNil(t, err)
@@ -96,7 +96,7 @@ func Test_API_Modifications(t *testing.T) {
 				client.Checkout.RefundCapturedPayment(&pspReference,
 					&checkout.CreatePaymentRefundRequest{
 						MerchantAccount: MerchantAccount,
-						Reference:       "reference01",
+						Reference:       common.PtrString("reference01"),
 						Amount: checkout.Amount{
 							Value:    1250,
 							Currency: "EUR",
@@ -117,7 +117,7 @@ func Test_API_Modifications(t *testing.T) {
 				client.Checkout.RefundOrCancelPayment(&pspReference,
 					&checkout.CreatePaymentReversalRequest{
 						MerchantAccount: MerchantAccount,
-						Reference:       "reference01",
+						Reference:       common.PtrString("reference01"),
 					})
 
 			require.NotNil(t, err)
