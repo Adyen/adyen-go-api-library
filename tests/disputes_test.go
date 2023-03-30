@@ -40,7 +40,7 @@ func Test_Disputes(t *testing.T) {
 				Value:    1000,
 			},
 			Reference:       "DISPUTES_CHARGEBACK",
-			PaymentMethod:   checkout.CardDetailsAsPaymentDonationRequestPaymentMethod(card),
+			PaymentMethod:   checkout.CardDetailsAsCheckoutPaymentMethod(card),
 			ReturnUrl:       "https://adyen.com",
 			MerchantAccount: MerchantAccount,
 		})

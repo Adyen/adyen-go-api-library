@@ -43,8 +43,8 @@ checkout: schema $(openapi-generator-jar) $(goimports)
 		--global-property apis,models \
 		--git-repo-id adyen-go-api-library/v6 --git-user-id adyen \
 		--enable-post-process-file \
+		--inline-schema-name-mappings PaymentDonationRequest_paymentMethod=CheckoutPaymentMethod \
 		--additional-properties=useOneOfDiscriminatorLookup=true \
-		--additional-properties=appDescription="" \
 		--additional-properties=serviceName=$@
 	rm -rf $(output)/go.{mod,sum}
 

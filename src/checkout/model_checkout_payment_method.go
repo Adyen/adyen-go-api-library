@@ -14,8 +14,8 @@ import (
 	"fmt"
 )
 
-// PaymentDonationRequestPaymentMethod - The type and required details of a payment method to use.
-type PaymentDonationRequestPaymentMethod struct {
+// CheckoutPaymentMethod - The type and required details of a payment method to use.
+type CheckoutPaymentMethod struct {
 	AchDetails                        *AchDetails
 	AfterpayDetails                   *AfterpayDetails
 	AmazonPayDetails                  *AmazonPayDetails
@@ -57,281 +57,281 @@ type PaymentDonationRequestPaymentMethod struct {
 	ZipDetails                        *ZipDetails
 }
 
-// AchDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns AchDetails wrapped in PaymentDonationRequestPaymentMethod
-func AchDetailsAsPaymentDonationRequestPaymentMethod(v *AchDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// AchDetailsAsCheckoutPaymentMethod is a convenience function that returns AchDetails wrapped in CheckoutPaymentMethod
+func AchDetailsAsCheckoutPaymentMethod(v *AchDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		AchDetails: v,
 	}
 }
 
-// AfterpayDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns AfterpayDetails wrapped in PaymentDonationRequestPaymentMethod
-func AfterpayDetailsAsPaymentDonationRequestPaymentMethod(v *AfterpayDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// AfterpayDetailsAsCheckoutPaymentMethod is a convenience function that returns AfterpayDetails wrapped in CheckoutPaymentMethod
+func AfterpayDetailsAsCheckoutPaymentMethod(v *AfterpayDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		AfterpayDetails: v,
 	}
 }
 
-// AmazonPayDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns AmazonPayDetails wrapped in PaymentDonationRequestPaymentMethod
-func AmazonPayDetailsAsPaymentDonationRequestPaymentMethod(v *AmazonPayDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// AmazonPayDetailsAsCheckoutPaymentMethod is a convenience function that returns AmazonPayDetails wrapped in CheckoutPaymentMethod
+func AmazonPayDetailsAsCheckoutPaymentMethod(v *AmazonPayDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		AmazonPayDetails: v,
 	}
 }
 
-// AndroidPayDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns AndroidPayDetails wrapped in PaymentDonationRequestPaymentMethod
-func AndroidPayDetailsAsPaymentDonationRequestPaymentMethod(v *AndroidPayDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// AndroidPayDetailsAsCheckoutPaymentMethod is a convenience function that returns AndroidPayDetails wrapped in CheckoutPaymentMethod
+func AndroidPayDetailsAsCheckoutPaymentMethod(v *AndroidPayDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		AndroidPayDetails: v,
 	}
 }
 
-// ApplePayDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns ApplePayDetails wrapped in PaymentDonationRequestPaymentMethod
-func ApplePayDetailsAsPaymentDonationRequestPaymentMethod(v *ApplePayDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// ApplePayDetailsAsCheckoutPaymentMethod is a convenience function that returns ApplePayDetails wrapped in CheckoutPaymentMethod
+func ApplePayDetailsAsCheckoutPaymentMethod(v *ApplePayDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		ApplePayDetails: v,
 	}
 }
 
-// BacsDirectDebitDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns BacsDirectDebitDetails wrapped in PaymentDonationRequestPaymentMethod
-func BacsDirectDebitDetailsAsPaymentDonationRequestPaymentMethod(v *BacsDirectDebitDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// BacsDirectDebitDetailsAsCheckoutPaymentMethod is a convenience function that returns BacsDirectDebitDetails wrapped in CheckoutPaymentMethod
+func BacsDirectDebitDetailsAsCheckoutPaymentMethod(v *BacsDirectDebitDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		BacsDirectDebitDetails: v,
 	}
 }
 
-// BillDeskDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns BillDeskDetails wrapped in PaymentDonationRequestPaymentMethod
-func BillDeskDetailsAsPaymentDonationRequestPaymentMethod(v *BillDeskDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// BillDeskDetailsAsCheckoutPaymentMethod is a convenience function that returns BillDeskDetails wrapped in CheckoutPaymentMethod
+func BillDeskDetailsAsCheckoutPaymentMethod(v *BillDeskDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		BillDeskDetails: v,
 	}
 }
 
-// BlikDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns BlikDetails wrapped in PaymentDonationRequestPaymentMethod
-func BlikDetailsAsPaymentDonationRequestPaymentMethod(v *BlikDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// BlikDetailsAsCheckoutPaymentMethod is a convenience function that returns BlikDetails wrapped in CheckoutPaymentMethod
+func BlikDetailsAsCheckoutPaymentMethod(v *BlikDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		BlikDetails: v,
 	}
 }
 
-// CardDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns CardDetails wrapped in PaymentDonationRequestPaymentMethod
-func CardDetailsAsPaymentDonationRequestPaymentMethod(v *CardDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// CardDetailsAsCheckoutPaymentMethod is a convenience function that returns CardDetails wrapped in CheckoutPaymentMethod
+func CardDetailsAsCheckoutPaymentMethod(v *CardDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		CardDetails: v,
 	}
 }
 
-// CellulantDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns CellulantDetails wrapped in PaymentDonationRequestPaymentMethod
-func CellulantDetailsAsPaymentDonationRequestPaymentMethod(v *CellulantDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// CellulantDetailsAsCheckoutPaymentMethod is a convenience function that returns CellulantDetails wrapped in CheckoutPaymentMethod
+func CellulantDetailsAsCheckoutPaymentMethod(v *CellulantDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		CellulantDetails: v,
 	}
 }
 
-// DokuDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns DokuDetails wrapped in PaymentDonationRequestPaymentMethod
-func DokuDetailsAsPaymentDonationRequestPaymentMethod(v *DokuDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// DokuDetailsAsCheckoutPaymentMethod is a convenience function that returns DokuDetails wrapped in CheckoutPaymentMethod
+func DokuDetailsAsCheckoutPaymentMethod(v *DokuDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		DokuDetails: v,
 	}
 }
 
-// DotpayDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns DotpayDetails wrapped in PaymentDonationRequestPaymentMethod
-func DotpayDetailsAsPaymentDonationRequestPaymentMethod(v *DotpayDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// DotpayDetailsAsCheckoutPaymentMethod is a convenience function that returns DotpayDetails wrapped in CheckoutPaymentMethod
+func DotpayDetailsAsCheckoutPaymentMethod(v *DotpayDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		DotpayDetails: v,
 	}
 }
 
-// DragonpayDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns DragonpayDetails wrapped in PaymentDonationRequestPaymentMethod
-func DragonpayDetailsAsPaymentDonationRequestPaymentMethod(v *DragonpayDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// DragonpayDetailsAsCheckoutPaymentMethod is a convenience function that returns DragonpayDetails wrapped in CheckoutPaymentMethod
+func DragonpayDetailsAsCheckoutPaymentMethod(v *DragonpayDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		DragonpayDetails: v,
 	}
 }
 
-// EcontextVoucherDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns EcontextVoucherDetails wrapped in PaymentDonationRequestPaymentMethod
-func EcontextVoucherDetailsAsPaymentDonationRequestPaymentMethod(v *EcontextVoucherDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// EcontextVoucherDetailsAsCheckoutPaymentMethod is a convenience function that returns EcontextVoucherDetails wrapped in CheckoutPaymentMethod
+func EcontextVoucherDetailsAsCheckoutPaymentMethod(v *EcontextVoucherDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		EcontextVoucherDetails: v,
 	}
 }
 
-// GenericIssuerPaymentMethodDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns GenericIssuerPaymentMethodDetails wrapped in PaymentDonationRequestPaymentMethod
-func GenericIssuerPaymentMethodDetailsAsPaymentDonationRequestPaymentMethod(v *GenericIssuerPaymentMethodDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// GenericIssuerPaymentMethodDetailsAsCheckoutPaymentMethod is a convenience function that returns GenericIssuerPaymentMethodDetails wrapped in CheckoutPaymentMethod
+func GenericIssuerPaymentMethodDetailsAsCheckoutPaymentMethod(v *GenericIssuerPaymentMethodDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		GenericIssuerPaymentMethodDetails: v,
 	}
 }
 
-// GiropayDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns GiropayDetails wrapped in PaymentDonationRequestPaymentMethod
-func GiropayDetailsAsPaymentDonationRequestPaymentMethod(v *GiropayDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// GiropayDetailsAsCheckoutPaymentMethod is a convenience function that returns GiropayDetails wrapped in CheckoutPaymentMethod
+func GiropayDetailsAsCheckoutPaymentMethod(v *GiropayDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		GiropayDetails: v,
 	}
 }
 
-// GooglePayDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns GooglePayDetails wrapped in PaymentDonationRequestPaymentMethod
-func GooglePayDetailsAsPaymentDonationRequestPaymentMethod(v *GooglePayDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// GooglePayDetailsAsCheckoutPaymentMethod is a convenience function that returns GooglePayDetails wrapped in CheckoutPaymentMethod
+func GooglePayDetailsAsCheckoutPaymentMethod(v *GooglePayDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		GooglePayDetails: v,
 	}
 }
 
-// IdealDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns IdealDetails wrapped in PaymentDonationRequestPaymentMethod
-func IdealDetailsAsPaymentDonationRequestPaymentMethod(v *IdealDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// IdealDetailsAsCheckoutPaymentMethod is a convenience function that returns IdealDetails wrapped in CheckoutPaymentMethod
+func IdealDetailsAsCheckoutPaymentMethod(v *IdealDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		IdealDetails: v,
 	}
 }
 
-// KlarnaDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns KlarnaDetails wrapped in PaymentDonationRequestPaymentMethod
-func KlarnaDetailsAsPaymentDonationRequestPaymentMethod(v *KlarnaDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// KlarnaDetailsAsCheckoutPaymentMethod is a convenience function that returns KlarnaDetails wrapped in CheckoutPaymentMethod
+func KlarnaDetailsAsCheckoutPaymentMethod(v *KlarnaDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		KlarnaDetails: v,
 	}
 }
 
-// MasterpassDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns MasterpassDetails wrapped in PaymentDonationRequestPaymentMethod
-func MasterpassDetailsAsPaymentDonationRequestPaymentMethod(v *MasterpassDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// MasterpassDetailsAsCheckoutPaymentMethod is a convenience function that returns MasterpassDetails wrapped in CheckoutPaymentMethod
+func MasterpassDetailsAsCheckoutPaymentMethod(v *MasterpassDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		MasterpassDetails: v,
 	}
 }
 
-// MbwayDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns MbwayDetails wrapped in PaymentDonationRequestPaymentMethod
-func MbwayDetailsAsPaymentDonationRequestPaymentMethod(v *MbwayDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// MbwayDetailsAsCheckoutPaymentMethod is a convenience function that returns MbwayDetails wrapped in CheckoutPaymentMethod
+func MbwayDetailsAsCheckoutPaymentMethod(v *MbwayDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		MbwayDetails: v,
 	}
 }
 
-// MobilePayDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns MobilePayDetails wrapped in PaymentDonationRequestPaymentMethod
-func MobilePayDetailsAsPaymentDonationRequestPaymentMethod(v *MobilePayDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// MobilePayDetailsAsCheckoutPaymentMethod is a convenience function that returns MobilePayDetails wrapped in CheckoutPaymentMethod
+func MobilePayDetailsAsCheckoutPaymentMethod(v *MobilePayDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		MobilePayDetails: v,
 	}
 }
 
-// MolPayDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns MolPayDetails wrapped in PaymentDonationRequestPaymentMethod
-func MolPayDetailsAsPaymentDonationRequestPaymentMethod(v *MolPayDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// MolPayDetailsAsCheckoutPaymentMethod is a convenience function that returns MolPayDetails wrapped in CheckoutPaymentMethod
+func MolPayDetailsAsCheckoutPaymentMethod(v *MolPayDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		MolPayDetails: v,
 	}
 }
 
-// OpenInvoiceDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns OpenInvoiceDetails wrapped in PaymentDonationRequestPaymentMethod
-func OpenInvoiceDetailsAsPaymentDonationRequestPaymentMethod(v *OpenInvoiceDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// OpenInvoiceDetailsAsCheckoutPaymentMethod is a convenience function that returns OpenInvoiceDetails wrapped in CheckoutPaymentMethod
+func OpenInvoiceDetailsAsCheckoutPaymentMethod(v *OpenInvoiceDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		OpenInvoiceDetails: v,
 	}
 }
 
-// PayPalDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns PayPalDetails wrapped in PaymentDonationRequestPaymentMethod
-func PayPalDetailsAsPaymentDonationRequestPaymentMethod(v *PayPalDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// PayPalDetailsAsCheckoutPaymentMethod is a convenience function that returns PayPalDetails wrapped in CheckoutPaymentMethod
+func PayPalDetailsAsCheckoutPaymentMethod(v *PayPalDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		PayPalDetails: v,
 	}
 }
 
-// PayUUpiDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns PayUUpiDetails wrapped in PaymentDonationRequestPaymentMethod
-func PayUUpiDetailsAsPaymentDonationRequestPaymentMethod(v *PayUUpiDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// PayUUpiDetailsAsCheckoutPaymentMethod is a convenience function that returns PayUUpiDetails wrapped in CheckoutPaymentMethod
+func PayUUpiDetailsAsCheckoutPaymentMethod(v *PayUUpiDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		PayUUpiDetails: v,
 	}
 }
 
-// PayWithGoogleDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns PayWithGoogleDetails wrapped in PaymentDonationRequestPaymentMethod
-func PayWithGoogleDetailsAsPaymentDonationRequestPaymentMethod(v *PayWithGoogleDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// PayWithGoogleDetailsAsCheckoutPaymentMethod is a convenience function that returns PayWithGoogleDetails wrapped in CheckoutPaymentMethod
+func PayWithGoogleDetailsAsCheckoutPaymentMethod(v *PayWithGoogleDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		PayWithGoogleDetails: v,
 	}
 }
 
-// PaymentDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns PaymentDetails wrapped in PaymentDonationRequestPaymentMethod
-func PaymentDetailsAsPaymentDonationRequestPaymentMethod(v *PaymentDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// PaymentDetailsAsCheckoutPaymentMethod is a convenience function that returns PaymentDetails wrapped in CheckoutPaymentMethod
+func PaymentDetailsAsCheckoutPaymentMethod(v *PaymentDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		PaymentDetails: v,
 	}
 }
 
-// RatepayDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns RatepayDetails wrapped in PaymentDonationRequestPaymentMethod
-func RatepayDetailsAsPaymentDonationRequestPaymentMethod(v *RatepayDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// RatepayDetailsAsCheckoutPaymentMethod is a convenience function that returns RatepayDetails wrapped in CheckoutPaymentMethod
+func RatepayDetailsAsCheckoutPaymentMethod(v *RatepayDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		RatepayDetails: v,
 	}
 }
 
-// SamsungPayDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns SamsungPayDetails wrapped in PaymentDonationRequestPaymentMethod
-func SamsungPayDetailsAsPaymentDonationRequestPaymentMethod(v *SamsungPayDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// SamsungPayDetailsAsCheckoutPaymentMethod is a convenience function that returns SamsungPayDetails wrapped in CheckoutPaymentMethod
+func SamsungPayDetailsAsCheckoutPaymentMethod(v *SamsungPayDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		SamsungPayDetails: v,
 	}
 }
 
-// SepaDirectDebitDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns SepaDirectDebitDetails wrapped in PaymentDonationRequestPaymentMethod
-func SepaDirectDebitDetailsAsPaymentDonationRequestPaymentMethod(v *SepaDirectDebitDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// SepaDirectDebitDetailsAsCheckoutPaymentMethod is a convenience function that returns SepaDirectDebitDetails wrapped in CheckoutPaymentMethod
+func SepaDirectDebitDetailsAsCheckoutPaymentMethod(v *SepaDirectDebitDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		SepaDirectDebitDetails: v,
 	}
 }
 
-// StoredPaymentMethodDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns StoredPaymentMethodDetails wrapped in PaymentDonationRequestPaymentMethod
-func StoredPaymentMethodDetailsAsPaymentDonationRequestPaymentMethod(v *StoredPaymentMethodDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// StoredPaymentMethodDetailsAsCheckoutPaymentMethod is a convenience function that returns StoredPaymentMethodDetails wrapped in CheckoutPaymentMethod
+func StoredPaymentMethodDetailsAsCheckoutPaymentMethod(v *StoredPaymentMethodDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		StoredPaymentMethodDetails: v,
 	}
 }
 
-// UpiCollectDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns UpiCollectDetails wrapped in PaymentDonationRequestPaymentMethod
-func UpiCollectDetailsAsPaymentDonationRequestPaymentMethod(v *UpiCollectDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// UpiCollectDetailsAsCheckoutPaymentMethod is a convenience function that returns UpiCollectDetails wrapped in CheckoutPaymentMethod
+func UpiCollectDetailsAsCheckoutPaymentMethod(v *UpiCollectDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		UpiCollectDetails: v,
 	}
 }
 
-// UpiIntentDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns UpiIntentDetails wrapped in PaymentDonationRequestPaymentMethod
-func UpiIntentDetailsAsPaymentDonationRequestPaymentMethod(v *UpiIntentDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// UpiIntentDetailsAsCheckoutPaymentMethod is a convenience function that returns UpiIntentDetails wrapped in CheckoutPaymentMethod
+func UpiIntentDetailsAsCheckoutPaymentMethod(v *UpiIntentDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		UpiIntentDetails: v,
 	}
 }
 
-// VippsDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns VippsDetails wrapped in PaymentDonationRequestPaymentMethod
-func VippsDetailsAsPaymentDonationRequestPaymentMethod(v *VippsDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// VippsDetailsAsCheckoutPaymentMethod is a convenience function that returns VippsDetails wrapped in CheckoutPaymentMethod
+func VippsDetailsAsCheckoutPaymentMethod(v *VippsDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		VippsDetails: v,
 	}
 }
 
-// VisaCheckoutDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns VisaCheckoutDetails wrapped in PaymentDonationRequestPaymentMethod
-func VisaCheckoutDetailsAsPaymentDonationRequestPaymentMethod(v *VisaCheckoutDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// VisaCheckoutDetailsAsCheckoutPaymentMethod is a convenience function that returns VisaCheckoutDetails wrapped in CheckoutPaymentMethod
+func VisaCheckoutDetailsAsCheckoutPaymentMethod(v *VisaCheckoutDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		VisaCheckoutDetails: v,
 	}
 }
 
-// WeChatPayDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns WeChatPayDetails wrapped in PaymentDonationRequestPaymentMethod
-func WeChatPayDetailsAsPaymentDonationRequestPaymentMethod(v *WeChatPayDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// WeChatPayDetailsAsCheckoutPaymentMethod is a convenience function that returns WeChatPayDetails wrapped in CheckoutPaymentMethod
+func WeChatPayDetailsAsCheckoutPaymentMethod(v *WeChatPayDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		WeChatPayDetails: v,
 	}
 }
 
-// WeChatPayMiniProgramDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns WeChatPayMiniProgramDetails wrapped in PaymentDonationRequestPaymentMethod
-func WeChatPayMiniProgramDetailsAsPaymentDonationRequestPaymentMethod(v *WeChatPayMiniProgramDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// WeChatPayMiniProgramDetailsAsCheckoutPaymentMethod is a convenience function that returns WeChatPayMiniProgramDetails wrapped in CheckoutPaymentMethod
+func WeChatPayMiniProgramDetailsAsCheckoutPaymentMethod(v *WeChatPayMiniProgramDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		WeChatPayMiniProgramDetails: v,
 	}
 }
 
-// ZipDetailsAsPaymentDonationRequestPaymentMethod is a convenience function that returns ZipDetails wrapped in PaymentDonationRequestPaymentMethod
-func ZipDetailsAsPaymentDonationRequestPaymentMethod(v *ZipDetails) PaymentDonationRequestPaymentMethod {
-	return PaymentDonationRequestPaymentMethod{
+// ZipDetailsAsCheckoutPaymentMethod is a convenience function that returns ZipDetails wrapped in CheckoutPaymentMethod
+func ZipDetailsAsCheckoutPaymentMethod(v *ZipDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
 		ZipDetails: v,
 	}
 }
 
 // Unmarshal JSON data into one of the pointers in the struct
-func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error {
+func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into AchDetails
@@ -883,16 +883,16 @@ func (dst *PaymentDonationRequestPaymentMethod) UnmarshalJSON(data []byte) error
 		dst.WeChatPayMiniProgramDetails = nil
 		dst.ZipDetails = nil
 
-		return fmt.Errorf("data matches more than one schema in oneOf(PaymentDonationRequestPaymentMethod)")
+		return fmt.Errorf("data matches more than one schema in oneOf(CheckoutPaymentMethod)")
 	} else if match == 1 {
 		return nil // exactly one match
 	} else { // no match
-		return fmt.Errorf("data failed to match schemas in oneOf(PaymentDonationRequestPaymentMethod)")
+		return fmt.Errorf("data failed to match schemas in oneOf(CheckoutPaymentMethod)")
 	}
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON
-func (src PaymentDonationRequestPaymentMethod) MarshalJSON() ([]byte, error) {
+func (src CheckoutPaymentMethod) MarshalJSON() ([]byte, error) {
 	if src.AchDetails != nil {
 		return json.Marshal(&src.AchDetails)
 	}
@@ -1053,7 +1053,7 @@ func (src PaymentDonationRequestPaymentMethod) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *PaymentDonationRequestPaymentMethod) GetActualInstance() interface{} {
+func (obj *CheckoutPaymentMethod) GetActualInstance() interface{} {
 	if obj == nil {
 		return nil
 	}
@@ -1217,38 +1217,38 @@ func (obj *PaymentDonationRequestPaymentMethod) GetActualInstance() interface{} 
 	return nil
 }
 
-type NullablePaymentDonationRequestPaymentMethod struct {
-	value *PaymentDonationRequestPaymentMethod
+type NullableCheckoutPaymentMethod struct {
+	value *CheckoutPaymentMethod
 	isSet bool
 }
 
-func (v NullablePaymentDonationRequestPaymentMethod) Get() *PaymentDonationRequestPaymentMethod {
+func (v NullableCheckoutPaymentMethod) Get() *CheckoutPaymentMethod {
 	return v.value
 }
 
-func (v *NullablePaymentDonationRequestPaymentMethod) Set(val *PaymentDonationRequestPaymentMethod) {
+func (v *NullableCheckoutPaymentMethod) Set(val *CheckoutPaymentMethod) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullablePaymentDonationRequestPaymentMethod) IsSet() bool {
+func (v NullableCheckoutPaymentMethod) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullablePaymentDonationRequestPaymentMethod) Unset() {
+func (v *NullableCheckoutPaymentMethod) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullablePaymentDonationRequestPaymentMethod(val *PaymentDonationRequestPaymentMethod) *NullablePaymentDonationRequestPaymentMethod {
-	return &NullablePaymentDonationRequestPaymentMethod{value: val, isSet: true}
+func NewNullableCheckoutPaymentMethod(val *CheckoutPaymentMethod) *NullableCheckoutPaymentMethod {
+	return &NullableCheckoutPaymentMethod{value: val, isSet: true}
 }
 
-func (v NullablePaymentDonationRequestPaymentMethod) MarshalJSON() ([]byte, error) {
+func (v NullableCheckoutPaymentMethod) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullablePaymentDonationRequestPaymentMethod) UnmarshalJSON(src []byte) error {
+func (v *NullableCheckoutPaymentMethod) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

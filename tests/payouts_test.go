@@ -120,7 +120,7 @@ func Test_Payout(t *testing.T) {
 						Currency: "EUR",
 					},
 					MerchantAccount: MerchantAccount,
-					PaymentMethod:   checkout.CardDetailsAsPaymentDonationRequestPaymentMethod(cc),
+					PaymentMethod:   checkout.CardDetailsAsCheckoutPaymentMethod(cc),
 				})
 
 				res, httpRes, err := client.Payouts.Payout(&payouts.PayoutRequest{

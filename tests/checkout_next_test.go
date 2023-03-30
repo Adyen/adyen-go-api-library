@@ -25,7 +25,7 @@ func Test_Checkout_Next(t *testing.T) {
 		ApiKey:      os.Getenv("ADYEN_API_KEY"),
 		Environment: "TEST",
 	})
-	client.GetConfig().Debug = true
+	//client.GetConfig().Debug = true
 
 	t.Run("Live URL with prefix", func(t *testing.T) {
 		configuration := newcheckout.NewClientConfig()
@@ -83,7 +83,7 @@ func Test_Checkout_Next(t *testing.T) {
 			paymentRequest := *checkout.NewPaymentRequest(
 				*checkout.NewAmount("EUR", int64(1234)),
 				MerchantAccount,
-				checkout.CardDetailsAsPaymentDonationRequestPaymentMethod(card),
+				checkout.CardDetailsAsCheckoutPaymentMethod(card),
 				"Reference_example",
 				"ReturnUrl_example",
 			) // PaymentRequest |  (optional)
@@ -109,7 +109,7 @@ func Test_Checkout_Next(t *testing.T) {
 			paymentRequest := *checkout.NewPaymentRequest(
 				*checkout.NewAmount("EUR", int64(1234)),
 				MerchantAccount,
-				checkout.IdealDetailsAsPaymentDonationRequestPaymentMethod(ideal),
+				checkout.IdealDetailsAsCheckoutPaymentMethod(ideal),
 				"Reference_example",
 				"ReturnUrl_example",
 			) // PaymentRequest |  (optional)

@@ -80,9 +80,9 @@ type PaymentRequest struct {
 	// When you are doing multiple partial (gift card) payments, this is the `pspReference` of the first payment. We use this to link the multiple payments to each other. As your own reference for linking multiple payments, use the `merchantOrderReference`instead.
 	OrderReference *string `json:"orderReference,omitempty"`
 	// Required for the 3D Secure 2 `channel` **Web** integration.  Set this parameter to the origin URL of the page that you are loading the 3D Secure Component from.
-	Origin                  *string                             `json:"origin,omitempty"`
-	PaymentMethod           PaymentDonationRequestPaymentMethod `json:"paymentMethod"`
-	PlatformChargebackLogic *PlatformChargebackLogic            `json:"platformChargebackLogic,omitempty"`
+	Origin                  *string                  `json:"origin,omitempty"`
+	PaymentMethod           CheckoutPaymentMethod    `json:"paymentMethod"`
+	PlatformChargebackLogic *PlatformChargebackLogic `json:"platformChargebackLogic,omitempty"`
 	// Date after which no further authorisations shall be performed. Only for 3D Secure 2.
 	RecurringExpiry *string `json:"recurringExpiry,omitempty"`
 	// Minimum number of days between authorisations. Only for 3D Secure 2.
@@ -135,7 +135,7 @@ type PaymentRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPaymentRequest(amount Amount, merchantAccount string, paymentMethod PaymentDonationRequestPaymentMethod, reference string, returnUrl string) *PaymentRequest {
+func NewPaymentRequest(amount Amount, merchantAccount string, paymentMethod CheckoutPaymentMethod, reference string, returnUrl string) *PaymentRequest {
 	this := PaymentRequest{}
 	this.Amount = amount
 	this.MerchantAccount = merchantAccount
@@ -1326,9 +1326,9 @@ func (o *PaymentRequest) SetOrigin(v string) {
 }
 
 // GetPaymentMethod returns the PaymentMethod field value
-func (o *PaymentRequest) GetPaymentMethod() PaymentDonationRequestPaymentMethod {
+func (o *PaymentRequest) GetPaymentMethod() CheckoutPaymentMethod {
 	if o == nil {
-		var ret PaymentDonationRequestPaymentMethod
+		var ret CheckoutPaymentMethod
 		return ret
 	}
 
@@ -1337,7 +1337,7 @@ func (o *PaymentRequest) GetPaymentMethod() PaymentDonationRequestPaymentMethod 
 
 // GetPaymentMethodOk returns a tuple with the PaymentMethod field value
 // and a boolean to check if the value has been set.
-func (o *PaymentRequest) GetPaymentMethodOk() (*PaymentDonationRequestPaymentMethod, bool) {
+func (o *PaymentRequest) GetPaymentMethodOk() (*CheckoutPaymentMethod, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1345,7 +1345,7 @@ func (o *PaymentRequest) GetPaymentMethodOk() (*PaymentDonationRequestPaymentMet
 }
 
 // SetPaymentMethod sets field value
-func (o *PaymentRequest) SetPaymentMethod(v PaymentDonationRequestPaymentMethod) {
+func (o *PaymentRequest) SetPaymentMethod(v CheckoutPaymentMethod) {
 	o.PaymentMethod = v
 }
 
