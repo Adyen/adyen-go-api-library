@@ -56,6 +56,9 @@ func Test_Checkout_Idempotency_Race(t *testing.T) {
 				ctx = common.WithIdempotencyKey(ctx, idempotencyKey)
 				_, _, err := client.Checkout.Payments(&checkout.PaymentRequest{
 					Reference: ref,
+					PaymentMethod: checkout.IdealDetailsAsCheckoutPaymentMethod(&checkout.IdealDetails{
+						Issuer: "1121",
+					}),
 				}, ctx)
 				require.NoError(t, err)
 				v, ok := idempotencyKeys.Load(ref)
