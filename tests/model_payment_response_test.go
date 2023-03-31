@@ -48,8 +48,8 @@ func TestPaymentResponse_UnmarshalJSON(t *testing.T) {
 			func(got checkout.PaymentResponse, t *testing.T) {
 				require.NotNil(t, got)
 				require.Nil(t, got.Action)
-				assert.Equal(t, "Error", got.ResultCode.String())
-				assert.Equal(t, "12345", got.PspReference)
+				assert.Equal(t, "Error", got.GetResultCode())
+				assert.Equal(t, "12345", got.GetPspReference())
 			},
 		},
 		{
@@ -69,9 +69,9 @@ func TestPaymentResponse_UnmarshalJSON(t *testing.T) {
 				require.NotNil(t, got)
 				require.NotNil(t, got.Action)
 				require.NotNil(t, got.ResultCode)
-				assert.Equal(t, "redirect", got.Action.(*checkout.CheckoutRedirectAction).Type)
-				assert.Equal(t, "ideal", got.Action.(*checkout.CheckoutRedirectAction).PaymentMethodType)
-				assert.Equal(t, "https://checkoutshopper-test.adyen.com/checkoutshopper/checkoutPaymentRedirect?redirectData=X6XtfGC3...", got.Action.(*checkout.CheckoutRedirectAction).Url)
+				assert.Equal(t, "redirect", got.GetAction().CheckoutRedirectAction.GetType())
+				assert.Equal(t, "ideal", got.GetAction().CheckoutRedirectAction.GetPaymentMethodType())
+				assert.Equal(t, "https://checkoutshopper-test.adyen.com/checkoutshopper/checkoutPaymentRedirect?redirectData=X6XtfGC3...", got.GetAction().CheckoutRedirectAction.GetUrl())
 			},
 		},
 		{
@@ -93,37 +93,13 @@ func TestPaymentResponse_UnmarshalJSON(t *testing.T) {
 				require.NotNil(t, got)
 				require.NotNil(t, got.Action)
 				require.NotNil(t, got.ResultCode)
-				assert.Equal(t, "threeDS2", got.Action.(*checkout.CheckoutThreeDS2Action).Type)
-				assert.Equal(t, "fingerprint", got.Action.(*checkout.CheckoutThreeDS2Action).Subtype)
-				assert.Equal(t, "eyJ0aHJlZURTTWVzc2FnZVZ...", got.Action.(*checkout.CheckoutThreeDS2Action).Token)
+				assert.Equal(t, "threeDS2", got.GetAction().CheckoutThreeDS2Action.GetType())
+				assert.Equal(t, "fingerprint", got.GetAction().CheckoutThreeDS2Action.GetSubtype())
+				assert.Equal(t, "eyJ0aHJlZURTTWVzc2FnZVZ...", got.GetAction().CheckoutThreeDS2Action.GetToken())
 
 				jsonString, err := json.Marshal(got)
 				assert.Nil(t, err)
 				assert.Equal(t, `{"action":{"authorisationToken":"BQABAQCOY3Jh1O4zAJC7AEESc...","paymentData":"Ab02b4c0!BQABAgCCFm6bRbO...","paymentMethodType":"scheme","subtype":"fingerprint","token":"eyJ0aHJlZURTTWVzc2FnZVZ...","type":"threeDS2"},"resultCode":"IdentifyShopper"}`, string(jsonString))
-			},
-		},
-		{
-			"unmarshalls a payment response with an action type not defined with concrete struct correctly",
-			checkout.PaymentResponse{},
-			`{
-                "resultCode": "IdentifyShopper",
-                "action": {
-                  "paymentMethodType": "scheme",
-                  "token": "eyJ0aHJlZURTTWVzc2FnZVZ...",
-                  "type": "unknown"
-                }
-            }`,
-			false,
-			func(got checkout.PaymentResponse, t *testing.T) {
-				require.NotNil(t, got)
-				require.NotNil(t, got.Action)
-				require.NotNil(t, got.ResultCode)
-				assert.Equal(t, "unknown", got.Action.(map[string]interface{})["type"].(string))
-				assert.Equal(t, "scheme", got.Action.(map[string]interface{})["paymentMethodType"])
-
-				jsonString, err := json.Marshal(got)
-				assert.Nil(t, err)
-				assert.Equal(t, `{"action":{"paymentMethodType":"scheme","token":"eyJ0aHJlZURTTWVzc2FnZVZ...","type":"unknown"},"resultCode":"IdentifyShopper"}`, string(jsonString))
 			},
 		},
 	}
@@ -139,4 +115,18 @@ func TestPaymentResponse_UnmarshalJSON(t *testing.T) {
 			tt.wantFn(pm, t)
 		})
 	}
+
+	t.Run("Cannot unmarshal type missing from the specification", func(t *testing.T) {
+		pm := checkout.PaymentResponse{}
+		inputJson := `{
+            "resultCode": "IdentifyShopper",
+            "action": {
+              "paymentMethodType": "scheme",
+              "token": "eyJ0aHJlZURTTWVzc2FnZVZ...",
+              "type": "unknown"
+            }
+        }`
+		err := json.Unmarshal([]byte(inputJson), &pm)
+		require.ErrorContains(t, err, "data failed to match schemas in oneOf(PaymentResponseAction)")
+	})
 }
