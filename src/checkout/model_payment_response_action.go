@@ -82,9 +82,9 @@ func (dst *PaymentResponseAction) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.CheckoutAwaitAction)
 	if err == nil {
 		jsonCheckoutAwaitAction, _ := json.Marshal(dst.CheckoutAwaitAction)
-		if string(jsonCheckoutAwaitAction) == "{}" { // empty struct
+		if string(jsonCheckoutAwaitAction) == "{}" || !dst.CheckoutAwaitAction.isValidType() { // empty struct
 			dst.CheckoutAwaitAction = nil
-		} else if dst.CheckoutAwaitAction.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -95,9 +95,9 @@ func (dst *PaymentResponseAction) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.CheckoutNativeRedirectAction)
 	if err == nil {
 		jsonCheckoutNativeRedirectAction, _ := json.Marshal(dst.CheckoutNativeRedirectAction)
-		if string(jsonCheckoutNativeRedirectAction) == "{}" { // empty struct
+		if string(jsonCheckoutNativeRedirectAction) == "{}" || !dst.CheckoutNativeRedirectAction.isValidType() { // empty struct
 			dst.CheckoutNativeRedirectAction = nil
-		} else if dst.CheckoutNativeRedirectAction.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -108,9 +108,9 @@ func (dst *PaymentResponseAction) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.CheckoutQrCodeAction)
 	if err == nil {
 		jsonCheckoutQrCodeAction, _ := json.Marshal(dst.CheckoutQrCodeAction)
-		if string(jsonCheckoutQrCodeAction) == "{}" { // empty struct
+		if string(jsonCheckoutQrCodeAction) == "{}" || !dst.CheckoutQrCodeAction.isValidType() { // empty struct
 			dst.CheckoutQrCodeAction = nil
-		} else if dst.CheckoutQrCodeAction.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -121,9 +121,9 @@ func (dst *PaymentResponseAction) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.CheckoutRedirectAction)
 	if err == nil {
 		jsonCheckoutRedirectAction, _ := json.Marshal(dst.CheckoutRedirectAction)
-		if string(jsonCheckoutRedirectAction) == "{}" { // empty struct
+		if string(jsonCheckoutRedirectAction) == "{}" || !dst.CheckoutRedirectAction.isValidType() { // empty struct
 			dst.CheckoutRedirectAction = nil
-		} else if dst.CheckoutRedirectAction.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -134,9 +134,9 @@ func (dst *PaymentResponseAction) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.CheckoutSDKAction)
 	if err == nil {
 		jsonCheckoutSDKAction, _ := json.Marshal(dst.CheckoutSDKAction)
-		if string(jsonCheckoutSDKAction) == "{}" { // empty struct
+		if string(jsonCheckoutSDKAction) == "{}" || !dst.CheckoutSDKAction.isValidType() { // empty struct
 			dst.CheckoutSDKAction = nil
-		} else if dst.CheckoutSDKAction.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -147,9 +147,9 @@ func (dst *PaymentResponseAction) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.CheckoutThreeDS2Action)
 	if err == nil {
 		jsonCheckoutThreeDS2Action, _ := json.Marshal(dst.CheckoutThreeDS2Action)
-		if string(jsonCheckoutThreeDS2Action) == "{}" { // empty struct
+		if string(jsonCheckoutThreeDS2Action) == "{}" || !dst.CheckoutThreeDS2Action.isValidType() { // empty struct
 			dst.CheckoutThreeDS2Action = nil
-		} else if dst.CheckoutThreeDS2Action.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -160,9 +160,9 @@ func (dst *PaymentResponseAction) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.CheckoutVoucherAction)
 	if err == nil {
 		jsonCheckoutVoucherAction, _ := json.Marshal(dst.CheckoutVoucherAction)
-		if string(jsonCheckoutVoucherAction) == "{}" { // empty struct
+		if string(jsonCheckoutVoucherAction) == "{}" || !dst.CheckoutVoucherAction.isValidType() { // empty struct
 			dst.CheckoutVoucherAction = nil
-		} else if dst.CheckoutVoucherAction.isValidType() {
+		} else {
 			match++
 		}
 	} else {

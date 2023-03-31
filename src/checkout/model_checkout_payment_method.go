@@ -338,9 +338,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.AchDetails)
 	if err == nil {
 		jsonAchDetails, _ := json.Marshal(dst.AchDetails)
-		if string(jsonAchDetails) == "{}" { // empty struct
+		if string(jsonAchDetails) == "{}" || !dst.AchDetails.isValidType() { // empty struct
 			dst.AchDetails = nil
-		} else if dst.AchDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -351,9 +351,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.AfterpayDetails)
 	if err == nil {
 		jsonAfterpayDetails, _ := json.Marshal(dst.AfterpayDetails)
-		if string(jsonAfterpayDetails) == "{}" { // empty struct
+		if string(jsonAfterpayDetails) == "{}" || !dst.AfterpayDetails.isValidType() { // empty struct
 			dst.AfterpayDetails = nil
-		} else if dst.AfterpayDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -364,9 +364,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.AmazonPayDetails)
 	if err == nil {
 		jsonAmazonPayDetails, _ := json.Marshal(dst.AmazonPayDetails)
-		if string(jsonAmazonPayDetails) == "{}" { // empty struct
+		if string(jsonAmazonPayDetails) == "{}" || !dst.AmazonPayDetails.isValidType() { // empty struct
 			dst.AmazonPayDetails = nil
-		} else if dst.AmazonPayDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -377,9 +377,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.AndroidPayDetails)
 	if err == nil {
 		jsonAndroidPayDetails, _ := json.Marshal(dst.AndroidPayDetails)
-		if string(jsonAndroidPayDetails) == "{}" { // empty struct
+		if string(jsonAndroidPayDetails) == "{}" || !dst.AndroidPayDetails.isValidType() { // empty struct
 			dst.AndroidPayDetails = nil
-		} else if dst.AndroidPayDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -390,9 +390,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.ApplePayDetails)
 	if err == nil {
 		jsonApplePayDetails, _ := json.Marshal(dst.ApplePayDetails)
-		if string(jsonApplePayDetails) == "{}" { // empty struct
+		if string(jsonApplePayDetails) == "{}" || !dst.ApplePayDetails.isValidType() { // empty struct
 			dst.ApplePayDetails = nil
-		} else if dst.ApplePayDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -403,9 +403,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.BacsDirectDebitDetails)
 	if err == nil {
 		jsonBacsDirectDebitDetails, _ := json.Marshal(dst.BacsDirectDebitDetails)
-		if string(jsonBacsDirectDebitDetails) == "{}" { // empty struct
+		if string(jsonBacsDirectDebitDetails) == "{}" || !dst.BacsDirectDebitDetails.isValidType() { // empty struct
 			dst.BacsDirectDebitDetails = nil
-		} else if dst.BacsDirectDebitDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -416,9 +416,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.BillDeskDetails)
 	if err == nil {
 		jsonBillDeskDetails, _ := json.Marshal(dst.BillDeskDetails)
-		if string(jsonBillDeskDetails) == "{}" { // empty struct
+		if string(jsonBillDeskDetails) == "{}" || !dst.BillDeskDetails.isValidType() { // empty struct
 			dst.BillDeskDetails = nil
-		} else if dst.BillDeskDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -429,9 +429,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.BlikDetails)
 	if err == nil {
 		jsonBlikDetails, _ := json.Marshal(dst.BlikDetails)
-		if string(jsonBlikDetails) == "{}" { // empty struct
+		if string(jsonBlikDetails) == "{}" || !dst.BlikDetails.isValidType() { // empty struct
 			dst.BlikDetails = nil
-		} else if dst.BlikDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -442,9 +442,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.CardDetails)
 	if err == nil {
 		jsonCardDetails, _ := json.Marshal(dst.CardDetails)
-		if string(jsonCardDetails) == "{}" { // empty struct
+		if string(jsonCardDetails) == "{}" || !dst.CardDetails.isValidType() { // empty struct
 			dst.CardDetails = nil
-		} else if dst.CardDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -455,9 +455,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.CellulantDetails)
 	if err == nil {
 		jsonCellulantDetails, _ := json.Marshal(dst.CellulantDetails)
-		if string(jsonCellulantDetails) == "{}" { // empty struct
+		if string(jsonCellulantDetails) == "{}" || !dst.CellulantDetails.isValidType() { // empty struct
 			dst.CellulantDetails = nil
-		} else if dst.CellulantDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -468,9 +468,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.DokuDetails)
 	if err == nil {
 		jsonDokuDetails, _ := json.Marshal(dst.DokuDetails)
-		if string(jsonDokuDetails) == "{}" { // empty struct
+		if string(jsonDokuDetails) == "{}" || !dst.DokuDetails.isValidType() { // empty struct
 			dst.DokuDetails = nil
-		} else if dst.DokuDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -481,9 +481,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.DotpayDetails)
 	if err == nil {
 		jsonDotpayDetails, _ := json.Marshal(dst.DotpayDetails)
-		if string(jsonDotpayDetails) == "{}" { // empty struct
+		if string(jsonDotpayDetails) == "{}" || !dst.DotpayDetails.isValidType() { // empty struct
 			dst.DotpayDetails = nil
-		} else if dst.DotpayDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -494,9 +494,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.DragonpayDetails)
 	if err == nil {
 		jsonDragonpayDetails, _ := json.Marshal(dst.DragonpayDetails)
-		if string(jsonDragonpayDetails) == "{}" { // empty struct
+		if string(jsonDragonpayDetails) == "{}" || !dst.DragonpayDetails.isValidType() { // empty struct
 			dst.DragonpayDetails = nil
-		} else if dst.DragonpayDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -507,9 +507,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.EcontextVoucherDetails)
 	if err == nil {
 		jsonEcontextVoucherDetails, _ := json.Marshal(dst.EcontextVoucherDetails)
-		if string(jsonEcontextVoucherDetails) == "{}" { // empty struct
+		if string(jsonEcontextVoucherDetails) == "{}" || !dst.EcontextVoucherDetails.isValidType() { // empty struct
 			dst.EcontextVoucherDetails = nil
-		} else if dst.EcontextVoucherDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -520,9 +520,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.GenericIssuerPaymentMethodDetails)
 	if err == nil {
 		jsonGenericIssuerPaymentMethodDetails, _ := json.Marshal(dst.GenericIssuerPaymentMethodDetails)
-		if string(jsonGenericIssuerPaymentMethodDetails) == "{}" { // empty struct
+		if string(jsonGenericIssuerPaymentMethodDetails) == "{}" || !dst.GenericIssuerPaymentMethodDetails.isValidType() { // empty struct
 			dst.GenericIssuerPaymentMethodDetails = nil
-		} else if dst.GenericIssuerPaymentMethodDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -533,9 +533,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.GiropayDetails)
 	if err == nil {
 		jsonGiropayDetails, _ := json.Marshal(dst.GiropayDetails)
-		if string(jsonGiropayDetails) == "{}" { // empty struct
+		if string(jsonGiropayDetails) == "{}" || !dst.GiropayDetails.isValidType() { // empty struct
 			dst.GiropayDetails = nil
-		} else if dst.GiropayDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -546,9 +546,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.GooglePayDetails)
 	if err == nil {
 		jsonGooglePayDetails, _ := json.Marshal(dst.GooglePayDetails)
-		if string(jsonGooglePayDetails) == "{}" { // empty struct
+		if string(jsonGooglePayDetails) == "{}" || !dst.GooglePayDetails.isValidType() { // empty struct
 			dst.GooglePayDetails = nil
-		} else if dst.GooglePayDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -559,9 +559,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.IdealDetails)
 	if err == nil {
 		jsonIdealDetails, _ := json.Marshal(dst.IdealDetails)
-		if string(jsonIdealDetails) == "{}" { // empty struct
+		if string(jsonIdealDetails) == "{}" || !dst.IdealDetails.isValidType() { // empty struct
 			dst.IdealDetails = nil
-		} else if dst.IdealDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -572,9 +572,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.KlarnaDetails)
 	if err == nil {
 		jsonKlarnaDetails, _ := json.Marshal(dst.KlarnaDetails)
-		if string(jsonKlarnaDetails) == "{}" { // empty struct
+		if string(jsonKlarnaDetails) == "{}" || !dst.KlarnaDetails.isValidType() { // empty struct
 			dst.KlarnaDetails = nil
-		} else if dst.KlarnaDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -585,9 +585,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.MasterpassDetails)
 	if err == nil {
 		jsonMasterpassDetails, _ := json.Marshal(dst.MasterpassDetails)
-		if string(jsonMasterpassDetails) == "{}" { // empty struct
+		if string(jsonMasterpassDetails) == "{}" || !dst.MasterpassDetails.isValidType() { // empty struct
 			dst.MasterpassDetails = nil
-		} else if dst.MasterpassDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -598,9 +598,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.MbwayDetails)
 	if err == nil {
 		jsonMbwayDetails, _ := json.Marshal(dst.MbwayDetails)
-		if string(jsonMbwayDetails) == "{}" { // empty struct
+		if string(jsonMbwayDetails) == "{}" || !dst.MbwayDetails.isValidType() { // empty struct
 			dst.MbwayDetails = nil
-		} else if dst.MbwayDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -611,9 +611,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.MobilePayDetails)
 	if err == nil {
 		jsonMobilePayDetails, _ := json.Marshal(dst.MobilePayDetails)
-		if string(jsonMobilePayDetails) == "{}" { // empty struct
+		if string(jsonMobilePayDetails) == "{}" || !dst.MobilePayDetails.isValidType() { // empty struct
 			dst.MobilePayDetails = nil
-		} else if dst.MobilePayDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -624,9 +624,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.MolPayDetails)
 	if err == nil {
 		jsonMolPayDetails, _ := json.Marshal(dst.MolPayDetails)
-		if string(jsonMolPayDetails) == "{}" { // empty struct
+		if string(jsonMolPayDetails) == "{}" || !dst.MolPayDetails.isValidType() { // empty struct
 			dst.MolPayDetails = nil
-		} else if dst.MolPayDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -637,9 +637,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.OpenInvoiceDetails)
 	if err == nil {
 		jsonOpenInvoiceDetails, _ := json.Marshal(dst.OpenInvoiceDetails)
-		if string(jsonOpenInvoiceDetails) == "{}" { // empty struct
+		if string(jsonOpenInvoiceDetails) == "{}" || !dst.OpenInvoiceDetails.isValidType() { // empty struct
 			dst.OpenInvoiceDetails = nil
-		} else if dst.OpenInvoiceDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -650,9 +650,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.PayPalDetails)
 	if err == nil {
 		jsonPayPalDetails, _ := json.Marshal(dst.PayPalDetails)
-		if string(jsonPayPalDetails) == "{}" { // empty struct
+		if string(jsonPayPalDetails) == "{}" || !dst.PayPalDetails.isValidType() { // empty struct
 			dst.PayPalDetails = nil
-		} else if dst.PayPalDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -663,9 +663,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.PayUUpiDetails)
 	if err == nil {
 		jsonPayUUpiDetails, _ := json.Marshal(dst.PayUUpiDetails)
-		if string(jsonPayUUpiDetails) == "{}" { // empty struct
+		if string(jsonPayUUpiDetails) == "{}" || !dst.PayUUpiDetails.isValidType() { // empty struct
 			dst.PayUUpiDetails = nil
-		} else if dst.PayUUpiDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -676,9 +676,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.PayWithGoogleDetails)
 	if err == nil {
 		jsonPayWithGoogleDetails, _ := json.Marshal(dst.PayWithGoogleDetails)
-		if string(jsonPayWithGoogleDetails) == "{}" { // empty struct
+		if string(jsonPayWithGoogleDetails) == "{}" || !dst.PayWithGoogleDetails.isValidType() { // empty struct
 			dst.PayWithGoogleDetails = nil
-		} else if dst.PayWithGoogleDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -689,9 +689,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.PaymentDetails)
 	if err == nil {
 		jsonPaymentDetails, _ := json.Marshal(dst.PaymentDetails)
-		if string(jsonPaymentDetails) == "{}" { // empty struct
+		if string(jsonPaymentDetails) == "{}" || !dst.PaymentDetails.isValidType() { // empty struct
 			dst.PaymentDetails = nil
-		} else if dst.PaymentDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -702,9 +702,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.RatepayDetails)
 	if err == nil {
 		jsonRatepayDetails, _ := json.Marshal(dst.RatepayDetails)
-		if string(jsonRatepayDetails) == "{}" { // empty struct
+		if string(jsonRatepayDetails) == "{}" || !dst.RatepayDetails.isValidType() { // empty struct
 			dst.RatepayDetails = nil
-		} else if dst.RatepayDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -715,9 +715,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.SamsungPayDetails)
 	if err == nil {
 		jsonSamsungPayDetails, _ := json.Marshal(dst.SamsungPayDetails)
-		if string(jsonSamsungPayDetails) == "{}" { // empty struct
+		if string(jsonSamsungPayDetails) == "{}" || !dst.SamsungPayDetails.isValidType() { // empty struct
 			dst.SamsungPayDetails = nil
-		} else if dst.SamsungPayDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -728,9 +728,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.SepaDirectDebitDetails)
 	if err == nil {
 		jsonSepaDirectDebitDetails, _ := json.Marshal(dst.SepaDirectDebitDetails)
-		if string(jsonSepaDirectDebitDetails) == "{}" { // empty struct
+		if string(jsonSepaDirectDebitDetails) == "{}" || !dst.SepaDirectDebitDetails.isValidType() { // empty struct
 			dst.SepaDirectDebitDetails = nil
-		} else if dst.SepaDirectDebitDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -741,9 +741,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.StoredPaymentMethodDetails)
 	if err == nil {
 		jsonStoredPaymentMethodDetails, _ := json.Marshal(dst.StoredPaymentMethodDetails)
-		if string(jsonStoredPaymentMethodDetails) == "{}" { // empty struct
+		if string(jsonStoredPaymentMethodDetails) == "{}" || !dst.StoredPaymentMethodDetails.isValidType() { // empty struct
 			dst.StoredPaymentMethodDetails = nil
-		} else if dst.StoredPaymentMethodDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -754,9 +754,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.UpiCollectDetails)
 	if err == nil {
 		jsonUpiCollectDetails, _ := json.Marshal(dst.UpiCollectDetails)
-		if string(jsonUpiCollectDetails) == "{}" { // empty struct
+		if string(jsonUpiCollectDetails) == "{}" || !dst.UpiCollectDetails.isValidType() { // empty struct
 			dst.UpiCollectDetails = nil
-		} else if dst.UpiCollectDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -767,9 +767,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.UpiIntentDetails)
 	if err == nil {
 		jsonUpiIntentDetails, _ := json.Marshal(dst.UpiIntentDetails)
-		if string(jsonUpiIntentDetails) == "{}" { // empty struct
+		if string(jsonUpiIntentDetails) == "{}" || !dst.UpiIntentDetails.isValidType() { // empty struct
 			dst.UpiIntentDetails = nil
-		} else if dst.UpiIntentDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -780,9 +780,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.VippsDetails)
 	if err == nil {
 		jsonVippsDetails, _ := json.Marshal(dst.VippsDetails)
-		if string(jsonVippsDetails) == "{}" { // empty struct
+		if string(jsonVippsDetails) == "{}" || !dst.VippsDetails.isValidType() { // empty struct
 			dst.VippsDetails = nil
-		} else if dst.VippsDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -793,9 +793,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.VisaCheckoutDetails)
 	if err == nil {
 		jsonVisaCheckoutDetails, _ := json.Marshal(dst.VisaCheckoutDetails)
-		if string(jsonVisaCheckoutDetails) == "{}" { // empty struct
+		if string(jsonVisaCheckoutDetails) == "{}" || !dst.VisaCheckoutDetails.isValidType() { // empty struct
 			dst.VisaCheckoutDetails = nil
-		} else if dst.VisaCheckoutDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -806,9 +806,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.WeChatPayDetails)
 	if err == nil {
 		jsonWeChatPayDetails, _ := json.Marshal(dst.WeChatPayDetails)
-		if string(jsonWeChatPayDetails) == "{}" { // empty struct
+		if string(jsonWeChatPayDetails) == "{}" || !dst.WeChatPayDetails.isValidType() { // empty struct
 			dst.WeChatPayDetails = nil
-		} else if dst.WeChatPayDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -819,9 +819,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.WeChatPayMiniProgramDetails)
 	if err == nil {
 		jsonWeChatPayMiniProgramDetails, _ := json.Marshal(dst.WeChatPayMiniProgramDetails)
-		if string(jsonWeChatPayMiniProgramDetails) == "{}" { // empty struct
+		if string(jsonWeChatPayMiniProgramDetails) == "{}" || !dst.WeChatPayMiniProgramDetails.isValidType() { // empty struct
 			dst.WeChatPayMiniProgramDetails = nil
-		} else if dst.WeChatPayMiniProgramDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
@@ -832,9 +832,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.ZipDetails)
 	if err == nil {
 		jsonZipDetails, _ := json.Marshal(dst.ZipDetails)
-		if string(jsonZipDetails) == "{}" { // empty struct
+		if string(jsonZipDetails) == "{}" || !dst.ZipDetails.isValidType() { // empty struct
 			dst.ZipDetails = nil
-		} else if dst.ZipDetails.isValidType() {
+		} else {
 			match++
 		}
 	} else {
