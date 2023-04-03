@@ -41,6 +41,8 @@ checkout: schema $(openapi-generator-jar) $(goimports)
 		-p packageName=$(@) \
 		--global-property apiTests=false \
 		--global-property apis,models \
+		--global-property apiDocs=false \
+		--global-property modelDocs=true \
 		--git-repo-id adyen-go-api-library/v6 --git-user-id adyen \
 		--enable-post-process-file \
 		--inline-schema-name-mappings PaymentDonationRequest_paymentMethod=CheckoutPaymentMethod \
