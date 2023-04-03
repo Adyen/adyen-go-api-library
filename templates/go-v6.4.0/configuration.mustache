@@ -1,5 +1,7 @@
 {{>partial_header}}
+{{#lambda.lowercase}}
 package {{packageName}}
+{{/lambda.lowercase}}
 
 import (
 	"context"
@@ -109,7 +111,7 @@ type MiddlewareFunction func(*http.Request)
 
 {{/withCustomMiddlewareFunction}}
 // Configuration stores the configuration of the API client
-type ClientConfig struct {
+type Configuration struct {
 	Host             string            `json:"host,omitempty"`
 	Scheme           string            `json:"scheme,omitempty"`
 	DefaultHeader    map[string]string `json:"defaultHeader,omitempty"`
@@ -121,13 +123,11 @@ type ClientConfig struct {
 	{{#withCustomMiddlewareFunction}}
 	Middleware       MiddlewareFunction
 	{{/withCustomMiddlewareFunction}}
-    // Custom Adyen properties
-    ApiKey           string            `json:"apiKey,omitempty"`
 }
 
-// NewConfiguration returns a new ClientConfig object
-func NewClientConfig() *ClientConfig {
-	cfg := &ClientConfig{
+// NewConfiguration returns a new Configuration object
+func NewConfiguration() *Configuration {
+	cfg := &Configuration{
 		DefaultHeader:    make(map[string]string),
 		UserAgent:        "{{{httpUserAgent}}}{{^httpUserAgent}}OpenAPI-Generator/{{{packageVersion}}}/go{{/httpUserAgent}}",
 		Debug:            false,
@@ -212,7 +212,7 @@ func NewClientConfig() *ClientConfig {
 }
 
 // AddDefaultHeader adds a new HTTP header to the default header in the request
-func (c *ClientConfig) AddDefaultHeader(key string, value string) {
+func (c *Configuration) AddDefaultHeader(key string, value string) {
 	c.DefaultHeader[key] = value
 }
 
@@ -245,7 +245,7 @@ func (sc ServerConfigurations) URL(index int, variables map[string]string) (stri
 }
 
 // ServerURL returns URL based on server settings
-func (c *ClientConfig) ServerURL(index int, variables map[string]string) (string, error) {
+func (c *Configuration) ServerURL(index int, variables map[string]string) (string, error) {
 	return c.Servers.URL(index, variables)
 }
 
@@ -302,7 +302,7 @@ func getServerOperationVariables(ctx context.Context, endpoint string) (map[stri
 }
 
 // ServerURLWithContext returns a new server URL given an endpoint
-func (c *ClientConfig) ServerURLWithContext(ctx context.Context, endpoint string) (string, error) {
+func (c *Configuration) ServerURLWithContext(ctx context.Context, endpoint string) (string, error) {
 	sc, ok := c.OperationServers[endpoint]
 	if !ok {
 		sc = c.Servers
