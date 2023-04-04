@@ -107,6 +107,12 @@ func Test_Payout(t *testing.T) {
 	t.Run("Instant Payouts", func(t *testing.T) {
 		t.Run("Payout", func(t *testing.T) {
 			t.Run("Create an API request that should pass", func(t *testing.T) {
+				cc := checkout.NewCardDetails()
+				cc.SetEncryptedCardNumber("test_4111111111111111")
+				cc.SetEncryptedExpiryMonth("test_03")
+				cc.SetEncryptedExpiryYear("test_2030")
+				cc.SetEncryptedSecurityCode("test_737")
+				cc.SetHolderName("John Smith")
 				paymentRes, _, _ := client.Checkout.Payments(&checkout.PaymentRequest{
 					Reference: "123456781235",
 					Amount: checkout.Amount{
@@ -114,20 +120,13 @@ func Test_Payout(t *testing.T) {
 						Currency: "EUR",
 					},
 					MerchantAccount: MerchantAccount,
-					PaymentMethod: map[string]interface{}{
-						"type":        "scheme",
-						"number":      "4111111111111111",
-						"expiryMonth": "03",
-						"expiryYear":  "2030",
-						"holderName":  "John Smith",
-						"cvc":         "737",
-					},
+					PaymentMethod:   checkout.CardDetailsAsCheckoutPaymentMethod(cc),
 				})
 
 				res, httpRes, err := client.Payouts.Payout(&payouts.PayoutRequest{
 					Amount:          amount,
 					MerchantAccount: MerchantAccount,
-					Reference:       paymentRes.PspReference,
+					Reference:       paymentRes.GetPspReference(),
 					Card:            card,
 					ShopperName:     shopperName,
 					DateOfBirth:     &dateOfBirth,

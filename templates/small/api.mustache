@@ -1,0 +1,73 @@
+{{>partial_header}}
+{{#lambda.lowercase}}
+package {{packageName}}
+{{/lambda.lowercase}}
+
+{{#operations}}
+import (
+	_context "context"
+    _nethttp "net/http"
+    "strings"
+)
+
+{{#operation}}
+
+/*
+{{#summary}}{{{.}}}{{/summary}}{{^summary}} Method for {{operationId}}{{/summary}}
+{{#notes}}
+{{notes}}
+{{/notes}}
+{{#pathParams}}
+{{#required}}
+ * @param {{paramName}}{{#description}} {{{.}}}{{/description}}
+{{/required}}
+{{/pathParams}}
+{{#bodyParams}}
+{{#required}}
+ * @param req{{#description}} {{{.}}}{{/description}}
+{{/required}}
+{{/bodyParams}}
+{{#hasOptionalParams}}
+{{#pathParams}}
+{{^required}}
+ * @param request {{vendorExtensions.x-export-param-name}} - reference of {{dataType}}). {{#description}} {{{.}}}{{/description}}
+{{/required}}
+{{/pathParams}}
+{{#bodyParams}}
+{{^required}}
+ * @param req {{vendorExtensions.x-export-param-name}} - reference of {{dataType}}). {{#description}} {{{.}}}{{/description}}
+{{/required}}
+{{/bodyParams}}
+{{/hasOptionalParams}}
+ * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+{{#returnType}}
+@return {{{returnType}}}
+{{/returnType}}
+*/
+{{#hasBodyParam}}
+{{! implementation when body param is provided (POST, PATCH, etc..)}}
+func (a {{#lambda.titlecase}}{{{packageName}}}{{/lambda.titlecase}}) {{#lambda.titlecase}}{{vendorExtensions.x-methodName}}{{/lambda.titlecase}}({{#pathParams}}{{paramName}} *{{{dataType}}}{{^last}}, {{/last}}{{/pathParams}}{{#bodyParams}}req *{{{dataType}}}{{^last}}, {{/last}}{{/bodyParams}}ctxs ..._context.Context) ({{#returnType}}{{{returnType}}}, {{/returnType}}*_nethttp.Response, error) {
+    res := &{{{returnType}}}{}
+	path := "{{{path}}}"
+	{{#pathParams}}
+	path = strings.ReplaceAll(path, "{" + "{{baseName}}" + "}", *{{paramName}})
+	{{/pathParams}}
+    httpRes, err := a.Client.MakeHTTP{{httpMethod}}Request(req, res, a.BasePath() + path, ctxs...)
+    return *res, httpRes, err
+}
+{{/hasBodyParam}}
+{{^hasBodyParam}}
+{{! implementation when body param is NOT provided (GET method) }}
+func (a {{#lambda.titlecase}}{{{packageName}}}{{/lambda.titlecase}}) {{#lambda.titlecase}}{{vendorExtensions.x-methodName}}{{/lambda.titlecase}}({{#pathParams}}{{paramName}} *{{{dataType}}}{{^last}}, {{/last}}{{/pathParams}}ctxs ..._context.Context) ({{#returnType}}{{{returnType}}}, {{/returnType}}*_nethttp.Response, error) {
+    res := &{{{returnType}}}{}
+	path := "{{{path}}}"
+	{{#pathParams}}
+	path = strings.ReplaceAll(path, "{" + "{{baseName}}" + "}", *{{paramName}})
+	{{/pathParams}}
+    httpRes, err := a.Client.MakeHTTP{{httpMethod}}Request(res, a.BasePath() + path, ctxs...)
+    return *res, httpRes, err
+}
+{{/hasBodyParam}}
+
+{{/operation}}
+{{/operations}}

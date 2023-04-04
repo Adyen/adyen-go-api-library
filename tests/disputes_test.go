@@ -28,25 +28,24 @@ func Test_Disputes(t *testing.T) {
 	})
 
 	createTestPayment := func() string {
+		card := checkout.NewCardDetails()
+		card.SetEncryptedCardNumber("test_4111111111111111")
+		card.SetEncryptedExpiryMonth("test_03")
+		card.SetEncryptedExpiryYear("test_2030")
+		card.SetEncryptedSecurityCode("test_737")
+		card.SetHolderName("chargeback:10.4")
 		res, _, _ := client.Checkout.Payments(&checkout.PaymentRequest{
 			Amount: checkout.Amount{
 				Currency: "EUR",
 				Value:    1000,
 			},
-			Reference: "DISPUTES_CHARGEBACK",
-			PaymentMethod: map[string]interface{}{
-				"type":        "scheme",
-				"number":      "4111111111111111",
-				"expiryMonth": "03",
-				"expiryYear":  "2030",
-				"holderName":  "chargeback:10.4",
-				"cvc":         "737",
-			},
+			Reference:       "DISPUTES_CHARGEBACK",
+			PaymentMethod:   checkout.CardDetailsAsCheckoutPaymentMethod(card),
 			ReturnUrl:       "https://adyen.com",
 			MerchantAccount: MerchantAccount,
 		})
 		captureRes, _, _ := client.Payments.Capture(&payments.ModificationRequest{
-			OriginalReference: res.PspReference,
+			OriginalReference: res.GetPspReference(),
 			ModificationAmount: &payments.Amount{
 				Currency: "EUR",
 				Value:    1000,

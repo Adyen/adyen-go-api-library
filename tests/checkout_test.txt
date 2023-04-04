@@ -42,7 +42,7 @@ func Test_Checkout(t *testing.T) {
 
 	t.Run("PaymentLinks", func(t *testing.T) {
 		createPaymentLink := func() (checkout.PaymentLinkResponse, *_nethttp.Response, error) {
-			return client.Checkout.CreatePaymentLink(&checkout.CreatePaymentLinkRequest{
+			return client.Checkout.PaymentLinks(&checkout.CreatePaymentLinkRequest{
 				Reference: "123456781235",
 				Amount: checkout.Amount{
 					Value:    1250,

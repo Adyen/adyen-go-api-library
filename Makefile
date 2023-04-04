@@ -14,35 +14,41 @@ verify: build run test
 
 # Automation
 
-openapi-generator-version:=5.4.0
+openapi-generator-version:=6.4.0
 openapi-generator-url:=https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/$(openapi-generator-version)/openapi-generator-cli-$(openapi-generator-version).jar
 openapi-generator-jar:=bin/openapi-generator-cli.jar
 openapi-generator-cli:=java -jar $(openapi-generator-jar)
+goimports:=$(GOPATH)/bin/goimports
 
 generator:=go
-services:=Checkout
+services:=checkout
 output:=src/checkout
-templates:=templates/go
+templates:=templates/small
 
 # Generate models (for each service)
 models: $(services)
 
-Checkout: spec=CheckoutService-v70
-Checkout: service=checkout
+checkout: spec=CheckoutService-v70
+checkout: service=checkout
 
 # Generate a full client (models and service classes)
-Checkout: schema $(openapi-generator-jar)
-	GO_POST_PROCESS_FILE="gofmt -w" $(openapi-generator-cli) generate \
+checkout: schema $(openapi-generator-jar) $(goimports)
+	GO_POST_PROCESS_FILE="$(goimports) -w" $(openapi-generator-cli) generate \
 		-i schema/json/$(spec).json \
 		-g $(generator) \
 		-t $(templates) \
 		-o $(output) \
-		-p packageName=Checkout \
+		-p packageName=$(@) \
+		--global-property apiTests=false \
+		--global-property apis,models \
+		--global-property apiDocs=false \
+		--global-property modelDocs=true \
+		--git-repo-id adyen-go-api-library/v6 --git-user-id adyen \
 		--enable-post-process-file \
-		--global-property apis \
-		--global-property modelDocs=false \
-		--global-property modelTests=false \
+		--inline-schema-name-mappings PaymentDonationRequest_paymentMethod=CheckoutPaymentMethod \
+		--additional-properties=useOneOfDiscriminatorLookup=true \
 		--additional-properties=serviceName=$@
+	rm -rf $(output)/go.{mod,sum}
 
 # Checkout spec (and patch version)
 schema:
@@ -57,9 +63,12 @@ templates: $(openapi-generator-jar)
 $(openapi-generator-jar):
 	wget --quiet -o /dev/null $(openapi-generator-url) -O $(openapi-generator-jar)
 
+# Download the import optimizer (and code formatter)
+$(goimports):
+	go install golang.org/x/tools/cmd/goimports@latest
+
 # Discard generated artifacts and changed models
 clean:
-	rm -rf $(output)
 	git checkout src/checkout
 	git clean -f -d src/checkout
 
