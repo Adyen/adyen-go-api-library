@@ -23,8 +23,9 @@ type Payouts common.Service
 /*
 ConfirmThirdParty Confirms a payout.
 Confirms a previously submitted payout.  To cancel a payout, use the &#x60;/declineThirdParty&#x60; endpoint.
- * @param request ModifyRequest - reference of ModifyRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param request ModifyRequest - reference of ModifyRequest).
+  - @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return ModifyResponse
 */
 func (a Payouts) ConfirmThirdParty(req *ModifyRequest, ctxs ..._context.Context) (ModifyResponse, *_nethttp.Response, error) {
@@ -36,8 +37,9 @@ func (a Payouts) ConfirmThirdParty(req *ModifyRequest, ctxs ..._context.Context)
 /*
 DeclineThirdParty Cancels a payout.
 Cancels a previously submitted payout.  To confirm and send a payout, use the &#x60;/confirmThirdParty&#x60; endpoint.
- * @param request ModifyRequest - reference of ModifyRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param request ModifyRequest - reference of ModifyRequest).
+  - @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return ModifyResponse
 */
 func (a Payouts) DeclineThirdParty(req *ModifyRequest, ctxs ..._context.Context) (ModifyResponse, *_nethttp.Response, error) {
@@ -49,8 +51,9 @@ func (a Payouts) DeclineThirdParty(req *ModifyRequest, ctxs ..._context.Context)
 /*
 Payout Pay out directly.
 With this call, you can pay out to your customers, and funds will be made available within 30 minutes on the cardholder&#39;s bank account (this is dependent on whether the issuer supports this functionality). Instant card payouts are only supported for Visa and Mastercard cards.
- * @param request PayoutRequest - reference of PayoutRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param request PayoutRequest - reference of PayoutRequest).
+  - @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return PayoutResponse
 */
 func (a Payouts) Payout(req *PayoutRequest, ctxs ..._context.Context) (PayoutResponse, *_nethttp.Response, error) {
@@ -62,8 +65,9 @@ func (a Payouts) Payout(req *PayoutRequest, ctxs ..._context.Context) (PayoutRes
 /*
 StoreDetailAndSubmitThirdParty Stores details and submits a payout.
 Submits a payout and stores its details for subsequent payouts.  The submitted payout must be confirmed or declined either by a reviewer or via &#x60;/confirmThirdParty&#x60; or &#x60;/declineThirdParty&#x60; calls.
- * @param request StoreDetailAndSubmitRequest - reference of StoreDetailAndSubmitRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param request StoreDetailAndSubmitRequest - reference of StoreDetailAndSubmitRequest).
+  - @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return StoreDetailAndSubmitResponse
 */
 func (a Payouts) StoreDetailAndSubmitThirdParty(req *StoreDetailAndSubmitRequest, ctxs ..._context.Context) (StoreDetailAndSubmitResponse, *_nethttp.Response, error) {
@@ -75,8 +79,9 @@ func (a Payouts) StoreDetailAndSubmitThirdParty(req *StoreDetailAndSubmitRequest
 /*
 StoreDetail Stores payout details.
 Stores payment details under the &#x60;PAYOUT&#x60; recurring contract. These payment details can be used later to submit a payout via the &#x60;/submitThirdParty&#x60; call.
- * @param request StoreDetailRequest - reference of StoreDetailRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param request StoreDetailRequest - reference of StoreDetailRequest).
+  - @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return StoreDetailResponse
 */
 func (a Payouts) StoreDetail(req *StoreDetailRequest, ctxs ..._context.Context) (StoreDetailResponse, *_nethttp.Response, error) {
@@ -88,8 +93,9 @@ func (a Payouts) StoreDetail(req *StoreDetailRequest, ctxs ..._context.Context) 
 /*
 SubmitThirdParty Submits a payout.
 Submits a payout using the previously stored payment details. To store payment details, use the &#x60;/storeDetail&#x60; API call.  The submitted payout must be confirmed or declined either by a reviewer or via &#x60;/confirmThirdParty&#x60; or &#x60;/declineThirdParty&#x60; calls.
- * @param request SubmitRequest - reference of SubmitRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param request SubmitRequest - reference of SubmitRequest).
+  - @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return SubmitResponse
 */
 func (a Payouts) SubmitThirdParty(req *SubmitRequest, ctxs ..._context.Context) (SubmitResponse, *_nethttp.Response, error) {
