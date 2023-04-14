@@ -136,12 +136,13 @@ func Test_Payout(t *testing.T) {
 					ShopperName:     shopperName,
 				})
 
+				authorised := common.Authorised.String()
 				require.Nil(t, err)
 				require.NotNil(t, httpRes)
 				assert.Equal(t, 200, httpRes.StatusCode)
 				require.NotNil(t, res)
 				assert.NotEmpty(t, res.PspReference)
-				assert.Equal(t, common.Authorised.String(), res.ResultCode)
+				assert.Equal(t, &authorised, res.ResultCode)
 			})
 		})
 	})
