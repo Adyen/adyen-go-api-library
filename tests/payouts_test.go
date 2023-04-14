@@ -141,7 +141,7 @@ func Test_Payout(t *testing.T) {
 				assert.Equal(t, 200, httpRes.StatusCode)
 				require.NotNil(t, res)
 				assert.NotEmpty(t, res.PspReference)
-				assert.Equal(t, common.Authorised, res.ResultCode)
+				assert.Equal(t, common.Authorised.String(), res.ResultCode)
 			})
 		})
 	})
