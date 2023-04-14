@@ -26,182 +26,196 @@ var adyenLib = &CommonField{
 }
 
 /*
-PostAdjustAuthorisation Increases or decreases the authorised amount.
-Allows you to increase or decrease the authorised amount after the initial authorisation has taken place. This functionality enables tipping, improving the chances your authorisation will be valid, charging the shopper when they have already left the merchant premises, etc.  For more information, refer to [Adjust Authorisation](https://docs.adyen.com/checkout/adjust-authorisation).
- * @param request ModificationRequest - reference of ModificationRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return ModificationResult
-*/
-func (a Payments) AdjustAuthorisation(req *ModificationRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
-	res := &ModificationResult{}
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/adjustAuthorisation", ctxs...)
-	return *res, httpRes, err
-}
+Create an authorisation
+Creates a payment with a unique reference (&#x60;pspReference&#x60;) and attempts to obtain an authorisation hold. For cards, this amount can be captured or cancelled later. Non-card payment methods typically don&#39;t support this and will automatically capture as part of the authorisation. &gt; This endpoint is part of our [classic API integration](https://docs.adyen.com/online-payments/classic-integrations/api-integration-ecommerce). If using a [newer integration](https://docs.adyen.com/online-payments), use the [&#x60;/payments&#x60;](https://docs.adyen.com/api-explorer/#/CheckoutService/payments) endpoint under Checkout API instead.
+  - @param req PaymentRequest - reference of PaymentRequest).
+  - @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
-/*
-PostAuthorise Creates a payment authorisation.
-Creates a payment with a unique reference (&#x60;pspReference&#x60;) and attempts to obtain an authorisation hold. For cards, this amount can be captured or cancelled later. Non-card payment methods typically don&#39;t support this and will automatically capture as part of the authorisation.  For more information, refer to [Classic integration](https://docs.adyen.com/classic-integration).
- * @param request PaymentRequest - reference of PaymentRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return PaymentResult
 */
 func (a Payments) Authorise(req *PaymentRequest, ctxs ..._context.Context) (PaymentResult, *_nethttp.Response, error) {
 	res := &PaymentResult{}
-	if req.ApplicationInfo == nil {
-		req.ApplicationInfo = &ApplicationInfo{}
-	}
-	req.ApplicationInfo.AdyenLibrary = adyenLib
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/authorise", ctxs...)
+	path := "/authorise"
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
 	return *res, httpRes, err
 }
 
 /*
-PostAuthorise3d Completes a 3D Secure payment authorisation.
-For an authenticated 3D Secure session, completes the payment authorisation. This endpoint must receive the &#x60;md&#x60; and &#x60;paResponse&#x60; parameters that you get from the card issuer after a shopper pays via 3D Secure.  For more information, refer to [3D Secure](https://docs.adyen.com/classic-integration/3d-secure).
- * @param request PaymentRequest3d - reference of PaymentRequest3d).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+Complete a 3DS authorisation
+For an authenticated 3D Secure session, completes the payment authorisation. This endpoint must receive the &#x60;md&#x60; and &#x60;paResponse&#x60; parameters that you get from the card issuer after a shopper pays via 3D Secure.  &gt; This endpoint is part of our [classic API integration](https://docs.adyen.com/online-payments/classic-integrations/api-integration-ecommerce/3d-secure). If using a [newer integration](https://docs.adyen.com/online-payments), use the [&#x60;/payments/details&#x60;](https://docs.adyen.com/api-explorer/#/CheckoutService/payments/details) endpoint under Checkout API instead.
+  - @param req PaymentRequest3d - reference of PaymentRequest3d).
+  - @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return PaymentResult
 */
 func (a Payments) Authorise3d(req *PaymentRequest3d, ctxs ..._context.Context) (PaymentResult, *_nethttp.Response, error) {
 	res := &PaymentResult{}
-	if req.ApplicationInfo == nil {
-		req.ApplicationInfo = &ApplicationInfo{}
-	}
-	req.ApplicationInfo.AdyenLibrary = adyenLib
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/authorise3d", ctxs...)
+	path := "/authorise3d"
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
 	return *res, httpRes, err
 }
 
 /*
-PostAuthorise3ds2 Completes a 3D Secure 2 payment authorisation.
-For an authenticated 3D Secure 2 session, completes the payment authorisation. This endpoint must receive the &#x60;threeDS2Token&#x60; and &#x60;threeDS2Result&#x60; parameters.  For more information, refer to [3D Secure 2](https://docs.adyen.com/checkout/3d-secure/native-3ds2).
- * @param request PaymentRequest3ds2 - reference of PaymentRequest3ds2).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+Complete a 3DS2 authorisation
+For an authenticated 3D Secure 2 session, completes the payment authorisation. This endpoint must receive the &#x60;threeDS2Token&#x60; and &#x60;threeDS2Result&#x60; parameters.  &gt; This endpoint is part of our [classic API integration](https://docs.adyen.com/online-payments/classic-integrations/api-integration-ecommerce/3d-secure). If using a [newer integration](https://docs.adyen.com/online-payments), use the [&#x60;/payments/details&#x60;](https://docs.adyen.com/api-explorer/#/CheckoutService/payments/details) endpoint under Checkout API instead.
+  - @param req PaymentRequest3ds2 - reference of PaymentRequest3ds2).
+  - @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return PaymentResult
 */
 func (a Payments) Authorise3ds2(req *PaymentRequest3ds2, ctxs ..._context.Context) (PaymentResult, *_nethttp.Response, error) {
 	res := &PaymentResult{}
-	if req.ApplicationInfo == nil {
-		req.ApplicationInfo = &ApplicationInfo{}
-	}
-	req.ApplicationInfo.AdyenLibrary = adyenLib
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/authorise3ds2", ctxs...)
+	path := "/authorise3ds2"
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
 	return *res, httpRes, err
 }
 
 /*
-PostCancel Cancels an authorised payment.
-Cancels the authorisation hold on a payment, returning a unique reference for this request. You can cancel payments after authorisation only for payment methods that support distinct authorisations and captures.  For more information, refer to [Cancel](https://docs.adyen.com/checkout/cancel).
- * @param request ModificationRequest - reference of ModificationRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return ModificationResult
-*/
-func (a Payments) Cancel(req *ModificationRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
-	res := &ModificationResult{}
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/cancel", ctxs...)
-	return *res, httpRes, err
-}
-
-/*
-PostCancelOrRefund Cancels or refunds a payment.
-Cancels a payment if it has not been captured yet, or refunds it if it has already been captured. This is useful when it is not certain if the payment has been captured or not (for example, when using auto-capture).  &gt; Do not use this request for payments that involve (multiple) partial captures.  For more information, refer to [Cancel or refund](https://docs.adyen.com/checkout/cancel-or-refund).
- * @param request ModificationRequest - reference of ModificationRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return ModificationResult
-*/
-func (a Payments) CancelOrRefund(req *ModificationRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
-	res := &ModificationResult{}
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/cancelOrRefund", ctxs...)
-	return *res, httpRes, err
-}
-
-/*
-PostCapture Captures an authorised payment.
-Captures the authorisation hold on a payment, returning a unique reference for this request. Usually the full authorisation amount is captured, however it&#39;s also possible to capture a smaller amount, which results in cancelling the remaining authorisation balance.  Payment methods, which automatically capture as part of authorisation, don&#39;t need to be captured, but submitting a capture request on these transactions will not result in double charges. If immediate or delayed auto-capture is enabled, calling the capture method is not neccessary.  For more information, refer to [Capture](https://docs.adyen.com/checkout/capture).
- * @param request ModificationRequest - reference of ModificationRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return ModificationResult
-*/
-func (a Payments) Capture(req *ModificationRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
-	res := &ModificationResult{}
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/capture", ctxs...)
-	return *res, httpRes, err
-}
-
-/*
-PostDonate Creates a payment for the specified donation.
-Schedules a new payment to be created (including a new authorisation request) for the specified donation using the payment details of the original payment.  For more information, see [Donate](https://docs.adyen.com/checkout/donate).
- * @param request DonationRequest - reference of DonationRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return ModificationResult
-*/
-func (a Payments) Donate(req *DonationRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
-	res := &ModificationResult{}
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/donate", ctxs...)
-	return *res, httpRes, err
-}
-
-/*
-PostGetAuthenticationResult Return the authentication result after doing a 3D Secure authentication only.
+Get the 3DS authentication result
 Return the authentication result after doing a 3D Secure authentication only.
- * @param request AuthenticationResultRequest - reference of AuthenticationResultRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param req AuthenticationResultRequest - reference of AuthenticationResultRequest).
+  - @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return AuthenticationResultResponse
 */
 func (a Payments) GetAuthenticationResult(req *AuthenticationResultRequest, ctxs ..._context.Context) (AuthenticationResultResponse, *_nethttp.Response, error) {
 	res := &AuthenticationResultResponse{}
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/getAuthenticationResult", ctxs...)
+	path := "/getAuthenticationResult"
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
 	return *res, httpRes, err
 }
 
 /*
-PostRefund Refunds a captured payment.
-Refunds a payment that has previously been captured, returning a unique reference for this request. Refunding can be done on the full captured amount or a partial amount. Multiple (partial) refunds will be accepted as long as their sum doesn&#39;t exceed the captured amount. Payments which have been authorised, but not captured, cannot be refunded, use the /cancel method instead.  &gt; Some payment methods/gateways do not support partial/multiple refunds. &gt; A margin above the captured limit can be configured to cover shipping/handling costs.  For more information, refer to [Refund](https://docs.adyen.com/checkout/refund).
- * @param request ModificationRequest - reference of ModificationRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return ModificationResult
-*/
-func (a Payments) Refund(req *ModificationRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
-	res := &ModificationResult{}
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/refund", ctxs...)
-	return *res, httpRes, err
-}
-
-/*
-PostRetrieve3ds2Result Retrieves the `threeDS2Result` after doing a 3D Secure 2 authentication only.
+Get the 3DS2 authentication result
 Retrieves the &#x60;threeDS2Result&#x60; after doing a 3D Secure 2 authentication only.
- * @param request ThreeDS2ResultRequest - reference of ThreeDS2ResultRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param req ThreeDS2ResultRequest - reference of ThreeDS2ResultRequest).
+  - @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return ThreeDS2ResultResponse
 */
 func (a Payments) Retrieve3ds2Result(req *ThreeDS2ResultRequest, ctxs ..._context.Context) (ThreeDS2ResultResponse, *_nethttp.Response, error) {
 	res := &ThreeDS2ResultResponse{}
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/retrieve3ds2Result", ctxs...)
+	path := "/retrieve3ds2Result"
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
 	return *res, httpRes, err
 }
 
 /*
-PostTechnicalCancel Cancels a payment using your custom reference.
-This endpoint allows you to cancel a payment if you do not have the PSP reference of the original payment request available.  In your call, refer to the original payment by using the &#x60;reference&#x60; that you specified in your payment request.  For more information, see [Technical cancel](https://docs.adyen.com/checkout/cancel#technical-cancel).
- * @param request ModificationRequest - reference of ModificationRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+Change the authorised amount
+Allows you to increase or decrease the authorised amount after the initial authorisation has taken place. This functionality enables for example tipping, improving the chances your authorisation will be valid, or charging the shopper when they have already left the merchant premises.  &gt; This endpoint is part of our [classic API integration](https://docs.adyen.com/online-payments/classic-integrations/api-integration-ecommerce). &gt; If you have a [newer integration](https://docs.adyen.com/online-payments), and are doing: &gt; * [Asynchronous adjustments](https://docs.adyen.com/online-payments/adjust-authorisation#asynchronous-or-synchronous-adjustment), use the [&#x60;/payments/{paymentPspReference}/amountUpdates&#x60;](https://docs.adyen.com/api-explorer/#/CheckoutService/v67/post/payments/{paymentPspReference}/amountUpdates) endpoint on Checkout API. &gt; * [Synchronous adjustments](https://docs.adyen.com/online-payments/adjust-authorisation#asynchronous-or-synchronous-adjustment), use this endpoint.
+  - @param req AdjustAuthorisationRequest - reference of AdjustAuthorisationRequest).
+  - @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return ModificationResult
 */
-func (a Payments) TechnicalCancel(req *ModificationRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
+func (a Payments) AdjustAuthorisation(req *AdjustAuthorisationRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
 	res := &ModificationResult{}
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/technicalCancel", ctxs...)
+	path := "/adjustAuthorisation"
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
 	return *res, httpRes, err
 }
 
 /*
-PostVoidPendingRefund Cancels a POS refund request before it has been completed.
-This endpoint allows you to cancel the refund request before it has been completed.  In your call, you can refer to the original refund request either by using the &#x60;tenderReference&#x60;, or the &#x60;pspReference&#x60;. We recommend implementing based on the &#x60;tenderReference&#x60;, as this is generated for both offline and online transactions.  For more information, refer to [Cancel a refund](https://docs.adyen.com/point-of-sale/refund-payment/cancel-a-pos-refund-request).
- * @param request ModificationRequest - reference of ModificationRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+Cancel an authorisation
+Cancels the authorisation hold on a payment, returning a unique reference for this request. You can cancel payments after authorisation only for payment methods that support distinct authorisations and captures.  For more information, refer to [Cancel](https://docs.adyen.com/online-payments/classic-integrations/modify-payments/cancel).  &gt; This endpoint is part of our [classic API integration](https://docs.adyen.com/online-payments/classic-integrations/api-integration-ecommerce). If using a [newer integration](https://docs.adyen.com/online-payments), use the [&#x60;/payments/{paymentPspReference}/cancels&#x60;](https://docs.adyen.com/api-explorer/#/CheckoutService/payments/{paymentPspReference}/cancels) endpoint under Checkout API instead.
+  - @param req CancelRequest - reference of CancelRequest).
+  - @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return ModificationResult
 */
-func (a Payments) VoidPendingRefund(req *ModificationRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
+func (a Payments) Cancel(req *CancelRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
 	res := &ModificationResult{}
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+"/voidPendingRefund", ctxs...)
+	path := "/cancel"
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
+	return *res, httpRes, err
+}
+
+/*
+Cancel or refund a payment
+Cancels a payment if it has not been captured yet, or refunds it if it has already been captured. This is useful when it is not certain if the payment has been captured or not (for example, when using auto-capture).  Do not use this endpoint for payments that involve:  * [Multiple partial captures](https://docs.adyen.com/online-payments/capture).  * [Split data](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information) either at time of payment or capture for Adyen for Platforms.   Instead, check if the payment has been captured and make a corresponding [&#x60;/refund&#x60;](https://docs.adyen.com/api-explorer/#/Payment/refund) or [&#x60;/cancel&#x60;](https://docs.adyen.com/api-explorer/#/Payment/cancel) call.  For more information, refer to [Cancel or refund](https://docs.adyen.com/online-payments/classic-integrations/modify-payments/cancel-or-refund).  &gt; This endpoint is part of our [classic API integration](https://docs.adyen.com/online-payments/classic-integrations/api-integration-ecommerce). If using a [newer integration](https://docs.adyen.com/online-payments), use the [&#x60;/payments/{paymentPspReference}/reversals&#x60;](https://docs.adyen.com/api-explorer/#/CheckoutService/payments/{paymentPspReference}/reversals) endpoint under Checkout API instead.
+  - @param req CancelOrRefundRequest - reference of CancelOrRefundRequest).
+  - @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
+@return ModificationResult
+*/
+func (a Payments) CancelOrRefund(req *CancelOrRefundRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
+	res := &ModificationResult{}
+	path := "/cancelOrRefund"
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
+	return *res, httpRes, err
+}
+
+/*
+Capture an authorisation
+Captures the authorisation hold on a payment, returning a unique reference for this request. Usually the full authorisation amount is captured, however it&#39;s also possible to capture a smaller amount, which results in cancelling the remaining authorisation balance.  Payment methods that are captured automatically after authorisation don&#39;t need to be captured. However, submitting a capture request on these transactions will not result in double charges. If immediate or delayed auto-capture is enabled, calling the capture method is not neccessary.  For more information refer to [Capture](https://docs.adyen.com/online-payments/classic-integrations/modify-payments/capture).  &gt; This endpoint is part of our [classic API integration](https://docs.adyen.com/online-payments/classic-integrations/api-integration-ecommerce). If using a [newer integration](https://docs.adyen.com/online-payments), use the [&#x60;/payments/{paymentPspReference}/captures&#x60;](https://docs.adyen.com/api-explorer/#/CheckoutService/v67/post/payments/{paymentPspReference}/captures) endpoint on Checkout API instead.
+  - @param req CaptureRequest - reference of CaptureRequest).
+  - @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
+@return ModificationResult
+*/
+func (a Payments) Capture(req *CaptureRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
+	res := &ModificationResult{}
+	path := "/capture"
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
+	return *res, httpRes, err
+}
+
+/*
+Create a donation
+Schedules a new payment to be created (including a new authorisation request) for the specified donation using the payment details of the original payment.  &gt; This endpoint is part of our [classic API integration](https://docs.adyen.com/online-payments/classic-integrations/api-integration-ecommerce). If using a [newer integration](https://docs.adyen.com/online-payments), use the [&#x60;/donations&#x60;](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/donations) endpoint under Checkout API instead.
+  - @param req DonationRequest - reference of DonationRequest).
+  - @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
+@return ModificationResult
+*/
+func (a Payments) Donate(req *DonationRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
+	res := &ModificationResult{}
+	path := "/donate"
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
+	return *res, httpRes, err
+}
+
+/*
+Refund a captured payment
+Refunds a payment that has previously been captured, returning a unique reference for this request. Refunding can be done on the full captured amount or a partial amount. Multiple (partial) refunds will be accepted as long as their sum doesn&#39;t exceed the captured amount. Payments which have been authorised, but not captured, cannot be refunded, use the /cancel method instead.  Some payment methods/gateways do not support partial/multiple refunds. A margin above the captured limit can be configured to cover shipping/handling costs.  For more information, refer to [Refund](https://docs.adyen.com/online-payments/classic-integrations/modify-payments/refund).  &gt; This endpoint is part of our [classic API integration](https://docs.adyen.com/online-payments/classic-integrations/api-integration-ecommerce). If using a [newer integration](https://docs.adyen.com/online-payments), use the [&#x60;/payments/{paymentPspReference}/refunds&#x60;](https://docs.adyen.com/api-explorer/#/CheckoutService/payments/{paymentPspReference}/refunds) endpoint under Checkout API instead.
+  - @param req RefundRequest - reference of RefundRequest).
+  - @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
+@return ModificationResult
+*/
+func (a Payments) Refund(req *RefundRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
+	res := &ModificationResult{}
+	path := "/refund"
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
+	return *res, httpRes, err
+}
+
+/*
+Cancel an authorisation using your reference
+This endpoint allows you to cancel a payment if you do not have the PSP reference of the original payment request available.  In your call, refer to the original payment by using the &#x60;reference&#x60; that you specified in your payment request.  For more information, see [Technical cancel](https://docs.adyen.com/online-payments/classic-integrations/modify-payments/cancel#technical-cancel).   &gt; This endpoint is part of our [classic API integration](https://docs.adyen.com/online-payments/classic-integrations/api-integration-ecommerce). If using a [newer integration](https://docs.adyen.com/online-payments), use the [&#x60;/cancels&#x60;](https://docs.adyen.com/api-explorer/#/CheckoutService/cancels) endpoint under Checkout API instead.
+  - @param req TechnicalCancelRequest - reference of TechnicalCancelRequest).
+  - @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
+@return ModificationResult
+*/
+func (a Payments) TechnicalCancel(req *TechnicalCancelRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
+	res := &ModificationResult{}
+	path := "/technicalCancel"
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
+	return *res, httpRes, err
+}
+
+/*
+Cancel an in-person refund
+This endpoint allows you to cancel an unreferenced refund request before it has been completed.  In your call, you can refer to the original refund request either by using the &#x60;tenderReference&#x60;, or the &#x60;pspReference&#x60;. We recommend implementing based on the &#x60;tenderReference&#x60;, as this is generated for both offline and online transactions.  For more information, refer to [Cancel an unreferenced refund](https://docs.adyen.com/point-of-sale/refund-payment/cancel-unreferenced).
+  - @param req VoidPendingRefundRequest - reference of VoidPendingRefundRequest).
+  - @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
+@return ModificationResult
+*/
+func (a Payments) VoidPendingRefund(req *VoidPendingRefundRequest, ctxs ..._context.Context) (ModificationResult, *_nethttp.Response, error) {
+	res := &ModificationResult{}
+	path := "/voidPendingRefund"
+	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
 	return *res, httpRes, err
 }
