@@ -47,8 +47,9 @@ func Test_Payout(t *testing.T) {
 	})
 
 	dateOfBirth := time.Date(1990, 1, 1, 0, 0, 0, 0, time.UTC)
+	cvc := "737"
 	card := &payouts.Card{
-		Cvc:         "737",
+		Cvc:         &cvc,
 		ExpiryMonth: "03",
 		ExpiryYear:  "2030",
 		HolderName:  "John Smith",
@@ -62,14 +63,18 @@ func Test_Payout(t *testing.T) {
 		Currency: "EUR",
 		Value:    1,
 	}
+	countryCode := "NL"
+	iban := "NL13TEST0123456789"
+	ownerName := "S. Hopper"
+	contract := "PAYOUT"
 	bank := payouts.BankAccount{
-		CountryCode: "NL",
-		Iban:        "NL13TEST0123456789",
-		OwnerName:   "S. Hopper",
+		CountryCode: &countryCode,
+		Iban:        &iban,
+		OwnerName:   &ownerName,
 	}
 	entityType := "NaturalPerson"
 	recurring := payouts.Recurring{
-		Contract: "PAYOUT",
+		Contract: &contract,
 	}
 	shopperEmail := "test@adyen.com"
 	nationality := "NL"
@@ -129,8 +134,6 @@ func Test_Payout(t *testing.T) {
 					Reference:       paymentRes.GetPspReference(),
 					Card:            card,
 					ShopperName:     shopperName,
-					DateOfBirth:     &dateOfBirth,
-					Nationality:     nationality,
 				})
 
 				require.Nil(t, err)
@@ -163,20 +166,21 @@ func Test_Payout(t *testing.T) {
 			t.Run("Create an API request that should pass", func(t *testing.T) {
 				ref := time.Now().String()
 				storeDetail, _, _ := createStoreDetail(ref)
+				contract := "PAYOUT"
 				res, httpRes, err := clientStore.Payouts.SubmitThirdParty(&payouts.SubmitRequest{
 					Amount:          amount,
 					MerchantAccount: MerchantAccount,
 					Recurring: payouts.Recurring{
-						Contract: "PAYOUT",
+						Contract: &contract,
 					},
-					EntityType:                       entityType,
+					EntityType:                       &entityType,
 					Reference:                        storeDetail.PspReference,
 					SelectedRecurringDetailReference: "LATEST",
 					ShopperEmail:                     shopperEmail,
 					ShopperReference:                 ref,
 					ShopperName:                      shopperName,
 					DateOfBirth:                      &dateOfBirth,
-					Nationality:                      nationality,
+					Nationality:                      &nationality,
 				})
 
 				require.Nil(t, err)
