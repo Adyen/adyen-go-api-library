@@ -22,12 +22,15 @@ func Test_Payment(t *testing.T) {
 		APIKey          = os.Getenv("ADYEN_API_KEY")
 	)
 
+	cvc := "737"
+	expiryMonth := "03"
+	number := "4111111111111111"
 	card := payments.Card{
-		Cvc:         "737",
-		ExpiryMonth: "03",
+		Cvc:         &cvc,
+		ExpiryMonth: &expiryMonth,
 		ExpiryYear:  "2030",
 		HolderName:  "John Smith",
-		Number:      "4111111111111111",
+		Number:      &number,
 	}
 
 	amount := payments.Amount{
@@ -107,13 +110,14 @@ func Test_Payment(t *testing.T) {
 	t.Run("Modifications", func(t *testing.T) {
 		t.Run("AdjustAuthorisation", func(t *testing.T) {
 			authRes, _, _ := authorisePost()
-			req := &payments.ModificationRequest{
-				OriginalReference: authRes.PspReference,
-				ModificationAmount: &payments.Amount{
+			reference := time.Now().String()
+			req := &payments.AdjustAuthorisationRequest{
+				OriginalReference: *authRes.PspReference,
+				ModificationAmount: payments.Amount{
 					Currency: "EUR",
 					Value:    1234,
 				},
-				Reference:       time.Now().String(),
+				Reference:       &reference,
 				MerchantAccount: MerchantAccount,
 			}
 			res, httpRes, err := client.Payments.AdjustAuthorisation(req)
@@ -123,9 +127,10 @@ func Test_Payment(t *testing.T) {
 
 		t.Run("CancelOrRefund", func(t *testing.T) {
 			authRes, _, _ := authorisePost()
-			req := &payments.ModificationRequest{
-				OriginalReference: authRes.PspReference,
-				Reference:         time.Now().String(),
+			reference := time.Now().String()
+			req := &payments.CancelOrRefundRequest{
+				OriginalReference: *authRes.PspReference,
+				Reference:         &reference,
 				MerchantAccount:   MerchantAccount,
 			}
 			res, httpRes, err := client.Payments.CancelOrRefund(req)
@@ -135,9 +140,10 @@ func Test_Payment(t *testing.T) {
 
 		t.Run("Cancel", func(t *testing.T) {
 			authRes, _, _ := authorisePost()
-			req := &payments.ModificationRequest{
-				OriginalReference: authRes.PspReference,
-				Reference:         time.Now().String(),
+			reference := time.Now().String()
+			req := &payments.CancelRequest{
+				OriginalReference: *authRes.PspReference,
+				Reference:         &reference,
 				MerchantAccount:   MerchantAccount,
 			}
 			res, httpRes, err := client.Payments.Cancel(req)
@@ -147,13 +153,14 @@ func Test_Payment(t *testing.T) {
 
 		t.Run("Capture", func(t *testing.T) {
 			authRes, _, _ := authorisePost()
-			req := &payments.ModificationRequest{
-				OriginalReference: authRes.PspReference,
-				ModificationAmount: &payments.Amount{
+			reference := time.Now().String()
+			req := &payments.CaptureRequest{
+				OriginalReference: *authRes.PspReference,
+				ModificationAmount: payments.Amount{
 					Currency: "EUR",
 					Value:    1234,
 				},
-				Reference:       time.Now().String(),
+				Reference:       &reference,
 				MerchantAccount: MerchantAccount,
 			}
 			res, httpRes, err := client.Payments.Capture(req)
@@ -163,13 +170,14 @@ func Test_Payment(t *testing.T) {
 
 		t.Run("Refund", func(t *testing.T) {
 			authRes, _, _ := authorisePost()
-			req := &payments.ModificationRequest{
-				OriginalReference: authRes.PspReference,
-				ModificationAmount: &payments.Amount{
+			reference := time.Now().String()
+			req := &payments.RefundRequest{
+				OriginalReference: *authRes.PspReference,
+				ModificationAmount: payments.Amount{
 					Currency: "EUR",
 					Value:    1234,
 				},
-				Reference:       time.Now().String(),
+				Reference:       &reference,
 				MerchantAccount: MerchantAccount,
 			}
 			res, httpRes, err := client.Payments.Refund(req)
@@ -179,10 +187,11 @@ func Test_Payment(t *testing.T) {
 
 		t.Run("TechnicalCancel", func(t *testing.T) {
 			authRes, _, _ := authorisePost()
-			req := &payments.ModificationRequest{
-				OriginalReference: authRes.PspReference,
-				Reference:         time.Now().String(),
-				MerchantAccount:   MerchantAccount,
+			reference := time.Now().String()
+			req := &payments.TechnicalCancelRequest{
+				OriginalMerchantReference: *authRes.PspReference,
+				Reference:                 &reference,
+				MerchantAccount:           MerchantAccount,
 			}
 			res, httpRes, err := client.Payments.TechnicalCancel(req)
 			assertForSuccessResponse(res, httpRes, err)
@@ -191,9 +200,10 @@ func Test_Payment(t *testing.T) {
 
 		t.Run("VoidPendingRefund", func(t *testing.T) {
 			authRes, _, _ := authorisePost()
-			req := &payments.ModificationRequest{
+			reference := time.Now().String()
+			req := &payments.VoidPendingRefundRequest{
 				OriginalReference: authRes.PspReference,
-				Reference:         time.Now().String(),
+				Reference:         &reference,
 				MerchantAccount:   MerchantAccount,
 			}
 			res, httpRes, err := client.Payments.VoidPendingRefund(req)
