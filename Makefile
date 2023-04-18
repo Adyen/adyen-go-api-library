@@ -21,8 +21,8 @@ openapi-generator-cli:=java -jar $(openapi-generator-jar)
 goimports:=$(GOPATH)/bin/goimports
 
 generator:=go
-services:=checkout
-output:=src/checkout
+services:=binLookup checkout
+output:=src/
 templates:=templates/small
 
 # Generate models (for each service)
@@ -30,14 +30,15 @@ models: $(services)
 
 checkout: spec=CheckoutService-v70
 checkout: service=checkout
-
+binLookup: spec=BinLookupService-v54
+binLookup: service=binlookup
 # Generate a full client (models and service classes)
-checkout: schema $(openapi-generator-jar) $(goimports)
+$(services): schema $(openapi-generator-jar) $(goimports)
 	GO_POST_PROCESS_FILE="$(goimports) -w" $(openapi-generator-cli) generate \
 		-i schema/json/$(spec).json \
 		-g $(generator) \
 		-t $(templates) \
-		-o $(output) \
+		-o $(output)$(service) \
 		-p packageName=$(@) \
 		--global-property apiTests=false \
 		--global-property apis,models \
@@ -61,7 +62,6 @@ templates: $(openapi-generator-jar)
 
 # Download the generator
 $(openapi-generator-jar):
-	mkdir -p bin
 	wget --quiet -o /dev/null $(openapi-generator-url) -O $(openapi-generator-jar)
 
 # Download the import optimizer (and code formatter)
