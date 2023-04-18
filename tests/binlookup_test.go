@@ -83,7 +83,7 @@ func Test_Binlookup(t *testing.T) {
 			})
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
-			assert.Equal(t, "Unsupported", res.ResultCode)
+			assert.Equal(t, "Unsupported", *res.ResultCode)
 		})
 		t.Run("Create an API request that should get success cost estimate", func(t *testing.T) {
 			cardNumber := "5101180000000007"
@@ -97,7 +97,7 @@ func Test_Binlookup(t *testing.T) {
 			})
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
-			assert.Equal(t, "Success", res.ResultCode)
+			assert.Equal(t, "Success", *res.ResultCode)
 		})
 	})
 }
