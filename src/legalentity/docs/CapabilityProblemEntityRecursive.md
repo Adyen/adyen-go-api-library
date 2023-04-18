@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Documents** | Pointer to **[]string** |  | [optional] 
 **Id** | Pointer to **string** |  | [optional] 
 **Type** | Pointer to **string** |  | [optional] 
 
@@ -25,6 +26,31 @@ will change when the set of required properties is changed
 NewCapabilityProblemEntityRecursiveWithDefaults instantiates a new CapabilityProblemEntityRecursive object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetDocuments
+
+`func (o *CapabilityProblemEntityRecursive) GetDocuments() []string`
+
+GetDocuments returns the Documents field if non-nil, zero value otherwise.
+
+### GetDocumentsOk
+
+`func (o *CapabilityProblemEntityRecursive) GetDocumentsOk() (*[]string, bool)`
+
+GetDocumentsOk returns a tuple with the Documents field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDocuments
+
+`func (o *CapabilityProblemEntityRecursive) SetDocuments(v []string)`
+
+SetDocuments sets Documents field to given value.
+
+### HasDocuments
+
+`func (o *CapabilityProblemEntityRecursive) HasDocuments() bool`
+
+HasDocuments returns a boolean if a field has been set.
 
 ### GetId
 

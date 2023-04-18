@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Allowed** | Pointer to **bool** | Indicates whether the supporting entity capability is allowed.  If a supporting entity is allowed but its parent legal entity is not, it means there are other supporting entities that failed validation.  **The allowed supporting entity can still be used** | [optional] [readonly] 
 **Id** | Pointer to **string** | Supporting entity reference  | [optional] [readonly] 
-**Problems** | Pointer to [**[]CapabilityProblem**](CapabilityProblem.md) | Contains verification errors and the actions that you can take to resolve them. | [optional] [readonly] 
 **Requested** | Pointer to **bool** | Indicates whether the supporting entity capability is requested.  | [optional] [readonly] 
 **VerificationStatus** | Pointer to **string** | The status of the verification checks for the supporting entity capability.  Possible values:  * **pending**: Adyen is running the verification.  * **invalid**: The verification failed. Check if the &#x60;errors&#x60; array contains more information.  * **valid**: The verification has been successfully completed.  * **rejected**: Adyen has verified the information, but found reasons to not allow the capability.  | [optional] [readonly] 
 
@@ -78,31 +77,6 @@ SetId sets Id field to given value.
 `func (o *SupportingEntityCapability) HasId() bool`
 
 HasId returns a boolean if a field has been set.
-
-### GetProblems
-
-`func (o *SupportingEntityCapability) GetProblems() []CapabilityProblem`
-
-GetProblems returns the Problems field if non-nil, zero value otherwise.
-
-### GetProblemsOk
-
-`func (o *SupportingEntityCapability) GetProblemsOk() (*[]CapabilityProblem, bool)`
-
-GetProblemsOk returns a tuple with the Problems field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetProblems
-
-`func (o *SupportingEntityCapability) SetProblems(v []CapabilityProblem)`
-
-SetProblems sets Problems field to given value.
-
-### HasProblems
-
-`func (o *SupportingEntityCapability) HasProblems() bool`
-
-HasProblems returns a boolean if a field has been set.
 
 ### GetRequested
 

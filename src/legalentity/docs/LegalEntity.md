@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Id** | **string** | The unique identifier of the legal entity. | [readonly] 
 **Individual** | Pointer to [**Individual**](Individual.md) |  | [optional] 
 **Organization** | Pointer to [**Organization**](Organization.md) |  | [optional] 
+**Problems** | Pointer to [**[]CapabilityProblem**](CapabilityProblem.md) | List of the verification errors from capabilities for the legal entity. | [optional] 
 **Reference** | Pointer to **string** | Your reference for the legal entity, maximum 150 characters. | [optional] 
 **SoleProprietorship** | Pointer to [**SoleProprietorship**](SoleProprietorship.md) |  | [optional] 
 **TransferInstruments** | Pointer to [**[]TransferInstrumentReference**](TransferInstrumentReference.md) | List of transfer instruments that the legal entity owns. | [optional] [readonly] 
@@ -204,6 +205,31 @@ SetOrganization sets Organization field to given value.
 `func (o *LegalEntity) HasOrganization() bool`
 
 HasOrganization returns a boolean if a field has been set.
+
+### GetProblems
+
+`func (o *LegalEntity) GetProblems() []CapabilityProblem`
+
+GetProblems returns the Problems field if non-nil, zero value otherwise.
+
+### GetProblemsOk
+
+`func (o *LegalEntity) GetProblemsOk() (*[]CapabilityProblem, bool)`
+
+GetProblemsOk returns a tuple with the Problems field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProblems
+
+`func (o *LegalEntity) SetProblems(v []CapabilityProblem)`
+
+SetProblems sets Problems field to given value.
+
+### HasProblems
+
+`func (o *LegalEntity) HasProblems() bool`
+
+HasProblems returns a boolean if a field has been set.
 
 ### GetReference
 

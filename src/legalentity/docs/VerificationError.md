@@ -4,13 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Capabilities** | Pointer to **[]string** |  | [optional] 
-**Code** | Pointer to **string** |  | [optional] 
-**Entity** | Pointer to [**CapabilityProblemEntity**](CapabilityProblemEntity.md) |  | [optional] 
-**Message** | Pointer to **string** |  | [optional] 
-**RemediatingActions** | Pointer to [**[]RemediatingAction**](RemediatingAction.md) |  | [optional] 
-**SubErrors** | Pointer to [**[]VerificationErrorRecursive**](VerificationErrorRecursive.md) |  | [optional] 
-**Type** | Pointer to **string** |  | [optional] 
+**Capabilities** | Pointer to **[]string** | Contains key-value pairs that specify the actions that the legal entity can do in your platform. The key is a capability required for your integration. For example, **issueCard** for Issuing.The value is an object containing the settings for the capability. | [optional] 
+**Code** | Pointer to **string** | The general error code. | [optional] 
+**Message** | Pointer to **string** | The general error message. | [optional] 
+**RemediatingActions** | Pointer to [**[]RemediatingAction**](RemediatingAction.md) | An object containing possible solutions to fix a verification error. | [optional] 
+**SubErrors** | Pointer to [**[]VerificationErrorRecursive**](VerificationErrorRecursive.md) | An array containing more granular information about the cause of the verification error. | [optional] 
+**Type** | Pointer to **string** | The type of error. | [optional] 
 
 ## Methods
 
@@ -80,31 +79,6 @@ SetCode sets Code field to given value.
 `func (o *VerificationError) HasCode() bool`
 
 HasCode returns a boolean if a field has been set.
-
-### GetEntity
-
-`func (o *VerificationError) GetEntity() CapabilityProblemEntity`
-
-GetEntity returns the Entity field if non-nil, zero value otherwise.
-
-### GetEntityOk
-
-`func (o *VerificationError) GetEntityOk() (*CapabilityProblemEntity, bool)`
-
-GetEntityOk returns a tuple with the Entity field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEntity
-
-`func (o *VerificationError) SetEntity(v CapabilityProblemEntity)`
-
-SetEntity sets Entity field to given value.
-
-### HasEntity
-
-`func (o *VerificationError) HasEntity() bool`
-
-HasEntity returns a boolean if a field has been set.
 
 ### GetMessage
 

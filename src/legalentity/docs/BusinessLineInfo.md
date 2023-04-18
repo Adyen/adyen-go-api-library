@@ -4,19 +4,20 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Capability** | **string** | The capability for which you are creating the business line. For example, **receivePayments**. | 
+**Capability** | Pointer to **string** | The capability for which you are creating the business line. For example, **receivePayments**. | [optional] 
 **IndustryCode** | **string** | A code that represents the industry of the legal entity. For example, **4431A** for computer software stores. | 
 **LegalEntityId** | **string** | Unique identifier of the [legal entity](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/legalEntities__resParam_id) that owns the business line. | 
-**SalesChannels** | Pointer to **[]string** | A list of channels where goods or services are sold. You cannot combine point of sale and ecommerce in one business line.  Possible values and combinations:  - For point of sale: **pos** and **posMoto**  - For ecommerce: **eCommerce** and **ecomMoto**  - For Pay by Link: **payByLink**  Required only in combination with the &#x60;capability&#x60; to **receivePayments** or **receiveFromPlatformPayments**. | [optional] 
+**SalesChannels** | Pointer to **[]string** | A list of channels where goods or services are sold.  Possible values: **pos**, **posMoto**, **eCommerce**, **ecomMoto**, **payByLink**.  Required only in combination with the &#x60;service&#x60; **paymentProcessing**. | [optional] 
+**Service** | **string** | The service for which you are creating the business line.  Possible values:**paymentProcessing**, **issuing**, **banking** | 
 **SourceOfFunds** | Pointer to [**SourceOfFunds**](SourceOfFunds.md) |  | [optional] 
-**WebData** | Pointer to [**[]WebData**](WebData.md) | List of website URLs where your user&#39;s goods or services are sold. When this is required for a capability but your user does not have an online presence, provide the reason in the &#x60;webDataExemption&#x60; object. | [optional] 
+**WebData** | Pointer to [**[]WebData**](WebData.md) | List of website URLs where your user&#39;s goods or services are sold. When this is required for a service but your user does not have an online presence, provide the reason in the &#x60;webDataExemption&#x60; object. | [optional] 
 **WebDataExemption** | Pointer to [**WebDataExemption**](WebDataExemption.md) |  | [optional] 
 
 ## Methods
 
 ### NewBusinessLineInfo
 
-`func NewBusinessLineInfo(capability string, industryCode string, legalEntityId string, ) *BusinessLineInfo`
+`func NewBusinessLineInfo(industryCode string, legalEntityId string, service string, ) *BusinessLineInfo`
 
 NewBusinessLineInfo instantiates a new BusinessLineInfo object
 This constructor will assign default values to properties that have it defined,
@@ -50,6 +51,11 @@ and a boolean to check if the value has been set.
 
 SetCapability sets Capability field to given value.
 
+### HasCapability
+
+`func (o *BusinessLineInfo) HasCapability() bool`
+
+HasCapability returns a boolean if a field has been set.
 
 ### GetIndustryCode
 
@@ -115,6 +121,26 @@ SetSalesChannels sets SalesChannels field to given value.
 `func (o *BusinessLineInfo) HasSalesChannels() bool`
 
 HasSalesChannels returns a boolean if a field has been set.
+
+### GetService
+
+`func (o *BusinessLineInfo) GetService() string`
+
+GetService returns the Service field if non-nil, zero value otherwise.
+
+### GetServiceOk
+
+`func (o *BusinessLineInfo) GetServiceOk() (*string, bool)`
+
+GetServiceOk returns a tuple with the Service field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetService
+
+`func (o *BusinessLineInfo) SetService(v string)`
+
+SetService sets Service field to given value.
+
 
 ### GetSourceOfFunds
 

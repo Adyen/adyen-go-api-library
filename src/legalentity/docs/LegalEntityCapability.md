@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 **Allowed** | Pointer to **bool** | Indicates whether the capability is allowed. Adyen sets this to **true** if the verification is successful  | [optional] [readonly] 
 **AllowedLevel** | Pointer to **string** | The capability level that is allowed for the legal entity.  Possible values: **notApplicable**, **low**, **medium**, **high**. | [optional] [readonly] 
 **AllowedSettings** | Pointer to [**CapabilitySettings**](CapabilitySettings.md) |  | [optional] 
-**Problems** | Pointer to [**[]CapabilityProblem**](CapabilityProblem.md) | Contains verification errors and the actions that you can take to resolve them. | [optional] [readonly] 
 **Requested** | Pointer to **bool** | Indicates whether the capability is requested. To check whether the Legal Entity is permitted to use the capability,  | [optional] [readonly] 
 **RequestedLevel** | Pointer to **string** | The requested level of the capability. Some capabilities, such as those used in [card issuing](https://docs.adyen.com/issuing/add-capabilities#capability-levels), have different levels. Levels increase the capability, but also require additional checks and increased monitoring.  Possible values: **notApplicable**, **low**, **medium**, **high**. | [optional] [readonly] 
 **RequestedSettings** | Pointer to [**CapabilitySettings**](CapabilitySettings.md) |  | [optional] 
@@ -107,31 +106,6 @@ SetAllowedSettings sets AllowedSettings field to given value.
 `func (o *LegalEntityCapability) HasAllowedSettings() bool`
 
 HasAllowedSettings returns a boolean if a field has been set.
-
-### GetProblems
-
-`func (o *LegalEntityCapability) GetProblems() []CapabilityProblem`
-
-GetProblems returns the Problems field if non-nil, zero value otherwise.
-
-### GetProblemsOk
-
-`func (o *LegalEntityCapability) GetProblemsOk() (*[]CapabilityProblem, bool)`
-
-GetProblemsOk returns a tuple with the Problems field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetProblems
-
-`func (o *LegalEntityCapability) SetProblems(v []CapabilityProblem)`
-
-SetProblems sets Problems field to given value.
-
-### HasProblems
-
-`func (o *LegalEntityCapability) HasProblems() bool`
-
-HasProblems returns a boolean if a field has been set.
 
 ### GetRequested
 

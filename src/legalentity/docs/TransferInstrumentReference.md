@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AccountIdentifier** | **string** | The masked IBAN or bank account number. | 
 **Id** | **string** | The unique identifier of the resource. | 
+**RealLastFour** | Pointer to **string** | Four last digits of the bank account number. | [optional] 
 
 ## Methods
 
@@ -65,6 +66,31 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
+
+### GetRealLastFour
+
+`func (o *TransferInstrumentReference) GetRealLastFour() string`
+
+GetRealLastFour returns the RealLastFour field if non-nil, zero value otherwise.
+
+### GetRealLastFourOk
+
+`func (o *TransferInstrumentReference) GetRealLastFourOk() (*string, bool)`
+
+GetRealLastFourOk returns a tuple with the RealLastFour field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRealLastFour
+
+`func (o *TransferInstrumentReference) SetRealLastFour(v string)`
+
+SetRealLastFour sets RealLastFour field to given value.
+
+### HasRealLastFour
+
+`func (o *TransferInstrumentReference) HasRealLastFour() bool`
+
+HasRealLastFour returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

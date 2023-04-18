@@ -4,20 +4,22 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Capability** | **string** | The capability for which you are creating the business line. For example, **receivePayments**. | 
+**Capability** | Pointer to **string** | The capability for which you are creating the business line. For example, **receivePayments**. | [optional] 
 **Id** | **string** | The unique identifier of the business line. | [readonly] 
 **IndustryCode** | **string** | A code that represents the industry of the legal entity. For example, **4431A** for computer software stores. | 
 **LegalEntityId** | **string** | Unique identifier of the [legal entity](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/legalEntities__resParam_id) that owns the business line. | 
-**SalesChannels** | Pointer to **[]string** | A list of channels where goods or services are sold. You cannot combine point of sale and ecommerce in one business line.  Possible values and combinations:  - For point of sale: **pos** and **posMoto**  - For ecommerce: **eCommerce** and **ecomMoto**  - For Pay by Link: **payByLink**  Required only in combination with the &#x60;capability&#x60; to **receivePayments** or **receiveFromPlatformPayments**. | [optional] 
+**Problems** | Pointer to [**[]CapabilityProblem**](CapabilityProblem.md) | List of the verification errors from capabilities for this supporting entity. | [optional] 
+**SalesChannels** | Pointer to **[]string** | A list of channels where goods or services are sold.  Possible values: **pos**, **posMoto**, **eCommerce**, **ecomMoto**, **payByLink**.  Required only in combination with the &#x60;service&#x60; **paymentProcessing**. | [optional] 
+**Service** | **string** | The service for which you are creating the business line.  Possible values:**paymentProcessing**, **issuing**, **banking** | 
 **SourceOfFunds** | Pointer to [**SourceOfFunds**](SourceOfFunds.md) |  | [optional] 
-**WebData** | Pointer to [**[]WebData**](WebData.md) | List of website URLs where your user&#39;s goods or services are sold. When this is required for a capability but your user does not have an online presence, provide the reason in the &#x60;webDataExemption&#x60; object. | [optional] 
+**WebData** | Pointer to [**[]WebData**](WebData.md) | List of website URLs where your user&#39;s goods or services are sold. When this is required for a service but your user does not have an online presence, provide the reason in the &#x60;webDataExemption&#x60; object. | [optional] 
 **WebDataExemption** | Pointer to [**WebDataExemption**](WebDataExemption.md) |  | [optional] 
 
 ## Methods
 
 ### NewBusinessLine
 
-`func NewBusinessLine(capability string, id string, industryCode string, legalEntityId string, ) *BusinessLine`
+`func NewBusinessLine(id string, industryCode string, legalEntityId string, service string, ) *BusinessLine`
 
 NewBusinessLine instantiates a new BusinessLine object
 This constructor will assign default values to properties that have it defined,
@@ -51,6 +53,11 @@ and a boolean to check if the value has been set.
 
 SetCapability sets Capability field to given value.
 
+### HasCapability
+
+`func (o *BusinessLine) HasCapability() bool`
+
+HasCapability returns a boolean if a field has been set.
 
 ### GetId
 
@@ -112,6 +119,31 @@ and a boolean to check if the value has been set.
 SetLegalEntityId sets LegalEntityId field to given value.
 
 
+### GetProblems
+
+`func (o *BusinessLine) GetProblems() []CapabilityProblem`
+
+GetProblems returns the Problems field if non-nil, zero value otherwise.
+
+### GetProblemsOk
+
+`func (o *BusinessLine) GetProblemsOk() (*[]CapabilityProblem, bool)`
+
+GetProblemsOk returns a tuple with the Problems field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProblems
+
+`func (o *BusinessLine) SetProblems(v []CapabilityProblem)`
+
+SetProblems sets Problems field to given value.
+
+### HasProblems
+
+`func (o *BusinessLine) HasProblems() bool`
+
+HasProblems returns a boolean if a field has been set.
+
 ### GetSalesChannels
 
 `func (o *BusinessLine) GetSalesChannels() []string`
@@ -136,6 +168,26 @@ SetSalesChannels sets SalesChannels field to given value.
 `func (o *BusinessLine) HasSalesChannels() bool`
 
 HasSalesChannels returns a boolean if a field has been set.
+
+### GetService
+
+`func (o *BusinessLine) GetService() string`
+
+GetService returns the Service field if non-nil, zero value otherwise.
+
+### GetServiceOk
+
+`func (o *BusinessLine) GetServiceOk() (*string, bool)`
+
+GetServiceOk returns a tuple with the Service field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetService
+
+`func (o *BusinessLine) SetService(v string)`
+
+SetService sets Service field to given value.
+
 
 ### GetSourceOfFunds
 
