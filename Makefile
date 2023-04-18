@@ -14,15 +14,15 @@ verify: build run test
 
 # Automation
 
-openapi-generator-version:=6.4.0
+openapi-generator-version:=6.5.0
 openapi-generator-url:=https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/$(openapi-generator-version)/openapi-generator-cli-$(openapi-generator-version).jar
 openapi-generator-jar:=bin/openapi-generator-cli.jar
 openapi-generator-cli:=java -jar $(openapi-generator-jar)
 goimports:=$(GOPATH)/bin/goimports
 
 generator:=go
-services:=checkout
-output:=src/checkout
+services:=checkout recurring
+output:=src/
 templates:=templates/small
 
 # Generate models (for each service)
@@ -30,14 +30,15 @@ models: $(services)
 
 checkout: spec=CheckoutService-v70
 checkout: service=checkout
-
+recurring: spec=RecurringService-v68
+recurring: service=recurring
 # Generate a full client (models and service classes)
-checkout: schema $(openapi-generator-jar) $(goimports)
+$(services): schema $(openapi-generator-jar) $(goimports)
 	GO_POST_PROCESS_FILE="$(goimports) -w" $(openapi-generator-cli) generate \
 		-i schema/json/$(spec).json \
 		-g $(generator) \
 		-t $(templates) \
-		-o $(output) \
+		-o $(output)$(service) \
 		-p packageName=$(@) \
 		--global-property apiTests=false \
 		--global-property apis,models \
@@ -46,6 +47,7 @@ checkout: schema $(openapi-generator-jar) $(goimports)
 		--git-repo-id adyen-go-api-library/v6 --git-user-id adyen \
 		--enable-post-process-file \
 		--inline-schema-name-mappings PaymentDonationRequest_paymentMethod=CheckoutPaymentMethod \
+		--reserved-words-mappings Recurring=RecurringObject \
 		--additional-properties=useOneOfDiscriminatorLookup=true \
 		--additional-properties=serviceName=$@
 	rm -rf $(output)/go.{mod,sum}
@@ -61,7 +63,6 @@ templates: $(openapi-generator-jar)
 
 # Download the generator
 $(openapi-generator-jar):
-	mkdir -p bin
 	wget --quiet -o /dev/null $(openapi-generator-url) -O $(openapi-generator-jar)
 
 # Download the import optimizer (and code formatter)

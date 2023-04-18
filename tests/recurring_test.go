@@ -49,7 +49,7 @@ func Test_Recurring(t *testing.T) {
 			res, httpRes, err := client.Recurring.ListRecurringDetails(&recurring.RecurringDetailsRequest{
 				MerchantAccount:  MerchantAccount,
 				ShopperReference: "4343553GFGFYFY4654654675765",
-				Recurring: &recurring.RecurringType{
+				Recurring: &recurring.Recurring{
 					Contract: "RECURRING",
 				},
 			})
@@ -156,5 +156,13 @@ func Test_Recurring(t *testing.T) {
 			require.NotNil(t, res)
 			assert.Equal(t, "Expiry month should be between 1 and 12 inclusive: 99", err.(common.APIError).Message)
 		})
+	})
+
+	t.Run("CreatePermit", func(t *testing.T) {
+
+	})
+
+	t.Run("DisablePermit", func(t *testing.T) {
+
 	})
 }
