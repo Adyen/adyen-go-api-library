@@ -42,8 +42,8 @@ func Test_Binlookup(t *testing.T) {
 
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
-			assert.Equal(t, false, res.ThreeDS2supported)
-			assert.Equal(t, true, res.ThreeDS1Supported)
+			assert.Equal(t, false, *res.ThreeDS2supported)
+			assert.Equal(t, true, *res.ThreeDS1Supported)
 		})
 		t.Run("Create an API request that should support 3DS1 and 3DS2", func(t *testing.T) {
 			cardNumber := "4917610000000000"
