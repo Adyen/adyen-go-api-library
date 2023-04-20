@@ -80,7 +80,7 @@ func Test_Payout(t *testing.T) {
 	nationality := "NL"
 
 	createStoreDetail := func(ref string) (payout.StoreDetailResponse, *_nethttp.Response, error) {
-		return clientStore.payout.StoreDetail(&payout.StoreDetailRequest{
+		return clientStore.Payout.StoreDetail(&payout.StoreDetailRequest{
 			Bank:             &bank,
 			DateOfBirth:      dateOfBirth,
 			EntityType:       entityType,
@@ -94,7 +94,7 @@ func Test_Payout(t *testing.T) {
 	}
 
 	createStoreDetailAndSubmitThirdParty := func(ref string) (payout.StoreDetailAndSubmitResponse, *_nethttp.Response, error) {
-		return clientStore.payout.StoreDetailAndSubmitThirdParty(&payout.StoreDetailAndSubmitRequest{
+		return clientStore.Payout.StoreDetailAndSubmitThirdParty(&payout.StoreDetailAndSubmitRequest{
 			Amount:           amount,
 			Bank:             &bank,
 			DateOfBirth:      dateOfBirth,
@@ -128,7 +128,7 @@ func Test_Payout(t *testing.T) {
 					PaymentMethod:   checkout.CardDetailsAsCheckoutPaymentMethod(cc),
 				})
 
-				res, httpRes, err := client.payout.Payout(&payout.PayoutRequest{
+				res, httpRes, err := client.Payout.Payout(&payout.PayoutRequest{
 					Amount:          amount,
 					MerchantAccount: MerchantAccount,
 					Reference:       paymentRes.GetPspReference(),
@@ -168,7 +168,7 @@ func Test_Payout(t *testing.T) {
 				ref := time.Now().String()
 				storeDetail, _, _ := createStoreDetail(ref)
 				contract := "PAYOUT"
-				res, httpRes, err := clientStore.payout.SubmitThirdParty(&payout.SubmitRequest{
+				res, httpRes, err := clientStore.Payout.SubmitThirdParty(&payout.SubmitRequest{
 					Amount:          amount,
 					MerchantAccount: MerchantAccount,
 					Recurring: payout.Recurring{
@@ -215,7 +215,7 @@ func Test_Payout(t *testing.T) {
 			t.Run("Create an API request that should pass", func(t *testing.T) {
 				ref := time.Now().String()
 				payoutDetail, _, _ := createStoreDetailAndSubmitThirdParty(ref)
-				res, httpRes, err := clientReview.payout.ConfirmThirdParty(&payout.ModifyRequest{
+				res, httpRes, err := clientReview.Payout.ConfirmThirdParty(&payout.ModifyRequest{
 					MerchantAccount:   MerchantAccount,
 					OriginalReference: payoutDetail.PspReference,
 				})
@@ -232,7 +232,7 @@ func Test_Payout(t *testing.T) {
 			t.Run("Create an API request that should pass", func(t *testing.T) {
 				ref := time.Now().String()
 				payoutDetail, _, _ := createStoreDetailAndSubmitThirdParty(ref)
-				res, httpRes, err := clientReview.payout.DeclineThirdParty(&payout.ModifyRequest{
+				res, httpRes, err := clientReview.Payout.DeclineThirdParty(&payout.ModifyRequest{
 					MerchantAccount:   MerchantAccount,
 					OriginalReference: payoutDetail.PspReference,
 				})
