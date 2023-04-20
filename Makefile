@@ -21,7 +21,8 @@ openapi-generator-cli:=java -jar $(openapi-generator-jar)
 goimports:=$(GOPATH)/bin/goimports
 
 generator:=go
-services:=checkout payout
+
+services:=checkout payments payout
 output:=src/
 templates:=templates/small
 
@@ -32,6 +33,9 @@ checkout: spec=CheckoutService-v70
 checkout: service=checkout
 payout: spec=PayoutService-v68
 payout: service=payout
+payments: spec=PaymentService-v68
+payments: service=payments
+
 # Generate a full client (models and service classes)
 $(services): schema $(openapi-generator-jar) $(goimports)
 	GO_POST_PROCESS_FILE="$(goimports) -w" $(openapi-generator-cli) generate \
@@ -62,6 +66,7 @@ templates: $(openapi-generator-jar)
 
 # Download the generator
 $(openapi-generator-jar):
+	mkdir -p bin
 	wget --quiet -o /dev/null $(openapi-generator-url) -O $(openapi-generator-jar)
 
 # Download the import optimizer (and code formatter)
