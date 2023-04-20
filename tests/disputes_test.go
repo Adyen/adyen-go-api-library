@@ -44,13 +44,14 @@ func Test_Disputes(t *testing.T) {
 			ReturnUrl:       "https://adyen.com",
 			MerchantAccount: MerchantAccount,
 		})
-		captureRes, _, _ := client.Payments.Capture(&payments.ModificationRequest{
+		reference := "MODIFICATION_REFERENCE"
+		captureRes, _, _ := client.Payments.Capture(&payments.CaptureRequest{
 			OriginalReference: res.GetPspReference(),
-			ModificationAmount: &payments.Amount{
+			ModificationAmount: payments.Amount{
 				Currency: "EUR",
 				Value:    1000,
 			},
-			Reference:       "MODIFICATION_REFERENCE",
+			Reference:       &reference,
 			MerchantAccount: MerchantAccount,
 		})
 		return captureRes.PspReference
