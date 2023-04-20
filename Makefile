@@ -21,7 +21,7 @@ openapi-generator-cli:=java -jar $(openapi-generator-jar)
 goimports:=$(GOPATH)/bin/goimports
 
 generator:=go
-services:=checkout legalentity payments
+services:=binLookup checkout legalentity payments
 output:=src/
 templates:=templates/small
 
@@ -32,6 +32,8 @@ checkout: spec=CheckoutService-v70
 checkout: service=checkout
 legalentity: spec=LegalEntityService-v3
 legalentity: service=legalentity
+binLookup: spec=BinLookupService-v54
+binLookup: service=binlookup
 payments: spec=PaymentService-v68
 payments: service=payments
 
