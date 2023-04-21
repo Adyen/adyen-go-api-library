@@ -10,19 +10,19 @@ Name | Type | Description | Notes
 **Description** | **string** | Your description for the document. | 
 **ExpiryDate** | Pointer to **string** | The expiry date of the document, in YYYY-MM-DD format. | [optional] 
 **FileName** | Pointer to **string** | The filename of the document. | [optional] 
-**Id** | **string** | The unique identifier of the document. | [readonly] 
+**Id** | Pointer to **string** | The unique identifier of the document. | [optional] [readonly] 
 **IssuerCountry** | Pointer to **string** | The two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code where the document was issued. For example, **US**. | [optional] 
 **IssuerState** | Pointer to **string** | The state or province where the document was issued (AU only). | [optional] 
 **ModificationDate** | Pointer to **time.Time** | The modification date of the document. | [optional] [readonly] 
 **Number** | Pointer to **string** | The number in the document. | [optional] 
 **Owner** | [**OwnerEntity**](OwnerEntity.md) |  | 
-**Type** | **string** | Type of document, used when providing an ID number or uploading a document. The possible values depend on the legal entity type.  When providing ID numbers: * For **individual**, the &#x60;type&#x60; values can be **driversLicense**, **identityCard**, **nationalIdNumber**, or **passport**.  When uploading documents: * For **organization**, the &#x60;type&#x60; values can be **proofOfAddress**, **registrationDocument**, **vatDocument**, **proofOfOrganizationTaxInfo**, **proofOfOwnership**, or **proofOfIndustry**.   * For **individual**, the &#x60;type&#x60; values can be **identityCard**, **driversLicense**, **passport**, **proofOfNationalIdNumber**, **proofOfResidency**, **proofOfIndustry**, or **proofOfIndividualTaxId**.  * For **soleProprietorship**, the &#x60;type&#x60; values can be **constitutionalDocument**, **proofOfAddress**, or **proofOfIndustry**.  * Use **bankStatement** to upload documents for a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id). | 
+**Type** | **string** | Type of document, used when providing an ID number or uploading a document. The possible values depend on the legal entity type.  When providing ID numbers: * For **individual**, the &#x60;type&#x60; values can be **driversLicense**, **identityCard**, **nationalIdNumber**, or **passport**.  When uploading photo IDs: * For **individual**, the &#x60;type&#x60; values can be **identityCard**, **driversLicense**, or **passport**.  When uploading other documents: * For **organization**, the &#x60;type&#x60; values can be **proofOfAddress**, **registrationDocument**, **vatDocument**, **proofOfOrganizationTaxInfo**, **proofOfOwnership**, or **proofOfIndustry**.   * For **individual**, the &#x60;type&#x60; values can be **identityCard**, **driversLicense**, **passport**, **proofOfNationalIdNumber**, **proofOfResidency**, **proofOfIndustry**, or **proofOfIndividualTaxId**.  * For **soleProprietorship**, the &#x60;type&#x60; values can be **constitutionalDocument**, **proofOfAddress**, or **proofOfIndustry**.  * Use **bankStatement** to upload documents for a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id). | 
 
 ## Methods
 
 ### NewDocument
 
-`func NewDocument(attachments []Attachment, description string, id string, owner OwnerEntity, type_ string, ) *Document`
+`func NewDocument(attachments []Attachment, description string, owner OwnerEntity, type_ string, ) *Document`
 
 NewDocument instantiates a new Document object
 This constructor will assign default values to properties that have it defined,
@@ -196,6 +196,11 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
+### HasId
+
+`func (o *Document) HasId() bool`
+
+HasId returns a boolean if a field has been set.
 
 ### GetIssuerCountry
 

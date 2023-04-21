@@ -7,9 +7,9 @@ Name | Type | Description | Notes
 **AssociatorId** | Pointer to **string** | The unique identifier of another legal entity with which the &#x60;legalEntityId&#x60; is associated. When the &#x60;legalEntityId&#x60; is associated to legal entities other than the current one, the response returns all the associations. | [optional] [readonly] 
 **EntityType** | Pointer to **string** | The legal entity type of associated legal entity.   For example, **organization**, **soleProprietorship** or **individual**.  | [optional] [readonly] 
 **JobTitle** | Pointer to **string** | The individual&#39;s job title if the &#x60;type&#x60; is **uboThroughControl** or **signatory**. | [optional] 
-**LegalEntityId** | **string** | The unique identifier of the associated [legal entity](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/legalEntities__resParam_id). | 
-**Name** | Pointer to **string** | The name of the associated [legal entity](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/legalEntities__resParam_id).  - For **individual**, &#x60;name.firstName&#x60; and &#x60;name.lastName&#x60;. - For **organization**, &#x60;legalName&#x60;. - For **soleProprietorship**, &#x60;name&#x60;. | [optional] [readonly] 
-**Type** | **string** | Defines the relationship of the legal entity to the current legal entity.   For example, **uboThroughOwnership**, **uboThroughControl**, **signatory**, or **soleProprietorship**.  | 
+**LegalEntityId** | **string** | The unique identifier of the associated [legal entity](https://docs.adyen.com/api-explorer/legalentity/latest/post/legalEntities#responses-200-id). | 
+**Name** | Pointer to **string** | The name of the associated [legal entity](https://docs.adyen.com/api-explorer/legalentity/latest/post/legalEntities#responses-200-id).  - For **individual**, &#x60;name.firstName&#x60; and &#x60;name.lastName&#x60;. - For **organization**, &#x60;legalName&#x60;. - For **soleProprietorship**, &#x60;name&#x60;. | [optional] [readonly] 
+**Type** | **string** | Defines the relationship of the legal entity to the current legal entity.   Possible values for organizations: **uboThroughOwnership**, **uboThroughControl**, **signatory**, or **ultimateParentCompany**.   Possible values for sole proprietorships: **soleProprietorship**.  | 
 
 ## Methods
 

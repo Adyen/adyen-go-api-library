@@ -14,14 +14,14 @@ verify: build run test
 
 # Automation
 
-openapi-generator-version:=6.4.0
+openapi-generator-version:=6.5.0
 openapi-generator-url:=https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/$(openapi-generator-version)/openapi-generator-cli-$(openapi-generator-version).jar
 openapi-generator-jar:=bin/openapi-generator-cli.jar
 openapi-generator-cli:=java -jar $(openapi-generator-jar)
 goimports:=$(GOPATH)/bin/goimports
 
 generator:=go
-services:=binLookup checkout payments payout
+services:=binLookup checkout legalentity payments payout
 output:=src/
 templates:=templates/small
 
@@ -30,6 +30,8 @@ models: $(services)
 
 checkout: spec=CheckoutService-v70
 checkout: service=checkout
+legalentity: spec=LegalEntityService-v3
+legalentity: service=legalentity
 payout: spec=PayoutService-v68
 payout: service=payout
 binLookup: spec=BinLookupService-v54

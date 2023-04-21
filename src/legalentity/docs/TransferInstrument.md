@@ -5,9 +5,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BankAccount** | [**BankAccountInfo**](BankAccountInfo.md) |  | 
+**Capabilities** | Pointer to [**map[string]SupportingEntityCapability**](SupportingEntityCapability.md) | List of capabilities for this supporting entity. | [optional] 
 **DocumentDetails** | Pointer to [**[]DocumentReference**](DocumentReference.md) | List of documents uploaded for the transfer instrument. | [optional] 
 **Id** | **string** | The unique identifier of the transfer instrument. | [readonly] 
-**LegalEntityId** | **string** | The unique identifier of the [legal entity](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/legalEntities__resParam_id) that owns the transfer instrument. | 
+**LegalEntityId** | **string** | The unique identifier of the [legal entity](https://docs.adyen.com/api-explorer/legalentity/latest/post/legalEntities#responses-200-id) that owns the transfer instrument. | 
+**Problems** | Pointer to [**[]CapabilityProblem**](CapabilityProblem.md) | List of the verification errors from capabilities for this supporting entity. | [optional] 
 **Type** | **string** | The type of transfer instrument.  Possible value: **bankAccount**. | 
 
 ## Methods
@@ -48,6 +50,31 @@ and a boolean to check if the value has been set.
 
 SetBankAccount sets BankAccount field to given value.
 
+
+### GetCapabilities
+
+`func (o *TransferInstrument) GetCapabilities() map[string]SupportingEntityCapability`
+
+GetCapabilities returns the Capabilities field if non-nil, zero value otherwise.
+
+### GetCapabilitiesOk
+
+`func (o *TransferInstrument) GetCapabilitiesOk() (*map[string]SupportingEntityCapability, bool)`
+
+GetCapabilitiesOk returns a tuple with the Capabilities field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCapabilities
+
+`func (o *TransferInstrument) SetCapabilities(v map[string]SupportingEntityCapability)`
+
+SetCapabilities sets Capabilities field to given value.
+
+### HasCapabilities
+
+`func (o *TransferInstrument) HasCapabilities() bool`
+
+HasCapabilities returns a boolean if a field has been set.
 
 ### GetDocumentDetails
 
@@ -113,6 +140,31 @@ and a boolean to check if the value has been set.
 
 SetLegalEntityId sets LegalEntityId field to given value.
 
+
+### GetProblems
+
+`func (o *TransferInstrument) GetProblems() []CapabilityProblem`
+
+GetProblems returns the Problems field if non-nil, zero value otherwise.
+
+### GetProblemsOk
+
+`func (o *TransferInstrument) GetProblemsOk() (*[]CapabilityProblem, bool)`
+
+GetProblemsOk returns a tuple with the Problems field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProblems
+
+`func (o *TransferInstrument) SetProblems(v []CapabilityProblem)`
+
+SetProblems sets Problems field to given value.
+
+### HasProblems
+
+`func (o *TransferInstrument) HasProblems() bool`
+
+HasProblems returns a boolean if a field has been set.
 
 ### GetType
 

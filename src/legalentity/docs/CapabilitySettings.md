@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AmountPerIndustry** | Pointer to [**map[string]Amount**](Amount.md) |  | [optional] 
-**AuthorizedCardUsers** | Pointer to **bool** |  | [optional] 
-**FundingSource** | Pointer to **[]string** |  | [optional] 
-**Interval** | Pointer to **string** |  | [optional] 
+**AmountPerIndustry** | Pointer to [**map[string]Amount**](Amount.md) | The maximum amount a card holder can spend per industry. | [optional] 
+**AuthorizedCardUsers** | Pointer to **bool** | The number of card holders who can use the card. | [optional] 
+**FundingSource** | Pointer to **[]string** | The funding source of the card, for example **debit**. | [optional] 
+**Interval** | Pointer to **string** | The period when the rule conditions apply. | [optional] 
 **MaxAmount** | Pointer to [**Amount**](Amount.md) |  | [optional] 
 
 ## Methods
