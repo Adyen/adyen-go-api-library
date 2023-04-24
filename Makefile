@@ -69,6 +69,7 @@ templates: $(openapi-generator-jar)
 
 # Download the generator
 $(openapi-generator-jar):
+	mkdir -p bin
 	wget --quiet -o /dev/null $(openapi-generator-url) -O $(openapi-generator-jar)
 
 # Download the import optimizer (and code formatter)
