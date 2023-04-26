@@ -11,17 +11,18 @@ import (
 	"net/http"
 
 	binlookup "github.com/adyen/adyen-go-api-library/v6/src/binlookup"
-	checkout "github.com/adyen/adyen-go-api-library/v6/src/checkout"
-	common "github.com/adyen/adyen-go-api-library/v6/src/common"
-	disputes "github.com/adyen/adyen-go-api-library/v6/src/disputes"
-	notification "github.com/adyen/adyen-go-api-library/v6/src/notification"
-	payments "github.com/adyen/adyen-go-api-library/v6/src/payments"
-	payout "github.com/adyen/adyen-go-api-library/v6/src/payout"
-	platformsaccount "github.com/adyen/adyen-go-api-library/v6/src/platformsaccount"
-	platformsfund "github.com/adyen/adyen-go-api-library/v6/src/platformsfund"
-	platformshostedonboardingpage "github.com/adyen/adyen-go-api-library/v6/src/platformshostedonboardingpage"
-	platformsnotificationconfiguration "github.com/adyen/adyen-go-api-library/v6/src/platformsnotificationconfiguration"
-	recurring "github.com/adyen/adyen-go-api-library/v6/src/recurring"
+	"github.com/adyen/adyen-go-api-library/v6/src/checkout"
+	"github.com/adyen/adyen-go-api-library/v6/src/common"
+	"github.com/adyen/adyen-go-api-library/v6/src/disputes"
+	"github.com/adyen/adyen-go-api-library/v6/src/notification"
+	"github.com/adyen/adyen-go-api-library/v6/src/payments"
+	"github.com/adyen/adyen-go-api-library/v6/src/payout"
+	"github.com/adyen/adyen-go-api-library/v6/src/platformsaccount"
+	"github.com/adyen/adyen-go-api-library/v6/src/platformsfund"
+	"github.com/adyen/adyen-go-api-library/v6/src/platformshostedonboardingpage"
+	"github.com/adyen/adyen-go-api-library/v6/src/platformsnotificationconfiguration"
+	"github.com/adyen/adyen-go-api-library/v6/src/recurring"
+	"github.com/adyen/adyen-go-api-library/v6/src/storedvalue"
 )
 
 // Constants used for the client API
@@ -52,6 +53,7 @@ const (
 	BinLookupAPIVersion             = "v50"
 	EndpointProtocol                = "https://"
 	DisputesAPIVersion              = "v30"
+	StoredValueAPIVersion           = "v46"
 )
 
 // APIClient manages communication with the Adyen Checkout API API v51
@@ -70,6 +72,7 @@ type APIClient struct {
 	PlatformsHostedOnboardingPage      *platformshostedonboardingpage.PlatformsHostedOnboardingPage
 	PlatformsNotificationConfiguration *platformsnotificationconfiguration.PlatformsNotificationConfiguration
 	Disputes                           *disputes.Disputes
+	StoredValue                        *storedvalue.Storedvalue
 }
 
 // NewClient creates a new API client. Requires Config object.
@@ -219,6 +222,13 @@ func NewClient(cfg *common.Config) *APIClient {
 		Client: c.client,
 		BasePath: func() string {
 			return fmt.Sprintf("%s/%s", c.client.Cfg.DisputesEndpoint, DisputesAPIVersion)
+		},
+	}
+
+	c.StoredValue = &storedvalue.Storedvalue{
+		Client: c.client,
+		BasePath: func() string {
+			return fmt.Sprintf("%s/pal/servlet/StoredValue/%s", c.client.Cfg.Endpoint, StoredValueAPIVersion)
 		},
 	}
 
