@@ -20,7 +20,7 @@ Changes the status of the provided payment method to the specified status.
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return StoredValueStatusChangeResponse
 */
-func (a Storedvalue) ChangeStatus(req *StoredValueStatusChangeRequest, ctxs ..._context.Context) (StoredValueStatusChangeResponse, *_nethttp.Response, error) {
+func (a StoredValue) ChangeStatus(req *StoredValueStatusChangeRequest, ctxs ..._context.Context) (StoredValueStatusChangeResponse, *_nethttp.Response, error) {
 	res := &StoredValueStatusChangeResponse{}
 	path := "/changeStatus"
 	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
@@ -34,7 +34,7 @@ Checks the balance of the provided payment method.
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return StoredValueBalanceCheckResponse
 */
-func (a Storedvalue) CheckBalance(req *StoredValueBalanceCheckRequest, ctxs ..._context.Context) (StoredValueBalanceCheckResponse, *_nethttp.Response, error) {
+func (a StoredValue) CheckBalance(req *StoredValueBalanceCheckRequest, ctxs ..._context.Context) (StoredValueBalanceCheckResponse, *_nethttp.Response, error) {
 	res := &StoredValueBalanceCheckResponse{}
 	path := "/checkBalance"
 	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
@@ -48,7 +48,7 @@ Issues a new card of the given payment method.
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return StoredValueIssueResponse
 */
-func (a Storedvalue) Issue(req *StoredValueIssueRequest, ctxs ..._context.Context) (StoredValueIssueResponse, *_nethttp.Response, error) {
+func (a StoredValue) Issue(req *StoredValueIssueRequest, ctxs ..._context.Context) (StoredValueIssueResponse, *_nethttp.Response, error) {
 	res := &StoredValueIssueResponse{}
 	path := "/issue"
 	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
@@ -62,7 +62,7 @@ Loads the payment method with the specified funds.
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return StoredValueLoadResponse
 */
-func (a Storedvalue) Load(req *StoredValueLoadRequest, ctxs ..._context.Context) (StoredValueLoadResponse, *_nethttp.Response, error) {
+func (a StoredValue) Load(req *StoredValueLoadRequest, ctxs ..._context.Context) (StoredValueLoadResponse, *_nethttp.Response, error) {
 	res := &StoredValueLoadResponse{}
 	path := "/load"
 	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
@@ -76,7 +76,7 @@ Increases the balance of the paymentmethod by the full amount left on the source
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return StoredValueBalanceMergeResponse
 */
-func (a Storedvalue) MergeBalance(req *StoredValueBalanceMergeRequest, ctxs ..._context.Context) (StoredValueBalanceMergeResponse, *_nethttp.Response, error) {
+func (a StoredValue) MergeBalance(req *StoredValueBalanceMergeRequest, ctxs ..._context.Context) (StoredValueBalanceMergeResponse, *_nethttp.Response, error) {
 	res := &StoredValueBalanceMergeResponse{}
 	path := "/mergeBalance"
 	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
@@ -90,7 +90,7 @@ Voids the referenced stored value transaction.
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return StoredValueVoidResponse
 */
-func (a Storedvalue) VoidTransaction(req *StoredValueVoidRequest, ctxs ..._context.Context) (StoredValueVoidResponse, *_nethttp.Response, error) {
+func (a StoredValue) VoidTransaction(req *StoredValueVoidRequest, ctxs ..._context.Context) (StoredValueVoidResponse, *_nethttp.Response, error) {
 	res := &StoredValueVoidResponse{}
 	path := "/voidTransaction"
 	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)

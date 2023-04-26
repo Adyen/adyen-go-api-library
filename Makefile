@@ -34,6 +34,7 @@ payout: spec=PayoutService-v68
 binlookup: spec=BinLookupService-v54
 payments: spec=PaymentService-v68
 storedvalue: spec=StoredValueService-v46
+storedvalue: serviceName=StoredValue
 
 # Generate a full client (models and service classes)
 $(services): schema $(openapi-generator-jar) $(goimports)
@@ -51,7 +52,7 @@ $(services): schema $(openapi-generator-jar) $(goimports)
 		--enable-post-process-file \
 		--inline-schema-name-mappings PaymentDonationRequest_paymentMethod=CheckoutPaymentMethod \
 		--additional-properties=useOneOfDiscriminatorLookup=true \
-		--additional-properties=serviceName=$@
+		--additional-properties=serviceName=$(serviceName)
 	rm -rf $(output)/go.{mod,sum}
 
 # Checkout spec (and patch version)

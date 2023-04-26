@@ -46,7 +46,7 @@ import (
 */
 {{#hasBodyParam}}
 {{! implementation when body param is provided (POST, PATCH, etc..)}}
-func (a {{#lambda.titlecase}}{{{packageName}}}{{/lambda.titlecase}}) {{#lambda.titlecase}}{{vendorExtensions.x-methodName}}{{/lambda.titlecase}}({{#pathParams}}{{paramName}} *{{{dataType}}}{{^last}}, {{/last}}{{/pathParams}}{{#bodyParams}}req *{{{dataType}}}{{^last}}, {{/last}}{{/bodyParams}}ctxs ..._context.Context) ({{#returnType}}{{{returnType}}}, {{/returnType}}*_nethttp.Response, error) {
+func (a {{{serviceName}}}) {{#lambda.titlecase}}{{vendorExtensions.x-methodName}}{{/lambda.titlecase}}({{#pathParams}}{{paramName}} *{{{dataType}}}{{^last}}, {{/last}}{{/pathParams}}{{#bodyParams}}req *{{{dataType}}}{{^last}}, {{/last}}{{/bodyParams}}ctxs ..._context.Context) ({{#returnType}}{{{returnType}}}, {{/returnType}}*_nethttp.Response, error) {
     res := &{{{returnType}}}{}
 	path := "{{{path}}}"
 	{{#pathParams}}
@@ -58,7 +58,7 @@ func (a {{#lambda.titlecase}}{{{packageName}}}{{/lambda.titlecase}}) {{#lambda.t
 {{/hasBodyParam}}
 {{^hasBodyParam}}
 {{! implementation when body param is NOT provided (GET method) }}
-func (a {{#lambda.titlecase}}{{{packageName}}}{{/lambda.titlecase}}) {{#lambda.titlecase}}{{vendorExtensions.x-methodName}}{{/lambda.titlecase}}({{#pathParams}}{{paramName}} *{{{dataType}}}{{^last}}, {{/last}}{{/pathParams}}ctxs ..._context.Context) ({{#returnType}}{{{returnType}}}, {{/returnType}}*_nethttp.Response, error) {
+func (a {{{serviceName}}}) {{#lambda.titlecase}}{{vendorExtensions.x-methodName}}{{/lambda.titlecase}}({{#pathParams}}{{paramName}} *{{{dataType}}}{{^last}}, {{/last}}{{/pathParams}}ctxs ..._context.Context) ({{#returnType}}{{{returnType}}}, {{/returnType}}*_nethttp.Response, error) {
     res := &{{{returnType}}}{}
 	path := "{{{path}}}"
 	{{#pathParams}}

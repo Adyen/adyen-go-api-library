@@ -16,6 +16,7 @@ The Library supports all APIs under the following services:
     * [Notification Configuration API](https://docs.adyen.com/api-explorer/#/NotificationConfigurationService/v6/overview) Current supported version: **v6**
 * [Cloud-based Terminal API](https://docs.adyen.com/point-of-sale/terminal-api-reference): Our point-of-sale integration.
 * [Legal Entity Management API](https://docs.adyen.com/api-explorer/#/legalentity/v2/overview): Manage legal entities that contain information required for verification. Current supported version: **v2**  
+* [Stored Value API](https://docs.adyen.com/payment-methods/gift-cards/stored-value-api): Use our Stored Value API to manage gift cards and other stored-value cards. Current supported version: **v46**
 
 For more information, refer to our [documentation](https://docs.adyen.com/) or the [API Explorer](https://docs.adyen.com/api-explorer/).
 

@@ -72,7 +72,7 @@ type APIClient struct {
 	PlatformsHostedOnboardingPage      *platformshostedonboardingpage.PlatformsHostedOnboardingPage
 	PlatformsNotificationConfiguration *platformsnotificationconfiguration.PlatformsNotificationConfiguration
 	Disputes                           *disputes.Disputes
-	StoredValue                        *storedvalue.Storedvalue
+	StoredValue                        *storedvalue.StoredValue
 }
 
 // NewClient creates a new API client. Requires Config object.
@@ -225,7 +225,7 @@ func NewClient(cfg *common.Config) *APIClient {
 		},
 	}
 
-	c.StoredValue = &storedvalue.Storedvalue{
+	c.StoredValue = &storedvalue.StoredValue{
 		Client: c.client,
 		BasePath: func() string {
 			return fmt.Sprintf("%s/pal/servlet/StoredValue/%s", c.client.Cfg.Endpoint, StoredValueAPIVersion)
