@@ -12,7 +12,7 @@ test:
 
 verify: build run test
 
-# Automation
+## Automation
 
 openapi-generator-version:=6.5.0
 openapi-generator-url:=https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/$(openapi-generator-version)/openapi-generator-cli-$(openapi-generator-version).jar
@@ -21,7 +21,7 @@ openapi-generator-cli:=java -jar $(openapi-generator-jar)
 goimports:=$(GOPATH)/bin/goimports
 
 generator:=go
-services:=binLookup checkout legalentity payments payout
+services:=binLookup checkout legalentity payments payout storedvalue
 output:=src/
 templates:=templates/small
 
@@ -29,15 +29,12 @@ templates:=templates/small
 models: $(services)
 
 checkout: spec=CheckoutService-v70
-checkout: service=checkout
 legalentity: spec=LegalEntityService-v3
-legalentity: service=legalentity
 payout: spec=PayoutService-v68
-payout: service=payout
-binLookup: spec=BinLookupService-v54
-binLookup: service=binlookup
+binlookup: spec=BinLookupService-v54
 payments: spec=PaymentService-v68
-payments: service=payments
+storedvalue: spec=StoredValueService-v46
+storedvalue: serviceName=StoredValue
 
 # Generate a full client (models and service classes)
 $(services): schema $(openapi-generator-jar) $(goimports)
@@ -45,7 +42,7 @@ $(services): schema $(openapi-generator-jar) $(goimports)
 		-i schema/json/$(spec).json \
 		-g $(generator) \
 		-t $(templates) \
-		-o $(output)$(service) \
+		-o $(output)$(@) \
 		-p packageName=$(@) \
 		--global-property apiTests=false \
 		--global-property apis,models \
@@ -55,7 +52,7 @@ $(services): schema $(openapi-generator-jar) $(goimports)
 		--enable-post-process-file \
 		--inline-schema-name-mappings PaymentDonationRequest_paymentMethod=CheckoutPaymentMethod \
 		--additional-properties=useOneOfDiscriminatorLookup=true \
-		--additional-properties=serviceName=$@
+		--additional-properties=serviceName=$(serviceName)
 	rm -rf $(output)/go.{mod,sum}
 
 # Checkout spec (and patch version)
