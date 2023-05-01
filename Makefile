@@ -21,8 +21,8 @@ openapi-generator-cli:=java -jar $(openapi-generator-jar)
 goimports:=$(GOPATH)/bin/goimports
 
 generator:=go
-services:=binLookup checkout legalentity payments payout storedvalue
-output:=src/
+services:=binLookup checkout legalentity payments payout storedvalue balanceplatform
+output:=src
 templates:=templates/small
 
 # Generate models (for each service)
@@ -35,6 +35,8 @@ binlookup: spec=BinLookupService-v54
 payments: spec=PaymentService-v68
 storedvalue: spec=StoredValueService-v46
 storedvalue: serviceName=StoredValue
+balanceplatform: spec=BalancePlatformService-v2
+balanceplatform: serviceName=BalancePlatform
 
 # Generate a full client (models and service classes)
 $(services): schema $(openapi-generator-jar) $(goimports)
@@ -42,18 +44,18 @@ $(services): schema $(openapi-generator-jar) $(goimports)
 		-i schema/json/$(spec).json \
 		-g $(generator) \
 		-t $(templates) \
-		-o $(output)$(@) \
+		-o $(output)/$(@) \
 		-p packageName=$(@) \
-		--global-property apiTests=false \
 		--global-property apis,models \
+		--global-property supportingFiles=api_index.go \
+		--global-property apiTests=false \
 		--global-property apiDocs=false \
 		--global-property modelDocs=true \
-		--git-repo-id adyen-go-api-library/v6 --git-user-id adyen \
+		-c ./templates/config.yaml \
 		--enable-post-process-file \
 		--inline-schema-name-mappings PaymentDonationRequest_paymentMethod=CheckoutPaymentMethod \
-		--additional-properties=useOneOfDiscriminatorLookup=true \
 		--additional-properties=serviceName=$(serviceName)
-	rm -rf $(output)/go.{mod,sum}
+	rm -rf $(output)/$(@)/go.{mod,sum}
 
 # Checkout spec (and patch version)
 schema:

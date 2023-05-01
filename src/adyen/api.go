@@ -8,6 +8,7 @@ package adyen
 
 import (
 	"fmt"
+	"github.com/adyen/adyen-go-api-library/v6/src/balanceplatform"
 	"net/http"
 
 	binlookup "github.com/adyen/adyen-go-api-library/v6/src/binlookup"
@@ -73,6 +74,7 @@ type APIClient struct {
 	PlatformsNotificationConfiguration *platformsnotificationconfiguration.PlatformsNotificationConfiguration
 	Disputes                           *disputes.Disputes
 	StoredValue                        *storedvalue.StoredValue
+	BalancePlatform                    *balanceplatform.APIClient
 }
 
 // NewClient creates a new API client. Requires Config object.
@@ -231,6 +233,8 @@ func NewClient(cfg *common.Config) *APIClient {
 			return fmt.Sprintf("%s/pal/servlet/StoredValue/%s", c.client.Cfg.Endpoint, StoredValueAPIVersion)
 		},
 	}
+
+	c.BalancePlatform = balanceplatform.NewAPIClient(c.client)
 
 	return c
 }

@@ -1,0 +1,9 @@
+templateDir: ./templates/small
+gitRepoId: adyen-go-api-library/v6
+gitUserId: adyen
+additionalProperties:
+  useOneOfDiscriminatorLookup: true
+files:
+  api-client.mustache:
+    destinationFilename: api_index.go
+    templateType: SupportingFiles
