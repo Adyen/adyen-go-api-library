@@ -9,7 +9,7 @@ API version: 2
 package balanceplatform
 
 import (
-	"github.com/adyen/adyen-go-api-library/v6/src/common"
+    "github.com/adyen/adyen-go-api-library/v6/src/common"
 )
 
 // APIClient manages communication with the Configuration API API v2
@@ -20,6 +20,8 @@ type APIClient struct {
 	// API Services
 
 	AccountHoldersApi *AccountHoldersApi
+
+	BalanceAccountsApi *BalanceAccountsApi
 
 	BankAccountValidationApi *BankAccountValidationApi
 
@@ -40,13 +42,14 @@ type APIClient struct {
 // optionally a custom http.Client to allow for advanced features such as caching.
 func NewAPIClient(client *common.Client) *APIClient {
 	c := &APIClient{}
-	c.common.Client = client
-	c.common.BasePath = func() string {
-		return "https://balanceplatform-api-test.adyen.com/bcl/v2"
-	}
+    c.common.Client = client
+    c.common.BasePath = func() string {
+        return client.Cfg.BalancePlatformEndpoint
+    }
 
 	// API Services
 	c.AccountHoldersApi = (*AccountHoldersApi)(&c.common)
+	c.BalanceAccountsApi = (*BalanceAccountsApi)(&c.common)
 	c.BankAccountValidationApi = (*BankAccountValidationApi)(&c.common)
 	c.GrantAccountsApi = (*GrantAccountsApi)(&c.common)
 	c.GrantOffersApi = (*GrantOffersApi)(&c.common)

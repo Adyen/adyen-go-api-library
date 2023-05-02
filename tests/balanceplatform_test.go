@@ -18,8 +18,8 @@ func Test_BalancePlatform(t *testing.T) {
 	client := adyen.NewClient(&common.Config{
 		ApiKey:      "YOUR_ADYEN_API_KEY",
 		Environment: "TEST",
+		Debug:       false,
 	})
-	//client.GetConfig().Debug = true
 	service := client.BalancePlatform
 
 	mux := http.NewServeMux()
@@ -28,6 +28,17 @@ func Test_BalancePlatform(t *testing.T) {
 		require.Equal(t, "GET", r.Method)
 		w.Header().Set("Content-Type", "application/json")
 		file, _ := os.Open("fixtures/account_holder.json")
+		io.Copy(w, file)
+	})
+	mux.HandleFunc("/balanceAccounts/balanceAccountId/sweeps/sweepId", func(w http.ResponseWriter, r *http.Request) {
+		require.Equal(t, "DELETE", r.Method)
+		w.WriteHeader(http.StatusNoContent)
+		// poof!
+	})
+	mux.HandleFunc("/transactionRules/transactionRuleId", func(w http.ResponseWriter, r *http.Request) {
+		require.Equal(t, "DELETE", r.Method)
+		w.Header().Set("Content-Type", "application/json")
+		file, _ := os.Open("fixtures/transaction_rule.json")
 		io.Copy(w, file)
 	})
 	// Error case
@@ -45,6 +56,17 @@ func Test_BalancePlatform(t *testing.T) {
 	client.BalancePlatform.AccountHoldersApi.BasePath = func() string {
 		return mockServer.URL
 	}
+
+	t.Run("Configuration", func(t *testing.T) {
+		testClient := adyen.NewClient(&common.Config{
+			Environment: common.TestEnv,
+		})
+		assert.Equal(t, "https://balanceplatform-api-test.adyen.com/bcl/v2", testClient.BalancePlatform.AccountHoldersApi.BasePath())
+		liveClient := adyen.NewClient(&common.Config{
+			Environment: common.LiveEnv,
+		})
+		assert.Equal(t, "https://balanceplatform-api-live.adyen.com/bcl/v2", liveClient.BalancePlatform.BalanceAccountsApi.BasePath())
+	})
 
 	t.Run("Get an account holder", func(t *testing.T) {
 		res, httpRes, err := service.AccountHoldersApi.GetAccountHolder(common.PtrString("123"))
@@ -73,5 +95,24 @@ func Test_BalancePlatform(t *testing.T) {
 		_ = json.Unmarshal(apiError.RawBody, &restError)
 		assert.Equal(t, "Entity was not found", restError.Title)
 		assert.Equal(t, "Payment instrument not found", restError.Detail)
+	})
+
+	t.Run("Delete a sweep", func(t *testing.T) {
+		httpRes, err := service.BalanceAccountsApi.DeleteSweep(
+			common.PtrString("balanceAccountId"),
+			common.PtrString("sweepId"),
+		)
+
+		assert.Equal(t, 204, httpRes.StatusCode)
+		require.Nil(t, err)
+	})
+
+	t.Run("Delete a transaction rule", func(t *testing.T) {
+		res, httpRes, err := service.TransactionRulesApi.DeleteTransactionRule(common.PtrString("transactionRuleId"))
+
+		require.NotNil(t, res)
+		require.NotNil(t, httpRes)
+		require.Nil(t, err)
+		assert.Equal(t, "myRule12345", res.GetReference())
 	})
 }

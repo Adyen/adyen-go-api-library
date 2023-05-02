@@ -48,30 +48,20 @@ type {{classname}} common.Service
 @return {{{returnType}}}
 {{/returnType}}
 */
-{{#hasBodyParam}}
-{{! implementation when body param is provided (POST, PATCH, etc..)}}
 func (a {{classname}}) {{#lambda.titlecase}}{{vendorExtensions.x-methodName}}{{/lambda.titlecase}}({{#pathParams}}{{paramName}} *{{{dataType}}}{{^last}}, {{/last}}{{/pathParams}}{{#bodyParams}}req *{{{dataType}}}{{^last}}, {{/last}}{{/bodyParams}}ctxs ..._context.Context) ({{#returnType}}{{{returnType}}}, {{/returnType}}*_nethttp.Response, error) {
+    {{#returnType}}
     res := &{{{returnType}}}{}
+    {{/returnType}}
+    {{^returnType}}
+    var res interface{}
+    {{/returnType}}
 	path := "{{{path}}}"
 	{{#pathParams}}
 	path = strings.ReplaceAll(path, "{" + "{{baseName}}" + "}", *{{paramName}})
 	{{/pathParams}}
-    httpRes, err := a.Client.MakeHTTP{{httpMethod}}Request(req, res, a.BasePath() + path, ctxs...)
-    return *res, httpRes, err
+    httpRes, err := a.Client.MakeHTTP{{httpMethod}}Request({{#hasBodyParam}}req, {{/hasBodyParam}}res, a.BasePath() + path, ctxs...)
+    return {{#returnType}}*res, {{/returnType}}httpRes, err
 }
-{{/hasBodyParam}}
-{{^hasBodyParam}}
-{{! implementation when body param is NOT provided (GET method) }}
-func (a {{classname}}) {{#lambda.titlecase}}{{vendorExtensions.x-methodName}}{{/lambda.titlecase}}({{#pathParams}}{{paramName}} *{{{dataType}}}{{^last}}, {{/last}}{{/pathParams}}ctxs ..._context.Context) ({{#returnType}}{{{returnType}}}, {{/returnType}}*_nethttp.Response, error) {
-    res := &{{{returnType}}}{}
-	path := "{{{path}}}"
-	{{#pathParams}}
-	path = strings.ReplaceAll(path, "{" + "{{baseName}}" + "}", *{{paramName}})
-	{{/pathParams}}
-    httpRes, err := a.Client.MakeHTTP{{httpMethod}}Request(res, a.BasePath() + path, ctxs...)
-    return *res, httpRes, err
-}
-{{/hasBodyParam}}
 
 {{/operation}}
 {{/operations}}

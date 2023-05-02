@@ -28,18 +28,20 @@ import (
 
 // Constants used for the client API
 const (
-	EndpointTest               = "https://pal-test.adyen.com"
-	EndpointLive               = "https://pal-live.adyen.com"
-	EndpointLiveSuffix         = "-pal-live.adyenpayments.com"
-	MarketpayEndpointTest      = "https://cal-test.adyen.com/cal/services"
-	MarketpayEndpointLive      = "https://cal-live.adyen.com/cal/services"
-	CheckoutEndpointTest       = "https://checkout-test.adyen.com/checkout"
-	CheckoutEndpointLiveSuffix = "-checkout-live.adyenpayments.com/checkout"
-	BinLookupPalSuffix         = "/pal/servlet/BinLookup/"
-	TerminalAPIEndpointTest    = "https://terminal-api-test.adyen.com"
-	TerminalAPIEndpointLive    = "https://terminal-api-live.adyen.com"
-	DisputesEndpointTest       = "https://ca-test.adyen.com/ca/services/DisputeService"
-	DisputesEndpointLive       = "https://ca-live.adyen.com/ca/services/DisputeService"
+	EndpointTest                = "https://pal-test.adyen.com"
+	EndpointLive                = "https://pal-live.adyen.com"
+	EndpointLiveSuffix          = "-pal-live.adyenpayments.com"
+	MarketpayEndpointTest       = "https://cal-test.adyen.com/cal/services"
+	MarketpayEndpointLive       = "https://cal-live.adyen.com/cal/services"
+	CheckoutEndpointTest        = "https://checkout-test.adyen.com/checkout"
+	CheckoutEndpointLiveSuffix  = "-checkout-live.adyenpayments.com/checkout"
+	BinLookupPalSuffix          = "/pal/servlet/BinLookup/"
+	TerminalAPIEndpointTest     = "https://terminal-api-test.adyen.com"
+	TerminalAPIEndpointLive     = "https://terminal-api-live.adyen.com"
+	DisputesEndpointTest        = "https://ca-test.adyen.com/ca/services/DisputeService"
+	DisputesEndpointLive        = "https://ca-live.adyen.com/ca/services/DisputeService"
+	BalancePlatformEndpointTest = "https://balanceplatform-api-test.adyen.com/bcl"
+	BalancePlatformEndpointLive = "https://balanceplatform-api-live.adyen.com/bcl"
 )
 
 // also update LibVersion in src/common/configuration.go when a version is updated and a major lib version is released
@@ -55,6 +57,7 @@ const (
 	EndpointProtocol                = "https://"
 	DisputesAPIVersion              = "v30"
 	StoredValueAPIVersion           = "v46"
+	BalancePlatformAPIVersion       = "v2"
 )
 
 // APIClient manages communication with the Adyen Checkout API API v51
@@ -258,6 +261,7 @@ func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix
 			c.client.Cfg.CheckoutEndpoint = ""
 		}
 		c.client.Cfg.TerminalApiCloudEndpoint = TerminalAPIEndpointLive
+		c.client.Cfg.BalancePlatformEndpoint = BalancePlatformEndpointLive
 	} else {
 		c.client.Cfg.Environment = env
 		c.client.Cfg.Endpoint = EndpointTest
@@ -265,7 +269,9 @@ func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix
 		c.client.Cfg.CheckoutEndpoint = CheckoutEndpointTest
 		c.client.Cfg.TerminalApiCloudEndpoint = TerminalAPIEndpointTest
 		c.client.Cfg.DisputesEndpoint = DisputesEndpointTest
+		c.client.Cfg.BalancePlatformEndpoint = BalancePlatformEndpointTest
 	}
+	c.client.Cfg.BalancePlatformEndpoint += "/" + BalancePlatformAPIVersion
 }
 
 // GetConfig Allow modification of underlying config for alternate implementations and testing

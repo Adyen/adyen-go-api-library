@@ -8,8 +8,7 @@ import (
 // APIClient manages communication with the {{appName}} API v{{version}}
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
-	cfg    *Configuration
-	common service // Reuse a single struct instead of allocating one for each service on the heap.
+	common common.Service // Reuse a single struct instead of allocating one for each service on the heap.
 
 	// API Services
 {{#apiInfo}}
@@ -26,9 +25,9 @@ type APIClient struct {
 // optionally a custom http.Client to allow for advanced features such as caching.
 func NewAPIClient(client *common.Client) *APIClient {
 	c := &APIClient{}
-	c.common.Client = c
+    c.common.Client = client
     c.common.BasePath = func() string {
-        return "{{{basePath}}}"
+        return client.Cfg.{{{serviceName}}}Endpoint
     }
 
 {{#apiInfo}}
