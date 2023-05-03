@@ -30,6 +30,14 @@ func Test_BalancePlatform(t *testing.T) {
 		file, _ := os.Open("fixtures/account_holder.json")
 		io.Copy(w, file)
 	})
+	mux.HandleFunc("/accountHolders/123/balanceAccounts", func(w http.ResponseWriter, r *http.Request) {
+		require.Equal(t, "GET", r.Method)
+		assert.Equal(t, "5", r.URL.Query().Get("limit"))
+		assert.Equal(t, "42", r.URL.Query().Get("offset"))
+		w.Header().Set("Content-Type", "application/json")
+		file, _ := os.Open("fixtures/paginated_balance_accounts_response.json")
+		io.Copy(w, file)
+	})
 	mux.HandleFunc("/balanceAccounts/balanceAccountId/sweeps/sweepId", func(w http.ResponseWriter, r *http.Request) {
 		require.Equal(t, "DELETE", r.Method)
 		w.WriteHeader(http.StatusNoContent)
@@ -80,6 +88,23 @@ func Test_BalancePlatform(t *testing.T) {
 		require.True(t, accountHolderCapability.GetEnabled())
 		assert.Equal(t, "pending", accountHolderCapability.GetVerificationStatus())
 		assert.Equal(t, "active", *res.Status)
+	})
+
+	t.Run("Get all balance accounts of an account holder", func(t *testing.T) {
+		res, httpRes, err := service.AccountHoldersApi.GetAllBalanceAccountsOfAccountHolder(
+			common.PtrString("123"),
+			map[string]string{
+				"limit":  "5",
+				"offset": "42",
+			},
+		)
+
+		require.NotNil(t, res)
+		require.NotNil(t, httpRes)
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+		require.True(t, res.HasNext)
+		assert.Equal(t, "AH32272223222B5CTBMZT6W2V", res.GetBalanceAccounts()[0].GetAccountHolderId())
 	})
 
 	t.Run("Error response", func(t *testing.T) {

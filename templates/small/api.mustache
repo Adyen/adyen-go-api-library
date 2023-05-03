@@ -48,7 +48,7 @@ type {{classname}} common.Service
 @return {{{returnType}}}
 {{/returnType}}
 */
-func (a {{classname}}) {{#lambda.titlecase}}{{vendorExtensions.x-methodName}}{{/lambda.titlecase}}({{#pathParams}}{{paramName}} *{{{dataType}}}{{^last}}, {{/last}}{{/pathParams}}{{#bodyParams}}req *{{{dataType}}}{{^last}}, {{/last}}{{/bodyParams}}ctxs ..._context.Context) ({{#returnType}}{{{returnType}}}, {{/returnType}}*_nethttp.Response, error) {
+func (a {{classname}}) {{#lambda.titlecase}}{{vendorExtensions.x-methodName}}{{/lambda.titlecase}}({{#pathParams}}{{paramName}} *{{{dataType}}}{{^last}}, {{/last}}{{/pathParams}}{{#hasQueryParams}}queryParams map[string]string, {{/hasQueryParams}}{{#bodyParams}}req *{{{dataType}}}{{^last}}, {{/last}}{{/bodyParams}}ctxs ..._context.Context) ({{#returnType}}{{{returnType}}}, {{/returnType}}*_nethttp.Response, error) {
     {{#returnType}}
     res := &{{{returnType}}}{}
     {{/returnType}}
@@ -59,7 +59,15 @@ func (a {{classname}}) {{#lambda.titlecase}}{{vendorExtensions.x-methodName}}{{/
 	{{#pathParams}}
 	path = strings.ReplaceAll(path, "{" + "{{baseName}}" + "}", *{{paramName}})
 	{{/pathParams}}
-    httpRes, err := a.Client.MakeHTTP{{httpMethod}}Request({{#hasBodyParam}}req, {{/hasBodyParam}}res, a.BasePath() + path, ctxs...)
+{{#hasQueryParams}}
+    queryString := url.Values{}
+{{#queryParams}}
+    if _, ok := queryParams["{{paramName}}"]; ok {
+        queryString.Add("{{baseName}}",  queryParams["{{paramName}}"])
+    }
+{{/queryParams}}
+{{/hasQueryParams}}
+    httpRes, err := a.Client.MakeHTTP{{httpMethod}}Request({{#hasBodyParam}}req, {{/hasBodyParam}}res, a.BasePath() + path{{#hasQueryParams}} + "?" + queryString.Encode(){{/hasQueryParams}}, ctxs...)
     return {{#returnType}}*res, {{/returnType}}httpRes, err
 }
 

@@ -1,0 +1,33 @@
+{
+  "balanceAccounts": [
+    {
+      "accountHolderId": "AH32272223222B5CTBMZT6W2V",
+      "defaultCurrencyCode": "EUR",
+      "description": "S. Hopper - Main Account",
+      "reference": "YOUR_REFERENCE-X173L",
+      "timeZone": "Europe/Amsterdam",
+      "id": "BA32272223222B5CTDNB66W2Z",
+      "status": "active"
+    },
+    {
+      "accountHolderId": "AH32272223222B5CTBMZT6W2V",
+      "defaultCurrencyCode": "EUR",
+      "description": "S. Hopper - Main Account",
+      "reference": "YOUR_REFERENCE-X173L",
+      "timeZone": "Europe/Amsterdam",
+      "id": "BA32272223222B5CTDQPM6W2H",
+      "status": "active"
+    },
+    {
+      "accountHolderId": "AH32272223222B5CTBMZT6W2V",
+      "defaultCurrencyCode": "EUR",
+      "description": "S. Hopper - Main Account",
+      "reference": "YOUR_REFERENCE-X173L",
+      "timeZone": "Europe/Amsterdam",
+      "id": "BA32272223222B5CVF5J63LMW",
+      "status": "active"
+    }
+  ],
+  "hasNext": true,
+  "hasPrevious": false
+}

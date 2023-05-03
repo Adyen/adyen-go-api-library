@@ -11,6 +11,7 @@ package balanceplatform
 import (
 	_context "context"
 	_nethttp "net/http"
+	"net/url"
 	"strings"
 
 	"github.com/adyen/adyen-go-api-library/v6/src/common"
@@ -42,11 +43,18 @@ Returns a list of the sweeps configured for a balance account.  To fetch multipl
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return BalanceSweepConfigurationsResponse
 */
-func (a BalanceAccountsApi) GetAllSweepsForBalanceAccount(balanceAccountId *string, ctxs ..._context.Context) (BalanceSweepConfigurationsResponse, *_nethttp.Response, error) {
+func (a BalanceAccountsApi) GetAllSweepsForBalanceAccount(balanceAccountId *string, queryParams map[string]string, ctxs ..._context.Context) (BalanceSweepConfigurationsResponse, *_nethttp.Response, error) {
 	res := &BalanceSweepConfigurationsResponse{}
 	path := "/balanceAccounts/{balanceAccountId}/sweeps"
 	path = strings.ReplaceAll(path, "{"+"balanceAccountId"+"}", *balanceAccountId)
-	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path, ctxs...)
+	queryString := url.Values{}
+	if _, ok := queryParams["offset"]; ok {
+		queryString.Add("offset", queryParams["offset"])
+	}
+	if _, ok := queryParams["limit"]; ok {
+		queryString.Add("limit", queryParams["limit"])
+	}
+	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path+"?"+queryString.Encode(), ctxs...)
 	return *res, httpRes, err
 }
 
@@ -89,11 +97,18 @@ Returns a paginated list of the payment instruments associated with a balance ac
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return PaginatedPaymentInstrumentsResponse
 */
-func (a BalanceAccountsApi) GetAllPaymentInstrumentsForBalanceAccount(id *string, ctxs ..._context.Context) (PaginatedPaymentInstrumentsResponse, *_nethttp.Response, error) {
+func (a BalanceAccountsApi) GetAllPaymentInstrumentsForBalanceAccount(id *string, queryParams map[string]string, ctxs ..._context.Context) (PaginatedPaymentInstrumentsResponse, *_nethttp.Response, error) {
 	res := &PaginatedPaymentInstrumentsResponse{}
 	path := "/balanceAccounts/{id}/paymentInstruments"
 	path = strings.ReplaceAll(path, "{"+"id"+"}", *id)
-	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path, ctxs...)
+	queryString := url.Values{}
+	if _, ok := queryParams["offset"]; ok {
+		queryString.Add("offset", queryParams["offset"])
+	}
+	if _, ok := queryParams["limit"]; ok {
+		queryString.Add("limit", queryParams["limit"])
+	}
+	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path+"?"+queryString.Encode(), ctxs...)
 	return *res, httpRes, err
 }
 

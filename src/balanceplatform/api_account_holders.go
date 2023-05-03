@@ -11,6 +11,7 @@ package balanceplatform
 import (
 	_context "context"
 	_nethttp "net/http"
+	"net/url"
 	"strings"
 
 	"github.com/adyen/adyen-go-api-library/v6/src/common"
@@ -41,11 +42,18 @@ Returns a paginated list of the balance accounts associated with an account hold
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return PaginatedBalanceAccountsResponse
 */
-func (a AccountHoldersApi) GetAllBalanceAccountsOfAccountHolder(id *string, ctxs ..._context.Context) (PaginatedBalanceAccountsResponse, *_nethttp.Response, error) {
+func (a AccountHoldersApi) GetAllBalanceAccountsOfAccountHolder(id *string, queryParams map[string]string, ctxs ..._context.Context) (PaginatedBalanceAccountsResponse, *_nethttp.Response, error) {
 	res := &PaginatedBalanceAccountsResponse{}
 	path := "/accountHolders/{id}/balanceAccounts"
 	path = strings.ReplaceAll(path, "{"+"id"+"}", *id)
-	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path, ctxs...)
+	queryString := url.Values{}
+	if _, ok := queryParams["offset"]; ok {
+		queryString.Add("offset", queryParams["offset"])
+	}
+	if _, ok := queryParams["limit"]; ok {
+		queryString.Add("limit", queryParams["limit"])
+	}
+	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path+"?"+queryString.Encode(), ctxs...)
 	return *res, httpRes, err
 }
 

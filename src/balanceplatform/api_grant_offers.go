@@ -11,6 +11,7 @@ package balanceplatform
 import (
 	_context "context"
 	_nethttp "net/http"
+	"net/url"
 	"strings"
 
 	"github.com/adyen/adyen-go-api-library/v6/src/common"
@@ -25,10 +26,14 @@ Returns a list of all [grant offers](https://docs.adyen.com/marketplaces-and-pla
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return GrantOffers
 */
-func (a GrantOffersApi) GetAllAvailableGrantOffers(ctxs ..._context.Context) (GrantOffers, *_nethttp.Response, error) {
+func (a GrantOffersApi) GetAllAvailableGrantOffers(queryParams map[string]string, ctxs ..._context.Context) (GrantOffers, *_nethttp.Response, error) {
 	res := &GrantOffers{}
 	path := "/grantOffers"
-	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path, ctxs...)
+	queryString := url.Values{}
+	if _, ok := queryParams["accountHolderId"]; ok {
+		queryString.Add("accountHolderId", queryParams["accountHolderId"])
+	}
+	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path+"?"+queryString.Encode(), ctxs...)
 	return *res, httpRes, err
 }
 
