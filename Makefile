@@ -56,6 +56,7 @@ $(services): schema $(openapi-generator-jar) $(goimports)
 		--inline-schema-name-mappings PaymentDonationRequest_paymentMethod=CheckoutPaymentMethod \
 		--additional-properties=serviceName=$(serviceName)
 	rm -rf $(output)/$(@)/go.{mod,sum}
+	rm -rf $(output)/$(@)/.openapi-generator/FILES
 
 # Clone OpenAPI spec (and apply local patches)
 schema:

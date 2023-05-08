@@ -20,3 +20,4 @@ vendor/
 .env
 error.txt
 /schema
+src/*/.openapi-generator/FILES
