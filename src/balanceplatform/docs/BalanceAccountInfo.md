@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **DefaultCurrencyCode** | Pointer to **string** | The default three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes) of the balance account. The default value is **EUR**. | [optional] 
 **Description** | Pointer to **string** | A human-readable description of the balance account, maximum 300 characters. You can use this parameter to distinguish between multiple balance accounts under an account holder. | [optional] 
 **Reference** | Pointer to **string** | Your reference for the balance account, maximum 150 characters. | [optional] 
-**TimeZone** | Pointer to **string** | The [time zone](https://www.iana.org/time-zones) of the balance account. For example, **Europe/Amsterdam**. Defaults to the time zone of the account holder if no time zone is set. For possible values, see the [list of time zone codes](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). | [optional] 
+**TimeZone** | Pointer to **string** | The time zone of the balance account. For example, **Europe/Amsterdam**. Defaults to the time zone of the account holder if no time zone is set. For possible values, see the [list of time zone codes](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). | [optional] 
 
 ## Methods
 

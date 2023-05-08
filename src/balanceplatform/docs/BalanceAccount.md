@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **Id** | **string** | The unique identifier of the balance account. | 
 **Reference** | Pointer to **string** | Your reference for the balance account, maximum 150 characters. | [optional] 
 **Status** | Pointer to **string** | The status of the balance account, set to **active** by default.   | [optional] 
-**TimeZone** | Pointer to **string** | The [time zone](https://www.iana.org/time-zones) of the balance account. For example, **Europe/Amsterdam**. Defaults to the time zone of the account holder if no time zone is set. For possible values, see the [list of time zone codes](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). | [optional] 
+**TimeZone** | Pointer to **string** | The time zone of the balance account. For example, **Europe/Amsterdam**. Defaults to the time zone of the account holder if no time zone is set. For possible values, see the [list of time zone codes](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). | [optional] 
 
 ## Methods
 

@@ -9,7 +9,7 @@ API version: 2
 package balanceplatform
 
 import (
-	_context "context"
+	"context"
 	_nethttp "net/http"
 	"net/url"
 	"strings"
@@ -20,6 +20,115 @@ import (
 // BalanceAccountsApi BalanceAccountsApi service
 type BalanceAccountsApi common.Service
 
+type CreateBalanceAccountConfig struct {
+	ctx                context.Context
+	balanceAccountInfo *BalanceAccountInfo
+}
+
+func (r CreateBalanceAccountConfig) BalanceAccountInfo(balanceAccountInfo BalanceAccountInfo) CreateBalanceAccountConfig {
+	r.balanceAccountInfo = &balanceAccountInfo
+	return r
+}
+
+/*
+CreateBalanceAccount Create a balance account
+
+Creates a balance account that holds the funds of the associated account holder.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return CreateBalanceAccountConfig
+*/
+func (a *BalanceAccountsApi) CreateBalanceAccountConfig(ctx context.Context) CreateBalanceAccountConfig {
+	return CreateBalanceAccountConfig{
+		ctx: ctx,
+	}
+}
+
+/*
+Create a balance account
+Creates a balance account that holds the funds of the associated account holder.
+ * @param req BalanceAccountInfo - reference of BalanceAccountInfo).
+ * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return BalanceAccount
+*/
+
+func (a *BalanceAccountsApi) CreateBalanceAccount(r CreateBalanceAccountConfig) (BalanceAccount, *_nethttp.Response, error) {
+	res := &BalanceAccount{}
+	path := "/balanceAccounts"
+	httpRes, err := a.Client.MakeHTTPPostRequest(r.balanceAccountInfo, res, a.BasePath()+path, r.ctx)
+	return *res, httpRes, err
+}
+
+type CreateSweepConfig struct {
+	ctx                  context.Context
+	balanceAccountId     string
+	sweepConfigurationV2 *SweepConfigurationV2
+}
+
+func (r CreateSweepConfig) SweepConfigurationV2(sweepConfigurationV2 SweepConfigurationV2) CreateSweepConfig {
+	r.sweepConfigurationV2 = &sweepConfigurationV2
+	return r
+}
+
+/*
+CreateSweep Create a sweep
+
+Creates a sweep that results in moving funds from or to a balance account.
+
+A sweep pulls in or pushes out funds based on a defined schedule, amount, currency, and a source or a destination.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param balanceAccountId The unique identifier of the balance account.
+ @return CreateSweepConfig
+*/
+func (a *BalanceAccountsApi) CreateSweepConfig(ctx context.Context, balanceAccountId string) CreateSweepConfig {
+	return CreateSweepConfig{
+		ctx:              ctx,
+		balanceAccountId: balanceAccountId,
+	}
+}
+
+/*
+Create a sweep
+Creates a sweep that results in moving funds from or to a balance account.  A sweep pulls in or pushes out funds based on a defined schedule, amount, currency, and a source or a destination.
+ * @param balanceAccountId The unique identifier of the balance account.
+ * @param req SweepConfigurationV2 - reference of SweepConfigurationV2).
+ * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return SweepConfigurationV2
+*/
+
+func (a *BalanceAccountsApi) CreateSweep(r CreateSweepConfig) (SweepConfigurationV2, *_nethttp.Response, error) {
+	res := &SweepConfigurationV2{}
+	path := "/balanceAccounts/{balanceAccountId}/sweeps"
+	path = strings.Replace(path, "{"+"balanceAccountId"+"}", url.PathEscape(common.ParameterValueToString(r.balanceAccountId, "balanceAccountId")), -1)
+	httpRes, err := a.Client.MakeHTTPPostRequest(r.sweepConfigurationV2, res, a.BasePath()+path, r.ctx)
+	return *res, httpRes, err
+}
+
+type DeleteSweepConfig struct {
+	ctx              context.Context
+	balanceAccountId string
+	sweepId          string
+}
+
+/*
+DeleteSweep Delete a sweep
+
+Deletes a sweep for a balance account.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param balanceAccountId The unique identifier of the balance account.
+ @param sweepId The unique identifier of the sweep.
+ @return DeleteSweepConfig
+*/
+func (a *BalanceAccountsApi) DeleteSweepConfig(ctx context.Context, balanceAccountId string, sweepId string) DeleteSweepConfig {
+	return DeleteSweepConfig{
+		ctx:              ctx,
+		balanceAccountId: balanceAccountId,
+		sweepId:          sweepId,
+	}
+}
+
 /*
 Delete a sweep
 Deletes a sweep for a balance account.
@@ -27,13 +136,111 @@ Deletes a sweep for a balance account.
  * @param sweepId The unique identifier of the sweep.
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 */
-func (a BalanceAccountsApi) DeleteSweep(balanceAccountId *string, sweepId *string, ctxs ..._context.Context) (*_nethttp.Response, error) {
+
+func (a *BalanceAccountsApi) DeleteSweep(r DeleteSweepConfig) (*_nethttp.Response, error) {
 	var res interface{}
 	path := "/balanceAccounts/{balanceAccountId}/sweeps/{sweepId}"
-	path = strings.ReplaceAll(path, "{"+"balanceAccountId"+"}", *balanceAccountId)
-	path = strings.ReplaceAll(path, "{"+"sweepId"+"}", *sweepId)
-	httpRes, err := a.Client.MakeHTTPDeleteRequest(res, a.BasePath()+path, ctxs...)
+	path = strings.Replace(path, "{"+"balanceAccountId"+"}", url.PathEscape(common.ParameterValueToString(r.balanceAccountId, "balanceAccountId")), -1)
+	path = strings.Replace(path, "{"+"sweepId"+"}", url.PathEscape(common.ParameterValueToString(r.sweepId, "sweepId")), -1)
+	httpRes, err := a.Client.MakeHTTPDeleteRequest(res, a.BasePath()+path, r.ctx)
 	return httpRes, err
+}
+
+type GetAllPaymentInstrumentsForBalanceAccountConfig struct {
+	ctx    context.Context
+	id     string
+	offset *int32
+	limit  *int32
+}
+
+// The number of items that you want to skip.
+func (r GetAllPaymentInstrumentsForBalanceAccountConfig) Offset(offset int32) GetAllPaymentInstrumentsForBalanceAccountConfig {
+	r.offset = &offset
+	return r
+}
+
+// The number of items returned per page, maximum 100 items. By default, the response returns 10 items per page.
+func (r GetAllPaymentInstrumentsForBalanceAccountConfig) Limit(limit int32) GetAllPaymentInstrumentsForBalanceAccountConfig {
+	r.limit = &limit
+	return r
+}
+
+/*
+GetAllPaymentInstrumentsForBalanceAccount Get all payment instruments for a balance account
+
+Returns a paginated list of the payment instruments associated with a balance account.
+
+To fetch multiple pages, use the query parameters.For example, to limit the page to 3 payment instruments and to skip the first 6, use `/balanceAccounts/{id}/paymentInstruments?limit=3&offset=6`.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier of the balance account.
+ @return GetAllPaymentInstrumentsForBalanceAccountConfig
+*/
+func (a *BalanceAccountsApi) GetAllPaymentInstrumentsForBalanceAccountConfig(ctx context.Context, id string) GetAllPaymentInstrumentsForBalanceAccountConfig {
+	return GetAllPaymentInstrumentsForBalanceAccountConfig{
+		ctx: ctx,
+		id:  id,
+	}
+}
+
+/*
+Get all payment instruments for a balance account
+Returns a paginated list of the payment instruments associated with a balance account.   To fetch multiple pages, use the query parameters.For example, to limit the page to 3 payment instruments and to skip the first 6, use &#x60;/balanceAccounts/{id}/paymentInstruments?limit&#x3D;3&amp;offset&#x3D;6&#x60;.
+ * @param id The unique identifier of the balance account.
+ * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return PaginatedPaymentInstrumentsResponse
+*/
+
+func (a *BalanceAccountsApi) GetAllPaymentInstrumentsForBalanceAccount(r GetAllPaymentInstrumentsForBalanceAccountConfig) (PaginatedPaymentInstrumentsResponse, *_nethttp.Response, error) {
+	res := &PaginatedPaymentInstrumentsResponse{}
+	path := "/balanceAccounts/{id}/paymentInstruments"
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryString := url.Values{}
+	if r.offset != nil {
+		common.ParameterAddToQuery(queryString, "offset", r.offset, "")
+	}
+	if r.limit != nil {
+		common.ParameterAddToQuery(queryString, "limit", r.limit, "")
+	}
+	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path+"?"+queryString.Encode(), r.ctx)
+	return *res, httpRes, err
+}
+
+type GetAllSweepsForBalanceAccountConfig struct {
+	ctx              context.Context
+	balanceAccountId string
+	offset           *int32
+	limit            *int32
+}
+
+// The number of items that you want to skip.
+func (r GetAllSweepsForBalanceAccountConfig) Offset(offset int32) GetAllSweepsForBalanceAccountConfig {
+	r.offset = &offset
+	return r
+}
+
+// The number of items returned per page, maximum 100 items. By default, the response returns 10 items per page.
+func (r GetAllSweepsForBalanceAccountConfig) Limit(limit int32) GetAllSweepsForBalanceAccountConfig {
+	r.limit = &limit
+	return r
+}
+
+/*
+GetAllSweepsForBalanceAccount Get all sweeps for a balance account
+
+Returns a list of the sweeps configured for a balance account.
+
+To fetch multiple pages, use the query parameters. For example, to limit the page to 5 sweeps and to skip the first 10, use `/balanceAccounts/{balanceAccountId}/sweeps?limit=5&offset=10`.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param balanceAccountId The unique identifier of the balance account.
+ @return GetAllSweepsForBalanceAccountConfig
+*/
+func (a *BalanceAccountsApi) GetAllSweepsForBalanceAccountConfig(ctx context.Context, balanceAccountId string) GetAllSweepsForBalanceAccountConfig {
+	return GetAllSweepsForBalanceAccountConfig{
+		ctx:              ctx,
+		balanceAccountId: balanceAccountId,
+	}
 }
 
 /*
@@ -43,19 +250,81 @@ Returns a list of the sweeps configured for a balance account.  To fetch multipl
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return BalanceSweepConfigurationsResponse
 */
-func (a BalanceAccountsApi) GetAllSweepsForBalanceAccount(balanceAccountId *string, queryParams map[string]string, ctxs ..._context.Context) (BalanceSweepConfigurationsResponse, *_nethttp.Response, error) {
+
+func (a *BalanceAccountsApi) GetAllSweepsForBalanceAccount(r GetAllSweepsForBalanceAccountConfig) (BalanceSweepConfigurationsResponse, *_nethttp.Response, error) {
 	res := &BalanceSweepConfigurationsResponse{}
 	path := "/balanceAccounts/{balanceAccountId}/sweeps"
-	path = strings.ReplaceAll(path, "{"+"balanceAccountId"+"}", *balanceAccountId)
+	path = strings.Replace(path, "{"+"balanceAccountId"+"}", url.PathEscape(common.ParameterValueToString(r.balanceAccountId, "balanceAccountId")), -1)
 	queryString := url.Values{}
-	if _, ok := queryParams["offset"]; ok {
-		queryString.Add("offset", queryParams["offset"])
+	if r.offset != nil {
+		common.ParameterAddToQuery(queryString, "offset", r.offset, "")
 	}
-	if _, ok := queryParams["limit"]; ok {
-		queryString.Add("limit", queryParams["limit"])
+	if r.limit != nil {
+		common.ParameterAddToQuery(queryString, "limit", r.limit, "")
 	}
-	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path+"?"+queryString.Encode(), ctxs...)
+	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path+"?"+queryString.Encode(), r.ctx)
 	return *res, httpRes, err
+}
+
+type GetBalanceAccountConfig struct {
+	ctx context.Context
+	id  string
+}
+
+/*
+GetBalanceAccount Get a balance account
+
+Returns a balance account and its balances for the default currency and other currencies with a non-zero balance.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier of the balance account.
+ @return GetBalanceAccountConfig
+*/
+func (a *BalanceAccountsApi) GetBalanceAccountConfig(ctx context.Context, id string) GetBalanceAccountConfig {
+	return GetBalanceAccountConfig{
+		ctx: ctx,
+		id:  id,
+	}
+}
+
+/*
+Get a balance account
+Returns a balance account and its balances for the default currency and other currencies with a non-zero balance.
+ * @param id The unique identifier of the balance account.
+ * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return BalanceAccount
+*/
+
+func (a *BalanceAccountsApi) GetBalanceAccount(r GetBalanceAccountConfig) (BalanceAccount, *_nethttp.Response, error) {
+	res := &BalanceAccount{}
+	path := "/balanceAccounts/{id}"
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path, r.ctx)
+	return *res, httpRes, err
+}
+
+type GetSweepConfig struct {
+	ctx              context.Context
+	balanceAccountId string
+	sweepId          string
+}
+
+/*
+GetSweep Get a sweep
+
+Returns a sweep.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param balanceAccountId The unique identifier of the balance account.
+ @param sweepId The unique identifier of the sweep.
+ @return GetSweepConfig
+*/
+func (a *BalanceAccountsApi) GetSweepConfig(ctx context.Context, balanceAccountId string, sweepId string) GetSweepConfig {
+	return GetSweepConfig{
+		ctx:              ctx,
+		balanceAccountId: balanceAccountId,
+		sweepId:          sweepId,
+	}
 }
 
 /*
@@ -66,50 +335,88 @@ Returns a sweep.
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return SweepConfigurationV2
 */
-func (a BalanceAccountsApi) GetSweep(balanceAccountId *string, sweepId *string, ctxs ..._context.Context) (SweepConfigurationV2, *_nethttp.Response, error) {
+
+func (a *BalanceAccountsApi) GetSweep(r GetSweepConfig) (SweepConfigurationV2, *_nethttp.Response, error) {
 	res := &SweepConfigurationV2{}
 	path := "/balanceAccounts/{balanceAccountId}/sweeps/{sweepId}"
-	path = strings.ReplaceAll(path, "{"+"balanceAccountId"+"}", *balanceAccountId)
-	path = strings.ReplaceAll(path, "{"+"sweepId"+"}", *sweepId)
-	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path, ctxs...)
+	path = strings.Replace(path, "{"+"balanceAccountId"+"}", url.PathEscape(common.ParameterValueToString(r.balanceAccountId, "balanceAccountId")), -1)
+	path = strings.Replace(path, "{"+"sweepId"+"}", url.PathEscape(common.ParameterValueToString(r.sweepId, "sweepId")), -1)
+	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path, r.ctx)
 	return *res, httpRes, err
 }
 
+type UpdateBalanceAccountConfig struct {
+	ctx                         context.Context
+	id                          string
+	balanceAccountUpdateRequest *BalanceAccountUpdateRequest
+}
+
+func (r UpdateBalanceAccountConfig) BalanceAccountUpdateRequest(balanceAccountUpdateRequest BalanceAccountUpdateRequest) UpdateBalanceAccountConfig {
+	r.balanceAccountUpdateRequest = &balanceAccountUpdateRequest
+	return r
+}
+
 /*
-Get a balance account
-Returns a balance account and its balances for the default currency and other currencies with a non-zero balance.
+UpdateBalanceAccount Update a balance account
+
+Updates a balance account.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier of the balance account.
+ @return UpdateBalanceAccountConfig
+*/
+func (a *BalanceAccountsApi) UpdateBalanceAccountConfig(ctx context.Context, id string) UpdateBalanceAccountConfig {
+	return UpdateBalanceAccountConfig{
+		ctx: ctx,
+		id:  id,
+	}
+}
+
+/*
+Update a balance account
+Updates a balance account.
  * @param id The unique identifier of the balance account.
+ * @param req BalanceAccountUpdateRequest - reference of BalanceAccountUpdateRequest).
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return BalanceAccount
 */
-func (a BalanceAccountsApi) GetBalanceAccount(id *string, ctxs ..._context.Context) (BalanceAccount, *_nethttp.Response, error) {
+
+func (a *BalanceAccountsApi) UpdateBalanceAccount(r UpdateBalanceAccountConfig) (BalanceAccount, *_nethttp.Response, error) {
 	res := &BalanceAccount{}
 	path := "/balanceAccounts/{id}"
-	path = strings.ReplaceAll(path, "{"+"id"+"}", *id)
-	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path, ctxs...)
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	httpRes, err := a.Client.MakeHTTPPatchRequest(r.balanceAccountUpdateRequest, res, a.BasePath()+path, r.ctx)
 	return *res, httpRes, err
 }
 
+type UpdateSweepConfig struct {
+	ctx                  context.Context
+	balanceAccountId     string
+	sweepId              string
+	sweepConfigurationV2 *SweepConfigurationV2
+}
+
+func (r UpdateSweepConfig) SweepConfigurationV2(sweepConfigurationV2 SweepConfigurationV2) UpdateSweepConfig {
+	r.sweepConfigurationV2 = &sweepConfigurationV2
+	return r
+}
+
 /*
-Get all payment instruments for a balance account
-Returns a paginated list of the payment instruments associated with a balance account.   To fetch multiple pages, use the query parameters.For example, to limit the page to 3 payment instruments and to skip the first 6, use &#x60;/balanceAccounts/{id}/paymentInstruments?limit&#x3D;3&amp;offset&#x3D;6&#x60;.
- * @param id The unique identifier of the balance account.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return PaginatedPaymentInstrumentsResponse
+UpdateSweep Update a sweep
+
+Updates a sweep. When updating a sweep resource, note that if a request parameter is not provided, the parameter is left unchanged.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param balanceAccountId The unique identifier of the balance account.
+ @param sweepId The unique identifier of the sweep.
+ @return UpdateSweepConfig
 */
-func (a BalanceAccountsApi) GetAllPaymentInstrumentsForBalanceAccount(id *string, queryParams map[string]string, ctxs ..._context.Context) (PaginatedPaymentInstrumentsResponse, *_nethttp.Response, error) {
-	res := &PaginatedPaymentInstrumentsResponse{}
-	path := "/balanceAccounts/{id}/paymentInstruments"
-	path = strings.ReplaceAll(path, "{"+"id"+"}", *id)
-	queryString := url.Values{}
-	if _, ok := queryParams["offset"]; ok {
-		queryString.Add("offset", queryParams["offset"])
+func (a *BalanceAccountsApi) UpdateSweepConfig(ctx context.Context, balanceAccountId string, sweepId string) UpdateSweepConfig {
+	return UpdateSweepConfig{
+		ctx:              ctx,
+		balanceAccountId: balanceAccountId,
+		sweepId:          sweepId,
 	}
-	if _, ok := queryParams["limit"]; ok {
-		queryString.Add("limit", queryParams["limit"])
-	}
-	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path+"?"+queryString.Encode(), ctxs...)
-	return *res, httpRes, err
 }
 
 /*
@@ -121,57 +428,12 @@ Updates a sweep. When updating a sweep resource, note that if a request paramete
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return SweepConfigurationV2
 */
-func (a BalanceAccountsApi) UpdateSweep(balanceAccountId *string, sweepId *string, req *SweepConfigurationV2, ctxs ..._context.Context) (SweepConfigurationV2, *_nethttp.Response, error) {
+
+func (a *BalanceAccountsApi) UpdateSweep(r UpdateSweepConfig) (SweepConfigurationV2, *_nethttp.Response, error) {
 	res := &SweepConfigurationV2{}
 	path := "/balanceAccounts/{balanceAccountId}/sweeps/{sweepId}"
-	path = strings.ReplaceAll(path, "{"+"balanceAccountId"+"}", *balanceAccountId)
-	path = strings.ReplaceAll(path, "{"+"sweepId"+"}", *sweepId)
-	httpRes, err := a.Client.MakeHTTPPatchRequest(req, res, a.BasePath()+path, ctxs...)
-	return *res, httpRes, err
-}
-
-/*
-Update a balance account
-Updates a balance account.
- * @param id The unique identifier of the balance account.
- * @param req BalanceAccountUpdateRequest - reference of BalanceAccountUpdateRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return BalanceAccount
-*/
-func (a BalanceAccountsApi) UpdateBalanceAccount(id *string, req *BalanceAccountUpdateRequest, ctxs ..._context.Context) (BalanceAccount, *_nethttp.Response, error) {
-	res := &BalanceAccount{}
-	path := "/balanceAccounts/{id}"
-	path = strings.ReplaceAll(path, "{"+"id"+"}", *id)
-	httpRes, err := a.Client.MakeHTTPPatchRequest(req, res, a.BasePath()+path, ctxs...)
-	return *res, httpRes, err
-}
-
-/*
-Create a balance account
-Creates a balance account that holds the funds of the associated account holder.
- * @param req BalanceAccountInfo - reference of BalanceAccountInfo).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return BalanceAccount
-*/
-func (a BalanceAccountsApi) CreateBalanceAccount(req *BalanceAccountInfo, ctxs ..._context.Context) (BalanceAccount, *_nethttp.Response, error) {
-	res := &BalanceAccount{}
-	path := "/balanceAccounts"
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
-	return *res, httpRes, err
-}
-
-/*
-Create a sweep
-Creates a sweep that results in moving funds from or to a balance account.  A sweep pulls in or pushes out funds based on a defined schedule, amount, currency, and a source or a destination.
- * @param balanceAccountId The unique identifier of the balance account.
- * @param req SweepConfigurationV2 - reference of SweepConfigurationV2).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return SweepConfigurationV2
-*/
-func (a BalanceAccountsApi) CreateSweep(balanceAccountId *string, req *SweepConfigurationV2, ctxs ..._context.Context) (SweepConfigurationV2, *_nethttp.Response, error) {
-	res := &SweepConfigurationV2{}
-	path := "/balanceAccounts/{balanceAccountId}/sweeps"
-	path = strings.ReplaceAll(path, "{"+"balanceAccountId"+"}", *balanceAccountId)
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
+	path = strings.Replace(path, "{"+"balanceAccountId"+"}", url.PathEscape(common.ParameterValueToString(r.balanceAccountId, "balanceAccountId")), -1)
+	path = strings.Replace(path, "{"+"sweepId"+"}", url.PathEscape(common.ParameterValueToString(r.sweepId, "sweepId")), -1)
+	httpRes, err := a.Client.MakeHTTPPatchRequest(r.sweepConfigurationV2, res, a.BasePath()+path, r.ctx)
 	return *res, httpRes, err
 }

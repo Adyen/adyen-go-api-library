@@ -9,8 +9,9 @@ API version: 2
 package balanceplatform
 
 import (
-	_context "context"
+	"context"
 	_nethttp "net/http"
+	"net/url"
 	"strings"
 
 	"github.com/adyen/adyen-go-api-library/v6/src/common"
@@ -19,34 +20,28 @@ import (
 // PaymentInstrumentGroupsApi PaymentInstrumentGroupsApi service
 type PaymentInstrumentGroupsApi common.Service
 
-/*
-Get a payment instrument group
-Returns the details of a payment instrument group.
- * @param id The unique identifier of the payment instrument group.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return PaymentInstrumentGroup
-*/
-func (a PaymentInstrumentGroupsApi) GetPaymentInstrumentGroup(id *string, ctxs ..._context.Context) (PaymentInstrumentGroup, *_nethttp.Response, error) {
-	res := &PaymentInstrumentGroup{}
-	path := "/paymentInstrumentGroups/{id}"
-	path = strings.ReplaceAll(path, "{"+"id"+"}", *id)
-	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path, ctxs...)
-	return *res, httpRes, err
+type CreatePaymentInstrumentGroupConfig struct {
+	ctx                        context.Context
+	paymentInstrumentGroupInfo *PaymentInstrumentGroupInfo
+}
+
+func (r CreatePaymentInstrumentGroupConfig) PaymentInstrumentGroupInfo(paymentInstrumentGroupInfo PaymentInstrumentGroupInfo) CreatePaymentInstrumentGroupConfig {
+	r.paymentInstrumentGroupInfo = &paymentInstrumentGroupInfo
+	return r
 }
 
 /*
-Get all transaction rules for a payment instrument group
-Returns a list of all the transaction rules associated with a payment instrument group.
- * @param id The unique identifier of the payment instrument group.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return TransactionRulesResponse
+CreatePaymentInstrumentGroup Create a payment instrument group
+
+Creates a payment instrument group to associate and group payment instrument resources together. You can apply a transaction rule to a payment instrument group.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return CreatePaymentInstrumentGroupConfig
 */
-func (a PaymentInstrumentGroupsApi) GetAllTransactionRulesForPaymentInstrumentGroup(id *string, ctxs ..._context.Context) (TransactionRulesResponse, *_nethttp.Response, error) {
-	res := &TransactionRulesResponse{}
-	path := "/paymentInstrumentGroups/{id}/transactionRules"
-	path = strings.ReplaceAll(path, "{"+"id"+"}", *id)
-	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path, ctxs...)
-	return *res, httpRes, err
+func (a *PaymentInstrumentGroupsApi) CreatePaymentInstrumentGroupConfig(ctx context.Context) CreatePaymentInstrumentGroupConfig {
+	return CreatePaymentInstrumentGroupConfig{
+		ctx: ctx,
+	}
 }
 
 /*
@@ -56,9 +51,84 @@ Creates a payment instrument group to associate and group payment instrument res
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return PaymentInstrumentGroup
 */
-func (a PaymentInstrumentGroupsApi) CreatePaymentInstrumentGroup(req *PaymentInstrumentGroupInfo, ctxs ..._context.Context) (PaymentInstrumentGroup, *_nethttp.Response, error) {
+
+func (a *PaymentInstrumentGroupsApi) CreatePaymentInstrumentGroup(r CreatePaymentInstrumentGroupConfig) (PaymentInstrumentGroup, *_nethttp.Response, error) {
 	res := &PaymentInstrumentGroup{}
 	path := "/paymentInstrumentGroups"
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
+	httpRes, err := a.Client.MakeHTTPPostRequest(r.paymentInstrumentGroupInfo, res, a.BasePath()+path, r.ctx)
+	return *res, httpRes, err
+}
+
+type GetAllTransactionRulesForPaymentInstrumentGroupConfig struct {
+	ctx context.Context
+	id  string
+}
+
+/*
+GetAllTransactionRulesForPaymentInstrumentGroup Get all transaction rules for a payment instrument group
+
+Returns a list of all the transaction rules associated with a payment instrument group.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier of the payment instrument group.
+ @return GetAllTransactionRulesForPaymentInstrumentGroupConfig
+*/
+func (a *PaymentInstrumentGroupsApi) GetAllTransactionRulesForPaymentInstrumentGroupConfig(ctx context.Context, id string) GetAllTransactionRulesForPaymentInstrumentGroupConfig {
+	return GetAllTransactionRulesForPaymentInstrumentGroupConfig{
+		ctx: ctx,
+		id:  id,
+	}
+}
+
+/*
+Get all transaction rules for a payment instrument group
+Returns a list of all the transaction rules associated with a payment instrument group.
+ * @param id The unique identifier of the payment instrument group.
+ * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return TransactionRulesResponse
+*/
+
+func (a *PaymentInstrumentGroupsApi) GetAllTransactionRulesForPaymentInstrumentGroup(r GetAllTransactionRulesForPaymentInstrumentGroupConfig) (TransactionRulesResponse, *_nethttp.Response, error) {
+	res := &TransactionRulesResponse{}
+	path := "/paymentInstrumentGroups/{id}/transactionRules"
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path, r.ctx)
+	return *res, httpRes, err
+}
+
+type GetPaymentInstrumentGroupConfig struct {
+	ctx context.Context
+	id  string
+}
+
+/*
+GetPaymentInstrumentGroup Get a payment instrument group
+
+Returns the details of a payment instrument group.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier of the payment instrument group.
+ @return GetPaymentInstrumentGroupConfig
+*/
+func (a *PaymentInstrumentGroupsApi) GetPaymentInstrumentGroupConfig(ctx context.Context, id string) GetPaymentInstrumentGroupConfig {
+	return GetPaymentInstrumentGroupConfig{
+		ctx: ctx,
+		id:  id,
+	}
+}
+
+/*
+Get a payment instrument group
+Returns the details of a payment instrument group.
+ * @param id The unique identifier of the payment instrument group.
+ * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return PaymentInstrumentGroup
+*/
+
+func (a *PaymentInstrumentGroupsApi) GetPaymentInstrumentGroup(r GetPaymentInstrumentGroupConfig) (PaymentInstrumentGroup, *_nethttp.Response, error) {
+	res := &PaymentInstrumentGroup{}
+	path := "/paymentInstrumentGroups/{id}"
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path, r.ctx)
 	return *res, httpRes, err
 }

@@ -57,10 +57,14 @@ $(services): schema $(openapi-generator-jar) $(goimports)
 		--additional-properties=serviceName=$(serviceName)
 	rm -rf $(output)/$(@)/go.{mod,sum}
 
-# Checkout spec (and patch version)
+# Clone OpenAPI spec (and apply local patches)
 schema:
 	git clone https://github.com/Adyen/adyen-openapi.git schema
 	perl -i -pe 's/"openapi" : "3.[0-9].[0-9]"/"openapi" : "3.0.0"/' schema/json/*.json
+	for json in schema/json/*.json; do \
+		jq -e 'if has("paths") then .paths[][] |= (.operationId = ."x-methodName") else . end' $$json > "$${json}.tmp"; \
+		mv "$${json}.tmp" $$json; \
+  	done
 
 # Extract templates (copy them for modifications)
 templates: $(openapi-generator-jar)

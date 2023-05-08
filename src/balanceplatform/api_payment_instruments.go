@@ -9,8 +9,9 @@ API version: 2
 package balanceplatform
 
 import (
-	_context "context"
+	"context"
 	_nethttp "net/http"
+	"net/url"
 	"strings"
 
 	"github.com/adyen/adyen-go-api-library/v6/src/common"
@@ -19,34 +20,66 @@ import (
 // PaymentInstrumentsApi PaymentInstrumentsApi service
 type PaymentInstrumentsApi common.Service
 
-/*
-Get a payment instrument
-Returns the details of a payment instrument.
- * @param id The unique identifier of the payment instrument.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return PaymentInstrument
-*/
-func (a PaymentInstrumentsApi) GetPaymentInstrument(id *string, ctxs ..._context.Context) (PaymentInstrument, *_nethttp.Response, error) {
-	res := &PaymentInstrument{}
-	path := "/paymentInstruments/{id}"
-	path = strings.ReplaceAll(path, "{"+"id"+"}", *id)
-	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path, ctxs...)
-	return *res, httpRes, err
+type CreatePaymentInstrumentConfig struct {
+	ctx                   context.Context
+	paymentInstrumentInfo *PaymentInstrumentInfo
+}
+
+func (r CreatePaymentInstrumentConfig) PaymentInstrumentInfo(paymentInstrumentInfo PaymentInstrumentInfo) CreatePaymentInstrumentConfig {
+	r.paymentInstrumentInfo = &paymentInstrumentInfo
+	return r
 }
 
 /*
-Get the PAN of a payment instrument
-Returns the primary account number (PAN) of a payment instrument.  To make this request, your API credential must have the following [role](https://docs.adyen.com/issuing/manage-access/api-credentials-web-service#api-permissions):  * Balance Platform BCL PCI role
- * @param id The unique identifier of the payment instrument.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return PaymentInstrumentRevealInfo
+CreatePaymentInstrument Create a payment instrument
+
+Creates a payment instrument to issue a physical card, a virtual card, or a business account to your user.
+
+ For more information, refer to [Issue cards](https://docs.adyen.com/issuing/create-cards) or [Issue business accounts](https://docs.adyen.com/marketplaces-and-platforms/business-accounts).
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return CreatePaymentInstrumentConfig
 */
-func (a PaymentInstrumentsApi) GetPanOfPaymentInstrument(id *string, ctxs ..._context.Context) (PaymentInstrumentRevealInfo, *_nethttp.Response, error) {
-	res := &PaymentInstrumentRevealInfo{}
-	path := "/paymentInstruments/{id}/reveal"
-	path = strings.ReplaceAll(path, "{"+"id"+"}", *id)
-	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path, ctxs...)
+func (a *PaymentInstrumentsApi) CreatePaymentInstrumentConfig(ctx context.Context) CreatePaymentInstrumentConfig {
+	return CreatePaymentInstrumentConfig{
+		ctx: ctx,
+	}
+}
+
+/*
+Create a payment instrument
+Creates a payment instrument to issue a physical card, a virtual card, or a business account to your user.   For more information, refer to [Issue cards](https://docs.adyen.com/issuing/create-cards) or [Issue business accounts](https://docs.adyen.com/marketplaces-and-platforms/business-accounts).
+ * @param req PaymentInstrumentInfo - reference of PaymentInstrumentInfo).
+ * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return PaymentInstrument
+*/
+
+func (a *PaymentInstrumentsApi) CreatePaymentInstrument(r CreatePaymentInstrumentConfig) (PaymentInstrument, *_nethttp.Response, error) {
+	res := &PaymentInstrument{}
+	path := "/paymentInstruments"
+	httpRes, err := a.Client.MakeHTTPPostRequest(r.paymentInstrumentInfo, res, a.BasePath()+path, r.ctx)
 	return *res, httpRes, err
+}
+
+type GetAllTransactionRulesForPaymentInstrumentConfig struct {
+	ctx context.Context
+	id  string
+}
+
+/*
+GetAllTransactionRulesForPaymentInstrument Get all transaction rules for a payment instrument
+
+Returns a list of transaction rules associated with a payment instrument.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier of the payment instrument.
+ @return GetAllTransactionRulesForPaymentInstrumentConfig
+*/
+func (a *PaymentInstrumentsApi) GetAllTransactionRulesForPaymentInstrumentConfig(ctx context.Context, id string) GetAllTransactionRulesForPaymentInstrumentConfig {
+	return GetAllTransactionRulesForPaymentInstrumentConfig{
+		ctx: ctx,
+		id:  id,
+	}
 }
 
 /*
@@ -56,12 +89,118 @@ Returns a list of transaction rules associated with a payment instrument.
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return TransactionRulesResponse
 */
-func (a PaymentInstrumentsApi) GetAllTransactionRulesForPaymentInstrument(id *string, ctxs ..._context.Context) (TransactionRulesResponse, *_nethttp.Response, error) {
+
+func (a *PaymentInstrumentsApi) GetAllTransactionRulesForPaymentInstrument(r GetAllTransactionRulesForPaymentInstrumentConfig) (TransactionRulesResponse, *_nethttp.Response, error) {
 	res := &TransactionRulesResponse{}
 	path := "/paymentInstruments/{id}/transactionRules"
-	path = strings.ReplaceAll(path, "{"+"id"+"}", *id)
-	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path, ctxs...)
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path, r.ctx)
 	return *res, httpRes, err
+}
+
+type GetPanOfPaymentInstrumentConfig struct {
+	ctx context.Context
+	id  string
+}
+
+/*
+GetPanOfPaymentInstrument Get the PAN of a payment instrument
+
+Returns the primary account number (PAN) of a payment instrument.
+
+To make this request, your API credential must have the following [role](https://docs.adyen.com/issuing/manage-access/api-credentials-web-service#api-permissions):
+
+* Balance Platform BCL PCI role
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier of the payment instrument.
+ @return GetPanOfPaymentInstrumentConfig
+*/
+func (a *PaymentInstrumentsApi) GetPanOfPaymentInstrumentConfig(ctx context.Context, id string) GetPanOfPaymentInstrumentConfig {
+	return GetPanOfPaymentInstrumentConfig{
+		ctx: ctx,
+		id:  id,
+	}
+}
+
+/*
+Get the PAN of a payment instrument
+Returns the primary account number (PAN) of a payment instrument.  To make this request, your API credential must have the following [role](https://docs.adyen.com/issuing/manage-access/api-credentials-web-service#api-permissions):  * Balance Platform BCL PCI role
+ * @param id The unique identifier of the payment instrument.
+ * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return PaymentInstrumentRevealInfo
+*/
+
+func (a *PaymentInstrumentsApi) GetPanOfPaymentInstrument(r GetPanOfPaymentInstrumentConfig) (PaymentInstrumentRevealInfo, *_nethttp.Response, error) {
+	res := &PaymentInstrumentRevealInfo{}
+	path := "/paymentInstruments/{id}/reveal"
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path, r.ctx)
+	return *res, httpRes, err
+}
+
+type GetPaymentInstrumentConfig struct {
+	ctx context.Context
+	id  string
+}
+
+/*
+GetPaymentInstrument Get a payment instrument
+
+Returns the details of a payment instrument.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier of the payment instrument.
+ @return GetPaymentInstrumentConfig
+*/
+func (a *PaymentInstrumentsApi) GetPaymentInstrumentConfig(ctx context.Context, id string) GetPaymentInstrumentConfig {
+	return GetPaymentInstrumentConfig{
+		ctx: ctx,
+		id:  id,
+	}
+}
+
+/*
+Get a payment instrument
+Returns the details of a payment instrument.
+ * @param id The unique identifier of the payment instrument.
+ * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return PaymentInstrument
+*/
+
+func (a *PaymentInstrumentsApi) GetPaymentInstrument(r GetPaymentInstrumentConfig) (PaymentInstrument, *_nethttp.Response, error) {
+	res := &PaymentInstrument{}
+	path := "/paymentInstruments/{id}"
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path, r.ctx)
+	return *res, httpRes, err
+}
+
+type UpdatePaymentInstrumentConfig struct {
+	ctx                            context.Context
+	id                             string
+	paymentInstrumentUpdateRequest *PaymentInstrumentUpdateRequest
+}
+
+func (r UpdatePaymentInstrumentConfig) PaymentInstrumentUpdateRequest(paymentInstrumentUpdateRequest PaymentInstrumentUpdateRequest) UpdatePaymentInstrumentConfig {
+	r.paymentInstrumentUpdateRequest = &paymentInstrumentUpdateRequest
+	return r
+}
+
+/*
+UpdatePaymentInstrument Update a payment instrument
+
+Updates a payment instrument. Once a payment instrument is already active, you can only update its status. However, for cards created with **inactive** status, you can still update the balance account associated with the card.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier of the payment instrument.
+ @return UpdatePaymentInstrumentConfig
+*/
+func (a *PaymentInstrumentsApi) UpdatePaymentInstrumentConfig(ctx context.Context, id string) UpdatePaymentInstrumentConfig {
+	return UpdatePaymentInstrumentConfig{
+		ctx: ctx,
+		id:  id,
+	}
 }
 
 /*
@@ -72,24 +211,11 @@ Updates a payment instrument. Once a payment instrument is already active, you c
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return UpdatePaymentInstrument
 */
-func (a PaymentInstrumentsApi) UpdatePaymentInstrument(id *string, req *PaymentInstrumentUpdateRequest, ctxs ..._context.Context) (UpdatePaymentInstrument, *_nethttp.Response, error) {
+
+func (a *PaymentInstrumentsApi) UpdatePaymentInstrument(r UpdatePaymentInstrumentConfig) (UpdatePaymentInstrument, *_nethttp.Response, error) {
 	res := &UpdatePaymentInstrument{}
 	path := "/paymentInstruments/{id}"
-	path = strings.ReplaceAll(path, "{"+"id"+"}", *id)
-	httpRes, err := a.Client.MakeHTTPPatchRequest(req, res, a.BasePath()+path, ctxs...)
-	return *res, httpRes, err
-}
-
-/*
-Create a payment instrument
-Creates a payment instrument to issue a physical card, a virtual card, or a business account to your user.   For more information, refer to [Issue cards](https://docs.adyen.com/issuing/create-cards) or [Issue business accounts](https://docs.adyen.com/marketplaces-and-platforms/business-accounts).
- * @param req PaymentInstrumentInfo - reference of PaymentInstrumentInfo).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return PaymentInstrument
-*/
-func (a PaymentInstrumentsApi) CreatePaymentInstrument(req *PaymentInstrumentInfo, ctxs ..._context.Context) (PaymentInstrument, *_nethttp.Response, error) {
-	res := &PaymentInstrument{}
-	path := "/paymentInstruments"
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	httpRes, err := a.Client.MakeHTTPPatchRequest(r.paymentInstrumentUpdateRequest, res, a.BasePath()+path, r.ctx)
 	return *res, httpRes, err
 }

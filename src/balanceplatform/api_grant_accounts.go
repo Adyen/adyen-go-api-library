@@ -9,8 +9,9 @@ API version: 2
 package balanceplatform
 
 import (
-	_context "context"
+	"context"
 	_nethttp "net/http"
+	"net/url"
 	"strings"
 
 	"github.com/adyen/adyen-go-api-library/v6/src/common"
@@ -19,6 +20,27 @@ import (
 // GrantAccountsApi GrantAccountsApi service
 type GrantAccountsApi common.Service
 
+type GetGrantAccountConfig struct {
+	ctx context.Context
+	id  string
+}
+
+/*
+GetGrantAccount Get a grant account
+
+Returns the details of the [grant account](https://docs.adyen.com/marketplaces-and-platforms/capital#grant-account).
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier of the grant account.
+ @return GetGrantAccountConfig
+*/
+func (a *GrantAccountsApi) GetGrantAccountConfig(ctx context.Context, id string) GetGrantAccountConfig {
+	return GetGrantAccountConfig{
+		ctx: ctx,
+		id:  id,
+	}
+}
+
 /*
 Get a grant account
 Returns the details of the [grant account](https://docs.adyen.com/marketplaces-and-platforms/capital#grant-account).
@@ -26,10 +48,11 @@ Returns the details of the [grant account](https://docs.adyen.com/marketplaces-a
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return CapitalGrantAccount
 */
-func (a GrantAccountsApi) GetGrantAccount(id *string, ctxs ..._context.Context) (CapitalGrantAccount, *_nethttp.Response, error) {
+
+func (a *GrantAccountsApi) GetGrantAccount(r GetGrantAccountConfig) (CapitalGrantAccount, *_nethttp.Response, error) {
 	res := &CapitalGrantAccount{}
 	path := "/grantAccounts/{id}"
-	path = strings.ReplaceAll(path, "{"+"id"+"}", *id)
-	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path, ctxs...)
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path, r.ctx)
 	return *res, httpRes, err
 }
