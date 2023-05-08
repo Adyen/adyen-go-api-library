@@ -47,7 +47,7 @@ $(services): schema $(openapi-generator-jar) $(goimports)
 		-o $(output)/$(@) \
 		-p packageName=$(@) \
 		--global-property apis,models \
-		--global-property supportingFiles=api_index.go \
+		--global-property supportingFiles=client.go \
 		--global-property apiTests=false \
 		--global-property apiDocs=false \
 		--global-property modelDocs=true \
