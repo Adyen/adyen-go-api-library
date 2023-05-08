@@ -1,12 +1,7 @@
-/*
- * Adyen API Client
- *
- * Contact: support@adyen.com
- */
-
 package adyen
 
 import (
+	"context"
 	"os"
 	"strings"
 	"testing"
@@ -32,7 +27,7 @@ func Test_api(t *testing.T) {
 		require.NotNil(t, client.client.Cfg)
 		require.NotNil(t, client.client.Cfg.HTTPClient)
 		require.NotNil(t, client.Checkout)
-		assert.Equal(t, "https://checkout-test.adyen.com/checkout/"+ CheckoutAPIVersion, client.Checkout.BasePath())
+		assert.Equal(t, "https://checkout-test.adyen.com/checkout/"+CheckoutAPIVersion, client.Checkout.BasePath())
 
 		t.Run("Create a API request that should fail", func(t *testing.T) {
 			res, httpRes, err := client.Checkout.PaymentMethods(&checkout.PaymentMethodsRequest{})
@@ -77,13 +72,16 @@ func Test_api(t *testing.T) {
 		})
 
 		t.Run("Create a API request that uses basic auth and should pass", func(t *testing.T) {
-			res, httpRes, err := client.Recurring.ListRecurringDetails(&recurring.RecurringDetailsRequest{
+			body := recurring.RecurringDetailsRequest{
 				MerchantAccount: MerchantAccount,
-				Recurring: &recurring.RecurringType{
-					Contract: "RECURRING",
+				Recurring: &recurring.Recurring{
+					Contract: common.PtrString("RECURRING"),
 				},
 				ShopperReference: time.Now().String(),
-			})
+			}
+			req := client.Recurring.ListRecurringDetailsConfig(context.Background()).RecurringDetailsRequest(body)
+
+			res, httpRes, err := client.Recurring.ListRecurringDetails(req)
 
 			require.Nil(t, err)
 			require.NotNil(t, res)
