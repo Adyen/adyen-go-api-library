@@ -1,0 +1,30 @@
+{
+  "aggregationLevel": "paymentInstrument",
+  "description": "Up to 1000 EUR per card for the last 12 hours",
+  "entityKey": {
+    "entityReference": "PG3227C223222C5GXR3M5592Q",
+    "entityType": "paymentInstrumentGroup"
+  },
+  "interval": {
+    "duration": {
+      "unit": "hours",
+      "value": 12
+    },
+    "timeZone": "UTC",
+    "type": "sliding"
+  },
+  "outcomeType": "hardBlock",
+  "reference": "myRule12345",
+  "requestType": "authorization",
+  "ruleRestrictions": {
+    "totalAmount": {
+      "operation": "greaterThan",
+      "value": {
+        "currency": "EUR",
+        "value": 100000
+      }
+    }
+  },
+  "type": "velocity",
+  "id": "TR3227C223222C5GXT3DD5VCF"
+}

@@ -72,6 +72,7 @@ type Config struct {
 	ConnectionTimeoutMillis time.Duration `json:"connectionTimeoutMillis,omitempty"`
 	CertificatePath         string        `json:"certificatePath,omitempty"`
 	DisputesEndpoint        string        `json:"disputesEndpoint,omitempty"`
+	BalancePlatformEndpoint string        `json:"balancePlatformEndpoint,omitempty"`
 
 	//Checkout Specific
 	CheckoutEndpoint string `json:"checkoutEndpoint,omitempty"`

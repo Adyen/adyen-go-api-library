@@ -224,6 +224,8 @@ func Test_Platforms(t *testing.T) {
 			assert.NotNil(t, res.PspReference)
 		})
 		t.Run("Unsuspend account holder", func(t *testing.T) {
+			t.Skip("Integration test")
+
 			accountHolderCode := uuid.New().String()
 			createAccountHolder(accountHolderCode)
 

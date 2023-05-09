@@ -1,0 +1,7 @@
+{
+  "type": "https://docs.adyen.com/errors/not-found",
+  "title": "Entity was not found",
+  "status": 422,
+  "detail": "Payment instrument not found",
+  "errorCode": "30_112"
+}

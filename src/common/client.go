@@ -123,7 +123,7 @@ func (c *Client) MakeHTTPGetRequest(res interface{}, path string, ctxs ...contex
 // MakeHTTPDeleteRequest is a generic method used to make HTTP DELETE requests
 func (c *Client) MakeHTTPDeleteRequest(res interface{}, path string, ctxs ...context.Context) (*http.Response, error) {
 	var req interface{}
-	return CreateHTTPRequest(c, http.MethodGet, req, res, path, ctxs)
+	return CreateHTTPRequest(c, http.MethodDelete, req, res, path, ctxs)
 }
 
 // MakeHTTPPatchRequest is a generic method used to make HTTP PATCH requests
@@ -367,6 +367,107 @@ func parameterToString(obj interface{}, collectionFormat string) string {
 	}
 
 	return fmt.Sprintf("%v", obj)
+}
+
+func ParameterValueToString(obj interface{}, key string) string {
+	if reflect.TypeOf(obj).Kind() != reflect.Ptr {
+		return fmt.Sprintf("%v", obj)
+	}
+	var param, ok = obj.(MappedNullable)
+	if !ok {
+		return ""
+	}
+	dataMap, err := param.ToMap()
+	if err != nil {
+		return ""
+	}
+	return fmt.Sprintf("%v", dataMap[key])
+}
+
+// ParameterAddToQuery adds the provided object to the url query supporting deep object syntax
+func ParameterAddToQuery(queryParams interface{}, keyPrefix string, obj interface{}, collectionType string) {
+	var v = reflect.ValueOf(obj)
+	var value = ""
+	if v == reflect.ValueOf(nil) {
+		value = "null"
+	} else {
+		switch v.Kind() {
+		case reflect.Invalid:
+			value = "invalid"
+
+		case reflect.Struct:
+			if t, ok := obj.(MappedNullable); ok {
+				dataMap, err := t.ToMap()
+				if err != nil {
+					return
+				}
+				ParameterAddToQuery(queryParams, keyPrefix, dataMap, collectionType)
+				return
+			}
+			if t, ok := obj.(time.Time); ok {
+				ParameterAddToQuery(queryParams, keyPrefix, t.Format(time.RFC3339), collectionType)
+				return
+			}
+			value = v.Type().String() + " value"
+		case reflect.Slice:
+			var indValue = reflect.ValueOf(obj)
+			if indValue == reflect.ValueOf(nil) {
+				return
+			}
+			var lenIndValue = indValue.Len()
+			for i := 0; i < lenIndValue; i++ {
+				var arrayValue = indValue.Index(i)
+				ParameterAddToQuery(queryParams, keyPrefix, arrayValue.Interface(), collectionType)
+			}
+			return
+
+		case reflect.Map:
+			var indValue = reflect.ValueOf(obj)
+			if indValue == reflect.ValueOf(nil) {
+				return
+			}
+			iter := indValue.MapRange()
+			for iter.Next() {
+				k, v := iter.Key(), iter.Value()
+				ParameterAddToQuery(queryParams, fmt.Sprintf("%s[%s]", keyPrefix, k.String()), v.Interface(), collectionType)
+			}
+			return
+
+		case reflect.Interface:
+			fallthrough
+		case reflect.Ptr:
+			ParameterAddToQuery(queryParams, keyPrefix, v.Elem().Interface(), collectionType)
+			return
+
+		case reflect.Int, reflect.Int8, reflect.Int16,
+			reflect.Int32, reflect.Int64:
+			value = strconv.FormatInt(v.Int(), 10)
+		case reflect.Uint, reflect.Uint8, reflect.Uint16,
+			reflect.Uint32, reflect.Uint64, reflect.Uintptr:
+			value = strconv.FormatUint(v.Uint(), 10)
+		case reflect.Float32, reflect.Float64:
+			value = strconv.FormatFloat(v.Float(), 'g', -1, 32)
+		case reflect.Bool:
+			value = strconv.FormatBool(v.Bool())
+		case reflect.String:
+			value = v.String()
+		default:
+			value = v.Type().String() + " value"
+		}
+	}
+
+	switch valuesMap := queryParams.(type) {
+	case url.Values:
+		if collectionType == "csv" && valuesMap.Get(keyPrefix) != "" {
+			valuesMap.Set(keyPrefix, valuesMap.Get(keyPrefix)+","+value)
+		} else {
+			valuesMap.Add(keyPrefix, value)
+		}
+		break
+	case map[string]string:
+		valuesMap[keyPrefix] = value
+		break
+	}
 }
 
 // parameterToJson is helper for converting interface{} parameters to json strings

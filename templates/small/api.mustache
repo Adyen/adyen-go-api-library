@@ -8,9 +8,59 @@ import (
 	_context "context"
     _nethttp "net/http"
     "strings"
+    "github.com/adyen/adyen-go-api-library/v6/src/common"
 )
 
+// {{classname}} {{classname}} service
+type {{classname}} common.Service
 {{#operation}}
+
+type {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config struct {
+	ctx context.Context
+{{#allParams}}
+	{{paramName}} {{^isPathParam}}{{^isFile}}*{{/isFile}}{{/isPathParam}}{{{dataType}}}
+{{/allParams}}
+}
+
+{{#allParams}}
+{{^isPathParam}}
+{{#description}}
+// {{.}}
+{{/description}}
+{{#isDeprecated}}
+// Deprecated
+{{/isDeprecated}}
+func (r {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config) {{vendorExtensions.x-export-param-name}}({{paramName}} {{{dataType}}}) {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config {
+	r.{{paramName}} = {{^isFile}}&{{/isFile}}{{paramName}}
+	return r
+}
+
+{{/isPathParam}}
+{{/allParams}}
+
+/*
+{{operationId}} {{{summary}}}{{^summary}}Method for {{operationId}}{{/summary}}
+{{#notes}}
+
+{{{unescapedNotes}}}
+{{/notes}}
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().{{#pathParams}}
+ @param {{paramName}}{{#description}} {{{.}}}{{/description}}{{/pathParams}}
+ @return {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config
+{{#isDeprecated}}
+
+Deprecated
+{{/isDeprecated}}
+*/
+func (a *{{{classname}}}) {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config(ctx context.Context{{#pathParams}}, {{paramName}} {{{dataType}}}{{/pathParams}}) {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config {
+	return {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config{
+		ctx: ctx,
+		{{#pathParams}}
+		{{paramName}}: {{paramName}},
+		{{/pathParams}}
+	}
+}
 
 /*
 {{#summary}}{{{.}}}{{/summary}}{{^summary}} Method for {{operationId}}{{/summary}}
@@ -44,30 +94,27 @@ import (
 @return {{{returnType}}}
 {{/returnType}}
 */
-{{#hasBodyParam}}
-{{! implementation when body param is provided (POST, PATCH, etc..)}}
-func (a {{{serviceName}}}) {{#lambda.titlecase}}{{vendorExtensions.x-methodName}}{{/lambda.titlecase}}({{#pathParams}}{{paramName}} *{{{dataType}}}{{^last}}, {{/last}}{{/pathParams}}{{#bodyParams}}req *{{{dataType}}}{{^last}}, {{/last}}{{/bodyParams}}ctxs ..._context.Context) ({{#returnType}}{{{returnType}}}, {{/returnType}}*_nethttp.Response, error) {
+
+func (a *{{{classname}}}) {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}(r {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config) ({{#returnType}}{{{returnType}}}, {{/returnType}}*_nethttp.Response, error) {
+    {{#returnType}}
     res := &{{{returnType}}}{}
-	path := "{{{path}}}"
-	{{#pathParams}}
-	path = strings.ReplaceAll(path, "{" + "{{baseName}}" + "}", *{{paramName}})
-	{{/pathParams}}
-    httpRes, err := a.Client.MakeHTTP{{httpMethod}}Request(req, res, a.BasePath() + path, ctxs...)
-    return *res, httpRes, err
+    {{/returnType}}
+    {{^returnType}}
+    var res interface{}
+    {{/returnType}}
+	path := "{{{path}}}"{{#pathParams}}
+    path = strings.Replace(path, "{"+"{{baseName}}"+"}", url.PathEscape(common.ParameterValueToString(r.{{paramName}}, "{{paramName}}")), -1){{/pathParams}}
+{{#hasQueryParams}}
+    queryString := url.Values{}
+{{#queryParams}}
+    if r.{{paramName}} != nil {
+        common.ParameterAddToQuery(queryString, "{{baseName}}", r.{{paramName}}, "")
+    }
+{{/queryParams}}
+{{/hasQueryParams}}
+    httpRes, err := a.Client.MakeHTTP{{httpMethod}}Request({{#bodyParams}}r.{{paramName}}, {{/bodyParams}}res, a.BasePath() + path{{#hasQueryParams}} + "?" + queryString.Encode(){{/hasQueryParams}}, r.ctx)
+    return {{#returnType}}*res, {{/returnType}}httpRes, err
 }
-{{/hasBodyParam}}
-{{^hasBodyParam}}
-{{! implementation when body param is NOT provided (GET method) }}
-func (a {{{serviceName}}}) {{#lambda.titlecase}}{{vendorExtensions.x-methodName}}{{/lambda.titlecase}}({{#pathParams}}{{paramName}} *{{{dataType}}}{{^last}}, {{/last}}{{/pathParams}}ctxs ..._context.Context) ({{#returnType}}{{{returnType}}}, {{/returnType}}*_nethttp.Response, error) {
-    res := &{{{returnType}}}{}
-	path := "{{{path}}}"
-	{{#pathParams}}
-	path = strings.ReplaceAll(path, "{" + "{{baseName}}" + "}", *{{paramName}})
-	{{/pathParams}}
-    httpRes, err := a.Client.MakeHTTP{{httpMethod}}Request(res, a.BasePath() + path, ctxs...)
-    return *res, httpRes, err
-}
-{{/hasBodyParam}}
 
 {{/operation}}
 {{/operations}}
