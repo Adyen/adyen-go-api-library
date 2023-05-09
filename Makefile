@@ -21,7 +21,7 @@ openapi-generator-cli:=java -jar $(openapi-generator-jar)
 goimports:=$(GOPATH)/bin/goimports
 
 generator:=go
-services:=binLookup checkout legalentity payments payout storedvalue balanceplatform recurring
+services:=binlookup checkout legalentity payments payout storedvalue balanceplatform recurring
 output:=src
 templates:=templates/small
 
@@ -83,8 +83,8 @@ $(goimports):
 
 # Discard generated artifacts and changed models
 clean:
-	git checkout src/checkout
-	git clean -f -d src/checkout
+	git checkout src
+	git clean -f -d src
 
 
 .PHONY: templates models $(services)
