@@ -9,6 +9,7 @@ package adyen
 import (
 	"fmt"
 	"github.com/adyen/adyen-go-api-library/v6/src/balanceplatform"
+	"github.com/adyen/adyen-go-api-library/v6/src/recurring"
 	"net/http"
 
 	binlookup "github.com/adyen/adyen-go-api-library/v6/src/binlookup"
@@ -22,7 +23,6 @@ import (
 	"github.com/adyen/adyen-go-api-library/v6/src/platformsfund"
 	"github.com/adyen/adyen-go-api-library/v6/src/platformshostedonboardingpage"
 	"github.com/adyen/adyen-go-api-library/v6/src/platformsnotificationconfiguration"
-	"github.com/adyen/adyen-go-api-library/v6/src/recurring"
 	"github.com/adyen/adyen-go-api-library/v6/src/storedvalue"
 )
 
@@ -51,7 +51,7 @@ const (
 	MarketpayNotificationAPIVersion = "v6"
 	MarketpayHopAPIVersion          = "v6"
 	PaymentAPIVersion               = "v64"
-	RecurringAPIVersion             = "v49"
+	RecurringAPIVersion             = "v68"
 	CheckoutAPIVersion              = "v70"
 	BinLookupAPIVersion             = "v50"
 	EndpointProtocol                = "https://"
@@ -68,7 +68,7 @@ type APIClient struct {
 	Checkout                           *checkout.Checkout
 	Payments                           *payments.Payments
 	Payout                             *payout.Payouts
-	Recurring                          *recurring.Recurring
+	Recurring                          *recurring.GeneralApi
 	BinLookup                          *binlookup.BinLookup
 	Notification                       *notification.NotificationService
 	PlatformsAccount                   *platformsaccount.PlatformsAccount
@@ -181,7 +181,7 @@ func NewClient(cfg *common.Config) *APIClient {
 		},
 	}
 
-	c.Recurring = &recurring.Recurring{
+	c.Recurring = &recurring.GeneralApi{
 		Client: c.client,
 		BasePath: func() string {
 			return fmt.Sprintf("%s/pal/servlet/Recurring/%s", c.client.Cfg.Endpoint, RecurringAPIVersion)

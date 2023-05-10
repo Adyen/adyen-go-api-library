@@ -21,7 +21,7 @@ openapi-generator-cli:=java -jar $(openapi-generator-jar)
 goimports:=$(GOPATH)/bin/goimports
 
 generator:=go
-services:=binLookup checkout legalentity payments payout storedvalue balanceplatform
+services:=binlookup checkout legalentity payments payout storedvalue balanceplatform recurring
 output:=src
 templates:=templates/small
 
@@ -37,6 +37,7 @@ storedvalue: spec=StoredValueService-v46
 storedvalue: serviceName=StoredValue
 balanceplatform: spec=BalancePlatformService-v2
 balanceplatform: serviceName=BalancePlatform
+recurring: spec=RecurringService-v68
 
 # Generate a full client (models and service classes)
 $(services): schema $(openapi-generator-jar) $(goimports)
@@ -82,8 +83,8 @@ $(goimports):
 
 # Discard generated artifacts and changed models
 clean:
-	git checkout src/checkout
-	git clean -f -d src/checkout
+	git checkout src
+	git clean -f -d src
 
 
 .PHONY: templates models $(services)
