@@ -9,6 +9,7 @@ package adyen
 import (
 	"fmt"
 	"github.com/adyen/adyen-go-api-library/v6/src/balanceplatform"
+	"github.com/adyen/adyen-go-api-library/v6/src/management"
 	"github.com/adyen/adyen-go-api-library/v6/src/recurring"
 	"net/http"
 
@@ -78,6 +79,7 @@ type APIClient struct {
 	Disputes                           *disputes.Disputes
 	StoredValue                        *storedvalue.StoredValue
 	BalancePlatform                    *balanceplatform.APIClient
+	Management                         *management.APIClient
 }
 
 // NewClient creates a new API client. Requires Config object.
@@ -238,6 +240,7 @@ func NewClient(cfg *common.Config) *APIClient {
 	}
 
 	c.BalancePlatform = balanceplatform.NewAPIClient(c.client)
+	c.Management = management.NewAPIClient(c.client)
 
 	return c
 }

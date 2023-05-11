@@ -21,7 +21,7 @@ openapi-generator-cli:=java -jar $(openapi-generator-jar)
 goimports:=$(GOPATH)/bin/goimports
 
 generator:=go
-services:=binlookup checkout legalentity payments payout storedvalue balanceplatform recurring
+services:=binlookup checkout legalentity payments payout storedvalue balanceplatform recurring management
 output:=src
 templates:=templates/small
 
@@ -38,6 +38,7 @@ storedvalue: serviceName=StoredValue
 balanceplatform: spec=BalancePlatformService-v2
 balanceplatform: serviceName=BalancePlatform
 recurring: spec=RecurringService-v68
+management: spec=ManagementService-v1
 
 # Generate a full client (models and service classes)
 $(services): schema $(openapi-generator-jar) $(goimports)
@@ -47,12 +48,13 @@ $(services): schema $(openapi-generator-jar) $(goimports)
 		-t $(templates) \
 		-o $(output)/$(@) \
 		-p packageName=$(@) \
+		-c ./templates/config.yaml \
 		--global-property apis,models \
 		--global-property supportingFiles=client.go \
 		--global-property apiTests=false \
 		--global-property apiDocs=false \
 		--global-property modelDocs=true \
-		-c ./templates/config.yaml \
+		--skip-validate-spec \
 		--enable-post-process-file \
 		--inline-schema-name-mappings PaymentDonationRequest_paymentMethod=CheckoutPaymentMethod \
 		--additional-properties=serviceName=$(serviceName)
