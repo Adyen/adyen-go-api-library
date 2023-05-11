@@ -73,6 +73,7 @@ type Config struct {
 	CertificatePath         string        `json:"certificatePath,omitempty"`
 	DisputesEndpoint        string        `json:"disputesEndpoint,omitempty"`
 	BalancePlatformEndpoint string        `json:"balancePlatformEndpoint,omitempty"`
+	ManagementEndpoint      string        `json:"managementEndpoint,omitempty"`
 
 	//Checkout Specific
 	CheckoutEndpoint string `json:"checkoutEndpoint,omitempty"`

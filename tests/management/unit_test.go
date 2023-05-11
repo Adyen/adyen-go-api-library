@@ -7,7 +7,6 @@ import (
 	"github.com/adyen/adyen-go-api-library/v6/src/adyen"
 	"github.com/adyen/adyen-go-api-library/v6/src/common"
 	"github.com/adyen/adyen-go-api-library/v6/src/management"
-	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"net/http"
@@ -17,9 +16,7 @@ import (
 	"testing"
 )
 
-func Test_ManagementAPI_AccountCompanyLevelApiService(t *testing.T) {
-	godotenv.Load("./../../.env")
-
+func Test_ManagementAPI(t *testing.T) {
 	mockServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch strings.TrimSpace(r.Method) {
 		case "GET":
@@ -66,6 +63,17 @@ func Test_ManagementAPI_AccountCompanyLevelApiService(t *testing.T) {
 	service.APICredentialsCompanyLevelApi.BasePath = func() string {
 		return mockServer.URL
 	}
+
+	t.Run("Configuration", func(t *testing.T) {
+		testClient := adyen.NewClient(&common.Config{
+			Environment: common.TestEnv,
+		})
+		assert.Equal(t, "https://management-test.adyen.com/v1", testClient.Management.MyAPICredentialApi.BasePath())
+		liveClient := adyen.NewClient(&common.Config{
+			Environment: common.LiveEnv,
+		})
+		assert.Equal(t, "https://management-live.adyen.com/v1", liveClient.Management.WebhooksCompanyLevelApi.BasePath())
+	})
 
 	t.Run("Test ListCompanyAccounts", func(t *testing.T) {
 		t.Run("Create an API request that should pass", func(t *testing.T) {
@@ -136,7 +144,6 @@ func Test_ManagementAPI_AccountCompanyLevelApiService(t *testing.T) {
 	})
 }
 
-// @TODO move it somewhere else
 // mock Response given the model
 func mockResponse(status int, w http.ResponseWriter, model interface{}) {
 	w.Header().Set("Content-Type", "application/json")

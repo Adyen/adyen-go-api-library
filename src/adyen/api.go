@@ -43,6 +43,8 @@ const (
 	DisputesEndpointLive        = "https://ca-live.adyen.com/ca/services/DisputeService"
 	BalancePlatformEndpointTest = "https://balanceplatform-api-test.adyen.com/bcl"
 	BalancePlatformEndpointLive = "https://balanceplatform-api-live.adyen.com/bcl"
+	ManagementEndpointTest      = "https://management-test.adyen.com"
+	ManagementEndpointLive      = "https://management-live.adyen.com"
 )
 
 // also update LibVersion in src/common/configuration.go when a version is updated and a major lib version is released
@@ -59,6 +61,7 @@ const (
 	DisputesAPIVersion              = "v30"
 	StoredValueAPIVersion           = "v46"
 	BalancePlatformAPIVersion       = "v2"
+	ManagementAPIVersion            = "v1"
 )
 
 // APIClient manages communication with the Adyen Checkout API API v51
@@ -265,6 +268,7 @@ func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix
 		}
 		c.client.Cfg.TerminalApiCloudEndpoint = TerminalAPIEndpointLive
 		c.client.Cfg.BalancePlatformEndpoint = BalancePlatformEndpointLive
+		c.client.Cfg.ManagementEndpoint = ManagementEndpointLive
 	} else {
 		c.client.Cfg.Environment = env
 		c.client.Cfg.Endpoint = EndpointTest
@@ -273,8 +277,10 @@ func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix
 		c.client.Cfg.TerminalApiCloudEndpoint = TerminalAPIEndpointTest
 		c.client.Cfg.DisputesEndpoint = DisputesEndpointTest
 		c.client.Cfg.BalancePlatformEndpoint = BalancePlatformEndpointTest
+		c.client.Cfg.ManagementEndpoint = ManagementEndpointTest
 	}
 	c.client.Cfg.BalancePlatformEndpoint += "/" + BalancePlatformAPIVersion
+	c.client.Cfg.ManagementEndpoint += "/" + ManagementAPIVersion
 }
 
 // GetConfig Allow modification of underlying config for alternate implementations and testing

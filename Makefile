@@ -39,6 +39,7 @@ balanceplatform: spec=BalancePlatformService-v2
 balanceplatform: serviceName=BalancePlatform
 recurring: spec=RecurringService-v68
 management: spec=ManagementService-v1
+management: serviceName=Management
 
 # Generate a full client (models and service classes)
 $(services): schema $(openapi-generator-jar) $(goimports)
