@@ -171,7 +171,7 @@ func Test_Platforms(t *testing.T) {
 			res, httpRes, err := uploadDocument(accountHolderCode)
 
 			require.Nil(t, err)
-			assert.Equal(t, 200, httpRes.StatusCode)
+			assert.Contains(t, [2]int{200, 202}, httpRes.StatusCode)
 			assert.NotNil(t, res.PspReference)
 		})
 

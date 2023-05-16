@@ -15,7 +15,7 @@ import (
 type {{classname}} common.Service
 {{#operation}}
 
-type {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config struct {
+type {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config struct {
 	ctx context.Context
 {{#allParams}}
 	{{paramName}} {{^isPathParam}}{{^isFile}}*{{/isFile}}{{/isPathParam}}{{{dataType}}}
@@ -30,7 +30,7 @@ type {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config struct {
 {{#isDeprecated}}
 // Deprecated
 {{/isDeprecated}}
-func (r {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config) {{vendorExtensions.x-export-param-name}}({{paramName}} {{{dataType}}}) {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config {
+func (r {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config) {{vendorExtensions.x-export-param-name}}({{paramName}} {{{dataType}}}) {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config {
 	r.{{paramName}} = {{^isFile}}&{{/isFile}}{{paramName}}
 	return r
 }
@@ -47,14 +47,14 @@ func (r {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config) {{vendo
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().{{#pathParams}}
  @param {{paramName}}{{#description}} {{{.}}}{{/description}}{{/pathParams}}
- @return {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config
+ @return {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config
 {{#isDeprecated}}
 
 Deprecated
 {{/isDeprecated}}
 */
-func (a *{{{classname}}}) {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config(ctx context.Context{{#pathParams}}, {{paramName}} {{{dataType}}}{{/pathParams}}) {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config {
-	return {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config{
+func (a *{{{classname}}}) {{{nickname}}}Config(ctx context.Context{{#pathParams}}, {{paramName}} {{{dataType}}}{{/pathParams}}) {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config {
+	return {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config{
 		ctx: ctx,
 		{{#pathParams}}
 		{{paramName}}: {{paramName}},
@@ -95,7 +95,7 @@ func (a *{{{classname}}}) {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecas
 {{/returnType}}
 */
 
-func (a *{{{classname}}}) {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}(r {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config) ({{#returnType}}{{{returnType}}}, {{/returnType}}*_nethttp.Response, error) {
+func (a *{{{classname}}}) {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}(r {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config) ({{#returnType}}{{{returnType}}}, {{/returnType}}*_nethttp.Response, error) {
     {{#returnType}}
     res := &{{{returnType}}}{}
     {{/returnType}}
@@ -112,7 +112,7 @@ func (a *{{{classname}}}) {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecas
     }
 {{/queryParams}}
 {{/hasQueryParams}}
-    httpRes, err := a.Client.MakeHTTP{{httpMethod}}Request({{#bodyParams}}r.{{paramName}}, {{/bodyParams}}res, a.BasePath() + path{{#hasQueryParams}} + "?" + queryString.Encode(){{/hasQueryParams}}, r.ctx)
+    httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.Method{{httpMethod}}, {{#bodyParams}}r.{{paramName}}{{/bodyParams}}{{^bodyParams}}nil{{/bodyParams}}, res, a.BasePath() + path{{#hasQueryParams}} + "?" + queryString.Encode(){{/hasQueryParams}}, []_context.Context{r.ctx})
     return {{#returnType}}*res, {{/returnType}}httpRes, err
 }
 
