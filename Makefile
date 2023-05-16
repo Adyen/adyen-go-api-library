@@ -21,26 +21,29 @@ openapi-generator-cli:=java -jar $(openapi-generator-jar)
 goimports:=$(GOPATH)/bin/goimports
 
 generator:=go
-services:=binlookup checkout legalentity payments payout storedvalue balanceplatform recurring
+services:=balanceplatform binlookup checkout legalentity payments payout recurring storedvalue transfers
 output:=src
 templates:=templates/small
 
 # Generate models (for each service)
 models: $(services)
 
-checkout: spec=CheckoutService-v70
-legalentity: spec=LegalEntityService-v3
-payout: spec=PayoutService-v68
-binlookup: spec=BinLookupService-v54
-payments: spec=PaymentService-v68
-storedvalue: spec=StoredValueService-v46
-storedvalue: serviceName=StoredValue
 balanceplatform: spec=BalancePlatformService-v2
 balanceplatform: serviceName=BalancePlatform
+binlookup: spec=BinLookupService-v54
+checkout: spec=CheckoutService-v70
+legalentity: spec=LegalEntityService-v3
+payments: spec=PaymentService-v68
+payout: spec=PayoutService-v68
 recurring: spec=RecurringService-v68
+storedvalue: spec=StoredValueService-v46
+storedvalue: serviceName=StoredValue
+transfers: spec=TransferService-v3
+transfers: serviceName=Transfers
 
 # Generate a full client (models and service classes)
 $(services): schema $(openapi-generator-jar) $(goimports)
+	rm -rf $(output)/$(@)/**
 	GO_POST_PROCESS_FILE="$(goimports) -w" $(openapi-generator-cli) generate \
 		-i schema/json/$(spec).json \
 		-g $(generator) \
