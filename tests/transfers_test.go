@@ -19,8 +19,6 @@ func Test_Transfers(t *testing.T) {
 		Environment: "TEST",
 	})
 
-	service := client.Transfers
-
 	mux := http.NewServeMux()
 
 	// Success case
@@ -76,6 +74,8 @@ func Test_Transfers(t *testing.T) {
 	client.Transfers.BasePath = func() string { return mockServer.URL }
 
 	t.Run("make transfer", func(t *testing.T) {
+		service := client.Transfers
+
 		request := service.PostTransfersConfig(context.Background())
 
 		_, httpRes, err := service.PostTransfers(request)
