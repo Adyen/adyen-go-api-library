@@ -57,18 +57,18 @@ func Test_Transfers(t *testing.T) {
 	})
 
 	// Error case
-	mux.HandleFunc("/transactions", func(w http.ResponseWriter, r *http.Request) {
-		require.Equal(t, "GET", r.Method)
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusForbidden)
-		io.WriteString(w, `{
-			"type": "https://docs.adyen.com/errors/forbidden",
-			"title": "Forbidden",
-			"status": 403,
-			"detail": "Not allowed",
-			"errorCode": "00_403"
-		}`)
-	})
+	// mux.HandleFunc("/transactions", func(w http.ResponseWriter, r *http.Request) {
+	// 	require.Equal(t, "GET", r.Method)
+	// 	w.Header().Set("Content-Type", "application/json")
+	// 	w.WriteHeader(http.StatusForbidden)
+	// 	io.WriteString(w, `{
+	// 		"type": "https://docs.adyen.com/errors/forbidden",
+	// 		"title": "Forbidden",
+	// 		"status": 403,
+	// 		"detail": "Not allowed",
+	// 		"errorCode": "00_403"
+	// 	}`)
+	// })
 
 	t.Run("make transfer", func(t *testing.T) {
 		request := service.PostTransfersConfig(context.Background())
