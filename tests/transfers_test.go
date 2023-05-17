@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+	"context"
 )
 
 func Test_Transfers(t *testing.T) {
@@ -17,6 +18,8 @@ func Test_Transfers(t *testing.T) {
 		ApiKey: "YOUR_ADYEN_API_KEY",
 		Environment: "TEST",
 	})
+
+	service := client.Transfers
 
 	mux:= http.NewServeMux()
 
@@ -69,6 +72,12 @@ func Test_Transfers(t *testing.T) {
 	})
 
 	t.Run("make transfer", func(t *testing.T) {
-		request := transfers.
+		request := service.GetTransactionsConfig(context.Background())
+
+		_, httpRes, err := service.GetTransactions(request)
+
+			require.NoError(t, err)
+			assert.Equal(t, 200, httpRes.StatusCode)
+			require.Nil(t, err)
 	})
 }

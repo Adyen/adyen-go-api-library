@@ -9,33 +9,16 @@ API version: 3
 package transfers
 
 import (
-	_context "context"
+	"context"
     _nethttp "net/http"
     "strings"
+    "time"
     "github.com/adyen/adyen-go-api-library/v6/src/common"
+    "net/url"
 )
 
 // GeneralApi GeneralApi service
 type GeneralApi common.Service
-if(responsecode == 200) {
-    res.parse(TransactionSearchResponse)
-}
-
-if(responsecode == 401) {
-    res.parse(RestServiceError)
-}
-
-if(responsecode == 403) {
-    res.parse(RestServiceError)
-}
-
-if(responsecode == 422) {
-    res.parse(RestServiceError)
-}
-
-if(responsecode == 500) {
-    res.parse(RestServiceError)
-}
 
 type GetTransactionsConfig struct {
 	ctx context.Context
@@ -153,26 +136,6 @@ func (a *GeneralApi) GetTransactions(r GetTransactionsConfig) (TransactionSearch
     return *res, httpRes, err
 }
 
-if(responsecode == 200) {
-    res.parse(Transaction)
-}
-
-if(responsecode == 401) {
-    res.parse(RestServiceError)
-}
-
-if(responsecode == 403) {
-    res.parse(RestServiceError)
-}
-
-if(responsecode == 422) {
-    res.parse(RestServiceError)
-}
-
-if(responsecode == 500) {
-    res.parse(RestServiceError)
-}
-
 type GetTransactionsIdConfig struct {
 	ctx context.Context
 	id string
@@ -211,29 +174,6 @@ func (a *GeneralApi) GetTransactionsId(r GetTransactionsIdConfig) (Transaction, 
     return *res, httpRes, err
 }
 
-if(responsecode == 200) {
-    res.parse(Transfer)
-}
-
-if(responsecode == 202) {
-    res.parse(Transfer)
-}
-
-if(responsecode == 401) {
-    res.parse(RestServiceError)
-}
-
-if(responsecode == 403) {
-    res.parse(RestServiceError)
-}
-
-if(responsecode == 422) {
-    res.parse(RestServiceError)
-}
-
-if(responsecode == 500) {
-    res.parse(RestServiceError)
-}
 
 type PostTransfersConfig struct {
 	ctx context.Context

@@ -8,9 +8,11 @@ package adyen
 
 import (
 	"fmt"
+	"net/http"
+
 	"github.com/adyen/adyen-go-api-library/v6/src/balanceplatform"
 	"github.com/adyen/adyen-go-api-library/v6/src/recurring"
-	"net/http"
+	"github.com/adyen/adyen-go-api-library/v6/src/transfers"
 
 	binlookup "github.com/adyen/adyen-go-api-library/v6/src/binlookup"
 	"github.com/adyen/adyen-go-api-library/v6/src/checkout"
@@ -42,6 +44,8 @@ const (
 	DisputesEndpointLive        = "https://ca-live.adyen.com/ca/services/DisputeService"
 	BalancePlatformEndpointTest = "https://balanceplatform-api-test.adyen.com/bcl"
 	BalancePlatformEndpointLive = "https://balanceplatform-api-live.adyen.com/bcl"
+	TransfersEndpointTest       = "https://balanceplatform-api-test.adyen.com/btl"
+	TransfersEndpointLive       = "https://balanceplatform-api-live.adyen.com/btl"
 )
 
 // also update LibVersion in src/common/configuration.go when a version is updated and a major lib version is released
@@ -58,6 +62,7 @@ const (
 	DisputesAPIVersion              = "v30"
 	StoredValueAPIVersion           = "v46"
 	BalancePlatformAPIVersion       = "v2"
+	TransfersAPIVersion             = "v3"
 )
 
 // APIClient manages communication with the Adyen Checkout API API v51
@@ -78,6 +83,7 @@ type APIClient struct {
 	Disputes                           *disputes.Disputes
 	StoredValue                        *storedvalue.StoredValue
 	BalancePlatform                    *balanceplatform.APIClient
+	Transfers                          *transfers.GeneralApi
 }
 
 // NewClient creates a new API client. Requires Config object.
@@ -270,6 +276,7 @@ func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix
 		c.client.Cfg.TerminalApiCloudEndpoint = TerminalAPIEndpointTest
 		c.client.Cfg.DisputesEndpoint = DisputesEndpointTest
 		c.client.Cfg.BalancePlatformEndpoint = BalancePlatformEndpointTest
+		c.client.Cfg.TransfersEndpoint = TransfersEndpointTest
 	}
 	c.client.Cfg.BalancePlatformEndpoint += "/" + BalancePlatformAPIVersion
 }
