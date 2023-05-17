@@ -4,6 +4,7 @@ import (
 	"context"
 	"io"
 	"net/http"
+	"net/http/httptest"
 	"testing"
 
 	"github.com/adyen/adyen-go-api-library/v6/src/adyen"
@@ -57,18 +58,22 @@ func Test_Transfers(t *testing.T) {
 	})
 
 	// Error case
-	// mux.HandleFunc("/transactions", func(w http.ResponseWriter, r *http.Request) {
-	// 	require.Equal(t, "GET", r.Method)
-	// 	w.Header().Set("Content-Type", "application/json")
-	// 	w.WriteHeader(http.StatusForbidden)
-	// 	io.WriteString(w, `{
-	// 		"type": "https://docs.adyen.com/errors/forbidden",
-	// 		"title": "Forbidden",
-	// 		"status": 403,
-	// 		"detail": "Not allowed",
-	// 		"errorCode": "00_403"
-	// 	}`)
-	// })
+	mux.HandleFunc("/transactions", func(w http.ResponseWriter, r *http.Request) {
+		require.Equal(t, "GET", r.Method)
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusForbidden)
+		io.WriteString(w, `{
+			"type": "https://docs.adyen.com/errors/forbidden",
+			"title": "Forbidden",
+			"status": 403,
+			"detail": "Not allowed",
+			"errorCode": "00_403"
+		}`)
+	})
+
+	mockServer := httptest.NewServer(mux)
+	defer mockServer.Close()
+	client.StoredValue.BasePath = func() string { return mockServer.URL }
 
 	t.Run("make transfer", func(t *testing.T) {
 		request := service.PostTransfersConfig(context.Background())
