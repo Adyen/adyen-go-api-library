@@ -11,6 +11,7 @@ import (
 	"net/http"
 
 	"github.com/adyen/adyen-go-api-library/v6/src/balanceplatform"
+	"github.com/adyen/adyen-go-api-library/v6/src/management"
 	"github.com/adyen/adyen-go-api-library/v6/src/recurring"
 	"github.com/adyen/adyen-go-api-library/v6/src/transfers"
 
@@ -46,6 +47,8 @@ const (
 	BalancePlatformEndpointLive = "https://balanceplatform-api-live.adyen.com/bcl"
 	TransfersEndpointTest       = "https://balanceplatform-api-test.adyen.com/btl"
 	TransfersEndpointLive       = "https://balanceplatform-api-live.adyen.com/btl"
+	ManagementEndpointTest      = "https://management-test.adyen.com"
+	ManagementEndpointLive      = "https://management-live.adyen.com"
 )
 
 // also update LibVersion in src/common/configuration.go when a version is updated and a major lib version is released
@@ -63,6 +66,7 @@ const (
 	StoredValueAPIVersion           = "v46"
 	BalancePlatformAPIVersion       = "v2"
 	TransfersAPIVersion             = "v3"
+	ManagementAPIVersion            = "v1"
 )
 
 // APIClient manages communication with the Adyen Checkout API API v51
@@ -84,6 +88,7 @@ type APIClient struct {
 	StoredValue                        *storedvalue.StoredValue
 	BalancePlatform                    *balanceplatform.APIClient
 	Transfers                          *transfers.GeneralApi
+	Management                         *management.APIClient
 }
 
 // NewClient creates a new API client. Requires Config object.
@@ -244,6 +249,7 @@ func NewClient(cfg *common.Config) *APIClient {
 	}
 
 	c.BalancePlatform = balanceplatform.NewAPIClient(c.client)
+	c.Management = management.NewAPIClient(c.client)
 
 	return c
 }
@@ -268,6 +274,7 @@ func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix
 		}
 		c.client.Cfg.TerminalApiCloudEndpoint = TerminalAPIEndpointLive
 		c.client.Cfg.BalancePlatformEndpoint = BalancePlatformEndpointLive
+		c.client.Cfg.ManagementEndpoint = ManagementEndpointLive
 	} else {
 		c.client.Cfg.Environment = env
 		c.client.Cfg.Endpoint = EndpointTest
@@ -277,8 +284,10 @@ func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix
 		c.client.Cfg.DisputesEndpoint = DisputesEndpointTest
 		c.client.Cfg.BalancePlatformEndpoint = BalancePlatformEndpointTest
 		c.client.Cfg.TransfersEndpoint = TransfersEndpointTest
+		c.client.Cfg.ManagementEndpoint = ManagementEndpointTest
 	}
 	c.client.Cfg.BalancePlatformEndpoint += "/" + BalancePlatformAPIVersion
+	c.client.Cfg.ManagementEndpoint += "/" + ManagementAPIVersion
 }
 
 // GetConfig Allow modification of underlying config for alternate implementations and testing
