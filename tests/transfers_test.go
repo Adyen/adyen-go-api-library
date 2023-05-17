@@ -73,7 +73,7 @@ func Test_Transfers(t *testing.T) {
 
 	mockServer := httptest.NewServer(mux)
 	defer mockServer.Close()
-	client.StoredValue.BasePath = func() string { return mockServer.URL }
+	client.Transfers.BasePath = func() string { return mockServer.URL }
 
 	t.Run("make transfer", func(t *testing.T) {
 		request := service.PostTransfersConfig(context.Background())
