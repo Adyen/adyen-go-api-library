@@ -51,16 +51,14 @@ func Test_ManagementAPI_Integration(t *testing.T) {
 		})
 	})
 
-	t.Run("Test MyAPICredentialApiService GetMeAllowedOrigins", func(t *testing.T) {
-		t.Run("Create an API request that should pass", func(t *testing.T) {
-			req := service.TerminalsTerminalLevelApi.ListTerminalsConfig(context.Background())
-			req = req.Countries("NL").PageSize(1)
+	t.Run("List terminals", func(t *testing.T) {
+		req := service.TerminalsTerminalLevelApi.ListTerminalsConfig(context.Background())
+		req = req.Countries("NL").PageSize(1)
 
-			resp, httpRes, err := service.TerminalsTerminalLevelApi.ListTerminals(req)
+		resp, httpRes, err := service.TerminalsTerminalLevelApi.ListTerminals(req)
 
-			require.Nil(t, err)
-			assert.Equal(t, 200, httpRes.StatusCode)
-			require.NotNil(t, resp)
-		})
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+		require.NotNil(t, resp)
 	})
 }
