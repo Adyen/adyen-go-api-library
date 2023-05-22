@@ -12,7 +12,7 @@ import (
 	"testing"
 )
 
-func Test_LegalEntity_BusinessLinesApiService(t *testing.T) {
+func Test_LegalEntity(t *testing.T) {
 	client := adyen.NewClient(&common.Config{
 		ApiKey:      "YOUR_ADYEN_API_KEY",
 		Environment: "TEST",
