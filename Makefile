@@ -23,7 +23,7 @@ goimports:=$(GOPATH)/bin/goimports
 generator:=go
 services:=binlookup checkout legalentity payments payout storedvalue balanceplatform recurring management
 output:=src
-templates:=templates/small
+templates:=templates/custom
 
 # Generate models (for each service)
 models: $(services)
