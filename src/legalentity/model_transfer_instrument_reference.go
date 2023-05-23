@@ -25,6 +25,8 @@ type TransferInstrumentReference struct {
 	Id string `json:"id"`
 	// Four last digits of the bank account number.
 	RealLastFour *string `json:"realLastFour,omitempty"`
+	// Identifies if the TI was created from a trusted source.
+	TrustedSource *bool `json:"trustedSource,omitempty"`
 }
 
 // NewTransferInstrumentReference instantiates a new TransferInstrumentReference object
@@ -126,6 +128,38 @@ func (o *TransferInstrumentReference) SetRealLastFour(v string) {
 	o.RealLastFour = &v
 }
 
+// GetTrustedSource returns the TrustedSource field value if set, zero value otherwise.
+func (o *TransferInstrumentReference) GetTrustedSource() bool {
+	if o == nil || common.IsNil(o.TrustedSource) {
+		var ret bool
+		return ret
+	}
+	return *o.TrustedSource
+}
+
+// GetTrustedSourceOk returns a tuple with the TrustedSource field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransferInstrumentReference) GetTrustedSourceOk() (*bool, bool) {
+	if o == nil || common.IsNil(o.TrustedSource) {
+		return nil, false
+	}
+	return o.TrustedSource, true
+}
+
+// HasTrustedSource returns a boolean if a field has been set.
+func (o *TransferInstrumentReference) HasTrustedSource() bool {
+	if o != nil && !common.IsNil(o.TrustedSource) {
+		return true
+	}
+
+	return false
+}
+
+// SetTrustedSource gets a reference to the given bool and assigns it to the TrustedSource field.
+func (o *TransferInstrumentReference) SetTrustedSource(v bool) {
+	o.TrustedSource = &v
+}
+
 func (o TransferInstrumentReference) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -141,6 +175,7 @@ func (o TransferInstrumentReference) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.RealLastFour) {
 		toSerialize["realLastFour"] = o.RealLastFour
 	}
+	// skip: trustedSource is readOnly
 	return toSerialize, nil
 }
 

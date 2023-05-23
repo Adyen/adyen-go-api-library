@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AccountNumber** | **string** | The 5- to 12-digit bank account number, without separators or whitespace. | 
+**AccountType** | Pointer to **string** | The bank account type.  Possible values: **checking** or **savings**. Defaults to **checking**. | [optional] [default to "checking"]
 **InstitutionNumber** | **string** | The 3-digit institution number, without separators or whitespace. | 
 **TransitNumber** | **string** | The 5-digit transit number, without separators or whitespace. | 
 **Type** | **string** | **caLocal** | [default to "caLocal"]
@@ -47,6 +48,31 @@ and a boolean to check if the value has been set.
 
 SetAccountNumber sets AccountNumber field to given value.
 
+
+### GetAccountType
+
+`func (o *CALocalAccountIdentification) GetAccountType() string`
+
+GetAccountType returns the AccountType field if non-nil, zero value otherwise.
+
+### GetAccountTypeOk
+
+`func (o *CALocalAccountIdentification) GetAccountTypeOk() (*string, bool)`
+
+GetAccountTypeOk returns a tuple with the AccountType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccountType
+
+`func (o *CALocalAccountIdentification) SetAccountType(v string)`
+
+SetAccountType sets AccountType field to given value.
+
+### HasAccountType
+
+`func (o *CALocalAccountIdentification) HasAccountType() bool`
+
+HasAccountType returns a boolean if a field has been set.
 
 ### GetInstitutionNumber
 

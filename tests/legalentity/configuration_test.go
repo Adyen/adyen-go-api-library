@@ -1,55 +1,60 @@
 package legalentity
 
 import (
-	openapiclient "github.com/adyen/adyen-go-api-library/v6/src/legalentity"
-	"github.com/joho/godotenv"
+	"context"
+	"encoding/json"
+	"github.com/adyen/adyen-go-api-library/v6/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v6/src/common"
 	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
+	"net/http"
+	"net/http/httptest"
 	"testing"
 )
 
 func Test_LegalEntity_Configuration(t *testing.T) {
-	godotenv.Load("./../../.env")
-
-	var (
-		username = "usr"
-		password = "pwd"
-		env      = openapiclient.TestEnv
-	)
-
-	t.Run("Test Configuration", func(t *testing.T) {
-		t.Run("Create a Client that should pass", func(t *testing.T) {
-
-			configuration, err := openapiclient.NewConfiguration(username, password, env)
-			require.Nil(t, err, "Error creating Config object")
-
-			apiClient := openapiclient.NewAPIClient(configuration)
-
-			// credentials
-			require.NotNil(t, apiClient.GetConfig().Username)
-			require.NotNil(t, apiClient.GetConfig().Password)
-			// env
-			require.NotNil(t, apiClient.GetConfig().Environment)
-			assert.Equal(t, openapiclient.TestEnv, apiClient.GetConfig().Environment)
-			// URL
-			assert.NotNil(t, apiClient.GetConfig().Servers)
-			assert.Equal(t, "https://kyc-test.adyen.com/lem/v2", apiClient.GetConfig().Servers[0].URL)
-
+	t.Run("Configuration", func(t *testing.T) {
+		testClient := adyen.NewClient(&common.Config{
+			Environment: common.TestEnv,
 		})
-		t.Run("Create a Client that should fail (missing apiKey)", func(t *testing.T) {
-
-			_, err := openapiclient.NewConfiguration("", password, env)
-			require.NotNil(t, err, "Error creating Config object")
-			assert.Equal(t, "username is not provided", err.Error())
-
+		assert.Equal(t, "https://kyc-test.adyen.com/lem/v3", testClient.LegalEntity.BusinessLinesApi.BasePath())
+		liveClient := adyen.NewClient(&common.Config{
+			Environment: common.LiveEnv,
 		})
-		t.Run("Create a Client that should fail (invalid Environment)", func(t *testing.T) {
-
-			_, err := openapiclient.NewConfiguration(username, "", env)
-			require.NotNil(t, err, "Error creating Config object")
-			assert.Equal(t, "password is not provided", err.Error())
-
-		})
+		assert.Equal(t, "https://kyc-live.adyen.com/lem/v3", liveClient.LegalEntity.DocumentsApi.BasePath())
 	})
 
+	basicAuthClient := adyen.NewClient(&common.Config{
+		Username:    "lem",
+		Password:    "lem",
+		Environment: "TEST",
+	})
+	service := basicAuthClient.LegalEntity
+	var (
+		mockServer  *httptest.Server
+		mockRequest *http.Request
+	)
+	mockServer = httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		mockRequest = r
+	}))
+	basicAuthClient.LegalEntity.TermsOfServiceApi.BasePath = func() string {
+		return mockServer.URL
+	}
+	defer mockServer.Close()
+
+	t.Run("Basic auth", func(t *testing.T) {
+		req := service.BusinessLinesApi.UpdateBusinessLineConfig(context.Background(), "123")
+
+		service.BusinessLinesApi.UpdateBusinessLine(req)
+
+		assert.NotEmpty(t, mockRequest.Header.Get("Authorization"))
+	})
+}
+
+// mock Response given the model
+func mockResponse(status int, w http.ResponseWriter, model interface{}) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(status)
+	if model != nil {
+		json.NewEncoder(w).Encode(model)
+	}
 }

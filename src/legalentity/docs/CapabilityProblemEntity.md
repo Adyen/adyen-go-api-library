@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Documents** | Pointer to **[]string** |  | [optional] 
+**Documents** | Pointer to **[]string** | List of document IDs corresponding to the verification errors from capabilities. | [optional] 
 **Id** | Pointer to **string** |  | [optional] 
 **Owner** | Pointer to [**CapabilityProblemEntityRecursive**](CapabilityProblemEntityRecursive.md) |  | [optional] 
 **Type** | Pointer to **string** |  | [optional] 
