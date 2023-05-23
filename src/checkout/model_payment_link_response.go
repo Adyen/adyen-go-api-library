@@ -20,11 +20,12 @@ var _ common.MappedNullable = &PaymentLinkResponse{}
 
 // PaymentLinkResponse struct for PaymentLinkResponse
 type PaymentLinkResponse struct {
-	// List of payment methods to be presented to the shopper. To refer to payment methods, use their `paymentMethod.type` from [Payment methods overview](https://docs.adyen.com/payment-methods).  Example: `\"allowedPaymentMethods\":[\"ideal\",\"giropay\"]`
-	AllowedPaymentMethods []string `json:"allowedPaymentMethods,omitempty"`
-	Amount                Amount   `json:"amount"`
-	BillingAddress        *Address `json:"billingAddress,omitempty"`
-	// List of payment methods to be hidden from the shopper. To refer to payment methods, use their `paymentMethod.type` from [Payment methods overview](https://docs.adyen.com/payment-methods).  Example: `\"blockedPaymentMethods\":[\"ideal\",\"giropay\"]`
+	// List of payment methods to be presented to the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).  Example: `\"allowedPaymentMethods\":[\"ideal\",\"giropay\"]`
+	AllowedPaymentMethods []string         `json:"allowedPaymentMethods,omitempty"`
+	Amount                Amount           `json:"amount"`
+	ApplicationInfo       *ApplicationInfo `json:"applicationInfo,omitempty"`
+	BillingAddress        *Address         `json:"billingAddress,omitempty"`
+	// List of payment methods to be hidden from the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).  Example: `\"blockedPaymentMethods\":[\"ideal\",\"giropay\"]`
 	BlockedPaymentMethods []string `json:"blockedPaymentMethods,omitempty"`
 	// The delay between the authorisation and scheduled auto-capture, specified in hours.
 	CaptureDelayHours *int32 `json:"captureDelayHours,omitempty"`
@@ -184,6 +185,38 @@ func (o *PaymentLinkResponse) GetAmountOk() (*Amount, bool) {
 // SetAmount sets field value
 func (o *PaymentLinkResponse) SetAmount(v Amount) {
 	o.Amount = v
+}
+
+// GetApplicationInfo returns the ApplicationInfo field value if set, zero value otherwise.
+func (o *PaymentLinkResponse) GetApplicationInfo() ApplicationInfo {
+	if o == nil || common.IsNil(o.ApplicationInfo) {
+		var ret ApplicationInfo
+		return ret
+	}
+	return *o.ApplicationInfo
+}
+
+// GetApplicationInfoOk returns a tuple with the ApplicationInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentLinkResponse) GetApplicationInfoOk() (*ApplicationInfo, bool) {
+	if o == nil || common.IsNil(o.ApplicationInfo) {
+		return nil, false
+	}
+	return o.ApplicationInfo, true
+}
+
+// HasApplicationInfo returns a boolean if a field has been set.
+func (o *PaymentLinkResponse) HasApplicationInfo() bool {
+	if o != nil && !common.IsNil(o.ApplicationInfo) {
+		return true
+	}
+
+	return false
+}
+
+// SetApplicationInfo gets a reference to the given ApplicationInfo and assigns it to the ApplicationInfo field.
+func (o *PaymentLinkResponse) SetApplicationInfo(v ApplicationInfo) {
+	o.ApplicationInfo = &v
 }
 
 // GetBillingAddress returns the BillingAddress field value if set, zero value otherwise.
@@ -1408,6 +1441,9 @@ func (o PaymentLinkResponse) ToMap() (map[string]interface{}, error) {
 		toSerialize["allowedPaymentMethods"] = o.AllowedPaymentMethods
 	}
 	toSerialize["amount"] = o.Amount
+	if !common.IsNil(o.ApplicationInfo) {
+		toSerialize["applicationInfo"] = o.ApplicationInfo
+	}
 	if !common.IsNil(o.BillingAddress) {
 		toSerialize["billingAddress"] = o.BillingAddress
 	}

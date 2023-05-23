@@ -29,6 +29,7 @@ templates:=templates/custom
 models: $(services)
 
 checkout: spec=CheckoutService-v70
+checkout: serviceName=Checkout
 legalentity: spec=LegalEntityService-v3
 legalentity: serviceName=LegalEntity
 payout: spec=PayoutService-v68

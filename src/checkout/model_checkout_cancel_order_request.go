@@ -20,15 +20,15 @@ var _ common.MappedNullable = &CheckoutCancelOrderRequest{}
 // CheckoutCancelOrderRequest struct for CheckoutCancelOrderRequest
 type CheckoutCancelOrderRequest struct {
 	// The merchant account identifier that orderData belongs to.
-	MerchantAccount string        `json:"merchantAccount"`
-	Order           CheckoutOrder `json:"order"`
+	MerchantAccount string             `json:"merchantAccount"`
+	Order           EncryptedOrderData `json:"order"`
 }
 
 // NewCheckoutCancelOrderRequest instantiates a new CheckoutCancelOrderRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCheckoutCancelOrderRequest(merchantAccount string, order CheckoutOrder) *CheckoutCancelOrderRequest {
+func NewCheckoutCancelOrderRequest(merchantAccount string, order EncryptedOrderData) *CheckoutCancelOrderRequest {
 	this := CheckoutCancelOrderRequest{}
 	this.MerchantAccount = merchantAccount
 	this.Order = order
@@ -68,9 +68,9 @@ func (o *CheckoutCancelOrderRequest) SetMerchantAccount(v string) {
 }
 
 // GetOrder returns the Order field value
-func (o *CheckoutCancelOrderRequest) GetOrder() CheckoutOrder {
+func (o *CheckoutCancelOrderRequest) GetOrder() EncryptedOrderData {
 	if o == nil {
-		var ret CheckoutOrder
+		var ret EncryptedOrderData
 		return ret
 	}
 
@@ -79,7 +79,7 @@ func (o *CheckoutCancelOrderRequest) GetOrder() CheckoutOrder {
 
 // GetOrderOk returns a tuple with the Order field value
 // and a boolean to check if the value has been set.
-func (o *CheckoutCancelOrderRequest) GetOrderOk() (*CheckoutOrder, bool) {
+func (o *CheckoutCancelOrderRequest) GetOrderOk() (*EncryptedOrderData, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -87,7 +87,7 @@ func (o *CheckoutCancelOrderRequest) GetOrderOk() (*CheckoutOrder, bool) {
 }
 
 // SetOrder sets field value
-func (o *CheckoutCancelOrderRequest) SetOrder(v CheckoutOrder) {
+func (o *CheckoutCancelOrderRequest) SetOrder(v EncryptedOrderData) {
 	o.Order = v
 }
 

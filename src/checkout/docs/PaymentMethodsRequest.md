@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AdditionalData** | Pointer to **map[string]string** | This field contains additional data, which may be required for a particular payment request.  The &#x60;additionalData&#x60; object consists of entries, each of which includes the key and value. | [optional] 
-**AllowedPaymentMethods** | Pointer to **[]string** | List of payment methods to be presented to the shopper. To refer to payment methods, use their &#x60;paymentMethod.type&#x60; from [Payment methods overview](https://docs.adyen.com/payment-methods).  Example: &#x60;\&quot;allowedPaymentMethods\&quot;:[\&quot;ideal\&quot;,\&quot;giropay\&quot;]&#x60; | [optional] 
+**AllowedPaymentMethods** | Pointer to **[]string** | List of payment methods to be presented to the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).  Example: &#x60;\&quot;allowedPaymentMethods\&quot;:[\&quot;ideal\&quot;,\&quot;giropay\&quot;]&#x60; | [optional] 
 **Amount** | Pointer to [**Amount**](Amount.md) |  | [optional] 
-**BlockedPaymentMethods** | Pointer to **[]string** | List of payment methods to be hidden from the shopper. To refer to payment methods, use their &#x60;paymentMethod.type&#x60; from [Payment methods overview](https://docs.adyen.com/payment-methods).  Example: &#x60;\&quot;blockedPaymentMethods\&quot;:[\&quot;ideal\&quot;,\&quot;giropay\&quot;]&#x60; | [optional] 
+**BlockedPaymentMethods** | Pointer to **[]string** | List of payment methods to be hidden from the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).  Example: &#x60;\&quot;blockedPaymentMethods\&quot;:[\&quot;ideal\&quot;,\&quot;giropay\&quot;]&#x60; | [optional] 
 **Channel** | Pointer to **string** | The platform where a payment transaction takes place. This field can be used for filtering out payment methods that are only available on specific platforms. Possible values: * iOS * Android * Web | [optional] 
 **CountryCode** | Pointer to **string** | The shopper&#39;s country code. | [optional] 
 **MerchantAccount** | **string** | The merchant account identifier, with which you want to process the transaction. | 
-**Order** | Pointer to [**CheckoutOrder**](CheckoutOrder.md) |  | [optional] 
+**Order** | Pointer to [**EncryptedOrderData**](EncryptedOrderData.md) |  | [optional] 
 **ShopperLocale** | Pointer to **string** | The combination of a language code and a country code to specify the language to be used in the payment. | [optional] 
 **ShopperReference** | Pointer to **string** | Required for recurring payments.  Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters. &gt; Your reference must not include personally identifiable information (PII), for example name or email address. | [optional] 
 **SplitCardFundingSources** | Pointer to **bool** | Boolean value indicating whether the card payment method should be split into separate debit and credit options. | [optional] [default to false]
@@ -208,20 +208,20 @@ SetMerchantAccount sets MerchantAccount field to given value.
 
 ### GetOrder
 
-`func (o *PaymentMethodsRequest) GetOrder() CheckoutOrder`
+`func (o *PaymentMethodsRequest) GetOrder() EncryptedOrderData`
 
 GetOrder returns the Order field if non-nil, zero value otherwise.
 
 ### GetOrderOk
 
-`func (o *PaymentMethodsRequest) GetOrderOk() (*CheckoutOrder, bool)`
+`func (o *PaymentMethodsRequest) GetOrderOk() (*EncryptedOrderData, bool)`
 
 GetOrderOk returns a tuple with the Order field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOrder
 
-`func (o *PaymentMethodsRequest) SetOrder(v CheckoutOrder)`
+`func (o *PaymentMethodsRequest) SetOrder(v EncryptedOrderData)`
 
 SetOrder sets Order field to given value.
 

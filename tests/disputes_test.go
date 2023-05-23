@@ -1,6 +1,7 @@
 package tests
 
 import (
+	"context"
 	"os"
 	"testing"
 
@@ -26,6 +27,7 @@ func Test_Disputes(t *testing.T) {
 		ApiKey:      APIKey,
 		Environment: "TEST",
 	})
+	service := client.Checkout()
 
 	createTestPayment := func() string {
 		card := checkout.NewCardDetails()
@@ -34,7 +36,7 @@ func Test_Disputes(t *testing.T) {
 		card.SetEncryptedExpiryYear("test_2030")
 		card.SetEncryptedSecurityCode("test_737")
 		card.SetHolderName("chargeback:10.4")
-		res, _, _ := client.Checkout.Payments(&checkout.PaymentRequest{
+		req := service.PaymentsApi.PaymentsConfig(context.Background()).PaymentRequest(checkout.PaymentRequest{
 			Amount: checkout.Amount{
 				Currency: "EUR",
 				Value:    1000,
@@ -44,6 +46,7 @@ func Test_Disputes(t *testing.T) {
 			ReturnUrl:       "https://adyen.com",
 			MerchantAccount: MerchantAccount,
 		})
+		res, _, _ := service.PaymentsApi.Payments(req)
 		reference := "MODIFICATION_REFERENCE"
 		captureRes, _, _ := client.Payments.Capture(&payments.CaptureRequest{
 			OriginalReference: res.GetPspReference(),

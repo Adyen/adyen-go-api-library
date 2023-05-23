@@ -9,22 +9,45 @@ API version: 70
 package checkout
 
 import (
+	"context"
 	_context "context"
 	_nethttp "net/http"
+
+	"github.com/adyen/adyen-go-api-library/v6/src/common"
 )
 
+// OrdersApi OrdersApi service
+type OrdersApi common.Service
+
+type OrdersApiCancelOrderConfig struct {
+	ctx                        context.Context
+	idempotencyKey             *string
+	checkoutCancelOrderRequest *CheckoutCancelOrderRequest
+}
+
+// A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
+func (r OrdersApiCancelOrderConfig) IdempotencyKey(idempotencyKey string) OrdersApiCancelOrderConfig {
+	r.idempotencyKey = &idempotencyKey
+	return r
+}
+
+func (r OrdersApiCancelOrderConfig) CheckoutCancelOrderRequest(checkoutCancelOrderRequest CheckoutCancelOrderRequest) OrdersApiCancelOrderConfig {
+	r.checkoutCancelOrderRequest = &checkoutCancelOrderRequest
+	return r
+}
+
 /*
-Create an order
-Creates an order to be used for partial payments. Make a POST &#x60;/orders&#x60; call before making a &#x60;/payments&#x60; call when processing payments with different payment methods.
- * @param req CheckoutCreateOrderRequest - reference of CheckoutCreateOrderRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return CheckoutCreateOrderResponse
+CancelOrder Cancel an order
+
+Cancels an order. Cancellation of an order results in an automatic rollback of all payments made in the order, either by canceling or refunding the payment, depending on the type of payment method.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return OrdersApiCancelOrderConfig
 */
-func (a Checkout) Orders(req *CheckoutCreateOrderRequest, ctxs ..._context.Context) (CheckoutCreateOrderResponse, *_nethttp.Response, error) {
-	res := &CheckoutCreateOrderResponse{}
-	path := "/orders"
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
-	return *res, httpRes, err
+func (a *OrdersApi) CancelOrderConfig(ctx context.Context) OrdersApiCancelOrderConfig {
+	return OrdersApiCancelOrderConfig{
+		ctx: ctx,
+	}
 }
 
 /*
@@ -34,11 +57,43 @@ Cancels an order. Cancellation of an order results in an automatic rollback of a
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return CheckoutCancelOrderResponse
 */
-func (a Checkout) CancelOrder(req *CheckoutCancelOrderRequest, ctxs ..._context.Context) (CheckoutCancelOrderResponse, *_nethttp.Response, error) {
+
+func (a *OrdersApi) CancelOrder(r OrdersApiCancelOrderConfig) (CheckoutCancelOrderResponse, *_nethttp.Response, error) {
 	res := &CheckoutCancelOrderResponse{}
 	path := "/orders/cancel"
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
+	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPost, r.checkoutCancelOrderRequest, res, a.BasePath()+path, []_context.Context{r.ctx})
 	return *res, httpRes, err
+}
+
+type OrdersApiGetBalanceOfGiftCardConfig struct {
+	ctx                         context.Context
+	idempotencyKey              *string
+	checkoutBalanceCheckRequest *CheckoutBalanceCheckRequest
+}
+
+// A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
+func (r OrdersApiGetBalanceOfGiftCardConfig) IdempotencyKey(idempotencyKey string) OrdersApiGetBalanceOfGiftCardConfig {
+	r.idempotencyKey = &idempotencyKey
+	return r
+}
+
+func (r OrdersApiGetBalanceOfGiftCardConfig) CheckoutBalanceCheckRequest(checkoutBalanceCheckRequest CheckoutBalanceCheckRequest) OrdersApiGetBalanceOfGiftCardConfig {
+	r.checkoutBalanceCheckRequest = &checkoutBalanceCheckRequest
+	return r
+}
+
+/*
+GetBalanceOfGiftCard Get the balance of a gift card
+
+Retrieves the balance remaining on a shopper's gift card. To check a gift card's balance, make a POST `/paymentMethods/balance` call and include the gift card's details inside a `paymentMethod` object.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return OrdersApiGetBalanceOfGiftCardConfig
+*/
+func (a *OrdersApi) GetBalanceOfGiftCardConfig(ctx context.Context) OrdersApiGetBalanceOfGiftCardConfig {
+	return OrdersApiGetBalanceOfGiftCardConfig{
+		ctx: ctx,
+	}
 }
 
 /*
@@ -48,9 +103,56 @@ Retrieves the balance remaining on a shopper&#39;s gift card. To check a gift ca
  * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return CheckoutBalanceCheckResponse
 */
-func (a Checkout) GetBalanceOfGiftCard(req *CheckoutBalanceCheckRequest, ctxs ..._context.Context) (CheckoutBalanceCheckResponse, *_nethttp.Response, error) {
+
+func (a *OrdersApi) GetBalanceOfGiftCard(r OrdersApiGetBalanceOfGiftCardConfig) (CheckoutBalanceCheckResponse, *_nethttp.Response, error) {
 	res := &CheckoutBalanceCheckResponse{}
 	path := "/paymentMethods/balance"
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
+	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPost, r.checkoutBalanceCheckRequest, res, a.BasePath()+path, []_context.Context{r.ctx})
+	return *res, httpRes, err
+}
+
+type OrdersApiOrdersConfig struct {
+	ctx                        context.Context
+	idempotencyKey             *string
+	checkoutCreateOrderRequest *CheckoutCreateOrderRequest
+}
+
+// A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
+func (r OrdersApiOrdersConfig) IdempotencyKey(idempotencyKey string) OrdersApiOrdersConfig {
+	r.idempotencyKey = &idempotencyKey
+	return r
+}
+
+func (r OrdersApiOrdersConfig) CheckoutCreateOrderRequest(checkoutCreateOrderRequest CheckoutCreateOrderRequest) OrdersApiOrdersConfig {
+	r.checkoutCreateOrderRequest = &checkoutCreateOrderRequest
+	return r
+}
+
+/*
+Orders Create an order
+
+Creates an order to be used for partial payments. Make a POST `/orders` call before making a `/payments` call when processing payments with different payment methods.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return OrdersApiOrdersConfig
+*/
+func (a *OrdersApi) OrdersConfig(ctx context.Context) OrdersApiOrdersConfig {
+	return OrdersApiOrdersConfig{
+		ctx: ctx,
+	}
+}
+
+/*
+Create an order
+Creates an order to be used for partial payments. Make a POST &#x60;/orders&#x60; call before making a &#x60;/payments&#x60; call when processing payments with different payment methods.
+ * @param req CheckoutCreateOrderRequest - reference of CheckoutCreateOrderRequest).
+ * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return CheckoutCreateOrderResponse
+*/
+
+func (a *OrdersApi) Orders(r OrdersApiOrdersConfig) (CheckoutCreateOrderResponse, *_nethttp.Response, error) {
+	res := &CheckoutCreateOrderResponse{}
+	path := "/orders"
+	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPost, r.checkoutCreateOrderRequest, res, a.BasePath()+path, []_context.Context{r.ctx})
 	return *res, httpRes, err
 }

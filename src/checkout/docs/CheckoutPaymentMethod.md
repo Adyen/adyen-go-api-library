@@ -34,7 +34,7 @@ Name | Type | Description | Notes
 **NetworkPaymentReference** | Pointer to **string** | The network token reference. This is the [&#x60;networkTxReference&#x60;](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_additionalData-ResponseAdditionalDataCommon-networkTxReference) from the response to the first payment. | [optional] 
 **Number** | Pointer to **string** | The card number. Only collect raw card data if you are [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide). | [optional] 
 **ShopperNotificationReference** | Pointer to **string** | The &#x60;shopperNotificationReference&#x60; returned in the response when you requested to notify the shopper. Used for recurring payment only. | [optional] 
-**ThreeDS2SdkVersion** | Pointer to **string** | Version of the 3D Secure 2 mobile SDK. | [optional] 
+**ThreeDS2SdkVersion** | Pointer to **string** | Required for mobile integrations. Version of the 3D Secure 2 mobile SDK. | [optional] 
 **FirstName** | **string** | The shopper&#39;s first name. | 
 **LastName** | **string** | The shopper&#39;s last name. | 
 **ShopperEmail** | **string** |  | 

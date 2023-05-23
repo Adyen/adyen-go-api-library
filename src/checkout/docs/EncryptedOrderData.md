@@ -1,4 +1,4 @@
-# CheckoutOrder
+# EncryptedOrderData
 
 ## Properties
 
@@ -9,59 +9,59 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewCheckoutOrder
+### NewEncryptedOrderData
 
-`func NewCheckoutOrder(orderData string, pspReference string, ) *CheckoutOrder`
+`func NewEncryptedOrderData(orderData string, pspReference string, ) *EncryptedOrderData`
 
-NewCheckoutOrder instantiates a new CheckoutOrder object
+NewEncryptedOrderData instantiates a new EncryptedOrderData object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewCheckoutOrderWithDefaults
+### NewEncryptedOrderDataWithDefaults
 
-`func NewCheckoutOrderWithDefaults() *CheckoutOrder`
+`func NewEncryptedOrderDataWithDefaults() *EncryptedOrderData`
 
-NewCheckoutOrderWithDefaults instantiates a new CheckoutOrder object
+NewEncryptedOrderDataWithDefaults instantiates a new EncryptedOrderData object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetOrderData
 
-`func (o *CheckoutOrder) GetOrderData() string`
+`func (o *EncryptedOrderData) GetOrderData() string`
 
 GetOrderData returns the OrderData field if non-nil, zero value otherwise.
 
 ### GetOrderDataOk
 
-`func (o *CheckoutOrder) GetOrderDataOk() (*string, bool)`
+`func (o *EncryptedOrderData) GetOrderDataOk() (*string, bool)`
 
 GetOrderDataOk returns a tuple with the OrderData field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOrderData
 
-`func (o *CheckoutOrder) SetOrderData(v string)`
+`func (o *EncryptedOrderData) SetOrderData(v string)`
 
 SetOrderData sets OrderData field to given value.
 
 
 ### GetPspReference
 
-`func (o *CheckoutOrder) GetPspReference() string`
+`func (o *EncryptedOrderData) GetPspReference() string`
 
 GetPspReference returns the PspReference field if non-nil, zero value otherwise.
 
 ### GetPspReferenceOk
 
-`func (o *CheckoutOrder) GetPspReferenceOk() (*string, bool)`
+`func (o *EncryptedOrderData) GetPspReferenceOk() (*string, bool)`
 
 GetPspReferenceOk returns a tuple with the PspReference field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPspReference
 
-`func (o *CheckoutOrder) SetPspReference(v string)`
+`func (o *EncryptedOrderData) SetPspReference(v string)`
 
 SetPspReference sets PspReference field to given value.
 

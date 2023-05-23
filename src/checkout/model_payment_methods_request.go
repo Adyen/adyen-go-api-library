@@ -21,18 +21,18 @@ var _ common.MappedNullable = &PaymentMethodsRequest{}
 type PaymentMethodsRequest struct {
 	// This field contains additional data, which may be required for a particular payment request.  The `additionalData` object consists of entries, each of which includes the key and value.
 	AdditionalData *map[string]string `json:"additionalData,omitempty"`
-	// List of payment methods to be presented to the shopper. To refer to payment methods, use their `paymentMethod.type` from [Payment methods overview](https://docs.adyen.com/payment-methods).  Example: `\"allowedPaymentMethods\":[\"ideal\",\"giropay\"]`
+	// List of payment methods to be presented to the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).  Example: `\"allowedPaymentMethods\":[\"ideal\",\"giropay\"]`
 	AllowedPaymentMethods []string `json:"allowedPaymentMethods,omitempty"`
 	Amount                *Amount  `json:"amount,omitempty"`
-	// List of payment methods to be hidden from the shopper. To refer to payment methods, use their `paymentMethod.type` from [Payment methods overview](https://docs.adyen.com/payment-methods).  Example: `\"blockedPaymentMethods\":[\"ideal\",\"giropay\"]`
+	// List of payment methods to be hidden from the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).  Example: `\"blockedPaymentMethods\":[\"ideal\",\"giropay\"]`
 	BlockedPaymentMethods []string `json:"blockedPaymentMethods,omitempty"`
 	// The platform where a payment transaction takes place. This field can be used for filtering out payment methods that are only available on specific platforms. Possible values: * iOS * Android * Web
 	Channel *string `json:"channel,omitempty"`
 	// The shopper's country code.
 	CountryCode *string `json:"countryCode,omitempty"`
 	// The merchant account identifier, with which you want to process the transaction.
-	MerchantAccount string         `json:"merchantAccount"`
-	Order           *CheckoutOrder `json:"order,omitempty"`
+	MerchantAccount string              `json:"merchantAccount"`
+	Order           *EncryptedOrderData `json:"order,omitempty"`
 	// The combination of a language code and a country code to specify the language to be used in the payment.
 	ShopperLocale *string `json:"shopperLocale,omitempty"`
 	// Required for recurring payments.  Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters. > Your reference must not include personally identifiable information (PII), for example name or email address.
@@ -282,9 +282,9 @@ func (o *PaymentMethodsRequest) SetMerchantAccount(v string) {
 }
 
 // GetOrder returns the Order field value if set, zero value otherwise.
-func (o *PaymentMethodsRequest) GetOrder() CheckoutOrder {
+func (o *PaymentMethodsRequest) GetOrder() EncryptedOrderData {
 	if o == nil || common.IsNil(o.Order) {
-		var ret CheckoutOrder
+		var ret EncryptedOrderData
 		return ret
 	}
 	return *o.Order
@@ -292,7 +292,7 @@ func (o *PaymentMethodsRequest) GetOrder() CheckoutOrder {
 
 // GetOrderOk returns a tuple with the Order field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentMethodsRequest) GetOrderOk() (*CheckoutOrder, bool) {
+func (o *PaymentMethodsRequest) GetOrderOk() (*EncryptedOrderData, bool) {
 	if o == nil || common.IsNil(o.Order) {
 		return nil, false
 	}
@@ -308,8 +308,8 @@ func (o *PaymentMethodsRequest) HasOrder() bool {
 	return false
 }
 
-// SetOrder gets a reference to the given CheckoutOrder and assigns it to the Order field.
-func (o *PaymentMethodsRequest) SetOrder(v CheckoutOrder) {
+// SetOrder gets a reference to the given EncryptedOrderData and assigns it to the Order field.
+func (o *PaymentMethodsRequest) SetOrder(v EncryptedOrderData) {
 	o.Order = &v
 }
 

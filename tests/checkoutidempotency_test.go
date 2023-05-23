@@ -43,6 +43,7 @@ func Test_Checkout_Idempotency_Race(t *testing.T) {
 			Transport: &referenceAndIdempotencyKeyTransport{},
 		},
 	})
+	service := client.Checkout()
 
 	for r := 0; r < 10; r++ {
 		t.Run(fmt.Sprintf("Routine %d", r), func(t *testing.T) {
@@ -54,12 +55,13 @@ func Test_Checkout_Idempotency_Race(t *testing.T) {
 				ctx, cancel := context.WithTimeout(context.Background(), time.Second*5)
 				defer cancel()
 				ctx = common.WithIdempotencyKey(ctx, idempotencyKey)
-				_, _, err := client.Checkout.Payments(&checkout.PaymentRequest{
+				req := service.PaymentsApi.PaymentsConfig(ctx).PaymentRequest(checkout.PaymentRequest{
 					Reference: ref,
 					PaymentMethod: checkout.IdealDetailsAsCheckoutPaymentMethod(&checkout.IdealDetails{
 						Issuer: "1121",
 					}),
-				}, ctx)
+				})
+				_, _, err := service.PaymentsApi.Payments(req)
 				require.NoError(t, err)
 				v, ok := idempotencyKeys.Load(ref)
 				require.True(t, ok)

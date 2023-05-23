@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**EnhancedSchemeDataCustomerReference** | Pointer to **string** | Customer code, if supplied by a customer. * Encoding: ASCII * maxLength: 25 | [optional] 
-**EnhancedSchemeDataEmployeeName** | Pointer to **string** | Name or ID associated with the individual working in a temporary capacity. * maxLength: 40 | [optional] 
-**EnhancedSchemeDataJobDescription** | Pointer to **string** | Description of the job or task of the individual working in a temporary capacity. * maxLength: 40 | [optional] 
-**EnhancedSchemeDataRegularHoursRate** | Pointer to **string** | Amount paid per regular hours worked, minor units. * maxLength: 7 | [optional] 
-**EnhancedSchemeDataRegularHoursWorked** | Pointer to **string** | Amount of time worked during a normal operation for the task or job. * maxLength: 7 | [optional] 
-**EnhancedSchemeDataRequestName** | Pointer to **string** | Name of the individual requesting temporary services. * maxLength: 40 | [optional] 
-**EnhancedSchemeDataTempStartDate** | Pointer to **string** | Date for the beginning of the pay period. * Format: ddMMyy * maxLength: 6 | [optional] 
-**EnhancedSchemeDataTempWeekEnding** | Pointer to **string** | Date of the end of the billing cycle. * Format: ddMMyy * maxLength: 6 | [optional] 
-**EnhancedSchemeDataTotalTaxAmount** | Pointer to **string** | Total tax amount, in minor units. For example, 2000 means USD 20.00 * maxLength: 12 | [optional] 
+**EnhancedSchemeDataCustomerReference** | Pointer to **string** | The customer code, if supplied by a customer. * Encoding: ASCII * maxLength: 25 | [optional] 
+**EnhancedSchemeDataEmployeeName** | Pointer to **string** | The name or ID of the person working in a temporary capacity. * maxLength: 40 * Must not be all zeros * Must not be all spaces | [optional] 
+**EnhancedSchemeDataJobDescription** | Pointer to **string** | The job description of the person working in a temporary capacity. * maxLength: 40 * Must not be all zeros * Must not be all spaces | [optional] 
+**EnhancedSchemeDataRegularHoursRate** | Pointer to **string** | The amount paid for regular hours worked, [minor units](https://docs.adyen.com/development-resources/currency-codes). * maxLength: 7 * Must not be empty * Can be all zeros | [optional] 
+**EnhancedSchemeDataRegularHoursWorked** | Pointer to **string** | The hours worked. * maxLength: 7 * Must not be empty * Can be all zeros | [optional] 
+**EnhancedSchemeDataRequestName** | Pointer to **string** | The name of the person requesting temporary services. * maxLength: 40 * Must not be all zeros * Must not be all spaces | [optional] 
+**EnhancedSchemeDataTempStartDate** | Pointer to **string** | The billing period start date. * Format: ddMMyy * maxLength: 6 | [optional] 
+**EnhancedSchemeDataTempWeekEnding** | Pointer to **string** | The billing period end date. * Format: ddMMyy * maxLength: 6 | [optional] 
+**EnhancedSchemeDataTotalTaxAmount** | Pointer to **string** | The total tax amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes). For example, 2000 means USD 20.00 * maxLength: 12 | [optional] 
 
 ## Methods
 

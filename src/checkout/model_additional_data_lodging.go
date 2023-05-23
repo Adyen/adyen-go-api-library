@@ -19,39 +19,37 @@ var _ common.MappedNullable = &AdditionalDataLodging{}
 
 // AdditionalDataLodging struct for AdditionalDataLodging
 type AdditionalDataLodging struct {
-	// The arrival date. * Date format: `yyyyMMdd`
+	// The arrival date. * Date format: **yyyyMmDd**. For example, for 2023 April 22, **20230422**.
 	LodgingCheckInDate *string `json:"lodging.checkInDate,omitempty"`
-	// The departure date. * Date format: `yyyyMMdd`
+	// The departure date. * Date format: **yyyyMmDd**. For example, for 2023 April 22, **20230422**.
 	LodgingCheckOutDate *string `json:"lodging.checkOutDate,omitempty"`
-	// The toll free phone number for the hotel/lodgings. * Format: Alphanumeric * maxLength: 17
+	// The toll-free phone number for the lodging. * Format: numeric * Max length: 17 characters. * For US and CA numbers must be 10 characters in length * Must not start with a space * Must not be all zeros * Must not contain any special characters such as + or -
 	LodgingCustomerServiceTollFreeNumber *string `json:"lodging.customerServiceTollFreeNumber,omitempty"`
-	// Identifies that the facility complies with the Hotel and Motel Fire Safety Act of 1990. Values can be: 'Y' or 'N'. * Format: Alphabetic * maxLength: 1
+	// Identifies that the facility complies with the Hotel and Motel Fire Safety Act of 1990. Must be 'Y' or 'N'. * Format: alphabetic * Max length: 1 character
 	LodgingFireSafetyActIndicator *string `json:"lodging.fireSafetyActIndicator,omitempty"`
-	// The folio cash advances. * Format: Numeric * maxLength: 12
+	// The folio cash advances, in [minor units](https://docs.adyen.com/development-resources/currency-codes). * Format: numeric * Max length: 12 characters
 	LodgingFolioCashAdvances *string `json:"lodging.folioCashAdvances,omitempty"`
-	// Card acceptor’s internal invoice or billing ID reference number. * Format: Alphanumeric * maxLength: 25
+	// The card acceptor’s internal invoice or billing ID reference number. * Max length: 25 characters. * Must not start with a space * Must not be all zeros
 	LodgingFolioNumber *string `json:"lodging.folioNumber,omitempty"`
-	// Any charges for food and beverages associated with the booking. * Format: Numeric * maxLength: 12
+	// Any charges for food and beverages associated with the booking, in [minor units](https://docs.adyen.com/development-resources/currency-codes). * Format: numeric * Max length: 12 characters
 	LodgingFoodBeverageCharges *string `json:"lodging.foodBeverageCharges,omitempty"`
-	// Indicates if the customer was a \"no-show\" (neither keeps nor cancels their booking).  Value should be Y or N. * Format: Numeric * maxLength: 1
+	// Indicates if the customer didn't check in for their booking.  Possible values:  * **Y**: the customer didn't check in  * **N**: the customer checked in
 	LodgingNoShowIndicator *string `json:"lodging.noShowIndicator,omitempty"`
-	// Prepaid expenses for the booking. * Format: Numeric * maxLength: 12
+	// The prepaid expenses for the booking. * Format: numeric * Max length: 12 characters
 	LodgingPrepaidExpenses *string `json:"lodging.prepaidExpenses,omitempty"`
-	// Identifies specific lodging property location by its local phone number. * Format: Alphanumeric * maxLength: 17
+	// The lodging property location's phone number. * Format: numeric. * Min length: 10 characters * Max length: 17 characters * For US and CA numbers must be 10 characters in length * Must not start with a space * Must not be all zeros * Must not contain any special characters such as + or -
 	LodgingPropertyPhoneNumber *string `json:"lodging.propertyPhoneNumber,omitempty"`
-	// Total number of nights the room will be rented. * Format: Numeric * maxLength: 4
+	// The total number of nights the room is booked for. * Format: numeric * Must be a number between 0 and 99 * Max length: 2 characters
 	LodgingRoom1NumberOfNights *string `json:"lodging.room1.numberOfNights,omitempty"`
-	// The rate of the room. * Format: Numeric * maxLength: 12
+	// The rate for the room, in [minor units](https://docs.adyen.com/development-resources/currency-codes). * Format: numeric * Max length: 12 characters * Must not be a negative number
 	LodgingRoom1Rate *string `json:"lodging.room1.rate,omitempty"`
-	// The total amount of tax to be paid. * Format: Numeric * maxLength: 12
-	LodgingRoom1Tax *string `json:"lodging.room1.tax,omitempty"`
-	// Total room tax amount. * Format: Numeric * maxLength: 12
+	// The total room tax amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes). * Format: numeric * Max length: 12 characters * Must not be a negative number
 	LodgingTotalRoomTax *string `json:"lodging.totalRoomTax,omitempty"`
-	// Total tax amount. * Format: Numeric * maxLength: 12
+	// The total tax amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes). * Format: numeric * Max length: 12 characters * Must not be a negative number
 	LodgingTotalTax *string `json:"lodging.totalTax,omitempty"`
-	// Number of nights. This should be included in the auth message. * Format: Numeric * maxLength: 2
+	// The number of nights. This should be included in the auth message. * Format: numeric * Max length: 2 characters
 	TravelEntertainmentAuthDataDuration *string `json:"travelEntertainmentAuthData.duration,omitempty"`
-	// Indicates what market-specific dataset will be submitted or is being submitted. Value should be \"H\" for Hotel. This should be included in the auth message.  * Format: Alphanumeric * maxLength: 1
+	// Indicates what market-specific dataset will be submitted. Must be 'H' for Hotel. This should be included in the auth message.  * Format: alphanumeric * Max length: 1 character
 	TravelEntertainmentAuthDataMarket *string `json:"travelEntertainmentAuthData.market,omitempty"`
 }
 
@@ -456,38 +454,6 @@ func (o *AdditionalDataLodging) SetLodgingRoom1Rate(v string) {
 	o.LodgingRoom1Rate = &v
 }
 
-// GetLodgingRoom1Tax returns the LodgingRoom1Tax field value if set, zero value otherwise.
-func (o *AdditionalDataLodging) GetLodgingRoom1Tax() string {
-	if o == nil || common.IsNil(o.LodgingRoom1Tax) {
-		var ret string
-		return ret
-	}
-	return *o.LodgingRoom1Tax
-}
-
-// GetLodgingRoom1TaxOk returns a tuple with the LodgingRoom1Tax field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AdditionalDataLodging) GetLodgingRoom1TaxOk() (*string, bool) {
-	if o == nil || common.IsNil(o.LodgingRoom1Tax) {
-		return nil, false
-	}
-	return o.LodgingRoom1Tax, true
-}
-
-// HasLodgingRoom1Tax returns a boolean if a field has been set.
-func (o *AdditionalDataLodging) HasLodgingRoom1Tax() bool {
-	if o != nil && !common.IsNil(o.LodgingRoom1Tax) {
-		return true
-	}
-
-	return false
-}
-
-// SetLodgingRoom1Tax gets a reference to the given string and assigns it to the LodgingRoom1Tax field.
-func (o *AdditionalDataLodging) SetLodgingRoom1Tax(v string) {
-	o.LodgingRoom1Tax = &v
-}
-
 // GetLodgingTotalRoomTax returns the LodgingTotalRoomTax field value if set, zero value otherwise.
 func (o *AdditionalDataLodging) GetLodgingTotalRoomTax() string {
 	if o == nil || common.IsNil(o.LodgingTotalRoomTax) {
@@ -661,9 +627,6 @@ func (o AdditionalDataLodging) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.LodgingRoom1Rate) {
 		toSerialize["lodging.room1.rate"] = o.LodgingRoom1Rate
-	}
-	if !common.IsNil(o.LodgingRoom1Tax) {
-		toSerialize["lodging.room1.tax"] = o.LodgingRoom1Tax
 	}
 	if !common.IsNil(o.LodgingTotalRoomTax) {
 		toSerialize["lodging.totalRoomTax"] = o.LodgingTotalRoomTax

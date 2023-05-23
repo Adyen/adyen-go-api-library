@@ -54,7 +54,7 @@ type CardDetails struct {
 	ShopperNotificationReference *string `json:"shopperNotificationReference,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
 	StoredPaymentMethodId *string `json:"storedPaymentMethodId,omitempty"`
-	// Version of the 3D Secure 2 mobile SDK.
+	// Required for mobile integrations. Version of the 3D Secure 2 mobile SDK.
 	ThreeDS2SdkVersion *string `json:"threeDS2SdkVersion,omitempty"`
 	// Default payment method details. Common for scheme payment methods, and for simple payment method details.
 	Type *string `json:"type,omitempty"`
