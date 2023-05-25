@@ -274,6 +274,7 @@ func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix
 		}
 		c.client.Cfg.TerminalApiCloudEndpoint = TerminalAPIEndpointLive
 		c.client.Cfg.BalancePlatformEndpoint = BalancePlatformEndpointLive
+		c.client.Cfg.TransfersEndpoint = TransfersEndpointLive
 		c.client.Cfg.ManagementEndpoint = ManagementEndpointLive
 	} else {
 		c.client.Cfg.Environment = env

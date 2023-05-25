@@ -2,6 +2,7 @@ package tests
 
 import (
 	"context"
+	"fmt"
 	"io"
 	"net/http"
 	"net/http/httptest"
@@ -71,6 +72,7 @@ func Test_Transfers(t *testing.T) {
 
 	mockServer := httptest.NewServer(mux)
 	defer mockServer.Close()
+	fmt.Println(mockServer.URL)
 	client.Transfers.BasePath = func() string { return mockServer.URL }
 
 	t.Run("make transfer", func(t *testing.T) {
