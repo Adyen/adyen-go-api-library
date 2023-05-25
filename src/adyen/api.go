@@ -91,7 +91,7 @@ type APIClient struct {
 	Disputes                           *disputes.Disputes
 	StoredValue                        *storedvalue.StoredValue
 	BalancePlatform                    *balanceplatform.APIClient
-	Transfers                          *transfers.APIClient
+	Transfers                          *transfers.GeneralApi
 	Management                         *management.APIClient
 	LegalEntity                        *legalentity.APIClient
 }
@@ -250,6 +250,13 @@ func NewClient(cfg *common.Config) *APIClient {
 		Client: c.client,
 		BasePath: func() string {
 			return fmt.Sprintf("%s/pal/servlet/StoredValue/%s", c.client.Cfg.Endpoint, StoredValueAPIVersion)
+		},
+	}
+
+	c.Transfers = &transfers.GeneralApi{
+		Client: c.client,
+		BasePath: func() string {
+			return fmt.Sprintf("%s/%s", c.client.Cfg.TransfersEndpoint, TransfersAPIVersion)
 		},
 	}
 
