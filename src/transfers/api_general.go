@@ -22,7 +22,7 @@ import (
 // GeneralApi GeneralApi service
 type GeneralApi common.Service
 
-type GeneralApiGetTransactionsConfig struct {
+type GeneralApiGetAllTransactionsConfig struct {
 	ctx                 context.Context
 	createdSince        *time.Time
 	createdUntil        *time.Time
@@ -35,65 +35,65 @@ type GeneralApiGetTransactionsConfig struct {
 }
 
 // Only include transactions that have been created on or after this point in time. The value must be in ISO 8601 format. For example, **2021-05-30T15:07:40Z**.
-func (r GeneralApiGetTransactionsConfig) CreatedSince(createdSince time.Time) GeneralApiGetTransactionsConfig {
+func (r GeneralApiGetAllTransactionsConfig) CreatedSince(createdSince time.Time) GeneralApiGetAllTransactionsConfig {
 	r.createdSince = &createdSince
 	return r
 }
 
 // Only include transactions that have been created on or before this point in time. The value must be in ISO 8601 format. For example, **2021-05-30T15:07:40Z**.
-func (r GeneralApiGetTransactionsConfig) CreatedUntil(createdUntil time.Time) GeneralApiGetTransactionsConfig {
+func (r GeneralApiGetAllTransactionsConfig) CreatedUntil(createdUntil time.Time) GeneralApiGetAllTransactionsConfig {
 	r.createdUntil = &createdUntil
 	return r
 }
 
 // Unique identifier of the [balance platform](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balancePlatforms/{id}__queryParam_id).
-func (r GeneralApiGetTransactionsConfig) BalancePlatform(balancePlatform string) GeneralApiGetTransactionsConfig {
+func (r GeneralApiGetAllTransactionsConfig) BalancePlatform(balancePlatform string) GeneralApiGetAllTransactionsConfig {
 	r.balancePlatform = &balancePlatform
 	return r
 }
 
 // Unique identifier of the [payment instrument](https://docs.adyen.com/api-explorer/balanceplatform/latest/get/paymentInstruments/_id_).
-func (r GeneralApiGetTransactionsConfig) PaymentInstrumentId(paymentInstrumentId string) GeneralApiGetTransactionsConfig {
+func (r GeneralApiGetAllTransactionsConfig) PaymentInstrumentId(paymentInstrumentId string) GeneralApiGetAllTransactionsConfig {
 	r.paymentInstrumentId = &paymentInstrumentId
 	return r
 }
 
 // Unique identifier of the [account holder](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/accountHolders/{id}__queryParam_id).
-func (r GeneralApiGetTransactionsConfig) AccountHolderId(accountHolderId string) GeneralApiGetTransactionsConfig {
+func (r GeneralApiGetAllTransactionsConfig) AccountHolderId(accountHolderId string) GeneralApiGetAllTransactionsConfig {
 	r.accountHolderId = &accountHolderId
 	return r
 }
 
 // Unique identifier of the [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balanceAccounts/{id}__queryParam_id).
-func (r GeneralApiGetTransactionsConfig) BalanceAccountId(balanceAccountId string) GeneralApiGetTransactionsConfig {
+func (r GeneralApiGetAllTransactionsConfig) BalanceAccountId(balanceAccountId string) GeneralApiGetAllTransactionsConfig {
 	r.balanceAccountId = &balanceAccountId
 	return r
 }
 
 // The &#x60;cursor&#x60; returned in the links of the previous response.
-func (r GeneralApiGetTransactionsConfig) Cursor(cursor string) GeneralApiGetTransactionsConfig {
+func (r GeneralApiGetAllTransactionsConfig) Cursor(cursor string) GeneralApiGetAllTransactionsConfig {
 	r.cursor = &cursor
 	return r
 }
 
 // The number of items returned per page, maximum of 100 items. By default, the response returns 10 items per page.
-func (r GeneralApiGetTransactionsConfig) Limit(limit int32) GeneralApiGetTransactionsConfig {
+func (r GeneralApiGetAllTransactionsConfig) Limit(limit int32) GeneralApiGetAllTransactionsConfig {
 	r.limit = &limit
 	return r
 }
 
 /*
-GetTransactions Get all transactions
+GetAllTransactions Get all transactions
 
 Returns all transactions related to a balance account with a payment instrument of type **bankAccount**.
 
 This endpoint supports cursor-based pagination. The response returns the first page of results, and returns links to the next page when applicable. You can use the links to page through the results. The response also returns links to the previous page when applicable.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return GeneralApiGetTransactionsConfig
+	@return GeneralApiGetAllTransactionsConfig
 */
-func (a *GeneralApi) GetTransactionsConfig(ctx context.Context) GeneralApiGetTransactionsConfig {
-	return GeneralApiGetTransactionsConfig{
+func (a *GeneralApi) GetAllTransactionsConfig(ctx context.Context) GeneralApiGetAllTransactionsConfig {
+	return GeneralApiGetAllTransactionsConfig{
 		ctx: ctx,
 	}
 }
@@ -105,7 +105,7 @@ Returns all transactions related to a balance account with a payment instrument 
 @return TransactionSearchResponse
 */
 
-func (a *GeneralApi) GetTransactions(r GeneralApiGetTransactionsConfig) (TransactionSearchResponse, *_nethttp.Response, error) {
+func (a *GeneralApi) GetAllTransactions(r GeneralApiGetAllTransactionsConfig) (TransactionSearchResponse, *_nethttp.Response, error) {
 	res := &TransactionSearchResponse{}
 	path := "/transactions"
 	queryString := url.Values{}
@@ -137,22 +137,22 @@ func (a *GeneralApi) GetTransactions(r GeneralApiGetTransactionsConfig) (Transac
 	return *res, httpRes, err
 }
 
-type GeneralApiGetTransactionsIdConfig struct {
+type GeneralApiGetTransactionConfig struct {
 	ctx context.Context
 	id  string
 }
 
 /*
-GetTransactionsId Get a transaction
+GetTransaction Get a transaction
 
 Returns a transaction.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id Unique identifier of the transaction.
-	@return GeneralApiGetTransactionsIdConfig
+	@return GeneralApiGetTransactionConfig
 */
-func (a *GeneralApi) GetTransactionsIdConfig(ctx context.Context, id string) GeneralApiGetTransactionsIdConfig {
-	return GeneralApiGetTransactionsIdConfig{
+func (a *GeneralApi) GetTransactionConfig(ctx context.Context, id string) GeneralApiGetTransactionConfig {
+	return GeneralApiGetTransactionConfig{
 		ctx: ctx,
 		id:  id,
 	}
@@ -166,7 +166,7 @@ Returns a transaction.
 @return Transaction
 */
 
-func (a *GeneralApi) GetTransactionsId(r GeneralApiGetTransactionsIdConfig) (Transaction, *_nethttp.Response, error) {
+func (a *GeneralApi) GetTransaction(r GeneralApiGetTransactionConfig) (Transaction, *_nethttp.Response, error) {
 	res := &Transaction{}
 	path := "/transactions/{id}"
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
@@ -174,28 +174,28 @@ func (a *GeneralApi) GetTransactionsId(r GeneralApiGetTransactionsIdConfig) (Tra
 	return *res, httpRes, err
 }
 
-type GeneralApiPostTransfersConfig struct {
+type GeneralApiTransferFundsConfig struct {
 	ctx          context.Context
 	transferInfo *TransferInfo
 }
 
-func (r GeneralApiPostTransfersConfig) TransferInfo(transferInfo TransferInfo) GeneralApiPostTransfersConfig {
+func (r GeneralApiTransferFundsConfig) TransferInfo(transferInfo TransferInfo) GeneralApiTransferFundsConfig {
 	r.transferInfo = &transferInfo
 	return r
 }
 
 /*
-PostTransfers Transfer funds
+TransferFunds Transfer funds
 
 Starts a request to transfer funds to [balance accounts](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts), [transfer instruments](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments), or third-party bank accounts. Adyen sends the outcome of the transfer request through webhooks.
 
 To use this endpoint, you need an additional role for your API credential and transfers must be enabled for the source balance account. Your Adyen contact will set these up for you.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return GeneralApiPostTransfersConfig
+	@return GeneralApiTransferFundsConfig
 */
-func (a *GeneralApi) PostTransfersConfig(ctx context.Context) GeneralApiPostTransfersConfig {
-	return GeneralApiPostTransfersConfig{
+func (a *GeneralApi) TransferFundsConfig(ctx context.Context) GeneralApiTransferFundsConfig {
+	return GeneralApiTransferFundsConfig{
 		ctx: ctx,
 	}
 }
@@ -208,7 +208,7 @@ Starts a request to transfer funds to [balance accounts](https://docs.adyen.com/
 @return Transfer
 */
 
-func (a *GeneralApi) PostTransfers(r GeneralApiPostTransfersConfig) (Transfer, *_nethttp.Response, error) {
+func (a *GeneralApi) TransferFunds(r GeneralApiTransferFundsConfig) (Transfer, *_nethttp.Response, error) {
 	res := &Transfer{}
 	path := "/transfers"
 	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPost, r.transferInfo, res, a.BasePath()+path, []_context.Context{r.ctx})

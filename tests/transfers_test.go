@@ -76,8 +76,8 @@ func Test_Transfers(t *testing.T) {
 	t.Run("make succesful transfer", func(t *testing.T) {
 		service := client.Transfers
 
-		request := service.PostTransfersConfig(context.Background())
-		_, httpRes, err := service.PostTransfers(request)
+		request := service.TransferFundsConfig(context.Background())
+		_, httpRes, err := service.TransferFunds(request)
 
 		require.NoError(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -87,8 +87,8 @@ func Test_Transfers(t *testing.T) {
 	t.Run("make unsuccesful get transactions call", func(t *testing.T) {
 		service := client.Transfers
 
-		request := service.GetTransactionsConfig(context.Background())
-		_, httpRes, err := service.GetTransactions(request)
+		request := service.GetAllTransactionsConfig(context.Background())
+		_, httpRes, err := service.GetAllTransactions(request)
 
 		assert.Equal(t, 403, httpRes.StatusCode)
 		require.NotNil(t, err)

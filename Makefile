@@ -46,7 +46,6 @@ management: serviceName=Management
 
 # Generate a full client (models and service classes)
 $(services): schema $(openapi-generator-jar) $(goimports)
-	rm -rf $(output)/$(@)/**
 	GO_POST_PROCESS_FILE="$(goimports) -w" $(openapi-generator-cli) generate \
 		-i schema/json/$(spec).json \
 		-g $(generator) \
