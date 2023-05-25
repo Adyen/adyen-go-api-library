@@ -10,8 +10,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
-
-	"github.com/adyen/adyen-go-api-library/v6/src/notification"
+	"github.com/adyen/adyen-go-api-library/v6/src/webhook"
 )
 
 // CalculateHmac calculates the SHA-256 HMAC for the given data and key
@@ -26,7 +25,7 @@ func CalculateHmac(data interface{}, secret string) (string, error) {
 }
 
 // ValidateHmac calculates the HMAC of the notification request item and checks if it matches with the given key
-func ValidateHmac(notificationRequestItem notification.NotificationRequestItem, key string) bool {
+func ValidateHmac(notificationRequestItem webhook.NotificationRequestItem, key string) bool {
 	expectedSign, err := CalculateHmac(notificationRequestItem, key)
 	if err != nil {
 		return false
@@ -38,7 +37,7 @@ func ValidateHmac(notificationRequestItem notification.NotificationRequestItem, 
 // GetDataToSign converts a notification request item to string, which later on can be used for calculating a HMAC
 func GetDataToSign(notificationRequestItem interface{}) string {
 	switch item := notificationRequestItem.(type) {
-	case notification.NotificationRequestItem:
+	case webhook.NotificationRequestItem:
 		signedDataList := []string{
 			item.PspReference,
 			item.OriginalReference,

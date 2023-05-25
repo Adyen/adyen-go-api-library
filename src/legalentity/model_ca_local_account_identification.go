@@ -21,6 +21,8 @@ var _ common.MappedNullable = &CALocalAccountIdentification{}
 type CALocalAccountIdentification struct {
 	// The 5- to 12-digit bank account number, without separators or whitespace.
 	AccountNumber string `json:"accountNumber"`
+	// The bank account type.  Possible values: **checking** or **savings**. Defaults to **checking**.
+	AccountType *string `json:"accountType,omitempty"`
 	// The 3-digit institution number, without separators or whitespace.
 	InstitutionNumber string `json:"institutionNumber"`
 	// The 5-digit transit number, without separators or whitespace.
@@ -36,6 +38,8 @@ type CALocalAccountIdentification struct {
 func NewCALocalAccountIdentification(accountNumber string, institutionNumber string, transitNumber string, type_ string) *CALocalAccountIdentification {
 	this := CALocalAccountIdentification{}
 	this.AccountNumber = accountNumber
+	var accountType string = "checking"
+	this.AccountType = &accountType
 	this.InstitutionNumber = institutionNumber
 	this.TransitNumber = transitNumber
 	this.Type = type_
@@ -47,6 +51,8 @@ func NewCALocalAccountIdentification(accountNumber string, institutionNumber str
 // but it doesn't guarantee that properties required by API are set
 func NewCALocalAccountIdentificationWithDefaults() *CALocalAccountIdentification {
 	this := CALocalAccountIdentification{}
+	var accountType string = "checking"
+	this.AccountType = &accountType
 	var type_ string = "caLocal"
 	this.Type = type_
 	return &this
@@ -74,6 +80,38 @@ func (o *CALocalAccountIdentification) GetAccountNumberOk() (*string, bool) {
 // SetAccountNumber sets field value
 func (o *CALocalAccountIdentification) SetAccountNumber(v string) {
 	o.AccountNumber = v
+}
+
+// GetAccountType returns the AccountType field value if set, zero value otherwise.
+func (o *CALocalAccountIdentification) GetAccountType() string {
+	if o == nil || common.IsNil(o.AccountType) {
+		var ret string
+		return ret
+	}
+	return *o.AccountType
+}
+
+// GetAccountTypeOk returns a tuple with the AccountType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CALocalAccountIdentification) GetAccountTypeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.AccountType) {
+		return nil, false
+	}
+	return o.AccountType, true
+}
+
+// HasAccountType returns a boolean if a field has been set.
+func (o *CALocalAccountIdentification) HasAccountType() bool {
+	if o != nil && !common.IsNil(o.AccountType) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccountType gets a reference to the given string and assigns it to the AccountType field.
+func (o *CALocalAccountIdentification) SetAccountType(v string) {
+	o.AccountType = &v
 }
 
 // GetInstitutionNumber returns the InstitutionNumber field value
@@ -159,6 +197,9 @@ func (o CALocalAccountIdentification) MarshalJSON() ([]byte, error) {
 func (o CALocalAccountIdentification) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["accountNumber"] = o.AccountNumber
+	if !common.IsNil(o.AccountType) {
+		toSerialize["accountType"] = o.AccountType
+	}
 	toSerialize["institutionNumber"] = o.InstitutionNumber
 	toSerialize["transitNumber"] = o.TransitNumber
 	toSerialize["type"] = o.Type
@@ -201,6 +242,15 @@ func (v *NullableCALocalAccountIdentification) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+func (o *CALocalAccountIdentification) isValidAccountType() bool {
+	var allowedEnumValues = []string{"checking", "savings"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetAccountType() == allowed {
+			return true
+		}
+	}
+	return false
+}
 func (o *CALocalAccountIdentification) isValidType() bool {
 	var allowedEnumValues = []string{"caLocal"}
 	for _, allowed := range allowedEnumValues {

@@ -1,0 +1,180 @@
+package legalentity
+
+import (
+	"context"
+	"github.com/adyen/adyen-go-api-library/v6/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v6/src/common"
+	"github.com/adyen/adyen-go-api-library/v6/src/legalentity"
+	"github.com/stretchr/testify/assert"
+	"net/http"
+	"net/http/httptest"
+	"strings"
+	"testing"
+)
+
+func Test_LegalEntity(t *testing.T) {
+	client := adyen.NewClient(&common.Config{
+		ApiKey:      "YOUR_ADYEN_API_KEY",
+		Environment: "TEST",
+		Debug:       false,
+	})
+	service := client.LegalEntity
+
+	var (
+		mockServer  *httptest.Server
+		mockRequest *http.Request
+	)
+
+	mockServer = httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		mockRequest = r
+
+		switch strings.TrimSpace(r.Method) {
+		case "GET":
+			switch strings.TrimSpace(r.URL.Path) {
+			case "/legalEntities/123":
+				legalEntityId := "123"
+				model := legalentity.LegalEntity{Id: legalEntityId}
+				mockResponse(http.StatusOK, w, model)
+			case "/legalEntities/123/businessLines":
+				model := legalentity.NewBusinessLinesWithDefaults()
+				mockResponse(http.StatusOK, w, model)
+			}
+		case "PATCH":
+			switch strings.TrimSpace(r.URL.Path) {
+			case "/legalEntities/123":
+				legalEntityId := "123"
+				model := legalentity.LegalEntity{Id: legalEntityId}
+				mockResponse(http.StatusOK, w, model)
+			}
+		case "POST":
+			switch strings.TrimSpace(r.URL.Path) {
+			case "/legalEntities":
+				legalEntityId := "123"
+				model := legalentity.LegalEntity{Id: legalEntityId}
+				mockResponse(http.StatusOK, w, model)
+			}
+		}
+	}))
+	defer mockServer.Close()
+
+	// base path is shared between all endpoints
+	client.LegalEntity.BusinessLinesApi.BasePath = func() string {
+		return mockServer.URL
+	}
+
+	t.Run("Test BusinessLinesApiService DeleteBusinessLine", func(t *testing.T) {
+		req := service.BusinessLinesApi.DeleteBusinessLineConfig(context.Background(), "123")
+
+		service.BusinessLinesApi.DeleteBusinessLine(req)
+
+		assert.Equal(t, "DELETE", mockRequest.Method)
+		assert.Equal(t, "/businessLines/123", mockRequest.URL.Path)
+	})
+
+	t.Run("Test BusinessLinesApiService GetBusinessLine", func(t *testing.T) {
+		req := service.BusinessLinesApi.GetBusinessLineConfig(context.Background(), "123")
+
+		service.BusinessLinesApi.GetBusinessLine(req)
+
+		assert.Equal(t, "GET", mockRequest.Method)
+		assert.Equal(t, "/businessLines/123", mockRequest.URL.Path)
+
+	})
+
+	t.Run("Test BusinessLinesApiService UpdateBusinessLine", func(t *testing.T) {
+		req := service.BusinessLinesApi.UpdateBusinessLineConfig(context.Background(), "123")
+
+		service.BusinessLinesApi.UpdateBusinessLine(req)
+
+		assert.Equal(t, "PATCH", mockRequest.Method)
+		assert.Equal(t, "/businessLines/123", mockRequest.URL.Path)
+	})
+
+	t.Run("Test BusinessLinesApiService CreateBusinessLine", func(t *testing.T) {
+		req := service.BusinessLinesApi.CreateBusinessLineConfig(context.Background())
+
+		service.BusinessLinesApi.CreateBusinessLine(req)
+
+		assert.Equal(t, "POST", mockRequest.Method)
+		assert.Equal(t, "/businessLines", mockRequest.URL.Path)
+	})
+
+	t.Run("Test DocumentsApiService UploadDocumentForVerificationChecks", func(t *testing.T) {
+		req := service.DocumentsApi.UploadDocumentForVerificationChecksConfig(context.Background())
+
+		service.DocumentsApi.UploadDocumentForVerificationChecks(req)
+
+		assert.Equal(t, "POST", mockRequest.Method)
+		assert.Equal(t, "/documents", mockRequest.URL.Path)
+
+	})
+
+	t.Run("Test HostedOnboardingApiService ListHostedOnboardingPageThemes", func(t *testing.T) {
+		req := service.HostedOnboardingApi.ListHostedOnboardingPageThemesConfig(context.Background())
+
+		service.HostedOnboardingApi.ListHostedOnboardingPageThemes(req)
+
+		assert.Equal(t, "GET", mockRequest.Method)
+		assert.Equal(t, "/themes", mockRequest.URL.Path)
+	})
+
+	t.Run("Test HostedOnboardingApiService GetLinkToAdyenhostedOnboardingPage", func(t *testing.T) {
+		req := service.HostedOnboardingApi.GetLinkToAdyenhostedOnboardingPageConfig(context.Background(), "123")
+
+		service.HostedOnboardingApi.GetLinkToAdyenhostedOnboardingPage(req)
+
+		assert.Equal(t, "POST", mockRequest.Method)
+		assert.Equal(t, "/legalEntities/123/onboardingLinks", mockRequest.URL.Path)
+	})
+
+	t.Run("Test LegalEntitiesApiService GetLegalEntity", func(t *testing.T) {
+		req := service.LegalEntitiesApi.GetLegalEntityConfig(context.Background(), "123")
+
+		service.LegalEntitiesApi.GetLegalEntity(req)
+
+		assert.Equal(t, "GET", mockRequest.Method)
+		assert.Equal(t, "/legalEntities/123", mockRequest.URL.Path)
+
+	})
+
+	t.Run("Test LegalEntitiesApiService GetAllBusinessLinesUnderLegalEntity", func(t *testing.T) {
+		req := service.LegalEntitiesApi.GetAllBusinessLinesUnderLegalEntityConfig(context.Background(), "123")
+
+		service.LegalEntitiesApi.GetAllBusinessLinesUnderLegalEntity(req)
+
+		assert.Equal(t, "GET", mockRequest.Method)
+		assert.Equal(t, "/legalEntities/123/businessLines", mockRequest.URL.Path)
+
+	})
+
+	t.Run("Test LegalEntitiesApiService UpdateLegalEntity", func(t *testing.T) {
+		req := service.LegalEntitiesApi.UpdateLegalEntityConfig(context.Background(), "123").
+			LegalEntityInfo(*legalentity.NewLegalEntityInfoWithDefaults())
+
+		service.LegalEntitiesApi.UpdateLegalEntity(req)
+
+		assert.Equal(t, "PATCH", mockRequest.Method)
+		assert.Equal(t, "/legalEntities/123", mockRequest.URL.Path)
+
+	})
+
+	t.Run("Test TermsOfServiceApiService GetTermsOfServiceInformationForLegalEntity", func(t *testing.T) {
+		req := service.TermsOfServiceApi.GetTermsOfServiceInformationForLegalEntityConfig(context.Background(), "123")
+
+		service.TermsOfServiceApi.GetTermsOfServiceInformationForLegalEntity(req)
+
+		assert.Equal(t, "GET", mockRequest.Method)
+		assert.Equal(t, "/legalEntities/123/termsOfServiceAcceptanceInfos", mockRequest.URL.Path)
+	})
+
+	t.Run("Test TermsOfServiceApiService AcceptTermsOfService", func(t *testing.T) {
+		legalEntityId := "123"
+		termsOfServiceDocumentId := "456"
+		req := service.TermsOfServiceApi.AcceptTermsOfServiceConfig(context.Background(), legalEntityId, termsOfServiceDocumentId)
+
+		service.TermsOfServiceApi.AcceptTermsOfService(req)
+
+		assert.Equal(t, "PATCH", mockRequest.Method)
+		assert.Equal(t, "/legalEntities/123/termsOfService/456", mockRequest.URL.Path)
+	})
+}
