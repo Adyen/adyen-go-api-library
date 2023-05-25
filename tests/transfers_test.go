@@ -2,7 +2,6 @@ package tests
 
 import (
 	"context"
-	"fmt"
 	"io"
 	"net/http"
 	"net/http/httptest"
@@ -72,15 +71,13 @@ func Test_Transfers(t *testing.T) {
 
 	mockServer := httptest.NewServer(mux)
 	defer mockServer.Close()
-	fmt.Println(mockServer.URL)
-	client.Transfers.BasePath = func() string { return mockServer.URL }
+	client.Transfers.GeneralApi.BasePath = func() string { return mockServer.URL }
 
 	t.Run("make transfer", func(t *testing.T) {
 		service := client.Transfers
 
-		request := service.PostTransfersConfig(context.Background())
-
-		_, httpRes, err := service.PostTransfers(request)
+		request := service.GeneralApi.PostTransfersConfig(context.Background())
+		_, httpRes, err := service.GeneralApi.PostTransfers(request)
 
 		require.NoError(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)

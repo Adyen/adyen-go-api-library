@@ -87,7 +87,7 @@ type APIClient struct {
 	Disputes                           *disputes.Disputes
 	StoredValue                        *storedvalue.StoredValue
 	BalancePlatform                    *balanceplatform.APIClient
-	Transfers                          *transfers.GeneralApi
+	Transfers                          *transfers.APIClient
 	Management                         *management.APIClient
 }
 
