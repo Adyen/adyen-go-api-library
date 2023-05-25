@@ -19,6 +19,7 @@ var _ common.MappedNullable = &CapabilityProblemEntityRecursive{}
 
 // CapabilityProblemEntityRecursive struct for CapabilityProblemEntityRecursive
 type CapabilityProblemEntityRecursive struct {
+	// List of document IDs corresponding to the verification errors from capabilities.
 	Documents []string `json:"documents,omitempty"`
 	Id        *string  `json:"id,omitempty"`
 	Type      *string  `json:"type,omitempty"`

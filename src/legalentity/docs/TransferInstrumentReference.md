@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **AccountIdentifier** | **string** | The masked IBAN or bank account number. | 
 **Id** | **string** | The unique identifier of the resource. | 
 **RealLastFour** | Pointer to **string** | Four last digits of the bank account number. | [optional] 
+**TrustedSource** | Pointer to **bool** | Identifies if the TI was created from a trusted source. | [optional] [readonly] 
 
 ## Methods
 
@@ -91,6 +92,31 @@ SetRealLastFour sets RealLastFour field to given value.
 `func (o *TransferInstrumentReference) HasRealLastFour() bool`
 
 HasRealLastFour returns a boolean if a field has been set.
+
+### GetTrustedSource
+
+`func (o *TransferInstrumentReference) GetTrustedSource() bool`
+
+GetTrustedSource returns the TrustedSource field if non-nil, zero value otherwise.
+
+### GetTrustedSourceOk
+
+`func (o *TransferInstrumentReference) GetTrustedSourceOk() (*bool, bool)`
+
+GetTrustedSourceOk returns a tuple with the TrustedSource field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTrustedSource
+
+`func (o *TransferInstrumentReference) SetTrustedSource(v bool)`
+
+SetTrustedSource sets TrustedSource field to given value.
+
+### HasTrustedSource
+
+`func (o *TransferInstrumentReference) HasTrustedSource() bool`
+
+HasTrustedSource returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

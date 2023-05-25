@@ -8,7 +8,7 @@ import (
 
 	"github.com/adyen/adyen-go-api-library/v6/src/adyen"
 	"github.com/adyen/adyen-go-api-library/v6/src/common"
-	"github.com/adyen/adyen-go-api-library/v6/src/notification"
+	"github.com/adyen/adyen-go-api-library/v6/src/webhook"
 )
 
 func TestNotificationService_HandleNotificationRequest(t *testing.T) {
@@ -18,7 +18,7 @@ func TestNotificationService_HandleNotificationRequest(t *testing.T) {
 	tests := []struct {
 		name    string
 		req     string
-		want    func(got *notification.Notification, t *testing.T)
+		want    func(got *webhook.Webhook, t *testing.T)
 		wantErr bool
 	}{
 		{
@@ -60,11 +60,11 @@ func TestNotificationService_HandleNotificationRequest(t *testing.T) {
                 ]
               }
             `,
-			func(got *notification.Notification, t *testing.T) {
+			func(got *webhook.Webhook, t *testing.T) {
 				require.NotNil(t, got)
 				assert.Equal(t, 1, len(got.GetNotificationItems()))
 				ni := got.GetNotificationItems()[0]
-				assert.Equal(t, notification.EventCodeAuthorisation, ni.EventCode)
+				assert.Equal(t, webhook.EventCodeAuthorisation, ni.EventCode)
 				assert.Equal(t, "true", ni.Success)
 				assert.Equal(t, "123456789", ni.PspReference)
 				assert.NotEmpty(t, ni.AdditionalData)
@@ -104,11 +104,11 @@ func TestNotificationService_HandleNotificationRequest(t *testing.T) {
                 ]
               }
             `,
-			func(got *notification.Notification, t *testing.T) {
+			func(got *webhook.Webhook, t *testing.T) {
 				require.NotNil(t, got)
 				assert.Equal(t, 1, len(got.GetNotificationItems()))
 				ni := got.GetNotificationItems()[0]
-				assert.Equal(t, notification.EventCodeCapture, ni.EventCode)
+				assert.Equal(t, webhook.EventCodeCapture, ni.EventCode)
 				assert.Equal(t, "true", ni.Success)
 				assert.Equal(t, "PSP_REFERENCE", ni.PspReference)
 				assert.Equal(t, "ORIGINAL_PSP", ni.OriginalReference)
@@ -143,11 +143,11 @@ func TestNotificationService_HandleNotificationRequest(t *testing.T) {
                 ]
               }
             `,
-			func(got *notification.Notification, t *testing.T) {
+			func(got *webhook.Webhook, t *testing.T) {
 				require.NotNil(t, got)
 				assert.Equal(t, 1, len(got.GetNotificationItems()))
 				ni := got.GetNotificationItems()[0]
-				assert.Equal(t, notification.EventCodeRefund, ni.EventCode)
+				assert.Equal(t, webhook.EventCodeRefund, ni.EventCode)
 				assert.Equal(t, "false", ni.Success)
 				assert.Equal(t, "PSP_REFERENCE", ni.PspReference)
 				assert.Equal(t, "ORIGINAL_PSP", ni.OriginalReference)

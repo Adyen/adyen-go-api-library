@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **AccountNumber** | **string** | The bank account number, without separators or whitespace. | 
 **BsbCode** | **string** | The 6-digit [Bank State Branch (BSB) code](https://en.wikipedia.org/wiki/Bank_state_branch), without separators or whitespace. | 
 **Type** | **string** | **usLocal** | [default to "usLocal"]
+**AccountType** | Pointer to **string** | The bank account type.  Possible values: **checking** or **savings**. Defaults to **checking**. | [optional] [default to "checking"]
 **InstitutionNumber** | **string** | The 3-digit institution number, without separators or whitespace. | 
 **TransitNumber** | **string** | The 5-digit transit number, without separators or whitespace. | 
 **BankCode** | **string** | The 4-digit bank code (Registreringsnummer) (without separators or whitespace). | 
@@ -15,7 +16,6 @@ Name | Type | Description | Notes
 **Bic** | **string** | The bank&#39;s 8- or 11-character BIC or SWIFT code. | 
 **ClearingNumber** | **string** | The 4- to 5-digit clearing number ([Clearingnummer](https://sv.wikipedia.org/wiki/Clearingnummer)), without separators or whitespace. | 
 **SortCode** | **string** | The 6-digit [sort code](https://en.wikipedia.org/wiki/Sort_code), without separators or whitespace. | 
-**AccountType** | Pointer to **string** | The bank account type.  Possible values: **checking** or **savings**. Defaults to **checking**. | [optional] [default to "checking"]
 **RoutingNumber** | **string** | The 9-digit [routing number](https://en.wikipedia.org/wiki/ABA_routing_transit_number), without separators or whitespace. | 
 
 ## Methods
@@ -96,6 +96,31 @@ and a boolean to check if the value has been set.
 
 SetType sets Type field to given value.
 
+
+### GetAccountType
+
+`func (o *BankAccountInfoAccountIdentification) GetAccountType() string`
+
+GetAccountType returns the AccountType field if non-nil, zero value otherwise.
+
+### GetAccountTypeOk
+
+`func (o *BankAccountInfoAccountIdentification) GetAccountTypeOk() (*string, bool)`
+
+GetAccountTypeOk returns a tuple with the AccountType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccountType
+
+`func (o *BankAccountInfoAccountIdentification) SetAccountType(v string)`
+
+SetAccountType sets AccountType field to given value.
+
+### HasAccountType
+
+`func (o *BankAccountInfoAccountIdentification) HasAccountType() bool`
+
+HasAccountType returns a boolean if a field has been set.
 
 ### GetInstitutionNumber
 
@@ -261,31 +286,6 @@ and a boolean to check if the value has been set.
 
 SetSortCode sets SortCode field to given value.
 
-
-### GetAccountType
-
-`func (o *BankAccountInfoAccountIdentification) GetAccountType() string`
-
-GetAccountType returns the AccountType field if non-nil, zero value otherwise.
-
-### GetAccountTypeOk
-
-`func (o *BankAccountInfoAccountIdentification) GetAccountTypeOk() (*string, bool)`
-
-GetAccountTypeOk returns a tuple with the AccountType field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAccountType
-
-`func (o *BankAccountInfoAccountIdentification) SetAccountType(v string)`
-
-SetAccountType sets AccountType field to given value.
-
-### HasAccountType
-
-`func (o *BankAccountInfoAccountIdentification) HasAccountType() bool`
-
-HasAccountType returns a boolean if a field has been set.
 
 ### GetRoutingNumber
 
