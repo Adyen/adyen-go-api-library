@@ -18,7 +18,6 @@ import (
 	"github.com/adyen/adyen-go-api-library/v6/src/checkout"
 	"github.com/adyen/adyen-go-api-library/v6/src/common"
 	"github.com/adyen/adyen-go-api-library/v6/src/disputes"
-	"github.com/adyen/adyen-go-api-library/v6/src/notification"
 	"github.com/adyen/adyen-go-api-library/v6/src/payments"
 	"github.com/adyen/adyen-go-api-library/v6/src/payout"
 	"github.com/adyen/adyen-go-api-library/v6/src/platformsaccount"
