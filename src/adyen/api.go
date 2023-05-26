@@ -26,29 +26,32 @@ import (
 	"github.com/adyen/adyen-go-api-library/v6/src/platformsfund"
 	"github.com/adyen/adyen-go-api-library/v6/src/platformshostedonboardingpage"
 	"github.com/adyen/adyen-go-api-library/v6/src/platformsnotificationconfiguration"
+	"github.com/adyen/adyen-go-api-library/v6/src/posterminalmanagement"
 	"github.com/adyen/adyen-go-api-library/v6/src/storedvalue"
 )
 
 // Constants used for the client API
 const (
-	EndpointTest                = "https://pal-test.adyen.com"
-	EndpointLive                = "https://pal-live.adyen.com"
-	EndpointLiveSuffix          = "-pal-live.adyenpayments.com"
-	MarketpayEndpointTest       = "https://cal-test.adyen.com/cal/services"
-	MarketpayEndpointLive       = "https://cal-live.adyen.com/cal/services"
-	CheckoutEndpointTest        = "https://checkout-test.adyen.com/checkout"
-	CheckoutEndpointLiveSuffix  = "-checkout-live.adyenpayments.com/checkout"
-	BinLookupPalSuffix          = "/pal/servlet/BinLookup/"
-	TerminalAPIEndpointTest     = "https://terminal-api-test.adyen.com"
-	TerminalAPIEndpointLive     = "https://terminal-api-live.adyen.com"
-	DisputesEndpointTest        = "https://ca-test.adyen.com/ca/services/DisputeService"
-	DisputesEndpointLive        = "https://ca-live.adyen.com/ca/services/DisputeService"
-	BalancePlatformEndpointTest = "https://balanceplatform-api-test.adyen.com/bcl"
-	BalancePlatformEndpointLive = "https://balanceplatform-api-live.adyen.com/bcl"
-	ManagementEndpointTest      = "https://management-test.adyen.com"
-	ManagementEndpointLive      = "https://management-live.adyen.com"
-	LegalEntityEntityTest       = "https://kyc-test.adyen.com/lem"
-	LegalEntityEntityLive       = "https://kyc-live.adyen.com/lem"
+	EndpointTest                      = "https://pal-test.adyen.com"
+	EndpointLive                      = "https://pal-live.adyen.com"
+	EndpointLiveSuffix                = "-pal-live.adyenpayments.com"
+	MarketpayEndpointTest             = "https://cal-test.adyen.com/cal/services"
+	MarketpayEndpointLive             = "https://cal-live.adyen.com/cal/services"
+	CheckoutEndpointTest              = "https://checkout-test.adyen.com/checkout"
+	CheckoutEndpointLiveSuffix        = "-checkout-live.adyenpayments.com/checkout"
+	BinLookupPalSuffix                = "/pal/servlet/BinLookup/"
+	TerminalAPIEndpointTest           = "https://terminal-api-test.adyen.com"
+	TerminalAPIEndpointLive           = "https://terminal-api-live.adyen.com"
+	DisputesEndpointTest              = "https://ca-test.adyen.com/ca/services/DisputeService"
+	DisputesEndpointLive              = "https://ca-live.adyen.com/ca/services/DisputeService"
+	BalancePlatformEndpointTest       = "https://balanceplatform-api-test.adyen.com/bcl"
+	BalancePlatformEndpointLive       = "https://balanceplatform-api-live.adyen.com/bcl"
+	ManagementEndpointTest            = "https://management-test.adyen.com"
+	ManagementEndpointLive            = "https://management-live.adyen.com"
+	LegalEntityEntityTest             = "https://kyc-test.adyen.com/lem"
+	LegalEntityEntityLive             = "https://kyc-live.adyen.com/lem"
+	PosTerminalManagementEndpointTest = "https://postfmapi-test.adyen.com/postfmapi/terminal/v1"
+	PosTerminalManagementEndpointLive = "https://postfmapi-live.adyen.com/postfmapi/terminal/v1"
 )
 
 // also update LibVersion in src/common/configuration.go when a version is updated and a major lib version is released
@@ -67,6 +70,7 @@ const (
 	BalancePlatformAPIVersion       = "v2"
 	ManagementAPIVersion            = "v1"
 	LegalEntityAPIVersion           = "v3"
+	PosTerminalManagementAPIVersion = "v1"
 )
 
 // APIClient manages communication with the Adyen Checkout API API v51
@@ -84,6 +88,7 @@ type APIClient struct {
 	PlatformsFund                      *platformsfund.PlatformsFund
 	PlatformsHostedOnboardingPage      *platformshostedonboardingpage.PlatformsHostedOnboardingPage
 	PlatformsNotificationConfiguration *platformsnotificationconfiguration.PlatformsNotificationConfiguration
+	PosTerminalManagement              *posterminalmanagement.GeneralApi
 	Disputes                           *disputes.Disputes
 	StoredValue                        *storedvalue.StoredValue
 	BalancePlatform                    *balanceplatform.APIClient
@@ -248,6 +253,13 @@ func NewClient(cfg *common.Config) *APIClient {
 		},
 	}
 
+	c.PosTerminalManagement = &posterminalmanagement.GeneralApi{
+		Client: c.client,
+		BasePath: func() string {
+			return fmt.Sprintf("%s/%s", c.client.Cfg.PosTerminalManagementEndpoint, PosTerminalManagementAPIVersion)
+		},
+	}
+
 	c.BalancePlatform = balanceplatform.NewAPIClient(c.client)
 	c.Management = management.NewAPIClient(c.client)
 	c.LegalEntity = legalentity.NewAPIClient(c.client)
@@ -277,6 +289,7 @@ func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix
 		c.client.Cfg.BalancePlatformEndpoint = BalancePlatformEndpointLive
 		c.client.Cfg.ManagementEndpoint = ManagementEndpointLive
 		c.client.Cfg.LegalEntityEndpoint = LegalEntityEntityLive
+		c.client.Cfg.PosTerminalManagementEndpoint = PosTerminalManagementEndpointLive
 	} else {
 		c.client.Cfg.Environment = env
 		c.client.Cfg.Endpoint = EndpointTest
@@ -287,6 +300,7 @@ func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix
 		c.client.Cfg.BalancePlatformEndpoint = BalancePlatformEndpointTest
 		c.client.Cfg.ManagementEndpoint = ManagementEndpointTest
 		c.client.Cfg.LegalEntityEndpoint = LegalEntityEntityTest
+		c.client.Cfg.PosTerminalManagementEndpoint = PosTerminalManagementEndpointTest
 	}
 	c.client.Cfg.BalancePlatformEndpoint += "/" + BalancePlatformAPIVersion
 	c.client.Cfg.ManagementEndpoint += "/" + ManagementAPIVersion

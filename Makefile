@@ -21,7 +21,7 @@ openapi-generator-cli:=java -jar $(openapi-generator-jar)
 goimports:=$(GOPATH)/bin/goimports
 
 generator:=go
-services:=binlookup checkout legalentity payments payout storedvalue balanceplatform recurring management
+services:=binlookup checkout legalentity payments payout storedvalue balanceplatform recurring management posterminalmanagement
 output:=src
 templates:=templates/custom
 
@@ -41,6 +41,8 @@ balanceplatform: serviceName=BalancePlatform
 recurring: spec=RecurringService-v68
 management: spec=ManagementService-v1
 management: serviceName=Management
+posterminalmanagement: spec=TfmAPIService-v1
+posterminalmanagement: serviceName=PosTerminalManagementApi
 
 # Generate a full client (models and service classes)
 $(services): schema $(openapi-generator-jar) $(goimports)

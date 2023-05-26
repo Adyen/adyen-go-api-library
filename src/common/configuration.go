@@ -62,19 +62,20 @@ const (
 
 // Config stores the configuration of the API client
 type Config struct {
-	Username                string        `json:"username,omitempty"`
-	Password                string        `json:"password,omitempty"`
-	MerchantAccount         string        `json:"merchantAccount,omitempty"`
-	Environment             Environment   `json:"environment,omitempty"`
-	Endpoint                string        `json:"endpoint,omitempty"`
-	MarketPayEndpoint       string        `json:"marketPayEndpoint,omitempty"`
-	ApiKey                  string        `json:"apiKey,omitempty"`
-	ConnectionTimeoutMillis time.Duration `json:"connectionTimeoutMillis,omitempty"`
-	CertificatePath         string        `json:"certificatePath,omitempty"`
-	DisputesEndpoint        string        `json:"disputesEndpoint,omitempty"`
-	BalancePlatformEndpoint string        `json:"balancePlatformEndpoint,omitempty"`
-	ManagementEndpoint      string        `json:"managementEndpoint,omitempty"`
-	LegalEntityEndpoint     string        `json:"legalEntityEndpoint,omitempty"`
+	Username                      string        `json:"username,omitempty"`
+	Password                      string        `json:"password,omitempty"`
+	MerchantAccount               string        `json:"merchantAccount,omitempty"`
+	Environment                   Environment   `json:"environment,omitempty"`
+	Endpoint                      string        `json:"endpoint,omitempty"`
+	MarketPayEndpoint             string        `json:"marketPayEndpoint,omitempty"`
+	ApiKey                        string        `json:"apiKey,omitempty"`
+	ConnectionTimeoutMillis       time.Duration `json:"connectionTimeoutMillis,omitempty"`
+	CertificatePath               string        `json:"certificatePath,omitempty"`
+	DisputesEndpoint              string        `json:"disputesEndpoint,omitempty"`
+	BalancePlatformEndpoint       string        `json:"balancePlatformEndpoint,omitempty"`
+	ManagementEndpoint            string        `json:"managementEndpoint,omitempty"`
+	LegalEntityEndpoint           string        `json:"legalEntityEndpoint,omitempty"`
+	PosTerminalManagementEndpoint string        `json:"posTerminalMangementEndpoint,omitempty"`
 
 	//Checkout Specific
 	CheckoutEndpoint string `json:"checkoutEndpoint,omitempty"`
