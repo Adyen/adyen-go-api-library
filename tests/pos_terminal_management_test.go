@@ -13,7 +13,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func Test_Transfers(t *testing.T) {
+func Test_Pos_Terminal_Management(t *testing.T) {
 	client := adyen.NewClient(&common.Config{
 		ApiKey:      "YOUR_ADYEN_API_KEY",
 		Environment: "TEST",
