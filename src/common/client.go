@@ -14,6 +14,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"log"
 	"mime/multipart"
 	"net/http"
@@ -89,7 +90,7 @@ func CreateHTTPRequest(c *Client, httpMethod string, req interface{}, res interf
 		return httpResponse, err
 	}
 
-	body, err := io.ReadAll(httpResponse.Body)
+	body, err := ioutil.ReadAll(httpResponse.Body)
 	httpResponse.Body.Close()
 	if err != nil {
 		return httpResponse, err
@@ -147,9 +148,9 @@ func SendAPIRequest(
 		return httpResponse, err
 	}
 
-	body, err := io.ReadAll(httpResponse.Body)
+	body, err := ioutil.ReadAll(httpResponse.Body)
 	httpResponse.Body.Close()
-	httpResponse.Body = io.NopCloser(bytes.NewBuffer(body))
+	httpResponse.Body = ioutil.NopCloser(bytes.NewBuffer(body))
 	if err != nil {
 		return httpResponse, err
 	}
