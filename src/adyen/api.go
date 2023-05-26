@@ -27,6 +27,7 @@ import (
 	"github.com/adyen/adyen-go-api-library/v6/src/platformsfund"
 	"github.com/adyen/adyen-go-api-library/v6/src/platformshostedonboardingpage"
 	"github.com/adyen/adyen-go-api-library/v6/src/platformsnotificationconfiguration"
+	"github.com/adyen/adyen-go-api-library/v6/src/posterminalmanagement"
 	"github.com/adyen/adyen-go-api-library/v6/src/storedvalue"
 )
 
@@ -52,6 +53,8 @@ const (
 	ManagementEndpointLive      = "https://management-live.adyen.com"
 	LegalEntityEntityTest       = "https://kyc-test.adyen.com/lem"
 	LegalEntityEntityLive       = "https://kyc-live.adyen.com/lem"
+  PosTerminalManagementEndpointTest = "https://postfmapi-test.adyen.com/postfmapi/terminal"
+	PosTerminalManagementEndpointLive = "https://postfmapi-live.adyen.com/postfmapi/terminal"
 )
 
 // also update LibVersion in src/common/configuration.go when a version is updated and a major lib version is released
@@ -71,6 +74,7 @@ const (
 	TransfersAPIVersion             = "v3"
 	ManagementAPIVersion            = "v1"
 	LegalEntityAPIVersion           = "v3"
+	PosTerminalManagementAPIVersion = "v1"
 )
 
 // APIClient manages communication with the Adyen Checkout API API v51
@@ -88,6 +92,7 @@ type APIClient struct {
 	PlatformsFund                      *platformsfund.PlatformsFund
 	PlatformsHostedOnboardingPage      *platformshostedonboardingpage.PlatformsHostedOnboardingPage
 	PlatformsNotificationConfiguration *platformsnotificationconfiguration.PlatformsNotificationConfiguration
+	PosTerminalManagement              *posterminalmanagement.GeneralApi
 	Disputes                           *disputes.Disputes
 	StoredValue                        *storedvalue.StoredValue
 	BalancePlatform                    *balanceplatform.APIClient
@@ -253,6 +258,13 @@ func NewClient(cfg *common.Config) *APIClient {
 		},
 	}
 
+	c.PosTerminalManagement = &posterminalmanagement.GeneralApi{
+		Client: c.client,
+		BasePath: func() string {
+			return fmt.Sprintf("%s/%s", c.client.Cfg.PosTerminalManagementEndpoint, PosTerminalManagementAPIVersion)
+		},
+	}
+  
 	c.Transfers = &transfers.GeneralApi{
 		Client: c.client,
 		BasePath: func() string {
@@ -290,6 +302,7 @@ func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix
 		c.client.Cfg.TransfersEndpoint = TransfersEndpointLive
 		c.client.Cfg.ManagementEndpoint = ManagementEndpointLive
 		c.client.Cfg.LegalEntityEndpoint = LegalEntityEntityLive
+		c.client.Cfg.PosTerminalManagementEndpoint = PosTerminalManagementEndpointLive
 	} else {
 		c.client.Cfg.Environment = env
 		c.client.Cfg.Endpoint = EndpointTest
@@ -301,6 +314,7 @@ func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix
 		c.client.Cfg.TransfersEndpoint = TransfersEndpointTest
 		c.client.Cfg.ManagementEndpoint = ManagementEndpointTest
 		c.client.Cfg.LegalEntityEndpoint = LegalEntityEntityTest
+		c.client.Cfg.PosTerminalManagementEndpoint = PosTerminalManagementEndpointTest
 	}
 	c.client.Cfg.BalancePlatformEndpoint += "/" + BalancePlatformAPIVersion
 	c.client.Cfg.ManagementEndpoint += "/" + ManagementAPIVersion

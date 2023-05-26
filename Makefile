@@ -21,7 +21,7 @@ openapi-generator-cli:=java -jar $(openapi-generator-jar)
 goimports:=$(GOPATH)/bin/goimports
 
 generator:=go
-services:=balanceplatform binlookup checkout legalentity management payments payout recurring storedvalue transfers
+services:=balanceplatform binlookup checkout legalentity management payments payout posterminalmanagement recurring storedvalue transfers
 output:=src
 templates:=templates/custom
 
@@ -43,6 +43,8 @@ transfers: spec=TransferService-v3
 transfers: serviceName=Transfers
 management: spec=ManagementService-v1
 management: serviceName=Management
+posterminalmanagement: spec=TfmAPIService-v1
+posterminalmanagement: serviceName=PosTerminalManagementApi
 
 # Generate a full client (models and service classes)
 $(services): schema $(openapi-generator-jar) $(goimports)
