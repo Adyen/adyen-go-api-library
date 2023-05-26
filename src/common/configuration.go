@@ -75,6 +75,7 @@ type Config struct {
 	BalancePlatformEndpoint       string        `json:"balancePlatformEndpoint,omitempty"`
 	ManagementEndpoint            string        `json:"managementEndpoint,omitempty"`
 	LegalEntityEndpoint           string        `json:"legalEntityEndpoint,omitempty"`
+  TransfersEndpoint             string        `json:"transfersEndpoint,omitempty"`
 	PosTerminalManagementEndpoint string        `json:"posTerminalMangementEndpoint,omitempty"`
 
 	//Checkout Specific
