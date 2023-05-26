@@ -50,7 +50,7 @@ const (
 	ManagementEndpointLive            = "https://management-live.adyen.com"
 	LegalEntityEntityTest             = "https://kyc-test.adyen.com/lem"
 	LegalEntityEntityLive             = "https://kyc-live.adyen.com/lem"
-	PosTerminalManagementEndpointTest = "https://postfmapi-test.adyen.com/postfmapi/terminal/v1"
+	PosTerminalManagementEndpointTest = "https://postfmapi-test.adyen.com/postfmapi/terminal"
 	PosTerminalManagementEndpointLive = "https://postfmapi-live.adyen.com/postfmapi/terminal/v1"
 )
 
