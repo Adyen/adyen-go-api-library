@@ -12,6 +12,7 @@ import (
 	"context"
 	_context "context"
 	_nethttp "net/http"
+	"net/url"
 
 	"github.com/adyen/adyen-go-api-library/v6/src/common"
 )
@@ -210,7 +211,24 @@ Sends payment parameters (like amount, country, and currency) together with othe
 func (a *PaymentsApi) Payments(r PaymentsApiPaymentsConfig) (PaymentResponse, *_nethttp.Response, error) {
 	res := &PaymentResponse{}
 	path := "/payments"
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPost, r.paymentRequest, res, a.BasePath()+path, []_context.Context{r.ctx})
+
+	headerParams := make(map[string]string)
+	queryParams := url.Values{}
+
+	if r.idempotencyKey != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
+	}
+
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		r.paymentRequest, res,
+		_nethttp.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
