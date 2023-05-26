@@ -51,7 +51,7 @@ const (
 	LegalEntityEntityTest             = "https://kyc-test.adyen.com/lem"
 	LegalEntityEntityLive             = "https://kyc-live.adyen.com/lem"
 	PosTerminalManagementEndpointTest = "https://postfmapi-test.adyen.com/postfmapi/terminal"
-	PosTerminalManagementEndpointLive = "https://postfmapi-live.adyen.com/postfmapi/terminal/v1"
+	PosTerminalManagementEndpointLive = "https://postfmapi-live.adyen.com/postfmapi/terminal"
 )
 
 // also update LibVersion in src/common/configuration.go when a version is updated and a major lib version is released
