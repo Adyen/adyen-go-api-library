@@ -10,7 +10,6 @@ package checkout
 
 import (
 	"context"
-	_context "context"
 	_nethttp "net/http"
 	"net/url"
 	"strings"
@@ -46,7 +45,7 @@ func (a *PaymentLinksApi) GetPaymentLinkConfig(ctx context.Context, linkId strin
 Get a payment link
 Retrieves the payment link details using the payment link &#x60;id&#x60;.
  * @param linkId Unique identifier of the payment link.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return PaymentLinkResponse
 */
 
@@ -54,7 +53,19 @@ func (a *PaymentLinksApi) GetPaymentLink(r PaymentLinksApiGetPaymentLinkConfig) 
 	res := &PaymentLinkResponse{}
 	path := "/paymentLinks/{linkId}"
 	path = strings.Replace(path, "{"+"linkId"+"}", url.PathEscape(common.ParameterValueToString(r.linkId, "linkId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		nil,
+		res,
+		_nethttp.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
@@ -95,14 +106,29 @@ func (a *PaymentLinksApi) PaymentLinksConfig(ctx context.Context) PaymentLinksAp
 Create a payment link
 Creates a payment link to our hosted payment form where shoppers can pay. The list of payment methods presented to the shopper depends on the &#x60;currency&#x60; and &#x60;country&#x60; parameters sent in the request.  For more information, refer to [Pay by Link documentation](https://docs.adyen.com/online-payments/pay-by-link#create-payment-links-through-api).
  * @param req CreatePaymentLinkRequest - reference of CreatePaymentLinkRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return PaymentLinkResponse
 */
 
 func (a *PaymentLinksApi) PaymentLinks(r PaymentLinksApiPaymentLinksConfig) (PaymentLinkResponse, *_nethttp.Response, error) {
 	res := &PaymentLinkResponse{}
 	path := "/paymentLinks"
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPost, r.createPaymentLinkRequest, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.idempotencyKey != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		r.createPaymentLinkRequest,
+		res,
+		_nethttp.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
@@ -138,7 +164,7 @@ Update the status of a payment link
 Updates the status of a payment link. Use this endpoint to [force the expiry of a payment link](https://docs.adyen.com/online-payments/pay-by-link#update-payment-link-status).
  * @param linkId Unique identifier of the payment link.
  * @param req UpdatePaymentLinkRequest - reference of UpdatePaymentLinkRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return PaymentLinkResponse
 */
 
@@ -146,6 +172,18 @@ func (a *PaymentLinksApi) UpdatePaymentLink(r PaymentLinksApiUpdatePaymentLinkCo
 	res := &PaymentLinkResponse{}
 	path := "/paymentLinks/{linkId}"
 	path = strings.Replace(path, "{"+"linkId"+"}", url.PathEscape(common.ParameterValueToString(r.linkId, "linkId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPatch, r.updatePaymentLinkRequest, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		r.updatePaymentLinkRequest,
+		res,
+		_nethttp.MethodPatch,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }

@@ -10,8 +10,8 @@ package checkout
 
 import (
 	"context"
-	_context "context"
 	_nethttp "net/http"
+	"net/url"
 
 	"github.com/adyen/adyen-go-api-library/v6/src/common"
 )
@@ -58,14 +58,29 @@ func (a *ClassicCheckoutSDKApi) PaymentSessionConfig(ctx context.Context) Classi
 Create a payment session
 Provides the data object that can be used to start the Checkout SDK. To set up the payment, pass its amount, currency, and other required parameters. We use this to optimise the payment flow and perform better risk assessment of the transaction.  For more information, refer to [How it works](https://docs.adyen.com/online-payments#howitworks).
  * @param req PaymentSetupRequest - reference of PaymentSetupRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return PaymentSetupResponse
 */
 
 func (a *ClassicCheckoutSDKApi) PaymentSession(r ClassicCheckoutSDKApiPaymentSessionConfig) (PaymentSetupResponse, *_nethttp.Response, error) {
 	res := &PaymentSetupResponse{}
 	path := "/paymentSession"
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPost, r.paymentSetupRequest, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.idempotencyKey != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		r.paymentSetupRequest,
+		res,
+		_nethttp.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
@@ -108,13 +123,28 @@ func (a *ClassicCheckoutSDKApi) VerifyPaymentResultConfig(ctx context.Context) C
 Verify a payment result
 Verifies the payment result using the payload returned from the Checkout SDK.  For more information, refer to [How it works](https://docs.adyen.com/online-payments#howitworks).
  * @param req PaymentVerificationRequest - reference of PaymentVerificationRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return PaymentVerificationResponse
 */
 
 func (a *ClassicCheckoutSDKApi) VerifyPaymentResult(r ClassicCheckoutSDKApiVerifyPaymentResultConfig) (PaymentVerificationResponse, *_nethttp.Response, error) {
 	res := &PaymentVerificationResponse{}
 	path := "/payments/result"
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPost, r.paymentVerificationRequest, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.idempotencyKey != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		r.paymentVerificationRequest,
+		res,
+		_nethttp.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }

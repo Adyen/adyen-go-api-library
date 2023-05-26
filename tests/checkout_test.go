@@ -7,6 +7,7 @@ import (
 	"github.com/adyen/adyen-go-api-library/v6/src/checkout"
 	"github.com/adyen/adyen-go-api-library/v6/src/common"
 	"github.com/google/uuid"
+	"io"
 	_nethttp "net/http"
 	"os"
 	"strings"
@@ -52,6 +53,9 @@ func Test_Checkout(t *testing.T) {
 			require.NotNil(t, httpRes)
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
+			resBody, readErr := io.ReadAll(httpRes.Body)
+			require.NoError(t, readErr)
+			assert.Contains(t, string(resBody), "paymentMethods")
 		})
 	})
 

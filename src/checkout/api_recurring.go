@@ -10,7 +10,6 @@ package checkout
 
 import (
 	"context"
-	_context "context"
 	_nethttp "net/http"
 	"net/url"
 	"strings"
@@ -60,7 +59,7 @@ func (a *RecurringApi) DeleteTokenForStoredPaymentDetailsConfig(ctx context.Cont
 Delete a token for stored payment details
 Deletes the token identified in the path. The token can no longer be used with payment requests.
  * @param recurringId The unique identifier of the token.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return StoredPaymentMethodResource
 */
 
@@ -68,14 +67,25 @@ func (a *RecurringApi) DeleteTokenForStoredPaymentDetails(r RecurringApiDeleteTo
 	res := &StoredPaymentMethodResource{}
 	path := "/storedPaymentMethods/{recurringId}"
 	path = strings.Replace(path, "{"+"recurringId"+"}", url.PathEscape(common.ParameterValueToString(r.recurringId, "recurringId")), -1)
-	queryString := url.Values{}
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
 	if r.shopperReference != nil {
-		common.ParameterAddToQuery(queryString, "shopperReference", r.shopperReference, "")
+		common.ParameterAddToQuery(queryParams, "shopperReference", r.shopperReference, "")
 	}
 	if r.merchantAccount != nil {
-		common.ParameterAddToQuery(queryString, "merchantAccount", r.merchantAccount, "")
+		common.ParameterAddToQuery(queryParams, "merchantAccount", r.merchantAccount, "")
 	}
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodDelete, nil, res, a.BasePath()+path+"?"+queryString.Encode(), []_context.Context{r.ctx})
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		nil,
+		res,
+		_nethttp.MethodDelete,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
@@ -116,20 +126,31 @@ func (a *RecurringApi) GetTokensForStoredPaymentDetailsConfig(ctx context.Contex
 /*
 Get tokens for stored payment details
 Lists the tokens for stored payment details for the shopper identified in the path, if there are any available. The token ID can be used with payment requests for the shopper&#39;s payment. A summary of the stored details is included.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ListStoredPaymentMethodsResponse
 */
 
 func (a *RecurringApi) GetTokensForStoredPaymentDetails(r RecurringApiGetTokensForStoredPaymentDetailsConfig) (ListStoredPaymentMethodsResponse, *_nethttp.Response, error) {
 	res := &ListStoredPaymentMethodsResponse{}
 	path := "/storedPaymentMethods"
-	queryString := url.Values{}
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
 	if r.shopperReference != nil {
-		common.ParameterAddToQuery(queryString, "shopperReference", r.shopperReference, "")
+		common.ParameterAddToQuery(queryParams, "shopperReference", r.shopperReference, "")
 	}
 	if r.merchantAccount != nil {
-		common.ParameterAddToQuery(queryString, "merchantAccount", r.merchantAccount, "")
+		common.ParameterAddToQuery(queryParams, "merchantAccount", r.merchantAccount, "")
 	}
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path+"?"+queryString.Encode(), []_context.Context{r.ctx})
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		nil,
+		res,
+		_nethttp.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
