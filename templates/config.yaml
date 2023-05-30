@@ -4,3 +4,4 @@ structPrefix: true
 isGoSubmodule: true
 additionalProperties:
   useOneOfDiscriminatorLookup: true
+  libraryVersion: v7
