@@ -10,6 +10,7 @@ The Library supports all APIs under the following services:
 * [Payments API](https://docs.adyen.com/api-explorer/#/Payment/v64/overview): Our classic integration for online payments. Current supported version: **v64**
 * [Recurring API](https://docs.adyen.com/api-explorer/Recurring/68/overview): Endpoints for managing saved payment details. Current supported version: **v68**
 * [Payouts API](https://docs.adyen.com/api-explorer/#/Payout/v64/overview): Endpoints for sending funds to your customers. Current supported version: **v64**
+* [BinLookup API](https://docs.adyen.com/api-explorer/BinLookup/54/overview): The BIN Lookup API provides endpoints for retrieving information based on a given BIN. Current supported version: **v54**
 * [Platforms APIs](https://docs.adyen.com/platforms/api): Set of APIs when using Adyen for Platforms.
     * [Account API](https://docs.adyen.com/api-explorer/#/Account/v6/overview) Current supported version: **v6**
     * [Fund API](https://docs.adyen.com/api-explorer/#/Fund/v6/overview) Current supported version: **v6**
