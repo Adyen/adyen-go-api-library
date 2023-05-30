@@ -31,6 +31,16 @@ func Test_Checkout(t *testing.T) {
 	})
 	service := client.Checkout()
 
+	t.Run("Configuration", func(t *testing.T) {
+		liveClient := adyen.NewClient(&common.Config{
+			ApiKey:                "LIVE_API_KEY",
+			Environment:           common.LiveEnv,
+			LiveEndpointURLPrefix: "abc123",
+			Debug:                 false,
+		})
+		require.Equal(t, "https://abc123-checkout-live.adyenpayments.com/checkout/v70", liveClient.Checkout().PaymentsApi.BasePath())
+	})
+
 	t.Run("PaymentMethods", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 			req := service.PaymentsApi.PaymentMethodsConfig(context.Background()).
