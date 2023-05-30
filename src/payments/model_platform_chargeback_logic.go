@@ -19,8 +19,9 @@ var _ common.MappedNullable = &PlatformChargebackLogic{}
 
 // PlatformChargebackLogic struct for PlatformChargebackLogic
 type PlatformChargebackLogic struct {
-	Behavior      *string `json:"behavior,omitempty"`
-	TargetAccount *string `json:"targetAccount,omitempty"`
+	Behavior              *string `json:"behavior,omitempty"`
+	CostAllocationAccount *string `json:"costAllocationAccount,omitempty"`
+	TargetAccount         *string `json:"targetAccount,omitempty"`
 }
 
 // NewPlatformChargebackLogic instantiates a new PlatformChargebackLogic object
@@ -72,6 +73,38 @@ func (o *PlatformChargebackLogic) SetBehavior(v string) {
 	o.Behavior = &v
 }
 
+// GetCostAllocationAccount returns the CostAllocationAccount field value if set, zero value otherwise.
+func (o *PlatformChargebackLogic) GetCostAllocationAccount() string {
+	if o == nil || common.IsNil(o.CostAllocationAccount) {
+		var ret string
+		return ret
+	}
+	return *o.CostAllocationAccount
+}
+
+// GetCostAllocationAccountOk returns a tuple with the CostAllocationAccount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PlatformChargebackLogic) GetCostAllocationAccountOk() (*string, bool) {
+	if o == nil || common.IsNil(o.CostAllocationAccount) {
+		return nil, false
+	}
+	return o.CostAllocationAccount, true
+}
+
+// HasCostAllocationAccount returns a boolean if a field has been set.
+func (o *PlatformChargebackLogic) HasCostAllocationAccount() bool {
+	if o != nil && !common.IsNil(o.CostAllocationAccount) {
+		return true
+	}
+
+	return false
+}
+
+// SetCostAllocationAccount gets a reference to the given string and assigns it to the CostAllocationAccount field.
+func (o *PlatformChargebackLogic) SetCostAllocationAccount(v string) {
+	o.CostAllocationAccount = &v
+}
+
 // GetTargetAccount returns the TargetAccount field value if set, zero value otherwise.
 func (o *PlatformChargebackLogic) GetTargetAccount() string {
 	if o == nil || common.IsNil(o.TargetAccount) {
@@ -116,6 +149,9 @@ func (o PlatformChargebackLogic) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.Behavior) {
 		toSerialize["behavior"] = o.Behavior
+	}
+	if !common.IsNil(o.CostAllocationAccount) {
+		toSerialize["costAllocationAccount"] = o.CostAllocationAccount
 	}
 	if !common.IsNil(o.TargetAccount) {
 		toSerialize["targetAccount"] = o.TargetAccount

@@ -63,7 +63,7 @@ const (
 	MarketpayFundAPIVersion         = "v6"
 	MarketpayNotificationAPIVersion = "v6"
 	MarketpayHopAPIVersion          = "v6"
-	PaymentAPIVersion               = "v64"
+	PaymentAPIVersion               = "v68"
 	RecurringAPIVersion             = "v68"
 	CheckoutAPIVersion              = "v70"
 	BinLookupAPIVersion             = "v50"
@@ -82,7 +82,6 @@ const (
 type APIClient struct {
 	client *common.Client
 	// API Services
-	Payments                           *payments.Payments
 	Payout                             *payout.Payouts
 	Recurring                          *recurring.GeneralApi
 	BinLookup                          *binlookup.BinLookup
@@ -181,13 +180,6 @@ func NewClient(cfg *common.Config) *APIClient {
 	}
 
 	// API Services
-	c.Payments = &payments.Payments{
-		Client: c.client,
-		BasePath: func() string {
-			return fmt.Sprintf("%s/pal/servlet/Payment/%s", c.client.Cfg.Endpoint, PaymentAPIVersion)
-		},
-	}
-
 	c.Payout = &payout.Payouts{
 		Client: c.client,
 		BasePath: func() string {
@@ -274,6 +266,14 @@ func NewClient(cfg *common.Config) *APIClient {
 
 func (c *APIClient) Checkout() *checkout.APIClient {
 	return checkout.NewAPIClient(c.client)
+}
+
+func (c *APIClient) Payments() *payments.APIClient {
+	client := payments.NewAPIClient(c.client)
+	client.GeneralApi.BasePath = func() string {
+		return fmt.Sprintf("%s/pal/servlet/Payment/%s", c.client.Cfg.Endpoint, PaymentAPIVersion)
+	}
+	return client
 }
 
 /*

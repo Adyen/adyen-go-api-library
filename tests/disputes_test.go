@@ -47,8 +47,9 @@ func Test_Disputes(t *testing.T) {
 			MerchantAccount: MerchantAccount,
 		})
 		res, _, _ := service.PaymentsApi.Payments(req)
+
 		reference := "MODIFICATION_REFERENCE"
-		captureRes, _, _ := client.Payments.Capture(&payments.CaptureRequest{
+		body := payments.CaptureRequest{
 			OriginalReference: res.GetPspReference(),
 			ModificationAmount: payments.Amount{
 				Currency: "EUR",
@@ -56,8 +57,11 @@ func Test_Disputes(t *testing.T) {
 			},
 			Reference:       &reference,
 			MerchantAccount: MerchantAccount,
-		})
-		return captureRes.PspReference
+		}
+		paymentsApi := client.Payments()
+		captureReq := paymentsApi.ModificationsApi.CaptureConfig(context.Background()).CaptureRequest(body)
+		captureRes, _, _ := paymentsApi.ModificationsApi.Capture(captureReq)
+		return captureRes.GetPspReference()
 	}
 
 	t.Run("Disputes", func(t *testing.T) {

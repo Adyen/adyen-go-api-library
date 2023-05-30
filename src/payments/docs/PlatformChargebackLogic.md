@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Behavior** | Pointer to **string** |  | [optional] 
+**CostAllocationAccount** | Pointer to **string** |  | [optional] 
 **TargetAccount** | Pointer to **string** |  | [optional] 
 
 ## Methods
@@ -50,6 +51,31 @@ SetBehavior sets Behavior field to given value.
 `func (o *PlatformChargebackLogic) HasBehavior() bool`
 
 HasBehavior returns a boolean if a field has been set.
+
+### GetCostAllocationAccount
+
+`func (o *PlatformChargebackLogic) GetCostAllocationAccount() string`
+
+GetCostAllocationAccount returns the CostAllocationAccount field if non-nil, zero value otherwise.
+
+### GetCostAllocationAccountOk
+
+`func (o *PlatformChargebackLogic) GetCostAllocationAccountOk() (*string, bool)`
+
+GetCostAllocationAccountOk returns a tuple with the CostAllocationAccount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCostAllocationAccount
+
+`func (o *PlatformChargebackLogic) SetCostAllocationAccount(v string)`
+
+SetCostAllocationAccount sets CostAllocationAccount field to given value.
+
+### HasCostAllocationAccount
+
+`func (o *PlatformChargebackLogic) HasCostAllocationAccount() bool`
+
+HasCostAllocationAccount returns a boolean if a field has been set.
 
 ### GetTargetAccount
 
