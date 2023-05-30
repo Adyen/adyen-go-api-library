@@ -22,15 +22,15 @@ type Card struct {
 	// The [card verification code](https://docs.adyen.com/payments-fundamentals/payment-glossary#card-security-code-cvc-cvv-cid) (1-20 characters). Depending on the card brand, it is known also as: * CVV2/CVC2 – length: 3 digits * CID – length: 4 digits > If you are using [Client-Side Encryption](https://docs.adyen.com/classic-integration/cse-integration-ecommerce), the CVC code is present in the encrypted data. You must never post the card details to the server. > This field must be always present in a [one-click payment request](https://docs.adyen.com/classic-integration/recurring-payments). > When this value is returned in a response, it is always empty because it is not stored.
 	Cvc *string `json:"cvc,omitempty"`
 	// The card expiry month. Format: 2 digits, zero-padded for single digits. For example: * 03 = March * 11 = November
-	ExpiryMonth string `json:"expiryMonth"`
+	ExpiryMonth *string `json:"expiryMonth,omitempty"`
 	// The card expiry year. Format: 4 digits. For example: 2020
-	ExpiryYear string `json:"expiryYear"`
+	ExpiryYear *string `json:"expiryYear,omitempty"`
 	// The name of the cardholder, as printed on the card.
-	HolderName string `json:"holderName"`
+	HolderName *string `json:"holderName,omitempty"`
 	// The issue number of the card (for some UK debit cards only).
 	IssueNumber *string `json:"issueNumber,omitempty"`
 	// The card number (4-19 characters). Do not use any separators. When this value is returned in a response, only the last 4 digits of the card number are returned.
-	Number string `json:"number"`
+	Number *string `json:"number,omitempty"`
 	// The month component of the start date (for some UK debit cards only).
 	StartMonth *string `json:"startMonth,omitempty"`
 	// The year component of the start date (for some UK debit cards only).
@@ -41,12 +41,8 @@ type Card struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCard(expiryMonth string, expiryYear string, holderName string, number string) *Card {
+func NewCard() *Card {
 	this := Card{}
-	this.ExpiryMonth = expiryMonth
-	this.ExpiryYear = expiryYear
-	this.HolderName = holderName
-	this.Number = number
 	return &this
 }
 
@@ -90,76 +86,100 @@ func (o *Card) SetCvc(v string) {
 	o.Cvc = &v
 }
 
-// GetExpiryMonth returns the ExpiryMonth field value
+// GetExpiryMonth returns the ExpiryMonth field value if set, zero value otherwise.
 func (o *Card) GetExpiryMonth() string {
-	if o == nil {
+	if o == nil || common.IsNil(o.ExpiryMonth) {
 		var ret string
 		return ret
 	}
-
-	return o.ExpiryMonth
+	return *o.ExpiryMonth
 }
 
-// GetExpiryMonthOk returns a tuple with the ExpiryMonth field value
+// GetExpiryMonthOk returns a tuple with the ExpiryMonth field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Card) GetExpiryMonthOk() (*string, bool) {
-	if o == nil {
+	if o == nil || common.IsNil(o.ExpiryMonth) {
 		return nil, false
 	}
-	return &o.ExpiryMonth, true
+	return o.ExpiryMonth, true
 }
 
-// SetExpiryMonth sets field value
+// HasExpiryMonth returns a boolean if a field has been set.
+func (o *Card) HasExpiryMonth() bool {
+	if o != nil && !common.IsNil(o.ExpiryMonth) {
+		return true
+	}
+
+	return false
+}
+
+// SetExpiryMonth gets a reference to the given string and assigns it to the ExpiryMonth field.
 func (o *Card) SetExpiryMonth(v string) {
-	o.ExpiryMonth = v
+	o.ExpiryMonth = &v
 }
 
-// GetExpiryYear returns the ExpiryYear field value
+// GetExpiryYear returns the ExpiryYear field value if set, zero value otherwise.
 func (o *Card) GetExpiryYear() string {
-	if o == nil {
+	if o == nil || common.IsNil(o.ExpiryYear) {
 		var ret string
 		return ret
 	}
-
-	return o.ExpiryYear
+	return *o.ExpiryYear
 }
 
-// GetExpiryYearOk returns a tuple with the ExpiryYear field value
+// GetExpiryYearOk returns a tuple with the ExpiryYear field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Card) GetExpiryYearOk() (*string, bool) {
-	if o == nil {
+	if o == nil || common.IsNil(o.ExpiryYear) {
 		return nil, false
 	}
-	return &o.ExpiryYear, true
+	return o.ExpiryYear, true
 }
 
-// SetExpiryYear sets field value
+// HasExpiryYear returns a boolean if a field has been set.
+func (o *Card) HasExpiryYear() bool {
+	if o != nil && !common.IsNil(o.ExpiryYear) {
+		return true
+	}
+
+	return false
+}
+
+// SetExpiryYear gets a reference to the given string and assigns it to the ExpiryYear field.
 func (o *Card) SetExpiryYear(v string) {
-	o.ExpiryYear = v
+	o.ExpiryYear = &v
 }
 
-// GetHolderName returns the HolderName field value
+// GetHolderName returns the HolderName field value if set, zero value otherwise.
 func (o *Card) GetHolderName() string {
-	if o == nil {
+	if o == nil || common.IsNil(o.HolderName) {
 		var ret string
 		return ret
 	}
-
-	return o.HolderName
+	return *o.HolderName
 }
 
-// GetHolderNameOk returns a tuple with the HolderName field value
+// GetHolderNameOk returns a tuple with the HolderName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Card) GetHolderNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || common.IsNil(o.HolderName) {
 		return nil, false
 	}
-	return &o.HolderName, true
+	return o.HolderName, true
 }
 
-// SetHolderName sets field value
+// HasHolderName returns a boolean if a field has been set.
+func (o *Card) HasHolderName() bool {
+	if o != nil && !common.IsNil(o.HolderName) {
+		return true
+	}
+
+	return false
+}
+
+// SetHolderName gets a reference to the given string and assigns it to the HolderName field.
 func (o *Card) SetHolderName(v string) {
-	o.HolderName = v
+	o.HolderName = &v
 }
 
 // GetIssueNumber returns the IssueNumber field value if set, zero value otherwise.
@@ -194,28 +214,36 @@ func (o *Card) SetIssueNumber(v string) {
 	o.IssueNumber = &v
 }
 
-// GetNumber returns the Number field value
+// GetNumber returns the Number field value if set, zero value otherwise.
 func (o *Card) GetNumber() string {
-	if o == nil {
+	if o == nil || common.IsNil(o.Number) {
 		var ret string
 		return ret
 	}
-
-	return o.Number
+	return *o.Number
 }
 
-// GetNumberOk returns a tuple with the Number field value
+// GetNumberOk returns a tuple with the Number field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Card) GetNumberOk() (*string, bool) {
-	if o == nil {
+	if o == nil || common.IsNil(o.Number) {
 		return nil, false
 	}
-	return &o.Number, true
+	return o.Number, true
 }
 
-// SetNumber sets field value
+// HasNumber returns a boolean if a field has been set.
+func (o *Card) HasNumber() bool {
+	if o != nil && !common.IsNil(o.Number) {
+		return true
+	}
+
+	return false
+}
+
+// SetNumber gets a reference to the given string and assigns it to the Number field.
 func (o *Card) SetNumber(v string) {
-	o.Number = v
+	o.Number = &v
 }
 
 // GetStartMonth returns the StartMonth field value if set, zero value otherwise.
@@ -295,13 +323,21 @@ func (o Card) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Cvc) {
 		toSerialize["cvc"] = o.Cvc
 	}
-	toSerialize["expiryMonth"] = o.ExpiryMonth
-	toSerialize["expiryYear"] = o.ExpiryYear
-	toSerialize["holderName"] = o.HolderName
+	if !common.IsNil(o.ExpiryMonth) {
+		toSerialize["expiryMonth"] = o.ExpiryMonth
+	}
+	if !common.IsNil(o.ExpiryYear) {
+		toSerialize["expiryYear"] = o.ExpiryYear
+	}
+	if !common.IsNil(o.HolderName) {
+		toSerialize["holderName"] = o.HolderName
+	}
 	if !common.IsNil(o.IssueNumber) {
 		toSerialize["issueNumber"] = o.IssueNumber
 	}
-	toSerialize["number"] = o.Number
+	if !common.IsNil(o.Number) {
+		toSerialize["number"] = o.Number
+	}
 	if !common.IsNil(o.StartMonth) {
 		toSerialize["startMonth"] = o.StartMonth
 	}

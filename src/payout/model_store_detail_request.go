@@ -10,7 +10,6 @@ package payout
 
 import (
 	"encoding/json"
-	"time"
 
 	"github.com/adyen/adyen-go-api-library/v6/src/common"
 )
@@ -26,7 +25,7 @@ type StoreDetailRequest struct {
 	BillingAddress *Address           `json:"billingAddress,omitempty"`
 	Card           *Card              `json:"card,omitempty"`
 	// The date of birth. Format: [ISO-8601](https://www.w3.org/TR/NOTE-datetime); example: YYYY-MM-DD For Paysafecard it must be the same as used when registering the Paysafecard account. > This field is mandatory for natural persons.
-	DateOfBirth time.Time `json:"dateOfBirth"`
+	DateOfBirth string `json:"dateOfBirth"`
 	// The type of the entity the payout is processed for.
 	EntityType string `json:"entityType"`
 	// An integer value that is added to the normal fraud score. The value can be either positive or negative.
@@ -53,7 +52,7 @@ type StoreDetailRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStoreDetailRequest(dateOfBirth time.Time, entityType string, merchantAccount string, nationality string, recurring Recurring, shopperEmail string, shopperReference string) *StoreDetailRequest {
+func NewStoreDetailRequest(dateOfBirth string, entityType string, merchantAccount string, nationality string, recurring Recurring, shopperEmail string, shopperReference string) *StoreDetailRequest {
 	this := StoreDetailRequest{}
 	this.DateOfBirth = dateOfBirth
 	this.EntityType = entityType
@@ -202,9 +201,9 @@ func (o *StoreDetailRequest) SetCard(v Card) {
 }
 
 // GetDateOfBirth returns the DateOfBirth field value
-func (o *StoreDetailRequest) GetDateOfBirth() time.Time {
+func (o *StoreDetailRequest) GetDateOfBirth() string {
 	if o == nil {
-		var ret time.Time
+		var ret string
 		return ret
 	}
 
@@ -213,7 +212,7 @@ func (o *StoreDetailRequest) GetDateOfBirth() time.Time {
 
 // GetDateOfBirthOk returns a tuple with the DateOfBirth field value
 // and a boolean to check if the value has been set.
-func (o *StoreDetailRequest) GetDateOfBirthOk() (*time.Time, bool) {
+func (o *StoreDetailRequest) GetDateOfBirthOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -221,7 +220,7 @@ func (o *StoreDetailRequest) GetDateOfBirthOk() (*time.Time, bool) {
 }
 
 // SetDateOfBirth sets field value
-func (o *StoreDetailRequest) SetDateOfBirth(v time.Time) {
+func (o *StoreDetailRequest) SetDateOfBirth(v string) {
 	o.DateOfBirth = v
 }
 
