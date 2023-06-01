@@ -18,7 +18,7 @@ import (
 	"github.com/adyen/adyen-go-api-library/v6/src/transfers"
 	"github.com/adyen/adyen-go-api-library/v6/src/webhook"
 
-	binlookup "github.com/adyen/adyen-go-api-library/v6/src/binlookup"
+	"github.com/adyen/adyen-go-api-library/v6/src/binlookup"
 	"github.com/adyen/adyen-go-api-library/v6/src/common"
 	"github.com/adyen/adyen-go-api-library/v6/src/disputes"
 	"github.com/adyen/adyen-go-api-library/v6/src/payments"
@@ -40,7 +40,6 @@ const (
 	MarketpayEndpointLive             = "https://cal-live.adyen.com/cal/services"
 	CheckoutEndpointTest              = "https://checkout-test.adyen.com/checkout"
 	CheckoutEndpointLiveSuffix        = "-checkout-live.adyenpayments.com/checkout"
-	BinLookupPalSuffix                = "/pal/servlet/BinLookup/"
 	TerminalAPIEndpointTest           = "https://terminal-api-test.adyen.com"
 	TerminalAPIEndpointLive           = "https://terminal-api-live.adyen.com"
 	DisputesEndpointTest              = "https://ca-test.adyen.com/ca/services/DisputeService"
@@ -66,7 +65,7 @@ const (
 	PaymentAPIVersion               = "v68"
 	RecurringAPIVersion             = "v68"
 	CheckoutAPIVersion              = "v70"
-	BinLookupAPIVersion             = "v50"
+	BinLookupAPIVersion             = "v54"
 	EndpointProtocol                = "https://"
 	DisputesAPIVersion              = "v30"
 	StoredValueAPIVersion           = "v46"
@@ -85,7 +84,7 @@ type APIClient struct {
 	Payments                           *payments.Payments
 	payout                             *payout.APIClient
 	Recurring                          *recurring.GeneralApi
-	BinLookup                          *binlookup.BinLookup
+	BinLookup                          *binlookup.GeneralApi
 	Notification                       *webhook.NotificationService
 	PlatformsAccount                   *platformsaccount.PlatformsAccount
 	PlatformsFund                      *platformsfund.PlatformsFund
@@ -195,10 +194,10 @@ func NewClient(cfg *common.Config) *APIClient {
 		},
 	}
 
-	c.BinLookup = &binlookup.BinLookup{
+	c.BinLookup = &binlookup.GeneralApi{
 		Client: c.client,
 		BasePath: func() string {
-			return fmt.Sprintf("%s/%s/%s", c.client.Cfg.Endpoint, BinLookupPalSuffix, BinLookupAPIVersion)
+			return fmt.Sprintf("%s/pal/servlet/BinLookup/%s", c.client.Cfg.Endpoint, BinLookupAPIVersion)
 		},
 	}
 
