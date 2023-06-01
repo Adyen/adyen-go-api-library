@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AdditionalData** | Pointer to **map[string]string** | This field contains additional data, which may be required for a particular request. | [optional] 
 **Amount** | [**Amount**](Amount.md) |  | 
-**DateOfBirth** | Pointer to **time.Time** | The date of birth. Format: ISO-8601; example: YYYY-MM-DD  For Paysafecard it must be the same as used when registering the Paysafecard account.  &gt; This field is mandatory for natural persons.  &gt; This field is required to update the existing &#x60;dateOfBirth&#x60; that is associated with this recurring contract. | [optional] 
+**DateOfBirth** | Pointer to **string** | The date of birth. Format: ISO-8601; example: YYYY-MM-DD  For Paysafecard it must be the same as used when registering the Paysafecard account.  &gt; This field is mandatory for natural persons.  &gt; This field is required to update the existing &#x60;dateOfBirth&#x60; that is associated with this recurring contract. | [optional] 
 **EntityType** | Pointer to **string** | The type of the entity the payout is processed for.  Allowed values: * NaturalPerson * Company &gt; This field is required to update the existing &#x60;entityType&#x60; that is associated with this recurring contract. | [optional] 
 **FraudOffset** | Pointer to **int32** | An integer value that is added to the normal fraud score. The value can be either positive or negative. | [optional] 
 **MerchantAccount** | **string** | The merchant account identifier you want to process the transaction request with. | 
@@ -86,20 +86,20 @@ SetAmount sets Amount field to given value.
 
 ### GetDateOfBirth
 
-`func (o *SubmitRequest) GetDateOfBirth() time.Time`
+`func (o *SubmitRequest) GetDateOfBirth() string`
 
 GetDateOfBirth returns the DateOfBirth field if non-nil, zero value otherwise.
 
 ### GetDateOfBirthOk
 
-`func (o *SubmitRequest) GetDateOfBirthOk() (*time.Time, bool)`
+`func (o *SubmitRequest) GetDateOfBirthOk() (*string, bool)`
 
 GetDateOfBirthOk returns a tuple with the DateOfBirth field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDateOfBirth
 
-`func (o *SubmitRequest) SetDateOfBirth(v time.Time)`
+`func (o *SubmitRequest) SetDateOfBirth(v string)`
 
 SetDateOfBirth sets DateOfBirth field to given value.
 

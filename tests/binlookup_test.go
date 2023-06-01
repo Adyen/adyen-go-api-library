@@ -1,17 +1,12 @@
-/*
- * Adyen API Client
- *
- * Contact: support@adyen.com
- */
-
 package tests
 
 import (
+	"context"
+	"github.com/adyen/adyen-go-api-library/v6/src/binlookup"
 	"os"
 	"testing"
 
 	"github.com/adyen/adyen-go-api-library/v6/src/adyen"
-	binLookup "github.com/adyen/adyen-go-api-library/v6/src/binlookup"
 	"github.com/adyen/adyen-go-api-library/v6/src/common"
 	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
@@ -29,16 +24,18 @@ func Test_Binlookup(t *testing.T) {
 	client := adyen.NewClient(&common.Config{
 		ApiKey:      APIKey,
 		Environment: "TEST",
+		Debug:       "true" == os.Getenv("DEBUG"),
 	})
-	// client.GetConfig().Debug = true
 
 	t.Run("Get 3DS Availability", func(t *testing.T) {
 		t.Run("Create an API request that should support only 3DS1", func(t *testing.T) {
 			cardNumber := "4111111111111111"
-			res, httpRes, err := client.BinLookup.Get3dsAvailability(&binLookup.ThreeDSAvailabilityRequest{
+			body := binlookup.ThreeDSAvailabilityRequest{
 				CardNumber:      &cardNumber,
 				MerchantAccount: MerchantAccount,
-			})
+			}
+			req := client.BinLookup.Get3dsAvailabilityConfig(context.Background()).ThreeDSAvailabilityRequest(body)
+			res, httpRes, err := client.BinLookup.Get3dsAvailability(req)
 
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
@@ -47,10 +44,13 @@ func Test_Binlookup(t *testing.T) {
 		})
 		t.Run("Create an API request that should support 3DS1 and 3DS2", func(t *testing.T) {
 			cardNumber := "4917610000000000"
-			res, httpRes, err := client.BinLookup.Get3dsAvailability(&binLookup.ThreeDSAvailabilityRequest{
+			body := binlookup.ThreeDSAvailabilityRequest{
 				CardNumber:      &cardNumber,
 				MerchantAccount: MerchantAccount,
-			})
+			}
+			req := client.BinLookup.Get3dsAvailabilityConfig(context.Background()).ThreeDSAvailabilityRequest(body)
+
+			res, httpRes, err := client.BinLookup.Get3dsAvailability(req)
 
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
@@ -59,10 +59,13 @@ func Test_Binlookup(t *testing.T) {
 		})
 		t.Run("Create an API request that should not support 3DS1 and 3DS2", func(t *testing.T) {
 			cardNumber := "4199350000000002"
-			res, httpRes, err := client.BinLookup.Get3dsAvailability(&binLookup.ThreeDSAvailabilityRequest{
+			body := binlookup.ThreeDSAvailabilityRequest{
 				CardNumber:      &cardNumber,
 				MerchantAccount: MerchantAccount,
-			})
+			}
+			req := client.BinLookup.Get3dsAvailabilityConfig(context.Background()).ThreeDSAvailabilityRequest(body)
+
+			res, httpRes, err := client.BinLookup.Get3dsAvailability(req)
 
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
@@ -73,28 +76,36 @@ func Test_Binlookup(t *testing.T) {
 	t.Run("Get Cost Estimate", func(t *testing.T) {
 		t.Run("Create an API request that should get an unsupported cost estimate", func(t *testing.T) {
 			cardNumber := "4111111111111111"
-			res, httpRes, err := client.BinLookup.GetCostEstimate(&binLookup.CostEstimateRequest{
-				Amount: binLookup.Amount{
+			body := binlookup.CostEstimateRequest{
+				Amount: binlookup.Amount{
 					Currency: "EUR",
 					Value:    1250,
 				},
 				CardNumber:      &cardNumber,
 				MerchantAccount: MerchantAccount,
-			})
+			}
+			req := client.BinLookup.GetCostEstimateConfig(context.Background()).CostEstimateRequest(body)
+
+			res, httpRes, err := client.BinLookup.GetCostEstimate(req)
+
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
 			assert.Equal(t, "Unsupported", *res.ResultCode)
 		})
 		t.Run("Create an API request that should get success cost estimate", func(t *testing.T) {
 			cardNumber := "5101180000000007"
-			res, httpRes, err := client.BinLookup.GetCostEstimate(&binLookup.CostEstimateRequest{
-				Amount: binLookup.Amount{
+			body := binlookup.CostEstimateRequest{
+				Amount: binlookup.Amount{
 					Currency: "EUR",
 					Value:    1250,
 				},
 				CardNumber:      &cardNumber,
 				MerchantAccount: MerchantAccount,
-			})
+			}
+			req := client.BinLookup.GetCostEstimateConfig(context.Background()).CostEstimateRequest(body)
+
+			res, httpRes, err := client.BinLookup.GetCostEstimate(req)
+
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
 			assert.Equal(t, "Success", *res.ResultCode)

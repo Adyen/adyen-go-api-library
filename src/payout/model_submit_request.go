@@ -10,7 +10,6 @@ package payout
 
 import (
 	"encoding/json"
-	"time"
 
 	"github.com/adyen/adyen-go-api-library/v6/src/common"
 )
@@ -24,7 +23,7 @@ type SubmitRequest struct {
 	AdditionalData *map[string]string `json:"additionalData,omitempty"`
 	Amount         Amount             `json:"amount"`
 	// The date of birth. Format: ISO-8601; example: YYYY-MM-DD  For Paysafecard it must be the same as used when registering the Paysafecard account.  > This field is mandatory for natural persons.  > This field is required to update the existing `dateOfBirth` that is associated with this recurring contract.
-	DateOfBirth *time.Time `json:"dateOfBirth,omitempty"`
+	DateOfBirth *string `json:"dateOfBirth,omitempty"`
 	// The type of the entity the payout is processed for.  Allowed values: * NaturalPerson * Company > This field is required to update the existing `entityType` that is associated with this recurring contract.
 	EntityType *string `json:"entityType,omitempty"`
 	// An integer value that is added to the normal fraud score. The value can be either positive or negative.
@@ -130,9 +129,9 @@ func (o *SubmitRequest) SetAmount(v Amount) {
 }
 
 // GetDateOfBirth returns the DateOfBirth field value if set, zero value otherwise.
-func (o *SubmitRequest) GetDateOfBirth() time.Time {
+func (o *SubmitRequest) GetDateOfBirth() string {
 	if o == nil || common.IsNil(o.DateOfBirth) {
-		var ret time.Time
+		var ret string
 		return ret
 	}
 	return *o.DateOfBirth
@@ -140,7 +139,7 @@ func (o *SubmitRequest) GetDateOfBirth() time.Time {
 
 // GetDateOfBirthOk returns a tuple with the DateOfBirth field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SubmitRequest) GetDateOfBirthOk() (*time.Time, bool) {
+func (o *SubmitRequest) GetDateOfBirthOk() (*string, bool) {
 	if o == nil || common.IsNil(o.DateOfBirth) {
 		return nil, false
 	}
@@ -156,8 +155,8 @@ func (o *SubmitRequest) HasDateOfBirth() bool {
 	return false
 }
 
-// SetDateOfBirth gets a reference to the given time.Time and assigns it to the DateOfBirth field.
-func (o *SubmitRequest) SetDateOfBirth(v time.Time) {
+// SetDateOfBirth gets a reference to the given string and assigns it to the DateOfBirth field.
+func (o *SubmitRequest) SetDateOfBirth(v string) {
 	o.DateOfBirth = &v
 }
 
