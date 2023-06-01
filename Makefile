@@ -32,6 +32,7 @@ balanceplatform: spec=BalancePlatformService-v2
 balanceplatform: serviceName=BalancePlatform
 binlookup: spec=BinLookupService-v54
 checkout: spec=CheckoutService-v70
+checkout: serviceName=Checkout
 legalentity: spec=LegalEntityService-v3
 legalentity: serviceName=LegalEntity
 payments: spec=PaymentService-v68

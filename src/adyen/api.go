@@ -11,6 +11,7 @@ import (
 	"net/http"
 
 	"github.com/adyen/adyen-go-api-library/v6/src/balanceplatform"
+	"github.com/adyen/adyen-go-api-library/v6/src/checkout"
 	"github.com/adyen/adyen-go-api-library/v6/src/legalentity"
 	"github.com/adyen/adyen-go-api-library/v6/src/management"
 	"github.com/adyen/adyen-go-api-library/v6/src/recurring"
@@ -18,7 +19,6 @@ import (
 	"github.com/adyen/adyen-go-api-library/v6/src/webhook"
 
 	binlookup "github.com/adyen/adyen-go-api-library/v6/src/binlookup"
-	"github.com/adyen/adyen-go-api-library/v6/src/checkout"
 	"github.com/adyen/adyen-go-api-library/v6/src/common"
 	"github.com/adyen/adyen-go-api-library/v6/src/disputes"
 	"github.com/adyen/adyen-go-api-library/v6/src/payments"
@@ -82,7 +82,6 @@ const (
 type APIClient struct {
 	client *common.Client
 	// API Services
-	Checkout                           *checkout.Checkout
 	Payments                           *payments.Payments
 	Payout                             *payout.Payouts
 	Recurring                          *recurring.GeneralApi
@@ -182,12 +181,6 @@ func NewClient(cfg *common.Config) *APIClient {
 	}
 
 	// API Services
-	c.Checkout = &checkout.Checkout{
-		Client: c.client,
-		BasePath: func() string {
-			return fmt.Sprintf("%s/%s", c.client.Cfg.CheckoutEndpoint, CheckoutAPIVersion)
-		},
-	}
 	c.Payments = &payments.Payments{
 		Client: c.client,
 		BasePath: func() string {
@@ -279,6 +272,10 @@ func NewClient(cfg *common.Config) *APIClient {
 	return c
 }
 
+func (c *APIClient) Checkout() *checkout.APIClient {
+	return checkout.NewAPIClient(c.client)
+}
+
 /*
 SetEnvironment This defines the payment environment for live or test
 
@@ -316,6 +313,8 @@ func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix
 		c.client.Cfg.LegalEntityEndpoint = LegalEntityEntityTest
 		c.client.Cfg.PosTerminalManagementEndpoint = PosTerminalManagementEndpointTest
 	}
+
+	c.client.Cfg.CheckoutEndpoint += "/" + CheckoutAPIVersion
 	c.client.Cfg.BalancePlatformEndpoint += "/" + BalancePlatformAPIVersion
 	c.client.Cfg.ManagementEndpoint += "/" + ManagementAPIVersion
 	c.client.Cfg.LegalEntityEndpoint += "/" + LegalEntityAPIVersion

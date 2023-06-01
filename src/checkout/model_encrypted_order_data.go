@@ -14,38 +14,38 @@ import (
 	"github.com/adyen/adyen-go-api-library/v6/src/common"
 )
 
-// checks if the CheckoutOrder type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &CheckoutOrder{}
+// checks if the EncryptedOrderData type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &EncryptedOrderData{}
 
-// CheckoutOrder struct for CheckoutOrder
-type CheckoutOrder struct {
+// EncryptedOrderData struct for EncryptedOrderData
+type EncryptedOrderData struct {
 	// The encrypted order data.
 	OrderData string `json:"orderData"`
 	// The `pspReference` that belongs to the order.
 	PspReference string `json:"pspReference"`
 }
 
-// NewCheckoutOrder instantiates a new CheckoutOrder object
+// NewEncryptedOrderData instantiates a new EncryptedOrderData object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCheckoutOrder(orderData string, pspReference string) *CheckoutOrder {
-	this := CheckoutOrder{}
+func NewEncryptedOrderData(orderData string, pspReference string) *EncryptedOrderData {
+	this := EncryptedOrderData{}
 	this.OrderData = orderData
 	this.PspReference = pspReference
 	return &this
 }
 
-// NewCheckoutOrderWithDefaults instantiates a new CheckoutOrder object
+// NewEncryptedOrderDataWithDefaults instantiates a new EncryptedOrderData object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCheckoutOrderWithDefaults() *CheckoutOrder {
-	this := CheckoutOrder{}
+func NewEncryptedOrderDataWithDefaults() *EncryptedOrderData {
+	this := EncryptedOrderData{}
 	return &this
 }
 
 // GetOrderData returns the OrderData field value
-func (o *CheckoutOrder) GetOrderData() string {
+func (o *EncryptedOrderData) GetOrderData() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -56,7 +56,7 @@ func (o *CheckoutOrder) GetOrderData() string {
 
 // GetOrderDataOk returns a tuple with the OrderData field value
 // and a boolean to check if the value has been set.
-func (o *CheckoutOrder) GetOrderDataOk() (*string, bool) {
+func (o *EncryptedOrderData) GetOrderDataOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -64,12 +64,12 @@ func (o *CheckoutOrder) GetOrderDataOk() (*string, bool) {
 }
 
 // SetOrderData sets field value
-func (o *CheckoutOrder) SetOrderData(v string) {
+func (o *EncryptedOrderData) SetOrderData(v string) {
 	o.OrderData = v
 }
 
 // GetPspReference returns the PspReference field value
-func (o *CheckoutOrder) GetPspReference() string {
+func (o *EncryptedOrderData) GetPspReference() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -80,7 +80,7 @@ func (o *CheckoutOrder) GetPspReference() string {
 
 // GetPspReferenceOk returns a tuple with the PspReference field value
 // and a boolean to check if the value has been set.
-func (o *CheckoutOrder) GetPspReferenceOk() (*string, bool) {
+func (o *EncryptedOrderData) GetPspReferenceOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -88,11 +88,11 @@ func (o *CheckoutOrder) GetPspReferenceOk() (*string, bool) {
 }
 
 // SetPspReference sets field value
-func (o *CheckoutOrder) SetPspReference(v string) {
+func (o *EncryptedOrderData) SetPspReference(v string) {
 	o.PspReference = v
 }
 
-func (o CheckoutOrder) MarshalJSON() ([]byte, error) {
+func (o EncryptedOrderData) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -100,45 +100,45 @@ func (o CheckoutOrder) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CheckoutOrder) ToMap() (map[string]interface{}, error) {
+func (o EncryptedOrderData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["orderData"] = o.OrderData
 	toSerialize["pspReference"] = o.PspReference
 	return toSerialize, nil
 }
 
-type NullableCheckoutOrder struct {
-	value *CheckoutOrder
+type NullableEncryptedOrderData struct {
+	value *EncryptedOrderData
 	isSet bool
 }
 
-func (v NullableCheckoutOrder) Get() *CheckoutOrder {
+func (v NullableEncryptedOrderData) Get() *EncryptedOrderData {
 	return v.value
 }
 
-func (v *NullableCheckoutOrder) Set(val *CheckoutOrder) {
+func (v *NullableEncryptedOrderData) Set(val *EncryptedOrderData) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCheckoutOrder) IsSet() bool {
+func (v NullableEncryptedOrderData) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCheckoutOrder) Unset() {
+func (v *NullableEncryptedOrderData) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCheckoutOrder(val *CheckoutOrder) *NullableCheckoutOrder {
-	return &NullableCheckoutOrder{value: val, isSet: true}
+func NewNullableEncryptedOrderData(val *EncryptedOrderData) *NullableEncryptedOrderData {
+	return &NullableEncryptedOrderData{value: val, isSet: true}
 }
 
-func (v NullableCheckoutOrder) MarshalJSON() ([]byte, error) {
+func (v NullableEncryptedOrderData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCheckoutOrder) UnmarshalJSON(src []byte) error {
+func (v *NullableEncryptedOrderData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

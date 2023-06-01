@@ -24,9 +24,9 @@ type Card struct {
 	// The card expiry month. Format: 2 digits, zero-padded for single digits. For example: * 03 = March * 11 = November
 	ExpiryMonth *string `json:"expiryMonth,omitempty"`
 	// The card expiry year. Format: 4 digits. For example: 2020
-	ExpiryYear string `json:"expiryYear"`
+	ExpiryYear *string `json:"expiryYear,omitempty"`
 	// The name of the cardholder, as printed on the card.
-	HolderName string `json:"holderName"`
+	HolderName *string `json:"holderName,omitempty"`
 	// The issue number of the card (for some UK debit cards only).
 	IssueNumber *string `json:"issueNumber,omitempty"`
 	// The card number (4-19 characters). Do not use any separators. When this value is returned in a response, only the last 4 digits of the card number are returned.
@@ -41,10 +41,8 @@ type Card struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCard(expiryYear string, holderName string) *Card {
+func NewCard() *Card {
 	this := Card{}
-	this.ExpiryYear = expiryYear
-	this.HolderName = holderName
 	return &this
 }
 
@@ -120,52 +118,68 @@ func (o *Card) SetExpiryMonth(v string) {
 	o.ExpiryMonth = &v
 }
 
-// GetExpiryYear returns the ExpiryYear field value
+// GetExpiryYear returns the ExpiryYear field value if set, zero value otherwise.
 func (o *Card) GetExpiryYear() string {
-	if o == nil {
+	if o == nil || common.IsNil(o.ExpiryYear) {
 		var ret string
 		return ret
 	}
-
-	return o.ExpiryYear
+	return *o.ExpiryYear
 }
 
-// GetExpiryYearOk returns a tuple with the ExpiryYear field value
+// GetExpiryYearOk returns a tuple with the ExpiryYear field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Card) GetExpiryYearOk() (*string, bool) {
-	if o == nil {
+	if o == nil || common.IsNil(o.ExpiryYear) {
 		return nil, false
 	}
-	return &o.ExpiryYear, true
+	return o.ExpiryYear, true
 }
 
-// SetExpiryYear sets field value
+// HasExpiryYear returns a boolean if a field has been set.
+func (o *Card) HasExpiryYear() bool {
+	if o != nil && !common.IsNil(o.ExpiryYear) {
+		return true
+	}
+
+	return false
+}
+
+// SetExpiryYear gets a reference to the given string and assigns it to the ExpiryYear field.
 func (o *Card) SetExpiryYear(v string) {
-	o.ExpiryYear = v
+	o.ExpiryYear = &v
 }
 
-// GetHolderName returns the HolderName field value
+// GetHolderName returns the HolderName field value if set, zero value otherwise.
 func (o *Card) GetHolderName() string {
-	if o == nil {
+	if o == nil || common.IsNil(o.HolderName) {
 		var ret string
 		return ret
 	}
-
-	return o.HolderName
+	return *o.HolderName
 }
 
-// GetHolderNameOk returns a tuple with the HolderName field value
+// GetHolderNameOk returns a tuple with the HolderName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Card) GetHolderNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || common.IsNil(o.HolderName) {
 		return nil, false
 	}
-	return &o.HolderName, true
+	return o.HolderName, true
 }
 
-// SetHolderName sets field value
+// HasHolderName returns a boolean if a field has been set.
+func (o *Card) HasHolderName() bool {
+	if o != nil && !common.IsNil(o.HolderName) {
+		return true
+	}
+
+	return false
+}
+
+// SetHolderName gets a reference to the given string and assigns it to the HolderName field.
 func (o *Card) SetHolderName(v string) {
-	o.HolderName = v
+	o.HolderName = &v
 }
 
 // GetIssueNumber returns the IssueNumber field value if set, zero value otherwise.
@@ -312,8 +326,12 @@ func (o Card) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.ExpiryMonth) {
 		toSerialize["expiryMonth"] = o.ExpiryMonth
 	}
-	toSerialize["expiryYear"] = o.ExpiryYear
-	toSerialize["holderName"] = o.HolderName
+	if !common.IsNil(o.ExpiryYear) {
+		toSerialize["expiryYear"] = o.ExpiryYear
+	}
+	if !common.IsNil(o.HolderName) {
+		toSerialize["holderName"] = o.HolderName
+	}
 	if !common.IsNil(o.IssueNumber) {
 		toSerialize["issueNumber"] = o.IssueNumber
 	}

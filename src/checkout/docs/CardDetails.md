@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **RecurringDetailReference** | Pointer to **string** | This is the &#x60;recurringDetailReference&#x60; returned in the response when you created the token. | [optional] 
 **ShopperNotificationReference** | Pointer to **string** | The &#x60;shopperNotificationReference&#x60; returned in the response when you requested to notify the shopper. Used only for recurring payments in India. | [optional] 
 **StoredPaymentMethodId** | Pointer to **string** | This is the &#x60;recurringDetailReference&#x60; returned in the response when you created the token. | [optional] 
-**ThreeDS2SdkVersion** | Pointer to **string** | Version of the 3D Secure 2 mobile SDK. | [optional] 
+**ThreeDS2SdkVersion** | Pointer to **string** | Required for mobile integrations. Version of the 3D Secure 2 mobile SDK. | [optional] 
 **Type** | Pointer to **string** | Default payment method details. Common for scheme payment methods, and for simple payment method details. | [optional] [default to "scheme"]
 
 ## Methods

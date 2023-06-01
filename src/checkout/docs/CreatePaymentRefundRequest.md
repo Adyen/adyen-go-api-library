@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Amount** | [**Amount**](Amount.md) |  | 
-**LineItems** | Pointer to [**[]LineItem**](LineItem.md) | Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment). &gt; This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, Zip and Atome. | [optional] 
+**LineItems** | Pointer to [**[]LineItem**](LineItem.md) | Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment). &gt; This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Atome, Clearpay, Klarna, Ratepay, Walley, and Zip. | [optional] 
 **MerchantAccount** | **string** | The merchant account that is used to process the payment. | 
 **MerchantRefundReason** | Pointer to **string** | Your reason for the refund request | [optional] 
 **Reference** | Pointer to **string** | Your reference for the refund request. Maximum length: 80 characters. | [optional] 

@@ -22,15 +22,20 @@ func Test_api(t *testing.T) {
 		client := NewClient(&common.Config{
 			Environment: "TEST",
 		})
+		svc := client.Checkout()
 		require.NotNil(t, client)
 		require.NotNil(t, client.client)
 		require.NotNil(t, client.client.Cfg)
 		require.NotNil(t, client.client.Cfg.HTTPClient)
 		require.NotNil(t, client.Checkout)
-		assert.Equal(t, "https://checkout-test.adyen.com/checkout/"+CheckoutAPIVersion, client.Checkout.BasePath())
+		assert.Equal(t, "https://checkout-test.adyen.com/checkout/"+CheckoutAPIVersion, svc.RecurringApi.BasePath())
 
 		t.Run("Create a API request that should fail", func(t *testing.T) {
-			res, httpRes, err := client.Checkout.PaymentMethods(&checkout.PaymentMethodsRequest{})
+			req := svc.PaymentsApi.PaymentMethodsConfig(context.Background())
+			req = req.PaymentMethodsRequest(checkout.PaymentMethodsRequest{})
+
+			res, httpRes, err := svc.PaymentsApi.PaymentMethods(req)
+
 			require.NotNil(t, err)
 			assert.Equal(t, true, strings.Contains(err.Error(), "Unauthorized"))
 			require.NotNil(t, res)
@@ -52,12 +57,15 @@ func Test_api(t *testing.T) {
 			ApiKey:      APIKey,
 			Environment: "TEST",
 		})
+		svc = client.Checkout()
 
 		t.Run("Create a API request that uses API key auth and should pass", func(t *testing.T) {
-
-			res, httpRes, err := client.Checkout.PaymentMethods(&checkout.PaymentMethodsRequest{
+			req := svc.PaymentsApi.PaymentMethodsConfig(context.Background())
+			req = req.PaymentMethodsRequest(checkout.PaymentMethodsRequest{
 				MerchantAccount: MerchantAccount,
 			})
+
+			res, httpRes, err := svc.PaymentsApi.PaymentMethods(req)
 
 			require.Nil(t, err)
 			require.NotNil(t, res)

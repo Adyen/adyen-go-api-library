@@ -420,7 +420,7 @@ func (v *NullableAchDetails) UnmarshalJSON(src []byte) error {
 }
 
 func (o *AchDetails) isValidType() bool {
-	var allowedEnumValues = []string{"ach"}
+	var allowedEnumValues = []string{"ach", "ach_plaid"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

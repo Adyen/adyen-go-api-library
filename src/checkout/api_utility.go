@@ -9,34 +9,139 @@ API version: 70
 package checkout
 
 import (
-	_context "context"
+	"context"
 	_nethttp "net/http"
+	"net/url"
+
+	"github.com/adyen/adyen-go-api-library/v6/src/common"
 )
+
+// UtilityApi UtilityApi service
+type UtilityApi common.Service
+
+type UtilityApiGetApplePaySessionConfig struct {
+	ctx                          context.Context
+	idempotencyKey               *string
+	createApplePaySessionRequest *CreateApplePaySessionRequest
+}
+
+// A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
+func (r UtilityApiGetApplePaySessionConfig) IdempotencyKey(idempotencyKey string) UtilityApiGetApplePaySessionConfig {
+	r.idempotencyKey = &idempotencyKey
+	return r
+}
+
+func (r UtilityApiGetApplePaySessionConfig) CreateApplePaySessionRequest(createApplePaySessionRequest CreateApplePaySessionRequest) UtilityApiGetApplePaySessionConfig {
+	r.createApplePaySessionRequest = &createApplePaySessionRequest
+	return r
+}
+
+/*
+GetApplePaySession Get an Apple Pay session
+
+You need to use this endpoint if you have an API-only integration with Apple Pay which uses Adyen's Apple Pay certificate.
+
+The endpoint returns the Apple Pay session data which you need to complete the [Apple Pay session validation](https://docs.adyen.com/payment-methods/apple-pay/api-only?tab=adyen-certificate-validation_1#complete-apple-pay-session-validation).
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return UtilityApiGetApplePaySessionConfig
+*/
+func (a *UtilityApi) GetApplePaySessionConfig(ctx context.Context) UtilityApiGetApplePaySessionConfig {
+	return UtilityApiGetApplePaySessionConfig{
+		ctx: ctx,
+	}
+}
 
 /*
 Get an Apple Pay session
 You need to use this endpoint if you have an API-only integration with Apple Pay which uses Adyen&#39;s Apple Pay certificate.  The endpoint returns the Apple Pay session data which you need to complete the [Apple Pay session validation](https://docs.adyen.com/payment-methods/apple-pay/api-only?tab&#x3D;adyen-certificate-validation_1#complete-apple-pay-session-validation).
  * @param req CreateApplePaySessionRequest - reference of CreateApplePaySessionRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ApplePaySessionResponse
 */
-func (a Checkout) GetApplePaySession(req *CreateApplePaySessionRequest, ctxs ..._context.Context) (ApplePaySessionResponse, *_nethttp.Response, error) {
+
+func (a *UtilityApi) GetApplePaySession(r UtilityApiGetApplePaySessionConfig) (ApplePaySessionResponse, *_nethttp.Response, error) {
 	res := &ApplePaySessionResponse{}
 	path := "/applePay/sessions"
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.idempotencyKey != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		r.createApplePaySessionRequest,
+		res,
+		_nethttp.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
+}
+
+type UtilityApiOriginKeysConfig struct {
+	ctx                    context.Context
+	idempotencyKey         *string
+	checkoutUtilityRequest *CheckoutUtilityRequest
+}
+
+// A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
+func (r UtilityApiOriginKeysConfig) IdempotencyKey(idempotencyKey string) UtilityApiOriginKeysConfig {
+	r.idempotencyKey = &idempotencyKey
+	return r
+}
+
+func (r UtilityApiOriginKeysConfig) CheckoutUtilityRequest(checkoutUtilityRequest CheckoutUtilityRequest) UtilityApiOriginKeysConfig {
+	r.checkoutUtilityRequest = &checkoutUtilityRequest
+	return r
+}
+
+/*
+OriginKeys Create originKey values for domains
+
+This operation takes the origin domains and returns a JSON object containing the corresponding origin keys for the domains.
+> If you're still using origin key for your Web Drop-in or Components integration, we recommend [switching to client key](https://docs.adyen.com/development-resources/client-side-authentication/migrate-from-origin-key-to-client-key). This allows you to use a single key for all origins, add or remove origins without generating a new key, and detect the card type from the number entered in your payment form.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return UtilityApiOriginKeysConfig
+
+Deprecated
+*/
+func (a *UtilityApi) OriginKeysConfig(ctx context.Context) UtilityApiOriginKeysConfig {
+	return UtilityApiOriginKeysConfig{
+		ctx: ctx,
+	}
 }
 
 /*
 Create originKey values for domains
 This operation takes the origin domains and returns a JSON object containing the corresponding origin keys for the domains.  &gt; If you&#39;re still using origin key for your Web Drop-in or Components integration, we recommend [switching to client key](https://docs.adyen.com/development-resources/client-side-authentication/migrate-from-origin-key-to-client-key). This allows you to use a single key for all origins, add or remove origins without generating a new key, and detect the card type from the number entered in your payment form.
  * @param req CheckoutUtilityRequest - reference of CheckoutUtilityRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return CheckoutUtilityResponse
 */
-func (a Checkout) OriginKeys(req *CheckoutUtilityRequest, ctxs ..._context.Context) (CheckoutUtilityResponse, *_nethttp.Response, error) {
+
+func (a *UtilityApi) OriginKeys(r UtilityApiOriginKeysConfig) (CheckoutUtilityResponse, *_nethttp.Response, error) {
 	res := &CheckoutUtilityResponse{}
 	path := "/originKeys"
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.idempotencyKey != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		r.checkoutUtilityRequest,
+		res,
+		_nethttp.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }

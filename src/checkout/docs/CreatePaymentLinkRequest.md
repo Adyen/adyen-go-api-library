@@ -4,10 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AllowedPaymentMethods** | Pointer to **[]string** | List of payment methods to be presented to the shopper. To refer to payment methods, use their &#x60;paymentMethod.type&#x60; from [Payment methods overview](https://docs.adyen.com/payment-methods).  Example: &#x60;\&quot;allowedPaymentMethods\&quot;:[\&quot;ideal\&quot;,\&quot;giropay\&quot;]&#x60; | [optional] 
+**AllowedPaymentMethods** | Pointer to **[]string** | List of payment methods to be presented to the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).  Example: &#x60;\&quot;allowedPaymentMethods\&quot;:[\&quot;ideal\&quot;,\&quot;giropay\&quot;]&#x60; | [optional] 
 **Amount** | [**Amount**](Amount.md) |  | 
+**ApplicationInfo** | Pointer to [**ApplicationInfo**](ApplicationInfo.md) |  | [optional] 
 **BillingAddress** | Pointer to [**Address**](Address.md) |  | [optional] 
-**BlockedPaymentMethods** | Pointer to **[]string** | List of payment methods to be hidden from the shopper. To refer to payment methods, use their &#x60;paymentMethod.type&#x60; from [Payment methods overview](https://docs.adyen.com/payment-methods).  Example: &#x60;\&quot;blockedPaymentMethods\&quot;:[\&quot;ideal\&quot;,\&quot;giropay\&quot;]&#x60; | [optional] 
+**BlockedPaymentMethods** | Pointer to **[]string** | List of payment methods to be hidden from the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).  Example: &#x60;\&quot;blockedPaymentMethods\&quot;:[\&quot;ideal\&quot;,\&quot;giropay\&quot;]&#x60; | [optional] 
 **CaptureDelayHours** | Pointer to **int32** | The delay between the authorisation and scheduled auto-capture, specified in hours. | [optional] 
 **CountryCode** | Pointer to **string** | The shopper&#39;s two-letter country code. | [optional] 
 **DateOfBirth** | Pointer to **string** | The shopper&#39;s date of birth.  Format [ISO-8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DD | [optional] 
@@ -105,6 +106,31 @@ and a boolean to check if the value has been set.
 
 SetAmount sets Amount field to given value.
 
+
+### GetApplicationInfo
+
+`func (o *CreatePaymentLinkRequest) GetApplicationInfo() ApplicationInfo`
+
+GetApplicationInfo returns the ApplicationInfo field if non-nil, zero value otherwise.
+
+### GetApplicationInfoOk
+
+`func (o *CreatePaymentLinkRequest) GetApplicationInfoOk() (*ApplicationInfo, bool)`
+
+GetApplicationInfoOk returns a tuple with the ApplicationInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApplicationInfo
+
+`func (o *CreatePaymentLinkRequest) SetApplicationInfo(v ApplicationInfo)`
+
+SetApplicationInfo sets ApplicationInfo field to given value.
+
+### HasApplicationInfo
+
+`func (o *CreatePaymentLinkRequest) HasApplicationInfo() bool`
+
+HasApplicationInfo returns a boolean if a field has been set.
 
 ### GetBillingAddress
 

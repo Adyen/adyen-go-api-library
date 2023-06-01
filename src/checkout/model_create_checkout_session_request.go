@@ -24,13 +24,13 @@ type CreateCheckoutSessionRequest struct {
 	AdditionalAmount *Amount      `json:"additionalAmount,omitempty"`
 	// This field contains additional data, which may be required for a particular payment request.  The `additionalData` object consists of entries, each of which includes the key and value.
 	AdditionalData *map[string]string `json:"additionalData,omitempty"`
-	// List of payment methods to be presented to the shopper. To refer to payment methods, use their `paymentMethod.type`from [Payment methods overview](https://docs.adyen.com/payment-methods).  Example: `\"allowedPaymentMethods\":[\"ideal\",\"giropay\"]`
+	// List of payment methods to be presented to the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).  Example: `\"allowedPaymentMethods\":[\"ideal\",\"giropay\"]`
 	AllowedPaymentMethods []string            `json:"allowedPaymentMethods,omitempty"`
 	Amount                Amount              `json:"amount"`
 	ApplicationInfo       *ApplicationInfo    `json:"applicationInfo,omitempty"`
 	AuthenticationData    *AuthenticationData `json:"authenticationData,omitempty"`
 	BillingAddress        *Address            `json:"billingAddress,omitempty"`
-	// List of payment methods to be hidden from the shopper. To refer to payment methods, use their `paymentMethod.type`from [Payment methods overview](https://docs.adyen.com/payment-methods).  Example: `\"blockedPaymentMethods\":[\"ideal\",\"giropay\"]`
+	// List of payment methods to be hidden from the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).  Example: `\"blockedPaymentMethods\":[\"ideal\",\"giropay\"]`
 	BlockedPaymentMethods []string `json:"blockedPaymentMethods,omitempty"`
 	// The delay between the authorisation and scheduled auto-capture, specified in hours.
 	CaptureDelayHours *int32 `json:"captureDelayHours,omitempty"`
@@ -111,6 +111,7 @@ type CreateCheckoutSessionRequest struct {
 	// The shopper's telephone number.
 	TelephoneNumber *string `json:"telephoneNumber,omitempty"`
 	// If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only), and not the payment authorisation.
+	// Deprecated
 	ThreeDSAuthenticationOnly *bool `json:"threeDSAuthenticationOnly,omitempty"`
 	// Set to true if the payment should be routed to a trusted MID.
 	TrustedShopper *bool `json:"trustedShopper,omitempty"`
@@ -1778,6 +1779,7 @@ func (o *CreateCheckoutSessionRequest) SetTelephoneNumber(v string) {
 }
 
 // GetThreeDSAuthenticationOnly returns the ThreeDSAuthenticationOnly field value if set, zero value otherwise.
+// Deprecated
 func (o *CreateCheckoutSessionRequest) GetThreeDSAuthenticationOnly() bool {
 	if o == nil || common.IsNil(o.ThreeDSAuthenticationOnly) {
 		var ret bool
@@ -1788,6 +1790,7 @@ func (o *CreateCheckoutSessionRequest) GetThreeDSAuthenticationOnly() bool {
 
 // GetThreeDSAuthenticationOnlyOk returns a tuple with the ThreeDSAuthenticationOnly field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *CreateCheckoutSessionRequest) GetThreeDSAuthenticationOnlyOk() (*bool, bool) {
 	if o == nil || common.IsNil(o.ThreeDSAuthenticationOnly) {
 		return nil, false
@@ -1805,6 +1808,7 @@ func (o *CreateCheckoutSessionRequest) HasThreeDSAuthenticationOnly() bool {
 }
 
 // SetThreeDSAuthenticationOnly gets a reference to the given bool and assigns it to the ThreeDSAuthenticationOnly field.
+// Deprecated
 func (o *CreateCheckoutSessionRequest) SetThreeDSAuthenticationOnly(v bool) {
 	o.ThreeDSAuthenticationOnly = &v
 }

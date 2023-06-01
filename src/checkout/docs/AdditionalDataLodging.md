@@ -4,23 +4,22 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**LodgingCheckInDate** | Pointer to **string** | The arrival date. * Date format: &#x60;yyyyMMdd&#x60; | [optional] 
-**LodgingCheckOutDate** | Pointer to **string** | The departure date. * Date format: &#x60;yyyyMMdd&#x60; | [optional] 
-**LodgingCustomerServiceTollFreeNumber** | Pointer to **string** | The toll free phone number for the hotel/lodgings. * Format: Alphanumeric * maxLength: 17 | [optional] 
-**LodgingFireSafetyActIndicator** | Pointer to **string** | Identifies that the facility complies with the Hotel and Motel Fire Safety Act of 1990. Values can be: &#39;Y&#39; or &#39;N&#39;. * Format: Alphabetic * maxLength: 1 | [optional] 
-**LodgingFolioCashAdvances** | Pointer to **string** | The folio cash advances. * Format: Numeric * maxLength: 12 | [optional] 
-**LodgingFolioNumber** | Pointer to **string** | Card acceptor’s internal invoice or billing ID reference number. * Format: Alphanumeric * maxLength: 25 | [optional] 
-**LodgingFoodBeverageCharges** | Pointer to **string** | Any charges for food and beverages associated with the booking. * Format: Numeric * maxLength: 12 | [optional] 
-**LodgingNoShowIndicator** | Pointer to **string** | Indicates if the customer was a \&quot;no-show\&quot; (neither keeps nor cancels their booking).  Value should be Y or N. * Format: Numeric * maxLength: 1 | [optional] 
-**LodgingPrepaidExpenses** | Pointer to **string** | Prepaid expenses for the booking. * Format: Numeric * maxLength: 12 | [optional] 
-**LodgingPropertyPhoneNumber** | Pointer to **string** | Identifies specific lodging property location by its local phone number. * Format: Alphanumeric * maxLength: 17 | [optional] 
-**LodgingRoom1NumberOfNights** | Pointer to **string** | Total number of nights the room will be rented. * Format: Numeric * maxLength: 4 | [optional] 
-**LodgingRoom1Rate** | Pointer to **string** | The rate of the room. * Format: Numeric * maxLength: 12 | [optional] 
-**LodgingRoom1Tax** | Pointer to **string** | The total amount of tax to be paid. * Format: Numeric * maxLength: 12 | [optional] 
-**LodgingTotalRoomTax** | Pointer to **string** | Total room tax amount. * Format: Numeric * maxLength: 12 | [optional] 
-**LodgingTotalTax** | Pointer to **string** | Total tax amount. * Format: Numeric * maxLength: 12 | [optional] 
-**TravelEntertainmentAuthDataDuration** | Pointer to **string** | Number of nights. This should be included in the auth message. * Format: Numeric * maxLength: 2 | [optional] 
-**TravelEntertainmentAuthDataMarket** | Pointer to **string** | Indicates what market-specific dataset will be submitted or is being submitted. Value should be \&quot;H\&quot; for Hotel. This should be included in the auth message.  * Format: Alphanumeric * maxLength: 1 | [optional] 
+**LodgingCheckInDate** | Pointer to **string** | The arrival date. * Date format: **yyyyMmDd**. For example, for 2023 April 22, **20230422**. | [optional] 
+**LodgingCheckOutDate** | Pointer to **string** | The departure date. * Date format: **yyyyMmDd**. For example, for 2023 April 22, **20230422**. | [optional] 
+**LodgingCustomerServiceTollFreeNumber** | Pointer to **string** | The toll-free phone number for the lodging. * Format: numeric * Max length: 17 characters. * For US and CA numbers must be 10 characters in length * Must not start with a space * Must not be all zeros * Must not contain any special characters such as + or - | [optional] 
+**LodgingFireSafetyActIndicator** | Pointer to **string** | Identifies that the facility complies with the Hotel and Motel Fire Safety Act of 1990. Must be &#39;Y&#39; or &#39;N&#39;. * Format: alphabetic * Max length: 1 character | [optional] 
+**LodgingFolioCashAdvances** | Pointer to **string** | The folio cash advances, in [minor units](https://docs.adyen.com/development-resources/currency-codes). * Format: numeric * Max length: 12 characters | [optional] 
+**LodgingFolioNumber** | Pointer to **string** | The card acceptor’s internal invoice or billing ID reference number. * Max length: 25 characters. * Must not start with a space * Must not be all zeros | [optional] 
+**LodgingFoodBeverageCharges** | Pointer to **string** | Any charges for food and beverages associated with the booking, in [minor units](https://docs.adyen.com/development-resources/currency-codes). * Format: numeric * Max length: 12 characters | [optional] 
+**LodgingNoShowIndicator** | Pointer to **string** | Indicates if the customer didn&#39;t check in for their booking.  Possible values:  * **Y**: the customer didn&#39;t check in  * **N**: the customer checked in | [optional] 
+**LodgingPrepaidExpenses** | Pointer to **string** | The prepaid expenses for the booking. * Format: numeric * Max length: 12 characters | [optional] 
+**LodgingPropertyPhoneNumber** | Pointer to **string** | The lodging property location&#39;s phone number. * Format: numeric. * Min length: 10 characters * Max length: 17 characters * For US and CA numbers must be 10 characters in length * Must not start with a space * Must not be all zeros * Must not contain any special characters such as + or - | [optional] 
+**LodgingRoom1NumberOfNights** | Pointer to **string** | The total number of nights the room is booked for. * Format: numeric * Must be a number between 0 and 99 * Max length: 2 characters | [optional] 
+**LodgingRoom1Rate** | Pointer to **string** | The rate for the room, in [minor units](https://docs.adyen.com/development-resources/currency-codes). * Format: numeric * Max length: 12 characters * Must not be a negative number | [optional] 
+**LodgingTotalRoomTax** | Pointer to **string** | The total room tax amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes). * Format: numeric * Max length: 12 characters * Must not be a negative number | [optional] 
+**LodgingTotalTax** | Pointer to **string** | The total tax amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes). * Format: numeric * Max length: 12 characters * Must not be a negative number | [optional] 
+**TravelEntertainmentAuthDataDuration** | Pointer to **string** | The number of nights. This should be included in the auth message. * Format: numeric * Max length: 2 characters | [optional] 
+**TravelEntertainmentAuthDataMarket** | Pointer to **string** | Indicates what market-specific dataset will be submitted. Must be &#39;H&#39; for Hotel. This should be included in the auth message.  * Format: alphanumeric * Max length: 1 character | [optional] 
 
 ## Methods
 
@@ -340,31 +339,6 @@ SetLodgingRoom1Rate sets LodgingRoom1Rate field to given value.
 `func (o *AdditionalDataLodging) HasLodgingRoom1Rate() bool`
 
 HasLodgingRoom1Rate returns a boolean if a field has been set.
-
-### GetLodgingRoom1Tax
-
-`func (o *AdditionalDataLodging) GetLodgingRoom1Tax() string`
-
-GetLodgingRoom1Tax returns the LodgingRoom1Tax field if non-nil, zero value otherwise.
-
-### GetLodgingRoom1TaxOk
-
-`func (o *AdditionalDataLodging) GetLodgingRoom1TaxOk() (*string, bool)`
-
-GetLodgingRoom1TaxOk returns a tuple with the LodgingRoom1Tax field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLodgingRoom1Tax
-
-`func (o *AdditionalDataLodging) SetLodgingRoom1Tax(v string)`
-
-SetLodgingRoom1Tax sets LodgingRoom1Tax field to given value.
-
-### HasLodgingRoom1Tax
-
-`func (o *AdditionalDataLodging) HasLodgingRoom1Tax() bool`
-
-HasLodgingRoom1Tax returns a boolean if a field has been set.
 
 ### GetLodgingTotalRoomTax
 

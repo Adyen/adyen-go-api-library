@@ -7,6 +7,7 @@
 package tests
 
 import (
+	"context"
 	"fmt"
 	_nethttp "net/http"
 	"os"
@@ -45,6 +46,7 @@ func Test_Payout(t *testing.T) {
 		ApiKey:      ReviewAPIKey,
 		Environment: "TEST",
 	})
+	service := client.Checkout()
 
 	dateOfBirth := time.Date(1990, 1, 1, 0, 0, 0, 0, time.UTC)
 	cvc := "737"
@@ -118,7 +120,7 @@ func Test_Payout(t *testing.T) {
 				cc.SetEncryptedExpiryYear("test_2030")
 				cc.SetEncryptedSecurityCode("test_737")
 				cc.SetHolderName("John Smith")
-				paymentRes, _, _ := client.Checkout.Payments(&checkout.PaymentRequest{
+				req := service.PaymentsApi.PaymentsConfig(context.Background()).PaymentRequest(checkout.PaymentRequest{
 					Reference: "123456781235",
 					Amount: checkout.Amount{
 						Value:    12500,
@@ -127,6 +129,7 @@ func Test_Payout(t *testing.T) {
 					MerchantAccount: MerchantAccount,
 					PaymentMethod:   checkout.CardDetailsAsCheckoutPaymentMethod(cc),
 				})
+				paymentRes, _, _ := service.PaymentsApi.Payments(req)
 
 				res, httpRes, err := client.Payout.Payout(&payout.PayoutRequest{
 					Amount:          amount,

@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **MerchantAccount** | **string** | The merchant account identifier that orderData belongs to. | 
-**Order** | [**CheckoutOrder**](CheckoutOrder.md) |  | 
+**Order** | [**EncryptedOrderData**](EncryptedOrderData.md) |  | 
 
 ## Methods
 
 ### NewCheckoutCancelOrderRequest
 
-`func NewCheckoutCancelOrderRequest(merchantAccount string, order CheckoutOrder, ) *CheckoutCancelOrderRequest`
+`func NewCheckoutCancelOrderRequest(merchantAccount string, order EncryptedOrderData, ) *CheckoutCancelOrderRequest`
 
 NewCheckoutCancelOrderRequest instantiates a new CheckoutCancelOrderRequest object
 This constructor will assign default values to properties that have it defined,
@@ -48,20 +48,20 @@ SetMerchantAccount sets MerchantAccount field to given value.
 
 ### GetOrder
 
-`func (o *CheckoutCancelOrderRequest) GetOrder() CheckoutOrder`
+`func (o *CheckoutCancelOrderRequest) GetOrder() EncryptedOrderData`
 
 GetOrder returns the Order field if non-nil, zero value otherwise.
 
 ### GetOrderOk
 
-`func (o *CheckoutCancelOrderRequest) GetOrderOk() (*CheckoutOrder, bool)`
+`func (o *CheckoutCancelOrderRequest) GetOrderOk() (*EncryptedOrderData, bool)`
 
 GetOrderOk returns a tuple with the Order field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOrder
 
-`func (o *CheckoutCancelOrderRequest) SetOrder(v CheckoutOrder)`
+`func (o *CheckoutCancelOrderRequest) SetOrder(v EncryptedOrderData)`
 
 SetOrder sets Order field to given value.
 
