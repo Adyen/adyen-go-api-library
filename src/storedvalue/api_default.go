@@ -1,7 +1,7 @@
 package storedvalue
 
 import (
-	"github.com/adyen/adyen-go-api-library/v6/src/common"
+	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
 // StoredValue API service

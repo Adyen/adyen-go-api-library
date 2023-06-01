@@ -14,7 +14,7 @@ import (
 	_nethttp "net/http"
 	"net/url"
 
-	"github.com/adyen/adyen-go-api-library/v6/src/common"
+	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
 // TerminalsTerminalLevelApi TerminalsTerminalLevelApi service

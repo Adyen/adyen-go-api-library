@@ -28,7 +28,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/adyen/adyen-go-api-library/v6/src/legalentity"
+    openapiclient "github.com/adyen/adyen-go-api-library/v7/src/legalentity"
 )
 
 func main() {
@@ -101,7 +101,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/adyen/adyen-go-api-library/v6/src/legalentity"
+    openapiclient "github.com/adyen/adyen-go-api-library/v7/src/legalentity"
 )
 
 func main() {
@@ -176,7 +176,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/adyen/adyen-go-api-library/v6/src/legalentity"
+    openapiclient "github.com/adyen/adyen-go-api-library/v7/src/legalentity"
 )
 
 func main() {
@@ -253,7 +253,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/adyen/adyen-go-api-library/v6/src/legalentity"
+    openapiclient "github.com/adyen/adyen-go-api-library/v7/src/legalentity"
 )
 
 func main() {
