@@ -81,7 +81,6 @@ const (
 type APIClient struct {
 	client *common.Client
 	// API Services
-	Payments                           *payments.Payments
 	payout                             *payout.APIClient
 	Recurring                          *recurring.GeneralApi
 	BinLookup                          *binlookup.GeneralApi
@@ -180,12 +179,6 @@ func NewClient(cfg *common.Config) *APIClient {
 	}
 
 	// API Services
-	c.Payments = &payments.Payments{
-		Client: c.client,
-		BasePath: func() string {
-			return fmt.Sprintf("%s/pal/servlet/Payment/%s", c.client.Cfg.Endpoint, PaymentAPIVersion)
-		},
-	}
 
 	c.Recurring = &recurring.GeneralApi{
 		Client: c.client,
@@ -266,6 +259,14 @@ func NewClient(cfg *common.Config) *APIClient {
 
 func (c *APIClient) Checkout() *checkout.APIClient {
 	return checkout.NewAPIClient(c.client)
+}
+
+func (c *APIClient) Payments() *payments.APIClient {
+	client := payments.NewAPIClient(c.client)
+	client.GeneralApi.BasePath = func() string {
+		return fmt.Sprintf("%s/pal/servlet/Payment/%s", c.client.Cfg.Endpoint, PaymentAPIVersion)
+	}
+	return client
 }
 
 func (c *APIClient) Payout() *payout.APIClient {

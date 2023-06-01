@@ -7,7 +7,7 @@ This is the officially supported golang library for using Adyen's APIs.
 The Library supports all APIs under the following services:
 
 * [Checkout API](https://docs.adyen.com/api-explorer/#/CheckoutService/v70/overview): Our latest integration for accepting online payments. Current supported version: **v70**
-* [Payments API](https://docs.adyen.com/api-explorer/#/Payment/v64/overview): Our classic integration for online payments. Current supported version: **v64**
+* [Payments API](https://docs.adyen.com/api-explorer/Payment/68/overview): Our classic integration for online payments. Current supported version: **v68**
 * [Recurring API](https://docs.adyen.com/api-explorer/Recurring/68/overview): Endpoints for managing saved payment details. Current supported version: **v68**
 * [Payouts API](https://docs.adyen.com/api-explorer/Payout/68/overview): Endpoints for sending funds to your customers. Current supported version: **v68**
 * [BinLookup API](https://docs.adyen.com/api-explorer/BinLookup/54/overview): The BIN Lookup API provides endpoints for retrieving information based on a given BIN. Current supported version: **v54**
