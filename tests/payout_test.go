@@ -7,55 +7,38 @@
 package tests
 
 import (
+	"bytes"
 	"context"
-	"fmt"
-	_nethttp "net/http"
-	"os"
+	"io"
+	"io/ioutil"
+	"net/http"
+	"net/http/httptest"
 	"testing"
 	"time"
 
 	"github.com/adyen/adyen-go-api-library/v6/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v6/src/checkout"
 	"github.com/adyen/adyen-go-api-library/v6/src/common"
 	"github.com/adyen/adyen-go-api-library/v6/src/payout"
-	"github.com/joho/godotenv"
-
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
 func Test_Payout(t *testing.T) {
-	godotenv.Load("./../.env")
-
-	var (
-		APIKey          = os.Getenv("ADYEN_API_KEY")
-		ReviewAPIKey    = os.Getenv("ADYEN_REVIEWPAYOUT_APIKEY")
-		StoreAPIKey     = os.Getenv("ADYEN_STOREPAYOUT_APIKEY")
-		MerchantAccount = os.Getenv("ADYEN_MERCHANT")
-	)
-
 	client := adyen.NewClient(&common.Config{
-		ApiKey:      APIKey,
+		ApiKey:      "MyAPIKey",
 		Environment: "TEST",
+		Debug:       true,
 	})
-	clientStore := adyen.NewClient(&common.Config{
-		ApiKey:      StoreAPIKey,
-		Environment: "TEST",
-	})
-	clientReview := adyen.NewClient(&common.Config{
-		ApiKey:      ReviewAPIKey,
-		Environment: "TEST",
-	})
-	service := client.Checkout()
 
-	dateOfBirth := time.Date(1990, 1, 1, 0, 0, 0, 0, time.UTC)
+	merchantAccount := "Merch"
+	dateOfBirth := "1990-01-01"
 	cvc := "737"
-	card := &payout.Card{
+	card := payout.Card{
 		Cvc:         &cvc,
-		ExpiryMonth: "03",
-		ExpiryYear:  "2030",
-		HolderName:  "John Smith",
-		Number:      "4111111111111111",
+		ExpiryMonth: common.PtrString("03"),
+		ExpiryYear:  common.PtrString("2030"),
+		HolderName:  common.PtrString("John Smith"),
+		Number:      common.PtrString("4111111111111111"),
 	}
 	shopperName := &payout.Name{
 		FirstName: "John",
@@ -81,27 +64,91 @@ func Test_Payout(t *testing.T) {
 	shopperEmail := "test@adyen.com"
 	nationality := "NL"
 
-	createStoreDetail := func(ref string) (payout.StoreDetailResponse, *_nethttp.Response, error) {
-		return clientStore.Payout.StoreDetail(&payout.StoreDetailRequest{
-			Bank:             &bank,
-			DateOfBirth:      dateOfBirth,
-			EntityType:       entityType,
-			MerchantAccount:  MerchantAccount,
-			Nationality:      nationality,
-			Recurring:        recurring,
-			ShopperEmail:     shopperEmail,
-			ShopperName:      shopperName,
-			ShopperReference: ref,
-		})
-	}
+	mux := http.NewServeMux()
+	// Success cases
+	mux.HandleFunc("/payout", func(w http.ResponseWriter, r *http.Request) {
+		require.Equal(t, "POST", r.Method)
+		w.Header().Set("Content-Type", "application/json")
 
-	createStoreDetailAndSubmitThirdParty := func(ref string) (payout.StoreDetailAndSubmitResponse, *_nethttp.Response, error) {
-		return clientStore.Payout.StoreDetailAndSubmitThirdParty(&payout.StoreDetailAndSubmitRequest{
+		// Error case
+		body, _ := ioutil.ReadAll(r.Body)
+		if bytes.Contains(body, []byte("failCase")) {
+			w.WriteHeader(http.StatusInternalServerError)
+			io.WriteString(w, `{
+				"status" : 500,
+				"errorCode" : "903",
+				"message" : "Internal error",
+				"errorType" : "internal"
+			}`)
+			return
+		}
+		io.WriteString(w, `{
+		  "additionalData": {
+			"cvcResult": "0 Unknown",
+			"authCode": "010523",
+			"avsResult": "0 Unknown",
+			"authorisationMid": "50",
+			"acquirerAccountCode": "AcquirerAccountCode"
+		  },
+		  "pspReference": "ABC213",
+		  "resultCode": "Authorised",
+		  "authCode": "010523"
+		}`)
+	})
+	mux.HandleFunc("/storeDetail", func(w http.ResponseWriter, r *http.Request) {
+		require.Equal(t, "POST", r.Method)
+		w.Header().Set("Content-Type", "application/json")
+		io.WriteString(w, `{
+		   "pspReference" : "ABC123",
+		   "recurringDetailReference" : "XYZ123",
+		   "resultCode" : "Success"
+		}`)
+	})
+	mux.HandleFunc("/submitThirdParty", func(w http.ResponseWriter, r *http.Request) {
+		require.Equal(t, "POST", r.Method)
+		w.Header().Set("Content-Type", "application/json")
+		io.WriteString(w, `{
+		   "pspReference" : "ABC123",
+		   "resultCode" : "[payout-submit-received]"
+		}`)
+	})
+	mux.HandleFunc("/storeDetailAndSubmitThirdParty", func(w http.ResponseWriter, r *http.Request) {
+		require.Equal(t, "POST", r.Method)
+		w.Header().Set("Content-Type", "application/json")
+		io.WriteString(w, `{
+		   "pspReference" : "ABC123",
+		   "resultCode" : "[payout-submit-received]"
+		}`)
+	})
+	mux.HandleFunc("/confirmThirdParty", func(w http.ResponseWriter, r *http.Request) {
+		require.Equal(t, "POST", r.Method)
+		w.Header().Set("Content-Type", "application/json")
+		io.WriteString(w, `{
+		   "pspReference" : "ABC123",
+		   "response" : "[payout-confirm-received]"
+		}`)
+	})
+	mux.HandleFunc("/declineThirdParty", func(w http.ResponseWriter, r *http.Request) {
+		require.Equal(t, "POST", r.Method)
+		w.Header().Set("Content-Type", "application/json")
+		io.WriteString(w, `{
+		   "pspReference" : "ABC123",
+		   "response" : "[payout-decline-received]"
+		}`)
+	})
+
+	mockServer := httptest.NewServer(mux)
+	defer mockServer.Close()
+	client.Payout().InitializationApi.BasePath = func() string { return mockServer.URL }
+
+	createStoreDetailAndSubmitThirdParty := func(ref string) (payout.StoreDetailAndSubmitResponse, *http.Response, error) {
+		req := client.Payout().InitializationApi.StoreDetailAndSubmitThirdPartyConfig(context.Background())
+		req = req.StoreDetailAndSubmitRequest(payout.StoreDetailAndSubmitRequest{
 			Amount:           amount,
 			Bank:             &bank,
 			DateOfBirth:      dateOfBirth,
 			EntityType:       entityType,
-			MerchantAccount:  MerchantAccount,
+			MerchantAccount:  merchantAccount,
 			Nationality:      nationality,
 			Recurring:        recurring,
 			Reference:        ref,
@@ -109,43 +156,56 @@ func Test_Payout(t *testing.T) {
 			ShopperName:      shopperName,
 			ShopperReference: ref,
 		})
+		return client.Payout().InitializationApi.StoreDetailAndSubmitThirdParty(req)
 	}
+
+	t.Run("Configuration", func(t *testing.T) {
+		testClient := adyen.NewClient(&common.Config{
+			Environment: common.TestEnv,
+		})
+		assert.Equal(t, "https://pal-test.adyen.com/pal/servlet/Payout/v68", testClient.Payout().InitializationApi.BasePath())
+		liveClient := adyen.NewClient(&common.Config{
+			Environment:           common.LiveEnv,
+			LiveEndpointURLPrefix: "go-live",
+		})
+		assert.Equal(t, "https://go-live-pal-live.adyenpayments.com/pal/servlet/Payout/v68", liveClient.Payout().ReviewingApi.BasePath())
+	})
 
 	t.Run("Instant Payouts", func(t *testing.T) {
 		t.Run("Payout", func(t *testing.T) {
 			t.Run("Create an API request that should pass", func(t *testing.T) {
-				cc := checkout.NewCardDetails()
-				cc.SetEncryptedCardNumber("test_4111111111111111")
-				cc.SetEncryptedExpiryMonth("test_03")
-				cc.SetEncryptedExpiryYear("test_2030")
-				cc.SetEncryptedSecurityCode("test_737")
-				cc.SetHolderName("John Smith")
-				req := service.PaymentsApi.PaymentsConfig(context.Background()).PaymentRequest(checkout.PaymentRequest{
-					Reference: "123456781235",
-					Amount: checkout.Amount{
-						Value:    12500,
-						Currency: "EUR",
-					},
-					MerchantAccount: MerchantAccount,
-					PaymentMethod:   checkout.CardDetailsAsCheckoutPaymentMethod(cc),
-				})
-				paymentRes, _, _ := service.PaymentsApi.Payments(req)
-
-				res, httpRes, err := client.Payout.Payout(&payout.PayoutRequest{
+				body := payout.PayoutRequest{
 					Amount:          amount,
-					MerchantAccount: MerchantAccount,
-					Reference:       paymentRes.GetPspReference(),
-					Card:            card,
+					MerchantAccount: merchantAccount,
+					Reference:       "FOOBAR",
+					Card:            &card,
 					ShopperName:     shopperName,
-				})
+				}
+				payoutReq := client.Payout().InstantPayoutsApi.PayoutConfig(context.Background()).PayoutRequest(body)
+				res, httpRes, err := client.Payout().InstantPayoutsApi.Payout(payoutReq)
 
 				authorised := common.Authorised.String()
 				require.Nil(t, err)
 				require.NotNil(t, httpRes)
 				assert.Equal(t, 200, httpRes.StatusCode)
-				require.NotNil(t, res)
-				assert.NotEmpty(t, res.PspReference)
+				require.Equal(t, "ABC213", res.GetPspReference())
 				assert.Equal(t, &authorised, res.ResultCode)
+			})
+
+			t.Run("Create an API request that should fail", func(t *testing.T) {
+				body := payout.PayoutRequest{
+					Amount:          amount,
+					MerchantAccount: merchantAccount,
+					Reference:       "failCase",
+					Card:            &card,
+					ShopperName:     shopperName,
+				}
+				payoutReq := client.Payout().InstantPayoutsApi.PayoutConfig(context.Background()).PayoutRequest(body)
+				_, httpRes, err := client.Payout().InstantPayoutsApi.Payout(payoutReq)
+
+				require.NotNil(t, err)
+				assert.Equal(t, 500, httpRes.StatusCode)
+				require.Equal(t, "internal", err.(common.APIError).Type)
 			})
 		})
 	})
@@ -153,39 +213,46 @@ func Test_Payout(t *testing.T) {
 	t.Run("Initialization", func(t *testing.T) {
 		t.Run("StoreDetail", func(t *testing.T) {
 			t.Run("Create an API request that should pass", func(t *testing.T) {
-				ref := time.Now().String()
-				res, httpRes, err := createStoreDetail(ref)
+				req := client.Payout().InitializationApi.StoreDetailConfig(context.Background())
+				req = req.StoreDetailRequest(payout.StoreDetailRequest{
+					Bank:             &bank,
+					DateOfBirth:      dateOfBirth,
+					EntityType:       entityType,
+					MerchantAccount:  merchantAccount,
+					Nationality:      nationality,
+					Recurring:        recurring,
+					ShopperEmail:     shopperEmail,
+					ShopperName:      shopperName,
+					ShopperReference: "MyShopper",
+				})
+				res, httpRes, err := client.Payout().InitializationApi.StoreDetail(req)
 
-				fmt.Println(err)
 				require.Nil(t, err)
-				require.NotNil(t, httpRes)
 				assert.Equal(t, 200, httpRes.StatusCode)
-				require.NotNil(t, res)
-				assert.NotEmpty(t, res.PspReference)
-				assert.NotEmpty(t, res.ResultCode)
+				assert.Equal(t, "ABC123", res.GetPspReference())
+				assert.Equal(t, "Success", res.GetResultCode())
 			})
 		})
 
 		t.Run("SubmitThirdParty", func(t *testing.T) {
 			t.Run("Create an API request that should pass", func(t *testing.T) {
-				ref := time.Now().String()
-				storeDetail, _, _ := createStoreDetail(ref)
-				contract := "PAYOUT"
-				res, httpRes, err := clientStore.Payout.SubmitThirdParty(&payout.SubmitRequest{
+				req := client.Payout().InitializationApi.SubmitThirdPartyConfig(context.Background())
+				req = req.SubmitRequest(payout.SubmitRequest{
 					Amount:          amount,
-					MerchantAccount: MerchantAccount,
+					MerchantAccount: merchantAccount,
 					Recurring: payout.Recurring{
 						Contract: &contract,
 					},
 					EntityType:                       &entityType,
-					Reference:                        storeDetail.PspReference,
+					Reference:                        "bar",
 					SelectedRecurringDetailReference: "LATEST",
 					ShopperEmail:                     shopperEmail,
-					ShopperReference:                 ref,
+					ShopperReference:                 "foo",
 					ShopperName:                      shopperName,
 					DateOfBirth:                      &dateOfBirth,
 					Nationality:                      &nationality,
 				})
+				res, httpRes, err := client.Payout().InitializationApi.SubmitThirdParty(req)
 
 				require.Nil(t, err)
 				require.NotNil(t, httpRes)
@@ -216,12 +283,12 @@ func Test_Payout(t *testing.T) {
 	t.Run("Reviewing", func(t *testing.T) {
 		t.Run("ConfirmThirdParty", func(t *testing.T) {
 			t.Run("Create an API request that should pass", func(t *testing.T) {
-				ref := time.Now().String()
-				payoutDetail, _, _ := createStoreDetailAndSubmitThirdParty(ref)
-				res, httpRes, err := clientReview.Payout.ConfirmThirdParty(&payout.ModifyRequest{
-					MerchantAccount:   MerchantAccount,
-					OriginalReference: payoutDetail.PspReference,
+				req := client.Payout().ReviewingApi.ConfirmThirdPartyConfig(context.Background())
+				req = req.ModifyRequest(payout.ModifyRequest{
+					MerchantAccount:   "merchantAccount",
+					OriginalReference: "TheOG",
 				})
+				res, httpRes, err := client.Payout().ReviewingApi.ConfirmThirdParty(req)
 
 				require.Nil(t, err)
 				require.NotNil(t, httpRes)
@@ -233,12 +300,13 @@ func Test_Payout(t *testing.T) {
 		})
 		t.Run("DeclineThirdParty", func(t *testing.T) {
 			t.Run("Create an API request that should pass", func(t *testing.T) {
-				ref := time.Now().String()
-				payoutDetail, _, _ := createStoreDetailAndSubmitThirdParty(ref)
-				res, httpRes, err := clientReview.Payout.DeclineThirdParty(&payout.ModifyRequest{
-					MerchantAccount:   MerchantAccount,
-					OriginalReference: payoutDetail.PspReference,
+				req := client.Payout().ReviewingApi.DeclineThirdPartyConfig(context.Background())
+				req = req.ModifyRequest(payout.ModifyRequest{
+					MerchantAccount:   merchantAccount,
+					OriginalReference: "TheGO",
 				})
+
+				res, httpRes, err := client.Payout().ReviewingApi.DeclineThirdParty(req)
 
 				require.Nil(t, err)
 				require.NotNil(t, httpRes)

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Bank** | Pointer to [**BankAccount**](BankAccount.md) |  | [optional] 
 **BillingAddress** | Pointer to [**Address**](Address.md) |  | [optional] 
 **Card** | Pointer to [**Card**](Card.md) |  | [optional] 
-**DateOfBirth** | **time.Time** | The date of birth. Format: [ISO-8601](https://www.w3.org/TR/NOTE-datetime); example: YYYY-MM-DD For Paysafecard it must be the same as used when registering the Paysafecard account. &gt; This field is mandatory for natural persons. | 
+**DateOfBirth** | **string** | The date of birth. Format: [ISO-8601](https://www.w3.org/TR/NOTE-datetime); example: YYYY-MM-DD For Paysafecard it must be the same as used when registering the Paysafecard account. &gt; This field is mandatory for natural persons. | 
 **EntityType** | **string** | The type of the entity the payout is processed for. | 
 **FraudOffset** | Pointer to **int32** | An integer value that is added to the normal fraud score. The value can be either positive or negative. | [optional] 
 **MerchantAccount** | **string** | The merchant account identifier, with which you want to process the transaction. | 
@@ -25,7 +25,7 @@ Name | Type | Description | Notes
 
 ### NewStoreDetailRequest
 
-`func NewStoreDetailRequest(dateOfBirth time.Time, entityType string, merchantAccount string, nationality string, recurring Recurring, shopperEmail string, shopperReference string, ) *StoreDetailRequest`
+`func NewStoreDetailRequest(dateOfBirth string, entityType string, merchantAccount string, nationality string, recurring Recurring, shopperEmail string, shopperReference string, ) *StoreDetailRequest`
 
 NewStoreDetailRequest instantiates a new StoreDetailRequest object
 This constructor will assign default values to properties that have it defined,
@@ -142,20 +142,20 @@ HasCard returns a boolean if a field has been set.
 
 ### GetDateOfBirth
 
-`func (o *StoreDetailRequest) GetDateOfBirth() time.Time`
+`func (o *StoreDetailRequest) GetDateOfBirth() string`
 
 GetDateOfBirth returns the DateOfBirth field if non-nil, zero value otherwise.
 
 ### GetDateOfBirthOk
 
-`func (o *StoreDetailRequest) GetDateOfBirthOk() (*time.Time, bool)`
+`func (o *StoreDetailRequest) GetDateOfBirthOk() (*string, bool)`
 
 GetDateOfBirthOk returns a tuple with the DateOfBirth field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDateOfBirth
 
-`func (o *StoreDetailRequest) SetDateOfBirth(v time.Time)`
+`func (o *StoreDetailRequest) SetDateOfBirth(v string)`
 
 SetDateOfBirth sets DateOfBirth field to given value.
 

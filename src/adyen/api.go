@@ -33,27 +33,27 @@ import (
 
 // Constants used for the client API
 const (
-	EndpointTest                = "https://pal-test.adyen.com"
-	EndpointLive                = "https://pal-live.adyen.com"
-	EndpointLiveSuffix          = "-pal-live.adyenpayments.com"
-	MarketpayEndpointTest       = "https://cal-test.adyen.com/cal/services"
-	MarketpayEndpointLive       = "https://cal-live.adyen.com/cal/services"
-	CheckoutEndpointTest        = "https://checkout-test.adyen.com/checkout"
-	CheckoutEndpointLiveSuffix  = "-checkout-live.adyenpayments.com/checkout"
-	BinLookupPalSuffix          = "/pal/servlet/BinLookup/"
-	TerminalAPIEndpointTest     = "https://terminal-api-test.adyen.com"
-	TerminalAPIEndpointLive     = "https://terminal-api-live.adyen.com"
-	DisputesEndpointTest        = "https://ca-test.adyen.com/ca/services/DisputeService"
-	DisputesEndpointLive        = "https://ca-live.adyen.com/ca/services/DisputeService"
-	BalancePlatformEndpointTest = "https://balanceplatform-api-test.adyen.com/bcl"
-	BalancePlatformEndpointLive = "https://balanceplatform-api-live.adyen.com/bcl"
-	TransfersEndpointTest       = "https://balanceplatform-api-test.adyen.com/btl"
-	TransfersEndpointLive       = "https://balanceplatform-api-live.adyen.com/btl"
-	ManagementEndpointTest      = "https://management-test.adyen.com"
-	ManagementEndpointLive      = "https://management-live.adyen.com"
-	LegalEntityEntityTest       = "https://kyc-test.adyen.com/lem"
-	LegalEntityEntityLive       = "https://kyc-live.adyen.com/lem"
-  PosTerminalManagementEndpointTest = "https://postfmapi-test.adyen.com/postfmapi/terminal"
+	EndpointTest                      = "https://pal-test.adyen.com"
+	EndpointLive                      = "https://pal-live.adyen.com"
+	EndpointLiveSuffix                = "-pal-live.adyenpayments.com"
+	MarketpayEndpointTest             = "https://cal-test.adyen.com/cal/services"
+	MarketpayEndpointLive             = "https://cal-live.adyen.com/cal/services"
+	CheckoutEndpointTest              = "https://checkout-test.adyen.com/checkout"
+	CheckoutEndpointLiveSuffix        = "-checkout-live.adyenpayments.com/checkout"
+	BinLookupPalSuffix                = "/pal/servlet/BinLookup/"
+	TerminalAPIEndpointTest           = "https://terminal-api-test.adyen.com"
+	TerminalAPIEndpointLive           = "https://terminal-api-live.adyen.com"
+	DisputesEndpointTest              = "https://ca-test.adyen.com/ca/services/DisputeService"
+	DisputesEndpointLive              = "https://ca-live.adyen.com/ca/services/DisputeService"
+	BalancePlatformEndpointTest       = "https://balanceplatform-api-test.adyen.com/bcl"
+	BalancePlatformEndpointLive       = "https://balanceplatform-api-live.adyen.com/bcl"
+	TransfersEndpointTest             = "https://balanceplatform-api-test.adyen.com/btl"
+	TransfersEndpointLive             = "https://balanceplatform-api-live.adyen.com/btl"
+	ManagementEndpointTest            = "https://management-test.adyen.com"
+	ManagementEndpointLive            = "https://management-live.adyen.com"
+	LegalEntityEntityTest             = "https://kyc-test.adyen.com/lem"
+	LegalEntityEntityLive             = "https://kyc-live.adyen.com/lem"
+	PosTerminalManagementEndpointTest = "https://postfmapi-test.adyen.com/postfmapi/terminal"
 	PosTerminalManagementEndpointLive = "https://postfmapi-live.adyen.com/postfmapi/terminal"
 )
 
@@ -63,7 +63,7 @@ const (
 	MarketpayFundAPIVersion         = "v6"
 	MarketpayNotificationAPIVersion = "v6"
 	MarketpayHopAPIVersion          = "v6"
-	PaymentAPIVersion               = "v64"
+	PaymentAPIVersion               = "v68"
 	RecurringAPIVersion             = "v68"
 	CheckoutAPIVersion              = "v70"
 	BinLookupAPIVersion             = "v50"
@@ -83,7 +83,7 @@ type APIClient struct {
 	client *common.Client
 	// API Services
 	Payments                           *payments.Payments
-	Payout                             *payout.Payouts
+	payout                             *payout.APIClient
 	Recurring                          *recurring.GeneralApi
 	BinLookup                          *binlookup.BinLookup
 	Notification                       *webhook.NotificationService
@@ -188,13 +188,6 @@ func NewClient(cfg *common.Config) *APIClient {
 		},
 	}
 
-	c.Payout = &payout.Payouts{
-		Client: c.client,
-		BasePath: func() string {
-			return fmt.Sprintf("%s/pal/servlet/Payout/%s", c.client.Cfg.Endpoint, PaymentAPIVersion)
-		},
-	}
-
 	c.Recurring = &recurring.GeneralApi{
 		Client: c.client,
 		BasePath: func() string {
@@ -257,7 +250,7 @@ func NewClient(cfg *common.Config) *APIClient {
 			return fmt.Sprintf("%s/%s", c.client.Cfg.PosTerminalManagementEndpoint, PosTerminalManagementAPIVersion)
 		},
 	}
-  
+
 	c.Transfers = &transfers.GeneralApi{
 		Client: c.client,
 		BasePath: func() string {
@@ -274,6 +267,16 @@ func NewClient(cfg *common.Config) *APIClient {
 
 func (c *APIClient) Checkout() *checkout.APIClient {
 	return checkout.NewAPIClient(c.client)
+}
+
+func (c *APIClient) Payout() *payout.APIClient {
+	if c.payout == nil {
+		c.payout = payout.NewAPIClient(c.client)
+		c.payout.InitializationApi.BasePath = func() string {
+			return fmt.Sprintf("%s/pal/servlet/Payout/%s", c.client.Cfg.Endpoint, PaymentAPIVersion)
+		}
+	}
+	return c.payout
 }
 
 /*
