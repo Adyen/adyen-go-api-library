@@ -5,11 +5,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Cvc** | Pointer to **string** | The [card verification code](https://docs.adyen.com/payments-fundamentals/payment-glossary#card-security-code-cvc-cvv-cid) (1-20 characters). Depending on the card brand, it is known also as: * CVV2/CVC2 – length: 3 digits * CID – length: 4 digits &gt; If you are using [Client-Side Encryption](https://docs.adyen.com/classic-integration/cse-integration-ecommerce), the CVC code is present in the encrypted data. You must never post the card details to the server. &gt; This field must be always present in a [one-click payment request](https://docs.adyen.com/classic-integration/recurring-payments). &gt; When this value is returned in a response, it is always empty because it is not stored. | [optional] 
-**ExpiryMonth** | **string** | The card expiry month. Format: 2 digits, zero-padded for single digits. For example: * 03 &#x3D; March * 11 &#x3D; November | 
-**ExpiryYear** | **string** | The card expiry year. Format: 4 digits. For example: 2020 | 
-**HolderName** | **string** | The name of the cardholder, as printed on the card. | 
+**ExpiryMonth** | Pointer to **string** | The card expiry month. Format: 2 digits, zero-padded for single digits. For example: * 03 &#x3D; March * 11 &#x3D; November | [optional] 
+**ExpiryYear** | Pointer to **string** | The card expiry year. Format: 4 digits. For example: 2020 | [optional] 
+**HolderName** | Pointer to **string** | The name of the cardholder, as printed on the card. | [optional] 
 **IssueNumber** | Pointer to **string** | The issue number of the card (for some UK debit cards only). | [optional] 
-**Number** | **string** | The card number (4-19 characters). Do not use any separators. When this value is returned in a response, only the last 4 digits of the card number are returned. | 
+**Number** | Pointer to **string** | The card number (4-19 characters). Do not use any separators. When this value is returned in a response, only the last 4 digits of the card number are returned. | [optional] 
 **StartMonth** | Pointer to **string** | The month component of the start date (for some UK debit cards only). | [optional] 
 **StartYear** | Pointer to **string** | The year component of the start date (for some UK debit cards only). | [optional] 
 
@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewCard
 
-`func NewCard(expiryMonth string, expiryYear string, holderName string, number string, ) *Card`
+`func NewCard() *Card`
 
 NewCard instantiates a new Card object
 This constructor will assign default values to properties that have it defined,
@@ -76,6 +76,11 @@ and a boolean to check if the value has been set.
 
 SetExpiryMonth sets ExpiryMonth field to given value.
 
+### HasExpiryMonth
+
+`func (o *Card) HasExpiryMonth() bool`
+
+HasExpiryMonth returns a boolean if a field has been set.
 
 ### GetExpiryYear
 
@@ -96,6 +101,11 @@ and a boolean to check if the value has been set.
 
 SetExpiryYear sets ExpiryYear field to given value.
 
+### HasExpiryYear
+
+`func (o *Card) HasExpiryYear() bool`
+
+HasExpiryYear returns a boolean if a field has been set.
 
 ### GetHolderName
 
@@ -116,6 +126,11 @@ and a boolean to check if the value has been set.
 
 SetHolderName sets HolderName field to given value.
 
+### HasHolderName
+
+`func (o *Card) HasHolderName() bool`
+
+HasHolderName returns a boolean if a field has been set.
 
 ### GetIssueNumber
 
@@ -161,6 +176,11 @@ and a boolean to check if the value has been set.
 
 SetNumber sets Number field to given value.
 
+### HasNumber
+
+`func (o *Card) HasNumber() bool`
+
+HasNumber returns a boolean if a field has been set.
 
 ### GetStartMonth
 
