@@ -2,8 +2,10 @@ package management
 
 import (
 	"context"
+	"encoding/json"
 	"github.com/adyen/adyen-go-api-library/v6/src/adyen"
 	"github.com/adyen/adyen-go-api-library/v6/src/common"
+	"github.com/adyen/adyen-go-api-library/v6/src/management"
 	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -60,5 +62,18 @@ func Test_ManagementAPI_Integration(t *testing.T) {
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 		require.NotNil(t, resp)
+	})
+
+	t.Run("Create an API request that should fail for company", func(t *testing.T) {
+		// create misconfigured client to test invalid apiKey
+		req := service.AccountCompanyLevelApi.GetCompanyAccountConfig(context.Background(), "99999")
+
+		_, httpRes, err := service.AccountCompanyLevelApi.GetCompanyAccount(req)
+
+		apiError := err.(common.APIError)
+		var restError management.RestServiceError
+		_ = json.Unmarshal(apiError.RawBody, &restError)
+		assert.Equal(t, 403, httpRes.StatusCode)
+		require.NotNil(t, string(apiError.RawBody))
 	})
 }
