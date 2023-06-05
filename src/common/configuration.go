@@ -51,7 +51,7 @@ const (
 
 const (
 	LibName    = "adyen-go-api-library"
-	LibVersion = "6.0.1"
+	LibVersion = "7.0.0"
 )
 
 // Config stores the configuration of the API client
@@ -89,7 +89,7 @@ type Config struct {
 
 func (c *Config) GetCheckoutEndpoint() (string, error) {
 	if c.CheckoutEndpoint == "" {
-		message := "Please provide your unique live url prefix on the SetEnvironment() call on the APIClient or provide checkoutEndpoint in your config object."
+		message := "please provide your unique live url prefix on the SetEnvironment() call on the APIClient or provide checkoutEndpoint in your config object"
 		return "", fmt.Errorf(message)
 	}
 	return c.CheckoutEndpoint, nil

@@ -44,8 +44,8 @@ func ExampleLiveEnv() {
 	})
 	res, httpRes, err := service.PaymentsApi.PaymentMethods(req)
 
-	fmt.Println(res.GetPaymentMethods(), httpRes, err)
-	// Output: [] <nil> Post "https://1797a841fbb37ca7-AdyenDemo-checkout-live.adyenpayments.com/checkout/v70/paymentMethods": dial tcp: lookup 1797a841fbb37ca7-AdyenDemo-checkout-live.adyenpayments.com: no such host
+	fmt.Println(res.GetPaymentMethods(), httpRes, err.(*url.Error).URL)
+	// Output: [] <nil> https://1797a841fbb37ca7-AdyenDemo-checkout-live.adyenpayments.com/checkout/v70/paymentMethods
 }
 
 func ExampleBasicAuth() {
