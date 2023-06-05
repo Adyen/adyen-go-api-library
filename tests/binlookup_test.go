@@ -2,12 +2,12 @@ package tests
 
 import (
 	"context"
-	"github.com/adyen/adyen-go-api-library/v6/src/binlookup"
+	"github.com/adyen/adyen-go-api-library/v7/src/binlookup"
 	"os"
 	"testing"
 
-	"github.com/adyen/adyen-go-api-library/v6/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v6/src/common"
+	"github.com/adyen/adyen-go-api-library/v7/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v7/src/common"
 	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

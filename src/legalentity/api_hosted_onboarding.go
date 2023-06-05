@@ -15,7 +15,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/adyen/adyen-go-api-library/v6/src/common"
+	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
 // HostedOnboardingApi HostedOnboardingApi service
