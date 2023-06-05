@@ -2,12 +2,7 @@ package webhook
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
-
-// NotificationService used to namespace this util under the client for consistency and for future prooffing if this ever requires api access
-type NotificationService common.Service
 
 //Event codes
 const (
@@ -46,8 +41,8 @@ const (
 	AdditionalDataFraudCheckPattern = "fraudCheck-(\\d+)-([A-Za-z0-9]+)"
 )
 
-// HandleNotificationRequest creates a Notification object from the given JSON string
-func (service *NotificationService) HandleNotificationRequest(req string) (*Webhook, error) {
+// HandleRequest creates a Notification object from the given JSON string
+func HandleRequest(req string) (*Webhook, error) {
 	res := Webhook{}
 	err := json.Unmarshal([]byte(req), &res)
 	if err != nil {

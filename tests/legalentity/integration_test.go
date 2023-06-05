@@ -43,7 +43,7 @@ func Test_LegalEntity_Integration(t *testing.T) {
 		}
 	}
 	client := adyen.NewClient(&config)
-	service := client.LegalEntity
+	service := client.LegalEntity()
 
 	t.Run("Get a legal entity", func(t *testing.T) {
 		req := service.LegalEntitiesApi.GetLegalEntityConfig(context.Background(), legalEntityId)

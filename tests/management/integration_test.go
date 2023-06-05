@@ -23,7 +23,7 @@ func Test_ManagementAPI_Integration(t *testing.T) {
 		Environment: common.TestEnv,
 		Debug:       "true" == os.Getenv("DEBUG"),
 	})
-	service := client.Management
+	service := client.Management()
 
 	t.Run("Test MyAPICredentialApiService GetMe", func(t *testing.T) {
 		t.Run("Create an API request that should pass", func(t *testing.T) {
@@ -42,9 +42,9 @@ func Test_ManagementAPI_Integration(t *testing.T) {
 				ApiKey:      "xxx",
 				Environment: common.TestEnv,
 			})
-			req := invalidKeyClient.Management.MyAPICredentialApi.GetApiCredentialDetailsConfig(context.Background())
+			req := invalidKeyClient.Management().MyAPICredentialApi.GetApiCredentialDetailsConfig(context.Background())
 
-			_, httpRes, err := invalidKeyClient.Management.MyAPICredentialApi.GetApiCredentialDetails(req)
+			_, httpRes, err := invalidKeyClient.Management().MyAPICredentialApi.GetApiCredentialDetails(req)
 
 			assert.Equal(t, 401, httpRes.StatusCode)
 			require.NotNil(t, err)

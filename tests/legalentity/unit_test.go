@@ -18,7 +18,7 @@ func Test_LegalEntity(t *testing.T) {
 		Environment: "TEST",
 		Debug:       false,
 	})
-	service := client.LegalEntity
+	service := client.LegalEntity()
 
 	var (
 		mockServer  *httptest.Server
@@ -58,7 +58,7 @@ func Test_LegalEntity(t *testing.T) {
 	defer mockServer.Close()
 
 	// base path is shared between all endpoints
-	client.LegalEntity.BusinessLinesApi.BasePath = func() string {
+	client.LegalEntity().BusinessLinesApi.BasePath = func() string {
 		return mockServer.URL
 	}
 
