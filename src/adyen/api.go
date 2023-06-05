@@ -11,6 +11,9 @@ import (
 	"net/http"
 
 	"github.com/adyen/adyen-go-api-library/v6/src/balanceplatform"
+	"github.com/adyen/adyen-go-api-library/v6/src/balanceplatformconfigurationnotification"
+	"github.com/adyen/adyen-go-api-library/v6/src/balanceplatformreportnotification"
+	"github.com/adyen/adyen-go-api-library/v6/src/balanceplatformtransfernotification"
 	"github.com/adyen/adyen-go-api-library/v6/src/checkout"
 	"github.com/adyen/adyen-go-api-library/v6/src/legalentity"
 	"github.com/adyen/adyen-go-api-library/v6/src/management"
@@ -81,21 +84,24 @@ const (
 type APIClient struct {
 	client *common.Client
 	// API Services
-	payout                             *payout.APIClient
-	Recurring                          *recurring.GeneralApi
-	BinLookup                          *binlookup.GeneralApi
-	Notification                       *webhook.NotificationService
-	PlatformsAccount                   *platformsaccount.PlatformsAccount
-	PlatformsFund                      *platformsfund.PlatformsFund
-	PlatformsHostedOnboardingPage      *platformshostedonboardingpage.PlatformsHostedOnboardingPage
-	PlatformsNotificationConfiguration *platformsnotificationconfiguration.PlatformsNotificationConfiguration
-	PosTerminalManagement              *posterminalmanagement.GeneralApi
-	Disputes                           *disputes.Disputes
-	StoredValue                        *storedvalue.StoredValue
-	BalancePlatform                    *balanceplatform.APIClient
-	Transfers                          *transfers.GeneralApi
-	Management                         *management.APIClient
-	LegalEntity                        *legalentity.APIClient
+	payout                                   *payout.APIClient
+	Recurring                                *recurring.GeneralApi
+	BinLookup                                *binlookup.GeneralApi
+	BalancePlatformConfigurationNotification *balanceplatformconfigurationnotification.NotificationService
+	BalancePlatformReportNotification        *balanceplatformreportnotification.NotificationService
+	BalancePlatformTransferNotification      *balanceplatformtransfernotification.NotificationService
+	Notification                             *webhook.NotificationService
+	PlatformsAccount                         *platformsaccount.PlatformsAccount
+	PlatformsFund                            *platformsfund.PlatformsFund
+	PlatformsHostedOnboardingPage            *platformshostedonboardingpage.PlatformsHostedOnboardingPage
+	PlatformsNotificationConfiguration       *platformsnotificationconfiguration.PlatformsNotificationConfiguration
+	PosTerminalManagement                    *posterminalmanagement.GeneralApi
+	Disputes                                 *disputes.Disputes
+	StoredValue                              *storedvalue.StoredValue
+	BalancePlatform                          *balanceplatform.APIClient
+	Transfers                                *transfers.GeneralApi
+	Management                               *management.APIClient
+	LegalEntity                              *legalentity.APIClient
 }
 
 // NewClient creates a new API client. Requires Config object.
