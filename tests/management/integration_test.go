@@ -2,15 +2,16 @@ package management
 
 import (
 	"context"
-	"encoding/json"
+	"os"
+	"reflect"
+	"testing"
+
 	"github.com/adyen/adyen-go-api-library/v6/src/adyen"
 	"github.com/adyen/adyen-go-api-library/v6/src/common"
 	"github.com/adyen/adyen-go-api-library/v6/src/management"
 	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"os"
-	"testing"
 )
 
 func Test_ManagementAPI_Integration(t *testing.T) {
@@ -65,15 +66,13 @@ func Test_ManagementAPI_Integration(t *testing.T) {
 	})
 
 	t.Run("Create an API request that should fail for company", func(t *testing.T) {
-		// create misconfigured client to test invalid apiKey
+		// Creates a test that should fail because of the wrong Id
 		req := service.AccountCompanyLevelApi.GetCompanyAccountConfig(context.Background(), "99999")
-
 		_, httpRes, err := service.AccountCompanyLevelApi.GetCompanyAccount(req)
-
-		apiError := err.(common.APIError)
-		var restError management.RestServiceError
-		_ = json.Unmarshal(apiError.RawBody, &restError)
+		assert.NotEmpty(t,err.GetRequestId())
+		assert.Equal(t, "010", err.GetErrorCode())
+		assert.Equal(t, int32(403), err.GetStatus())
 		assert.Equal(t, 403, httpRes.StatusCode)
-		require.NotNil(t, string(apiError.RawBody))
+		assert.Equal(t, reflect.TypeOf(err), reflect.TypeOf(management.RestServiceError{}))
 	})
 }
