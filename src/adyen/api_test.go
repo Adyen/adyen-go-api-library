@@ -87,9 +87,9 @@ func Test_api(t *testing.T) {
 				},
 				ShopperReference: time.Now().String(),
 			}
-			req := client.Recurring.ListRecurringDetailsConfig(context.Background()).RecurringDetailsRequest(body)
+			req := client.Recurring().ListRecurringDetailsConfig(context.Background()).RecurringDetailsRequest(body)
 
-			res, httpRes, err := client.Recurring.ListRecurringDetails(req)
+			res, httpRes, err := client.Recurring().ListRecurringDetails(req)
 
 			require.Nil(t, err)
 			require.NotNil(t, res)

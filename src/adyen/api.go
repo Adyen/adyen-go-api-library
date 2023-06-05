@@ -76,26 +76,28 @@ const (
 	PosTerminalManagementAPIVersion = "v1"
 )
 
-// APIClient manages communication with the Adyen Checkout API API v51
+// APIClient Manages access to Adyen API services.
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	client *common.Client
 	// API Services
+	checkout                           *checkout.APIClient
+	payments                           *payments.APIClient
 	payout                             *payout.APIClient
-	Recurring                          *recurring.GeneralApi
-	BinLookup                          *binlookup.GeneralApi
+	recurring                          *recurring.GeneralApi
+	binLookup                          *binlookup.GeneralApi
 	Notification                       *webhook.NotificationService
-	PlatformsAccount                   *platformsaccount.PlatformsAccount
-	PlatformsFund                      *platformsfund.PlatformsFund
-	PlatformsHostedOnboardingPage      *platformshostedonboardingpage.PlatformsHostedOnboardingPage
-	PlatformsNotificationConfiguration *platformsnotificationconfiguration.PlatformsNotificationConfiguration
-	PosTerminalManagement              *posterminalmanagement.GeneralApi
-	Disputes                           *disputes.Disputes
-	StoredValue                        *storedvalue.StoredValue
-	BalancePlatform                    *balanceplatform.APIClient
-	Transfers                          *transfers.GeneralApi
-	Management                         *management.APIClient
-	LegalEntity                        *legalentity.APIClient
+	platformsAccount                   *platformsaccount.PlatformsAccount
+	platformsFund                      *platformsfund.PlatformsFund
+	platformsHostedOnboardingPage      *platformshostedonboardingpage.PlatformsHostedOnboardingPage
+	platformsNotificationConfiguration *platformsnotificationconfiguration.PlatformsNotificationConfiguration
+	posTerminalManagement              *posterminalmanagement.GeneralApi
+	disputes                           *disputes.Disputes
+	storedValue                        *storedvalue.StoredValue
+	balancePlatform                    *balanceplatform.APIClient
+	transfers                          *transfers.GeneralApi
+	management                         *management.APIClient
+	legalEntity                        *legalentity.APIClient
 }
 
 // NewClient creates a new API client. Requires Config object.
@@ -156,7 +158,6 @@ type APIClient struct {
 //
 // optionally a custom http.Client can be passed via the Config allow for advanced features such as caching.
 func NewClient(cfg *common.Config) *APIClient {
-
 	if cfg.HTTPClient == nil {
 		cfg.HTTPClient = http.DefaultClient
 	}
@@ -174,99 +175,28 @@ func NewClient(cfg *common.Config) *APIClient {
 	c.client = &common.Client{}
 	c.client.Cfg = cfg
 
-	if cfg.Environment != "" {
-		c.SetEnvironment(cfg.Environment, cfg.LiveEndpointURLPrefix)
-	}
-
-	// API Services
-
-	c.Recurring = &recurring.GeneralApi{
-		Client: c.client,
-		BasePath: func() string {
-			return fmt.Sprintf("%s/pal/servlet/Recurring/%s", c.client.Cfg.Endpoint, RecurringAPIVersion)
-		},
-	}
-
-	c.BinLookup = &binlookup.GeneralApi{
-		Client: c.client,
-		BasePath: func() string {
-			return fmt.Sprintf("%s/pal/servlet/BinLookup/%s", c.client.Cfg.Endpoint, BinLookupAPIVersion)
-		},
-	}
-
-	c.PlatformsAccount = &platformsaccount.PlatformsAccount{
-		Client: c.client,
-		BasePath: func() string {
-			return fmt.Sprintf("%s/Account/%s", c.client.Cfg.MarketPayEndpoint, MarketpayAccountAPIVersion)
-		},
-	}
-
-	c.PlatformsFund = &platformsfund.PlatformsFund{
-		Client: c.client,
-		BasePath: func() string {
-			return fmt.Sprintf("%s/Fund/%s", c.client.Cfg.MarketPayEndpoint, MarketpayFundAPIVersion)
-		},
-	}
-
-	c.PlatformsHostedOnboardingPage = &platformshostedonboardingpage.PlatformsHostedOnboardingPage{
-		Client: c.client,
-		BasePath: func() string {
-			return fmt.Sprintf("%s/Hop/%s", c.client.Cfg.MarketPayEndpoint, MarketpayHopAPIVersion)
-		},
-	}
-
-	c.PlatformsNotificationConfiguration = &platformsnotificationconfiguration.PlatformsNotificationConfiguration{
-		Client: c.client,
-		BasePath: func() string {
-			return fmt.Sprintf("%s/Notification/%s", c.client.Cfg.MarketPayEndpoint, MarketpayNotificationAPIVersion)
-		},
-	}
-
-	c.Disputes = &disputes.Disputes{
-		Client: c.client,
-		BasePath: func() string {
-			return fmt.Sprintf("%s/%s", c.client.Cfg.DisputesEndpoint, DisputesAPIVersion)
-		},
-	}
-
-	c.StoredValue = &storedvalue.StoredValue{
-		Client: c.client,
-		BasePath: func() string {
-			return fmt.Sprintf("%s/pal/servlet/StoredValue/%s", c.client.Cfg.Endpoint, StoredValueAPIVersion)
-		},
-	}
-
-	c.PosTerminalManagement = &posterminalmanagement.GeneralApi{
-		Client: c.client,
-		BasePath: func() string {
-			return fmt.Sprintf("%s/%s", c.client.Cfg.PosTerminalManagementEndpoint, PosTerminalManagementAPIVersion)
-		},
-	}
-
-	c.Transfers = &transfers.GeneralApi{
-		Client: c.client,
-		BasePath: func() string {
-			return fmt.Sprintf("%s/%s", c.client.Cfg.TransfersEndpoint, TransfersAPIVersion)
-		},
-	}
-
-	c.BalancePlatform = balanceplatform.NewAPIClient(c.client)
-	c.Management = management.NewAPIClient(c.client)
-	c.LegalEntity = legalentity.NewAPIClient(c.client)
+	c.SetEnvironment(cfg.Environment, cfg.LiveEndpointURLPrefix)
 
 	return c
 }
 
+// API Services
+
 func (c *APIClient) Checkout() *checkout.APIClient {
-	return checkout.NewAPIClient(c.client)
+	if c.checkout == nil {
+		c.checkout = checkout.NewAPIClient(c.client)
+	}
+	return c.checkout
 }
 
 func (c *APIClient) Payments() *payments.APIClient {
-	client := payments.NewAPIClient(c.client)
-	client.GeneralApi.BasePath = func() string {
-		return fmt.Sprintf("%s/pal/servlet/Payment/%s", c.client.Cfg.Endpoint, PaymentAPIVersion)
+	if c.payments == nil {
+		c.payments = payments.NewAPIClient(c.client)
+		c.payments.GeneralApi.BasePath = func() string {
+			return fmt.Sprintf("%s/pal/servlet/Payment/%s", c.client.Cfg.Endpoint, PaymentAPIVersion)
+		}
 	}
-	return client
+	return c.payments
 }
 
 func (c *APIClient) Payout() *payout.APIClient {
@@ -277,6 +207,147 @@ func (c *APIClient) Payout() *payout.APIClient {
 		}
 	}
 	return c.payout
+}
+
+func (c *APIClient) Recurring() *recurring.GeneralApi {
+	if c.recurring == nil {
+		c.recurring = &recurring.GeneralApi{
+			Client: c.client,
+			BasePath: func() string {
+				return fmt.Sprintf("%s/pal/servlet/Recurring/%s", c.client.Cfg.Endpoint, RecurringAPIVersion)
+			},
+		}
+	}
+	return c.recurring
+}
+
+func (c *APIClient) BinLookup() *binlookup.GeneralApi {
+	if c.binLookup == nil {
+		c.binLookup = &binlookup.GeneralApi{
+			Client: c.client,
+			BasePath: func() string {
+				return fmt.Sprintf("%s/pal/servlet/BinLookup/%s", c.client.Cfg.Endpoint, BinLookupAPIVersion)
+			},
+		}
+	}
+	return c.binLookup
+}
+
+func (c *APIClient) StoredValue() *storedvalue.StoredValue {
+	if c.storedValue == nil {
+		c.storedValue = &storedvalue.StoredValue{
+			Client: c.client,
+			BasePath: func() string {
+				return fmt.Sprintf("%s/pal/servlet/StoredValue/%s", c.client.Cfg.Endpoint, StoredValueAPIVersion)
+			},
+		}
+	}
+	return c.storedValue
+}
+
+func (c *APIClient) PosTerminalManagement() *posterminalmanagement.GeneralApi {
+	if c.posTerminalManagement == nil {
+		c.posTerminalManagement = &posterminalmanagement.GeneralApi{
+			Client: c.client,
+			BasePath: func() string {
+				return fmt.Sprintf("%s/%s", c.client.Cfg.PosTerminalManagementEndpoint, PosTerminalManagementAPIVersion)
+			},
+		}
+	}
+	return c.posTerminalManagement
+}
+
+func (c *APIClient) Transfers() *transfers.GeneralApi {
+	if c.transfers == nil {
+		c.transfers = &transfers.GeneralApi{
+			Client: c.client,
+			BasePath: func() string {
+				return fmt.Sprintf("%s/%s", c.client.Cfg.TransfersEndpoint, TransfersAPIVersion)
+			},
+		}
+	}
+	return c.transfers
+}
+
+func (c *APIClient) BalancePlatform() *balanceplatform.APIClient {
+	if c.balancePlatform == nil {
+		c.balancePlatform = balanceplatform.NewAPIClient(c.client)
+	}
+	return c.balancePlatform
+}
+
+func (c *APIClient) Management() *management.APIClient {
+	if c.management == nil {
+		c.management = management.NewAPIClient(c.client)
+	}
+	return c.management
+}
+
+func (c *APIClient) LegalEntity() *legalentity.APIClient {
+	if c.legalEntity == nil {
+		c.legalEntity = legalentity.NewAPIClient(c.client)
+	}
+	return c.legalEntity
+}
+
+func (c *APIClient) Disputes() *disputes.Disputes {
+	if c.disputes == nil {
+		c.disputes = &disputes.Disputes{
+			Client: c.client,
+			BasePath: func() string {
+				return fmt.Sprintf("%s/%s", c.client.Cfg.DisputesEndpoint, DisputesAPIVersion)
+			},
+		}
+	}
+	return c.disputes
+}
+
+func (c *APIClient) PlatformsAccount() *platformsaccount.PlatformsAccount {
+	if c.platformsAccount == nil {
+		c.platformsAccount = &platformsaccount.PlatformsAccount{
+			Client: c.client,
+			BasePath: func() string {
+				return fmt.Sprintf("%s/Account/%s", c.client.Cfg.MarketPayEndpoint, MarketpayAccountAPIVersion)
+			},
+		}
+	}
+	return c.platformsAccount
+}
+
+func (c *APIClient) PlatformsFund() *platformsfund.PlatformsFund {
+	if c.platformsFund == nil {
+		c.platformsFund = &platformsfund.PlatformsFund{
+			Client: c.client,
+			BasePath: func() string {
+				return fmt.Sprintf("%s/Fund/%s", c.client.Cfg.MarketPayEndpoint, MarketpayFundAPIVersion)
+			},
+		}
+	}
+	return c.platformsFund
+}
+
+func (c *APIClient) PlatformsHostedOnboardingPage() *platformshostedonboardingpage.PlatformsHostedOnboardingPage {
+	if c.platformsHostedOnboardingPage == nil {
+		c.platformsHostedOnboardingPage = &platformshostedonboardingpage.PlatformsHostedOnboardingPage{
+			Client: c.client,
+			BasePath: func() string {
+				return fmt.Sprintf("%s/Hop/%s", c.client.Cfg.MarketPayEndpoint, MarketpayHopAPIVersion)
+			},
+		}
+	}
+	return c.platformsHostedOnboardingPage
+}
+
+func (c *APIClient) PlatformsNotificationConfiguration() *platformsnotificationconfiguration.PlatformsNotificationConfiguration {
+	if c.platformsNotificationConfiguration == nil {
+		c.platformsNotificationConfiguration = &platformsnotificationconfiguration.PlatformsNotificationConfiguration{
+			Client: c.client,
+			BasePath: func() string {
+				return fmt.Sprintf("%s/Notification/%s", c.client.Cfg.MarketPayEndpoint, MarketpayNotificationAPIVersion)
+			},
+		}
+	}
+	return c.platformsNotificationConfiguration
 }
 
 /*

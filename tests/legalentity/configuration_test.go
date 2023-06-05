@@ -16,11 +16,11 @@ func Test_LegalEntity_Configuration(t *testing.T) {
 		testClient := adyen.NewClient(&common.Config{
 			Environment: common.TestEnv,
 		})
-		assert.Equal(t, "https://kyc-test.adyen.com/lem/v3", testClient.LegalEntity.BusinessLinesApi.BasePath())
+		assert.Equal(t, "https://kyc-test.adyen.com/lem/v3", testClient.LegalEntity().BusinessLinesApi.BasePath())
 		liveClient := adyen.NewClient(&common.Config{
 			Environment: common.LiveEnv,
 		})
-		assert.Equal(t, "https://kyc-live.adyen.com/lem/v3", liveClient.LegalEntity.DocumentsApi.BasePath())
+		assert.Equal(t, "https://kyc-live.adyen.com/lem/v3", liveClient.LegalEntity().DocumentsApi.BasePath())
 	})
 
 	basicAuthClient := adyen.NewClient(&common.Config{
@@ -28,7 +28,7 @@ func Test_LegalEntity_Configuration(t *testing.T) {
 		Password:    "lem",
 		Environment: "TEST",
 	})
-	service := basicAuthClient.LegalEntity
+	service := basicAuthClient.LegalEntity()
 	var (
 		mockServer  *httptest.Server
 		mockRequest *http.Request
@@ -36,7 +36,7 @@ func Test_LegalEntity_Configuration(t *testing.T) {
 	mockServer = httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		mockRequest = r
 	}))
-	basicAuthClient.LegalEntity.TermsOfServiceApi.BasePath = func() string {
+	basicAuthClient.LegalEntity().TermsOfServiceApi.BasePath = func() string {
 		return mockServer.URL
 	}
 	defer mockServer.Close()

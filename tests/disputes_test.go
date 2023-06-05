@@ -67,7 +67,7 @@ func Test_Disputes(t *testing.T) {
 	t.Run("Disputes", func(t *testing.T) {
 		t.Run("Retrieve applicable defense reasons", func(t *testing.T) {
 			pspReference := createTestPayment()
-			res, httpRes, err := client.Disputes.RetrieveApplicableDefenseReasons(&disputes.DefenseReasonsRequest{
+			res, httpRes, err := client.Disputes().RetrieveApplicableDefenseReasons(&disputes.DefenseReasonsRequest{
 				DisputePspReference: pspReference,
 				MerchantAccountCode: MerchantAccount,
 			})
@@ -80,7 +80,7 @@ func Test_Disputes(t *testing.T) {
 
 		t.Run("Supply defense document", func(t *testing.T) {
 			pspReference := createTestPayment()
-			res, httpRes, err := client.Disputes.SupplyDefenseDocument(&disputes.SupplyDefenseDocumentRequest{
+			res, httpRes, err := client.Disputes().SupplyDefenseDocument(&disputes.SupplyDefenseDocumentRequest{
 				DefenseDocuments: []disputes.DefenseDocument{
 					{
 						Content:                 "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==",
@@ -100,7 +100,7 @@ func Test_Disputes(t *testing.T) {
 
 		t.Run("Delete dispute defense document", func(t *testing.T) {
 			pspReference := createTestPayment()
-			res, httpRes, err := client.Disputes.DeleteDisputeDefenseDocument(&disputes.DeleteDefenseDocumentRequest{
+			res, httpRes, err := client.Disputes().DeleteDisputeDefenseDocument(&disputes.DeleteDefenseDocumentRequest{
 				DefenseDocumentType: "DefenseMaterial",
 				DisputePspReference: pspReference,
 				MerchantAccountCode: MerchantAccount,
@@ -114,7 +114,7 @@ func Test_Disputes(t *testing.T) {
 
 		t.Run("Defend dispute", func(t *testing.T) {
 			pspReference := createTestPayment()
-			res, httpRes, err := client.Disputes.DefendDispute(&disputes.DefendDisputeRequest{
+			res, httpRes, err := client.Disputes().DefendDispute(&disputes.DefendDisputeRequest{
 				DefenseReasonCode:   "DuplicateChargeback",
 				DisputePspReference: pspReference,
 				MerchantAccountCode: MerchantAccount,
@@ -128,7 +128,7 @@ func Test_Disputes(t *testing.T) {
 
 		t.Run("Download dispute defense document", func(t *testing.T) {
 			pspReference := createTestPayment()
-			_, httpRes, err := client.Disputes.DownloadDisputeDefenseDocument(&disputes.DownloadDefenseDocumentRequest{
+			_, httpRes, err := client.Disputes().DownloadDisputeDefenseDocument(&disputes.DownloadDefenseDocumentRequest{
 				DefenseDocumentType: "DefenseMaterial",
 				DisputePspReference: pspReference,
 				MerchantAccountCode: MerchantAccount,

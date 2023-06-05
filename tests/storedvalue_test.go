@@ -43,17 +43,17 @@ func Test_StoredValue(t *testing.T) {
 
 	mockServer := httptest.NewServer(mux)
 	defer mockServer.Close()
-	client.StoredValue.BasePath = func() string { return mockServer.URL }
+	client.StoredValue().BasePath = func() string { return mockServer.URL }
 
 	t.Run("Configuration", func(t *testing.T) {
 		testClient := adyen.NewClient(&common.Config{
 			Environment: common.TestEnv,
 		})
-		assert.Equal(t, "https://pal-test.adyen.com/pal/servlet/StoredValue/v46", testClient.StoredValue.BasePath())
+		assert.Equal(t, "https://pal-test.adyen.com/pal/servlet/StoredValue/v46", testClient.StoredValue().BasePath())
 		liveClient := adyen.NewClient(&common.Config{
 			Environment: common.LiveEnv,
 		})
-		assert.Equal(t, "https://pal-live.adyen.com/pal/servlet/StoredValue/v46", liveClient.StoredValue.BasePath())
+		assert.Equal(t, "https://pal-live.adyen.com/pal/servlet/StoredValue/v46", liveClient.StoredValue().BasePath())
 	})
 
 	t.Run("Check balance", func(t *testing.T) {
@@ -64,7 +64,7 @@ func Test_StoredValue(t *testing.T) {
 		}, "YOUR_REFERENCE")
 		request.SetStore("YOUR_STORE_ID")
 
-		res, httpRes, err := client.StoredValue.CheckBalance(request)
+		res, httpRes, err := client.StoredValue().CheckBalance(request)
 
 		require.NotNil(t, res)
 		require.NotNil(t, httpRes)
@@ -76,7 +76,7 @@ func Test_StoredValue(t *testing.T) {
 	})
 
 	t.Run("Error response", func(t *testing.T) {
-		_, httpRes, err := client.StoredValue.VoidTransaction(&storedvalue.StoredValueVoidRequest{
+		_, httpRes, err := client.StoredValue().VoidTransaction(&storedvalue.StoredValueVoidRequest{
 			MerchantAccount:   "YOUR_MERCHANT_ACCOUNT",
 			OriginalReference: "",
 			Reference:         nil,
