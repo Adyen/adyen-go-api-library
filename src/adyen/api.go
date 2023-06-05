@@ -11,16 +11,12 @@ import (
 	"net/http"
 
 	"github.com/adyen/adyen-go-api-library/v6/src/balanceplatform"
-	"github.com/adyen/adyen-go-api-library/v6/src/checkout"
-	"github.com/adyen/adyen-go-api-library/v6/src/legalentity"
-	"github.com/adyen/adyen-go-api-library/v6/src/management"
-	"github.com/adyen/adyen-go-api-library/v6/src/recurring"
-	"github.com/adyen/adyen-go-api-library/v6/src/transfers"
-	"github.com/adyen/adyen-go-api-library/v6/src/webhook"
-
 	"github.com/adyen/adyen-go-api-library/v6/src/binlookup"
+	"github.com/adyen/adyen-go-api-library/v6/src/checkout"
 	"github.com/adyen/adyen-go-api-library/v6/src/common"
 	"github.com/adyen/adyen-go-api-library/v6/src/disputes"
+	"github.com/adyen/adyen-go-api-library/v6/src/legalentity"
+	"github.com/adyen/adyen-go-api-library/v6/src/management"
 	"github.com/adyen/adyen-go-api-library/v6/src/payments"
 	"github.com/adyen/adyen-go-api-library/v6/src/payout"
 	"github.com/adyen/adyen-go-api-library/v6/src/platformsaccount"
@@ -28,7 +24,9 @@ import (
 	"github.com/adyen/adyen-go-api-library/v6/src/platformshostedonboardingpage"
 	"github.com/adyen/adyen-go-api-library/v6/src/platformsnotificationconfiguration"
 	"github.com/adyen/adyen-go-api-library/v6/src/posterminalmanagement"
+	"github.com/adyen/adyen-go-api-library/v6/src/recurring"
 	"github.com/adyen/adyen-go-api-library/v6/src/storedvalue"
+	"github.com/adyen/adyen-go-api-library/v6/src/transfers"
 )
 
 // Constants used for the client API
@@ -86,7 +84,6 @@ type APIClient struct {
 	payout                             *payout.APIClient
 	recurring                          *recurring.GeneralApi
 	binLookup                          *binlookup.GeneralApi
-	Notification                       *webhook.NotificationService
 	platformsAccount                   *platformsaccount.PlatformsAccount
 	platformsFund                      *platformsfund.PlatformsFund
 	platformsHostedOnboardingPage      *platformshostedonboardingpage.PlatformsHostedOnboardingPage
