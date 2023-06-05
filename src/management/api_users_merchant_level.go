@@ -10,7 +10,8 @@ package management
 
 import (
 	"context"
-	_context "context"
+	"encoding/json"
+	"io/ioutil"
 	_nethttp "net/http"
 	"net/url"
 	"strings"
@@ -40,10 +41,9 @@ Creates a user for the `merchantId` specified in the path.
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Users read and write
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param merchantId Unique identifier of the merchant.
- @return UsersMerchantLevelApiCreateNewUserConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId Unique identifier of the merchant.
+	@return UsersMerchantLevelApiCreateNewUserConfig
 */
 func (a *UsersMerchantLevelApi) CreateNewUserConfig(ctx context.Context, merchantId string) UsersMerchantLevelApiCreateNewUserConfig {
 	return UsersMerchantLevelApiCreateNewUserConfig{
@@ -57,16 +57,73 @@ Create a new user
 Creates a user for the &#x60;merchantId&#x60; specified in the path.  To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Users read and write
  * @param merchantId Unique identifier of the merchant.
  * @param req CreateMerchantUserRequest - reference of CreateMerchantUserRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return CreateUserResponse
 */
 
-func (a *UsersMerchantLevelApi) CreateNewUser(r UsersMerchantLevelApiCreateNewUserConfig) (CreateUserResponse, *_nethttp.Response, error) {
+func (a *UsersMerchantLevelApi) CreateNewUser(r UsersMerchantLevelApiCreateNewUserConfig) (CreateUserResponse, *_nethttp.Response, RestServiceError) {
+	var v RestServiceError
 	res := &CreateUserResponse{}
 	path := "/merchants/{merchantId}/users"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPost, r.createMerchantUserRequest, res, a.BasePath()+path, []_context.Context{r.ctx})
-	return *res, httpRes, err
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, _ := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		r.createMerchantUserRequest,
+		res,
+		_nethttp.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes.StatusCode == 400 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 401 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 403 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 422 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 500 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+	return *res, httpRes, v
 }
 
 type UsersMerchantLevelApiGetUserDetailsConfig struct {
@@ -83,11 +140,10 @@ Returns user details for the `userId` and the `merchantId` specified in the path
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Users read and write
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param merchantId Unique identifier of the merchant.
- @param userId Unique identifier of the user.
- @return UsersMerchantLevelApiGetUserDetailsConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId Unique identifier of the merchant.
+	@param userId Unique identifier of the user.
+	@return UsersMerchantLevelApiGetUserDetailsConfig
 */
 func (a *UsersMerchantLevelApi) GetUserDetailsConfig(ctx context.Context, merchantId string, userId string) UsersMerchantLevelApiGetUserDetailsConfig {
 	return UsersMerchantLevelApiGetUserDetailsConfig{
@@ -102,17 +158,74 @@ Get user details
 Returns user details for the &#x60;userId&#x60; and the &#x60;merchantId&#x60; specified in the path.  To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Users read and write
  * @param merchantId Unique identifier of the merchant.
  * @param userId Unique identifier of the user.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return User
 */
 
-func (a *UsersMerchantLevelApi) GetUserDetails(r UsersMerchantLevelApiGetUserDetailsConfig) (User, *_nethttp.Response, error) {
+func (a *UsersMerchantLevelApi) GetUserDetails(r UsersMerchantLevelApiGetUserDetailsConfig) (User, *_nethttp.Response, RestServiceError) {
+	var v RestServiceError
 	res := &User{}
 	path := "/merchants/{merchantId}/users/{userId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"userId"+"}", url.PathEscape(common.ParameterValueToString(r.userId, "userId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
-	return *res, httpRes, err
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, _ := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		nil,
+		res,
+		_nethttp.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes.StatusCode == 400 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 401 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 403 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 422 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 500 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+	return *res, httpRes, v
 }
 
 type UsersMerchantLevelApiListUsersConfig struct {
@@ -149,10 +262,9 @@ Returns a list of users associated with the `merchantId` specified in the path.
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Users read and write
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param merchantId Unique identifier of the merchant.
- @return UsersMerchantLevelApiListUsersConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId Unique identifier of the merchant.
+	@return UsersMerchantLevelApiListUsersConfig
 */
 func (a *UsersMerchantLevelApi) ListUsersConfig(ctx context.Context, merchantId string) UsersMerchantLevelApiListUsersConfig {
 	return UsersMerchantLevelApiListUsersConfig{
@@ -165,26 +277,82 @@ func (a *UsersMerchantLevelApi) ListUsersConfig(ctx context.Context, merchantId 
 Get a list of users
 Returns a list of users associated with the &#x60;merchantId&#x60; specified in the path.  To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Users read and write
  * @param merchantId Unique identifier of the merchant.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ListMerchantUsersResponse
 */
 
-func (a *UsersMerchantLevelApi) ListUsers(r UsersMerchantLevelApiListUsersConfig) (ListMerchantUsersResponse, *_nethttp.Response, error) {
+func (a *UsersMerchantLevelApi) ListUsers(r UsersMerchantLevelApiListUsersConfig) (ListMerchantUsersResponse, *_nethttp.Response, RestServiceError) {
+	var v RestServiceError
 	res := &ListMerchantUsersResponse{}
 	path := "/merchants/{merchantId}/users"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
-	queryString := url.Values{}
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
 	if r.pageNumber != nil {
-		common.ParameterAddToQuery(queryString, "pageNumber", r.pageNumber, "")
+		common.ParameterAddToQuery(queryParams, "pageNumber", r.pageNumber, "")
 	}
 	if r.pageSize != nil {
-		common.ParameterAddToQuery(queryString, "pageSize", r.pageSize, "")
+		common.ParameterAddToQuery(queryParams, "pageSize", r.pageSize, "")
 	}
 	if r.username != nil {
-		common.ParameterAddToQuery(queryString, "username", r.username, "")
+		common.ParameterAddToQuery(queryParams, "username", r.username, "")
 	}
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path+"?"+queryString.Encode(), []_context.Context{r.ctx})
-	return *res, httpRes, err
+	httpRes, _ := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		nil,
+		res,
+		_nethttp.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes.StatusCode == 400 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 401 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 403 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 422 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 500 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+	return *res, httpRes, v
 }
 
 type UsersMerchantLevelApiUpdateUserConfig struct {
@@ -207,11 +375,10 @@ Updates user details for the `userId` and the `merchantId` specified in the path
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Users read and write
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param merchantId Unique identifier of the merchant.
- @param userId Unique identifier of the user.
- @return UsersMerchantLevelApiUpdateUserConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId Unique identifier of the merchant.
+	@param userId Unique identifier of the user.
+	@return UsersMerchantLevelApiUpdateUserConfig
 */
 func (a *UsersMerchantLevelApi) UpdateUserConfig(ctx context.Context, merchantId string, userId string) UsersMerchantLevelApiUpdateUserConfig {
 	return UsersMerchantLevelApiUpdateUserConfig{
@@ -227,15 +394,72 @@ Updates user details for the &#x60;userId&#x60; and the &#x60;merchantId&#x60; s
  * @param merchantId Unique identifier of the merchant.
  * @param userId Unique identifier of the user.
  * @param req UpdateMerchantUserRequest - reference of UpdateMerchantUserRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return User
 */
 
-func (a *UsersMerchantLevelApi) UpdateUser(r UsersMerchantLevelApiUpdateUserConfig) (User, *_nethttp.Response, error) {
+func (a *UsersMerchantLevelApi) UpdateUser(r UsersMerchantLevelApiUpdateUserConfig) (User, *_nethttp.Response, RestServiceError) {
+	var v RestServiceError
 	res := &User{}
 	path := "/merchants/{merchantId}/users/{userId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"userId"+"}", url.PathEscape(common.ParameterValueToString(r.userId, "userId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPatch, r.updateMerchantUserRequest, res, a.BasePath()+path, []_context.Context{r.ctx})
-	return *res, httpRes, err
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, _ := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		r.updateMerchantUserRequest,
+		res,
+		_nethttp.MethodPatch,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes.StatusCode == 400 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 401 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 403 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 422 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 500 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+	return *res, httpRes, v
 }

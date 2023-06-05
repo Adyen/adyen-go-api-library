@@ -10,7 +10,8 @@ package management
 
 import (
 	"context"
-	_context "context"
+	"encoding/json"
+	"io/ioutil"
 	_nethttp "net/http"
 	"net/url"
 	"strings"
@@ -39,8 +40,8 @@ Creates a store for the merchant account specified in the request.
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Stores read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return AccountStoreLevelApiCreateStoreConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return AccountStoreLevelApiCreateStoreConfig
 */
 func (a *AccountStoreLevelApi) CreateStoreConfig(ctx context.Context) AccountStoreLevelApiCreateStoreConfig {
 	return AccountStoreLevelApiCreateStoreConfig{
@@ -52,15 +53,72 @@ func (a *AccountStoreLevelApi) CreateStoreConfig(ctx context.Context) AccountSto
 Create a store
 Creates a store for the merchant account specified in the request.  To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Stores read and write
  * @param req StoreCreationWithMerchantCodeRequest - reference of StoreCreationWithMerchantCodeRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return Store
 */
 
-func (a *AccountStoreLevelApi) CreateStore(r AccountStoreLevelApiCreateStoreConfig) (Store, *_nethttp.Response, error) {
+func (a *AccountStoreLevelApi) CreateStore(r AccountStoreLevelApiCreateStoreConfig) (Store, *_nethttp.Response, RestServiceError) {
+	var v RestServiceError
 	res := &Store{}
 	path := "/stores"
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPost, r.storeCreationWithMerchantCodeRequest, res, a.BasePath()+path, []_context.Context{r.ctx})
-	return *res, httpRes, err
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, _ := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		r.storeCreationWithMerchantCodeRequest,
+		res,
+		_nethttp.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes.StatusCode == 400 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 401 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 403 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 422 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 500 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+	return *res, httpRes, v
 }
 
 type AccountStoreLevelApiCreateStoreByMerchantIdConfig struct {
@@ -82,9 +140,9 @@ Creates a store for the merchant account identified in the path.
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Stores read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param merchantId The unique identifier of the merchant account.
- @return AccountStoreLevelApiCreateStoreByMerchantIdConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@return AccountStoreLevelApiCreateStoreByMerchantIdConfig
 */
 func (a *AccountStoreLevelApi) CreateStoreByMerchantIdConfig(ctx context.Context, merchantId string) AccountStoreLevelApiCreateStoreByMerchantIdConfig {
 	return AccountStoreLevelApiCreateStoreByMerchantIdConfig{
@@ -98,16 +156,73 @@ Create a store
 Creates a store for the merchant account identified in the path.  To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Stores read and write
  * @param merchantId The unique identifier of the merchant account.
  * @param req StoreCreationRequest - reference of StoreCreationRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return Store
 */
 
-func (a *AccountStoreLevelApi) CreateStoreByMerchantId(r AccountStoreLevelApiCreateStoreByMerchantIdConfig) (Store, *_nethttp.Response, error) {
+func (a *AccountStoreLevelApi) CreateStoreByMerchantId(r AccountStoreLevelApiCreateStoreByMerchantIdConfig) (Store, *_nethttp.Response, RestServiceError) {
+	var v RestServiceError
 	res := &Store{}
 	path := "/merchants/{merchantId}/stores"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPost, r.storeCreationRequest, res, a.BasePath()+path, []_context.Context{r.ctx})
-	return *res, httpRes, err
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, _ := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		r.storeCreationRequest,
+		res,
+		_nethttp.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes.StatusCode == 400 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 401 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 403 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 422 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 500 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+	return *res, httpRes, v
 }
 
 type AccountStoreLevelApiGetStoreConfig struct {
@@ -125,10 +240,10 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Stores read
 * Management API—Stores read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param merchantId The unique identifier of the merchant account.
- @param storeId The unique identifier of the store.
- @return AccountStoreLevelApiGetStoreConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@param storeId The unique identifier of the store.
+	@return AccountStoreLevelApiGetStoreConfig
 */
 func (a *AccountStoreLevelApi) GetStoreConfig(ctx context.Context, merchantId string, storeId string) AccountStoreLevelApiGetStoreConfig {
 	return AccountStoreLevelApiGetStoreConfig{
@@ -143,17 +258,74 @@ Get a store
 Returns the details of the store identified in the path.  To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Stores read * Management API—Stores read and write
  * @param merchantId The unique identifier of the merchant account.
  * @param storeId The unique identifier of the store.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return Store
 */
 
-func (a *AccountStoreLevelApi) GetStore(r AccountStoreLevelApiGetStoreConfig) (Store, *_nethttp.Response, error) {
+func (a *AccountStoreLevelApi) GetStore(r AccountStoreLevelApiGetStoreConfig) (Store, *_nethttp.Response, RestServiceError) {
+	var v RestServiceError
 	res := &Store{}
 	path := "/merchants/{merchantId}/stores/{storeId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"storeId"+"}", url.PathEscape(common.ParameterValueToString(r.storeId, "storeId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
-	return *res, httpRes, err
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, _ := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		nil,
+		res,
+		_nethttp.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes.StatusCode == 400 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 401 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 403 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 422 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 500 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+	return *res, httpRes, v
 }
 
 type AccountStoreLevelApiGetStoreByIdConfig struct {
@@ -170,9 +342,9 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Stores read
 * Management API—Stores read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param storeId The unique identifier of the store.
- @return AccountStoreLevelApiGetStoreByIdConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param storeId The unique identifier of the store.
+	@return AccountStoreLevelApiGetStoreByIdConfig
 */
 func (a *AccountStoreLevelApi) GetStoreByIdConfig(ctx context.Context, storeId string) AccountStoreLevelApiGetStoreByIdConfig {
 	return AccountStoreLevelApiGetStoreByIdConfig{
@@ -185,16 +357,73 @@ func (a *AccountStoreLevelApi) GetStoreByIdConfig(ctx context.Context, storeId s
 Get a store
 Returns the details of the store identified in the path.  To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Stores read * Management API—Stores read and write
  * @param storeId The unique identifier of the store.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return Store
 */
 
-func (a *AccountStoreLevelApi) GetStoreById(r AccountStoreLevelApiGetStoreByIdConfig) (Store, *_nethttp.Response, error) {
+func (a *AccountStoreLevelApi) GetStoreById(r AccountStoreLevelApiGetStoreByIdConfig) (Store, *_nethttp.Response, RestServiceError) {
+	var v RestServiceError
 	res := &Store{}
 	path := "/stores/{storeId}"
 	path = strings.Replace(path, "{"+"storeId"+"}", url.PathEscape(common.ParameterValueToString(r.storeId, "storeId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
-	return *res, httpRes, err
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, _ := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		nil,
+		res,
+		_nethttp.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes.StatusCode == 400 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 401 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 403 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 422 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 500 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+	return *res, httpRes, v
 }
 
 type AccountStoreLevelApiListStoresConfig struct {
@@ -238,8 +467,8 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Stores read
 * Management API—Stores read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return AccountStoreLevelApiListStoresConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return AccountStoreLevelApiListStoresConfig
 */
 func (a *AccountStoreLevelApi) ListStoresConfig(ctx context.Context) AccountStoreLevelApiListStoresConfig {
 	return AccountStoreLevelApiListStoresConfig{
@@ -250,28 +479,84 @@ func (a *AccountStoreLevelApi) ListStoresConfig(ctx context.Context) AccountStor
 /*
 Get a list of stores
 Returns a list of stores. The list is grouped into pages as defined by the query parameters.  To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Stores read * Management API—Stores read and write
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ListStoresResponse
 */
 
-func (a *AccountStoreLevelApi) ListStores(r AccountStoreLevelApiListStoresConfig) (ListStoresResponse, *_nethttp.Response, error) {
+func (a *AccountStoreLevelApi) ListStores(r AccountStoreLevelApiListStoresConfig) (ListStoresResponse, *_nethttp.Response, RestServiceError) {
+	var v RestServiceError
 	res := &ListStoresResponse{}
 	path := "/stores"
-	queryString := url.Values{}
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
 	if r.pageNumber != nil {
-		common.ParameterAddToQuery(queryString, "pageNumber", r.pageNumber, "")
+		common.ParameterAddToQuery(queryParams, "pageNumber", r.pageNumber, "")
 	}
 	if r.pageSize != nil {
-		common.ParameterAddToQuery(queryString, "pageSize", r.pageSize, "")
+		common.ParameterAddToQuery(queryParams, "pageSize", r.pageSize, "")
 	}
 	if r.reference != nil {
-		common.ParameterAddToQuery(queryString, "reference", r.reference, "")
+		common.ParameterAddToQuery(queryParams, "reference", r.reference, "")
 	}
 	if r.merchantId != nil {
-		common.ParameterAddToQuery(queryString, "merchantId", r.merchantId, "")
+		common.ParameterAddToQuery(queryParams, "merchantId", r.merchantId, "")
 	}
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path+"?"+queryString.Encode(), []_context.Context{r.ctx})
-	return *res, httpRes, err
+	httpRes, _ := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		nil,
+		res,
+		_nethttp.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes.StatusCode == 400 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 401 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 403 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 422 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 500 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+	return *res, httpRes, v
 }
 
 type AccountStoreLevelApiListStoresByMerchantIdConfig struct {
@@ -309,9 +594,9 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Stores read
 * Management API—Stores read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param merchantId The unique identifier of the merchant account.
- @return AccountStoreLevelApiListStoresByMerchantIdConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@return AccountStoreLevelApiListStoresByMerchantIdConfig
 */
 func (a *AccountStoreLevelApi) ListStoresByMerchantIdConfig(ctx context.Context, merchantId string) AccountStoreLevelApiListStoresByMerchantIdConfig {
 	return AccountStoreLevelApiListStoresByMerchantIdConfig{
@@ -324,26 +609,82 @@ func (a *AccountStoreLevelApi) ListStoresByMerchantIdConfig(ctx context.Context,
 Get a list of stores
 Returns a list of stores for the merchant account identified in the path. The list is grouped into pages as defined by the query parameters.  To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Stores read * Management API—Stores read and write
  * @param merchantId The unique identifier of the merchant account.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ListStoresResponse
 */
 
-func (a *AccountStoreLevelApi) ListStoresByMerchantId(r AccountStoreLevelApiListStoresByMerchantIdConfig) (ListStoresResponse, *_nethttp.Response, error) {
+func (a *AccountStoreLevelApi) ListStoresByMerchantId(r AccountStoreLevelApiListStoresByMerchantIdConfig) (ListStoresResponse, *_nethttp.Response, RestServiceError) {
+	var v RestServiceError
 	res := &ListStoresResponse{}
 	path := "/merchants/{merchantId}/stores"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
-	queryString := url.Values{}
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
 	if r.pageNumber != nil {
-		common.ParameterAddToQuery(queryString, "pageNumber", r.pageNumber, "")
+		common.ParameterAddToQuery(queryParams, "pageNumber", r.pageNumber, "")
 	}
 	if r.pageSize != nil {
-		common.ParameterAddToQuery(queryString, "pageSize", r.pageSize, "")
+		common.ParameterAddToQuery(queryParams, "pageSize", r.pageSize, "")
 	}
 	if r.reference != nil {
-		common.ParameterAddToQuery(queryString, "reference", r.reference, "")
+		common.ParameterAddToQuery(queryParams, "reference", r.reference, "")
 	}
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path+"?"+queryString.Encode(), []_context.Context{r.ctx})
-	return *res, httpRes, err
+	httpRes, _ := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		nil,
+		res,
+		_nethttp.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes.StatusCode == 400 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 401 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 403 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 422 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 500 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+	return *res, httpRes, v
 }
 
 type AccountStoreLevelApiUpdateStoreConfig struct {
@@ -366,10 +707,10 @@ Updates the store identified in the path. You can only update some store paramet
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Stores read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param merchantId The unique identifier of the merchant account.
- @param storeId The unique identifier of the store.
- @return AccountStoreLevelApiUpdateStoreConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@param storeId The unique identifier of the store.
+	@return AccountStoreLevelApiUpdateStoreConfig
 */
 func (a *AccountStoreLevelApi) UpdateStoreConfig(ctx context.Context, merchantId string, storeId string) AccountStoreLevelApiUpdateStoreConfig {
 	return AccountStoreLevelApiUpdateStoreConfig{
@@ -385,17 +726,74 @@ Updates the store identified in the path. You can only update some store paramet
  * @param merchantId The unique identifier of the merchant account.
  * @param storeId The unique identifier of the store.
  * @param req UpdateStoreRequest - reference of UpdateStoreRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return Store
 */
 
-func (a *AccountStoreLevelApi) UpdateStore(r AccountStoreLevelApiUpdateStoreConfig) (Store, *_nethttp.Response, error) {
+func (a *AccountStoreLevelApi) UpdateStore(r AccountStoreLevelApiUpdateStoreConfig) (Store, *_nethttp.Response, RestServiceError) {
+	var v RestServiceError
 	res := &Store{}
 	path := "/merchants/{merchantId}/stores/{storeId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"storeId"+"}", url.PathEscape(common.ParameterValueToString(r.storeId, "storeId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPatch, r.updateStoreRequest, res, a.BasePath()+path, []_context.Context{r.ctx})
-	return *res, httpRes, err
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, _ := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		r.updateStoreRequest,
+		res,
+		_nethttp.MethodPatch,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes.StatusCode == 400 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 401 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 403 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 422 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 500 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+	return *res, httpRes, v
 }
 
 type AccountStoreLevelApiUpdateStoreByIdConfig struct {
@@ -418,9 +816,9 @@ You can only update some store parameters.
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Stores read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param storeId The unique identifier of the store.
- @return AccountStoreLevelApiUpdateStoreByIdConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param storeId The unique identifier of the store.
+	@return AccountStoreLevelApiUpdateStoreByIdConfig
 */
 func (a *AccountStoreLevelApi) UpdateStoreByIdConfig(ctx context.Context, storeId string) AccountStoreLevelApiUpdateStoreByIdConfig {
 	return AccountStoreLevelApiUpdateStoreByIdConfig{
@@ -434,14 +832,71 @@ Update a store
 Updates the store identified in the path. You can only update some store parameters.  To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Stores read and write
  * @param storeId The unique identifier of the store.
  * @param req UpdateStoreRequest - reference of UpdateStoreRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return Store
 */
 
-func (a *AccountStoreLevelApi) UpdateStoreById(r AccountStoreLevelApiUpdateStoreByIdConfig) (Store, *_nethttp.Response, error) {
+func (a *AccountStoreLevelApi) UpdateStoreById(r AccountStoreLevelApiUpdateStoreByIdConfig) (Store, *_nethttp.Response, RestServiceError) {
+	var v RestServiceError
 	res := &Store{}
 	path := "/stores/{storeId}"
 	path = strings.Replace(path, "{"+"storeId"+"}", url.PathEscape(common.ParameterValueToString(r.storeId, "storeId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPatch, r.updateStoreRequest, res, a.BasePath()+path, []_context.Context{r.ctx})
-	return *res, httpRes, err
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, _ := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		r.updateStoreRequest,
+		res,
+		_nethttp.MethodPatch,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes.StatusCode == 400 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 401 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 403 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 422 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 500 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+	return *res, httpRes, v
 }

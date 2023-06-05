@@ -10,7 +10,8 @@ package management
 
 import (
 	"context"
-	_context "context"
+	"encoding/json"
+	"io/ioutil"
 	_nethttp "net/http"
 	"net/url"
 	"strings"
@@ -35,10 +36,10 @@ Returns a new [client key](https://docs.adyen.com/development-resources/client-s
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—API credentials read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param merchantId The unique identifier of the merchant account.
- @param apiCredentialId Unique identifier of the API credential.
- @return ClientKeyMerchantLevelApiGenerateNewClientKeyConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@param apiCredentialId Unique identifier of the API credential.
+	@return ClientKeyMerchantLevelApiGenerateNewClientKeyConfig
 */
 func (a *ClientKeyMerchantLevelApi) GenerateNewClientKeyConfig(ctx context.Context, merchantId string, apiCredentialId string) ClientKeyMerchantLevelApiGenerateNewClientKeyConfig {
 	return ClientKeyMerchantLevelApiGenerateNewClientKeyConfig{
@@ -53,15 +54,72 @@ Generate new client key
 Returns a new [client key](https://docs.adyen.com/development-resources/client-side-authentication#how-it-works) for the API credential identified in the path. You can use the new client key a few minutes after generating it. The old client key stops working 24 hours after generating a new one.  To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—API credentials read and write
  * @param merchantId The unique identifier of the merchant account.
  * @param apiCredentialId Unique identifier of the API credential.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return GenerateClientKeyResponse
 */
 
-func (a *ClientKeyMerchantLevelApi) GenerateNewClientKey(r ClientKeyMerchantLevelApiGenerateNewClientKeyConfig) (GenerateClientKeyResponse, *_nethttp.Response, error) {
+func (a *ClientKeyMerchantLevelApi) GenerateNewClientKey(r ClientKeyMerchantLevelApiGenerateNewClientKeyConfig) (GenerateClientKeyResponse, *_nethttp.Response, RestServiceError) {
+	var v RestServiceError
 	res := &GenerateClientKeyResponse{}
 	path := "/merchants/{merchantId}/apiCredentials/{apiCredentialId}/generateClientKey"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"apiCredentialId"+"}", url.PathEscape(common.ParameterValueToString(r.apiCredentialId, "apiCredentialId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPost, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
-	return *res, httpRes, err
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, _ := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		nil,
+		res,
+		_nethttp.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes.StatusCode == 400 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 401 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 403 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 422 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 500 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+	return *res, httpRes, v
 }

@@ -20,7 +20,7 @@ var _ common.MappedNullable = &StoreCreationRequest{}
 // StoreCreationRequest struct for StoreCreationRequest
 type StoreCreationRequest struct {
 	Address StoreLocation `json:"address"`
-	// The unique identifiers of the [business lines](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/businesslines__resParam_id) that the store is associated with. If not specified, the business line of the merchant account is used. Required when there are multiple business lines under the merchant account.
+	// The unique identifiers of the [business lines](https://docs.adyen.com/api-explorer/legalentity/latest/post/businessLines#responses-200-id) that the store is associated with. If not specified, the business line of the merchant account is used. Required when there are multiple business lines under the merchant account.
 	BusinessLineIds []string `json:"businessLineIds,omitempty"`
 	// Your description of the store.
 	Description string `json:"description"`
@@ -28,7 +28,7 @@ type StoreCreationRequest struct {
 	ExternalReferenceId *string `json:"externalReferenceId,omitempty"`
 	// The phone number of the store, including '+' and country code.
 	PhoneNumber string `json:"phoneNumber"`
-	// Your reference to recognize the store by. Also known as the store code.  Allowed characters: Lowercase and uppercase letters without diacritics, numbers 0 through 9, hyphen (-), and underscore (_).
+	// Your reference to recognize the store by. Also known as the store code.  Allowed characters: lowercase and uppercase letters without diacritics, numbers 0 through 9, hyphen (-), and underscore (_).  If you do not provide a reference in your POST request, it is populated with the Adyen-generated [id](https://docs.adyen.com/api-explorer/Management/latest/post/stores#responses-200-id).
 	Reference *string `json:"reference,omitempty"`
 	// The store name to be shown on the shopper's bank or credit card statement and on the shopper receipt. Maximum length: 22 characters; can't be all numbers.
 	ShopperStatement   string                   `json:"shopperStatement"`

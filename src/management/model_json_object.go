@@ -19,8 +19,8 @@ var _ common.MappedNullable = &JSONObject{}
 
 // JSONObject struct for JSONObject
 type JSONObject struct {
-	Paths    []JSONPath `json:"paths,omitempty"`
-	RootPath *JSONPath  `json:"rootPath,omitempty"`
+	Paths    []JSONPathWrapper `json:"paths,omitempty"`
+	RootPath *JSONPath         `json:"rootPath,omitempty"`
 }
 
 // NewJSONObject instantiates a new JSONObject object
@@ -41,9 +41,9 @@ func NewJSONObjectWithDefaults() *JSONObject {
 }
 
 // GetPaths returns the Paths field value if set, zero value otherwise.
-func (o *JSONObject) GetPaths() []JSONPath {
+func (o *JSONObject) GetPaths() []JSONPathWrapper {
 	if o == nil || common.IsNil(o.Paths) {
-		var ret []JSONPath
+		var ret []JSONPathWrapper
 		return ret
 	}
 	return o.Paths
@@ -51,7 +51,7 @@ func (o *JSONObject) GetPaths() []JSONPath {
 
 // GetPathsOk returns a tuple with the Paths field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *JSONObject) GetPathsOk() ([]JSONPath, bool) {
+func (o *JSONObject) GetPathsOk() ([]JSONPathWrapper, bool) {
 	if o == nil || common.IsNil(o.Paths) {
 		return nil, false
 	}
@@ -67,8 +67,8 @@ func (o *JSONObject) HasPaths() bool {
 	return false
 }
 
-// SetPaths gets a reference to the given []JSONPath and assigns it to the Paths field.
-func (o *JSONObject) SetPaths(v []JSONPath) {
+// SetPaths gets a reference to the given []JSONPathWrapper and assigns it to the Paths field.
+func (o *JSONObject) SetPaths(v []JSONPathWrapper) {
 	o.Paths = v
 }
 

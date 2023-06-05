@@ -24,8 +24,8 @@ type CreateUserResponse struct {
 	AccountGroups []string `json:"accountGroups,omitempty"`
 	// Indicates whether this user is active.
 	Active *bool `json:"active,omitempty"`
-	// Set of authn apps available to this user
-	AuthnApps []string `json:"authnApps,omitempty"`
+	// Set of apps available to this user
+	Apps []string `json:"apps,omitempty"`
 	// The email address of the user.
 	Email string `json:"email"`
 	// The unique identifier of the user.
@@ -157,36 +157,36 @@ func (o *CreateUserResponse) SetActive(v bool) {
 	o.Active = &v
 }
 
-// GetAuthnApps returns the AuthnApps field value if set, zero value otherwise.
-func (o *CreateUserResponse) GetAuthnApps() []string {
-	if o == nil || common.IsNil(o.AuthnApps) {
+// GetApps returns the Apps field value if set, zero value otherwise.
+func (o *CreateUserResponse) GetApps() []string {
+	if o == nil || common.IsNil(o.Apps) {
 		var ret []string
 		return ret
 	}
-	return o.AuthnApps
+	return o.Apps
 }
 
-// GetAuthnAppsOk returns a tuple with the AuthnApps field value if set, nil otherwise
+// GetAppsOk returns a tuple with the Apps field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateUserResponse) GetAuthnAppsOk() ([]string, bool) {
-	if o == nil || common.IsNil(o.AuthnApps) {
+func (o *CreateUserResponse) GetAppsOk() ([]string, bool) {
+	if o == nil || common.IsNil(o.Apps) {
 		return nil, false
 	}
-	return o.AuthnApps, true
+	return o.Apps, true
 }
 
-// HasAuthnApps returns a boolean if a field has been set.
-func (o *CreateUserResponse) HasAuthnApps() bool {
-	if o != nil && !common.IsNil(o.AuthnApps) {
+// HasApps returns a boolean if a field has been set.
+func (o *CreateUserResponse) HasApps() bool {
+	if o != nil && !common.IsNil(o.Apps) {
 		return true
 	}
 
 	return false
 }
 
-// SetAuthnApps gets a reference to the given []string and assigns it to the AuthnApps field.
-func (o *CreateUserResponse) SetAuthnApps(v []string) {
-	o.AuthnApps = v
+// SetApps gets a reference to the given []string and assigns it to the Apps field.
+func (o *CreateUserResponse) SetApps(v []string) {
+	o.Apps = v
 }
 
 // GetEmail returns the Email field value
@@ -360,8 +360,8 @@ func (o CreateUserResponse) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Active) {
 		toSerialize["active"] = o.Active
 	}
-	if !common.IsNil(o.AuthnApps) {
-		toSerialize["authnApps"] = o.AuthnApps
+	if !common.IsNil(o.Apps) {
+		toSerialize["apps"] = o.Apps
 	}
 	toSerialize["email"] = o.Email
 	toSerialize["id"] = o.Id

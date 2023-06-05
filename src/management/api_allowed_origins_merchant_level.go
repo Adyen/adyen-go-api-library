@@ -10,7 +10,8 @@ package management
 
 import (
 	"context"
-	_context "context"
+	"encoding/json"
+	"io/ioutil"
 	_nethttp "net/http"
 	"net/url"
 	"strings"
@@ -41,10 +42,10 @@ Adds a new [allowed origin](https://docs.adyen.com/development-resources/client-
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—API credentials read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param merchantId The unique identifier of the merchant account.
- @param apiCredentialId Unique identifier of the API credential.
- @return AllowedOriginsMerchantLevelApiCreateAllowedOriginConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@param apiCredentialId Unique identifier of the API credential.
+	@return AllowedOriginsMerchantLevelApiCreateAllowedOriginConfig
 */
 func (a *AllowedOriginsMerchantLevelApi) CreateAllowedOriginConfig(ctx context.Context, merchantId string, apiCredentialId string) AllowedOriginsMerchantLevelApiCreateAllowedOriginConfig {
 	return AllowedOriginsMerchantLevelApiCreateAllowedOriginConfig{
@@ -60,17 +61,74 @@ Adds a new [allowed origin](https://docs.adyen.com/development-resources/client-
  * @param merchantId The unique identifier of the merchant account.
  * @param apiCredentialId Unique identifier of the API credential.
  * @param req AllowedOrigin - reference of AllowedOrigin).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return AllowedOriginsResponse
 */
 
-func (a *AllowedOriginsMerchantLevelApi) CreateAllowedOrigin(r AllowedOriginsMerchantLevelApiCreateAllowedOriginConfig) (AllowedOriginsResponse, *_nethttp.Response, error) {
+func (a *AllowedOriginsMerchantLevelApi) CreateAllowedOrigin(r AllowedOriginsMerchantLevelApiCreateAllowedOriginConfig) (AllowedOriginsResponse, *_nethttp.Response, RestServiceError) {
+	var v RestServiceError
 	res := &AllowedOriginsResponse{}
 	path := "/merchants/{merchantId}/apiCredentials/{apiCredentialId}/allowedOrigins"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"apiCredentialId"+"}", url.PathEscape(common.ParameterValueToString(r.apiCredentialId, "apiCredentialId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPost, r.allowedOrigin, res, a.BasePath()+path, []_context.Context{r.ctx})
-	return *res, httpRes, err
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, _ := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		r.allowedOrigin,
+		res,
+		_nethttp.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes.StatusCode == 400 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 401 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 403 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 422 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 500 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+	return *res, httpRes, v
 }
 
 type AllowedOriginsMerchantLevelApiDeleteAllowedOriginConfig struct {
@@ -88,11 +146,11 @@ Removes the [allowed origin](https://docs.adyen.com/development-resources/client
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—API credentials read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param merchantId The unique identifier of the merchant account.
- @param apiCredentialId Unique identifier of the API credential.
- @param originId Unique identifier of the allowed origin.
- @return AllowedOriginsMerchantLevelApiDeleteAllowedOriginConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@param apiCredentialId Unique identifier of the API credential.
+	@param originId Unique identifier of the allowed origin.
+	@return AllowedOriginsMerchantLevelApiDeleteAllowedOriginConfig
 */
 func (a *AllowedOriginsMerchantLevelApi) DeleteAllowedOriginConfig(ctx context.Context, merchantId string, apiCredentialId string, originId string) AllowedOriginsMerchantLevelApiDeleteAllowedOriginConfig {
 	return AllowedOriginsMerchantLevelApiDeleteAllowedOriginConfig{
@@ -109,17 +167,74 @@ Removes the [allowed origin](https://docs.adyen.com/development-resources/client
  * @param merchantId The unique identifier of the merchant account.
  * @param apiCredentialId Unique identifier of the API credential.
  * @param originId Unique identifier of the allowed origin.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 */
 
-func (a *AllowedOriginsMerchantLevelApi) DeleteAllowedOrigin(r AllowedOriginsMerchantLevelApiDeleteAllowedOriginConfig) (*_nethttp.Response, error) {
+func (a *AllowedOriginsMerchantLevelApi) DeleteAllowedOrigin(r AllowedOriginsMerchantLevelApiDeleteAllowedOriginConfig) (*_nethttp.Response, RestServiceError) {
+	var v RestServiceError
 	var res interface{}
 	path := "/merchants/{merchantId}/apiCredentials/{apiCredentialId}/allowedOrigins/{originId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"apiCredentialId"+"}", url.PathEscape(common.ParameterValueToString(r.apiCredentialId, "apiCredentialId")), -1)
 	path = strings.Replace(path, "{"+"originId"+"}", url.PathEscape(common.ParameterValueToString(r.originId, "originId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodDelete, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
-	return httpRes, err
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, _ := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		nil,
+		res,
+		_nethttp.MethodDelete,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes.StatusCode == 400 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return httpRes, v
+	}
+
+	if httpRes.StatusCode == 401 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return httpRes, v
+	}
+
+	if httpRes.StatusCode == 403 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return httpRes, v
+	}
+
+	if httpRes.StatusCode == 422 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return httpRes, v
+	}
+
+	if httpRes.StatusCode == 500 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return httpRes, v
+	}
+	return httpRes, v
 }
 
 type AllowedOriginsMerchantLevelApiGetAllowedOriginConfig struct {
@@ -137,11 +252,11 @@ Returns the [allowed origin](https://docs.adyen.com/development-resources/client
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—API credentials read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param merchantId The unique identifier of the merchant account.
- @param apiCredentialId Unique identifier of the API credential.
- @param originId Unique identifier of the allowed origin.
- @return AllowedOriginsMerchantLevelApiGetAllowedOriginConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@param apiCredentialId Unique identifier of the API credential.
+	@param originId Unique identifier of the allowed origin.
+	@return AllowedOriginsMerchantLevelApiGetAllowedOriginConfig
 */
 func (a *AllowedOriginsMerchantLevelApi) GetAllowedOriginConfig(ctx context.Context, merchantId string, apiCredentialId string, originId string) AllowedOriginsMerchantLevelApiGetAllowedOriginConfig {
 	return AllowedOriginsMerchantLevelApiGetAllowedOriginConfig{
@@ -158,18 +273,75 @@ Returns the [allowed origin](https://docs.adyen.com/development-resources/client
  * @param merchantId The unique identifier of the merchant account.
  * @param apiCredentialId Unique identifier of the API credential.
  * @param originId Unique identifier of the allowed origin.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return AllowedOrigin
 */
 
-func (a *AllowedOriginsMerchantLevelApi) GetAllowedOrigin(r AllowedOriginsMerchantLevelApiGetAllowedOriginConfig) (AllowedOrigin, *_nethttp.Response, error) {
+func (a *AllowedOriginsMerchantLevelApi) GetAllowedOrigin(r AllowedOriginsMerchantLevelApiGetAllowedOriginConfig) (AllowedOrigin, *_nethttp.Response, RestServiceError) {
+	var v RestServiceError
 	res := &AllowedOrigin{}
 	path := "/merchants/{merchantId}/apiCredentials/{apiCredentialId}/allowedOrigins/{originId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"apiCredentialId"+"}", url.PathEscape(common.ParameterValueToString(r.apiCredentialId, "apiCredentialId")), -1)
 	path = strings.Replace(path, "{"+"originId"+"}", url.PathEscape(common.ParameterValueToString(r.originId, "originId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
-	return *res, httpRes, err
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, _ := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		nil,
+		res,
+		_nethttp.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes.StatusCode == 400 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 401 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 403 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 422 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 500 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+	return *res, httpRes, v
 }
 
 type AllowedOriginsMerchantLevelApiListAllowedOriginsConfig struct {
@@ -186,10 +358,10 @@ Returns the list of [allowed origins](https://docs.adyen.com/development-resourc
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—API credentials read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param merchantId The unique identifier of the merchant account.
- @param apiCredentialId Unique identifier of the API credential.
- @return AllowedOriginsMerchantLevelApiListAllowedOriginsConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@param apiCredentialId Unique identifier of the API credential.
+	@return AllowedOriginsMerchantLevelApiListAllowedOriginsConfig
 */
 func (a *AllowedOriginsMerchantLevelApi) ListAllowedOriginsConfig(ctx context.Context, merchantId string, apiCredentialId string) AllowedOriginsMerchantLevelApiListAllowedOriginsConfig {
 	return AllowedOriginsMerchantLevelApiListAllowedOriginsConfig{
@@ -204,15 +376,72 @@ Get a list of allowed origins
 Returns the list of [allowed origins](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins) for the API credential identified in the path.  To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—API credentials read and write
  * @param merchantId The unique identifier of the merchant account.
  * @param apiCredentialId Unique identifier of the API credential.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return AllowedOriginsResponse
 */
 
-func (a *AllowedOriginsMerchantLevelApi) ListAllowedOrigins(r AllowedOriginsMerchantLevelApiListAllowedOriginsConfig) (AllowedOriginsResponse, *_nethttp.Response, error) {
+func (a *AllowedOriginsMerchantLevelApi) ListAllowedOrigins(r AllowedOriginsMerchantLevelApiListAllowedOriginsConfig) (AllowedOriginsResponse, *_nethttp.Response, RestServiceError) {
+	var v RestServiceError
 	res := &AllowedOriginsResponse{}
 	path := "/merchants/{merchantId}/apiCredentials/{apiCredentialId}/allowedOrigins"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"apiCredentialId"+"}", url.PathEscape(common.ParameterValueToString(r.apiCredentialId, "apiCredentialId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
-	return *res, httpRes, err
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, _ := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		nil,
+		res,
+		_nethttp.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes.StatusCode == 400 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 401 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 403 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 422 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 500 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+	return *res, httpRes, v
 }

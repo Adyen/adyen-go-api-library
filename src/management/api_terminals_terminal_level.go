@@ -10,7 +10,8 @@ package management
 
 import (
 	"context"
-	_context "context"
+	"encoding/json"
+	"io/ioutil"
 	_nethttp "net/http"
 	"net/url"
 
@@ -82,8 +83,8 @@ When using `searchQuery`, other query parameters are ignored.
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API — Terminal actions read
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return TerminalsTerminalLevelApiListTerminalsConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return TerminalsTerminalLevelApiListTerminalsConfig
 */
 func (a *TerminalsTerminalLevelApi) ListTerminalsConfig(ctx context.Context) TerminalsTerminalLevelApiListTerminalsConfig {
 	return TerminalsTerminalLevelApiListTerminalsConfig{
@@ -94,35 +95,91 @@ func (a *TerminalsTerminalLevelApi) ListTerminalsConfig(ctx context.Context) Ter
 /*
 Get a list of terminals
 Returns the payment terminals that the API credential has access to and that match the query parameters.  When using &#x60;searchQuery&#x60;, other query parameters are ignored.  To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API — Terminal actions read
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ListTerminalsResponse
 */
 
-func (a *TerminalsTerminalLevelApi) ListTerminals(r TerminalsTerminalLevelApiListTerminalsConfig) (ListTerminalsResponse, *_nethttp.Response, error) {
+func (a *TerminalsTerminalLevelApi) ListTerminals(r TerminalsTerminalLevelApiListTerminalsConfig) (ListTerminalsResponse, *_nethttp.Response, RestServiceError) {
+	var v RestServiceError
 	res := &ListTerminalsResponse{}
 	path := "/terminals"
-	queryString := url.Values{}
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
 	if r.searchQuery != nil {
-		common.ParameterAddToQuery(queryString, "searchQuery", r.searchQuery, "")
+		common.ParameterAddToQuery(queryParams, "searchQuery", r.searchQuery, "")
 	}
 	if r.countries != nil {
-		common.ParameterAddToQuery(queryString, "countries", r.countries, "")
+		common.ParameterAddToQuery(queryParams, "countries", r.countries, "")
 	}
 	if r.merchantIds != nil {
-		common.ParameterAddToQuery(queryString, "merchantIds", r.merchantIds, "")
+		common.ParameterAddToQuery(queryParams, "merchantIds", r.merchantIds, "")
 	}
 	if r.storeIds != nil {
-		common.ParameterAddToQuery(queryString, "storeIds", r.storeIds, "")
+		common.ParameterAddToQuery(queryParams, "storeIds", r.storeIds, "")
 	}
 	if r.brandModels != nil {
-		common.ParameterAddToQuery(queryString, "brandModels", r.brandModels, "")
+		common.ParameterAddToQuery(queryParams, "brandModels", r.brandModels, "")
 	}
 	if r.pageNumber != nil {
-		common.ParameterAddToQuery(queryString, "pageNumber", r.pageNumber, "")
+		common.ParameterAddToQuery(queryParams, "pageNumber", r.pageNumber, "")
 	}
 	if r.pageSize != nil {
-		common.ParameterAddToQuery(queryString, "pageSize", r.pageSize, "")
+		common.ParameterAddToQuery(queryParams, "pageSize", r.pageSize, "")
 	}
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path+"?"+queryString.Encode(), []_context.Context{r.ctx})
-	return *res, httpRes, err
+	httpRes, _ := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		nil,
+		res,
+		_nethttp.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes.StatusCode == 400 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 401 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 403 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 422 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 500 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+	return *res, httpRes, v
 }

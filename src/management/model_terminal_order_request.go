@@ -25,6 +25,8 @@ type TerminalOrderRequest struct {
 	CustomerOrderReference *string `json:"customerOrderReference,omitempty"`
 	// The products included in the order.
 	Items []OrderItem `json:"items,omitempty"`
+	// Type of order
+	OrderType *string `json:"orderType,omitempty"`
 	// The identification of the shipping location to use for the order.
 	ShippingLocationId *string `json:"shippingLocationId,omitempty"`
 	// The tax number of the billing entity.
@@ -144,6 +146,38 @@ func (o *TerminalOrderRequest) SetItems(v []OrderItem) {
 	o.Items = v
 }
 
+// GetOrderType returns the OrderType field value if set, zero value otherwise.
+func (o *TerminalOrderRequest) GetOrderType() string {
+	if o == nil || common.IsNil(o.OrderType) {
+		var ret string
+		return ret
+	}
+	return *o.OrderType
+}
+
+// GetOrderTypeOk returns a tuple with the OrderType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TerminalOrderRequest) GetOrderTypeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.OrderType) {
+		return nil, false
+	}
+	return o.OrderType, true
+}
+
+// HasOrderType returns a boolean if a field has been set.
+func (o *TerminalOrderRequest) HasOrderType() bool {
+	if o != nil && !common.IsNil(o.OrderType) {
+		return true
+	}
+
+	return false
+}
+
+// SetOrderType gets a reference to the given string and assigns it to the OrderType field.
+func (o *TerminalOrderRequest) SetOrderType(v string) {
+	o.OrderType = &v
+}
+
 // GetShippingLocationId returns the ShippingLocationId field value if set, zero value otherwise.
 func (o *TerminalOrderRequest) GetShippingLocationId() string {
 	if o == nil || common.IsNil(o.ShippingLocationId) {
@@ -226,6 +260,9 @@ func (o TerminalOrderRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Items) {
 		toSerialize["items"] = o.Items
+	}
+	if !common.IsNil(o.OrderType) {
+		toSerialize["orderType"] = o.OrderType
 	}
 	if !common.IsNil(o.ShippingLocationId) {
 		toSerialize["shippingLocationId"] = o.ShippingLocationId

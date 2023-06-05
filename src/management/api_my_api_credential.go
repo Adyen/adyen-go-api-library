@@ -10,7 +10,8 @@ package management
 
 import (
 	"context"
-	_context "context"
+	"encoding/json"
+	"io/ioutil"
 	_nethttp "net/http"
 	"net/url"
 	"strings"
@@ -39,8 +40,8 @@ The API key from the request is used to identify the [API credential](https://do
 
 You can make this request with any of the Management API roles.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return MyAPICredentialApiAddAllowedOriginConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return MyAPICredentialApiAddAllowedOriginConfig
 */
 func (a *MyAPICredentialApi) AddAllowedOriginConfig(ctx context.Context) MyAPICredentialApiAddAllowedOriginConfig {
 	return MyAPICredentialApiAddAllowedOriginConfig{
@@ -52,15 +53,72 @@ func (a *MyAPICredentialApi) AddAllowedOriginConfig(ctx context.Context) MyAPICr
 Add allowed origin
 Adds an allowed origin to the list of [allowed origins](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins) of your API credential. The API key from the request is used to identify the [API credential](https://docs.adyen.com/development-resources/api-credentials).  You can make this request with any of the Management API roles.
  * @param req CreateAllowedOriginRequest - reference of CreateAllowedOriginRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return AllowedOrigin
 */
 
-func (a *MyAPICredentialApi) AddAllowedOrigin(r MyAPICredentialApiAddAllowedOriginConfig) (AllowedOrigin, *_nethttp.Response, error) {
+func (a *MyAPICredentialApi) AddAllowedOrigin(r MyAPICredentialApiAddAllowedOriginConfig) (AllowedOrigin, *_nethttp.Response, RestServiceError) {
+	var v RestServiceError
 	res := &AllowedOrigin{}
 	path := "/me/allowedOrigins"
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPost, r.createAllowedOriginRequest, res, a.BasePath()+path, []_context.Context{r.ctx})
-	return *res, httpRes, err
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, _ := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		r.createAllowedOriginRequest,
+		res,
+		_nethttp.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes.StatusCode == 400 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 401 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 403 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 422 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 500 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+	return *res, httpRes, v
 }
 
 type MyAPICredentialApiGetAllowedOriginDetailsConfig struct {
@@ -76,9 +134,9 @@ The API key from the request is used to identify the [API credential](https://do
 
 You can make this request with any of the Management API roles.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param originId Unique identifier of the allowed origin.
- @return MyAPICredentialApiGetAllowedOriginDetailsConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param originId Unique identifier of the allowed origin.
+	@return MyAPICredentialApiGetAllowedOriginDetailsConfig
 */
 func (a *MyAPICredentialApi) GetAllowedOriginDetailsConfig(ctx context.Context, originId string) MyAPICredentialApiGetAllowedOriginDetailsConfig {
 	return MyAPICredentialApiGetAllowedOriginDetailsConfig{
@@ -91,16 +149,73 @@ func (a *MyAPICredentialApi) GetAllowedOriginDetailsConfig(ctx context.Context, 
 Get allowed origin details
 Returns the details of the [allowed origin](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins) specified in the path. The API key from the request is used to identify the [API credential](https://docs.adyen.com/development-resources/api-credentials).  You can make this request with any of the Management API roles.
  * @param originId Unique identifier of the allowed origin.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return AllowedOrigin
 */
 
-func (a *MyAPICredentialApi) GetAllowedOriginDetails(r MyAPICredentialApiGetAllowedOriginDetailsConfig) (AllowedOrigin, *_nethttp.Response, error) {
+func (a *MyAPICredentialApi) GetAllowedOriginDetails(r MyAPICredentialApiGetAllowedOriginDetailsConfig) (AllowedOrigin, *_nethttp.Response, RestServiceError) {
+	var v RestServiceError
 	res := &AllowedOrigin{}
 	path := "/me/allowedOrigins/{originId}"
 	path = strings.Replace(path, "{"+"originId"+"}", url.PathEscape(common.ParameterValueToString(r.originId, "originId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
-	return *res, httpRes, err
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, _ := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		nil,
+		res,
+		_nethttp.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes.StatusCode == 400 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 401 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 403 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 422 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 500 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+	return *res, httpRes, v
 }
 
 type MyAPICredentialApiGetAllowedOriginsConfig struct {
@@ -114,8 +229,8 @@ Returns the list of [allowed origins](https://docs.adyen.com/development-resourc
 
 You can make this request with any of the Management API roles.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return MyAPICredentialApiGetAllowedOriginsConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return MyAPICredentialApiGetAllowedOriginsConfig
 */
 func (a *MyAPICredentialApi) GetAllowedOriginsConfig(ctx context.Context) MyAPICredentialApiGetAllowedOriginsConfig {
 	return MyAPICredentialApiGetAllowedOriginsConfig{
@@ -126,15 +241,72 @@ func (a *MyAPICredentialApi) GetAllowedOriginsConfig(ctx context.Context) MyAPIC
 /*
 Get allowed origins
 Returns the list of [allowed origins](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins) of your [API credential](https://docs.adyen.com/development-resources/api-credentials) based on the API key you used in the request.  You can make this request with any of the Management API roles.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return AllowedOriginsResponse
 */
 
-func (a *MyAPICredentialApi) GetAllowedOrigins(r MyAPICredentialApiGetAllowedOriginsConfig) (AllowedOriginsResponse, *_nethttp.Response, error) {
+func (a *MyAPICredentialApi) GetAllowedOrigins(r MyAPICredentialApiGetAllowedOriginsConfig) (AllowedOriginsResponse, *_nethttp.Response, RestServiceError) {
+	var v RestServiceError
 	res := &AllowedOriginsResponse{}
 	path := "/me/allowedOrigins"
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
-	return *res, httpRes, err
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, _ := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		nil,
+		res,
+		_nethttp.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes.StatusCode == 400 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 401 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 403 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 422 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 500 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+	return *res, httpRes, v
 }
 
 type MyAPICredentialApiGetApiCredentialDetailsConfig struct {
@@ -148,8 +320,8 @@ Returns your [API credential](https://docs.adyen.com/development-resources/api-c
 
 You can make this request with any of the Management API roles.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return MyAPICredentialApiGetApiCredentialDetailsConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return MyAPICredentialApiGetApiCredentialDetailsConfig
 */
 func (a *MyAPICredentialApi) GetApiCredentialDetailsConfig(ctx context.Context) MyAPICredentialApiGetApiCredentialDetailsConfig {
 	return MyAPICredentialApiGetApiCredentialDetailsConfig{
@@ -160,15 +332,72 @@ func (a *MyAPICredentialApi) GetApiCredentialDetailsConfig(ctx context.Context) 
 /*
 Get API credential details
 Returns your [API credential](https://docs.adyen.com/development-resources/api-credentials) details based on the API Key you used in the request.  You can make this request with any of the Management API roles.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return MeApiCredential
 */
 
-func (a *MyAPICredentialApi) GetApiCredentialDetails(r MyAPICredentialApiGetApiCredentialDetailsConfig) (MeApiCredential, *_nethttp.Response, error) {
+func (a *MyAPICredentialApi) GetApiCredentialDetails(r MyAPICredentialApiGetApiCredentialDetailsConfig) (MeApiCredential, *_nethttp.Response, RestServiceError) {
+	var v RestServiceError
 	res := &MeApiCredential{}
 	path := "/me"
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
-	return *res, httpRes, err
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, _ := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		nil,
+		res,
+		_nethttp.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes.StatusCode == 400 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 401 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 403 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 422 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+
+	if httpRes.StatusCode == 500 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return *res, httpRes, v
+	}
+	return *res, httpRes, v
 }
 
 type MyAPICredentialApiRemoveAllowedOriginConfig struct {
@@ -184,9 +413,9 @@ The API key from the request is used to identify the [API credential](https://do
 
 You can make this request with any of the Management API roles.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param originId Unique identifier of the allowed origin.
- @return MyAPICredentialApiRemoveAllowedOriginConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param originId Unique identifier of the allowed origin.
+	@return MyAPICredentialApiRemoveAllowedOriginConfig
 */
 func (a *MyAPICredentialApi) RemoveAllowedOriginConfig(ctx context.Context, originId string) MyAPICredentialApiRemoveAllowedOriginConfig {
 	return MyAPICredentialApiRemoveAllowedOriginConfig{
@@ -199,13 +428,70 @@ func (a *MyAPICredentialApi) RemoveAllowedOriginConfig(ctx context.Context, orig
 Remove allowed origin
 Removes the [allowed origin](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins) specified in the path. The API key from the request is used to identify the [API credential](https://docs.adyen.com/development-resources/api-credentials).  You can make this request with any of the Management API roles.
  * @param originId Unique identifier of the allowed origin.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 */
 
-func (a *MyAPICredentialApi) RemoveAllowedOrigin(r MyAPICredentialApiRemoveAllowedOriginConfig) (*_nethttp.Response, error) {
+func (a *MyAPICredentialApi) RemoveAllowedOrigin(r MyAPICredentialApiRemoveAllowedOriginConfig) (*_nethttp.Response, RestServiceError) {
+	var v RestServiceError
 	var res interface{}
 	path := "/me/allowedOrigins/{originId}"
 	path = strings.Replace(path, "{"+"originId"+"}", url.PathEscape(common.ParameterValueToString(r.originId, "originId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodDelete, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
-	return httpRes, err
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, _ := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		nil,
+		res,
+		_nethttp.MethodDelete,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes.StatusCode == 400 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return httpRes, v
+	}
+
+	if httpRes.StatusCode == 401 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return httpRes, v
+	}
+
+	if httpRes.StatusCode == 403 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return httpRes, v
+	}
+
+	if httpRes.StatusCode == 422 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return httpRes, v
+	}
+
+	if httpRes.StatusCode == 500 {
+
+		defer httpRes.Body.Close()
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &v)
+		return httpRes, v
+	}
+	return httpRes, v
 }
