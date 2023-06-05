@@ -46,7 +46,7 @@ For more information, refer to our [documentation](https://docs.adyen.com/) or t
 You can use go modules to add our library to your project
 
 ```bash
-go get github.com/adyen/adyen-go-api-library/v6
+go get github.com/adyen/adyen-go-api-library/v7
 ```
 
 ## Usage examples
@@ -55,119 +55,120 @@ go get github.com/adyen/adyen-go-api-library/v6
 
 ```go
 import (
-	"github.com/adyen/adyen-go-api-library/v6/src/checkout"
-	"github.com/adyen/adyen-go-api-library/v6/src/common"
-	"github.com/adyen/adyen-go-api-library/v6/src/adyen"
+	"context"
+	"github.com/adyen/adyen-go-api-library/v7/src/checkout"
+	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v7/src/adyen"
 )
 
 client := adyen.NewClient(&common.Config{
     ApiKey:      "your api key",
     Environment: common.TestEnv,
 })
+service := client.Checkout()
 
-res, httpRes, err := client.Checkout.PaymentMethods(&checkout.PaymentMethodsRequest{
+req := service.PaymentsApi.PaymentMethodsConfig(context.Background())
+req = req.PaymentMethodsRequest(checkout.PaymentMethodsRequest{
     MerchantAccount: "your merchant account",
 })
+res, httpRes, err := service.PaymentsApi.PaymentMethods(req)
 ```
 
 ### Using APIs with APIKey for Live env
 
 ```go
 import (
-    "github.com/adyen/adyen-go-api-library/v6/src/checkout"
-    "github.com/adyen/adyen-go-api-library/v6/src/common"
-    "github.com/adyen/adyen-go-api-library/v6/src/adyen"
+    "github.com/adyen/adyen-go-api-library/v7/src/checkout"
+    "github.com/adyen/adyen-go-api-library/v7/src/common"
+    "github.com/adyen/adyen-go-api-library/v7/src/adyen"
 )
 
 client := adyen.NewClient(&common.Config{
-    ApiKey:      "your api key",
-    Environment: common.LiveEnv,
+    ApiKey:                "your api key",
+    Environment:           common.LiveEnv,
     LiveEndpointURLPrefix: "1797a841fbb37ca7-AdyenDemo", // Refer to https://docs.adyen.com/development-resources/live-endpoints#live-url-prefix
 })
+service := client.Checkout()
 
-res, httpRes, err := client.Checkout.PaymentMethods(&checkout.PaymentMethodsRequest{
+req := service.PaymentsApi.PaymentMethodsConfig(context.Background())
+req = req.PaymentMethodsRequest(checkout.PaymentMethodsRequest{
     MerchantAccount: "your merchant account",
 })
+res, httpRes, err := service.PaymentsApi.PaymentMethods(req)
 ```
 
 ### Using API with Basic Auth
 
 ```go
 import (
-    "github.com/adyen/adyen-go-api-library/v6/src/recurring"
-    "github.com/adyen/adyen-go-api-library/v6/src/common"
-    "github.com/adyen/adyen-go-api-library/v6/src/adyen"
+    "github.com/adyen/adyen-go-api-library/v7/src/recurring"
+    "github.com/adyen/adyen-go-api-library/v7/src/common"
+    "github.com/adyen/adyen-go-api-library/v7/src/adyen"
 )
 
 client := adyen.NewClient(&common.Config{
-    Username:        USER,
-    Password:        PASS,
-    Environment:     common.TestEnv,
-    ApplicationName: "adyen-api-go-library",
+    Username:    "your ws user",
+    Password:    "your secret password",
+    Environment: common.TestEnv,
+    UserAgent:   "Custom Application",
 })
+service := client.Recurring()
 
-res, httpRes, err := client.Recurring.ListRecurringDetails(&recurring.RecurringDetailsRequest{
-    MerchantAccount: MerchantAccount,
-    Recurring: &recurring.RecurringType{
-        Contract: "RECURRING",
+req := service.ListRecurringDetailsConfig(context.Background())
+req = req.RecurringDetailsRequest(recurring.RecurringDetailsRequest{
+    MerchantAccount: "your merchant account",
+    Recurring: &recurring.Recurring{
+        Contract: common.PtrString("RECURRING"),
     },
     ShopperReference: "ref",
 })
+res, httpRes, err := service.ListRecurringDetails(req)
 ```
 
-### Using Notifications parser
+### Using Webhook parser
 
 ```go
 import (
-    "github.com/adyen/adyen-go-api-library/v6/src/adyen"
-    "github.com/adyen/adyen-go-api-library/v6/src/common"
+	"github.com/adyen/adyen-go-api-library/v7/src/webhook"
 )
 
-client := adyen.NewClient(&common.Config{
-    ApiKey:      "your api key",
-    Environment: common.TestEnv,
-})
-
-notification, err := client.Notification.HandleNotificationRequest(jsonRequestString)
+msg, err := webhook.HandleRequest(`{"live": "false", "notificationItems": []}`)
 ```
 
 ### Getting error details
 
 ```go
 import (
-	"github.com/adyen/adyen-go-api-library/v6/src/common"
-	"github.com/adyen/adyen-go-api-library/v6/src/checkout"
-	"github.com/adyen/adyen-go-api-library/v6/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v7/src/checkout"
+	"github.com/adyen/adyen-go-api-library/v7/src/adyen"
 )
 
 client := adyen.NewClient(&common.Config{
     ApiKey:      "your api key",
     Environment: common.TestEnv,
 })
+service := client.Checkout()
 
-res, httpRes, err := client.Checkout.Payments(&checkout.PaymentRequest{
+req := service.PaymentsApi.PaymentsConfig(context.Background())
+paymentMethod := checkout.IdealDetailsAsCheckoutPaymentMethod(checkout.NewIdealDetails("1121"))
+_, httpRes, err := service.PaymentsApi.Payments(req.PaymentRequest(checkout.PaymentRequest{
     Reference: "123456781235",
     Amount: checkout.Amount{
         Value:    1250,
         Currency: "EUR",
     },
-    CountryCode:     "NL",
-    MerchantAccount: MerchantAccount,
-    Channel:         "Web",
+    CountryCode:     common.PtrString("NL"),
+    MerchantAccount: "your merchant account",
+    Channel:         common.PtrString("Web"),
     ReturnUrl:       "http://localhost:3000/redirect",
-    PaymentMethod: map[string]interface{}{
-        "type":   "ideal",
-        "issuer": "1121",
-    },
-})
+    PaymentMethod:   paymentMethod,
+}))
 
-errorText := err.Error()
+httpStatusCode := httpRes.StatusCode
 errorMessage := err.(common.APIError).Message
 errorCode := err.(common.APIError).Code
 errorType := err.(common.APIError).Type
-
-httpStatusCode := httpRes.StatusCode
-httpStatus := httpRes.Status
 ```
 
 ### Custom HTTP Client Configuration
@@ -176,9 +177,8 @@ By default, Go [`http.DefaultClient`](https://golang.org/pkg/net/http/) will be 
 
 ```go
 client := adyen.NewClient(&common.Config{
-    HTTPClient:  &http.Client{
-        CheckRedirect: redirectPolicyFunc,
-        Timeout: 10 * time.MilliSeconds,
+    HTTPClient: &http.Client{
+        Timeout: 512 * time.Millisecond,
     },
     Environment: common.TestEnv,
     ApiKey:      "your api key",
@@ -192,13 +192,13 @@ You can configure a proxy connection by injecting your own `http.Client` with a 
 Example:
 
 ```go
-//creating the proxyURL
+// creating the proxyURL
 proxyURL, _ := url.Parse("http://myproxy:7000")
 transport := &http.Transport{
     Proxy: http.ProxyURL(proxyURL),
 }
-client = adyen.NewClient(&common.Config{
-    HTTPClient:  &http.Client{
+client := adyen.NewClient(&common.Config{
+    HTTPClient: &http.Client{
         Transport: transport,
     },
     Environment: common.TestEnv,
