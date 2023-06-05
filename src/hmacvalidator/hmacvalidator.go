@@ -6,11 +6,11 @@ import (
 	"encoding/base64"
 	"encoding/hex"
 	"fmt"
+	"github.com/adyen/adyen-go-api-library/v7/src/webhook"
 	"regexp"
 	"sort"
 	"strconv"
 	"strings"
-	"github.com/adyen/adyen-go-api-library/v6/src/webhook"
 )
 
 // CalculateHmac calculates the SHA-256 HMAC for the given data and key

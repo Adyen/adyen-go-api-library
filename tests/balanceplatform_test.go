@@ -3,9 +3,9 @@ package tests
 import (
 	"context"
 	"encoding/json"
-	"github.com/adyen/adyen-go-api-library/v6/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v6/src/balanceplatform"
-	"github.com/adyen/adyen-go-api-library/v6/src/common"
+	"github.com/adyen/adyen-go-api-library/v7/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v7/src/balanceplatform"
+	"github.com/adyen/adyen-go-api-library/v7/src/common"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"io"
