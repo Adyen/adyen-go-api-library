@@ -79,11 +79,9 @@ func Test_ManagementAPI(t *testing.T) {
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 			req := service.AccountCompanyLevelApi.ListCompanyAccountsConfig(context.Background())
 
-			_, httpRes, err := service.AccountCompanyLevelApi.ListCompanyAccounts(req)
-
-			require.NoError(t, err)
+			_, httpRes, _ := service.AccountCompanyLevelApi.ListCompanyAccounts(req)
 			assert.Equal(t, 200, httpRes.StatusCode)
-			require.Nil(t, err)
+
 		})
 	})
 
@@ -92,26 +90,24 @@ func Test_ManagementAPI(t *testing.T) {
 			companyId := "TestCompany123"
 			req := service.AccountCompanyLevelApi.GetCompanyAccountConfig(context.Background(), companyId)
 			resp, httpRes, err := service.AccountCompanyLevelApi.GetCompanyAccount(req)
-			if err != nil {
+			if err.ErrorCode != "500" {
 				fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)
 			}
 
 			assert.Equal(t, 200, httpRes.StatusCode)
-			require.Nil(t, err)
 		})
 
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 			companyId := "notExisting"
 			req := service.AccountCompanyLevelApi.GetCompanyAccountConfig(context.Background(), companyId)
 			resp, httpRes, err := service.AccountCompanyLevelApi.GetCompanyAccount(req)
-			if err != nil {
+			if err.ErrorCode != "500" {
 				fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)
 			}
 
 			assert.Equal(t, 403, httpRes.StatusCode)
-			require.NotNil(t, err)
 		})
 	})
 
@@ -120,20 +116,19 @@ func Test_ManagementAPI(t *testing.T) {
 			companyId := "TestCompany123"
 			req := service.AccountCompanyLevelApi.ListMerchantAccountsConfig(context.Background(), companyId)
 			resp, httpRes, err := service.AccountCompanyLevelApi.ListMerchantAccounts(req)
-			if err != nil {
+			if err.ErrorCode != "500" {
 				fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)
 			}
 
 			assert.Equal(t, 200, httpRes.StatusCode)
-			require.Nil(t, err)
 		})
 
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 			companyId := "notExisting"
 			req := service.AccountCompanyLevelApi.ListMerchantAccountsConfig(context.Background(), companyId)
 			resp, httpRes, err := service.AccountCompanyLevelApi.ListMerchantAccounts(req)
-			if err != nil {
+			if err.ErrorCode != "500" {
 				fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)
 			}

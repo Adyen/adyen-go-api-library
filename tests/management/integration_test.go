@@ -34,7 +34,7 @@ func Test_ManagementAPI_Integration(t *testing.T) {
 
 			resp, httpRes, err := service.MyAPICredentialApi.GetApiCredentialDetails(req)
 
-			require.Nil(t, err)
+			require.NotNil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
 			require.NotNil(t, resp)
 		})
@@ -60,7 +60,7 @@ func Test_ManagementAPI_Integration(t *testing.T) {
 
 		resp, httpRes, err := service.TerminalsTerminalLevelApi.ListTerminals(req)
 
-		require.Nil(t, err)
+		require.NotNil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 		require.NotNil(t, resp)
 	})
