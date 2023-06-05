@@ -6,10 +6,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/adyen/adyen-go-api-library/v6/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v6/src/common"
+	"github.com/adyen/adyen-go-api-library/v7/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v7/src/common"
 
-	"github.com/adyen/adyen-go-api-library/v6/src/recurring"
+	"github.com/adyen/adyen-go-api-library/v7/src/recurring"
 	"github.com/joho/godotenv"
 
 	"github.com/stretchr/testify/assert"
@@ -32,10 +32,10 @@ func Test_Recurring(t *testing.T) {
 
 	t.Run("ListRecurringDetails", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
-			req := client.Recurring.ListRecurringDetailsConfig(context.Background()).
+			req := client.Recurring().ListRecurringDetailsConfig(context.Background()).
 				RecurringDetailsRequest(*recurring.NewRecurringDetailsRequestWithDefaults())
 
-			res, httpRes, err := client.Recurring.ListRecurringDetails(req)
+			res, httpRes, err := client.Recurring().ListRecurringDetails(req)
 
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
@@ -46,7 +46,7 @@ func Test_Recurring(t *testing.T) {
 		})
 
 		t.Run("Create an API request that should pass", func(t *testing.T) {
-			req := client.Recurring.ListRecurringDetailsConfig(context.Background())
+			req := client.Recurring().ListRecurringDetailsConfig(context.Background())
 			req = req.RecurringDetailsRequest(recurring.RecurringDetailsRequest{
 				MerchantAccount:  MerchantAccount,
 				ShopperReference: "4343553GFGFYFY4654654675765",
@@ -55,7 +55,7 @@ func Test_Recurring(t *testing.T) {
 				},
 			})
 
-			res, httpRes, err := client.Recurring.ListRecurringDetails(req)
+			res, httpRes, err := client.Recurring().ListRecurringDetails(req)
 
 			require.Nil(t, err)
 			require.NotNil(t, httpRes)
@@ -73,9 +73,9 @@ func Test_Recurring(t *testing.T) {
 				ShopperReference: "4343553GFGFYFY4654654675765",
 			}
 			body.SetRecurringDetailReference("8314442372419167")
-			req := client.Recurring.DisableConfig(context.Background()).DisableRequest(body)
+			req := client.Recurring().DisableConfig(context.Background()).DisableRequest(body)
 
-			res, httpRes, err := client.Recurring.Disable(req)
+			res, httpRes, err := client.Recurring().Disable(req)
 
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
@@ -101,9 +101,9 @@ func Test_Recurring(t *testing.T) {
 				RecurringDetailReference: common.PtrString("8314442372419167"),
 				StoredPaymentMethodId:    common.PtrString("8314442372419167"),
 			}
-			req := client.Recurring.NotifyShopperConfig(context.Background()).NotifyShopperRequest(body)
+			req := client.Recurring().NotifyShopperConfig(context.Background()).NotifyShopperRequest(body)
 
-			res, httpRes, err := client.Recurring.NotifyShopper(req)
+			res, httpRes, err := client.Recurring().NotifyShopper(req)
 
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
@@ -127,9 +127,9 @@ func Test_Recurring(t *testing.T) {
 			body.SetBillingSequenceNumber("adhoc")
 			body.SetRecurringDetailReference("8314442372419167")
 			body.SetStoredPaymentMethodId("8314442372419167")
-			req := client.Recurring.NotifyShopperConfig(context.Background()).NotifyShopperRequest(body)
+			req := client.Recurring().NotifyShopperConfig(context.Background()).NotifyShopperRequest(body)
 
-			res, httpRes, err := client.Recurring.NotifyShopper(req)
+			res, httpRes, err := client.Recurring().NotifyShopper(req)
 
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
@@ -146,9 +146,9 @@ func Test_Recurring(t *testing.T) {
 				MerchantAccount: MerchantAccount,
 				Reference:       "4343553GFGFYFY4654654675765",
 			}
-			req := client.Recurring.ScheduleAccountUpdaterConfig(context.Background()).ScheduleAccountUpdaterRequest(body)
+			req := client.Recurring().ScheduleAccountUpdaterConfig(context.Background()).ScheduleAccountUpdaterRequest(body)
 
-			res, httpRes, err := client.Recurring.ScheduleAccountUpdater(req)
+			res, httpRes, err := client.Recurring().ScheduleAccountUpdater(req)
 
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
@@ -169,9 +169,9 @@ func Test_Recurring(t *testing.T) {
 				Reference:       "4343553GFGFYFY4654654675765",
 				Card:            card,
 			}
-			req := client.Recurring.ScheduleAccountUpdaterConfig(context.Background()).ScheduleAccountUpdaterRequest(body)
+			req := client.Recurring().ScheduleAccountUpdaterConfig(context.Background()).ScheduleAccountUpdaterRequest(body)
 
-			res, httpRes, err := client.Recurring.ScheduleAccountUpdater(req)
+			res, httpRes, err := client.Recurring().ScheduleAccountUpdater(req)
 
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)

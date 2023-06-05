@@ -2,9 +2,9 @@ package legalentity
 
 import (
 	"context"
-	"github.com/adyen/adyen-go-api-library/v6/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v6/src/common"
-	"github.com/adyen/adyen-go-api-library/v6/src/legalentity"
+	"github.com/adyen/adyen-go-api-library/v7/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v7/src/legalentity"
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"net/http/httptest"
@@ -18,7 +18,7 @@ func Test_LegalEntity(t *testing.T) {
 		Environment: "TEST",
 		Debug:       false,
 	})
-	service := client.LegalEntity
+	service := client.LegalEntity()
 
 	var (
 		mockServer  *httptest.Server
@@ -58,7 +58,7 @@ func Test_LegalEntity(t *testing.T) {
 	defer mockServer.Close()
 
 	// base path is shared between all endpoints
-	client.LegalEntity.BusinessLinesApi.BasePath = func() string {
+	client.LegalEntity().BusinessLinesApi.BasePath = func() string {
 		return mockServer.URL
 	}
 

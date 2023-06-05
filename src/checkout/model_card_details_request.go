@@ -11,7 +11,7 @@ package checkout
 import (
 	"encoding/json"
 
-	"github.com/adyen/adyen-go-api-library/v6/src/common"
+	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
 // checks if the CardDetailsRequest type satisfies the MappedNullable interface at compile time
