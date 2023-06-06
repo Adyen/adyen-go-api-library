@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	// "github.com///testify/require"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/balanceplatformconfigurationnotification"
+	"github.com/adyen/adyen-go-api-library/v7/src/configurationnotification"
 )
 
 func Test_BalancePlatform_Configuration_Notifications_HandleRequest(t *testing.T) {
@@ -73,7 +73,7 @@ func Test_BalancePlatform_Configuration_Notifications_HandleRequest(t *testing.T
 			"type": "balancePlatform.accountHolder.created"
 		  }
 		`
-		balancePlatformNotification, _ := balanceplatformconfigurationnotification.HandleAccountHolderNotificationRequest(notificationJson)
+		balancePlatformNotification, _ := configurationnotification.HandleAccountHolderNotificationRequest(notificationJson)
 		balancePlatformValue := "YOUR_BALANCE_PLATFORM"
 		assert.Equal(t, &balancePlatformValue, balancePlatformNotification.Data.BalancePlatform)
 		assert.Equal(t, "test@adyen.com", balancePlatformNotification.Data.AccountHolder.ContactDetails.Email)

@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/balanceplatformtransfernotification"
+	"github.com/adyen/adyen-go-api-library/v7/src/transfernotification"
 )
 
 func Test_BalancePlatform_Transfer_Notifications_HandleRequest(t *testing.T) {
@@ -27,7 +27,7 @@ func Test_BalancePlatform_Transfer_Notifications_HandleRequest(t *testing.T) {
 			"environment": "test"
 		  }
 		`
-		balancePlatformNotification, _ := balanceplatformtransfernotification.HandleTransferNotificationRequest(notificationJson)
+		balancePlatformNotification, _ := transfernotification.HandleTransferNotificationRequest(notificationJson)
 		balancePlatformValue := "YOUR_BALANCE_PLATFORM"
 		transferType := "refund"
 		assert.Equal(t, &balancePlatformValue, balancePlatformNotification.Data.BalancePlatform)

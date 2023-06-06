@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	// "github.com///testify/require"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/balanceplatformreportnotification"
+	"github.com/adyen/adyen-go-api-library/v7/src/reportnotification"
 )
 
 func Test_BalancePlatform_Report_Notifications_HandleRequest(t *testing.T) {
@@ -30,7 +30,7 @@ func Test_BalancePlatform_Report_Notifications_HandleRequest(t *testing.T) {
 			"type": "balancePlatform.report.created"
 		  }
 		`
-		balancePlatformNotification, _ := balanceplatformreportnotification.HandleReportNotificationRequest(notificationJson)
+		balancePlatformNotification, _ := reportnotification.HandleReportNotificationRequest(notificationJson)
 		balancePlatformValue := "YOUR_BALANCE_PLATFORM"
 		assert.Equal(t, &balancePlatformValue, balancePlatformNotification.Data.BalancePlatform)
 		assert.Equal(t, "balanceplatform_payments_accounting_report", balancePlatformNotification.Data.ReportType)

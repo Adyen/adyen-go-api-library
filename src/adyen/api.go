@@ -11,12 +11,10 @@ import (
 	"net/http"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/balanceplatform"
-	"github.com/adyen/adyen-go-api-library/v7/src/balanceplatformconfigurationnotification"
-	"github.com/adyen/adyen-go-api-library/v7/src/balanceplatformreportnotification"
-	"github.com/adyen/adyen-go-api-library/v7/src/balanceplatformtransfernotification"
 	"github.com/adyen/adyen-go-api-library/v7/src/binlookup"
 	"github.com/adyen/adyen-go-api-library/v7/src/checkout"
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v7/src/configurationnotification"
 	"github.com/adyen/adyen-go-api-library/v7/src/disputes"
 	"github.com/adyen/adyen-go-api-library/v7/src/legalentity"
 	"github.com/adyen/adyen-go-api-library/v7/src/management"
@@ -28,7 +26,9 @@ import (
 	"github.com/adyen/adyen-go-api-library/v7/src/platformsnotificationconfiguration"
 	"github.com/adyen/adyen-go-api-library/v7/src/posterminalmanagement"
 	"github.com/adyen/adyen-go-api-library/v7/src/recurring"
+	"github.com/adyen/adyen-go-api-library/v7/src/reportnotification"
 	"github.com/adyen/adyen-go-api-library/v7/src/storedvalue"
+	"github.com/adyen/adyen-go-api-library/v7/src/transfernotification"
 	"github.com/adyen/adyen-go-api-library/v7/src/transfers"
 )
 
@@ -83,25 +83,25 @@ type APIClient struct {
 	client *common.Client
 	// API Services
 
-	balancePlatformConfigurationNotification *balanceplatformconfigurationnotification.NotificationService
-	balancePlatformReportNotification        *balanceplatformreportnotification.NotificationService
-	balancePlatformTransferNotification      *balanceplatformtransfernotification.NotificationService
-	checkout                                 *checkout.APIClient
-	payments                                 *payments.APIClient
-	payout                                   *payout.APIClient
-	recurring                                *recurring.GeneralApi
-	binLookup                                *binlookup.GeneralApi
-	platformsAccount                         *platformsaccount.PlatformsAccount
-	platformsFund                            *platformsfund.PlatformsFund
-	platformsHostedOnboardingPage            *platformshostedonboardingpage.PlatformsHostedOnboardingPage
-	platformsNotificationConfiguration       *platformsnotificationconfiguration.PlatformsNotificationConfiguration
-	posTerminalManagement                    *posterminalmanagement.GeneralApi
-	disputes                                 *disputes.Disputes
-	storedValue                              *storedvalue.StoredValue
-	balancePlatform                          *balanceplatform.APIClient
-	transfers                                *transfers.GeneralApi
-	management                               *management.APIClient
-	legalEntity                              *legalentity.APIClient
+	configurationnotification          *configurationnotification.NotificationService
+	reportnotification                 *reportnotification.NotificationService
+	transfernotification               *transfernotification.NotificationService
+	checkout                           *checkout.APIClient
+	payments                           *payments.APIClient
+	payout                             *payout.APIClient
+	recurring                          *recurring.GeneralApi
+	binLookup                          *binlookup.GeneralApi
+	platformsAccount                   *platformsaccount.PlatformsAccount
+	platformsFund                      *platformsfund.PlatformsFund
+	platformsHostedOnboardingPage      *platformshostedonboardingpage.PlatformsHostedOnboardingPage
+	platformsNotificationConfiguration *platformsnotificationconfiguration.PlatformsNotificationConfiguration
+	posTerminalManagement              *posterminalmanagement.GeneralApi
+	disputes                           *disputes.Disputes
+	storedValue                        *storedvalue.StoredValue
+	balancePlatform                    *balanceplatform.APIClient
+	transfers                          *transfers.GeneralApi
+	management                         *management.APIClient
+	legalEntity                        *legalentity.APIClient
 }
 
 // NewClient creates a new API client. Requires Config object.
