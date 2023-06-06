@@ -61,14 +61,14 @@ Creates a user for the &#x60;merchantId&#x60; specified in the path.  To make th
 @return CreateUserResponse
 */
 
-func (a *UsersMerchantLevelApi) CreateNewUser(r UsersMerchantLevelApiCreateNewUserConfig) (CreateUserResponse, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *UsersMerchantLevelApi) CreateNewUser(r UsersMerchantLevelApiCreateNewUserConfig) (CreateUserResponse, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &CreateUserResponse{}
 	path := "/merchants/{merchantId}/users"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		r.createMerchantUserRequest,
@@ -84,8 +84,8 @@ func (a *UsersMerchantLevelApi) CreateNewUser(r UsersMerchantLevelApiCreateNewUs
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -93,8 +93,8 @@ func (a *UsersMerchantLevelApi) CreateNewUser(r UsersMerchantLevelApiCreateNewUs
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -102,8 +102,8 @@ func (a *UsersMerchantLevelApi) CreateNewUser(r UsersMerchantLevelApiCreateNewUs
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -111,8 +111,8 @@ func (a *UsersMerchantLevelApi) CreateNewUser(r UsersMerchantLevelApiCreateNewUs
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -120,10 +120,10 @@ func (a *UsersMerchantLevelApi) CreateNewUser(r UsersMerchantLevelApiCreateNewUs
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type UsersMerchantLevelApiGetUserDetailsConfig struct {
@@ -162,15 +162,15 @@ Returns user details for the &#x60;userId&#x60; and the &#x60;merchantId&#x60; s
 @return User
 */
 
-func (a *UsersMerchantLevelApi) GetUserDetails(r UsersMerchantLevelApiGetUserDetailsConfig) (User, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *UsersMerchantLevelApi) GetUserDetails(r UsersMerchantLevelApiGetUserDetailsConfig) (User, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &User{}
 	path := "/merchants/{merchantId}/users/{userId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"userId"+"}", url.PathEscape(common.ParameterValueToString(r.userId, "userId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -186,8 +186,8 @@ func (a *UsersMerchantLevelApi) GetUserDetails(r UsersMerchantLevelApiGetUserDet
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -195,8 +195,8 @@ func (a *UsersMerchantLevelApi) GetUserDetails(r UsersMerchantLevelApiGetUserDet
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -204,8 +204,8 @@ func (a *UsersMerchantLevelApi) GetUserDetails(r UsersMerchantLevelApiGetUserDet
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -213,8 +213,8 @@ func (a *UsersMerchantLevelApi) GetUserDetails(r UsersMerchantLevelApiGetUserDet
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -222,10 +222,10 @@ func (a *UsersMerchantLevelApi) GetUserDetails(r UsersMerchantLevelApiGetUserDet
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type UsersMerchantLevelApiListUsersConfig struct {
@@ -281,8 +281,8 @@ Returns a list of users associated with the &#x60;merchantId&#x60; specified in 
 @return ListMerchantUsersResponse
 */
 
-func (a *UsersMerchantLevelApi) ListUsers(r UsersMerchantLevelApiListUsersConfig) (ListMerchantUsersResponse, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *UsersMerchantLevelApi) ListUsers(r UsersMerchantLevelApiListUsersConfig) (ListMerchantUsersResponse, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &ListMerchantUsersResponse{}
 	path := "/merchants/{merchantId}/users"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -297,7 +297,7 @@ func (a *UsersMerchantLevelApi) ListUsers(r UsersMerchantLevelApiListUsersConfig
 	if r.username != nil {
 		common.ParameterAddToQuery(queryParams, "username", r.username, "")
 	}
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -313,8 +313,8 @@ func (a *UsersMerchantLevelApi) ListUsers(r UsersMerchantLevelApiListUsersConfig
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -322,8 +322,8 @@ func (a *UsersMerchantLevelApi) ListUsers(r UsersMerchantLevelApiListUsersConfig
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -331,8 +331,8 @@ func (a *UsersMerchantLevelApi) ListUsers(r UsersMerchantLevelApiListUsersConfig
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -340,8 +340,8 @@ func (a *UsersMerchantLevelApi) ListUsers(r UsersMerchantLevelApiListUsersConfig
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -349,10 +349,10 @@ func (a *UsersMerchantLevelApi) ListUsers(r UsersMerchantLevelApiListUsersConfig
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type UsersMerchantLevelApiUpdateUserConfig struct {
@@ -398,15 +398,15 @@ Updates user details for the &#x60;userId&#x60; and the &#x60;merchantId&#x60; s
 @return User
 */
 
-func (a *UsersMerchantLevelApi) UpdateUser(r UsersMerchantLevelApiUpdateUserConfig) (User, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *UsersMerchantLevelApi) UpdateUser(r UsersMerchantLevelApiUpdateUserConfig) (User, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &User{}
 	path := "/merchants/{merchantId}/users/{userId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"userId"+"}", url.PathEscape(common.ParameterValueToString(r.userId, "userId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		r.updateMerchantUserRequest,
@@ -422,8 +422,8 @@ func (a *UsersMerchantLevelApi) UpdateUser(r UsersMerchantLevelApiUpdateUserConf
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -431,8 +431,8 @@ func (a *UsersMerchantLevelApi) UpdateUser(r UsersMerchantLevelApiUpdateUserConf
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -440,8 +440,8 @@ func (a *UsersMerchantLevelApi) UpdateUser(r UsersMerchantLevelApiUpdateUserConf
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -449,8 +449,8 @@ func (a *UsersMerchantLevelApi) UpdateUser(r UsersMerchantLevelApiUpdateUserConf
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -458,8 +458,8 @@ func (a *UsersMerchantLevelApi) UpdateUser(r UsersMerchantLevelApiUpdateUserConf
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }

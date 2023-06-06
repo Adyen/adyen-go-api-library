@@ -99,8 +99,8 @@ Returns the payment terminals that the API credential has access to and that mat
 @return ListTerminalsResponse
 */
 
-func (a *TerminalsTerminalLevelApi) ListTerminals(r TerminalsTerminalLevelApiListTerminalsConfig) (ListTerminalsResponse, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *TerminalsTerminalLevelApi) ListTerminals(r TerminalsTerminalLevelApiListTerminalsConfig) (ListTerminalsResponse, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &ListTerminalsResponse{}
 	path := "/terminals"
 	queryParams := url.Values{}
@@ -126,7 +126,7 @@ func (a *TerminalsTerminalLevelApi) ListTerminals(r TerminalsTerminalLevelApiLis
 	if r.pageSize != nil {
 		common.ParameterAddToQuery(queryParams, "pageSize", r.pageSize, "")
 	}
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -142,8 +142,8 @@ func (a *TerminalsTerminalLevelApi) ListTerminals(r TerminalsTerminalLevelApiLis
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -151,8 +151,8 @@ func (a *TerminalsTerminalLevelApi) ListTerminals(r TerminalsTerminalLevelApiLis
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -160,8 +160,8 @@ func (a *TerminalsTerminalLevelApi) ListTerminals(r TerminalsTerminalLevelApiLis
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -169,8 +169,8 @@ func (a *TerminalsTerminalLevelApi) ListTerminals(r TerminalsTerminalLevelApiLis
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -178,8 +178,8 @@ func (a *TerminalsTerminalLevelApi) ListTerminals(r TerminalsTerminalLevelApiLis
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }

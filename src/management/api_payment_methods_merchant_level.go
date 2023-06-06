@@ -64,15 +64,15 @@ Adds the new domain to the list of Apple Pay domains that are registered with th
  * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 */
 
-func (a *PaymentMethodsMerchantLevelApi) AddApplePayDomain(r PaymentMethodsMerchantLevelApiAddApplePayDomainConfig) (*_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *PaymentMethodsMerchantLevelApi) AddApplePayDomain(r PaymentMethodsMerchantLevelApiAddApplePayDomainConfig) (*_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	var res interface{}
 	path := "/merchants/{merchantId}/paymentMethodSettings/{paymentMethodId}/addApplePayDomains"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"paymentMethodId"+"}", url.PathEscape(common.ParameterValueToString(r.paymentMethodId, "paymentMethodId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		r.applePayInfo,
@@ -88,8 +88,8 @@ func (a *PaymentMethodsMerchantLevelApi) AddApplePayDomain(r PaymentMethodsMerch
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -97,8 +97,8 @@ func (a *PaymentMethodsMerchantLevelApi) AddApplePayDomain(r PaymentMethodsMerch
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -106,8 +106,8 @@ func (a *PaymentMethodsMerchantLevelApi) AddApplePayDomain(r PaymentMethodsMerch
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -115,8 +115,8 @@ func (a *PaymentMethodsMerchantLevelApi) AddApplePayDomain(r PaymentMethodsMerch
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -124,10 +124,10 @@ func (a *PaymentMethodsMerchantLevelApi) AddApplePayDomain(r PaymentMethodsMerch
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return httpRes, serviceError, err
 	}
-	return httpRes, v
+	return httpRes, serviceError, err
 }
 
 type PaymentMethodsMerchantLevelApiGetAllPaymentMethodsConfig struct {
@@ -190,8 +190,8 @@ Returns details for all payment methods of the merchant account identified in th
 @return PaymentMethodResponse
 */
 
-func (a *PaymentMethodsMerchantLevelApi) GetAllPaymentMethods(r PaymentMethodsMerchantLevelApiGetAllPaymentMethodsConfig) (PaymentMethodResponse, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *PaymentMethodsMerchantLevelApi) GetAllPaymentMethods(r PaymentMethodsMerchantLevelApiGetAllPaymentMethodsConfig) (PaymentMethodResponse, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &PaymentMethodResponse{}
 	path := "/merchants/{merchantId}/paymentMethodSettings"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -209,7 +209,7 @@ func (a *PaymentMethodsMerchantLevelApi) GetAllPaymentMethods(r PaymentMethodsMe
 	if r.pageNumber != nil {
 		common.ParameterAddToQuery(queryParams, "pageNumber", r.pageNumber, "")
 	}
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -225,8 +225,8 @@ func (a *PaymentMethodsMerchantLevelApi) GetAllPaymentMethods(r PaymentMethodsMe
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -234,8 +234,8 @@ func (a *PaymentMethodsMerchantLevelApi) GetAllPaymentMethods(r PaymentMethodsMe
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -243,8 +243,8 @@ func (a *PaymentMethodsMerchantLevelApi) GetAllPaymentMethods(r PaymentMethodsMe
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -252,8 +252,8 @@ func (a *PaymentMethodsMerchantLevelApi) GetAllPaymentMethods(r PaymentMethodsMe
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -261,10 +261,10 @@ func (a *PaymentMethodsMerchantLevelApi) GetAllPaymentMethods(r PaymentMethodsMe
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type PaymentMethodsMerchantLevelApiGetApplePayDomainsConfig struct {
@@ -303,15 +303,15 @@ Returns all Apple Pay domains that are registered with the merchant account and 
 @return ApplePayInfo
 */
 
-func (a *PaymentMethodsMerchantLevelApi) GetApplePayDomains(r PaymentMethodsMerchantLevelApiGetApplePayDomainsConfig) (ApplePayInfo, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *PaymentMethodsMerchantLevelApi) GetApplePayDomains(r PaymentMethodsMerchantLevelApiGetApplePayDomainsConfig) (ApplePayInfo, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &ApplePayInfo{}
 	path := "/merchants/{merchantId}/paymentMethodSettings/{paymentMethodId}/getApplePayDomains"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"paymentMethodId"+"}", url.PathEscape(common.ParameterValueToString(r.paymentMethodId, "paymentMethodId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -327,8 +327,8 @@ func (a *PaymentMethodsMerchantLevelApi) GetApplePayDomains(r PaymentMethodsMerc
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -336,8 +336,8 @@ func (a *PaymentMethodsMerchantLevelApi) GetApplePayDomains(r PaymentMethodsMerc
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -345,8 +345,8 @@ func (a *PaymentMethodsMerchantLevelApi) GetApplePayDomains(r PaymentMethodsMerc
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -354,8 +354,8 @@ func (a *PaymentMethodsMerchantLevelApi) GetApplePayDomains(r PaymentMethodsMerc
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -363,10 +363,10 @@ func (a *PaymentMethodsMerchantLevelApi) GetApplePayDomains(r PaymentMethodsMerc
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type PaymentMethodsMerchantLevelApiGetPaymentMethodDetailsConfig struct {
@@ -405,15 +405,15 @@ Returns details for the merchant account and the payment method identified in th
 @return PaymentMethod
 */
 
-func (a *PaymentMethodsMerchantLevelApi) GetPaymentMethodDetails(r PaymentMethodsMerchantLevelApiGetPaymentMethodDetailsConfig) (PaymentMethod, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *PaymentMethodsMerchantLevelApi) GetPaymentMethodDetails(r PaymentMethodsMerchantLevelApiGetPaymentMethodDetailsConfig) (PaymentMethod, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &PaymentMethod{}
 	path := "/merchants/{merchantId}/paymentMethodSettings/{paymentMethodId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"paymentMethodId"+"}", url.PathEscape(common.ParameterValueToString(r.paymentMethodId, "paymentMethodId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -429,8 +429,8 @@ func (a *PaymentMethodsMerchantLevelApi) GetPaymentMethodDetails(r PaymentMethod
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -438,8 +438,8 @@ func (a *PaymentMethodsMerchantLevelApi) GetPaymentMethodDetails(r PaymentMethod
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -447,8 +447,8 @@ func (a *PaymentMethodsMerchantLevelApi) GetPaymentMethodDetails(r PaymentMethod
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -456,8 +456,8 @@ func (a *PaymentMethodsMerchantLevelApi) GetPaymentMethodDetails(r PaymentMethod
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -465,10 +465,10 @@ func (a *PaymentMethodsMerchantLevelApi) GetPaymentMethodDetails(r PaymentMethod
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type PaymentMethodsMerchantLevelApiRequestPaymentMethodConfig struct {
@@ -510,14 +510,14 @@ Sends a request to add a new payment method to the merchant account identified i
 @return PaymentMethod
 */
 
-func (a *PaymentMethodsMerchantLevelApi) RequestPaymentMethod(r PaymentMethodsMerchantLevelApiRequestPaymentMethodConfig) (PaymentMethod, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *PaymentMethodsMerchantLevelApi) RequestPaymentMethod(r PaymentMethodsMerchantLevelApiRequestPaymentMethodConfig) (PaymentMethod, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &PaymentMethod{}
 	path := "/merchants/{merchantId}/paymentMethodSettings"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		r.paymentMethodSetupInfo,
@@ -533,8 +533,8 @@ func (a *PaymentMethodsMerchantLevelApi) RequestPaymentMethod(r PaymentMethodsMe
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -542,8 +542,8 @@ func (a *PaymentMethodsMerchantLevelApi) RequestPaymentMethod(r PaymentMethodsMe
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -551,8 +551,8 @@ func (a *PaymentMethodsMerchantLevelApi) RequestPaymentMethod(r PaymentMethodsMe
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -560,8 +560,8 @@ func (a *PaymentMethodsMerchantLevelApi) RequestPaymentMethod(r PaymentMethodsMe
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -569,10 +569,10 @@ func (a *PaymentMethodsMerchantLevelApi) RequestPaymentMethod(r PaymentMethodsMe
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type PaymentMethodsMerchantLevelApiUpdatePaymentMethodConfig struct {
@@ -618,15 +618,15 @@ Updates payment method details for the merchant account and the payment method i
 @return PaymentMethod
 */
 
-func (a *PaymentMethodsMerchantLevelApi) UpdatePaymentMethod(r PaymentMethodsMerchantLevelApiUpdatePaymentMethodConfig) (PaymentMethod, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *PaymentMethodsMerchantLevelApi) UpdatePaymentMethod(r PaymentMethodsMerchantLevelApiUpdatePaymentMethodConfig) (PaymentMethod, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &PaymentMethod{}
 	path := "/merchants/{merchantId}/paymentMethodSettings/{paymentMethodId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"paymentMethodId"+"}", url.PathEscape(common.ParameterValueToString(r.paymentMethodId, "paymentMethodId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		r.updatePaymentMethodInfo,
@@ -642,8 +642,8 @@ func (a *PaymentMethodsMerchantLevelApi) UpdatePaymentMethod(r PaymentMethodsMer
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -651,8 +651,8 @@ func (a *PaymentMethodsMerchantLevelApi) UpdatePaymentMethod(r PaymentMethodsMer
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -660,8 +660,8 @@ func (a *PaymentMethodsMerchantLevelApi) UpdatePaymentMethod(r PaymentMethodsMer
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -669,8 +669,8 @@ func (a *PaymentMethodsMerchantLevelApi) UpdatePaymentMethod(r PaymentMethodsMer
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -678,8 +678,8 @@ func (a *PaymentMethodsMerchantLevelApi) UpdatePaymentMethod(r PaymentMethodsMer
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }

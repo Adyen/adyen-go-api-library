@@ -61,13 +61,13 @@ Schedules a [terminal action](https://docs.adyen.com/point-of-sale/automating-te
 @return ScheduleTerminalActionsResponse
 */
 
-func (a *TerminalActionsTerminalLevelApi) CreateTerminalAction(r TerminalActionsTerminalLevelApiCreateTerminalActionConfig) (ScheduleTerminalActionsResponse, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *TerminalActionsTerminalLevelApi) CreateTerminalAction(r TerminalActionsTerminalLevelApiCreateTerminalActionConfig) (ScheduleTerminalActionsResponse, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &ScheduleTerminalActionsResponse{}
 	path := "/terminals/scheduleActions"
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		r.scheduleTerminalActionsRequest,
@@ -83,8 +83,8 @@ func (a *TerminalActionsTerminalLevelApi) CreateTerminalAction(r TerminalActions
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -92,8 +92,8 @@ func (a *TerminalActionsTerminalLevelApi) CreateTerminalAction(r TerminalActions
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -101,8 +101,8 @@ func (a *TerminalActionsTerminalLevelApi) CreateTerminalAction(r TerminalActions
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -110,8 +110,8 @@ func (a *TerminalActionsTerminalLevelApi) CreateTerminalAction(r TerminalActions
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -119,8 +119,8 @@ func (a *TerminalActionsTerminalLevelApi) CreateTerminalAction(r TerminalActions
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }

@@ -58,15 +58,15 @@ Returns an [HMAC key](https://en.wikipedia.org/wiki/HMAC) for the webhook identi
 @return GenerateHmacKeyResponse
 */
 
-func (a *WebhooksCompanyLevelApi) GenerateHmacKey(r WebhooksCompanyLevelApiGenerateHmacKeyConfig) (GenerateHmacKeyResponse, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *WebhooksCompanyLevelApi) GenerateHmacKey(r WebhooksCompanyLevelApiGenerateHmacKeyConfig) (GenerateHmacKeyResponse, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &GenerateHmacKeyResponse{}
 	path := "/companies/{companyId}/webhooks/{webhookId}/generateHmac"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
 	path = strings.Replace(path, "{"+"webhookId"+"}", url.PathEscape(common.ParameterValueToString(r.webhookId, "webhookId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -82,8 +82,8 @@ func (a *WebhooksCompanyLevelApi) GenerateHmacKey(r WebhooksCompanyLevelApiGener
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -91,8 +91,8 @@ func (a *WebhooksCompanyLevelApi) GenerateHmacKey(r WebhooksCompanyLevelApiGener
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -100,8 +100,8 @@ func (a *WebhooksCompanyLevelApi) GenerateHmacKey(r WebhooksCompanyLevelApiGener
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -109,8 +109,8 @@ func (a *WebhooksCompanyLevelApi) GenerateHmacKey(r WebhooksCompanyLevelApiGener
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -118,10 +118,10 @@ func (a *WebhooksCompanyLevelApi) GenerateHmacKey(r WebhooksCompanyLevelApiGener
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type WebhooksCompanyLevelApiGetWebhookConfig struct {
@@ -161,15 +161,15 @@ Returns the configuration for the webhook identified in the path.  To make this 
 @return Webhook
 */
 
-func (a *WebhooksCompanyLevelApi) GetWebhook(r WebhooksCompanyLevelApiGetWebhookConfig) (Webhook, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *WebhooksCompanyLevelApi) GetWebhook(r WebhooksCompanyLevelApiGetWebhookConfig) (Webhook, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &Webhook{}
 	path := "/companies/{companyId}/webhooks/{webhookId}"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
 	path = strings.Replace(path, "{"+"webhookId"+"}", url.PathEscape(common.ParameterValueToString(r.webhookId, "webhookId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -185,8 +185,8 @@ func (a *WebhooksCompanyLevelApi) GetWebhook(r WebhooksCompanyLevelApiGetWebhook
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -194,8 +194,8 @@ func (a *WebhooksCompanyLevelApi) GetWebhook(r WebhooksCompanyLevelApiGetWebhook
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -203,8 +203,8 @@ func (a *WebhooksCompanyLevelApi) GetWebhook(r WebhooksCompanyLevelApiGetWebhook
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -212,8 +212,8 @@ func (a *WebhooksCompanyLevelApi) GetWebhook(r WebhooksCompanyLevelApiGetWebhook
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -221,10 +221,10 @@ func (a *WebhooksCompanyLevelApi) GetWebhook(r WebhooksCompanyLevelApiGetWebhook
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type WebhooksCompanyLevelApiListAllWebhooksConfig struct {
@@ -274,8 +274,8 @@ Lists all webhook configurations for the company account.  To make this request,
 @return ListWebhooksResponse
 */
 
-func (a *WebhooksCompanyLevelApi) ListAllWebhooks(r WebhooksCompanyLevelApiListAllWebhooksConfig) (ListWebhooksResponse, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *WebhooksCompanyLevelApi) ListAllWebhooks(r WebhooksCompanyLevelApiListAllWebhooksConfig) (ListWebhooksResponse, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &ListWebhooksResponse{}
 	path := "/companies/{companyId}/webhooks"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -287,7 +287,7 @@ func (a *WebhooksCompanyLevelApi) ListAllWebhooks(r WebhooksCompanyLevelApiListA
 	if r.pageSize != nil {
 		common.ParameterAddToQuery(queryParams, "pageSize", r.pageSize, "")
 	}
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -303,8 +303,8 @@ func (a *WebhooksCompanyLevelApi) ListAllWebhooks(r WebhooksCompanyLevelApiListA
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -312,8 +312,8 @@ func (a *WebhooksCompanyLevelApi) ListAllWebhooks(r WebhooksCompanyLevelApiListA
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -321,8 +321,8 @@ func (a *WebhooksCompanyLevelApi) ListAllWebhooks(r WebhooksCompanyLevelApiListA
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -330,8 +330,8 @@ func (a *WebhooksCompanyLevelApi) ListAllWebhooks(r WebhooksCompanyLevelApiListA
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -339,10 +339,10 @@ func (a *WebhooksCompanyLevelApi) ListAllWebhooks(r WebhooksCompanyLevelApiListA
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type WebhooksCompanyLevelApiRemoveWebhookConfig struct {
@@ -380,15 +380,15 @@ Remove the configuration for the webhook identified in the path.  To make this r
  * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 */
 
-func (a *WebhooksCompanyLevelApi) RemoveWebhook(r WebhooksCompanyLevelApiRemoveWebhookConfig) (*_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *WebhooksCompanyLevelApi) RemoveWebhook(r WebhooksCompanyLevelApiRemoveWebhookConfig) (*_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	var res interface{}
 	path := "/companies/{companyId}/webhooks/{webhookId}"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
 	path = strings.Replace(path, "{"+"webhookId"+"}", url.PathEscape(common.ParameterValueToString(r.webhookId, "webhookId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -404,8 +404,8 @@ func (a *WebhooksCompanyLevelApi) RemoveWebhook(r WebhooksCompanyLevelApiRemoveW
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -413,8 +413,8 @@ func (a *WebhooksCompanyLevelApi) RemoveWebhook(r WebhooksCompanyLevelApiRemoveW
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -422,8 +422,8 @@ func (a *WebhooksCompanyLevelApi) RemoveWebhook(r WebhooksCompanyLevelApiRemoveW
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -431,8 +431,8 @@ func (a *WebhooksCompanyLevelApi) RemoveWebhook(r WebhooksCompanyLevelApiRemoveW
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -440,10 +440,10 @@ func (a *WebhooksCompanyLevelApi) RemoveWebhook(r WebhooksCompanyLevelApiRemoveW
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return httpRes, serviceError, err
 	}
-	return httpRes, v
+	return httpRes, serviceError, err
 }
 
 type WebhooksCompanyLevelApiSetUpWebhookConfig struct {
@@ -485,14 +485,14 @@ Subscribe to receive webhook notifications about events related to your company 
 @return Webhook
 */
 
-func (a *WebhooksCompanyLevelApi) SetUpWebhook(r WebhooksCompanyLevelApiSetUpWebhookConfig) (Webhook, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *WebhooksCompanyLevelApi) SetUpWebhook(r WebhooksCompanyLevelApiSetUpWebhookConfig) (Webhook, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &Webhook{}
 	path := "/companies/{companyId}/webhooks"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		r.createCompanyWebhookRequest,
@@ -508,8 +508,8 @@ func (a *WebhooksCompanyLevelApi) SetUpWebhook(r WebhooksCompanyLevelApiSetUpWeb
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -517,8 +517,8 @@ func (a *WebhooksCompanyLevelApi) SetUpWebhook(r WebhooksCompanyLevelApiSetUpWeb
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -526,8 +526,8 @@ func (a *WebhooksCompanyLevelApi) SetUpWebhook(r WebhooksCompanyLevelApiSetUpWeb
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -535,8 +535,8 @@ func (a *WebhooksCompanyLevelApi) SetUpWebhook(r WebhooksCompanyLevelApiSetUpWeb
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -544,10 +544,10 @@ func (a *WebhooksCompanyLevelApi) SetUpWebhook(r WebhooksCompanyLevelApiSetUpWeb
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type WebhooksCompanyLevelApiTestWebhookConfig struct {
@@ -599,15 +599,15 @@ Sends sample notifications to test if the webhook is set up correctly.  We send 
 @return TestWebhookResponse
 */
 
-func (a *WebhooksCompanyLevelApi) TestWebhook(r WebhooksCompanyLevelApiTestWebhookConfig) (TestWebhookResponse, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *WebhooksCompanyLevelApi) TestWebhook(r WebhooksCompanyLevelApiTestWebhookConfig) (TestWebhookResponse, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &TestWebhookResponse{}
 	path := "/companies/{companyId}/webhooks/{webhookId}/test"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
 	path = strings.Replace(path, "{"+"webhookId"+"}", url.PathEscape(common.ParameterValueToString(r.webhookId, "webhookId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		r.testCompanyWebhookRequest,
@@ -623,8 +623,8 @@ func (a *WebhooksCompanyLevelApi) TestWebhook(r WebhooksCompanyLevelApiTestWebho
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -632,8 +632,8 @@ func (a *WebhooksCompanyLevelApi) TestWebhook(r WebhooksCompanyLevelApiTestWebho
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -641,8 +641,8 @@ func (a *WebhooksCompanyLevelApi) TestWebhook(r WebhooksCompanyLevelApiTestWebho
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -650,8 +650,8 @@ func (a *WebhooksCompanyLevelApi) TestWebhook(r WebhooksCompanyLevelApiTestWebho
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -659,10 +659,10 @@ func (a *WebhooksCompanyLevelApi) TestWebhook(r WebhooksCompanyLevelApiTestWebho
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type WebhooksCompanyLevelApiUpdateWebhookConfig struct {
@@ -708,15 +708,15 @@ Make changes to the configuration of the webhook identified in the path. The req
 @return Webhook
 */
 
-func (a *WebhooksCompanyLevelApi) UpdateWebhook(r WebhooksCompanyLevelApiUpdateWebhookConfig) (Webhook, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *WebhooksCompanyLevelApi) UpdateWebhook(r WebhooksCompanyLevelApiUpdateWebhookConfig) (Webhook, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &Webhook{}
 	path := "/companies/{companyId}/webhooks/{webhookId}"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
 	path = strings.Replace(path, "{"+"webhookId"+"}", url.PathEscape(common.ParameterValueToString(r.webhookId, "webhookId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		r.updateCompanyWebhookRequest,
@@ -732,8 +732,8 @@ func (a *WebhooksCompanyLevelApi) UpdateWebhook(r WebhooksCompanyLevelApiUpdateW
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -741,8 +741,8 @@ func (a *WebhooksCompanyLevelApi) UpdateWebhook(r WebhooksCompanyLevelApiUpdateW
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -750,8 +750,8 @@ func (a *WebhooksCompanyLevelApi) UpdateWebhook(r WebhooksCompanyLevelApiUpdateW
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -759,8 +759,8 @@ func (a *WebhooksCompanyLevelApi) UpdateWebhook(r WebhooksCompanyLevelApiUpdateW
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -768,8 +768,8 @@ func (a *WebhooksCompanyLevelApi) UpdateWebhook(r WebhooksCompanyLevelApiUpdateW
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }

@@ -59,13 +59,13 @@ Creates a merchant account for the company account specified in the request.  Us
 @return CreateMerchantResponse
 */
 
-func (a *AccountMerchantLevelApi) CreateMerchantAccount(r AccountMerchantLevelApiCreateMerchantAccountConfig) (CreateMerchantResponse, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *AccountMerchantLevelApi) CreateMerchantAccount(r AccountMerchantLevelApiCreateMerchantAccountConfig) (CreateMerchantResponse, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &CreateMerchantResponse{}
 	path := "/merchants"
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		r.createMerchantRequest,
@@ -81,8 +81,8 @@ func (a *AccountMerchantLevelApi) CreateMerchantAccount(r AccountMerchantLevelAp
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -90,8 +90,8 @@ func (a *AccountMerchantLevelApi) CreateMerchantAccount(r AccountMerchantLevelAp
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -99,8 +99,8 @@ func (a *AccountMerchantLevelApi) CreateMerchantAccount(r AccountMerchantLevelAp
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -108,8 +108,8 @@ func (a *AccountMerchantLevelApi) CreateMerchantAccount(r AccountMerchantLevelAp
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -117,10 +117,10 @@ func (a *AccountMerchantLevelApi) CreateMerchantAccount(r AccountMerchantLevelAp
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type AccountMerchantLevelApiGetMerchantAccountConfig struct {
@@ -155,14 +155,14 @@ Returns the merchant account specified in the path. Your API credential must hav
 @return Merchant
 */
 
-func (a *AccountMerchantLevelApi) GetMerchantAccount(r AccountMerchantLevelApiGetMerchantAccountConfig) (Merchant, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *AccountMerchantLevelApi) GetMerchantAccount(r AccountMerchantLevelApiGetMerchantAccountConfig) (Merchant, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &Merchant{}
 	path := "/merchants/{merchantId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -178,8 +178,8 @@ func (a *AccountMerchantLevelApi) GetMerchantAccount(r AccountMerchantLevelApiGe
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -187,8 +187,8 @@ func (a *AccountMerchantLevelApi) GetMerchantAccount(r AccountMerchantLevelApiGe
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -196,8 +196,8 @@ func (a *AccountMerchantLevelApi) GetMerchantAccount(r AccountMerchantLevelApiGe
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -205,8 +205,8 @@ func (a *AccountMerchantLevelApi) GetMerchantAccount(r AccountMerchantLevelApiGe
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -214,10 +214,10 @@ func (a *AccountMerchantLevelApi) GetMerchantAccount(r AccountMerchantLevelApiGe
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type AccountMerchantLevelApiListMerchantAccountsConfig struct {
@@ -262,8 +262,8 @@ Returns the list of merchant accounts that your API credential has access to. Th
 @return ListMerchantResponse
 */
 
-func (a *AccountMerchantLevelApi) ListMerchantAccounts(r AccountMerchantLevelApiListMerchantAccountsConfig) (ListMerchantResponse, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *AccountMerchantLevelApi) ListMerchantAccounts(r AccountMerchantLevelApiListMerchantAccountsConfig) (ListMerchantResponse, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &ListMerchantResponse{}
 	path := "/merchants"
 	queryParams := url.Values{}
@@ -274,7 +274,7 @@ func (a *AccountMerchantLevelApi) ListMerchantAccounts(r AccountMerchantLevelApi
 	if r.pageSize != nil {
 		common.ParameterAddToQuery(queryParams, "pageSize", r.pageSize, "")
 	}
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -290,8 +290,8 @@ func (a *AccountMerchantLevelApi) ListMerchantAccounts(r AccountMerchantLevelApi
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -299,8 +299,8 @@ func (a *AccountMerchantLevelApi) ListMerchantAccounts(r AccountMerchantLevelApi
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -308,8 +308,8 @@ func (a *AccountMerchantLevelApi) ListMerchantAccounts(r AccountMerchantLevelApi
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -317,8 +317,8 @@ func (a *AccountMerchantLevelApi) ListMerchantAccounts(r AccountMerchantLevelApi
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -326,10 +326,10 @@ func (a *AccountMerchantLevelApi) ListMerchantAccounts(r AccountMerchantLevelApi
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type AccountMerchantLevelApiRequestToActivateMerchantAccountConfig struct {
@@ -368,14 +368,14 @@ Sends a request to activate the merchant account identified in the path.  You ge
 @return RequestActivationResponse
 */
 
-func (a *AccountMerchantLevelApi) RequestToActivateMerchantAccount(r AccountMerchantLevelApiRequestToActivateMerchantAccountConfig) (RequestActivationResponse, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *AccountMerchantLevelApi) RequestToActivateMerchantAccount(r AccountMerchantLevelApiRequestToActivateMerchantAccountConfig) (RequestActivationResponse, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &RequestActivationResponse{}
 	path := "/merchants/{merchantId}/activate"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -391,8 +391,8 @@ func (a *AccountMerchantLevelApi) RequestToActivateMerchantAccount(r AccountMerc
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -400,8 +400,8 @@ func (a *AccountMerchantLevelApi) RequestToActivateMerchantAccount(r AccountMerc
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -409,8 +409,8 @@ func (a *AccountMerchantLevelApi) RequestToActivateMerchantAccount(r AccountMerc
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -418,8 +418,8 @@ func (a *AccountMerchantLevelApi) RequestToActivateMerchantAccount(r AccountMerc
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -427,8 +427,8 @@ func (a *AccountMerchantLevelApi) RequestToActivateMerchantAccount(r AccountMerc
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }

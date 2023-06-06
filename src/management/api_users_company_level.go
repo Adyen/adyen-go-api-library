@@ -61,14 +61,14 @@ Creates the user for the &#x60;companyId&#x60; identified in the path.  To make 
 @return CreateCompanyUserResponse
 */
 
-func (a *UsersCompanyLevelApi) CreateNewUser(r UsersCompanyLevelApiCreateNewUserConfig) (CreateCompanyUserResponse, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *UsersCompanyLevelApi) CreateNewUser(r UsersCompanyLevelApiCreateNewUserConfig) (CreateCompanyUserResponse, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &CreateCompanyUserResponse{}
 	path := "/companies/{companyId}/users"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		r.createCompanyUserRequest,
@@ -84,8 +84,8 @@ func (a *UsersCompanyLevelApi) CreateNewUser(r UsersCompanyLevelApiCreateNewUser
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -93,8 +93,8 @@ func (a *UsersCompanyLevelApi) CreateNewUser(r UsersCompanyLevelApiCreateNewUser
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -102,8 +102,8 @@ func (a *UsersCompanyLevelApi) CreateNewUser(r UsersCompanyLevelApiCreateNewUser
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -111,8 +111,8 @@ func (a *UsersCompanyLevelApi) CreateNewUser(r UsersCompanyLevelApiCreateNewUser
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -120,10 +120,10 @@ func (a *UsersCompanyLevelApi) CreateNewUser(r UsersCompanyLevelApiCreateNewUser
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type UsersCompanyLevelApiGetUserDetailsConfig struct {
@@ -162,15 +162,15 @@ Returns user details for the &#x60;userId&#x60; and the &#x60;companyId&#x60; id
 @return CompanyUser
 */
 
-func (a *UsersCompanyLevelApi) GetUserDetails(r UsersCompanyLevelApiGetUserDetailsConfig) (CompanyUser, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *UsersCompanyLevelApi) GetUserDetails(r UsersCompanyLevelApiGetUserDetailsConfig) (CompanyUser, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &CompanyUser{}
 	path := "/companies/{companyId}/users/{userId}"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
 	path = strings.Replace(path, "{"+"userId"+"}", url.PathEscape(common.ParameterValueToString(r.userId, "userId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -186,8 +186,8 @@ func (a *UsersCompanyLevelApi) GetUserDetails(r UsersCompanyLevelApiGetUserDetai
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -195,8 +195,8 @@ func (a *UsersCompanyLevelApi) GetUserDetails(r UsersCompanyLevelApiGetUserDetai
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -204,8 +204,8 @@ func (a *UsersCompanyLevelApi) GetUserDetails(r UsersCompanyLevelApiGetUserDetai
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -213,8 +213,8 @@ func (a *UsersCompanyLevelApi) GetUserDetails(r UsersCompanyLevelApiGetUserDetai
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -222,10 +222,10 @@ func (a *UsersCompanyLevelApi) GetUserDetails(r UsersCompanyLevelApiGetUserDetai
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type UsersCompanyLevelApiListUsersConfig struct {
@@ -281,8 +281,8 @@ Returns the list of users for the &#x60;companyId&#x60; identified in the path. 
 @return ListCompanyUsersResponse
 */
 
-func (a *UsersCompanyLevelApi) ListUsers(r UsersCompanyLevelApiListUsersConfig) (ListCompanyUsersResponse, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *UsersCompanyLevelApi) ListUsers(r UsersCompanyLevelApiListUsersConfig) (ListCompanyUsersResponse, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &ListCompanyUsersResponse{}
 	path := "/companies/{companyId}/users"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -297,7 +297,7 @@ func (a *UsersCompanyLevelApi) ListUsers(r UsersCompanyLevelApiListUsersConfig) 
 	if r.username != nil {
 		common.ParameterAddToQuery(queryParams, "username", r.username, "")
 	}
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -313,8 +313,8 @@ func (a *UsersCompanyLevelApi) ListUsers(r UsersCompanyLevelApiListUsersConfig) 
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -322,8 +322,8 @@ func (a *UsersCompanyLevelApi) ListUsers(r UsersCompanyLevelApiListUsersConfig) 
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -331,8 +331,8 @@ func (a *UsersCompanyLevelApi) ListUsers(r UsersCompanyLevelApiListUsersConfig) 
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -340,8 +340,8 @@ func (a *UsersCompanyLevelApi) ListUsers(r UsersCompanyLevelApiListUsersConfig) 
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -349,10 +349,10 @@ func (a *UsersCompanyLevelApi) ListUsers(r UsersCompanyLevelApiListUsersConfig) 
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type UsersCompanyLevelApiUpdateUserDetailsConfig struct {
@@ -398,15 +398,15 @@ Updates user details for the &#x60;userId&#x60; and the &#x60;companyId&#x60; id
 @return CompanyUser
 */
 
-func (a *UsersCompanyLevelApi) UpdateUserDetails(r UsersCompanyLevelApiUpdateUserDetailsConfig) (CompanyUser, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *UsersCompanyLevelApi) UpdateUserDetails(r UsersCompanyLevelApiUpdateUserDetailsConfig) (CompanyUser, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &CompanyUser{}
 	path := "/companies/{companyId}/users/{userId}"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
 	path = strings.Replace(path, "{"+"userId"+"}", url.PathEscape(common.ParameterValueToString(r.userId, "userId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		r.updateCompanyUserRequest,
@@ -422,8 +422,8 @@ func (a *UsersCompanyLevelApi) UpdateUserDetails(r UsersCompanyLevelApiUpdateUse
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -431,8 +431,8 @@ func (a *UsersCompanyLevelApi) UpdateUserDetails(r UsersCompanyLevelApiUpdateUse
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -440,8 +440,8 @@ func (a *UsersCompanyLevelApi) UpdateUserDetails(r UsersCompanyLevelApiUpdateUse
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -449,8 +449,8 @@ func (a *UsersCompanyLevelApi) UpdateUserDetails(r UsersCompanyLevelApiUpdateUse
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -458,8 +458,8 @@ func (a *UsersCompanyLevelApi) UpdateUserDetails(r UsersCompanyLevelApiUpdateUse
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }

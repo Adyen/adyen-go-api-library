@@ -58,15 +58,15 @@ Returns the details of the [terminal action](https://docs.adyen.com/point-of-sal
 @return ExternalTerminalAction
 */
 
-func (a *TerminalActionsCompanyLevelApi) GetTerminalAction(r TerminalActionsCompanyLevelApiGetTerminalActionConfig) (ExternalTerminalAction, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *TerminalActionsCompanyLevelApi) GetTerminalAction(r TerminalActionsCompanyLevelApiGetTerminalActionConfig) (ExternalTerminalAction, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &ExternalTerminalAction{}
 	path := "/companies/{companyId}/terminalActions/{actionId}"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
 	path = strings.Replace(path, "{"+"actionId"+"}", url.PathEscape(common.ParameterValueToString(r.actionId, "actionId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -82,8 +82,8 @@ func (a *TerminalActionsCompanyLevelApi) GetTerminalAction(r TerminalActionsComp
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -91,8 +91,8 @@ func (a *TerminalActionsCompanyLevelApi) GetTerminalAction(r TerminalActionsComp
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -100,8 +100,8 @@ func (a *TerminalActionsCompanyLevelApi) GetTerminalAction(r TerminalActionsComp
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -109,8 +109,8 @@ func (a *TerminalActionsCompanyLevelApi) GetTerminalAction(r TerminalActionsComp
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -118,10 +118,10 @@ func (a *TerminalActionsCompanyLevelApi) GetTerminalAction(r TerminalActionsComp
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type TerminalActionsCompanyLevelApiListAndroidAppsConfig struct {
@@ -172,8 +172,8 @@ Returns a list of the Android apps that are available for the company identified
 @return AndroidAppsResponse
 */
 
-func (a *TerminalActionsCompanyLevelApi) ListAndroidApps(r TerminalActionsCompanyLevelApiListAndroidAppsConfig) (AndroidAppsResponse, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *TerminalActionsCompanyLevelApi) ListAndroidApps(r TerminalActionsCompanyLevelApiListAndroidAppsConfig) (AndroidAppsResponse, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &AndroidAppsResponse{}
 	path := "/companies/{companyId}/androidApps"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -185,7 +185,7 @@ func (a *TerminalActionsCompanyLevelApi) ListAndroidApps(r TerminalActionsCompan
 	if r.pageSize != nil {
 		common.ParameterAddToQuery(queryParams, "pageSize", r.pageSize, "")
 	}
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -201,8 +201,8 @@ func (a *TerminalActionsCompanyLevelApi) ListAndroidApps(r TerminalActionsCompan
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -210,8 +210,8 @@ func (a *TerminalActionsCompanyLevelApi) ListAndroidApps(r TerminalActionsCompan
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -219,8 +219,8 @@ func (a *TerminalActionsCompanyLevelApi) ListAndroidApps(r TerminalActionsCompan
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -228,8 +228,8 @@ func (a *TerminalActionsCompanyLevelApi) ListAndroidApps(r TerminalActionsCompan
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -237,10 +237,10 @@ func (a *TerminalActionsCompanyLevelApi) ListAndroidApps(r TerminalActionsCompan
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type TerminalActionsCompanyLevelApiListAndroidCertificatesConfig struct {
@@ -291,8 +291,8 @@ Returns a list of the Android certificates that are available for the company id
 @return AndroidCertificatesResponse
 */
 
-func (a *TerminalActionsCompanyLevelApi) ListAndroidCertificates(r TerminalActionsCompanyLevelApiListAndroidCertificatesConfig) (AndroidCertificatesResponse, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *TerminalActionsCompanyLevelApi) ListAndroidCertificates(r TerminalActionsCompanyLevelApiListAndroidCertificatesConfig) (AndroidCertificatesResponse, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &AndroidCertificatesResponse{}
 	path := "/companies/{companyId}/androidCertificates"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -304,7 +304,7 @@ func (a *TerminalActionsCompanyLevelApi) ListAndroidCertificates(r TerminalActio
 	if r.pageSize != nil {
 		common.ParameterAddToQuery(queryParams, "pageSize", r.pageSize, "")
 	}
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -320,8 +320,8 @@ func (a *TerminalActionsCompanyLevelApi) ListAndroidCertificates(r TerminalActio
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -329,8 +329,8 @@ func (a *TerminalActionsCompanyLevelApi) ListAndroidCertificates(r TerminalActio
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -338,8 +338,8 @@ func (a *TerminalActionsCompanyLevelApi) ListAndroidCertificates(r TerminalActio
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -347,8 +347,8 @@ func (a *TerminalActionsCompanyLevelApi) ListAndroidCertificates(r TerminalActio
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -356,10 +356,10 @@ func (a *TerminalActionsCompanyLevelApi) ListAndroidCertificates(r TerminalActio
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type TerminalActionsCompanyLevelApiListTerminalActionsConfig struct {
@@ -422,8 +422,8 @@ Returns the [terminal actions](https://docs.adyen.com/point-of-sale/automating-t
 @return ListExternalTerminalActionsResponse
 */
 
-func (a *TerminalActionsCompanyLevelApi) ListTerminalActions(r TerminalActionsCompanyLevelApiListTerminalActionsConfig) (ListExternalTerminalActionsResponse, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *TerminalActionsCompanyLevelApi) ListTerminalActions(r TerminalActionsCompanyLevelApiListTerminalActionsConfig) (ListExternalTerminalActionsResponse, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &ListExternalTerminalActionsResponse{}
 	path := "/companies/{companyId}/terminalActions"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -441,7 +441,7 @@ func (a *TerminalActionsCompanyLevelApi) ListTerminalActions(r TerminalActionsCo
 	if r.type_ != nil {
 		common.ParameterAddToQuery(queryParams, "type", r.type_, "")
 	}
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -457,8 +457,8 @@ func (a *TerminalActionsCompanyLevelApi) ListTerminalActions(r TerminalActionsCo
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -466,8 +466,8 @@ func (a *TerminalActionsCompanyLevelApi) ListTerminalActions(r TerminalActionsCo
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -475,8 +475,8 @@ func (a *TerminalActionsCompanyLevelApi) ListTerminalActions(r TerminalActionsCo
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -484,8 +484,8 @@ func (a *TerminalActionsCompanyLevelApi) ListTerminalActions(r TerminalActionsCo
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -493,8 +493,8 @@ func (a *TerminalActionsCompanyLevelApi) ListTerminalActions(r TerminalActionsCo
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }

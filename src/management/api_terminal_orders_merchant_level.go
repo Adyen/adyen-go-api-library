@@ -60,15 +60,15 @@ Cancels the terminal products order identified in the path. Cancelling is only p
 @return TerminalOrder
 */
 
-func (a *TerminalOrdersMerchantLevelApi) CancelOrder(r TerminalOrdersMerchantLevelApiCancelOrderConfig) (TerminalOrder, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *TerminalOrdersMerchantLevelApi) CancelOrder(r TerminalOrdersMerchantLevelApiCancelOrderConfig) (TerminalOrder, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &TerminalOrder{}
 	path := "/merchants/{merchantId}/terminalOrders/{orderId}/cancel"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"orderId"+"}", url.PathEscape(common.ParameterValueToString(r.orderId, "orderId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -84,8 +84,8 @@ func (a *TerminalOrdersMerchantLevelApi) CancelOrder(r TerminalOrdersMerchantLev
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -93,8 +93,8 @@ func (a *TerminalOrdersMerchantLevelApi) CancelOrder(r TerminalOrdersMerchantLev
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -102,8 +102,8 @@ func (a *TerminalOrdersMerchantLevelApi) CancelOrder(r TerminalOrdersMerchantLev
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -111,8 +111,8 @@ func (a *TerminalOrdersMerchantLevelApi) CancelOrder(r TerminalOrdersMerchantLev
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -120,10 +120,10 @@ func (a *TerminalOrdersMerchantLevelApi) CancelOrder(r TerminalOrdersMerchantLev
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type TerminalOrdersMerchantLevelApiCreateOrderConfig struct {
@@ -165,14 +165,14 @@ Creates an order for payment terminal products for the merchant account identifi
 @return TerminalOrder
 */
 
-func (a *TerminalOrdersMerchantLevelApi) CreateOrder(r TerminalOrdersMerchantLevelApiCreateOrderConfig) (TerminalOrder, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *TerminalOrdersMerchantLevelApi) CreateOrder(r TerminalOrdersMerchantLevelApiCreateOrderConfig) (TerminalOrder, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &TerminalOrder{}
 	path := "/merchants/{merchantId}/terminalOrders"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		r.terminalOrderRequest,
@@ -188,8 +188,8 @@ func (a *TerminalOrdersMerchantLevelApi) CreateOrder(r TerminalOrdersMerchantLev
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -197,8 +197,8 @@ func (a *TerminalOrdersMerchantLevelApi) CreateOrder(r TerminalOrdersMerchantLev
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -206,8 +206,8 @@ func (a *TerminalOrdersMerchantLevelApi) CreateOrder(r TerminalOrdersMerchantLev
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -215,8 +215,8 @@ func (a *TerminalOrdersMerchantLevelApi) CreateOrder(r TerminalOrdersMerchantLev
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -224,10 +224,10 @@ func (a *TerminalOrdersMerchantLevelApi) CreateOrder(r TerminalOrdersMerchantLev
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type TerminalOrdersMerchantLevelApiCreateShippingLocationConfig struct {
@@ -269,14 +269,14 @@ Creates a shipping location for the merchant account identified in the path. A s
 @return ShippingLocation
 */
 
-func (a *TerminalOrdersMerchantLevelApi) CreateShippingLocation(r TerminalOrdersMerchantLevelApiCreateShippingLocationConfig) (ShippingLocation, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *TerminalOrdersMerchantLevelApi) CreateShippingLocation(r TerminalOrdersMerchantLevelApiCreateShippingLocationConfig) (ShippingLocation, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &ShippingLocation{}
 	path := "/merchants/{merchantId}/shippingLocations"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		r.shippingLocation,
@@ -292,8 +292,8 @@ func (a *TerminalOrdersMerchantLevelApi) CreateShippingLocation(r TerminalOrders
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -301,8 +301,8 @@ func (a *TerminalOrdersMerchantLevelApi) CreateShippingLocation(r TerminalOrders
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -310,8 +310,8 @@ func (a *TerminalOrdersMerchantLevelApi) CreateShippingLocation(r TerminalOrders
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -319,8 +319,8 @@ func (a *TerminalOrdersMerchantLevelApi) CreateShippingLocation(r TerminalOrders
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -328,10 +328,10 @@ func (a *TerminalOrdersMerchantLevelApi) CreateShippingLocation(r TerminalOrders
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type TerminalOrdersMerchantLevelApiGetOrderConfig struct {
@@ -371,15 +371,15 @@ Returns the details of the terminal products order identified in the path.  To m
 @return TerminalOrder
 */
 
-func (a *TerminalOrdersMerchantLevelApi) GetOrder(r TerminalOrdersMerchantLevelApiGetOrderConfig) (TerminalOrder, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *TerminalOrdersMerchantLevelApi) GetOrder(r TerminalOrdersMerchantLevelApiGetOrderConfig) (TerminalOrder, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &TerminalOrder{}
 	path := "/merchants/{merchantId}/terminalOrders/{orderId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"orderId"+"}", url.PathEscape(common.ParameterValueToString(r.orderId, "orderId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -395,8 +395,8 @@ func (a *TerminalOrdersMerchantLevelApi) GetOrder(r TerminalOrdersMerchantLevelA
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -404,8 +404,8 @@ func (a *TerminalOrdersMerchantLevelApi) GetOrder(r TerminalOrdersMerchantLevelA
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -413,8 +413,8 @@ func (a *TerminalOrdersMerchantLevelApi) GetOrder(r TerminalOrdersMerchantLevelA
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -422,8 +422,8 @@ func (a *TerminalOrdersMerchantLevelApi) GetOrder(r TerminalOrdersMerchantLevelA
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -431,10 +431,10 @@ func (a *TerminalOrdersMerchantLevelApi) GetOrder(r TerminalOrdersMerchantLevelA
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type TerminalOrdersMerchantLevelApiListBillingEntitiesConfig struct {
@@ -478,8 +478,8 @@ Returns the billing entities of the merchant account identified in the path. A b
 @return BillingEntitiesResponse
 */
 
-func (a *TerminalOrdersMerchantLevelApi) ListBillingEntities(r TerminalOrdersMerchantLevelApiListBillingEntitiesConfig) (BillingEntitiesResponse, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *TerminalOrdersMerchantLevelApi) ListBillingEntities(r TerminalOrdersMerchantLevelApiListBillingEntitiesConfig) (BillingEntitiesResponse, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &BillingEntitiesResponse{}
 	path := "/merchants/{merchantId}/billingEntities"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -488,7 +488,7 @@ func (a *TerminalOrdersMerchantLevelApi) ListBillingEntities(r TerminalOrdersMer
 	if r.name != nil {
 		common.ParameterAddToQuery(queryParams, "name", r.name, "")
 	}
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -504,8 +504,8 @@ func (a *TerminalOrdersMerchantLevelApi) ListBillingEntities(r TerminalOrdersMer
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -513,8 +513,8 @@ func (a *TerminalOrdersMerchantLevelApi) ListBillingEntities(r TerminalOrdersMer
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -522,8 +522,8 @@ func (a *TerminalOrdersMerchantLevelApi) ListBillingEntities(r TerminalOrdersMer
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -531,8 +531,8 @@ func (a *TerminalOrdersMerchantLevelApi) ListBillingEntities(r TerminalOrdersMer
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -540,10 +540,10 @@ func (a *TerminalOrdersMerchantLevelApi) ListBillingEntities(r TerminalOrdersMer
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type TerminalOrdersMerchantLevelApiListOrdersConfig struct {
@@ -607,8 +607,8 @@ Returns a list of terminal products orders for the merchant account identified i
 @return TerminalOrdersResponse
 */
 
-func (a *TerminalOrdersMerchantLevelApi) ListOrders(r TerminalOrdersMerchantLevelApiListOrdersConfig) (TerminalOrdersResponse, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *TerminalOrdersMerchantLevelApi) ListOrders(r TerminalOrdersMerchantLevelApiListOrdersConfig) (TerminalOrdersResponse, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &TerminalOrdersResponse{}
 	path := "/merchants/{merchantId}/terminalOrders"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -626,7 +626,7 @@ func (a *TerminalOrdersMerchantLevelApi) ListOrders(r TerminalOrdersMerchantLeve
 	if r.limit != nil {
 		common.ParameterAddToQuery(queryParams, "limit", r.limit, "")
 	}
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -642,8 +642,8 @@ func (a *TerminalOrdersMerchantLevelApi) ListOrders(r TerminalOrdersMerchantLeve
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -651,8 +651,8 @@ func (a *TerminalOrdersMerchantLevelApi) ListOrders(r TerminalOrdersMerchantLeve
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -660,8 +660,8 @@ func (a *TerminalOrdersMerchantLevelApi) ListOrders(r TerminalOrdersMerchantLeve
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -669,8 +669,8 @@ func (a *TerminalOrdersMerchantLevelApi) ListOrders(r TerminalOrdersMerchantLeve
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -678,10 +678,10 @@ func (a *TerminalOrdersMerchantLevelApi) ListOrders(r TerminalOrdersMerchantLeve
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type TerminalOrdersMerchantLevelApiListShippingLocationsConfig struct {
@@ -739,8 +739,8 @@ Returns the shipping locations for the merchant account identified in the path. 
 @return ShippingLocationsResponse
 */
 
-func (a *TerminalOrdersMerchantLevelApi) ListShippingLocations(r TerminalOrdersMerchantLevelApiListShippingLocationsConfig) (ShippingLocationsResponse, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *TerminalOrdersMerchantLevelApi) ListShippingLocations(r TerminalOrdersMerchantLevelApiListShippingLocationsConfig) (ShippingLocationsResponse, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &ShippingLocationsResponse{}
 	path := "/merchants/{merchantId}/shippingLocations"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -755,7 +755,7 @@ func (a *TerminalOrdersMerchantLevelApi) ListShippingLocations(r TerminalOrdersM
 	if r.limit != nil {
 		common.ParameterAddToQuery(queryParams, "limit", r.limit, "")
 	}
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -771,8 +771,8 @@ func (a *TerminalOrdersMerchantLevelApi) ListShippingLocations(r TerminalOrdersM
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -780,8 +780,8 @@ func (a *TerminalOrdersMerchantLevelApi) ListShippingLocations(r TerminalOrdersM
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -789,8 +789,8 @@ func (a *TerminalOrdersMerchantLevelApi) ListShippingLocations(r TerminalOrdersM
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -798,8 +798,8 @@ func (a *TerminalOrdersMerchantLevelApi) ListShippingLocations(r TerminalOrdersM
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -807,10 +807,10 @@ func (a *TerminalOrdersMerchantLevelApi) ListShippingLocations(r TerminalOrdersM
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type TerminalOrdersMerchantLevelApiListTerminalModelsConfig struct {
@@ -846,14 +846,14 @@ Returns the payment terminal models that merchant account identified in the path
 @return TerminalModelsResponse
 */
 
-func (a *TerminalOrdersMerchantLevelApi) ListTerminalModels(r TerminalOrdersMerchantLevelApiListTerminalModelsConfig) (TerminalModelsResponse, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *TerminalOrdersMerchantLevelApi) ListTerminalModels(r TerminalOrdersMerchantLevelApiListTerminalModelsConfig) (TerminalModelsResponse, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &TerminalModelsResponse{}
 	path := "/merchants/{merchantId}/terminalModels"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -869,8 +869,8 @@ func (a *TerminalOrdersMerchantLevelApi) ListTerminalModels(r TerminalOrdersMerc
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -878,8 +878,8 @@ func (a *TerminalOrdersMerchantLevelApi) ListTerminalModels(r TerminalOrdersMerc
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -887,8 +887,8 @@ func (a *TerminalOrdersMerchantLevelApi) ListTerminalModels(r TerminalOrdersMerc
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -896,8 +896,8 @@ func (a *TerminalOrdersMerchantLevelApi) ListTerminalModels(r TerminalOrdersMerc
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -905,10 +905,10 @@ func (a *TerminalOrdersMerchantLevelApi) ListTerminalModels(r TerminalOrdersMerc
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type TerminalOrdersMerchantLevelApiListTerminalProductsConfig struct {
@@ -972,8 +972,8 @@ Returns a country-specific list of payment terminal packages and parts that the 
 @return TerminalProductsResponse
 */
 
-func (a *TerminalOrdersMerchantLevelApi) ListTerminalProducts(r TerminalOrdersMerchantLevelApiListTerminalProductsConfig) (TerminalProductsResponse, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *TerminalOrdersMerchantLevelApi) ListTerminalProducts(r TerminalOrdersMerchantLevelApiListTerminalProductsConfig) (TerminalProductsResponse, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &TerminalProductsResponse{}
 	path := "/merchants/{merchantId}/terminalProducts"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -991,7 +991,7 @@ func (a *TerminalOrdersMerchantLevelApi) ListTerminalProducts(r TerminalOrdersMe
 	if r.limit != nil {
 		common.ParameterAddToQuery(queryParams, "limit", r.limit, "")
 	}
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -1007,8 +1007,8 @@ func (a *TerminalOrdersMerchantLevelApi) ListTerminalProducts(r TerminalOrdersMe
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -1016,8 +1016,8 @@ func (a *TerminalOrdersMerchantLevelApi) ListTerminalProducts(r TerminalOrdersMe
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -1025,8 +1025,8 @@ func (a *TerminalOrdersMerchantLevelApi) ListTerminalProducts(r TerminalOrdersMe
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -1034,8 +1034,8 @@ func (a *TerminalOrdersMerchantLevelApi) ListTerminalProducts(r TerminalOrdersMe
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -1043,10 +1043,10 @@ func (a *TerminalOrdersMerchantLevelApi) ListTerminalProducts(r TerminalOrdersMe
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type TerminalOrdersMerchantLevelApiUpdateOrderConfig struct {
@@ -1098,15 +1098,15 @@ Updates the terminal products order identified in the path. Updating is only pos
 @return TerminalOrder
 */
 
-func (a *TerminalOrdersMerchantLevelApi) UpdateOrder(r TerminalOrdersMerchantLevelApiUpdateOrderConfig) (TerminalOrder, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *TerminalOrdersMerchantLevelApi) UpdateOrder(r TerminalOrdersMerchantLevelApiUpdateOrderConfig) (TerminalOrder, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &TerminalOrder{}
 	path := "/merchants/{merchantId}/terminalOrders/{orderId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"orderId"+"}", url.PathEscape(common.ParameterValueToString(r.orderId, "orderId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		r.terminalOrderRequest,
@@ -1122,8 +1122,8 @@ func (a *TerminalOrdersMerchantLevelApi) UpdateOrder(r TerminalOrdersMerchantLev
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -1131,8 +1131,8 @@ func (a *TerminalOrdersMerchantLevelApi) UpdateOrder(r TerminalOrdersMerchantLev
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -1140,8 +1140,8 @@ func (a *TerminalOrdersMerchantLevelApi) UpdateOrder(r TerminalOrdersMerchantLev
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -1149,8 +1149,8 @@ func (a *TerminalOrdersMerchantLevelApi) UpdateOrder(r TerminalOrdersMerchantLev
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -1158,8 +1158,8 @@ func (a *TerminalOrdersMerchantLevelApi) UpdateOrder(r TerminalOrdersMerchantLev
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }

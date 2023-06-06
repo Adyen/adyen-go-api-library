@@ -58,15 +58,15 @@ Returns a new [client key](https://docs.adyen.com/development-resources/client-s
 @return GenerateClientKeyResponse
 */
 
-func (a *ClientKeyMerchantLevelApi) GenerateNewClientKey(r ClientKeyMerchantLevelApiGenerateNewClientKeyConfig) (GenerateClientKeyResponse, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *ClientKeyMerchantLevelApi) GenerateNewClientKey(r ClientKeyMerchantLevelApiGenerateNewClientKeyConfig) (GenerateClientKeyResponse, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &GenerateClientKeyResponse{}
 	path := "/merchants/{merchantId}/apiCredentials/{apiCredentialId}/generateClientKey"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"apiCredentialId"+"}", url.PathEscape(common.ParameterValueToString(r.apiCredentialId, "apiCredentialId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -82,8 +82,8 @@ func (a *ClientKeyMerchantLevelApi) GenerateNewClientKey(r ClientKeyMerchantLeve
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -91,8 +91,8 @@ func (a *ClientKeyMerchantLevelApi) GenerateNewClientKey(r ClientKeyMerchantLeve
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -100,8 +100,8 @@ func (a *ClientKeyMerchantLevelApi) GenerateNewClientKey(r ClientKeyMerchantLeve
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -109,8 +109,8 @@ func (a *ClientKeyMerchantLevelApi) GenerateNewClientKey(r ClientKeyMerchantLeve
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -118,8 +118,8 @@ func (a *ClientKeyMerchantLevelApi) GenerateNewClientKey(r ClientKeyMerchantLeve
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }

@@ -58,15 +58,15 @@ Returns an [HMAC key](https://en.wikipedia.org/wiki/HMAC) for the webhook identi
 @return GenerateHmacKeyResponse
 */
 
-func (a *WebhooksMerchantLevelApi) GenerateHmacKey(r WebhooksMerchantLevelApiGenerateHmacKeyConfig) (GenerateHmacKeyResponse, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *WebhooksMerchantLevelApi) GenerateHmacKey(r WebhooksMerchantLevelApiGenerateHmacKeyConfig) (GenerateHmacKeyResponse, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &GenerateHmacKeyResponse{}
 	path := "/merchants/{merchantId}/webhooks/{webhookId}/generateHmac"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"webhookId"+"}", url.PathEscape(common.ParameterValueToString(r.webhookId, "webhookId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -82,8 +82,8 @@ func (a *WebhooksMerchantLevelApi) GenerateHmacKey(r WebhooksMerchantLevelApiGen
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -91,8 +91,8 @@ func (a *WebhooksMerchantLevelApi) GenerateHmacKey(r WebhooksMerchantLevelApiGen
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -100,8 +100,8 @@ func (a *WebhooksMerchantLevelApi) GenerateHmacKey(r WebhooksMerchantLevelApiGen
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -109,8 +109,8 @@ func (a *WebhooksMerchantLevelApi) GenerateHmacKey(r WebhooksMerchantLevelApiGen
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -118,10 +118,10 @@ func (a *WebhooksMerchantLevelApi) GenerateHmacKey(r WebhooksMerchantLevelApiGen
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type WebhooksMerchantLevelApiGetWebhookConfig struct {
@@ -161,15 +161,15 @@ Returns the configuration for the webhook identified in the path.  To make this 
 @return Webhook
 */
 
-func (a *WebhooksMerchantLevelApi) GetWebhook(r WebhooksMerchantLevelApiGetWebhookConfig) (Webhook, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *WebhooksMerchantLevelApi) GetWebhook(r WebhooksMerchantLevelApiGetWebhookConfig) (Webhook, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &Webhook{}
 	path := "/merchants/{merchantId}/webhooks/{webhookId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"webhookId"+"}", url.PathEscape(common.ParameterValueToString(r.webhookId, "webhookId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -185,8 +185,8 @@ func (a *WebhooksMerchantLevelApi) GetWebhook(r WebhooksMerchantLevelApiGetWebho
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -194,8 +194,8 @@ func (a *WebhooksMerchantLevelApi) GetWebhook(r WebhooksMerchantLevelApiGetWebho
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -203,8 +203,8 @@ func (a *WebhooksMerchantLevelApi) GetWebhook(r WebhooksMerchantLevelApiGetWebho
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -212,8 +212,8 @@ func (a *WebhooksMerchantLevelApi) GetWebhook(r WebhooksMerchantLevelApiGetWebho
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -221,10 +221,10 @@ func (a *WebhooksMerchantLevelApi) GetWebhook(r WebhooksMerchantLevelApiGetWebho
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type WebhooksMerchantLevelApiListAllWebhooksConfig struct {
@@ -274,8 +274,8 @@ Lists all webhook configurations for the merchant account.  To make this request
 @return ListWebhooksResponse
 */
 
-func (a *WebhooksMerchantLevelApi) ListAllWebhooks(r WebhooksMerchantLevelApiListAllWebhooksConfig) (ListWebhooksResponse, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *WebhooksMerchantLevelApi) ListAllWebhooks(r WebhooksMerchantLevelApiListAllWebhooksConfig) (ListWebhooksResponse, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &ListWebhooksResponse{}
 	path := "/merchants/{merchantId}/webhooks"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -287,7 +287,7 @@ func (a *WebhooksMerchantLevelApi) ListAllWebhooks(r WebhooksMerchantLevelApiLis
 	if r.pageSize != nil {
 		common.ParameterAddToQuery(queryParams, "pageSize", r.pageSize, "")
 	}
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -303,8 +303,8 @@ func (a *WebhooksMerchantLevelApi) ListAllWebhooks(r WebhooksMerchantLevelApiLis
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -312,8 +312,8 @@ func (a *WebhooksMerchantLevelApi) ListAllWebhooks(r WebhooksMerchantLevelApiLis
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -321,8 +321,8 @@ func (a *WebhooksMerchantLevelApi) ListAllWebhooks(r WebhooksMerchantLevelApiLis
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -330,8 +330,8 @@ func (a *WebhooksMerchantLevelApi) ListAllWebhooks(r WebhooksMerchantLevelApiLis
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -339,10 +339,10 @@ func (a *WebhooksMerchantLevelApi) ListAllWebhooks(r WebhooksMerchantLevelApiLis
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type WebhooksMerchantLevelApiRemoveWebhookConfig struct {
@@ -380,15 +380,15 @@ Remove the configuration for the webhook identified in the path.  To make this r
  * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 */
 
-func (a *WebhooksMerchantLevelApi) RemoveWebhook(r WebhooksMerchantLevelApiRemoveWebhookConfig) (*_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *WebhooksMerchantLevelApi) RemoveWebhook(r WebhooksMerchantLevelApiRemoveWebhookConfig) (*_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	var res interface{}
 	path := "/merchants/{merchantId}/webhooks/{webhookId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"webhookId"+"}", url.PathEscape(common.ParameterValueToString(r.webhookId, "webhookId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -404,8 +404,8 @@ func (a *WebhooksMerchantLevelApi) RemoveWebhook(r WebhooksMerchantLevelApiRemov
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -413,8 +413,8 @@ func (a *WebhooksMerchantLevelApi) RemoveWebhook(r WebhooksMerchantLevelApiRemov
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -422,8 +422,8 @@ func (a *WebhooksMerchantLevelApi) RemoveWebhook(r WebhooksMerchantLevelApiRemov
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -431,8 +431,8 @@ func (a *WebhooksMerchantLevelApi) RemoveWebhook(r WebhooksMerchantLevelApiRemov
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -440,10 +440,10 @@ func (a *WebhooksMerchantLevelApi) RemoveWebhook(r WebhooksMerchantLevelApiRemov
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return httpRes, serviceError, err
 	}
-	return httpRes, v
+	return httpRes, serviceError, err
 }
 
 type WebhooksMerchantLevelApiSetUpWebhookConfig struct {
@@ -485,14 +485,14 @@ Subscribe to receive webhook notifications about events related to your merchant
 @return Webhook
 */
 
-func (a *WebhooksMerchantLevelApi) SetUpWebhook(r WebhooksMerchantLevelApiSetUpWebhookConfig) (Webhook, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *WebhooksMerchantLevelApi) SetUpWebhook(r WebhooksMerchantLevelApiSetUpWebhookConfig) (Webhook, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &Webhook{}
 	path := "/merchants/{merchantId}/webhooks"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		r.createMerchantWebhookRequest,
@@ -508,8 +508,8 @@ func (a *WebhooksMerchantLevelApi) SetUpWebhook(r WebhooksMerchantLevelApiSetUpW
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -517,8 +517,8 @@ func (a *WebhooksMerchantLevelApi) SetUpWebhook(r WebhooksMerchantLevelApiSetUpW
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -526,8 +526,8 @@ func (a *WebhooksMerchantLevelApi) SetUpWebhook(r WebhooksMerchantLevelApiSetUpW
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -535,8 +535,8 @@ func (a *WebhooksMerchantLevelApi) SetUpWebhook(r WebhooksMerchantLevelApiSetUpW
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -544,10 +544,10 @@ func (a *WebhooksMerchantLevelApi) SetUpWebhook(r WebhooksMerchantLevelApiSetUpW
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type WebhooksMerchantLevelApiTestWebhookConfig struct {
@@ -597,15 +597,15 @@ Sends sample notifications to test if the webhook is set up correctly.  We send 
 @return TestWebhookResponse
 */
 
-func (a *WebhooksMerchantLevelApi) TestWebhook(r WebhooksMerchantLevelApiTestWebhookConfig) (TestWebhookResponse, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *WebhooksMerchantLevelApi) TestWebhook(r WebhooksMerchantLevelApiTestWebhookConfig) (TestWebhookResponse, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &TestWebhookResponse{}
 	path := "/merchants/{merchantId}/webhooks/{webhookId}/test"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"webhookId"+"}", url.PathEscape(common.ParameterValueToString(r.webhookId, "webhookId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		r.testWebhookRequest,
@@ -621,8 +621,8 @@ func (a *WebhooksMerchantLevelApi) TestWebhook(r WebhooksMerchantLevelApiTestWeb
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -630,8 +630,8 @@ func (a *WebhooksMerchantLevelApi) TestWebhook(r WebhooksMerchantLevelApiTestWeb
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -639,8 +639,8 @@ func (a *WebhooksMerchantLevelApi) TestWebhook(r WebhooksMerchantLevelApiTestWeb
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -648,8 +648,8 @@ func (a *WebhooksMerchantLevelApi) TestWebhook(r WebhooksMerchantLevelApiTestWeb
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -657,10 +657,10 @@ func (a *WebhooksMerchantLevelApi) TestWebhook(r WebhooksMerchantLevelApiTestWeb
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type WebhooksMerchantLevelApiUpdateWebhookConfig struct {
@@ -706,15 +706,15 @@ Make changes to the configuration of the webhook identified in the path. The req
 @return Webhook
 */
 
-func (a *WebhooksMerchantLevelApi) UpdateWebhook(r WebhooksMerchantLevelApiUpdateWebhookConfig) (Webhook, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *WebhooksMerchantLevelApi) UpdateWebhook(r WebhooksMerchantLevelApiUpdateWebhookConfig) (Webhook, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &Webhook{}
 	path := "/merchants/{merchantId}/webhooks/{webhookId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"webhookId"+"}", url.PathEscape(common.ParameterValueToString(r.webhookId, "webhookId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		r.updateMerchantWebhookRequest,
@@ -730,8 +730,8 @@ func (a *WebhooksMerchantLevelApi) UpdateWebhook(r WebhooksMerchantLevelApiUpdat
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -739,8 +739,8 @@ func (a *WebhooksMerchantLevelApi) UpdateWebhook(r WebhooksMerchantLevelApiUpdat
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -748,8 +748,8 @@ func (a *WebhooksMerchantLevelApi) UpdateWebhook(r WebhooksMerchantLevelApiUpdat
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -757,8 +757,8 @@ func (a *WebhooksMerchantLevelApi) UpdateWebhook(r WebhooksMerchantLevelApiUpdat
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -766,8 +766,8 @@ func (a *WebhooksMerchantLevelApi) UpdateWebhook(r WebhooksMerchantLevelApiUpdat
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }

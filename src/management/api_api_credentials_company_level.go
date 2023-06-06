@@ -70,14 +70,14 @@ Creates an [API credential](https://docs.adyen.com/development-resources/api-cre
 @return CreateCompanyApiCredentialResponse
 */
 
-func (a *APICredentialsCompanyLevelApi) CreateApiCredential(r APICredentialsCompanyLevelApiCreateApiCredentialConfig) (CreateCompanyApiCredentialResponse, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *APICredentialsCompanyLevelApi) CreateApiCredential(r APICredentialsCompanyLevelApiCreateApiCredentialConfig) (CreateCompanyApiCredentialResponse, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &CreateCompanyApiCredentialResponse{}
 	path := "/companies/{companyId}/apiCredentials"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		r.createCompanyApiCredentialRequest,
@@ -93,8 +93,8 @@ func (a *APICredentialsCompanyLevelApi) CreateApiCredential(r APICredentialsComp
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -102,8 +102,8 @@ func (a *APICredentialsCompanyLevelApi) CreateApiCredential(r APICredentialsComp
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -111,8 +111,8 @@ func (a *APICredentialsCompanyLevelApi) CreateApiCredential(r APICredentialsComp
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -120,8 +120,8 @@ func (a *APICredentialsCompanyLevelApi) CreateApiCredential(r APICredentialsComp
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -129,10 +129,10 @@ func (a *APICredentialsCompanyLevelApi) CreateApiCredential(r APICredentialsComp
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type APICredentialsCompanyLevelApiGetApiCredentialConfig struct {
@@ -171,15 +171,15 @@ Returns the [API credential](https://docs.adyen.com/development-resources/api-cr
 @return CompanyApiCredential
 */
 
-func (a *APICredentialsCompanyLevelApi) GetApiCredential(r APICredentialsCompanyLevelApiGetApiCredentialConfig) (CompanyApiCredential, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *APICredentialsCompanyLevelApi) GetApiCredential(r APICredentialsCompanyLevelApiGetApiCredentialConfig) (CompanyApiCredential, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &CompanyApiCredential{}
 	path := "/companies/{companyId}/apiCredentials/{apiCredentialId}"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
 	path = strings.Replace(path, "{"+"apiCredentialId"+"}", url.PathEscape(common.ParameterValueToString(r.apiCredentialId, "apiCredentialId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -195,8 +195,8 @@ func (a *APICredentialsCompanyLevelApi) GetApiCredential(r APICredentialsCompany
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -204,8 +204,8 @@ func (a *APICredentialsCompanyLevelApi) GetApiCredential(r APICredentialsCompany
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -213,8 +213,8 @@ func (a *APICredentialsCompanyLevelApi) GetApiCredential(r APICredentialsCompany
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -222,8 +222,8 @@ func (a *APICredentialsCompanyLevelApi) GetApiCredential(r APICredentialsCompany
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -231,10 +231,10 @@ func (a *APICredentialsCompanyLevelApi) GetApiCredential(r APICredentialsCompany
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type APICredentialsCompanyLevelApiListApiCredentialsConfig struct {
@@ -283,8 +283,8 @@ Returns the list of [API credentials](https://docs.adyen.com/development-resourc
 @return ListCompanyApiCredentialsResponse
 */
 
-func (a *APICredentialsCompanyLevelApi) ListApiCredentials(r APICredentialsCompanyLevelApiListApiCredentialsConfig) (ListCompanyApiCredentialsResponse, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *APICredentialsCompanyLevelApi) ListApiCredentials(r APICredentialsCompanyLevelApiListApiCredentialsConfig) (ListCompanyApiCredentialsResponse, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &ListCompanyApiCredentialsResponse{}
 	path := "/companies/{companyId}/apiCredentials"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -296,7 +296,7 @@ func (a *APICredentialsCompanyLevelApi) ListApiCredentials(r APICredentialsCompa
 	if r.pageSize != nil {
 		common.ParameterAddToQuery(queryParams, "pageSize", r.pageSize, "")
 	}
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -312,8 +312,8 @@ func (a *APICredentialsCompanyLevelApi) ListApiCredentials(r APICredentialsCompa
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -321,8 +321,8 @@ func (a *APICredentialsCompanyLevelApi) ListApiCredentials(r APICredentialsCompa
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -330,8 +330,8 @@ func (a *APICredentialsCompanyLevelApi) ListApiCredentials(r APICredentialsCompa
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -339,8 +339,8 @@ func (a *APICredentialsCompanyLevelApi) ListApiCredentials(r APICredentialsCompa
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -348,10 +348,10 @@ func (a *APICredentialsCompanyLevelApi) ListApiCredentials(r APICredentialsCompa
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type APICredentialsCompanyLevelApiUpdateApiCredentialConfig struct {
@@ -397,15 +397,15 @@ Changes the API credential&#39;s roles, merchant account access, or allowed orig
 @return CompanyApiCredential
 */
 
-func (a *APICredentialsCompanyLevelApi) UpdateApiCredential(r APICredentialsCompanyLevelApiUpdateApiCredentialConfig) (CompanyApiCredential, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *APICredentialsCompanyLevelApi) UpdateApiCredential(r APICredentialsCompanyLevelApiUpdateApiCredentialConfig) (CompanyApiCredential, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &CompanyApiCredential{}
 	path := "/companies/{companyId}/apiCredentials/{apiCredentialId}"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
 	path = strings.Replace(path, "{"+"apiCredentialId"+"}", url.PathEscape(common.ParameterValueToString(r.apiCredentialId, "apiCredentialId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		r.updateCompanyApiCredentialRequest,
@@ -421,8 +421,8 @@ func (a *APICredentialsCompanyLevelApi) UpdateApiCredential(r APICredentialsComp
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -430,8 +430,8 @@ func (a *APICredentialsCompanyLevelApi) UpdateApiCredential(r APICredentialsComp
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -439,8 +439,8 @@ func (a *APICredentialsCompanyLevelApi) UpdateApiCredential(r APICredentialsComp
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -448,8 +448,8 @@ func (a *APICredentialsCompanyLevelApi) UpdateApiCredential(r APICredentialsComp
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -457,8 +457,8 @@ func (a *APICredentialsCompanyLevelApi) UpdateApiCredential(r APICredentialsComp
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }

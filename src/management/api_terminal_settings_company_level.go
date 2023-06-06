@@ -65,8 +65,8 @@ Returns the logo that is configured for a specific payment terminal model at the
 @return Logo
 */
 
-func (a *TerminalSettingsCompanyLevelApi) GetTerminalLogo(r TerminalSettingsCompanyLevelApiGetTerminalLogoConfig) (Logo, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *TerminalSettingsCompanyLevelApi) GetTerminalLogo(r TerminalSettingsCompanyLevelApiGetTerminalLogoConfig) (Logo, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &Logo{}
 	path := "/companies/{companyId}/terminalLogos"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -75,7 +75,7 @@ func (a *TerminalSettingsCompanyLevelApi) GetTerminalLogo(r TerminalSettingsComp
 	if r.model != nil {
 		common.ParameterAddToQuery(queryParams, "model", r.model, "")
 	}
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -91,8 +91,8 @@ func (a *TerminalSettingsCompanyLevelApi) GetTerminalLogo(r TerminalSettingsComp
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -100,8 +100,8 @@ func (a *TerminalSettingsCompanyLevelApi) GetTerminalLogo(r TerminalSettingsComp
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -109,8 +109,8 @@ func (a *TerminalSettingsCompanyLevelApi) GetTerminalLogo(r TerminalSettingsComp
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -118,8 +118,8 @@ func (a *TerminalSettingsCompanyLevelApi) GetTerminalLogo(r TerminalSettingsComp
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -127,10 +127,10 @@ func (a *TerminalSettingsCompanyLevelApi) GetTerminalLogo(r TerminalSettingsComp
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type TerminalSettingsCompanyLevelApiGetTerminalSettingsConfig struct {
@@ -169,14 +169,14 @@ Returns the payment terminal settings that are configured for the company identi
 @return TerminalSettings
 */
 
-func (a *TerminalSettingsCompanyLevelApi) GetTerminalSettings(r TerminalSettingsCompanyLevelApiGetTerminalSettingsConfig) (TerminalSettings, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *TerminalSettingsCompanyLevelApi) GetTerminalSettings(r TerminalSettingsCompanyLevelApiGetTerminalSettingsConfig) (TerminalSettings, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &TerminalSettings{}
 	path := "/companies/{companyId}/terminalSettings"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -192,8 +192,8 @@ func (a *TerminalSettingsCompanyLevelApi) GetTerminalSettings(r TerminalSettings
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -201,8 +201,8 @@ func (a *TerminalSettingsCompanyLevelApi) GetTerminalSettings(r TerminalSettings
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -210,8 +210,8 @@ func (a *TerminalSettingsCompanyLevelApi) GetTerminalSettings(r TerminalSettings
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -219,8 +219,8 @@ func (a *TerminalSettingsCompanyLevelApi) GetTerminalSettings(r TerminalSettings
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -228,10 +228,10 @@ func (a *TerminalSettingsCompanyLevelApi) GetTerminalSettings(r TerminalSettings
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type TerminalSettingsCompanyLevelApiUpdateTerminalLogoConfig struct {
@@ -283,8 +283,8 @@ Updates the logo that is configured for a specific payment terminal model at the
 @return Logo
 */
 
-func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalLogo(r TerminalSettingsCompanyLevelApiUpdateTerminalLogoConfig) (Logo, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalLogo(r TerminalSettingsCompanyLevelApiUpdateTerminalLogoConfig) (Logo, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &Logo{}
 	path := "/companies/{companyId}/terminalLogos"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -293,7 +293,7 @@ func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalLogo(r TerminalSettingsC
 	if r.model != nil {
 		common.ParameterAddToQuery(queryParams, "model", r.model, "")
 	}
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		r.logo,
@@ -309,8 +309,8 @@ func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalLogo(r TerminalSettingsC
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -318,8 +318,8 @@ func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalLogo(r TerminalSettingsC
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -327,8 +327,8 @@ func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalLogo(r TerminalSettingsC
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -336,8 +336,8 @@ func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalLogo(r TerminalSettingsC
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -345,10 +345,10 @@ func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalLogo(r TerminalSettingsC
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type TerminalSettingsCompanyLevelApiUpdateTerminalSettingsConfig struct {
@@ -397,14 +397,14 @@ Updates payment terminal settings for the company identified in the path. These 
 @return TerminalSettings
 */
 
-func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalSettings(r TerminalSettingsCompanyLevelApiUpdateTerminalSettingsConfig) (TerminalSettings, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalSettings(r TerminalSettingsCompanyLevelApiUpdateTerminalSettingsConfig) (TerminalSettings, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &TerminalSettings{}
 	path := "/companies/{companyId}/terminalSettings"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		r.terminalSettings,
@@ -420,8 +420,8 @@ func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalSettings(r TerminalSetti
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -429,8 +429,8 @@ func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalSettings(r TerminalSetti
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -438,8 +438,8 @@ func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalSettings(r TerminalSetti
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -447,8 +447,8 @@ func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalSettings(r TerminalSetti
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -456,8 +456,8 @@ func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalSettings(r TerminalSetti
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }

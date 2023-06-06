@@ -33,11 +33,12 @@ func Test_ManagementAPI_Integration(t *testing.T) {
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 			req := service.MyAPICredentialApi.GetApiCredentialDetailsConfig(context.Background())
 
-			resp, httpRes, err := service.MyAPICredentialApi.GetApiCredentialDetails(req)
+			resp, httpRes, serviceErr, err := service.MyAPICredentialApi.GetApiCredentialDetails(req)
 
-			require.NotNil(t, err)
+			require.NotNil(t, serviceErr)
 			assert.Equal(t, 200, httpRes.StatusCode)
 			require.NotNil(t, resp)
+			require.Nil(t, err)
 		})
 
 		t.Run("Create an API request that should fail", func(t *testing.T) {
@@ -48,10 +49,10 @@ func Test_ManagementAPI_Integration(t *testing.T) {
 			})
 			req := invalidKeyClient.Management().MyAPICredentialApi.GetApiCredentialDetailsConfig(context.Background())
 
-			_, httpRes, err := invalidKeyClient.Management().MyAPICredentialApi.GetApiCredentialDetails(req)
+			_, httpRes, serviceErr, _ := invalidKeyClient.Management().MyAPICredentialApi.GetApiCredentialDetails(req)
 
 			assert.Equal(t, 401, httpRes.StatusCode)
-			require.NotNil(t, err)
+			require.NotNil(t, serviceErr)
 		})
 	})
 
@@ -59,9 +60,10 @@ func Test_ManagementAPI_Integration(t *testing.T) {
 		req := service.TerminalsTerminalLevelApi.ListTerminalsConfig(context.Background())
 		req = req.Countries("NL").PageSize(1)
 
-		resp, httpRes, err := service.TerminalsTerminalLevelApi.ListTerminals(req)
+		resp, httpRes, serviceErr, err := service.TerminalsTerminalLevelApi.ListTerminals(req)
 
-		require.NotNil(t, err)
+		require.NotNil(t, serviceErr)
+		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 		require.NotNil(t, resp)
 	})
@@ -69,11 +71,12 @@ func Test_ManagementAPI_Integration(t *testing.T) {
 	t.Run("Create an API request that should fail for company", func(t *testing.T) {
 		// Creates a test that should fail because of the wrong Id
 		req := service.AccountCompanyLevelApi.GetCompanyAccountConfig(context.Background(), "99999")
-		_, httpRes, err := service.AccountCompanyLevelApi.GetCompanyAccount(req)
-		assert.NotEmpty(t, err.GetRequestId())
-		assert.Equal(t, "010", err.GetErrorCode())
-		assert.Equal(t, int32(403), err.GetStatus())
+		_, httpRes, serviceErr, err := service.AccountCompanyLevelApi.GetCompanyAccount(req)
+		assert.NotEmpty(t, serviceErr.GetRequestId())
+		assert.Equal(t, "010", serviceErr.GetErrorCode())
+		assert.Equal(t, int32(403), serviceErr.GetStatus())
 		assert.Equal(t, 403, httpRes.StatusCode)
-		assert.Equal(t, reflect.TypeOf(err), reflect.TypeOf(management.RestServiceError{}))
+		assert.Equal(t, reflect.TypeOf(serviceErr), reflect.TypeOf(management.RestServiceError{}))
+		assert.NotNil(t, err)
 	})
 }

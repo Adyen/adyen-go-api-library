@@ -54,14 +54,14 @@ Returns the company account specified in the path. Your API credential must have
 @return Company
 */
 
-func (a *AccountCompanyLevelApi) GetCompanyAccount(r AccountCompanyLevelApiGetCompanyAccountConfig) (Company, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *AccountCompanyLevelApi) GetCompanyAccount(r AccountCompanyLevelApiGetCompanyAccountConfig) (Company, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &Company{}
 	path := "/companies/{companyId}"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -77,8 +77,8 @@ func (a *AccountCompanyLevelApi) GetCompanyAccount(r AccountCompanyLevelApiGetCo
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -86,8 +86,8 @@ func (a *AccountCompanyLevelApi) GetCompanyAccount(r AccountCompanyLevelApiGetCo
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -95,8 +95,8 @@ func (a *AccountCompanyLevelApi) GetCompanyAccount(r AccountCompanyLevelApiGetCo
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -104,8 +104,8 @@ func (a *AccountCompanyLevelApi) GetCompanyAccount(r AccountCompanyLevelApiGetCo
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -113,10 +113,10 @@ func (a *AccountCompanyLevelApi) GetCompanyAccount(r AccountCompanyLevelApiGetCo
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type AccountCompanyLevelApiListCompanyAccountsConfig struct {
@@ -162,8 +162,8 @@ Returns the list of company accounts that your API credential has access to. The
 @return ListCompanyResponse
 */
 
-func (a *AccountCompanyLevelApi) ListCompanyAccounts(r AccountCompanyLevelApiListCompanyAccountsConfig) (ListCompanyResponse, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *AccountCompanyLevelApi) ListCompanyAccounts(r AccountCompanyLevelApiListCompanyAccountsConfig) (ListCompanyResponse, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &ListCompanyResponse{}
 	path := "/companies"
 	queryParams := url.Values{}
@@ -174,7 +174,7 @@ func (a *AccountCompanyLevelApi) ListCompanyAccounts(r AccountCompanyLevelApiLis
 	if r.pageSize != nil {
 		common.ParameterAddToQuery(queryParams, "pageSize", r.pageSize, "")
 	}
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -190,8 +190,8 @@ func (a *AccountCompanyLevelApi) ListCompanyAccounts(r AccountCompanyLevelApiLis
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -199,8 +199,8 @@ func (a *AccountCompanyLevelApi) ListCompanyAccounts(r AccountCompanyLevelApiLis
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -208,8 +208,8 @@ func (a *AccountCompanyLevelApi) ListCompanyAccounts(r AccountCompanyLevelApiLis
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -217,8 +217,8 @@ func (a *AccountCompanyLevelApi) ListCompanyAccounts(r AccountCompanyLevelApiLis
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -226,10 +226,10 @@ func (a *AccountCompanyLevelApi) ListCompanyAccounts(r AccountCompanyLevelApiLis
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type AccountCompanyLevelApiListMerchantAccountsConfig struct {
@@ -278,8 +278,8 @@ Returns the list of merchant accounts under the company account specified in the
 @return ListMerchantResponse
 */
 
-func (a *AccountCompanyLevelApi) ListMerchantAccounts(r AccountCompanyLevelApiListMerchantAccountsConfig) (ListMerchantResponse, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *AccountCompanyLevelApi) ListMerchantAccounts(r AccountCompanyLevelApiListMerchantAccountsConfig) (ListMerchantResponse, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &ListMerchantResponse{}
 	path := "/companies/{companyId}/merchants"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -291,7 +291,7 @@ func (a *AccountCompanyLevelApi) ListMerchantAccounts(r AccountCompanyLevelApiLi
 	if r.pageSize != nil {
 		common.ParameterAddToQuery(queryParams, "pageSize", r.pageSize, "")
 	}
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -307,8 +307,8 @@ func (a *AccountCompanyLevelApi) ListMerchantAccounts(r AccountCompanyLevelApiLi
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -316,8 +316,8 @@ func (a *AccountCompanyLevelApi) ListMerchantAccounts(r AccountCompanyLevelApiLi
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -325,8 +325,8 @@ func (a *AccountCompanyLevelApi) ListMerchantAccounts(r AccountCompanyLevelApiLi
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -334,8 +334,8 @@ func (a *AccountCompanyLevelApi) ListMerchantAccounts(r AccountCompanyLevelApiLi
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -343,8 +343,8 @@ func (a *AccountCompanyLevelApi) ListMerchantAccounts(r AccountCompanyLevelApiLi
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }

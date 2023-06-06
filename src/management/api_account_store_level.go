@@ -57,13 +57,13 @@ Creates a store for the merchant account specified in the request.  To make this
 @return Store
 */
 
-func (a *AccountStoreLevelApi) CreateStore(r AccountStoreLevelApiCreateStoreConfig) (Store, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *AccountStoreLevelApi) CreateStore(r AccountStoreLevelApiCreateStoreConfig) (Store, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &Store{}
 	path := "/stores"
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		r.storeCreationWithMerchantCodeRequest,
@@ -79,8 +79,8 @@ func (a *AccountStoreLevelApi) CreateStore(r AccountStoreLevelApiCreateStoreConf
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -88,8 +88,8 @@ func (a *AccountStoreLevelApi) CreateStore(r AccountStoreLevelApiCreateStoreConf
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -97,8 +97,8 @@ func (a *AccountStoreLevelApi) CreateStore(r AccountStoreLevelApiCreateStoreConf
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -106,8 +106,8 @@ func (a *AccountStoreLevelApi) CreateStore(r AccountStoreLevelApiCreateStoreConf
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -115,10 +115,10 @@ func (a *AccountStoreLevelApi) CreateStore(r AccountStoreLevelApiCreateStoreConf
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type AccountStoreLevelApiCreateStoreByMerchantIdConfig struct {
@@ -160,14 +160,14 @@ Creates a store for the merchant account identified in the path.  To make this r
 @return Store
 */
 
-func (a *AccountStoreLevelApi) CreateStoreByMerchantId(r AccountStoreLevelApiCreateStoreByMerchantIdConfig) (Store, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *AccountStoreLevelApi) CreateStoreByMerchantId(r AccountStoreLevelApiCreateStoreByMerchantIdConfig) (Store, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &Store{}
 	path := "/merchants/{merchantId}/stores"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		r.storeCreationRequest,
@@ -183,8 +183,8 @@ func (a *AccountStoreLevelApi) CreateStoreByMerchantId(r AccountStoreLevelApiCre
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -192,8 +192,8 @@ func (a *AccountStoreLevelApi) CreateStoreByMerchantId(r AccountStoreLevelApiCre
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -201,8 +201,8 @@ func (a *AccountStoreLevelApi) CreateStoreByMerchantId(r AccountStoreLevelApiCre
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -210,8 +210,8 @@ func (a *AccountStoreLevelApi) CreateStoreByMerchantId(r AccountStoreLevelApiCre
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -219,10 +219,10 @@ func (a *AccountStoreLevelApi) CreateStoreByMerchantId(r AccountStoreLevelApiCre
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type AccountStoreLevelApiGetStoreConfig struct {
@@ -262,15 +262,15 @@ Returns the details of the store identified in the path.  To make this request, 
 @return Store
 */
 
-func (a *AccountStoreLevelApi) GetStore(r AccountStoreLevelApiGetStoreConfig) (Store, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *AccountStoreLevelApi) GetStore(r AccountStoreLevelApiGetStoreConfig) (Store, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &Store{}
 	path := "/merchants/{merchantId}/stores/{storeId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"storeId"+"}", url.PathEscape(common.ParameterValueToString(r.storeId, "storeId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -286,8 +286,8 @@ func (a *AccountStoreLevelApi) GetStore(r AccountStoreLevelApiGetStoreConfig) (S
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -295,8 +295,8 @@ func (a *AccountStoreLevelApi) GetStore(r AccountStoreLevelApiGetStoreConfig) (S
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -304,8 +304,8 @@ func (a *AccountStoreLevelApi) GetStore(r AccountStoreLevelApiGetStoreConfig) (S
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -313,8 +313,8 @@ func (a *AccountStoreLevelApi) GetStore(r AccountStoreLevelApiGetStoreConfig) (S
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -322,10 +322,10 @@ func (a *AccountStoreLevelApi) GetStore(r AccountStoreLevelApiGetStoreConfig) (S
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type AccountStoreLevelApiGetStoreByIdConfig struct {
@@ -361,14 +361,14 @@ Returns the details of the store identified in the path.  To make this request, 
 @return Store
 */
 
-func (a *AccountStoreLevelApi) GetStoreById(r AccountStoreLevelApiGetStoreByIdConfig) (Store, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *AccountStoreLevelApi) GetStoreById(r AccountStoreLevelApiGetStoreByIdConfig) (Store, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &Store{}
 	path := "/stores/{storeId}"
 	path = strings.Replace(path, "{"+"storeId"+"}", url.PathEscape(common.ParameterValueToString(r.storeId, "storeId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -384,8 +384,8 @@ func (a *AccountStoreLevelApi) GetStoreById(r AccountStoreLevelApiGetStoreByIdCo
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -393,8 +393,8 @@ func (a *AccountStoreLevelApi) GetStoreById(r AccountStoreLevelApiGetStoreByIdCo
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -402,8 +402,8 @@ func (a *AccountStoreLevelApi) GetStoreById(r AccountStoreLevelApiGetStoreByIdCo
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -411,8 +411,8 @@ func (a *AccountStoreLevelApi) GetStoreById(r AccountStoreLevelApiGetStoreByIdCo
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -420,10 +420,10 @@ func (a *AccountStoreLevelApi) GetStoreById(r AccountStoreLevelApiGetStoreByIdCo
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type AccountStoreLevelApiListStoresConfig struct {
@@ -483,8 +483,8 @@ Returns a list of stores. The list is grouped into pages as defined by the query
 @return ListStoresResponse
 */
 
-func (a *AccountStoreLevelApi) ListStores(r AccountStoreLevelApiListStoresConfig) (ListStoresResponse, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *AccountStoreLevelApi) ListStores(r AccountStoreLevelApiListStoresConfig) (ListStoresResponse, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &ListStoresResponse{}
 	path := "/stores"
 	queryParams := url.Values{}
@@ -501,7 +501,7 @@ func (a *AccountStoreLevelApi) ListStores(r AccountStoreLevelApiListStoresConfig
 	if r.merchantId != nil {
 		common.ParameterAddToQuery(queryParams, "merchantId", r.merchantId, "")
 	}
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -517,8 +517,8 @@ func (a *AccountStoreLevelApi) ListStores(r AccountStoreLevelApiListStoresConfig
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -526,8 +526,8 @@ func (a *AccountStoreLevelApi) ListStores(r AccountStoreLevelApiListStoresConfig
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -535,8 +535,8 @@ func (a *AccountStoreLevelApi) ListStores(r AccountStoreLevelApiListStoresConfig
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -544,8 +544,8 @@ func (a *AccountStoreLevelApi) ListStores(r AccountStoreLevelApiListStoresConfig
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -553,10 +553,10 @@ func (a *AccountStoreLevelApi) ListStores(r AccountStoreLevelApiListStoresConfig
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type AccountStoreLevelApiListStoresByMerchantIdConfig struct {
@@ -613,8 +613,8 @@ Returns a list of stores for the merchant account identified in the path. The li
 @return ListStoresResponse
 */
 
-func (a *AccountStoreLevelApi) ListStoresByMerchantId(r AccountStoreLevelApiListStoresByMerchantIdConfig) (ListStoresResponse, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *AccountStoreLevelApi) ListStoresByMerchantId(r AccountStoreLevelApiListStoresByMerchantIdConfig) (ListStoresResponse, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &ListStoresResponse{}
 	path := "/merchants/{merchantId}/stores"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -629,7 +629,7 @@ func (a *AccountStoreLevelApi) ListStoresByMerchantId(r AccountStoreLevelApiList
 	if r.reference != nil {
 		common.ParameterAddToQuery(queryParams, "reference", r.reference, "")
 	}
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -645,8 +645,8 @@ func (a *AccountStoreLevelApi) ListStoresByMerchantId(r AccountStoreLevelApiList
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -654,8 +654,8 @@ func (a *AccountStoreLevelApi) ListStoresByMerchantId(r AccountStoreLevelApiList
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -663,8 +663,8 @@ func (a *AccountStoreLevelApi) ListStoresByMerchantId(r AccountStoreLevelApiList
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -672,8 +672,8 @@ func (a *AccountStoreLevelApi) ListStoresByMerchantId(r AccountStoreLevelApiList
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -681,10 +681,10 @@ func (a *AccountStoreLevelApi) ListStoresByMerchantId(r AccountStoreLevelApiList
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type AccountStoreLevelApiUpdateStoreConfig struct {
@@ -730,15 +730,15 @@ Updates the store identified in the path. You can only update some store paramet
 @return Store
 */
 
-func (a *AccountStoreLevelApi) UpdateStore(r AccountStoreLevelApiUpdateStoreConfig) (Store, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *AccountStoreLevelApi) UpdateStore(r AccountStoreLevelApiUpdateStoreConfig) (Store, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &Store{}
 	path := "/merchants/{merchantId}/stores/{storeId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"storeId"+"}", url.PathEscape(common.ParameterValueToString(r.storeId, "storeId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		r.updateStoreRequest,
@@ -754,8 +754,8 @@ func (a *AccountStoreLevelApi) UpdateStore(r AccountStoreLevelApiUpdateStoreConf
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -763,8 +763,8 @@ func (a *AccountStoreLevelApi) UpdateStore(r AccountStoreLevelApiUpdateStoreConf
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -772,8 +772,8 @@ func (a *AccountStoreLevelApi) UpdateStore(r AccountStoreLevelApiUpdateStoreConf
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -781,8 +781,8 @@ func (a *AccountStoreLevelApi) UpdateStore(r AccountStoreLevelApiUpdateStoreConf
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -790,10 +790,10 @@ func (a *AccountStoreLevelApi) UpdateStore(r AccountStoreLevelApiUpdateStoreConf
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type AccountStoreLevelApiUpdateStoreByIdConfig struct {
@@ -836,14 +836,14 @@ Updates the store identified in the path. You can only update some store paramet
 @return Store
 */
 
-func (a *AccountStoreLevelApi) UpdateStoreById(r AccountStoreLevelApiUpdateStoreByIdConfig) (Store, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *AccountStoreLevelApi) UpdateStoreById(r AccountStoreLevelApiUpdateStoreByIdConfig) (Store, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &Store{}
 	path := "/stores/{storeId}"
 	path = strings.Replace(path, "{"+"storeId"+"}", url.PathEscape(common.ParameterValueToString(r.storeId, "storeId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		r.updateStoreRequest,
@@ -859,8 +859,8 @@ func (a *AccountStoreLevelApi) UpdateStoreById(r AccountStoreLevelApiUpdateStore
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -868,8 +868,8 @@ func (a *AccountStoreLevelApi) UpdateStoreById(r AccountStoreLevelApiUpdateStore
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -877,8 +877,8 @@ func (a *AccountStoreLevelApi) UpdateStoreById(r AccountStoreLevelApiUpdateStore
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -886,8 +886,8 @@ func (a *AccountStoreLevelApi) UpdateStoreById(r AccountStoreLevelApiUpdateStore
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -895,8 +895,8 @@ func (a *AccountStoreLevelApi) UpdateStoreById(r AccountStoreLevelApiUpdateStore
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }

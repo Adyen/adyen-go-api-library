@@ -64,8 +64,8 @@ Returns the logo that is configured for a specific payment terminal model at the
 @return Logo
 */
 
-func (a *TerminalSettingsMerchantLevelApi) GetTerminalLogo(r TerminalSettingsMerchantLevelApiGetTerminalLogoConfig) (Logo, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *TerminalSettingsMerchantLevelApi) GetTerminalLogo(r TerminalSettingsMerchantLevelApiGetTerminalLogoConfig) (Logo, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &Logo{}
 	path := "/merchants/{merchantId}/terminalLogos"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -74,7 +74,7 @@ func (a *TerminalSettingsMerchantLevelApi) GetTerminalLogo(r TerminalSettingsMer
 	if r.model != nil {
 		common.ParameterAddToQuery(queryParams, "model", r.model, "")
 	}
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -90,8 +90,8 @@ func (a *TerminalSettingsMerchantLevelApi) GetTerminalLogo(r TerminalSettingsMer
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -99,8 +99,8 @@ func (a *TerminalSettingsMerchantLevelApi) GetTerminalLogo(r TerminalSettingsMer
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -108,8 +108,8 @@ func (a *TerminalSettingsMerchantLevelApi) GetTerminalLogo(r TerminalSettingsMer
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -117,8 +117,8 @@ func (a *TerminalSettingsMerchantLevelApi) GetTerminalLogo(r TerminalSettingsMer
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -126,10 +126,10 @@ func (a *TerminalSettingsMerchantLevelApi) GetTerminalLogo(r TerminalSettingsMer
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type TerminalSettingsMerchantLevelApiGetTerminalSettingsConfig struct {
@@ -165,14 +165,14 @@ Returns the payment terminal settings that are configured for the merchant accou
 @return TerminalSettings
 */
 
-func (a *TerminalSettingsMerchantLevelApi) GetTerminalSettings(r TerminalSettingsMerchantLevelApiGetTerminalSettingsConfig) (TerminalSettings, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *TerminalSettingsMerchantLevelApi) GetTerminalSettings(r TerminalSettingsMerchantLevelApiGetTerminalSettingsConfig) (TerminalSettings, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &TerminalSettings{}
 	path := "/merchants/{merchantId}/terminalSettings"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -188,8 +188,8 @@ func (a *TerminalSettingsMerchantLevelApi) GetTerminalSettings(r TerminalSetting
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -197,8 +197,8 @@ func (a *TerminalSettingsMerchantLevelApi) GetTerminalSettings(r TerminalSetting
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -206,8 +206,8 @@ func (a *TerminalSettingsMerchantLevelApi) GetTerminalSettings(r TerminalSetting
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -215,8 +215,8 @@ func (a *TerminalSettingsMerchantLevelApi) GetTerminalSettings(r TerminalSetting
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -224,10 +224,10 @@ func (a *TerminalSettingsMerchantLevelApi) GetTerminalSettings(r TerminalSetting
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type TerminalSettingsMerchantLevelApiUpdateTerminalLogoConfig struct {
@@ -280,8 +280,8 @@ Updates the logo for a specific payment terminal model at the merchant account i
 @return Logo
 */
 
-func (a *TerminalSettingsMerchantLevelApi) UpdateTerminalLogo(r TerminalSettingsMerchantLevelApiUpdateTerminalLogoConfig) (Logo, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *TerminalSettingsMerchantLevelApi) UpdateTerminalLogo(r TerminalSettingsMerchantLevelApiUpdateTerminalLogoConfig) (Logo, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &Logo{}
 	path := "/merchants/{merchantId}/terminalLogos"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -290,7 +290,7 @@ func (a *TerminalSettingsMerchantLevelApi) UpdateTerminalLogo(r TerminalSettings
 	if r.model != nil {
 		common.ParameterAddToQuery(queryParams, "model", r.model, "")
 	}
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		r.logo,
@@ -306,8 +306,8 @@ func (a *TerminalSettingsMerchantLevelApi) UpdateTerminalLogo(r TerminalSettings
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -315,8 +315,8 @@ func (a *TerminalSettingsMerchantLevelApi) UpdateTerminalLogo(r TerminalSettings
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -324,8 +324,8 @@ func (a *TerminalSettingsMerchantLevelApi) UpdateTerminalLogo(r TerminalSettings
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -333,8 +333,8 @@ func (a *TerminalSettingsMerchantLevelApi) UpdateTerminalLogo(r TerminalSettings
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -342,10 +342,10 @@ func (a *TerminalSettingsMerchantLevelApi) UpdateTerminalLogo(r TerminalSettings
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type TerminalSettingsMerchantLevelApiUpdateTerminalSettingsConfig struct {
@@ -392,14 +392,14 @@ Updates payment terminal settings for the merchant account identified in the pat
 @return TerminalSettings
 */
 
-func (a *TerminalSettingsMerchantLevelApi) UpdateTerminalSettings(r TerminalSettingsMerchantLevelApiUpdateTerminalSettingsConfig) (TerminalSettings, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *TerminalSettingsMerchantLevelApi) UpdateTerminalSettings(r TerminalSettingsMerchantLevelApiUpdateTerminalSettingsConfig) (TerminalSettings, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &TerminalSettings{}
 	path := "/merchants/{merchantId}/terminalSettings"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		r.terminalSettings,
@@ -415,8 +415,8 @@ func (a *TerminalSettingsMerchantLevelApi) UpdateTerminalSettings(r TerminalSett
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -424,8 +424,8 @@ func (a *TerminalSettingsMerchantLevelApi) UpdateTerminalSettings(r TerminalSett
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -433,8 +433,8 @@ func (a *TerminalSettingsMerchantLevelApi) UpdateTerminalSettings(r TerminalSett
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -442,8 +442,8 @@ func (a *TerminalSettingsMerchantLevelApi) UpdateTerminalSettings(r TerminalSett
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -451,8 +451,8 @@ func (a *TerminalSettingsMerchantLevelApi) UpdateTerminalSettings(r TerminalSett
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }

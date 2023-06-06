@@ -65,15 +65,15 @@ Adds a new [allowed origin](https://docs.adyen.com/development-resources/client-
 @return AllowedOriginsResponse
 */
 
-func (a *AllowedOriginsMerchantLevelApi) CreateAllowedOrigin(r AllowedOriginsMerchantLevelApiCreateAllowedOriginConfig) (AllowedOriginsResponse, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *AllowedOriginsMerchantLevelApi) CreateAllowedOrigin(r AllowedOriginsMerchantLevelApiCreateAllowedOriginConfig) (AllowedOriginsResponse, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &AllowedOriginsResponse{}
 	path := "/merchants/{merchantId}/apiCredentials/{apiCredentialId}/allowedOrigins"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"apiCredentialId"+"}", url.PathEscape(common.ParameterValueToString(r.apiCredentialId, "apiCredentialId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		r.allowedOrigin,
@@ -89,8 +89,8 @@ func (a *AllowedOriginsMerchantLevelApi) CreateAllowedOrigin(r AllowedOriginsMer
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -98,8 +98,8 @@ func (a *AllowedOriginsMerchantLevelApi) CreateAllowedOrigin(r AllowedOriginsMer
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -107,8 +107,8 @@ func (a *AllowedOriginsMerchantLevelApi) CreateAllowedOrigin(r AllowedOriginsMer
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -116,8 +116,8 @@ func (a *AllowedOriginsMerchantLevelApi) CreateAllowedOrigin(r AllowedOriginsMer
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -125,10 +125,10 @@ func (a *AllowedOriginsMerchantLevelApi) CreateAllowedOrigin(r AllowedOriginsMer
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type AllowedOriginsMerchantLevelApiDeleteAllowedOriginConfig struct {
@@ -170,8 +170,8 @@ Removes the [allowed origin](https://docs.adyen.com/development-resources/client
  * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 */
 
-func (a *AllowedOriginsMerchantLevelApi) DeleteAllowedOrigin(r AllowedOriginsMerchantLevelApiDeleteAllowedOriginConfig) (*_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *AllowedOriginsMerchantLevelApi) DeleteAllowedOrigin(r AllowedOriginsMerchantLevelApiDeleteAllowedOriginConfig) (*_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	var res interface{}
 	path := "/merchants/{merchantId}/apiCredentials/{apiCredentialId}/allowedOrigins/{originId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -179,7 +179,7 @@ func (a *AllowedOriginsMerchantLevelApi) DeleteAllowedOrigin(r AllowedOriginsMer
 	path = strings.Replace(path, "{"+"originId"+"}", url.PathEscape(common.ParameterValueToString(r.originId, "originId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -195,8 +195,8 @@ func (a *AllowedOriginsMerchantLevelApi) DeleteAllowedOrigin(r AllowedOriginsMer
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -204,8 +204,8 @@ func (a *AllowedOriginsMerchantLevelApi) DeleteAllowedOrigin(r AllowedOriginsMer
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -213,8 +213,8 @@ func (a *AllowedOriginsMerchantLevelApi) DeleteAllowedOrigin(r AllowedOriginsMer
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -222,8 +222,8 @@ func (a *AllowedOriginsMerchantLevelApi) DeleteAllowedOrigin(r AllowedOriginsMer
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -231,10 +231,10 @@ func (a *AllowedOriginsMerchantLevelApi) DeleteAllowedOrigin(r AllowedOriginsMer
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return httpRes, serviceError, err
 	}
-	return httpRes, v
+	return httpRes, serviceError, err
 }
 
 type AllowedOriginsMerchantLevelApiGetAllowedOriginConfig struct {
@@ -277,8 +277,8 @@ Returns the [allowed origin](https://docs.adyen.com/development-resources/client
 @return AllowedOrigin
 */
 
-func (a *AllowedOriginsMerchantLevelApi) GetAllowedOrigin(r AllowedOriginsMerchantLevelApiGetAllowedOriginConfig) (AllowedOrigin, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *AllowedOriginsMerchantLevelApi) GetAllowedOrigin(r AllowedOriginsMerchantLevelApiGetAllowedOriginConfig) (AllowedOrigin, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &AllowedOrigin{}
 	path := "/merchants/{merchantId}/apiCredentials/{apiCredentialId}/allowedOrigins/{originId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -286,7 +286,7 @@ func (a *AllowedOriginsMerchantLevelApi) GetAllowedOrigin(r AllowedOriginsMercha
 	path = strings.Replace(path, "{"+"originId"+"}", url.PathEscape(common.ParameterValueToString(r.originId, "originId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -302,8 +302,8 @@ func (a *AllowedOriginsMerchantLevelApi) GetAllowedOrigin(r AllowedOriginsMercha
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -311,8 +311,8 @@ func (a *AllowedOriginsMerchantLevelApi) GetAllowedOrigin(r AllowedOriginsMercha
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -320,8 +320,8 @@ func (a *AllowedOriginsMerchantLevelApi) GetAllowedOrigin(r AllowedOriginsMercha
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -329,8 +329,8 @@ func (a *AllowedOriginsMerchantLevelApi) GetAllowedOrigin(r AllowedOriginsMercha
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -338,10 +338,10 @@ func (a *AllowedOriginsMerchantLevelApi) GetAllowedOrigin(r AllowedOriginsMercha
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
 
 type AllowedOriginsMerchantLevelApiListAllowedOriginsConfig struct {
@@ -380,15 +380,15 @@ Returns the list of [allowed origins](https://docs.adyen.com/development-resourc
 @return AllowedOriginsResponse
 */
 
-func (a *AllowedOriginsMerchantLevelApi) ListAllowedOrigins(r AllowedOriginsMerchantLevelApiListAllowedOriginsConfig) (AllowedOriginsResponse, *_nethttp.Response, RestServiceError) {
-	var v RestServiceError
+func (a *AllowedOriginsMerchantLevelApi) ListAllowedOrigins(r AllowedOriginsMerchantLevelApiListAllowedOriginsConfig) (AllowedOriginsResponse, *_nethttp.Response, RestServiceError, error) {
+	var serviceError RestServiceError
 	res := &AllowedOriginsResponse{}
 	path := "/merchants/{merchantId}/apiCredentials/{apiCredentialId}/allowedOrigins"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"apiCredentialId"+"}", url.PathEscape(common.ParameterValueToString(r.apiCredentialId, "apiCredentialId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
-	httpRes, _ := common.SendAPIRequest(
+	httpRes, err := common.SendAPIRequest(
 		r.ctx,
 		a.Client,
 		nil,
@@ -404,8 +404,8 @@ func (a *AllowedOriginsMerchantLevelApi) ListAllowedOrigins(r AllowedOriginsMerc
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 401 {
@@ -413,8 +413,8 @@ func (a *AllowedOriginsMerchantLevelApi) ListAllowedOrigins(r AllowedOriginsMerc
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 403 {
@@ -422,8 +422,8 @@ func (a *AllowedOriginsMerchantLevelApi) ListAllowedOrigins(r AllowedOriginsMerc
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 422 {
@@ -431,8 +431,8 @@ func (a *AllowedOriginsMerchantLevelApi) ListAllowedOrigins(r AllowedOriginsMerc
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
 
 	if httpRes.StatusCode == 500 {
@@ -440,8 +440,8 @@ func (a *AllowedOriginsMerchantLevelApi) ListAllowedOrigins(r AllowedOriginsMerc
 		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &v)
-		return *res, httpRes, v
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError, err
 	}
-	return *res, httpRes, v
+	return *res, httpRes, serviceError, err
 }
