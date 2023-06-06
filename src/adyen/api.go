@@ -14,7 +14,7 @@ import (
 	"github.com/adyen/adyen-go-api-library/v7/src/binlookup"
 	"github.com/adyen/adyen-go-api-library/v7/src/checkout"
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
-	"github.com/adyen/adyen-go-api-library/v7/src/configurationnotification"
+	"github.com/adyen/adyen-go-api-library/v7/src/configurationwebhook"
 	"github.com/adyen/adyen-go-api-library/v7/src/disputes"
 	"github.com/adyen/adyen-go-api-library/v7/src/legalentity"
 	"github.com/adyen/adyen-go-api-library/v7/src/management"
@@ -26,10 +26,10 @@ import (
 	"github.com/adyen/adyen-go-api-library/v7/src/platformsnotificationconfiguration"
 	"github.com/adyen/adyen-go-api-library/v7/src/posterminalmanagement"
 	"github.com/adyen/adyen-go-api-library/v7/src/recurring"
-	"github.com/adyen/adyen-go-api-library/v7/src/reportnotification"
+	"github.com/adyen/adyen-go-api-library/v7/src/reportwebhook"
 	"github.com/adyen/adyen-go-api-library/v7/src/storedvalue"
-	"github.com/adyen/adyen-go-api-library/v7/src/transfernotification"
 	"github.com/adyen/adyen-go-api-library/v7/src/transfers"
+	"github.com/adyen/adyen-go-api-library/v7/src/transferwebhook"
 )
 
 // Constants used for the client API
@@ -83,9 +83,9 @@ type APIClient struct {
 	client *common.Client
 	// API Services
 
-	configurationnotification          *configurationnotification.NotificationService
-	reportnotification                 *reportnotification.NotificationService
-	transfernotification               *transfernotification.NotificationService
+	configurationwebhook               *configurationwebhook.NotificationService
+	reportwebhook                      *reportwebhook.NotificationService
+	transferwebhook                    *transferwebhook.NotificationService
 	checkout                           *checkout.APIClient
 	payments                           *payments.APIClient
 	payout                             *payout.APIClient

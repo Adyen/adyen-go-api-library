@@ -21,7 +21,7 @@ openapi-generator-cli:=java -jar $(openapi-generator-jar)
 goimports:=$(GOPATH)/bin/goimports
 
 generator:=go
-services:=balanceplatform configurationnotification reportnotification transfernotification binlookup checkout legalentity management payments payout posterminalmanagement recurring storedvalue transfers
+services:=balanceplatform configurationwebhook reportwebhook transferwebhook binlookup checkout legalentity management payments payout posterminalmanagement recurring storedvalue transfers
 output:=src
 templates:=templates/custom
 
@@ -30,9 +30,9 @@ models: $(services)
 
 balanceplatform: spec=BalancePlatformService-v2
 balanceplatform: serviceName=BalancePlatform
-configurationnotification: spec=configurationnotification-v1
-reportnotification: spec=reportnotification-v1
-transfernotification: spec=transfernotification-v3
+configurationwebhook: spec=BalancePlatformConfigurationNotification-v1
+reportwebhook: spec=BalancePlatformReportNotification-v1
+transferwebhook: spec=BalancePlatformTransferNotification-v3
 binlookup: spec=BinLookupService-v54
 checkout: spec=CheckoutService-v70
 checkout: serviceName=Checkout
