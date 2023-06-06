@@ -10,7 +10,7 @@ import (
 type NotificationService common.Service
 
 // HandleAccountNotificationRequest creates a Notification object from the given JSON string
-func (service *NotificationService) HandleAccountHolderNotificationRequest(req string) (*AccountHolderNotificationRequest, error) {
+func HandleAccountHolderNotificationRequest(req string) (*AccountHolderNotificationRequest, error) {
 	res := AccountHolderNotificationRequest{}
 	err := json.Unmarshal([]byte(req), &res)
 	if err != nil {
@@ -20,7 +20,7 @@ func (service *NotificationService) HandleAccountHolderNotificationRequest(req s
 }
 
 // HandleBalanceAccountNotificationRequest creates a Notification object from the given JSON string
-func (service *NotificationService) HandleBalanceAccountNotificationRequest(req string) (*BalanceAccountNotificationRequest, error) {
+func HandleBalanceAccountNotificationRequest(req string) (*BalanceAccountNotificationRequest, error) {
 	res := BalanceAccountNotificationRequest{}
 	err := json.Unmarshal([]byte(req), &res)
 	if err != nil {
@@ -30,7 +30,7 @@ func (service *NotificationService) HandleBalanceAccountNotificationRequest(req 
 }
 
 // HandleCardOrderNotificationRequest creates a Notification object from the given JSON string
-func (service *NotificationService) HandleCardOrderNotificationRequest(req string) (*CardOrderNotificationRequest, error) {
+func HandleCardOrderNotificationRequest(req string) (*CardOrderNotificationRequest, error) {
 	res := CardOrderNotificationRequest{}
 	err := json.Unmarshal([]byte(req), &res)
 	if err != nil {
@@ -40,7 +40,7 @@ func (service *NotificationService) HandleCardOrderNotificationRequest(req strin
 }
 
 // HandlePaymentNotificationRequest creates a Notification object from the given JSON string
-func (service *NotificationService) HandlePaymentNotificationRequest(req string) (*PaymentNotificationRequest, error) {
+func HandlePaymentNotificationRequest(req string) (*PaymentNotificationRequest, error) {
 	res := PaymentNotificationRequest{}
 	err := json.Unmarshal([]byte(req), &res)
 	if err != nil {
@@ -50,7 +50,7 @@ func (service *NotificationService) HandlePaymentNotificationRequest(req string)
 }
 
 // HandleSweepConfigurationNotificationRequest creates a Notification object from the given JSON string
-func (service *NotificationService) HandleSweepConfigurationNotificationRequest(req string) (*SweepConfigurationNotificationRequest, error) {
+func HandleSweepConfigurationNotificationRequest(req string) (*SweepConfigurationNotificationRequest, error) {
 	res := SweepConfigurationNotificationRequest{}
 	err := json.Unmarshal([]byte(req), &res)
 	if err != nil {

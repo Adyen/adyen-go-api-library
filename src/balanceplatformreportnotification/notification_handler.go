@@ -10,7 +10,7 @@ import (
 type NotificationService common.Service
 
 // HandleReportNotificationRequest creates a Notification object from the given JSON string
-func (service *NotificationService) HandleReportNotificationRequest(req string) (*ReportNotificationRequest, error) {
+func HandleReportNotificationRequest(req string) (*ReportNotificationRequest, error) {
 	res := ReportNotificationRequest{}
 	err := json.Unmarshal([]byte(req), &res)
 	if err != nil {
