@@ -9,7 +9,7 @@ API version: 3
 package balanceplatformtransfernotification
 
 import (
-    "github.com/adyen/adyen-go-api-library/v6/src/common"
+    "github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
 // APIClient manages communication with the Transfer webhooks API v3

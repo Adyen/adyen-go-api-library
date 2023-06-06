@@ -9,7 +9,7 @@ API version: 1
 package balanceplatformreportnotification
 
 import (
-    "github.com/adyen/adyen-go-api-library/v6/src/common"
+    "github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
 // APIClient manages communication with the Report webhooks API v1

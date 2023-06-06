@@ -3,7 +3,7 @@ package balanceplatformconfigurationnotification
 import (
 	"encoding/json"
 
-	"github.com/adyen/adyen-go-api-library/v6/src/common"
+	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
 // NotificationService used to namespace this util under the client for consistency and for future prooffing if this ever requires api access
