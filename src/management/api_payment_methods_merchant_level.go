@@ -82,10 +82,9 @@ func (a *PaymentMethodsMerchantLevelApi) AddApplePayDomain(r PaymentMethodsMerch
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -93,8 +92,6 @@ func (a *PaymentMethodsMerchantLevelApi) AddApplePayDomain(r PaymentMethodsMerch
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -102,8 +99,6 @@ func (a *PaymentMethodsMerchantLevelApi) AddApplePayDomain(r PaymentMethodsMerch
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -111,8 +106,6 @@ func (a *PaymentMethodsMerchantLevelApi) AddApplePayDomain(r PaymentMethodsMerch
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -120,8 +113,6 @@ func (a *PaymentMethodsMerchantLevelApi) AddApplePayDomain(r PaymentMethodsMerch
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -219,10 +210,9 @@ func (a *PaymentMethodsMerchantLevelApi) GetAllPaymentMethods(r PaymentMethodsMe
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -230,8 +220,6 @@ func (a *PaymentMethodsMerchantLevelApi) GetAllPaymentMethods(r PaymentMethodsMe
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -239,8 +227,6 @@ func (a *PaymentMethodsMerchantLevelApi) GetAllPaymentMethods(r PaymentMethodsMe
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -248,8 +234,6 @@ func (a *PaymentMethodsMerchantLevelApi) GetAllPaymentMethods(r PaymentMethodsMe
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -257,8 +241,6 @@ func (a *PaymentMethodsMerchantLevelApi) GetAllPaymentMethods(r PaymentMethodsMe
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -321,10 +303,9 @@ func (a *PaymentMethodsMerchantLevelApi) GetApplePayDomains(r PaymentMethodsMerc
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -332,8 +313,6 @@ func (a *PaymentMethodsMerchantLevelApi) GetApplePayDomains(r PaymentMethodsMerc
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -341,8 +320,6 @@ func (a *PaymentMethodsMerchantLevelApi) GetApplePayDomains(r PaymentMethodsMerc
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -350,8 +327,6 @@ func (a *PaymentMethodsMerchantLevelApi) GetApplePayDomains(r PaymentMethodsMerc
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -359,8 +334,6 @@ func (a *PaymentMethodsMerchantLevelApi) GetApplePayDomains(r PaymentMethodsMerc
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -423,10 +396,9 @@ func (a *PaymentMethodsMerchantLevelApi) GetPaymentMethodDetails(r PaymentMethod
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -434,8 +406,6 @@ func (a *PaymentMethodsMerchantLevelApi) GetPaymentMethodDetails(r PaymentMethod
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -443,8 +413,6 @@ func (a *PaymentMethodsMerchantLevelApi) GetPaymentMethodDetails(r PaymentMethod
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -452,8 +420,6 @@ func (a *PaymentMethodsMerchantLevelApi) GetPaymentMethodDetails(r PaymentMethod
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -461,8 +427,6 @@ func (a *PaymentMethodsMerchantLevelApi) GetPaymentMethodDetails(r PaymentMethod
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -527,10 +491,9 @@ func (a *PaymentMethodsMerchantLevelApi) RequestPaymentMethod(r PaymentMethodsMe
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -538,8 +501,6 @@ func (a *PaymentMethodsMerchantLevelApi) RequestPaymentMethod(r PaymentMethodsMe
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -547,8 +508,6 @@ func (a *PaymentMethodsMerchantLevelApi) RequestPaymentMethod(r PaymentMethodsMe
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -556,8 +515,6 @@ func (a *PaymentMethodsMerchantLevelApi) RequestPaymentMethod(r PaymentMethodsMe
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -565,8 +522,6 @@ func (a *PaymentMethodsMerchantLevelApi) RequestPaymentMethod(r PaymentMethodsMe
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -636,10 +591,9 @@ func (a *PaymentMethodsMerchantLevelApi) UpdatePaymentMethod(r PaymentMethodsMer
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -647,8 +601,6 @@ func (a *PaymentMethodsMerchantLevelApi) UpdatePaymentMethod(r PaymentMethodsMer
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -656,8 +608,6 @@ func (a *PaymentMethodsMerchantLevelApi) UpdatePaymentMethod(r PaymentMethodsMer
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -665,8 +615,6 @@ func (a *PaymentMethodsMerchantLevelApi) UpdatePaymentMethod(r PaymentMethodsMer
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -674,8 +622,6 @@ func (a *PaymentMethodsMerchantLevelApi) UpdatePaymentMethod(r PaymentMethodsMer
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)

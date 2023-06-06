@@ -78,10 +78,9 @@ func (a *TerminalOrdersMerchantLevelApi) CancelOrder(r TerminalOrdersMerchantLev
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -89,8 +88,6 @@ func (a *TerminalOrdersMerchantLevelApi) CancelOrder(r TerminalOrdersMerchantLev
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -98,8 +95,6 @@ func (a *TerminalOrdersMerchantLevelApi) CancelOrder(r TerminalOrdersMerchantLev
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -107,8 +102,6 @@ func (a *TerminalOrdersMerchantLevelApi) CancelOrder(r TerminalOrdersMerchantLev
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -116,8 +109,6 @@ func (a *TerminalOrdersMerchantLevelApi) CancelOrder(r TerminalOrdersMerchantLev
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -182,10 +173,9 @@ func (a *TerminalOrdersMerchantLevelApi) CreateOrder(r TerminalOrdersMerchantLev
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -193,8 +183,6 @@ func (a *TerminalOrdersMerchantLevelApi) CreateOrder(r TerminalOrdersMerchantLev
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -202,8 +190,6 @@ func (a *TerminalOrdersMerchantLevelApi) CreateOrder(r TerminalOrdersMerchantLev
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -211,8 +197,6 @@ func (a *TerminalOrdersMerchantLevelApi) CreateOrder(r TerminalOrdersMerchantLev
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -220,8 +204,6 @@ func (a *TerminalOrdersMerchantLevelApi) CreateOrder(r TerminalOrdersMerchantLev
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -286,10 +268,9 @@ func (a *TerminalOrdersMerchantLevelApi) CreateShippingLocation(r TerminalOrders
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -297,8 +278,6 @@ func (a *TerminalOrdersMerchantLevelApi) CreateShippingLocation(r TerminalOrders
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -306,8 +285,6 @@ func (a *TerminalOrdersMerchantLevelApi) CreateShippingLocation(r TerminalOrders
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -315,8 +292,6 @@ func (a *TerminalOrdersMerchantLevelApi) CreateShippingLocation(r TerminalOrders
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -324,8 +299,6 @@ func (a *TerminalOrdersMerchantLevelApi) CreateShippingLocation(r TerminalOrders
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -389,10 +362,9 @@ func (a *TerminalOrdersMerchantLevelApi) GetOrder(r TerminalOrdersMerchantLevelA
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -400,8 +372,6 @@ func (a *TerminalOrdersMerchantLevelApi) GetOrder(r TerminalOrdersMerchantLevelA
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -409,8 +379,6 @@ func (a *TerminalOrdersMerchantLevelApi) GetOrder(r TerminalOrdersMerchantLevelA
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -418,8 +386,6 @@ func (a *TerminalOrdersMerchantLevelApi) GetOrder(r TerminalOrdersMerchantLevelA
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -427,8 +393,6 @@ func (a *TerminalOrdersMerchantLevelApi) GetOrder(r TerminalOrdersMerchantLevelA
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -498,10 +462,9 @@ func (a *TerminalOrdersMerchantLevelApi) ListBillingEntities(r TerminalOrdersMer
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -509,8 +472,6 @@ func (a *TerminalOrdersMerchantLevelApi) ListBillingEntities(r TerminalOrdersMer
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -518,8 +479,6 @@ func (a *TerminalOrdersMerchantLevelApi) ListBillingEntities(r TerminalOrdersMer
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -527,8 +486,6 @@ func (a *TerminalOrdersMerchantLevelApi) ListBillingEntities(r TerminalOrdersMer
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -536,8 +493,6 @@ func (a *TerminalOrdersMerchantLevelApi) ListBillingEntities(r TerminalOrdersMer
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -636,10 +591,9 @@ func (a *TerminalOrdersMerchantLevelApi) ListOrders(r TerminalOrdersMerchantLeve
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -647,8 +601,6 @@ func (a *TerminalOrdersMerchantLevelApi) ListOrders(r TerminalOrdersMerchantLeve
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -656,8 +608,6 @@ func (a *TerminalOrdersMerchantLevelApi) ListOrders(r TerminalOrdersMerchantLeve
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -665,8 +615,6 @@ func (a *TerminalOrdersMerchantLevelApi) ListOrders(r TerminalOrdersMerchantLeve
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -674,8 +622,6 @@ func (a *TerminalOrdersMerchantLevelApi) ListOrders(r TerminalOrdersMerchantLeve
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -765,10 +711,9 @@ func (a *TerminalOrdersMerchantLevelApi) ListShippingLocations(r TerminalOrdersM
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -776,8 +721,6 @@ func (a *TerminalOrdersMerchantLevelApi) ListShippingLocations(r TerminalOrdersM
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -785,8 +728,6 @@ func (a *TerminalOrdersMerchantLevelApi) ListShippingLocations(r TerminalOrdersM
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -794,8 +735,6 @@ func (a *TerminalOrdersMerchantLevelApi) ListShippingLocations(r TerminalOrdersM
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -803,8 +742,6 @@ func (a *TerminalOrdersMerchantLevelApi) ListShippingLocations(r TerminalOrdersM
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -863,10 +800,9 @@ func (a *TerminalOrdersMerchantLevelApi) ListTerminalModels(r TerminalOrdersMerc
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -874,8 +810,6 @@ func (a *TerminalOrdersMerchantLevelApi) ListTerminalModels(r TerminalOrdersMerc
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -883,8 +817,6 @@ func (a *TerminalOrdersMerchantLevelApi) ListTerminalModels(r TerminalOrdersMerc
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -892,8 +824,6 @@ func (a *TerminalOrdersMerchantLevelApi) ListTerminalModels(r TerminalOrdersMerc
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -901,8 +831,6 @@ func (a *TerminalOrdersMerchantLevelApi) ListTerminalModels(r TerminalOrdersMerc
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -1001,10 +929,9 @@ func (a *TerminalOrdersMerchantLevelApi) ListTerminalProducts(r TerminalOrdersMe
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -1012,8 +939,6 @@ func (a *TerminalOrdersMerchantLevelApi) ListTerminalProducts(r TerminalOrdersMe
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -1021,8 +946,6 @@ func (a *TerminalOrdersMerchantLevelApi) ListTerminalProducts(r TerminalOrdersMe
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -1030,8 +953,6 @@ func (a *TerminalOrdersMerchantLevelApi) ListTerminalProducts(r TerminalOrdersMe
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -1039,8 +960,6 @@ func (a *TerminalOrdersMerchantLevelApi) ListTerminalProducts(r TerminalOrdersMe
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -1116,10 +1035,9 @@ func (a *TerminalOrdersMerchantLevelApi) UpdateOrder(r TerminalOrdersMerchantLev
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -1127,8 +1045,6 @@ func (a *TerminalOrdersMerchantLevelApi) UpdateOrder(r TerminalOrdersMerchantLev
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -1136,8 +1052,6 @@ func (a *TerminalOrdersMerchantLevelApi) UpdateOrder(r TerminalOrdersMerchantLev
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -1145,8 +1059,6 @@ func (a *TerminalOrdersMerchantLevelApi) UpdateOrder(r TerminalOrdersMerchantLev
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -1154,8 +1066,6 @@ func (a *TerminalOrdersMerchantLevelApi) UpdateOrder(r TerminalOrdersMerchantLev
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)

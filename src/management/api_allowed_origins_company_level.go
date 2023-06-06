@@ -83,10 +83,9 @@ func (a *AllowedOriginsCompanyLevelApi) CreateAllowedOrigin(r AllowedOriginsComp
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -94,8 +93,6 @@ func (a *AllowedOriginsCompanyLevelApi) CreateAllowedOrigin(r AllowedOriginsComp
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -103,8 +100,6 @@ func (a *AllowedOriginsCompanyLevelApi) CreateAllowedOrigin(r AllowedOriginsComp
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -112,8 +107,6 @@ func (a *AllowedOriginsCompanyLevelApi) CreateAllowedOrigin(r AllowedOriginsComp
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -121,8 +114,6 @@ func (a *AllowedOriginsCompanyLevelApi) CreateAllowedOrigin(r AllowedOriginsComp
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -189,10 +180,9 @@ func (a *AllowedOriginsCompanyLevelApi) DeleteAllowedOrigin(r AllowedOriginsComp
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -200,8 +190,6 @@ func (a *AllowedOriginsCompanyLevelApi) DeleteAllowedOrigin(r AllowedOriginsComp
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -209,8 +197,6 @@ func (a *AllowedOriginsCompanyLevelApi) DeleteAllowedOrigin(r AllowedOriginsComp
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -218,8 +204,6 @@ func (a *AllowedOriginsCompanyLevelApi) DeleteAllowedOrigin(r AllowedOriginsComp
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -227,8 +211,6 @@ func (a *AllowedOriginsCompanyLevelApi) DeleteAllowedOrigin(r AllowedOriginsComp
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -296,10 +278,9 @@ func (a *AllowedOriginsCompanyLevelApi) GetAllowedOrigin(r AllowedOriginsCompany
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -307,8 +288,6 @@ func (a *AllowedOriginsCompanyLevelApi) GetAllowedOrigin(r AllowedOriginsCompany
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -316,8 +295,6 @@ func (a *AllowedOriginsCompanyLevelApi) GetAllowedOrigin(r AllowedOriginsCompany
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -325,8 +302,6 @@ func (a *AllowedOriginsCompanyLevelApi) GetAllowedOrigin(r AllowedOriginsCompany
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -334,8 +309,6 @@ func (a *AllowedOriginsCompanyLevelApi) GetAllowedOrigin(r AllowedOriginsCompany
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -398,10 +371,9 @@ func (a *AllowedOriginsCompanyLevelApi) ListAllowedOrigins(r AllowedOriginsCompa
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -409,8 +381,6 @@ func (a *AllowedOriginsCompanyLevelApi) ListAllowedOrigins(r AllowedOriginsCompa
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -418,8 +388,6 @@ func (a *AllowedOriginsCompanyLevelApi) ListAllowedOrigins(r AllowedOriginsCompa
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -427,8 +395,6 @@ func (a *AllowedOriginsCompanyLevelApi) ListAllowedOrigins(r AllowedOriginsCompa
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -436,8 +402,6 @@ func (a *AllowedOriginsCompanyLevelApi) ListAllowedOrigins(r AllowedOriginsCompa
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)

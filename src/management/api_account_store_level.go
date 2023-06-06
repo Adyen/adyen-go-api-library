@@ -73,10 +73,9 @@ func (a *AccountStoreLevelApi) CreateStore(r AccountStoreLevelApiCreateStoreConf
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -84,8 +83,6 @@ func (a *AccountStoreLevelApi) CreateStore(r AccountStoreLevelApiCreateStoreConf
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -93,8 +90,6 @@ func (a *AccountStoreLevelApi) CreateStore(r AccountStoreLevelApiCreateStoreConf
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -102,8 +97,6 @@ func (a *AccountStoreLevelApi) CreateStore(r AccountStoreLevelApiCreateStoreConf
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -111,8 +104,6 @@ func (a *AccountStoreLevelApi) CreateStore(r AccountStoreLevelApiCreateStoreConf
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -177,10 +168,9 @@ func (a *AccountStoreLevelApi) CreateStoreByMerchantId(r AccountStoreLevelApiCre
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -188,8 +178,6 @@ func (a *AccountStoreLevelApi) CreateStoreByMerchantId(r AccountStoreLevelApiCre
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -197,8 +185,6 @@ func (a *AccountStoreLevelApi) CreateStoreByMerchantId(r AccountStoreLevelApiCre
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -206,8 +192,6 @@ func (a *AccountStoreLevelApi) CreateStoreByMerchantId(r AccountStoreLevelApiCre
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -215,8 +199,6 @@ func (a *AccountStoreLevelApi) CreateStoreByMerchantId(r AccountStoreLevelApiCre
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -280,10 +262,9 @@ func (a *AccountStoreLevelApi) GetStore(r AccountStoreLevelApiGetStoreConfig) (S
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -291,8 +272,6 @@ func (a *AccountStoreLevelApi) GetStore(r AccountStoreLevelApiGetStoreConfig) (S
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -300,8 +279,6 @@ func (a *AccountStoreLevelApi) GetStore(r AccountStoreLevelApiGetStoreConfig) (S
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -309,8 +286,6 @@ func (a *AccountStoreLevelApi) GetStore(r AccountStoreLevelApiGetStoreConfig) (S
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -318,8 +293,6 @@ func (a *AccountStoreLevelApi) GetStore(r AccountStoreLevelApiGetStoreConfig) (S
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -378,10 +351,9 @@ func (a *AccountStoreLevelApi) GetStoreById(r AccountStoreLevelApiGetStoreByIdCo
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -389,8 +361,6 @@ func (a *AccountStoreLevelApi) GetStoreById(r AccountStoreLevelApiGetStoreByIdCo
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -398,8 +368,6 @@ func (a *AccountStoreLevelApi) GetStoreById(r AccountStoreLevelApiGetStoreByIdCo
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -407,8 +375,6 @@ func (a *AccountStoreLevelApi) GetStoreById(r AccountStoreLevelApiGetStoreByIdCo
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -416,8 +382,6 @@ func (a *AccountStoreLevelApi) GetStoreById(r AccountStoreLevelApiGetStoreByIdCo
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -511,10 +475,9 @@ func (a *AccountStoreLevelApi) ListStores(r AccountStoreLevelApiListStoresConfig
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -522,8 +485,6 @@ func (a *AccountStoreLevelApi) ListStores(r AccountStoreLevelApiListStoresConfig
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -531,8 +492,6 @@ func (a *AccountStoreLevelApi) ListStores(r AccountStoreLevelApiListStoresConfig
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -540,8 +499,6 @@ func (a *AccountStoreLevelApi) ListStores(r AccountStoreLevelApiListStoresConfig
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -549,8 +506,6 @@ func (a *AccountStoreLevelApi) ListStores(r AccountStoreLevelApiListStoresConfig
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -639,10 +594,9 @@ func (a *AccountStoreLevelApi) ListStoresByMerchantId(r AccountStoreLevelApiList
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -650,8 +604,6 @@ func (a *AccountStoreLevelApi) ListStoresByMerchantId(r AccountStoreLevelApiList
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -659,8 +611,6 @@ func (a *AccountStoreLevelApi) ListStoresByMerchantId(r AccountStoreLevelApiList
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -668,8 +618,6 @@ func (a *AccountStoreLevelApi) ListStoresByMerchantId(r AccountStoreLevelApiList
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -677,8 +625,6 @@ func (a *AccountStoreLevelApi) ListStoresByMerchantId(r AccountStoreLevelApiList
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -748,10 +694,9 @@ func (a *AccountStoreLevelApi) UpdateStore(r AccountStoreLevelApiUpdateStoreConf
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -759,8 +704,6 @@ func (a *AccountStoreLevelApi) UpdateStore(r AccountStoreLevelApiUpdateStoreConf
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -768,8 +711,6 @@ func (a *AccountStoreLevelApi) UpdateStore(r AccountStoreLevelApiUpdateStoreConf
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -777,8 +718,6 @@ func (a *AccountStoreLevelApi) UpdateStore(r AccountStoreLevelApiUpdateStoreConf
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -786,8 +725,6 @@ func (a *AccountStoreLevelApi) UpdateStore(r AccountStoreLevelApiUpdateStoreConf
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -853,10 +790,9 @@ func (a *AccountStoreLevelApi) UpdateStoreById(r AccountStoreLevelApiUpdateStore
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -864,8 +800,6 @@ func (a *AccountStoreLevelApi) UpdateStoreById(r AccountStoreLevelApiUpdateStore
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -873,8 +807,6 @@ func (a *AccountStoreLevelApi) UpdateStoreById(r AccountStoreLevelApiUpdateStore
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -882,8 +814,6 @@ func (a *AccountStoreLevelApi) UpdateStoreById(r AccountStoreLevelApiUpdateStore
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -891,8 +821,6 @@ func (a *AccountStoreLevelApi) UpdateStoreById(r AccountStoreLevelApiUpdateStore
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)

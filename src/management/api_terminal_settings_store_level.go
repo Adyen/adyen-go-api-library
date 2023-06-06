@@ -89,10 +89,9 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalLogo(r TerminalSettingsStoreL
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -100,8 +99,6 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalLogo(r TerminalSettingsStoreL
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -109,8 +106,6 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalLogo(r TerminalSettingsStoreL
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -118,8 +113,6 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalLogo(r TerminalSettingsStoreL
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -127,8 +120,6 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalLogo(r TerminalSettingsStoreL
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -199,10 +190,9 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalLogoByStoreId(r TerminalSetti
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -210,8 +200,6 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalLogoByStoreId(r TerminalSetti
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -219,8 +207,6 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalLogoByStoreId(r TerminalSetti
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -228,8 +214,6 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalLogoByStoreId(r TerminalSetti
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -237,8 +221,6 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalLogoByStoreId(r TerminalSetti
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -305,10 +287,9 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalSettings(r TerminalSettingsSt
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -316,8 +297,6 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalSettings(r TerminalSettingsSt
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -325,8 +304,6 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalSettings(r TerminalSettingsSt
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -334,8 +311,6 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalSettings(r TerminalSettingsSt
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -343,8 +318,6 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalSettings(r TerminalSettingsSt
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -406,10 +379,9 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalSettingsByStoreId(r TerminalS
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -417,8 +389,6 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalSettingsByStoreId(r TerminalS
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -426,8 +396,6 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalSettingsByStoreId(r TerminalS
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -435,8 +403,6 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalSettingsByStoreId(r TerminalS
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -444,8 +410,6 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalSettingsByStoreId(r TerminalS
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -529,10 +493,9 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalLogo(r TerminalSettingsSto
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -540,8 +503,6 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalLogo(r TerminalSettingsSto
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -549,8 +510,6 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalLogo(r TerminalSettingsSto
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -558,8 +517,6 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalLogo(r TerminalSettingsSto
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -567,8 +524,6 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalLogo(r TerminalSettingsSto
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -647,10 +602,9 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalLogoByStoreId(r TerminalSe
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -658,8 +612,6 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalLogoByStoreId(r TerminalSe
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -667,8 +619,6 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalLogoByStoreId(r TerminalSe
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -676,8 +626,6 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalLogoByStoreId(r TerminalSe
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -685,8 +633,6 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalLogoByStoreId(r TerminalSe
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -763,10 +709,9 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalSettings(r TerminalSetting
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -774,8 +719,6 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalSettings(r TerminalSetting
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -783,8 +726,6 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalSettings(r TerminalSetting
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -792,8 +733,6 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalSettings(r TerminalSetting
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -801,8 +740,6 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalSettings(r TerminalSetting
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -874,10 +811,9 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalSettingsByStoreId(r Termin
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -885,8 +821,6 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalSettingsByStoreId(r Termin
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -894,8 +828,6 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalSettingsByStoreId(r Termin
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -903,8 +835,6 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalSettingsByStoreId(r Termin
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -912,8 +842,6 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalSettingsByStoreId(r Termin
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)

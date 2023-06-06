@@ -133,12 +133,16 @@ func (a *{{{classname}}}) {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecas
         queryParams,
         headerParams,
     )
+     defer httpRes.Body.Close()
 {{#responses}}
     {{#dataType}}
+    
         {{^is1xx}}
             {{^is2xx}}
                 {{#range}}
+                
                     {{#is3xx}}
+                   
                         if httpRes.StatusCode >= 300 && httpRes.StatusCode < 400 {
                     {{/is3xx}}
                     {{#is4xx}}
@@ -154,8 +158,6 @@ func (a *{{{classname}}}) {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecas
                         if httpRes.StatusCode == {{{code}}} {
                     {{/wildcard}}
                 {{/range}}
-                
-		        defer httpRes.Body.Close()
 	            // Read the response body
 		        body, _ := ioutil.ReadAll(httpRes.Body)
 		        _ = json.Unmarshal([]byte(body), &serviceError)

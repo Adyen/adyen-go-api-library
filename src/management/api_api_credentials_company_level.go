@@ -87,10 +87,9 @@ func (a *APICredentialsCompanyLevelApi) CreateApiCredential(r APICredentialsComp
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -98,8 +97,6 @@ func (a *APICredentialsCompanyLevelApi) CreateApiCredential(r APICredentialsComp
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -107,8 +104,6 @@ func (a *APICredentialsCompanyLevelApi) CreateApiCredential(r APICredentialsComp
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -116,8 +111,6 @@ func (a *APICredentialsCompanyLevelApi) CreateApiCredential(r APICredentialsComp
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -125,8 +118,6 @@ func (a *APICredentialsCompanyLevelApi) CreateApiCredential(r APICredentialsComp
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -189,10 +180,9 @@ func (a *APICredentialsCompanyLevelApi) GetApiCredential(r APICredentialsCompany
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -200,8 +190,6 @@ func (a *APICredentialsCompanyLevelApi) GetApiCredential(r APICredentialsCompany
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -209,8 +197,6 @@ func (a *APICredentialsCompanyLevelApi) GetApiCredential(r APICredentialsCompany
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -218,8 +204,6 @@ func (a *APICredentialsCompanyLevelApi) GetApiCredential(r APICredentialsCompany
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -227,8 +211,6 @@ func (a *APICredentialsCompanyLevelApi) GetApiCredential(r APICredentialsCompany
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -306,10 +288,9 @@ func (a *APICredentialsCompanyLevelApi) ListApiCredentials(r APICredentialsCompa
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -317,8 +298,6 @@ func (a *APICredentialsCompanyLevelApi) ListApiCredentials(r APICredentialsCompa
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -326,8 +305,6 @@ func (a *APICredentialsCompanyLevelApi) ListApiCredentials(r APICredentialsCompa
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -335,8 +312,6 @@ func (a *APICredentialsCompanyLevelApi) ListApiCredentials(r APICredentialsCompa
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -344,8 +319,6 @@ func (a *APICredentialsCompanyLevelApi) ListApiCredentials(r APICredentialsCompa
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -415,10 +388,9 @@ func (a *APICredentialsCompanyLevelApi) UpdateApiCredential(r APICredentialsComp
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -426,8 +398,6 @@ func (a *APICredentialsCompanyLevelApi) UpdateApiCredential(r APICredentialsComp
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -435,8 +405,6 @@ func (a *APICredentialsCompanyLevelApi) UpdateApiCredential(r APICredentialsComp
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -444,8 +412,6 @@ func (a *APICredentialsCompanyLevelApi) UpdateApiCredential(r APICredentialsComp
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -453,8 +419,6 @@ func (a *APICredentialsCompanyLevelApi) UpdateApiCredential(r APICredentialsComp
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)

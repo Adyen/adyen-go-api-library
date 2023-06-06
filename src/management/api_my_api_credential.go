@@ -73,10 +73,9 @@ func (a *MyAPICredentialApi) AddAllowedOrigin(r MyAPICredentialApiAddAllowedOrig
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -84,8 +83,6 @@ func (a *MyAPICredentialApi) AddAllowedOrigin(r MyAPICredentialApiAddAllowedOrig
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -93,8 +90,6 @@ func (a *MyAPICredentialApi) AddAllowedOrigin(r MyAPICredentialApiAddAllowedOrig
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -102,8 +97,6 @@ func (a *MyAPICredentialApi) AddAllowedOrigin(r MyAPICredentialApiAddAllowedOrig
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -111,8 +104,6 @@ func (a *MyAPICredentialApi) AddAllowedOrigin(r MyAPICredentialApiAddAllowedOrig
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -170,10 +161,9 @@ func (a *MyAPICredentialApi) GetAllowedOriginDetails(r MyAPICredentialApiGetAllo
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -181,8 +171,6 @@ func (a *MyAPICredentialApi) GetAllowedOriginDetails(r MyAPICredentialApiGetAllo
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -190,8 +178,6 @@ func (a *MyAPICredentialApi) GetAllowedOriginDetails(r MyAPICredentialApiGetAllo
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -199,8 +185,6 @@ func (a *MyAPICredentialApi) GetAllowedOriginDetails(r MyAPICredentialApiGetAllo
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -208,8 +192,6 @@ func (a *MyAPICredentialApi) GetAllowedOriginDetails(r MyAPICredentialApiGetAllo
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -261,10 +243,9 @@ func (a *MyAPICredentialApi) GetAllowedOrigins(r MyAPICredentialApiGetAllowedOri
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -272,8 +253,6 @@ func (a *MyAPICredentialApi) GetAllowedOrigins(r MyAPICredentialApiGetAllowedOri
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -281,8 +260,6 @@ func (a *MyAPICredentialApi) GetAllowedOrigins(r MyAPICredentialApiGetAllowedOri
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -290,8 +267,6 @@ func (a *MyAPICredentialApi) GetAllowedOrigins(r MyAPICredentialApiGetAllowedOri
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -299,8 +274,6 @@ func (a *MyAPICredentialApi) GetAllowedOrigins(r MyAPICredentialApiGetAllowedOri
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -352,10 +325,9 @@ func (a *MyAPICredentialApi) GetApiCredentialDetails(r MyAPICredentialApiGetApiC
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -363,8 +335,6 @@ func (a *MyAPICredentialApi) GetApiCredentialDetails(r MyAPICredentialApiGetApiC
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -372,8 +342,6 @@ func (a *MyAPICredentialApi) GetApiCredentialDetails(r MyAPICredentialApiGetApiC
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -381,8 +349,6 @@ func (a *MyAPICredentialApi) GetApiCredentialDetails(r MyAPICredentialApiGetApiC
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -390,8 +356,6 @@ func (a *MyAPICredentialApi) GetApiCredentialDetails(r MyAPICredentialApiGetApiC
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -448,10 +412,9 @@ func (a *MyAPICredentialApi) RemoveAllowedOrigin(r MyAPICredentialApiRemoveAllow
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -459,8 +422,6 @@ func (a *MyAPICredentialApi) RemoveAllowedOrigin(r MyAPICredentialApiRemoveAllow
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -468,8 +429,6 @@ func (a *MyAPICredentialApi) RemoveAllowedOrigin(r MyAPICredentialApiRemoveAllow
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -477,8 +436,6 @@ func (a *MyAPICredentialApi) RemoveAllowedOrigin(r MyAPICredentialApiRemoveAllow
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -486,8 +443,6 @@ func (a *MyAPICredentialApi) RemoveAllowedOrigin(r MyAPICredentialApiRemoveAllow
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)

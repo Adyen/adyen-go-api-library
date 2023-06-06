@@ -83,10 +83,9 @@ func (a *PayoutSettingsMerchantLevelApi) AddPayoutSetting(r PayoutSettingsMercha
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -94,8 +93,6 @@ func (a *PayoutSettingsMerchantLevelApi) AddPayoutSetting(r PayoutSettingsMercha
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -103,8 +100,6 @@ func (a *PayoutSettingsMerchantLevelApi) AddPayoutSetting(r PayoutSettingsMercha
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -112,8 +107,6 @@ func (a *PayoutSettingsMerchantLevelApi) AddPayoutSetting(r PayoutSettingsMercha
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -121,8 +114,6 @@ func (a *PayoutSettingsMerchantLevelApi) AddPayoutSetting(r PayoutSettingsMercha
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -187,10 +178,9 @@ func (a *PayoutSettingsMerchantLevelApi) DeletePayoutSetting(r PayoutSettingsMer
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -198,8 +188,6 @@ func (a *PayoutSettingsMerchantLevelApi) DeletePayoutSetting(r PayoutSettingsMer
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -207,8 +195,6 @@ func (a *PayoutSettingsMerchantLevelApi) DeletePayoutSetting(r PayoutSettingsMer
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -216,8 +202,6 @@ func (a *PayoutSettingsMerchantLevelApi) DeletePayoutSetting(r PayoutSettingsMer
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -225,8 +209,6 @@ func (a *PayoutSettingsMerchantLevelApi) DeletePayoutSetting(r PayoutSettingsMer
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -291,10 +273,9 @@ func (a *PayoutSettingsMerchantLevelApi) GetPayoutSetting(r PayoutSettingsMercha
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -302,8 +283,6 @@ func (a *PayoutSettingsMerchantLevelApi) GetPayoutSetting(r PayoutSettingsMercha
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -311,8 +290,6 @@ func (a *PayoutSettingsMerchantLevelApi) GetPayoutSetting(r PayoutSettingsMercha
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -320,8 +297,6 @@ func (a *PayoutSettingsMerchantLevelApi) GetPayoutSetting(r PayoutSettingsMercha
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -329,8 +304,6 @@ func (a *PayoutSettingsMerchantLevelApi) GetPayoutSetting(r PayoutSettingsMercha
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -390,10 +363,9 @@ func (a *PayoutSettingsMerchantLevelApi) ListPayoutSettings(r PayoutSettingsMerc
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -401,8 +373,6 @@ func (a *PayoutSettingsMerchantLevelApi) ListPayoutSettings(r PayoutSettingsMerc
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -410,8 +380,6 @@ func (a *PayoutSettingsMerchantLevelApi) ListPayoutSettings(r PayoutSettingsMerc
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -419,8 +387,6 @@ func (a *PayoutSettingsMerchantLevelApi) ListPayoutSettings(r PayoutSettingsMerc
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -428,8 +394,6 @@ func (a *PayoutSettingsMerchantLevelApi) ListPayoutSettings(r PayoutSettingsMerc
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -502,10 +466,9 @@ func (a *PayoutSettingsMerchantLevelApi) UpdatePayoutSetting(r PayoutSettingsMer
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -513,8 +476,6 @@ func (a *PayoutSettingsMerchantLevelApi) UpdatePayoutSetting(r PayoutSettingsMer
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -522,8 +483,6 @@ func (a *PayoutSettingsMerchantLevelApi) UpdatePayoutSetting(r PayoutSettingsMer
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -531,8 +490,6 @@ func (a *PayoutSettingsMerchantLevelApi) UpdatePayoutSetting(r PayoutSettingsMer
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -540,8 +497,6 @@ func (a *PayoutSettingsMerchantLevelApi) UpdatePayoutSetting(r PayoutSettingsMer
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)

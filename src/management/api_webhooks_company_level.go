@@ -76,10 +76,9 @@ func (a *WebhooksCompanyLevelApi) GenerateHmacKey(r WebhooksCompanyLevelApiGener
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -87,8 +86,6 @@ func (a *WebhooksCompanyLevelApi) GenerateHmacKey(r WebhooksCompanyLevelApiGener
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -96,8 +93,6 @@ func (a *WebhooksCompanyLevelApi) GenerateHmacKey(r WebhooksCompanyLevelApiGener
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -105,8 +100,6 @@ func (a *WebhooksCompanyLevelApi) GenerateHmacKey(r WebhooksCompanyLevelApiGener
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -114,8 +107,6 @@ func (a *WebhooksCompanyLevelApi) GenerateHmacKey(r WebhooksCompanyLevelApiGener
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -179,10 +170,9 @@ func (a *WebhooksCompanyLevelApi) GetWebhook(r WebhooksCompanyLevelApiGetWebhook
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -190,8 +180,6 @@ func (a *WebhooksCompanyLevelApi) GetWebhook(r WebhooksCompanyLevelApiGetWebhook
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -199,8 +187,6 @@ func (a *WebhooksCompanyLevelApi) GetWebhook(r WebhooksCompanyLevelApiGetWebhook
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -208,8 +194,6 @@ func (a *WebhooksCompanyLevelApi) GetWebhook(r WebhooksCompanyLevelApiGetWebhook
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -217,8 +201,6 @@ func (a *WebhooksCompanyLevelApi) GetWebhook(r WebhooksCompanyLevelApiGetWebhook
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -297,10 +279,9 @@ func (a *WebhooksCompanyLevelApi) ListAllWebhooks(r WebhooksCompanyLevelApiListA
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -308,8 +289,6 @@ func (a *WebhooksCompanyLevelApi) ListAllWebhooks(r WebhooksCompanyLevelApiListA
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -317,8 +296,6 @@ func (a *WebhooksCompanyLevelApi) ListAllWebhooks(r WebhooksCompanyLevelApiListA
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -326,8 +303,6 @@ func (a *WebhooksCompanyLevelApi) ListAllWebhooks(r WebhooksCompanyLevelApiListA
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -335,8 +310,6 @@ func (a *WebhooksCompanyLevelApi) ListAllWebhooks(r WebhooksCompanyLevelApiListA
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -398,10 +371,9 @@ func (a *WebhooksCompanyLevelApi) RemoveWebhook(r WebhooksCompanyLevelApiRemoveW
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -409,8 +381,6 @@ func (a *WebhooksCompanyLevelApi) RemoveWebhook(r WebhooksCompanyLevelApiRemoveW
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -418,8 +388,6 @@ func (a *WebhooksCompanyLevelApi) RemoveWebhook(r WebhooksCompanyLevelApiRemoveW
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -427,8 +395,6 @@ func (a *WebhooksCompanyLevelApi) RemoveWebhook(r WebhooksCompanyLevelApiRemoveW
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -436,8 +402,6 @@ func (a *WebhooksCompanyLevelApi) RemoveWebhook(r WebhooksCompanyLevelApiRemoveW
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -502,10 +466,9 @@ func (a *WebhooksCompanyLevelApi) SetUpWebhook(r WebhooksCompanyLevelApiSetUpWeb
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -513,8 +476,6 @@ func (a *WebhooksCompanyLevelApi) SetUpWebhook(r WebhooksCompanyLevelApiSetUpWeb
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -522,8 +483,6 @@ func (a *WebhooksCompanyLevelApi) SetUpWebhook(r WebhooksCompanyLevelApiSetUpWeb
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -531,8 +490,6 @@ func (a *WebhooksCompanyLevelApi) SetUpWebhook(r WebhooksCompanyLevelApiSetUpWeb
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -540,8 +497,6 @@ func (a *WebhooksCompanyLevelApi) SetUpWebhook(r WebhooksCompanyLevelApiSetUpWeb
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -617,10 +572,9 @@ func (a *WebhooksCompanyLevelApi) TestWebhook(r WebhooksCompanyLevelApiTestWebho
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -628,8 +582,6 @@ func (a *WebhooksCompanyLevelApi) TestWebhook(r WebhooksCompanyLevelApiTestWebho
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -637,8 +589,6 @@ func (a *WebhooksCompanyLevelApi) TestWebhook(r WebhooksCompanyLevelApiTestWebho
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -646,8 +596,6 @@ func (a *WebhooksCompanyLevelApi) TestWebhook(r WebhooksCompanyLevelApiTestWebho
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -655,8 +603,6 @@ func (a *WebhooksCompanyLevelApi) TestWebhook(r WebhooksCompanyLevelApiTestWebho
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -726,10 +672,9 @@ func (a *WebhooksCompanyLevelApi) UpdateWebhook(r WebhooksCompanyLevelApiUpdateW
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
 	if httpRes.StatusCode == 400 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -737,8 +682,6 @@ func (a *WebhooksCompanyLevelApi) UpdateWebhook(r WebhooksCompanyLevelApiUpdateW
 	}
 
 	if httpRes.StatusCode == 401 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -746,8 +689,6 @@ func (a *WebhooksCompanyLevelApi) UpdateWebhook(r WebhooksCompanyLevelApiUpdateW
 	}
 
 	if httpRes.StatusCode == 403 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -755,8 +696,6 @@ func (a *WebhooksCompanyLevelApi) UpdateWebhook(r WebhooksCompanyLevelApiUpdateW
 	}
 
 	if httpRes.StatusCode == 422 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
@@ -764,8 +703,6 @@ func (a *WebhooksCompanyLevelApi) UpdateWebhook(r WebhooksCompanyLevelApiUpdateW
 	}
 
 	if httpRes.StatusCode == 500 {
-
-		defer httpRes.Body.Close()
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
