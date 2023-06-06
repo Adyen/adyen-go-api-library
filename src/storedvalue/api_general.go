@@ -9,90 +9,318 @@ API version: 46
 package storedvalue
 
 import (
-	_context "context"
+	"context"
 	_nethttp "net/http"
+	"net/url"
+
+	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
+
+// GeneralApi GeneralApi service
+type GeneralApi common.Service
+
+type GeneralApiChangeStatusConfig struct {
+	ctx                            context.Context
+	storedValueStatusChangeRequest *StoredValueStatusChangeRequest
+}
+
+func (r GeneralApiChangeStatusConfig) StoredValueStatusChangeRequest(storedValueStatusChangeRequest StoredValueStatusChangeRequest) GeneralApiChangeStatusConfig {
+	r.storedValueStatusChangeRequest = &storedValueStatusChangeRequest
+	return r
+}
+
+/*
+ChangeStatus Changes the status of the payment method.
+
+Changes the status of the provided payment method to the specified status.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return GeneralApiChangeStatusConfig
+*/
+func (a *GeneralApi) ChangeStatusConfig(ctx context.Context) GeneralApiChangeStatusConfig {
+	return GeneralApiChangeStatusConfig{
+		ctx: ctx,
+	}
+}
 
 /*
 Changes the status of the payment method.
 Changes the status of the provided payment method to the specified status.
  * @param req StoredValueStatusChangeRequest - reference of StoredValueStatusChangeRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return StoredValueStatusChangeResponse
 */
-func (a StoredValue) ChangeStatus(req *StoredValueStatusChangeRequest, ctxs ..._context.Context) (StoredValueStatusChangeResponse, *_nethttp.Response, error) {
+
+func (a *GeneralApi) ChangeStatus(r GeneralApiChangeStatusConfig) (StoredValueStatusChangeResponse, *_nethttp.Response, error) {
 	res := &StoredValueStatusChangeResponse{}
 	path := "/changeStatus"
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		r.storedValueStatusChangeRequest,
+		res,
+		_nethttp.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
+}
+
+type GeneralApiCheckBalanceConfig struct {
+	ctx                            context.Context
+	storedValueBalanceCheckRequest *StoredValueBalanceCheckRequest
+}
+
+func (r GeneralApiCheckBalanceConfig) StoredValueBalanceCheckRequest(storedValueBalanceCheckRequest StoredValueBalanceCheckRequest) GeneralApiCheckBalanceConfig {
+	r.storedValueBalanceCheckRequest = &storedValueBalanceCheckRequest
+	return r
+}
+
+/*
+CheckBalance Checks the balance.
+
+Checks the balance of the provided payment method.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return GeneralApiCheckBalanceConfig
+*/
+func (a *GeneralApi) CheckBalanceConfig(ctx context.Context) GeneralApiCheckBalanceConfig {
+	return GeneralApiCheckBalanceConfig{
+		ctx: ctx,
+	}
 }
 
 /*
 Checks the balance.
 Checks the balance of the provided payment method.
  * @param req StoredValueBalanceCheckRequest - reference of StoredValueBalanceCheckRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return StoredValueBalanceCheckResponse
 */
-func (a StoredValue) CheckBalance(req *StoredValueBalanceCheckRequest, ctxs ..._context.Context) (StoredValueBalanceCheckResponse, *_nethttp.Response, error) {
+
+func (a *GeneralApi) CheckBalance(r GeneralApiCheckBalanceConfig) (StoredValueBalanceCheckResponse, *_nethttp.Response, error) {
 	res := &StoredValueBalanceCheckResponse{}
 	path := "/checkBalance"
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		r.storedValueBalanceCheckRequest,
+		res,
+		_nethttp.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
+}
+
+type GeneralApiIssueConfig struct {
+	ctx                     context.Context
+	storedValueIssueRequest *StoredValueIssueRequest
+}
+
+func (r GeneralApiIssueConfig) StoredValueIssueRequest(storedValueIssueRequest StoredValueIssueRequest) GeneralApiIssueConfig {
+	r.storedValueIssueRequest = &storedValueIssueRequest
+	return r
+}
+
+/*
+Issue Issues a new card.
+
+Issues a new card of the given payment method.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return GeneralApiIssueConfig
+*/
+func (a *GeneralApi) IssueConfig(ctx context.Context) GeneralApiIssueConfig {
+	return GeneralApiIssueConfig{
+		ctx: ctx,
+	}
 }
 
 /*
 Issues a new card.
 Issues a new card of the given payment method.
  * @param req StoredValueIssueRequest - reference of StoredValueIssueRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return StoredValueIssueResponse
 */
-func (a StoredValue) Issue(req *StoredValueIssueRequest, ctxs ..._context.Context) (StoredValueIssueResponse, *_nethttp.Response, error) {
+
+func (a *GeneralApi) Issue(r GeneralApiIssueConfig) (StoredValueIssueResponse, *_nethttp.Response, error) {
 	res := &StoredValueIssueResponse{}
 	path := "/issue"
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		r.storedValueIssueRequest,
+		res,
+		_nethttp.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
+}
+
+type GeneralApiLoadConfig struct {
+	ctx                    context.Context
+	storedValueLoadRequest *StoredValueLoadRequest
+}
+
+func (r GeneralApiLoadConfig) StoredValueLoadRequest(storedValueLoadRequest StoredValueLoadRequest) GeneralApiLoadConfig {
+	r.storedValueLoadRequest = &storedValueLoadRequest
+	return r
+}
+
+/*
+Load Loads the payment method.
+
+Loads the payment method with the specified funds.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return GeneralApiLoadConfig
+*/
+func (a *GeneralApi) LoadConfig(ctx context.Context) GeneralApiLoadConfig {
+	return GeneralApiLoadConfig{
+		ctx: ctx,
+	}
 }
 
 /*
 Loads the payment method.
 Loads the payment method with the specified funds.
  * @param req StoredValueLoadRequest - reference of StoredValueLoadRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return StoredValueLoadResponse
 */
-func (a StoredValue) Load(req *StoredValueLoadRequest, ctxs ..._context.Context) (StoredValueLoadResponse, *_nethttp.Response, error) {
+
+func (a *GeneralApi) Load(r GeneralApiLoadConfig) (StoredValueLoadResponse, *_nethttp.Response, error) {
 	res := &StoredValueLoadResponse{}
 	path := "/load"
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		r.storedValueLoadRequest,
+		res,
+		_nethttp.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
+}
+
+type GeneralApiMergeBalanceConfig struct {
+	ctx                            context.Context
+	storedValueBalanceMergeRequest *StoredValueBalanceMergeRequest
+}
+
+func (r GeneralApiMergeBalanceConfig) StoredValueBalanceMergeRequest(storedValueBalanceMergeRequest StoredValueBalanceMergeRequest) GeneralApiMergeBalanceConfig {
+	r.storedValueBalanceMergeRequest = &storedValueBalanceMergeRequest
+	return r
+}
+
+/*
+MergeBalance Merge the balance of two cards.
+
+Increases the balance of the paymentmethod by the full amount left on the source paymentmethod
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return GeneralApiMergeBalanceConfig
+*/
+func (a *GeneralApi) MergeBalanceConfig(ctx context.Context) GeneralApiMergeBalanceConfig {
+	return GeneralApiMergeBalanceConfig{
+		ctx: ctx,
+	}
 }
 
 /*
 Merge the balance of two cards.
 Increases the balance of the paymentmethod by the full amount left on the source paymentmethod
  * @param req StoredValueBalanceMergeRequest - reference of StoredValueBalanceMergeRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return StoredValueBalanceMergeResponse
 */
-func (a StoredValue) MergeBalance(req *StoredValueBalanceMergeRequest, ctxs ..._context.Context) (StoredValueBalanceMergeResponse, *_nethttp.Response, error) {
+
+func (a *GeneralApi) MergeBalance(r GeneralApiMergeBalanceConfig) (StoredValueBalanceMergeResponse, *_nethttp.Response, error) {
 	res := &StoredValueBalanceMergeResponse{}
 	path := "/mergeBalance"
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		r.storedValueBalanceMergeRequest,
+		res,
+		_nethttp.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
+}
+
+type GeneralApiVoidTransactionConfig struct {
+	ctx                    context.Context
+	storedValueVoidRequest *StoredValueVoidRequest
+}
+
+func (r GeneralApiVoidTransactionConfig) StoredValueVoidRequest(storedValueVoidRequest StoredValueVoidRequest) GeneralApiVoidTransactionConfig {
+	r.storedValueVoidRequest = &storedValueVoidRequest
+	return r
+}
+
+/*
+VoidTransaction Voids a transaction.
+
+Voids the referenced stored value transaction.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return GeneralApiVoidTransactionConfig
+*/
+func (a *GeneralApi) VoidTransactionConfig(ctx context.Context) GeneralApiVoidTransactionConfig {
+	return GeneralApiVoidTransactionConfig{
+		ctx: ctx,
+	}
 }
 
 /*
 Voids a transaction.
 Voids the referenced stored value transaction.
  * @param req StoredValueVoidRequest - reference of StoredValueVoidRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return StoredValueVoidResponse
 */
-func (a StoredValue) VoidTransaction(req *StoredValueVoidRequest, ctxs ..._context.Context) (StoredValueVoidResponse, *_nethttp.Response, error) {
+
+func (a *GeneralApi) VoidTransaction(r GeneralApiVoidTransactionConfig) (StoredValueVoidResponse, *_nethttp.Response, error) {
 	res := &StoredValueVoidResponse{}
 	path := "/voidTransaction"
-	httpRes, err := a.Client.MakeHTTPPostRequest(req, res, a.BasePath()+path, ctxs...)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		r.storedValueVoidRequest,
+		res,
+		_nethttp.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
