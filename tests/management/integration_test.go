@@ -6,9 +6,9 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/adyen/adyen-go-api-library/v6/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v6/src/common"
-	"github.com/adyen/adyen-go-api-library/v6/src/management"
+	"github.com/adyen/adyen-go-api-library/v7/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v7/src/management"
 
 	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
@@ -70,7 +70,7 @@ func Test_ManagementAPI_Integration(t *testing.T) {
 		// Creates a test that should fail because of the wrong Id
 		req := service.AccountCompanyLevelApi.GetCompanyAccountConfig(context.Background(), "99999")
 		_, httpRes, err := service.AccountCompanyLevelApi.GetCompanyAccount(req)
-		assert.NotEmpty(t,err.GetRequestId())
+		assert.NotEmpty(t, err.GetRequestId())
 		assert.Equal(t, "010", err.GetErrorCode())
 		assert.Equal(t, int32(403), err.GetStatus())
 		assert.Equal(t, 403, httpRes.StatusCode)
