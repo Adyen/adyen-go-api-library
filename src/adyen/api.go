@@ -79,7 +79,6 @@ const (
 type APIClient struct {
 	client *common.Client
 	// API Services
-
 	checkout                           *checkout.APIClient
 	payments                           *payments.APIClient
 	payout                             *payout.APIClient
