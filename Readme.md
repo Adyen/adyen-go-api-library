@@ -125,7 +125,7 @@ req = req.RecurringDetailsRequest(recurring.RecurringDetailsRequest{
 res, httpRes, err := service.ListRecurringDetails(req)
 ```
 
-### Using Webhook parser
+### Using the webhook parser
 
 ```go
 import (
@@ -208,8 +208,9 @@ client := adyen.NewClient(&common.Config{
 
 ## Support
 
-If you have a feature request, or spotted a bug or a technical problem, create a github issue. 
-For other questions, contact our [support team](https://support.adyen.com/hc/en-us/requests/new?ticket_form_id=360000705420).
+If you have a feature request, or spotted a bug or a technical problem, [create an issue here](https://github.com/Adyen/adyen-go-api-library/issues/new/choose).
+
+For other questions, [contact our Support Team](https://www.adyen.help/hc/en-us/requests/new?ticket_form_id=360000705420).
 
 ## Contributing
 
@@ -220,6 +221,10 @@ We strongly encourage you to join us in contributing to this repository so every
 -   Any general improvements
 
 Read our [**contribution guidelines**](CONTRIBUTING.md) to find out how.
+
+## Feedback
+
+We value your input! Help us enhance our API Libraries and improve the integration experience by providing your feedback. Please take a moment to fill out [our feedback form](https://forms.gle/A4EERrR6CWgKWe5r9) to share your thoughts, suggestions or ideas.
 
 ## Licence
 
