@@ -2,3 +2,6 @@
 
 # Single class service does not need an "index" to group multiple tags
 client.go
+
+# Webhook handler is not a generated file and should remain untouched
+webhook_handler.go
