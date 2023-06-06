@@ -15,11 +15,11 @@ import (
 	"os"
 	"testing"
 
-	"github.com/adyen/adyen-go-api-library/v6/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v6/src/common"
-	"github.com/adyen/adyen-go-api-library/v6/src/platformsaccount"
-	"github.com/adyen/adyen-go-api-library/v6/src/platformsfund"
-	"github.com/adyen/adyen-go-api-library/v6/src/platformsnotificationconfiguration"
+	"github.com/adyen/adyen-go-api-library/v7/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v7/src/platformsaccount"
+	"github.com/adyen/adyen-go-api-library/v7/src/platformsfund"
+	"github.com/adyen/adyen-go-api-library/v7/src/platformsnotificationconfiguration"
 	"github.com/google/uuid"
 	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
@@ -42,7 +42,7 @@ func Test_Platforms(t *testing.T) {
 	// client.GetConfig().Debug = true
 
 	createAccountHolder := func(id string) (platformsaccount.CreateAccountHolderResponse, *http.Response, error) {
-		return client.PlatformsAccount.CreateAccountHolder(&platformsaccount.CreateAccountHolderRequest{
+		return client.PlatformsAccount().CreateAccountHolder(&platformsaccount.CreateAccountHolderRequest{
 			AccountHolderCode: id,
 			AccountHolderDetails: platformsaccount.AccountHolderDetails{
 				Email:           "go_library@test.com",
@@ -65,7 +65,7 @@ func Test_Platforms(t *testing.T) {
 	}
 
 	createAccount := func(id string) (platformsaccount.CreateAccountResponse, *http.Response, error) {
-		return client.PlatformsAccount.CreateAccount(&platformsaccount.CreateAccountRequest{
+		return client.PlatformsAccount().CreateAccount(&platformsaccount.CreateAccountRequest{
 			AccountHolderCode: uuid.New().String(),
 			Description:       "Create Account GoLang E2E",
 			Metadata:          map[string]string{"meta": "data"},
@@ -79,7 +79,7 @@ func Test_Platforms(t *testing.T) {
 		var buff bytes.Buffer
 		png.Encode(&buff, myImage)
 		encodedString := base64.StdEncoding.EncodeToString(buff.Bytes())
-		return client.PlatformsAccount.UploadDocument(&platformsaccount.UploadDocumentRequest{
+		return client.PlatformsAccount().UploadDocument(&platformsaccount.UploadDocumentRequest{
 			DocumentContent: encodedString,
 			DocumentDetail: platformsaccount.DocumentDetail{
 				AccountHolderCode: id,
@@ -92,7 +92,7 @@ func Test_Platforms(t *testing.T) {
 	}
 
 	createConfiguration := func() (platformsnotificationconfiguration.GetNotificationConfigurationResponse, *http.Response, error) {
-		return client.PlatformsNotificationConfiguration.CreateNotificationConfiguration(&platformsnotificationconfiguration.CreateNotificationConfigurationRequest{
+		return client.PlatformsNotificationConfiguration().CreateNotificationConfiguration(&platformsnotificationconfiguration.CreateNotificationConfigurationRequest{
 			ConfigurationDetails: platformsnotificationconfiguration.NotificationConfigurationDetails{
 				Active:    true,
 				NotifyURL: "https://www.adyen.com/notification-handler",
@@ -131,7 +131,7 @@ func Test_Platforms(t *testing.T) {
 			// ... and uncomment the line below
 			// time.Sleep(20 * time.Second)
 
-			res, httpRes, err := client.PlatformsAccount.GetAccountHolder(&platformsaccount.GetAccountHolderRequest{
+			res, httpRes, err := client.PlatformsAccount().GetAccountHolder(&platformsaccount.GetAccountHolderRequest{
 				AccountHolderCode: accountHolderCode,
 			})
 
@@ -142,7 +142,7 @@ func Test_Platforms(t *testing.T) {
 		t.Run("Update account holder", func(t *testing.T) {
 			accountHolderCode := uuid.New().String()
 			createAccountHolder(accountHolderCode)
-			res, httpRes, err := client.PlatformsAccount.UpdateAccountHolder(&platformsaccount.UpdateAccountHolderRequest{
+			res, httpRes, err := client.PlatformsAccount().UpdateAccountHolder(&platformsaccount.UpdateAccountHolderRequest{
 				AccountHolderCode:    accountHolderCode,
 				AccountHolderDetails: &platformsaccount.AccountHolderDetails{Address: &platformsaccount.ViasAddress{Country: "BE"}},
 			})
@@ -154,7 +154,7 @@ func Test_Platforms(t *testing.T) {
 		t.Run("Check account holder", func(t *testing.T) {
 			accountHolderCode := uuid.New().String()
 			createAccountHolder(accountHolderCode)
-			res, httpRes, err := client.PlatformsAccount.CheckAccountHolder(&platformsaccount.PerformVerificationRequest{
+			res, httpRes, err := client.PlatformsAccount().CheckAccountHolder(&platformsaccount.PerformVerificationRequest{
 				AccountHolderCode: accountHolderCode,
 				AccountStateType:  "Processing",
 				Tier:              2,
@@ -186,7 +186,7 @@ func Test_Platforms(t *testing.T) {
 			// ... and uncomment the line below
 			// time.Sleep(5 * time.Second)
 
-			res, httpRes, err := client.PlatformsAccount.GetUploadedDocuments(&platformsaccount.GetUploadedDocumentsRequest{
+			res, httpRes, err := client.PlatformsAccount().GetUploadedDocuments(&platformsaccount.GetUploadedDocumentsRequest{
 				AccountHolderCode: accountHolderCode,
 			})
 
@@ -203,7 +203,7 @@ func Test_Platforms(t *testing.T) {
 			// ... and uncomment the line below
 			// time.Sleep(5 * time.Second)
 
-			res, httpRes, err := client.PlatformsAccount.CloseAccount(&platformsaccount.CloseAccountRequest{
+			res, httpRes, err := client.PlatformsAccount().CloseAccount(&platformsaccount.CloseAccountRequest{
 				AccountCode: r.AccountCode,
 			})
 
@@ -215,7 +215,7 @@ func Test_Platforms(t *testing.T) {
 			accountHolderCode := uuid.New().String()
 			createAccountHolder(accountHolderCode)
 
-			res, httpRes, err := client.PlatformsAccount.SuspendAccountHolder(&platformsaccount.SuspendAccountHolderRequest{
+			res, httpRes, err := client.PlatformsAccount().SuspendAccountHolder(&platformsaccount.SuspendAccountHolderRequest{
 				AccountHolderCode: accountHolderCode,
 			})
 
@@ -229,11 +229,11 @@ func Test_Platforms(t *testing.T) {
 			accountHolderCode := uuid.New().String()
 			createAccountHolder(accountHolderCode)
 
-			client.PlatformsAccount.SuspendAccountHolder(&platformsaccount.SuspendAccountHolderRequest{
+			client.PlatformsAccount().SuspendAccountHolder(&platformsaccount.SuspendAccountHolderRequest{
 				AccountHolderCode: accountHolderCode,
 			})
 
-			res, httpRes, err := client.PlatformsAccount.UnSuspendAccountHolder(&platformsaccount.UnSuspendAccountHolderRequest{
+			res, httpRes, err := client.PlatformsAccount().UnSuspendAccountHolder(&platformsaccount.UnSuspendAccountHolderRequest{
 				AccountHolderCode: accountHolderCode,
 			})
 
@@ -245,7 +245,7 @@ func Test_Platforms(t *testing.T) {
 			accountHolderCode := uuid.New().String()
 			createAccountHolder(accountHolderCode)
 
-			res, httpRes, err := client.PlatformsAccount.UpdateAccountHolderState(&platformsaccount.UpdateAccountHolderStateRequest{
+			res, httpRes, err := client.PlatformsAccount().UpdateAccountHolderState(&platformsaccount.UpdateAccountHolderStateRequest{
 				AccountHolderCode: accountHolderCode,
 				Disable:           false,
 				StateType:         "Payout",
@@ -259,7 +259,7 @@ func Test_Platforms(t *testing.T) {
 			accountHolderCode := uuid.New().String()
 			createAccountHolder(accountHolderCode)
 
-			res, httpRes, err := client.PlatformsAccount.CloseAccountHolder(&platformsaccount.CloseAccountHolderRequest{
+			res, httpRes, err := client.PlatformsAccount().CloseAccountHolder(&platformsaccount.CloseAccountHolderRequest{
 				AccountHolderCode: accountHolderCode,
 			})
 
@@ -275,7 +275,7 @@ func Test_Platforms(t *testing.T) {
 			accountHolderCode := uuid.New().String()
 			createAccountHolder(accountHolderCode)
 
-			res, httpRes, err := client.PlatformsFund.AccountHolderBalance(&platformsfund.AccountHolderBalanceRequest{
+			res, httpRes, err := client.PlatformsFund().AccountHolderBalance(&platformsfund.AccountHolderBalanceRequest{
 				AccountHolderCode: accountHolderCode,
 			})
 
@@ -289,7 +289,7 @@ func Test_Platforms(t *testing.T) {
 			accountHolderCode := uuid.New().String()
 			createAccountHolder(accountHolderCode)
 
-			res, httpRes, err := client.PlatformsFund.AccountHolderTransactionList(&platformsfund.AccountHolderTransactionListRequest{
+			res, httpRes, err := client.PlatformsFund().AccountHolderTransactionList(&platformsfund.AccountHolderTransactionListRequest{
 				AccountHolderCode: accountHolderCode,
 			})
 
@@ -303,7 +303,7 @@ func Test_Platforms(t *testing.T) {
 			accountHolderCode := uuid.New().String()
 			createAccountHolder(accountHolderCode)
 
-			res, httpRes, err := client.PlatformsFund.TransferFunds(&platformsfund.TransferFundsRequest{
+			res, httpRes, err := client.PlatformsFund().TransferFunds(&platformsfund.TransferFundsRequest{
 				SourceAccountCode:      "8515883280985939",
 				DestinationAccountCode: "8815883278206345",
 				Amount:                 platformsfund.Amount{Currency: "EUR", Value: 1},
@@ -324,7 +324,7 @@ func Test_Platforms(t *testing.T) {
 		})
 		t.Run("Retrieve configurations", func(t *testing.T) {
 			t.Skip("Fix me")
-			res, httpRes, err := client.PlatformsNotificationConfiguration.GetNotificationConfigurationList(nil)
+			res, httpRes, err := client.PlatformsNotificationConfiguration().GetNotificationConfigurationList(nil)
 
 			require.Nil(t, err)
 			assert.Equal(t, 202, httpRes.StatusCode)
@@ -333,7 +333,7 @@ func Test_Platforms(t *testing.T) {
 		t.Run("Retrieve configuration", func(t *testing.T) {
 			t.Skip("Async. Skipping...")
 			r, _, _ := createConfiguration()
-			res, httpRes, err := client.PlatformsNotificationConfiguration.GetNotificationConfiguration(&platformsnotificationconfiguration.GetNotificationConfigurationRequest{
+			res, httpRes, err := client.PlatformsNotificationConfiguration().GetNotificationConfiguration(&platformsnotificationconfiguration.GetNotificationConfigurationRequest{
 				NotificationId: r.ConfigurationDetails.NotificationId,
 			})
 
@@ -344,7 +344,7 @@ func Test_Platforms(t *testing.T) {
 		t.Run("Update configuration", func(t *testing.T) {
 			t.Skip("Async request. Skipping...")
 			r, _, _ := createConfiguration()
-			res, httpRes, err := client.PlatformsNotificationConfiguration.UpdateNotificationConfiguration(&platformsnotificationconfiguration.UpdateNotificationConfigurationRequest{
+			res, httpRes, err := client.PlatformsNotificationConfiguration().UpdateNotificationConfiguration(&platformsnotificationconfiguration.UpdateNotificationConfigurationRequest{
 				ConfigurationDetails: platformsnotificationconfiguration.NotificationConfigurationDetails{
 					Active:    true,
 					NotifyURL: "https://www.adyen.com/notification-handler",
@@ -364,7 +364,7 @@ func Test_Platforms(t *testing.T) {
 		t.Run("Delete configuration", func(t *testing.T) {
 			t.Skip("Async request. Skipping...")
 			r, _, _ := createConfiguration()
-			res, httpRes, err := client.PlatformsNotificationConfiguration.DeleteNotificationConfigurations(&platformsnotificationconfiguration.DeleteNotificationConfigurationRequest{
+			res, httpRes, err := client.PlatformsNotificationConfiguration().DeleteNotificationConfigurations(&platformsnotificationconfiguration.DeleteNotificationConfigurationRequest{
 				NotificationIds: []int64{r.ConfigurationDetails.NotificationId},
 			})
 

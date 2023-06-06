@@ -6,15 +6,10 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/adyen/adyen-go-api-library/v6/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v6/src/common"
-	"github.com/adyen/adyen-go-api-library/v6/src/webhook"
+	"github.com/adyen/adyen-go-api-library/v7/src/webhook"
 )
 
-func TestNotificationService_HandleNotificationRequest(t *testing.T) {
-
-	client := adyen.NewClient(&common.Config{})
-
+func TestWebhook_HandleRequest(t *testing.T) {
 	tests := []struct {
 		name    string
 		req     string
@@ -157,9 +152,9 @@ func TestNotificationService_HandleNotificationRequest(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := client.Notification.HandleNotificationRequest(tt.req)
+			got, err := webhook.HandleRequest(tt.req)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("NotificationService.HandleNotificationRequest() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("webhook.HandleRequest() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			require.Nil(t, err)

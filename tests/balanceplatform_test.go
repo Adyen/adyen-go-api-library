@@ -3,9 +3,9 @@ package tests
 import (
 	"context"
 	"encoding/json"
-	"github.com/adyen/adyen-go-api-library/v6/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v6/src/balanceplatform"
-	"github.com/adyen/adyen-go-api-library/v6/src/common"
+	"github.com/adyen/adyen-go-api-library/v7/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v7/src/balanceplatform"
+	"github.com/adyen/adyen-go-api-library/v7/src/common"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"io"
@@ -21,7 +21,7 @@ func Test_BalancePlatform(t *testing.T) {
 		Environment: "TEST",
 		Debug:       false,
 	})
-	service := client.BalancePlatform
+	service := client.BalancePlatform()
 
 	mux := http.NewServeMux()
 	// Success case
@@ -62,7 +62,7 @@ func Test_BalancePlatform(t *testing.T) {
 	mockServer := httptest.NewServer(mux)
 	defer mockServer.Close()
 	// base path is shared between all endpoints
-	client.BalancePlatform.AccountHoldersApi.BasePath = func() string {
+	client.BalancePlatform().AccountHoldersApi.BasePath = func() string {
 		return mockServer.URL
 	}
 
@@ -70,11 +70,11 @@ func Test_BalancePlatform(t *testing.T) {
 		testClient := adyen.NewClient(&common.Config{
 			Environment: common.TestEnv,
 		})
-		assert.Equal(t, "https://balanceplatform-api-test.adyen.com/bcl/v2", testClient.BalancePlatform.AccountHoldersApi.BasePath())
+		assert.Equal(t, "https://balanceplatform-api-test.adyen.com/bcl/v2", testClient.BalancePlatform().AccountHoldersApi.BasePath())
 		liveClient := adyen.NewClient(&common.Config{
 			Environment: common.LiveEnv,
 		})
-		assert.Equal(t, "https://balanceplatform-api-live.adyen.com/bcl/v2", liveClient.BalancePlatform.BalanceAccountsApi.BasePath())
+		assert.Equal(t, "https://balanceplatform-api-live.adyen.com/bcl/v2", liveClient.BalancePlatform().BalanceAccountsApi.BasePath())
 	})
 
 	t.Run("Get an account holder", func(t *testing.T) {

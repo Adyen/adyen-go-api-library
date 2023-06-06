@@ -4,9 +4,9 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/adyen/adyen-go-api-library/v6/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v6/src/common"
-	"github.com/adyen/adyen-go-api-library/v6/src/management"
+	"github.com/adyen/adyen-go-api-library/v7/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v7/src/management"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"net/http"
@@ -58,7 +58,7 @@ func Test_ManagementAPI(t *testing.T) {
 		Environment: common.TestEnv,
 		Debug:       "true" == os.Getenv("DEBUG"),
 	})
-	service := client.Management
+	service := client.Management()
 	// base path is shared between all endpoints
 	service.APICredentialsCompanyLevelApi.BasePath = func() string {
 		return mockServer.URL
@@ -68,11 +68,11 @@ func Test_ManagementAPI(t *testing.T) {
 		testClient := adyen.NewClient(&common.Config{
 			Environment: common.TestEnv,
 		})
-		assert.Equal(t, "https://management-test.adyen.com/v1", testClient.Management.MyAPICredentialApi.BasePath())
+		assert.Equal(t, "https://management-test.adyen.com/v1", testClient.Management().MyAPICredentialApi.BasePath())
 		liveClient := adyen.NewClient(&common.Config{
 			Environment: common.LiveEnv,
 		})
-		assert.Equal(t, "https://management-live.adyen.com/v1", liveClient.Management.WebhooksCompanyLevelApi.BasePath())
+		assert.Equal(t, "https://management-live.adyen.com/v1", liveClient.Management().WebhooksCompanyLevelApi.BasePath())
 	})
 
 	t.Run("Test ListCompanyAccounts", func(t *testing.T) {

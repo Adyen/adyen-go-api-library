@@ -7,8 +7,8 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/adyen/adyen-go-api-library/v6/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v6/src/common"
+	"github.com/adyen/adyen-go-api-library/v7/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v7/src/common"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -48,12 +48,12 @@ func Test_Pos_Terminal_Management(t *testing.T) {
 
 	mockServer := httptest.NewServer(mux)
 	defer mockServer.Close()
-	client.PosTerminalManagement.BasePath = func() string { return mockServer.URL }
+	client.PosTerminalManagement().BasePath = func() string { return mockServer.URL }
+	service := client.PosTerminalManagement()
 
 	t.Run("successfully assign terminal", func(t *testing.T) {
-		service := client.PosTerminalManagement
-
 		request := service.AssignTerminalsConfig(context.Background())
+
 		_, httpRes, err := service.AssignTerminals(request)
 
 		require.NoError(t, err)
@@ -62,13 +62,11 @@ func Test_Pos_Terminal_Management(t *testing.T) {
 	})
 
 	t.Run("make unsuccesful findTerminal call", func(t *testing.T) {
-		service := client.PosTerminalManagement
-
 		request := service.FindTerminalConfig(context.Background())
+
 		_, httpRes, err := service.FindTerminal(request)
 
 		assert.Equal(t, 403, httpRes.StatusCode)
 		require.NotNil(t, err)
-
 	})
 }
