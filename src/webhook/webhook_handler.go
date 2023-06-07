@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 )
 
-//Event codes
+// Event codes
 const (
 	EventCodeAuthorisation            = "AUTHORISATION"
 	EventCodeAuthorisationAdjustment  = "AUTHORISATION_ADJUSTMENT"
@@ -35,7 +35,7 @@ const (
 	EventCodePaidoutReversed          = "PAIDOUT_REVERSED"
 )
 
-//Additional Data
+// Additional Data
 const (
 	AdditionalDataTotalFraudScore   = "totalFraudScore"
 	AdditionalDataFraudCheckPattern = "fraudCheck-(\\d+)-([A-Za-z0-9]+)"
