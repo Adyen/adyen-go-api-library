@@ -1,9 +1,3 @@
-/*
- * Adyen API Client
- *
- * Contact: support@adyen.com
- */
-
 package tests
 
 import (
@@ -184,12 +178,11 @@ func Test_Payout(t *testing.T) {
 				payoutReq := client.Payout().InstantPayoutsApi.PayoutConfig(context.Background()).PayoutRequest(body)
 				res, httpRes, err := client.Payout().InstantPayoutsApi.Payout(payoutReq)
 
-				authorised := common.Authorised.String()
 				require.Nil(t, err)
 				require.NotNil(t, httpRes)
 				assert.Equal(t, 200, httpRes.StatusCode)
 				require.Equal(t, "ABC213", res.GetPspReference())
-				assert.Equal(t, &authorised, res.ResultCode)
+				assert.Equal(t, "Authorised", res.ResultCode)
 			})
 
 			t.Run("Create an API request that should fail", func(t *testing.T) {
