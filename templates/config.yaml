@@ -6,9 +6,6 @@ additionalProperties:
   useOneOfDiscriminatorLookup: true
 templateDir: ./templates/custom
 files:
-    api.mustache:
-        destinationFilename: .go
-        templateType: API
     rest_api.mustache:
         destinationFolder: ./src/management/
         destinationFilename: .go
