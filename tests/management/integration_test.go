@@ -56,7 +56,7 @@ func Test_ManagementAPI_Integration(t *testing.T) {
 		req = req.Countries("NL").PageSize(1)
 
 		resp, httpRes, serviceErr := service.TerminalsTerminalLevelApi.ListTerminals(req)
-		require.NotNil(t, serviceErr)
+		require.Nil(t, serviceErr)
 		assert.Equal(t, 200, httpRes.StatusCode)
 		require.NotNil(t, resp)
 	})
