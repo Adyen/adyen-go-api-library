@@ -182,7 +182,7 @@ func Test_Payout(t *testing.T) {
 				require.NotNil(t, httpRes)
 				assert.Equal(t, 200, httpRes.StatusCode)
 				require.Equal(t, "ABC213", res.GetPspReference())
-				assert.Equal(t, "Authorised", res.ResultCode)
+				assert.Equal(t, "Authorised", res.GetResultCode())
 			})
 
 			t.Run("Create an API request that should fail", func(t *testing.T) {
