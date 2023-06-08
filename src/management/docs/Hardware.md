@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayMaximumBackLight** | Pointer to **int32** | The brightness of the display when the terminal is being used, expressed as a percentage. | [optional] 
+**RestartHour** | Pointer to **int32** | The hour (0 - 23) in which the device will reboot, reboot will happen in the timezone of the device | [optional] 
 
 ## Methods
 
@@ -49,6 +50,31 @@ SetDisplayMaximumBackLight sets DisplayMaximumBackLight field to given value.
 `func (o *Hardware) HasDisplayMaximumBackLight() bool`
 
 HasDisplayMaximumBackLight returns a boolean if a field has been set.
+
+### GetRestartHour
+
+`func (o *Hardware) GetRestartHour() int32`
+
+GetRestartHour returns the RestartHour field if non-nil, zero value otherwise.
+
+### GetRestartHourOk
+
+`func (o *Hardware) GetRestartHourOk() (*int32, bool)`
+
+GetRestartHourOk returns a tuple with the RestartHour field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRestartHour
+
+`func (o *Hardware) SetRestartHour(v int32)`
+
+SetRestartHour sets RestartHour field to given value.
+
+### HasRestartHour
+
+`func (o *Hardware) HasRestartHour() bool`
+
+HasRestartHour returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

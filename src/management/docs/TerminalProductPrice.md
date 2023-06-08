@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Currency** | Pointer to **string** | The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes). | [optional] 
-**Value** | Pointer to **map[string]interface{}** |  | [optional] 
+**Value** | Pointer to **float64** | The price of the item. | [optional] 
 
 ## Methods
 
@@ -53,20 +53,20 @@ HasCurrency returns a boolean if a field has been set.
 
 ### GetValue
 
-`func (o *TerminalProductPrice) GetValue() map[string]interface{}`
+`func (o *TerminalProductPrice) GetValue() float64`
 
 GetValue returns the Value field if non-nil, zero value otherwise.
 
 ### GetValueOk
 
-`func (o *TerminalProductPrice) GetValueOk() (*map[string]interface{}, bool)`
+`func (o *TerminalProductPrice) GetValueOk() (*float64, bool)`
 
 GetValueOk returns a tuple with the Value field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetValue
 
-`func (o *TerminalProductPrice) SetValue(v map[string]interface{})`
+`func (o *TerminalProductPrice) SetValue(v float64)`
 
 SetValue sets Value field to given value.
 

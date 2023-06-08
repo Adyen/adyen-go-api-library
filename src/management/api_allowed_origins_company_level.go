@@ -65,8 +65,8 @@ Adds a new [allowed origin](https://docs.adyen.com/development-resources/client-
 @return AllowedOriginsResponse
 */
 
-func (a *AllowedOriginsCompanyLevelApi) CreateAllowedOrigin(r AllowedOriginsCompanyLevelApiCreateAllowedOriginConfig) (AllowedOriginsResponse, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *AllowedOriginsCompanyLevelApi) CreateAllowedOrigin(r AllowedOriginsCompanyLevelApiCreateAllowedOriginConfig) (AllowedOriginsResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &AllowedOriginsResponse{}
 	path := "/companies/{companyId}/apiCredentials/{apiCredentialId}/allowedOrigins"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -89,37 +89,37 @@ func (a *AllowedOriginsCompanyLevelApi) CreateAllowedOrigin(r AllowedOriginsComp
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }
 
 type AllowedOriginsCompanyLevelApiDeleteAllowedOriginConfig struct {
@@ -161,8 +161,8 @@ Removes the [allowed origin](https://docs.adyen.com/development-resources/client
  * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 */
 
-func (a *AllowedOriginsCompanyLevelApi) DeleteAllowedOrigin(r AllowedOriginsCompanyLevelApiDeleteAllowedOriginConfig) (*_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *AllowedOriginsCompanyLevelApi) DeleteAllowedOrigin(r AllowedOriginsCompanyLevelApiDeleteAllowedOriginConfig) (*_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	var res interface{}
 	path := "/companies/{companyId}/apiCredentials/{apiCredentialId}/allowedOrigins/{originId}"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -186,37 +186,37 @@ func (a *AllowedOriginsCompanyLevelApi) DeleteAllowedOrigin(r AllowedOriginsComp
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return httpRes, serviceError, err
+		return httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return httpRes, serviceError, err
+		return httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return httpRes, serviceError, err
+		return httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return httpRes, serviceError, err
+		return httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return httpRes, serviceError, err
+		return httpRes, serviceError
 	}
-	return httpRes, serviceError, err
+	return httpRes, err
 }
 
 type AllowedOriginsCompanyLevelApiGetAllowedOriginConfig struct {
@@ -259,8 +259,8 @@ Returns the [allowed origin](https://docs.adyen.com/development-resources/client
 @return AllowedOrigin
 */
 
-func (a *AllowedOriginsCompanyLevelApi) GetAllowedOrigin(r AllowedOriginsCompanyLevelApiGetAllowedOriginConfig) (AllowedOrigin, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *AllowedOriginsCompanyLevelApi) GetAllowedOrigin(r AllowedOriginsCompanyLevelApiGetAllowedOriginConfig) (AllowedOrigin, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &AllowedOrigin{}
 	path := "/companies/{companyId}/apiCredentials/{apiCredentialId}/allowedOrigins/{originId}"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -284,37 +284,37 @@ func (a *AllowedOriginsCompanyLevelApi) GetAllowedOrigin(r AllowedOriginsCompany
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }
 
 type AllowedOriginsCompanyLevelApiListAllowedOriginsConfig struct {
@@ -353,8 +353,8 @@ Returns the list of [allowed origins](https://docs.adyen.com/development-resourc
 @return AllowedOriginsResponse
 */
 
-func (a *AllowedOriginsCompanyLevelApi) ListAllowedOrigins(r AllowedOriginsCompanyLevelApiListAllowedOriginsConfig) (AllowedOriginsResponse, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *AllowedOriginsCompanyLevelApi) ListAllowedOrigins(r AllowedOriginsCompanyLevelApiListAllowedOriginsConfig) (AllowedOriginsResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &AllowedOriginsResponse{}
 	path := "/companies/{companyId}/apiCredentials/{apiCredentialId}/allowedOrigins"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -377,35 +377,35 @@ func (a *AllowedOriginsCompanyLevelApi) ListAllowedOrigins(r AllowedOriginsCompa
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }

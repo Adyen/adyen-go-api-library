@@ -70,8 +70,8 @@ Creates an [API credential](https://docs.adyen.com/development-resources/api-cre
 @return CreateApiCredentialResponse
 */
 
-func (a *APICredentialsMerchantLevelApi) CreateApiCredential(r APICredentialsMerchantLevelApiCreateApiCredentialConfig) (CreateApiCredentialResponse, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *APICredentialsMerchantLevelApi) CreateApiCredential(r APICredentialsMerchantLevelApiCreateApiCredentialConfig) (CreateApiCredentialResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &CreateApiCredentialResponse{}
 	path := "/merchants/{merchantId}/apiCredentials"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -93,37 +93,37 @@ func (a *APICredentialsMerchantLevelApi) CreateApiCredential(r APICredentialsMer
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }
 
 type APICredentialsMerchantLevelApiGetApiCredentialConfig struct {
@@ -162,8 +162,8 @@ Returns the [API credential](https://docs.adyen.com/development-resources/api-cr
 @return ApiCredential
 */
 
-func (a *APICredentialsMerchantLevelApi) GetApiCredential(r APICredentialsMerchantLevelApiGetApiCredentialConfig) (ApiCredential, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *APICredentialsMerchantLevelApi) GetApiCredential(r APICredentialsMerchantLevelApiGetApiCredentialConfig) (ApiCredential, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &ApiCredential{}
 	path := "/merchants/{merchantId}/apiCredentials/{apiCredentialId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -186,37 +186,37 @@ func (a *APICredentialsMerchantLevelApi) GetApiCredential(r APICredentialsMercha
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }
 
 type APICredentialsMerchantLevelApiListApiCredentialsConfig struct {
@@ -265,8 +265,8 @@ Returns the list of [API credentials](https://docs.adyen.com/development-resourc
 @return ListMerchantApiCredentialsResponse
 */
 
-func (a *APICredentialsMerchantLevelApi) ListApiCredentials(r APICredentialsMerchantLevelApiListApiCredentialsConfig) (ListMerchantApiCredentialsResponse, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *APICredentialsMerchantLevelApi) ListApiCredentials(r APICredentialsMerchantLevelApiListApiCredentialsConfig) (ListMerchantApiCredentialsResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &ListMerchantApiCredentialsResponse{}
 	path := "/merchants/{merchantId}/apiCredentials"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -294,37 +294,37 @@ func (a *APICredentialsMerchantLevelApi) ListApiCredentials(r APICredentialsMerc
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }
 
 type APICredentialsMerchantLevelApiUpdateApiCredentialConfig struct {
@@ -370,8 +370,8 @@ Changes the API credential&#39;s roles, or allowed origins. The request has the 
 @return ApiCredential
 */
 
-func (a *APICredentialsMerchantLevelApi) UpdateApiCredential(r APICredentialsMerchantLevelApiUpdateApiCredentialConfig) (ApiCredential, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *APICredentialsMerchantLevelApi) UpdateApiCredential(r APICredentialsMerchantLevelApiUpdateApiCredentialConfig) (ApiCredential, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &ApiCredential{}
 	path := "/merchants/{merchantId}/apiCredentials/{apiCredentialId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -394,35 +394,35 @@ func (a *APICredentialsMerchantLevelApi) UpdateApiCredential(r APICredentialsMer
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }

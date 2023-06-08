@@ -58,8 +58,8 @@ Returns a new API key for the API credential. You can use the new API key a few 
 @return GenerateApiKeyResponse
 */
 
-func (a *APIKeyCompanyLevelApi) GenerateNewApiKey(r APIKeyCompanyLevelApiGenerateNewApiKeyConfig) (GenerateApiKeyResponse, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *APIKeyCompanyLevelApi) GenerateNewApiKey(r APIKeyCompanyLevelApiGenerateNewApiKeyConfig) (GenerateApiKeyResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &GenerateApiKeyResponse{}
 	path := "/companies/{companyId}/apiCredentials/{apiCredentialId}/generateApiKey"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -82,35 +82,35 @@ func (a *APIKeyCompanyLevelApi) GenerateNewApiKey(r APIKeyCompanyLevelApiGenerat
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }

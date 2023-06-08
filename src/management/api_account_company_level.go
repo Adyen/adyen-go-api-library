@@ -54,8 +54,8 @@ Returns the company account specified in the path. Your API credential must have
 @return Company
 */
 
-func (a *AccountCompanyLevelApi) GetCompanyAccount(r AccountCompanyLevelApiGetCompanyAccountConfig) (Company, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *AccountCompanyLevelApi) GetCompanyAccount(r AccountCompanyLevelApiGetCompanyAccountConfig) (Company, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &Company{}
 	path := "/companies/{companyId}"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -77,37 +77,37 @@ func (a *AccountCompanyLevelApi) GetCompanyAccount(r AccountCompanyLevelApiGetCo
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }
 
 type AccountCompanyLevelApiListCompanyAccountsConfig struct {
@@ -153,8 +153,8 @@ Returns the list of company accounts that your API credential has access to. The
 @return ListCompanyResponse
 */
 
-func (a *AccountCompanyLevelApi) ListCompanyAccounts(r AccountCompanyLevelApiListCompanyAccountsConfig) (ListCompanyResponse, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *AccountCompanyLevelApi) ListCompanyAccounts(r AccountCompanyLevelApiListCompanyAccountsConfig) (ListCompanyResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &ListCompanyResponse{}
 	path := "/companies"
 	queryParams := url.Values{}
@@ -181,37 +181,37 @@ func (a *AccountCompanyLevelApi) ListCompanyAccounts(r AccountCompanyLevelApiLis
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }
 
 type AccountCompanyLevelApiListMerchantAccountsConfig struct {
@@ -260,8 +260,8 @@ Returns the list of merchant accounts under the company account specified in the
 @return ListMerchantResponse
 */
 
-func (a *AccountCompanyLevelApi) ListMerchantAccounts(r AccountCompanyLevelApiListMerchantAccountsConfig) (ListMerchantResponse, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *AccountCompanyLevelApi) ListMerchantAccounts(r AccountCompanyLevelApiListMerchantAccountsConfig) (ListMerchantResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &ListMerchantResponse{}
 	path := "/companies/{companyId}/merchants"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -289,35 +289,35 @@ func (a *AccountCompanyLevelApi) ListMerchantAccounts(r AccountCompanyLevelApiLi
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }

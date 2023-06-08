@@ -57,8 +57,8 @@ Adds an allowed origin to the list of [allowed origins](https://docs.adyen.com/d
 @return AllowedOrigin
 */
 
-func (a *MyAPICredentialApi) AddAllowedOrigin(r MyAPICredentialApiAddAllowedOriginConfig) (AllowedOrigin, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *MyAPICredentialApi) AddAllowedOrigin(r MyAPICredentialApiAddAllowedOriginConfig) (AllowedOrigin, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &AllowedOrigin{}
 	path := "/me/allowedOrigins"
 	queryParams := url.Values{}
@@ -79,37 +79,37 @@ func (a *MyAPICredentialApi) AddAllowedOrigin(r MyAPICredentialApiAddAllowedOrig
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }
 
 type MyAPICredentialApiGetAllowedOriginDetailsConfig struct {
@@ -144,8 +144,8 @@ Returns the details of the [allowed origin](https://docs.adyen.com/development-r
 @return AllowedOrigin
 */
 
-func (a *MyAPICredentialApi) GetAllowedOriginDetails(r MyAPICredentialApiGetAllowedOriginDetailsConfig) (AllowedOrigin, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *MyAPICredentialApi) GetAllowedOriginDetails(r MyAPICredentialApiGetAllowedOriginDetailsConfig) (AllowedOrigin, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &AllowedOrigin{}
 	path := "/me/allowedOrigins/{originId}"
 	path = strings.Replace(path, "{"+"originId"+"}", url.PathEscape(common.ParameterValueToString(r.originId, "originId")), -1)
@@ -167,37 +167,37 @@ func (a *MyAPICredentialApi) GetAllowedOriginDetails(r MyAPICredentialApiGetAllo
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }
 
 type MyAPICredentialApiGetAllowedOriginsConfig struct {
@@ -227,8 +227,8 @@ Returns the list of [allowed origins](https://docs.adyen.com/development-resourc
 @return AllowedOriginsResponse
 */
 
-func (a *MyAPICredentialApi) GetAllowedOrigins(r MyAPICredentialApiGetAllowedOriginsConfig) (AllowedOriginsResponse, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *MyAPICredentialApi) GetAllowedOrigins(r MyAPICredentialApiGetAllowedOriginsConfig) (AllowedOriginsResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &AllowedOriginsResponse{}
 	path := "/me/allowedOrigins"
 	queryParams := url.Values{}
@@ -249,37 +249,37 @@ func (a *MyAPICredentialApi) GetAllowedOrigins(r MyAPICredentialApiGetAllowedOri
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }
 
 type MyAPICredentialApiGetApiCredentialDetailsConfig struct {
@@ -309,8 +309,8 @@ Returns your [API credential](https://docs.adyen.com/development-resources/api-c
 @return MeApiCredential
 */
 
-func (a *MyAPICredentialApi) GetApiCredentialDetails(r MyAPICredentialApiGetApiCredentialDetailsConfig) (MeApiCredential, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *MyAPICredentialApi) GetApiCredentialDetails(r MyAPICredentialApiGetApiCredentialDetailsConfig) (MeApiCredential, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &MeApiCredential{}
 	path := "/me"
 	queryParams := url.Values{}
@@ -331,37 +331,37 @@ func (a *MyAPICredentialApi) GetApiCredentialDetails(r MyAPICredentialApiGetApiC
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }
 
 type MyAPICredentialApiRemoveAllowedOriginConfig struct {
@@ -395,8 +395,8 @@ Removes the [allowed origin](https://docs.adyen.com/development-resources/client
  * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 */
 
-func (a *MyAPICredentialApi) RemoveAllowedOrigin(r MyAPICredentialApiRemoveAllowedOriginConfig) (*_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *MyAPICredentialApi) RemoveAllowedOrigin(r MyAPICredentialApiRemoveAllowedOriginConfig) (*_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	var res interface{}
 	path := "/me/allowedOrigins/{originId}"
 	path = strings.Replace(path, "{"+"originId"+"}", url.PathEscape(common.ParameterValueToString(r.originId, "originId")), -1)
@@ -418,35 +418,35 @@ func (a *MyAPICredentialApi) RemoveAllowedOrigin(r MyAPICredentialApiRemoveAllow
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return httpRes, serviceError, err
+		return httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return httpRes, serviceError, err
+		return httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return httpRes, serviceError, err
+		return httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return httpRes, serviceError, err
+		return httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return httpRes, serviceError, err
+		return httpRes, serviceError
 	}
-	return httpRes, serviceError, err
+	return httpRes, err
 }

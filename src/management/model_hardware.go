@@ -21,6 +21,8 @@ var _ common.MappedNullable = &Hardware{}
 type Hardware struct {
 	// The brightness of the display when the terminal is being used, expressed as a percentage.
 	DisplayMaximumBackLight *int32 `json:"displayMaximumBackLight,omitempty"`
+	// The hour (0 - 23) in which the device will reboot, reboot will happen in the timezone of the device
+	RestartHour *int32 `json:"restartHour,omitempty"`
 }
 
 // NewHardware instantiates a new Hardware object
@@ -72,6 +74,38 @@ func (o *Hardware) SetDisplayMaximumBackLight(v int32) {
 	o.DisplayMaximumBackLight = &v
 }
 
+// GetRestartHour returns the RestartHour field value if set, zero value otherwise.
+func (o *Hardware) GetRestartHour() int32 {
+	if o == nil || common.IsNil(o.RestartHour) {
+		var ret int32
+		return ret
+	}
+	return *o.RestartHour
+}
+
+// GetRestartHourOk returns a tuple with the RestartHour field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Hardware) GetRestartHourOk() (*int32, bool) {
+	if o == nil || common.IsNil(o.RestartHour) {
+		return nil, false
+	}
+	return o.RestartHour, true
+}
+
+// HasRestartHour returns a boolean if a field has been set.
+func (o *Hardware) HasRestartHour() bool {
+	if o != nil && !common.IsNil(o.RestartHour) {
+		return true
+	}
+
+	return false
+}
+
+// SetRestartHour gets a reference to the given int32 and assigns it to the RestartHour field.
+func (o *Hardware) SetRestartHour(v int32) {
+	o.RestartHour = &v
+}
+
 func (o Hardware) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -84,6 +118,9 @@ func (o Hardware) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.DisplayMaximumBackLight) {
 		toSerialize["displayMaximumBackLight"] = o.DisplayMaximumBackLight
+	}
+	if !common.IsNil(o.RestartHour) {
+		toSerialize["restartHour"] = o.RestartHour
 	}
 	return toSerialize, nil
 }

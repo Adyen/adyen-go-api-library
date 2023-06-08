@@ -58,8 +58,8 @@ Returns an [HMAC key](https://en.wikipedia.org/wiki/HMAC) for the webhook identi
 @return GenerateHmacKeyResponse
 */
 
-func (a *WebhooksMerchantLevelApi) GenerateHmacKey(r WebhooksMerchantLevelApiGenerateHmacKeyConfig) (GenerateHmacKeyResponse, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *WebhooksMerchantLevelApi) GenerateHmacKey(r WebhooksMerchantLevelApiGenerateHmacKeyConfig) (GenerateHmacKeyResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &GenerateHmacKeyResponse{}
 	path := "/merchants/{merchantId}/webhooks/{webhookId}/generateHmac"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -82,37 +82,37 @@ func (a *WebhooksMerchantLevelApi) GenerateHmacKey(r WebhooksMerchantLevelApiGen
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }
 
 type WebhooksMerchantLevelApiGetWebhookConfig struct {
@@ -152,8 +152,8 @@ Returns the configuration for the webhook identified in the path.  To make this 
 @return Webhook
 */
 
-func (a *WebhooksMerchantLevelApi) GetWebhook(r WebhooksMerchantLevelApiGetWebhookConfig) (Webhook, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *WebhooksMerchantLevelApi) GetWebhook(r WebhooksMerchantLevelApiGetWebhookConfig) (Webhook, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &Webhook{}
 	path := "/merchants/{merchantId}/webhooks/{webhookId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -176,37 +176,37 @@ func (a *WebhooksMerchantLevelApi) GetWebhook(r WebhooksMerchantLevelApiGetWebho
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }
 
 type WebhooksMerchantLevelApiListAllWebhooksConfig struct {
@@ -256,8 +256,8 @@ Lists all webhook configurations for the merchant account.  To make this request
 @return ListWebhooksResponse
 */
 
-func (a *WebhooksMerchantLevelApi) ListAllWebhooks(r WebhooksMerchantLevelApiListAllWebhooksConfig) (ListWebhooksResponse, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *WebhooksMerchantLevelApi) ListAllWebhooks(r WebhooksMerchantLevelApiListAllWebhooksConfig) (ListWebhooksResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &ListWebhooksResponse{}
 	path := "/merchants/{merchantId}/webhooks"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -285,37 +285,37 @@ func (a *WebhooksMerchantLevelApi) ListAllWebhooks(r WebhooksMerchantLevelApiLis
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }
 
 type WebhooksMerchantLevelApiRemoveWebhookConfig struct {
@@ -353,8 +353,8 @@ Remove the configuration for the webhook identified in the path.  To make this r
  * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 */
 
-func (a *WebhooksMerchantLevelApi) RemoveWebhook(r WebhooksMerchantLevelApiRemoveWebhookConfig) (*_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *WebhooksMerchantLevelApi) RemoveWebhook(r WebhooksMerchantLevelApiRemoveWebhookConfig) (*_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	var res interface{}
 	path := "/merchants/{merchantId}/webhooks/{webhookId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -377,37 +377,37 @@ func (a *WebhooksMerchantLevelApi) RemoveWebhook(r WebhooksMerchantLevelApiRemov
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return httpRes, serviceError, err
+		return httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return httpRes, serviceError, err
+		return httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return httpRes, serviceError, err
+		return httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return httpRes, serviceError, err
+		return httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return httpRes, serviceError, err
+		return httpRes, serviceError
 	}
-	return httpRes, serviceError, err
+	return httpRes, err
 }
 
 type WebhooksMerchantLevelApiSetUpWebhookConfig struct {
@@ -449,8 +449,8 @@ Subscribe to receive webhook notifications about events related to your merchant
 @return Webhook
 */
 
-func (a *WebhooksMerchantLevelApi) SetUpWebhook(r WebhooksMerchantLevelApiSetUpWebhookConfig) (Webhook, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *WebhooksMerchantLevelApi) SetUpWebhook(r WebhooksMerchantLevelApiSetUpWebhookConfig) (Webhook, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &Webhook{}
 	path := "/merchants/{merchantId}/webhooks"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -472,37 +472,37 @@ func (a *WebhooksMerchantLevelApi) SetUpWebhook(r WebhooksMerchantLevelApiSetUpW
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }
 
 type WebhooksMerchantLevelApiTestWebhookConfig struct {
@@ -552,8 +552,8 @@ Sends sample notifications to test if the webhook is set up correctly.  We send 
 @return TestWebhookResponse
 */
 
-func (a *WebhooksMerchantLevelApi) TestWebhook(r WebhooksMerchantLevelApiTestWebhookConfig) (TestWebhookResponse, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *WebhooksMerchantLevelApi) TestWebhook(r WebhooksMerchantLevelApiTestWebhookConfig) (TestWebhookResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &TestWebhookResponse{}
 	path := "/merchants/{merchantId}/webhooks/{webhookId}/test"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -576,37 +576,37 @@ func (a *WebhooksMerchantLevelApi) TestWebhook(r WebhooksMerchantLevelApiTestWeb
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }
 
 type WebhooksMerchantLevelApiUpdateWebhookConfig struct {
@@ -652,8 +652,8 @@ Make changes to the configuration of the webhook identified in the path. The req
 @return Webhook
 */
 
-func (a *WebhooksMerchantLevelApi) UpdateWebhook(r WebhooksMerchantLevelApiUpdateWebhookConfig) (Webhook, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *WebhooksMerchantLevelApi) UpdateWebhook(r WebhooksMerchantLevelApiUpdateWebhookConfig) (Webhook, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &Webhook{}
 	path := "/merchants/{merchantId}/webhooks/{webhookId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -676,35 +676,35 @@ func (a *WebhooksMerchantLevelApi) UpdateWebhook(r WebhooksMerchantLevelApiUpdat
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }

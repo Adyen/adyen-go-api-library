@@ -65,8 +65,8 @@ Returns the logo that is configured for a specific payment terminal model at the
 @return Logo
 */
 
-func (a *TerminalSettingsCompanyLevelApi) GetTerminalLogo(r TerminalSettingsCompanyLevelApiGetTerminalLogoConfig) (Logo, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *TerminalSettingsCompanyLevelApi) GetTerminalLogo(r TerminalSettingsCompanyLevelApiGetTerminalLogoConfig) (Logo, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &Logo{}
 	path := "/companies/{companyId}/terminalLogos"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -91,37 +91,37 @@ func (a *TerminalSettingsCompanyLevelApi) GetTerminalLogo(r TerminalSettingsComp
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }
 
 type TerminalSettingsCompanyLevelApiGetTerminalSettingsConfig struct {
@@ -160,8 +160,8 @@ Returns the payment terminal settings that are configured for the company identi
 @return TerminalSettings
 */
 
-func (a *TerminalSettingsCompanyLevelApi) GetTerminalSettings(r TerminalSettingsCompanyLevelApiGetTerminalSettingsConfig) (TerminalSettings, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *TerminalSettingsCompanyLevelApi) GetTerminalSettings(r TerminalSettingsCompanyLevelApiGetTerminalSettingsConfig) (TerminalSettings, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &TerminalSettings{}
 	path := "/companies/{companyId}/terminalSettings"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -183,37 +183,37 @@ func (a *TerminalSettingsCompanyLevelApi) GetTerminalSettings(r TerminalSettings
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }
 
 type TerminalSettingsCompanyLevelApiUpdateTerminalLogoConfig struct {
@@ -265,8 +265,8 @@ Updates the logo that is configured for a specific payment terminal model at the
 @return Logo
 */
 
-func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalLogo(r TerminalSettingsCompanyLevelApiUpdateTerminalLogoConfig) (Logo, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalLogo(r TerminalSettingsCompanyLevelApiUpdateTerminalLogoConfig) (Logo, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &Logo{}
 	path := "/companies/{companyId}/terminalLogos"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -291,37 +291,37 @@ func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalLogo(r TerminalSettingsC
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }
 
 type TerminalSettingsCompanyLevelApiUpdateTerminalSettingsConfig struct {
@@ -370,8 +370,8 @@ Updates payment terminal settings for the company identified in the path. These 
 @return TerminalSettings
 */
 
-func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalSettings(r TerminalSettingsCompanyLevelApiUpdateTerminalSettingsConfig) (TerminalSettings, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalSettings(r TerminalSettingsCompanyLevelApiUpdateTerminalSettingsConfig) (TerminalSettings, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &TerminalSettings{}
 	path := "/companies/{companyId}/terminalSettings"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -393,35 +393,35 @@ func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalSettings(r TerminalSetti
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }

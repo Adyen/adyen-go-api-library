@@ -99,8 +99,8 @@ Returns the payment terminals that the API credential has access to and that mat
 @return ListTerminalsResponse
 */
 
-func (a *TerminalsTerminalLevelApi) ListTerminals(r TerminalsTerminalLevelApiListTerminalsConfig) (ListTerminalsResponse, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *TerminalsTerminalLevelApi) ListTerminals(r TerminalsTerminalLevelApiListTerminalsConfig) (ListTerminalsResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &ListTerminalsResponse{}
 	path := "/terminals"
 	queryParams := url.Values{}
@@ -142,35 +142,35 @@ func (a *TerminalsTerminalLevelApi) ListTerminals(r TerminalsTerminalLevelApiLis
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }

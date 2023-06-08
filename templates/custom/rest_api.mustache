@@ -96,8 +96,8 @@ func (a *{{{classname}}}) {{{nickname}}}Config(ctx context.Context{{#pathParams}
 {{/returnType}}
 */
 
-func (a *{{{classname}}}) {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}(r {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config) ({{#returnType}}{{{returnType}}}, {{/returnType}}*_nethttp.Response, RestServiceError, error) {
-    var serviceError RestServiceError
+func (a *{{{classname}}}) {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}(r {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config) ({{#returnType}}{{{returnType}}}, {{/returnType}}*_nethttp.Response, error) {
+    var serviceError common.RestServiceError
     {{#returnType}}
     res := &{{{returnType}}}{}
     {{/returnType}}
@@ -161,7 +161,7 @@ func (a *{{{classname}}}) {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecas
 	            // Read the response body
 		        body, _ := ioutil.ReadAll(httpRes.Body)
 		        _ = json.Unmarshal([]byte(body), &serviceError)
-		        return {{#returnType}}*res, {{/returnType}}httpRes, serviceError, err
+		        return {{#returnType}}*res, {{/returnType}}httpRes, serviceError
                 {{^wildcard}}
                     }
                 {{/wildcard}}
@@ -169,7 +169,7 @@ func (a *{{{classname}}}) {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecas
         {{/is1xx}}
     {{/dataType}}
 {{/responses}}
-    return {{#returnType}}*res, {{/returnType}}httpRes, serviceError, err
+    return {{#returnType}}*res, {{/returnType}}httpRes, err
 }
 
 {{/operation}}

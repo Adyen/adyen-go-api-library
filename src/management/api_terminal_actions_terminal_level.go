@@ -61,8 +61,8 @@ Schedules a [terminal action](https://docs.adyen.com/point-of-sale/automating-te
 @return ScheduleTerminalActionsResponse
 */
 
-func (a *TerminalActionsTerminalLevelApi) CreateTerminalAction(r TerminalActionsTerminalLevelApiCreateTerminalActionConfig) (ScheduleTerminalActionsResponse, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *TerminalActionsTerminalLevelApi) CreateTerminalAction(r TerminalActionsTerminalLevelApiCreateTerminalActionConfig) (ScheduleTerminalActionsResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &ScheduleTerminalActionsResponse{}
 	path := "/terminals/scheduleActions"
 	queryParams := url.Values{}
@@ -83,35 +83,35 @@ func (a *TerminalActionsTerminalLevelApi) CreateTerminalAction(r TerminalActions
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }

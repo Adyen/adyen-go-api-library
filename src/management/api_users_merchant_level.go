@@ -61,8 +61,8 @@ Creates a user for the &#x60;merchantId&#x60; specified in the path.  To make th
 @return CreateUserResponse
 */
 
-func (a *UsersMerchantLevelApi) CreateNewUser(r UsersMerchantLevelApiCreateNewUserConfig) (CreateUserResponse, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *UsersMerchantLevelApi) CreateNewUser(r UsersMerchantLevelApiCreateNewUserConfig) (CreateUserResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &CreateUserResponse{}
 	path := "/merchants/{merchantId}/users"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -84,37 +84,37 @@ func (a *UsersMerchantLevelApi) CreateNewUser(r UsersMerchantLevelApiCreateNewUs
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }
 
 type UsersMerchantLevelApiGetUserDetailsConfig struct {
@@ -153,8 +153,8 @@ Returns user details for the &#x60;userId&#x60; and the &#x60;merchantId&#x60; s
 @return User
 */
 
-func (a *UsersMerchantLevelApi) GetUserDetails(r UsersMerchantLevelApiGetUserDetailsConfig) (User, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *UsersMerchantLevelApi) GetUserDetails(r UsersMerchantLevelApiGetUserDetailsConfig) (User, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &User{}
 	path := "/merchants/{merchantId}/users/{userId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -177,37 +177,37 @@ func (a *UsersMerchantLevelApi) GetUserDetails(r UsersMerchantLevelApiGetUserDet
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }
 
 type UsersMerchantLevelApiListUsersConfig struct {
@@ -263,8 +263,8 @@ Returns a list of users associated with the &#x60;merchantId&#x60; specified in 
 @return ListMerchantUsersResponse
 */
 
-func (a *UsersMerchantLevelApi) ListUsers(r UsersMerchantLevelApiListUsersConfig) (ListMerchantUsersResponse, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *UsersMerchantLevelApi) ListUsers(r UsersMerchantLevelApiListUsersConfig) (ListMerchantUsersResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &ListMerchantUsersResponse{}
 	path := "/merchants/{merchantId}/users"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -295,37 +295,37 @@ func (a *UsersMerchantLevelApi) ListUsers(r UsersMerchantLevelApiListUsersConfig
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }
 
 type UsersMerchantLevelApiUpdateUserConfig struct {
@@ -371,8 +371,8 @@ Updates user details for the &#x60;userId&#x60; and the &#x60;merchantId&#x60; s
 @return User
 */
 
-func (a *UsersMerchantLevelApi) UpdateUser(r UsersMerchantLevelApiUpdateUserConfig) (User, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *UsersMerchantLevelApi) UpdateUser(r UsersMerchantLevelApiUpdateUserConfig) (User, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &User{}
 	path := "/merchants/{merchantId}/users/{userId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -395,35 +395,35 @@ func (a *UsersMerchantLevelApi) UpdateUser(r UsersMerchantLevelApiUpdateUserConf
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }

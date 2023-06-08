@@ -61,8 +61,8 @@ Creates the user for the &#x60;companyId&#x60; identified in the path.  To make 
 @return CreateCompanyUserResponse
 */
 
-func (a *UsersCompanyLevelApi) CreateNewUser(r UsersCompanyLevelApiCreateNewUserConfig) (CreateCompanyUserResponse, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *UsersCompanyLevelApi) CreateNewUser(r UsersCompanyLevelApiCreateNewUserConfig) (CreateCompanyUserResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &CreateCompanyUserResponse{}
 	path := "/companies/{companyId}/users"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -84,37 +84,37 @@ func (a *UsersCompanyLevelApi) CreateNewUser(r UsersCompanyLevelApiCreateNewUser
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }
 
 type UsersCompanyLevelApiGetUserDetailsConfig struct {
@@ -153,8 +153,8 @@ Returns user details for the &#x60;userId&#x60; and the &#x60;companyId&#x60; id
 @return CompanyUser
 */
 
-func (a *UsersCompanyLevelApi) GetUserDetails(r UsersCompanyLevelApiGetUserDetailsConfig) (CompanyUser, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *UsersCompanyLevelApi) GetUserDetails(r UsersCompanyLevelApiGetUserDetailsConfig) (CompanyUser, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &CompanyUser{}
 	path := "/companies/{companyId}/users/{userId}"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -177,37 +177,37 @@ func (a *UsersCompanyLevelApi) GetUserDetails(r UsersCompanyLevelApiGetUserDetai
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }
 
 type UsersCompanyLevelApiListUsersConfig struct {
@@ -263,8 +263,8 @@ Returns the list of users for the &#x60;companyId&#x60; identified in the path. 
 @return ListCompanyUsersResponse
 */
 
-func (a *UsersCompanyLevelApi) ListUsers(r UsersCompanyLevelApiListUsersConfig) (ListCompanyUsersResponse, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *UsersCompanyLevelApi) ListUsers(r UsersCompanyLevelApiListUsersConfig) (ListCompanyUsersResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &ListCompanyUsersResponse{}
 	path := "/companies/{companyId}/users"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -295,37 +295,37 @@ func (a *UsersCompanyLevelApi) ListUsers(r UsersCompanyLevelApiListUsersConfig) 
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }
 
 type UsersCompanyLevelApiUpdateUserDetailsConfig struct {
@@ -371,8 +371,8 @@ Updates user details for the &#x60;userId&#x60; and the &#x60;companyId&#x60; id
 @return CompanyUser
 */
 
-func (a *UsersCompanyLevelApi) UpdateUserDetails(r UsersCompanyLevelApiUpdateUserDetailsConfig) (CompanyUser, *_nethttp.Response, RestServiceError, error) {
-	var serviceError RestServiceError
+func (a *UsersCompanyLevelApi) UpdateUserDetails(r UsersCompanyLevelApiUpdateUserDetailsConfig) (CompanyUser, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &CompanyUser{}
 	path := "/companies/{companyId}/users/{userId}"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -395,35 +395,35 @@ func (a *UsersCompanyLevelApi) UpdateUserDetails(r UsersCompanyLevelApiUpdateUse
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		_ = json.Unmarshal([]byte(body), &serviceError)
-		return *res, httpRes, serviceError, err
+		return *res, httpRes, serviceError
 	}
-	return *res, httpRes, serviceError, err
+	return *res, httpRes, err
 }
