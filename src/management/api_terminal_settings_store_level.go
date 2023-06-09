@@ -10,39 +10,29 @@ package management
 
 import (
 	"context"
-	"net/http"
+	"encoding/json"
+	"io/ioutil"
+	_nethttp "net/http"
 	"net/url"
 	"strings"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// TerminalSettingsStoreLevelApi service
+// TerminalSettingsStoreLevelApi TerminalSettingsStoreLevelApi service
 type TerminalSettingsStoreLevelApi common.Service
 
-// All parameters accepted by TerminalSettingsStoreLevelApi.GetTerminalLogo
-type TerminalSettingsStoreLevelApiGetTerminalLogoInput struct {
+type TerminalSettingsStoreLevelApiGetTerminalLogoConfig struct {
+	ctx        context.Context
 	merchantId string
 	reference  string
 	model      *string
 }
 
 // The terminal model. Possible values: E355, VX675WIFIBT, VX680, VX690, VX700, VX820, M400, MX925, P400Plus, UX300, UX410, V200cPlus, V240mPlus, V400cPlus, V400m, e280, e285, e285p, S1E, S1EL, S1F2, S1L, S1U, S7T.
-func (r TerminalSettingsStoreLevelApiGetTerminalLogoInput) Model(model string) TerminalSettingsStoreLevelApiGetTerminalLogoInput {
+func (r TerminalSettingsStoreLevelApiGetTerminalLogoConfig) Model(model string) TerminalSettingsStoreLevelApiGetTerminalLogoConfig {
 	r.model = &model
 	return r
-}
-
-/*
-Prepare a request for GetTerminalLogo
-@param merchantId The unique identifier of the merchant account.@param reference The reference that identifies the store.
-@return TerminalSettingsStoreLevelApiGetTerminalLogoInput
-*/
-func (a *TerminalSettingsStoreLevelApi) GetTerminalLogoInput(merchantId string, reference string) TerminalSettingsStoreLevelApiGetTerminalLogoInput {
-	return TerminalSettingsStoreLevelApiGetTerminalLogoInput{
-		merchantId: merchantId,
-		reference:  reference,
-	}
 }
 
 /*
@@ -56,11 +46,30 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Terminal settings read
 * Management API—Terminal settings read and write
 
-@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@param r TerminalSettingsStoreLevelApiGetTerminalLogoInput - Request parameters, see GetTerminalLogoInput
-@return Logo, *http.Response, error
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@param reference The reference that identifies the store.
+	@return TerminalSettingsStoreLevelApiGetTerminalLogoConfig
 */
-func (a *TerminalSettingsStoreLevelApi) GetTerminalLogo(ctx context.Context, r TerminalSettingsStoreLevelApiGetTerminalLogoInput) (Logo, *http.Response, error) {
+func (a *TerminalSettingsStoreLevelApi) GetTerminalLogoConfig(ctx context.Context, merchantId string, reference string) TerminalSettingsStoreLevelApiGetTerminalLogoConfig {
+	return TerminalSettingsStoreLevelApiGetTerminalLogoConfig{
+		ctx:        ctx,
+		merchantId: merchantId,
+		reference:  reference,
+	}
+}
+
+/*
+Get the terminal logo
+Returns the logo that is configured for a specific payment terminal model at the store identified in the path.  The logo is returned as a Base64-encoded string. You need to Base64-decode the string to get the actual image file.  This logo applies to all terminals of the specified model under the store, unless a different logo is configured for an individual terminal.  To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal settings read * Management API—Terminal settings read and write
+ * @param merchantId The unique identifier of the merchant account.
+ * @param reference The reference that identifies the store.
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return Logo
+*/
+
+func (a *TerminalSettingsStoreLevelApi) GetTerminalLogo(r TerminalSettingsStoreLevelApiGetTerminalLogoConfig) (Logo, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &Logo{}
 	path := "/merchants/{merchantId}/stores/{reference}/terminalLogos"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -71,40 +80,64 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalLogo(ctx context.Context, r T
 		common.ParameterAddToQuery(queryParams, "model", r.model, "")
 	}
 	httpRes, err := common.SendAPIRequest(
-		ctx,
+		r.ctx,
 		a.Client,
 		nil,
 		res,
-		http.MethodGet,
+		_nethttp.MethodGet,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
-// All parameters accepted by TerminalSettingsStoreLevelApi.GetTerminalLogoByStoreId
-type TerminalSettingsStoreLevelApiGetTerminalLogoByStoreIdInput struct {
+type TerminalSettingsStoreLevelApiGetTerminalLogoByStoreIdConfig struct {
+	ctx     context.Context
 	storeId string
 	model   *string
 }
 
 // The terminal model. Possible values: E355, VX675WIFIBT, VX680, VX690, VX700, VX820, M400, MX925, P400Plus, UX300, UX410, V200cPlus, V240mPlus, V400cPlus, V400m, e280, e285, e285p, S1E, S1EL, S1F2, S1L, S1U, S7T.
-func (r TerminalSettingsStoreLevelApiGetTerminalLogoByStoreIdInput) Model(model string) TerminalSettingsStoreLevelApiGetTerminalLogoByStoreIdInput {
+func (r TerminalSettingsStoreLevelApiGetTerminalLogoByStoreIdConfig) Model(model string) TerminalSettingsStoreLevelApiGetTerminalLogoByStoreIdConfig {
 	r.model = &model
 	return r
-}
-
-/*
-Prepare a request for GetTerminalLogoByStoreId
-@param storeId The unique identifier of the store.
-@return TerminalSettingsStoreLevelApiGetTerminalLogoByStoreIdInput
-*/
-func (a *TerminalSettingsStoreLevelApi) GetTerminalLogoByStoreIdInput(storeId string) TerminalSettingsStoreLevelApiGetTerminalLogoByStoreIdInput {
-	return TerminalSettingsStoreLevelApiGetTerminalLogoByStoreIdInput{
-		storeId: storeId,
-	}
 }
 
 /*
@@ -118,11 +151,27 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Terminal settings read
 * Management API—Terminal settings read and write
 
-@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@param r TerminalSettingsStoreLevelApiGetTerminalLogoByStoreIdInput - Request parameters, see GetTerminalLogoByStoreIdInput
-@return Logo, *http.Response, error
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param storeId The unique identifier of the store.
+	@return TerminalSettingsStoreLevelApiGetTerminalLogoByStoreIdConfig
 */
-func (a *TerminalSettingsStoreLevelApi) GetTerminalLogoByStoreId(ctx context.Context, r TerminalSettingsStoreLevelApiGetTerminalLogoByStoreIdInput) (Logo, *http.Response, error) {
+func (a *TerminalSettingsStoreLevelApi) GetTerminalLogoByStoreIdConfig(ctx context.Context, storeId string) TerminalSettingsStoreLevelApiGetTerminalLogoByStoreIdConfig {
+	return TerminalSettingsStoreLevelApiGetTerminalLogoByStoreIdConfig{
+		ctx:     ctx,
+		storeId: storeId,
+	}
+}
+
+/*
+Get the terminal logo
+Returns the logo that is configured for a specific payment terminal model at the store identified in the path.  The logo is returned as a Base64-encoded string. You need to Base64-decode the string to get the actual image file.  This logo applies to all terminals of that model under the store unless a different logo is configured for an individual terminal.  To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal settings read * Management API—Terminal settings read and write
+ * @param storeId The unique identifier of the store.
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return Logo
+*/
+
+func (a *TerminalSettingsStoreLevelApi) GetTerminalLogoByStoreId(r TerminalSettingsStoreLevelApiGetTerminalLogoByStoreIdConfig) (Logo, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &Logo{}
 	path := "/stores/{storeId}/terminalLogos"
 	path = strings.Replace(path, "{"+"storeId"+"}", url.PathEscape(common.ParameterValueToString(r.storeId, "storeId")), -1)
@@ -132,35 +181,58 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalLogoByStoreId(ctx context.Con
 		common.ParameterAddToQuery(queryParams, "model", r.model, "")
 	}
 	httpRes, err := common.SendAPIRequest(
-		ctx,
+		r.ctx,
 		a.Client,
 		nil,
 		res,
-		http.MethodGet,
+		_nethttp.MethodGet,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
-// All parameters accepted by TerminalSettingsStoreLevelApi.GetTerminalSettings
-type TerminalSettingsStoreLevelApiGetTerminalSettingsInput struct {
+type TerminalSettingsStoreLevelApiGetTerminalSettingsConfig struct {
+	ctx        context.Context
 	merchantId string
 	reference  string
-}
-
-/*
-Prepare a request for GetTerminalSettings
-@param merchantId The unique identifier of the merchant account.@param reference The reference that identifies the store.
-@return TerminalSettingsStoreLevelApiGetTerminalSettingsInput
-*/
-func (a *TerminalSettingsStoreLevelApi) GetTerminalSettingsInput(merchantId string, reference string) TerminalSettingsStoreLevelApiGetTerminalSettingsInput {
-	return TerminalSettingsStoreLevelApiGetTerminalSettingsInput{
-		merchantId: merchantId,
-		reference:  reference,
-	}
 }
 
 /*
@@ -175,11 +247,30 @@ To make this request, your API credential must have one of the following [roles]
 For [sensitive terminal settings](https://docs.adyen.com/point-of-sale/automating-terminal-management/configure-terminals-api#sensitive-terminal-settings), your API credential must have the following role:
 * Management API—Terminal settings Advanced read and write
 
-@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@param r TerminalSettingsStoreLevelApiGetTerminalSettingsInput - Request parameters, see GetTerminalSettingsInput
-@return TerminalSettings, *http.Response, error
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@param reference The reference that identifies the store.
+	@return TerminalSettingsStoreLevelApiGetTerminalSettingsConfig
 */
-func (a *TerminalSettingsStoreLevelApi) GetTerminalSettings(ctx context.Context, r TerminalSettingsStoreLevelApiGetTerminalSettingsInput) (TerminalSettings, *http.Response, error) {
+func (a *TerminalSettingsStoreLevelApi) GetTerminalSettingsConfig(ctx context.Context, merchantId string, reference string) TerminalSettingsStoreLevelApiGetTerminalSettingsConfig {
+	return TerminalSettingsStoreLevelApiGetTerminalSettingsConfig{
+		ctx:        ctx,
+		merchantId: merchantId,
+		reference:  reference,
+	}
+}
+
+/*
+Get terminal settings
+Returns the payment terminal settings that are configured for the store identified in the path. These settings apply to all terminals under the store unless different values are configured for an individual terminal.  To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal settings read * Management API—Terminal settings read and write  For [sensitive terminal settings](https://docs.adyen.com/point-of-sale/automating-terminal-management/configure-terminals-api#sensitive-terminal-settings), your API credential must have the following role: * Management API—Terminal settings Advanced read and write
+ * @param merchantId The unique identifier of the merchant account.
+ * @param reference The reference that identifies the store.
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return TerminalSettings
+*/
+
+func (a *TerminalSettingsStoreLevelApi) GetTerminalSettings(r TerminalSettingsStoreLevelApiGetTerminalSettingsConfig) (TerminalSettings, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &TerminalSettings{}
 	path := "/merchants/{merchantId}/stores/{reference}/terminalSettings"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -187,33 +278,57 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalSettings(ctx context.Context,
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		ctx,
+		r.ctx,
 		a.Client,
 		nil,
 		res,
-		http.MethodGet,
+		_nethttp.MethodGet,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
-// All parameters accepted by TerminalSettingsStoreLevelApi.GetTerminalSettingsByStoreId
-type TerminalSettingsStoreLevelApiGetTerminalSettingsByStoreIdInput struct {
+type TerminalSettingsStoreLevelApiGetTerminalSettingsByStoreIdConfig struct {
+	ctx     context.Context
 	storeId string
-}
-
-/*
-Prepare a request for GetTerminalSettingsByStoreId
-@param storeId The unique identifier of the store.
-@return TerminalSettingsStoreLevelApiGetTerminalSettingsByStoreIdInput
-*/
-func (a *TerminalSettingsStoreLevelApi) GetTerminalSettingsByStoreIdInput(storeId string) TerminalSettingsStoreLevelApiGetTerminalSettingsByStoreIdInput {
-	return TerminalSettingsStoreLevelApiGetTerminalSettingsByStoreIdInput{
-		storeId: storeId,
-	}
 }
 
 /*
@@ -228,32 +343,83 @@ To make this request, your API credential must have one of the following [roles]
 For [sensitive terminal settings](https://docs.adyen.com/point-of-sale/automating-terminal-management/configure-terminals-api#sensitive-terminal-settings), your API credential must have the following role:
 * Management API—Terminal settings Advanced read and write
 
-@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@param r TerminalSettingsStoreLevelApiGetTerminalSettingsByStoreIdInput - Request parameters, see GetTerminalSettingsByStoreIdInput
-@return TerminalSettings, *http.Response, error
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param storeId The unique identifier of the store.
+	@return TerminalSettingsStoreLevelApiGetTerminalSettingsByStoreIdConfig
 */
-func (a *TerminalSettingsStoreLevelApi) GetTerminalSettingsByStoreId(ctx context.Context, r TerminalSettingsStoreLevelApiGetTerminalSettingsByStoreIdInput) (TerminalSettings, *http.Response, error) {
+func (a *TerminalSettingsStoreLevelApi) GetTerminalSettingsByStoreIdConfig(ctx context.Context, storeId string) TerminalSettingsStoreLevelApiGetTerminalSettingsByStoreIdConfig {
+	return TerminalSettingsStoreLevelApiGetTerminalSettingsByStoreIdConfig{
+		ctx:     ctx,
+		storeId: storeId,
+	}
+}
+
+/*
+Get terminal settings
+Returns the payment terminal settings that are configured for the store identified in the path. These settings apply to all terminals under the store unless different values are configured for an individual terminal.  To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal settings read * Management API—Terminal settings read and write  For [sensitive terminal settings](https://docs.adyen.com/point-of-sale/automating-terminal-management/configure-terminals-api#sensitive-terminal-settings), your API credential must have the following role: * Management API—Terminal settings Advanced read and write
+ * @param storeId The unique identifier of the store.
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return TerminalSettings
+*/
+
+func (a *TerminalSettingsStoreLevelApi) GetTerminalSettingsByStoreId(r TerminalSettingsStoreLevelApiGetTerminalSettingsByStoreIdConfig) (TerminalSettings, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &TerminalSettings{}
 	path := "/stores/{storeId}/terminalSettings"
 	path = strings.Replace(path, "{"+"storeId"+"}", url.PathEscape(common.ParameterValueToString(r.storeId, "storeId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		ctx,
+		r.ctx,
 		a.Client,
 		nil,
 		res,
-		http.MethodGet,
+		_nethttp.MethodGet,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
-// All parameters accepted by TerminalSettingsStoreLevelApi.UpdateTerminalLogo
-type TerminalSettingsStoreLevelApiUpdateTerminalLogoInput struct {
+type TerminalSettingsStoreLevelApiUpdateTerminalLogoConfig struct {
+	ctx        context.Context
 	merchantId string
 	reference  string
 	model      *string
@@ -261,26 +427,14 @@ type TerminalSettingsStoreLevelApiUpdateTerminalLogoInput struct {
 }
 
 // The terminal model. Possible values: E355, VX675WIFIBT, VX680, VX690, VX700, VX820, M400, MX925, P400Plus, UX300, UX410, V200cPlus, V240mPlus, V400cPlus, V400m, e280, e285, e285p, S1E, S1EL, S1F2, S1L, S1U, S7T
-func (r TerminalSettingsStoreLevelApiUpdateTerminalLogoInput) Model(model string) TerminalSettingsStoreLevelApiUpdateTerminalLogoInput {
+func (r TerminalSettingsStoreLevelApiUpdateTerminalLogoConfig) Model(model string) TerminalSettingsStoreLevelApiUpdateTerminalLogoConfig {
 	r.model = &model
 	return r
 }
 
-func (r TerminalSettingsStoreLevelApiUpdateTerminalLogoInput) Logo(logo Logo) TerminalSettingsStoreLevelApiUpdateTerminalLogoInput {
+func (r TerminalSettingsStoreLevelApiUpdateTerminalLogoConfig) Logo(logo Logo) TerminalSettingsStoreLevelApiUpdateTerminalLogoConfig {
 	r.logo = &logo
 	return r
-}
-
-/*
-Prepare a request for UpdateTerminalLogo
-@param merchantId The unique identifier of the merchant account.@param reference The reference that identifies the store.
-@return TerminalSettingsStoreLevelApiUpdateTerminalLogoInput
-*/
-func (a *TerminalSettingsStoreLevelApi) UpdateTerminalLogoInput(merchantId string, reference string) TerminalSettingsStoreLevelApiUpdateTerminalLogoInput {
-	return TerminalSettingsStoreLevelApiUpdateTerminalLogoInput{
-		merchantId: merchantId,
-		reference:  reference,
-	}
 }
 
 /*
@@ -295,11 +449,31 @@ This logo applies to all terminals of the specified model under the store, unles
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Terminal settings read and write
 
-@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@param r TerminalSettingsStoreLevelApiUpdateTerminalLogoInput - Request parameters, see UpdateTerminalLogoInput
-@return Logo, *http.Response, error
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@param reference The reference that identifies the store.
+	@return TerminalSettingsStoreLevelApiUpdateTerminalLogoConfig
 */
-func (a *TerminalSettingsStoreLevelApi) UpdateTerminalLogo(ctx context.Context, r TerminalSettingsStoreLevelApiUpdateTerminalLogoInput) (Logo, *http.Response, error) {
+func (a *TerminalSettingsStoreLevelApi) UpdateTerminalLogoConfig(ctx context.Context, merchantId string, reference string) TerminalSettingsStoreLevelApiUpdateTerminalLogoConfig {
+	return TerminalSettingsStoreLevelApiUpdateTerminalLogoConfig{
+		ctx:        ctx,
+		merchantId: merchantId,
+		reference:  reference,
+	}
+}
+
+/*
+Update the terminal logo
+Updates the logo that is configured for a specific payment terminal model at the store identified in the path. You can update the logo for only one terminal model at a time. This logo applies to all terminals of the specified model under the store, unless a different logo is configured for an individual terminal.   * To change the logo, specify the image file as a Base64-encoded string. * To restore the logo inherited from a higher level (merchant or company account), specify an empty logo value.  To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal settings read and write
+ * @param merchantId The unique identifier of the merchant account.
+ * @param reference The reference that identifies the store.
+ * @param req Logo - reference of Logo).
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return Logo
+*/
+
+func (a *TerminalSettingsStoreLevelApi) UpdateTerminalLogo(r TerminalSettingsStoreLevelApiUpdateTerminalLogoConfig) (Logo, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &Logo{}
 	path := "/merchants/{merchantId}/stores/{reference}/terminalLogos"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -310,46 +484,70 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalLogo(ctx context.Context, 
 		common.ParameterAddToQuery(queryParams, "model", r.model, "")
 	}
 	httpRes, err := common.SendAPIRequest(
-		ctx,
+		r.ctx,
 		a.Client,
 		r.logo,
 		res,
-		http.MethodPatch,
+		_nethttp.MethodPatch,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
-// All parameters accepted by TerminalSettingsStoreLevelApi.UpdateTerminalLogoByStoreId
-type TerminalSettingsStoreLevelApiUpdateTerminalLogoByStoreIdInput struct {
+type TerminalSettingsStoreLevelApiUpdateTerminalLogoByStoreIdConfig struct {
+	ctx     context.Context
 	storeId string
 	model   *string
 	logo    *Logo
 }
 
 // The terminal model. Possible values: E355, VX675WIFIBT, VX680, VX690, VX700, VX820, M400, MX925, P400Plus, UX300, UX410, V200cPlus, V240mPlus, V400cPlus, V400m, e280, e285, e285p, S1E, S1EL, S1F2, S1L, S1U, S7T.
-func (r TerminalSettingsStoreLevelApiUpdateTerminalLogoByStoreIdInput) Model(model string) TerminalSettingsStoreLevelApiUpdateTerminalLogoByStoreIdInput {
+func (r TerminalSettingsStoreLevelApiUpdateTerminalLogoByStoreIdConfig) Model(model string) TerminalSettingsStoreLevelApiUpdateTerminalLogoByStoreIdConfig {
 	r.model = &model
 	return r
 }
 
-func (r TerminalSettingsStoreLevelApiUpdateTerminalLogoByStoreIdInput) Logo(logo Logo) TerminalSettingsStoreLevelApiUpdateTerminalLogoByStoreIdInput {
+func (r TerminalSettingsStoreLevelApiUpdateTerminalLogoByStoreIdConfig) Logo(logo Logo) TerminalSettingsStoreLevelApiUpdateTerminalLogoByStoreIdConfig {
 	r.logo = &logo
 	return r
-}
-
-/*
-Prepare a request for UpdateTerminalLogoByStoreId
-@param storeId The unique identifier of the store.
-@return TerminalSettingsStoreLevelApiUpdateTerminalLogoByStoreIdInput
-*/
-func (a *TerminalSettingsStoreLevelApi) UpdateTerminalLogoByStoreIdInput(storeId string) TerminalSettingsStoreLevelApiUpdateTerminalLogoByStoreIdInput {
-	return TerminalSettingsStoreLevelApiUpdateTerminalLogoByStoreIdInput{
-		storeId: storeId,
-	}
 }
 
 /*
@@ -364,11 +562,28 @@ This logo applies to all terminals of the specified model under the store, unles
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Terminal settings read and write
 
-@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@param r TerminalSettingsStoreLevelApiUpdateTerminalLogoByStoreIdInput - Request parameters, see UpdateTerminalLogoByStoreIdInput
-@return Logo, *http.Response, error
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param storeId The unique identifier of the store.
+	@return TerminalSettingsStoreLevelApiUpdateTerminalLogoByStoreIdConfig
 */
-func (a *TerminalSettingsStoreLevelApi) UpdateTerminalLogoByStoreId(ctx context.Context, r TerminalSettingsStoreLevelApiUpdateTerminalLogoByStoreIdInput) (Logo, *http.Response, error) {
+func (a *TerminalSettingsStoreLevelApi) UpdateTerminalLogoByStoreIdConfig(ctx context.Context, storeId string) TerminalSettingsStoreLevelApiUpdateTerminalLogoByStoreIdConfig {
+	return TerminalSettingsStoreLevelApiUpdateTerminalLogoByStoreIdConfig{
+		ctx:     ctx,
+		storeId: storeId,
+	}
+}
+
+/*
+Update the terminal logo
+Updates the logo that is configured for a specific payment terminal model at the store identified in the path. You can update the logo for only one terminal model at a time. This logo applies to all terminals of the specified model under the store, unless a different logo is configured for an individual terminal.   * To change the logo, specify the image file as a Base64-encoded string. * To restore the logo inherited from a higher level (merchant or company account), specify an empty logo value.  To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal settings read and write
+ * @param storeId The unique identifier of the store.
+ * @param req Logo - reference of Logo).
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return Logo
+*/
+
+func (a *TerminalSettingsStoreLevelApi) UpdateTerminalLogoByStoreId(r TerminalSettingsStoreLevelApiUpdateTerminalLogoByStoreIdConfig) (Logo, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &Logo{}
 	path := "/stores/{storeId}/terminalLogos"
 	path = strings.Replace(path, "{"+"storeId"+"}", url.PathEscape(common.ParameterValueToString(r.storeId, "storeId")), -1)
@@ -378,41 +593,64 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalLogoByStoreId(ctx context.
 		common.ParameterAddToQuery(queryParams, "model", r.model, "")
 	}
 	httpRes, err := common.SendAPIRequest(
-		ctx,
+		r.ctx,
 		a.Client,
 		r.logo,
 		res,
-		http.MethodPatch,
+		_nethttp.MethodPatch,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
-// All parameters accepted by TerminalSettingsStoreLevelApi.UpdateTerminalSettings
-type TerminalSettingsStoreLevelApiUpdateTerminalSettingsInput struct {
+type TerminalSettingsStoreLevelApiUpdateTerminalSettingsConfig struct {
+	ctx              context.Context
 	merchantId       string
 	reference        string
 	terminalSettings *TerminalSettings
 }
 
-func (r TerminalSettingsStoreLevelApiUpdateTerminalSettingsInput) TerminalSettings(terminalSettings TerminalSettings) TerminalSettingsStoreLevelApiUpdateTerminalSettingsInput {
+func (r TerminalSettingsStoreLevelApiUpdateTerminalSettingsConfig) TerminalSettings(terminalSettings TerminalSettings) TerminalSettingsStoreLevelApiUpdateTerminalSettingsConfig {
 	r.terminalSettings = &terminalSettings
 	return r
-}
-
-/*
-Prepare a request for UpdateTerminalSettings
-@param merchantId The unique identifier of the merchant account.@param reference The reference that identifies the store.
-@return TerminalSettingsStoreLevelApiUpdateTerminalSettingsInput
-*/
-func (a *TerminalSettingsStoreLevelApi) UpdateTerminalSettingsInput(merchantId string, reference string) TerminalSettingsStoreLevelApiUpdateTerminalSettingsInput {
-	return TerminalSettingsStoreLevelApiUpdateTerminalSettingsInput{
-		merchantId: merchantId,
-		reference:  reference,
-	}
 }
 
 /*
@@ -430,11 +668,31 @@ To make this request, your API credential must have the following [role](https:/
 For [sensitive terminal settings](https://docs.adyen.com/point-of-sale/automating-terminal-management/configure-terminals-api#sensitive-terminal-settings), your API credential must have the following role:
 * Management API—Terminal settings Advanced read and write
 
-@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@param r TerminalSettingsStoreLevelApiUpdateTerminalSettingsInput - Request parameters, see UpdateTerminalSettingsInput
-@return TerminalSettings, *http.Response, error
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@param reference The reference that identifies the store.
+	@return TerminalSettingsStoreLevelApiUpdateTerminalSettingsConfig
 */
-func (a *TerminalSettingsStoreLevelApi) UpdateTerminalSettings(ctx context.Context, r TerminalSettingsStoreLevelApiUpdateTerminalSettingsInput) (TerminalSettings, *http.Response, error) {
+func (a *TerminalSettingsStoreLevelApi) UpdateTerminalSettingsConfig(ctx context.Context, merchantId string, reference string) TerminalSettingsStoreLevelApiUpdateTerminalSettingsConfig {
+	return TerminalSettingsStoreLevelApiUpdateTerminalSettingsConfig{
+		ctx:        ctx,
+		merchantId: merchantId,
+		reference:  reference,
+	}
+}
+
+/*
+Update terminal settings
+Updates payment terminal settings for the store identified in the path. These settings apply to all terminals under the store, unless different values are configured for an individual terminal.  * To change a parameter value, include the full object that contains the parameter, even if you don&#39;t want to change all parameters in the object. * To restore a parameter value inherited from a higher level, include the full object that contains the parameter, and specify an empty value for the parameter or omit the parameter. * Objects that are not included in the request are not updated.  To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal settings read and write  For [sensitive terminal settings](https://docs.adyen.com/point-of-sale/automating-terminal-management/configure-terminals-api#sensitive-terminal-settings), your API credential must have the following role: * Management API—Terminal settings Advanced read and write
+ * @param merchantId The unique identifier of the merchant account.
+ * @param reference The reference that identifies the store.
+ * @param req TerminalSettings - reference of TerminalSettings).
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return TerminalSettings
+*/
+
+func (a *TerminalSettingsStoreLevelApi) UpdateTerminalSettings(r TerminalSettingsStoreLevelApiUpdateTerminalSettingsConfig) (TerminalSettings, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &TerminalSettings{}
 	path := "/merchants/{merchantId}/stores/{reference}/terminalSettings"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -442,39 +700,63 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalSettings(ctx context.Conte
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		ctx,
+		r.ctx,
 		a.Client,
 		r.terminalSettings,
 		res,
-		http.MethodPatch,
+		_nethttp.MethodPatch,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
-// All parameters accepted by TerminalSettingsStoreLevelApi.UpdateTerminalSettingsByStoreId
-type TerminalSettingsStoreLevelApiUpdateTerminalSettingsByStoreIdInput struct {
+type TerminalSettingsStoreLevelApiUpdateTerminalSettingsByStoreIdConfig struct {
+	ctx              context.Context
 	storeId          string
 	terminalSettings *TerminalSettings
 }
 
-func (r TerminalSettingsStoreLevelApiUpdateTerminalSettingsByStoreIdInput) TerminalSettings(terminalSettings TerminalSettings) TerminalSettingsStoreLevelApiUpdateTerminalSettingsByStoreIdInput {
+func (r TerminalSettingsStoreLevelApiUpdateTerminalSettingsByStoreIdConfig) TerminalSettings(terminalSettings TerminalSettings) TerminalSettingsStoreLevelApiUpdateTerminalSettingsByStoreIdConfig {
 	r.terminalSettings = &terminalSettings
 	return r
-}
-
-/*
-Prepare a request for UpdateTerminalSettingsByStoreId
-@param storeId The unique identifier of the store.
-@return TerminalSettingsStoreLevelApiUpdateTerminalSettingsByStoreIdInput
-*/
-func (a *TerminalSettingsStoreLevelApi) UpdateTerminalSettingsByStoreIdInput(storeId string) TerminalSettingsStoreLevelApiUpdateTerminalSettingsByStoreIdInput {
-	return TerminalSettingsStoreLevelApiUpdateTerminalSettingsByStoreIdInput{
-		storeId: storeId,
-	}
 }
 
 /*
@@ -492,26 +774,78 @@ To make this request, your API credential must have the following [role](https:/
 For [sensitive terminal settings](https://docs.adyen.com/point-of-sale/automating-terminal-management/configure-terminals-api#sensitive-terminal-settings), your API credential must have the following role:
 * Management API—Terminal settings Advanced read and write
 
-@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@param r TerminalSettingsStoreLevelApiUpdateTerminalSettingsByStoreIdInput - Request parameters, see UpdateTerminalSettingsByStoreIdInput
-@return TerminalSettings, *http.Response, error
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param storeId The unique identifier of the store.
+	@return TerminalSettingsStoreLevelApiUpdateTerminalSettingsByStoreIdConfig
 */
-func (a *TerminalSettingsStoreLevelApi) UpdateTerminalSettingsByStoreId(ctx context.Context, r TerminalSettingsStoreLevelApiUpdateTerminalSettingsByStoreIdInput) (TerminalSettings, *http.Response, error) {
+func (a *TerminalSettingsStoreLevelApi) UpdateTerminalSettingsByStoreIdConfig(ctx context.Context, storeId string) TerminalSettingsStoreLevelApiUpdateTerminalSettingsByStoreIdConfig {
+	return TerminalSettingsStoreLevelApiUpdateTerminalSettingsByStoreIdConfig{
+		ctx:     ctx,
+		storeId: storeId,
+	}
+}
+
+/*
+Update terminal settings
+Updates payment terminal settings for the store identified in the path. These settings apply to all terminals under the store, unless different values are configured for an individual terminal.  * To change a parameter value, include the full object that contains the parameter, even if you don&#39;t want to change all parameters in the object. * To restore a parameter value inherited from a higher level, include the full object that contains the parameter, and specify an empty value for the parameter or omit the parameter. * Objects that are not included in the request are not updated.  To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal settings read and write  For [sensitive terminal settings](https://docs.adyen.com/point-of-sale/automating-terminal-management/configure-terminals-api#sensitive-terminal-settings), your API credential must have the following role: * Management API—Terminal settings Advanced read and write
+ * @param storeId The unique identifier of the store.
+ * @param req TerminalSettings - reference of TerminalSettings).
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return TerminalSettings
+*/
+
+func (a *TerminalSettingsStoreLevelApi) UpdateTerminalSettingsByStoreId(r TerminalSettingsStoreLevelApiUpdateTerminalSettingsByStoreIdConfig) (TerminalSettings, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &TerminalSettings{}
 	path := "/stores/{storeId}/terminalSettings"
 	path = strings.Replace(path, "{"+"storeId"+"}", url.PathEscape(common.ParameterValueToString(r.storeId, "storeId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		ctx,
+		r.ctx,
 		a.Client,
 		r.terminalSettings,
 		res,
-		http.MethodPatch,
+		_nethttp.MethodPatch,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }

@@ -10,38 +10,28 @@ package management
 
 import (
 	"context"
-	"net/http"
+	"encoding/json"
+	"io/ioutil"
+	_nethttp "net/http"
 	"net/url"
 	"strings"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// PaymentMethodsMerchantLevelApi service
+// PaymentMethodsMerchantLevelApi PaymentMethodsMerchantLevelApi service
 type PaymentMethodsMerchantLevelApi common.Service
 
-// All parameters accepted by PaymentMethodsMerchantLevelApi.AddApplePayDomain
-type PaymentMethodsMerchantLevelApiAddApplePayDomainInput struct {
+type PaymentMethodsMerchantLevelApiAddApplePayDomainConfig struct {
+	ctx             context.Context
 	merchantId      string
 	paymentMethodId string
 	applePayInfo    *ApplePayInfo
 }
 
-func (r PaymentMethodsMerchantLevelApiAddApplePayDomainInput) ApplePayInfo(applePayInfo ApplePayInfo) PaymentMethodsMerchantLevelApiAddApplePayDomainInput {
+func (r PaymentMethodsMerchantLevelApiAddApplePayDomainConfig) ApplePayInfo(applePayInfo ApplePayInfo) PaymentMethodsMerchantLevelApiAddApplePayDomainConfig {
 	r.applePayInfo = &applePayInfo
 	return r
-}
-
-/*
-Prepare a request for AddApplePayDomain
-@param merchantId The unique identifier of the merchant account.@param paymentMethodId The unique identifier of the payment method.
-@return PaymentMethodsMerchantLevelApiAddApplePayDomainInput
-*/
-func (a *PaymentMethodsMerchantLevelApi) AddApplePayDomainInput(merchantId string, paymentMethodId string) PaymentMethodsMerchantLevelApiAddApplePayDomainInput {
-	return PaymentMethodsMerchantLevelApiAddApplePayDomainInput{
-		merchantId:      merchantId,
-		paymentMethodId: paymentMethodId,
-	}
 }
 
 /*
@@ -52,12 +42,30 @@ Adds the new domain to the list of Apple Pay domains that are registered with th
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Payment methods read and write
 
-
-@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@param r PaymentMethodsMerchantLevelApiAddApplePayDomainInput - Request parameters, see AddApplePayDomainInput
-@return , *http.Response, error
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@param paymentMethodId The unique identifier of the payment method.
+	@return PaymentMethodsMerchantLevelApiAddApplePayDomainConfig
 */
-func (a *PaymentMethodsMerchantLevelApi) AddApplePayDomain(ctx context.Context, r PaymentMethodsMerchantLevelApiAddApplePayDomainInput) (*http.Response, error) {
+func (a *PaymentMethodsMerchantLevelApi) AddApplePayDomainConfig(ctx context.Context, merchantId string, paymentMethodId string) PaymentMethodsMerchantLevelApiAddApplePayDomainConfig {
+	return PaymentMethodsMerchantLevelApiAddApplePayDomainConfig{
+		ctx:             ctx,
+		merchantId:      merchantId,
+		paymentMethodId: paymentMethodId,
+	}
+}
+
+/*
+Add an Apple Pay domain
+Adds the new domain to the list of Apple Pay domains that are registered with the merchant account and the payment method identified in the path. For more information, see [Apple Pay documentation](https://docs.adyen.com/payment-methods/apple-pay/enable-apple-pay#register-merchant-domain).  To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Payment methods read and write
+ * @param merchantId The unique identifier of the merchant account.
+ * @param paymentMethodId The unique identifier of the payment method.
+ * @param req ApplePayInfo - reference of ApplePayInfo).
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+*/
+
+func (a *PaymentMethodsMerchantLevelApi) AddApplePayDomain(r PaymentMethodsMerchantLevelApiAddApplePayDomainConfig) (*_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	var res interface{}
 	path := "/merchants/{merchantId}/paymentMethodSettings/{paymentMethodId}/addApplePayDomains"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -65,21 +73,56 @@ func (a *PaymentMethodsMerchantLevelApi) AddApplePayDomain(ctx context.Context, 
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		ctx,
+		r.ctx,
 		a.Client,
 		r.applePayInfo,
 		res,
-		http.MethodPost,
+		_nethttp.MethodPost,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return httpRes, serviceError
+	}
 	return httpRes, err
 }
 
-// All parameters accepted by PaymentMethodsMerchantLevelApi.GetAllPaymentMethods
-type PaymentMethodsMerchantLevelApiGetAllPaymentMethodsInput struct {
+type PaymentMethodsMerchantLevelApiGetAllPaymentMethodsConfig struct {
+	ctx            context.Context
 	merchantId     string
 	storeId        *string
 	businessLineId *string
@@ -88,38 +131,27 @@ type PaymentMethodsMerchantLevelApiGetAllPaymentMethodsInput struct {
 }
 
 // The unique identifier of the store for which to return the payment methods.
-func (r PaymentMethodsMerchantLevelApiGetAllPaymentMethodsInput) StoreId(storeId string) PaymentMethodsMerchantLevelApiGetAllPaymentMethodsInput {
+func (r PaymentMethodsMerchantLevelApiGetAllPaymentMethodsConfig) StoreId(storeId string) PaymentMethodsMerchantLevelApiGetAllPaymentMethodsConfig {
 	r.storeId = &storeId
 	return r
 }
 
 // The unique identifier of the Business Line for which to return the payment methods.
-func (r PaymentMethodsMerchantLevelApiGetAllPaymentMethodsInput) BusinessLineId(businessLineId string) PaymentMethodsMerchantLevelApiGetAllPaymentMethodsInput {
+func (r PaymentMethodsMerchantLevelApiGetAllPaymentMethodsConfig) BusinessLineId(businessLineId string) PaymentMethodsMerchantLevelApiGetAllPaymentMethodsConfig {
 	r.businessLineId = &businessLineId
 	return r
 }
 
 // The number of items to have on a page, maximum 100. The default is 10 items on a page.
-func (r PaymentMethodsMerchantLevelApiGetAllPaymentMethodsInput) PageSize(pageSize int32) PaymentMethodsMerchantLevelApiGetAllPaymentMethodsInput {
+func (r PaymentMethodsMerchantLevelApiGetAllPaymentMethodsConfig) PageSize(pageSize int32) PaymentMethodsMerchantLevelApiGetAllPaymentMethodsConfig {
 	r.pageSize = &pageSize
 	return r
 }
 
 // The number of the page to fetch.
-func (r PaymentMethodsMerchantLevelApiGetAllPaymentMethodsInput) PageNumber(pageNumber int32) PaymentMethodsMerchantLevelApiGetAllPaymentMethodsInput {
+func (r PaymentMethodsMerchantLevelApiGetAllPaymentMethodsConfig) PageNumber(pageNumber int32) PaymentMethodsMerchantLevelApiGetAllPaymentMethodsConfig {
 	r.pageNumber = &pageNumber
 	return r
-}
-
-/*
-Prepare a request for GetAllPaymentMethods
-@param merchantId The unique identifier of the merchant account.
-@return PaymentMethodsMerchantLevelApiGetAllPaymentMethodsInput
-*/
-func (a *PaymentMethodsMerchantLevelApi) GetAllPaymentMethodsInput(merchantId string) PaymentMethodsMerchantLevelApiGetAllPaymentMethodsInput {
-	return PaymentMethodsMerchantLevelApiGetAllPaymentMethodsInput{
-		merchantId: merchantId,
-	}
 }
 
 /*
@@ -130,12 +162,27 @@ Returns details for all payment methods of the merchant account identified in th
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Payment methods read
 
-
-@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@param r PaymentMethodsMerchantLevelApiGetAllPaymentMethodsInput - Request parameters, see GetAllPaymentMethodsInput
-@return PaymentMethodResponse, *http.Response, error
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@return PaymentMethodsMerchantLevelApiGetAllPaymentMethodsConfig
 */
-func (a *PaymentMethodsMerchantLevelApi) GetAllPaymentMethods(ctx context.Context, r PaymentMethodsMerchantLevelApiGetAllPaymentMethodsInput) (PaymentMethodResponse, *http.Response, error) {
+func (a *PaymentMethodsMerchantLevelApi) GetAllPaymentMethodsConfig(ctx context.Context, merchantId string) PaymentMethodsMerchantLevelApiGetAllPaymentMethodsConfig {
+	return PaymentMethodsMerchantLevelApiGetAllPaymentMethodsConfig{
+		ctx:        ctx,
+		merchantId: merchantId,
+	}
+}
+
+/*
+Get all payment methods
+Returns details for all payment methods of the merchant account identified in the path.  To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Payment methods read
+ * @param merchantId The unique identifier of the merchant account.
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return PaymentMethodResponse
+*/
+
+func (a *PaymentMethodsMerchantLevelApi) GetAllPaymentMethods(r PaymentMethodsMerchantLevelApiGetAllPaymentMethodsConfig) (PaymentMethodResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &PaymentMethodResponse{}
 	path := "/merchants/{merchantId}/paymentMethodSettings"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -154,35 +201,58 @@ func (a *PaymentMethodsMerchantLevelApi) GetAllPaymentMethods(ctx context.Contex
 		common.ParameterAddToQuery(queryParams, "pageNumber", r.pageNumber, "")
 	}
 	httpRes, err := common.SendAPIRequest(
-		ctx,
+		r.ctx,
 		a.Client,
 		nil,
 		res,
-		http.MethodGet,
+		_nethttp.MethodGet,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
-// All parameters accepted by PaymentMethodsMerchantLevelApi.GetApplePayDomains
-type PaymentMethodsMerchantLevelApiGetApplePayDomainsInput struct {
+type PaymentMethodsMerchantLevelApiGetApplePayDomainsConfig struct {
+	ctx             context.Context
 	merchantId      string
 	paymentMethodId string
-}
-
-/*
-Prepare a request for GetApplePayDomains
-@param merchantId The unique identifier of the merchant account.@param paymentMethodId The unique identifier of the payment method.
-@return PaymentMethodsMerchantLevelApiGetApplePayDomainsInput
-*/
-func (a *PaymentMethodsMerchantLevelApi) GetApplePayDomainsInput(merchantId string, paymentMethodId string) PaymentMethodsMerchantLevelApiGetApplePayDomainsInput {
-	return PaymentMethodsMerchantLevelApiGetApplePayDomainsInput{
-		merchantId:      merchantId,
-		paymentMethodId: paymentMethodId,
-	}
 }
 
 /*
@@ -193,12 +263,30 @@ Returns all Apple Pay domains that are registered with the merchant account and 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Payment methods read
 
-
-@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@param r PaymentMethodsMerchantLevelApiGetApplePayDomainsInput - Request parameters, see GetApplePayDomainsInput
-@return ApplePayInfo, *http.Response, error
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@param paymentMethodId The unique identifier of the payment method.
+	@return PaymentMethodsMerchantLevelApiGetApplePayDomainsConfig
 */
-func (a *PaymentMethodsMerchantLevelApi) GetApplePayDomains(ctx context.Context, r PaymentMethodsMerchantLevelApiGetApplePayDomainsInput) (ApplePayInfo, *http.Response, error) {
+func (a *PaymentMethodsMerchantLevelApi) GetApplePayDomainsConfig(ctx context.Context, merchantId string, paymentMethodId string) PaymentMethodsMerchantLevelApiGetApplePayDomainsConfig {
+	return PaymentMethodsMerchantLevelApiGetApplePayDomainsConfig{
+		ctx:             ctx,
+		merchantId:      merchantId,
+		paymentMethodId: paymentMethodId,
+	}
+}
+
+/*
+Get Apple Pay domains
+Returns all Apple Pay domains that are registered with the merchant account and the payment method identified in the path. For more information, see [Apple Pay documentation](https://docs.adyen.com/payment-methods/apple-pay/enable-apple-pay#register-merchant-domain).  To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Payment methods read
+ * @param merchantId The unique identifier of the merchant account.
+ * @param paymentMethodId The unique identifier of the payment method.
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return ApplePayInfo
+*/
+
+func (a *PaymentMethodsMerchantLevelApi) GetApplePayDomains(r PaymentMethodsMerchantLevelApiGetApplePayDomainsConfig) (ApplePayInfo, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &ApplePayInfo{}
 	path := "/merchants/{merchantId}/paymentMethodSettings/{paymentMethodId}/getApplePayDomains"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -206,35 +294,58 @@ func (a *PaymentMethodsMerchantLevelApi) GetApplePayDomains(ctx context.Context,
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		ctx,
+		r.ctx,
 		a.Client,
 		nil,
 		res,
-		http.MethodGet,
+		_nethttp.MethodGet,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
-// All parameters accepted by PaymentMethodsMerchantLevelApi.GetPaymentMethodDetails
-type PaymentMethodsMerchantLevelApiGetPaymentMethodDetailsInput struct {
+type PaymentMethodsMerchantLevelApiGetPaymentMethodDetailsConfig struct {
+	ctx             context.Context
 	merchantId      string
 	paymentMethodId string
-}
-
-/*
-Prepare a request for GetPaymentMethodDetails
-@param merchantId The unique identifier of the merchant account.@param paymentMethodId The unique identifier of the payment method.
-@return PaymentMethodsMerchantLevelApiGetPaymentMethodDetailsInput
-*/
-func (a *PaymentMethodsMerchantLevelApi) GetPaymentMethodDetailsInput(merchantId string, paymentMethodId string) PaymentMethodsMerchantLevelApiGetPaymentMethodDetailsInput {
-	return PaymentMethodsMerchantLevelApiGetPaymentMethodDetailsInput{
-		merchantId:      merchantId,
-		paymentMethodId: paymentMethodId,
-	}
 }
 
 /*
@@ -245,12 +356,30 @@ Returns details for the merchant account and the payment method identified in th
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Payment methods read
 
-
-@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@param r PaymentMethodsMerchantLevelApiGetPaymentMethodDetailsInput - Request parameters, see GetPaymentMethodDetailsInput
-@return PaymentMethod, *http.Response, error
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@param paymentMethodId The unique identifier of the payment method.
+	@return PaymentMethodsMerchantLevelApiGetPaymentMethodDetailsConfig
 */
-func (a *PaymentMethodsMerchantLevelApi) GetPaymentMethodDetails(ctx context.Context, r PaymentMethodsMerchantLevelApiGetPaymentMethodDetailsInput) (PaymentMethod, *http.Response, error) {
+func (a *PaymentMethodsMerchantLevelApi) GetPaymentMethodDetailsConfig(ctx context.Context, merchantId string, paymentMethodId string) PaymentMethodsMerchantLevelApiGetPaymentMethodDetailsConfig {
+	return PaymentMethodsMerchantLevelApiGetPaymentMethodDetailsConfig{
+		ctx:             ctx,
+		merchantId:      merchantId,
+		paymentMethodId: paymentMethodId,
+	}
+}
+
+/*
+Get payment method details
+Returns details for the merchant account and the payment method identified in the path.  To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Payment methods read
+ * @param merchantId The unique identifier of the merchant account.
+ * @param paymentMethodId The unique identifier of the payment method.
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return PaymentMethod
+*/
+
+func (a *PaymentMethodsMerchantLevelApi) GetPaymentMethodDetails(r PaymentMethodsMerchantLevelApiGetPaymentMethodDetailsConfig) (PaymentMethod, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &PaymentMethod{}
 	path := "/merchants/{merchantId}/paymentMethodSettings/{paymentMethodId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -258,39 +387,63 @@ func (a *PaymentMethodsMerchantLevelApi) GetPaymentMethodDetails(ctx context.Con
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		ctx,
+		r.ctx,
 		a.Client,
 		nil,
 		res,
-		http.MethodGet,
+		_nethttp.MethodGet,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
-// All parameters accepted by PaymentMethodsMerchantLevelApi.RequestPaymentMethod
-type PaymentMethodsMerchantLevelApiRequestPaymentMethodInput struct {
+type PaymentMethodsMerchantLevelApiRequestPaymentMethodConfig struct {
+	ctx                    context.Context
 	merchantId             string
 	paymentMethodSetupInfo *PaymentMethodSetupInfo
 }
 
-func (r PaymentMethodsMerchantLevelApiRequestPaymentMethodInput) PaymentMethodSetupInfo(paymentMethodSetupInfo PaymentMethodSetupInfo) PaymentMethodsMerchantLevelApiRequestPaymentMethodInput {
+func (r PaymentMethodsMerchantLevelApiRequestPaymentMethodConfig) PaymentMethodSetupInfo(paymentMethodSetupInfo PaymentMethodSetupInfo) PaymentMethodsMerchantLevelApiRequestPaymentMethodConfig {
 	r.paymentMethodSetupInfo = &paymentMethodSetupInfo
 	return r
-}
-
-/*
-Prepare a request for RequestPaymentMethod
-@param merchantId The unique identifier of the merchant account.
-@return PaymentMethodsMerchantLevelApiRequestPaymentMethodInput
-*/
-func (a *PaymentMethodsMerchantLevelApi) RequestPaymentMethodInput(merchantId string) PaymentMethodsMerchantLevelApiRequestPaymentMethodInput {
-	return PaymentMethodsMerchantLevelApiRequestPaymentMethodInput{
-		merchantId: merchantId,
-	}
 }
 
 /*
@@ -301,53 +454,92 @@ Sends a request to add a new payment method to the merchant account identified i
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Payment methods read and write
 
-
-@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@param r PaymentMethodsMerchantLevelApiRequestPaymentMethodInput - Request parameters, see RequestPaymentMethodInput
-@return PaymentMethod, *http.Response, error
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@return PaymentMethodsMerchantLevelApiRequestPaymentMethodConfig
 */
-func (a *PaymentMethodsMerchantLevelApi) RequestPaymentMethod(ctx context.Context, r PaymentMethodsMerchantLevelApiRequestPaymentMethodInput) (PaymentMethod, *http.Response, error) {
+func (a *PaymentMethodsMerchantLevelApi) RequestPaymentMethodConfig(ctx context.Context, merchantId string) PaymentMethodsMerchantLevelApiRequestPaymentMethodConfig {
+	return PaymentMethodsMerchantLevelApiRequestPaymentMethodConfig{
+		ctx:        ctx,
+		merchantId: merchantId,
+	}
+}
+
+/*
+Request a payment method
+Sends a request to add a new payment method to the merchant account identified in the path.  To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Payment methods read and write
+ * @param merchantId The unique identifier of the merchant account.
+ * @param req PaymentMethodSetupInfo - reference of PaymentMethodSetupInfo).
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return PaymentMethod
+*/
+
+func (a *PaymentMethodsMerchantLevelApi) RequestPaymentMethod(r PaymentMethodsMerchantLevelApiRequestPaymentMethodConfig) (PaymentMethod, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &PaymentMethod{}
 	path := "/merchants/{merchantId}/paymentMethodSettings"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		ctx,
+		r.ctx,
 		a.Client,
 		r.paymentMethodSetupInfo,
 		res,
-		http.MethodPost,
+		_nethttp.MethodPost,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
-// All parameters accepted by PaymentMethodsMerchantLevelApi.UpdatePaymentMethod
-type PaymentMethodsMerchantLevelApiUpdatePaymentMethodInput struct {
+type PaymentMethodsMerchantLevelApiUpdatePaymentMethodConfig struct {
+	ctx                     context.Context
 	merchantId              string
 	paymentMethodId         string
 	updatePaymentMethodInfo *UpdatePaymentMethodInfo
 }
 
-func (r PaymentMethodsMerchantLevelApiUpdatePaymentMethodInput) UpdatePaymentMethodInfo(updatePaymentMethodInfo UpdatePaymentMethodInfo) PaymentMethodsMerchantLevelApiUpdatePaymentMethodInput {
+func (r PaymentMethodsMerchantLevelApiUpdatePaymentMethodConfig) UpdatePaymentMethodInfo(updatePaymentMethodInfo UpdatePaymentMethodInfo) PaymentMethodsMerchantLevelApiUpdatePaymentMethodConfig {
 	r.updatePaymentMethodInfo = &updatePaymentMethodInfo
 	return r
-}
-
-/*
-Prepare a request for UpdatePaymentMethod
-@param merchantId The unique identifier of the merchant account.@param paymentMethodId The unique identifier of the payment method.
-@return PaymentMethodsMerchantLevelApiUpdatePaymentMethodInput
-*/
-func (a *PaymentMethodsMerchantLevelApi) UpdatePaymentMethodInput(merchantId string, paymentMethodId string) PaymentMethodsMerchantLevelApiUpdatePaymentMethodInput {
-	return PaymentMethodsMerchantLevelApiUpdatePaymentMethodInput{
-		merchantId:      merchantId,
-		paymentMethodId: paymentMethodId,
-	}
 }
 
 /*
@@ -358,12 +550,31 @@ Updates payment method details for the merchant account and the payment method i
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Payment methods read and write
 
-
-@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@param r PaymentMethodsMerchantLevelApiUpdatePaymentMethodInput - Request parameters, see UpdatePaymentMethodInput
-@return PaymentMethod, *http.Response, error
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@param paymentMethodId The unique identifier of the payment method.
+	@return PaymentMethodsMerchantLevelApiUpdatePaymentMethodConfig
 */
-func (a *PaymentMethodsMerchantLevelApi) UpdatePaymentMethod(ctx context.Context, r PaymentMethodsMerchantLevelApiUpdatePaymentMethodInput) (PaymentMethod, *http.Response, error) {
+func (a *PaymentMethodsMerchantLevelApi) UpdatePaymentMethodConfig(ctx context.Context, merchantId string, paymentMethodId string) PaymentMethodsMerchantLevelApiUpdatePaymentMethodConfig {
+	return PaymentMethodsMerchantLevelApiUpdatePaymentMethodConfig{
+		ctx:             ctx,
+		merchantId:      merchantId,
+		paymentMethodId: paymentMethodId,
+	}
+}
+
+/*
+Update a payment method
+Updates payment method details for the merchant account and the payment method identified in the path.  To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Payment methods read and write
+ * @param merchantId The unique identifier of the merchant account.
+ * @param paymentMethodId The unique identifier of the payment method.
+ * @param req UpdatePaymentMethodInfo - reference of UpdatePaymentMethodInfo).
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return PaymentMethod
+*/
+
+func (a *PaymentMethodsMerchantLevelApi) UpdatePaymentMethod(r PaymentMethodsMerchantLevelApiUpdatePaymentMethodConfig) (PaymentMethod, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &PaymentMethod{}
 	path := "/merchants/{merchantId}/paymentMethodSettings/{paymentMethodId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -371,15 +582,50 @@ func (a *PaymentMethodsMerchantLevelApi) UpdatePaymentMethod(ctx context.Context
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		ctx,
+		r.ctx,
 		a.Client,
 		r.updatePaymentMethodInfo,
 		res,
-		http.MethodPatch,
+		_nethttp.MethodPatch,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }

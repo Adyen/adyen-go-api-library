@@ -77,11 +77,9 @@ func Test_ManagementAPI(t *testing.T) {
 
 	t.Run("Test ListCompanyAccounts", func(t *testing.T) {
 		t.Run("Create an API request that should pass", func(t *testing.T) {
-			req := service.AccountCompanyLevelApi.ListCompanyAccountsInput()
+			req := service.AccountCompanyLevelApi.ListCompanyAccountsConfig(context.Background())
 
-			_, httpRes, err := service.AccountCompanyLevelApi.ListCompanyAccounts(context.Background(), req)
-
-			require.NoError(t, err)
+			_, httpRes, err := service.AccountCompanyLevelApi.ListCompanyAccounts(req)
 			assert.Equal(t, 200, httpRes.StatusCode)
 			require.Nil(t, err)
 		})
@@ -90,56 +88,58 @@ func Test_ManagementAPI(t *testing.T) {
 	t.Run("Test GetCompanyAccount", func(t *testing.T) {
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 			companyId := "TestCompany123"
-			req := service.AccountCompanyLevelApi.GetCompanyAccountInput(companyId)
-			resp, httpRes, err := service.AccountCompanyLevelApi.GetCompanyAccount(context.Background(), req)
-			if err != nil {
-				fmt.Fprintf(os.Stderr, "Error: %v\n", err)
+			req := service.AccountCompanyLevelApi.GetCompanyAccountConfig(context.Background(), companyId)
+			resp, httpRes, serviceError := service.AccountCompanyLevelApi.GetCompanyAccount(req)
+			
+			if httpRes.StatusCode != 500 {
+				fmt.Fprintf(os.Stderr, "Error: %v\n", serviceError)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)
 			}
 
 			assert.Equal(t, 200, httpRes.StatusCode)
-			require.Nil(t, err)
+			require.Nil(t, serviceError)
 		})
 
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 			companyId := "notExisting"
-			req := service.AccountCompanyLevelApi.GetCompanyAccountInput(companyId)
-			resp, httpRes, err := service.AccountCompanyLevelApi.GetCompanyAccount(context.Background(), req)
-			if err != nil {
-				fmt.Fprintf(os.Stderr, "Error: %v\n", err)
+			req := service.AccountCompanyLevelApi.GetCompanyAccountConfig(context.Background(), companyId)
+			resp, httpRes, serviceError:= service.AccountCompanyLevelApi.GetCompanyAccount(req)
+			restServiceErr:=serviceError.(common.RestServiceError)
+			if restServiceErr.ErrorCode != "500" {
+				fmt.Fprintf(os.Stderr, "Error: %v\n", serviceError)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)
 			}
 
 			assert.Equal(t, 403, httpRes.StatusCode)
-			require.NotNil(t, err)
 		})
 	})
 
 	t.Run("Test ListMerchantAccounts", func(t *testing.T) {
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 			companyId := "TestCompany123"
-			req := service.AccountCompanyLevelApi.ListMerchantAccountsInput(companyId)
-			resp, httpRes, err := service.AccountCompanyLevelApi.ListMerchantAccounts(context.Background(), req)
-			if err != nil {
-				fmt.Fprintf(os.Stderr, "Error: %v\n", err)
+			req := service.AccountCompanyLevelApi.ListMerchantAccountsConfig(context.Background(), companyId)
+			resp, httpRes, serviceError:= service.AccountCompanyLevelApi.ListMerchantAccounts(req)
+			
+			if httpRes.StatusCode != 500 {
+				fmt.Fprintf(os.Stderr, "Error: %v\n", serviceError)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)
 			}
 
 			assert.Equal(t, 200, httpRes.StatusCode)
-			require.Nil(t, err)
+			require.Nil(t, serviceError)
 		})
 
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 			companyId := "notExisting"
-			req := service.AccountCompanyLevelApi.ListMerchantAccountsInput(companyId)
-			resp, httpRes, err := service.AccountCompanyLevelApi.ListMerchantAccounts(context.Background(), req)
-			if err != nil {
-				fmt.Fprintf(os.Stderr, "Error: %v\n", err)
+			req := service.AccountCompanyLevelApi.ListMerchantAccountsConfig(context.Background(), companyId)
+			resp, httpRes, serviceError:= service.AccountCompanyLevelApi.ListMerchantAccounts(req)
+			restServiceErr:=serviceError.(common.RestServiceError)
+			if restServiceErr.ErrorCode != "500" {
+				fmt.Fprintf(os.Stderr, "Error: %v\n", serviceError)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)
 			}
-
 			assert.Equal(t, 403, httpRes.StatusCode)
-			require.NotNil(t, err)
+			require.NotNil(t, serviceError)
 		})
 	})
 }

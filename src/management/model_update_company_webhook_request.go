@@ -660,7 +660,7 @@ func (o *UpdateCompanyWebhookRequest) isValidFilterMerchantAccountType() bool {
 	return false
 }
 func (o *UpdateCompanyWebhookRequest) isValidNetworkType() bool {
-	var allowedEnumValues = []string{"LOCAL", "PUBLIC"}
+	var allowedEnumValues = []string{"local", "public"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetNetworkType() == allowed {
 			return true

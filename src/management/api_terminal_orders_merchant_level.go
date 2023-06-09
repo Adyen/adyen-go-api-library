@@ -10,32 +10,22 @@ package management
 
 import (
 	"context"
-	"net/http"
+	"encoding/json"
+	"io/ioutil"
+	_nethttp "net/http"
 	"net/url"
 	"strings"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// TerminalOrdersMerchantLevelApi service
+// TerminalOrdersMerchantLevelApi TerminalOrdersMerchantLevelApi service
 type TerminalOrdersMerchantLevelApi common.Service
 
-// All parameters accepted by TerminalOrdersMerchantLevelApi.CancelOrder
-type TerminalOrdersMerchantLevelApiCancelOrderInput struct {
+type TerminalOrdersMerchantLevelApiCancelOrderConfig struct {
+	ctx        context.Context
 	merchantId string
 	orderId    string
-}
-
-/*
-Prepare a request for CancelOrder
-@param merchantId The unique identifier of the merchant account.@param orderId The unique identifier of the order.
-@return TerminalOrdersMerchantLevelApiCancelOrderInput
-*/
-func (a *TerminalOrdersMerchantLevelApi) CancelOrderInput(merchantId string, orderId string) TerminalOrdersMerchantLevelApiCancelOrderInput {
-	return TerminalOrdersMerchantLevelApiCancelOrderInput{
-		merchantId: merchantId,
-		orderId:    orderId,
-	}
 }
 
 /*
@@ -48,11 +38,30 @@ To cancel an order, make a POST call without a request body. The response return
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Terminal ordering read and write
 
-@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@param r TerminalOrdersMerchantLevelApiCancelOrderInput - Request parameters, see CancelOrderInput
-@return TerminalOrder, *http.Response, error
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@param orderId The unique identifier of the order.
+	@return TerminalOrdersMerchantLevelApiCancelOrderConfig
 */
-func (a *TerminalOrdersMerchantLevelApi) CancelOrder(ctx context.Context, r TerminalOrdersMerchantLevelApiCancelOrderInput) (TerminalOrder, *http.Response, error) {
+func (a *TerminalOrdersMerchantLevelApi) CancelOrderConfig(ctx context.Context, merchantId string, orderId string) TerminalOrdersMerchantLevelApiCancelOrderConfig {
+	return TerminalOrdersMerchantLevelApiCancelOrderConfig{
+		ctx:        ctx,
+		merchantId: merchantId,
+		orderId:    orderId,
+	}
+}
+
+/*
+Cancel an order
+Cancels the terminal products order identified in the path. Cancelling is only possible while the order has the status **Placed**. To cancel an order, make a POST call without a request body. The response returns the full order details, but with the status changed to **Cancelled**.  To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal ordering read and write
+ * @param merchantId The unique identifier of the merchant account.
+ * @param orderId The unique identifier of the order.
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return TerminalOrder
+*/
+
+func (a *TerminalOrdersMerchantLevelApi) CancelOrder(r TerminalOrdersMerchantLevelApiCancelOrderConfig) (TerminalOrder, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &TerminalOrder{}
 	path := "/merchants/{merchantId}/terminalOrders/{orderId}/cancel"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -60,39 +69,63 @@ func (a *TerminalOrdersMerchantLevelApi) CancelOrder(ctx context.Context, r Term
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		ctx,
+		r.ctx,
 		a.Client,
 		nil,
 		res,
-		http.MethodPost,
+		_nethttp.MethodPost,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
-// All parameters accepted by TerminalOrdersMerchantLevelApi.CreateOrder
-type TerminalOrdersMerchantLevelApiCreateOrderInput struct {
+type TerminalOrdersMerchantLevelApiCreateOrderConfig struct {
+	ctx                  context.Context
 	merchantId           string
 	terminalOrderRequest *TerminalOrderRequest
 }
 
-func (r TerminalOrdersMerchantLevelApiCreateOrderInput) TerminalOrderRequest(terminalOrderRequest TerminalOrderRequest) TerminalOrdersMerchantLevelApiCreateOrderInput {
+func (r TerminalOrdersMerchantLevelApiCreateOrderConfig) TerminalOrderRequest(terminalOrderRequest TerminalOrderRequest) TerminalOrdersMerchantLevelApiCreateOrderConfig {
 	r.terminalOrderRequest = &terminalOrderRequest
 	return r
-}
-
-/*
-Prepare a request for CreateOrder
-@param merchantId The unique identifier of the merchant account.
-@return TerminalOrdersMerchantLevelApiCreateOrderInput
-*/
-func (a *TerminalOrdersMerchantLevelApi) CreateOrderInput(merchantId string) TerminalOrdersMerchantLevelApiCreateOrderInput {
-	return TerminalOrdersMerchantLevelApiCreateOrderInput{
-		merchantId: merchantId,
-	}
 }
 
 /*
@@ -103,50 +136,91 @@ Creates an order for payment terminal products for the merchant account identifi
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Terminal ordering read and write
 
-@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@param r TerminalOrdersMerchantLevelApiCreateOrderInput - Request parameters, see CreateOrderInput
-@return TerminalOrder, *http.Response, error
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@return TerminalOrdersMerchantLevelApiCreateOrderConfig
 */
-func (a *TerminalOrdersMerchantLevelApi) CreateOrder(ctx context.Context, r TerminalOrdersMerchantLevelApiCreateOrderInput) (TerminalOrder, *http.Response, error) {
+func (a *TerminalOrdersMerchantLevelApi) CreateOrderConfig(ctx context.Context, merchantId string) TerminalOrdersMerchantLevelApiCreateOrderConfig {
+	return TerminalOrdersMerchantLevelApiCreateOrderConfig{
+		ctx:        ctx,
+		merchantId: merchantId,
+	}
+}
+
+/*
+Create an order
+Creates an order for payment terminal products for the merchant account identified in the path.  To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal ordering read and write
+ * @param merchantId The unique identifier of the merchant account.
+ * @param req TerminalOrderRequest - reference of TerminalOrderRequest).
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return TerminalOrder
+*/
+
+func (a *TerminalOrdersMerchantLevelApi) CreateOrder(r TerminalOrdersMerchantLevelApiCreateOrderConfig) (TerminalOrder, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &TerminalOrder{}
 	path := "/merchants/{merchantId}/terminalOrders"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		ctx,
+		r.ctx,
 		a.Client,
 		r.terminalOrderRequest,
 		res,
-		http.MethodPost,
+		_nethttp.MethodPost,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
-// All parameters accepted by TerminalOrdersMerchantLevelApi.CreateShippingLocation
-type TerminalOrdersMerchantLevelApiCreateShippingLocationInput struct {
+type TerminalOrdersMerchantLevelApiCreateShippingLocationConfig struct {
+	ctx              context.Context
 	merchantId       string
 	shippingLocation *ShippingLocation
 }
 
-func (r TerminalOrdersMerchantLevelApiCreateShippingLocationInput) ShippingLocation(shippingLocation ShippingLocation) TerminalOrdersMerchantLevelApiCreateShippingLocationInput {
+func (r TerminalOrdersMerchantLevelApiCreateShippingLocationConfig) ShippingLocation(shippingLocation ShippingLocation) TerminalOrdersMerchantLevelApiCreateShippingLocationConfig {
 	r.shippingLocation = &shippingLocation
 	return r
-}
-
-/*
-Prepare a request for CreateShippingLocation
-@param merchantId The unique identifier of the merchant account.
-@return TerminalOrdersMerchantLevelApiCreateShippingLocationInput
-*/
-func (a *TerminalOrdersMerchantLevelApi) CreateShippingLocationInput(merchantId string) TerminalOrdersMerchantLevelApiCreateShippingLocationInput {
-	return TerminalOrdersMerchantLevelApiCreateShippingLocationInput{
-		merchantId: merchantId,
-	}
 }
 
 /*
@@ -157,46 +231,86 @@ Creates a shipping location for the merchant account identified in the path. A s
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Terminal ordering read and write
 
-@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@param r TerminalOrdersMerchantLevelApiCreateShippingLocationInput - Request parameters, see CreateShippingLocationInput
-@return ShippingLocation, *http.Response, error
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@return TerminalOrdersMerchantLevelApiCreateShippingLocationConfig
 */
-func (a *TerminalOrdersMerchantLevelApi) CreateShippingLocation(ctx context.Context, r TerminalOrdersMerchantLevelApiCreateShippingLocationInput) (ShippingLocation, *http.Response, error) {
+func (a *TerminalOrdersMerchantLevelApi) CreateShippingLocationConfig(ctx context.Context, merchantId string) TerminalOrdersMerchantLevelApiCreateShippingLocationConfig {
+	return TerminalOrdersMerchantLevelApiCreateShippingLocationConfig{
+		ctx:        ctx,
+		merchantId: merchantId,
+	}
+}
+
+/*
+Create a shipping location
+Creates a shipping location for the merchant account identified in the path. A shipping location defines an address where orders can be shipped to.   To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal ordering read and write
+ * @param merchantId The unique identifier of the merchant account.
+ * @param req ShippingLocation - reference of ShippingLocation).
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return ShippingLocation
+*/
+
+func (a *TerminalOrdersMerchantLevelApi) CreateShippingLocation(r TerminalOrdersMerchantLevelApiCreateShippingLocationConfig) (ShippingLocation, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &ShippingLocation{}
 	path := "/merchants/{merchantId}/shippingLocations"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		ctx,
+		r.ctx,
 		a.Client,
 		r.shippingLocation,
 		res,
-		http.MethodPost,
+		_nethttp.MethodPost,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
-// All parameters accepted by TerminalOrdersMerchantLevelApi.GetOrder
-type TerminalOrdersMerchantLevelApiGetOrderInput struct {
+type TerminalOrdersMerchantLevelApiGetOrderConfig struct {
+	ctx        context.Context
 	merchantId string
 	orderId    string
-}
-
-/*
-Prepare a request for GetOrder
-@param merchantId The unique identifier of the merchant account.@param orderId The unique identifier of the order.
-@return TerminalOrdersMerchantLevelApiGetOrderInput
-*/
-func (a *TerminalOrdersMerchantLevelApi) GetOrderInput(merchantId string, orderId string) TerminalOrdersMerchantLevelApiGetOrderInput {
-	return TerminalOrdersMerchantLevelApiGetOrderInput{
-		merchantId: merchantId,
-		orderId:    orderId,
-	}
 }
 
 /*
@@ -208,11 +322,30 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Terminal ordering read
 * Management API—Terminal ordering read and write
 
-@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@param r TerminalOrdersMerchantLevelApiGetOrderInput - Request parameters, see GetOrderInput
-@return TerminalOrder, *http.Response, error
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@param orderId The unique identifier of the order.
+	@return TerminalOrdersMerchantLevelApiGetOrderConfig
 */
-func (a *TerminalOrdersMerchantLevelApi) GetOrder(ctx context.Context, r TerminalOrdersMerchantLevelApiGetOrderInput) (TerminalOrder, *http.Response, error) {
+func (a *TerminalOrdersMerchantLevelApi) GetOrderConfig(ctx context.Context, merchantId string, orderId string) TerminalOrdersMerchantLevelApiGetOrderConfig {
+	return TerminalOrdersMerchantLevelApiGetOrderConfig{
+		ctx:        ctx,
+		merchantId: merchantId,
+		orderId:    orderId,
+	}
+}
+
+/*
+Get an order
+Returns the details of the terminal products order identified in the path.  To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal ordering read * Management API—Terminal ordering read and write
+ * @param merchantId The unique identifier of the merchant account.
+ * @param orderId The unique identifier of the order.
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return TerminalOrder
+*/
+
+func (a *TerminalOrdersMerchantLevelApi) GetOrder(r TerminalOrdersMerchantLevelApiGetOrderConfig) (TerminalOrder, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &TerminalOrder{}
 	path := "/merchants/{merchantId}/terminalOrders/{orderId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -220,40 +353,64 @@ func (a *TerminalOrdersMerchantLevelApi) GetOrder(ctx context.Context, r Termina
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		ctx,
+		r.ctx,
 		a.Client,
 		nil,
 		res,
-		http.MethodGet,
+		_nethttp.MethodGet,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
-// All parameters accepted by TerminalOrdersMerchantLevelApi.ListBillingEntities
-type TerminalOrdersMerchantLevelApiListBillingEntitiesInput struct {
+type TerminalOrdersMerchantLevelApiListBillingEntitiesConfig struct {
+	ctx        context.Context
 	merchantId string
 	name       *string
 }
 
 // The name of the billing entity.
-func (r TerminalOrdersMerchantLevelApiListBillingEntitiesInput) Name(name string) TerminalOrdersMerchantLevelApiListBillingEntitiesInput {
+func (r TerminalOrdersMerchantLevelApiListBillingEntitiesConfig) Name(name string) TerminalOrdersMerchantLevelApiListBillingEntitiesConfig {
 	r.name = &name
 	return r
-}
-
-/*
-Prepare a request for ListBillingEntities
-@param merchantId The unique identifier of the merchant account.
-@return TerminalOrdersMerchantLevelApiListBillingEntitiesInput
-*/
-func (a *TerminalOrdersMerchantLevelApi) ListBillingEntitiesInput(merchantId string) TerminalOrdersMerchantLevelApiListBillingEntitiesInput {
-	return TerminalOrdersMerchantLevelApiListBillingEntitiesInput{
-		merchantId: merchantId,
-	}
 }
 
 /*
@@ -266,11 +423,27 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Terminal ordering read
 * Management API—Terminal ordering read and write
 
-@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@param r TerminalOrdersMerchantLevelApiListBillingEntitiesInput - Request parameters, see ListBillingEntitiesInput
-@return BillingEntitiesResponse, *http.Response, error
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@return TerminalOrdersMerchantLevelApiListBillingEntitiesConfig
 */
-func (a *TerminalOrdersMerchantLevelApi) ListBillingEntities(ctx context.Context, r TerminalOrdersMerchantLevelApiListBillingEntitiesInput) (BillingEntitiesResponse, *http.Response, error) {
+func (a *TerminalOrdersMerchantLevelApi) ListBillingEntitiesConfig(ctx context.Context, merchantId string) TerminalOrdersMerchantLevelApiListBillingEntitiesConfig {
+	return TerminalOrdersMerchantLevelApiListBillingEntitiesConfig{
+		ctx:        ctx,
+		merchantId: merchantId,
+	}
+}
+
+/*
+Get a list of billing entities
+Returns the billing entities of the merchant account identified in the path. A billing entity is a legal entity where we charge orders to. An order for terminal products must contain the ID of a billing entity.  To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal ordering read * Management API—Terminal ordering read and write
+ * @param merchantId The unique identifier of the merchant account.
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return BillingEntitiesResponse
+*/
+
+func (a *TerminalOrdersMerchantLevelApi) ListBillingEntities(r TerminalOrdersMerchantLevelApiListBillingEntitiesConfig) (BillingEntitiesResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &BillingEntitiesResponse{}
 	path := "/merchants/{merchantId}/billingEntities"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -280,21 +453,56 @@ func (a *TerminalOrdersMerchantLevelApi) ListBillingEntities(ctx context.Context
 		common.ParameterAddToQuery(queryParams, "name", r.name, "")
 	}
 	httpRes, err := common.SendAPIRequest(
-		ctx,
+		r.ctx,
 		a.Client,
 		nil,
 		res,
-		http.MethodGet,
+		_nethttp.MethodGet,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
-// All parameters accepted by TerminalOrdersMerchantLevelApi.ListOrders
-type TerminalOrdersMerchantLevelApiListOrdersInput struct {
+type TerminalOrdersMerchantLevelApiListOrdersConfig struct {
+	ctx                    context.Context
 	merchantId             string
 	customerOrderReference *string
 	status                 *string
@@ -303,38 +511,27 @@ type TerminalOrdersMerchantLevelApiListOrdersInput struct {
 }
 
 // Your purchase order number.
-func (r TerminalOrdersMerchantLevelApiListOrdersInput) CustomerOrderReference(customerOrderReference string) TerminalOrdersMerchantLevelApiListOrdersInput {
+func (r TerminalOrdersMerchantLevelApiListOrdersConfig) CustomerOrderReference(customerOrderReference string) TerminalOrdersMerchantLevelApiListOrdersConfig {
 	r.customerOrderReference = &customerOrderReference
 	return r
 }
 
 // The order status. Possible values (not case-sensitive): Placed, Confirmed, Cancelled, Shipped, Delivered.
-func (r TerminalOrdersMerchantLevelApiListOrdersInput) Status(status string) TerminalOrdersMerchantLevelApiListOrdersInput {
+func (r TerminalOrdersMerchantLevelApiListOrdersConfig) Status(status string) TerminalOrdersMerchantLevelApiListOrdersConfig {
 	r.status = &status
 	return r
 }
 
 // The number of orders to skip.
-func (r TerminalOrdersMerchantLevelApiListOrdersInput) Offset(offset int32) TerminalOrdersMerchantLevelApiListOrdersInput {
+func (r TerminalOrdersMerchantLevelApiListOrdersConfig) Offset(offset int32) TerminalOrdersMerchantLevelApiListOrdersConfig {
 	r.offset = &offset
 	return r
 }
 
 // The number of orders to return.
-func (r TerminalOrdersMerchantLevelApiListOrdersInput) Limit(limit int32) TerminalOrdersMerchantLevelApiListOrdersInput {
+func (r TerminalOrdersMerchantLevelApiListOrdersConfig) Limit(limit int32) TerminalOrdersMerchantLevelApiListOrdersConfig {
 	r.limit = &limit
 	return r
-}
-
-/*
-Prepare a request for ListOrders
-@param merchantId
-@return TerminalOrdersMerchantLevelApiListOrdersInput
-*/
-func (a *TerminalOrdersMerchantLevelApi) ListOrdersInput(merchantId string) TerminalOrdersMerchantLevelApiListOrdersInput {
-	return TerminalOrdersMerchantLevelApiListOrdersInput{
-		merchantId: merchantId,
-	}
 }
 
 /*
@@ -346,11 +543,27 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Terminal ordering read
 * Management API—Terminal ordering read and write
 
-@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@param r TerminalOrdersMerchantLevelApiListOrdersInput - Request parameters, see ListOrdersInput
-@return TerminalOrdersResponse, *http.Response, error
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId
+	@return TerminalOrdersMerchantLevelApiListOrdersConfig
 */
-func (a *TerminalOrdersMerchantLevelApi) ListOrders(ctx context.Context, r TerminalOrdersMerchantLevelApiListOrdersInput) (TerminalOrdersResponse, *http.Response, error) {
+func (a *TerminalOrdersMerchantLevelApi) ListOrdersConfig(ctx context.Context, merchantId string) TerminalOrdersMerchantLevelApiListOrdersConfig {
+	return TerminalOrdersMerchantLevelApiListOrdersConfig{
+		ctx:        ctx,
+		merchantId: merchantId,
+	}
+}
+
+/*
+Get a list of orders
+Returns a list of terminal products orders for the merchant account identified in the path.  To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal ordering read * Management API—Terminal ordering read and write
+ * @param merchantId
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return TerminalOrdersResponse
+*/
+
+func (a *TerminalOrdersMerchantLevelApi) ListOrders(r TerminalOrdersMerchantLevelApiListOrdersConfig) (TerminalOrdersResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &TerminalOrdersResponse{}
 	path := "/merchants/{merchantId}/terminalOrders"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -369,21 +582,56 @@ func (a *TerminalOrdersMerchantLevelApi) ListOrders(ctx context.Context, r Termi
 		common.ParameterAddToQuery(queryParams, "limit", r.limit, "")
 	}
 	httpRes, err := common.SendAPIRequest(
-		ctx,
+		r.ctx,
 		a.Client,
 		nil,
 		res,
-		http.MethodGet,
+		_nethttp.MethodGet,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
-// All parameters accepted by TerminalOrdersMerchantLevelApi.ListShippingLocations
-type TerminalOrdersMerchantLevelApiListShippingLocationsInput struct {
+type TerminalOrdersMerchantLevelApiListShippingLocationsConfig struct {
+	ctx        context.Context
 	merchantId string
 	name       *string
 	offset     *int32
@@ -391,32 +639,21 @@ type TerminalOrdersMerchantLevelApiListShippingLocationsInput struct {
 }
 
 // The name of the shipping location.
-func (r TerminalOrdersMerchantLevelApiListShippingLocationsInput) Name(name string) TerminalOrdersMerchantLevelApiListShippingLocationsInput {
+func (r TerminalOrdersMerchantLevelApiListShippingLocationsConfig) Name(name string) TerminalOrdersMerchantLevelApiListShippingLocationsConfig {
 	r.name = &name
 	return r
 }
 
 // The number of locations to skip.
-func (r TerminalOrdersMerchantLevelApiListShippingLocationsInput) Offset(offset int32) TerminalOrdersMerchantLevelApiListShippingLocationsInput {
+func (r TerminalOrdersMerchantLevelApiListShippingLocationsConfig) Offset(offset int32) TerminalOrdersMerchantLevelApiListShippingLocationsConfig {
 	r.offset = &offset
 	return r
 }
 
 // The number of locations to return.
-func (r TerminalOrdersMerchantLevelApiListShippingLocationsInput) Limit(limit int32) TerminalOrdersMerchantLevelApiListShippingLocationsInput {
+func (r TerminalOrdersMerchantLevelApiListShippingLocationsConfig) Limit(limit int32) TerminalOrdersMerchantLevelApiListShippingLocationsConfig {
 	r.limit = &limit
 	return r
-}
-
-/*
-Prepare a request for ListShippingLocations
-@param merchantId The unique identifier of the merchant account.
-@return TerminalOrdersMerchantLevelApiListShippingLocationsInput
-*/
-func (a *TerminalOrdersMerchantLevelApi) ListShippingLocationsInput(merchantId string) TerminalOrdersMerchantLevelApiListShippingLocationsInput {
-	return TerminalOrdersMerchantLevelApiListShippingLocationsInput{
-		merchantId: merchantId,
-	}
 }
 
 /*
@@ -429,11 +666,27 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Terminal ordering read
 * Management API—Terminal ordering read and write
 
-@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@param r TerminalOrdersMerchantLevelApiListShippingLocationsInput - Request parameters, see ListShippingLocationsInput
-@return ShippingLocationsResponse, *http.Response, error
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@return TerminalOrdersMerchantLevelApiListShippingLocationsConfig
 */
-func (a *TerminalOrdersMerchantLevelApi) ListShippingLocations(ctx context.Context, r TerminalOrdersMerchantLevelApiListShippingLocationsInput) (ShippingLocationsResponse, *http.Response, error) {
+func (a *TerminalOrdersMerchantLevelApi) ListShippingLocationsConfig(ctx context.Context, merchantId string) TerminalOrdersMerchantLevelApiListShippingLocationsConfig {
+	return TerminalOrdersMerchantLevelApiListShippingLocationsConfig{
+		ctx:        ctx,
+		merchantId: merchantId,
+	}
+}
+
+/*
+Get a list of shipping locations
+Returns the shipping locations for the merchant account identified in the path. A shipping location includes the address where orders can be delivered, and an ID which you need to specify when ordering terminal products.  To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal ordering read * Management API—Terminal ordering read and write
+ * @param merchantId The unique identifier of the merchant account.
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return ShippingLocationsResponse
+*/
+
+func (a *TerminalOrdersMerchantLevelApi) ListShippingLocations(r TerminalOrdersMerchantLevelApiListShippingLocationsConfig) (ShippingLocationsResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &ShippingLocationsResponse{}
 	path := "/merchants/{merchantId}/shippingLocations"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -449,33 +702,57 @@ func (a *TerminalOrdersMerchantLevelApi) ListShippingLocations(ctx context.Conte
 		common.ParameterAddToQuery(queryParams, "limit", r.limit, "")
 	}
 	httpRes, err := common.SendAPIRequest(
-		ctx,
+		r.ctx,
 		a.Client,
 		nil,
 		res,
-		http.MethodGet,
+		_nethttp.MethodGet,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
-// All parameters accepted by TerminalOrdersMerchantLevelApi.ListTerminalModels
-type TerminalOrdersMerchantLevelApiListTerminalModelsInput struct {
+type TerminalOrdersMerchantLevelApiListTerminalModelsConfig struct {
+	ctx        context.Context
 	merchantId string
-}
-
-/*
-Prepare a request for ListTerminalModels
-@param merchantId The unique identifier of the merchant account.
-@return TerminalOrdersMerchantLevelApiListTerminalModelsInput
-*/
-func (a *TerminalOrdersMerchantLevelApi) ListTerminalModelsInput(merchantId string) TerminalOrdersMerchantLevelApiListTerminalModelsInput {
-	return TerminalOrdersMerchantLevelApiListTerminalModelsInput{
-		merchantId: merchantId,
-	}
 }
 
 /*
@@ -487,32 +764,83 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Terminal ordering read
 * Management API—Terminal ordering read and write
 
-@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@param r TerminalOrdersMerchantLevelApiListTerminalModelsInput - Request parameters, see ListTerminalModelsInput
-@return TerminalModelsResponse, *http.Response, error
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@return TerminalOrdersMerchantLevelApiListTerminalModelsConfig
 */
-func (a *TerminalOrdersMerchantLevelApi) ListTerminalModels(ctx context.Context, r TerminalOrdersMerchantLevelApiListTerminalModelsInput) (TerminalModelsResponse, *http.Response, error) {
+func (a *TerminalOrdersMerchantLevelApi) ListTerminalModelsConfig(ctx context.Context, merchantId string) TerminalOrdersMerchantLevelApiListTerminalModelsConfig {
+	return TerminalOrdersMerchantLevelApiListTerminalModelsConfig{
+		ctx:        ctx,
+		merchantId: merchantId,
+	}
+}
+
+/*
+Get a list of terminal models
+Returns the payment terminal models that merchant account identified in the path has access to. The response includes the terminal model ID, which can be used as a query parameter when getting a list of terminals or a list of products for ordering.  To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal ordering read * Management API—Terminal ordering read and write
+ * @param merchantId The unique identifier of the merchant account.
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return TerminalModelsResponse
+*/
+
+func (a *TerminalOrdersMerchantLevelApi) ListTerminalModels(r TerminalOrdersMerchantLevelApiListTerminalModelsConfig) (TerminalModelsResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &TerminalModelsResponse{}
 	path := "/merchants/{merchantId}/terminalModels"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		ctx,
+		r.ctx,
 		a.Client,
 		nil,
 		res,
-		http.MethodGet,
+		_nethttp.MethodGet,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
-// All parameters accepted by TerminalOrdersMerchantLevelApi.ListTerminalProducts
-type TerminalOrdersMerchantLevelApiListTerminalProductsInput struct {
+type TerminalOrdersMerchantLevelApiListTerminalProductsConfig struct {
+	ctx             context.Context
 	merchantId      string
 	country         *string
 	terminalModelId *string
@@ -521,38 +849,27 @@ type TerminalOrdersMerchantLevelApiListTerminalProductsInput struct {
 }
 
 // The country to return products for, in [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format. For example, **US**
-func (r TerminalOrdersMerchantLevelApiListTerminalProductsInput) Country(country string) TerminalOrdersMerchantLevelApiListTerminalProductsInput {
+func (r TerminalOrdersMerchantLevelApiListTerminalProductsConfig) Country(country string) TerminalOrdersMerchantLevelApiListTerminalProductsConfig {
 	r.country = &country
 	return r
 }
 
 // The terminal model to return products for. Use the ID returned in the [GET &#x60;/terminalModels&#x60;](https://docs.adyen.com/api-explorer/#/ManagementService/latest/get/merchants/{merchantId}/terminalModels) response. For example, **Verifone.M400**
-func (r TerminalOrdersMerchantLevelApiListTerminalProductsInput) TerminalModelId(terminalModelId string) TerminalOrdersMerchantLevelApiListTerminalProductsInput {
+func (r TerminalOrdersMerchantLevelApiListTerminalProductsConfig) TerminalModelId(terminalModelId string) TerminalOrdersMerchantLevelApiListTerminalProductsConfig {
 	r.terminalModelId = &terminalModelId
 	return r
 }
 
 // The number of products to skip.
-func (r TerminalOrdersMerchantLevelApiListTerminalProductsInput) Offset(offset int32) TerminalOrdersMerchantLevelApiListTerminalProductsInput {
+func (r TerminalOrdersMerchantLevelApiListTerminalProductsConfig) Offset(offset int32) TerminalOrdersMerchantLevelApiListTerminalProductsConfig {
 	r.offset = &offset
 	return r
 }
 
 // The number of products to return.
-func (r TerminalOrdersMerchantLevelApiListTerminalProductsInput) Limit(limit int32) TerminalOrdersMerchantLevelApiListTerminalProductsInput {
+func (r TerminalOrdersMerchantLevelApiListTerminalProductsConfig) Limit(limit int32) TerminalOrdersMerchantLevelApiListTerminalProductsConfig {
 	r.limit = &limit
 	return r
-}
-
-/*
-Prepare a request for ListTerminalProducts
-@param merchantId The unique identifier of the merchant account.
-@return TerminalOrdersMerchantLevelApiListTerminalProductsInput
-*/
-func (a *TerminalOrdersMerchantLevelApi) ListTerminalProductsInput(merchantId string) TerminalOrdersMerchantLevelApiListTerminalProductsInput {
-	return TerminalOrdersMerchantLevelApiListTerminalProductsInput{
-		merchantId: merchantId,
-	}
 }
 
 /*
@@ -564,11 +881,27 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Terminal ordering read
 * Management API—Terminal ordering read and write
 
-@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@param r TerminalOrdersMerchantLevelApiListTerminalProductsInput - Request parameters, see ListTerminalProductsInput
-@return TerminalProductsResponse, *http.Response, error
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@return TerminalOrdersMerchantLevelApiListTerminalProductsConfig
 */
-func (a *TerminalOrdersMerchantLevelApi) ListTerminalProducts(ctx context.Context, r TerminalOrdersMerchantLevelApiListTerminalProductsInput) (TerminalProductsResponse, *http.Response, error) {
+func (a *TerminalOrdersMerchantLevelApi) ListTerminalProductsConfig(ctx context.Context, merchantId string) TerminalOrdersMerchantLevelApiListTerminalProductsConfig {
+	return TerminalOrdersMerchantLevelApiListTerminalProductsConfig{
+		ctx:        ctx,
+		merchantId: merchantId,
+	}
+}
+
+/*
+Get a list of terminal products
+Returns a country-specific list of payment terminal packages and parts that the merchant account identified in the path has access to.  To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal ordering read * Management API—Terminal ordering read and write
+ * @param merchantId The unique identifier of the merchant account.
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return TerminalProductsResponse
+*/
+
+func (a *TerminalOrdersMerchantLevelApi) ListTerminalProducts(r TerminalOrdersMerchantLevelApiListTerminalProductsConfig) (TerminalProductsResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &TerminalProductsResponse{}
 	path := "/merchants/{merchantId}/terminalProducts"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -587,41 +920,64 @@ func (a *TerminalOrdersMerchantLevelApi) ListTerminalProducts(ctx context.Contex
 		common.ParameterAddToQuery(queryParams, "limit", r.limit, "")
 	}
 	httpRes, err := common.SendAPIRequest(
-		ctx,
+		r.ctx,
 		a.Client,
 		nil,
 		res,
-		http.MethodGet,
+		_nethttp.MethodGet,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
-// All parameters accepted by TerminalOrdersMerchantLevelApi.UpdateOrder
-type TerminalOrdersMerchantLevelApiUpdateOrderInput struct {
+type TerminalOrdersMerchantLevelApiUpdateOrderConfig struct {
+	ctx                  context.Context
 	merchantId           string
 	orderId              string
 	terminalOrderRequest *TerminalOrderRequest
 }
 
-func (r TerminalOrdersMerchantLevelApiUpdateOrderInput) TerminalOrderRequest(terminalOrderRequest TerminalOrderRequest) TerminalOrdersMerchantLevelApiUpdateOrderInput {
+func (r TerminalOrdersMerchantLevelApiUpdateOrderConfig) TerminalOrderRequest(terminalOrderRequest TerminalOrderRequest) TerminalOrdersMerchantLevelApiUpdateOrderConfig {
 	r.terminalOrderRequest = &terminalOrderRequest
 	return r
-}
-
-/*
-Prepare a request for UpdateOrder
-@param merchantId The unique identifier of the merchant account.@param orderId The unique identifier of the order.
-@return TerminalOrdersMerchantLevelApiUpdateOrderInput
-*/
-func (a *TerminalOrdersMerchantLevelApi) UpdateOrderInput(merchantId string, orderId string) TerminalOrdersMerchantLevelApiUpdateOrderInput {
-	return TerminalOrdersMerchantLevelApiUpdateOrderInput{
-		merchantId: merchantId,
-		orderId:    orderId,
-	}
 }
 
 /*
@@ -632,16 +988,37 @@ Updating is only possible while the order has the status **Placed**.
 
 The request body only needs to contain what you want to change.
 However, to update the products in the `items` array, you must provice the entire array. For example, if the array has three items:
- To remove one item, the array must include the remaining two items. Or to add one item, the array must include all four items.
+
+	To remove one item, the array must include the remaining two items. Or to add one item, the array must include all four items.
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Terminal ordering read and write
 
-@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@param r TerminalOrdersMerchantLevelApiUpdateOrderInput - Request parameters, see UpdateOrderInput
-@return TerminalOrder, *http.Response, error
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@param orderId The unique identifier of the order.
+	@return TerminalOrdersMerchantLevelApiUpdateOrderConfig
 */
-func (a *TerminalOrdersMerchantLevelApi) UpdateOrder(ctx context.Context, r TerminalOrdersMerchantLevelApiUpdateOrderInput) (TerminalOrder, *http.Response, error) {
+func (a *TerminalOrdersMerchantLevelApi) UpdateOrderConfig(ctx context.Context, merchantId string, orderId string) TerminalOrdersMerchantLevelApiUpdateOrderConfig {
+	return TerminalOrdersMerchantLevelApiUpdateOrderConfig{
+		ctx:        ctx,
+		merchantId: merchantId,
+		orderId:    orderId,
+	}
+}
+
+/*
+Update an order
+Updates the terminal products order identified in the path. Updating is only possible while the order has the status **Placed**.  The request body only needs to contain what you want to change.  However, to update the products in the &#x60;items&#x60; array, you must provice the entire array. For example, if the array has three items:  To remove one item, the array must include the remaining two items. Or to add one item, the array must include all four items.  To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal ordering read and write
+ * @param merchantId The unique identifier of the merchant account.
+ * @param orderId The unique identifier of the order.
+ * @param req TerminalOrderRequest - reference of TerminalOrderRequest).
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return TerminalOrder
+*/
+
+func (a *TerminalOrdersMerchantLevelApi) UpdateOrder(r TerminalOrdersMerchantLevelApiUpdateOrderConfig) (TerminalOrder, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &TerminalOrder{}
 	path := "/merchants/{merchantId}/terminalOrders/{orderId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -649,15 +1026,50 @@ func (a *TerminalOrdersMerchantLevelApi) UpdateOrder(ctx context.Context, r Term
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		ctx,
+		r.ctx,
 		a.Client,
 		r.terminalOrderRequest,
 		res,
-		http.MethodPatch,
+		_nethttp.MethodPatch,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }

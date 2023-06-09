@@ -10,37 +10,28 @@ package management
 
 import (
 	"context"
-	"net/http"
+	"encoding/json"
+	"io/ioutil"
+	_nethttp "net/http"
 	"net/url"
 	"strings"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// TerminalSettingsMerchantLevelApi service
+// TerminalSettingsMerchantLevelApi TerminalSettingsMerchantLevelApi service
 type TerminalSettingsMerchantLevelApi common.Service
 
-// All parameters accepted by TerminalSettingsMerchantLevelApi.GetTerminalLogo
-type TerminalSettingsMerchantLevelApiGetTerminalLogoInput struct {
+type TerminalSettingsMerchantLevelApiGetTerminalLogoConfig struct {
+	ctx        context.Context
 	merchantId string
 	model      *string
 }
 
 // The terminal model. Possible values: E355, VX675WIFIBT, VX680, VX690, VX700, VX820, M400, MX925, P400Plus, UX300, UX410, V200cPlus, V240mPlus, V400cPlus, V400m, e280, e285, e285p, S1E, S1EL, S1F2, S1L, S1U, S7T.
-func (r TerminalSettingsMerchantLevelApiGetTerminalLogoInput) Model(model string) TerminalSettingsMerchantLevelApiGetTerminalLogoInput {
+func (r TerminalSettingsMerchantLevelApiGetTerminalLogoConfig) Model(model string) TerminalSettingsMerchantLevelApiGetTerminalLogoConfig {
 	r.model = &model
 	return r
-}
-
-/*
-Prepare a request for GetTerminalLogo
-@param merchantId The unique identifier of the merchant account.
-@return TerminalSettingsMerchantLevelApiGetTerminalLogoInput
-*/
-func (a *TerminalSettingsMerchantLevelApi) GetTerminalLogoInput(merchantId string) TerminalSettingsMerchantLevelApiGetTerminalLogoInput {
-	return TerminalSettingsMerchantLevelApiGetTerminalLogoInput{
-		merchantId: merchantId,
-	}
 }
 
 /*
@@ -54,11 +45,27 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Terminal settings read
 * Management API—Terminal settings read and write
 
-@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@param r TerminalSettingsMerchantLevelApiGetTerminalLogoInput - Request parameters, see GetTerminalLogoInput
-@return Logo, *http.Response, error
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@return TerminalSettingsMerchantLevelApiGetTerminalLogoConfig
 */
-func (a *TerminalSettingsMerchantLevelApi) GetTerminalLogo(ctx context.Context, r TerminalSettingsMerchantLevelApiGetTerminalLogoInput) (Logo, *http.Response, error) {
+func (a *TerminalSettingsMerchantLevelApi) GetTerminalLogoConfig(ctx context.Context, merchantId string) TerminalSettingsMerchantLevelApiGetTerminalLogoConfig {
+	return TerminalSettingsMerchantLevelApiGetTerminalLogoConfig{
+		ctx:        ctx,
+		merchantId: merchantId,
+	}
+}
+
+/*
+Get the terminal logo
+Returns the logo that is configured for a specific payment terminal model at the merchant account identified in the path.  The logo is returned as a Base64-encoded string. You need to Base64-decode the string to get the actual image file.  This logo applies to all terminals of the specified model under the merchant account, unless a different logo is configured at a lower level (store or individual terminal).  To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal settings read * Management API—Terminal settings read and write
+ * @param merchantId The unique identifier of the merchant account.
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return Logo
+*/
+
+func (a *TerminalSettingsMerchantLevelApi) GetTerminalLogo(r TerminalSettingsMerchantLevelApiGetTerminalLogoConfig) (Logo, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &Logo{}
 	path := "/merchants/{merchantId}/terminalLogos"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -68,33 +75,57 @@ func (a *TerminalSettingsMerchantLevelApi) GetTerminalLogo(ctx context.Context, 
 		common.ParameterAddToQuery(queryParams, "model", r.model, "")
 	}
 	httpRes, err := common.SendAPIRequest(
-		ctx,
+		r.ctx,
 		a.Client,
 		nil,
 		res,
-		http.MethodGet,
+		_nethttp.MethodGet,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
-// All parameters accepted by TerminalSettingsMerchantLevelApi.GetTerminalSettings
-type TerminalSettingsMerchantLevelApiGetTerminalSettingsInput struct {
+type TerminalSettingsMerchantLevelApiGetTerminalSettingsConfig struct {
+	ctx        context.Context
 	merchantId string
-}
-
-/*
-Prepare a request for GetTerminalSettings
-@param merchantId The unique identifier of the merchant account.
-@return TerminalSettingsMerchantLevelApiGetTerminalSettingsInput
-*/
-func (a *TerminalSettingsMerchantLevelApi) GetTerminalSettingsInput(merchantId string) TerminalSettingsMerchantLevelApiGetTerminalSettingsInput {
-	return TerminalSettingsMerchantLevelApiGetTerminalSettingsInput{
-		merchantId: merchantId,
-	}
 }
 
 /*
@@ -106,57 +137,97 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Terminal settings read
 * Management API—Terminal settings read and write
 
-@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@param r TerminalSettingsMerchantLevelApiGetTerminalSettingsInput - Request parameters, see GetTerminalSettingsInput
-@return TerminalSettings, *http.Response, error
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@return TerminalSettingsMerchantLevelApiGetTerminalSettingsConfig
 */
-func (a *TerminalSettingsMerchantLevelApi) GetTerminalSettings(ctx context.Context, r TerminalSettingsMerchantLevelApiGetTerminalSettingsInput) (TerminalSettings, *http.Response, error) {
+func (a *TerminalSettingsMerchantLevelApi) GetTerminalSettingsConfig(ctx context.Context, merchantId string) TerminalSettingsMerchantLevelApiGetTerminalSettingsConfig {
+	return TerminalSettingsMerchantLevelApiGetTerminalSettingsConfig{
+		ctx:        ctx,
+		merchantId: merchantId,
+	}
+}
+
+/*
+Get terminal settings
+Returns the payment terminal settings that are configured for the merchant account identified in the path. These settings apply to all terminals under the merchant account unless different values are configured at a lower level (store or individual terminal).  To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal settings read * Management API—Terminal settings read and write
+ * @param merchantId The unique identifier of the merchant account.
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return TerminalSettings
+*/
+
+func (a *TerminalSettingsMerchantLevelApi) GetTerminalSettings(r TerminalSettingsMerchantLevelApiGetTerminalSettingsConfig) (TerminalSettings, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &TerminalSettings{}
 	path := "/merchants/{merchantId}/terminalSettings"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		ctx,
+		r.ctx,
 		a.Client,
 		nil,
 		res,
-		http.MethodGet,
+		_nethttp.MethodGet,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
-// All parameters accepted by TerminalSettingsMerchantLevelApi.UpdateTerminalLogo
-type TerminalSettingsMerchantLevelApiUpdateTerminalLogoInput struct {
+type TerminalSettingsMerchantLevelApiUpdateTerminalLogoConfig struct {
+	ctx        context.Context
 	merchantId string
 	model      *string
 	logo       *Logo
 }
 
 // The terminal model. Allowed values: E355, VX675WIFIBT, VX680, VX690, VX700, VX820, M400, MX925, P400Plus, UX300, UX410, V200cPlus, V240mPlus, V400cPlus, V400m, e280, e285, e285p, S1E, S1EL, S1F2, S1L, S1U, S7T.
-func (r TerminalSettingsMerchantLevelApiUpdateTerminalLogoInput) Model(model string) TerminalSettingsMerchantLevelApiUpdateTerminalLogoInput {
+func (r TerminalSettingsMerchantLevelApiUpdateTerminalLogoConfig) Model(model string) TerminalSettingsMerchantLevelApiUpdateTerminalLogoConfig {
 	r.model = &model
 	return r
 }
 
-func (r TerminalSettingsMerchantLevelApiUpdateTerminalLogoInput) Logo(logo Logo) TerminalSettingsMerchantLevelApiUpdateTerminalLogoInput {
+func (r TerminalSettingsMerchantLevelApiUpdateTerminalLogoConfig) Logo(logo Logo) TerminalSettingsMerchantLevelApiUpdateTerminalLogoConfig {
 	r.logo = &logo
 	return r
-}
-
-/*
-Prepare a request for UpdateTerminalLogo
-@param merchantId The unique identifier of the merchant account.
-@return TerminalSettingsMerchantLevelApiUpdateTerminalLogoInput
-*/
-func (a *TerminalSettingsMerchantLevelApi) UpdateTerminalLogoInput(merchantId string) TerminalSettingsMerchantLevelApiUpdateTerminalLogoInput {
-	return TerminalSettingsMerchantLevelApiUpdateTerminalLogoInput{
-		merchantId: merchantId,
-	}
 }
 
 /*
@@ -171,11 +242,28 @@ This logo applies to all terminals of the specified model under the merchant acc
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Terminal settings read and write
 
-@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@param r TerminalSettingsMerchantLevelApiUpdateTerminalLogoInput - Request parameters, see UpdateTerminalLogoInput
-@return Logo, *http.Response, error
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@return TerminalSettingsMerchantLevelApiUpdateTerminalLogoConfig
 */
-func (a *TerminalSettingsMerchantLevelApi) UpdateTerminalLogo(ctx context.Context, r TerminalSettingsMerchantLevelApiUpdateTerminalLogoInput) (Logo, *http.Response, error) {
+func (a *TerminalSettingsMerchantLevelApi) UpdateTerminalLogoConfig(ctx context.Context, merchantId string) TerminalSettingsMerchantLevelApiUpdateTerminalLogoConfig {
+	return TerminalSettingsMerchantLevelApiUpdateTerminalLogoConfig{
+		ctx:        ctx,
+		merchantId: merchantId,
+	}
+}
+
+/*
+Update the terminal logo
+Updates the logo for a specific payment terminal model at the merchant account identified in the path. You can update the logo for only one terminal model at a time.  This logo applies to all terminals of the specified model under the merchant account, unless a different logo is configured at a lower level (store or individual terminal).  * To change the logo, specify the image file as a Base64-encoded string. * To restore the logo inherited from the company account, specify an empty logo value.  To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal settings read and write
+ * @param merchantId The unique identifier of the merchant account.
+ * @param req Logo - reference of Logo).
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return Logo
+*/
+
+func (a *TerminalSettingsMerchantLevelApi) UpdateTerminalLogo(r TerminalSettingsMerchantLevelApiUpdateTerminalLogoConfig) (Logo, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &Logo{}
 	path := "/merchants/{merchantId}/terminalLogos"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -185,39 +273,63 @@ func (a *TerminalSettingsMerchantLevelApi) UpdateTerminalLogo(ctx context.Contex
 		common.ParameterAddToQuery(queryParams, "model", r.model, "")
 	}
 	httpRes, err := common.SendAPIRequest(
-		ctx,
+		r.ctx,
 		a.Client,
 		r.logo,
 		res,
-		http.MethodPatch,
+		_nethttp.MethodPatch,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
-// All parameters accepted by TerminalSettingsMerchantLevelApi.UpdateTerminalSettings
-type TerminalSettingsMerchantLevelApiUpdateTerminalSettingsInput struct {
+type TerminalSettingsMerchantLevelApiUpdateTerminalSettingsConfig struct {
+	ctx              context.Context
 	merchantId       string
 	terminalSettings *TerminalSettings
 }
 
-func (r TerminalSettingsMerchantLevelApiUpdateTerminalSettingsInput) TerminalSettings(terminalSettings TerminalSettings) TerminalSettingsMerchantLevelApiUpdateTerminalSettingsInput {
+func (r TerminalSettingsMerchantLevelApiUpdateTerminalSettingsConfig) TerminalSettings(terminalSettings TerminalSettings) TerminalSettingsMerchantLevelApiUpdateTerminalSettingsConfig {
 	r.terminalSettings = &terminalSettings
 	return r
-}
-
-/*
-Prepare a request for UpdateTerminalSettings
-@param merchantId The unique identifier of the merchant account.
-@return TerminalSettingsMerchantLevelApiUpdateTerminalSettingsInput
-*/
-func (a *TerminalSettingsMerchantLevelApi) UpdateTerminalSettingsInput(merchantId string) TerminalSettingsMerchantLevelApiUpdateTerminalSettingsInput {
-	return TerminalSettingsMerchantLevelApiUpdateTerminalSettingsInput{
-		merchantId: merchantId,
-	}
 }
 
 /*
@@ -233,26 +345,78 @@ These settings apply to all terminals under the merchant account, unless differe
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Terminal settings read and write
 
-@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@param r TerminalSettingsMerchantLevelApiUpdateTerminalSettingsInput - Request parameters, see UpdateTerminalSettingsInput
-@return TerminalSettings, *http.Response, error
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@return TerminalSettingsMerchantLevelApiUpdateTerminalSettingsConfig
 */
-func (a *TerminalSettingsMerchantLevelApi) UpdateTerminalSettings(ctx context.Context, r TerminalSettingsMerchantLevelApiUpdateTerminalSettingsInput) (TerminalSettings, *http.Response, error) {
+func (a *TerminalSettingsMerchantLevelApi) UpdateTerminalSettingsConfig(ctx context.Context, merchantId string) TerminalSettingsMerchantLevelApiUpdateTerminalSettingsConfig {
+	return TerminalSettingsMerchantLevelApiUpdateTerminalSettingsConfig{
+		ctx:        ctx,
+		merchantId: merchantId,
+	}
+}
+
+/*
+Update terminal settings
+Updates payment terminal settings for the merchant account identified in the path. These settings apply to all terminals under the merchant account, unless different values are configured at a lower level (store or individual terminal).  * To change a parameter value, include the full object that contains the parameter, even if you don&#39;t want to change all parameters in the object. * To restore a parameter value inherited from a higher level, include the full object that contains the parameter, and specify an empty value for the parameter or omit the parameter. * Objects that are not included in the request are not updated.  To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal settings read and write
+ * @param merchantId The unique identifier of the merchant account.
+ * @param req TerminalSettings - reference of TerminalSettings).
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return TerminalSettings
+*/
+
+func (a *TerminalSettingsMerchantLevelApi) UpdateTerminalSettings(r TerminalSettingsMerchantLevelApiUpdateTerminalSettingsConfig) (TerminalSettings, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &TerminalSettings{}
 	path := "/merchants/{merchantId}/terminalSettings"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		ctx,
+		r.ctx,
 		a.Client,
 		r.terminalSettings,
 		res,
-		http.MethodPatch,
+		_nethttp.MethodPatch,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
+	defer httpRes.Body.Close()
 
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }

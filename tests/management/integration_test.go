@@ -2,13 +2,15 @@ package management
 
 import (
 	"context"
+	"os"
+	"reflect"
+	"testing"
+
 	"github.com/adyen/adyen-go-api-library/v7/src/adyen"
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"os"
-	"testing"
 )
 
 func Test_ManagementAPI_Integration(t *testing.T) {
@@ -27,13 +29,11 @@ func Test_ManagementAPI_Integration(t *testing.T) {
 
 	t.Run("Test MyAPICredentialApiService GetMe", func(t *testing.T) {
 		t.Run("Create an API request that should pass", func(t *testing.T) {
-			req := service.MyAPICredentialApi.GetApiCredentialDetailsInput()
-
-			resp, httpRes, err := service.MyAPICredentialApi.GetApiCredentialDetails(context.Background(), req)
-
-			require.Nil(t, err)
+			req := service.MyAPICredentialApi.GetApiCredentialDetailsConfig(context.Background())
+			resp, httpRes, serviceErr := service.MyAPICredentialApi.GetApiCredentialDetails(req)
 			assert.Equal(t, 200, httpRes.StatusCode)
 			require.NotNil(t, resp)
+			require.Nil(t, serviceErr)
 		})
 
 		t.Run("Create an API request that should fail", func(t *testing.T) {
@@ -42,23 +42,34 @@ func Test_ManagementAPI_Integration(t *testing.T) {
 				ApiKey:      "xxx",
 				Environment: common.TestEnv,
 			})
-			req := invalidKeyClient.Management().MyAPICredentialApi.GetApiCredentialDetailsInput()
+			req := invalidKeyClient.Management().MyAPICredentialApi.GetApiCredentialDetailsConfig(context.Background())
 
-			_, httpRes, err := invalidKeyClient.Management().MyAPICredentialApi.GetApiCredentialDetails(context.Background(), req)
-
+			_, httpRes, serviceErr := invalidKeyClient.Management().MyAPICredentialApi.GetApiCredentialDetails(req)
+			restServiceErr:=serviceErr.(common.RestServiceError)
 			assert.Equal(t, 401, httpRes.StatusCode)
-			require.NotNil(t, err)
+			require.NotNil(t, restServiceErr)
 		})
 	})
 
 	t.Run("List terminals", func(t *testing.T) {
-		req := service.TerminalsTerminalLevelApi.ListTerminalsInput()
+		req := service.TerminalsTerminalLevelApi.ListTerminalsConfig(context.Background())
 		req = req.Countries("NL").PageSize(1)
 
-		resp, httpRes, err := service.TerminalsTerminalLevelApi.ListTerminals(context.Background(), req)
-
-		require.Nil(t, err)
+		resp, httpRes, serviceErr := service.TerminalsTerminalLevelApi.ListTerminals(req)
+		require.Nil(t, serviceErr)
 		assert.Equal(t, 200, httpRes.StatusCode)
 		require.NotNil(t, resp)
+	})
+
+	t.Run("Create an API request that should fail for company", func(t *testing.T) {
+		// Creates a test that should fail because of the wrong Id
+		req := service.AccountCompanyLevelApi.GetCompanyAccountConfig(context.Background(), "99999")
+		_, httpRes, serviceErr := service.AccountCompanyLevelApi.GetCompanyAccount(req)
+		restServiceErr:=serviceErr.(common.RestServiceError)
+		assert.NotEmpty(t, restServiceErr.GetRequestId())
+		assert.Equal(t, "010", restServiceErr.GetErrorCode())
+		assert.Equal(t, int32(403), restServiceErr.GetStatus())
+		assert.Equal(t, 403, httpRes.StatusCode)
+		assert.Equal(t, reflect.TypeOf(serviceErr), reflect.TypeOf(common.RestServiceError{}))
 	})
 }
