@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"testing"
 	"time"
 
@@ -21,7 +22,7 @@ func Test_Payout(t *testing.T) {
 	client := adyen.NewClient(&common.Config{
 		ApiKey:      "MyAPIKey",
 		Environment: "TEST",
-		Debug:       true,
+		Debug:       "true" == os.Getenv("DEBUG"),
 	})
 
 	merchantAccount := "Merch"

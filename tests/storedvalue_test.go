@@ -10,6 +10,7 @@ import (
 	"io"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"testing"
 )
 
@@ -17,8 +18,8 @@ func Test_StoredValue(t *testing.T) {
 	client := adyen.NewClient(&common.Config{
 		ApiKey:      "YOUR_ADYEN_API_KEY",
 		Environment: "TEST",
+		Debug:       "true" == os.Getenv("DEBUG"),
 	})
-	//client.GetConfig().Debug = true
 
 	mux := http.NewServeMux()
 	// Success case
@@ -66,8 +67,8 @@ func Test_StoredValue(t *testing.T) {
 		}, "YOUR_REFERENCE")
 		body.SetStore("YOUR_STORE_ID")
 
-		req := service.CheckBalanceConfig(context.Background()).StoredValueBalanceCheckRequest(*body)
-		res, httpRes, err := service.CheckBalance(req)
+		req := service.CheckBalanceInput().StoredValueBalanceCheckRequest(*body)
+		res, httpRes, err := service.CheckBalance(context.Background(), req)
 
 		require.NotNil(t, res)
 		require.NotNil(t, httpRes)
@@ -84,8 +85,8 @@ func Test_StoredValue(t *testing.T) {
 			OriginalReference: "",
 			Reference:         nil,
 		}
-		req := service.VoidTransactionConfig(context.Background()).StoredValueVoidRequest(body)
-		_, httpRes, err := client.StoredValue().VoidTransaction(req)
+		req := service.VoidTransactionInput().StoredValueVoidRequest(body)
+		_, httpRes, err := client.StoredValue().VoidTransaction(context.Background(), req)
 
 		assert.Equal(t, 500, httpRes.StatusCode)
 		apiError := err.(common.APIError)
