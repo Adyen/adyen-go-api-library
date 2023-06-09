@@ -29,13 +29,14 @@ func Test_Recurring(t *testing.T) {
 		Environment: "TEST",
 		Debug:       "true" == os.Getenv("DEBUG"),
 	})
+	service := client.Recurring()
 
 	t.Run("ListRecurringDetails", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
-			req := client.Recurring().ListRecurringDetailsConfig(context.Background()).
+			req := service.ListRecurringDetailsInput().
 				RecurringDetailsRequest(*recurring.NewRecurringDetailsRequestWithDefaults())
 
-			res, httpRes, err := client.Recurring().ListRecurringDetails(req)
+			res, httpRes, err := service.ListRecurringDetails(context.Background(), req)
 
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
@@ -46,7 +47,7 @@ func Test_Recurring(t *testing.T) {
 		})
 
 		t.Run("Create an API request that should pass", func(t *testing.T) {
-			req := client.Recurring().ListRecurringDetailsConfig(context.Background())
+			req := service.ListRecurringDetailsInput()
 			req = req.RecurringDetailsRequest(recurring.RecurringDetailsRequest{
 				MerchantAccount:  MerchantAccount,
 				ShopperReference: "4343553GFGFYFY4654654675765",
@@ -55,7 +56,7 @@ func Test_Recurring(t *testing.T) {
 				},
 			})
 
-			res, httpRes, err := client.Recurring().ListRecurringDetails(req)
+			res, httpRes, err := service.ListRecurringDetails(context.Background(), req)
 
 			require.Nil(t, err)
 			require.NotNil(t, httpRes)
@@ -73,9 +74,9 @@ func Test_Recurring(t *testing.T) {
 				ShopperReference: "4343553GFGFYFY4654654675765",
 			}
 			body.SetRecurringDetailReference("8314442372419167")
-			req := client.Recurring().DisableConfig(context.Background()).DisableRequest(body)
+			req := service.DisableInput().DisableRequest(body)
 
-			res, httpRes, err := client.Recurring().Disable(req)
+			res, httpRes, err := service.Disable(context.Background(), req)
 
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
@@ -101,9 +102,9 @@ func Test_Recurring(t *testing.T) {
 				RecurringDetailReference: common.PtrString("8314442372419167"),
 				StoredPaymentMethodId:    common.PtrString("8314442372419167"),
 			}
-			req := client.Recurring().NotifyShopperConfig(context.Background()).NotifyShopperRequest(body)
+			req := service.NotifyShopperInput().NotifyShopperRequest(body)
 
-			res, httpRes, err := client.Recurring().NotifyShopper(req)
+			res, httpRes, err := service.NotifyShopper(context.Background(), req)
 
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
@@ -127,9 +128,9 @@ func Test_Recurring(t *testing.T) {
 			body.SetBillingSequenceNumber("adhoc")
 			body.SetRecurringDetailReference("8314442372419167")
 			body.SetStoredPaymentMethodId("8314442372419167")
-			req := client.Recurring().NotifyShopperConfig(context.Background()).NotifyShopperRequest(body)
+			req := service.NotifyShopperInput().NotifyShopperRequest(body)
 
-			res, httpRes, err := client.Recurring().NotifyShopper(req)
+			res, httpRes, err := service.NotifyShopper(context.Background(), req)
 
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
@@ -146,9 +147,9 @@ func Test_Recurring(t *testing.T) {
 				MerchantAccount: MerchantAccount,
 				Reference:       "4343553GFGFYFY4654654675765",
 			}
-			req := client.Recurring().ScheduleAccountUpdaterConfig(context.Background()).ScheduleAccountUpdaterRequest(body)
+			req := service.ScheduleAccountUpdaterInput().ScheduleAccountUpdaterRequest(body)
 
-			res, httpRes, err := client.Recurring().ScheduleAccountUpdater(req)
+			res, httpRes, err := service.ScheduleAccountUpdater(context.Background(), req)
 
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
@@ -169,9 +170,9 @@ func Test_Recurring(t *testing.T) {
 				Reference:       "4343553GFGFYFY4654654675765",
 				Card:            card,
 			}
-			req := client.Recurring().ScheduleAccountUpdaterConfig(context.Background()).ScheduleAccountUpdaterRequest(body)
+			req := service.ScheduleAccountUpdaterInput().ScheduleAccountUpdaterRequest(body)
 
-			res, httpRes, err := client.Recurring().ScheduleAccountUpdater(req)
+			res, httpRes, err := service.ScheduleAccountUpdater(context.Background(), req)
 
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)

@@ -57,7 +57,7 @@ func ExampleBasicAuth() {
 	})
 	service := client.Recurring()
 
-	req := service.ListRecurringDetailsConfig(context.Background())
+	req := service.ListRecurringDetailsInput()
 	req = req.RecurringDetailsRequest(recurring.RecurringDetailsRequest{
 		MerchantAccount: "your merchant account",
 		Recurring: &recurring.Recurring{
@@ -65,7 +65,7 @@ func ExampleBasicAuth() {
 		},
 		ShopperReference: "ref",
 	})
-	res, httpRes, err := service.ListRecurringDetails(req)
+	res, httpRes, err := service.ListRecurringDetails(context.Background(), req)
 
 	fmt.Println(res, httpRes, err)
 }

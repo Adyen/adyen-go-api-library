@@ -6,18 +6,18 @@ package {{packageName}}
 {{#operations}}
 import (
 	"context"
-    _nethttp "net/http"
+    "net/http"
     "net/url"
     "strings"
     "github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// {{classname}} {{classname}} service
+// {{classname}} service
 type {{classname}} common.Service
 {{#operation}}
 
-type {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config struct {
-	ctx context.Context
+// All parameters accepted by {{{classname}}}.{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}
+type {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Input struct {
 {{#allParams}}
 	{{paramName}} {{^isPathParam}}{{^isFile}}*{{/isFile}}{{/isPathParam}}{{{dataType}}}
 {{/allParams}}
@@ -31,7 +31,7 @@ type {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{oper
 {{#isDeprecated}}
 // Deprecated
 {{/isDeprecated}}
-func (r {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config) {{vendorExtensions.x-export-param-name}}({{paramName}} {{{dataType}}}) {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config {
+func (r {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Input) {{vendorExtensions.x-export-param-name}}({{paramName}} {{{dataType}}}) {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Input {
 	r.{{paramName}} = {{^isFile}}&{{/isFile}}{{paramName}}
 	return r
 }
@@ -40,23 +40,17 @@ func (r {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{o
 {{/allParams}}
 
 /*
-{{operationId}} {{{summary}}}{{^summary}}Method for {{operationId}}{{/summary}}
-{{#notes}}
-
-{{{unescapedNotes}}}
-{{/notes}}
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().{{#pathParams}}
- @param {{paramName}}{{#description}} {{{.}}}{{/description}}{{/pathParams}}
- @return {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config
+Prepare a request for {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}
+{{#pathParams}}
+@param {{paramName}}{{#description}} {{{.}}}{{/description}}{{/pathParams}}
+@return {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Input
 {{#isDeprecated}}
 
 Deprecated
 {{/isDeprecated}}
 */
-func (a *{{{classname}}}) {{{nickname}}}Config(ctx context.Context{{#pathParams}}, {{paramName}} {{{dataType}}}{{/pathParams}}) {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config {
-	return {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config{
-		ctx: ctx,
+func (a *{{{classname}}}) {{{nickname}}}Input({{#pathParams}}, {{paramName}} {{{dataType}}}{{/pathParams}}) {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Input {
+	return {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Input{
 		{{#pathParams}}
 		{{paramName}}: {{paramName}},
 		{{/pathParams}}
@@ -64,39 +58,21 @@ func (a *{{{classname}}}) {{{nickname}}}Config(ctx context.Context{{#pathParams}
 }
 
 /*
-{{#summary}}{{{.}}}{{/summary}}{{^summary}} Method for {{operationId}}{{/summary}}
+{{operationId}} {{{summary}}}{{^summary}}Method for {{operationId}}{{/summary}}
 {{#notes}}
-{{notes}}
-{{/notes}}
-{{#pathParams}}
-{{#required}}
- * @param {{paramName}}{{#description}} {{{.}}}{{/description}}
-{{/required}}
-{{/pathParams}}
-{{#bodyParams}}
-{{#required}}
- * @param req{{#description}} {{{.}}}{{/description}}
-{{/required}}
-{{/bodyParams}}
-{{#hasOptionalParams}}
-{{#pathParams}}
-{{^required}}
- * @param request {{vendorExtensions.x-export-param-name}} - reference of {{dataType}}). {{#description}} {{{.}}}{{/description}}
-{{/required}}
-{{/pathParams}}
-{{#bodyParams}}
-{{^required}}
- * @param req {{vendorExtensions.x-export-param-name}} - reference of {{dataType}}). {{#description}} {{{.}}}{{/description}}
-{{/required}}
-{{/bodyParams}}
-{{/hasOptionalParams}}
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-{{#returnType}}
-@return {{{returnType}}}
-{{/returnType}}
-*/
 
-func (a *{{{classname}}}) {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}(r {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config) ({{#returnType}}{{{returnType}}}, {{/returnType}}*_nethttp.Response, error) {
+{{{unescapedNotes}}}
+{{/notes}}
+
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Input - Request parameters, see {{{nickname}}}Input
+@return {{{returnType}}}, *http.Response, error
+{{#isDeprecated}}
+
+    Deprecated
+{{/isDeprecated}}
+*/
+func (a *{{{classname}}}) {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}(ctx context.Context, r {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Input) ({{#returnType}}{{{returnType}}}, {{/returnType}}*http.Response, error) {
     {{#returnType}}
     res := &{{{returnType}}}{}
     {{/returnType}}
@@ -123,11 +99,11 @@ func (a *{{{classname}}}) {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecas
     {{/required}}
 {{/headerParams}}
     httpRes, err := common.SendAPIRequest(
-        r.ctx,
+        ctx,
         a.Client,
         {{#bodyParams}}r.{{paramName}}{{/bodyParams}}{{^bodyParams}}nil{{/bodyParams}},
         res,
-        _nethttp.Method{{httpMethod}},
+        http.Method{{httpMethod}},
         a.BasePath()+path,
         queryParams,
         headerParams,
