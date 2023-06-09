@@ -1,6 +1,7 @@
 package tests
 
 import (
+	"context"
 	"github.com/adyen/adyen-go-api-library/v7/src/adyen"
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 	"github.com/adyen/adyen-go-api-library/v7/src/storedvalue"
@@ -44,6 +45,7 @@ func Test_StoredValue(t *testing.T) {
 	mockServer := httptest.NewServer(mux)
 	defer mockServer.Close()
 	client.StoredValue().BasePath = func() string { return mockServer.URL }
+	service := client.StoredValue()
 
 	t.Run("Configuration", func(t *testing.T) {
 		testClient := adyen.NewClient(&common.Config{
@@ -57,14 +59,15 @@ func Test_StoredValue(t *testing.T) {
 	})
 
 	t.Run("Check balance", func(t *testing.T) {
-		request := storedvalue.NewStoredValueBalanceCheckRequest("YOUR_MERCHANT_ACCOUNT", map[string]string{
+		body := storedvalue.NewStoredValueBalanceCheckRequest("YOUR_MERCHANT_ACCOUNT", map[string]string{
 			"type":         "svs",
 			"number":       "603628672882001915092",
 			"securityCode": "5754",
 		}, "YOUR_REFERENCE")
-		request.SetStore("YOUR_STORE_ID")
+		body.SetStore("YOUR_STORE_ID")
 
-		res, httpRes, err := client.StoredValue().CheckBalance(request)
+		req := service.CheckBalanceConfig(context.Background()).StoredValueBalanceCheckRequest(*body)
+		res, httpRes, err := service.CheckBalance(req)
 
 		require.NotNil(t, res)
 		require.NotNil(t, httpRes)
@@ -76,11 +79,13 @@ func Test_StoredValue(t *testing.T) {
 	})
 
 	t.Run("Error response", func(t *testing.T) {
-		_, httpRes, err := client.StoredValue().VoidTransaction(&storedvalue.StoredValueVoidRequest{
+		body := storedvalue.StoredValueVoidRequest{
 			MerchantAccount:   "YOUR_MERCHANT_ACCOUNT",
 			OriginalReference: "",
 			Reference:         nil,
-		})
+		}
+		req := service.VoidTransactionConfig(context.Background()).StoredValueVoidRequest(body)
+		_, httpRes, err := client.StoredValue().VoidTransaction(req)
 
 		assert.Equal(t, 500, httpRes.StatusCode)
 		apiError := err.(common.APIError)
