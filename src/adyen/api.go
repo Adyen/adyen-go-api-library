@@ -90,7 +90,7 @@ type APIClient struct {
 	platformsNotificationConfiguration *platformsnotificationconfiguration.PlatformsNotificationConfiguration
 	posTerminalManagement              *posterminalmanagement.GeneralApi
 	disputes                           *disputes.Disputes
-	storedValue                        *storedvalue.StoredValue
+	storedValue                        *storedvalue.GeneralApi
 	balancePlatform                    *balanceplatform.APIClient
 	transfers                          *transfers.GeneralApi
 	management                         *management.APIClient
@@ -230,9 +230,9 @@ func (c *APIClient) BinLookup() *binlookup.GeneralApi {
 	return c.binLookup
 }
 
-func (c *APIClient) StoredValue() *storedvalue.StoredValue {
+func (c *APIClient) StoredValue() *storedvalue.GeneralApi {
 	if c.storedValue == nil {
-		c.storedValue = &storedvalue.StoredValue{
+		c.storedValue = &storedvalue.GeneralApi{
 			Client: c.client,
 			BasePath: func() string {
 				return fmt.Sprintf("%s/pal/servlet/StoredValue/%s", c.client.Cfg.Endpoint, StoredValueAPIVersion)
