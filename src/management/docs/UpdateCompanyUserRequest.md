@@ -7,8 +7,6 @@ Name | Type | Description | Notes
 **AccountGroups** | Pointer to **[]string** | The list of [account groups](https://docs.adyen.com/account/account-structure#account-groups) associated with this user. | [optional] 
 **Active** | Pointer to **bool** | Indicates whether this user is active. | [optional] 
 **AssociatedMerchantAccounts** | Pointer to **[]string** | The list of [merchant accounts](https://docs.adyen.com/account/account-structure#merchant-accounts) to associate the user with. | [optional] 
-**AuthnAppsToAdd** | Pointer to **[]string** | Set of authn apps to add to this user | [optional] 
-**AuthnAppsToRemove** | Pointer to **[]string** | Set of authn apps to remove from this user | [optional] 
 **Email** | Pointer to **string** | The email address of the user. | [optional] 
 **Name** | Pointer to [**Name2**](Name2.md) |  | [optional] 
 **Roles** | Pointer to **[]string** | The list of [roles](https://docs.adyen.com/account/user-roles) for this user. | [optional] 
@@ -107,56 +105,6 @@ SetAssociatedMerchantAccounts sets AssociatedMerchantAccounts field to given val
 `func (o *UpdateCompanyUserRequest) HasAssociatedMerchantAccounts() bool`
 
 HasAssociatedMerchantAccounts returns a boolean if a field has been set.
-
-### GetAuthnAppsToAdd
-
-`func (o *UpdateCompanyUserRequest) GetAuthnAppsToAdd() []string`
-
-GetAuthnAppsToAdd returns the AuthnAppsToAdd field if non-nil, zero value otherwise.
-
-### GetAuthnAppsToAddOk
-
-`func (o *UpdateCompanyUserRequest) GetAuthnAppsToAddOk() (*[]string, bool)`
-
-GetAuthnAppsToAddOk returns a tuple with the AuthnAppsToAdd field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAuthnAppsToAdd
-
-`func (o *UpdateCompanyUserRequest) SetAuthnAppsToAdd(v []string)`
-
-SetAuthnAppsToAdd sets AuthnAppsToAdd field to given value.
-
-### HasAuthnAppsToAdd
-
-`func (o *UpdateCompanyUserRequest) HasAuthnAppsToAdd() bool`
-
-HasAuthnAppsToAdd returns a boolean if a field has been set.
-
-### GetAuthnAppsToRemove
-
-`func (o *UpdateCompanyUserRequest) GetAuthnAppsToRemove() []string`
-
-GetAuthnAppsToRemove returns the AuthnAppsToRemove field if non-nil, zero value otherwise.
-
-### GetAuthnAppsToRemoveOk
-
-`func (o *UpdateCompanyUserRequest) GetAuthnAppsToRemoveOk() (*[]string, bool)`
-
-GetAuthnAppsToRemoveOk returns a tuple with the AuthnAppsToRemove field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAuthnAppsToRemove
-
-`func (o *UpdateCompanyUserRequest) SetAuthnAppsToRemove(v []string)`
-
-SetAuthnAppsToRemove sets AuthnAppsToRemove field to given value.
-
-### HasAuthnAppsToRemove
-
-`func (o *UpdateCompanyUserRequest) HasAuthnAppsToRemove() bool`
-
-HasAuthnAppsToRemove returns a boolean if a field has been set.
 
 ### GetEmail
 

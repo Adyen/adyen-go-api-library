@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **BillingEntityId** | Pointer to **string** | The identification of the billing entity to use for the order. | [optional] 
 **CustomerOrderReference** | Pointer to **string** | The merchant-defined purchase order reference. | [optional] 
 **Items** | Pointer to [**[]OrderItem**](OrderItem.md) | The products included in the order. | [optional] 
+**OrderType** | Pointer to **string** | Type of order | [optional] 
 **ShippingLocationId** | Pointer to **string** | The identification of the shipping location to use for the order. | [optional] 
 **TaxId** | Pointer to **string** | The tax number of the billing entity. | [optional] 
 
@@ -103,6 +104,31 @@ SetItems sets Items field to given value.
 `func (o *TerminalOrderRequest) HasItems() bool`
 
 HasItems returns a boolean if a field has been set.
+
+### GetOrderType
+
+`func (o *TerminalOrderRequest) GetOrderType() string`
+
+GetOrderType returns the OrderType field if non-nil, zero value otherwise.
+
+### GetOrderTypeOk
+
+`func (o *TerminalOrderRequest) GetOrderTypeOk() (*string, bool)`
+
+GetOrderTypeOk returns a tuple with the OrderType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOrderType
+
+`func (o *TerminalOrderRequest) SetOrderType(v string)`
+
+SetOrderType sets OrderType field to given value.
+
+### HasOrderType
+
+`func (o *TerminalOrderRequest) HasOrderType() bool`
+
+HasOrderType returns a boolean if a field has been set.
 
 ### GetShippingLocationId
 

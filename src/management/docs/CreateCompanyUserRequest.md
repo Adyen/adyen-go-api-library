@@ -6,12 +6,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AccountGroups** | Pointer to **[]string** | The list of [account groups](https://docs.adyen.com/account/account-structure#account-groups) associated with this user. | [optional] 
 **AssociatedMerchantAccounts** | Pointer to **[]string** | The list of [merchant accounts](https://docs.adyen.com/account/account-structure#merchant-accounts) associated with this user. | [optional] 
-**AuthnApps** | Pointer to **[]string** | Set of authn apps to add to this user | [optional] 
 **Email** | **string** | The email address of the user. | 
 **Name** | [**Name**](Name.md) |  | 
 **Roles** | Pointer to **[]string** | The list of [roles](https://docs.adyen.com/account/user-roles) for this user. | [optional] 
 **TimeZoneCode** | Pointer to **string** | The [tz database name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) of the time zone of the user. For example, **Europe/Amsterdam**. | [optional] 
-**Username** | **string** | The username for this user. Allowed length: 255 alphanumeric characters. | 
+**Username** | **string** | The user&#39;s email address that will be their username. Must be the same as the one in the &#x60;email&#x60; field. | 
 
 ## Methods
 
@@ -81,31 +80,6 @@ SetAssociatedMerchantAccounts sets AssociatedMerchantAccounts field to given val
 `func (o *CreateCompanyUserRequest) HasAssociatedMerchantAccounts() bool`
 
 HasAssociatedMerchantAccounts returns a boolean if a field has been set.
-
-### GetAuthnApps
-
-`func (o *CreateCompanyUserRequest) GetAuthnApps() []string`
-
-GetAuthnApps returns the AuthnApps field if non-nil, zero value otherwise.
-
-### GetAuthnAppsOk
-
-`func (o *CreateCompanyUserRequest) GetAuthnAppsOk() (*[]string, bool)`
-
-GetAuthnAppsOk returns a tuple with the AuthnApps field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAuthnApps
-
-`func (o *CreateCompanyUserRequest) SetAuthnApps(v []string)`
-
-SetAuthnApps sets AuthnApps field to given value.
-
-### HasAuthnApps
-
-`func (o *CreateCompanyUserRequest) HasAuthnApps() bool`
-
-HasAuthnApps returns a boolean if a field has been set.
 
 ### GetEmail
 

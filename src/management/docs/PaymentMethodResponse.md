@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Links** | Pointer to [**PaginationLinks**](PaginationLinks.md) |  | [optional] 
-**Data** | Pointer to [**[]PaymentMethod**](PaymentMethod.md) | Payment methods details. | [optional] 
+**Data** | Pointer to [**[]PaymentMethodWrapper**](PaymentMethodWrapper.md) | Payment methods details. | [optional] 
 **ItemsTotal** | **int32** | Total number of items. | 
 **PagesTotal** | **int32** | Total number of pages. | 
 **TypesWithErrors** | Pointer to **[]string** | Payment method types with errors. | [optional] 
@@ -56,20 +56,20 @@ HasLinks returns a boolean if a field has been set.
 
 ### GetData
 
-`func (o *PaymentMethodResponse) GetData() []PaymentMethod`
+`func (o *PaymentMethodResponse) GetData() []PaymentMethodWrapper`
 
 GetData returns the Data field if non-nil, zero value otherwise.
 
 ### GetDataOk
 
-`func (o *PaymentMethodResponse) GetDataOk() (*[]PaymentMethod, bool)`
+`func (o *PaymentMethodResponse) GetDataOk() (*[]PaymentMethodWrapper, bool)`
 
 GetDataOk returns a tuple with the Data field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetData
 
-`func (o *PaymentMethodResponse) SetData(v []PaymentMethod)`
+`func (o *PaymentMethodResponse) SetData(v []PaymentMethodWrapper)`
 
 SetData sets Data field to given value.
 

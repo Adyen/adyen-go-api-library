@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Detail** | **string** | A human-readable explanation specific to this occurrence of the problem. | 
 **ErrorCode** | **string** | A code that identifies the problem type. | 
 **Instance** | Pointer to **string** | A unique URI that identifies the specific occurrence of the problem. | [optional] 
-**InvalidFields** | Pointer to [**[]InvalidField**](InvalidField.md) | Detailed explanation of each validation error, when applicable. | [optional] 
+**InvalidFields** | Pointer to [**[]InvalidFieldWrapper**](InvalidFieldWrapper.md) | Detailed explanation of each validation error, when applicable. | [optional] 
 **RequestId** | Pointer to **string** | A unique reference for the request, essentially the same as &#x60;pspReference&#x60;. | [optional] 
 **Response** | Pointer to [**JSONObject**](JSONObject.md) |  | [optional] 
 **Status** | **int32** | The HTTP status code. | 
@@ -100,20 +100,20 @@ HasInstance returns a boolean if a field has been set.
 
 ### GetInvalidFields
 
-`func (o *RestServiceError) GetInvalidFields() []InvalidField`
+`func (o *RestServiceError) GetInvalidFields() []InvalidFieldWrapper`
 
 GetInvalidFields returns the InvalidFields field if non-nil, zero value otherwise.
 
 ### GetInvalidFieldsOk
 
-`func (o *RestServiceError) GetInvalidFieldsOk() (*[]InvalidField, bool)`
+`func (o *RestServiceError) GetInvalidFieldsOk() (*[]InvalidFieldWrapper, bool)`
 
 GetInvalidFieldsOk returns a tuple with the InvalidFields field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetInvalidFields
 
-`func (o *RestServiceError) SetInvalidFields(v []InvalidField)`
+`func (o *RestServiceError) SetInvalidFields(v []InvalidFieldWrapper)`
 
 SetInvalidFields sets InvalidFields field to given value.
 

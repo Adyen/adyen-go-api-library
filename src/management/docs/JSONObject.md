@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Paths** | Pointer to [**[]JSONPath**](JSONPath.md) |  | [optional] 
+**Paths** | Pointer to [**[]JSONPathWrapper**](JSONPathWrapper.md) |  | [optional] 
 **RootPath** | Pointer to [**JSONPath**](JSONPath.md) |  | [optional] 
 
 ## Methods
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetPaths
 
-`func (o *JSONObject) GetPaths() []JSONPath`
+`func (o *JSONObject) GetPaths() []JSONPathWrapper`
 
 GetPaths returns the Paths field if non-nil, zero value otherwise.
 
 ### GetPathsOk
 
-`func (o *JSONObject) GetPathsOk() (*[]JSONPath, bool)`
+`func (o *JSONObject) GetPathsOk() (*[]JSONPathWrapper, bool)`
 
 GetPathsOk returns a tuple with the Paths field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPaths
 
-`func (o *JSONObject) SetPaths(v []JSONPath)`
+`func (o *JSONObject) SetPaths(v []JSONPathWrapper)`
 
 SetPaths sets Paths field to given value.
 

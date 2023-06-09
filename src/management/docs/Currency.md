@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Amount** | Pointer to **int32** | Surcharge amount per transaction, in [minor units](https://docs.adyen.com/development-resources/currency-codes). | [optional] 
 **CurrencyCode** | **string** | Three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes). For example, **AUD**. | 
-**Percentage** | Pointer to **map[string]interface{}** |  | [optional] 
+**Percentage** | Pointer to **float64** | Surcharge percentage per transaction. The maximum number of decimal places is two. For example, **1%** or **2.27%**. | [optional] 
 
 ## Methods
 
@@ -74,20 +74,20 @@ SetCurrencyCode sets CurrencyCode field to given value.
 
 ### GetPercentage
 
-`func (o *Currency) GetPercentage() map[string]interface{}`
+`func (o *Currency) GetPercentage() float64`
 
 GetPercentage returns the Percentage field if non-nil, zero value otherwise.
 
 ### GetPercentageOk
 
-`func (o *Currency) GetPercentageOk() (*map[string]interface{}, bool)`
+`func (o *Currency) GetPercentageOk() (*float64, bool)`
 
 GetPercentageOk returns a tuple with the Percentage field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPercentage
 
-`func (o *Currency) SetPercentage(v map[string]interface{})`
+`func (o *Currency) SetPercentage(v float64)`
 
 SetPercentage sets Percentage field to given value.
 

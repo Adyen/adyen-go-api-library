@@ -10,7 +10,8 @@ package management
 
 import (
 	"context"
-	_context "context"
+	"encoding/json"
+	"io/ioutil"
 	_nethttp "net/http"
 	"net/url"
 	"strings"
@@ -41,8 +42,8 @@ Use this endpoint if your integration requires it, such as Adyen for Platforms M
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Accounts read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return AccountMerchantLevelApiCreateMerchantAccountConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return AccountMerchantLevelApiCreateMerchantAccountConfig
 */
 func (a *AccountMerchantLevelApi) CreateMerchantAccountConfig(ctx context.Context) AccountMerchantLevelApiCreateMerchantAccountConfig {
 	return AccountMerchantLevelApiCreateMerchantAccountConfig{
@@ -54,14 +55,62 @@ func (a *AccountMerchantLevelApi) CreateMerchantAccountConfig(ctx context.Contex
 Create a merchant account
 Creates a merchant account for the company account specified in the request.  Use this endpoint if your integration requires it, such as Adyen for Platforms Manage. Your Adyen contact will set up your access.  To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Accounts read and write
  * @param req CreateMerchantRequest - reference of CreateMerchantRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return CreateMerchantResponse
 */
 
 func (a *AccountMerchantLevelApi) CreateMerchantAccount(r AccountMerchantLevelApiCreateMerchantAccountConfig) (CreateMerchantResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &CreateMerchantResponse{}
 	path := "/merchants"
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPost, r.createMerchantRequest, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		r.createMerchantRequest,
+		res,
+		_nethttp.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+	defer httpRes.Body.Close()
+
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
@@ -78,9 +127,9 @@ Returns the merchant account specified in the path. Your API credential must hav
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Account read
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param merchantId The unique identifier of the merchant account.
- @return AccountMerchantLevelApiGetMerchantAccountConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@return AccountMerchantLevelApiGetMerchantAccountConfig
 */
 func (a *AccountMerchantLevelApi) GetMerchantAccountConfig(ctx context.Context, merchantId string) AccountMerchantLevelApiGetMerchantAccountConfig {
 	return AccountMerchantLevelApiGetMerchantAccountConfig{
@@ -93,15 +142,63 @@ func (a *AccountMerchantLevelApi) GetMerchantAccountConfig(ctx context.Context, 
 Get a merchant account
 Returns the merchant account specified in the path. Your API credential must have access to the merchant account.  To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Account read
  * @param merchantId The unique identifier of the merchant account.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return Merchant
 */
 
 func (a *AccountMerchantLevelApi) GetMerchantAccount(r AccountMerchantLevelApiGetMerchantAccountConfig) (Merchant, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &Merchant{}
 	path := "/merchants/{merchantId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		nil,
+		res,
+		_nethttp.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+	defer httpRes.Body.Close()
+
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
@@ -131,8 +228,8 @@ Returns the list of merchant accounts that your API credential has access to. Th
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Account read
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return AccountMerchantLevelApiListMerchantAccountsConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return AccountMerchantLevelApiListMerchantAccountsConfig
 */
 func (a *AccountMerchantLevelApi) ListMerchantAccountsConfig(ctx context.Context) AccountMerchantLevelApiListMerchantAccountsConfig {
 	return AccountMerchantLevelApiListMerchantAccountsConfig{
@@ -143,21 +240,68 @@ func (a *AccountMerchantLevelApi) ListMerchantAccountsConfig(ctx context.Context
 /*
 Get a list of merchant accounts
 Returns the list of merchant accounts that your API credential has access to. The list is grouped into pages as defined by the query parameters.   To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Account read
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ListMerchantResponse
 */
 
 func (a *AccountMerchantLevelApi) ListMerchantAccounts(r AccountMerchantLevelApiListMerchantAccountsConfig) (ListMerchantResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &ListMerchantResponse{}
 	path := "/merchants"
-	queryString := url.Values{}
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
 	if r.pageNumber != nil {
-		common.ParameterAddToQuery(queryString, "pageNumber", r.pageNumber, "")
+		common.ParameterAddToQuery(queryParams, "pageNumber", r.pageNumber, "")
 	}
 	if r.pageSize != nil {
-		common.ParameterAddToQuery(queryString, "pageSize", r.pageSize, "")
+		common.ParameterAddToQuery(queryParams, "pageSize", r.pageSize, "")
 	}
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path+"?"+queryString.Encode(), []_context.Context{r.ctx})
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		nil,
+		res,
+		_nethttp.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+	defer httpRes.Body.Close()
+
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
@@ -178,9 +322,9 @@ Use this endpoint if your integration requires it, such as Adyen for Platforms M
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Accounts read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param merchantId The unique identifier of the merchant account.
- @return AccountMerchantLevelApiRequestToActivateMerchantAccountConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param merchantId The unique identifier of the merchant account.
+	@return AccountMerchantLevelApiRequestToActivateMerchantAccountConfig
 */
 func (a *AccountMerchantLevelApi) RequestToActivateMerchantAccountConfig(ctx context.Context, merchantId string) AccountMerchantLevelApiRequestToActivateMerchantAccountConfig {
 	return AccountMerchantLevelApiRequestToActivateMerchantAccountConfig{
@@ -193,14 +337,62 @@ func (a *AccountMerchantLevelApi) RequestToActivateMerchantAccountConfig(ctx con
 Request to activate a merchant account
 Sends a request to activate the merchant account identified in the path.  You get the result of the activation asychronously through a [&#x60;merchant.updated&#x60;](https://docs.adyen.com/api-explorer/ManagementNotification/latest/post/merchant.updated) webhook. Once the merchant account is activated, you can start using it to accept payments and payouts.  Use this endpoint if your integration requires it, such as Adyen for Platforms Manage. Your Adyen contact will set up your access.  To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Accounts read and write
  * @param merchantId The unique identifier of the merchant account.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return RequestActivationResponse
 */
 
 func (a *AccountMerchantLevelApi) RequestToActivateMerchantAccount(r AccountMerchantLevelApiRequestToActivateMerchantAccountConfig) (RequestActivationResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &RequestActivationResponse{}
 	path := "/merchants/{merchantId}/activate"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPost, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		nil,
+		res,
+		_nethttp.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+	defer httpRes.Body.Close()
+
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }

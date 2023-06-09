@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Logo** | **string** | Vipps logo. Format: Base64-encoded string. | 
-**SubscriptionCancelUrl** | Pointer to **string** | Vipps subscription cancel url | [optional] 
+**SubscriptionCancelUrl** | Pointer to **string** | Vipps subscription cancel url (required in case of [recurring payments](https://docs.adyen.com/online-payments/tokenization)) | [optional] 
 
 ## Methods
 

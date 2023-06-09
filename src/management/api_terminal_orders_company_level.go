@@ -10,7 +10,8 @@ package management
 
 import (
 	"context"
-	_context "context"
+	"encoding/json"
+	"io/ioutil"
 	_nethttp "net/http"
 	"net/url"
 	"strings"
@@ -37,10 +38,10 @@ To cancel an order, make a POST call without a request body. The response return
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Terminal ordering read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param companyId The unique identifier of the company account.
- @param orderId The unique identifier of the order.
- @return TerminalOrdersCompanyLevelApiCancelOrderConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param companyId The unique identifier of the company account.
+	@param orderId The unique identifier of the order.
+	@return TerminalOrdersCompanyLevelApiCancelOrderConfig
 */
 func (a *TerminalOrdersCompanyLevelApi) CancelOrderConfig(ctx context.Context, companyId string, orderId string) TerminalOrdersCompanyLevelApiCancelOrderConfig {
 	return TerminalOrdersCompanyLevelApiCancelOrderConfig{
@@ -55,16 +56,64 @@ Cancel an order
 Cancels the terminal products order identified in the path. Cancelling is only possible while the order has the status **Placed**. To cancel an order, make a POST call without a request body. The response returns the full order details, but with the status changed to **Cancelled**.  To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal ordering read and write
  * @param companyId The unique identifier of the company account.
  * @param orderId The unique identifier of the order.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return TerminalOrder
 */
 
 func (a *TerminalOrdersCompanyLevelApi) CancelOrder(r TerminalOrdersCompanyLevelApiCancelOrderConfig) (TerminalOrder, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &TerminalOrder{}
 	path := "/companies/{companyId}/terminalOrders/{orderId}/cancel"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
 	path = strings.Replace(path, "{"+"orderId"+"}", url.PathEscape(common.ParameterValueToString(r.orderId, "orderId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPost, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		nil,
+		res,
+		_nethttp.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+	defer httpRes.Body.Close()
+
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
@@ -87,9 +136,9 @@ Creates an order for payment terminal products for the company identified in the
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Terminal ordering read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param companyId The unique identifier of the company account.
- @return TerminalOrdersCompanyLevelApiCreateOrderConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param companyId The unique identifier of the company account.
+	@return TerminalOrdersCompanyLevelApiCreateOrderConfig
 */
 func (a *TerminalOrdersCompanyLevelApi) CreateOrderConfig(ctx context.Context, companyId string) TerminalOrdersCompanyLevelApiCreateOrderConfig {
 	return TerminalOrdersCompanyLevelApiCreateOrderConfig{
@@ -103,15 +152,63 @@ Create an order
 Creates an order for payment terminal products for the company identified in the path.  To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal ordering read and write
  * @param companyId The unique identifier of the company account.
  * @param req TerminalOrderRequest - reference of TerminalOrderRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return TerminalOrder
 */
 
 func (a *TerminalOrdersCompanyLevelApi) CreateOrder(r TerminalOrdersCompanyLevelApiCreateOrderConfig) (TerminalOrder, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &TerminalOrder{}
 	path := "/companies/{companyId}/terminalOrders"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPost, r.terminalOrderRequest, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		r.terminalOrderRequest,
+		res,
+		_nethttp.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+	defer httpRes.Body.Close()
+
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
@@ -134,9 +231,9 @@ Creates a shipping location for the company identified in the path. A shipping l
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Terminal ordering read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param companyId The unique identifier of the company account.
- @return TerminalOrdersCompanyLevelApiCreateShippingLocationConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param companyId The unique identifier of the company account.
+	@return TerminalOrdersCompanyLevelApiCreateShippingLocationConfig
 */
 func (a *TerminalOrdersCompanyLevelApi) CreateShippingLocationConfig(ctx context.Context, companyId string) TerminalOrdersCompanyLevelApiCreateShippingLocationConfig {
 	return TerminalOrdersCompanyLevelApiCreateShippingLocationConfig{
@@ -150,15 +247,63 @@ Create a shipping location
 Creates a shipping location for the company identified in the path. A shipping location defines an address where orders can be delivered.  To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal ordering read and write
  * @param companyId The unique identifier of the company account.
  * @param req ShippingLocation - reference of ShippingLocation).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ShippingLocation
 */
 
 func (a *TerminalOrdersCompanyLevelApi) CreateShippingLocation(r TerminalOrdersCompanyLevelApiCreateShippingLocationConfig) (ShippingLocation, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &ShippingLocation{}
 	path := "/companies/{companyId}/shippingLocations"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPost, r.shippingLocation, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		r.shippingLocation,
+		res,
+		_nethttp.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+	defer httpRes.Body.Close()
+
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
@@ -177,10 +322,10 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Terminal ordering read
 * Management API—Terminal ordering read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param companyId The unique identifier of the company account.
- @param orderId The unique identifier of the order.
- @return TerminalOrdersCompanyLevelApiGetOrderConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param companyId The unique identifier of the company account.
+	@param orderId The unique identifier of the order.
+	@return TerminalOrdersCompanyLevelApiGetOrderConfig
 */
 func (a *TerminalOrdersCompanyLevelApi) GetOrderConfig(ctx context.Context, companyId string, orderId string) TerminalOrdersCompanyLevelApiGetOrderConfig {
 	return TerminalOrdersCompanyLevelApiGetOrderConfig{
@@ -195,16 +340,64 @@ Get an order
 Returns the details of the terminal products order identified in the path.  To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal ordering read * Management API—Terminal ordering read and write
  * @param companyId The unique identifier of the company account.
  * @param orderId The unique identifier of the order.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return TerminalOrder
 */
 
 func (a *TerminalOrdersCompanyLevelApi) GetOrder(r TerminalOrdersCompanyLevelApiGetOrderConfig) (TerminalOrder, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &TerminalOrder{}
 	path := "/companies/{companyId}/terminalOrders/{orderId}"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
 	path = strings.Replace(path, "{"+"orderId"+"}", url.PathEscape(common.ParameterValueToString(r.orderId, "orderId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		nil,
+		res,
+		_nethttp.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+	defer httpRes.Body.Close()
+
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
@@ -230,9 +423,9 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Terminal ordering read
 * Management API—Terminal ordering read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param companyId The unique identifier of the company account.
- @return TerminalOrdersCompanyLevelApiListBillingEntitiesConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param companyId The unique identifier of the company account.
+	@return TerminalOrdersCompanyLevelApiListBillingEntitiesConfig
 */
 func (a *TerminalOrdersCompanyLevelApi) ListBillingEntitiesConfig(ctx context.Context, companyId string) TerminalOrdersCompanyLevelApiListBillingEntitiesConfig {
 	return TerminalOrdersCompanyLevelApiListBillingEntitiesConfig{
@@ -245,19 +438,66 @@ func (a *TerminalOrdersCompanyLevelApi) ListBillingEntitiesConfig(ctx context.Co
 Get a list of billing entities
 Returns the billing entities of the company identified in the path and all merchant accounts belonging to the company. A billing entity is a legal entity where we charge orders to. An order for terminal products must contain the ID of a billing entity.  To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal ordering read * Management API—Terminal ordering read and write
  * @param companyId The unique identifier of the company account.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return BillingEntitiesResponse
 */
 
 func (a *TerminalOrdersCompanyLevelApi) ListBillingEntities(r TerminalOrdersCompanyLevelApiListBillingEntitiesConfig) (BillingEntitiesResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &BillingEntitiesResponse{}
 	path := "/companies/{companyId}/billingEntities"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
-	queryString := url.Values{}
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
 	if r.name != nil {
-		common.ParameterAddToQuery(queryString, "name", r.name, "")
+		common.ParameterAddToQuery(queryParams, "name", r.name, "")
 	}
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path+"?"+queryString.Encode(), []_context.Context{r.ctx})
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		nil,
+		res,
+		_nethttp.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+	defer httpRes.Body.Close()
+
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
@@ -304,9 +544,9 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Terminal ordering read
 * Management API—Terminal ordering read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param companyId The unique identifier of the company account.
- @return TerminalOrdersCompanyLevelApiListOrdersConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param companyId The unique identifier of the company account.
+	@return TerminalOrdersCompanyLevelApiListOrdersConfig
 */
 func (a *TerminalOrdersCompanyLevelApi) ListOrdersConfig(ctx context.Context, companyId string) TerminalOrdersCompanyLevelApiListOrdersConfig {
 	return TerminalOrdersCompanyLevelApiListOrdersConfig{
@@ -319,28 +559,75 @@ func (a *TerminalOrdersCompanyLevelApi) ListOrdersConfig(ctx context.Context, co
 Get a list of orders
 Returns a lists of terminal products orders for the company identified in the path. To filter the list, use one or more of the query parameters.  To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal ordering read * Management API—Terminal ordering read and write
  * @param companyId The unique identifier of the company account.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return TerminalOrdersResponse
 */
 
 func (a *TerminalOrdersCompanyLevelApi) ListOrders(r TerminalOrdersCompanyLevelApiListOrdersConfig) (TerminalOrdersResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &TerminalOrdersResponse{}
 	path := "/companies/{companyId}/terminalOrders"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
-	queryString := url.Values{}
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
 	if r.customerOrderReference != nil {
-		common.ParameterAddToQuery(queryString, "customerOrderReference", r.customerOrderReference, "")
+		common.ParameterAddToQuery(queryParams, "customerOrderReference", r.customerOrderReference, "")
 	}
 	if r.status != nil {
-		common.ParameterAddToQuery(queryString, "status", r.status, "")
+		common.ParameterAddToQuery(queryParams, "status", r.status, "")
 	}
 	if r.offset != nil {
-		common.ParameterAddToQuery(queryString, "offset", r.offset, "")
+		common.ParameterAddToQuery(queryParams, "offset", r.offset, "")
 	}
 	if r.limit != nil {
-		common.ParameterAddToQuery(queryString, "limit", r.limit, "")
+		common.ParameterAddToQuery(queryParams, "limit", r.limit, "")
 	}
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path+"?"+queryString.Encode(), []_context.Context{r.ctx})
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		nil,
+		res,
+		_nethttp.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+	defer httpRes.Body.Close()
+
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
@@ -380,9 +667,9 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Terminal ordering read
 * Management API—Terminal ordering read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param companyId The unique identifier of the company account.
- @return TerminalOrdersCompanyLevelApiListShippingLocationsConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param companyId The unique identifier of the company account.
+	@return TerminalOrdersCompanyLevelApiListShippingLocationsConfig
 */
 func (a *TerminalOrdersCompanyLevelApi) ListShippingLocationsConfig(ctx context.Context, companyId string) TerminalOrdersCompanyLevelApiListShippingLocationsConfig {
 	return TerminalOrdersCompanyLevelApiListShippingLocationsConfig{
@@ -395,25 +682,72 @@ func (a *TerminalOrdersCompanyLevelApi) ListShippingLocationsConfig(ctx context.
 Get a list of shipping locations
 Returns the shipping locations for the company identified in the path and all merchant accounts belonging to the company. A shipping location includes the address where orders can be delivered, and an ID which you need to specify when ordering terminal products.  To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal ordering read * Management API—Terminal ordering read and write
  * @param companyId The unique identifier of the company account.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ShippingLocationsResponse
 */
 
 func (a *TerminalOrdersCompanyLevelApi) ListShippingLocations(r TerminalOrdersCompanyLevelApiListShippingLocationsConfig) (ShippingLocationsResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &ShippingLocationsResponse{}
 	path := "/companies/{companyId}/shippingLocations"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
-	queryString := url.Values{}
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
 	if r.name != nil {
-		common.ParameterAddToQuery(queryString, "name", r.name, "")
+		common.ParameterAddToQuery(queryParams, "name", r.name, "")
 	}
 	if r.offset != nil {
-		common.ParameterAddToQuery(queryString, "offset", r.offset, "")
+		common.ParameterAddToQuery(queryParams, "offset", r.offset, "")
 	}
 	if r.limit != nil {
-		common.ParameterAddToQuery(queryString, "limit", r.limit, "")
+		common.ParameterAddToQuery(queryParams, "limit", r.limit, "")
 	}
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path+"?"+queryString.Encode(), []_context.Context{r.ctx})
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		nil,
+		res,
+		_nethttp.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+	defer httpRes.Body.Close()
+
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
@@ -432,9 +766,9 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Terminal ordering read
 * Management API—Terminal ordering read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param companyId The unique identifier of the company account.
- @return TerminalOrdersCompanyLevelApiListTerminalModelsConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param companyId The unique identifier of the company account.
+	@return TerminalOrdersCompanyLevelApiListTerminalModelsConfig
 */
 func (a *TerminalOrdersCompanyLevelApi) ListTerminalModelsConfig(ctx context.Context, companyId string) TerminalOrdersCompanyLevelApiListTerminalModelsConfig {
 	return TerminalOrdersCompanyLevelApiListTerminalModelsConfig{
@@ -447,15 +781,63 @@ func (a *TerminalOrdersCompanyLevelApi) ListTerminalModelsConfig(ctx context.Con
 Get a list of terminal models
 Returns a list of payment terminal models that the company identified in the path has access to. The response includes the terminal model ID, which can be used as a query parameter when getting a list of terminals or a list of products for ordering.  To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal ordering read * Management API—Terminal ordering read and write
  * @param companyId The unique identifier of the company account.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return TerminalModelsResponse
 */
 
 func (a *TerminalOrdersCompanyLevelApi) ListTerminalModels(r TerminalOrdersCompanyLevelApiListTerminalModelsConfig) (TerminalModelsResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &TerminalModelsResponse{}
 	path := "/companies/{companyId}/terminalModels"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		nil,
+		res,
+		_nethttp.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+	defer httpRes.Body.Close()
+
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
@@ -501,9 +883,9 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Terminal ordering read
 * Management API—Terminal ordering read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param companyId The unique identifier of the company account.
- @return TerminalOrdersCompanyLevelApiListTerminalProductsConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param companyId The unique identifier of the company account.
+	@return TerminalOrdersCompanyLevelApiListTerminalProductsConfig
 */
 func (a *TerminalOrdersCompanyLevelApi) ListTerminalProductsConfig(ctx context.Context, companyId string) TerminalOrdersCompanyLevelApiListTerminalProductsConfig {
 	return TerminalOrdersCompanyLevelApiListTerminalProductsConfig{
@@ -516,28 +898,75 @@ func (a *TerminalOrdersCompanyLevelApi) ListTerminalProductsConfig(ctx context.C
 Get a list of terminal products
 Returns a country-specific list of payment terminal packages and parts that the company identified in the path has access to.   To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal ordering read * Management API—Terminal ordering read and write
  * @param companyId The unique identifier of the company account.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return TerminalProductsResponse
 */
 
 func (a *TerminalOrdersCompanyLevelApi) ListTerminalProducts(r TerminalOrdersCompanyLevelApiListTerminalProductsConfig) (TerminalProductsResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &TerminalProductsResponse{}
 	path := "/companies/{companyId}/terminalProducts"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
-	queryString := url.Values{}
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
 	if r.country != nil {
-		common.ParameterAddToQuery(queryString, "country", r.country, "")
+		common.ParameterAddToQuery(queryParams, "country", r.country, "")
 	}
 	if r.terminalModelId != nil {
-		common.ParameterAddToQuery(queryString, "terminalModelId", r.terminalModelId, "")
+		common.ParameterAddToQuery(queryParams, "terminalModelId", r.terminalModelId, "")
 	}
 	if r.offset != nil {
-		common.ParameterAddToQuery(queryString, "offset", r.offset, "")
+		common.ParameterAddToQuery(queryParams, "offset", r.offset, "")
 	}
 	if r.limit != nil {
-		common.ParameterAddToQuery(queryString, "limit", r.limit, "")
+		common.ParameterAddToQuery(queryParams, "limit", r.limit, "")
 	}
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path+"?"+queryString.Encode(), []_context.Context{r.ctx})
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		nil,
+		res,
+		_nethttp.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+	defer httpRes.Body.Close()
+
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
@@ -561,15 +990,16 @@ Updating is only possible while the order has the status **Placed**.
 
 The request body only needs to contain what you want to change.
 However, to update the products in the `items` array, you must provide the entire array. For example, if the array has three items:
- To remove one item, the array must include the remaining two items. Or to add one item, the array must include all four items.
+
+	To remove one item, the array must include the remaining two items. Or to add one item, the array must include all four items.
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Terminal ordering read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param companyId The unique identifier of the company account.
- @param orderId The unique identifier of the order.
- @return TerminalOrdersCompanyLevelApiUpdateOrderConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param companyId The unique identifier of the company account.
+	@param orderId The unique identifier of the order.
+	@return TerminalOrdersCompanyLevelApiUpdateOrderConfig
 */
 func (a *TerminalOrdersCompanyLevelApi) UpdateOrderConfig(ctx context.Context, companyId string, orderId string) TerminalOrdersCompanyLevelApiUpdateOrderConfig {
 	return TerminalOrdersCompanyLevelApiUpdateOrderConfig{
@@ -585,15 +1015,63 @@ Updates the terminal products order identified in the path. Updating is only pos
  * @param companyId The unique identifier of the company account.
  * @param orderId The unique identifier of the order.
  * @param req TerminalOrderRequest - reference of TerminalOrderRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return TerminalOrder
 */
 
 func (a *TerminalOrdersCompanyLevelApi) UpdateOrder(r TerminalOrdersCompanyLevelApiUpdateOrderConfig) (TerminalOrder, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &TerminalOrder{}
 	path := "/companies/{companyId}/terminalOrders/{orderId}"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
 	path = strings.Replace(path, "{"+"orderId"+"}", url.PathEscape(common.ParameterValueToString(r.orderId, "orderId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPatch, r.terminalOrderRequest, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		r.terminalOrderRequest,
+		res,
+		_nethttp.MethodPatch,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+	defer httpRes.Body.Close()
+
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }

@@ -4,10 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AfterpayTouch** | Pointer to [**AfterpayTouchInfo**](AfterpayTouchInfo.md) |  | [optional] 
 **ApplePay** | Pointer to [**ApplePayInfo**](ApplePayInfo.md) |  | [optional] 
 **Bcmc** | Pointer to [**BcmcInfo**](BcmcInfo.md) |  | [optional] 
 **BusinessLineId** | Pointer to **string** | The unique identifier of the business line. | [optional] 
 **CartesBancaires** | Pointer to [**CartesBancairesInfo**](CartesBancairesInfo.md) |  | [optional] 
+**Clearpay** | Pointer to [**ClearpayInfo**](ClearpayInfo.md) |  | [optional] 
 **Countries** | Pointer to **[]string** | The list of countries where a payment method is available. By default, all countries supported by the payment method. | [optional] 
 **Currencies** | Pointer to **[]string** | The list of currencies that a payment method supports. By default, all currencies supported by the payment method. | [optional] 
 **CustomRoutingFlags** | Pointer to **[]string** | The list of custom routing flags to route payment to the intended acquirer. | [optional] 
@@ -21,6 +23,7 @@ Name | Type | Description | Notes
 **Sofort** | Pointer to [**SofortInfo**](SofortInfo.md) |  | [optional] 
 **StoreId** | Pointer to **string** | The ID of the [store](https://docs.adyen.com/api-explorer/#/ManagementService/latest/post/stores__resParam_id), if any. | [optional] 
 **Swish** | Pointer to [**SwishInfo**](SwishInfo.md) |  | [optional] 
+**Twint** | Pointer to [**TwintInfo**](TwintInfo.md) |  | [optional] 
 **Type** | Pointer to **string** | Payment method [variant](https://docs.adyen.com/development-resources/paymentmethodvariant#management-api). | [optional] 
 **Vipps** | Pointer to [**VippsInfo**](VippsInfo.md) |  | [optional] 
 
@@ -42,6 +45,31 @@ will change when the set of required properties is changed
 NewPaymentMethodSetupInfoWithDefaults instantiates a new PaymentMethodSetupInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAfterpayTouch
+
+`func (o *PaymentMethodSetupInfo) GetAfterpayTouch() AfterpayTouchInfo`
+
+GetAfterpayTouch returns the AfterpayTouch field if non-nil, zero value otherwise.
+
+### GetAfterpayTouchOk
+
+`func (o *PaymentMethodSetupInfo) GetAfterpayTouchOk() (*AfterpayTouchInfo, bool)`
+
+GetAfterpayTouchOk returns a tuple with the AfterpayTouch field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAfterpayTouch
+
+`func (o *PaymentMethodSetupInfo) SetAfterpayTouch(v AfterpayTouchInfo)`
+
+SetAfterpayTouch sets AfterpayTouch field to given value.
+
+### HasAfterpayTouch
+
+`func (o *PaymentMethodSetupInfo) HasAfterpayTouch() bool`
+
+HasAfterpayTouch returns a boolean if a field has been set.
 
 ### GetApplePay
 
@@ -142,6 +170,31 @@ SetCartesBancaires sets CartesBancaires field to given value.
 `func (o *PaymentMethodSetupInfo) HasCartesBancaires() bool`
 
 HasCartesBancaires returns a boolean if a field has been set.
+
+### GetClearpay
+
+`func (o *PaymentMethodSetupInfo) GetClearpay() ClearpayInfo`
+
+GetClearpay returns the Clearpay field if non-nil, zero value otherwise.
+
+### GetClearpayOk
+
+`func (o *PaymentMethodSetupInfo) GetClearpayOk() (*ClearpayInfo, bool)`
+
+GetClearpayOk returns a tuple with the Clearpay field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClearpay
+
+`func (o *PaymentMethodSetupInfo) SetClearpay(v ClearpayInfo)`
+
+SetClearpay sets Clearpay field to given value.
+
+### HasClearpay
+
+`func (o *PaymentMethodSetupInfo) HasClearpay() bool`
+
+HasClearpay returns a boolean if a field has been set.
 
 ### GetCountries
 
@@ -467,6 +520,31 @@ SetSwish sets Swish field to given value.
 `func (o *PaymentMethodSetupInfo) HasSwish() bool`
 
 HasSwish returns a boolean if a field has been set.
+
+### GetTwint
+
+`func (o *PaymentMethodSetupInfo) GetTwint() TwintInfo`
+
+GetTwint returns the Twint field if non-nil, zero value otherwise.
+
+### GetTwintOk
+
+`func (o *PaymentMethodSetupInfo) GetTwintOk() (*TwintInfo, bool)`
+
+GetTwintOk returns a tuple with the Twint field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTwint
+
+`func (o *PaymentMethodSetupInfo) SetTwint(v TwintInfo)`
+
+SetTwint sets Twint field to given value.
+
+### HasTwint
+
+`func (o *PaymentMethodSetupInfo) HasTwint() bool`
+
+HasTwint returns a boolean if a field has been set.
 
 ### GetType
 

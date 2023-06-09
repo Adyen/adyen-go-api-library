@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Bcmc** | Pointer to [**BcmcInfo**](BcmcInfo.md) |  | [optional] 
+**CartesBancaires** | Pointer to [**CartesBancairesInfo**](CartesBancairesInfo.md) |  | [optional] 
 **Countries** | Pointer to **[]string** | The list of countries where a payment method is available. By default, all countries supported by the payment method. | [optional] 
 **Currencies** | Pointer to **[]string** | The list of currencies that a payment method supports. By default, all currencies supported by the payment method. | [optional] 
-**CustomRoutingFlags** | Pointer to **[]string** | Custom routing flags for acquirer routing. | [optional] 
 **Enabled** | Pointer to **bool** | Indicates whether the payment method is enabled (**true**) or disabled (**false**). | [optional] 
-**ShopperStatement** | Pointer to [**ShopperStatement**](ShopperStatement.md) |  | [optional] 
 **StoreIds** | Pointer to **[]string** | The list of stores for this payment method | [optional] 
 
 ## Methods
@@ -29,6 +29,56 @@ will change when the set of required properties is changed
 NewUpdatePaymentMethodInfoWithDefaults instantiates a new UpdatePaymentMethodInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetBcmc
+
+`func (o *UpdatePaymentMethodInfo) GetBcmc() BcmcInfo`
+
+GetBcmc returns the Bcmc field if non-nil, zero value otherwise.
+
+### GetBcmcOk
+
+`func (o *UpdatePaymentMethodInfo) GetBcmcOk() (*BcmcInfo, bool)`
+
+GetBcmcOk returns a tuple with the Bcmc field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBcmc
+
+`func (o *UpdatePaymentMethodInfo) SetBcmc(v BcmcInfo)`
+
+SetBcmc sets Bcmc field to given value.
+
+### HasBcmc
+
+`func (o *UpdatePaymentMethodInfo) HasBcmc() bool`
+
+HasBcmc returns a boolean if a field has been set.
+
+### GetCartesBancaires
+
+`func (o *UpdatePaymentMethodInfo) GetCartesBancaires() CartesBancairesInfo`
+
+GetCartesBancaires returns the CartesBancaires field if non-nil, zero value otherwise.
+
+### GetCartesBancairesOk
+
+`func (o *UpdatePaymentMethodInfo) GetCartesBancairesOk() (*CartesBancairesInfo, bool)`
+
+GetCartesBancairesOk returns a tuple with the CartesBancaires field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCartesBancaires
+
+`func (o *UpdatePaymentMethodInfo) SetCartesBancaires(v CartesBancairesInfo)`
+
+SetCartesBancaires sets CartesBancaires field to given value.
+
+### HasCartesBancaires
+
+`func (o *UpdatePaymentMethodInfo) HasCartesBancaires() bool`
+
+HasCartesBancaires returns a boolean if a field has been set.
 
 ### GetCountries
 
@@ -80,31 +130,6 @@ SetCurrencies sets Currencies field to given value.
 
 HasCurrencies returns a boolean if a field has been set.
 
-### GetCustomRoutingFlags
-
-`func (o *UpdatePaymentMethodInfo) GetCustomRoutingFlags() []string`
-
-GetCustomRoutingFlags returns the CustomRoutingFlags field if non-nil, zero value otherwise.
-
-### GetCustomRoutingFlagsOk
-
-`func (o *UpdatePaymentMethodInfo) GetCustomRoutingFlagsOk() (*[]string, bool)`
-
-GetCustomRoutingFlagsOk returns a tuple with the CustomRoutingFlags field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCustomRoutingFlags
-
-`func (o *UpdatePaymentMethodInfo) SetCustomRoutingFlags(v []string)`
-
-SetCustomRoutingFlags sets CustomRoutingFlags field to given value.
-
-### HasCustomRoutingFlags
-
-`func (o *UpdatePaymentMethodInfo) HasCustomRoutingFlags() bool`
-
-HasCustomRoutingFlags returns a boolean if a field has been set.
-
 ### GetEnabled
 
 `func (o *UpdatePaymentMethodInfo) GetEnabled() bool`
@@ -129,31 +154,6 @@ SetEnabled sets Enabled field to given value.
 `func (o *UpdatePaymentMethodInfo) HasEnabled() bool`
 
 HasEnabled returns a boolean if a field has been set.
-
-### GetShopperStatement
-
-`func (o *UpdatePaymentMethodInfo) GetShopperStatement() ShopperStatement`
-
-GetShopperStatement returns the ShopperStatement field if non-nil, zero value otherwise.
-
-### GetShopperStatementOk
-
-`func (o *UpdatePaymentMethodInfo) GetShopperStatementOk() (*ShopperStatement, bool)`
-
-GetShopperStatementOk returns a tuple with the ShopperStatement field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetShopperStatement
-
-`func (o *UpdatePaymentMethodInfo) SetShopperStatement(v ShopperStatement)`
-
-SetShopperStatement sets ShopperStatement field to given value.
-
-### HasShopperStatement
-
-`func (o *UpdatePaymentMethodInfo) HasShopperStatement() bool`
-
-HasShopperStatement returns a boolean if a field has been set.
 
 ### GetStoreIds
 

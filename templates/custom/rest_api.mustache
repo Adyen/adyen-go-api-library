@@ -1,0 +1,176 @@
+{{>partial_header}}
+{{#lambda.lowercase}}
+package {{packageName}}
+{{/lambda.lowercase}}
+
+{{#operations}}
+import (
+	"context"
+    _nethttp "net/http"
+    "net/url"
+    "strings"
+    "github.com/adyen/adyen-go-api-library/v7/src/common"
+)
+
+// {{classname}} {{classname}} service
+type {{classname}} common.Service
+{{#operation}}
+
+type {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config struct {
+	ctx context.Context
+{{#allParams}}
+	{{paramName}} {{^isPathParam}}{{^isFile}}*{{/isFile}}{{/isPathParam}}{{{dataType}}}
+{{/allParams}}
+}
+
+{{#allParams}}
+{{^isPathParam}}
+{{#description}}
+// {{.}}
+{{/description}}
+{{#isDeprecated}}
+// Deprecated
+{{/isDeprecated}}
+func (r {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config) {{vendorExtensions.x-export-param-name}}({{paramName}} {{{dataType}}}) {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config {
+	r.{{paramName}} = {{^isFile}}&{{/isFile}}{{paramName}}
+	return r
+}
+
+{{/isPathParam}}
+{{/allParams}}
+
+/*
+{{operationId}} {{{summary}}}{{^summary}}Method for {{operationId}}{{/summary}}
+{{#notes}}
+
+{{{unescapedNotes}}}
+{{/notes}}
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().{{#pathParams}}
+ @param {{paramName}}{{#description}} {{{.}}}{{/description}}{{/pathParams}}
+ @return {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config
+{{#isDeprecated}}
+
+Deprecated
+{{/isDeprecated}}
+*/
+func (a *{{{classname}}}) {{{nickname}}}Config(ctx context.Context{{#pathParams}}, {{paramName}} {{{dataType}}}{{/pathParams}}) {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config {
+	return {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config{
+		ctx: ctx,
+		{{#pathParams}}
+		{{paramName}}: {{paramName}},
+		{{/pathParams}}
+	}
+}
+
+/*
+{{#summary}}{{{.}}}{{/summary}}{{^summary}} Method for {{operationId}}{{/summary}}
+{{#notes}}
+{{notes}}
+{{/notes}}
+{{#pathParams}}
+{{#required}}
+ * @param {{paramName}}{{#description}} {{{.}}}{{/description}}
+{{/required}}
+{{/pathParams}}
+{{#bodyParams}}
+{{#required}}
+ * @param req{{#description}} {{{.}}}{{/description}}
+{{/required}}
+{{/bodyParams}}
+{{#hasOptionalParams}}
+{{#pathParams}}
+{{^required}}
+ * @param request {{vendorExtensions.x-export-param-name}} - reference of {{dataType}}). {{#description}} {{{.}}}{{/description}}
+{{/required}}
+{{/pathParams}}
+{{#bodyParams}}
+{{^required}}
+ * @param req {{vendorExtensions.x-export-param-name}} - reference of {{dataType}}). {{#description}} {{{.}}}{{/description}}
+{{/required}}
+{{/bodyParams}}
+{{/hasOptionalParams}}
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+{{#returnType}}
+@return {{{returnType}}}
+{{/returnType}}
+*/
+
+func (a *{{{classname}}}) {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}(r {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Config) ({{#returnType}}{{{returnType}}}, {{/returnType}}*_nethttp.Response, error) {
+    var serviceError common.RestServiceError
+    {{#returnType}}
+    res := &{{{returnType}}}{}
+    {{/returnType}}
+    {{^returnType}}
+    var res interface{}
+    {{/returnType}}
+	path := "{{{path}}}"{{#pathParams}}
+    path = strings.Replace(path, "{"+"{{baseName}}"+"}", url.PathEscape(common.ParameterValueToString(r.{{paramName}}, "{{paramName}}")), -1){{/pathParams}}
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+{{#queryParams}}
+    if r.{{paramName}} != nil {
+        common.ParameterAddToQuery(queryParams, "{{baseName}}", r.{{paramName}}, "")
+    }
+{{/queryParams}}
+{{#headerParams}}
+    {{#required}}
+    common.ParameterAddToHeaderOrQuery(headerParams, "{{baseName}}", r.{{paramName}}, "{{collectionFormat}}")
+    {{/required}}
+    {{^required}}
+    if r.{{paramName}} != nil {
+        common.ParameterAddToHeaderOrQuery(headerParams, "{{baseName}}", r.{{paramName}}, "{{collectionFormat}}")
+    }
+    {{/required}}
+{{/headerParams}}
+    httpRes, err := common.SendAPIRequest(
+        r.ctx,
+        a.Client,
+        {{#bodyParams}}r.{{paramName}}{{/bodyParams}}{{^bodyParams}}nil{{/bodyParams}},
+        res,
+        _nethttp.Method{{httpMethod}},
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
+     defer httpRes.Body.Close()
+{{#responses}}
+    {{#dataType}}
+    
+        {{^is1xx}}
+            {{^is2xx}}
+                {{#range}}
+                
+                    {{#is3xx}}
+                   
+                        if httpRes.StatusCode >= 300 && httpRes.StatusCode < 400 {
+                    {{/is3xx}}
+                    {{#is4xx}}
+                        if httpRes.StatusCode >= 400 && httpRes.StatusCode < 500 {
+                    {{/is4xx}}
+                    {{#is5xx}}
+                        if httpRes.StatusCode >= 500 {
+                    {{/is5xx}}
+                {{/range}}
+                {{^range}}
+
+                    {{^wildcard}}
+                        if httpRes.StatusCode == {{{code}}} {
+                    {{/wildcard}}
+                {{/range}}
+	            // Read the response body
+		        body, _ := ioutil.ReadAll(httpRes.Body)
+		        _ = json.Unmarshal([]byte(body), &serviceError)
+		        return {{#returnType}}*res, {{/returnType}}httpRes, serviceError
+                {{^wildcard}}
+                    }
+                {{/wildcard}}
+            {{/is2xx}}
+        {{/is1xx}}
+    {{/dataType}}
+{{/responses}}
+    return {{#returnType}}*res, {{/returnType}}httpRes, err
+}
+
+{{/operation}}
+{{/operations}}

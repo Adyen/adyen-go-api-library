@@ -6,8 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AccountGroups** | Pointer to **[]string** | The list of [account groups](https://docs.adyen.com/account/account-structure#account-groups) associated with this user. | [optional] 
 **Active** | Pointer to **bool** | Sets the status of the user to active (**true**) or inactive (**false**). | [optional] 
-**AuthnAppsToAdd** | Pointer to **[]string** | Set of authn apps to add to this user | [optional] 
-**AuthnAppsToRemove** | Pointer to **[]string** | Set of authn apps to remove from this user | [optional] 
 **Email** | Pointer to **string** | The email address of the user. | [optional] 
 **Name** | Pointer to [**Name2**](Name2.md) |  | [optional] 
 **Roles** | Pointer to **[]string** | The list of [roles](https://docs.adyen.com/account/user-roles) for this user. | [optional] 
@@ -81,56 +79,6 @@ SetActive sets Active field to given value.
 `func (o *UpdateMerchantUserRequest) HasActive() bool`
 
 HasActive returns a boolean if a field has been set.
-
-### GetAuthnAppsToAdd
-
-`func (o *UpdateMerchantUserRequest) GetAuthnAppsToAdd() []string`
-
-GetAuthnAppsToAdd returns the AuthnAppsToAdd field if non-nil, zero value otherwise.
-
-### GetAuthnAppsToAddOk
-
-`func (o *UpdateMerchantUserRequest) GetAuthnAppsToAddOk() (*[]string, bool)`
-
-GetAuthnAppsToAddOk returns a tuple with the AuthnAppsToAdd field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAuthnAppsToAdd
-
-`func (o *UpdateMerchantUserRequest) SetAuthnAppsToAdd(v []string)`
-
-SetAuthnAppsToAdd sets AuthnAppsToAdd field to given value.
-
-### HasAuthnAppsToAdd
-
-`func (o *UpdateMerchantUserRequest) HasAuthnAppsToAdd() bool`
-
-HasAuthnAppsToAdd returns a boolean if a field has been set.
-
-### GetAuthnAppsToRemove
-
-`func (o *UpdateMerchantUserRequest) GetAuthnAppsToRemove() []string`
-
-GetAuthnAppsToRemove returns the AuthnAppsToRemove field if non-nil, zero value otherwise.
-
-### GetAuthnAppsToRemoveOk
-
-`func (o *UpdateMerchantUserRequest) GetAuthnAppsToRemoveOk() (*[]string, bool)`
-
-GetAuthnAppsToRemoveOk returns a tuple with the AuthnAppsToRemove field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAuthnAppsToRemove
-
-`func (o *UpdateMerchantUserRequest) SetAuthnAppsToRemove(v []string)`
-
-SetAuthnAppsToRemove sets AuthnAppsToRemove field to given value.
-
-### HasAuthnAppsToRemove
-
-`func (o *UpdateMerchantUserRequest) HasAuthnAppsToRemove() bool`
-
-HasAuthnAppsToRemove returns a boolean if a field has been set.
 
 ### GetEmail
 

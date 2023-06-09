@@ -47,6 +47,8 @@ type APIClient struct {
 
 	PayoutSettingsMerchantLevelApi *PayoutSettingsMerchantLevelApi
 
+	SplitConfigurationMerchantLevelApi *SplitConfigurationMerchantLevelApi
+
 	TerminalActionsCompanyLevelApi *TerminalActionsCompanyLevelApi
 
 	TerminalActionsTerminalLevelApi *TerminalActionsTerminalLevelApi
@@ -74,8 +76,7 @@ type APIClient struct {
 	WebhooksMerchantLevelApi *WebhooksMerchantLevelApi
 }
 
-// NewAPIClient creates a new API client. Requires a userAgent string describing your application.
-// optionally a custom http.Client to allow for advanced features such as caching.
+// NewAPIClient creates a new API client.
 func NewAPIClient(client *common.Client) *APIClient {
 	c := &APIClient{}
     c.common.Client = client
@@ -98,6 +99,7 @@ func NewAPIClient(client *common.Client) *APIClient {
 	c.MyAPICredentialApi = (*MyAPICredentialApi)(&c.common)
 	c.PaymentMethodsMerchantLevelApi = (*PaymentMethodsMerchantLevelApi)(&c.common)
 	c.PayoutSettingsMerchantLevelApi = (*PayoutSettingsMerchantLevelApi)(&c.common)
+	c.SplitConfigurationMerchantLevelApi = (*SplitConfigurationMerchantLevelApi)(&c.common)
 	c.TerminalActionsCompanyLevelApi = (*TerminalActionsCompanyLevelApi)(&c.common)
 	c.TerminalActionsTerminalLevelApi = (*TerminalActionsTerminalLevelApi)(&c.common)
 	c.TerminalOrdersCompanyLevelApi = (*TerminalOrdersCompanyLevelApi)(&c.common)

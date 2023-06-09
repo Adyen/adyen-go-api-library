@@ -10,7 +10,8 @@ package management
 
 import (
 	"context"
-	_context "context"
+	"encoding/json"
+	"io/ioutil"
 	_nethttp "net/http"
 	"net/url"
 	"strings"
@@ -35,10 +36,10 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Terminal actions read
 * Management API—Terminal actions read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param companyId The unique identifier of the company account.
- @param actionId The unique identifier of the terminal action.
- @return TerminalActionsCompanyLevelApiGetTerminalActionConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param companyId The unique identifier of the company account.
+	@param actionId The unique identifier of the terminal action.
+	@return TerminalActionsCompanyLevelApiGetTerminalActionConfig
 */
 func (a *TerminalActionsCompanyLevelApi) GetTerminalActionConfig(ctx context.Context, companyId string, actionId string) TerminalActionsCompanyLevelApiGetTerminalActionConfig {
 	return TerminalActionsCompanyLevelApiGetTerminalActionConfig{
@@ -53,24 +54,74 @@ Get terminal action
 Returns the details of the [terminal action](https://docs.adyen.com/point-of-sale/automating-terminal-management/terminal-actions-api) identified in the path. To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal actions read * Management API—Terminal actions read and write
  * @param companyId The unique identifier of the company account.
  * @param actionId The unique identifier of the terminal action.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ExternalTerminalAction
 */
 
 func (a *TerminalActionsCompanyLevelApi) GetTerminalAction(r TerminalActionsCompanyLevelApiGetTerminalActionConfig) (ExternalTerminalAction, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &ExternalTerminalAction{}
 	path := "/companies/{companyId}/terminalActions/{actionId}"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
 	path = strings.Replace(path, "{"+"actionId"+"}", url.PathEscape(common.ParameterValueToString(r.actionId, "actionId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		nil,
+		res,
+		_nethttp.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+	defer httpRes.Body.Close()
+
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
 type TerminalActionsCompanyLevelApiListAndroidAppsConfig struct {
-	ctx        context.Context
-	companyId  string
-	pageNumber *int32
-	pageSize   *int32
+	ctx         context.Context
+	companyId   string
+	pageNumber  *int32
+	pageSize    *int32
+	packageName *string
+	versionCode *int32
 }
 
 // The number of the page to fetch.
@@ -85,6 +136,18 @@ func (r TerminalActionsCompanyLevelApiListAndroidAppsConfig) PageSize(pageSize i
 	return r
 }
 
+// The package name that uniquely identifies the Android app.
+func (r TerminalActionsCompanyLevelApiListAndroidAppsConfig) PackageName(packageName string) TerminalActionsCompanyLevelApiListAndroidAppsConfig {
+	r.packageName = &packageName
+	return r
+}
+
+// The version number of the app.
+func (r TerminalActionsCompanyLevelApiListAndroidAppsConfig) VersionCode(versionCode int32) TerminalActionsCompanyLevelApiListAndroidAppsConfig {
+	r.versionCode = &versionCode
+	return r
+}
+
 /*
 ListAndroidApps Get a list of Android apps
 
@@ -95,9 +158,9 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Terminal actions read
 * Management API—Terminal actions read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param companyId The unique identifier of the company account.
- @return TerminalActionsCompanyLevelApiListAndroidAppsConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param companyId The unique identifier of the company account.
+	@return TerminalActionsCompanyLevelApiListAndroidAppsConfig
 */
 func (a *TerminalActionsCompanyLevelApi) ListAndroidAppsConfig(ctx context.Context, companyId string) TerminalActionsCompanyLevelApiListAndroidAppsConfig {
 	return TerminalActionsCompanyLevelApiListAndroidAppsConfig{
@@ -110,30 +173,84 @@ func (a *TerminalActionsCompanyLevelApi) ListAndroidAppsConfig(ctx context.Conte
 Get a list of Android apps
 Returns a list of the Android apps that are available for the company identified in the path.  These apps have been uploaded to Adyen and can be installed or uninstalled on Android payment terminals through [terminal actions](https://docs.adyen.com/point-of-sale/automating-terminal-management/terminal-actions-api).  To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal actions read * Management API—Terminal actions read and write
  * @param companyId The unique identifier of the company account.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return AndroidAppsResponse
 */
 
 func (a *TerminalActionsCompanyLevelApi) ListAndroidApps(r TerminalActionsCompanyLevelApiListAndroidAppsConfig) (AndroidAppsResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &AndroidAppsResponse{}
 	path := "/companies/{companyId}/androidApps"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
-	queryString := url.Values{}
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
 	if r.pageNumber != nil {
-		common.ParameterAddToQuery(queryString, "pageNumber", r.pageNumber, "")
+		common.ParameterAddToQuery(queryParams, "pageNumber", r.pageNumber, "")
 	}
 	if r.pageSize != nil {
-		common.ParameterAddToQuery(queryString, "pageSize", r.pageSize, "")
+		common.ParameterAddToQuery(queryParams, "pageSize", r.pageSize, "")
 	}
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path+"?"+queryString.Encode(), []_context.Context{r.ctx})
+	if r.packageName != nil {
+		common.ParameterAddToQuery(queryParams, "packageName", r.packageName, "")
+	}
+	if r.versionCode != nil {
+		common.ParameterAddToQuery(queryParams, "versionCode", r.versionCode, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		nil,
+		res,
+		_nethttp.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+	defer httpRes.Body.Close()
+
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
 type TerminalActionsCompanyLevelApiListAndroidCertificatesConfig struct {
-	ctx        context.Context
-	companyId  string
-	pageNumber *int32
-	pageSize   *int32
+	ctx             context.Context
+	companyId       string
+	pageNumber      *int32
+	pageSize        *int32
+	certificateName *string
 }
 
 // The number of the page to fetch.
@@ -148,6 +265,12 @@ func (r TerminalActionsCompanyLevelApiListAndroidCertificatesConfig) PageSize(pa
 	return r
 }
 
+// The name of the certificate.
+func (r TerminalActionsCompanyLevelApiListAndroidCertificatesConfig) CertificateName(certificateName string) TerminalActionsCompanyLevelApiListAndroidCertificatesConfig {
+	r.certificateName = &certificateName
+	return r
+}
+
 /*
 ListAndroidCertificates Get a list of Android certificates
 
@@ -158,9 +281,9 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Terminal actions read
 * Management API—Terminal actions read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param companyId The unique identifier of the company account.
- @return TerminalActionsCompanyLevelApiListAndroidCertificatesConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param companyId The unique identifier of the company account.
+	@return TerminalActionsCompanyLevelApiListAndroidCertificatesConfig
 */
 func (a *TerminalActionsCompanyLevelApi) ListAndroidCertificatesConfig(ctx context.Context, companyId string) TerminalActionsCompanyLevelApiListAndroidCertificatesConfig {
 	return TerminalActionsCompanyLevelApiListAndroidCertificatesConfig{
@@ -173,22 +296,72 @@ func (a *TerminalActionsCompanyLevelApi) ListAndroidCertificatesConfig(ctx conte
 Get a list of Android certificates
 Returns a list of the Android certificates that are available for the company identified in the path. Typically, these certificates enable running apps on Android payment terminals. The certifcates in the list have been uploaded to Adyen and can be installed or uninstalled on Android terminals through [terminal actions](https://docs.adyen.com/point-of-sale/automating-terminal-management/terminal-actions-api).  To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal actions read * Management API—Terminal actions read and write
  * @param companyId The unique identifier of the company account.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return AndroidCertificatesResponse
 */
 
 func (a *TerminalActionsCompanyLevelApi) ListAndroidCertificates(r TerminalActionsCompanyLevelApiListAndroidCertificatesConfig) (AndroidCertificatesResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &AndroidCertificatesResponse{}
 	path := "/companies/{companyId}/androidCertificates"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
-	queryString := url.Values{}
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
 	if r.pageNumber != nil {
-		common.ParameterAddToQuery(queryString, "pageNumber", r.pageNumber, "")
+		common.ParameterAddToQuery(queryParams, "pageNumber", r.pageNumber, "")
 	}
 	if r.pageSize != nil {
-		common.ParameterAddToQuery(queryString, "pageSize", r.pageSize, "")
+		common.ParameterAddToQuery(queryParams, "pageSize", r.pageSize, "")
 	}
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path+"?"+queryString.Encode(), []_context.Context{r.ctx})
+	if r.certificateName != nil {
+		common.ParameterAddToQuery(queryParams, "certificateName", r.certificateName, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		nil,
+		res,
+		_nethttp.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+	defer httpRes.Body.Close()
+
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }
 
@@ -233,9 +406,9 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Terminal actions read
 * Management API—Terminal actions read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param companyId The unique identifier of the company account.
- @return TerminalActionsCompanyLevelApiListTerminalActionsConfig
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param companyId The unique identifier of the company account.
+	@return TerminalActionsCompanyLevelApiListTerminalActionsConfig
 */
 func (a *TerminalActionsCompanyLevelApi) ListTerminalActionsConfig(ctx context.Context, companyId string) TerminalActionsCompanyLevelApiListTerminalActionsConfig {
 	return TerminalActionsCompanyLevelApiListTerminalActionsConfig{
@@ -248,27 +421,74 @@ func (a *TerminalActionsCompanyLevelApi) ListTerminalActionsConfig(ctx context.C
 Get a list of terminal actions
 Returns the [terminal actions](https://docs.adyen.com/point-of-sale/automating-terminal-management/terminal-actions-api) that have been scheduled for the company identified in the path.The response doesn&#39;t include actions that are scheduled by Adyen. To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal actions read * Management API—Terminal actions read and write
  * @param companyId The unique identifier of the company account.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ListExternalTerminalActionsResponse
 */
 
 func (a *TerminalActionsCompanyLevelApi) ListTerminalActions(r TerminalActionsCompanyLevelApiListTerminalActionsConfig) (ListExternalTerminalActionsResponse, *_nethttp.Response, error) {
+	var serviceError common.RestServiceError
 	res := &ListExternalTerminalActionsResponse{}
 	path := "/companies/{companyId}/terminalActions"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
-	queryString := url.Values{}
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
 	if r.pageNumber != nil {
-		common.ParameterAddToQuery(queryString, "pageNumber", r.pageNumber, "")
+		common.ParameterAddToQuery(queryParams, "pageNumber", r.pageNumber, "")
 	}
 	if r.pageSize != nil {
-		common.ParameterAddToQuery(queryString, "pageSize", r.pageSize, "")
+		common.ParameterAddToQuery(queryParams, "pageSize", r.pageSize, "")
 	}
 	if r.status != nil {
-		common.ParameterAddToQuery(queryString, "status", r.status, "")
+		common.ParameterAddToQuery(queryParams, "status", r.status, "")
 	}
 	if r.type_ != nil {
-		common.ParameterAddToQuery(queryString, "type", r.type_, "")
+		common.ParameterAddToQuery(queryParams, "type", r.type_, "")
 	}
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path+"?"+queryString.Encode(), []_context.Context{r.ctx})
+	httpRes, err := common.SendAPIRequest(
+		r.ctx,
+		a.Client,
+		nil,
+		res,
+		_nethttp.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+	defer httpRes.Body.Close()
+
+	if httpRes.StatusCode == 400 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		// Read the response body
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		_ = json.Unmarshal([]byte(body), &serviceError)
+		return *res, httpRes, serviceError
+	}
 	return *res, httpRes, err
 }

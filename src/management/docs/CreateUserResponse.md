@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Links** | Pointer to [**Links**](Links.md) |  | [optional] 
 **AccountGroups** | Pointer to **[]string** | The list of [account groups](https://docs.adyen.com/account/account-structure#account-groups) associated with this user. | [optional] 
 **Active** | Pointer to **bool** | Indicates whether this user is active. | [optional] 
-**AuthnApps** | Pointer to **[]string** | Set of authn apps available to this user | [optional] 
+**Apps** | Pointer to **[]string** | Set of apps available to this user | [optional] 
 **Email** | **string** | The email address of the user. | 
 **Id** | **string** | The unique identifier of the user. | 
 **Name** | Pointer to [**Name**](Name.md) |  | [optional] 
@@ -109,30 +109,30 @@ SetActive sets Active field to given value.
 
 HasActive returns a boolean if a field has been set.
 
-### GetAuthnApps
+### GetApps
 
-`func (o *CreateUserResponse) GetAuthnApps() []string`
+`func (o *CreateUserResponse) GetApps() []string`
 
-GetAuthnApps returns the AuthnApps field if non-nil, zero value otherwise.
+GetApps returns the Apps field if non-nil, zero value otherwise.
 
-### GetAuthnAppsOk
+### GetAppsOk
 
-`func (o *CreateUserResponse) GetAuthnAppsOk() (*[]string, bool)`
+`func (o *CreateUserResponse) GetAppsOk() (*[]string, bool)`
 
-GetAuthnAppsOk returns a tuple with the AuthnApps field if it's non-nil, zero value otherwise
+GetAppsOk returns a tuple with the Apps field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetAuthnApps
+### SetApps
 
-`func (o *CreateUserResponse) SetAuthnApps(v []string)`
+`func (o *CreateUserResponse) SetApps(v []string)`
 
-SetAuthnApps sets AuthnApps field to given value.
+SetApps sets Apps field to given value.
 
-### HasAuthnApps
+### HasApps
 
-`func (o *CreateUserResponse) HasAuthnApps() bool`
+`func (o *CreateUserResponse) HasApps() bool`
 
-HasAuthnApps returns a boolean if a field has been set.
+HasApps returns a boolean if a field has been set.
 
 ### GetEmail
 
