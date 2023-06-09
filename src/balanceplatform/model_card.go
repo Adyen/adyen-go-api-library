@@ -442,7 +442,7 @@ func (o Card) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.LastFour) {
 		toSerialize["lastFour"] = o.LastFour
 	}
-	// skip: number is readOnly
+	toSerialize["number"] = o.Number
 	return toSerialize, nil
 }
 

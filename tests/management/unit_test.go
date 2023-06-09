@@ -77,9 +77,9 @@ func Test_ManagementAPI(t *testing.T) {
 
 	t.Run("Test ListCompanyAccounts", func(t *testing.T) {
 		t.Run("Create an API request that should pass", func(t *testing.T) {
-			req := service.AccountCompanyLevelApi.ListCompanyAccountsConfig(context.Background())
+			req := service.AccountCompanyLevelApi.ListCompanyAccountsInput()
 
-			_, httpRes, err := service.AccountCompanyLevelApi.ListCompanyAccounts(req)
+			_, httpRes, err := service.AccountCompanyLevelApi.ListCompanyAccounts(context.Background(), req)
 
 			require.NoError(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
@@ -90,8 +90,8 @@ func Test_ManagementAPI(t *testing.T) {
 	t.Run("Test GetCompanyAccount", func(t *testing.T) {
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 			companyId := "TestCompany123"
-			req := service.AccountCompanyLevelApi.GetCompanyAccountConfig(context.Background(), companyId)
-			resp, httpRes, err := service.AccountCompanyLevelApi.GetCompanyAccount(req)
+			req := service.AccountCompanyLevelApi.GetCompanyAccountInput(companyId)
+			resp, httpRes, err := service.AccountCompanyLevelApi.GetCompanyAccount(context.Background(), req)
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)
@@ -103,8 +103,8 @@ func Test_ManagementAPI(t *testing.T) {
 
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 			companyId := "notExisting"
-			req := service.AccountCompanyLevelApi.GetCompanyAccountConfig(context.Background(), companyId)
-			resp, httpRes, err := service.AccountCompanyLevelApi.GetCompanyAccount(req)
+			req := service.AccountCompanyLevelApi.GetCompanyAccountInput(companyId)
+			resp, httpRes, err := service.AccountCompanyLevelApi.GetCompanyAccount(context.Background(), req)
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)
@@ -118,8 +118,8 @@ func Test_ManagementAPI(t *testing.T) {
 	t.Run("Test ListMerchantAccounts", func(t *testing.T) {
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 			companyId := "TestCompany123"
-			req := service.AccountCompanyLevelApi.ListMerchantAccountsConfig(context.Background(), companyId)
-			resp, httpRes, err := service.AccountCompanyLevelApi.ListMerchantAccounts(req)
+			req := service.AccountCompanyLevelApi.ListMerchantAccountsInput(companyId)
+			resp, httpRes, err := service.AccountCompanyLevelApi.ListMerchantAccounts(context.Background(), req)
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)
@@ -131,8 +131,8 @@ func Test_ManagementAPI(t *testing.T) {
 
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 			companyId := "notExisting"
-			req := service.AccountCompanyLevelApi.ListMerchantAccountsConfig(context.Background(), companyId)
-			resp, httpRes, err := service.AccountCompanyLevelApi.ListMerchantAccounts(req)
+			req := service.AccountCompanyLevelApi.ListMerchantAccountsInput(companyId)
+			resp, httpRes, err := service.AccountCompanyLevelApi.ListMerchantAccounts(context.Background(), req)
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)

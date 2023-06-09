@@ -136,7 +136,7 @@ func Test_Payout(t *testing.T) {
 	client.Payout().InitializationApi.BasePath = func() string { return mockServer.URL }
 
 	createStoreDetailAndSubmitThirdParty := func(ref string) (payout.StoreDetailAndSubmitResponse, *http.Response, error) {
-		req := client.Payout().InitializationApi.StoreDetailAndSubmitThirdPartyConfig(context.Background())
+		req := client.Payout().InitializationApi.StoreDetailAndSubmitThirdPartyInput()
 		req = req.StoreDetailAndSubmitRequest(payout.StoreDetailAndSubmitRequest{
 			Amount:           amount,
 			Bank:             &bank,
@@ -150,7 +150,7 @@ func Test_Payout(t *testing.T) {
 			ShopperName:      shopperName,
 			ShopperReference: ref,
 		})
-		return client.Payout().InitializationApi.StoreDetailAndSubmitThirdParty(req)
+		return client.Payout().InitializationApi.StoreDetailAndSubmitThirdParty(context.Background(), req)
 	}
 
 	t.Run("Configuration", func(t *testing.T) {
@@ -175,8 +175,8 @@ func Test_Payout(t *testing.T) {
 					Card:            &card,
 					ShopperName:     shopperName,
 				}
-				payoutReq := client.Payout().InstantPayoutsApi.PayoutConfig(context.Background()).PayoutRequest(body)
-				res, httpRes, err := client.Payout().InstantPayoutsApi.Payout(payoutReq)
+				payoutReq := client.Payout().InstantPayoutsApi.PayoutInput().PayoutRequest(body)
+				res, httpRes, err := client.Payout().InstantPayoutsApi.Payout(context.Background(), payoutReq)
 
 				require.Nil(t, err)
 				require.NotNil(t, httpRes)
@@ -193,8 +193,8 @@ func Test_Payout(t *testing.T) {
 					Card:            &card,
 					ShopperName:     shopperName,
 				}
-				payoutReq := client.Payout().InstantPayoutsApi.PayoutConfig(context.Background()).PayoutRequest(body)
-				_, httpRes, err := client.Payout().InstantPayoutsApi.Payout(payoutReq)
+				payoutReq := client.Payout().InstantPayoutsApi.PayoutInput().PayoutRequest(body)
+				_, httpRes, err := client.Payout().InstantPayoutsApi.Payout(context.Background(), payoutReq)
 
 				require.NotNil(t, err)
 				assert.Equal(t, 500, httpRes.StatusCode)
@@ -206,7 +206,7 @@ func Test_Payout(t *testing.T) {
 	t.Run("Initialization", func(t *testing.T) {
 		t.Run("StoreDetail", func(t *testing.T) {
 			t.Run("Create an API request that should pass", func(t *testing.T) {
-				req := client.Payout().InitializationApi.StoreDetailConfig(context.Background())
+				req := client.Payout().InitializationApi.StoreDetailInput()
 				req = req.StoreDetailRequest(payout.StoreDetailRequest{
 					Bank:             &bank,
 					DateOfBirth:      dateOfBirth,
@@ -218,7 +218,7 @@ func Test_Payout(t *testing.T) {
 					ShopperName:      shopperName,
 					ShopperReference: "MyShopper",
 				})
-				res, httpRes, err := client.Payout().InitializationApi.StoreDetail(req)
+				res, httpRes, err := client.Payout().InitializationApi.StoreDetail(context.Background(), req)
 
 				require.Nil(t, err)
 				assert.Equal(t, 200, httpRes.StatusCode)
@@ -229,7 +229,7 @@ func Test_Payout(t *testing.T) {
 
 		t.Run("SubmitThirdParty", func(t *testing.T) {
 			t.Run("Create an API request that should pass", func(t *testing.T) {
-				req := client.Payout().InitializationApi.SubmitThirdPartyConfig(context.Background())
+				req := client.Payout().InitializationApi.SubmitThirdPartyInput()
 				req = req.SubmitRequest(payout.SubmitRequest{
 					Amount:          amount,
 					MerchantAccount: merchantAccount,
@@ -245,7 +245,7 @@ func Test_Payout(t *testing.T) {
 					DateOfBirth:                      &dateOfBirth,
 					Nationality:                      &nationality,
 				})
-				res, httpRes, err := client.Payout().InitializationApi.SubmitThirdParty(req)
+				res, httpRes, err := client.Payout().InitializationApi.SubmitThirdParty(context.Background(), req)
 
 				require.Nil(t, err)
 				require.NotNil(t, httpRes)
@@ -276,12 +276,12 @@ func Test_Payout(t *testing.T) {
 	t.Run("Reviewing", func(t *testing.T) {
 		t.Run("ConfirmThirdParty", func(t *testing.T) {
 			t.Run("Create an API request that should pass", func(t *testing.T) {
-				req := client.Payout().ReviewingApi.ConfirmThirdPartyConfig(context.Background())
+				req := client.Payout().ReviewingApi.ConfirmThirdPartyInput()
 				req = req.ModifyRequest(payout.ModifyRequest{
 					MerchantAccount:   "merchantAccount",
 					OriginalReference: "TheOG",
 				})
-				res, httpRes, err := client.Payout().ReviewingApi.ConfirmThirdParty(req)
+				res, httpRes, err := client.Payout().ReviewingApi.ConfirmThirdParty(context.Background(), req)
 
 				require.Nil(t, err)
 				require.NotNil(t, httpRes)
@@ -293,13 +293,13 @@ func Test_Payout(t *testing.T) {
 		})
 		t.Run("DeclineThirdParty", func(t *testing.T) {
 			t.Run("Create an API request that should pass", func(t *testing.T) {
-				req := client.Payout().ReviewingApi.DeclineThirdPartyConfig(context.Background())
+				req := client.Payout().ReviewingApi.DeclineThirdPartyInput()
 				req = req.ModifyRequest(payout.ModifyRequest{
 					MerchantAccount:   merchantAccount,
 					OriginalReference: "TheGO",
 				})
 
-				res, httpRes, err := client.Payout().ReviewingApi.DeclineThirdParty(req)
+				res, httpRes, err := client.Payout().ReviewingApi.DeclineThirdParty(context.Background(), req)
 
 				require.Nil(t, err)
 				require.NotNil(t, httpRes)

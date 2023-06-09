@@ -10,21 +10,32 @@ package management
 
 import (
 	"context"
-	_context "context"
-	_nethttp "net/http"
+	"net/http"
 	"net/url"
 	"strings"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// WebhooksMerchantLevelApi WebhooksMerchantLevelApi service
+// WebhooksMerchantLevelApi service
 type WebhooksMerchantLevelApi common.Service
 
-type WebhooksMerchantLevelApiGenerateHmacKeyConfig struct {
-	ctx        context.Context
+// All parameters accepted by WebhooksMerchantLevelApi.GenerateHmacKey
+type WebhooksMerchantLevelApiGenerateHmacKeyInput struct {
 	merchantId string
 	webhookId  string
+}
+
+/*
+Prepare a request for GenerateHmacKey
+@param merchantId The unique identifier of the merchant account.@param webhookId
+@return WebhooksMerchantLevelApiGenerateHmacKeyInput
+*/
+func (a *WebhooksMerchantLevelApi) GenerateHmacKeyInput(merchantId string, webhookId string) WebhooksMerchantLevelApiGenerateHmacKeyInput {
+	return WebhooksMerchantLevelApiGenerateHmacKeyInput{
+		merchantId: merchantId,
+		webhookId:  webhookId,
+	}
 }
 
 /*
@@ -35,41 +46,47 @@ Returns an [HMAC key](https://en.wikipedia.org/wiki/HMAC) for the webhook identi
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Webhooks read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param merchantId The unique identifier of the merchant account.
- @param webhookId
- @return WebhooksMerchantLevelApiGenerateHmacKeyConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r WebhooksMerchantLevelApiGenerateHmacKeyInput - Request parameters, see GenerateHmacKeyInput
+@return GenerateHmacKeyResponse, *http.Response, error
 */
-func (a *WebhooksMerchantLevelApi) GenerateHmacKeyConfig(ctx context.Context, merchantId string, webhookId string) WebhooksMerchantLevelApiGenerateHmacKeyConfig {
-	return WebhooksMerchantLevelApiGenerateHmacKeyConfig{
-		ctx:        ctx,
-		merchantId: merchantId,
-		webhookId:  webhookId,
-	}
-}
-
-/*
-Generate an HMAC key
-Returns an [HMAC key](https://en.wikipedia.org/wiki/HMAC) for the webhook identified in the path. This key allows you to check the integrity and the origin of the notifications you receive.By creating an HMAC key, you start receiving [HMAC-signed notifications](https://docs.adyen.com/development-resources/webhooks/verify-hmac-signatures#enable-hmac-signatures) from Adyen. Find out more about how to [verify HMAC signatures](https://docs.adyen.com/development-resources/webhooks/verify-hmac-signatures).  To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Webhooks read and write
- * @param merchantId The unique identifier of the merchant account.
- * @param webhookId
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return GenerateHmacKeyResponse
-*/
-
-func (a *WebhooksMerchantLevelApi) GenerateHmacKey(r WebhooksMerchantLevelApiGenerateHmacKeyConfig) (GenerateHmacKeyResponse, *_nethttp.Response, error) {
+func (a *WebhooksMerchantLevelApi) GenerateHmacKey(ctx context.Context, r WebhooksMerchantLevelApiGenerateHmacKeyInput) (GenerateHmacKeyResponse, *http.Response, error) {
 	res := &GenerateHmacKeyResponse{}
 	path := "/merchants/{merchantId}/webhooks/{webhookId}/generateHmac"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"webhookId"+"}", url.PathEscape(common.ParameterValueToString(r.webhookId, "webhookId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPost, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type WebhooksMerchantLevelApiGetWebhookConfig struct {
-	ctx        context.Context
+// All parameters accepted by WebhooksMerchantLevelApi.GetWebhook
+type WebhooksMerchantLevelApiGetWebhookInput struct {
 	merchantId string
 	webhookId  string
+}
+
+/*
+Prepare a request for GetWebhook
+@param merchantId The unique identifier of the merchant account.@param webhookId Unique identifier of the webhook configuration.
+@return WebhooksMerchantLevelApiGetWebhookInput
+*/
+func (a *WebhooksMerchantLevelApi) GetWebhookInput(merchantId string, webhookId string) WebhooksMerchantLevelApiGetWebhookInput {
+	return WebhooksMerchantLevelApiGetWebhookInput{
+		merchantId: merchantId,
+		webhookId:  webhookId,
+	}
 }
 
 /*
@@ -81,54 +98,59 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Webhooks read
 * Management API—Webhooks read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param merchantId The unique identifier of the merchant account.
- @param webhookId Unique identifier of the webhook configuration.
- @return WebhooksMerchantLevelApiGetWebhookConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r WebhooksMerchantLevelApiGetWebhookInput - Request parameters, see GetWebhookInput
+@return Webhook, *http.Response, error
 */
-func (a *WebhooksMerchantLevelApi) GetWebhookConfig(ctx context.Context, merchantId string, webhookId string) WebhooksMerchantLevelApiGetWebhookConfig {
-	return WebhooksMerchantLevelApiGetWebhookConfig{
-		ctx:        ctx,
-		merchantId: merchantId,
-		webhookId:  webhookId,
-	}
-}
-
-/*
-Get a webhook
-Returns the configuration for the webhook identified in the path.  To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Webhooks read * Management API—Webhooks read and write
- * @param merchantId The unique identifier of the merchant account.
- * @param webhookId Unique identifier of the webhook configuration.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return Webhook
-*/
-
-func (a *WebhooksMerchantLevelApi) GetWebhook(r WebhooksMerchantLevelApiGetWebhookConfig) (Webhook, *_nethttp.Response, error) {
+func (a *WebhooksMerchantLevelApi) GetWebhook(ctx context.Context, r WebhooksMerchantLevelApiGetWebhookInput) (Webhook, *http.Response, error) {
 	res := &Webhook{}
 	path := "/merchants/{merchantId}/webhooks/{webhookId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"webhookId"+"}", url.PathEscape(common.ParameterValueToString(r.webhookId, "webhookId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type WebhooksMerchantLevelApiListAllWebhooksConfig struct {
-	ctx        context.Context
+// All parameters accepted by WebhooksMerchantLevelApi.ListAllWebhooks
+type WebhooksMerchantLevelApiListAllWebhooksInput struct {
 	merchantId string
 	pageNumber *int32
 	pageSize   *int32
 }
 
 // The number of the page to fetch.
-func (r WebhooksMerchantLevelApiListAllWebhooksConfig) PageNumber(pageNumber int32) WebhooksMerchantLevelApiListAllWebhooksConfig {
+func (r WebhooksMerchantLevelApiListAllWebhooksInput) PageNumber(pageNumber int32) WebhooksMerchantLevelApiListAllWebhooksInput {
 	r.pageNumber = &pageNumber
 	return r
 }
 
 // The number of items to have on a page, maximum 100. The default is 10 items on a page.
-func (r WebhooksMerchantLevelApiListAllWebhooksConfig) PageSize(pageSize int32) WebhooksMerchantLevelApiListAllWebhooksConfig {
+func (r WebhooksMerchantLevelApiListAllWebhooksInput) PageSize(pageSize int32) WebhooksMerchantLevelApiListAllWebhooksInput {
 	r.pageSize = &pageSize
 	return r
+}
+
+/*
+Prepare a request for ListAllWebhooks
+@param merchantId The unique identifier of the merchant account.
+@return WebhooksMerchantLevelApiListAllWebhooksInput
+*/
+func (a *WebhooksMerchantLevelApi) ListAllWebhooksInput(merchantId string) WebhooksMerchantLevelApiListAllWebhooksInput {
+	return WebhooksMerchantLevelApiListAllWebhooksInput{
+		merchantId: merchantId,
+	}
 }
 
 /*
@@ -140,44 +162,52 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Webhooks read
 * Management API—Webhooks read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param merchantId The unique identifier of the merchant account.
- @return WebhooksMerchantLevelApiListAllWebhooksConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r WebhooksMerchantLevelApiListAllWebhooksInput - Request parameters, see ListAllWebhooksInput
+@return ListWebhooksResponse, *http.Response, error
 */
-func (a *WebhooksMerchantLevelApi) ListAllWebhooksConfig(ctx context.Context, merchantId string) WebhooksMerchantLevelApiListAllWebhooksConfig {
-	return WebhooksMerchantLevelApiListAllWebhooksConfig{
-		ctx:        ctx,
-		merchantId: merchantId,
-	}
-}
-
-/*
-List all webhooks
-Lists all webhook configurations for the merchant account.  To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Webhooks read * Management API—Webhooks read and write
- * @param merchantId The unique identifier of the merchant account.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return ListWebhooksResponse
-*/
-
-func (a *WebhooksMerchantLevelApi) ListAllWebhooks(r WebhooksMerchantLevelApiListAllWebhooksConfig) (ListWebhooksResponse, *_nethttp.Response, error) {
+func (a *WebhooksMerchantLevelApi) ListAllWebhooks(ctx context.Context, r WebhooksMerchantLevelApiListAllWebhooksInput) (ListWebhooksResponse, *http.Response, error) {
 	res := &ListWebhooksResponse{}
 	path := "/merchants/{merchantId}/webhooks"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
-	queryString := url.Values{}
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
 	if r.pageNumber != nil {
-		common.ParameterAddToQuery(queryString, "pageNumber", r.pageNumber, "")
+		common.ParameterAddToQuery(queryParams, "pageNumber", r.pageNumber, "")
 	}
 	if r.pageSize != nil {
-		common.ParameterAddToQuery(queryString, "pageSize", r.pageSize, "")
+		common.ParameterAddToQuery(queryParams, "pageSize", r.pageSize, "")
 	}
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path+"?"+queryString.Encode(), []_context.Context{r.ctx})
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type WebhooksMerchantLevelApiRemoveWebhookConfig struct {
-	ctx        context.Context
+// All parameters accepted by WebhooksMerchantLevelApi.RemoveWebhook
+type WebhooksMerchantLevelApiRemoveWebhookInput struct {
 	merchantId string
 	webhookId  string
+}
+
+/*
+Prepare a request for RemoveWebhook
+@param merchantId The unique identifier of the merchant account.@param webhookId Unique identifier of the webhook configuration.
+@return WebhooksMerchantLevelApiRemoveWebhookInput
+*/
+func (a *WebhooksMerchantLevelApi) RemoveWebhookInput(merchantId string, webhookId string) WebhooksMerchantLevelApiRemoveWebhookInput {
+	return WebhooksMerchantLevelApiRemoveWebhookInput{
+		merchantId: merchantId,
+		webhookId:  webhookId,
+	}
 }
 
 /*
@@ -188,45 +218,51 @@ Remove the configuration for the webhook identified in the path.
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Webhooks read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param merchantId The unique identifier of the merchant account.
- @param webhookId Unique identifier of the webhook configuration.
- @return WebhooksMerchantLevelApiRemoveWebhookConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r WebhooksMerchantLevelApiRemoveWebhookInput - Request parameters, see RemoveWebhookInput
+@return , *http.Response, error
 */
-func (a *WebhooksMerchantLevelApi) RemoveWebhookConfig(ctx context.Context, merchantId string, webhookId string) WebhooksMerchantLevelApiRemoveWebhookConfig {
-	return WebhooksMerchantLevelApiRemoveWebhookConfig{
-		ctx:        ctx,
-		merchantId: merchantId,
-		webhookId:  webhookId,
-	}
-}
-
-/*
-Remove a webhook
-Remove the configuration for the webhook identified in the path.  To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Webhooks read and write
- * @param merchantId The unique identifier of the merchant account.
- * @param webhookId Unique identifier of the webhook configuration.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-*/
-
-func (a *WebhooksMerchantLevelApi) RemoveWebhook(r WebhooksMerchantLevelApiRemoveWebhookConfig) (*_nethttp.Response, error) {
+func (a *WebhooksMerchantLevelApi) RemoveWebhook(ctx context.Context, r WebhooksMerchantLevelApiRemoveWebhookInput) (*http.Response, error) {
 	var res interface{}
 	path := "/merchants/{merchantId}/webhooks/{webhookId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"webhookId"+"}", url.PathEscape(common.ParameterValueToString(r.webhookId, "webhookId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodDelete, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodDelete,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return httpRes, err
 }
 
-type WebhooksMerchantLevelApiSetUpWebhookConfig struct {
-	ctx                          context.Context
+// All parameters accepted by WebhooksMerchantLevelApi.SetUpWebhook
+type WebhooksMerchantLevelApiSetUpWebhookInput struct {
 	merchantId                   string
 	createMerchantWebhookRequest *CreateMerchantWebhookRequest
 }
 
-func (r WebhooksMerchantLevelApiSetUpWebhookConfig) CreateMerchantWebhookRequest(createMerchantWebhookRequest CreateMerchantWebhookRequest) WebhooksMerchantLevelApiSetUpWebhookConfig {
+func (r WebhooksMerchantLevelApiSetUpWebhookInput) CreateMerchantWebhookRequest(createMerchantWebhookRequest CreateMerchantWebhookRequest) WebhooksMerchantLevelApiSetUpWebhookInput {
 	r.createMerchantWebhookRequest = &createMerchantWebhookRequest
 	return r
+}
+
+/*
+Prepare a request for SetUpWebhook
+@param merchantId The unique identifier of the merchant account.
+@return WebhooksMerchantLevelApiSetUpWebhookInput
+*/
+func (a *WebhooksMerchantLevelApi) SetUpWebhookInput(merchantId string) WebhooksMerchantLevelApiSetUpWebhookInput {
+	return WebhooksMerchantLevelApiSetUpWebhookInput{
+		merchantId: merchantId,
+	}
 }
 
 /*
@@ -237,44 +273,52 @@ Subscribe to receive webhook notifications about events related to your merchant
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Webhooks read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param merchantId The unique identifier of the merchant account.
- @return WebhooksMerchantLevelApiSetUpWebhookConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r WebhooksMerchantLevelApiSetUpWebhookInput - Request parameters, see SetUpWebhookInput
+@return Webhook, *http.Response, error
 */
-func (a *WebhooksMerchantLevelApi) SetUpWebhookConfig(ctx context.Context, merchantId string) WebhooksMerchantLevelApiSetUpWebhookConfig {
-	return WebhooksMerchantLevelApiSetUpWebhookConfig{
-		ctx:        ctx,
-		merchantId: merchantId,
-	}
-}
-
-/*
-Set up a webhook
-Subscribe to receive webhook notifications about events related to your merchant account. You can add basic authentication to make sure the data is secure.  To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Webhooks read and write
- * @param merchantId The unique identifier of the merchant account.
- * @param req CreateMerchantWebhookRequest - reference of CreateMerchantWebhookRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return Webhook
-*/
-
-func (a *WebhooksMerchantLevelApi) SetUpWebhook(r WebhooksMerchantLevelApiSetUpWebhookConfig) (Webhook, *_nethttp.Response, error) {
+func (a *WebhooksMerchantLevelApi) SetUpWebhook(ctx context.Context, r WebhooksMerchantLevelApiSetUpWebhookInput) (Webhook, *http.Response, error) {
 	res := &Webhook{}
 	path := "/merchants/{merchantId}/webhooks"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPost, r.createMerchantWebhookRequest, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.createMerchantWebhookRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type WebhooksMerchantLevelApiTestWebhookConfig struct {
-	ctx                context.Context
+// All parameters accepted by WebhooksMerchantLevelApi.TestWebhook
+type WebhooksMerchantLevelApiTestWebhookInput struct {
 	merchantId         string
 	webhookId          string
 	testWebhookRequest *TestWebhookRequest
 }
 
-func (r WebhooksMerchantLevelApiTestWebhookConfig) TestWebhookRequest(testWebhookRequest TestWebhookRequest) WebhooksMerchantLevelApiTestWebhookConfig {
+func (r WebhooksMerchantLevelApiTestWebhookInput) TestWebhookRequest(testWebhookRequest TestWebhookRequest) WebhooksMerchantLevelApiTestWebhookInput {
 	r.testWebhookRequest = &testWebhookRequest
 	return r
+}
+
+/*
+Prepare a request for TestWebhook
+@param merchantId The unique identifier of the merchant account.@param webhookId Unique identifier of the webhook configuration.
+@return WebhooksMerchantLevelApiTestWebhookInput
+*/
+func (a *WebhooksMerchantLevelApi) TestWebhookInput(merchantId string, webhookId string) WebhooksMerchantLevelApiTestWebhookInput {
+	return WebhooksMerchantLevelApiTestWebhookInput{
+		merchantId: merchantId,
+		webhookId:  webhookId,
+	}
 }
 
 /*
@@ -289,48 +333,53 @@ The response describes the result of the test. The `status` field tells you if t
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Webhooks read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param merchantId The unique identifier of the merchant account.
- @param webhookId Unique identifier of the webhook configuration.
- @return WebhooksMerchantLevelApiTestWebhookConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r WebhooksMerchantLevelApiTestWebhookInput - Request parameters, see TestWebhookInput
+@return TestWebhookResponse, *http.Response, error
 */
-func (a *WebhooksMerchantLevelApi) TestWebhookConfig(ctx context.Context, merchantId string, webhookId string) WebhooksMerchantLevelApiTestWebhookConfig {
-	return WebhooksMerchantLevelApiTestWebhookConfig{
-		ctx:        ctx,
-		merchantId: merchantId,
-		webhookId:  webhookId,
-	}
-}
-
-/*
-Test a webhook
-Sends sample notifications to test if the webhook is set up correctly.  We send four test notifications for each event code you choose. They cover success and failure scenarios for the hard-coded currencies EUR and GBP, regardless of the currencies configured in the merchant accounts. For custom notifications, we only send the specified custom notification.  The response describes the result of the test. The &#x60;status&#x60; field tells you if the test was successful or not. You can use the other fields to troubleshoot unsuccessful tests.  To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Webhooks read and write
- * @param merchantId The unique identifier of the merchant account.
- * @param webhookId Unique identifier of the webhook configuration.
- * @param req TestWebhookRequest - reference of TestWebhookRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return TestWebhookResponse
-*/
-
-func (a *WebhooksMerchantLevelApi) TestWebhook(r WebhooksMerchantLevelApiTestWebhookConfig) (TestWebhookResponse, *_nethttp.Response, error) {
+func (a *WebhooksMerchantLevelApi) TestWebhook(ctx context.Context, r WebhooksMerchantLevelApiTestWebhookInput) (TestWebhookResponse, *http.Response, error) {
 	res := &TestWebhookResponse{}
 	path := "/merchants/{merchantId}/webhooks/{webhookId}/test"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"webhookId"+"}", url.PathEscape(common.ParameterValueToString(r.webhookId, "webhookId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPost, r.testWebhookRequest, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.testWebhookRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type WebhooksMerchantLevelApiUpdateWebhookConfig struct {
-	ctx                          context.Context
+// All parameters accepted by WebhooksMerchantLevelApi.UpdateWebhook
+type WebhooksMerchantLevelApiUpdateWebhookInput struct {
 	merchantId                   string
 	webhookId                    string
 	updateMerchantWebhookRequest *UpdateMerchantWebhookRequest
 }
 
-func (r WebhooksMerchantLevelApiUpdateWebhookConfig) UpdateMerchantWebhookRequest(updateMerchantWebhookRequest UpdateMerchantWebhookRequest) WebhooksMerchantLevelApiUpdateWebhookConfig {
+func (r WebhooksMerchantLevelApiUpdateWebhookInput) UpdateMerchantWebhookRequest(updateMerchantWebhookRequest UpdateMerchantWebhookRequest) WebhooksMerchantLevelApiUpdateWebhookInput {
 	r.updateMerchantWebhookRequest = &updateMerchantWebhookRequest
 	return r
+}
+
+/*
+Prepare a request for UpdateWebhook
+@param merchantId The unique identifier of the merchant account.@param webhookId Unique identifier of the webhook configuration.
+@return WebhooksMerchantLevelApiUpdateWebhookInput
+*/
+func (a *WebhooksMerchantLevelApi) UpdateWebhookInput(merchantId string, webhookId string) WebhooksMerchantLevelApiUpdateWebhookInput {
+	return WebhooksMerchantLevelApiUpdateWebhookInput{
+		merchantId: merchantId,
+		webhookId:  webhookId,
+	}
 }
 
 /*
@@ -341,34 +390,27 @@ Make changes to the configuration of the webhook identified in the path. The req
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Webhooks read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param merchantId The unique identifier of the merchant account.
- @param webhookId Unique identifier of the webhook configuration.
- @return WebhooksMerchantLevelApiUpdateWebhookConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r WebhooksMerchantLevelApiUpdateWebhookInput - Request parameters, see UpdateWebhookInput
+@return Webhook, *http.Response, error
 */
-func (a *WebhooksMerchantLevelApi) UpdateWebhookConfig(ctx context.Context, merchantId string, webhookId string) WebhooksMerchantLevelApiUpdateWebhookConfig {
-	return WebhooksMerchantLevelApiUpdateWebhookConfig{
-		ctx:        ctx,
-		merchantId: merchantId,
-		webhookId:  webhookId,
-	}
-}
-
-/*
-Update a webhook
-Make changes to the configuration of the webhook identified in the path. The request contains the new values you want to have in the webhook configuration. The response contains the full configuration for the webhook, which includes the new values from the request.  To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Webhooks read and write
- * @param merchantId The unique identifier of the merchant account.
- * @param webhookId Unique identifier of the webhook configuration.
- * @param req UpdateMerchantWebhookRequest - reference of UpdateMerchantWebhookRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return Webhook
-*/
-
-func (a *WebhooksMerchantLevelApi) UpdateWebhook(r WebhooksMerchantLevelApiUpdateWebhookConfig) (Webhook, *_nethttp.Response, error) {
+func (a *WebhooksMerchantLevelApi) UpdateWebhook(ctx context.Context, r WebhooksMerchantLevelApiUpdateWebhookInput) (Webhook, *http.Response, error) {
 	res := &Webhook{}
 	path := "/merchants/{merchantId}/webhooks/{webhookId}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"webhookId"+"}", url.PathEscape(common.ParameterValueToString(r.webhookId, "webhookId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPatch, r.updateMerchantWebhookRequest, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.updateMerchantWebhookRequest,
+		res,
+		http.MethodPatch,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }

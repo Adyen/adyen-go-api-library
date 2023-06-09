@@ -10,25 +10,34 @@ package balanceplatform
 
 import (
 	"context"
-	_nethttp "net/http"
+	"net/http"
 	"net/url"
 	"strings"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// GrantOffersApi GrantOffersApi service
+// GrantOffersApi service
 type GrantOffersApi common.Service
 
-type GetAllAvailableGrantOffersConfig struct {
-	ctx             context.Context
+// All parameters accepted by GrantOffersApi.GetAllAvailableGrantOffers
+type GrantOffersApiGetAllAvailableGrantOffersInput struct {
 	accountHolderId *string
 }
 
 // The unique identifier of the grant account.
-func (r GetAllAvailableGrantOffersConfig) AccountHolderId(accountHolderId string) GetAllAvailableGrantOffersConfig {
+func (r GrantOffersApiGetAllAvailableGrantOffersInput) AccountHolderId(accountHolderId string) GrantOffersApiGetAllAvailableGrantOffersInput {
 	r.accountHolderId = &accountHolderId
 	return r
+}
+
+/*
+Prepare a request for GetAllAvailableGrantOffers
+
+@return GrantOffersApiGetAllAvailableGrantOffersInput
+*/
+func (a *GrantOffersApi) GetAllAvailableGrantOffersInput() GrantOffersApiGetAllAvailableGrantOffersInput {
+	return GrantOffersApiGetAllAvailableGrantOffersInput{}
 }
 
 /*
@@ -36,36 +45,46 @@ GetAllAvailableGrantOffers Get all available grant offers
 
 Returns a list of all [grant offers](https://docs.adyen.com/marketplaces-and-platforms/capital#grant-offers) available for `accountHolderId` specified as a query parameter.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return GetAllAvailableGrantOffersConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r GrantOffersApiGetAllAvailableGrantOffersInput - Request parameters, see GetAllAvailableGrantOffersInput
+@return GrantOffers, *http.Response, error
 */
-func (a *GrantOffersApi) GetAllAvailableGrantOffersConfig(ctx context.Context) GetAllAvailableGrantOffersConfig {
-	return GetAllAvailableGrantOffersConfig{
-		ctx: ctx,
-	}
-}
-
-/*
-Get all available grant offers
-Returns a list of all [grant offers](https://docs.adyen.com/marketplaces-and-platforms/capital#grant-offers) available for &#x60;accountHolderId&#x60; specified as a query parameter.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return GrantOffers
-*/
-
-func (a *GrantOffersApi) GetAllAvailableGrantOffers(r GetAllAvailableGrantOffersConfig) (GrantOffers, *_nethttp.Response, error) {
+func (a *GrantOffersApi) GetAllAvailableGrantOffers(ctx context.Context, r GrantOffersApiGetAllAvailableGrantOffersInput) (GrantOffers, *http.Response, error) {
 	res := &GrantOffers{}
 	path := "/grantOffers"
-	queryString := url.Values{}
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
 	if r.accountHolderId != nil {
-		common.ParameterAddToQuery(queryString, "accountHolderId", r.accountHolderId, "")
+		common.ParameterAddToQuery(queryParams, "accountHolderId", r.accountHolderId, "")
 	}
-	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path+"?"+queryString.Encode(), r.ctx)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type GetGrantOfferConfig struct {
-	ctx          context.Context
+// All parameters accepted by GrantOffersApi.GetGrantOffer
+type GrantOffersApiGetGrantOfferInput struct {
 	grantOfferId string
+}
+
+/*
+Prepare a request for GetGrantOffer
+@param grantOfferId The unique identifier of the grant offer.
+@return GrantOffersApiGetGrantOfferInput
+*/
+func (a *GrantOffersApi) GetGrantOfferInput(grantOfferId string) GrantOffersApiGetGrantOfferInput {
+	return GrantOffersApiGetGrantOfferInput{
+		grantOfferId: grantOfferId,
+	}
 }
 
 /*
@@ -73,29 +92,26 @@ GetGrantOffer Get a grant offer
 
 Returns the details of a single grant offer.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param grantOfferId The unique identifier of the grant offer.
- @return GetGrantOfferConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r GrantOffersApiGetGrantOfferInput - Request parameters, see GetGrantOfferInput
+@return GrantOffer, *http.Response, error
 */
-func (a *GrantOffersApi) GetGrantOfferConfig(ctx context.Context, grantOfferId string) GetGrantOfferConfig {
-	return GetGrantOfferConfig{
-		ctx:          ctx,
-		grantOfferId: grantOfferId,
-	}
-}
-
-/*
-Get a grant offer
-Returns the details of a single grant offer.
- * @param grantOfferId The unique identifier of the grant offer.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return GrantOffer
-*/
-
-func (a *GrantOffersApi) GetGrantOffer(r GetGrantOfferConfig) (GrantOffer, *_nethttp.Response, error) {
+func (a *GrantOffersApi) GetGrantOffer(ctx context.Context, r GrantOffersApiGetGrantOfferInput) (GrantOffer, *http.Response, error) {
 	res := &GrantOffer{}
 	path := "/grantOffers/{grantOfferId}"
 	path = strings.Replace(path, "{"+"grantOfferId"+"}", url.PathEscape(common.ParameterValueToString(r.grantOfferId, "grantOfferId")), -1)
-	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path, r.ctx)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }

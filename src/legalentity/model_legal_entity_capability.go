@@ -318,18 +318,30 @@ func (o LegalEntityCapability) MarshalJSON() ([]byte, error) {
 
 func (o LegalEntityCapability) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	// skip: allowed is readOnly
-	// skip: allowedLevel is readOnly
+	if !common.IsNil(o.Allowed) {
+		toSerialize["allowed"] = o.Allowed
+	}
+	if !common.IsNil(o.AllowedLevel) {
+		toSerialize["allowedLevel"] = o.AllowedLevel
+	}
 	if !common.IsNil(o.AllowedSettings) {
 		toSerialize["allowedSettings"] = o.AllowedSettings
 	}
-	// skip: requested is readOnly
-	// skip: requestedLevel is readOnly
+	if !common.IsNil(o.Requested) {
+		toSerialize["requested"] = o.Requested
+	}
+	if !common.IsNil(o.RequestedLevel) {
+		toSerialize["requestedLevel"] = o.RequestedLevel
+	}
 	if !common.IsNil(o.RequestedSettings) {
 		toSerialize["requestedSettings"] = o.RequestedSettings
 	}
-	// skip: transferInstruments is readOnly
-	// skip: verificationStatus is readOnly
+	if !common.IsNil(o.TransferInstruments) {
+		toSerialize["transferInstruments"] = o.TransferInstruments
+	}
+	if !common.IsNil(o.VerificationStatus) {
+		toSerialize["verificationStatus"] = o.VerificationStatus
+	}
 	return toSerialize, nil
 }
 

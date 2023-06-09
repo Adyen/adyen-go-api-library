@@ -119,7 +119,9 @@ func (o WebData) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.WebAddress) {
 		toSerialize["webAddress"] = o.WebAddress
 	}
-	// skip: webAddressId is readOnly
+	if !common.IsNil(o.WebAddressId) {
+		toSerialize["webAddressId"] = o.WebAddressId
+	}
 	return toSerialize, nil
 }
 

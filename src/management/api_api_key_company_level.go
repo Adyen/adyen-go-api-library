@@ -10,21 +10,32 @@ package management
 
 import (
 	"context"
-	_context "context"
-	_nethttp "net/http"
+	"net/http"
 	"net/url"
 	"strings"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// APIKeyCompanyLevelApi APIKeyCompanyLevelApi service
+// APIKeyCompanyLevelApi service
 type APIKeyCompanyLevelApi common.Service
 
-type APIKeyCompanyLevelApiGenerateNewApiKeyConfig struct {
-	ctx             context.Context
+// All parameters accepted by APIKeyCompanyLevelApi.GenerateNewApiKey
+type APIKeyCompanyLevelApiGenerateNewApiKeyInput struct {
 	companyId       string
 	apiCredentialId string
+}
+
+/*
+Prepare a request for GenerateNewApiKey
+@param companyId The unique identifier of the company account.@param apiCredentialId Unique identifier of the API credential.
+@return APIKeyCompanyLevelApiGenerateNewApiKeyInput
+*/
+func (a *APIKeyCompanyLevelApi) GenerateNewApiKeyInput(companyId string, apiCredentialId string) APIKeyCompanyLevelApiGenerateNewApiKeyInput {
+	return APIKeyCompanyLevelApiGenerateNewApiKeyInput{
+		companyId:       companyId,
+		apiCredentialId: apiCredentialId,
+	}
 }
 
 /*
@@ -35,33 +46,27 @@ Returns a new API key for the API credential. You can use the new API key a few 
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—API credentials read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param companyId The unique identifier of the company account.
- @param apiCredentialId Unique identifier of the API credential.
- @return APIKeyCompanyLevelApiGenerateNewApiKeyConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r APIKeyCompanyLevelApiGenerateNewApiKeyInput - Request parameters, see GenerateNewApiKeyInput
+@return GenerateApiKeyResponse, *http.Response, error
 */
-func (a *APIKeyCompanyLevelApi) GenerateNewApiKeyConfig(ctx context.Context, companyId string, apiCredentialId string) APIKeyCompanyLevelApiGenerateNewApiKeyConfig {
-	return APIKeyCompanyLevelApiGenerateNewApiKeyConfig{
-		ctx:             ctx,
-		companyId:       companyId,
-		apiCredentialId: apiCredentialId,
-	}
-}
-
-/*
-Generate new API key
-Returns a new API key for the API credential. You can use the new API key a few minutes after generating it. The old API key stops working 24 hours after generating a new one.  To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—API credentials read and write
- * @param companyId The unique identifier of the company account.
- * @param apiCredentialId Unique identifier of the API credential.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return GenerateApiKeyResponse
-*/
-
-func (a *APIKeyCompanyLevelApi) GenerateNewApiKey(r APIKeyCompanyLevelApiGenerateNewApiKeyConfig) (GenerateApiKeyResponse, *_nethttp.Response, error) {
+func (a *APIKeyCompanyLevelApi) GenerateNewApiKey(ctx context.Context, r APIKeyCompanyLevelApiGenerateNewApiKeyInput) (GenerateApiKeyResponse, *http.Response, error) {
 	res := &GenerateApiKeyResponse{}
 	path := "/companies/{companyId}/apiCredentials/{apiCredentialId}/generateApiKey"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
 	path = strings.Replace(path, "{"+"apiCredentialId"+"}", url.PathEscape(common.ParameterValueToString(r.apiCredentialId, "apiCredentialId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPost, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }

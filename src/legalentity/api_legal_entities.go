@@ -10,20 +10,30 @@ package legalentity
 
 import (
 	"context"
-	_context "context"
-	_nethttp "net/http"
+	"net/http"
 	"net/url"
 	"strings"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// LegalEntitiesApi LegalEntitiesApi service
+// LegalEntitiesApi service
 type LegalEntitiesApi common.Service
 
-type LegalEntitiesApiCheckLegalEntitysVerificationErrorsConfig struct {
-	ctx context.Context
-	id  string
+// All parameters accepted by LegalEntitiesApi.CheckLegalEntitysVerificationErrors
+type LegalEntitiesApiCheckLegalEntitysVerificationErrorsInput struct {
+	id string
+}
+
+/*
+Prepare a request for CheckLegalEntitysVerificationErrors
+@param id The unique identifier of the legal entity.
+@return LegalEntitiesApiCheckLegalEntitysVerificationErrorsInput
+*/
+func (a *LegalEntitiesApi) CheckLegalEntitysVerificationErrorsInput(id string) LegalEntitiesApiCheckLegalEntitysVerificationErrorsInput {
+	return LegalEntitiesApiCheckLegalEntitysVerificationErrorsInput{
+		id: id,
+	}
 }
 
 /*
@@ -31,41 +41,47 @@ CheckLegalEntitysVerificationErrors Check a legal entity's verification errors
 
 Returns the verification errors for a legal entity and its supporting entities.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier of the legal entity.
- @return LegalEntitiesApiCheckLegalEntitysVerificationErrorsConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r LegalEntitiesApiCheckLegalEntitysVerificationErrorsInput - Request parameters, see CheckLegalEntitysVerificationErrorsInput
+@return VerificationErrors, *http.Response, error
 */
-func (a *LegalEntitiesApi) CheckLegalEntitysVerificationErrorsConfig(ctx context.Context, id string) LegalEntitiesApiCheckLegalEntitysVerificationErrorsConfig {
-	return LegalEntitiesApiCheckLegalEntitysVerificationErrorsConfig{
-		ctx: ctx,
-		id:  id,
-	}
-}
-
-/*
-Check a legal entity's verification errors
-Returns the verification errors for a legal entity and its supporting entities.
- * @param id The unique identifier of the legal entity.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return VerificationErrors
-*/
-
-func (a *LegalEntitiesApi) CheckLegalEntitysVerificationErrors(r LegalEntitiesApiCheckLegalEntitysVerificationErrorsConfig) (VerificationErrors, *_nethttp.Response, error) {
+func (a *LegalEntitiesApi) CheckLegalEntitysVerificationErrors(ctx context.Context, r LegalEntitiesApiCheckLegalEntitysVerificationErrorsInput) (VerificationErrors, *http.Response, error) {
 	res := &VerificationErrors{}
 	path := "/legalEntities/{id}/checkVerificationErrors"
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPost, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type LegalEntitiesApiCreateLegalEntityConfig struct {
-	ctx                         context.Context
+// All parameters accepted by LegalEntitiesApi.CreateLegalEntity
+type LegalEntitiesApiCreateLegalEntityInput struct {
 	legalEntityInfoRequiredType *LegalEntityInfoRequiredType
 }
 
-func (r LegalEntitiesApiCreateLegalEntityConfig) LegalEntityInfoRequiredType(legalEntityInfoRequiredType LegalEntityInfoRequiredType) LegalEntitiesApiCreateLegalEntityConfig {
+func (r LegalEntitiesApiCreateLegalEntityInput) LegalEntityInfoRequiredType(legalEntityInfoRequiredType LegalEntityInfoRequiredType) LegalEntitiesApiCreateLegalEntityInput {
 	r.legalEntityInfoRequiredType = &legalEntityInfoRequiredType
 	return r
+}
+
+/*
+Prepare a request for CreateLegalEntity
+
+@return LegalEntitiesApiCreateLegalEntityInput
+*/
+func (a *LegalEntitiesApi) CreateLegalEntityInput() LegalEntitiesApiCreateLegalEntityInput {
+	return LegalEntitiesApiCreateLegalEntityInput{}
 }
 
 /*
@@ -77,33 +93,43 @@ This resource contains information about the user that will be onboarded in your
 
 
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return LegalEntitiesApiCreateLegalEntityConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r LegalEntitiesApiCreateLegalEntityInput - Request parameters, see CreateLegalEntityInput
+@return LegalEntity, *http.Response, error
 */
-func (a *LegalEntitiesApi) CreateLegalEntityConfig(ctx context.Context) LegalEntitiesApiCreateLegalEntityConfig {
-	return LegalEntitiesApiCreateLegalEntityConfig{
-		ctx: ctx,
-	}
-}
-
-/*
-Create a legal entity
-Creates a legal entity.   This resource contains information about the user that will be onboarded in your platform. Adyen uses this information to perform verification checks as required by payment industry regulations. Adyen informs you of the verification results through webhooks or API responses.
- * @param req LegalEntityInfoRequiredType - reference of LegalEntityInfoRequiredType).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return LegalEntity
-*/
-
-func (a *LegalEntitiesApi) CreateLegalEntity(r LegalEntitiesApiCreateLegalEntityConfig) (LegalEntity, *_nethttp.Response, error) {
+func (a *LegalEntitiesApi) CreateLegalEntity(ctx context.Context, r LegalEntitiesApiCreateLegalEntityInput) (LegalEntity, *http.Response, error) {
 	res := &LegalEntity{}
 	path := "/legalEntities"
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPost, r.legalEntityInfoRequiredType, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.legalEntityInfoRequiredType,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type LegalEntitiesApiGetAllBusinessLinesUnderLegalEntityConfig struct {
-	ctx context.Context
-	id  string
+// All parameters accepted by LegalEntitiesApi.GetAllBusinessLinesUnderLegalEntity
+type LegalEntitiesApiGetAllBusinessLinesUnderLegalEntityInput struct {
+	id string
+}
+
+/*
+Prepare a request for GetAllBusinessLinesUnderLegalEntity
+@param id The unique identifier of the legal entity.
+@return LegalEntitiesApiGetAllBusinessLinesUnderLegalEntityInput
+*/
+func (a *LegalEntitiesApi) GetAllBusinessLinesUnderLegalEntityInput(id string) LegalEntitiesApiGetAllBusinessLinesUnderLegalEntityInput {
+	return LegalEntitiesApiGetAllBusinessLinesUnderLegalEntityInput{
+		id: id,
+	}
 }
 
 /*
@@ -111,36 +137,44 @@ GetAllBusinessLinesUnderLegalEntity Get all business lines under a legal entity
 
 Returns the business lines owned by a legal entity.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier of the legal entity.
- @return LegalEntitiesApiGetAllBusinessLinesUnderLegalEntityConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r LegalEntitiesApiGetAllBusinessLinesUnderLegalEntityInput - Request parameters, see GetAllBusinessLinesUnderLegalEntityInput
+@return BusinessLines, *http.Response, error
 */
-func (a *LegalEntitiesApi) GetAllBusinessLinesUnderLegalEntityConfig(ctx context.Context, id string) LegalEntitiesApiGetAllBusinessLinesUnderLegalEntityConfig {
-	return LegalEntitiesApiGetAllBusinessLinesUnderLegalEntityConfig{
-		ctx: ctx,
-		id:  id,
-	}
-}
-
-/*
-Get all business lines under a legal entity
-Returns the business lines owned by a legal entity.
- * @param id The unique identifier of the legal entity.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return BusinessLines
-*/
-
-func (a *LegalEntitiesApi) GetAllBusinessLinesUnderLegalEntity(r LegalEntitiesApiGetAllBusinessLinesUnderLegalEntityConfig) (BusinessLines, *_nethttp.Response, error) {
+func (a *LegalEntitiesApi) GetAllBusinessLinesUnderLegalEntity(ctx context.Context, r LegalEntitiesApiGetAllBusinessLinesUnderLegalEntityInput) (BusinessLines, *http.Response, error) {
 	res := &BusinessLines{}
 	path := "/legalEntities/{id}/businessLines"
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type LegalEntitiesApiGetLegalEntityConfig struct {
-	ctx context.Context
-	id  string
+// All parameters accepted by LegalEntitiesApi.GetLegalEntity
+type LegalEntitiesApiGetLegalEntityInput struct {
+	id string
+}
+
+/*
+Prepare a request for GetLegalEntity
+@param id The unique identifier of the legal entity.
+@return LegalEntitiesApiGetLegalEntityInput
+*/
+func (a *LegalEntitiesApi) GetLegalEntityInput(id string) LegalEntitiesApiGetLegalEntityInput {
+	return LegalEntitiesApiGetLegalEntityInput{
+		id: id,
+	}
 }
 
 /*
@@ -148,42 +182,50 @@ GetLegalEntity Get a legal entity
 
 Returns a legal entity.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier of the legal entity.
- @return LegalEntitiesApiGetLegalEntityConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r LegalEntitiesApiGetLegalEntityInput - Request parameters, see GetLegalEntityInput
+@return LegalEntity, *http.Response, error
 */
-func (a *LegalEntitiesApi) GetLegalEntityConfig(ctx context.Context, id string) LegalEntitiesApiGetLegalEntityConfig {
-	return LegalEntitiesApiGetLegalEntityConfig{
-		ctx: ctx,
-		id:  id,
-	}
-}
-
-/*
-Get a legal entity
-Returns a legal entity.
- * @param id The unique identifier of the legal entity.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return LegalEntity
-*/
-
-func (a *LegalEntitiesApi) GetLegalEntity(r LegalEntitiesApiGetLegalEntityConfig) (LegalEntity, *_nethttp.Response, error) {
+func (a *LegalEntitiesApi) GetLegalEntity(ctx context.Context, r LegalEntitiesApiGetLegalEntityInput) (LegalEntity, *http.Response, error) {
 	res := &LegalEntity{}
 	path := "/legalEntities/{id}"
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type LegalEntitiesApiUpdateLegalEntityConfig struct {
-	ctx             context.Context
+// All parameters accepted by LegalEntitiesApi.UpdateLegalEntity
+type LegalEntitiesApiUpdateLegalEntityInput struct {
 	id              string
 	legalEntityInfo *LegalEntityInfo
 }
 
-func (r LegalEntitiesApiUpdateLegalEntityConfig) LegalEntityInfo(legalEntityInfo LegalEntityInfo) LegalEntitiesApiUpdateLegalEntityConfig {
+func (r LegalEntitiesApiUpdateLegalEntityInput) LegalEntityInfo(legalEntityInfo LegalEntityInfo) LegalEntitiesApiUpdateLegalEntityInput {
 	r.legalEntityInfo = &legalEntityInfo
 	return r
+}
+
+/*
+Prepare a request for UpdateLegalEntity
+@param id The unique identifier of the legal entity.
+@return LegalEntitiesApiUpdateLegalEntityInput
+*/
+func (a *LegalEntitiesApi) UpdateLegalEntityInput(id string) LegalEntitiesApiUpdateLegalEntityInput {
+	return LegalEntitiesApiUpdateLegalEntityInput{
+		id: id,
+	}
 }
 
 /*
@@ -193,30 +235,26 @@ Updates a legal entity.
 
  >To change the legal entity type, include only the new `type` in your request. To update the `entityAssociations` array, you need to replace the entire array. For example, if the array has 3 entries and you want to remove 1 entry, you need to PATCH the resource with the remaining 2 entries.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier of the legal entity.
- @return LegalEntitiesApiUpdateLegalEntityConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r LegalEntitiesApiUpdateLegalEntityInput - Request parameters, see UpdateLegalEntityInput
+@return LegalEntity, *http.Response, error
 */
-func (a *LegalEntitiesApi) UpdateLegalEntityConfig(ctx context.Context, id string) LegalEntitiesApiUpdateLegalEntityConfig {
-	return LegalEntitiesApiUpdateLegalEntityConfig{
-		ctx: ctx,
-		id:  id,
-	}
-}
-
-/*
-Update a legal entity
-Updates a legal entity.   &gt;To change the legal entity type, include only the new &#x60;type&#x60; in your request. To update the &#x60;entityAssociations&#x60; array, you need to replace the entire array. For example, if the array has 3 entries and you want to remove 1 entry, you need to PATCH the resource with the remaining 2 entries.
- * @param id The unique identifier of the legal entity.
- * @param req LegalEntityInfo - reference of LegalEntityInfo).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return LegalEntity
-*/
-
-func (a *LegalEntitiesApi) UpdateLegalEntity(r LegalEntitiesApiUpdateLegalEntityConfig) (LegalEntity, *_nethttp.Response, error) {
+func (a *LegalEntitiesApi) UpdateLegalEntity(ctx context.Context, r LegalEntitiesApiUpdateLegalEntityInput) (LegalEntity, *http.Response, error) {
 	res := &LegalEntity{}
 	path := "/legalEntities/{id}"
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPatch, r.legalEntityInfo, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.legalEntityInfo,
+		res,
+		http.MethodPatch,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }

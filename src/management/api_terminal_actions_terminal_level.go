@@ -10,23 +10,32 @@ package management
 
 import (
 	"context"
-	_context "context"
-	_nethttp "net/http"
+	"net/http"
+	"net/url"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// TerminalActionsTerminalLevelApi TerminalActionsTerminalLevelApi service
+// TerminalActionsTerminalLevelApi service
 type TerminalActionsTerminalLevelApi common.Service
 
-type TerminalActionsTerminalLevelApiCreateTerminalActionConfig struct {
-	ctx                            context.Context
+// All parameters accepted by TerminalActionsTerminalLevelApi.CreateTerminalAction
+type TerminalActionsTerminalLevelApiCreateTerminalActionInput struct {
 	scheduleTerminalActionsRequest *ScheduleTerminalActionsRequest
 }
 
-func (r TerminalActionsTerminalLevelApiCreateTerminalActionConfig) ScheduleTerminalActionsRequest(scheduleTerminalActionsRequest ScheduleTerminalActionsRequest) TerminalActionsTerminalLevelApiCreateTerminalActionConfig {
+func (r TerminalActionsTerminalLevelApiCreateTerminalActionInput) ScheduleTerminalActionsRequest(scheduleTerminalActionsRequest ScheduleTerminalActionsRequest) TerminalActionsTerminalLevelApiCreateTerminalActionInput {
 	r.scheduleTerminalActionsRequest = &scheduleTerminalActionsRequest
 	return r
+}
+
+/*
+Prepare a request for CreateTerminalAction
+
+@return TerminalActionsTerminalLevelApiCreateTerminalActionInput
+*/
+func (a *TerminalActionsTerminalLevelApi) CreateTerminalActionInput() TerminalActionsTerminalLevelApiCreateTerminalActionInput {
+	return TerminalActionsTerminalLevelApiCreateTerminalActionInput{}
 }
 
 /*
@@ -42,26 +51,25 @@ The following restrictions apply:
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Terminal actions read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return TerminalActionsTerminalLevelApiCreateTerminalActionConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r TerminalActionsTerminalLevelApiCreateTerminalActionInput - Request parameters, see CreateTerminalActionInput
+@return ScheduleTerminalActionsResponse, *http.Response, error
 */
-func (a *TerminalActionsTerminalLevelApi) CreateTerminalActionConfig(ctx context.Context) TerminalActionsTerminalLevelApiCreateTerminalActionConfig {
-	return TerminalActionsTerminalLevelApiCreateTerminalActionConfig{
-		ctx: ctx,
-	}
-}
-
-/*
-Create a terminal action
-Schedules a [terminal action](https://docs.adyen.com/point-of-sale/automating-terminal-management/terminal-actions-api) by specifying the action and the terminals that the action must be applied to.   The following restrictions apply: * You can schedule only one action at a time. For example, to install a new app version and remove an old app version, you have to make two API requests.  * The maximum number of terminals in a request is **100**. For example, to apply an action to 250 terminals, you have to divide the terminals over three API requests.  * If there is an error with one or more terminal IDs in the request, the action is scheduled for none of the terminals. You need to fix the error and try again.   To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal actions read and write
- * @param req ScheduleTerminalActionsRequest - reference of ScheduleTerminalActionsRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return ScheduleTerminalActionsResponse
-*/
-
-func (a *TerminalActionsTerminalLevelApi) CreateTerminalAction(r TerminalActionsTerminalLevelApiCreateTerminalActionConfig) (ScheduleTerminalActionsResponse, *_nethttp.Response, error) {
+func (a *TerminalActionsTerminalLevelApi) CreateTerminalAction(ctx context.Context, r TerminalActionsTerminalLevelApiCreateTerminalActionInput) (ScheduleTerminalActionsResponse, *http.Response, error) {
 	res := &ScheduleTerminalActionsResponse{}
 	path := "/terminals/scheduleActions"
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPost, r.scheduleTerminalActionsRequest, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.scheduleTerminalActionsRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }

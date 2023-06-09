@@ -238,13 +238,19 @@ func (o LegalEntityAssociation) MarshalJSON() ([]byte, error) {
 
 func (o LegalEntityAssociation) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	// skip: associatorId is readOnly
-	// skip: entityType is readOnly
+	if !common.IsNil(o.AssociatorId) {
+		toSerialize["associatorId"] = o.AssociatorId
+	}
+	if !common.IsNil(o.EntityType) {
+		toSerialize["entityType"] = o.EntityType
+	}
 	if !common.IsNil(o.JobTitle) {
 		toSerialize["jobTitle"] = o.JobTitle
 	}
 	toSerialize["legalEntityId"] = o.LegalEntityId
-	// skip: name is readOnly
+	if !common.IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
 	toSerialize["type"] = o.Type
 	return toSerialize, nil
 }

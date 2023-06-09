@@ -10,23 +10,32 @@ package payments
 
 import (
 	"context"
-	_nethttp "net/http"
+	"net/http"
 	"net/url"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// GeneralApi GeneralApi service
+// GeneralApi service
 type GeneralApi common.Service
 
-type GeneralApiAuthoriseConfig struct {
-	ctx            context.Context
+// All parameters accepted by GeneralApi.Authorise
+type GeneralApiAuthoriseInput struct {
 	paymentRequest *PaymentRequest
 }
 
-func (r GeneralApiAuthoriseConfig) PaymentRequest(paymentRequest PaymentRequest) GeneralApiAuthoriseConfig {
+func (r GeneralApiAuthoriseInput) PaymentRequest(paymentRequest PaymentRequest) GeneralApiAuthoriseInput {
 	r.paymentRequest = &paymentRequest
 	return r
+}
+
+/*
+Prepare a request for Authorise
+
+@return GeneralApiAuthoriseInput
+*/
+func (a *GeneralApi) AuthoriseInput() GeneralApiAuthoriseInput {
+	return GeneralApiAuthoriseInput{}
 }
 
 /*
@@ -35,34 +44,21 @@ Authorise Create an authorisation
 Creates a payment with a unique reference (`pspReference`) and attempts to obtain an authorisation hold. For cards, this amount can be captured or cancelled later. Non-card payment methods typically don't support this and will automatically capture as part of the authorisation.
 > This endpoint is part of our [classic API integration](https://docs.adyen.com/online-payments/classic-integrations/api-integration-ecommerce). If using a [newer integration](https://docs.adyen.com/online-payments), use the [`/payments`](https://docs.adyen.com/api-explorer/#/CheckoutService/payments) endpoint under Checkout API instead.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return GeneralApiAuthoriseConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r GeneralApiAuthoriseInput - Request parameters, see AuthoriseInput
+@return PaymentResult, *http.Response, error
 */
-func (a *GeneralApi) AuthoriseConfig(ctx context.Context) GeneralApiAuthoriseConfig {
-	return GeneralApiAuthoriseConfig{
-		ctx: ctx,
-	}
-}
-
-/*
-Create an authorisation
-Creates a payment with a unique reference (&#x60;pspReference&#x60;) and attempts to obtain an authorisation hold. For cards, this amount can be captured or cancelled later. Non-card payment methods typically don&#39;t support this and will automatically capture as part of the authorisation. &gt; This endpoint is part of our [classic API integration](https://docs.adyen.com/online-payments/classic-integrations/api-integration-ecommerce). If using a [newer integration](https://docs.adyen.com/online-payments), use the [&#x60;/payments&#x60;](https://docs.adyen.com/api-explorer/#/CheckoutService/payments) endpoint under Checkout API instead.
- * @param req PaymentRequest - reference of PaymentRequest).
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return PaymentResult
-*/
-
-func (a *GeneralApi) Authorise(r GeneralApiAuthoriseConfig) (PaymentResult, *_nethttp.Response, error) {
+func (a *GeneralApi) Authorise(ctx context.Context, r GeneralApiAuthoriseInput) (PaymentResult, *http.Response, error) {
 	res := &PaymentResult{}
 	path := "/authorise"
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		r.paymentRequest,
 		res,
-		_nethttp.MethodPost,
+		http.MethodPost,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
@@ -71,14 +67,23 @@ func (a *GeneralApi) Authorise(r GeneralApiAuthoriseConfig) (PaymentResult, *_ne
 	return *res, httpRes, err
 }
 
-type GeneralApiAuthorise3dConfig struct {
-	ctx              context.Context
+// All parameters accepted by GeneralApi.Authorise3d
+type GeneralApiAuthorise3dInput struct {
 	paymentRequest3d *PaymentRequest3d
 }
 
-func (r GeneralApiAuthorise3dConfig) PaymentRequest3d(paymentRequest3d PaymentRequest3d) GeneralApiAuthorise3dConfig {
+func (r GeneralApiAuthorise3dInput) PaymentRequest3d(paymentRequest3d PaymentRequest3d) GeneralApiAuthorise3dInput {
 	r.paymentRequest3d = &paymentRequest3d
 	return r
+}
+
+/*
+Prepare a request for Authorise3d
+
+@return GeneralApiAuthorise3dInput
+*/
+func (a *GeneralApi) Authorise3dInput() GeneralApiAuthorise3dInput {
+	return GeneralApiAuthorise3dInput{}
 }
 
 /*
@@ -88,34 +93,21 @@ For an authenticated 3D Secure session, completes the payment authorisation. Thi
 
 > This endpoint is part of our [classic API integration](https://docs.adyen.com/online-payments/classic-integrations/api-integration-ecommerce/3d-secure). If using a [newer integration](https://docs.adyen.com/online-payments), use the [`/payments/details`](https://docs.adyen.com/api-explorer/#/CheckoutService/payments/details) endpoint under Checkout API instead.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return GeneralApiAuthorise3dConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r GeneralApiAuthorise3dInput - Request parameters, see Authorise3dInput
+@return PaymentResult, *http.Response, error
 */
-func (a *GeneralApi) Authorise3dConfig(ctx context.Context) GeneralApiAuthorise3dConfig {
-	return GeneralApiAuthorise3dConfig{
-		ctx: ctx,
-	}
-}
-
-/*
-Complete a 3DS authorisation
-For an authenticated 3D Secure session, completes the payment authorisation. This endpoint must receive the &#x60;md&#x60; and &#x60;paResponse&#x60; parameters that you get from the card issuer after a shopper pays via 3D Secure.  &gt; This endpoint is part of our [classic API integration](https://docs.adyen.com/online-payments/classic-integrations/api-integration-ecommerce/3d-secure). If using a [newer integration](https://docs.adyen.com/online-payments), use the [&#x60;/payments/details&#x60;](https://docs.adyen.com/api-explorer/#/CheckoutService/payments/details) endpoint under Checkout API instead.
- * @param req PaymentRequest3d - reference of PaymentRequest3d).
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return PaymentResult
-*/
-
-func (a *GeneralApi) Authorise3d(r GeneralApiAuthorise3dConfig) (PaymentResult, *_nethttp.Response, error) {
+func (a *GeneralApi) Authorise3d(ctx context.Context, r GeneralApiAuthorise3dInput) (PaymentResult, *http.Response, error) {
 	res := &PaymentResult{}
 	path := "/authorise3d"
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		r.paymentRequest3d,
 		res,
-		_nethttp.MethodPost,
+		http.MethodPost,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
@@ -124,14 +116,23 @@ func (a *GeneralApi) Authorise3d(r GeneralApiAuthorise3dConfig) (PaymentResult, 
 	return *res, httpRes, err
 }
 
-type GeneralApiAuthorise3ds2Config struct {
-	ctx                context.Context
+// All parameters accepted by GeneralApi.Authorise3ds2
+type GeneralApiAuthorise3ds2Input struct {
 	paymentRequest3ds2 *PaymentRequest3ds2
 }
 
-func (r GeneralApiAuthorise3ds2Config) PaymentRequest3ds2(paymentRequest3ds2 PaymentRequest3ds2) GeneralApiAuthorise3ds2Config {
+func (r GeneralApiAuthorise3ds2Input) PaymentRequest3ds2(paymentRequest3ds2 PaymentRequest3ds2) GeneralApiAuthorise3ds2Input {
 	r.paymentRequest3ds2 = &paymentRequest3ds2
 	return r
+}
+
+/*
+Prepare a request for Authorise3ds2
+
+@return GeneralApiAuthorise3ds2Input
+*/
+func (a *GeneralApi) Authorise3ds2Input() GeneralApiAuthorise3ds2Input {
+	return GeneralApiAuthorise3ds2Input{}
 }
 
 /*
@@ -141,34 +142,21 @@ For an authenticated 3D Secure 2 session, completes the payment authorisation. T
 
 > This endpoint is part of our [classic API integration](https://docs.adyen.com/online-payments/classic-integrations/api-integration-ecommerce/3d-secure). If using a [newer integration](https://docs.adyen.com/online-payments), use the [`/payments/details`](https://docs.adyen.com/api-explorer/#/CheckoutService/payments/details) endpoint under Checkout API instead.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return GeneralApiAuthorise3ds2Config
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r GeneralApiAuthorise3ds2Input - Request parameters, see Authorise3ds2Input
+@return PaymentResult, *http.Response, error
 */
-func (a *GeneralApi) Authorise3ds2Config(ctx context.Context) GeneralApiAuthorise3ds2Config {
-	return GeneralApiAuthorise3ds2Config{
-		ctx: ctx,
-	}
-}
-
-/*
-Complete a 3DS2 authorisation
-For an authenticated 3D Secure 2 session, completes the payment authorisation. This endpoint must receive the &#x60;threeDS2Token&#x60; and &#x60;threeDS2Result&#x60; parameters.  &gt; This endpoint is part of our [classic API integration](https://docs.adyen.com/online-payments/classic-integrations/api-integration-ecommerce/3d-secure). If using a [newer integration](https://docs.adyen.com/online-payments), use the [&#x60;/payments/details&#x60;](https://docs.adyen.com/api-explorer/#/CheckoutService/payments/details) endpoint under Checkout API instead.
- * @param req PaymentRequest3ds2 - reference of PaymentRequest3ds2).
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return PaymentResult
-*/
-
-func (a *GeneralApi) Authorise3ds2(r GeneralApiAuthorise3ds2Config) (PaymentResult, *_nethttp.Response, error) {
+func (a *GeneralApi) Authorise3ds2(ctx context.Context, r GeneralApiAuthorise3ds2Input) (PaymentResult, *http.Response, error) {
 	res := &PaymentResult{}
 	path := "/authorise3ds2"
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		r.paymentRequest3ds2,
 		res,
-		_nethttp.MethodPost,
+		http.MethodPost,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
@@ -177,14 +165,23 @@ func (a *GeneralApi) Authorise3ds2(r GeneralApiAuthorise3ds2Config) (PaymentResu
 	return *res, httpRes, err
 }
 
-type GeneralApiGetAuthenticationResultConfig struct {
-	ctx                         context.Context
+// All parameters accepted by GeneralApi.GetAuthenticationResult
+type GeneralApiGetAuthenticationResultInput struct {
 	authenticationResultRequest *AuthenticationResultRequest
 }
 
-func (r GeneralApiGetAuthenticationResultConfig) AuthenticationResultRequest(authenticationResultRequest AuthenticationResultRequest) GeneralApiGetAuthenticationResultConfig {
+func (r GeneralApiGetAuthenticationResultInput) AuthenticationResultRequest(authenticationResultRequest AuthenticationResultRequest) GeneralApiGetAuthenticationResultInput {
 	r.authenticationResultRequest = &authenticationResultRequest
 	return r
+}
+
+/*
+Prepare a request for GetAuthenticationResult
+
+@return GeneralApiGetAuthenticationResultInput
+*/
+func (a *GeneralApi) GetAuthenticationResultInput() GeneralApiGetAuthenticationResultInput {
+	return GeneralApiGetAuthenticationResultInput{}
 }
 
 /*
@@ -192,34 +189,21 @@ GetAuthenticationResult Get the 3DS authentication result
 
 Return the authentication result after doing a 3D Secure authentication only.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return GeneralApiGetAuthenticationResultConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r GeneralApiGetAuthenticationResultInput - Request parameters, see GetAuthenticationResultInput
+@return AuthenticationResultResponse, *http.Response, error
 */
-func (a *GeneralApi) GetAuthenticationResultConfig(ctx context.Context) GeneralApiGetAuthenticationResultConfig {
-	return GeneralApiGetAuthenticationResultConfig{
-		ctx: ctx,
-	}
-}
-
-/*
-Get the 3DS authentication result
-Return the authentication result after doing a 3D Secure authentication only.
- * @param req AuthenticationResultRequest - reference of AuthenticationResultRequest).
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return AuthenticationResultResponse
-*/
-
-func (a *GeneralApi) GetAuthenticationResult(r GeneralApiGetAuthenticationResultConfig) (AuthenticationResultResponse, *_nethttp.Response, error) {
+func (a *GeneralApi) GetAuthenticationResult(ctx context.Context, r GeneralApiGetAuthenticationResultInput) (AuthenticationResultResponse, *http.Response, error) {
 	res := &AuthenticationResultResponse{}
 	path := "/getAuthenticationResult"
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		r.authenticationResultRequest,
 		res,
-		_nethttp.MethodPost,
+		http.MethodPost,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
@@ -228,14 +212,23 @@ func (a *GeneralApi) GetAuthenticationResult(r GeneralApiGetAuthenticationResult
 	return *res, httpRes, err
 }
 
-type GeneralApiRetrieve3ds2ResultConfig struct {
-	ctx                   context.Context
+// All parameters accepted by GeneralApi.Retrieve3ds2Result
+type GeneralApiRetrieve3ds2ResultInput struct {
 	threeDS2ResultRequest *ThreeDS2ResultRequest
 }
 
-func (r GeneralApiRetrieve3ds2ResultConfig) ThreeDS2ResultRequest(threeDS2ResultRequest ThreeDS2ResultRequest) GeneralApiRetrieve3ds2ResultConfig {
+func (r GeneralApiRetrieve3ds2ResultInput) ThreeDS2ResultRequest(threeDS2ResultRequest ThreeDS2ResultRequest) GeneralApiRetrieve3ds2ResultInput {
 	r.threeDS2ResultRequest = &threeDS2ResultRequest
 	return r
+}
+
+/*
+Prepare a request for Retrieve3ds2Result
+
+@return GeneralApiRetrieve3ds2ResultInput
+*/
+func (a *GeneralApi) Retrieve3ds2ResultInput() GeneralApiRetrieve3ds2ResultInput {
+	return GeneralApiRetrieve3ds2ResultInput{}
 }
 
 /*
@@ -243,34 +236,21 @@ Retrieve3ds2Result Get the 3DS2 authentication result
 
 Retrieves the `threeDS2Result` after doing a 3D Secure 2 authentication only.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return GeneralApiRetrieve3ds2ResultConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r GeneralApiRetrieve3ds2ResultInput - Request parameters, see Retrieve3ds2ResultInput
+@return ThreeDS2ResultResponse, *http.Response, error
 */
-func (a *GeneralApi) Retrieve3ds2ResultConfig(ctx context.Context) GeneralApiRetrieve3ds2ResultConfig {
-	return GeneralApiRetrieve3ds2ResultConfig{
-		ctx: ctx,
-	}
-}
-
-/*
-Get the 3DS2 authentication result
-Retrieves the &#x60;threeDS2Result&#x60; after doing a 3D Secure 2 authentication only.
- * @param req ThreeDS2ResultRequest - reference of ThreeDS2ResultRequest).
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return ThreeDS2ResultResponse
-*/
-
-func (a *GeneralApi) Retrieve3ds2Result(r GeneralApiRetrieve3ds2ResultConfig) (ThreeDS2ResultResponse, *_nethttp.Response, error) {
+func (a *GeneralApi) Retrieve3ds2Result(ctx context.Context, r GeneralApiRetrieve3ds2ResultInput) (ThreeDS2ResultResponse, *http.Response, error) {
 	res := &ThreeDS2ResultResponse{}
 	path := "/retrieve3ds2Result"
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		r.threeDS2ResultRequest,
 		res,
-		_nethttp.MethodPost,
+		http.MethodPost,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,

@@ -10,19 +10,30 @@ package balanceplatform
 
 import (
 	"context"
-	_nethttp "net/http"
+	"net/http"
 	"net/url"
 	"strings"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// GrantAccountsApi GrantAccountsApi service
+// GrantAccountsApi service
 type GrantAccountsApi common.Service
 
-type GetGrantAccountConfig struct {
-	ctx context.Context
-	id  string
+// All parameters accepted by GrantAccountsApi.GetGrantAccount
+type GrantAccountsApiGetGrantAccountInput struct {
+	id string
+}
+
+/*
+Prepare a request for GetGrantAccount
+@param id The unique identifier of the grant account.
+@return GrantAccountsApiGetGrantAccountInput
+*/
+func (a *GrantAccountsApi) GetGrantAccountInput(id string) GrantAccountsApiGetGrantAccountInput {
+	return GrantAccountsApiGetGrantAccountInput{
+		id: id,
+	}
 }
 
 /*
@@ -30,29 +41,26 @@ GetGrantAccount Get a grant account
 
 Returns the details of the [grant account](https://docs.adyen.com/marketplaces-and-platforms/capital#grant-account).
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier of the grant account.
- @return GetGrantAccountConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r GrantAccountsApiGetGrantAccountInput - Request parameters, see GetGrantAccountInput
+@return CapitalGrantAccount, *http.Response, error
 */
-func (a *GrantAccountsApi) GetGrantAccountConfig(ctx context.Context, id string) GetGrantAccountConfig {
-	return GetGrantAccountConfig{
-		ctx: ctx,
-		id:  id,
-	}
-}
-
-/*
-Get a grant account
-Returns the details of the [grant account](https://docs.adyen.com/marketplaces-and-platforms/capital#grant-account).
- * @param id The unique identifier of the grant account.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return CapitalGrantAccount
-*/
-
-func (a *GrantAccountsApi) GetGrantAccount(r GetGrantAccountConfig) (CapitalGrantAccount, *_nethttp.Response, error) {
+func (a *GrantAccountsApi) GetGrantAccount(ctx context.Context, r GrantAccountsApiGetGrantAccountInput) (CapitalGrantAccount, *http.Response, error) {
 	res := &CapitalGrantAccount{}
 	path := "/grantAccounts/{id}"
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path, r.ctx)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }

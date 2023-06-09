@@ -276,7 +276,9 @@ func (o LegalEntityInfoRequiredType) MarshalJSON() ([]byte, error) {
 
 func (o LegalEntityInfoRequiredType) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	// skip: capabilities is readOnly
+	if !common.IsNil(o.Capabilities) {
+		toSerialize["capabilities"] = o.Capabilities
+	}
 	if !common.IsNil(o.EntityAssociations) {
 		toSerialize["entityAssociations"] = o.EntityAssociations
 	}

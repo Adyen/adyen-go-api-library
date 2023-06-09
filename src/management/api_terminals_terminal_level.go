@@ -10,18 +10,17 @@ package management
 
 import (
 	"context"
-	_context "context"
-	_nethttp "net/http"
+	"net/http"
 	"net/url"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// TerminalsTerminalLevelApi TerminalsTerminalLevelApi service
+// TerminalsTerminalLevelApi service
 type TerminalsTerminalLevelApi common.Service
 
-type TerminalsTerminalLevelApiListTerminalsConfig struct {
-	ctx         context.Context
+// All parameters accepted by TerminalsTerminalLevelApi.ListTerminals
+type TerminalsTerminalLevelApiListTerminalsInput struct {
 	searchQuery *string
 	countries   *string
 	merchantIds *string
@@ -32,45 +31,54 @@ type TerminalsTerminalLevelApiListTerminalsConfig struct {
 }
 
 // Returns terminals with an ID that contains the specified string. If present, other query parameters are ignored.
-func (r TerminalsTerminalLevelApiListTerminalsConfig) SearchQuery(searchQuery string) TerminalsTerminalLevelApiListTerminalsConfig {
+func (r TerminalsTerminalLevelApiListTerminalsInput) SearchQuery(searchQuery string) TerminalsTerminalLevelApiListTerminalsInput {
 	r.searchQuery = &searchQuery
 	return r
 }
 
 // Returns terminals located in the countries specified by their [two-letter country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
-func (r TerminalsTerminalLevelApiListTerminalsConfig) Countries(countries string) TerminalsTerminalLevelApiListTerminalsConfig {
+func (r TerminalsTerminalLevelApiListTerminalsInput) Countries(countries string) TerminalsTerminalLevelApiListTerminalsInput {
 	r.countries = &countries
 	return r
 }
 
 // Returns terminals that belong to the merchant accounts specified by their unique merchant account ID.
-func (r TerminalsTerminalLevelApiListTerminalsConfig) MerchantIds(merchantIds string) TerminalsTerminalLevelApiListTerminalsConfig {
+func (r TerminalsTerminalLevelApiListTerminalsInput) MerchantIds(merchantIds string) TerminalsTerminalLevelApiListTerminalsInput {
 	r.merchantIds = &merchantIds
 	return r
 }
 
 // Returns terminals that are assigned to the [stores](https://docs.adyen.com/api-explorer/#/ManagementService/latest/get/stores) specified by their unique store ID.
-func (r TerminalsTerminalLevelApiListTerminalsConfig) StoreIds(storeIds string) TerminalsTerminalLevelApiListTerminalsConfig {
+func (r TerminalsTerminalLevelApiListTerminalsInput) StoreIds(storeIds string) TerminalsTerminalLevelApiListTerminalsInput {
 	r.storeIds = &storeIds
 	return r
 }
 
 // Returns terminals of the [models](https://docs.adyen.com/api-explorer/#/ManagementService/latest/get/companies/{companyId}/terminalModels) specified in the format *brand.model*.
-func (r TerminalsTerminalLevelApiListTerminalsConfig) BrandModels(brandModels string) TerminalsTerminalLevelApiListTerminalsConfig {
+func (r TerminalsTerminalLevelApiListTerminalsInput) BrandModels(brandModels string) TerminalsTerminalLevelApiListTerminalsInput {
 	r.brandModels = &brandModels
 	return r
 }
 
 // The number of the page to fetch.
-func (r TerminalsTerminalLevelApiListTerminalsConfig) PageNumber(pageNumber int32) TerminalsTerminalLevelApiListTerminalsConfig {
+func (r TerminalsTerminalLevelApiListTerminalsInput) PageNumber(pageNumber int32) TerminalsTerminalLevelApiListTerminalsInput {
 	r.pageNumber = &pageNumber
 	return r
 }
 
 // The number of items to have on a page, maximum 100. The default is 20 items on a page.
-func (r TerminalsTerminalLevelApiListTerminalsConfig) PageSize(pageSize int32) TerminalsTerminalLevelApiListTerminalsConfig {
+func (r TerminalsTerminalLevelApiListTerminalsInput) PageSize(pageSize int32) TerminalsTerminalLevelApiListTerminalsInput {
 	r.pageSize = &pageSize
 	return r
+}
+
+/*
+Prepare a request for ListTerminals
+
+@return TerminalsTerminalLevelApiListTerminalsInput
+*/
+func (a *TerminalsTerminalLevelApi) ListTerminalsInput() TerminalsTerminalLevelApiListTerminalsInput {
+	return TerminalsTerminalLevelApiListTerminalsInput{}
 }
 
 /*
@@ -82,47 +90,46 @@ When using `searchQuery`, other query parameters are ignored.
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API — Terminal actions read
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return TerminalsTerminalLevelApiListTerminalsConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r TerminalsTerminalLevelApiListTerminalsInput - Request parameters, see ListTerminalsInput
+@return ListTerminalsResponse, *http.Response, error
 */
-func (a *TerminalsTerminalLevelApi) ListTerminalsConfig(ctx context.Context) TerminalsTerminalLevelApiListTerminalsConfig {
-	return TerminalsTerminalLevelApiListTerminalsConfig{
-		ctx: ctx,
-	}
-}
-
-/*
-Get a list of terminals
-Returns the payment terminals that the API credential has access to and that match the query parameters.  When using &#x60;searchQuery&#x60;, other query parameters are ignored.  To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API — Terminal actions read
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return ListTerminalsResponse
-*/
-
-func (a *TerminalsTerminalLevelApi) ListTerminals(r TerminalsTerminalLevelApiListTerminalsConfig) (ListTerminalsResponse, *_nethttp.Response, error) {
+func (a *TerminalsTerminalLevelApi) ListTerminals(ctx context.Context, r TerminalsTerminalLevelApiListTerminalsInput) (ListTerminalsResponse, *http.Response, error) {
 	res := &ListTerminalsResponse{}
 	path := "/terminals"
-	queryString := url.Values{}
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
 	if r.searchQuery != nil {
-		common.ParameterAddToQuery(queryString, "searchQuery", r.searchQuery, "")
+		common.ParameterAddToQuery(queryParams, "searchQuery", r.searchQuery, "")
 	}
 	if r.countries != nil {
-		common.ParameterAddToQuery(queryString, "countries", r.countries, "")
+		common.ParameterAddToQuery(queryParams, "countries", r.countries, "")
 	}
 	if r.merchantIds != nil {
-		common.ParameterAddToQuery(queryString, "merchantIds", r.merchantIds, "")
+		common.ParameterAddToQuery(queryParams, "merchantIds", r.merchantIds, "")
 	}
 	if r.storeIds != nil {
-		common.ParameterAddToQuery(queryString, "storeIds", r.storeIds, "")
+		common.ParameterAddToQuery(queryParams, "storeIds", r.storeIds, "")
 	}
 	if r.brandModels != nil {
-		common.ParameterAddToQuery(queryString, "brandModels", r.brandModels, "")
+		common.ParameterAddToQuery(queryParams, "brandModels", r.brandModels, "")
 	}
 	if r.pageNumber != nil {
-		common.ParameterAddToQuery(queryString, "pageNumber", r.pageNumber, "")
+		common.ParameterAddToQuery(queryParams, "pageNumber", r.pageNumber, "")
 	}
 	if r.pageSize != nil {
-		common.ParameterAddToQuery(queryString, "pageSize", r.pageSize, "")
+		common.ParameterAddToQuery(queryParams, "pageSize", r.pageSize, "")
 	}
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path+"?"+queryString.Encode(), []_context.Context{r.ctx})
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }

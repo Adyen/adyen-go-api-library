@@ -29,7 +29,7 @@ func Test_API_Modifications(t *testing.T) {
 	t.Run("API Modifications - Captures", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 			pspReference := "psp0001"
-			req := service.ModificationsApi.CaptureAuthorisedPaymentConfig(context.Background(), pspReference)
+			req := service.ModificationsApi.CaptureAuthorisedPaymentInput(pspReference)
 			req = req.CreatePaymentCaptureRequest(checkout.CreatePaymentCaptureRequest{
 				MerchantAccount: MerchantAccount,
 				Amount: checkout.Amount{
@@ -37,7 +37,7 @@ func Test_API_Modifications(t *testing.T) {
 					Currency: "EUR",
 				},
 			})
-			res, httpRes, err := service.ModificationsApi.CaptureAuthorisedPayment(req)
+			res, httpRes, err := service.ModificationsApi.CaptureAuthorisedPayment(context.Background(), req)
 
 			require.NotNil(t, err)
 			assert.Contains(t, err.Error(), "Original pspReference required for this operation")
@@ -49,13 +49,13 @@ func Test_API_Modifications(t *testing.T) {
 
 	t.Run("API Modifications - Cancels", func(t *testing.T) {
 		t.Run("Create an API request that should pass", func(t *testing.T) {
-			req := service.ModificationsApi.CancelAuthorisedPaymentConfig(context.Background())
+			req := service.ModificationsApi.CancelAuthorisedPaymentInput()
 			req = req.CreateStandalonePaymentCancelRequest(checkout.CreateStandalonePaymentCancelRequest{
 				MerchantAccount:  MerchantAccount,
 				PaymentReference: "paymentReference01",
 				Reference:        common.PtrString("reference01"),
 			})
-			res, httpRes, err := service.ModificationsApi.CancelAuthorisedPayment(req)
+			res, httpRes, err := service.ModificationsApi.CancelAuthorisedPayment(context.Background(), req)
 
 			require.Nil(t, err)
 			require.NotNil(t, httpRes)
@@ -65,13 +65,13 @@ func Test_API_Modifications(t *testing.T) {
 		})
 
 		t.Run("Create an API request that should fail", func(t *testing.T) {
-			req := service.ModificationsApi.CancelAuthorisedPaymentConfig(context.Background())
+			req := service.ModificationsApi.CancelAuthorisedPaymentInput()
 			req = req.CreateStandalonePaymentCancelRequest(checkout.CreateStandalonePaymentCancelRequest{
 				MerchantAccount:  MerchantAccount,
 				PaymentReference: "",
 				Reference:        common.PtrString("reference01"),
 			})
-			_, httpRes, err := service.ModificationsApi.CancelAuthorisedPayment(req)
+			_, httpRes, err := service.ModificationsApi.CancelAuthorisedPayment(context.Background(), req)
 
 			require.NotNil(t, err)
 			assert.Contains(t, err.Error(), "Required field 'paymentReference' is not provided.")
@@ -82,7 +82,7 @@ func Test_API_Modifications(t *testing.T) {
 	t.Run("API Modifications - Refunds", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 			pspReference := "psp0001"
-			req := service.ModificationsApi.RefundCapturedPaymentConfig(context.Background(), pspReference)
+			req := service.ModificationsApi.RefundCapturedPaymentInput(pspReference)
 			req = req.CreatePaymentRefundRequest(checkout.CreatePaymentRefundRequest{
 				MerchantAccount: MerchantAccount,
 				Reference:       common.PtrString("reference01"),
@@ -91,7 +91,7 @@ func Test_API_Modifications(t *testing.T) {
 					Currency: "EUR",
 				},
 			})
-			_, httpRes, err := service.ModificationsApi.RefundCapturedPayment(req)
+			_, httpRes, err := service.ModificationsApi.RefundCapturedPayment(context.Background(), req)
 
 			require.NotNil(t, err)
 			assert.Contains(t, err.Error(), "Original pspReference required")
@@ -102,12 +102,12 @@ func Test_API_Modifications(t *testing.T) {
 	t.Run("API Modifications - Reversals", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 			pspReference := "psp0001"
-			req := service.ModificationsApi.RefundOrCancelPaymentConfig(context.Background(), pspReference)
+			req := service.ModificationsApi.RefundOrCancelPaymentInput(pspReference)
 			req = req.CreatePaymentReversalRequest(checkout.CreatePaymentReversalRequest{
 				MerchantAccount: MerchantAccount,
 				Reference:       common.PtrString("reference01"),
 			})
-			_, httpRes, err := service.ModificationsApi.RefundOrCancelPayment(req)
+			_, httpRes, err := service.ModificationsApi.RefundOrCancelPayment(context.Background(), req)
 
 			require.NotNil(t, err)
 			assert.Contains(t, err.Error(), "Original pspReference required")

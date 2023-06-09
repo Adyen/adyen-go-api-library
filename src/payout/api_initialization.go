@@ -10,23 +10,32 @@ package payout
 
 import (
 	"context"
-	_nethttp "net/http"
+	"net/http"
 	"net/url"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// InitializationApi InitializationApi service
+// InitializationApi service
 type InitializationApi common.Service
 
-type InitializationApiStoreDetailConfig struct {
-	ctx                context.Context
+// All parameters accepted by InitializationApi.StoreDetail
+type InitializationApiStoreDetailInput struct {
 	storeDetailRequest *StoreDetailRequest
 }
 
-func (r InitializationApiStoreDetailConfig) StoreDetailRequest(storeDetailRequest StoreDetailRequest) InitializationApiStoreDetailConfig {
+func (r InitializationApiStoreDetailInput) StoreDetailRequest(storeDetailRequest StoreDetailRequest) InitializationApiStoreDetailInput {
 	r.storeDetailRequest = &storeDetailRequest
 	return r
+}
+
+/*
+Prepare a request for StoreDetail
+
+@return InitializationApiStoreDetailInput
+*/
+func (a *InitializationApi) StoreDetailInput() InitializationApiStoreDetailInput {
+	return InitializationApiStoreDetailInput{}
 }
 
 /*
@@ -34,34 +43,21 @@ StoreDetail Store payout details
 
 Stores payment details under the `PAYOUT` recurring contract. These payment details can be used later to submit a payout via the `/submitThirdParty` call.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return InitializationApiStoreDetailConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r InitializationApiStoreDetailInput - Request parameters, see StoreDetailInput
+@return StoreDetailResponse, *http.Response, error
 */
-func (a *InitializationApi) StoreDetailConfig(ctx context.Context) InitializationApiStoreDetailConfig {
-	return InitializationApiStoreDetailConfig{
-		ctx: ctx,
-	}
-}
-
-/*
-Store payout details
-Stores payment details under the &#x60;PAYOUT&#x60; recurring contract. These payment details can be used later to submit a payout via the &#x60;/submitThirdParty&#x60; call.
- * @param req StoreDetailRequest - reference of StoreDetailRequest).
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return StoreDetailResponse
-*/
-
-func (a *InitializationApi) StoreDetail(r InitializationApiStoreDetailConfig) (StoreDetailResponse, *_nethttp.Response, error) {
+func (a *InitializationApi) StoreDetail(ctx context.Context, r InitializationApiStoreDetailInput) (StoreDetailResponse, *http.Response, error) {
 	res := &StoreDetailResponse{}
 	path := "/storeDetail"
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		r.storeDetailRequest,
 		res,
-		_nethttp.MethodPost,
+		http.MethodPost,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
@@ -70,14 +66,23 @@ func (a *InitializationApi) StoreDetail(r InitializationApiStoreDetailConfig) (S
 	return *res, httpRes, err
 }
 
-type InitializationApiStoreDetailAndSubmitThirdPartyConfig struct {
-	ctx                         context.Context
+// All parameters accepted by InitializationApi.StoreDetailAndSubmitThirdParty
+type InitializationApiStoreDetailAndSubmitThirdPartyInput struct {
 	storeDetailAndSubmitRequest *StoreDetailAndSubmitRequest
 }
 
-func (r InitializationApiStoreDetailAndSubmitThirdPartyConfig) StoreDetailAndSubmitRequest(storeDetailAndSubmitRequest StoreDetailAndSubmitRequest) InitializationApiStoreDetailAndSubmitThirdPartyConfig {
+func (r InitializationApiStoreDetailAndSubmitThirdPartyInput) StoreDetailAndSubmitRequest(storeDetailAndSubmitRequest StoreDetailAndSubmitRequest) InitializationApiStoreDetailAndSubmitThirdPartyInput {
 	r.storeDetailAndSubmitRequest = &storeDetailAndSubmitRequest
 	return r
+}
+
+/*
+Prepare a request for StoreDetailAndSubmitThirdParty
+
+@return InitializationApiStoreDetailAndSubmitThirdPartyInput
+*/
+func (a *InitializationApi) StoreDetailAndSubmitThirdPartyInput() InitializationApiStoreDetailAndSubmitThirdPartyInput {
+	return InitializationApiStoreDetailAndSubmitThirdPartyInput{}
 }
 
 /*
@@ -87,34 +92,21 @@ Submits a payout and stores its details for subsequent payouts.
 
 The submitted payout must be confirmed or declined either by a reviewer or via `/confirmThirdParty` or `/declineThirdParty` calls.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return InitializationApiStoreDetailAndSubmitThirdPartyConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r InitializationApiStoreDetailAndSubmitThirdPartyInput - Request parameters, see StoreDetailAndSubmitThirdPartyInput
+@return StoreDetailAndSubmitResponse, *http.Response, error
 */
-func (a *InitializationApi) StoreDetailAndSubmitThirdPartyConfig(ctx context.Context) InitializationApiStoreDetailAndSubmitThirdPartyConfig {
-	return InitializationApiStoreDetailAndSubmitThirdPartyConfig{
-		ctx: ctx,
-	}
-}
-
-/*
-Store details and submit a payout
-Submits a payout and stores its details for subsequent payouts.  The submitted payout must be confirmed or declined either by a reviewer or via &#x60;/confirmThirdParty&#x60; or &#x60;/declineThirdParty&#x60; calls.
- * @param req StoreDetailAndSubmitRequest - reference of StoreDetailAndSubmitRequest).
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return StoreDetailAndSubmitResponse
-*/
-
-func (a *InitializationApi) StoreDetailAndSubmitThirdParty(r InitializationApiStoreDetailAndSubmitThirdPartyConfig) (StoreDetailAndSubmitResponse, *_nethttp.Response, error) {
+func (a *InitializationApi) StoreDetailAndSubmitThirdParty(ctx context.Context, r InitializationApiStoreDetailAndSubmitThirdPartyInput) (StoreDetailAndSubmitResponse, *http.Response, error) {
 	res := &StoreDetailAndSubmitResponse{}
 	path := "/storeDetailAndSubmitThirdParty"
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		r.storeDetailAndSubmitRequest,
 		res,
-		_nethttp.MethodPost,
+		http.MethodPost,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
@@ -123,14 +115,23 @@ func (a *InitializationApi) StoreDetailAndSubmitThirdParty(r InitializationApiSt
 	return *res, httpRes, err
 }
 
-type InitializationApiSubmitThirdPartyConfig struct {
-	ctx           context.Context
+// All parameters accepted by InitializationApi.SubmitThirdParty
+type InitializationApiSubmitThirdPartyInput struct {
 	submitRequest *SubmitRequest
 }
 
-func (r InitializationApiSubmitThirdPartyConfig) SubmitRequest(submitRequest SubmitRequest) InitializationApiSubmitThirdPartyConfig {
+func (r InitializationApiSubmitThirdPartyInput) SubmitRequest(submitRequest SubmitRequest) InitializationApiSubmitThirdPartyInput {
 	r.submitRequest = &submitRequest
 	return r
+}
+
+/*
+Prepare a request for SubmitThirdParty
+
+@return InitializationApiSubmitThirdPartyInput
+*/
+func (a *InitializationApi) SubmitThirdPartyInput() InitializationApiSubmitThirdPartyInput {
+	return InitializationApiSubmitThirdPartyInput{}
 }
 
 /*
@@ -140,34 +141,21 @@ Submits a payout using the previously stored payment details. To store payment d
 
 The submitted payout must be confirmed or declined either by a reviewer or via `/confirmThirdParty` or `/declineThirdParty` calls.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return InitializationApiSubmitThirdPartyConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r InitializationApiSubmitThirdPartyInput - Request parameters, see SubmitThirdPartyInput
+@return SubmitResponse, *http.Response, error
 */
-func (a *InitializationApi) SubmitThirdPartyConfig(ctx context.Context) InitializationApiSubmitThirdPartyConfig {
-	return InitializationApiSubmitThirdPartyConfig{
-		ctx: ctx,
-	}
-}
-
-/*
-Submit a payout
-Submits a payout using the previously stored payment details. To store payment details, use the &#x60;/storeDetail&#x60; API call.  The submitted payout must be confirmed or declined either by a reviewer or via &#x60;/confirmThirdParty&#x60; or &#x60;/declineThirdParty&#x60; calls.
- * @param req SubmitRequest - reference of SubmitRequest).
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return SubmitResponse
-*/
-
-func (a *InitializationApi) SubmitThirdParty(r InitializationApiSubmitThirdPartyConfig) (SubmitResponse, *_nethttp.Response, error) {
+func (a *InitializationApi) SubmitThirdParty(ctx context.Context, r InitializationApiSubmitThirdPartyInput) (SubmitResponse, *http.Response, error) {
 	res := &SubmitResponse{}
 	path := "/submitThirdParty"
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		r.submitRequest,
 		res,
-		_nethttp.MethodPost,
+		http.MethodPost,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,

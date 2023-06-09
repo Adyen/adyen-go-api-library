@@ -36,7 +36,7 @@ func Test_Disputes(t *testing.T) {
 		card.SetEncryptedExpiryYear("test_2030")
 		card.SetEncryptedSecurityCode("test_737")
 		card.SetHolderName("chargeback:10.4")
-		req := service.PaymentsApi.PaymentsConfig(context.Background()).PaymentRequest(checkout.PaymentRequest{
+		req := service.PaymentsApi.PaymentsInput().PaymentRequest(checkout.PaymentRequest{
 			Amount: checkout.Amount{
 				Currency: "EUR",
 				Value:    1000,
@@ -46,7 +46,7 @@ func Test_Disputes(t *testing.T) {
 			ReturnUrl:       "https://adyen.com",
 			MerchantAccount: MerchantAccount,
 		})
-		res, _, _ := service.PaymentsApi.Payments(req)
+		res, _, _ := service.PaymentsApi.Payments(context.Background(), req)
 
 		reference := "MODIFICATION_REFERENCE"
 		body := payments.CaptureRequest{
@@ -59,8 +59,8 @@ func Test_Disputes(t *testing.T) {
 			MerchantAccount: MerchantAccount,
 		}
 		paymentsApi := client.Payments()
-		captureReq := paymentsApi.ModificationsApi.CaptureConfig(context.Background()).CaptureRequest(body)
-		captureRes, _, _ := paymentsApi.ModificationsApi.Capture(captureReq)
+		captureReq := paymentsApi.ModificationsApi.CaptureInput().CaptureRequest(body)
+		captureRes, _, _ := paymentsApi.ModificationsApi.Capture(context.Background(), captureReq)
 		return captureRes.GetPspReference()
 	}
 

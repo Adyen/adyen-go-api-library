@@ -46,9 +46,9 @@ func Test_LegalEntity_Integration(t *testing.T) {
 	service := client.LegalEntity()
 
 	t.Run("Get a legal entity", func(t *testing.T) {
-		req := service.LegalEntitiesApi.GetLegalEntityConfig(context.Background(), legalEntityId)
+		req := service.LegalEntitiesApi.GetLegalEntityInput(legalEntityId)
 
-		res, httpRes, err := service.LegalEntitiesApi.GetLegalEntity(req)
+		res, httpRes, err := service.LegalEntitiesApi.GetLegalEntity(context.Background(), req)
 
 		require.NoError(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)

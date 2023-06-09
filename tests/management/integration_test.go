@@ -27,9 +27,9 @@ func Test_ManagementAPI_Integration(t *testing.T) {
 
 	t.Run("Test MyAPICredentialApiService GetMe", func(t *testing.T) {
 		t.Run("Create an API request that should pass", func(t *testing.T) {
-			req := service.MyAPICredentialApi.GetApiCredentialDetailsConfig(context.Background())
+			req := service.MyAPICredentialApi.GetApiCredentialDetailsInput()
 
-			resp, httpRes, err := service.MyAPICredentialApi.GetApiCredentialDetails(req)
+			resp, httpRes, err := service.MyAPICredentialApi.GetApiCredentialDetails(context.Background(), req)
 
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
@@ -42,9 +42,9 @@ func Test_ManagementAPI_Integration(t *testing.T) {
 				ApiKey:      "xxx",
 				Environment: common.TestEnv,
 			})
-			req := invalidKeyClient.Management().MyAPICredentialApi.GetApiCredentialDetailsConfig(context.Background())
+			req := invalidKeyClient.Management().MyAPICredentialApi.GetApiCredentialDetailsInput()
 
-			_, httpRes, err := invalidKeyClient.Management().MyAPICredentialApi.GetApiCredentialDetails(req)
+			_, httpRes, err := invalidKeyClient.Management().MyAPICredentialApi.GetApiCredentialDetails(context.Background(), req)
 
 			assert.Equal(t, 401, httpRes.StatusCode)
 			require.NotNil(t, err)
@@ -52,10 +52,10 @@ func Test_ManagementAPI_Integration(t *testing.T) {
 	})
 
 	t.Run("List terminals", func(t *testing.T) {
-		req := service.TerminalsTerminalLevelApi.ListTerminalsConfig(context.Background())
+		req := service.TerminalsTerminalLevelApi.ListTerminalsInput()
 		req = req.Countries("NL").PageSize(1)
 
-		resp, httpRes, err := service.TerminalsTerminalLevelApi.ListTerminals(req)
+		resp, httpRes, err := service.TerminalsTerminalLevelApi.ListTerminals(context.Background(), req)
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)

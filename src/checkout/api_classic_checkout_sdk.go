@@ -10,30 +10,41 @@ package checkout
 
 import (
 	"context"
-	_nethttp "net/http"
+	"net/http"
 	"net/url"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// ClassicCheckoutSDKApi ClassicCheckoutSDKApi service
+// ClassicCheckoutSDKApi service
 type ClassicCheckoutSDKApi common.Service
 
-type ClassicCheckoutSDKApiPaymentSessionConfig struct {
-	ctx                 context.Context
+// All parameters accepted by ClassicCheckoutSDKApi.PaymentSession
+type ClassicCheckoutSDKApiPaymentSessionInput struct {
 	idempotencyKey      *string
 	paymentSetupRequest *PaymentSetupRequest
 }
 
 // A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
-func (r ClassicCheckoutSDKApiPaymentSessionConfig) IdempotencyKey(idempotencyKey string) ClassicCheckoutSDKApiPaymentSessionConfig {
+func (r ClassicCheckoutSDKApiPaymentSessionInput) IdempotencyKey(idempotencyKey string) ClassicCheckoutSDKApiPaymentSessionInput {
 	r.idempotencyKey = &idempotencyKey
 	return r
 }
 
-func (r ClassicCheckoutSDKApiPaymentSessionConfig) PaymentSetupRequest(paymentSetupRequest PaymentSetupRequest) ClassicCheckoutSDKApiPaymentSessionConfig {
+func (r ClassicCheckoutSDKApiPaymentSessionInput) PaymentSetupRequest(paymentSetupRequest PaymentSetupRequest) ClassicCheckoutSDKApiPaymentSessionInput {
 	r.paymentSetupRequest = &paymentSetupRequest
 	return r
+}
+
+/*
+Prepare a request for PaymentSession
+
+@return ClassicCheckoutSDKApiPaymentSessionInput
+
+Deprecated
+*/
+func (a *ClassicCheckoutSDKApi) PaymentSessionInput() ClassicCheckoutSDKApiPaymentSessionInput {
+	return ClassicCheckoutSDKApiPaymentSessionInput{}
 }
 
 /*
@@ -43,26 +54,13 @@ Provides the data object that can be used to start the Checkout SDK. To set up t
 
 For more information, refer to [How it works](https://docs.adyen.com/online-payments#howitworks).
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ClassicCheckoutSDKApiPaymentSessionConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r ClassicCheckoutSDKApiPaymentSessionInput - Request parameters, see PaymentSessionInput
+@return PaymentSetupResponse, *http.Response, error
 
-Deprecated
+    Deprecated
 */
-func (a *ClassicCheckoutSDKApi) PaymentSessionConfig(ctx context.Context) ClassicCheckoutSDKApiPaymentSessionConfig {
-	return ClassicCheckoutSDKApiPaymentSessionConfig{
-		ctx: ctx,
-	}
-}
-
-/*
-Create a payment session
-Provides the data object that can be used to start the Checkout SDK. To set up the payment, pass its amount, currency, and other required parameters. We use this to optimise the payment flow and perform better risk assessment of the transaction.  For more information, refer to [How it works](https://docs.adyen.com/online-payments#howitworks).
- * @param req PaymentSetupRequest - reference of PaymentSetupRequest).
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return PaymentSetupResponse
-*/
-
-func (a *ClassicCheckoutSDKApi) PaymentSession(r ClassicCheckoutSDKApiPaymentSessionConfig) (PaymentSetupResponse, *_nethttp.Response, error) {
+func (a *ClassicCheckoutSDKApi) PaymentSession(ctx context.Context, r ClassicCheckoutSDKApiPaymentSessionInput) (PaymentSetupResponse, *http.Response, error) {
 	res := &PaymentSetupResponse{}
 	path := "/paymentSession"
 	queryParams := url.Values{}
@@ -71,11 +69,11 @@ func (a *ClassicCheckoutSDKApi) PaymentSession(r ClassicCheckoutSDKApiPaymentSes
 		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
 	}
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		r.paymentSetupRequest,
 		res,
-		_nethttp.MethodPost,
+		http.MethodPost,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
@@ -84,21 +82,32 @@ func (a *ClassicCheckoutSDKApi) PaymentSession(r ClassicCheckoutSDKApiPaymentSes
 	return *res, httpRes, err
 }
 
-type ClassicCheckoutSDKApiVerifyPaymentResultConfig struct {
-	ctx                        context.Context
+// All parameters accepted by ClassicCheckoutSDKApi.VerifyPaymentResult
+type ClassicCheckoutSDKApiVerifyPaymentResultInput struct {
 	idempotencyKey             *string
 	paymentVerificationRequest *PaymentVerificationRequest
 }
 
 // A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
-func (r ClassicCheckoutSDKApiVerifyPaymentResultConfig) IdempotencyKey(idempotencyKey string) ClassicCheckoutSDKApiVerifyPaymentResultConfig {
+func (r ClassicCheckoutSDKApiVerifyPaymentResultInput) IdempotencyKey(idempotencyKey string) ClassicCheckoutSDKApiVerifyPaymentResultInput {
 	r.idempotencyKey = &idempotencyKey
 	return r
 }
 
-func (r ClassicCheckoutSDKApiVerifyPaymentResultConfig) PaymentVerificationRequest(paymentVerificationRequest PaymentVerificationRequest) ClassicCheckoutSDKApiVerifyPaymentResultConfig {
+func (r ClassicCheckoutSDKApiVerifyPaymentResultInput) PaymentVerificationRequest(paymentVerificationRequest PaymentVerificationRequest) ClassicCheckoutSDKApiVerifyPaymentResultInput {
 	r.paymentVerificationRequest = &paymentVerificationRequest
 	return r
+}
+
+/*
+Prepare a request for VerifyPaymentResult
+
+@return ClassicCheckoutSDKApiVerifyPaymentResultInput
+
+Deprecated
+*/
+func (a *ClassicCheckoutSDKApi) VerifyPaymentResultInput() ClassicCheckoutSDKApiVerifyPaymentResultInput {
+	return ClassicCheckoutSDKApiVerifyPaymentResultInput{}
 }
 
 /*
@@ -108,26 +117,13 @@ Verifies the payment result using the payload returned from the Checkout SDK.
 
 For more information, refer to [How it works](https://docs.adyen.com/online-payments#howitworks).
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ClassicCheckoutSDKApiVerifyPaymentResultConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r ClassicCheckoutSDKApiVerifyPaymentResultInput - Request parameters, see VerifyPaymentResultInput
+@return PaymentVerificationResponse, *http.Response, error
 
-Deprecated
+    Deprecated
 */
-func (a *ClassicCheckoutSDKApi) VerifyPaymentResultConfig(ctx context.Context) ClassicCheckoutSDKApiVerifyPaymentResultConfig {
-	return ClassicCheckoutSDKApiVerifyPaymentResultConfig{
-		ctx: ctx,
-	}
-}
-
-/*
-Verify a payment result
-Verifies the payment result using the payload returned from the Checkout SDK.  For more information, refer to [How it works](https://docs.adyen.com/online-payments#howitworks).
- * @param req PaymentVerificationRequest - reference of PaymentVerificationRequest).
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return PaymentVerificationResponse
-*/
-
-func (a *ClassicCheckoutSDKApi) VerifyPaymentResult(r ClassicCheckoutSDKApiVerifyPaymentResultConfig) (PaymentVerificationResponse, *_nethttp.Response, error) {
+func (a *ClassicCheckoutSDKApi) VerifyPaymentResult(ctx context.Context, r ClassicCheckoutSDKApiVerifyPaymentResultInput) (PaymentVerificationResponse, *http.Response, error) {
 	res := &PaymentVerificationResponse{}
 	path := "/payments/result"
 	queryParams := url.Values{}
@@ -136,11 +132,11 @@ func (a *ClassicCheckoutSDKApi) VerifyPaymentResult(r ClassicCheckoutSDKApiVerif
 		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
 	}
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		r.paymentVerificationRequest,
 		res,
-		_nethttp.MethodPost,
+		http.MethodPost,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,

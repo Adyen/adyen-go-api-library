@@ -10,23 +10,32 @@ package payout
 
 import (
 	"context"
-	_nethttp "net/http"
+	"net/http"
 	"net/url"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// ReviewingApi ReviewingApi service
+// ReviewingApi service
 type ReviewingApi common.Service
 
-type ReviewingApiConfirmThirdPartyConfig struct {
-	ctx           context.Context
+// All parameters accepted by ReviewingApi.ConfirmThirdParty
+type ReviewingApiConfirmThirdPartyInput struct {
 	modifyRequest *ModifyRequest
 }
 
-func (r ReviewingApiConfirmThirdPartyConfig) ModifyRequest(modifyRequest ModifyRequest) ReviewingApiConfirmThirdPartyConfig {
+func (r ReviewingApiConfirmThirdPartyInput) ModifyRequest(modifyRequest ModifyRequest) ReviewingApiConfirmThirdPartyInput {
 	r.modifyRequest = &modifyRequest
 	return r
+}
+
+/*
+Prepare a request for ConfirmThirdParty
+
+@return ReviewingApiConfirmThirdPartyInput
+*/
+func (a *ReviewingApi) ConfirmThirdPartyInput() ReviewingApiConfirmThirdPartyInput {
+	return ReviewingApiConfirmThirdPartyInput{}
 }
 
 /*
@@ -36,34 +45,21 @@ Confirms a previously submitted payout.
 
 To cancel a payout, use the `/declineThirdParty` endpoint.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ReviewingApiConfirmThirdPartyConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r ReviewingApiConfirmThirdPartyInput - Request parameters, see ConfirmThirdPartyInput
+@return ModifyResponse, *http.Response, error
 */
-func (a *ReviewingApi) ConfirmThirdPartyConfig(ctx context.Context) ReviewingApiConfirmThirdPartyConfig {
-	return ReviewingApiConfirmThirdPartyConfig{
-		ctx: ctx,
-	}
-}
-
-/*
-Confirm a payout
-Confirms a previously submitted payout.  To cancel a payout, use the &#x60;/declineThirdParty&#x60; endpoint.
- * @param req ModifyRequest - reference of ModifyRequest).
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return ModifyResponse
-*/
-
-func (a *ReviewingApi) ConfirmThirdParty(r ReviewingApiConfirmThirdPartyConfig) (ModifyResponse, *_nethttp.Response, error) {
+func (a *ReviewingApi) ConfirmThirdParty(ctx context.Context, r ReviewingApiConfirmThirdPartyInput) (ModifyResponse, *http.Response, error) {
 	res := &ModifyResponse{}
 	path := "/confirmThirdParty"
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		r.modifyRequest,
 		res,
-		_nethttp.MethodPost,
+		http.MethodPost,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
@@ -72,14 +68,23 @@ func (a *ReviewingApi) ConfirmThirdParty(r ReviewingApiConfirmThirdPartyConfig) 
 	return *res, httpRes, err
 }
 
-type ReviewingApiDeclineThirdPartyConfig struct {
-	ctx           context.Context
+// All parameters accepted by ReviewingApi.DeclineThirdParty
+type ReviewingApiDeclineThirdPartyInput struct {
 	modifyRequest *ModifyRequest
 }
 
-func (r ReviewingApiDeclineThirdPartyConfig) ModifyRequest(modifyRequest ModifyRequest) ReviewingApiDeclineThirdPartyConfig {
+func (r ReviewingApiDeclineThirdPartyInput) ModifyRequest(modifyRequest ModifyRequest) ReviewingApiDeclineThirdPartyInput {
 	r.modifyRequest = &modifyRequest
 	return r
+}
+
+/*
+Prepare a request for DeclineThirdParty
+
+@return ReviewingApiDeclineThirdPartyInput
+*/
+func (a *ReviewingApi) DeclineThirdPartyInput() ReviewingApiDeclineThirdPartyInput {
+	return ReviewingApiDeclineThirdPartyInput{}
 }
 
 /*
@@ -89,34 +94,21 @@ Cancels a previously submitted payout.
 
 To confirm and send a payout, use the `/confirmThirdParty` endpoint.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ReviewingApiDeclineThirdPartyConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r ReviewingApiDeclineThirdPartyInput - Request parameters, see DeclineThirdPartyInput
+@return ModifyResponse, *http.Response, error
 */
-func (a *ReviewingApi) DeclineThirdPartyConfig(ctx context.Context) ReviewingApiDeclineThirdPartyConfig {
-	return ReviewingApiDeclineThirdPartyConfig{
-		ctx: ctx,
-	}
-}
-
-/*
-Cancel a payout
-Cancels a previously submitted payout.  To confirm and send a payout, use the &#x60;/confirmThirdParty&#x60; endpoint.
- * @param req ModifyRequest - reference of ModifyRequest).
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return ModifyResponse
-*/
-
-func (a *ReviewingApi) DeclineThirdParty(r ReviewingApiDeclineThirdPartyConfig) (ModifyResponse, *_nethttp.Response, error) {
+func (a *ReviewingApi) DeclineThirdParty(ctx context.Context, r ReviewingApiDeclineThirdPartyInput) (ModifyResponse, *http.Response, error) {
 	res := &ModifyResponse{}
 	path := "/declineThirdParty"
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		r.modifyRequest,
 		res,
-		_nethttp.MethodPost,
+		http.MethodPost,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,

@@ -52,9 +52,9 @@ func Test_Pos_Terminal_Management(t *testing.T) {
 	service := client.PosTerminalManagement()
 
 	t.Run("successfully assign terminal", func(t *testing.T) {
-		request := service.AssignTerminalsConfig(context.Background())
+		request := service.AssignTerminalsInput()
 
-		_, httpRes, err := service.AssignTerminals(request)
+		_, httpRes, err := service.AssignTerminals(context.Background(), request)
 
 		require.NoError(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -62,9 +62,9 @@ func Test_Pos_Terminal_Management(t *testing.T) {
 	})
 
 	t.Run("make unsuccesful findTerminal call", func(t *testing.T) {
-		request := service.FindTerminalConfig(context.Background())
+		request := service.FindTerminalInput()
 
-		_, httpRes, err := service.FindTerminal(request)
+		_, httpRes, err := service.FindTerminal(context.Background(), request)
 
 		assert.Equal(t, 403, httpRes.StatusCode)
 		require.NotNil(t, err)

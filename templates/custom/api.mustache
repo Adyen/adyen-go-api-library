@@ -49,7 +49,7 @@ Prepare a request for {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}
 Deprecated
 {{/isDeprecated}}
 */
-func (a *{{{classname}}}) {{{nickname}}}Input({{#pathParams}}, {{paramName}} {{{dataType}}}{{/pathParams}}) {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Input {
+func (a *{{{classname}}}) {{{nickname}}}Input({{#pathParams}}{{paramName}} {{{dataType}}}{{^-last}}, {{/-last}}{{/pathParams}}) {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Input {
 	return {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Input{
 		{{#pathParams}}
 		{{paramName}}: {{paramName}},

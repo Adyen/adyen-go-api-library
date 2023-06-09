@@ -10,22 +10,32 @@ package balanceplatform
 
 import (
 	"context"
-	_nethttp "net/http"
+	"net/http"
+	"net/url"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// BankAccountValidationApi BankAccountValidationApi service
+// BankAccountValidationApi service
 type BankAccountValidationApi common.Service
 
-type ValidateBankAccountIdentificationConfig struct {
-	ctx                                        context.Context
+// All parameters accepted by BankAccountValidationApi.ValidateBankAccountIdentification
+type BankAccountValidationApiValidateBankAccountIdentificationInput struct {
 	bankAccountIdentificationValidationRequest *BankAccountIdentificationValidationRequest
 }
 
-func (r ValidateBankAccountIdentificationConfig) BankAccountIdentificationValidationRequest(bankAccountIdentificationValidationRequest BankAccountIdentificationValidationRequest) ValidateBankAccountIdentificationConfig {
+func (r BankAccountValidationApiValidateBankAccountIdentificationInput) BankAccountIdentificationValidationRequest(bankAccountIdentificationValidationRequest BankAccountIdentificationValidationRequest) BankAccountValidationApiValidateBankAccountIdentificationInput {
 	r.bankAccountIdentificationValidationRequest = &bankAccountIdentificationValidationRequest
 	return r
+}
+
+/*
+Prepare a request for ValidateBankAccountIdentification
+
+@return BankAccountValidationApiValidateBankAccountIdentificationInput
+*/
+func (a *BankAccountValidationApi) ValidateBankAccountIdentificationInput() BankAccountValidationApiValidateBankAccountIdentificationInput {
+	return BankAccountValidationApiValidateBankAccountIdentificationInput{}
 }
 
 /*
@@ -33,26 +43,25 @@ ValidateBankAccountIdentification Validate a bank account
 
 Validates bank account identification details. You can use this endpoint to validate bank account details before you [make a transfer](https://docs.adyen.com/api-explorer/transfers/latest/post/transfers) or [create a transfer instrument](https://docs.adyen.com/api-explorer/legalentity/latest/post/transferInstruments).
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ValidateBankAccountIdentificationConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r BankAccountValidationApiValidateBankAccountIdentificationInput - Request parameters, see ValidateBankAccountIdentificationInput
+@return map[string]interface{}, *http.Response, error
 */
-func (a *BankAccountValidationApi) ValidateBankAccountIdentificationConfig(ctx context.Context) ValidateBankAccountIdentificationConfig {
-	return ValidateBankAccountIdentificationConfig{
-		ctx: ctx,
-	}
-}
-
-/*
-Validate a bank account
-Validates bank account identification details. You can use this endpoint to validate bank account details before you [make a transfer](https://docs.adyen.com/api-explorer/transfers/latest/post/transfers) or [create a transfer instrument](https://docs.adyen.com/api-explorer/legalentity/latest/post/transferInstruments).
- * @param req BankAccountIdentificationValidationRequest - reference of BankAccountIdentificationValidationRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return map[string]interface{}
-*/
-
-func (a *BankAccountValidationApi) ValidateBankAccountIdentification(r ValidateBankAccountIdentificationConfig) (map[string]interface{}, *_nethttp.Response, error) {
+func (a *BankAccountValidationApi) ValidateBankAccountIdentification(ctx context.Context, r BankAccountValidationApiValidateBankAccountIdentificationInput) (map[string]interface{}, *http.Response, error) {
 	res := &map[string]interface{}{}
 	path := "/validateBankAccountIdentification"
-	httpRes, err := a.Client.MakeHTTPPostRequest(r.bankAccountIdentificationValidationRequest, res, a.BasePath()+path, r.ctx)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.bankAccountIdentificationValidationRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }

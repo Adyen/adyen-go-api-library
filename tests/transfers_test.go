@@ -71,13 +71,13 @@ func Test_Transfers(t *testing.T) {
 
 	mockServer := httptest.NewServer(mux)
 	defer mockServer.Close()
-	client.Transfers().BasePath = func() string { return mockServer.URL }
+	client.Transfers().TransfersApi.BasePath = func() string { return mockServer.URL }
 	service := client.Transfers()
 
 	t.Run("make succesful transfer", func(t *testing.T) {
-		request := service.TransferFundsConfig(context.Background())
+		request := service.TransfersApi.TransferFundsInput()
 
-		_, httpRes, err := service.TransferFunds(request)
+		_, httpRes, err := service.TransfersApi.TransferFunds(context.Background(), request)
 
 		require.NoError(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -85,9 +85,10 @@ func Test_Transfers(t *testing.T) {
 	})
 
 	t.Run("make unsuccesful get transactions call", func(t *testing.T) {
-		request := service.GetAllTransactionsConfig(context.Background())
-
-		_, httpRes, err := service.GetAllTransactions(request)
+		_, httpRes, err := service.TransactionsApi.GetAllTransactions(
+			context.Background(),
+			service.TransactionsApi.GetAllTransactionsInput(),
+		)
 
 		assert.Equal(t, 403, httpRes.StatusCode)
 		require.NotNil(t, err)

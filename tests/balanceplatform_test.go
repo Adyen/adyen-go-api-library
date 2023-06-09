@@ -78,8 +78,8 @@ func Test_BalancePlatform(t *testing.T) {
 	})
 
 	t.Run("Get an account holder", func(t *testing.T) {
-		req := service.AccountHoldersApi.GetAccountHolderConfig(context.Background(), "123")
-		res, httpRes, err := service.AccountHoldersApi.GetAccountHolder(req)
+		req := service.AccountHoldersApi.GetAccountHolderInput("123")
+		res, httpRes, err := service.AccountHoldersApi.GetAccountHolder(context.Background(), req)
 
 		require.NotNil(t, res)
 		require.NotNil(t, httpRes)
@@ -93,9 +93,9 @@ func Test_BalancePlatform(t *testing.T) {
 	})
 
 	t.Run("Get all balance accounts of an account holder", func(t *testing.T) {
-		req := service.AccountHoldersApi.GetAllBalanceAccountsOfAccountHolderConfig(context.Background(), "123")
+		req := service.AccountHoldersApi.GetAllBalanceAccountsOfAccountHolderInput("123")
 		req = req.Offset(42).Limit(5)
-		res, httpRes, err := service.AccountHoldersApi.GetAllBalanceAccountsOfAccountHolder(req)
+		res, httpRes, err := service.AccountHoldersApi.GetAllBalanceAccountsOfAccountHolder(context.Background(), req)
 
 		require.NotNil(t, res)
 		require.NotNil(t, httpRes)
@@ -106,11 +106,11 @@ func Test_BalancePlatform(t *testing.T) {
 	})
 
 	t.Run("Error response", func(t *testing.T) {
-		req := service.PaymentInstrumentsApi.UpdatePaymentInstrumentConfig(context.Background(), "666")
+		req := service.PaymentInstrumentsApi.UpdatePaymentInstrumentInput("666")
 		body := balanceplatform.NewPaymentInstrumentUpdateRequest()
 		body.SetBalanceAccountId("BA32272223222B5CM82WL892M")
 		req.PaymentInstrumentUpdateRequest(*body)
-		_, _, err := service.PaymentInstrumentsApi.UpdatePaymentInstrument(req)
+		_, _, err := service.PaymentInstrumentsApi.UpdatePaymentInstrument(context.Background(), req)
 
 		apiError := err.(common.APIError)
 		assert.Equal(t, float64(422), apiError.Status)
@@ -123,16 +123,16 @@ func Test_BalancePlatform(t *testing.T) {
 	})
 
 	t.Run("Delete a sweep", func(t *testing.T) {
-		req := service.BalanceAccountsApi.DeleteSweepConfig(context.Background(), "balanceAccountId", "sweepId")
-		httpRes, err := service.BalanceAccountsApi.DeleteSweep(req)
+		req := service.BalanceAccountsApi.DeleteSweepInput("balanceAccountId", "sweepId")
+		httpRes, err := service.BalanceAccountsApi.DeleteSweep(context.Background(), req)
 
 		assert.Equal(t, 204, httpRes.StatusCode)
 		require.Nil(t, err)
 	})
 
 	t.Run("Delete a transaction rule", func(t *testing.T) {
-		req := service.TransactionRulesApi.DeleteTransactionRuleConfig(context.Background(), "transactionRuleId")
-		res, httpRes, err := service.TransactionRulesApi.DeleteTransactionRule(req)
+		req := service.TransactionRulesApi.DeleteTransactionRuleInput("transactionRuleId")
+		res, httpRes, err := service.TransactionRulesApi.DeleteTransactionRule(context.Background(), req)
 
 		require.NotNil(t, res)
 		require.NotNil(t, httpRes)

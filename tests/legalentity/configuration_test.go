@@ -42,9 +42,9 @@ func Test_LegalEntity_Configuration(t *testing.T) {
 	defer mockServer.Close()
 
 	t.Run("Basic auth", func(t *testing.T) {
-		req := service.BusinessLinesApi.UpdateBusinessLineConfig(context.Background(), "123")
+		req := service.BusinessLinesApi.UpdateBusinessLineInput("123")
 
-		service.BusinessLinesApi.UpdateBusinessLine(req)
+		service.BusinessLinesApi.UpdateBusinessLine(context.Background(), req)
 
 		assert.NotEmpty(t, mockRequest.Header.Get("Authorization"))
 	})

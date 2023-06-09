@@ -10,27 +10,37 @@ package management
 
 import (
 	"context"
-	_context "context"
-	_nethttp "net/http"
+	"net/http"
 	"net/url"
 	"strings"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// TerminalSettingsCompanyLevelApi TerminalSettingsCompanyLevelApi service
+// TerminalSettingsCompanyLevelApi service
 type TerminalSettingsCompanyLevelApi common.Service
 
-type TerminalSettingsCompanyLevelApiGetTerminalLogoConfig struct {
-	ctx       context.Context
+// All parameters accepted by TerminalSettingsCompanyLevelApi.GetTerminalLogo
+type TerminalSettingsCompanyLevelApiGetTerminalLogoInput struct {
 	companyId string
 	model     *string
 }
 
 // The terminal model. Possible values: E355, VX675WIFIBT, VX680, VX690, VX700, VX820, M400, MX925, P400Plus, UX300, UX410, V200cPlus, V240mPlus, V400cPlus, V400m, e280, e285, e285p, S1E, S1EL, S1F2, S1L, S1U, S7T.
-func (r TerminalSettingsCompanyLevelApiGetTerminalLogoConfig) Model(model string) TerminalSettingsCompanyLevelApiGetTerminalLogoConfig {
+func (r TerminalSettingsCompanyLevelApiGetTerminalLogoInput) Model(model string) TerminalSettingsCompanyLevelApiGetTerminalLogoInput {
 	r.model = &model
 	return r
+}
+
+/*
+Prepare a request for GetTerminalLogo
+@param companyId The unique identifier of the company account.
+@return TerminalSettingsCompanyLevelApiGetTerminalLogoInput
+*/
+func (a *TerminalSettingsCompanyLevelApi) GetTerminalLogoInput(companyId string) TerminalSettingsCompanyLevelApiGetTerminalLogoInput {
+	return TerminalSettingsCompanyLevelApiGetTerminalLogoInput{
+		companyId: companyId,
+	}
 }
 
 /*
@@ -45,40 +55,47 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Terminal settings read
 * Management API—Terminal settings read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param companyId The unique identifier of the company account.
- @return TerminalSettingsCompanyLevelApiGetTerminalLogoConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r TerminalSettingsCompanyLevelApiGetTerminalLogoInput - Request parameters, see GetTerminalLogoInput
+@return Logo, *http.Response, error
 */
-func (a *TerminalSettingsCompanyLevelApi) GetTerminalLogoConfig(ctx context.Context, companyId string) TerminalSettingsCompanyLevelApiGetTerminalLogoConfig {
-	return TerminalSettingsCompanyLevelApiGetTerminalLogoConfig{
-		ctx:       ctx,
-		companyId: companyId,
-	}
-}
-
-/*
-Get the terminal logo
-Returns the logo that is configured for a specific payment terminal model at the company identified in the path.   The logo is returned as a Base64-encoded string. You need to Base64-decode the string to get the actual image file.  This logo applies to all terminals of the specified model under the company, unless a different logo is configured at a lower level (merchant account, store, or individual terminal).  To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal settings read * Management API—Terminal settings read and write
- * @param companyId The unique identifier of the company account.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return Logo
-*/
-
-func (a *TerminalSettingsCompanyLevelApi) GetTerminalLogo(r TerminalSettingsCompanyLevelApiGetTerminalLogoConfig) (Logo, *_nethttp.Response, error) {
+func (a *TerminalSettingsCompanyLevelApi) GetTerminalLogo(ctx context.Context, r TerminalSettingsCompanyLevelApiGetTerminalLogoInput) (Logo, *http.Response, error) {
 	res := &Logo{}
 	path := "/companies/{companyId}/terminalLogos"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
-	queryString := url.Values{}
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
 	if r.model != nil {
-		common.ParameterAddToQuery(queryString, "model", r.model, "")
+		common.ParameterAddToQuery(queryParams, "model", r.model, "")
 	}
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path+"?"+queryString.Encode(), []_context.Context{r.ctx})
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type TerminalSettingsCompanyLevelApiGetTerminalSettingsConfig struct {
-	ctx       context.Context
+// All parameters accepted by TerminalSettingsCompanyLevelApi.GetTerminalSettings
+type TerminalSettingsCompanyLevelApiGetTerminalSettingsInput struct {
 	companyId string
+}
+
+/*
+Prepare a request for GetTerminalSettings
+@param companyId The unique identifier of the company account.
+@return TerminalSettingsCompanyLevelApiGetTerminalSettingsInput
+*/
+func (a *TerminalSettingsCompanyLevelApi) GetTerminalSettingsInput(companyId string) TerminalSettingsCompanyLevelApiGetTerminalSettingsInput {
+	return TerminalSettingsCompanyLevelApiGetTerminalSettingsInput{
+		companyId: companyId,
+	}
 }
 
 /*
@@ -93,49 +110,57 @@ To make this request, your API credential must have one of the following [roles]
 For [sensitive terminal settings](https://docs.adyen.com/point-of-sale/automating-terminal-management/configure-terminals-api#sensitive-terminal-settings), your API credential must have the following role:
 * Management API—Terminal settings Advanced read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param companyId The unique identifier of the company account.
- @return TerminalSettingsCompanyLevelApiGetTerminalSettingsConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r TerminalSettingsCompanyLevelApiGetTerminalSettingsInput - Request parameters, see GetTerminalSettingsInput
+@return TerminalSettings, *http.Response, error
 */
-func (a *TerminalSettingsCompanyLevelApi) GetTerminalSettingsConfig(ctx context.Context, companyId string) TerminalSettingsCompanyLevelApiGetTerminalSettingsConfig {
-	return TerminalSettingsCompanyLevelApiGetTerminalSettingsConfig{
-		ctx:       ctx,
-		companyId: companyId,
-	}
-}
-
-/*
-Get terminal settings
-Returns the payment terminal settings that are configured for the company identified in the path. These settings apply to all terminals under the company, unless different values are configured at a lower level (merchant account, store, or individual terminal).  To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal settings read * Management API—Terminal settings read and write  For [sensitive terminal settings](https://docs.adyen.com/point-of-sale/automating-terminal-management/configure-terminals-api#sensitive-terminal-settings), your API credential must have the following role: * Management API—Terminal settings Advanced read and write
- * @param companyId The unique identifier of the company account.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return TerminalSettings
-*/
-
-func (a *TerminalSettingsCompanyLevelApi) GetTerminalSettings(r TerminalSettingsCompanyLevelApiGetTerminalSettingsConfig) (TerminalSettings, *_nethttp.Response, error) {
+func (a *TerminalSettingsCompanyLevelApi) GetTerminalSettings(ctx context.Context, r TerminalSettingsCompanyLevelApiGetTerminalSettingsInput) (TerminalSettings, *http.Response, error) {
 	res := &TerminalSettings{}
 	path := "/companies/{companyId}/terminalSettings"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type TerminalSettingsCompanyLevelApiUpdateTerminalLogoConfig struct {
-	ctx       context.Context
+// All parameters accepted by TerminalSettingsCompanyLevelApi.UpdateTerminalLogo
+type TerminalSettingsCompanyLevelApiUpdateTerminalLogoInput struct {
 	companyId string
 	model     *string
 	logo      *Logo
 }
 
 // The terminal model. Possible values: E355, VX675WIFIBT, VX680, VX690, VX700, VX820, M400, MX925, P400Plus, UX300, UX410, V200cPlus, V240mPlus, V400cPlus, V400m, e280, e285, e285p, S1E, S1EL, S1F2, S1L, S1U, S7T.
-func (r TerminalSettingsCompanyLevelApiUpdateTerminalLogoConfig) Model(model string) TerminalSettingsCompanyLevelApiUpdateTerminalLogoConfig {
+func (r TerminalSettingsCompanyLevelApiUpdateTerminalLogoInput) Model(model string) TerminalSettingsCompanyLevelApiUpdateTerminalLogoInput {
 	r.model = &model
 	return r
 }
 
-func (r TerminalSettingsCompanyLevelApiUpdateTerminalLogoConfig) Logo(logo Logo) TerminalSettingsCompanyLevelApiUpdateTerminalLogoConfig {
+func (r TerminalSettingsCompanyLevelApiUpdateTerminalLogoInput) Logo(logo Logo) TerminalSettingsCompanyLevelApiUpdateTerminalLogoInput {
 	r.logo = &logo
 	return r
+}
+
+/*
+Prepare a request for UpdateTerminalLogo
+@param companyId The unique identifier of the company account.
+@return TerminalSettingsCompanyLevelApiUpdateTerminalLogoInput
+*/
+func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalLogoInput(companyId string) TerminalSettingsCompanyLevelApiUpdateTerminalLogoInput {
+	return TerminalSettingsCompanyLevelApiUpdateTerminalLogoInput{
+		companyId: companyId,
+	}
 }
 
 /*
@@ -149,47 +174,53 @@ This logo applies to all terminals of the specified model under the company, unl
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Terminal settings read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param companyId The unique identifier of the company account.
- @return TerminalSettingsCompanyLevelApiUpdateTerminalLogoConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r TerminalSettingsCompanyLevelApiUpdateTerminalLogoInput - Request parameters, see UpdateTerminalLogoInput
+@return Logo, *http.Response, error
 */
-func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalLogoConfig(ctx context.Context, companyId string) TerminalSettingsCompanyLevelApiUpdateTerminalLogoConfig {
-	return TerminalSettingsCompanyLevelApiUpdateTerminalLogoConfig{
-		ctx:       ctx,
-		companyId: companyId,
-	}
-}
-
-/*
-Update the terminal logo
-Updates the logo that is configured for a specific payment terminal model at the company identified in the path. You can update the logo for only one terminal model at a time. This logo applies to all terminals of the specified model under the company, unless a different logo is configured at a lower level (merchant account, store, or individual terminal).  * To change the logo, specify the image file as a Base64-encoded string. * To restore the logo inherited from the Adyen PSP level, specify an empty logo value.  To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal settings read and write
- * @param companyId The unique identifier of the company account.
- * @param req Logo - reference of Logo).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return Logo
-*/
-
-func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalLogo(r TerminalSettingsCompanyLevelApiUpdateTerminalLogoConfig) (Logo, *_nethttp.Response, error) {
+func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalLogo(ctx context.Context, r TerminalSettingsCompanyLevelApiUpdateTerminalLogoInput) (Logo, *http.Response, error) {
 	res := &Logo{}
 	path := "/companies/{companyId}/terminalLogos"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
-	queryString := url.Values{}
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
 	if r.model != nil {
-		common.ParameterAddToQuery(queryString, "model", r.model, "")
+		common.ParameterAddToQuery(queryParams, "model", r.model, "")
 	}
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPatch, r.logo, res, a.BasePath()+path+"?"+queryString.Encode(), []_context.Context{r.ctx})
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.logo,
+		res,
+		http.MethodPatch,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type TerminalSettingsCompanyLevelApiUpdateTerminalSettingsConfig struct {
-	ctx              context.Context
+// All parameters accepted by TerminalSettingsCompanyLevelApi.UpdateTerminalSettings
+type TerminalSettingsCompanyLevelApiUpdateTerminalSettingsInput struct {
 	companyId        string
 	terminalSettings *TerminalSettings
 }
 
-func (r TerminalSettingsCompanyLevelApiUpdateTerminalSettingsConfig) TerminalSettings(terminalSettings TerminalSettings) TerminalSettingsCompanyLevelApiUpdateTerminalSettingsConfig {
+func (r TerminalSettingsCompanyLevelApiUpdateTerminalSettingsInput) TerminalSettings(terminalSettings TerminalSettings) TerminalSettingsCompanyLevelApiUpdateTerminalSettingsInput {
 	r.terminalSettings = &terminalSettings
 	return r
+}
+
+/*
+Prepare a request for UpdateTerminalSettings
+@param companyId The unique identifier of the company account.
+@return TerminalSettingsCompanyLevelApiUpdateTerminalSettingsInput
+*/
+func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalSettingsInput(companyId string) TerminalSettingsCompanyLevelApiUpdateTerminalSettingsInput {
+	return TerminalSettingsCompanyLevelApiUpdateTerminalSettingsInput{
+		companyId: companyId,
+	}
 }
 
 /*
@@ -207,30 +238,26 @@ To make this request, your API credential must have the following [role](https:/
 For [sensitive terminal settings](https://docs.adyen.com/point-of-sale/automating-terminal-management/configure-terminals-api#sensitive-terminal-settings), your API credential must have the following role:
 * Management API—Terminal settings Advanced read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param companyId The unique identifier of the company account.
- @return TerminalSettingsCompanyLevelApiUpdateTerminalSettingsConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r TerminalSettingsCompanyLevelApiUpdateTerminalSettingsInput - Request parameters, see UpdateTerminalSettingsInput
+@return TerminalSettings, *http.Response, error
 */
-func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalSettingsConfig(ctx context.Context, companyId string) TerminalSettingsCompanyLevelApiUpdateTerminalSettingsConfig {
-	return TerminalSettingsCompanyLevelApiUpdateTerminalSettingsConfig{
-		ctx:       ctx,
-		companyId: companyId,
-	}
-}
-
-/*
-Update terminal settings
-Updates payment terminal settings for the company identified in the path. These settings apply to all terminals under the company, unless different values are configured at a lower level (merchant account, store, or individual terminal).  * To change a parameter value, include the full object that contains the parameter, even if you don&#39;t want to change all parameters in the object. * To restore a parameter value inherited from the Adyen PSP level, include the full object that contains the parameter, and specify an empty value for the parameter or omit the parameter. * Objects that are not included in the request are not updated.  To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal settings read and write  For [sensitive terminal settings](https://docs.adyen.com/point-of-sale/automating-terminal-management/configure-terminals-api#sensitive-terminal-settings), your API credential must have the following role: * Management API—Terminal settings Advanced read and write
- * @param companyId The unique identifier of the company account.
- * @param req TerminalSettings - reference of TerminalSettings).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return TerminalSettings
-*/
-
-func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalSettings(r TerminalSettingsCompanyLevelApiUpdateTerminalSettingsConfig) (TerminalSettings, *_nethttp.Response, error) {
+func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalSettings(ctx context.Context, r TerminalSettingsCompanyLevelApiUpdateTerminalSettingsInput) (TerminalSettings, *http.Response, error) {
 	res := &TerminalSettings{}
 	path := "/companies/{companyId}/terminalSettings"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPatch, r.terminalSettings, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.terminalSettings,
+		res,
+		http.MethodPatch,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }

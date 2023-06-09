@@ -10,24 +10,33 @@ package balanceplatform
 
 import (
 	"context"
-	_nethttp "net/http"
+	"net/http"
 	"net/url"
 	"strings"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// TransactionRulesApi TransactionRulesApi service
+// TransactionRulesApi service
 type TransactionRulesApi common.Service
 
-type CreateTransactionRuleConfig struct {
-	ctx                 context.Context
+// All parameters accepted by TransactionRulesApi.CreateTransactionRule
+type TransactionRulesApiCreateTransactionRuleInput struct {
 	transactionRuleInfo *TransactionRuleInfo
 }
 
-func (r CreateTransactionRuleConfig) TransactionRuleInfo(transactionRuleInfo TransactionRuleInfo) CreateTransactionRuleConfig {
+func (r TransactionRulesApiCreateTransactionRuleInput) TransactionRuleInfo(transactionRuleInfo TransactionRuleInfo) TransactionRulesApiCreateTransactionRuleInput {
 	r.transactionRuleInfo = &transactionRuleInfo
 	return r
+}
+
+/*
+Prepare a request for CreateTransactionRule
+
+@return TransactionRulesApiCreateTransactionRuleInput
+*/
+func (a *TransactionRulesApi) CreateTransactionRuleInput() TransactionRulesApiCreateTransactionRuleInput {
+	return TransactionRulesApiCreateTransactionRuleInput{}
 }
 
 /*
@@ -35,33 +44,43 @@ CreateTransactionRule Create a transaction rule
 
 Creates a [transaction rule](https://docs.adyen.com/issuing/transaction-rules). When your user makes a transaction with their Adyen-issued card, the transaction is allowed or declined based on the conditions and outcome defined in the transaction rule. You can apply the transaction rule to several cards, such as all the cards in your platform, or to a specific card. For use cases, see [examples](https://docs.adyen.com/issuing/transaction-rules/examples).
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return CreateTransactionRuleConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r TransactionRulesApiCreateTransactionRuleInput - Request parameters, see CreateTransactionRuleInput
+@return TransactionRule, *http.Response, error
 */
-func (a *TransactionRulesApi) CreateTransactionRuleConfig(ctx context.Context) CreateTransactionRuleConfig {
-	return CreateTransactionRuleConfig{
-		ctx: ctx,
-	}
-}
-
-/*
-Create a transaction rule
-Creates a [transaction rule](https://docs.adyen.com/issuing/transaction-rules). When your user makes a transaction with their Adyen-issued card, the transaction is allowed or declined based on the conditions and outcome defined in the transaction rule. You can apply the transaction rule to several cards, such as all the cards in your platform, or to a specific card. For use cases, see [examples](https://docs.adyen.com/issuing/transaction-rules/examples).
- * @param req TransactionRuleInfo - reference of TransactionRuleInfo).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return TransactionRule
-*/
-
-func (a *TransactionRulesApi) CreateTransactionRule(r CreateTransactionRuleConfig) (TransactionRule, *_nethttp.Response, error) {
+func (a *TransactionRulesApi) CreateTransactionRule(ctx context.Context, r TransactionRulesApiCreateTransactionRuleInput) (TransactionRule, *http.Response, error) {
 	res := &TransactionRule{}
 	path := "/transactionRules"
-	httpRes, err := a.Client.MakeHTTPPostRequest(r.transactionRuleInfo, res, a.BasePath()+path, r.ctx)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.transactionRuleInfo,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type DeleteTransactionRuleConfig struct {
-	ctx               context.Context
+// All parameters accepted by TransactionRulesApi.DeleteTransactionRule
+type TransactionRulesApiDeleteTransactionRuleInput struct {
 	transactionRuleId string
+}
+
+/*
+Prepare a request for DeleteTransactionRule
+@param transactionRuleId The unique identifier of the transaction rule.
+@return TransactionRulesApiDeleteTransactionRuleInput
+*/
+func (a *TransactionRulesApi) DeleteTransactionRuleInput(transactionRuleId string) TransactionRulesApiDeleteTransactionRuleInput {
+	return TransactionRulesApiDeleteTransactionRuleInput{
+		transactionRuleId: transactionRuleId,
+	}
 }
 
 /*
@@ -69,36 +88,44 @@ DeleteTransactionRule Delete a transaction rule
 
 Deletes a transaction rule.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param transactionRuleId The unique identifier of the transaction rule.
- @return DeleteTransactionRuleConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r TransactionRulesApiDeleteTransactionRuleInput - Request parameters, see DeleteTransactionRuleInput
+@return TransactionRule, *http.Response, error
 */
-func (a *TransactionRulesApi) DeleteTransactionRuleConfig(ctx context.Context, transactionRuleId string) DeleteTransactionRuleConfig {
-	return DeleteTransactionRuleConfig{
-		ctx:               ctx,
-		transactionRuleId: transactionRuleId,
-	}
-}
-
-/*
-Delete a transaction rule
-Deletes a transaction rule.
- * @param transactionRuleId The unique identifier of the transaction rule.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return TransactionRule
-*/
-
-func (a *TransactionRulesApi) DeleteTransactionRule(r DeleteTransactionRuleConfig) (TransactionRule, *_nethttp.Response, error) {
+func (a *TransactionRulesApi) DeleteTransactionRule(ctx context.Context, r TransactionRulesApiDeleteTransactionRuleInput) (TransactionRule, *http.Response, error) {
 	res := &TransactionRule{}
 	path := "/transactionRules/{transactionRuleId}"
 	path = strings.Replace(path, "{"+"transactionRuleId"+"}", url.PathEscape(common.ParameterValueToString(r.transactionRuleId, "transactionRuleId")), -1)
-	httpRes, err := a.Client.MakeHTTPDeleteRequest(res, a.BasePath()+path, r.ctx)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodDelete,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type GetTransactionRuleConfig struct {
-	ctx               context.Context
+// All parameters accepted by TransactionRulesApi.GetTransactionRule
+type TransactionRulesApiGetTransactionRuleInput struct {
 	transactionRuleId string
+}
+
+/*
+Prepare a request for GetTransactionRule
+@param transactionRuleId The unique identifier of the transaction rule.
+@return TransactionRulesApiGetTransactionRuleInput
+*/
+func (a *TransactionRulesApi) GetTransactionRuleInput(transactionRuleId string) TransactionRulesApiGetTransactionRuleInput {
+	return TransactionRulesApiGetTransactionRuleInput{
+		transactionRuleId: transactionRuleId,
+	}
 }
 
 /*
@@ -106,42 +133,50 @@ GetTransactionRule Get a transaction rule
 
 Returns the details of a transaction rule.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param transactionRuleId The unique identifier of the transaction rule.
- @return GetTransactionRuleConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r TransactionRulesApiGetTransactionRuleInput - Request parameters, see GetTransactionRuleInput
+@return TransactionRuleResponse, *http.Response, error
 */
-func (a *TransactionRulesApi) GetTransactionRuleConfig(ctx context.Context, transactionRuleId string) GetTransactionRuleConfig {
-	return GetTransactionRuleConfig{
-		ctx:               ctx,
-		transactionRuleId: transactionRuleId,
-	}
-}
-
-/*
-Get a transaction rule
-Returns the details of a transaction rule.
- * @param transactionRuleId The unique identifier of the transaction rule.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return TransactionRuleResponse
-*/
-
-func (a *TransactionRulesApi) GetTransactionRule(r GetTransactionRuleConfig) (TransactionRuleResponse, *_nethttp.Response, error) {
+func (a *TransactionRulesApi) GetTransactionRule(ctx context.Context, r TransactionRulesApiGetTransactionRuleInput) (TransactionRuleResponse, *http.Response, error) {
 	res := &TransactionRuleResponse{}
 	path := "/transactionRules/{transactionRuleId}"
 	path = strings.Replace(path, "{"+"transactionRuleId"+"}", url.PathEscape(common.ParameterValueToString(r.transactionRuleId, "transactionRuleId")), -1)
-	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path, r.ctx)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type UpdateTransactionRuleConfig struct {
-	ctx                 context.Context
+// All parameters accepted by TransactionRulesApi.UpdateTransactionRule
+type TransactionRulesApiUpdateTransactionRuleInput struct {
 	transactionRuleId   string
 	transactionRuleInfo *TransactionRuleInfo
 }
 
-func (r UpdateTransactionRuleConfig) TransactionRuleInfo(transactionRuleInfo TransactionRuleInfo) UpdateTransactionRuleConfig {
+func (r TransactionRulesApiUpdateTransactionRuleInput) TransactionRuleInfo(transactionRuleInfo TransactionRuleInfo) TransactionRulesApiUpdateTransactionRuleInput {
 	r.transactionRuleInfo = &transactionRuleInfo
 	return r
+}
+
+/*
+Prepare a request for UpdateTransactionRule
+@param transactionRuleId The unique identifier of the transaction rule.
+@return TransactionRulesApiUpdateTransactionRuleInput
+*/
+func (a *TransactionRulesApi) UpdateTransactionRuleInput(transactionRuleId string) TransactionRulesApiUpdateTransactionRuleInput {
+	return TransactionRulesApiUpdateTransactionRuleInput{
+		transactionRuleId: transactionRuleId,
+	}
 }
 
 /*
@@ -153,30 +188,26 @@ Updates a transaction rule.
 
 * When updating any other parameter, you need to send all existing resource parameters. If you omit a parameter in the request, that parameter is removed from the resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param transactionRuleId The unique identifier of the transaction rule.
- @return UpdateTransactionRuleConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r TransactionRulesApiUpdateTransactionRuleInput - Request parameters, see UpdateTransactionRuleInput
+@return TransactionRule, *http.Response, error
 */
-func (a *TransactionRulesApi) UpdateTransactionRuleConfig(ctx context.Context, transactionRuleId string) UpdateTransactionRuleConfig {
-	return UpdateTransactionRuleConfig{
-		ctx:               ctx,
-		transactionRuleId: transactionRuleId,
-	}
-}
-
-/*
-Update a transaction rule
-Updates a transaction rule.   * To update only the status of a transaction rule, send only the &#x60;status&#x60; parameter. All other parameters not provided in the request are left unchanged.  * When updating any other parameter, you need to send all existing resource parameters. If you omit a parameter in the request, that parameter is removed from the resource.
- * @param transactionRuleId The unique identifier of the transaction rule.
- * @param req TransactionRuleInfo - reference of TransactionRuleInfo).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return TransactionRule
-*/
-
-func (a *TransactionRulesApi) UpdateTransactionRule(r UpdateTransactionRuleConfig) (TransactionRule, *_nethttp.Response, error) {
+func (a *TransactionRulesApi) UpdateTransactionRule(ctx context.Context, r TransactionRulesApiUpdateTransactionRuleInput) (TransactionRule, *http.Response, error) {
 	res := &TransactionRule{}
 	path := "/transactionRules/{transactionRuleId}"
 	path = strings.Replace(path, "{"+"transactionRuleId"+"}", url.PathEscape(common.ParameterValueToString(r.transactionRuleId, "transactionRuleId")), -1)
-	httpRes, err := a.Client.MakeHTTPPatchRequest(r.transactionRuleInfo, res, a.BasePath()+path, r.ctx)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.transactionRuleInfo,
+		res,
+		http.MethodPatch,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }

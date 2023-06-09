@@ -175,7 +175,9 @@ func (o TransferInstrumentReference) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.RealLastFour) {
 		toSerialize["realLastFour"] = o.RealLastFour
 	}
-	// skip: trustedSource is readOnly
+	if !common.IsNil(o.TrustedSource) {
+		toSerialize["trustedSource"] = o.TrustedSource
+	}
 	return toSerialize, nil
 }
 

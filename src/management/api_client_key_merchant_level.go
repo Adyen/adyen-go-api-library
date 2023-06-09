@@ -10,21 +10,32 @@ package management
 
 import (
 	"context"
-	_context "context"
-	_nethttp "net/http"
+	"net/http"
 	"net/url"
 	"strings"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// ClientKeyMerchantLevelApi ClientKeyMerchantLevelApi service
+// ClientKeyMerchantLevelApi service
 type ClientKeyMerchantLevelApi common.Service
 
-type ClientKeyMerchantLevelApiGenerateNewClientKeyConfig struct {
-	ctx             context.Context
+// All parameters accepted by ClientKeyMerchantLevelApi.GenerateNewClientKey
+type ClientKeyMerchantLevelApiGenerateNewClientKeyInput struct {
 	merchantId      string
 	apiCredentialId string
+}
+
+/*
+Prepare a request for GenerateNewClientKey
+@param merchantId The unique identifier of the merchant account.@param apiCredentialId Unique identifier of the API credential.
+@return ClientKeyMerchantLevelApiGenerateNewClientKeyInput
+*/
+func (a *ClientKeyMerchantLevelApi) GenerateNewClientKeyInput(merchantId string, apiCredentialId string) ClientKeyMerchantLevelApiGenerateNewClientKeyInput {
+	return ClientKeyMerchantLevelApiGenerateNewClientKeyInput{
+		merchantId:      merchantId,
+		apiCredentialId: apiCredentialId,
+	}
 }
 
 /*
@@ -35,33 +46,27 @@ Returns a new [client key](https://docs.adyen.com/development-resources/client-s
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—API credentials read and write
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param merchantId The unique identifier of the merchant account.
- @param apiCredentialId Unique identifier of the API credential.
- @return ClientKeyMerchantLevelApiGenerateNewClientKeyConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r ClientKeyMerchantLevelApiGenerateNewClientKeyInput - Request parameters, see GenerateNewClientKeyInput
+@return GenerateClientKeyResponse, *http.Response, error
 */
-func (a *ClientKeyMerchantLevelApi) GenerateNewClientKeyConfig(ctx context.Context, merchantId string, apiCredentialId string) ClientKeyMerchantLevelApiGenerateNewClientKeyConfig {
-	return ClientKeyMerchantLevelApiGenerateNewClientKeyConfig{
-		ctx:             ctx,
-		merchantId:      merchantId,
-		apiCredentialId: apiCredentialId,
-	}
-}
-
-/*
-Generate new client key
-Returns a new [client key](https://docs.adyen.com/development-resources/client-side-authentication#how-it-works) for the API credential identified in the path. You can use the new client key a few minutes after generating it. The old client key stops working 24 hours after generating a new one.  To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—API credentials read and write
- * @param merchantId The unique identifier of the merchant account.
- * @param apiCredentialId Unique identifier of the API credential.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return GenerateClientKeyResponse
-*/
-
-func (a *ClientKeyMerchantLevelApi) GenerateNewClientKey(r ClientKeyMerchantLevelApiGenerateNewClientKeyConfig) (GenerateClientKeyResponse, *_nethttp.Response, error) {
+func (a *ClientKeyMerchantLevelApi) GenerateNewClientKey(ctx context.Context, r ClientKeyMerchantLevelApiGenerateNewClientKeyInput) (GenerateClientKeyResponse, *http.Response, error) {
 	res := &GenerateClientKeyResponse{}
 	path := "/merchants/{merchantId}/apiCredentials/{apiCredentialId}/generateClientKey"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"apiCredentialId"+"}", url.PathEscape(common.ParameterValueToString(r.apiCredentialId, "apiCredentialId")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPost, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }

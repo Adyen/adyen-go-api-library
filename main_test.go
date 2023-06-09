@@ -1,9 +1,3 @@
-/*
- * Adyen API Client
- *
- * Contact: support@adyen.com
- */
-
 package main
 
 import (
@@ -21,10 +15,10 @@ import (
 
 func Test_main(t *testing.T) {
 	t.Run("Create a new APIClient", func(t *testing.T) {
-
 		client := adyen.NewClient(&common.Config{
 			Environment: "TEST",
 		})
+
 		require.NotNil(t, client)
 		checkoutClient := client.Checkout()
 		require.NotNil(t, checkoutClient)
@@ -34,8 +28,10 @@ func Test_main(t *testing.T) {
 		assert.Equal(t, "https://checkout-test.adyen.com/checkout/"+adyen.CheckoutAPIVersion, checkoutClient.ModificationsApi.BasePath())
 
 		t.Run("Create a API request that should fail", func(t *testing.T) {
-			req := checkoutClient.PaymentsApi.PaymentMethodsConfig(context.Background()).PaymentMethodsRequest(checkout.PaymentMethodsRequest{})
-			res, httpRes, err := checkoutClient.PaymentsApi.PaymentMethods(req)
+			req := checkoutClient.PaymentsApi.PaymentMethodsInput().PaymentMethodsRequest(checkout.PaymentMethodsRequest{})
+
+			res, httpRes, err := checkoutClient.PaymentsApi.PaymentMethods(context.Background(), req)
+
 			require.NotNil(t, err)
 			assert.Equal(t, true, strings.Contains(err.Error(), "Unauthorized"))
 			require.NotNil(t, res)

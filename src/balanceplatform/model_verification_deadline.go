@@ -103,8 +103,8 @@ func (o VerificationDeadline) MarshalJSON() ([]byte, error) {
 
 func (o VerificationDeadline) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	// skip: capabilities is readOnly
-	// skip: expiresAt is readOnly
+	toSerialize["capabilities"] = o.Capabilities
+	toSerialize["expiresAt"] = o.ExpiresAt
 	return toSerialize, nil
 }
 
