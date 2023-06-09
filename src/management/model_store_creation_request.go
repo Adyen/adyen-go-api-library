@@ -20,16 +20,15 @@ var _ common.MappedNullable = &StoreCreationRequest{}
 // StoreCreationRequest struct for StoreCreationRequest
 type StoreCreationRequest struct {
 	Address StoreLocation `json:"address"`
-	// The unique identifiers of the [business lines](https://docs.adyen.com/api-explorer/legalentity/latest/post/businessLines#responses-200-id) that the store is associated with. If not specified, the business line of the merchant account is used. Required when there are multiple business lines under the merchant account.
-	// Deprecated
+	// The unique identifiers of the [business lines](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/businesslines__resParam_id) that the store is associated with. If not specified, the business line of the merchant account is used. Required when there are multiple business lines under the merchant account.
 	BusinessLineIds []string `json:"businessLineIds,omitempty"`
 	// Your description of the store.
 	Description string `json:"description"`
-	// Used by certain payment methods and tax authorities to uniquely identify the store.  For CNPJ in Brazil, ZIP in Australia and SIRET in France.  This field is conditionally required if the store is in Brazil or France.  For CNPJ the format is 00.000.000/0000-00, can be submitted as just digits, or with dots, slash & hyphen.  For Australian stores an optional field used by the Zip payment method, equivalent to their locationId.  For SIRET the format is 14 digits.
+	// When using the Zip payment method: The location ID that Zip has assigned to your store.
 	ExternalReferenceId *string `json:"externalReferenceId,omitempty"`
 	// The phone number of the store, including '+' and country code.
 	PhoneNumber string `json:"phoneNumber"`
-	// Your reference to recognize the store by. Also known as the store code.  Allowed characters: lowercase and uppercase letters without diacritics, numbers 0 through 9, hyphen (-), and underscore (_).  If you do not provide a reference in your POST request, it is populated with the Adyen-generated [id](https://docs.adyen.com/api-explorer/Management/latest/post/stores#responses-200-id).
+	// Your reference to recognize the store by. Also known as the store code.  Allowed characters: Lowercase and uppercase letters without diacritics, numbers 0 through 9, hyphen (-), and underscore (_).
 	Reference *string `json:"reference,omitempty"`
 	// The store name to be shown on the shopper's bank or credit card statement and on the shopper receipt. Maximum length: 22 characters; can't be all numbers.
 	ShopperStatement   string                   `json:"shopperStatement"`
@@ -82,7 +81,6 @@ func (o *StoreCreationRequest) SetAddress(v StoreLocation) {
 }
 
 // GetBusinessLineIds returns the BusinessLineIds field value if set, zero value otherwise.
-// Deprecated
 func (o *StoreCreationRequest) GetBusinessLineIds() []string {
 	if o == nil || common.IsNil(o.BusinessLineIds) {
 		var ret []string
@@ -93,7 +91,6 @@ func (o *StoreCreationRequest) GetBusinessLineIds() []string {
 
 // GetBusinessLineIdsOk returns a tuple with the BusinessLineIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *StoreCreationRequest) GetBusinessLineIdsOk() ([]string, bool) {
 	if o == nil || common.IsNil(o.BusinessLineIds) {
 		return nil, false
@@ -111,7 +108,6 @@ func (o *StoreCreationRequest) HasBusinessLineIds() bool {
 }
 
 // SetBusinessLineIds gets a reference to the given []string and assigns it to the BusinessLineIds field.
-// Deprecated
 func (o *StoreCreationRequest) SetBusinessLineIds(v []string) {
 	o.BusinessLineIds = v
 }

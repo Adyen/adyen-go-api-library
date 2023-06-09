@@ -21,66 +21,48 @@ var _ common.MappedNullable = &Terminal{}
 // Terminal struct for Terminal
 type Terminal struct {
 	// The [assignment status](https://docs.adyen.com/point-of-sale/automating-terminal-management/assign-terminals-api) of the terminal. If true, the terminal is assigned. If false, the terminal is in inventory and can't be boarded.
-	// Deprecated
 	Assigned *bool `json:"assigned,omitempty"`
 	// The Bluetooth IP address of the terminal.
-	// Deprecated
 	BluetoothIp *string `json:"bluetoothIp,omitempty"`
 	// The Bluetooth MAC address of the terminal.
 	BluetoothMac *string `json:"bluetoothMac,omitempty"`
 	// The city where the terminal is located.
-	// Deprecated
 	City *string `json:"city,omitempty"`
 	// The company account that the terminal is associated with. If this is the only account level shown in the response, the terminal is assigned to the inventory of the company account.
-	// Deprecated
 	CompanyAccount *string `json:"companyAccount,omitempty"`
 	// The country code of the country where the terminal is located.
-	// Deprecated
 	CountryCode *string `json:"countryCode,omitempty"`
 	// The model name of the terminal.
-	// Deprecated
 	DeviceModel *string `json:"deviceModel,omitempty"`
 	// The ethernet IP address of the terminal.
-	// Deprecated
 	EthernetIp *string `json:"ethernetIp,omitempty"`
 	// The ethernet MAC address of the terminal.
-	// Deprecated
 	EthernetMac *string `json:"ethernetMac,omitempty"`
 	// The software release currently in use on the terminal.
 	FirmwareVersion *string `json:"firmwareVersion,omitempty"`
 	// The integrated circuit card identifier (ICCID) of the SIM card in the terminal.
-	// Deprecated
 	Iccid *string `json:"iccid,omitempty"`
 	// The unique identifier of the terminal.
 	Id *string `json:"id,omitempty"`
 	// Date and time of the last activity on the terminal. Not included when the last activity was more than 14 days ago.
-	// Deprecated
 	LastActivityDateTime *time.Time `json:"lastActivityDateTime,omitempty"`
 	// Date and time of the last transaction on the terminal. Not included when the last transaction was more than 14 days ago.
-	// Deprecated
 	LastTransactionDateTime *time.Time `json:"lastTransactionDateTime,omitempty"`
 	// The Ethernet link negotiation that the terminal uses:  - `auto`: Auto-negotiation  - `100full`: 100 Mbps full duplex
-	// Deprecated
 	LinkNegotiation *string `json:"linkNegotiation,omitempty"`
 	// The serial number of the terminal.
 	SerialNumber *string `json:"serialNumber,omitempty"`
 	// On a terminal that supports 3G or 4G connectivity, indicates the status of the SIM card in the terminal: ACTIVE or INVENTORY.
-	// Deprecated
 	SimStatus *string `json:"simStatus,omitempty"`
 	// Indicates when the terminal was last online, whether the terminal is being reassigned, or whether the terminal is turned off. If the terminal was last online more that a week ago, it is also shown as turned off.
-	// Deprecated
 	Status *string `json:"status,omitempty"`
 	// The status of the store that the terminal is assigned to.
-	// Deprecated
 	StoreStatus *string `json:"storeStatus,omitempty"`
 	// The terminal's IP address in your Wi-Fi network.
-	// Deprecated
 	WifiIp *string `json:"wifiIp,omitempty"`
 	// The terminal's MAC address in your Wi-Fi network.
-	// Deprecated
 	WifiMac *string `json:"wifiMac,omitempty"`
 	// The SSID of the Wi-Fi network that your terminal is connected to.
-	// Deprecated
 	WifiSsid *string `json:"wifiSsid,omitempty"`
 }
 
@@ -102,7 +84,6 @@ func NewTerminalWithDefaults() *Terminal {
 }
 
 // GetAssigned returns the Assigned field value if set, zero value otherwise.
-// Deprecated
 func (o *Terminal) GetAssigned() bool {
 	if o == nil || common.IsNil(o.Assigned) {
 		var ret bool
@@ -113,7 +94,6 @@ func (o *Terminal) GetAssigned() bool {
 
 // GetAssignedOk returns a tuple with the Assigned field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *Terminal) GetAssignedOk() (*bool, bool) {
 	if o == nil || common.IsNil(o.Assigned) {
 		return nil, false
@@ -131,13 +111,11 @@ func (o *Terminal) HasAssigned() bool {
 }
 
 // SetAssigned gets a reference to the given bool and assigns it to the Assigned field.
-// Deprecated
 func (o *Terminal) SetAssigned(v bool) {
 	o.Assigned = &v
 }
 
 // GetBluetoothIp returns the BluetoothIp field value if set, zero value otherwise.
-// Deprecated
 func (o *Terminal) GetBluetoothIp() string {
 	if o == nil || common.IsNil(o.BluetoothIp) {
 		var ret string
@@ -148,7 +126,6 @@ func (o *Terminal) GetBluetoothIp() string {
 
 // GetBluetoothIpOk returns a tuple with the BluetoothIp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *Terminal) GetBluetoothIpOk() (*string, bool) {
 	if o == nil || common.IsNil(o.BluetoothIp) {
 		return nil, false
@@ -166,7 +143,6 @@ func (o *Terminal) HasBluetoothIp() bool {
 }
 
 // SetBluetoothIp gets a reference to the given string and assigns it to the BluetoothIp field.
-// Deprecated
 func (o *Terminal) SetBluetoothIp(v string) {
 	o.BluetoothIp = &v
 }
@@ -204,7 +180,6 @@ func (o *Terminal) SetBluetoothMac(v string) {
 }
 
 // GetCity returns the City field value if set, zero value otherwise.
-// Deprecated
 func (o *Terminal) GetCity() string {
 	if o == nil || common.IsNil(o.City) {
 		var ret string
@@ -215,7 +190,6 @@ func (o *Terminal) GetCity() string {
 
 // GetCityOk returns a tuple with the City field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *Terminal) GetCityOk() (*string, bool) {
 	if o == nil || common.IsNil(o.City) {
 		return nil, false
@@ -233,13 +207,11 @@ func (o *Terminal) HasCity() bool {
 }
 
 // SetCity gets a reference to the given string and assigns it to the City field.
-// Deprecated
 func (o *Terminal) SetCity(v string) {
 	o.City = &v
 }
 
 // GetCompanyAccount returns the CompanyAccount field value if set, zero value otherwise.
-// Deprecated
 func (o *Terminal) GetCompanyAccount() string {
 	if o == nil || common.IsNil(o.CompanyAccount) {
 		var ret string
@@ -250,7 +222,6 @@ func (o *Terminal) GetCompanyAccount() string {
 
 // GetCompanyAccountOk returns a tuple with the CompanyAccount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *Terminal) GetCompanyAccountOk() (*string, bool) {
 	if o == nil || common.IsNil(o.CompanyAccount) {
 		return nil, false
@@ -268,13 +239,11 @@ func (o *Terminal) HasCompanyAccount() bool {
 }
 
 // SetCompanyAccount gets a reference to the given string and assigns it to the CompanyAccount field.
-// Deprecated
 func (o *Terminal) SetCompanyAccount(v string) {
 	o.CompanyAccount = &v
 }
 
 // GetCountryCode returns the CountryCode field value if set, zero value otherwise.
-// Deprecated
 func (o *Terminal) GetCountryCode() string {
 	if o == nil || common.IsNil(o.CountryCode) {
 		var ret string
@@ -285,7 +254,6 @@ func (o *Terminal) GetCountryCode() string {
 
 // GetCountryCodeOk returns a tuple with the CountryCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *Terminal) GetCountryCodeOk() (*string, bool) {
 	if o == nil || common.IsNil(o.CountryCode) {
 		return nil, false
@@ -303,13 +271,11 @@ func (o *Terminal) HasCountryCode() bool {
 }
 
 // SetCountryCode gets a reference to the given string and assigns it to the CountryCode field.
-// Deprecated
 func (o *Terminal) SetCountryCode(v string) {
 	o.CountryCode = &v
 }
 
 // GetDeviceModel returns the DeviceModel field value if set, zero value otherwise.
-// Deprecated
 func (o *Terminal) GetDeviceModel() string {
 	if o == nil || common.IsNil(o.DeviceModel) {
 		var ret string
@@ -320,7 +286,6 @@ func (o *Terminal) GetDeviceModel() string {
 
 // GetDeviceModelOk returns a tuple with the DeviceModel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *Terminal) GetDeviceModelOk() (*string, bool) {
 	if o == nil || common.IsNil(o.DeviceModel) {
 		return nil, false
@@ -338,13 +303,11 @@ func (o *Terminal) HasDeviceModel() bool {
 }
 
 // SetDeviceModel gets a reference to the given string and assigns it to the DeviceModel field.
-// Deprecated
 func (o *Terminal) SetDeviceModel(v string) {
 	o.DeviceModel = &v
 }
 
 // GetEthernetIp returns the EthernetIp field value if set, zero value otherwise.
-// Deprecated
 func (o *Terminal) GetEthernetIp() string {
 	if o == nil || common.IsNil(o.EthernetIp) {
 		var ret string
@@ -355,7 +318,6 @@ func (o *Terminal) GetEthernetIp() string {
 
 // GetEthernetIpOk returns a tuple with the EthernetIp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *Terminal) GetEthernetIpOk() (*string, bool) {
 	if o == nil || common.IsNil(o.EthernetIp) {
 		return nil, false
@@ -373,13 +335,11 @@ func (o *Terminal) HasEthernetIp() bool {
 }
 
 // SetEthernetIp gets a reference to the given string and assigns it to the EthernetIp field.
-// Deprecated
 func (o *Terminal) SetEthernetIp(v string) {
 	o.EthernetIp = &v
 }
 
 // GetEthernetMac returns the EthernetMac field value if set, zero value otherwise.
-// Deprecated
 func (o *Terminal) GetEthernetMac() string {
 	if o == nil || common.IsNil(o.EthernetMac) {
 		var ret string
@@ -390,7 +350,6 @@ func (o *Terminal) GetEthernetMac() string {
 
 // GetEthernetMacOk returns a tuple with the EthernetMac field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *Terminal) GetEthernetMacOk() (*string, bool) {
 	if o == nil || common.IsNil(o.EthernetMac) {
 		return nil, false
@@ -408,7 +367,6 @@ func (o *Terminal) HasEthernetMac() bool {
 }
 
 // SetEthernetMac gets a reference to the given string and assigns it to the EthernetMac field.
-// Deprecated
 func (o *Terminal) SetEthernetMac(v string) {
 	o.EthernetMac = &v
 }
@@ -446,7 +404,6 @@ func (o *Terminal) SetFirmwareVersion(v string) {
 }
 
 // GetIccid returns the Iccid field value if set, zero value otherwise.
-// Deprecated
 func (o *Terminal) GetIccid() string {
 	if o == nil || common.IsNil(o.Iccid) {
 		var ret string
@@ -457,7 +414,6 @@ func (o *Terminal) GetIccid() string {
 
 // GetIccidOk returns a tuple with the Iccid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *Terminal) GetIccidOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Iccid) {
 		return nil, false
@@ -475,7 +431,6 @@ func (o *Terminal) HasIccid() bool {
 }
 
 // SetIccid gets a reference to the given string and assigns it to the Iccid field.
-// Deprecated
 func (o *Terminal) SetIccid(v string) {
 	o.Iccid = &v
 }
@@ -513,7 +468,6 @@ func (o *Terminal) SetId(v string) {
 }
 
 // GetLastActivityDateTime returns the LastActivityDateTime field value if set, zero value otherwise.
-// Deprecated
 func (o *Terminal) GetLastActivityDateTime() time.Time {
 	if o == nil || common.IsNil(o.LastActivityDateTime) {
 		var ret time.Time
@@ -524,7 +478,6 @@ func (o *Terminal) GetLastActivityDateTime() time.Time {
 
 // GetLastActivityDateTimeOk returns a tuple with the LastActivityDateTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *Terminal) GetLastActivityDateTimeOk() (*time.Time, bool) {
 	if o == nil || common.IsNil(o.LastActivityDateTime) {
 		return nil, false
@@ -542,13 +495,11 @@ func (o *Terminal) HasLastActivityDateTime() bool {
 }
 
 // SetLastActivityDateTime gets a reference to the given time.Time and assigns it to the LastActivityDateTime field.
-// Deprecated
 func (o *Terminal) SetLastActivityDateTime(v time.Time) {
 	o.LastActivityDateTime = &v
 }
 
 // GetLastTransactionDateTime returns the LastTransactionDateTime field value if set, zero value otherwise.
-// Deprecated
 func (o *Terminal) GetLastTransactionDateTime() time.Time {
 	if o == nil || common.IsNil(o.LastTransactionDateTime) {
 		var ret time.Time
@@ -559,7 +510,6 @@ func (o *Terminal) GetLastTransactionDateTime() time.Time {
 
 // GetLastTransactionDateTimeOk returns a tuple with the LastTransactionDateTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *Terminal) GetLastTransactionDateTimeOk() (*time.Time, bool) {
 	if o == nil || common.IsNil(o.LastTransactionDateTime) {
 		return nil, false
@@ -577,13 +527,11 @@ func (o *Terminal) HasLastTransactionDateTime() bool {
 }
 
 // SetLastTransactionDateTime gets a reference to the given time.Time and assigns it to the LastTransactionDateTime field.
-// Deprecated
 func (o *Terminal) SetLastTransactionDateTime(v time.Time) {
 	o.LastTransactionDateTime = &v
 }
 
 // GetLinkNegotiation returns the LinkNegotiation field value if set, zero value otherwise.
-// Deprecated
 func (o *Terminal) GetLinkNegotiation() string {
 	if o == nil || common.IsNil(o.LinkNegotiation) {
 		var ret string
@@ -594,7 +542,6 @@ func (o *Terminal) GetLinkNegotiation() string {
 
 // GetLinkNegotiationOk returns a tuple with the LinkNegotiation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *Terminal) GetLinkNegotiationOk() (*string, bool) {
 	if o == nil || common.IsNil(o.LinkNegotiation) {
 		return nil, false
@@ -612,7 +559,6 @@ func (o *Terminal) HasLinkNegotiation() bool {
 }
 
 // SetLinkNegotiation gets a reference to the given string and assigns it to the LinkNegotiation field.
-// Deprecated
 func (o *Terminal) SetLinkNegotiation(v string) {
 	o.LinkNegotiation = &v
 }
@@ -650,7 +596,6 @@ func (o *Terminal) SetSerialNumber(v string) {
 }
 
 // GetSimStatus returns the SimStatus field value if set, zero value otherwise.
-// Deprecated
 func (o *Terminal) GetSimStatus() string {
 	if o == nil || common.IsNil(o.SimStatus) {
 		var ret string
@@ -661,7 +606,6 @@ func (o *Terminal) GetSimStatus() string {
 
 // GetSimStatusOk returns a tuple with the SimStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *Terminal) GetSimStatusOk() (*string, bool) {
 	if o == nil || common.IsNil(o.SimStatus) {
 		return nil, false
@@ -679,13 +623,11 @@ func (o *Terminal) HasSimStatus() bool {
 }
 
 // SetSimStatus gets a reference to the given string and assigns it to the SimStatus field.
-// Deprecated
 func (o *Terminal) SetSimStatus(v string) {
 	o.SimStatus = &v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-// Deprecated
 func (o *Terminal) GetStatus() string {
 	if o == nil || common.IsNil(o.Status) {
 		var ret string
@@ -696,7 +638,6 @@ func (o *Terminal) GetStatus() string {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *Terminal) GetStatusOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Status) {
 		return nil, false
@@ -714,13 +655,11 @@ func (o *Terminal) HasStatus() bool {
 }
 
 // SetStatus gets a reference to the given string and assigns it to the Status field.
-// Deprecated
 func (o *Terminal) SetStatus(v string) {
 	o.Status = &v
 }
 
 // GetStoreStatus returns the StoreStatus field value if set, zero value otherwise.
-// Deprecated
 func (o *Terminal) GetStoreStatus() string {
 	if o == nil || common.IsNil(o.StoreStatus) {
 		var ret string
@@ -731,7 +670,6 @@ func (o *Terminal) GetStoreStatus() string {
 
 // GetStoreStatusOk returns a tuple with the StoreStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *Terminal) GetStoreStatusOk() (*string, bool) {
 	if o == nil || common.IsNil(o.StoreStatus) {
 		return nil, false
@@ -749,13 +687,11 @@ func (o *Terminal) HasStoreStatus() bool {
 }
 
 // SetStoreStatus gets a reference to the given string and assigns it to the StoreStatus field.
-// Deprecated
 func (o *Terminal) SetStoreStatus(v string) {
 	o.StoreStatus = &v
 }
 
 // GetWifiIp returns the WifiIp field value if set, zero value otherwise.
-// Deprecated
 func (o *Terminal) GetWifiIp() string {
 	if o == nil || common.IsNil(o.WifiIp) {
 		var ret string
@@ -766,7 +702,6 @@ func (o *Terminal) GetWifiIp() string {
 
 // GetWifiIpOk returns a tuple with the WifiIp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *Terminal) GetWifiIpOk() (*string, bool) {
 	if o == nil || common.IsNil(o.WifiIp) {
 		return nil, false
@@ -784,13 +719,11 @@ func (o *Terminal) HasWifiIp() bool {
 }
 
 // SetWifiIp gets a reference to the given string and assigns it to the WifiIp field.
-// Deprecated
 func (o *Terminal) SetWifiIp(v string) {
 	o.WifiIp = &v
 }
 
 // GetWifiMac returns the WifiMac field value if set, zero value otherwise.
-// Deprecated
 func (o *Terminal) GetWifiMac() string {
 	if o == nil || common.IsNil(o.WifiMac) {
 		var ret string
@@ -801,7 +734,6 @@ func (o *Terminal) GetWifiMac() string {
 
 // GetWifiMacOk returns a tuple with the WifiMac field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *Terminal) GetWifiMacOk() (*string, bool) {
 	if o == nil || common.IsNil(o.WifiMac) {
 		return nil, false
@@ -819,13 +751,11 @@ func (o *Terminal) HasWifiMac() bool {
 }
 
 // SetWifiMac gets a reference to the given string and assigns it to the WifiMac field.
-// Deprecated
 func (o *Terminal) SetWifiMac(v string) {
 	o.WifiMac = &v
 }
 
 // GetWifiSsid returns the WifiSsid field value if set, zero value otherwise.
-// Deprecated
 func (o *Terminal) GetWifiSsid() string {
 	if o == nil || common.IsNil(o.WifiSsid) {
 		var ret string
@@ -836,7 +766,6 @@ func (o *Terminal) GetWifiSsid() string {
 
 // GetWifiSsidOk returns a tuple with the WifiSsid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *Terminal) GetWifiSsidOk() (*string, bool) {
 	if o == nil || common.IsNil(o.WifiSsid) {
 		return nil, false
@@ -854,7 +783,6 @@ func (o *Terminal) HasWifiSsid() bool {
 }
 
 // SetWifiSsid gets a reference to the given string and assigns it to the WifiSsid field.
-// Deprecated
 func (o *Terminal) SetWifiSsid(v string) {
 	o.WifiSsid = &v
 }

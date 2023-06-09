@@ -47,8 +47,6 @@ type APIClient struct {
 
 	PayoutSettingsMerchantLevelApi *PayoutSettingsMerchantLevelApi
 
-	SplitConfigurationMerchantLevelApi *SplitConfigurationMerchantLevelApi
-
 	TerminalActionsCompanyLevelApi *TerminalActionsCompanyLevelApi
 
 	TerminalActionsTerminalLevelApi *TerminalActionsTerminalLevelApi
@@ -99,7 +97,6 @@ func NewAPIClient(client *common.Client) *APIClient {
 	c.MyAPICredentialApi = (*MyAPICredentialApi)(&c.common)
 	c.PaymentMethodsMerchantLevelApi = (*PaymentMethodsMerchantLevelApi)(&c.common)
 	c.PayoutSettingsMerchantLevelApi = (*PayoutSettingsMerchantLevelApi)(&c.common)
-	c.SplitConfigurationMerchantLevelApi = (*SplitConfigurationMerchantLevelApi)(&c.common)
 	c.TerminalActionsCompanyLevelApi = (*TerminalActionsCompanyLevelApi)(&c.common)
 	c.TerminalActionsTerminalLevelApi = (*TerminalActionsTerminalLevelApi)(&c.common)
 	c.TerminalOrdersCompanyLevelApi = (*TerminalOrdersCompanyLevelApi)(&c.common)

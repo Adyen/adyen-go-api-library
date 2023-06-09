@@ -12,25 +12,36 @@ import (
 	"context"
 	"encoding/json"
 	"io/ioutil"
-	_nethttp "net/http"
+	"net/http"
 	"net/url"
 	"strings"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// UsersCompanyLevelApi UsersCompanyLevelApi service
+// UsersCompanyLevelApi service
 type UsersCompanyLevelApi common.Service
 
-type UsersCompanyLevelApiCreateNewUserConfig struct {
-	ctx                      context.Context
+// All parameters accepted by UsersCompanyLevelApi.CreateNewUser
+type UsersCompanyLevelApiCreateNewUserInput struct {
 	companyId                string
 	createCompanyUserRequest *CreateCompanyUserRequest
 }
 
-func (r UsersCompanyLevelApiCreateNewUserConfig) CreateCompanyUserRequest(createCompanyUserRequest CreateCompanyUserRequest) UsersCompanyLevelApiCreateNewUserConfig {
+func (r UsersCompanyLevelApiCreateNewUserInput) CreateCompanyUserRequest(createCompanyUserRequest CreateCompanyUserRequest) UsersCompanyLevelApiCreateNewUserInput {
 	r.createCompanyUserRequest = &createCompanyUserRequest
 	return r
+}
+
+/*
+Prepare a request for CreateNewUser
+@param companyId The unique identifier of the company account.
+@return UsersCompanyLevelApiCreateNewUserInput
+*/
+func (a *UsersCompanyLevelApi) CreateNewUserInput(companyId string) UsersCompanyLevelApiCreateNewUserInput {
+	return UsersCompanyLevelApiCreateNewUserInput{
+		companyId: companyId,
+	}
 }
 
 /*
@@ -41,86 +52,94 @@ Creates the user for the `companyId` identified in the path.
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Users read and write
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param companyId The unique identifier of the company account.
-	@return UsersCompanyLevelApiCreateNewUserConfig
-*/
-func (a *UsersCompanyLevelApi) CreateNewUserConfig(ctx context.Context, companyId string) UsersCompanyLevelApiCreateNewUserConfig {
-	return UsersCompanyLevelApiCreateNewUserConfig{
-		ctx:       ctx,
-		companyId: companyId,
-	}
-}
 
-/*
-Create a new user
-Creates the user for the &#x60;companyId&#x60; identified in the path.  To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Users read and write
- * @param companyId The unique identifier of the company account.
- * @param req CreateCompanyUserRequest - reference of CreateCompanyUserRequest).
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return CreateCompanyUserResponse
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r UsersCompanyLevelApiCreateNewUserInput - Request parameters, see CreateNewUserInput
+@return CreateCompanyUserResponse, *http.Response, error
 */
-
-func (a *UsersCompanyLevelApi) CreateNewUser(r UsersCompanyLevelApiCreateNewUserConfig) (CreateCompanyUserResponse, *_nethttp.Response, error) {
-	var serviceError common.RestServiceError
+func (a *UsersCompanyLevelApi) CreateNewUser(ctx context.Context, r UsersCompanyLevelApiCreateNewUserInput) (CreateCompanyUserResponse, *http.Response, error) {
 	res := &CreateCompanyUserResponse{}
 	path := "/companies/{companyId}/users"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		r.createCompanyUserRequest,
 		res,
-		_nethttp.MethodPost,
+		http.MethodPost,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
-	defer httpRes.Body.Close()
+
+	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
+
 	return *res, httpRes, err
 }
 
-type UsersCompanyLevelApiGetUserDetailsConfig struct {
-	ctx       context.Context
+// All parameters accepted by UsersCompanyLevelApi.GetUserDetails
+type UsersCompanyLevelApiGetUserDetailsInput struct {
 	companyId string
 	userId    string
+}
+
+/*
+Prepare a request for GetUserDetails
+@param companyId The unique identifier of the company account.@param userId The unique identifier of the user.
+@return UsersCompanyLevelApiGetUserDetailsInput
+*/
+func (a *UsersCompanyLevelApi) GetUserDetailsInput(companyId string, userId string) UsersCompanyLevelApiGetUserDetailsInput {
+	return UsersCompanyLevelApiGetUserDetailsInput{
+		companyId: companyId,
+		userId:    userId,
+	}
 }
 
 /*
@@ -131,30 +150,12 @@ Returns user details for the `userId` and the `companyId` identified in the path
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Users read and write
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param companyId The unique identifier of the company account.
-	@param userId The unique identifier of the user.
-	@return UsersCompanyLevelApiGetUserDetailsConfig
-*/
-func (a *UsersCompanyLevelApi) GetUserDetailsConfig(ctx context.Context, companyId string, userId string) UsersCompanyLevelApiGetUserDetailsConfig {
-	return UsersCompanyLevelApiGetUserDetailsConfig{
-		ctx:       ctx,
-		companyId: companyId,
-		userId:    userId,
-	}
-}
 
-/*
-Get user details
-Returns user details for the &#x60;userId&#x60; and the &#x60;companyId&#x60; identified in the path.  To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Users read and write
- * @param companyId The unique identifier of the company account.
- * @param userId The unique identifier of the user.
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return CompanyUser
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r UsersCompanyLevelApiGetUserDetailsInput - Request parameters, see GetUserDetailsInput
+@return CompanyUser, *http.Response, error
 */
-
-func (a *UsersCompanyLevelApi) GetUserDetails(r UsersCompanyLevelApiGetUserDetailsConfig) (CompanyUser, *_nethttp.Response, error) {
-	var serviceError common.RestServiceError
+func (a *UsersCompanyLevelApi) GetUserDetails(ctx context.Context, r UsersCompanyLevelApiGetUserDetailsInput) (CompanyUser, *http.Response, error) {
 	res := &CompanyUser{}
 	path := "/companies/{companyId}/users/{userId}"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -162,56 +163,68 @@ func (a *UsersCompanyLevelApi) GetUserDetails(r UsersCompanyLevelApiGetUserDetai
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		nil,
 		res,
-		_nethttp.MethodGet,
+		http.MethodGet,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
-	defer httpRes.Body.Close()
+
+	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
+
 	return *res, httpRes, err
 }
 
-type UsersCompanyLevelApiListUsersConfig struct {
-	ctx        context.Context
+// All parameters accepted by UsersCompanyLevelApi.ListUsers
+type UsersCompanyLevelApiListUsersInput struct {
 	companyId  string
 	pageNumber *int32
 	pageSize   *int32
@@ -219,21 +232,32 @@ type UsersCompanyLevelApiListUsersConfig struct {
 }
 
 // The number of the page to return.
-func (r UsersCompanyLevelApiListUsersConfig) PageNumber(pageNumber int32) UsersCompanyLevelApiListUsersConfig {
+func (r UsersCompanyLevelApiListUsersInput) PageNumber(pageNumber int32) UsersCompanyLevelApiListUsersInput {
 	r.pageNumber = &pageNumber
 	return r
 }
 
 // The number of items to have on a page. Maximum value is **100**. The default is **10** items on a page.
-func (r UsersCompanyLevelApiListUsersConfig) PageSize(pageSize int32) UsersCompanyLevelApiListUsersConfig {
+func (r UsersCompanyLevelApiListUsersInput) PageSize(pageSize int32) UsersCompanyLevelApiListUsersInput {
 	r.pageSize = &pageSize
 	return r
 }
 
 // The partial or complete username to select all users that match.
-func (r UsersCompanyLevelApiListUsersConfig) Username(username string) UsersCompanyLevelApiListUsersConfig {
+func (r UsersCompanyLevelApiListUsersInput) Username(username string) UsersCompanyLevelApiListUsersInput {
 	r.username = &username
 	return r
+}
+
+/*
+Prepare a request for ListUsers
+@param companyId The unique identifier of the company account.
+@return UsersCompanyLevelApiListUsersInput
+*/
+func (a *UsersCompanyLevelApi) ListUsersInput(companyId string) UsersCompanyLevelApiListUsersInput {
+	return UsersCompanyLevelApiListUsersInput{
+		companyId: companyId,
+	}
 }
 
 /*
@@ -244,27 +268,12 @@ Returns the list of users for the `companyId` identified in the path.
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Users read and write
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param companyId The unique identifier of the company account.
-	@return UsersCompanyLevelApiListUsersConfig
-*/
-func (a *UsersCompanyLevelApi) ListUsersConfig(ctx context.Context, companyId string) UsersCompanyLevelApiListUsersConfig {
-	return UsersCompanyLevelApiListUsersConfig{
-		ctx:       ctx,
-		companyId: companyId,
-	}
-}
 
-/*
-Get a list of users
-Returns the list of users for the &#x60;companyId&#x60; identified in the path.  To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Users read and write
- * @param companyId The unique identifier of the company account.
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return ListCompanyUsersResponse
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r UsersCompanyLevelApiListUsersInput - Request parameters, see ListUsersInput
+@return ListCompanyUsersResponse, *http.Response, error
 */
-
-func (a *UsersCompanyLevelApi) ListUsers(r UsersCompanyLevelApiListUsersConfig) (ListCompanyUsersResponse, *_nethttp.Response, error) {
-	var serviceError common.RestServiceError
+func (a *UsersCompanyLevelApi) ListUsers(ctx context.Context, r UsersCompanyLevelApiListUsersInput) (ListCompanyUsersResponse, *http.Response, error) {
 	res := &ListCompanyUsersResponse{}
 	path := "/companies/{companyId}/users"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -280,64 +289,88 @@ func (a *UsersCompanyLevelApi) ListUsers(r UsersCompanyLevelApiListUsersConfig) 
 		common.ParameterAddToQuery(queryParams, "username", r.username, "")
 	}
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		nil,
 		res,
-		_nethttp.MethodGet,
+		http.MethodGet,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
-	defer httpRes.Body.Close()
+
+	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
+
 	return *res, httpRes, err
 }
 
-type UsersCompanyLevelApiUpdateUserDetailsConfig struct {
-	ctx                      context.Context
+// All parameters accepted by UsersCompanyLevelApi.UpdateUserDetails
+type UsersCompanyLevelApiUpdateUserDetailsInput struct {
 	companyId                string
 	userId                   string
 	updateCompanyUserRequest *UpdateCompanyUserRequest
 }
 
-func (r UsersCompanyLevelApiUpdateUserDetailsConfig) UpdateCompanyUserRequest(updateCompanyUserRequest UpdateCompanyUserRequest) UsersCompanyLevelApiUpdateUserDetailsConfig {
+func (r UsersCompanyLevelApiUpdateUserDetailsInput) UpdateCompanyUserRequest(updateCompanyUserRequest UpdateCompanyUserRequest) UsersCompanyLevelApiUpdateUserDetailsInput {
 	r.updateCompanyUserRequest = &updateCompanyUserRequest
 	return r
+}
+
+/*
+Prepare a request for UpdateUserDetails
+@param companyId The unique identifier of the company account.@param userId The unique identifier of the user.
+@return UsersCompanyLevelApiUpdateUserDetailsInput
+*/
+func (a *UsersCompanyLevelApi) UpdateUserDetailsInput(companyId string, userId string) UsersCompanyLevelApiUpdateUserDetailsInput {
+	return UsersCompanyLevelApiUpdateUserDetailsInput{
+		companyId: companyId,
+		userId:    userId,
+	}
 }
 
 /*
@@ -348,31 +381,12 @@ Updates user details for the `userId` and the `companyId` identified in the path
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Users read and write
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param companyId The unique identifier of the company account.
-	@param userId The unique identifier of the user.
-	@return UsersCompanyLevelApiUpdateUserDetailsConfig
-*/
-func (a *UsersCompanyLevelApi) UpdateUserDetailsConfig(ctx context.Context, companyId string, userId string) UsersCompanyLevelApiUpdateUserDetailsConfig {
-	return UsersCompanyLevelApiUpdateUserDetailsConfig{
-		ctx:       ctx,
-		companyId: companyId,
-		userId:    userId,
-	}
-}
 
-/*
-Update user details
-Updates user details for the &#x60;userId&#x60; and the &#x60;companyId&#x60; identified in the path.  To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Users read and write
- * @param companyId The unique identifier of the company account.
- * @param userId The unique identifier of the user.
- * @param req UpdateCompanyUserRequest - reference of UpdateCompanyUserRequest).
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return CompanyUser
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r UsersCompanyLevelApiUpdateUserDetailsInput - Request parameters, see UpdateUserDetailsInput
+@return CompanyUser, *http.Response, error
 */
-
-func (a *UsersCompanyLevelApi) UpdateUserDetails(r UsersCompanyLevelApiUpdateUserDetailsConfig) (CompanyUser, *_nethttp.Response, error) {
-	var serviceError common.RestServiceError
+func (a *UsersCompanyLevelApi) UpdateUserDetails(ctx context.Context, r UsersCompanyLevelApiUpdateUserDetailsInput) (CompanyUser, *http.Response, error) {
 	res := &CompanyUser{}
 	path := "/companies/{companyId}/users/{userId}"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -380,50 +394,62 @@ func (a *UsersCompanyLevelApi) UpdateUserDetails(r UsersCompanyLevelApiUpdateUse
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		r.updateCompanyUserRequest,
 		res,
-		_nethttp.MethodPatch,
+		http.MethodPatch,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
-	defer httpRes.Body.Close()
+
+	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
+
 	return *res, httpRes, err
 }

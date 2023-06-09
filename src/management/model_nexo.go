@@ -24,8 +24,7 @@ type Nexo struct {
 	EventUrls     *EventUrl        `json:"eventUrls,omitempty"`
 	// One or more URLs to send event messages to when using Terminal API.
 	// Deprecated
-	NexoEventUrls []string      `json:"nexoEventUrls,omitempty"`
-	Notification  *Notification `json:"notification,omitempty"`
+	NexoEventUrls []string `json:"nexoEventUrls,omitempty"`
 }
 
 // NewNexo instantiates a new Nexo object
@@ -176,38 +175,6 @@ func (o *Nexo) SetNexoEventUrls(v []string) {
 	o.NexoEventUrls = v
 }
 
-// GetNotification returns the Notification field value if set, zero value otherwise.
-func (o *Nexo) GetNotification() Notification {
-	if o == nil || common.IsNil(o.Notification) {
-		var ret Notification
-		return ret
-	}
-	return *o.Notification
-}
-
-// GetNotificationOk returns a tuple with the Notification field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Nexo) GetNotificationOk() (*Notification, bool) {
-	if o == nil || common.IsNil(o.Notification) {
-		return nil, false
-	}
-	return o.Notification, true
-}
-
-// HasNotification returns a boolean if a field has been set.
-func (o *Nexo) HasNotification() bool {
-	if o != nil && !common.IsNil(o.Notification) {
-		return true
-	}
-
-	return false
-}
-
-// SetNotification gets a reference to the given Notification and assigns it to the Notification field.
-func (o *Nexo) SetNotification(v Notification) {
-	o.Notification = &v
-}
-
 func (o Nexo) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -229,9 +196,6 @@ func (o Nexo) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.NexoEventUrls) {
 		toSerialize["nexoEventUrls"] = o.NexoEventUrls
-	}
-	if !common.IsNil(o.Notification) {
-		toSerialize["notification"] = o.Notification
 	}
 	return toSerialize, nil
 }

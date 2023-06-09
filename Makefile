@@ -44,6 +44,7 @@ transfers: spec=TransferService-v3
 transfers: serviceName=Transfers
 management: spec=ManagementService-v1
 management: serviceName=Management
+management: templates=templates/rest
 posterminalmanagement: spec=TfmAPIService-v1
 posterminalmanagement: serviceName=PosTerminalManagementApi
 

@@ -12,20 +12,32 @@ import (
 	"context"
 	"encoding/json"
 	"io/ioutil"
-	_nethttp "net/http"
+	"net/http"
 	"net/url"
 	"strings"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// APIKeyMerchantLevelApi APIKeyMerchantLevelApi service
+// APIKeyMerchantLevelApi service
 type APIKeyMerchantLevelApi common.Service
 
-type APIKeyMerchantLevelApiGenerateNewApiKeyConfig struct {
-	ctx             context.Context
+// All parameters accepted by APIKeyMerchantLevelApi.GenerateNewApiKey
+type APIKeyMerchantLevelApiGenerateNewApiKeyInput struct {
 	merchantId      string
 	apiCredentialId string
+}
+
+/*
+Prepare a request for GenerateNewApiKey
+@param merchantId The unique identifier of the merchant account.@param apiCredentialId Unique identifier of the API credential.
+@return APIKeyMerchantLevelApiGenerateNewApiKeyInput
+*/
+func (a *APIKeyMerchantLevelApi) GenerateNewApiKeyInput(merchantId string, apiCredentialId string) APIKeyMerchantLevelApiGenerateNewApiKeyInput {
+	return APIKeyMerchantLevelApiGenerateNewApiKeyInput{
+		merchantId:      merchantId,
+		apiCredentialId: apiCredentialId,
+	}
 }
 
 /*
@@ -36,30 +48,11 @@ Returns a new API key for the API credential. You can use the new API key a few 
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—API credentials read and write
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param merchantId The unique identifier of the merchant account.
-	@param apiCredentialId Unique identifier of the API credential.
-	@return APIKeyMerchantLevelApiGenerateNewApiKeyConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r APIKeyMerchantLevelApiGenerateNewApiKeyInput - Request parameters, see GenerateNewApiKeyInput
+@return GenerateApiKeyResponse, *http.Response, error
 */
-func (a *APIKeyMerchantLevelApi) GenerateNewApiKeyConfig(ctx context.Context, merchantId string, apiCredentialId string) APIKeyMerchantLevelApiGenerateNewApiKeyConfig {
-	return APIKeyMerchantLevelApiGenerateNewApiKeyConfig{
-		ctx:             ctx,
-		merchantId:      merchantId,
-		apiCredentialId: apiCredentialId,
-	}
-}
-
-/*
-Generate new API key
-Returns a new API key for the API credential. You can use the new API key a few minutes after generating it. The old API key stops working 24 hours after generating a new one.  To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—API credentials read and write
- * @param merchantId The unique identifier of the merchant account.
- * @param apiCredentialId Unique identifier of the API credential.
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return GenerateApiKeyResponse
-*/
-
-func (a *APIKeyMerchantLevelApi) GenerateNewApiKey(r APIKeyMerchantLevelApiGenerateNewApiKeyConfig) (GenerateApiKeyResponse, *_nethttp.Response, error) {
-	var serviceError common.RestServiceError
+func (a *APIKeyMerchantLevelApi) GenerateNewApiKey(ctx context.Context, r APIKeyMerchantLevelApiGenerateNewApiKeyInput) (GenerateApiKeyResponse, *http.Response, error) {
 	res := &GenerateApiKeyResponse{}
 	path := "/merchants/{merchantId}/apiCredentials/{apiCredentialId}/generateApiKey"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
@@ -67,50 +60,62 @@ func (a *APIKeyMerchantLevelApi) GenerateNewApiKey(r APIKeyMerchantLevelApiGener
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		nil,
 		res,
-		_nethttp.MethodPost,
+		http.MethodPost,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
-	defer httpRes.Body.Close()
+
+	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
+
 	return *res, httpRes, err
 }

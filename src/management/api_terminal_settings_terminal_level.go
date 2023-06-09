@@ -12,19 +12,30 @@ import (
 	"context"
 	"encoding/json"
 	"io/ioutil"
-	_nethttp "net/http"
+	"net/http"
 	"net/url"
 	"strings"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// TerminalSettingsTerminalLevelApi TerminalSettingsTerminalLevelApi service
+// TerminalSettingsTerminalLevelApi service
 type TerminalSettingsTerminalLevelApi common.Service
 
-type TerminalSettingsTerminalLevelApiGetTerminalLogoConfig struct {
-	ctx        context.Context
+// All parameters accepted by TerminalSettingsTerminalLevelApi.GetTerminalLogo
+type TerminalSettingsTerminalLevelApiGetTerminalLogoInput struct {
 	terminalId string
+}
+
+/*
+Prepare a request for GetTerminalLogo
+@param terminalId The unique identifier of the payment terminal.
+@return TerminalSettingsTerminalLevelApiGetTerminalLogoInput
+*/
+func (a *TerminalSettingsTerminalLevelApi) GetTerminalLogoInput(terminalId string) TerminalSettingsTerminalLevelApiGetTerminalLogoInput {
+	return TerminalSettingsTerminalLevelApiGetTerminalLogoInput{
+		terminalId: terminalId,
+	}
 }
 
 /*
@@ -37,84 +48,91 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Terminal settings read
 * Management API—Terminal settings read and write
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param terminalId The unique identifier of the payment terminal.
-	@return TerminalSettingsTerminalLevelApiGetTerminalLogoConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r TerminalSettingsTerminalLevelApiGetTerminalLogoInput - Request parameters, see GetTerminalLogoInput
+@return Logo, *http.Response, error
 */
-func (a *TerminalSettingsTerminalLevelApi) GetTerminalLogoConfig(ctx context.Context, terminalId string) TerminalSettingsTerminalLevelApiGetTerminalLogoConfig {
-	return TerminalSettingsTerminalLevelApiGetTerminalLogoConfig{
-		ctx:        ctx,
-		terminalId: terminalId,
-	}
-}
-
-/*
-Get the terminal logo
-Returns the logo that is configured for the payment terminal identified in the path. The logo is returned as a Base64-encoded string. You need to Base64-decode the string to get the actual image file.  To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal settings read * Management API—Terminal settings read and write
- * @param terminalId The unique identifier of the payment terminal.
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return Logo
-*/
-
-func (a *TerminalSettingsTerminalLevelApi) GetTerminalLogo(r TerminalSettingsTerminalLevelApiGetTerminalLogoConfig) (Logo, *_nethttp.Response, error) {
-	var serviceError common.RestServiceError
+func (a *TerminalSettingsTerminalLevelApi) GetTerminalLogo(ctx context.Context, r TerminalSettingsTerminalLevelApiGetTerminalLogoInput) (Logo, *http.Response, error) {
 	res := &Logo{}
 	path := "/terminals/{terminalId}/terminalLogos"
 	path = strings.Replace(path, "{"+"terminalId"+"}", url.PathEscape(common.ParameterValueToString(r.terminalId, "terminalId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		nil,
 		res,
-		_nethttp.MethodGet,
+		http.MethodGet,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
-	defer httpRes.Body.Close()
+
+	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
+
 	return *res, httpRes, err
 }
 
-type TerminalSettingsTerminalLevelApiGetTerminalSettingsConfig struct {
-	ctx        context.Context
+// All parameters accepted by TerminalSettingsTerminalLevelApi.GetTerminalSettings
+type TerminalSettingsTerminalLevelApiGetTerminalSettingsInput struct {
 	terminalId string
+}
+
+/*
+Prepare a request for GetTerminalSettings
+@param terminalId The unique identifier of the payment terminal.
+@return TerminalSettingsTerminalLevelApiGetTerminalSettingsInput
+*/
+func (a *TerminalSettingsTerminalLevelApi) GetTerminalSettingsInput(terminalId string) TerminalSettingsTerminalLevelApiGetTerminalSettingsInput {
+	return TerminalSettingsTerminalLevelApiGetTerminalSettingsInput{
+		terminalId: terminalId,
+	}
 }
 
 /*
@@ -129,90 +147,97 @@ To make this request, your API credential must have one of the following [roles]
 For [sensitive terminal settings](https://docs.adyen.com/point-of-sale/automating-terminal-management/configure-terminals-api#sensitive-terminal-settings), your API credential must have the following role:
 * Management API—Terminal settings Advanced read and write
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param terminalId The unique identifier of the payment terminal.
-	@return TerminalSettingsTerminalLevelApiGetTerminalSettingsConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r TerminalSettingsTerminalLevelApiGetTerminalSettingsInput - Request parameters, see GetTerminalSettingsInput
+@return TerminalSettings, *http.Response, error
 */
-func (a *TerminalSettingsTerminalLevelApi) GetTerminalSettingsConfig(ctx context.Context, terminalId string) TerminalSettingsTerminalLevelApiGetTerminalSettingsConfig {
-	return TerminalSettingsTerminalLevelApiGetTerminalSettingsConfig{
-		ctx:        ctx,
-		terminalId: terminalId,
-	}
-}
-
-/*
-Get terminal settings
-Returns the settings that are configured for the payment terminal identified in the path.  To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal settings read * Management API—Terminal settings read and write  For [sensitive terminal settings](https://docs.adyen.com/point-of-sale/automating-terminal-management/configure-terminals-api#sensitive-terminal-settings), your API credential must have the following role: * Management API—Terminal settings Advanced read and write
- * @param terminalId The unique identifier of the payment terminal.
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return TerminalSettings
-*/
-
-func (a *TerminalSettingsTerminalLevelApi) GetTerminalSettings(r TerminalSettingsTerminalLevelApiGetTerminalSettingsConfig) (TerminalSettings, *_nethttp.Response, error) {
-	var serviceError common.RestServiceError
+func (a *TerminalSettingsTerminalLevelApi) GetTerminalSettings(ctx context.Context, r TerminalSettingsTerminalLevelApiGetTerminalSettingsInput) (TerminalSettings, *http.Response, error) {
 	res := &TerminalSettings{}
 	path := "/terminals/{terminalId}/terminalSettings"
 	path = strings.Replace(path, "{"+"terminalId"+"}", url.PathEscape(common.ParameterValueToString(r.terminalId, "terminalId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		nil,
 		res,
-		_nethttp.MethodGet,
+		http.MethodGet,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
-	defer httpRes.Body.Close()
+
+	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
+
 	return *res, httpRes, err
 }
 
-type TerminalSettingsTerminalLevelApiUpdateLogoConfig struct {
-	ctx        context.Context
+// All parameters accepted by TerminalSettingsTerminalLevelApi.UpdateLogo
+type TerminalSettingsTerminalLevelApiUpdateLogoInput struct {
 	terminalId string
 	logo       *Logo
 }
 
-func (r TerminalSettingsTerminalLevelApiUpdateLogoConfig) Logo(logo Logo) TerminalSettingsTerminalLevelApiUpdateLogoConfig {
+func (r TerminalSettingsTerminalLevelApiUpdateLogoInput) Logo(logo Logo) TerminalSettingsTerminalLevelApiUpdateLogoInput {
 	r.logo = &logo
 	return r
+}
+
+/*
+Prepare a request for UpdateLogo
+@param terminalId The unique identifier of the payment terminal.
+@return TerminalSettingsTerminalLevelApiUpdateLogoInput
+*/
+func (a *TerminalSettingsTerminalLevelApi) UpdateLogoInput(terminalId string) TerminalSettingsTerminalLevelApiUpdateLogoInput {
+	return TerminalSettingsTerminalLevelApiUpdateLogoInput{
+		terminalId: terminalId,
+	}
 }
 
 /*
@@ -226,91 +251,97 @@ Updates the logo for the payment terminal identified in the path.
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Terminal settings read and write
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param terminalId The unique identifier of the payment terminal.
-	@return TerminalSettingsTerminalLevelApiUpdateLogoConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r TerminalSettingsTerminalLevelApiUpdateLogoInput - Request parameters, see UpdateLogoInput
+@return Logo, *http.Response, error
 */
-func (a *TerminalSettingsTerminalLevelApi) UpdateLogoConfig(ctx context.Context, terminalId string) TerminalSettingsTerminalLevelApiUpdateLogoConfig {
-	return TerminalSettingsTerminalLevelApiUpdateLogoConfig{
-		ctx:        ctx,
-		terminalId: terminalId,
-	}
-}
-
-/*
-Update the logo
-Updates the logo for the payment terminal identified in the path.  * To change the logo, specify the image file as a Base64-encoded string. * To restore the logo inherited from a higher level (store, merchant account, or company account), specify an empty logo value.  To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal settings read and write
- * @param terminalId The unique identifier of the payment terminal.
- * @param req Logo - reference of Logo).
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return Logo
-*/
-
-func (a *TerminalSettingsTerminalLevelApi) UpdateLogo(r TerminalSettingsTerminalLevelApiUpdateLogoConfig) (Logo, *_nethttp.Response, error) {
-	var serviceError common.RestServiceError
+func (a *TerminalSettingsTerminalLevelApi) UpdateLogo(ctx context.Context, r TerminalSettingsTerminalLevelApiUpdateLogoInput) (Logo, *http.Response, error) {
 	res := &Logo{}
 	path := "/terminals/{terminalId}/terminalLogos"
 	path = strings.Replace(path, "{"+"terminalId"+"}", url.PathEscape(common.ParameterValueToString(r.terminalId, "terminalId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		r.logo,
 		res,
-		_nethttp.MethodPatch,
+		http.MethodPatch,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
-	defer httpRes.Body.Close()
+
+	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
+
 	return *res, httpRes, err
 }
 
-type TerminalSettingsTerminalLevelApiUpdateTerminalSettingsConfig struct {
-	ctx              context.Context
+// All parameters accepted by TerminalSettingsTerminalLevelApi.UpdateTerminalSettings
+type TerminalSettingsTerminalLevelApiUpdateTerminalSettingsInput struct {
 	terminalId       string
 	terminalSettings *TerminalSettings
 }
 
-func (r TerminalSettingsTerminalLevelApiUpdateTerminalSettingsConfig) TerminalSettings(terminalSettings TerminalSettings) TerminalSettingsTerminalLevelApiUpdateTerminalSettingsConfig {
+func (r TerminalSettingsTerminalLevelApiUpdateTerminalSettingsInput) TerminalSettings(terminalSettings TerminalSettings) TerminalSettingsTerminalLevelApiUpdateTerminalSettingsInput {
 	r.terminalSettings = &terminalSettings
 	return r
+}
+
+/*
+Prepare a request for UpdateTerminalSettings
+@param terminalId The unique identifier of the payment terminal.
+@return TerminalSettingsTerminalLevelApiUpdateTerminalSettingsInput
+*/
+func (a *TerminalSettingsTerminalLevelApi) UpdateTerminalSettingsInput(terminalId string) TerminalSettingsTerminalLevelApiUpdateTerminalSettingsInput {
+	return TerminalSettingsTerminalLevelApiUpdateTerminalSettingsInput{
+		terminalId: terminalId,
+	}
 }
 
 /*
@@ -328,78 +359,73 @@ To make this request, your API credential must have the following [role](https:/
 For [sensitive terminal settings](https://docs.adyen.com/point-of-sale/automating-terminal-management/configure-terminals-api#sensitive-terminal-settings), your API credential must have the following role:
 * Management API—Terminal settings Advanced read and write
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param terminalId The unique identifier of the payment terminal.
-	@return TerminalSettingsTerminalLevelApiUpdateTerminalSettingsConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r TerminalSettingsTerminalLevelApiUpdateTerminalSettingsInput - Request parameters, see UpdateTerminalSettingsInput
+@return TerminalSettings, *http.Response, error
 */
-func (a *TerminalSettingsTerminalLevelApi) UpdateTerminalSettingsConfig(ctx context.Context, terminalId string) TerminalSettingsTerminalLevelApiUpdateTerminalSettingsConfig {
-	return TerminalSettingsTerminalLevelApiUpdateTerminalSettingsConfig{
-		ctx:        ctx,
-		terminalId: terminalId,
-	}
-}
-
-/*
-Update terminal settings
-Updates the settings that are configured for the payment terminal identified in the path.  * To change a parameter value, include the full object that contains the parameter, even if you don&#39;t want to change all parameters in the object. * To restore a parameter value inherited from a higher level, include the full object that contains the parameter, and specify an empty value for the parameter or omit the parameter. * Objects that are not included in the request are not updated.  To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal settings read and write  For [sensitive terminal settings](https://docs.adyen.com/point-of-sale/automating-terminal-management/configure-terminals-api#sensitive-terminal-settings), your API credential must have the following role: * Management API—Terminal settings Advanced read and write
- * @param terminalId The unique identifier of the payment terminal.
- * @param req TerminalSettings - reference of TerminalSettings).
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return TerminalSettings
-*/
-
-func (a *TerminalSettingsTerminalLevelApi) UpdateTerminalSettings(r TerminalSettingsTerminalLevelApiUpdateTerminalSettingsConfig) (TerminalSettings, *_nethttp.Response, error) {
-	var serviceError common.RestServiceError
+func (a *TerminalSettingsTerminalLevelApi) UpdateTerminalSettings(ctx context.Context, r TerminalSettingsTerminalLevelApiUpdateTerminalSettingsInput) (TerminalSettings, *http.Response, error) {
 	res := &TerminalSettings{}
 	path := "/terminals/{terminalId}/terminalSettings"
 	path = strings.Replace(path, "{"+"terminalId"+"}", url.PathEscape(common.ParameterValueToString(r.terminalId, "terminalId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		r.terminalSettings,
 		res,
-		_nethttp.MethodPatch,
+		http.MethodPatch,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
-	defer httpRes.Body.Close()
+
+	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
+
 	return *res, httpRes, err
 }

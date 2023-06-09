@@ -22,7 +22,6 @@ type Store struct {
 	Links   *Links         `json:"_links,omitempty"`
 	Address *StoreLocation `json:"address,omitempty"`
 	// The unique identifiers of the [business lines](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/businesslines__resParam_id) that the store is associated with.  If not specified, the business line of the merchant account is used. Required when there are multiple business lines under the merchant account.
-	// Deprecated
 	BusinessLineIds []string `json:"businessLineIds,omitempty"`
 	// The description of the store.
 	Description *string `json:"description,omitempty"`
@@ -125,7 +124,6 @@ func (o *Store) SetAddress(v StoreLocation) {
 }
 
 // GetBusinessLineIds returns the BusinessLineIds field value if set, zero value otherwise.
-// Deprecated
 func (o *Store) GetBusinessLineIds() []string {
 	if o == nil || common.IsNil(o.BusinessLineIds) {
 		var ret []string
@@ -136,7 +134,6 @@ func (o *Store) GetBusinessLineIds() []string {
 
 // GetBusinessLineIdsOk returns a tuple with the BusinessLineIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *Store) GetBusinessLineIdsOk() ([]string, bool) {
 	if o == nil || common.IsNil(o.BusinessLineIds) {
 		return nil, false
@@ -154,7 +151,6 @@ func (o *Store) HasBusinessLineIds() bool {
 }
 
 // SetBusinessLineIds gets a reference to the given []string and assigns it to the BusinessLineIds field.
-// Deprecated
 func (o *Store) SetBusinessLineIds(v []string) {
 	o.BusinessLineIds = v
 }

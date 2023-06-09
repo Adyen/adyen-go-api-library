@@ -4,9 +4,3 @@ structPrefix: true
 isGoSubmodule: true
 additionalProperties:
   useOneOfDiscriminatorLookup: true
-templateDir: ./templates/custom
-files:
-    rest_api.mustache:
-        destinationFolder: ./src/management/
-        destinationFilename: .go
-        templateType: API
