@@ -1,4 +1,6 @@
-## Adyen Golang API Client Library
+# Adyen Golang API Client Library
+
+[![Go Reference](https://pkg.go.dev/badge/github.com/adyen/adyen-go-api-library/v7.svg)](https://pkg.go.dev/github.com/adyen/adyen-go-api-library/v7)
 
 This is the officially supported golang library for using Adyen's APIs.
 
@@ -67,11 +69,11 @@ client := adyen.NewClient(&common.Config{
 })
 service := client.Checkout()
 
-req := service.PaymentsApi.PaymentMethodsConfig(context.Background())
+req := service.PaymentsApi.PaymentMethodsInput()
 req = req.PaymentMethodsRequest(checkout.PaymentMethodsRequest{
     MerchantAccount: "your merchant account",
 })
-res, httpRes, err := service.PaymentsApi.PaymentMethods(req)
+res, httpRes, err := service.PaymentsApi.PaymentMethods(context.Background(), req)
 ```
 
 ### Using APIs with APIKey for Live env
@@ -90,11 +92,11 @@ client := adyen.NewClient(&common.Config{
 })
 service := client.Checkout()
 
-req := service.PaymentsApi.PaymentMethodsConfig(context.Background())
+req := service.PaymentsApi.PaymentMethodsInput()
 req = req.PaymentMethodsRequest(checkout.PaymentMethodsRequest{
     MerchantAccount: "your merchant account",
 })
-res, httpRes, err := service.PaymentsApi.PaymentMethods(req)
+res, httpRes, err := service.PaymentsApi.PaymentMethods(context.Background(), req)
 ```
 
 ### Using API with Basic Auth
@@ -114,7 +116,7 @@ client := adyen.NewClient(&common.Config{
 })
 service := client.Recurring()
 
-req := service.ListRecurringDetailsConfig(context.Background())
+req := service.ListRecurringDetailsInput()
 req = req.RecurringDetailsRequest(recurring.RecurringDetailsRequest{
     MerchantAccount: "your merchant account",
     Recurring: &recurring.Recurring{
@@ -122,7 +124,7 @@ req = req.RecurringDetailsRequest(recurring.RecurringDetailsRequest{
     },
     ShopperReference: "ref",
 })
-res, httpRes, err := service.ListRecurringDetails(req)
+res, httpRes, err := service.ListRecurringDetails(context.Background(), req)
 ```
 
 ### Using the webhook parser
@@ -150,9 +152,9 @@ client := adyen.NewClient(&common.Config{
 })
 service := client.Checkout()
 
-req := service.PaymentsApi.PaymentsConfig(context.Background())
+req := service.PaymentsApi.PaymentsInput()
 paymentMethod := checkout.IdealDetailsAsCheckoutPaymentMethod(checkout.NewIdealDetails("1121"))
-_, httpRes, err := service.PaymentsApi.Payments(req.PaymentRequest(checkout.PaymentRequest{
+_, httpRes, err := service.PaymentsApi.Payments(context.Background(), req.PaymentRequest(checkout.PaymentRequest{
     Reference: "123456781235",
     Amount: checkout.Amount{
         Value:    1250,

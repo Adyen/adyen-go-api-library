@@ -18,7 +18,7 @@ openapi-generator-version:=6.5.0
 openapi-generator-url:=https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/$(openapi-generator-version)/openapi-generator-cli-$(openapi-generator-version).jar
 openapi-generator-jar:=bin/openapi-generator-cli.jar
 openapi-generator-cli:=java -jar $(openapi-generator-jar)
-goimports:=$(GOPATH)/bin/goimports
+goimports:=$(shell go env GOPATH)/bin/goimports
 
 generator:=go
 services:=balanceplatform binlookup checkout legalentity management payments payout posterminalmanagement recurring storedvalue transfers
@@ -60,7 +60,7 @@ $(services): schema $(openapi-generator-jar) $(goimports)
 		--global-property supportingFiles=client.go \
 		--global-property apiTests=false \
 		--global-property apiDocs=false \
-		--global-property modelDocs=true \
+		--global-property modelDocs=false \
 		--skip-validate-spec \
 		--enable-post-process-file \
 		--inline-schema-name-mappings PaymentDonationRequest_paymentMethod=CheckoutPaymentMethod \
