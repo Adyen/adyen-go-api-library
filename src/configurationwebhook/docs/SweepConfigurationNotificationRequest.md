@@ -1,88 +1,88 @@
-# SweepconfigurationwebhookRequest
+# SweepConfigurationNotificationRequest
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Data** | [**SweepconfigurationwebhookData**](SweepconfigurationwebhookData.md) |  | 
+**Data** | [**SweepConfigurationNotificationData**](SweepConfigurationNotificationData.md) |  | 
 **Environment** | **string** | The environment from which the webhook originated.  Possible values: **test**, **live**. | 
 **Type** | **string** | Type of webhook. | 
 
 ## Methods
 
-### NewSweepconfigurationwebhookRequest
+### NewSweepConfigurationNotificationRequest
 
-`func NewSweepconfigurationwebhookRequest(data SweepconfigurationwebhookData, environment string, type_ string, ) *SweepconfigurationwebhookRequest`
+`func NewSweepConfigurationNotificationRequest(data SweepConfigurationNotificationData, environment string, type_ string, ) *SweepConfigurationNotificationRequest`
 
-NewSweepconfigurationwebhookRequest instantiates a new SweepconfigurationwebhookRequest object
+NewSweepConfigurationNotificationRequest instantiates a new SweepConfigurationNotificationRequest object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewSweepconfigurationwebhookRequestWithDefaults
+### NewSweepConfigurationNotificationRequestWithDefaults
 
-`func NewSweepconfigurationwebhookRequestWithDefaults() *SweepconfigurationwebhookRequest`
+`func NewSweepConfigurationNotificationRequestWithDefaults() *SweepConfigurationNotificationRequest`
 
-NewSweepconfigurationwebhookRequestWithDefaults instantiates a new SweepconfigurationwebhookRequest object
+NewSweepConfigurationNotificationRequestWithDefaults instantiates a new SweepConfigurationNotificationRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetData
 
-`func (o *SweepconfigurationwebhookRequest) GetData() SweepconfigurationwebhookData`
+`func (o *SweepConfigurationNotificationRequest) GetData() SweepConfigurationNotificationData`
 
 GetData returns the Data field if non-nil, zero value otherwise.
 
 ### GetDataOk
 
-`func (o *SweepconfigurationwebhookRequest) GetDataOk() (*SweepconfigurationwebhookData, bool)`
+`func (o *SweepConfigurationNotificationRequest) GetDataOk() (*SweepConfigurationNotificationData, bool)`
 
 GetDataOk returns a tuple with the Data field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetData
 
-`func (o *SweepconfigurationwebhookRequest) SetData(v SweepconfigurationwebhookData)`
+`func (o *SweepConfigurationNotificationRequest) SetData(v SweepConfigurationNotificationData)`
 
 SetData sets Data field to given value.
 
 
 ### GetEnvironment
 
-`func (o *SweepconfigurationwebhookRequest) GetEnvironment() string`
+`func (o *SweepConfigurationNotificationRequest) GetEnvironment() string`
 
 GetEnvironment returns the Environment field if non-nil, zero value otherwise.
 
 ### GetEnvironmentOk
 
-`func (o *SweepconfigurationwebhookRequest) GetEnvironmentOk() (*string, bool)`
+`func (o *SweepConfigurationNotificationRequest) GetEnvironmentOk() (*string, bool)`
 
 GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEnvironment
 
-`func (o *SweepconfigurationwebhookRequest) SetEnvironment(v string)`
+`func (o *SweepConfigurationNotificationRequest) SetEnvironment(v string)`
 
 SetEnvironment sets Environment field to given value.
 
 
 ### GetType
 
-`func (o *SweepconfigurationwebhookRequest) GetType() string`
+`func (o *SweepConfigurationNotificationRequest) GetType() string`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *SweepconfigurationwebhookRequest) GetTypeOk() (*string, bool)`
+`func (o *SweepConfigurationNotificationRequest) GetTypeOk() (*string, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *SweepconfigurationwebhookRequest) SetType(v string)`
+`func (o *SweepConfigurationNotificationRequest) SetType(v string)`
 
 SetType sets Type field to given value.
 

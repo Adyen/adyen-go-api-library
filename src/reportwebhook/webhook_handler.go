@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 )
 
-// HandlereportwebhookRequest creates a Notification object from the given JSON string
-func HandlereportwebhookRequest(req string) (*reportwebhookRequest, error) {
-	res := reportwebhookRequest{}
+// HandleReportwebhookRequest creates a Notification object from the given JSON string
+func HandleReportwebhookRequest(req string) (*ReportNotificationRequest, error) {
+	res := ReportNotificationRequest{}
 	err := json.Unmarshal([]byte(req), &res)
 	if err != nil {
 		return nil, err

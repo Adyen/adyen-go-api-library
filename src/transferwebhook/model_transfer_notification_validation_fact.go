@@ -14,36 +14,36 @@ import (
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// checks if the transferwebhookValidationFact type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &transferwebhookValidationFact{}
+// checks if the TransferNotificationValidationFact type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &TransferNotificationValidationFact{}
 
-// transferwebhookValidationFact struct for transferwebhookValidationFact
-type transferwebhookValidationFact struct {
+// TransferNotificationValidationFact struct for TransferNotificationValidationFact
+type TransferNotificationValidationFact struct {
 	// The evaluation result of the validation fact.
 	Result *string `json:"result,omitempty"`
 	// The type of the validation fact.
 	Type *string `json:"type,omitempty"`
 }
 
-// NewtransferwebhookValidationFact instantiates a new transferwebhookValidationFact object
+// NewTransferNotificationValidationFact instantiates a new TransferNotificationValidationFact object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewtransferwebhookValidationFact() *transferwebhookValidationFact {
-	this := transferwebhookValidationFact{}
+func NewTransferNotificationValidationFact() *TransferNotificationValidationFact {
+	this := TransferNotificationValidationFact{}
 	return &this
 }
 
-// NewtransferwebhookValidationFactWithDefaults instantiates a new transferwebhookValidationFact object
+// NewTransferNotificationValidationFactWithDefaults instantiates a new TransferNotificationValidationFact object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewtransferwebhookValidationFactWithDefaults() *transferwebhookValidationFact {
-	this := transferwebhookValidationFact{}
+func NewTransferNotificationValidationFactWithDefaults() *TransferNotificationValidationFact {
+	this := TransferNotificationValidationFact{}
 	return &this
 }
 
 // GetResult returns the Result field value if set, zero value otherwise.
-func (o *transferwebhookValidationFact) GetResult() string {
+func (o *TransferNotificationValidationFact) GetResult() string {
 	if o == nil || common.IsNil(o.Result) {
 		var ret string
 		return ret
@@ -53,7 +53,7 @@ func (o *transferwebhookValidationFact) GetResult() string {
 
 // GetResultOk returns a tuple with the Result field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *transferwebhookValidationFact) GetResultOk() (*string, bool) {
+func (o *TransferNotificationValidationFact) GetResultOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Result) {
 		return nil, false
 	}
@@ -61,7 +61,7 @@ func (o *transferwebhookValidationFact) GetResultOk() (*string, bool) {
 }
 
 // HasResult returns a boolean if a field has been set.
-func (o *transferwebhookValidationFact) HasResult() bool {
+func (o *TransferNotificationValidationFact) HasResult() bool {
 	if o != nil && !common.IsNil(o.Result) {
 		return true
 	}
@@ -70,12 +70,12 @@ func (o *transferwebhookValidationFact) HasResult() bool {
 }
 
 // SetResult gets a reference to the given string and assigns it to the Result field.
-func (o *transferwebhookValidationFact) SetResult(v string) {
+func (o *TransferNotificationValidationFact) SetResult(v string) {
 	o.Result = &v
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
-func (o *transferwebhookValidationFact) GetType() string {
+func (o *TransferNotificationValidationFact) GetType() string {
 	if o == nil || common.IsNil(o.Type) {
 		var ret string
 		return ret
@@ -85,7 +85,7 @@ func (o *transferwebhookValidationFact) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *transferwebhookValidationFact) GetTypeOk() (*string, bool) {
+func (o *TransferNotificationValidationFact) GetTypeOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Type) {
 		return nil, false
 	}
@@ -93,7 +93,7 @@ func (o *transferwebhookValidationFact) GetTypeOk() (*string, bool) {
 }
 
 // HasType returns a boolean if a field has been set.
-func (o *transferwebhookValidationFact) HasType() bool {
+func (o *TransferNotificationValidationFact) HasType() bool {
 	if o != nil && !common.IsNil(o.Type) {
 		return true
 	}
@@ -102,11 +102,11 @@ func (o *transferwebhookValidationFact) HasType() bool {
 }
 
 // SetType gets a reference to the given string and assigns it to the Type field.
-func (o *transferwebhookValidationFact) SetType(v string) {
+func (o *TransferNotificationValidationFact) SetType(v string) {
 	o.Type = &v
 }
 
-func (o transferwebhookValidationFact) MarshalJSON() ([]byte, error) {
+func (o TransferNotificationValidationFact) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -114,7 +114,7 @@ func (o transferwebhookValidationFact) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o transferwebhookValidationFact) ToMap() (map[string]interface{}, error) {
+func (o TransferNotificationValidationFact) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.Result) {
 		toSerialize["result"] = o.Result
@@ -125,38 +125,38 @@ func (o transferwebhookValidationFact) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullabletransferwebhookValidationFact struct {
-	value *transferwebhookValidationFact
+type NullableTransferNotificationValidationFact struct {
+	value *TransferNotificationValidationFact
 	isSet bool
 }
 
-func (v NullabletransferwebhookValidationFact) Get() *transferwebhookValidationFact {
+func (v NullableTransferNotificationValidationFact) Get() *TransferNotificationValidationFact {
 	return v.value
 }
 
-func (v *NullabletransferwebhookValidationFact) Set(val *transferwebhookValidationFact) {
+func (v *NullableTransferNotificationValidationFact) Set(val *TransferNotificationValidationFact) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullabletransferwebhookValidationFact) IsSet() bool {
+func (v NullableTransferNotificationValidationFact) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullabletransferwebhookValidationFact) Unset() {
+func (v *NullableTransferNotificationValidationFact) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullabletransferwebhookValidationFact(val *transferwebhookValidationFact) *NullabletransferwebhookValidationFact {
-	return &NullabletransferwebhookValidationFact{value: val, isSet: true}
+func NewNullableTransferNotificationValidationFact(val *TransferNotificationValidationFact) *NullableTransferNotificationValidationFact {
+	return &NullableTransferNotificationValidationFact{value: val, isSet: true}
 }
 
-func (v NullabletransferwebhookValidationFact) MarshalJSON() ([]byte, error) {
+func (v NullableTransferNotificationValidationFact) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullabletransferwebhookValidationFact) UnmarshalJSON(src []byte) error {
+func (v *NullableTransferNotificationValidationFact) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

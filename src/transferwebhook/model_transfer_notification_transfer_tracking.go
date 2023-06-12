@@ -15,36 +15,36 @@ import (
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// checks if the transferwebhookTransferTracking type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &transferwebhookTransferTracking{}
+// checks if the TransferNotificationTransferTracking type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &TransferNotificationTransferTracking{}
 
-// transferwebhookTransferTracking struct for transferwebhookTransferTracking
-type transferwebhookTransferTracking struct {
+// TransferNotificationTransferTracking struct for TransferNotificationTransferTracking
+type TransferNotificationTransferTracking struct {
 	// The estimated time the beneficiary should have access to the funds.
 	EstimatedArrivalTime *time.Time `json:"estimatedArrivalTime,omitempty"`
 	// The tracking status of the transfer.
 	Status *string `json:"status,omitempty"`
 }
 
-// NewtransferwebhookTransferTracking instantiates a new transferwebhookTransferTracking object
+// NewTransferNotificationTransferTracking instantiates a new TransferNotificationTransferTracking object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewtransferwebhookTransferTracking() *transferwebhookTransferTracking {
-	this := transferwebhookTransferTracking{}
+func NewTransferNotificationTransferTracking() *TransferNotificationTransferTracking {
+	this := TransferNotificationTransferTracking{}
 	return &this
 }
 
-// NewtransferwebhookTransferTrackingWithDefaults instantiates a new transferwebhookTransferTracking object
+// NewTransferNotificationTransferTrackingWithDefaults instantiates a new TransferNotificationTransferTracking object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewtransferwebhookTransferTrackingWithDefaults() *transferwebhookTransferTracking {
-	this := transferwebhookTransferTracking{}
+func NewTransferNotificationTransferTrackingWithDefaults() *TransferNotificationTransferTracking {
+	this := TransferNotificationTransferTracking{}
 	return &this
 }
 
 // GetEstimatedArrivalTime returns the EstimatedArrivalTime field value if set, zero value otherwise.
-func (o *transferwebhookTransferTracking) GetEstimatedArrivalTime() time.Time {
+func (o *TransferNotificationTransferTracking) GetEstimatedArrivalTime() time.Time {
 	if o == nil || common.IsNil(o.EstimatedArrivalTime) {
 		var ret time.Time
 		return ret
@@ -54,7 +54,7 @@ func (o *transferwebhookTransferTracking) GetEstimatedArrivalTime() time.Time {
 
 // GetEstimatedArrivalTimeOk returns a tuple with the EstimatedArrivalTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *transferwebhookTransferTracking) GetEstimatedArrivalTimeOk() (*time.Time, bool) {
+func (o *TransferNotificationTransferTracking) GetEstimatedArrivalTimeOk() (*time.Time, bool) {
 	if o == nil || common.IsNil(o.EstimatedArrivalTime) {
 		return nil, false
 	}
@@ -62,7 +62,7 @@ func (o *transferwebhookTransferTracking) GetEstimatedArrivalTimeOk() (*time.Tim
 }
 
 // HasEstimatedArrivalTime returns a boolean if a field has been set.
-func (o *transferwebhookTransferTracking) HasEstimatedArrivalTime() bool {
+func (o *TransferNotificationTransferTracking) HasEstimatedArrivalTime() bool {
 	if o != nil && !common.IsNil(o.EstimatedArrivalTime) {
 		return true
 	}
@@ -71,12 +71,12 @@ func (o *transferwebhookTransferTracking) HasEstimatedArrivalTime() bool {
 }
 
 // SetEstimatedArrivalTime gets a reference to the given time.Time and assigns it to the EstimatedArrivalTime field.
-func (o *transferwebhookTransferTracking) SetEstimatedArrivalTime(v time.Time) {
+func (o *TransferNotificationTransferTracking) SetEstimatedArrivalTime(v time.Time) {
 	o.EstimatedArrivalTime = &v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *transferwebhookTransferTracking) GetStatus() string {
+func (o *TransferNotificationTransferTracking) GetStatus() string {
 	if o == nil || common.IsNil(o.Status) {
 		var ret string
 		return ret
@@ -86,7 +86,7 @@ func (o *transferwebhookTransferTracking) GetStatus() string {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *transferwebhookTransferTracking) GetStatusOk() (*string, bool) {
+func (o *TransferNotificationTransferTracking) GetStatusOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Status) {
 		return nil, false
 	}
@@ -94,7 +94,7 @@ func (o *transferwebhookTransferTracking) GetStatusOk() (*string, bool) {
 }
 
 // HasStatus returns a boolean if a field has been set.
-func (o *transferwebhookTransferTracking) HasStatus() bool {
+func (o *TransferNotificationTransferTracking) HasStatus() bool {
 	if o != nil && !common.IsNil(o.Status) {
 		return true
 	}
@@ -103,11 +103,11 @@ func (o *transferwebhookTransferTracking) HasStatus() bool {
 }
 
 // SetStatus gets a reference to the given string and assigns it to the Status field.
-func (o *transferwebhookTransferTracking) SetStatus(v string) {
+func (o *TransferNotificationTransferTracking) SetStatus(v string) {
 	o.Status = &v
 }
 
-func (o transferwebhookTransferTracking) MarshalJSON() ([]byte, error) {
+func (o TransferNotificationTransferTracking) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -115,7 +115,7 @@ func (o transferwebhookTransferTracking) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o transferwebhookTransferTracking) ToMap() (map[string]interface{}, error) {
+func (o TransferNotificationTransferTracking) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.EstimatedArrivalTime) {
 		toSerialize["estimatedArrivalTime"] = o.EstimatedArrivalTime
@@ -126,43 +126,43 @@ func (o transferwebhookTransferTracking) ToMap() (map[string]interface{}, error)
 	return toSerialize, nil
 }
 
-type NullabletransferwebhookTransferTracking struct {
-	value *transferwebhookTransferTracking
+type NullableTransferNotificationTransferTracking struct {
+	value *TransferNotificationTransferTracking
 	isSet bool
 }
 
-func (v NullabletransferwebhookTransferTracking) Get() *transferwebhookTransferTracking {
+func (v NullableTransferNotificationTransferTracking) Get() *TransferNotificationTransferTracking {
 	return v.value
 }
 
-func (v *NullabletransferwebhookTransferTracking) Set(val *transferwebhookTransferTracking) {
+func (v *NullableTransferNotificationTransferTracking) Set(val *TransferNotificationTransferTracking) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullabletransferwebhookTransferTracking) IsSet() bool {
+func (v NullableTransferNotificationTransferTracking) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullabletransferwebhookTransferTracking) Unset() {
+func (v *NullableTransferNotificationTransferTracking) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullabletransferwebhookTransferTracking(val *transferwebhookTransferTracking) *NullabletransferwebhookTransferTracking {
-	return &NullabletransferwebhookTransferTracking{value: val, isSet: true}
+func NewNullableTransferNotificationTransferTracking(val *TransferNotificationTransferTracking) *NullableTransferNotificationTransferTracking {
+	return &NullableTransferNotificationTransferTracking{value: val, isSet: true}
 }
 
-func (v NullabletransferwebhookTransferTracking) MarshalJSON() ([]byte, error) {
+func (v NullableTransferNotificationTransferTracking) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullabletransferwebhookTransferTracking) UnmarshalJSON(src []byte) error {
+func (v *NullableTransferNotificationTransferTracking) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
 
-func (o *transferwebhookTransferTracking) isValidStatus() bool {
+func (o *TransferNotificationTransferTracking) isValidStatus() bool {
 	var allowedEnumValues = []string{"credited"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetStatus() == allowed {

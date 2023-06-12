@@ -14,42 +14,42 @@ import (
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// checks if the SweepconfigurationwebhookRequest type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &SweepconfigurationwebhookRequest{}
+// checks if the SweepConfigurationNotificationRequest type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &SweepConfigurationNotificationRequest{}
 
-// SweepconfigurationwebhookRequest struct for SweepconfigurationwebhookRequest
-type SweepconfigurationwebhookRequest struct {
-	Data SweepconfigurationwebhookData `json:"data"`
+// SweepConfigurationNotificationRequest struct for SweepConfigurationNotificationRequest
+type SweepConfigurationNotificationRequest struct {
+	Data SweepConfigurationNotificationData `json:"data"`
 	// The environment from which the webhook originated.  Possible values: **test**, **live**.
 	Environment string `json:"environment"`
 	// Type of webhook.
 	Type string `json:"type"`
 }
 
-// NewSweepconfigurationwebhookRequest instantiates a new SweepconfigurationwebhookRequest object
+// NewSweepConfigurationNotificationRequest instantiates a new SweepConfigurationNotificationRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSweepconfigurationwebhookRequest(data SweepconfigurationwebhookData, environment string, type_ string) *SweepconfigurationwebhookRequest {
-	this := SweepconfigurationwebhookRequest{}
+func NewSweepConfigurationNotificationRequest(data SweepConfigurationNotificationData, environment string, type_ string) *SweepConfigurationNotificationRequest {
+	this := SweepConfigurationNotificationRequest{}
 	this.Data = data
 	this.Environment = environment
 	this.Type = type_
 	return &this
 }
 
-// NewSweepconfigurationwebhookRequestWithDefaults instantiates a new SweepconfigurationwebhookRequest object
+// NewSweepConfigurationNotificationRequestWithDefaults instantiates a new SweepConfigurationNotificationRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewSweepconfigurationwebhookRequestWithDefaults() *SweepconfigurationwebhookRequest {
-	this := SweepconfigurationwebhookRequest{}
+func NewSweepConfigurationNotificationRequestWithDefaults() *SweepConfigurationNotificationRequest {
+	this := SweepConfigurationNotificationRequest{}
 	return &this
 }
 
 // GetData returns the Data field value
-func (o *SweepconfigurationwebhookRequest) GetData() SweepconfigurationwebhookData {
+func (o *SweepConfigurationNotificationRequest) GetData() SweepConfigurationNotificationData {
 	if o == nil {
-		var ret SweepconfigurationwebhookData
+		var ret SweepConfigurationNotificationData
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *SweepconfigurationwebhookRequest) GetData() SweepconfigurationwebhookDa
 
 // GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
-func (o *SweepconfigurationwebhookRequest) GetDataOk() (*SweepconfigurationwebhookData, bool) {
+func (o *SweepConfigurationNotificationRequest) GetDataOk() (*SweepConfigurationNotificationData, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,12 +66,12 @@ func (o *SweepconfigurationwebhookRequest) GetDataOk() (*Sweepconfigurationwebho
 }
 
 // SetData sets field value
-func (o *SweepconfigurationwebhookRequest) SetData(v SweepconfigurationwebhookData) {
+func (o *SweepConfigurationNotificationRequest) SetData(v SweepConfigurationNotificationData) {
 	o.Data = v
 }
 
 // GetEnvironment returns the Environment field value
-func (o *SweepconfigurationwebhookRequest) GetEnvironment() string {
+func (o *SweepConfigurationNotificationRequest) GetEnvironment() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -82,7 +82,7 @@ func (o *SweepconfigurationwebhookRequest) GetEnvironment() string {
 
 // GetEnvironmentOk returns a tuple with the Environment field value
 // and a boolean to check if the value has been set.
-func (o *SweepconfigurationwebhookRequest) GetEnvironmentOk() (*string, bool) {
+func (o *SweepConfigurationNotificationRequest) GetEnvironmentOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -90,12 +90,12 @@ func (o *SweepconfigurationwebhookRequest) GetEnvironmentOk() (*string, bool) {
 }
 
 // SetEnvironment sets field value
-func (o *SweepconfigurationwebhookRequest) SetEnvironment(v string) {
+func (o *SweepConfigurationNotificationRequest) SetEnvironment(v string) {
 	o.Environment = v
 }
 
 // GetType returns the Type field value
-func (o *SweepconfigurationwebhookRequest) GetType() string {
+func (o *SweepConfigurationNotificationRequest) GetType() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -106,7 +106,7 @@ func (o *SweepconfigurationwebhookRequest) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *SweepconfigurationwebhookRequest) GetTypeOk() (*string, bool) {
+func (o *SweepConfigurationNotificationRequest) GetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -114,11 +114,11 @@ func (o *SweepconfigurationwebhookRequest) GetTypeOk() (*string, bool) {
 }
 
 // SetType sets field value
-func (o *SweepconfigurationwebhookRequest) SetType(v string) {
+func (o *SweepConfigurationNotificationRequest) SetType(v string) {
 	o.Type = v
 }
 
-func (o SweepconfigurationwebhookRequest) MarshalJSON() ([]byte, error) {
+func (o SweepConfigurationNotificationRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -126,7 +126,7 @@ func (o SweepconfigurationwebhookRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SweepconfigurationwebhookRequest) ToMap() (map[string]interface{}, error) {
+func (o SweepConfigurationNotificationRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["data"] = o.Data
 	toSerialize["environment"] = o.Environment
@@ -134,43 +134,43 @@ func (o SweepconfigurationwebhookRequest) ToMap() (map[string]interface{}, error
 	return toSerialize, nil
 }
 
-type NullableSweepconfigurationwebhookRequest struct {
-	value *SweepconfigurationwebhookRequest
+type NullableSweepConfigurationNotificationRequest struct {
+	value *SweepConfigurationNotificationRequest
 	isSet bool
 }
 
-func (v NullableSweepconfigurationwebhookRequest) Get() *SweepconfigurationwebhookRequest {
+func (v NullableSweepConfigurationNotificationRequest) Get() *SweepConfigurationNotificationRequest {
 	return v.value
 }
 
-func (v *NullableSweepconfigurationwebhookRequest) Set(val *SweepconfigurationwebhookRequest) {
+func (v *NullableSweepConfigurationNotificationRequest) Set(val *SweepConfigurationNotificationRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableSweepconfigurationwebhookRequest) IsSet() bool {
+func (v NullableSweepConfigurationNotificationRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableSweepconfigurationwebhookRequest) Unset() {
+func (v *NullableSweepConfigurationNotificationRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableSweepconfigurationwebhookRequest(val *SweepconfigurationwebhookRequest) *NullableSweepconfigurationwebhookRequest {
-	return &NullableSweepconfigurationwebhookRequest{value: val, isSet: true}
+func NewNullableSweepConfigurationNotificationRequest(val *SweepConfigurationNotificationRequest) *NullableSweepConfigurationNotificationRequest {
+	return &NullableSweepConfigurationNotificationRequest{value: val, isSet: true}
 }
 
-func (v NullableSweepconfigurationwebhookRequest) MarshalJSON() ([]byte, error) {
+func (v NullableSweepConfigurationNotificationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableSweepconfigurationwebhookRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableSweepConfigurationNotificationRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
 
-func (o *SweepconfigurationwebhookRequest) isValidType() bool {
+func (o *SweepConfigurationNotificationRequest) isValidType() bool {
 	var allowedEnumValues = []string{"balancePlatform.balanceAccountSweep.created", "balancePlatform.balanceAccountSweep.updated", "balancePlatform.balanceAccountSweep.deleted"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {

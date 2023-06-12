@@ -14,42 +14,42 @@ import (
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// checks if the reportwebhookRequest type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &reportwebhookRequest{}
+// checks if the ReportNotificationRequest type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &ReportNotificationRequest{}
 
-// reportwebhookRequest struct for reportwebhookRequest
-type reportwebhookRequest struct {
-	Data reportwebhookData `json:"data"`
+// ReportNotificationRequest struct for ReportNotificationRequest
+type ReportNotificationRequest struct {
+	Data ReportNotificationData `json:"data"`
 	// The environment from which the webhook originated.  Possible values: **test**, **live**.
 	Environment string `json:"environment"`
 	// Type of webhook.
 	Type string `json:"type"`
 }
 
-// NewreportwebhookRequest instantiates a new reportwebhookRequest object
+// NewReportNotificationRequest instantiates a new ReportNotificationRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewreportwebhookRequest(data reportwebhookData, environment string, type_ string) *reportwebhookRequest {
-	this := reportwebhookRequest{}
+func NewReportNotificationRequest(data ReportNotificationData, environment string, type_ string) *ReportNotificationRequest {
+	this := ReportNotificationRequest{}
 	this.Data = data
 	this.Environment = environment
 	this.Type = type_
 	return &this
 }
 
-// NewreportwebhookRequestWithDefaults instantiates a new reportwebhookRequest object
+// NewReportNotificationRequestWithDefaults instantiates a new ReportNotificationRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewreportwebhookRequestWithDefaults() *reportwebhookRequest {
-	this := reportwebhookRequest{}
+func NewReportNotificationRequestWithDefaults() *ReportNotificationRequest {
+	this := ReportNotificationRequest{}
 	return &this
 }
 
 // GetData returns the Data field value
-func (o *reportwebhookRequest) GetData() reportwebhookData {
+func (o *ReportNotificationRequest) GetData() ReportNotificationData {
 	if o == nil {
-		var ret reportwebhookData
+		var ret ReportNotificationData
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *reportwebhookRequest) GetData() reportwebhookData {
 
 // GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
-func (o *reportwebhookRequest) GetDataOk() (*reportwebhookData, bool) {
+func (o *ReportNotificationRequest) GetDataOk() (*ReportNotificationData, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,12 +66,12 @@ func (o *reportwebhookRequest) GetDataOk() (*reportwebhookData, bool) {
 }
 
 // SetData sets field value
-func (o *reportwebhookRequest) SetData(v reportwebhookData) {
+func (o *ReportNotificationRequest) SetData(v ReportNotificationData) {
 	o.Data = v
 }
 
 // GetEnvironment returns the Environment field value
-func (o *reportwebhookRequest) GetEnvironment() string {
+func (o *ReportNotificationRequest) GetEnvironment() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -82,7 +82,7 @@ func (o *reportwebhookRequest) GetEnvironment() string {
 
 // GetEnvironmentOk returns a tuple with the Environment field value
 // and a boolean to check if the value has been set.
-func (o *reportwebhookRequest) GetEnvironmentOk() (*string, bool) {
+func (o *ReportNotificationRequest) GetEnvironmentOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -90,12 +90,12 @@ func (o *reportwebhookRequest) GetEnvironmentOk() (*string, bool) {
 }
 
 // SetEnvironment sets field value
-func (o *reportwebhookRequest) SetEnvironment(v string) {
+func (o *ReportNotificationRequest) SetEnvironment(v string) {
 	o.Environment = v
 }
 
 // GetType returns the Type field value
-func (o *reportwebhookRequest) GetType() string {
+func (o *ReportNotificationRequest) GetType() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -106,7 +106,7 @@ func (o *reportwebhookRequest) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *reportwebhookRequest) GetTypeOk() (*string, bool) {
+func (o *ReportNotificationRequest) GetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -114,11 +114,11 @@ func (o *reportwebhookRequest) GetTypeOk() (*string, bool) {
 }
 
 // SetType sets field value
-func (o *reportwebhookRequest) SetType(v string) {
+func (o *ReportNotificationRequest) SetType(v string) {
 	o.Type = v
 }
 
-func (o reportwebhookRequest) MarshalJSON() ([]byte, error) {
+func (o ReportNotificationRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -126,7 +126,7 @@ func (o reportwebhookRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o reportwebhookRequest) ToMap() (map[string]interface{}, error) {
+func (o ReportNotificationRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["data"] = o.Data
 	toSerialize["environment"] = o.Environment
@@ -134,43 +134,43 @@ func (o reportwebhookRequest) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullablereportwebhookRequest struct {
-	value *reportwebhookRequest
+type NullableReportNotificationRequest struct {
+	value *ReportNotificationRequest
 	isSet bool
 }
 
-func (v NullablereportwebhookRequest) Get() *reportwebhookRequest {
+func (v NullableReportNotificationRequest) Get() *ReportNotificationRequest {
 	return v.value
 }
 
-func (v *NullablereportwebhookRequest) Set(val *reportwebhookRequest) {
+func (v *NullableReportNotificationRequest) Set(val *ReportNotificationRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullablereportwebhookRequest) IsSet() bool {
+func (v NullableReportNotificationRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullablereportwebhookRequest) Unset() {
+func (v *NullableReportNotificationRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullablereportwebhookRequest(val *reportwebhookRequest) *NullablereportwebhookRequest {
-	return &NullablereportwebhookRequest{value: val, isSet: true}
+func NewNullableReportNotificationRequest(val *ReportNotificationRequest) *NullableReportNotificationRequest {
+	return &NullableReportNotificationRequest{value: val, isSet: true}
 }
 
-func (v NullablereportwebhookRequest) MarshalJSON() ([]byte, error) {
+func (v NullableReportNotificationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullablereportwebhookRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableReportNotificationRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
 
-func (o *reportwebhookRequest) isValidType() bool {
+func (o *ReportNotificationRequest) isValidType() bool {
 	var allowedEnumValues = []string{"balancePlatform.report.created"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {

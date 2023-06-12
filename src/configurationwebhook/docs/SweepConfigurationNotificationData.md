@@ -1,4 +1,4 @@
-# SweepconfigurationwebhookData
+# SweepConfigurationNotificationData
 
 ## Properties
 
@@ -10,95 +10,95 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewSweepconfigurationwebhookData
+### NewSweepConfigurationNotificationData
 
-`func NewSweepconfigurationwebhookData() *SweepconfigurationwebhookData`
+`func NewSweepConfigurationNotificationData() *SweepConfigurationNotificationData`
 
-NewSweepconfigurationwebhookData instantiates a new SweepconfigurationwebhookData object
+NewSweepConfigurationNotificationData instantiates a new SweepConfigurationNotificationData object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewSweepconfigurationwebhookDataWithDefaults
+### NewSweepConfigurationNotificationDataWithDefaults
 
-`func NewSweepconfigurationwebhookDataWithDefaults() *SweepconfigurationwebhookData`
+`func NewSweepConfigurationNotificationDataWithDefaults() *SweepConfigurationNotificationData`
 
-NewSweepconfigurationwebhookDataWithDefaults instantiates a new SweepconfigurationwebhookData object
+NewSweepConfigurationNotificationDataWithDefaults instantiates a new SweepConfigurationNotificationData object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetAccountId
 
-`func (o *SweepconfigurationwebhookData) GetAccountId() string`
+`func (o *SweepConfigurationNotificationData) GetAccountId() string`
 
 GetAccountId returns the AccountId field if non-nil, zero value otherwise.
 
 ### GetAccountIdOk
 
-`func (o *SweepconfigurationwebhookData) GetAccountIdOk() (*string, bool)`
+`func (o *SweepConfigurationNotificationData) GetAccountIdOk() (*string, bool)`
 
 GetAccountIdOk returns a tuple with the AccountId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAccountId
 
-`func (o *SweepconfigurationwebhookData) SetAccountId(v string)`
+`func (o *SweepConfigurationNotificationData) SetAccountId(v string)`
 
 SetAccountId sets AccountId field to given value.
 
 ### HasAccountId
 
-`func (o *SweepconfigurationwebhookData) HasAccountId() bool`
+`func (o *SweepConfigurationNotificationData) HasAccountId() bool`
 
 HasAccountId returns a boolean if a field has been set.
 
 ### GetBalancePlatform
 
-`func (o *SweepconfigurationwebhookData) GetBalancePlatform() string`
+`func (o *SweepConfigurationNotificationData) GetBalancePlatform() string`
 
 GetBalancePlatform returns the BalancePlatform field if non-nil, zero value otherwise.
 
 ### GetBalancePlatformOk
 
-`func (o *SweepconfigurationwebhookData) GetBalancePlatformOk() (*string, bool)`
+`func (o *SweepConfigurationNotificationData) GetBalancePlatformOk() (*string, bool)`
 
 GetBalancePlatformOk returns a tuple with the BalancePlatform field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBalancePlatform
 
-`func (o *SweepconfigurationwebhookData) SetBalancePlatform(v string)`
+`func (o *SweepConfigurationNotificationData) SetBalancePlatform(v string)`
 
 SetBalancePlatform sets BalancePlatform field to given value.
 
 ### HasBalancePlatform
 
-`func (o *SweepconfigurationwebhookData) HasBalancePlatform() bool`
+`func (o *SweepConfigurationNotificationData) HasBalancePlatform() bool`
 
 HasBalancePlatform returns a boolean if a field has been set.
 
 ### GetSweep
 
-`func (o *SweepconfigurationwebhookData) GetSweep() SweepConfigurationV2`
+`func (o *SweepConfigurationNotificationData) GetSweep() SweepConfigurationV2`
 
 GetSweep returns the Sweep field if non-nil, zero value otherwise.
 
 ### GetSweepOk
 
-`func (o *SweepconfigurationwebhookData) GetSweepOk() (*SweepConfigurationV2, bool)`
+`func (o *SweepConfigurationNotificationData) GetSweepOk() (*SweepConfigurationV2, bool)`
 
 GetSweepOk returns a tuple with the Sweep field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSweep
 
-`func (o *SweepconfigurationwebhookData) SetSweep(v SweepConfigurationV2)`
+`func (o *SweepConfigurationNotificationData) SetSweep(v SweepConfigurationV2)`
 
 SetSweep sets Sweep field to given value.
 
 ### HasSweep
 
-`func (o *SweepconfigurationwebhookData) HasSweep() bool`
+`func (o *SweepConfigurationNotificationData) HasSweep() bool`
 
 HasSweep returns a boolean if a field has been set.
 

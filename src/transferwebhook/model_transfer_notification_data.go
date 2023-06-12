@@ -15,11 +15,11 @@ import (
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// checks if the transferwebhookData type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &transferwebhookData{}
+// checks if the TransferNotificationData type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &TransferNotificationData{}
 
-// transferwebhookData struct for transferwebhookData
-type transferwebhookData struct {
+// TransferNotificationData struct for TransferNotificationData
+type TransferNotificationData struct {
 	AccountHolder  *ResourceReference `json:"accountHolder,omitempty"`
 	Amount         Amount             `json:"amount"`
 	BalanceAccount *ResourceReference `json:"balanceAccount,omitempty"`
@@ -78,7 +78,7 @@ type transferwebhookData struct {
 	SequenceNumber *int32 `json:"sequenceNumber,omitempty"`
 	// The result of the transfer.   For example, **authorised**, **refused**, or **error**.
 	Status   string                                `json:"status"`
-	Tracking *transferwebhookTransferTracking `json:"tracking,omitempty"`
+	Tracking *TransferNotificationTransferTracking `json:"tracking,omitempty"`
 	// The ID of the transaction that is created based on the transfer.
 	// Deprecated
 	TransactionId          *string                 `json:"transactionId,omitempty"`
@@ -87,31 +87,31 @@ type transferwebhookData struct {
 	Type *string `json:"type,omitempty"`
 	// The evaluation of the validation facts. See [validation checks](https://docs.adyen.com/issuing/validation-checks) for more information.
 	// Deprecated
-	ValidationFacts []transferwebhookValidationFact `json:"validationFacts,omitempty"`
+	ValidationFacts []TransferNotificationValidationFact `json:"validationFacts,omitempty"`
 }
 
-// NewtransferwebhookData instantiates a new transferwebhookData object
+// NewTransferNotificationData instantiates a new TransferNotificationData object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewtransferwebhookData(amount Amount, category string, status string) *transferwebhookData {
-	this := transferwebhookData{}
+func NewTransferNotificationData(amount Amount, category string, status string) *TransferNotificationData {
+	this := TransferNotificationData{}
 	this.Amount = amount
 	this.Category = category
 	this.Status = status
 	return &this
 }
 
-// NewtransferwebhookDataWithDefaults instantiates a new transferwebhookData object
+// NewTransferNotificationDataWithDefaults instantiates a new TransferNotificationData object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewtransferwebhookDataWithDefaults() *transferwebhookData {
-	this := transferwebhookData{}
+func NewTransferNotificationDataWithDefaults() *TransferNotificationData {
+	this := TransferNotificationData{}
 	return &this
 }
 
 // GetAccountHolder returns the AccountHolder field value if set, zero value otherwise.
-func (o *transferwebhookData) GetAccountHolder() ResourceReference {
+func (o *TransferNotificationData) GetAccountHolder() ResourceReference {
 	if o == nil || common.IsNil(o.AccountHolder) {
 		var ret ResourceReference
 		return ret
@@ -121,7 +121,7 @@ func (o *transferwebhookData) GetAccountHolder() ResourceReference {
 
 // GetAccountHolderOk returns a tuple with the AccountHolder field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *transferwebhookData) GetAccountHolderOk() (*ResourceReference, bool) {
+func (o *TransferNotificationData) GetAccountHolderOk() (*ResourceReference, bool) {
 	if o == nil || common.IsNil(o.AccountHolder) {
 		return nil, false
 	}
@@ -129,7 +129,7 @@ func (o *transferwebhookData) GetAccountHolderOk() (*ResourceReference, bool) {
 }
 
 // HasAccountHolder returns a boolean if a field has been set.
-func (o *transferwebhookData) HasAccountHolder() bool {
+func (o *TransferNotificationData) HasAccountHolder() bool {
 	if o != nil && !common.IsNil(o.AccountHolder) {
 		return true
 	}
@@ -138,12 +138,12 @@ func (o *transferwebhookData) HasAccountHolder() bool {
 }
 
 // SetAccountHolder gets a reference to the given ResourceReference and assigns it to the AccountHolder field.
-func (o *transferwebhookData) SetAccountHolder(v ResourceReference) {
+func (o *TransferNotificationData) SetAccountHolder(v ResourceReference) {
 	o.AccountHolder = &v
 }
 
 // GetAmount returns the Amount field value
-func (o *transferwebhookData) GetAmount() Amount {
+func (o *TransferNotificationData) GetAmount() Amount {
 	if o == nil {
 		var ret Amount
 		return ret
@@ -154,7 +154,7 @@ func (o *transferwebhookData) GetAmount() Amount {
 
 // GetAmountOk returns a tuple with the Amount field value
 // and a boolean to check if the value has been set.
-func (o *transferwebhookData) GetAmountOk() (*Amount, bool) {
+func (o *TransferNotificationData) GetAmountOk() (*Amount, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -162,12 +162,12 @@ func (o *transferwebhookData) GetAmountOk() (*Amount, bool) {
 }
 
 // SetAmount sets field value
-func (o *transferwebhookData) SetAmount(v Amount) {
+func (o *TransferNotificationData) SetAmount(v Amount) {
 	o.Amount = v
 }
 
 // GetBalanceAccount returns the BalanceAccount field value if set, zero value otherwise.
-func (o *transferwebhookData) GetBalanceAccount() ResourceReference {
+func (o *TransferNotificationData) GetBalanceAccount() ResourceReference {
 	if o == nil || common.IsNil(o.BalanceAccount) {
 		var ret ResourceReference
 		return ret
@@ -177,7 +177,7 @@ func (o *transferwebhookData) GetBalanceAccount() ResourceReference {
 
 // GetBalanceAccountOk returns a tuple with the BalanceAccount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *transferwebhookData) GetBalanceAccountOk() (*ResourceReference, bool) {
+func (o *TransferNotificationData) GetBalanceAccountOk() (*ResourceReference, bool) {
 	if o == nil || common.IsNil(o.BalanceAccount) {
 		return nil, false
 	}
@@ -185,7 +185,7 @@ func (o *transferwebhookData) GetBalanceAccountOk() (*ResourceReference, bool) {
 }
 
 // HasBalanceAccount returns a boolean if a field has been set.
-func (o *transferwebhookData) HasBalanceAccount() bool {
+func (o *TransferNotificationData) HasBalanceAccount() bool {
 	if o != nil && !common.IsNil(o.BalanceAccount) {
 		return true
 	}
@@ -194,13 +194,13 @@ func (o *transferwebhookData) HasBalanceAccount() bool {
 }
 
 // SetBalanceAccount gets a reference to the given ResourceReference and assigns it to the BalanceAccount field.
-func (o *transferwebhookData) SetBalanceAccount(v ResourceReference) {
+func (o *TransferNotificationData) SetBalanceAccount(v ResourceReference) {
 	o.BalanceAccount = &v
 }
 
 // GetBalanceAccountId returns the BalanceAccountId field value if set, zero value otherwise.
 // Deprecated
-func (o *transferwebhookData) GetBalanceAccountId() string {
+func (o *TransferNotificationData) GetBalanceAccountId() string {
 	if o == nil || common.IsNil(o.BalanceAccountId) {
 		var ret string
 		return ret
@@ -211,7 +211,7 @@ func (o *transferwebhookData) GetBalanceAccountId() string {
 // GetBalanceAccountIdOk returns a tuple with the BalanceAccountId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // Deprecated
-func (o *transferwebhookData) GetBalanceAccountIdOk() (*string, bool) {
+func (o *TransferNotificationData) GetBalanceAccountIdOk() (*string, bool) {
 	if o == nil || common.IsNil(o.BalanceAccountId) {
 		return nil, false
 	}
@@ -219,7 +219,7 @@ func (o *transferwebhookData) GetBalanceAccountIdOk() (*string, bool) {
 }
 
 // HasBalanceAccountId returns a boolean if a field has been set.
-func (o *transferwebhookData) HasBalanceAccountId() bool {
+func (o *TransferNotificationData) HasBalanceAccountId() bool {
 	if o != nil && !common.IsNil(o.BalanceAccountId) {
 		return true
 	}
@@ -229,12 +229,12 @@ func (o *transferwebhookData) HasBalanceAccountId() bool {
 
 // SetBalanceAccountId gets a reference to the given string and assigns it to the BalanceAccountId field.
 // Deprecated
-func (o *transferwebhookData) SetBalanceAccountId(v string) {
+func (o *TransferNotificationData) SetBalanceAccountId(v string) {
 	o.BalanceAccountId = &v
 }
 
 // GetBalancePlatform returns the BalancePlatform field value if set, zero value otherwise.
-func (o *transferwebhookData) GetBalancePlatform() string {
+func (o *TransferNotificationData) GetBalancePlatform() string {
 	if o == nil || common.IsNil(o.BalancePlatform) {
 		var ret string
 		return ret
@@ -244,7 +244,7 @@ func (o *transferwebhookData) GetBalancePlatform() string {
 
 // GetBalancePlatformOk returns a tuple with the BalancePlatform field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *transferwebhookData) GetBalancePlatformOk() (*string, bool) {
+func (o *TransferNotificationData) GetBalancePlatformOk() (*string, bool) {
 	if o == nil || common.IsNil(o.BalancePlatform) {
 		return nil, false
 	}
@@ -252,7 +252,7 @@ func (o *transferwebhookData) GetBalancePlatformOk() (*string, bool) {
 }
 
 // HasBalancePlatform returns a boolean if a field has been set.
-func (o *transferwebhookData) HasBalancePlatform() bool {
+func (o *TransferNotificationData) HasBalancePlatform() bool {
 	if o != nil && !common.IsNil(o.BalancePlatform) {
 		return true
 	}
@@ -261,12 +261,12 @@ func (o *transferwebhookData) HasBalancePlatform() bool {
 }
 
 // SetBalancePlatform gets a reference to the given string and assigns it to the BalancePlatform field.
-func (o *transferwebhookData) SetBalancePlatform(v string) {
+func (o *TransferNotificationData) SetBalancePlatform(v string) {
 	o.BalancePlatform = &v
 }
 
 // GetBalances returns the Balances field value if set, zero value otherwise.
-func (o *transferwebhookData) GetBalances() []BalanceMutation {
+func (o *TransferNotificationData) GetBalances() []BalanceMutation {
 	if o == nil || common.IsNil(o.Balances) {
 		var ret []BalanceMutation
 		return ret
@@ -276,7 +276,7 @@ func (o *transferwebhookData) GetBalances() []BalanceMutation {
 
 // GetBalancesOk returns a tuple with the Balances field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *transferwebhookData) GetBalancesOk() ([]BalanceMutation, bool) {
+func (o *TransferNotificationData) GetBalancesOk() ([]BalanceMutation, bool) {
 	if o == nil || common.IsNil(o.Balances) {
 		return nil, false
 	}
@@ -284,7 +284,7 @@ func (o *transferwebhookData) GetBalancesOk() ([]BalanceMutation, bool) {
 }
 
 // HasBalances returns a boolean if a field has been set.
-func (o *transferwebhookData) HasBalances() bool {
+func (o *TransferNotificationData) HasBalances() bool {
 	if o != nil && !common.IsNil(o.Balances) {
 		return true
 	}
@@ -293,12 +293,12 @@ func (o *transferwebhookData) HasBalances() bool {
 }
 
 // SetBalances gets a reference to the given []BalanceMutation and assigns it to the Balances field.
-func (o *transferwebhookData) SetBalances(v []BalanceMutation) {
+func (o *TransferNotificationData) SetBalances(v []BalanceMutation) {
 	o.Balances = v
 }
 
 // GetCategory returns the Category field value
-func (o *transferwebhookData) GetCategory() string {
+func (o *TransferNotificationData) GetCategory() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -309,7 +309,7 @@ func (o *transferwebhookData) GetCategory() string {
 
 // GetCategoryOk returns a tuple with the Category field value
 // and a boolean to check if the value has been set.
-func (o *transferwebhookData) GetCategoryOk() (*string, bool) {
+func (o *TransferNotificationData) GetCategoryOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -317,12 +317,12 @@ func (o *transferwebhookData) GetCategoryOk() (*string, bool) {
 }
 
 // SetCategory sets field value
-func (o *transferwebhookData) SetCategory(v string) {
+func (o *TransferNotificationData) SetCategory(v string) {
 	o.Category = v
 }
 
 // GetCounterparty returns the Counterparty field value if set, zero value otherwise.
-func (o *transferwebhookData) GetCounterparty() CounterpartyV3 {
+func (o *TransferNotificationData) GetCounterparty() CounterpartyV3 {
 	if o == nil || common.IsNil(o.Counterparty) {
 		var ret CounterpartyV3
 		return ret
@@ -332,7 +332,7 @@ func (o *transferwebhookData) GetCounterparty() CounterpartyV3 {
 
 // GetCounterpartyOk returns a tuple with the Counterparty field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *transferwebhookData) GetCounterpartyOk() (*CounterpartyV3, bool) {
+func (o *TransferNotificationData) GetCounterpartyOk() (*CounterpartyV3, bool) {
 	if o == nil || common.IsNil(o.Counterparty) {
 		return nil, false
 	}
@@ -340,7 +340,7 @@ func (o *transferwebhookData) GetCounterpartyOk() (*CounterpartyV3, bool) {
 }
 
 // HasCounterparty returns a boolean if a field has been set.
-func (o *transferwebhookData) HasCounterparty() bool {
+func (o *TransferNotificationData) HasCounterparty() bool {
 	if o != nil && !common.IsNil(o.Counterparty) {
 		return true
 	}
@@ -349,12 +349,12 @@ func (o *transferwebhookData) HasCounterparty() bool {
 }
 
 // SetCounterparty gets a reference to the given CounterpartyV3 and assigns it to the Counterparty field.
-func (o *transferwebhookData) SetCounterparty(v CounterpartyV3) {
+func (o *TransferNotificationData) SetCounterparty(v CounterpartyV3) {
 	o.Counterparty = &v
 }
 
 // GetCreationDate returns the CreationDate field value if set, zero value otherwise.
-func (o *transferwebhookData) GetCreationDate() time.Time {
+func (o *TransferNotificationData) GetCreationDate() time.Time {
 	if o == nil || common.IsNil(o.CreationDate) {
 		var ret time.Time
 		return ret
@@ -364,7 +364,7 @@ func (o *transferwebhookData) GetCreationDate() time.Time {
 
 // GetCreationDateOk returns a tuple with the CreationDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *transferwebhookData) GetCreationDateOk() (*time.Time, bool) {
+func (o *TransferNotificationData) GetCreationDateOk() (*time.Time, bool) {
 	if o == nil || common.IsNil(o.CreationDate) {
 		return nil, false
 	}
@@ -372,7 +372,7 @@ func (o *transferwebhookData) GetCreationDateOk() (*time.Time, bool) {
 }
 
 // HasCreationDate returns a boolean if a field has been set.
-func (o *transferwebhookData) HasCreationDate() bool {
+func (o *TransferNotificationData) HasCreationDate() bool {
 	if o != nil && !common.IsNil(o.CreationDate) {
 		return true
 	}
@@ -381,12 +381,12 @@ func (o *transferwebhookData) HasCreationDate() bool {
 }
 
 // SetCreationDate gets a reference to the given time.Time and assigns it to the CreationDate field.
-func (o *transferwebhookData) SetCreationDate(v time.Time) {
+func (o *TransferNotificationData) SetCreationDate(v time.Time) {
 	o.CreationDate = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
-func (o *transferwebhookData) GetDescription() string {
+func (o *TransferNotificationData) GetDescription() string {
 	if o == nil || common.IsNil(o.Description) {
 		var ret string
 		return ret
@@ -396,7 +396,7 @@ func (o *transferwebhookData) GetDescription() string {
 
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *transferwebhookData) GetDescriptionOk() (*string, bool) {
+func (o *TransferNotificationData) GetDescriptionOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Description) {
 		return nil, false
 	}
@@ -404,7 +404,7 @@ func (o *transferwebhookData) GetDescriptionOk() (*string, bool) {
 }
 
 // HasDescription returns a boolean if a field has been set.
-func (o *transferwebhookData) HasDescription() bool {
+func (o *TransferNotificationData) HasDescription() bool {
 	if o != nil && !common.IsNil(o.Description) {
 		return true
 	}
@@ -413,12 +413,12 @@ func (o *transferwebhookData) HasDescription() bool {
 }
 
 // SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *transferwebhookData) SetDescription(v string) {
+func (o *TransferNotificationData) SetDescription(v string) {
 	o.Description = &v
 }
 
 // GetDirection returns the Direction field value if set, zero value otherwise.
-func (o *transferwebhookData) GetDirection() string {
+func (o *TransferNotificationData) GetDirection() string {
 	if o == nil || common.IsNil(o.Direction) {
 		var ret string
 		return ret
@@ -428,7 +428,7 @@ func (o *transferwebhookData) GetDirection() string {
 
 // GetDirectionOk returns a tuple with the Direction field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *transferwebhookData) GetDirectionOk() (*string, bool) {
+func (o *TransferNotificationData) GetDirectionOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Direction) {
 		return nil, false
 	}
@@ -436,7 +436,7 @@ func (o *transferwebhookData) GetDirectionOk() (*string, bool) {
 }
 
 // HasDirection returns a boolean if a field has been set.
-func (o *transferwebhookData) HasDirection() bool {
+func (o *TransferNotificationData) HasDirection() bool {
 	if o != nil && !common.IsNil(o.Direction) {
 		return true
 	}
@@ -445,12 +445,12 @@ func (o *transferwebhookData) HasDirection() bool {
 }
 
 // SetDirection gets a reference to the given string and assigns it to the Direction field.
-func (o *transferwebhookData) SetDirection(v string) {
+func (o *TransferNotificationData) SetDirection(v string) {
 	o.Direction = &v
 }
 
 // GetEvents returns the Events field value if set, zero value otherwise.
-func (o *transferwebhookData) GetEvents() []TransferEvent {
+func (o *TransferNotificationData) GetEvents() []TransferEvent {
 	if o == nil || common.IsNil(o.Events) {
 		var ret []TransferEvent
 		return ret
@@ -460,7 +460,7 @@ func (o *transferwebhookData) GetEvents() []TransferEvent {
 
 // GetEventsOk returns a tuple with the Events field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *transferwebhookData) GetEventsOk() ([]TransferEvent, bool) {
+func (o *TransferNotificationData) GetEventsOk() ([]TransferEvent, bool) {
 	if o == nil || common.IsNil(o.Events) {
 		return nil, false
 	}
@@ -468,7 +468,7 @@ func (o *transferwebhookData) GetEventsOk() ([]TransferEvent, bool) {
 }
 
 // HasEvents returns a boolean if a field has been set.
-func (o *transferwebhookData) HasEvents() bool {
+func (o *TransferNotificationData) HasEvents() bool {
 	if o != nil && !common.IsNil(o.Events) {
 		return true
 	}
@@ -477,12 +477,12 @@ func (o *transferwebhookData) HasEvents() bool {
 }
 
 // SetEvents gets a reference to the given []TransferEvent and assigns it to the Events field.
-func (o *transferwebhookData) SetEvents(v []TransferEvent) {
+func (o *TransferNotificationData) SetEvents(v []TransferEvent) {
 	o.Events = v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *transferwebhookData) GetId() string {
+func (o *TransferNotificationData) GetId() string {
 	if o == nil || common.IsNil(o.Id) {
 		var ret string
 		return ret
@@ -492,7 +492,7 @@ func (o *transferwebhookData) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *transferwebhookData) GetIdOk() (*string, bool) {
+func (o *TransferNotificationData) GetIdOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Id) {
 		return nil, false
 	}
@@ -500,7 +500,7 @@ func (o *transferwebhookData) GetIdOk() (*string, bool) {
 }
 
 // HasId returns a boolean if a field has been set.
-func (o *transferwebhookData) HasId() bool {
+func (o *TransferNotificationData) HasId() bool {
 	if o != nil && !common.IsNil(o.Id) {
 		return true
 	}
@@ -509,13 +509,13 @@ func (o *transferwebhookData) HasId() bool {
 }
 
 // SetId gets a reference to the given string and assigns it to the Id field.
-func (o *transferwebhookData) SetId(v string) {
+func (o *TransferNotificationData) SetId(v string) {
 	o.Id = &v
 }
 
 // GetModificationMerchantReference returns the ModificationMerchantReference field value if set, zero value otherwise.
 // Deprecated
-func (o *transferwebhookData) GetModificationMerchantReference() string {
+func (o *TransferNotificationData) GetModificationMerchantReference() string {
 	if o == nil || common.IsNil(o.ModificationMerchantReference) {
 		var ret string
 		return ret
@@ -526,7 +526,7 @@ func (o *transferwebhookData) GetModificationMerchantReference() string {
 // GetModificationMerchantReferenceOk returns a tuple with the ModificationMerchantReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // Deprecated
-func (o *transferwebhookData) GetModificationMerchantReferenceOk() (*string, bool) {
+func (o *TransferNotificationData) GetModificationMerchantReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ModificationMerchantReference) {
 		return nil, false
 	}
@@ -534,7 +534,7 @@ func (o *transferwebhookData) GetModificationMerchantReferenceOk() (*string, boo
 }
 
 // HasModificationMerchantReference returns a boolean if a field has been set.
-func (o *transferwebhookData) HasModificationMerchantReference() bool {
+func (o *TransferNotificationData) HasModificationMerchantReference() bool {
 	if o != nil && !common.IsNil(o.ModificationMerchantReference) {
 		return true
 	}
@@ -544,13 +544,13 @@ func (o *transferwebhookData) HasModificationMerchantReference() bool {
 
 // SetModificationMerchantReference gets a reference to the given string and assigns it to the ModificationMerchantReference field.
 // Deprecated
-func (o *transferwebhookData) SetModificationMerchantReference(v string) {
+func (o *TransferNotificationData) SetModificationMerchantReference(v string) {
 	o.ModificationMerchantReference = &v
 }
 
 // GetModificationPspReference returns the ModificationPspReference field value if set, zero value otherwise.
 // Deprecated
-func (o *transferwebhookData) GetModificationPspReference() string {
+func (o *TransferNotificationData) GetModificationPspReference() string {
 	if o == nil || common.IsNil(o.ModificationPspReference) {
 		var ret string
 		return ret
@@ -561,7 +561,7 @@ func (o *transferwebhookData) GetModificationPspReference() string {
 // GetModificationPspReferenceOk returns a tuple with the ModificationPspReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // Deprecated
-func (o *transferwebhookData) GetModificationPspReferenceOk() (*string, bool) {
+func (o *TransferNotificationData) GetModificationPspReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ModificationPspReference) {
 		return nil, false
 	}
@@ -569,7 +569,7 @@ func (o *transferwebhookData) GetModificationPspReferenceOk() (*string, bool) {
 }
 
 // HasModificationPspReference returns a boolean if a field has been set.
-func (o *transferwebhookData) HasModificationPspReference() bool {
+func (o *TransferNotificationData) HasModificationPspReference() bool {
 	if o != nil && !common.IsNil(o.ModificationPspReference) {
 		return true
 	}
@@ -579,13 +579,13 @@ func (o *transferwebhookData) HasModificationPspReference() bool {
 
 // SetModificationPspReference gets a reference to the given string and assigns it to the ModificationPspReference field.
 // Deprecated
-func (o *transferwebhookData) SetModificationPspReference(v string) {
+func (o *TransferNotificationData) SetModificationPspReference(v string) {
 	o.ModificationPspReference = &v
 }
 
 // GetPanEntryMode returns the PanEntryMode field value if set, zero value otherwise.
 // Deprecated
-func (o *transferwebhookData) GetPanEntryMode() string {
+func (o *TransferNotificationData) GetPanEntryMode() string {
 	if o == nil || common.IsNil(o.PanEntryMode) {
 		var ret string
 		return ret
@@ -596,7 +596,7 @@ func (o *transferwebhookData) GetPanEntryMode() string {
 // GetPanEntryModeOk returns a tuple with the PanEntryMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // Deprecated
-func (o *transferwebhookData) GetPanEntryModeOk() (*string, bool) {
+func (o *TransferNotificationData) GetPanEntryModeOk() (*string, bool) {
 	if o == nil || common.IsNil(o.PanEntryMode) {
 		return nil, false
 	}
@@ -604,7 +604,7 @@ func (o *transferwebhookData) GetPanEntryModeOk() (*string, bool) {
 }
 
 // HasPanEntryMode returns a boolean if a field has been set.
-func (o *transferwebhookData) HasPanEntryMode() bool {
+func (o *TransferNotificationData) HasPanEntryMode() bool {
 	if o != nil && !common.IsNil(o.PanEntryMode) {
 		return true
 	}
@@ -614,12 +614,12 @@ func (o *transferwebhookData) HasPanEntryMode() bool {
 
 // SetPanEntryMode gets a reference to the given string and assigns it to the PanEntryMode field.
 // Deprecated
-func (o *transferwebhookData) SetPanEntryMode(v string) {
+func (o *TransferNotificationData) SetPanEntryMode(v string) {
 	o.PanEntryMode = &v
 }
 
 // GetPaymentInstrument returns the PaymentInstrument field value if set, zero value otherwise.
-func (o *transferwebhookData) GetPaymentInstrument() PaymentInstrument {
+func (o *TransferNotificationData) GetPaymentInstrument() PaymentInstrument {
 	if o == nil || common.IsNil(o.PaymentInstrument) {
 		var ret PaymentInstrument
 		return ret
@@ -629,7 +629,7 @@ func (o *transferwebhookData) GetPaymentInstrument() PaymentInstrument {
 
 // GetPaymentInstrumentOk returns a tuple with the PaymentInstrument field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *transferwebhookData) GetPaymentInstrumentOk() (*PaymentInstrument, bool) {
+func (o *TransferNotificationData) GetPaymentInstrumentOk() (*PaymentInstrument, bool) {
 	if o == nil || common.IsNil(o.PaymentInstrument) {
 		return nil, false
 	}
@@ -637,7 +637,7 @@ func (o *transferwebhookData) GetPaymentInstrumentOk() (*PaymentInstrument, bool
 }
 
 // HasPaymentInstrument returns a boolean if a field has been set.
-func (o *transferwebhookData) HasPaymentInstrument() bool {
+func (o *TransferNotificationData) HasPaymentInstrument() bool {
 	if o != nil && !common.IsNil(o.PaymentInstrument) {
 		return true
 	}
@@ -646,13 +646,13 @@ func (o *transferwebhookData) HasPaymentInstrument() bool {
 }
 
 // SetPaymentInstrument gets a reference to the given PaymentInstrument and assigns it to the PaymentInstrument field.
-func (o *transferwebhookData) SetPaymentInstrument(v PaymentInstrument) {
+func (o *TransferNotificationData) SetPaymentInstrument(v PaymentInstrument) {
 	o.PaymentInstrument = &v
 }
 
 // GetPaymentInstrumentId returns the PaymentInstrumentId field value if set, zero value otherwise.
 // Deprecated
-func (o *transferwebhookData) GetPaymentInstrumentId() string {
+func (o *TransferNotificationData) GetPaymentInstrumentId() string {
 	if o == nil || common.IsNil(o.PaymentInstrumentId) {
 		var ret string
 		return ret
@@ -663,7 +663,7 @@ func (o *transferwebhookData) GetPaymentInstrumentId() string {
 // GetPaymentInstrumentIdOk returns a tuple with the PaymentInstrumentId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // Deprecated
-func (o *transferwebhookData) GetPaymentInstrumentIdOk() (*string, bool) {
+func (o *TransferNotificationData) GetPaymentInstrumentIdOk() (*string, bool) {
 	if o == nil || common.IsNil(o.PaymentInstrumentId) {
 		return nil, false
 	}
@@ -671,7 +671,7 @@ func (o *transferwebhookData) GetPaymentInstrumentIdOk() (*string, bool) {
 }
 
 // HasPaymentInstrumentId returns a boolean if a field has been set.
-func (o *transferwebhookData) HasPaymentInstrumentId() bool {
+func (o *TransferNotificationData) HasPaymentInstrumentId() bool {
 	if o != nil && !common.IsNil(o.PaymentInstrumentId) {
 		return true
 	}
@@ -681,13 +681,13 @@ func (o *transferwebhookData) HasPaymentInstrumentId() bool {
 
 // SetPaymentInstrumentId gets a reference to the given string and assigns it to the PaymentInstrumentId field.
 // Deprecated
-func (o *transferwebhookData) SetPaymentInstrumentId(v string) {
+func (o *TransferNotificationData) SetPaymentInstrumentId(v string) {
 	o.PaymentInstrumentId = &v
 }
 
 // GetPaymentMerchantReference returns the PaymentMerchantReference field value if set, zero value otherwise.
 // Deprecated
-func (o *transferwebhookData) GetPaymentMerchantReference() string {
+func (o *TransferNotificationData) GetPaymentMerchantReference() string {
 	if o == nil || common.IsNil(o.PaymentMerchantReference) {
 		var ret string
 		return ret
@@ -698,7 +698,7 @@ func (o *transferwebhookData) GetPaymentMerchantReference() string {
 // GetPaymentMerchantReferenceOk returns a tuple with the PaymentMerchantReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // Deprecated
-func (o *transferwebhookData) GetPaymentMerchantReferenceOk() (*string, bool) {
+func (o *TransferNotificationData) GetPaymentMerchantReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.PaymentMerchantReference) {
 		return nil, false
 	}
@@ -706,7 +706,7 @@ func (o *transferwebhookData) GetPaymentMerchantReferenceOk() (*string, bool) {
 }
 
 // HasPaymentMerchantReference returns a boolean if a field has been set.
-func (o *transferwebhookData) HasPaymentMerchantReference() bool {
+func (o *TransferNotificationData) HasPaymentMerchantReference() bool {
 	if o != nil && !common.IsNil(o.PaymentMerchantReference) {
 		return true
 	}
@@ -716,12 +716,12 @@ func (o *transferwebhookData) HasPaymentMerchantReference() bool {
 
 // SetPaymentMerchantReference gets a reference to the given string and assigns it to the PaymentMerchantReference field.
 // Deprecated
-func (o *transferwebhookData) SetPaymentMerchantReference(v string) {
+func (o *TransferNotificationData) SetPaymentMerchantReference(v string) {
 	o.PaymentMerchantReference = &v
 }
 
 // GetPriority returns the Priority field value if set, zero value otherwise.
-func (o *transferwebhookData) GetPriority() string {
+func (o *TransferNotificationData) GetPriority() string {
 	if o == nil || common.IsNil(o.Priority) {
 		var ret string
 		return ret
@@ -731,7 +731,7 @@ func (o *transferwebhookData) GetPriority() string {
 
 // GetPriorityOk returns a tuple with the Priority field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *transferwebhookData) GetPriorityOk() (*string, bool) {
+func (o *TransferNotificationData) GetPriorityOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Priority) {
 		return nil, false
 	}
@@ -739,7 +739,7 @@ func (o *transferwebhookData) GetPriorityOk() (*string, bool) {
 }
 
 // HasPriority returns a boolean if a field has been set.
-func (o *transferwebhookData) HasPriority() bool {
+func (o *TransferNotificationData) HasPriority() bool {
 	if o != nil && !common.IsNil(o.Priority) {
 		return true
 	}
@@ -748,13 +748,13 @@ func (o *transferwebhookData) HasPriority() bool {
 }
 
 // SetPriority gets a reference to the given string and assigns it to the Priority field.
-func (o *transferwebhookData) SetPriority(v string) {
+func (o *TransferNotificationData) SetPriority(v string) {
 	o.Priority = &v
 }
 
 // GetProcessingType returns the ProcessingType field value if set, zero value otherwise.
 // Deprecated
-func (o *transferwebhookData) GetProcessingType() string {
+func (o *TransferNotificationData) GetProcessingType() string {
 	if o == nil || common.IsNil(o.ProcessingType) {
 		var ret string
 		return ret
@@ -765,7 +765,7 @@ func (o *transferwebhookData) GetProcessingType() string {
 // GetProcessingTypeOk returns a tuple with the ProcessingType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // Deprecated
-func (o *transferwebhookData) GetProcessingTypeOk() (*string, bool) {
+func (o *TransferNotificationData) GetProcessingTypeOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ProcessingType) {
 		return nil, false
 	}
@@ -773,7 +773,7 @@ func (o *transferwebhookData) GetProcessingTypeOk() (*string, bool) {
 }
 
 // HasProcessingType returns a boolean if a field has been set.
-func (o *transferwebhookData) HasProcessingType() bool {
+func (o *TransferNotificationData) HasProcessingType() bool {
 	if o != nil && !common.IsNil(o.ProcessingType) {
 		return true
 	}
@@ -783,13 +783,13 @@ func (o *transferwebhookData) HasProcessingType() bool {
 
 // SetProcessingType gets a reference to the given string and assigns it to the ProcessingType field.
 // Deprecated
-func (o *transferwebhookData) SetProcessingType(v string) {
+func (o *TransferNotificationData) SetProcessingType(v string) {
 	o.ProcessingType = &v
 }
 
 // GetPspPaymentReference returns the PspPaymentReference field value if set, zero value otherwise.
 // Deprecated
-func (o *transferwebhookData) GetPspPaymentReference() string {
+func (o *TransferNotificationData) GetPspPaymentReference() string {
 	if o == nil || common.IsNil(o.PspPaymentReference) {
 		var ret string
 		return ret
@@ -800,7 +800,7 @@ func (o *transferwebhookData) GetPspPaymentReference() string {
 // GetPspPaymentReferenceOk returns a tuple with the PspPaymentReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // Deprecated
-func (o *transferwebhookData) GetPspPaymentReferenceOk() (*string, bool) {
+func (o *TransferNotificationData) GetPspPaymentReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.PspPaymentReference) {
 		return nil, false
 	}
@@ -808,7 +808,7 @@ func (o *transferwebhookData) GetPspPaymentReferenceOk() (*string, bool) {
 }
 
 // HasPspPaymentReference returns a boolean if a field has been set.
-func (o *transferwebhookData) HasPspPaymentReference() bool {
+func (o *TransferNotificationData) HasPspPaymentReference() bool {
 	if o != nil && !common.IsNil(o.PspPaymentReference) {
 		return true
 	}
@@ -818,12 +818,12 @@ func (o *transferwebhookData) HasPspPaymentReference() bool {
 
 // SetPspPaymentReference gets a reference to the given string and assigns it to the PspPaymentReference field.
 // Deprecated
-func (o *transferwebhookData) SetPspPaymentReference(v string) {
+func (o *TransferNotificationData) SetPspPaymentReference(v string) {
 	o.PspPaymentReference = &v
 }
 
 // GetReason returns the Reason field value if set, zero value otherwise.
-func (o *transferwebhookData) GetReason() string {
+func (o *TransferNotificationData) GetReason() string {
 	if o == nil || common.IsNil(o.Reason) {
 		var ret string
 		return ret
@@ -833,7 +833,7 @@ func (o *transferwebhookData) GetReason() string {
 
 // GetReasonOk returns a tuple with the Reason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *transferwebhookData) GetReasonOk() (*string, bool) {
+func (o *TransferNotificationData) GetReasonOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Reason) {
 		return nil, false
 	}
@@ -841,7 +841,7 @@ func (o *transferwebhookData) GetReasonOk() (*string, bool) {
 }
 
 // HasReason returns a boolean if a field has been set.
-func (o *transferwebhookData) HasReason() bool {
+func (o *TransferNotificationData) HasReason() bool {
 	if o != nil && !common.IsNil(o.Reason) {
 		return true
 	}
@@ -850,12 +850,12 @@ func (o *transferwebhookData) HasReason() bool {
 }
 
 // SetReason gets a reference to the given string and assigns it to the Reason field.
-func (o *transferwebhookData) SetReason(v string) {
+func (o *TransferNotificationData) SetReason(v string) {
 	o.Reason = &v
 }
 
 // GetReference returns the Reference field value if set, zero value otherwise.
-func (o *transferwebhookData) GetReference() string {
+func (o *TransferNotificationData) GetReference() string {
 	if o == nil || common.IsNil(o.Reference) {
 		var ret string
 		return ret
@@ -865,7 +865,7 @@ func (o *transferwebhookData) GetReference() string {
 
 // GetReferenceOk returns a tuple with the Reference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *transferwebhookData) GetReferenceOk() (*string, bool) {
+func (o *TransferNotificationData) GetReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Reference) {
 		return nil, false
 	}
@@ -873,7 +873,7 @@ func (o *transferwebhookData) GetReferenceOk() (*string, bool) {
 }
 
 // HasReference returns a boolean if a field has been set.
-func (o *transferwebhookData) HasReference() bool {
+func (o *TransferNotificationData) HasReference() bool {
 	if o != nil && !common.IsNil(o.Reference) {
 		return true
 	}
@@ -882,12 +882,12 @@ func (o *transferwebhookData) HasReference() bool {
 }
 
 // SetReference gets a reference to the given string and assigns it to the Reference field.
-func (o *transferwebhookData) SetReference(v string) {
+func (o *TransferNotificationData) SetReference(v string) {
 	o.Reference = &v
 }
 
 // GetReferenceForBeneficiary returns the ReferenceForBeneficiary field value if set, zero value otherwise.
-func (o *transferwebhookData) GetReferenceForBeneficiary() string {
+func (o *TransferNotificationData) GetReferenceForBeneficiary() string {
 	if o == nil || common.IsNil(o.ReferenceForBeneficiary) {
 		var ret string
 		return ret
@@ -897,7 +897,7 @@ func (o *transferwebhookData) GetReferenceForBeneficiary() string {
 
 // GetReferenceForBeneficiaryOk returns a tuple with the ReferenceForBeneficiary field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *transferwebhookData) GetReferenceForBeneficiaryOk() (*string, bool) {
+func (o *TransferNotificationData) GetReferenceForBeneficiaryOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ReferenceForBeneficiary) {
 		return nil, false
 	}
@@ -905,7 +905,7 @@ func (o *transferwebhookData) GetReferenceForBeneficiaryOk() (*string, bool) {
 }
 
 // HasReferenceForBeneficiary returns a boolean if a field has been set.
-func (o *transferwebhookData) HasReferenceForBeneficiary() bool {
+func (o *TransferNotificationData) HasReferenceForBeneficiary() bool {
 	if o != nil && !common.IsNil(o.ReferenceForBeneficiary) {
 		return true
 	}
@@ -914,12 +914,12 @@ func (o *transferwebhookData) HasReferenceForBeneficiary() bool {
 }
 
 // SetReferenceForBeneficiary gets a reference to the given string and assigns it to the ReferenceForBeneficiary field.
-func (o *transferwebhookData) SetReferenceForBeneficiary(v string) {
+func (o *TransferNotificationData) SetReferenceForBeneficiary(v string) {
 	o.ReferenceForBeneficiary = &v
 }
 
 // GetRelayedAuthorisationData returns the RelayedAuthorisationData field value if set, zero value otherwise.
-func (o *transferwebhookData) GetRelayedAuthorisationData() RelayedAuthorisationData {
+func (o *TransferNotificationData) GetRelayedAuthorisationData() RelayedAuthorisationData {
 	if o == nil || common.IsNil(o.RelayedAuthorisationData) {
 		var ret RelayedAuthorisationData
 		return ret
@@ -929,7 +929,7 @@ func (o *transferwebhookData) GetRelayedAuthorisationData() RelayedAuthorisation
 
 // GetRelayedAuthorisationDataOk returns a tuple with the RelayedAuthorisationData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *transferwebhookData) GetRelayedAuthorisationDataOk() (*RelayedAuthorisationData, bool) {
+func (o *TransferNotificationData) GetRelayedAuthorisationDataOk() (*RelayedAuthorisationData, bool) {
 	if o == nil || common.IsNil(o.RelayedAuthorisationData) {
 		return nil, false
 	}
@@ -937,7 +937,7 @@ func (o *transferwebhookData) GetRelayedAuthorisationDataOk() (*RelayedAuthorisa
 }
 
 // HasRelayedAuthorisationData returns a boolean if a field has been set.
-func (o *transferwebhookData) HasRelayedAuthorisationData() bool {
+func (o *TransferNotificationData) HasRelayedAuthorisationData() bool {
 	if o != nil && !common.IsNil(o.RelayedAuthorisationData) {
 		return true
 	}
@@ -946,12 +946,12 @@ func (o *transferwebhookData) HasRelayedAuthorisationData() bool {
 }
 
 // SetRelayedAuthorisationData gets a reference to the given RelayedAuthorisationData and assigns it to the RelayedAuthorisationData field.
-func (o *transferwebhookData) SetRelayedAuthorisationData(v RelayedAuthorisationData) {
+func (o *TransferNotificationData) SetRelayedAuthorisationData(v RelayedAuthorisationData) {
 	o.RelayedAuthorisationData = &v
 }
 
 // GetSequenceNumber returns the SequenceNumber field value if set, zero value otherwise.
-func (o *transferwebhookData) GetSequenceNumber() int32 {
+func (o *TransferNotificationData) GetSequenceNumber() int32 {
 	if o == nil || common.IsNil(o.SequenceNumber) {
 		var ret int32
 		return ret
@@ -961,7 +961,7 @@ func (o *transferwebhookData) GetSequenceNumber() int32 {
 
 // GetSequenceNumberOk returns a tuple with the SequenceNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *transferwebhookData) GetSequenceNumberOk() (*int32, bool) {
+func (o *TransferNotificationData) GetSequenceNumberOk() (*int32, bool) {
 	if o == nil || common.IsNil(o.SequenceNumber) {
 		return nil, false
 	}
@@ -969,7 +969,7 @@ func (o *transferwebhookData) GetSequenceNumberOk() (*int32, bool) {
 }
 
 // HasSequenceNumber returns a boolean if a field has been set.
-func (o *transferwebhookData) HasSequenceNumber() bool {
+func (o *TransferNotificationData) HasSequenceNumber() bool {
 	if o != nil && !common.IsNil(o.SequenceNumber) {
 		return true
 	}
@@ -978,12 +978,12 @@ func (o *transferwebhookData) HasSequenceNumber() bool {
 }
 
 // SetSequenceNumber gets a reference to the given int32 and assigns it to the SequenceNumber field.
-func (o *transferwebhookData) SetSequenceNumber(v int32) {
+func (o *TransferNotificationData) SetSequenceNumber(v int32) {
 	o.SequenceNumber = &v
 }
 
 // GetStatus returns the Status field value
-func (o *transferwebhookData) GetStatus() string {
+func (o *TransferNotificationData) GetStatus() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -994,7 +994,7 @@ func (o *transferwebhookData) GetStatus() string {
 
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *transferwebhookData) GetStatusOk() (*string, bool) {
+func (o *TransferNotificationData) GetStatusOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1002,14 +1002,14 @@ func (o *transferwebhookData) GetStatusOk() (*string, bool) {
 }
 
 // SetStatus sets field value
-func (o *transferwebhookData) SetStatus(v string) {
+func (o *TransferNotificationData) SetStatus(v string) {
 	o.Status = v
 }
 
 // GetTracking returns the Tracking field value if set, zero value otherwise.
-func (o *transferwebhookData) GetTracking() transferwebhookTransferTracking {
+func (o *TransferNotificationData) GetTracking() TransferNotificationTransferTracking {
 	if o == nil || common.IsNil(o.Tracking) {
-		var ret transferwebhookTransferTracking
+		var ret TransferNotificationTransferTracking
 		return ret
 	}
 	return *o.Tracking
@@ -1017,7 +1017,7 @@ func (o *transferwebhookData) GetTracking() transferwebhookTransferTracking {
 
 // GetTrackingOk returns a tuple with the Tracking field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *transferwebhookData) GetTrackingOk() (*transferwebhookTransferTracking, bool) {
+func (o *TransferNotificationData) GetTrackingOk() (*TransferNotificationTransferTracking, bool) {
 	if o == nil || common.IsNil(o.Tracking) {
 		return nil, false
 	}
@@ -1025,7 +1025,7 @@ func (o *transferwebhookData) GetTrackingOk() (*transferwebhookTransferTracking,
 }
 
 // HasTracking returns a boolean if a field has been set.
-func (o *transferwebhookData) HasTracking() bool {
+func (o *TransferNotificationData) HasTracking() bool {
 	if o != nil && !common.IsNil(o.Tracking) {
 		return true
 	}
@@ -1033,14 +1033,14 @@ func (o *transferwebhookData) HasTracking() bool {
 	return false
 }
 
-// SetTracking gets a reference to the given transferwebhookTransferTracking and assigns it to the Tracking field.
-func (o *transferwebhookData) SetTracking(v transferwebhookTransferTracking) {
+// SetTracking gets a reference to the given TransferNotificationTransferTracking and assigns it to the Tracking field.
+func (o *TransferNotificationData) SetTracking(v TransferNotificationTransferTracking) {
 	o.Tracking = &v
 }
 
 // GetTransactionId returns the TransactionId field value if set, zero value otherwise.
 // Deprecated
-func (o *transferwebhookData) GetTransactionId() string {
+func (o *TransferNotificationData) GetTransactionId() string {
 	if o == nil || common.IsNil(o.TransactionId) {
 		var ret string
 		return ret
@@ -1051,7 +1051,7 @@ func (o *transferwebhookData) GetTransactionId() string {
 // GetTransactionIdOk returns a tuple with the TransactionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // Deprecated
-func (o *transferwebhookData) GetTransactionIdOk() (*string, bool) {
+func (o *TransferNotificationData) GetTransactionIdOk() (*string, bool) {
 	if o == nil || common.IsNil(o.TransactionId) {
 		return nil, false
 	}
@@ -1059,7 +1059,7 @@ func (o *transferwebhookData) GetTransactionIdOk() (*string, bool) {
 }
 
 // HasTransactionId returns a boolean if a field has been set.
-func (o *transferwebhookData) HasTransactionId() bool {
+func (o *TransferNotificationData) HasTransactionId() bool {
 	if o != nil && !common.IsNil(o.TransactionId) {
 		return true
 	}
@@ -1069,12 +1069,12 @@ func (o *transferwebhookData) HasTransactionId() bool {
 
 // SetTransactionId gets a reference to the given string and assigns it to the TransactionId field.
 // Deprecated
-func (o *transferwebhookData) SetTransactionId(v string) {
+func (o *TransferNotificationData) SetTransactionId(v string) {
 	o.TransactionId = &v
 }
 
 // GetTransactionRulesResult returns the TransactionRulesResult field value if set, zero value otherwise.
-func (o *transferwebhookData) GetTransactionRulesResult() TransactionRulesResult {
+func (o *TransferNotificationData) GetTransactionRulesResult() TransactionRulesResult {
 	if o == nil || common.IsNil(o.TransactionRulesResult) {
 		var ret TransactionRulesResult
 		return ret
@@ -1084,7 +1084,7 @@ func (o *transferwebhookData) GetTransactionRulesResult() TransactionRulesResult
 
 // GetTransactionRulesResultOk returns a tuple with the TransactionRulesResult field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *transferwebhookData) GetTransactionRulesResultOk() (*TransactionRulesResult, bool) {
+func (o *TransferNotificationData) GetTransactionRulesResultOk() (*TransactionRulesResult, bool) {
 	if o == nil || common.IsNil(o.TransactionRulesResult) {
 		return nil, false
 	}
@@ -1092,7 +1092,7 @@ func (o *transferwebhookData) GetTransactionRulesResultOk() (*TransactionRulesRe
 }
 
 // HasTransactionRulesResult returns a boolean if a field has been set.
-func (o *transferwebhookData) HasTransactionRulesResult() bool {
+func (o *TransferNotificationData) HasTransactionRulesResult() bool {
 	if o != nil && !common.IsNil(o.TransactionRulesResult) {
 		return true
 	}
@@ -1101,12 +1101,12 @@ func (o *transferwebhookData) HasTransactionRulesResult() bool {
 }
 
 // SetTransactionRulesResult gets a reference to the given TransactionRulesResult and assigns it to the TransactionRulesResult field.
-func (o *transferwebhookData) SetTransactionRulesResult(v TransactionRulesResult) {
+func (o *TransferNotificationData) SetTransactionRulesResult(v TransactionRulesResult) {
 	o.TransactionRulesResult = &v
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
-func (o *transferwebhookData) GetType() string {
+func (o *TransferNotificationData) GetType() string {
 	if o == nil || common.IsNil(o.Type) {
 		var ret string
 		return ret
@@ -1116,7 +1116,7 @@ func (o *transferwebhookData) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *transferwebhookData) GetTypeOk() (*string, bool) {
+func (o *TransferNotificationData) GetTypeOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Type) {
 		return nil, false
 	}
@@ -1124,7 +1124,7 @@ func (o *transferwebhookData) GetTypeOk() (*string, bool) {
 }
 
 // HasType returns a boolean if a field has been set.
-func (o *transferwebhookData) HasType() bool {
+func (o *TransferNotificationData) HasType() bool {
 	if o != nil && !common.IsNil(o.Type) {
 		return true
 	}
@@ -1133,15 +1133,15 @@ func (o *transferwebhookData) HasType() bool {
 }
 
 // SetType gets a reference to the given string and assigns it to the Type field.
-func (o *transferwebhookData) SetType(v string) {
+func (o *TransferNotificationData) SetType(v string) {
 	o.Type = &v
 }
 
 // GetValidationFacts returns the ValidationFacts field value if set, zero value otherwise.
 // Deprecated
-func (o *transferwebhookData) GetValidationFacts() []transferwebhookValidationFact {
+func (o *TransferNotificationData) GetValidationFacts() []TransferNotificationValidationFact {
 	if o == nil || common.IsNil(o.ValidationFacts) {
-		var ret []transferwebhookValidationFact
+		var ret []TransferNotificationValidationFact
 		return ret
 	}
 	return o.ValidationFacts
@@ -1150,7 +1150,7 @@ func (o *transferwebhookData) GetValidationFacts() []transferwebhookValidationFa
 // GetValidationFactsOk returns a tuple with the ValidationFacts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // Deprecated
-func (o *transferwebhookData) GetValidationFactsOk() ([]transferwebhookValidationFact, bool) {
+func (o *TransferNotificationData) GetValidationFactsOk() ([]TransferNotificationValidationFact, bool) {
 	if o == nil || common.IsNil(o.ValidationFacts) {
 		return nil, false
 	}
@@ -1158,7 +1158,7 @@ func (o *transferwebhookData) GetValidationFactsOk() ([]transferwebhookValidatio
 }
 
 // HasValidationFacts returns a boolean if a field has been set.
-func (o *transferwebhookData) HasValidationFacts() bool {
+func (o *TransferNotificationData) HasValidationFacts() bool {
 	if o != nil && !common.IsNil(o.ValidationFacts) {
 		return true
 	}
@@ -1166,13 +1166,13 @@ func (o *transferwebhookData) HasValidationFacts() bool {
 	return false
 }
 
-// SetValidationFacts gets a reference to the given []transferwebhookValidationFact and assigns it to the ValidationFacts field.
+// SetValidationFacts gets a reference to the given []TransferNotificationValidationFact and assigns it to the ValidationFacts field.
 // Deprecated
-func (o *transferwebhookData) SetValidationFacts(v []transferwebhookValidationFact) {
+func (o *TransferNotificationData) SetValidationFacts(v []TransferNotificationValidationFact) {
 	o.ValidationFacts = v
 }
 
-func (o transferwebhookData) MarshalJSON() ([]byte, error) {
+func (o TransferNotificationData) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -1180,7 +1180,7 @@ func (o transferwebhookData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o transferwebhookData) ToMap() (map[string]interface{}, error) {
+func (o TransferNotificationData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.AccountHolder) {
 		toSerialize["accountHolder"] = o.AccountHolder
@@ -1278,43 +1278,43 @@ func (o transferwebhookData) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullabletransferwebhookData struct {
-	value *transferwebhookData
+type NullableTransferNotificationData struct {
+	value *TransferNotificationData
 	isSet bool
 }
 
-func (v NullabletransferwebhookData) Get() *transferwebhookData {
+func (v NullableTransferNotificationData) Get() *TransferNotificationData {
 	return v.value
 }
 
-func (v *NullabletransferwebhookData) Set(val *transferwebhookData) {
+func (v *NullableTransferNotificationData) Set(val *TransferNotificationData) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullabletransferwebhookData) IsSet() bool {
+func (v NullableTransferNotificationData) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullabletransferwebhookData) Unset() {
+func (v *NullableTransferNotificationData) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullabletransferwebhookData(val *transferwebhookData) *NullabletransferwebhookData {
-	return &NullabletransferwebhookData{value: val, isSet: true}
+func NewNullableTransferNotificationData(val *TransferNotificationData) *NullableTransferNotificationData {
+	return &NullableTransferNotificationData{value: val, isSet: true}
 }
 
-func (v NullabletransferwebhookData) MarshalJSON() ([]byte, error) {
+func (v NullableTransferNotificationData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullabletransferwebhookData) UnmarshalJSON(src []byte) error {
+func (v *NullableTransferNotificationData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
 
-func (o *transferwebhookData) isValidCategory() bool {
+func (o *TransferNotificationData) isValidCategory() bool {
 	var allowedEnumValues = []string{"bank", "internal", "issuedCard", "platformPayment"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetCategory() == allowed {
@@ -1323,7 +1323,7 @@ func (o *transferwebhookData) isValidCategory() bool {
 	}
 	return false
 }
-func (o *transferwebhookData) isValidDirection() bool {
+func (o *TransferNotificationData) isValidDirection() bool {
 	var allowedEnumValues = []string{"incoming", "outgoing"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetDirection() == allowed {
@@ -1332,7 +1332,7 @@ func (o *transferwebhookData) isValidDirection() bool {
 	}
 	return false
 }
-func (o *transferwebhookData) isValidPanEntryMode() bool {
+func (o *TransferNotificationData) isValidPanEntryMode() bool {
 	var allowedEnumValues = []string{"chip", "cof", "contactless", "ecommerce", "magstripe", "manual", "token"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetPanEntryMode() == allowed {
@@ -1341,7 +1341,7 @@ func (o *transferwebhookData) isValidPanEntryMode() bool {
 	}
 	return false
 }
-func (o *transferwebhookData) isValidPriority() bool {
+func (o *TransferNotificationData) isValidPriority() bool {
 	var allowedEnumValues = []string{"crossBorder", "directDebit", "fast", "instant", "internal", "regular", "wire"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetPriority() == allowed {
@@ -1350,7 +1350,7 @@ func (o *transferwebhookData) isValidPriority() bool {
 	}
 	return false
 }
-func (o *transferwebhookData) isValidProcessingType() bool {
+func (o *TransferNotificationData) isValidProcessingType() bool {
 	var allowedEnumValues = []string{"atmWithdraw", "balanceInquiry", "ecommerce", "moto", "pos", "purchaseWithCashback", "recurring", "token"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetProcessingType() == allowed {
@@ -1359,7 +1359,7 @@ func (o *transferwebhookData) isValidProcessingType() bool {
 	}
 	return false
 }
-func (o *transferwebhookData) isValidReason() bool {
+func (o *TransferNotificationData) isValidReason() bool {
 	var allowedEnumValues = []string{"amountLimitExceeded", "approved", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "error", "notEnoughBalance", "refusedByCounterpartyBank", "routeNotFound", "unknown"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetReason() == allowed {
@@ -1368,7 +1368,7 @@ func (o *transferwebhookData) isValidReason() bool {
 	}
 	return false
 }
-func (o *transferwebhookData) isValidStatus() bool {
+func (o *TransferNotificationData) isValidStatus() bool {
 	var allowedEnumValues = []string{"approvalPending", "atmWithdrawal", "atmWithdrawalReversalPending", "atmWithdrawalReversed", "authAdjustmentAuthorised", "authAdjustmentError", "authAdjustmentRefused", "authorised", "bankTransfer", "bankTransferPending", "booked", "bookingPending", "cancelled", "capturePending", "captureReversalPending", "captureReversed", "captured", "chargeback", "chargebackPending", "chargebackReversalPending", "chargebackReversed", "credited", "depositCorrection", "depositCorrectionPending", "dispute", "disputeClosed", "disputeExpired", "disputeNeedsReview", "error", "expired", "failed", "fee", "feePending", "internalTransfer", "internalTransferPending", "invoiceDeduction", "invoiceDeductionPending", "manualCorrectionPending", "manuallyCorrected", "matchedStatement", "matchedStatementPending", "merchantPayin", "merchantPayinPending", "merchantPayinReversed", "merchantPayinReversedPending", "miscCost", "miscCostPending", "paymentCost", "paymentCostPending", "received", "refundPending", "refundReversalPending", "refundReversed", "refunded", "refused", "reserveAdjustment", "reserveAdjustmentPending", "returned", "secondChargeback", "secondChargebackPending", "undefined"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetStatus() == allowed {
@@ -1377,7 +1377,7 @@ func (o *transferwebhookData) isValidStatus() bool {
 	}
 	return false
 }
-func (o *transferwebhookData) isValidType() bool {
+func (o *TransferNotificationData) isValidType() bool {
 	var allowedEnumValues = []string{"atmWithdrawal", "atmWithdrawalReversal", "balanceAdjustment", "balanceRollover", "bankTransfer", "capture", "captureReversal", "chargeback", "chargebackReversal", "depositCorrection", "fee", "grant", "installment", "installmentReversal", "internalTransfer", "invoiceDeduction", "leftover", "manualCorrection", "miscCost", "payment", "paymentCost", "refund", "refundReversal", "repayment", "reserveAdjustment", "secondChargeback"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {

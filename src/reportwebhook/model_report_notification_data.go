@@ -15,11 +15,11 @@ import (
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// checks if the reportwebhookData type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &reportwebhookData{}
+// checks if the ReportNotificationData type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &ReportNotificationData{}
 
-// reportwebhookData struct for reportwebhookData
-type reportwebhookData struct {
+// ReportNotificationData struct for ReportNotificationData
+type ReportNotificationData struct {
 	AccountHolder  *ResourceReference `json:"accountHolder,omitempty"`
 	BalanceAccount *ResourceReference `json:"balanceAccount,omitempty"`
 	// The unique identifier of the balance platform.
@@ -34,28 +34,28 @@ type reportwebhookData struct {
 	ReportType string `json:"reportType"`
 }
 
-// NewreportwebhookData instantiates a new reportwebhookData object
+// NewReportNotificationData instantiates a new ReportNotificationData object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewreportwebhookData(downloadUrl string, fileName string, reportType string) *reportwebhookData {
-	this := reportwebhookData{}
+func NewReportNotificationData(downloadUrl string, fileName string, reportType string) *ReportNotificationData {
+	this := ReportNotificationData{}
 	this.DownloadUrl = downloadUrl
 	this.FileName = fileName
 	this.ReportType = reportType
 	return &this
 }
 
-// NewreportwebhookDataWithDefaults instantiates a new reportwebhookData object
+// NewReportNotificationDataWithDefaults instantiates a new ReportNotificationData object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewreportwebhookDataWithDefaults() *reportwebhookData {
-	this := reportwebhookData{}
+func NewReportNotificationDataWithDefaults() *ReportNotificationData {
+	this := ReportNotificationData{}
 	return &this
 }
 
 // GetAccountHolder returns the AccountHolder field value if set, zero value otherwise.
-func (o *reportwebhookData) GetAccountHolder() ResourceReference {
+func (o *ReportNotificationData) GetAccountHolder() ResourceReference {
 	if o == nil || common.IsNil(o.AccountHolder) {
 		var ret ResourceReference
 		return ret
@@ -65,7 +65,7 @@ func (o *reportwebhookData) GetAccountHolder() ResourceReference {
 
 // GetAccountHolderOk returns a tuple with the AccountHolder field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *reportwebhookData) GetAccountHolderOk() (*ResourceReference, bool) {
+func (o *ReportNotificationData) GetAccountHolderOk() (*ResourceReference, bool) {
 	if o == nil || common.IsNil(o.AccountHolder) {
 		return nil, false
 	}
@@ -73,7 +73,7 @@ func (o *reportwebhookData) GetAccountHolderOk() (*ResourceReference, bool) {
 }
 
 // HasAccountHolder returns a boolean if a field has been set.
-func (o *reportwebhookData) HasAccountHolder() bool {
+func (o *ReportNotificationData) HasAccountHolder() bool {
 	if o != nil && !common.IsNil(o.AccountHolder) {
 		return true
 	}
@@ -82,12 +82,12 @@ func (o *reportwebhookData) HasAccountHolder() bool {
 }
 
 // SetAccountHolder gets a reference to the given ResourceReference and assigns it to the AccountHolder field.
-func (o *reportwebhookData) SetAccountHolder(v ResourceReference) {
+func (o *ReportNotificationData) SetAccountHolder(v ResourceReference) {
 	o.AccountHolder = &v
 }
 
 // GetBalanceAccount returns the BalanceAccount field value if set, zero value otherwise.
-func (o *reportwebhookData) GetBalanceAccount() ResourceReference {
+func (o *ReportNotificationData) GetBalanceAccount() ResourceReference {
 	if o == nil || common.IsNil(o.BalanceAccount) {
 		var ret ResourceReference
 		return ret
@@ -97,7 +97,7 @@ func (o *reportwebhookData) GetBalanceAccount() ResourceReference {
 
 // GetBalanceAccountOk returns a tuple with the BalanceAccount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *reportwebhookData) GetBalanceAccountOk() (*ResourceReference, bool) {
+func (o *ReportNotificationData) GetBalanceAccountOk() (*ResourceReference, bool) {
 	if o == nil || common.IsNil(o.BalanceAccount) {
 		return nil, false
 	}
@@ -105,7 +105,7 @@ func (o *reportwebhookData) GetBalanceAccountOk() (*ResourceReference, bool) {
 }
 
 // HasBalanceAccount returns a boolean if a field has been set.
-func (o *reportwebhookData) HasBalanceAccount() bool {
+func (o *ReportNotificationData) HasBalanceAccount() bool {
 	if o != nil && !common.IsNil(o.BalanceAccount) {
 		return true
 	}
@@ -114,12 +114,12 @@ func (o *reportwebhookData) HasBalanceAccount() bool {
 }
 
 // SetBalanceAccount gets a reference to the given ResourceReference and assigns it to the BalanceAccount field.
-func (o *reportwebhookData) SetBalanceAccount(v ResourceReference) {
+func (o *ReportNotificationData) SetBalanceAccount(v ResourceReference) {
 	o.BalanceAccount = &v
 }
 
 // GetBalancePlatform returns the BalancePlatform field value if set, zero value otherwise.
-func (o *reportwebhookData) GetBalancePlatform() string {
+func (o *ReportNotificationData) GetBalancePlatform() string {
 	if o == nil || common.IsNil(o.BalancePlatform) {
 		var ret string
 		return ret
@@ -129,7 +129,7 @@ func (o *reportwebhookData) GetBalancePlatform() string {
 
 // GetBalancePlatformOk returns a tuple with the BalancePlatform field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *reportwebhookData) GetBalancePlatformOk() (*string, bool) {
+func (o *ReportNotificationData) GetBalancePlatformOk() (*string, bool) {
 	if o == nil || common.IsNil(o.BalancePlatform) {
 		return nil, false
 	}
@@ -137,7 +137,7 @@ func (o *reportwebhookData) GetBalancePlatformOk() (*string, bool) {
 }
 
 // HasBalancePlatform returns a boolean if a field has been set.
-func (o *reportwebhookData) HasBalancePlatform() bool {
+func (o *ReportNotificationData) HasBalancePlatform() bool {
 	if o != nil && !common.IsNil(o.BalancePlatform) {
 		return true
 	}
@@ -146,12 +146,12 @@ func (o *reportwebhookData) HasBalancePlatform() bool {
 }
 
 // SetBalancePlatform gets a reference to the given string and assigns it to the BalancePlatform field.
-func (o *reportwebhookData) SetBalancePlatform(v string) {
+func (o *ReportNotificationData) SetBalancePlatform(v string) {
 	o.BalancePlatform = &v
 }
 
 // GetCreationDate returns the CreationDate field value if set, zero value otherwise.
-func (o *reportwebhookData) GetCreationDate() time.Time {
+func (o *ReportNotificationData) GetCreationDate() time.Time {
 	if o == nil || common.IsNil(o.CreationDate) {
 		var ret time.Time
 		return ret
@@ -161,7 +161,7 @@ func (o *reportwebhookData) GetCreationDate() time.Time {
 
 // GetCreationDateOk returns a tuple with the CreationDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *reportwebhookData) GetCreationDateOk() (*time.Time, bool) {
+func (o *ReportNotificationData) GetCreationDateOk() (*time.Time, bool) {
 	if o == nil || common.IsNil(o.CreationDate) {
 		return nil, false
 	}
@@ -169,7 +169,7 @@ func (o *reportwebhookData) GetCreationDateOk() (*time.Time, bool) {
 }
 
 // HasCreationDate returns a boolean if a field has been set.
-func (o *reportwebhookData) HasCreationDate() bool {
+func (o *ReportNotificationData) HasCreationDate() bool {
 	if o != nil && !common.IsNil(o.CreationDate) {
 		return true
 	}
@@ -178,12 +178,12 @@ func (o *reportwebhookData) HasCreationDate() bool {
 }
 
 // SetCreationDate gets a reference to the given time.Time and assigns it to the CreationDate field.
-func (o *reportwebhookData) SetCreationDate(v time.Time) {
+func (o *ReportNotificationData) SetCreationDate(v time.Time) {
 	o.CreationDate = &v
 }
 
 // GetDownloadUrl returns the DownloadUrl field value
-func (o *reportwebhookData) GetDownloadUrl() string {
+func (o *ReportNotificationData) GetDownloadUrl() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -194,7 +194,7 @@ func (o *reportwebhookData) GetDownloadUrl() string {
 
 // GetDownloadUrlOk returns a tuple with the DownloadUrl field value
 // and a boolean to check if the value has been set.
-func (o *reportwebhookData) GetDownloadUrlOk() (*string, bool) {
+func (o *ReportNotificationData) GetDownloadUrlOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -202,12 +202,12 @@ func (o *reportwebhookData) GetDownloadUrlOk() (*string, bool) {
 }
 
 // SetDownloadUrl sets field value
-func (o *reportwebhookData) SetDownloadUrl(v string) {
+func (o *ReportNotificationData) SetDownloadUrl(v string) {
 	o.DownloadUrl = v
 }
 
 // GetFileName returns the FileName field value
-func (o *reportwebhookData) GetFileName() string {
+func (o *ReportNotificationData) GetFileName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -218,7 +218,7 @@ func (o *reportwebhookData) GetFileName() string {
 
 // GetFileNameOk returns a tuple with the FileName field value
 // and a boolean to check if the value has been set.
-func (o *reportwebhookData) GetFileNameOk() (*string, bool) {
+func (o *ReportNotificationData) GetFileNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -226,12 +226,12 @@ func (o *reportwebhookData) GetFileNameOk() (*string, bool) {
 }
 
 // SetFileName sets field value
-func (o *reportwebhookData) SetFileName(v string) {
+func (o *ReportNotificationData) SetFileName(v string) {
 	o.FileName = v
 }
 
 // GetReportType returns the ReportType field value
-func (o *reportwebhookData) GetReportType() string {
+func (o *ReportNotificationData) GetReportType() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -242,7 +242,7 @@ func (o *reportwebhookData) GetReportType() string {
 
 // GetReportTypeOk returns a tuple with the ReportType field value
 // and a boolean to check if the value has been set.
-func (o *reportwebhookData) GetReportTypeOk() (*string, bool) {
+func (o *ReportNotificationData) GetReportTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -250,11 +250,11 @@ func (o *reportwebhookData) GetReportTypeOk() (*string, bool) {
 }
 
 // SetReportType sets field value
-func (o *reportwebhookData) SetReportType(v string) {
+func (o *ReportNotificationData) SetReportType(v string) {
 	o.ReportType = v
 }
 
-func (o reportwebhookData) MarshalJSON() ([]byte, error) {
+func (o ReportNotificationData) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -262,7 +262,7 @@ func (o reportwebhookData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o reportwebhookData) ToMap() (map[string]interface{}, error) {
+func (o ReportNotificationData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.AccountHolder) {
 		toSerialize["accountHolder"] = o.AccountHolder
@@ -282,38 +282,38 @@ func (o reportwebhookData) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullablereportwebhookData struct {
-	value *reportwebhookData
+type NullableReportNotificationData struct {
+	value *ReportNotificationData
 	isSet bool
 }
 
-func (v NullablereportwebhookData) Get() *reportwebhookData {
+func (v NullableReportNotificationData) Get() *ReportNotificationData {
 	return v.value
 }
 
-func (v *NullablereportwebhookData) Set(val *reportwebhookData) {
+func (v *NullableReportNotificationData) Set(val *ReportNotificationData) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullablereportwebhookData) IsSet() bool {
+func (v NullableReportNotificationData) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullablereportwebhookData) Unset() {
+func (v *NullableReportNotificationData) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullablereportwebhookData(val *reportwebhookData) *NullablereportwebhookData {
-	return &NullablereportwebhookData{value: val, isSet: true}
+func NewNullableReportNotificationData(val *ReportNotificationData) *NullableReportNotificationData {
+	return &NullableReportNotificationData{value: val, isSet: true}
 }
 
-func (v NullablereportwebhookData) MarshalJSON() ([]byte, error) {
+func (v NullableReportNotificationData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullablereportwebhookData) UnmarshalJSON(src []byte) error {
+func (v *NullableReportNotificationData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

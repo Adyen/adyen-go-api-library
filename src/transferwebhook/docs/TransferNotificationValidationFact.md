@@ -1,4 +1,4 @@
-# transferwebhookValidationFact
+# TransferNotificationValidationFact
 
 ## Properties
 
@@ -9,70 +9,70 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewtransferwebhookValidationFact
+### NewTransferNotificationValidationFact
 
-`func NewtransferwebhookValidationFact() *transferwebhookValidationFact`
+`func NewTransferNotificationValidationFact() *TransferNotificationValidationFact`
 
-NewtransferwebhookValidationFact instantiates a new transferwebhookValidationFact object
+NewTransferNotificationValidationFact instantiates a new TransferNotificationValidationFact object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewtransferwebhookValidationFactWithDefaults
+### NewTransferNotificationValidationFactWithDefaults
 
-`func NewtransferwebhookValidationFactWithDefaults() *transferwebhookValidationFact`
+`func NewTransferNotificationValidationFactWithDefaults() *TransferNotificationValidationFact`
 
-NewtransferwebhookValidationFactWithDefaults instantiates a new transferwebhookValidationFact object
+NewTransferNotificationValidationFactWithDefaults instantiates a new TransferNotificationValidationFact object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetResult
 
-`func (o *transferwebhookValidationFact) GetResult() string`
+`func (o *TransferNotificationValidationFact) GetResult() string`
 
 GetResult returns the Result field if non-nil, zero value otherwise.
 
 ### GetResultOk
 
-`func (o *transferwebhookValidationFact) GetResultOk() (*string, bool)`
+`func (o *TransferNotificationValidationFact) GetResultOk() (*string, bool)`
 
 GetResultOk returns a tuple with the Result field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResult
 
-`func (o *transferwebhookValidationFact) SetResult(v string)`
+`func (o *TransferNotificationValidationFact) SetResult(v string)`
 
 SetResult sets Result field to given value.
 
 ### HasResult
 
-`func (o *transferwebhookValidationFact) HasResult() bool`
+`func (o *TransferNotificationValidationFact) HasResult() bool`
 
 HasResult returns a boolean if a field has been set.
 
 ### GetType
 
-`func (o *transferwebhookValidationFact) GetType() string`
+`func (o *TransferNotificationValidationFact) GetType() string`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *transferwebhookValidationFact) GetTypeOk() (*string, bool)`
+`func (o *TransferNotificationValidationFact) GetTypeOk() (*string, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *transferwebhookValidationFact) SetType(v string)`
+`func (o *TransferNotificationValidationFact) SetType(v string)`
 
 SetType sets Type field to given value.
 
 ### HasType
 
-`func (o *transferwebhookValidationFact) HasType() bool`
+`func (o *TransferNotificationValidationFact) HasType() bool`
 
 HasType returns a boolean if a field has been set.
 

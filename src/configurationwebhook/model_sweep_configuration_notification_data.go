@@ -14,11 +14,11 @@ import (
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// checks if the SweepconfigurationwebhookData type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &SweepconfigurationwebhookData{}
+// checks if the SweepConfigurationNotificationData type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &SweepConfigurationNotificationData{}
 
-// SweepconfigurationwebhookData struct for SweepconfigurationwebhookData
-type SweepconfigurationwebhookData struct {
+// SweepConfigurationNotificationData struct for SweepConfigurationNotificationData
+type SweepConfigurationNotificationData struct {
 	// The unique identifier of the balance account for which the sweep was configured.
 	AccountId *string `json:"accountId,omitempty"`
 	// The unique identifier of the balance platform.
@@ -26,25 +26,25 @@ type SweepconfigurationwebhookData struct {
 	Sweep           *SweepConfigurationV2 `json:"sweep,omitempty"`
 }
 
-// NewSweepconfigurationwebhookData instantiates a new SweepconfigurationwebhookData object
+// NewSweepConfigurationNotificationData instantiates a new SweepConfigurationNotificationData object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSweepconfigurationwebhookData() *SweepconfigurationwebhookData {
-	this := SweepconfigurationwebhookData{}
+func NewSweepConfigurationNotificationData() *SweepConfigurationNotificationData {
+	this := SweepConfigurationNotificationData{}
 	return &this
 }
 
-// NewSweepconfigurationwebhookDataWithDefaults instantiates a new SweepconfigurationwebhookData object
+// NewSweepConfigurationNotificationDataWithDefaults instantiates a new SweepConfigurationNotificationData object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewSweepconfigurationwebhookDataWithDefaults() *SweepconfigurationwebhookData {
-	this := SweepconfigurationwebhookData{}
+func NewSweepConfigurationNotificationDataWithDefaults() *SweepConfigurationNotificationData {
+	this := SweepConfigurationNotificationData{}
 	return &this
 }
 
 // GetAccountId returns the AccountId field value if set, zero value otherwise.
-func (o *SweepconfigurationwebhookData) GetAccountId() string {
+func (o *SweepConfigurationNotificationData) GetAccountId() string {
 	if o == nil || common.IsNil(o.AccountId) {
 		var ret string
 		return ret
@@ -54,7 +54,7 @@ func (o *SweepconfigurationwebhookData) GetAccountId() string {
 
 // GetAccountIdOk returns a tuple with the AccountId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SweepconfigurationwebhookData) GetAccountIdOk() (*string, bool) {
+func (o *SweepConfigurationNotificationData) GetAccountIdOk() (*string, bool) {
 	if o == nil || common.IsNil(o.AccountId) {
 		return nil, false
 	}
@@ -62,7 +62,7 @@ func (o *SweepconfigurationwebhookData) GetAccountIdOk() (*string, bool) {
 }
 
 // HasAccountId returns a boolean if a field has been set.
-func (o *SweepconfigurationwebhookData) HasAccountId() bool {
+func (o *SweepConfigurationNotificationData) HasAccountId() bool {
 	if o != nil && !common.IsNil(o.AccountId) {
 		return true
 	}
@@ -71,12 +71,12 @@ func (o *SweepconfigurationwebhookData) HasAccountId() bool {
 }
 
 // SetAccountId gets a reference to the given string and assigns it to the AccountId field.
-func (o *SweepconfigurationwebhookData) SetAccountId(v string) {
+func (o *SweepConfigurationNotificationData) SetAccountId(v string) {
 	o.AccountId = &v
 }
 
 // GetBalancePlatform returns the BalancePlatform field value if set, zero value otherwise.
-func (o *SweepconfigurationwebhookData) GetBalancePlatform() string {
+func (o *SweepConfigurationNotificationData) GetBalancePlatform() string {
 	if o == nil || common.IsNil(o.BalancePlatform) {
 		var ret string
 		return ret
@@ -86,7 +86,7 @@ func (o *SweepconfigurationwebhookData) GetBalancePlatform() string {
 
 // GetBalancePlatformOk returns a tuple with the BalancePlatform field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SweepconfigurationwebhookData) GetBalancePlatformOk() (*string, bool) {
+func (o *SweepConfigurationNotificationData) GetBalancePlatformOk() (*string, bool) {
 	if o == nil || common.IsNil(o.BalancePlatform) {
 		return nil, false
 	}
@@ -94,7 +94,7 @@ func (o *SweepconfigurationwebhookData) GetBalancePlatformOk() (*string, bool) {
 }
 
 // HasBalancePlatform returns a boolean if a field has been set.
-func (o *SweepconfigurationwebhookData) HasBalancePlatform() bool {
+func (o *SweepConfigurationNotificationData) HasBalancePlatform() bool {
 	if o != nil && !common.IsNil(o.BalancePlatform) {
 		return true
 	}
@@ -103,12 +103,12 @@ func (o *SweepconfigurationwebhookData) HasBalancePlatform() bool {
 }
 
 // SetBalancePlatform gets a reference to the given string and assigns it to the BalancePlatform field.
-func (o *SweepconfigurationwebhookData) SetBalancePlatform(v string) {
+func (o *SweepConfigurationNotificationData) SetBalancePlatform(v string) {
 	o.BalancePlatform = &v
 }
 
 // GetSweep returns the Sweep field value if set, zero value otherwise.
-func (o *SweepconfigurationwebhookData) GetSweep() SweepConfigurationV2 {
+func (o *SweepConfigurationNotificationData) GetSweep() SweepConfigurationV2 {
 	if o == nil || common.IsNil(o.Sweep) {
 		var ret SweepConfigurationV2
 		return ret
@@ -118,7 +118,7 @@ func (o *SweepconfigurationwebhookData) GetSweep() SweepConfigurationV2 {
 
 // GetSweepOk returns a tuple with the Sweep field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SweepconfigurationwebhookData) GetSweepOk() (*SweepConfigurationV2, bool) {
+func (o *SweepConfigurationNotificationData) GetSweepOk() (*SweepConfigurationV2, bool) {
 	if o == nil || common.IsNil(o.Sweep) {
 		return nil, false
 	}
@@ -126,7 +126,7 @@ func (o *SweepconfigurationwebhookData) GetSweepOk() (*SweepConfigurationV2, boo
 }
 
 // HasSweep returns a boolean if a field has been set.
-func (o *SweepconfigurationwebhookData) HasSweep() bool {
+func (o *SweepConfigurationNotificationData) HasSweep() bool {
 	if o != nil && !common.IsNil(o.Sweep) {
 		return true
 	}
@@ -135,11 +135,11 @@ func (o *SweepconfigurationwebhookData) HasSweep() bool {
 }
 
 // SetSweep gets a reference to the given SweepConfigurationV2 and assigns it to the Sweep field.
-func (o *SweepconfigurationwebhookData) SetSweep(v SweepConfigurationV2) {
+func (o *SweepConfigurationNotificationData) SetSweep(v SweepConfigurationV2) {
 	o.Sweep = &v
 }
 
-func (o SweepconfigurationwebhookData) MarshalJSON() ([]byte, error) {
+func (o SweepConfigurationNotificationData) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -147,7 +147,7 @@ func (o SweepconfigurationwebhookData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SweepconfigurationwebhookData) ToMap() (map[string]interface{}, error) {
+func (o SweepConfigurationNotificationData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.AccountId) {
 		toSerialize["accountId"] = o.AccountId
@@ -161,38 +161,38 @@ func (o SweepconfigurationwebhookData) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableSweepconfigurationwebhookData struct {
-	value *SweepconfigurationwebhookData
+type NullableSweepConfigurationNotificationData struct {
+	value *SweepConfigurationNotificationData
 	isSet bool
 }
 
-func (v NullableSweepconfigurationwebhookData) Get() *SweepconfigurationwebhookData {
+func (v NullableSweepConfigurationNotificationData) Get() *SweepConfigurationNotificationData {
 	return v.value
 }
 
-func (v *NullableSweepconfigurationwebhookData) Set(val *SweepconfigurationwebhookData) {
+func (v *NullableSweepConfigurationNotificationData) Set(val *SweepConfigurationNotificationData) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableSweepconfigurationwebhookData) IsSet() bool {
+func (v NullableSweepConfigurationNotificationData) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableSweepconfigurationwebhookData) Unset() {
+func (v *NullableSweepConfigurationNotificationData) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableSweepconfigurationwebhookData(val *SweepconfigurationwebhookData) *NullableSweepconfigurationwebhookData {
-	return &NullableSweepconfigurationwebhookData{value: val, isSet: true}
+func NewNullableSweepConfigurationNotificationData(val *SweepConfigurationNotificationData) *NullableSweepConfigurationNotificationData {
+	return &NullableSweepConfigurationNotificationData{value: val, isSet: true}
 }
 
-func (v NullableSweepconfigurationwebhookData) MarshalJSON() ([]byte, error) {
+func (v NullableSweepConfigurationNotificationData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableSweepconfigurationwebhookData) UnmarshalJSON(src []byte) error {
+func (v *NullableSweepConfigurationNotificationData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

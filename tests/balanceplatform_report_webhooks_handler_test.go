@@ -4,7 +4,6 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	// "github.com///testify/require"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/reportwebhook"
 )
@@ -30,7 +29,7 @@ func Test_BalancePlatform_Report_Webhooks_HandleRequest(t *testing.T) {
 			"type": "balancePlatform.report.created"
 		  }
 		`
-		balancePlatformNotification, _ := reportwebhook.HandlereportwebhookRequest(notificationJson)
+		balancePlatformNotification, _ := reportwebhook.HandleReportwebhookRequest(notificationJson)
 		balancePlatformValue := "YOUR_BALANCE_PLATFORM"
 		assert.Equal(t, &balancePlatformValue, balancePlatformNotification.Data.BalancePlatform)
 		assert.Equal(t, "balanceplatform_payments_accounting_report", balancePlatformNotification.Data.ReportType)
