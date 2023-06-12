@@ -44,8 +44,8 @@ func HandlePaymentNotificationRequest(req string) (*PaymentNotificationRequest, 
 	return &res, nil
 }
 
-// HandleSweepconfigurationwebhookRequest creates a Notification object from the given JSON string
-func HandleSweepconfigurationwebhookRequest(req string) (*SweepConfigurationNotificationRequest, error) {
+// HandleSweepconfigurationNotificationRequest creates a Notification object from the given JSON string
+func HandleSweepconfigurationNotificationRequest(req string) (*SweepConfigurationNotificationRequest, error) {
 	res := SweepConfigurationNotificationRequest{}
 	err := json.Unmarshal([]byte(req), &res)
 	if err != nil {
