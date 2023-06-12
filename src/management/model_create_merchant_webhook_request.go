@@ -578,7 +578,7 @@ func (o *CreateMerchantWebhookRequest) isValidCommunicationFormat() bool {
 	return false
 }
 func (o *CreateMerchantWebhookRequest) isValidNetworkType() bool {
-	var allowedEnumValues = []string{"local", "public"}
+	var allowedEnumValues = []string{"LOCAL", "PUBLIC"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetNetworkType() == allowed {
 			return true

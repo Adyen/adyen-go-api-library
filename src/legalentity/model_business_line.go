@@ -365,7 +365,7 @@ func (o BusinessLine) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Capability) {
 		toSerialize["capability"] = o.Capability
 	}
-	// skip: id is readOnly
+	toSerialize["id"] = o.Id
 	toSerialize["industryCode"] = o.IndustryCode
 	toSerialize["legalEntityId"] = o.LegalEntityId
 	if !common.IsNil(o.Problems) {

@@ -1471,7 +1471,7 @@ func (o PaymentLinkResponse) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.ExpiresAt) {
 		toSerialize["expiresAt"] = o.ExpiresAt
 	}
-	// skip: id is readOnly
+	toSerialize["id"] = o.Id
 	if !common.IsNil(o.InstallmentOptions) {
 		toSerialize["installmentOptions"] = o.InstallmentOptions
 	}
@@ -1550,7 +1550,7 @@ func (o PaymentLinkResponse) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.UpdatedAt) {
 		toSerialize["updatedAt"] = o.UpdatedAt
 	}
-	// skip: url is readOnly
+	toSerialize["url"] = o.Url
 	return toSerialize, nil
 }
 

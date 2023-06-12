@@ -31,10 +31,10 @@ func Test_api(t *testing.T) {
 		assert.Equal(t, "https://checkout-test.adyen.com/checkout/"+CheckoutAPIVersion, svc.RecurringApi.BasePath())
 
 		t.Run("Create a API request that should fail", func(t *testing.T) {
-			req := svc.PaymentsApi.PaymentMethodsConfig(context.Background())
+			req := svc.PaymentsApi.PaymentMethodsInput()
 			req = req.PaymentMethodsRequest(checkout.PaymentMethodsRequest{})
 
-			res, httpRes, err := svc.PaymentsApi.PaymentMethods(req)
+			res, httpRes, err := svc.PaymentsApi.PaymentMethods(context.Background(), req)
 
 			require.NotNil(t, err)
 			assert.Equal(t, true, strings.Contains(err.Error(), "Unauthorized"))
@@ -60,12 +60,12 @@ func Test_api(t *testing.T) {
 		svc = client.Checkout()
 
 		t.Run("Create a API request that uses API key auth and should pass", func(t *testing.T) {
-			req := svc.PaymentsApi.PaymentMethodsConfig(context.Background())
+			req := svc.PaymentsApi.PaymentMethodsInput()
 			req = req.PaymentMethodsRequest(checkout.PaymentMethodsRequest{
 				MerchantAccount: MerchantAccount,
 			})
 
-			res, httpRes, err := svc.PaymentsApi.PaymentMethods(req)
+			res, httpRes, err := svc.PaymentsApi.PaymentMethods(context.Background(), req)
 
 			require.Nil(t, err)
 			require.NotNil(t, res)
@@ -87,9 +87,9 @@ func Test_api(t *testing.T) {
 				},
 				ShopperReference: time.Now().String(),
 			}
-			req := client.Recurring().ListRecurringDetailsConfig(context.Background()).RecurringDetailsRequest(body)
+			req := client.Recurring().ListRecurringDetailsInput().RecurringDetailsRequest(body)
 
-			res, httpRes, err := client.Recurring().ListRecurringDetails(req)
+			res, httpRes, err := client.Recurring().ListRecurringDetails(context.Background(), req)
 
 			require.Nil(t, err)
 			require.NotNil(t, res)

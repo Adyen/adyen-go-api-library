@@ -10,20 +10,30 @@ package legalentity
 
 import (
 	"context"
-	_context "context"
-	_nethttp "net/http"
+	"net/http"
 	"net/url"
 	"strings"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// DocumentsApi DocumentsApi service
+// DocumentsApi service
 type DocumentsApi common.Service
 
-type DocumentsApiDeleteDocumentConfig struct {
-	ctx context.Context
-	id  string
+// All parameters accepted by DocumentsApi.DeleteDocument
+type DocumentsApiDeleteDocumentInput struct {
+	id string
+}
+
+/*
+Prepare a request for DeleteDocument
+@param id The unique identifier of the document to be deleted.
+@return DocumentsApiDeleteDocumentInput
+*/
+func (a *DocumentsApi) DeleteDocumentInput(id string) DocumentsApiDeleteDocumentInput {
+	return DocumentsApiDeleteDocumentInput{
+		id: id,
+	}
 }
 
 /*
@@ -31,36 +41,44 @@ DeleteDocument Delete a document
 
 Deletes a document.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier of the document to be deleted.
- @return DocumentsApiDeleteDocumentConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r DocumentsApiDeleteDocumentInput - Request parameters, see DeleteDocumentInput
+@return map[string]interface{}, *http.Response, error
 */
-func (a *DocumentsApi) DeleteDocumentConfig(ctx context.Context, id string) DocumentsApiDeleteDocumentConfig {
-	return DocumentsApiDeleteDocumentConfig{
-		ctx: ctx,
-		id:  id,
-	}
-}
-
-/*
-Delete a document
-Deletes a document.
- * @param id The unique identifier of the document to be deleted.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return map[string]interface{}
-*/
-
-func (a *DocumentsApi) DeleteDocument(r DocumentsApiDeleteDocumentConfig) (map[string]interface{}, *_nethttp.Response, error) {
+func (a *DocumentsApi) DeleteDocument(ctx context.Context, r DocumentsApiDeleteDocumentInput) (map[string]interface{}, *http.Response, error) {
 	res := &map[string]interface{}{}
 	path := "/documents/{id}"
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodDelete, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodDelete,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type DocumentsApiGetDocumentConfig struct {
-	ctx context.Context
-	id  string
+// All parameters accepted by DocumentsApi.GetDocument
+type DocumentsApiGetDocumentInput struct {
+	id string
+}
+
+/*
+Prepare a request for GetDocument
+@param id The unique identifier of the document.
+@return DocumentsApiGetDocumentInput
+*/
+func (a *DocumentsApi) GetDocumentInput(id string) DocumentsApiGetDocumentInput {
+	return DocumentsApiGetDocumentInput{
+		id: id,
+	}
 }
 
 /*
@@ -68,42 +86,50 @@ GetDocument Get a document
 
 Returns a document.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier of the document.
- @return DocumentsApiGetDocumentConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r DocumentsApiGetDocumentInput - Request parameters, see GetDocumentInput
+@return Document, *http.Response, error
 */
-func (a *DocumentsApi) GetDocumentConfig(ctx context.Context, id string) DocumentsApiGetDocumentConfig {
-	return DocumentsApiGetDocumentConfig{
-		ctx: ctx,
-		id:  id,
-	}
-}
-
-/*
-Get a document
-Returns a document.
- * @param id The unique identifier of the document.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return Document
-*/
-
-func (a *DocumentsApi) GetDocument(r DocumentsApiGetDocumentConfig) (Document, *_nethttp.Response, error) {
+func (a *DocumentsApi) GetDocument(ctx context.Context, r DocumentsApiGetDocumentInput) (Document, *http.Response, error) {
 	res := &Document{}
 	path := "/documents/{id}"
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type DocumentsApiUpdateDocumentConfig struct {
-	ctx      context.Context
+// All parameters accepted by DocumentsApi.UpdateDocument
+type DocumentsApiUpdateDocumentInput struct {
 	id       string
 	document *Document
 }
 
-func (r DocumentsApiUpdateDocumentConfig) Document(document Document) DocumentsApiUpdateDocumentConfig {
+func (r DocumentsApiUpdateDocumentInput) Document(document Document) DocumentsApiUpdateDocumentInput {
 	r.document = &document
 	return r
+}
+
+/*
+Prepare a request for UpdateDocument
+@param id The unique identifier of the document to be updated.
+@return DocumentsApiUpdateDocumentInput
+*/
+func (a *DocumentsApi) UpdateDocumentInput(id string) DocumentsApiUpdateDocumentInput {
+	return DocumentsApiUpdateDocumentInput{
+		id: id,
+	}
 }
 
 /*
@@ -111,42 +137,47 @@ UpdateDocument Update a document
 
 Updates a document.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier of the document to be updated.
- @return DocumentsApiUpdateDocumentConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r DocumentsApiUpdateDocumentInput - Request parameters, see UpdateDocumentInput
+@return Document, *http.Response, error
 */
-func (a *DocumentsApi) UpdateDocumentConfig(ctx context.Context, id string) DocumentsApiUpdateDocumentConfig {
-	return DocumentsApiUpdateDocumentConfig{
-		ctx: ctx,
-		id:  id,
-	}
-}
-
-/*
-Update a document
-Updates a document.
- * @param id The unique identifier of the document to be updated.
- * @param req Document - reference of Document).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return Document
-*/
-
-func (a *DocumentsApi) UpdateDocument(r DocumentsApiUpdateDocumentConfig) (Document, *_nethttp.Response, error) {
+func (a *DocumentsApi) UpdateDocument(ctx context.Context, r DocumentsApiUpdateDocumentInput) (Document, *http.Response, error) {
 	res := &Document{}
 	path := "/documents/{id}"
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPatch, r.document, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.document,
+		res,
+		http.MethodPatch,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type DocumentsApiUploadDocumentForVerificationChecksConfig struct {
-	ctx      context.Context
+// All parameters accepted by DocumentsApi.UploadDocumentForVerificationChecks
+type DocumentsApiUploadDocumentForVerificationChecksInput struct {
 	document *Document
 }
 
-func (r DocumentsApiUploadDocumentForVerificationChecksConfig) Document(document Document) DocumentsApiUploadDocumentForVerificationChecksConfig {
+func (r DocumentsApiUploadDocumentForVerificationChecksInput) Document(document Document) DocumentsApiUploadDocumentForVerificationChecksInput {
 	r.document = &document
 	return r
+}
+
+/*
+Prepare a request for UploadDocumentForVerificationChecks
+
+@return DocumentsApiUploadDocumentForVerificationChecksInput
+*/
+func (a *DocumentsApi) UploadDocumentForVerificationChecksInput() DocumentsApiUploadDocumentForVerificationChecksInput {
+	return DocumentsApiUploadDocumentForVerificationChecksInput{}
 }
 
 /*
@@ -158,26 +189,25 @@ Uploads a document for verification checks.
 
  You should only upload documents when Adyen requests additional information for the legal entity.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return DocumentsApiUploadDocumentForVerificationChecksConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r DocumentsApiUploadDocumentForVerificationChecksInput - Request parameters, see UploadDocumentForVerificationChecksInput
+@return Document, *http.Response, error
 */
-func (a *DocumentsApi) UploadDocumentForVerificationChecksConfig(ctx context.Context) DocumentsApiUploadDocumentForVerificationChecksConfig {
-	return DocumentsApiUploadDocumentForVerificationChecksConfig{
-		ctx: ctx,
-	}
-}
-
-/*
-Upload a document for verification checks
-Uploads a document for verification checks.   Adyen uses the information from the [legal entity](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/legalEntities) to run automated verification checks. If these checks fail, you will be notified to provide additional documents.   You should only upload documents when Adyen requests additional information for the legal entity.
- * @param req Document - reference of Document).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return Document
-*/
-
-func (a *DocumentsApi) UploadDocumentForVerificationChecks(r DocumentsApiUploadDocumentForVerificationChecksConfig) (Document, *_nethttp.Response, error) {
+func (a *DocumentsApi) UploadDocumentForVerificationChecks(ctx context.Context, r DocumentsApiUploadDocumentForVerificationChecksInput) (Document, *http.Response, error) {
 	res := &Document{}
 	path := "/documents"
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPost, r.document, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.document,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }

@@ -12,20 +12,32 @@ import (
 	"context"
 	"encoding/json"
 	"io/ioutil"
-	_nethttp "net/http"
+	"net/http"
 	"net/url"
 	"strings"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// WebhooksCompanyLevelApi WebhooksCompanyLevelApi service
+// WebhooksCompanyLevelApi service
 type WebhooksCompanyLevelApi common.Service
 
-type WebhooksCompanyLevelApiGenerateHmacKeyConfig struct {
-	ctx       context.Context
+// All parameters accepted by WebhooksCompanyLevelApi.GenerateHmacKey
+type WebhooksCompanyLevelApiGenerateHmacKeyInput struct {
 	companyId string
 	webhookId string
+}
+
+/*
+Prepare a request for GenerateHmacKey
+@param companyId The unique identifier of the company account.@param webhookId Unique identifier of the webhook configuration.
+@return WebhooksCompanyLevelApiGenerateHmacKeyInput
+*/
+func (a *WebhooksCompanyLevelApi) GenerateHmacKeyInput(companyId string, webhookId string) WebhooksCompanyLevelApiGenerateHmacKeyInput {
+	return WebhooksCompanyLevelApiGenerateHmacKeyInput{
+		companyId: companyId,
+		webhookId: webhookId,
+	}
 }
 
 /*
@@ -36,30 +48,11 @@ Returns an [HMAC key](https://en.wikipedia.org/wiki/HMAC) for the webhook identi
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Webhooks read and write
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param companyId The unique identifier of the company account.
-	@param webhookId Unique identifier of the webhook configuration.
-	@return WebhooksCompanyLevelApiGenerateHmacKeyConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r WebhooksCompanyLevelApiGenerateHmacKeyInput - Request parameters, see GenerateHmacKeyInput
+@return GenerateHmacKeyResponse, *http.Response, error
 */
-func (a *WebhooksCompanyLevelApi) GenerateHmacKeyConfig(ctx context.Context, companyId string, webhookId string) WebhooksCompanyLevelApiGenerateHmacKeyConfig {
-	return WebhooksCompanyLevelApiGenerateHmacKeyConfig{
-		ctx:       ctx,
-		companyId: companyId,
-		webhookId: webhookId,
-	}
-}
-
-/*
-Generate an HMAC key
-Returns an [HMAC key](https://en.wikipedia.org/wiki/HMAC) for the webhook identified in the path. This key allows you to check the integrity and the origin of the notifications you receive.By creating an HMAC key, you start receiving [HMAC-signed notifications](https://docs.adyen.com/development-resources/webhooks/verify-hmac-signatures#enable-hmac-signatures) from Adyen. Find out more about how to [verify HMAC signatures](https://docs.adyen.com/development-resources/webhooks/verify-hmac-signatures).  To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Webhooks read and write
- * @param companyId The unique identifier of the company account.
- * @param webhookId Unique identifier of the webhook configuration.
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return GenerateHmacKeyResponse
-*/
-
-func (a *WebhooksCompanyLevelApi) GenerateHmacKey(r WebhooksCompanyLevelApiGenerateHmacKeyConfig) (GenerateHmacKeyResponse, *_nethttp.Response, error) {
-	var serviceError common.RestServiceError
+func (a *WebhooksCompanyLevelApi) GenerateHmacKey(ctx context.Context, r WebhooksCompanyLevelApiGenerateHmacKeyInput) (GenerateHmacKeyResponse, *http.Response, error) {
 	res := &GenerateHmacKeyResponse{}
 	path := "/companies/{companyId}/webhooks/{webhookId}/generateHmac"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -67,58 +60,82 @@ func (a *WebhooksCompanyLevelApi) GenerateHmacKey(r WebhooksCompanyLevelApiGener
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		nil,
 		res,
-		_nethttp.MethodPost,
+		http.MethodPost,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
-	defer httpRes.Body.Close()
+
+	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
+
 	return *res, httpRes, err
 }
 
-type WebhooksCompanyLevelApiGetWebhookConfig struct {
-	ctx       context.Context
+// All parameters accepted by WebhooksCompanyLevelApi.GetWebhook
+type WebhooksCompanyLevelApiGetWebhookInput struct {
 	companyId string
 	webhookId string
+}
+
+/*
+Prepare a request for GetWebhook
+@param companyId Unique identifier of the [company account](https://docs.adyen.com/account/account-structure#company-account).@param webhookId Unique identifier of the webhook configuration.
+@return WebhooksCompanyLevelApiGetWebhookInput
+*/
+func (a *WebhooksCompanyLevelApi) GetWebhookInput(companyId string, webhookId string) WebhooksCompanyLevelApiGetWebhookInput {
+	return WebhooksCompanyLevelApiGetWebhookInput{
+		companyId: companyId,
+		webhookId: webhookId,
+	}
 }
 
 /*
@@ -130,30 +147,11 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Webhooks read
 * Management API—Webhooks read and write
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param companyId Unique identifier of the [company account](https://docs.adyen.com/account/account-structure#company-account).
-	@param webhookId Unique identifier of the webhook configuration.
-	@return WebhooksCompanyLevelApiGetWebhookConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r WebhooksCompanyLevelApiGetWebhookInput - Request parameters, see GetWebhookInput
+@return Webhook, *http.Response, error
 */
-func (a *WebhooksCompanyLevelApi) GetWebhookConfig(ctx context.Context, companyId string, webhookId string) WebhooksCompanyLevelApiGetWebhookConfig {
-	return WebhooksCompanyLevelApiGetWebhookConfig{
-		ctx:       ctx,
-		companyId: companyId,
-		webhookId: webhookId,
-	}
-}
-
-/*
-Get a webhook
-Returns the configuration for the webhook identified in the path.  To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Webhooks read * Management API—Webhooks read and write
- * @param companyId Unique identifier of the [company account](https://docs.adyen.com/account/account-structure#company-account).
- * @param webhookId Unique identifier of the webhook configuration.
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return Webhook
-*/
-
-func (a *WebhooksCompanyLevelApi) GetWebhook(r WebhooksCompanyLevelApiGetWebhookConfig) (Webhook, *_nethttp.Response, error) {
-	var serviceError common.RestServiceError
+func (a *WebhooksCompanyLevelApi) GetWebhook(ctx context.Context, r WebhooksCompanyLevelApiGetWebhookInput) (Webhook, *http.Response, error) {
 	res := &Webhook{}
 	path := "/companies/{companyId}/webhooks/{webhookId}"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -161,71 +159,94 @@ func (a *WebhooksCompanyLevelApi) GetWebhook(r WebhooksCompanyLevelApiGetWebhook
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		nil,
 		res,
-		_nethttp.MethodGet,
+		http.MethodGet,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
-	defer httpRes.Body.Close()
+
+	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
+
 	return *res, httpRes, err
 }
 
-type WebhooksCompanyLevelApiListAllWebhooksConfig struct {
-	ctx        context.Context
+// All parameters accepted by WebhooksCompanyLevelApi.ListAllWebhooks
+type WebhooksCompanyLevelApiListAllWebhooksInput struct {
 	companyId  string
 	pageNumber *int32
 	pageSize   *int32
 }
 
 // The number of the page to fetch.
-func (r WebhooksCompanyLevelApiListAllWebhooksConfig) PageNumber(pageNumber int32) WebhooksCompanyLevelApiListAllWebhooksConfig {
+func (r WebhooksCompanyLevelApiListAllWebhooksInput) PageNumber(pageNumber int32) WebhooksCompanyLevelApiListAllWebhooksInput {
 	r.pageNumber = &pageNumber
 	return r
 }
 
 // The number of items to have on a page, maximum 100. The default is 10 items on a page.
-func (r WebhooksCompanyLevelApiListAllWebhooksConfig) PageSize(pageSize int32) WebhooksCompanyLevelApiListAllWebhooksConfig {
+func (r WebhooksCompanyLevelApiListAllWebhooksInput) PageSize(pageSize int32) WebhooksCompanyLevelApiListAllWebhooksInput {
 	r.pageSize = &pageSize
 	return r
+}
+
+/*
+Prepare a request for ListAllWebhooks
+@param companyId Unique identifier of the [company account](https://docs.adyen.com/account/account-structure#company-account).
+@return WebhooksCompanyLevelApiListAllWebhooksInput
+*/
+func (a *WebhooksCompanyLevelApi) ListAllWebhooksInput(companyId string) WebhooksCompanyLevelApiListAllWebhooksInput {
+	return WebhooksCompanyLevelApiListAllWebhooksInput{
+		companyId: companyId,
+	}
 }
 
 /*
@@ -237,27 +258,11 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Webhooks read
 * Management API—Webhooks read and write
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param companyId Unique identifier of the [company account](https://docs.adyen.com/account/account-structure#company-account).
-	@return WebhooksCompanyLevelApiListAllWebhooksConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r WebhooksCompanyLevelApiListAllWebhooksInput - Request parameters, see ListAllWebhooksInput
+@return ListWebhooksResponse, *http.Response, error
 */
-func (a *WebhooksCompanyLevelApi) ListAllWebhooksConfig(ctx context.Context, companyId string) WebhooksCompanyLevelApiListAllWebhooksConfig {
-	return WebhooksCompanyLevelApiListAllWebhooksConfig{
-		ctx:       ctx,
-		companyId: companyId,
-	}
-}
-
-/*
-List all webhooks
-Lists all webhook configurations for the company account.  To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Webhooks read * Management API—Webhooks read and write
- * @param companyId Unique identifier of the [company account](https://docs.adyen.com/account/account-structure#company-account).
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return ListWebhooksResponse
-*/
-
-func (a *WebhooksCompanyLevelApi) ListAllWebhooks(r WebhooksCompanyLevelApiListAllWebhooksConfig) (ListWebhooksResponse, *_nethttp.Response, error) {
-	var serviceError common.RestServiceError
+func (a *WebhooksCompanyLevelApi) ListAllWebhooks(ctx context.Context, r WebhooksCompanyLevelApiListAllWebhooksInput) (ListWebhooksResponse, *http.Response, error) {
 	res := &ListWebhooksResponse{}
 	path := "/companies/{companyId}/webhooks"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -270,58 +275,82 @@ func (a *WebhooksCompanyLevelApi) ListAllWebhooks(r WebhooksCompanyLevelApiListA
 		common.ParameterAddToQuery(queryParams, "pageSize", r.pageSize, "")
 	}
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		nil,
 		res,
-		_nethttp.MethodGet,
+		http.MethodGet,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
-	defer httpRes.Body.Close()
+
+	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
+
 	return *res, httpRes, err
 }
 
-type WebhooksCompanyLevelApiRemoveWebhookConfig struct {
-	ctx       context.Context
+// All parameters accepted by WebhooksCompanyLevelApi.RemoveWebhook
+type WebhooksCompanyLevelApiRemoveWebhookInput struct {
 	companyId string
 	webhookId string
+}
+
+/*
+Prepare a request for RemoveWebhook
+@param companyId The unique identifier of the company account.@param webhookId Unique identifier of the webhook configuration.
+@return WebhooksCompanyLevelApiRemoveWebhookInput
+*/
+func (a *WebhooksCompanyLevelApi) RemoveWebhookInput(companyId string, webhookId string) WebhooksCompanyLevelApiRemoveWebhookInput {
+	return WebhooksCompanyLevelApiRemoveWebhookInput{
+		companyId: companyId,
+		webhookId: webhookId,
+	}
 }
 
 /*
@@ -332,29 +361,11 @@ Remove the configuration for the webhook identified in the path.
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Webhooks read and write
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param companyId The unique identifier of the company account.
-	@param webhookId Unique identifier of the webhook configuration.
-	@return WebhooksCompanyLevelApiRemoveWebhookConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r WebhooksCompanyLevelApiRemoveWebhookInput - Request parameters, see RemoveWebhookInput
+@return , *http.Response, error
 */
-func (a *WebhooksCompanyLevelApi) RemoveWebhookConfig(ctx context.Context, companyId string, webhookId string) WebhooksCompanyLevelApiRemoveWebhookConfig {
-	return WebhooksCompanyLevelApiRemoveWebhookConfig{
-		ctx:       ctx,
-		companyId: companyId,
-		webhookId: webhookId,
-	}
-}
-
-/*
-Remove a webhook
-Remove the configuration for the webhook identified in the path.  To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Webhooks read and write
- * @param companyId The unique identifier of the company account.
- * @param webhookId Unique identifier of the webhook configuration.
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-*/
-
-func (a *WebhooksCompanyLevelApi) RemoveWebhook(r WebhooksCompanyLevelApiRemoveWebhookConfig) (*_nethttp.Response, error) {
-	var serviceError common.RestServiceError
+func (a *WebhooksCompanyLevelApi) RemoveWebhook(ctx context.Context, r WebhooksCompanyLevelApiRemoveWebhookInput) (*http.Response, error) {
 	var res interface{}
 	path := "/companies/{companyId}/webhooks/{webhookId}"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -362,63 +373,86 @@ func (a *WebhooksCompanyLevelApi) RemoveWebhook(r WebhooksCompanyLevelApiRemoveW
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		nil,
 		res,
-		_nethttp.MethodDelete,
+		http.MethodDelete,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
-	defer httpRes.Body.Close()
+
+	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
 		return httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
 		return httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
 		return httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
 		return httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
 		return httpRes, serviceError
 	}
+
 	return httpRes, err
 }
 
-type WebhooksCompanyLevelApiSetUpWebhookConfig struct {
-	ctx                         context.Context
+// All parameters accepted by WebhooksCompanyLevelApi.SetUpWebhook
+type WebhooksCompanyLevelApiSetUpWebhookInput struct {
 	companyId                   string
 	createCompanyWebhookRequest *CreateCompanyWebhookRequest
 }
 
-func (r WebhooksCompanyLevelApiSetUpWebhookConfig) CreateCompanyWebhookRequest(createCompanyWebhookRequest CreateCompanyWebhookRequest) WebhooksCompanyLevelApiSetUpWebhookConfig {
+func (r WebhooksCompanyLevelApiSetUpWebhookInput) CreateCompanyWebhookRequest(createCompanyWebhookRequest CreateCompanyWebhookRequest) WebhooksCompanyLevelApiSetUpWebhookInput {
 	r.createCompanyWebhookRequest = &createCompanyWebhookRequest
 	return r
+}
+
+/*
+Prepare a request for SetUpWebhook
+@param companyId Unique identifier of the [company account](https://docs.adyen.com/account/account-structure#company-account).
+@return WebhooksCompanyLevelApiSetUpWebhookInput
+*/
+func (a *WebhooksCompanyLevelApi) SetUpWebhookInput(companyId string) WebhooksCompanyLevelApiSetUpWebhookInput {
+	return WebhooksCompanyLevelApiSetUpWebhookInput{
+		companyId: companyId,
+	}
 }
 
 /*
@@ -429,92 +463,99 @@ Subscribe to receive webhook notifications about events related to your company 
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Webhooks read and write
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param companyId Unique identifier of the [company account](https://docs.adyen.com/account/account-structure#company-account).
-	@return WebhooksCompanyLevelApiSetUpWebhookConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r WebhooksCompanyLevelApiSetUpWebhookInput - Request parameters, see SetUpWebhookInput
+@return Webhook, *http.Response, error
 */
-func (a *WebhooksCompanyLevelApi) SetUpWebhookConfig(ctx context.Context, companyId string) WebhooksCompanyLevelApiSetUpWebhookConfig {
-	return WebhooksCompanyLevelApiSetUpWebhookConfig{
-		ctx:       ctx,
-		companyId: companyId,
-	}
-}
-
-/*
-Set up a webhook
-Subscribe to receive webhook notifications about events related to your company account. You can add basic authentication to make sure the data is secure.  To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Webhooks read and write
- * @param companyId Unique identifier of the [company account](https://docs.adyen.com/account/account-structure#company-account).
- * @param req CreateCompanyWebhookRequest - reference of CreateCompanyWebhookRequest).
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return Webhook
-*/
-
-func (a *WebhooksCompanyLevelApi) SetUpWebhook(r WebhooksCompanyLevelApiSetUpWebhookConfig) (Webhook, *_nethttp.Response, error) {
-	var serviceError common.RestServiceError
+func (a *WebhooksCompanyLevelApi) SetUpWebhook(ctx context.Context, r WebhooksCompanyLevelApiSetUpWebhookInput) (Webhook, *http.Response, error) {
 	res := &Webhook{}
 	path := "/companies/{companyId}/webhooks"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		r.createCompanyWebhookRequest,
 		res,
-		_nethttp.MethodPost,
+		http.MethodPost,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
-	defer httpRes.Body.Close()
+
+	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
+
 	return *res, httpRes, err
 }
 
-type WebhooksCompanyLevelApiTestWebhookConfig struct {
-	ctx                       context.Context
+// All parameters accepted by WebhooksCompanyLevelApi.TestWebhook
+type WebhooksCompanyLevelApiTestWebhookInput struct {
 	companyId                 string
 	webhookId                 string
 	testCompanyWebhookRequest *TestCompanyWebhookRequest
 }
 
-func (r WebhooksCompanyLevelApiTestWebhookConfig) TestCompanyWebhookRequest(testCompanyWebhookRequest TestCompanyWebhookRequest) WebhooksCompanyLevelApiTestWebhookConfig {
+func (r WebhooksCompanyLevelApiTestWebhookInput) TestCompanyWebhookRequest(testCompanyWebhookRequest TestCompanyWebhookRequest) WebhooksCompanyLevelApiTestWebhookInput {
 	r.testCompanyWebhookRequest = &testCompanyWebhookRequest
 	return r
+}
+
+/*
+Prepare a request for TestWebhook
+@param companyId The unique identifier of the company account.@param webhookId Unique identifier of the webhook configuration.
+@return WebhooksCompanyLevelApiTestWebhookInput
+*/
+func (a *WebhooksCompanyLevelApi) TestWebhookInput(companyId string, webhookId string) WebhooksCompanyLevelApiTestWebhookInput {
+	return WebhooksCompanyLevelApiTestWebhookInput{
+		companyId: companyId,
+		webhookId: webhookId,
+	}
 }
 
 /*
@@ -531,31 +572,11 @@ The response describes the result of the test. The `status` field tells you if t
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Webhooks read and write
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param companyId The unique identifier of the company account.
-	@param webhookId Unique identifier of the webhook configuration.
-	@return WebhooksCompanyLevelApiTestWebhookConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r WebhooksCompanyLevelApiTestWebhookInput - Request parameters, see TestWebhookInput
+@return TestWebhookResponse, *http.Response, error
 */
-func (a *WebhooksCompanyLevelApi) TestWebhookConfig(ctx context.Context, companyId string, webhookId string) WebhooksCompanyLevelApiTestWebhookConfig {
-	return WebhooksCompanyLevelApiTestWebhookConfig{
-		ctx:       ctx,
-		companyId: companyId,
-		webhookId: webhookId,
-	}
-}
-
-/*
-Test a webhook
-Sends sample notifications to test if the webhook is set up correctly.  We send sample notifications for maximum 20 of the merchant accounts that the webhook is configured for. If the webhook is configured for more than 20 merchant accounts, use the &#x60;merchantIds&#x60; array to specify a subset of the merchant accounts for which to send test notifications.  We send four test notifications for each event code you choose. They cover success and failure scenarios for the hard-coded currencies EUR and GBP, regardless of the currencies configured in the merchant accounts. For custom notifications, we only send the specified custom notification.  The response describes the result of the test. The &#x60;status&#x60; field tells you if the test was successful or not. You can use the other response fields to troubleshoot unsuccessful tests.  To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Webhooks read and write
- * @param companyId The unique identifier of the company account.
- * @param webhookId Unique identifier of the webhook configuration.
- * @param req TestCompanyWebhookRequest - reference of TestCompanyWebhookRequest).
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return TestWebhookResponse
-*/
-
-func (a *WebhooksCompanyLevelApi) TestWebhook(r WebhooksCompanyLevelApiTestWebhookConfig) (TestWebhookResponse, *_nethttp.Response, error) {
-	var serviceError common.RestServiceError
+func (a *WebhooksCompanyLevelApi) TestWebhook(ctx context.Context, r WebhooksCompanyLevelApiTestWebhookInput) (TestWebhookResponse, *http.Response, error) {
 	res := &TestWebhookResponse{}
 	path := "/companies/{companyId}/webhooks/{webhookId}/test"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -563,64 +584,88 @@ func (a *WebhooksCompanyLevelApi) TestWebhook(r WebhooksCompanyLevelApiTestWebho
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		r.testCompanyWebhookRequest,
 		res,
-		_nethttp.MethodPost,
+		http.MethodPost,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
-	defer httpRes.Body.Close()
+
+	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
+
 	return *res, httpRes, err
 }
 
-type WebhooksCompanyLevelApiUpdateWebhookConfig struct {
-	ctx                         context.Context
+// All parameters accepted by WebhooksCompanyLevelApi.UpdateWebhook
+type WebhooksCompanyLevelApiUpdateWebhookInput struct {
 	companyId                   string
 	webhookId                   string
 	updateCompanyWebhookRequest *UpdateCompanyWebhookRequest
 }
 
-func (r WebhooksCompanyLevelApiUpdateWebhookConfig) UpdateCompanyWebhookRequest(updateCompanyWebhookRequest UpdateCompanyWebhookRequest) WebhooksCompanyLevelApiUpdateWebhookConfig {
+func (r WebhooksCompanyLevelApiUpdateWebhookInput) UpdateCompanyWebhookRequest(updateCompanyWebhookRequest UpdateCompanyWebhookRequest) WebhooksCompanyLevelApiUpdateWebhookInput {
 	r.updateCompanyWebhookRequest = &updateCompanyWebhookRequest
 	return r
+}
+
+/*
+Prepare a request for UpdateWebhook
+@param companyId The unique identifier of the company account.@param webhookId Unique identifier of the webhook configuration.
+@return WebhooksCompanyLevelApiUpdateWebhookInput
+*/
+func (a *WebhooksCompanyLevelApi) UpdateWebhookInput(companyId string, webhookId string) WebhooksCompanyLevelApiUpdateWebhookInput {
+	return WebhooksCompanyLevelApiUpdateWebhookInput{
+		companyId: companyId,
+		webhookId: webhookId,
+	}
 }
 
 /*
@@ -631,31 +676,11 @@ Make changes to the configuration of the webhook identified in the path. The req
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Webhooks read and write
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param companyId The unique identifier of the company account.
-	@param webhookId Unique identifier of the webhook configuration.
-	@return WebhooksCompanyLevelApiUpdateWebhookConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r WebhooksCompanyLevelApiUpdateWebhookInput - Request parameters, see UpdateWebhookInput
+@return Webhook, *http.Response, error
 */
-func (a *WebhooksCompanyLevelApi) UpdateWebhookConfig(ctx context.Context, companyId string, webhookId string) WebhooksCompanyLevelApiUpdateWebhookConfig {
-	return WebhooksCompanyLevelApiUpdateWebhookConfig{
-		ctx:       ctx,
-		companyId: companyId,
-		webhookId: webhookId,
-	}
-}
-
-/*
-Update a webhook
-Make changes to the configuration of the webhook identified in the path. The request contains the new values you want to have in the webhook configuration. The response contains the full configuration for the webhook, which includes the new values from the request.  To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Webhooks read and write
- * @param companyId The unique identifier of the company account.
- * @param webhookId Unique identifier of the webhook configuration.
- * @param req UpdateCompanyWebhookRequest - reference of UpdateCompanyWebhookRequest).
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return Webhook
-*/
-
-func (a *WebhooksCompanyLevelApi) UpdateWebhook(r WebhooksCompanyLevelApiUpdateWebhookConfig) (Webhook, *_nethttp.Response, error) {
-	var serviceError common.RestServiceError
+func (a *WebhooksCompanyLevelApi) UpdateWebhook(ctx context.Context, r WebhooksCompanyLevelApiUpdateWebhookInput) (Webhook, *http.Response, error) {
 	res := &Webhook{}
 	path := "/companies/{companyId}/webhooks/{webhookId}"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -663,50 +688,62 @@ func (a *WebhooksCompanyLevelApi) UpdateWebhook(r WebhooksCompanyLevelApiUpdateW
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		r.updateCompanyWebhookRequest,
 		res,
-		_nethttp.MethodPatch,
+		http.MethodPatch,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
-	defer httpRes.Body.Close()
+
+	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
+
 	return *res, httpRes, err
 }

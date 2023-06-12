@@ -10,25 +10,33 @@ package legalentity
 
 import (
 	"context"
-	_context "context"
-	_nethttp "net/http"
+	"net/http"
 	"net/url"
 	"strings"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// TransferInstrumentsApi TransferInstrumentsApi service
+// TransferInstrumentsApi service
 type TransferInstrumentsApi common.Service
 
-type TransferInstrumentsApiCreateTransferInstrumentConfig struct {
-	ctx                    context.Context
+// All parameters accepted by TransferInstrumentsApi.CreateTransferInstrument
+type TransferInstrumentsApiCreateTransferInstrumentInput struct {
 	transferInstrumentInfo *TransferInstrumentInfo
 }
 
-func (r TransferInstrumentsApiCreateTransferInstrumentConfig) TransferInstrumentInfo(transferInstrumentInfo TransferInstrumentInfo) TransferInstrumentsApiCreateTransferInstrumentConfig {
+func (r TransferInstrumentsApiCreateTransferInstrumentInput) TransferInstrumentInfo(transferInstrumentInfo TransferInstrumentInfo) TransferInstrumentsApiCreateTransferInstrumentInput {
 	r.transferInstrumentInfo = &transferInstrumentInfo
 	return r
+}
+
+/*
+Prepare a request for CreateTransferInstrument
+
+@return TransferInstrumentsApiCreateTransferInstrumentInput
+*/
+func (a *TransferInstrumentsApi) CreateTransferInstrumentInput() TransferInstrumentsApiCreateTransferInstrumentInput {
+	return TransferInstrumentsApiCreateTransferInstrumentInput{}
 }
 
 /*
@@ -40,33 +48,43 @@ A transfer instrument is a bank account that a legal entity owns. Adyen performs
 
 When the transfer instrument passes the verification checks, you can start sending funds from the balance platform to the transfer instrument (such as payouts).
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return TransferInstrumentsApiCreateTransferInstrumentConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r TransferInstrumentsApiCreateTransferInstrumentInput - Request parameters, see CreateTransferInstrumentInput
+@return TransferInstrument, *http.Response, error
 */
-func (a *TransferInstrumentsApi) CreateTransferInstrumentConfig(ctx context.Context) TransferInstrumentsApiCreateTransferInstrumentConfig {
-	return TransferInstrumentsApiCreateTransferInstrumentConfig{
-		ctx: ctx,
-	}
-}
-
-/*
-Create a transfer instrument
-Creates a transfer instrument.   A transfer instrument is a bank account that a legal entity owns. Adyen performs verification checks on the transfer instrument as required by payment industry regulations. We inform you of the verification results through webhooks or API responses.  When the transfer instrument passes the verification checks, you can start sending funds from the balance platform to the transfer instrument (such as payouts).
- * @param req TransferInstrumentInfo - reference of TransferInstrumentInfo).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return TransferInstrument
-*/
-
-func (a *TransferInstrumentsApi) CreateTransferInstrument(r TransferInstrumentsApiCreateTransferInstrumentConfig) (TransferInstrument, *_nethttp.Response, error) {
+func (a *TransferInstrumentsApi) CreateTransferInstrument(ctx context.Context, r TransferInstrumentsApiCreateTransferInstrumentInput) (TransferInstrument, *http.Response, error) {
 	res := &TransferInstrument{}
 	path := "/transferInstruments"
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPost, r.transferInstrumentInfo, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.transferInstrumentInfo,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type TransferInstrumentsApiDeleteTransferInstrumentConfig struct {
-	ctx context.Context
-	id  string
+// All parameters accepted by TransferInstrumentsApi.DeleteTransferInstrument
+type TransferInstrumentsApiDeleteTransferInstrumentInput struct {
+	id string
+}
+
+/*
+Prepare a request for DeleteTransferInstrument
+@param id The unique identifier of the transfer instrument to be deleted.
+@return TransferInstrumentsApiDeleteTransferInstrumentInput
+*/
+func (a *TransferInstrumentsApi) DeleteTransferInstrumentInput(id string) TransferInstrumentsApiDeleteTransferInstrumentInput {
+	return TransferInstrumentsApiDeleteTransferInstrumentInput{
+		id: id,
+	}
 }
 
 /*
@@ -74,35 +92,44 @@ DeleteTransferInstrument Delete a transfer instrument
 
 Deletes a transfer instrument.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier of the transfer instrument to be deleted.
- @return TransferInstrumentsApiDeleteTransferInstrumentConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r TransferInstrumentsApiDeleteTransferInstrumentInput - Request parameters, see DeleteTransferInstrumentInput
+@return , *http.Response, error
 */
-func (a *TransferInstrumentsApi) DeleteTransferInstrumentConfig(ctx context.Context, id string) TransferInstrumentsApiDeleteTransferInstrumentConfig {
-	return TransferInstrumentsApiDeleteTransferInstrumentConfig{
-		ctx: ctx,
-		id:  id,
-	}
-}
-
-/*
-Delete a transfer instrument
-Deletes a transfer instrument.
- * @param id The unique identifier of the transfer instrument to be deleted.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-*/
-
-func (a *TransferInstrumentsApi) DeleteTransferInstrument(r TransferInstrumentsApiDeleteTransferInstrumentConfig) (*_nethttp.Response, error) {
+func (a *TransferInstrumentsApi) DeleteTransferInstrument(ctx context.Context, r TransferInstrumentsApiDeleteTransferInstrumentInput) (*http.Response, error) {
 	var res interface{}
 	path := "/transferInstruments/{id}"
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodDelete, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodDelete,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return httpRes, err
 }
 
-type TransferInstrumentsApiGetTransferInstrumentConfig struct {
-	ctx context.Context
-	id  string
+// All parameters accepted by TransferInstrumentsApi.GetTransferInstrument
+type TransferInstrumentsApiGetTransferInstrumentInput struct {
+	id string
+}
+
+/*
+Prepare a request for GetTransferInstrument
+@param id The unique identifier of the transfer instrument.
+@return TransferInstrumentsApiGetTransferInstrumentInput
+*/
+func (a *TransferInstrumentsApi) GetTransferInstrumentInput(id string) TransferInstrumentsApiGetTransferInstrumentInput {
+	return TransferInstrumentsApiGetTransferInstrumentInput{
+		id: id,
+	}
 }
 
 /*
@@ -110,42 +137,50 @@ GetTransferInstrument Get a transfer instrument
 
 Returns the details of a transfer instrument.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier of the transfer instrument.
- @return TransferInstrumentsApiGetTransferInstrumentConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r TransferInstrumentsApiGetTransferInstrumentInput - Request parameters, see GetTransferInstrumentInput
+@return TransferInstrument, *http.Response, error
 */
-func (a *TransferInstrumentsApi) GetTransferInstrumentConfig(ctx context.Context, id string) TransferInstrumentsApiGetTransferInstrumentConfig {
-	return TransferInstrumentsApiGetTransferInstrumentConfig{
-		ctx: ctx,
-		id:  id,
-	}
-}
-
-/*
-Get a transfer instrument
-Returns the details of a transfer instrument.
- * @param id The unique identifier of the transfer instrument.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return TransferInstrument
-*/
-
-func (a *TransferInstrumentsApi) GetTransferInstrument(r TransferInstrumentsApiGetTransferInstrumentConfig) (TransferInstrument, *_nethttp.Response, error) {
+func (a *TransferInstrumentsApi) GetTransferInstrument(ctx context.Context, r TransferInstrumentsApiGetTransferInstrumentInput) (TransferInstrument, *http.Response, error) {
 	res := &TransferInstrument{}
 	path := "/transferInstruments/{id}"
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type TransferInstrumentsApiUpdateTransferInstrumentConfig struct {
-	ctx                    context.Context
+// All parameters accepted by TransferInstrumentsApi.UpdateTransferInstrument
+type TransferInstrumentsApiUpdateTransferInstrumentInput struct {
 	id                     string
 	transferInstrumentInfo *TransferInstrumentInfo
 }
 
-func (r TransferInstrumentsApiUpdateTransferInstrumentConfig) TransferInstrumentInfo(transferInstrumentInfo TransferInstrumentInfo) TransferInstrumentsApiUpdateTransferInstrumentConfig {
+func (r TransferInstrumentsApiUpdateTransferInstrumentInput) TransferInstrumentInfo(transferInstrumentInfo TransferInstrumentInfo) TransferInstrumentsApiUpdateTransferInstrumentInput {
 	r.transferInstrumentInfo = &transferInstrumentInfo
 	return r
+}
+
+/*
+Prepare a request for UpdateTransferInstrument
+@param id The unique identifier of the transfer instrument.
+@return TransferInstrumentsApiUpdateTransferInstrumentInput
+*/
+func (a *TransferInstrumentsApi) UpdateTransferInstrumentInput(id string) TransferInstrumentsApiUpdateTransferInstrumentInput {
+	return TransferInstrumentsApiUpdateTransferInstrumentInput{
+		id: id,
+	}
 }
 
 /*
@@ -153,30 +188,26 @@ UpdateTransferInstrument Update a transfer instrument
 
 Updates a transfer instrument.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier of the transfer instrument.
- @return TransferInstrumentsApiUpdateTransferInstrumentConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r TransferInstrumentsApiUpdateTransferInstrumentInput - Request parameters, see UpdateTransferInstrumentInput
+@return TransferInstrument, *http.Response, error
 */
-func (a *TransferInstrumentsApi) UpdateTransferInstrumentConfig(ctx context.Context, id string) TransferInstrumentsApiUpdateTransferInstrumentConfig {
-	return TransferInstrumentsApiUpdateTransferInstrumentConfig{
-		ctx: ctx,
-		id:  id,
-	}
-}
-
-/*
-Update a transfer instrument
-Updates a transfer instrument.
- * @param id The unique identifier of the transfer instrument.
- * @param req TransferInstrumentInfo - reference of TransferInstrumentInfo).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return TransferInstrument
-*/
-
-func (a *TransferInstrumentsApi) UpdateTransferInstrument(r TransferInstrumentsApiUpdateTransferInstrumentConfig) (TransferInstrument, *_nethttp.Response, error) {
+func (a *TransferInstrumentsApi) UpdateTransferInstrument(ctx context.Context, r TransferInstrumentsApiUpdateTransferInstrumentInput) (TransferInstrument, *http.Response, error) {
 	res := &TransferInstrument{}
 	path := "/transferInstruments/{id}"
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPatch, r.transferInstrumentInfo, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.transferInstrumentInfo,
+		res,
+		http.MethodPatch,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }

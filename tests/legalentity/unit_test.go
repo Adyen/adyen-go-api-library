@@ -63,18 +63,18 @@ func Test_LegalEntity(t *testing.T) {
 	}
 
 	t.Run("Test BusinessLinesApiService DeleteBusinessLine", func(t *testing.T) {
-		req := service.BusinessLinesApi.DeleteBusinessLineConfig(context.Background(), "123")
+		req := service.BusinessLinesApi.DeleteBusinessLineInput("123")
 
-		service.BusinessLinesApi.DeleteBusinessLine(req)
+		service.BusinessLinesApi.DeleteBusinessLine(context.Background(), req)
 
 		assert.Equal(t, "DELETE", mockRequest.Method)
 		assert.Equal(t, "/businessLines/123", mockRequest.URL.Path)
 	})
 
 	t.Run("Test BusinessLinesApiService GetBusinessLine", func(t *testing.T) {
-		req := service.BusinessLinesApi.GetBusinessLineConfig(context.Background(), "123")
+		req := service.BusinessLinesApi.GetBusinessLineInput("123")
 
-		service.BusinessLinesApi.GetBusinessLine(req)
+		service.BusinessLinesApi.GetBusinessLine(context.Background(), req)
 
 		assert.Equal(t, "GET", mockRequest.Method)
 		assert.Equal(t, "/businessLines/123", mockRequest.URL.Path)
@@ -82,27 +82,27 @@ func Test_LegalEntity(t *testing.T) {
 	})
 
 	t.Run("Test BusinessLinesApiService UpdateBusinessLine", func(t *testing.T) {
-		req := service.BusinessLinesApi.UpdateBusinessLineConfig(context.Background(), "123")
+		req := service.BusinessLinesApi.UpdateBusinessLineInput("123")
 
-		service.BusinessLinesApi.UpdateBusinessLine(req)
+		service.BusinessLinesApi.UpdateBusinessLine(context.Background(), req)
 
 		assert.Equal(t, "PATCH", mockRequest.Method)
 		assert.Equal(t, "/businessLines/123", mockRequest.URL.Path)
 	})
 
 	t.Run("Test BusinessLinesApiService CreateBusinessLine", func(t *testing.T) {
-		req := service.BusinessLinesApi.CreateBusinessLineConfig(context.Background())
+		req := service.BusinessLinesApi.CreateBusinessLineInput()
 
-		service.BusinessLinesApi.CreateBusinessLine(req)
+		service.BusinessLinesApi.CreateBusinessLine(context.Background(), req)
 
 		assert.Equal(t, "POST", mockRequest.Method)
 		assert.Equal(t, "/businessLines", mockRequest.URL.Path)
 	})
 
 	t.Run("Test DocumentsApiService UploadDocumentForVerificationChecks", func(t *testing.T) {
-		req := service.DocumentsApi.UploadDocumentForVerificationChecksConfig(context.Background())
+		req := service.DocumentsApi.UploadDocumentForVerificationChecksInput()
 
-		service.DocumentsApi.UploadDocumentForVerificationChecks(req)
+		service.DocumentsApi.UploadDocumentForVerificationChecks(context.Background(), req)
 
 		assert.Equal(t, "POST", mockRequest.Method)
 		assert.Equal(t, "/documents", mockRequest.URL.Path)
@@ -110,27 +110,27 @@ func Test_LegalEntity(t *testing.T) {
 	})
 
 	t.Run("Test HostedOnboardingApiService ListHostedOnboardingPageThemes", func(t *testing.T) {
-		req := service.HostedOnboardingApi.ListHostedOnboardingPageThemesConfig(context.Background())
+		req := service.HostedOnboardingApi.ListHostedOnboardingPageThemesInput()
 
-		service.HostedOnboardingApi.ListHostedOnboardingPageThemes(req)
+		service.HostedOnboardingApi.ListHostedOnboardingPageThemes(context.Background(), req)
 
 		assert.Equal(t, "GET", mockRequest.Method)
 		assert.Equal(t, "/themes", mockRequest.URL.Path)
 	})
 
 	t.Run("Test HostedOnboardingApiService GetLinkToAdyenhostedOnboardingPage", func(t *testing.T) {
-		req := service.HostedOnboardingApi.GetLinkToAdyenhostedOnboardingPageConfig(context.Background(), "123")
+		req := service.HostedOnboardingApi.GetLinkToAdyenhostedOnboardingPageInput("123")
 
-		service.HostedOnboardingApi.GetLinkToAdyenhostedOnboardingPage(req)
+		service.HostedOnboardingApi.GetLinkToAdyenhostedOnboardingPage(context.Background(), req)
 
 		assert.Equal(t, "POST", mockRequest.Method)
 		assert.Equal(t, "/legalEntities/123/onboardingLinks", mockRequest.URL.Path)
 	})
 
 	t.Run("Test LegalEntitiesApiService GetLegalEntity", func(t *testing.T) {
-		req := service.LegalEntitiesApi.GetLegalEntityConfig(context.Background(), "123")
+		req := service.LegalEntitiesApi.GetLegalEntityInput("123")
 
-		service.LegalEntitiesApi.GetLegalEntity(req)
+		service.LegalEntitiesApi.GetLegalEntity(context.Background(), req)
 
 		assert.Equal(t, "GET", mockRequest.Method)
 		assert.Equal(t, "/legalEntities/123", mockRequest.URL.Path)
@@ -138,9 +138,9 @@ func Test_LegalEntity(t *testing.T) {
 	})
 
 	t.Run("Test LegalEntitiesApiService GetAllBusinessLinesUnderLegalEntity", func(t *testing.T) {
-		req := service.LegalEntitiesApi.GetAllBusinessLinesUnderLegalEntityConfig(context.Background(), "123")
+		req := service.LegalEntitiesApi.GetAllBusinessLinesUnderLegalEntityInput("123")
 
-		service.LegalEntitiesApi.GetAllBusinessLinesUnderLegalEntity(req)
+		service.LegalEntitiesApi.GetAllBusinessLinesUnderLegalEntity(context.Background(), req)
 
 		assert.Equal(t, "GET", mockRequest.Method)
 		assert.Equal(t, "/legalEntities/123/businessLines", mockRequest.URL.Path)
@@ -148,10 +148,10 @@ func Test_LegalEntity(t *testing.T) {
 	})
 
 	t.Run("Test LegalEntitiesApiService UpdateLegalEntity", func(t *testing.T) {
-		req := service.LegalEntitiesApi.UpdateLegalEntityConfig(context.Background(), "123").
+		req := service.LegalEntitiesApi.UpdateLegalEntityInput("123").
 			LegalEntityInfo(*legalentity.NewLegalEntityInfoWithDefaults())
 
-		service.LegalEntitiesApi.UpdateLegalEntity(req)
+		service.LegalEntitiesApi.UpdateLegalEntity(context.Background(), req)
 
 		assert.Equal(t, "PATCH", mockRequest.Method)
 		assert.Equal(t, "/legalEntities/123", mockRequest.URL.Path)
@@ -159,9 +159,9 @@ func Test_LegalEntity(t *testing.T) {
 	})
 
 	t.Run("Test TermsOfServiceApiService GetTermsOfServiceInformationForLegalEntity", func(t *testing.T) {
-		req := service.TermsOfServiceApi.GetTermsOfServiceInformationForLegalEntityConfig(context.Background(), "123")
+		req := service.TermsOfServiceApi.GetTermsOfServiceInformationForLegalEntityInput("123")
 
-		service.TermsOfServiceApi.GetTermsOfServiceInformationForLegalEntity(req)
+		service.TermsOfServiceApi.GetTermsOfServiceInformationForLegalEntity(context.Background(), req)
 
 		assert.Equal(t, "GET", mockRequest.Method)
 		assert.Equal(t, "/legalEntities/123/termsOfServiceAcceptanceInfos", mockRequest.URL.Path)
@@ -170,9 +170,9 @@ func Test_LegalEntity(t *testing.T) {
 	t.Run("Test TermsOfServiceApiService AcceptTermsOfService", func(t *testing.T) {
 		legalEntityId := "123"
 		termsOfServiceDocumentId := "456"
-		req := service.TermsOfServiceApi.AcceptTermsOfServiceConfig(context.Background(), legalEntityId, termsOfServiceDocumentId)
+		req := service.TermsOfServiceApi.AcceptTermsOfServiceInput(legalEntityId, termsOfServiceDocumentId)
 
-		service.TermsOfServiceApi.AcceptTermsOfService(req)
+		service.TermsOfServiceApi.AcceptTermsOfService(context.Background(), req)
 
 		assert.Equal(t, "PATCH", mockRequest.Method)
 		assert.Equal(t, "/legalEntities/123/termsOfService/456", mockRequest.URL.Path)

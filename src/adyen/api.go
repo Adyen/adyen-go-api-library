@@ -92,7 +92,7 @@ type APIClient struct {
 	disputes                           *disputes.Disputes
 	storedValue                        *storedvalue.GeneralApi
 	balancePlatform                    *balanceplatform.APIClient
-	transfers                          *transfers.GeneralApi
+	transfers                          *transfers.APIClient
 	management                         *management.APIClient
 	legalEntity                        *legalentity.APIClient
 }
@@ -254,13 +254,11 @@ func (c *APIClient) PosTerminalManagement() *posterminalmanagement.GeneralApi {
 	return c.posTerminalManagement
 }
 
-func (c *APIClient) Transfers() *transfers.GeneralApi {
+func (c *APIClient) Transfers() *transfers.APIClient {
 	if c.transfers == nil {
-		c.transfers = &transfers.GeneralApi{
-			Client: c.client,
-			BasePath: func() string {
-				return fmt.Sprintf("%s/%s", c.client.Cfg.TransfersEndpoint, TransfersAPIVersion)
-			},
+		c.transfers = transfers.NewAPIClient(c.client)
+		c.transfers.TransfersApi.BasePath = func() string {
+			return fmt.Sprintf("%s/%s", c.client.Cfg.TransfersEndpoint, TransfersAPIVersion)
 		}
 	}
 	return c.transfers

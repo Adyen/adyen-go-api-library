@@ -2009,7 +2009,7 @@ func (o CreateCheckoutSessionResponse) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.FundRecipient) {
 		toSerialize["fundRecipient"] = o.FundRecipient
 	}
-	// skip: id is readOnly
+	toSerialize["id"] = o.Id
 	if !common.IsNil(o.InstallmentOptions) {
 		toSerialize["installmentOptions"] = o.InstallmentOptions
 	}

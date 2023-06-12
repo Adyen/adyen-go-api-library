@@ -10,26 +10,36 @@ package legalentity
 
 import (
 	"context"
-	_context "context"
-	_nethttp "net/http"
+	"net/http"
 	"net/url"
 	"strings"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// PCIQuestionnairesApi PCIQuestionnairesApi service
+// PCIQuestionnairesApi service
 type PCIQuestionnairesApi common.Service
 
-type PCIQuestionnairesApiGeneratePciQuestionnaireConfig struct {
-	ctx                           context.Context
+// All parameters accepted by PCIQuestionnairesApi.GeneratePciQuestionnaire
+type PCIQuestionnairesApiGeneratePciQuestionnaireInput struct {
 	id                            string
 	generatePciDescriptionRequest *GeneratePciDescriptionRequest
 }
 
-func (r PCIQuestionnairesApiGeneratePciQuestionnaireConfig) GeneratePciDescriptionRequest(generatePciDescriptionRequest GeneratePciDescriptionRequest) PCIQuestionnairesApiGeneratePciQuestionnaireConfig {
+func (r PCIQuestionnairesApiGeneratePciQuestionnaireInput) GeneratePciDescriptionRequest(generatePciDescriptionRequest GeneratePciDescriptionRequest) PCIQuestionnairesApiGeneratePciQuestionnaireInput {
 	r.generatePciDescriptionRequest = &generatePciDescriptionRequest
 	return r
+}
+
+/*
+Prepare a request for GeneratePciQuestionnaire
+@param id The legal entity ID of the individual who will sign the PCI questionnaire.
+@return PCIQuestionnairesApiGeneratePciQuestionnaireInput
+*/
+func (a *PCIQuestionnairesApi) GeneratePciQuestionnaireInput(id string) PCIQuestionnairesApiGeneratePciQuestionnaireInput {
+	return PCIQuestionnairesApiGeneratePciQuestionnaireInput{
+		id: id,
+	}
 }
 
 /*
@@ -37,38 +47,46 @@ GeneratePciQuestionnaire Generate PCI questionnaire
 
 Generates the required PCI questionnaire based on the user's [salesChannel](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/businessLines__reqParam_salesChannels). If multiple questionnaires are required, this request creates a single consodilated document to be signed.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The legal entity ID of the individual who will sign the PCI questionnaire.
- @return PCIQuestionnairesApiGeneratePciQuestionnaireConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r PCIQuestionnairesApiGeneratePciQuestionnaireInput - Request parameters, see GeneratePciQuestionnaireInput
+@return GeneratePciDescriptionResponse, *http.Response, error
 */
-func (a *PCIQuestionnairesApi) GeneratePciQuestionnaireConfig(ctx context.Context, id string) PCIQuestionnairesApiGeneratePciQuestionnaireConfig {
-	return PCIQuestionnairesApiGeneratePciQuestionnaireConfig{
-		ctx: ctx,
-		id:  id,
-	}
-}
-
-/*
-Generate PCI questionnaire
-Generates the required PCI questionnaire based on the user&#39;s [salesChannel](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/businessLines__reqParam_salesChannels). If multiple questionnaires are required, this request creates a single consodilated document to be signed.
- * @param id The legal entity ID of the individual who will sign the PCI questionnaire.
- * @param req GeneratePciDescriptionRequest - reference of GeneratePciDescriptionRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return GeneratePciDescriptionResponse
-*/
-
-func (a *PCIQuestionnairesApi) GeneratePciQuestionnaire(r PCIQuestionnairesApiGeneratePciQuestionnaireConfig) (GeneratePciDescriptionResponse, *_nethttp.Response, error) {
+func (a *PCIQuestionnairesApi) GeneratePciQuestionnaire(ctx context.Context, r PCIQuestionnairesApiGeneratePciQuestionnaireInput) (GeneratePciDescriptionResponse, *http.Response, error) {
 	res := &GeneratePciDescriptionResponse{}
 	path := "/legalEntities/{id}/pciQuestionnaires/generatePciTemplates"
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPost, r.generatePciDescriptionRequest, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.generatePciDescriptionRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type PCIQuestionnairesApiGetPciQuestionnaireConfig struct {
-	ctx   context.Context
+// All parameters accepted by PCIQuestionnairesApi.GetPciQuestionnaire
+type PCIQuestionnairesApiGetPciQuestionnaireInput struct {
 	id    string
 	pciid string
+}
+
+/*
+Prepare a request for GetPciQuestionnaire
+@param id The legal entity ID of the individual who signed the PCI questionnaire.@param pciid The unique identifier of the signed PCI questionnaire.
+@return PCIQuestionnairesApiGetPciQuestionnaireInput
+*/
+func (a *PCIQuestionnairesApi) GetPciQuestionnaireInput(id string, pciid string) PCIQuestionnairesApiGetPciQuestionnaireInput {
+	return PCIQuestionnairesApiGetPciQuestionnaireInput{
+		id:    id,
+		pciid: pciid,
+	}
 }
 
 /*
@@ -76,40 +94,45 @@ GetPciQuestionnaire Get PCI questionnaire
 
 Returns the signed PCI questionnaire.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The legal entity ID of the individual who signed the PCI questionnaire.
- @param pciid The unique identifier of the signed PCI questionnaire.
- @return PCIQuestionnairesApiGetPciQuestionnaireConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r PCIQuestionnairesApiGetPciQuestionnaireInput - Request parameters, see GetPciQuestionnaireInput
+@return GetPciQuestionnaireResponse, *http.Response, error
 */
-func (a *PCIQuestionnairesApi) GetPciQuestionnaireConfig(ctx context.Context, id string, pciid string) PCIQuestionnairesApiGetPciQuestionnaireConfig {
-	return PCIQuestionnairesApiGetPciQuestionnaireConfig{
-		ctx:   ctx,
-		id:    id,
-		pciid: pciid,
-	}
-}
-
-/*
-Get PCI questionnaire
-Returns the signed PCI questionnaire.
- * @param id The legal entity ID of the individual who signed the PCI questionnaire.
- * @param pciid The unique identifier of the signed PCI questionnaire.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return GetPciQuestionnaireResponse
-*/
-
-func (a *PCIQuestionnairesApi) GetPciQuestionnaire(r PCIQuestionnairesApiGetPciQuestionnaireConfig) (GetPciQuestionnaireResponse, *_nethttp.Response, error) {
+func (a *PCIQuestionnairesApi) GetPciQuestionnaire(ctx context.Context, r PCIQuestionnairesApiGetPciQuestionnaireInput) (GetPciQuestionnaireResponse, *http.Response, error) {
 	res := &GetPciQuestionnaireResponse{}
 	path := "/legalEntities/{id}/pciQuestionnaires/{pciid}"
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
 	path = strings.Replace(path, "{"+"pciid"+"}", url.PathEscape(common.ParameterValueToString(r.pciid, "pciid")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type PCIQuestionnairesApiGetPciQuestionnaireDetailsConfig struct {
-	ctx context.Context
-	id  string
+// All parameters accepted by PCIQuestionnairesApi.GetPciQuestionnaireDetails
+type PCIQuestionnairesApiGetPciQuestionnaireDetailsInput struct {
+	id string
+}
+
+/*
+Prepare a request for GetPciQuestionnaireDetails
+@param id The unique identifier of the legal entity to get PCI questionnaire information.
+@return PCIQuestionnairesApiGetPciQuestionnaireDetailsInput
+*/
+func (a *PCIQuestionnairesApi) GetPciQuestionnaireDetailsInput(id string) PCIQuestionnairesApiGetPciQuestionnaireDetailsInput {
+	return PCIQuestionnairesApiGetPciQuestionnaireDetailsInput{
+		id: id,
+	}
 }
 
 /*
@@ -117,42 +140,50 @@ GetPciQuestionnaireDetails Get PCI questionnaire details
 
 Get a list of signed PCI questionnaires.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier of the legal entity to get PCI questionnaire information.
- @return PCIQuestionnairesApiGetPciQuestionnaireDetailsConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r PCIQuestionnairesApiGetPciQuestionnaireDetailsInput - Request parameters, see GetPciQuestionnaireDetailsInput
+@return GetPciQuestionnaireInfosResponse, *http.Response, error
 */
-func (a *PCIQuestionnairesApi) GetPciQuestionnaireDetailsConfig(ctx context.Context, id string) PCIQuestionnairesApiGetPciQuestionnaireDetailsConfig {
-	return PCIQuestionnairesApiGetPciQuestionnaireDetailsConfig{
-		ctx: ctx,
-		id:  id,
-	}
-}
-
-/*
-Get PCI questionnaire details
-Get a list of signed PCI questionnaires.
- * @param id The unique identifier of the legal entity to get PCI questionnaire information.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return GetPciQuestionnaireInfosResponse
-*/
-
-func (a *PCIQuestionnairesApi) GetPciQuestionnaireDetails(r PCIQuestionnairesApiGetPciQuestionnaireDetailsConfig) (GetPciQuestionnaireInfosResponse, *_nethttp.Response, error) {
+func (a *PCIQuestionnairesApi) GetPciQuestionnaireDetails(ctx context.Context, r PCIQuestionnairesApiGetPciQuestionnaireDetailsInput) (GetPciQuestionnaireInfosResponse, *http.Response, error) {
 	res := &GetPciQuestionnaireInfosResponse{}
 	path := "/legalEntities/{id}/pciQuestionnaires"
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type PCIQuestionnairesApiSignPciQuestionnaireConfig struct {
-	ctx               context.Context
+// All parameters accepted by PCIQuestionnairesApi.SignPciQuestionnaire
+type PCIQuestionnairesApiSignPciQuestionnaireInput struct {
 	id                string
 	pciSigningRequest *PciSigningRequest
 }
 
-func (r PCIQuestionnairesApiSignPciQuestionnaireConfig) PciSigningRequest(pciSigningRequest PciSigningRequest) PCIQuestionnairesApiSignPciQuestionnaireConfig {
+func (r PCIQuestionnairesApiSignPciQuestionnaireInput) PciSigningRequest(pciSigningRequest PciSigningRequest) PCIQuestionnairesApiSignPciQuestionnaireInput {
 	r.pciSigningRequest = &pciSigningRequest
 	return r
+}
+
+/*
+Prepare a request for SignPciQuestionnaire
+@param id The legal entity ID of the individual who signed the PCI questionnaire.
+@return PCIQuestionnairesApiSignPciQuestionnaireInput
+*/
+func (a *PCIQuestionnairesApi) SignPciQuestionnaireInput(id string) PCIQuestionnairesApiSignPciQuestionnaireInput {
+	return PCIQuestionnairesApiSignPciQuestionnaireInput{
+		id: id,
+	}
 }
 
 /*
@@ -160,30 +191,26 @@ SignPciQuestionnaire Sign PCI questionnaire
 
 Signs the required PCI questionnaire.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The legal entity ID of the individual who signed the PCI questionnaire.
- @return PCIQuestionnairesApiSignPciQuestionnaireConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r PCIQuestionnairesApiSignPciQuestionnaireInput - Request parameters, see SignPciQuestionnaireInput
+@return PciSigningResponse, *http.Response, error
 */
-func (a *PCIQuestionnairesApi) SignPciQuestionnaireConfig(ctx context.Context, id string) PCIQuestionnairesApiSignPciQuestionnaireConfig {
-	return PCIQuestionnairesApiSignPciQuestionnaireConfig{
-		ctx: ctx,
-		id:  id,
-	}
-}
-
-/*
-Sign PCI questionnaire
-Signs the required PCI questionnaire.
- * @param id The legal entity ID of the individual who signed the PCI questionnaire.
- * @param req PciSigningRequest - reference of PciSigningRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return PciSigningResponse
-*/
-
-func (a *PCIQuestionnairesApi) SignPciQuestionnaire(r PCIQuestionnairesApiSignPciQuestionnaireConfig) (PciSigningResponse, *_nethttp.Response, error) {
+func (a *PCIQuestionnairesApi) SignPciQuestionnaire(ctx context.Context, r PCIQuestionnairesApiSignPciQuestionnaireInput) (PciSigningResponse, *http.Response, error) {
 	res := &PciSigningResponse{}
 	path := "/legalEntities/{id}/pciQuestionnaires/signPciTemplates"
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPost, r.pciSigningRequest, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.pciSigningRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }

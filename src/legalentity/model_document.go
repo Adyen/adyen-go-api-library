@@ -477,7 +477,9 @@ func (o Document) ToMap() (map[string]interface{}, error) {
 		toSerialize["attachment"] = o.Attachment
 	}
 	toSerialize["attachments"] = o.Attachments
-	// skip: creationDate is readOnly
+	if !common.IsNil(o.CreationDate) {
+		toSerialize["creationDate"] = o.CreationDate
+	}
 	toSerialize["description"] = o.Description
 	if !common.IsNil(o.ExpiryDate) {
 		toSerialize["expiryDate"] = o.ExpiryDate
@@ -485,14 +487,18 @@ func (o Document) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.FileName) {
 		toSerialize["fileName"] = o.FileName
 	}
-	// skip: id is readOnly
+	if !common.IsNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
 	if !common.IsNil(o.IssuerCountry) {
 		toSerialize["issuerCountry"] = o.IssuerCountry
 	}
 	if !common.IsNil(o.IssuerState) {
 		toSerialize["issuerState"] = o.IssuerState
 	}
-	// skip: modificationDate is readOnly
+	if !common.IsNil(o.ModificationDate) {
+		toSerialize["modificationDate"] = o.ModificationDate
+	}
 	if !common.IsNil(o.Number) {
 		toSerialize["number"] = o.Number
 	}

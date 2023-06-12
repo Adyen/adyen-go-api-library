@@ -469,11 +469,13 @@ func (o SweepConfigurationV2) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	// skip: id is readOnly
+	toSerialize["id"] = o.Id
 	if !common.IsNil(o.Priorities) {
 		toSerialize["priorities"] = o.Priorities
 	}
-	// skip: reason is readOnly
+	if !common.IsNil(o.Reason) {
+		toSerialize["reason"] = o.Reason
+	}
 	toSerialize["schedule"] = o.Schedule
 	if !common.IsNil(o.Status) {
 		toSerialize["status"] = o.Status

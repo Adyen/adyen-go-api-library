@@ -386,15 +386,21 @@ func (o AccountHolderCapability) MarshalJSON() ([]byte, error) {
 
 func (o AccountHolderCapability) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	// skip: allowed is readOnly
-	// skip: allowedLevel is readOnly
+	if !common.IsNil(o.Allowed) {
+		toSerialize["allowed"] = o.Allowed
+	}
+	if !common.IsNil(o.AllowedLevel) {
+		toSerialize["allowedLevel"] = o.AllowedLevel
+	}
 	if !common.IsNil(o.AllowedSettings) {
 		toSerialize["allowedSettings"] = o.AllowedSettings
 	}
 	if !common.IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
-	// skip: problems is readOnly
+	if !common.IsNil(o.Problems) {
+		toSerialize["problems"] = o.Problems
+	}
 	if !common.IsNil(o.Requested) {
 		toSerialize["requested"] = o.Requested
 	}
@@ -407,7 +413,9 @@ func (o AccountHolderCapability) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.TransferInstruments) {
 		toSerialize["transferInstruments"] = o.TransferInstruments
 	}
-	// skip: verificationStatus is readOnly
+	if !common.IsNil(o.VerificationStatus) {
+		toSerialize["verificationStatus"] = o.VerificationStatus
+	}
 	return toSerialize, nil
 }
 

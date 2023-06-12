@@ -22,9 +22,8 @@ type Currency struct {
 	// Surcharge amount per transaction, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
 	Amount *int32 `json:"amount,omitempty"`
 	// Three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes). For example, **AUD**.
-	CurrencyCode string `json:"currencyCode"`
-	// Surcharge percentage per transaction. The maximum number of decimal places is two. For example, **1%** or **2.27%**.
-	Percentage *float64 `json:"percentage,omitempty"`
+	CurrencyCode string                 `json:"currencyCode"`
+	Percentage   map[string]interface{} `json:"percentage,omitempty"`
 }
 
 // NewCurrency instantiates a new Currency object
@@ -102,19 +101,19 @@ func (o *Currency) SetCurrencyCode(v string) {
 }
 
 // GetPercentage returns the Percentage field value if set, zero value otherwise.
-func (o *Currency) GetPercentage() float64 {
+func (o *Currency) GetPercentage() map[string]interface{} {
 	if o == nil || common.IsNil(o.Percentage) {
-		var ret float64
+		var ret map[string]interface{}
 		return ret
 	}
-	return *o.Percentage
+	return o.Percentage
 }
 
 // GetPercentageOk returns a tuple with the Percentage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Currency) GetPercentageOk() (*float64, bool) {
+func (o *Currency) GetPercentageOk() (map[string]interface{}, bool) {
 	if o == nil || common.IsNil(o.Percentage) {
-		return nil, false
+		return map[string]interface{}{}, false
 	}
 	return o.Percentage, true
 }
@@ -128,9 +127,9 @@ func (o *Currency) HasPercentage() bool {
 	return false
 }
 
-// SetPercentage gets a reference to the given float64 and assigns it to the Percentage field.
-func (o *Currency) SetPercentage(v float64) {
-	o.Percentage = &v
+// SetPercentage gets a reference to the given map[string]interface{} and assigns it to the Percentage field.
+func (o *Currency) SetPercentage(v map[string]interface{}) {
+	o.Percentage = v
 }
 
 func (o Currency) MarshalJSON() ([]byte, error) {

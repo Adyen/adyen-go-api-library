@@ -20,11 +20,11 @@ func ExamplePaymentsApi_PaymentMethods() {
 	})
 	service := client.Checkout()
 
-	req := service.PaymentsApi.PaymentMethodsConfig(context.Background())
+	req := service.PaymentsApi.PaymentMethodsInput()
 	req = req.PaymentMethodsRequest(checkout.PaymentMethodsRequest{
 		MerchantAccount: "your merchant account",
 	})
-	res, httpRes, err := service.PaymentsApi.PaymentMethods(req)
+	res, httpRes, err := service.PaymentsApi.PaymentMethods(context.Background(), req)
 
 	fmt.Println(res.GetPaymentMethods(), httpRes.StatusCode, err)
 	// Output: [] 401 401 : HTTP Status Response - Unauthorized (security: 000)
@@ -38,11 +38,11 @@ func ExampleLiveEnv() {
 	})
 	service := client.Checkout()
 
-	req := service.PaymentsApi.PaymentMethodsConfig(context.Background())
+	req := service.PaymentsApi.PaymentMethodsInput()
 	req = req.PaymentMethodsRequest(checkout.PaymentMethodsRequest{
 		MerchantAccount: "your merchant account",
 	})
-	res, httpRes, err := service.PaymentsApi.PaymentMethods(req)
+	res, httpRes, err := service.PaymentsApi.PaymentMethods(context.Background(), req)
 
 	fmt.Println(res.GetPaymentMethods(), httpRes, err.(*url.Error).URL)
 	// Output: [] <nil> https://1797a841fbb37ca7-AdyenDemo-checkout-live.adyenpayments.com/checkout/v70/paymentMethods
@@ -57,7 +57,7 @@ func ExampleBasicAuth() {
 	})
 	service := client.Recurring()
 
-	req := service.ListRecurringDetailsConfig(context.Background())
+	req := service.ListRecurringDetailsInput()
 	req = req.RecurringDetailsRequest(recurring.RecurringDetailsRequest{
 		MerchantAccount: "your merchant account",
 		Recurring: &recurring.Recurring{
@@ -65,7 +65,7 @@ func ExampleBasicAuth() {
 		},
 		ShopperReference: "ref",
 	})
-	res, httpRes, err := service.ListRecurringDetails(req)
+	res, httpRes, err := service.ListRecurringDetails(context.Background(), req)
 
 	fmt.Println(res, httpRes, err)
 }
@@ -84,9 +84,9 @@ func ExampleError() {
 	})
 	service := client.Checkout()
 
-	req := service.PaymentsApi.PaymentsConfig(context.Background())
+	req := service.PaymentsApi.PaymentsInput()
 	paymentMethod := checkout.IdealDetailsAsCheckoutPaymentMethod(checkout.NewIdealDetails("1121"))
-	_, httpRes, err := service.PaymentsApi.Payments(req.PaymentRequest(checkout.PaymentRequest{
+	_, httpRes, err := service.PaymentsApi.Payments(context.Background(), req.PaymentRequest(checkout.PaymentRequest{
 		Reference: "123456781235",
 		Amount: checkout.Amount{
 			Value:    1250,

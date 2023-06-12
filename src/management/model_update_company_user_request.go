@@ -25,6 +25,10 @@ type UpdateCompanyUserRequest struct {
 	Active *bool `json:"active,omitempty"`
 	// The list of [merchant accounts](https://docs.adyen.com/account/account-structure#merchant-accounts) to associate the user with.
 	AssociatedMerchantAccounts []string `json:"associatedMerchantAccounts,omitempty"`
+	// Set of authn apps to add to this user
+	AuthnAppsToAdd []string `json:"authnAppsToAdd,omitempty"`
+	// Set of authn apps to remove from this user
+	AuthnAppsToRemove []string `json:"authnAppsToRemove,omitempty"`
 	// The email address of the user.
 	Email *string `json:"email,omitempty"`
 	Name  *Name2  `json:"name,omitempty"`
@@ -145,6 +149,70 @@ func (o *UpdateCompanyUserRequest) HasAssociatedMerchantAccounts() bool {
 // SetAssociatedMerchantAccounts gets a reference to the given []string and assigns it to the AssociatedMerchantAccounts field.
 func (o *UpdateCompanyUserRequest) SetAssociatedMerchantAccounts(v []string) {
 	o.AssociatedMerchantAccounts = v
+}
+
+// GetAuthnAppsToAdd returns the AuthnAppsToAdd field value if set, zero value otherwise.
+func (o *UpdateCompanyUserRequest) GetAuthnAppsToAdd() []string {
+	if o == nil || common.IsNil(o.AuthnAppsToAdd) {
+		var ret []string
+		return ret
+	}
+	return o.AuthnAppsToAdd
+}
+
+// GetAuthnAppsToAddOk returns a tuple with the AuthnAppsToAdd field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateCompanyUserRequest) GetAuthnAppsToAddOk() ([]string, bool) {
+	if o == nil || common.IsNil(o.AuthnAppsToAdd) {
+		return nil, false
+	}
+	return o.AuthnAppsToAdd, true
+}
+
+// HasAuthnAppsToAdd returns a boolean if a field has been set.
+func (o *UpdateCompanyUserRequest) HasAuthnAppsToAdd() bool {
+	if o != nil && !common.IsNil(o.AuthnAppsToAdd) {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthnAppsToAdd gets a reference to the given []string and assigns it to the AuthnAppsToAdd field.
+func (o *UpdateCompanyUserRequest) SetAuthnAppsToAdd(v []string) {
+	o.AuthnAppsToAdd = v
+}
+
+// GetAuthnAppsToRemove returns the AuthnAppsToRemove field value if set, zero value otherwise.
+func (o *UpdateCompanyUserRequest) GetAuthnAppsToRemove() []string {
+	if o == nil || common.IsNil(o.AuthnAppsToRemove) {
+		var ret []string
+		return ret
+	}
+	return o.AuthnAppsToRemove
+}
+
+// GetAuthnAppsToRemoveOk returns a tuple with the AuthnAppsToRemove field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateCompanyUserRequest) GetAuthnAppsToRemoveOk() ([]string, bool) {
+	if o == nil || common.IsNil(o.AuthnAppsToRemove) {
+		return nil, false
+	}
+	return o.AuthnAppsToRemove, true
+}
+
+// HasAuthnAppsToRemove returns a boolean if a field has been set.
+func (o *UpdateCompanyUserRequest) HasAuthnAppsToRemove() bool {
+	if o != nil && !common.IsNil(o.AuthnAppsToRemove) {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthnAppsToRemove gets a reference to the given []string and assigns it to the AuthnAppsToRemove field.
+func (o *UpdateCompanyUserRequest) SetAuthnAppsToRemove(v []string) {
+	o.AuthnAppsToRemove = v
 }
 
 // GetEmail returns the Email field value if set, zero value otherwise.
@@ -293,6 +361,12 @@ func (o UpdateCompanyUserRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.AssociatedMerchantAccounts) {
 		toSerialize["associatedMerchantAccounts"] = o.AssociatedMerchantAccounts
+	}
+	if !common.IsNil(o.AuthnAppsToAdd) {
+		toSerialize["authnAppsToAdd"] = o.AuthnAppsToAdd
+	}
+	if !common.IsNil(o.AuthnAppsToRemove) {
+		toSerialize["authnAppsToRemove"] = o.AuthnAppsToRemove
 	}
 	if !common.IsNil(o.Email) {
 		toSerialize["email"] = o.Email

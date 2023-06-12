@@ -10,22 +10,32 @@ package recurring
 
 import (
 	"context"
-	_nethttp "net/http"
+	"net/http"
+	"net/url"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// GeneralApi GeneralApi service
+// GeneralApi service
 type GeneralApi common.Service
 
-type CreatePermitConfig struct {
-	ctx                 context.Context
+// All parameters accepted by GeneralApi.CreatePermit
+type GeneralApiCreatePermitInput struct {
 	createPermitRequest *CreatePermitRequest
 }
 
-func (r CreatePermitConfig) CreatePermitRequest(createPermitRequest CreatePermitRequest) CreatePermitConfig {
+func (r GeneralApiCreatePermitInput) CreatePermitRequest(createPermitRequest CreatePermitRequest) GeneralApiCreatePermitInput {
 	r.createPermitRequest = &createPermitRequest
 	return r
+}
+
+/*
+Prepare a request for CreatePermit
+
+@return GeneralApiCreatePermitInput
+*/
+func (a *GeneralApi) CreatePermitInput() GeneralApiCreatePermitInput {
+	return GeneralApiCreatePermitInput{}
 }
 
 /*
@@ -33,38 +43,46 @@ CreatePermit Create new permits linked to a recurring contract.
 
 Create permits for a recurring contract, including support for defining restrictions.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return CreatePermitConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r GeneralApiCreatePermitInput - Request parameters, see CreatePermitInput
+@return CreatePermitResult, *http.Response, error
 */
-func (a *GeneralApi) CreatePermitConfig(ctx context.Context) CreatePermitConfig {
-	return CreatePermitConfig{
-		ctx: ctx,
-	}
-}
-
-/*
-Create new permits linked to a recurring contract.
-Create permits for a recurring contract, including support for defining restrictions.
- * @param req CreatePermitRequest - reference of CreatePermitRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return CreatePermitResult
-*/
-
-func (a *GeneralApi) CreatePermit(r CreatePermitConfig) (CreatePermitResult, *_nethttp.Response, error) {
+func (a *GeneralApi) CreatePermit(ctx context.Context, r GeneralApiCreatePermitInput) (CreatePermitResult, *http.Response, error) {
 	res := &CreatePermitResult{}
 	path := "/createPermit"
-	httpRes, err := a.Client.MakeHTTPPostRequest(r.createPermitRequest, res, a.BasePath()+path, r.ctx)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.createPermitRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type DisableConfig struct {
-	ctx            context.Context
+// All parameters accepted by GeneralApi.Disable
+type GeneralApiDisableInput struct {
 	disableRequest *DisableRequest
 }
 
-func (r DisableConfig) DisableRequest(disableRequest DisableRequest) DisableConfig {
+func (r GeneralApiDisableInput) DisableRequest(disableRequest DisableRequest) GeneralApiDisableInput {
 	r.disableRequest = &disableRequest
 	return r
+}
+
+/*
+Prepare a request for Disable
+
+@return GeneralApiDisableInput
+*/
+func (a *GeneralApi) DisableInput() GeneralApiDisableInput {
+	return GeneralApiDisableInput{}
 }
 
 /*
@@ -74,38 +92,46 @@ Disables stored payment details to stop charging a shopper with this particular 
 
 For more information, refer to [Disable stored details](https://docs.adyen.com/classic-integration/recurring-payments/disable-stored-details/).
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return DisableConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r GeneralApiDisableInput - Request parameters, see DisableInput
+@return DisableResult, *http.Response, error
 */
-func (a *GeneralApi) DisableConfig(ctx context.Context) DisableConfig {
-	return DisableConfig{
-		ctx: ctx,
-	}
-}
-
-/*
-Disable stored payment details
-Disables stored payment details to stop charging a shopper with this particular recurring detail ID.  For more information, refer to [Disable stored details](https://docs.adyen.com/classic-integration/recurring-payments/disable-stored-details/).
- * @param req DisableRequest - reference of DisableRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return DisableResult
-*/
-
-func (a *GeneralApi) Disable(r DisableConfig) (DisableResult, *_nethttp.Response, error) {
+func (a *GeneralApi) Disable(ctx context.Context, r GeneralApiDisableInput) (DisableResult, *http.Response, error) {
 	res := &DisableResult{}
 	path := "/disable"
-	httpRes, err := a.Client.MakeHTTPPostRequest(r.disableRequest, res, a.BasePath()+path, r.ctx)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.disableRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type DisablePermitConfig struct {
-	ctx                  context.Context
+// All parameters accepted by GeneralApi.DisablePermit
+type GeneralApiDisablePermitInput struct {
 	disablePermitRequest *DisablePermitRequest
 }
 
-func (r DisablePermitConfig) DisablePermitRequest(disablePermitRequest DisablePermitRequest) DisablePermitConfig {
+func (r GeneralApiDisablePermitInput) DisablePermitRequest(disablePermitRequest DisablePermitRequest) GeneralApiDisablePermitInput {
 	r.disablePermitRequest = &disablePermitRequest
 	return r
+}
+
+/*
+Prepare a request for DisablePermit
+
+@return GeneralApiDisablePermitInput
+*/
+func (a *GeneralApi) DisablePermitInput() GeneralApiDisablePermitInput {
+	return GeneralApiDisablePermitInput{}
 }
 
 /*
@@ -113,38 +139,46 @@ DisablePermit Disable an existing permit.
 
 Disable a permit that was previously linked to a recurringDetailReference.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return DisablePermitConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r GeneralApiDisablePermitInput - Request parameters, see DisablePermitInput
+@return DisablePermitResult, *http.Response, error
 */
-func (a *GeneralApi) DisablePermitConfig(ctx context.Context) DisablePermitConfig {
-	return DisablePermitConfig{
-		ctx: ctx,
-	}
-}
-
-/*
-Disable an existing permit.
-Disable a permit that was previously linked to a recurringDetailReference.
- * @param req DisablePermitRequest - reference of DisablePermitRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return DisablePermitResult
-*/
-
-func (a *GeneralApi) DisablePermit(r DisablePermitConfig) (DisablePermitResult, *_nethttp.Response, error) {
+func (a *GeneralApi) DisablePermit(ctx context.Context, r GeneralApiDisablePermitInput) (DisablePermitResult, *http.Response, error) {
 	res := &DisablePermitResult{}
 	path := "/disablePermit"
-	httpRes, err := a.Client.MakeHTTPPostRequest(r.disablePermitRequest, res, a.BasePath()+path, r.ctx)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.disablePermitRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type ListRecurringDetailsConfig struct {
-	ctx                     context.Context
+// All parameters accepted by GeneralApi.ListRecurringDetails
+type GeneralApiListRecurringDetailsInput struct {
 	recurringDetailsRequest *RecurringDetailsRequest
 }
 
-func (r ListRecurringDetailsConfig) RecurringDetailsRequest(recurringDetailsRequest RecurringDetailsRequest) ListRecurringDetailsConfig {
+func (r GeneralApiListRecurringDetailsInput) RecurringDetailsRequest(recurringDetailsRequest RecurringDetailsRequest) GeneralApiListRecurringDetailsInput {
 	r.recurringDetailsRequest = &recurringDetailsRequest
 	return r
+}
+
+/*
+Prepare a request for ListRecurringDetails
+
+@return GeneralApiListRecurringDetailsInput
+*/
+func (a *GeneralApi) ListRecurringDetailsInput() GeneralApiListRecurringDetailsInput {
+	return GeneralApiListRecurringDetailsInput{}
 }
 
 /*
@@ -154,38 +188,46 @@ Lists the stored payment details for a shopper, if there are any available. The 
 
 For more information, refer to [Retrieve stored details](https://docs.adyen.com/classic-integration/recurring-payments/retrieve-stored-details/).
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ListRecurringDetailsConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r GeneralApiListRecurringDetailsInput - Request parameters, see ListRecurringDetailsInput
+@return RecurringDetailsResult, *http.Response, error
 */
-func (a *GeneralApi) ListRecurringDetailsConfig(ctx context.Context) ListRecurringDetailsConfig {
-	return ListRecurringDetailsConfig{
-		ctx: ctx,
-	}
-}
-
-/*
-Get stored payment details
-Lists the stored payment details for a shopper, if there are any available. The recurring detail ID can be used with a regular authorisation request to charge the shopper. A summary of the payment detail is returned for presentation to the shopper.  For more information, refer to [Retrieve stored details](https://docs.adyen.com/classic-integration/recurring-payments/retrieve-stored-details/).
- * @param req RecurringDetailsRequest - reference of RecurringDetailsRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return RecurringDetailsResult
-*/
-
-func (a *GeneralApi) ListRecurringDetails(r ListRecurringDetailsConfig) (RecurringDetailsResult, *_nethttp.Response, error) {
+func (a *GeneralApi) ListRecurringDetails(ctx context.Context, r GeneralApiListRecurringDetailsInput) (RecurringDetailsResult, *http.Response, error) {
 	res := &RecurringDetailsResult{}
 	path := "/listRecurringDetails"
-	httpRes, err := a.Client.MakeHTTPPostRequest(r.recurringDetailsRequest, res, a.BasePath()+path, r.ctx)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.recurringDetailsRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type NotifyShopperConfig struct {
-	ctx                  context.Context
+// All parameters accepted by GeneralApi.NotifyShopper
+type GeneralApiNotifyShopperInput struct {
 	notifyShopperRequest *NotifyShopperRequest
 }
 
-func (r NotifyShopperConfig) NotifyShopperRequest(notifyShopperRequest NotifyShopperRequest) NotifyShopperConfig {
+func (r GeneralApiNotifyShopperInput) NotifyShopperRequest(notifyShopperRequest NotifyShopperRequest) GeneralApiNotifyShopperInput {
 	r.notifyShopperRequest = &notifyShopperRequest
 	return r
+}
+
+/*
+Prepare a request for NotifyShopper
+
+@return GeneralApiNotifyShopperInput
+*/
+func (a *GeneralApi) NotifyShopperInput() GeneralApiNotifyShopperInput {
+	return GeneralApiNotifyShopperInput{}
 }
 
 /*
@@ -193,38 +235,46 @@ NotifyShopper Ask issuer to notify the shopper
 
 Sends a request to the issuer so they can inform the shopper about the upcoming recurring payment. This endpoint is used only for local acquiring in India. For more information, refer to [Recurring card payments in India](https://docs.adyen.com/payment-methods/cards/cards-recurring-india).
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return NotifyShopperConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r GeneralApiNotifyShopperInput - Request parameters, see NotifyShopperInput
+@return NotifyShopperResult, *http.Response, error
 */
-func (a *GeneralApi) NotifyShopperConfig(ctx context.Context) NotifyShopperConfig {
-	return NotifyShopperConfig{
-		ctx: ctx,
-	}
-}
-
-/*
-Ask issuer to notify the shopper
-Sends a request to the issuer so they can inform the shopper about the upcoming recurring payment. This endpoint is used only for local acquiring in India. For more information, refer to [Recurring card payments in India](https://docs.adyen.com/payment-methods/cards/cards-recurring-india).
- * @param req NotifyShopperRequest - reference of NotifyShopperRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return NotifyShopperResult
-*/
-
-func (a *GeneralApi) NotifyShopper(r NotifyShopperConfig) (NotifyShopperResult, *_nethttp.Response, error) {
+func (a *GeneralApi) NotifyShopper(ctx context.Context, r GeneralApiNotifyShopperInput) (NotifyShopperResult, *http.Response, error) {
 	res := &NotifyShopperResult{}
 	path := "/notifyShopper"
-	httpRes, err := a.Client.MakeHTTPPostRequest(r.notifyShopperRequest, res, a.BasePath()+path, r.ctx)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.notifyShopperRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type ScheduleAccountUpdaterConfig struct {
-	ctx                           context.Context
+// All parameters accepted by GeneralApi.ScheduleAccountUpdater
+type GeneralApiScheduleAccountUpdaterInput struct {
 	scheduleAccountUpdaterRequest *ScheduleAccountUpdaterRequest
 }
 
-func (r ScheduleAccountUpdaterConfig) ScheduleAccountUpdaterRequest(scheduleAccountUpdaterRequest ScheduleAccountUpdaterRequest) ScheduleAccountUpdaterConfig {
+func (r GeneralApiScheduleAccountUpdaterInput) ScheduleAccountUpdaterRequest(scheduleAccountUpdaterRequest ScheduleAccountUpdaterRequest) GeneralApiScheduleAccountUpdaterInput {
 	r.scheduleAccountUpdaterRequest = &scheduleAccountUpdaterRequest
 	return r
+}
+
+/*
+Prepare a request for ScheduleAccountUpdater
+
+@return GeneralApiScheduleAccountUpdaterInput
+*/
+func (a *GeneralApi) ScheduleAccountUpdaterInput() GeneralApiScheduleAccountUpdaterInput {
+	return GeneralApiScheduleAccountUpdaterInput{}
 }
 
 /*
@@ -234,26 +284,25 @@ When making the API call, you can submit either the credit card information, or 
 * If the card information is provided, all the sub-fields for `card` are mandatory.
 * If the recurring detail reference is provided, the fields for `shopperReference` and `selectedRecurringDetailReference` are mandatory.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ScheduleAccountUpdaterConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r GeneralApiScheduleAccountUpdaterInput - Request parameters, see ScheduleAccountUpdaterInput
+@return ScheduleAccountUpdaterResult, *http.Response, error
 */
-func (a *GeneralApi) ScheduleAccountUpdaterConfig(ctx context.Context) ScheduleAccountUpdaterConfig {
-	return ScheduleAccountUpdaterConfig{
-		ctx: ctx,
-	}
-}
-
-/*
-Schedule running the Account Updater
-When making the API call, you can submit either the credit card information, or the recurring detail reference and the shopper reference: * If the card information is provided, all the sub-fields for &#x60;card&#x60; are mandatory. * If the recurring detail reference is provided, the fields for &#x60;shopperReference&#x60; and &#x60;selectedRecurringDetailReference&#x60; are mandatory.
- * @param req ScheduleAccountUpdaterRequest - reference of ScheduleAccountUpdaterRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return ScheduleAccountUpdaterResult
-*/
-
-func (a *GeneralApi) ScheduleAccountUpdater(r ScheduleAccountUpdaterConfig) (ScheduleAccountUpdaterResult, *_nethttp.Response, error) {
+func (a *GeneralApi) ScheduleAccountUpdater(ctx context.Context, r GeneralApiScheduleAccountUpdaterInput) (ScheduleAccountUpdaterResult, *http.Response, error) {
 	res := &ScheduleAccountUpdaterResult{}
 	path := "/scheduleAccountUpdater"
-	httpRes, err := a.Client.MakeHTTPPostRequest(r.scheduleAccountUpdaterRequest, res, a.BasePath()+path, r.ctx)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.scheduleAccountUpdaterRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }

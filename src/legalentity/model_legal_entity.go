@@ -450,7 +450,9 @@ func (o LegalEntity) MarshalJSON() ([]byte, error) {
 
 func (o LegalEntity) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	// skip: capabilities is readOnly
+	if !common.IsNil(o.Capabilities) {
+		toSerialize["capabilities"] = o.Capabilities
+	}
 	if !common.IsNil(o.DocumentDetails) {
 		toSerialize["documentDetails"] = o.DocumentDetails
 	}
@@ -460,7 +462,7 @@ func (o LegalEntity) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.EntityAssociations) {
 		toSerialize["entityAssociations"] = o.EntityAssociations
 	}
-	// skip: id is readOnly
+	toSerialize["id"] = o.Id
 	if !common.IsNil(o.Individual) {
 		toSerialize["individual"] = o.Individual
 	}
@@ -476,7 +478,9 @@ func (o LegalEntity) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.SoleProprietorship) {
 		toSerialize["soleProprietorship"] = o.SoleProprietorship
 	}
-	// skip: transferInstruments is readOnly
+	if !common.IsNil(o.TransferInstruments) {
+		toSerialize["transferInstruments"] = o.TransferInstruments
+	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}

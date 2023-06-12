@@ -286,19 +286,27 @@ func (o AccountSupportingEntityCapability) MarshalJSON() ([]byte, error) {
 
 func (o AccountSupportingEntityCapability) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	// skip: allowed is readOnly
-	// skip: allowedLevel is readOnly
+	if !common.IsNil(o.Allowed) {
+		toSerialize["allowed"] = o.Allowed
+	}
+	if !common.IsNil(o.AllowedLevel) {
+		toSerialize["allowedLevel"] = o.AllowedLevel
+	}
 	if !common.IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
-	// skip: id is readOnly
+	if !common.IsNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
 	if !common.IsNil(o.Requested) {
 		toSerialize["requested"] = o.Requested
 	}
 	if !common.IsNil(o.RequestedLevel) {
 		toSerialize["requestedLevel"] = o.RequestedLevel
 	}
-	// skip: verificationStatus is readOnly
+	if !common.IsNil(o.VerificationStatus) {
+		toSerialize["verificationStatus"] = o.VerificationStatus
+	}
 	return toSerialize, nil
 }
 

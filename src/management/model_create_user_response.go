@@ -24,8 +24,8 @@ type CreateUserResponse struct {
 	AccountGroups []string `json:"accountGroups,omitempty"`
 	// Indicates whether this user is active.
 	Active *bool `json:"active,omitempty"`
-	// Set of apps available to this user
-	Apps []string `json:"apps,omitempty"`
+	// Set of authn apps available to this user
+	AuthnApps []string `json:"authnApps,omitempty"`
 	// The email address of the user.
 	Email string `json:"email"`
 	// The unique identifier of the user.
@@ -157,36 +157,36 @@ func (o *CreateUserResponse) SetActive(v bool) {
 	o.Active = &v
 }
 
-// GetApps returns the Apps field value if set, zero value otherwise.
-func (o *CreateUserResponse) GetApps() []string {
-	if o == nil || common.IsNil(o.Apps) {
+// GetAuthnApps returns the AuthnApps field value if set, zero value otherwise.
+func (o *CreateUserResponse) GetAuthnApps() []string {
+	if o == nil || common.IsNil(o.AuthnApps) {
 		var ret []string
 		return ret
 	}
-	return o.Apps
+	return o.AuthnApps
 }
 
-// GetAppsOk returns a tuple with the Apps field value if set, nil otherwise
+// GetAuthnAppsOk returns a tuple with the AuthnApps field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateUserResponse) GetAppsOk() ([]string, bool) {
-	if o == nil || common.IsNil(o.Apps) {
+func (o *CreateUserResponse) GetAuthnAppsOk() ([]string, bool) {
+	if o == nil || common.IsNil(o.AuthnApps) {
 		return nil, false
 	}
-	return o.Apps, true
+	return o.AuthnApps, true
 }
 
-// HasApps returns a boolean if a field has been set.
-func (o *CreateUserResponse) HasApps() bool {
-	if o != nil && !common.IsNil(o.Apps) {
+// HasAuthnApps returns a boolean if a field has been set.
+func (o *CreateUserResponse) HasAuthnApps() bool {
+	if o != nil && !common.IsNil(o.AuthnApps) {
 		return true
 	}
 
 	return false
 }
 
-// SetApps gets a reference to the given []string and assigns it to the Apps field.
-func (o *CreateUserResponse) SetApps(v []string) {
-	o.Apps = v
+// SetAuthnApps gets a reference to the given []string and assigns it to the AuthnApps field.
+func (o *CreateUserResponse) SetAuthnApps(v []string) {
+	o.AuthnApps = v
 }
 
 // GetEmail returns the Email field value
@@ -360,8 +360,8 @@ func (o CreateUserResponse) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Active) {
 		toSerialize["active"] = o.Active
 	}
-	if !common.IsNil(o.Apps) {
-		toSerialize["apps"] = o.Apps
+	if !common.IsNil(o.AuthnApps) {
+		toSerialize["authnApps"] = o.AuthnApps
 	}
 	toSerialize["email"] = o.Email
 	toSerialize["id"] = o.Id

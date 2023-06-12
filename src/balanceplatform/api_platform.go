@@ -10,33 +10,44 @@ package balanceplatform
 
 import (
 	"context"
-	_nethttp "net/http"
+	"net/http"
 	"net/url"
 	"strings"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// PlatformApi PlatformApi service
+// PlatformApi service
 type PlatformApi common.Service
 
-type GetAllAccountHoldersUnderBalancePlatformConfig struct {
-	ctx    context.Context
+// All parameters accepted by PlatformApi.GetAllAccountHoldersUnderBalancePlatform
+type PlatformApiGetAllAccountHoldersUnderBalancePlatformInput struct {
 	id     string
 	offset *int32
 	limit  *int32
 }
 
 // The number of items that you want to skip.
-func (r GetAllAccountHoldersUnderBalancePlatformConfig) Offset(offset int32) GetAllAccountHoldersUnderBalancePlatformConfig {
+func (r PlatformApiGetAllAccountHoldersUnderBalancePlatformInput) Offset(offset int32) PlatformApiGetAllAccountHoldersUnderBalancePlatformInput {
 	r.offset = &offset
 	return r
 }
 
 // The number of items returned per page, maximum 100 items. By default, the response returns 10 items per page.
-func (r GetAllAccountHoldersUnderBalancePlatformConfig) Limit(limit int32) GetAllAccountHoldersUnderBalancePlatformConfig {
+func (r PlatformApiGetAllAccountHoldersUnderBalancePlatformInput) Limit(limit int32) PlatformApiGetAllAccountHoldersUnderBalancePlatformInput {
 	r.limit = &limit
 	return r
+}
+
+/*
+Prepare a request for GetAllAccountHoldersUnderBalancePlatform
+@param id The unique identifier of the balance platform.
+@return PlatformApiGetAllAccountHoldersUnderBalancePlatformInput
+*/
+func (a *PlatformApi) GetAllAccountHoldersUnderBalancePlatformInput(id string) PlatformApiGetAllAccountHoldersUnderBalancePlatformInput {
+	return PlatformApiGetAllAccountHoldersUnderBalancePlatformInput{
+		id: id,
+	}
 }
 
 /*
@@ -46,43 +57,50 @@ Returns a paginated list of all the account holders that belong to the balance p
 
 For example, to limit the page to 5 account holders and to skip the first 20, use `/balancePlatforms/{id}/accountHolders?limit=5&offset=20`.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier of the balance platform.
- @return GetAllAccountHoldersUnderBalancePlatformConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r PlatformApiGetAllAccountHoldersUnderBalancePlatformInput - Request parameters, see GetAllAccountHoldersUnderBalancePlatformInput
+@return PaginatedAccountHoldersResponse, *http.Response, error
 */
-func (a *PlatformApi) GetAllAccountHoldersUnderBalancePlatformConfig(ctx context.Context, id string) GetAllAccountHoldersUnderBalancePlatformConfig {
-	return GetAllAccountHoldersUnderBalancePlatformConfig{
-		ctx: ctx,
-		id:  id,
-	}
-}
-
-/*
-Get all account holders under a balance platform
-Returns a paginated list of all the account holders that belong to the balance platform. To fetch multiple pages, use the query parameters.   For example, to limit the page to 5 account holders and to skip the first 20, use &#x60;/balancePlatforms/{id}/accountHolders?limit&#x3D;5&amp;offset&#x3D;20&#x60;.
- * @param id The unique identifier of the balance platform.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return PaginatedAccountHoldersResponse
-*/
-
-func (a *PlatformApi) GetAllAccountHoldersUnderBalancePlatform(r GetAllAccountHoldersUnderBalancePlatformConfig) (PaginatedAccountHoldersResponse, *_nethttp.Response, error) {
+func (a *PlatformApi) GetAllAccountHoldersUnderBalancePlatform(ctx context.Context, r PlatformApiGetAllAccountHoldersUnderBalancePlatformInput) (PaginatedAccountHoldersResponse, *http.Response, error) {
 	res := &PaginatedAccountHoldersResponse{}
 	path := "/balancePlatforms/{id}/accountHolders"
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-	queryString := url.Values{}
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
 	if r.offset != nil {
-		common.ParameterAddToQuery(queryString, "offset", r.offset, "")
+		common.ParameterAddToQuery(queryParams, "offset", r.offset, "")
 	}
 	if r.limit != nil {
-		common.ParameterAddToQuery(queryString, "limit", r.limit, "")
+		common.ParameterAddToQuery(queryParams, "limit", r.limit, "")
 	}
-	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path+"?"+queryString.Encode(), r.ctx)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type GetBalancePlatformConfig struct {
-	ctx context.Context
-	id  string
+// All parameters accepted by PlatformApi.GetBalancePlatform
+type PlatformApiGetBalancePlatformInput struct {
+	id string
+}
+
+/*
+Prepare a request for GetBalancePlatform
+@param id The unique identifier of the balance platform.
+@return PlatformApiGetBalancePlatformInput
+*/
+func (a *PlatformApi) GetBalancePlatformInput(id string) PlatformApiGetBalancePlatformInput {
+	return PlatformApiGetBalancePlatformInput{
+		id: id,
+	}
 }
 
 /*
@@ -90,29 +108,26 @@ GetBalancePlatform Get a balance platform
 
 Returns a balance platform.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier of the balance platform.
- @return GetBalancePlatformConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r PlatformApiGetBalancePlatformInput - Request parameters, see GetBalancePlatformInput
+@return BalancePlatform, *http.Response, error
 */
-func (a *PlatformApi) GetBalancePlatformConfig(ctx context.Context, id string) GetBalancePlatformConfig {
-	return GetBalancePlatformConfig{
-		ctx: ctx,
-		id:  id,
-	}
-}
-
-/*
-Get a balance platform
-Returns a balance platform.
- * @param id The unique identifier of the balance platform.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return BalancePlatform
-*/
-
-func (a *PlatformApi) GetBalancePlatform(r GetBalancePlatformConfig) (BalancePlatform, *_nethttp.Response, error) {
+func (a *PlatformApi) GetBalancePlatform(ctx context.Context, r PlatformApiGetBalancePlatformInput) (BalancePlatform, *http.Response, error) {
 	res := &BalancePlatform{}
 	path := "/balancePlatforms/{id}"
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-	httpRes, err := a.Client.MakeHTTPGetRequest(res, a.BasePath()+path, r.ctx)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }

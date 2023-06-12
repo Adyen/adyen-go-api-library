@@ -21,7 +21,7 @@ var _ common.MappedNullable = &PaymentMethodResponse{}
 type PaymentMethodResponse struct {
 	Links *PaginationLinks `json:"_links,omitempty"`
 	// Payment methods details.
-	Data []PaymentMethodWrapper `json:"data,omitempty"`
+	Data []PaymentMethod `json:"data,omitempty"`
 	// Total number of items.
 	ItemsTotal int32 `json:"itemsTotal"`
 	// Total number of pages.
@@ -82,9 +82,9 @@ func (o *PaymentMethodResponse) SetLinks(v PaginationLinks) {
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *PaymentMethodResponse) GetData() []PaymentMethodWrapper {
+func (o *PaymentMethodResponse) GetData() []PaymentMethod {
 	if o == nil || common.IsNil(o.Data) {
-		var ret []PaymentMethodWrapper
+		var ret []PaymentMethod
 		return ret
 	}
 	return o.Data
@@ -92,7 +92,7 @@ func (o *PaymentMethodResponse) GetData() []PaymentMethodWrapper {
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentMethodResponse) GetDataOk() ([]PaymentMethodWrapper, bool) {
+func (o *PaymentMethodResponse) GetDataOk() ([]PaymentMethod, bool) {
 	if o == nil || common.IsNil(o.Data) {
 		return nil, false
 	}
@@ -108,8 +108,8 @@ func (o *PaymentMethodResponse) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given []PaymentMethodWrapper and assigns it to the Data field.
-func (o *PaymentMethodResponse) SetData(v []PaymentMethodWrapper) {
+// SetData gets a reference to the given []PaymentMethod and assigns it to the Data field.
+func (o *PaymentMethodResponse) SetData(v []PaymentMethod) {
 	o.Data = v
 }
 

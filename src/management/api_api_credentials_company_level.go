@@ -12,25 +12,36 @@ import (
 	"context"
 	"encoding/json"
 	"io/ioutil"
-	_nethttp "net/http"
+	"net/http"
 	"net/url"
 	"strings"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// APICredentialsCompanyLevelApi APICredentialsCompanyLevelApi service
+// APICredentialsCompanyLevelApi service
 type APICredentialsCompanyLevelApi common.Service
 
-type APICredentialsCompanyLevelApiCreateApiCredentialConfig struct {
-	ctx                               context.Context
+// All parameters accepted by APICredentialsCompanyLevelApi.CreateApiCredential
+type APICredentialsCompanyLevelApiCreateApiCredentialInput struct {
 	companyId                         string
 	createCompanyApiCredentialRequest *CreateCompanyApiCredentialRequest
 }
 
-func (r APICredentialsCompanyLevelApiCreateApiCredentialConfig) CreateCompanyApiCredentialRequest(createCompanyApiCredentialRequest CreateCompanyApiCredentialRequest) APICredentialsCompanyLevelApiCreateApiCredentialConfig {
+func (r APICredentialsCompanyLevelApiCreateApiCredentialInput) CreateCompanyApiCredentialRequest(createCompanyApiCredentialRequest CreateCompanyApiCredentialRequest) APICredentialsCompanyLevelApiCreateApiCredentialInput {
 	r.createCompanyApiCredentialRequest = &createCompanyApiCredentialRequest
 	return r
+}
+
+/*
+Prepare a request for CreateApiCredential
+@param companyId The unique identifier of the company account.
+@return APICredentialsCompanyLevelApiCreateApiCredentialInput
+*/
+func (a *APICredentialsCompanyLevelApi) CreateApiCredentialInput(companyId string) APICredentialsCompanyLevelApiCreateApiCredentialInput {
+	return APICredentialsCompanyLevelApiCreateApiCredentialInput{
+		companyId: companyId,
+	}
 }
 
 /*
@@ -50,86 +61,93 @@ If your API key is lost or compromised, you need to [generate a new API key](htt
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—API credentials read and write
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param companyId The unique identifier of the company account.
-	@return APICredentialsCompanyLevelApiCreateApiCredentialConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r APICredentialsCompanyLevelApiCreateApiCredentialInput - Request parameters, see CreateApiCredentialInput
+@return CreateCompanyApiCredentialResponse, *http.Response, error
 */
-func (a *APICredentialsCompanyLevelApi) CreateApiCredentialConfig(ctx context.Context, companyId string) APICredentialsCompanyLevelApiCreateApiCredentialConfig {
-	return APICredentialsCompanyLevelApiCreateApiCredentialConfig{
-		ctx:       ctx,
-		companyId: companyId,
-	}
-}
-
-/*
-Create an API credential.
-Creates an [API credential](https://docs.adyen.com/development-resources/api-credentials) for the company account identified in the path. In the request, you can specify which merchant accounts the new API credential will have access to, as well as its roles and allowed origins.  The response includes several types of authentication details: * [API key](https://docs.adyen.com/development-resources/api-authentication#api-key-authentication): used for API request authentication. * [Client key](https://docs.adyen.com/development-resources/client-side-authentication#how-it-works): public key used for client-side authentication. * [Username and password](https://docs.adyen.com/development-resources/api-authentication#using-basic-authentication): used for basic authentication.  &gt; Make sure you store the API key securely in your system. You won&#39;t be able to retrieve it later.  If your API key is lost or compromised, you need to [generate a new API key](https://docs.adyen.com/api-explorer/#/ManagementService/v1/post/companies/{companyId}/apiCredentials/{apiCredentialId}/generateApiKey).  To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—API credentials read and write
- * @param companyId The unique identifier of the company account.
- * @param req CreateCompanyApiCredentialRequest - reference of CreateCompanyApiCredentialRequest).
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return CreateCompanyApiCredentialResponse
-*/
-
-func (a *APICredentialsCompanyLevelApi) CreateApiCredential(r APICredentialsCompanyLevelApiCreateApiCredentialConfig) (CreateCompanyApiCredentialResponse, *_nethttp.Response, error) {
-	var serviceError common.RestServiceError
+func (a *APICredentialsCompanyLevelApi) CreateApiCredential(ctx context.Context, r APICredentialsCompanyLevelApiCreateApiCredentialInput) (CreateCompanyApiCredentialResponse, *http.Response, error) {
 	res := &CreateCompanyApiCredentialResponse{}
 	path := "/companies/{companyId}/apiCredentials"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		r.createCompanyApiCredentialRequest,
 		res,
-		_nethttp.MethodPost,
+		http.MethodPost,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
-	defer httpRes.Body.Close()
+
+	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
+
 	return *res, httpRes, err
 }
 
-type APICredentialsCompanyLevelApiGetApiCredentialConfig struct {
-	ctx             context.Context
+// All parameters accepted by APICredentialsCompanyLevelApi.GetApiCredential
+type APICredentialsCompanyLevelApiGetApiCredentialInput struct {
 	companyId       string
 	apiCredentialId string
+}
+
+/*
+Prepare a request for GetApiCredential
+@param companyId The unique identifier of the company account.@param apiCredentialId Unique identifier of the API credential.
+@return APICredentialsCompanyLevelApiGetApiCredentialInput
+*/
+func (a *APICredentialsCompanyLevelApi) GetApiCredentialInput(companyId string, apiCredentialId string) APICredentialsCompanyLevelApiGetApiCredentialInput {
+	return APICredentialsCompanyLevelApiGetApiCredentialInput{
+		companyId:       companyId,
+		apiCredentialId: apiCredentialId,
+	}
 }
 
 /*
@@ -140,30 +158,11 @@ Returns the [API credential](https://docs.adyen.com/development-resources/api-cr
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—API credentials read and write
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param companyId The unique identifier of the company account.
-	@param apiCredentialId Unique identifier of the API credential.
-	@return APICredentialsCompanyLevelApiGetApiCredentialConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r APICredentialsCompanyLevelApiGetApiCredentialInput - Request parameters, see GetApiCredentialInput
+@return CompanyApiCredential, *http.Response, error
 */
-func (a *APICredentialsCompanyLevelApi) GetApiCredentialConfig(ctx context.Context, companyId string, apiCredentialId string) APICredentialsCompanyLevelApiGetApiCredentialConfig {
-	return APICredentialsCompanyLevelApiGetApiCredentialConfig{
-		ctx:             ctx,
-		companyId:       companyId,
-		apiCredentialId: apiCredentialId,
-	}
-}
-
-/*
-Get an API credential
-Returns the [API credential](https://docs.adyen.com/development-resources/api-credentials) identified in the path.  To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—API credentials read and write
- * @param companyId The unique identifier of the company account.
- * @param apiCredentialId Unique identifier of the API credential.
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return CompanyApiCredential
-*/
-
-func (a *APICredentialsCompanyLevelApi) GetApiCredential(r APICredentialsCompanyLevelApiGetApiCredentialConfig) (CompanyApiCredential, *_nethttp.Response, error) {
-	var serviceError common.RestServiceError
+func (a *APICredentialsCompanyLevelApi) GetApiCredential(ctx context.Context, r APICredentialsCompanyLevelApiGetApiCredentialInput) (CompanyApiCredential, *http.Response, error) {
 	res := &CompanyApiCredential{}
 	path := "/companies/{companyId}/apiCredentials/{apiCredentialId}"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -171,71 +170,94 @@ func (a *APICredentialsCompanyLevelApi) GetApiCredential(r APICredentialsCompany
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		nil,
 		res,
-		_nethttp.MethodGet,
+		http.MethodGet,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
-	defer httpRes.Body.Close()
+
+	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
+
 	return *res, httpRes, err
 }
 
-type APICredentialsCompanyLevelApiListApiCredentialsConfig struct {
-	ctx        context.Context
+// All parameters accepted by APICredentialsCompanyLevelApi.ListApiCredentials
+type APICredentialsCompanyLevelApiListApiCredentialsInput struct {
 	companyId  string
 	pageNumber *int32
 	pageSize   *int32
 }
 
 // The number of the page to fetch.
-func (r APICredentialsCompanyLevelApiListApiCredentialsConfig) PageNumber(pageNumber int32) APICredentialsCompanyLevelApiListApiCredentialsConfig {
+func (r APICredentialsCompanyLevelApiListApiCredentialsInput) PageNumber(pageNumber int32) APICredentialsCompanyLevelApiListApiCredentialsInput {
 	r.pageNumber = &pageNumber
 	return r
 }
 
 // The number of items to have on a page, maximum 100. The default is 10 items on a page.
-func (r APICredentialsCompanyLevelApiListApiCredentialsConfig) PageSize(pageSize int32) APICredentialsCompanyLevelApiListApiCredentialsConfig {
+func (r APICredentialsCompanyLevelApiListApiCredentialsInput) PageSize(pageSize int32) APICredentialsCompanyLevelApiListApiCredentialsInput {
 	r.pageSize = &pageSize
 	return r
+}
+
+/*
+Prepare a request for ListApiCredentials
+@param companyId The unique identifier of the company account.
+@return APICredentialsCompanyLevelApiListApiCredentialsInput
+*/
+func (a *APICredentialsCompanyLevelApi) ListApiCredentialsInput(companyId string) APICredentialsCompanyLevelApiListApiCredentialsInput {
+	return APICredentialsCompanyLevelApiListApiCredentialsInput{
+		companyId: companyId,
+	}
 }
 
 /*
@@ -246,27 +268,11 @@ Returns the list of [API credentials](https://docs.adyen.com/development-resourc
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—API credentials read and write
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param companyId The unique identifier of the company account.
-	@return APICredentialsCompanyLevelApiListApiCredentialsConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r APICredentialsCompanyLevelApiListApiCredentialsInput - Request parameters, see ListApiCredentialsInput
+@return ListCompanyApiCredentialsResponse, *http.Response, error
 */
-func (a *APICredentialsCompanyLevelApi) ListApiCredentialsConfig(ctx context.Context, companyId string) APICredentialsCompanyLevelApiListApiCredentialsConfig {
-	return APICredentialsCompanyLevelApiListApiCredentialsConfig{
-		ctx:       ctx,
-		companyId: companyId,
-	}
-}
-
-/*
-Get a list of API credentials
-Returns the list of [API credentials](https://docs.adyen.com/development-resources/api-credentials) for the company account. The list is grouped into pages as defined by the query parameters.  To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—API credentials read and write
- * @param companyId The unique identifier of the company account.
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return ListCompanyApiCredentialsResponse
-*/
-
-func (a *APICredentialsCompanyLevelApi) ListApiCredentials(r APICredentialsCompanyLevelApiListApiCredentialsConfig) (ListCompanyApiCredentialsResponse, *_nethttp.Response, error) {
-	var serviceError common.RestServiceError
+func (a *APICredentialsCompanyLevelApi) ListApiCredentials(ctx context.Context, r APICredentialsCompanyLevelApiListApiCredentialsInput) (ListCompanyApiCredentialsResponse, *http.Response, error) {
 	res := &ListCompanyApiCredentialsResponse{}
 	path := "/companies/{companyId}/apiCredentials"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -279,64 +285,88 @@ func (a *APICredentialsCompanyLevelApi) ListApiCredentials(r APICredentialsCompa
 		common.ParameterAddToQuery(queryParams, "pageSize", r.pageSize, "")
 	}
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		nil,
 		res,
-		_nethttp.MethodGet,
+		http.MethodGet,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
-	defer httpRes.Body.Close()
+
+	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
+
 	return *res, httpRes, err
 }
 
-type APICredentialsCompanyLevelApiUpdateApiCredentialConfig struct {
-	ctx                               context.Context
+// All parameters accepted by APICredentialsCompanyLevelApi.UpdateApiCredential
+type APICredentialsCompanyLevelApiUpdateApiCredentialInput struct {
 	companyId                         string
 	apiCredentialId                   string
 	updateCompanyApiCredentialRequest *UpdateCompanyApiCredentialRequest
 }
 
-func (r APICredentialsCompanyLevelApiUpdateApiCredentialConfig) UpdateCompanyApiCredentialRequest(updateCompanyApiCredentialRequest UpdateCompanyApiCredentialRequest) APICredentialsCompanyLevelApiUpdateApiCredentialConfig {
+func (r APICredentialsCompanyLevelApiUpdateApiCredentialInput) UpdateCompanyApiCredentialRequest(updateCompanyApiCredentialRequest UpdateCompanyApiCredentialRequest) APICredentialsCompanyLevelApiUpdateApiCredentialInput {
 	r.updateCompanyApiCredentialRequest = &updateCompanyApiCredentialRequest
 	return r
+}
+
+/*
+Prepare a request for UpdateApiCredential
+@param companyId The unique identifier of the company account.@param apiCredentialId Unique identifier of the API credential.
+@return APICredentialsCompanyLevelApiUpdateApiCredentialInput
+*/
+func (a *APICredentialsCompanyLevelApi) UpdateApiCredentialInput(companyId string, apiCredentialId string) APICredentialsCompanyLevelApiUpdateApiCredentialInput {
+	return APICredentialsCompanyLevelApiUpdateApiCredentialInput{
+		companyId:       companyId,
+		apiCredentialId: apiCredentialId,
+	}
 }
 
 /*
@@ -347,31 +377,11 @@ Changes the API credential's roles, merchant account access, or allowed origins.
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—API credentials read and write
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param companyId The unique identifier of the company account.
-	@param apiCredentialId Unique identifier of the API credential.
-	@return APICredentialsCompanyLevelApiUpdateApiCredentialConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r APICredentialsCompanyLevelApiUpdateApiCredentialInput - Request parameters, see UpdateApiCredentialInput
+@return CompanyApiCredential, *http.Response, error
 */
-func (a *APICredentialsCompanyLevelApi) UpdateApiCredentialConfig(ctx context.Context, companyId string, apiCredentialId string) APICredentialsCompanyLevelApiUpdateApiCredentialConfig {
-	return APICredentialsCompanyLevelApiUpdateApiCredentialConfig{
-		ctx:             ctx,
-		companyId:       companyId,
-		apiCredentialId: apiCredentialId,
-	}
-}
-
-/*
-Update an API credential.
-Changes the API credential&#39;s roles, merchant account access, or allowed origins. The request has the new values for the fields you want to change. The response contains the full updated API credential, including the new values from the request.   To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—API credentials read and write
- * @param companyId The unique identifier of the company account.
- * @param apiCredentialId Unique identifier of the API credential.
- * @param req UpdateCompanyApiCredentialRequest - reference of UpdateCompanyApiCredentialRequest).
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return CompanyApiCredential
-*/
-
-func (a *APICredentialsCompanyLevelApi) UpdateApiCredential(r APICredentialsCompanyLevelApiUpdateApiCredentialConfig) (CompanyApiCredential, *_nethttp.Response, error) {
-	var serviceError common.RestServiceError
+func (a *APICredentialsCompanyLevelApi) UpdateApiCredential(ctx context.Context, r APICredentialsCompanyLevelApiUpdateApiCredentialInput) (CompanyApiCredential, *http.Response, error) {
 	res := &CompanyApiCredential{}
 	path := "/companies/{companyId}/apiCredentials/{apiCredentialId}"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -379,50 +389,62 @@ func (a *APICredentialsCompanyLevelApi) UpdateApiCredential(r APICredentialsComp
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		r.updateCompanyApiCredentialRequest,
 		res,
-		_nethttp.MethodPatch,
+		http.MethodPatch,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
-	defer httpRes.Body.Close()
+
+	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
+
 	return *res, httpRes, err
 }

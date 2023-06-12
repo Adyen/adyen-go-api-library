@@ -10,25 +10,33 @@ package legalentity
 
 import (
 	"context"
-	_context "context"
-	_nethttp "net/http"
+	"net/http"
 	"net/url"
 	"strings"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// BusinessLinesApi BusinessLinesApi service
+// BusinessLinesApi service
 type BusinessLinesApi common.Service
 
-type BusinessLinesApiCreateBusinessLineConfig struct {
-	ctx              context.Context
+// All parameters accepted by BusinessLinesApi.CreateBusinessLine
+type BusinessLinesApiCreateBusinessLineInput struct {
 	businessLineInfo *BusinessLineInfo
 }
 
-func (r BusinessLinesApiCreateBusinessLineConfig) BusinessLineInfo(businessLineInfo BusinessLineInfo) BusinessLinesApiCreateBusinessLineConfig {
+func (r BusinessLinesApiCreateBusinessLineInput) BusinessLineInfo(businessLineInfo BusinessLineInfo) BusinessLinesApiCreateBusinessLineInput {
 	r.businessLineInfo = &businessLineInfo
 	return r
+}
+
+/*
+Prepare a request for CreateBusinessLine
+
+@return BusinessLinesApiCreateBusinessLineInput
+*/
+func (a *BusinessLinesApi) CreateBusinessLineInput() BusinessLinesApiCreateBusinessLineInput {
+	return BusinessLinesApiCreateBusinessLineInput{}
 }
 
 /*
@@ -38,33 +46,43 @@ Creates a business line.
 
 This resource contains information about your user's line of business, including their industry and their source of funds. Adyen uses this information to verify your users as required by payment industry regulations. Adyen informs you of the verification results through webhooks or API responses.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return BusinessLinesApiCreateBusinessLineConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r BusinessLinesApiCreateBusinessLineInput - Request parameters, see CreateBusinessLineInput
+@return BusinessLine, *http.Response, error
 */
-func (a *BusinessLinesApi) CreateBusinessLineConfig(ctx context.Context) BusinessLinesApiCreateBusinessLineConfig {
-	return BusinessLinesApiCreateBusinessLineConfig{
-		ctx: ctx,
-	}
-}
-
-/*
-Create a business line
-Creates a business line.   This resource contains information about your user&#39;s line of business, including their industry and their source of funds. Adyen uses this information to verify your users as required by payment industry regulations. Adyen informs you of the verification results through webhooks or API responses.
- * @param req BusinessLineInfo - reference of BusinessLineInfo).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return BusinessLine
-*/
-
-func (a *BusinessLinesApi) CreateBusinessLine(r BusinessLinesApiCreateBusinessLineConfig) (BusinessLine, *_nethttp.Response, error) {
+func (a *BusinessLinesApi) CreateBusinessLine(ctx context.Context, r BusinessLinesApiCreateBusinessLineInput) (BusinessLine, *http.Response, error) {
 	res := &BusinessLine{}
 	path := "/businessLines"
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPost, r.businessLineInfo, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.businessLineInfo,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type BusinessLinesApiDeleteBusinessLineConfig struct {
-	ctx context.Context
-	id  string
+// All parameters accepted by BusinessLinesApi.DeleteBusinessLine
+type BusinessLinesApiDeleteBusinessLineInput struct {
+	id string
+}
+
+/*
+Prepare a request for DeleteBusinessLine
+@param id The unique identifier of the business line to be deleted.
+@return BusinessLinesApiDeleteBusinessLineInput
+*/
+func (a *BusinessLinesApi) DeleteBusinessLineInput(id string) BusinessLinesApiDeleteBusinessLineInput {
+	return BusinessLinesApiDeleteBusinessLineInput{
+		id: id,
+	}
 }
 
 /*
@@ -74,35 +92,44 @@ Deletes a business line.
 
  >If you delete a business line linked to a [payment method](https://docs.adyen.com/development-resources/paymentmethodvariant#management-api), it can affect your merchant account's ability to use the [payment method](https://docs.adyen.com/api-explorer/Management/latest/post/merchants/_merchantId_/paymentMethodSettings). The business line is removed from all linked merchant accounts.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier of the business line to be deleted.
- @return BusinessLinesApiDeleteBusinessLineConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r BusinessLinesApiDeleteBusinessLineInput - Request parameters, see DeleteBusinessLineInput
+@return , *http.Response, error
 */
-func (a *BusinessLinesApi) DeleteBusinessLineConfig(ctx context.Context, id string) BusinessLinesApiDeleteBusinessLineConfig {
-	return BusinessLinesApiDeleteBusinessLineConfig{
-		ctx: ctx,
-		id:  id,
-	}
-}
-
-/*
-Delete a business line
-Deletes a business line.   &gt;If you delete a business line linked to a [payment method](https://docs.adyen.com/development-resources/paymentmethodvariant#management-api), it can affect your merchant account&#39;s ability to use the [payment method](https://docs.adyen.com/api-explorer/Management/latest/post/merchants/_merchantId_/paymentMethodSettings). The business line is removed from all linked merchant accounts.
- * @param id The unique identifier of the business line to be deleted.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-*/
-
-func (a *BusinessLinesApi) DeleteBusinessLine(r BusinessLinesApiDeleteBusinessLineConfig) (*_nethttp.Response, error) {
+func (a *BusinessLinesApi) DeleteBusinessLine(ctx context.Context, r BusinessLinesApiDeleteBusinessLineInput) (*http.Response, error) {
 	var res interface{}
 	path := "/businessLines/{id}"
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodDelete, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodDelete,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return httpRes, err
 }
 
-type BusinessLinesApiGetBusinessLineConfig struct {
-	ctx context.Context
-	id  string
+// All parameters accepted by BusinessLinesApi.GetBusinessLine
+type BusinessLinesApiGetBusinessLineInput struct {
+	id string
+}
+
+/*
+Prepare a request for GetBusinessLine
+@param id The unique identifier of the business line.
+@return BusinessLinesApiGetBusinessLineInput
+*/
+func (a *BusinessLinesApi) GetBusinessLineInput(id string) BusinessLinesApiGetBusinessLineInput {
+	return BusinessLinesApiGetBusinessLineInput{
+		id: id,
+	}
 }
 
 /*
@@ -110,42 +137,50 @@ GetBusinessLine Get a business line
 
 Returns the detail of a business line.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier of the business line.
- @return BusinessLinesApiGetBusinessLineConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r BusinessLinesApiGetBusinessLineInput - Request parameters, see GetBusinessLineInput
+@return BusinessLine, *http.Response, error
 */
-func (a *BusinessLinesApi) GetBusinessLineConfig(ctx context.Context, id string) BusinessLinesApiGetBusinessLineConfig {
-	return BusinessLinesApiGetBusinessLineConfig{
-		ctx: ctx,
-		id:  id,
-	}
-}
-
-/*
-Get a business line
-Returns the detail of a business line.
- * @param id The unique identifier of the business line.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return BusinessLine
-*/
-
-func (a *BusinessLinesApi) GetBusinessLine(r BusinessLinesApiGetBusinessLineConfig) (BusinessLine, *_nethttp.Response, error) {
+func (a *BusinessLinesApi) GetBusinessLine(ctx context.Context, r BusinessLinesApiGetBusinessLineInput) (BusinessLine, *http.Response, error) {
 	res := &BusinessLine{}
 	path := "/businessLines/{id}"
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type BusinessLinesApiUpdateBusinessLineConfig struct {
-	ctx                    context.Context
+// All parameters accepted by BusinessLinesApi.UpdateBusinessLine
+type BusinessLinesApiUpdateBusinessLineInput struct {
 	id                     string
 	businessLineInfoUpdate *BusinessLineInfoUpdate
 }
 
-func (r BusinessLinesApiUpdateBusinessLineConfig) BusinessLineInfoUpdate(businessLineInfoUpdate BusinessLineInfoUpdate) BusinessLinesApiUpdateBusinessLineConfig {
+func (r BusinessLinesApiUpdateBusinessLineInput) BusinessLineInfoUpdate(businessLineInfoUpdate BusinessLineInfoUpdate) BusinessLinesApiUpdateBusinessLineInput {
 	r.businessLineInfoUpdate = &businessLineInfoUpdate
 	return r
+}
+
+/*
+Prepare a request for UpdateBusinessLine
+@param id The unique identifier of the business line.
+@return BusinessLinesApiUpdateBusinessLineInput
+*/
+func (a *BusinessLinesApi) UpdateBusinessLineInput(id string) BusinessLinesApiUpdateBusinessLineInput {
+	return BusinessLinesApiUpdateBusinessLineInput{
+		id: id,
+	}
 }
 
 /*
@@ -153,30 +188,26 @@ UpdateBusinessLine Update a business line
 
 Updates a business line.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier of the business line.
- @return BusinessLinesApiUpdateBusinessLineConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r BusinessLinesApiUpdateBusinessLineInput - Request parameters, see UpdateBusinessLineInput
+@return BusinessLine, *http.Response, error
 */
-func (a *BusinessLinesApi) UpdateBusinessLineConfig(ctx context.Context, id string) BusinessLinesApiUpdateBusinessLineConfig {
-	return BusinessLinesApiUpdateBusinessLineConfig{
-		ctx: ctx,
-		id:  id,
-	}
-}
-
-/*
-Update a business line
-Updates a business line.
- * @param id The unique identifier of the business line.
- * @param req BusinessLineInfoUpdate - reference of BusinessLineInfoUpdate).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return BusinessLine
-*/
-
-func (a *BusinessLinesApi) UpdateBusinessLine(r BusinessLinesApiUpdateBusinessLineConfig) (BusinessLine, *_nethttp.Response, error) {
+func (a *BusinessLinesApi) UpdateBusinessLine(ctx context.Context, r BusinessLinesApiUpdateBusinessLineInput) (BusinessLine, *http.Response, error) {
 	res := &BusinessLine{}
 	path := "/businessLines/{id}"
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPatch, r.businessLineInfoUpdate, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.businessLineInfoUpdate,
+		res,
+		http.MethodPatch,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }

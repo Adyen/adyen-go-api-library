@@ -12,20 +12,32 @@ import (
 	"context"
 	"encoding/json"
 	"io/ioutil"
-	_nethttp "net/http"
+	"net/http"
 	"net/url"
 	"strings"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// TerminalActionsCompanyLevelApi TerminalActionsCompanyLevelApi service
+// TerminalActionsCompanyLevelApi service
 type TerminalActionsCompanyLevelApi common.Service
 
-type TerminalActionsCompanyLevelApiGetTerminalActionConfig struct {
-	ctx       context.Context
+// All parameters accepted by TerminalActionsCompanyLevelApi.GetTerminalAction
+type TerminalActionsCompanyLevelApiGetTerminalActionInput struct {
 	companyId string
 	actionId  string
+}
+
+/*
+Prepare a request for GetTerminalAction
+@param companyId The unique identifier of the company account.@param actionId The unique identifier of the terminal action.
+@return TerminalActionsCompanyLevelApiGetTerminalActionInput
+*/
+func (a *TerminalActionsCompanyLevelApi) GetTerminalActionInput(companyId string, actionId string) TerminalActionsCompanyLevelApiGetTerminalActionInput {
+	return TerminalActionsCompanyLevelApiGetTerminalActionInput{
+		companyId: companyId,
+		actionId:  actionId,
+	}
 }
 
 /*
@@ -36,30 +48,11 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Terminal actions read
 * Management API—Terminal actions read and write
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param companyId The unique identifier of the company account.
-	@param actionId The unique identifier of the terminal action.
-	@return TerminalActionsCompanyLevelApiGetTerminalActionConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r TerminalActionsCompanyLevelApiGetTerminalActionInput - Request parameters, see GetTerminalActionInput
+@return ExternalTerminalAction, *http.Response, error
 */
-func (a *TerminalActionsCompanyLevelApi) GetTerminalActionConfig(ctx context.Context, companyId string, actionId string) TerminalActionsCompanyLevelApiGetTerminalActionConfig {
-	return TerminalActionsCompanyLevelApiGetTerminalActionConfig{
-		ctx:       ctx,
-		companyId: companyId,
-		actionId:  actionId,
-	}
-}
-
-/*
-Get terminal action
-Returns the details of the [terminal action](https://docs.adyen.com/point-of-sale/automating-terminal-management/terminal-actions-api) identified in the path. To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal actions read * Management API—Terminal actions read and write
- * @param companyId The unique identifier of the company account.
- * @param actionId The unique identifier of the terminal action.
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return ExternalTerminalAction
-*/
-
-func (a *TerminalActionsCompanyLevelApi) GetTerminalAction(r TerminalActionsCompanyLevelApiGetTerminalActionConfig) (ExternalTerminalAction, *_nethttp.Response, error) {
-	var serviceError common.RestServiceError
+func (a *TerminalActionsCompanyLevelApi) GetTerminalAction(ctx context.Context, r TerminalActionsCompanyLevelApiGetTerminalActionInput) (ExternalTerminalAction, *http.Response, error) {
 	res := &ExternalTerminalAction{}
 	path := "/companies/{companyId}/terminalActions/{actionId}"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -67,85 +60,94 @@ func (a *TerminalActionsCompanyLevelApi) GetTerminalAction(r TerminalActionsComp
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		nil,
 		res,
-		_nethttp.MethodGet,
+		http.MethodGet,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
-	defer httpRes.Body.Close()
+
+	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
+
 	return *res, httpRes, err
 }
 
-type TerminalActionsCompanyLevelApiListAndroidAppsConfig struct {
-	ctx         context.Context
-	companyId   string
-	pageNumber  *int32
-	pageSize    *int32
-	packageName *string
-	versionCode *int32
+// All parameters accepted by TerminalActionsCompanyLevelApi.ListAndroidApps
+type TerminalActionsCompanyLevelApiListAndroidAppsInput struct {
+	companyId  string
+	pageNumber *int32
+	pageSize   *int32
 }
 
 // The number of the page to fetch.
-func (r TerminalActionsCompanyLevelApiListAndroidAppsConfig) PageNumber(pageNumber int32) TerminalActionsCompanyLevelApiListAndroidAppsConfig {
+func (r TerminalActionsCompanyLevelApiListAndroidAppsInput) PageNumber(pageNumber int32) TerminalActionsCompanyLevelApiListAndroidAppsInput {
 	r.pageNumber = &pageNumber
 	return r
 }
 
 // The number of items to have on a page, maximum 100. The default is 20 items on a page.
-func (r TerminalActionsCompanyLevelApiListAndroidAppsConfig) PageSize(pageSize int32) TerminalActionsCompanyLevelApiListAndroidAppsConfig {
+func (r TerminalActionsCompanyLevelApiListAndroidAppsInput) PageSize(pageSize int32) TerminalActionsCompanyLevelApiListAndroidAppsInput {
 	r.pageSize = &pageSize
 	return r
 }
 
-// The package name that uniquely identifies the Android app.
-func (r TerminalActionsCompanyLevelApiListAndroidAppsConfig) PackageName(packageName string) TerminalActionsCompanyLevelApiListAndroidAppsConfig {
-	r.packageName = &packageName
-	return r
-}
-
-// The version number of the app.
-func (r TerminalActionsCompanyLevelApiListAndroidAppsConfig) VersionCode(versionCode int32) TerminalActionsCompanyLevelApiListAndroidAppsConfig {
-	r.versionCode = &versionCode
-	return r
+/*
+Prepare a request for ListAndroidApps
+@param companyId The unique identifier of the company account.
+@return TerminalActionsCompanyLevelApiListAndroidAppsInput
+*/
+func (a *TerminalActionsCompanyLevelApi) ListAndroidAppsInput(companyId string) TerminalActionsCompanyLevelApiListAndroidAppsInput {
+	return TerminalActionsCompanyLevelApiListAndroidAppsInput{
+		companyId: companyId,
+	}
 }
 
 /*
@@ -158,27 +160,11 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Terminal actions read
 * Management API—Terminal actions read and write
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param companyId The unique identifier of the company account.
-	@return TerminalActionsCompanyLevelApiListAndroidAppsConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r TerminalActionsCompanyLevelApiListAndroidAppsInput - Request parameters, see ListAndroidAppsInput
+@return AndroidAppsResponse, *http.Response, error
 */
-func (a *TerminalActionsCompanyLevelApi) ListAndroidAppsConfig(ctx context.Context, companyId string) TerminalActionsCompanyLevelApiListAndroidAppsConfig {
-	return TerminalActionsCompanyLevelApiListAndroidAppsConfig{
-		ctx:       ctx,
-		companyId: companyId,
-	}
-}
-
-/*
-Get a list of Android apps
-Returns a list of the Android apps that are available for the company identified in the path.  These apps have been uploaded to Adyen and can be installed or uninstalled on Android payment terminals through [terminal actions](https://docs.adyen.com/point-of-sale/automating-terminal-management/terminal-actions-api).  To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal actions read * Management API—Terminal actions read and write
- * @param companyId The unique identifier of the company account.
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return AndroidAppsResponse
-*/
-
-func (a *TerminalActionsCompanyLevelApi) ListAndroidApps(r TerminalActionsCompanyLevelApiListAndroidAppsConfig) (AndroidAppsResponse, *_nethttp.Response, error) {
-	var serviceError common.RestServiceError
+func (a *TerminalActionsCompanyLevelApi) ListAndroidApps(ctx context.Context, r TerminalActionsCompanyLevelApiListAndroidAppsInput) (AndroidAppsResponse, *http.Response, error) {
 	res := &AndroidAppsResponse{}
 	path := "/companies/{companyId}/androidApps"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -190,85 +176,95 @@ func (a *TerminalActionsCompanyLevelApi) ListAndroidApps(r TerminalActionsCompan
 	if r.pageSize != nil {
 		common.ParameterAddToQuery(queryParams, "pageSize", r.pageSize, "")
 	}
-	if r.packageName != nil {
-		common.ParameterAddToQuery(queryParams, "packageName", r.packageName, "")
-	}
-	if r.versionCode != nil {
-		common.ParameterAddToQuery(queryParams, "versionCode", r.versionCode, "")
-	}
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		nil,
 		res,
-		_nethttp.MethodGet,
+		http.MethodGet,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
-	defer httpRes.Body.Close()
+
+	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
+
 	return *res, httpRes, err
 }
 
-type TerminalActionsCompanyLevelApiListAndroidCertificatesConfig struct {
-	ctx             context.Context
-	companyId       string
-	pageNumber      *int32
-	pageSize        *int32
-	certificateName *string
+// All parameters accepted by TerminalActionsCompanyLevelApi.ListAndroidCertificates
+type TerminalActionsCompanyLevelApiListAndroidCertificatesInput struct {
+	companyId  string
+	pageNumber *int32
+	pageSize   *int32
 }
 
 // The number of the page to fetch.
-func (r TerminalActionsCompanyLevelApiListAndroidCertificatesConfig) PageNumber(pageNumber int32) TerminalActionsCompanyLevelApiListAndroidCertificatesConfig {
+func (r TerminalActionsCompanyLevelApiListAndroidCertificatesInput) PageNumber(pageNumber int32) TerminalActionsCompanyLevelApiListAndroidCertificatesInput {
 	r.pageNumber = &pageNumber
 	return r
 }
 
 // The number of items to have on a page, maximum 100. The default is 20 items on a page.
-func (r TerminalActionsCompanyLevelApiListAndroidCertificatesConfig) PageSize(pageSize int32) TerminalActionsCompanyLevelApiListAndroidCertificatesConfig {
+func (r TerminalActionsCompanyLevelApiListAndroidCertificatesInput) PageSize(pageSize int32) TerminalActionsCompanyLevelApiListAndroidCertificatesInput {
 	r.pageSize = &pageSize
 	return r
 }
 
-// The name of the certificate.
-func (r TerminalActionsCompanyLevelApiListAndroidCertificatesConfig) CertificateName(certificateName string) TerminalActionsCompanyLevelApiListAndroidCertificatesConfig {
-	r.certificateName = &certificateName
-	return r
+/*
+Prepare a request for ListAndroidCertificates
+@param companyId The unique identifier of the company account.
+@return TerminalActionsCompanyLevelApiListAndroidCertificatesInput
+*/
+func (a *TerminalActionsCompanyLevelApi) ListAndroidCertificatesInput(companyId string) TerminalActionsCompanyLevelApiListAndroidCertificatesInput {
+	return TerminalActionsCompanyLevelApiListAndroidCertificatesInput{
+		companyId: companyId,
+	}
 }
 
 /*
@@ -281,27 +277,11 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Terminal actions read
 * Management API—Terminal actions read and write
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param companyId The unique identifier of the company account.
-	@return TerminalActionsCompanyLevelApiListAndroidCertificatesConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r TerminalActionsCompanyLevelApiListAndroidCertificatesInput - Request parameters, see ListAndroidCertificatesInput
+@return AndroidCertificatesResponse, *http.Response, error
 */
-func (a *TerminalActionsCompanyLevelApi) ListAndroidCertificatesConfig(ctx context.Context, companyId string) TerminalActionsCompanyLevelApiListAndroidCertificatesConfig {
-	return TerminalActionsCompanyLevelApiListAndroidCertificatesConfig{
-		ctx:       ctx,
-		companyId: companyId,
-	}
-}
-
-/*
-Get a list of Android certificates
-Returns a list of the Android certificates that are available for the company identified in the path. Typically, these certificates enable running apps on Android payment terminals. The certifcates in the list have been uploaded to Adyen and can be installed or uninstalled on Android terminals through [terminal actions](https://docs.adyen.com/point-of-sale/automating-terminal-management/terminal-actions-api).  To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal actions read * Management API—Terminal actions read and write
- * @param companyId The unique identifier of the company account.
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return AndroidCertificatesResponse
-*/
-
-func (a *TerminalActionsCompanyLevelApi) ListAndroidCertificates(r TerminalActionsCompanyLevelApiListAndroidCertificatesConfig) (AndroidCertificatesResponse, *_nethttp.Response, error) {
-	var serviceError common.RestServiceError
+func (a *TerminalActionsCompanyLevelApi) ListAndroidCertificates(ctx context.Context, r TerminalActionsCompanyLevelApiListAndroidCertificatesInput) (AndroidCertificatesResponse, *http.Response, error) {
 	res := &AndroidCertificatesResponse{}
 	path := "/companies/{companyId}/androidCertificates"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -313,60 +293,69 @@ func (a *TerminalActionsCompanyLevelApi) ListAndroidCertificates(r TerminalActio
 	if r.pageSize != nil {
 		common.ParameterAddToQuery(queryParams, "pageSize", r.pageSize, "")
 	}
-	if r.certificateName != nil {
-		common.ParameterAddToQuery(queryParams, "certificateName", r.certificateName, "")
-	}
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		nil,
 		res,
-		_nethttp.MethodGet,
+		http.MethodGet,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
-	defer httpRes.Body.Close()
+
+	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
+
 	return *res, httpRes, err
 }
 
-type TerminalActionsCompanyLevelApiListTerminalActionsConfig struct {
-	ctx        context.Context
+// All parameters accepted by TerminalActionsCompanyLevelApi.ListTerminalActions
+type TerminalActionsCompanyLevelApiListTerminalActionsInput struct {
 	companyId  string
 	pageNumber *int32
 	pageSize   *int32
@@ -375,27 +364,38 @@ type TerminalActionsCompanyLevelApiListTerminalActionsConfig struct {
 }
 
 // The number of the page to fetch.
-func (r TerminalActionsCompanyLevelApiListTerminalActionsConfig) PageNumber(pageNumber int32) TerminalActionsCompanyLevelApiListTerminalActionsConfig {
+func (r TerminalActionsCompanyLevelApiListTerminalActionsInput) PageNumber(pageNumber int32) TerminalActionsCompanyLevelApiListTerminalActionsInput {
 	r.pageNumber = &pageNumber
 	return r
 }
 
 // The number of items to have on a page, maximum 100. The default is 20 items on a page.
-func (r TerminalActionsCompanyLevelApiListTerminalActionsConfig) PageSize(pageSize int32) TerminalActionsCompanyLevelApiListTerminalActionsConfig {
+func (r TerminalActionsCompanyLevelApiListTerminalActionsInput) PageSize(pageSize int32) TerminalActionsCompanyLevelApiListTerminalActionsInput {
 	r.pageSize = &pageSize
 	return r
 }
 
 // Returns terminal actions with the specified status.  Allowed values: **pending**, **successful**, **failed**, **cancelled**, **tryLater**.
-func (r TerminalActionsCompanyLevelApiListTerminalActionsConfig) Status(status string) TerminalActionsCompanyLevelApiListTerminalActionsConfig {
+func (r TerminalActionsCompanyLevelApiListTerminalActionsInput) Status(status string) TerminalActionsCompanyLevelApiListTerminalActionsInput {
 	r.status = &status
 	return r
 }
 
 // Returns terminal actions of the specified type.  Allowed values: **InstallAndroidApp**, **UninstallAndroidApp**, **InstallAndroidCertificate**, **UninstallAndroidCertificate**.
-func (r TerminalActionsCompanyLevelApiListTerminalActionsConfig) Type_(type_ string) TerminalActionsCompanyLevelApiListTerminalActionsConfig {
+func (r TerminalActionsCompanyLevelApiListTerminalActionsInput) Type_(type_ string) TerminalActionsCompanyLevelApiListTerminalActionsInput {
 	r.type_ = &type_
 	return r
+}
+
+/*
+Prepare a request for ListTerminalActions
+@param companyId The unique identifier of the company account.
+@return TerminalActionsCompanyLevelApiListTerminalActionsInput
+*/
+func (a *TerminalActionsCompanyLevelApi) ListTerminalActionsInput(companyId string) TerminalActionsCompanyLevelApiListTerminalActionsInput {
+	return TerminalActionsCompanyLevelApiListTerminalActionsInput{
+		companyId: companyId,
+	}
 }
 
 /*
@@ -406,27 +406,11 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Terminal actions read
 * Management API—Terminal actions read and write
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param companyId The unique identifier of the company account.
-	@return TerminalActionsCompanyLevelApiListTerminalActionsConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r TerminalActionsCompanyLevelApiListTerminalActionsInput - Request parameters, see ListTerminalActionsInput
+@return ListExternalTerminalActionsResponse, *http.Response, error
 */
-func (a *TerminalActionsCompanyLevelApi) ListTerminalActionsConfig(ctx context.Context, companyId string) TerminalActionsCompanyLevelApiListTerminalActionsConfig {
-	return TerminalActionsCompanyLevelApiListTerminalActionsConfig{
-		ctx:       ctx,
-		companyId: companyId,
-	}
-}
-
-/*
-Get a list of terminal actions
-Returns the [terminal actions](https://docs.adyen.com/point-of-sale/automating-terminal-management/terminal-actions-api) that have been scheduled for the company identified in the path.The response doesn&#39;t include actions that are scheduled by Adyen. To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Terminal actions read * Management API—Terminal actions read and write
- * @param companyId The unique identifier of the company account.
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return ListExternalTerminalActionsResponse
-*/
-
-func (a *TerminalActionsCompanyLevelApi) ListTerminalActions(r TerminalActionsCompanyLevelApiListTerminalActionsConfig) (ListExternalTerminalActionsResponse, *_nethttp.Response, error) {
-	var serviceError common.RestServiceError
+func (a *TerminalActionsCompanyLevelApi) ListTerminalActions(ctx context.Context, r TerminalActionsCompanyLevelApiListTerminalActionsInput) (ListExternalTerminalActionsResponse, *http.Response, error) {
 	res := &ListExternalTerminalActionsResponse{}
 	path := "/companies/{companyId}/terminalActions"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -445,50 +429,62 @@ func (a *TerminalActionsCompanyLevelApi) ListTerminalActions(r TerminalActionsCo
 		common.ParameterAddToQuery(queryParams, "type", r.type_, "")
 	}
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		nil,
 		res,
-		_nethttp.MethodGet,
+		http.MethodGet,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
-	defer httpRes.Body.Close()
+
+	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
+
 	return *res, httpRes, err
 }

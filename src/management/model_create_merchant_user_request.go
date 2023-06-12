@@ -21,6 +21,8 @@ var _ common.MappedNullable = &CreateMerchantUserRequest{}
 type CreateMerchantUserRequest struct {
 	// The list of [account groups](https://docs.adyen.com/account/account-structure#account-groups) associated with this user.
 	AccountGroups []string `json:"accountGroups,omitempty"`
+	// Set of authn apps to add to this user
+	AuthnApps []string `json:"authnApps,omitempty"`
 	// The email address of the user.
 	Email string `json:"email"`
 	Name  Name   `json:"name"`
@@ -28,7 +30,7 @@ type CreateMerchantUserRequest struct {
 	Roles []string `json:"roles,omitempty"`
 	// The [tz database name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) of the time zone of the user. For example, **Europe/Amsterdam**.
 	TimeZoneCode *string `json:"timeZoneCode,omitempty"`
-	// The user's email address that will be their username. Must be the same as the one in the `email` field.
+	// The username for this user. Allowed length: 255 alphanumeric characters.
 	Username string `json:"username"`
 }
 
@@ -82,6 +84,38 @@ func (o *CreateMerchantUserRequest) HasAccountGroups() bool {
 // SetAccountGroups gets a reference to the given []string and assigns it to the AccountGroups field.
 func (o *CreateMerchantUserRequest) SetAccountGroups(v []string) {
 	o.AccountGroups = v
+}
+
+// GetAuthnApps returns the AuthnApps field value if set, zero value otherwise.
+func (o *CreateMerchantUserRequest) GetAuthnApps() []string {
+	if o == nil || common.IsNil(o.AuthnApps) {
+		var ret []string
+		return ret
+	}
+	return o.AuthnApps
+}
+
+// GetAuthnAppsOk returns a tuple with the AuthnApps field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateMerchantUserRequest) GetAuthnAppsOk() ([]string, bool) {
+	if o == nil || common.IsNil(o.AuthnApps) {
+		return nil, false
+	}
+	return o.AuthnApps, true
+}
+
+// HasAuthnApps returns a boolean if a field has been set.
+func (o *CreateMerchantUserRequest) HasAuthnApps() bool {
+	if o != nil && !common.IsNil(o.AuthnApps) {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthnApps gets a reference to the given []string and assigns it to the AuthnApps field.
+func (o *CreateMerchantUserRequest) SetAuthnApps(v []string) {
+	o.AuthnApps = v
 }
 
 // GetEmail returns the Email field value
@@ -232,6 +266,9 @@ func (o CreateMerchantUserRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.AccountGroups) {
 		toSerialize["accountGroups"] = o.AccountGroups
+	}
+	if !common.IsNil(o.AuthnApps) {
+		toSerialize["authnApps"] = o.AuthnApps
 	}
 	toSerialize["email"] = o.Email
 	toSerialize["name"] = o.Name

@@ -29,8 +29,10 @@ func Test_ManagementAPI_Integration(t *testing.T) {
 
 	t.Run("Test MyAPICredentialApiService GetMe", func(t *testing.T) {
 		t.Run("Create an API request that should pass", func(t *testing.T) {
-			req := service.MyAPICredentialApi.GetApiCredentialDetailsConfig(context.Background())
-			resp, httpRes, serviceErr := service.MyAPICredentialApi.GetApiCredentialDetails(req)
+			req := service.MyAPICredentialApi.GetApiCredentialDetailsInput()
+
+			resp, httpRes, serviceErr := service.MyAPICredentialApi.GetApiCredentialDetails(context.Background(), req)
+
 			assert.Equal(t, 200, httpRes.StatusCode)
 			require.NotNil(t, resp)
 			require.Nil(t, serviceErr)
@@ -42,20 +44,22 @@ func Test_ManagementAPI_Integration(t *testing.T) {
 				ApiKey:      "xxx",
 				Environment: common.TestEnv,
 			})
-			req := invalidKeyClient.Management().MyAPICredentialApi.GetApiCredentialDetailsConfig(context.Background())
+			req := invalidKeyClient.Management().MyAPICredentialApi.GetApiCredentialDetailsInput()
 
-			_, httpRes, serviceErr := invalidKeyClient.Management().MyAPICredentialApi.GetApiCredentialDetails(req)
-			restServiceErr:=serviceErr.(common.RestServiceError)
+			_, httpRes, serviceErr := invalidKeyClient.Management().MyAPICredentialApi.GetApiCredentialDetails(context.Background(), req)
+
+			restServiceErr := serviceErr.(common.RestServiceError)
 			assert.Equal(t, 401, httpRes.StatusCode)
 			require.NotNil(t, restServiceErr)
 		})
 	})
 
 	t.Run("List terminals", func(t *testing.T) {
-		req := service.TerminalsTerminalLevelApi.ListTerminalsConfig(context.Background())
+		req := service.TerminalsTerminalLevelApi.ListTerminalsInput()
 		req = req.Countries("NL").PageSize(1)
 
-		resp, httpRes, serviceErr := service.TerminalsTerminalLevelApi.ListTerminals(req)
+		resp, httpRes, serviceErr := service.TerminalsTerminalLevelApi.ListTerminals(context.Background(), req)
+
 		require.Nil(t, serviceErr)
 		assert.Equal(t, 200, httpRes.StatusCode)
 		require.NotNil(t, resp)
@@ -63,9 +67,11 @@ func Test_ManagementAPI_Integration(t *testing.T) {
 
 	t.Run("Create an API request that should fail for company", func(t *testing.T) {
 		// Creates a test that should fail because of the wrong Id
-		req := service.AccountCompanyLevelApi.GetCompanyAccountConfig(context.Background(), "99999")
-		_, httpRes, serviceErr := service.AccountCompanyLevelApi.GetCompanyAccount(req)
-		restServiceErr:=serviceErr.(common.RestServiceError)
+		req := service.AccountCompanyLevelApi.GetCompanyAccountInput("99999")
+
+		_, httpRes, serviceErr := service.AccountCompanyLevelApi.GetCompanyAccount(context.Background(), req)
+
+		restServiceErr := serviceErr.(common.RestServiceError)
 		assert.NotEmpty(t, restServiceErr.GetRequestId())
 		assert.Equal(t, "010", restServiceErr.GetErrorCode())
 		assert.Equal(t, int32(403), restServiceErr.GetStatus())

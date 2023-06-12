@@ -10,30 +10,39 @@ package checkout
 
 import (
 	"context"
-	_nethttp "net/http"
+	"net/http"
 	"net/url"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// PaymentsApi PaymentsApi service
+// PaymentsApi service
 type PaymentsApi common.Service
 
-type PaymentsApiCardDetailsConfig struct {
-	ctx                context.Context
+// All parameters accepted by PaymentsApi.CardDetails
+type PaymentsApiCardDetailsInput struct {
 	idempotencyKey     *string
 	cardDetailsRequest *CardDetailsRequest
 }
 
 // A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
-func (r PaymentsApiCardDetailsConfig) IdempotencyKey(idempotencyKey string) PaymentsApiCardDetailsConfig {
+func (r PaymentsApiCardDetailsInput) IdempotencyKey(idempotencyKey string) PaymentsApiCardDetailsInput {
 	r.idempotencyKey = &idempotencyKey
 	return r
 }
 
-func (r PaymentsApiCardDetailsConfig) CardDetailsRequest(cardDetailsRequest CardDetailsRequest) PaymentsApiCardDetailsConfig {
+func (r PaymentsApiCardDetailsInput) CardDetailsRequest(cardDetailsRequest CardDetailsRequest) PaymentsApiCardDetailsInput {
 	r.cardDetailsRequest = &cardDetailsRequest
 	return r
+}
+
+/*
+Prepare a request for CardDetails
+
+@return PaymentsApiCardDetailsInput
+*/
+func (a *PaymentsApi) CardDetailsInput() PaymentsApiCardDetailsInput {
+	return PaymentsApiCardDetailsInput{}
 }
 
 /*
@@ -45,24 +54,11 @@ If you have an API-only integration and collect card data, use this endpoint to 
 
 
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return PaymentsApiCardDetailsConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r PaymentsApiCardDetailsInput - Request parameters, see CardDetailsInput
+@return CardDetailsResponse, *http.Response, error
 */
-func (a *PaymentsApi) CardDetailsConfig(ctx context.Context) PaymentsApiCardDetailsConfig {
-	return PaymentsApiCardDetailsConfig{
-		ctx: ctx,
-	}
-}
-
-/*
-Get the list of brands on the card
-Send a request with at least the first 6 digits of the card number to get a response with an array of brands on the card. If you include [your supported brands](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/cardDetails__reqParam_supportedBrands) in the request, the response also tells you if you support each [brand that was identified](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/cardDetails__resParam_details).  If you have an API-only integration and collect card data, use this endpoint to find out if the shopper&#39;s card is co-branded. For co-branded cards, you must let the shopper choose the brand to pay with  if you support both brands.
- * @param req CardDetailsRequest - reference of CardDetailsRequest).
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return CardDetailsResponse
-*/
-
-func (a *PaymentsApi) CardDetails(r PaymentsApiCardDetailsConfig) (CardDetailsResponse, *_nethttp.Response, error) {
+func (a *PaymentsApi) CardDetails(ctx context.Context, r PaymentsApiCardDetailsInput) (CardDetailsResponse, *http.Response, error) {
 	res := &CardDetailsResponse{}
 	path := "/cardDetails"
 	queryParams := url.Values{}
@@ -71,11 +67,11 @@ func (a *PaymentsApi) CardDetails(r PaymentsApiCardDetailsConfig) (CardDetailsRe
 		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
 	}
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		r.cardDetailsRequest,
 		res,
-		_nethttp.MethodPost,
+		http.MethodPost,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
@@ -84,21 +80,30 @@ func (a *PaymentsApi) CardDetails(r PaymentsApiCardDetailsConfig) (CardDetailsRe
 	return *res, httpRes, err
 }
 
-type PaymentsApiDonationsConfig struct {
-	ctx                    context.Context
+// All parameters accepted by PaymentsApi.Donations
+type PaymentsApiDonationsInput struct {
 	idempotencyKey         *string
 	paymentDonationRequest *PaymentDonationRequest
 }
 
 // A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
-func (r PaymentsApiDonationsConfig) IdempotencyKey(idempotencyKey string) PaymentsApiDonationsConfig {
+func (r PaymentsApiDonationsInput) IdempotencyKey(idempotencyKey string) PaymentsApiDonationsInput {
 	r.idempotencyKey = &idempotencyKey
 	return r
 }
 
-func (r PaymentsApiDonationsConfig) PaymentDonationRequest(paymentDonationRequest PaymentDonationRequest) PaymentsApiDonationsConfig {
+func (r PaymentsApiDonationsInput) PaymentDonationRequest(paymentDonationRequest PaymentDonationRequest) PaymentsApiDonationsInput {
 	r.paymentDonationRequest = &paymentDonationRequest
 	return r
+}
+
+/*
+Prepare a request for Donations
+
+@return PaymentsApiDonationsInput
+*/
+func (a *PaymentsApi) DonationsInput() PaymentsApiDonationsInput {
+	return PaymentsApiDonationsInput{}
 }
 
 /*
@@ -108,24 +113,11 @@ Takes in the donation token generated by the `/payments` request and uses it to 
 
 For more information, see [Donations](https://docs.adyen.com/online-payments/donations).
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return PaymentsApiDonationsConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r PaymentsApiDonationsInput - Request parameters, see DonationsInput
+@return DonationResponse, *http.Response, error
 */
-func (a *PaymentsApi) DonationsConfig(ctx context.Context) PaymentsApiDonationsConfig {
-	return PaymentsApiDonationsConfig{
-		ctx: ctx,
-	}
-}
-
-/*
-Start a transaction for donations
-Takes in the donation token generated by the &#x60;/payments&#x60; request and uses it to make the donation for the donation account specified in the request.  For more information, see [Donations](https://docs.adyen.com/online-payments/donations).
- * @param req PaymentDonationRequest - reference of PaymentDonationRequest).
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return DonationResponse
-*/
-
-func (a *PaymentsApi) Donations(r PaymentsApiDonationsConfig) (DonationResponse, *_nethttp.Response, error) {
+func (a *PaymentsApi) Donations(ctx context.Context, r PaymentsApiDonationsInput) (DonationResponse, *http.Response, error) {
 	res := &DonationResponse{}
 	path := "/donations"
 	queryParams := url.Values{}
@@ -134,11 +126,11 @@ func (a *PaymentsApi) Donations(r PaymentsApiDonationsConfig) (DonationResponse,
 		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
 	}
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		r.paymentDonationRequest,
 		res,
-		_nethttp.MethodPost,
+		http.MethodPost,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
@@ -147,21 +139,30 @@ func (a *PaymentsApi) Donations(r PaymentsApiDonationsConfig) (DonationResponse,
 	return *res, httpRes, err
 }
 
-type PaymentsApiPaymentMethodsConfig struct {
-	ctx                   context.Context
+// All parameters accepted by PaymentsApi.PaymentMethods
+type PaymentsApiPaymentMethodsInput struct {
 	idempotencyKey        *string
 	paymentMethodsRequest *PaymentMethodsRequest
 }
 
 // A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
-func (r PaymentsApiPaymentMethodsConfig) IdempotencyKey(idempotencyKey string) PaymentsApiPaymentMethodsConfig {
+func (r PaymentsApiPaymentMethodsInput) IdempotencyKey(idempotencyKey string) PaymentsApiPaymentMethodsInput {
 	r.idempotencyKey = &idempotencyKey
 	return r
 }
 
-func (r PaymentsApiPaymentMethodsConfig) PaymentMethodsRequest(paymentMethodsRequest PaymentMethodsRequest) PaymentsApiPaymentMethodsConfig {
+func (r PaymentsApiPaymentMethodsInput) PaymentMethodsRequest(paymentMethodsRequest PaymentMethodsRequest) PaymentsApiPaymentMethodsInput {
 	r.paymentMethodsRequest = &paymentMethodsRequest
 	return r
+}
+
+/*
+Prepare a request for PaymentMethods
+
+@return PaymentsApiPaymentMethodsInput
+*/
+func (a *PaymentsApi) PaymentMethodsInput() PaymentsApiPaymentMethodsInput {
+	return PaymentsApiPaymentMethodsInput{}
 }
 
 /*
@@ -171,24 +172,11 @@ Queries the available payment methods for a transaction based on the transaction
 
 Although we highly recommend using this endpoint to ensure you are always offering the most up-to-date list of payment methods, its usage is optional. You can, for example, also cache the `/paymentMethods` response and update it once a week.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return PaymentsApiPaymentMethodsConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r PaymentsApiPaymentMethodsInput - Request parameters, see PaymentMethodsInput
+@return PaymentMethodsResponse, *http.Response, error
 */
-func (a *PaymentsApi) PaymentMethodsConfig(ctx context.Context) PaymentsApiPaymentMethodsConfig {
-	return PaymentsApiPaymentMethodsConfig{
-		ctx: ctx,
-	}
-}
-
-/*
-Get a list of available payment methods
-Queries the available payment methods for a transaction based on the transaction context (like amount, country, and currency). Besides giving back a list of the available payment methods, the response also returns which input details you need to collect from the shopper (to be submitted to &#x60;/payments&#x60;).  Although we highly recommend using this endpoint to ensure you are always offering the most up-to-date list of payment methods, its usage is optional. You can, for example, also cache the &#x60;/paymentMethods&#x60; response and update it once a week.
- * @param req PaymentMethodsRequest - reference of PaymentMethodsRequest).
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return PaymentMethodsResponse
-*/
-
-func (a *PaymentsApi) PaymentMethods(r PaymentsApiPaymentMethodsConfig) (PaymentMethodsResponse, *_nethttp.Response, error) {
+func (a *PaymentsApi) PaymentMethods(ctx context.Context, r PaymentsApiPaymentMethodsInput) (PaymentMethodsResponse, *http.Response, error) {
 	res := &PaymentMethodsResponse{}
 	path := "/paymentMethods"
 	queryParams := url.Values{}
@@ -197,11 +185,11 @@ func (a *PaymentsApi) PaymentMethods(r PaymentsApiPaymentMethodsConfig) (Payment
 		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
 	}
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		r.paymentMethodsRequest,
 		res,
-		_nethttp.MethodPost,
+		http.MethodPost,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
@@ -210,21 +198,30 @@ func (a *PaymentsApi) PaymentMethods(r PaymentsApiPaymentMethodsConfig) (Payment
 	return *res, httpRes, err
 }
 
-type PaymentsApiPaymentsConfig struct {
-	ctx            context.Context
+// All parameters accepted by PaymentsApi.Payments
+type PaymentsApiPaymentsInput struct {
 	idempotencyKey *string
 	paymentRequest *PaymentRequest
 }
 
 // A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
-func (r PaymentsApiPaymentsConfig) IdempotencyKey(idempotencyKey string) PaymentsApiPaymentsConfig {
+func (r PaymentsApiPaymentsInput) IdempotencyKey(idempotencyKey string) PaymentsApiPaymentsInput {
 	r.idempotencyKey = &idempotencyKey
 	return r
 }
 
-func (r PaymentsApiPaymentsConfig) PaymentRequest(paymentRequest PaymentRequest) PaymentsApiPaymentsConfig {
+func (r PaymentsApiPaymentsInput) PaymentRequest(paymentRequest PaymentRequest) PaymentsApiPaymentsInput {
 	r.paymentRequest = &paymentRequest
 	return r
+}
+
+/*
+Prepare a request for Payments
+
+@return PaymentsApiPaymentsInput
+*/
+func (a *PaymentsApi) PaymentsInput() PaymentsApiPaymentsInput {
+	return PaymentsApiPaymentsInput{}
 }
 
 /*
@@ -235,24 +232,11 @@ The response depends on the [payment flow](https://docs.adyen.com/payment-method
 * For a direct flow, the response includes a `pspReference` and a `resultCode` with the payment result, for example **Authorised** or **Refused**.
 * For a redirect or additional action, the response contains an `action` object.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return PaymentsApiPaymentsConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r PaymentsApiPaymentsInput - Request parameters, see PaymentsInput
+@return PaymentResponse, *http.Response, error
 */
-func (a *PaymentsApi) PaymentsConfig(ctx context.Context) PaymentsApiPaymentsConfig {
-	return PaymentsApiPaymentsConfig{
-		ctx: ctx,
-	}
-}
-
-/*
-Start a transaction
-Sends payment parameters (like amount, country, and currency) together with other required input details collected from the shopper. To know more about required parameters for specific payment methods, refer to our [payment method guides](https://docs.adyen.com/payment-methods).  The response depends on the [payment flow](https://docs.adyen.com/payment-methods#payment-flow): * For a direct flow, the response includes a &#x60;pspReference&#x60; and a &#x60;resultCode&#x60; with the payment result, for example **Authorised** or **Refused**.  * For a redirect or additional action, the response contains an &#x60;action&#x60; object.
- * @param req PaymentRequest - reference of PaymentRequest).
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return PaymentResponse
-*/
-
-func (a *PaymentsApi) Payments(r PaymentsApiPaymentsConfig) (PaymentResponse, *_nethttp.Response, error) {
+func (a *PaymentsApi) Payments(ctx context.Context, r PaymentsApiPaymentsInput) (PaymentResponse, *http.Response, error) {
 	res := &PaymentResponse{}
 	path := "/payments"
 	queryParams := url.Values{}
@@ -261,11 +245,11 @@ func (a *PaymentsApi) Payments(r PaymentsApiPaymentsConfig) (PaymentResponse, *_
 		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
 	}
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		r.paymentRequest,
 		res,
-		_nethttp.MethodPost,
+		http.MethodPost,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
@@ -274,21 +258,30 @@ func (a *PaymentsApi) Payments(r PaymentsApiPaymentsConfig) (PaymentResponse, *_
 	return *res, httpRes, err
 }
 
-type PaymentsApiPaymentsDetailsConfig struct {
-	ctx            context.Context
+// All parameters accepted by PaymentsApi.PaymentsDetails
+type PaymentsApiPaymentsDetailsInput struct {
 	idempotencyKey *string
 	detailsRequest *DetailsRequest
 }
 
 // A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
-func (r PaymentsApiPaymentsDetailsConfig) IdempotencyKey(idempotencyKey string) PaymentsApiPaymentsDetailsConfig {
+func (r PaymentsApiPaymentsDetailsInput) IdempotencyKey(idempotencyKey string) PaymentsApiPaymentsDetailsInput {
 	r.idempotencyKey = &idempotencyKey
 	return r
 }
 
-func (r PaymentsApiPaymentsDetailsConfig) DetailsRequest(detailsRequest DetailsRequest) PaymentsApiPaymentsDetailsConfig {
+func (r PaymentsApiPaymentsDetailsInput) DetailsRequest(detailsRequest DetailsRequest) PaymentsApiPaymentsDetailsInput {
 	r.detailsRequest = &detailsRequest
 	return r
+}
+
+/*
+Prepare a request for PaymentsDetails
+
+@return PaymentsApiPaymentsDetailsInput
+*/
+func (a *PaymentsApi) PaymentsDetailsInput() PaymentsApiPaymentsDetailsInput {
+	return PaymentsApiPaymentsDetailsInput{}
 }
 
 /*
@@ -298,24 +291,11 @@ Submits details for a payment created using `/payments`. This step is only neede
 
 
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return PaymentsApiPaymentsDetailsConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r PaymentsApiPaymentsDetailsInput - Request parameters, see PaymentsDetailsInput
+@return PaymentDetailsResponse, *http.Response, error
 */
-func (a *PaymentsApi) PaymentsDetailsConfig(ctx context.Context) PaymentsApiPaymentsDetailsConfig {
-	return PaymentsApiPaymentsDetailsConfig{
-		ctx: ctx,
-	}
-}
-
-/*
-Submit details for a payment
-Submits details for a payment created using &#x60;/payments&#x60;. This step is only needed when no final state has been reached on the &#x60;/payments&#x60; request, for example when the shopper was redirected to another page to complete the payment.
- * @param req DetailsRequest - reference of DetailsRequest).
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return PaymentDetailsResponse
-*/
-
-func (a *PaymentsApi) PaymentsDetails(r PaymentsApiPaymentsDetailsConfig) (PaymentDetailsResponse, *_nethttp.Response, error) {
+func (a *PaymentsApi) PaymentsDetails(ctx context.Context, r PaymentsApiPaymentsDetailsInput) (PaymentDetailsResponse, *http.Response, error) {
 	res := &PaymentDetailsResponse{}
 	path := "/payments/details"
 	queryParams := url.Values{}
@@ -324,11 +304,11 @@ func (a *PaymentsApi) PaymentsDetails(r PaymentsApiPaymentsDetailsConfig) (Payme
 		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
 	}
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		r.detailsRequest,
 		res,
-		_nethttp.MethodPost,
+		http.MethodPost,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
@@ -337,21 +317,30 @@ func (a *PaymentsApi) PaymentsDetails(r PaymentsApiPaymentsDetailsConfig) (Payme
 	return *res, httpRes, err
 }
 
-type PaymentsApiSessionsConfig struct {
-	ctx                          context.Context
+// All parameters accepted by PaymentsApi.Sessions
+type PaymentsApiSessionsInput struct {
 	idempotencyKey               *string
 	createCheckoutSessionRequest *CreateCheckoutSessionRequest
 }
 
 // A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
-func (r PaymentsApiSessionsConfig) IdempotencyKey(idempotencyKey string) PaymentsApiSessionsConfig {
+func (r PaymentsApiSessionsInput) IdempotencyKey(idempotencyKey string) PaymentsApiSessionsInput {
 	r.idempotencyKey = &idempotencyKey
 	return r
 }
 
-func (r PaymentsApiSessionsConfig) CreateCheckoutSessionRequest(createCheckoutSessionRequest CreateCheckoutSessionRequest) PaymentsApiSessionsConfig {
+func (r PaymentsApiSessionsInput) CreateCheckoutSessionRequest(createCheckoutSessionRequest CreateCheckoutSessionRequest) PaymentsApiSessionsInput {
 	r.createCheckoutSessionRequest = &createCheckoutSessionRequest
 	return r
+}
+
+/*
+Prepare a request for Sessions
+
+@return PaymentsApiSessionsInput
+*/
+func (a *PaymentsApi) SessionsInput() PaymentsApiSessionsInput {
+	return PaymentsApiSessionsInput{}
 }
 
 /*
@@ -363,24 +352,11 @@ The response contains encrypted payment session data. The front end then uses th
 
 You get the payment outcome asynchronously, in an [AUTHORISATION](https://docs.adyen.com/api-explorer/#/Webhooks/latest/post/AUTHORISATION) webhook.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return PaymentsApiSessionsConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r PaymentsApiSessionsInput - Request parameters, see SessionsInput
+@return CreateCheckoutSessionResponse, *http.Response, error
 */
-func (a *PaymentsApi) SessionsConfig(ctx context.Context) PaymentsApiSessionsConfig {
-	return PaymentsApiSessionsConfig{
-		ctx: ctx,
-	}
-}
-
-/*
-Create a payment session
-Creates a payment session for [Web Drop-in](https://docs.adyen.com/online-payments/web-drop-in) and [Web Components](https://docs.adyen.com/online-payments/web-components) integrations.  The response contains encrypted payment session data. The front end then uses the session data to make any required server-side calls for the payment flow.  You get the payment outcome asynchronously, in an [AUTHORISATION](https://docs.adyen.com/api-explorer/#/Webhooks/latest/post/AUTHORISATION) webhook.
- * @param req CreateCheckoutSessionRequest - reference of CreateCheckoutSessionRequest).
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return CreateCheckoutSessionResponse
-*/
-
-func (a *PaymentsApi) Sessions(r PaymentsApiSessionsConfig) (CreateCheckoutSessionResponse, *_nethttp.Response, error) {
+func (a *PaymentsApi) Sessions(ctx context.Context, r PaymentsApiSessionsInput) (CreateCheckoutSessionResponse, *http.Response, error) {
 	res := &CreateCheckoutSessionResponse{}
 	path := "/sessions"
 	queryParams := url.Values{}
@@ -389,11 +365,11 @@ func (a *PaymentsApi) Sessions(r PaymentsApiSessionsConfig) (CreateCheckoutSessi
 		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
 	}
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		r.createCheckoutSessionRequest,
 		res,
-		_nethttp.MethodPost,
+		http.MethodPost,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,

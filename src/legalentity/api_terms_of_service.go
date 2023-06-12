@@ -10,27 +10,38 @@ package legalentity
 
 import (
 	"context"
-	_context "context"
-	_nethttp "net/http"
+	"net/http"
 	"net/url"
 	"strings"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// TermsOfServiceApi TermsOfServiceApi service
+// TermsOfServiceApi service
 type TermsOfServiceApi common.Service
 
-type TermsOfServiceApiAcceptTermsOfServiceConfig struct {
-	ctx                         context.Context
+// All parameters accepted by TermsOfServiceApi.AcceptTermsOfService
+type TermsOfServiceApiAcceptTermsOfServiceInput struct {
 	id                          string
 	termsofservicedocumentid    string
 	acceptTermsOfServiceRequest *AcceptTermsOfServiceRequest
 }
 
-func (r TermsOfServiceApiAcceptTermsOfServiceConfig) AcceptTermsOfServiceRequest(acceptTermsOfServiceRequest AcceptTermsOfServiceRequest) TermsOfServiceApiAcceptTermsOfServiceConfig {
+func (r TermsOfServiceApiAcceptTermsOfServiceInput) AcceptTermsOfServiceRequest(acceptTermsOfServiceRequest AcceptTermsOfServiceRequest) TermsOfServiceApiAcceptTermsOfServiceInput {
 	r.acceptTermsOfServiceRequest = &acceptTermsOfServiceRequest
 	return r
+}
+
+/*
+Prepare a request for AcceptTermsOfService
+@param id The unique identifier of the legal entity.@param termsofservicedocumentid The unique identifier of the Terms of Service document.
+@return TermsOfServiceApiAcceptTermsOfServiceInput
+*/
+func (a *TermsOfServiceApi) AcceptTermsOfServiceInput(id string, termsofservicedocumentid string) TermsOfServiceApiAcceptTermsOfServiceInput {
+	return TermsOfServiceApiAcceptTermsOfServiceInput{
+		id:                       id,
+		termsofservicedocumentid: termsofservicedocumentid,
+	}
 }
 
 /*
@@ -38,47 +49,51 @@ AcceptTermsOfService Accept Terms of Service
 
 Accepts Terms of Service.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier of the legal entity.
- @param termsofservicedocumentid The unique identifier of the Terms of Service document.
- @return TermsOfServiceApiAcceptTermsOfServiceConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r TermsOfServiceApiAcceptTermsOfServiceInput - Request parameters, see AcceptTermsOfServiceInput
+@return AcceptTermsOfServiceResponse, *http.Response, error
 */
-func (a *TermsOfServiceApi) AcceptTermsOfServiceConfig(ctx context.Context, id string, termsofservicedocumentid string) TermsOfServiceApiAcceptTermsOfServiceConfig {
-	return TermsOfServiceApiAcceptTermsOfServiceConfig{
-		ctx:                      ctx,
-		id:                       id,
-		termsofservicedocumentid: termsofservicedocumentid,
-	}
-}
-
-/*
-Accept Terms of Service
-Accepts Terms of Service.
- * @param id The unique identifier of the legal entity.
- * @param termsofservicedocumentid The unique identifier of the Terms of Service document.
- * @param req AcceptTermsOfServiceRequest - reference of AcceptTermsOfServiceRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return AcceptTermsOfServiceResponse
-*/
-
-func (a *TermsOfServiceApi) AcceptTermsOfService(r TermsOfServiceApiAcceptTermsOfServiceConfig) (AcceptTermsOfServiceResponse, *_nethttp.Response, error) {
+func (a *TermsOfServiceApi) AcceptTermsOfService(ctx context.Context, r TermsOfServiceApiAcceptTermsOfServiceInput) (AcceptTermsOfServiceResponse, *http.Response, error) {
 	res := &AcceptTermsOfServiceResponse{}
 	path := "/legalEntities/{id}/termsOfService/{termsofservicedocumentid}"
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
 	path = strings.Replace(path, "{"+"termsofservicedocumentid"+"}", url.PathEscape(common.ParameterValueToString(r.termsofservicedocumentid, "termsofservicedocumentid")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPatch, r.acceptTermsOfServiceRequest, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.acceptTermsOfServiceRequest,
+		res,
+		http.MethodPatch,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type TermsOfServiceApiGetTermsOfServiceDocumentConfig struct {
-	ctx                              context.Context
+// All parameters accepted by TermsOfServiceApi.GetTermsOfServiceDocument
+type TermsOfServiceApiGetTermsOfServiceDocumentInput struct {
 	id                               string
 	getTermsOfServiceDocumentRequest *GetTermsOfServiceDocumentRequest
 }
 
-func (r TermsOfServiceApiGetTermsOfServiceDocumentConfig) GetTermsOfServiceDocumentRequest(getTermsOfServiceDocumentRequest GetTermsOfServiceDocumentRequest) TermsOfServiceApiGetTermsOfServiceDocumentConfig {
+func (r TermsOfServiceApiGetTermsOfServiceDocumentInput) GetTermsOfServiceDocumentRequest(getTermsOfServiceDocumentRequest GetTermsOfServiceDocumentRequest) TermsOfServiceApiGetTermsOfServiceDocumentInput {
 	r.getTermsOfServiceDocumentRequest = &getTermsOfServiceDocumentRequest
 	return r
+}
+
+/*
+Prepare a request for GetTermsOfServiceDocument
+@param id The unique identifier of the legal entity.
+@return TermsOfServiceApiGetTermsOfServiceDocumentInput
+*/
+func (a *TermsOfServiceApi) GetTermsOfServiceDocumentInput(id string) TermsOfServiceApiGetTermsOfServiceDocumentInput {
+	return TermsOfServiceApiGetTermsOfServiceDocumentInput{
+		id: id,
+	}
 }
 
 /*
@@ -86,37 +101,44 @@ GetTermsOfServiceDocument Get Terms of Service document
 
 Returns the Terms of Service document for a legal entity.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier of the legal entity.
- @return TermsOfServiceApiGetTermsOfServiceDocumentConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r TermsOfServiceApiGetTermsOfServiceDocumentInput - Request parameters, see GetTermsOfServiceDocumentInput
+@return GetTermsOfServiceDocumentResponse, *http.Response, error
 */
-func (a *TermsOfServiceApi) GetTermsOfServiceDocumentConfig(ctx context.Context, id string) TermsOfServiceApiGetTermsOfServiceDocumentConfig {
-	return TermsOfServiceApiGetTermsOfServiceDocumentConfig{
-		ctx: ctx,
-		id:  id,
-	}
-}
-
-/*
-Get Terms of Service document
-Returns the Terms of Service document for a legal entity.
- * @param id The unique identifier of the legal entity.
- * @param req GetTermsOfServiceDocumentRequest - reference of GetTermsOfServiceDocumentRequest).
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return GetTermsOfServiceDocumentResponse
-*/
-
-func (a *TermsOfServiceApi) GetTermsOfServiceDocument(r TermsOfServiceApiGetTermsOfServiceDocumentConfig) (GetTermsOfServiceDocumentResponse, *_nethttp.Response, error) {
+func (a *TermsOfServiceApi) GetTermsOfServiceDocument(ctx context.Context, r TermsOfServiceApiGetTermsOfServiceDocumentInput) (GetTermsOfServiceDocumentResponse, *http.Response, error) {
 	res := &GetTermsOfServiceDocumentResponse{}
 	path := "/legalEntities/{id}/termsOfService"
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodPost, r.getTermsOfServiceDocumentRequest, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.getTermsOfServiceDocumentRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }
 
-type TermsOfServiceApiGetTermsOfServiceInformationForLegalEntityConfig struct {
-	ctx context.Context
-	id  string
+// All parameters accepted by TermsOfServiceApi.GetTermsOfServiceInformationForLegalEntity
+type TermsOfServiceApiGetTermsOfServiceInformationForLegalEntityInput struct {
+	id string
+}
+
+/*
+Prepare a request for GetTermsOfServiceInformationForLegalEntity
+@param id The unique identifier of the legal entity.
+@return TermsOfServiceApiGetTermsOfServiceInformationForLegalEntityInput
+*/
+func (a *TermsOfServiceApi) GetTermsOfServiceInformationForLegalEntityInput(id string) TermsOfServiceApiGetTermsOfServiceInformationForLegalEntityInput {
+	return TermsOfServiceApiGetTermsOfServiceInformationForLegalEntityInput{
+		id: id,
+	}
 }
 
 /*
@@ -124,29 +146,26 @@ GetTermsOfServiceInformationForLegalEntity Get Terms of Service information for 
 
 Returns Terms of Service information for a legal entity.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier of the legal entity.
- @return TermsOfServiceApiGetTermsOfServiceInformationForLegalEntityConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r TermsOfServiceApiGetTermsOfServiceInformationForLegalEntityInput - Request parameters, see GetTermsOfServiceInformationForLegalEntityInput
+@return GetTermsOfServiceAcceptanceInfosResponse, *http.Response, error
 */
-func (a *TermsOfServiceApi) GetTermsOfServiceInformationForLegalEntityConfig(ctx context.Context, id string) TermsOfServiceApiGetTermsOfServiceInformationForLegalEntityConfig {
-	return TermsOfServiceApiGetTermsOfServiceInformationForLegalEntityConfig{
-		ctx: ctx,
-		id:  id,
-	}
-}
-
-/*
-Get Terms of Service information for a legal entity
-Returns Terms of Service information for a legal entity.
- * @param id The unique identifier of the legal entity.
- * @param ctxs ..._context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return GetTermsOfServiceAcceptanceInfosResponse
-*/
-
-func (a *TermsOfServiceApi) GetTermsOfServiceInformationForLegalEntity(r TermsOfServiceApiGetTermsOfServiceInformationForLegalEntityConfig) (GetTermsOfServiceAcceptanceInfosResponse, *_nethttp.Response, error) {
+func (a *TermsOfServiceApi) GetTermsOfServiceInformationForLegalEntity(ctx context.Context, r TermsOfServiceApiGetTermsOfServiceInformationForLegalEntityInput) (GetTermsOfServiceAcceptanceInfosResponse, *http.Response, error) {
 	res := &GetTermsOfServiceAcceptanceInfosResponse{}
 	path := "/legalEntities/{id}/termsOfServiceAcceptanceInfos"
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-	httpRes, err := common.CreateHTTPRequest(a.Client, _nethttp.MethodGet, nil, res, a.BasePath()+path, []_context.Context{r.ctx})
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
 	return *res, httpRes, err
 }

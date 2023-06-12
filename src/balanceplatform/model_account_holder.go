@@ -419,7 +419,7 @@ func (o AccountHolder) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	// skip: id is readOnly
+	toSerialize["id"] = o.Id
 	toSerialize["legalEntityId"] = o.LegalEntityId
 	if !common.IsNil(o.PrimaryBalanceAccount) {
 		toSerialize["primaryBalanceAccount"] = o.PrimaryBalanceAccount
@@ -433,7 +433,9 @@ func (o AccountHolder) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.TimeZone) {
 		toSerialize["timeZone"] = o.TimeZone
 	}
-	// skip: verificationDeadlines is readOnly
+	if !common.IsNil(o.VerificationDeadlines) {
+		toSerialize["verificationDeadlines"] = o.VerificationDeadlines
+	}
 	return toSerialize, nil
 }
 

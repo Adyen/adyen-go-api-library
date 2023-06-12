@@ -19,7 +19,6 @@ var _ common.MappedNullable = &PaymentMethod{}
 
 // PaymentMethod struct for PaymentMethod
 type PaymentMethod struct {
-	AfterpayTouch *AfterpayTouchInfo `json:"afterpayTouch,omitempty"`
 	// Indicates whether receiving payments is allowed. This value is set to **true** by Adyen after screening your merchant account.
 	Allowed  *bool         `json:"allowed,omitempty"`
 	ApplePay *ApplePayInfo `json:"applePay,omitempty"`
@@ -27,7 +26,6 @@ type PaymentMethod struct {
 	// The unique identifier of the business line.
 	BusinessLineId  *string              `json:"businessLineId,omitempty"`
 	CartesBancaires *CartesBancairesInfo `json:"cartesBancaires,omitempty"`
-	Clearpay        *ClearpayInfo        `json:"clearpay,omitempty"`
 	// The list of countries where a payment method is available. By default, all countries supported by the payment method.
 	Countries []string `json:"countries,omitempty"`
 	// The list of currencies that a payment method supports. By default, all currencies supported by the payment method.
@@ -51,7 +49,6 @@ type PaymentMethod struct {
 	// The ID of the [store](https://docs.adyen.com/api-explorer/#/ManagementService/latest/post/stores__resParam_id), if any.
 	StoreId *string    `json:"storeId,omitempty"`
 	Swish   *SwishInfo `json:"swish,omitempty"`
-	Twint   *TwintInfo `json:"twint,omitempty"`
 	// Payment method [variant](https://docs.adyen.com/development-resources/paymentmethodvariant#management-api).
 	Type *string `json:"type,omitempty"`
 	// Payment method status. Possible values: * **valid** * **pending** * **invalid** * **rejected**
@@ -75,38 +72,6 @@ func NewPaymentMethod(id string) *PaymentMethod {
 func NewPaymentMethodWithDefaults() *PaymentMethod {
 	this := PaymentMethod{}
 	return &this
-}
-
-// GetAfterpayTouch returns the AfterpayTouch field value if set, zero value otherwise.
-func (o *PaymentMethod) GetAfterpayTouch() AfterpayTouchInfo {
-	if o == nil || common.IsNil(o.AfterpayTouch) {
-		var ret AfterpayTouchInfo
-		return ret
-	}
-	return *o.AfterpayTouch
-}
-
-// GetAfterpayTouchOk returns a tuple with the AfterpayTouch field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PaymentMethod) GetAfterpayTouchOk() (*AfterpayTouchInfo, bool) {
-	if o == nil || common.IsNil(o.AfterpayTouch) {
-		return nil, false
-	}
-	return o.AfterpayTouch, true
-}
-
-// HasAfterpayTouch returns a boolean if a field has been set.
-func (o *PaymentMethod) HasAfterpayTouch() bool {
-	if o != nil && !common.IsNil(o.AfterpayTouch) {
-		return true
-	}
-
-	return false
-}
-
-// SetAfterpayTouch gets a reference to the given AfterpayTouchInfo and assigns it to the AfterpayTouch field.
-func (o *PaymentMethod) SetAfterpayTouch(v AfterpayTouchInfo) {
-	o.AfterpayTouch = &v
 }
 
 // GetAllowed returns the Allowed field value if set, zero value otherwise.
@@ -267,38 +232,6 @@ func (o *PaymentMethod) HasCartesBancaires() bool {
 // SetCartesBancaires gets a reference to the given CartesBancairesInfo and assigns it to the CartesBancaires field.
 func (o *PaymentMethod) SetCartesBancaires(v CartesBancairesInfo) {
 	o.CartesBancaires = &v
-}
-
-// GetClearpay returns the Clearpay field value if set, zero value otherwise.
-func (o *PaymentMethod) GetClearpay() ClearpayInfo {
-	if o == nil || common.IsNil(o.Clearpay) {
-		var ret ClearpayInfo
-		return ret
-	}
-	return *o.Clearpay
-}
-
-// GetClearpayOk returns a tuple with the Clearpay field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PaymentMethod) GetClearpayOk() (*ClearpayInfo, bool) {
-	if o == nil || common.IsNil(o.Clearpay) {
-		return nil, false
-	}
-	return o.Clearpay, true
-}
-
-// HasClearpay returns a boolean if a field has been set.
-func (o *PaymentMethod) HasClearpay() bool {
-	if o != nil && !common.IsNil(o.Clearpay) {
-		return true
-	}
-
-	return false
-}
-
-// SetClearpay gets a reference to the given ClearpayInfo and assigns it to the Clearpay field.
-func (o *PaymentMethod) SetClearpay(v ClearpayInfo) {
-	o.Clearpay = &v
 }
 
 // GetCountries returns the Countries field value if set, zero value otherwise.
@@ -773,38 +706,6 @@ func (o *PaymentMethod) SetSwish(v SwishInfo) {
 	o.Swish = &v
 }
 
-// GetTwint returns the Twint field value if set, zero value otherwise.
-func (o *PaymentMethod) GetTwint() TwintInfo {
-	if o == nil || common.IsNil(o.Twint) {
-		var ret TwintInfo
-		return ret
-	}
-	return *o.Twint
-}
-
-// GetTwintOk returns a tuple with the Twint field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PaymentMethod) GetTwintOk() (*TwintInfo, bool) {
-	if o == nil || common.IsNil(o.Twint) {
-		return nil, false
-	}
-	return o.Twint, true
-}
-
-// HasTwint returns a boolean if a field has been set.
-func (o *PaymentMethod) HasTwint() bool {
-	if o != nil && !common.IsNil(o.Twint) {
-		return true
-	}
-
-	return false
-}
-
-// SetTwint gets a reference to the given TwintInfo and assigns it to the Twint field.
-func (o *PaymentMethod) SetTwint(v TwintInfo) {
-	o.Twint = &v
-}
-
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *PaymentMethod) GetType() string {
 	if o == nil || common.IsNil(o.Type) {
@@ -911,9 +812,6 @@ func (o PaymentMethod) MarshalJSON() ([]byte, error) {
 
 func (o PaymentMethod) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !common.IsNil(o.AfterpayTouch) {
-		toSerialize["afterpayTouch"] = o.AfterpayTouch
-	}
 	if !common.IsNil(o.Allowed) {
 		toSerialize["allowed"] = o.Allowed
 	}
@@ -928,9 +826,6 @@ func (o PaymentMethod) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.CartesBancaires) {
 		toSerialize["cartesBancaires"] = o.CartesBancaires
-	}
-	if !common.IsNil(o.Clearpay) {
-		toSerialize["clearpay"] = o.Clearpay
 	}
 	if !common.IsNil(o.Countries) {
 		toSerialize["countries"] = o.Countries
@@ -974,9 +869,6 @@ func (o PaymentMethod) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Swish) {
 		toSerialize["swish"] = o.Swish
-	}
-	if !common.IsNil(o.Twint) {
-		toSerialize["twint"] = o.Twint
 	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type

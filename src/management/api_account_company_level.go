@@ -12,19 +12,30 @@ import (
 	"context"
 	"encoding/json"
 	"io/ioutil"
-	_nethttp "net/http"
+	"net/http"
 	"net/url"
 	"strings"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// AccountCompanyLevelApi AccountCompanyLevelApi service
+// AccountCompanyLevelApi service
 type AccountCompanyLevelApi common.Service
 
-type AccountCompanyLevelApiGetCompanyAccountConfig struct {
-	ctx       context.Context
+// All parameters accepted by AccountCompanyLevelApi.GetCompanyAccount
+type AccountCompanyLevelApiGetCompanyAccountInput struct {
 	companyId string
+}
+
+/*
+Prepare a request for GetCompanyAccount
+@param companyId The unique identifier of the company account.
+@return AccountCompanyLevelApiGetCompanyAccountInput
+*/
+func (a *AccountCompanyLevelApi) GetCompanyAccountInput(companyId string) AccountCompanyLevelApiGetCompanyAccountInput {
+	return AccountCompanyLevelApiGetCompanyAccountInput{
+		companyId: companyId,
+	}
 }
 
 /*
@@ -35,97 +46,98 @@ Returns the company account specified in the path. Your API credential must have
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Account read
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param companyId The unique identifier of the company account.
-	@return AccountCompanyLevelApiGetCompanyAccountConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r AccountCompanyLevelApiGetCompanyAccountInput - Request parameters, see GetCompanyAccountInput
+@return Company, *http.Response, error
 */
-func (a *AccountCompanyLevelApi) GetCompanyAccountConfig(ctx context.Context, companyId string) AccountCompanyLevelApiGetCompanyAccountConfig {
-	return AccountCompanyLevelApiGetCompanyAccountConfig{
-		ctx:       ctx,
-		companyId: companyId,
-	}
-}
-
-/*
-Get a company account
-Returns the company account specified in the path. Your API credential must have access to the company account.   To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Account read
- * @param companyId The unique identifier of the company account.
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return Company
-*/
-
-func (a *AccountCompanyLevelApi) GetCompanyAccount(r AccountCompanyLevelApiGetCompanyAccountConfig) (Company, *_nethttp.Response, error) {
-	var serviceError common.RestServiceError
+func (a *AccountCompanyLevelApi) GetCompanyAccount(ctx context.Context, r AccountCompanyLevelApiGetCompanyAccountInput) (Company, *http.Response, error) {
 	res := &Company{}
 	path := "/companies/{companyId}"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		nil,
 		res,
-		_nethttp.MethodGet,
+		http.MethodGet,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
-	defer httpRes.Body.Close()
+
+	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
-	}
-
-	if httpRes.StatusCode == 403 {
-		// Read the response body
+	} else if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
-	}
-
-	if httpRes.StatusCode == 422 {
-		// Read the response body
+	} else if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
+
 	return *res, httpRes, err
 }
 
-type AccountCompanyLevelApiListCompanyAccountsConfig struct {
-	ctx        context.Context
+// All parameters accepted by AccountCompanyLevelApi.ListCompanyAccounts
+type AccountCompanyLevelApiListCompanyAccountsInput struct {
 	pageNumber *int32
 	pageSize   *int32
 }
 
 // The number of the page to fetch.
-func (r AccountCompanyLevelApiListCompanyAccountsConfig) PageNumber(pageNumber int32) AccountCompanyLevelApiListCompanyAccountsConfig {
+func (r AccountCompanyLevelApiListCompanyAccountsInput) PageNumber(pageNumber int32) AccountCompanyLevelApiListCompanyAccountsInput {
 	r.pageNumber = &pageNumber
 	return r
 }
 
 // The number of items to have on a page, maximum 100. The default is 10 items on a page.
-func (r AccountCompanyLevelApiListCompanyAccountsConfig) PageSize(pageSize int32) AccountCompanyLevelApiListCompanyAccountsConfig {
+func (r AccountCompanyLevelApiListCompanyAccountsInput) PageSize(pageSize int32) AccountCompanyLevelApiListCompanyAccountsInput {
 	r.pageSize = &pageSize
 	return r
+}
+
+/*
+Prepare a request for ListCompanyAccounts
+
+@return AccountCompanyLevelApiListCompanyAccountsInput
+*/
+func (a *AccountCompanyLevelApi) ListCompanyAccountsInput() AccountCompanyLevelApiListCompanyAccountsInput {
+	return AccountCompanyLevelApiListCompanyAccountsInput{}
 }
 
 /*
@@ -137,24 +149,11 @@ To make this request, your API credential must have the following [roles](https:
 
 * Management API—Account read
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return AccountCompanyLevelApiListCompanyAccountsConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r AccountCompanyLevelApiListCompanyAccountsInput - Request parameters, see ListCompanyAccountsInput
+@return ListCompanyResponse, *http.Response, error
 */
-func (a *AccountCompanyLevelApi) ListCompanyAccountsConfig(ctx context.Context) AccountCompanyLevelApiListCompanyAccountsConfig {
-	return AccountCompanyLevelApiListCompanyAccountsConfig{
-		ctx: ctx,
-	}
-}
-
-/*
-Get a list of company accounts
-Returns the list of company accounts that your API credential has access to. The list is grouped into pages as defined by the query parameters.  To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):  * Management API—Account read
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return ListCompanyResponse
-*/
-
-func (a *AccountCompanyLevelApi) ListCompanyAccounts(r AccountCompanyLevelApiListCompanyAccountsConfig) (ListCompanyResponse, *_nethttp.Response, error) {
-	var serviceError common.RestServiceError
+func (a *AccountCompanyLevelApi) ListCompanyAccounts(ctx context.Context, r AccountCompanyLevelApiListCompanyAccountsInput) (ListCompanyResponse, *http.Response, error) {
 	res := &ListCompanyResponse{}
 	path := "/companies"
 	queryParams := url.Values{}
@@ -166,71 +165,94 @@ func (a *AccountCompanyLevelApi) ListCompanyAccounts(r AccountCompanyLevelApiLis
 		common.ParameterAddToQuery(queryParams, "pageSize", r.pageSize, "")
 	}
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		nil,
 		res,
-		_nethttp.MethodGet,
+		http.MethodGet,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
-	defer httpRes.Body.Close()
+
+	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
+
 	return *res, httpRes, err
 }
 
-type AccountCompanyLevelApiListMerchantAccountsConfig struct {
-	ctx        context.Context
+// All parameters accepted by AccountCompanyLevelApi.ListMerchantAccounts
+type AccountCompanyLevelApiListMerchantAccountsInput struct {
 	companyId  string
 	pageNumber *int32
 	pageSize   *int32
 }
 
 // The number of the page to fetch.
-func (r AccountCompanyLevelApiListMerchantAccountsConfig) PageNumber(pageNumber int32) AccountCompanyLevelApiListMerchantAccountsConfig {
+func (r AccountCompanyLevelApiListMerchantAccountsInput) PageNumber(pageNumber int32) AccountCompanyLevelApiListMerchantAccountsInput {
 	r.pageNumber = &pageNumber
 	return r
 }
 
 // The number of items to have on a page, maximum 100. The default is 10 items on a page.
-func (r AccountCompanyLevelApiListMerchantAccountsConfig) PageSize(pageSize int32) AccountCompanyLevelApiListMerchantAccountsConfig {
+func (r AccountCompanyLevelApiListMerchantAccountsInput) PageSize(pageSize int32) AccountCompanyLevelApiListMerchantAccountsInput {
 	r.pageSize = &pageSize
 	return r
+}
+
+/*
+Prepare a request for ListMerchantAccounts
+@param companyId The unique identifier of the company account.
+@return AccountCompanyLevelApiListMerchantAccountsInput
+*/
+func (a *AccountCompanyLevelApi) ListMerchantAccountsInput(companyId string) AccountCompanyLevelApiListMerchantAccountsInput {
+	return AccountCompanyLevelApiListMerchantAccountsInput{
+		companyId: companyId,
+	}
 }
 
 /*
@@ -241,27 +263,11 @@ Returns the list of merchant accounts under the company account specified in the
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Account read
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param companyId The unique identifier of the company account.
-	@return AccountCompanyLevelApiListMerchantAccountsConfig
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r AccountCompanyLevelApiListMerchantAccountsInput - Request parameters, see ListMerchantAccountsInput
+@return ListMerchantResponse, *http.Response, error
 */
-func (a *AccountCompanyLevelApi) ListMerchantAccountsConfig(ctx context.Context, companyId string) AccountCompanyLevelApiListMerchantAccountsConfig {
-	return AccountCompanyLevelApiListMerchantAccountsConfig{
-		ctx:       ctx,
-		companyId: companyId,
-	}
-}
-
-/*
-Get a list of merchant accounts
-Returns the list of merchant accounts under the company account specified in the path. The list only includes merchant accounts that your API credential has access to. The list is grouped into pages as defined by the query parameters.   To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions): * Management API—Account read
- * @param companyId The unique identifier of the company account.
- * @param ctxs ...context.Context - optional, for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return ListMerchantResponse
-*/
-
-func (a *AccountCompanyLevelApi) ListMerchantAccounts(r AccountCompanyLevelApiListMerchantAccountsConfig) (ListMerchantResponse, *_nethttp.Response, error) {
-	var serviceError common.RestServiceError
+func (a *AccountCompanyLevelApi) ListMerchantAccounts(ctx context.Context, r AccountCompanyLevelApiListMerchantAccountsInput) (ListMerchantResponse, *http.Response, error) {
 	res := &ListMerchantResponse{}
 	path := "/companies/{companyId}/merchants"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
@@ -274,50 +280,62 @@ func (a *AccountCompanyLevelApi) ListMerchantAccounts(r AccountCompanyLevelApiLi
 		common.ParameterAddToQuery(queryParams, "pageSize", r.pageSize, "")
 	}
 	httpRes, err := common.SendAPIRequest(
-		r.ctx,
+		ctx,
 		a.Client,
 		nil,
 		res,
-		_nethttp.MethodGet,
+		http.MethodGet,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
-	defer httpRes.Body.Close()
+
+	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 401 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
-		// Read the response body
 		body, _ := ioutil.ReadAll(httpRes.Body)
-		_ = json.Unmarshal([]byte(body), &serviceError)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
 		return *res, httpRes, serviceError
 	}
+
 	return *res, httpRes, err
 }

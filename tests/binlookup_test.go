@@ -34,8 +34,8 @@ func Test_Binlookup(t *testing.T) {
 				CardNumber:      &cardNumber,
 				MerchantAccount: MerchantAccount,
 			}
-			req := client.BinLookup().Get3dsAvailabilityConfig(context.Background()).ThreeDSAvailabilityRequest(body)
-			res, httpRes, err := client.BinLookup().Get3dsAvailability(req)
+			req := client.BinLookup().Get3dsAvailabilityInput().ThreeDSAvailabilityRequest(body)
+			res, httpRes, err := client.BinLookup().Get3dsAvailability(context.Background(), req)
 
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
@@ -48,9 +48,9 @@ func Test_Binlookup(t *testing.T) {
 				CardNumber:      &cardNumber,
 				MerchantAccount: MerchantAccount,
 			}
-			req := client.BinLookup().Get3dsAvailabilityConfig(context.Background()).ThreeDSAvailabilityRequest(body)
+			req := client.BinLookup().Get3dsAvailabilityInput().ThreeDSAvailabilityRequest(body)
 
-			res, httpRes, err := client.BinLookup().Get3dsAvailability(req)
+			res, httpRes, err := client.BinLookup().Get3dsAvailability(context.Background(), req)
 
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
@@ -63,9 +63,9 @@ func Test_Binlookup(t *testing.T) {
 				CardNumber:      &cardNumber,
 				MerchantAccount: MerchantAccount,
 			}
-			req := client.BinLookup().Get3dsAvailabilityConfig(context.Background()).ThreeDSAvailabilityRequest(body)
+			req := client.BinLookup().Get3dsAvailabilityInput().ThreeDSAvailabilityRequest(body)
 
-			res, httpRes, err := client.BinLookup().Get3dsAvailability(req)
+			res, httpRes, err := client.BinLookup().Get3dsAvailability(context.Background(), req)
 
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
@@ -84,9 +84,9 @@ func Test_Binlookup(t *testing.T) {
 				CardNumber:      &cardNumber,
 				MerchantAccount: MerchantAccount,
 			}
-			req := client.BinLookup().GetCostEstimateConfig(context.Background()).CostEstimateRequest(body)
+			req := client.BinLookup().GetCostEstimateInput().CostEstimateRequest(body)
 
-			res, httpRes, err := client.BinLookup().GetCostEstimate(req)
+			res, httpRes, err := client.BinLookup().GetCostEstimate(context.Background(), req)
 
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
@@ -102,9 +102,9 @@ func Test_Binlookup(t *testing.T) {
 				CardNumber:      &cardNumber,
 				MerchantAccount: MerchantAccount,
 			}
-			req := client.BinLookup().GetCostEstimateConfig(context.Background()).CostEstimateRequest(body)
+			req := client.BinLookup().GetCostEstimateInput().CostEstimateRequest(body)
 
-			res, httpRes, err := client.BinLookup().GetCostEstimate(req)
+			res, httpRes, err := client.BinLookup().GetCostEstimate(context.Background(), req)
 
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)

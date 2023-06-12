@@ -60,45 +60,44 @@ func Test_Payment(t *testing.T) {
 			Reference:       time.Now().String(),
 			MerchantAccount: MerchantAccount,
 		}
-		req := service.GeneralApi.AuthoriseConfig(context.Background()).PaymentRequest(body)
-		return service.GeneralApi.Authorise(req)
+		req := service.GeneralApi.AuthoriseInput().PaymentRequest(body)
+		return service.GeneralApi.Authorise(context.Background(), req)
 	}
 
 	t.Run("General", func(t *testing.T) {
 		t.Run("Authorise3d", func(t *testing.T) {
 			t.Skip("skipping since 3d requires manual user authentication")
-			req := service.GeneralApi.Authorise3dConfig(context.Background()).PaymentRequest3d(payments.PaymentRequest3d{})
-			res, httpRes, err := service.GeneralApi.Authorise3d(req)
+			req := service.GeneralApi.Authorise3dInput().PaymentRequest3d(payments.PaymentRequest3d{})
+			res, httpRes, err := service.GeneralApi.Authorise3d(context.Background(), req)
 			assertForSuccessResponse(res, httpRes, err)
 		})
 
 		t.Run("Authorise3ds2", func(t *testing.T) {
 			t.Skip("skipping since 3d requires manual user authentication")
-			req := service.GeneralApi.Authorise3ds2Config(context.Background()).PaymentRequest3ds2(payments.PaymentRequest3ds2{})
-			res, httpRes, err := service.GeneralApi.Authorise3ds2(req)
+			req := service.GeneralApi.Authorise3ds2Input().PaymentRequest3ds2(payments.PaymentRequest3ds2{})
+			res, httpRes, err := service.GeneralApi.Authorise3ds2(context.Background(), req)
 			assertForSuccessResponse(res, httpRes, err)
 		})
 
 		t.Run("Authorise", func(t *testing.T) {
-			resultCode := common.Authorised.String()
 			res, httpRes, err := authorisePost()
 
 			assertForSuccessResponse(res, httpRes, err)
 			assert.NotNil(t, res.PspReference)
-			assert.Equal(t, res.ResultCode, &resultCode)
+			assert.Equal(t, res.GetResultCode(), "Authorised")
 		})
 
 		t.Run("GetAuthenticationResult", func(t *testing.T) {
 			t.Skip("skipping since this returns auth result after a 3d auth")
-			req := service.GeneralApi.GetAuthenticationResultConfig(context.Background())
-			res, httpRes, err := service.GeneralApi.GetAuthenticationResult(req)
+			req := service.GeneralApi.GetAuthenticationResultInput()
+			res, httpRes, err := service.GeneralApi.GetAuthenticationResult(context.Background(), req)
 			assertForSuccessResponse(res, httpRes, err)
 		})
 
 		t.Run("Retrieve3ds2Result", func(t *testing.T) {
 			t.Skip("skipping since this returns auth result after a 3d auth")
-			req := service.GeneralApi.Retrieve3ds2ResultConfig(context.Background())
-			res, httpRes, err := service.GeneralApi.Retrieve3ds2Result(req)
+			req := service.GeneralApi.Retrieve3ds2ResultInput()
+			res, httpRes, err := service.GeneralApi.Retrieve3ds2Result(context.Background(), req)
 			assertForSuccessResponse(res, httpRes, err)
 		})
 	})
@@ -116,8 +115,8 @@ func Test_Payment(t *testing.T) {
 				Reference:       &reference,
 				MerchantAccount: MerchantAccount,
 			}
-			req := service.ModificationsApi.AdjustAuthorisationConfig(context.Background()).AdjustAuthorisationRequest(body)
-			res, httpRes, err := service.ModificationsApi.AdjustAuthorisation(req)
+			req := service.ModificationsApi.AdjustAuthorisationInput().AdjustAuthorisationRequest(body)
+			res, httpRes, err := service.ModificationsApi.AdjustAuthorisation(context.Background(), req)
 			assertForSuccessResponse(res, httpRes, err)
 			assert.Equal(t, "[adjustAuthorisation-received]", res.Response)
 		})
@@ -130,8 +129,8 @@ func Test_Payment(t *testing.T) {
 				Reference:         &reference,
 				MerchantAccount:   MerchantAccount,
 			}
-			req := service.ModificationsApi.CancelOrRefundConfig(context.Background()).CancelOrRefundRequest(body)
-			res, httpRes, err := service.ModificationsApi.CancelOrRefund(req)
+			req := service.ModificationsApi.CancelOrRefundInput().CancelOrRefundRequest(body)
+			res, httpRes, err := service.ModificationsApi.CancelOrRefund(context.Background(), req)
 			assertForSuccessResponse(res, httpRes, err)
 			assert.Equal(t, "[cancelOrRefund-received]", res.Response)
 		})
@@ -144,8 +143,8 @@ func Test_Payment(t *testing.T) {
 				Reference:         &reference,
 				MerchantAccount:   MerchantAccount,
 			}
-			req := service.ModificationsApi.CancelConfig(context.Background()).CancelRequest(body)
-			res, httpRes, err := service.ModificationsApi.Cancel(req)
+			req := service.ModificationsApi.CancelInput().CancelRequest(body)
+			res, httpRes, err := service.ModificationsApi.Cancel(context.Background(), req)
 			assertForSuccessResponse(res, httpRes, err)
 			assert.Equal(t, "[cancel-received]", res.Response)
 		})
@@ -162,8 +161,8 @@ func Test_Payment(t *testing.T) {
 				Reference:       &reference,
 				MerchantAccount: MerchantAccount,
 			}
-			req := service.ModificationsApi.CaptureConfig(context.Background()).CaptureRequest(body)
-			res, httpRes, err := service.ModificationsApi.Capture(req)
+			req := service.ModificationsApi.CaptureInput().CaptureRequest(body)
+			res, httpRes, err := service.ModificationsApi.Capture(context.Background(), req)
 			assertForSuccessResponse(res, httpRes, err)
 			assert.Equal(t, "[capture-received]", res.Response)
 		})
@@ -180,8 +179,8 @@ func Test_Payment(t *testing.T) {
 				Reference:       &reference,
 				MerchantAccount: MerchantAccount,
 			}
-			req := service.ModificationsApi.RefundConfig(context.Background()).RefundRequest(body)
-			res, httpRes, err := service.ModificationsApi.Refund(req)
+			req := service.ModificationsApi.RefundInput().RefundRequest(body)
+			res, httpRes, err := service.ModificationsApi.Refund(context.Background(), req)
 			assertForSuccessResponse(res, httpRes, err)
 			assert.Equal(t, "[refund-received]", res.Response)
 		})
@@ -194,8 +193,8 @@ func Test_Payment(t *testing.T) {
 				Reference:                 &reference,
 				MerchantAccount:           MerchantAccount,
 			}
-			req := service.ModificationsApi.TechnicalCancelConfig(context.Background()).TechnicalCancelRequest(body)
-			res, httpRes, err := service.ModificationsApi.TechnicalCancel(req)
+			req := service.ModificationsApi.TechnicalCancelInput().TechnicalCancelRequest(body)
+			res, httpRes, err := service.ModificationsApi.TechnicalCancel(context.Background(), req)
 			assertForSuccessResponse(res, httpRes, err)
 			assert.Equal(t, "[technical-cancel-received]", res.Response)
 		})
@@ -208,8 +207,8 @@ func Test_Payment(t *testing.T) {
 				Reference:         &reference,
 				MerchantAccount:   MerchantAccount,
 			}
-			req := service.ModificationsApi.VoidPendingRefundConfig(context.Background()).VoidPendingRefundRequest(body)
-			res, httpRes, err := service.ModificationsApi.VoidPendingRefund(req)
+			req := service.ModificationsApi.VoidPendingRefundInput().VoidPendingRefundRequest(body)
+			res, httpRes, err := service.ModificationsApi.VoidPendingRefund(context.Background(), req)
 			assertForSuccessResponse(res, httpRes, err)
 			assert.Equal(t, "[voidPendingRefund-received]", res.Response)
 		})

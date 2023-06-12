@@ -264,7 +264,7 @@ func (o TransferInstrument) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.DocumentDetails) {
 		toSerialize["documentDetails"] = o.DocumentDetails
 	}
-	// skip: id is readOnly
+	toSerialize["id"] = o.Id
 	toSerialize["legalEntityId"] = o.LegalEntityId
 	if !common.IsNil(o.Problems) {
 		toSerialize["problems"] = o.Problems

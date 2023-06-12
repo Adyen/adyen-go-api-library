@@ -20,9 +20,8 @@ var _ common.MappedNullable = &TerminalProductPrice{}
 // TerminalProductPrice struct for TerminalProductPrice
 type TerminalProductPrice struct {
 	// The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes).
-	Currency *string `json:"currency,omitempty"`
-	// The price of the item.
-	Value *float64 `json:"value,omitempty"`
+	Currency *string                `json:"currency,omitempty"`
+	Value    map[string]interface{} `json:"value,omitempty"`
 }
 
 // NewTerminalProductPrice instantiates a new TerminalProductPrice object
@@ -75,19 +74,19 @@ func (o *TerminalProductPrice) SetCurrency(v string) {
 }
 
 // GetValue returns the Value field value if set, zero value otherwise.
-func (o *TerminalProductPrice) GetValue() float64 {
+func (o *TerminalProductPrice) GetValue() map[string]interface{} {
 	if o == nil || common.IsNil(o.Value) {
-		var ret float64
+		var ret map[string]interface{}
 		return ret
 	}
-	return *o.Value
+	return o.Value
 }
 
 // GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TerminalProductPrice) GetValueOk() (*float64, bool) {
+func (o *TerminalProductPrice) GetValueOk() (map[string]interface{}, bool) {
 	if o == nil || common.IsNil(o.Value) {
-		return nil, false
+		return map[string]interface{}{}, false
 	}
 	return o.Value, true
 }
@@ -101,9 +100,9 @@ func (o *TerminalProductPrice) HasValue() bool {
 	return false
 }
 
-// SetValue gets a reference to the given float64 and assigns it to the Value field.
-func (o *TerminalProductPrice) SetValue(v float64) {
-	o.Value = &v
+// SetValue gets a reference to the given map[string]interface{} and assigns it to the Value field.
+func (o *TerminalProductPrice) SetValue(v map[string]interface{}) {
+	o.Value = v
 }
 
 func (o TerminalProductPrice) MarshalJSON() ([]byte, error) {
