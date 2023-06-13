@@ -27,7 +27,7 @@ func Test_BalancePlatform_Transfer_Webhooks_HandleRequest(t *testing.T) {
 			"environment": "test"
 		  }
 		`
-		balancePlatformNotification, _ := transferwebhook.HandleTransferwebhookRequest(notificationJson)
+		balancePlatformNotification, _ := transferwebhook.HandleTransferNotificationRequest(notificationJson)
 		balancePlatformValue := "YOUR_BALANCE_PLATFORM"
 		transferType := "refund"
 		assert.Equal(t, &balancePlatformValue, balancePlatformNotification.Data.BalancePlatform)
