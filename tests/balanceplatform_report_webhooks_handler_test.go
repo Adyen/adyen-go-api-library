@@ -29,7 +29,7 @@ func Test_BalancePlatform_Report_Webhooks_HandleRequest(t *testing.T) {
 			"type": "balancePlatform.report.created"
 		  }
 		`
-		balancePlatformNotification, _ := reportwebhook.HandleReportwebhookRequest(notificationJson)
+		balancePlatformNotification, _ := reportwebhook.HandleReportNotificationRequest(notificationJson)
 		balancePlatformValue := "YOUR_BALANCE_PLATFORM"
 		assert.Equal(t, &balancePlatformValue, balancePlatformNotification.Data.BalancePlatform)
 		assert.Equal(t, "balanceplatform_payments_accounting_report", balancePlatformNotification.Data.ReportType)
