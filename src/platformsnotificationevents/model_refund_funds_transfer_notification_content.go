@@ -15,8 +15,8 @@ import (
 	"encoding/json"
 )
 
-// RefundFundstransferwebhookContent struct for RefundFundstransferwebhookContent
-type RefundFundstransferwebhookContent struct {
+// RefundFundsTransferNotificationContent struct for RefundFundsTransferNotificationContent
+type RefundFundsTransferNotificationContent struct {
 	Amount Amount `json:"amount"`
 	// Invalid fields list.
 	InvalidFields *[]ErrorFieldType `json:"invalidFields,omitempty"`
@@ -27,27 +27,27 @@ type RefundFundstransferwebhookContent struct {
 	Status *OperationStatus `json:"status,omitempty"`
 }
 
-// NewRefundFundstransferwebhookContent instantiates a new RefundFundstransferwebhookContent object
+// NewRefundFundsTransferNotificationContent instantiates a new RefundFundsTransferNotificationContent object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRefundFundstransferwebhookContent(amount Amount, originalReference string, ) *RefundFundstransferwebhookContent {
-	this := RefundFundstransferwebhookContent{}
+func NewRefundFundsTransferNotificationContent(amount Amount, originalReference string, ) *RefundFundsTransferNotificationContent {
+	this := RefundFundsTransferNotificationContent{}
 	this.Amount = amount
 	this.OriginalReference = originalReference
 	return &this
 }
 
-// NewRefundFundstransferwebhookContentWithDefaults instantiates a new RefundFundstransferwebhookContent object
+// NewRefundFundsTransferNotificationContentWithDefaults instantiates a new RefundFundsTransferNotificationContent object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewRefundFundstransferwebhookContentWithDefaults() *RefundFundstransferwebhookContent {
-	this := RefundFundstransferwebhookContent{}
+func NewRefundFundsTransferNotificationContentWithDefaults() *RefundFundsTransferNotificationContent {
+	this := RefundFundsTransferNotificationContent{}
 	return &this
 }
 
 // GetAmount returns the Amount field value
-func (o *RefundFundstransferwebhookContent) GetAmount() Amount {
+func (o *RefundFundsTransferNotificationContent) GetAmount() Amount {
 	if o == nil  {
 		var ret Amount
 		return ret
@@ -58,7 +58,7 @@ func (o *RefundFundstransferwebhookContent) GetAmount() Amount {
 
 // GetAmountOk returns a tuple with the Amount field value
 // and a boolean to check if the value has been set.
-func (o *RefundFundstransferwebhookContent) GetAmountOk() (*Amount, bool) {
+func (o *RefundFundsTransferNotificationContent) GetAmountOk() (*Amount, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -66,12 +66,12 @@ func (o *RefundFundstransferwebhookContent) GetAmountOk() (*Amount, bool) {
 }
 
 // SetAmount sets field value
-func (o *RefundFundstransferwebhookContent) SetAmount(v Amount) {
+func (o *RefundFundsTransferNotificationContent) SetAmount(v Amount) {
 	o.Amount = v
 }
 
 // GetInvalidFields returns the InvalidFields field value if set, zero value otherwise.
-func (o *RefundFundstransferwebhookContent) GetInvalidFields() []ErrorFieldType {
+func (o *RefundFundsTransferNotificationContent) GetInvalidFields() []ErrorFieldType {
 	if o == nil || o.InvalidFields == nil {
 		var ret []ErrorFieldType
 		return ret
@@ -81,7 +81,7 @@ func (o *RefundFundstransferwebhookContent) GetInvalidFields() []ErrorFieldType 
 
 // GetInvalidFieldsOk returns a tuple with the InvalidFields field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RefundFundstransferwebhookContent) GetInvalidFieldsOk() (*[]ErrorFieldType, bool) {
+func (o *RefundFundsTransferNotificationContent) GetInvalidFieldsOk() (*[]ErrorFieldType, bool) {
 	if o == nil || o.InvalidFields == nil {
 		return nil, false
 	}
@@ -89,7 +89,7 @@ func (o *RefundFundstransferwebhookContent) GetInvalidFieldsOk() (*[]ErrorFieldT
 }
 
 // HasInvalidFields returns a boolean if a field has been set.
-func (o *RefundFundstransferwebhookContent) HasInvalidFields() bool {
+func (o *RefundFundsTransferNotificationContent) HasInvalidFields() bool {
 	if o != nil && o.InvalidFields != nil {
 		return true
 	}
@@ -98,12 +98,12 @@ func (o *RefundFundstransferwebhookContent) HasInvalidFields() bool {
 }
 
 // SetInvalidFields gets a reference to the given []ErrorFieldType and assigns it to the InvalidFields field.
-func (o *RefundFundstransferwebhookContent) SetInvalidFields(v []ErrorFieldType) {
+func (o *RefundFundsTransferNotificationContent) SetInvalidFields(v []ErrorFieldType) {
 	o.InvalidFields = &v
 }
 
 // GetMerchantReference returns the MerchantReference field value if set, zero value otherwise.
-func (o *RefundFundstransferwebhookContent) GetMerchantReference() string {
+func (o *RefundFundsTransferNotificationContent) GetMerchantReference() string {
 	if o == nil || o.MerchantReference == nil {
 		var ret string
 		return ret
@@ -113,7 +113,7 @@ func (o *RefundFundstransferwebhookContent) GetMerchantReference() string {
 
 // GetMerchantReferenceOk returns a tuple with the MerchantReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RefundFundstransferwebhookContent) GetMerchantReferenceOk() (*string, bool) {
+func (o *RefundFundsTransferNotificationContent) GetMerchantReferenceOk() (*string, bool) {
 	if o == nil || o.MerchantReference == nil {
 		return nil, false
 	}
@@ -121,7 +121,7 @@ func (o *RefundFundstransferwebhookContent) GetMerchantReferenceOk() (*string, b
 }
 
 // HasMerchantReference returns a boolean if a field has been set.
-func (o *RefundFundstransferwebhookContent) HasMerchantReference() bool {
+func (o *RefundFundsTransferNotificationContent) HasMerchantReference() bool {
 	if o != nil && o.MerchantReference != nil {
 		return true
 	}
@@ -130,12 +130,12 @@ func (o *RefundFundstransferwebhookContent) HasMerchantReference() bool {
 }
 
 // SetMerchantReference gets a reference to the given string and assigns it to the MerchantReference field.
-func (o *RefundFundstransferwebhookContent) SetMerchantReference(v string) {
+func (o *RefundFundsTransferNotificationContent) SetMerchantReference(v string) {
 	o.MerchantReference = &v
 }
 
 // GetOriginalReference returns the OriginalReference field value
-func (o *RefundFundstransferwebhookContent) GetOriginalReference() string {
+func (o *RefundFundsTransferNotificationContent) GetOriginalReference() string {
 	if o == nil  {
 		var ret string
 		return ret
@@ -146,7 +146,7 @@ func (o *RefundFundstransferwebhookContent) GetOriginalReference() string {
 
 // GetOriginalReferenceOk returns a tuple with the OriginalReference field value
 // and a boolean to check if the value has been set.
-func (o *RefundFundstransferwebhookContent) GetOriginalReferenceOk() (*string, bool) {
+func (o *RefundFundsTransferNotificationContent) GetOriginalReferenceOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -154,12 +154,12 @@ func (o *RefundFundstransferwebhookContent) GetOriginalReferenceOk() (*string, b
 }
 
 // SetOriginalReference sets field value
-func (o *RefundFundstransferwebhookContent) SetOriginalReference(v string) {
+func (o *RefundFundsTransferNotificationContent) SetOriginalReference(v string) {
 	o.OriginalReference = v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *RefundFundstransferwebhookContent) GetStatus() OperationStatus {
+func (o *RefundFundsTransferNotificationContent) GetStatus() OperationStatus {
 	if o == nil || o.Status == nil {
 		var ret OperationStatus
 		return ret
@@ -169,7 +169,7 @@ func (o *RefundFundstransferwebhookContent) GetStatus() OperationStatus {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RefundFundstransferwebhookContent) GetStatusOk() (*OperationStatus, bool) {
+func (o *RefundFundsTransferNotificationContent) GetStatusOk() (*OperationStatus, bool) {
 	if o == nil || o.Status == nil {
 		return nil, false
 	}
@@ -177,7 +177,7 @@ func (o *RefundFundstransferwebhookContent) GetStatusOk() (*OperationStatus, boo
 }
 
 // HasStatus returns a boolean if a field has been set.
-func (o *RefundFundstransferwebhookContent) HasStatus() bool {
+func (o *RefundFundsTransferNotificationContent) HasStatus() bool {
 	if o != nil && o.Status != nil {
 		return true
 	}
@@ -186,11 +186,11 @@ func (o *RefundFundstransferwebhookContent) HasStatus() bool {
 }
 
 // SetStatus gets a reference to the given OperationStatus and assigns it to the Status field.
-func (o *RefundFundstransferwebhookContent) SetStatus(v OperationStatus) {
+func (o *RefundFundsTransferNotificationContent) SetStatus(v OperationStatus) {
 	o.Status = &v
 }
 
-func (o RefundFundstransferwebhookContent) MarshalJSON() ([]byte, error) {
+func (o RefundFundsTransferNotificationContent) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["amount"] = o.Amount
@@ -210,38 +210,38 @@ func (o RefundFundstransferwebhookContent) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableRefundFundstransferwebhookContent struct {
-	value *RefundFundstransferwebhookContent
+type NullableRefundFundsTransferNotificationContent struct {
+	value *RefundFundsTransferNotificationContent
 	isSet bool
 }
 
-func (v NullableRefundFundstransferwebhookContent) Get() *RefundFundstransferwebhookContent {
+func (v NullableRefundFundsTransferNotificationContent) Get() *RefundFundsTransferNotificationContent {
 	return v.value
 }
 
-func (v *NullableRefundFundstransferwebhookContent) Set(val *RefundFundstransferwebhookContent) {
+func (v *NullableRefundFundsTransferNotificationContent) Set(val *RefundFundsTransferNotificationContent) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableRefundFundstransferwebhookContent) IsSet() bool {
+func (v NullableRefundFundsTransferNotificationContent) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableRefundFundstransferwebhookContent) Unset() {
+func (v *NullableRefundFundsTransferNotificationContent) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableRefundFundstransferwebhookContent(val *RefundFundstransferwebhookContent) *NullableRefundFundstransferwebhookContent {
-	return &NullableRefundFundstransferwebhookContent{value: val, isSet: true}
+func NewNullableRefundFundsTransferNotificationContent(val *RefundFundsTransferNotificationContent) *NullableRefundFundsTransferNotificationContent {
+	return &NullableRefundFundsTransferNotificationContent{value: val, isSet: true}
 }
 
-func (v NullableRefundFundstransferwebhookContent) MarshalJSON() ([]byte, error) {
+func (v NullableRefundFundsTransferNotificationContent) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableRefundFundstransferwebhookContent) UnmarshalJSON(src []byte) error {
+func (v *NullableRefundFundsTransferNotificationContent) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
