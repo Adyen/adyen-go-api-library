@@ -27,6 +27,8 @@ type BalanceAccountBase struct {
 	Description *string `json:"description,omitempty"`
 	// The unique identifier of the balance account.
 	Id string `json:"id"`
+	// A set of key and value pairs for general use by the merchant. The keys do not have specific names and may be used for storing miscellaneous data as desired. > Note that during an update of metadata, the omission of existing key-value pairs will result in the deletion of those key-value pairs.
+	Metadata *map[string]string `json:"metadata,omitempty"`
 	// Your reference for the balance account, maximum 150 characters.
 	Reference *string `json:"reference,omitempty"`
 	// The status of the balance account, set to **active** by default.
@@ -166,6 +168,38 @@ func (o *BalanceAccountBase) SetId(v string) {
 	o.Id = v
 }
 
+// GetMetadata returns the Metadata field value if set, zero value otherwise.
+func (o *BalanceAccountBase) GetMetadata() map[string]string {
+	if o == nil || common.IsNil(o.Metadata) {
+		var ret map[string]string
+		return ret
+	}
+	return *o.Metadata
+}
+
+// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BalanceAccountBase) GetMetadataOk() (*map[string]string, bool) {
+	if o == nil || common.IsNil(o.Metadata) {
+		return nil, false
+	}
+	return o.Metadata, true
+}
+
+// HasMetadata returns a boolean if a field has been set.
+func (o *BalanceAccountBase) HasMetadata() bool {
+	if o != nil && !common.IsNil(o.Metadata) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetadata gets a reference to the given map[string]string and assigns it to the Metadata field.
+func (o *BalanceAccountBase) SetMetadata(v map[string]string) {
+	o.Metadata = &v
+}
+
 // GetReference returns the Reference field value if set, zero value otherwise.
 func (o *BalanceAccountBase) GetReference() string {
 	if o == nil || common.IsNil(o.Reference) {
@@ -280,6 +314,9 @@ func (o BalanceAccountBase) ToMap() (map[string]interface{}, error) {
 		toSerialize["description"] = o.Description
 	}
 	toSerialize["id"] = o.Id
+	if !common.IsNil(o.Metadata) {
+		toSerialize["metadata"] = o.Metadata
+	}
 	if !common.IsNil(o.Reference) {
 		toSerialize["reference"] = o.Reference
 	}

@@ -2,7 +2,6 @@ package tests
 
 import (
 	"context"
-	"encoding/json"
 	"github.com/adyen/adyen-go-api-library/v7/src/adyen"
 	"github.com/adyen/adyen-go-api-library/v7/src/balanceplatform"
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
@@ -110,16 +109,14 @@ func Test_BalancePlatform(t *testing.T) {
 		body := balanceplatform.NewPaymentInstrumentUpdateRequest()
 		body.SetBalanceAccountId("BA32272223222B5CM82WL892M")
 		req.PaymentInstrumentUpdateRequest(*body)
+
 		_, _, err := service.PaymentInstrumentsApi.UpdatePaymentInstrument(context.Background(), req)
 
-		apiError := err.(common.APIError)
-		assert.Equal(t, float64(422), apiError.Status)
-		assert.Equal(t, "30_112", apiError.Code)
-
-		var restError balanceplatform.RestServiceError
-		_ = json.Unmarshal(apiError.RawBody, &restError)
-		assert.Equal(t, "Entity was not found", restError.Title)
-		assert.Equal(t, "Payment instrument not found", restError.Detail)
+		serviceError := err.(common.RestServiceError)
+		assert.Equal(t, int32(422), serviceError.Status)
+		assert.Equal(t, "30_112", serviceError.GetErrorCode())
+		assert.Equal(t, "Entity was not found", serviceError.GetTitle())
+		assert.Equal(t, "Payment instrument not found", serviceError.GetDetail())
 	})
 
 	t.Run("Delete a sweep", func(t *testing.T) {

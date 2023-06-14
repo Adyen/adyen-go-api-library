@@ -37,7 +37,7 @@ type UpdatePaymentInstrument struct {
 	Status *string `json:"status,omitempty"`
 	// Comment for the status of the payment instrument.  Required if `statusReason` is **other**.
 	StatusComment *string `json:"statusComment,omitempty"`
-	// The reason for updating the status of the payment instrument.  Possible values: **lost**, **stolen**, **damaged**, **suspectedFraud**, **expired**, **endOfLife**, **accountClosure**, **other**. If the reason is **other**, you must also send the `statusComment` parameter describing the status change.
+	// The reason for the status of the payment instrument.  Possible values: **accountClosure**, **damaged**, **endOfLife**, **expired**, **lost**, **stolen**, **suspectedFraud**, **transactionRule**, **other**. If the reason is **other**, you must also send the `statusComment` parameter describing the status change.
 	StatusReason *string `json:"statusReason,omitempty"`
 	// Type of payment instrument.  Possible value: **card**, **bankAccount**.
 	Type string `json:"type"`
@@ -503,7 +503,7 @@ func (o *UpdatePaymentInstrument) isValidStatus() bool {
 	return false
 }
 func (o *UpdatePaymentInstrument) isValidStatusReason() bool {
-	var allowedEnumValues = []string{"accountClosure", "damaged", "endOfLife", "expired", "lost", "other", "stolen", "suspectedFraud"}
+	var allowedEnumValues = []string{"accountClosure", "damaged", "endOfLife", "expired", "lost", "other", "stolen", "suspectedFraud", "transactionRule"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetStatusReason() == allowed {
 			return true

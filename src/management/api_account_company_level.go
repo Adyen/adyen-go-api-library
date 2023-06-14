@@ -85,14 +85,18 @@ func (a *AccountCompanyLevelApi) GetCompanyAccount(ctx context.Context, r Accoun
 			return *res, httpRes, decodeError
 		}
 		return *res, httpRes, serviceError
-	} else if httpRes.StatusCode == 403 {
+	}
+
+	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
 		}
 		return *res, httpRes, serviceError
-	} else if httpRes.StatusCode == 422 {
+	}
+
+	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {

@@ -30,6 +30,8 @@ type AccountHolder struct {
 	Id string `json:"id"`
 	// The unique identifier of the [legal entity](https://docs.adyen.com/api-explorer/legalentity/latest/post/legalEntities#responses-200-id) associated with the account holder. Adyen performs a verification process against the legal entity of the account holder.
 	LegalEntityId string `json:"legalEntityId"`
+	// A set of key and value pairs for general use by the merchant. The keys do not have specific names and may be used for storing miscellaneous data as desired. > Note that during an update of metadata, the omission of existing key-value pairs will result in the deletion of those key-value pairs.
+	Metadata *map[string]string `json:"metadata,omitempty"`
 	// The ID of the account holder's primary balance account. By default, this is set to the first balance account that you create for the account holder. To assign a different balance account, send a PATCH request.
 	PrimaryBalanceAccount *string `json:"primaryBalanceAccount,omitempty"`
 	// Your reference for the account holder, maximum 150 characters.
@@ -237,6 +239,38 @@ func (o *AccountHolder) SetLegalEntityId(v string) {
 	o.LegalEntityId = v
 }
 
+// GetMetadata returns the Metadata field value if set, zero value otherwise.
+func (o *AccountHolder) GetMetadata() map[string]string {
+	if o == nil || common.IsNil(o.Metadata) {
+		var ret map[string]string
+		return ret
+	}
+	return *o.Metadata
+}
+
+// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AccountHolder) GetMetadataOk() (*map[string]string, bool) {
+	if o == nil || common.IsNil(o.Metadata) {
+		return nil, false
+	}
+	return o.Metadata, true
+}
+
+// HasMetadata returns a boolean if a field has been set.
+func (o *AccountHolder) HasMetadata() bool {
+	if o != nil && !common.IsNil(o.Metadata) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetadata gets a reference to the given map[string]string and assigns it to the Metadata field.
+func (o *AccountHolder) SetMetadata(v map[string]string) {
+	o.Metadata = &v
+}
+
 // GetPrimaryBalanceAccount returns the PrimaryBalanceAccount field value if set, zero value otherwise.
 func (o *AccountHolder) GetPrimaryBalanceAccount() string {
 	if o == nil || common.IsNil(o.PrimaryBalanceAccount) {
@@ -421,6 +455,9 @@ func (o AccountHolder) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["id"] = o.Id
 	toSerialize["legalEntityId"] = o.LegalEntityId
+	if !common.IsNil(o.Metadata) {
+		toSerialize["metadata"] = o.Metadata
+	}
 	if !common.IsNil(o.PrimaryBalanceAccount) {
 		toSerialize["primaryBalanceAccount"] = o.PrimaryBalanceAccount
 	}

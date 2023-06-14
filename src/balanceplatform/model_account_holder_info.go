@@ -28,6 +28,8 @@ type AccountHolderInfo struct {
 	Description *string `json:"description,omitempty"`
 	// The unique identifier of the [legal entity](https://docs.adyen.com/api-explorer/legalentity/latest/post/legalEntities#responses-200-id) associated with the account holder. Adyen performs a verification process against the legal entity of the account holder.
 	LegalEntityId string `json:"legalEntityId"`
+	// A set of key and value pairs for general use by the merchant. The keys do not have specific names and may be used for storing miscellaneous data as desired. > Note that during an update of metadata, the omission of existing key-value pairs will result in the deletion of those key-value pairs.
+	Metadata *map[string]string `json:"metadata,omitempty"`
 	// Your reference for the account holder, maximum 150 characters.
 	Reference *string `json:"reference,omitempty"`
 	// The time zone of the account holder. For example, **Europe/Amsterdam**. Defaults to the time zone of the balance platform if no time zone is set. For possible values, see the [list of time zone codes](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
@@ -204,6 +206,38 @@ func (o *AccountHolderInfo) SetLegalEntityId(v string) {
 	o.LegalEntityId = v
 }
 
+// GetMetadata returns the Metadata field value if set, zero value otherwise.
+func (o *AccountHolderInfo) GetMetadata() map[string]string {
+	if o == nil || common.IsNil(o.Metadata) {
+		var ret map[string]string
+		return ret
+	}
+	return *o.Metadata
+}
+
+// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AccountHolderInfo) GetMetadataOk() (*map[string]string, bool) {
+	if o == nil || common.IsNil(o.Metadata) {
+		return nil, false
+	}
+	return o.Metadata, true
+}
+
+// HasMetadata returns a boolean if a field has been set.
+func (o *AccountHolderInfo) HasMetadata() bool {
+	if o != nil && !common.IsNil(o.Metadata) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetadata gets a reference to the given map[string]string and assigns it to the Metadata field.
+func (o *AccountHolderInfo) SetMetadata(v map[string]string) {
+	o.Metadata = &v
+}
+
 // GetReference returns the Reference field value if set, zero value otherwise.
 func (o *AccountHolderInfo) GetReference() string {
 	if o == nil || common.IsNil(o.Reference) {
@@ -291,6 +325,9 @@ func (o AccountHolderInfo) ToMap() (map[string]interface{}, error) {
 		toSerialize["description"] = o.Description
 	}
 	toSerialize["legalEntityId"] = o.LegalEntityId
+	if !common.IsNil(o.Metadata) {
+		toSerialize["metadata"] = o.Metadata
+	}
 	if !common.IsNil(o.Reference) {
 		toSerialize["reference"] = o.Reference
 	}

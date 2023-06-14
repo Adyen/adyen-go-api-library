@@ -281,7 +281,7 @@ func (o *PaymentInstrumentUpdateRequest) isValidStatus() bool {
 	return false
 }
 func (o *PaymentInstrumentUpdateRequest) isValidStatusReason() bool {
-	var allowedEnumValues = []string{"accountClosure", "damaged", "endOfLife", "expired", "lost", "other", "stolen", "suspectedFraud"}
+	var allowedEnumValues = []string{"accountClosure", "damaged", "endOfLife", "expired", "lost", "other", "stolen", "suspectedFraud", "transactionRule"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetStatusReason() == allowed {
 			return true
