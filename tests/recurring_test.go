@@ -1,20 +1,15 @@
-/*
- * Adyen API Client
- *
- * Contact: support@adyen.com
- */
-
 package tests
 
 import (
+	"context"
 	"os"
 	"strings"
 	"testing"
 
-	"github.com/adyen/adyen-go-api-library/v6/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v6/src/common"
+	"github.com/adyen/adyen-go-api-library/v7/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v7/src/common"
 
-	"github.com/adyen/adyen-go-api-library/v6/src/recurring"
+	"github.com/adyen/adyen-go-api-library/v7/src/recurring"
 	"github.com/joho/godotenv"
 
 	"github.com/stretchr/testify/assert"
@@ -32,12 +27,17 @@ func Test_Recurring(t *testing.T) {
 	client := adyen.NewClient(&common.Config{
 		ApiKey:      APIKey,
 		Environment: "TEST",
+		Debug:       "true" == os.Getenv("DEBUG"),
 	})
-	// client.GetConfig().Debug = true
+	service := client.Recurring()
 
 	t.Run("ListRecurringDetails", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
-			res, httpRes, err := client.Recurring.ListRecurringDetails(&recurring.RecurringDetailsRequest{})
+			req := service.ListRecurringDetailsInput().
+				RecurringDetailsRequest(*recurring.NewRecurringDetailsRequestWithDefaults())
+
+			res, httpRes, err := service.ListRecurringDetails(context.Background(), req)
+
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
 			assert.Equal(t, true, strings.Contains(err.Error(), "Invalid Merchant Account"))
@@ -45,14 +45,19 @@ func Test_Recurring(t *testing.T) {
 			require.NotNil(t, res)
 			assert.Equal(t, "Invalid Merchant Account", err.(common.APIError).Message)
 		})
+
 		t.Run("Create an API request that should pass", func(t *testing.T) {
-			res, httpRes, err := client.Recurring.ListRecurringDetails(&recurring.RecurringDetailsRequest{
+			req := service.ListRecurringDetailsInput()
+			req = req.RecurringDetailsRequest(recurring.RecurringDetailsRequest{
 				MerchantAccount:  MerchantAccount,
 				ShopperReference: "4343553GFGFYFY4654654675765",
-				Recurring: &recurring.RecurringType{
-					Contract: "RECURRING",
+				Recurring: &recurring.Recurring{
+					Contract: common.PtrString("RECURRING"),
 				},
 			})
+
+			res, httpRes, err := service.ListRecurringDetails(context.Background(), req)
+
 			require.Nil(t, err)
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 200, httpRes.StatusCode)
@@ -64,11 +69,15 @@ func Test_Recurring(t *testing.T) {
 
 	t.Run("Disable", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
-			res, httpRes, err := client.Recurring.Disable(&recurring.DisableRequest{
-				MerchantAccount:          MerchantAccount,
-				ShopperReference:         "4343553GFGFYFY4654654675765",
-				RecurringDetailReference: "8314442372419167",
-			})
+			body := recurring.DisableRequest{
+				MerchantAccount:  MerchantAccount,
+				ShopperReference: "4343553GFGFYFY4654654675765",
+			}
+			body.SetRecurringDetailReference("8314442372419167")
+			req := service.DisableInput().DisableRequest(body)
+
+			res, httpRes, err := service.Disable(context.Background(), req)
+
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
 			assert.Equal(t, true, strings.Contains(err.Error(), "Contract not found"))
@@ -80,19 +89,23 @@ func Test_Recurring(t *testing.T) {
 
 	t.Run("NotifyShopper", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
-			res, httpRes, err := client.Recurring.NotifyShopper(&recurring.NotifyShopperRequest{
-				Amount: &recurring.Amount{
+			body := recurring.NotifyShopperRequest{
+				Amount: recurring.Amount{
 					Currency: "INR",
 					Value:    1234,
 				},
-				BillingDate:              "2030-12-31",
-				BillingSequenceNumber:    "adhoc",
+				BillingDate:              common.PtrString("2030-12-31"),
+				BillingSequenceNumber:    common.PtrString("adhoc"),
 				MerchantAccount:          MerchantAccount,
 				Reference:                "4343553GFGFYFY4654654675765",
 				ShopperReference:         "4343553GFGFYFY4654654675765",
-				RecurringDetailReference: "8314442372419167",
-				StoredPaymentMethodID:    "8314442372419167",
-			})
+				RecurringDetailReference: common.PtrString("8314442372419167"),
+				StoredPaymentMethodId:    common.PtrString("8314442372419167"),
+			}
+			req := service.NotifyShopperInput().NotifyShopperRequest(body)
+
+			res, httpRes, err := service.NotifyShopper(context.Background(), req)
+
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
 			assert.Equal(t, true, strings.Contains(err.Error(), "PaymentDetail not found"))
@@ -102,19 +115,23 @@ func Test_Recurring(t *testing.T) {
 		})
 
 		t.Run("Create an API request that should fail because of invalid date", func(t *testing.T) {
-			res, httpRes, err := client.Recurring.NotifyShopper(&recurring.NotifyShopperRequest{
-				Amount: &recurring.Amount{
+			body := recurring.NotifyShopperRequest{
+				Amount: recurring.Amount{
 					Currency: "INR",
 					Value:    1234,
 				},
-				BillingDate:              "2",
-				BillingSequenceNumber:    "adhoc",
-				MerchantAccount:          MerchantAccount,
-				Reference:                "4343553GFGFYFY4654654675765",
-				ShopperReference:         "4343553GFGFYFY4654654675765",
-				RecurringDetailReference: "8314442372419167",
-				StoredPaymentMethodID:    "8314442372419167",
-			})
+				MerchantAccount:  MerchantAccount,
+				Reference:        "4343553GFGFYFY4654654675765",
+				ShopperReference: "4343553GFGFYFY4654654675765",
+			}
+			body.SetBillingDate("2")
+			body.SetBillingSequenceNumber("adhoc")
+			body.SetRecurringDetailReference("8314442372419167")
+			body.SetStoredPaymentMethodId("8314442372419167")
+			req := service.NotifyShopperInput().NotifyShopperRequest(body)
+
+			res, httpRes, err := service.NotifyShopper(context.Background(), req)
+
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
 			assert.Equal(t, true, strings.Contains(err.Error(), "Inner validation error(s) occurred: billingDate should be in yyyy-MM-dd format"))
@@ -126,11 +143,14 @@ func Test_Recurring(t *testing.T) {
 
 	t.Run("ScheduleAccountUpdater", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
-			res, httpRes, err := client.Recurring.ScheduleAccountUpdater(&recurring.ScheduleAccountUpdaterRequest{
+			body := recurring.ScheduleAccountUpdaterRequest{
 				MerchantAccount: MerchantAccount,
 				Reference:       "4343553GFGFYFY4654654675765",
-				// RecurringDetailReference: "8314442372419167",
-			})
+			}
+			req := service.ScheduleAccountUpdaterInput().ScheduleAccountUpdaterRequest(body)
+
+			res, httpRes, err := service.ScheduleAccountUpdater(context.Background(), req)
+
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
 			assert.Equal(t, true, strings.Contains(err.Error(), "Missing card or shopperReference & selectedRecurringDetailReference"))
@@ -138,23 +158,28 @@ func Test_Recurring(t *testing.T) {
 			require.NotNil(t, res)
 			assert.Equal(t, "Missing card or shopperReference & selectedRecurringDetailReference", err.(common.APIError).Message)
 		})
+
 		t.Run("Create an API request that should fail with card", func(t *testing.T) {
-			res, httpRes, err := client.Recurring.ScheduleAccountUpdater(&recurring.ScheduleAccountUpdaterRequest{
+			card := &recurring.Card{}
+			card.SetExpiryMonth("99")
+			card.SetExpiryYear("2030")
+			card.SetHolderName("Adyen test")
+			card.SetNumber("4111111111111111")
+			body := recurring.ScheduleAccountUpdaterRequest{
 				MerchantAccount: MerchantAccount,
 				Reference:       "4343553GFGFYFY4654654675765",
-				Card: &recurring.Card{
-					ExpiryMonth: "03",
-					ExpiryYear:  "2030",
-					HolderName:  "Adyen test",
-					Number:      "4111111111111111",
-				},
-			})
+				Card:            card,
+			}
+			req := service.ScheduleAccountUpdaterInput().ScheduleAccountUpdaterRequest(body)
+
+			res, httpRes, err := service.ScheduleAccountUpdater(context.Background(), req)
+
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
-			assert.Equal(t, true, strings.Contains(err.Error(), "No registered account for AccountUpdater"))
+			assert.Equal(t, true, strings.Contains(err.Error(), "Expiry month should be between 1 and 12 inclusive: 99"))
 			assert.Equal(t, 422, httpRes.StatusCode)
 			require.NotNil(t, res)
-			assert.Equal(t, "No registered account for AccountUpdater.", err.(common.APIError).Message)
+			assert.Equal(t, "Expiry month should be between 1 and 12 inclusive: 99", err.(common.APIError).Message)
 		})
 	})
 }

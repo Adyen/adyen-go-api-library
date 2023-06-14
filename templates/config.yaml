@@ -1,0 +1,6 @@
+gitUserId: adyen
+gitRepoId: adyen-go-api-library/v6/src
+structPrefix: true
+isGoSubmodule: true
+additionalProperties:
+  useOneOfDiscriminatorLookup: true

@@ -1,20 +1,15 @@
-/*
- * Adyen API Client
- *
- * Contact: support@adyen.com
- */
-
 package adyen
 
 import (
+	"context"
 	"os"
 	"strings"
 	"testing"
 	"time"
 
-	"github.com/adyen/adyen-go-api-library/v6/src/checkout"
-	"github.com/adyen/adyen-go-api-library/v6/src/common"
-	"github.com/adyen/adyen-go-api-library/v6/src/recurring"
+	"github.com/adyen/adyen-go-api-library/v7/src/checkout"
+	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v7/src/recurring"
 	"github.com/joho/godotenv"
 
 	"github.com/stretchr/testify/assert"
@@ -27,15 +22,20 @@ func Test_api(t *testing.T) {
 		client := NewClient(&common.Config{
 			Environment: "TEST",
 		})
+		svc := client.Checkout()
 		require.NotNil(t, client)
 		require.NotNil(t, client.client)
 		require.NotNil(t, client.client.Cfg)
 		require.NotNil(t, client.client.Cfg.HTTPClient)
 		require.NotNil(t, client.Checkout)
-		assert.Equal(t, "https://checkout-test.adyen.com/checkout/"+ CheckoutAPIVersion, client.Checkout.BasePath())
+		assert.Equal(t, "https://checkout-test.adyen.com/checkout/"+CheckoutAPIVersion, svc.RecurringApi.BasePath())
 
 		t.Run("Create a API request that should fail", func(t *testing.T) {
-			res, httpRes, err := client.Checkout.PaymentMethods(&checkout.PaymentMethodsRequest{})
+			req := svc.PaymentsApi.PaymentMethodsInput()
+			req = req.PaymentMethodsRequest(checkout.PaymentMethodsRequest{})
+
+			res, httpRes, err := svc.PaymentsApi.PaymentMethods(context.Background(), req)
+
 			require.NotNil(t, err)
 			assert.Equal(t, true, strings.Contains(err.Error(), "Unauthorized"))
 			require.NotNil(t, res)
@@ -57,12 +57,15 @@ func Test_api(t *testing.T) {
 			ApiKey:      APIKey,
 			Environment: "TEST",
 		})
+		svc = client.Checkout()
 
 		t.Run("Create a API request that uses API key auth and should pass", func(t *testing.T) {
-
-			res, httpRes, err := client.Checkout.PaymentMethods(&checkout.PaymentMethodsRequest{
+			req := svc.PaymentsApi.PaymentMethodsInput()
+			req = req.PaymentMethodsRequest(checkout.PaymentMethodsRequest{
 				MerchantAccount: MerchantAccount,
 			})
+
+			res, httpRes, err := svc.PaymentsApi.PaymentMethods(context.Background(), req)
 
 			require.Nil(t, err)
 			require.NotNil(t, res)
@@ -77,13 +80,16 @@ func Test_api(t *testing.T) {
 		})
 
 		t.Run("Create a API request that uses basic auth and should pass", func(t *testing.T) {
-			res, httpRes, err := client.Recurring.ListRecurringDetails(&recurring.RecurringDetailsRequest{
+			body := recurring.RecurringDetailsRequest{
 				MerchantAccount: MerchantAccount,
-				Recurring: &recurring.RecurringType{
-					Contract: "RECURRING",
+				Recurring: &recurring.Recurring{
+					Contract: common.PtrString("RECURRING"),
 				},
 				ShopperReference: time.Now().String(),
-			})
+			}
+			req := client.Recurring().ListRecurringDetailsInput().RecurringDetailsRequest(body)
+
+			res, httpRes, err := client.Recurring().ListRecurringDetails(context.Background(), req)
 
 			require.Nil(t, err)
 			require.NotNil(t, res)

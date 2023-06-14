@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/adyen/adyen-go-api-library/v6/src/notification"
+	"github.com/adyen/adyen-go-api-library/v7/src/webhook"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -12,9 +12,9 @@ const key = "DFB1EB5485895CFA84146406857104ABB4CBCABDC8AAF103A624C8F6A3EAAB00"
 const expectedSign = "ipnxGCaUZ4l8TUW75a71/ghd2Fe5ffvX0pV4TLTntIc="
 
 var eventDate = time.Date(1970, time.January, 01, 0, 0, 0, 0, time.UTC)
-var notificationRequestItem = notification.NotificationRequestItem{
+var notificationRequestItem = webhook.NotificationRequestItem{
 	AdditionalData: &map[string]interface{}{"hmacSignature": expectedSign},
-	Amount: notification.Amount{
+	Amount: webhook.Amount{
 		Currency: "EUR",
 		Value:    1000,
 	},

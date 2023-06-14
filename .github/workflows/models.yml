@@ -1,0 +1,35 @@
+name: Go Models
+
+on: [ workflow_dispatch ]
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    name: Generate Models
+    steps:
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: 1.18
+        id: go
+      - uses: actions/checkout@v3
+      - run: make models
+      - name: Set PR variables
+        id: vars
+        run: |
+          cd schema
+          echo ::set-output name=pr_title::"Update models"
+          echo ::set-output name=pr_body::"OpenAPI spec or templates produced new models on $(date +%d-%m-%Y) \
+            by [commit](https://github.com/Adyen/adyen-openapi/commit/$(git rev-parse HEAD))."
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@5b4a9f6a9e2af26e5f02351490b90d01eb8ec1e5 # v5.0.0
+        with:
+          token: ${{ secrets.ADYEN_AUTOMATION_BOT_ACCESS_TOKEN }}
+          committer: ${{ secrets.ADYEN_AUTOMATION_BOT_EMAIL }}
+          author: ${{ secrets.ADYEN_AUTOMATION_BOT_EMAIL }}
+          base: develop
+          branch: automation/models
+          title: ${{ steps.vars.outputs.pr_title }}
+          body: ${{ steps.vars.outputs.pr_body }}
+          add-paths: |
+            src

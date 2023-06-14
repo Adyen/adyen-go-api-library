@@ -1,14 +1,15 @@
 package tests
 
 import (
+	"context"
 	"os"
 	"testing"
 
-	"github.com/adyen/adyen-go-api-library/v6/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v6/src/checkout"
-	"github.com/adyen/adyen-go-api-library/v6/src/common"
-	"github.com/adyen/adyen-go-api-library/v6/src/disputes"
-	"github.com/adyen/adyen-go-api-library/v6/src/payments"
+	"github.com/adyen/adyen-go-api-library/v7/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v7/src/checkout"
+	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v7/src/disputes"
+	"github.com/adyen/adyen-go-api-library/v7/src/payments"
 	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -26,41 +27,47 @@ func Test_Disputes(t *testing.T) {
 		ApiKey:      APIKey,
 		Environment: "TEST",
 	})
+	service := client.Checkout()
 
 	createTestPayment := func() string {
-		res, _, _ := client.Checkout.Payments(&checkout.PaymentRequest{
+		card := checkout.NewCardDetails()
+		card.SetEncryptedCardNumber("test_4111111111111111")
+		card.SetEncryptedExpiryMonth("test_03")
+		card.SetEncryptedExpiryYear("test_2030")
+		card.SetEncryptedSecurityCode("test_737")
+		card.SetHolderName("chargeback:10.4")
+		req := service.PaymentsApi.PaymentsInput().PaymentRequest(checkout.PaymentRequest{
 			Amount: checkout.Amount{
 				Currency: "EUR",
 				Value:    1000,
 			},
-			Reference: "DISPUTES_CHARGEBACK",
-			PaymentMethod: map[string]interface{}{
-				"type":        "scheme",
-				"number":      "4111111111111111",
-				"expiryMonth": "03",
-				"expiryYear":  "2030",
-				"holderName":  "chargeback:10.4",
-				"cvc":         "737",
-			},
+			Reference:       "DISPUTES_CHARGEBACK",
+			PaymentMethod:   checkout.CardDetailsAsCheckoutPaymentMethod(card),
 			ReturnUrl:       "https://adyen.com",
 			MerchantAccount: MerchantAccount,
 		})
-		captureRes, _, _ := client.Payments.Capture(&payments.ModificationRequest{
-			OriginalReference: res.PspReference,
-			ModificationAmount: &payments.Amount{
+		res, _, _ := service.PaymentsApi.Payments(context.Background(), req)
+
+		reference := "MODIFICATION_REFERENCE"
+		body := payments.CaptureRequest{
+			OriginalReference: res.GetPspReference(),
+			ModificationAmount: payments.Amount{
 				Currency: "EUR",
 				Value:    1000,
 			},
-			Reference:       "MODIFICATION_REFERENCE",
+			Reference:       &reference,
 			MerchantAccount: MerchantAccount,
-		})
-		return captureRes.PspReference
+		}
+		paymentsApi := client.Payments()
+		captureReq := paymentsApi.ModificationsApi.CaptureInput().CaptureRequest(body)
+		captureRes, _, _ := paymentsApi.ModificationsApi.Capture(context.Background(), captureReq)
+		return captureRes.GetPspReference()
 	}
 
 	t.Run("Disputes", func(t *testing.T) {
 		t.Run("Retrieve applicable defense reasons", func(t *testing.T) {
 			pspReference := createTestPayment()
-			res, httpRes, err := client.Disputes.RetrieveApplicableDefenseReasons(&disputes.DefenseReasonsRequest{
+			res, httpRes, err := client.Disputes().RetrieveApplicableDefenseReasons(&disputes.DefenseReasonsRequest{
 				DisputePspReference: pspReference,
 				MerchantAccountCode: MerchantAccount,
 			})
@@ -73,7 +80,7 @@ func Test_Disputes(t *testing.T) {
 
 		t.Run("Supply defense document", func(t *testing.T) {
 			pspReference := createTestPayment()
-			res, httpRes, err := client.Disputes.SupplyDefenseDocument(&disputes.SupplyDefenseDocumentRequest{
+			res, httpRes, err := client.Disputes().SupplyDefenseDocument(&disputes.SupplyDefenseDocumentRequest{
 				DefenseDocuments: []disputes.DefenseDocument{
 					{
 						Content:                 "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==",
@@ -93,7 +100,7 @@ func Test_Disputes(t *testing.T) {
 
 		t.Run("Delete dispute defense document", func(t *testing.T) {
 			pspReference := createTestPayment()
-			res, httpRes, err := client.Disputes.DeleteDisputeDefenseDocument(&disputes.DeleteDefenseDocumentRequest{
+			res, httpRes, err := client.Disputes().DeleteDisputeDefenseDocument(&disputes.DeleteDefenseDocumentRequest{
 				DefenseDocumentType: "DefenseMaterial",
 				DisputePspReference: pspReference,
 				MerchantAccountCode: MerchantAccount,
@@ -107,7 +114,7 @@ func Test_Disputes(t *testing.T) {
 
 		t.Run("Defend dispute", func(t *testing.T) {
 			pspReference := createTestPayment()
-			res, httpRes, err := client.Disputes.DefendDispute(&disputes.DefendDisputeRequest{
+			res, httpRes, err := client.Disputes().DefendDispute(&disputes.DefendDisputeRequest{
 				DefenseReasonCode:   "DuplicateChargeback",
 				DisputePspReference: pspReference,
 				MerchantAccountCode: MerchantAccount,
@@ -121,7 +128,7 @@ func Test_Disputes(t *testing.T) {
 
 		t.Run("Download dispute defense document", func(t *testing.T) {
 			pspReference := createTestPayment()
-			_, httpRes, err := client.Disputes.DownloadDisputeDefenseDocument(&disputes.DownloadDefenseDocumentRequest{
+			_, httpRes, err := client.Disputes().DownloadDisputeDefenseDocument(&disputes.DownloadDefenseDocumentRequest{
 				DefenseDocumentType: "DefenseMaterial",
 				DisputePspReference: pspReference,
 				MerchantAccountCode: MerchantAccount,

@@ -1,9 +1,3 @@
-/*
- * Adyen API
- *
- * Contact: support@adyen.com
- */
-
 package common
 
 import (
@@ -57,21 +51,26 @@ const (
 
 const (
 	LibName    = "adyen-go-api-library"
-	LibVersion = "6.0.1"
+	LibVersion = "7.0.0"
 )
 
 // Config stores the configuration of the API client
 type Config struct {
-	Username                string        `json:"username,omitempty"`
-	Password                string        `json:"password,omitempty"`
-	MerchantAccount         string        `json:"merchantAccount,omitempty"`
-	Environment             Environment   `json:"environment,omitempty"`
-	Endpoint                string        `json:"endpoint,omitempty"`
-	MarketPayEndpoint       string        `json:"marketPayEndpoint,omitempty"`
-	ApiKey                  string        `json:"apiKey,omitempty"`
-	ConnectionTimeoutMillis time.Duration `json:"connectionTimeoutMillis,omitempty"`
-	CertificatePath         string        `json:"certificatePath,omitempty"`
-	DisputesEndpoint        string        `json:"disputesEndpoint,omitempty"`
+	Username                      string        `json:"username,omitempty"`
+	Password                      string        `json:"password,omitempty"`
+	MerchantAccount               string        `json:"merchantAccount,omitempty"`
+	Environment                   Environment   `json:"environment,omitempty"`
+	Endpoint                      string        `json:"endpoint,omitempty"`
+	MarketPayEndpoint             string        `json:"marketPayEndpoint,omitempty"`
+	ApiKey                        string        `json:"apiKey,omitempty"`
+	ConnectionTimeoutMillis       time.Duration `json:"connectionTimeoutMillis,omitempty"`
+	CertificatePath               string        `json:"certificatePath,omitempty"`
+	DisputesEndpoint              string        `json:"disputesEndpoint,omitempty"`
+	BalancePlatformEndpoint       string        `json:"balancePlatformEndpoint,omitempty"`
+	ManagementEndpoint            string        `json:"managementEndpoint,omitempty"`
+	LegalEntityEndpoint           string        `json:"legalEntityEndpoint,omitempty"`
+	TransfersEndpoint             string        `json:"transfersEndpoint,omitempty"`
+	PosTerminalManagementEndpoint string        `json:"posTerminalManagementEndpoint,omitempty"`
 
 	//Checkout Specific
 	CheckoutEndpoint string `json:"checkoutEndpoint,omitempty"`
@@ -90,7 +89,7 @@ type Config struct {
 
 func (c *Config) GetCheckoutEndpoint() (string, error) {
 	if c.CheckoutEndpoint == "" {
-		message := "Please provide your unique live url prefix on the SetEnvironment() call on the APIClient or provide checkoutEndpoint in your config object."
+		message := "please provide your unique live url prefix on the SetEnvironment() call on the APIClient or provide checkoutEndpoint in your config object"
 		return "", fmt.Errorf(message)
 	}
 	return c.CheckoutEndpoint, nil

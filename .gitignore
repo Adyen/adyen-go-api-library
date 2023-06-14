@@ -7,6 +7,7 @@
 .git
 .idea/
 bin/
+.vscode/
 # Test binary, built with `go test -c`
 *.test
 
@@ -19,3 +20,4 @@ vendor/
 .env
 error.txt
 /schema
+src/*/.openapi-generator/FILES
