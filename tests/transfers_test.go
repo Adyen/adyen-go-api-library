@@ -92,5 +92,10 @@ func Test_Transfers(t *testing.T) {
 
 		assert.Equal(t, 403, httpRes.StatusCode)
 		require.NotNil(t, err)
+		serviceError := err.(common.RestServiceError)
+		assert.Equal(t, int32(403), serviceError.Status)
+		assert.Equal(t, "00_403", serviceError.GetErrorCode())
+		assert.Equal(t, "Forbidden", serviceError.GetTitle())
+		assert.Equal(t, "Not allowed", serviceError.GetDetail())
 	})
 }
