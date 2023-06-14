@@ -19,7 +19,7 @@ var _ common.MappedNullable = &DeliveryContact{}
 
 // DeliveryContact struct for DeliveryContact
 type DeliveryContact struct {
-	Address Address2 `json:"address"`
+	Address DeliveryAddress `json:"address"`
 	// The email address of the contact.
 	Email *string `json:"email,omitempty"`
 	// The full phone number of the contact provided as a single string. It will be handled as a landline phone. **Examples:** \"0031 6 11 22 33 44\", \"+316/1122-3344\", \"(0031) 611223344\"
@@ -34,7 +34,7 @@ type DeliveryContact struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDeliveryContact(address Address2, name Name) *DeliveryContact {
+func NewDeliveryContact(address DeliveryAddress, name Name) *DeliveryContact {
 	this := DeliveryContact{}
 	this.Address = address
 	this.Name = name
@@ -50,9 +50,9 @@ func NewDeliveryContactWithDefaults() *DeliveryContact {
 }
 
 // GetAddress returns the Address field value
-func (o *DeliveryContact) GetAddress() Address2 {
+func (o *DeliveryContact) GetAddress() DeliveryAddress {
 	if o == nil {
-		var ret Address2
+		var ret DeliveryAddress
 		return ret
 	}
 
@@ -61,7 +61,7 @@ func (o *DeliveryContact) GetAddress() Address2 {
 
 // GetAddressOk returns a tuple with the Address field value
 // and a boolean to check if the value has been set.
-func (o *DeliveryContact) GetAddressOk() (*Address2, bool) {
+func (o *DeliveryContact) GetAddressOk() (*DeliveryAddress, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -69,7 +69,7 @@ func (o *DeliveryContact) GetAddressOk() (*Address2, bool) {
 }
 
 // SetAddress sets field value
-func (o *DeliveryContact) SetAddress(v Address2) {
+func (o *DeliveryContact) SetAddress(v DeliveryAddress) {
 	o.Address = v
 }
 

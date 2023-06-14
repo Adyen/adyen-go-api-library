@@ -22,8 +22,8 @@ type AccountHolderCapability struct {
 	// Indicates whether the capability is allowed. Adyen sets this to **true** if the verification is successful and the account holder is permitted to use the capability.
 	Allowed *bool `json:"allowed,omitempty"`
 	// The capability level that is allowed for the account holder.  Possible values: **notApplicable**, **low**, **medium**, **high**.
-	AllowedLevel    *string     `json:"allowedLevel,omitempty"`
-	AllowedSettings *JSONObject `json:"allowedSettings,omitempty"`
+	AllowedLevel    *string             `json:"allowedLevel,omitempty"`
+	AllowedSettings *CapabilitySettings `json:"allowedSettings,omitempty"`
 	// Indicates whether the capability is enabled. If **false**, the capability is temporarily disabled for the account holder.
 	Enabled *bool `json:"enabled,omitempty"`
 	// Contains verification errors and the actions that you can take to resolve them.
@@ -31,8 +31,8 @@ type AccountHolderCapability struct {
 	// Indicates whether the capability is requested. To check whether the account holder is permitted to use the capability, refer to the `allowed` field.
 	Requested *bool `json:"requested,omitempty"`
 	// The requested level of the capability. Some capabilities, such as those used in [card issuing](https://docs.adyen.com/issuing/add-capabilities#capability-levels), have different levels. Levels increase the capability, but also require additional checks and increased monitoring.  Possible values: **notApplicable**, **low**, **medium**, **high**.
-	RequestedLevel    *string     `json:"requestedLevel,omitempty"`
-	RequestedSettings *JSONObject `json:"requestedSettings,omitempty"`
+	RequestedLevel    *string             `json:"requestedLevel,omitempty"`
+	RequestedSettings *CapabilitySettings `json:"requestedSettings,omitempty"`
 	// Contains the status of the transfer instruments associated with this capability.
 	TransferInstruments []AccountSupportingEntityCapability `json:"transferInstruments,omitempty"`
 	// The status of the verification checks for the capability.  Possible values:  * **pending**: Adyen is running the verification.  * **invalid**: The verification failed. Check if the `errors` array contains more information.  * **valid**: The verification has been successfully completed.  * **rejected**: Adyen has verified the information, but found reasons to not allow the capability.
@@ -121,9 +121,9 @@ func (o *AccountHolderCapability) SetAllowedLevel(v string) {
 }
 
 // GetAllowedSettings returns the AllowedSettings field value if set, zero value otherwise.
-func (o *AccountHolderCapability) GetAllowedSettings() JSONObject {
+func (o *AccountHolderCapability) GetAllowedSettings() CapabilitySettings {
 	if o == nil || common.IsNil(o.AllowedSettings) {
-		var ret JSONObject
+		var ret CapabilitySettings
 		return ret
 	}
 	return *o.AllowedSettings
@@ -131,7 +131,7 @@ func (o *AccountHolderCapability) GetAllowedSettings() JSONObject {
 
 // GetAllowedSettingsOk returns a tuple with the AllowedSettings field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountHolderCapability) GetAllowedSettingsOk() (*JSONObject, bool) {
+func (o *AccountHolderCapability) GetAllowedSettingsOk() (*CapabilitySettings, bool) {
 	if o == nil || common.IsNil(o.AllowedSettings) {
 		return nil, false
 	}
@@ -147,8 +147,8 @@ func (o *AccountHolderCapability) HasAllowedSettings() bool {
 	return false
 }
 
-// SetAllowedSettings gets a reference to the given JSONObject and assigns it to the AllowedSettings field.
-func (o *AccountHolderCapability) SetAllowedSettings(v JSONObject) {
+// SetAllowedSettings gets a reference to the given CapabilitySettings and assigns it to the AllowedSettings field.
+func (o *AccountHolderCapability) SetAllowedSettings(v CapabilitySettings) {
 	o.AllowedSettings = &v
 }
 
@@ -281,9 +281,9 @@ func (o *AccountHolderCapability) SetRequestedLevel(v string) {
 }
 
 // GetRequestedSettings returns the RequestedSettings field value if set, zero value otherwise.
-func (o *AccountHolderCapability) GetRequestedSettings() JSONObject {
+func (o *AccountHolderCapability) GetRequestedSettings() CapabilitySettings {
 	if o == nil || common.IsNil(o.RequestedSettings) {
-		var ret JSONObject
+		var ret CapabilitySettings
 		return ret
 	}
 	return *o.RequestedSettings
@@ -291,7 +291,7 @@ func (o *AccountHolderCapability) GetRequestedSettings() JSONObject {
 
 // GetRequestedSettingsOk returns a tuple with the RequestedSettings field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountHolderCapability) GetRequestedSettingsOk() (*JSONObject, bool) {
+func (o *AccountHolderCapability) GetRequestedSettingsOk() (*CapabilitySettings, bool) {
 	if o == nil || common.IsNil(o.RequestedSettings) {
 		return nil, false
 	}
@@ -307,8 +307,8 @@ func (o *AccountHolderCapability) HasRequestedSettings() bool {
 	return false
 }
 
-// SetRequestedSettings gets a reference to the given JSONObject and assigns it to the RequestedSettings field.
-func (o *AccountHolderCapability) SetRequestedSettings(v JSONObject) {
+// SetRequestedSettings gets a reference to the given CapabilitySettings and assigns it to the RequestedSettings field.
+func (o *AccountHolderCapability) SetRequestedSettings(v CapabilitySettings) {
 	o.RequestedSettings = &v
 }
 

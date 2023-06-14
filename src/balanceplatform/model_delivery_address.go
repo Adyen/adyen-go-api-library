@@ -14,11 +14,11 @@ import (
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// checks if the Address2 type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &Address2{}
+// checks if the DeliveryAddress type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &DeliveryAddress{}
 
-// Address2 struct for Address2
-type Address2 struct {
+// DeliveryAddress struct for DeliveryAddress
+type DeliveryAddress struct {
 	// The name of the city.
 	City *string `json:"city,omitempty"`
 	// The two-character ISO-3166-1 alpha-2 country code. For example, **US**. >If you don't know the country or are not collecting the country from the shopper, provide `country` as `ZZ`.
@@ -35,26 +35,26 @@ type Address2 struct {
 	StateOrProvince *string `json:"stateOrProvince,omitempty"`
 }
 
-// NewAddress2 instantiates a new Address2 object
+// NewDeliveryAddress instantiates a new DeliveryAddress object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAddress2(country string) *Address2 {
-	this := Address2{}
+func NewDeliveryAddress(country string) *DeliveryAddress {
+	this := DeliveryAddress{}
 	this.Country = country
 	return &this
 }
 
-// NewAddress2WithDefaults instantiates a new Address2 object
+// NewDeliveryAddressWithDefaults instantiates a new DeliveryAddress object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewAddress2WithDefaults() *Address2 {
-	this := Address2{}
+func NewDeliveryAddressWithDefaults() *DeliveryAddress {
+	this := DeliveryAddress{}
 	return &this
 }
 
 // GetCity returns the City field value if set, zero value otherwise.
-func (o *Address2) GetCity() string {
+func (o *DeliveryAddress) GetCity() string {
 	if o == nil || common.IsNil(o.City) {
 		var ret string
 		return ret
@@ -64,7 +64,7 @@ func (o *Address2) GetCity() string {
 
 // GetCityOk returns a tuple with the City field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Address2) GetCityOk() (*string, bool) {
+func (o *DeliveryAddress) GetCityOk() (*string, bool) {
 	if o == nil || common.IsNil(o.City) {
 		return nil, false
 	}
@@ -72,7 +72,7 @@ func (o *Address2) GetCityOk() (*string, bool) {
 }
 
 // HasCity returns a boolean if a field has been set.
-func (o *Address2) HasCity() bool {
+func (o *DeliveryAddress) HasCity() bool {
 	if o != nil && !common.IsNil(o.City) {
 		return true
 	}
@@ -81,12 +81,12 @@ func (o *Address2) HasCity() bool {
 }
 
 // SetCity gets a reference to the given string and assigns it to the City field.
-func (o *Address2) SetCity(v string) {
+func (o *DeliveryAddress) SetCity(v string) {
 	o.City = &v
 }
 
 // GetCountry returns the Country field value
-func (o *Address2) GetCountry() string {
+func (o *DeliveryAddress) GetCountry() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -97,7 +97,7 @@ func (o *Address2) GetCountry() string {
 
 // GetCountryOk returns a tuple with the Country field value
 // and a boolean to check if the value has been set.
-func (o *Address2) GetCountryOk() (*string, bool) {
+func (o *DeliveryAddress) GetCountryOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -105,12 +105,12 @@ func (o *Address2) GetCountryOk() (*string, bool) {
 }
 
 // SetCountry sets field value
-func (o *Address2) SetCountry(v string) {
+func (o *DeliveryAddress) SetCountry(v string) {
 	o.Country = v
 }
 
 // GetLine1 returns the Line1 field value if set, zero value otherwise.
-func (o *Address2) GetLine1() string {
+func (o *DeliveryAddress) GetLine1() string {
 	if o == nil || common.IsNil(o.Line1) {
 		var ret string
 		return ret
@@ -120,7 +120,7 @@ func (o *Address2) GetLine1() string {
 
 // GetLine1Ok returns a tuple with the Line1 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Address2) GetLine1Ok() (*string, bool) {
+func (o *DeliveryAddress) GetLine1Ok() (*string, bool) {
 	if o == nil || common.IsNil(o.Line1) {
 		return nil, false
 	}
@@ -128,7 +128,7 @@ func (o *Address2) GetLine1Ok() (*string, bool) {
 }
 
 // HasLine1 returns a boolean if a field has been set.
-func (o *Address2) HasLine1() bool {
+func (o *DeliveryAddress) HasLine1() bool {
 	if o != nil && !common.IsNil(o.Line1) {
 		return true
 	}
@@ -137,12 +137,12 @@ func (o *Address2) HasLine1() bool {
 }
 
 // SetLine1 gets a reference to the given string and assigns it to the Line1 field.
-func (o *Address2) SetLine1(v string) {
+func (o *DeliveryAddress) SetLine1(v string) {
 	o.Line1 = &v
 }
 
 // GetLine2 returns the Line2 field value if set, zero value otherwise.
-func (o *Address2) GetLine2() string {
+func (o *DeliveryAddress) GetLine2() string {
 	if o == nil || common.IsNil(o.Line2) {
 		var ret string
 		return ret
@@ -152,7 +152,7 @@ func (o *Address2) GetLine2() string {
 
 // GetLine2Ok returns a tuple with the Line2 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Address2) GetLine2Ok() (*string, bool) {
+func (o *DeliveryAddress) GetLine2Ok() (*string, bool) {
 	if o == nil || common.IsNil(o.Line2) {
 		return nil, false
 	}
@@ -160,7 +160,7 @@ func (o *Address2) GetLine2Ok() (*string, bool) {
 }
 
 // HasLine2 returns a boolean if a field has been set.
-func (o *Address2) HasLine2() bool {
+func (o *DeliveryAddress) HasLine2() bool {
 	if o != nil && !common.IsNil(o.Line2) {
 		return true
 	}
@@ -169,12 +169,12 @@ func (o *Address2) HasLine2() bool {
 }
 
 // SetLine2 gets a reference to the given string and assigns it to the Line2 field.
-func (o *Address2) SetLine2(v string) {
+func (o *DeliveryAddress) SetLine2(v string) {
 	o.Line2 = &v
 }
 
 // GetLine3 returns the Line3 field value if set, zero value otherwise.
-func (o *Address2) GetLine3() string {
+func (o *DeliveryAddress) GetLine3() string {
 	if o == nil || common.IsNil(o.Line3) {
 		var ret string
 		return ret
@@ -184,7 +184,7 @@ func (o *Address2) GetLine3() string {
 
 // GetLine3Ok returns a tuple with the Line3 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Address2) GetLine3Ok() (*string, bool) {
+func (o *DeliveryAddress) GetLine3Ok() (*string, bool) {
 	if o == nil || common.IsNil(o.Line3) {
 		return nil, false
 	}
@@ -192,7 +192,7 @@ func (o *Address2) GetLine3Ok() (*string, bool) {
 }
 
 // HasLine3 returns a boolean if a field has been set.
-func (o *Address2) HasLine3() bool {
+func (o *DeliveryAddress) HasLine3() bool {
 	if o != nil && !common.IsNil(o.Line3) {
 		return true
 	}
@@ -201,12 +201,12 @@ func (o *Address2) HasLine3() bool {
 }
 
 // SetLine3 gets a reference to the given string and assigns it to the Line3 field.
-func (o *Address2) SetLine3(v string) {
+func (o *DeliveryAddress) SetLine3(v string) {
 	o.Line3 = &v
 }
 
 // GetPostalCode returns the PostalCode field value if set, zero value otherwise.
-func (o *Address2) GetPostalCode() string {
+func (o *DeliveryAddress) GetPostalCode() string {
 	if o == nil || common.IsNil(o.PostalCode) {
 		var ret string
 		return ret
@@ -216,7 +216,7 @@ func (o *Address2) GetPostalCode() string {
 
 // GetPostalCodeOk returns a tuple with the PostalCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Address2) GetPostalCodeOk() (*string, bool) {
+func (o *DeliveryAddress) GetPostalCodeOk() (*string, bool) {
 	if o == nil || common.IsNil(o.PostalCode) {
 		return nil, false
 	}
@@ -224,7 +224,7 @@ func (o *Address2) GetPostalCodeOk() (*string, bool) {
 }
 
 // HasPostalCode returns a boolean if a field has been set.
-func (o *Address2) HasPostalCode() bool {
+func (o *DeliveryAddress) HasPostalCode() bool {
 	if o != nil && !common.IsNil(o.PostalCode) {
 		return true
 	}
@@ -233,12 +233,12 @@ func (o *Address2) HasPostalCode() bool {
 }
 
 // SetPostalCode gets a reference to the given string and assigns it to the PostalCode field.
-func (o *Address2) SetPostalCode(v string) {
+func (o *DeliveryAddress) SetPostalCode(v string) {
 	o.PostalCode = &v
 }
 
 // GetStateOrProvince returns the StateOrProvince field value if set, zero value otherwise.
-func (o *Address2) GetStateOrProvince() string {
+func (o *DeliveryAddress) GetStateOrProvince() string {
 	if o == nil || common.IsNil(o.StateOrProvince) {
 		var ret string
 		return ret
@@ -248,7 +248,7 @@ func (o *Address2) GetStateOrProvince() string {
 
 // GetStateOrProvinceOk returns a tuple with the StateOrProvince field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Address2) GetStateOrProvinceOk() (*string, bool) {
+func (o *DeliveryAddress) GetStateOrProvinceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.StateOrProvince) {
 		return nil, false
 	}
@@ -256,7 +256,7 @@ func (o *Address2) GetStateOrProvinceOk() (*string, bool) {
 }
 
 // HasStateOrProvince returns a boolean if a field has been set.
-func (o *Address2) HasStateOrProvince() bool {
+func (o *DeliveryAddress) HasStateOrProvince() bool {
 	if o != nil && !common.IsNil(o.StateOrProvince) {
 		return true
 	}
@@ -265,11 +265,11 @@ func (o *Address2) HasStateOrProvince() bool {
 }
 
 // SetStateOrProvince gets a reference to the given string and assigns it to the StateOrProvince field.
-func (o *Address2) SetStateOrProvince(v string) {
+func (o *DeliveryAddress) SetStateOrProvince(v string) {
 	o.StateOrProvince = &v
 }
 
-func (o Address2) MarshalJSON() ([]byte, error) {
+func (o DeliveryAddress) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -277,7 +277,7 @@ func (o Address2) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Address2) ToMap() (map[string]interface{}, error) {
+func (o DeliveryAddress) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.City) {
 		toSerialize["city"] = o.City
@@ -301,38 +301,38 @@ func (o Address2) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableAddress2 struct {
-	value *Address2
+type NullableDeliveryAddress struct {
+	value *DeliveryAddress
 	isSet bool
 }
 
-func (v NullableAddress2) Get() *Address2 {
+func (v NullableDeliveryAddress) Get() *DeliveryAddress {
 	return v.value
 }
 
-func (v *NullableAddress2) Set(val *Address2) {
+func (v *NullableDeliveryAddress) Set(val *DeliveryAddress) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAddress2) IsSet() bool {
+func (v NullableDeliveryAddress) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAddress2) Unset() {
+func (v *NullableDeliveryAddress) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAddress2(val *Address2) *NullableAddress2 {
-	return &NullableAddress2{value: val, isSet: true}
+func NewNullableDeliveryAddress(val *DeliveryAddress) *NullableDeliveryAddress {
+	return &NullableDeliveryAddress{value: val, isSet: true}
 }
 
-func (v NullableAddress2) MarshalJSON() ([]byte, error) {
+func (v NullableDeliveryAddress) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAddress2) UnmarshalJSON(src []byte) error {
+func (v *NullableDeliveryAddress) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
