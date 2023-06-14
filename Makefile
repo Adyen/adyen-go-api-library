@@ -30,6 +30,7 @@ models: $(services)
 
 balanceplatform: spec=BalancePlatformService-v2
 balanceplatform: serviceName=BalancePlatform
+balanceplatform: hasRestServiceError=true
 configurationwebhook: spec=BalancePlatformConfigurationNotification-v1
 reportwebhook: spec=BalancePlatformReportNotification-v1
 transferwebhook: spec=BalancePlatformTransferNotification-v3
@@ -45,9 +46,10 @@ storedvalue: spec=StoredValueService-v46
 storedvalue: serviceName=StoredValue
 transfers: spec=TransferService-v3
 transfers: serviceName=Transfers
+transfers: hasRestServiceError=true
 management: spec=ManagementService-v1
 management: serviceName=Management
-management: templates=templates/rest
+management: hasRestServiceError=true
 posterminalmanagement: spec=TfmAPIService-v1
 posterminalmanagement: serviceName=PosTerminalManagementApi
 
@@ -68,7 +70,8 @@ $(services): schema $(openapi-generator-jar) $(goimports)
 		--skip-validate-spec \
 		--enable-post-process-file \
 		--inline-schema-name-mappings PaymentDonationRequest_paymentMethod=CheckoutPaymentMethod \
-		--additional-properties=serviceName=$(serviceName)
+		--additional-properties=serviceName=$(serviceName) \
+		--additional-properties=$(if $(hasRestServiceError),hasRestServiceError=true)
 	rm -rf $(output)/$(@)/go.{mod,sum}
 	rm -rf $(output)/$(@)/.openapi-generator/FILES
 
