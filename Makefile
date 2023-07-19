@@ -102,5 +102,12 @@ clean:
 	git checkout src
 	git clean -f -d src
 
+## Releases
 
-.PHONY: templates models $(services)
+version:
+	perl -lne 'print "currentVersion=$$1" if /LibVersion = "(.+)"/' < src/common/configuration.go >> "$$GITHUB_OUTPUT"
+
+bump:
+	perl -i -pe 's/$$ENV{"CURRENT_VERSION"}/$$ENV{"NEXT_VERSION"}/' src/common/configuration.go
+
+.PHONY: templates models $(services) version bump
