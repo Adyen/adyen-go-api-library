@@ -19,6 +19,8 @@ type APIClient struct {
 
 	// API Services
 
+	CapitalApi *CapitalApi
+
 	TransactionsApi *TransactionsApi
 
 	TransfersApi *TransfersApi
@@ -33,6 +35,7 @@ func NewAPIClient(client *common.Client) *APIClient {
     }
 
 	// API Services
+	c.CapitalApi = (*CapitalApi)(&c.common)
 	c.TransactionsApi = (*TransactionsApi)(&c.common)
 	c.TransfersApi = (*TransfersApi)(&c.common)
 

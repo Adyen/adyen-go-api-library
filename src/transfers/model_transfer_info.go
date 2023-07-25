@@ -465,7 +465,7 @@ func (v *NullableTransferInfo) UnmarshalJSON(src []byte) error {
 }
 
 func (o *TransferInfo) isValidCategory() bool {
-	var allowedEnumValues = []string{"bank", "internal", "issuedCard", "platformPayment"}
+	var allowedEnumValues = []string{"bank", "internal", "issuedCard", "platformPayment", "card"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetCategory() == allowed {
 			return true

@@ -653,7 +653,7 @@ func (v *NullableTransaction) UnmarshalJSON(src []byte) error {
 }
 
 func (o *Transaction) isValidCategory() bool {
-	var allowedEnumValues = []string{"bank", "grants", "internal", "issuedCard", "platformPayment"}
+	var allowedEnumValues = []string{"bank", "card", "grants", "internal", "issuedCard", "migration", "platformPayment"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetCategory() == allowed {
 			return true
@@ -671,7 +671,7 @@ func (o *Transaction) isValidStatus() bool {
 	return false
 }
 func (o *Transaction) isValidType() bool {
-	var allowedEnumValues = []string{"atmWithdrawal", "atmWithdrawalReversal", "balanceAdjustment", "balanceRollover", "bankTransfer", "capture", "captureReversal", "chargeback", "chargebackReversal", "depositCorrection", "fee", "grant", "installment", "installmentReversal", "internalTransfer", "invoiceDeduction", "leftover", "manualCorrection", "miscCost", "payment", "paymentCost", "refund", "refundReversal", "repayment", "reserveAdjustment", "secondChargeback"}
+	var allowedEnumValues = []string{"atmWithdrawal", "atmWithdrawalReversal", "balanceAdjustment", "balanceRollover", "bankTransfer", "capture", "captureReversal", "cardTransfer", "chargeback", "chargebackReversal", "depositCorrection", "fee", "grant", "installment", "installmentReversal", "internalTransfer", "invoiceDeduction", "leftover", "manualCorrection", "miscCost", "payment", "paymentCost", "refund", "refundReversal", "repayment", "reserveAdjustment", "secondChargeback"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true
