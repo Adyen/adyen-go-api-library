@@ -2,6 +2,7 @@ package tests
 
 import (
 	"context"
+	"github.com/adyen/adyen-go-api-library/v7/src/transfers"
 	"io"
 	"net/http"
 	"net/http/httptest"
@@ -55,6 +56,40 @@ func Test_Transfers(t *testing.T) {
 		  }`)
 	})
 
+	mux.HandleFunc("/grants", func(w http.ResponseWriter, r *http.Request) {
+		require.Equal(t, "POST", r.Method)
+		w.Header().Set("Content-Type", "application/json")
+		io.WriteString(w, `{
+			"id": "GR00000000000000000000001",
+			"grantAccountId": "CG00000000000000000000001",
+			"grantOfferId": "0000000000000001",
+			"counterparty": {
+				"accountHolderId": "AH00000000000000000000001",
+				"balanceAccountId": "BA00000000000000000000001"
+			},
+			"amount": {
+				"currency": "EUR",
+				"value": 1000000
+			},
+			"fee": {
+				"amount": {
+					"value": 120000,
+					"currency": "EUR"
+				}
+			},
+			"balances": {
+				"currency": "EUR",
+				"fee": 120000,
+				"principal": 1000000,
+				"total": 1120009
+			},
+			"repayment": {
+				"basisPoints": 1400
+			},
+			"status": "Pending"
+		}`)
+	})
+
 	// Error case
 	mux.HandleFunc("/transactions", func(w http.ResponseWriter, r *http.Request) {
 		require.Equal(t, "GET", r.Method)
@@ -74,7 +109,7 @@ func Test_Transfers(t *testing.T) {
 	client.Transfers().TransfersApi.BasePath = func() string { return mockServer.URL }
 	service := client.Transfers()
 
-	t.Run("make succesful transfer", func(t *testing.T) {
+	t.Run("make successful transfer", func(t *testing.T) {
 		request := service.TransfersApi.TransferFundsInput()
 
 		_, httpRes, err := service.TransfersApi.TransferFunds(context.Background(), request)
@@ -84,7 +119,7 @@ func Test_Transfers(t *testing.T) {
 		require.Nil(t, err)
 	})
 
-	t.Run("make unsuccesful get transactions call", func(t *testing.T) {
+	t.Run("make unsuccessful get transactions call", func(t *testing.T) {
 		_, httpRes, err := service.TransactionsApi.GetAllTransactions(
 			context.Background(),
 			service.TransactionsApi.GetAllTransactionsInput(),
@@ -97,5 +132,25 @@ func Test_Transfers(t *testing.T) {
 		assert.Equal(t, "00_403", serviceError.GetErrorCode())
 		assert.Equal(t, "Forbidden", serviceError.GetTitle())
 		assert.Equal(t, "Not allowed", serviceError.GetDetail())
+	})
+
+	t.Run("Request a grant payout", func(t *testing.T) {
+		request := service.CapitalApi.RequestGrantPayoutInput().CapitalGrantInfo(transfers.CapitalGrantInfo{
+			GrantAccountId: "CG00000000000000000000001",
+			GrantOfferId:   "0000000000000001",
+			Counterparty: &transfers.Counterparty2{
+				AccountHolderId:  common.PtrString("AH00000000000000000000001"),
+				BalanceAccountId: common.PtrString("BA00000000000000000000001"),
+			},
+		})
+
+		grant, httpRes, err := service.CapitalApi.RequestGrantPayout(context.Background(), request)
+
+		require.NoError(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+		assert.Equal(t, "GR00000000000000000000001", grant.GetId())
+		assert.Equal(t, "Pending", grant.GetStatus())
+		balances := grant.GetBalances()
+		assert.Equal(t, int64(1120009), balances.GetTotal())
 	})
 }

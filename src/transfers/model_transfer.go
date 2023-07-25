@@ -10,6 +10,7 @@ package transfers
 
 import (
 	"encoding/json"
+	"time"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
@@ -28,6 +29,8 @@ type Transfer struct {
 	// The type of transfer.  Possible values:   - **bank**: Transfer to a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id) or a bank account.  - **internal**: Transfer to another [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id) within your platform.  - **issuedCard**: Transfer initiated by a Adyen-issued card.  - **platformPayment**: Fund movements related to payments that are acquired for your users.
 	Category     string         `json:"category"`
 	Counterparty CounterpartyV3 `json:"counterparty"`
+	// The date and time when the event was triggered, in ISO 8601 extended format. For example, **2020-12-18T10:15:30+01:00**.
+	CreationDate *time.Time `json:"creationDate,omitempty"`
 	// Your description for the transfer. It is used by most banks as the transfer description. We recommend sending a maximum of 140 characters, otherwise the description may be truncated.  Supported characters: **[a-z] [A-Z] [0-9] / - ?** **: ( ) . , ' + Space**  Supported characters for **regular** and **fast** transfers to a US counterparty: **[a-z] [A-Z] [0-9] & $ % # @** **~ = + - _ ' \" ! ?**
 	Description *string `json:"description,omitempty"`
 	// The direction of the transfer.  Possible values: **incoming**, **outgoing**.
@@ -240,6 +243,38 @@ func (o *Transfer) GetCounterpartyOk() (*CounterpartyV3, bool) {
 // SetCounterparty sets field value
 func (o *Transfer) SetCounterparty(v CounterpartyV3) {
 	o.Counterparty = v
+}
+
+// GetCreationDate returns the CreationDate field value if set, zero value otherwise.
+func (o *Transfer) GetCreationDate() time.Time {
+	if o == nil || common.IsNil(o.CreationDate) {
+		var ret time.Time
+		return ret
+	}
+	return *o.CreationDate
+}
+
+// GetCreationDateOk returns a tuple with the CreationDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Transfer) GetCreationDateOk() (*time.Time, bool) {
+	if o == nil || common.IsNil(o.CreationDate) {
+		return nil, false
+	}
+	return o.CreationDate, true
+}
+
+// HasCreationDate returns a boolean if a field has been set.
+func (o *Transfer) HasCreationDate() bool {
+	if o != nil && !common.IsNil(o.CreationDate) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreationDate gets a reference to the given time.Time and assigns it to the CreationDate field.
+func (o *Transfer) SetCreationDate(v time.Time) {
+	o.CreationDate = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -579,6 +614,9 @@ func (o Transfer) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["category"] = o.Category
 	toSerialize["counterparty"] = o.Counterparty
+	if !common.IsNil(o.CreationDate) {
+		toSerialize["creationDate"] = o.CreationDate
+	}
 	if !common.IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
@@ -683,7 +721,7 @@ func (o *Transfer) isValidReason() bool {
 	return false
 }
 func (o *Transfer) isValidStatus() bool {
-	var allowedEnumValues = []string{"approvalPending", "atmWithdrawal", "atmWithdrawalReversalPending", "atmWithdrawalReversed", "authAdjustmentAuthorised", "authAdjustmentError", "authAdjustmentRefused", "authorised", "bankTransfer", "bankTransferPending", "booked", "bookingPending", "cancelled", "capturePending", "captureReversalPending", "captureReversed", "captured", "chargeback", "chargebackPending", "chargebackReversalPending", "chargebackReversed", "credited", "depositCorrection", "depositCorrectionPending", "dispute", "disputeClosed", "disputeExpired", "disputeNeedsReview", "error", "expired", "failed", "fee", "feePending", "internalTransfer", "internalTransferPending", "invoiceDeduction", "invoiceDeductionPending", "manualCorrectionPending", "manuallyCorrected", "matchedStatement", "matchedStatementPending", "merchantPayin", "merchantPayinPending", "merchantPayinReversed", "merchantPayinReversedPending", "miscCost", "miscCostPending", "paymentCost", "paymentCostPending", "received", "refundPending", "refundReversalPending", "refundReversed", "refunded", "refused", "reserveAdjustment", "reserveAdjustmentPending", "returned", "secondChargeback", "secondChargebackPending", "undefined"}
+	var allowedEnumValues = []string{"approvalPending", "atmWithdrawal", "atmWithdrawalReversalPending", "atmWithdrawalReversed", "authAdjustmentAuthorised", "authAdjustmentError", "authAdjustmentRefused", "authorised", "bankTransfer", "bankTransferPending", "booked", "bookingPending", "cancelled", "capturePending", "captureReversalPending", "captureReversed", "captured", "capturedExternally", "chargeback", "chargebackExternally", "chargebackPending", "chargebackReversalPending", "chargebackReversed", "credited", "depositCorrection", "depositCorrectionPending", "dispute", "disputeClosed", "disputeExpired", "disputeNeedsReview", "error", "expired", "failed", "fee", "feePending", "internalTransfer", "internalTransferPending", "invoiceDeduction", "invoiceDeductionPending", "manualCorrectionPending", "manuallyCorrected", "matchedStatement", "matchedStatementPending", "merchantPayin", "merchantPayinPending", "merchantPayinReversed", "merchantPayinReversedPending", "miscCost", "miscCostPending", "paymentCost", "paymentCostPending", "received", "refundPending", "refundReversalPending", "refundReversed", "refunded", "refundedExternally", "refused", "reserveAdjustment", "reserveAdjustmentPending", "returned", "secondChargeback", "secondChargebackPending", "undefined"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetStatus() == allowed {
 			return true
