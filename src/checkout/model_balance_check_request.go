@@ -15,16 +15,16 @@ import (
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// checks if the CheckoutBalanceCheckRequest type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &CheckoutBalanceCheckRequest{}
+// checks if the BalanceCheckRequest type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &BalanceCheckRequest{}
 
-// CheckoutBalanceCheckRequest struct for CheckoutBalanceCheckRequest
-type CheckoutBalanceCheckRequest struct {
+// BalanceCheckRequest struct for BalanceCheckRequest
+type BalanceCheckRequest struct {
 	AccountInfo      *AccountInfo `json:"accountInfo,omitempty"`
 	AdditionalAmount *Amount      `json:"additionalAmount,omitempty"`
 	// This field contains additional data, which may be required for a particular payment request.  The `additionalData` object consists of entries, each of which includes the key and value.
 	AdditionalData  *map[string]string `json:"additionalData,omitempty"`
-	Amount          *Amount            `json:"amount,omitempty"`
+	Amount          Amount             `json:"amount"`
 	ApplicationInfo *ApplicationInfo   `json:"applicationInfo,omitempty"`
 	BillingAddress  *Address           `json:"billingAddress,omitempty"`
 	BrowserInfo     *BrowserInfo       `json:"browserInfo,omitempty"`
@@ -84,7 +84,7 @@ type CheckoutBalanceCheckRequest struct {
 	SocialSecurityNumber *string `json:"socialSecurityNumber,omitempty"`
 	// An array of objects specifying how the payment should be split when using [Adyen for Platforms](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information) or [Issuing](https://docs.adyen.com/issuing/add-manage-funds#split).
 	Splits []Split `json:"splits,omitempty"`
-	// The ecommerce or point-of-sale store that is processing the payment. Used in [partner model integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for Adyen for Platforms.
+	// The ecommerce or point-of-sale store that is processing the payment. Used in:  * [Partner platform integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for the [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic). * [Platform setup integrations](https://docs.adyen.com/marketplaces-and-platforms/additional-for-platform-setup/route-payment-to-store) for the [Balance Platform](https://docs.adyen.com/marketplaces-and-platforms).
 	Store *string `json:"store,omitempty"`
 	// The shopper's telephone number.
 	TelephoneNumber     *string              `json:"telephoneNumber,omitempty"`
@@ -98,12 +98,13 @@ type CheckoutBalanceCheckRequest struct {
 	TrustedShopper *bool `json:"trustedShopper,omitempty"`
 }
 
-// NewCheckoutBalanceCheckRequest instantiates a new CheckoutBalanceCheckRequest object
+// NewBalanceCheckRequest instantiates a new BalanceCheckRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCheckoutBalanceCheckRequest(merchantAccount string, paymentMethod map[string]string) *CheckoutBalanceCheckRequest {
-	this := CheckoutBalanceCheckRequest{}
+func NewBalanceCheckRequest(amount Amount, merchantAccount string, paymentMethod map[string]string) *BalanceCheckRequest {
+	this := BalanceCheckRequest{}
+	this.Amount = amount
 	this.MerchantAccount = merchantAccount
 	this.PaymentMethod = paymentMethod
 	var threeDSAuthenticationOnly bool = false
@@ -111,18 +112,18 @@ func NewCheckoutBalanceCheckRequest(merchantAccount string, paymentMethod map[st
 	return &this
 }
 
-// NewCheckoutBalanceCheckRequestWithDefaults instantiates a new CheckoutBalanceCheckRequest object
+// NewBalanceCheckRequestWithDefaults instantiates a new BalanceCheckRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCheckoutBalanceCheckRequestWithDefaults() *CheckoutBalanceCheckRequest {
-	this := CheckoutBalanceCheckRequest{}
+func NewBalanceCheckRequestWithDefaults() *BalanceCheckRequest {
+	this := BalanceCheckRequest{}
 	var threeDSAuthenticationOnly bool = false
 	this.ThreeDSAuthenticationOnly = &threeDSAuthenticationOnly
 	return &this
 }
 
 // GetAccountInfo returns the AccountInfo field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetAccountInfo() AccountInfo {
+func (o *BalanceCheckRequest) GetAccountInfo() AccountInfo {
 	if o == nil || common.IsNil(o.AccountInfo) {
 		var ret AccountInfo
 		return ret
@@ -132,7 +133,7 @@ func (o *CheckoutBalanceCheckRequest) GetAccountInfo() AccountInfo {
 
 // GetAccountInfoOk returns a tuple with the AccountInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetAccountInfoOk() (*AccountInfo, bool) {
+func (o *BalanceCheckRequest) GetAccountInfoOk() (*AccountInfo, bool) {
 	if o == nil || common.IsNil(o.AccountInfo) {
 		return nil, false
 	}
@@ -140,7 +141,7 @@ func (o *CheckoutBalanceCheckRequest) GetAccountInfoOk() (*AccountInfo, bool) {
 }
 
 // HasAccountInfo returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasAccountInfo() bool {
+func (o *BalanceCheckRequest) HasAccountInfo() bool {
 	if o != nil && !common.IsNil(o.AccountInfo) {
 		return true
 	}
@@ -149,12 +150,12 @@ func (o *CheckoutBalanceCheckRequest) HasAccountInfo() bool {
 }
 
 // SetAccountInfo gets a reference to the given AccountInfo and assigns it to the AccountInfo field.
-func (o *CheckoutBalanceCheckRequest) SetAccountInfo(v AccountInfo) {
+func (o *BalanceCheckRequest) SetAccountInfo(v AccountInfo) {
 	o.AccountInfo = &v
 }
 
 // GetAdditionalAmount returns the AdditionalAmount field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetAdditionalAmount() Amount {
+func (o *BalanceCheckRequest) GetAdditionalAmount() Amount {
 	if o == nil || common.IsNil(o.AdditionalAmount) {
 		var ret Amount
 		return ret
@@ -164,7 +165,7 @@ func (o *CheckoutBalanceCheckRequest) GetAdditionalAmount() Amount {
 
 // GetAdditionalAmountOk returns a tuple with the AdditionalAmount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetAdditionalAmountOk() (*Amount, bool) {
+func (o *BalanceCheckRequest) GetAdditionalAmountOk() (*Amount, bool) {
 	if o == nil || common.IsNil(o.AdditionalAmount) {
 		return nil, false
 	}
@@ -172,7 +173,7 @@ func (o *CheckoutBalanceCheckRequest) GetAdditionalAmountOk() (*Amount, bool) {
 }
 
 // HasAdditionalAmount returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasAdditionalAmount() bool {
+func (o *BalanceCheckRequest) HasAdditionalAmount() bool {
 	if o != nil && !common.IsNil(o.AdditionalAmount) {
 		return true
 	}
@@ -181,12 +182,12 @@ func (o *CheckoutBalanceCheckRequest) HasAdditionalAmount() bool {
 }
 
 // SetAdditionalAmount gets a reference to the given Amount and assigns it to the AdditionalAmount field.
-func (o *CheckoutBalanceCheckRequest) SetAdditionalAmount(v Amount) {
+func (o *BalanceCheckRequest) SetAdditionalAmount(v Amount) {
 	o.AdditionalAmount = &v
 }
 
 // GetAdditionalData returns the AdditionalData field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetAdditionalData() map[string]string {
+func (o *BalanceCheckRequest) GetAdditionalData() map[string]string {
 	if o == nil || common.IsNil(o.AdditionalData) {
 		var ret map[string]string
 		return ret
@@ -196,7 +197,7 @@ func (o *CheckoutBalanceCheckRequest) GetAdditionalData() map[string]string {
 
 // GetAdditionalDataOk returns a tuple with the AdditionalData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetAdditionalDataOk() (*map[string]string, bool) {
+func (o *BalanceCheckRequest) GetAdditionalDataOk() (*map[string]string, bool) {
 	if o == nil || common.IsNil(o.AdditionalData) {
 		return nil, false
 	}
@@ -204,7 +205,7 @@ func (o *CheckoutBalanceCheckRequest) GetAdditionalDataOk() (*map[string]string,
 }
 
 // HasAdditionalData returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasAdditionalData() bool {
+func (o *BalanceCheckRequest) HasAdditionalData() bool {
 	if o != nil && !common.IsNil(o.AdditionalData) {
 		return true
 	}
@@ -213,44 +214,36 @@ func (o *CheckoutBalanceCheckRequest) HasAdditionalData() bool {
 }
 
 // SetAdditionalData gets a reference to the given map[string]string and assigns it to the AdditionalData field.
-func (o *CheckoutBalanceCheckRequest) SetAdditionalData(v map[string]string) {
+func (o *BalanceCheckRequest) SetAdditionalData(v map[string]string) {
 	o.AdditionalData = &v
 }
 
-// GetAmount returns the Amount field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetAmount() Amount {
-	if o == nil || common.IsNil(o.Amount) {
+// GetAmount returns the Amount field value
+func (o *BalanceCheckRequest) GetAmount() Amount {
+	if o == nil {
 		var ret Amount
 		return ret
 	}
-	return *o.Amount
+
+	return o.Amount
 }
 
-// GetAmountOk returns a tuple with the Amount field value if set, nil otherwise
+// GetAmountOk returns a tuple with the Amount field value
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetAmountOk() (*Amount, bool) {
-	if o == nil || common.IsNil(o.Amount) {
+func (o *BalanceCheckRequest) GetAmountOk() (*Amount, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Amount, true
+	return &o.Amount, true
 }
 
-// HasAmount returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasAmount() bool {
-	if o != nil && !common.IsNil(o.Amount) {
-		return true
-	}
-
-	return false
-}
-
-// SetAmount gets a reference to the given Amount and assigns it to the Amount field.
-func (o *CheckoutBalanceCheckRequest) SetAmount(v Amount) {
-	o.Amount = &v
+// SetAmount sets field value
+func (o *BalanceCheckRequest) SetAmount(v Amount) {
+	o.Amount = v
 }
 
 // GetApplicationInfo returns the ApplicationInfo field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetApplicationInfo() ApplicationInfo {
+func (o *BalanceCheckRequest) GetApplicationInfo() ApplicationInfo {
 	if o == nil || common.IsNil(o.ApplicationInfo) {
 		var ret ApplicationInfo
 		return ret
@@ -260,7 +253,7 @@ func (o *CheckoutBalanceCheckRequest) GetApplicationInfo() ApplicationInfo {
 
 // GetApplicationInfoOk returns a tuple with the ApplicationInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetApplicationInfoOk() (*ApplicationInfo, bool) {
+func (o *BalanceCheckRequest) GetApplicationInfoOk() (*ApplicationInfo, bool) {
 	if o == nil || common.IsNil(o.ApplicationInfo) {
 		return nil, false
 	}
@@ -268,7 +261,7 @@ func (o *CheckoutBalanceCheckRequest) GetApplicationInfoOk() (*ApplicationInfo, 
 }
 
 // HasApplicationInfo returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasApplicationInfo() bool {
+func (o *BalanceCheckRequest) HasApplicationInfo() bool {
 	if o != nil && !common.IsNil(o.ApplicationInfo) {
 		return true
 	}
@@ -277,12 +270,12 @@ func (o *CheckoutBalanceCheckRequest) HasApplicationInfo() bool {
 }
 
 // SetApplicationInfo gets a reference to the given ApplicationInfo and assigns it to the ApplicationInfo field.
-func (o *CheckoutBalanceCheckRequest) SetApplicationInfo(v ApplicationInfo) {
+func (o *BalanceCheckRequest) SetApplicationInfo(v ApplicationInfo) {
 	o.ApplicationInfo = &v
 }
 
 // GetBillingAddress returns the BillingAddress field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetBillingAddress() Address {
+func (o *BalanceCheckRequest) GetBillingAddress() Address {
 	if o == nil || common.IsNil(o.BillingAddress) {
 		var ret Address
 		return ret
@@ -292,7 +285,7 @@ func (o *CheckoutBalanceCheckRequest) GetBillingAddress() Address {
 
 // GetBillingAddressOk returns a tuple with the BillingAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetBillingAddressOk() (*Address, bool) {
+func (o *BalanceCheckRequest) GetBillingAddressOk() (*Address, bool) {
 	if o == nil || common.IsNil(o.BillingAddress) {
 		return nil, false
 	}
@@ -300,7 +293,7 @@ func (o *CheckoutBalanceCheckRequest) GetBillingAddressOk() (*Address, bool) {
 }
 
 // HasBillingAddress returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasBillingAddress() bool {
+func (o *BalanceCheckRequest) HasBillingAddress() bool {
 	if o != nil && !common.IsNil(o.BillingAddress) {
 		return true
 	}
@@ -309,12 +302,12 @@ func (o *CheckoutBalanceCheckRequest) HasBillingAddress() bool {
 }
 
 // SetBillingAddress gets a reference to the given Address and assigns it to the BillingAddress field.
-func (o *CheckoutBalanceCheckRequest) SetBillingAddress(v Address) {
+func (o *BalanceCheckRequest) SetBillingAddress(v Address) {
 	o.BillingAddress = &v
 }
 
 // GetBrowserInfo returns the BrowserInfo field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetBrowserInfo() BrowserInfo {
+func (o *BalanceCheckRequest) GetBrowserInfo() BrowserInfo {
 	if o == nil || common.IsNil(o.BrowserInfo) {
 		var ret BrowserInfo
 		return ret
@@ -324,7 +317,7 @@ func (o *CheckoutBalanceCheckRequest) GetBrowserInfo() BrowserInfo {
 
 // GetBrowserInfoOk returns a tuple with the BrowserInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetBrowserInfoOk() (*BrowserInfo, bool) {
+func (o *BalanceCheckRequest) GetBrowserInfoOk() (*BrowserInfo, bool) {
 	if o == nil || common.IsNil(o.BrowserInfo) {
 		return nil, false
 	}
@@ -332,7 +325,7 @@ func (o *CheckoutBalanceCheckRequest) GetBrowserInfoOk() (*BrowserInfo, bool) {
 }
 
 // HasBrowserInfo returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasBrowserInfo() bool {
+func (o *BalanceCheckRequest) HasBrowserInfo() bool {
 	if o != nil && !common.IsNil(o.BrowserInfo) {
 		return true
 	}
@@ -341,12 +334,12 @@ func (o *CheckoutBalanceCheckRequest) HasBrowserInfo() bool {
 }
 
 // SetBrowserInfo gets a reference to the given BrowserInfo and assigns it to the BrowserInfo field.
-func (o *CheckoutBalanceCheckRequest) SetBrowserInfo(v BrowserInfo) {
+func (o *BalanceCheckRequest) SetBrowserInfo(v BrowserInfo) {
 	o.BrowserInfo = &v
 }
 
 // GetCaptureDelayHours returns the CaptureDelayHours field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetCaptureDelayHours() int32 {
+func (o *BalanceCheckRequest) GetCaptureDelayHours() int32 {
 	if o == nil || common.IsNil(o.CaptureDelayHours) {
 		var ret int32
 		return ret
@@ -356,7 +349,7 @@ func (o *CheckoutBalanceCheckRequest) GetCaptureDelayHours() int32 {
 
 // GetCaptureDelayHoursOk returns a tuple with the CaptureDelayHours field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetCaptureDelayHoursOk() (*int32, bool) {
+func (o *BalanceCheckRequest) GetCaptureDelayHoursOk() (*int32, bool) {
 	if o == nil || common.IsNil(o.CaptureDelayHours) {
 		return nil, false
 	}
@@ -364,7 +357,7 @@ func (o *CheckoutBalanceCheckRequest) GetCaptureDelayHoursOk() (*int32, bool) {
 }
 
 // HasCaptureDelayHours returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasCaptureDelayHours() bool {
+func (o *BalanceCheckRequest) HasCaptureDelayHours() bool {
 	if o != nil && !common.IsNil(o.CaptureDelayHours) {
 		return true
 	}
@@ -373,12 +366,12 @@ func (o *CheckoutBalanceCheckRequest) HasCaptureDelayHours() bool {
 }
 
 // SetCaptureDelayHours gets a reference to the given int32 and assigns it to the CaptureDelayHours field.
-func (o *CheckoutBalanceCheckRequest) SetCaptureDelayHours(v int32) {
+func (o *BalanceCheckRequest) SetCaptureDelayHours(v int32) {
 	o.CaptureDelayHours = &v
 }
 
 // GetDateOfBirth returns the DateOfBirth field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetDateOfBirth() string {
+func (o *BalanceCheckRequest) GetDateOfBirth() string {
 	if o == nil || common.IsNil(o.DateOfBirth) {
 		var ret string
 		return ret
@@ -388,7 +381,7 @@ func (o *CheckoutBalanceCheckRequest) GetDateOfBirth() string {
 
 // GetDateOfBirthOk returns a tuple with the DateOfBirth field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetDateOfBirthOk() (*string, bool) {
+func (o *BalanceCheckRequest) GetDateOfBirthOk() (*string, bool) {
 	if o == nil || common.IsNil(o.DateOfBirth) {
 		return nil, false
 	}
@@ -396,7 +389,7 @@ func (o *CheckoutBalanceCheckRequest) GetDateOfBirthOk() (*string, bool) {
 }
 
 // HasDateOfBirth returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasDateOfBirth() bool {
+func (o *BalanceCheckRequest) HasDateOfBirth() bool {
 	if o != nil && !common.IsNil(o.DateOfBirth) {
 		return true
 	}
@@ -405,12 +398,12 @@ func (o *CheckoutBalanceCheckRequest) HasDateOfBirth() bool {
 }
 
 // SetDateOfBirth gets a reference to the given string and assigns it to the DateOfBirth field.
-func (o *CheckoutBalanceCheckRequest) SetDateOfBirth(v string) {
+func (o *BalanceCheckRequest) SetDateOfBirth(v string) {
 	o.DateOfBirth = &v
 }
 
 // GetDccQuote returns the DccQuote field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetDccQuote() ForexQuote {
+func (o *BalanceCheckRequest) GetDccQuote() ForexQuote {
 	if o == nil || common.IsNil(o.DccQuote) {
 		var ret ForexQuote
 		return ret
@@ -420,7 +413,7 @@ func (o *CheckoutBalanceCheckRequest) GetDccQuote() ForexQuote {
 
 // GetDccQuoteOk returns a tuple with the DccQuote field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetDccQuoteOk() (*ForexQuote, bool) {
+func (o *BalanceCheckRequest) GetDccQuoteOk() (*ForexQuote, bool) {
 	if o == nil || common.IsNil(o.DccQuote) {
 		return nil, false
 	}
@@ -428,7 +421,7 @@ func (o *CheckoutBalanceCheckRequest) GetDccQuoteOk() (*ForexQuote, bool) {
 }
 
 // HasDccQuote returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasDccQuote() bool {
+func (o *BalanceCheckRequest) HasDccQuote() bool {
 	if o != nil && !common.IsNil(o.DccQuote) {
 		return true
 	}
@@ -437,12 +430,12 @@ func (o *CheckoutBalanceCheckRequest) HasDccQuote() bool {
 }
 
 // SetDccQuote gets a reference to the given ForexQuote and assigns it to the DccQuote field.
-func (o *CheckoutBalanceCheckRequest) SetDccQuote(v ForexQuote) {
+func (o *BalanceCheckRequest) SetDccQuote(v ForexQuote) {
 	o.DccQuote = &v
 }
 
 // GetDeliveryAddress returns the DeliveryAddress field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetDeliveryAddress() Address {
+func (o *BalanceCheckRequest) GetDeliveryAddress() Address {
 	if o == nil || common.IsNil(o.DeliveryAddress) {
 		var ret Address
 		return ret
@@ -452,7 +445,7 @@ func (o *CheckoutBalanceCheckRequest) GetDeliveryAddress() Address {
 
 // GetDeliveryAddressOk returns a tuple with the DeliveryAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetDeliveryAddressOk() (*Address, bool) {
+func (o *BalanceCheckRequest) GetDeliveryAddressOk() (*Address, bool) {
 	if o == nil || common.IsNil(o.DeliveryAddress) {
 		return nil, false
 	}
@@ -460,7 +453,7 @@ func (o *CheckoutBalanceCheckRequest) GetDeliveryAddressOk() (*Address, bool) {
 }
 
 // HasDeliveryAddress returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasDeliveryAddress() bool {
+func (o *BalanceCheckRequest) HasDeliveryAddress() bool {
 	if o != nil && !common.IsNil(o.DeliveryAddress) {
 		return true
 	}
@@ -469,12 +462,12 @@ func (o *CheckoutBalanceCheckRequest) HasDeliveryAddress() bool {
 }
 
 // SetDeliveryAddress gets a reference to the given Address and assigns it to the DeliveryAddress field.
-func (o *CheckoutBalanceCheckRequest) SetDeliveryAddress(v Address) {
+func (o *BalanceCheckRequest) SetDeliveryAddress(v Address) {
 	o.DeliveryAddress = &v
 }
 
 // GetDeliveryDate returns the DeliveryDate field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetDeliveryDate() time.Time {
+func (o *BalanceCheckRequest) GetDeliveryDate() time.Time {
 	if o == nil || common.IsNil(o.DeliveryDate) {
 		var ret time.Time
 		return ret
@@ -484,7 +477,7 @@ func (o *CheckoutBalanceCheckRequest) GetDeliveryDate() time.Time {
 
 // GetDeliveryDateOk returns a tuple with the DeliveryDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetDeliveryDateOk() (*time.Time, bool) {
+func (o *BalanceCheckRequest) GetDeliveryDateOk() (*time.Time, bool) {
 	if o == nil || common.IsNil(o.DeliveryDate) {
 		return nil, false
 	}
@@ -492,7 +485,7 @@ func (o *CheckoutBalanceCheckRequest) GetDeliveryDateOk() (*time.Time, bool) {
 }
 
 // HasDeliveryDate returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasDeliveryDate() bool {
+func (o *BalanceCheckRequest) HasDeliveryDate() bool {
 	if o != nil && !common.IsNil(o.DeliveryDate) {
 		return true
 	}
@@ -501,12 +494,12 @@ func (o *CheckoutBalanceCheckRequest) HasDeliveryDate() bool {
 }
 
 // SetDeliveryDate gets a reference to the given time.Time and assigns it to the DeliveryDate field.
-func (o *CheckoutBalanceCheckRequest) SetDeliveryDate(v time.Time) {
+func (o *BalanceCheckRequest) SetDeliveryDate(v time.Time) {
 	o.DeliveryDate = &v
 }
 
 // GetDeviceFingerprint returns the DeviceFingerprint field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetDeviceFingerprint() string {
+func (o *BalanceCheckRequest) GetDeviceFingerprint() string {
 	if o == nil || common.IsNil(o.DeviceFingerprint) {
 		var ret string
 		return ret
@@ -516,7 +509,7 @@ func (o *CheckoutBalanceCheckRequest) GetDeviceFingerprint() string {
 
 // GetDeviceFingerprintOk returns a tuple with the DeviceFingerprint field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetDeviceFingerprintOk() (*string, bool) {
+func (o *BalanceCheckRequest) GetDeviceFingerprintOk() (*string, bool) {
 	if o == nil || common.IsNil(o.DeviceFingerprint) {
 		return nil, false
 	}
@@ -524,7 +517,7 @@ func (o *CheckoutBalanceCheckRequest) GetDeviceFingerprintOk() (*string, bool) {
 }
 
 // HasDeviceFingerprint returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasDeviceFingerprint() bool {
+func (o *BalanceCheckRequest) HasDeviceFingerprint() bool {
 	if o != nil && !common.IsNil(o.DeviceFingerprint) {
 		return true
 	}
@@ -533,12 +526,12 @@ func (o *CheckoutBalanceCheckRequest) HasDeviceFingerprint() bool {
 }
 
 // SetDeviceFingerprint gets a reference to the given string and assigns it to the DeviceFingerprint field.
-func (o *CheckoutBalanceCheckRequest) SetDeviceFingerprint(v string) {
+func (o *BalanceCheckRequest) SetDeviceFingerprint(v string) {
 	o.DeviceFingerprint = &v
 }
 
 // GetFraudOffset returns the FraudOffset field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetFraudOffset() int32 {
+func (o *BalanceCheckRequest) GetFraudOffset() int32 {
 	if o == nil || common.IsNil(o.FraudOffset) {
 		var ret int32
 		return ret
@@ -548,7 +541,7 @@ func (o *CheckoutBalanceCheckRequest) GetFraudOffset() int32 {
 
 // GetFraudOffsetOk returns a tuple with the FraudOffset field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetFraudOffsetOk() (*int32, bool) {
+func (o *BalanceCheckRequest) GetFraudOffsetOk() (*int32, bool) {
 	if o == nil || common.IsNil(o.FraudOffset) {
 		return nil, false
 	}
@@ -556,7 +549,7 @@ func (o *CheckoutBalanceCheckRequest) GetFraudOffsetOk() (*int32, bool) {
 }
 
 // HasFraudOffset returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasFraudOffset() bool {
+func (o *BalanceCheckRequest) HasFraudOffset() bool {
 	if o != nil && !common.IsNil(o.FraudOffset) {
 		return true
 	}
@@ -565,12 +558,12 @@ func (o *CheckoutBalanceCheckRequest) HasFraudOffset() bool {
 }
 
 // SetFraudOffset gets a reference to the given int32 and assigns it to the FraudOffset field.
-func (o *CheckoutBalanceCheckRequest) SetFraudOffset(v int32) {
+func (o *BalanceCheckRequest) SetFraudOffset(v int32) {
 	o.FraudOffset = &v
 }
 
 // GetInstallments returns the Installments field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetInstallments() Installments {
+func (o *BalanceCheckRequest) GetInstallments() Installments {
 	if o == nil || common.IsNil(o.Installments) {
 		var ret Installments
 		return ret
@@ -580,7 +573,7 @@ func (o *CheckoutBalanceCheckRequest) GetInstallments() Installments {
 
 // GetInstallmentsOk returns a tuple with the Installments field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetInstallmentsOk() (*Installments, bool) {
+func (o *BalanceCheckRequest) GetInstallmentsOk() (*Installments, bool) {
 	if o == nil || common.IsNil(o.Installments) {
 		return nil, false
 	}
@@ -588,7 +581,7 @@ func (o *CheckoutBalanceCheckRequest) GetInstallmentsOk() (*Installments, bool) 
 }
 
 // HasInstallments returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasInstallments() bool {
+func (o *BalanceCheckRequest) HasInstallments() bool {
 	if o != nil && !common.IsNil(o.Installments) {
 		return true
 	}
@@ -597,12 +590,12 @@ func (o *CheckoutBalanceCheckRequest) HasInstallments() bool {
 }
 
 // SetInstallments gets a reference to the given Installments and assigns it to the Installments field.
-func (o *CheckoutBalanceCheckRequest) SetInstallments(v Installments) {
+func (o *BalanceCheckRequest) SetInstallments(v Installments) {
 	o.Installments = &v
 }
 
 // GetLocalizedShopperStatement returns the LocalizedShopperStatement field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetLocalizedShopperStatement() map[string]string {
+func (o *BalanceCheckRequest) GetLocalizedShopperStatement() map[string]string {
 	if o == nil || common.IsNil(o.LocalizedShopperStatement) {
 		var ret map[string]string
 		return ret
@@ -612,7 +605,7 @@ func (o *CheckoutBalanceCheckRequest) GetLocalizedShopperStatement() map[string]
 
 // GetLocalizedShopperStatementOk returns a tuple with the LocalizedShopperStatement field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetLocalizedShopperStatementOk() (*map[string]string, bool) {
+func (o *BalanceCheckRequest) GetLocalizedShopperStatementOk() (*map[string]string, bool) {
 	if o == nil || common.IsNil(o.LocalizedShopperStatement) {
 		return nil, false
 	}
@@ -620,7 +613,7 @@ func (o *CheckoutBalanceCheckRequest) GetLocalizedShopperStatementOk() (*map[str
 }
 
 // HasLocalizedShopperStatement returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasLocalizedShopperStatement() bool {
+func (o *BalanceCheckRequest) HasLocalizedShopperStatement() bool {
 	if o != nil && !common.IsNil(o.LocalizedShopperStatement) {
 		return true
 	}
@@ -629,12 +622,12 @@ func (o *CheckoutBalanceCheckRequest) HasLocalizedShopperStatement() bool {
 }
 
 // SetLocalizedShopperStatement gets a reference to the given map[string]string and assigns it to the LocalizedShopperStatement field.
-func (o *CheckoutBalanceCheckRequest) SetLocalizedShopperStatement(v map[string]string) {
+func (o *BalanceCheckRequest) SetLocalizedShopperStatement(v map[string]string) {
 	o.LocalizedShopperStatement = &v
 }
 
 // GetMcc returns the Mcc field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetMcc() string {
+func (o *BalanceCheckRequest) GetMcc() string {
 	if o == nil || common.IsNil(o.Mcc) {
 		var ret string
 		return ret
@@ -644,7 +637,7 @@ func (o *CheckoutBalanceCheckRequest) GetMcc() string {
 
 // GetMccOk returns a tuple with the Mcc field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetMccOk() (*string, bool) {
+func (o *BalanceCheckRequest) GetMccOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Mcc) {
 		return nil, false
 	}
@@ -652,7 +645,7 @@ func (o *CheckoutBalanceCheckRequest) GetMccOk() (*string, bool) {
 }
 
 // HasMcc returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasMcc() bool {
+func (o *BalanceCheckRequest) HasMcc() bool {
 	if o != nil && !common.IsNil(o.Mcc) {
 		return true
 	}
@@ -661,12 +654,12 @@ func (o *CheckoutBalanceCheckRequest) HasMcc() bool {
 }
 
 // SetMcc gets a reference to the given string and assigns it to the Mcc field.
-func (o *CheckoutBalanceCheckRequest) SetMcc(v string) {
+func (o *BalanceCheckRequest) SetMcc(v string) {
 	o.Mcc = &v
 }
 
 // GetMerchantAccount returns the MerchantAccount field value
-func (o *CheckoutBalanceCheckRequest) GetMerchantAccount() string {
+func (o *BalanceCheckRequest) GetMerchantAccount() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -677,7 +670,7 @@ func (o *CheckoutBalanceCheckRequest) GetMerchantAccount() string {
 
 // GetMerchantAccountOk returns a tuple with the MerchantAccount field value
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetMerchantAccountOk() (*string, bool) {
+func (o *BalanceCheckRequest) GetMerchantAccountOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -685,12 +678,12 @@ func (o *CheckoutBalanceCheckRequest) GetMerchantAccountOk() (*string, bool) {
 }
 
 // SetMerchantAccount sets field value
-func (o *CheckoutBalanceCheckRequest) SetMerchantAccount(v string) {
+func (o *BalanceCheckRequest) SetMerchantAccount(v string) {
 	o.MerchantAccount = v
 }
 
 // GetMerchantOrderReference returns the MerchantOrderReference field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetMerchantOrderReference() string {
+func (o *BalanceCheckRequest) GetMerchantOrderReference() string {
 	if o == nil || common.IsNil(o.MerchantOrderReference) {
 		var ret string
 		return ret
@@ -700,7 +693,7 @@ func (o *CheckoutBalanceCheckRequest) GetMerchantOrderReference() string {
 
 // GetMerchantOrderReferenceOk returns a tuple with the MerchantOrderReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetMerchantOrderReferenceOk() (*string, bool) {
+func (o *BalanceCheckRequest) GetMerchantOrderReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.MerchantOrderReference) {
 		return nil, false
 	}
@@ -708,7 +701,7 @@ func (o *CheckoutBalanceCheckRequest) GetMerchantOrderReferenceOk() (*string, bo
 }
 
 // HasMerchantOrderReference returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasMerchantOrderReference() bool {
+func (o *BalanceCheckRequest) HasMerchantOrderReference() bool {
 	if o != nil && !common.IsNil(o.MerchantOrderReference) {
 		return true
 	}
@@ -717,12 +710,12 @@ func (o *CheckoutBalanceCheckRequest) HasMerchantOrderReference() bool {
 }
 
 // SetMerchantOrderReference gets a reference to the given string and assigns it to the MerchantOrderReference field.
-func (o *CheckoutBalanceCheckRequest) SetMerchantOrderReference(v string) {
+func (o *BalanceCheckRequest) SetMerchantOrderReference(v string) {
 	o.MerchantOrderReference = &v
 }
 
 // GetMerchantRiskIndicator returns the MerchantRiskIndicator field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetMerchantRiskIndicator() MerchantRiskIndicator {
+func (o *BalanceCheckRequest) GetMerchantRiskIndicator() MerchantRiskIndicator {
 	if o == nil || common.IsNil(o.MerchantRiskIndicator) {
 		var ret MerchantRiskIndicator
 		return ret
@@ -732,7 +725,7 @@ func (o *CheckoutBalanceCheckRequest) GetMerchantRiskIndicator() MerchantRiskInd
 
 // GetMerchantRiskIndicatorOk returns a tuple with the MerchantRiskIndicator field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetMerchantRiskIndicatorOk() (*MerchantRiskIndicator, bool) {
+func (o *BalanceCheckRequest) GetMerchantRiskIndicatorOk() (*MerchantRiskIndicator, bool) {
 	if o == nil || common.IsNil(o.MerchantRiskIndicator) {
 		return nil, false
 	}
@@ -740,7 +733,7 @@ func (o *CheckoutBalanceCheckRequest) GetMerchantRiskIndicatorOk() (*MerchantRis
 }
 
 // HasMerchantRiskIndicator returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasMerchantRiskIndicator() bool {
+func (o *BalanceCheckRequest) HasMerchantRiskIndicator() bool {
 	if o != nil && !common.IsNil(o.MerchantRiskIndicator) {
 		return true
 	}
@@ -749,12 +742,12 @@ func (o *CheckoutBalanceCheckRequest) HasMerchantRiskIndicator() bool {
 }
 
 // SetMerchantRiskIndicator gets a reference to the given MerchantRiskIndicator and assigns it to the MerchantRiskIndicator field.
-func (o *CheckoutBalanceCheckRequest) SetMerchantRiskIndicator(v MerchantRiskIndicator) {
+func (o *BalanceCheckRequest) SetMerchantRiskIndicator(v MerchantRiskIndicator) {
 	o.MerchantRiskIndicator = &v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetMetadata() map[string]string {
+func (o *BalanceCheckRequest) GetMetadata() map[string]string {
 	if o == nil || common.IsNil(o.Metadata) {
 		var ret map[string]string
 		return ret
@@ -764,7 +757,7 @@ func (o *CheckoutBalanceCheckRequest) GetMetadata() map[string]string {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetMetadataOk() (*map[string]string, bool) {
+func (o *BalanceCheckRequest) GetMetadataOk() (*map[string]string, bool) {
 	if o == nil || common.IsNil(o.Metadata) {
 		return nil, false
 	}
@@ -772,7 +765,7 @@ func (o *CheckoutBalanceCheckRequest) GetMetadataOk() (*map[string]string, bool)
 }
 
 // HasMetadata returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasMetadata() bool {
+func (o *BalanceCheckRequest) HasMetadata() bool {
 	if o != nil && !common.IsNil(o.Metadata) {
 		return true
 	}
@@ -781,12 +774,12 @@ func (o *CheckoutBalanceCheckRequest) HasMetadata() bool {
 }
 
 // SetMetadata gets a reference to the given map[string]string and assigns it to the Metadata field.
-func (o *CheckoutBalanceCheckRequest) SetMetadata(v map[string]string) {
+func (o *BalanceCheckRequest) SetMetadata(v map[string]string) {
 	o.Metadata = &v
 }
 
 // GetOrderReference returns the OrderReference field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetOrderReference() string {
+func (o *BalanceCheckRequest) GetOrderReference() string {
 	if o == nil || common.IsNil(o.OrderReference) {
 		var ret string
 		return ret
@@ -796,7 +789,7 @@ func (o *CheckoutBalanceCheckRequest) GetOrderReference() string {
 
 // GetOrderReferenceOk returns a tuple with the OrderReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetOrderReferenceOk() (*string, bool) {
+func (o *BalanceCheckRequest) GetOrderReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.OrderReference) {
 		return nil, false
 	}
@@ -804,7 +797,7 @@ func (o *CheckoutBalanceCheckRequest) GetOrderReferenceOk() (*string, bool) {
 }
 
 // HasOrderReference returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasOrderReference() bool {
+func (o *BalanceCheckRequest) HasOrderReference() bool {
 	if o != nil && !common.IsNil(o.OrderReference) {
 		return true
 	}
@@ -813,12 +806,12 @@ func (o *CheckoutBalanceCheckRequest) HasOrderReference() bool {
 }
 
 // SetOrderReference gets a reference to the given string and assigns it to the OrderReference field.
-func (o *CheckoutBalanceCheckRequest) SetOrderReference(v string) {
+func (o *BalanceCheckRequest) SetOrderReference(v string) {
 	o.OrderReference = &v
 }
 
 // GetPaymentMethod returns the PaymentMethod field value
-func (o *CheckoutBalanceCheckRequest) GetPaymentMethod() map[string]string {
+func (o *BalanceCheckRequest) GetPaymentMethod() map[string]string {
 	if o == nil {
 		var ret map[string]string
 		return ret
@@ -829,7 +822,7 @@ func (o *CheckoutBalanceCheckRequest) GetPaymentMethod() map[string]string {
 
 // GetPaymentMethodOk returns a tuple with the PaymentMethod field value
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetPaymentMethodOk() (*map[string]string, bool) {
+func (o *BalanceCheckRequest) GetPaymentMethodOk() (*map[string]string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -837,12 +830,12 @@ func (o *CheckoutBalanceCheckRequest) GetPaymentMethodOk() (*map[string]string, 
 }
 
 // SetPaymentMethod sets field value
-func (o *CheckoutBalanceCheckRequest) SetPaymentMethod(v map[string]string) {
+func (o *BalanceCheckRequest) SetPaymentMethod(v map[string]string) {
 	o.PaymentMethod = v
 }
 
 // GetRecurring returns the Recurring field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetRecurring() Recurring {
+func (o *BalanceCheckRequest) GetRecurring() Recurring {
 	if o == nil || common.IsNil(o.Recurring) {
 		var ret Recurring
 		return ret
@@ -852,7 +845,7 @@ func (o *CheckoutBalanceCheckRequest) GetRecurring() Recurring {
 
 // GetRecurringOk returns a tuple with the Recurring field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetRecurringOk() (*Recurring, bool) {
+func (o *BalanceCheckRequest) GetRecurringOk() (*Recurring, bool) {
 	if o == nil || common.IsNil(o.Recurring) {
 		return nil, false
 	}
@@ -860,7 +853,7 @@ func (o *CheckoutBalanceCheckRequest) GetRecurringOk() (*Recurring, bool) {
 }
 
 // HasRecurring returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasRecurring() bool {
+func (o *BalanceCheckRequest) HasRecurring() bool {
 	if o != nil && !common.IsNil(o.Recurring) {
 		return true
 	}
@@ -869,12 +862,12 @@ func (o *CheckoutBalanceCheckRequest) HasRecurring() bool {
 }
 
 // SetRecurring gets a reference to the given Recurring and assigns it to the Recurring field.
-func (o *CheckoutBalanceCheckRequest) SetRecurring(v Recurring) {
+func (o *BalanceCheckRequest) SetRecurring(v Recurring) {
 	o.Recurring = &v
 }
 
 // GetRecurringProcessingModel returns the RecurringProcessingModel field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetRecurringProcessingModel() string {
+func (o *BalanceCheckRequest) GetRecurringProcessingModel() string {
 	if o == nil || common.IsNil(o.RecurringProcessingModel) {
 		var ret string
 		return ret
@@ -884,7 +877,7 @@ func (o *CheckoutBalanceCheckRequest) GetRecurringProcessingModel() string {
 
 // GetRecurringProcessingModelOk returns a tuple with the RecurringProcessingModel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetRecurringProcessingModelOk() (*string, bool) {
+func (o *BalanceCheckRequest) GetRecurringProcessingModelOk() (*string, bool) {
 	if o == nil || common.IsNil(o.RecurringProcessingModel) {
 		return nil, false
 	}
@@ -892,7 +885,7 @@ func (o *CheckoutBalanceCheckRequest) GetRecurringProcessingModelOk() (*string, 
 }
 
 // HasRecurringProcessingModel returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasRecurringProcessingModel() bool {
+func (o *BalanceCheckRequest) HasRecurringProcessingModel() bool {
 	if o != nil && !common.IsNil(o.RecurringProcessingModel) {
 		return true
 	}
@@ -901,12 +894,12 @@ func (o *CheckoutBalanceCheckRequest) HasRecurringProcessingModel() bool {
 }
 
 // SetRecurringProcessingModel gets a reference to the given string and assigns it to the RecurringProcessingModel field.
-func (o *CheckoutBalanceCheckRequest) SetRecurringProcessingModel(v string) {
+func (o *BalanceCheckRequest) SetRecurringProcessingModel(v string) {
 	o.RecurringProcessingModel = &v
 }
 
 // GetReference returns the Reference field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetReference() string {
+func (o *BalanceCheckRequest) GetReference() string {
 	if o == nil || common.IsNil(o.Reference) {
 		var ret string
 		return ret
@@ -916,7 +909,7 @@ func (o *CheckoutBalanceCheckRequest) GetReference() string {
 
 // GetReferenceOk returns a tuple with the Reference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetReferenceOk() (*string, bool) {
+func (o *BalanceCheckRequest) GetReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Reference) {
 		return nil, false
 	}
@@ -924,7 +917,7 @@ func (o *CheckoutBalanceCheckRequest) GetReferenceOk() (*string, bool) {
 }
 
 // HasReference returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasReference() bool {
+func (o *BalanceCheckRequest) HasReference() bool {
 	if o != nil && !common.IsNil(o.Reference) {
 		return true
 	}
@@ -933,12 +926,12 @@ func (o *CheckoutBalanceCheckRequest) HasReference() bool {
 }
 
 // SetReference gets a reference to the given string and assigns it to the Reference field.
-func (o *CheckoutBalanceCheckRequest) SetReference(v string) {
+func (o *BalanceCheckRequest) SetReference(v string) {
 	o.Reference = &v
 }
 
 // GetSelectedBrand returns the SelectedBrand field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetSelectedBrand() string {
+func (o *BalanceCheckRequest) GetSelectedBrand() string {
 	if o == nil || common.IsNil(o.SelectedBrand) {
 		var ret string
 		return ret
@@ -948,7 +941,7 @@ func (o *CheckoutBalanceCheckRequest) GetSelectedBrand() string {
 
 // GetSelectedBrandOk returns a tuple with the SelectedBrand field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetSelectedBrandOk() (*string, bool) {
+func (o *BalanceCheckRequest) GetSelectedBrandOk() (*string, bool) {
 	if o == nil || common.IsNil(o.SelectedBrand) {
 		return nil, false
 	}
@@ -956,7 +949,7 @@ func (o *CheckoutBalanceCheckRequest) GetSelectedBrandOk() (*string, bool) {
 }
 
 // HasSelectedBrand returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasSelectedBrand() bool {
+func (o *BalanceCheckRequest) HasSelectedBrand() bool {
 	if o != nil && !common.IsNil(o.SelectedBrand) {
 		return true
 	}
@@ -965,12 +958,12 @@ func (o *CheckoutBalanceCheckRequest) HasSelectedBrand() bool {
 }
 
 // SetSelectedBrand gets a reference to the given string and assigns it to the SelectedBrand field.
-func (o *CheckoutBalanceCheckRequest) SetSelectedBrand(v string) {
+func (o *BalanceCheckRequest) SetSelectedBrand(v string) {
 	o.SelectedBrand = &v
 }
 
 // GetSelectedRecurringDetailReference returns the SelectedRecurringDetailReference field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetSelectedRecurringDetailReference() string {
+func (o *BalanceCheckRequest) GetSelectedRecurringDetailReference() string {
 	if o == nil || common.IsNil(o.SelectedRecurringDetailReference) {
 		var ret string
 		return ret
@@ -980,7 +973,7 @@ func (o *CheckoutBalanceCheckRequest) GetSelectedRecurringDetailReference() stri
 
 // GetSelectedRecurringDetailReferenceOk returns a tuple with the SelectedRecurringDetailReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetSelectedRecurringDetailReferenceOk() (*string, bool) {
+func (o *BalanceCheckRequest) GetSelectedRecurringDetailReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.SelectedRecurringDetailReference) {
 		return nil, false
 	}
@@ -988,7 +981,7 @@ func (o *CheckoutBalanceCheckRequest) GetSelectedRecurringDetailReferenceOk() (*
 }
 
 // HasSelectedRecurringDetailReference returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasSelectedRecurringDetailReference() bool {
+func (o *BalanceCheckRequest) HasSelectedRecurringDetailReference() bool {
 	if o != nil && !common.IsNil(o.SelectedRecurringDetailReference) {
 		return true
 	}
@@ -997,12 +990,12 @@ func (o *CheckoutBalanceCheckRequest) HasSelectedRecurringDetailReference() bool
 }
 
 // SetSelectedRecurringDetailReference gets a reference to the given string and assigns it to the SelectedRecurringDetailReference field.
-func (o *CheckoutBalanceCheckRequest) SetSelectedRecurringDetailReference(v string) {
+func (o *BalanceCheckRequest) SetSelectedRecurringDetailReference(v string) {
 	o.SelectedRecurringDetailReference = &v
 }
 
 // GetSessionId returns the SessionId field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetSessionId() string {
+func (o *BalanceCheckRequest) GetSessionId() string {
 	if o == nil || common.IsNil(o.SessionId) {
 		var ret string
 		return ret
@@ -1012,7 +1005,7 @@ func (o *CheckoutBalanceCheckRequest) GetSessionId() string {
 
 // GetSessionIdOk returns a tuple with the SessionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetSessionIdOk() (*string, bool) {
+func (o *BalanceCheckRequest) GetSessionIdOk() (*string, bool) {
 	if o == nil || common.IsNil(o.SessionId) {
 		return nil, false
 	}
@@ -1020,7 +1013,7 @@ func (o *CheckoutBalanceCheckRequest) GetSessionIdOk() (*string, bool) {
 }
 
 // HasSessionId returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasSessionId() bool {
+func (o *BalanceCheckRequest) HasSessionId() bool {
 	if o != nil && !common.IsNil(o.SessionId) {
 		return true
 	}
@@ -1029,12 +1022,12 @@ func (o *CheckoutBalanceCheckRequest) HasSessionId() bool {
 }
 
 // SetSessionId gets a reference to the given string and assigns it to the SessionId field.
-func (o *CheckoutBalanceCheckRequest) SetSessionId(v string) {
+func (o *BalanceCheckRequest) SetSessionId(v string) {
 	o.SessionId = &v
 }
 
 // GetShopperEmail returns the ShopperEmail field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetShopperEmail() string {
+func (o *BalanceCheckRequest) GetShopperEmail() string {
 	if o == nil || common.IsNil(o.ShopperEmail) {
 		var ret string
 		return ret
@@ -1044,7 +1037,7 @@ func (o *CheckoutBalanceCheckRequest) GetShopperEmail() string {
 
 // GetShopperEmailOk returns a tuple with the ShopperEmail field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetShopperEmailOk() (*string, bool) {
+func (o *BalanceCheckRequest) GetShopperEmailOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ShopperEmail) {
 		return nil, false
 	}
@@ -1052,7 +1045,7 @@ func (o *CheckoutBalanceCheckRequest) GetShopperEmailOk() (*string, bool) {
 }
 
 // HasShopperEmail returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasShopperEmail() bool {
+func (o *BalanceCheckRequest) HasShopperEmail() bool {
 	if o != nil && !common.IsNil(o.ShopperEmail) {
 		return true
 	}
@@ -1061,12 +1054,12 @@ func (o *CheckoutBalanceCheckRequest) HasShopperEmail() bool {
 }
 
 // SetShopperEmail gets a reference to the given string and assigns it to the ShopperEmail field.
-func (o *CheckoutBalanceCheckRequest) SetShopperEmail(v string) {
+func (o *BalanceCheckRequest) SetShopperEmail(v string) {
 	o.ShopperEmail = &v
 }
 
 // GetShopperIP returns the ShopperIP field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetShopperIP() string {
+func (o *BalanceCheckRequest) GetShopperIP() string {
 	if o == nil || common.IsNil(o.ShopperIP) {
 		var ret string
 		return ret
@@ -1076,7 +1069,7 @@ func (o *CheckoutBalanceCheckRequest) GetShopperIP() string {
 
 // GetShopperIPOk returns a tuple with the ShopperIP field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetShopperIPOk() (*string, bool) {
+func (o *BalanceCheckRequest) GetShopperIPOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ShopperIP) {
 		return nil, false
 	}
@@ -1084,7 +1077,7 @@ func (o *CheckoutBalanceCheckRequest) GetShopperIPOk() (*string, bool) {
 }
 
 // HasShopperIP returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasShopperIP() bool {
+func (o *BalanceCheckRequest) HasShopperIP() bool {
 	if o != nil && !common.IsNil(o.ShopperIP) {
 		return true
 	}
@@ -1093,12 +1086,12 @@ func (o *CheckoutBalanceCheckRequest) HasShopperIP() bool {
 }
 
 // SetShopperIP gets a reference to the given string and assigns it to the ShopperIP field.
-func (o *CheckoutBalanceCheckRequest) SetShopperIP(v string) {
+func (o *BalanceCheckRequest) SetShopperIP(v string) {
 	o.ShopperIP = &v
 }
 
 // GetShopperInteraction returns the ShopperInteraction field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetShopperInteraction() string {
+func (o *BalanceCheckRequest) GetShopperInteraction() string {
 	if o == nil || common.IsNil(o.ShopperInteraction) {
 		var ret string
 		return ret
@@ -1108,7 +1101,7 @@ func (o *CheckoutBalanceCheckRequest) GetShopperInteraction() string {
 
 // GetShopperInteractionOk returns a tuple with the ShopperInteraction field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetShopperInteractionOk() (*string, bool) {
+func (o *BalanceCheckRequest) GetShopperInteractionOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ShopperInteraction) {
 		return nil, false
 	}
@@ -1116,7 +1109,7 @@ func (o *CheckoutBalanceCheckRequest) GetShopperInteractionOk() (*string, bool) 
 }
 
 // HasShopperInteraction returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasShopperInteraction() bool {
+func (o *BalanceCheckRequest) HasShopperInteraction() bool {
 	if o != nil && !common.IsNil(o.ShopperInteraction) {
 		return true
 	}
@@ -1125,12 +1118,12 @@ func (o *CheckoutBalanceCheckRequest) HasShopperInteraction() bool {
 }
 
 // SetShopperInteraction gets a reference to the given string and assigns it to the ShopperInteraction field.
-func (o *CheckoutBalanceCheckRequest) SetShopperInteraction(v string) {
+func (o *BalanceCheckRequest) SetShopperInteraction(v string) {
 	o.ShopperInteraction = &v
 }
 
 // GetShopperLocale returns the ShopperLocale field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetShopperLocale() string {
+func (o *BalanceCheckRequest) GetShopperLocale() string {
 	if o == nil || common.IsNil(o.ShopperLocale) {
 		var ret string
 		return ret
@@ -1140,7 +1133,7 @@ func (o *CheckoutBalanceCheckRequest) GetShopperLocale() string {
 
 // GetShopperLocaleOk returns a tuple with the ShopperLocale field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetShopperLocaleOk() (*string, bool) {
+func (o *BalanceCheckRequest) GetShopperLocaleOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ShopperLocale) {
 		return nil, false
 	}
@@ -1148,7 +1141,7 @@ func (o *CheckoutBalanceCheckRequest) GetShopperLocaleOk() (*string, bool) {
 }
 
 // HasShopperLocale returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasShopperLocale() bool {
+func (o *BalanceCheckRequest) HasShopperLocale() bool {
 	if o != nil && !common.IsNil(o.ShopperLocale) {
 		return true
 	}
@@ -1157,12 +1150,12 @@ func (o *CheckoutBalanceCheckRequest) HasShopperLocale() bool {
 }
 
 // SetShopperLocale gets a reference to the given string and assigns it to the ShopperLocale field.
-func (o *CheckoutBalanceCheckRequest) SetShopperLocale(v string) {
+func (o *BalanceCheckRequest) SetShopperLocale(v string) {
 	o.ShopperLocale = &v
 }
 
 // GetShopperName returns the ShopperName field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetShopperName() Name {
+func (o *BalanceCheckRequest) GetShopperName() Name {
 	if o == nil || common.IsNil(o.ShopperName) {
 		var ret Name
 		return ret
@@ -1172,7 +1165,7 @@ func (o *CheckoutBalanceCheckRequest) GetShopperName() Name {
 
 // GetShopperNameOk returns a tuple with the ShopperName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetShopperNameOk() (*Name, bool) {
+func (o *BalanceCheckRequest) GetShopperNameOk() (*Name, bool) {
 	if o == nil || common.IsNil(o.ShopperName) {
 		return nil, false
 	}
@@ -1180,7 +1173,7 @@ func (o *CheckoutBalanceCheckRequest) GetShopperNameOk() (*Name, bool) {
 }
 
 // HasShopperName returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasShopperName() bool {
+func (o *BalanceCheckRequest) HasShopperName() bool {
 	if o != nil && !common.IsNil(o.ShopperName) {
 		return true
 	}
@@ -1189,12 +1182,12 @@ func (o *CheckoutBalanceCheckRequest) HasShopperName() bool {
 }
 
 // SetShopperName gets a reference to the given Name and assigns it to the ShopperName field.
-func (o *CheckoutBalanceCheckRequest) SetShopperName(v Name) {
+func (o *BalanceCheckRequest) SetShopperName(v Name) {
 	o.ShopperName = &v
 }
 
 // GetShopperReference returns the ShopperReference field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetShopperReference() string {
+func (o *BalanceCheckRequest) GetShopperReference() string {
 	if o == nil || common.IsNil(o.ShopperReference) {
 		var ret string
 		return ret
@@ -1204,7 +1197,7 @@ func (o *CheckoutBalanceCheckRequest) GetShopperReference() string {
 
 // GetShopperReferenceOk returns a tuple with the ShopperReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetShopperReferenceOk() (*string, bool) {
+func (o *BalanceCheckRequest) GetShopperReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ShopperReference) {
 		return nil, false
 	}
@@ -1212,7 +1205,7 @@ func (o *CheckoutBalanceCheckRequest) GetShopperReferenceOk() (*string, bool) {
 }
 
 // HasShopperReference returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasShopperReference() bool {
+func (o *BalanceCheckRequest) HasShopperReference() bool {
 	if o != nil && !common.IsNil(o.ShopperReference) {
 		return true
 	}
@@ -1221,12 +1214,12 @@ func (o *CheckoutBalanceCheckRequest) HasShopperReference() bool {
 }
 
 // SetShopperReference gets a reference to the given string and assigns it to the ShopperReference field.
-func (o *CheckoutBalanceCheckRequest) SetShopperReference(v string) {
+func (o *BalanceCheckRequest) SetShopperReference(v string) {
 	o.ShopperReference = &v
 }
 
 // GetShopperStatement returns the ShopperStatement field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetShopperStatement() string {
+func (o *BalanceCheckRequest) GetShopperStatement() string {
 	if o == nil || common.IsNil(o.ShopperStatement) {
 		var ret string
 		return ret
@@ -1236,7 +1229,7 @@ func (o *CheckoutBalanceCheckRequest) GetShopperStatement() string {
 
 // GetShopperStatementOk returns a tuple with the ShopperStatement field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetShopperStatementOk() (*string, bool) {
+func (o *BalanceCheckRequest) GetShopperStatementOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ShopperStatement) {
 		return nil, false
 	}
@@ -1244,7 +1237,7 @@ func (o *CheckoutBalanceCheckRequest) GetShopperStatementOk() (*string, bool) {
 }
 
 // HasShopperStatement returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasShopperStatement() bool {
+func (o *BalanceCheckRequest) HasShopperStatement() bool {
 	if o != nil && !common.IsNil(o.ShopperStatement) {
 		return true
 	}
@@ -1253,12 +1246,12 @@ func (o *CheckoutBalanceCheckRequest) HasShopperStatement() bool {
 }
 
 // SetShopperStatement gets a reference to the given string and assigns it to the ShopperStatement field.
-func (o *CheckoutBalanceCheckRequest) SetShopperStatement(v string) {
+func (o *BalanceCheckRequest) SetShopperStatement(v string) {
 	o.ShopperStatement = &v
 }
 
 // GetSocialSecurityNumber returns the SocialSecurityNumber field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetSocialSecurityNumber() string {
+func (o *BalanceCheckRequest) GetSocialSecurityNumber() string {
 	if o == nil || common.IsNil(o.SocialSecurityNumber) {
 		var ret string
 		return ret
@@ -1268,7 +1261,7 @@ func (o *CheckoutBalanceCheckRequest) GetSocialSecurityNumber() string {
 
 // GetSocialSecurityNumberOk returns a tuple with the SocialSecurityNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetSocialSecurityNumberOk() (*string, bool) {
+func (o *BalanceCheckRequest) GetSocialSecurityNumberOk() (*string, bool) {
 	if o == nil || common.IsNil(o.SocialSecurityNumber) {
 		return nil, false
 	}
@@ -1276,7 +1269,7 @@ func (o *CheckoutBalanceCheckRequest) GetSocialSecurityNumberOk() (*string, bool
 }
 
 // HasSocialSecurityNumber returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasSocialSecurityNumber() bool {
+func (o *BalanceCheckRequest) HasSocialSecurityNumber() bool {
 	if o != nil && !common.IsNil(o.SocialSecurityNumber) {
 		return true
 	}
@@ -1285,12 +1278,12 @@ func (o *CheckoutBalanceCheckRequest) HasSocialSecurityNumber() bool {
 }
 
 // SetSocialSecurityNumber gets a reference to the given string and assigns it to the SocialSecurityNumber field.
-func (o *CheckoutBalanceCheckRequest) SetSocialSecurityNumber(v string) {
+func (o *BalanceCheckRequest) SetSocialSecurityNumber(v string) {
 	o.SocialSecurityNumber = &v
 }
 
 // GetSplits returns the Splits field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetSplits() []Split {
+func (o *BalanceCheckRequest) GetSplits() []Split {
 	if o == nil || common.IsNil(o.Splits) {
 		var ret []Split
 		return ret
@@ -1300,7 +1293,7 @@ func (o *CheckoutBalanceCheckRequest) GetSplits() []Split {
 
 // GetSplitsOk returns a tuple with the Splits field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetSplitsOk() ([]Split, bool) {
+func (o *BalanceCheckRequest) GetSplitsOk() ([]Split, bool) {
 	if o == nil || common.IsNil(o.Splits) {
 		return nil, false
 	}
@@ -1308,7 +1301,7 @@ func (o *CheckoutBalanceCheckRequest) GetSplitsOk() ([]Split, bool) {
 }
 
 // HasSplits returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasSplits() bool {
+func (o *BalanceCheckRequest) HasSplits() bool {
 	if o != nil && !common.IsNil(o.Splits) {
 		return true
 	}
@@ -1317,12 +1310,12 @@ func (o *CheckoutBalanceCheckRequest) HasSplits() bool {
 }
 
 // SetSplits gets a reference to the given []Split and assigns it to the Splits field.
-func (o *CheckoutBalanceCheckRequest) SetSplits(v []Split) {
+func (o *BalanceCheckRequest) SetSplits(v []Split) {
 	o.Splits = v
 }
 
 // GetStore returns the Store field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetStore() string {
+func (o *BalanceCheckRequest) GetStore() string {
 	if o == nil || common.IsNil(o.Store) {
 		var ret string
 		return ret
@@ -1332,7 +1325,7 @@ func (o *CheckoutBalanceCheckRequest) GetStore() string {
 
 // GetStoreOk returns a tuple with the Store field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetStoreOk() (*string, bool) {
+func (o *BalanceCheckRequest) GetStoreOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Store) {
 		return nil, false
 	}
@@ -1340,7 +1333,7 @@ func (o *CheckoutBalanceCheckRequest) GetStoreOk() (*string, bool) {
 }
 
 // HasStore returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasStore() bool {
+func (o *BalanceCheckRequest) HasStore() bool {
 	if o != nil && !common.IsNil(o.Store) {
 		return true
 	}
@@ -1349,12 +1342,12 @@ func (o *CheckoutBalanceCheckRequest) HasStore() bool {
 }
 
 // SetStore gets a reference to the given string and assigns it to the Store field.
-func (o *CheckoutBalanceCheckRequest) SetStore(v string) {
+func (o *BalanceCheckRequest) SetStore(v string) {
 	o.Store = &v
 }
 
 // GetTelephoneNumber returns the TelephoneNumber field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetTelephoneNumber() string {
+func (o *BalanceCheckRequest) GetTelephoneNumber() string {
 	if o == nil || common.IsNil(o.TelephoneNumber) {
 		var ret string
 		return ret
@@ -1364,7 +1357,7 @@ func (o *CheckoutBalanceCheckRequest) GetTelephoneNumber() string {
 
 // GetTelephoneNumberOk returns a tuple with the TelephoneNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetTelephoneNumberOk() (*string, bool) {
+func (o *BalanceCheckRequest) GetTelephoneNumberOk() (*string, bool) {
 	if o == nil || common.IsNil(o.TelephoneNumber) {
 		return nil, false
 	}
@@ -1372,7 +1365,7 @@ func (o *CheckoutBalanceCheckRequest) GetTelephoneNumberOk() (*string, bool) {
 }
 
 // HasTelephoneNumber returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasTelephoneNumber() bool {
+func (o *BalanceCheckRequest) HasTelephoneNumber() bool {
 	if o != nil && !common.IsNil(o.TelephoneNumber) {
 		return true
 	}
@@ -1381,12 +1374,12 @@ func (o *CheckoutBalanceCheckRequest) HasTelephoneNumber() bool {
 }
 
 // SetTelephoneNumber gets a reference to the given string and assigns it to the TelephoneNumber field.
-func (o *CheckoutBalanceCheckRequest) SetTelephoneNumber(v string) {
+func (o *BalanceCheckRequest) SetTelephoneNumber(v string) {
 	o.TelephoneNumber = &v
 }
 
 // GetThreeDS2RequestData returns the ThreeDS2RequestData field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetThreeDS2RequestData() ThreeDS2RequestData {
+func (o *BalanceCheckRequest) GetThreeDS2RequestData() ThreeDS2RequestData {
 	if o == nil || common.IsNil(o.ThreeDS2RequestData) {
 		var ret ThreeDS2RequestData
 		return ret
@@ -1396,7 +1389,7 @@ func (o *CheckoutBalanceCheckRequest) GetThreeDS2RequestData() ThreeDS2RequestDa
 
 // GetThreeDS2RequestDataOk returns a tuple with the ThreeDS2RequestData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetThreeDS2RequestDataOk() (*ThreeDS2RequestData, bool) {
+func (o *BalanceCheckRequest) GetThreeDS2RequestDataOk() (*ThreeDS2RequestData, bool) {
 	if o == nil || common.IsNil(o.ThreeDS2RequestData) {
 		return nil, false
 	}
@@ -1404,7 +1397,7 @@ func (o *CheckoutBalanceCheckRequest) GetThreeDS2RequestDataOk() (*ThreeDS2Reque
 }
 
 // HasThreeDS2RequestData returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasThreeDS2RequestData() bool {
+func (o *BalanceCheckRequest) HasThreeDS2RequestData() bool {
 	if o != nil && !common.IsNil(o.ThreeDS2RequestData) {
 		return true
 	}
@@ -1413,13 +1406,13 @@ func (o *CheckoutBalanceCheckRequest) HasThreeDS2RequestData() bool {
 }
 
 // SetThreeDS2RequestData gets a reference to the given ThreeDS2RequestData and assigns it to the ThreeDS2RequestData field.
-func (o *CheckoutBalanceCheckRequest) SetThreeDS2RequestData(v ThreeDS2RequestData) {
+func (o *BalanceCheckRequest) SetThreeDS2RequestData(v ThreeDS2RequestData) {
 	o.ThreeDS2RequestData = &v
 }
 
 // GetThreeDSAuthenticationOnly returns the ThreeDSAuthenticationOnly field value if set, zero value otherwise.
 // Deprecated
-func (o *CheckoutBalanceCheckRequest) GetThreeDSAuthenticationOnly() bool {
+func (o *BalanceCheckRequest) GetThreeDSAuthenticationOnly() bool {
 	if o == nil || common.IsNil(o.ThreeDSAuthenticationOnly) {
 		var ret bool
 		return ret
@@ -1430,7 +1423,7 @@ func (o *CheckoutBalanceCheckRequest) GetThreeDSAuthenticationOnly() bool {
 // GetThreeDSAuthenticationOnlyOk returns a tuple with the ThreeDSAuthenticationOnly field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // Deprecated
-func (o *CheckoutBalanceCheckRequest) GetThreeDSAuthenticationOnlyOk() (*bool, bool) {
+func (o *BalanceCheckRequest) GetThreeDSAuthenticationOnlyOk() (*bool, bool) {
 	if o == nil || common.IsNil(o.ThreeDSAuthenticationOnly) {
 		return nil, false
 	}
@@ -1438,7 +1431,7 @@ func (o *CheckoutBalanceCheckRequest) GetThreeDSAuthenticationOnlyOk() (*bool, b
 }
 
 // HasThreeDSAuthenticationOnly returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasThreeDSAuthenticationOnly() bool {
+func (o *BalanceCheckRequest) HasThreeDSAuthenticationOnly() bool {
 	if o != nil && !common.IsNil(o.ThreeDSAuthenticationOnly) {
 		return true
 	}
@@ -1448,12 +1441,12 @@ func (o *CheckoutBalanceCheckRequest) HasThreeDSAuthenticationOnly() bool {
 
 // SetThreeDSAuthenticationOnly gets a reference to the given bool and assigns it to the ThreeDSAuthenticationOnly field.
 // Deprecated
-func (o *CheckoutBalanceCheckRequest) SetThreeDSAuthenticationOnly(v bool) {
+func (o *BalanceCheckRequest) SetThreeDSAuthenticationOnly(v bool) {
 	o.ThreeDSAuthenticationOnly = &v
 }
 
 // GetTotalsGroup returns the TotalsGroup field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetTotalsGroup() string {
+func (o *BalanceCheckRequest) GetTotalsGroup() string {
 	if o == nil || common.IsNil(o.TotalsGroup) {
 		var ret string
 		return ret
@@ -1463,7 +1456,7 @@ func (o *CheckoutBalanceCheckRequest) GetTotalsGroup() string {
 
 // GetTotalsGroupOk returns a tuple with the TotalsGroup field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetTotalsGroupOk() (*string, bool) {
+func (o *BalanceCheckRequest) GetTotalsGroupOk() (*string, bool) {
 	if o == nil || common.IsNil(o.TotalsGroup) {
 		return nil, false
 	}
@@ -1471,7 +1464,7 @@ func (o *CheckoutBalanceCheckRequest) GetTotalsGroupOk() (*string, bool) {
 }
 
 // HasTotalsGroup returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasTotalsGroup() bool {
+func (o *BalanceCheckRequest) HasTotalsGroup() bool {
 	if o != nil && !common.IsNil(o.TotalsGroup) {
 		return true
 	}
@@ -1480,12 +1473,12 @@ func (o *CheckoutBalanceCheckRequest) HasTotalsGroup() bool {
 }
 
 // SetTotalsGroup gets a reference to the given string and assigns it to the TotalsGroup field.
-func (o *CheckoutBalanceCheckRequest) SetTotalsGroup(v string) {
+func (o *BalanceCheckRequest) SetTotalsGroup(v string) {
 	o.TotalsGroup = &v
 }
 
 // GetTrustedShopper returns the TrustedShopper field value if set, zero value otherwise.
-func (o *CheckoutBalanceCheckRequest) GetTrustedShopper() bool {
+func (o *BalanceCheckRequest) GetTrustedShopper() bool {
 	if o == nil || common.IsNil(o.TrustedShopper) {
 		var ret bool
 		return ret
@@ -1495,7 +1488,7 @@ func (o *CheckoutBalanceCheckRequest) GetTrustedShopper() bool {
 
 // GetTrustedShopperOk returns a tuple with the TrustedShopper field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutBalanceCheckRequest) GetTrustedShopperOk() (*bool, bool) {
+func (o *BalanceCheckRequest) GetTrustedShopperOk() (*bool, bool) {
 	if o == nil || common.IsNil(o.TrustedShopper) {
 		return nil, false
 	}
@@ -1503,7 +1496,7 @@ func (o *CheckoutBalanceCheckRequest) GetTrustedShopperOk() (*bool, bool) {
 }
 
 // HasTrustedShopper returns a boolean if a field has been set.
-func (o *CheckoutBalanceCheckRequest) HasTrustedShopper() bool {
+func (o *BalanceCheckRequest) HasTrustedShopper() bool {
 	if o != nil && !common.IsNil(o.TrustedShopper) {
 		return true
 	}
@@ -1512,11 +1505,11 @@ func (o *CheckoutBalanceCheckRequest) HasTrustedShopper() bool {
 }
 
 // SetTrustedShopper gets a reference to the given bool and assigns it to the TrustedShopper field.
-func (o *CheckoutBalanceCheckRequest) SetTrustedShopper(v bool) {
+func (o *BalanceCheckRequest) SetTrustedShopper(v bool) {
 	o.TrustedShopper = &v
 }
 
-func (o CheckoutBalanceCheckRequest) MarshalJSON() ([]byte, error) {
+func (o BalanceCheckRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -1524,7 +1517,7 @@ func (o CheckoutBalanceCheckRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CheckoutBalanceCheckRequest) ToMap() (map[string]interface{}, error) {
+func (o BalanceCheckRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.AccountInfo) {
 		toSerialize["accountInfo"] = o.AccountInfo
@@ -1535,9 +1528,7 @@ func (o CheckoutBalanceCheckRequest) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.AdditionalData) {
 		toSerialize["additionalData"] = o.AdditionalData
 	}
-	if !common.IsNil(o.Amount) {
-		toSerialize["amount"] = o.Amount
-	}
+	toSerialize["amount"] = o.Amount
 	if !common.IsNil(o.ApplicationInfo) {
 		toSerialize["applicationInfo"] = o.ApplicationInfo
 	}
@@ -1657,43 +1648,43 @@ func (o CheckoutBalanceCheckRequest) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableCheckoutBalanceCheckRequest struct {
-	value *CheckoutBalanceCheckRequest
+type NullableBalanceCheckRequest struct {
+	value *BalanceCheckRequest
 	isSet bool
 }
 
-func (v NullableCheckoutBalanceCheckRequest) Get() *CheckoutBalanceCheckRequest {
+func (v NullableBalanceCheckRequest) Get() *BalanceCheckRequest {
 	return v.value
 }
 
-func (v *NullableCheckoutBalanceCheckRequest) Set(val *CheckoutBalanceCheckRequest) {
+func (v *NullableBalanceCheckRequest) Set(val *BalanceCheckRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCheckoutBalanceCheckRequest) IsSet() bool {
+func (v NullableBalanceCheckRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCheckoutBalanceCheckRequest) Unset() {
+func (v *NullableBalanceCheckRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCheckoutBalanceCheckRequest(val *CheckoutBalanceCheckRequest) *NullableCheckoutBalanceCheckRequest {
-	return &NullableCheckoutBalanceCheckRequest{value: val, isSet: true}
+func NewNullableBalanceCheckRequest(val *BalanceCheckRequest) *NullableBalanceCheckRequest {
+	return &NullableBalanceCheckRequest{value: val, isSet: true}
 }
 
-func (v NullableCheckoutBalanceCheckRequest) MarshalJSON() ([]byte, error) {
+func (v NullableBalanceCheckRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCheckoutBalanceCheckRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableBalanceCheckRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
 
-func (o *CheckoutBalanceCheckRequest) isValidRecurringProcessingModel() bool {
+func (o *BalanceCheckRequest) isValidRecurringProcessingModel() bool {
 	var allowedEnumValues = []string{"CardOnFile", "Subscription", "UnscheduledCardOnFile"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetRecurringProcessingModel() == allowed {
@@ -1702,7 +1693,7 @@ func (o *CheckoutBalanceCheckRequest) isValidRecurringProcessingModel() bool {
 	}
 	return false
 }
-func (o *CheckoutBalanceCheckRequest) isValidShopperInteraction() bool {
+func (o *BalanceCheckRequest) isValidShopperInteraction() bool {
 	var allowedEnumValues = []string{"Ecommerce", "ContAuth", "Moto", "POS"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetShopperInteraction() == allowed {

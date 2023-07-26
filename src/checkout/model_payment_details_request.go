@@ -14,11 +14,11 @@ import (
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// checks if the DetailsRequest type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &DetailsRequest{}
+// checks if the PaymentDetailsRequest type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &PaymentDetailsRequest{}
 
-// DetailsRequest struct for DetailsRequest
-type DetailsRequest struct {
+// PaymentDetailsRequest struct for PaymentDetailsRequest
+type PaymentDetailsRequest struct {
 	AuthenticationData *DetailsRequestAuthenticationData `json:"authenticationData,omitempty"`
 	Details            PaymentCompletionDetails          `json:"details"`
 	// The `paymentData` value from the `/payments` response. Required if the `/payments` response returns this value.
@@ -28,26 +28,26 @@ type DetailsRequest struct {
 	ThreeDSAuthenticationOnly *bool `json:"threeDSAuthenticationOnly,omitempty"`
 }
 
-// NewDetailsRequest instantiates a new DetailsRequest object
+// NewPaymentDetailsRequest instantiates a new PaymentDetailsRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDetailsRequest(details PaymentCompletionDetails) *DetailsRequest {
-	this := DetailsRequest{}
+func NewPaymentDetailsRequest(details PaymentCompletionDetails) *PaymentDetailsRequest {
+	this := PaymentDetailsRequest{}
 	this.Details = details
 	return &this
 }
 
-// NewDetailsRequestWithDefaults instantiates a new DetailsRequest object
+// NewPaymentDetailsRequestWithDefaults instantiates a new PaymentDetailsRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewDetailsRequestWithDefaults() *DetailsRequest {
-	this := DetailsRequest{}
+func NewPaymentDetailsRequestWithDefaults() *PaymentDetailsRequest {
+	this := PaymentDetailsRequest{}
 	return &this
 }
 
 // GetAuthenticationData returns the AuthenticationData field value if set, zero value otherwise.
-func (o *DetailsRequest) GetAuthenticationData() DetailsRequestAuthenticationData {
+func (o *PaymentDetailsRequest) GetAuthenticationData() DetailsRequestAuthenticationData {
 	if o == nil || common.IsNil(o.AuthenticationData) {
 		var ret DetailsRequestAuthenticationData
 		return ret
@@ -57,7 +57,7 @@ func (o *DetailsRequest) GetAuthenticationData() DetailsRequestAuthenticationDat
 
 // GetAuthenticationDataOk returns a tuple with the AuthenticationData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DetailsRequest) GetAuthenticationDataOk() (*DetailsRequestAuthenticationData, bool) {
+func (o *PaymentDetailsRequest) GetAuthenticationDataOk() (*DetailsRequestAuthenticationData, bool) {
 	if o == nil || common.IsNil(o.AuthenticationData) {
 		return nil, false
 	}
@@ -65,7 +65,7 @@ func (o *DetailsRequest) GetAuthenticationDataOk() (*DetailsRequestAuthenticatio
 }
 
 // HasAuthenticationData returns a boolean if a field has been set.
-func (o *DetailsRequest) HasAuthenticationData() bool {
+func (o *PaymentDetailsRequest) HasAuthenticationData() bool {
 	if o != nil && !common.IsNil(o.AuthenticationData) {
 		return true
 	}
@@ -74,12 +74,12 @@ func (o *DetailsRequest) HasAuthenticationData() bool {
 }
 
 // SetAuthenticationData gets a reference to the given DetailsRequestAuthenticationData and assigns it to the AuthenticationData field.
-func (o *DetailsRequest) SetAuthenticationData(v DetailsRequestAuthenticationData) {
+func (o *PaymentDetailsRequest) SetAuthenticationData(v DetailsRequestAuthenticationData) {
 	o.AuthenticationData = &v
 }
 
 // GetDetails returns the Details field value
-func (o *DetailsRequest) GetDetails() PaymentCompletionDetails {
+func (o *PaymentDetailsRequest) GetDetails() PaymentCompletionDetails {
 	if o == nil {
 		var ret PaymentCompletionDetails
 		return ret
@@ -90,7 +90,7 @@ func (o *DetailsRequest) GetDetails() PaymentCompletionDetails {
 
 // GetDetailsOk returns a tuple with the Details field value
 // and a boolean to check if the value has been set.
-func (o *DetailsRequest) GetDetailsOk() (*PaymentCompletionDetails, bool) {
+func (o *PaymentDetailsRequest) GetDetailsOk() (*PaymentCompletionDetails, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -98,12 +98,12 @@ func (o *DetailsRequest) GetDetailsOk() (*PaymentCompletionDetails, bool) {
 }
 
 // SetDetails sets field value
-func (o *DetailsRequest) SetDetails(v PaymentCompletionDetails) {
+func (o *PaymentDetailsRequest) SetDetails(v PaymentCompletionDetails) {
 	o.Details = v
 }
 
 // GetPaymentData returns the PaymentData field value if set, zero value otherwise.
-func (o *DetailsRequest) GetPaymentData() string {
+func (o *PaymentDetailsRequest) GetPaymentData() string {
 	if o == nil || common.IsNil(o.PaymentData) {
 		var ret string
 		return ret
@@ -113,7 +113,7 @@ func (o *DetailsRequest) GetPaymentData() string {
 
 // GetPaymentDataOk returns a tuple with the PaymentData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DetailsRequest) GetPaymentDataOk() (*string, bool) {
+func (o *PaymentDetailsRequest) GetPaymentDataOk() (*string, bool) {
 	if o == nil || common.IsNil(o.PaymentData) {
 		return nil, false
 	}
@@ -121,7 +121,7 @@ func (o *DetailsRequest) GetPaymentDataOk() (*string, bool) {
 }
 
 // HasPaymentData returns a boolean if a field has been set.
-func (o *DetailsRequest) HasPaymentData() bool {
+func (o *PaymentDetailsRequest) HasPaymentData() bool {
 	if o != nil && !common.IsNil(o.PaymentData) {
 		return true
 	}
@@ -130,13 +130,13 @@ func (o *DetailsRequest) HasPaymentData() bool {
 }
 
 // SetPaymentData gets a reference to the given string and assigns it to the PaymentData field.
-func (o *DetailsRequest) SetPaymentData(v string) {
+func (o *PaymentDetailsRequest) SetPaymentData(v string) {
 	o.PaymentData = &v
 }
 
 // GetThreeDSAuthenticationOnly returns the ThreeDSAuthenticationOnly field value if set, zero value otherwise.
 // Deprecated
-func (o *DetailsRequest) GetThreeDSAuthenticationOnly() bool {
+func (o *PaymentDetailsRequest) GetThreeDSAuthenticationOnly() bool {
 	if o == nil || common.IsNil(o.ThreeDSAuthenticationOnly) {
 		var ret bool
 		return ret
@@ -147,7 +147,7 @@ func (o *DetailsRequest) GetThreeDSAuthenticationOnly() bool {
 // GetThreeDSAuthenticationOnlyOk returns a tuple with the ThreeDSAuthenticationOnly field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // Deprecated
-func (o *DetailsRequest) GetThreeDSAuthenticationOnlyOk() (*bool, bool) {
+func (o *PaymentDetailsRequest) GetThreeDSAuthenticationOnlyOk() (*bool, bool) {
 	if o == nil || common.IsNil(o.ThreeDSAuthenticationOnly) {
 		return nil, false
 	}
@@ -155,7 +155,7 @@ func (o *DetailsRequest) GetThreeDSAuthenticationOnlyOk() (*bool, bool) {
 }
 
 // HasThreeDSAuthenticationOnly returns a boolean if a field has been set.
-func (o *DetailsRequest) HasThreeDSAuthenticationOnly() bool {
+func (o *PaymentDetailsRequest) HasThreeDSAuthenticationOnly() bool {
 	if o != nil && !common.IsNil(o.ThreeDSAuthenticationOnly) {
 		return true
 	}
@@ -165,11 +165,11 @@ func (o *DetailsRequest) HasThreeDSAuthenticationOnly() bool {
 
 // SetThreeDSAuthenticationOnly gets a reference to the given bool and assigns it to the ThreeDSAuthenticationOnly field.
 // Deprecated
-func (o *DetailsRequest) SetThreeDSAuthenticationOnly(v bool) {
+func (o *PaymentDetailsRequest) SetThreeDSAuthenticationOnly(v bool) {
 	o.ThreeDSAuthenticationOnly = &v
 }
 
-func (o DetailsRequest) MarshalJSON() ([]byte, error) {
+func (o PaymentDetailsRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -177,7 +177,7 @@ func (o DetailsRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DetailsRequest) ToMap() (map[string]interface{}, error) {
+func (o PaymentDetailsRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.AuthenticationData) {
 		toSerialize["authenticationData"] = o.AuthenticationData
@@ -192,38 +192,38 @@ func (o DetailsRequest) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableDetailsRequest struct {
-	value *DetailsRequest
+type NullablePaymentDetailsRequest struct {
+	value *PaymentDetailsRequest
 	isSet bool
 }
 
-func (v NullableDetailsRequest) Get() *DetailsRequest {
+func (v NullablePaymentDetailsRequest) Get() *PaymentDetailsRequest {
 	return v.value
 }
 
-func (v *NullableDetailsRequest) Set(val *DetailsRequest) {
+func (v *NullablePaymentDetailsRequest) Set(val *PaymentDetailsRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableDetailsRequest) IsSet() bool {
+func (v NullablePaymentDetailsRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableDetailsRequest) Unset() {
+func (v *NullablePaymentDetailsRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableDetailsRequest(val *DetailsRequest) *NullableDetailsRequest {
-	return &NullableDetailsRequest{value: val, isSet: true}
+func NewNullablePaymentDetailsRequest(val *PaymentDetailsRequest) *NullablePaymentDetailsRequest {
+	return &NullablePaymentDetailsRequest{value: val, isSet: true}
 }
 
-func (v NullableDetailsRequest) MarshalJSON() ([]byte, error) {
+func (v NullablePaymentDetailsRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableDetailsRequest) UnmarshalJSON(src []byte) error {
+func (v *NullablePaymentDetailsRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

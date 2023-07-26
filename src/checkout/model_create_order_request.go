@@ -14,11 +14,11 @@ import (
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// checks if the CheckoutCreateOrderRequest type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &CheckoutCreateOrderRequest{}
+// checks if the CreateOrderRequest type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &CreateOrderRequest{}
 
-// CheckoutCreateOrderRequest struct for CheckoutCreateOrderRequest
-type CheckoutCreateOrderRequest struct {
+// CreateOrderRequest struct for CreateOrderRequest
+type CreateOrderRequest struct {
 	Amount Amount `json:"amount"`
 	// The date that order expires; e.g. 2019-03-23T12:25:28Z. If not provided, the default expiry duration is 1 day.
 	ExpiresAt *string `json:"expiresAt,omitempty"`
@@ -28,28 +28,28 @@ type CheckoutCreateOrderRequest struct {
 	Reference string `json:"reference"`
 }
 
-// NewCheckoutCreateOrderRequest instantiates a new CheckoutCreateOrderRequest object
+// NewCreateOrderRequest instantiates a new CreateOrderRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCheckoutCreateOrderRequest(amount Amount, merchantAccount string, reference string) *CheckoutCreateOrderRequest {
-	this := CheckoutCreateOrderRequest{}
+func NewCreateOrderRequest(amount Amount, merchantAccount string, reference string) *CreateOrderRequest {
+	this := CreateOrderRequest{}
 	this.Amount = amount
 	this.MerchantAccount = merchantAccount
 	this.Reference = reference
 	return &this
 }
 
-// NewCheckoutCreateOrderRequestWithDefaults instantiates a new CheckoutCreateOrderRequest object
+// NewCreateOrderRequestWithDefaults instantiates a new CreateOrderRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCheckoutCreateOrderRequestWithDefaults() *CheckoutCreateOrderRequest {
-	this := CheckoutCreateOrderRequest{}
+func NewCreateOrderRequestWithDefaults() *CreateOrderRequest {
+	this := CreateOrderRequest{}
 	return &this
 }
 
 // GetAmount returns the Amount field value
-func (o *CheckoutCreateOrderRequest) GetAmount() Amount {
+func (o *CreateOrderRequest) GetAmount() Amount {
 	if o == nil {
 		var ret Amount
 		return ret
@@ -60,7 +60,7 @@ func (o *CheckoutCreateOrderRequest) GetAmount() Amount {
 
 // GetAmountOk returns a tuple with the Amount field value
 // and a boolean to check if the value has been set.
-func (o *CheckoutCreateOrderRequest) GetAmountOk() (*Amount, bool) {
+func (o *CreateOrderRequest) GetAmountOk() (*Amount, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -68,12 +68,12 @@ func (o *CheckoutCreateOrderRequest) GetAmountOk() (*Amount, bool) {
 }
 
 // SetAmount sets field value
-func (o *CheckoutCreateOrderRequest) SetAmount(v Amount) {
+func (o *CreateOrderRequest) SetAmount(v Amount) {
 	o.Amount = v
 }
 
 // GetExpiresAt returns the ExpiresAt field value if set, zero value otherwise.
-func (o *CheckoutCreateOrderRequest) GetExpiresAt() string {
+func (o *CreateOrderRequest) GetExpiresAt() string {
 	if o == nil || common.IsNil(o.ExpiresAt) {
 		var ret string
 		return ret
@@ -83,7 +83,7 @@ func (o *CheckoutCreateOrderRequest) GetExpiresAt() string {
 
 // GetExpiresAtOk returns a tuple with the ExpiresAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutCreateOrderRequest) GetExpiresAtOk() (*string, bool) {
+func (o *CreateOrderRequest) GetExpiresAtOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ExpiresAt) {
 		return nil, false
 	}
@@ -91,7 +91,7 @@ func (o *CheckoutCreateOrderRequest) GetExpiresAtOk() (*string, bool) {
 }
 
 // HasExpiresAt returns a boolean if a field has been set.
-func (o *CheckoutCreateOrderRequest) HasExpiresAt() bool {
+func (o *CreateOrderRequest) HasExpiresAt() bool {
 	if o != nil && !common.IsNil(o.ExpiresAt) {
 		return true
 	}
@@ -100,12 +100,12 @@ func (o *CheckoutCreateOrderRequest) HasExpiresAt() bool {
 }
 
 // SetExpiresAt gets a reference to the given string and assigns it to the ExpiresAt field.
-func (o *CheckoutCreateOrderRequest) SetExpiresAt(v string) {
+func (o *CreateOrderRequest) SetExpiresAt(v string) {
 	o.ExpiresAt = &v
 }
 
 // GetMerchantAccount returns the MerchantAccount field value
-func (o *CheckoutCreateOrderRequest) GetMerchantAccount() string {
+func (o *CreateOrderRequest) GetMerchantAccount() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -116,7 +116,7 @@ func (o *CheckoutCreateOrderRequest) GetMerchantAccount() string {
 
 // GetMerchantAccountOk returns a tuple with the MerchantAccount field value
 // and a boolean to check if the value has been set.
-func (o *CheckoutCreateOrderRequest) GetMerchantAccountOk() (*string, bool) {
+func (o *CreateOrderRequest) GetMerchantAccountOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -124,12 +124,12 @@ func (o *CheckoutCreateOrderRequest) GetMerchantAccountOk() (*string, bool) {
 }
 
 // SetMerchantAccount sets field value
-func (o *CheckoutCreateOrderRequest) SetMerchantAccount(v string) {
+func (o *CreateOrderRequest) SetMerchantAccount(v string) {
 	o.MerchantAccount = v
 }
 
 // GetReference returns the Reference field value
-func (o *CheckoutCreateOrderRequest) GetReference() string {
+func (o *CreateOrderRequest) GetReference() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -140,7 +140,7 @@ func (o *CheckoutCreateOrderRequest) GetReference() string {
 
 // GetReferenceOk returns a tuple with the Reference field value
 // and a boolean to check if the value has been set.
-func (o *CheckoutCreateOrderRequest) GetReferenceOk() (*string, bool) {
+func (o *CreateOrderRequest) GetReferenceOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -148,11 +148,11 @@ func (o *CheckoutCreateOrderRequest) GetReferenceOk() (*string, bool) {
 }
 
 // SetReference sets field value
-func (o *CheckoutCreateOrderRequest) SetReference(v string) {
+func (o *CreateOrderRequest) SetReference(v string) {
 	o.Reference = v
 }
 
-func (o CheckoutCreateOrderRequest) MarshalJSON() ([]byte, error) {
+func (o CreateOrderRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -160,7 +160,7 @@ func (o CheckoutCreateOrderRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CheckoutCreateOrderRequest) ToMap() (map[string]interface{}, error) {
+func (o CreateOrderRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["amount"] = o.Amount
 	if !common.IsNil(o.ExpiresAt) {
@@ -171,38 +171,38 @@ func (o CheckoutCreateOrderRequest) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableCheckoutCreateOrderRequest struct {
-	value *CheckoutCreateOrderRequest
+type NullableCreateOrderRequest struct {
+	value *CreateOrderRequest
 	isSet bool
 }
 
-func (v NullableCheckoutCreateOrderRequest) Get() *CheckoutCreateOrderRequest {
+func (v NullableCreateOrderRequest) Get() *CreateOrderRequest {
 	return v.value
 }
 
-func (v *NullableCheckoutCreateOrderRequest) Set(val *CheckoutCreateOrderRequest) {
+func (v *NullableCreateOrderRequest) Set(val *CreateOrderRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCheckoutCreateOrderRequest) IsSet() bool {
+func (v NullableCreateOrderRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCheckoutCreateOrderRequest) Unset() {
+func (v *NullableCreateOrderRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCheckoutCreateOrderRequest(val *CheckoutCreateOrderRequest) *NullableCheckoutCreateOrderRequest {
-	return &NullableCheckoutCreateOrderRequest{value: val, isSet: true}
+func NewNullableCreateOrderRequest(val *CreateOrderRequest) *NullableCreateOrderRequest {
+	return &NullableCreateOrderRequest{value: val, isSet: true}
 }
 
-func (v NullableCheckoutCreateOrderRequest) MarshalJSON() ([]byte, error) {
+func (v NullableCreateOrderRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCheckoutCreateOrderRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateOrderRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

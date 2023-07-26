@@ -14,11 +14,11 @@ import (
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// checks if the CheckoutCreateOrderResponse type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &CheckoutCreateOrderResponse{}
+// checks if the CreateOrderResponse type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &CreateOrderResponse{}
 
-// CheckoutCreateOrderResponse struct for CheckoutCreateOrderResponse
-type CheckoutCreateOrderResponse struct {
+// CreateOrderResponse struct for CreateOrderResponse
+type CreateOrderResponse struct {
 	// Contains additional information about the payment. Some data fields are included only if you select them first: Go to **Customer Area** > **Developers** > **Additional data**.
 	AdditionalData *map[string]string `json:"additionalData,omitempty"`
 	Amount         Amount             `json:"amount"`
@@ -38,12 +38,12 @@ type CheckoutCreateOrderResponse struct {
 	ResultCode string `json:"resultCode"`
 }
 
-// NewCheckoutCreateOrderResponse instantiates a new CheckoutCreateOrderResponse object
+// NewCreateOrderResponse instantiates a new CreateOrderResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCheckoutCreateOrderResponse(amount Amount, expiresAt string, orderData string, remainingAmount Amount, resultCode string) *CheckoutCreateOrderResponse {
-	this := CheckoutCreateOrderResponse{}
+func NewCreateOrderResponse(amount Amount, expiresAt string, orderData string, remainingAmount Amount, resultCode string) *CreateOrderResponse {
+	this := CreateOrderResponse{}
 	this.Amount = amount
 	this.ExpiresAt = expiresAt
 	this.OrderData = orderData
@@ -52,16 +52,16 @@ func NewCheckoutCreateOrderResponse(amount Amount, expiresAt string, orderData s
 	return &this
 }
 
-// NewCheckoutCreateOrderResponseWithDefaults instantiates a new CheckoutCreateOrderResponse object
+// NewCreateOrderResponseWithDefaults instantiates a new CreateOrderResponse object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCheckoutCreateOrderResponseWithDefaults() *CheckoutCreateOrderResponse {
-	this := CheckoutCreateOrderResponse{}
+func NewCreateOrderResponseWithDefaults() *CreateOrderResponse {
+	this := CreateOrderResponse{}
 	return &this
 }
 
 // GetAdditionalData returns the AdditionalData field value if set, zero value otherwise.
-func (o *CheckoutCreateOrderResponse) GetAdditionalData() map[string]string {
+func (o *CreateOrderResponse) GetAdditionalData() map[string]string {
 	if o == nil || common.IsNil(o.AdditionalData) {
 		var ret map[string]string
 		return ret
@@ -71,7 +71,7 @@ func (o *CheckoutCreateOrderResponse) GetAdditionalData() map[string]string {
 
 // GetAdditionalDataOk returns a tuple with the AdditionalData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutCreateOrderResponse) GetAdditionalDataOk() (*map[string]string, bool) {
+func (o *CreateOrderResponse) GetAdditionalDataOk() (*map[string]string, bool) {
 	if o == nil || common.IsNil(o.AdditionalData) {
 		return nil, false
 	}
@@ -79,7 +79,7 @@ func (o *CheckoutCreateOrderResponse) GetAdditionalDataOk() (*map[string]string,
 }
 
 // HasAdditionalData returns a boolean if a field has been set.
-func (o *CheckoutCreateOrderResponse) HasAdditionalData() bool {
+func (o *CreateOrderResponse) HasAdditionalData() bool {
 	if o != nil && !common.IsNil(o.AdditionalData) {
 		return true
 	}
@@ -88,12 +88,12 @@ func (o *CheckoutCreateOrderResponse) HasAdditionalData() bool {
 }
 
 // SetAdditionalData gets a reference to the given map[string]string and assigns it to the AdditionalData field.
-func (o *CheckoutCreateOrderResponse) SetAdditionalData(v map[string]string) {
+func (o *CreateOrderResponse) SetAdditionalData(v map[string]string) {
 	o.AdditionalData = &v
 }
 
 // GetAmount returns the Amount field value
-func (o *CheckoutCreateOrderResponse) GetAmount() Amount {
+func (o *CreateOrderResponse) GetAmount() Amount {
 	if o == nil {
 		var ret Amount
 		return ret
@@ -104,7 +104,7 @@ func (o *CheckoutCreateOrderResponse) GetAmount() Amount {
 
 // GetAmountOk returns a tuple with the Amount field value
 // and a boolean to check if the value has been set.
-func (o *CheckoutCreateOrderResponse) GetAmountOk() (*Amount, bool) {
+func (o *CreateOrderResponse) GetAmountOk() (*Amount, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -112,12 +112,12 @@ func (o *CheckoutCreateOrderResponse) GetAmountOk() (*Amount, bool) {
 }
 
 // SetAmount sets field value
-func (o *CheckoutCreateOrderResponse) SetAmount(v Amount) {
+func (o *CreateOrderResponse) SetAmount(v Amount) {
 	o.Amount = v
 }
 
 // GetExpiresAt returns the ExpiresAt field value
-func (o *CheckoutCreateOrderResponse) GetExpiresAt() string {
+func (o *CreateOrderResponse) GetExpiresAt() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -128,7 +128,7 @@ func (o *CheckoutCreateOrderResponse) GetExpiresAt() string {
 
 // GetExpiresAtOk returns a tuple with the ExpiresAt field value
 // and a boolean to check if the value has been set.
-func (o *CheckoutCreateOrderResponse) GetExpiresAtOk() (*string, bool) {
+func (o *CreateOrderResponse) GetExpiresAtOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -136,12 +136,12 @@ func (o *CheckoutCreateOrderResponse) GetExpiresAtOk() (*string, bool) {
 }
 
 // SetExpiresAt sets field value
-func (o *CheckoutCreateOrderResponse) SetExpiresAt(v string) {
+func (o *CreateOrderResponse) SetExpiresAt(v string) {
 	o.ExpiresAt = v
 }
 
 // GetFraudResult returns the FraudResult field value if set, zero value otherwise.
-func (o *CheckoutCreateOrderResponse) GetFraudResult() FraudResult {
+func (o *CreateOrderResponse) GetFraudResult() FraudResult {
 	if o == nil || common.IsNil(o.FraudResult) {
 		var ret FraudResult
 		return ret
@@ -151,7 +151,7 @@ func (o *CheckoutCreateOrderResponse) GetFraudResult() FraudResult {
 
 // GetFraudResultOk returns a tuple with the FraudResult field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutCreateOrderResponse) GetFraudResultOk() (*FraudResult, bool) {
+func (o *CreateOrderResponse) GetFraudResultOk() (*FraudResult, bool) {
 	if o == nil || common.IsNil(o.FraudResult) {
 		return nil, false
 	}
@@ -159,7 +159,7 @@ func (o *CheckoutCreateOrderResponse) GetFraudResultOk() (*FraudResult, bool) {
 }
 
 // HasFraudResult returns a boolean if a field has been set.
-func (o *CheckoutCreateOrderResponse) HasFraudResult() bool {
+func (o *CreateOrderResponse) HasFraudResult() bool {
 	if o != nil && !common.IsNil(o.FraudResult) {
 		return true
 	}
@@ -168,12 +168,12 @@ func (o *CheckoutCreateOrderResponse) HasFraudResult() bool {
 }
 
 // SetFraudResult gets a reference to the given FraudResult and assigns it to the FraudResult field.
-func (o *CheckoutCreateOrderResponse) SetFraudResult(v FraudResult) {
+func (o *CreateOrderResponse) SetFraudResult(v FraudResult) {
 	o.FraudResult = &v
 }
 
 // GetOrderData returns the OrderData field value
-func (o *CheckoutCreateOrderResponse) GetOrderData() string {
+func (o *CreateOrderResponse) GetOrderData() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -184,7 +184,7 @@ func (o *CheckoutCreateOrderResponse) GetOrderData() string {
 
 // GetOrderDataOk returns a tuple with the OrderData field value
 // and a boolean to check if the value has been set.
-func (o *CheckoutCreateOrderResponse) GetOrderDataOk() (*string, bool) {
+func (o *CreateOrderResponse) GetOrderDataOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -192,12 +192,12 @@ func (o *CheckoutCreateOrderResponse) GetOrderDataOk() (*string, bool) {
 }
 
 // SetOrderData sets field value
-func (o *CheckoutCreateOrderResponse) SetOrderData(v string) {
+func (o *CreateOrderResponse) SetOrderData(v string) {
 	o.OrderData = v
 }
 
 // GetPspReference returns the PspReference field value if set, zero value otherwise.
-func (o *CheckoutCreateOrderResponse) GetPspReference() string {
+func (o *CreateOrderResponse) GetPspReference() string {
 	if o == nil || common.IsNil(o.PspReference) {
 		var ret string
 		return ret
@@ -207,7 +207,7 @@ func (o *CheckoutCreateOrderResponse) GetPspReference() string {
 
 // GetPspReferenceOk returns a tuple with the PspReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutCreateOrderResponse) GetPspReferenceOk() (*string, bool) {
+func (o *CreateOrderResponse) GetPspReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.PspReference) {
 		return nil, false
 	}
@@ -215,7 +215,7 @@ func (o *CheckoutCreateOrderResponse) GetPspReferenceOk() (*string, bool) {
 }
 
 // HasPspReference returns a boolean if a field has been set.
-func (o *CheckoutCreateOrderResponse) HasPspReference() bool {
+func (o *CreateOrderResponse) HasPspReference() bool {
 	if o != nil && !common.IsNil(o.PspReference) {
 		return true
 	}
@@ -224,12 +224,12 @@ func (o *CheckoutCreateOrderResponse) HasPspReference() bool {
 }
 
 // SetPspReference gets a reference to the given string and assigns it to the PspReference field.
-func (o *CheckoutCreateOrderResponse) SetPspReference(v string) {
+func (o *CreateOrderResponse) SetPspReference(v string) {
 	o.PspReference = &v
 }
 
 // GetReference returns the Reference field value if set, zero value otherwise.
-func (o *CheckoutCreateOrderResponse) GetReference() string {
+func (o *CreateOrderResponse) GetReference() string {
 	if o == nil || common.IsNil(o.Reference) {
 		var ret string
 		return ret
@@ -239,7 +239,7 @@ func (o *CheckoutCreateOrderResponse) GetReference() string {
 
 // GetReferenceOk returns a tuple with the Reference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutCreateOrderResponse) GetReferenceOk() (*string, bool) {
+func (o *CreateOrderResponse) GetReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Reference) {
 		return nil, false
 	}
@@ -247,7 +247,7 @@ func (o *CheckoutCreateOrderResponse) GetReferenceOk() (*string, bool) {
 }
 
 // HasReference returns a boolean if a field has been set.
-func (o *CheckoutCreateOrderResponse) HasReference() bool {
+func (o *CreateOrderResponse) HasReference() bool {
 	if o != nil && !common.IsNil(o.Reference) {
 		return true
 	}
@@ -256,12 +256,12 @@ func (o *CheckoutCreateOrderResponse) HasReference() bool {
 }
 
 // SetReference gets a reference to the given string and assigns it to the Reference field.
-func (o *CheckoutCreateOrderResponse) SetReference(v string) {
+func (o *CreateOrderResponse) SetReference(v string) {
 	o.Reference = &v
 }
 
 // GetRefusalReason returns the RefusalReason field value if set, zero value otherwise.
-func (o *CheckoutCreateOrderResponse) GetRefusalReason() string {
+func (o *CreateOrderResponse) GetRefusalReason() string {
 	if o == nil || common.IsNil(o.RefusalReason) {
 		var ret string
 		return ret
@@ -271,7 +271,7 @@ func (o *CheckoutCreateOrderResponse) GetRefusalReason() string {
 
 // GetRefusalReasonOk returns a tuple with the RefusalReason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutCreateOrderResponse) GetRefusalReasonOk() (*string, bool) {
+func (o *CreateOrderResponse) GetRefusalReasonOk() (*string, bool) {
 	if o == nil || common.IsNil(o.RefusalReason) {
 		return nil, false
 	}
@@ -279,7 +279,7 @@ func (o *CheckoutCreateOrderResponse) GetRefusalReasonOk() (*string, bool) {
 }
 
 // HasRefusalReason returns a boolean if a field has been set.
-func (o *CheckoutCreateOrderResponse) HasRefusalReason() bool {
+func (o *CreateOrderResponse) HasRefusalReason() bool {
 	if o != nil && !common.IsNil(o.RefusalReason) {
 		return true
 	}
@@ -288,12 +288,12 @@ func (o *CheckoutCreateOrderResponse) HasRefusalReason() bool {
 }
 
 // SetRefusalReason gets a reference to the given string and assigns it to the RefusalReason field.
-func (o *CheckoutCreateOrderResponse) SetRefusalReason(v string) {
+func (o *CreateOrderResponse) SetRefusalReason(v string) {
 	o.RefusalReason = &v
 }
 
 // GetRemainingAmount returns the RemainingAmount field value
-func (o *CheckoutCreateOrderResponse) GetRemainingAmount() Amount {
+func (o *CreateOrderResponse) GetRemainingAmount() Amount {
 	if o == nil {
 		var ret Amount
 		return ret
@@ -304,7 +304,7 @@ func (o *CheckoutCreateOrderResponse) GetRemainingAmount() Amount {
 
 // GetRemainingAmountOk returns a tuple with the RemainingAmount field value
 // and a boolean to check if the value has been set.
-func (o *CheckoutCreateOrderResponse) GetRemainingAmountOk() (*Amount, bool) {
+func (o *CreateOrderResponse) GetRemainingAmountOk() (*Amount, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -312,12 +312,12 @@ func (o *CheckoutCreateOrderResponse) GetRemainingAmountOk() (*Amount, bool) {
 }
 
 // SetRemainingAmount sets field value
-func (o *CheckoutCreateOrderResponse) SetRemainingAmount(v Amount) {
+func (o *CreateOrderResponse) SetRemainingAmount(v Amount) {
 	o.RemainingAmount = v
 }
 
 // GetResultCode returns the ResultCode field value
-func (o *CheckoutCreateOrderResponse) GetResultCode() string {
+func (o *CreateOrderResponse) GetResultCode() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -328,7 +328,7 @@ func (o *CheckoutCreateOrderResponse) GetResultCode() string {
 
 // GetResultCodeOk returns a tuple with the ResultCode field value
 // and a boolean to check if the value has been set.
-func (o *CheckoutCreateOrderResponse) GetResultCodeOk() (*string, bool) {
+func (o *CreateOrderResponse) GetResultCodeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -336,11 +336,11 @@ func (o *CheckoutCreateOrderResponse) GetResultCodeOk() (*string, bool) {
 }
 
 // SetResultCode sets field value
-func (o *CheckoutCreateOrderResponse) SetResultCode(v string) {
+func (o *CreateOrderResponse) SetResultCode(v string) {
 	o.ResultCode = v
 }
 
-func (o CheckoutCreateOrderResponse) MarshalJSON() ([]byte, error) {
+func (o CreateOrderResponse) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -348,7 +348,7 @@ func (o CheckoutCreateOrderResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CheckoutCreateOrderResponse) ToMap() (map[string]interface{}, error) {
+func (o CreateOrderResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.AdditionalData) {
 		toSerialize["additionalData"] = o.AdditionalData
@@ -373,43 +373,43 @@ func (o CheckoutCreateOrderResponse) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableCheckoutCreateOrderResponse struct {
-	value *CheckoutCreateOrderResponse
+type NullableCreateOrderResponse struct {
+	value *CreateOrderResponse
 	isSet bool
 }
 
-func (v NullableCheckoutCreateOrderResponse) Get() *CheckoutCreateOrderResponse {
+func (v NullableCreateOrderResponse) Get() *CreateOrderResponse {
 	return v.value
 }
 
-func (v *NullableCheckoutCreateOrderResponse) Set(val *CheckoutCreateOrderResponse) {
+func (v *NullableCreateOrderResponse) Set(val *CreateOrderResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCheckoutCreateOrderResponse) IsSet() bool {
+func (v NullableCreateOrderResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCheckoutCreateOrderResponse) Unset() {
+func (v *NullableCreateOrderResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCheckoutCreateOrderResponse(val *CheckoutCreateOrderResponse) *NullableCheckoutCreateOrderResponse {
-	return &NullableCheckoutCreateOrderResponse{value: val, isSet: true}
+func NewNullableCreateOrderResponse(val *CreateOrderResponse) *NullableCreateOrderResponse {
+	return &NullableCreateOrderResponse{value: val, isSet: true}
 }
 
-func (v NullableCheckoutCreateOrderResponse) MarshalJSON() ([]byte, error) {
+func (v NullableCreateOrderResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCheckoutCreateOrderResponse) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateOrderResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
 
-func (o *CheckoutCreateOrderResponse) isValidResultCode() bool {
+func (o *CreateOrderResponse) isValidResultCode() bool {
 	var allowedEnumValues = []string{"Success"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetResultCode() == allowed {

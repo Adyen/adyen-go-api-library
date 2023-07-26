@@ -15,11 +15,11 @@ import (
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// checks if the PaymentDonationRequest type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &PaymentDonationRequest{}
+// checks if the DonationPaymentRequest type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &DonationPaymentRequest{}
 
-// PaymentDonationRequest struct for PaymentDonationRequest
-type PaymentDonationRequest struct {
+// DonationPaymentRequest struct for DonationPaymentRequest
+type DonationPaymentRequest struct {
 	AccountInfo      *AccountInfo `json:"accountInfo,omitempty"`
 	AdditionalAmount *Amount      `json:"additionalAmount,omitempty"`
 	// This field contains additional data, which may be required for a particular payment request.  The `additionalData` object consists of entries, each of which includes the key and value.
@@ -42,10 +42,13 @@ type PaymentDonationRequest struct {
 	// The shopper country.  Format: [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) Example: NL or DE
 	CountryCode *string `json:"countryCode,omitempty"`
 	// The shopper's date of birth.  Format [ISO-8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DD
-	DateOfBirth     *string     `json:"dateOfBirth,omitempty"`
-	DccQuote        *ForexQuote `json:"dccQuote,omitempty"`
-	DeliveryAddress *Address    `json:"deliveryAddress,omitempty"`
+	DateOfBirth *time.Time  `json:"dateOfBirth,omitempty"`
+	DccQuote    *ForexQuote `json:"dccQuote,omitempty"`
 	// The date and time the purchased goods should be delivered.  Format [ISO 8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DDThh:mm:ss.sssTZD  Example: 2017-07-17T13:42:40.428+01:00
+	DeliverAt       *time.Time `json:"deliverAt,omitempty"`
+	DeliveryAddress *Address   `json:"deliveryAddress,omitempty"`
+	// The date and time the purchased goods should be delivered.  Format [ISO 8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DDThh:mm:ss.sssTZD  Example: 2017-07-17T13:42:40.428+01:00
+	// Deprecated
 	DeliveryDate *time.Time `json:"deliveryDate,omitempty"`
 	// A string containing the shopper's device fingerprint. For more information, refer to [Device fingerprinting](https://docs.adyen.com/risk-management/device-fingerprinting).
 	DeviceFingerprint *string `json:"deviceFingerprint,omitempty"`
@@ -64,13 +67,15 @@ type PaymentDonationRequest struct {
 	// The type of the entity the payment is processed for.
 	EntityType *string `json:"entityType,omitempty"`
 	// An integer value that is added to the normal fraud score. The value can be either positive or negative.
-	FraudOffset *int32 `json:"fraudOffset,omitempty"`
+	FraudOffset   *int32         `json:"fraudOffset,omitempty"`
+	FundOrigin    *FundOrigin    `json:"fundOrigin,omitempty"`
+	FundRecipient *FundRecipient `json:"fundRecipient,omitempty"`
 	// The reason for the amount update. Possible values:  * **delayedCharge**  * **noShow**  * **installment**
 	IndustryUsage *string       `json:"industryUsage,omitempty"`
 	Installments  *Installments `json:"installments,omitempty"`
-	// Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment). > This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Atome, Clearpay, Klarna, Ratepay, Walley, and Zip.
+	// Price and product information about the purchased items, to be included on the invoice sent to the shopper. > This field is required for 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, and Zip.
 	LineItems []LineItem `json:"lineItems,omitempty"`
-	// This field allows merchants to use dynamic shopper statement in local character sets. The local shopper statement field can be supplied in markets where localized merchant descriptors are used. Currently, Adyen only supports this in the Japanese market .The available character sets at the moment are: * Processing in Japan: **ja-Kana** The character set **ja-Kana** supports UTF-8 based Katakana and alphanumeric and special characters. Merchants can use half-width or full-width characters. An example request would be: > {   \"shopperStatement\" : \"ADYEN - SELLER-A\",   \"localizedShopperStatement\" : {     \"ja-Kana\" : \"ADYEN - セラーA\"   } } We recommend merchants to always supply the field localizedShopperStatement in addition to the field shopperStatement.It is issuer dependent whether the localized shopper statement field is supported. In the case of non-domestic transactions (e.g. US-issued cards processed in JP) the field `shopperStatement` is used to modify the statement of the shopper. Adyen handles the complexity of ensuring the correct descriptors are assigned. Please note, this field can be used for only Visa and Mastercard transactions.
+	// This field allows merchants to use dynamic shopper statement in local character sets. The local shopper statement field can be supplied in markets where localized merchant descriptors are used. Currently, Adyen only supports this in the Japanese market .The available character sets at the moment are: * Processing in Japan: **ja-Kana** The character set **ja-Kana** supports UTF-8 based Katakana and alphanumeric and special characters. Merchants should send the Katakana shopperStatement in full-width characters.  An example request would be: > {   \"shopperStatement\" : \"ADYEN - SELLER-A\",   \"localizedShopperStatement\" : {     \"ja-Kana\" : \"ADYEN - セラーA\"   } } We recommend merchants to always supply the field localizedShopperStatement in addition to the field shopperStatement.It is issuer dependent whether the localized shopper statement field is supported. In the case of non-domestic transactions (e.g. US-issued cards processed in JP) the field `shopperStatement` is used to modify the statement of the shopper. Adyen handles the complexity of ensuring the correct descriptors are assigned.
 	LocalizedShopperStatement *map[string]string `json:"localizedShopperStatement,omitempty"`
 	Mandate                   *Mandate           `json:"mandate,omitempty"`
 	// The [merchant category code](https://en.wikipedia.org/wiki/Merchant_category_code) (MCC) is a four-digit number, which relates to a particular market segment. This code reflects the predominant activity that is conducted by the merchant.
@@ -122,15 +127,15 @@ type PaymentDonationRequest struct {
 	ShopperStatement *string `json:"shopperStatement,omitempty"`
 	// The shopper's social security number.
 	SocialSecurityNumber *string `json:"socialSecurityNumber,omitempty"`
-	// An array of objects specifying how the payment should be split when using [Adyen for Platforms](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information) or [Issuing](https://docs.adyen.com/issuing/add-manage-funds#split).
+	// An array of objects specifying how to split a payment when using [Adyen for Platforms](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information), [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic/processing-payments#providing-split-information), or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
 	Splits []Split `json:"splits,omitempty"`
-	// The ecommerce or point-of-sale store that is processing the payment. Used in [partner model integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for Adyen for Platforms.
+	// The ecommerce or point-of-sale store that is processing the payment. Used in:  * [Partner platform integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for the [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic). * [Platform setup integrations](https://docs.adyen.com/marketplaces-and-platforms/additional-for-platform-setup/route-payment-to-store) for the [Balance Platform](https://docs.adyen.com/marketplaces-and-platforms).
 	Store *string `json:"store,omitempty"`
 	// When true and `shopperReference` is provided, the payment details will be stored.
 	StorePaymentMethod *bool `json:"storePaymentMethod,omitempty"`
 	// The shopper's telephone number.
-	TelephoneNumber     *string              `json:"telephoneNumber,omitempty"`
-	ThreeDS2RequestData *ThreeDS2RequestData `json:"threeDS2RequestData,omitempty"`
+	TelephoneNumber     *string               `json:"telephoneNumber,omitempty"`
+	ThreeDS2RequestData *ThreeDS2RequestData2 `json:"threeDS2RequestData,omitempty"`
 	// If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only), and not the payment authorisation.
 	// Deprecated
 	ThreeDSAuthenticationOnly *bool `json:"threeDSAuthenticationOnly,omitempty"`
@@ -138,12 +143,12 @@ type PaymentDonationRequest struct {
 	TrustedShopper *bool `json:"trustedShopper,omitempty"`
 }
 
-// NewPaymentDonationRequest instantiates a new PaymentDonationRequest object
+// NewDonationPaymentRequest instantiates a new DonationPaymentRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPaymentDonationRequest(amount Amount, donationAccount string, merchantAccount string, paymentMethod CheckoutPaymentMethod, reference string, returnUrl string) *PaymentDonationRequest {
-	this := PaymentDonationRequest{}
+func NewDonationPaymentRequest(amount Amount, donationAccount string, merchantAccount string, paymentMethod CheckoutPaymentMethod, reference string, returnUrl string) *DonationPaymentRequest {
+	this := DonationPaymentRequest{}
 	this.Amount = amount
 	this.DonationAccount = donationAccount
 	this.MerchantAccount = merchantAccount
@@ -155,18 +160,18 @@ func NewPaymentDonationRequest(amount Amount, donationAccount string, merchantAc
 	return &this
 }
 
-// NewPaymentDonationRequestWithDefaults instantiates a new PaymentDonationRequest object
+// NewDonationPaymentRequestWithDefaults instantiates a new DonationPaymentRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewPaymentDonationRequestWithDefaults() *PaymentDonationRequest {
-	this := PaymentDonationRequest{}
+func NewDonationPaymentRequestWithDefaults() *DonationPaymentRequest {
+	this := DonationPaymentRequest{}
 	var threeDSAuthenticationOnly bool = false
 	this.ThreeDSAuthenticationOnly = &threeDSAuthenticationOnly
 	return &this
 }
 
 // GetAccountInfo returns the AccountInfo field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetAccountInfo() AccountInfo {
+func (o *DonationPaymentRequest) GetAccountInfo() AccountInfo {
 	if o == nil || common.IsNil(o.AccountInfo) {
 		var ret AccountInfo
 		return ret
@@ -176,7 +181,7 @@ func (o *PaymentDonationRequest) GetAccountInfo() AccountInfo {
 
 // GetAccountInfoOk returns a tuple with the AccountInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetAccountInfoOk() (*AccountInfo, bool) {
+func (o *DonationPaymentRequest) GetAccountInfoOk() (*AccountInfo, bool) {
 	if o == nil || common.IsNil(o.AccountInfo) {
 		return nil, false
 	}
@@ -184,7 +189,7 @@ func (o *PaymentDonationRequest) GetAccountInfoOk() (*AccountInfo, bool) {
 }
 
 // HasAccountInfo returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasAccountInfo() bool {
+func (o *DonationPaymentRequest) HasAccountInfo() bool {
 	if o != nil && !common.IsNil(o.AccountInfo) {
 		return true
 	}
@@ -193,12 +198,12 @@ func (o *PaymentDonationRequest) HasAccountInfo() bool {
 }
 
 // SetAccountInfo gets a reference to the given AccountInfo and assigns it to the AccountInfo field.
-func (o *PaymentDonationRequest) SetAccountInfo(v AccountInfo) {
+func (o *DonationPaymentRequest) SetAccountInfo(v AccountInfo) {
 	o.AccountInfo = &v
 }
 
 // GetAdditionalAmount returns the AdditionalAmount field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetAdditionalAmount() Amount {
+func (o *DonationPaymentRequest) GetAdditionalAmount() Amount {
 	if o == nil || common.IsNil(o.AdditionalAmount) {
 		var ret Amount
 		return ret
@@ -208,7 +213,7 @@ func (o *PaymentDonationRequest) GetAdditionalAmount() Amount {
 
 // GetAdditionalAmountOk returns a tuple with the AdditionalAmount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetAdditionalAmountOk() (*Amount, bool) {
+func (o *DonationPaymentRequest) GetAdditionalAmountOk() (*Amount, bool) {
 	if o == nil || common.IsNil(o.AdditionalAmount) {
 		return nil, false
 	}
@@ -216,7 +221,7 @@ func (o *PaymentDonationRequest) GetAdditionalAmountOk() (*Amount, bool) {
 }
 
 // HasAdditionalAmount returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasAdditionalAmount() bool {
+func (o *DonationPaymentRequest) HasAdditionalAmount() bool {
 	if o != nil && !common.IsNil(o.AdditionalAmount) {
 		return true
 	}
@@ -225,12 +230,12 @@ func (o *PaymentDonationRequest) HasAdditionalAmount() bool {
 }
 
 // SetAdditionalAmount gets a reference to the given Amount and assigns it to the AdditionalAmount field.
-func (o *PaymentDonationRequest) SetAdditionalAmount(v Amount) {
+func (o *DonationPaymentRequest) SetAdditionalAmount(v Amount) {
 	o.AdditionalAmount = &v
 }
 
 // GetAdditionalData returns the AdditionalData field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetAdditionalData() map[string]string {
+func (o *DonationPaymentRequest) GetAdditionalData() map[string]string {
 	if o == nil || common.IsNil(o.AdditionalData) {
 		var ret map[string]string
 		return ret
@@ -240,7 +245,7 @@ func (o *PaymentDonationRequest) GetAdditionalData() map[string]string {
 
 // GetAdditionalDataOk returns a tuple with the AdditionalData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetAdditionalDataOk() (*map[string]string, bool) {
+func (o *DonationPaymentRequest) GetAdditionalDataOk() (*map[string]string, bool) {
 	if o == nil || common.IsNil(o.AdditionalData) {
 		return nil, false
 	}
@@ -248,7 +253,7 @@ func (o *PaymentDonationRequest) GetAdditionalDataOk() (*map[string]string, bool
 }
 
 // HasAdditionalData returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasAdditionalData() bool {
+func (o *DonationPaymentRequest) HasAdditionalData() bool {
 	if o != nil && !common.IsNil(o.AdditionalData) {
 		return true
 	}
@@ -257,12 +262,12 @@ func (o *PaymentDonationRequest) HasAdditionalData() bool {
 }
 
 // SetAdditionalData gets a reference to the given map[string]string and assigns it to the AdditionalData field.
-func (o *PaymentDonationRequest) SetAdditionalData(v map[string]string) {
+func (o *DonationPaymentRequest) SetAdditionalData(v map[string]string) {
 	o.AdditionalData = &v
 }
 
 // GetAmount returns the Amount field value
-func (o *PaymentDonationRequest) GetAmount() Amount {
+func (o *DonationPaymentRequest) GetAmount() Amount {
 	if o == nil {
 		var ret Amount
 		return ret
@@ -273,7 +278,7 @@ func (o *PaymentDonationRequest) GetAmount() Amount {
 
 // GetAmountOk returns a tuple with the Amount field value
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetAmountOk() (*Amount, bool) {
+func (o *DonationPaymentRequest) GetAmountOk() (*Amount, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -281,12 +286,12 @@ func (o *PaymentDonationRequest) GetAmountOk() (*Amount, bool) {
 }
 
 // SetAmount sets field value
-func (o *PaymentDonationRequest) SetAmount(v Amount) {
+func (o *DonationPaymentRequest) SetAmount(v Amount) {
 	o.Amount = v
 }
 
 // GetApplicationInfo returns the ApplicationInfo field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetApplicationInfo() ApplicationInfo {
+func (o *DonationPaymentRequest) GetApplicationInfo() ApplicationInfo {
 	if o == nil || common.IsNil(o.ApplicationInfo) {
 		var ret ApplicationInfo
 		return ret
@@ -296,7 +301,7 @@ func (o *PaymentDonationRequest) GetApplicationInfo() ApplicationInfo {
 
 // GetApplicationInfoOk returns a tuple with the ApplicationInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetApplicationInfoOk() (*ApplicationInfo, bool) {
+func (o *DonationPaymentRequest) GetApplicationInfoOk() (*ApplicationInfo, bool) {
 	if o == nil || common.IsNil(o.ApplicationInfo) {
 		return nil, false
 	}
@@ -304,7 +309,7 @@ func (o *PaymentDonationRequest) GetApplicationInfoOk() (*ApplicationInfo, bool)
 }
 
 // HasApplicationInfo returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasApplicationInfo() bool {
+func (o *DonationPaymentRequest) HasApplicationInfo() bool {
 	if o != nil && !common.IsNil(o.ApplicationInfo) {
 		return true
 	}
@@ -313,12 +318,12 @@ func (o *PaymentDonationRequest) HasApplicationInfo() bool {
 }
 
 // SetApplicationInfo gets a reference to the given ApplicationInfo and assigns it to the ApplicationInfo field.
-func (o *PaymentDonationRequest) SetApplicationInfo(v ApplicationInfo) {
+func (o *DonationPaymentRequest) SetApplicationInfo(v ApplicationInfo) {
 	o.ApplicationInfo = &v
 }
 
 // GetAuthenticationData returns the AuthenticationData field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetAuthenticationData() AuthenticationData {
+func (o *DonationPaymentRequest) GetAuthenticationData() AuthenticationData {
 	if o == nil || common.IsNil(o.AuthenticationData) {
 		var ret AuthenticationData
 		return ret
@@ -328,7 +333,7 @@ func (o *PaymentDonationRequest) GetAuthenticationData() AuthenticationData {
 
 // GetAuthenticationDataOk returns a tuple with the AuthenticationData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetAuthenticationDataOk() (*AuthenticationData, bool) {
+func (o *DonationPaymentRequest) GetAuthenticationDataOk() (*AuthenticationData, bool) {
 	if o == nil || common.IsNil(o.AuthenticationData) {
 		return nil, false
 	}
@@ -336,7 +341,7 @@ func (o *PaymentDonationRequest) GetAuthenticationDataOk() (*AuthenticationData,
 }
 
 // HasAuthenticationData returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasAuthenticationData() bool {
+func (o *DonationPaymentRequest) HasAuthenticationData() bool {
 	if o != nil && !common.IsNil(o.AuthenticationData) {
 		return true
 	}
@@ -345,12 +350,12 @@ func (o *PaymentDonationRequest) HasAuthenticationData() bool {
 }
 
 // SetAuthenticationData gets a reference to the given AuthenticationData and assigns it to the AuthenticationData field.
-func (o *PaymentDonationRequest) SetAuthenticationData(v AuthenticationData) {
+func (o *DonationPaymentRequest) SetAuthenticationData(v AuthenticationData) {
 	o.AuthenticationData = &v
 }
 
 // GetBillingAddress returns the BillingAddress field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetBillingAddress() Address {
+func (o *DonationPaymentRequest) GetBillingAddress() Address {
 	if o == nil || common.IsNil(o.BillingAddress) {
 		var ret Address
 		return ret
@@ -360,7 +365,7 @@ func (o *PaymentDonationRequest) GetBillingAddress() Address {
 
 // GetBillingAddressOk returns a tuple with the BillingAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetBillingAddressOk() (*Address, bool) {
+func (o *DonationPaymentRequest) GetBillingAddressOk() (*Address, bool) {
 	if o == nil || common.IsNil(o.BillingAddress) {
 		return nil, false
 	}
@@ -368,7 +373,7 @@ func (o *PaymentDonationRequest) GetBillingAddressOk() (*Address, bool) {
 }
 
 // HasBillingAddress returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasBillingAddress() bool {
+func (o *DonationPaymentRequest) HasBillingAddress() bool {
 	if o != nil && !common.IsNil(o.BillingAddress) {
 		return true
 	}
@@ -377,12 +382,12 @@ func (o *PaymentDonationRequest) HasBillingAddress() bool {
 }
 
 // SetBillingAddress gets a reference to the given Address and assigns it to the BillingAddress field.
-func (o *PaymentDonationRequest) SetBillingAddress(v Address) {
+func (o *DonationPaymentRequest) SetBillingAddress(v Address) {
 	o.BillingAddress = &v
 }
 
 // GetBrowserInfo returns the BrowserInfo field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetBrowserInfo() BrowserInfo {
+func (o *DonationPaymentRequest) GetBrowserInfo() BrowserInfo {
 	if o == nil || common.IsNil(o.BrowserInfo) {
 		var ret BrowserInfo
 		return ret
@@ -392,7 +397,7 @@ func (o *PaymentDonationRequest) GetBrowserInfo() BrowserInfo {
 
 // GetBrowserInfoOk returns a tuple with the BrowserInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetBrowserInfoOk() (*BrowserInfo, bool) {
+func (o *DonationPaymentRequest) GetBrowserInfoOk() (*BrowserInfo, bool) {
 	if o == nil || common.IsNil(o.BrowserInfo) {
 		return nil, false
 	}
@@ -400,7 +405,7 @@ func (o *PaymentDonationRequest) GetBrowserInfoOk() (*BrowserInfo, bool) {
 }
 
 // HasBrowserInfo returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasBrowserInfo() bool {
+func (o *DonationPaymentRequest) HasBrowserInfo() bool {
 	if o != nil && !common.IsNil(o.BrowserInfo) {
 		return true
 	}
@@ -409,12 +414,12 @@ func (o *PaymentDonationRequest) HasBrowserInfo() bool {
 }
 
 // SetBrowserInfo gets a reference to the given BrowserInfo and assigns it to the BrowserInfo field.
-func (o *PaymentDonationRequest) SetBrowserInfo(v BrowserInfo) {
+func (o *DonationPaymentRequest) SetBrowserInfo(v BrowserInfo) {
 	o.BrowserInfo = &v
 }
 
 // GetCaptureDelayHours returns the CaptureDelayHours field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetCaptureDelayHours() int32 {
+func (o *DonationPaymentRequest) GetCaptureDelayHours() int32 {
 	if o == nil || common.IsNil(o.CaptureDelayHours) {
 		var ret int32
 		return ret
@@ -424,7 +429,7 @@ func (o *PaymentDonationRequest) GetCaptureDelayHours() int32 {
 
 // GetCaptureDelayHoursOk returns a tuple with the CaptureDelayHours field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetCaptureDelayHoursOk() (*int32, bool) {
+func (o *DonationPaymentRequest) GetCaptureDelayHoursOk() (*int32, bool) {
 	if o == nil || common.IsNil(o.CaptureDelayHours) {
 		return nil, false
 	}
@@ -432,7 +437,7 @@ func (o *PaymentDonationRequest) GetCaptureDelayHoursOk() (*int32, bool) {
 }
 
 // HasCaptureDelayHours returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasCaptureDelayHours() bool {
+func (o *DonationPaymentRequest) HasCaptureDelayHours() bool {
 	if o != nil && !common.IsNil(o.CaptureDelayHours) {
 		return true
 	}
@@ -441,12 +446,12 @@ func (o *PaymentDonationRequest) HasCaptureDelayHours() bool {
 }
 
 // SetCaptureDelayHours gets a reference to the given int32 and assigns it to the CaptureDelayHours field.
-func (o *PaymentDonationRequest) SetCaptureDelayHours(v int32) {
+func (o *DonationPaymentRequest) SetCaptureDelayHours(v int32) {
 	o.CaptureDelayHours = &v
 }
 
 // GetChannel returns the Channel field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetChannel() string {
+func (o *DonationPaymentRequest) GetChannel() string {
 	if o == nil || common.IsNil(o.Channel) {
 		var ret string
 		return ret
@@ -456,7 +461,7 @@ func (o *PaymentDonationRequest) GetChannel() string {
 
 // GetChannelOk returns a tuple with the Channel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetChannelOk() (*string, bool) {
+func (o *DonationPaymentRequest) GetChannelOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Channel) {
 		return nil, false
 	}
@@ -464,7 +469,7 @@ func (o *PaymentDonationRequest) GetChannelOk() (*string, bool) {
 }
 
 // HasChannel returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasChannel() bool {
+func (o *DonationPaymentRequest) HasChannel() bool {
 	if o != nil && !common.IsNil(o.Channel) {
 		return true
 	}
@@ -473,12 +478,12 @@ func (o *PaymentDonationRequest) HasChannel() bool {
 }
 
 // SetChannel gets a reference to the given string and assigns it to the Channel field.
-func (o *PaymentDonationRequest) SetChannel(v string) {
+func (o *DonationPaymentRequest) SetChannel(v string) {
 	o.Channel = &v
 }
 
 // GetCheckoutAttemptId returns the CheckoutAttemptId field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetCheckoutAttemptId() string {
+func (o *DonationPaymentRequest) GetCheckoutAttemptId() string {
 	if o == nil || common.IsNil(o.CheckoutAttemptId) {
 		var ret string
 		return ret
@@ -488,7 +493,7 @@ func (o *PaymentDonationRequest) GetCheckoutAttemptId() string {
 
 // GetCheckoutAttemptIdOk returns a tuple with the CheckoutAttemptId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetCheckoutAttemptIdOk() (*string, bool) {
+func (o *DonationPaymentRequest) GetCheckoutAttemptIdOk() (*string, bool) {
 	if o == nil || common.IsNil(o.CheckoutAttemptId) {
 		return nil, false
 	}
@@ -496,7 +501,7 @@ func (o *PaymentDonationRequest) GetCheckoutAttemptIdOk() (*string, bool) {
 }
 
 // HasCheckoutAttemptId returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasCheckoutAttemptId() bool {
+func (o *DonationPaymentRequest) HasCheckoutAttemptId() bool {
 	if o != nil && !common.IsNil(o.CheckoutAttemptId) {
 		return true
 	}
@@ -505,12 +510,12 @@ func (o *PaymentDonationRequest) HasCheckoutAttemptId() bool {
 }
 
 // SetCheckoutAttemptId gets a reference to the given string and assigns it to the CheckoutAttemptId field.
-func (o *PaymentDonationRequest) SetCheckoutAttemptId(v string) {
+func (o *DonationPaymentRequest) SetCheckoutAttemptId(v string) {
 	o.CheckoutAttemptId = &v
 }
 
 // GetCompany returns the Company field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetCompany() Company {
+func (o *DonationPaymentRequest) GetCompany() Company {
 	if o == nil || common.IsNil(o.Company) {
 		var ret Company
 		return ret
@@ -520,7 +525,7 @@ func (o *PaymentDonationRequest) GetCompany() Company {
 
 // GetCompanyOk returns a tuple with the Company field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetCompanyOk() (*Company, bool) {
+func (o *DonationPaymentRequest) GetCompanyOk() (*Company, bool) {
 	if o == nil || common.IsNil(o.Company) {
 		return nil, false
 	}
@@ -528,7 +533,7 @@ func (o *PaymentDonationRequest) GetCompanyOk() (*Company, bool) {
 }
 
 // HasCompany returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasCompany() bool {
+func (o *DonationPaymentRequest) HasCompany() bool {
 	if o != nil && !common.IsNil(o.Company) {
 		return true
 	}
@@ -537,13 +542,13 @@ func (o *PaymentDonationRequest) HasCompany() bool {
 }
 
 // SetCompany gets a reference to the given Company and assigns it to the Company field.
-func (o *PaymentDonationRequest) SetCompany(v Company) {
+func (o *DonationPaymentRequest) SetCompany(v Company) {
 	o.Company = &v
 }
 
 // GetConversionId returns the ConversionId field value if set, zero value otherwise.
 // Deprecated
-func (o *PaymentDonationRequest) GetConversionId() string {
+func (o *DonationPaymentRequest) GetConversionId() string {
 	if o == nil || common.IsNil(o.ConversionId) {
 		var ret string
 		return ret
@@ -554,7 +559,7 @@ func (o *PaymentDonationRequest) GetConversionId() string {
 // GetConversionIdOk returns a tuple with the ConversionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // Deprecated
-func (o *PaymentDonationRequest) GetConversionIdOk() (*string, bool) {
+func (o *DonationPaymentRequest) GetConversionIdOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ConversionId) {
 		return nil, false
 	}
@@ -562,7 +567,7 @@ func (o *PaymentDonationRequest) GetConversionIdOk() (*string, bool) {
 }
 
 // HasConversionId returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasConversionId() bool {
+func (o *DonationPaymentRequest) HasConversionId() bool {
 	if o != nil && !common.IsNil(o.ConversionId) {
 		return true
 	}
@@ -572,12 +577,12 @@ func (o *PaymentDonationRequest) HasConversionId() bool {
 
 // SetConversionId gets a reference to the given string and assigns it to the ConversionId field.
 // Deprecated
-func (o *PaymentDonationRequest) SetConversionId(v string) {
+func (o *DonationPaymentRequest) SetConversionId(v string) {
 	o.ConversionId = &v
 }
 
 // GetCountryCode returns the CountryCode field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetCountryCode() string {
+func (o *DonationPaymentRequest) GetCountryCode() string {
 	if o == nil || common.IsNil(o.CountryCode) {
 		var ret string
 		return ret
@@ -587,7 +592,7 @@ func (o *PaymentDonationRequest) GetCountryCode() string {
 
 // GetCountryCodeOk returns a tuple with the CountryCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetCountryCodeOk() (*string, bool) {
+func (o *DonationPaymentRequest) GetCountryCodeOk() (*string, bool) {
 	if o == nil || common.IsNil(o.CountryCode) {
 		return nil, false
 	}
@@ -595,7 +600,7 @@ func (o *PaymentDonationRequest) GetCountryCodeOk() (*string, bool) {
 }
 
 // HasCountryCode returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasCountryCode() bool {
+func (o *DonationPaymentRequest) HasCountryCode() bool {
 	if o != nil && !common.IsNil(o.CountryCode) {
 		return true
 	}
@@ -604,14 +609,14 @@ func (o *PaymentDonationRequest) HasCountryCode() bool {
 }
 
 // SetCountryCode gets a reference to the given string and assigns it to the CountryCode field.
-func (o *PaymentDonationRequest) SetCountryCode(v string) {
+func (o *DonationPaymentRequest) SetCountryCode(v string) {
 	o.CountryCode = &v
 }
 
 // GetDateOfBirth returns the DateOfBirth field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetDateOfBirth() string {
+func (o *DonationPaymentRequest) GetDateOfBirth() time.Time {
 	if o == nil || common.IsNil(o.DateOfBirth) {
-		var ret string
+		var ret time.Time
 		return ret
 	}
 	return *o.DateOfBirth
@@ -619,7 +624,7 @@ func (o *PaymentDonationRequest) GetDateOfBirth() string {
 
 // GetDateOfBirthOk returns a tuple with the DateOfBirth field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetDateOfBirthOk() (*string, bool) {
+func (o *DonationPaymentRequest) GetDateOfBirthOk() (*time.Time, bool) {
 	if o == nil || common.IsNil(o.DateOfBirth) {
 		return nil, false
 	}
@@ -627,7 +632,7 @@ func (o *PaymentDonationRequest) GetDateOfBirthOk() (*string, bool) {
 }
 
 // HasDateOfBirth returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasDateOfBirth() bool {
+func (o *DonationPaymentRequest) HasDateOfBirth() bool {
 	if o != nil && !common.IsNil(o.DateOfBirth) {
 		return true
 	}
@@ -635,13 +640,13 @@ func (o *PaymentDonationRequest) HasDateOfBirth() bool {
 	return false
 }
 
-// SetDateOfBirth gets a reference to the given string and assigns it to the DateOfBirth field.
-func (o *PaymentDonationRequest) SetDateOfBirth(v string) {
+// SetDateOfBirth gets a reference to the given time.Time and assigns it to the DateOfBirth field.
+func (o *DonationPaymentRequest) SetDateOfBirth(v time.Time) {
 	o.DateOfBirth = &v
 }
 
 // GetDccQuote returns the DccQuote field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetDccQuote() ForexQuote {
+func (o *DonationPaymentRequest) GetDccQuote() ForexQuote {
 	if o == nil || common.IsNil(o.DccQuote) {
 		var ret ForexQuote
 		return ret
@@ -651,7 +656,7 @@ func (o *PaymentDonationRequest) GetDccQuote() ForexQuote {
 
 // GetDccQuoteOk returns a tuple with the DccQuote field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetDccQuoteOk() (*ForexQuote, bool) {
+func (o *DonationPaymentRequest) GetDccQuoteOk() (*ForexQuote, bool) {
 	if o == nil || common.IsNil(o.DccQuote) {
 		return nil, false
 	}
@@ -659,7 +664,7 @@ func (o *PaymentDonationRequest) GetDccQuoteOk() (*ForexQuote, bool) {
 }
 
 // HasDccQuote returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasDccQuote() bool {
+func (o *DonationPaymentRequest) HasDccQuote() bool {
 	if o != nil && !common.IsNil(o.DccQuote) {
 		return true
 	}
@@ -668,12 +673,44 @@ func (o *PaymentDonationRequest) HasDccQuote() bool {
 }
 
 // SetDccQuote gets a reference to the given ForexQuote and assigns it to the DccQuote field.
-func (o *PaymentDonationRequest) SetDccQuote(v ForexQuote) {
+func (o *DonationPaymentRequest) SetDccQuote(v ForexQuote) {
 	o.DccQuote = &v
 }
 
+// GetDeliverAt returns the DeliverAt field value if set, zero value otherwise.
+func (o *DonationPaymentRequest) GetDeliverAt() time.Time {
+	if o == nil || common.IsNil(o.DeliverAt) {
+		var ret time.Time
+		return ret
+	}
+	return *o.DeliverAt
+}
+
+// GetDeliverAtOk returns a tuple with the DeliverAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DonationPaymentRequest) GetDeliverAtOk() (*time.Time, bool) {
+	if o == nil || common.IsNil(o.DeliverAt) {
+		return nil, false
+	}
+	return o.DeliverAt, true
+}
+
+// HasDeliverAt returns a boolean if a field has been set.
+func (o *DonationPaymentRequest) HasDeliverAt() bool {
+	if o != nil && !common.IsNil(o.DeliverAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetDeliverAt gets a reference to the given time.Time and assigns it to the DeliverAt field.
+func (o *DonationPaymentRequest) SetDeliverAt(v time.Time) {
+	o.DeliverAt = &v
+}
+
 // GetDeliveryAddress returns the DeliveryAddress field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetDeliveryAddress() Address {
+func (o *DonationPaymentRequest) GetDeliveryAddress() Address {
 	if o == nil || common.IsNil(o.DeliveryAddress) {
 		var ret Address
 		return ret
@@ -683,7 +720,7 @@ func (o *PaymentDonationRequest) GetDeliveryAddress() Address {
 
 // GetDeliveryAddressOk returns a tuple with the DeliveryAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetDeliveryAddressOk() (*Address, bool) {
+func (o *DonationPaymentRequest) GetDeliveryAddressOk() (*Address, bool) {
 	if o == nil || common.IsNil(o.DeliveryAddress) {
 		return nil, false
 	}
@@ -691,7 +728,7 @@ func (o *PaymentDonationRequest) GetDeliveryAddressOk() (*Address, bool) {
 }
 
 // HasDeliveryAddress returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasDeliveryAddress() bool {
+func (o *DonationPaymentRequest) HasDeliveryAddress() bool {
 	if o != nil && !common.IsNil(o.DeliveryAddress) {
 		return true
 	}
@@ -700,12 +737,13 @@ func (o *PaymentDonationRequest) HasDeliveryAddress() bool {
 }
 
 // SetDeliveryAddress gets a reference to the given Address and assigns it to the DeliveryAddress field.
-func (o *PaymentDonationRequest) SetDeliveryAddress(v Address) {
+func (o *DonationPaymentRequest) SetDeliveryAddress(v Address) {
 	o.DeliveryAddress = &v
 }
 
 // GetDeliveryDate returns the DeliveryDate field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetDeliveryDate() time.Time {
+// Deprecated
+func (o *DonationPaymentRequest) GetDeliveryDate() time.Time {
 	if o == nil || common.IsNil(o.DeliveryDate) {
 		var ret time.Time
 		return ret
@@ -715,7 +753,8 @@ func (o *PaymentDonationRequest) GetDeliveryDate() time.Time {
 
 // GetDeliveryDateOk returns a tuple with the DeliveryDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetDeliveryDateOk() (*time.Time, bool) {
+// Deprecated
+func (o *DonationPaymentRequest) GetDeliveryDateOk() (*time.Time, bool) {
 	if o == nil || common.IsNil(o.DeliveryDate) {
 		return nil, false
 	}
@@ -723,7 +762,7 @@ func (o *PaymentDonationRequest) GetDeliveryDateOk() (*time.Time, bool) {
 }
 
 // HasDeliveryDate returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasDeliveryDate() bool {
+func (o *DonationPaymentRequest) HasDeliveryDate() bool {
 	if o != nil && !common.IsNil(o.DeliveryDate) {
 		return true
 	}
@@ -732,12 +771,13 @@ func (o *PaymentDonationRequest) HasDeliveryDate() bool {
 }
 
 // SetDeliveryDate gets a reference to the given time.Time and assigns it to the DeliveryDate field.
-func (o *PaymentDonationRequest) SetDeliveryDate(v time.Time) {
+// Deprecated
+func (o *DonationPaymentRequest) SetDeliveryDate(v time.Time) {
 	o.DeliveryDate = &v
 }
 
 // GetDeviceFingerprint returns the DeviceFingerprint field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetDeviceFingerprint() string {
+func (o *DonationPaymentRequest) GetDeviceFingerprint() string {
 	if o == nil || common.IsNil(o.DeviceFingerprint) {
 		var ret string
 		return ret
@@ -747,7 +787,7 @@ func (o *PaymentDonationRequest) GetDeviceFingerprint() string {
 
 // GetDeviceFingerprintOk returns a tuple with the DeviceFingerprint field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetDeviceFingerprintOk() (*string, bool) {
+func (o *DonationPaymentRequest) GetDeviceFingerprintOk() (*string, bool) {
 	if o == nil || common.IsNil(o.DeviceFingerprint) {
 		return nil, false
 	}
@@ -755,7 +795,7 @@ func (o *PaymentDonationRequest) GetDeviceFingerprintOk() (*string, bool) {
 }
 
 // HasDeviceFingerprint returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasDeviceFingerprint() bool {
+func (o *DonationPaymentRequest) HasDeviceFingerprint() bool {
 	if o != nil && !common.IsNil(o.DeviceFingerprint) {
 		return true
 	}
@@ -764,12 +804,12 @@ func (o *PaymentDonationRequest) HasDeviceFingerprint() bool {
 }
 
 // SetDeviceFingerprint gets a reference to the given string and assigns it to the DeviceFingerprint field.
-func (o *PaymentDonationRequest) SetDeviceFingerprint(v string) {
+func (o *DonationPaymentRequest) SetDeviceFingerprint(v string) {
 	o.DeviceFingerprint = &v
 }
 
 // GetDonationAccount returns the DonationAccount field value
-func (o *PaymentDonationRequest) GetDonationAccount() string {
+func (o *DonationPaymentRequest) GetDonationAccount() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -780,7 +820,7 @@ func (o *PaymentDonationRequest) GetDonationAccount() string {
 
 // GetDonationAccountOk returns a tuple with the DonationAccount field value
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetDonationAccountOk() (*string, bool) {
+func (o *DonationPaymentRequest) GetDonationAccountOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -788,12 +828,12 @@ func (o *PaymentDonationRequest) GetDonationAccountOk() (*string, bool) {
 }
 
 // SetDonationAccount sets field value
-func (o *PaymentDonationRequest) SetDonationAccount(v string) {
+func (o *DonationPaymentRequest) SetDonationAccount(v string) {
 	o.DonationAccount = v
 }
 
 // GetDonationOriginalPspReference returns the DonationOriginalPspReference field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetDonationOriginalPspReference() string {
+func (o *DonationPaymentRequest) GetDonationOriginalPspReference() string {
 	if o == nil || common.IsNil(o.DonationOriginalPspReference) {
 		var ret string
 		return ret
@@ -803,7 +843,7 @@ func (o *PaymentDonationRequest) GetDonationOriginalPspReference() string {
 
 // GetDonationOriginalPspReferenceOk returns a tuple with the DonationOriginalPspReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetDonationOriginalPspReferenceOk() (*string, bool) {
+func (o *DonationPaymentRequest) GetDonationOriginalPspReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.DonationOriginalPspReference) {
 		return nil, false
 	}
@@ -811,7 +851,7 @@ func (o *PaymentDonationRequest) GetDonationOriginalPspReferenceOk() (*string, b
 }
 
 // HasDonationOriginalPspReference returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasDonationOriginalPspReference() bool {
+func (o *DonationPaymentRequest) HasDonationOriginalPspReference() bool {
 	if o != nil && !common.IsNil(o.DonationOriginalPspReference) {
 		return true
 	}
@@ -820,12 +860,12 @@ func (o *PaymentDonationRequest) HasDonationOriginalPspReference() bool {
 }
 
 // SetDonationOriginalPspReference gets a reference to the given string and assigns it to the DonationOriginalPspReference field.
-func (o *PaymentDonationRequest) SetDonationOriginalPspReference(v string) {
+func (o *DonationPaymentRequest) SetDonationOriginalPspReference(v string) {
 	o.DonationOriginalPspReference = &v
 }
 
 // GetDonationToken returns the DonationToken field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetDonationToken() string {
+func (o *DonationPaymentRequest) GetDonationToken() string {
 	if o == nil || common.IsNil(o.DonationToken) {
 		var ret string
 		return ret
@@ -835,7 +875,7 @@ func (o *PaymentDonationRequest) GetDonationToken() string {
 
 // GetDonationTokenOk returns a tuple with the DonationToken field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetDonationTokenOk() (*string, bool) {
+func (o *DonationPaymentRequest) GetDonationTokenOk() (*string, bool) {
 	if o == nil || common.IsNil(o.DonationToken) {
 		return nil, false
 	}
@@ -843,7 +883,7 @@ func (o *PaymentDonationRequest) GetDonationTokenOk() (*string, bool) {
 }
 
 // HasDonationToken returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasDonationToken() bool {
+func (o *DonationPaymentRequest) HasDonationToken() bool {
 	if o != nil && !common.IsNil(o.DonationToken) {
 		return true
 	}
@@ -852,12 +892,12 @@ func (o *PaymentDonationRequest) HasDonationToken() bool {
 }
 
 // SetDonationToken gets a reference to the given string and assigns it to the DonationToken field.
-func (o *PaymentDonationRequest) SetDonationToken(v string) {
+func (o *DonationPaymentRequest) SetDonationToken(v string) {
 	o.DonationToken = &v
 }
 
 // GetEnableOneClick returns the EnableOneClick field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetEnableOneClick() bool {
+func (o *DonationPaymentRequest) GetEnableOneClick() bool {
 	if o == nil || common.IsNil(o.EnableOneClick) {
 		var ret bool
 		return ret
@@ -867,7 +907,7 @@ func (o *PaymentDonationRequest) GetEnableOneClick() bool {
 
 // GetEnableOneClickOk returns a tuple with the EnableOneClick field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetEnableOneClickOk() (*bool, bool) {
+func (o *DonationPaymentRequest) GetEnableOneClickOk() (*bool, bool) {
 	if o == nil || common.IsNil(o.EnableOneClick) {
 		return nil, false
 	}
@@ -875,7 +915,7 @@ func (o *PaymentDonationRequest) GetEnableOneClickOk() (*bool, bool) {
 }
 
 // HasEnableOneClick returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasEnableOneClick() bool {
+func (o *DonationPaymentRequest) HasEnableOneClick() bool {
 	if o != nil && !common.IsNil(o.EnableOneClick) {
 		return true
 	}
@@ -884,12 +924,12 @@ func (o *PaymentDonationRequest) HasEnableOneClick() bool {
 }
 
 // SetEnableOneClick gets a reference to the given bool and assigns it to the EnableOneClick field.
-func (o *PaymentDonationRequest) SetEnableOneClick(v bool) {
+func (o *DonationPaymentRequest) SetEnableOneClick(v bool) {
 	o.EnableOneClick = &v
 }
 
 // GetEnablePayOut returns the EnablePayOut field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetEnablePayOut() bool {
+func (o *DonationPaymentRequest) GetEnablePayOut() bool {
 	if o == nil || common.IsNil(o.EnablePayOut) {
 		var ret bool
 		return ret
@@ -899,7 +939,7 @@ func (o *PaymentDonationRequest) GetEnablePayOut() bool {
 
 // GetEnablePayOutOk returns a tuple with the EnablePayOut field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetEnablePayOutOk() (*bool, bool) {
+func (o *DonationPaymentRequest) GetEnablePayOutOk() (*bool, bool) {
 	if o == nil || common.IsNil(o.EnablePayOut) {
 		return nil, false
 	}
@@ -907,7 +947,7 @@ func (o *PaymentDonationRequest) GetEnablePayOutOk() (*bool, bool) {
 }
 
 // HasEnablePayOut returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasEnablePayOut() bool {
+func (o *DonationPaymentRequest) HasEnablePayOut() bool {
 	if o != nil && !common.IsNil(o.EnablePayOut) {
 		return true
 	}
@@ -916,12 +956,12 @@ func (o *PaymentDonationRequest) HasEnablePayOut() bool {
 }
 
 // SetEnablePayOut gets a reference to the given bool and assigns it to the EnablePayOut field.
-func (o *PaymentDonationRequest) SetEnablePayOut(v bool) {
+func (o *DonationPaymentRequest) SetEnablePayOut(v bool) {
 	o.EnablePayOut = &v
 }
 
 // GetEnableRecurring returns the EnableRecurring field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetEnableRecurring() bool {
+func (o *DonationPaymentRequest) GetEnableRecurring() bool {
 	if o == nil || common.IsNil(o.EnableRecurring) {
 		var ret bool
 		return ret
@@ -931,7 +971,7 @@ func (o *PaymentDonationRequest) GetEnableRecurring() bool {
 
 // GetEnableRecurringOk returns a tuple with the EnableRecurring field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetEnableRecurringOk() (*bool, bool) {
+func (o *DonationPaymentRequest) GetEnableRecurringOk() (*bool, bool) {
 	if o == nil || common.IsNil(o.EnableRecurring) {
 		return nil, false
 	}
@@ -939,7 +979,7 @@ func (o *PaymentDonationRequest) GetEnableRecurringOk() (*bool, bool) {
 }
 
 // HasEnableRecurring returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasEnableRecurring() bool {
+func (o *DonationPaymentRequest) HasEnableRecurring() bool {
 	if o != nil && !common.IsNil(o.EnableRecurring) {
 		return true
 	}
@@ -948,12 +988,12 @@ func (o *PaymentDonationRequest) HasEnableRecurring() bool {
 }
 
 // SetEnableRecurring gets a reference to the given bool and assigns it to the EnableRecurring field.
-func (o *PaymentDonationRequest) SetEnableRecurring(v bool) {
+func (o *DonationPaymentRequest) SetEnableRecurring(v bool) {
 	o.EnableRecurring = &v
 }
 
 // GetEntityType returns the EntityType field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetEntityType() string {
+func (o *DonationPaymentRequest) GetEntityType() string {
 	if o == nil || common.IsNil(o.EntityType) {
 		var ret string
 		return ret
@@ -963,7 +1003,7 @@ func (o *PaymentDonationRequest) GetEntityType() string {
 
 // GetEntityTypeOk returns a tuple with the EntityType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetEntityTypeOk() (*string, bool) {
+func (o *DonationPaymentRequest) GetEntityTypeOk() (*string, bool) {
 	if o == nil || common.IsNil(o.EntityType) {
 		return nil, false
 	}
@@ -971,7 +1011,7 @@ func (o *PaymentDonationRequest) GetEntityTypeOk() (*string, bool) {
 }
 
 // HasEntityType returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasEntityType() bool {
+func (o *DonationPaymentRequest) HasEntityType() bool {
 	if o != nil && !common.IsNil(o.EntityType) {
 		return true
 	}
@@ -980,12 +1020,12 @@ func (o *PaymentDonationRequest) HasEntityType() bool {
 }
 
 // SetEntityType gets a reference to the given string and assigns it to the EntityType field.
-func (o *PaymentDonationRequest) SetEntityType(v string) {
+func (o *DonationPaymentRequest) SetEntityType(v string) {
 	o.EntityType = &v
 }
 
 // GetFraudOffset returns the FraudOffset field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetFraudOffset() int32 {
+func (o *DonationPaymentRequest) GetFraudOffset() int32 {
 	if o == nil || common.IsNil(o.FraudOffset) {
 		var ret int32
 		return ret
@@ -995,7 +1035,7 @@ func (o *PaymentDonationRequest) GetFraudOffset() int32 {
 
 // GetFraudOffsetOk returns a tuple with the FraudOffset field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetFraudOffsetOk() (*int32, bool) {
+func (o *DonationPaymentRequest) GetFraudOffsetOk() (*int32, bool) {
 	if o == nil || common.IsNil(o.FraudOffset) {
 		return nil, false
 	}
@@ -1003,7 +1043,7 @@ func (o *PaymentDonationRequest) GetFraudOffsetOk() (*int32, bool) {
 }
 
 // HasFraudOffset returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasFraudOffset() bool {
+func (o *DonationPaymentRequest) HasFraudOffset() bool {
 	if o != nil && !common.IsNil(o.FraudOffset) {
 		return true
 	}
@@ -1012,12 +1052,76 @@ func (o *PaymentDonationRequest) HasFraudOffset() bool {
 }
 
 // SetFraudOffset gets a reference to the given int32 and assigns it to the FraudOffset field.
-func (o *PaymentDonationRequest) SetFraudOffset(v int32) {
+func (o *DonationPaymentRequest) SetFraudOffset(v int32) {
 	o.FraudOffset = &v
 }
 
+// GetFundOrigin returns the FundOrigin field value if set, zero value otherwise.
+func (o *DonationPaymentRequest) GetFundOrigin() FundOrigin {
+	if o == nil || common.IsNil(o.FundOrigin) {
+		var ret FundOrigin
+		return ret
+	}
+	return *o.FundOrigin
+}
+
+// GetFundOriginOk returns a tuple with the FundOrigin field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DonationPaymentRequest) GetFundOriginOk() (*FundOrigin, bool) {
+	if o == nil || common.IsNil(o.FundOrigin) {
+		return nil, false
+	}
+	return o.FundOrigin, true
+}
+
+// HasFundOrigin returns a boolean if a field has been set.
+func (o *DonationPaymentRequest) HasFundOrigin() bool {
+	if o != nil && !common.IsNil(o.FundOrigin) {
+		return true
+	}
+
+	return false
+}
+
+// SetFundOrigin gets a reference to the given FundOrigin and assigns it to the FundOrigin field.
+func (o *DonationPaymentRequest) SetFundOrigin(v FundOrigin) {
+	o.FundOrigin = &v
+}
+
+// GetFundRecipient returns the FundRecipient field value if set, zero value otherwise.
+func (o *DonationPaymentRequest) GetFundRecipient() FundRecipient {
+	if o == nil || common.IsNil(o.FundRecipient) {
+		var ret FundRecipient
+		return ret
+	}
+	return *o.FundRecipient
+}
+
+// GetFundRecipientOk returns a tuple with the FundRecipient field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DonationPaymentRequest) GetFundRecipientOk() (*FundRecipient, bool) {
+	if o == nil || common.IsNil(o.FundRecipient) {
+		return nil, false
+	}
+	return o.FundRecipient, true
+}
+
+// HasFundRecipient returns a boolean if a field has been set.
+func (o *DonationPaymentRequest) HasFundRecipient() bool {
+	if o != nil && !common.IsNil(o.FundRecipient) {
+		return true
+	}
+
+	return false
+}
+
+// SetFundRecipient gets a reference to the given FundRecipient and assigns it to the FundRecipient field.
+func (o *DonationPaymentRequest) SetFundRecipient(v FundRecipient) {
+	o.FundRecipient = &v
+}
+
 // GetIndustryUsage returns the IndustryUsage field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetIndustryUsage() string {
+func (o *DonationPaymentRequest) GetIndustryUsage() string {
 	if o == nil || common.IsNil(o.IndustryUsage) {
 		var ret string
 		return ret
@@ -1027,7 +1131,7 @@ func (o *PaymentDonationRequest) GetIndustryUsage() string {
 
 // GetIndustryUsageOk returns a tuple with the IndustryUsage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetIndustryUsageOk() (*string, bool) {
+func (o *DonationPaymentRequest) GetIndustryUsageOk() (*string, bool) {
 	if o == nil || common.IsNil(o.IndustryUsage) {
 		return nil, false
 	}
@@ -1035,7 +1139,7 @@ func (o *PaymentDonationRequest) GetIndustryUsageOk() (*string, bool) {
 }
 
 // HasIndustryUsage returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasIndustryUsage() bool {
+func (o *DonationPaymentRequest) HasIndustryUsage() bool {
 	if o != nil && !common.IsNil(o.IndustryUsage) {
 		return true
 	}
@@ -1044,12 +1148,12 @@ func (o *PaymentDonationRequest) HasIndustryUsage() bool {
 }
 
 // SetIndustryUsage gets a reference to the given string and assigns it to the IndustryUsage field.
-func (o *PaymentDonationRequest) SetIndustryUsage(v string) {
+func (o *DonationPaymentRequest) SetIndustryUsage(v string) {
 	o.IndustryUsage = &v
 }
 
 // GetInstallments returns the Installments field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetInstallments() Installments {
+func (o *DonationPaymentRequest) GetInstallments() Installments {
 	if o == nil || common.IsNil(o.Installments) {
 		var ret Installments
 		return ret
@@ -1059,7 +1163,7 @@ func (o *PaymentDonationRequest) GetInstallments() Installments {
 
 // GetInstallmentsOk returns a tuple with the Installments field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetInstallmentsOk() (*Installments, bool) {
+func (o *DonationPaymentRequest) GetInstallmentsOk() (*Installments, bool) {
 	if o == nil || common.IsNil(o.Installments) {
 		return nil, false
 	}
@@ -1067,7 +1171,7 @@ func (o *PaymentDonationRequest) GetInstallmentsOk() (*Installments, bool) {
 }
 
 // HasInstallments returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasInstallments() bool {
+func (o *DonationPaymentRequest) HasInstallments() bool {
 	if o != nil && !common.IsNil(o.Installments) {
 		return true
 	}
@@ -1076,12 +1180,12 @@ func (o *PaymentDonationRequest) HasInstallments() bool {
 }
 
 // SetInstallments gets a reference to the given Installments and assigns it to the Installments field.
-func (o *PaymentDonationRequest) SetInstallments(v Installments) {
+func (o *DonationPaymentRequest) SetInstallments(v Installments) {
 	o.Installments = &v
 }
 
 // GetLineItems returns the LineItems field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetLineItems() []LineItem {
+func (o *DonationPaymentRequest) GetLineItems() []LineItem {
 	if o == nil || common.IsNil(o.LineItems) {
 		var ret []LineItem
 		return ret
@@ -1091,7 +1195,7 @@ func (o *PaymentDonationRequest) GetLineItems() []LineItem {
 
 // GetLineItemsOk returns a tuple with the LineItems field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetLineItemsOk() ([]LineItem, bool) {
+func (o *DonationPaymentRequest) GetLineItemsOk() ([]LineItem, bool) {
 	if o == nil || common.IsNil(o.LineItems) {
 		return nil, false
 	}
@@ -1099,7 +1203,7 @@ func (o *PaymentDonationRequest) GetLineItemsOk() ([]LineItem, bool) {
 }
 
 // HasLineItems returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasLineItems() bool {
+func (o *DonationPaymentRequest) HasLineItems() bool {
 	if o != nil && !common.IsNil(o.LineItems) {
 		return true
 	}
@@ -1108,12 +1212,12 @@ func (o *PaymentDonationRequest) HasLineItems() bool {
 }
 
 // SetLineItems gets a reference to the given []LineItem and assigns it to the LineItems field.
-func (o *PaymentDonationRequest) SetLineItems(v []LineItem) {
+func (o *DonationPaymentRequest) SetLineItems(v []LineItem) {
 	o.LineItems = v
 }
 
 // GetLocalizedShopperStatement returns the LocalizedShopperStatement field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetLocalizedShopperStatement() map[string]string {
+func (o *DonationPaymentRequest) GetLocalizedShopperStatement() map[string]string {
 	if o == nil || common.IsNil(o.LocalizedShopperStatement) {
 		var ret map[string]string
 		return ret
@@ -1123,7 +1227,7 @@ func (o *PaymentDonationRequest) GetLocalizedShopperStatement() map[string]strin
 
 // GetLocalizedShopperStatementOk returns a tuple with the LocalizedShopperStatement field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetLocalizedShopperStatementOk() (*map[string]string, bool) {
+func (o *DonationPaymentRequest) GetLocalizedShopperStatementOk() (*map[string]string, bool) {
 	if o == nil || common.IsNil(o.LocalizedShopperStatement) {
 		return nil, false
 	}
@@ -1131,7 +1235,7 @@ func (o *PaymentDonationRequest) GetLocalizedShopperStatementOk() (*map[string]s
 }
 
 // HasLocalizedShopperStatement returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasLocalizedShopperStatement() bool {
+func (o *DonationPaymentRequest) HasLocalizedShopperStatement() bool {
 	if o != nil && !common.IsNil(o.LocalizedShopperStatement) {
 		return true
 	}
@@ -1140,12 +1244,12 @@ func (o *PaymentDonationRequest) HasLocalizedShopperStatement() bool {
 }
 
 // SetLocalizedShopperStatement gets a reference to the given map[string]string and assigns it to the LocalizedShopperStatement field.
-func (o *PaymentDonationRequest) SetLocalizedShopperStatement(v map[string]string) {
+func (o *DonationPaymentRequest) SetLocalizedShopperStatement(v map[string]string) {
 	o.LocalizedShopperStatement = &v
 }
 
 // GetMandate returns the Mandate field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetMandate() Mandate {
+func (o *DonationPaymentRequest) GetMandate() Mandate {
 	if o == nil || common.IsNil(o.Mandate) {
 		var ret Mandate
 		return ret
@@ -1155,7 +1259,7 @@ func (o *PaymentDonationRequest) GetMandate() Mandate {
 
 // GetMandateOk returns a tuple with the Mandate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetMandateOk() (*Mandate, bool) {
+func (o *DonationPaymentRequest) GetMandateOk() (*Mandate, bool) {
 	if o == nil || common.IsNil(o.Mandate) {
 		return nil, false
 	}
@@ -1163,7 +1267,7 @@ func (o *PaymentDonationRequest) GetMandateOk() (*Mandate, bool) {
 }
 
 // HasMandate returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasMandate() bool {
+func (o *DonationPaymentRequest) HasMandate() bool {
 	if o != nil && !common.IsNil(o.Mandate) {
 		return true
 	}
@@ -1172,12 +1276,12 @@ func (o *PaymentDonationRequest) HasMandate() bool {
 }
 
 // SetMandate gets a reference to the given Mandate and assigns it to the Mandate field.
-func (o *PaymentDonationRequest) SetMandate(v Mandate) {
+func (o *DonationPaymentRequest) SetMandate(v Mandate) {
 	o.Mandate = &v
 }
 
 // GetMcc returns the Mcc field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetMcc() string {
+func (o *DonationPaymentRequest) GetMcc() string {
 	if o == nil || common.IsNil(o.Mcc) {
 		var ret string
 		return ret
@@ -1187,7 +1291,7 @@ func (o *PaymentDonationRequest) GetMcc() string {
 
 // GetMccOk returns a tuple with the Mcc field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetMccOk() (*string, bool) {
+func (o *DonationPaymentRequest) GetMccOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Mcc) {
 		return nil, false
 	}
@@ -1195,7 +1299,7 @@ func (o *PaymentDonationRequest) GetMccOk() (*string, bool) {
 }
 
 // HasMcc returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasMcc() bool {
+func (o *DonationPaymentRequest) HasMcc() bool {
 	if o != nil && !common.IsNil(o.Mcc) {
 		return true
 	}
@@ -1204,12 +1308,12 @@ func (o *PaymentDonationRequest) HasMcc() bool {
 }
 
 // SetMcc gets a reference to the given string and assigns it to the Mcc field.
-func (o *PaymentDonationRequest) SetMcc(v string) {
+func (o *DonationPaymentRequest) SetMcc(v string) {
 	o.Mcc = &v
 }
 
 // GetMerchantAccount returns the MerchantAccount field value
-func (o *PaymentDonationRequest) GetMerchantAccount() string {
+func (o *DonationPaymentRequest) GetMerchantAccount() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -1220,7 +1324,7 @@ func (o *PaymentDonationRequest) GetMerchantAccount() string {
 
 // GetMerchantAccountOk returns a tuple with the MerchantAccount field value
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetMerchantAccountOk() (*string, bool) {
+func (o *DonationPaymentRequest) GetMerchantAccountOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1228,12 +1332,12 @@ func (o *PaymentDonationRequest) GetMerchantAccountOk() (*string, bool) {
 }
 
 // SetMerchantAccount sets field value
-func (o *PaymentDonationRequest) SetMerchantAccount(v string) {
+func (o *DonationPaymentRequest) SetMerchantAccount(v string) {
 	o.MerchantAccount = v
 }
 
 // GetMerchantOrderReference returns the MerchantOrderReference field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetMerchantOrderReference() string {
+func (o *DonationPaymentRequest) GetMerchantOrderReference() string {
 	if o == nil || common.IsNil(o.MerchantOrderReference) {
 		var ret string
 		return ret
@@ -1243,7 +1347,7 @@ func (o *PaymentDonationRequest) GetMerchantOrderReference() string {
 
 // GetMerchantOrderReferenceOk returns a tuple with the MerchantOrderReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetMerchantOrderReferenceOk() (*string, bool) {
+func (o *DonationPaymentRequest) GetMerchantOrderReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.MerchantOrderReference) {
 		return nil, false
 	}
@@ -1251,7 +1355,7 @@ func (o *PaymentDonationRequest) GetMerchantOrderReferenceOk() (*string, bool) {
 }
 
 // HasMerchantOrderReference returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasMerchantOrderReference() bool {
+func (o *DonationPaymentRequest) HasMerchantOrderReference() bool {
 	if o != nil && !common.IsNil(o.MerchantOrderReference) {
 		return true
 	}
@@ -1260,12 +1364,12 @@ func (o *PaymentDonationRequest) HasMerchantOrderReference() bool {
 }
 
 // SetMerchantOrderReference gets a reference to the given string and assigns it to the MerchantOrderReference field.
-func (o *PaymentDonationRequest) SetMerchantOrderReference(v string) {
+func (o *DonationPaymentRequest) SetMerchantOrderReference(v string) {
 	o.MerchantOrderReference = &v
 }
 
 // GetMerchantRiskIndicator returns the MerchantRiskIndicator field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetMerchantRiskIndicator() MerchantRiskIndicator {
+func (o *DonationPaymentRequest) GetMerchantRiskIndicator() MerchantRiskIndicator {
 	if o == nil || common.IsNil(o.MerchantRiskIndicator) {
 		var ret MerchantRiskIndicator
 		return ret
@@ -1275,7 +1379,7 @@ func (o *PaymentDonationRequest) GetMerchantRiskIndicator() MerchantRiskIndicato
 
 // GetMerchantRiskIndicatorOk returns a tuple with the MerchantRiskIndicator field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetMerchantRiskIndicatorOk() (*MerchantRiskIndicator, bool) {
+func (o *DonationPaymentRequest) GetMerchantRiskIndicatorOk() (*MerchantRiskIndicator, bool) {
 	if o == nil || common.IsNil(o.MerchantRiskIndicator) {
 		return nil, false
 	}
@@ -1283,7 +1387,7 @@ func (o *PaymentDonationRequest) GetMerchantRiskIndicatorOk() (*MerchantRiskIndi
 }
 
 // HasMerchantRiskIndicator returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasMerchantRiskIndicator() bool {
+func (o *DonationPaymentRequest) HasMerchantRiskIndicator() bool {
 	if o != nil && !common.IsNil(o.MerchantRiskIndicator) {
 		return true
 	}
@@ -1292,12 +1396,12 @@ func (o *PaymentDonationRequest) HasMerchantRiskIndicator() bool {
 }
 
 // SetMerchantRiskIndicator gets a reference to the given MerchantRiskIndicator and assigns it to the MerchantRiskIndicator field.
-func (o *PaymentDonationRequest) SetMerchantRiskIndicator(v MerchantRiskIndicator) {
+func (o *DonationPaymentRequest) SetMerchantRiskIndicator(v MerchantRiskIndicator) {
 	o.MerchantRiskIndicator = &v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetMetadata() map[string]string {
+func (o *DonationPaymentRequest) GetMetadata() map[string]string {
 	if o == nil || common.IsNil(o.Metadata) {
 		var ret map[string]string
 		return ret
@@ -1307,7 +1411,7 @@ func (o *PaymentDonationRequest) GetMetadata() map[string]string {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetMetadataOk() (*map[string]string, bool) {
+func (o *DonationPaymentRequest) GetMetadataOk() (*map[string]string, bool) {
 	if o == nil || common.IsNil(o.Metadata) {
 		return nil, false
 	}
@@ -1315,7 +1419,7 @@ func (o *PaymentDonationRequest) GetMetadataOk() (*map[string]string, bool) {
 }
 
 // HasMetadata returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasMetadata() bool {
+func (o *DonationPaymentRequest) HasMetadata() bool {
 	if o != nil && !common.IsNil(o.Metadata) {
 		return true
 	}
@@ -1324,12 +1428,12 @@ func (o *PaymentDonationRequest) HasMetadata() bool {
 }
 
 // SetMetadata gets a reference to the given map[string]string and assigns it to the Metadata field.
-func (o *PaymentDonationRequest) SetMetadata(v map[string]string) {
+func (o *DonationPaymentRequest) SetMetadata(v map[string]string) {
 	o.Metadata = &v
 }
 
 // GetMpiData returns the MpiData field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetMpiData() ThreeDSecureData {
+func (o *DonationPaymentRequest) GetMpiData() ThreeDSecureData {
 	if o == nil || common.IsNil(o.MpiData) {
 		var ret ThreeDSecureData
 		return ret
@@ -1339,7 +1443,7 @@ func (o *PaymentDonationRequest) GetMpiData() ThreeDSecureData {
 
 // GetMpiDataOk returns a tuple with the MpiData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetMpiDataOk() (*ThreeDSecureData, bool) {
+func (o *DonationPaymentRequest) GetMpiDataOk() (*ThreeDSecureData, bool) {
 	if o == nil || common.IsNil(o.MpiData) {
 		return nil, false
 	}
@@ -1347,7 +1451,7 @@ func (o *PaymentDonationRequest) GetMpiDataOk() (*ThreeDSecureData, bool) {
 }
 
 // HasMpiData returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasMpiData() bool {
+func (o *DonationPaymentRequest) HasMpiData() bool {
 	if o != nil && !common.IsNil(o.MpiData) {
 		return true
 	}
@@ -1356,12 +1460,12 @@ func (o *PaymentDonationRequest) HasMpiData() bool {
 }
 
 // SetMpiData gets a reference to the given ThreeDSecureData and assigns it to the MpiData field.
-func (o *PaymentDonationRequest) SetMpiData(v ThreeDSecureData) {
+func (o *DonationPaymentRequest) SetMpiData(v ThreeDSecureData) {
 	o.MpiData = &v
 }
 
 // GetOrder returns the Order field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetOrder() EncryptedOrderData {
+func (o *DonationPaymentRequest) GetOrder() EncryptedOrderData {
 	if o == nil || common.IsNil(o.Order) {
 		var ret EncryptedOrderData
 		return ret
@@ -1371,7 +1475,7 @@ func (o *PaymentDonationRequest) GetOrder() EncryptedOrderData {
 
 // GetOrderOk returns a tuple with the Order field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetOrderOk() (*EncryptedOrderData, bool) {
+func (o *DonationPaymentRequest) GetOrderOk() (*EncryptedOrderData, bool) {
 	if o == nil || common.IsNil(o.Order) {
 		return nil, false
 	}
@@ -1379,7 +1483,7 @@ func (o *PaymentDonationRequest) GetOrderOk() (*EncryptedOrderData, bool) {
 }
 
 // HasOrder returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasOrder() bool {
+func (o *DonationPaymentRequest) HasOrder() bool {
 	if o != nil && !common.IsNil(o.Order) {
 		return true
 	}
@@ -1388,12 +1492,12 @@ func (o *PaymentDonationRequest) HasOrder() bool {
 }
 
 // SetOrder gets a reference to the given EncryptedOrderData and assigns it to the Order field.
-func (o *PaymentDonationRequest) SetOrder(v EncryptedOrderData) {
+func (o *DonationPaymentRequest) SetOrder(v EncryptedOrderData) {
 	o.Order = &v
 }
 
 // GetOrderReference returns the OrderReference field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetOrderReference() string {
+func (o *DonationPaymentRequest) GetOrderReference() string {
 	if o == nil || common.IsNil(o.OrderReference) {
 		var ret string
 		return ret
@@ -1403,7 +1507,7 @@ func (o *PaymentDonationRequest) GetOrderReference() string {
 
 // GetOrderReferenceOk returns a tuple with the OrderReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetOrderReferenceOk() (*string, bool) {
+func (o *DonationPaymentRequest) GetOrderReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.OrderReference) {
 		return nil, false
 	}
@@ -1411,7 +1515,7 @@ func (o *PaymentDonationRequest) GetOrderReferenceOk() (*string, bool) {
 }
 
 // HasOrderReference returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasOrderReference() bool {
+func (o *DonationPaymentRequest) HasOrderReference() bool {
 	if o != nil && !common.IsNil(o.OrderReference) {
 		return true
 	}
@@ -1420,12 +1524,12 @@ func (o *PaymentDonationRequest) HasOrderReference() bool {
 }
 
 // SetOrderReference gets a reference to the given string and assigns it to the OrderReference field.
-func (o *PaymentDonationRequest) SetOrderReference(v string) {
+func (o *DonationPaymentRequest) SetOrderReference(v string) {
 	o.OrderReference = &v
 }
 
 // GetOrigin returns the Origin field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetOrigin() string {
+func (o *DonationPaymentRequest) GetOrigin() string {
 	if o == nil || common.IsNil(o.Origin) {
 		var ret string
 		return ret
@@ -1435,7 +1539,7 @@ func (o *PaymentDonationRequest) GetOrigin() string {
 
 // GetOriginOk returns a tuple with the Origin field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetOriginOk() (*string, bool) {
+func (o *DonationPaymentRequest) GetOriginOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Origin) {
 		return nil, false
 	}
@@ -1443,7 +1547,7 @@ func (o *PaymentDonationRequest) GetOriginOk() (*string, bool) {
 }
 
 // HasOrigin returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasOrigin() bool {
+func (o *DonationPaymentRequest) HasOrigin() bool {
 	if o != nil && !common.IsNil(o.Origin) {
 		return true
 	}
@@ -1452,12 +1556,12 @@ func (o *PaymentDonationRequest) HasOrigin() bool {
 }
 
 // SetOrigin gets a reference to the given string and assigns it to the Origin field.
-func (o *PaymentDonationRequest) SetOrigin(v string) {
+func (o *DonationPaymentRequest) SetOrigin(v string) {
 	o.Origin = &v
 }
 
 // GetPaymentMethod returns the PaymentMethod field value
-func (o *PaymentDonationRequest) GetPaymentMethod() CheckoutPaymentMethod {
+func (o *DonationPaymentRequest) GetPaymentMethod() CheckoutPaymentMethod {
 	if o == nil {
 		var ret CheckoutPaymentMethod
 		return ret
@@ -1468,7 +1572,7 @@ func (o *PaymentDonationRequest) GetPaymentMethod() CheckoutPaymentMethod {
 
 // GetPaymentMethodOk returns a tuple with the PaymentMethod field value
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetPaymentMethodOk() (*CheckoutPaymentMethod, bool) {
+func (o *DonationPaymentRequest) GetPaymentMethodOk() (*CheckoutPaymentMethod, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1476,12 +1580,12 @@ func (o *PaymentDonationRequest) GetPaymentMethodOk() (*CheckoutPaymentMethod, b
 }
 
 // SetPaymentMethod sets field value
-func (o *PaymentDonationRequest) SetPaymentMethod(v CheckoutPaymentMethod) {
+func (o *DonationPaymentRequest) SetPaymentMethod(v CheckoutPaymentMethod) {
 	o.PaymentMethod = v
 }
 
 // GetPlatformChargebackLogic returns the PlatformChargebackLogic field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetPlatformChargebackLogic() PlatformChargebackLogic {
+func (o *DonationPaymentRequest) GetPlatformChargebackLogic() PlatformChargebackLogic {
 	if o == nil || common.IsNil(o.PlatformChargebackLogic) {
 		var ret PlatformChargebackLogic
 		return ret
@@ -1491,7 +1595,7 @@ func (o *PaymentDonationRequest) GetPlatformChargebackLogic() PlatformChargeback
 
 // GetPlatformChargebackLogicOk returns a tuple with the PlatformChargebackLogic field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetPlatformChargebackLogicOk() (*PlatformChargebackLogic, bool) {
+func (o *DonationPaymentRequest) GetPlatformChargebackLogicOk() (*PlatformChargebackLogic, bool) {
 	if o == nil || common.IsNil(o.PlatformChargebackLogic) {
 		return nil, false
 	}
@@ -1499,7 +1603,7 @@ func (o *PaymentDonationRequest) GetPlatformChargebackLogicOk() (*PlatformCharge
 }
 
 // HasPlatformChargebackLogic returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasPlatformChargebackLogic() bool {
+func (o *DonationPaymentRequest) HasPlatformChargebackLogic() bool {
 	if o != nil && !common.IsNil(o.PlatformChargebackLogic) {
 		return true
 	}
@@ -1508,12 +1612,12 @@ func (o *PaymentDonationRequest) HasPlatformChargebackLogic() bool {
 }
 
 // SetPlatformChargebackLogic gets a reference to the given PlatformChargebackLogic and assigns it to the PlatformChargebackLogic field.
-func (o *PaymentDonationRequest) SetPlatformChargebackLogic(v PlatformChargebackLogic) {
+func (o *DonationPaymentRequest) SetPlatformChargebackLogic(v PlatformChargebackLogic) {
 	o.PlatformChargebackLogic = &v
 }
 
 // GetRecurringExpiry returns the RecurringExpiry field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetRecurringExpiry() string {
+func (o *DonationPaymentRequest) GetRecurringExpiry() string {
 	if o == nil || common.IsNil(o.RecurringExpiry) {
 		var ret string
 		return ret
@@ -1523,7 +1627,7 @@ func (o *PaymentDonationRequest) GetRecurringExpiry() string {
 
 // GetRecurringExpiryOk returns a tuple with the RecurringExpiry field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetRecurringExpiryOk() (*string, bool) {
+func (o *DonationPaymentRequest) GetRecurringExpiryOk() (*string, bool) {
 	if o == nil || common.IsNil(o.RecurringExpiry) {
 		return nil, false
 	}
@@ -1531,7 +1635,7 @@ func (o *PaymentDonationRequest) GetRecurringExpiryOk() (*string, bool) {
 }
 
 // HasRecurringExpiry returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasRecurringExpiry() bool {
+func (o *DonationPaymentRequest) HasRecurringExpiry() bool {
 	if o != nil && !common.IsNil(o.RecurringExpiry) {
 		return true
 	}
@@ -1540,12 +1644,12 @@ func (o *PaymentDonationRequest) HasRecurringExpiry() bool {
 }
 
 // SetRecurringExpiry gets a reference to the given string and assigns it to the RecurringExpiry field.
-func (o *PaymentDonationRequest) SetRecurringExpiry(v string) {
+func (o *DonationPaymentRequest) SetRecurringExpiry(v string) {
 	o.RecurringExpiry = &v
 }
 
 // GetRecurringFrequency returns the RecurringFrequency field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetRecurringFrequency() string {
+func (o *DonationPaymentRequest) GetRecurringFrequency() string {
 	if o == nil || common.IsNil(o.RecurringFrequency) {
 		var ret string
 		return ret
@@ -1555,7 +1659,7 @@ func (o *PaymentDonationRequest) GetRecurringFrequency() string {
 
 // GetRecurringFrequencyOk returns a tuple with the RecurringFrequency field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetRecurringFrequencyOk() (*string, bool) {
+func (o *DonationPaymentRequest) GetRecurringFrequencyOk() (*string, bool) {
 	if o == nil || common.IsNil(o.RecurringFrequency) {
 		return nil, false
 	}
@@ -1563,7 +1667,7 @@ func (o *PaymentDonationRequest) GetRecurringFrequencyOk() (*string, bool) {
 }
 
 // HasRecurringFrequency returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasRecurringFrequency() bool {
+func (o *DonationPaymentRequest) HasRecurringFrequency() bool {
 	if o != nil && !common.IsNil(o.RecurringFrequency) {
 		return true
 	}
@@ -1572,12 +1676,12 @@ func (o *PaymentDonationRequest) HasRecurringFrequency() bool {
 }
 
 // SetRecurringFrequency gets a reference to the given string and assigns it to the RecurringFrequency field.
-func (o *PaymentDonationRequest) SetRecurringFrequency(v string) {
+func (o *DonationPaymentRequest) SetRecurringFrequency(v string) {
 	o.RecurringFrequency = &v
 }
 
 // GetRecurringProcessingModel returns the RecurringProcessingModel field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetRecurringProcessingModel() string {
+func (o *DonationPaymentRequest) GetRecurringProcessingModel() string {
 	if o == nil || common.IsNil(o.RecurringProcessingModel) {
 		var ret string
 		return ret
@@ -1587,7 +1691,7 @@ func (o *PaymentDonationRequest) GetRecurringProcessingModel() string {
 
 // GetRecurringProcessingModelOk returns a tuple with the RecurringProcessingModel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetRecurringProcessingModelOk() (*string, bool) {
+func (o *DonationPaymentRequest) GetRecurringProcessingModelOk() (*string, bool) {
 	if o == nil || common.IsNil(o.RecurringProcessingModel) {
 		return nil, false
 	}
@@ -1595,7 +1699,7 @@ func (o *PaymentDonationRequest) GetRecurringProcessingModelOk() (*string, bool)
 }
 
 // HasRecurringProcessingModel returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasRecurringProcessingModel() bool {
+func (o *DonationPaymentRequest) HasRecurringProcessingModel() bool {
 	if o != nil && !common.IsNil(o.RecurringProcessingModel) {
 		return true
 	}
@@ -1604,12 +1708,12 @@ func (o *PaymentDonationRequest) HasRecurringProcessingModel() bool {
 }
 
 // SetRecurringProcessingModel gets a reference to the given string and assigns it to the RecurringProcessingModel field.
-func (o *PaymentDonationRequest) SetRecurringProcessingModel(v string) {
+func (o *DonationPaymentRequest) SetRecurringProcessingModel(v string) {
 	o.RecurringProcessingModel = &v
 }
 
 // GetRedirectFromIssuerMethod returns the RedirectFromIssuerMethod field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetRedirectFromIssuerMethod() string {
+func (o *DonationPaymentRequest) GetRedirectFromIssuerMethod() string {
 	if o == nil || common.IsNil(o.RedirectFromIssuerMethod) {
 		var ret string
 		return ret
@@ -1619,7 +1723,7 @@ func (o *PaymentDonationRequest) GetRedirectFromIssuerMethod() string {
 
 // GetRedirectFromIssuerMethodOk returns a tuple with the RedirectFromIssuerMethod field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetRedirectFromIssuerMethodOk() (*string, bool) {
+func (o *DonationPaymentRequest) GetRedirectFromIssuerMethodOk() (*string, bool) {
 	if o == nil || common.IsNil(o.RedirectFromIssuerMethod) {
 		return nil, false
 	}
@@ -1627,7 +1731,7 @@ func (o *PaymentDonationRequest) GetRedirectFromIssuerMethodOk() (*string, bool)
 }
 
 // HasRedirectFromIssuerMethod returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasRedirectFromIssuerMethod() bool {
+func (o *DonationPaymentRequest) HasRedirectFromIssuerMethod() bool {
 	if o != nil && !common.IsNil(o.RedirectFromIssuerMethod) {
 		return true
 	}
@@ -1636,12 +1740,12 @@ func (o *PaymentDonationRequest) HasRedirectFromIssuerMethod() bool {
 }
 
 // SetRedirectFromIssuerMethod gets a reference to the given string and assigns it to the RedirectFromIssuerMethod field.
-func (o *PaymentDonationRequest) SetRedirectFromIssuerMethod(v string) {
+func (o *DonationPaymentRequest) SetRedirectFromIssuerMethod(v string) {
 	o.RedirectFromIssuerMethod = &v
 }
 
 // GetRedirectToIssuerMethod returns the RedirectToIssuerMethod field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetRedirectToIssuerMethod() string {
+func (o *DonationPaymentRequest) GetRedirectToIssuerMethod() string {
 	if o == nil || common.IsNil(o.RedirectToIssuerMethod) {
 		var ret string
 		return ret
@@ -1651,7 +1755,7 @@ func (o *PaymentDonationRequest) GetRedirectToIssuerMethod() string {
 
 // GetRedirectToIssuerMethodOk returns a tuple with the RedirectToIssuerMethod field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetRedirectToIssuerMethodOk() (*string, bool) {
+func (o *DonationPaymentRequest) GetRedirectToIssuerMethodOk() (*string, bool) {
 	if o == nil || common.IsNil(o.RedirectToIssuerMethod) {
 		return nil, false
 	}
@@ -1659,7 +1763,7 @@ func (o *PaymentDonationRequest) GetRedirectToIssuerMethodOk() (*string, bool) {
 }
 
 // HasRedirectToIssuerMethod returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasRedirectToIssuerMethod() bool {
+func (o *DonationPaymentRequest) HasRedirectToIssuerMethod() bool {
 	if o != nil && !common.IsNil(o.RedirectToIssuerMethod) {
 		return true
 	}
@@ -1668,12 +1772,12 @@ func (o *PaymentDonationRequest) HasRedirectToIssuerMethod() bool {
 }
 
 // SetRedirectToIssuerMethod gets a reference to the given string and assigns it to the RedirectToIssuerMethod field.
-func (o *PaymentDonationRequest) SetRedirectToIssuerMethod(v string) {
+func (o *DonationPaymentRequest) SetRedirectToIssuerMethod(v string) {
 	o.RedirectToIssuerMethod = &v
 }
 
 // GetReference returns the Reference field value
-func (o *PaymentDonationRequest) GetReference() string {
+func (o *DonationPaymentRequest) GetReference() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -1684,7 +1788,7 @@ func (o *PaymentDonationRequest) GetReference() string {
 
 // GetReferenceOk returns a tuple with the Reference field value
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetReferenceOk() (*string, bool) {
+func (o *DonationPaymentRequest) GetReferenceOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1692,12 +1796,12 @@ func (o *PaymentDonationRequest) GetReferenceOk() (*string, bool) {
 }
 
 // SetReference sets field value
-func (o *PaymentDonationRequest) SetReference(v string) {
+func (o *DonationPaymentRequest) SetReference(v string) {
 	o.Reference = v
 }
 
 // GetReturnUrl returns the ReturnUrl field value
-func (o *PaymentDonationRequest) GetReturnUrl() string {
+func (o *DonationPaymentRequest) GetReturnUrl() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -1708,7 +1812,7 @@ func (o *PaymentDonationRequest) GetReturnUrl() string {
 
 // GetReturnUrlOk returns a tuple with the ReturnUrl field value
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetReturnUrlOk() (*string, bool) {
+func (o *DonationPaymentRequest) GetReturnUrlOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1716,12 +1820,12 @@ func (o *PaymentDonationRequest) GetReturnUrlOk() (*string, bool) {
 }
 
 // SetReturnUrl sets field value
-func (o *PaymentDonationRequest) SetReturnUrl(v string) {
+func (o *DonationPaymentRequest) SetReturnUrl(v string) {
 	o.ReturnUrl = v
 }
 
 // GetRiskData returns the RiskData field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetRiskData() RiskData {
+func (o *DonationPaymentRequest) GetRiskData() RiskData {
 	if o == nil || common.IsNil(o.RiskData) {
 		var ret RiskData
 		return ret
@@ -1731,7 +1835,7 @@ func (o *PaymentDonationRequest) GetRiskData() RiskData {
 
 // GetRiskDataOk returns a tuple with the RiskData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetRiskDataOk() (*RiskData, bool) {
+func (o *DonationPaymentRequest) GetRiskDataOk() (*RiskData, bool) {
 	if o == nil || common.IsNil(o.RiskData) {
 		return nil, false
 	}
@@ -1739,7 +1843,7 @@ func (o *PaymentDonationRequest) GetRiskDataOk() (*RiskData, bool) {
 }
 
 // HasRiskData returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasRiskData() bool {
+func (o *DonationPaymentRequest) HasRiskData() bool {
 	if o != nil && !common.IsNil(o.RiskData) {
 		return true
 	}
@@ -1748,12 +1852,12 @@ func (o *PaymentDonationRequest) HasRiskData() bool {
 }
 
 // SetRiskData gets a reference to the given RiskData and assigns it to the RiskData field.
-func (o *PaymentDonationRequest) SetRiskData(v RiskData) {
+func (o *DonationPaymentRequest) SetRiskData(v RiskData) {
 	o.RiskData = &v
 }
 
 // GetSessionValidity returns the SessionValidity field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetSessionValidity() string {
+func (o *DonationPaymentRequest) GetSessionValidity() string {
 	if o == nil || common.IsNil(o.SessionValidity) {
 		var ret string
 		return ret
@@ -1763,7 +1867,7 @@ func (o *PaymentDonationRequest) GetSessionValidity() string {
 
 // GetSessionValidityOk returns a tuple with the SessionValidity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetSessionValidityOk() (*string, bool) {
+func (o *DonationPaymentRequest) GetSessionValidityOk() (*string, bool) {
 	if o == nil || common.IsNil(o.SessionValidity) {
 		return nil, false
 	}
@@ -1771,7 +1875,7 @@ func (o *PaymentDonationRequest) GetSessionValidityOk() (*string, bool) {
 }
 
 // HasSessionValidity returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasSessionValidity() bool {
+func (o *DonationPaymentRequest) HasSessionValidity() bool {
 	if o != nil && !common.IsNil(o.SessionValidity) {
 		return true
 	}
@@ -1780,12 +1884,12 @@ func (o *PaymentDonationRequest) HasSessionValidity() bool {
 }
 
 // SetSessionValidity gets a reference to the given string and assigns it to the SessionValidity field.
-func (o *PaymentDonationRequest) SetSessionValidity(v string) {
+func (o *DonationPaymentRequest) SetSessionValidity(v string) {
 	o.SessionValidity = &v
 }
 
 // GetShopperEmail returns the ShopperEmail field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetShopperEmail() string {
+func (o *DonationPaymentRequest) GetShopperEmail() string {
 	if o == nil || common.IsNil(o.ShopperEmail) {
 		var ret string
 		return ret
@@ -1795,7 +1899,7 @@ func (o *PaymentDonationRequest) GetShopperEmail() string {
 
 // GetShopperEmailOk returns a tuple with the ShopperEmail field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetShopperEmailOk() (*string, bool) {
+func (o *DonationPaymentRequest) GetShopperEmailOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ShopperEmail) {
 		return nil, false
 	}
@@ -1803,7 +1907,7 @@ func (o *PaymentDonationRequest) GetShopperEmailOk() (*string, bool) {
 }
 
 // HasShopperEmail returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasShopperEmail() bool {
+func (o *DonationPaymentRequest) HasShopperEmail() bool {
 	if o != nil && !common.IsNil(o.ShopperEmail) {
 		return true
 	}
@@ -1812,12 +1916,12 @@ func (o *PaymentDonationRequest) HasShopperEmail() bool {
 }
 
 // SetShopperEmail gets a reference to the given string and assigns it to the ShopperEmail field.
-func (o *PaymentDonationRequest) SetShopperEmail(v string) {
+func (o *DonationPaymentRequest) SetShopperEmail(v string) {
 	o.ShopperEmail = &v
 }
 
 // GetShopperIP returns the ShopperIP field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetShopperIP() string {
+func (o *DonationPaymentRequest) GetShopperIP() string {
 	if o == nil || common.IsNil(o.ShopperIP) {
 		var ret string
 		return ret
@@ -1827,7 +1931,7 @@ func (o *PaymentDonationRequest) GetShopperIP() string {
 
 // GetShopperIPOk returns a tuple with the ShopperIP field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetShopperIPOk() (*string, bool) {
+func (o *DonationPaymentRequest) GetShopperIPOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ShopperIP) {
 		return nil, false
 	}
@@ -1835,7 +1939,7 @@ func (o *PaymentDonationRequest) GetShopperIPOk() (*string, bool) {
 }
 
 // HasShopperIP returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasShopperIP() bool {
+func (o *DonationPaymentRequest) HasShopperIP() bool {
 	if o != nil && !common.IsNil(o.ShopperIP) {
 		return true
 	}
@@ -1844,12 +1948,12 @@ func (o *PaymentDonationRequest) HasShopperIP() bool {
 }
 
 // SetShopperIP gets a reference to the given string and assigns it to the ShopperIP field.
-func (o *PaymentDonationRequest) SetShopperIP(v string) {
+func (o *DonationPaymentRequest) SetShopperIP(v string) {
 	o.ShopperIP = &v
 }
 
 // GetShopperInteraction returns the ShopperInteraction field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetShopperInteraction() string {
+func (o *DonationPaymentRequest) GetShopperInteraction() string {
 	if o == nil || common.IsNil(o.ShopperInteraction) {
 		var ret string
 		return ret
@@ -1859,7 +1963,7 @@ func (o *PaymentDonationRequest) GetShopperInteraction() string {
 
 // GetShopperInteractionOk returns a tuple with the ShopperInteraction field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetShopperInteractionOk() (*string, bool) {
+func (o *DonationPaymentRequest) GetShopperInteractionOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ShopperInteraction) {
 		return nil, false
 	}
@@ -1867,7 +1971,7 @@ func (o *PaymentDonationRequest) GetShopperInteractionOk() (*string, bool) {
 }
 
 // HasShopperInteraction returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasShopperInteraction() bool {
+func (o *DonationPaymentRequest) HasShopperInteraction() bool {
 	if o != nil && !common.IsNil(o.ShopperInteraction) {
 		return true
 	}
@@ -1876,12 +1980,12 @@ func (o *PaymentDonationRequest) HasShopperInteraction() bool {
 }
 
 // SetShopperInteraction gets a reference to the given string and assigns it to the ShopperInteraction field.
-func (o *PaymentDonationRequest) SetShopperInteraction(v string) {
+func (o *DonationPaymentRequest) SetShopperInteraction(v string) {
 	o.ShopperInteraction = &v
 }
 
 // GetShopperLocale returns the ShopperLocale field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetShopperLocale() string {
+func (o *DonationPaymentRequest) GetShopperLocale() string {
 	if o == nil || common.IsNil(o.ShopperLocale) {
 		var ret string
 		return ret
@@ -1891,7 +1995,7 @@ func (o *PaymentDonationRequest) GetShopperLocale() string {
 
 // GetShopperLocaleOk returns a tuple with the ShopperLocale field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetShopperLocaleOk() (*string, bool) {
+func (o *DonationPaymentRequest) GetShopperLocaleOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ShopperLocale) {
 		return nil, false
 	}
@@ -1899,7 +2003,7 @@ func (o *PaymentDonationRequest) GetShopperLocaleOk() (*string, bool) {
 }
 
 // HasShopperLocale returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasShopperLocale() bool {
+func (o *DonationPaymentRequest) HasShopperLocale() bool {
 	if o != nil && !common.IsNil(o.ShopperLocale) {
 		return true
 	}
@@ -1908,12 +2012,12 @@ func (o *PaymentDonationRequest) HasShopperLocale() bool {
 }
 
 // SetShopperLocale gets a reference to the given string and assigns it to the ShopperLocale field.
-func (o *PaymentDonationRequest) SetShopperLocale(v string) {
+func (o *DonationPaymentRequest) SetShopperLocale(v string) {
 	o.ShopperLocale = &v
 }
 
 // GetShopperName returns the ShopperName field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetShopperName() Name {
+func (o *DonationPaymentRequest) GetShopperName() Name {
 	if o == nil || common.IsNil(o.ShopperName) {
 		var ret Name
 		return ret
@@ -1923,7 +2027,7 @@ func (o *PaymentDonationRequest) GetShopperName() Name {
 
 // GetShopperNameOk returns a tuple with the ShopperName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetShopperNameOk() (*Name, bool) {
+func (o *DonationPaymentRequest) GetShopperNameOk() (*Name, bool) {
 	if o == nil || common.IsNil(o.ShopperName) {
 		return nil, false
 	}
@@ -1931,7 +2035,7 @@ func (o *PaymentDonationRequest) GetShopperNameOk() (*Name, bool) {
 }
 
 // HasShopperName returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasShopperName() bool {
+func (o *DonationPaymentRequest) HasShopperName() bool {
 	if o != nil && !common.IsNil(o.ShopperName) {
 		return true
 	}
@@ -1940,12 +2044,12 @@ func (o *PaymentDonationRequest) HasShopperName() bool {
 }
 
 // SetShopperName gets a reference to the given Name and assigns it to the ShopperName field.
-func (o *PaymentDonationRequest) SetShopperName(v Name) {
+func (o *DonationPaymentRequest) SetShopperName(v Name) {
 	o.ShopperName = &v
 }
 
 // GetShopperReference returns the ShopperReference field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetShopperReference() string {
+func (o *DonationPaymentRequest) GetShopperReference() string {
 	if o == nil || common.IsNil(o.ShopperReference) {
 		var ret string
 		return ret
@@ -1955,7 +2059,7 @@ func (o *PaymentDonationRequest) GetShopperReference() string {
 
 // GetShopperReferenceOk returns a tuple with the ShopperReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetShopperReferenceOk() (*string, bool) {
+func (o *DonationPaymentRequest) GetShopperReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ShopperReference) {
 		return nil, false
 	}
@@ -1963,7 +2067,7 @@ func (o *PaymentDonationRequest) GetShopperReferenceOk() (*string, bool) {
 }
 
 // HasShopperReference returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasShopperReference() bool {
+func (o *DonationPaymentRequest) HasShopperReference() bool {
 	if o != nil && !common.IsNil(o.ShopperReference) {
 		return true
 	}
@@ -1972,12 +2076,12 @@ func (o *PaymentDonationRequest) HasShopperReference() bool {
 }
 
 // SetShopperReference gets a reference to the given string and assigns it to the ShopperReference field.
-func (o *PaymentDonationRequest) SetShopperReference(v string) {
+func (o *DonationPaymentRequest) SetShopperReference(v string) {
 	o.ShopperReference = &v
 }
 
 // GetShopperStatement returns the ShopperStatement field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetShopperStatement() string {
+func (o *DonationPaymentRequest) GetShopperStatement() string {
 	if o == nil || common.IsNil(o.ShopperStatement) {
 		var ret string
 		return ret
@@ -1987,7 +2091,7 @@ func (o *PaymentDonationRequest) GetShopperStatement() string {
 
 // GetShopperStatementOk returns a tuple with the ShopperStatement field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetShopperStatementOk() (*string, bool) {
+func (o *DonationPaymentRequest) GetShopperStatementOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ShopperStatement) {
 		return nil, false
 	}
@@ -1995,7 +2099,7 @@ func (o *PaymentDonationRequest) GetShopperStatementOk() (*string, bool) {
 }
 
 // HasShopperStatement returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasShopperStatement() bool {
+func (o *DonationPaymentRequest) HasShopperStatement() bool {
 	if o != nil && !common.IsNil(o.ShopperStatement) {
 		return true
 	}
@@ -2004,12 +2108,12 @@ func (o *PaymentDonationRequest) HasShopperStatement() bool {
 }
 
 // SetShopperStatement gets a reference to the given string and assigns it to the ShopperStatement field.
-func (o *PaymentDonationRequest) SetShopperStatement(v string) {
+func (o *DonationPaymentRequest) SetShopperStatement(v string) {
 	o.ShopperStatement = &v
 }
 
 // GetSocialSecurityNumber returns the SocialSecurityNumber field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetSocialSecurityNumber() string {
+func (o *DonationPaymentRequest) GetSocialSecurityNumber() string {
 	if o == nil || common.IsNil(o.SocialSecurityNumber) {
 		var ret string
 		return ret
@@ -2019,7 +2123,7 @@ func (o *PaymentDonationRequest) GetSocialSecurityNumber() string {
 
 // GetSocialSecurityNumberOk returns a tuple with the SocialSecurityNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetSocialSecurityNumberOk() (*string, bool) {
+func (o *DonationPaymentRequest) GetSocialSecurityNumberOk() (*string, bool) {
 	if o == nil || common.IsNil(o.SocialSecurityNumber) {
 		return nil, false
 	}
@@ -2027,7 +2131,7 @@ func (o *PaymentDonationRequest) GetSocialSecurityNumberOk() (*string, bool) {
 }
 
 // HasSocialSecurityNumber returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasSocialSecurityNumber() bool {
+func (o *DonationPaymentRequest) HasSocialSecurityNumber() bool {
 	if o != nil && !common.IsNil(o.SocialSecurityNumber) {
 		return true
 	}
@@ -2036,12 +2140,12 @@ func (o *PaymentDonationRequest) HasSocialSecurityNumber() bool {
 }
 
 // SetSocialSecurityNumber gets a reference to the given string and assigns it to the SocialSecurityNumber field.
-func (o *PaymentDonationRequest) SetSocialSecurityNumber(v string) {
+func (o *DonationPaymentRequest) SetSocialSecurityNumber(v string) {
 	o.SocialSecurityNumber = &v
 }
 
 // GetSplits returns the Splits field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetSplits() []Split {
+func (o *DonationPaymentRequest) GetSplits() []Split {
 	if o == nil || common.IsNil(o.Splits) {
 		var ret []Split
 		return ret
@@ -2051,7 +2155,7 @@ func (o *PaymentDonationRequest) GetSplits() []Split {
 
 // GetSplitsOk returns a tuple with the Splits field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetSplitsOk() ([]Split, bool) {
+func (o *DonationPaymentRequest) GetSplitsOk() ([]Split, bool) {
 	if o == nil || common.IsNil(o.Splits) {
 		return nil, false
 	}
@@ -2059,7 +2163,7 @@ func (o *PaymentDonationRequest) GetSplitsOk() ([]Split, bool) {
 }
 
 // HasSplits returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasSplits() bool {
+func (o *DonationPaymentRequest) HasSplits() bool {
 	if o != nil && !common.IsNil(o.Splits) {
 		return true
 	}
@@ -2068,12 +2172,12 @@ func (o *PaymentDonationRequest) HasSplits() bool {
 }
 
 // SetSplits gets a reference to the given []Split and assigns it to the Splits field.
-func (o *PaymentDonationRequest) SetSplits(v []Split) {
+func (o *DonationPaymentRequest) SetSplits(v []Split) {
 	o.Splits = v
 }
 
 // GetStore returns the Store field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetStore() string {
+func (o *DonationPaymentRequest) GetStore() string {
 	if o == nil || common.IsNil(o.Store) {
 		var ret string
 		return ret
@@ -2083,7 +2187,7 @@ func (o *PaymentDonationRequest) GetStore() string {
 
 // GetStoreOk returns a tuple with the Store field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetStoreOk() (*string, bool) {
+func (o *DonationPaymentRequest) GetStoreOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Store) {
 		return nil, false
 	}
@@ -2091,7 +2195,7 @@ func (o *PaymentDonationRequest) GetStoreOk() (*string, bool) {
 }
 
 // HasStore returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasStore() bool {
+func (o *DonationPaymentRequest) HasStore() bool {
 	if o != nil && !common.IsNil(o.Store) {
 		return true
 	}
@@ -2100,12 +2204,12 @@ func (o *PaymentDonationRequest) HasStore() bool {
 }
 
 // SetStore gets a reference to the given string and assigns it to the Store field.
-func (o *PaymentDonationRequest) SetStore(v string) {
+func (o *DonationPaymentRequest) SetStore(v string) {
 	o.Store = &v
 }
 
 // GetStorePaymentMethod returns the StorePaymentMethod field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetStorePaymentMethod() bool {
+func (o *DonationPaymentRequest) GetStorePaymentMethod() bool {
 	if o == nil || common.IsNil(o.StorePaymentMethod) {
 		var ret bool
 		return ret
@@ -2115,7 +2219,7 @@ func (o *PaymentDonationRequest) GetStorePaymentMethod() bool {
 
 // GetStorePaymentMethodOk returns a tuple with the StorePaymentMethod field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetStorePaymentMethodOk() (*bool, bool) {
+func (o *DonationPaymentRequest) GetStorePaymentMethodOk() (*bool, bool) {
 	if o == nil || common.IsNil(o.StorePaymentMethod) {
 		return nil, false
 	}
@@ -2123,7 +2227,7 @@ func (o *PaymentDonationRequest) GetStorePaymentMethodOk() (*bool, bool) {
 }
 
 // HasStorePaymentMethod returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasStorePaymentMethod() bool {
+func (o *DonationPaymentRequest) HasStorePaymentMethod() bool {
 	if o != nil && !common.IsNil(o.StorePaymentMethod) {
 		return true
 	}
@@ -2132,12 +2236,12 @@ func (o *PaymentDonationRequest) HasStorePaymentMethod() bool {
 }
 
 // SetStorePaymentMethod gets a reference to the given bool and assigns it to the StorePaymentMethod field.
-func (o *PaymentDonationRequest) SetStorePaymentMethod(v bool) {
+func (o *DonationPaymentRequest) SetStorePaymentMethod(v bool) {
 	o.StorePaymentMethod = &v
 }
 
 // GetTelephoneNumber returns the TelephoneNumber field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetTelephoneNumber() string {
+func (o *DonationPaymentRequest) GetTelephoneNumber() string {
 	if o == nil || common.IsNil(o.TelephoneNumber) {
 		var ret string
 		return ret
@@ -2147,7 +2251,7 @@ func (o *PaymentDonationRequest) GetTelephoneNumber() string {
 
 // GetTelephoneNumberOk returns a tuple with the TelephoneNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetTelephoneNumberOk() (*string, bool) {
+func (o *DonationPaymentRequest) GetTelephoneNumberOk() (*string, bool) {
 	if o == nil || common.IsNil(o.TelephoneNumber) {
 		return nil, false
 	}
@@ -2155,7 +2259,7 @@ func (o *PaymentDonationRequest) GetTelephoneNumberOk() (*string, bool) {
 }
 
 // HasTelephoneNumber returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasTelephoneNumber() bool {
+func (o *DonationPaymentRequest) HasTelephoneNumber() bool {
 	if o != nil && !common.IsNil(o.TelephoneNumber) {
 		return true
 	}
@@ -2164,14 +2268,14 @@ func (o *PaymentDonationRequest) HasTelephoneNumber() bool {
 }
 
 // SetTelephoneNumber gets a reference to the given string and assigns it to the TelephoneNumber field.
-func (o *PaymentDonationRequest) SetTelephoneNumber(v string) {
+func (o *DonationPaymentRequest) SetTelephoneNumber(v string) {
 	o.TelephoneNumber = &v
 }
 
 // GetThreeDS2RequestData returns the ThreeDS2RequestData field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetThreeDS2RequestData() ThreeDS2RequestData {
+func (o *DonationPaymentRequest) GetThreeDS2RequestData() ThreeDS2RequestData2 {
 	if o == nil || common.IsNil(o.ThreeDS2RequestData) {
-		var ret ThreeDS2RequestData
+		var ret ThreeDS2RequestData2
 		return ret
 	}
 	return *o.ThreeDS2RequestData
@@ -2179,7 +2283,7 @@ func (o *PaymentDonationRequest) GetThreeDS2RequestData() ThreeDS2RequestData {
 
 // GetThreeDS2RequestDataOk returns a tuple with the ThreeDS2RequestData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetThreeDS2RequestDataOk() (*ThreeDS2RequestData, bool) {
+func (o *DonationPaymentRequest) GetThreeDS2RequestDataOk() (*ThreeDS2RequestData2, bool) {
 	if o == nil || common.IsNil(o.ThreeDS2RequestData) {
 		return nil, false
 	}
@@ -2187,7 +2291,7 @@ func (o *PaymentDonationRequest) GetThreeDS2RequestDataOk() (*ThreeDS2RequestDat
 }
 
 // HasThreeDS2RequestData returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasThreeDS2RequestData() bool {
+func (o *DonationPaymentRequest) HasThreeDS2RequestData() bool {
 	if o != nil && !common.IsNil(o.ThreeDS2RequestData) {
 		return true
 	}
@@ -2195,14 +2299,14 @@ func (o *PaymentDonationRequest) HasThreeDS2RequestData() bool {
 	return false
 }
 
-// SetThreeDS2RequestData gets a reference to the given ThreeDS2RequestData and assigns it to the ThreeDS2RequestData field.
-func (o *PaymentDonationRequest) SetThreeDS2RequestData(v ThreeDS2RequestData) {
+// SetThreeDS2RequestData gets a reference to the given ThreeDS2RequestData2 and assigns it to the ThreeDS2RequestData field.
+func (o *DonationPaymentRequest) SetThreeDS2RequestData(v ThreeDS2RequestData2) {
 	o.ThreeDS2RequestData = &v
 }
 
 // GetThreeDSAuthenticationOnly returns the ThreeDSAuthenticationOnly field value if set, zero value otherwise.
 // Deprecated
-func (o *PaymentDonationRequest) GetThreeDSAuthenticationOnly() bool {
+func (o *DonationPaymentRequest) GetThreeDSAuthenticationOnly() bool {
 	if o == nil || common.IsNil(o.ThreeDSAuthenticationOnly) {
 		var ret bool
 		return ret
@@ -2213,7 +2317,7 @@ func (o *PaymentDonationRequest) GetThreeDSAuthenticationOnly() bool {
 // GetThreeDSAuthenticationOnlyOk returns a tuple with the ThreeDSAuthenticationOnly field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // Deprecated
-func (o *PaymentDonationRequest) GetThreeDSAuthenticationOnlyOk() (*bool, bool) {
+func (o *DonationPaymentRequest) GetThreeDSAuthenticationOnlyOk() (*bool, bool) {
 	if o == nil || common.IsNil(o.ThreeDSAuthenticationOnly) {
 		return nil, false
 	}
@@ -2221,7 +2325,7 @@ func (o *PaymentDonationRequest) GetThreeDSAuthenticationOnlyOk() (*bool, bool) 
 }
 
 // HasThreeDSAuthenticationOnly returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasThreeDSAuthenticationOnly() bool {
+func (o *DonationPaymentRequest) HasThreeDSAuthenticationOnly() bool {
 	if o != nil && !common.IsNil(o.ThreeDSAuthenticationOnly) {
 		return true
 	}
@@ -2231,12 +2335,12 @@ func (o *PaymentDonationRequest) HasThreeDSAuthenticationOnly() bool {
 
 // SetThreeDSAuthenticationOnly gets a reference to the given bool and assigns it to the ThreeDSAuthenticationOnly field.
 // Deprecated
-func (o *PaymentDonationRequest) SetThreeDSAuthenticationOnly(v bool) {
+func (o *DonationPaymentRequest) SetThreeDSAuthenticationOnly(v bool) {
 	o.ThreeDSAuthenticationOnly = &v
 }
 
 // GetTrustedShopper returns the TrustedShopper field value if set, zero value otherwise.
-func (o *PaymentDonationRequest) GetTrustedShopper() bool {
+func (o *DonationPaymentRequest) GetTrustedShopper() bool {
 	if o == nil || common.IsNil(o.TrustedShopper) {
 		var ret bool
 		return ret
@@ -2246,7 +2350,7 @@ func (o *PaymentDonationRequest) GetTrustedShopper() bool {
 
 // GetTrustedShopperOk returns a tuple with the TrustedShopper field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentDonationRequest) GetTrustedShopperOk() (*bool, bool) {
+func (o *DonationPaymentRequest) GetTrustedShopperOk() (*bool, bool) {
 	if o == nil || common.IsNil(o.TrustedShopper) {
 		return nil, false
 	}
@@ -2254,7 +2358,7 @@ func (o *PaymentDonationRequest) GetTrustedShopperOk() (*bool, bool) {
 }
 
 // HasTrustedShopper returns a boolean if a field has been set.
-func (o *PaymentDonationRequest) HasTrustedShopper() bool {
+func (o *DonationPaymentRequest) HasTrustedShopper() bool {
 	if o != nil && !common.IsNil(o.TrustedShopper) {
 		return true
 	}
@@ -2263,11 +2367,11 @@ func (o *PaymentDonationRequest) HasTrustedShopper() bool {
 }
 
 // SetTrustedShopper gets a reference to the given bool and assigns it to the TrustedShopper field.
-func (o *PaymentDonationRequest) SetTrustedShopper(v bool) {
+func (o *DonationPaymentRequest) SetTrustedShopper(v bool) {
 	o.TrustedShopper = &v
 }
 
-func (o PaymentDonationRequest) MarshalJSON() ([]byte, error) {
+func (o DonationPaymentRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -2275,7 +2379,7 @@ func (o PaymentDonationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentDonationRequest) ToMap() (map[string]interface{}, error) {
+func (o DonationPaymentRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.AccountInfo) {
 		toSerialize["accountInfo"] = o.AccountInfo
@@ -2323,6 +2427,9 @@ func (o PaymentDonationRequest) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.DccQuote) {
 		toSerialize["dccQuote"] = o.DccQuote
 	}
+	if !common.IsNil(o.DeliverAt) {
+		toSerialize["deliverAt"] = o.DeliverAt
+	}
 	if !common.IsNil(o.DeliveryAddress) {
 		toSerialize["deliveryAddress"] = o.DeliveryAddress
 	}
@@ -2353,6 +2460,12 @@ func (o PaymentDonationRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.FraudOffset) {
 		toSerialize["fraudOffset"] = o.FraudOffset
+	}
+	if !common.IsNil(o.FundOrigin) {
+		toSerialize["fundOrigin"] = o.FundOrigin
+	}
+	if !common.IsNil(o.FundRecipient) {
+		toSerialize["fundRecipient"] = o.FundRecipient
 	}
 	if !common.IsNil(o.IndustryUsage) {
 		toSerialize["industryUsage"] = o.IndustryUsage
@@ -2469,43 +2582,43 @@ func (o PaymentDonationRequest) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullablePaymentDonationRequest struct {
-	value *PaymentDonationRequest
+type NullableDonationPaymentRequest struct {
+	value *DonationPaymentRequest
 	isSet bool
 }
 
-func (v NullablePaymentDonationRequest) Get() *PaymentDonationRequest {
+func (v NullableDonationPaymentRequest) Get() *DonationPaymentRequest {
 	return v.value
 }
 
-func (v *NullablePaymentDonationRequest) Set(val *PaymentDonationRequest) {
+func (v *NullableDonationPaymentRequest) Set(val *DonationPaymentRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullablePaymentDonationRequest) IsSet() bool {
+func (v NullableDonationPaymentRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullablePaymentDonationRequest) Unset() {
+func (v *NullableDonationPaymentRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullablePaymentDonationRequest(val *PaymentDonationRequest) *NullablePaymentDonationRequest {
-	return &NullablePaymentDonationRequest{value: val, isSet: true}
+func NewNullableDonationPaymentRequest(val *DonationPaymentRequest) *NullableDonationPaymentRequest {
+	return &NullableDonationPaymentRequest{value: val, isSet: true}
 }
 
-func (v NullablePaymentDonationRequest) MarshalJSON() ([]byte, error) {
+func (v NullableDonationPaymentRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullablePaymentDonationRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableDonationPaymentRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
 
-func (o *PaymentDonationRequest) isValidChannel() bool {
+func (o *DonationPaymentRequest) isValidChannel() bool {
 	var allowedEnumValues = []string{"iOS", "Android", "Web"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetChannel() == allowed {
@@ -2514,7 +2627,7 @@ func (o *PaymentDonationRequest) isValidChannel() bool {
 	}
 	return false
 }
-func (o *PaymentDonationRequest) isValidEntityType() bool {
+func (o *DonationPaymentRequest) isValidEntityType() bool {
 	var allowedEnumValues = []string{"NaturalPerson", "CompanyName"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetEntityType() == allowed {
@@ -2523,7 +2636,7 @@ func (o *PaymentDonationRequest) isValidEntityType() bool {
 	}
 	return false
 }
-func (o *PaymentDonationRequest) isValidIndustryUsage() bool {
+func (o *DonationPaymentRequest) isValidIndustryUsage() bool {
 	var allowedEnumValues = []string{"delayedCharge", "installment", "noShow"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetIndustryUsage() == allowed {
@@ -2532,7 +2645,7 @@ func (o *PaymentDonationRequest) isValidIndustryUsage() bool {
 	}
 	return false
 }
-func (o *PaymentDonationRequest) isValidRecurringProcessingModel() bool {
+func (o *DonationPaymentRequest) isValidRecurringProcessingModel() bool {
 	var allowedEnumValues = []string{"CardOnFile", "Subscription", "UnscheduledCardOnFile"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetRecurringProcessingModel() == allowed {
@@ -2541,7 +2654,7 @@ func (o *PaymentDonationRequest) isValidRecurringProcessingModel() bool {
 	}
 	return false
 }
-func (o *PaymentDonationRequest) isValidShopperInteraction() bool {
+func (o *DonationPaymentRequest) isValidShopperInteraction() bool {
 	var allowedEnumValues = []string{"Ecommerce", "ContAuth", "Moto", "POS"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetShopperInteraction() == allowed {

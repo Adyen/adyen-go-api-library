@@ -14,11 +14,11 @@ import (
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// checks if the PaymentRefundResource type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &PaymentRefundResource{}
+// checks if the PaymentRefundResponse type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &PaymentRefundResponse{}
 
-// PaymentRefundResource struct for PaymentRefundResource
-type PaymentRefundResource struct {
+// PaymentRefundResponse struct for PaymentRefundResponse
+type PaymentRefundResponse struct {
 	Amount Amount `json:"amount"`
 	// Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment). > This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Atome, Clearpay, Klarna, Ratepay, Walley, and Zip.
 	LineItems []LineItem `json:"lineItems,omitempty"`
@@ -38,12 +38,12 @@ type PaymentRefundResource struct {
 	Status string `json:"status"`
 }
 
-// NewPaymentRefundResource instantiates a new PaymentRefundResource object
+// NewPaymentRefundResponse instantiates a new PaymentRefundResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPaymentRefundResource(amount Amount, merchantAccount string, paymentPspReference string, pspReference string, status string) *PaymentRefundResource {
-	this := PaymentRefundResource{}
+func NewPaymentRefundResponse(amount Amount, merchantAccount string, paymentPspReference string, pspReference string, status string) *PaymentRefundResponse {
+	this := PaymentRefundResponse{}
 	this.Amount = amount
 	this.MerchantAccount = merchantAccount
 	this.PaymentPspReference = paymentPspReference
@@ -52,16 +52,16 @@ func NewPaymentRefundResource(amount Amount, merchantAccount string, paymentPspR
 	return &this
 }
 
-// NewPaymentRefundResourceWithDefaults instantiates a new PaymentRefundResource object
+// NewPaymentRefundResponseWithDefaults instantiates a new PaymentRefundResponse object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewPaymentRefundResourceWithDefaults() *PaymentRefundResource {
-	this := PaymentRefundResource{}
+func NewPaymentRefundResponseWithDefaults() *PaymentRefundResponse {
+	this := PaymentRefundResponse{}
 	return &this
 }
 
 // GetAmount returns the Amount field value
-func (o *PaymentRefundResource) GetAmount() Amount {
+func (o *PaymentRefundResponse) GetAmount() Amount {
 	if o == nil {
 		var ret Amount
 		return ret
@@ -72,7 +72,7 @@ func (o *PaymentRefundResource) GetAmount() Amount {
 
 // GetAmountOk returns a tuple with the Amount field value
 // and a boolean to check if the value has been set.
-func (o *PaymentRefundResource) GetAmountOk() (*Amount, bool) {
+func (o *PaymentRefundResponse) GetAmountOk() (*Amount, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -80,12 +80,12 @@ func (o *PaymentRefundResource) GetAmountOk() (*Amount, bool) {
 }
 
 // SetAmount sets field value
-func (o *PaymentRefundResource) SetAmount(v Amount) {
+func (o *PaymentRefundResponse) SetAmount(v Amount) {
 	o.Amount = v
 }
 
 // GetLineItems returns the LineItems field value if set, zero value otherwise.
-func (o *PaymentRefundResource) GetLineItems() []LineItem {
+func (o *PaymentRefundResponse) GetLineItems() []LineItem {
 	if o == nil || common.IsNil(o.LineItems) {
 		var ret []LineItem
 		return ret
@@ -95,7 +95,7 @@ func (o *PaymentRefundResource) GetLineItems() []LineItem {
 
 // GetLineItemsOk returns a tuple with the LineItems field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentRefundResource) GetLineItemsOk() ([]LineItem, bool) {
+func (o *PaymentRefundResponse) GetLineItemsOk() ([]LineItem, bool) {
 	if o == nil || common.IsNil(o.LineItems) {
 		return nil, false
 	}
@@ -103,7 +103,7 @@ func (o *PaymentRefundResource) GetLineItemsOk() ([]LineItem, bool) {
 }
 
 // HasLineItems returns a boolean if a field has been set.
-func (o *PaymentRefundResource) HasLineItems() bool {
+func (o *PaymentRefundResponse) HasLineItems() bool {
 	if o != nil && !common.IsNil(o.LineItems) {
 		return true
 	}
@@ -112,12 +112,12 @@ func (o *PaymentRefundResource) HasLineItems() bool {
 }
 
 // SetLineItems gets a reference to the given []LineItem and assigns it to the LineItems field.
-func (o *PaymentRefundResource) SetLineItems(v []LineItem) {
+func (o *PaymentRefundResponse) SetLineItems(v []LineItem) {
 	o.LineItems = v
 }
 
 // GetMerchantAccount returns the MerchantAccount field value
-func (o *PaymentRefundResource) GetMerchantAccount() string {
+func (o *PaymentRefundResponse) GetMerchantAccount() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -128,7 +128,7 @@ func (o *PaymentRefundResource) GetMerchantAccount() string {
 
 // GetMerchantAccountOk returns a tuple with the MerchantAccount field value
 // and a boolean to check if the value has been set.
-func (o *PaymentRefundResource) GetMerchantAccountOk() (*string, bool) {
+func (o *PaymentRefundResponse) GetMerchantAccountOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -136,12 +136,12 @@ func (o *PaymentRefundResource) GetMerchantAccountOk() (*string, bool) {
 }
 
 // SetMerchantAccount sets field value
-func (o *PaymentRefundResource) SetMerchantAccount(v string) {
+func (o *PaymentRefundResponse) SetMerchantAccount(v string) {
 	o.MerchantAccount = v
 }
 
 // GetMerchantRefundReason returns the MerchantRefundReason field value if set, zero value otherwise.
-func (o *PaymentRefundResource) GetMerchantRefundReason() string {
+func (o *PaymentRefundResponse) GetMerchantRefundReason() string {
 	if o == nil || common.IsNil(o.MerchantRefundReason) {
 		var ret string
 		return ret
@@ -151,7 +151,7 @@ func (o *PaymentRefundResource) GetMerchantRefundReason() string {
 
 // GetMerchantRefundReasonOk returns a tuple with the MerchantRefundReason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentRefundResource) GetMerchantRefundReasonOk() (*string, bool) {
+func (o *PaymentRefundResponse) GetMerchantRefundReasonOk() (*string, bool) {
 	if o == nil || common.IsNil(o.MerchantRefundReason) {
 		return nil, false
 	}
@@ -159,7 +159,7 @@ func (o *PaymentRefundResource) GetMerchantRefundReasonOk() (*string, bool) {
 }
 
 // HasMerchantRefundReason returns a boolean if a field has been set.
-func (o *PaymentRefundResource) HasMerchantRefundReason() bool {
+func (o *PaymentRefundResponse) HasMerchantRefundReason() bool {
 	if o != nil && !common.IsNil(o.MerchantRefundReason) {
 		return true
 	}
@@ -168,12 +168,12 @@ func (o *PaymentRefundResource) HasMerchantRefundReason() bool {
 }
 
 // SetMerchantRefundReason gets a reference to the given string and assigns it to the MerchantRefundReason field.
-func (o *PaymentRefundResource) SetMerchantRefundReason(v string) {
+func (o *PaymentRefundResponse) SetMerchantRefundReason(v string) {
 	o.MerchantRefundReason = &v
 }
 
 // GetPaymentPspReference returns the PaymentPspReference field value
-func (o *PaymentRefundResource) GetPaymentPspReference() string {
+func (o *PaymentRefundResponse) GetPaymentPspReference() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -184,7 +184,7 @@ func (o *PaymentRefundResource) GetPaymentPspReference() string {
 
 // GetPaymentPspReferenceOk returns a tuple with the PaymentPspReference field value
 // and a boolean to check if the value has been set.
-func (o *PaymentRefundResource) GetPaymentPspReferenceOk() (*string, bool) {
+func (o *PaymentRefundResponse) GetPaymentPspReferenceOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -192,12 +192,12 @@ func (o *PaymentRefundResource) GetPaymentPspReferenceOk() (*string, bool) {
 }
 
 // SetPaymentPspReference sets field value
-func (o *PaymentRefundResource) SetPaymentPspReference(v string) {
+func (o *PaymentRefundResponse) SetPaymentPspReference(v string) {
 	o.PaymentPspReference = v
 }
 
 // GetPspReference returns the PspReference field value
-func (o *PaymentRefundResource) GetPspReference() string {
+func (o *PaymentRefundResponse) GetPspReference() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -208,7 +208,7 @@ func (o *PaymentRefundResource) GetPspReference() string {
 
 // GetPspReferenceOk returns a tuple with the PspReference field value
 // and a boolean to check if the value has been set.
-func (o *PaymentRefundResource) GetPspReferenceOk() (*string, bool) {
+func (o *PaymentRefundResponse) GetPspReferenceOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -216,12 +216,12 @@ func (o *PaymentRefundResource) GetPspReferenceOk() (*string, bool) {
 }
 
 // SetPspReference sets field value
-func (o *PaymentRefundResource) SetPspReference(v string) {
+func (o *PaymentRefundResponse) SetPspReference(v string) {
 	o.PspReference = v
 }
 
 // GetReference returns the Reference field value if set, zero value otherwise.
-func (o *PaymentRefundResource) GetReference() string {
+func (o *PaymentRefundResponse) GetReference() string {
 	if o == nil || common.IsNil(o.Reference) {
 		var ret string
 		return ret
@@ -231,7 +231,7 @@ func (o *PaymentRefundResource) GetReference() string {
 
 // GetReferenceOk returns a tuple with the Reference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentRefundResource) GetReferenceOk() (*string, bool) {
+func (o *PaymentRefundResponse) GetReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Reference) {
 		return nil, false
 	}
@@ -239,7 +239,7 @@ func (o *PaymentRefundResource) GetReferenceOk() (*string, bool) {
 }
 
 // HasReference returns a boolean if a field has been set.
-func (o *PaymentRefundResource) HasReference() bool {
+func (o *PaymentRefundResponse) HasReference() bool {
 	if o != nil && !common.IsNil(o.Reference) {
 		return true
 	}
@@ -248,12 +248,12 @@ func (o *PaymentRefundResource) HasReference() bool {
 }
 
 // SetReference gets a reference to the given string and assigns it to the Reference field.
-func (o *PaymentRefundResource) SetReference(v string) {
+func (o *PaymentRefundResponse) SetReference(v string) {
 	o.Reference = &v
 }
 
 // GetSplits returns the Splits field value if set, zero value otherwise.
-func (o *PaymentRefundResource) GetSplits() []Split {
+func (o *PaymentRefundResponse) GetSplits() []Split {
 	if o == nil || common.IsNil(o.Splits) {
 		var ret []Split
 		return ret
@@ -263,7 +263,7 @@ func (o *PaymentRefundResource) GetSplits() []Split {
 
 // GetSplitsOk returns a tuple with the Splits field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentRefundResource) GetSplitsOk() ([]Split, bool) {
+func (o *PaymentRefundResponse) GetSplitsOk() ([]Split, bool) {
 	if o == nil || common.IsNil(o.Splits) {
 		return nil, false
 	}
@@ -271,7 +271,7 @@ func (o *PaymentRefundResource) GetSplitsOk() ([]Split, bool) {
 }
 
 // HasSplits returns a boolean if a field has been set.
-func (o *PaymentRefundResource) HasSplits() bool {
+func (o *PaymentRefundResponse) HasSplits() bool {
 	if o != nil && !common.IsNil(o.Splits) {
 		return true
 	}
@@ -280,12 +280,12 @@ func (o *PaymentRefundResource) HasSplits() bool {
 }
 
 // SetSplits gets a reference to the given []Split and assigns it to the Splits field.
-func (o *PaymentRefundResource) SetSplits(v []Split) {
+func (o *PaymentRefundResponse) SetSplits(v []Split) {
 	o.Splits = v
 }
 
 // GetStatus returns the Status field value
-func (o *PaymentRefundResource) GetStatus() string {
+func (o *PaymentRefundResponse) GetStatus() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -296,7 +296,7 @@ func (o *PaymentRefundResource) GetStatus() string {
 
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *PaymentRefundResource) GetStatusOk() (*string, bool) {
+func (o *PaymentRefundResponse) GetStatusOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -304,11 +304,11 @@ func (o *PaymentRefundResource) GetStatusOk() (*string, bool) {
 }
 
 // SetStatus sets field value
-func (o *PaymentRefundResource) SetStatus(v string) {
+func (o *PaymentRefundResponse) SetStatus(v string) {
 	o.Status = v
 }
 
-func (o PaymentRefundResource) MarshalJSON() ([]byte, error) {
+func (o PaymentRefundResponse) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -316,7 +316,7 @@ func (o PaymentRefundResource) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentRefundResource) ToMap() (map[string]interface{}, error) {
+func (o PaymentRefundResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["amount"] = o.Amount
 	if !common.IsNil(o.LineItems) {
@@ -338,43 +338,43 @@ func (o PaymentRefundResource) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullablePaymentRefundResource struct {
-	value *PaymentRefundResource
+type NullablePaymentRefundResponse struct {
+	value *PaymentRefundResponse
 	isSet bool
 }
 
-func (v NullablePaymentRefundResource) Get() *PaymentRefundResource {
+func (v NullablePaymentRefundResponse) Get() *PaymentRefundResponse {
 	return v.value
 }
 
-func (v *NullablePaymentRefundResource) Set(val *PaymentRefundResource) {
+func (v *NullablePaymentRefundResponse) Set(val *PaymentRefundResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullablePaymentRefundResource) IsSet() bool {
+func (v NullablePaymentRefundResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullablePaymentRefundResource) Unset() {
+func (v *NullablePaymentRefundResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullablePaymentRefundResource(val *PaymentRefundResource) *NullablePaymentRefundResource {
-	return &NullablePaymentRefundResource{value: val, isSet: true}
+func NewNullablePaymentRefundResponse(val *PaymentRefundResponse) *NullablePaymentRefundResponse {
+	return &NullablePaymentRefundResponse{value: val, isSet: true}
 }
 
-func (v NullablePaymentRefundResource) MarshalJSON() ([]byte, error) {
+func (v NullablePaymentRefundResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullablePaymentRefundResource) UnmarshalJSON(src []byte) error {
+func (v *NullablePaymentRefundResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
 
-func (o *PaymentRefundResource) isValidMerchantRefundReason() bool {
+func (o *PaymentRefundResponse) isValidMerchantRefundReason() bool {
 	var allowedEnumValues = []string{"FRAUD", "CUSTOMER REQUEST", "RETURN", "DUPLICATE", "OTHER"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetMerchantRefundReason() == allowed {
@@ -383,7 +383,7 @@ func (o *PaymentRefundResource) isValidMerchantRefundReason() bool {
 	}
 	return false
 }
-func (o *PaymentRefundResource) isValidStatus() bool {
+func (o *PaymentRefundResponse) isValidStatus() bool {
 	var allowedEnumValues = []string{"received"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetStatus() == allowed {

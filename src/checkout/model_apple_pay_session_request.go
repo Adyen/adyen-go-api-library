@@ -14,11 +14,11 @@ import (
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// checks if the CreateApplePaySessionRequest type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &CreateApplePaySessionRequest{}
+// checks if the ApplePaySessionRequest type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &ApplePaySessionRequest{}
 
-// CreateApplePaySessionRequest struct for CreateApplePaySessionRequest
-type CreateApplePaySessionRequest struct {
+// ApplePaySessionRequest struct for ApplePaySessionRequest
+type ApplePaySessionRequest struct {
 	// This is the name that your shoppers will see in the Apple Pay interface.  The value returned as `configuration.merchantName` field from the [`/paymentMethods`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/paymentMethods) response.
 	DisplayName string `json:"displayName"`
 	// The domain name you provided when you added Apple Pay in your Customer Area.  This must match the `window.location.hostname` of the web shop.
@@ -27,28 +27,28 @@ type CreateApplePaySessionRequest struct {
 	MerchantIdentifier string `json:"merchantIdentifier"`
 }
 
-// NewCreateApplePaySessionRequest instantiates a new CreateApplePaySessionRequest object
+// NewApplePaySessionRequest instantiates a new ApplePaySessionRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateApplePaySessionRequest(displayName string, domainName string, merchantIdentifier string) *CreateApplePaySessionRequest {
-	this := CreateApplePaySessionRequest{}
+func NewApplePaySessionRequest(displayName string, domainName string, merchantIdentifier string) *ApplePaySessionRequest {
+	this := ApplePaySessionRequest{}
 	this.DisplayName = displayName
 	this.DomainName = domainName
 	this.MerchantIdentifier = merchantIdentifier
 	return &this
 }
 
-// NewCreateApplePaySessionRequestWithDefaults instantiates a new CreateApplePaySessionRequest object
+// NewApplePaySessionRequestWithDefaults instantiates a new ApplePaySessionRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateApplePaySessionRequestWithDefaults() *CreateApplePaySessionRequest {
-	this := CreateApplePaySessionRequest{}
+func NewApplePaySessionRequestWithDefaults() *ApplePaySessionRequest {
+	this := ApplePaySessionRequest{}
 	return &this
 }
 
 // GetDisplayName returns the DisplayName field value
-func (o *CreateApplePaySessionRequest) GetDisplayName() string {
+func (o *ApplePaySessionRequest) GetDisplayName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -59,7 +59,7 @@ func (o *CreateApplePaySessionRequest) GetDisplayName() string {
 
 // GetDisplayNameOk returns a tuple with the DisplayName field value
 // and a boolean to check if the value has been set.
-func (o *CreateApplePaySessionRequest) GetDisplayNameOk() (*string, bool) {
+func (o *ApplePaySessionRequest) GetDisplayNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -67,12 +67,12 @@ func (o *CreateApplePaySessionRequest) GetDisplayNameOk() (*string, bool) {
 }
 
 // SetDisplayName sets field value
-func (o *CreateApplePaySessionRequest) SetDisplayName(v string) {
+func (o *ApplePaySessionRequest) SetDisplayName(v string) {
 	o.DisplayName = v
 }
 
 // GetDomainName returns the DomainName field value
-func (o *CreateApplePaySessionRequest) GetDomainName() string {
+func (o *ApplePaySessionRequest) GetDomainName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -83,7 +83,7 @@ func (o *CreateApplePaySessionRequest) GetDomainName() string {
 
 // GetDomainNameOk returns a tuple with the DomainName field value
 // and a boolean to check if the value has been set.
-func (o *CreateApplePaySessionRequest) GetDomainNameOk() (*string, bool) {
+func (o *ApplePaySessionRequest) GetDomainNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -91,12 +91,12 @@ func (o *CreateApplePaySessionRequest) GetDomainNameOk() (*string, bool) {
 }
 
 // SetDomainName sets field value
-func (o *CreateApplePaySessionRequest) SetDomainName(v string) {
+func (o *ApplePaySessionRequest) SetDomainName(v string) {
 	o.DomainName = v
 }
 
 // GetMerchantIdentifier returns the MerchantIdentifier field value
-func (o *CreateApplePaySessionRequest) GetMerchantIdentifier() string {
+func (o *ApplePaySessionRequest) GetMerchantIdentifier() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -107,7 +107,7 @@ func (o *CreateApplePaySessionRequest) GetMerchantIdentifier() string {
 
 // GetMerchantIdentifierOk returns a tuple with the MerchantIdentifier field value
 // and a boolean to check if the value has been set.
-func (o *CreateApplePaySessionRequest) GetMerchantIdentifierOk() (*string, bool) {
+func (o *ApplePaySessionRequest) GetMerchantIdentifierOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -115,11 +115,11 @@ func (o *CreateApplePaySessionRequest) GetMerchantIdentifierOk() (*string, bool)
 }
 
 // SetMerchantIdentifier sets field value
-func (o *CreateApplePaySessionRequest) SetMerchantIdentifier(v string) {
+func (o *ApplePaySessionRequest) SetMerchantIdentifier(v string) {
 	o.MerchantIdentifier = v
 }
 
-func (o CreateApplePaySessionRequest) MarshalJSON() ([]byte, error) {
+func (o ApplePaySessionRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -127,7 +127,7 @@ func (o CreateApplePaySessionRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateApplePaySessionRequest) ToMap() (map[string]interface{}, error) {
+func (o ApplePaySessionRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["displayName"] = o.DisplayName
 	toSerialize["domainName"] = o.DomainName
@@ -135,38 +135,38 @@ func (o CreateApplePaySessionRequest) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableCreateApplePaySessionRequest struct {
-	value *CreateApplePaySessionRequest
+type NullableApplePaySessionRequest struct {
+	value *ApplePaySessionRequest
 	isSet bool
 }
 
-func (v NullableCreateApplePaySessionRequest) Get() *CreateApplePaySessionRequest {
+func (v NullableApplePaySessionRequest) Get() *ApplePaySessionRequest {
 	return v.value
 }
 
-func (v *NullableCreateApplePaySessionRequest) Set(val *CreateApplePaySessionRequest) {
+func (v *NullableApplePaySessionRequest) Set(val *ApplePaySessionRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateApplePaySessionRequest) IsSet() bool {
+func (v NullableApplePaySessionRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateApplePaySessionRequest) Unset() {
+func (v *NullableApplePaySessionRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateApplePaySessionRequest(val *CreateApplePaySessionRequest) *NullableCreateApplePaySessionRequest {
-	return &NullableCreateApplePaySessionRequest{value: val, isSet: true}
+func NewNullableApplePaySessionRequest(val *ApplePaySessionRequest) *NullableApplePaySessionRequest {
+	return &NullableApplePaySessionRequest{value: val, isSet: true}
 }
 
-func (v NullableCreateApplePaySessionRequest) MarshalJSON() ([]byte, error) {
+func (v NullableApplePaySessionRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateApplePaySessionRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableApplePaySessionRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

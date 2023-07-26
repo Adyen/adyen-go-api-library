@@ -14,37 +14,37 @@ import (
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// checks if the CreatePaymentReversalRequest type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &CreatePaymentReversalRequest{}
+// checks if the PaymentReversalRequest type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &PaymentReversalRequest{}
 
-// CreatePaymentReversalRequest struct for CreatePaymentReversalRequest
-type CreatePaymentReversalRequest struct {
+// PaymentReversalRequest struct for PaymentReversalRequest
+type PaymentReversalRequest struct {
 	// The merchant account that is used to process the payment.
 	MerchantAccount string `json:"merchantAccount"`
 	// Your reference for the reversal request. Maximum length: 80 characters.
 	Reference *string `json:"reference,omitempty"`
 }
 
-// NewCreatePaymentReversalRequest instantiates a new CreatePaymentReversalRequest object
+// NewPaymentReversalRequest instantiates a new PaymentReversalRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreatePaymentReversalRequest(merchantAccount string) *CreatePaymentReversalRequest {
-	this := CreatePaymentReversalRequest{}
+func NewPaymentReversalRequest(merchantAccount string) *PaymentReversalRequest {
+	this := PaymentReversalRequest{}
 	this.MerchantAccount = merchantAccount
 	return &this
 }
 
-// NewCreatePaymentReversalRequestWithDefaults instantiates a new CreatePaymentReversalRequest object
+// NewPaymentReversalRequestWithDefaults instantiates a new PaymentReversalRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreatePaymentReversalRequestWithDefaults() *CreatePaymentReversalRequest {
-	this := CreatePaymentReversalRequest{}
+func NewPaymentReversalRequestWithDefaults() *PaymentReversalRequest {
+	this := PaymentReversalRequest{}
 	return &this
 }
 
 // GetMerchantAccount returns the MerchantAccount field value
-func (o *CreatePaymentReversalRequest) GetMerchantAccount() string {
+func (o *PaymentReversalRequest) GetMerchantAccount() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -55,7 +55,7 @@ func (o *CreatePaymentReversalRequest) GetMerchantAccount() string {
 
 // GetMerchantAccountOk returns a tuple with the MerchantAccount field value
 // and a boolean to check if the value has been set.
-func (o *CreatePaymentReversalRequest) GetMerchantAccountOk() (*string, bool) {
+func (o *PaymentReversalRequest) GetMerchantAccountOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -63,12 +63,12 @@ func (o *CreatePaymentReversalRequest) GetMerchantAccountOk() (*string, bool) {
 }
 
 // SetMerchantAccount sets field value
-func (o *CreatePaymentReversalRequest) SetMerchantAccount(v string) {
+func (o *PaymentReversalRequest) SetMerchantAccount(v string) {
 	o.MerchantAccount = v
 }
 
 // GetReference returns the Reference field value if set, zero value otherwise.
-func (o *CreatePaymentReversalRequest) GetReference() string {
+func (o *PaymentReversalRequest) GetReference() string {
 	if o == nil || common.IsNil(o.Reference) {
 		var ret string
 		return ret
@@ -78,7 +78,7 @@ func (o *CreatePaymentReversalRequest) GetReference() string {
 
 // GetReferenceOk returns a tuple with the Reference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreatePaymentReversalRequest) GetReferenceOk() (*string, bool) {
+func (o *PaymentReversalRequest) GetReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Reference) {
 		return nil, false
 	}
@@ -86,7 +86,7 @@ func (o *CreatePaymentReversalRequest) GetReferenceOk() (*string, bool) {
 }
 
 // HasReference returns a boolean if a field has been set.
-func (o *CreatePaymentReversalRequest) HasReference() bool {
+func (o *PaymentReversalRequest) HasReference() bool {
 	if o != nil && !common.IsNil(o.Reference) {
 		return true
 	}
@@ -95,11 +95,11 @@ func (o *CreatePaymentReversalRequest) HasReference() bool {
 }
 
 // SetReference gets a reference to the given string and assigns it to the Reference field.
-func (o *CreatePaymentReversalRequest) SetReference(v string) {
+func (o *PaymentReversalRequest) SetReference(v string) {
 	o.Reference = &v
 }
 
-func (o CreatePaymentReversalRequest) MarshalJSON() ([]byte, error) {
+func (o PaymentReversalRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -107,7 +107,7 @@ func (o CreatePaymentReversalRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreatePaymentReversalRequest) ToMap() (map[string]interface{}, error) {
+func (o PaymentReversalRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["merchantAccount"] = o.MerchantAccount
 	if !common.IsNil(o.Reference) {
@@ -116,38 +116,38 @@ func (o CreatePaymentReversalRequest) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableCreatePaymentReversalRequest struct {
-	value *CreatePaymentReversalRequest
+type NullablePaymentReversalRequest struct {
+	value *PaymentReversalRequest
 	isSet bool
 }
 
-func (v NullableCreatePaymentReversalRequest) Get() *CreatePaymentReversalRequest {
+func (v NullablePaymentReversalRequest) Get() *PaymentReversalRequest {
 	return v.value
 }
 
-func (v *NullableCreatePaymentReversalRequest) Set(val *CreatePaymentReversalRequest) {
+func (v *NullablePaymentReversalRequest) Set(val *PaymentReversalRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreatePaymentReversalRequest) IsSet() bool {
+func (v NullablePaymentReversalRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreatePaymentReversalRequest) Unset() {
+func (v *NullablePaymentReversalRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreatePaymentReversalRequest(val *CreatePaymentReversalRequest) *NullableCreatePaymentReversalRequest {
-	return &NullableCreatePaymentReversalRequest{value: val, isSet: true}
+func NewNullablePaymentReversalRequest(val *PaymentReversalRequest) *NullablePaymentReversalRequest {
+	return &NullablePaymentReversalRequest{value: val, isSet: true}
 }
 
-func (v NullableCreatePaymentReversalRequest) MarshalJSON() ([]byte, error) {
+func (v NullablePaymentReversalRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreatePaymentReversalRequest) UnmarshalJSON(src []byte) error {
+func (v *NullablePaymentReversalRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

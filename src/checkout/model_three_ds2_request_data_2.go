@@ -14,11 +14,11 @@ import (
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// checks if the ThreeDS2RequestData type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &ThreeDS2RequestData{}
+// checks if the ThreeDS2RequestData2 type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &ThreeDS2RequestData2{}
 
-// ThreeDS2RequestData struct for ThreeDS2RequestData
-type ThreeDS2RequestData struct {
+// ThreeDS2RequestData2 struct for ThreeDS2RequestData2
+type ThreeDS2RequestData2 struct {
 	AcctInfo *AcctInfo `json:"acctInfo,omitempty"`
 	// Indicates the type of account. For example, for a multi-account card product. Length: 2 characters. Allowed values: * **01** — Not applicable * **02** — Credit * **03** — Debit
 	AcctType *string `json:"acctType,omitempty"`
@@ -33,9 +33,7 @@ type ThreeDS2RequestData struct {
 	AuthenticationOnly *bool `json:"authenticationOnly,omitempty"`
 	// Possibility to specify a preference for receiving a challenge from the issuer. Allowed values: * `noPreference` * `requestNoChallenge` * `requestChallenge` * `requestChallengeAsMandate`
 	// Deprecated
-	ChallengeIndicator *string `json:"challengeIndicator,omitempty"`
-	// The environment of the shopper. Allowed values: * `app` * `browser`
-	DeviceChannel       string               `json:"deviceChannel"`
+	ChallengeIndicator  *string              `json:"challengeIndicator,omitempty"`
 	DeviceRenderOptions *DeviceRenderOptions `json:"deviceRenderOptions,omitempty"`
 	HomePhone           *Phone               `json:"homePhone,omitempty"`
 	// Required for merchants that have been enrolled for 3D Secure 2 by another party than Adyen, mostly [authentication-only integrations](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only). The `mcc` is a four-digit code with which the previously given `acquirerMerchantID` is registered at the scheme.
@@ -57,19 +55,15 @@ type ThreeDS2RequestData struct {
 	RecurringExpiry *string `json:"recurringExpiry,omitempty"`
 	// Indicates the minimum number of days between authorisations. Maximum length: 4 characters.
 	RecurringFrequency *string `json:"recurringFrequency,omitempty"`
-	// The `sdkAppID` value as received from the 3D Secure 2 SDK. Required for `deviceChannel` set to **app**.
-	SdkAppID *string `json:"sdkAppID,omitempty"`
-	// The `sdkEncData` value as received from the 3D Secure 2 SDK. Required for `deviceChannel` set to **app**.
-	SdkEncData     *string         `json:"sdkEncData,omitempty"`
+	// The `sdkAppID` value as received from the 3D Secure 2 SDK.
+	SdkAppID       *string         `json:"sdkAppID,omitempty"`
 	SdkEphemPubKey *SDKEphemPubKey `json:"sdkEphemPubKey,omitempty"`
 	// The maximum amount of time in minutes for the 3D Secure 2 authentication process. Optional and only for `deviceChannel` set to **app**. Defaults to **60** minutes.
 	SdkMaxTimeout *int32 `json:"sdkMaxTimeout,omitempty"`
-	// The `sdkReferenceNumber` value as received from the 3D Secure 2 SDK. Only for `deviceChannel` set to **app**.
+	// The `sdkReferenceNumber` value as received from the 3D Secure 2 SDK.
 	SdkReferenceNumber *string `json:"sdkReferenceNumber,omitempty"`
-	// The `sdkTransID` value as received from the 3D Secure 2 SDK. Only for `deviceChannel` set to **app**.
+	// The `sdkTransID` value as received from the 3D Secure 2 SDK.
 	SdkTransID *string `json:"sdkTransID,omitempty"`
-	// Version of the 3D Secure 2 mobile SDK.  Only for `deviceChannel` set to **app**.
-	SdkVersion *string `json:"sdkVersion,omitempty"`
 	// Completion indicator for the device fingerprinting.
 	ThreeDSCompInd *string `json:"threeDSCompInd,omitempty"`
 	// Indicates the type of Authentication request.
@@ -93,25 +87,24 @@ type ThreeDS2RequestData struct {
 	WorkPhone       *Phone  `json:"workPhone,omitempty"`
 }
 
-// NewThreeDS2RequestData instantiates a new ThreeDS2RequestData object
+// NewThreeDS2RequestData2 instantiates a new ThreeDS2RequestData2 object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewThreeDS2RequestData(deviceChannel string) *ThreeDS2RequestData {
-	this := ThreeDS2RequestData{}
+func NewThreeDS2RequestData2() *ThreeDS2RequestData2 {
+	this := ThreeDS2RequestData2{}
 	var authenticationOnly bool = false
 	this.AuthenticationOnly = &authenticationOnly
-	this.DeviceChannel = deviceChannel
 	var sdkMaxTimeout int32 = 60
 	this.SdkMaxTimeout = &sdkMaxTimeout
 	return &this
 }
 
-// NewThreeDS2RequestDataWithDefaults instantiates a new ThreeDS2RequestData object
+// NewThreeDS2RequestData2WithDefaults instantiates a new ThreeDS2RequestData2 object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewThreeDS2RequestDataWithDefaults() *ThreeDS2RequestData {
-	this := ThreeDS2RequestData{}
+func NewThreeDS2RequestData2WithDefaults() *ThreeDS2RequestData2 {
+	this := ThreeDS2RequestData2{}
 	var authenticationOnly bool = false
 	this.AuthenticationOnly = &authenticationOnly
 	var sdkMaxTimeout int32 = 60
@@ -120,7 +113,7 @@ func NewThreeDS2RequestDataWithDefaults() *ThreeDS2RequestData {
 }
 
 // GetAcctInfo returns the AcctInfo field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetAcctInfo() AcctInfo {
+func (o *ThreeDS2RequestData2) GetAcctInfo() AcctInfo {
 	if o == nil || common.IsNil(o.AcctInfo) {
 		var ret AcctInfo
 		return ret
@@ -130,7 +123,7 @@ func (o *ThreeDS2RequestData) GetAcctInfo() AcctInfo {
 
 // GetAcctInfoOk returns a tuple with the AcctInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetAcctInfoOk() (*AcctInfo, bool) {
+func (o *ThreeDS2RequestData2) GetAcctInfoOk() (*AcctInfo, bool) {
 	if o == nil || common.IsNil(o.AcctInfo) {
 		return nil, false
 	}
@@ -138,7 +131,7 @@ func (o *ThreeDS2RequestData) GetAcctInfoOk() (*AcctInfo, bool) {
 }
 
 // HasAcctInfo returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasAcctInfo() bool {
+func (o *ThreeDS2RequestData2) HasAcctInfo() bool {
 	if o != nil && !common.IsNil(o.AcctInfo) {
 		return true
 	}
@@ -147,12 +140,12 @@ func (o *ThreeDS2RequestData) HasAcctInfo() bool {
 }
 
 // SetAcctInfo gets a reference to the given AcctInfo and assigns it to the AcctInfo field.
-func (o *ThreeDS2RequestData) SetAcctInfo(v AcctInfo) {
+func (o *ThreeDS2RequestData2) SetAcctInfo(v AcctInfo) {
 	o.AcctInfo = &v
 }
 
 // GetAcctType returns the AcctType field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetAcctType() string {
+func (o *ThreeDS2RequestData2) GetAcctType() string {
 	if o == nil || common.IsNil(o.AcctType) {
 		var ret string
 		return ret
@@ -162,7 +155,7 @@ func (o *ThreeDS2RequestData) GetAcctType() string {
 
 // GetAcctTypeOk returns a tuple with the AcctType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetAcctTypeOk() (*string, bool) {
+func (o *ThreeDS2RequestData2) GetAcctTypeOk() (*string, bool) {
 	if o == nil || common.IsNil(o.AcctType) {
 		return nil, false
 	}
@@ -170,7 +163,7 @@ func (o *ThreeDS2RequestData) GetAcctTypeOk() (*string, bool) {
 }
 
 // HasAcctType returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasAcctType() bool {
+func (o *ThreeDS2RequestData2) HasAcctType() bool {
 	if o != nil && !common.IsNil(o.AcctType) {
 		return true
 	}
@@ -179,12 +172,12 @@ func (o *ThreeDS2RequestData) HasAcctType() bool {
 }
 
 // SetAcctType gets a reference to the given string and assigns it to the AcctType field.
-func (o *ThreeDS2RequestData) SetAcctType(v string) {
+func (o *ThreeDS2RequestData2) SetAcctType(v string) {
 	o.AcctType = &v
 }
 
 // GetAcquirerBIN returns the AcquirerBIN field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetAcquirerBIN() string {
+func (o *ThreeDS2RequestData2) GetAcquirerBIN() string {
 	if o == nil || common.IsNil(o.AcquirerBIN) {
 		var ret string
 		return ret
@@ -194,7 +187,7 @@ func (o *ThreeDS2RequestData) GetAcquirerBIN() string {
 
 // GetAcquirerBINOk returns a tuple with the AcquirerBIN field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetAcquirerBINOk() (*string, bool) {
+func (o *ThreeDS2RequestData2) GetAcquirerBINOk() (*string, bool) {
 	if o == nil || common.IsNil(o.AcquirerBIN) {
 		return nil, false
 	}
@@ -202,7 +195,7 @@ func (o *ThreeDS2RequestData) GetAcquirerBINOk() (*string, bool) {
 }
 
 // HasAcquirerBIN returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasAcquirerBIN() bool {
+func (o *ThreeDS2RequestData2) HasAcquirerBIN() bool {
 	if o != nil && !common.IsNil(o.AcquirerBIN) {
 		return true
 	}
@@ -211,12 +204,12 @@ func (o *ThreeDS2RequestData) HasAcquirerBIN() bool {
 }
 
 // SetAcquirerBIN gets a reference to the given string and assigns it to the AcquirerBIN field.
-func (o *ThreeDS2RequestData) SetAcquirerBIN(v string) {
+func (o *ThreeDS2RequestData2) SetAcquirerBIN(v string) {
 	o.AcquirerBIN = &v
 }
 
 // GetAcquirerMerchantID returns the AcquirerMerchantID field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetAcquirerMerchantID() string {
+func (o *ThreeDS2RequestData2) GetAcquirerMerchantID() string {
 	if o == nil || common.IsNil(o.AcquirerMerchantID) {
 		var ret string
 		return ret
@@ -226,7 +219,7 @@ func (o *ThreeDS2RequestData) GetAcquirerMerchantID() string {
 
 // GetAcquirerMerchantIDOk returns a tuple with the AcquirerMerchantID field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetAcquirerMerchantIDOk() (*string, bool) {
+func (o *ThreeDS2RequestData2) GetAcquirerMerchantIDOk() (*string, bool) {
 	if o == nil || common.IsNil(o.AcquirerMerchantID) {
 		return nil, false
 	}
@@ -234,7 +227,7 @@ func (o *ThreeDS2RequestData) GetAcquirerMerchantIDOk() (*string, bool) {
 }
 
 // HasAcquirerMerchantID returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasAcquirerMerchantID() bool {
+func (o *ThreeDS2RequestData2) HasAcquirerMerchantID() bool {
 	if o != nil && !common.IsNil(o.AcquirerMerchantID) {
 		return true
 	}
@@ -243,12 +236,12 @@ func (o *ThreeDS2RequestData) HasAcquirerMerchantID() bool {
 }
 
 // SetAcquirerMerchantID gets a reference to the given string and assigns it to the AcquirerMerchantID field.
-func (o *ThreeDS2RequestData) SetAcquirerMerchantID(v string) {
+func (o *ThreeDS2RequestData2) SetAcquirerMerchantID(v string) {
 	o.AcquirerMerchantID = &v
 }
 
 // GetAddrMatch returns the AddrMatch field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetAddrMatch() string {
+func (o *ThreeDS2RequestData2) GetAddrMatch() string {
 	if o == nil || common.IsNil(o.AddrMatch) {
 		var ret string
 		return ret
@@ -258,7 +251,7 @@ func (o *ThreeDS2RequestData) GetAddrMatch() string {
 
 // GetAddrMatchOk returns a tuple with the AddrMatch field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetAddrMatchOk() (*string, bool) {
+func (o *ThreeDS2RequestData2) GetAddrMatchOk() (*string, bool) {
 	if o == nil || common.IsNil(o.AddrMatch) {
 		return nil, false
 	}
@@ -266,7 +259,7 @@ func (o *ThreeDS2RequestData) GetAddrMatchOk() (*string, bool) {
 }
 
 // HasAddrMatch returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasAddrMatch() bool {
+func (o *ThreeDS2RequestData2) HasAddrMatch() bool {
 	if o != nil && !common.IsNil(o.AddrMatch) {
 		return true
 	}
@@ -275,13 +268,13 @@ func (o *ThreeDS2RequestData) HasAddrMatch() bool {
 }
 
 // SetAddrMatch gets a reference to the given string and assigns it to the AddrMatch field.
-func (o *ThreeDS2RequestData) SetAddrMatch(v string) {
+func (o *ThreeDS2RequestData2) SetAddrMatch(v string) {
 	o.AddrMatch = &v
 }
 
 // GetAuthenticationOnly returns the AuthenticationOnly field value if set, zero value otherwise.
 // Deprecated
-func (o *ThreeDS2RequestData) GetAuthenticationOnly() bool {
+func (o *ThreeDS2RequestData2) GetAuthenticationOnly() bool {
 	if o == nil || common.IsNil(o.AuthenticationOnly) {
 		var ret bool
 		return ret
@@ -292,7 +285,7 @@ func (o *ThreeDS2RequestData) GetAuthenticationOnly() bool {
 // GetAuthenticationOnlyOk returns a tuple with the AuthenticationOnly field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // Deprecated
-func (o *ThreeDS2RequestData) GetAuthenticationOnlyOk() (*bool, bool) {
+func (o *ThreeDS2RequestData2) GetAuthenticationOnlyOk() (*bool, bool) {
 	if o == nil || common.IsNil(o.AuthenticationOnly) {
 		return nil, false
 	}
@@ -300,7 +293,7 @@ func (o *ThreeDS2RequestData) GetAuthenticationOnlyOk() (*bool, bool) {
 }
 
 // HasAuthenticationOnly returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasAuthenticationOnly() bool {
+func (o *ThreeDS2RequestData2) HasAuthenticationOnly() bool {
 	if o != nil && !common.IsNil(o.AuthenticationOnly) {
 		return true
 	}
@@ -310,13 +303,13 @@ func (o *ThreeDS2RequestData) HasAuthenticationOnly() bool {
 
 // SetAuthenticationOnly gets a reference to the given bool and assigns it to the AuthenticationOnly field.
 // Deprecated
-func (o *ThreeDS2RequestData) SetAuthenticationOnly(v bool) {
+func (o *ThreeDS2RequestData2) SetAuthenticationOnly(v bool) {
 	o.AuthenticationOnly = &v
 }
 
 // GetChallengeIndicator returns the ChallengeIndicator field value if set, zero value otherwise.
 // Deprecated
-func (o *ThreeDS2RequestData) GetChallengeIndicator() string {
+func (o *ThreeDS2RequestData2) GetChallengeIndicator() string {
 	if o == nil || common.IsNil(o.ChallengeIndicator) {
 		var ret string
 		return ret
@@ -327,7 +320,7 @@ func (o *ThreeDS2RequestData) GetChallengeIndicator() string {
 // GetChallengeIndicatorOk returns a tuple with the ChallengeIndicator field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // Deprecated
-func (o *ThreeDS2RequestData) GetChallengeIndicatorOk() (*string, bool) {
+func (o *ThreeDS2RequestData2) GetChallengeIndicatorOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ChallengeIndicator) {
 		return nil, false
 	}
@@ -335,7 +328,7 @@ func (o *ThreeDS2RequestData) GetChallengeIndicatorOk() (*string, bool) {
 }
 
 // HasChallengeIndicator returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasChallengeIndicator() bool {
+func (o *ThreeDS2RequestData2) HasChallengeIndicator() bool {
 	if o != nil && !common.IsNil(o.ChallengeIndicator) {
 		return true
 	}
@@ -345,36 +338,12 @@ func (o *ThreeDS2RequestData) HasChallengeIndicator() bool {
 
 // SetChallengeIndicator gets a reference to the given string and assigns it to the ChallengeIndicator field.
 // Deprecated
-func (o *ThreeDS2RequestData) SetChallengeIndicator(v string) {
+func (o *ThreeDS2RequestData2) SetChallengeIndicator(v string) {
 	o.ChallengeIndicator = &v
 }
 
-// GetDeviceChannel returns the DeviceChannel field value
-func (o *ThreeDS2RequestData) GetDeviceChannel() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.DeviceChannel
-}
-
-// GetDeviceChannelOk returns a tuple with the DeviceChannel field value
-// and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetDeviceChannelOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.DeviceChannel, true
-}
-
-// SetDeviceChannel sets field value
-func (o *ThreeDS2RequestData) SetDeviceChannel(v string) {
-	o.DeviceChannel = v
-}
-
 // GetDeviceRenderOptions returns the DeviceRenderOptions field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetDeviceRenderOptions() DeviceRenderOptions {
+func (o *ThreeDS2RequestData2) GetDeviceRenderOptions() DeviceRenderOptions {
 	if o == nil || common.IsNil(o.DeviceRenderOptions) {
 		var ret DeviceRenderOptions
 		return ret
@@ -384,7 +353,7 @@ func (o *ThreeDS2RequestData) GetDeviceRenderOptions() DeviceRenderOptions {
 
 // GetDeviceRenderOptionsOk returns a tuple with the DeviceRenderOptions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetDeviceRenderOptionsOk() (*DeviceRenderOptions, bool) {
+func (o *ThreeDS2RequestData2) GetDeviceRenderOptionsOk() (*DeviceRenderOptions, bool) {
 	if o == nil || common.IsNil(o.DeviceRenderOptions) {
 		return nil, false
 	}
@@ -392,7 +361,7 @@ func (o *ThreeDS2RequestData) GetDeviceRenderOptionsOk() (*DeviceRenderOptions, 
 }
 
 // HasDeviceRenderOptions returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasDeviceRenderOptions() bool {
+func (o *ThreeDS2RequestData2) HasDeviceRenderOptions() bool {
 	if o != nil && !common.IsNil(o.DeviceRenderOptions) {
 		return true
 	}
@@ -401,12 +370,12 @@ func (o *ThreeDS2RequestData) HasDeviceRenderOptions() bool {
 }
 
 // SetDeviceRenderOptions gets a reference to the given DeviceRenderOptions and assigns it to the DeviceRenderOptions field.
-func (o *ThreeDS2RequestData) SetDeviceRenderOptions(v DeviceRenderOptions) {
+func (o *ThreeDS2RequestData2) SetDeviceRenderOptions(v DeviceRenderOptions) {
 	o.DeviceRenderOptions = &v
 }
 
 // GetHomePhone returns the HomePhone field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetHomePhone() Phone {
+func (o *ThreeDS2RequestData2) GetHomePhone() Phone {
 	if o == nil || common.IsNil(o.HomePhone) {
 		var ret Phone
 		return ret
@@ -416,7 +385,7 @@ func (o *ThreeDS2RequestData) GetHomePhone() Phone {
 
 // GetHomePhoneOk returns a tuple with the HomePhone field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetHomePhoneOk() (*Phone, bool) {
+func (o *ThreeDS2RequestData2) GetHomePhoneOk() (*Phone, bool) {
 	if o == nil || common.IsNil(o.HomePhone) {
 		return nil, false
 	}
@@ -424,7 +393,7 @@ func (o *ThreeDS2RequestData) GetHomePhoneOk() (*Phone, bool) {
 }
 
 // HasHomePhone returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasHomePhone() bool {
+func (o *ThreeDS2RequestData2) HasHomePhone() bool {
 	if o != nil && !common.IsNil(o.HomePhone) {
 		return true
 	}
@@ -433,12 +402,12 @@ func (o *ThreeDS2RequestData) HasHomePhone() bool {
 }
 
 // SetHomePhone gets a reference to the given Phone and assigns it to the HomePhone field.
-func (o *ThreeDS2RequestData) SetHomePhone(v Phone) {
+func (o *ThreeDS2RequestData2) SetHomePhone(v Phone) {
 	o.HomePhone = &v
 }
 
 // GetMcc returns the Mcc field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetMcc() string {
+func (o *ThreeDS2RequestData2) GetMcc() string {
 	if o == nil || common.IsNil(o.Mcc) {
 		var ret string
 		return ret
@@ -448,7 +417,7 @@ func (o *ThreeDS2RequestData) GetMcc() string {
 
 // GetMccOk returns a tuple with the Mcc field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetMccOk() (*string, bool) {
+func (o *ThreeDS2RequestData2) GetMccOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Mcc) {
 		return nil, false
 	}
@@ -456,7 +425,7 @@ func (o *ThreeDS2RequestData) GetMccOk() (*string, bool) {
 }
 
 // HasMcc returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasMcc() bool {
+func (o *ThreeDS2RequestData2) HasMcc() bool {
 	if o != nil && !common.IsNil(o.Mcc) {
 		return true
 	}
@@ -465,12 +434,12 @@ func (o *ThreeDS2RequestData) HasMcc() bool {
 }
 
 // SetMcc gets a reference to the given string and assigns it to the Mcc field.
-func (o *ThreeDS2RequestData) SetMcc(v string) {
+func (o *ThreeDS2RequestData2) SetMcc(v string) {
 	o.Mcc = &v
 }
 
 // GetMerchantName returns the MerchantName field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetMerchantName() string {
+func (o *ThreeDS2RequestData2) GetMerchantName() string {
 	if o == nil || common.IsNil(o.MerchantName) {
 		var ret string
 		return ret
@@ -480,7 +449,7 @@ func (o *ThreeDS2RequestData) GetMerchantName() string {
 
 // GetMerchantNameOk returns a tuple with the MerchantName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetMerchantNameOk() (*string, bool) {
+func (o *ThreeDS2RequestData2) GetMerchantNameOk() (*string, bool) {
 	if o == nil || common.IsNil(o.MerchantName) {
 		return nil, false
 	}
@@ -488,7 +457,7 @@ func (o *ThreeDS2RequestData) GetMerchantNameOk() (*string, bool) {
 }
 
 // HasMerchantName returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasMerchantName() bool {
+func (o *ThreeDS2RequestData2) HasMerchantName() bool {
 	if o != nil && !common.IsNil(o.MerchantName) {
 		return true
 	}
@@ -497,12 +466,12 @@ func (o *ThreeDS2RequestData) HasMerchantName() bool {
 }
 
 // SetMerchantName gets a reference to the given string and assigns it to the MerchantName field.
-func (o *ThreeDS2RequestData) SetMerchantName(v string) {
+func (o *ThreeDS2RequestData2) SetMerchantName(v string) {
 	o.MerchantName = &v
 }
 
 // GetMessageVersion returns the MessageVersion field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetMessageVersion() string {
+func (o *ThreeDS2RequestData2) GetMessageVersion() string {
 	if o == nil || common.IsNil(o.MessageVersion) {
 		var ret string
 		return ret
@@ -512,7 +481,7 @@ func (o *ThreeDS2RequestData) GetMessageVersion() string {
 
 // GetMessageVersionOk returns a tuple with the MessageVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetMessageVersionOk() (*string, bool) {
+func (o *ThreeDS2RequestData2) GetMessageVersionOk() (*string, bool) {
 	if o == nil || common.IsNil(o.MessageVersion) {
 		return nil, false
 	}
@@ -520,7 +489,7 @@ func (o *ThreeDS2RequestData) GetMessageVersionOk() (*string, bool) {
 }
 
 // HasMessageVersion returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasMessageVersion() bool {
+func (o *ThreeDS2RequestData2) HasMessageVersion() bool {
 	if o != nil && !common.IsNil(o.MessageVersion) {
 		return true
 	}
@@ -529,12 +498,12 @@ func (o *ThreeDS2RequestData) HasMessageVersion() bool {
 }
 
 // SetMessageVersion gets a reference to the given string and assigns it to the MessageVersion field.
-func (o *ThreeDS2RequestData) SetMessageVersion(v string) {
+func (o *ThreeDS2RequestData2) SetMessageVersion(v string) {
 	o.MessageVersion = &v
 }
 
 // GetMobilePhone returns the MobilePhone field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetMobilePhone() Phone {
+func (o *ThreeDS2RequestData2) GetMobilePhone() Phone {
 	if o == nil || common.IsNil(o.MobilePhone) {
 		var ret Phone
 		return ret
@@ -544,7 +513,7 @@ func (o *ThreeDS2RequestData) GetMobilePhone() Phone {
 
 // GetMobilePhoneOk returns a tuple with the MobilePhone field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetMobilePhoneOk() (*Phone, bool) {
+func (o *ThreeDS2RequestData2) GetMobilePhoneOk() (*Phone, bool) {
 	if o == nil || common.IsNil(o.MobilePhone) {
 		return nil, false
 	}
@@ -552,7 +521,7 @@ func (o *ThreeDS2RequestData) GetMobilePhoneOk() (*Phone, bool) {
 }
 
 // HasMobilePhone returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasMobilePhone() bool {
+func (o *ThreeDS2RequestData2) HasMobilePhone() bool {
 	if o != nil && !common.IsNil(o.MobilePhone) {
 		return true
 	}
@@ -561,12 +530,12 @@ func (o *ThreeDS2RequestData) HasMobilePhone() bool {
 }
 
 // SetMobilePhone gets a reference to the given Phone and assigns it to the MobilePhone field.
-func (o *ThreeDS2RequestData) SetMobilePhone(v Phone) {
+func (o *ThreeDS2RequestData2) SetMobilePhone(v Phone) {
 	o.MobilePhone = &v
 }
 
 // GetNotificationURL returns the NotificationURL field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetNotificationURL() string {
+func (o *ThreeDS2RequestData2) GetNotificationURL() string {
 	if o == nil || common.IsNil(o.NotificationURL) {
 		var ret string
 		return ret
@@ -576,7 +545,7 @@ func (o *ThreeDS2RequestData) GetNotificationURL() string {
 
 // GetNotificationURLOk returns a tuple with the NotificationURL field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetNotificationURLOk() (*string, bool) {
+func (o *ThreeDS2RequestData2) GetNotificationURLOk() (*string, bool) {
 	if o == nil || common.IsNil(o.NotificationURL) {
 		return nil, false
 	}
@@ -584,7 +553,7 @@ func (o *ThreeDS2RequestData) GetNotificationURLOk() (*string, bool) {
 }
 
 // HasNotificationURL returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasNotificationURL() bool {
+func (o *ThreeDS2RequestData2) HasNotificationURL() bool {
 	if o != nil && !common.IsNil(o.NotificationURL) {
 		return true
 	}
@@ -593,12 +562,12 @@ func (o *ThreeDS2RequestData) HasNotificationURL() bool {
 }
 
 // SetNotificationURL gets a reference to the given string and assigns it to the NotificationURL field.
-func (o *ThreeDS2RequestData) SetNotificationURL(v string) {
+func (o *ThreeDS2RequestData2) SetNotificationURL(v string) {
 	o.NotificationURL = &v
 }
 
 // GetPayTokenInd returns the PayTokenInd field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetPayTokenInd() bool {
+func (o *ThreeDS2RequestData2) GetPayTokenInd() bool {
 	if o == nil || common.IsNil(o.PayTokenInd) {
 		var ret bool
 		return ret
@@ -608,7 +577,7 @@ func (o *ThreeDS2RequestData) GetPayTokenInd() bool {
 
 // GetPayTokenIndOk returns a tuple with the PayTokenInd field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetPayTokenIndOk() (*bool, bool) {
+func (o *ThreeDS2RequestData2) GetPayTokenIndOk() (*bool, bool) {
 	if o == nil || common.IsNil(o.PayTokenInd) {
 		return nil, false
 	}
@@ -616,7 +585,7 @@ func (o *ThreeDS2RequestData) GetPayTokenIndOk() (*bool, bool) {
 }
 
 // HasPayTokenInd returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasPayTokenInd() bool {
+func (o *ThreeDS2RequestData2) HasPayTokenInd() bool {
 	if o != nil && !common.IsNil(o.PayTokenInd) {
 		return true
 	}
@@ -625,12 +594,12 @@ func (o *ThreeDS2RequestData) HasPayTokenInd() bool {
 }
 
 // SetPayTokenInd gets a reference to the given bool and assigns it to the PayTokenInd field.
-func (o *ThreeDS2RequestData) SetPayTokenInd(v bool) {
+func (o *ThreeDS2RequestData2) SetPayTokenInd(v bool) {
 	o.PayTokenInd = &v
 }
 
 // GetPaymentAuthenticationUseCase returns the PaymentAuthenticationUseCase field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetPaymentAuthenticationUseCase() string {
+func (o *ThreeDS2RequestData2) GetPaymentAuthenticationUseCase() string {
 	if o == nil || common.IsNil(o.PaymentAuthenticationUseCase) {
 		var ret string
 		return ret
@@ -640,7 +609,7 @@ func (o *ThreeDS2RequestData) GetPaymentAuthenticationUseCase() string {
 
 // GetPaymentAuthenticationUseCaseOk returns a tuple with the PaymentAuthenticationUseCase field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetPaymentAuthenticationUseCaseOk() (*string, bool) {
+func (o *ThreeDS2RequestData2) GetPaymentAuthenticationUseCaseOk() (*string, bool) {
 	if o == nil || common.IsNil(o.PaymentAuthenticationUseCase) {
 		return nil, false
 	}
@@ -648,7 +617,7 @@ func (o *ThreeDS2RequestData) GetPaymentAuthenticationUseCaseOk() (*string, bool
 }
 
 // HasPaymentAuthenticationUseCase returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasPaymentAuthenticationUseCase() bool {
+func (o *ThreeDS2RequestData2) HasPaymentAuthenticationUseCase() bool {
 	if o != nil && !common.IsNil(o.PaymentAuthenticationUseCase) {
 		return true
 	}
@@ -657,12 +626,12 @@ func (o *ThreeDS2RequestData) HasPaymentAuthenticationUseCase() bool {
 }
 
 // SetPaymentAuthenticationUseCase gets a reference to the given string and assigns it to the PaymentAuthenticationUseCase field.
-func (o *ThreeDS2RequestData) SetPaymentAuthenticationUseCase(v string) {
+func (o *ThreeDS2RequestData2) SetPaymentAuthenticationUseCase(v string) {
 	o.PaymentAuthenticationUseCase = &v
 }
 
 // GetPurchaseInstalData returns the PurchaseInstalData field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetPurchaseInstalData() string {
+func (o *ThreeDS2RequestData2) GetPurchaseInstalData() string {
 	if o == nil || common.IsNil(o.PurchaseInstalData) {
 		var ret string
 		return ret
@@ -672,7 +641,7 @@ func (o *ThreeDS2RequestData) GetPurchaseInstalData() string {
 
 // GetPurchaseInstalDataOk returns a tuple with the PurchaseInstalData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetPurchaseInstalDataOk() (*string, bool) {
+func (o *ThreeDS2RequestData2) GetPurchaseInstalDataOk() (*string, bool) {
 	if o == nil || common.IsNil(o.PurchaseInstalData) {
 		return nil, false
 	}
@@ -680,7 +649,7 @@ func (o *ThreeDS2RequestData) GetPurchaseInstalDataOk() (*string, bool) {
 }
 
 // HasPurchaseInstalData returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasPurchaseInstalData() bool {
+func (o *ThreeDS2RequestData2) HasPurchaseInstalData() bool {
 	if o != nil && !common.IsNil(o.PurchaseInstalData) {
 		return true
 	}
@@ -689,12 +658,12 @@ func (o *ThreeDS2RequestData) HasPurchaseInstalData() bool {
 }
 
 // SetPurchaseInstalData gets a reference to the given string and assigns it to the PurchaseInstalData field.
-func (o *ThreeDS2RequestData) SetPurchaseInstalData(v string) {
+func (o *ThreeDS2RequestData2) SetPurchaseInstalData(v string) {
 	o.PurchaseInstalData = &v
 }
 
 // GetRecurringExpiry returns the RecurringExpiry field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetRecurringExpiry() string {
+func (o *ThreeDS2RequestData2) GetRecurringExpiry() string {
 	if o == nil || common.IsNil(o.RecurringExpiry) {
 		var ret string
 		return ret
@@ -704,7 +673,7 @@ func (o *ThreeDS2RequestData) GetRecurringExpiry() string {
 
 // GetRecurringExpiryOk returns a tuple with the RecurringExpiry field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetRecurringExpiryOk() (*string, bool) {
+func (o *ThreeDS2RequestData2) GetRecurringExpiryOk() (*string, bool) {
 	if o == nil || common.IsNil(o.RecurringExpiry) {
 		return nil, false
 	}
@@ -712,7 +681,7 @@ func (o *ThreeDS2RequestData) GetRecurringExpiryOk() (*string, bool) {
 }
 
 // HasRecurringExpiry returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasRecurringExpiry() bool {
+func (o *ThreeDS2RequestData2) HasRecurringExpiry() bool {
 	if o != nil && !common.IsNil(o.RecurringExpiry) {
 		return true
 	}
@@ -721,12 +690,12 @@ func (o *ThreeDS2RequestData) HasRecurringExpiry() bool {
 }
 
 // SetRecurringExpiry gets a reference to the given string and assigns it to the RecurringExpiry field.
-func (o *ThreeDS2RequestData) SetRecurringExpiry(v string) {
+func (o *ThreeDS2RequestData2) SetRecurringExpiry(v string) {
 	o.RecurringExpiry = &v
 }
 
 // GetRecurringFrequency returns the RecurringFrequency field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetRecurringFrequency() string {
+func (o *ThreeDS2RequestData2) GetRecurringFrequency() string {
 	if o == nil || common.IsNil(o.RecurringFrequency) {
 		var ret string
 		return ret
@@ -736,7 +705,7 @@ func (o *ThreeDS2RequestData) GetRecurringFrequency() string {
 
 // GetRecurringFrequencyOk returns a tuple with the RecurringFrequency field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetRecurringFrequencyOk() (*string, bool) {
+func (o *ThreeDS2RequestData2) GetRecurringFrequencyOk() (*string, bool) {
 	if o == nil || common.IsNil(o.RecurringFrequency) {
 		return nil, false
 	}
@@ -744,7 +713,7 @@ func (o *ThreeDS2RequestData) GetRecurringFrequencyOk() (*string, bool) {
 }
 
 // HasRecurringFrequency returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasRecurringFrequency() bool {
+func (o *ThreeDS2RequestData2) HasRecurringFrequency() bool {
 	if o != nil && !common.IsNil(o.RecurringFrequency) {
 		return true
 	}
@@ -753,12 +722,12 @@ func (o *ThreeDS2RequestData) HasRecurringFrequency() bool {
 }
 
 // SetRecurringFrequency gets a reference to the given string and assigns it to the RecurringFrequency field.
-func (o *ThreeDS2RequestData) SetRecurringFrequency(v string) {
+func (o *ThreeDS2RequestData2) SetRecurringFrequency(v string) {
 	o.RecurringFrequency = &v
 }
 
 // GetSdkAppID returns the SdkAppID field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetSdkAppID() string {
+func (o *ThreeDS2RequestData2) GetSdkAppID() string {
 	if o == nil || common.IsNil(o.SdkAppID) {
 		var ret string
 		return ret
@@ -768,7 +737,7 @@ func (o *ThreeDS2RequestData) GetSdkAppID() string {
 
 // GetSdkAppIDOk returns a tuple with the SdkAppID field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetSdkAppIDOk() (*string, bool) {
+func (o *ThreeDS2RequestData2) GetSdkAppIDOk() (*string, bool) {
 	if o == nil || common.IsNil(o.SdkAppID) {
 		return nil, false
 	}
@@ -776,7 +745,7 @@ func (o *ThreeDS2RequestData) GetSdkAppIDOk() (*string, bool) {
 }
 
 // HasSdkAppID returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasSdkAppID() bool {
+func (o *ThreeDS2RequestData2) HasSdkAppID() bool {
 	if o != nil && !common.IsNil(o.SdkAppID) {
 		return true
 	}
@@ -785,44 +754,12 @@ func (o *ThreeDS2RequestData) HasSdkAppID() bool {
 }
 
 // SetSdkAppID gets a reference to the given string and assigns it to the SdkAppID field.
-func (o *ThreeDS2RequestData) SetSdkAppID(v string) {
+func (o *ThreeDS2RequestData2) SetSdkAppID(v string) {
 	o.SdkAppID = &v
 }
 
-// GetSdkEncData returns the SdkEncData field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetSdkEncData() string {
-	if o == nil || common.IsNil(o.SdkEncData) {
-		var ret string
-		return ret
-	}
-	return *o.SdkEncData
-}
-
-// GetSdkEncDataOk returns a tuple with the SdkEncData field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetSdkEncDataOk() (*string, bool) {
-	if o == nil || common.IsNil(o.SdkEncData) {
-		return nil, false
-	}
-	return o.SdkEncData, true
-}
-
-// HasSdkEncData returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasSdkEncData() bool {
-	if o != nil && !common.IsNil(o.SdkEncData) {
-		return true
-	}
-
-	return false
-}
-
-// SetSdkEncData gets a reference to the given string and assigns it to the SdkEncData field.
-func (o *ThreeDS2RequestData) SetSdkEncData(v string) {
-	o.SdkEncData = &v
-}
-
 // GetSdkEphemPubKey returns the SdkEphemPubKey field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetSdkEphemPubKey() SDKEphemPubKey {
+func (o *ThreeDS2RequestData2) GetSdkEphemPubKey() SDKEphemPubKey {
 	if o == nil || common.IsNil(o.SdkEphemPubKey) {
 		var ret SDKEphemPubKey
 		return ret
@@ -832,7 +769,7 @@ func (o *ThreeDS2RequestData) GetSdkEphemPubKey() SDKEphemPubKey {
 
 // GetSdkEphemPubKeyOk returns a tuple with the SdkEphemPubKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetSdkEphemPubKeyOk() (*SDKEphemPubKey, bool) {
+func (o *ThreeDS2RequestData2) GetSdkEphemPubKeyOk() (*SDKEphemPubKey, bool) {
 	if o == nil || common.IsNil(o.SdkEphemPubKey) {
 		return nil, false
 	}
@@ -840,7 +777,7 @@ func (o *ThreeDS2RequestData) GetSdkEphemPubKeyOk() (*SDKEphemPubKey, bool) {
 }
 
 // HasSdkEphemPubKey returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasSdkEphemPubKey() bool {
+func (o *ThreeDS2RequestData2) HasSdkEphemPubKey() bool {
 	if o != nil && !common.IsNil(o.SdkEphemPubKey) {
 		return true
 	}
@@ -849,12 +786,12 @@ func (o *ThreeDS2RequestData) HasSdkEphemPubKey() bool {
 }
 
 // SetSdkEphemPubKey gets a reference to the given SDKEphemPubKey and assigns it to the SdkEphemPubKey field.
-func (o *ThreeDS2RequestData) SetSdkEphemPubKey(v SDKEphemPubKey) {
+func (o *ThreeDS2RequestData2) SetSdkEphemPubKey(v SDKEphemPubKey) {
 	o.SdkEphemPubKey = &v
 }
 
 // GetSdkMaxTimeout returns the SdkMaxTimeout field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetSdkMaxTimeout() int32 {
+func (o *ThreeDS2RequestData2) GetSdkMaxTimeout() int32 {
 	if o == nil || common.IsNil(o.SdkMaxTimeout) {
 		var ret int32
 		return ret
@@ -864,7 +801,7 @@ func (o *ThreeDS2RequestData) GetSdkMaxTimeout() int32 {
 
 // GetSdkMaxTimeoutOk returns a tuple with the SdkMaxTimeout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetSdkMaxTimeoutOk() (*int32, bool) {
+func (o *ThreeDS2RequestData2) GetSdkMaxTimeoutOk() (*int32, bool) {
 	if o == nil || common.IsNil(o.SdkMaxTimeout) {
 		return nil, false
 	}
@@ -872,7 +809,7 @@ func (o *ThreeDS2RequestData) GetSdkMaxTimeoutOk() (*int32, bool) {
 }
 
 // HasSdkMaxTimeout returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasSdkMaxTimeout() bool {
+func (o *ThreeDS2RequestData2) HasSdkMaxTimeout() bool {
 	if o != nil && !common.IsNil(o.SdkMaxTimeout) {
 		return true
 	}
@@ -881,12 +818,12 @@ func (o *ThreeDS2RequestData) HasSdkMaxTimeout() bool {
 }
 
 // SetSdkMaxTimeout gets a reference to the given int32 and assigns it to the SdkMaxTimeout field.
-func (o *ThreeDS2RequestData) SetSdkMaxTimeout(v int32) {
+func (o *ThreeDS2RequestData2) SetSdkMaxTimeout(v int32) {
 	o.SdkMaxTimeout = &v
 }
 
 // GetSdkReferenceNumber returns the SdkReferenceNumber field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetSdkReferenceNumber() string {
+func (o *ThreeDS2RequestData2) GetSdkReferenceNumber() string {
 	if o == nil || common.IsNil(o.SdkReferenceNumber) {
 		var ret string
 		return ret
@@ -896,7 +833,7 @@ func (o *ThreeDS2RequestData) GetSdkReferenceNumber() string {
 
 // GetSdkReferenceNumberOk returns a tuple with the SdkReferenceNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetSdkReferenceNumberOk() (*string, bool) {
+func (o *ThreeDS2RequestData2) GetSdkReferenceNumberOk() (*string, bool) {
 	if o == nil || common.IsNil(o.SdkReferenceNumber) {
 		return nil, false
 	}
@@ -904,7 +841,7 @@ func (o *ThreeDS2RequestData) GetSdkReferenceNumberOk() (*string, bool) {
 }
 
 // HasSdkReferenceNumber returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasSdkReferenceNumber() bool {
+func (o *ThreeDS2RequestData2) HasSdkReferenceNumber() bool {
 	if o != nil && !common.IsNil(o.SdkReferenceNumber) {
 		return true
 	}
@@ -913,12 +850,12 @@ func (o *ThreeDS2RequestData) HasSdkReferenceNumber() bool {
 }
 
 // SetSdkReferenceNumber gets a reference to the given string and assigns it to the SdkReferenceNumber field.
-func (o *ThreeDS2RequestData) SetSdkReferenceNumber(v string) {
+func (o *ThreeDS2RequestData2) SetSdkReferenceNumber(v string) {
 	o.SdkReferenceNumber = &v
 }
 
 // GetSdkTransID returns the SdkTransID field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetSdkTransID() string {
+func (o *ThreeDS2RequestData2) GetSdkTransID() string {
 	if o == nil || common.IsNil(o.SdkTransID) {
 		var ret string
 		return ret
@@ -928,7 +865,7 @@ func (o *ThreeDS2RequestData) GetSdkTransID() string {
 
 // GetSdkTransIDOk returns a tuple with the SdkTransID field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetSdkTransIDOk() (*string, bool) {
+func (o *ThreeDS2RequestData2) GetSdkTransIDOk() (*string, bool) {
 	if o == nil || common.IsNil(o.SdkTransID) {
 		return nil, false
 	}
@@ -936,7 +873,7 @@ func (o *ThreeDS2RequestData) GetSdkTransIDOk() (*string, bool) {
 }
 
 // HasSdkTransID returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasSdkTransID() bool {
+func (o *ThreeDS2RequestData2) HasSdkTransID() bool {
 	if o != nil && !common.IsNil(o.SdkTransID) {
 		return true
 	}
@@ -945,44 +882,12 @@ func (o *ThreeDS2RequestData) HasSdkTransID() bool {
 }
 
 // SetSdkTransID gets a reference to the given string and assigns it to the SdkTransID field.
-func (o *ThreeDS2RequestData) SetSdkTransID(v string) {
+func (o *ThreeDS2RequestData2) SetSdkTransID(v string) {
 	o.SdkTransID = &v
 }
 
-// GetSdkVersion returns the SdkVersion field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetSdkVersion() string {
-	if o == nil || common.IsNil(o.SdkVersion) {
-		var ret string
-		return ret
-	}
-	return *o.SdkVersion
-}
-
-// GetSdkVersionOk returns a tuple with the SdkVersion field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetSdkVersionOk() (*string, bool) {
-	if o == nil || common.IsNil(o.SdkVersion) {
-		return nil, false
-	}
-	return o.SdkVersion, true
-}
-
-// HasSdkVersion returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasSdkVersion() bool {
-	if o != nil && !common.IsNil(o.SdkVersion) {
-		return true
-	}
-
-	return false
-}
-
-// SetSdkVersion gets a reference to the given string and assigns it to the SdkVersion field.
-func (o *ThreeDS2RequestData) SetSdkVersion(v string) {
-	o.SdkVersion = &v
-}
-
 // GetThreeDSCompInd returns the ThreeDSCompInd field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetThreeDSCompInd() string {
+func (o *ThreeDS2RequestData2) GetThreeDSCompInd() string {
 	if o == nil || common.IsNil(o.ThreeDSCompInd) {
 		var ret string
 		return ret
@@ -992,7 +897,7 @@ func (o *ThreeDS2RequestData) GetThreeDSCompInd() string {
 
 // GetThreeDSCompIndOk returns a tuple with the ThreeDSCompInd field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetThreeDSCompIndOk() (*string, bool) {
+func (o *ThreeDS2RequestData2) GetThreeDSCompIndOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ThreeDSCompInd) {
 		return nil, false
 	}
@@ -1000,7 +905,7 @@ func (o *ThreeDS2RequestData) GetThreeDSCompIndOk() (*string, bool) {
 }
 
 // HasThreeDSCompInd returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasThreeDSCompInd() bool {
+func (o *ThreeDS2RequestData2) HasThreeDSCompInd() bool {
 	if o != nil && !common.IsNil(o.ThreeDSCompInd) {
 		return true
 	}
@@ -1009,12 +914,12 @@ func (o *ThreeDS2RequestData) HasThreeDSCompInd() bool {
 }
 
 // SetThreeDSCompInd gets a reference to the given string and assigns it to the ThreeDSCompInd field.
-func (o *ThreeDS2RequestData) SetThreeDSCompInd(v string) {
+func (o *ThreeDS2RequestData2) SetThreeDSCompInd(v string) {
 	o.ThreeDSCompInd = &v
 }
 
 // GetThreeDSRequestorAuthenticationInd returns the ThreeDSRequestorAuthenticationInd field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetThreeDSRequestorAuthenticationInd() string {
+func (o *ThreeDS2RequestData2) GetThreeDSRequestorAuthenticationInd() string {
 	if o == nil || common.IsNil(o.ThreeDSRequestorAuthenticationInd) {
 		var ret string
 		return ret
@@ -1024,7 +929,7 @@ func (o *ThreeDS2RequestData) GetThreeDSRequestorAuthenticationInd() string {
 
 // GetThreeDSRequestorAuthenticationIndOk returns a tuple with the ThreeDSRequestorAuthenticationInd field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetThreeDSRequestorAuthenticationIndOk() (*string, bool) {
+func (o *ThreeDS2RequestData2) GetThreeDSRequestorAuthenticationIndOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ThreeDSRequestorAuthenticationInd) {
 		return nil, false
 	}
@@ -1032,7 +937,7 @@ func (o *ThreeDS2RequestData) GetThreeDSRequestorAuthenticationIndOk() (*string,
 }
 
 // HasThreeDSRequestorAuthenticationInd returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasThreeDSRequestorAuthenticationInd() bool {
+func (o *ThreeDS2RequestData2) HasThreeDSRequestorAuthenticationInd() bool {
 	if o != nil && !common.IsNil(o.ThreeDSRequestorAuthenticationInd) {
 		return true
 	}
@@ -1041,12 +946,12 @@ func (o *ThreeDS2RequestData) HasThreeDSRequestorAuthenticationInd() bool {
 }
 
 // SetThreeDSRequestorAuthenticationInd gets a reference to the given string and assigns it to the ThreeDSRequestorAuthenticationInd field.
-func (o *ThreeDS2RequestData) SetThreeDSRequestorAuthenticationInd(v string) {
+func (o *ThreeDS2RequestData2) SetThreeDSRequestorAuthenticationInd(v string) {
 	o.ThreeDSRequestorAuthenticationInd = &v
 }
 
 // GetThreeDSRequestorAuthenticationInfo returns the ThreeDSRequestorAuthenticationInfo field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetThreeDSRequestorAuthenticationInfo() ThreeDSRequestorAuthenticationInfo {
+func (o *ThreeDS2RequestData2) GetThreeDSRequestorAuthenticationInfo() ThreeDSRequestorAuthenticationInfo {
 	if o == nil || common.IsNil(o.ThreeDSRequestorAuthenticationInfo) {
 		var ret ThreeDSRequestorAuthenticationInfo
 		return ret
@@ -1056,7 +961,7 @@ func (o *ThreeDS2RequestData) GetThreeDSRequestorAuthenticationInfo() ThreeDSReq
 
 // GetThreeDSRequestorAuthenticationInfoOk returns a tuple with the ThreeDSRequestorAuthenticationInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetThreeDSRequestorAuthenticationInfoOk() (*ThreeDSRequestorAuthenticationInfo, bool) {
+func (o *ThreeDS2RequestData2) GetThreeDSRequestorAuthenticationInfoOk() (*ThreeDSRequestorAuthenticationInfo, bool) {
 	if o == nil || common.IsNil(o.ThreeDSRequestorAuthenticationInfo) {
 		return nil, false
 	}
@@ -1064,7 +969,7 @@ func (o *ThreeDS2RequestData) GetThreeDSRequestorAuthenticationInfoOk() (*ThreeD
 }
 
 // HasThreeDSRequestorAuthenticationInfo returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasThreeDSRequestorAuthenticationInfo() bool {
+func (o *ThreeDS2RequestData2) HasThreeDSRequestorAuthenticationInfo() bool {
 	if o != nil && !common.IsNil(o.ThreeDSRequestorAuthenticationInfo) {
 		return true
 	}
@@ -1073,12 +978,12 @@ func (o *ThreeDS2RequestData) HasThreeDSRequestorAuthenticationInfo() bool {
 }
 
 // SetThreeDSRequestorAuthenticationInfo gets a reference to the given ThreeDSRequestorAuthenticationInfo and assigns it to the ThreeDSRequestorAuthenticationInfo field.
-func (o *ThreeDS2RequestData) SetThreeDSRequestorAuthenticationInfo(v ThreeDSRequestorAuthenticationInfo) {
+func (o *ThreeDS2RequestData2) SetThreeDSRequestorAuthenticationInfo(v ThreeDSRequestorAuthenticationInfo) {
 	o.ThreeDSRequestorAuthenticationInfo = &v
 }
 
 // GetThreeDSRequestorChallengeInd returns the ThreeDSRequestorChallengeInd field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetThreeDSRequestorChallengeInd() string {
+func (o *ThreeDS2RequestData2) GetThreeDSRequestorChallengeInd() string {
 	if o == nil || common.IsNil(o.ThreeDSRequestorChallengeInd) {
 		var ret string
 		return ret
@@ -1088,7 +993,7 @@ func (o *ThreeDS2RequestData) GetThreeDSRequestorChallengeInd() string {
 
 // GetThreeDSRequestorChallengeIndOk returns a tuple with the ThreeDSRequestorChallengeInd field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetThreeDSRequestorChallengeIndOk() (*string, bool) {
+func (o *ThreeDS2RequestData2) GetThreeDSRequestorChallengeIndOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ThreeDSRequestorChallengeInd) {
 		return nil, false
 	}
@@ -1096,7 +1001,7 @@ func (o *ThreeDS2RequestData) GetThreeDSRequestorChallengeIndOk() (*string, bool
 }
 
 // HasThreeDSRequestorChallengeInd returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasThreeDSRequestorChallengeInd() bool {
+func (o *ThreeDS2RequestData2) HasThreeDSRequestorChallengeInd() bool {
 	if o != nil && !common.IsNil(o.ThreeDSRequestorChallengeInd) {
 		return true
 	}
@@ -1105,12 +1010,12 @@ func (o *ThreeDS2RequestData) HasThreeDSRequestorChallengeInd() bool {
 }
 
 // SetThreeDSRequestorChallengeInd gets a reference to the given string and assigns it to the ThreeDSRequestorChallengeInd field.
-func (o *ThreeDS2RequestData) SetThreeDSRequestorChallengeInd(v string) {
+func (o *ThreeDS2RequestData2) SetThreeDSRequestorChallengeInd(v string) {
 	o.ThreeDSRequestorChallengeInd = &v
 }
 
 // GetThreeDSRequestorID returns the ThreeDSRequestorID field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetThreeDSRequestorID() string {
+func (o *ThreeDS2RequestData2) GetThreeDSRequestorID() string {
 	if o == nil || common.IsNil(o.ThreeDSRequestorID) {
 		var ret string
 		return ret
@@ -1120,7 +1025,7 @@ func (o *ThreeDS2RequestData) GetThreeDSRequestorID() string {
 
 // GetThreeDSRequestorIDOk returns a tuple with the ThreeDSRequestorID field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetThreeDSRequestorIDOk() (*string, bool) {
+func (o *ThreeDS2RequestData2) GetThreeDSRequestorIDOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ThreeDSRequestorID) {
 		return nil, false
 	}
@@ -1128,7 +1033,7 @@ func (o *ThreeDS2RequestData) GetThreeDSRequestorIDOk() (*string, bool) {
 }
 
 // HasThreeDSRequestorID returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasThreeDSRequestorID() bool {
+func (o *ThreeDS2RequestData2) HasThreeDSRequestorID() bool {
 	if o != nil && !common.IsNil(o.ThreeDSRequestorID) {
 		return true
 	}
@@ -1137,12 +1042,12 @@ func (o *ThreeDS2RequestData) HasThreeDSRequestorID() bool {
 }
 
 // SetThreeDSRequestorID gets a reference to the given string and assigns it to the ThreeDSRequestorID field.
-func (o *ThreeDS2RequestData) SetThreeDSRequestorID(v string) {
+func (o *ThreeDS2RequestData2) SetThreeDSRequestorID(v string) {
 	o.ThreeDSRequestorID = &v
 }
 
 // GetThreeDSRequestorName returns the ThreeDSRequestorName field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetThreeDSRequestorName() string {
+func (o *ThreeDS2RequestData2) GetThreeDSRequestorName() string {
 	if o == nil || common.IsNil(o.ThreeDSRequestorName) {
 		var ret string
 		return ret
@@ -1152,7 +1057,7 @@ func (o *ThreeDS2RequestData) GetThreeDSRequestorName() string {
 
 // GetThreeDSRequestorNameOk returns a tuple with the ThreeDSRequestorName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetThreeDSRequestorNameOk() (*string, bool) {
+func (o *ThreeDS2RequestData2) GetThreeDSRequestorNameOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ThreeDSRequestorName) {
 		return nil, false
 	}
@@ -1160,7 +1065,7 @@ func (o *ThreeDS2RequestData) GetThreeDSRequestorNameOk() (*string, bool) {
 }
 
 // HasThreeDSRequestorName returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasThreeDSRequestorName() bool {
+func (o *ThreeDS2RequestData2) HasThreeDSRequestorName() bool {
 	if o != nil && !common.IsNil(o.ThreeDSRequestorName) {
 		return true
 	}
@@ -1169,12 +1074,12 @@ func (o *ThreeDS2RequestData) HasThreeDSRequestorName() bool {
 }
 
 // SetThreeDSRequestorName gets a reference to the given string and assigns it to the ThreeDSRequestorName field.
-func (o *ThreeDS2RequestData) SetThreeDSRequestorName(v string) {
+func (o *ThreeDS2RequestData2) SetThreeDSRequestorName(v string) {
 	o.ThreeDSRequestorName = &v
 }
 
 // GetThreeDSRequestorPriorAuthenticationInfo returns the ThreeDSRequestorPriorAuthenticationInfo field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetThreeDSRequestorPriorAuthenticationInfo() ThreeDSRequestorPriorAuthenticationInfo {
+func (o *ThreeDS2RequestData2) GetThreeDSRequestorPriorAuthenticationInfo() ThreeDSRequestorPriorAuthenticationInfo {
 	if o == nil || common.IsNil(o.ThreeDSRequestorPriorAuthenticationInfo) {
 		var ret ThreeDSRequestorPriorAuthenticationInfo
 		return ret
@@ -1184,7 +1089,7 @@ func (o *ThreeDS2RequestData) GetThreeDSRequestorPriorAuthenticationInfo() Three
 
 // GetThreeDSRequestorPriorAuthenticationInfoOk returns a tuple with the ThreeDSRequestorPriorAuthenticationInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetThreeDSRequestorPriorAuthenticationInfoOk() (*ThreeDSRequestorPriorAuthenticationInfo, bool) {
+func (o *ThreeDS2RequestData2) GetThreeDSRequestorPriorAuthenticationInfoOk() (*ThreeDSRequestorPriorAuthenticationInfo, bool) {
 	if o == nil || common.IsNil(o.ThreeDSRequestorPriorAuthenticationInfo) {
 		return nil, false
 	}
@@ -1192,7 +1097,7 @@ func (o *ThreeDS2RequestData) GetThreeDSRequestorPriorAuthenticationInfoOk() (*T
 }
 
 // HasThreeDSRequestorPriorAuthenticationInfo returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasThreeDSRequestorPriorAuthenticationInfo() bool {
+func (o *ThreeDS2RequestData2) HasThreeDSRequestorPriorAuthenticationInfo() bool {
 	if o != nil && !common.IsNil(o.ThreeDSRequestorPriorAuthenticationInfo) {
 		return true
 	}
@@ -1201,12 +1106,12 @@ func (o *ThreeDS2RequestData) HasThreeDSRequestorPriorAuthenticationInfo() bool 
 }
 
 // SetThreeDSRequestorPriorAuthenticationInfo gets a reference to the given ThreeDSRequestorPriorAuthenticationInfo and assigns it to the ThreeDSRequestorPriorAuthenticationInfo field.
-func (o *ThreeDS2RequestData) SetThreeDSRequestorPriorAuthenticationInfo(v ThreeDSRequestorPriorAuthenticationInfo) {
+func (o *ThreeDS2RequestData2) SetThreeDSRequestorPriorAuthenticationInfo(v ThreeDSRequestorPriorAuthenticationInfo) {
 	o.ThreeDSRequestorPriorAuthenticationInfo = &v
 }
 
 // GetThreeDSRequestorURL returns the ThreeDSRequestorURL field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetThreeDSRequestorURL() string {
+func (o *ThreeDS2RequestData2) GetThreeDSRequestorURL() string {
 	if o == nil || common.IsNil(o.ThreeDSRequestorURL) {
 		var ret string
 		return ret
@@ -1216,7 +1121,7 @@ func (o *ThreeDS2RequestData) GetThreeDSRequestorURL() string {
 
 // GetThreeDSRequestorURLOk returns a tuple with the ThreeDSRequestorURL field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetThreeDSRequestorURLOk() (*string, bool) {
+func (o *ThreeDS2RequestData2) GetThreeDSRequestorURLOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ThreeDSRequestorURL) {
 		return nil, false
 	}
@@ -1224,7 +1129,7 @@ func (o *ThreeDS2RequestData) GetThreeDSRequestorURLOk() (*string, bool) {
 }
 
 // HasThreeDSRequestorURL returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasThreeDSRequestorURL() bool {
+func (o *ThreeDS2RequestData2) HasThreeDSRequestorURL() bool {
 	if o != nil && !common.IsNil(o.ThreeDSRequestorURL) {
 		return true
 	}
@@ -1233,12 +1138,12 @@ func (o *ThreeDS2RequestData) HasThreeDSRequestorURL() bool {
 }
 
 // SetThreeDSRequestorURL gets a reference to the given string and assigns it to the ThreeDSRequestorURL field.
-func (o *ThreeDS2RequestData) SetThreeDSRequestorURL(v string) {
+func (o *ThreeDS2RequestData2) SetThreeDSRequestorURL(v string) {
 	o.ThreeDSRequestorURL = &v
 }
 
 // GetTransType returns the TransType field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetTransType() string {
+func (o *ThreeDS2RequestData2) GetTransType() string {
 	if o == nil || common.IsNil(o.TransType) {
 		var ret string
 		return ret
@@ -1248,7 +1153,7 @@ func (o *ThreeDS2RequestData) GetTransType() string {
 
 // GetTransTypeOk returns a tuple with the TransType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetTransTypeOk() (*string, bool) {
+func (o *ThreeDS2RequestData2) GetTransTypeOk() (*string, bool) {
 	if o == nil || common.IsNil(o.TransType) {
 		return nil, false
 	}
@@ -1256,7 +1161,7 @@ func (o *ThreeDS2RequestData) GetTransTypeOk() (*string, bool) {
 }
 
 // HasTransType returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasTransType() bool {
+func (o *ThreeDS2RequestData2) HasTransType() bool {
 	if o != nil && !common.IsNil(o.TransType) {
 		return true
 	}
@@ -1265,12 +1170,12 @@ func (o *ThreeDS2RequestData) HasTransType() bool {
 }
 
 // SetTransType gets a reference to the given string and assigns it to the TransType field.
-func (o *ThreeDS2RequestData) SetTransType(v string) {
+func (o *ThreeDS2RequestData2) SetTransType(v string) {
 	o.TransType = &v
 }
 
 // GetTransactionType returns the TransactionType field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetTransactionType() string {
+func (o *ThreeDS2RequestData2) GetTransactionType() string {
 	if o == nil || common.IsNil(o.TransactionType) {
 		var ret string
 		return ret
@@ -1280,7 +1185,7 @@ func (o *ThreeDS2RequestData) GetTransactionType() string {
 
 // GetTransactionTypeOk returns a tuple with the TransactionType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetTransactionTypeOk() (*string, bool) {
+func (o *ThreeDS2RequestData2) GetTransactionTypeOk() (*string, bool) {
 	if o == nil || common.IsNil(o.TransactionType) {
 		return nil, false
 	}
@@ -1288,7 +1193,7 @@ func (o *ThreeDS2RequestData) GetTransactionTypeOk() (*string, bool) {
 }
 
 // HasTransactionType returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasTransactionType() bool {
+func (o *ThreeDS2RequestData2) HasTransactionType() bool {
 	if o != nil && !common.IsNil(o.TransactionType) {
 		return true
 	}
@@ -1297,12 +1202,12 @@ func (o *ThreeDS2RequestData) HasTransactionType() bool {
 }
 
 // SetTransactionType gets a reference to the given string and assigns it to the TransactionType field.
-func (o *ThreeDS2RequestData) SetTransactionType(v string) {
+func (o *ThreeDS2RequestData2) SetTransactionType(v string) {
 	o.TransactionType = &v
 }
 
 // GetWhiteListStatus returns the WhiteListStatus field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetWhiteListStatus() string {
+func (o *ThreeDS2RequestData2) GetWhiteListStatus() string {
 	if o == nil || common.IsNil(o.WhiteListStatus) {
 		var ret string
 		return ret
@@ -1312,7 +1217,7 @@ func (o *ThreeDS2RequestData) GetWhiteListStatus() string {
 
 // GetWhiteListStatusOk returns a tuple with the WhiteListStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetWhiteListStatusOk() (*string, bool) {
+func (o *ThreeDS2RequestData2) GetWhiteListStatusOk() (*string, bool) {
 	if o == nil || common.IsNil(o.WhiteListStatus) {
 		return nil, false
 	}
@@ -1320,7 +1225,7 @@ func (o *ThreeDS2RequestData) GetWhiteListStatusOk() (*string, bool) {
 }
 
 // HasWhiteListStatus returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasWhiteListStatus() bool {
+func (o *ThreeDS2RequestData2) HasWhiteListStatus() bool {
 	if o != nil && !common.IsNil(o.WhiteListStatus) {
 		return true
 	}
@@ -1329,12 +1234,12 @@ func (o *ThreeDS2RequestData) HasWhiteListStatus() bool {
 }
 
 // SetWhiteListStatus gets a reference to the given string and assigns it to the WhiteListStatus field.
-func (o *ThreeDS2RequestData) SetWhiteListStatus(v string) {
+func (o *ThreeDS2RequestData2) SetWhiteListStatus(v string) {
 	o.WhiteListStatus = &v
 }
 
 // GetWorkPhone returns the WorkPhone field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetWorkPhone() Phone {
+func (o *ThreeDS2RequestData2) GetWorkPhone() Phone {
 	if o == nil || common.IsNil(o.WorkPhone) {
 		var ret Phone
 		return ret
@@ -1344,7 +1249,7 @@ func (o *ThreeDS2RequestData) GetWorkPhone() Phone {
 
 // GetWorkPhoneOk returns a tuple with the WorkPhone field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetWorkPhoneOk() (*Phone, bool) {
+func (o *ThreeDS2RequestData2) GetWorkPhoneOk() (*Phone, bool) {
 	if o == nil || common.IsNil(o.WorkPhone) {
 		return nil, false
 	}
@@ -1352,7 +1257,7 @@ func (o *ThreeDS2RequestData) GetWorkPhoneOk() (*Phone, bool) {
 }
 
 // HasWorkPhone returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasWorkPhone() bool {
+func (o *ThreeDS2RequestData2) HasWorkPhone() bool {
 	if o != nil && !common.IsNil(o.WorkPhone) {
 		return true
 	}
@@ -1361,11 +1266,11 @@ func (o *ThreeDS2RequestData) HasWorkPhone() bool {
 }
 
 // SetWorkPhone gets a reference to the given Phone and assigns it to the WorkPhone field.
-func (o *ThreeDS2RequestData) SetWorkPhone(v Phone) {
+func (o *ThreeDS2RequestData2) SetWorkPhone(v Phone) {
 	o.WorkPhone = &v
 }
 
-func (o ThreeDS2RequestData) MarshalJSON() ([]byte, error) {
+func (o ThreeDS2RequestData2) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -1373,7 +1278,7 @@ func (o ThreeDS2RequestData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ThreeDS2RequestData) ToMap() (map[string]interface{}, error) {
+func (o ThreeDS2RequestData2) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.AcctInfo) {
 		toSerialize["acctInfo"] = o.AcctInfo
@@ -1396,7 +1301,6 @@ func (o ThreeDS2RequestData) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.ChallengeIndicator) {
 		toSerialize["challengeIndicator"] = o.ChallengeIndicator
 	}
-	toSerialize["deviceChannel"] = o.DeviceChannel
 	if !common.IsNil(o.DeviceRenderOptions) {
 		toSerialize["deviceRenderOptions"] = o.DeviceRenderOptions
 	}
@@ -1436,9 +1340,6 @@ func (o ThreeDS2RequestData) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.SdkAppID) {
 		toSerialize["sdkAppID"] = o.SdkAppID
 	}
-	if !common.IsNil(o.SdkEncData) {
-		toSerialize["sdkEncData"] = o.SdkEncData
-	}
 	if !common.IsNil(o.SdkEphemPubKey) {
 		toSerialize["sdkEphemPubKey"] = o.SdkEphemPubKey
 	}
@@ -1450,9 +1351,6 @@ func (o ThreeDS2RequestData) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.SdkTransID) {
 		toSerialize["sdkTransID"] = o.SdkTransID
-	}
-	if !common.IsNil(o.SdkVersion) {
-		toSerialize["sdkVersion"] = o.SdkVersion
 	}
 	if !common.IsNil(o.ThreeDSCompInd) {
 		toSerialize["threeDSCompInd"] = o.ThreeDSCompInd
@@ -1493,43 +1391,43 @@ func (o ThreeDS2RequestData) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableThreeDS2RequestData struct {
-	value *ThreeDS2RequestData
+type NullableThreeDS2RequestData2 struct {
+	value *ThreeDS2RequestData2
 	isSet bool
 }
 
-func (v NullableThreeDS2RequestData) Get() *ThreeDS2RequestData {
+func (v NullableThreeDS2RequestData2) Get() *ThreeDS2RequestData2 {
 	return v.value
 }
 
-func (v *NullableThreeDS2RequestData) Set(val *ThreeDS2RequestData) {
+func (v *NullableThreeDS2RequestData2) Set(val *ThreeDS2RequestData2) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableThreeDS2RequestData) IsSet() bool {
+func (v NullableThreeDS2RequestData2) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableThreeDS2RequestData) Unset() {
+func (v *NullableThreeDS2RequestData2) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableThreeDS2RequestData(val *ThreeDS2RequestData) *NullableThreeDS2RequestData {
-	return &NullableThreeDS2RequestData{value: val, isSet: true}
+func NewNullableThreeDS2RequestData2(val *ThreeDS2RequestData2) *NullableThreeDS2RequestData2 {
+	return &NullableThreeDS2RequestData2{value: val, isSet: true}
 }
 
-func (v NullableThreeDS2RequestData) MarshalJSON() ([]byte, error) {
+func (v NullableThreeDS2RequestData2) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableThreeDS2RequestData) UnmarshalJSON(src []byte) error {
+func (v *NullableThreeDS2RequestData2) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
 
-func (o *ThreeDS2RequestData) isValidAcctType() bool {
+func (o *ThreeDS2RequestData2) isValidAcctType() bool {
 	var allowedEnumValues = []string{"01", "02", "03"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetAcctType() == allowed {
@@ -1538,7 +1436,7 @@ func (o *ThreeDS2RequestData) isValidAcctType() bool {
 	}
 	return false
 }
-func (o *ThreeDS2RequestData) isValidAddrMatch() bool {
+func (o *ThreeDS2RequestData2) isValidAddrMatch() bool {
 	var allowedEnumValues = []string{"Y", "N"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetAddrMatch() == allowed {
@@ -1547,7 +1445,7 @@ func (o *ThreeDS2RequestData) isValidAddrMatch() bool {
 	}
 	return false
 }
-func (o *ThreeDS2RequestData) isValidChallengeIndicator() bool {
+func (o *ThreeDS2RequestData2) isValidChallengeIndicator() bool {
 	var allowedEnumValues = []string{"noPreference", "requestNoChallenge", "requestChallenge", "requestChallengeAsMandate"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetChallengeIndicator() == allowed {
@@ -1556,7 +1454,7 @@ func (o *ThreeDS2RequestData) isValidChallengeIndicator() bool {
 	}
 	return false
 }
-func (o *ThreeDS2RequestData) isValidThreeDSRequestorChallengeInd() bool {
+func (o *ThreeDS2RequestData2) isValidThreeDSRequestorChallengeInd() bool {
 	var allowedEnumValues = []string{"01", "02", "03", "04", "05", "06"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetThreeDSRequestorChallengeInd() == allowed {
@@ -1565,7 +1463,7 @@ func (o *ThreeDS2RequestData) isValidThreeDSRequestorChallengeInd() bool {
 	}
 	return false
 }
-func (o *ThreeDS2RequestData) isValidTransType() bool {
+func (o *ThreeDS2RequestData2) isValidTransType() bool {
 	var allowedEnumValues = []string{"01", "03", "10", "11", "28"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetTransType() == allowed {
@@ -1574,7 +1472,7 @@ func (o *ThreeDS2RequestData) isValidTransType() bool {
 	}
 	return false
 }
-func (o *ThreeDS2RequestData) isValidTransactionType() bool {
+func (o *ThreeDS2RequestData2) isValidTransactionType() bool {
 	var allowedEnumValues = []string{"goodsOrServicePurchase", "checkAcceptance", "accountFunding", "quasiCashTransaction", "prepaidActivationAndLoad"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetTransactionType() == allowed {

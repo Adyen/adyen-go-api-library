@@ -14,38 +14,38 @@ import (
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// checks if the CheckoutCancelOrderResponse type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &CheckoutCancelOrderResponse{}
+// checks if the CancelOrderResponse type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &CancelOrderResponse{}
 
-// CheckoutCancelOrderResponse struct for CheckoutCancelOrderResponse
-type CheckoutCancelOrderResponse struct {
+// CancelOrderResponse struct for CancelOrderResponse
+type CancelOrderResponse struct {
 	// A unique reference of the cancellation request.
 	PspReference string `json:"pspReference"`
 	// The result of the cancellation request.  Possible values:  * **Received** – Indicates the cancellation has successfully been received by Adyen, and will be processed.
 	ResultCode string `json:"resultCode"`
 }
 
-// NewCheckoutCancelOrderResponse instantiates a new CheckoutCancelOrderResponse object
+// NewCancelOrderResponse instantiates a new CancelOrderResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCheckoutCancelOrderResponse(pspReference string, resultCode string) *CheckoutCancelOrderResponse {
-	this := CheckoutCancelOrderResponse{}
+func NewCancelOrderResponse(pspReference string, resultCode string) *CancelOrderResponse {
+	this := CancelOrderResponse{}
 	this.PspReference = pspReference
 	this.ResultCode = resultCode
 	return &this
 }
 
-// NewCheckoutCancelOrderResponseWithDefaults instantiates a new CheckoutCancelOrderResponse object
+// NewCancelOrderResponseWithDefaults instantiates a new CancelOrderResponse object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCheckoutCancelOrderResponseWithDefaults() *CheckoutCancelOrderResponse {
-	this := CheckoutCancelOrderResponse{}
+func NewCancelOrderResponseWithDefaults() *CancelOrderResponse {
+	this := CancelOrderResponse{}
 	return &this
 }
 
 // GetPspReference returns the PspReference field value
-func (o *CheckoutCancelOrderResponse) GetPspReference() string {
+func (o *CancelOrderResponse) GetPspReference() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -56,7 +56,7 @@ func (o *CheckoutCancelOrderResponse) GetPspReference() string {
 
 // GetPspReferenceOk returns a tuple with the PspReference field value
 // and a boolean to check if the value has been set.
-func (o *CheckoutCancelOrderResponse) GetPspReferenceOk() (*string, bool) {
+func (o *CancelOrderResponse) GetPspReferenceOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -64,12 +64,12 @@ func (o *CheckoutCancelOrderResponse) GetPspReferenceOk() (*string, bool) {
 }
 
 // SetPspReference sets field value
-func (o *CheckoutCancelOrderResponse) SetPspReference(v string) {
+func (o *CancelOrderResponse) SetPspReference(v string) {
 	o.PspReference = v
 }
 
 // GetResultCode returns the ResultCode field value
-func (o *CheckoutCancelOrderResponse) GetResultCode() string {
+func (o *CancelOrderResponse) GetResultCode() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -80,7 +80,7 @@ func (o *CheckoutCancelOrderResponse) GetResultCode() string {
 
 // GetResultCodeOk returns a tuple with the ResultCode field value
 // and a boolean to check if the value has been set.
-func (o *CheckoutCancelOrderResponse) GetResultCodeOk() (*string, bool) {
+func (o *CancelOrderResponse) GetResultCodeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -88,11 +88,11 @@ func (o *CheckoutCancelOrderResponse) GetResultCodeOk() (*string, bool) {
 }
 
 // SetResultCode sets field value
-func (o *CheckoutCancelOrderResponse) SetResultCode(v string) {
+func (o *CancelOrderResponse) SetResultCode(v string) {
 	o.ResultCode = v
 }
 
-func (o CheckoutCancelOrderResponse) MarshalJSON() ([]byte, error) {
+func (o CancelOrderResponse) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -100,50 +100,50 @@ func (o CheckoutCancelOrderResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CheckoutCancelOrderResponse) ToMap() (map[string]interface{}, error) {
+func (o CancelOrderResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["pspReference"] = o.PspReference
 	toSerialize["resultCode"] = o.ResultCode
 	return toSerialize, nil
 }
 
-type NullableCheckoutCancelOrderResponse struct {
-	value *CheckoutCancelOrderResponse
+type NullableCancelOrderResponse struct {
+	value *CancelOrderResponse
 	isSet bool
 }
 
-func (v NullableCheckoutCancelOrderResponse) Get() *CheckoutCancelOrderResponse {
+func (v NullableCancelOrderResponse) Get() *CancelOrderResponse {
 	return v.value
 }
 
-func (v *NullableCheckoutCancelOrderResponse) Set(val *CheckoutCancelOrderResponse) {
+func (v *NullableCancelOrderResponse) Set(val *CancelOrderResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCheckoutCancelOrderResponse) IsSet() bool {
+func (v NullableCancelOrderResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCheckoutCancelOrderResponse) Unset() {
+func (v *NullableCancelOrderResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCheckoutCancelOrderResponse(val *CheckoutCancelOrderResponse) *NullableCheckoutCancelOrderResponse {
-	return &NullableCheckoutCancelOrderResponse{value: val, isSet: true}
+func NewNullableCancelOrderResponse(val *CancelOrderResponse) *NullableCancelOrderResponse {
+	return &NullableCancelOrderResponse{value: val, isSet: true}
 }
 
-func (v NullableCheckoutCancelOrderResponse) MarshalJSON() ([]byte, error) {
+func (v NullableCancelOrderResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCheckoutCancelOrderResponse) UnmarshalJSON(src []byte) error {
+func (v *NullableCancelOrderResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
 
-func (o *CheckoutCancelOrderResponse) isValidResultCode() bool {
+func (o *CancelOrderResponse) isValidResultCode() bool {
 	var allowedEnumValues = []string{"Received"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetResultCode() == allowed {

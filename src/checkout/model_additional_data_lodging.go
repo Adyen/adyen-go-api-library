@@ -39,7 +39,7 @@ type AdditionalDataLodging struct {
 	LodgingPrepaidExpenses *string `json:"lodging.prepaidExpenses,omitempty"`
 	// The lodging property location's phone number. * Format: numeric. * Min length: 10 characters * Max length: 17 characters * For US and CA numbers must be 10 characters in length * Must not start with a space * Must not be all zeros * Must not contain any special characters such as + or -
 	LodgingPropertyPhoneNumber *string `json:"lodging.propertyPhoneNumber,omitempty"`
-	// The total number of nights the room is booked for. * Format: numeric * Must be a number between 0 and 99 * Max length: 2 characters
+	// The total number of nights the room is booked for. * Format: numeric * Must be a number between 0 and 99 * Max length: 4 characters
 	LodgingRoom1NumberOfNights *string `json:"lodging.room1.numberOfNights,omitempty"`
 	// The rate for the room, in [minor units](https://docs.adyen.com/development-resources/currency-codes). * Format: numeric * Max length: 12 characters * Must not be a negative number
 	LodgingRoom1Rate *string `json:"lodging.room1.rate,omitempty"`
@@ -47,7 +47,7 @@ type AdditionalDataLodging struct {
 	LodgingTotalRoomTax *string `json:"lodging.totalRoomTax,omitempty"`
 	// The total tax amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes). * Format: numeric * Max length: 12 characters * Must not be a negative number
 	LodgingTotalTax *string `json:"lodging.totalTax,omitempty"`
-	// The number of nights. This should be included in the auth message. * Format: numeric * Max length: 2 characters
+	// The number of nights. This should be included in the auth message. * Format: numeric * Max length: 4 characters
 	TravelEntertainmentAuthDataDuration *string `json:"travelEntertainmentAuthData.duration,omitempty"`
 	// Indicates what market-specific dataset will be submitted. Must be 'H' for Hotel. This should be included in the auth message.  * Format: alphanumeric * Max length: 1 character
 	TravelEntertainmentAuthDataMarket *string `json:"travelEntertainmentAuthData.market,omitempty"`

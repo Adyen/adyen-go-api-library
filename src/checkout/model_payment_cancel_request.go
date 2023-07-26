@@ -14,37 +14,37 @@ import (
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// checks if the CreatePaymentCancelRequest type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &CreatePaymentCancelRequest{}
+// checks if the PaymentCancelRequest type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &PaymentCancelRequest{}
 
-// CreatePaymentCancelRequest struct for CreatePaymentCancelRequest
-type CreatePaymentCancelRequest struct {
+// PaymentCancelRequest struct for PaymentCancelRequest
+type PaymentCancelRequest struct {
 	// The merchant account that is used to process the payment.
 	MerchantAccount string `json:"merchantAccount"`
 	// Your reference for the cancel request. Maximum length: 80 characters.
 	Reference *string `json:"reference,omitempty"`
 }
 
-// NewCreatePaymentCancelRequest instantiates a new CreatePaymentCancelRequest object
+// NewPaymentCancelRequest instantiates a new PaymentCancelRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreatePaymentCancelRequest(merchantAccount string) *CreatePaymentCancelRequest {
-	this := CreatePaymentCancelRequest{}
+func NewPaymentCancelRequest(merchantAccount string) *PaymentCancelRequest {
+	this := PaymentCancelRequest{}
 	this.MerchantAccount = merchantAccount
 	return &this
 }
 
-// NewCreatePaymentCancelRequestWithDefaults instantiates a new CreatePaymentCancelRequest object
+// NewPaymentCancelRequestWithDefaults instantiates a new PaymentCancelRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreatePaymentCancelRequestWithDefaults() *CreatePaymentCancelRequest {
-	this := CreatePaymentCancelRequest{}
+func NewPaymentCancelRequestWithDefaults() *PaymentCancelRequest {
+	this := PaymentCancelRequest{}
 	return &this
 }
 
 // GetMerchantAccount returns the MerchantAccount field value
-func (o *CreatePaymentCancelRequest) GetMerchantAccount() string {
+func (o *PaymentCancelRequest) GetMerchantAccount() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -55,7 +55,7 @@ func (o *CreatePaymentCancelRequest) GetMerchantAccount() string {
 
 // GetMerchantAccountOk returns a tuple with the MerchantAccount field value
 // and a boolean to check if the value has been set.
-func (o *CreatePaymentCancelRequest) GetMerchantAccountOk() (*string, bool) {
+func (o *PaymentCancelRequest) GetMerchantAccountOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -63,12 +63,12 @@ func (o *CreatePaymentCancelRequest) GetMerchantAccountOk() (*string, bool) {
 }
 
 // SetMerchantAccount sets field value
-func (o *CreatePaymentCancelRequest) SetMerchantAccount(v string) {
+func (o *PaymentCancelRequest) SetMerchantAccount(v string) {
 	o.MerchantAccount = v
 }
 
 // GetReference returns the Reference field value if set, zero value otherwise.
-func (o *CreatePaymentCancelRequest) GetReference() string {
+func (o *PaymentCancelRequest) GetReference() string {
 	if o == nil || common.IsNil(o.Reference) {
 		var ret string
 		return ret
@@ -78,7 +78,7 @@ func (o *CreatePaymentCancelRequest) GetReference() string {
 
 // GetReferenceOk returns a tuple with the Reference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreatePaymentCancelRequest) GetReferenceOk() (*string, bool) {
+func (o *PaymentCancelRequest) GetReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Reference) {
 		return nil, false
 	}
@@ -86,7 +86,7 @@ func (o *CreatePaymentCancelRequest) GetReferenceOk() (*string, bool) {
 }
 
 // HasReference returns a boolean if a field has been set.
-func (o *CreatePaymentCancelRequest) HasReference() bool {
+func (o *PaymentCancelRequest) HasReference() bool {
 	if o != nil && !common.IsNil(o.Reference) {
 		return true
 	}
@@ -95,11 +95,11 @@ func (o *CreatePaymentCancelRequest) HasReference() bool {
 }
 
 // SetReference gets a reference to the given string and assigns it to the Reference field.
-func (o *CreatePaymentCancelRequest) SetReference(v string) {
+func (o *PaymentCancelRequest) SetReference(v string) {
 	o.Reference = &v
 }
 
-func (o CreatePaymentCancelRequest) MarshalJSON() ([]byte, error) {
+func (o PaymentCancelRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -107,7 +107,7 @@ func (o CreatePaymentCancelRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreatePaymentCancelRequest) ToMap() (map[string]interface{}, error) {
+func (o PaymentCancelRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["merchantAccount"] = o.MerchantAccount
 	if !common.IsNil(o.Reference) {
@@ -116,38 +116,38 @@ func (o CreatePaymentCancelRequest) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableCreatePaymentCancelRequest struct {
-	value *CreatePaymentCancelRequest
+type NullablePaymentCancelRequest struct {
+	value *PaymentCancelRequest
 	isSet bool
 }
 
-func (v NullableCreatePaymentCancelRequest) Get() *CreatePaymentCancelRequest {
+func (v NullablePaymentCancelRequest) Get() *PaymentCancelRequest {
 	return v.value
 }
 
-func (v *NullableCreatePaymentCancelRequest) Set(val *CreatePaymentCancelRequest) {
+func (v *NullablePaymentCancelRequest) Set(val *PaymentCancelRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreatePaymentCancelRequest) IsSet() bool {
+func (v NullablePaymentCancelRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreatePaymentCancelRequest) Unset() {
+func (v *NullablePaymentCancelRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreatePaymentCancelRequest(val *CreatePaymentCancelRequest) *NullableCreatePaymentCancelRequest {
-	return &NullableCreatePaymentCancelRequest{value: val, isSet: true}
+func NewNullablePaymentCancelRequest(val *PaymentCancelRequest) *NullablePaymentCancelRequest {
+	return &NullablePaymentCancelRequest{value: val, isSet: true}
 }
 
-func (v NullableCreatePaymentCancelRequest) MarshalJSON() ([]byte, error) {
+func (v NullablePaymentCancelRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreatePaymentCancelRequest) UnmarshalJSON(src []byte) error {
+func (v *NullablePaymentCancelRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

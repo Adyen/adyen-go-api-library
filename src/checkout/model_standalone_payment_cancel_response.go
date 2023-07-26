@@ -14,46 +14,46 @@ import (
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// checks if the PaymentReversalResource type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &PaymentReversalResource{}
+// checks if the StandalonePaymentCancelResponse type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &StandalonePaymentCancelResponse{}
 
-// PaymentReversalResource struct for PaymentReversalResource
-type PaymentReversalResource struct {
+// StandalonePaymentCancelResponse struct for StandalonePaymentCancelResponse
+type StandalonePaymentCancelResponse struct {
 	// The merchant account that is used to process the payment.
 	MerchantAccount string `json:"merchantAccount"`
-	// The [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference) of the payment to reverse.
-	PaymentPspReference string `json:"paymentPspReference"`
-	// Adyen's 16-character reference associated with the reversal request.
+	// The [`reference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__reqParam_reference) of the payment to cancel.
+	PaymentReference string `json:"paymentReference"`
+	// Adyen's 16-character reference associated with the cancel request.
 	PspReference string `json:"pspReference"`
-	// Your reference for the reversal request.
+	// Your reference for the cancel request.
 	Reference *string `json:"reference,omitempty"`
 	// The status of your request. This will always have the value **received**.
 	Status string `json:"status"`
 }
 
-// NewPaymentReversalResource instantiates a new PaymentReversalResource object
+// NewStandalonePaymentCancelResponse instantiates a new StandalonePaymentCancelResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPaymentReversalResource(merchantAccount string, paymentPspReference string, pspReference string, status string) *PaymentReversalResource {
-	this := PaymentReversalResource{}
+func NewStandalonePaymentCancelResponse(merchantAccount string, paymentReference string, pspReference string, status string) *StandalonePaymentCancelResponse {
+	this := StandalonePaymentCancelResponse{}
 	this.MerchantAccount = merchantAccount
-	this.PaymentPspReference = paymentPspReference
+	this.PaymentReference = paymentReference
 	this.PspReference = pspReference
 	this.Status = status
 	return &this
 }
 
-// NewPaymentReversalResourceWithDefaults instantiates a new PaymentReversalResource object
+// NewStandalonePaymentCancelResponseWithDefaults instantiates a new StandalonePaymentCancelResponse object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewPaymentReversalResourceWithDefaults() *PaymentReversalResource {
-	this := PaymentReversalResource{}
+func NewStandalonePaymentCancelResponseWithDefaults() *StandalonePaymentCancelResponse {
+	this := StandalonePaymentCancelResponse{}
 	return &this
 }
 
 // GetMerchantAccount returns the MerchantAccount field value
-func (o *PaymentReversalResource) GetMerchantAccount() string {
+func (o *StandalonePaymentCancelResponse) GetMerchantAccount() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -64,7 +64,7 @@ func (o *PaymentReversalResource) GetMerchantAccount() string {
 
 // GetMerchantAccountOk returns a tuple with the MerchantAccount field value
 // and a boolean to check if the value has been set.
-func (o *PaymentReversalResource) GetMerchantAccountOk() (*string, bool) {
+func (o *StandalonePaymentCancelResponse) GetMerchantAccountOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -72,36 +72,36 @@ func (o *PaymentReversalResource) GetMerchantAccountOk() (*string, bool) {
 }
 
 // SetMerchantAccount sets field value
-func (o *PaymentReversalResource) SetMerchantAccount(v string) {
+func (o *StandalonePaymentCancelResponse) SetMerchantAccount(v string) {
 	o.MerchantAccount = v
 }
 
-// GetPaymentPspReference returns the PaymentPspReference field value
-func (o *PaymentReversalResource) GetPaymentPspReference() string {
+// GetPaymentReference returns the PaymentReference field value
+func (o *StandalonePaymentCancelResponse) GetPaymentReference() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.PaymentPspReference
+	return o.PaymentReference
 }
 
-// GetPaymentPspReferenceOk returns a tuple with the PaymentPspReference field value
+// GetPaymentReferenceOk returns a tuple with the PaymentReference field value
 // and a boolean to check if the value has been set.
-func (o *PaymentReversalResource) GetPaymentPspReferenceOk() (*string, bool) {
+func (o *StandalonePaymentCancelResponse) GetPaymentReferenceOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.PaymentPspReference, true
+	return &o.PaymentReference, true
 }
 
-// SetPaymentPspReference sets field value
-func (o *PaymentReversalResource) SetPaymentPspReference(v string) {
-	o.PaymentPspReference = v
+// SetPaymentReference sets field value
+func (o *StandalonePaymentCancelResponse) SetPaymentReference(v string) {
+	o.PaymentReference = v
 }
 
 // GetPspReference returns the PspReference field value
-func (o *PaymentReversalResource) GetPspReference() string {
+func (o *StandalonePaymentCancelResponse) GetPspReference() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -112,7 +112,7 @@ func (o *PaymentReversalResource) GetPspReference() string {
 
 // GetPspReferenceOk returns a tuple with the PspReference field value
 // and a boolean to check if the value has been set.
-func (o *PaymentReversalResource) GetPspReferenceOk() (*string, bool) {
+func (o *StandalonePaymentCancelResponse) GetPspReferenceOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -120,12 +120,12 @@ func (o *PaymentReversalResource) GetPspReferenceOk() (*string, bool) {
 }
 
 // SetPspReference sets field value
-func (o *PaymentReversalResource) SetPspReference(v string) {
+func (o *StandalonePaymentCancelResponse) SetPspReference(v string) {
 	o.PspReference = v
 }
 
 // GetReference returns the Reference field value if set, zero value otherwise.
-func (o *PaymentReversalResource) GetReference() string {
+func (o *StandalonePaymentCancelResponse) GetReference() string {
 	if o == nil || common.IsNil(o.Reference) {
 		var ret string
 		return ret
@@ -135,7 +135,7 @@ func (o *PaymentReversalResource) GetReference() string {
 
 // GetReferenceOk returns a tuple with the Reference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentReversalResource) GetReferenceOk() (*string, bool) {
+func (o *StandalonePaymentCancelResponse) GetReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Reference) {
 		return nil, false
 	}
@@ -143,7 +143,7 @@ func (o *PaymentReversalResource) GetReferenceOk() (*string, bool) {
 }
 
 // HasReference returns a boolean if a field has been set.
-func (o *PaymentReversalResource) HasReference() bool {
+func (o *StandalonePaymentCancelResponse) HasReference() bool {
 	if o != nil && !common.IsNil(o.Reference) {
 		return true
 	}
@@ -152,12 +152,12 @@ func (o *PaymentReversalResource) HasReference() bool {
 }
 
 // SetReference gets a reference to the given string and assigns it to the Reference field.
-func (o *PaymentReversalResource) SetReference(v string) {
+func (o *StandalonePaymentCancelResponse) SetReference(v string) {
 	o.Reference = &v
 }
 
 // GetStatus returns the Status field value
-func (o *PaymentReversalResource) GetStatus() string {
+func (o *StandalonePaymentCancelResponse) GetStatus() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -168,7 +168,7 @@ func (o *PaymentReversalResource) GetStatus() string {
 
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *PaymentReversalResource) GetStatusOk() (*string, bool) {
+func (o *StandalonePaymentCancelResponse) GetStatusOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -176,11 +176,11 @@ func (o *PaymentReversalResource) GetStatusOk() (*string, bool) {
 }
 
 // SetStatus sets field value
-func (o *PaymentReversalResource) SetStatus(v string) {
+func (o *StandalonePaymentCancelResponse) SetStatus(v string) {
 	o.Status = v
 }
 
-func (o PaymentReversalResource) MarshalJSON() ([]byte, error) {
+func (o StandalonePaymentCancelResponse) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -188,10 +188,10 @@ func (o PaymentReversalResource) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentReversalResource) ToMap() (map[string]interface{}, error) {
+func (o StandalonePaymentCancelResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["merchantAccount"] = o.MerchantAccount
-	toSerialize["paymentPspReference"] = o.PaymentPspReference
+	toSerialize["paymentReference"] = o.PaymentReference
 	toSerialize["pspReference"] = o.PspReference
 	if !common.IsNil(o.Reference) {
 		toSerialize["reference"] = o.Reference
@@ -200,43 +200,43 @@ func (o PaymentReversalResource) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullablePaymentReversalResource struct {
-	value *PaymentReversalResource
+type NullableStandalonePaymentCancelResponse struct {
+	value *StandalonePaymentCancelResponse
 	isSet bool
 }
 
-func (v NullablePaymentReversalResource) Get() *PaymentReversalResource {
+func (v NullableStandalonePaymentCancelResponse) Get() *StandalonePaymentCancelResponse {
 	return v.value
 }
 
-func (v *NullablePaymentReversalResource) Set(val *PaymentReversalResource) {
+func (v *NullableStandalonePaymentCancelResponse) Set(val *StandalonePaymentCancelResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullablePaymentReversalResource) IsSet() bool {
+func (v NullableStandalonePaymentCancelResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullablePaymentReversalResource) Unset() {
+func (v *NullableStandalonePaymentCancelResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullablePaymentReversalResource(val *PaymentReversalResource) *NullablePaymentReversalResource {
-	return &NullablePaymentReversalResource{value: val, isSet: true}
+func NewNullableStandalonePaymentCancelResponse(val *StandalonePaymentCancelResponse) *NullableStandalonePaymentCancelResponse {
+	return &NullableStandalonePaymentCancelResponse{value: val, isSet: true}
 }
 
-func (v NullablePaymentReversalResource) MarshalJSON() ([]byte, error) {
+func (v NullableStandalonePaymentCancelResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullablePaymentReversalResource) UnmarshalJSON(src []byte) error {
+func (v *NullableStandalonePaymentCancelResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
 
-func (o *PaymentReversalResource) isValidStatus() bool {
+func (o *StandalonePaymentCancelResponse) isValidStatus() bool {
 	var allowedEnumValues = []string{"received"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetStatus() == allowed {

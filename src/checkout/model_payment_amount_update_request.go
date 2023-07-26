@@ -14,43 +14,45 @@ import (
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// checks if the CreatePaymentCaptureRequest type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &CreatePaymentCaptureRequest{}
+// checks if the PaymentAmountUpdateRequest type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &PaymentAmountUpdateRequest{}
 
-// CreatePaymentCaptureRequest struct for CreatePaymentCaptureRequest
-type CreatePaymentCaptureRequest struct {
+// PaymentAmountUpdateRequest struct for PaymentAmountUpdateRequest
+type PaymentAmountUpdateRequest struct {
 	Amount Amount `json:"amount"`
+	// The reason for the amount update. Possible values:  * **delayedCharge**  * **noShow**  * **installment**
+	IndustryUsage *string `json:"industryUsage,omitempty"`
 	// Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment). > This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Atome, Clearpay, Klarna, Ratepay, Walley, and Zip.
 	LineItems []LineItem `json:"lineItems,omitempty"`
 	// The merchant account that is used to process the payment.
 	MerchantAccount string `json:"merchantAccount"`
-	// Your reference for the capture request. Maximum length: 80 characters.
+	// Your reference for the amount update request. Maximum length: 80 characters.
 	Reference *string `json:"reference,omitempty"`
 	// An array of objects specifying how the amount should be split between accounts when using Adyen for Platforms. For details, refer to [Providing split information](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information).
 	Splits []Split `json:"splits,omitempty"`
 }
 
-// NewCreatePaymentCaptureRequest instantiates a new CreatePaymentCaptureRequest object
+// NewPaymentAmountUpdateRequest instantiates a new PaymentAmountUpdateRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreatePaymentCaptureRequest(amount Amount, merchantAccount string) *CreatePaymentCaptureRequest {
-	this := CreatePaymentCaptureRequest{}
+func NewPaymentAmountUpdateRequest(amount Amount, merchantAccount string) *PaymentAmountUpdateRequest {
+	this := PaymentAmountUpdateRequest{}
 	this.Amount = amount
 	this.MerchantAccount = merchantAccount
 	return &this
 }
 
-// NewCreatePaymentCaptureRequestWithDefaults instantiates a new CreatePaymentCaptureRequest object
+// NewPaymentAmountUpdateRequestWithDefaults instantiates a new PaymentAmountUpdateRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreatePaymentCaptureRequestWithDefaults() *CreatePaymentCaptureRequest {
-	this := CreatePaymentCaptureRequest{}
+func NewPaymentAmountUpdateRequestWithDefaults() *PaymentAmountUpdateRequest {
+	this := PaymentAmountUpdateRequest{}
 	return &this
 }
 
 // GetAmount returns the Amount field value
-func (o *CreatePaymentCaptureRequest) GetAmount() Amount {
+func (o *PaymentAmountUpdateRequest) GetAmount() Amount {
 	if o == nil {
 		var ret Amount
 		return ret
@@ -61,7 +63,7 @@ func (o *CreatePaymentCaptureRequest) GetAmount() Amount {
 
 // GetAmountOk returns a tuple with the Amount field value
 // and a boolean to check if the value has been set.
-func (o *CreatePaymentCaptureRequest) GetAmountOk() (*Amount, bool) {
+func (o *PaymentAmountUpdateRequest) GetAmountOk() (*Amount, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -69,12 +71,44 @@ func (o *CreatePaymentCaptureRequest) GetAmountOk() (*Amount, bool) {
 }
 
 // SetAmount sets field value
-func (o *CreatePaymentCaptureRequest) SetAmount(v Amount) {
+func (o *PaymentAmountUpdateRequest) SetAmount(v Amount) {
 	o.Amount = v
 }
 
+// GetIndustryUsage returns the IndustryUsage field value if set, zero value otherwise.
+func (o *PaymentAmountUpdateRequest) GetIndustryUsage() string {
+	if o == nil || common.IsNil(o.IndustryUsage) {
+		var ret string
+		return ret
+	}
+	return *o.IndustryUsage
+}
+
+// GetIndustryUsageOk returns a tuple with the IndustryUsage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentAmountUpdateRequest) GetIndustryUsageOk() (*string, bool) {
+	if o == nil || common.IsNil(o.IndustryUsage) {
+		return nil, false
+	}
+	return o.IndustryUsage, true
+}
+
+// HasIndustryUsage returns a boolean if a field has been set.
+func (o *PaymentAmountUpdateRequest) HasIndustryUsage() bool {
+	if o != nil && !common.IsNil(o.IndustryUsage) {
+		return true
+	}
+
+	return false
+}
+
+// SetIndustryUsage gets a reference to the given string and assigns it to the IndustryUsage field.
+func (o *PaymentAmountUpdateRequest) SetIndustryUsage(v string) {
+	o.IndustryUsage = &v
+}
+
 // GetLineItems returns the LineItems field value if set, zero value otherwise.
-func (o *CreatePaymentCaptureRequest) GetLineItems() []LineItem {
+func (o *PaymentAmountUpdateRequest) GetLineItems() []LineItem {
 	if o == nil || common.IsNil(o.LineItems) {
 		var ret []LineItem
 		return ret
@@ -84,7 +118,7 @@ func (o *CreatePaymentCaptureRequest) GetLineItems() []LineItem {
 
 // GetLineItemsOk returns a tuple with the LineItems field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreatePaymentCaptureRequest) GetLineItemsOk() ([]LineItem, bool) {
+func (o *PaymentAmountUpdateRequest) GetLineItemsOk() ([]LineItem, bool) {
 	if o == nil || common.IsNil(o.LineItems) {
 		return nil, false
 	}
@@ -92,7 +126,7 @@ func (o *CreatePaymentCaptureRequest) GetLineItemsOk() ([]LineItem, bool) {
 }
 
 // HasLineItems returns a boolean if a field has been set.
-func (o *CreatePaymentCaptureRequest) HasLineItems() bool {
+func (o *PaymentAmountUpdateRequest) HasLineItems() bool {
 	if o != nil && !common.IsNil(o.LineItems) {
 		return true
 	}
@@ -101,12 +135,12 @@ func (o *CreatePaymentCaptureRequest) HasLineItems() bool {
 }
 
 // SetLineItems gets a reference to the given []LineItem and assigns it to the LineItems field.
-func (o *CreatePaymentCaptureRequest) SetLineItems(v []LineItem) {
+func (o *PaymentAmountUpdateRequest) SetLineItems(v []LineItem) {
 	o.LineItems = v
 }
 
 // GetMerchantAccount returns the MerchantAccount field value
-func (o *CreatePaymentCaptureRequest) GetMerchantAccount() string {
+func (o *PaymentAmountUpdateRequest) GetMerchantAccount() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -117,7 +151,7 @@ func (o *CreatePaymentCaptureRequest) GetMerchantAccount() string {
 
 // GetMerchantAccountOk returns a tuple with the MerchantAccount field value
 // and a boolean to check if the value has been set.
-func (o *CreatePaymentCaptureRequest) GetMerchantAccountOk() (*string, bool) {
+func (o *PaymentAmountUpdateRequest) GetMerchantAccountOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -125,12 +159,12 @@ func (o *CreatePaymentCaptureRequest) GetMerchantAccountOk() (*string, bool) {
 }
 
 // SetMerchantAccount sets field value
-func (o *CreatePaymentCaptureRequest) SetMerchantAccount(v string) {
+func (o *PaymentAmountUpdateRequest) SetMerchantAccount(v string) {
 	o.MerchantAccount = v
 }
 
 // GetReference returns the Reference field value if set, zero value otherwise.
-func (o *CreatePaymentCaptureRequest) GetReference() string {
+func (o *PaymentAmountUpdateRequest) GetReference() string {
 	if o == nil || common.IsNil(o.Reference) {
 		var ret string
 		return ret
@@ -140,7 +174,7 @@ func (o *CreatePaymentCaptureRequest) GetReference() string {
 
 // GetReferenceOk returns a tuple with the Reference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreatePaymentCaptureRequest) GetReferenceOk() (*string, bool) {
+func (o *PaymentAmountUpdateRequest) GetReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Reference) {
 		return nil, false
 	}
@@ -148,7 +182,7 @@ func (o *CreatePaymentCaptureRequest) GetReferenceOk() (*string, bool) {
 }
 
 // HasReference returns a boolean if a field has been set.
-func (o *CreatePaymentCaptureRequest) HasReference() bool {
+func (o *PaymentAmountUpdateRequest) HasReference() bool {
 	if o != nil && !common.IsNil(o.Reference) {
 		return true
 	}
@@ -157,12 +191,12 @@ func (o *CreatePaymentCaptureRequest) HasReference() bool {
 }
 
 // SetReference gets a reference to the given string and assigns it to the Reference field.
-func (o *CreatePaymentCaptureRequest) SetReference(v string) {
+func (o *PaymentAmountUpdateRequest) SetReference(v string) {
 	o.Reference = &v
 }
 
 // GetSplits returns the Splits field value if set, zero value otherwise.
-func (o *CreatePaymentCaptureRequest) GetSplits() []Split {
+func (o *PaymentAmountUpdateRequest) GetSplits() []Split {
 	if o == nil || common.IsNil(o.Splits) {
 		var ret []Split
 		return ret
@@ -172,7 +206,7 @@ func (o *CreatePaymentCaptureRequest) GetSplits() []Split {
 
 // GetSplitsOk returns a tuple with the Splits field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreatePaymentCaptureRequest) GetSplitsOk() ([]Split, bool) {
+func (o *PaymentAmountUpdateRequest) GetSplitsOk() ([]Split, bool) {
 	if o == nil || common.IsNil(o.Splits) {
 		return nil, false
 	}
@@ -180,7 +214,7 @@ func (o *CreatePaymentCaptureRequest) GetSplitsOk() ([]Split, bool) {
 }
 
 // HasSplits returns a boolean if a field has been set.
-func (o *CreatePaymentCaptureRequest) HasSplits() bool {
+func (o *PaymentAmountUpdateRequest) HasSplits() bool {
 	if o != nil && !common.IsNil(o.Splits) {
 		return true
 	}
@@ -189,11 +223,11 @@ func (o *CreatePaymentCaptureRequest) HasSplits() bool {
 }
 
 // SetSplits gets a reference to the given []Split and assigns it to the Splits field.
-func (o *CreatePaymentCaptureRequest) SetSplits(v []Split) {
+func (o *PaymentAmountUpdateRequest) SetSplits(v []Split) {
 	o.Splits = v
 }
 
-func (o CreatePaymentCaptureRequest) MarshalJSON() ([]byte, error) {
+func (o PaymentAmountUpdateRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -201,9 +235,12 @@ func (o CreatePaymentCaptureRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreatePaymentCaptureRequest) ToMap() (map[string]interface{}, error) {
+func (o PaymentAmountUpdateRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["amount"] = o.Amount
+	if !common.IsNil(o.IndustryUsage) {
+		toSerialize["industryUsage"] = o.IndustryUsage
+	}
 	if !common.IsNil(o.LineItems) {
 		toSerialize["lineItems"] = o.LineItems
 	}
@@ -217,38 +254,48 @@ func (o CreatePaymentCaptureRequest) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableCreatePaymentCaptureRequest struct {
-	value *CreatePaymentCaptureRequest
+type NullablePaymentAmountUpdateRequest struct {
+	value *PaymentAmountUpdateRequest
 	isSet bool
 }
 
-func (v NullableCreatePaymentCaptureRequest) Get() *CreatePaymentCaptureRequest {
+func (v NullablePaymentAmountUpdateRequest) Get() *PaymentAmountUpdateRequest {
 	return v.value
 }
 
-func (v *NullableCreatePaymentCaptureRequest) Set(val *CreatePaymentCaptureRequest) {
+func (v *NullablePaymentAmountUpdateRequest) Set(val *PaymentAmountUpdateRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreatePaymentCaptureRequest) IsSet() bool {
+func (v NullablePaymentAmountUpdateRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreatePaymentCaptureRequest) Unset() {
+func (v *NullablePaymentAmountUpdateRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreatePaymentCaptureRequest(val *CreatePaymentCaptureRequest) *NullableCreatePaymentCaptureRequest {
-	return &NullableCreatePaymentCaptureRequest{value: val, isSet: true}
+func NewNullablePaymentAmountUpdateRequest(val *PaymentAmountUpdateRequest) *NullablePaymentAmountUpdateRequest {
+	return &NullablePaymentAmountUpdateRequest{value: val, isSet: true}
 }
 
-func (v NullableCreatePaymentCaptureRequest) MarshalJSON() ([]byte, error) {
+func (v NullablePaymentAmountUpdateRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreatePaymentCaptureRequest) UnmarshalJSON(src []byte) error {
+func (v *NullablePaymentAmountUpdateRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
+}
+
+func (o *PaymentAmountUpdateRequest) isValidIndustryUsage() bool {
+	var allowedEnumValues = []string{"delayedCharge", "installment", "noShow"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetIndustryUsage() == allowed {
+			return true
+		}
+	}
+	return false
 }

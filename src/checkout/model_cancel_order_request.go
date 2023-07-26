@@ -14,37 +14,37 @@ import (
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// checks if the CheckoutCancelOrderRequest type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &CheckoutCancelOrderRequest{}
+// checks if the CancelOrderRequest type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &CancelOrderRequest{}
 
-// CheckoutCancelOrderRequest struct for CheckoutCancelOrderRequest
-type CheckoutCancelOrderRequest struct {
+// CancelOrderRequest struct for CancelOrderRequest
+type CancelOrderRequest struct {
 	// The merchant account identifier that orderData belongs to.
 	MerchantAccount string             `json:"merchantAccount"`
 	Order           EncryptedOrderData `json:"order"`
 }
 
-// NewCheckoutCancelOrderRequest instantiates a new CheckoutCancelOrderRequest object
+// NewCancelOrderRequest instantiates a new CancelOrderRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCheckoutCancelOrderRequest(merchantAccount string, order EncryptedOrderData) *CheckoutCancelOrderRequest {
-	this := CheckoutCancelOrderRequest{}
+func NewCancelOrderRequest(merchantAccount string, order EncryptedOrderData) *CancelOrderRequest {
+	this := CancelOrderRequest{}
 	this.MerchantAccount = merchantAccount
 	this.Order = order
 	return &this
 }
 
-// NewCheckoutCancelOrderRequestWithDefaults instantiates a new CheckoutCancelOrderRequest object
+// NewCancelOrderRequestWithDefaults instantiates a new CancelOrderRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCheckoutCancelOrderRequestWithDefaults() *CheckoutCancelOrderRequest {
-	this := CheckoutCancelOrderRequest{}
+func NewCancelOrderRequestWithDefaults() *CancelOrderRequest {
+	this := CancelOrderRequest{}
 	return &this
 }
 
 // GetMerchantAccount returns the MerchantAccount field value
-func (o *CheckoutCancelOrderRequest) GetMerchantAccount() string {
+func (o *CancelOrderRequest) GetMerchantAccount() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -55,7 +55,7 @@ func (o *CheckoutCancelOrderRequest) GetMerchantAccount() string {
 
 // GetMerchantAccountOk returns a tuple with the MerchantAccount field value
 // and a boolean to check if the value has been set.
-func (o *CheckoutCancelOrderRequest) GetMerchantAccountOk() (*string, bool) {
+func (o *CancelOrderRequest) GetMerchantAccountOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -63,12 +63,12 @@ func (o *CheckoutCancelOrderRequest) GetMerchantAccountOk() (*string, bool) {
 }
 
 // SetMerchantAccount sets field value
-func (o *CheckoutCancelOrderRequest) SetMerchantAccount(v string) {
+func (o *CancelOrderRequest) SetMerchantAccount(v string) {
 	o.MerchantAccount = v
 }
 
 // GetOrder returns the Order field value
-func (o *CheckoutCancelOrderRequest) GetOrder() EncryptedOrderData {
+func (o *CancelOrderRequest) GetOrder() EncryptedOrderData {
 	if o == nil {
 		var ret EncryptedOrderData
 		return ret
@@ -79,7 +79,7 @@ func (o *CheckoutCancelOrderRequest) GetOrder() EncryptedOrderData {
 
 // GetOrderOk returns a tuple with the Order field value
 // and a boolean to check if the value has been set.
-func (o *CheckoutCancelOrderRequest) GetOrderOk() (*EncryptedOrderData, bool) {
+func (o *CancelOrderRequest) GetOrderOk() (*EncryptedOrderData, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -87,11 +87,11 @@ func (o *CheckoutCancelOrderRequest) GetOrderOk() (*EncryptedOrderData, bool) {
 }
 
 // SetOrder sets field value
-func (o *CheckoutCancelOrderRequest) SetOrder(v EncryptedOrderData) {
+func (o *CancelOrderRequest) SetOrder(v EncryptedOrderData) {
 	o.Order = v
 }
 
-func (o CheckoutCancelOrderRequest) MarshalJSON() ([]byte, error) {
+func (o CancelOrderRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -99,45 +99,45 @@ func (o CheckoutCancelOrderRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CheckoutCancelOrderRequest) ToMap() (map[string]interface{}, error) {
+func (o CancelOrderRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["merchantAccount"] = o.MerchantAccount
 	toSerialize["order"] = o.Order
 	return toSerialize, nil
 }
 
-type NullableCheckoutCancelOrderRequest struct {
-	value *CheckoutCancelOrderRequest
+type NullableCancelOrderRequest struct {
+	value *CancelOrderRequest
 	isSet bool
 }
 
-func (v NullableCheckoutCancelOrderRequest) Get() *CheckoutCancelOrderRequest {
+func (v NullableCancelOrderRequest) Get() *CancelOrderRequest {
 	return v.value
 }
 
-func (v *NullableCheckoutCancelOrderRequest) Set(val *CheckoutCancelOrderRequest) {
+func (v *NullableCancelOrderRequest) Set(val *CancelOrderRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCheckoutCancelOrderRequest) IsSet() bool {
+func (v NullableCancelOrderRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCheckoutCancelOrderRequest) Unset() {
+func (v *NullableCancelOrderRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCheckoutCancelOrderRequest(val *CheckoutCancelOrderRequest) *NullableCheckoutCancelOrderRequest {
-	return &NullableCheckoutCancelOrderRequest{value: val, isSet: true}
+func NewNullableCancelOrderRequest(val *CancelOrderRequest) *NullableCancelOrderRequest {
+	return &NullableCancelOrderRequest{value: val, isSet: true}
 }
 
-func (v NullableCheckoutCancelOrderRequest) MarshalJSON() ([]byte, error) {
+func (v NullableCancelOrderRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCheckoutCancelOrderRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableCancelOrderRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

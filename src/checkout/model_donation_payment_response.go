@@ -14,11 +14,11 @@ import (
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// checks if the DonationResponse type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &DonationResponse{}
+// checks if the DonationPaymentResponse type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &DonationPaymentResponse{}
 
-// DonationResponse struct for DonationResponse
-type DonationResponse struct {
+// DonationPaymentResponse struct for DonationPaymentResponse
+type DonationPaymentResponse struct {
 	Amount *Amount `json:"amount,omitempty"`
 	// The Adyen account name of your charity. We will provide you with this account name once your chosen charity has been [onboarded](https://docs.adyen.com/online-payments/donations#onboarding).
 	DonationAccount *string `json:"donationAccount,omitempty"`
@@ -33,25 +33,25 @@ type DonationResponse struct {
 	Status *string `json:"status,omitempty"`
 }
 
-// NewDonationResponse instantiates a new DonationResponse object
+// NewDonationPaymentResponse instantiates a new DonationPaymentResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDonationResponse() *DonationResponse {
-	this := DonationResponse{}
+func NewDonationPaymentResponse() *DonationPaymentResponse {
+	this := DonationPaymentResponse{}
 	return &this
 }
 
-// NewDonationResponseWithDefaults instantiates a new DonationResponse object
+// NewDonationPaymentResponseWithDefaults instantiates a new DonationPaymentResponse object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewDonationResponseWithDefaults() *DonationResponse {
-	this := DonationResponse{}
+func NewDonationPaymentResponseWithDefaults() *DonationPaymentResponse {
+	this := DonationPaymentResponse{}
 	return &this
 }
 
 // GetAmount returns the Amount field value if set, zero value otherwise.
-func (o *DonationResponse) GetAmount() Amount {
+func (o *DonationPaymentResponse) GetAmount() Amount {
 	if o == nil || common.IsNil(o.Amount) {
 		var ret Amount
 		return ret
@@ -61,7 +61,7 @@ func (o *DonationResponse) GetAmount() Amount {
 
 // GetAmountOk returns a tuple with the Amount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DonationResponse) GetAmountOk() (*Amount, bool) {
+func (o *DonationPaymentResponse) GetAmountOk() (*Amount, bool) {
 	if o == nil || common.IsNil(o.Amount) {
 		return nil, false
 	}
@@ -69,7 +69,7 @@ func (o *DonationResponse) GetAmountOk() (*Amount, bool) {
 }
 
 // HasAmount returns a boolean if a field has been set.
-func (o *DonationResponse) HasAmount() bool {
+func (o *DonationPaymentResponse) HasAmount() bool {
 	if o != nil && !common.IsNil(o.Amount) {
 		return true
 	}
@@ -78,12 +78,12 @@ func (o *DonationResponse) HasAmount() bool {
 }
 
 // SetAmount gets a reference to the given Amount and assigns it to the Amount field.
-func (o *DonationResponse) SetAmount(v Amount) {
+func (o *DonationPaymentResponse) SetAmount(v Amount) {
 	o.Amount = &v
 }
 
 // GetDonationAccount returns the DonationAccount field value if set, zero value otherwise.
-func (o *DonationResponse) GetDonationAccount() string {
+func (o *DonationPaymentResponse) GetDonationAccount() string {
 	if o == nil || common.IsNil(o.DonationAccount) {
 		var ret string
 		return ret
@@ -93,7 +93,7 @@ func (o *DonationResponse) GetDonationAccount() string {
 
 // GetDonationAccountOk returns a tuple with the DonationAccount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DonationResponse) GetDonationAccountOk() (*string, bool) {
+func (o *DonationPaymentResponse) GetDonationAccountOk() (*string, bool) {
 	if o == nil || common.IsNil(o.DonationAccount) {
 		return nil, false
 	}
@@ -101,7 +101,7 @@ func (o *DonationResponse) GetDonationAccountOk() (*string, bool) {
 }
 
 // HasDonationAccount returns a boolean if a field has been set.
-func (o *DonationResponse) HasDonationAccount() bool {
+func (o *DonationPaymentResponse) HasDonationAccount() bool {
 	if o != nil && !common.IsNil(o.DonationAccount) {
 		return true
 	}
@@ -110,12 +110,12 @@ func (o *DonationResponse) HasDonationAccount() bool {
 }
 
 // SetDonationAccount gets a reference to the given string and assigns it to the DonationAccount field.
-func (o *DonationResponse) SetDonationAccount(v string) {
+func (o *DonationPaymentResponse) SetDonationAccount(v string) {
 	o.DonationAccount = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *DonationResponse) GetId() string {
+func (o *DonationPaymentResponse) GetId() string {
 	if o == nil || common.IsNil(o.Id) {
 		var ret string
 		return ret
@@ -125,7 +125,7 @@ func (o *DonationResponse) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DonationResponse) GetIdOk() (*string, bool) {
+func (o *DonationPaymentResponse) GetIdOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Id) {
 		return nil, false
 	}
@@ -133,7 +133,7 @@ func (o *DonationResponse) GetIdOk() (*string, bool) {
 }
 
 // HasId returns a boolean if a field has been set.
-func (o *DonationResponse) HasId() bool {
+func (o *DonationPaymentResponse) HasId() bool {
 	if o != nil && !common.IsNil(o.Id) {
 		return true
 	}
@@ -142,12 +142,12 @@ func (o *DonationResponse) HasId() bool {
 }
 
 // SetId gets a reference to the given string and assigns it to the Id field.
-func (o *DonationResponse) SetId(v string) {
+func (o *DonationPaymentResponse) SetId(v string) {
 	o.Id = &v
 }
 
 // GetMerchantAccount returns the MerchantAccount field value if set, zero value otherwise.
-func (o *DonationResponse) GetMerchantAccount() string {
+func (o *DonationPaymentResponse) GetMerchantAccount() string {
 	if o == nil || common.IsNil(o.MerchantAccount) {
 		var ret string
 		return ret
@@ -157,7 +157,7 @@ func (o *DonationResponse) GetMerchantAccount() string {
 
 // GetMerchantAccountOk returns a tuple with the MerchantAccount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DonationResponse) GetMerchantAccountOk() (*string, bool) {
+func (o *DonationPaymentResponse) GetMerchantAccountOk() (*string, bool) {
 	if o == nil || common.IsNil(o.MerchantAccount) {
 		return nil, false
 	}
@@ -165,7 +165,7 @@ func (o *DonationResponse) GetMerchantAccountOk() (*string, bool) {
 }
 
 // HasMerchantAccount returns a boolean if a field has been set.
-func (o *DonationResponse) HasMerchantAccount() bool {
+func (o *DonationPaymentResponse) HasMerchantAccount() bool {
 	if o != nil && !common.IsNil(o.MerchantAccount) {
 		return true
 	}
@@ -174,12 +174,12 @@ func (o *DonationResponse) HasMerchantAccount() bool {
 }
 
 // SetMerchantAccount gets a reference to the given string and assigns it to the MerchantAccount field.
-func (o *DonationResponse) SetMerchantAccount(v string) {
+func (o *DonationPaymentResponse) SetMerchantAccount(v string) {
 	o.MerchantAccount = &v
 }
 
 // GetPayment returns the Payment field value if set, zero value otherwise.
-func (o *DonationResponse) GetPayment() PaymentResponse {
+func (o *DonationPaymentResponse) GetPayment() PaymentResponse {
 	if o == nil || common.IsNil(o.Payment) {
 		var ret PaymentResponse
 		return ret
@@ -189,7 +189,7 @@ func (o *DonationResponse) GetPayment() PaymentResponse {
 
 // GetPaymentOk returns a tuple with the Payment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DonationResponse) GetPaymentOk() (*PaymentResponse, bool) {
+func (o *DonationPaymentResponse) GetPaymentOk() (*PaymentResponse, bool) {
 	if o == nil || common.IsNil(o.Payment) {
 		return nil, false
 	}
@@ -197,7 +197,7 @@ func (o *DonationResponse) GetPaymentOk() (*PaymentResponse, bool) {
 }
 
 // HasPayment returns a boolean if a field has been set.
-func (o *DonationResponse) HasPayment() bool {
+func (o *DonationPaymentResponse) HasPayment() bool {
 	if o != nil && !common.IsNil(o.Payment) {
 		return true
 	}
@@ -206,12 +206,12 @@ func (o *DonationResponse) HasPayment() bool {
 }
 
 // SetPayment gets a reference to the given PaymentResponse and assigns it to the Payment field.
-func (o *DonationResponse) SetPayment(v PaymentResponse) {
+func (o *DonationPaymentResponse) SetPayment(v PaymentResponse) {
 	o.Payment = &v
 }
 
 // GetReference returns the Reference field value if set, zero value otherwise.
-func (o *DonationResponse) GetReference() string {
+func (o *DonationPaymentResponse) GetReference() string {
 	if o == nil || common.IsNil(o.Reference) {
 		var ret string
 		return ret
@@ -221,7 +221,7 @@ func (o *DonationResponse) GetReference() string {
 
 // GetReferenceOk returns a tuple with the Reference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DonationResponse) GetReferenceOk() (*string, bool) {
+func (o *DonationPaymentResponse) GetReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Reference) {
 		return nil, false
 	}
@@ -229,7 +229,7 @@ func (o *DonationResponse) GetReferenceOk() (*string, bool) {
 }
 
 // HasReference returns a boolean if a field has been set.
-func (o *DonationResponse) HasReference() bool {
+func (o *DonationPaymentResponse) HasReference() bool {
 	if o != nil && !common.IsNil(o.Reference) {
 		return true
 	}
@@ -238,12 +238,12 @@ func (o *DonationResponse) HasReference() bool {
 }
 
 // SetReference gets a reference to the given string and assigns it to the Reference field.
-func (o *DonationResponse) SetReference(v string) {
+func (o *DonationPaymentResponse) SetReference(v string) {
 	o.Reference = &v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *DonationResponse) GetStatus() string {
+func (o *DonationPaymentResponse) GetStatus() string {
 	if o == nil || common.IsNil(o.Status) {
 		var ret string
 		return ret
@@ -253,7 +253,7 @@ func (o *DonationResponse) GetStatus() string {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DonationResponse) GetStatusOk() (*string, bool) {
+func (o *DonationPaymentResponse) GetStatusOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Status) {
 		return nil, false
 	}
@@ -261,7 +261,7 @@ func (o *DonationResponse) GetStatusOk() (*string, bool) {
 }
 
 // HasStatus returns a boolean if a field has been set.
-func (o *DonationResponse) HasStatus() bool {
+func (o *DonationPaymentResponse) HasStatus() bool {
 	if o != nil && !common.IsNil(o.Status) {
 		return true
 	}
@@ -270,11 +270,11 @@ func (o *DonationResponse) HasStatus() bool {
 }
 
 // SetStatus gets a reference to the given string and assigns it to the Status field.
-func (o *DonationResponse) SetStatus(v string) {
+func (o *DonationPaymentResponse) SetStatus(v string) {
 	o.Status = &v
 }
 
-func (o DonationResponse) MarshalJSON() ([]byte, error) {
+func (o DonationPaymentResponse) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -282,7 +282,7 @@ func (o DonationResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DonationResponse) ToMap() (map[string]interface{}, error) {
+func (o DonationPaymentResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
@@ -308,43 +308,43 @@ func (o DonationResponse) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableDonationResponse struct {
-	value *DonationResponse
+type NullableDonationPaymentResponse struct {
+	value *DonationPaymentResponse
 	isSet bool
 }
 
-func (v NullableDonationResponse) Get() *DonationResponse {
+func (v NullableDonationPaymentResponse) Get() *DonationPaymentResponse {
 	return v.value
 }
 
-func (v *NullableDonationResponse) Set(val *DonationResponse) {
+func (v *NullableDonationPaymentResponse) Set(val *DonationPaymentResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableDonationResponse) IsSet() bool {
+func (v NullableDonationPaymentResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableDonationResponse) Unset() {
+func (v *NullableDonationPaymentResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableDonationResponse(val *DonationResponse) *NullableDonationResponse {
-	return &NullableDonationResponse{value: val, isSet: true}
+func NewNullableDonationPaymentResponse(val *DonationPaymentResponse) *NullableDonationPaymentResponse {
+	return &NullableDonationPaymentResponse{value: val, isSet: true}
 }
 
-func (v NullableDonationResponse) MarshalJSON() ([]byte, error) {
+func (v NullableDonationPaymentResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableDonationResponse) UnmarshalJSON(src []byte) error {
+func (v *NullableDonationPaymentResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
 
-func (o *DonationResponse) isValidStatus() bool {
+func (o *DonationPaymentResponse) isValidStatus() bool {
 	var allowedEnumValues = []string{"completed", "pending", "refused"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetStatus() == allowed {

@@ -14,11 +14,11 @@ import (
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// checks if the PaymentAmountUpdateResource type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &PaymentAmountUpdateResource{}
+// checks if the PaymentAmountUpdateResponse type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &PaymentAmountUpdateResponse{}
 
-// PaymentAmountUpdateResource struct for PaymentAmountUpdateResource
-type PaymentAmountUpdateResource struct {
+// PaymentAmountUpdateResponse struct for PaymentAmountUpdateResponse
+type PaymentAmountUpdateResponse struct {
 	Amount Amount `json:"amount"`
 	// The reason for the amount update. Possible values:  * **delayedCharge**  * **noShow**  * **installment**
 	IndustryUsage *string `json:"industryUsage,omitempty"`
@@ -36,12 +36,12 @@ type PaymentAmountUpdateResource struct {
 	Status string `json:"status"`
 }
 
-// NewPaymentAmountUpdateResource instantiates a new PaymentAmountUpdateResource object
+// NewPaymentAmountUpdateResponse instantiates a new PaymentAmountUpdateResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPaymentAmountUpdateResource(amount Amount, merchantAccount string, paymentPspReference string, pspReference string, reference string, status string) *PaymentAmountUpdateResource {
-	this := PaymentAmountUpdateResource{}
+func NewPaymentAmountUpdateResponse(amount Amount, merchantAccount string, paymentPspReference string, pspReference string, reference string, status string) *PaymentAmountUpdateResponse {
+	this := PaymentAmountUpdateResponse{}
 	this.Amount = amount
 	this.MerchantAccount = merchantAccount
 	this.PaymentPspReference = paymentPspReference
@@ -51,16 +51,16 @@ func NewPaymentAmountUpdateResource(amount Amount, merchantAccount string, payme
 	return &this
 }
 
-// NewPaymentAmountUpdateResourceWithDefaults instantiates a new PaymentAmountUpdateResource object
+// NewPaymentAmountUpdateResponseWithDefaults instantiates a new PaymentAmountUpdateResponse object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewPaymentAmountUpdateResourceWithDefaults() *PaymentAmountUpdateResource {
-	this := PaymentAmountUpdateResource{}
+func NewPaymentAmountUpdateResponseWithDefaults() *PaymentAmountUpdateResponse {
+	this := PaymentAmountUpdateResponse{}
 	return &this
 }
 
 // GetAmount returns the Amount field value
-func (o *PaymentAmountUpdateResource) GetAmount() Amount {
+func (o *PaymentAmountUpdateResponse) GetAmount() Amount {
 	if o == nil {
 		var ret Amount
 		return ret
@@ -71,7 +71,7 @@ func (o *PaymentAmountUpdateResource) GetAmount() Amount {
 
 // GetAmountOk returns a tuple with the Amount field value
 // and a boolean to check if the value has been set.
-func (o *PaymentAmountUpdateResource) GetAmountOk() (*Amount, bool) {
+func (o *PaymentAmountUpdateResponse) GetAmountOk() (*Amount, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -79,12 +79,12 @@ func (o *PaymentAmountUpdateResource) GetAmountOk() (*Amount, bool) {
 }
 
 // SetAmount sets field value
-func (o *PaymentAmountUpdateResource) SetAmount(v Amount) {
+func (o *PaymentAmountUpdateResponse) SetAmount(v Amount) {
 	o.Amount = v
 }
 
 // GetIndustryUsage returns the IndustryUsage field value if set, zero value otherwise.
-func (o *PaymentAmountUpdateResource) GetIndustryUsage() string {
+func (o *PaymentAmountUpdateResponse) GetIndustryUsage() string {
 	if o == nil || common.IsNil(o.IndustryUsage) {
 		var ret string
 		return ret
@@ -94,7 +94,7 @@ func (o *PaymentAmountUpdateResource) GetIndustryUsage() string {
 
 // GetIndustryUsageOk returns a tuple with the IndustryUsage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentAmountUpdateResource) GetIndustryUsageOk() (*string, bool) {
+func (o *PaymentAmountUpdateResponse) GetIndustryUsageOk() (*string, bool) {
 	if o == nil || common.IsNil(o.IndustryUsage) {
 		return nil, false
 	}
@@ -102,7 +102,7 @@ func (o *PaymentAmountUpdateResource) GetIndustryUsageOk() (*string, bool) {
 }
 
 // HasIndustryUsage returns a boolean if a field has been set.
-func (o *PaymentAmountUpdateResource) HasIndustryUsage() bool {
+func (o *PaymentAmountUpdateResponse) HasIndustryUsage() bool {
 	if o != nil && !common.IsNil(o.IndustryUsage) {
 		return true
 	}
@@ -111,12 +111,12 @@ func (o *PaymentAmountUpdateResource) HasIndustryUsage() bool {
 }
 
 // SetIndustryUsage gets a reference to the given string and assigns it to the IndustryUsage field.
-func (o *PaymentAmountUpdateResource) SetIndustryUsage(v string) {
+func (o *PaymentAmountUpdateResponse) SetIndustryUsage(v string) {
 	o.IndustryUsage = &v
 }
 
 // GetMerchantAccount returns the MerchantAccount field value
-func (o *PaymentAmountUpdateResource) GetMerchantAccount() string {
+func (o *PaymentAmountUpdateResponse) GetMerchantAccount() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -127,7 +127,7 @@ func (o *PaymentAmountUpdateResource) GetMerchantAccount() string {
 
 // GetMerchantAccountOk returns a tuple with the MerchantAccount field value
 // and a boolean to check if the value has been set.
-func (o *PaymentAmountUpdateResource) GetMerchantAccountOk() (*string, bool) {
+func (o *PaymentAmountUpdateResponse) GetMerchantAccountOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -135,12 +135,12 @@ func (o *PaymentAmountUpdateResource) GetMerchantAccountOk() (*string, bool) {
 }
 
 // SetMerchantAccount sets field value
-func (o *PaymentAmountUpdateResource) SetMerchantAccount(v string) {
+func (o *PaymentAmountUpdateResponse) SetMerchantAccount(v string) {
 	o.MerchantAccount = v
 }
 
 // GetPaymentPspReference returns the PaymentPspReference field value
-func (o *PaymentAmountUpdateResource) GetPaymentPspReference() string {
+func (o *PaymentAmountUpdateResponse) GetPaymentPspReference() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -151,7 +151,7 @@ func (o *PaymentAmountUpdateResource) GetPaymentPspReference() string {
 
 // GetPaymentPspReferenceOk returns a tuple with the PaymentPspReference field value
 // and a boolean to check if the value has been set.
-func (o *PaymentAmountUpdateResource) GetPaymentPspReferenceOk() (*string, bool) {
+func (o *PaymentAmountUpdateResponse) GetPaymentPspReferenceOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -159,12 +159,12 @@ func (o *PaymentAmountUpdateResource) GetPaymentPspReferenceOk() (*string, bool)
 }
 
 // SetPaymentPspReference sets field value
-func (o *PaymentAmountUpdateResource) SetPaymentPspReference(v string) {
+func (o *PaymentAmountUpdateResponse) SetPaymentPspReference(v string) {
 	o.PaymentPspReference = v
 }
 
 // GetPspReference returns the PspReference field value
-func (o *PaymentAmountUpdateResource) GetPspReference() string {
+func (o *PaymentAmountUpdateResponse) GetPspReference() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -175,7 +175,7 @@ func (o *PaymentAmountUpdateResource) GetPspReference() string {
 
 // GetPspReferenceOk returns a tuple with the PspReference field value
 // and a boolean to check if the value has been set.
-func (o *PaymentAmountUpdateResource) GetPspReferenceOk() (*string, bool) {
+func (o *PaymentAmountUpdateResponse) GetPspReferenceOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -183,12 +183,12 @@ func (o *PaymentAmountUpdateResource) GetPspReferenceOk() (*string, bool) {
 }
 
 // SetPspReference sets field value
-func (o *PaymentAmountUpdateResource) SetPspReference(v string) {
+func (o *PaymentAmountUpdateResponse) SetPspReference(v string) {
 	o.PspReference = v
 }
 
 // GetReference returns the Reference field value
-func (o *PaymentAmountUpdateResource) GetReference() string {
+func (o *PaymentAmountUpdateResponse) GetReference() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -199,7 +199,7 @@ func (o *PaymentAmountUpdateResource) GetReference() string {
 
 // GetReferenceOk returns a tuple with the Reference field value
 // and a boolean to check if the value has been set.
-func (o *PaymentAmountUpdateResource) GetReferenceOk() (*string, bool) {
+func (o *PaymentAmountUpdateResponse) GetReferenceOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -207,12 +207,12 @@ func (o *PaymentAmountUpdateResource) GetReferenceOk() (*string, bool) {
 }
 
 // SetReference sets field value
-func (o *PaymentAmountUpdateResource) SetReference(v string) {
+func (o *PaymentAmountUpdateResponse) SetReference(v string) {
 	o.Reference = v
 }
 
 // GetSplits returns the Splits field value if set, zero value otherwise.
-func (o *PaymentAmountUpdateResource) GetSplits() []Split {
+func (o *PaymentAmountUpdateResponse) GetSplits() []Split {
 	if o == nil || common.IsNil(o.Splits) {
 		var ret []Split
 		return ret
@@ -222,7 +222,7 @@ func (o *PaymentAmountUpdateResource) GetSplits() []Split {
 
 // GetSplitsOk returns a tuple with the Splits field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentAmountUpdateResource) GetSplitsOk() ([]Split, bool) {
+func (o *PaymentAmountUpdateResponse) GetSplitsOk() ([]Split, bool) {
 	if o == nil || common.IsNil(o.Splits) {
 		return nil, false
 	}
@@ -230,7 +230,7 @@ func (o *PaymentAmountUpdateResource) GetSplitsOk() ([]Split, bool) {
 }
 
 // HasSplits returns a boolean if a field has been set.
-func (o *PaymentAmountUpdateResource) HasSplits() bool {
+func (o *PaymentAmountUpdateResponse) HasSplits() bool {
 	if o != nil && !common.IsNil(o.Splits) {
 		return true
 	}
@@ -239,12 +239,12 @@ func (o *PaymentAmountUpdateResource) HasSplits() bool {
 }
 
 // SetSplits gets a reference to the given []Split and assigns it to the Splits field.
-func (o *PaymentAmountUpdateResource) SetSplits(v []Split) {
+func (o *PaymentAmountUpdateResponse) SetSplits(v []Split) {
 	o.Splits = v
 }
 
 // GetStatus returns the Status field value
-func (o *PaymentAmountUpdateResource) GetStatus() string {
+func (o *PaymentAmountUpdateResponse) GetStatus() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -255,7 +255,7 @@ func (o *PaymentAmountUpdateResource) GetStatus() string {
 
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *PaymentAmountUpdateResource) GetStatusOk() (*string, bool) {
+func (o *PaymentAmountUpdateResponse) GetStatusOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -263,11 +263,11 @@ func (o *PaymentAmountUpdateResource) GetStatusOk() (*string, bool) {
 }
 
 // SetStatus sets field value
-func (o *PaymentAmountUpdateResource) SetStatus(v string) {
+func (o *PaymentAmountUpdateResponse) SetStatus(v string) {
 	o.Status = v
 }
 
-func (o PaymentAmountUpdateResource) MarshalJSON() ([]byte, error) {
+func (o PaymentAmountUpdateResponse) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -275,7 +275,7 @@ func (o PaymentAmountUpdateResource) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentAmountUpdateResource) ToMap() (map[string]interface{}, error) {
+func (o PaymentAmountUpdateResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["amount"] = o.Amount
 	if !common.IsNil(o.IndustryUsage) {
@@ -292,43 +292,43 @@ func (o PaymentAmountUpdateResource) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullablePaymentAmountUpdateResource struct {
-	value *PaymentAmountUpdateResource
+type NullablePaymentAmountUpdateResponse struct {
+	value *PaymentAmountUpdateResponse
 	isSet bool
 }
 
-func (v NullablePaymentAmountUpdateResource) Get() *PaymentAmountUpdateResource {
+func (v NullablePaymentAmountUpdateResponse) Get() *PaymentAmountUpdateResponse {
 	return v.value
 }
 
-func (v *NullablePaymentAmountUpdateResource) Set(val *PaymentAmountUpdateResource) {
+func (v *NullablePaymentAmountUpdateResponse) Set(val *PaymentAmountUpdateResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullablePaymentAmountUpdateResource) IsSet() bool {
+func (v NullablePaymentAmountUpdateResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullablePaymentAmountUpdateResource) Unset() {
+func (v *NullablePaymentAmountUpdateResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullablePaymentAmountUpdateResource(val *PaymentAmountUpdateResource) *NullablePaymentAmountUpdateResource {
-	return &NullablePaymentAmountUpdateResource{value: val, isSet: true}
+func NewNullablePaymentAmountUpdateResponse(val *PaymentAmountUpdateResponse) *NullablePaymentAmountUpdateResponse {
+	return &NullablePaymentAmountUpdateResponse{value: val, isSet: true}
 }
 
-func (v NullablePaymentAmountUpdateResource) MarshalJSON() ([]byte, error) {
+func (v NullablePaymentAmountUpdateResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullablePaymentAmountUpdateResource) UnmarshalJSON(src []byte) error {
+func (v *NullablePaymentAmountUpdateResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
 
-func (o *PaymentAmountUpdateResource) isValidIndustryUsage() bool {
+func (o *PaymentAmountUpdateResponse) isValidIndustryUsage() bool {
 	var allowedEnumValues = []string{"delayedCharge", "installment", "noShow"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetIndustryUsage() == allowed {
@@ -337,7 +337,7 @@ func (o *PaymentAmountUpdateResource) isValidIndustryUsage() bool {
 	}
 	return false
 }
-func (o *PaymentAmountUpdateResource) isValidStatus() bool {
+func (o *PaymentAmountUpdateResponse) isValidStatus() bool {
 	var allowedEnumValues = []string{"received"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetStatus() == allowed {
