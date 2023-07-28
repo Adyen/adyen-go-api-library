@@ -19,12 +19,9 @@ var _ common.MappedNullable = &PlatformChargebackLogic{}
 
 // PlatformChargebackLogic struct for PlatformChargebackLogic
 type PlatformChargebackLogic struct {
-	// The method of handling the chargeback.  Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**, **deductAccordingToSplitRatio**.
-	Behavior *string `json:"behavior,omitempty"`
-	// The unique identifier of the balance account to which the chargeback fees are booked. By default, the chargeback fees are booked to your liable balance account.
+	Behavior              *string `json:"behavior,omitempty"`
 	CostAllocationAccount *string `json:"costAllocationAccount,omitempty"`
-	// The unique identifier of the balance account against which the disputed amount is booked.  Required if `behavior` is **deductFromOneBalanceAccount**.
-	TargetAccount *string `json:"targetAccount,omitempty"`
+	TargetAccount         *string `json:"targetAccount,omitempty"`
 }
 
 // NewPlatformChargebackLogic instantiates a new PlatformChargebackLogic object

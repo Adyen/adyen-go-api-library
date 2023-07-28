@@ -19,7 +19,7 @@ var _ common.MappedNullable = &AdditionalDataLevel23{}
 
 // AdditionalDataLevel23 struct for AdditionalDataLevel23
 type AdditionalDataLevel23 struct {
-	// The customer code.  Encoding: ASCII  Max length: 25 characters  Must not start with a space or be all spaces  Must not be all zeros
+	// The customer code, if supplied by a customer.  Encoding: ASCII  Max length: 25 characters  Must not start with a space or be all spaces  Must not be all zeros
 	EnhancedSchemeDataCustomerReference *string `json:"enhancedSchemeData.customerReference,omitempty"`
 	// The three-letter [ISO 3166-1 alpha-3 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) for the destination address.  Encoding: ASCII  Fixed length: 3 characters
 	EnhancedSchemeDataDestinationCountryCode *string `json:"enhancedSchemeData.destinationCountryCode,omitempty"`

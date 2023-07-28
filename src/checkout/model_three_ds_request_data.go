@@ -263,7 +263,7 @@ func (o *ThreeDSRequestData) isValidNativeThreeDS() bool {
 	return false
 }
 func (o *ThreeDSRequestData) isValidThreeDSVersion() bool {
-	var allowedEnumValues = []string{"V_2_1_0", "V_2_2_0"}
+	var allowedEnumValues = []string{"2.1.0", "2.2.0"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetThreeDSVersion() == allowed {
 			return true

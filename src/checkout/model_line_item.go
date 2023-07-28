@@ -33,7 +33,7 @@ type LineItem struct {
 	Id *string `json:"id,omitempty"`
 	// Link to the picture of the purchased item.
 	ImageUrl *string `json:"imageUrl,omitempty"`
-	// Item category, used by the payment methods PayPal and Ratepay.
+	// Item category, used by the RatePay payment method.
 	ItemCategory *string `json:"itemCategory,omitempty"`
 	// Manufacturer of the item.
 	Manufacturer *string `json:"manufacturer,omitempty"`

@@ -66,9 +66,8 @@ type CreateCheckoutSessionRequest struct {
 	// This reference allows linking multiple transactions to each other for reporting purposes (i.e. order auth-rate). The reference should be unique per billing cycle. The same merchant order reference should never be reused after the first authorised attempt. If used, this field should be supplied for all incoming authorisations. > We strongly recommend you send the `merchantOrderReference` value to benefit from linking payment requests when authorisation retries take place. In addition, we recommend you provide `retry.orderAttemptNumber`, `retry.chainAttemptNumber`, and `retry.skipRetry` values in `PaymentRequest.additionalData`.
 	MerchantOrderReference *string `json:"merchantOrderReference,omitempty"`
 	// Metadata consists of entries, each of which includes a key and a value. Limits: * Maximum 20 key-value pairs per request. * Maximum 20 characters per key. * Maximum 80 characters per value.
-	Metadata                *map[string]string       `json:"metadata,omitempty"`
-	MpiData                 *ThreeDSecureData        `json:"mpiData,omitempty"`
-	PlatformChargebackLogic *PlatformChargebackLogic `json:"platformChargebackLogic,omitempty"`
+	Metadata *map[string]string `json:"metadata,omitempty"`
+	MpiData  *ThreeDSecureData  `json:"mpiData,omitempty"`
 	// Date after which no further authorisations shall be performed. Only for 3D Secure 2.
 	RecurringExpiry *string `json:"recurringExpiry,omitempty"`
 	// Minimum number of days between authorisations. Only for 3D Secure 2.
@@ -101,9 +100,9 @@ type CreateCheckoutSessionRequest struct {
 	SocialSecurityNumber *string `json:"socialSecurityNumber,omitempty"`
 	// Boolean value indicating whether the card payment method should be split into separate debit and credit options.
 	SplitCardFundingSources *bool `json:"splitCardFundingSources,omitempty"`
-	// An array of objects specifying how to split a payment when using [Adyen for Platforms](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information), [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic/processing-payments#providing-split-information), or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
+	// An array of objects specifying how the payment should be split when using [Adyen for Platforms](https://docs.adyen.com/platforms/processing-payments#providing-split-information) or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
 	Splits []Split `json:"splits,omitempty"`
-	// The ecommerce or point-of-sale store that is processing the payment. Used in:  * [Partner platform integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for the [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic). * [Platform setup integrations](https://docs.adyen.com/marketplaces-and-platforms/additional-for-platform-setup/route-payment-to-store) for the [Balance Platform](https://docs.adyen.com/marketplaces-and-platforms).
+	// The ecommerce or point-of-sale store that is processing the payment.
 	Store *string `json:"store,omitempty"`
 	// When this is set to **true** and the `shopperReference` is provided, the payment details will be stored.
 	StorePaymentMethod *bool `json:"storePaymentMethod,omitempty"`
@@ -1091,38 +1090,6 @@ func (o *CreateCheckoutSessionRequest) SetMpiData(v ThreeDSecureData) {
 	o.MpiData = &v
 }
 
-// GetPlatformChargebackLogic returns the PlatformChargebackLogic field value if set, zero value otherwise.
-func (o *CreateCheckoutSessionRequest) GetPlatformChargebackLogic() PlatformChargebackLogic {
-	if o == nil || common.IsNil(o.PlatformChargebackLogic) {
-		var ret PlatformChargebackLogic
-		return ret
-	}
-	return *o.PlatformChargebackLogic
-}
-
-// GetPlatformChargebackLogicOk returns a tuple with the PlatformChargebackLogic field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateCheckoutSessionRequest) GetPlatformChargebackLogicOk() (*PlatformChargebackLogic, bool) {
-	if o == nil || common.IsNil(o.PlatformChargebackLogic) {
-		return nil, false
-	}
-	return o.PlatformChargebackLogic, true
-}
-
-// HasPlatformChargebackLogic returns a boolean if a field has been set.
-func (o *CreateCheckoutSessionRequest) HasPlatformChargebackLogic() bool {
-	if o != nil && !common.IsNil(o.PlatformChargebackLogic) {
-		return true
-	}
-
-	return false
-}
-
-// SetPlatformChargebackLogic gets a reference to the given PlatformChargebackLogic and assigns it to the PlatformChargebackLogic field.
-func (o *CreateCheckoutSessionRequest) SetPlatformChargebackLogic(v PlatformChargebackLogic) {
-	o.PlatformChargebackLogic = &v
-}
-
 // GetRecurringExpiry returns the RecurringExpiry field value if set, zero value otherwise.
 func (o *CreateCheckoutSessionRequest) GetRecurringExpiry() string {
 	if o == nil || common.IsNil(o.RecurringExpiry) {
@@ -1973,9 +1940,6 @@ func (o CreateCheckoutSessionRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.MpiData) {
 		toSerialize["mpiData"] = o.MpiData
-	}
-	if !common.IsNil(o.PlatformChargebackLogic) {
-		toSerialize["platformChargebackLogic"] = o.PlatformChargebackLogic
 	}
 	if !common.IsNil(o.RecurringExpiry) {
 		toSerialize["recurringExpiry"] = o.RecurringExpiry

@@ -22,8 +22,8 @@ type ModificationsApi common.Service
 
 // All parameters accepted by ModificationsApi.CancelAuthorisedPayment
 type ModificationsApiCancelAuthorisedPaymentInput struct {
-	idempotencyKey                 *string
-	standalonePaymentCancelRequest *StandalonePaymentCancelRequest
+	idempotencyKey                       *string
+	createStandalonePaymentCancelRequest *CreateStandalonePaymentCancelRequest
 }
 
 // A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
@@ -32,8 +32,8 @@ func (r ModificationsApiCancelAuthorisedPaymentInput) IdempotencyKey(idempotency
 	return r
 }
 
-func (r ModificationsApiCancelAuthorisedPaymentInput) StandalonePaymentCancelRequest(standalonePaymentCancelRequest StandalonePaymentCancelRequest) ModificationsApiCancelAuthorisedPaymentInput {
-	r.standalonePaymentCancelRequest = &standalonePaymentCancelRequest
+func (r ModificationsApiCancelAuthorisedPaymentInput) CreateStandalonePaymentCancelRequest(createStandalonePaymentCancelRequest CreateStandalonePaymentCancelRequest) ModificationsApiCancelAuthorisedPaymentInput {
+	r.createStandalonePaymentCancelRequest = &createStandalonePaymentCancelRequest
 	return r
 }
 
@@ -59,10 +59,10 @@ For more information, refer to [Cancel](https://docs.adyen.com/online-payments/c
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r ModificationsApiCancelAuthorisedPaymentInput - Request parameters, see CancelAuthorisedPaymentInput
-@return StandalonePaymentCancelResponse, *http.Response, error
+@return StandalonePaymentCancelResource, *http.Response, error
 */
-func (a *ModificationsApi) CancelAuthorisedPayment(ctx context.Context, r ModificationsApiCancelAuthorisedPaymentInput) (StandalonePaymentCancelResponse, *http.Response, error) {
-	res := &StandalonePaymentCancelResponse{}
+func (a *ModificationsApi) CancelAuthorisedPayment(ctx context.Context, r ModificationsApiCancelAuthorisedPaymentInput) (StandalonePaymentCancelResource, *http.Response, error) {
+	res := &StandalonePaymentCancelResource{}
 	path := "/cancels"
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
@@ -72,7 +72,7 @@ func (a *ModificationsApi) CancelAuthorisedPayment(ctx context.Context, r Modifi
 	httpRes, err := common.SendAPIRequest(
 		ctx,
 		a.Client,
-		r.standalonePaymentCancelRequest,
+		r.createStandalonePaymentCancelRequest,
 		res,
 		http.MethodPost,
 		a.BasePath()+path,
@@ -85,9 +85,9 @@ func (a *ModificationsApi) CancelAuthorisedPayment(ctx context.Context, r Modifi
 
 // All parameters accepted by ModificationsApi.CancelAuthorisedPaymentByPspReference
 type ModificationsApiCancelAuthorisedPaymentByPspReferenceInput struct {
-	paymentPspReference  string
-	idempotencyKey       *string
-	paymentCancelRequest *PaymentCancelRequest
+	paymentPspReference        string
+	idempotencyKey             *string
+	createPaymentCancelRequest *CreatePaymentCancelRequest
 }
 
 // A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
@@ -96,8 +96,8 @@ func (r ModificationsApiCancelAuthorisedPaymentByPspReferenceInput) IdempotencyK
 	return r
 }
 
-func (r ModificationsApiCancelAuthorisedPaymentByPspReferenceInput) PaymentCancelRequest(paymentCancelRequest PaymentCancelRequest) ModificationsApiCancelAuthorisedPaymentByPspReferenceInput {
-	r.paymentCancelRequest = &paymentCancelRequest
+func (r ModificationsApiCancelAuthorisedPaymentByPspReferenceInput) CreatePaymentCancelRequest(createPaymentCancelRequest CreatePaymentCancelRequest) ModificationsApiCancelAuthorisedPaymentByPspReferenceInput {
+	r.createPaymentCancelRequest = &createPaymentCancelRequest
 	return r
 }
 
@@ -125,10 +125,10 @@ For more information, refer to [Cancel](https://docs.adyen.com/online-payments/c
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r ModificationsApiCancelAuthorisedPaymentByPspReferenceInput - Request parameters, see CancelAuthorisedPaymentByPspReferenceInput
-@return PaymentCancelResponse, *http.Response, error
+@return PaymentCancelResource, *http.Response, error
 */
-func (a *ModificationsApi) CancelAuthorisedPaymentByPspReference(ctx context.Context, r ModificationsApiCancelAuthorisedPaymentByPspReferenceInput) (PaymentCancelResponse, *http.Response, error) {
-	res := &PaymentCancelResponse{}
+func (a *ModificationsApi) CancelAuthorisedPaymentByPspReference(ctx context.Context, r ModificationsApiCancelAuthorisedPaymentByPspReferenceInput) (PaymentCancelResource, *http.Response, error) {
+	res := &PaymentCancelResource{}
 	path := "/payments/{paymentPspReference}/cancels"
 	path = strings.Replace(path, "{"+"paymentPspReference"+"}", url.PathEscape(common.ParameterValueToString(r.paymentPspReference, "paymentPspReference")), -1)
 	queryParams := url.Values{}
@@ -139,7 +139,7 @@ func (a *ModificationsApi) CancelAuthorisedPaymentByPspReference(ctx context.Con
 	httpRes, err := common.SendAPIRequest(
 		ctx,
 		a.Client,
-		r.paymentCancelRequest,
+		r.createPaymentCancelRequest,
 		res,
 		http.MethodPost,
 		a.BasePath()+path,
@@ -152,9 +152,9 @@ func (a *ModificationsApi) CancelAuthorisedPaymentByPspReference(ctx context.Con
 
 // All parameters accepted by ModificationsApi.CaptureAuthorisedPayment
 type ModificationsApiCaptureAuthorisedPaymentInput struct {
-	paymentPspReference   string
-	idempotencyKey        *string
-	paymentCaptureRequest *PaymentCaptureRequest
+	paymentPspReference         string
+	idempotencyKey              *string
+	createPaymentCaptureRequest *CreatePaymentCaptureRequest
 }
 
 // A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
@@ -163,8 +163,8 @@ func (r ModificationsApiCaptureAuthorisedPaymentInput) IdempotencyKey(idempotenc
 	return r
 }
 
-func (r ModificationsApiCaptureAuthorisedPaymentInput) PaymentCaptureRequest(paymentCaptureRequest PaymentCaptureRequest) ModificationsApiCaptureAuthorisedPaymentInput {
-	r.paymentCaptureRequest = &paymentCaptureRequest
+func (r ModificationsApiCaptureAuthorisedPaymentInput) CreatePaymentCaptureRequest(createPaymentCaptureRequest CreatePaymentCaptureRequest) ModificationsApiCaptureAuthorisedPaymentInput {
+	r.createPaymentCaptureRequest = &createPaymentCaptureRequest
 	return r
 }
 
@@ -192,10 +192,10 @@ For more information, refer to [Capture](https://docs.adyen.com/online-payments/
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r ModificationsApiCaptureAuthorisedPaymentInput - Request parameters, see CaptureAuthorisedPaymentInput
-@return PaymentCaptureResponse, *http.Response, error
+@return PaymentCaptureResource, *http.Response, error
 */
-func (a *ModificationsApi) CaptureAuthorisedPayment(ctx context.Context, r ModificationsApiCaptureAuthorisedPaymentInput) (PaymentCaptureResponse, *http.Response, error) {
-	res := &PaymentCaptureResponse{}
+func (a *ModificationsApi) CaptureAuthorisedPayment(ctx context.Context, r ModificationsApiCaptureAuthorisedPaymentInput) (PaymentCaptureResource, *http.Response, error) {
+	res := &PaymentCaptureResource{}
 	path := "/payments/{paymentPspReference}/captures"
 	path = strings.Replace(path, "{"+"paymentPspReference"+"}", url.PathEscape(common.ParameterValueToString(r.paymentPspReference, "paymentPspReference")), -1)
 	queryParams := url.Values{}
@@ -206,7 +206,7 @@ func (a *ModificationsApi) CaptureAuthorisedPayment(ctx context.Context, r Modif
 	httpRes, err := common.SendAPIRequest(
 		ctx,
 		a.Client,
-		r.paymentCaptureRequest,
+		r.createPaymentCaptureRequest,
 		res,
 		http.MethodPost,
 		a.BasePath()+path,
@@ -219,9 +219,9 @@ func (a *ModificationsApi) CaptureAuthorisedPayment(ctx context.Context, r Modif
 
 // All parameters accepted by ModificationsApi.RefundCapturedPayment
 type ModificationsApiRefundCapturedPaymentInput struct {
-	paymentPspReference  string
-	idempotencyKey       *string
-	paymentRefundRequest *PaymentRefundRequest
+	paymentPspReference        string
+	idempotencyKey             *string
+	createPaymentRefundRequest *CreatePaymentRefundRequest
 }
 
 // A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
@@ -230,8 +230,8 @@ func (r ModificationsApiRefundCapturedPaymentInput) IdempotencyKey(idempotencyKe
 	return r
 }
 
-func (r ModificationsApiRefundCapturedPaymentInput) PaymentRefundRequest(paymentRefundRequest PaymentRefundRequest) ModificationsApiRefundCapturedPaymentInput {
-	r.paymentRefundRequest = &paymentRefundRequest
+func (r ModificationsApiRefundCapturedPaymentInput) CreatePaymentRefundRequest(createPaymentRefundRequest CreatePaymentRefundRequest) ModificationsApiRefundCapturedPaymentInput {
+	r.createPaymentRefundRequest = &createPaymentRefundRequest
 	return r
 }
 
@@ -261,10 +261,10 @@ For more information, refer to [Refund](https://docs.adyen.com/online-payments/r
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r ModificationsApiRefundCapturedPaymentInput - Request parameters, see RefundCapturedPaymentInput
-@return PaymentRefundResponse, *http.Response, error
+@return PaymentRefundResource, *http.Response, error
 */
-func (a *ModificationsApi) RefundCapturedPayment(ctx context.Context, r ModificationsApiRefundCapturedPaymentInput) (PaymentRefundResponse, *http.Response, error) {
-	res := &PaymentRefundResponse{}
+func (a *ModificationsApi) RefundCapturedPayment(ctx context.Context, r ModificationsApiRefundCapturedPaymentInput) (PaymentRefundResource, *http.Response, error) {
+	res := &PaymentRefundResource{}
 	path := "/payments/{paymentPspReference}/refunds"
 	path = strings.Replace(path, "{"+"paymentPspReference"+"}", url.PathEscape(common.ParameterValueToString(r.paymentPspReference, "paymentPspReference")), -1)
 	queryParams := url.Values{}
@@ -275,7 +275,7 @@ func (a *ModificationsApi) RefundCapturedPayment(ctx context.Context, r Modifica
 	httpRes, err := common.SendAPIRequest(
 		ctx,
 		a.Client,
-		r.paymentRefundRequest,
+		r.createPaymentRefundRequest,
 		res,
 		http.MethodPost,
 		a.BasePath()+path,
@@ -288,9 +288,9 @@ func (a *ModificationsApi) RefundCapturedPayment(ctx context.Context, r Modifica
 
 // All parameters accepted by ModificationsApi.RefundOrCancelPayment
 type ModificationsApiRefundOrCancelPaymentInput struct {
-	paymentPspReference    string
-	idempotencyKey         *string
-	paymentReversalRequest *PaymentReversalRequest
+	paymentPspReference          string
+	idempotencyKey               *string
+	createPaymentReversalRequest *CreatePaymentReversalRequest
 }
 
 // A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
@@ -299,8 +299,8 @@ func (r ModificationsApiRefundOrCancelPaymentInput) IdempotencyKey(idempotencyKe
 	return r
 }
 
-func (r ModificationsApiRefundOrCancelPaymentInput) PaymentReversalRequest(paymentReversalRequest PaymentReversalRequest) ModificationsApiRefundOrCancelPaymentInput {
-	r.paymentReversalRequest = &paymentReversalRequest
+func (r ModificationsApiRefundOrCancelPaymentInput) CreatePaymentReversalRequest(createPaymentReversalRequest CreatePaymentReversalRequest) ModificationsApiRefundOrCancelPaymentInput {
+	r.createPaymentReversalRequest = &createPaymentReversalRequest
 	return r
 }
 
@@ -327,10 +327,10 @@ For more information, refer to [Reversal](https://docs.adyen.com/online-payments
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r ModificationsApiRefundOrCancelPaymentInput - Request parameters, see RefundOrCancelPaymentInput
-@return PaymentReversalResponse, *http.Response, error
+@return PaymentReversalResource, *http.Response, error
 */
-func (a *ModificationsApi) RefundOrCancelPayment(ctx context.Context, r ModificationsApiRefundOrCancelPaymentInput) (PaymentReversalResponse, *http.Response, error) {
-	res := &PaymentReversalResponse{}
+func (a *ModificationsApi) RefundOrCancelPayment(ctx context.Context, r ModificationsApiRefundOrCancelPaymentInput) (PaymentReversalResource, *http.Response, error) {
+	res := &PaymentReversalResource{}
 	path := "/payments/{paymentPspReference}/reversals"
 	path = strings.Replace(path, "{"+"paymentPspReference"+"}", url.PathEscape(common.ParameterValueToString(r.paymentPspReference, "paymentPspReference")), -1)
 	queryParams := url.Values{}
@@ -341,7 +341,7 @@ func (a *ModificationsApi) RefundOrCancelPayment(ctx context.Context, r Modifica
 	httpRes, err := common.SendAPIRequest(
 		ctx,
 		a.Client,
-		r.paymentReversalRequest,
+		r.createPaymentReversalRequest,
 		res,
 		http.MethodPost,
 		a.BasePath()+path,
@@ -354,9 +354,9 @@ func (a *ModificationsApi) RefundOrCancelPayment(ctx context.Context, r Modifica
 
 // All parameters accepted by ModificationsApi.UpdateAuthorisedAmount
 type ModificationsApiUpdateAuthorisedAmountInput struct {
-	paymentPspReference        string
-	idempotencyKey             *string
-	paymentAmountUpdateRequest *PaymentAmountUpdateRequest
+	paymentPspReference              string
+	idempotencyKey                   *string
+	createPaymentAmountUpdateRequest *CreatePaymentAmountUpdateRequest
 }
 
 // A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
@@ -365,8 +365,8 @@ func (r ModificationsApiUpdateAuthorisedAmountInput) IdempotencyKey(idempotencyK
 	return r
 }
 
-func (r ModificationsApiUpdateAuthorisedAmountInput) PaymentAmountUpdateRequest(paymentAmountUpdateRequest PaymentAmountUpdateRequest) ModificationsApiUpdateAuthorisedAmountInput {
-	r.paymentAmountUpdateRequest = &paymentAmountUpdateRequest
+func (r ModificationsApiUpdateAuthorisedAmountInput) CreatePaymentAmountUpdateRequest(createPaymentAmountUpdateRequest CreatePaymentAmountUpdateRequest) ModificationsApiUpdateAuthorisedAmountInput {
+	r.createPaymentAmountUpdateRequest = &createPaymentAmountUpdateRequest
 	return r
 }
 
@@ -394,10 +394,10 @@ For more information, refer to [Authorisation adjustment](https://docs.adyen.com
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r ModificationsApiUpdateAuthorisedAmountInput - Request parameters, see UpdateAuthorisedAmountInput
-@return PaymentAmountUpdateResponse, *http.Response, error
+@return PaymentAmountUpdateResource, *http.Response, error
 */
-func (a *ModificationsApi) UpdateAuthorisedAmount(ctx context.Context, r ModificationsApiUpdateAuthorisedAmountInput) (PaymentAmountUpdateResponse, *http.Response, error) {
-	res := &PaymentAmountUpdateResponse{}
+func (a *ModificationsApi) UpdateAuthorisedAmount(ctx context.Context, r ModificationsApiUpdateAuthorisedAmountInput) (PaymentAmountUpdateResource, *http.Response, error) {
+	res := &PaymentAmountUpdateResource{}
 	path := "/payments/{paymentPspReference}/amountUpdates"
 	path = strings.Replace(path, "{"+"paymentPspReference"+"}", url.PathEscape(common.ParameterValueToString(r.paymentPspReference, "paymentPspReference")), -1)
 	queryParams := url.Values{}
@@ -408,7 +408,7 @@ func (a *ModificationsApi) UpdateAuthorisedAmount(ctx context.Context, r Modific
 	httpRes, err := common.SendAPIRequest(
 		ctx,
 		a.Client,
-		r.paymentAmountUpdateRequest,
+		r.createPaymentAmountUpdateRequest,
 		res,
 		http.MethodPost,
 		a.BasePath()+path,

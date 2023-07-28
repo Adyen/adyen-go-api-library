@@ -22,9 +22,9 @@ type RecurringApi common.Service
 
 // All parameters accepted by RecurringApi.DeleteTokenForStoredPaymentDetails
 type RecurringApiDeleteTokenForStoredPaymentDetailsInput struct {
-	storedPaymentMethodId string
-	shopperReference      *string
-	merchantAccount       *string
+	recurringId      string
+	shopperReference *string
+	merchantAccount  *string
 }
 
 // Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters. &gt; Your reference must not include personally identifiable information (PII), for example name or email address.
@@ -41,12 +41,12 @@ func (r RecurringApiDeleteTokenForStoredPaymentDetailsInput) MerchantAccount(mer
 
 /*
 Prepare a request for DeleteTokenForStoredPaymentDetails
-@param storedPaymentMethodId The unique identifier of the token.
+@param recurringId The unique identifier of the token.
 @return RecurringApiDeleteTokenForStoredPaymentDetailsInput
 */
-func (a *RecurringApi) DeleteTokenForStoredPaymentDetailsInput(storedPaymentMethodId string) RecurringApiDeleteTokenForStoredPaymentDetailsInput {
+func (a *RecurringApi) DeleteTokenForStoredPaymentDetailsInput(recurringId string) RecurringApiDeleteTokenForStoredPaymentDetailsInput {
 	return RecurringApiDeleteTokenForStoredPaymentDetailsInput{
-		storedPaymentMethodId: storedPaymentMethodId,
+		recurringId: recurringId,
 	}
 }
 
@@ -61,8 +61,8 @@ Deletes the token identified in the path. The token can no longer be used with p
 */
 func (a *RecurringApi) DeleteTokenForStoredPaymentDetails(ctx context.Context, r RecurringApiDeleteTokenForStoredPaymentDetailsInput) (StoredPaymentMethodResource, *http.Response, error) {
 	res := &StoredPaymentMethodResource{}
-	path := "/storedPaymentMethods/{storedPaymentMethodId}"
-	path = strings.Replace(path, "{"+"storedPaymentMethodId"+"}", url.PathEscape(common.ParameterValueToString(r.storedPaymentMethodId, "storedPaymentMethodId")), -1)
+	path := "/storedPaymentMethods/{recurringId}"
+	path = strings.Replace(path, "{"+"recurringId"+"}", url.PathEscape(common.ParameterValueToString(r.recurringId, "recurringId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	if r.shopperReference != nil {

@@ -21,8 +21,8 @@ type OrdersApi common.Service
 
 // All parameters accepted by OrdersApi.CancelOrder
 type OrdersApiCancelOrderInput struct {
-	idempotencyKey     *string
-	cancelOrderRequest *CancelOrderRequest
+	idempotencyKey             *string
+	checkoutCancelOrderRequest *CheckoutCancelOrderRequest
 }
 
 // A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
@@ -31,8 +31,8 @@ func (r OrdersApiCancelOrderInput) IdempotencyKey(idempotencyKey string) OrdersA
 	return r
 }
 
-func (r OrdersApiCancelOrderInput) CancelOrderRequest(cancelOrderRequest CancelOrderRequest) OrdersApiCancelOrderInput {
-	r.cancelOrderRequest = &cancelOrderRequest
+func (r OrdersApiCancelOrderInput) CheckoutCancelOrderRequest(checkoutCancelOrderRequest CheckoutCancelOrderRequest) OrdersApiCancelOrderInput {
+	r.checkoutCancelOrderRequest = &checkoutCancelOrderRequest
 	return r
 }
 
@@ -52,10 +52,10 @@ Cancels an order. Cancellation of an order results in an automatic rollback of a
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r OrdersApiCancelOrderInput - Request parameters, see CancelOrderInput
-@return CancelOrderResponse, *http.Response, error
+@return CheckoutCancelOrderResponse, *http.Response, error
 */
-func (a *OrdersApi) CancelOrder(ctx context.Context, r OrdersApiCancelOrderInput) (CancelOrderResponse, *http.Response, error) {
-	res := &CancelOrderResponse{}
+func (a *OrdersApi) CancelOrder(ctx context.Context, r OrdersApiCancelOrderInput) (CheckoutCancelOrderResponse, *http.Response, error) {
+	res := &CheckoutCancelOrderResponse{}
 	path := "/orders/cancel"
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
@@ -65,7 +65,7 @@ func (a *OrdersApi) CancelOrder(ctx context.Context, r OrdersApiCancelOrderInput
 	httpRes, err := common.SendAPIRequest(
 		ctx,
 		a.Client,
-		r.cancelOrderRequest,
+		r.checkoutCancelOrderRequest,
 		res,
 		http.MethodPost,
 		a.BasePath()+path,
@@ -78,8 +78,8 @@ func (a *OrdersApi) CancelOrder(ctx context.Context, r OrdersApiCancelOrderInput
 
 // All parameters accepted by OrdersApi.GetBalanceOfGiftCard
 type OrdersApiGetBalanceOfGiftCardInput struct {
-	idempotencyKey      *string
-	balanceCheckRequest *BalanceCheckRequest
+	idempotencyKey              *string
+	checkoutBalanceCheckRequest *CheckoutBalanceCheckRequest
 }
 
 // A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
@@ -88,8 +88,8 @@ func (r OrdersApiGetBalanceOfGiftCardInput) IdempotencyKey(idempotencyKey string
 	return r
 }
 
-func (r OrdersApiGetBalanceOfGiftCardInput) BalanceCheckRequest(balanceCheckRequest BalanceCheckRequest) OrdersApiGetBalanceOfGiftCardInput {
-	r.balanceCheckRequest = &balanceCheckRequest
+func (r OrdersApiGetBalanceOfGiftCardInput) CheckoutBalanceCheckRequest(checkoutBalanceCheckRequest CheckoutBalanceCheckRequest) OrdersApiGetBalanceOfGiftCardInput {
+	r.checkoutBalanceCheckRequest = &checkoutBalanceCheckRequest
 	return r
 }
 
@@ -109,10 +109,10 @@ Retrieves the balance remaining on a shopper's gift card. To check a gift card's
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r OrdersApiGetBalanceOfGiftCardInput - Request parameters, see GetBalanceOfGiftCardInput
-@return BalanceCheckResponse, *http.Response, error
+@return CheckoutBalanceCheckResponse, *http.Response, error
 */
-func (a *OrdersApi) GetBalanceOfGiftCard(ctx context.Context, r OrdersApiGetBalanceOfGiftCardInput) (BalanceCheckResponse, *http.Response, error) {
-	res := &BalanceCheckResponse{}
+func (a *OrdersApi) GetBalanceOfGiftCard(ctx context.Context, r OrdersApiGetBalanceOfGiftCardInput) (CheckoutBalanceCheckResponse, *http.Response, error) {
+	res := &CheckoutBalanceCheckResponse{}
 	path := "/paymentMethods/balance"
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
@@ -122,7 +122,7 @@ func (a *OrdersApi) GetBalanceOfGiftCard(ctx context.Context, r OrdersApiGetBala
 	httpRes, err := common.SendAPIRequest(
 		ctx,
 		a.Client,
-		r.balanceCheckRequest,
+		r.checkoutBalanceCheckRequest,
 		res,
 		http.MethodPost,
 		a.BasePath()+path,
@@ -135,8 +135,8 @@ func (a *OrdersApi) GetBalanceOfGiftCard(ctx context.Context, r OrdersApiGetBala
 
 // All parameters accepted by OrdersApi.Orders
 type OrdersApiOrdersInput struct {
-	idempotencyKey     *string
-	createOrderRequest *CreateOrderRequest
+	idempotencyKey             *string
+	checkoutCreateOrderRequest *CheckoutCreateOrderRequest
 }
 
 // A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
@@ -145,8 +145,8 @@ func (r OrdersApiOrdersInput) IdempotencyKey(idempotencyKey string) OrdersApiOrd
 	return r
 }
 
-func (r OrdersApiOrdersInput) CreateOrderRequest(createOrderRequest CreateOrderRequest) OrdersApiOrdersInput {
-	r.createOrderRequest = &createOrderRequest
+func (r OrdersApiOrdersInput) CheckoutCreateOrderRequest(checkoutCreateOrderRequest CheckoutCreateOrderRequest) OrdersApiOrdersInput {
+	r.checkoutCreateOrderRequest = &checkoutCreateOrderRequest
 	return r
 }
 
@@ -166,10 +166,10 @@ Creates an order to be used for partial payments. Make a POST `/orders` call bef
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r OrdersApiOrdersInput - Request parameters, see OrdersInput
-@return CreateOrderResponse, *http.Response, error
+@return CheckoutCreateOrderResponse, *http.Response, error
 */
-func (a *OrdersApi) Orders(ctx context.Context, r OrdersApiOrdersInput) (CreateOrderResponse, *http.Response, error) {
-	res := &CreateOrderResponse{}
+func (a *OrdersApi) Orders(ctx context.Context, r OrdersApiOrdersInput) (CheckoutCreateOrderResponse, *http.Response, error) {
+	res := &CheckoutCreateOrderResponse{}
 	path := "/orders"
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
@@ -179,7 +179,7 @@ func (a *OrdersApi) Orders(ctx context.Context, r OrdersApiOrdersInput) (CreateO
 	httpRes, err := common.SendAPIRequest(
 		ctx,
 		a.Client,
-		r.createOrderRequest,
+		r.checkoutCreateOrderRequest,
 		res,
 		http.MethodPost,
 		a.BasePath()+path,

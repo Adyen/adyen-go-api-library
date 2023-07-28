@@ -67,8 +67,8 @@ func (a *PaymentLinksApi) GetPaymentLink(ctx context.Context, r PaymentLinksApiG
 
 // All parameters accepted by PaymentLinksApi.PaymentLinks
 type PaymentLinksApiPaymentLinksInput struct {
-	idempotencyKey     *string
-	paymentLinkRequest *PaymentLinkRequest
+	idempotencyKey           *string
+	createPaymentLinkRequest *CreatePaymentLinkRequest
 }
 
 // A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
@@ -77,8 +77,8 @@ func (r PaymentLinksApiPaymentLinksInput) IdempotencyKey(idempotencyKey string) 
 	return r
 }
 
-func (r PaymentLinksApiPaymentLinksInput) PaymentLinkRequest(paymentLinkRequest PaymentLinkRequest) PaymentLinksApiPaymentLinksInput {
-	r.paymentLinkRequest = &paymentLinkRequest
+func (r PaymentLinksApiPaymentLinksInput) CreatePaymentLinkRequest(createPaymentLinkRequest CreatePaymentLinkRequest) PaymentLinksApiPaymentLinksInput {
+	r.createPaymentLinkRequest = &createPaymentLinkRequest
 	return r
 }
 
@@ -113,7 +113,7 @@ func (a *PaymentLinksApi) PaymentLinks(ctx context.Context, r PaymentLinksApiPay
 	httpRes, err := common.SendAPIRequest(
 		ctx,
 		a.Client,
-		r.paymentLinkRequest,
+		r.createPaymentLinkRequest,
 		res,
 		http.MethodPost,
 		a.BasePath()+path,

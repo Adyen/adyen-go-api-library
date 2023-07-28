@@ -23,12 +23,8 @@ type PayPalDetails struct {
 	CheckoutAttemptId *string `json:"checkoutAttemptId,omitempty"`
 	// The unique ID associated with the order.
 	OrderID *string `json:"orderID,omitempty"`
-	// IMMEDIATE_PAYMENT_REQUIRED or UNRESTRICTED
-	PayeePreferred *string `json:"payeePreferred,omitempty"`
 	// The unique ID associated with the payer.
 	PayerID *string `json:"payerID,omitempty"`
-	// PAYPAL or PAYPAL_CREDIT
-	PayerSelected *string `json:"payerSelected,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
 	// Deprecated
 	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
@@ -124,38 +120,6 @@ func (o *PayPalDetails) SetOrderID(v string) {
 	o.OrderID = &v
 }
 
-// GetPayeePreferred returns the PayeePreferred field value if set, zero value otherwise.
-func (o *PayPalDetails) GetPayeePreferred() string {
-	if o == nil || common.IsNil(o.PayeePreferred) {
-		var ret string
-		return ret
-	}
-	return *o.PayeePreferred
-}
-
-// GetPayeePreferredOk returns a tuple with the PayeePreferred field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PayPalDetails) GetPayeePreferredOk() (*string, bool) {
-	if o == nil || common.IsNil(o.PayeePreferred) {
-		return nil, false
-	}
-	return o.PayeePreferred, true
-}
-
-// HasPayeePreferred returns a boolean if a field has been set.
-func (o *PayPalDetails) HasPayeePreferred() bool {
-	if o != nil && !common.IsNil(o.PayeePreferred) {
-		return true
-	}
-
-	return false
-}
-
-// SetPayeePreferred gets a reference to the given string and assigns it to the PayeePreferred field.
-func (o *PayPalDetails) SetPayeePreferred(v string) {
-	o.PayeePreferred = &v
-}
-
 // GetPayerID returns the PayerID field value if set, zero value otherwise.
 func (o *PayPalDetails) GetPayerID() string {
 	if o == nil || common.IsNil(o.PayerID) {
@@ -186,38 +150,6 @@ func (o *PayPalDetails) HasPayerID() bool {
 // SetPayerID gets a reference to the given string and assigns it to the PayerID field.
 func (o *PayPalDetails) SetPayerID(v string) {
 	o.PayerID = &v
-}
-
-// GetPayerSelected returns the PayerSelected field value if set, zero value otherwise.
-func (o *PayPalDetails) GetPayerSelected() string {
-	if o == nil || common.IsNil(o.PayerSelected) {
-		var ret string
-		return ret
-	}
-	return *o.PayerSelected
-}
-
-// GetPayerSelectedOk returns a tuple with the PayerSelected field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PayPalDetails) GetPayerSelectedOk() (*string, bool) {
-	if o == nil || common.IsNil(o.PayerSelected) {
-		return nil, false
-	}
-	return o.PayerSelected, true
-}
-
-// HasPayerSelected returns a boolean if a field has been set.
-func (o *PayPalDetails) HasPayerSelected() bool {
-	if o != nil && !common.IsNil(o.PayerSelected) {
-		return true
-	}
-
-	return false
-}
-
-// SetPayerSelected gets a reference to the given string and assigns it to the PayerSelected field.
-func (o *PayPalDetails) SetPayerSelected(v string) {
-	o.PayerSelected = &v
 }
 
 // GetRecurringDetailReference returns the RecurringDetailReference field value if set, zero value otherwise.
@@ -359,14 +291,8 @@ func (o PayPalDetails) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.OrderID) {
 		toSerialize["orderID"] = o.OrderID
 	}
-	if !common.IsNil(o.PayeePreferred) {
-		toSerialize["payeePreferred"] = o.PayeePreferred
-	}
 	if !common.IsNil(o.PayerID) {
 		toSerialize["payerID"] = o.PayerID
-	}
-	if !common.IsNil(o.PayerSelected) {
-		toSerialize["payerSelected"] = o.PayerSelected
 	}
 	if !common.IsNil(o.RecurringDetailReference) {
 		toSerialize["recurringDetailReference"] = o.RecurringDetailReference

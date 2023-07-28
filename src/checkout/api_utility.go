@@ -21,8 +21,8 @@ type UtilityApi common.Service
 
 // All parameters accepted by UtilityApi.GetApplePaySession
 type UtilityApiGetApplePaySessionInput struct {
-	idempotencyKey         *string
-	applePaySessionRequest *ApplePaySessionRequest
+	idempotencyKey               *string
+	createApplePaySessionRequest *CreateApplePaySessionRequest
 }
 
 // A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
@@ -31,8 +31,8 @@ func (r UtilityApiGetApplePaySessionInput) IdempotencyKey(idempotencyKey string)
 	return r
 }
 
-func (r UtilityApiGetApplePaySessionInput) ApplePaySessionRequest(applePaySessionRequest ApplePaySessionRequest) UtilityApiGetApplePaySessionInput {
-	r.applePaySessionRequest = &applePaySessionRequest
+func (r UtilityApiGetApplePaySessionInput) CreateApplePaySessionRequest(createApplePaySessionRequest CreateApplePaySessionRequest) UtilityApiGetApplePaySessionInput {
+	r.createApplePaySessionRequest = &createApplePaySessionRequest
 	return r
 }
 
@@ -67,7 +67,7 @@ func (a *UtilityApi) GetApplePaySession(ctx context.Context, r UtilityApiGetAppl
 	httpRes, err := common.SendAPIRequest(
 		ctx,
 		a.Client,
-		r.applePaySessionRequest,
+		r.createApplePaySessionRequest,
 		res,
 		http.MethodPost,
 		a.BasePath()+path,
@@ -80,8 +80,8 @@ func (a *UtilityApi) GetApplePaySession(ctx context.Context, r UtilityApiGetAppl
 
 // All parameters accepted by UtilityApi.OriginKeys
 type UtilityApiOriginKeysInput struct {
-	idempotencyKey *string
-	utilityRequest *UtilityRequest
+	idempotencyKey         *string
+	checkoutUtilityRequest *CheckoutUtilityRequest
 }
 
 // A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
@@ -90,8 +90,8 @@ func (r UtilityApiOriginKeysInput) IdempotencyKey(idempotencyKey string) Utility
 	return r
 }
 
-func (r UtilityApiOriginKeysInput) UtilityRequest(utilityRequest UtilityRequest) UtilityApiOriginKeysInput {
-	r.utilityRequest = &utilityRequest
+func (r UtilityApiOriginKeysInput) CheckoutUtilityRequest(checkoutUtilityRequest CheckoutUtilityRequest) UtilityApiOriginKeysInput {
+	r.checkoutUtilityRequest = &checkoutUtilityRequest
 	return r
 }
 
@@ -114,12 +114,12 @@ This operation takes the origin domains and returns a JSON object containing the
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r UtilityApiOriginKeysInput - Request parameters, see OriginKeysInput
-@return UtilityResponse, *http.Response, error
+@return CheckoutUtilityResponse, *http.Response, error
 
     Deprecated
 */
-func (a *UtilityApi) OriginKeys(ctx context.Context, r UtilityApiOriginKeysInput) (UtilityResponse, *http.Response, error) {
-	res := &UtilityResponse{}
+func (a *UtilityApi) OriginKeys(ctx context.Context, r UtilityApiOriginKeysInput) (CheckoutUtilityResponse, *http.Response, error) {
+	res := &CheckoutUtilityResponse{}
 	path := "/originKeys"
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
@@ -129,7 +129,7 @@ func (a *UtilityApi) OriginKeys(ctx context.Context, r UtilityApiOriginKeysInput
 	httpRes, err := common.SendAPIRequest(
 		ctx,
 		a.Client,
-		r.utilityRequest,
+		r.checkoutUtilityRequest,
 		res,
 		http.MethodPost,
 		a.BasePath()+path,
