@@ -25,6 +25,7 @@ type BankAccountInfoAccountIdentification struct {
 	NumberAndBicAccountIdentification *NumberAndBicAccountIdentification
 	PLLocalAccountIdentification      *PLLocalAccountIdentification
 	SELocalAccountIdentification      *SELocalAccountIdentification
+	SGLocalAccountIdentification      *SGLocalAccountIdentification
 	UKLocalAccountIdentification      *UKLocalAccountIdentification
 	USLocalAccountIdentification      *USLocalAccountIdentification
 }
@@ -96,6 +97,13 @@ func PLLocalAccountIdentificationAsBankAccountInfoAccountIdentification(v *PLLoc
 func SELocalAccountIdentificationAsBankAccountInfoAccountIdentification(v *SELocalAccountIdentification) BankAccountInfoAccountIdentification {
 	return BankAccountInfoAccountIdentification{
 		SELocalAccountIdentification: v,
+	}
+}
+
+// SGLocalAccountIdentificationAsBankAccountInfoAccountIdentification is a convenience function that returns SGLocalAccountIdentification wrapped in BankAccountInfoAccountIdentification
+func SGLocalAccountIdentificationAsBankAccountInfoAccountIdentification(v *SGLocalAccountIdentification) BankAccountInfoAccountIdentification {
+	return BankAccountInfoAccountIdentification{
+		SGLocalAccountIdentification: v,
 	}
 }
 
@@ -247,6 +255,19 @@ func (dst *BankAccountInfoAccountIdentification) UnmarshalJSON(data []byte) erro
 		dst.SELocalAccountIdentification = nil
 	}
 
+	// try to unmarshal data into SGLocalAccountIdentification
+	err = json.Unmarshal(data, &dst.SGLocalAccountIdentification)
+	if err == nil {
+		jsonSGLocalAccountIdentification, _ := json.Marshal(dst.SGLocalAccountIdentification)
+		if string(jsonSGLocalAccountIdentification) == "{}" || !dst.SGLocalAccountIdentification.isValidType() { // empty struct
+			dst.SGLocalAccountIdentification = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.SGLocalAccountIdentification = nil
+	}
+
 	// try to unmarshal data into UKLocalAccountIdentification
 	err = json.Unmarshal(data, &dst.UKLocalAccountIdentification)
 	if err == nil {
@@ -285,6 +306,7 @@ func (dst *BankAccountInfoAccountIdentification) UnmarshalJSON(data []byte) erro
 		dst.NumberAndBicAccountIdentification = nil
 		dst.PLLocalAccountIdentification = nil
 		dst.SELocalAccountIdentification = nil
+		dst.SGLocalAccountIdentification = nil
 		dst.UKLocalAccountIdentification = nil
 		dst.USLocalAccountIdentification = nil
 
@@ -336,6 +358,10 @@ func (src BankAccountInfoAccountIdentification) MarshalJSON() ([]byte, error) {
 
 	if src.SELocalAccountIdentification != nil {
 		return json.Marshal(&src.SELocalAccountIdentification)
+	}
+
+	if src.SGLocalAccountIdentification != nil {
+		return json.Marshal(&src.SGLocalAccountIdentification)
 	}
 
 	if src.UKLocalAccountIdentification != nil {
@@ -392,6 +418,10 @@ func (obj *BankAccountInfoAccountIdentification) GetActualInstance() interface{}
 
 	if obj.SELocalAccountIdentification != nil {
 		return obj.SELocalAccountIdentification
+	}
+
+	if obj.SGLocalAccountIdentification != nil {
+		return obj.SGLocalAccountIdentification
 	}
 
 	if obj.UKLocalAccountIdentification != nil {

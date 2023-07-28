@@ -122,9 +122,11 @@ func (a *TerminalActionsCompanyLevelApi) GetTerminalAction(ctx context.Context, 
 
 // All parameters accepted by TerminalActionsCompanyLevelApi.ListAndroidApps
 type TerminalActionsCompanyLevelApiListAndroidAppsInput struct {
-	companyId  string
-	pageNumber *int32
-	pageSize   *int32
+	companyId   string
+	pageNumber  *int32
+	pageSize    *int32
+	packageName *string
+	versionCode *int32
 }
 
 // The number of the page to fetch.
@@ -136,6 +138,18 @@ func (r TerminalActionsCompanyLevelApiListAndroidAppsInput) PageNumber(pageNumbe
 // The number of items to have on a page, maximum 100. The default is 20 items on a page.
 func (r TerminalActionsCompanyLevelApiListAndroidAppsInput) PageSize(pageSize int32) TerminalActionsCompanyLevelApiListAndroidAppsInput {
 	r.pageSize = &pageSize
+	return r
+}
+
+// The package name that uniquely identifies the Android app.
+func (r TerminalActionsCompanyLevelApiListAndroidAppsInput) PackageName(packageName string) TerminalActionsCompanyLevelApiListAndroidAppsInput {
+	r.packageName = &packageName
+	return r
+}
+
+// The version number of the app.
+func (r TerminalActionsCompanyLevelApiListAndroidAppsInput) VersionCode(versionCode int32) TerminalActionsCompanyLevelApiListAndroidAppsInput {
+	r.versionCode = &versionCode
 	return r
 }
 
@@ -175,6 +189,12 @@ func (a *TerminalActionsCompanyLevelApi) ListAndroidApps(ctx context.Context, r 
 	}
 	if r.pageSize != nil {
 		common.ParameterAddToQuery(queryParams, "pageSize", r.pageSize, "")
+	}
+	if r.packageName != nil {
+		common.ParameterAddToQuery(queryParams, "packageName", r.packageName, "")
+	}
+	if r.versionCode != nil {
+		common.ParameterAddToQuery(queryParams, "versionCode", r.versionCode, "")
 	}
 	httpRes, err := common.SendAPIRequest(
 		ctx,
@@ -239,9 +259,10 @@ func (a *TerminalActionsCompanyLevelApi) ListAndroidApps(ctx context.Context, r 
 
 // All parameters accepted by TerminalActionsCompanyLevelApi.ListAndroidCertificates
 type TerminalActionsCompanyLevelApiListAndroidCertificatesInput struct {
-	companyId  string
-	pageNumber *int32
-	pageSize   *int32
+	companyId       string
+	pageNumber      *int32
+	pageSize        *int32
+	certificateName *string
 }
 
 // The number of the page to fetch.
@@ -253,6 +274,12 @@ func (r TerminalActionsCompanyLevelApiListAndroidCertificatesInput) PageNumber(p
 // The number of items to have on a page, maximum 100. The default is 20 items on a page.
 func (r TerminalActionsCompanyLevelApiListAndroidCertificatesInput) PageSize(pageSize int32) TerminalActionsCompanyLevelApiListAndroidCertificatesInput {
 	r.pageSize = &pageSize
+	return r
+}
+
+// The name of the certificate.
+func (r TerminalActionsCompanyLevelApiListAndroidCertificatesInput) CertificateName(certificateName string) TerminalActionsCompanyLevelApiListAndroidCertificatesInput {
+	r.certificateName = &certificateName
 	return r
 }
 
@@ -292,6 +319,9 @@ func (a *TerminalActionsCompanyLevelApi) ListAndroidCertificates(ctx context.Con
 	}
 	if r.pageSize != nil {
 		common.ParameterAddToQuery(queryParams, "pageSize", r.pageSize, "")
+	}
+	if r.certificateName != nil {
+		common.ParameterAddToQuery(queryParams, "certificateName", r.certificateName, "")
 	}
 	httpRes, err := common.SendAPIRequest(
 		ctx,

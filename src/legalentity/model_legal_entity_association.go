@@ -21,7 +21,7 @@ var _ common.MappedNullable = &LegalEntityAssociation{}
 type LegalEntityAssociation struct {
 	// The unique identifier of another legal entity with which the `legalEntityId` is associated. When the `legalEntityId` is associated to legal entities other than the current one, the response returns all the associations.
 	AssociatorId *string `json:"associatorId,omitempty"`
-	// The legal entity type of associated legal entity.   For example, **organization**, **soleProprietorship** or **individual**.
+	// The legal entity type of associated legal entity.  For example, **organization**, **soleProprietorship** or **individual**.
 	EntityType *string `json:"entityType,omitempty"`
 	// The individual's job title if the `type` is **uboThroughControl** or **signatory**.
 	JobTitle *string `json:"jobTitle,omitempty"`
@@ -29,7 +29,7 @@ type LegalEntityAssociation struct {
 	LegalEntityId string `json:"legalEntityId"`
 	// The name of the associated [legal entity](https://docs.adyen.com/api-explorer/legalentity/latest/post/legalEntities#responses-200-id).  - For **individual**, `name.firstName` and `name.lastName`. - For **organization**, `legalName`. - For **soleProprietorship**, `name`.
 	Name *string `json:"name,omitempty"`
-	// Defines the relationship of the legal entity to the current legal entity.   Possible values for organizations: **uboThroughOwnership**, **uboThroughControl**, **signatory**, or **ultimateParentCompany**.   Possible values for sole proprietorships: **soleProprietorship**.
+	// Defines the relationship of the legal entity to the current legal entity.  Possible values for organizations: **uboThroughOwnership**, **uboThroughControl**, **director**, **signatory**, or **ultimateParentCompany**.  Possible values for sole proprietorships: **soleProprietorship**.
 	Type string `json:"type"`
 }
 

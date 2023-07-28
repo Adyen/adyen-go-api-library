@@ -24,6 +24,7 @@ type TerminalsTerminalLevelApi common.Service
 // All parameters accepted by TerminalsTerminalLevelApi.ListTerminals
 type TerminalsTerminalLevelApiListTerminalsInput struct {
 	searchQuery *string
+	otpQuery    *string
 	countries   *string
 	merchantIds *string
 	storeIds    *string
@@ -35,6 +36,12 @@ type TerminalsTerminalLevelApiListTerminalsInput struct {
 // Returns terminals with an ID that contains the specified string. If present, other query parameters are ignored.
 func (r TerminalsTerminalLevelApiListTerminalsInput) SearchQuery(searchQuery string) TerminalsTerminalLevelApiListTerminalsInput {
 	r.searchQuery = &searchQuery
+	return r
+}
+
+// Returns one or more terminals associated with the one-time passwords specified in the request. If this query parameter is used, other query parameters are ignored.
+func (r TerminalsTerminalLevelApiListTerminalsInput) OtpQuery(otpQuery string) TerminalsTerminalLevelApiListTerminalsInput {
+	r.otpQuery = &otpQuery
 	return r
 }
 
@@ -87,8 +94,6 @@ func (a *TerminalsTerminalLevelApi) ListTerminalsInput() TerminalsTerminalLevelA
 ListTerminals Get a list of terminals
 
 Returns the payment terminals that the API credential has access to and that match the query parameters.
-When using `searchQuery`, other query parameters are ignored.
-
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API — Terminal actions read
 
@@ -103,6 +108,9 @@ func (a *TerminalsTerminalLevelApi) ListTerminals(ctx context.Context, r Termina
 	headerParams := make(map[string]string)
 	if r.searchQuery != nil {
 		common.ParameterAddToQuery(queryParams, "searchQuery", r.searchQuery, "")
+	}
+	if r.otpQuery != nil {
+		common.ParameterAddToQuery(queryParams, "otpQuery", r.otpQuery, "")
 	}
 	if r.countries != nil {
 		common.ParameterAddToQuery(queryParams, "countries", r.countries, "")

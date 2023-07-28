@@ -21,7 +21,7 @@ var _ common.MappedNullable = &TaxReportingClassification{}
 type TaxReportingClassification struct {
 	// The organization's business type.  Possible values: **other**, **listedPublicCompany**, **subsidiaryOfListedPublicCompany**, **governmentalOrganization**, **internationalOrganization**, **financialInstitution**.
 	BusinessType *string `json:"businessType,omitempty"`
-	// The Global Intermediary Identification Number (GIIN) required for FATCA.
+	// The Global Intermediary Identification Number (GIIN) required for FATCA. Only required if the organization is a US financial institution and the `businessType` is **financialInstitution**.
 	FinancialInstitutionNumber *string `json:"financialInstitutionNumber,omitempty"`
 	// The organization's main source of income.  Possible values: **businessOperation**, **realEstateSales**, **investmentInterestOrRoyalty**, **propertyRental**, **other**.
 	MainSourceOfIncome *string `json:"mainSourceOfIncome,omitempty"`

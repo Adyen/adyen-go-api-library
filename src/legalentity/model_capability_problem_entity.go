@@ -233,7 +233,7 @@ func (v *NullableCapabilityProblemEntity) UnmarshalJSON(src []byte) error {
 }
 
 func (o *CapabilityProblemEntity) isValidType() bool {
-	var allowedEnumValues = []string{"BankAccount", "Document", "LegalEntity"}
+	var allowedEnumValues = []string{"BankAccount", "Document", "LegalEntity", "product"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

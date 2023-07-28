@@ -43,10 +43,10 @@ Deletes a document.
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r DocumentsApiDeleteDocumentInput - Request parameters, see DeleteDocumentInput
-@return map[string]interface{}, *http.Response, error
+@return , *http.Response, error
 */
-func (a *DocumentsApi) DeleteDocument(ctx context.Context, r DocumentsApiDeleteDocumentInput) (map[string]interface{}, *http.Response, error) {
-	res := &map[string]interface{}{}
+func (a *DocumentsApi) DeleteDocument(ctx context.Context, r DocumentsApiDeleteDocumentInput) (*http.Response, error) {
+	var res interface{}
 	path := "/documents/{id}"
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
 	queryParams := url.Values{}
@@ -62,7 +62,7 @@ func (a *DocumentsApi) DeleteDocument(ctx context.Context, r DocumentsApiDeleteD
 		headerParams,
 	)
 
-	return *res, httpRes, err
+	return httpRes, err
 }
 
 // All parameters accepted by DocumentsApi.GetDocument

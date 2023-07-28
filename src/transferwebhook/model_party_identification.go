@@ -20,7 +20,7 @@ var _ common.MappedNullable = &PartyIdentification{}
 // PartyIdentification struct for PartyIdentification
 type PartyIdentification struct {
 	Address *Address `json:"address,omitempty"`
-	// The date of birth of the individual in [ISO-8601](https://www.w3.org/TR/NOTE-datetime) format. For example, **YYYY-MM-DD**.  Allowed only when `type` is **individual**.
+	// The date of birth of the individual in [ISO-8601](https://www.w3.org/TR/NOTE-datetime) format. For example, **YYYY-MM-DD**. Should not be before January 1, 1900.  Allowed only when `type` is **individual**.
 	DateOfBirth *string `json:"dateOfBirth,omitempty"`
 	// First name of the individual.  Allowed only when `type` is **individual**.
 	FirstName *string `json:"firstName,omitempty"`
@@ -28,7 +28,7 @@ type PartyIdentification struct {
 	FullName string `json:"fullName"`
 	// Last name of the individual.  Allowed only when `type` is **individual**.
 	LastName *string `json:"lastName,omitempty"`
-	// Your unique reference of the party. This should be consistent for all transfers initiated to/from the same party/counterparty. e.g Your client's unique wallet or payee ID
+	// A unique reference to identify the party or counterparty involved in transfers. This identifier ensures consistency and uniqueness throughout all transactions initiated to and from the same party. For example, your client's unique wallet or payee ID.
 	Reference *string `json:"reference,omitempty"`
 	// The type of entity that owns the bank account.   Possible values: **individual**, **organization**, or **unknown**.
 	Type *string `json:"type,omitempty"`

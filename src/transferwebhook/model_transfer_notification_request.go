@@ -19,7 +19,7 @@ var _ common.MappedNullable = &TransferNotificationRequest{}
 
 // TransferNotificationRequest struct for TransferNotificationRequest
 type TransferNotificationRequest struct {
-	Data TransferNotificationData `json:"data"`
+	Data TransferData `json:"data"`
 	// The environment from which the webhook originated.  Possible values: **test**, **live**.
 	Environment string `json:"environment"`
 	// The type of webhook.
@@ -30,7 +30,7 @@ type TransferNotificationRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTransferNotificationRequest(data TransferNotificationData, environment string) *TransferNotificationRequest {
+func NewTransferNotificationRequest(data TransferData, environment string) *TransferNotificationRequest {
 	this := TransferNotificationRequest{}
 	this.Data = data
 	this.Environment = environment
@@ -46,9 +46,9 @@ func NewTransferNotificationRequestWithDefaults() *TransferNotificationRequest {
 }
 
 // GetData returns the Data field value
-func (o *TransferNotificationRequest) GetData() TransferNotificationData {
+func (o *TransferNotificationRequest) GetData() TransferData {
 	if o == nil {
-		var ret TransferNotificationData
+		var ret TransferData
 		return ret
 	}
 
@@ -57,7 +57,7 @@ func (o *TransferNotificationRequest) GetData() TransferNotificationData {
 
 // GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
-func (o *TransferNotificationRequest) GetDataOk() (*TransferNotificationData, bool) {
+func (o *TransferNotificationRequest) GetDataOk() (*TransferData, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -65,7 +65,7 @@ func (o *TransferNotificationRequest) GetDataOk() (*TransferNotificationData, bo
 }
 
 // SetData sets field value
-func (o *TransferNotificationRequest) SetData(v TransferNotificationData) {
+func (o *TransferNotificationRequest) SetData(v TransferData) {
 	o.Data = v
 }
 

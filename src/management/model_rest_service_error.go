@@ -26,7 +26,7 @@ type RestServiceError struct {
 	// A unique URI that identifies the specific occurrence of the problem.
 	Instance *string `json:"instance,omitempty"`
 	// Detailed explanation of each validation error, when applicable.
-	InvalidFields []InvalidField `json:"invalidFields,omitempty"`
+	InvalidFields []InvalidFieldWrapper `json:"invalidFields,omitempty"`
 	// A unique reference for the request, essentially the same as `pspReference`.
 	RequestId *string     `json:"requestId,omitempty"`
 	Response  *JSONObject `json:"response,omitempty"`
@@ -141,9 +141,9 @@ func (o *RestServiceError) SetInstance(v string) {
 }
 
 // GetInvalidFields returns the InvalidFields field value if set, zero value otherwise.
-func (o *RestServiceError) GetInvalidFields() []InvalidField {
+func (o *RestServiceError) GetInvalidFields() []InvalidFieldWrapper {
 	if o == nil || common.IsNil(o.InvalidFields) {
-		var ret []InvalidField
+		var ret []InvalidFieldWrapper
 		return ret
 	}
 	return o.InvalidFields
@@ -151,7 +151,7 @@ func (o *RestServiceError) GetInvalidFields() []InvalidField {
 
 // GetInvalidFieldsOk returns a tuple with the InvalidFields field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RestServiceError) GetInvalidFieldsOk() ([]InvalidField, bool) {
+func (o *RestServiceError) GetInvalidFieldsOk() ([]InvalidFieldWrapper, bool) {
 	if o == nil || common.IsNil(o.InvalidFields) {
 		return nil, false
 	}
@@ -167,8 +167,8 @@ func (o *RestServiceError) HasInvalidFields() bool {
 	return false
 }
 
-// SetInvalidFields gets a reference to the given []InvalidField and assigns it to the InvalidFields field.
-func (o *RestServiceError) SetInvalidFields(v []InvalidField) {
+// SetInvalidFields gets a reference to the given []InvalidFieldWrapper and assigns it to the InvalidFields field.
+func (o *RestServiceError) SetInvalidFields(v []InvalidFieldWrapper) {
 	o.InvalidFields = v
 }
 

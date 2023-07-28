@@ -38,7 +38,7 @@ type Organization struct {
 	// The tax information of the organization.
 	TaxInformation             []TaxInformation            `json:"taxInformation,omitempty"`
 	TaxReportingClassification *TaxReportingClassification `json:"taxReportingClassification,omitempty"`
-	// Type of organization.   Possible values: **associationIncorporated**, **governmentalOrganization**, **listedPublicCompany**, **nonProfit**, **partnershipIncorporated**, **privateCompany**.
+	// Type of organization.  Possible values: **associationIncorporated**, **governmentalOrganization**, **listedPublicCompany**, **nonProfit**, **partnershipIncorporated**, **privateCompany**.
 	Type *string `json:"type,omitempty"`
 	// The reason the organization has not provided a VAT number.  Possible values: **industryExemption**, **belowTaxThreshold**.
 	VatAbsenceReason *string `json:"vatAbsenceReason,omitempty"`

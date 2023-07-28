@@ -12,6 +12,7 @@ import (
 	"context"
 	"net/http"
 	"net/url"
+	"strings"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
@@ -83,7 +84,7 @@ func (a *PaymentsApi) CardDetails(ctx context.Context, r PaymentsApiCardDetailsI
 // All parameters accepted by PaymentsApi.Donations
 type PaymentsApiDonationsInput struct {
 	idempotencyKey         *string
-	paymentDonationRequest *PaymentDonationRequest
+	donationPaymentRequest *DonationPaymentRequest
 }
 
 // A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
@@ -92,8 +93,8 @@ func (r PaymentsApiDonationsInput) IdempotencyKey(idempotencyKey string) Payment
 	return r
 }
 
-func (r PaymentsApiDonationsInput) PaymentDonationRequest(paymentDonationRequest PaymentDonationRequest) PaymentsApiDonationsInput {
-	r.paymentDonationRequest = &paymentDonationRequest
+func (r PaymentsApiDonationsInput) DonationPaymentRequest(donationPaymentRequest DonationPaymentRequest) PaymentsApiDonationsInput {
+	r.donationPaymentRequest = &donationPaymentRequest
 	return r
 }
 
@@ -115,10 +116,10 @@ For more information, see [Donations](https://docs.adyen.com/online-payments/don
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r PaymentsApiDonationsInput - Request parameters, see DonationsInput
-@return DonationResponse, *http.Response, error
+@return DonationPaymentResponse, *http.Response, error
 */
-func (a *PaymentsApi) Donations(ctx context.Context, r PaymentsApiDonationsInput) (DonationResponse, *http.Response, error) {
-	res := &DonationResponse{}
+func (a *PaymentsApi) Donations(ctx context.Context, r PaymentsApiDonationsInput) (DonationPaymentResponse, *http.Response, error) {
+	res := &DonationPaymentResponse{}
 	path := "/donations"
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
@@ -128,9 +129,64 @@ func (a *PaymentsApi) Donations(ctx context.Context, r PaymentsApiDonationsInput
 	httpRes, err := common.SendAPIRequest(
 		ctx,
 		a.Client,
-		r.paymentDonationRequest,
+		r.donationPaymentRequest,
 		res,
 		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	return *res, httpRes, err
+}
+
+// All parameters accepted by PaymentsApi.GetResultOfPaymentSession
+type PaymentsApiGetResultOfPaymentSessionInput struct {
+	sessionId     string
+	sessionResult *string
+}
+
+// The &#x60;sessionResult&#x60; value from the Drop-in or Component.
+func (r PaymentsApiGetResultOfPaymentSessionInput) SessionResult(sessionResult string) PaymentsApiGetResultOfPaymentSessionInput {
+	r.sessionResult = &sessionResult
+	return r
+}
+
+/*
+Prepare a request for GetResultOfPaymentSession
+@param sessionId A unique identifier of the session.
+@return PaymentsApiGetResultOfPaymentSessionInput
+*/
+func (a *PaymentsApi) GetResultOfPaymentSessionInput(sessionId string) PaymentsApiGetResultOfPaymentSessionInput {
+	return PaymentsApiGetResultOfPaymentSessionInput{
+		sessionId: sessionId,
+	}
+}
+
+/*
+GetResultOfPaymentSession Get the result of a payment session
+
+Returns the status of the payment session with the `sessionId` and `sessionResult` specified in the path.
+
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r PaymentsApiGetResultOfPaymentSessionInput - Request parameters, see GetResultOfPaymentSessionInput
+@return SessionResultResponse, *http.Response, error
+*/
+func (a *PaymentsApi) GetResultOfPaymentSession(ctx context.Context, r PaymentsApiGetResultOfPaymentSessionInput) (SessionResultResponse, *http.Response, error) {
+	res := &SessionResultResponse{}
+	path := "/sessions/{sessionId}"
+	path = strings.Replace(path, "{"+"sessionId"+"}", url.PathEscape(common.ParameterValueToString(r.sessionId, "sessionId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.sessionResult != nil {
+		common.ParameterAddToQuery(queryParams, "sessionResult", r.sessionResult, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
@@ -260,8 +316,8 @@ func (a *PaymentsApi) Payments(ctx context.Context, r PaymentsApiPaymentsInput) 
 
 // All parameters accepted by PaymentsApi.PaymentsDetails
 type PaymentsApiPaymentsDetailsInput struct {
-	idempotencyKey *string
-	detailsRequest *DetailsRequest
+	idempotencyKey        *string
+	paymentDetailsRequest *PaymentDetailsRequest
 }
 
 // A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
@@ -270,8 +326,8 @@ func (r PaymentsApiPaymentsDetailsInput) IdempotencyKey(idempotencyKey string) P
 	return r
 }
 
-func (r PaymentsApiPaymentsDetailsInput) DetailsRequest(detailsRequest DetailsRequest) PaymentsApiPaymentsDetailsInput {
-	r.detailsRequest = &detailsRequest
+func (r PaymentsApiPaymentsDetailsInput) PaymentDetailsRequest(paymentDetailsRequest PaymentDetailsRequest) PaymentsApiPaymentsDetailsInput {
+	r.paymentDetailsRequest = &paymentDetailsRequest
 	return r
 }
 
@@ -306,7 +362,7 @@ func (a *PaymentsApi) PaymentsDetails(ctx context.Context, r PaymentsApiPayments
 	httpRes, err := common.SendAPIRequest(
 		ctx,
 		a.Client,
-		r.detailsRequest,
+		r.paymentDetailsRequest,
 		res,
 		http.MethodPost,
 		a.BasePath()+path,

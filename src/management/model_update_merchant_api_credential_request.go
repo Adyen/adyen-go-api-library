@@ -25,7 +25,7 @@ type UpdateMerchantApiCredentialRequest struct {
 	AllowedOrigins []string `json:"allowedOrigins,omitempty"`
 	// Description of the API credential.
 	Description *string `json:"description,omitempty"`
-	// List of [roles](https://docs.adyen.com/development-resources/api-credentials#roles-1) for the API credential.
+	// List of [roles](https://docs.adyen.com/development-resources/api-credentials#roles-1) for the API credential. Only roles assigned to 'ws@Company.<CompanyName>' can be assigned to other API credentials.
 	Roles []string `json:"roles,omitempty"`
 }
 

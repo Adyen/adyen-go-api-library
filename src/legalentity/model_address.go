@@ -25,7 +25,7 @@ type Address struct {
 	Country string `json:"country"`
 	// Postal code. Required if `stateOrProvince` and/or `city` is provided.
 	PostalCode *string `json:"postalCode,omitempty"`
-	// The two-letter ISO 3166-2 state or province code. For example, **CA** in the US.   If you specify the state or province, you must also send `city`, `postalCode`, and `street`.
+	// The two-letter ISO 3166-2 state or province code. For example, **CA** in the US.  If you specify the state or province, you must also send `city`, `postalCode`, and `street`.
 	StateOrProvince *string `json:"stateOrProvince,omitempty"`
 	// The name of the street, and the house or building number. Required if `stateOrProvince` and/or `city` is provided.
 	Street *string `json:"street,omitempty"`

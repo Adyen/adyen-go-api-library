@@ -19,61 +19,61 @@ var _ common.MappedNullable = &AdditionalDataAirline{}
 
 // AdditionalDataAirline struct for AdditionalDataAirline
 type AdditionalDataAirline struct {
-	// Reference number for the invoice, issued by the agency. * minLength: 1 * maxLength: 6
+	// The reference number for the invoice, issued by the agency. * Encoding: ASCII * minLength: 1 character * maxLength: 6 characters
 	AirlineAgencyInvoiceNumber *string `json:"airline.agency_invoice_number,omitempty"`
-	// 2-letter agency plan identifier; alphabetical. * minLength: 2 * maxLength: 2
+	// The two-letter agency plan identifier. * Encoding: ASCII * minLength: 2 characters * maxLength: 2 characters
 	AirlineAgencyPlanName *string `json:"airline.agency_plan_name,omitempty"`
-	// [IATA](https://www.iata.org/services/pages/codes.aspx) 3-digit accounting code (PAX); numeric. It identifies the carrier. * Format: IATA 3-digit accounting code (PAX) * Example: KLM = 074 * minLength: 3 * maxLength: 3
+	// The [IATA](https://www.iata.org/services/pages/codes.aspx) 3-digit accounting code (PAX) that identifies the carrier. * Format: IATA 3-digit accounting code (PAX) * Example: KLM = 074 * minLength: 3 characters * maxLength: 3 characters * Must not be all spaces * Must not be all zeros
 	AirlineAirlineCode *string `json:"airline.airline_code,omitempty"`
-	// [IATA](https://www.iata.org/services/pages/codes.aspx) 2-letter accounting code (PAX); alphabetical. It identifies the carrier. * Format: [IATA](https://www.iata.org/services/pages/codes.aspx) 2-letter airline code * Example: KLM = KL * minLength: 2 * maxLength: 2
+	// The [IATA](https://www.iata.org/services/pages/codes.aspx) 2-letter accounting code (PAX) that identifies the carrier. * Encoding: ASCII * Example: KLM = KL * minLength: 2 characters * maxLength: 2 characters * Must not be all spaces * Must not be all zeros
 	AirlineAirlineDesignatorCode *string `json:"airline.airline_designator_code,omitempty"`
-	// Chargeable amount for boarding the plane. The transaction amount needs to be represented in minor units according to the [following table](https://docs.adyen.com/development-resources/currency-codes). * minLength: 1 * maxLength: 18
+	// The amount charged for boarding the plane, in [minor units](https://docs.adyen.com/development-resources/currency-codes). * Encoding: Numeric * minLength: 1 character * maxLength: 18 characters
 	AirlineBoardingFee *string `json:"airline.boarding_fee,omitempty"`
-	// The [CRS](https://en.wikipedia.org/wiki/Computer_reservation_system) used to make the reservation and purchase the ticket. * Format: alphanumeric. * minLength: 4 * maxLength: 4
+	// The [CRS](https://en.wikipedia.org/wiki/Computer_reservation_system) used to make the reservation and purchase the ticket. * Encoding: ASCII * minLength: 4 characters * maxLength: 4 characters
 	AirlineComputerizedReservationSystem *string `json:"airline.computerized_reservation_system,omitempty"`
-	// Reference number; alphanumeric. * minLength: 0 * maxLength: 20
+	// The alphanumeric customer reference number. * Encoding: ASCII * maxLength: 20 characters * If you send more than 20 characters, the customer reference number is truncated * Must not be all spaces
 	AirlineCustomerReferenceNumber *string `json:"airline.customer_reference_number,omitempty"`
-	// Optional 2-digit code; alphanumeric. It identifies the type of product of the transaction. The description of the code may appear on credit card statements. * Format: 2-digit code * Example: Passenger ticket = 01 * minLength: 2 * maxLength: 2
+	// A code that identifies the type of item bought. The description of the code can appear on credit card statements. * Encoding: ASCII * Example: Passenger ticket = 01 * minLength: 2 characters * maxLength: 2 characters
 	AirlineDocumentType *string `json:"airline.document_type,omitempty"`
-	// Flight departure date. Local time `(HH:mm)` is optional. * Date format: `yyyy-MM-dd` * Date and time format: `yyyy-MM-dd HH:mm` * minLength: 10 * maxLength: 16
+	// The flight departure date. Local time `(HH:mm)` is optional. * Date format: `yyyy-MM-dd` * Date and time format: `yyyy-MM-dd HH:mm` * minLength: 10 characters * maxLength: 16 characters
 	AirlineFlightDate *string `json:"airline.flight_date,omitempty"`
-	// [IATA](https://www.iata.org/services/pages/codes.aspx) 2-letter accounting code (PAX); alphabetical. It identifies the carrier. This field is required/mandatory if the airline data includes leg details. * Format: IATA 2-letter airline code * Example: KLM = KL * minLength: 2 * maxLength: 2
+	// The [IATA](https://www.iata.org/services/pages/codes.aspx) 2-letter accounting code (PAX) that identifies the carrier. This field is required if the airline data includes leg details. * Example: KLM = KL * minLength: 2 characters * maxLength: 2 characters * Must not be all spaces * Must not be all zeros
 	AirlineLegCarrierCode *string `json:"airline.leg.carrier_code,omitempty"`
-	// 1-letter travel class identifier; alphabetical. There is no standard; however, the following codes are used rather consistently: * F: first class * J: business class * Y: economy class * W: premium economy  Limitations: * minLength: 1 * maxLength: 1
+	// A one-letter travel class identifier.  The following are common:  * F: first class * J: business class * Y: economy class * W: premium economy  * Encoding: ASCII * minLength: 1 character * maxLength: 1 character * Must not be all spaces * Must not be all zeros
 	AirlineLegClassOfTravel *string `json:"airline.leg.class_of_travel,omitempty"`
-	//   Date and time of travel. [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)-compliant. * Format: `yyyy-MM-dd HH:mm` * minLength: 16 * maxLength: 16
+	//   Date and time of travel in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format `yyyy-MM-dd HH:mm`. * Encoding: ASCII * minLength: 16 characters * maxLength: 16 characters
 	AirlineLegDateOfTravel *string `json:"airline.leg.date_of_travel,omitempty"`
-	// Alphabetical identifier of the departure airport. This field is required if the airline data includes leg details. * Format: [IATA](https://www.iata.org/services/pages/codes.aspx) 3-letter airport code. * Example: Amsterdam = AMS * minLength: 3 * maxLength: 3
+	// The [IATA](https://www.iata.org/services/pages/codes.aspx) three-letter airport code of the departure airport. This field is required if the airline data includes leg details.  * Encoding: ASCII * Example: Amsterdam = AMS * minLength: 3 characters * maxLength: 3 characters * Must not be all spaces * Must not be all zeros
 	AirlineLegDepartAirport *string `json:"airline.leg.depart_airport,omitempty"`
-	// [Departure tax](https://en.wikipedia.org/wiki/Departure_tax). Amount charged by a country to an individual upon their leaving. The transaction amount needs to be represented in minor units according to the [following table](https://docs.adyen.com/development-resources/currency-codes). * minLength: 1 * maxLength: 12
+	// The amount of [departure tax](https://en.wikipedia.org/wiki/Departure_tax) charged, in [minor units](https://docs.adyen.com/development-resources/currency-codes). * Encoding: Numeric * minLength: 1 * maxLength: 12 * Must not be all zeros
 	AirlineLegDepartTax *string `json:"airline.leg.depart_tax,omitempty"`
-	// Alphabetical identifier of the destination/arrival airport. This field is required/mandatory if the airline data includes leg details. * Format: [IATA](https://www.iata.org/services/pages/codes.aspx) 3-letter airport code. * Example: Amsterdam = AMS * minLength: 3 * maxLength: 3
+	// The [IATA](https://www.iata.org/services/pages/codes.aspx) 3-letter airport code of the destination airport. This field is required if the airline data includes leg details. * Example: Amsterdam = AMS * Encoding: ASCII * minLength: 3 characters * maxLength: 3 characters * Must not be all spaces * Must not be all zeros
 	AirlineLegDestinationCode *string `json:"airline.leg.destination_code,omitempty"`
-	// [Fare basis code](https://en.wikipedia.org/wiki/Fare_basis_code); alphanumeric. * minLength: 1 * maxLength: 7
+	// The [fare basis code](https://en.wikipedia.org/wiki/Fare_basis_code), alphanumeric. * minLength: 1 character * maxLength: 6 characters * Must not be all spaces * Must not be all zeros
 	AirlineLegFareBaseCode *string `json:"airline.leg.fare_base_code,omitempty"`
-	// The flight identifier. * minLength: 1 * maxLength: 5
+	// The flight identifier. * minLength: 1 character * maxLength: 5 characters * Must not be all spaces * Must not be all zeros
 	AirlineLegFlightNumber *string `json:"airline.leg.flight_number,omitempty"`
-	// 1-letter code that indicates whether the passenger is entitled to make a stopover. Only two types of characters are allowed: * O: Stopover allowed * X: Stopover not allowed  Limitations: * minLength: 1 * maxLength: 1
+	// A one-letter code that indicates whether the passenger is entitled to make a stopover. Can be a space, O if the passenger is entitled to make a stopover, or X if they are not. * Encoding: ASCII * minLength: 1 character * maxLength: 1 character
 	AirlineLegStopOverCode *string `json:"airline.leg.stop_over_code,omitempty"`
-	// Date of birth of the passenger.  Date format: `yyyy-MM-dd` * minLength: 10 * maxLength: 10
+	// The passenger's date of birth.  Date format: `yyyy-MM-dd` * minLength: 10 * maxLength: 10
 	AirlinePassengerDateOfBirth *string `json:"airline.passenger.date_of_birth,omitempty"`
-	// Passenger first name/given name. > This field is required/mandatory if the airline data includes passenger details or leg details.
+	// The passenger's first name. > This field is required if the airline data includes passenger details or leg details. * Encoding: ASCII
 	AirlinePassengerFirstName *string `json:"airline.passenger.first_name,omitempty"`
-	// Passenger last name/family name. > This field is required/mandatory if the airline data includes passenger details or leg details.
+	// The passenger's last name. > This field is required if the airline data includes passenger details or leg details. * Encoding: ASCII
 	AirlinePassengerLastName *string `json:"airline.passenger.last_name,omitempty"`
-	// Telephone number of the passenger, including country code. This is an alphanumeric field that can include the '+' and '-' signs. * minLength: 3 * maxLength: 30
+	// The passenger's telephone number, including country code. This is an alphanumeric field that can include the '+' and '-' signs. * Encoding: ASCII * minLength: 3 characters * maxLength: 30 characters
 	AirlinePassengerTelephoneNumber *string `json:"airline.passenger.telephone_number,omitempty"`
-	// Passenger type code (PTC). IATA PTC values are 3-letter alphabetical. Example: ADT, SRC, CNN, INS.  However, several carriers use non-standard codes that can be up to 5 alphanumeric characters. * minLength: 3 * maxLength: 6
+	// The IATA passenger type code (PTC). * Encoding: ASCII * minLength: 3 characters * maxLength: 6 characters
 	AirlinePassengerTravellerType *string `json:"airline.passenger.traveller_type,omitempty"`
-	// Passenger name, initials, and a title. * Format: last name + first name or initials + title. * Example: *FLYER / MARY MS*. * minLength: 1 * maxLength: 49
+	// The passenger's name, initials, and title. * Format: last name + first name or initials + title * Example: *FLYER / MARY MS* * minLength: 1 character * maxLength: 20 characters * If you send more than 20 characters, the name is truncated * Must not be all spaces * Must not be all zeros
 	AirlinePassengerName string `json:"airline.passenger_name"`
-	// Address of the place/agency that issued the ticket. * minLength: 0 * maxLength: 16
+	// The address of the organization that issued the ticket. * minLength: 0 characters * maxLength: 16 characters
 	AirlineTicketIssueAddress *string `json:"airline.ticket_issue_address,omitempty"`
-	// The ticket's unique identifier. * minLength: 1 * maxLength: 150
+	// The ticket's unique identifier. * minLength: 1 character * maxLength: 15 characters * Must not be all spaces * Must not be all zeros
 	AirlineTicketNumber *string `json:"airline.ticket_number,omitempty"`
-	// IATA number, also ARC number or ARC/IATA number. Unique identifier number for travel agencies. * minLength: 1 * maxLength: 8
+	// The unique identifier from IATA or ARC for the travel agency that issues the ticket. * Encoding: ASCII * minLength: 1 character * maxLength: 8 characters * Must not be all spaces * Must not be all zeros
 	AirlineTravelAgencyCode *string `json:"airline.travel_agency_code,omitempty"`
-	// The name of the travel agency. * minLength: 1 * maxLength: 25
+	// The name of the travel agency.  * Encoding: ASCII * minLength: 1 character * maxLength: 25 characters * Must not be all spaces * Must not be all zeros
 	AirlineTravelAgencyName *string `json:"airline.travel_agency_name,omitempty"`
 }
 

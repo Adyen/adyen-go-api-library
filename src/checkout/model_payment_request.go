@@ -42,10 +42,13 @@ type PaymentRequest struct {
 	// The shopper country.  Format: [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) Example: NL or DE
 	CountryCode *string `json:"countryCode,omitempty"`
 	// The shopper's date of birth.  Format [ISO-8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DD
-	DateOfBirth     *string     `json:"dateOfBirth,omitempty"`
-	DccQuote        *ForexQuote `json:"dccQuote,omitempty"`
-	DeliveryAddress *Address    `json:"deliveryAddress,omitempty"`
+	DateOfBirth *time.Time  `json:"dateOfBirth,omitempty"`
+	DccQuote    *ForexQuote `json:"dccQuote,omitempty"`
 	// The date and time the purchased goods should be delivered.  Format [ISO 8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DDThh:mm:ss.sssTZD  Example: 2017-07-17T13:42:40.428+01:00
+	DeliverAt       *time.Time `json:"deliverAt,omitempty"`
+	DeliveryAddress *Address   `json:"deliveryAddress,omitempty"`
+	// The date and time the purchased goods should be delivered.  Format [ISO 8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DDThh:mm:ss.sssTZD  Example: 2017-07-17T13:42:40.428+01:00
+	// Deprecated
 	DeliveryDate *time.Time `json:"deliveryDate,omitempty"`
 	// A string containing the shopper's device fingerprint. For more information, refer to [Device fingerprinting](https://docs.adyen.com/risk-management/device-fingerprinting).
 	DeviceFingerprint *string `json:"deviceFingerprint,omitempty"`
@@ -58,13 +61,15 @@ type PaymentRequest struct {
 	// The type of the entity the payment is processed for.
 	EntityType *string `json:"entityType,omitempty"`
 	// An integer value that is added to the normal fraud score. The value can be either positive or negative.
-	FraudOffset *int32 `json:"fraudOffset,omitempty"`
+	FraudOffset   *int32         `json:"fraudOffset,omitempty"`
+	FundOrigin    *FundOrigin    `json:"fundOrigin,omitempty"`
+	FundRecipient *FundRecipient `json:"fundRecipient,omitempty"`
 	// The reason for the amount update. Possible values:  * **delayedCharge**  * **noShow**  * **installment**
 	IndustryUsage *string       `json:"industryUsage,omitempty"`
 	Installments  *Installments `json:"installments,omitempty"`
-	// Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment). > This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Atome, Clearpay, Klarna, Ratepay, Walley, and Zip.
+	// Price and product information about the purchased items, to be included on the invoice sent to the shopper. > This field is required for 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, and Zip.
 	LineItems []LineItem `json:"lineItems,omitempty"`
-	// This field allows merchants to use dynamic shopper statement in local character sets. The local shopper statement field can be supplied in markets where localized merchant descriptors are used. Currently, Adyen only supports this in the Japanese market .The available character sets at the moment are: * Processing in Japan: **ja-Kana** The character set **ja-Kana** supports UTF-8 based Katakana and alphanumeric and special characters. Merchants can use half-width or full-width characters. An example request would be: > {   \"shopperStatement\" : \"ADYEN - SELLER-A\",   \"localizedShopperStatement\" : {     \"ja-Kana\" : \"ADYEN - セラーA\"   } } We recommend merchants to always supply the field localizedShopperStatement in addition to the field shopperStatement.It is issuer dependent whether the localized shopper statement field is supported. In the case of non-domestic transactions (e.g. US-issued cards processed in JP) the field `shopperStatement` is used to modify the statement of the shopper. Adyen handles the complexity of ensuring the correct descriptors are assigned. Please note, this field can be used for only Visa and Mastercard transactions.
+	// This field allows merchants to use dynamic shopper statement in local character sets. The local shopper statement field can be supplied in markets where localized merchant descriptors are used. Currently, Adyen only supports this in the Japanese market .The available character sets at the moment are: * Processing in Japan: **ja-Kana** The character set **ja-Kana** supports UTF-8 based Katakana and alphanumeric and special characters. Merchants should send the Katakana shopperStatement in full-width characters.  An example request would be: > {   \"shopperStatement\" : \"ADYEN - SELLER-A\",   \"localizedShopperStatement\" : {     \"ja-Kana\" : \"ADYEN - セラーA\"   } } We recommend merchants to always supply the field localizedShopperStatement in addition to the field shopperStatement.It is issuer dependent whether the localized shopper statement field is supported. In the case of non-domestic transactions (e.g. US-issued cards processed in JP) the field `shopperStatement` is used to modify the statement of the shopper. Adyen handles the complexity of ensuring the correct descriptors are assigned.
 	LocalizedShopperStatement *map[string]string `json:"localizedShopperStatement,omitempty"`
 	Mandate                   *Mandate           `json:"mandate,omitempty"`
 	// The [merchant category code](https://en.wikipedia.org/wiki/Merchant_category_code) (MCC) is a four-digit number, which relates to a particular market segment. This code reflects the predominant activity that is conducted by the merchant.
@@ -81,9 +86,9 @@ type PaymentRequest struct {
 	// When you are doing multiple partial (gift card) payments, this is the `pspReference` of the first payment. We use this to link the multiple payments to each other. As your own reference for linking multiple payments, use the `merchantOrderReference`instead.
 	OrderReference *string `json:"orderReference,omitempty"`
 	// Required for the 3D Secure 2 `channel` **Web** integration.  Set this parameter to the origin URL of the page that you are loading the 3D Secure Component from.
-	Origin                  *string                  `json:"origin,omitempty"`
-	PaymentMethod           CheckoutPaymentMethod    `json:"paymentMethod"`
-	PlatformChargebackLogic *PlatformChargebackLogic `json:"platformChargebackLogic,omitempty"`
+	Origin                  *string                             `json:"origin,omitempty"`
+	PaymentMethod           DonationPaymentRequestPaymentMethod `json:"paymentMethod"`
+	PlatformChargebackLogic *PlatformChargebackLogic            `json:"platformChargebackLogic,omitempty"`
 	// Date after which no further authorisations shall be performed. Only for 3D Secure 2.
 	RecurringExpiry *string `json:"recurringExpiry,omitempty"`
 	// Minimum number of days between authorisations. Only for 3D Secure 2.
@@ -116,15 +121,15 @@ type PaymentRequest struct {
 	ShopperStatement *string `json:"shopperStatement,omitempty"`
 	// The shopper's social security number.
 	SocialSecurityNumber *string `json:"socialSecurityNumber,omitempty"`
-	// An array of objects specifying how the payment should be split when using [Adyen for Platforms](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information) or [Issuing](https://docs.adyen.com/issuing/add-manage-funds#split).
+	// An array of objects specifying how to split a payment when using [Adyen for Platforms](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information), [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic/processing-payments#providing-split-information), or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
 	Splits []Split `json:"splits,omitempty"`
-	// The ecommerce or point-of-sale store that is processing the payment. Used in [partner model integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for Adyen for Platforms.
+	// The ecommerce or point-of-sale store that is processing the payment. Used in:  * [Partner platform integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for the [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic). * [Platform setup integrations](https://docs.adyen.com/marketplaces-and-platforms/additional-for-platform-setup/route-payment-to-store) for the [Balance Platform](https://docs.adyen.com/marketplaces-and-platforms).
 	Store *string `json:"store,omitempty"`
 	// When true and `shopperReference` is provided, the payment details will be stored.
 	StorePaymentMethod *bool `json:"storePaymentMethod,omitempty"`
 	// The shopper's telephone number.
-	TelephoneNumber     *string              `json:"telephoneNumber,omitempty"`
-	ThreeDS2RequestData *ThreeDS2RequestData `json:"threeDS2RequestData,omitempty"`
+	TelephoneNumber     *string               `json:"telephoneNumber,omitempty"`
+	ThreeDS2RequestData *ThreeDS2RequestData2 `json:"threeDS2RequestData,omitempty"`
 	// If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only), and not the payment authorisation.
 	// Deprecated
 	ThreeDSAuthenticationOnly *bool `json:"threeDSAuthenticationOnly,omitempty"`
@@ -136,7 +141,7 @@ type PaymentRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPaymentRequest(amount Amount, merchantAccount string, paymentMethod CheckoutPaymentMethod, reference string, returnUrl string) *PaymentRequest {
+func NewPaymentRequest(amount Amount, merchantAccount string, paymentMethod DonationPaymentRequestPaymentMethod, reference string, returnUrl string) *PaymentRequest {
 	this := PaymentRequest{}
 	this.Amount = amount
 	this.MerchantAccount = merchantAccount
@@ -602,9 +607,9 @@ func (o *PaymentRequest) SetCountryCode(v string) {
 }
 
 // GetDateOfBirth returns the DateOfBirth field value if set, zero value otherwise.
-func (o *PaymentRequest) GetDateOfBirth() string {
+func (o *PaymentRequest) GetDateOfBirth() time.Time {
 	if o == nil || common.IsNil(o.DateOfBirth) {
-		var ret string
+		var ret time.Time
 		return ret
 	}
 	return *o.DateOfBirth
@@ -612,7 +617,7 @@ func (o *PaymentRequest) GetDateOfBirth() string {
 
 // GetDateOfBirthOk returns a tuple with the DateOfBirth field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentRequest) GetDateOfBirthOk() (*string, bool) {
+func (o *PaymentRequest) GetDateOfBirthOk() (*time.Time, bool) {
 	if o == nil || common.IsNil(o.DateOfBirth) {
 		return nil, false
 	}
@@ -628,8 +633,8 @@ func (o *PaymentRequest) HasDateOfBirth() bool {
 	return false
 }
 
-// SetDateOfBirth gets a reference to the given string and assigns it to the DateOfBirth field.
-func (o *PaymentRequest) SetDateOfBirth(v string) {
+// SetDateOfBirth gets a reference to the given time.Time and assigns it to the DateOfBirth field.
+func (o *PaymentRequest) SetDateOfBirth(v time.Time) {
 	o.DateOfBirth = &v
 }
 
@@ -665,6 +670,38 @@ func (o *PaymentRequest) SetDccQuote(v ForexQuote) {
 	o.DccQuote = &v
 }
 
+// GetDeliverAt returns the DeliverAt field value if set, zero value otherwise.
+func (o *PaymentRequest) GetDeliverAt() time.Time {
+	if o == nil || common.IsNil(o.DeliverAt) {
+		var ret time.Time
+		return ret
+	}
+	return *o.DeliverAt
+}
+
+// GetDeliverAtOk returns a tuple with the DeliverAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentRequest) GetDeliverAtOk() (*time.Time, bool) {
+	if o == nil || common.IsNil(o.DeliverAt) {
+		return nil, false
+	}
+	return o.DeliverAt, true
+}
+
+// HasDeliverAt returns a boolean if a field has been set.
+func (o *PaymentRequest) HasDeliverAt() bool {
+	if o != nil && !common.IsNil(o.DeliverAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetDeliverAt gets a reference to the given time.Time and assigns it to the DeliverAt field.
+func (o *PaymentRequest) SetDeliverAt(v time.Time) {
+	o.DeliverAt = &v
+}
+
 // GetDeliveryAddress returns the DeliveryAddress field value if set, zero value otherwise.
 func (o *PaymentRequest) GetDeliveryAddress() Address {
 	if o == nil || common.IsNil(o.DeliveryAddress) {
@@ -698,6 +735,7 @@ func (o *PaymentRequest) SetDeliveryAddress(v Address) {
 }
 
 // GetDeliveryDate returns the DeliveryDate field value if set, zero value otherwise.
+// Deprecated
 func (o *PaymentRequest) GetDeliveryDate() time.Time {
 	if o == nil || common.IsNil(o.DeliveryDate) {
 		var ret time.Time
@@ -708,6 +746,7 @@ func (o *PaymentRequest) GetDeliveryDate() time.Time {
 
 // GetDeliveryDateOk returns a tuple with the DeliveryDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *PaymentRequest) GetDeliveryDateOk() (*time.Time, bool) {
 	if o == nil || common.IsNil(o.DeliveryDate) {
 		return nil, false
@@ -725,6 +764,7 @@ func (o *PaymentRequest) HasDeliveryDate() bool {
 }
 
 // SetDeliveryDate gets a reference to the given time.Time and assigns it to the DeliveryDate field.
+// Deprecated
 func (o *PaymentRequest) SetDeliveryDate(v time.Time) {
 	o.DeliveryDate = &v
 }
@@ -919,6 +959,70 @@ func (o *PaymentRequest) HasFraudOffset() bool {
 // SetFraudOffset gets a reference to the given int32 and assigns it to the FraudOffset field.
 func (o *PaymentRequest) SetFraudOffset(v int32) {
 	o.FraudOffset = &v
+}
+
+// GetFundOrigin returns the FundOrigin field value if set, zero value otherwise.
+func (o *PaymentRequest) GetFundOrigin() FundOrigin {
+	if o == nil || common.IsNil(o.FundOrigin) {
+		var ret FundOrigin
+		return ret
+	}
+	return *o.FundOrigin
+}
+
+// GetFundOriginOk returns a tuple with the FundOrigin field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentRequest) GetFundOriginOk() (*FundOrigin, bool) {
+	if o == nil || common.IsNil(o.FundOrigin) {
+		return nil, false
+	}
+	return o.FundOrigin, true
+}
+
+// HasFundOrigin returns a boolean if a field has been set.
+func (o *PaymentRequest) HasFundOrigin() bool {
+	if o != nil && !common.IsNil(o.FundOrigin) {
+		return true
+	}
+
+	return false
+}
+
+// SetFundOrigin gets a reference to the given FundOrigin and assigns it to the FundOrigin field.
+func (o *PaymentRequest) SetFundOrigin(v FundOrigin) {
+	o.FundOrigin = &v
+}
+
+// GetFundRecipient returns the FundRecipient field value if set, zero value otherwise.
+func (o *PaymentRequest) GetFundRecipient() FundRecipient {
+	if o == nil || common.IsNil(o.FundRecipient) {
+		var ret FundRecipient
+		return ret
+	}
+	return *o.FundRecipient
+}
+
+// GetFundRecipientOk returns a tuple with the FundRecipient field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentRequest) GetFundRecipientOk() (*FundRecipient, bool) {
+	if o == nil || common.IsNil(o.FundRecipient) {
+		return nil, false
+	}
+	return o.FundRecipient, true
+}
+
+// HasFundRecipient returns a boolean if a field has been set.
+func (o *PaymentRequest) HasFundRecipient() bool {
+	if o != nil && !common.IsNil(o.FundRecipient) {
+		return true
+	}
+
+	return false
+}
+
+// SetFundRecipient gets a reference to the given FundRecipient and assigns it to the FundRecipient field.
+func (o *PaymentRequest) SetFundRecipient(v FundRecipient) {
+	o.FundRecipient = &v
 }
 
 // GetIndustryUsage returns the IndustryUsage field value if set, zero value otherwise.
@@ -1362,9 +1466,9 @@ func (o *PaymentRequest) SetOrigin(v string) {
 }
 
 // GetPaymentMethod returns the PaymentMethod field value
-func (o *PaymentRequest) GetPaymentMethod() CheckoutPaymentMethod {
+func (o *PaymentRequest) GetPaymentMethod() DonationPaymentRequestPaymentMethod {
 	if o == nil {
-		var ret CheckoutPaymentMethod
+		var ret DonationPaymentRequestPaymentMethod
 		return ret
 	}
 
@@ -1373,7 +1477,7 @@ func (o *PaymentRequest) GetPaymentMethod() CheckoutPaymentMethod {
 
 // GetPaymentMethodOk returns a tuple with the PaymentMethod field value
 // and a boolean to check if the value has been set.
-func (o *PaymentRequest) GetPaymentMethodOk() (*CheckoutPaymentMethod, bool) {
+func (o *PaymentRequest) GetPaymentMethodOk() (*DonationPaymentRequestPaymentMethod, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1381,7 +1485,7 @@ func (o *PaymentRequest) GetPaymentMethodOk() (*CheckoutPaymentMethod, bool) {
 }
 
 // SetPaymentMethod sets field value
-func (o *PaymentRequest) SetPaymentMethod(v CheckoutPaymentMethod) {
+func (o *PaymentRequest) SetPaymentMethod(v DonationPaymentRequestPaymentMethod) {
 	o.PaymentMethod = v
 }
 
@@ -2074,9 +2178,9 @@ func (o *PaymentRequest) SetTelephoneNumber(v string) {
 }
 
 // GetThreeDS2RequestData returns the ThreeDS2RequestData field value if set, zero value otherwise.
-func (o *PaymentRequest) GetThreeDS2RequestData() ThreeDS2RequestData {
+func (o *PaymentRequest) GetThreeDS2RequestData() ThreeDS2RequestData2 {
 	if o == nil || common.IsNil(o.ThreeDS2RequestData) {
-		var ret ThreeDS2RequestData
+		var ret ThreeDS2RequestData2
 		return ret
 	}
 	return *o.ThreeDS2RequestData
@@ -2084,7 +2188,7 @@ func (o *PaymentRequest) GetThreeDS2RequestData() ThreeDS2RequestData {
 
 // GetThreeDS2RequestDataOk returns a tuple with the ThreeDS2RequestData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentRequest) GetThreeDS2RequestDataOk() (*ThreeDS2RequestData, bool) {
+func (o *PaymentRequest) GetThreeDS2RequestDataOk() (*ThreeDS2RequestData2, bool) {
 	if o == nil || common.IsNil(o.ThreeDS2RequestData) {
 		return nil, false
 	}
@@ -2100,8 +2204,8 @@ func (o *PaymentRequest) HasThreeDS2RequestData() bool {
 	return false
 }
 
-// SetThreeDS2RequestData gets a reference to the given ThreeDS2RequestData and assigns it to the ThreeDS2RequestData field.
-func (o *PaymentRequest) SetThreeDS2RequestData(v ThreeDS2RequestData) {
+// SetThreeDS2RequestData gets a reference to the given ThreeDS2RequestData2 and assigns it to the ThreeDS2RequestData field.
+func (o *PaymentRequest) SetThreeDS2RequestData(v ThreeDS2RequestData2) {
 	o.ThreeDS2RequestData = &v
 }
 
@@ -2228,6 +2332,9 @@ func (o PaymentRequest) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.DccQuote) {
 		toSerialize["dccQuote"] = o.DccQuote
 	}
+	if !common.IsNil(o.DeliverAt) {
+		toSerialize["deliverAt"] = o.DeliverAt
+	}
 	if !common.IsNil(o.DeliveryAddress) {
 		toSerialize["deliveryAddress"] = o.DeliveryAddress
 	}
@@ -2251,6 +2358,12 @@ func (o PaymentRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.FraudOffset) {
 		toSerialize["fraudOffset"] = o.FraudOffset
+	}
+	if !common.IsNil(o.FundOrigin) {
+		toSerialize["fundOrigin"] = o.FundOrigin
+	}
+	if !common.IsNil(o.FundRecipient) {
+		toSerialize["fundRecipient"] = o.FundRecipient
 	}
 	if !common.IsNil(o.IndustryUsage) {
 		toSerialize["industryUsage"] = o.IndustryUsage

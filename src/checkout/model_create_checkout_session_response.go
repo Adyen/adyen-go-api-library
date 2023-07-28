@@ -39,8 +39,8 @@ type CreateCheckoutSessionResponse struct {
 	Company *Company `json:"company,omitempty"`
 	// The shopper's two-letter country code.
 	CountryCode *string `json:"countryCode,omitempty"`
-	// The shopper's date of birth.  Format [ISO-8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DD
-	DateOfBirth *string `json:"dateOfBirth,omitempty"`
+	// The shopper's date of birth in [ISO8601](https://www.iso.org/iso-8601-date-and-time-format.html) format.
+	DateOfBirth *time.Time `json:"dateOfBirth,omitempty"`
 	// The date and time when the purchased goods should be delivered.  [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format: YYYY-MM-DDThh:mm:ss+TZD, for example, **2020-12-18T10:15:30+01:00**.
 	DeliverAt       *time.Time `json:"deliverAt,omitempty"`
 	DeliveryAddress *Address   `json:"deliveryAddress,omitempty"`
@@ -70,8 +70,9 @@ type CreateCheckoutSessionResponse struct {
 	// Metadata consists of entries, each of which includes a key and a value. Limits: * Maximum 20 key-value pairs per request. * Maximum 20 characters per key. * Maximum 80 characters per value.
 	Metadata *map[string]string `json:"metadata,omitempty"`
 	// Indicates the type of front end integration. Possible values: * **embedded** (default): Drop-in or Components integration * **hosted**: Hosted Checkout integration
-	Mode    *string           `json:"mode,omitempty"`
-	MpiData *ThreeDSecureData `json:"mpiData,omitempty"`
+	Mode                    *string                  `json:"mode,omitempty"`
+	MpiData                 *ThreeDSecureData        `json:"mpiData,omitempty"`
+	PlatformChargebackLogic *PlatformChargebackLogic `json:"platformChargebackLogic,omitempty"`
 	// Date after which no further authorisations shall be performed. Only for 3D Secure 2.
 	RecurringExpiry *string `json:"recurringExpiry,omitempty"`
 	// Minimum number of days between authorisations. Only for 3D Secure 2.
@@ -106,9 +107,9 @@ type CreateCheckoutSessionResponse struct {
 	SocialSecurityNumber *string `json:"socialSecurityNumber,omitempty"`
 	// Boolean value indicating whether the card payment method should be split into separate debit and credit options.
 	SplitCardFundingSources *bool `json:"splitCardFundingSources,omitempty"`
-	// An array of objects specifying how the payment should be split when using [Adyen for Platforms](https://docs.adyen.com/platforms/processing-payments#providing-split-information) or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
+	// An array of objects specifying how to split a payment when using [Adyen for Platforms](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information), [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic/processing-payments#providing-split-information), or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
 	Splits []Split `json:"splits,omitempty"`
-	// The ecommerce or point-of-sale store that is processing the payment.
+	// The ecommerce or point-of-sale store that is processing the payment. Used in:  * [Partner platform integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for the [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic). * [Platform setup integrations](https://docs.adyen.com/marketplaces-and-platforms/additional-for-platform-setup/route-payment-to-store) for the [Balance Platform](https://docs.adyen.com/marketplaces-and-platforms).
 	Store *string `json:"store,omitempty"`
 	// When this is set to **true** and the `shopperReference` is provided, the payment details will be stored.
 	StorePaymentMethod *bool `json:"storePaymentMethod,omitempty"`
@@ -567,9 +568,9 @@ func (o *CreateCheckoutSessionResponse) SetCountryCode(v string) {
 }
 
 // GetDateOfBirth returns the DateOfBirth field value if set, zero value otherwise.
-func (o *CreateCheckoutSessionResponse) GetDateOfBirth() string {
+func (o *CreateCheckoutSessionResponse) GetDateOfBirth() time.Time {
 	if o == nil || common.IsNil(o.DateOfBirth) {
-		var ret string
+		var ret time.Time
 		return ret
 	}
 	return *o.DateOfBirth
@@ -577,7 +578,7 @@ func (o *CreateCheckoutSessionResponse) GetDateOfBirth() string {
 
 // GetDateOfBirthOk returns a tuple with the DateOfBirth field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateCheckoutSessionResponse) GetDateOfBirthOk() (*string, bool) {
+func (o *CreateCheckoutSessionResponse) GetDateOfBirthOk() (*time.Time, bool) {
 	if o == nil || common.IsNil(o.DateOfBirth) {
 		return nil, false
 	}
@@ -593,8 +594,8 @@ func (o *CreateCheckoutSessionResponse) HasDateOfBirth() bool {
 	return false
 }
 
-// SetDateOfBirth gets a reference to the given string and assigns it to the DateOfBirth field.
-func (o *CreateCheckoutSessionResponse) SetDateOfBirth(v string) {
+// SetDateOfBirth gets a reference to the given time.Time and assigns it to the DateOfBirth field.
+func (o *CreateCheckoutSessionResponse) SetDateOfBirth(v time.Time) {
 	o.DateOfBirth = &v
 }
 
@@ -1148,6 +1149,38 @@ func (o *CreateCheckoutSessionResponse) HasMpiData() bool {
 // SetMpiData gets a reference to the given ThreeDSecureData and assigns it to the MpiData field.
 func (o *CreateCheckoutSessionResponse) SetMpiData(v ThreeDSecureData) {
 	o.MpiData = &v
+}
+
+// GetPlatformChargebackLogic returns the PlatformChargebackLogic field value if set, zero value otherwise.
+func (o *CreateCheckoutSessionResponse) GetPlatformChargebackLogic() PlatformChargebackLogic {
+	if o == nil || common.IsNil(o.PlatformChargebackLogic) {
+		var ret PlatformChargebackLogic
+		return ret
+	}
+	return *o.PlatformChargebackLogic
+}
+
+// GetPlatformChargebackLogicOk returns a tuple with the PlatformChargebackLogic field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCheckoutSessionResponse) GetPlatformChargebackLogicOk() (*PlatformChargebackLogic, bool) {
+	if o == nil || common.IsNil(o.PlatformChargebackLogic) {
+		return nil, false
+	}
+	return o.PlatformChargebackLogic, true
+}
+
+// HasPlatformChargebackLogic returns a boolean if a field has been set.
+func (o *CreateCheckoutSessionResponse) HasPlatformChargebackLogic() bool {
+	if o != nil && !common.IsNil(o.PlatformChargebackLogic) {
+		return true
+	}
+
+	return false
+}
+
+// SetPlatformChargebackLogic gets a reference to the given PlatformChargebackLogic and assigns it to the PlatformChargebackLogic field.
+func (o *CreateCheckoutSessionResponse) SetPlatformChargebackLogic(v PlatformChargebackLogic) {
+	o.PlatformChargebackLogic = &v
 }
 
 // GetRecurringExpiry returns the RecurringExpiry field value if set, zero value otherwise.
@@ -2034,6 +2067,9 @@ func (o CreateCheckoutSessionResponse) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.MpiData) {
 		toSerialize["mpiData"] = o.MpiData
+	}
+	if !common.IsNil(o.PlatformChargebackLogic) {
+		toSerialize["platformChargebackLogic"] = o.PlatformChargebackLogic
 	}
 	if !common.IsNil(o.RecurringExpiry) {
 		toSerialize["recurringExpiry"] = o.RecurringExpiry
