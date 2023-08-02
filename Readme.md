@@ -1,3 +1,5 @@
+![Go](https://github.com/Adyen/adyen-go-api-library/assets/156021/23cd84f0-f918-456d-8f3f-ee6d0fc8ef2e)
+
 # Adyen Golang API Client Library
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/adyen/adyen-go-api-library/v7.svg)](https://pkg.go.dev/github.com/adyen/adyen-go-api-library/v7)
