@@ -21,7 +21,7 @@ var _ common.MappedNullable = &VippsInfo{}
 type VippsInfo struct {
 	// Vipps logo. Format: Base64-encoded string.
 	Logo string `json:"logo"`
-	// Vipps subscription cancel url
+	// Vipps subscription cancel url (required in case of [recurring payments](https://docs.adyen.com/online-payments/tokenization))
 	SubscriptionCancelUrl *string `json:"subscriptionCancelUrl,omitempty"`
 }
 

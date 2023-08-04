@@ -577,7 +577,7 @@ func (o *UpdateMerchantWebhookRequest) isValidCommunicationFormat() bool {
 	return false
 }
 func (o *UpdateMerchantWebhookRequest) isValidNetworkType() bool {
-	var allowedEnumValues = []string{"LOCAL", "PUBLIC"}
+	var allowedEnumValues = []string{"local", "public"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetNetworkType() == allowed {
 			return true
@@ -586,7 +586,7 @@ func (o *UpdateMerchantWebhookRequest) isValidNetworkType() bool {
 	return false
 }
 func (o *UpdateMerchantWebhookRequest) isValidSslVersion() bool {
-	var allowedEnumValues = []string{"HTTP", "SSL", "SSLv3", "TLS", "TLSv1", "TLSv1.1", "TLSv1.2", "TLSv1.3"}
+	var allowedEnumValues = []string{"HTTP", "TLSv1.2", "TLSv1.3"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetSslVersion() == allowed {
 			return true

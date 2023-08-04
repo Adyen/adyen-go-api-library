@@ -28,7 +28,7 @@ type BusinessLineInfoUpdate struct {
 	LegalEntityId *string `json:"legalEntityId,omitempty"`
 	// A list of channels where goods or services are sold.  Possible values: **pos**, **posMoto**, **eCommerce**, **ecomMoto**, **payByLink**.  Required only in combination with the `service` **paymentProcessing**.
 	SalesChannels []string `json:"salesChannels,omitempty"`
-	// The service for which you are creating the business line.  Possible values:**paymentProcessing**, **issuing**, **banking**
+	// The service for which you are creating the business line.  Possible values: **paymentProcessing**, **issuing**, **banking**
 	Service       string         `json:"service"`
 	SourceOfFunds *SourceOfFunds `json:"sourceOfFunds,omitempty"`
 	// List of website URLs where your user's goods or services are sold. When this is required for a service but your user does not have an online presence, provide the reason in the `webDataExemption` object.
@@ -376,6 +376,15 @@ func (v *NullableBusinessLineInfoUpdate) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+func (o *BusinessLineInfoUpdate) isValidCapability() bool {
+	var allowedEnumValues = []string{"receivePayments", "receiveFromPlatformPayments", "issueBankAccount"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetCapability() == allowed {
+			return true
+		}
+	}
+	return false
+}
 func (o *BusinessLineInfoUpdate) isValidService() bool {
 	var allowedEnumValues = []string{"paymentProcessing", "issuing", "banking"}
 	for _, allowed := range allowedEnumValues {

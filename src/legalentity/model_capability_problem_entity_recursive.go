@@ -197,7 +197,7 @@ func (v *NullableCapabilityProblemEntityRecursive) UnmarshalJSON(src []byte) err
 }
 
 func (o *CapabilityProblemEntityRecursive) isValidType() bool {
-	var allowedEnumValues = []string{"BankAccount", "Document", "LegalEntity"}
+	var allowedEnumValues = []string{"BankAccount", "Document", "LegalEntity", "product"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true
