@@ -28,8 +28,10 @@ type AccountHolderInfo struct {
 	Description *string `json:"description,omitempty"`
 	// The unique identifier of the [legal entity](https://docs.adyen.com/api-explorer/legalentity/latest/post/legalEntities#responses-200-id) associated with the account holder. Adyen performs a verification process against the legal entity of the account holder.
 	LegalEntityId string `json:"legalEntityId"`
-	// A set of key and value pairs for general use by the merchant. The keys do not have specific names and may be used for storing miscellaneous data as desired. > Note that during an update of metadata, the omission of existing key-value pairs will result in the deletion of those key-value pairs.
+	// A set of key and value pairs for general use. The keys do not have specific names and may be used for storing miscellaneous data as desired. > Note that during an update of metadata, the omission of existing key-value pairs will result in the deletion of those key-value pairs.
 	Metadata *map[string]string `json:"metadata,omitempty"`
+	// The unique identifier of the migrated account holder in the classic integration.
+	MigratedAccountHolderCode *string `json:"migratedAccountHolderCode,omitempty"`
 	// Your reference for the account holder, maximum 150 characters.
 	Reference *string `json:"reference,omitempty"`
 	// The time zone of the account holder. For example, **Europe/Amsterdam**. Defaults to the time zone of the balance platform if no time zone is set. For possible values, see the [list of time zone codes](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
@@ -238,6 +240,38 @@ func (o *AccountHolderInfo) SetMetadata(v map[string]string) {
 	o.Metadata = &v
 }
 
+// GetMigratedAccountHolderCode returns the MigratedAccountHolderCode field value if set, zero value otherwise.
+func (o *AccountHolderInfo) GetMigratedAccountHolderCode() string {
+	if o == nil || common.IsNil(o.MigratedAccountHolderCode) {
+		var ret string
+		return ret
+	}
+	return *o.MigratedAccountHolderCode
+}
+
+// GetMigratedAccountHolderCodeOk returns a tuple with the MigratedAccountHolderCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AccountHolderInfo) GetMigratedAccountHolderCodeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.MigratedAccountHolderCode) {
+		return nil, false
+	}
+	return o.MigratedAccountHolderCode, true
+}
+
+// HasMigratedAccountHolderCode returns a boolean if a field has been set.
+func (o *AccountHolderInfo) HasMigratedAccountHolderCode() bool {
+	if o != nil && !common.IsNil(o.MigratedAccountHolderCode) {
+		return true
+	}
+
+	return false
+}
+
+// SetMigratedAccountHolderCode gets a reference to the given string and assigns it to the MigratedAccountHolderCode field.
+func (o *AccountHolderInfo) SetMigratedAccountHolderCode(v string) {
+	o.MigratedAccountHolderCode = &v
+}
+
 // GetReference returns the Reference field value if set, zero value otherwise.
 func (o *AccountHolderInfo) GetReference() string {
 	if o == nil || common.IsNil(o.Reference) {
@@ -327,6 +361,9 @@ func (o AccountHolderInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize["legalEntityId"] = o.LegalEntityId
 	if !common.IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
+	}
+	if !common.IsNil(o.MigratedAccountHolderCode) {
+		toSerialize["migratedAccountHolderCode"] = o.MigratedAccountHolderCode
 	}
 	if !common.IsNil(o.Reference) {
 		toSerialize["reference"] = o.Reference

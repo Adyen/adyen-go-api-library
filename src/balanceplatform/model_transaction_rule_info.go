@@ -521,7 +521,7 @@ func (o *TransactionRuleInfo) isValidOutcomeType() bool {
 	return false
 }
 func (o *TransactionRuleInfo) isValidRequestType() bool {
-	var allowedEnumValues = []string{"authentication", "authorization", "tokenization"}
+	var allowedEnumValues = []string{"authentication", "authorization", "bankTransfer", "tokenization"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetRequestType() == allowed {
 			return true

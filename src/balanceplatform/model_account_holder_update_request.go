@@ -14,11 +14,11 @@ import (
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// checks if the AccountHolder type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &AccountHolder{}
+// checks if the AccountHolderUpdateRequest type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &AccountHolderUpdateRequest{}
 
-// AccountHolder struct for AccountHolder
-type AccountHolder struct {
+// AccountHolderUpdateRequest struct for AccountHolderUpdateRequest
+type AccountHolderUpdateRequest struct {
 	// The unique identifier of the [balance platform](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balancePlatforms/{id}__queryParam_id) to which the account holder belongs. Required in the request if your API credentials can be used for multiple balance platforms.
 	BalancePlatform *string `json:"balancePlatform,omitempty"`
 	// Contains key-value pairs that specify the actions that an account holder can do in your platform. The key is a capability required for your integration. For example, **issueCard** for Issuing. The value is an object containing the settings for the capability.
@@ -26,10 +26,6 @@ type AccountHolder struct {
 	ContactDetails *ContactDetails                     `json:"contactDetails,omitempty"`
 	// Your description for the account holder, maximum 300 characters.
 	Description *string `json:"description,omitempty"`
-	// The unique identifier of the account holder.
-	Id string `json:"id"`
-	// The unique identifier of the [legal entity](https://docs.adyen.com/api-explorer/legalentity/latest/post/legalEntities#responses-200-id) associated with the account holder. Adyen performs a verification process against the legal entity of the account holder.
-	LegalEntityId string `json:"legalEntityId"`
 	// A set of key and value pairs for general use. The keys do not have specific names and may be used for storing miscellaneous data as desired. > Note that during an update of metadata, the omission of existing key-value pairs will result in the deletion of those key-value pairs.
 	Metadata *map[string]string `json:"metadata,omitempty"`
 	// The unique identifier of the migrated account holder in the classic integration.
@@ -46,27 +42,25 @@ type AccountHolder struct {
 	VerificationDeadlines []VerificationDeadline `json:"verificationDeadlines,omitempty"`
 }
 
-// NewAccountHolder instantiates a new AccountHolder object
+// NewAccountHolderUpdateRequest instantiates a new AccountHolderUpdateRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccountHolder(id string, legalEntityId string) *AccountHolder {
-	this := AccountHolder{}
-	this.Id = id
-	this.LegalEntityId = legalEntityId
+func NewAccountHolderUpdateRequest() *AccountHolderUpdateRequest {
+	this := AccountHolderUpdateRequest{}
 	return &this
 }
 
-// NewAccountHolderWithDefaults instantiates a new AccountHolder object
+// NewAccountHolderUpdateRequestWithDefaults instantiates a new AccountHolderUpdateRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewAccountHolderWithDefaults() *AccountHolder {
-	this := AccountHolder{}
+func NewAccountHolderUpdateRequestWithDefaults() *AccountHolderUpdateRequest {
+	this := AccountHolderUpdateRequest{}
 	return &this
 }
 
 // GetBalancePlatform returns the BalancePlatform field value if set, zero value otherwise.
-func (o *AccountHolder) GetBalancePlatform() string {
+func (o *AccountHolderUpdateRequest) GetBalancePlatform() string {
 	if o == nil || common.IsNil(o.BalancePlatform) {
 		var ret string
 		return ret
@@ -76,7 +70,7 @@ func (o *AccountHolder) GetBalancePlatform() string {
 
 // GetBalancePlatformOk returns a tuple with the BalancePlatform field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountHolder) GetBalancePlatformOk() (*string, bool) {
+func (o *AccountHolderUpdateRequest) GetBalancePlatformOk() (*string, bool) {
 	if o == nil || common.IsNil(o.BalancePlatform) {
 		return nil, false
 	}
@@ -84,7 +78,7 @@ func (o *AccountHolder) GetBalancePlatformOk() (*string, bool) {
 }
 
 // HasBalancePlatform returns a boolean if a field has been set.
-func (o *AccountHolder) HasBalancePlatform() bool {
+func (o *AccountHolderUpdateRequest) HasBalancePlatform() bool {
 	if o != nil && !common.IsNil(o.BalancePlatform) {
 		return true
 	}
@@ -93,12 +87,12 @@ func (o *AccountHolder) HasBalancePlatform() bool {
 }
 
 // SetBalancePlatform gets a reference to the given string and assigns it to the BalancePlatform field.
-func (o *AccountHolder) SetBalancePlatform(v string) {
+func (o *AccountHolderUpdateRequest) SetBalancePlatform(v string) {
 	o.BalancePlatform = &v
 }
 
 // GetCapabilities returns the Capabilities field value if set, zero value otherwise.
-func (o *AccountHolder) GetCapabilities() map[string]AccountHolderCapability {
+func (o *AccountHolderUpdateRequest) GetCapabilities() map[string]AccountHolderCapability {
 	if o == nil || common.IsNil(o.Capabilities) {
 		var ret map[string]AccountHolderCapability
 		return ret
@@ -108,7 +102,7 @@ func (o *AccountHolder) GetCapabilities() map[string]AccountHolderCapability {
 
 // GetCapabilitiesOk returns a tuple with the Capabilities field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountHolder) GetCapabilitiesOk() (*map[string]AccountHolderCapability, bool) {
+func (o *AccountHolderUpdateRequest) GetCapabilitiesOk() (*map[string]AccountHolderCapability, bool) {
 	if o == nil || common.IsNil(o.Capabilities) {
 		return nil, false
 	}
@@ -116,7 +110,7 @@ func (o *AccountHolder) GetCapabilitiesOk() (*map[string]AccountHolderCapability
 }
 
 // HasCapabilities returns a boolean if a field has been set.
-func (o *AccountHolder) HasCapabilities() bool {
+func (o *AccountHolderUpdateRequest) HasCapabilities() bool {
 	if o != nil && !common.IsNil(o.Capabilities) {
 		return true
 	}
@@ -125,12 +119,12 @@ func (o *AccountHolder) HasCapabilities() bool {
 }
 
 // SetCapabilities gets a reference to the given map[string]AccountHolderCapability and assigns it to the Capabilities field.
-func (o *AccountHolder) SetCapabilities(v map[string]AccountHolderCapability) {
+func (o *AccountHolderUpdateRequest) SetCapabilities(v map[string]AccountHolderCapability) {
 	o.Capabilities = &v
 }
 
 // GetContactDetails returns the ContactDetails field value if set, zero value otherwise.
-func (o *AccountHolder) GetContactDetails() ContactDetails {
+func (o *AccountHolderUpdateRequest) GetContactDetails() ContactDetails {
 	if o == nil || common.IsNil(o.ContactDetails) {
 		var ret ContactDetails
 		return ret
@@ -140,7 +134,7 @@ func (o *AccountHolder) GetContactDetails() ContactDetails {
 
 // GetContactDetailsOk returns a tuple with the ContactDetails field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountHolder) GetContactDetailsOk() (*ContactDetails, bool) {
+func (o *AccountHolderUpdateRequest) GetContactDetailsOk() (*ContactDetails, bool) {
 	if o == nil || common.IsNil(o.ContactDetails) {
 		return nil, false
 	}
@@ -148,7 +142,7 @@ func (o *AccountHolder) GetContactDetailsOk() (*ContactDetails, bool) {
 }
 
 // HasContactDetails returns a boolean if a field has been set.
-func (o *AccountHolder) HasContactDetails() bool {
+func (o *AccountHolderUpdateRequest) HasContactDetails() bool {
 	if o != nil && !common.IsNil(o.ContactDetails) {
 		return true
 	}
@@ -157,12 +151,12 @@ func (o *AccountHolder) HasContactDetails() bool {
 }
 
 // SetContactDetails gets a reference to the given ContactDetails and assigns it to the ContactDetails field.
-func (o *AccountHolder) SetContactDetails(v ContactDetails) {
+func (o *AccountHolderUpdateRequest) SetContactDetails(v ContactDetails) {
 	o.ContactDetails = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
-func (o *AccountHolder) GetDescription() string {
+func (o *AccountHolderUpdateRequest) GetDescription() string {
 	if o == nil || common.IsNil(o.Description) {
 		var ret string
 		return ret
@@ -172,7 +166,7 @@ func (o *AccountHolder) GetDescription() string {
 
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountHolder) GetDescriptionOk() (*string, bool) {
+func (o *AccountHolderUpdateRequest) GetDescriptionOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Description) {
 		return nil, false
 	}
@@ -180,7 +174,7 @@ func (o *AccountHolder) GetDescriptionOk() (*string, bool) {
 }
 
 // HasDescription returns a boolean if a field has been set.
-func (o *AccountHolder) HasDescription() bool {
+func (o *AccountHolderUpdateRequest) HasDescription() bool {
 	if o != nil && !common.IsNil(o.Description) {
 		return true
 	}
@@ -189,60 +183,12 @@ func (o *AccountHolder) HasDescription() bool {
 }
 
 // SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *AccountHolder) SetDescription(v string) {
+func (o *AccountHolderUpdateRequest) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetId returns the Id field value
-func (o *AccountHolder) GetId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Id
-}
-
-// GetIdOk returns a tuple with the Id field value
-// and a boolean to check if the value has been set.
-func (o *AccountHolder) GetIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Id, true
-}
-
-// SetId sets field value
-func (o *AccountHolder) SetId(v string) {
-	o.Id = v
-}
-
-// GetLegalEntityId returns the LegalEntityId field value
-func (o *AccountHolder) GetLegalEntityId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.LegalEntityId
-}
-
-// GetLegalEntityIdOk returns a tuple with the LegalEntityId field value
-// and a boolean to check if the value has been set.
-func (o *AccountHolder) GetLegalEntityIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.LegalEntityId, true
-}
-
-// SetLegalEntityId sets field value
-func (o *AccountHolder) SetLegalEntityId(v string) {
-	o.LegalEntityId = v
-}
-
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *AccountHolder) GetMetadata() map[string]string {
+func (o *AccountHolderUpdateRequest) GetMetadata() map[string]string {
 	if o == nil || common.IsNil(o.Metadata) {
 		var ret map[string]string
 		return ret
@@ -252,7 +198,7 @@ func (o *AccountHolder) GetMetadata() map[string]string {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountHolder) GetMetadataOk() (*map[string]string, bool) {
+func (o *AccountHolderUpdateRequest) GetMetadataOk() (*map[string]string, bool) {
 	if o == nil || common.IsNil(o.Metadata) {
 		return nil, false
 	}
@@ -260,7 +206,7 @@ func (o *AccountHolder) GetMetadataOk() (*map[string]string, bool) {
 }
 
 // HasMetadata returns a boolean if a field has been set.
-func (o *AccountHolder) HasMetadata() bool {
+func (o *AccountHolderUpdateRequest) HasMetadata() bool {
 	if o != nil && !common.IsNil(o.Metadata) {
 		return true
 	}
@@ -269,12 +215,12 @@ func (o *AccountHolder) HasMetadata() bool {
 }
 
 // SetMetadata gets a reference to the given map[string]string and assigns it to the Metadata field.
-func (o *AccountHolder) SetMetadata(v map[string]string) {
+func (o *AccountHolderUpdateRequest) SetMetadata(v map[string]string) {
 	o.Metadata = &v
 }
 
 // GetMigratedAccountHolderCode returns the MigratedAccountHolderCode field value if set, zero value otherwise.
-func (o *AccountHolder) GetMigratedAccountHolderCode() string {
+func (o *AccountHolderUpdateRequest) GetMigratedAccountHolderCode() string {
 	if o == nil || common.IsNil(o.MigratedAccountHolderCode) {
 		var ret string
 		return ret
@@ -284,7 +230,7 @@ func (o *AccountHolder) GetMigratedAccountHolderCode() string {
 
 // GetMigratedAccountHolderCodeOk returns a tuple with the MigratedAccountHolderCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountHolder) GetMigratedAccountHolderCodeOk() (*string, bool) {
+func (o *AccountHolderUpdateRequest) GetMigratedAccountHolderCodeOk() (*string, bool) {
 	if o == nil || common.IsNil(o.MigratedAccountHolderCode) {
 		return nil, false
 	}
@@ -292,7 +238,7 @@ func (o *AccountHolder) GetMigratedAccountHolderCodeOk() (*string, bool) {
 }
 
 // HasMigratedAccountHolderCode returns a boolean if a field has been set.
-func (o *AccountHolder) HasMigratedAccountHolderCode() bool {
+func (o *AccountHolderUpdateRequest) HasMigratedAccountHolderCode() bool {
 	if o != nil && !common.IsNil(o.MigratedAccountHolderCode) {
 		return true
 	}
@@ -301,12 +247,12 @@ func (o *AccountHolder) HasMigratedAccountHolderCode() bool {
 }
 
 // SetMigratedAccountHolderCode gets a reference to the given string and assigns it to the MigratedAccountHolderCode field.
-func (o *AccountHolder) SetMigratedAccountHolderCode(v string) {
+func (o *AccountHolderUpdateRequest) SetMigratedAccountHolderCode(v string) {
 	o.MigratedAccountHolderCode = &v
 }
 
 // GetPrimaryBalanceAccount returns the PrimaryBalanceAccount field value if set, zero value otherwise.
-func (o *AccountHolder) GetPrimaryBalanceAccount() string {
+func (o *AccountHolderUpdateRequest) GetPrimaryBalanceAccount() string {
 	if o == nil || common.IsNil(o.PrimaryBalanceAccount) {
 		var ret string
 		return ret
@@ -316,7 +262,7 @@ func (o *AccountHolder) GetPrimaryBalanceAccount() string {
 
 // GetPrimaryBalanceAccountOk returns a tuple with the PrimaryBalanceAccount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountHolder) GetPrimaryBalanceAccountOk() (*string, bool) {
+func (o *AccountHolderUpdateRequest) GetPrimaryBalanceAccountOk() (*string, bool) {
 	if o == nil || common.IsNil(o.PrimaryBalanceAccount) {
 		return nil, false
 	}
@@ -324,7 +270,7 @@ func (o *AccountHolder) GetPrimaryBalanceAccountOk() (*string, bool) {
 }
 
 // HasPrimaryBalanceAccount returns a boolean if a field has been set.
-func (o *AccountHolder) HasPrimaryBalanceAccount() bool {
+func (o *AccountHolderUpdateRequest) HasPrimaryBalanceAccount() bool {
 	if o != nil && !common.IsNil(o.PrimaryBalanceAccount) {
 		return true
 	}
@@ -333,12 +279,12 @@ func (o *AccountHolder) HasPrimaryBalanceAccount() bool {
 }
 
 // SetPrimaryBalanceAccount gets a reference to the given string and assigns it to the PrimaryBalanceAccount field.
-func (o *AccountHolder) SetPrimaryBalanceAccount(v string) {
+func (o *AccountHolderUpdateRequest) SetPrimaryBalanceAccount(v string) {
 	o.PrimaryBalanceAccount = &v
 }
 
 // GetReference returns the Reference field value if set, zero value otherwise.
-func (o *AccountHolder) GetReference() string {
+func (o *AccountHolderUpdateRequest) GetReference() string {
 	if o == nil || common.IsNil(o.Reference) {
 		var ret string
 		return ret
@@ -348,7 +294,7 @@ func (o *AccountHolder) GetReference() string {
 
 // GetReferenceOk returns a tuple with the Reference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountHolder) GetReferenceOk() (*string, bool) {
+func (o *AccountHolderUpdateRequest) GetReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Reference) {
 		return nil, false
 	}
@@ -356,7 +302,7 @@ func (o *AccountHolder) GetReferenceOk() (*string, bool) {
 }
 
 // HasReference returns a boolean if a field has been set.
-func (o *AccountHolder) HasReference() bool {
+func (o *AccountHolderUpdateRequest) HasReference() bool {
 	if o != nil && !common.IsNil(o.Reference) {
 		return true
 	}
@@ -365,12 +311,12 @@ func (o *AccountHolder) HasReference() bool {
 }
 
 // SetReference gets a reference to the given string and assigns it to the Reference field.
-func (o *AccountHolder) SetReference(v string) {
+func (o *AccountHolderUpdateRequest) SetReference(v string) {
 	o.Reference = &v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *AccountHolder) GetStatus() string {
+func (o *AccountHolderUpdateRequest) GetStatus() string {
 	if o == nil || common.IsNil(o.Status) {
 		var ret string
 		return ret
@@ -380,7 +326,7 @@ func (o *AccountHolder) GetStatus() string {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountHolder) GetStatusOk() (*string, bool) {
+func (o *AccountHolderUpdateRequest) GetStatusOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Status) {
 		return nil, false
 	}
@@ -388,7 +334,7 @@ func (o *AccountHolder) GetStatusOk() (*string, bool) {
 }
 
 // HasStatus returns a boolean if a field has been set.
-func (o *AccountHolder) HasStatus() bool {
+func (o *AccountHolderUpdateRequest) HasStatus() bool {
 	if o != nil && !common.IsNil(o.Status) {
 		return true
 	}
@@ -397,12 +343,12 @@ func (o *AccountHolder) HasStatus() bool {
 }
 
 // SetStatus gets a reference to the given string and assigns it to the Status field.
-func (o *AccountHolder) SetStatus(v string) {
+func (o *AccountHolderUpdateRequest) SetStatus(v string) {
 	o.Status = &v
 }
 
 // GetTimeZone returns the TimeZone field value if set, zero value otherwise.
-func (o *AccountHolder) GetTimeZone() string {
+func (o *AccountHolderUpdateRequest) GetTimeZone() string {
 	if o == nil || common.IsNil(o.TimeZone) {
 		var ret string
 		return ret
@@ -412,7 +358,7 @@ func (o *AccountHolder) GetTimeZone() string {
 
 // GetTimeZoneOk returns a tuple with the TimeZone field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountHolder) GetTimeZoneOk() (*string, bool) {
+func (o *AccountHolderUpdateRequest) GetTimeZoneOk() (*string, bool) {
 	if o == nil || common.IsNil(o.TimeZone) {
 		return nil, false
 	}
@@ -420,7 +366,7 @@ func (o *AccountHolder) GetTimeZoneOk() (*string, bool) {
 }
 
 // HasTimeZone returns a boolean if a field has been set.
-func (o *AccountHolder) HasTimeZone() bool {
+func (o *AccountHolderUpdateRequest) HasTimeZone() bool {
 	if o != nil && !common.IsNil(o.TimeZone) {
 		return true
 	}
@@ -429,12 +375,12 @@ func (o *AccountHolder) HasTimeZone() bool {
 }
 
 // SetTimeZone gets a reference to the given string and assigns it to the TimeZone field.
-func (o *AccountHolder) SetTimeZone(v string) {
+func (o *AccountHolderUpdateRequest) SetTimeZone(v string) {
 	o.TimeZone = &v
 }
 
 // GetVerificationDeadlines returns the VerificationDeadlines field value if set, zero value otherwise.
-func (o *AccountHolder) GetVerificationDeadlines() []VerificationDeadline {
+func (o *AccountHolderUpdateRequest) GetVerificationDeadlines() []VerificationDeadline {
 	if o == nil || common.IsNil(o.VerificationDeadlines) {
 		var ret []VerificationDeadline
 		return ret
@@ -444,7 +390,7 @@ func (o *AccountHolder) GetVerificationDeadlines() []VerificationDeadline {
 
 // GetVerificationDeadlinesOk returns a tuple with the VerificationDeadlines field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountHolder) GetVerificationDeadlinesOk() ([]VerificationDeadline, bool) {
+func (o *AccountHolderUpdateRequest) GetVerificationDeadlinesOk() ([]VerificationDeadline, bool) {
 	if o == nil || common.IsNil(o.VerificationDeadlines) {
 		return nil, false
 	}
@@ -452,7 +398,7 @@ func (o *AccountHolder) GetVerificationDeadlinesOk() ([]VerificationDeadline, bo
 }
 
 // HasVerificationDeadlines returns a boolean if a field has been set.
-func (o *AccountHolder) HasVerificationDeadlines() bool {
+func (o *AccountHolderUpdateRequest) HasVerificationDeadlines() bool {
 	if o != nil && !common.IsNil(o.VerificationDeadlines) {
 		return true
 	}
@@ -461,11 +407,11 @@ func (o *AccountHolder) HasVerificationDeadlines() bool {
 }
 
 // SetVerificationDeadlines gets a reference to the given []VerificationDeadline and assigns it to the VerificationDeadlines field.
-func (o *AccountHolder) SetVerificationDeadlines(v []VerificationDeadline) {
+func (o *AccountHolderUpdateRequest) SetVerificationDeadlines(v []VerificationDeadline) {
 	o.VerificationDeadlines = v
 }
 
-func (o AccountHolder) MarshalJSON() ([]byte, error) {
+func (o AccountHolderUpdateRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -473,7 +419,7 @@ func (o AccountHolder) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AccountHolder) ToMap() (map[string]interface{}, error) {
+func (o AccountHolderUpdateRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.BalancePlatform) {
 		toSerialize["balancePlatform"] = o.BalancePlatform
@@ -487,8 +433,6 @@ func (o AccountHolder) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	toSerialize["id"] = o.Id
-	toSerialize["legalEntityId"] = o.LegalEntityId
 	if !common.IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
 	}
@@ -513,43 +457,43 @@ func (o AccountHolder) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableAccountHolder struct {
-	value *AccountHolder
+type NullableAccountHolderUpdateRequest struct {
+	value *AccountHolderUpdateRequest
 	isSet bool
 }
 
-func (v NullableAccountHolder) Get() *AccountHolder {
+func (v NullableAccountHolderUpdateRequest) Get() *AccountHolderUpdateRequest {
 	return v.value
 }
 
-func (v *NullableAccountHolder) Set(val *AccountHolder) {
+func (v *NullableAccountHolderUpdateRequest) Set(val *AccountHolderUpdateRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAccountHolder) IsSet() bool {
+func (v NullableAccountHolderUpdateRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAccountHolder) Unset() {
+func (v *NullableAccountHolderUpdateRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAccountHolder(val *AccountHolder) *NullableAccountHolder {
-	return &NullableAccountHolder{value: val, isSet: true}
+func NewNullableAccountHolderUpdateRequest(val *AccountHolderUpdateRequest) *NullableAccountHolderUpdateRequest {
+	return &NullableAccountHolderUpdateRequest{value: val, isSet: true}
 }
 
-func (v NullableAccountHolder) MarshalJSON() ([]byte, error) {
+func (v NullableAccountHolderUpdateRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAccountHolder) UnmarshalJSON(src []byte) error {
+func (v *NullableAccountHolderUpdateRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
 
-func (o *AccountHolder) isValidStatus() bool {
+func (o *AccountHolderUpdateRequest) isValidStatus() bool {
 	var allowedEnumValues = []string{"active", "closed", "inactive", "suspended"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetStatus() == allowed {

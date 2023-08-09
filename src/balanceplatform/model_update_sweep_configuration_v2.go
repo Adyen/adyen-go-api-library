@@ -14,61 +14,93 @@ import (
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// checks if the SweepConfigurationV2 type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &SweepConfigurationV2{}
+// checks if the UpdateSweepConfigurationV2 type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &UpdateSweepConfigurationV2{}
 
-// SweepConfigurationV2 struct for SweepConfigurationV2
-type SweepConfigurationV2 struct {
+// UpdateSweepConfigurationV2 struct for UpdateSweepConfigurationV2
+type UpdateSweepConfigurationV2 struct {
+	// The unique identifier of the destination or source [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id).   You can only use this for periodic sweep schedules such as `schedule.type` **daily** or **monthly**.
+	BalanceAccountId *string `json:"balanceAccountId,omitempty"`
 	// The type of transfer that results from the sweep.  Possible values:   - **bank**: Sweep to a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id).  - **internal**: Transfer to another [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id) within your platform.  Required when setting `priorities`.
-	Category     *string           `json:"category,omitempty"`
-	Counterparty SweepCounterparty `json:"counterparty"`
+	Category     *string            `json:"category,omitempty"`
+	Counterparty *SweepCounterparty `json:"counterparty,omitempty"`
 	// The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes) in uppercase. For example, **EUR**.  The sweep currency must match any of the [balances currencies](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balanceAccounts/{id}__resParam_balances).
-	Currency string `json:"currency"`
+	Currency *string `json:"currency,omitempty"`
 	// The message that will be used in the sweep transfer's description body with a maximum length of 140 characters.  If the message is longer after replacing placeholders, the message will be cut off at 140 characters.
 	Description *string `json:"description,omitempty"`
 	// The unique identifier of the sweep.
-	Id string `json:"id"`
+	Id *string `json:"id,omitempty"`
 	// The list of priorities for the bank transfer. This sets the speed at which the transfer is sent and the fees that you have to pay. You can provide multiple priorities. Adyen will try to pay out using the priority listed first, and if that's not possible, it moves on to the next option in the order of provided priorities.  Possible values:  * **regular**: For normal, low-value transactions.  * **fast**: Faster way to transfer funds but has higher fees. Recommended for high-priority, low-value transactions.  * **wire**: Fastest way to transfer funds but has the highest fees. Recommended for high-priority, high-value transactions.  * **instant**: Instant way to transfer funds in [SEPA countries](https://www.ecb.europa.eu/paym/integration/retail/sepa/html/index.en.html).  * **crossBorder**: High-value transfer to a recipient in a different country.  * **internal**: Transfer to an Adyen-issued business bank account (by bank account number/IBAN).  Set `category` to **bank**. For more details, see [optional priorities setup](https://docs.adyen.com/marketplaces-and-platforms/payout-to-users/scheduled-payouts#optional-priorities-setup).
 	Priorities []string `json:"priorities,omitempty"`
 	// The reason for disabling the sweep.
-	Reason   *string       `json:"reason,omitempty"`
-	Schedule SweepSchedule `json:"schedule"`
+	Reason   *string        `json:"reason,omitempty"`
+	Schedule *SweepSchedule `json:"schedule,omitempty"`
 	// The status of the sweep. If not provided, by default, this is set to **active**.  Possible values:    * **active**:  the sweep is enabled and funds will be pulled in or pushed out based on the defined configuration.    * **inactive**: the sweep is disabled and cannot be triggered.
-	Status        *string `json:"status,omitempty"`
-	SweepAmount   *Amount `json:"sweepAmount,omitempty"`
-	TargetAmount  *Amount `json:"targetAmount,omitempty"`
-	TriggerAmount *Amount `json:"triggerAmount,omitempty"`
+	Status       *string `json:"status,omitempty"`
+	SweepAmount  *Amount `json:"sweepAmount,omitempty"`
+	TargetAmount *Amount `json:"targetAmount,omitempty"`
+	// The unique identifier of the destination or source [transfer instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/transferInstruments__resParam_id).  You can also use this in combination with a `merchantAccount` and a `type` **pull** to start a direct debit request from the source transfer instrument. To use this feature, reach out to your Adyen contact.
+	TransferInstrumentId *string `json:"transferInstrumentId,omitempty"`
+	TriggerAmount        *Amount `json:"triggerAmount,omitempty"`
 	// The direction of sweep, whether pushing out or pulling in funds to the balance account. If not provided, by default, this is set to **push**.  Possible values:   * **push**: _push out funds_ to a destination balance account or transfer instrument.   * **pull**: _pull in funds_ from a source merchant account, transfer instrument, or balance account.
 	Type *string `json:"type,omitempty"`
 }
 
-// NewSweepConfigurationV2 instantiates a new SweepConfigurationV2 object
+// NewUpdateSweepConfigurationV2 instantiates a new UpdateSweepConfigurationV2 object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSweepConfigurationV2(counterparty SweepCounterparty, currency string, id string, schedule SweepSchedule) *SweepConfigurationV2 {
-	this := SweepConfigurationV2{}
-	this.Counterparty = counterparty
-	this.Currency = currency
-	this.Id = id
-	this.Schedule = schedule
+func NewUpdateSweepConfigurationV2() *UpdateSweepConfigurationV2 {
+	this := UpdateSweepConfigurationV2{}
 	var type_ string = "push"
 	this.Type = &type_
 	return &this
 }
 
-// NewSweepConfigurationV2WithDefaults instantiates a new SweepConfigurationV2 object
+// NewUpdateSweepConfigurationV2WithDefaults instantiates a new UpdateSweepConfigurationV2 object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewSweepConfigurationV2WithDefaults() *SweepConfigurationV2 {
-	this := SweepConfigurationV2{}
+func NewUpdateSweepConfigurationV2WithDefaults() *UpdateSweepConfigurationV2 {
+	this := UpdateSweepConfigurationV2{}
 	var type_ string = "push"
 	this.Type = &type_
 	return &this
+}
+
+// GetBalanceAccountId returns the BalanceAccountId field value if set, zero value otherwise.
+func (o *UpdateSweepConfigurationV2) GetBalanceAccountId() string {
+	if o == nil || common.IsNil(o.BalanceAccountId) {
+		var ret string
+		return ret
+	}
+	return *o.BalanceAccountId
+}
+
+// GetBalanceAccountIdOk returns a tuple with the BalanceAccountId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateSweepConfigurationV2) GetBalanceAccountIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.BalanceAccountId) {
+		return nil, false
+	}
+	return o.BalanceAccountId, true
+}
+
+// HasBalanceAccountId returns a boolean if a field has been set.
+func (o *UpdateSweepConfigurationV2) HasBalanceAccountId() bool {
+	if o != nil && !common.IsNil(o.BalanceAccountId) {
+		return true
+	}
+
+	return false
+}
+
+// SetBalanceAccountId gets a reference to the given string and assigns it to the BalanceAccountId field.
+func (o *UpdateSweepConfigurationV2) SetBalanceAccountId(v string) {
+	o.BalanceAccountId = &v
 }
 
 // GetCategory returns the Category field value if set, zero value otherwise.
-func (o *SweepConfigurationV2) GetCategory() string {
+func (o *UpdateSweepConfigurationV2) GetCategory() string {
 	if o == nil || common.IsNil(o.Category) {
 		var ret string
 		return ret
@@ -78,7 +110,7 @@ func (o *SweepConfigurationV2) GetCategory() string {
 
 // GetCategoryOk returns a tuple with the Category field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SweepConfigurationV2) GetCategoryOk() (*string, bool) {
+func (o *UpdateSweepConfigurationV2) GetCategoryOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Category) {
 		return nil, false
 	}
@@ -86,7 +118,7 @@ func (o *SweepConfigurationV2) GetCategoryOk() (*string, bool) {
 }
 
 // HasCategory returns a boolean if a field has been set.
-func (o *SweepConfigurationV2) HasCategory() bool {
+func (o *UpdateSweepConfigurationV2) HasCategory() bool {
 	if o != nil && !common.IsNil(o.Category) {
 		return true
 	}
@@ -95,60 +127,76 @@ func (o *SweepConfigurationV2) HasCategory() bool {
 }
 
 // SetCategory gets a reference to the given string and assigns it to the Category field.
-func (o *SweepConfigurationV2) SetCategory(v string) {
+func (o *UpdateSweepConfigurationV2) SetCategory(v string) {
 	o.Category = &v
 }
 
-// GetCounterparty returns the Counterparty field value
-func (o *SweepConfigurationV2) GetCounterparty() SweepCounterparty {
-	if o == nil {
+// GetCounterparty returns the Counterparty field value if set, zero value otherwise.
+func (o *UpdateSweepConfigurationV2) GetCounterparty() SweepCounterparty {
+	if o == nil || common.IsNil(o.Counterparty) {
 		var ret SweepCounterparty
 		return ret
 	}
-
-	return o.Counterparty
+	return *o.Counterparty
 }
 
-// GetCounterpartyOk returns a tuple with the Counterparty field value
+// GetCounterpartyOk returns a tuple with the Counterparty field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SweepConfigurationV2) GetCounterpartyOk() (*SweepCounterparty, bool) {
-	if o == nil {
+func (o *UpdateSweepConfigurationV2) GetCounterpartyOk() (*SweepCounterparty, bool) {
+	if o == nil || common.IsNil(o.Counterparty) {
 		return nil, false
 	}
-	return &o.Counterparty, true
+	return o.Counterparty, true
 }
 
-// SetCounterparty sets field value
-func (o *SweepConfigurationV2) SetCounterparty(v SweepCounterparty) {
-	o.Counterparty = v
+// HasCounterparty returns a boolean if a field has been set.
+func (o *UpdateSweepConfigurationV2) HasCounterparty() bool {
+	if o != nil && !common.IsNil(o.Counterparty) {
+		return true
+	}
+
+	return false
 }
 
-// GetCurrency returns the Currency field value
-func (o *SweepConfigurationV2) GetCurrency() string {
-	if o == nil {
+// SetCounterparty gets a reference to the given SweepCounterparty and assigns it to the Counterparty field.
+func (o *UpdateSweepConfigurationV2) SetCounterparty(v SweepCounterparty) {
+	o.Counterparty = &v
+}
+
+// GetCurrency returns the Currency field value if set, zero value otherwise.
+func (o *UpdateSweepConfigurationV2) GetCurrency() string {
+	if o == nil || common.IsNil(o.Currency) {
 		var ret string
 		return ret
 	}
-
-	return o.Currency
+	return *o.Currency
 }
 
-// GetCurrencyOk returns a tuple with the Currency field value
+// GetCurrencyOk returns a tuple with the Currency field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SweepConfigurationV2) GetCurrencyOk() (*string, bool) {
-	if o == nil {
+func (o *UpdateSweepConfigurationV2) GetCurrencyOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Currency) {
 		return nil, false
 	}
-	return &o.Currency, true
+	return o.Currency, true
 }
 
-// SetCurrency sets field value
-func (o *SweepConfigurationV2) SetCurrency(v string) {
-	o.Currency = v
+// HasCurrency returns a boolean if a field has been set.
+func (o *UpdateSweepConfigurationV2) HasCurrency() bool {
+	if o != nil && !common.IsNil(o.Currency) {
+		return true
+	}
+
+	return false
+}
+
+// SetCurrency gets a reference to the given string and assigns it to the Currency field.
+func (o *UpdateSweepConfigurationV2) SetCurrency(v string) {
+	o.Currency = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
-func (o *SweepConfigurationV2) GetDescription() string {
+func (o *UpdateSweepConfigurationV2) GetDescription() string {
 	if o == nil || common.IsNil(o.Description) {
 		var ret string
 		return ret
@@ -158,7 +206,7 @@ func (o *SweepConfigurationV2) GetDescription() string {
 
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SweepConfigurationV2) GetDescriptionOk() (*string, bool) {
+func (o *UpdateSweepConfigurationV2) GetDescriptionOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Description) {
 		return nil, false
 	}
@@ -166,7 +214,7 @@ func (o *SweepConfigurationV2) GetDescriptionOk() (*string, bool) {
 }
 
 // HasDescription returns a boolean if a field has been set.
-func (o *SweepConfigurationV2) HasDescription() bool {
+func (o *UpdateSweepConfigurationV2) HasDescription() bool {
 	if o != nil && !common.IsNil(o.Description) {
 		return true
 	}
@@ -175,36 +223,44 @@ func (o *SweepConfigurationV2) HasDescription() bool {
 }
 
 // SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *SweepConfigurationV2) SetDescription(v string) {
+func (o *UpdateSweepConfigurationV2) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetId returns the Id field value
-func (o *SweepConfigurationV2) GetId() string {
-	if o == nil {
+// GetId returns the Id field value if set, zero value otherwise.
+func (o *UpdateSweepConfigurationV2) GetId() string {
+	if o == nil || common.IsNil(o.Id) {
 		var ret string
 		return ret
 	}
-
-	return o.Id
+	return *o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SweepConfigurationV2) GetIdOk() (*string, bool) {
-	if o == nil {
+func (o *UpdateSweepConfigurationV2) GetIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Id) {
 		return nil, false
 	}
-	return &o.Id, true
+	return o.Id, true
 }
 
-// SetId sets field value
-func (o *SweepConfigurationV2) SetId(v string) {
-	o.Id = v
+// HasId returns a boolean if a field has been set.
+func (o *UpdateSweepConfigurationV2) HasId() bool {
+	if o != nil && !common.IsNil(o.Id) {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given string and assigns it to the Id field.
+func (o *UpdateSweepConfigurationV2) SetId(v string) {
+	o.Id = &v
 }
 
 // GetPriorities returns the Priorities field value if set, zero value otherwise.
-func (o *SweepConfigurationV2) GetPriorities() []string {
+func (o *UpdateSweepConfigurationV2) GetPriorities() []string {
 	if o == nil || common.IsNil(o.Priorities) {
 		var ret []string
 		return ret
@@ -214,7 +270,7 @@ func (o *SweepConfigurationV2) GetPriorities() []string {
 
 // GetPrioritiesOk returns a tuple with the Priorities field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SweepConfigurationV2) GetPrioritiesOk() ([]string, bool) {
+func (o *UpdateSweepConfigurationV2) GetPrioritiesOk() ([]string, bool) {
 	if o == nil || common.IsNil(o.Priorities) {
 		return nil, false
 	}
@@ -222,7 +278,7 @@ func (o *SweepConfigurationV2) GetPrioritiesOk() ([]string, bool) {
 }
 
 // HasPriorities returns a boolean if a field has been set.
-func (o *SweepConfigurationV2) HasPriorities() bool {
+func (o *UpdateSweepConfigurationV2) HasPriorities() bool {
 	if o != nil && !common.IsNil(o.Priorities) {
 		return true
 	}
@@ -231,12 +287,12 @@ func (o *SweepConfigurationV2) HasPriorities() bool {
 }
 
 // SetPriorities gets a reference to the given []string and assigns it to the Priorities field.
-func (o *SweepConfigurationV2) SetPriorities(v []string) {
+func (o *UpdateSweepConfigurationV2) SetPriorities(v []string) {
 	o.Priorities = v
 }
 
 // GetReason returns the Reason field value if set, zero value otherwise.
-func (o *SweepConfigurationV2) GetReason() string {
+func (o *UpdateSweepConfigurationV2) GetReason() string {
 	if o == nil || common.IsNil(o.Reason) {
 		var ret string
 		return ret
@@ -246,7 +302,7 @@ func (o *SweepConfigurationV2) GetReason() string {
 
 // GetReasonOk returns a tuple with the Reason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SweepConfigurationV2) GetReasonOk() (*string, bool) {
+func (o *UpdateSweepConfigurationV2) GetReasonOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Reason) {
 		return nil, false
 	}
@@ -254,7 +310,7 @@ func (o *SweepConfigurationV2) GetReasonOk() (*string, bool) {
 }
 
 // HasReason returns a boolean if a field has been set.
-func (o *SweepConfigurationV2) HasReason() bool {
+func (o *UpdateSweepConfigurationV2) HasReason() bool {
 	if o != nil && !common.IsNil(o.Reason) {
 		return true
 	}
@@ -263,36 +319,44 @@ func (o *SweepConfigurationV2) HasReason() bool {
 }
 
 // SetReason gets a reference to the given string and assigns it to the Reason field.
-func (o *SweepConfigurationV2) SetReason(v string) {
+func (o *UpdateSweepConfigurationV2) SetReason(v string) {
 	o.Reason = &v
 }
 
-// GetSchedule returns the Schedule field value
-func (o *SweepConfigurationV2) GetSchedule() SweepSchedule {
-	if o == nil {
+// GetSchedule returns the Schedule field value if set, zero value otherwise.
+func (o *UpdateSweepConfigurationV2) GetSchedule() SweepSchedule {
+	if o == nil || common.IsNil(o.Schedule) {
 		var ret SweepSchedule
 		return ret
 	}
-
-	return o.Schedule
+	return *o.Schedule
 }
 
-// GetScheduleOk returns a tuple with the Schedule field value
+// GetScheduleOk returns a tuple with the Schedule field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SweepConfigurationV2) GetScheduleOk() (*SweepSchedule, bool) {
-	if o == nil {
+func (o *UpdateSweepConfigurationV2) GetScheduleOk() (*SweepSchedule, bool) {
+	if o == nil || common.IsNil(o.Schedule) {
 		return nil, false
 	}
-	return &o.Schedule, true
+	return o.Schedule, true
 }
 
-// SetSchedule sets field value
-func (o *SweepConfigurationV2) SetSchedule(v SweepSchedule) {
-	o.Schedule = v
+// HasSchedule returns a boolean if a field has been set.
+func (o *UpdateSweepConfigurationV2) HasSchedule() bool {
+	if o != nil && !common.IsNil(o.Schedule) {
+		return true
+	}
+
+	return false
+}
+
+// SetSchedule gets a reference to the given SweepSchedule and assigns it to the Schedule field.
+func (o *UpdateSweepConfigurationV2) SetSchedule(v SweepSchedule) {
+	o.Schedule = &v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *SweepConfigurationV2) GetStatus() string {
+func (o *UpdateSweepConfigurationV2) GetStatus() string {
 	if o == nil || common.IsNil(o.Status) {
 		var ret string
 		return ret
@@ -302,7 +366,7 @@ func (o *SweepConfigurationV2) GetStatus() string {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SweepConfigurationV2) GetStatusOk() (*string, bool) {
+func (o *UpdateSweepConfigurationV2) GetStatusOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Status) {
 		return nil, false
 	}
@@ -310,7 +374,7 @@ func (o *SweepConfigurationV2) GetStatusOk() (*string, bool) {
 }
 
 // HasStatus returns a boolean if a field has been set.
-func (o *SweepConfigurationV2) HasStatus() bool {
+func (o *UpdateSweepConfigurationV2) HasStatus() bool {
 	if o != nil && !common.IsNil(o.Status) {
 		return true
 	}
@@ -319,12 +383,12 @@ func (o *SweepConfigurationV2) HasStatus() bool {
 }
 
 // SetStatus gets a reference to the given string and assigns it to the Status field.
-func (o *SweepConfigurationV2) SetStatus(v string) {
+func (o *UpdateSweepConfigurationV2) SetStatus(v string) {
 	o.Status = &v
 }
 
 // GetSweepAmount returns the SweepAmount field value if set, zero value otherwise.
-func (o *SweepConfigurationV2) GetSweepAmount() Amount {
+func (o *UpdateSweepConfigurationV2) GetSweepAmount() Amount {
 	if o == nil || common.IsNil(o.SweepAmount) {
 		var ret Amount
 		return ret
@@ -334,7 +398,7 @@ func (o *SweepConfigurationV2) GetSweepAmount() Amount {
 
 // GetSweepAmountOk returns a tuple with the SweepAmount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SweepConfigurationV2) GetSweepAmountOk() (*Amount, bool) {
+func (o *UpdateSweepConfigurationV2) GetSweepAmountOk() (*Amount, bool) {
 	if o == nil || common.IsNil(o.SweepAmount) {
 		return nil, false
 	}
@@ -342,7 +406,7 @@ func (o *SweepConfigurationV2) GetSweepAmountOk() (*Amount, bool) {
 }
 
 // HasSweepAmount returns a boolean if a field has been set.
-func (o *SweepConfigurationV2) HasSweepAmount() bool {
+func (o *UpdateSweepConfigurationV2) HasSweepAmount() bool {
 	if o != nil && !common.IsNil(o.SweepAmount) {
 		return true
 	}
@@ -351,12 +415,12 @@ func (o *SweepConfigurationV2) HasSweepAmount() bool {
 }
 
 // SetSweepAmount gets a reference to the given Amount and assigns it to the SweepAmount field.
-func (o *SweepConfigurationV2) SetSweepAmount(v Amount) {
+func (o *UpdateSweepConfigurationV2) SetSweepAmount(v Amount) {
 	o.SweepAmount = &v
 }
 
 // GetTargetAmount returns the TargetAmount field value if set, zero value otherwise.
-func (o *SweepConfigurationV2) GetTargetAmount() Amount {
+func (o *UpdateSweepConfigurationV2) GetTargetAmount() Amount {
 	if o == nil || common.IsNil(o.TargetAmount) {
 		var ret Amount
 		return ret
@@ -366,7 +430,7 @@ func (o *SweepConfigurationV2) GetTargetAmount() Amount {
 
 // GetTargetAmountOk returns a tuple with the TargetAmount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SweepConfigurationV2) GetTargetAmountOk() (*Amount, bool) {
+func (o *UpdateSweepConfigurationV2) GetTargetAmountOk() (*Amount, bool) {
 	if o == nil || common.IsNil(o.TargetAmount) {
 		return nil, false
 	}
@@ -374,7 +438,7 @@ func (o *SweepConfigurationV2) GetTargetAmountOk() (*Amount, bool) {
 }
 
 // HasTargetAmount returns a boolean if a field has been set.
-func (o *SweepConfigurationV2) HasTargetAmount() bool {
+func (o *UpdateSweepConfigurationV2) HasTargetAmount() bool {
 	if o != nil && !common.IsNil(o.TargetAmount) {
 		return true
 	}
@@ -383,12 +447,44 @@ func (o *SweepConfigurationV2) HasTargetAmount() bool {
 }
 
 // SetTargetAmount gets a reference to the given Amount and assigns it to the TargetAmount field.
-func (o *SweepConfigurationV2) SetTargetAmount(v Amount) {
+func (o *UpdateSweepConfigurationV2) SetTargetAmount(v Amount) {
 	o.TargetAmount = &v
 }
 
+// GetTransferInstrumentId returns the TransferInstrumentId field value if set, zero value otherwise.
+func (o *UpdateSweepConfigurationV2) GetTransferInstrumentId() string {
+	if o == nil || common.IsNil(o.TransferInstrumentId) {
+		var ret string
+		return ret
+	}
+	return *o.TransferInstrumentId
+}
+
+// GetTransferInstrumentIdOk returns a tuple with the TransferInstrumentId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateSweepConfigurationV2) GetTransferInstrumentIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.TransferInstrumentId) {
+		return nil, false
+	}
+	return o.TransferInstrumentId, true
+}
+
+// HasTransferInstrumentId returns a boolean if a field has been set.
+func (o *UpdateSweepConfigurationV2) HasTransferInstrumentId() bool {
+	if o != nil && !common.IsNil(o.TransferInstrumentId) {
+		return true
+	}
+
+	return false
+}
+
+// SetTransferInstrumentId gets a reference to the given string and assigns it to the TransferInstrumentId field.
+func (o *UpdateSweepConfigurationV2) SetTransferInstrumentId(v string) {
+	o.TransferInstrumentId = &v
+}
+
 // GetTriggerAmount returns the TriggerAmount field value if set, zero value otherwise.
-func (o *SweepConfigurationV2) GetTriggerAmount() Amount {
+func (o *UpdateSweepConfigurationV2) GetTriggerAmount() Amount {
 	if o == nil || common.IsNil(o.TriggerAmount) {
 		var ret Amount
 		return ret
@@ -398,7 +494,7 @@ func (o *SweepConfigurationV2) GetTriggerAmount() Amount {
 
 // GetTriggerAmountOk returns a tuple with the TriggerAmount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SweepConfigurationV2) GetTriggerAmountOk() (*Amount, bool) {
+func (o *UpdateSweepConfigurationV2) GetTriggerAmountOk() (*Amount, bool) {
 	if o == nil || common.IsNil(o.TriggerAmount) {
 		return nil, false
 	}
@@ -406,7 +502,7 @@ func (o *SweepConfigurationV2) GetTriggerAmountOk() (*Amount, bool) {
 }
 
 // HasTriggerAmount returns a boolean if a field has been set.
-func (o *SweepConfigurationV2) HasTriggerAmount() bool {
+func (o *UpdateSweepConfigurationV2) HasTriggerAmount() bool {
 	if o != nil && !common.IsNil(o.TriggerAmount) {
 		return true
 	}
@@ -415,12 +511,12 @@ func (o *SweepConfigurationV2) HasTriggerAmount() bool {
 }
 
 // SetTriggerAmount gets a reference to the given Amount and assigns it to the TriggerAmount field.
-func (o *SweepConfigurationV2) SetTriggerAmount(v Amount) {
+func (o *UpdateSweepConfigurationV2) SetTriggerAmount(v Amount) {
 	o.TriggerAmount = &v
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
-func (o *SweepConfigurationV2) GetType() string {
+func (o *UpdateSweepConfigurationV2) GetType() string {
 	if o == nil || common.IsNil(o.Type) {
 		var ret string
 		return ret
@@ -430,7 +526,7 @@ func (o *SweepConfigurationV2) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SweepConfigurationV2) GetTypeOk() (*string, bool) {
+func (o *UpdateSweepConfigurationV2) GetTypeOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Type) {
 		return nil, false
 	}
@@ -438,7 +534,7 @@ func (o *SweepConfigurationV2) GetTypeOk() (*string, bool) {
 }
 
 // HasType returns a boolean if a field has been set.
-func (o *SweepConfigurationV2) HasType() bool {
+func (o *UpdateSweepConfigurationV2) HasType() bool {
 	if o != nil && !common.IsNil(o.Type) {
 		return true
 	}
@@ -447,11 +543,11 @@ func (o *SweepConfigurationV2) HasType() bool {
 }
 
 // SetType gets a reference to the given string and assigns it to the Type field.
-func (o *SweepConfigurationV2) SetType(v string) {
+func (o *UpdateSweepConfigurationV2) SetType(v string) {
 	o.Type = &v
 }
 
-func (o SweepConfigurationV2) MarshalJSON() ([]byte, error) {
+func (o UpdateSweepConfigurationV2) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -459,24 +555,35 @@ func (o SweepConfigurationV2) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SweepConfigurationV2) ToMap() (map[string]interface{}, error) {
+func (o UpdateSweepConfigurationV2) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.BalanceAccountId) {
+		toSerialize["balanceAccountId"] = o.BalanceAccountId
+	}
 	if !common.IsNil(o.Category) {
 		toSerialize["category"] = o.Category
 	}
-	toSerialize["counterparty"] = o.Counterparty
-	toSerialize["currency"] = o.Currency
+	if !common.IsNil(o.Counterparty) {
+		toSerialize["counterparty"] = o.Counterparty
+	}
+	if !common.IsNil(o.Currency) {
+		toSerialize["currency"] = o.Currency
+	}
 	if !common.IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	toSerialize["id"] = o.Id
+	if !common.IsNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
 	if !common.IsNil(o.Priorities) {
 		toSerialize["priorities"] = o.Priorities
 	}
 	if !common.IsNil(o.Reason) {
 		toSerialize["reason"] = o.Reason
 	}
-	toSerialize["schedule"] = o.Schedule
+	if !common.IsNil(o.Schedule) {
+		toSerialize["schedule"] = o.Schedule
+	}
 	if !common.IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
@@ -485,6 +592,9 @@ func (o SweepConfigurationV2) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.TargetAmount) {
 		toSerialize["targetAmount"] = o.TargetAmount
+	}
+	if !common.IsNil(o.TransferInstrumentId) {
+		toSerialize["transferInstrumentId"] = o.TransferInstrumentId
 	}
 	if !common.IsNil(o.TriggerAmount) {
 		toSerialize["triggerAmount"] = o.TriggerAmount
@@ -495,43 +605,43 @@ func (o SweepConfigurationV2) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableSweepConfigurationV2 struct {
-	value *SweepConfigurationV2
+type NullableUpdateSweepConfigurationV2 struct {
+	value *UpdateSweepConfigurationV2
 	isSet bool
 }
 
-func (v NullableSweepConfigurationV2) Get() *SweepConfigurationV2 {
+func (v NullableUpdateSweepConfigurationV2) Get() *UpdateSweepConfigurationV2 {
 	return v.value
 }
 
-func (v *NullableSweepConfigurationV2) Set(val *SweepConfigurationV2) {
+func (v *NullableUpdateSweepConfigurationV2) Set(val *UpdateSweepConfigurationV2) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableSweepConfigurationV2) IsSet() bool {
+func (v NullableUpdateSweepConfigurationV2) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableSweepConfigurationV2) Unset() {
+func (v *NullableUpdateSweepConfigurationV2) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableSweepConfigurationV2(val *SweepConfigurationV2) *NullableSweepConfigurationV2 {
-	return &NullableSweepConfigurationV2{value: val, isSet: true}
+func NewNullableUpdateSweepConfigurationV2(val *UpdateSweepConfigurationV2) *NullableUpdateSweepConfigurationV2 {
+	return &NullableUpdateSweepConfigurationV2{value: val, isSet: true}
 }
 
-func (v NullableSweepConfigurationV2) MarshalJSON() ([]byte, error) {
+func (v NullableUpdateSweepConfigurationV2) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableSweepConfigurationV2) UnmarshalJSON(src []byte) error {
+func (v *NullableUpdateSweepConfigurationV2) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
 
-func (o *SweepConfigurationV2) isValidCategory() bool {
+func (o *UpdateSweepConfigurationV2) isValidCategory() bool {
 	var allowedEnumValues = []string{"bank", "internal", "platformPayment"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetCategory() == allowed {
@@ -540,7 +650,7 @@ func (o *SweepConfigurationV2) isValidCategory() bool {
 	}
 	return false
 }
-func (o *SweepConfigurationV2) isValidReason() bool {
+func (o *UpdateSweepConfigurationV2) isValidReason() bool {
 	var allowedEnumValues = []string{"amountLimitExceeded", "approved", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "error", "notEnoughBalance", "refusedByCounterpartyBank", "routeNotFound", "unknown"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetReason() == allowed {
@@ -549,7 +659,7 @@ func (o *SweepConfigurationV2) isValidReason() bool {
 	}
 	return false
 }
-func (o *SweepConfigurationV2) isValidStatus() bool {
+func (o *UpdateSweepConfigurationV2) isValidStatus() bool {
 	var allowedEnumValues = []string{"active", "inactive"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetStatus() == allowed {
@@ -558,7 +668,7 @@ func (o *SweepConfigurationV2) isValidStatus() bool {
 	}
 	return false
 }
-func (o *SweepConfigurationV2) isValidType() bool {
+func (o *UpdateSweepConfigurationV2) isValidType() bool {
 	var allowedEnumValues = []string{"pull", "push"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {

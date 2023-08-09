@@ -16,11 +16,15 @@ import (
 // BankAccountIdentificationValidationRequestAccountIdentification - Bank account identification.
 type BankAccountIdentificationValidationRequestAccountIdentification struct {
 	AULocalAccountIdentification      *AULocalAccountIdentification
+	BRLocalAccountIdentification      *BRLocalAccountIdentification
 	CALocalAccountIdentification      *CALocalAccountIdentification
 	CZLocalAccountIdentification      *CZLocalAccountIdentification
+	DKLocalAccountIdentification      *DKLocalAccountIdentification
+	HKLocalAccountIdentification      *HKLocalAccountIdentification
 	HULocalAccountIdentification      *HULocalAccountIdentification
 	IbanAccountIdentification         *IbanAccountIdentification
 	NOLocalAccountIdentification      *NOLocalAccountIdentification
+	NZLocalAccountIdentification      *NZLocalAccountIdentification
 	NumberAndBicAccountIdentification *NumberAndBicAccountIdentification
 	PLLocalAccountIdentification      *PLLocalAccountIdentification
 	SELocalAccountIdentification      *SELocalAccountIdentification
@@ -36,6 +40,13 @@ func AULocalAccountIdentificationAsBankAccountIdentificationValidationRequestAcc
 	}
 }
 
+// BRLocalAccountIdentificationAsBankAccountIdentificationValidationRequestAccountIdentification is a convenience function that returns BRLocalAccountIdentification wrapped in BankAccountIdentificationValidationRequestAccountIdentification
+func BRLocalAccountIdentificationAsBankAccountIdentificationValidationRequestAccountIdentification(v *BRLocalAccountIdentification) BankAccountIdentificationValidationRequestAccountIdentification {
+	return BankAccountIdentificationValidationRequestAccountIdentification{
+		BRLocalAccountIdentification: v,
+	}
+}
+
 // CALocalAccountIdentificationAsBankAccountIdentificationValidationRequestAccountIdentification is a convenience function that returns CALocalAccountIdentification wrapped in BankAccountIdentificationValidationRequestAccountIdentification
 func CALocalAccountIdentificationAsBankAccountIdentificationValidationRequestAccountIdentification(v *CALocalAccountIdentification) BankAccountIdentificationValidationRequestAccountIdentification {
 	return BankAccountIdentificationValidationRequestAccountIdentification{
@@ -47,6 +58,20 @@ func CALocalAccountIdentificationAsBankAccountIdentificationValidationRequestAcc
 func CZLocalAccountIdentificationAsBankAccountIdentificationValidationRequestAccountIdentification(v *CZLocalAccountIdentification) BankAccountIdentificationValidationRequestAccountIdentification {
 	return BankAccountIdentificationValidationRequestAccountIdentification{
 		CZLocalAccountIdentification: v,
+	}
+}
+
+// DKLocalAccountIdentificationAsBankAccountIdentificationValidationRequestAccountIdentification is a convenience function that returns DKLocalAccountIdentification wrapped in BankAccountIdentificationValidationRequestAccountIdentification
+func DKLocalAccountIdentificationAsBankAccountIdentificationValidationRequestAccountIdentification(v *DKLocalAccountIdentification) BankAccountIdentificationValidationRequestAccountIdentification {
+	return BankAccountIdentificationValidationRequestAccountIdentification{
+		DKLocalAccountIdentification: v,
+	}
+}
+
+// HKLocalAccountIdentificationAsBankAccountIdentificationValidationRequestAccountIdentification is a convenience function that returns HKLocalAccountIdentification wrapped in BankAccountIdentificationValidationRequestAccountIdentification
+func HKLocalAccountIdentificationAsBankAccountIdentificationValidationRequestAccountIdentification(v *HKLocalAccountIdentification) BankAccountIdentificationValidationRequestAccountIdentification {
+	return BankAccountIdentificationValidationRequestAccountIdentification{
+		HKLocalAccountIdentification: v,
 	}
 }
 
@@ -68,6 +93,13 @@ func IbanAccountIdentificationAsBankAccountIdentificationValidationRequestAccoun
 func NOLocalAccountIdentificationAsBankAccountIdentificationValidationRequestAccountIdentification(v *NOLocalAccountIdentification) BankAccountIdentificationValidationRequestAccountIdentification {
 	return BankAccountIdentificationValidationRequestAccountIdentification{
 		NOLocalAccountIdentification: v,
+	}
+}
+
+// NZLocalAccountIdentificationAsBankAccountIdentificationValidationRequestAccountIdentification is a convenience function that returns NZLocalAccountIdentification wrapped in BankAccountIdentificationValidationRequestAccountIdentification
+func NZLocalAccountIdentificationAsBankAccountIdentificationValidationRequestAccountIdentification(v *NZLocalAccountIdentification) BankAccountIdentificationValidationRequestAccountIdentification {
+	return BankAccountIdentificationValidationRequestAccountIdentification{
+		NZLocalAccountIdentification: v,
 	}
 }
 
@@ -130,6 +162,19 @@ func (dst *BankAccountIdentificationValidationRequestAccountIdentification) Unma
 		dst.AULocalAccountIdentification = nil
 	}
 
+	// try to unmarshal data into BRLocalAccountIdentification
+	err = json.Unmarshal(data, &dst.BRLocalAccountIdentification)
+	if err == nil {
+		jsonBRLocalAccountIdentification, _ := json.Marshal(dst.BRLocalAccountIdentification)
+		if string(jsonBRLocalAccountIdentification) == "{}" || !dst.BRLocalAccountIdentification.isValidType() { // empty struct
+			dst.BRLocalAccountIdentification = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.BRLocalAccountIdentification = nil
+	}
+
 	// try to unmarshal data into CALocalAccountIdentification
 	err = json.Unmarshal(data, &dst.CALocalAccountIdentification)
 	if err == nil {
@@ -154,6 +199,32 @@ func (dst *BankAccountIdentificationValidationRequestAccountIdentification) Unma
 		}
 	} else {
 		dst.CZLocalAccountIdentification = nil
+	}
+
+	// try to unmarshal data into DKLocalAccountIdentification
+	err = json.Unmarshal(data, &dst.DKLocalAccountIdentification)
+	if err == nil {
+		jsonDKLocalAccountIdentification, _ := json.Marshal(dst.DKLocalAccountIdentification)
+		if string(jsonDKLocalAccountIdentification) == "{}" || !dst.DKLocalAccountIdentification.isValidType() { // empty struct
+			dst.DKLocalAccountIdentification = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.DKLocalAccountIdentification = nil
+	}
+
+	// try to unmarshal data into HKLocalAccountIdentification
+	err = json.Unmarshal(data, &dst.HKLocalAccountIdentification)
+	if err == nil {
+		jsonHKLocalAccountIdentification, _ := json.Marshal(dst.HKLocalAccountIdentification)
+		if string(jsonHKLocalAccountIdentification) == "{}" || !dst.HKLocalAccountIdentification.isValidType() { // empty struct
+			dst.HKLocalAccountIdentification = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.HKLocalAccountIdentification = nil
 	}
 
 	// try to unmarshal data into HULocalAccountIdentification
@@ -193,6 +264,19 @@ func (dst *BankAccountIdentificationValidationRequestAccountIdentification) Unma
 		}
 	} else {
 		dst.NOLocalAccountIdentification = nil
+	}
+
+	// try to unmarshal data into NZLocalAccountIdentification
+	err = json.Unmarshal(data, &dst.NZLocalAccountIdentification)
+	if err == nil {
+		jsonNZLocalAccountIdentification, _ := json.Marshal(dst.NZLocalAccountIdentification)
+		if string(jsonNZLocalAccountIdentification) == "{}" || !dst.NZLocalAccountIdentification.isValidType() { // empty struct
+			dst.NZLocalAccountIdentification = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.NZLocalAccountIdentification = nil
 	}
 
 	// try to unmarshal data into NumberAndBicAccountIdentification
@@ -276,11 +360,15 @@ func (dst *BankAccountIdentificationValidationRequestAccountIdentification) Unma
 	if match > 1 { // more than 1 match
 		// reset to nil
 		dst.AULocalAccountIdentification = nil
+		dst.BRLocalAccountIdentification = nil
 		dst.CALocalAccountIdentification = nil
 		dst.CZLocalAccountIdentification = nil
+		dst.DKLocalAccountIdentification = nil
+		dst.HKLocalAccountIdentification = nil
 		dst.HULocalAccountIdentification = nil
 		dst.IbanAccountIdentification = nil
 		dst.NOLocalAccountIdentification = nil
+		dst.NZLocalAccountIdentification = nil
 		dst.NumberAndBicAccountIdentification = nil
 		dst.PLLocalAccountIdentification = nil
 		dst.SELocalAccountIdentification = nil
@@ -302,12 +390,24 @@ func (src BankAccountIdentificationValidationRequestAccountIdentification) Marsh
 		return json.Marshal(&src.AULocalAccountIdentification)
 	}
 
+	if src.BRLocalAccountIdentification != nil {
+		return json.Marshal(&src.BRLocalAccountIdentification)
+	}
+
 	if src.CALocalAccountIdentification != nil {
 		return json.Marshal(&src.CALocalAccountIdentification)
 	}
 
 	if src.CZLocalAccountIdentification != nil {
 		return json.Marshal(&src.CZLocalAccountIdentification)
+	}
+
+	if src.DKLocalAccountIdentification != nil {
+		return json.Marshal(&src.DKLocalAccountIdentification)
+	}
+
+	if src.HKLocalAccountIdentification != nil {
+		return json.Marshal(&src.HKLocalAccountIdentification)
 	}
 
 	if src.HULocalAccountIdentification != nil {
@@ -320,6 +420,10 @@ func (src BankAccountIdentificationValidationRequestAccountIdentification) Marsh
 
 	if src.NOLocalAccountIdentification != nil {
 		return json.Marshal(&src.NOLocalAccountIdentification)
+	}
+
+	if src.NZLocalAccountIdentification != nil {
+		return json.Marshal(&src.NZLocalAccountIdentification)
 	}
 
 	if src.NumberAndBicAccountIdentification != nil {
@@ -358,12 +462,24 @@ func (obj *BankAccountIdentificationValidationRequestAccountIdentification) GetA
 		return obj.AULocalAccountIdentification
 	}
 
+	if obj.BRLocalAccountIdentification != nil {
+		return obj.BRLocalAccountIdentification
+	}
+
 	if obj.CALocalAccountIdentification != nil {
 		return obj.CALocalAccountIdentification
 	}
 
 	if obj.CZLocalAccountIdentification != nil {
 		return obj.CZLocalAccountIdentification
+	}
+
+	if obj.DKLocalAccountIdentification != nil {
+		return obj.DKLocalAccountIdentification
+	}
+
+	if obj.HKLocalAccountIdentification != nil {
+		return obj.HKLocalAccountIdentification
 	}
 
 	if obj.HULocalAccountIdentification != nil {
@@ -376,6 +492,10 @@ func (obj *BankAccountIdentificationValidationRequestAccountIdentification) GetA
 
 	if obj.NOLocalAccountIdentification != nil {
 		return obj.NOLocalAccountIdentification
+	}
+
+	if obj.NZLocalAccountIdentification != nil {
+		return obj.NZLocalAccountIdentification
 	}
 
 	if obj.NumberAndBicAccountIdentification != nil {
