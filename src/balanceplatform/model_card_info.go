@@ -22,7 +22,7 @@ type CardInfo struct {
 	Authentication *Authentication `json:"authentication,omitempty"`
 	// The brand of the physical or the virtual card. Possible values: **visa**, **mc**.
 	Brand string `json:"brand"`
-	// The brand variant of the physical or the virtual card. >Contact your Adyen Implementation Manager to get the values that are relevant to your integration. Examples: **visadebit**, **mcprepaid**.
+	// The brand variant of the physical or the virtual card. For example, **visadebit** or **mcprepaid**. >Reach out to your Adyen contact to get the values relevant for your integration.
 	BrandVariant string `json:"brandVariant"`
 	// The name of the cardholder.  Maximum length: 26 characters.
 	CardholderName  string             `json:"cardholderName"`
@@ -30,6 +30,8 @@ type CardInfo struct {
 	DeliveryContact *DeliveryContact   `json:"deliveryContact,omitempty"`
 	// The form factor of the card. Possible values: **virtual**, **physical**.
 	FormFactor string `json:"formFactor"`
+	// Allocates a specific product range for either a physical or a virtual card. Possible values: **fullySecure**, **secureCorporate**. >Reach out to your Adyen contact to get the values relevant for your integration.
+	ThreeDSecure *string `json:"threeDSecure,omitempty"`
 }
 
 // NewCardInfo instantiates a new CardInfo object
@@ -245,6 +247,38 @@ func (o *CardInfo) SetFormFactor(v string) {
 	o.FormFactor = v
 }
 
+// GetThreeDSecure returns the ThreeDSecure field value if set, zero value otherwise.
+func (o *CardInfo) GetThreeDSecure() string {
+	if o == nil || common.IsNil(o.ThreeDSecure) {
+		var ret string
+		return ret
+	}
+	return *o.ThreeDSecure
+}
+
+// GetThreeDSecureOk returns a tuple with the ThreeDSecure field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CardInfo) GetThreeDSecureOk() (*string, bool) {
+	if o == nil || common.IsNil(o.ThreeDSecure) {
+		return nil, false
+	}
+	return o.ThreeDSecure, true
+}
+
+// HasThreeDSecure returns a boolean if a field has been set.
+func (o *CardInfo) HasThreeDSecure() bool {
+	if o != nil && !common.IsNil(o.ThreeDSecure) {
+		return true
+	}
+
+	return false
+}
+
+// SetThreeDSecure gets a reference to the given string and assigns it to the ThreeDSecure field.
+func (o *CardInfo) SetThreeDSecure(v string) {
+	o.ThreeDSecure = &v
+}
+
 func (o CardInfo) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -268,6 +302,9 @@ func (o CardInfo) ToMap() (map[string]interface{}, error) {
 		toSerialize["deliveryContact"] = o.DeliveryContact
 	}
 	toSerialize["formFactor"] = o.FormFactor
+	if !common.IsNil(o.ThreeDSecure) {
+		toSerialize["threeDSecure"] = o.ThreeDSecure
+	}
 	return toSerialize, nil
 }
 

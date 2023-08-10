@@ -326,12 +326,12 @@ func (a *AccountHoldersApi) GetAllBalanceAccountsOfAccountHolder(ctx context.Con
 
 // All parameters accepted by AccountHoldersApi.UpdateAccountHolder
 type AccountHoldersApiUpdateAccountHolderInput struct {
-	id            string
-	accountHolder *AccountHolder
+	id                         string
+	accountHolderUpdateRequest *AccountHolderUpdateRequest
 }
 
-func (r AccountHoldersApiUpdateAccountHolderInput) AccountHolder(accountHolder AccountHolder) AccountHoldersApiUpdateAccountHolderInput {
-	r.accountHolder = &accountHolder
+func (r AccountHoldersApiUpdateAccountHolderInput) AccountHolderUpdateRequest(accountHolderUpdateRequest AccountHolderUpdateRequest) AccountHoldersApiUpdateAccountHolderInput {
+	r.accountHolderUpdateRequest = &accountHolderUpdateRequest
 	return r
 }
 
@@ -364,7 +364,7 @@ func (a *AccountHoldersApi) UpdateAccountHolder(ctx context.Context, r AccountHo
 	httpRes, err := common.SendAPIRequest(
 		ctx,
 		a.Client,
-		r.accountHolder,
+		r.accountHolderUpdateRequest,
 		res,
 		http.MethodPatch,
 		a.BasePath()+path,

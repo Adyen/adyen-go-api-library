@@ -47,10 +47,10 @@ Validates bank account identification details. You can use this endpoint to vali
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r BankAccountValidationApiValidateBankAccountIdentificationInput - Request parameters, see ValidateBankAccountIdentificationInput
-@return map[string]interface{}, *http.Response, error
+@return *http.Response, error
 */
-func (a *BankAccountValidationApi) ValidateBankAccountIdentification(ctx context.Context, r BankAccountValidationApiValidateBankAccountIdentificationInput) (map[string]interface{}, *http.Response, error) {
-	res := &map[string]interface{}{}
+func (a *BankAccountValidationApi) ValidateBankAccountIdentification(ctx context.Context, r BankAccountValidationApiValidateBankAccountIdentificationInput) (*http.Response, error) {
+	var res interface{}
 	path := "/validateBankAccountIdentification"
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
@@ -71,37 +71,37 @@ func (a *BankAccountValidationApi) ValidateBankAccountIdentification(ctx context
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
-			return *res, httpRes, decodeError
+			return httpRes, decodeError
 		}
-		return *res, httpRes, serviceError
+		return httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
-			return *res, httpRes, decodeError
+			return httpRes, decodeError
 		}
-		return *res, httpRes, serviceError
+		return httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
-			return *res, httpRes, decodeError
+			return httpRes, decodeError
 		}
-		return *res, httpRes, serviceError
+		return httpRes, serviceError
 	}
 
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
-			return *res, httpRes, decodeError
+			return httpRes, decodeError
 		}
-		return *res, httpRes, serviceError
+		return httpRes, serviceError
 	}
 
-	return *res, httpRes, err
+	return httpRes, err
 }

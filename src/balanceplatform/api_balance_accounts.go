@@ -241,7 +241,7 @@ Deletes a sweep for a balance account.
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r BalanceAccountsApiDeleteSweepInput - Request parameters, see DeleteSweepInput
-@return , *http.Response, error
+@return *http.Response, error
 */
 func (a *BalanceAccountsApi) DeleteSweep(ctx context.Context, r BalanceAccountsApiDeleteSweepInput) (*http.Response, error) {
 	var res interface{}
@@ -826,13 +826,13 @@ func (a *BalanceAccountsApi) UpdateBalanceAccount(ctx context.Context, r Balance
 
 // All parameters accepted by BalanceAccountsApi.UpdateSweep
 type BalanceAccountsApiUpdateSweepInput struct {
-	balanceAccountId     string
-	sweepId              string
-	sweepConfigurationV2 *SweepConfigurationV2
+	balanceAccountId           string
+	sweepId                    string
+	updateSweepConfigurationV2 *UpdateSweepConfigurationV2
 }
 
-func (r BalanceAccountsApiUpdateSweepInput) SweepConfigurationV2(sweepConfigurationV2 SweepConfigurationV2) BalanceAccountsApiUpdateSweepInput {
-	r.sweepConfigurationV2 = &sweepConfigurationV2
+func (r BalanceAccountsApiUpdateSweepInput) UpdateSweepConfigurationV2(updateSweepConfigurationV2 UpdateSweepConfigurationV2) BalanceAccountsApiUpdateSweepInput {
+	r.updateSweepConfigurationV2 = &updateSweepConfigurationV2
 	return r
 }
 
@@ -867,7 +867,7 @@ func (a *BalanceAccountsApi) UpdateSweep(ctx context.Context, r BalanceAccountsA
 	httpRes, err := common.SendAPIRequest(
 		ctx,
 		a.Client,
-		r.sweepConfigurationV2,
+		r.updateSweepConfigurationV2,
 		res,
 		http.MethodPatch,
 		a.BasePath()+path,
