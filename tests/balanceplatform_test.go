@@ -2,6 +2,7 @@ package tests
 
 import (
 	"context"
+	"errors"
 	"github.com/adyen/adyen-go-api-library/v7/src/adyen"
 	"github.com/adyen/adyen-go-api-library/v7/src/balanceplatform"
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
@@ -25,7 +26,7 @@ func Test_BalancePlatform(t *testing.T) {
 	mux := http.NewServeMux()
 	// Success case
 	mux.HandleFunc("/accountHolders/123", func(w http.ResponseWriter, r *http.Request) {
-		require.Equal(t, "GET", r.Method)
+		assert.Contains(t, [2]string{"GET", "PATCH"}, r.Method)
 		w.Header().Set("Content-Type", "application/json")
 		file, _ := os.Open("fixtures/account_holder.json")
 		io.Copy(w, file)
@@ -42,6 +43,12 @@ func Test_BalancePlatform(t *testing.T) {
 		require.Equal(t, "DELETE", r.Method)
 		w.WriteHeader(http.StatusNoContent)
 		// poof!
+	})
+	mux.HandleFunc("/balanceAccounts/BA123/sweeps/SWPC123", func(w http.ResponseWriter, r *http.Request) {
+		assert.Contains(t, [2]string{"GET", "PATCH"}, r.Method)
+		w.Header().Set("Content-Type", "application/json")
+		file, _ := os.Open("fixtures/sweep.json")
+		io.Copy(w, file)
 	})
 	mux.HandleFunc("/transactionRules/transactionRuleId", func(w http.ResponseWriter, r *http.Request) {
 		require.Equal(t, "DELETE", r.Method)
@@ -91,6 +98,20 @@ func Test_BalancePlatform(t *testing.T) {
 		assert.Equal(t, "active", *res.Status)
 	})
 
+	t.Run("Update account holder", func(t *testing.T) {
+		req := service.AccountHoldersApi.UpdateAccountHolderInput("123")
+
+		req = req.AccountHolderUpdateRequest(balanceplatform.AccountHolderUpdateRequest{
+			Status: common.PtrString("closed"),
+		})
+
+		res, httpRes, err := service.AccountHoldersApi.UpdateAccountHolder(context.Background(), req)
+
+		assert.Equal(t, 200, httpRes.StatusCode)
+		require.NoError(t, err)
+		assert.Equal(t, "YOUR_BALANCE_PLATFORM", res.GetBalancePlatform())
+	})
+
 	t.Run("Get all balance accounts of an account holder", func(t *testing.T) {
 		req := service.AccountHoldersApi.GetAllBalanceAccountsOfAccountHolderInput("123")
 		req = req.Offset(42).Limit(5)
@@ -112,11 +133,40 @@ func Test_BalancePlatform(t *testing.T) {
 
 		_, _, err := service.PaymentInstrumentsApi.UpdatePaymentInstrument(context.Background(), req)
 
-		serviceError := err.(common.RestServiceError)
+		var serviceError common.RestServiceError
+		errors.As(err, &serviceError)
 		assert.Equal(t, int32(422), serviceError.Status)
 		assert.Equal(t, "30_112", serviceError.GetErrorCode())
 		assert.Equal(t, "Entity was not found", serviceError.GetTitle())
 		assert.Equal(t, "Payment instrument not found", serviceError.GetDetail())
+	})
+
+	t.Run("Get a sweep", func(t *testing.T) {
+		req := service.BalanceAccountsApi.GetSweepInput("BA123", "SWPC123")
+
+		res, httpRes, err := service.BalanceAccountsApi.GetSweep(context.Background(), req)
+
+		assert.Equal(t, 200, httpRes.StatusCode)
+		assert.NoError(t, err)
+		assert.Equal(t, "active", res.GetStatus())
+	})
+
+	t.Run("Update a sweep", func(t *testing.T) {
+		req := service.BalanceAccountsApi.UpdateSweepInput("BA123", "SWPC123")
+
+		cron := balanceplatform.NewSweepSchedule("cron")
+		cron.SetCronExpression("6 6 6 6 6")
+		req = req.UpdateSweepConfigurationV2(balanceplatform.UpdateSweepConfigurationV2{
+			Schedule:    cron,
+			Description: common.PtrString("Let's Go!"),
+		})
+
+		res, httpRes, err := service.BalanceAccountsApi.UpdateSweep(context.Background(), req)
+
+		assert.Equal(t, 200, httpRes.StatusCode)
+		assert.NoError(t, err)
+		assert.Equal(t, "cron", res.Schedule.Type)
+		assert.Equal(t, "6 6 6 6 6", *res.Schedule.CronExpression)
 	})
 
 	t.Run("Delete a sweep", func(t *testing.T) {

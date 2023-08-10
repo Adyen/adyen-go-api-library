@@ -19,8 +19,6 @@ var _ common.MappedNullable = &UpdateSweepConfigurationV2{}
 
 // UpdateSweepConfigurationV2 struct for UpdateSweepConfigurationV2
 type UpdateSweepConfigurationV2 struct {
-	// The unique identifier of the destination or source [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id).   You can only use this for periodic sweep schedules such as `schedule.type` **daily** or **monthly**.
-	BalanceAccountId *string `json:"balanceAccountId,omitempty"`
 	// The type of transfer that results from the sweep.  Possible values:   - **bank**: Sweep to a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id).  - **internal**: Transfer to another [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id) within your platform.  Required when setting `priorities`.
 	Category     *string            `json:"category,omitempty"`
 	Counterparty *SweepCounterparty `json:"counterparty,omitempty"`
@@ -36,12 +34,10 @@ type UpdateSweepConfigurationV2 struct {
 	Reason   *string        `json:"reason,omitempty"`
 	Schedule *SweepSchedule `json:"schedule,omitempty"`
 	// The status of the sweep. If not provided, by default, this is set to **active**.  Possible values:    * **active**:  the sweep is enabled and funds will be pulled in or pushed out based on the defined configuration.    * **inactive**: the sweep is disabled and cannot be triggered.
-	Status       *string `json:"status,omitempty"`
-	SweepAmount  *Amount `json:"sweepAmount,omitempty"`
-	TargetAmount *Amount `json:"targetAmount,omitempty"`
-	// The unique identifier of the destination or source [transfer instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/transferInstruments__resParam_id).  You can also use this in combination with a `merchantAccount` and a `type` **pull** to start a direct debit request from the source transfer instrument. To use this feature, reach out to your Adyen contact.
-	TransferInstrumentId *string `json:"transferInstrumentId,omitempty"`
-	TriggerAmount        *Amount `json:"triggerAmount,omitempty"`
+	Status        *string `json:"status,omitempty"`
+	SweepAmount   *Amount `json:"sweepAmount,omitempty"`
+	TargetAmount  *Amount `json:"targetAmount,omitempty"`
+	TriggerAmount *Amount `json:"triggerAmount,omitempty"`
 	// The direction of sweep, whether pushing out or pulling in funds to the balance account. If not provided, by default, this is set to **push**.  Possible values:   * **push**: _push out funds_ to a destination balance account or transfer instrument.   * **pull**: _pull in funds_ from a source merchant account, transfer instrument, or balance account.
 	Type *string `json:"type,omitempty"`
 }
@@ -65,38 +61,6 @@ func NewUpdateSweepConfigurationV2WithDefaults() *UpdateSweepConfigurationV2 {
 	var type_ string = "push"
 	this.Type = &type_
 	return &this
-}
-
-// GetBalanceAccountId returns the BalanceAccountId field value if set, zero value otherwise.
-func (o *UpdateSweepConfigurationV2) GetBalanceAccountId() string {
-	if o == nil || common.IsNil(o.BalanceAccountId) {
-		var ret string
-		return ret
-	}
-	return *o.BalanceAccountId
-}
-
-// GetBalanceAccountIdOk returns a tuple with the BalanceAccountId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateSweepConfigurationV2) GetBalanceAccountIdOk() (*string, bool) {
-	if o == nil || common.IsNil(o.BalanceAccountId) {
-		return nil, false
-	}
-	return o.BalanceAccountId, true
-}
-
-// HasBalanceAccountId returns a boolean if a field has been set.
-func (o *UpdateSweepConfigurationV2) HasBalanceAccountId() bool {
-	if o != nil && !common.IsNil(o.BalanceAccountId) {
-		return true
-	}
-
-	return false
-}
-
-// SetBalanceAccountId gets a reference to the given string and assigns it to the BalanceAccountId field.
-func (o *UpdateSweepConfigurationV2) SetBalanceAccountId(v string) {
-	o.BalanceAccountId = &v
 }
 
 // GetCategory returns the Category field value if set, zero value otherwise.
@@ -451,38 +415,6 @@ func (o *UpdateSweepConfigurationV2) SetTargetAmount(v Amount) {
 	o.TargetAmount = &v
 }
 
-// GetTransferInstrumentId returns the TransferInstrumentId field value if set, zero value otherwise.
-func (o *UpdateSweepConfigurationV2) GetTransferInstrumentId() string {
-	if o == nil || common.IsNil(o.TransferInstrumentId) {
-		var ret string
-		return ret
-	}
-	return *o.TransferInstrumentId
-}
-
-// GetTransferInstrumentIdOk returns a tuple with the TransferInstrumentId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateSweepConfigurationV2) GetTransferInstrumentIdOk() (*string, bool) {
-	if o == nil || common.IsNil(o.TransferInstrumentId) {
-		return nil, false
-	}
-	return o.TransferInstrumentId, true
-}
-
-// HasTransferInstrumentId returns a boolean if a field has been set.
-func (o *UpdateSweepConfigurationV2) HasTransferInstrumentId() bool {
-	if o != nil && !common.IsNil(o.TransferInstrumentId) {
-		return true
-	}
-
-	return false
-}
-
-// SetTransferInstrumentId gets a reference to the given string and assigns it to the TransferInstrumentId field.
-func (o *UpdateSweepConfigurationV2) SetTransferInstrumentId(v string) {
-	o.TransferInstrumentId = &v
-}
-
 // GetTriggerAmount returns the TriggerAmount field value if set, zero value otherwise.
 func (o *UpdateSweepConfigurationV2) GetTriggerAmount() Amount {
 	if o == nil || common.IsNil(o.TriggerAmount) {
@@ -557,9 +489,6 @@ func (o UpdateSweepConfigurationV2) MarshalJSON() ([]byte, error) {
 
 func (o UpdateSweepConfigurationV2) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !common.IsNil(o.BalanceAccountId) {
-		toSerialize["balanceAccountId"] = o.BalanceAccountId
-	}
 	if !common.IsNil(o.Category) {
 		toSerialize["category"] = o.Category
 	}
@@ -592,9 +521,6 @@ func (o UpdateSweepConfigurationV2) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.TargetAmount) {
 		toSerialize["targetAmount"] = o.TargetAmount
-	}
-	if !common.IsNil(o.TransferInstrumentId) {
-		toSerialize["transferInstrumentId"] = o.TransferInstrumentId
 	}
 	if !common.IsNil(o.TriggerAmount) {
 		toSerialize["triggerAmount"] = o.TriggerAmount
