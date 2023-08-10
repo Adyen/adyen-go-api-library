@@ -44,10 +44,10 @@ func Test_BalancePlatform(t *testing.T) {
 		w.WriteHeader(http.StatusNoContent)
 		// poof!
 	})
-    mux.HandleFunc("/validateBankAccountIdentification", func(w http.ResponseWriter, r *http.Request) {
-        require.Equal(t, "POST", r.Method)
-        // no response
-    })
+	mux.HandleFunc("/validateBankAccountIdentification", func(w http.ResponseWriter, r *http.Request) {
+		require.Equal(t, "POST", r.Method)
+		// no response
+	})
 	mux.HandleFunc("/balanceAccounts/BA123/sweeps/SWPC123", func(w http.ResponseWriter, r *http.Request) {
 		assert.Contains(t, [2]string{"GET", "PATCH"}, r.Method)
 		w.Header().Set("Content-Type", "application/json")
@@ -191,11 +191,11 @@ func Test_BalancePlatform(t *testing.T) {
 		assert.Equal(t, "myRule12345", res.GetReference())
 	})
 
-    t.Run("Validate a bank account", func(t *testing.T) {
-        req := service.BankAccountValidationApi.ValidateBankAccountIdentificationInput()
-        httpRes, err := service.BankAccountValidationApi.ValidateBankAccountIdentification(context.Background(), req)
+	t.Run("Validate a bank account", func(t *testing.T) {
+		req := service.BankAccountValidationApi.ValidateBankAccountIdentificationInput()
+		httpRes, err := service.BankAccountValidationApi.ValidateBankAccountIdentification(context.Background(), req)
 
-        assert.Equal(t, 200, httpRes.StatusCode)
-        assert.NoError(t, err)
-    })
+		assert.Equal(t, 200, httpRes.StatusCode)
+		assert.NoError(t, err)
+	})
 }
