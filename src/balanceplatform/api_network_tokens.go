@@ -134,7 +134,7 @@ Updates the status of the network token.
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r NetworkTokensApiUpdateNetworkTokenInput - Request parameters, see UpdateNetworkTokenInput
-@return , *http.Response, error
+@return *http.Response, error
 */
 func (a *NetworkTokensApi) UpdateNetworkToken(ctx context.Context, r NetworkTokensApiUpdateNetworkTokenInput) (*http.Response, error) {
 	var res interface{}

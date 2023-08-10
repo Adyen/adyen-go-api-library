@@ -47,7 +47,7 @@ Validates bank account identification details. You can use this endpoint to vali
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r BankAccountValidationApiValidateBankAccountIdentificationInput - Request parameters, see ValidateBankAccountIdentificationInput
-@return , *http.Response, error
+@return *http.Response, error
 */
 func (a *BankAccountValidationApi) ValidateBankAccountIdentification(ctx context.Context, r BankAccountValidationApiValidateBankAccountIdentificationInput) (*http.Response, error) {
 	var res interface{}

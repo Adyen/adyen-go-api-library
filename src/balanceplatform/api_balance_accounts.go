@@ -241,7 +241,7 @@ Deletes a sweep for a balance account.
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r BalanceAccountsApiDeleteSweepInput - Request parameters, see DeleteSweepInput
-@return , *http.Response, error
+@return *http.Response, error
 */
 func (a *BalanceAccountsApi) DeleteSweep(ctx context.Context, r BalanceAccountsApiDeleteSweepInput) (*http.Response, error) {
 	var res interface{}
