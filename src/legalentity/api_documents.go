@@ -43,7 +43,7 @@ Deletes a document.
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r DocumentsApiDeleteDocumentInput - Request parameters, see DeleteDocumentInput
-@return , *http.Response, error
+@return *http.Response, error
 */
 func (a *DocumentsApi) DeleteDocument(ctx context.Context, r DocumentsApiDeleteDocumentInput) (*http.Response, error) {
 	var res interface{}

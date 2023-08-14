@@ -84,9 +84,13 @@ type APIClient struct {
 	payout                             *payout.APIClient
 	recurring                          *recurring.GeneralApi
 	binLookup                          *binlookup.GeneralApi
+    // Deprecated: Please migrate to the new Adyen For Platforms.
 	platformsAccount                   *platformsaccount.PlatformsAccount
+    // Deprecated: Please migrate to the new Adyen For Platforms.
 	platformsFund                      *platformsfund.PlatformsFund
+    // Deprecated: Please migrate to the new Adyen For Platforms.
 	platformsHostedOnboardingPage      *platformshostedonboardingpage.PlatformsHostedOnboardingPage
+    // Deprecated: Please migrate to the new Adyen For Platforms.
 	platformsNotificationConfiguration *platformsnotificationconfiguration.PlatformsNotificationConfiguration
 	posTerminalManagement              *posterminalmanagement.GeneralApi
 	disputes                           *disputes.Disputes
@@ -297,6 +301,7 @@ func (c *APIClient) Disputes() *disputes.Disputes {
 	return c.disputes
 }
 
+// Deprecated: Please migrate to the new Adyen For Platforms.
 func (c *APIClient) PlatformsAccount() *platformsaccount.PlatformsAccount {
 	if c.platformsAccount == nil {
 		c.platformsAccount = &platformsaccount.PlatformsAccount{
@@ -309,6 +314,7 @@ func (c *APIClient) PlatformsAccount() *platformsaccount.PlatformsAccount {
 	return c.platformsAccount
 }
 
+// Deprecated: Please migrate to the new Adyen For Platforms.
 func (c *APIClient) PlatformsFund() *platformsfund.PlatformsFund {
 	if c.platformsFund == nil {
 		c.platformsFund = &platformsfund.PlatformsFund{
@@ -321,6 +327,7 @@ func (c *APIClient) PlatformsFund() *platformsfund.PlatformsFund {
 	return c.platformsFund
 }
 
+// Deprecated: Please migrate to the new Adyen For Platforms.
 func (c *APIClient) PlatformsHostedOnboardingPage() *platformshostedonboardingpage.PlatformsHostedOnboardingPage {
 	if c.platformsHostedOnboardingPage == nil {
 		c.platformsHostedOnboardingPage = &platformshostedonboardingpage.PlatformsHostedOnboardingPage{
@@ -333,6 +340,7 @@ func (c *APIClient) PlatformsHostedOnboardingPage() *platformshostedonboardingpa
 	return c.platformsHostedOnboardingPage
 }
 
+// Deprecated: Please migrate to the new Adyen For Platforms.
 func (c *APIClient) PlatformsNotificationConfiguration() *platformsnotificationconfiguration.PlatformsNotificationConfiguration {
 	if c.platformsNotificationConfiguration == nil {
 		c.platformsNotificationConfiguration = &platformsnotificationconfiguration.PlatformsNotificationConfiguration{

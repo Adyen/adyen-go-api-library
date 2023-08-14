@@ -39,7 +39,7 @@ type Card struct {
 	LastFour *string `json:"lastFour,omitempty"`
 	// The primary account number (PAN) of the card. > The PAN is masked by default and returned only for single-use virtual cards.
 	Number string `json:"number"`
-	// Allocates a specific product range for either a physical or a virtual card. Possible values: **fullySecure**, **secureCorporate**. >Reach out to your Adyen contact to get the values relevant for your integration.
+	// Allocates a specific product range for either a physical or a virtual card. Possible values: **fullySupported**, **secureCorporate**. >Reach out to your Adyen contact to get the values relevant for your integration.
 	ThreeDSecure *string `json:"threeDSecure,omitempty"`
 }
 
