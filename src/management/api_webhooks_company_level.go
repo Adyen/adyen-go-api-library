@@ -363,7 +363,7 @@ To make this request, your API credential must have the following [roles](https:
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r WebhooksCompanyLevelApiRemoveWebhookInput - Request parameters, see RemoveWebhookInput
-@return , *http.Response, error
+@return *http.Response, error
 */
 func (a *WebhooksCompanyLevelApi) RemoveWebhook(ctx context.Context, r WebhooksCompanyLevelApiRemoveWebhookInput) (*http.Response, error) {
 	var res interface{}

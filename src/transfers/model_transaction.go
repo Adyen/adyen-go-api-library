@@ -34,8 +34,12 @@ type Transaction struct {
 	Counterparty CounterpartyV3 `json:"counterparty"`
 	// The date the transaction was created.
 	CreatedAt time.Time `json:"createdAt"`
+	// The date and time when the event was triggered, in ISO 8601 extended format. For example, **2020-12-18T10:15:30+01:00**.
+	CreationDate *time.Time `json:"creationDate,omitempty"`
 	// The `description` from the `/transfers` request.
 	Description *string `json:"description,omitempty"`
+	// The PSP reference in the journal.
+	EventId *string `json:"eventId,omitempty"`
 	// Unique identifier of the transaction.
 	Id               string  `json:"id"`
 	InstructedAmount *Amount `json:"instructedAmount,omitempty"`
@@ -283,6 +287,38 @@ func (o *Transaction) SetCreatedAt(v time.Time) {
 	o.CreatedAt = v
 }
 
+// GetCreationDate returns the CreationDate field value if set, zero value otherwise.
+func (o *Transaction) GetCreationDate() time.Time {
+	if o == nil || common.IsNil(o.CreationDate) {
+		var ret time.Time
+		return ret
+	}
+	return *o.CreationDate
+}
+
+// GetCreationDateOk returns a tuple with the CreationDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Transaction) GetCreationDateOk() (*time.Time, bool) {
+	if o == nil || common.IsNil(o.CreationDate) {
+		return nil, false
+	}
+	return o.CreationDate, true
+}
+
+// HasCreationDate returns a boolean if a field has been set.
+func (o *Transaction) HasCreationDate() bool {
+	if o != nil && !common.IsNil(o.CreationDate) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreationDate gets a reference to the given time.Time and assigns it to the CreationDate field.
+func (o *Transaction) SetCreationDate(v time.Time) {
+	o.CreationDate = &v
+}
+
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *Transaction) GetDescription() string {
 	if o == nil || common.IsNil(o.Description) {
@@ -313,6 +349,38 @@ func (o *Transaction) HasDescription() bool {
 // SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *Transaction) SetDescription(v string) {
 	o.Description = &v
+}
+
+// GetEventId returns the EventId field value if set, zero value otherwise.
+func (o *Transaction) GetEventId() string {
+	if o == nil || common.IsNil(o.EventId) {
+		var ret string
+		return ret
+	}
+	return *o.EventId
+}
+
+// GetEventIdOk returns a tuple with the EventId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Transaction) GetEventIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.EventId) {
+		return nil, false
+	}
+	return o.EventId, true
+}
+
+// HasEventId returns a boolean if a field has been set.
+func (o *Transaction) HasEventId() bool {
+	if o != nil && !common.IsNil(o.EventId) {
+		return true
+	}
+
+	return false
+}
+
+// SetEventId gets a reference to the given string and assigns it to the EventId field.
+func (o *Transaction) SetEventId(v string) {
+	o.EventId = &v
 }
 
 // GetId returns the Id field value
@@ -591,8 +659,14 @@ func (o Transaction) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["counterparty"] = o.Counterparty
 	toSerialize["createdAt"] = o.CreatedAt
+	if !common.IsNil(o.CreationDate) {
+		toSerialize["creationDate"] = o.CreationDate
+	}
 	if !common.IsNil(o.Description) {
 		toSerialize["description"] = o.Description
+	}
+	if !common.IsNil(o.EventId) {
+		toSerialize["eventId"] = o.EventId
 	}
 	toSerialize["id"] = o.Id
 	if !common.IsNil(o.InstructedAmount) {

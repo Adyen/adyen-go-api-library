@@ -99,6 +99,8 @@ Returns all transactions related to a balance account with a payment instrument 
 
 This endpoint supports cursor-based pagination. The response returns the first page of results, and returns links to the next page when applicable. You can use the links to page through the results. The response also returns links to the previous page when applicable.
 
+Provide either `balanceAccountId`, `accountHolderId`, or `balancePlatform` when using this endpoint.
+
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TransactionsApiGetAllTransactionsInput - Request parameters, see GetAllTransactionsInput
 @return TransactionSearchResponse, *http.Response, error

@@ -98,7 +98,7 @@ Deletes a business line.
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r BusinessLinesApiDeleteBusinessLineInput - Request parameters, see DeleteBusinessLineInput
-@return , *http.Response, error
+@return *http.Response, error
 */
 func (a *BusinessLinesApi) DeleteBusinessLine(ctx context.Context, r BusinessLinesApiDeleteBusinessLineInput) (*http.Response, error) {
 	var res interface{}

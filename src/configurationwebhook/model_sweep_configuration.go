@@ -24,8 +24,8 @@ type SweepConfiguration struct {
 	// The unique identifier of the sweep.
 	Id string `json:"id"`
 	// The merchant account that will be the source of funds. You can only use this if you are processing payments with Adyen. This can only be used for sweeps of `type` **pull** and `schedule.type` **balance**.
-	MerchantAccount *string                    `json:"merchantAccount,omitempty"`
-	Schedule        SweepConfigurationSchedule `json:"schedule"`
+	MerchantAccount *string       `json:"merchantAccount,omitempty"`
+	Schedule        SweepSchedule `json:"schedule"`
 	// The status of the sweep. If not provided, by default, this is set to **active**.  Possible values:    * **active**:  the sweep is enabled and funds will be pulled in or pushed out based on the defined configuration.    * **inactive**: the sweep is disabled and cannot be triggered.
 	Status       *string `json:"status,omitempty"`
 	SweepAmount  *Amount `json:"sweepAmount,omitempty"`
@@ -41,7 +41,7 @@ type SweepConfiguration struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSweepConfiguration(id string, schedule SweepConfigurationSchedule) *SweepConfiguration {
+func NewSweepConfiguration(id string, schedule SweepSchedule) *SweepConfiguration {
 	this := SweepConfiguration{}
 	this.Id = id
 	this.Schedule = schedule
@@ -149,9 +149,9 @@ func (o *SweepConfiguration) SetMerchantAccount(v string) {
 }
 
 // GetSchedule returns the Schedule field value
-func (o *SweepConfiguration) GetSchedule() SweepConfigurationSchedule {
+func (o *SweepConfiguration) GetSchedule() SweepSchedule {
 	if o == nil {
-		var ret SweepConfigurationSchedule
+		var ret SweepSchedule
 		return ret
 	}
 
@@ -160,7 +160,7 @@ func (o *SweepConfiguration) GetSchedule() SweepConfigurationSchedule {
 
 // GetScheduleOk returns a tuple with the Schedule field value
 // and a boolean to check if the value has been set.
-func (o *SweepConfiguration) GetScheduleOk() (*SweepConfigurationSchedule, bool) {
+func (o *SweepConfiguration) GetScheduleOk() (*SweepSchedule, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -168,7 +168,7 @@ func (o *SweepConfiguration) GetScheduleOk() (*SweepConfigurationSchedule, bool)
 }
 
 // SetSchedule sets field value
-func (o *SweepConfiguration) SetSchedule(v SweepConfigurationSchedule) {
+func (o *SweepConfiguration) SetSchedule(v SweepSchedule) {
 	o.Schedule = v
 }
 

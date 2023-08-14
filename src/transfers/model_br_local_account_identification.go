@@ -19,11 +19,11 @@ var _ common.MappedNullable = &BRLocalAccountIdentification{}
 
 // BRLocalAccountIdentification struct for BRLocalAccountIdentification
 type BRLocalAccountIdentification struct {
-	// The bank account number (without separators or whitespace).
+	// The bank account number, without separators or whitespace.
 	AccountNumber string `json:"accountNumber"`
-	// The 3-digit Brazilian bank code (with leading zeros).
+	// The 3-digit bank code, with leading zeros.
 	BankCode string `json:"bankCode"`
-	// The bank account branch number (without separators or whitespace).
+	// The bank account branch number, without separators or whitespace.
 	BranchNumber string `json:"branchNumber"`
 	// **brLocal**
 	Type string `json:"type"`

@@ -420,7 +420,7 @@ You can make this request with any of the Management API roles.
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r MyAPICredentialApiRemoveAllowedOriginInput - Request parameters, see RemoveAllowedOriginInput
-@return , *http.Response, error
+@return *http.Response, error
 */
 func (a *MyAPICredentialApi) RemoveAllowedOrigin(ctx context.Context, r MyAPICredentialApiRemoveAllowedOriginInput) (*http.Response, error) {
 	var res interface{}

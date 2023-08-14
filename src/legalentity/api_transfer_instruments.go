@@ -94,7 +94,7 @@ Deletes a transfer instrument.
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TransferInstrumentsApiDeleteTransferInstrumentInput - Request parameters, see DeleteTransferInstrumentInput
-@return , *http.Response, error
+@return *http.Response, error
 */
 func (a *TransferInstrumentsApi) DeleteTransferInstrument(ctx context.Context, r TransferInstrumentsApiDeleteTransferInstrumentInput) (*http.Response, error) {
 	var res interface{}
