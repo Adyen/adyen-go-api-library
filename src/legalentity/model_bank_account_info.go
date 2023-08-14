@@ -25,6 +25,8 @@ type BankAccountInfo struct {
 	AccountType *string `json:"accountType,omitempty"`
 	// The two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code where the bank account is registered. For example, **NL**.
 	CountryCode *string `json:"countryCode,omitempty"`
+	// Identifies if the bank account was created through [instant bank verification](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-08-hosted-onboarding).
+	TrustedSource *bool `json:"trustedSource,omitempty"`
 }
 
 // NewBankAccountInfo instantiates a new BankAccountInfo object
@@ -143,6 +145,38 @@ func (o *BankAccountInfo) SetCountryCode(v string) {
 	o.CountryCode = &v
 }
 
+// GetTrustedSource returns the TrustedSource field value if set, zero value otherwise.
+func (o *BankAccountInfo) GetTrustedSource() bool {
+	if o == nil || common.IsNil(o.TrustedSource) {
+		var ret bool
+		return ret
+	}
+	return *o.TrustedSource
+}
+
+// GetTrustedSourceOk returns a tuple with the TrustedSource field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BankAccountInfo) GetTrustedSourceOk() (*bool, bool) {
+	if o == nil || common.IsNil(o.TrustedSource) {
+		return nil, false
+	}
+	return o.TrustedSource, true
+}
+
+// HasTrustedSource returns a boolean if a field has been set.
+func (o *BankAccountInfo) HasTrustedSource() bool {
+	if o != nil && !common.IsNil(o.TrustedSource) {
+		return true
+	}
+
+	return false
+}
+
+// SetTrustedSource gets a reference to the given bool and assigns it to the TrustedSource field.
+func (o *BankAccountInfo) SetTrustedSource(v bool) {
+	o.TrustedSource = &v
+}
+
 func (o BankAccountInfo) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -161,6 +195,9 @@ func (o BankAccountInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.CountryCode) {
 		toSerialize["countryCode"] = o.CountryCode
+	}
+	if !common.IsNil(o.TrustedSource) {
+		toSerialize["trustedSource"] = o.TrustedSource
 	}
 	return toSerialize, nil
 }

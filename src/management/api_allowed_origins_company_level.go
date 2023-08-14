@@ -156,7 +156,7 @@ To make this request, your API credential must have the following [roles](https:
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r AllowedOriginsCompanyLevelApiDeleteAllowedOriginInput - Request parameters, see DeleteAllowedOriginInput
-@return , *http.Response, error
+@return *http.Response, error
 */
 func (a *AllowedOriginsCompanyLevelApi) DeleteAllowedOrigin(ctx context.Context, r AllowedOriginsCompanyLevelApiDeleteAllowedOriginInput) (*http.Response, error) {
 	var res interface{}

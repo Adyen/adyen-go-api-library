@@ -18,6 +18,7 @@ import (
 )
 
 // PlatformsHostedOnboardingPage PlatformsHostedOnboardingPage service
+// Deprecated: Please migrate to the new Adyen For Platforms.
 type PlatformsHostedOnboardingPage common.Service
 
 /*

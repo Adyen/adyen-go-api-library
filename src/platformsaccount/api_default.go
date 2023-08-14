@@ -18,6 +18,7 @@ import (
 )
 
 // PlatformsAccount PlatformsAccount service
+// Deprecated: Please migrate to the new Adyen For Platforms.
 type PlatformsAccount common.Service
 
 /*

@@ -102,8 +102,6 @@ func NewThreeDS2RequestData(deviceChannel string) *ThreeDS2RequestData {
 	var authenticationOnly bool = false
 	this.AuthenticationOnly = &authenticationOnly
 	this.DeviceChannel = deviceChannel
-	var messageVersion string = "2.1.0"
-	this.MessageVersion = &messageVersion
 	var sdkMaxTimeout int32 = 60
 	this.SdkMaxTimeout = &sdkMaxTimeout
 	return &this
@@ -116,8 +114,6 @@ func NewThreeDS2RequestDataWithDefaults() *ThreeDS2RequestData {
 	this := ThreeDS2RequestData{}
 	var authenticationOnly bool = false
 	this.AuthenticationOnly = &authenticationOnly
-	var messageVersion string = "2.1.0"
-	this.MessageVersion = &messageVersion
 	var sdkMaxTimeout int32 = 60
 	this.SdkMaxTimeout = &sdkMaxTimeout
 	return &this

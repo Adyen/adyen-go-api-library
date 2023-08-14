@@ -19,15 +19,14 @@ var _ common.MappedNullable = &UpdatePaymentMethodInfo{}
 
 // UpdatePaymentMethodInfo struct for UpdatePaymentMethodInfo
 type UpdatePaymentMethodInfo struct {
+	Bcmc            *BcmcInfo            `json:"bcmc,omitempty"`
+	CartesBancaires *CartesBancairesInfo `json:"cartesBancaires,omitempty"`
 	// The list of countries where a payment method is available. By default, all countries supported by the payment method.
 	Countries []string `json:"countries,omitempty"`
 	// The list of currencies that a payment method supports. By default, all currencies supported by the payment method.
 	Currencies []string `json:"currencies,omitempty"`
-	// Custom routing flags for acquirer routing.
-	CustomRoutingFlags []string `json:"customRoutingFlags,omitempty"`
 	// Indicates whether the payment method is enabled (**true**) or disabled (**false**).
-	Enabled          *bool             `json:"enabled,omitempty"`
-	ShopperStatement *ShopperStatement `json:"shopperStatement,omitempty"`
+	Enabled *bool `json:"enabled,omitempty"`
 	// The list of stores for this payment method
 	StoreIds []string `json:"storeIds,omitempty"`
 }
@@ -47,6 +46,70 @@ func NewUpdatePaymentMethodInfo() *UpdatePaymentMethodInfo {
 func NewUpdatePaymentMethodInfoWithDefaults() *UpdatePaymentMethodInfo {
 	this := UpdatePaymentMethodInfo{}
 	return &this
+}
+
+// GetBcmc returns the Bcmc field value if set, zero value otherwise.
+func (o *UpdatePaymentMethodInfo) GetBcmc() BcmcInfo {
+	if o == nil || common.IsNil(o.Bcmc) {
+		var ret BcmcInfo
+		return ret
+	}
+	return *o.Bcmc
+}
+
+// GetBcmcOk returns a tuple with the Bcmc field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdatePaymentMethodInfo) GetBcmcOk() (*BcmcInfo, bool) {
+	if o == nil || common.IsNil(o.Bcmc) {
+		return nil, false
+	}
+	return o.Bcmc, true
+}
+
+// HasBcmc returns a boolean if a field has been set.
+func (o *UpdatePaymentMethodInfo) HasBcmc() bool {
+	if o != nil && !common.IsNil(o.Bcmc) {
+		return true
+	}
+
+	return false
+}
+
+// SetBcmc gets a reference to the given BcmcInfo and assigns it to the Bcmc field.
+func (o *UpdatePaymentMethodInfo) SetBcmc(v BcmcInfo) {
+	o.Bcmc = &v
+}
+
+// GetCartesBancaires returns the CartesBancaires field value if set, zero value otherwise.
+func (o *UpdatePaymentMethodInfo) GetCartesBancaires() CartesBancairesInfo {
+	if o == nil || common.IsNil(o.CartesBancaires) {
+		var ret CartesBancairesInfo
+		return ret
+	}
+	return *o.CartesBancaires
+}
+
+// GetCartesBancairesOk returns a tuple with the CartesBancaires field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdatePaymentMethodInfo) GetCartesBancairesOk() (*CartesBancairesInfo, bool) {
+	if o == nil || common.IsNil(o.CartesBancaires) {
+		return nil, false
+	}
+	return o.CartesBancaires, true
+}
+
+// HasCartesBancaires returns a boolean if a field has been set.
+func (o *UpdatePaymentMethodInfo) HasCartesBancaires() bool {
+	if o != nil && !common.IsNil(o.CartesBancaires) {
+		return true
+	}
+
+	return false
+}
+
+// SetCartesBancaires gets a reference to the given CartesBancairesInfo and assigns it to the CartesBancaires field.
+func (o *UpdatePaymentMethodInfo) SetCartesBancaires(v CartesBancairesInfo) {
+	o.CartesBancaires = &v
 }
 
 // GetCountries returns the Countries field value if set, zero value otherwise.
@@ -113,38 +176,6 @@ func (o *UpdatePaymentMethodInfo) SetCurrencies(v []string) {
 	o.Currencies = v
 }
 
-// GetCustomRoutingFlags returns the CustomRoutingFlags field value if set, zero value otherwise.
-func (o *UpdatePaymentMethodInfo) GetCustomRoutingFlags() []string {
-	if o == nil || common.IsNil(o.CustomRoutingFlags) {
-		var ret []string
-		return ret
-	}
-	return o.CustomRoutingFlags
-}
-
-// GetCustomRoutingFlagsOk returns a tuple with the CustomRoutingFlags field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdatePaymentMethodInfo) GetCustomRoutingFlagsOk() ([]string, bool) {
-	if o == nil || common.IsNil(o.CustomRoutingFlags) {
-		return nil, false
-	}
-	return o.CustomRoutingFlags, true
-}
-
-// HasCustomRoutingFlags returns a boolean if a field has been set.
-func (o *UpdatePaymentMethodInfo) HasCustomRoutingFlags() bool {
-	if o != nil && !common.IsNil(o.CustomRoutingFlags) {
-		return true
-	}
-
-	return false
-}
-
-// SetCustomRoutingFlags gets a reference to the given []string and assigns it to the CustomRoutingFlags field.
-func (o *UpdatePaymentMethodInfo) SetCustomRoutingFlags(v []string) {
-	o.CustomRoutingFlags = v
-}
-
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
 func (o *UpdatePaymentMethodInfo) GetEnabled() bool {
 	if o == nil || common.IsNil(o.Enabled) {
@@ -175,38 +206,6 @@ func (o *UpdatePaymentMethodInfo) HasEnabled() bool {
 // SetEnabled gets a reference to the given bool and assigns it to the Enabled field.
 func (o *UpdatePaymentMethodInfo) SetEnabled(v bool) {
 	o.Enabled = &v
-}
-
-// GetShopperStatement returns the ShopperStatement field value if set, zero value otherwise.
-func (o *UpdatePaymentMethodInfo) GetShopperStatement() ShopperStatement {
-	if o == nil || common.IsNil(o.ShopperStatement) {
-		var ret ShopperStatement
-		return ret
-	}
-	return *o.ShopperStatement
-}
-
-// GetShopperStatementOk returns a tuple with the ShopperStatement field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdatePaymentMethodInfo) GetShopperStatementOk() (*ShopperStatement, bool) {
-	if o == nil || common.IsNil(o.ShopperStatement) {
-		return nil, false
-	}
-	return o.ShopperStatement, true
-}
-
-// HasShopperStatement returns a boolean if a field has been set.
-func (o *UpdatePaymentMethodInfo) HasShopperStatement() bool {
-	if o != nil && !common.IsNil(o.ShopperStatement) {
-		return true
-	}
-
-	return false
-}
-
-// SetShopperStatement gets a reference to the given ShopperStatement and assigns it to the ShopperStatement field.
-func (o *UpdatePaymentMethodInfo) SetShopperStatement(v ShopperStatement) {
-	o.ShopperStatement = &v
 }
 
 // GetStoreIds returns the StoreIds field value if set, zero value otherwise.
@@ -251,20 +250,20 @@ func (o UpdatePaymentMethodInfo) MarshalJSON() ([]byte, error) {
 
 func (o UpdatePaymentMethodInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.Bcmc) {
+		toSerialize["bcmc"] = o.Bcmc
+	}
+	if !common.IsNil(o.CartesBancaires) {
+		toSerialize["cartesBancaires"] = o.CartesBancaires
+	}
 	if !common.IsNil(o.Countries) {
 		toSerialize["countries"] = o.Countries
 	}
 	if !common.IsNil(o.Currencies) {
 		toSerialize["currencies"] = o.Currencies
 	}
-	if !common.IsNil(o.CustomRoutingFlags) {
-		toSerialize["customRoutingFlags"] = o.CustomRoutingFlags
-	}
 	if !common.IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
-	}
-	if !common.IsNil(o.ShopperStatement) {
-		toSerialize["shopperStatement"] = o.ShopperStatement
 	}
 	if !common.IsNil(o.StoreIds) {
 		toSerialize["storeIds"] = o.StoreIds

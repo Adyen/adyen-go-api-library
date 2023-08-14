@@ -18,6 +18,7 @@ import (
 )
 
 // PlatformsFund PlatformsFund service
+// Deprecated: Please migrate to the new Adyen For Platforms.
 type PlatformsFund common.Service
 
 /*

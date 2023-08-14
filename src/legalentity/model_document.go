@@ -22,7 +22,7 @@ var _ common.MappedNullable = &Document{}
 type Document struct {
 	Attachment *Attachment `json:"attachment,omitempty"`
 	// Array that contains the document. The array supports multiple attachments for uploading different sides or pages of a document.
-	Attachments []Attachment `json:"attachments"`
+	Attachments []Attachment `json:"attachments,omitempty"`
 	// The creation date of the document.
 	CreationDate *time.Time `json:"creationDate,omitempty"`
 	// Your description for the document.
@@ -43,9 +43,9 @@ type Document struct {
 	// The modification date of the document.
 	ModificationDate *time.Time `json:"modificationDate,omitempty"`
 	// The number in the document.
-	Number *string     `json:"number,omitempty"`
-	Owner  OwnerEntity `json:"owner"`
-	// Type of document, used when providing an ID number or uploading a document. The possible values depend on the legal entity type.  When providing ID numbers: * For **individual**, the `type` values can be **driversLicense**, **identityCard**, **nationalIdNumber**, or **passport**.  When uploading photo IDs: * For **individual**, the `type` values can be **identityCard**, **driversLicense**, or **passport**.  When uploading other documents: * For **organization**, the `type` values can be **proofOfAddress**, **registrationDocument**, **vatDocument**, **proofOfOrganizationTaxInfo**, **proofOfOwnership**, or **proofOfIndustry**.   * For **individual**, the `type` values can be **identityCard**, **driversLicense**, **passport**, **proofOfNationalIdNumber**, **proofOfResidency**, **proofOfIndustry**, or **proofOfIndividualTaxId**.  * For **soleProprietorship**, the `type` values can be **constitutionalDocument**, **proofOfAddress**, or **proofOfIndustry**.  * Use **bankStatement** to upload documents for a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id).
+	Number *string      `json:"number,omitempty"`
+	Owner  *OwnerEntity `json:"owner,omitempty"`
+	// Type of document, used when providing an ID number or uploading a document. The possible values depend on the legal entity type.  * For **organization**, the `type` values can be **proofOfAddress**, **registrationDocument**, **vatDocument**, **proofOfOrganizationTaxInfo**, **proofOfOwnership**, **proofOfIndustry**, or **proofOfFundingOrWealthSource**.  * For **individual**, the `type` values can be **identityCard**, **driversLicense**, **passport**, **proofOfNationalIdNumber**, **proofOfResidency**, **proofOfIndustry**, **proofOfIndividualTaxId**, or **proofOfFundingOrWealthSource**.  * For **soleProprietorship**, the `type` values can be **constitutionalDocument**, **proofOfAddress**, or **proofOfIndustry**.  * Use **bankStatement** to upload documents for a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id).
 	Type string `json:"type"`
 }
 
@@ -53,11 +53,9 @@ type Document struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDocument(attachments []Attachment, description string, owner OwnerEntity, type_ string) *Document {
+func NewDocument(description string, type_ string) *Document {
 	this := Document{}
-	this.Attachments = attachments
 	this.Description = description
-	this.Owner = owner
 	this.Type = type_
 	return &this
 }
@@ -102,26 +100,34 @@ func (o *Document) SetAttachment(v Attachment) {
 	o.Attachment = &v
 }
 
-// GetAttachments returns the Attachments field value
+// GetAttachments returns the Attachments field value if set, zero value otherwise.
 func (o *Document) GetAttachments() []Attachment {
-	if o == nil {
+	if o == nil || common.IsNil(o.Attachments) {
 		var ret []Attachment
 		return ret
 	}
-
 	return o.Attachments
 }
 
-// GetAttachmentsOk returns a tuple with the Attachments field value
+// GetAttachmentsOk returns a tuple with the Attachments field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Document) GetAttachmentsOk() ([]Attachment, bool) {
-	if o == nil {
+	if o == nil || common.IsNil(o.Attachments) {
 		return nil, false
 	}
 	return o.Attachments, true
 }
 
-// SetAttachments sets field value
+// HasAttachments returns a boolean if a field has been set.
+func (o *Document) HasAttachments() bool {
+	if o != nil && !common.IsNil(o.Attachments) {
+		return true
+	}
+
+	return false
+}
+
+// SetAttachments gets a reference to the given []Attachment and assigns it to the Attachments field.
 func (o *Document) SetAttachments(v []Attachment) {
 	o.Attachments = v
 }
@@ -415,28 +421,36 @@ func (o *Document) SetNumber(v string) {
 	o.Number = &v
 }
 
-// GetOwner returns the Owner field value
+// GetOwner returns the Owner field value if set, zero value otherwise.
 func (o *Document) GetOwner() OwnerEntity {
-	if o == nil {
+	if o == nil || common.IsNil(o.Owner) {
 		var ret OwnerEntity
 		return ret
 	}
-
-	return o.Owner
+	return *o.Owner
 }
 
-// GetOwnerOk returns a tuple with the Owner field value
+// GetOwnerOk returns a tuple with the Owner field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Document) GetOwnerOk() (*OwnerEntity, bool) {
-	if o == nil {
+	if o == nil || common.IsNil(o.Owner) {
 		return nil, false
 	}
-	return &o.Owner, true
+	return o.Owner, true
 }
 
-// SetOwner sets field value
+// HasOwner returns a boolean if a field has been set.
+func (o *Document) HasOwner() bool {
+	if o != nil && !common.IsNil(o.Owner) {
+		return true
+	}
+
+	return false
+}
+
+// SetOwner gets a reference to the given OwnerEntity and assigns it to the Owner field.
 func (o *Document) SetOwner(v OwnerEntity) {
-	o.Owner = v
+	o.Owner = &v
 }
 
 // GetType returns the Type field value
@@ -476,7 +490,9 @@ func (o Document) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Attachment) {
 		toSerialize["attachment"] = o.Attachment
 	}
-	toSerialize["attachments"] = o.Attachments
+	if !common.IsNil(o.Attachments) {
+		toSerialize["attachments"] = o.Attachments
+	}
 	if !common.IsNil(o.CreationDate) {
 		toSerialize["creationDate"] = o.CreationDate
 	}
@@ -502,7 +518,9 @@ func (o Document) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Number) {
 		toSerialize["number"] = o.Number
 	}
-	toSerialize["owner"] = o.Owner
+	if !common.IsNil(o.Owner) {
+		toSerialize["owner"] = o.Owner
+	}
 	toSerialize["type"] = o.Type
 	return toSerialize, nil
 }
@@ -544,7 +562,7 @@ func (v *NullableDocument) UnmarshalJSON(src []byte) error {
 }
 
 func (o *Document) isValidType() bool {
-	var allowedEnumValues = []string{"bankStatement", "driversLicense", "identityCard", "nationalIdNumber", "passport", "proofOfAddress", "proofOfNationalIdNumber", "proofOfResidency", "registrationDocument", "vatDocument", "proofOfOrganizationTaxInfo", "proofOfIndustry", "constitutionalDocument"}
+	var allowedEnumValues = []string{"bankStatement", "driversLicense", "identityCard", "nationalIdNumber", "passport", "proofOfAddress", "proofOfNationalIdNumber", "proofOfResidency", "registrationDocument", "vatDocument", "proofOfOrganizationTaxInfo", "proofOfIndustry", "constitutionalDocument", "proofOfFundingOrWealthSource"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

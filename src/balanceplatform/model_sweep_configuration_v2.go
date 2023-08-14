@@ -31,8 +31,8 @@ type SweepConfigurationV2 struct {
 	// The list of priorities for the bank transfer. This sets the speed at which the transfer is sent and the fees that you have to pay. You can provide multiple priorities. Adyen will try to pay out using the priority listed first, and if that's not possible, it moves on to the next option in the order of provided priorities.  Possible values:  * **regular**: For normal, low-value transactions.  * **fast**: Faster way to transfer funds but has higher fees. Recommended for high-priority, low-value transactions.  * **wire**: Fastest way to transfer funds but has the highest fees. Recommended for high-priority, high-value transactions.  * **instant**: Instant way to transfer funds in [SEPA countries](https://www.ecb.europa.eu/paym/integration/retail/sepa/html/index.en.html).  * **crossBorder**: High-value transfer to a recipient in a different country.  * **internal**: Transfer to an Adyen-issued business bank account (by bank account number/IBAN).  Set `category` to **bank**. For more details, see [optional priorities setup](https://docs.adyen.com/marketplaces-and-platforms/payout-to-users/scheduled-payouts#optional-priorities-setup).
 	Priorities []string `json:"priorities,omitempty"`
 	// The reason for disabling the sweep.
-	Reason   *string                      `json:"reason,omitempty"`
-	Schedule SweepConfigurationV2Schedule `json:"schedule"`
+	Reason   *string       `json:"reason,omitempty"`
+	Schedule SweepSchedule `json:"schedule"`
 	// The status of the sweep. If not provided, by default, this is set to **active**.  Possible values:    * **active**:  the sweep is enabled and funds will be pulled in or pushed out based on the defined configuration.    * **inactive**: the sweep is disabled and cannot be triggered.
 	Status        *string `json:"status,omitempty"`
 	SweepAmount   *Amount `json:"sweepAmount,omitempty"`
@@ -46,7 +46,7 @@ type SweepConfigurationV2 struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSweepConfigurationV2(counterparty SweepCounterparty, currency string, id string, schedule SweepConfigurationV2Schedule) *SweepConfigurationV2 {
+func NewSweepConfigurationV2(counterparty SweepCounterparty, currency string, id string, schedule SweepSchedule) *SweepConfigurationV2 {
 	this := SweepConfigurationV2{}
 	this.Counterparty = counterparty
 	this.Currency = currency
@@ -268,9 +268,9 @@ func (o *SweepConfigurationV2) SetReason(v string) {
 }
 
 // GetSchedule returns the Schedule field value
-func (o *SweepConfigurationV2) GetSchedule() SweepConfigurationV2Schedule {
+func (o *SweepConfigurationV2) GetSchedule() SweepSchedule {
 	if o == nil {
-		var ret SweepConfigurationV2Schedule
+		var ret SweepSchedule
 		return ret
 	}
 
@@ -279,7 +279,7 @@ func (o *SweepConfigurationV2) GetSchedule() SweepConfigurationV2Schedule {
 
 // GetScheduleOk returns a tuple with the Schedule field value
 // and a boolean to check if the value has been set.
-func (o *SweepConfigurationV2) GetScheduleOk() (*SweepConfigurationV2Schedule, bool) {
+func (o *SweepConfigurationV2) GetScheduleOk() (*SweepSchedule, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -287,7 +287,7 @@ func (o *SweepConfigurationV2) GetScheduleOk() (*SweepConfigurationV2Schedule, b
 }
 
 // SetSchedule sets field value
-func (o *SweepConfigurationV2) SetSchedule(v SweepConfigurationV2Schedule) {
+func (o *SweepConfigurationV2) SetSchedule(v SweepSchedule) {
 	o.Schedule = v
 }
 

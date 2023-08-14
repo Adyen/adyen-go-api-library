@@ -20,9 +20,11 @@ type BankAccountV3AccountIdentification struct {
 	CALocalAccountIdentification      *CALocalAccountIdentification
 	CZLocalAccountIdentification      *CZLocalAccountIdentification
 	DKLocalAccountIdentification      *DKLocalAccountIdentification
+	HKLocalAccountIdentification      *HKLocalAccountIdentification
 	HULocalAccountIdentification      *HULocalAccountIdentification
 	IbanAccountIdentification         *IbanAccountIdentification
 	NOLocalAccountIdentification      *NOLocalAccountIdentification
+	NZLocalAccountIdentification      *NZLocalAccountIdentification
 	NumberAndBicAccountIdentification *NumberAndBicAccountIdentification
 	PLLocalAccountIdentification      *PLLocalAccountIdentification
 	SELocalAccountIdentification      *SELocalAccountIdentification
@@ -66,6 +68,13 @@ func DKLocalAccountIdentificationAsBankAccountV3AccountIdentification(v *DKLocal
 	}
 }
 
+// HKLocalAccountIdentificationAsBankAccountV3AccountIdentification is a convenience function that returns HKLocalAccountIdentification wrapped in BankAccountV3AccountIdentification
+func HKLocalAccountIdentificationAsBankAccountV3AccountIdentification(v *HKLocalAccountIdentification) BankAccountV3AccountIdentification {
+	return BankAccountV3AccountIdentification{
+		HKLocalAccountIdentification: v,
+	}
+}
+
 // HULocalAccountIdentificationAsBankAccountV3AccountIdentification is a convenience function that returns HULocalAccountIdentification wrapped in BankAccountV3AccountIdentification
 func HULocalAccountIdentificationAsBankAccountV3AccountIdentification(v *HULocalAccountIdentification) BankAccountV3AccountIdentification {
 	return BankAccountV3AccountIdentification{
@@ -84,6 +93,13 @@ func IbanAccountIdentificationAsBankAccountV3AccountIdentification(v *IbanAccoun
 func NOLocalAccountIdentificationAsBankAccountV3AccountIdentification(v *NOLocalAccountIdentification) BankAccountV3AccountIdentification {
 	return BankAccountV3AccountIdentification{
 		NOLocalAccountIdentification: v,
+	}
+}
+
+// NZLocalAccountIdentificationAsBankAccountV3AccountIdentification is a convenience function that returns NZLocalAccountIdentification wrapped in BankAccountV3AccountIdentification
+func NZLocalAccountIdentificationAsBankAccountV3AccountIdentification(v *NZLocalAccountIdentification) BankAccountV3AccountIdentification {
+	return BankAccountV3AccountIdentification{
+		NZLocalAccountIdentification: v,
 	}
 }
 
@@ -198,6 +214,19 @@ func (dst *BankAccountV3AccountIdentification) UnmarshalJSON(data []byte) error 
 		dst.DKLocalAccountIdentification = nil
 	}
 
+	// try to unmarshal data into HKLocalAccountIdentification
+	err = json.Unmarshal(data, &dst.HKLocalAccountIdentification)
+	if err == nil {
+		jsonHKLocalAccountIdentification, _ := json.Marshal(dst.HKLocalAccountIdentification)
+		if string(jsonHKLocalAccountIdentification) == "{}" || !dst.HKLocalAccountIdentification.isValidType() { // empty struct
+			dst.HKLocalAccountIdentification = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.HKLocalAccountIdentification = nil
+	}
+
 	// try to unmarshal data into HULocalAccountIdentification
 	err = json.Unmarshal(data, &dst.HULocalAccountIdentification)
 	if err == nil {
@@ -235,6 +264,19 @@ func (dst *BankAccountV3AccountIdentification) UnmarshalJSON(data []byte) error 
 		}
 	} else {
 		dst.NOLocalAccountIdentification = nil
+	}
+
+	// try to unmarshal data into NZLocalAccountIdentification
+	err = json.Unmarshal(data, &dst.NZLocalAccountIdentification)
+	if err == nil {
+		jsonNZLocalAccountIdentification, _ := json.Marshal(dst.NZLocalAccountIdentification)
+		if string(jsonNZLocalAccountIdentification) == "{}" || !dst.NZLocalAccountIdentification.isValidType() { // empty struct
+			dst.NZLocalAccountIdentification = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.NZLocalAccountIdentification = nil
 	}
 
 	// try to unmarshal data into NumberAndBicAccountIdentification
@@ -322,9 +364,11 @@ func (dst *BankAccountV3AccountIdentification) UnmarshalJSON(data []byte) error 
 		dst.CALocalAccountIdentification = nil
 		dst.CZLocalAccountIdentification = nil
 		dst.DKLocalAccountIdentification = nil
+		dst.HKLocalAccountIdentification = nil
 		dst.HULocalAccountIdentification = nil
 		dst.IbanAccountIdentification = nil
 		dst.NOLocalAccountIdentification = nil
+		dst.NZLocalAccountIdentification = nil
 		dst.NumberAndBicAccountIdentification = nil
 		dst.PLLocalAccountIdentification = nil
 		dst.SELocalAccountIdentification = nil
@@ -362,6 +406,10 @@ func (src BankAccountV3AccountIdentification) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.DKLocalAccountIdentification)
 	}
 
+	if src.HKLocalAccountIdentification != nil {
+		return json.Marshal(&src.HKLocalAccountIdentification)
+	}
+
 	if src.HULocalAccountIdentification != nil {
 		return json.Marshal(&src.HULocalAccountIdentification)
 	}
@@ -372,6 +420,10 @@ func (src BankAccountV3AccountIdentification) MarshalJSON() ([]byte, error) {
 
 	if src.NOLocalAccountIdentification != nil {
 		return json.Marshal(&src.NOLocalAccountIdentification)
+	}
+
+	if src.NZLocalAccountIdentification != nil {
+		return json.Marshal(&src.NZLocalAccountIdentification)
 	}
 
 	if src.NumberAndBicAccountIdentification != nil {
@@ -426,6 +478,10 @@ func (obj *BankAccountV3AccountIdentification) GetActualInstance() interface{} {
 		return obj.DKLocalAccountIdentification
 	}
 
+	if obj.HKLocalAccountIdentification != nil {
+		return obj.HKLocalAccountIdentification
+	}
+
 	if obj.HULocalAccountIdentification != nil {
 		return obj.HULocalAccountIdentification
 	}
@@ -436,6 +492,10 @@ func (obj *BankAccountV3AccountIdentification) GetActualInstance() interface{} {
 
 	if obj.NOLocalAccountIdentification != nil {
 		return obj.NOLocalAccountIdentification
+	}
+
+	if obj.NZLocalAccountIdentification != nil {
+		return obj.NZLocalAccountIdentification
 	}
 
 	if obj.NumberAndBicAccountIdentification != nil {

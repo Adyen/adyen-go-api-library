@@ -25,11 +25,11 @@ type AndroidApp struct {
 	Id string `json:"id"`
 	// The app name that is shown on the terminal.
 	Label *string `json:"label,omitempty"`
-	// The package name of the app.
+	// The package name that uniquely identifies the Android app.
 	PackageName *string `json:"packageName,omitempty"`
 	// The status of the app. Possible values:  * `processing`: The app is being signed and converted to a format that the terminal can handle. * `error`: Something went wrong. Check that the app matches the [requirements](https://docs.adyen.com/point-of-sale/android-terminals/app-requirements). * `invalid`: There is something wrong with the APK file of the app. * `ready`: The app has been signed and converted. * `archived`: The app is no longer available.
 	Status string `json:"status"`
-	// The internal version number of the app.
+	// The version number of the app.
 	VersionCode *int32 `json:"versionCode,omitempty"`
 	// The app version number that is shown on the terminal.
 	VersionName *string `json:"versionName,omitempty"`

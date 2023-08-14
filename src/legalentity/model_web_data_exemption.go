@@ -125,7 +125,7 @@ func (v *NullableWebDataExemption) UnmarshalJSON(src []byte) error {
 }
 
 func (o *WebDataExemption) isValidReason() bool {
-	var allowedEnumValues = []string{"noOnlinePresence"}
+	var allowedEnumValues = []string{"noOnlinePresence", "notCollectedDuringOnboarding"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetReason() == allowed {
 			return true

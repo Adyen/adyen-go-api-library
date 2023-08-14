@@ -18,6 +18,7 @@ import (
 )
 
 // PlatformsNotificationConfiguration PlatformsNotificationConfiguration service
+// Deprecated: Please migrate to the new Adyen For Platforms.
 type PlatformsNotificationConfiguration common.Service
 
 /*
