@@ -68,11 +68,11 @@ func Test_ManagementAPI(t *testing.T) {
 		testClient := adyen.NewClient(&common.Config{
 			Environment: common.TestEnv,
 		})
-		assert.Equal(t, "https://management-test.adyen.com/v1", testClient.Management().MyAPICredentialApi.BasePath())
+		assert.Equal(t, "https://management-test.adyen.com/v3", testClient.Management().MyAPICredentialApi.BasePath())
 		liveClient := adyen.NewClient(&common.Config{
 			Environment: common.LiveEnv,
 		})
-		assert.Equal(t, "https://management-live.adyen.com/v1", liveClient.Management().WebhooksCompanyLevelApi.BasePath())
+		assert.Equal(t, "https://management-live.adyen.com/v3", liveClient.Management().WebhooksCompanyLevelApi.BasePath())
 	})
 
 	t.Run("Test ListCompanyAccounts", func(t *testing.T) {

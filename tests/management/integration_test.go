@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"os"
-	"reflect"
 	"testing"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/adyen"
@@ -79,6 +78,5 @@ func Test_ManagementAPI_Integration(t *testing.T) {
 		assert.Equal(t, "010", restServiceErr.GetErrorCode())
 		assert.Equal(t, int32(403), restServiceErr.GetStatus())
 		assert.Equal(t, 403, httpRes.StatusCode)
-		assert.Equal(t, reflect.TypeOf(serviceErr), reflect.TypeOf(common.RestServiceError{}))
 	})
 }
