@@ -68,8 +68,8 @@ const (
 	DisputesAPIVersion              = "v30"
 	StoredValueAPIVersion           = "v46"
 	BalancePlatformAPIVersion       = "v2"
-	TransfersAPIVersion             = "v3"
-	ManagementAPIVersion            = "v1"
+	TransfersAPIVersion             = "v4"
+	ManagementAPIVersion            = "v3"
 	LegalEntityAPIVersion           = "v3"
 	PosTerminalManagementAPIVersion = "v1"
 )

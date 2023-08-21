@@ -2,6 +2,7 @@ package management
 
 import (
 	"context"
+	"errors"
 	"os"
 	"reflect"
 	"testing"
@@ -48,7 +49,8 @@ func Test_ManagementAPI_Integration(t *testing.T) {
 
 			_, httpRes, serviceErr := invalidKeyClient.Management().MyAPICredentialApi.GetApiCredentialDetails(context.Background(), req)
 
-			restServiceErr := serviceErr.(common.RestServiceError)
+			var restServiceErr common.RestServiceError
+			errors.As(serviceErr, &restServiceErr)
 			assert.Equal(t, 401, httpRes.StatusCode)
 			require.NotNil(t, restServiceErr)
 		})
@@ -71,7 +73,8 @@ func Test_ManagementAPI_Integration(t *testing.T) {
 
 		_, httpRes, serviceErr := service.AccountCompanyLevelApi.GetCompanyAccount(context.Background(), req)
 
-		restServiceErr := serviceErr.(common.RestServiceError)
+		var restServiceErr common.RestServiceError
+		errors.As(serviceErr, &restServiceErr)
 		assert.NotEmpty(t, restServiceErr.GetRequestId())
 		assert.Equal(t, "010", restServiceErr.GetErrorCode())
 		assert.Equal(t, int32(403), restServiceErr.GetStatus())
