@@ -3,6 +3,7 @@ package management
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/adyen/adyen-go-api-library/v7/src/adyen"
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
@@ -104,7 +105,8 @@ func Test_ManagementAPI(t *testing.T) {
 			companyId := "notExisting"
 			req := service.AccountCompanyLevelApi.GetCompanyAccountInput(companyId)
 			resp, httpRes, serviceError := service.AccountCompanyLevelApi.GetCompanyAccount(context.Background(), req)
-			restServiceErr := serviceError.(common.RestServiceError)
+			var restServiceErr common.RestServiceError
+			errors.As(serviceError, &restServiceErr)
 			if restServiceErr.ErrorCode != "500" {
 				fmt.Fprintf(os.Stderr, "Error: %v\n", serviceError)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)
@@ -133,7 +135,8 @@ func Test_ManagementAPI(t *testing.T) {
 			companyId := "notExisting"
 			req := service.AccountCompanyLevelApi.ListMerchantAccountsInput(companyId)
 			resp, httpRes, serviceError := service.AccountCompanyLevelApi.ListMerchantAccounts(context.Background(), req)
-			restServiceErr := serviceError.(common.RestServiceError)
+			var restServiceErr common.RestServiceError
+			errors.As(serviceError, &restServiceErr)
 			if restServiceErr.ErrorCode != "500" {
 				fmt.Fprintf(os.Stderr, "Error: %v\n", serviceError)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)
