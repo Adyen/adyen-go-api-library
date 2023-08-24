@@ -10,6 +10,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/adyen/adyen-go-api-library/v7/src/balancecontrol"
 	"github.com/adyen/adyen-go-api-library/v7/src/balanceplatform"
 	"github.com/adyen/adyen-go-api-library/v7/src/binlookup"
 	"github.com/adyen/adyen-go-api-library/v7/src/checkout"
@@ -64,6 +65,7 @@ const (
 	RecurringAPIVersion             = "v68"
 	CheckoutAPIVersion              = "v70"
 	BinLookupAPIVersion             = "v54"
+	BalanceControlAPIVersion        = "v1"
 	EndpointProtocol                = "https://"
 	DisputesAPIVersion              = "v30"
 	StoredValueAPIVersion           = "v46"
@@ -79,18 +81,19 @@ const (
 type APIClient struct {
 	client *common.Client
 	// API Services
-	checkout                           *checkout.APIClient
-	payments                           *payments.APIClient
-	payout                             *payout.APIClient
-	recurring                          *recurring.GeneralApi
-	binLookup                          *binlookup.GeneralApi
-    // Deprecated: Please migrate to the new Adyen For Platforms.
-	platformsAccount                   *platformsaccount.PlatformsAccount
-    // Deprecated: Please migrate to the new Adyen For Platforms.
-	platformsFund                      *platformsfund.PlatformsFund
-    // Deprecated: Please migrate to the new Adyen For Platforms.
-	platformsHostedOnboardingPage      *platformshostedonboardingpage.PlatformsHostedOnboardingPage
-    // Deprecated: Please migrate to the new Adyen For Platforms.
+	checkout       *checkout.APIClient
+	payments       *payments.APIClient
+	payout         *payout.APIClient
+	recurring      *recurring.GeneralApi
+	binLookup      *binlookup.GeneralApi
+	balancecontrol *balancecontrol.GeneralApi
+	// Deprecated: Please migrate to the new Adyen For Platforms.
+	platformsAccount *platformsaccount.PlatformsAccount
+	// Deprecated: Please migrate to the new Adyen For Platforms.
+	platformsFund *platformsfund.PlatformsFund
+	// Deprecated: Please migrate to the new Adyen For Platforms.
+	platformsHostedOnboardingPage *platformshostedonboardingpage.PlatformsHostedOnboardingPage
+	// Deprecated: Please migrate to the new Adyen For Platforms.
 	platformsNotificationConfiguration *platformsnotificationconfiguration.PlatformsNotificationConfiguration
 	posTerminalManagement              *posterminalmanagement.GeneralApi
 	disputes                           *disputes.Disputes
@@ -232,6 +235,18 @@ func (c *APIClient) BinLookup() *binlookup.GeneralApi {
 		}
 	}
 	return c.binLookup
+}
+
+func (c *APIClient) BalanceControl() *balancecontrol.GeneralApi {
+	if c.balancecontrol == nil {
+		c.balancecontrol = &balancecontrol.GeneralApi{
+			Client: c.client,
+			BasePath: func() string {
+				return fmt.Sprintf("%s/pal/servlet/BalanceControl/%s", c.client.Cfg.Endpoint, BalanceControlAPIVersion)
+			},
+		}
+	}
+	return c.balancecontrol
 }
 
 func (c *APIClient) StoredValue() *storedvalue.GeneralApi {

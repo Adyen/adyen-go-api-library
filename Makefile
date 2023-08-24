@@ -21,13 +21,14 @@ openapi-generator-cli:=java -jar $(openapi-generator-jar)
 goimports:=$(shell go env GOPATH)/bin/goimports
 
 generator:=go
-services:=balanceplatform configurationwebhook reportwebhook transferwebhook binlookup checkout legalentity management payments payout posterminalmanagement recurring storedvalue transfers
+services:=balancecontrol balanceplatform configurationwebhook reportwebhook transferwebhook binlookup checkout legalentity management payments payout posterminalmanagement recurring storedvalue transfers
 output:=src
 templates:=templates/custom
 
 # Generate models (for each service)
 models: $(services)
 
+balancecontrol: spec=BalanceControlService-v1
 balanceplatform: spec=BalancePlatformService-v2
 balanceplatform: serviceName=BalancePlatform
 balanceplatform: hasRestServiceError=true
