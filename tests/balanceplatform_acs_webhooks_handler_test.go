@@ -1,10 +1,10 @@
 package tests
 
 import (
-    "github.com/adyen/adyen-go-api-library/v7/src/acswebhook"
-    "testing"
+	"github.com/adyen/adyen-go-api-library/v7/src/acswebhook"
+	"testing"
 
-    "github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"
 )
 
 func Test_BalancePlatform_Acs_Webhooks_HandleRequest(t *testing.T) {
@@ -45,9 +45,9 @@ func Test_BalancePlatform_Acs_Webhooks_HandleRequest(t *testing.T) {
 
 		webhook, _ := acswebhook.HandleAuthenticationNotificationRequest(notificationJson)
 
-        assert.Equal(t, "balancePlatform.authentication.created", webhook.Type)
+		assert.Equal(t, "balancePlatform.authentication.created", webhook.Type)
 		assert.Equal(t, "authenticated", webhook.Data.Status)
-        assert.Equal(t, 2022, webhook.Data.Authentication.CreatedAt.Year())
-        assert.True(t, webhook.Data.Authentication.InPSD2Scope)
+		assert.Equal(t, 2022, webhook.Data.Authentication.CreatedAt.Year())
+		assert.True(t, webhook.Data.Authentication.InPSD2Scope)
 	})
 }
