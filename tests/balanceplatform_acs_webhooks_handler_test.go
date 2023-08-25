@@ -8,7 +8,7 @@ import (
 )
 
 func Test_BalancePlatform_Acs_Webhooks_HandleRequest(t *testing.T) {
-	t.Run("should return transfer success", func(t *testing.T) {
+	t.Run("on balancePlatform.authentication.created", func(t *testing.T) {
 		notificationJson := `{
           "data": {
             "authentication": {
