@@ -67,7 +67,14 @@ func (a *LegalEntitiesApi) CheckLegalEntitysVerificationErrors(ctx context.Conte
 
 // All parameters accepted by LegalEntitiesApi.CreateLegalEntity
 type LegalEntitiesApiCreateLegalEntityInput struct {
+	xRequestedVerificationCode  *string
 	legalEntityInfoRequiredType *LegalEntityInfoRequiredType
+}
+
+// Use a suberror code as your requested verification code. You can include one code at a time in your request header. Requested verification codes can only be used in your test environment.
+func (r LegalEntitiesApiCreateLegalEntityInput) XRequestedVerificationCode(xRequestedVerificationCode string) LegalEntitiesApiCreateLegalEntityInput {
+	r.xRequestedVerificationCode = &xRequestedVerificationCode
+	return r
 }
 
 func (r LegalEntitiesApiCreateLegalEntityInput) LegalEntityInfoRequiredType(legalEntityInfoRequiredType LegalEntityInfoRequiredType) LegalEntitiesApiCreateLegalEntityInput {
@@ -104,6 +111,9 @@ func (a *LegalEntitiesApi) CreateLegalEntity(ctx context.Context, r LegalEntitie
 	path := "/legalEntities"
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
+	if r.xRequestedVerificationCode != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "x-requested-verification-code", r.xRequestedVerificationCode, "")
+	}
 	httpRes, err := common.SendAPIRequest(
 		ctx,
 		a.Client,

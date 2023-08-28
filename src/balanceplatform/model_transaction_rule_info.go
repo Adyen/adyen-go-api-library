@@ -512,7 +512,7 @@ func (v *NullableTransactionRuleInfo) UnmarshalJSON(src []byte) error {
 }
 
 func (o *TransactionRuleInfo) isValidOutcomeType() bool {
-	var allowedEnumValues = []string{"hardBlock", "scoreBased"}
+	var allowedEnumValues = []string{"enforceSCA", "hardBlock", "scoreBased"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetOutcomeType() == allowed {
 			return true

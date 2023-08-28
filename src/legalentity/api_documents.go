@@ -163,7 +163,14 @@ func (a *DocumentsApi) UpdateDocument(ctx context.Context, r DocumentsApiUpdateD
 
 // All parameters accepted by DocumentsApi.UploadDocumentForVerificationChecks
 type DocumentsApiUploadDocumentForVerificationChecksInput struct {
-	document *Document
+	xRequestedVerificationCode *string
+	document                   *Document
+}
+
+// Use a suberror code as your requested verification code. You can include one code at a time in your request header. Requested verification codes can only be used in your test environment.
+func (r DocumentsApiUploadDocumentForVerificationChecksInput) XRequestedVerificationCode(xRequestedVerificationCode string) DocumentsApiUploadDocumentForVerificationChecksInput {
+	r.xRequestedVerificationCode = &xRequestedVerificationCode
+	return r
 }
 
 func (r DocumentsApiUploadDocumentForVerificationChecksInput) Document(document Document) DocumentsApiUploadDocumentForVerificationChecksInput {
@@ -198,6 +205,9 @@ func (a *DocumentsApi) UploadDocumentForVerificationChecks(ctx context.Context, 
 	path := "/documents"
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
+	if r.xRequestedVerificationCode != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "x-requested-verification-code", r.xRequestedVerificationCode, "")
+	}
 	httpRes, err := common.SendAPIRequest(
 		ctx,
 		a.Client,
