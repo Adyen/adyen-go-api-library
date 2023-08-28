@@ -21,16 +21,19 @@ openapi-generator-cli:=java -jar $(openapi-generator-jar)
 goimports:=$(shell go env GOPATH)/bin/goimports
 
 generator:=go
-services:=balanceplatform configurationwebhook reportwebhook transferwebhook binlookup checkout legalentity management payments payout posterminalmanagement recurring storedvalue transfers
+services:=balancecontrol balanceplatform acswebhook configurationwebhook reportwebhook transferwebhook binlookup checkout legalentity management managementwebhook payments payout posterminalmanagement recurring storedvalue transfers
 output:=src
 templates:=templates/custom
 
 # Generate models (for each service)
 models: $(services)
 
+balancecontrol: spec=BalanceControlService-v1
 balanceplatform: spec=BalancePlatformService-v2
 balanceplatform: serviceName=BalancePlatform
 balanceplatform: hasRestServiceError=true
+# Balance Platform Webhooks
+acswebhook: spec=BalancePlatformAcsNotification-v1
 configurationwebhook: spec=BalancePlatformConfigurationNotification-v1
 reportwebhook: spec=BalancePlatformReportNotification-v1
 transferwebhook: spec=BalancePlatformTransferNotification-v3
@@ -50,6 +53,7 @@ transfers: hasRestServiceError=true
 management: spec=ManagementService-v1
 management: serviceName=Management
 management: hasRestServiceError=true
+managementwebhook: spec=ManagementNotificationService-v1
 posterminalmanagement: spec=TfmAPIService-v1
 posterminalmanagement: serviceName=PosTerminalManagementApi
 
