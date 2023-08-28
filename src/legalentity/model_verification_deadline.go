@@ -22,6 +22,8 @@ var _ common.MappedNullable = &VerificationDeadline{}
 type VerificationDeadline struct {
 	// The names of the capabilities to be disallowed.
 	Capabilities []string `json:"capabilities"`
+	// The unique identifiers of the bank account(s) that the deadline applies to
+	EntityIds []string `json:"entityIds,omitempty"`
 	// The date that verification is due by before capabilities are disallowed.
 	ExpiresAt time.Time `json:"expiresAt"`
 }
@@ -69,6 +71,38 @@ func (o *VerificationDeadline) SetCapabilities(v []string) {
 	o.Capabilities = v
 }
 
+// GetEntityIds returns the EntityIds field value if set, zero value otherwise.
+func (o *VerificationDeadline) GetEntityIds() []string {
+	if o == nil || common.IsNil(o.EntityIds) {
+		var ret []string
+		return ret
+	}
+	return o.EntityIds
+}
+
+// GetEntityIdsOk returns a tuple with the EntityIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VerificationDeadline) GetEntityIdsOk() ([]string, bool) {
+	if o == nil || common.IsNil(o.EntityIds) {
+		return nil, false
+	}
+	return o.EntityIds, true
+}
+
+// HasEntityIds returns a boolean if a field has been set.
+func (o *VerificationDeadline) HasEntityIds() bool {
+	if o != nil && !common.IsNil(o.EntityIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetEntityIds gets a reference to the given []string and assigns it to the EntityIds field.
+func (o *VerificationDeadline) SetEntityIds(v []string) {
+	o.EntityIds = v
+}
+
 // GetExpiresAt returns the ExpiresAt field value
 func (o *VerificationDeadline) GetExpiresAt() time.Time {
 	if o == nil {
@@ -104,6 +138,9 @@ func (o VerificationDeadline) MarshalJSON() ([]byte, error) {
 func (o VerificationDeadline) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["capabilities"] = o.Capabilities
+	if !common.IsNil(o.EntityIds) {
+		toSerialize["entityIds"] = o.EntityIds
+	}
 	toSerialize["expiresAt"] = o.ExpiresAt
 	return toSerialize, nil
 }

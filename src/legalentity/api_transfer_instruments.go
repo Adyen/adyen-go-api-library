@@ -22,7 +22,14 @@ type TransferInstrumentsApi common.Service
 
 // All parameters accepted by TransferInstrumentsApi.CreateTransferInstrument
 type TransferInstrumentsApiCreateTransferInstrumentInput struct {
-	transferInstrumentInfo *TransferInstrumentInfo
+	xRequestedVerificationCode *string
+	transferInstrumentInfo     *TransferInstrumentInfo
+}
+
+// Use a suberror code as your requested verification code. You can include one code at a time in your request header. Requested verification codes can only be used in your test environment.
+func (r TransferInstrumentsApiCreateTransferInstrumentInput) XRequestedVerificationCode(xRequestedVerificationCode string) TransferInstrumentsApiCreateTransferInstrumentInput {
+	r.xRequestedVerificationCode = &xRequestedVerificationCode
+	return r
 }
 
 func (r TransferInstrumentsApiCreateTransferInstrumentInput) TransferInstrumentInfo(transferInstrumentInfo TransferInstrumentInfo) TransferInstrumentsApiCreateTransferInstrumentInput {
@@ -57,6 +64,9 @@ func (a *TransferInstrumentsApi) CreateTransferInstrument(ctx context.Context, r
 	path := "/transferInstruments"
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
+	if r.xRequestedVerificationCode != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "x-requested-verification-code", r.xRequestedVerificationCode, "")
+	}
 	httpRes, err := common.SendAPIRequest(
 		ctx,
 		a.Client,
