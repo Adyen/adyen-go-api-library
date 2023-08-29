@@ -8,6 +8,7 @@ package adyen
 
 import (
 	"fmt"
+	"github.com/adyen/adyen-go-api-library/v7/src/dataprotection"
 	"net/http"
 
 	"github.com/adyen/adyen-go-api-library/v7/src/balancecontrol"
@@ -53,6 +54,8 @@ const (
 	LegalEntityEntityLive             = "https://kyc-live.adyen.com/lem"
 	PosTerminalManagementEndpointTest = "https://postfmapi-test.adyen.com/postfmapi/terminal"
 	PosTerminalManagementEndpointLive = "https://postfmapi-live.adyen.com/postfmapi/terminal"
+	DataProtectionEndpointTest        = "https://ca-test.adyen.com/ca/services/DataProtectionService"
+	DataProtectionEndpointLive        = "https://ca-live.adyen.com/ca/services/DataProtectionService"
 )
 
 // also update LibVersion in src/common/configuration.go when a version is updated and a major lib version is released
@@ -74,6 +77,7 @@ const (
 	ManagementAPIVersion            = "v1"
 	LegalEntityAPIVersion           = "v3"
 	PosTerminalManagementAPIVersion = "v1"
+	DataProtectionAPIVersion        = "v1"
 )
 
 // APIClient Manages access to Adyen API services.
@@ -102,6 +106,7 @@ type APIClient struct {
 	transfers                          *transfers.APIClient
 	management                         *management.APIClient
 	legalEntity                        *legalentity.APIClient
+	dataProtection                     *dataprotection.GeneralApi
 }
 
 // NewClient creates a new API client. Requires Config object.
@@ -368,6 +373,18 @@ func (c *APIClient) PlatformsNotificationConfiguration() *platformsnotificationc
 	return c.platformsNotificationConfiguration
 }
 
+func (c *APIClient) DataProtection() *dataprotection.GeneralApi {
+	if c.dataProtection == nil {
+		c.dataProtection = &dataprotection.GeneralApi{
+			Client: c.client,
+			BasePath: func() string {
+                return fmt.Sprintf("%s/%s", c.client.Cfg.DataProtectionEndpoint, DataProtectionAPIVersion)
+			},
+		}
+	}
+	return c.dataProtection
+}
+
 /*
 SetEnvironment This defines the payment environment for live or test
 
@@ -392,6 +409,7 @@ func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix
 		c.client.Cfg.ManagementEndpoint = ManagementEndpointLive
 		c.client.Cfg.LegalEntityEndpoint = LegalEntityEntityLive
 		c.client.Cfg.PosTerminalManagementEndpoint = PosTerminalManagementEndpointLive
+		c.client.Cfg.DataProtectionEndpoint = DataProtectionEndpointLive
 	} else {
 		c.client.Cfg.Environment = env
 		c.client.Cfg.Endpoint = EndpointTest
@@ -404,6 +422,7 @@ func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix
 		c.client.Cfg.ManagementEndpoint = ManagementEndpointTest
 		c.client.Cfg.LegalEntityEndpoint = LegalEntityEntityTest
 		c.client.Cfg.PosTerminalManagementEndpoint = PosTerminalManagementEndpointTest
+		c.client.Cfg.DataProtectionEndpoint = DataProtectionEndpointTest
 	}
 
 	c.client.Cfg.CheckoutEndpoint += "/" + CheckoutAPIVersion

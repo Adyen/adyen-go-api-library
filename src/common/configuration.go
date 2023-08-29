@@ -71,6 +71,7 @@ type Config struct {
 	LegalEntityEndpoint           string        `json:"legalEntityEndpoint,omitempty"`
 	TransfersEndpoint             string        `json:"transfersEndpoint,omitempty"`
 	PosTerminalManagementEndpoint string        `json:"posTerminalManagementEndpoint,omitempty"`
+	DataProtectionEndpoint        string        `json:"dataProtectionEndpoint,omitempty"`
 
 	//Checkout Specific
 	CheckoutEndpoint string `json:"checkoutEndpoint,omitempty"`
