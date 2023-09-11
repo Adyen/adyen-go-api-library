@@ -21,7 +21,7 @@ openapi-generator-cli:=java -jar $(openapi-generator-jar)
 goimports:=$(shell go env GOPATH)/bin/goimports
 
 generator:=go
-services:=balancecontrol balanceplatform acswebhook configurationwebhook reportwebhook transferwebhook binlookup checkout legalentity management managementwebhook payments payout posterminalmanagement recurring storedvalue transfers
+services:=balancecontrol balanceplatform acswebhook configurationwebhook reportwebhook transferwebhook binlookup checkout legalentity management managementwebhook payments payout posterminalmanagement recurring storedvalue transfers dataprotection
 output:=src
 templates:=templates/custom
 
@@ -56,6 +56,8 @@ management: hasRestServiceError=true
 managementwebhook: spec=ManagementNotificationService-v1
 posterminalmanagement: spec=TfmAPIService-v1
 posterminalmanagement: serviceName=PosTerminalManagementApi
+dataprotection: spec=DataProtectionService-v1
+dataprotection: serviceName=DataProtection
 
 # Generate a full client (models and service classes)
 $(services): schema $(openapi-generator-jar) $(goimports)
