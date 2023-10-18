@@ -26,8 +26,10 @@ func Test_Disputes(t *testing.T) {
 	client := adyen.NewClient(&common.Config{
 		ApiKey:      APIKey,
 		Environment: "TEST",
+		Debug:       true,
 	})
-	service := client.Checkout()
+	checkoutApi := client.Checkout()
+	service := client.Disputes()
 
 	createTestPayment := func() string {
 		card := checkout.NewCardDetails()
@@ -36,7 +38,7 @@ func Test_Disputes(t *testing.T) {
 		card.SetEncryptedExpiryYear("test_2030")
 		card.SetEncryptedSecurityCode("test_737")
 		card.SetHolderName("chargeback:10.4")
-		req := service.PaymentsApi.PaymentsInput().PaymentRequest(checkout.PaymentRequest{
+		req := checkoutApi.PaymentsApi.PaymentsInput().PaymentRequest(checkout.PaymentRequest{
 			Amount: checkout.Amount{
 				Currency: "EUR",
 				Value:    1000,
@@ -46,7 +48,7 @@ func Test_Disputes(t *testing.T) {
 			ReturnUrl:       "https://adyen.com",
 			MerchantAccount: MerchantAccount,
 		})
-		res, _, _ := service.PaymentsApi.Payments(context.Background(), req)
+		res, _, _ := checkoutApi.PaymentsApi.Payments(context.Background(), req)
 
 		reference := "MODIFICATION_REFERENCE"
 		body := payments.CaptureRequest{
@@ -67,20 +69,21 @@ func Test_Disputes(t *testing.T) {
 	t.Run("Disputes", func(t *testing.T) {
 		t.Run("Retrieve applicable defense reasons", func(t *testing.T) {
 			pspReference := createTestPayment()
-			res, httpRes, err := client.Disputes().RetrieveApplicableDefenseReasons(&disputes.DefenseReasonsRequest{
+			req := service.RetrieveApplicableDefenseReasonsInput().DefenseReasonsRequest(disputes.DefenseReasonsRequest{
 				DisputePspReference: pspReference,
 				MerchantAccountCode: MerchantAccount,
 			})
+			res, httpRes, err := service.RetrieveApplicableDefenseReasons(context.Background(), req)
 
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
 			assert.NotNil(t, res)
-			assert.Equal(t, "Dispute not found.", res.DisputeServiceResult.ErrorMessage)
+			assert.Equal(t, "Dispute not found.", res.DisputeServiceResult.GetErrorMessage())
 		})
 
 		t.Run("Supply defense document", func(t *testing.T) {
 			pspReference := createTestPayment()
-			res, httpRes, err := client.Disputes().SupplyDefenseDocument(&disputes.SupplyDefenseDocumentRequest{
+			req := service.SupplyDefenseDocumentInput().SupplyDefenseDocumentRequest(disputes.SupplyDefenseDocumentRequest{
 				DefenseDocuments: []disputes.DefenseDocument{
 					{
 						Content:                 "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==",
@@ -91,48 +94,52 @@ func Test_Disputes(t *testing.T) {
 				DisputePspReference: pspReference,
 				MerchantAccountCode: MerchantAccount,
 			})
+			res, httpRes, err := service.SupplyDefenseDocument(context.Background(), req)
 
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
 			assert.NotNil(t, res)
-			assert.Equal(t, "Unknown dispute", res.DisputeServiceResult.ErrorMessage)
+			assert.Equal(t, "Unknown dispute", res.DisputeServiceResult.GetErrorMessage())
 		})
 
 		t.Run("Delete dispute defense document", func(t *testing.T) {
 			pspReference := createTestPayment()
-			res, httpRes, err := client.Disputes().DeleteDisputeDefenseDocument(&disputes.DeleteDefenseDocumentRequest{
+			req := service.DeleteDisputeDefenseDocumentInput().DeleteDefenseDocumentRequest(disputes.DeleteDefenseDocumentRequest{
 				DefenseDocumentType: "DefenseMaterial",
 				DisputePspReference: pspReference,
 				MerchantAccountCode: MerchantAccount,
 			})
+			res, httpRes, err := service.DeleteDisputeDefenseDocument(context.Background(), req)
 
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
 			assert.NotNil(t, res)
-			assert.Equal(t, "Unknown dispute", res.DisputeServiceResult.ErrorMessage)
+			assert.Equal(t, "Unknown dispute", res.DisputeServiceResult.GetErrorMessage())
 		})
 
 		t.Run("Defend dispute", func(t *testing.T) {
 			pspReference := createTestPayment()
-			res, httpRes, err := client.Disputes().DefendDispute(&disputes.DefendDisputeRequest{
+			req := service.DefendDisputeInput().DefendDisputeRequest(disputes.DefendDisputeRequest{
 				DefenseReasonCode:   "DuplicateChargeback",
 				DisputePspReference: pspReference,
 				MerchantAccountCode: MerchantAccount,
 			})
+			res, httpRes, err := service.DefendDispute(context.Background(), req)
 
 			require.Nil(t, err)
 			assert.Equal(t, 200, httpRes.StatusCode)
 			assert.NotNil(t, res)
-			assert.Equal(t, "Dispute not found.", res.DisputeServiceResult.ErrorMessage)
+			assert.Equal(t, "Dispute not found.", res.DisputeServiceResult.GetErrorMessage())
 		})
 
 		t.Run("Download dispute defense document", func(t *testing.T) {
 			pspReference := createTestPayment()
-			_, httpRes, err := client.Disputes().DownloadDisputeDefenseDocument(&disputes.DownloadDefenseDocumentRequest{
+			req := service.DownloadDisputeDefenseDocumentInput().DownloadDefenseDocumentRequest(disputes.DownloadDefenseDocumentRequest{
 				DefenseDocumentType: "DefenseMaterial",
 				DisputePspReference: pspReference,
 				MerchantAccountCode: MerchantAccount,
 			})
+			_, httpRes, err := service.DownloadDisputeDefenseDocument(context.Background(), req)
 
 			require.NotNil(t, err)
 			assert.Equal(t, 403, httpRes.StatusCode)
