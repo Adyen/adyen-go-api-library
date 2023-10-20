@@ -66,6 +66,10 @@ func (a *BalanceAccountsApi) CreateBalanceAccount(ctx context.Context, r Balance
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -166,6 +170,10 @@ func (a *BalanceAccountsApi) CreateSweep(ctx context.Context, r BalanceAccountsA
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -260,6 +268,10 @@ func (a *BalanceAccountsApi) DeleteSweep(ctx context.Context, r BalanceAccountsA
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -375,6 +387,10 @@ func (a *BalanceAccountsApi) GetAllPaymentInstrumentsForBalanceAccount(ctx conte
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -489,6 +505,10 @@ func (a *BalanceAccountsApi) GetAllSweepsForBalanceAccount(ctx context.Context, 
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -580,6 +600,10 @@ func (a *BalanceAccountsApi) GetBalanceAccount(ctx context.Context, r BalanceAcc
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -675,6 +699,10 @@ func (a *BalanceAccountsApi) GetSweep(ctx context.Context, r BalanceAccountsApiG
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -773,6 +801,10 @@ func (a *BalanceAccountsApi) UpdateBalanceAccount(ctx context.Context, r Balance
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -874,6 +906,10 @@ func (a *BalanceAccountsApi) UpdateSweep(ctx context.Context, r BalanceAccountsA
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
