@@ -51,7 +51,7 @@ const (
 
 const (
 	LibName    = "adyen-go-api-library"
-	LibVersion = "7.1.0"
+	LibVersion = "7.3.0"
 )
 
 // Config stores the configuration of the API client
@@ -71,6 +71,7 @@ type Config struct {
 	LegalEntityEndpoint           string        `json:"legalEntityEndpoint,omitempty"`
 	TransfersEndpoint             string        `json:"transfersEndpoint,omitempty"`
 	PosTerminalManagementEndpoint string        `json:"posTerminalManagementEndpoint,omitempty"`
+	DataProtectionEndpoint        string        `json:"dataProtectionEndpoint,omitempty"`
 
 	//Checkout Specific
 	CheckoutEndpoint string `json:"checkoutEndpoint,omitempty"`

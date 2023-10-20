@@ -40,8 +40,6 @@ type BalanceAccount struct {
 	Reference *string `json:"reference,omitempty"`
 	// The status of the balance account, set to **Active** by default.
 	Status *string `json:"status,omitempty"`
-	// Contains key-value pairs that specify configurations for balance sweeps per currency code. A sweep pulls in or pushes out funds based on a defined schedule, amount, and a source (for pulling funds) or a destination (for pushing funds).  The key must be a three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes) in uppercase. For example, **EUR**. The value must be an object containing the sweep configuration.
-	SweepConfigurations *map[string]SweepConfiguration `json:"sweepConfigurations,omitempty"`
 	// The time zone of the balance account. For example, **Europe/Amsterdam**. Defaults to the time zone of the account holder if no time zone is set. For possible values, see the [list of time zone codes](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 	TimeZone *string `json:"timeZone,omitempty"`
 }
@@ -401,38 +399,6 @@ func (o *BalanceAccount) SetStatus(v string) {
 	o.Status = &v
 }
 
-// GetSweepConfigurations returns the SweepConfigurations field value if set, zero value otherwise.
-func (o *BalanceAccount) GetSweepConfigurations() map[string]SweepConfiguration {
-	if o == nil || common.IsNil(o.SweepConfigurations) {
-		var ret map[string]SweepConfiguration
-		return ret
-	}
-	return *o.SweepConfigurations
-}
-
-// GetSweepConfigurationsOk returns a tuple with the SweepConfigurations field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BalanceAccount) GetSweepConfigurationsOk() (*map[string]SweepConfiguration, bool) {
-	if o == nil || common.IsNil(o.SweepConfigurations) {
-		return nil, false
-	}
-	return o.SweepConfigurations, true
-}
-
-// HasSweepConfigurations returns a boolean if a field has been set.
-func (o *BalanceAccount) HasSweepConfigurations() bool {
-	if o != nil && !common.IsNil(o.SweepConfigurations) {
-		return true
-	}
-
-	return false
-}
-
-// SetSweepConfigurations gets a reference to the given map[string]SweepConfiguration and assigns it to the SweepConfigurations field.
-func (o *BalanceAccount) SetSweepConfigurations(v map[string]SweepConfiguration) {
-	o.SweepConfigurations = &v
-}
-
 // GetTimeZone returns the TimeZone field value if set, zero value otherwise.
 func (o *BalanceAccount) GetTimeZone() string {
 	if o == nil || common.IsNil(o.TimeZone) {
@@ -503,9 +469,6 @@ func (o BalanceAccount) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Status) {
 		toSerialize["status"] = o.Status
-	}
-	if !common.IsNil(o.SweepConfigurations) {
-		toSerialize["sweepConfigurations"] = o.SweepConfigurations
 	}
 	if !common.IsNil(o.TimeZone) {
 		toSerialize["timeZone"] = o.TimeZone

@@ -8,8 +8,10 @@ package adyen
 
 import (
 	"fmt"
+	"github.com/adyen/adyen-go-api-library/v7/src/dataprotection"
 	"net/http"
 
+	"github.com/adyen/adyen-go-api-library/v7/src/balancecontrol"
 	"github.com/adyen/adyen-go-api-library/v7/src/balanceplatform"
 	"github.com/adyen/adyen-go-api-library/v7/src/binlookup"
 	"github.com/adyen/adyen-go-api-library/v7/src/checkout"
@@ -52,6 +54,8 @@ const (
 	LegalEntityEntityLive             = "https://kyc-live.adyen.com/lem"
 	PosTerminalManagementEndpointTest = "https://postfmapi-test.adyen.com/postfmapi/terminal"
 	PosTerminalManagementEndpointLive = "https://postfmapi-live.adyen.com/postfmapi/terminal"
+	DataProtectionEndpointTest        = "https://ca-test.adyen.com/ca/services/DataProtectionService"
+	DataProtectionEndpointLive        = "https://ca-live.adyen.com/ca/services/DataProtectionService"
 )
 
 // also update LibVersion in src/common/configuration.go when a version is updated and a major lib version is released
@@ -64,6 +68,7 @@ const (
 	RecurringAPIVersion             = "v68"
 	CheckoutAPIVersion              = "v70"
 	BinLookupAPIVersion             = "v54"
+	BalanceControlAPIVersion        = "v1"
 	EndpointProtocol                = "https://"
 	DisputesAPIVersion              = "v30"
 	StoredValueAPIVersion           = "v46"
@@ -72,6 +77,7 @@ const (
 	ManagementAPIVersion            = "v3"
 	LegalEntityAPIVersion           = "v3"
 	PosTerminalManagementAPIVersion = "v1"
+	DataProtectionAPIVersion        = "v1"
 )
 
 // APIClient Manages access to Adyen API services.
@@ -79,18 +85,19 @@ const (
 type APIClient struct {
 	client *common.Client
 	// API Services
-	checkout                           *checkout.APIClient
-	payments                           *payments.APIClient
-	payout                             *payout.APIClient
-	recurring                          *recurring.GeneralApi
-	binLookup                          *binlookup.GeneralApi
-    // Deprecated: Please migrate to the new Adyen For Platforms.
-	platformsAccount                   *platformsaccount.PlatformsAccount
-    // Deprecated: Please migrate to the new Adyen For Platforms.
-	platformsFund                      *platformsfund.PlatformsFund
-    // Deprecated: Please migrate to the new Adyen For Platforms.
-	platformsHostedOnboardingPage      *platformshostedonboardingpage.PlatformsHostedOnboardingPage
-    // Deprecated: Please migrate to the new Adyen For Platforms.
+	checkout       *checkout.APIClient
+	payments       *payments.APIClient
+	payout         *payout.APIClient
+	recurring      *recurring.GeneralApi
+	binLookup      *binlookup.GeneralApi
+	balancecontrol *balancecontrol.GeneralApi
+	// Deprecated: Please migrate to the new Adyen For Platforms.
+	platformsAccount *platformsaccount.PlatformsAccount
+	// Deprecated: Please migrate to the new Adyen For Platforms.
+	platformsFund *platformsfund.PlatformsFund
+	// Deprecated: Please migrate to the new Adyen For Platforms.
+	platformsHostedOnboardingPage *platformshostedonboardingpage.PlatformsHostedOnboardingPage
+	// Deprecated: Please migrate to the new Adyen For Platforms.
 	platformsNotificationConfiguration *platformsnotificationconfiguration.PlatformsNotificationConfiguration
 	posTerminalManagement              *posterminalmanagement.GeneralApi
 	disputes                           *disputes.Disputes
@@ -99,6 +106,7 @@ type APIClient struct {
 	transfers                          *transfers.APIClient
 	management                         *management.APIClient
 	legalEntity                        *legalentity.APIClient
+	dataProtection                     *dataprotection.GeneralApi
 }
 
 // NewClient creates a new API client. Requires Config object.
@@ -234,6 +242,18 @@ func (c *APIClient) BinLookup() *binlookup.GeneralApi {
 	return c.binLookup
 }
 
+func (c *APIClient) BalanceControl() *balancecontrol.GeneralApi {
+	if c.balancecontrol == nil {
+		c.balancecontrol = &balancecontrol.GeneralApi{
+			Client: c.client,
+			BasePath: func() string {
+				return fmt.Sprintf("%s/pal/servlet/BalanceControl/%s", c.client.Cfg.Endpoint, BalanceControlAPIVersion)
+			},
+		}
+	}
+	return c.balancecontrol
+}
+
 func (c *APIClient) StoredValue() *storedvalue.GeneralApi {
 	if c.storedValue == nil {
 		c.storedValue = &storedvalue.GeneralApi{
@@ -353,6 +373,18 @@ func (c *APIClient) PlatformsNotificationConfiguration() *platformsnotificationc
 	return c.platformsNotificationConfiguration
 }
 
+func (c *APIClient) DataProtection() *dataprotection.GeneralApi {
+	if c.dataProtection == nil {
+		c.dataProtection = &dataprotection.GeneralApi{
+			Client: c.client,
+			BasePath: func() string {
+                return fmt.Sprintf("%s/%s", c.client.Cfg.DataProtectionEndpoint, DataProtectionAPIVersion)
+			},
+		}
+	}
+	return c.dataProtection
+}
+
 /*
 SetEnvironment This defines the payment environment for live or test
 
@@ -377,6 +409,7 @@ func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix
 		c.client.Cfg.ManagementEndpoint = ManagementEndpointLive
 		c.client.Cfg.LegalEntityEndpoint = LegalEntityEntityLive
 		c.client.Cfg.PosTerminalManagementEndpoint = PosTerminalManagementEndpointLive
+		c.client.Cfg.DataProtectionEndpoint = DataProtectionEndpointLive
 	} else {
 		c.client.Cfg.Environment = env
 		c.client.Cfg.Endpoint = EndpointTest
@@ -389,6 +422,7 @@ func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix
 		c.client.Cfg.ManagementEndpoint = ManagementEndpointTest
 		c.client.Cfg.LegalEntityEndpoint = LegalEntityEntityTest
 		c.client.Cfg.PosTerminalManagementEndpoint = PosTerminalManagementEndpointTest
+		c.client.Cfg.DataProtectionEndpoint = DataProtectionEndpointTest
 	}
 
 	c.client.Cfg.CheckoutEndpoint += "/" + CheckoutAPIVersion
