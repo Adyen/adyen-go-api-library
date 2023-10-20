@@ -76,6 +76,10 @@ func (a *SplitConfigurationMerchantLevelApi) CreateRule(ctx context.Context, r S
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -177,6 +181,10 @@ func (a *SplitConfigurationMerchantLevelApi) CreateSplitConfiguration(ctx contex
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -274,6 +282,10 @@ func (a *SplitConfigurationMerchantLevelApi) DeleteSplitConfiguration(ctx contex
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -376,6 +388,10 @@ func (a *SplitConfigurationMerchantLevelApi) DeleteSplitConfigurationRule(ctx co
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -474,6 +490,10 @@ func (a *SplitConfigurationMerchantLevelApi) GetSplitConfiguration(ctx context.C
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -568,6 +588,10 @@ func (a *SplitConfigurationMerchantLevelApi) ListSplitConfigurations(ctx context
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -676,6 +700,10 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitConditions(ctx context.C
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -779,6 +807,10 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitConfigurationDescription
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -889,6 +921,10 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitLogic(ctx context.Contex
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 

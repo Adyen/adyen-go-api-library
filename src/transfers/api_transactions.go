@@ -145,6 +145,10 @@ func (a *TransactionsApi) GetAllTransactions(ctx context.Context, r Transactions
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 401 {
@@ -227,6 +231,10 @@ func (a *TransactionsApi) GetTransaction(ctx context.Context, r TransactionsApiG
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 

@@ -70,6 +70,10 @@ func (a *CapitalApi) GetCapitalAccount(ctx context.Context, r CapitalApiGetCapit
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -170,6 +174,10 @@ func (a *CapitalApi) GetGrantReferenceDetails(ctx context.Context, r CapitalApiG
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -273,6 +281,10 @@ func (a *CapitalApi) RequestGrantPayout(ctx context.Context, r CapitalApiRequest
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 

@@ -67,6 +67,10 @@ func (a *TransfersApi) TransferFunds(ctx context.Context, r TransfersApiTransfer
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 401 {

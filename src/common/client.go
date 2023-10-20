@@ -32,6 +32,12 @@ import (
 	"golang.org/x/oauth2"
 )
 
+const (
+	apiKeyHeader        = "X-Api-Key"
+	authorizationHeader = "Authorization"
+	redacted            = "***************"
+)
+
 var (
 	jsonCheck = regexp.MustCompile(`(?i:(?:application|text)/(?:vnd\.[^;]+\+)?json)`)
 	xmlCheck  = regexp.MustCompile(`(?i:(?:application|text)/xml)`)
@@ -194,7 +200,11 @@ func (c *Client) MakeHTTPPatchRequest(req interface{}, res interface{}, path str
 // CallAPI do the Request.
 func (c *Client) CallAPI(request *http.Request) (*http.Response, error) {
 	if c.Cfg.Debug {
+		originalHeaders := request.Header.Clone()
+		maskApiKey(request)
+		maskAuthorization(request)
 		dump, err := httputil.DumpRequestOut(request, true)
+		request.Header = originalHeaders
 		if err != nil {
 			return nil, err
 		}
@@ -215,6 +225,32 @@ func (c *Client) CallAPI(request *http.Request) (*http.Response, error) {
 	}
 
 	return resp, err
+}
+
+func maskApiKey(request *http.Request) {
+	apiKey := request.Header.Get(apiKeyHeader)
+	if apiKey == "" {
+		return
+	}
+	const visibleChars = 5
+	cutPoint := len(apiKey) - visibleChars
+	if cutPoint > 0 {
+		maskedKey := redacted + apiKey[cutPoint:]
+		request.Header.Set(apiKeyHeader, maskedKey)
+	}
+}
+
+func maskAuthorization(request *http.Request) {
+	authorization := request.Header.Get(authorizationHeader)
+	if authorization == "" {
+		return
+	}
+	fields := strings.Fields(authorization)
+	maskedAuthorization := redacted
+	if len(fields) > 0 {
+		maskedAuthorization = fields[0] + " " + redacted
+	}
+	request.Header.Set(authorizationHeader, maskedAuthorization)
 }
 
 // PrepareRequest build the Request
@@ -285,7 +321,7 @@ func (c *Client) PrepareRequest(
 
 	// Add authentication headers
 	if c.Cfg.ApiKey != "" {
-		localVarRequest.Header.Add("x-API-key", c.Cfg.ApiKey)
+		localVarRequest.Header.Add(apiKeyHeader, c.Cfg.ApiKey)
 	} else if c.Cfg.Username != "" && c.Cfg.Password != "" {
 		localVarRequest.SetBasicAuth(c.Cfg.Username, c.Cfg.Password)
 	}
@@ -314,7 +350,7 @@ func (c *Client) PrepareRequest(
 
 		// AccessToken Authentication
 		if auth, ok := ctx.Value(ContextAccessToken).(string); ok {
-			localVarRequest.Header.Add("Authorization", "Bearer "+auth)
+			localVarRequest.Header.Add(authorizationHeader, "Bearer "+auth)
 		}
 
 	}

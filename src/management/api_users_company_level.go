@@ -74,6 +74,10 @@ func (a *UsersCompanyLevelApi) CreateNewUser(ctx context.Context, r UsersCompany
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -172,6 +176,10 @@ func (a *UsersCompanyLevelApi) GetUserDetails(ctx context.Context, r UsersCompan
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -299,6 +307,10 @@ func (a *UsersCompanyLevelApi) ListUsers(ctx context.Context, r UsersCompanyLeve
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -403,6 +415,10 @@ func (a *UsersCompanyLevelApi) UpdateUserDetails(ctx context.Context, r UsersCom
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 

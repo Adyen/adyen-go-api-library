@@ -66,6 +66,10 @@ func (a *TransactionRulesApi) CreateTransactionRule(ctx context.Context, r Trans
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -158,6 +162,10 @@ func (a *TransactionRulesApi) DeleteTransactionRule(ctx context.Context, r Trans
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -249,6 +257,10 @@ func (a *TransactionRulesApi) GetTransactionRule(ctx context.Context, r Transact
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -351,6 +363,10 @@ func (a *TransactionRulesApi) UpdateTransactionRule(ctx context.Context, r Trans
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 

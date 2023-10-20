@@ -81,6 +81,10 @@ func (a *TerminalSettingsCompanyLevelApi) GetTerminalLogo(ctx context.Context, r
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -179,6 +183,10 @@ func (a *TerminalSettingsCompanyLevelApi) GetTerminalSettings(ctx context.Contex
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -294,6 +302,10 @@ func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalLogo(ctx context.Context
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -401,6 +413,10 @@ func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalSettings(ctx context.Con
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 

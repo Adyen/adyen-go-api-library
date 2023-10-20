@@ -64,6 +64,10 @@ func (a *NetworkTokensApi) GetNetworkToken(ctx context.Context, r NetworkTokensA
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 401 {
@@ -152,6 +156,10 @@ func (a *NetworkTokensApi) UpdateNetworkToken(ctx context.Context, r NetworkToke
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 

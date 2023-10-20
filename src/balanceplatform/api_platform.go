@@ -86,6 +86,10 @@ func (a *PlatformApi) GetAllAccountHoldersUnderBalancePlatform(ctx context.Conte
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -177,6 +181,10 @@ func (a *PlatformApi) GetBalancePlatform(ctx context.Context, r PlatformApiGetBa
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
