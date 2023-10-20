@@ -165,15 +165,15 @@ func Test_Transfers(t *testing.T) {
 
 		assert.Equal(t, 200, httpRes.StatusCode)
 		require.NoError(t, err)
-		require.Len(t, res.Data, 3)
-		assert.Equal(t, 2022, res.GetData()[0].GetCreatedAt().Year())
+		require.Len(t, res.Data, 4)
+		assert.Equal(t, 2023, res.GetData()[0].GetCreationDate().Year())
 	})
 
 	t.Run("Request a grant payout", func(t *testing.T) {
 		request := service.CapitalApi.RequestGrantPayoutInput().CapitalGrantInfo(transfers.CapitalGrantInfo{
 			GrantAccountId: "CG00000000000000000000001",
 			GrantOfferId:   "0000000000000001",
-			Counterparty: &transfers.Counterparty2{
+			Counterparty: &transfers.Counterparty{
 				AccountHolderId:  common.PtrString("AH00000000000000000000001"),
 				BalanceAccountId: common.PtrString("BA00000000000000000000001"),
 			},

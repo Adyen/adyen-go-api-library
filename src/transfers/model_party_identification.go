@@ -14,11 +14,11 @@ import (
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// checks if the UltimatePartyIdentification type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &UltimatePartyIdentification{}
+// checks if the PartyIdentification type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &PartyIdentification{}
 
-// UltimatePartyIdentification struct for UltimatePartyIdentification
-type UltimatePartyIdentification struct {
+// PartyIdentification struct for PartyIdentification
+type PartyIdentification struct {
 	Address *Address `json:"address,omitempty"`
 	// The date of birth of the individual in [ISO-8601](https://www.w3.org/TR/NOTE-datetime) format. For example, **YYYY-MM-DD**. Should not be before January 1, 1900.  Allowed only when `type` is **individual**.
 	DateOfBirth *string `json:"dateOfBirth,omitempty"`
@@ -34,30 +34,30 @@ type UltimatePartyIdentification struct {
 	Type *string `json:"type,omitempty"`
 }
 
-// NewUltimatePartyIdentification instantiates a new UltimatePartyIdentification object
+// NewPartyIdentification instantiates a new PartyIdentification object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUltimatePartyIdentification(fullName string) *UltimatePartyIdentification {
-	this := UltimatePartyIdentification{}
+func NewPartyIdentification(fullName string) *PartyIdentification {
+	this := PartyIdentification{}
 	this.FullName = fullName
 	var type_ string = "unknown"
 	this.Type = &type_
 	return &this
 }
 
-// NewUltimatePartyIdentificationWithDefaults instantiates a new UltimatePartyIdentification object
+// NewPartyIdentificationWithDefaults instantiates a new PartyIdentification object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewUltimatePartyIdentificationWithDefaults() *UltimatePartyIdentification {
-	this := UltimatePartyIdentification{}
+func NewPartyIdentificationWithDefaults() *PartyIdentification {
+	this := PartyIdentification{}
 	var type_ string = "unknown"
 	this.Type = &type_
 	return &this
 }
 
 // GetAddress returns the Address field value if set, zero value otherwise.
-func (o *UltimatePartyIdentification) GetAddress() Address {
+func (o *PartyIdentification) GetAddress() Address {
 	if o == nil || common.IsNil(o.Address) {
 		var ret Address
 		return ret
@@ -67,7 +67,7 @@ func (o *UltimatePartyIdentification) GetAddress() Address {
 
 // GetAddressOk returns a tuple with the Address field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UltimatePartyIdentification) GetAddressOk() (*Address, bool) {
+func (o *PartyIdentification) GetAddressOk() (*Address, bool) {
 	if o == nil || common.IsNil(o.Address) {
 		return nil, false
 	}
@@ -75,7 +75,7 @@ func (o *UltimatePartyIdentification) GetAddressOk() (*Address, bool) {
 }
 
 // HasAddress returns a boolean if a field has been set.
-func (o *UltimatePartyIdentification) HasAddress() bool {
+func (o *PartyIdentification) HasAddress() bool {
 	if o != nil && !common.IsNil(o.Address) {
 		return true
 	}
@@ -84,12 +84,12 @@ func (o *UltimatePartyIdentification) HasAddress() bool {
 }
 
 // SetAddress gets a reference to the given Address and assigns it to the Address field.
-func (o *UltimatePartyIdentification) SetAddress(v Address) {
+func (o *PartyIdentification) SetAddress(v Address) {
 	o.Address = &v
 }
 
 // GetDateOfBirth returns the DateOfBirth field value if set, zero value otherwise.
-func (o *UltimatePartyIdentification) GetDateOfBirth() string {
+func (o *PartyIdentification) GetDateOfBirth() string {
 	if o == nil || common.IsNil(o.DateOfBirth) {
 		var ret string
 		return ret
@@ -99,7 +99,7 @@ func (o *UltimatePartyIdentification) GetDateOfBirth() string {
 
 // GetDateOfBirthOk returns a tuple with the DateOfBirth field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UltimatePartyIdentification) GetDateOfBirthOk() (*string, bool) {
+func (o *PartyIdentification) GetDateOfBirthOk() (*string, bool) {
 	if o == nil || common.IsNil(o.DateOfBirth) {
 		return nil, false
 	}
@@ -107,7 +107,7 @@ func (o *UltimatePartyIdentification) GetDateOfBirthOk() (*string, bool) {
 }
 
 // HasDateOfBirth returns a boolean if a field has been set.
-func (o *UltimatePartyIdentification) HasDateOfBirth() bool {
+func (o *PartyIdentification) HasDateOfBirth() bool {
 	if o != nil && !common.IsNil(o.DateOfBirth) {
 		return true
 	}
@@ -116,12 +116,12 @@ func (o *UltimatePartyIdentification) HasDateOfBirth() bool {
 }
 
 // SetDateOfBirth gets a reference to the given string and assigns it to the DateOfBirth field.
-func (o *UltimatePartyIdentification) SetDateOfBirth(v string) {
+func (o *PartyIdentification) SetDateOfBirth(v string) {
 	o.DateOfBirth = &v
 }
 
 // GetFirstName returns the FirstName field value if set, zero value otherwise.
-func (o *UltimatePartyIdentification) GetFirstName() string {
+func (o *PartyIdentification) GetFirstName() string {
 	if o == nil || common.IsNil(o.FirstName) {
 		var ret string
 		return ret
@@ -131,7 +131,7 @@ func (o *UltimatePartyIdentification) GetFirstName() string {
 
 // GetFirstNameOk returns a tuple with the FirstName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UltimatePartyIdentification) GetFirstNameOk() (*string, bool) {
+func (o *PartyIdentification) GetFirstNameOk() (*string, bool) {
 	if o == nil || common.IsNil(o.FirstName) {
 		return nil, false
 	}
@@ -139,7 +139,7 @@ func (o *UltimatePartyIdentification) GetFirstNameOk() (*string, bool) {
 }
 
 // HasFirstName returns a boolean if a field has been set.
-func (o *UltimatePartyIdentification) HasFirstName() bool {
+func (o *PartyIdentification) HasFirstName() bool {
 	if o != nil && !common.IsNil(o.FirstName) {
 		return true
 	}
@@ -148,12 +148,12 @@ func (o *UltimatePartyIdentification) HasFirstName() bool {
 }
 
 // SetFirstName gets a reference to the given string and assigns it to the FirstName field.
-func (o *UltimatePartyIdentification) SetFirstName(v string) {
+func (o *PartyIdentification) SetFirstName(v string) {
 	o.FirstName = &v
 }
 
 // GetFullName returns the FullName field value
-func (o *UltimatePartyIdentification) GetFullName() string {
+func (o *PartyIdentification) GetFullName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -164,7 +164,7 @@ func (o *UltimatePartyIdentification) GetFullName() string {
 
 // GetFullNameOk returns a tuple with the FullName field value
 // and a boolean to check if the value has been set.
-func (o *UltimatePartyIdentification) GetFullNameOk() (*string, bool) {
+func (o *PartyIdentification) GetFullNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -172,12 +172,12 @@ func (o *UltimatePartyIdentification) GetFullNameOk() (*string, bool) {
 }
 
 // SetFullName sets field value
-func (o *UltimatePartyIdentification) SetFullName(v string) {
+func (o *PartyIdentification) SetFullName(v string) {
 	o.FullName = v
 }
 
 // GetLastName returns the LastName field value if set, zero value otherwise.
-func (o *UltimatePartyIdentification) GetLastName() string {
+func (o *PartyIdentification) GetLastName() string {
 	if o == nil || common.IsNil(o.LastName) {
 		var ret string
 		return ret
@@ -187,7 +187,7 @@ func (o *UltimatePartyIdentification) GetLastName() string {
 
 // GetLastNameOk returns a tuple with the LastName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UltimatePartyIdentification) GetLastNameOk() (*string, bool) {
+func (o *PartyIdentification) GetLastNameOk() (*string, bool) {
 	if o == nil || common.IsNil(o.LastName) {
 		return nil, false
 	}
@@ -195,7 +195,7 @@ func (o *UltimatePartyIdentification) GetLastNameOk() (*string, bool) {
 }
 
 // HasLastName returns a boolean if a field has been set.
-func (o *UltimatePartyIdentification) HasLastName() bool {
+func (o *PartyIdentification) HasLastName() bool {
 	if o != nil && !common.IsNil(o.LastName) {
 		return true
 	}
@@ -204,12 +204,12 @@ func (o *UltimatePartyIdentification) HasLastName() bool {
 }
 
 // SetLastName gets a reference to the given string and assigns it to the LastName field.
-func (o *UltimatePartyIdentification) SetLastName(v string) {
+func (o *PartyIdentification) SetLastName(v string) {
 	o.LastName = &v
 }
 
 // GetReference returns the Reference field value if set, zero value otherwise.
-func (o *UltimatePartyIdentification) GetReference() string {
+func (o *PartyIdentification) GetReference() string {
 	if o == nil || common.IsNil(o.Reference) {
 		var ret string
 		return ret
@@ -219,7 +219,7 @@ func (o *UltimatePartyIdentification) GetReference() string {
 
 // GetReferenceOk returns a tuple with the Reference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UltimatePartyIdentification) GetReferenceOk() (*string, bool) {
+func (o *PartyIdentification) GetReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Reference) {
 		return nil, false
 	}
@@ -227,7 +227,7 @@ func (o *UltimatePartyIdentification) GetReferenceOk() (*string, bool) {
 }
 
 // HasReference returns a boolean if a field has been set.
-func (o *UltimatePartyIdentification) HasReference() bool {
+func (o *PartyIdentification) HasReference() bool {
 	if o != nil && !common.IsNil(o.Reference) {
 		return true
 	}
@@ -236,12 +236,12 @@ func (o *UltimatePartyIdentification) HasReference() bool {
 }
 
 // SetReference gets a reference to the given string and assigns it to the Reference field.
-func (o *UltimatePartyIdentification) SetReference(v string) {
+func (o *PartyIdentification) SetReference(v string) {
 	o.Reference = &v
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
-func (o *UltimatePartyIdentification) GetType() string {
+func (o *PartyIdentification) GetType() string {
 	if o == nil || common.IsNil(o.Type) {
 		var ret string
 		return ret
@@ -251,7 +251,7 @@ func (o *UltimatePartyIdentification) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UltimatePartyIdentification) GetTypeOk() (*string, bool) {
+func (o *PartyIdentification) GetTypeOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Type) {
 		return nil, false
 	}
@@ -259,7 +259,7 @@ func (o *UltimatePartyIdentification) GetTypeOk() (*string, bool) {
 }
 
 // HasType returns a boolean if a field has been set.
-func (o *UltimatePartyIdentification) HasType() bool {
+func (o *PartyIdentification) HasType() bool {
 	if o != nil && !common.IsNil(o.Type) {
 		return true
 	}
@@ -268,11 +268,11 @@ func (o *UltimatePartyIdentification) HasType() bool {
 }
 
 // SetType gets a reference to the given string and assigns it to the Type field.
-func (o *UltimatePartyIdentification) SetType(v string) {
+func (o *PartyIdentification) SetType(v string) {
 	o.Type = &v
 }
 
-func (o UltimatePartyIdentification) MarshalJSON() ([]byte, error) {
+func (o PartyIdentification) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -280,7 +280,7 @@ func (o UltimatePartyIdentification) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UltimatePartyIdentification) ToMap() (map[string]interface{}, error) {
+func (o PartyIdentification) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.Address) {
 		toSerialize["address"] = o.Address
@@ -304,43 +304,43 @@ func (o UltimatePartyIdentification) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableUltimatePartyIdentification struct {
-	value *UltimatePartyIdentification
+type NullablePartyIdentification struct {
+	value *PartyIdentification
 	isSet bool
 }
 
-func (v NullableUltimatePartyIdentification) Get() *UltimatePartyIdentification {
+func (v NullablePartyIdentification) Get() *PartyIdentification {
 	return v.value
 }
 
-func (v *NullableUltimatePartyIdentification) Set(val *UltimatePartyIdentification) {
+func (v *NullablePartyIdentification) Set(val *PartyIdentification) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableUltimatePartyIdentification) IsSet() bool {
+func (v NullablePartyIdentification) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableUltimatePartyIdentification) Unset() {
+func (v *NullablePartyIdentification) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableUltimatePartyIdentification(val *UltimatePartyIdentification) *NullableUltimatePartyIdentification {
-	return &NullableUltimatePartyIdentification{value: val, isSet: true}
+func NewNullablePartyIdentification(val *PartyIdentification) *NullablePartyIdentification {
+	return &NullablePartyIdentification{value: val, isSet: true}
 }
 
-func (v NullableUltimatePartyIdentification) MarshalJSON() ([]byte, error) {
+func (v NullablePartyIdentification) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableUltimatePartyIdentification) UnmarshalJSON(src []byte) error {
+func (v *NullablePartyIdentification) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
 
-func (o *UltimatePartyIdentification) isValidType() bool {
+func (o *PartyIdentification) isValidType() bool {
 	var allowedEnumValues = []string{"individual", "organization", "unknown"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
