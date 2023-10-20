@@ -74,6 +74,10 @@ func (a *UsersMerchantLevelApi) CreateNewUser(ctx context.Context, r UsersMercha
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -172,6 +176,10 @@ func (a *UsersMerchantLevelApi) GetUserDetails(ctx context.Context, r UsersMerch
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -299,6 +307,10 @@ func (a *UsersMerchantLevelApi) ListUsers(ctx context.Context, r UsersMerchantLe
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -403,6 +415,10 @@ func (a *UsersMerchantLevelApi) UpdateUser(ctx context.Context, r UsersMerchantL
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 

@@ -65,6 +65,10 @@ func (a *BankAccountValidationApi) ValidateBankAccountIdentification(ctx context
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 401 {

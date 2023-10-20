@@ -69,6 +69,10 @@ func (a *MyAPICredentialApi) AddAllowedOrigin(ctx context.Context, r MyAPICreden
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -164,6 +168,10 @@ func (a *MyAPICredentialApi) GetAllowedOriginDetails(ctx context.Context, r MyAP
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -254,6 +262,10 @@ func (a *MyAPICredentialApi) GetAllowedOrigins(ctx context.Context, r MyAPICrede
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -343,6 +355,10 @@ func (a *MyAPICredentialApi) GetApiCredentialDetails(ctx context.Context, r MyAP
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -438,6 +454,10 @@ func (a *MyAPICredentialApi) RemoveAllowedOrigin(ctx context.Context, r MyAPICre
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 

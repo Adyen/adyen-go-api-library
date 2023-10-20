@@ -68,6 +68,10 @@ func (a *AccountHoldersApi) CreateAccountHolder(ctx context.Context, r AccountHo
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -159,6 +163,10 @@ func (a *AccountHoldersApi) GetAccountHolder(ctx context.Context, r AccountHolde
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -274,6 +282,10 @@ func (a *AccountHoldersApi) GetAllBalanceAccountsOfAccountHolder(ctx context.Con
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -371,6 +383,10 @@ func (a *AccountHoldersApi) UpdateAccountHolder(ctx context.Context, r AccountHo
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 

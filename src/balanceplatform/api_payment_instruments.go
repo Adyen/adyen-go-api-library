@@ -68,6 +68,10 @@ func (a *PaymentInstrumentsApi) CreatePaymentInstrument(ctx context.Context, r P
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -159,6 +163,10 @@ func (a *PaymentInstrumentsApi) GetAllTransactionRulesForPaymentInstrument(ctx c
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -256,6 +264,10 @@ func (a *PaymentInstrumentsApi) GetPanOfPaymentInstrument(ctx context.Context, r
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -348,6 +360,10 @@ func (a *PaymentInstrumentsApi) GetPaymentInstrument(ctx context.Context, r Paym
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -439,6 +455,10 @@ func (a *PaymentInstrumentsApi) ListNetworkTokens(ctx context.Context, r Payment
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -537,6 +557,10 @@ func (a *PaymentInstrumentsApi) UpdatePaymentInstrument(ctx context.Context, r P
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 

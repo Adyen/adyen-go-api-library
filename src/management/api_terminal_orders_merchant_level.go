@@ -72,6 +72,10 @@ func (a *TerminalOrdersMerchantLevelApi) CancelOrder(ctx context.Context, r Term
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -172,6 +176,10 @@ func (a *TerminalOrdersMerchantLevelApi) CreateOrder(ctx context.Context, r Term
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -274,6 +282,10 @@ func (a *TerminalOrdersMerchantLevelApi) CreateShippingLocation(ctx context.Cont
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -372,6 +384,10 @@ func (a *TerminalOrdersMerchantLevelApi) GetOrder(ctx context.Context, r Termina
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -479,6 +495,10 @@ func (a *TerminalOrdersMerchantLevelApi) ListBillingEntities(ctx context.Context
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -616,6 +636,10 @@ func (a *TerminalOrdersMerchantLevelApi) ListOrders(ctx context.Context, r Termi
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -743,6 +767,10 @@ func (a *TerminalOrdersMerchantLevelApi) ListShippingLocations(ctx context.Conte
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -838,6 +866,10 @@ func (a *TerminalOrdersMerchantLevelApi) ListTerminalModels(ctx context.Context,
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -975,6 +1007,10 @@ func (a *TerminalOrdersMerchantLevelApi) ListTerminalProducts(ctx context.Contex
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -1083,6 +1119,10 @@ func (a *TerminalOrdersMerchantLevelApi) UpdateOrder(ctx context.Context, r Term
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
