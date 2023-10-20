@@ -70,6 +70,10 @@ func (a *TerminalActionsCompanyLevelApi) GetTerminalAction(ctx context.Context, 
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -207,6 +211,10 @@ func (a *TerminalActionsCompanyLevelApi) ListAndroidApps(ctx context.Context, r 
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -333,6 +341,10 @@ func (a *TerminalActionsCompanyLevelApi) ListAndroidCertificates(ctx context.Con
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -468,6 +480,10 @@ func (a *TerminalActionsCompanyLevelApi) ListTerminalActions(ctx context.Context
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 

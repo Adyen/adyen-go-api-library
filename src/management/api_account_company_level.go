@@ -67,6 +67,10 @@ func (a *AccountCompanyLevelApi) GetCompanyAccount(ctx context.Context, r Accoun
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -178,6 +182,10 @@ func (a *AccountCompanyLevelApi) ListCompanyAccounts(ctx context.Context, r Acco
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -293,6 +301,10 @@ func (a *AccountCompanyLevelApi) ListMerchantAccounts(ctx context.Context, r Acc
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
