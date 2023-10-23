@@ -2,6 +2,12 @@ name: Prepare release
 
 on:
   workflow_dispatch:
+    inputs:
+      pre-release:
+        required: false
+        type: boolean
+        default: false
+        description: "This release will be labeled as non-production ready"
   push:
     branches:
       - develop
@@ -20,3 +26,4 @@ jobs:
           develop-branch: develop
           release-branch: main
           version-files: src/common/configuration.go
+          pre-release: ${{ inputs.pre-release || false }}
