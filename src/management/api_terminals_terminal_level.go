@@ -247,6 +247,10 @@ func (a *TerminalsTerminalLevelApi) ReassignTerminal(ctx context.Context, r Term
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {

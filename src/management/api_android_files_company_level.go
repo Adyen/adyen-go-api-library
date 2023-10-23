@@ -72,6 +72,10 @@ func (a *AndroidFilesCompanyLevelApi) GetAndroidApp(ctx context.Context, r Andro
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -211,6 +215,10 @@ func (a *AndroidFilesCompanyLevelApi) ListAndroidApps(ctx context.Context, r And
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -340,6 +348,10 @@ func (a *AndroidFilesCompanyLevelApi) ListAndroidCertificates(ctx context.Contex
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -437,8 +449,11 @@ func (a *AndroidFilesCompanyLevelApi) UploadAndroidApp(ctx context.Context, r An
 		headerParams,
 	)
 
-	var serviceError common.RestServiceError
+	if httpRes == nil {
+		return httpRes, err
+	}
 
+	var serviceError common.RestServiceError
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)

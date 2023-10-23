@@ -123,6 +123,99 @@ func (a *MyAPICredentialApi) AddAllowedOrigin(ctx context.Context, r MyAPICreden
 	return *res, httpRes, err
 }
 
+// All parameters accepted by MyAPICredentialApi.GenerateNewClientKeyForSelf
+type MyAPICredentialApiGenerateNewClientKeyForSelfInput struct {
+}
+
+/*
+Prepare a request for GenerateNewClientKeyForSelf
+
+@return MyAPICredentialApiGenerateNewClientKeyForSelfInput
+*/
+func (a *MyAPICredentialApi) GenerateNewClientKeyForSelfInput() MyAPICredentialApiGenerateNewClientKeyForSelfInput {
+	return MyAPICredentialApiGenerateNewClientKeyForSelfInput{}
+}
+
+/*
+GenerateNewClientKeyForSelf Generate new client key for self
+
+Returns a new [client key](https://docs.adyen.com/development-resources/client-side-authentication#how-it-works) for the caller - API Credential or OAuth Access Token. You can use the new client key a few minutes after generating it. The old client key stops working 24 hours after generating a new one.To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+* Management API—API credentials read and write
+
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r MyAPICredentialApiGenerateNewClientKeyForSelfInput - Request parameters, see GenerateNewClientKeyForSelfInput
+@return GenerateClientKeyResponse, *http.Response, error
+*/
+func (a *MyAPICredentialApi) GenerateNewClientKeyForSelf(ctx context.Context, r MyAPICredentialApiGenerateNewClientKeyForSelfInput) (GenerateClientKeyResponse, *http.Response, error) {
+	res := &GenerateClientKeyResponse{}
+	path := "/me/generateClientKey"
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
+	var serviceError common.RestServiceError
+
+	if httpRes.StatusCode == 400 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+
+	return *res, httpRes, err
+}
+
 // All parameters accepted by MyAPICredentialApi.GetAllowedOriginDetails
 type MyAPICredentialApiGetAllowedOriginDetailsInput struct {
 	originId string

@@ -24,6 +24,7 @@ type TerminalSettings struct {
 	// Settings for tipping with or without predefined options to choose from. The maximum number of predefined options is four, or three plus the option to enter a custom tip.
 	Gratuities        []Gratuity         `json:"gratuities,omitempty"`
 	Hardware          *Hardware          `json:"hardware,omitempty"`
+	Localization      *Localization      `json:"localization,omitempty"`
 	Nexo              *Nexo              `json:"nexo,omitempty"`
 	OfflineProcessing *OfflineProcessing `json:"offlineProcessing,omitempty"`
 	Opi               *Opi               `json:"opi,omitempty"`
@@ -182,6 +183,38 @@ func (o *TerminalSettings) HasHardware() bool {
 // SetHardware gets a reference to the given Hardware and assigns it to the Hardware field.
 func (o *TerminalSettings) SetHardware(v Hardware) {
 	o.Hardware = &v
+}
+
+// GetLocalization returns the Localization field value if set, zero value otherwise.
+func (o *TerminalSettings) GetLocalization() Localization {
+	if o == nil || common.IsNil(o.Localization) {
+		var ret Localization
+		return ret
+	}
+	return *o.Localization
+}
+
+// GetLocalizationOk returns a tuple with the Localization field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TerminalSettings) GetLocalizationOk() (*Localization, bool) {
+	if o == nil || common.IsNil(o.Localization) {
+		return nil, false
+	}
+	return o.Localization, true
+}
+
+// HasLocalization returns a boolean if a field has been set.
+func (o *TerminalSettings) HasLocalization() bool {
+	if o != nil && !common.IsNil(o.Localization) {
+		return true
+	}
+
+	return false
+}
+
+// SetLocalization gets a reference to the given Localization and assigns it to the Localization field.
+func (o *TerminalSettings) SetLocalization(v Localization) {
+	o.Localization = &v
 }
 
 // GetNexo returns the Nexo field value if set, zero value otherwise.
@@ -621,6 +654,9 @@ func (o TerminalSettings) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Hardware) {
 		toSerialize["hardware"] = o.Hardware
+	}
+	if !common.IsNil(o.Localization) {
+		toSerialize["localization"] = o.Localization
 	}
 	if !common.IsNil(o.Nexo) {
 		toSerialize["nexo"] = o.Nexo
