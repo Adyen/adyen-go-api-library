@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/checkout"
+	"github.com/adyen/adyen-go-api-library/v8/src/checkout"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

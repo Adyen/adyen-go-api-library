@@ -9,7 +9,7 @@ API version: 2
 package balanceplatform
 
 import (
-    "github.com/adyen/adyen-go-api-library/v7/src/common"
+    "github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // APIClient manages communication with the Configuration API API v2

@@ -8,27 +8,27 @@ package adyen
 
 import (
 	"fmt"
-	"github.com/adyen/adyen-go-api-library/v7/src/dataprotection"
+	"github.com/adyen/adyen-go-api-library/v8/src/dataprotection"
 	"net/http"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/balancecontrol"
-	"github.com/adyen/adyen-go-api-library/v7/src/balanceplatform"
-	"github.com/adyen/adyen-go-api-library/v7/src/binlookup"
-	"github.com/adyen/adyen-go-api-library/v7/src/checkout"
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
-	"github.com/adyen/adyen-go-api-library/v7/src/disputes"
-	"github.com/adyen/adyen-go-api-library/v7/src/legalentity"
-	"github.com/adyen/adyen-go-api-library/v7/src/management"
-	"github.com/adyen/adyen-go-api-library/v7/src/payments"
-	"github.com/adyen/adyen-go-api-library/v7/src/payout"
-	"github.com/adyen/adyen-go-api-library/v7/src/platformsaccount"
-	"github.com/adyen/adyen-go-api-library/v7/src/platformsfund"
-	"github.com/adyen/adyen-go-api-library/v7/src/platformshostedonboardingpage"
-	"github.com/adyen/adyen-go-api-library/v7/src/platformsnotificationconfiguration"
-	"github.com/adyen/adyen-go-api-library/v7/src/posterminalmanagement"
-	"github.com/adyen/adyen-go-api-library/v7/src/recurring"
-	"github.com/adyen/adyen-go-api-library/v7/src/storedvalue"
-	"github.com/adyen/adyen-go-api-library/v7/src/transfers"
+	"github.com/adyen/adyen-go-api-library/v8/src/balancecontrol"
+	"github.com/adyen/adyen-go-api-library/v8/src/balanceplatform"
+	"github.com/adyen/adyen-go-api-library/v8/src/binlookup"
+	"github.com/adyen/adyen-go-api-library/v8/src/checkout"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/disputes"
+	"github.com/adyen/adyen-go-api-library/v8/src/legalentity"
+	"github.com/adyen/adyen-go-api-library/v8/src/management"
+	"github.com/adyen/adyen-go-api-library/v8/src/payments"
+	"github.com/adyen/adyen-go-api-library/v8/src/payout"
+	"github.com/adyen/adyen-go-api-library/v8/src/platformsaccount"
+	"github.com/adyen/adyen-go-api-library/v8/src/platformsfund"
+	"github.com/adyen/adyen-go-api-library/v8/src/platformshostedonboardingpage"
+	"github.com/adyen/adyen-go-api-library/v8/src/platformsnotificationconfiguration"
+	"github.com/adyen/adyen-go-api-library/v8/src/posterminalmanagement"
+	"github.com/adyen/adyen-go-api-library/v8/src/recurring"
+	"github.com/adyen/adyen-go-api-library/v8/src/storedvalue"
+	"github.com/adyen/adyen-go-api-library/v8/src/transfers"
 )
 
 // Constants used for the client API
@@ -311,7 +311,7 @@ func (c *APIClient) LegalEntity() *legalentity.APIClient {
 
 func (c *APIClient) Disputes() *disputes.GeneralApi {
 	if c.disputes == nil {
-		c.disputes = &disputes.GeneralApi {
+		c.disputes = &disputes.GeneralApi{
 			Client: c.client,
 			BasePath: func() string {
 				return fmt.Sprintf("%s/%s", c.client.Cfg.DisputesEndpoint, DisputesAPIVersion)
@@ -378,7 +378,7 @@ func (c *APIClient) DataProtection() *dataprotection.GeneralApi {
 		c.dataProtection = &dataprotection.GeneralApi{
 			Client: c.client,
 			BasePath: func() string {
-                return fmt.Sprintf("%s/%s", c.client.Cfg.DataProtectionEndpoint, DataProtectionAPIVersion)
+				return fmt.Sprintf("%s/%s", c.client.Cfg.DataProtectionEndpoint, DataProtectionAPIVersion)
 			},
 		}
 	}
