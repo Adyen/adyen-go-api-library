@@ -70,6 +70,10 @@ func (a *TransfersApi) ReturnTransfer(ctx context.Context, r TransfersApiReturnT
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 401 {
