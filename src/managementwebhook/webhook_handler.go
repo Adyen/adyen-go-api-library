@@ -33,3 +33,25 @@ func HandlePaymentMethodCreatedNotificationRequest(req string) (*PaymentMethodCr
 	}
 	return &res, nil
 }
+
+// HandlePaymentMethodRequestRemovedNotificationRequest creates a Notification object from the given JSON string
+// event: paymentMethod.requestRemoved
+func HandlePaymentMethodRequestRemovedNotificationRequest(req string) (*PaymentMethodRequestRemovedNotificationRequest, error) {
+	res := PaymentMethodRequestRemovedNotificationRequest{}
+	err := json.Unmarshal([]byte(req), &res)
+	if err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+// HandlePaymentMethodScheduledForRemovalNotificationRequest creates a Notification object from the given JSON string
+// event: paymentMethod.requestScheduledForRemoval
+func HandlePaymentMethodScheduledForRemovalNotificationRequest(req string) (*PaymentMethodScheduledForRemovalNotificationRequest, error) {
+	res := PaymentMethodScheduledForRemovalNotificationRequest{}
+	err := json.Unmarshal([]byte(req), &res)
+	if err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
