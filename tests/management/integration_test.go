@@ -2,15 +2,14 @@ package management
 
 import (
 	"context"
-	"os"
-	"reflect"
-	"testing"
-
+	"errors"
 	"github.com/adyen/adyen-go-api-library/v7/src/adyen"
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"os"
+	"testing"
 )
 
 func Test_ManagementAPI_Integration(t *testing.T) {
@@ -48,10 +47,22 @@ func Test_ManagementAPI_Integration(t *testing.T) {
 
 			_, httpRes, serviceErr := invalidKeyClient.Management().MyAPICredentialApi.GetApiCredentialDetails(context.Background(), req)
 
-			restServiceErr := serviceErr.(common.RestServiceError)
+			var restServiceErr common.RestServiceError
+			errors.As(serviceErr, &restServiceErr)
 			assert.Equal(t, 401, httpRes.StatusCode)
 			require.NotNil(t, restServiceErr)
 		})
+	})
+
+	t.Run("List merchant accounts", func(t *testing.T) {
+		req := service.AccountMerchantLevelApi.ListMerchantAccountsInput()
+		req = req.PageNumber(1).PageSize(1)
+
+		resp, httpRes, serviceErr := service.AccountMerchantLevelApi.ListMerchantAccounts(context.Background(), req)
+
+		require.Nil(t, serviceErr)
+		assert.Equal(t, 200, httpRes.StatusCode)
+		require.Equal(t, 1, len(resp.Data), "Should contain only one merchant account")
 	})
 
 	t.Run("List terminals", func(t *testing.T) {
@@ -71,11 +82,11 @@ func Test_ManagementAPI_Integration(t *testing.T) {
 
 		_, httpRes, serviceErr := service.AccountCompanyLevelApi.GetCompanyAccount(context.Background(), req)
 
-		restServiceErr := serviceErr.(common.RestServiceError)
+		var restServiceErr common.RestServiceError
+		errors.As(serviceErr, &restServiceErr)
 		assert.NotEmpty(t, restServiceErr.GetRequestId())
 		assert.Equal(t, "010", restServiceErr.GetErrorCode())
 		assert.Equal(t, int32(403), restServiceErr.GetStatus())
 		assert.Equal(t, 403, httpRes.StatusCode)
-		assert.Equal(t, reflect.TypeOf(serviceErr), reflect.TypeOf(common.RestServiceError{}))
 	})
 }

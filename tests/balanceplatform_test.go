@@ -154,7 +154,7 @@ func Test_BalancePlatform(t *testing.T) {
 	t.Run("Gateway Timeout error", func(t *testing.T) {
 		req := service.BalanceAccountsApi.CreateBalanceAccountInput().BalanceAccountInfo(balanceplatform.BalanceAccountInfo{
 			AccountHolderId: "AH123ABC",
-			Description:    common.PtrString("S.Hopper - Main balance account"),
+			Description:     common.PtrString("S.Hopper - Main balance account"),
 		})
 
 		_, httpRes, err := service.BalanceAccountsApi.CreateBalanceAccount(context.Background(), req)
