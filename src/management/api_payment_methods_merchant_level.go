@@ -77,6 +77,10 @@ func (a *PaymentMethodsMerchantLevelApi) AddApplePayDomain(ctx context.Context, 
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -213,6 +217,10 @@ func (a *PaymentMethodsMerchantLevelApi) GetAllPaymentMethods(ctx context.Contex
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -312,6 +320,10 @@ func (a *PaymentMethodsMerchantLevelApi) GetApplePayDomains(ctx context.Context,
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -410,6 +422,10 @@ func (a *PaymentMethodsMerchantLevelApi) GetPaymentMethodDetails(ctx context.Con
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -512,6 +528,10 @@ func (a *PaymentMethodsMerchantLevelApi) RequestPaymentMethod(ctx context.Contex
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -617,6 +637,10 @@ func (a *PaymentMethodsMerchantLevelApi) UpdatePaymentMethod(ctx context.Context
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 

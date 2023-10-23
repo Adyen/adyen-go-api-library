@@ -82,6 +82,10 @@ func (a *APICredentialsMerchantLevelApi) CreateApiCredential(ctx context.Context
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -179,6 +183,10 @@ func (a *APICredentialsMerchantLevelApi) GetApiCredential(ctx context.Context, r
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -295,6 +303,10 @@ func (a *APICredentialsMerchantLevelApi) ListApiCredentials(ctx context.Context,
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -398,6 +410,10 @@ func (a *APICredentialsMerchantLevelApi) UpdateApiCredential(ctx context.Context
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 

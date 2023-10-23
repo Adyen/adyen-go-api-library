@@ -80,6 +80,10 @@ func (a *TerminalSettingsMerchantLevelApi) GetTerminalLogo(ctx context.Context, 
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -175,6 +179,10 @@ func (a *TerminalSettingsMerchantLevelApi) GetTerminalSettings(ctx context.Conte
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -291,6 +299,10 @@ func (a *TerminalSettingsMerchantLevelApi) UpdateTerminalLogo(ctx context.Contex
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -396,6 +408,10 @@ func (a *TerminalSettingsMerchantLevelApi) UpdateTerminalSettings(ctx context.Co
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 

@@ -70,6 +70,10 @@ func (a *GrantOffersApi) GetAllAvailableGrantOffers(ctx context.Context, r Grant
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -161,6 +165,10 @@ func (a *GrantOffersApi) GetGrantOffer(ctx context.Context, r GrantOffersApiGetG
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 

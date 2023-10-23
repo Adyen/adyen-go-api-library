@@ -70,6 +70,10 @@ func (a *WebhooksMerchantLevelApi) GenerateHmacKey(ctx context.Context, r Webhoo
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -168,6 +172,10 @@ func (a *WebhooksMerchantLevelApi) GetWebhook(ctx context.Context, r WebhooksMer
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -285,6 +293,10 @@ func (a *WebhooksMerchantLevelApi) ListAllWebhooks(ctx context.Context, r Webhoo
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -382,6 +394,10 @@ func (a *WebhooksMerchantLevelApi) RemoveWebhook(ctx context.Context, r Webhooks
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -483,6 +499,10 @@ func (a *WebhooksMerchantLevelApi) SetUpWebhook(ctx context.Context, r WebhooksM
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -592,6 +612,10 @@ func (a *WebhooksMerchantLevelApi) TestWebhook(ctx context.Context, r WebhooksMe
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -695,6 +719,10 @@ func (a *WebhooksMerchantLevelApi) UpdateWebhook(ctx context.Context, r Webhooks
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 

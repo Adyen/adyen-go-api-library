@@ -76,6 +76,10 @@ func (a *AllowedOriginsMerchantLevelApi) CreateAllowedOrigin(ctx context.Context
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -176,6 +180,10 @@ func (a *AllowedOriginsMerchantLevelApi) DeleteAllowedOrigin(ctx context.Context
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -278,6 +286,10 @@ func (a *AllowedOriginsMerchantLevelApi) GetAllowedOrigin(ctx context.Context, r
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -375,6 +387,10 @@ func (a *AllowedOriginsMerchantLevelApi) ListAllowedOrigins(ctx context.Context,
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 

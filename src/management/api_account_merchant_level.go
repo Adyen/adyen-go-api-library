@@ -71,6 +71,10 @@ func (a *AccountMerchantLevelApi) CreateMerchantAccount(ctx context.Context, r A
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -165,6 +169,10 @@ func (a *AccountMerchantLevelApi) GetMerchantAccount(ctx context.Context, r Acco
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -277,6 +285,10 @@ func (a *AccountMerchantLevelApi) ListMerchantAccounts(ctx context.Context, r Ac
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -375,6 +387,10 @@ func (a *AccountMerchantLevelApi) RequestToActivateMerchantAccount(ctx context.C
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 

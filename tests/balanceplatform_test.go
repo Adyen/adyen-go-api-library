@@ -76,6 +76,12 @@ func Test_BalancePlatform(t *testing.T) {
 		return mockServer.URL
 	}
 
+	// Network error
+	mux.HandleFunc("/balanceAccounts", func(w http.ResponseWriter, r *http.Request) {
+		require.Equal(t, "POST", r.Method)
+		mockServer.CloseClientConnections()
+	})
+
 	t.Run("Configuration", func(t *testing.T) {
 		testClient := adyen.NewClient(&common.Config{
 			Environment: common.TestEnv,
@@ -143,6 +149,18 @@ func Test_BalancePlatform(t *testing.T) {
 		assert.Equal(t, "30_112", serviceError.GetErrorCode())
 		assert.Equal(t, "Entity was not found", serviceError.GetTitle())
 		assert.Equal(t, "Payment instrument not found", serviceError.GetDetail())
+	})
+
+	t.Run("Gateway Timeout error", func(t *testing.T) {
+		req := service.BalanceAccountsApi.CreateBalanceAccountInput().BalanceAccountInfo(balanceplatform.BalanceAccountInfo{
+			AccountHolderId: "AH123ABC",
+			Description:     common.PtrString("S.Hopper - Main balance account"),
+		})
+
+		_, httpRes, err := service.BalanceAccountsApi.CreateBalanceAccount(context.Background(), req)
+
+		assert.Error(t, err)
+		assert.Nil(t, httpRes)
 	})
 
 	t.Run("Get a sweep", func(t *testing.T) {

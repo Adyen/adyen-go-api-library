@@ -69,6 +69,10 @@ func (a *AccountStoreLevelApi) CreateStore(ctx context.Context, r AccountStoreLe
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -170,6 +174,10 @@ func (a *AccountStoreLevelApi) CreateStoreByMerchantId(ctx context.Context, r Ac
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -269,6 +277,10 @@ func (a *AccountStoreLevelApi) GetStore(ctx context.Context, r AccountStoreLevel
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -364,6 +376,10 @@ func (a *AccountStoreLevelApi) GetStoreById(ctx context.Context, r AccountStoreL
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -497,6 +513,10 @@ func (a *AccountStoreLevelApi) ListStores(ctx context.Context, r AccountStoreLev
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -623,6 +643,10 @@ func (a *AccountStoreLevelApi) ListStoresByMerchantId(ctx context.Context, r Acc
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -727,6 +751,10 @@ func (a *AccountStoreLevelApi) UpdateStore(ctx context.Context, r AccountStoreLe
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -828,6 +856,10 @@ func (a *AccountStoreLevelApi) UpdateStoreById(ctx context.Context, r AccountSto
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 

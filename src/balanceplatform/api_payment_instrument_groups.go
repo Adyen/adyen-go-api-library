@@ -66,6 +66,10 @@ func (a *PaymentInstrumentGroupsApi) CreatePaymentInstrumentGroup(ctx context.Co
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -158,6 +162,10 @@ func (a *PaymentInstrumentGroupsApi) GetAllTransactionRulesForPaymentInstrumentG
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -249,6 +257,10 @@ func (a *PaymentInstrumentGroupsApi) GetPaymentInstrumentGroup(ctx context.Conte
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 

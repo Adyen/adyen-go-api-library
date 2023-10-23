@@ -70,6 +70,10 @@ func (a *APIKeyCompanyLevelApi) GenerateNewApiKey(ctx context.Context, r APIKeyC
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
