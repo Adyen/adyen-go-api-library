@@ -14,38 +14,38 @@ import (
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// checks if the DefenseReasonsRequest type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &DefenseReasonsRequest{}
+// checks if the AcceptDisputeRequest type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &AcceptDisputeRequest{}
 
-// DefenseReasonsRequest struct for DefenseReasonsRequest
-type DefenseReasonsRequest struct {
+// AcceptDisputeRequest struct for AcceptDisputeRequest
+type AcceptDisputeRequest struct {
 	// The PSP reference assigned to the dispute.
 	DisputePspReference string `json:"disputePspReference"`
 	// The merchant account identifier, for which you want to process the dispute transaction.
 	MerchantAccountCode string `json:"merchantAccountCode"`
 }
 
-// NewDefenseReasonsRequest instantiates a new DefenseReasonsRequest object
+// NewAcceptDisputeRequest instantiates a new AcceptDisputeRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDefenseReasonsRequest(disputePspReference string, merchantAccountCode string) *DefenseReasonsRequest {
-	this := DefenseReasonsRequest{}
+func NewAcceptDisputeRequest(disputePspReference string, merchantAccountCode string) *AcceptDisputeRequest {
+	this := AcceptDisputeRequest{}
 	this.DisputePspReference = disputePspReference
 	this.MerchantAccountCode = merchantAccountCode
 	return &this
 }
 
-// NewDefenseReasonsRequestWithDefaults instantiates a new DefenseReasonsRequest object
+// NewAcceptDisputeRequestWithDefaults instantiates a new AcceptDisputeRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewDefenseReasonsRequestWithDefaults() *DefenseReasonsRequest {
-	this := DefenseReasonsRequest{}
+func NewAcceptDisputeRequestWithDefaults() *AcceptDisputeRequest {
+	this := AcceptDisputeRequest{}
 	return &this
 }
 
 // GetDisputePspReference returns the DisputePspReference field value
-func (o *DefenseReasonsRequest) GetDisputePspReference() string {
+func (o *AcceptDisputeRequest) GetDisputePspReference() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -56,7 +56,7 @@ func (o *DefenseReasonsRequest) GetDisputePspReference() string {
 
 // GetDisputePspReferenceOk returns a tuple with the DisputePspReference field value
 // and a boolean to check if the value has been set.
-func (o *DefenseReasonsRequest) GetDisputePspReferenceOk() (*string, bool) {
+func (o *AcceptDisputeRequest) GetDisputePspReferenceOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -64,12 +64,12 @@ func (o *DefenseReasonsRequest) GetDisputePspReferenceOk() (*string, bool) {
 }
 
 // SetDisputePspReference sets field value
-func (o *DefenseReasonsRequest) SetDisputePspReference(v string) {
+func (o *AcceptDisputeRequest) SetDisputePspReference(v string) {
 	o.DisputePspReference = v
 }
 
 // GetMerchantAccountCode returns the MerchantAccountCode field value
-func (o *DefenseReasonsRequest) GetMerchantAccountCode() string {
+func (o *AcceptDisputeRequest) GetMerchantAccountCode() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -80,7 +80,7 @@ func (o *DefenseReasonsRequest) GetMerchantAccountCode() string {
 
 // GetMerchantAccountCodeOk returns a tuple with the MerchantAccountCode field value
 // and a boolean to check if the value has been set.
-func (o *DefenseReasonsRequest) GetMerchantAccountCodeOk() (*string, bool) {
+func (o *AcceptDisputeRequest) GetMerchantAccountCodeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -88,11 +88,11 @@ func (o *DefenseReasonsRequest) GetMerchantAccountCodeOk() (*string, bool) {
 }
 
 // SetMerchantAccountCode sets field value
-func (o *DefenseReasonsRequest) SetMerchantAccountCode(v string) {
+func (o *AcceptDisputeRequest) SetMerchantAccountCode(v string) {
 	o.MerchantAccountCode = v
 }
 
-func (o DefenseReasonsRequest) MarshalJSON() ([]byte, error) {
+func (o AcceptDisputeRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -100,45 +100,45 @@ func (o DefenseReasonsRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DefenseReasonsRequest) ToMap() (map[string]interface{}, error) {
+func (o AcceptDisputeRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["disputePspReference"] = o.DisputePspReference
 	toSerialize["merchantAccountCode"] = o.MerchantAccountCode
 	return toSerialize, nil
 }
 
-type NullableDefenseReasonsRequest struct {
-	value *DefenseReasonsRequest
+type NullableAcceptDisputeRequest struct {
+	value *AcceptDisputeRequest
 	isSet bool
 }
 
-func (v NullableDefenseReasonsRequest) Get() *DefenseReasonsRequest {
+func (v NullableAcceptDisputeRequest) Get() *AcceptDisputeRequest {
 	return v.value
 }
 
-func (v *NullableDefenseReasonsRequest) Set(val *DefenseReasonsRequest) {
+func (v *NullableAcceptDisputeRequest) Set(val *AcceptDisputeRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableDefenseReasonsRequest) IsSet() bool {
+func (v NullableAcceptDisputeRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableDefenseReasonsRequest) Unset() {
+func (v *NullableAcceptDisputeRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableDefenseReasonsRequest(val *DefenseReasonsRequest) *NullableDefenseReasonsRequest {
-	return &NullableDefenseReasonsRequest{value: val, isSet: true}
+func NewNullableAcceptDisputeRequest(val *AcceptDisputeRequest) *NullableAcceptDisputeRequest {
+	return &NullableAcceptDisputeRequest{value: val, isSet: true}
 }
 
-func (v NullableDefenseReasonsRequest) MarshalJSON() ([]byte, error) {
+func (v NullableAcceptDisputeRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableDefenseReasonsRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableAcceptDisputeRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

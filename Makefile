@@ -22,6 +22,7 @@ goimports:=$(shell go env GOPATH)/bin/goimports
 
 generator:=go
 services:=balancecontrol balanceplatform acswebhook configurationwebhook reportwebhook transferwebhook binlookup checkout legalentity management managementwebhook payments payout posterminalmanagement recurring storedvalue transfers dataprotection
+services+=disputes
 output:=src
 templates:=templates/custom
 
@@ -58,6 +59,8 @@ posterminalmanagement: spec=TfmAPIService-v1
 posterminalmanagement: serviceName=PosTerminalManagementApi
 dataprotection: spec=DataProtectionService-v1
 dataprotection: serviceName=DataProtection
+disputes: spec=DisputeService-v30
+disputes: serviceName=Disputes
 
 # Generate a full client (models and service classes)
 $(services): schema $(openapi-generator-jar) $(goimports)

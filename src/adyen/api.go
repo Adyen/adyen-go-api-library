@@ -100,7 +100,7 @@ type APIClient struct {
 	// Deprecated: Please migrate to the new Adyen For Platforms.
 	platformsNotificationConfiguration *platformsnotificationconfiguration.PlatformsNotificationConfiguration
 	posTerminalManagement              *posterminalmanagement.GeneralApi
-	disputes                           *disputes.Disputes
+	disputes                           *disputes.GeneralApi
 	storedValue                        *storedvalue.GeneralApi
 	balancePlatform                    *balanceplatform.APIClient
 	transfers                          *transfers.APIClient
@@ -309,9 +309,9 @@ func (c *APIClient) LegalEntity() *legalentity.APIClient {
 	return c.legalEntity
 }
 
-func (c *APIClient) Disputes() *disputes.Disputes {
+func (c *APIClient) Disputes() *disputes.GeneralApi {
 	if c.disputes == nil {
-		c.disputes = &disputes.Disputes{
+		c.disputes = &disputes.GeneralApi {
 			Client: c.client,
 			BasePath: func() string {
 				return fmt.Sprintf("%s/%s", c.client.Cfg.DisputesEndpoint, DisputesAPIVersion)
