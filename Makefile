@@ -22,6 +22,7 @@ goimports:=$(shell go env GOPATH)/bin/goimports
 
 generator:=go
 services:=balancecontrol balanceplatform acswebhook configurationwebhook reportwebhook transferwebhook binlookup checkout legalentity management managementwebhook payments payout posterminalmanagement recurring storedvalue transfers dataprotection
+services+=disputes
 output:=src
 templates:=templates/custom
 
@@ -36,7 +37,7 @@ balanceplatform: hasRestServiceError=true
 acswebhook: spec=BalancePlatformAcsNotification-v1
 configurationwebhook: spec=BalancePlatformConfigurationNotification-v1
 reportwebhook: spec=BalancePlatformReportNotification-v1
-transferwebhook: spec=BalancePlatformTransferNotification-v3
+transferwebhook: spec=BalancePlatformTransferNotification-v4
 binlookup: spec=BinLookupService-v54
 checkout: spec=CheckoutService-v70
 checkout: serviceName=Checkout
@@ -47,17 +48,19 @@ payout: spec=PayoutService-v68
 recurring: spec=RecurringService-v68
 storedvalue: spec=StoredValueService-v46
 storedvalue: serviceName=StoredValue
-transfers: spec=TransferService-v3
+transfers: spec=TransferService-v4
 transfers: serviceName=Transfers
 transfers: hasRestServiceError=true
-management: spec=ManagementService-v1
+management: spec=ManagementService-v3
 management: serviceName=Management
 management: hasRestServiceError=true
-managementwebhook: spec=ManagementNotificationService-v1
+managementwebhook: spec=ManagementNotificationService-v3
 posterminalmanagement: spec=TfmAPIService-v1
 posterminalmanagement: serviceName=PosTerminalManagementApi
 dataprotection: spec=DataProtectionService-v1
 dataprotection: serviceName=DataProtection
+disputes: spec=DisputeService-v30
+disputes: serviceName=Disputes
 
 # Generate a full client (models and service classes)
 $(services): schema $(openapi-generator-jar) $(goimports)
@@ -108,12 +111,4 @@ clean:
 	git checkout src
 	git clean -f -d src
 
-## Releases
-
-version:
-	perl -lne 'print "currentVersion=$$1" if /LibVersion = "(.+)"/' < src/common/configuration.go >> "$$GITHUB_OUTPUT"
-
-bump:
-	perl -i -pe 's/$$ENV{"CURRENT_VERSION"}/$$ENV{"NEXT_VERSION"}/' src/common/configuration.go
-
-.PHONY: templates models $(services) version bump
+.PHONY: templates models $(services)

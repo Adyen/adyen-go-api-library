@@ -3,10 +3,11 @@ package management
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
-	"github.com/adyen/adyen-go-api-library/v7/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
-	"github.com/adyen/adyen-go-api-library/v7/src/management"
+	"github.com/adyen/adyen-go-api-library/v8/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/management"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"net/http"
@@ -68,11 +69,11 @@ func Test_ManagementAPI(t *testing.T) {
 		testClient := adyen.NewClient(&common.Config{
 			Environment: common.TestEnv,
 		})
-		assert.Equal(t, "https://management-test.adyen.com/v1", testClient.Management().MyAPICredentialApi.BasePath())
+		assert.Equal(t, "https://management-test.adyen.com/v3", testClient.Management().MyAPICredentialApi.BasePath())
 		liveClient := adyen.NewClient(&common.Config{
 			Environment: common.LiveEnv,
 		})
-		assert.Equal(t, "https://management-live.adyen.com/v1", liveClient.Management().WebhooksCompanyLevelApi.BasePath())
+		assert.Equal(t, "https://management-live.adyen.com/v3", liveClient.Management().WebhooksCompanyLevelApi.BasePath())
 	})
 
 	t.Run("Test ListCompanyAccounts", func(t *testing.T) {
@@ -104,7 +105,8 @@ func Test_ManagementAPI(t *testing.T) {
 			companyId := "notExisting"
 			req := service.AccountCompanyLevelApi.GetCompanyAccountInput(companyId)
 			resp, httpRes, serviceError := service.AccountCompanyLevelApi.GetCompanyAccount(context.Background(), req)
-			restServiceErr := serviceError.(common.RestServiceError)
+			var restServiceErr common.RestServiceError
+			errors.As(serviceError, &restServiceErr)
 			if restServiceErr.ErrorCode != "500" {
 				fmt.Fprintf(os.Stderr, "Error: %v\n", serviceError)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)
@@ -133,7 +135,8 @@ func Test_ManagementAPI(t *testing.T) {
 			companyId := "notExisting"
 			req := service.AccountCompanyLevelApi.ListMerchantAccountsInput(companyId)
 			resp, httpRes, serviceError := service.AccountCompanyLevelApi.ListMerchantAccounts(context.Background(), req)
-			restServiceErr := serviceError.(common.RestServiceError)
+			var restServiceErr common.RestServiceError
+			errors.As(serviceError, &restServiceErr)
 			if restServiceErr.ErrorCode != "500" {
 				fmt.Fprintf(os.Stderr, "Error: %v\n", serviceError)
 				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)

@@ -3,9 +3,9 @@ package tests
 import (
 	"context"
 	"errors"
-	"github.com/adyen/adyen-go-api-library/v7/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v7/src/balanceplatform"
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v8/src/balanceplatform"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"io"
@@ -154,7 +154,7 @@ func Test_BalancePlatform(t *testing.T) {
 	t.Run("Gateway Timeout error", func(t *testing.T) {
 		req := service.BalanceAccountsApi.CreateBalanceAccountInput().BalanceAccountInfo(balanceplatform.BalanceAccountInfo{
 			AccountHolderId: "AH123ABC",
-			Description:    common.PtrString("S.Hopper - Main balance account"),
+			Description:     common.PtrString("S.Hopper - Main balance account"),
 		})
 
 		_, httpRes, err := service.BalanceAccountsApi.CreateBalanceAccount(context.Background(), req)

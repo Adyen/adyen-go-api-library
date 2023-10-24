@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	// "github.com///testify/require"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/configurationwebhook"
+	"github.com/adyen/adyen-go-api-library/v8/src/configurationwebhook"
 )
 
 func Test_BalancePlatform_Configuration_Webhooks_HandleRequest(t *testing.T) {
