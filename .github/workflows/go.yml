@@ -9,22 +9,18 @@ jobs:
     name: Build & Verify
     runs-on: ubuntu-latest
     steps:
-
     - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
-
     - uses: actions/setup-go@v4
       with:
         go-version: 1.13
-
     - name: Get dependencies
       run: go get -v -t -d ./...
-
     - name: Build
       run: go build -v .
-
     - name: Test
-      run: go test ./...
+      run: go test -tags $GO_TEST_TAGS ./...
       env:
+        GO_TEST_TAGS: ${{ github.ref == 'refs/heads/main' && 'integration' || '' }}
         ADYEN_API_KEY: ${{ secrets.ADYEN_API_KEY }}
         ADYEN_MERCHANT: ${{ secrets.ADYEN_MERCHANT }}
         ADYEN_PASSWORD: ${{ secrets.ADYEN_PASSWORD }}
