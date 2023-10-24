@@ -17,7 +17,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // TransactionsApi service

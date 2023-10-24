@@ -2,7 +2,7 @@
 
 # Adyen Golang API Client Library
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/adyen/adyen-go-api-library/v7.svg)](https://pkg.go.dev/github.com/adyen/adyen-go-api-library/v7)
+[![Go Reference](https://pkg.go.dev/badge/github.com/adyen/adyen-go-api-library/v8.svg)](https://pkg.go.dev/github.com/adyen/adyen-go-api-library/v8)
 
 This is the officially supported golang library for using Adyen's APIs.
 
@@ -65,7 +65,7 @@ The library supports all webhooks under the following model directories:
 You can use go modules to add our library to your project
 
 ```bash
-go get github.com/adyen/adyen-go-api-library/v7
+go get github.com/adyen/adyen-go-api-library/v8@v8.0.0-beta
 ```
 
 ## Usage examples
@@ -75,9 +75,9 @@ go get github.com/adyen/adyen-go-api-library/v7
 ```go
 import (
 	"context"
-	"github.com/adyen/adyen-go-api-library/v7/src/checkout"
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
-	"github.com/adyen/adyen-go-api-library/v7/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v8/src/checkout"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/adyen"
 )
 
 client := adyen.NewClient(&common.Config{
@@ -97,9 +97,9 @@ res, httpRes, err := service.PaymentsApi.PaymentMethods(context.Background(), re
 
 ```go
 import (
-    "github.com/adyen/adyen-go-api-library/v7/src/checkout"
-    "github.com/adyen/adyen-go-api-library/v7/src/common"
-    "github.com/adyen/adyen-go-api-library/v7/src/adyen"
+    "github.com/adyen/adyen-go-api-library/v8/src/checkout"
+    "github.com/adyen/adyen-go-api-library/v8/src/common"
+    "github.com/adyen/adyen-go-api-library/v8/src/adyen"
 )
 
 client := adyen.NewClient(&common.Config{
@@ -120,9 +120,9 @@ res, httpRes, err := service.PaymentsApi.PaymentMethods(context.Background(), re
 
 ```go
 import (
-    "github.com/adyen/adyen-go-api-library/v7/src/recurring"
-    "github.com/adyen/adyen-go-api-library/v7/src/common"
-    "github.com/adyen/adyen-go-api-library/v7/src/adyen"
+    "github.com/adyen/adyen-go-api-library/v8/src/recurring"
+    "github.com/adyen/adyen-go-api-library/v8/src/common"
+    "github.com/adyen/adyen-go-api-library/v8/src/adyen"
 )
 
 client := adyen.NewClient(&common.Config{
@@ -148,7 +148,7 @@ res, httpRes, err := service.ListRecurringDetails(context.Background(), req)
 
 ```go
 import (
-	"github.com/adyen/adyen-go-api-library/v7/src/webhook"
+	"github.com/adyen/adyen-go-api-library/v8/src/webhook"
 )
 
 msg, err := webhook.HandleRequest(`{"live": "false", "notificationItems": []}`)
@@ -158,9 +158,9 @@ msg, err := webhook.HandleRequest(`{"live": "false", "notificationItems": []}`)
 
 ```go
 import (
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
-	"github.com/adyen/adyen-go-api-library/v7/src/checkout"
-	"github.com/adyen/adyen-go-api-library/v7/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/checkout"
+	"github.com/adyen/adyen-go-api-library/v8/src/adyen"
 )
 
 client := adyen.NewClient(&common.Config{

@@ -2,14 +2,14 @@ package tests
 
 import (
 	"context"
-	"github.com/adyen/adyen-go-api-library/v7/src/balancecontrol"
+	"github.com/adyen/adyen-go-api-library/v8/src/balancecontrol"
 	"io"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -45,16 +45,16 @@ func Test_BalanceControl(t *testing.T) {
 	client.BalanceControl().BasePath = func() string { return mockServer.URL }
 	service := client.BalanceControl()
 
-    t.Run("Configuration", func(t *testing.T) {
-        testClient := adyen.NewClient(&common.Config{
-            Environment: common.TestEnv,
-        })
-        assert.Equal(t, "https://pal-test.adyen.com/pal/servlet/BalanceControl/v1", testClient.BalanceControl().BasePath())
-        liveClient := adyen.NewClient(&common.Config{
-            Environment: common.LiveEnv,
-        })
-        assert.Equal(t, "https://pal-live.adyen.com/pal/servlet/BalanceControl/v1", liveClient.BalanceControl().BasePath())
-    })
+	t.Run("Configuration", func(t *testing.T) {
+		testClient := adyen.NewClient(&common.Config{
+			Environment: common.TestEnv,
+		})
+		assert.Equal(t, "https://pal-test.adyen.com/pal/servlet/BalanceControl/v1", testClient.BalanceControl().BasePath())
+		liveClient := adyen.NewClient(&common.Config{
+			Environment: common.LiveEnv,
+		})
+		assert.Equal(t, "https://pal-live.adyen.com/pal/servlet/BalanceControl/v1", liveClient.BalanceControl().BasePath())
+	})
 
 	t.Run("Start a balance transfer", func(t *testing.T) {
 		request := service.BalanceTransferInput().BalanceTransferRequest(balancecontrol.BalanceTransferRequest{
