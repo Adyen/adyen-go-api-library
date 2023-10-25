@@ -23,12 +23,16 @@ type DonationPaymentRequest struct {
 	AccountInfo      *AccountInfo `json:"accountInfo,omitempty"`
 	AdditionalAmount *Amount      `json:"additionalAmount,omitempty"`
 	// This field contains additional data, which may be required for a particular payment request.  The `additionalData` object consists of entries, each of which includes the key and value.
-	AdditionalData     *map[string]string  `json:"additionalData,omitempty"`
-	Amount             Amount              `json:"amount"`
-	ApplicationInfo    *ApplicationInfo    `json:"applicationInfo,omitempty"`
-	AuthenticationData *AuthenticationData `json:"authenticationData,omitempty"`
-	BillingAddress     *Address            `json:"billingAddress,omitempty"`
-	BrowserInfo        *BrowserInfo        `json:"browserInfo,omitempty"`
+	AdditionalData *map[string]string `json:"additionalData,omitempty"`
+	// List of payment methods to be presented to the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).  Example: `\"allowedPaymentMethods\":[\"ideal\",\"giropay\"]`
+	AllowedPaymentMethods []string            `json:"allowedPaymentMethods,omitempty"`
+	Amount                Amount              `json:"amount"`
+	ApplicationInfo       *ApplicationInfo    `json:"applicationInfo,omitempty"`
+	AuthenticationData    *AuthenticationData `json:"authenticationData,omitempty"`
+	BillingAddress        *BillingAddress     `json:"billingAddress,omitempty"`
+	// List of payment methods to be hidden from the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).  Example: `\"blockedPaymentMethods\":[\"ideal\",\"giropay\"]`
+	BlockedPaymentMethods []string     `json:"blockedPaymentMethods,omitempty"`
+	BrowserInfo           *BrowserInfo `json:"browserInfo,omitempty"`
 	// The delay between the authorisation and scheduled auto-capture, specified in hours.
 	CaptureDelayHours *int32 `json:"captureDelayHours,omitempty"`
 	// The platform where a payment transaction takes place. This field is optional for filtering out payment methods that are only available on specific platforms. If this value is not set, then we will try to infer it from the `sdkVersion` or `token`.  Possible values: * iOS * Android * Web
@@ -45,10 +49,9 @@ type DonationPaymentRequest struct {
 	DateOfBirth *time.Time  `json:"dateOfBirth,omitempty"`
 	DccQuote    *ForexQuote `json:"dccQuote,omitempty"`
 	// The date and time the purchased goods should be delivered.  Format [ISO 8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DDThh:mm:ss.sssTZD  Example: 2017-07-17T13:42:40.428+01:00
-	DeliverAt       *time.Time `json:"deliverAt,omitempty"`
-	DeliveryAddress *Address   `json:"deliveryAddress,omitempty"`
+	DeliverAt       *time.Time       `json:"deliverAt,omitempty"`
+	DeliveryAddress *DeliveryAddress `json:"deliveryAddress,omitempty"`
 	// The date and time the purchased goods should be delivered.  Format [ISO 8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DDThh:mm:ss.sssTZD  Example: 2017-07-17T13:42:40.428+01:00
-	// Deprecated
 	DeliveryDate *time.Time `json:"deliveryDate,omitempty"`
 	// A string containing the shopper's device fingerprint. For more information, refer to [Device fingerprinting](https://docs.adyen.com/risk-management/device-fingerprinting).
 	DeviceFingerprint *string `json:"deviceFingerprint,omitempty"`
@@ -70,12 +73,14 @@ type DonationPaymentRequest struct {
 	FraudOffset   *int32         `json:"fraudOffset,omitempty"`
 	FundOrigin    *FundOrigin    `json:"fundOrigin,omitempty"`
 	FundRecipient *FundRecipient `json:"fundRecipient,omitempty"`
+	// The funding source that should be used when multiple sources are available. For Brazilian combo cards, by default the funding source is credit. To use debit, set this value to **debit**.
+	FundingSource *string `json:"fundingSource,omitempty"`
 	// The reason for the amount update. Possible values:  * **delayedCharge**  * **noShow**  * **installment**
 	IndustryUsage *string       `json:"industryUsage,omitempty"`
 	Installments  *Installments `json:"installments,omitempty"`
 	// Price and product information about the purchased items, to be included on the invoice sent to the shopper. > This field is required for 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, and Zip.
 	LineItems []LineItem `json:"lineItems,omitempty"`
-	// This field allows merchants to use dynamic shopper statement in local character sets. The local shopper statement field can be supplied in markets where localized merchant descriptors are used. Currently, Adyen only supports this in the Japanese market .The available character sets at the moment are: * Processing in Japan: **ja-Kana** The character set **ja-Kana** supports UTF-8 based Katakana and alphanumeric and special characters. Merchants should send the Katakana shopperStatement in full-width characters.  An example request would be: > {   \"shopperStatement\" : \"ADYEN - SELLER-A\",   \"localizedShopperStatement\" : {     \"ja-Kana\" : \"ADYEN - セラーA\"   } } We recommend merchants to always supply the field localizedShopperStatement in addition to the field shopperStatement.It is issuer dependent whether the localized shopper statement field is supported. In the case of non-domestic transactions (e.g. US-issued cards processed in JP) the field `shopperStatement` is used to modify the statement of the shopper. Adyen handles the complexity of ensuring the correct descriptors are assigned.
+	// The `localizedShopperStatement` field lets you use dynamic values for your shopper statement in a local character set. If not supplied, left empty, or for cross-border transactions, **shopperStatement** is used.  Adyen currently supports the ja-Kana character set for Visa and Mastercard payments in Japan using Japanese cards. This character set supports:  * UTF-8 based Katakana, capital letters, numbers and special characters.  * Half-width or full-width characters.
 	LocalizedShopperStatement *map[string]string `json:"localizedShopperStatement,omitempty"`
 	Mandate                   *Mandate           `json:"mandate,omitempty"`
 	// The [merchant category code](https://en.wikipedia.org/wiki/Merchant_category_code) (MCC) is a four-digit number, which relates to a particular market segment. This code reflects the predominant activity that is conducted by the merchant.
@@ -92,9 +97,9 @@ type DonationPaymentRequest struct {
 	// When you are doing multiple partial (gift card) payments, this is the `pspReference` of the first payment. We use this to link the multiple payments to each other. As your own reference for linking multiple payments, use the `merchantOrderReference`instead.
 	OrderReference *string `json:"orderReference,omitempty"`
 	// Required for the 3D Secure 2 `channel` **Web** integration.  Set this parameter to the origin URL of the page that you are loading the 3D Secure Component from.
-	Origin                  *string                             `json:"origin,omitempty"`
-	PaymentMethod           DonationPaymentRequestPaymentMethod `json:"paymentMethod"`
-	PlatformChargebackLogic *PlatformChargebackLogic            `json:"platformChargebackLogic,omitempty"`
+	Origin                  *string                  `json:"origin,omitempty"`
+	PaymentMethod           DonationPaymentMethod    `json:"paymentMethod"`
+	PlatformChargebackLogic *PlatformChargebackLogic `json:"platformChargebackLogic,omitempty"`
 	// Date after which no further authorisations shall be performed. Only for 3D Secure 2.
 	RecurringExpiry *string `json:"recurringExpiry,omitempty"`
 	// Minimum number of days between authorisations. Only for 3D Secure 2.
@@ -110,6 +115,8 @@ type DonationPaymentRequest struct {
 	// The URL to return to in case of a redirection. The format depends on the channel. This URL can have a maximum of 1024 characters. * For web, include the protocol `http://` or `https://`. You can also include your own additional query parameters, for example, shopper ID or order reference number. Example: `https://your-company.com/checkout?shopperOrder=12xy` * For iOS, use the custom URL for your app. To know more about setting custom URL schemes, refer to the [Apple Developer documentation](https://developer.apple.com/documentation/uikit/inter-process_communication/allowing_apps_and_websites_to_link_to_your_content/defining_a_custom_url_scheme_for_your_app). Example: `my-app://` * For Android, use a custom URL handled by an Activity on your app. You can configure it with an [intent filter](https://developer.android.com/guide/components/intents-filters). Example: `my-app://your.package.name`
 	ReturnUrl string    `json:"returnUrl"`
 	RiskData  *RiskData `json:"riskData,omitempty"`
+	// The `recurringDetailReference` you want to use for this payment. The value `LATEST` can be used to select the most recently stored recurring detail.
+	SelectedRecurringDetailReference *string `json:"selectedRecurringDetailReference,omitempty"`
 	// The date and time until when the session remains valid, in [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format.  For example: 2020-07-18T15:42:40.428+01:00
 	SessionValidity *string `json:"sessionValidity,omitempty"`
 	// The shopper's email address. We recommend that you provide this data, as it is used in velocity fraud checks. > For 3D Secure 2 transactions, schemes require `shopperEmail` for all browser-based and mobile implementations.
@@ -147,7 +154,7 @@ type DonationPaymentRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDonationPaymentRequest(amount Amount, donationAccount string, merchantAccount string, paymentMethod DonationPaymentRequestPaymentMethod, reference string, returnUrl string) *DonationPaymentRequest {
+func NewDonationPaymentRequest(amount Amount, donationAccount string, merchantAccount string, paymentMethod DonationPaymentMethod, reference string, returnUrl string) *DonationPaymentRequest {
 	this := DonationPaymentRequest{}
 	this.Amount = amount
 	this.DonationAccount = donationAccount
@@ -266,6 +273,38 @@ func (o *DonationPaymentRequest) SetAdditionalData(v map[string]string) {
 	o.AdditionalData = &v
 }
 
+// GetAllowedPaymentMethods returns the AllowedPaymentMethods field value if set, zero value otherwise.
+func (o *DonationPaymentRequest) GetAllowedPaymentMethods() []string {
+	if o == nil || common.IsNil(o.AllowedPaymentMethods) {
+		var ret []string
+		return ret
+	}
+	return o.AllowedPaymentMethods
+}
+
+// GetAllowedPaymentMethodsOk returns a tuple with the AllowedPaymentMethods field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DonationPaymentRequest) GetAllowedPaymentMethodsOk() ([]string, bool) {
+	if o == nil || common.IsNil(o.AllowedPaymentMethods) {
+		return nil, false
+	}
+	return o.AllowedPaymentMethods, true
+}
+
+// HasAllowedPaymentMethods returns a boolean if a field has been set.
+func (o *DonationPaymentRequest) HasAllowedPaymentMethods() bool {
+	if o != nil && !common.IsNil(o.AllowedPaymentMethods) {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowedPaymentMethods gets a reference to the given []string and assigns it to the AllowedPaymentMethods field.
+func (o *DonationPaymentRequest) SetAllowedPaymentMethods(v []string) {
+	o.AllowedPaymentMethods = v
+}
+
 // GetAmount returns the Amount field value
 func (o *DonationPaymentRequest) GetAmount() Amount {
 	if o == nil {
@@ -355,9 +394,9 @@ func (o *DonationPaymentRequest) SetAuthenticationData(v AuthenticationData) {
 }
 
 // GetBillingAddress returns the BillingAddress field value if set, zero value otherwise.
-func (o *DonationPaymentRequest) GetBillingAddress() Address {
+func (o *DonationPaymentRequest) GetBillingAddress() BillingAddress {
 	if o == nil || common.IsNil(o.BillingAddress) {
-		var ret Address
+		var ret BillingAddress
 		return ret
 	}
 	return *o.BillingAddress
@@ -365,7 +404,7 @@ func (o *DonationPaymentRequest) GetBillingAddress() Address {
 
 // GetBillingAddressOk returns a tuple with the BillingAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DonationPaymentRequest) GetBillingAddressOk() (*Address, bool) {
+func (o *DonationPaymentRequest) GetBillingAddressOk() (*BillingAddress, bool) {
 	if o == nil || common.IsNil(o.BillingAddress) {
 		return nil, false
 	}
@@ -381,9 +420,41 @@ func (o *DonationPaymentRequest) HasBillingAddress() bool {
 	return false
 }
 
-// SetBillingAddress gets a reference to the given Address and assigns it to the BillingAddress field.
-func (o *DonationPaymentRequest) SetBillingAddress(v Address) {
+// SetBillingAddress gets a reference to the given BillingAddress and assigns it to the BillingAddress field.
+func (o *DonationPaymentRequest) SetBillingAddress(v BillingAddress) {
 	o.BillingAddress = &v
+}
+
+// GetBlockedPaymentMethods returns the BlockedPaymentMethods field value if set, zero value otherwise.
+func (o *DonationPaymentRequest) GetBlockedPaymentMethods() []string {
+	if o == nil || common.IsNil(o.BlockedPaymentMethods) {
+		var ret []string
+		return ret
+	}
+	return o.BlockedPaymentMethods
+}
+
+// GetBlockedPaymentMethodsOk returns a tuple with the BlockedPaymentMethods field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DonationPaymentRequest) GetBlockedPaymentMethodsOk() ([]string, bool) {
+	if o == nil || common.IsNil(o.BlockedPaymentMethods) {
+		return nil, false
+	}
+	return o.BlockedPaymentMethods, true
+}
+
+// HasBlockedPaymentMethods returns a boolean if a field has been set.
+func (o *DonationPaymentRequest) HasBlockedPaymentMethods() bool {
+	if o != nil && !common.IsNil(o.BlockedPaymentMethods) {
+		return true
+	}
+
+	return false
+}
+
+// SetBlockedPaymentMethods gets a reference to the given []string and assigns it to the BlockedPaymentMethods field.
+func (o *DonationPaymentRequest) SetBlockedPaymentMethods(v []string) {
+	o.BlockedPaymentMethods = v
 }
 
 // GetBrowserInfo returns the BrowserInfo field value if set, zero value otherwise.
@@ -710,9 +781,9 @@ func (o *DonationPaymentRequest) SetDeliverAt(v time.Time) {
 }
 
 // GetDeliveryAddress returns the DeliveryAddress field value if set, zero value otherwise.
-func (o *DonationPaymentRequest) GetDeliveryAddress() Address {
+func (o *DonationPaymentRequest) GetDeliveryAddress() DeliveryAddress {
 	if o == nil || common.IsNil(o.DeliveryAddress) {
-		var ret Address
+		var ret DeliveryAddress
 		return ret
 	}
 	return *o.DeliveryAddress
@@ -720,7 +791,7 @@ func (o *DonationPaymentRequest) GetDeliveryAddress() Address {
 
 // GetDeliveryAddressOk returns a tuple with the DeliveryAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DonationPaymentRequest) GetDeliveryAddressOk() (*Address, bool) {
+func (o *DonationPaymentRequest) GetDeliveryAddressOk() (*DeliveryAddress, bool) {
 	if o == nil || common.IsNil(o.DeliveryAddress) {
 		return nil, false
 	}
@@ -736,13 +807,12 @@ func (o *DonationPaymentRequest) HasDeliveryAddress() bool {
 	return false
 }
 
-// SetDeliveryAddress gets a reference to the given Address and assigns it to the DeliveryAddress field.
-func (o *DonationPaymentRequest) SetDeliveryAddress(v Address) {
+// SetDeliveryAddress gets a reference to the given DeliveryAddress and assigns it to the DeliveryAddress field.
+func (o *DonationPaymentRequest) SetDeliveryAddress(v DeliveryAddress) {
 	o.DeliveryAddress = &v
 }
 
 // GetDeliveryDate returns the DeliveryDate field value if set, zero value otherwise.
-// Deprecated
 func (o *DonationPaymentRequest) GetDeliveryDate() time.Time {
 	if o == nil || common.IsNil(o.DeliveryDate) {
 		var ret time.Time
@@ -753,7 +823,6 @@ func (o *DonationPaymentRequest) GetDeliveryDate() time.Time {
 
 // GetDeliveryDateOk returns a tuple with the DeliveryDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *DonationPaymentRequest) GetDeliveryDateOk() (*time.Time, bool) {
 	if o == nil || common.IsNil(o.DeliveryDate) {
 		return nil, false
@@ -771,7 +840,6 @@ func (o *DonationPaymentRequest) HasDeliveryDate() bool {
 }
 
 // SetDeliveryDate gets a reference to the given time.Time and assigns it to the DeliveryDate field.
-// Deprecated
 func (o *DonationPaymentRequest) SetDeliveryDate(v time.Time) {
 	o.DeliveryDate = &v
 }
@@ -1118,6 +1186,38 @@ func (o *DonationPaymentRequest) HasFundRecipient() bool {
 // SetFundRecipient gets a reference to the given FundRecipient and assigns it to the FundRecipient field.
 func (o *DonationPaymentRequest) SetFundRecipient(v FundRecipient) {
 	o.FundRecipient = &v
+}
+
+// GetFundingSource returns the FundingSource field value if set, zero value otherwise.
+func (o *DonationPaymentRequest) GetFundingSource() string {
+	if o == nil || common.IsNil(o.FundingSource) {
+		var ret string
+		return ret
+	}
+	return *o.FundingSource
+}
+
+// GetFundingSourceOk returns a tuple with the FundingSource field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DonationPaymentRequest) GetFundingSourceOk() (*string, bool) {
+	if o == nil || common.IsNil(o.FundingSource) {
+		return nil, false
+	}
+	return o.FundingSource, true
+}
+
+// HasFundingSource returns a boolean if a field has been set.
+func (o *DonationPaymentRequest) HasFundingSource() bool {
+	if o != nil && !common.IsNil(o.FundingSource) {
+		return true
+	}
+
+	return false
+}
+
+// SetFundingSource gets a reference to the given string and assigns it to the FundingSource field.
+func (o *DonationPaymentRequest) SetFundingSource(v string) {
+	o.FundingSource = &v
 }
 
 // GetIndustryUsage returns the IndustryUsage field value if set, zero value otherwise.
@@ -1561,9 +1661,9 @@ func (o *DonationPaymentRequest) SetOrigin(v string) {
 }
 
 // GetPaymentMethod returns the PaymentMethod field value
-func (o *DonationPaymentRequest) GetPaymentMethod() DonationPaymentRequestPaymentMethod {
+func (o *DonationPaymentRequest) GetPaymentMethod() DonationPaymentMethod {
 	if o == nil {
-		var ret DonationPaymentRequestPaymentMethod
+		var ret DonationPaymentMethod
 		return ret
 	}
 
@@ -1572,7 +1672,7 @@ func (o *DonationPaymentRequest) GetPaymentMethod() DonationPaymentRequestPaymen
 
 // GetPaymentMethodOk returns a tuple with the PaymentMethod field value
 // and a boolean to check if the value has been set.
-func (o *DonationPaymentRequest) GetPaymentMethodOk() (*DonationPaymentRequestPaymentMethod, bool) {
+func (o *DonationPaymentRequest) GetPaymentMethodOk() (*DonationPaymentMethod, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1580,7 +1680,7 @@ func (o *DonationPaymentRequest) GetPaymentMethodOk() (*DonationPaymentRequestPa
 }
 
 // SetPaymentMethod sets field value
-func (o *DonationPaymentRequest) SetPaymentMethod(v DonationPaymentRequestPaymentMethod) {
+func (o *DonationPaymentRequest) SetPaymentMethod(v DonationPaymentMethod) {
 	o.PaymentMethod = v
 }
 
@@ -1854,6 +1954,38 @@ func (o *DonationPaymentRequest) HasRiskData() bool {
 // SetRiskData gets a reference to the given RiskData and assigns it to the RiskData field.
 func (o *DonationPaymentRequest) SetRiskData(v RiskData) {
 	o.RiskData = &v
+}
+
+// GetSelectedRecurringDetailReference returns the SelectedRecurringDetailReference field value if set, zero value otherwise.
+func (o *DonationPaymentRequest) GetSelectedRecurringDetailReference() string {
+	if o == nil || common.IsNil(o.SelectedRecurringDetailReference) {
+		var ret string
+		return ret
+	}
+	return *o.SelectedRecurringDetailReference
+}
+
+// GetSelectedRecurringDetailReferenceOk returns a tuple with the SelectedRecurringDetailReference field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DonationPaymentRequest) GetSelectedRecurringDetailReferenceOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SelectedRecurringDetailReference) {
+		return nil, false
+	}
+	return o.SelectedRecurringDetailReference, true
+}
+
+// HasSelectedRecurringDetailReference returns a boolean if a field has been set.
+func (o *DonationPaymentRequest) HasSelectedRecurringDetailReference() bool {
+	if o != nil && !common.IsNil(o.SelectedRecurringDetailReference) {
+		return true
+	}
+
+	return false
+}
+
+// SetSelectedRecurringDetailReference gets a reference to the given string and assigns it to the SelectedRecurringDetailReference field.
+func (o *DonationPaymentRequest) SetSelectedRecurringDetailReference(v string) {
+	o.SelectedRecurringDetailReference = &v
 }
 
 // GetSessionValidity returns the SessionValidity field value if set, zero value otherwise.
@@ -2390,6 +2522,9 @@ func (o DonationPaymentRequest) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.AdditionalData) {
 		toSerialize["additionalData"] = o.AdditionalData
 	}
+	if !common.IsNil(o.AllowedPaymentMethods) {
+		toSerialize["allowedPaymentMethods"] = o.AllowedPaymentMethods
+	}
 	toSerialize["amount"] = o.Amount
 	if !common.IsNil(o.ApplicationInfo) {
 		toSerialize["applicationInfo"] = o.ApplicationInfo
@@ -2399,6 +2534,9 @@ func (o DonationPaymentRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.BillingAddress) {
 		toSerialize["billingAddress"] = o.BillingAddress
+	}
+	if !common.IsNil(o.BlockedPaymentMethods) {
+		toSerialize["blockedPaymentMethods"] = o.BlockedPaymentMethods
 	}
 	if !common.IsNil(o.BrowserInfo) {
 		toSerialize["browserInfo"] = o.BrowserInfo
@@ -2467,6 +2605,9 @@ func (o DonationPaymentRequest) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.FundRecipient) {
 		toSerialize["fundRecipient"] = o.FundRecipient
 	}
+	if !common.IsNil(o.FundingSource) {
+		toSerialize["fundingSource"] = o.FundingSource
+	}
 	if !common.IsNil(o.IndustryUsage) {
 		toSerialize["industryUsage"] = o.IndustryUsage
 	}
@@ -2530,6 +2671,9 @@ func (o DonationPaymentRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["returnUrl"] = o.ReturnUrl
 	if !common.IsNil(o.RiskData) {
 		toSerialize["riskData"] = o.RiskData
+	}
+	if !common.IsNil(o.SelectedRecurringDetailReference) {
+		toSerialize["selectedRecurringDetailReference"] = o.SelectedRecurringDetailReference
 	}
 	if !common.IsNil(o.SessionValidity) {
 		toSerialize["sessionValidity"] = o.SessionValidity
@@ -2631,6 +2775,15 @@ func (o *DonationPaymentRequest) isValidEntityType() bool {
 	var allowedEnumValues = []string{"NaturalPerson", "CompanyName"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetEntityType() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *DonationPaymentRequest) isValidFundingSource() bool {
+	var allowedEnumValues = []string{"debit"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetFundingSource() == allowed {
 			return true
 		}
 	}

@@ -29,7 +29,7 @@ type CreateCheckoutSessionRequest struct {
 	Amount                Amount              `json:"amount"`
 	ApplicationInfo       *ApplicationInfo    `json:"applicationInfo,omitempty"`
 	AuthenticationData    *AuthenticationData `json:"authenticationData,omitempty"`
-	BillingAddress        *Address            `json:"billingAddress,omitempty"`
+	BillingAddress        *BillingAddress     `json:"billingAddress,omitempty"`
 	// List of payment methods to be hidden from the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).  Example: `\"blockedPaymentMethods\":[\"ideal\",\"giropay\"]`
 	BlockedPaymentMethods []string `json:"blockedPaymentMethods,omitempty"`
 	// The delay between the authorisation and scheduled auto-capture, specified in hours.
@@ -42,8 +42,8 @@ type CreateCheckoutSessionRequest struct {
 	// The shopper's date of birth.  Format [ISO-8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DD
 	DateOfBirth *string `json:"dateOfBirth,omitempty"`
 	// The date and time when the purchased goods should be delivered.  [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format: YYYY-MM-DDThh:mm:ss+TZD, for example, **2020-12-18T10:15:30+01:00**.
-	DeliverAt       *time.Time `json:"deliverAt,omitempty"`
-	DeliveryAddress *Address   `json:"deliveryAddress,omitempty"`
+	DeliverAt       *time.Time       `json:"deliverAt,omitempty"`
+	DeliveryAddress *DeliveryAddress `json:"deliveryAddress,omitempty"`
 	// When true and `shopperReference` is provided, the shopper will be asked if the payment details should be stored for future one-click payments.
 	EnableOneClick *bool `json:"enableOneClick,omitempty"`
 	// When true and `shopperReference` is provided, the payment details will be tokenized for payouts.
@@ -66,8 +66,9 @@ type CreateCheckoutSessionRequest struct {
 	// This reference allows linking multiple transactions to each other for reporting purposes (i.e. order auth-rate). The reference should be unique per billing cycle. The same merchant order reference should never be reused after the first authorised attempt. If used, this field should be supplied for all incoming authorisations. > We strongly recommend you send the `merchantOrderReference` value to benefit from linking payment requests when authorisation retries take place. In addition, we recommend you provide `retry.orderAttemptNumber`, `retry.chainAttemptNumber`, and `retry.skipRetry` values in `PaymentRequest.additionalData`.
 	MerchantOrderReference *string `json:"merchantOrderReference,omitempty"`
 	// Metadata consists of entries, each of which includes a key and a value. Limits: * Maximum 20 key-value pairs per request. * Maximum 20 characters per key. * Maximum 80 characters per value.
-	Metadata *map[string]string `json:"metadata,omitempty"`
-	MpiData  *ThreeDSecureData  `json:"mpiData,omitempty"`
+	Metadata                *map[string]string       `json:"metadata,omitempty"`
+	MpiData                 *ThreeDSecureData        `json:"mpiData,omitempty"`
+	PlatformChargebackLogic *PlatformChargebackLogic `json:"platformChargebackLogic,omitempty"`
 	// Date after which no further authorisations shall be performed. Only for 3D Secure 2.
 	RecurringExpiry *string `json:"recurringExpiry,omitempty"`
 	// Minimum number of days between authorisations. Only for 3D Secure 2.
@@ -100,9 +101,9 @@ type CreateCheckoutSessionRequest struct {
 	SocialSecurityNumber *string `json:"socialSecurityNumber,omitempty"`
 	// Boolean value indicating whether the card payment method should be split into separate debit and credit options.
 	SplitCardFundingSources *bool `json:"splitCardFundingSources,omitempty"`
-	// An array of objects specifying how the payment should be split when using [Adyen for Platforms](https://docs.adyen.com/platforms/processing-payments#providing-split-information) or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
+	// An array of objects specifying how to split a payment when using [Adyen for Platforms](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information), [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic/processing-payments#providing-split-information), or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
 	Splits []Split `json:"splits,omitempty"`
-	// The ecommerce or point-of-sale store that is processing the payment.
+	// The ecommerce or point-of-sale store that is processing the payment. Used in:  * [Partner platform integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for the [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic). * [Platform setup integrations](https://docs.adyen.com/marketplaces-and-platforms/additional-for-platform-setup/route-payment-to-store) for the [Balance Platform](https://docs.adyen.com/marketplaces-and-platforms).
 	Store *string `json:"store,omitempty"`
 	// When this is set to **true** and the `shopperReference` is provided, the payment details will be stored.
 	StorePaymentMethod *bool `json:"storePaymentMethod,omitempty"`
@@ -363,9 +364,9 @@ func (o *CreateCheckoutSessionRequest) SetAuthenticationData(v AuthenticationDat
 }
 
 // GetBillingAddress returns the BillingAddress field value if set, zero value otherwise.
-func (o *CreateCheckoutSessionRequest) GetBillingAddress() Address {
+func (o *CreateCheckoutSessionRequest) GetBillingAddress() BillingAddress {
 	if o == nil || common.IsNil(o.BillingAddress) {
-		var ret Address
+		var ret BillingAddress
 		return ret
 	}
 	return *o.BillingAddress
@@ -373,7 +374,7 @@ func (o *CreateCheckoutSessionRequest) GetBillingAddress() Address {
 
 // GetBillingAddressOk returns a tuple with the BillingAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateCheckoutSessionRequest) GetBillingAddressOk() (*Address, bool) {
+func (o *CreateCheckoutSessionRequest) GetBillingAddressOk() (*BillingAddress, bool) {
 	if o == nil || common.IsNil(o.BillingAddress) {
 		return nil, false
 	}
@@ -389,8 +390,8 @@ func (o *CreateCheckoutSessionRequest) HasBillingAddress() bool {
 	return false
 }
 
-// SetBillingAddress gets a reference to the given Address and assigns it to the BillingAddress field.
-func (o *CreateCheckoutSessionRequest) SetBillingAddress(v Address) {
+// SetBillingAddress gets a reference to the given BillingAddress and assigns it to the BillingAddress field.
+func (o *CreateCheckoutSessionRequest) SetBillingAddress(v BillingAddress) {
 	o.BillingAddress = &v
 }
 
@@ -619,9 +620,9 @@ func (o *CreateCheckoutSessionRequest) SetDeliverAt(v time.Time) {
 }
 
 // GetDeliveryAddress returns the DeliveryAddress field value if set, zero value otherwise.
-func (o *CreateCheckoutSessionRequest) GetDeliveryAddress() Address {
+func (o *CreateCheckoutSessionRequest) GetDeliveryAddress() DeliveryAddress {
 	if o == nil || common.IsNil(o.DeliveryAddress) {
-		var ret Address
+		var ret DeliveryAddress
 		return ret
 	}
 	return *o.DeliveryAddress
@@ -629,7 +630,7 @@ func (o *CreateCheckoutSessionRequest) GetDeliveryAddress() Address {
 
 // GetDeliveryAddressOk returns a tuple with the DeliveryAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateCheckoutSessionRequest) GetDeliveryAddressOk() (*Address, bool) {
+func (o *CreateCheckoutSessionRequest) GetDeliveryAddressOk() (*DeliveryAddress, bool) {
 	if o == nil || common.IsNil(o.DeliveryAddress) {
 		return nil, false
 	}
@@ -645,8 +646,8 @@ func (o *CreateCheckoutSessionRequest) HasDeliveryAddress() bool {
 	return false
 }
 
-// SetDeliveryAddress gets a reference to the given Address and assigns it to the DeliveryAddress field.
-func (o *CreateCheckoutSessionRequest) SetDeliveryAddress(v Address) {
+// SetDeliveryAddress gets a reference to the given DeliveryAddress and assigns it to the DeliveryAddress field.
+func (o *CreateCheckoutSessionRequest) SetDeliveryAddress(v DeliveryAddress) {
 	o.DeliveryAddress = &v
 }
 
@@ -1088,6 +1089,38 @@ func (o *CreateCheckoutSessionRequest) HasMpiData() bool {
 // SetMpiData gets a reference to the given ThreeDSecureData and assigns it to the MpiData field.
 func (o *CreateCheckoutSessionRequest) SetMpiData(v ThreeDSecureData) {
 	o.MpiData = &v
+}
+
+// GetPlatformChargebackLogic returns the PlatformChargebackLogic field value if set, zero value otherwise.
+func (o *CreateCheckoutSessionRequest) GetPlatformChargebackLogic() PlatformChargebackLogic {
+	if o == nil || common.IsNil(o.PlatformChargebackLogic) {
+		var ret PlatformChargebackLogic
+		return ret
+	}
+	return *o.PlatformChargebackLogic
+}
+
+// GetPlatformChargebackLogicOk returns a tuple with the PlatformChargebackLogic field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCheckoutSessionRequest) GetPlatformChargebackLogicOk() (*PlatformChargebackLogic, bool) {
+	if o == nil || common.IsNil(o.PlatformChargebackLogic) {
+		return nil, false
+	}
+	return o.PlatformChargebackLogic, true
+}
+
+// HasPlatformChargebackLogic returns a boolean if a field has been set.
+func (o *CreateCheckoutSessionRequest) HasPlatformChargebackLogic() bool {
+	if o != nil && !common.IsNil(o.PlatformChargebackLogic) {
+		return true
+	}
+
+	return false
+}
+
+// SetPlatformChargebackLogic gets a reference to the given PlatformChargebackLogic and assigns it to the PlatformChargebackLogic field.
+func (o *CreateCheckoutSessionRequest) SetPlatformChargebackLogic(v PlatformChargebackLogic) {
+	o.PlatformChargebackLogic = &v
 }
 
 // GetRecurringExpiry returns the RecurringExpiry field value if set, zero value otherwise.
@@ -1940,6 +1973,9 @@ func (o CreateCheckoutSessionRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.MpiData) {
 		toSerialize["mpiData"] = o.MpiData
+	}
+	if !common.IsNil(o.PlatformChargebackLogic) {
+		toSerialize["platformChargebackLogic"] = o.PlatformChargebackLogic
 	}
 	if !common.IsNil(o.RecurringExpiry) {
 		toSerialize["recurringExpiry"] = o.RecurringExpiry
