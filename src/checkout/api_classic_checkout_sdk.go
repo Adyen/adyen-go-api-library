@@ -79,10 +79,6 @@ func (a *ClassicCheckoutSDKApi) PaymentSession(ctx context.Context, r ClassicChe
 		headerParams,
 	)
 
-	if httpRes == nil {
-		return *res, httpRes, err
-	}
-
 	return *res, httpRes, err
 }
 
@@ -145,10 +141,6 @@ func (a *ClassicCheckoutSDKApi) VerifyPaymentResult(ctx context.Context, r Class
 		queryParams,
 		headerParams,
 	)
-
-	if httpRes == nil {
-		return *res, httpRes, err
-	}
 
 	return *res, httpRes, err
 }

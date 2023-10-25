@@ -82,10 +82,6 @@ func (a *RecurringApi) DeleteTokenForStoredPaymentDetails(ctx context.Context, r
 		headerParams,
 	)
 
-	if httpRes == nil {
-		return httpRes, err
-	}
-
 	return httpRes, err
 }
 
@@ -148,10 +144,6 @@ func (a *RecurringApi) GetTokensForStoredPaymentDetails(ctx context.Context, r R
 		queryParams,
 		headerParams,
 	)
-
-	if httpRes == nil {
-		return *res, httpRes, err
-	}
 
 	return *res, httpRes, err
 }

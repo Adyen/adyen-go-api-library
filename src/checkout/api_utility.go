@@ -75,10 +75,6 @@ func (a *UtilityApi) GetApplePaySession(ctx context.Context, r UtilityApiGetAppl
 		headerParams,
 	)
 
-	if httpRes == nil {
-		return *res, httpRes, err
-	}
-
 	return *res, httpRes, err
 }
 
@@ -140,10 +136,6 @@ func (a *UtilityApi) OriginKeys(ctx context.Context, r UtilityApiOriginKeysInput
 		queryParams,
 		headerParams,
 	)
-
-	if httpRes == nil {
-		return *res, httpRes, err
-	}
 
 	return *res, httpRes, err
 }

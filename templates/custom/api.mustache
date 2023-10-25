@@ -109,13 +109,15 @@ func (a *{{{classname}}}) {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecas
         headerParams,
     )
 
-	if httpRes == nil {
-        return {{#returnType}}*res, {{/returnType}}httpRes, err
-    }
 
 {{#hasRestServiceError}}
 {{#responses}}
-    {{#-first}}var serviceError common.RestServiceError{{/-first}}
+    {{#-first}}
+    var serviceError common.RestServiceError
+    if httpRes == nil {
+        return {{#returnType}}*res, {{/returnType}}httpRes, err
+    }
+    {{/-first}}
     {{#dataType}}
         {{^is1xx}}
             {{^is2xx}}

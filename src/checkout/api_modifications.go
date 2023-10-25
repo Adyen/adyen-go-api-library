@@ -80,10 +80,6 @@ func (a *ModificationsApi) CancelAuthorisedPayment(ctx context.Context, r Modifi
 		headerParams,
 	)
 
-	if httpRes == nil {
-		return *res, httpRes, err
-	}
-
 	return *res, httpRes, err
 }
 
@@ -151,10 +147,6 @@ func (a *ModificationsApi) CancelAuthorisedPaymentByPspReference(ctx context.Con
 		headerParams,
 	)
 
-	if httpRes == nil {
-		return *res, httpRes, err
-	}
-
 	return *res, httpRes, err
 }
 
@@ -221,10 +213,6 @@ func (a *ModificationsApi) CaptureAuthorisedPayment(ctx context.Context, r Modif
 		queryParams,
 		headerParams,
 	)
-
-	if httpRes == nil {
-		return *res, httpRes, err
-	}
 
 	return *res, httpRes, err
 }
@@ -295,10 +283,6 @@ func (a *ModificationsApi) RefundCapturedPayment(ctx context.Context, r Modifica
 		headerParams,
 	)
 
-	if httpRes == nil {
-		return *res, httpRes, err
-	}
-
 	return *res, httpRes, err
 }
 
@@ -364,10 +348,6 @@ func (a *ModificationsApi) RefundOrCancelPayment(ctx context.Context, r Modifica
 		queryParams,
 		headerParams,
 	)
-
-	if httpRes == nil {
-		return *res, httpRes, err
-	}
 
 	return *res, httpRes, err
 }
@@ -435,10 +415,6 @@ func (a *ModificationsApi) UpdateAuthorisedAmount(ctx context.Context, r Modific
 		queryParams,
 		headerParams,
 	)
-
-	if httpRes == nil {
-		return *res, httpRes, err
-	}
 
 	return *res, httpRes, err
 }
