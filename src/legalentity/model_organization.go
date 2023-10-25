@@ -11,7 +11,7 @@ package legalentity
 import (
 	"encoding/json"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the Organization type satisfies the MappedNullable interface at compile time
@@ -38,7 +38,7 @@ type Organization struct {
 	// The tax information of the organization.
 	TaxInformation             []TaxInformation            `json:"taxInformation,omitempty"`
 	TaxReportingClassification *TaxReportingClassification `json:"taxReportingClassification,omitempty"`
-	// Type of organization.   Possible values: **associationIncorporated**, **governmentalOrganization**, **listedPublicCompany**, **nonProfit**, **partnershipIncorporated**, **privateCompany**.
+	// Type of organization.  Possible values: **associationIncorporated**, **governmentalOrganization**, **listedPublicCompany**, **nonProfit**, **partnershipIncorporated**, **privateCompany**.
 	Type *string `json:"type,omitempty"`
 	// The reason the organization has not provided a VAT number.  Possible values: **industryExemption**, **belowTaxThreshold**.
 	VatAbsenceReason *string `json:"vatAbsenceReason,omitempty"`

@@ -11,7 +11,7 @@ package balanceplatform
 import (
 	"encoding/json"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the TransactionRuleInfo type satisfies the MappedNullable interface at compile time
@@ -512,7 +512,7 @@ func (v *NullableTransactionRuleInfo) UnmarshalJSON(src []byte) error {
 }
 
 func (o *TransactionRuleInfo) isValidOutcomeType() bool {
-	var allowedEnumValues = []string{"hardBlock", "scoreBased"}
+	var allowedEnumValues = []string{"enforceSCA", "hardBlock", "scoreBased"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetOutcomeType() == allowed {
 			return true
@@ -521,7 +521,7 @@ func (o *TransactionRuleInfo) isValidOutcomeType() bool {
 	return false
 }
 func (o *TransactionRuleInfo) isValidRequestType() bool {
-	var allowedEnumValues = []string{"authentication", "authorization", "tokenization"}
+	var allowedEnumValues = []string{"authentication", "authorization", "bankTransfer", "tokenization"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetRequestType() == allowed {
 			return true

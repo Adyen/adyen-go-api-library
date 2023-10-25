@@ -13,7 +13,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // OrdersApi service
@@ -73,6 +73,10 @@ func (a *OrdersApi) CancelOrder(ctx context.Context, r OrdersApiCancelOrderInput
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	return *res, httpRes, err
 }
 
@@ -130,6 +134,10 @@ func (a *OrdersApi) GetBalanceOfGiftCard(ctx context.Context, r OrdersApiGetBala
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	return *res, httpRes, err
 }
 
@@ -186,6 +194,10 @@ func (a *OrdersApi) Orders(ctx context.Context, r OrdersApiOrdersInput) (CreateO
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	return *res, httpRes, err
 }

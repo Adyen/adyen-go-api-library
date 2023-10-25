@@ -11,7 +11,7 @@ package balanceplatform
 import (
 	"encoding/json"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the BalanceAccountUpdateRequest type satisfies the MappedNullable interface at compile time
@@ -25,8 +25,9 @@ type BalanceAccountUpdateRequest struct {
 	DefaultCurrencyCode *string `json:"defaultCurrencyCode,omitempty"`
 	// A human-readable description of the balance account, maximum 300 characters. You can use this parameter to distinguish between multiple balance accounts under an account holder.
 	Description *string `json:"description,omitempty"`
-	// A set of key and value pairs for general use by the merchant. The keys do not have specific names and may be used for storing miscellaneous data as desired. > Note that during an update of metadata, the omission of existing key-value pairs will result in the deletion of those key-value pairs.
-	Metadata *map[string]string `json:"metadata,omitempty"`
+	// A set of key and value pairs for general use. The keys do not have specific names and may be used for storing miscellaneous data as desired. > Note that during an update of metadata, the omission of existing key-value pairs will result in the deletion of those key-value pairs.
+	Metadata                     *map[string]string            `json:"metadata,omitempty"`
+	PlatformPaymentConfiguration *PlatformPaymentConfiguration `json:"platformPaymentConfiguration,omitempty"`
 	// Your reference to the balance account, maximum 150 characters.
 	Reference *string `json:"reference,omitempty"`
 	// The status of the balance account. Payment instruments linked to the balance account can only be used if the balance account status is **active**.  Possible values: **active**, **inactive**, **closed**, **suspended**.
@@ -180,6 +181,38 @@ func (o *BalanceAccountUpdateRequest) SetMetadata(v map[string]string) {
 	o.Metadata = &v
 }
 
+// GetPlatformPaymentConfiguration returns the PlatformPaymentConfiguration field value if set, zero value otherwise.
+func (o *BalanceAccountUpdateRequest) GetPlatformPaymentConfiguration() PlatformPaymentConfiguration {
+	if o == nil || common.IsNil(o.PlatformPaymentConfiguration) {
+		var ret PlatformPaymentConfiguration
+		return ret
+	}
+	return *o.PlatformPaymentConfiguration
+}
+
+// GetPlatformPaymentConfigurationOk returns a tuple with the PlatformPaymentConfiguration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BalanceAccountUpdateRequest) GetPlatformPaymentConfigurationOk() (*PlatformPaymentConfiguration, bool) {
+	if o == nil || common.IsNil(o.PlatformPaymentConfiguration) {
+		return nil, false
+	}
+	return o.PlatformPaymentConfiguration, true
+}
+
+// HasPlatformPaymentConfiguration returns a boolean if a field has been set.
+func (o *BalanceAccountUpdateRequest) HasPlatformPaymentConfiguration() bool {
+	if o != nil && !common.IsNil(o.PlatformPaymentConfiguration) {
+		return true
+	}
+
+	return false
+}
+
+// SetPlatformPaymentConfiguration gets a reference to the given PlatformPaymentConfiguration and assigns it to the PlatformPaymentConfiguration field.
+func (o *BalanceAccountUpdateRequest) SetPlatformPaymentConfiguration(v PlatformPaymentConfiguration) {
+	o.PlatformPaymentConfiguration = &v
+}
+
 // GetReference returns the Reference field value if set, zero value otherwise.
 func (o *BalanceAccountUpdateRequest) GetReference() string {
 	if o == nil || common.IsNil(o.Reference) {
@@ -297,6 +330,9 @@ func (o BalanceAccountUpdateRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
+	}
+	if !common.IsNil(o.PlatformPaymentConfiguration) {
+		toSerialize["platformPaymentConfiguration"] = o.PlatformPaymentConfiguration
 	}
 	if !common.IsNil(o.Reference) {
 		toSerialize["reference"] = o.Reference

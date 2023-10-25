@@ -19,12 +19,14 @@ type BankAccountInfoAccountIdentification struct {
 	CALocalAccountIdentification      *CALocalAccountIdentification
 	CZLocalAccountIdentification      *CZLocalAccountIdentification
 	DKLocalAccountIdentification      *DKLocalAccountIdentification
+	HKLocalAccountIdentification      *HKLocalAccountIdentification
 	HULocalAccountIdentification      *HULocalAccountIdentification
 	IbanAccountIdentification         *IbanAccountIdentification
 	NOLocalAccountIdentification      *NOLocalAccountIdentification
 	NumberAndBicAccountIdentification *NumberAndBicAccountIdentification
 	PLLocalAccountIdentification      *PLLocalAccountIdentification
 	SELocalAccountIdentification      *SELocalAccountIdentification
+	SGLocalAccountIdentification      *SGLocalAccountIdentification
 	UKLocalAccountIdentification      *UKLocalAccountIdentification
 	USLocalAccountIdentification      *USLocalAccountIdentification
 }
@@ -54,6 +56,13 @@ func CZLocalAccountIdentificationAsBankAccountInfoAccountIdentification(v *CZLoc
 func DKLocalAccountIdentificationAsBankAccountInfoAccountIdentification(v *DKLocalAccountIdentification) BankAccountInfoAccountIdentification {
 	return BankAccountInfoAccountIdentification{
 		DKLocalAccountIdentification: v,
+	}
+}
+
+// HKLocalAccountIdentificationAsBankAccountInfoAccountIdentification is a convenience function that returns HKLocalAccountIdentification wrapped in BankAccountInfoAccountIdentification
+func HKLocalAccountIdentificationAsBankAccountInfoAccountIdentification(v *HKLocalAccountIdentification) BankAccountInfoAccountIdentification {
+	return BankAccountInfoAccountIdentification{
+		HKLocalAccountIdentification: v,
 	}
 }
 
@@ -96,6 +105,13 @@ func PLLocalAccountIdentificationAsBankAccountInfoAccountIdentification(v *PLLoc
 func SELocalAccountIdentificationAsBankAccountInfoAccountIdentification(v *SELocalAccountIdentification) BankAccountInfoAccountIdentification {
 	return BankAccountInfoAccountIdentification{
 		SELocalAccountIdentification: v,
+	}
+}
+
+// SGLocalAccountIdentificationAsBankAccountInfoAccountIdentification is a convenience function that returns SGLocalAccountIdentification wrapped in BankAccountInfoAccountIdentification
+func SGLocalAccountIdentificationAsBankAccountInfoAccountIdentification(v *SGLocalAccountIdentification) BankAccountInfoAccountIdentification {
+	return BankAccountInfoAccountIdentification{
+		SGLocalAccountIdentification: v,
 	}
 }
 
@@ -167,6 +183,19 @@ func (dst *BankAccountInfoAccountIdentification) UnmarshalJSON(data []byte) erro
 		}
 	} else {
 		dst.DKLocalAccountIdentification = nil
+	}
+
+	// try to unmarshal data into HKLocalAccountIdentification
+	err = json.Unmarshal(data, &dst.HKLocalAccountIdentification)
+	if err == nil {
+		jsonHKLocalAccountIdentification, _ := json.Marshal(dst.HKLocalAccountIdentification)
+		if string(jsonHKLocalAccountIdentification) == "{}" || !dst.HKLocalAccountIdentification.isValidType() { // empty struct
+			dst.HKLocalAccountIdentification = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.HKLocalAccountIdentification = nil
 	}
 
 	// try to unmarshal data into HULocalAccountIdentification
@@ -247,6 +276,19 @@ func (dst *BankAccountInfoAccountIdentification) UnmarshalJSON(data []byte) erro
 		dst.SELocalAccountIdentification = nil
 	}
 
+	// try to unmarshal data into SGLocalAccountIdentification
+	err = json.Unmarshal(data, &dst.SGLocalAccountIdentification)
+	if err == nil {
+		jsonSGLocalAccountIdentification, _ := json.Marshal(dst.SGLocalAccountIdentification)
+		if string(jsonSGLocalAccountIdentification) == "{}" || !dst.SGLocalAccountIdentification.isValidType() { // empty struct
+			dst.SGLocalAccountIdentification = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.SGLocalAccountIdentification = nil
+	}
+
 	// try to unmarshal data into UKLocalAccountIdentification
 	err = json.Unmarshal(data, &dst.UKLocalAccountIdentification)
 	if err == nil {
@@ -279,12 +321,14 @@ func (dst *BankAccountInfoAccountIdentification) UnmarshalJSON(data []byte) erro
 		dst.CALocalAccountIdentification = nil
 		dst.CZLocalAccountIdentification = nil
 		dst.DKLocalAccountIdentification = nil
+		dst.HKLocalAccountIdentification = nil
 		dst.HULocalAccountIdentification = nil
 		dst.IbanAccountIdentification = nil
 		dst.NOLocalAccountIdentification = nil
 		dst.NumberAndBicAccountIdentification = nil
 		dst.PLLocalAccountIdentification = nil
 		dst.SELocalAccountIdentification = nil
+		dst.SGLocalAccountIdentification = nil
 		dst.UKLocalAccountIdentification = nil
 		dst.USLocalAccountIdentification = nil
 
@@ -314,6 +358,10 @@ func (src BankAccountInfoAccountIdentification) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.DKLocalAccountIdentification)
 	}
 
+	if src.HKLocalAccountIdentification != nil {
+		return json.Marshal(&src.HKLocalAccountIdentification)
+	}
+
 	if src.HULocalAccountIdentification != nil {
 		return json.Marshal(&src.HULocalAccountIdentification)
 	}
@@ -336,6 +384,10 @@ func (src BankAccountInfoAccountIdentification) MarshalJSON() ([]byte, error) {
 
 	if src.SELocalAccountIdentification != nil {
 		return json.Marshal(&src.SELocalAccountIdentification)
+	}
+
+	if src.SGLocalAccountIdentification != nil {
+		return json.Marshal(&src.SGLocalAccountIdentification)
 	}
 
 	if src.UKLocalAccountIdentification != nil {
@@ -370,6 +422,10 @@ func (obj *BankAccountInfoAccountIdentification) GetActualInstance() interface{}
 		return obj.DKLocalAccountIdentification
 	}
 
+	if obj.HKLocalAccountIdentification != nil {
+		return obj.HKLocalAccountIdentification
+	}
+
 	if obj.HULocalAccountIdentification != nil {
 		return obj.HULocalAccountIdentification
 	}
@@ -392,6 +448,10 @@ func (obj *BankAccountInfoAccountIdentification) GetActualInstance() interface{}
 
 	if obj.SELocalAccountIdentification != nil {
 		return obj.SELocalAccountIdentification
+	}
+
+	if obj.SGLocalAccountIdentification != nil {
+		return obj.SGLocalAccountIdentification
 	}
 
 	if obj.UKLocalAccountIdentification != nil {

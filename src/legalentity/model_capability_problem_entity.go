@@ -11,7 +11,7 @@ package legalentity
 import (
 	"encoding/json"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the CapabilityProblemEntity type satisfies the MappedNullable interface at compile time
@@ -233,7 +233,7 @@ func (v *NullableCapabilityProblemEntity) UnmarshalJSON(src []byte) error {
 }
 
 func (o *CapabilityProblemEntity) isValidType() bool {
-	var allowedEnumValues = []string{"BankAccount", "Document", "LegalEntity"}
+	var allowedEnumValues = []string{"BankAccount", "Document", "LegalEntity", "product"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

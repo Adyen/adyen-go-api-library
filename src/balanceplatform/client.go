@@ -9,7 +9,7 @@ API version: 2
 package balanceplatform
 
 import (
-    "github.com/adyen/adyen-go-api-library/v7/src/common"
+    "github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // APIClient manages communication with the Configuration API API v2
@@ -28,6 +28,8 @@ type APIClient struct {
 	GrantAccountsApi *GrantAccountsApi
 
 	GrantOffersApi *GrantOffersApi
+
+	NetworkTokensApi *NetworkTokensApi
 
 	PaymentInstrumentGroupsApi *PaymentInstrumentGroupsApi
 
@@ -52,6 +54,7 @@ func NewAPIClient(client *common.Client) *APIClient {
 	c.BankAccountValidationApi = (*BankAccountValidationApi)(&c.common)
 	c.GrantAccountsApi = (*GrantAccountsApi)(&c.common)
 	c.GrantOffersApi = (*GrantOffersApi)(&c.common)
+	c.NetworkTokensApi = (*NetworkTokensApi)(&c.common)
 	c.PaymentInstrumentGroupsApi = (*PaymentInstrumentGroupsApi)(&c.common)
 	c.PaymentInstrumentsApi = (*PaymentInstrumentsApi)(&c.common)
 	c.PlatformApi = (*PlatformApi)(&c.common)

@@ -11,7 +11,7 @@ package payments
 import (
 	"encoding/json"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the ThreeDS2RequestData type satisfies the MappedNullable interface at compile time
@@ -102,8 +102,6 @@ func NewThreeDS2RequestData(deviceChannel string) *ThreeDS2RequestData {
 	var authenticationOnly bool = false
 	this.AuthenticationOnly = &authenticationOnly
 	this.DeviceChannel = deviceChannel
-	var messageVersion string = "2.1.0"
-	this.MessageVersion = &messageVersion
 	var sdkMaxTimeout int32 = 60
 	this.SdkMaxTimeout = &sdkMaxTimeout
 	return &this
@@ -116,8 +114,6 @@ func NewThreeDS2RequestDataWithDefaults() *ThreeDS2RequestData {
 	this := ThreeDS2RequestData{}
 	var authenticationOnly bool = false
 	this.AuthenticationOnly = &authenticationOnly
-	var messageVersion string = "2.1.0"
-	this.MessageVersion = &messageVersion
 	var sdkMaxTimeout int32 = 60
 	this.SdkMaxTimeout = &sdkMaxTimeout
 	return &this

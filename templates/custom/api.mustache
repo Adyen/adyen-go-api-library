@@ -9,7 +9,7 @@ import (
     "net/http"
     "net/url"
     "strings"
-    "github.com/adyen/adyen-go-api-library/v7/src/common"
+    "github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // {{classname}} service
@@ -66,7 +66,7 @@ func (a *{{{classname}}}) {{{nickname}}}Input({{#pathParams}}{{paramName}} {{{da
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Input - Request parameters, see {{{nickname}}}Input
-@return {{{returnType}}}, *http.Response, error
+@return {{#returnType}}{{{returnType}}}, {{/returnType}}*http.Response, error
 {{#isDeprecated}}
 
     Deprecated
@@ -109,17 +109,18 @@ func (a *{{{classname}}}) {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecas
         headerParams,
     )
 
+	if httpRes == nil {
+        return {{#returnType}}*res, {{/returnType}}httpRes, err
+    }
+
 {{#hasRestServiceError}}
 {{#responses}}
     {{#-first}}var serviceError common.RestServiceError{{/-first}}
     {{#dataType}}
-
         {{^is1xx}}
             {{^is2xx}}
                 {{#range}}
-
                     {{#is3xx}}
-
                         if httpRes.StatusCode >= 300 && httpRes.StatusCode < 400 {
                     {{/is3xx}}
                     {{#is4xx}}
@@ -130,19 +131,18 @@ func (a *{{{classname}}}) {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecas
                     {{/is5xx}}
                 {{/range}}
                 {{^range}}
-
                     {{^wildcard}}
                         if httpRes.StatusCode == {{{code}}} {
                     {{/wildcard}}
                 {{/range}}
-                body, _ := ioutil.ReadAll(httpRes.Body)
-                decodeError := json.Unmarshal([]byte(body), &serviceError)
-                if decodeError != nil {
-                return {{#returnType}}*res, {{/returnType}}httpRes, decodeError
-                }
-                return {{#returnType}}*res, {{/returnType}}httpRes, serviceError
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return {{#returnType}}*res, {{/returnType}}httpRes, decodeError
+                            }
+                            return {{#returnType}}*res, {{/returnType}}httpRes, serviceError
                 {{^wildcard}}
-                    }
+                        }
                 {{/wildcard}}
             {{/is2xx}}
         {{/is1xx}}

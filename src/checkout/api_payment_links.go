@@ -14,7 +14,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // PaymentLinksApi service
@@ -61,6 +61,10 @@ func (a *PaymentLinksApi) GetPaymentLink(ctx context.Context, r PaymentLinksApiG
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	return *res, httpRes, err
 }
@@ -121,6 +125,10 @@ func (a *PaymentLinksApi) PaymentLinks(ctx context.Context, r PaymentLinksApiPay
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	return *res, httpRes, err
 }
 
@@ -171,6 +179,10 @@ func (a *PaymentLinksApi) UpdatePaymentLink(ctx context.Context, r PaymentLinksA
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	return *res, httpRes, err
 }

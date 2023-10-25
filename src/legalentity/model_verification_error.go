@@ -11,7 +11,7 @@ package legalentity
 import (
 	"encoding/json"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the VerificationError type satisfies the MappedNullable interface at compile time
@@ -310,7 +310,7 @@ func (v *NullableVerificationError) UnmarshalJSON(src []byte) error {
 }
 
 func (o *VerificationError) isValidType() bool {
-	var allowedEnumValues = []string{"dataMissing", "invalidInput", "pendingStatus"}
+	var allowedEnumValues = []string{"dataMissing", "dataReview", "invalidInput", "pendingStatus", "rejected"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

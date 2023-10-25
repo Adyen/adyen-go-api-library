@@ -14,10 +14,11 @@ import (
 	_context "context"
 	_nethttp "net/http"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // PlatformsHostedOnboardingPage PlatformsHostedOnboardingPage service
+// Deprecated: Please migrate to the new Adyen For Platforms.
 type PlatformsHostedOnboardingPage common.Service
 
 /*

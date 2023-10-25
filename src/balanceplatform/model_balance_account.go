@@ -11,7 +11,7 @@ package balanceplatform
 import (
 	"encoding/json"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the BalanceAccount type satisfies the MappedNullable interface at compile time
@@ -29,8 +29,11 @@ type BalanceAccount struct {
 	Description *string `json:"description,omitempty"`
 	// The unique identifier of the balance account.
 	Id string `json:"id"`
-	// A set of key and value pairs for general use by the merchant. The keys do not have specific names and may be used for storing miscellaneous data as desired. > Note that during an update of metadata, the omission of existing key-value pairs will result in the deletion of those key-value pairs.
+	// A set of key and value pairs for general use. The keys do not have specific names and may be used for storing miscellaneous data as desired. > Note that during an update of metadata, the omission of existing key-value pairs will result in the deletion of those key-value pairs.
 	Metadata *map[string]string `json:"metadata,omitempty"`
+	// The unique identifier of the account of the migrated account holder in the classic integration.
+	MigratedAccountCode          *string                       `json:"migratedAccountCode,omitempty"`
+	PlatformPaymentConfiguration *PlatformPaymentConfiguration `json:"platformPaymentConfiguration,omitempty"`
 	// Your reference for the balance account, maximum 150 characters.
 	Reference *string `json:"reference,omitempty"`
 	// The status of the balance account, set to **active** by default.
@@ -234,6 +237,70 @@ func (o *BalanceAccount) SetMetadata(v map[string]string) {
 	o.Metadata = &v
 }
 
+// GetMigratedAccountCode returns the MigratedAccountCode field value if set, zero value otherwise.
+func (o *BalanceAccount) GetMigratedAccountCode() string {
+	if o == nil || common.IsNil(o.MigratedAccountCode) {
+		var ret string
+		return ret
+	}
+	return *o.MigratedAccountCode
+}
+
+// GetMigratedAccountCodeOk returns a tuple with the MigratedAccountCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BalanceAccount) GetMigratedAccountCodeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.MigratedAccountCode) {
+		return nil, false
+	}
+	return o.MigratedAccountCode, true
+}
+
+// HasMigratedAccountCode returns a boolean if a field has been set.
+func (o *BalanceAccount) HasMigratedAccountCode() bool {
+	if o != nil && !common.IsNil(o.MigratedAccountCode) {
+		return true
+	}
+
+	return false
+}
+
+// SetMigratedAccountCode gets a reference to the given string and assigns it to the MigratedAccountCode field.
+func (o *BalanceAccount) SetMigratedAccountCode(v string) {
+	o.MigratedAccountCode = &v
+}
+
+// GetPlatformPaymentConfiguration returns the PlatformPaymentConfiguration field value if set, zero value otherwise.
+func (o *BalanceAccount) GetPlatformPaymentConfiguration() PlatformPaymentConfiguration {
+	if o == nil || common.IsNil(o.PlatformPaymentConfiguration) {
+		var ret PlatformPaymentConfiguration
+		return ret
+	}
+	return *o.PlatformPaymentConfiguration
+}
+
+// GetPlatformPaymentConfigurationOk returns a tuple with the PlatformPaymentConfiguration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BalanceAccount) GetPlatformPaymentConfigurationOk() (*PlatformPaymentConfiguration, bool) {
+	if o == nil || common.IsNil(o.PlatformPaymentConfiguration) {
+		return nil, false
+	}
+	return o.PlatformPaymentConfiguration, true
+}
+
+// HasPlatformPaymentConfiguration returns a boolean if a field has been set.
+func (o *BalanceAccount) HasPlatformPaymentConfiguration() bool {
+	if o != nil && !common.IsNil(o.PlatformPaymentConfiguration) {
+		return true
+	}
+
+	return false
+}
+
+// SetPlatformPaymentConfiguration gets a reference to the given PlatformPaymentConfiguration and assigns it to the PlatformPaymentConfiguration field.
+func (o *BalanceAccount) SetPlatformPaymentConfiguration(v PlatformPaymentConfiguration) {
+	o.PlatformPaymentConfiguration = &v
+}
+
 // GetReference returns the Reference field value if set, zero value otherwise.
 func (o *BalanceAccount) GetReference() string {
 	if o == nil || common.IsNil(o.Reference) {
@@ -353,6 +420,12 @@ func (o BalanceAccount) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	if !common.IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
+	}
+	if !common.IsNil(o.MigratedAccountCode) {
+		toSerialize["migratedAccountCode"] = o.MigratedAccountCode
+	}
+	if !common.IsNil(o.PlatformPaymentConfiguration) {
+		toSerialize["platformPaymentConfiguration"] = o.PlatformPaymentConfiguration
 	}
 	if !common.IsNil(o.Reference) {
 		toSerialize["reference"] = o.Reference

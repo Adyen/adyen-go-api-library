@@ -13,7 +13,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // UtilityApi service
@@ -74,6 +74,10 @@ func (a *UtilityApi) GetApplePaySession(ctx context.Context, r UtilityApiGetAppl
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	return *res, httpRes, err
 }
@@ -136,6 +140,10 @@ func (a *UtilityApi) OriginKeys(ctx context.Context, r UtilityApiOriginKeysInput
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	return *res, httpRes, err
 }

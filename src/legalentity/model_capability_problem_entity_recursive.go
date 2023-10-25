@@ -11,7 +11,7 @@ package legalentity
 import (
 	"encoding/json"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the CapabilityProblemEntityRecursive type satisfies the MappedNullable interface at compile time
@@ -197,7 +197,7 @@ func (v *NullableCapabilityProblemEntityRecursive) UnmarshalJSON(src []byte) err
 }
 
 func (o *CapabilityProblemEntityRecursive) isValidType() bool {
-	var allowedEnumValues = []string{"BankAccount", "Document", "LegalEntity"}
+	var allowedEnumValues = []string{"BankAccount", "Document", "LegalEntity", "product"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

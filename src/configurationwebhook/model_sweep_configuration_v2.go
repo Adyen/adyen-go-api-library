@@ -11,7 +11,7 @@ package configurationwebhook
 import (
 	"encoding/json"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the SweepConfigurationV2 type satisfies the MappedNullable interface at compile time
@@ -27,8 +27,8 @@ type SweepConfigurationV2 struct {
 	// The unique identifier of the sweep.
 	Id string `json:"id"`
 	// The reason for disabling the sweep.
-	Reason   *string                    `json:"reason,omitempty"`
-	Schedule SweepConfigurationSchedule `json:"schedule"`
+	Reason   *string       `json:"reason,omitempty"`
+	Schedule SweepSchedule `json:"schedule"`
 	// The status of the sweep. If not provided, by default, this is set to **active**.  Possible values:    * **active**:  the sweep is enabled and funds will be pulled in or pushed out based on the defined configuration.    * **inactive**: the sweep is disabled and cannot be triggered.
 	Status        *string `json:"status,omitempty"`
 	SweepAmount   *Amount `json:"sweepAmount,omitempty"`
@@ -42,7 +42,7 @@ type SweepConfigurationV2 struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSweepConfigurationV2(counterparty SweepCounterparty, currency string, id string, schedule SweepConfigurationSchedule) *SweepConfigurationV2 {
+func NewSweepConfigurationV2(counterparty SweepCounterparty, currency string, id string, schedule SweepSchedule) *SweepConfigurationV2 {
 	this := SweepConfigurationV2{}
 	this.Counterparty = counterparty
 	this.Currency = currency
@@ -200,9 +200,9 @@ func (o *SweepConfigurationV2) SetReason(v string) {
 }
 
 // GetSchedule returns the Schedule field value
-func (o *SweepConfigurationV2) GetSchedule() SweepConfigurationSchedule {
+func (o *SweepConfigurationV2) GetSchedule() SweepSchedule {
 	if o == nil {
-		var ret SweepConfigurationSchedule
+		var ret SweepSchedule
 		return ret
 	}
 
@@ -211,7 +211,7 @@ func (o *SweepConfigurationV2) GetSchedule() SweepConfigurationSchedule {
 
 // GetScheduleOk returns a tuple with the Schedule field value
 // and a boolean to check if the value has been set.
-func (o *SweepConfigurationV2) GetScheduleOk() (*SweepConfigurationSchedule, bool) {
+func (o *SweepConfigurationV2) GetScheduleOk() (*SweepSchedule, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -219,7 +219,7 @@ func (o *SweepConfigurationV2) GetScheduleOk() (*SweepConfigurationSchedule, boo
 }
 
 // SetSchedule sets field value
-func (o *SweepConfigurationV2) SetSchedule(v SweepConfigurationSchedule) {
+func (o *SweepConfigurationV2) SetSchedule(v SweepSchedule) {
 	o.Schedule = v
 }
 

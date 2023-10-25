@@ -14,7 +14,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // PaymentsApi service
@@ -78,6 +78,10 @@ func (a *PaymentsApi) CardDetails(ctx context.Context, r PaymentsApiCardDetailsI
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	return *res, httpRes, err
 }
 
@@ -137,6 +141,10 @@ func (a *PaymentsApi) Donations(ctx context.Context, r PaymentsApiDonationsInput
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	return *res, httpRes, err
 }
 
@@ -191,6 +199,10 @@ func (a *PaymentsApi) GetResultOfPaymentSession(ctx context.Context, r PaymentsA
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	return *res, httpRes, err
 }
@@ -250,6 +262,10 @@ func (a *PaymentsApi) PaymentMethods(ctx context.Context, r PaymentsApiPaymentMe
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	return *res, httpRes, err
 }
@@ -311,6 +327,10 @@ func (a *PaymentsApi) Payments(ctx context.Context, r PaymentsApiPaymentsInput) 
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	return *res, httpRes, err
 }
 
@@ -369,6 +389,10 @@ func (a *PaymentsApi) PaymentsDetails(ctx context.Context, r PaymentsApiPayments
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	return *res, httpRes, err
 }
@@ -430,6 +454,10 @@ func (a *PaymentsApi) Sessions(ctx context.Context, r PaymentsApiSessionsInput) 
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	return *res, httpRes, err
 }

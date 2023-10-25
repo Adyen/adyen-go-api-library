@@ -11,7 +11,7 @@ package legalentity
 import (
 	"encoding/json"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the AcceptTermsOfServiceRequest type satisfies the MappedNullable interface at compile time
@@ -19,8 +19,8 @@ var _ common.MappedNullable = &AcceptTermsOfServiceRequest{}
 
 // AcceptTermsOfServiceRequest struct for AcceptTermsOfServiceRequest
 type AcceptTermsOfServiceRequest struct {
-	// The unique identifier of the user accepting the Terms of Service.
-	AcceptedBy *string `json:"acceptedBy,omitempty"`
+	// The individual legal entity ID of the user accepting the Terms of Service. This can also be the legal entity ID of the signatory for an organization.
+	AcceptedBy string `json:"acceptedBy"`
 	// The IP address of the user accepting the Terms of Service.
 	IpAddress *string `json:"ipAddress,omitempty"`
 }
@@ -29,8 +29,9 @@ type AcceptTermsOfServiceRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAcceptTermsOfServiceRequest() *AcceptTermsOfServiceRequest {
+func NewAcceptTermsOfServiceRequest(acceptedBy string) *AcceptTermsOfServiceRequest {
 	this := AcceptTermsOfServiceRequest{}
+	this.AcceptedBy = acceptedBy
 	return &this
 }
 
@@ -42,36 +43,28 @@ func NewAcceptTermsOfServiceRequestWithDefaults() *AcceptTermsOfServiceRequest {
 	return &this
 }
 
-// GetAcceptedBy returns the AcceptedBy field value if set, zero value otherwise.
+// GetAcceptedBy returns the AcceptedBy field value
 func (o *AcceptTermsOfServiceRequest) GetAcceptedBy() string {
-	if o == nil || common.IsNil(o.AcceptedBy) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.AcceptedBy
+
+	return o.AcceptedBy
 }
 
-// GetAcceptedByOk returns a tuple with the AcceptedBy field value if set, nil otherwise
+// GetAcceptedByOk returns a tuple with the AcceptedBy field value
 // and a boolean to check if the value has been set.
 func (o *AcceptTermsOfServiceRequest) GetAcceptedByOk() (*string, bool) {
-	if o == nil || common.IsNil(o.AcceptedBy) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AcceptedBy, true
+	return &o.AcceptedBy, true
 }
 
-// HasAcceptedBy returns a boolean if a field has been set.
-func (o *AcceptTermsOfServiceRequest) HasAcceptedBy() bool {
-	if o != nil && !common.IsNil(o.AcceptedBy) {
-		return true
-	}
-
-	return false
-}
-
-// SetAcceptedBy gets a reference to the given string and assigns it to the AcceptedBy field.
+// SetAcceptedBy sets field value
 func (o *AcceptTermsOfServiceRequest) SetAcceptedBy(v string) {
-	o.AcceptedBy = &v
+	o.AcceptedBy = v
 }
 
 // GetIpAddress returns the IpAddress field value if set, zero value otherwise.
@@ -116,9 +109,7 @@ func (o AcceptTermsOfServiceRequest) MarshalJSON() ([]byte, error) {
 
 func (o AcceptTermsOfServiceRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !common.IsNil(o.AcceptedBy) {
-		toSerialize["acceptedBy"] = o.AcceptedBy
-	}
+	toSerialize["acceptedBy"] = o.AcceptedBy
 	if !common.IsNil(o.IpAddress) {
 		toSerialize["ipAddress"] = o.IpAddress
 	}

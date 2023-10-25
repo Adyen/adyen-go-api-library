@@ -11,7 +11,7 @@ package legalentity
 import (
 	"encoding/json"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the TransferInstrumentReference type satisfies the MappedNullable interface at compile time
@@ -25,7 +25,7 @@ type TransferInstrumentReference struct {
 	Id string `json:"id"`
 	// Four last digits of the bank account number.
 	RealLastFour *string `json:"realLastFour,omitempty"`
-	// Identifies if the TI was created from a trusted source.
+	// Identifies if the bank account was created through [instant bank verification](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-08-hosted-onboarding).
 	TrustedSource *bool `json:"trustedSource,omitempty"`
 }
 

@@ -16,7 +16,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // PaymentInstrumentGroupsApi service
@@ -65,6 +65,10 @@ func (a *PaymentInstrumentGroupsApi) CreatePaymentInstrumentGroup(ctx context.Co
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -158,6 +162,10 @@ func (a *PaymentInstrumentGroupsApi) GetAllTransactionRulesForPaymentInstrumentG
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -249,6 +257,10 @@ func (a *PaymentInstrumentGroupsApi) GetPaymentInstrumentGroup(ctx context.Conte
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 

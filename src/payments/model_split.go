@@ -11,7 +11,7 @@ package payments
 import (
 	"encoding/json"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the Split type satisfies the MappedNullable interface at compile time
@@ -254,7 +254,7 @@ func (v *NullableSplit) UnmarshalJSON(src []byte) error {
 }
 
 func (o *Split) isValidType() bool {
-	var allowedEnumValues = []string{"BalanceAccount", "Commission", "Default", "MarketPlace", "PaymentFee", "Remainder", "Surcharge", "Tip", "VAT", "Verification"}
+	var allowedEnumValues = []string{"BalanceAccount", "Commission", "Default", "MarketPlace", "PaymentFee", "PaymentFeeAcquiring", "PaymentFeeAdyen", "PaymentFeeAdyenCommission", "PaymentFeeAdyenMarkup", "PaymentFeeInterchange", "PaymentFeeSchemeFee", "Remainder", "Surcharge", "Tip", "VAT", "Verification"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

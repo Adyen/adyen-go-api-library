@@ -6,7 +6,7 @@ import (
 	"encoding/base64"
 	"encoding/hex"
 	"fmt"
-	"github.com/adyen/adyen-go-api-library/v7/src/webhook"
+	"github.com/adyen/adyen-go-api-library/v8/src/webhook"
 	"regexp"
 	"sort"
 	"strconv"

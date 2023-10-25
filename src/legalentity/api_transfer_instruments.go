@@ -14,7 +14,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // TransferInstrumentsApi service
@@ -22,7 +22,14 @@ type TransferInstrumentsApi common.Service
 
 // All parameters accepted by TransferInstrumentsApi.CreateTransferInstrument
 type TransferInstrumentsApiCreateTransferInstrumentInput struct {
-	transferInstrumentInfo *TransferInstrumentInfo
+	xRequestedVerificationCode *string
+	transferInstrumentInfo     *TransferInstrumentInfo
+}
+
+// Use a suberror code as your requested verification code. You can include one code at a time in your request header. Requested verification codes can only be used in your test environment.
+func (r TransferInstrumentsApiCreateTransferInstrumentInput) XRequestedVerificationCode(xRequestedVerificationCode string) TransferInstrumentsApiCreateTransferInstrumentInput {
+	r.xRequestedVerificationCode = &xRequestedVerificationCode
+	return r
 }
 
 func (r TransferInstrumentsApiCreateTransferInstrumentInput) TransferInstrumentInfo(transferInstrumentInfo TransferInstrumentInfo) TransferInstrumentsApiCreateTransferInstrumentInput {
@@ -57,6 +64,9 @@ func (a *TransferInstrumentsApi) CreateTransferInstrument(ctx context.Context, r
 	path := "/transferInstruments"
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
+	if r.xRequestedVerificationCode != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "x-requested-verification-code", r.xRequestedVerificationCode, "")
+	}
 	httpRes, err := common.SendAPIRequest(
 		ctx,
 		a.Client,
@@ -94,7 +104,7 @@ Deletes a transfer instrument.
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TransferInstrumentsApiDeleteTransferInstrumentInput - Request parameters, see DeleteTransferInstrumentInput
-@return , *http.Response, error
+@return *http.Response, error
 */
 func (a *TransferInstrumentsApi) DeleteTransferInstrument(ctx context.Context, r TransferInstrumentsApiDeleteTransferInstrumentInput) (*http.Response, error) {
 	var res interface{}

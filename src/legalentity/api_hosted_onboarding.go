@@ -14,7 +14,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // HostedOnboardingApi service
@@ -46,6 +46,10 @@ func (a *HostedOnboardingApi) GetLinkToAdyenhostedOnboardingPageInput(id string)
 GetLinkToAdyenhostedOnboardingPage Get a link to an Adyen-hosted onboarding page
 
 Returns a link to an Adyen-hosted onboarding page where you need to redirect your user.
+
+>If you are using hosted onboarding, [only use v2](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-01-legal-entity-management-api-3) for your API requests.
+
+
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r HostedOnboardingApiGetLinkToAdyenhostedOnboardingPageInput - Request parameters, see GetLinkToAdyenhostedOnboardingPageInput
@@ -90,7 +94,9 @@ func (a *HostedOnboardingApi) GetOnboardingLinkThemeInput(id string) HostedOnboa
 /*
 GetOnboardingLinkTheme Get an onboarding link theme
 
-Returns the details of the theme identified in the path.
+Returns the details of the theme identified in the path.>If you are using hosted onboarding, [only use v2](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-01-legal-entity-management-api-3) for your API requests.
+
+
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r HostedOnboardingApiGetOnboardingLinkThemeInput - Request parameters, see GetOnboardingLinkThemeInput
@@ -133,6 +139,10 @@ func (a *HostedOnboardingApi) ListHostedOnboardingPageThemesInput() HostedOnboar
 ListHostedOnboardingPageThemes Get a list of hosted onboarding page themes
 
 Returns a list of hosted onboarding page themes.
+
+>If you are using hosted onboarding, [only use v2](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-01-legal-entity-management-api-3) for your API requests.
+
+
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r HostedOnboardingApiListHostedOnboardingPageThemesInput - Request parameters, see ListHostedOnboardingPageThemesInput

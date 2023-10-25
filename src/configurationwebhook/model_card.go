@@ -11,7 +11,7 @@ package configurationwebhook
 import (
 	"encoding/json"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the Card type satisfies the MappedNullable interface at compile time
@@ -24,7 +24,7 @@ type Card struct {
 	Bin *string `json:"bin,omitempty"`
 	// The brand of the physical or the virtual card. Possible values: **visa**, **mc**.
 	Brand string `json:"brand"`
-	// The brand variant of the physical or the virtual card. >Contact your Adyen Implementation Manager to get the values that are relevant to your integration. Examples: **visadebit**, **mcprepaid**.
+	// The brand variant of the physical or the virtual card. For example, **visadebit** or **mcprepaid**. >Reach out to your Adyen contact to get the values relevant for your integration.
 	BrandVariant string `json:"brandVariant"`
 	// The name of the cardholder.  Maximum length: 26 characters.
 	CardholderName string             `json:"cardholderName"`
@@ -39,6 +39,8 @@ type Card struct {
 	LastFour *string `json:"lastFour,omitempty"`
 	// The primary account number (PAN) of the card. > The PAN is masked by default and returned only for single-use virtual cards.
 	Number string `json:"number"`
+	// Allocates a specific product range for either a physical or a virtual card. Possible values: **fullySupported**, **secureCorporate**. >Reach out to your Adyen contact to get the values relevant for your integration.
+	ThreeDSecure *string `json:"threeDSecure,omitempty"`
 }
 
 // NewCard instantiates a new Card object
@@ -407,6 +409,38 @@ func (o *Card) SetNumber(v string) {
 	o.Number = v
 }
 
+// GetThreeDSecure returns the ThreeDSecure field value if set, zero value otherwise.
+func (o *Card) GetThreeDSecure() string {
+	if o == nil || common.IsNil(o.ThreeDSecure) {
+		var ret string
+		return ret
+	}
+	return *o.ThreeDSecure
+}
+
+// GetThreeDSecureOk returns a tuple with the ThreeDSecure field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Card) GetThreeDSecureOk() (*string, bool) {
+	if o == nil || common.IsNil(o.ThreeDSecure) {
+		return nil, false
+	}
+	return o.ThreeDSecure, true
+}
+
+// HasThreeDSecure returns a boolean if a field has been set.
+func (o *Card) HasThreeDSecure() bool {
+	if o != nil && !common.IsNil(o.ThreeDSecure) {
+		return true
+	}
+
+	return false
+}
+
+// SetThreeDSecure gets a reference to the given string and assigns it to the ThreeDSecure field.
+func (o *Card) SetThreeDSecure(v string) {
+	o.ThreeDSecure = &v
+}
+
 func (o Card) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -443,6 +477,9 @@ func (o Card) ToMap() (map[string]interface{}, error) {
 		toSerialize["lastFour"] = o.LastFour
 	}
 	toSerialize["number"] = o.Number
+	if !common.IsNil(o.ThreeDSecure) {
+		toSerialize["threeDSecure"] = o.ThreeDSecure
+	}
 	return toSerialize, nil
 }
 

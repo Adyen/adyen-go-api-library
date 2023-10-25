@@ -16,7 +16,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // PlatformApi service
@@ -85,6 +85,10 @@ func (a *PlatformApi) GetAllAccountHoldersUnderBalancePlatform(ctx context.Conte
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -177,6 +181,10 @@ func (a *PlatformApi) GetBalancePlatform(ctx context.Context, r PlatformApiGetBa
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 

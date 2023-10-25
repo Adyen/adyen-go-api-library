@@ -11,7 +11,7 @@ package legalentity
 import (
 	"encoding/json"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the LegalEntity type satisfies the MappedNullable interface at compile time
@@ -41,6 +41,8 @@ type LegalEntity struct {
 	TransferInstruments []TransferInstrumentReference `json:"transferInstruments,omitempty"`
 	// The type of legal entity.   Possible values: **individual**, **organization**, or **soleProprietorship**.
 	Type *string `json:"type,omitempty"`
+	// List of verification deadlines and the capabilities that will be disallowed if verification errors are not resolved.
+	VerificationDeadlines []VerificationDeadline `json:"verificationDeadlines,omitempty"`
 }
 
 // NewLegalEntity instantiates a new LegalEntity object
@@ -440,6 +442,38 @@ func (o *LegalEntity) SetType(v string) {
 	o.Type = &v
 }
 
+// GetVerificationDeadlines returns the VerificationDeadlines field value if set, zero value otherwise.
+func (o *LegalEntity) GetVerificationDeadlines() []VerificationDeadline {
+	if o == nil || common.IsNil(o.VerificationDeadlines) {
+		var ret []VerificationDeadline
+		return ret
+	}
+	return o.VerificationDeadlines
+}
+
+// GetVerificationDeadlinesOk returns a tuple with the VerificationDeadlines field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LegalEntity) GetVerificationDeadlinesOk() ([]VerificationDeadline, bool) {
+	if o == nil || common.IsNil(o.VerificationDeadlines) {
+		return nil, false
+	}
+	return o.VerificationDeadlines, true
+}
+
+// HasVerificationDeadlines returns a boolean if a field has been set.
+func (o *LegalEntity) HasVerificationDeadlines() bool {
+	if o != nil && !common.IsNil(o.VerificationDeadlines) {
+		return true
+	}
+
+	return false
+}
+
+// SetVerificationDeadlines gets a reference to the given []VerificationDeadline and assigns it to the VerificationDeadlines field.
+func (o *LegalEntity) SetVerificationDeadlines(v []VerificationDeadline) {
+	o.VerificationDeadlines = v
+}
+
 func (o LegalEntity) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -483,6 +517,9 @@ func (o LegalEntity) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type
+	}
+	if !common.IsNil(o.VerificationDeadlines) {
+		toSerialize["verificationDeadlines"] = o.VerificationDeadlines
 	}
 	return toSerialize, nil
 }

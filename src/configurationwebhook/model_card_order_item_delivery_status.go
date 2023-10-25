@@ -11,7 +11,7 @@ package configurationwebhook
 import (
 	"encoding/json"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the CardOrderItemDeliveryStatus type satisfies the MappedNullable interface at compile time
@@ -19,12 +19,10 @@ var _ common.MappedNullable = &CardOrderItemDeliveryStatus{}
 
 // CardOrderItemDeliveryStatus struct for CardOrderItemDeliveryStatus
 type CardOrderItemDeliveryStatus struct {
+	// Error message.
+	ErrorMessage *string `json:"errorMessage,omitempty"`
 	// Status of the delivery.
 	Status *string `json:"status,omitempty"`
-	// Error status, if any.
-	StatusError *string `json:"statusError,omitempty"`
-	// Error message, if any.
-	StatusErrorMessage *string `json:"statusErrorMessage,omitempty"`
 	// Tracking number of the delivery.
 	TrackingNumber *string `json:"trackingNumber,omitempty"`
 }
@@ -44,6 +42,38 @@ func NewCardOrderItemDeliveryStatus() *CardOrderItemDeliveryStatus {
 func NewCardOrderItemDeliveryStatusWithDefaults() *CardOrderItemDeliveryStatus {
 	this := CardOrderItemDeliveryStatus{}
 	return &this
+}
+
+// GetErrorMessage returns the ErrorMessage field value if set, zero value otherwise.
+func (o *CardOrderItemDeliveryStatus) GetErrorMessage() string {
+	if o == nil || common.IsNil(o.ErrorMessage) {
+		var ret string
+		return ret
+	}
+	return *o.ErrorMessage
+}
+
+// GetErrorMessageOk returns a tuple with the ErrorMessage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CardOrderItemDeliveryStatus) GetErrorMessageOk() (*string, bool) {
+	if o == nil || common.IsNil(o.ErrorMessage) {
+		return nil, false
+	}
+	return o.ErrorMessage, true
+}
+
+// HasErrorMessage returns a boolean if a field has been set.
+func (o *CardOrderItemDeliveryStatus) HasErrorMessage() bool {
+	if o != nil && !common.IsNil(o.ErrorMessage) {
+		return true
+	}
+
+	return false
+}
+
+// SetErrorMessage gets a reference to the given string and assigns it to the ErrorMessage field.
+func (o *CardOrderItemDeliveryStatus) SetErrorMessage(v string) {
+	o.ErrorMessage = &v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
@@ -76,70 +106,6 @@ func (o *CardOrderItemDeliveryStatus) HasStatus() bool {
 // SetStatus gets a reference to the given string and assigns it to the Status field.
 func (o *CardOrderItemDeliveryStatus) SetStatus(v string) {
 	o.Status = &v
-}
-
-// GetStatusError returns the StatusError field value if set, zero value otherwise.
-func (o *CardOrderItemDeliveryStatus) GetStatusError() string {
-	if o == nil || common.IsNil(o.StatusError) {
-		var ret string
-		return ret
-	}
-	return *o.StatusError
-}
-
-// GetStatusErrorOk returns a tuple with the StatusError field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CardOrderItemDeliveryStatus) GetStatusErrorOk() (*string, bool) {
-	if o == nil || common.IsNil(o.StatusError) {
-		return nil, false
-	}
-	return o.StatusError, true
-}
-
-// HasStatusError returns a boolean if a field has been set.
-func (o *CardOrderItemDeliveryStatus) HasStatusError() bool {
-	if o != nil && !common.IsNil(o.StatusError) {
-		return true
-	}
-
-	return false
-}
-
-// SetStatusError gets a reference to the given string and assigns it to the StatusError field.
-func (o *CardOrderItemDeliveryStatus) SetStatusError(v string) {
-	o.StatusError = &v
-}
-
-// GetStatusErrorMessage returns the StatusErrorMessage field value if set, zero value otherwise.
-func (o *CardOrderItemDeliveryStatus) GetStatusErrorMessage() string {
-	if o == nil || common.IsNil(o.StatusErrorMessage) {
-		var ret string
-		return ret
-	}
-	return *o.StatusErrorMessage
-}
-
-// GetStatusErrorMessageOk returns a tuple with the StatusErrorMessage field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CardOrderItemDeliveryStatus) GetStatusErrorMessageOk() (*string, bool) {
-	if o == nil || common.IsNil(o.StatusErrorMessage) {
-		return nil, false
-	}
-	return o.StatusErrorMessage, true
-}
-
-// HasStatusErrorMessage returns a boolean if a field has been set.
-func (o *CardOrderItemDeliveryStatus) HasStatusErrorMessage() bool {
-	if o != nil && !common.IsNil(o.StatusErrorMessage) {
-		return true
-	}
-
-	return false
-}
-
-// SetStatusErrorMessage gets a reference to the given string and assigns it to the StatusErrorMessage field.
-func (o *CardOrderItemDeliveryStatus) SetStatusErrorMessage(v string) {
-	o.StatusErrorMessage = &v
 }
 
 // GetTrackingNumber returns the TrackingNumber field value if set, zero value otherwise.
@@ -184,14 +150,11 @@ func (o CardOrderItemDeliveryStatus) MarshalJSON() ([]byte, error) {
 
 func (o CardOrderItemDeliveryStatus) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.ErrorMessage) {
+		toSerialize["errorMessage"] = o.ErrorMessage
+	}
 	if !common.IsNil(o.Status) {
 		toSerialize["status"] = o.Status
-	}
-	if !common.IsNil(o.StatusError) {
-		toSerialize["statusError"] = o.StatusError
-	}
-	if !common.IsNil(o.StatusErrorMessage) {
-		toSerialize["statusErrorMessage"] = o.StatusErrorMessage
 	}
 	if !common.IsNil(o.TrackingNumber) {
 		toSerialize["trackingNumber"] = o.TrackingNumber
@@ -236,7 +199,7 @@ func (v *NullableCardOrderItemDeliveryStatus) UnmarshalJSON(src []byte) error {
 }
 
 func (o *CardOrderItemDeliveryStatus) isValidStatus() bool {
-	var allowedEnumValues = []string{"created", "delivered", "processing", "produced", "rejected", "shipped", "unknown"}
+	var allowedEnumValues = []string{"created", "delivered", "notApplicable", "processing", "produced", "rejected", "shipped", "unknown"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetStatus() == allowed {
 			return true

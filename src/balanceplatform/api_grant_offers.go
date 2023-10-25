@@ -16,7 +16,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // GrantOffersApi service
@@ -69,6 +69,10 @@ func (a *GrantOffersApi) GetAllAvailableGrantOffers(ctx context.Context, r Grant
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -161,6 +165,10 @@ func (a *GrantOffersApi) GetGrantOffer(ctx context.Context, r GrantOffersApiGetG
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 

@@ -16,7 +16,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // AccountHoldersApi service
@@ -67,6 +67,10 @@ func (a *AccountHoldersApi) CreateAccountHolder(ctx context.Context, r AccountHo
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -159,6 +163,10 @@ func (a *AccountHoldersApi) GetAccountHolder(ctx context.Context, r AccountHolde
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 
@@ -274,6 +282,10 @@ func (a *AccountHoldersApi) GetAllBalanceAccountsOfAccountHolder(ctx context.Con
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	var serviceError common.RestServiceError
 
 	if httpRes.StatusCode == 400 {
@@ -326,12 +338,12 @@ func (a *AccountHoldersApi) GetAllBalanceAccountsOfAccountHolder(ctx context.Con
 
 // All parameters accepted by AccountHoldersApi.UpdateAccountHolder
 type AccountHoldersApiUpdateAccountHolderInput struct {
-	id            string
-	accountHolder *AccountHolder
+	id                         string
+	accountHolderUpdateRequest *AccountHolderUpdateRequest
 }
 
-func (r AccountHoldersApiUpdateAccountHolderInput) AccountHolder(accountHolder AccountHolder) AccountHoldersApiUpdateAccountHolderInput {
-	r.accountHolder = &accountHolder
+func (r AccountHoldersApiUpdateAccountHolderInput) AccountHolderUpdateRequest(accountHolderUpdateRequest AccountHolderUpdateRequest) AccountHoldersApiUpdateAccountHolderInput {
+	r.accountHolderUpdateRequest = &accountHolderUpdateRequest
 	return r
 }
 
@@ -364,13 +376,17 @@ func (a *AccountHoldersApi) UpdateAccountHolder(ctx context.Context, r AccountHo
 	httpRes, err := common.SendAPIRequest(
 		ctx,
 		a.Client,
-		r.accountHolder,
+		r.accountHolderUpdateRequest,
 		res,
 		http.MethodPatch,
 		a.BasePath()+path,
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	var serviceError common.RestServiceError
 

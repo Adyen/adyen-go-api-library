@@ -11,7 +11,7 @@ package legalentity
 import (
 	"encoding/json"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the BusinessLineInfoUpdate type satisfies the MappedNullable interface at compile time
@@ -28,8 +28,8 @@ type BusinessLineInfoUpdate struct {
 	LegalEntityId *string `json:"legalEntityId,omitempty"`
 	// A list of channels where goods or services are sold.  Possible values: **pos**, **posMoto**, **eCommerce**, **ecomMoto**, **payByLink**.  Required only in combination with the `service` **paymentProcessing**.
 	SalesChannels []string `json:"salesChannels,omitempty"`
-	// The service for which you are creating the business line.  Possible values:**paymentProcessing**, **issuing**, **banking**
-	Service       string         `json:"service"`
+	// The service for which you are creating the business line.  Possible values: **paymentProcessing**, **issuing**, **banking**
+	Service       *string        `json:"service,omitempty"`
 	SourceOfFunds *SourceOfFunds `json:"sourceOfFunds,omitempty"`
 	// List of website URLs where your user's goods or services are sold. When this is required for a service but your user does not have an online presence, provide the reason in the `webDataExemption` object.
 	WebData          []WebData         `json:"webData,omitempty"`
@@ -40,9 +40,8 @@ type BusinessLineInfoUpdate struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBusinessLineInfoUpdate(service string) *BusinessLineInfoUpdate {
+func NewBusinessLineInfoUpdate() *BusinessLineInfoUpdate {
 	this := BusinessLineInfoUpdate{}
-	this.Service = service
 	return &this
 }
 
@@ -185,28 +184,36 @@ func (o *BusinessLineInfoUpdate) SetSalesChannels(v []string) {
 	o.SalesChannels = v
 }
 
-// GetService returns the Service field value
+// GetService returns the Service field value if set, zero value otherwise.
 func (o *BusinessLineInfoUpdate) GetService() string {
-	if o == nil {
+	if o == nil || common.IsNil(o.Service) {
 		var ret string
 		return ret
 	}
-
-	return o.Service
+	return *o.Service
 }
 
-// GetServiceOk returns a tuple with the Service field value
+// GetServiceOk returns a tuple with the Service field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BusinessLineInfoUpdate) GetServiceOk() (*string, bool) {
-	if o == nil {
+	if o == nil || common.IsNil(o.Service) {
 		return nil, false
 	}
-	return &o.Service, true
+	return o.Service, true
 }
 
-// SetService sets field value
+// HasService returns a boolean if a field has been set.
+func (o *BusinessLineInfoUpdate) HasService() bool {
+	if o != nil && !common.IsNil(o.Service) {
+		return true
+	}
+
+	return false
+}
+
+// SetService gets a reference to the given string and assigns it to the Service field.
 func (o *BusinessLineInfoUpdate) SetService(v string) {
-	o.Service = v
+	o.Service = &v
 }
 
 // GetSourceOfFunds returns the SourceOfFunds field value if set, zero value otherwise.
@@ -327,7 +334,9 @@ func (o BusinessLineInfoUpdate) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.SalesChannels) {
 		toSerialize["salesChannels"] = o.SalesChannels
 	}
-	toSerialize["service"] = o.Service
+	if !common.IsNil(o.Service) {
+		toSerialize["service"] = o.Service
+	}
 	if !common.IsNil(o.SourceOfFunds) {
 		toSerialize["sourceOfFunds"] = o.SourceOfFunds
 	}
@@ -376,6 +385,15 @@ func (v *NullableBusinessLineInfoUpdate) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+func (o *BusinessLineInfoUpdate) isValidCapability() bool {
+	var allowedEnumValues = []string{"receivePayments", "receiveFromPlatformPayments", "issueBankAccount"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetCapability() == allowed {
+			return true
+		}
+	}
+	return false
+}
 func (o *BusinessLineInfoUpdate) isValidService() bool {
 	var allowedEnumValues = []string{"paymentProcessing", "issuing", "banking"}
 	for _, allowed := range allowedEnumValues {

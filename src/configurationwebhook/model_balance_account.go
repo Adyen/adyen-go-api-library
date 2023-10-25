@@ -11,7 +11,7 @@ package configurationwebhook
 import (
 	"encoding/json"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the BalanceAccount type satisfies the MappedNullable interface at compile time
@@ -29,16 +29,17 @@ type BalanceAccount struct {
 	Description *string `json:"description,omitempty"`
 	// The unique identifier of the balance account.
 	Id string `json:"id"`
-	// A set of key and value pairs for general use by the merchant. The keys do not have specific names and may be used for storing miscellaneous data as desired. > Note that during an update of metadata, the omission of existing key-value pairs will result in the deletion of those key-value pairs.
+	// A set of key and value pairs for general use. The keys do not have specific names and may be used for storing miscellaneous data as desired. > Note that during an update of metadata, the omission of existing key-value pairs will result in the deletion of those key-value pairs.
 	Metadata *map[string]string `json:"metadata,omitempty"`
+	// The unique identifier of the account of the migrated account holder in the classic integration.
+	MigratedAccountCode *string `json:"migratedAccountCode,omitempty"`
 	// List of [payment instruments](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/paymentInstruments) associated with the balance account.
-	PaymentInstruments []PaymentInstrumentReference `json:"paymentInstruments,omitempty"`
+	PaymentInstruments           []PaymentInstrumentReference  `json:"paymentInstruments,omitempty"`
+	PlatformPaymentConfiguration *PlatformPaymentConfiguration `json:"platformPaymentConfiguration,omitempty"`
 	// Your reference for the balance account, maximum 150 characters.
 	Reference *string `json:"reference,omitempty"`
 	// The status of the balance account, set to **Active** by default.
 	Status *string `json:"status,omitempty"`
-	// Contains key-value pairs that specify configurations for balance sweeps per currency code. A sweep pulls in or pushes out funds based on a defined schedule, amount, and a source (for pulling funds) or a destination (for pushing funds).  The key must be a three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes) in uppercase. For example, **EUR**. The value must be an object containing the sweep configuration.
-	SweepConfigurations *map[string]SweepConfiguration `json:"sweepConfigurations,omitempty"`
 	// The time zone of the balance account. For example, **Europe/Amsterdam**. Defaults to the time zone of the account holder if no time zone is set. For possible values, see the [list of time zone codes](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 	TimeZone *string `json:"timeZone,omitempty"`
 }
@@ -238,6 +239,38 @@ func (o *BalanceAccount) SetMetadata(v map[string]string) {
 	o.Metadata = &v
 }
 
+// GetMigratedAccountCode returns the MigratedAccountCode field value if set, zero value otherwise.
+func (o *BalanceAccount) GetMigratedAccountCode() string {
+	if o == nil || common.IsNil(o.MigratedAccountCode) {
+		var ret string
+		return ret
+	}
+	return *o.MigratedAccountCode
+}
+
+// GetMigratedAccountCodeOk returns a tuple with the MigratedAccountCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BalanceAccount) GetMigratedAccountCodeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.MigratedAccountCode) {
+		return nil, false
+	}
+	return o.MigratedAccountCode, true
+}
+
+// HasMigratedAccountCode returns a boolean if a field has been set.
+func (o *BalanceAccount) HasMigratedAccountCode() bool {
+	if o != nil && !common.IsNil(o.MigratedAccountCode) {
+		return true
+	}
+
+	return false
+}
+
+// SetMigratedAccountCode gets a reference to the given string and assigns it to the MigratedAccountCode field.
+func (o *BalanceAccount) SetMigratedAccountCode(v string) {
+	o.MigratedAccountCode = &v
+}
+
 // GetPaymentInstruments returns the PaymentInstruments field value if set, zero value otherwise.
 func (o *BalanceAccount) GetPaymentInstruments() []PaymentInstrumentReference {
 	if o == nil || common.IsNil(o.PaymentInstruments) {
@@ -268,6 +301,38 @@ func (o *BalanceAccount) HasPaymentInstruments() bool {
 // SetPaymentInstruments gets a reference to the given []PaymentInstrumentReference and assigns it to the PaymentInstruments field.
 func (o *BalanceAccount) SetPaymentInstruments(v []PaymentInstrumentReference) {
 	o.PaymentInstruments = v
+}
+
+// GetPlatformPaymentConfiguration returns the PlatformPaymentConfiguration field value if set, zero value otherwise.
+func (o *BalanceAccount) GetPlatformPaymentConfiguration() PlatformPaymentConfiguration {
+	if o == nil || common.IsNil(o.PlatformPaymentConfiguration) {
+		var ret PlatformPaymentConfiguration
+		return ret
+	}
+	return *o.PlatformPaymentConfiguration
+}
+
+// GetPlatformPaymentConfigurationOk returns a tuple with the PlatformPaymentConfiguration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BalanceAccount) GetPlatformPaymentConfigurationOk() (*PlatformPaymentConfiguration, bool) {
+	if o == nil || common.IsNil(o.PlatformPaymentConfiguration) {
+		return nil, false
+	}
+	return o.PlatformPaymentConfiguration, true
+}
+
+// HasPlatformPaymentConfiguration returns a boolean if a field has been set.
+func (o *BalanceAccount) HasPlatformPaymentConfiguration() bool {
+	if o != nil && !common.IsNil(o.PlatformPaymentConfiguration) {
+		return true
+	}
+
+	return false
+}
+
+// SetPlatformPaymentConfiguration gets a reference to the given PlatformPaymentConfiguration and assigns it to the PlatformPaymentConfiguration field.
+func (o *BalanceAccount) SetPlatformPaymentConfiguration(v PlatformPaymentConfiguration) {
+	o.PlatformPaymentConfiguration = &v
 }
 
 // GetReference returns the Reference field value if set, zero value otherwise.
@@ -334,38 +399,6 @@ func (o *BalanceAccount) SetStatus(v string) {
 	o.Status = &v
 }
 
-// GetSweepConfigurations returns the SweepConfigurations field value if set, zero value otherwise.
-func (o *BalanceAccount) GetSweepConfigurations() map[string]SweepConfiguration {
-	if o == nil || common.IsNil(o.SweepConfigurations) {
-		var ret map[string]SweepConfiguration
-		return ret
-	}
-	return *o.SweepConfigurations
-}
-
-// GetSweepConfigurationsOk returns a tuple with the SweepConfigurations field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BalanceAccount) GetSweepConfigurationsOk() (*map[string]SweepConfiguration, bool) {
-	if o == nil || common.IsNil(o.SweepConfigurations) {
-		return nil, false
-	}
-	return o.SweepConfigurations, true
-}
-
-// HasSweepConfigurations returns a boolean if a field has been set.
-func (o *BalanceAccount) HasSweepConfigurations() bool {
-	if o != nil && !common.IsNil(o.SweepConfigurations) {
-		return true
-	}
-
-	return false
-}
-
-// SetSweepConfigurations gets a reference to the given map[string]SweepConfiguration and assigns it to the SweepConfigurations field.
-func (o *BalanceAccount) SetSweepConfigurations(v map[string]SweepConfiguration) {
-	o.SweepConfigurations = &v
-}
-
 // GetTimeZone returns the TimeZone field value if set, zero value otherwise.
 func (o *BalanceAccount) GetTimeZone() string {
 	if o == nil || common.IsNil(o.TimeZone) {
@@ -422,17 +455,20 @@ func (o BalanceAccount) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
 	}
+	if !common.IsNil(o.MigratedAccountCode) {
+		toSerialize["migratedAccountCode"] = o.MigratedAccountCode
+	}
 	if !common.IsNil(o.PaymentInstruments) {
 		toSerialize["paymentInstruments"] = o.PaymentInstruments
+	}
+	if !common.IsNil(o.PlatformPaymentConfiguration) {
+		toSerialize["platformPaymentConfiguration"] = o.PlatformPaymentConfiguration
 	}
 	if !common.IsNil(o.Reference) {
 		toSerialize["reference"] = o.Reference
 	}
 	if !common.IsNil(o.Status) {
 		toSerialize["status"] = o.Status
-	}
-	if !common.IsNil(o.SweepConfigurations) {
-		toSerialize["sweepConfigurations"] = o.SweepConfigurations
 	}
 	if !common.IsNil(o.TimeZone) {
 		toSerialize["timeZone"] = o.TimeZone

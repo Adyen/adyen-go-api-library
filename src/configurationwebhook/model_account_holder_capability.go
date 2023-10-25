@@ -11,7 +11,7 @@ package configurationwebhook
 import (
 	"encoding/json"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the AccountHolderCapability type satisfies the MappedNullable interface at compile time
@@ -27,7 +27,7 @@ type AccountHolderCapability struct {
 	// Indicates whether the capability is enabled. If **false**, the capability is temporarily disabled for the account holder.
 	Enabled *bool `json:"enabled,omitempty"`
 	// Contains verification errors and the actions that you can take to resolve them.
-	Problems []map[string]interface{} `json:"problems,omitempty"`
+	Problems []CapabilityProblem `json:"problems,omitempty"`
 	// Indicates whether the capability is requested. To check whether the account holder is permitted to use the capability, refer to the `allowed` field.
 	Requested *bool `json:"requested,omitempty"`
 	// The requested level of the capability. Some capabilities, such as those used in [card issuing](https://docs.adyen.com/issuing/add-capabilities#capability-levels), have different levels. Levels increase the capability, but also require additional checks and increased monitoring.  Possible values: **notApplicable**, **low**, **medium**, **high**.
@@ -185,9 +185,9 @@ func (o *AccountHolderCapability) SetEnabled(v bool) {
 }
 
 // GetProblems returns the Problems field value if set, zero value otherwise.
-func (o *AccountHolderCapability) GetProblems() []map[string]interface{} {
+func (o *AccountHolderCapability) GetProblems() []CapabilityProblem {
 	if o == nil || common.IsNil(o.Problems) {
-		var ret []map[string]interface{}
+		var ret []CapabilityProblem
 		return ret
 	}
 	return o.Problems
@@ -195,7 +195,7 @@ func (o *AccountHolderCapability) GetProblems() []map[string]interface{} {
 
 // GetProblemsOk returns a tuple with the Problems field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountHolderCapability) GetProblemsOk() ([]map[string]interface{}, bool) {
+func (o *AccountHolderCapability) GetProblemsOk() ([]CapabilityProblem, bool) {
 	if o == nil || common.IsNil(o.Problems) {
 		return nil, false
 	}
@@ -211,8 +211,8 @@ func (o *AccountHolderCapability) HasProblems() bool {
 	return false
 }
 
-// SetProblems gets a reference to the given []map[string]interface{} and assigns it to the Problems field.
-func (o *AccountHolderCapability) SetProblems(v []map[string]interface{}) {
+// SetProblems gets a reference to the given []CapabilityProblem and assigns it to the Problems field.
+func (o *AccountHolderCapability) SetProblems(v []CapabilityProblem) {
 	o.Problems = v
 }
 

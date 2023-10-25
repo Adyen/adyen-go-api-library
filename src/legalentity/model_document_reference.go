@@ -12,7 +12,7 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the DocumentReference type satisfies the MappedNullable interface at compile time
@@ -30,6 +30,8 @@ type DocumentReference struct {
 	Id *string `json:"id,omitempty"`
 	// The modification date of the document.
 	ModificationDate *time.Time `json:"modificationDate,omitempty"`
+	// List of document pages
+	Pages []DocumentPage `json:"pages,omitempty"`
 	// Type of document, used when providing an ID number or uploading a document.
 	Type *string `json:"type,omitempty"`
 }
@@ -211,6 +213,38 @@ func (o *DocumentReference) SetModificationDate(v time.Time) {
 	o.ModificationDate = &v
 }
 
+// GetPages returns the Pages field value if set, zero value otherwise.
+func (o *DocumentReference) GetPages() []DocumentPage {
+	if o == nil || common.IsNil(o.Pages) {
+		var ret []DocumentPage
+		return ret
+	}
+	return o.Pages
+}
+
+// GetPagesOk returns a tuple with the Pages field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DocumentReference) GetPagesOk() ([]DocumentPage, bool) {
+	if o == nil || common.IsNil(o.Pages) {
+		return nil, false
+	}
+	return o.Pages, true
+}
+
+// HasPages returns a boolean if a field has been set.
+func (o *DocumentReference) HasPages() bool {
+	if o != nil && !common.IsNil(o.Pages) {
+		return true
+	}
+
+	return false
+}
+
+// SetPages gets a reference to the given []DocumentPage and assigns it to the Pages field.
+func (o *DocumentReference) SetPages(v []DocumentPage) {
+	o.Pages = v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *DocumentReference) GetType() string {
 	if o == nil || common.IsNil(o.Type) {
@@ -267,6 +301,9 @@ func (o DocumentReference) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.ModificationDate) {
 		toSerialize["modificationDate"] = o.ModificationDate
+	}
+	if !common.IsNil(o.Pages) {
+		toSerialize["pages"] = o.Pages
 	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type

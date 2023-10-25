@@ -14,7 +14,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // ModificationsApi service
@@ -79,6 +79,10 @@ func (a *ModificationsApi) CancelAuthorisedPayment(ctx context.Context, r Modifi
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	return *res, httpRes, err
 }
@@ -147,6 +151,10 @@ func (a *ModificationsApi) CancelAuthorisedPaymentByPspReference(ctx context.Con
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	return *res, httpRes, err
 }
 
@@ -213,6 +221,10 @@ func (a *ModificationsApi) CaptureAuthorisedPayment(ctx context.Context, r Modif
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	return *res, httpRes, err
 }
@@ -283,6 +295,10 @@ func (a *ModificationsApi) RefundCapturedPayment(ctx context.Context, r Modifica
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	return *res, httpRes, err
 }
 
@@ -348,6 +364,10 @@ func (a *ModificationsApi) RefundOrCancelPayment(ctx context.Context, r Modifica
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	return *res, httpRes, err
 }
@@ -415,6 +435,10 @@ func (a *ModificationsApi) UpdateAuthorisedAmount(ctx context.Context, r Modific
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	return *res, httpRes, err
 }

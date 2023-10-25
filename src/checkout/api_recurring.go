@@ -14,7 +14,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // RecurringApi service
@@ -57,7 +57,7 @@ Deletes the token identified in the path. The token can no longer be used with p
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r RecurringApiDeleteTokenForStoredPaymentDetailsInput - Request parameters, see DeleteTokenForStoredPaymentDetailsInput
-@return , *http.Response, error
+@return *http.Response, error
 */
 func (a *RecurringApi) DeleteTokenForStoredPaymentDetails(ctx context.Context, r RecurringApiDeleteTokenForStoredPaymentDetailsInput) (*http.Response, error) {
 	var res interface{}
@@ -81,6 +81,10 @@ func (a *RecurringApi) DeleteTokenForStoredPaymentDetails(ctx context.Context, r
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return httpRes, err
+	}
 
 	return httpRes, err
 }
@@ -144,6 +148,10 @@ func (a *RecurringApi) GetTokensForStoredPaymentDetails(ctx context.Context, r R
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	return *res, httpRes, err
 }

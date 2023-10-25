@@ -13,7 +13,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // ClassicCheckoutSDKApi service
@@ -79,6 +79,10 @@ func (a *ClassicCheckoutSDKApi) PaymentSession(ctx context.Context, r ClassicChe
 		headerParams,
 	)
 
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
 	return *res, httpRes, err
 }
 
@@ -141,6 +145,10 @@ func (a *ClassicCheckoutSDKApi) VerifyPaymentResult(ctx context.Context, r Class
 		queryParams,
 		headerParams,
 	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
 	return *res, httpRes, err
 }

@@ -12,7 +12,7 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the TransferEvent type satisfies the MappedNullable interface at compile time
@@ -37,7 +37,8 @@ type TransferEvent struct {
 	// The status of the transfer event.
 	Status *string `json:"status,omitempty"`
 	// The id of the transaction that is related to this accounting event. Only sent for events of type **accounting** where the balance changes.
-	TransactionId *string `json:"transactionId,omitempty"`
+	TransactionId     *string            `json:"transactionId,omitempty"`
+	TransferOperation *TransferOperation `json:"transferOperation,omitempty"`
 	// The type of the transfer event. Possible values: **accounting**, **tracking**.
 	Type *string `json:"type,omitempty"`
 	// The date when the tracking status was updated.
@@ -383,6 +384,38 @@ func (o *TransferEvent) SetTransactionId(v string) {
 	o.TransactionId = &v
 }
 
+// GetTransferOperation returns the TransferOperation field value if set, zero value otherwise.
+func (o *TransferEvent) GetTransferOperation() TransferOperation {
+	if o == nil || common.IsNil(o.TransferOperation) {
+		var ret TransferOperation
+		return ret
+	}
+	return *o.TransferOperation
+}
+
+// GetTransferOperationOk returns a tuple with the TransferOperation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransferEvent) GetTransferOperationOk() (*TransferOperation, bool) {
+	if o == nil || common.IsNil(o.TransferOperation) {
+		return nil, false
+	}
+	return o.TransferOperation, true
+}
+
+// HasTransferOperation returns a boolean if a field has been set.
+func (o *TransferEvent) HasTransferOperation() bool {
+	if o != nil && !common.IsNil(o.TransferOperation) {
+		return true
+	}
+
+	return false
+}
+
+// SetTransferOperation gets a reference to the given TransferOperation and assigns it to the TransferOperation field.
+func (o *TransferEvent) SetTransferOperation(v TransferOperation) {
+	o.TransferOperation = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *TransferEvent) GetType() string {
 	if o == nil || common.IsNil(o.Type) {
@@ -519,6 +552,9 @@ func (o TransferEvent) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.TransactionId) {
 		toSerialize["transactionId"] = o.TransactionId
 	}
+	if !common.IsNil(o.TransferOperation) {
+		toSerialize["transferOperation"] = o.TransferOperation
+	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
@@ -577,7 +613,7 @@ func (o *TransferEvent) isValidReason() bool {
 	return false
 }
 func (o *TransferEvent) isValidStatus() bool {
-	var allowedEnumValues = []string{"approvalPending", "atmWithdrawal", "atmWithdrawalReversalPending", "atmWithdrawalReversed", "authAdjustmentAuthorised", "authAdjustmentError", "authAdjustmentRefused", "authorised", "bankTransfer", "bankTransferPending", "booked", "bookingPending", "cancelled", "capturePending", "captureReversalPending", "captureReversed", "captured", "chargeback", "chargebackPending", "chargebackReversalPending", "chargebackReversed", "credited", "depositCorrection", "depositCorrectionPending", "dispute", "disputeClosed", "disputeExpired", "disputeNeedsReview", "error", "expired", "failed", "fee", "feePending", "internalTransfer", "internalTransferPending", "invoiceDeduction", "invoiceDeductionPending", "manualCorrectionPending", "manuallyCorrected", "matchedStatement", "matchedStatementPending", "merchantPayin", "merchantPayinPending", "merchantPayinReversed", "merchantPayinReversedPending", "miscCost", "miscCostPending", "paymentCost", "paymentCostPending", "received", "refundPending", "refundReversalPending", "refundReversed", "refunded", "refused", "reserveAdjustment", "reserveAdjustmentPending", "returned", "secondChargeback", "secondChargebackPending", "undefined"}
+	var allowedEnumValues = []string{"approvalPending", "atmWithdrawal", "atmWithdrawalReversalPending", "atmWithdrawalReversed", "authAdjustmentAuthorised", "authAdjustmentError", "authAdjustmentRefused", "authorised", "bankTransfer", "bankTransferPending", "booked", "bookingPending", "cancelled", "capturePending", "captureReversalPending", "captureReversed", "captured", "capturedExternally", "chargeback", "chargebackExternally", "chargebackPending", "chargebackReversalPending", "chargebackReversed", "credited", "depositCorrection", "depositCorrectionPending", "dispute", "disputeClosed", "disputeExpired", "disputeNeedsReview", "error", "expired", "failed", "fee", "feePending", "internalTransfer", "internalTransferPending", "invoiceDeduction", "invoiceDeductionPending", "manualCorrectionPending", "manuallyCorrected", "matchedStatement", "matchedStatementPending", "merchantPayin", "merchantPayinPending", "merchantPayinReversed", "merchantPayinReversedPending", "miscCost", "miscCostPending", "operationAuthorized", "operationBooked", "operationPending", "operationReceived", "paymentCost", "paymentCostPending", "received", "refundPending", "refundReversalPending", "refundReversed", "refunded", "refundedExternally", "refused", "reserveAdjustment", "reserveAdjustmentPending", "returned", "secondChargeback", "secondChargebackPending", "undefined"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetStatus() == allowed {
 			return true

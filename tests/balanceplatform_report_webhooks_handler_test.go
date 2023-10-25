@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/reportwebhook"
+	"github.com/adyen/adyen-go-api-library/v8/src/reportwebhook"
 )
 
 func Test_BalancePlatform_Report_Webhooks_HandleRequest(t *testing.T) {

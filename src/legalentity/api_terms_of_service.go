@@ -14,7 +14,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // TermsOfServiceApi service
@@ -153,6 +153,51 @@ Returns Terms of Service information for a legal entity.
 func (a *TermsOfServiceApi) GetTermsOfServiceInformationForLegalEntity(ctx context.Context, r TermsOfServiceApiGetTermsOfServiceInformationForLegalEntityInput) (GetTermsOfServiceAcceptanceInfosResponse, *http.Response, error) {
 	res := &GetTermsOfServiceAcceptanceInfosResponse{}
 	path := "/legalEntities/{id}/termsOfServiceAcceptanceInfos"
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	return *res, httpRes, err
+}
+
+// All parameters accepted by TermsOfServiceApi.GetTermsOfServiceStatus
+type TermsOfServiceApiGetTermsOfServiceStatusInput struct {
+	id string
+}
+
+/*
+Prepare a request for GetTermsOfServiceStatus
+@param id The unique identifier of the legal entity.
+@return TermsOfServiceApiGetTermsOfServiceStatusInput
+*/
+func (a *TermsOfServiceApi) GetTermsOfServiceStatusInput(id string) TermsOfServiceApiGetTermsOfServiceStatusInput {
+	return TermsOfServiceApiGetTermsOfServiceStatusInput{
+		id: id,
+	}
+}
+
+/*
+GetTermsOfServiceStatus Get Terms of Service status
+
+Returns the required types of Terms of Service that need to be accepted by a legal entity.
+
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r TermsOfServiceApiGetTermsOfServiceStatusInput - Request parameters, see GetTermsOfServiceStatusInput
+@return CalculateTermsOfServiceStatusResponse, *http.Response, error
+*/
+func (a *TermsOfServiceApi) GetTermsOfServiceStatus(ctx context.Context, r TermsOfServiceApiGetTermsOfServiceStatusInput) (CalculateTermsOfServiceStatusResponse, *http.Response, error) {
+	res := &CalculateTermsOfServiceStatusResponse{}
+	path := "/legalEntities/{id}/termsOfServiceStatus"
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)

@@ -1,0 +1,21 @@
+{
+  "id": "SWPC123",
+  "schedule": {
+    "type": "cron",
+    "cronExpression": "6 6 6 6 6"
+  },
+  "status": "active",
+  "targetAmount": {
+    "currency": "EUR",
+    "value": 0
+  },
+  "triggerAmount": {
+    "currency": "EUR",
+    "value": 0
+  },
+  "type": "push",
+  "counterparty": {
+    "balanceAccountId": "BA123"
+  },
+  "currency": "EUR"
+}

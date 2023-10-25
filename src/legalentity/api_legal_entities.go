@@ -14,7 +14,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/adyen/adyen-go-api-library/v7/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // LegalEntitiesApi service
@@ -67,7 +67,14 @@ func (a *LegalEntitiesApi) CheckLegalEntitysVerificationErrors(ctx context.Conte
 
 // All parameters accepted by LegalEntitiesApi.CreateLegalEntity
 type LegalEntitiesApiCreateLegalEntityInput struct {
+	xRequestedVerificationCode  *string
 	legalEntityInfoRequiredType *LegalEntityInfoRequiredType
+}
+
+// Use a suberror code as your requested verification code. You can include one code at a time in your request header. Requested verification codes can only be used in your test environment.
+func (r LegalEntitiesApiCreateLegalEntityInput) XRequestedVerificationCode(xRequestedVerificationCode string) LegalEntitiesApiCreateLegalEntityInput {
+	r.xRequestedVerificationCode = &xRequestedVerificationCode
+	return r
 }
 
 func (r LegalEntitiesApiCreateLegalEntityInput) LegalEntityInfoRequiredType(legalEntityInfoRequiredType LegalEntityInfoRequiredType) LegalEntitiesApiCreateLegalEntityInput {
@@ -91,6 +98,8 @@ Creates a legal entity.
 
 This resource contains information about the user that will be onboarded in your platform. Adyen uses this information to perform verification checks as required by payment industry regulations. Adyen informs you of the verification results through webhooks or API responses.
 
+>If you are using hosted onboarding, [only use v2](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-01-legal-entity-management-api-3) for your API requests.
+
 
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -102,6 +111,9 @@ func (a *LegalEntitiesApi) CreateLegalEntity(ctx context.Context, r LegalEntitie
 	path := "/legalEntities"
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
+	if r.xRequestedVerificationCode != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "x-requested-verification-code", r.xRequestedVerificationCode, "")
+	}
 	httpRes, err := common.SendAPIRequest(
 		ctx,
 		a.Client,
