@@ -36,7 +36,7 @@ type PaymentCaptureResponse struct {
 	// The status of your request. This will always have the value **received**.
 	Status string `json:"status"`
 	// List of sub-merchants.
-	SubMerchants []SubMerchant2 `json:"subMerchants,omitempty"`
+	SubMerchants []SubMerchantInfo `json:"subMerchants,omitempty"`
 }
 
 // NewPaymentCaptureResponse instantiates a new PaymentCaptureResponse object
@@ -310,9 +310,9 @@ func (o *PaymentCaptureResponse) SetStatus(v string) {
 }
 
 // GetSubMerchants returns the SubMerchants field value if set, zero value otherwise.
-func (o *PaymentCaptureResponse) GetSubMerchants() []SubMerchant2 {
+func (o *PaymentCaptureResponse) GetSubMerchants() []SubMerchantInfo {
 	if o == nil || common.IsNil(o.SubMerchants) {
-		var ret []SubMerchant2
+		var ret []SubMerchantInfo
 		return ret
 	}
 	return o.SubMerchants
@@ -320,7 +320,7 @@ func (o *PaymentCaptureResponse) GetSubMerchants() []SubMerchant2 {
 
 // GetSubMerchantsOk returns a tuple with the SubMerchants field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentCaptureResponse) GetSubMerchantsOk() ([]SubMerchant2, bool) {
+func (o *PaymentCaptureResponse) GetSubMerchantsOk() ([]SubMerchantInfo, bool) {
 	if o == nil || common.IsNil(o.SubMerchants) {
 		return nil, false
 	}
@@ -336,8 +336,8 @@ func (o *PaymentCaptureResponse) HasSubMerchants() bool {
 	return false
 }
 
-// SetSubMerchants gets a reference to the given []SubMerchant2 and assigns it to the SubMerchants field.
-func (o *PaymentCaptureResponse) SetSubMerchants(v []SubMerchant2) {
+// SetSubMerchants gets a reference to the given []SubMerchantInfo and assigns it to the SubMerchants field.
+func (o *PaymentCaptureResponse) SetSubMerchants(v []SubMerchantInfo) {
 	o.SubMerchants = v
 }
 

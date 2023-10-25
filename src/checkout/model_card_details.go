@@ -811,7 +811,7 @@ func (o *CardDetails) isValidFundingSource() bool {
 	return false
 }
 func (o *CardDetails) isValidType() bool {
-	var allowedEnumValues = []string{"scheme", "networkToken", "giftcard", "alliancedata", "card"}
+	var allowedEnumValues = []string{"scheme", "networkToken", "card"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

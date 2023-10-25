@@ -14,39 +14,39 @@ import (
 	"github.com/adyen/adyen-go-api-library/v7/src/common"
 )
 
-// checks if the SubMerchant2 type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &SubMerchant2{}
+// checks if the SubMerchantInfo type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &SubMerchantInfo{}
 
-// SubMerchant2 struct for SubMerchant2
-type SubMerchant2 struct {
-	Address *Address `json:"address,omitempty"`
-	Id      *string  `json:"id,omitempty"`
-	Mcc     *string  `json:"mcc,omitempty"`
-	Name    *string  `json:"name,omitempty"`
-	TaxId   *string  `json:"taxId,omitempty"`
+// SubMerchantInfo struct for SubMerchantInfo
+type SubMerchantInfo struct {
+	Address *BillingAddress `json:"address,omitempty"`
+	Id      *string         `json:"id,omitempty"`
+	Mcc     *string         `json:"mcc,omitempty"`
+	Name    *string         `json:"name,omitempty"`
+	TaxId   *string         `json:"taxId,omitempty"`
 }
 
-// NewSubMerchant2 instantiates a new SubMerchant2 object
+// NewSubMerchantInfo instantiates a new SubMerchantInfo object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSubMerchant2() *SubMerchant2 {
-	this := SubMerchant2{}
+func NewSubMerchantInfo() *SubMerchantInfo {
+	this := SubMerchantInfo{}
 	return &this
 }
 
-// NewSubMerchant2WithDefaults instantiates a new SubMerchant2 object
+// NewSubMerchantInfoWithDefaults instantiates a new SubMerchantInfo object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewSubMerchant2WithDefaults() *SubMerchant2 {
-	this := SubMerchant2{}
+func NewSubMerchantInfoWithDefaults() *SubMerchantInfo {
+	this := SubMerchantInfo{}
 	return &this
 }
 
 // GetAddress returns the Address field value if set, zero value otherwise.
-func (o *SubMerchant2) GetAddress() Address {
+func (o *SubMerchantInfo) GetAddress() BillingAddress {
 	if o == nil || common.IsNil(o.Address) {
-		var ret Address
+		var ret BillingAddress
 		return ret
 	}
 	return *o.Address
@@ -54,7 +54,7 @@ func (o *SubMerchant2) GetAddress() Address {
 
 // GetAddressOk returns a tuple with the Address field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SubMerchant2) GetAddressOk() (*Address, bool) {
+func (o *SubMerchantInfo) GetAddressOk() (*BillingAddress, bool) {
 	if o == nil || common.IsNil(o.Address) {
 		return nil, false
 	}
@@ -62,7 +62,7 @@ func (o *SubMerchant2) GetAddressOk() (*Address, bool) {
 }
 
 // HasAddress returns a boolean if a field has been set.
-func (o *SubMerchant2) HasAddress() bool {
+func (o *SubMerchantInfo) HasAddress() bool {
 	if o != nil && !common.IsNil(o.Address) {
 		return true
 	}
@@ -70,13 +70,13 @@ func (o *SubMerchant2) HasAddress() bool {
 	return false
 }
 
-// SetAddress gets a reference to the given Address and assigns it to the Address field.
-func (o *SubMerchant2) SetAddress(v Address) {
+// SetAddress gets a reference to the given BillingAddress and assigns it to the Address field.
+func (o *SubMerchantInfo) SetAddress(v BillingAddress) {
 	o.Address = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *SubMerchant2) GetId() string {
+func (o *SubMerchantInfo) GetId() string {
 	if o == nil || common.IsNil(o.Id) {
 		var ret string
 		return ret
@@ -86,7 +86,7 @@ func (o *SubMerchant2) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SubMerchant2) GetIdOk() (*string, bool) {
+func (o *SubMerchantInfo) GetIdOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Id) {
 		return nil, false
 	}
@@ -94,7 +94,7 @@ func (o *SubMerchant2) GetIdOk() (*string, bool) {
 }
 
 // HasId returns a boolean if a field has been set.
-func (o *SubMerchant2) HasId() bool {
+func (o *SubMerchantInfo) HasId() bool {
 	if o != nil && !common.IsNil(o.Id) {
 		return true
 	}
@@ -103,12 +103,12 @@ func (o *SubMerchant2) HasId() bool {
 }
 
 // SetId gets a reference to the given string and assigns it to the Id field.
-func (o *SubMerchant2) SetId(v string) {
+func (o *SubMerchantInfo) SetId(v string) {
 	o.Id = &v
 }
 
 // GetMcc returns the Mcc field value if set, zero value otherwise.
-func (o *SubMerchant2) GetMcc() string {
+func (o *SubMerchantInfo) GetMcc() string {
 	if o == nil || common.IsNil(o.Mcc) {
 		var ret string
 		return ret
@@ -118,7 +118,7 @@ func (o *SubMerchant2) GetMcc() string {
 
 // GetMccOk returns a tuple with the Mcc field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SubMerchant2) GetMccOk() (*string, bool) {
+func (o *SubMerchantInfo) GetMccOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Mcc) {
 		return nil, false
 	}
@@ -126,7 +126,7 @@ func (o *SubMerchant2) GetMccOk() (*string, bool) {
 }
 
 // HasMcc returns a boolean if a field has been set.
-func (o *SubMerchant2) HasMcc() bool {
+func (o *SubMerchantInfo) HasMcc() bool {
 	if o != nil && !common.IsNil(o.Mcc) {
 		return true
 	}
@@ -135,12 +135,12 @@ func (o *SubMerchant2) HasMcc() bool {
 }
 
 // SetMcc gets a reference to the given string and assigns it to the Mcc field.
-func (o *SubMerchant2) SetMcc(v string) {
+func (o *SubMerchantInfo) SetMcc(v string) {
 	o.Mcc = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
-func (o *SubMerchant2) GetName() string {
+func (o *SubMerchantInfo) GetName() string {
 	if o == nil || common.IsNil(o.Name) {
 		var ret string
 		return ret
@@ -150,7 +150,7 @@ func (o *SubMerchant2) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SubMerchant2) GetNameOk() (*string, bool) {
+func (o *SubMerchantInfo) GetNameOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Name) {
 		return nil, false
 	}
@@ -158,7 +158,7 @@ func (o *SubMerchant2) GetNameOk() (*string, bool) {
 }
 
 // HasName returns a boolean if a field has been set.
-func (o *SubMerchant2) HasName() bool {
+func (o *SubMerchantInfo) HasName() bool {
 	if o != nil && !common.IsNil(o.Name) {
 		return true
 	}
@@ -167,12 +167,12 @@ func (o *SubMerchant2) HasName() bool {
 }
 
 // SetName gets a reference to the given string and assigns it to the Name field.
-func (o *SubMerchant2) SetName(v string) {
+func (o *SubMerchantInfo) SetName(v string) {
 	o.Name = &v
 }
 
 // GetTaxId returns the TaxId field value if set, zero value otherwise.
-func (o *SubMerchant2) GetTaxId() string {
+func (o *SubMerchantInfo) GetTaxId() string {
 	if o == nil || common.IsNil(o.TaxId) {
 		var ret string
 		return ret
@@ -182,7 +182,7 @@ func (o *SubMerchant2) GetTaxId() string {
 
 // GetTaxIdOk returns a tuple with the TaxId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SubMerchant2) GetTaxIdOk() (*string, bool) {
+func (o *SubMerchantInfo) GetTaxIdOk() (*string, bool) {
 	if o == nil || common.IsNil(o.TaxId) {
 		return nil, false
 	}
@@ -190,7 +190,7 @@ func (o *SubMerchant2) GetTaxIdOk() (*string, bool) {
 }
 
 // HasTaxId returns a boolean if a field has been set.
-func (o *SubMerchant2) HasTaxId() bool {
+func (o *SubMerchantInfo) HasTaxId() bool {
 	if o != nil && !common.IsNil(o.TaxId) {
 		return true
 	}
@@ -199,11 +199,11 @@ func (o *SubMerchant2) HasTaxId() bool {
 }
 
 // SetTaxId gets a reference to the given string and assigns it to the TaxId field.
-func (o *SubMerchant2) SetTaxId(v string) {
+func (o *SubMerchantInfo) SetTaxId(v string) {
 	o.TaxId = &v
 }
 
-func (o SubMerchant2) MarshalJSON() ([]byte, error) {
+func (o SubMerchantInfo) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -211,7 +211,7 @@ func (o SubMerchant2) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SubMerchant2) ToMap() (map[string]interface{}, error) {
+func (o SubMerchantInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.Address) {
 		toSerialize["address"] = o.Address
@@ -231,38 +231,38 @@ func (o SubMerchant2) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableSubMerchant2 struct {
-	value *SubMerchant2
+type NullableSubMerchantInfo struct {
+	value *SubMerchantInfo
 	isSet bool
 }
 
-func (v NullableSubMerchant2) Get() *SubMerchant2 {
+func (v NullableSubMerchantInfo) Get() *SubMerchantInfo {
 	return v.value
 }
 
-func (v *NullableSubMerchant2) Set(val *SubMerchant2) {
+func (v *NullableSubMerchantInfo) Set(val *SubMerchantInfo) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableSubMerchant2) IsSet() bool {
+func (v NullableSubMerchantInfo) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableSubMerchant2) Unset() {
+func (v *NullableSubMerchantInfo) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableSubMerchant2(val *SubMerchant2) *NullableSubMerchant2 {
-	return &NullableSubMerchant2{value: val, isSet: true}
+func NewNullableSubMerchantInfo(val *SubMerchantInfo) *NullableSubMerchantInfo {
+	return &NullableSubMerchantInfo{value: val, isSet: true}
 }
 
-func (v NullableSubMerchant2) MarshalJSON() ([]byte, error) {
+func (v NullableSubMerchantInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableSubMerchant2) UnmarshalJSON(src []byte) error {
+func (v *NullableSubMerchantInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

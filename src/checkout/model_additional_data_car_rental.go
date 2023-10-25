@@ -21,19 +21,19 @@ var _ common.MappedNullable = &AdditionalDataCarRental{}
 type AdditionalDataCarRental struct {
 	// The pick-up date. * Date format: `yyyyMMdd`
 	CarRentalCheckOutDate *string `json:"carRental.checkOutDate,omitempty"`
-	// The customer service phone number of the car rental company. * Format: Alphanumeric * maxLength: 17 * For US and CA numbers must be 10 characters in length * Must not start with a space * Must not be all zeros * Must not contain any special characters such as + or -
+	// The customer service phone number of the car rental company. * Format: Alphanumeric * maxLength: 17 * For US and CA numbers must be 10 characters in length * Must not start with a space * Must not contain any special characters such as + or - *Must not be all zeros.
 	CarRentalCustomerServiceTollFreeNumber *string `json:"carRental.customerServiceTollFreeNumber,omitempty"`
 	// Number of days for which the car is being rented. * Format: Numeric * maxLength: 4 * Must not be all spaces
 	CarRentalDaysRented *string `json:"carRental.daysRented,omitempty"`
 	// Any fuel charges associated with the rental, in [minor units](https://docs.adyen.com/development-resources/currency-codes). * Format: Numeric * maxLength: 12
 	CarRentalFuelCharges *string `json:"carRental.fuelCharges,omitempty"`
-	// Any insurance charges associated with the rental, in [minor units](https://docs.adyen.com/development-resources/currency-codes). * Format: Numeric * maxLength: 12 * Must not be all spaces * Must not be all zeros
+	// Any insurance charges associated with the rental, in [minor units](https://docs.adyen.com/development-resources/currency-codes). * Format: Numeric * maxLength: 12 * Must not be all spaces *Must not be all zeros.
 	CarRentalInsuranceCharges *string `json:"carRental.insuranceCharges,omitempty"`
-	// The city where the car is rented. * Format: Alphanumeric * maxLength: 18 * Must not start with a space or be all spaces * Must not be all zeros
+	// The city where the car is rented. * Format: Alphanumeric * maxLength: 18 * Must not start with a space or be all spaces *Must not be all zeros.
 	CarRentalLocationCity *string `json:"carRental.locationCity,omitempty"`
 	// The country where the car is rented, in [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format. * Format: Alphanumeric * maxLength: 2
 	CarRentalLocationCountry *string `json:"carRental.locationCountry,omitempty"`
-	// The state or province where the car is rented. * Format: Alphanumeric * maxLength: 2 * Must not start with a space or be all spaces * Must not be all zeros
+	// The state or province where the car is rented. * Format: Alphanumeric * maxLength: 2 * Must not start with a space or be all spaces *Must not be all zeros.
 	CarRentalLocationStateProvince *string `json:"carRental.locationStateProvince,omitempty"`
 	// Indicates if the customer didn't pick up their rental car. * Y - Customer did not pick up their car * N - Not applicable
 	CarRentalNoShowIndicator *string `json:"carRental.noShowIndicator,omitempty"`
@@ -43,21 +43,21 @@ type AdditionalDataCarRental struct {
 	CarRentalRate *string `json:"carRental.rate,omitempty"`
 	// Specifies whether the given rate is applied daily or weekly. * D - Daily rate * W - Weekly rate
 	CarRentalRateIndicator *string `json:"carRental.rateIndicator,omitempty"`
-	// The rental agreement number for the car rental. * Format: Alphanumeric * maxLength: 9 * Must not start with a space or be all spaces * Must not be all zeros
+	// The rental agreement number for the car rental. * Format: Alphanumeric * maxLength: 9 * Must not start with a space or be all spaces *Must not be all zeros.
 	CarRentalRentalAgreementNumber *string `json:"carRental.rentalAgreementNumber,omitempty"`
-	// The classification of the rental car. * Format: Alphanumeric * maxLength: 4 * Must not start with a space or be all spaces * Must not be all zeros
+	// The classification of the rental car. * Format: Alphanumeric * maxLength: 4 * Must not start with a space or be all spaces *Must not be all zeros.
 	CarRentalRentalClassId *string `json:"carRental.rentalClassId,omitempty"`
-	// The name of the person renting the car. * Format: Alphanumeric * maxLength: 26 * If you send more than 26 characters, the name is truncated * Must not start with a space or be all spaces * Must not be all zeros
+	// The name of the person renting the car. * Format: Alphanumeric * maxLength: 26 * If you send more than 26 characters, the name is truncated * Must not start with a space or be all spaces *Must not be all zeros.
 	CarRentalRenterName *string `json:"carRental.renterName,omitempty"`
-	// The city where the car must be returned. * Format: Alphanumeric * maxLength: 18 * Must not start with a space or be all spaces * Must not be all zeros
+	// The city where the car must be returned. * Format: Alphanumeric * maxLength: 18 * Must not start with a space or be all spaces *Must not be all zeros.
 	CarRentalReturnCity *string `json:"carRental.returnCity,omitempty"`
 	// The country where the car must be returned, in [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format. * Format: Alphanumeric * maxLength: 2
 	CarRentalReturnCountry *string `json:"carRental.returnCountry,omitempty"`
 	// The last date to return the car by. * Date format: `yyyyMMdd` * maxLength: 8
 	CarRentalReturnDate *string `json:"carRental.returnDate,omitempty"`
-	// The agency code, phone number, or address abbreviation * Format: Alphanumeric * maxLength: 10 * Must not start with a space or be all spaces * Must not be all zeros
+	// The agency code, phone number, or address abbreviation * Format: Alphanumeric * maxLength: 10 * Must not start with a space or be all spaces *Must not be all zeros.
 	CarRentalReturnLocationId *string `json:"carRental.returnLocationId,omitempty"`
-	// The state or province where the car must be returned. * Format: Alphanumeric * maxLength: 3 * Must not start with a space or be all spaces * Must not be all zeros
+	// The state or province where the car must be returned. * Format: Alphanumeric * maxLength: 3 * Must not start with a space or be all spaces *Must not be all zeros.
 	CarRentalReturnStateProvince *string `json:"carRental.returnStateProvince,omitempty"`
 	// Indicates if the goods or services were tax-exempt, or if tax was not paid on them.  Values: * Y - Goods or services were tax exempt * N - Tax was not collected
 	CarRentalTaxExemptIndicator *string `json:"carRental.taxExemptIndicator,omitempty"`

@@ -21,9 +21,9 @@ var _ common.MappedNullable = &AdditionalDataTemporaryServices{}
 type AdditionalDataTemporaryServices struct {
 	// The customer code, if supplied by a customer. * Encoding: ASCII * maxLength: 25
 	EnhancedSchemeDataCustomerReference *string `json:"enhancedSchemeData.customerReference,omitempty"`
-	// The name or ID of the person working in a temporary capacity. * maxLength: 40 * Must not be all zeros * Must not be all spaces
+	// The name or ID of the person working in a temporary capacity. * maxLength: 40.   * Must not be all spaces.  *Must not be all zeros.
 	EnhancedSchemeDataEmployeeName *string `json:"enhancedSchemeData.employeeName,omitempty"`
-	// The job description of the person working in a temporary capacity. * maxLength: 40 * Must not be all zeros * Must not be all spaces
+	// The job description of the person working in a temporary capacity. * maxLength: 40  * Must not be all spaces.  *Must not be all zeros.
 	EnhancedSchemeDataJobDescription *string `json:"enhancedSchemeData.jobDescription,omitempty"`
 	// The amount paid for regular hours worked, [minor units](https://docs.adyen.com/development-resources/currency-codes). * maxLength: 7 * Must not be empty * Can be all zeros
 	EnhancedSchemeDataRegularHoursRate *string `json:"enhancedSchemeData.regularHoursRate,omitempty"`

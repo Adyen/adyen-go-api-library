@@ -57,10 +57,10 @@ Deletes the token identified in the path. The token can no longer be used with p
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r RecurringApiDeleteTokenForStoredPaymentDetailsInput - Request parameters, see DeleteTokenForStoredPaymentDetailsInput
-@return StoredPaymentMethodResource, *http.Response, error
+@return , *http.Response, error
 */
-func (a *RecurringApi) DeleteTokenForStoredPaymentDetails(ctx context.Context, r RecurringApiDeleteTokenForStoredPaymentDetailsInput) (StoredPaymentMethodResource, *http.Response, error) {
-	res := &StoredPaymentMethodResource{}
+func (a *RecurringApi) DeleteTokenForStoredPaymentDetails(ctx context.Context, r RecurringApiDeleteTokenForStoredPaymentDetailsInput) (*http.Response, error) {
+	var res interface{}
 	path := "/storedPaymentMethods/{storedPaymentMethodId}"
 	path = strings.Replace(path, "{"+"storedPaymentMethodId"+"}", url.PathEscape(common.ParameterValueToString(r.storedPaymentMethodId, "storedPaymentMethodId")), -1)
 	queryParams := url.Values{}
@@ -82,7 +82,7 @@ func (a *RecurringApi) DeleteTokenForStoredPaymentDetails(ctx context.Context, r
 		headerParams,
 	)
 
-	return *res, httpRes, err
+	return httpRes, err
 }
 
 // All parameters accepted by RecurringApi.GetTokensForStoredPaymentDetails

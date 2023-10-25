@@ -27,7 +27,7 @@ type PaymentRequest struct {
 	Amount             Amount              `json:"amount"`
 	ApplicationInfo    *ApplicationInfo    `json:"applicationInfo,omitempty"`
 	AuthenticationData *AuthenticationData `json:"authenticationData,omitempty"`
-	BillingAddress     *Address            `json:"billingAddress,omitempty"`
+	BillingAddress     *BillingAddress     `json:"billingAddress,omitempty"`
 	BrowserInfo        *BrowserInfo        `json:"browserInfo,omitempty"`
 	// The delay between the authorisation and scheduled auto-capture, specified in hours.
 	CaptureDelayHours *int32 `json:"captureDelayHours,omitempty"`
@@ -45,8 +45,8 @@ type PaymentRequest struct {
 	DateOfBirth *time.Time  `json:"dateOfBirth,omitempty"`
 	DccQuote    *ForexQuote `json:"dccQuote,omitempty"`
 	// The date and time the purchased goods should be delivered.  Format [ISO 8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DDThh:mm:ss.sssTZD  Example: 2017-07-17T13:42:40.428+01:00
-	DeliverAt       *time.Time `json:"deliverAt,omitempty"`
-	DeliveryAddress *Address   `json:"deliveryAddress,omitempty"`
+	DeliverAt       *time.Time       `json:"deliverAt,omitempty"`
+	DeliveryAddress *DeliveryAddress `json:"deliveryAddress,omitempty"`
 	// The date and time the purchased goods should be delivered.  Format [ISO 8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DDThh:mm:ss.sssTZD  Example: 2017-07-17T13:42:40.428+01:00
 	// Deprecated
 	DeliveryDate *time.Time `json:"deliveryDate,omitempty"`
@@ -69,7 +69,7 @@ type PaymentRequest struct {
 	Installments  *Installments `json:"installments,omitempty"`
 	// Price and product information about the purchased items, to be included on the invoice sent to the shopper. > This field is required for 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, and Zip.
 	LineItems []LineItem `json:"lineItems,omitempty"`
-	// This field allows merchants to use dynamic shopper statement in local character sets. The local shopper statement field can be supplied in markets where localized merchant descriptors are used. Currently, Adyen only supports this in the Japanese market .The available character sets at the moment are: * Processing in Japan: **ja-Kana** The character set **ja-Kana** supports UTF-8 based Katakana and alphanumeric and special characters. Merchants should send the Katakana shopperStatement in full-width characters.  An example request would be: > {   \"shopperStatement\" : \"ADYEN - SELLER-A\",   \"localizedShopperStatement\" : {     \"ja-Kana\" : \"ADYEN - セラーA\"   } } We recommend merchants to always supply the field localizedShopperStatement in addition to the field shopperStatement.It is issuer dependent whether the localized shopper statement field is supported. In the case of non-domestic transactions (e.g. US-issued cards processed in JP) the field `shopperStatement` is used to modify the statement of the shopper. Adyen handles the complexity of ensuring the correct descriptors are assigned.
+	// The `localizedShopperStatement` field lets you use dynamic values for your shopper statement in a local character set. If not supplied, left empty, or for cross-border transactions, **shopperStatement** is used.  Adyen currently supports the ja-Kana character set for Visa and Mastercard payments in Japan using Japanese cards. This character set supports:  * UTF-8 based Katakana, capital letters, numbers and special characters.  * Half-width or full-width characters.
 	LocalizedShopperStatement *map[string]string `json:"localizedShopperStatement,omitempty"`
 	Mandate                   *Mandate           `json:"mandate,omitempty"`
 	// The [merchant category code](https://en.wikipedia.org/wiki/Merchant_category_code) (MCC) is a four-digit number, which relates to a particular market segment. This code reflects the predominant activity that is conducted by the merchant.
@@ -348,9 +348,9 @@ func (o *PaymentRequest) SetAuthenticationData(v AuthenticationData) {
 }
 
 // GetBillingAddress returns the BillingAddress field value if set, zero value otherwise.
-func (o *PaymentRequest) GetBillingAddress() Address {
+func (o *PaymentRequest) GetBillingAddress() BillingAddress {
 	if o == nil || common.IsNil(o.BillingAddress) {
-		var ret Address
+		var ret BillingAddress
 		return ret
 	}
 	return *o.BillingAddress
@@ -358,7 +358,7 @@ func (o *PaymentRequest) GetBillingAddress() Address {
 
 // GetBillingAddressOk returns a tuple with the BillingAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentRequest) GetBillingAddressOk() (*Address, bool) {
+func (o *PaymentRequest) GetBillingAddressOk() (*BillingAddress, bool) {
 	if o == nil || common.IsNil(o.BillingAddress) {
 		return nil, false
 	}
@@ -374,8 +374,8 @@ func (o *PaymentRequest) HasBillingAddress() bool {
 	return false
 }
 
-// SetBillingAddress gets a reference to the given Address and assigns it to the BillingAddress field.
-func (o *PaymentRequest) SetBillingAddress(v Address) {
+// SetBillingAddress gets a reference to the given BillingAddress and assigns it to the BillingAddress field.
+func (o *PaymentRequest) SetBillingAddress(v BillingAddress) {
 	o.BillingAddress = &v
 }
 
@@ -703,9 +703,9 @@ func (o *PaymentRequest) SetDeliverAt(v time.Time) {
 }
 
 // GetDeliveryAddress returns the DeliveryAddress field value if set, zero value otherwise.
-func (o *PaymentRequest) GetDeliveryAddress() Address {
+func (o *PaymentRequest) GetDeliveryAddress() DeliveryAddress {
 	if o == nil || common.IsNil(o.DeliveryAddress) {
-		var ret Address
+		var ret DeliveryAddress
 		return ret
 	}
 	return *o.DeliveryAddress
@@ -713,7 +713,7 @@ func (o *PaymentRequest) GetDeliveryAddress() Address {
 
 // GetDeliveryAddressOk returns a tuple with the DeliveryAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentRequest) GetDeliveryAddressOk() (*Address, bool) {
+func (o *PaymentRequest) GetDeliveryAddressOk() (*DeliveryAddress, bool) {
 	if o == nil || common.IsNil(o.DeliveryAddress) {
 		return nil, false
 	}
@@ -729,8 +729,8 @@ func (o *PaymentRequest) HasDeliveryAddress() bool {
 	return false
 }
 
-// SetDeliveryAddress gets a reference to the given Address and assigns it to the DeliveryAddress field.
-func (o *PaymentRequest) SetDeliveryAddress(v Address) {
+// SetDeliveryAddress gets a reference to the given DeliveryAddress and assigns it to the DeliveryAddress field.
+func (o *PaymentRequest) SetDeliveryAddress(v DeliveryAddress) {
 	o.DeliveryAddress = &v
 }
 

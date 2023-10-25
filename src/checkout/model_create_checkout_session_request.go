@@ -29,7 +29,7 @@ type CreateCheckoutSessionRequest struct {
 	Amount                Amount              `json:"amount"`
 	ApplicationInfo       *ApplicationInfo    `json:"applicationInfo,omitempty"`
 	AuthenticationData    *AuthenticationData `json:"authenticationData,omitempty"`
-	BillingAddress        *Address            `json:"billingAddress,omitempty"`
+	BillingAddress        *BillingAddress     `json:"billingAddress,omitempty"`
 	// List of payment methods to be hidden from the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).  Example: `\"blockedPaymentMethods\":[\"ideal\",\"giropay\"]`
 	BlockedPaymentMethods []string `json:"blockedPaymentMethods,omitempty"`
 	// The delay between the authorisation and scheduled auto-capture, specified in hours.
@@ -42,8 +42,8 @@ type CreateCheckoutSessionRequest struct {
 	// The shopper's date of birth.  Format [ISO-8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DD
 	DateOfBirth *string `json:"dateOfBirth,omitempty"`
 	// The date and time when the purchased goods should be delivered.  [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format: YYYY-MM-DDThh:mm:ss+TZD, for example, **2020-12-18T10:15:30+01:00**.
-	DeliverAt       *time.Time `json:"deliverAt,omitempty"`
-	DeliveryAddress *Address   `json:"deliveryAddress,omitempty"`
+	DeliverAt       *time.Time       `json:"deliverAt,omitempty"`
+	DeliveryAddress *DeliveryAddress `json:"deliveryAddress,omitempty"`
 	// When true and `shopperReference` is provided, the shopper will be asked if the payment details should be stored for future one-click payments.
 	EnableOneClick *bool `json:"enableOneClick,omitempty"`
 	// When true and `shopperReference` is provided, the payment details will be tokenized for payouts.
@@ -364,9 +364,9 @@ func (o *CreateCheckoutSessionRequest) SetAuthenticationData(v AuthenticationDat
 }
 
 // GetBillingAddress returns the BillingAddress field value if set, zero value otherwise.
-func (o *CreateCheckoutSessionRequest) GetBillingAddress() Address {
+func (o *CreateCheckoutSessionRequest) GetBillingAddress() BillingAddress {
 	if o == nil || common.IsNil(o.BillingAddress) {
-		var ret Address
+		var ret BillingAddress
 		return ret
 	}
 	return *o.BillingAddress
@@ -374,7 +374,7 @@ func (o *CreateCheckoutSessionRequest) GetBillingAddress() Address {
 
 // GetBillingAddressOk returns a tuple with the BillingAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateCheckoutSessionRequest) GetBillingAddressOk() (*Address, bool) {
+func (o *CreateCheckoutSessionRequest) GetBillingAddressOk() (*BillingAddress, bool) {
 	if o == nil || common.IsNil(o.BillingAddress) {
 		return nil, false
 	}
@@ -390,8 +390,8 @@ func (o *CreateCheckoutSessionRequest) HasBillingAddress() bool {
 	return false
 }
 
-// SetBillingAddress gets a reference to the given Address and assigns it to the BillingAddress field.
-func (o *CreateCheckoutSessionRequest) SetBillingAddress(v Address) {
+// SetBillingAddress gets a reference to the given BillingAddress and assigns it to the BillingAddress field.
+func (o *CreateCheckoutSessionRequest) SetBillingAddress(v BillingAddress) {
 	o.BillingAddress = &v
 }
 
@@ -620,9 +620,9 @@ func (o *CreateCheckoutSessionRequest) SetDeliverAt(v time.Time) {
 }
 
 // GetDeliveryAddress returns the DeliveryAddress field value if set, zero value otherwise.
-func (o *CreateCheckoutSessionRequest) GetDeliveryAddress() Address {
+func (o *CreateCheckoutSessionRequest) GetDeliveryAddress() DeliveryAddress {
 	if o == nil || common.IsNil(o.DeliveryAddress) {
-		var ret Address
+		var ret DeliveryAddress
 		return ret
 	}
 	return *o.DeliveryAddress
@@ -630,7 +630,7 @@ func (o *CreateCheckoutSessionRequest) GetDeliveryAddress() Address {
 
 // GetDeliveryAddressOk returns a tuple with the DeliveryAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateCheckoutSessionRequest) GetDeliveryAddressOk() (*Address, bool) {
+func (o *CreateCheckoutSessionRequest) GetDeliveryAddressOk() (*DeliveryAddress, bool) {
 	if o == nil || common.IsNil(o.DeliveryAddress) {
 		return nil, false
 	}
@@ -646,8 +646,8 @@ func (o *CreateCheckoutSessionRequest) HasDeliveryAddress() bool {
 	return false
 }
 
-// SetDeliveryAddress gets a reference to the given Address and assigns it to the DeliveryAddress field.
-func (o *CreateCheckoutSessionRequest) SetDeliveryAddress(v Address) {
+// SetDeliveryAddress gets a reference to the given DeliveryAddress and assigns it to the DeliveryAddress field.
+func (o *CreateCheckoutSessionRequest) SetDeliveryAddress(v DeliveryAddress) {
 	o.DeliveryAddress = &v
 }
 

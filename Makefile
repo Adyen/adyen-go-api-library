@@ -69,7 +69,8 @@ $(services): schema $(openapi-generator-jar) $(goimports)
 		--global-property modelDocs=false \
 		--skip-validate-spec \
 		--enable-post-process-file \
-		--inline-schema-name-mappings DonationPaymentRequest_paymentMethod=CheckoutPaymentMethod \
+		--inline-schema-name-mappings PaymentRequest_paymentMethod=CheckoutPaymentMethod \
+		--inline-schema-name-mappings DonationPaymentRequest_paymentMethod=DonationPaymentMethod \
 		--additional-properties=serviceName=$(serviceName) \
 		--additional-properties=$(if $(hasRestServiceError),hasRestServiceError=true)
 	rm -rf $(output)/$(@)/go.{mod,sum}
