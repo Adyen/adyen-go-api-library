@@ -171,7 +171,7 @@ func TestCheckout(t *testing.T) {
 	t.Run("Orders", func(t *testing.T) {
 		t.Run("Get balance", func(t *testing.T) {
 			req := service.OrdersApi.GetBalanceOfGiftCardInput()
-			req = req.CheckoutBalanceCheckRequest(checkout.CheckoutBalanceCheckRequest{
+			req = req.BalanceCheckRequest(checkout.BalanceCheckRequest{
 				MerchantAccount: merchantAccount,
 				PaymentMethod: map[string]string{
 					"type":       "giftcard",
@@ -192,7 +192,7 @@ func TestCheckout(t *testing.T) {
 
 		t.Run("Create order", func(t *testing.T) {
 			req := service.OrdersApi.OrdersInput()
-			req = req.CheckoutCreateOrderRequest(checkout.CheckoutCreateOrderRequest{
+			req = req.CreateOrderRequest(checkout.CreateOrderRequest{
 				Amount: checkout.Amount{
 					Currency: "EUR",
 					Value:    2500,
@@ -211,7 +211,7 @@ func TestCheckout(t *testing.T) {
 
 		t.Run("Cancel order", func(t *testing.T) {
 			cancelReq := service.OrdersApi.CancelOrderInput()
-			cancelReq = cancelReq.CheckoutCancelOrderRequest(checkout.CheckoutCancelOrderRequest{
+			cancelReq = cancelReq.CancelOrderRequest(checkout.CancelOrderRequest{
 				MerchantAccount: merchantAccount,
 				Order: checkout.EncryptedOrderData{
 					OrderData:    "823fh892f8f18f4...148f13f9f3f",

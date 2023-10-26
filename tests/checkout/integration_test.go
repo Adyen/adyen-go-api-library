@@ -121,7 +121,7 @@ func TestCheckoutIntegration(t *testing.T) {
 	t.Run("PaymentDetails", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 			req := service.PaymentsApi.PaymentsDetailsInput()
-			req = req.DetailsRequest(checkout.DetailsRequest{
+			req = req.PaymentDetailsRequest(checkout.PaymentDetailsRequest{
 				PaymentData: common.PtrString("1234"),
 				Details: checkout.PaymentCompletionDetails{
 					MD:    common.PtrString("Ab02b4c0!BQABAgCW5sxB4e/=="),
@@ -142,7 +142,7 @@ func TestCheckoutIntegration(t *testing.T) {
 	t.Run("PaymentLinks", func(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 			req := service.PaymentLinksApi.PaymentLinksInput()
-			req = req.CreatePaymentLinkRequest(checkout.CreatePaymentLinkRequest{
+			req = req.PaymentLinkRequest(checkout.PaymentLinkRequest{
 				Amount: checkout.Amount{
 					Value:    1250,
 					Currency: "EUR",
@@ -159,7 +159,7 @@ func TestCheckoutIntegration(t *testing.T) {
 
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 			req := service.PaymentLinksApi.PaymentLinksInput()
-			req = req.CreatePaymentLinkRequest(checkout.CreatePaymentLinkRequest{
+			req = req.PaymentLinkRequest(checkout.PaymentLinkRequest{
 				Reference: "123456781235",
 				Amount: checkout.Amount{
 					Value:    1250,
@@ -264,7 +264,7 @@ func TestCheckoutIntegration(t *testing.T) {
 		t.Run("Get origin keys", func(t *testing.T) {
 			domain := "https://adyen.com"
 			req := service.UtilityApi.OriginKeysInput()
-			req = req.CheckoutUtilityRequest(checkout.CheckoutUtilityRequest{
+			req = req.UtilityRequest(checkout.UtilityRequest{
 				OriginDomains: []string{
 					domain,
 				},
@@ -285,7 +285,7 @@ func TestCheckoutIntegration(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 			req := service.OrdersApi.OrdersInput()
 			// missing required "reference" field
-			req = req.CheckoutCreateOrderRequest(checkout.CheckoutCreateOrderRequest{
+			req = req.CreateOrderRequest(checkout.CreateOrderRequest{
 				Amount: checkout.Amount{
 					Currency: "EUR",
 					Value:    1000,
