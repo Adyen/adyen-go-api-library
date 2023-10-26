@@ -1,0 +1,15 @@
+{
+  "additionalData": {
+    "cvcResult": "1 Matches",
+    "authCode": "065696",
+    "avsResult": "4 AVS not supported for this card type",
+    "avsResultRaw": "4",
+    "cvcResultRaw": "M",
+    "refusalReasonRaw": "AUTHORISED",
+    "acquirerCode": "TestPmmAcquirer",
+    "acquirerReference": "8PQMP9VIE9N"
+  },
+  "pspReference": "993617895215577D",
+  "resultCode": "Authorised",
+  "merchantReference": "string"
+}

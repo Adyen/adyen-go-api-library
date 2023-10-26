@@ -18,7 +18,7 @@ jobs:
     - name: Build
       run: go build -v .
     - name: Test
-      run: go test ./... -tags $GO_TEST_TAGS 
+      run: go test -v ./... -tags $GO_TEST_TAGS
       env:
         GO_TEST_TAGS: ${{ github.ref == 'refs/heads/main' && 'integration' || 'unit' }}
         ADYEN_API_KEY: ${{ secrets.ADYEN_API_KEY }}

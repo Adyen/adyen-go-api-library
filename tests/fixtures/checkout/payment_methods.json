@@ -1,0 +1,621 @@
+{
+  "paymentMethods": [
+    {
+      "details": [
+        {
+          "items": [
+            {
+              "id": "1121",
+              "name": "Test Issuer"
+            },
+            {
+              "id": "1154",
+              "name": "Test Issuer 5"
+            },
+            {
+              "id": "1153",
+              "name": "Test Issuer 4"
+            },
+            {
+              "id": "1152",
+              "name": "Test Issuer 3"
+            },
+            {
+              "id": "1151",
+              "name": "Test Issuer 2"
+            },
+            {
+              "id": "1162",
+              "name": "Test Issuer Cancelled"
+            },
+            {
+              "id": "1161",
+              "name": "Test Issuer Pending"
+            },
+            {
+              "id": "1160",
+              "name": "Test Issuer Refused"
+            },
+            {
+              "id": "1159",
+              "name": "Test Issuer 10"
+            },
+            {
+              "id": "1158",
+              "name": "Test Issuer 9"
+            },
+            {
+              "id": "1157",
+              "name": "Test Issuer 8"
+            },
+            {
+              "id": "1156",
+              "name": "Test Issuer 7"
+            },
+            {
+              "id": "1155",
+              "name": "Test Issuer 6"
+            }
+          ],
+          "key": "issuer",
+          "type": "select"
+        }
+      ],
+      "name": "iDEAL",
+      "type": "ideal"
+    },
+    {
+      "details": [
+        {
+          "key": "encryptedCardNumber",
+          "type": "cardToken"
+        },
+        {
+          "key": "encryptedSecurityCode",
+          "type": "cardToken"
+        },
+        {
+          "key": "encryptedExpiryMonth",
+          "type": "cardToken"
+        },
+        {
+          "key": "encryptedExpiryYear",
+          "type": "cardToken"
+        },
+        {
+          "key": "holderName",
+          "optional": true,
+          "type": "text"
+        }
+      ],
+      "name": "Credit Card",
+      "type": "scheme"
+    },
+    {
+      "name": "PayPal",
+      "type": "paypal"
+    },
+    {
+      "details": [
+        {
+          "details": [
+            {
+              "key": "firstName",
+              "type": "text"
+            },
+            {
+              "key": "lastName",
+              "type": "text"
+            },
+            {
+              "items": [
+                {
+                  "id": "M",
+                  "name": "male"
+                },
+                {
+                  "id": "F",
+                  "name": "female"
+                }
+              ],
+              "key": "gender",
+              "type": "radio"
+            },
+            {
+              "key": "dateOfBirth",
+              "type": "date"
+            },
+            {
+              "key": "telephoneNumber",
+              "type": "tel"
+            },
+            {
+              "key": "shopperEmail",
+              "type": "emailAddress"
+            }
+          ],
+          "key": "personalDetails",
+          "type": "fieldSet"
+        },
+        {
+          "details": [
+            {
+              "key": "street",
+              "type": "text"
+            },
+            {
+              "key": "houseNumberOrName",
+              "type": "text"
+            },
+            {
+              "key": "city",
+              "type": "text"
+            },
+            {
+              "key": "postalCode",
+              "type": "text"
+            },
+            {
+              "key": "stateOrProvince",
+              "optional": true,
+              "type": "text"
+            },
+            {
+              "items": [
+                {
+                  "id": "NL",
+                  "name": "Netherlands"
+                },
+                {
+                  "id": "BE",
+                  "name": "Belgium"
+                }
+              ],
+              "key": "country",
+              "type": "select",
+              "value": "NL"
+            }
+          ],
+          "key": "billingAddress",
+          "type": "address"
+        },
+        {
+          "key": "separateDeliveryAddress",
+          "optional": true,
+          "type": "boolean",
+          "value": "false"
+        },
+        {
+          "details": [
+            {
+              "key": "street",
+              "type": "text"
+            },
+            {
+              "key": "houseNumberOrName",
+              "type": "text"
+            },
+            {
+              "key": "city",
+              "type": "text"
+            },
+            {
+              "key": "postalCode",
+              "type": "text"
+            },
+            {
+              "key": "stateOrProvince",
+              "optional": true,
+              "type": "text"
+            },
+            {
+              "items": [
+                {
+                  "id": "NL",
+                  "name": "Netherlands"
+                },
+                {
+                  "id": "BE",
+                  "name": "Belgium"
+                }
+              ],
+              "key": "country",
+              "type": "select",
+              "value": "NL"
+            }
+          ],
+          "key": "deliveryAddress",
+          "optional": true,
+          "type": "address"
+        }
+      ],
+      "name": "AfterPay Invoice",
+      "type": "afterpay_default"
+    },
+    {
+      "name": "Pay later with Klarna.",
+      "type": "klarna"
+    },
+    {
+      "details": [
+        {
+          "key": "sepa.ownerName",
+          "type": "text"
+        },
+        {
+          "key": "sepa.ibanNumber",
+          "type": "text"
+        }
+      ],
+      "name": "SEPA Direct Debit",
+      "type": "sepadirectdebit"
+    },
+    {
+      "name": "Paysafecard",
+      "type": "paysafecard"
+    },
+    {
+      "name": "Bijenkorf Cadeaucard",
+      "type": "bijcadeaucard"
+    },
+    {
+      "name": "Fonq Giftcard",
+      "type": "fonqgiftcard"
+    },
+    {
+      "name": "Bank Transfer (NL)",
+      "type": "bankTransfer_NL"
+    },
+    {
+      "name": "Pathe Giftcard",
+      "type": "pathegiftcard"
+    },
+    {
+      "name": "VVV Giftcard",
+      "type": "vvvgiftcard"
+    },
+    {
+      "name": "Podium Card",
+      "type": "podiumcard"
+    },
+    {
+      "name": "RatePay Direct Debit",
+      "type": "ratepay_directdebit"
+    },
+    {
+      "name": "Rituals Giftcard",
+      "type": "rituals"
+    },
+    {
+      "name": "Hunkemoller Lingerie Card",
+      "type": "hmlingerie"
+    },
+    {
+      "name": "Primera Cadeaukaart",
+      "type": "primeracadeaucard"
+    },
+    {
+      "name": "Fashioncheque",
+      "type": "fashioncheque"
+    },
+    {
+      "name": "NETELLER",
+      "type": "neteller"
+    },
+    {
+      "name": "Adyen Voucher",
+      "type": "adyen_test_voucher"
+    },
+    {
+      "name": "AfterPay B2B",
+      "type": "afterpay_b2b"
+    },
+    {
+      "name": "AfterPay DirectDebit",
+      "type": "afterpay_directdebit"
+    },
+    {
+      "name": "AliPay",
+      "type": "alipay"
+    },
+    {
+      "name": "AliPay",
+      "type": "alipay_wap"
+    },
+    {
+      "details": [
+        {
+          "key": "additionalData.androidpay.token",
+          "type": "androidPayToken"
+        }
+      ],
+      "name": "Android Pay",
+      "type": "androidpay"
+    },
+    {
+      "details": [
+        {
+          "key": "additionalData.applepay.token",
+          "type": "applePayToken"
+        }
+      ],
+      "name": "Apple Pay",
+      "type": "applepay"
+    },
+    {
+      "name": "Baby Gift Card",
+      "type": "babygiftcard"
+    },
+    {
+      "name": "SEPA Bank Transfer",
+      "type": "bankTransfer_IBAN"
+    },
+    {
+      "name": "Bloemen Giftcard",
+      "type": "bloemengiftcard"
+    },
+    {
+      "name": "Boekenbon Giftcard",
+      "type": "boekenbon"
+    },
+    {
+      "name": "Cash-Ticket",
+      "type": "cashticket"
+    },
+    {
+      "name": "Chasin Giftcard",
+      "type": "chasingiftcard"
+    },
+    {
+      "name": "ClickandBuy",
+      "type": "clickandbuy"
+    },
+    {
+      "name": "Costes Giftcard",
+      "type": "costesgiftcard"
+    },
+    {
+      "name": "custom_settlement",
+      "type": "custom_settlement"
+    },
+    {
+      "name": "eft_directdebit_CA",
+      "type": "eft_directdebit_CA"
+    },
+    {
+      "name": "Nationale Entertainment Card",
+      "type": "entertainmentcard"
+    },
+    {
+      "name": "Expert Cadeaukaart",
+      "type": "expertgiftcard"
+    },
+    {
+      "name": "FijnCadeau",
+      "type": "fijncadeau"
+    },
+    {
+      "name": "Fleurop Bloemenbon",
+      "type": "fleuropbloemenbon"
+    },
+    {
+      "name": "Gall & Gall",
+      "type": "gallgall"
+    },
+    {
+      "name": "Generic GiftCard",
+      "type": "genericgiftcard"
+    },
+    {
+      "name": "GiftFor2",
+      "type": "giftfor2card"
+    },
+    {
+      "name": "Givex",
+      "type": "givex"
+    },
+    {
+      "name": "Goldsmiths Card",
+      "type": "goldsmithscard"
+    },
+    {
+      "name": "Hunkemoller Member Card",
+      "type": "hmclub"
+    },
+    {
+      "name": "Phone Payment",
+      "type": "ivr"
+    },
+    {
+      "name": "Landline phone",
+      "type": "ivrLandline"
+    },
+    {
+      "name": "Mobile phone",
+      "type": "ivrMobile"
+    },
+    {
+      "name": "Kado Wereld",
+      "type": "kadowereld"
+    },
+    {
+      "name": "Karen Millen GiftCard",
+      "type": "karenmillengiftcard"
+    },
+    {
+      "name": "Leisure Card",
+      "type": "leisurecard"
+    },
+    {
+      "name": "Loods5 Cadeaukaart",
+      "type": "loods5giftcard"
+    },
+    {
+      "name": "Loods5 Tegoedbon",
+      "type": "loods5prepaidcard"
+    },
+    {
+      "details": [
+        {
+          "key": "additionalData.amazonPayToken",
+          "type": "text"
+        }
+      ],
+      "name": "Amazon Pay",
+      "supportsRecurring": true,
+      "type": "amazonpay"
+    },
+    {
+      "name": "MOLPoints",
+      "type": "molpay_points"
+    },
+    {
+      "name": "Moneybookers",
+      "type": "moneybookers"
+    },
+    {
+      "name": "De Nationale Musicalcard",
+      "type": "musicalcard"
+    },
+    {
+      "name": "Nationale Bioscoopbon",
+      "type": "nationalebioscoopbon"
+    },
+    {
+      "name": "Nationale Tuinbon",
+      "type": "nationaletuinbon"
+    },
+    {
+      "name": "Nationale Verwen Cadeaubon",
+      "type": "nationaleverwencadeaubon"
+    },
+    {
+      "name": "Onebip",
+      "type": "onebip"
+    },
+    {
+      "details": [
+        {
+          "key": "additionalData.paywithgoogle.token",
+          "type": "payWithGoogleToken"
+        }
+      ],
+      "name": "Google Pay",
+      "type": "paywithgoogle"
+    },
+    {
+      "name": "Plastix",
+      "type": "plastix"
+    },
+    {
+      "name": "Pluim",
+      "type": "pluimgiftcard"
+    },
+    {
+      "name": "Illicado Gift Card",
+      "type": "prosodie_illicado"
+    },
+    {
+      "name": "RatePay Invoice",
+      "type": "ratepay"
+    },
+    {
+      "name": "Rob Peetoom Giftcard",
+      "type": "robpeetoomgiftcard"
+    },
+    {
+      "name": "Shoes&Accessories Cadeau",
+      "type": "sagiftcard"
+    },
+    {
+      "name": "Score Giftcard",
+      "type": "scoregiftcard"
+    },
+    {
+      "name": "Premium SMS",
+      "type": "sms"
+    },
+    {
+      "name": "SVS",
+      "type": "svs"
+    },
+    {
+      "name": "TCS Test GiftCard",
+      "type": "tcstestgiftcard"
+    },
+    {
+      "name": "The Sting Giftcard",
+      "type": "thestinggiftcard"
+    },
+    {
+      "name": "Ukash",
+      "type": "ukash"
+    },
+    {
+      "name": "UnionPay",
+      "type": "unionpay"
+    },
+    {
+      "name": "Valuelink",
+      "type": "valuelink"
+    },
+    {
+      "name": "V&D Cadeaukaart",
+      "type": "vdcadeaucard"
+    },
+    {
+      "details": [
+        {
+          "key": "additionalData.visacheckout.callId",
+          "type": "text"
+        }
+      ],
+      "name": "Visa Checkout",
+      "type": "visacheckout"
+    },
+    {
+      "name": "VVV Cadeaubon",
+      "type": "vvvcadeaubon"
+    },
+    {
+      "name": "Webshop Giftcard",
+      "type": "webshopgiftcard"
+    },
+    {
+      "name": "WE Fashion Giftcard",
+      "type": "wefashiongiftcard"
+    },
+    {
+      "name": "Western Union",
+      "type": "westernunion"
+    },
+    {
+      "name": "Winkel Cheque",
+      "type": "winkelcheque"
+    },
+    {
+      "name": "Your Gift",
+      "type": "yourgift"
+    }
+  ],
+  "storedPaymentMethods": [
+    {
+      "brand": "visa",
+      "expiryMonth": "10",
+      "expiryYear": "30",
+      "holderName": "John Smith",
+      "id": "7219687191761347",
+      "issuerName": "ISSUER_NAME",
+      "lastFour": "1111",
+      "name": "VISA",
+      "shopperEmail": "john.smith@example.com",
+      "shopperReference": "YOUR_SHOPPER_REFERENCE",
+      "supportedRecurringProcessingModels": [
+        "CardOnFile",
+        "Subscription",
+        "UnscheduledCardOnFile"
+      ],
+      "type": "scheme"
+    }
+  ]
+}
