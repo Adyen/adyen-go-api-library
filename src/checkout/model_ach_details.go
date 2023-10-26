@@ -21,6 +21,8 @@ var _ common.MappedNullable = &AchDetails{}
 type AchDetails struct {
 	// The bank account number (without separators).
 	BankAccountNumber string `json:"bankAccountNumber"`
+	// The bank account type (checking, savings...).
+	BankAccountType *string `json:"bankAccountType,omitempty"`
 	// The bank routing number of the account. The field value is `nil` in most cases.
 	BankLocationId *string `json:"bankLocationId,omitempty"`
 	// The checkout attempt identifier.
@@ -84,6 +86,38 @@ func (o *AchDetails) GetBankAccountNumberOk() (*string, bool) {
 // SetBankAccountNumber sets field value
 func (o *AchDetails) SetBankAccountNumber(v string) {
 	o.BankAccountNumber = v
+}
+
+// GetBankAccountType returns the BankAccountType field value if set, zero value otherwise.
+func (o *AchDetails) GetBankAccountType() string {
+	if o == nil || common.IsNil(o.BankAccountType) {
+		var ret string
+		return ret
+	}
+	return *o.BankAccountType
+}
+
+// GetBankAccountTypeOk returns a tuple with the BankAccountType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AchDetails) GetBankAccountTypeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.BankAccountType) {
+		return nil, false
+	}
+	return o.BankAccountType, true
+}
+
+// HasBankAccountType returns a boolean if a field has been set.
+func (o *AchDetails) HasBankAccountType() bool {
+	if o != nil && !common.IsNil(o.BankAccountType) {
+		return true
+	}
+
+	return false
+}
+
+// SetBankAccountType gets a reference to the given string and assigns it to the BankAccountType field.
+func (o *AchDetails) SetBankAccountType(v string) {
+	o.BankAccountType = &v
 }
 
 // GetBankLocationId returns the BankLocationId field value if set, zero value otherwise.
@@ -356,6 +390,9 @@ func (o AchDetails) MarshalJSON() ([]byte, error) {
 func (o AchDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["bankAccountNumber"] = o.BankAccountNumber
+	if !common.IsNil(o.BankAccountType) {
+		toSerialize["bankAccountType"] = o.BankAccountType
+	}
 	if !common.IsNil(o.BankLocationId) {
 		toSerialize["bankLocationId"] = o.BankLocationId
 	}
@@ -419,6 +456,15 @@ func (v *NullableAchDetails) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+func (o *AchDetails) isValidBankAccountType() bool {
+	var allowedEnumValues = []string{"balance", "checking", "deposit", "general", "other", "payment", "savings"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetBankAccountType() == allowed {
+			return true
+		}
+	}
+	return false
+}
 func (o *AchDetails) isValidType() bool {
 	var allowedEnumValues = []string{"ach", "ach_plaid"}
 	for _, allowed := range allowedEnumValues {

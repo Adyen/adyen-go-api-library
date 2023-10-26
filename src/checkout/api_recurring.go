@@ -22,9 +22,9 @@ type RecurringApi common.Service
 
 // All parameters accepted by RecurringApi.DeleteTokenForStoredPaymentDetails
 type RecurringApiDeleteTokenForStoredPaymentDetailsInput struct {
-	recurringId      string
-	shopperReference *string
-	merchantAccount  *string
+	storedPaymentMethodId string
+	shopperReference      *string
+	merchantAccount       *string
 }
 
 // Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters. &gt; Your reference must not include personally identifiable information (PII), for example name or email address.
@@ -41,12 +41,12 @@ func (r RecurringApiDeleteTokenForStoredPaymentDetailsInput) MerchantAccount(mer
 
 /*
 Prepare a request for DeleteTokenForStoredPaymentDetails
-@param recurringId The unique identifier of the token.
+@param storedPaymentMethodId The unique identifier of the token.
 @return RecurringApiDeleteTokenForStoredPaymentDetailsInput
 */
-func (a *RecurringApi) DeleteTokenForStoredPaymentDetailsInput(recurringId string) RecurringApiDeleteTokenForStoredPaymentDetailsInput {
+func (a *RecurringApi) DeleteTokenForStoredPaymentDetailsInput(storedPaymentMethodId string) RecurringApiDeleteTokenForStoredPaymentDetailsInput {
 	return RecurringApiDeleteTokenForStoredPaymentDetailsInput{
-		recurringId: recurringId,
+		storedPaymentMethodId: storedPaymentMethodId,
 	}
 }
 
@@ -57,12 +57,12 @@ Deletes the token identified in the path. The token can no longer be used with p
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r RecurringApiDeleteTokenForStoredPaymentDetailsInput - Request parameters, see DeleteTokenForStoredPaymentDetailsInput
-@return StoredPaymentMethodResource, *http.Response, error
+@return *http.Response, error
 */
-func (a *RecurringApi) DeleteTokenForStoredPaymentDetails(ctx context.Context, r RecurringApiDeleteTokenForStoredPaymentDetailsInput) (StoredPaymentMethodResource, *http.Response, error) {
-	res := &StoredPaymentMethodResource{}
-	path := "/storedPaymentMethods/{recurringId}"
-	path = strings.Replace(path, "{"+"recurringId"+"}", url.PathEscape(common.ParameterValueToString(r.recurringId, "recurringId")), -1)
+func (a *RecurringApi) DeleteTokenForStoredPaymentDetails(ctx context.Context, r RecurringApiDeleteTokenForStoredPaymentDetailsInput) (*http.Response, error) {
+	var res interface{}
+	path := "/storedPaymentMethods/{storedPaymentMethodId}"
+	path = strings.Replace(path, "{"+"storedPaymentMethodId"+"}", url.PathEscape(common.ParameterValueToString(r.storedPaymentMethodId, "storedPaymentMethodId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	if r.shopperReference != nil {
@@ -82,7 +82,7 @@ func (a *RecurringApi) DeleteTokenForStoredPaymentDetails(ctx context.Context, r
 		headerParams,
 	)
 
-	return *res, httpRes, err
+	return httpRes, err
 }
 
 // All parameters accepted by RecurringApi.GetTokensForStoredPaymentDetails

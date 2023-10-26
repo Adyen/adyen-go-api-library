@@ -344,7 +344,7 @@ func (v *NullableAfterpayDetails) UnmarshalJSON(src []byte) error {
 }
 
 func (o *AfterpayDetails) isValidType() bool {
-	var allowedEnumValues = []string{"afterpay_default", "afterpaytouch", "afterpay_b2b"}
+	var allowedEnumValues = []string{"afterpay_default", "afterpaytouch", "afterpay_b2b", "clearpay"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

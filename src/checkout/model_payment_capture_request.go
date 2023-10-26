@@ -30,7 +30,7 @@ type PaymentCaptureRequest struct {
 	// An array of objects specifying how the amount should be split between accounts when using Adyen for Platforms. For details, refer to [Providing split information](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information).
 	Splits []Split `json:"splits,omitempty"`
 	// A List of sub-merchants.
-	SubMerchants []SubMerchant2 `json:"subMerchants,omitempty"`
+	SubMerchants []SubMerchantInfo `json:"subMerchants,omitempty"`
 }
 
 // NewPaymentCaptureRequest instantiates a new PaymentCaptureRequest object
@@ -229,9 +229,9 @@ func (o *PaymentCaptureRequest) SetSplits(v []Split) {
 }
 
 // GetSubMerchants returns the SubMerchants field value if set, zero value otherwise.
-func (o *PaymentCaptureRequest) GetSubMerchants() []SubMerchant2 {
+func (o *PaymentCaptureRequest) GetSubMerchants() []SubMerchantInfo {
 	if o == nil || common.IsNil(o.SubMerchants) {
-		var ret []SubMerchant2
+		var ret []SubMerchantInfo
 		return ret
 	}
 	return o.SubMerchants
@@ -239,7 +239,7 @@ func (o *PaymentCaptureRequest) GetSubMerchants() []SubMerchant2 {
 
 // GetSubMerchantsOk returns a tuple with the SubMerchants field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentCaptureRequest) GetSubMerchantsOk() ([]SubMerchant2, bool) {
+func (o *PaymentCaptureRequest) GetSubMerchantsOk() ([]SubMerchantInfo, bool) {
 	if o == nil || common.IsNil(o.SubMerchants) {
 		return nil, false
 	}
@@ -255,8 +255,8 @@ func (o *PaymentCaptureRequest) HasSubMerchants() bool {
 	return false
 }
 
-// SetSubMerchants gets a reference to the given []SubMerchant2 and assigns it to the SubMerchants field.
-func (o *PaymentCaptureRequest) SetSubMerchants(v []SubMerchant2) {
+// SetSubMerchants gets a reference to the given []SubMerchantInfo and assigns it to the SubMerchants field.
+func (o *PaymentCaptureRequest) SetSubMerchants(v []SubMerchantInfo) {
 	o.SubMerchants = v
 }
 

@@ -38,7 +38,7 @@ type PaymentLinkResponse struct {
 	DeliveryAddress *Address   `json:"deliveryAddress,omitempty"`
 	// A short description visible on the payment page. Maximum length: 280 characters.
 	Description *string `json:"description,omitempty"`
-	// The date when the payment link expires.  [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format: YYYY-MM-DDThh:mm:ss+TZD, for example, **2020-12-18T10:15:30+01:00**.  The maximum expiry date is 70 days after the payment link is created.  If not provided, the payment link expires 24 hours after it was created.
+	// The date when the payment link expires.  [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format with time zone designator **Z**: YYYY-MM-DDThh:mm:ss+TZD, for example, **2020-12-18T10:15:30Z**.  The maximum expiry date is 70 days after the payment link is created.  If not provided, the payment link expires 24 hours after it was created.
 	ExpiresAt *string `json:"expiresAt,omitempty"`
 	// A unique identifier of the payment link.
 	Id string `json:"id"`
@@ -56,7 +56,7 @@ type PaymentLinkResponse struct {
 	MerchantOrderReference *string `json:"merchantOrderReference,omitempty"`
 	// Metadata consists of entries, each of which includes a key and a value. Limitations: * Maximum 20 key-value pairs per request. Otherwise, error \"177\" occurs: \"Metadata size exceeds limit\" * Maximum 20 characters per key. Otherwise, error \"178\" occurs: \"Metadata key size exceeds limit\" * A key cannot have the name `checkout.linkId`. Any value that you provide with this key is going to be replaced by the real payment link ID.
 	Metadata *map[string]string `json:"metadata,omitempty"`
-	// Defines a recurring payment type. Required when creating a token to store payment details. Possible values: * **Subscription** – A transaction for a fixed or variable amount, which follows a fixed schedule. * **CardOnFile** – With a card-on-file (CoF) transaction, card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction. * **UnscheduledCardOnFile** – An unscheduled card-on-file (UCoF) transaction is a transaction that occurs on a non-fixed schedule and/or has variable amounts. For example, automatic top-ups when a cardholder's balance drops below a certain amount.
+	// Defines a recurring payment type. Required when `storePaymentMethodMode` is set to **askForConsent** or **enabled**. Possible values: * **Subscription** – A transaction for a fixed or variable amount, which follows a fixed schedule. * **CardOnFile** – With a card-on-file (CoF) transaction, card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction. * **UnscheduledCardOnFile** – An unscheduled card-on-file (UCoF) transaction is a transaction that occurs on a non-fixed schedule and/or has variable amounts. For example, automatic top-ups when a cardholder's balance drops below a certain amount.
 	RecurringProcessingModel *string `json:"recurringProcessingModel,omitempty"`
 	// A reference that is used to uniquely identify the payment in future communications about the payment status.
 	Reference string `json:"reference"`
@@ -82,13 +82,13 @@ type PaymentLinkResponse struct {
 	SocialSecurityNumber *string `json:"socialSecurityNumber,omitempty"`
 	// Boolean value indicating whether the card payment method should be split into separate debit and credit options.
 	SplitCardFundingSources *bool `json:"splitCardFundingSources,omitempty"`
-	// An array of objects specifying how the payment should be split between accounts when using Adyen for Platforms. For details, refer to [Providing split information](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information).
+	// An array of objects specifying how to split a payment when using [Adyen for Platforms](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information), [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic/processing-payments#providing-split-information), or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
 	Splits []Split `json:"splits,omitempty"`
 	// Status of the payment link. Possible values: * **active**: The link can be used to make payments. * **expired**: The expiry date for the payment link has passed. Shoppers can no longer use the link to make payments. * **completed**: The shopper completed the payment. * **paymentPending**: The shopper is in the process of making the payment. Applies to payment methods with an asynchronous flow.
 	Status string `json:"status"`
 	// The physical store, for which this payment is processed.
 	Store *string `json:"store,omitempty"`
-	// Indicates if the details of the payment method will be stored for the shopper. Possible values: * **disabled** – No details will be stored (default). * **askForConsent** – If the `shopperReference` is provided, the UI lets the shopper choose if they want their payment details to be stored. * **enabled** – If the `shopperReference` is provided, the details will be stored without asking the shopper for consent.
+	// Indicates if the details of the payment method will be stored for the shopper. Possible values: * **disabled** – No details will be stored (default). * **askForConsent** – If the `shopperReference` is provided, the UI lets the shopper choose if they want their payment details to be stored. * **enabled** – If the `shopperReference` is provided, the details will be stored without asking the shopper for consent.   When set to **askForConsent** or **enabled**, you must also include the `recurringProcessingModel` parameter.
 	StorePaymentMethodMode *string `json:"storePaymentMethodMode,omitempty"`
 	// The shopper's telephone number.
 	TelephoneNumber *string `json:"telephoneNumber,omitempty"`

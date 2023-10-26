@@ -19,10 +19,12 @@ var _ common.MappedNullable = &AmazonPayDetails{}
 
 // AmazonPayDetails struct for AmazonPayDetails
 type AmazonPayDetails struct {
-	// This is the `amazonPayToken` that you obtained from the [Get Checkout Session](https://amazon-pay-acquirer-guide.s3-eu-west-1.amazonaws.com/v1/amazon-pay-api-v2/checkout-session.html#get-checkout-session) response.
+	// This is the `amazonPayToken` that you obtained from the [Get Checkout Session](https://amazon-pay-acquirer-guide.s3-eu-west-1.amazonaws.com/v1/amazon-pay-api-v2/checkout-session.html#get-checkout-session) response. This token is used for API only integration specifically.
 	AmazonPayToken *string `json:"amazonPayToken,omitempty"`
 	// The checkout attempt identifier.
 	CheckoutAttemptId *string `json:"checkoutAttemptId,omitempty"`
+	// The `checkoutSessionId` is used to identify the checkout session at the Amazon Pay side. This field is required only for drop-in and components integration, where it replaces the amazonPayToken.
+	CheckoutSessionId *string `json:"checkoutSessionId,omitempty"`
 	// **amazonpay**
 	Type *string `json:"type,omitempty"`
 }
@@ -112,6 +114,38 @@ func (o *AmazonPayDetails) SetCheckoutAttemptId(v string) {
 	o.CheckoutAttemptId = &v
 }
 
+// GetCheckoutSessionId returns the CheckoutSessionId field value if set, zero value otherwise.
+func (o *AmazonPayDetails) GetCheckoutSessionId() string {
+	if o == nil || common.IsNil(o.CheckoutSessionId) {
+		var ret string
+		return ret
+	}
+	return *o.CheckoutSessionId
+}
+
+// GetCheckoutSessionIdOk returns a tuple with the CheckoutSessionId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AmazonPayDetails) GetCheckoutSessionIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.CheckoutSessionId) {
+		return nil, false
+	}
+	return o.CheckoutSessionId, true
+}
+
+// HasCheckoutSessionId returns a boolean if a field has been set.
+func (o *AmazonPayDetails) HasCheckoutSessionId() bool {
+	if o != nil && !common.IsNil(o.CheckoutSessionId) {
+		return true
+	}
+
+	return false
+}
+
+// SetCheckoutSessionId gets a reference to the given string and assigns it to the CheckoutSessionId field.
+func (o *AmazonPayDetails) SetCheckoutSessionId(v string) {
+	o.CheckoutSessionId = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *AmazonPayDetails) GetType() string {
 	if o == nil || common.IsNil(o.Type) {
@@ -159,6 +193,9 @@ func (o AmazonPayDetails) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
+	}
+	if !common.IsNil(o.CheckoutSessionId) {
+		toSerialize["checkoutSessionId"] = o.CheckoutSessionId
 	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type
