@@ -577,7 +577,7 @@ func (o *UpdateSweepConfigurationV2) isValidCategory() bool {
 	return false
 }
 func (o *UpdateSweepConfigurationV2) isValidReason() bool {
-	var allowedEnumValues = []string{"amountLimitExceeded", "approved", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "error", "notEnoughBalance", "refusedByCounterpartyBank", "routeNotFound", "unknown"}
+	var allowedEnumValues = []string{"amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declinedByTransactionRule", "error", "notEnoughBalance", "refusedByCounterpartyBank", "routeNotFound", "scaFailed", "unknown"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetReason() == allowed {
 			return true

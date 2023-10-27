@@ -19,9 +19,9 @@ type APIClient struct {
 
 	// API Services
 
-	GeneralApi *GeneralApi
-
 	ModificationsApi *ModificationsApi
+
+	PaymentsApi *PaymentsApi
 }
 
 // NewAPIClient creates a new API client.
@@ -33,8 +33,8 @@ func NewAPIClient(client *common.Client) *APIClient {
     }
 
 	// API Services
-	c.GeneralApi = (*GeneralApi)(&c.common)
 	c.ModificationsApi = (*ModificationsApi)(&c.common)
+	c.PaymentsApi = (*PaymentsApi)(&c.common)
 
 	return c
 }

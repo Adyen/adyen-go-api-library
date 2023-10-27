@@ -19,7 +19,8 @@ var _ common.MappedNullable = &PaymentCaptureRequest{}
 
 // PaymentCaptureRequest struct for PaymentCaptureRequest
 type PaymentCaptureRequest struct {
-	Amount Amount `json:"amount"`
+	Amount          Amount           `json:"amount"`
+	ApplicationInfo *ApplicationInfo `json:"applicationInfo,omitempty"`
 	// Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment). > This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Atome, Clearpay, Klarna, Ratepay, Walley, and Zip.
 	LineItems []LineItem `json:"lineItems,omitempty"`
 	// The merchant account that is used to process the payment.
@@ -74,6 +75,38 @@ func (o *PaymentCaptureRequest) GetAmountOk() (*Amount, bool) {
 // SetAmount sets field value
 func (o *PaymentCaptureRequest) SetAmount(v Amount) {
 	o.Amount = v
+}
+
+// GetApplicationInfo returns the ApplicationInfo field value if set, zero value otherwise.
+func (o *PaymentCaptureRequest) GetApplicationInfo() ApplicationInfo {
+	if o == nil || common.IsNil(o.ApplicationInfo) {
+		var ret ApplicationInfo
+		return ret
+	}
+	return *o.ApplicationInfo
+}
+
+// GetApplicationInfoOk returns a tuple with the ApplicationInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentCaptureRequest) GetApplicationInfoOk() (*ApplicationInfo, bool) {
+	if o == nil || common.IsNil(o.ApplicationInfo) {
+		return nil, false
+	}
+	return o.ApplicationInfo, true
+}
+
+// HasApplicationInfo returns a boolean if a field has been set.
+func (o *PaymentCaptureRequest) HasApplicationInfo() bool {
+	if o != nil && !common.IsNil(o.ApplicationInfo) {
+		return true
+	}
+
+	return false
+}
+
+// SetApplicationInfo gets a reference to the given ApplicationInfo and assigns it to the ApplicationInfo field.
+func (o *PaymentCaptureRequest) SetApplicationInfo(v ApplicationInfo) {
+	o.ApplicationInfo = &v
 }
 
 // GetLineItems returns the LineItems field value if set, zero value otherwise.
@@ -271,6 +304,9 @@ func (o PaymentCaptureRequest) MarshalJSON() ([]byte, error) {
 func (o PaymentCaptureRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["amount"] = o.Amount
+	if !common.IsNil(o.ApplicationInfo) {
+		toSerialize["applicationInfo"] = o.ApplicationInfo
+	}
 	if !common.IsNil(o.LineItems) {
 		toSerialize["lineItems"] = o.LineItems
 	}

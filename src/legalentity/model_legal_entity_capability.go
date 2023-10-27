@@ -19,17 +19,17 @@ var _ common.MappedNullable = &LegalEntityCapability{}
 
 // LegalEntityCapability struct for LegalEntityCapability
 type LegalEntityCapability struct {
-	// Indicates whether the capability is allowed. Adyen sets this to **true** if the verification is successful
+	// Indicates whether the capability is allowed. Adyen sets this to **true** if the verification is successful.
 	Allowed *bool `json:"allowed,omitempty"`
 	// The capability level that is allowed for the legal entity.  Possible values: **notApplicable**, **low**, **medium**, **high**.
 	AllowedLevel    *string             `json:"allowedLevel,omitempty"`
 	AllowedSettings *CapabilitySettings `json:"allowedSettings,omitempty"`
-	// Indicates whether the capability is requested. To check whether the Legal Entity is permitted to use the capability,
+	// Indicates whether the capability is requested. To check whether the legal entity is permitted to use the capability, refer to the `allowed` field.
 	Requested *bool `json:"requested,omitempty"`
 	// The requested level of the capability. Some capabilities, such as those used in [card issuing](https://docs.adyen.com/issuing/add-capabilities#capability-levels), have different levels. Levels increase the capability, but also require additional checks and increased monitoring.  Possible values: **notApplicable**, **low**, **medium**, **high**.
 	RequestedLevel    *string             `json:"requestedLevel,omitempty"`
 	RequestedSettings *CapabilitySettings `json:"requestedSettings,omitempty"`
-	// Capability status for transfer instruments associated with legal entity
+	// The capability status of transfer instruments associated with the legal entity.
 	TransferInstruments []SupportingEntityCapability `json:"transferInstruments,omitempty"`
 	// The status of the verification checks for the capability.  Possible values:  * **pending**: Adyen is running the verification.  * **invalid**: The verification failed. Check if the `errors` array contains more information.  * **valid**: The verification has been successfully completed.  * **rejected**: Adyen has verified the information, but found reasons to not allow the capability.
 	VerificationStatus *string `json:"verificationStatus,omitempty"`

@@ -173,8 +173,15 @@ func (a *TransferInstrumentsApi) GetTransferInstrument(ctx context.Context, r Tr
 
 // All parameters accepted by TransferInstrumentsApi.UpdateTransferInstrument
 type TransferInstrumentsApiUpdateTransferInstrumentInput struct {
-	id                     string
-	transferInstrumentInfo *TransferInstrumentInfo
+	id                         string
+	xRequestedVerificationCode *string
+	transferInstrumentInfo     *TransferInstrumentInfo
+}
+
+// Use the requested verification code 0_0001 to resolve any suberrors associated with the transfer instrument. Requested verification codes can only be used in your test environment.
+func (r TransferInstrumentsApiUpdateTransferInstrumentInput) XRequestedVerificationCode(xRequestedVerificationCode string) TransferInstrumentsApiUpdateTransferInstrumentInput {
+	r.xRequestedVerificationCode = &xRequestedVerificationCode
+	return r
 }
 
 func (r TransferInstrumentsApiUpdateTransferInstrumentInput) TransferInstrumentInfo(transferInstrumentInfo TransferInstrumentInfo) TransferInstrumentsApiUpdateTransferInstrumentInput {
@@ -208,6 +215,9 @@ func (a *TransferInstrumentsApi) UpdateTransferInstrument(ctx context.Context, r
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
+	if r.xRequestedVerificationCode != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "x-requested-verification-code", r.xRequestedVerificationCode, "")
+	}
 	httpRes, err := common.SendAPIRequest(
 		ctx,
 		a.Client,

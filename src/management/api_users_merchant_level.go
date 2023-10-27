@@ -79,7 +79,6 @@ func (a *UsersMerchantLevelApi) CreateNewUser(ctx context.Context, r UsersMercha
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -88,7 +87,6 @@ func (a *UsersMerchantLevelApi) CreateNewUser(ctx context.Context, r UsersMercha
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -97,7 +95,6 @@ func (a *UsersMerchantLevelApi) CreateNewUser(ctx context.Context, r UsersMercha
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -106,7 +103,6 @@ func (a *UsersMerchantLevelApi) CreateNewUser(ctx context.Context, r UsersMercha
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -115,7 +111,6 @@ func (a *UsersMerchantLevelApi) CreateNewUser(ctx context.Context, r UsersMercha
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -182,7 +177,6 @@ func (a *UsersMerchantLevelApi) GetUserDetails(ctx context.Context, r UsersMerch
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -191,7 +185,6 @@ func (a *UsersMerchantLevelApi) GetUserDetails(ctx context.Context, r UsersMerch
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -200,7 +193,6 @@ func (a *UsersMerchantLevelApi) GetUserDetails(ctx context.Context, r UsersMerch
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -209,7 +201,6 @@ func (a *UsersMerchantLevelApi) GetUserDetails(ctx context.Context, r UsersMerch
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -218,7 +209,6 @@ func (a *UsersMerchantLevelApi) GetUserDetails(ctx context.Context, r UsersMerch
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -312,7 +302,6 @@ func (a *UsersMerchantLevelApi) ListUsers(ctx context.Context, r UsersMerchantLe
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -321,7 +310,6 @@ func (a *UsersMerchantLevelApi) ListUsers(ctx context.Context, r UsersMerchantLe
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -330,7 +318,6 @@ func (a *UsersMerchantLevelApi) ListUsers(ctx context.Context, r UsersMerchantLe
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -339,7 +326,6 @@ func (a *UsersMerchantLevelApi) ListUsers(ctx context.Context, r UsersMerchantLe
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -348,7 +334,6 @@ func (a *UsersMerchantLevelApi) ListUsers(ctx context.Context, r UsersMerchantLe
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -421,7 +406,6 @@ func (a *UsersMerchantLevelApi) UpdateUser(ctx context.Context, r UsersMerchantL
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -430,7 +414,6 @@ func (a *UsersMerchantLevelApi) UpdateUser(ctx context.Context, r UsersMerchantL
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -439,7 +422,6 @@ func (a *UsersMerchantLevelApi) UpdateUser(ctx context.Context, r UsersMerchantL
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -448,7 +430,6 @@ func (a *UsersMerchantLevelApi) UpdateUser(ctx context.Context, r UsersMerchantL
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -457,7 +438,6 @@ func (a *UsersMerchantLevelApi) UpdateUser(ctx context.Context, r UsersMerchantL
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)

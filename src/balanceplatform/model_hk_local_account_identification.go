@@ -19,10 +19,10 @@ var _ common.MappedNullable = &HKLocalAccountIdentification{}
 
 // HKLocalAccountIdentification struct for HKLocalAccountIdentification
 type HKLocalAccountIdentification struct {
-	// The 6- to 19-character bank account number (alphanumeric), without separators or whitespace.
+	// The 9- to 15-character bank account number (alphanumeric), without separators or whitespace. Starts with the 3-digit branch code.
 	AccountNumber string `json:"accountNumber"`
-	// The 6-digit bank code including the 3-digit bank code and 3-digit branch code, without separators or whitespace.
-	BankCode string `json:"bankCode"`
+	// The 3-digit clearing code, without separators or whitespace.
+	ClearingCode string `json:"clearingCode"`
 	// **hkLocal**
 	Type string `json:"type"`
 }
@@ -31,10 +31,10 @@ type HKLocalAccountIdentification struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHKLocalAccountIdentification(accountNumber string, bankCode string, type_ string) *HKLocalAccountIdentification {
+func NewHKLocalAccountIdentification(accountNumber string, clearingCode string, type_ string) *HKLocalAccountIdentification {
 	this := HKLocalAccountIdentification{}
 	this.AccountNumber = accountNumber
-	this.BankCode = bankCode
+	this.ClearingCode = clearingCode
 	this.Type = type_
 	return &this
 }
@@ -73,28 +73,28 @@ func (o *HKLocalAccountIdentification) SetAccountNumber(v string) {
 	o.AccountNumber = v
 }
 
-// GetBankCode returns the BankCode field value
-func (o *HKLocalAccountIdentification) GetBankCode() string {
+// GetClearingCode returns the ClearingCode field value
+func (o *HKLocalAccountIdentification) GetClearingCode() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.BankCode
+	return o.ClearingCode
 }
 
-// GetBankCodeOk returns a tuple with the BankCode field value
+// GetClearingCodeOk returns a tuple with the ClearingCode field value
 // and a boolean to check if the value has been set.
-func (o *HKLocalAccountIdentification) GetBankCodeOk() (*string, bool) {
+func (o *HKLocalAccountIdentification) GetClearingCodeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.BankCode, true
+	return &o.ClearingCode, true
 }
 
-// SetBankCode sets field value
-func (o *HKLocalAccountIdentification) SetBankCode(v string) {
-	o.BankCode = v
+// SetClearingCode sets field value
+func (o *HKLocalAccountIdentification) SetClearingCode(v string) {
+	o.ClearingCode = v
 }
 
 // GetType returns the Type field value
@@ -132,7 +132,7 @@ func (o HKLocalAccountIdentification) MarshalJSON() ([]byte, error) {
 func (o HKLocalAccountIdentification) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["accountNumber"] = o.AccountNumber
-	toSerialize["bankCode"] = o.BankCode
+	toSerialize["clearingCode"] = o.ClearingCode
 	toSerialize["type"] = o.Type
 	return toSerialize, nil
 }

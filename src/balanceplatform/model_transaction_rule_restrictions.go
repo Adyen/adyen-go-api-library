@@ -21,6 +21,7 @@ var _ common.MappedNullable = &TransactionRuleRestrictions{}
 type TransactionRuleRestrictions struct {
 	ActiveNetworkTokens      *ActiveNetworkTokensRestriction      `json:"activeNetworkTokens,omitempty"`
 	BrandVariants            *BrandVariantsRestriction            `json:"brandVariants,omitempty"`
+	CounterpartyBank         *CounterpartyBankRestriction         `json:"counterpartyBank,omitempty"`
 	Countries                *CountriesRestriction                `json:"countries,omitempty"`
 	DayOfWeek                *DayOfWeekRestriction                `json:"dayOfWeek,omitempty"`
 	DifferentCurrencies      *DifferentCurrenciesRestriction      `json:"differentCurrencies,omitempty"`
@@ -114,6 +115,38 @@ func (o *TransactionRuleRestrictions) HasBrandVariants() bool {
 // SetBrandVariants gets a reference to the given BrandVariantsRestriction and assigns it to the BrandVariants field.
 func (o *TransactionRuleRestrictions) SetBrandVariants(v BrandVariantsRestriction) {
 	o.BrandVariants = &v
+}
+
+// GetCounterpartyBank returns the CounterpartyBank field value if set, zero value otherwise.
+func (o *TransactionRuleRestrictions) GetCounterpartyBank() CounterpartyBankRestriction {
+	if o == nil || common.IsNil(o.CounterpartyBank) {
+		var ret CounterpartyBankRestriction
+		return ret
+	}
+	return *o.CounterpartyBank
+}
+
+// GetCounterpartyBankOk returns a tuple with the CounterpartyBank field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionRuleRestrictions) GetCounterpartyBankOk() (*CounterpartyBankRestriction, bool) {
+	if o == nil || common.IsNil(o.CounterpartyBank) {
+		return nil, false
+	}
+	return o.CounterpartyBank, true
+}
+
+// HasCounterpartyBank returns a boolean if a field has been set.
+func (o *TransactionRuleRestrictions) HasCounterpartyBank() bool {
+	if o != nil && !common.IsNil(o.CounterpartyBank) {
+		return true
+	}
+
+	return false
+}
+
+// SetCounterpartyBank gets a reference to the given CounterpartyBankRestriction and assigns it to the CounterpartyBank field.
+func (o *TransactionRuleRestrictions) SetCounterpartyBank(v CounterpartyBankRestriction) {
+	o.CounterpartyBank = &v
 }
 
 // GetCountries returns the Countries field value if set, zero value otherwise.
@@ -515,6 +548,9 @@ func (o TransactionRuleRestrictions) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.BrandVariants) {
 		toSerialize["brandVariants"] = o.BrandVariants
+	}
+	if !common.IsNil(o.CounterpartyBank) {
+		toSerialize["counterpartyBank"] = o.CounterpartyBank
 	}
 	if !common.IsNil(o.Countries) {
 		toSerialize["countries"] = o.Countries

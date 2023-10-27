@@ -75,7 +75,6 @@ func (a *TransfersApi) ReturnTransfer(ctx context.Context, r TransfersApiReturnT
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -84,7 +83,6 @@ func (a *TransfersApi) ReturnTransfer(ctx context.Context, r TransfersApiReturnT
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -93,7 +91,6 @@ func (a *TransfersApi) ReturnTransfer(ctx context.Context, r TransfersApiReturnT
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -102,7 +99,6 @@ func (a *TransfersApi) ReturnTransfer(ctx context.Context, r TransfersApiReturnT
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -178,7 +174,6 @@ func (a *TransfersApi) TransferFunds(ctx context.Context, r TransfersApiTransfer
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -187,7 +182,6 @@ func (a *TransfersApi) TransferFunds(ctx context.Context, r TransfersApiTransfer
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -196,7 +190,6 @@ func (a *TransfersApi) TransferFunds(ctx context.Context, r TransfersApiTransfer
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -205,7 +198,6 @@ func (a *TransfersApi) TransferFunds(ctx context.Context, r TransfersApiTransfer
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)

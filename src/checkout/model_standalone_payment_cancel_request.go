@@ -19,6 +19,7 @@ var _ common.MappedNullable = &StandalonePaymentCancelRequest{}
 
 // StandalonePaymentCancelRequest struct for StandalonePaymentCancelRequest
 type StandalonePaymentCancelRequest struct {
+	ApplicationInfo *ApplicationInfo `json:"applicationInfo,omitempty"`
 	// The merchant account that is used to process the payment.
 	MerchantAccount string `json:"merchantAccount"`
 	// The [`reference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__reqParam_reference) of the payment that you want to cancel.
@@ -44,6 +45,38 @@ func NewStandalonePaymentCancelRequest(merchantAccount string, paymentReference 
 func NewStandalonePaymentCancelRequestWithDefaults() *StandalonePaymentCancelRequest {
 	this := StandalonePaymentCancelRequest{}
 	return &this
+}
+
+// GetApplicationInfo returns the ApplicationInfo field value if set, zero value otherwise.
+func (o *StandalonePaymentCancelRequest) GetApplicationInfo() ApplicationInfo {
+	if o == nil || common.IsNil(o.ApplicationInfo) {
+		var ret ApplicationInfo
+		return ret
+	}
+	return *o.ApplicationInfo
+}
+
+// GetApplicationInfoOk returns a tuple with the ApplicationInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StandalonePaymentCancelRequest) GetApplicationInfoOk() (*ApplicationInfo, bool) {
+	if o == nil || common.IsNil(o.ApplicationInfo) {
+		return nil, false
+	}
+	return o.ApplicationInfo, true
+}
+
+// HasApplicationInfo returns a boolean if a field has been set.
+func (o *StandalonePaymentCancelRequest) HasApplicationInfo() bool {
+	if o != nil && !common.IsNil(o.ApplicationInfo) {
+		return true
+	}
+
+	return false
+}
+
+// SetApplicationInfo gets a reference to the given ApplicationInfo and assigns it to the ApplicationInfo field.
+func (o *StandalonePaymentCancelRequest) SetApplicationInfo(v ApplicationInfo) {
+	o.ApplicationInfo = &v
 }
 
 // GetMerchantAccount returns the MerchantAccount field value
@@ -136,6 +169,9 @@ func (o StandalonePaymentCancelRequest) MarshalJSON() ([]byte, error) {
 
 func (o StandalonePaymentCancelRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.ApplicationInfo) {
+		toSerialize["applicationInfo"] = o.ApplicationInfo
+	}
 	toSerialize["merchantAccount"] = o.MerchantAccount
 	toSerialize["paymentReference"] = o.PaymentReference
 	if !common.IsNil(o.Reference) {

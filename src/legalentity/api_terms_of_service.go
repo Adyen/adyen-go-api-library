@@ -34,7 +34,7 @@ func (r TermsOfServiceApiAcceptTermsOfServiceInput) AcceptTermsOfServiceRequest(
 
 /*
 Prepare a request for AcceptTermsOfService
-@param id The unique identifier of the legal entity.@param termsofservicedocumentid The unique identifier of the Terms of Service document.
+@param id The unique identifier of the legal entity. For sole proprietorships, this is the individual legal entity ID of the owner.@param termsofservicedocumentid The unique identifier of the Terms of Service document.
 @return TermsOfServiceApiAcceptTermsOfServiceInput
 */
 func (a *TermsOfServiceApi) AcceptTermsOfServiceInput(id string, termsofservicedocumentid string) TermsOfServiceApiAcceptTermsOfServiceInput {
@@ -87,7 +87,7 @@ func (r TermsOfServiceApiGetTermsOfServiceDocumentInput) GetTermsOfServiceDocume
 
 /*
 Prepare a request for GetTermsOfServiceDocument
-@param id The unique identifier of the legal entity.
+@param id The unique identifier of the legal entity. For sole proprietorships, this is the individual legal entity ID of the owner.
 @return TermsOfServiceApiGetTermsOfServiceDocumentInput
 */
 func (a *TermsOfServiceApi) GetTermsOfServiceDocumentInput(id string) TermsOfServiceApiGetTermsOfServiceDocumentInput {
@@ -132,7 +132,7 @@ type TermsOfServiceApiGetTermsOfServiceInformationForLegalEntityInput struct {
 
 /*
 Prepare a request for GetTermsOfServiceInformationForLegalEntity
-@param id The unique identifier of the legal entity.
+@param id The unique identifier of the legal entity. For sole proprietorships, this is the individual legal entity ID of the owner.
 @return TermsOfServiceApiGetTermsOfServiceInformationForLegalEntityInput
 */
 func (a *TermsOfServiceApi) GetTermsOfServiceInformationForLegalEntityInput(id string) TermsOfServiceApiGetTermsOfServiceInformationForLegalEntityInput {
@@ -177,7 +177,7 @@ type TermsOfServiceApiGetTermsOfServiceStatusInput struct {
 
 /*
 Prepare a request for GetTermsOfServiceStatus
-@param id The unique identifier of the legal entity.
+@param id The unique identifier of the legal entity. For sole proprietorships, this is the individual legal entity ID of the owner.
 @return TermsOfServiceApiGetTermsOfServiceStatusInput
 */
 func (a *TermsOfServiceApi) GetTermsOfServiceStatusInput(id string) TermsOfServiceApiGetTermsOfServiceStatusInput {
