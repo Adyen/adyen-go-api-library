@@ -16,7 +16,7 @@ import (
 	"testing"
 )
 
-func Test_BalancePlatform(t *testing.T) {
+func TestBalancePlatform(t *testing.T) {
 	client := adyen.NewClient(&common.Config{
 		ApiKey:      "YOUR_ADYEN_API_KEY",
 		Environment: "TEST",

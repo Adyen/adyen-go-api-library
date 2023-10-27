@@ -8,8 +8,7 @@ import (
 	"github.com/adyen/adyen-go-api-library/v8/src/transferwebhook"
 )
 
-func Test_BalancePlatform_Transfer_Webhooks_HandleRequest(t *testing.T) {
-
+func TestHandleTransferNotificationRequest(t *testing.T) {
 	t.Run("should return transfer success", func(t *testing.T) {
 		notificationJson := `{
 			"data": {
