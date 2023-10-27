@@ -1,4 +1,4 @@
-package tests
+package balanceplatform
 
 import (
 	"github.com/adyen/adyen-go-api-library/v8/src/acswebhook"

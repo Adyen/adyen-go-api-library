@@ -5,15 +5,13 @@ import (
 	"github.com/adyen/adyen-go-api-library/v8/src/adyen"
 	"github.com/adyen/adyen-go-api-library/v8/src/checkout"
 	"github.com/adyen/adyen-go-api-library/v8/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/tests"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"io"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"net/http/httptest"
-	"os"
-	"strings"
 	"testing"
 )
 
@@ -26,27 +24,12 @@ func TestCheckout(t *testing.T) {
 
 	mux := http.NewServeMux()
 
-	mockedResponse := func(status int, method, endpoint, fixture string) {
-		mux.HandleFunc(endpoint, func(w http.ResponseWriter, r *http.Request) {
-			assert.Contains(t, strings.Fields(method), r.Method)
-
-			w.Header().Set("Content-Type", "application/json")
-			w.WriteHeader(status)
-
-			file, err := os.Open("../fixtures/" + fixture)
-			if err != nil {
-				log.Fatal(err)
-			}
-			if _, err := io.Copy(w, file); err != nil {
-				log.Fatal(err)
-			}
-		})
-	}
+	mockResponse := tests.MockResponse(t, mux)
 	mockOk := func(method, endpoint, fixture string) {
-		mockedResponse(http.StatusOK, method, endpoint, fixture)
+		mockResponse(http.StatusOK, method, endpoint, fixture)
 	}
 	mockCreated := func(method, endpoint, fixture string) {
-		mockedResponse(http.StatusCreated, method, endpoint, fixture)
+		mockResponse(http.StatusCreated, method, endpoint, fixture)
 	}
 
 	// Success cases
