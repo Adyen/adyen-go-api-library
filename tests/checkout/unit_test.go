@@ -61,7 +61,7 @@ func TestCheckout(t *testing.T) {
 			LiveEndpointURLPrefix: "abc123",
 			Debug:                 false,
 		})
-		require.Equal(t, "https://abc123-checkout-live.adyenpayments.com/checkout/v70", liveClient.Checkout().PaymentsApi.BasePath())
+		require.Equal(t, "https://abc123-checkout-live.adyenpayments.com/checkout/"+adyen.CheckoutAPIVersion, liveClient.Checkout().PaymentsApi.BasePath())
 	})
 
 	t.Run("PaymentMethods", func(t *testing.T) {
