@@ -72,7 +72,6 @@ func (a *AccountCompanyLevelApi) GetCompanyAccount(ctx context.Context, r Accoun
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -81,7 +80,6 @@ func (a *AccountCompanyLevelApi) GetCompanyAccount(ctx context.Context, r Accoun
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -90,7 +88,6 @@ func (a *AccountCompanyLevelApi) GetCompanyAccount(ctx context.Context, r Accoun
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -99,7 +96,6 @@ func (a *AccountCompanyLevelApi) GetCompanyAccount(ctx context.Context, r Accoun
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -108,7 +104,6 @@ func (a *AccountCompanyLevelApi) GetCompanyAccount(ctx context.Context, r Accoun
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -188,7 +183,6 @@ func (a *AccountCompanyLevelApi) ListCompanyAccounts(ctx context.Context, r Acco
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -197,7 +191,6 @@ func (a *AccountCompanyLevelApi) ListCompanyAccounts(ctx context.Context, r Acco
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -206,7 +199,6 @@ func (a *AccountCompanyLevelApi) ListCompanyAccounts(ctx context.Context, r Acco
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -215,7 +207,6 @@ func (a *AccountCompanyLevelApi) ListCompanyAccounts(ctx context.Context, r Acco
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -224,7 +215,6 @@ func (a *AccountCompanyLevelApi) ListCompanyAccounts(ctx context.Context, r Acco
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -307,7 +297,6 @@ func (a *AccountCompanyLevelApi) ListMerchantAccounts(ctx context.Context, r Acc
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -316,7 +305,6 @@ func (a *AccountCompanyLevelApi) ListMerchantAccounts(ctx context.Context, r Acc
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -325,7 +313,6 @@ func (a *AccountCompanyLevelApi) ListMerchantAccounts(ctx context.Context, r Acc
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -334,7 +321,6 @@ func (a *AccountCompanyLevelApi) ListMerchantAccounts(ctx context.Context, r Acc
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -343,7 +329,6 @@ func (a *AccountCompanyLevelApi) ListMerchantAccounts(ctx context.Context, r Acc
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)

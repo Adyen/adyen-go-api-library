@@ -86,7 +86,6 @@ func (a *TerminalSettingsCompanyLevelApi) GetTerminalLogo(ctx context.Context, r
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -95,7 +94,6 @@ func (a *TerminalSettingsCompanyLevelApi) GetTerminalLogo(ctx context.Context, r
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -104,7 +102,6 @@ func (a *TerminalSettingsCompanyLevelApi) GetTerminalLogo(ctx context.Context, r
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -113,7 +110,6 @@ func (a *TerminalSettingsCompanyLevelApi) GetTerminalLogo(ctx context.Context, r
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -122,7 +118,6 @@ func (a *TerminalSettingsCompanyLevelApi) GetTerminalLogo(ctx context.Context, r
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -189,7 +184,6 @@ func (a *TerminalSettingsCompanyLevelApi) GetTerminalSettings(ctx context.Contex
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -198,7 +192,6 @@ func (a *TerminalSettingsCompanyLevelApi) GetTerminalSettings(ctx context.Contex
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -207,7 +200,6 @@ func (a *TerminalSettingsCompanyLevelApi) GetTerminalSettings(ctx context.Contex
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -216,7 +208,6 @@ func (a *TerminalSettingsCompanyLevelApi) GetTerminalSettings(ctx context.Contex
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -225,7 +216,6 @@ func (a *TerminalSettingsCompanyLevelApi) GetTerminalSettings(ctx context.Contex
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -307,7 +297,6 @@ func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalLogo(ctx context.Context
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -316,7 +305,6 @@ func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalLogo(ctx context.Context
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -325,7 +313,6 @@ func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalLogo(ctx context.Context
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -334,7 +321,6 @@ func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalLogo(ctx context.Context
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -343,7 +329,6 @@ func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalLogo(ctx context.Context
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -419,7 +404,6 @@ func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalSettings(ctx context.Con
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -428,7 +412,6 @@ func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalSettings(ctx context.Con
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -437,7 +420,6 @@ func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalSettings(ctx context.Con
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -446,7 +428,6 @@ func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalSettings(ctx context.Con
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -455,7 +436,6 @@ func (a *TerminalSettingsCompanyLevelApi) UpdateTerminalSettings(ctx context.Con
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)

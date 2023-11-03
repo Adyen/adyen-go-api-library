@@ -33,8 +33,6 @@ type AccountHolderCapability struct {
 	// The requested level of the capability. Some capabilities, such as those used in [card issuing](https://docs.adyen.com/issuing/add-capabilities#capability-levels), have different levels. Levels increase the capability, but also require additional checks and increased monitoring.  Possible values: **notApplicable**, **low**, **medium**, **high**.
 	RequestedLevel    *string             `json:"requestedLevel,omitempty"`
 	RequestedSettings *CapabilitySettings `json:"requestedSettings,omitempty"`
-	// Contains the status of the transfer instruments associated with this capability.
-	TransferInstruments []AccountSupportingEntityCapability `json:"transferInstruments,omitempty"`
 	// The status of the verification checks for the capability.  Possible values:  * **pending**: Adyen is running the verification.  * **invalid**: The verification failed. Check if the `errors` array contains more information.  * **valid**: The verification has been successfully completed.  * **rejected**: Adyen has verified the information, but found reasons to not allow the capability.
 	VerificationStatus *string `json:"verificationStatus,omitempty"`
 }
@@ -312,38 +310,6 @@ func (o *AccountHolderCapability) SetRequestedSettings(v CapabilitySettings) {
 	o.RequestedSettings = &v
 }
 
-// GetTransferInstruments returns the TransferInstruments field value if set, zero value otherwise.
-func (o *AccountHolderCapability) GetTransferInstruments() []AccountSupportingEntityCapability {
-	if o == nil || common.IsNil(o.TransferInstruments) {
-		var ret []AccountSupportingEntityCapability
-		return ret
-	}
-	return o.TransferInstruments
-}
-
-// GetTransferInstrumentsOk returns a tuple with the TransferInstruments field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AccountHolderCapability) GetTransferInstrumentsOk() ([]AccountSupportingEntityCapability, bool) {
-	if o == nil || common.IsNil(o.TransferInstruments) {
-		return nil, false
-	}
-	return o.TransferInstruments, true
-}
-
-// HasTransferInstruments returns a boolean if a field has been set.
-func (o *AccountHolderCapability) HasTransferInstruments() bool {
-	if o != nil && !common.IsNil(o.TransferInstruments) {
-		return true
-	}
-
-	return false
-}
-
-// SetTransferInstruments gets a reference to the given []AccountSupportingEntityCapability and assigns it to the TransferInstruments field.
-func (o *AccountHolderCapability) SetTransferInstruments(v []AccountSupportingEntityCapability) {
-	o.TransferInstruments = v
-}
-
 // GetVerificationStatus returns the VerificationStatus field value if set, zero value otherwise.
 func (o *AccountHolderCapability) GetVerificationStatus() string {
 	if o == nil || common.IsNil(o.VerificationStatus) {
@@ -409,9 +375,6 @@ func (o AccountHolderCapability) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.RequestedSettings) {
 		toSerialize["requestedSettings"] = o.RequestedSettings
-	}
-	if !common.IsNil(o.TransferInstruments) {
-		toSerialize["transferInstruments"] = o.TransferInstruments
 	}
 	if !common.IsNil(o.VerificationStatus) {
 		toSerialize["verificationStatus"] = o.VerificationStatus

@@ -27,6 +27,8 @@ type DSPublicKeyDetail struct {
 	FromSDKVersion *string `json:"fromSDKVersion,omitempty"`
 	// Public key. The 3D Secure 2 SDK encrypts the device information by using the DS public key.
 	PublicKey *string `json:"publicKey,omitempty"`
+	// Directory Server root certificates. The 3D Secure 2 SDK verifies the ACS signed content using the rootCertificates.
+	RootCertificates *string `json:"rootCertificates,omitempty"`
 }
 
 // NewDSPublicKeyDetail instantiates a new DSPublicKeyDetail object
@@ -174,6 +176,38 @@ func (o *DSPublicKeyDetail) SetPublicKey(v string) {
 	o.PublicKey = &v
 }
 
+// GetRootCertificates returns the RootCertificates field value if set, zero value otherwise.
+func (o *DSPublicKeyDetail) GetRootCertificates() string {
+	if o == nil || common.IsNil(o.RootCertificates) {
+		var ret string
+		return ret
+	}
+	return *o.RootCertificates
+}
+
+// GetRootCertificatesOk returns a tuple with the RootCertificates field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DSPublicKeyDetail) GetRootCertificatesOk() (*string, bool) {
+	if o == nil || common.IsNil(o.RootCertificates) {
+		return nil, false
+	}
+	return o.RootCertificates, true
+}
+
+// HasRootCertificates returns a boolean if a field has been set.
+func (o *DSPublicKeyDetail) HasRootCertificates() bool {
+	if o != nil && !common.IsNil(o.RootCertificates) {
+		return true
+	}
+
+	return false
+}
+
+// SetRootCertificates gets a reference to the given string and assigns it to the RootCertificates field.
+func (o *DSPublicKeyDetail) SetRootCertificates(v string) {
+	o.RootCertificates = &v
+}
+
 func (o DSPublicKeyDetail) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -195,6 +229,9 @@ func (o DSPublicKeyDetail) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.PublicKey) {
 		toSerialize["publicKey"] = o.PublicKey
+	}
+	if !common.IsNil(o.RootCertificates) {
+		toSerialize["rootCertificates"] = o.RootCertificates
 	}
 	return toSerialize, nil
 }

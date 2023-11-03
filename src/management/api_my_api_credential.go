@@ -74,7 +74,6 @@ func (a *MyAPICredentialApi) AddAllowedOrigin(ctx context.Context, r MyAPICreden
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -83,7 +82,6 @@ func (a *MyAPICredentialApi) AddAllowedOrigin(ctx context.Context, r MyAPICreden
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -92,7 +90,6 @@ func (a *MyAPICredentialApi) AddAllowedOrigin(ctx context.Context, r MyAPICreden
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -101,7 +98,6 @@ func (a *MyAPICredentialApi) AddAllowedOrigin(ctx context.Context, r MyAPICreden
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -110,7 +106,6 @@ func (a *MyAPICredentialApi) AddAllowedOrigin(ctx context.Context, r MyAPICreden
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -167,7 +162,6 @@ func (a *MyAPICredentialApi) GenerateNewClientKeyForSelf(ctx context.Context, r 
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -176,7 +170,6 @@ func (a *MyAPICredentialApi) GenerateNewClientKeyForSelf(ctx context.Context, r 
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -185,7 +178,6 @@ func (a *MyAPICredentialApi) GenerateNewClientKeyForSelf(ctx context.Context, r 
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -194,7 +186,6 @@ func (a *MyAPICredentialApi) GenerateNewClientKeyForSelf(ctx context.Context, r 
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -203,7 +194,6 @@ func (a *MyAPICredentialApi) GenerateNewClientKeyForSelf(ctx context.Context, r 
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -266,7 +256,6 @@ func (a *MyAPICredentialApi) GetAllowedOriginDetails(ctx context.Context, r MyAP
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -275,7 +264,6 @@ func (a *MyAPICredentialApi) GetAllowedOriginDetails(ctx context.Context, r MyAP
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -284,7 +272,6 @@ func (a *MyAPICredentialApi) GetAllowedOriginDetails(ctx context.Context, r MyAP
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -293,7 +280,6 @@ func (a *MyAPICredentialApi) GetAllowedOriginDetails(ctx context.Context, r MyAP
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -302,7 +288,6 @@ func (a *MyAPICredentialApi) GetAllowedOriginDetails(ctx context.Context, r MyAP
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -360,7 +345,6 @@ func (a *MyAPICredentialApi) GetAllowedOrigins(ctx context.Context, r MyAPICrede
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -369,7 +353,6 @@ func (a *MyAPICredentialApi) GetAllowedOrigins(ctx context.Context, r MyAPICrede
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -378,7 +361,6 @@ func (a *MyAPICredentialApi) GetAllowedOrigins(ctx context.Context, r MyAPICrede
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -387,7 +369,6 @@ func (a *MyAPICredentialApi) GetAllowedOrigins(ctx context.Context, r MyAPICrede
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -396,7 +377,6 @@ func (a *MyAPICredentialApi) GetAllowedOrigins(ctx context.Context, r MyAPICrede
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -454,7 +434,6 @@ func (a *MyAPICredentialApi) GetApiCredentialDetails(ctx context.Context, r MyAP
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -463,7 +442,6 @@ func (a *MyAPICredentialApi) GetApiCredentialDetails(ctx context.Context, r MyAP
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -472,7 +450,6 @@ func (a *MyAPICredentialApi) GetApiCredentialDetails(ctx context.Context, r MyAP
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -481,7 +458,6 @@ func (a *MyAPICredentialApi) GetApiCredentialDetails(ctx context.Context, r MyAP
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -490,7 +466,6 @@ func (a *MyAPICredentialApi) GetApiCredentialDetails(ctx context.Context, r MyAP
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -553,7 +528,6 @@ func (a *MyAPICredentialApi) RemoveAllowedOrigin(ctx context.Context, r MyAPICre
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -562,7 +536,6 @@ func (a *MyAPICredentialApi) RemoveAllowedOrigin(ctx context.Context, r MyAPICre
 		}
 		return httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -571,7 +544,6 @@ func (a *MyAPICredentialApi) RemoveAllowedOrigin(ctx context.Context, r MyAPICre
 		}
 		return httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -580,7 +552,6 @@ func (a *MyAPICredentialApi) RemoveAllowedOrigin(ctx context.Context, r MyAPICre
 		}
 		return httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -589,7 +560,6 @@ func (a *MyAPICredentialApi) RemoveAllowedOrigin(ctx context.Context, r MyAPICre
 		}
 		return httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)

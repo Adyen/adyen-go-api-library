@@ -73,7 +73,6 @@ func (a *AccountHoldersApi) CreateAccountHolder(ctx context.Context, r AccountHo
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -82,7 +81,6 @@ func (a *AccountHoldersApi) CreateAccountHolder(ctx context.Context, r AccountHo
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -91,7 +89,6 @@ func (a *AccountHoldersApi) CreateAccountHolder(ctx context.Context, r AccountHo
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -100,7 +97,6 @@ func (a *AccountHoldersApi) CreateAccountHolder(ctx context.Context, r AccountHo
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -109,7 +105,6 @@ func (a *AccountHoldersApi) CreateAccountHolder(ctx context.Context, r AccountHo
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -169,7 +164,6 @@ func (a *AccountHoldersApi) GetAccountHolder(ctx context.Context, r AccountHolde
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -178,7 +172,6 @@ func (a *AccountHoldersApi) GetAccountHolder(ctx context.Context, r AccountHolde
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -187,7 +180,6 @@ func (a *AccountHoldersApi) GetAccountHolder(ctx context.Context, r AccountHolde
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -196,7 +188,6 @@ func (a *AccountHoldersApi) GetAccountHolder(ctx context.Context, r AccountHolde
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -205,7 +196,6 @@ func (a *AccountHoldersApi) GetAccountHolder(ctx context.Context, r AccountHolde
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -287,7 +277,6 @@ func (a *AccountHoldersApi) GetAllBalanceAccountsOfAccountHolder(ctx context.Con
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -296,7 +285,6 @@ func (a *AccountHoldersApi) GetAllBalanceAccountsOfAccountHolder(ctx context.Con
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -305,7 +293,6 @@ func (a *AccountHoldersApi) GetAllBalanceAccountsOfAccountHolder(ctx context.Con
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -314,7 +301,6 @@ func (a *AccountHoldersApi) GetAllBalanceAccountsOfAccountHolder(ctx context.Con
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -323,7 +309,117 @@ func (a *AccountHoldersApi) GetAllBalanceAccountsOfAccountHolder(ctx context.Con
 		}
 		return *res, httpRes, serviceError
 	}
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
 
+	return *res, httpRes, err
+}
+
+// All parameters accepted by AccountHoldersApi.GetTaxForm
+type AccountHoldersApiGetTaxFormInput struct {
+	id       string
+	formType *string
+	year     *int32
+}
+
+// The type of tax form you want to retrieve. Accepted values are **us1099k** and **us1099nec**
+func (r AccountHoldersApiGetTaxFormInput) FormType(formType string) AccountHoldersApiGetTaxFormInput {
+	r.formType = &formType
+	return r
+}
+
+// The tax year in YYYY format for the tax form you want to retrieve
+func (r AccountHoldersApiGetTaxFormInput) Year(year int32) AccountHoldersApiGetTaxFormInput {
+	r.year = &year
+	return r
+}
+
+/*
+Prepare a request for GetTaxForm
+@param id The unique identifier of the account holder.
+@return AccountHoldersApiGetTaxFormInput
+*/
+func (a *AccountHoldersApi) GetTaxFormInput(id string) AccountHoldersApiGetTaxFormInput {
+	return AccountHoldersApiGetTaxFormInput{
+		id: id,
+	}
+}
+
+/*
+GetTaxForm Get a tax form
+
+Generates a tax form for account holders operating in the US. For more information, refer to [Providing tax forms](https://docs.adyen.com/marketplaces-and-platforms/us-tax-forms/).
+
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r AccountHoldersApiGetTaxFormInput - Request parameters, see GetTaxFormInput
+@return GetTaxFormResponse, *http.Response, error
+*/
+func (a *AccountHoldersApi) GetTaxForm(ctx context.Context, r AccountHoldersApiGetTaxFormInput) (GetTaxFormResponse, *http.Response, error) {
+	res := &GetTaxFormResponse{}
+	path := "/accountHolders/{id}/taxForms"
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.formType != nil {
+		common.ParameterAddToQuery(queryParams, "formType", r.formType, "")
+	}
+	if r.year != nil {
+		common.ParameterAddToQuery(queryParams, "year", r.year, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 400 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -389,7 +485,6 @@ func (a *AccountHoldersApi) UpdateAccountHolder(ctx context.Context, r AccountHo
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -398,7 +493,6 @@ func (a *AccountHoldersApi) UpdateAccountHolder(ctx context.Context, r AccountHo
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -407,7 +501,6 @@ func (a *AccountHoldersApi) UpdateAccountHolder(ctx context.Context, r AccountHo
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -416,7 +509,6 @@ func (a *AccountHoldersApi) UpdateAccountHolder(ctx context.Context, r AccountHo
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -425,7 +517,6 @@ func (a *AccountHoldersApi) UpdateAccountHolder(ctx context.Context, r AccountHo
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)

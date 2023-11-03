@@ -19,6 +19,7 @@ var _ common.MappedNullable = &PaymentReversalRequest{}
 
 // PaymentReversalRequest struct for PaymentReversalRequest
 type PaymentReversalRequest struct {
+	ApplicationInfo *ApplicationInfo `json:"applicationInfo,omitempty"`
 	// The merchant account that is used to process the payment.
 	MerchantAccount string `json:"merchantAccount"`
 	// Your reference for the reversal request. Maximum length: 80 characters.
@@ -41,6 +42,38 @@ func NewPaymentReversalRequest(merchantAccount string) *PaymentReversalRequest {
 func NewPaymentReversalRequestWithDefaults() *PaymentReversalRequest {
 	this := PaymentReversalRequest{}
 	return &this
+}
+
+// GetApplicationInfo returns the ApplicationInfo field value if set, zero value otherwise.
+func (o *PaymentReversalRequest) GetApplicationInfo() ApplicationInfo {
+	if o == nil || common.IsNil(o.ApplicationInfo) {
+		var ret ApplicationInfo
+		return ret
+	}
+	return *o.ApplicationInfo
+}
+
+// GetApplicationInfoOk returns a tuple with the ApplicationInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentReversalRequest) GetApplicationInfoOk() (*ApplicationInfo, bool) {
+	if o == nil || common.IsNil(o.ApplicationInfo) {
+		return nil, false
+	}
+	return o.ApplicationInfo, true
+}
+
+// HasApplicationInfo returns a boolean if a field has been set.
+func (o *PaymentReversalRequest) HasApplicationInfo() bool {
+	if o != nil && !common.IsNil(o.ApplicationInfo) {
+		return true
+	}
+
+	return false
+}
+
+// SetApplicationInfo gets a reference to the given ApplicationInfo and assigns it to the ApplicationInfo field.
+func (o *PaymentReversalRequest) SetApplicationInfo(v ApplicationInfo) {
+	o.ApplicationInfo = &v
 }
 
 // GetMerchantAccount returns the MerchantAccount field value
@@ -109,6 +142,9 @@ func (o PaymentReversalRequest) MarshalJSON() ([]byte, error) {
 
 func (o PaymentReversalRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.ApplicationInfo) {
+		toSerialize["applicationInfo"] = o.ApplicationInfo
+	}
 	toSerialize["merchantAccount"] = o.MerchantAccount
 	if !common.IsNil(o.Reference) {
 		toSerialize["reference"] = o.Reference

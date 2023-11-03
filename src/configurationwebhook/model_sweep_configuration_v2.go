@@ -458,7 +458,7 @@ func (v *NullableSweepConfigurationV2) UnmarshalJSON(src []byte) error {
 }
 
 func (o *SweepConfigurationV2) isValidReason() bool {
-	var allowedEnumValues = []string{"amountLimitExceeded", "approved", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "error", "notEnoughBalance", "refusedByCounterpartyBank", "routeNotFound", "unknown"}
+	var allowedEnumValues = []string{"amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declinedByTransactionRule", "error", "notEnoughBalance", "refusedByCounterpartyBank", "routeNotFound", "scaFailed", "unknown"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetReason() == allowed {
 			return true

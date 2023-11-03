@@ -220,8 +220,15 @@ func (a *LegalEntitiesApi) GetLegalEntity(ctx context.Context, r LegalEntitiesAp
 
 // All parameters accepted by LegalEntitiesApi.UpdateLegalEntity
 type LegalEntitiesApiUpdateLegalEntityInput struct {
-	id              string
-	legalEntityInfo *LegalEntityInfo
+	id                         string
+	xRequestedVerificationCode *string
+	legalEntityInfo            *LegalEntityInfo
+}
+
+// Use the requested verification code 0_0001 to resolve any suberrors associated with the legal entity. Requested verification codes can only be used in your test environment.
+func (r LegalEntitiesApiUpdateLegalEntityInput) XRequestedVerificationCode(xRequestedVerificationCode string) LegalEntitiesApiUpdateLegalEntityInput {
+	r.xRequestedVerificationCode = &xRequestedVerificationCode
+	return r
 }
 
 func (r LegalEntitiesApiUpdateLegalEntityInput) LegalEntityInfo(legalEntityInfo LegalEntityInfo) LegalEntitiesApiUpdateLegalEntityInput {
@@ -257,6 +264,9 @@ func (a *LegalEntitiesApi) UpdateLegalEntity(ctx context.Context, r LegalEntitie
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
+	if r.xRequestedVerificationCode != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "x-requested-verification-code", r.xRequestedVerificationCode, "")
+	}
 	httpRes, err := common.SendAPIRequest(
 		ctx,
 		a.Client,

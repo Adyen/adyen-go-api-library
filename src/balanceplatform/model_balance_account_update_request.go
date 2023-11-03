@@ -21,8 +21,6 @@ var _ common.MappedNullable = &BalanceAccountUpdateRequest{}
 type BalanceAccountUpdateRequest struct {
 	// The unique identifier of the [account holder](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/accountHolders__resParam_id) associated with the balance account.
 	AccountHolderId *string `json:"accountHolderId,omitempty"`
-	// The default currency code of this balance account, in three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes) format.  The default value is **EUR**.
-	DefaultCurrencyCode *string `json:"defaultCurrencyCode,omitempty"`
 	// A human-readable description of the balance account, maximum 300 characters. You can use this parameter to distinguish between multiple balance accounts under an account holder.
 	Description *string `json:"description,omitempty"`
 	// A set of key and value pairs for general use. The keys do not have specific names and may be used for storing miscellaneous data as desired. > Note that during an update of metadata, the omission of existing key-value pairs will result in the deletion of those key-value pairs.
@@ -83,38 +81,6 @@ func (o *BalanceAccountUpdateRequest) HasAccountHolderId() bool {
 // SetAccountHolderId gets a reference to the given string and assigns it to the AccountHolderId field.
 func (o *BalanceAccountUpdateRequest) SetAccountHolderId(v string) {
 	o.AccountHolderId = &v
-}
-
-// GetDefaultCurrencyCode returns the DefaultCurrencyCode field value if set, zero value otherwise.
-func (o *BalanceAccountUpdateRequest) GetDefaultCurrencyCode() string {
-	if o == nil || common.IsNil(o.DefaultCurrencyCode) {
-		var ret string
-		return ret
-	}
-	return *o.DefaultCurrencyCode
-}
-
-// GetDefaultCurrencyCodeOk returns a tuple with the DefaultCurrencyCode field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BalanceAccountUpdateRequest) GetDefaultCurrencyCodeOk() (*string, bool) {
-	if o == nil || common.IsNil(o.DefaultCurrencyCode) {
-		return nil, false
-	}
-	return o.DefaultCurrencyCode, true
-}
-
-// HasDefaultCurrencyCode returns a boolean if a field has been set.
-func (o *BalanceAccountUpdateRequest) HasDefaultCurrencyCode() bool {
-	if o != nil && !common.IsNil(o.DefaultCurrencyCode) {
-		return true
-	}
-
-	return false
-}
-
-// SetDefaultCurrencyCode gets a reference to the given string and assigns it to the DefaultCurrencyCode field.
-func (o *BalanceAccountUpdateRequest) SetDefaultCurrencyCode(v string) {
-	o.DefaultCurrencyCode = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -321,9 +287,6 @@ func (o BalanceAccountUpdateRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.AccountHolderId) {
 		toSerialize["accountHolderId"] = o.AccountHolderId
-	}
-	if !common.IsNil(o.DefaultCurrencyCode) {
-		toSerialize["defaultCurrencyCode"] = o.DefaultCurrencyCode
 	}
 	if !common.IsNil(o.Description) {
 		toSerialize["description"] = o.Description

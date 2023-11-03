@@ -97,6 +97,8 @@ type CreateCheckoutSessionRequest struct {
 	ShopperReference *string `json:"shopperReference,omitempty"`
 	// The text to be shown on the shopper's bank statement.  We recommend sending a maximum of 22 characters, otherwise banks might truncate the string.  Allowed characters: **a-z**, **A-Z**, **0-9**, spaces, and special characters **. , ' _ - ? + * /_**.
 	ShopperStatement *string `json:"shopperStatement,omitempty"`
+	// Set to true to show the payment amount per installment.
+	ShowInstallmentAmount *bool `json:"showInstallmentAmount,omitempty"`
 	// The shopper's social security number.
 	SocialSecurityNumber *string `json:"socialSecurityNumber,omitempty"`
 	// Boolean value indicating whether the card payment method should be split into separate debit and credit options.
@@ -1587,6 +1589,38 @@ func (o *CreateCheckoutSessionRequest) SetShopperStatement(v string) {
 	o.ShopperStatement = &v
 }
 
+// GetShowInstallmentAmount returns the ShowInstallmentAmount field value if set, zero value otherwise.
+func (o *CreateCheckoutSessionRequest) GetShowInstallmentAmount() bool {
+	if o == nil || common.IsNil(o.ShowInstallmentAmount) {
+		var ret bool
+		return ret
+	}
+	return *o.ShowInstallmentAmount
+}
+
+// GetShowInstallmentAmountOk returns a tuple with the ShowInstallmentAmount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCheckoutSessionRequest) GetShowInstallmentAmountOk() (*bool, bool) {
+	if o == nil || common.IsNil(o.ShowInstallmentAmount) {
+		return nil, false
+	}
+	return o.ShowInstallmentAmount, true
+}
+
+// HasShowInstallmentAmount returns a boolean if a field has been set.
+func (o *CreateCheckoutSessionRequest) HasShowInstallmentAmount() bool {
+	if o != nil && !common.IsNil(o.ShowInstallmentAmount) {
+		return true
+	}
+
+	return false
+}
+
+// SetShowInstallmentAmount gets a reference to the given bool and assigns it to the ShowInstallmentAmount field.
+func (o *CreateCheckoutSessionRequest) SetShowInstallmentAmount(v bool) {
+	o.ShowInstallmentAmount = &v
+}
+
 // GetSocialSecurityNumber returns the SocialSecurityNumber field value if set, zero value otherwise.
 func (o *CreateCheckoutSessionRequest) GetSocialSecurityNumber() string {
 	if o == nil || common.IsNil(o.SocialSecurityNumber) {
@@ -2017,6 +2051,9 @@ func (o CreateCheckoutSessionRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.ShopperStatement) {
 		toSerialize["shopperStatement"] = o.ShopperStatement
+	}
+	if !common.IsNil(o.ShowInstallmentAmount) {
+		toSerialize["showInstallmentAmount"] = o.ShowInstallmentAmount
 	}
 	if !common.IsNil(o.SocialSecurityNumber) {
 		toSerialize["socialSecurityNumber"] = o.SocialSecurityNumber

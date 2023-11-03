@@ -33,7 +33,7 @@ func (r PCIQuestionnairesApiGeneratePciQuestionnaireInput) GeneratePciDescriptio
 
 /*
 Prepare a request for GeneratePciQuestionnaire
-@param id The legal entity ID of the individual who will sign the PCI questionnaire.
+@param id The unique identifier of the legal entity to get PCI questionnaire information.
 @return PCIQuestionnairesApiGeneratePciQuestionnaireInput
 */
 func (a *PCIQuestionnairesApi) GeneratePciQuestionnaireInput(id string) PCIQuestionnairesApiGeneratePciQuestionnaireInput {
@@ -45,7 +45,7 @@ func (a *PCIQuestionnairesApi) GeneratePciQuestionnaireInput(id string) PCIQuest
 /*
 GeneratePciQuestionnaire Generate PCI questionnaire
 
-Generates the required PCI questionnaire based on the user's [salesChannel](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/businessLines__reqParam_salesChannels). If multiple questionnaires are required, this request creates a single consodilated document to be signed.
+Generates the required PCI questionnaires based on the user's [salesChannel](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/businessLines__reqParam_salesChannels).
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r PCIQuestionnairesApiGeneratePciQuestionnaireInput - Request parameters, see GeneratePciQuestionnaireInput

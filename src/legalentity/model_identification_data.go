@@ -33,7 +33,7 @@ type IdentificationData struct {
 	NationalIdExempt *bool `json:"nationalIdExempt,omitempty"`
 	// The number in the document.
 	Number *string `json:"number,omitempty"`
-	// Type of document, used when providing an ID number or uploading a document. The possible values depend on the legal entity type.  * For **organization**, the `type` values can be **proofOfAddress**, **registrationDocument**, **vatDocument**, **proofOfOrganizationTaxInfo**, **proofOfOwnership**, **proofOfIndustry**, or **proofOfFundingOrWealthSource**.  * For **individual**, the `type` values can be **identityCard**, **driversLicense**, **passport**, **proofOfNationalIdNumber**, **proofOfResidency**, **proofOfIndustry**, **proofOfIndividualTaxId**, or **proofOfFundingOrWealthSource**.  * For **soleProprietorship**, the `type` values can be **constitutionalDocument**, **proofOfAddress**, or **proofOfIndustry**.  * Use **bankStatement** to upload documents for a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id).
+	// Type of identity data. For **individual**, the `type` value is **nationalIdNumber**.
 	Type string `json:"type"`
 }
 
@@ -346,7 +346,7 @@ func (v *NullableIdentificationData) UnmarshalJSON(src []byte) error {
 }
 
 func (o *IdentificationData) isValidType() bool {
-	var allowedEnumValues = []string{"bankStatement", "driversLicense", "identityCard", "nationalIdNumber", "passport", "proofOfAddress", "proofOfNationalIdNumber", "proofOfResidency", "registrationDocument", "vatDocument", "proofOfOrganizationTaxInfo", "proofOfIndustry", "constitutionalDocument", "proofOfFundingOrWealthSource"}
+	var allowedEnumValues = []string{"nationalIdNumber"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

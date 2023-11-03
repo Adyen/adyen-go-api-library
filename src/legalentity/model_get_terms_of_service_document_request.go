@@ -19,18 +19,20 @@ var _ common.MappedNullable = &GetTermsOfServiceDocumentRequest{}
 
 // GetTermsOfServiceDocumentRequest struct for GetTermsOfServiceDocumentRequest
 type GetTermsOfServiceDocumentRequest struct {
-	// The language to be used for the Terms of Service document, specified by the two letter [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code. For example, **nl** for Dutch.
-	Language *string `json:"language,omitempty"`
+	// The language to be used for the Terms of Service document, specified by the two-letter [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code. Possible value: **en** for English.
+	Language string `json:"language"`
 	// The type of Terms of Service.
-	Type *string `json:"type,omitempty"`
+	Type string `json:"type"`
 }
 
 // NewGetTermsOfServiceDocumentRequest instantiates a new GetTermsOfServiceDocumentRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetTermsOfServiceDocumentRequest() *GetTermsOfServiceDocumentRequest {
+func NewGetTermsOfServiceDocumentRequest(language string, type_ string) *GetTermsOfServiceDocumentRequest {
 	this := GetTermsOfServiceDocumentRequest{}
+	this.Language = language
+	this.Type = type_
 	return &this
 }
 
@@ -42,68 +44,52 @@ func NewGetTermsOfServiceDocumentRequestWithDefaults() *GetTermsOfServiceDocumen
 	return &this
 }
 
-// GetLanguage returns the Language field value if set, zero value otherwise.
+// GetLanguage returns the Language field value
 func (o *GetTermsOfServiceDocumentRequest) GetLanguage() string {
-	if o == nil || common.IsNil(o.Language) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Language
+
+	return o.Language
 }
 
-// GetLanguageOk returns a tuple with the Language field value if set, nil otherwise
+// GetLanguageOk returns a tuple with the Language field value
 // and a boolean to check if the value has been set.
 func (o *GetTermsOfServiceDocumentRequest) GetLanguageOk() (*string, bool) {
-	if o == nil || common.IsNil(o.Language) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Language, true
+	return &o.Language, true
 }
 
-// HasLanguage returns a boolean if a field has been set.
-func (o *GetTermsOfServiceDocumentRequest) HasLanguage() bool {
-	if o != nil && !common.IsNil(o.Language) {
-		return true
-	}
-
-	return false
-}
-
-// SetLanguage gets a reference to the given string and assigns it to the Language field.
+// SetLanguage sets field value
 func (o *GetTermsOfServiceDocumentRequest) SetLanguage(v string) {
-	o.Language = &v
+	o.Language = v
 }
 
-// GetType returns the Type field value if set, zero value otherwise.
+// GetType returns the Type field value
 func (o *GetTermsOfServiceDocumentRequest) GetType() string {
-	if o == nil || common.IsNil(o.Type) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Type
+
+	return o.Type
 }
 
-// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
 func (o *GetTermsOfServiceDocumentRequest) GetTypeOk() (*string, bool) {
-	if o == nil || common.IsNil(o.Type) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Type, true
+	return &o.Type, true
 }
 
-// HasType returns a boolean if a field has been set.
-func (o *GetTermsOfServiceDocumentRequest) HasType() bool {
-	if o != nil && !common.IsNil(o.Type) {
-		return true
-	}
-
-	return false
-}
-
-// SetType gets a reference to the given string and assigns it to the Type field.
+// SetType sets field value
 func (o *GetTermsOfServiceDocumentRequest) SetType(v string) {
-	o.Type = &v
+	o.Type = v
 }
 
 func (o GetTermsOfServiceDocumentRequest) MarshalJSON() ([]byte, error) {
@@ -116,12 +102,8 @@ func (o GetTermsOfServiceDocumentRequest) MarshalJSON() ([]byte, error) {
 
 func (o GetTermsOfServiceDocumentRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !common.IsNil(o.Language) {
-		toSerialize["language"] = o.Language
-	}
-	if !common.IsNil(o.Type) {
-		toSerialize["type"] = o.Type
-	}
+	toSerialize["language"] = o.Language
+	toSerialize["type"] = o.Type
 	return toSerialize, nil
 }
 

@@ -23,6 +23,8 @@ type BankAccountInfo struct {
 	// The type of bank account.
 	// Deprecated
 	AccountType *string `json:"accountType,omitempty"`
+	// The name of the banking institution where the bank account is held.
+	BankName *string `json:"bankName,omitempty"`
 	// The two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code where the bank account is registered. For example, **NL**.
 	CountryCode *string `json:"countryCode,omitempty"`
 	// Identifies if the bank account was created through [instant bank verification](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-08-hosted-onboarding).
@@ -113,6 +115,38 @@ func (o *BankAccountInfo) SetAccountType(v string) {
 	o.AccountType = &v
 }
 
+// GetBankName returns the BankName field value if set, zero value otherwise.
+func (o *BankAccountInfo) GetBankName() string {
+	if o == nil || common.IsNil(o.BankName) {
+		var ret string
+		return ret
+	}
+	return *o.BankName
+}
+
+// GetBankNameOk returns a tuple with the BankName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BankAccountInfo) GetBankNameOk() (*string, bool) {
+	if o == nil || common.IsNil(o.BankName) {
+		return nil, false
+	}
+	return o.BankName, true
+}
+
+// HasBankName returns a boolean if a field has been set.
+func (o *BankAccountInfo) HasBankName() bool {
+	if o != nil && !common.IsNil(o.BankName) {
+		return true
+	}
+
+	return false
+}
+
+// SetBankName gets a reference to the given string and assigns it to the BankName field.
+func (o *BankAccountInfo) SetBankName(v string) {
+	o.BankName = &v
+}
+
 // GetCountryCode returns the CountryCode field value if set, zero value otherwise.
 func (o *BankAccountInfo) GetCountryCode() string {
 	if o == nil || common.IsNil(o.CountryCode) {
@@ -192,6 +226,9 @@ func (o BankAccountInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.AccountType) {
 		toSerialize["accountType"] = o.AccountType
+	}
+	if !common.IsNil(o.BankName) {
+		toSerialize["bankName"] = o.BankName
 	}
 	if !common.IsNil(o.CountryCode) {
 		toSerialize["countryCode"] = o.CountryCode

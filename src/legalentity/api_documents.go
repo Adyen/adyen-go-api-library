@@ -112,8 +112,15 @@ func (a *DocumentsApi) GetDocument(ctx context.Context, r DocumentsApiGetDocumen
 
 // All parameters accepted by DocumentsApi.UpdateDocument
 type DocumentsApiUpdateDocumentInput struct {
-	id       string
-	document *Document
+	id                         string
+	xRequestedVerificationCode *string
+	document                   *Document
+}
+
+// Use the requested verification code 0_0001 to resolve any suberrors associated with the document. Requested verification codes can only be used in your test environment.
+func (r DocumentsApiUpdateDocumentInput) XRequestedVerificationCode(xRequestedVerificationCode string) DocumentsApiUpdateDocumentInput {
+	r.xRequestedVerificationCode = &xRequestedVerificationCode
+	return r
 }
 
 func (r DocumentsApiUpdateDocumentInput) Document(document Document) DocumentsApiUpdateDocumentInput {
@@ -137,6 +144,8 @@ UpdateDocument Update a document
 
 Updates a document.
 
+ >You can upload a maximum of 15 pages for photo IDs.
+
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r DocumentsApiUpdateDocumentInput - Request parameters, see UpdateDocumentInput
 @return Document, *http.Response, error
@@ -147,6 +156,9 @@ func (a *DocumentsApi) UpdateDocument(ctx context.Context, r DocumentsApiUpdateD
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
+	if r.xRequestedVerificationCode != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "x-requested-verification-code", r.xRequestedVerificationCode, "")
+	}
 	httpRes, err := common.SendAPIRequest(
 		ctx,
 		a.Client,
@@ -195,6 +207,8 @@ Uploads a document for verification checks.
  Adyen uses the information from the [legal entity](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/legalEntities) to run automated verification checks. If these checks fail, you will be notified to provide additional documents.
 
  You should only upload documents when Adyen requests additional information for the legal entity.
+
+ >You can upload a maximum of 15 pages for photo IDs.
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r DocumentsApiUploadDocumentForVerificationChecksInput - Request parameters, see UploadDocumentForVerificationChecksInput

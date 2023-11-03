@@ -19,7 +19,8 @@ var _ common.MappedNullable = &PaymentAmountUpdateRequest{}
 
 // PaymentAmountUpdateRequest struct for PaymentAmountUpdateRequest
 type PaymentAmountUpdateRequest struct {
-	Amount Amount `json:"amount"`
+	Amount          Amount           `json:"amount"`
+	ApplicationInfo *ApplicationInfo `json:"applicationInfo,omitempty"`
 	// The reason for the amount update. Possible values:  * **delayedCharge**  * **noShow**  * **installment**
 	IndustryUsage *string `json:"industryUsage,omitempty"`
 	// Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment). > This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Atome, Clearpay, Klarna, Ratepay, Walley, and Zip.
@@ -73,6 +74,38 @@ func (o *PaymentAmountUpdateRequest) GetAmountOk() (*Amount, bool) {
 // SetAmount sets field value
 func (o *PaymentAmountUpdateRequest) SetAmount(v Amount) {
 	o.Amount = v
+}
+
+// GetApplicationInfo returns the ApplicationInfo field value if set, zero value otherwise.
+func (o *PaymentAmountUpdateRequest) GetApplicationInfo() ApplicationInfo {
+	if o == nil || common.IsNil(o.ApplicationInfo) {
+		var ret ApplicationInfo
+		return ret
+	}
+	return *o.ApplicationInfo
+}
+
+// GetApplicationInfoOk returns a tuple with the ApplicationInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentAmountUpdateRequest) GetApplicationInfoOk() (*ApplicationInfo, bool) {
+	if o == nil || common.IsNil(o.ApplicationInfo) {
+		return nil, false
+	}
+	return o.ApplicationInfo, true
+}
+
+// HasApplicationInfo returns a boolean if a field has been set.
+func (o *PaymentAmountUpdateRequest) HasApplicationInfo() bool {
+	if o != nil && !common.IsNil(o.ApplicationInfo) {
+		return true
+	}
+
+	return false
+}
+
+// SetApplicationInfo gets a reference to the given ApplicationInfo and assigns it to the ApplicationInfo field.
+func (o *PaymentAmountUpdateRequest) SetApplicationInfo(v ApplicationInfo) {
+	o.ApplicationInfo = &v
 }
 
 // GetIndustryUsage returns the IndustryUsage field value if set, zero value otherwise.
@@ -238,6 +271,9 @@ func (o PaymentAmountUpdateRequest) MarshalJSON() ([]byte, error) {
 func (o PaymentAmountUpdateRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["amount"] = o.Amount
+	if !common.IsNil(o.ApplicationInfo) {
+		toSerialize["applicationInfo"] = o.ApplicationInfo
+	}
 	if !common.IsNil(o.IndustryUsage) {
 		toSerialize["industryUsage"] = o.IndustryUsage
 	}

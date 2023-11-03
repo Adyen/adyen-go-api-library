@@ -32,7 +32,7 @@ type LegalEntity struct {
 	Id           string        `json:"id"`
 	Individual   *Individual   `json:"individual,omitempty"`
 	Organization *Organization `json:"organization,omitempty"`
-	// List of the verification errors from capabilities for the legal entity.
+	// List of verification errors related to capabilities for the legal entity.
 	Problems []CapabilityProblem `json:"problems,omitempty"`
 	// Your reference for the legal entity, maximum 150 characters.
 	Reference          *string             `json:"reference,omitempty"`

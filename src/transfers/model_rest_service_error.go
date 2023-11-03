@@ -28,8 +28,9 @@ type RestServiceError struct {
 	// Detailed explanation of each validation error, when applicable.
 	InvalidFields []InvalidField `json:"invalidFields,omitempty"`
 	// A unique reference for the request, essentially the same as `pspReference`.
-	RequestId *string     `json:"requestId,omitempty"`
-	Response  *JSONObject `json:"response,omitempty"`
+	RequestId *string `json:"requestId,omitempty"`
+	// JSON response payload.
+	Response map[string]interface{} `json:"response,omitempty"`
 	// The HTTP status code.
 	Status int32 `json:"status"`
 	// A short, human-readable summary of the problem type.
@@ -205,19 +206,19 @@ func (o *RestServiceError) SetRequestId(v string) {
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *RestServiceError) GetResponse() JSONObject {
+func (o *RestServiceError) GetResponse() map[string]interface{} {
 	if o == nil || common.IsNil(o.Response) {
-		var ret JSONObject
+		var ret map[string]interface{}
 		return ret
 	}
-	return *o.Response
+	return o.Response
 }
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RestServiceError) GetResponseOk() (*JSONObject, bool) {
+func (o *RestServiceError) GetResponseOk() (map[string]interface{}, bool) {
 	if o == nil || common.IsNil(o.Response) {
-		return nil, false
+		return map[string]interface{}{}, false
 	}
 	return o.Response, true
 }
@@ -231,9 +232,9 @@ func (o *RestServiceError) HasResponse() bool {
 	return false
 }
 
-// SetResponse gets a reference to the given JSONObject and assigns it to the Response field.
-func (o *RestServiceError) SetResponse(v JSONObject) {
-	o.Response = &v
+// SetResponse gets a reference to the given map[string]interface{} and assigns it to the Response field.
+func (o *RestServiceError) SetResponse(v map[string]interface{}) {
+	o.Response = v
 }
 
 // GetStatus returns the Status field value
