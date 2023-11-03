@@ -1,4 +1,4 @@
-package tests
+package balanceplatform
 
 import (
 	"testing"
@@ -9,8 +9,7 @@ import (
 	"github.com/adyen/adyen-go-api-library/v8/src/configurationwebhook"
 )
 
-func Test_BalancePlatform_Configuration_Webhooks_HandleRequest(t *testing.T) {
-
+func TestHandleAccountHolderNotificationRequest(t *testing.T) {
 	t.Run("should return accountHolder created success", func(t *testing.T) {
 		notificationJson := `{
 			"data": {

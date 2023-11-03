@@ -1,4 +1,4 @@
-package tests
+package balanceplatform
 
 import (
 	"github.com/adyen/adyen-go-api-library/v8/src/acswebhook"
@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func Test_BalancePlatform_Acs_Webhooks_HandleRequest(t *testing.T) {
+func TestHandleAuthenticationNotificationRequest(t *testing.T) {
 	t.Run("on balancePlatform.authentication.created", func(t *testing.T) {
 		notificationJson := `{
           "data": {

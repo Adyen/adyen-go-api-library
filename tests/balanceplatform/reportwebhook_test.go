@@ -1,4 +1,4 @@
-package tests
+package balanceplatform
 
 import (
 	"testing"
@@ -8,8 +8,7 @@ import (
 	"github.com/adyen/adyen-go-api-library/v8/src/reportwebhook"
 )
 
-func Test_BalancePlatform_Report_Webhooks_HandleRequest(t *testing.T) {
-
+func TestHandleReportNotificationRequest(t *testing.T) {
 	t.Run("should return report created success", func(t *testing.T) {
 		notificationJson := `{
 			"data": {

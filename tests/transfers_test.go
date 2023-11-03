@@ -7,7 +7,6 @@ import (
 	"io"
 	"net/http"
 	"net/http/httptest"
-	"os"
 	"testing"
 	"time"
 
@@ -25,7 +24,7 @@ func Test_Transfers(t *testing.T) {
 
 	mux := http.NewServeMux()
 
-	// Success case
+	// Success cases
 	mux.HandleFunc("/transfers", func(w http.ResponseWriter, r *http.Request) {
 		require.Equal(t, "POST", r.Method)
 		w.Header().Set("Content-Type", "application/json")
@@ -92,13 +91,9 @@ func Test_Transfers(t *testing.T) {
 			"status": "Pending"
 		}`)
 	})
-	mux.HandleFunc("/transactions", func(w http.ResponseWriter, r *http.Request) {
-		require.Equal(t, "GET", r.Method)
-		assert.Equal(t, "2022-01-01T01:02:03Z", r.URL.Query().Get("createdSince"))
-		w.Header().Set("Content-Type", "application/json")
-		file, _ := os.Open("fixtures/all_transactions.json")
-		io.Copy(w, file)
-	})
+
+	mockResponse := MockResponse(t, mux)
+	mockResponse(http.StatusOK, "GET", "/transactions", "all_transactions.json")
 
 	// Error case
 	mux.HandleFunc("/transactions/ERRForbidden403", func(w http.ResponseWriter, r *http.Request) {

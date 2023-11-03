@@ -1,3 +1,6 @@
+//go:build integration
+// +build integration
+
 package management
 
 import (
@@ -14,10 +17,6 @@ import (
 
 func Test_ManagementAPI_Integration(t *testing.T) {
 	godotenv.Load("./../../.env")
-
-	if os.Getenv("ADYEN_API_KEY") == "" {
-		t.Skip("Integration tests require credentials")
-	}
 
 	client := adyen.NewClient(&common.Config{
 		ApiKey:      os.Getenv("ADYEN_API_KEY"),

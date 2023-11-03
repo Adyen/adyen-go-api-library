@@ -1,4 +1,4 @@
-package tests
+package balanceplatform
 
 import (
 	"context"
@@ -6,6 +6,7 @@ import (
 	"github.com/adyen/adyen-go-api-library/v8/src/adyen"
 	"github.com/adyen/adyen-go-api-library/v8/src/balanceplatform"
 	"github.com/adyen/adyen-go-api-library/v8/src/common"
+	"github.com/adyen/adyen-go-api-library/v8/tests"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"io"
@@ -15,7 +16,7 @@ import (
 	"testing"
 )
 
-func Test_BalancePlatform(t *testing.T) {
+func TestBalancePlatform(t *testing.T) {
 	client := adyen.NewClient(&common.Config{
 		ApiKey:      "YOUR_ADYEN_API_KEY",
 		Environment: "TEST",
@@ -24,19 +25,16 @@ func Test_BalancePlatform(t *testing.T) {
 	service := client.BalancePlatform()
 
 	mux := http.NewServeMux()
-	// Success case
-	mux.HandleFunc("/accountHolders/123", func(w http.ResponseWriter, r *http.Request) {
-		assert.Contains(t, [2]string{"GET", "PATCH"}, r.Method)
-		w.Header().Set("Content-Type", "application/json")
-		file, _ := os.Open("fixtures/account_holder.json")
-		io.Copy(w, file)
-	})
+	mockResponse := tests.MockResponse(t, mux)
+
+	// Success cases
+	mockResponse(http.StatusOK, "GET PATCH", "/accountHolders/123", "account_holder.json")
 	mux.HandleFunc("/accountHolders/123/balanceAccounts", func(w http.ResponseWriter, r *http.Request) {
 		require.Equal(t, "GET", r.Method)
 		assert.Equal(t, "5", r.URL.Query().Get("limit"))
 		assert.Equal(t, "42", r.URL.Query().Get("offset"))
 		w.Header().Set("Content-Type", "application/json")
-		file, _ := os.Open("fixtures/paginated_balance_accounts_response.json")
+		file, _ := os.Open("../fixtures/paginated_balance_accounts_response.json")
 		io.Copy(w, file)
 	})
 	mux.HandleFunc("/balanceAccounts/balanceAccountId/sweeps/sweepId", func(w http.ResponseWriter, r *http.Request) {
@@ -48,26 +46,11 @@ func Test_BalancePlatform(t *testing.T) {
 		require.Equal(t, "POST", r.Method)
 		// no response
 	})
-	mux.HandleFunc("/balanceAccounts/BA123/sweeps/SWPC123", func(w http.ResponseWriter, r *http.Request) {
-		assert.Contains(t, [2]string{"GET", "PATCH"}, r.Method)
-		w.Header().Set("Content-Type", "application/json")
-		file, _ := os.Open("fixtures/sweep.json")
-		io.Copy(w, file)
-	})
-	mux.HandleFunc("/transactionRules/transactionRuleId", func(w http.ResponseWriter, r *http.Request) {
-		require.Equal(t, "DELETE", r.Method)
-		w.Header().Set("Content-Type", "application/json")
-		file, _ := os.Open("fixtures/transaction_rule.json")
-		io.Copy(w, file)
-	})
+	mockResponse(http.StatusOK, "GET PATCH", "/balanceAccounts/BA123/sweeps/SWPC123", "sweep.json")
+	mockResponse(http.StatusOK, "DELETE", "/transactionRules/transactionRuleId", "transaction_rule.json")
+
 	// Error case
-	mux.HandleFunc("/paymentInstruments/666", func(w http.ResponseWriter, r *http.Request) {
-		require.Equal(t, "PATCH", r.Method)
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusUnprocessableEntity)
-		file, _ := os.Open("fixtures/not_found.json")
-		io.Copy(w, file)
-	})
+	mockResponse(http.StatusUnprocessableEntity, "PATCH", "/paymentInstruments/666", "not_found.json")
 
 	mockServer := httptest.NewServer(mux)
 	defer mockServer.Close()
