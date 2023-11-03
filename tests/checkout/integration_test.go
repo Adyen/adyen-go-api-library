@@ -9,6 +9,7 @@ import (
 	"github.com/adyen/adyen-go-api-library/v8/src/adyen"
 	"github.com/adyen/adyen-go-api-library/v8/src/checkout"
 	"github.com/adyen/adyen-go-api-library/v8/src/common"
+	"github.com/google/uuid"
 	"io/ioutil"
 	"os"
 	"strings"
@@ -92,7 +93,7 @@ func TestCheckoutIntegration(t *testing.T) {
 		})
 
 		t.Run("iDEAL payment", func(t *testing.T) {
-			idempotencyKey := "b9c3947f-b282-4059-a645-56ddbbd2fef3"
+			idempotencyKey := uuid.New().String()
 			ctx := common.WithIdempotencyKey(context.Background(), idempotencyKey)
 			ideal := checkout.NewIdealDetails("1121")
 			paymentRequest := *checkout.NewPaymentRequest(
@@ -253,7 +254,7 @@ func TestCheckoutIntegration(t *testing.T) {
 			// verify ServiceError2 includes PspReference
 			require.NotNil(t, err.(common.APIError).RawBody)
 
-			var serviceError checkout.ServiceError2
+			var serviceError checkout.ServiceError
 			json.Unmarshal(err.(common.APIError).RawBody, &serviceError)
 			require.NotNil(t, serviceError)
 			require.NotNil(t, serviceError.PspReference)
