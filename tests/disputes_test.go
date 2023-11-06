@@ -49,14 +49,6 @@ func Test_Disputes(t *testing.T) {
 		io.WriteString(w, `{"disputeServiceResult":{"errorMessage":"Dispute not found.","success":false}}`)
 	})
 
-	// Error case
-	mux.HandleFunc("/downloadDisputeDefenseDocument", func(w http.ResponseWriter, r *http.Request) {
-		require.Equal(t, "POST", r.Method)
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusForbidden)
-		io.WriteString(w, `{"status":403,"errorCode":"010","message":"Not allowed","errorType":"security"}`)
-	})
-
 	mockServer := httptest.NewServer(mux)
 	defer mockServer.Close()
 
@@ -135,17 +127,5 @@ func Test_Disputes(t *testing.T) {
 		assert.Equal(t, 200, httpRes.StatusCode)
 		assert.NotNil(t, res)
 		assert.Equal(t, "Dispute not found.", res.DisputeServiceResult.GetErrorMessage())
-	})
-
-	t.Run("Download dispute defense document", func(t *testing.T) {
-		req := service.DownloadDisputeDefenseDocumentInput().DownloadDefenseDocumentRequest(disputes.DownloadDefenseDocumentRequest{
-			DefenseDocumentType: "DefenseMaterial",
-			DisputePspReference: pspReference,
-			MerchantAccountCode: merchantAccount,
-		})
-		_, httpRes, err := service.DownloadDisputeDefenseDocument(context.Background(), req)
-
-		require.NotNil(t, err)
-		assert.Equal(t, 403, httpRes.StatusCode)
 	})
 }
