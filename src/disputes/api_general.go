@@ -160,53 +160,6 @@ func (a *GeneralApi) DeleteDisputeDefenseDocument(ctx context.Context, r General
 	return *res, httpRes, err
 }
 
-// All parameters accepted by GeneralApi.DownloadDisputeDefenseDocument
-type GeneralApiDownloadDisputeDefenseDocumentInput struct {
-	downloadDefenseDocumentRequest *DownloadDefenseDocumentRequest
-}
-
-func (r GeneralApiDownloadDisputeDefenseDocumentInput) DownloadDefenseDocumentRequest(downloadDefenseDocumentRequest DownloadDefenseDocumentRequest) GeneralApiDownloadDisputeDefenseDocumentInput {
-	r.downloadDefenseDocumentRequest = &downloadDefenseDocumentRequest
-	return r
-}
-
-/*
-Prepare a request for DownloadDisputeDefenseDocument
-
-@return GeneralApiDownloadDisputeDefenseDocumentInput
-*/
-func (a *GeneralApi) DownloadDisputeDefenseDocumentInput() GeneralApiDownloadDisputeDefenseDocumentInput {
-	return GeneralApiDownloadDisputeDefenseDocumentInput{}
-}
-
-/*
-DownloadDisputeDefenseDocument Download a defense document
-
-Downloads a specific dispute defense document that was supplied earlier.
-
-@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@param r GeneralApiDownloadDisputeDefenseDocumentInput - Request parameters, see DownloadDisputeDefenseDocumentInput
-@return DownloadDefenseDocumentResponse, *http.Response, error
-*/
-func (a *GeneralApi) DownloadDisputeDefenseDocument(ctx context.Context, r GeneralApiDownloadDisputeDefenseDocumentInput) (DownloadDefenseDocumentResponse, *http.Response, error) {
-	res := &DownloadDefenseDocumentResponse{}
-	path := "/downloadDisputeDefenseDocument"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.downloadDefenseDocumentRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
-
-	return *res, httpRes, err
-}
-
 // All parameters accepted by GeneralApi.RetrieveApplicableDefenseReasons
 type GeneralApiRetrieveApplicableDefenseReasonsInput struct {
 	defenseReasonsRequest *DefenseReasonsRequest

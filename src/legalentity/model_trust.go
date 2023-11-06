@@ -14,11 +14,11 @@ import (
 	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
-// checks if the SoleProprietorship type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &SoleProprietorship{}
+// checks if the Trust type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &Trust{}
 
-// SoleProprietorship struct for SoleProprietorship
-type SoleProprietorship struct {
+// Trust struct for Trust
+type Trust struct {
 	// The two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code of the governing country.
 	CountryOfGoverningLaw string `json:"countryOfGoverningLaw"`
 	// The date when the legal arrangement was incorporated in YYYY-MM-DD format.
@@ -33,34 +33,39 @@ type SoleProprietorship struct {
 	RegistrationNumber *string `json:"registrationNumber,omitempty"`
 	// The tax information of the entity.
 	TaxInformation []TaxInformation `json:"taxInformation,omitempty"`
+	// Type of trust.  Possible values for Australian trusts: **cashManagementTrust**, **corporateUnitTrust**, **deceasedEstate**, **discretionaryInvestmentTrust**, **discretionaryServicesManagementTrust**, **discretionaryTradingTrust**, **firstHomeSaverAccountsTrust**, **fixedTrust**, **fixedUnitTrust**, **hybridTrust**, **listedPublicUnitTrust**, **otherTrust**, **pooledSuperannuationTrust**, **publicTradingTrust**, **unlistedPublicUnitTrust**.
+	Type string `json:"type"`
+	// The undefined beneficiary information of the entity.
+	UndefinedBeneficiaryInfo []UndefinedBeneficiary `json:"undefinedBeneficiaryInfo,omitempty"`
 	// The reason for not providing a VAT number.  Possible values: **industryExemption**, **belowTaxThreshold**.
 	VatAbsenceReason *string `json:"vatAbsenceReason,omitempty"`
 	// The VAT number.
 	VatNumber *string `json:"vatNumber,omitempty"`
 }
 
-// NewSoleProprietorship instantiates a new SoleProprietorship object
+// NewTrust instantiates a new Trust object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSoleProprietorship(countryOfGoverningLaw string, name string, registeredAddress Address) *SoleProprietorship {
-	this := SoleProprietorship{}
+func NewTrust(countryOfGoverningLaw string, name string, registeredAddress Address, type_ string) *Trust {
+	this := Trust{}
 	this.CountryOfGoverningLaw = countryOfGoverningLaw
 	this.Name = name
 	this.RegisteredAddress = registeredAddress
+	this.Type = type_
 	return &this
 }
 
-// NewSoleProprietorshipWithDefaults instantiates a new SoleProprietorship object
+// NewTrustWithDefaults instantiates a new Trust object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewSoleProprietorshipWithDefaults() *SoleProprietorship {
-	this := SoleProprietorship{}
+func NewTrustWithDefaults() *Trust {
+	this := Trust{}
 	return &this
 }
 
 // GetCountryOfGoverningLaw returns the CountryOfGoverningLaw field value
-func (o *SoleProprietorship) GetCountryOfGoverningLaw() string {
+func (o *Trust) GetCountryOfGoverningLaw() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -71,7 +76,7 @@ func (o *SoleProprietorship) GetCountryOfGoverningLaw() string {
 
 // GetCountryOfGoverningLawOk returns a tuple with the CountryOfGoverningLaw field value
 // and a boolean to check if the value has been set.
-func (o *SoleProprietorship) GetCountryOfGoverningLawOk() (*string, bool) {
+func (o *Trust) GetCountryOfGoverningLawOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -79,12 +84,12 @@ func (o *SoleProprietorship) GetCountryOfGoverningLawOk() (*string, bool) {
 }
 
 // SetCountryOfGoverningLaw sets field value
-func (o *SoleProprietorship) SetCountryOfGoverningLaw(v string) {
+func (o *Trust) SetCountryOfGoverningLaw(v string) {
 	o.CountryOfGoverningLaw = v
 }
 
 // GetDateOfIncorporation returns the DateOfIncorporation field value if set, zero value otherwise.
-func (o *SoleProprietorship) GetDateOfIncorporation() string {
+func (o *Trust) GetDateOfIncorporation() string {
 	if o == nil || common.IsNil(o.DateOfIncorporation) {
 		var ret string
 		return ret
@@ -94,7 +99,7 @@ func (o *SoleProprietorship) GetDateOfIncorporation() string {
 
 // GetDateOfIncorporationOk returns a tuple with the DateOfIncorporation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SoleProprietorship) GetDateOfIncorporationOk() (*string, bool) {
+func (o *Trust) GetDateOfIncorporationOk() (*string, bool) {
 	if o == nil || common.IsNil(o.DateOfIncorporation) {
 		return nil, false
 	}
@@ -102,7 +107,7 @@ func (o *SoleProprietorship) GetDateOfIncorporationOk() (*string, bool) {
 }
 
 // HasDateOfIncorporation returns a boolean if a field has been set.
-func (o *SoleProprietorship) HasDateOfIncorporation() bool {
+func (o *Trust) HasDateOfIncorporation() bool {
 	if o != nil && !common.IsNil(o.DateOfIncorporation) {
 		return true
 	}
@@ -111,12 +116,12 @@ func (o *SoleProprietorship) HasDateOfIncorporation() bool {
 }
 
 // SetDateOfIncorporation gets a reference to the given string and assigns it to the DateOfIncorporation field.
-func (o *SoleProprietorship) SetDateOfIncorporation(v string) {
+func (o *Trust) SetDateOfIncorporation(v string) {
 	o.DateOfIncorporation = &v
 }
 
 // GetDoingBusinessAs returns the DoingBusinessAs field value if set, zero value otherwise.
-func (o *SoleProprietorship) GetDoingBusinessAs() string {
+func (o *Trust) GetDoingBusinessAs() string {
 	if o == nil || common.IsNil(o.DoingBusinessAs) {
 		var ret string
 		return ret
@@ -126,7 +131,7 @@ func (o *SoleProprietorship) GetDoingBusinessAs() string {
 
 // GetDoingBusinessAsOk returns a tuple with the DoingBusinessAs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SoleProprietorship) GetDoingBusinessAsOk() (*string, bool) {
+func (o *Trust) GetDoingBusinessAsOk() (*string, bool) {
 	if o == nil || common.IsNil(o.DoingBusinessAs) {
 		return nil, false
 	}
@@ -134,7 +139,7 @@ func (o *SoleProprietorship) GetDoingBusinessAsOk() (*string, bool) {
 }
 
 // HasDoingBusinessAs returns a boolean if a field has been set.
-func (o *SoleProprietorship) HasDoingBusinessAs() bool {
+func (o *Trust) HasDoingBusinessAs() bool {
 	if o != nil && !common.IsNil(o.DoingBusinessAs) {
 		return true
 	}
@@ -143,12 +148,12 @@ func (o *SoleProprietorship) HasDoingBusinessAs() bool {
 }
 
 // SetDoingBusinessAs gets a reference to the given string and assigns it to the DoingBusinessAs field.
-func (o *SoleProprietorship) SetDoingBusinessAs(v string) {
+func (o *Trust) SetDoingBusinessAs(v string) {
 	o.DoingBusinessAs = &v
 }
 
 // GetName returns the Name field value
-func (o *SoleProprietorship) GetName() string {
+func (o *Trust) GetName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -159,7 +164,7 @@ func (o *SoleProprietorship) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *SoleProprietorship) GetNameOk() (*string, bool) {
+func (o *Trust) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -167,12 +172,12 @@ func (o *SoleProprietorship) GetNameOk() (*string, bool) {
 }
 
 // SetName sets field value
-func (o *SoleProprietorship) SetName(v string) {
+func (o *Trust) SetName(v string) {
 	o.Name = v
 }
 
 // GetPrincipalPlaceOfBusiness returns the PrincipalPlaceOfBusiness field value if set, zero value otherwise.
-func (o *SoleProprietorship) GetPrincipalPlaceOfBusiness() Address {
+func (o *Trust) GetPrincipalPlaceOfBusiness() Address {
 	if o == nil || common.IsNil(o.PrincipalPlaceOfBusiness) {
 		var ret Address
 		return ret
@@ -182,7 +187,7 @@ func (o *SoleProprietorship) GetPrincipalPlaceOfBusiness() Address {
 
 // GetPrincipalPlaceOfBusinessOk returns a tuple with the PrincipalPlaceOfBusiness field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SoleProprietorship) GetPrincipalPlaceOfBusinessOk() (*Address, bool) {
+func (o *Trust) GetPrincipalPlaceOfBusinessOk() (*Address, bool) {
 	if o == nil || common.IsNil(o.PrincipalPlaceOfBusiness) {
 		return nil, false
 	}
@@ -190,7 +195,7 @@ func (o *SoleProprietorship) GetPrincipalPlaceOfBusinessOk() (*Address, bool) {
 }
 
 // HasPrincipalPlaceOfBusiness returns a boolean if a field has been set.
-func (o *SoleProprietorship) HasPrincipalPlaceOfBusiness() bool {
+func (o *Trust) HasPrincipalPlaceOfBusiness() bool {
 	if o != nil && !common.IsNil(o.PrincipalPlaceOfBusiness) {
 		return true
 	}
@@ -199,12 +204,12 @@ func (o *SoleProprietorship) HasPrincipalPlaceOfBusiness() bool {
 }
 
 // SetPrincipalPlaceOfBusiness gets a reference to the given Address and assigns it to the PrincipalPlaceOfBusiness field.
-func (o *SoleProprietorship) SetPrincipalPlaceOfBusiness(v Address) {
+func (o *Trust) SetPrincipalPlaceOfBusiness(v Address) {
 	o.PrincipalPlaceOfBusiness = &v
 }
 
 // GetRegisteredAddress returns the RegisteredAddress field value
-func (o *SoleProprietorship) GetRegisteredAddress() Address {
+func (o *Trust) GetRegisteredAddress() Address {
 	if o == nil {
 		var ret Address
 		return ret
@@ -215,7 +220,7 @@ func (o *SoleProprietorship) GetRegisteredAddress() Address {
 
 // GetRegisteredAddressOk returns a tuple with the RegisteredAddress field value
 // and a boolean to check if the value has been set.
-func (o *SoleProprietorship) GetRegisteredAddressOk() (*Address, bool) {
+func (o *Trust) GetRegisteredAddressOk() (*Address, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -223,12 +228,12 @@ func (o *SoleProprietorship) GetRegisteredAddressOk() (*Address, bool) {
 }
 
 // SetRegisteredAddress sets field value
-func (o *SoleProprietorship) SetRegisteredAddress(v Address) {
+func (o *Trust) SetRegisteredAddress(v Address) {
 	o.RegisteredAddress = v
 }
 
 // GetRegistrationNumber returns the RegistrationNumber field value if set, zero value otherwise.
-func (o *SoleProprietorship) GetRegistrationNumber() string {
+func (o *Trust) GetRegistrationNumber() string {
 	if o == nil || common.IsNil(o.RegistrationNumber) {
 		var ret string
 		return ret
@@ -238,7 +243,7 @@ func (o *SoleProprietorship) GetRegistrationNumber() string {
 
 // GetRegistrationNumberOk returns a tuple with the RegistrationNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SoleProprietorship) GetRegistrationNumberOk() (*string, bool) {
+func (o *Trust) GetRegistrationNumberOk() (*string, bool) {
 	if o == nil || common.IsNil(o.RegistrationNumber) {
 		return nil, false
 	}
@@ -246,7 +251,7 @@ func (o *SoleProprietorship) GetRegistrationNumberOk() (*string, bool) {
 }
 
 // HasRegistrationNumber returns a boolean if a field has been set.
-func (o *SoleProprietorship) HasRegistrationNumber() bool {
+func (o *Trust) HasRegistrationNumber() bool {
 	if o != nil && !common.IsNil(o.RegistrationNumber) {
 		return true
 	}
@@ -255,12 +260,12 @@ func (o *SoleProprietorship) HasRegistrationNumber() bool {
 }
 
 // SetRegistrationNumber gets a reference to the given string and assigns it to the RegistrationNumber field.
-func (o *SoleProprietorship) SetRegistrationNumber(v string) {
+func (o *Trust) SetRegistrationNumber(v string) {
 	o.RegistrationNumber = &v
 }
 
 // GetTaxInformation returns the TaxInformation field value if set, zero value otherwise.
-func (o *SoleProprietorship) GetTaxInformation() []TaxInformation {
+func (o *Trust) GetTaxInformation() []TaxInformation {
 	if o == nil || common.IsNil(o.TaxInformation) {
 		var ret []TaxInformation
 		return ret
@@ -270,7 +275,7 @@ func (o *SoleProprietorship) GetTaxInformation() []TaxInformation {
 
 // GetTaxInformationOk returns a tuple with the TaxInformation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SoleProprietorship) GetTaxInformationOk() ([]TaxInformation, bool) {
+func (o *Trust) GetTaxInformationOk() ([]TaxInformation, bool) {
 	if o == nil || common.IsNil(o.TaxInformation) {
 		return nil, false
 	}
@@ -278,7 +283,7 @@ func (o *SoleProprietorship) GetTaxInformationOk() ([]TaxInformation, bool) {
 }
 
 // HasTaxInformation returns a boolean if a field has been set.
-func (o *SoleProprietorship) HasTaxInformation() bool {
+func (o *Trust) HasTaxInformation() bool {
 	if o != nil && !common.IsNil(o.TaxInformation) {
 		return true
 	}
@@ -287,12 +292,68 @@ func (o *SoleProprietorship) HasTaxInformation() bool {
 }
 
 // SetTaxInformation gets a reference to the given []TaxInformation and assigns it to the TaxInformation field.
-func (o *SoleProprietorship) SetTaxInformation(v []TaxInformation) {
+func (o *Trust) SetTaxInformation(v []TaxInformation) {
 	o.TaxInformation = v
 }
 
+// GetType returns the Type field value
+func (o *Trust) GetType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value
+// and a boolean to check if the value has been set.
+func (o *Trust) GetTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Type, true
+}
+
+// SetType sets field value
+func (o *Trust) SetType(v string) {
+	o.Type = v
+}
+
+// GetUndefinedBeneficiaryInfo returns the UndefinedBeneficiaryInfo field value if set, zero value otherwise.
+func (o *Trust) GetUndefinedBeneficiaryInfo() []UndefinedBeneficiary {
+	if o == nil || common.IsNil(o.UndefinedBeneficiaryInfo) {
+		var ret []UndefinedBeneficiary
+		return ret
+	}
+	return o.UndefinedBeneficiaryInfo
+}
+
+// GetUndefinedBeneficiaryInfoOk returns a tuple with the UndefinedBeneficiaryInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Trust) GetUndefinedBeneficiaryInfoOk() ([]UndefinedBeneficiary, bool) {
+	if o == nil || common.IsNil(o.UndefinedBeneficiaryInfo) {
+		return nil, false
+	}
+	return o.UndefinedBeneficiaryInfo, true
+}
+
+// HasUndefinedBeneficiaryInfo returns a boolean if a field has been set.
+func (o *Trust) HasUndefinedBeneficiaryInfo() bool {
+	if o != nil && !common.IsNil(o.UndefinedBeneficiaryInfo) {
+		return true
+	}
+
+	return false
+}
+
+// SetUndefinedBeneficiaryInfo gets a reference to the given []UndefinedBeneficiary and assigns it to the UndefinedBeneficiaryInfo field.
+func (o *Trust) SetUndefinedBeneficiaryInfo(v []UndefinedBeneficiary) {
+	o.UndefinedBeneficiaryInfo = v
+}
+
 // GetVatAbsenceReason returns the VatAbsenceReason field value if set, zero value otherwise.
-func (o *SoleProprietorship) GetVatAbsenceReason() string {
+func (o *Trust) GetVatAbsenceReason() string {
 	if o == nil || common.IsNil(o.VatAbsenceReason) {
 		var ret string
 		return ret
@@ -302,7 +363,7 @@ func (o *SoleProprietorship) GetVatAbsenceReason() string {
 
 // GetVatAbsenceReasonOk returns a tuple with the VatAbsenceReason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SoleProprietorship) GetVatAbsenceReasonOk() (*string, bool) {
+func (o *Trust) GetVatAbsenceReasonOk() (*string, bool) {
 	if o == nil || common.IsNil(o.VatAbsenceReason) {
 		return nil, false
 	}
@@ -310,7 +371,7 @@ func (o *SoleProprietorship) GetVatAbsenceReasonOk() (*string, bool) {
 }
 
 // HasVatAbsenceReason returns a boolean if a field has been set.
-func (o *SoleProprietorship) HasVatAbsenceReason() bool {
+func (o *Trust) HasVatAbsenceReason() bool {
 	if o != nil && !common.IsNil(o.VatAbsenceReason) {
 		return true
 	}
@@ -319,12 +380,12 @@ func (o *SoleProprietorship) HasVatAbsenceReason() bool {
 }
 
 // SetVatAbsenceReason gets a reference to the given string and assigns it to the VatAbsenceReason field.
-func (o *SoleProprietorship) SetVatAbsenceReason(v string) {
+func (o *Trust) SetVatAbsenceReason(v string) {
 	o.VatAbsenceReason = &v
 }
 
 // GetVatNumber returns the VatNumber field value if set, zero value otherwise.
-func (o *SoleProprietorship) GetVatNumber() string {
+func (o *Trust) GetVatNumber() string {
 	if o == nil || common.IsNil(o.VatNumber) {
 		var ret string
 		return ret
@@ -334,7 +395,7 @@ func (o *SoleProprietorship) GetVatNumber() string {
 
 // GetVatNumberOk returns a tuple with the VatNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SoleProprietorship) GetVatNumberOk() (*string, bool) {
+func (o *Trust) GetVatNumberOk() (*string, bool) {
 	if o == nil || common.IsNil(o.VatNumber) {
 		return nil, false
 	}
@@ -342,7 +403,7 @@ func (o *SoleProprietorship) GetVatNumberOk() (*string, bool) {
 }
 
 // HasVatNumber returns a boolean if a field has been set.
-func (o *SoleProprietorship) HasVatNumber() bool {
+func (o *Trust) HasVatNumber() bool {
 	if o != nil && !common.IsNil(o.VatNumber) {
 		return true
 	}
@@ -351,11 +412,11 @@ func (o *SoleProprietorship) HasVatNumber() bool {
 }
 
 // SetVatNumber gets a reference to the given string and assigns it to the VatNumber field.
-func (o *SoleProprietorship) SetVatNumber(v string) {
+func (o *Trust) SetVatNumber(v string) {
 	o.VatNumber = &v
 }
 
-func (o SoleProprietorship) MarshalJSON() ([]byte, error) {
+func (o Trust) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -363,7 +424,7 @@ func (o SoleProprietorship) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SoleProprietorship) ToMap() (map[string]interface{}, error) {
+func (o Trust) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["countryOfGoverningLaw"] = o.CountryOfGoverningLaw
 	if !common.IsNil(o.DateOfIncorporation) {
@@ -383,6 +444,10 @@ func (o SoleProprietorship) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.TaxInformation) {
 		toSerialize["taxInformation"] = o.TaxInformation
 	}
+	toSerialize["type"] = o.Type
+	if !common.IsNil(o.UndefinedBeneficiaryInfo) {
+		toSerialize["undefinedBeneficiaryInfo"] = o.UndefinedBeneficiaryInfo
+	}
 	if !common.IsNil(o.VatAbsenceReason) {
 		toSerialize["vatAbsenceReason"] = o.VatAbsenceReason
 	}
@@ -392,43 +457,52 @@ func (o SoleProprietorship) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableSoleProprietorship struct {
-	value *SoleProprietorship
+type NullableTrust struct {
+	value *Trust
 	isSet bool
 }
 
-func (v NullableSoleProprietorship) Get() *SoleProprietorship {
+func (v NullableTrust) Get() *Trust {
 	return v.value
 }
 
-func (v *NullableSoleProprietorship) Set(val *SoleProprietorship) {
+func (v *NullableTrust) Set(val *Trust) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableSoleProprietorship) IsSet() bool {
+func (v NullableTrust) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableSoleProprietorship) Unset() {
+func (v *NullableTrust) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableSoleProprietorship(val *SoleProprietorship) *NullableSoleProprietorship {
-	return &NullableSoleProprietorship{value: val, isSet: true}
+func NewNullableTrust(val *Trust) *NullableTrust {
+	return &NullableTrust{value: val, isSet: true}
 }
 
-func (v NullableSoleProprietorship) MarshalJSON() ([]byte, error) {
+func (v NullableTrust) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableSoleProprietorship) UnmarshalJSON(src []byte) error {
+func (v *NullableTrust) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
 
-func (o *SoleProprietorship) isValidVatAbsenceReason() bool {
+func (o *Trust) isValidType() bool {
+	var allowedEnumValues = []string{"cashManagementTrust", "corporateUnitTrust", "deceasedEstate", "discretionaryInvestmentTrust", "discretionaryServicesManagementTrust", "discretionaryTradingTrust", "firstHomeSaverAccountsTrust", "fixedTrust", "fixedUnitTrust", "hybridTrust", "listedPublicUnitTrust", "otherTrust", "pooledSuperannuationTrust", "publicTradingTrust", "unlistedPublicUnitTrust"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *Trust) isValidVatAbsenceReason() bool {
 	var allowedEnumValues = []string{"industryExemption", "belowTaxThreshold"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetVatAbsenceReason() == allowed {

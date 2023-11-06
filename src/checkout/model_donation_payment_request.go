@@ -141,8 +141,8 @@ type DonationPaymentRequest struct {
 	// When true and `shopperReference` is provided, the payment details will be stored.
 	StorePaymentMethod *bool `json:"storePaymentMethod,omitempty"`
 	// The shopper's telephone number.
-	TelephoneNumber     *string               `json:"telephoneNumber,omitempty"`
-	ThreeDS2RequestData *ThreeDS2RequestData2 `json:"threeDS2RequestData,omitempty"`
+	TelephoneNumber     *string                `json:"telephoneNumber,omitempty"`
+	ThreeDS2RequestData *ThreeDS2RequestFields `json:"threeDS2RequestData,omitempty"`
 	// If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only), and not the payment authorisation.
 	// Deprecated
 	ThreeDSAuthenticationOnly *bool `json:"threeDSAuthenticationOnly,omitempty"`
@@ -2405,9 +2405,9 @@ func (o *DonationPaymentRequest) SetTelephoneNumber(v string) {
 }
 
 // GetThreeDS2RequestData returns the ThreeDS2RequestData field value if set, zero value otherwise.
-func (o *DonationPaymentRequest) GetThreeDS2RequestData() ThreeDS2RequestData2 {
+func (o *DonationPaymentRequest) GetThreeDS2RequestData() ThreeDS2RequestFields {
 	if o == nil || common.IsNil(o.ThreeDS2RequestData) {
-		var ret ThreeDS2RequestData2
+		var ret ThreeDS2RequestFields
 		return ret
 	}
 	return *o.ThreeDS2RequestData
@@ -2415,7 +2415,7 @@ func (o *DonationPaymentRequest) GetThreeDS2RequestData() ThreeDS2RequestData2 {
 
 // GetThreeDS2RequestDataOk returns a tuple with the ThreeDS2RequestData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DonationPaymentRequest) GetThreeDS2RequestDataOk() (*ThreeDS2RequestData2, bool) {
+func (o *DonationPaymentRequest) GetThreeDS2RequestDataOk() (*ThreeDS2RequestFields, bool) {
 	if o == nil || common.IsNil(o.ThreeDS2RequestData) {
 		return nil, false
 	}
@@ -2431,8 +2431,8 @@ func (o *DonationPaymentRequest) HasThreeDS2RequestData() bool {
 	return false
 }
 
-// SetThreeDS2RequestData gets a reference to the given ThreeDS2RequestData2 and assigns it to the ThreeDS2RequestData field.
-func (o *DonationPaymentRequest) SetThreeDS2RequestData(v ThreeDS2RequestData2) {
+// SetThreeDS2RequestData gets a reference to the given ThreeDS2RequestFields and assigns it to the ThreeDS2RequestData field.
+func (o *DonationPaymentRequest) SetThreeDS2RequestData(v ThreeDS2RequestFields) {
 	o.ThreeDS2RequestData = &v
 }
 
