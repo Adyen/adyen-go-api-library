@@ -22,7 +22,7 @@ goimports:=$(shell go env GOPATH)/bin/goimports
 
 generator:=go
 services:=balancecontrol balanceplatform acswebhook configurationwebhook reportwebhook transferwebhook binlookup checkout legalentity management managementwebhook payments payout posterminalmanagement recurring storedvalue transfers dataprotection
-services+=disputes
+services+=disputes transactionwebhook
 output:=src
 templates:=templates/custom
 
@@ -55,6 +55,7 @@ management: spec=ManagementService-v3
 management: serviceName=Management
 management: hasRestServiceError=true
 managementwebhook: spec=ManagementNotificationService-v3
+transactionwebhook: spec=BalancePlatformTransactionNotification-v4
 posterminalmanagement: spec=TfmAPIService-v1
 posterminalmanagement: serviceName=PosTerminalManagementApi
 dataprotection: spec=DataProtectionService-v1
