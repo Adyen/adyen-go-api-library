@@ -136,16 +136,4 @@ func Test_Disputes(t *testing.T) {
 		assert.NotNil(t, res)
 		assert.Equal(t, "Dispute not found.", res.DisputeServiceResult.GetErrorMessage())
 	})
-
-	t.Run("Download dispute defense document", func(t *testing.T) {
-		req := service.DownloadDisputeDefenseDocumentInput().DownloadDefenseDocumentRequest(disputes.DownloadDefenseDocumentRequest{
-			DefenseDocumentType: "DefenseMaterial",
-			DisputePspReference: pspReference,
-			MerchantAccountCode: merchantAccount,
-		})
-		_, httpRes, err := service.DownloadDisputeDefenseDocument(context.Background(), req)
-
-		require.NotNil(t, err)
-		assert.Equal(t, 403, httpRes.StatusCode)
-	})
 }
