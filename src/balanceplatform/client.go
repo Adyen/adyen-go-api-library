@@ -38,6 +38,8 @@ type APIClient struct {
 	PlatformApi *PlatformApi
 
 	TransactionRulesApi *TransactionRulesApi
+
+	TransferRoutesApi *TransferRoutesApi
 }
 
 // NewAPIClient creates a new API client.
@@ -59,6 +61,7 @@ func NewAPIClient(client *common.Client) *APIClient {
 	c.PaymentInstrumentsApi = (*PaymentInstrumentsApi)(&c.common)
 	c.PlatformApi = (*PlatformApi)(&c.common)
 	c.TransactionRulesApi = (*TransactionRulesApi)(&c.common)
+	c.TransferRoutesApi = (*TransferRoutesApi)(&c.common)
 
 	return c
 }

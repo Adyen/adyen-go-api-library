@@ -19,14 +19,14 @@ var _ common.MappedNullable = &Split{}
 
 // Split struct for Split
 type Split struct {
-	// Unique identifier of the account where the split amount should be sent. This is required if `type` is **MarketPlace** or **BalanceAccount**.
-	Account *string     `json:"account,omitempty"`
-	Amount  SplitAmount `json:"amount"`
-	// A description of this split.
+	// The unique identifier of the account to which the split amount is booked. Required if `type` is **MarketPlace** or **BalanceAccount**.  * [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic): The [`accountCode`](https://docs.adyen.com/api-explorer/Account/latest/post/updateAccount#request-accountCode) of the account to which the split amount is booked. * [Balance Platform](https://docs.adyen.com/marketplaces-and-platforms): The [`balanceAccountId`](https://docs.adyen.com/api-explorer/balanceplatform/latest/get/balanceAccounts/_id_#path-id) of the account to which the split amount is booked.
+	Account *string      `json:"account,omitempty"`
+	Amount  *SplitAmount `json:"amount,omitempty"`
+	// Your description for the split item.
 	Description *string `json:"description,omitempty"`
-	// Your reference for the split, which you can use to link the split to other operations such as captures and refunds.  This is required if `type` is **MarketPlace** or **BalanceAccount**. For the other types, we also recommend sending a reference so you can reconcile the split and the associated payment in the transaction overview and in the reports. If the reference is not provided, the split is reported as part of the aggregated [TransferBalance record type](https://docs.adyen.com/reporting/marketpay-payments-accounting-report) in Adyen for Platforms.
+	// Your reference for the split item.  This is required if `type` is **MarketPlace** ([Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic)) or **BalanceAccount** ([Balance Platform](https://docs.adyen.com/marketplaces-and-platforms)). For the other types, we also recommend sending a reference so you can reconcile the split and the associated payment in the transaction overview and in the reports.
 	Reference *string `json:"reference,omitempty"`
-	// The type of split. Possible values: **Default**, **PaymentFee**, **VAT**, **Commission**, **MarketPlace**, **BalanceAccount**, **Remainder**, **Surcharge**, **Tip**.
+	// The type of the split item.  Possible values:  * [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic): **Commission**, **Default**, **Marketplace**, **PaymentFee**, **VAT**. * [Balance Platform](https://docs.adyen.com/marketplaces-and-platforms): **BalanceAccount**, **Commission**, **Default**, **PaymentFee**, **Remainder**, **Surcharge**, **Tip**, **VAT**.
 	Type string `json:"type"`
 }
 
@@ -34,9 +34,8 @@ type Split struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSplit(amount SplitAmount, type_ string) *Split {
+func NewSplit(type_ string) *Split {
 	this := Split{}
-	this.Amount = amount
 	this.Type = type_
 	return &this
 }
@@ -81,28 +80,36 @@ func (o *Split) SetAccount(v string) {
 	o.Account = &v
 }
 
-// GetAmount returns the Amount field value
+// GetAmount returns the Amount field value if set, zero value otherwise.
 func (o *Split) GetAmount() SplitAmount {
-	if o == nil {
+	if o == nil || common.IsNil(o.Amount) {
 		var ret SplitAmount
 		return ret
 	}
-
-	return o.Amount
+	return *o.Amount
 }
 
-// GetAmountOk returns a tuple with the Amount field value
+// GetAmountOk returns a tuple with the Amount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Split) GetAmountOk() (*SplitAmount, bool) {
-	if o == nil {
+	if o == nil || common.IsNil(o.Amount) {
 		return nil, false
 	}
-	return &o.Amount, true
+	return o.Amount, true
 }
 
-// SetAmount sets field value
+// HasAmount returns a boolean if a field has been set.
+func (o *Split) HasAmount() bool {
+	if o != nil && !common.IsNil(o.Amount) {
+		return true
+	}
+
+	return false
+}
+
+// SetAmount gets a reference to the given SplitAmount and assigns it to the Amount field.
 func (o *Split) SetAmount(v SplitAmount) {
-	o.Amount = v
+	o.Amount = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -206,7 +213,9 @@ func (o Split) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Account) {
 		toSerialize["account"] = o.Account
 	}
-	toSerialize["amount"] = o.Amount
+	if !common.IsNil(o.Amount) {
+		toSerialize["amount"] = o.Amount
+	}
 	if !common.IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
@@ -254,7 +263,7 @@ func (v *NullableSplit) UnmarshalJSON(src []byte) error {
 }
 
 func (o *Split) isValidType() bool {
-	var allowedEnumValues = []string{"BalanceAccount", "Commission", "Default", "MarketPlace", "PaymentFee", "PaymentFeeAcquiring", "PaymentFeeAdyen", "PaymentFeeAdyenCommission", "PaymentFeeAdyenMarkup", "PaymentFeeInterchange", "PaymentFeeSchemeFee", "Remainder", "Surcharge", "Tip", "VAT", "Verification"}
+	var allowedEnumValues = []string{"BalanceAccount", "Commission", "Default", "MarketPlace", "PaymentFee", "Remainder", "Surcharge", "Tip", "VAT"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

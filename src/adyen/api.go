@@ -66,7 +66,7 @@ const (
 	MarketpayHopAPIVersion          = "v6"
 	PaymentAPIVersion               = "v68"
 	RecurringAPIVersion             = "v68"
-	CheckoutAPIVersion              = "v70"
+	CheckoutAPIVersion              = "v71"
 	BinLookupAPIVersion             = "v54"
 	BalanceControlAPIVersion        = "v1"
 	EndpointProtocol                = "https://"
@@ -201,7 +201,7 @@ func (c *APIClient) Checkout() *checkout.APIClient {
 func (c *APIClient) Payments() *payments.APIClient {
 	if c.payments == nil {
 		c.payments = payments.NewAPIClient(c.client)
-		c.payments.GeneralApi.BasePath = func() string {
+		c.payments.PaymentsApi.BasePath = func() string {
 			return fmt.Sprintf("%s/pal/servlet/Payment/%s", c.client.Cfg.Endpoint, PaymentAPIVersion)
 		}
 	}

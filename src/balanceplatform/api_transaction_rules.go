@@ -71,7 +71,6 @@ func (a *TransactionRulesApi) CreateTransactionRule(ctx context.Context, r Trans
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -80,7 +79,6 @@ func (a *TransactionRulesApi) CreateTransactionRule(ctx context.Context, r Trans
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -89,7 +87,6 @@ func (a *TransactionRulesApi) CreateTransactionRule(ctx context.Context, r Trans
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -98,7 +95,6 @@ func (a *TransactionRulesApi) CreateTransactionRule(ctx context.Context, r Trans
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -107,7 +103,6 @@ func (a *TransactionRulesApi) CreateTransactionRule(ctx context.Context, r Trans
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -167,7 +162,6 @@ func (a *TransactionRulesApi) DeleteTransactionRule(ctx context.Context, r Trans
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -176,7 +170,6 @@ func (a *TransactionRulesApi) DeleteTransactionRule(ctx context.Context, r Trans
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -185,7 +178,6 @@ func (a *TransactionRulesApi) DeleteTransactionRule(ctx context.Context, r Trans
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -194,7 +186,6 @@ func (a *TransactionRulesApi) DeleteTransactionRule(ctx context.Context, r Trans
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -203,7 +194,6 @@ func (a *TransactionRulesApi) DeleteTransactionRule(ctx context.Context, r Trans
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -263,7 +253,6 @@ func (a *TransactionRulesApi) GetTransactionRule(ctx context.Context, r Transact
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -272,7 +261,6 @@ func (a *TransactionRulesApi) GetTransactionRule(ctx context.Context, r Transact
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -281,7 +269,6 @@ func (a *TransactionRulesApi) GetTransactionRule(ctx context.Context, r Transact
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -290,7 +277,6 @@ func (a *TransactionRulesApi) GetTransactionRule(ctx context.Context, r Transact
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -299,7 +285,6 @@ func (a *TransactionRulesApi) GetTransactionRule(ctx context.Context, r Transact
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -369,7 +354,6 @@ func (a *TransactionRulesApi) UpdateTransactionRule(ctx context.Context, r Trans
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -378,7 +362,6 @@ func (a *TransactionRulesApi) UpdateTransactionRule(ctx context.Context, r Trans
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -387,7 +370,6 @@ func (a *TransactionRulesApi) UpdateTransactionRule(ctx context.Context, r Trans
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -396,7 +378,6 @@ func (a *TransactionRulesApi) UpdateTransactionRule(ctx context.Context, r Trans
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -405,7 +386,6 @@ func (a *TransactionRulesApi) UpdateTransactionRule(ctx context.Context, r Trans
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)

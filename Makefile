@@ -22,7 +22,7 @@ goimports:=$(shell go env GOPATH)/bin/goimports
 
 generator:=go
 services:=balancecontrol balanceplatform acswebhook configurationwebhook reportwebhook transferwebhook binlookup checkout legalentity management managementwebhook payments payout posterminalmanagement recurring storedvalue transfers dataprotection
-services+=disputes
+services+=disputes transactionwebhook
 output:=src
 templates:=templates/custom
 
@@ -39,7 +39,7 @@ configurationwebhook: spec=BalancePlatformConfigurationNotification-v1
 reportwebhook: spec=BalancePlatformReportNotification-v1
 transferwebhook: spec=BalancePlatformTransferNotification-v4
 binlookup: spec=BinLookupService-v54
-checkout: spec=CheckoutService-v70
+checkout: spec=CheckoutService-v71
 checkout: serviceName=Checkout
 legalentity: spec=LegalEntityService-v3
 legalentity: serviceName=LegalEntity
@@ -55,6 +55,7 @@ management: spec=ManagementService-v3
 management: serviceName=Management
 management: hasRestServiceError=true
 managementwebhook: spec=ManagementNotificationService-v3
+transactionwebhook: spec=BalancePlatformTransactionNotification-v4
 posterminalmanagement: spec=TfmAPIService-v1
 posterminalmanagement: serviceName=PosTerminalManagementApi
 dataprotection: spec=DataProtectionService-v1
@@ -78,7 +79,8 @@ $(services): schema $(openapi-generator-jar) $(goimports)
 		--global-property modelDocs=false \
 		--skip-validate-spec \
 		--enable-post-process-file \
-		--inline-schema-name-mappings PaymentDonationRequest_paymentMethod=CheckoutPaymentMethod \
+		--inline-schema-name-mappings PaymentRequest_paymentMethod=CheckoutPaymentMethod \
+		--inline-schema-name-mappings DonationPaymentRequest_paymentMethod=DonationPaymentMethod \
 		--additional-properties=serviceName=$(serviceName) \
 		--additional-properties=$(if $(hasRestServiceError),hasRestServiceError=true)
 	rm -rf $(output)/$(@)/go.{mod,sum}

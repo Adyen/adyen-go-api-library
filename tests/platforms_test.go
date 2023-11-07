@@ -1,8 +1,5 @@
-/*
- * Adyen API Client
- *
- * Contact: support@adyen.com
- */
+//go:build integration
+// +build integration
 
 package tests
 

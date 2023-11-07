@@ -75,7 +75,6 @@ func (a *WebhooksCompanyLevelApi) GenerateHmacKey(ctx context.Context, r Webhook
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -84,7 +83,6 @@ func (a *WebhooksCompanyLevelApi) GenerateHmacKey(ctx context.Context, r Webhook
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -93,7 +91,6 @@ func (a *WebhooksCompanyLevelApi) GenerateHmacKey(ctx context.Context, r Webhook
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -102,7 +99,6 @@ func (a *WebhooksCompanyLevelApi) GenerateHmacKey(ctx context.Context, r Webhook
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -111,7 +107,6 @@ func (a *WebhooksCompanyLevelApi) GenerateHmacKey(ctx context.Context, r Webhook
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -178,7 +173,6 @@ func (a *WebhooksCompanyLevelApi) GetWebhook(ctx context.Context, r WebhooksComp
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -187,7 +181,6 @@ func (a *WebhooksCompanyLevelApi) GetWebhook(ctx context.Context, r WebhooksComp
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -196,7 +189,6 @@ func (a *WebhooksCompanyLevelApi) GetWebhook(ctx context.Context, r WebhooksComp
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -205,7 +197,6 @@ func (a *WebhooksCompanyLevelApi) GetWebhook(ctx context.Context, r WebhooksComp
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -214,7 +205,6 @@ func (a *WebhooksCompanyLevelApi) GetWebhook(ctx context.Context, r WebhooksComp
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -298,7 +288,6 @@ func (a *WebhooksCompanyLevelApi) ListAllWebhooks(ctx context.Context, r Webhook
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -307,7 +296,6 @@ func (a *WebhooksCompanyLevelApi) ListAllWebhooks(ctx context.Context, r Webhook
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -316,7 +304,6 @@ func (a *WebhooksCompanyLevelApi) ListAllWebhooks(ctx context.Context, r Webhook
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -325,7 +312,6 @@ func (a *WebhooksCompanyLevelApi) ListAllWebhooks(ctx context.Context, r Webhook
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -334,7 +320,6 @@ func (a *WebhooksCompanyLevelApi) ListAllWebhooks(ctx context.Context, r Webhook
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -400,7 +385,6 @@ func (a *WebhooksCompanyLevelApi) RemoveWebhook(ctx context.Context, r WebhooksC
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -409,7 +393,6 @@ func (a *WebhooksCompanyLevelApi) RemoveWebhook(ctx context.Context, r WebhooksC
 		}
 		return httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -418,7 +401,6 @@ func (a *WebhooksCompanyLevelApi) RemoveWebhook(ctx context.Context, r WebhooksC
 		}
 		return httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -427,7 +409,6 @@ func (a *WebhooksCompanyLevelApi) RemoveWebhook(ctx context.Context, r WebhooksC
 		}
 		return httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -436,7 +417,6 @@ func (a *WebhooksCompanyLevelApi) RemoveWebhook(ctx context.Context, r WebhooksC
 		}
 		return httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -505,7 +485,6 @@ func (a *WebhooksCompanyLevelApi) SetUpWebhook(ctx context.Context, r WebhooksCo
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -514,7 +493,6 @@ func (a *WebhooksCompanyLevelApi) SetUpWebhook(ctx context.Context, r WebhooksCo
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -523,7 +501,6 @@ func (a *WebhooksCompanyLevelApi) SetUpWebhook(ctx context.Context, r WebhooksCo
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -532,7 +509,6 @@ func (a *WebhooksCompanyLevelApi) SetUpWebhook(ctx context.Context, r WebhooksCo
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -541,7 +517,6 @@ func (a *WebhooksCompanyLevelApi) SetUpWebhook(ctx context.Context, r WebhooksCo
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -619,7 +594,6 @@ func (a *WebhooksCompanyLevelApi) TestWebhook(ctx context.Context, r WebhooksCom
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -628,7 +602,6 @@ func (a *WebhooksCompanyLevelApi) TestWebhook(ctx context.Context, r WebhooksCom
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -637,7 +610,6 @@ func (a *WebhooksCompanyLevelApi) TestWebhook(ctx context.Context, r WebhooksCom
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -646,7 +618,6 @@ func (a *WebhooksCompanyLevelApi) TestWebhook(ctx context.Context, r WebhooksCom
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -655,7 +626,6 @@ func (a *WebhooksCompanyLevelApi) TestWebhook(ctx context.Context, r WebhooksCom
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -727,7 +697,6 @@ func (a *WebhooksCompanyLevelApi) UpdateWebhook(ctx context.Context, r WebhooksC
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -736,7 +705,6 @@ func (a *WebhooksCompanyLevelApi) UpdateWebhook(ctx context.Context, r WebhooksC
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -745,7 +713,6 @@ func (a *WebhooksCompanyLevelApi) UpdateWebhook(ctx context.Context, r WebhooksC
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -754,7 +721,6 @@ func (a *WebhooksCompanyLevelApi) UpdateWebhook(ctx context.Context, r WebhooksC
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -763,7 +729,6 @@ func (a *WebhooksCompanyLevelApi) UpdateWebhook(ctx context.Context, r WebhooksC
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)

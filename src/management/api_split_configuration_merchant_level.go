@@ -81,7 +81,6 @@ func (a *SplitConfigurationMerchantLevelApi) CreateRule(ctx context.Context, r S
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -90,7 +89,6 @@ func (a *SplitConfigurationMerchantLevelApi) CreateRule(ctx context.Context, r S
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -99,7 +97,6 @@ func (a *SplitConfigurationMerchantLevelApi) CreateRule(ctx context.Context, r S
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -108,7 +105,6 @@ func (a *SplitConfigurationMerchantLevelApi) CreateRule(ctx context.Context, r S
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -117,7 +113,6 @@ func (a *SplitConfigurationMerchantLevelApi) CreateRule(ctx context.Context, r S
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -186,7 +181,6 @@ func (a *SplitConfigurationMerchantLevelApi) CreateSplitConfiguration(ctx contex
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -195,7 +189,6 @@ func (a *SplitConfigurationMerchantLevelApi) CreateSplitConfiguration(ctx contex
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -204,7 +197,6 @@ func (a *SplitConfigurationMerchantLevelApi) CreateSplitConfiguration(ctx contex
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -213,7 +205,6 @@ func (a *SplitConfigurationMerchantLevelApi) CreateSplitConfiguration(ctx contex
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -222,7 +213,6 @@ func (a *SplitConfigurationMerchantLevelApi) CreateSplitConfiguration(ctx contex
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -288,7 +278,6 @@ func (a *SplitConfigurationMerchantLevelApi) DeleteSplitConfiguration(ctx contex
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -297,7 +286,6 @@ func (a *SplitConfigurationMerchantLevelApi) DeleteSplitConfiguration(ctx contex
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -306,7 +294,6 @@ func (a *SplitConfigurationMerchantLevelApi) DeleteSplitConfiguration(ctx contex
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -315,7 +302,6 @@ func (a *SplitConfigurationMerchantLevelApi) DeleteSplitConfiguration(ctx contex
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -324,7 +310,6 @@ func (a *SplitConfigurationMerchantLevelApi) DeleteSplitConfiguration(ctx contex
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -393,7 +378,6 @@ func (a *SplitConfigurationMerchantLevelApi) DeleteSplitConfigurationRule(ctx co
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -402,7 +386,6 @@ func (a *SplitConfigurationMerchantLevelApi) DeleteSplitConfigurationRule(ctx co
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -411,7 +394,6 @@ func (a *SplitConfigurationMerchantLevelApi) DeleteSplitConfigurationRule(ctx co
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -420,7 +402,6 @@ func (a *SplitConfigurationMerchantLevelApi) DeleteSplitConfigurationRule(ctx co
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -429,7 +410,6 @@ func (a *SplitConfigurationMerchantLevelApi) DeleteSplitConfigurationRule(ctx co
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -495,7 +475,6 @@ func (a *SplitConfigurationMerchantLevelApi) GetSplitConfiguration(ctx context.C
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -504,7 +483,6 @@ func (a *SplitConfigurationMerchantLevelApi) GetSplitConfiguration(ctx context.C
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -513,7 +491,6 @@ func (a *SplitConfigurationMerchantLevelApi) GetSplitConfiguration(ctx context.C
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -522,7 +499,6 @@ func (a *SplitConfigurationMerchantLevelApi) GetSplitConfiguration(ctx context.C
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -531,7 +507,6 @@ func (a *SplitConfigurationMerchantLevelApi) GetSplitConfiguration(ctx context.C
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -594,7 +569,6 @@ func (a *SplitConfigurationMerchantLevelApi) ListSplitConfigurations(ctx context
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -603,7 +577,6 @@ func (a *SplitConfigurationMerchantLevelApi) ListSplitConfigurations(ctx context
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -612,7 +585,6 @@ func (a *SplitConfigurationMerchantLevelApi) ListSplitConfigurations(ctx context
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -621,7 +593,6 @@ func (a *SplitConfigurationMerchantLevelApi) ListSplitConfigurations(ctx context
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -630,7 +601,6 @@ func (a *SplitConfigurationMerchantLevelApi) ListSplitConfigurations(ctx context
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -705,7 +675,6 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitConditions(ctx context.C
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -714,7 +683,6 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitConditions(ctx context.C
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -723,7 +691,6 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitConditions(ctx context.C
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -732,7 +699,6 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitConditions(ctx context.C
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -741,7 +707,6 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitConditions(ctx context.C
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -813,7 +778,6 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitConfigurationDescription
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -822,7 +786,6 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitConfigurationDescription
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -831,7 +794,6 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitConfigurationDescription
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -840,7 +802,6 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitConfigurationDescription
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -849,7 +810,6 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitConfigurationDescription
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -927,7 +887,6 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitLogic(ctx context.Contex
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -936,7 +895,6 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitLogic(ctx context.Contex
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -945,7 +903,6 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitLogic(ctx context.Contex
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -954,7 +911,6 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitLogic(ctx context.Contex
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -963,7 +919,6 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitLogic(ctx context.Contex
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)

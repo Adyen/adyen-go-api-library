@@ -31,6 +31,8 @@ type SoleProprietorship struct {
 	RegisteredAddress        Address  `json:"registeredAddress"`
 	// The registration number.
 	RegistrationNumber *string `json:"registrationNumber,omitempty"`
+	// The tax information of the entity.
+	TaxInformation []TaxInformation `json:"taxInformation,omitempty"`
 	// The reason for not providing a VAT number.  Possible values: **industryExemption**, **belowTaxThreshold**.
 	VatAbsenceReason *string `json:"vatAbsenceReason,omitempty"`
 	// The VAT number.
@@ -257,6 +259,38 @@ func (o *SoleProprietorship) SetRegistrationNumber(v string) {
 	o.RegistrationNumber = &v
 }
 
+// GetTaxInformation returns the TaxInformation field value if set, zero value otherwise.
+func (o *SoleProprietorship) GetTaxInformation() []TaxInformation {
+	if o == nil || common.IsNil(o.TaxInformation) {
+		var ret []TaxInformation
+		return ret
+	}
+	return o.TaxInformation
+}
+
+// GetTaxInformationOk returns a tuple with the TaxInformation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SoleProprietorship) GetTaxInformationOk() ([]TaxInformation, bool) {
+	if o == nil || common.IsNil(o.TaxInformation) {
+		return nil, false
+	}
+	return o.TaxInformation, true
+}
+
+// HasTaxInformation returns a boolean if a field has been set.
+func (o *SoleProprietorship) HasTaxInformation() bool {
+	if o != nil && !common.IsNil(o.TaxInformation) {
+		return true
+	}
+
+	return false
+}
+
+// SetTaxInformation gets a reference to the given []TaxInformation and assigns it to the TaxInformation field.
+func (o *SoleProprietorship) SetTaxInformation(v []TaxInformation) {
+	o.TaxInformation = v
+}
+
 // GetVatAbsenceReason returns the VatAbsenceReason field value if set, zero value otherwise.
 func (o *SoleProprietorship) GetVatAbsenceReason() string {
 	if o == nil || common.IsNil(o.VatAbsenceReason) {
@@ -345,6 +379,9 @@ func (o SoleProprietorship) ToMap() (map[string]interface{}, error) {
 	toSerialize["registeredAddress"] = o.RegisteredAddress
 	if !common.IsNil(o.RegistrationNumber) {
 		toSerialize["registrationNumber"] = o.RegistrationNumber
+	}
+	if !common.IsNil(o.TaxInformation) {
+		toSerialize["taxInformation"] = o.TaxInformation
 	}
 	if !common.IsNil(o.VatAbsenceReason) {
 		toSerialize["vatAbsenceReason"] = o.VatAbsenceReason

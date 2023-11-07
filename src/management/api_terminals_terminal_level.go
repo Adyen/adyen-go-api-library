@@ -147,7 +147,6 @@ func (a *TerminalsTerminalLevelApi) ListTerminals(ctx context.Context, r Termina
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -156,7 +155,6 @@ func (a *TerminalsTerminalLevelApi) ListTerminals(ctx context.Context, r Termina
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -165,7 +163,6 @@ func (a *TerminalsTerminalLevelApi) ListTerminals(ctx context.Context, r Termina
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -174,7 +171,6 @@ func (a *TerminalsTerminalLevelApi) ListTerminals(ctx context.Context, r Termina
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -183,7 +179,6 @@ func (a *TerminalsTerminalLevelApi) ListTerminals(ctx context.Context, r Termina
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -252,7 +247,6 @@ func (a *TerminalsTerminalLevelApi) ReassignTerminal(ctx context.Context, r Term
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 400 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -261,7 +255,6 @@ func (a *TerminalsTerminalLevelApi) ReassignTerminal(ctx context.Context, r Term
 		}
 		return httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -270,7 +263,6 @@ func (a *TerminalsTerminalLevelApi) ReassignTerminal(ctx context.Context, r Term
 		}
 		return httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -279,7 +271,6 @@ func (a *TerminalsTerminalLevelApi) ReassignTerminal(ctx context.Context, r Term
 		}
 		return httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -288,7 +279,6 @@ func (a *TerminalsTerminalLevelApi) ReassignTerminal(ctx context.Context, r Term
 		}
 		return httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)

@@ -22,7 +22,6 @@ type IdentificationData struct {
 	// The card number of the document that was issued (AU only).
 	CardNumber *string `json:"cardNumber,omitempty"`
 	// The expiry date of the document, in YYYY-MM-DD format.
-	// Deprecated
 	ExpiryDate *string `json:"expiryDate,omitempty"`
 	// The two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code where the document was issued. For example, **US**.
 	// Deprecated
@@ -33,7 +32,7 @@ type IdentificationData struct {
 	NationalIdExempt *bool `json:"nationalIdExempt,omitempty"`
 	// The number in the document.
 	Number *string `json:"number,omitempty"`
-	// Type of document, used when providing an ID number or uploading a document. The possible values depend on the legal entity type.  * For **organization**, the `type` values can be **proofOfAddress**, **registrationDocument**, **vatDocument**, **proofOfOrganizationTaxInfo**, **proofOfOwnership**, **proofOfIndustry**, or **proofOfFundingOrWealthSource**.  * For **individual**, the `type` values can be **identityCard**, **driversLicense**, **passport**, **proofOfNationalIdNumber**, **proofOfResidency**, **proofOfIndustry**, **proofOfIndividualTaxId**, or **proofOfFundingOrWealthSource**.  * For **soleProprietorship**, the `type` values can be **constitutionalDocument**, **proofOfAddress**, or **proofOfIndustry**.  * Use **bankStatement** to upload documents for a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id).
+	// Type of identity data. For **individual**, the `type` value is **nationalIdNumber**.
 	Type string `json:"type"`
 }
 
@@ -88,7 +87,6 @@ func (o *IdentificationData) SetCardNumber(v string) {
 }
 
 // GetExpiryDate returns the ExpiryDate field value if set, zero value otherwise.
-// Deprecated
 func (o *IdentificationData) GetExpiryDate() string {
 	if o == nil || common.IsNil(o.ExpiryDate) {
 		var ret string
@@ -99,7 +97,6 @@ func (o *IdentificationData) GetExpiryDate() string {
 
 // GetExpiryDateOk returns a tuple with the ExpiryDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *IdentificationData) GetExpiryDateOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ExpiryDate) {
 		return nil, false
@@ -117,7 +114,6 @@ func (o *IdentificationData) HasExpiryDate() bool {
 }
 
 // SetExpiryDate gets a reference to the given string and assigns it to the ExpiryDate field.
-// Deprecated
 func (o *IdentificationData) SetExpiryDate(v string) {
 	o.ExpiryDate = &v
 }
@@ -346,7 +342,7 @@ func (v *NullableIdentificationData) UnmarshalJSON(src []byte) error {
 }
 
 func (o *IdentificationData) isValidType() bool {
-	var allowedEnumValues = []string{"bankStatement", "driversLicense", "identityCard", "nationalIdNumber", "passport", "proofOfAddress", "proofOfNationalIdNumber", "proofOfResidency", "registrationDocument", "vatDocument", "proofOfOrganizationTaxInfo", "proofOfIndustry", "constitutionalDocument", "proofOfFundingOrWealthSource"}
+	var allowedEnumValues = []string{"nationalIdNumber"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

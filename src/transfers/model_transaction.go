@@ -29,8 +29,6 @@ type Transaction struct {
 	BookingDate time.Time `json:"bookingDate"`
 	// The date and time when the event was triggered, in ISO 8601 extended format. For example, **2020-12-18T10:15:30+01:00**.
 	CreationDate *time.Time `json:"creationDate,omitempty"`
-	// The PSP reference of the transaction in the journal.
-	EventId *string `json:"eventId,omitempty"`
 	// The unique identifier of the transaction.
 	Id string `json:"id"`
 	// The status of the transaction.   Possible values:  * **pending**: The transaction is still pending.  * **booked**: The transaction has been booked to the balance account.
@@ -217,38 +215,6 @@ func (o *Transaction) SetCreationDate(v time.Time) {
 	o.CreationDate = &v
 }
 
-// GetEventId returns the EventId field value if set, zero value otherwise.
-func (o *Transaction) GetEventId() string {
-	if o == nil || common.IsNil(o.EventId) {
-		var ret string
-		return ret
-	}
-	return *o.EventId
-}
-
-// GetEventIdOk returns a tuple with the EventId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Transaction) GetEventIdOk() (*string, bool) {
-	if o == nil || common.IsNil(o.EventId) {
-		return nil, false
-	}
-	return o.EventId, true
-}
-
-// HasEventId returns a boolean if a field has been set.
-func (o *Transaction) HasEventId() bool {
-	if o != nil && !common.IsNil(o.EventId) {
-		return true
-	}
-
-	return false
-}
-
-// SetEventId gets a reference to the given string and assigns it to the EventId field.
-func (o *Transaction) SetEventId(v string) {
-	o.EventId = &v
-}
-
 // GetId returns the Id field value
 func (o *Transaction) GetId() string {
 	if o == nil {
@@ -370,9 +336,6 @@ func (o Transaction) ToMap() (map[string]interface{}, error) {
 	toSerialize["bookingDate"] = o.BookingDate
 	if !common.IsNil(o.CreationDate) {
 		toSerialize["creationDate"] = o.CreationDate
-	}
-	if !common.IsNil(o.EventId) {
-		toSerialize["eventId"] = o.EventId
 	}
 	toSerialize["id"] = o.Id
 	toSerialize["status"] = o.Status

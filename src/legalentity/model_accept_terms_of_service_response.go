@@ -25,11 +25,11 @@ type AcceptTermsOfServiceResponse struct {
 	Id *string `json:"id,omitempty"`
 	// The IP address of the user that accepted the Terms of Service.
 	IpAddress *string `json:"ipAddress,omitempty"`
-	// The language used for the Terms of Service document, specified by the two letter [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code. For example, **nl** for Dutch.
+	// The language used for the Terms of Service document, specified by the two-letter [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code. Possible value: **en** for English.
 	Language *string `json:"language,omitempty"`
 	// The unique identifier of the Terms of Service document.
 	TermsOfServiceDocumentId *string `json:"termsOfServiceDocumentId,omitempty"`
-	// The type of Terms of Service.
+	// The type of Terms of Service.  Possible values: *  **adyenForPlatformsManage** *  **adyenIssuing** *  **adyenForPlatformsAdvanced** *  **adyenCapital** *  **adyenAccount** *  **adyenCard** *  **adyenFranchisee**
 	Type *string `json:"type,omitempty"`
 }
 

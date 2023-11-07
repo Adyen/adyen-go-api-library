@@ -157,7 +157,6 @@ func (a *TransactionsApi) GetAllTransactions(ctx context.Context, r Transactions
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -166,7 +165,6 @@ func (a *TransactionsApi) GetAllTransactions(ctx context.Context, r Transactions
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -175,7 +173,6 @@ func (a *TransactionsApi) GetAllTransactions(ctx context.Context, r Transactions
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -184,7 +181,6 @@ func (a *TransactionsApi) GetAllTransactions(ctx context.Context, r Transactions
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -246,7 +242,6 @@ func (a *TransactionsApi) GetTransaction(ctx context.Context, r TransactionsApiG
 	}
 
 	var serviceError common.RestServiceError
-
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -255,7 +250,6 @@ func (a *TransactionsApi) GetTransaction(ctx context.Context, r TransactionsApiG
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -264,7 +258,6 @@ func (a *TransactionsApi) GetTransaction(ctx context.Context, r TransactionsApiG
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -273,7 +266,6 @@ func (a *TransactionsApi) GetTransaction(ctx context.Context, r TransactionsApiG
 		}
 		return *res, httpRes, serviceError
 	}
-
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)

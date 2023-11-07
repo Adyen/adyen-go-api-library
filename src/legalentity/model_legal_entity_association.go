@@ -29,7 +29,9 @@ type LegalEntityAssociation struct {
 	LegalEntityId string `json:"legalEntityId"`
 	// The name of the associated [legal entity](https://docs.adyen.com/api-explorer/legalentity/latest/post/legalEntities#responses-200-id).  - For **individual**, `name.firstName` and `name.lastName`. - For **organization**, `legalName`. - For **soleProprietorship**, `name`.
 	Name *string `json:"name,omitempty"`
-	// Defines the relationship of the legal entity to the current legal entity.  Possible values for organizations: **uboThroughOwnership**, **uboThroughControl**, **director**, **signatory**, or **ultimateParentCompany**.  Possible values for sole proprietorships: **soleProprietorship**.
+	// Defines the Kyc Exemption Reason for a Settlor associated with a trust.  For example, **professionalServiceProvider**, **deceased**, or **contributionBelowThreshold**.
+	SettlorExemptionReason []string `json:"settlorExemptionReason,omitempty"`
+	// Defines the relationship of the legal entity to the current legal entity.  Possible values for organizations: **uboThroughOwnership**, **uboThroughControl**, **director**, **signatory**, or **ultimateParentCompany**.  Possible values for sole proprietorships: **soleProprietorship**.  Possible value for trusts: **trust**  Possible values for trust members: **definedBeneficiary**, **protector**, **secondaryTrustee**, **settlor**, **uboThroughControl**, or **uboThroughOwnership**.
 	Type string `json:"type"`
 }
 
@@ -204,6 +206,38 @@ func (o *LegalEntityAssociation) SetName(v string) {
 	o.Name = &v
 }
 
+// GetSettlorExemptionReason returns the SettlorExemptionReason field value if set, zero value otherwise.
+func (o *LegalEntityAssociation) GetSettlorExemptionReason() []string {
+	if o == nil || common.IsNil(o.SettlorExemptionReason) {
+		var ret []string
+		return ret
+	}
+	return o.SettlorExemptionReason
+}
+
+// GetSettlorExemptionReasonOk returns a tuple with the SettlorExemptionReason field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LegalEntityAssociation) GetSettlorExemptionReasonOk() ([]string, bool) {
+	if o == nil || common.IsNil(o.SettlorExemptionReason) {
+		return nil, false
+	}
+	return o.SettlorExemptionReason, true
+}
+
+// HasSettlorExemptionReason returns a boolean if a field has been set.
+func (o *LegalEntityAssociation) HasSettlorExemptionReason() bool {
+	if o != nil && !common.IsNil(o.SettlorExemptionReason) {
+		return true
+	}
+
+	return false
+}
+
+// SetSettlorExemptionReason gets a reference to the given []string and assigns it to the SettlorExemptionReason field.
+func (o *LegalEntityAssociation) SetSettlorExemptionReason(v []string) {
+	o.SettlorExemptionReason = v
+}
+
 // GetType returns the Type field value
 func (o *LegalEntityAssociation) GetType() string {
 	if o == nil {
@@ -251,6 +285,9 @@ func (o LegalEntityAssociation) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+	if !common.IsNil(o.SettlorExemptionReason) {
+		toSerialize["settlorExemptionReason"] = o.SettlorExemptionReason
+	}
 	toSerialize["type"] = o.Type
 	return toSerialize, nil
 }
@@ -292,7 +329,7 @@ func (v *NullableLegalEntityAssociation) UnmarshalJSON(src []byte) error {
 }
 
 func (o *LegalEntityAssociation) isValidType() bool {
-	var allowedEnumValues = []string{"pciSignatory", "signatory", "soleProprietorship", "uboThroughControl", "uboThroughOwnership", "ultimateParentCompany"}
+	var allowedEnumValues = []string{"definedBeneficiary", "director", "pciSignatory", "protector", "secondaryTrustee", "settlor", "signatory", "soleProprietorship", "trust", "trustOwnership", "uboThroughControl", "uboThroughOwnership", "ultimateParentCompany", "undefinedBeneficiary"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

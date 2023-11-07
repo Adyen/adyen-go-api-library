@@ -28,7 +28,8 @@ type LegalEntityInfoRequiredType struct {
 	// Your reference for the legal entity, maximum 150 characters.
 	Reference          *string             `json:"reference,omitempty"`
 	SoleProprietorship *SoleProprietorship `json:"soleProprietorship,omitempty"`
-	// The type of legal entity.   Possible values: **individual**, **organization**, or **soleProprietorship**.
+	Trust              *Trust              `json:"trust,omitempty"`
+	// The type of legal entity.   Possible values: **individual**, **organization**, **soleProprietorship**, or **trust**.
 	Type string `json:"type"`
 }
 
@@ -242,6 +243,38 @@ func (o *LegalEntityInfoRequiredType) SetSoleProprietorship(v SoleProprietorship
 	o.SoleProprietorship = &v
 }
 
+// GetTrust returns the Trust field value if set, zero value otherwise.
+func (o *LegalEntityInfoRequiredType) GetTrust() Trust {
+	if o == nil || common.IsNil(o.Trust) {
+		var ret Trust
+		return ret
+	}
+	return *o.Trust
+}
+
+// GetTrustOk returns a tuple with the Trust field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LegalEntityInfoRequiredType) GetTrustOk() (*Trust, bool) {
+	if o == nil || common.IsNil(o.Trust) {
+		return nil, false
+	}
+	return o.Trust, true
+}
+
+// HasTrust returns a boolean if a field has been set.
+func (o *LegalEntityInfoRequiredType) HasTrust() bool {
+	if o != nil && !common.IsNil(o.Trust) {
+		return true
+	}
+
+	return false
+}
+
+// SetTrust gets a reference to the given Trust and assigns it to the Trust field.
+func (o *LegalEntityInfoRequiredType) SetTrust(v Trust) {
+	o.Trust = &v
+}
+
 // GetType returns the Type field value
 func (o *LegalEntityInfoRequiredType) GetType() string {
 	if o == nil {
@@ -293,6 +326,9 @@ func (o LegalEntityInfoRequiredType) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.SoleProprietorship) {
 		toSerialize["soleProprietorship"] = o.SoleProprietorship
+	}
+	if !common.IsNil(o.Trust) {
+		toSerialize["trust"] = o.Trust
 	}
 	toSerialize["type"] = o.Type
 	return toSerialize, nil

@@ -1,3 +1,6 @@
+//go:build integration
+// +build integration
+
 package tests
 
 import (
@@ -30,7 +33,7 @@ func Test_API_Modifications(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 			pspReference := "psp0001"
 			req := service.ModificationsApi.CaptureAuthorisedPaymentInput(pspReference)
-			req = req.CreatePaymentCaptureRequest(checkout.CreatePaymentCaptureRequest{
+			req = req.PaymentCaptureRequest(checkout.PaymentCaptureRequest{
 				MerchantAccount: MerchantAccount,
 				Amount: checkout.Amount{
 					Value:    1250,
@@ -50,7 +53,7 @@ func Test_API_Modifications(t *testing.T) {
 	t.Run("API Modifications - Cancels", func(t *testing.T) {
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 			req := service.ModificationsApi.CancelAuthorisedPaymentInput()
-			req = req.CreateStandalonePaymentCancelRequest(checkout.CreateStandalonePaymentCancelRequest{
+			req = req.StandalonePaymentCancelRequest(checkout.StandalonePaymentCancelRequest{
 				MerchantAccount:  MerchantAccount,
 				PaymentReference: "paymentReference01",
 				Reference:        common.PtrString("reference01"),
@@ -66,7 +69,7 @@ func Test_API_Modifications(t *testing.T) {
 
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 			req := service.ModificationsApi.CancelAuthorisedPaymentInput()
-			req = req.CreateStandalonePaymentCancelRequest(checkout.CreateStandalonePaymentCancelRequest{
+			req = req.StandalonePaymentCancelRequest(checkout.StandalonePaymentCancelRequest{
 				MerchantAccount:  MerchantAccount,
 				PaymentReference: "",
 				Reference:        common.PtrString("reference01"),
@@ -83,7 +86,7 @@ func Test_API_Modifications(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 			pspReference := "psp0001"
 			req := service.ModificationsApi.RefundCapturedPaymentInput(pspReference)
-			req = req.CreatePaymentRefundRequest(checkout.CreatePaymentRefundRequest{
+			req = req.PaymentRefundRequest(checkout.PaymentRefundRequest{
 				MerchantAccount: MerchantAccount,
 				Reference:       common.PtrString("reference01"),
 				Amount: checkout.Amount{
@@ -103,7 +106,7 @@ func Test_API_Modifications(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 			pspReference := "psp0001"
 			req := service.ModificationsApi.RefundOrCancelPaymentInput(pspReference)
-			req = req.CreatePaymentReversalRequest(checkout.CreatePaymentReversalRequest{
+			req = req.PaymentReversalRequest(checkout.PaymentReversalRequest{
 				MerchantAccount: MerchantAccount,
 				Reference:       common.PtrString("reference01"),
 			})

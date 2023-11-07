@@ -1,3 +1,6 @@
+//go:build integration
+// +build integration
+
 package tests
 
 import (
@@ -60,22 +63,22 @@ func Test_Payment(t *testing.T) {
 			Reference:       time.Now().String(),
 			MerchantAccount: MerchantAccount,
 		}
-		req := service.GeneralApi.AuthoriseInput().PaymentRequest(body)
-		return service.GeneralApi.Authorise(context.Background(), req)
+		req := service.PaymentsApi.AuthoriseInput().PaymentRequest(body)
+		return service.PaymentsApi.Authorise(context.Background(), req)
 	}
 
 	t.Run("General", func(t *testing.T) {
 		t.Run("Authorise3d", func(t *testing.T) {
 			t.Skip("skipping since 3d requires manual user authentication")
-			req := service.GeneralApi.Authorise3dInput().PaymentRequest3d(payments.PaymentRequest3d{})
-			res, httpRes, err := service.GeneralApi.Authorise3d(context.Background(), req)
+			req := service.PaymentsApi.Authorise3dInput().PaymentRequest3d(payments.PaymentRequest3d{})
+			res, httpRes, err := service.PaymentsApi.Authorise3d(context.Background(), req)
 			assertForSuccessResponse(res, httpRes, err)
 		})
 
 		t.Run("Authorise3ds2", func(t *testing.T) {
 			t.Skip("skipping since 3d requires manual user authentication")
-			req := service.GeneralApi.Authorise3ds2Input().PaymentRequest3ds2(payments.PaymentRequest3ds2{})
-			res, httpRes, err := service.GeneralApi.Authorise3ds2(context.Background(), req)
+			req := service.PaymentsApi.Authorise3ds2Input().PaymentRequest3ds2(payments.PaymentRequest3ds2{})
+			res, httpRes, err := service.PaymentsApi.Authorise3ds2(context.Background(), req)
 			assertForSuccessResponse(res, httpRes, err)
 		})
 
@@ -89,15 +92,15 @@ func Test_Payment(t *testing.T) {
 
 		t.Run("GetAuthenticationResult", func(t *testing.T) {
 			t.Skip("skipping since this returns auth result after a 3d auth")
-			req := service.GeneralApi.GetAuthenticationResultInput()
-			res, httpRes, err := service.GeneralApi.GetAuthenticationResult(context.Background(), req)
+			req := service.PaymentsApi.GetAuthenticationResultInput()
+			res, httpRes, err := service.PaymentsApi.GetAuthenticationResult(context.Background(), req)
 			assertForSuccessResponse(res, httpRes, err)
 		})
 
 		t.Run("Retrieve3ds2Result", func(t *testing.T) {
 			t.Skip("skipping since this returns auth result after a 3d auth")
-			req := service.GeneralApi.Retrieve3ds2ResultInput()
-			res, httpRes, err := service.GeneralApi.Retrieve3ds2Result(context.Background(), req)
+			req := service.PaymentsApi.Retrieve3ds2ResultInput()
+			res, httpRes, err := service.PaymentsApi.Retrieve3ds2Result(context.Background(), req)
 			assertForSuccessResponse(res, httpRes, err)
 		})
 	})

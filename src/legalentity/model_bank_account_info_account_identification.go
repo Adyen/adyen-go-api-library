@@ -23,6 +23,7 @@ type BankAccountInfoAccountIdentification struct {
 	HULocalAccountIdentification      *HULocalAccountIdentification
 	IbanAccountIdentification         *IbanAccountIdentification
 	NOLocalAccountIdentification      *NOLocalAccountIdentification
+	NZLocalAccountIdentification      *NZLocalAccountIdentification
 	NumberAndBicAccountIdentification *NumberAndBicAccountIdentification
 	PLLocalAccountIdentification      *PLLocalAccountIdentification
 	SELocalAccountIdentification      *SELocalAccountIdentification
@@ -84,6 +85,13 @@ func IbanAccountIdentificationAsBankAccountInfoAccountIdentification(v *IbanAcco
 func NOLocalAccountIdentificationAsBankAccountInfoAccountIdentification(v *NOLocalAccountIdentification) BankAccountInfoAccountIdentification {
 	return BankAccountInfoAccountIdentification{
 		NOLocalAccountIdentification: v,
+	}
+}
+
+// NZLocalAccountIdentificationAsBankAccountInfoAccountIdentification is a convenience function that returns NZLocalAccountIdentification wrapped in BankAccountInfoAccountIdentification
+func NZLocalAccountIdentificationAsBankAccountInfoAccountIdentification(v *NZLocalAccountIdentification) BankAccountInfoAccountIdentification {
+	return BankAccountInfoAccountIdentification{
+		NZLocalAccountIdentification: v,
 	}
 }
 
@@ -237,6 +245,19 @@ func (dst *BankAccountInfoAccountIdentification) UnmarshalJSON(data []byte) erro
 		dst.NOLocalAccountIdentification = nil
 	}
 
+	// try to unmarshal data into NZLocalAccountIdentification
+	err = json.Unmarshal(data, &dst.NZLocalAccountIdentification)
+	if err == nil {
+		jsonNZLocalAccountIdentification, _ := json.Marshal(dst.NZLocalAccountIdentification)
+		if string(jsonNZLocalAccountIdentification) == "{}" || !dst.NZLocalAccountIdentification.isValidType() { // empty struct
+			dst.NZLocalAccountIdentification = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.NZLocalAccountIdentification = nil
+	}
+
 	// try to unmarshal data into NumberAndBicAccountIdentification
 	err = json.Unmarshal(data, &dst.NumberAndBicAccountIdentification)
 	if err == nil {
@@ -325,6 +346,7 @@ func (dst *BankAccountInfoAccountIdentification) UnmarshalJSON(data []byte) erro
 		dst.HULocalAccountIdentification = nil
 		dst.IbanAccountIdentification = nil
 		dst.NOLocalAccountIdentification = nil
+		dst.NZLocalAccountIdentification = nil
 		dst.NumberAndBicAccountIdentification = nil
 		dst.PLLocalAccountIdentification = nil
 		dst.SELocalAccountIdentification = nil
@@ -372,6 +394,10 @@ func (src BankAccountInfoAccountIdentification) MarshalJSON() ([]byte, error) {
 
 	if src.NOLocalAccountIdentification != nil {
 		return json.Marshal(&src.NOLocalAccountIdentification)
+	}
+
+	if src.NZLocalAccountIdentification != nil {
+		return json.Marshal(&src.NZLocalAccountIdentification)
 	}
 
 	if src.NumberAndBicAccountIdentification != nil {
@@ -436,6 +462,10 @@ func (obj *BankAccountInfoAccountIdentification) GetActualInstance() interface{}
 
 	if obj.NOLocalAccountIdentification != nil {
 		return obj.NOLocalAccountIdentification
+	}
+
+	if obj.NZLocalAccountIdentification != nil {
+		return obj.NZLocalAccountIdentification
 	}
 
 	if obj.NumberAndBicAccountIdentification != nil {
