@@ -150,6 +150,7 @@ Creates an order for payment terminal products for the merchant account identifi
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Terminal ordering read and write
+>Requests to the Management API test endpoint do not create actual orders for test terminals. To order test terminals, you need to [submit a sales order](https://docs.adyen.com/point-of-sale/managing-terminals/order-terminals/#sales-order-steps) in your Customer Area.
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TerminalOrdersMerchantLevelApiCreateOrderInput - Request parameters, see CreateOrderInput
@@ -1047,7 +1048,7 @@ Updates the terminal products order identified in the path.
 Updating is only possible while the order has the status **Placed**.
 
 The request body only needs to contain what you want to change.
-However, to update the products in the `items` array, you must provice the entire array. For example, if the array has three items:
+However, to update the products in the `items` array, you must provide the entire array. For example, if the array has three items:
  To remove one item, the array must include the remaining two items. Or to add one item, the array must include all four items.
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):

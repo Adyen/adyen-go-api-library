@@ -27,7 +27,7 @@ type GetTermsOfServiceDocumentResponse struct {
 	Language *string `json:"language,omitempty"`
 	// The unique identifier of the Terms of Service document.
 	TermsOfServiceDocumentId *string `json:"termsOfServiceDocumentId,omitempty"`
-	// The type of Terms of Service.
+	// The type of Terms of Service.  Possible values: *  **adyenForPlatformsManage** *  **adyenIssuing** *  **adyenForPlatformsAdvanced** *  **adyenCapital** *  **adyenAccount** *  **adyenCard** *  **adyenFranchisee**
 	Type *string `json:"type,omitempty"`
 }
 

@@ -283,7 +283,7 @@ func (o *Recurring) isValidContract() bool {
 	return false
 }
 func (o *Recurring) isValidTokenService() bool {
-	var allowedEnumValues = []string{"VISATOKENSERVICE", "MCTOKENSERVICE"}
+	var allowedEnumValues = []string{"VISATOKENSERVICE", "MCTOKENSERVICE", "AMEXTOKENSERVICE", "TOKEN_SHARING"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetTokenService() == allowed {
 			return true
