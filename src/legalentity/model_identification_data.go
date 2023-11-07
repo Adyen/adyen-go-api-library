@@ -22,7 +22,6 @@ type IdentificationData struct {
 	// The card number of the document that was issued (AU only).
 	CardNumber *string `json:"cardNumber,omitempty"`
 	// The expiry date of the document, in YYYY-MM-DD format.
-	// Deprecated
 	ExpiryDate *string `json:"expiryDate,omitempty"`
 	// The two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code where the document was issued. For example, **US**.
 	// Deprecated
@@ -88,7 +87,6 @@ func (o *IdentificationData) SetCardNumber(v string) {
 }
 
 // GetExpiryDate returns the ExpiryDate field value if set, zero value otherwise.
-// Deprecated
 func (o *IdentificationData) GetExpiryDate() string {
 	if o == nil || common.IsNil(o.ExpiryDate) {
 		var ret string
@@ -99,7 +97,6 @@ func (o *IdentificationData) GetExpiryDate() string {
 
 // GetExpiryDateOk returns a tuple with the ExpiryDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *IdentificationData) GetExpiryDateOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ExpiryDate) {
 		return nil, false
@@ -117,7 +114,6 @@ func (o *IdentificationData) HasExpiryDate() bool {
 }
 
 // SetExpiryDate gets a reference to the given string and assigns it to the ExpiryDate field.
-// Deprecated
 func (o *IdentificationData) SetExpiryDate(v string) {
 	o.ExpiryDate = &v
 }

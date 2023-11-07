@@ -118,30 +118,34 @@ func (a *MyAPICredentialApi) AddAllowedOrigin(ctx context.Context, r MyAPICreden
 	return *res, httpRes, err
 }
 
-// All parameters accepted by MyAPICredentialApi.GenerateNewClientKeyForSelf
-type MyAPICredentialApiGenerateNewClientKeyForSelfInput struct {
+// All parameters accepted by MyAPICredentialApi.GenerateClientKey
+type MyAPICredentialApiGenerateClientKeyInput struct {
 }
 
 /*
-Prepare a request for GenerateNewClientKeyForSelf
+Prepare a request for GenerateClientKey
 
-@return MyAPICredentialApiGenerateNewClientKeyForSelfInput
+@return MyAPICredentialApiGenerateClientKeyInput
 */
-func (a *MyAPICredentialApi) GenerateNewClientKeyForSelfInput() MyAPICredentialApiGenerateNewClientKeyForSelfInput {
-	return MyAPICredentialApiGenerateNewClientKeyForSelfInput{}
+func (a *MyAPICredentialApi) GenerateClientKeyInput() MyAPICredentialApiGenerateClientKeyInput {
+	return MyAPICredentialApiGenerateClientKeyInput{}
 }
 
 /*
-GenerateNewClientKeyForSelf Generate new client key for self
+GenerateClientKey Generate a client key
 
-Returns a new [client key](https://docs.adyen.com/development-resources/client-side-authentication#how-it-works) for the caller - API Credential or OAuth Access Token. You can use the new client key a few minutes after generating it. The old client key stops working 24 hours after generating a new one.To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+Generates a new [client key](https://docs.adyen.com/development-resources/client-side-authentication/) used to authenticate requests from your payment environment.
+You can use the new client key a few minutes after generating it.
+The old client key stops working 24 hours after generating a new one.
+
+To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—API credentials read and write
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@param r MyAPICredentialApiGenerateNewClientKeyForSelfInput - Request parameters, see GenerateNewClientKeyForSelfInput
+@param r MyAPICredentialApiGenerateClientKeyInput - Request parameters, see GenerateClientKeyInput
 @return GenerateClientKeyResponse, *http.Response, error
 */
-func (a *MyAPICredentialApi) GenerateNewClientKeyForSelf(ctx context.Context, r MyAPICredentialApiGenerateNewClientKeyForSelfInput) (GenerateClientKeyResponse, *http.Response, error) {
+func (a *MyAPICredentialApi) GenerateClientKey(ctx context.Context, r MyAPICredentialApiGenerateClientKeyInput) (GenerateClientKeyResponse, *http.Response, error) {
 	res := &GenerateClientKeyResponse{}
 	path := "/me/generateClientKey"
 	queryParams := url.Values{}

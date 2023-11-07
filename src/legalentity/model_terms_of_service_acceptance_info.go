@@ -28,7 +28,7 @@ type TermsOfServiceAcceptanceInfo struct {
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
 	// An Adyen-generated reference for the accepted Terms of Service.
 	Id *string `json:"id,omitempty"`
-	// The type of Terms of Service.
+	// The type of Terms of Service.  Possible values: *  **adyenForPlatformsManage** *  **adyenIssuing** *  **adyenForPlatformsAdvanced** *  **adyenCapital** *  **adyenAccount** *  **adyenCard** *  **adyenFranchisee**
 	Type *string `json:"type,omitempty"`
 }
 

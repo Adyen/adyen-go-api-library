@@ -150,6 +150,7 @@ Creates an order for payment terminal products for the company identified in the
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Terminal ordering read and write
+>Requests to the Management API test endpoint do not create actual orders for test terminals. To order test terminals, you need to [submit a sales order](https://docs.adyen.com/point-of-sale/managing-terminals/order-terminals/#sales-order-steps) in your Customer Area.
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TerminalOrdersCompanyLevelApiCreateOrderInput - Request parameters, see CreateOrderInput
