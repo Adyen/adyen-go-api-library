@@ -21,7 +21,7 @@ var _ common.MappedNullable = &CheckoutThreeDS2Action{}
 type CheckoutThreeDS2Action struct {
 	// A token needed to authorise a payment.
 	AuthorisationToken *string `json:"authorisationToken,omitempty"`
-	// A value that must be submitted to the `/payments/details` endpoint to verify this payment.
+	// Encoded payment data.
 	PaymentData *string `json:"paymentData,omitempty"`
 	// Specifies the payment method.
 	PaymentMethodType *string `json:"paymentMethodType,omitempty"`

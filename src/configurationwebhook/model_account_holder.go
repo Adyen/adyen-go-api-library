@@ -42,6 +42,8 @@ type AccountHolder struct {
 	Status *string `json:"status,omitempty"`
 	// The time zone of the account holder. For example, **Europe/Amsterdam**. Defaults to the time zone of the balance platform if no time zone is set. For possible values, see the [list of time zone codes](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 	TimeZone *string `json:"timeZone,omitempty"`
+	// List of verification deadlines and the capabilities that will be disallowed if verification errors are not resolved.
+	VerificationDeadlines []VerificationDeadline `json:"verificationDeadlines,omitempty"`
 }
 
 // NewAccountHolder instantiates a new AccountHolder object
@@ -431,6 +433,38 @@ func (o *AccountHolder) SetTimeZone(v string) {
 	o.TimeZone = &v
 }
 
+// GetVerificationDeadlines returns the VerificationDeadlines field value if set, zero value otherwise.
+func (o *AccountHolder) GetVerificationDeadlines() []VerificationDeadline {
+	if o == nil || common.IsNil(o.VerificationDeadlines) {
+		var ret []VerificationDeadline
+		return ret
+	}
+	return o.VerificationDeadlines
+}
+
+// GetVerificationDeadlinesOk returns a tuple with the VerificationDeadlines field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AccountHolder) GetVerificationDeadlinesOk() ([]VerificationDeadline, bool) {
+	if o == nil || common.IsNil(o.VerificationDeadlines) {
+		return nil, false
+	}
+	return o.VerificationDeadlines, true
+}
+
+// HasVerificationDeadlines returns a boolean if a field has been set.
+func (o *AccountHolder) HasVerificationDeadlines() bool {
+	if o != nil && !common.IsNil(o.VerificationDeadlines) {
+		return true
+	}
+
+	return false
+}
+
+// SetVerificationDeadlines gets a reference to the given []VerificationDeadline and assigns it to the VerificationDeadlines field.
+func (o *AccountHolder) SetVerificationDeadlines(v []VerificationDeadline) {
+	o.VerificationDeadlines = v
+}
+
 func (o AccountHolder) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -472,6 +506,9 @@ func (o AccountHolder) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.TimeZone) {
 		toSerialize["timeZone"] = o.TimeZone
+	}
+	if !common.IsNil(o.VerificationDeadlines) {
+		toSerialize["verificationDeadlines"] = o.VerificationDeadlines
 	}
 	return toSerialize, nil
 }
