@@ -2,7 +2,7 @@ name: Go
 
 on:
   pull_request:
-    branches: [ main, develop ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -20,7 +20,7 @@ jobs:
     - name: Test
       run: go test -v ./... -tags $GO_TEST_TAGS
       env:
-        GO_TEST_TAGS: ${{ github.ref == 'refs/heads/main' && 'integration' || 'unit' }}
+        GO_TEST_TAGS: ${{ contains(github.event.pull_request.labels.*.name, 'release') && 'integration' || 'unit' }}
         ADYEN_API_KEY: ${{ secrets.ADYEN_API_KEY }}
         ADYEN_MERCHANT: ${{ secrets.ADYEN_MERCHANT }}
         ADYEN_PASSWORD: ${{ secrets.ADYEN_PASSWORD }}

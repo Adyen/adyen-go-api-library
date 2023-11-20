@@ -1,6 +1,6 @@
 ## Steps for Release of this library
 
-Releases are done on GitHub on the `main` branch. All development is done on the `develop` branch only.
+Development and releases happen on GitHub from the `main` branch.
 
 **Step 0**: Update the exact API version to be supported (ie `CheckoutAPIVersion = v69`) in `src/adyen/api.go`
 
@@ -14,6 +14,6 @@ Releases are done on GitHub on the `main` branch. All development is done on the
 
 **Step 5**: Find and replace `github.com/adyen/adyen-go-api-library/v<current major version>` with `github.com/adyen/adyen-go-api-library/v<new major version>` throughout the project including test files and README. For example `github.com/adyen/adyen-go-api-library/v3` will become `github.com/adyen/adyen-go-api-library/v4`
 
-**Step 6**: create a PR form `develop` to `main` and wait for all tests to pass and for approvals
+**Step 6**: Review the automatic release PR
 
-**Step 7**: once ready merge the PR to main and create a GitHub release with changelog and a new tag corresponding to the version
+**Step 7**: Review the generated Github release and its release notes 
