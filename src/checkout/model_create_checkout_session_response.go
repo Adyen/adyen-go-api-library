@@ -119,11 +119,15 @@ type CreateCheckoutSessionResponse struct {
 	StorePaymentMethodMode *string `json:"storePaymentMethodMode,omitempty"`
 	// The shopper's telephone number.
 	TelephoneNumber *string `json:"telephoneNumber,omitempty"`
+	// Sets a custom theme for the Adyen-hosted payment page. The value can be any of the **Theme ID** values from your Customer Area.
+	ThemeId *string `json:"themeId,omitempty"`
 	// If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only), and not the payment authorisation.
 	// Deprecated
 	ThreeDSAuthenticationOnly *bool `json:"threeDSAuthenticationOnly,omitempty"`
 	// Set to true if the payment should be routed to a trusted MID.
 	TrustedShopper *bool `json:"trustedShopper,omitempty"`
+	// The URL for the Hosted Checkout page. Redirect the shopper to this URL so they can make the payment.
+	Url *string `json:"url,omitempty"`
 }
 
 // NewCreateCheckoutSessionResponse instantiates a new CreateCheckoutSessionResponse object
@@ -1937,6 +1941,38 @@ func (o *CreateCheckoutSessionResponse) SetTelephoneNumber(v string) {
 	o.TelephoneNumber = &v
 }
 
+// GetThemeId returns the ThemeId field value if set, zero value otherwise.
+func (o *CreateCheckoutSessionResponse) GetThemeId() string {
+	if o == nil || common.IsNil(o.ThemeId) {
+		var ret string
+		return ret
+	}
+	return *o.ThemeId
+}
+
+// GetThemeIdOk returns a tuple with the ThemeId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCheckoutSessionResponse) GetThemeIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.ThemeId) {
+		return nil, false
+	}
+	return o.ThemeId, true
+}
+
+// HasThemeId returns a boolean if a field has been set.
+func (o *CreateCheckoutSessionResponse) HasThemeId() bool {
+	if o != nil && !common.IsNil(o.ThemeId) {
+		return true
+	}
+
+	return false
+}
+
+// SetThemeId gets a reference to the given string and assigns it to the ThemeId field.
+func (o *CreateCheckoutSessionResponse) SetThemeId(v string) {
+	o.ThemeId = &v
+}
+
 // GetThreeDSAuthenticationOnly returns the ThreeDSAuthenticationOnly field value if set, zero value otherwise.
 // Deprecated
 func (o *CreateCheckoutSessionResponse) GetThreeDSAuthenticationOnly() bool {
@@ -2002,6 +2038,38 @@ func (o *CreateCheckoutSessionResponse) HasTrustedShopper() bool {
 // SetTrustedShopper gets a reference to the given bool and assigns it to the TrustedShopper field.
 func (o *CreateCheckoutSessionResponse) SetTrustedShopper(v bool) {
 	o.TrustedShopper = &v
+}
+
+// GetUrl returns the Url field value if set, zero value otherwise.
+func (o *CreateCheckoutSessionResponse) GetUrl() string {
+	if o == nil || common.IsNil(o.Url) {
+		var ret string
+		return ret
+	}
+	return *o.Url
+}
+
+// GetUrlOk returns a tuple with the Url field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCheckoutSessionResponse) GetUrlOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Url) {
+		return nil, false
+	}
+	return o.Url, true
+}
+
+// HasUrl returns a boolean if a field has been set.
+func (o *CreateCheckoutSessionResponse) HasUrl() bool {
+	if o != nil && !common.IsNil(o.Url) {
+		return true
+	}
+
+	return false
+}
+
+// SetUrl gets a reference to the given string and assigns it to the Url field.
+func (o *CreateCheckoutSessionResponse) SetUrl(v string) {
+	o.Url = &v
 }
 
 func (o CreateCheckoutSessionResponse) MarshalJSON() ([]byte, error) {
@@ -2173,11 +2241,17 @@ func (o CreateCheckoutSessionResponse) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.TelephoneNumber) {
 		toSerialize["telephoneNumber"] = o.TelephoneNumber
 	}
+	if !common.IsNil(o.ThemeId) {
+		toSerialize["themeId"] = o.ThemeId
+	}
 	if !common.IsNil(o.ThreeDSAuthenticationOnly) {
 		toSerialize["threeDSAuthenticationOnly"] = o.ThreeDSAuthenticationOnly
 	}
 	if !common.IsNil(o.TrustedShopper) {
 		toSerialize["trustedShopper"] = o.TrustedShopper
+	}
+	if !common.IsNil(o.Url) {
+		toSerialize["url"] = o.Url
 	}
 	return toSerialize, nil
 }

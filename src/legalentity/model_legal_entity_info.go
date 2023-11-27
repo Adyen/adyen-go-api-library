@@ -30,7 +30,8 @@ type LegalEntityInfo struct {
 	SoleProprietorship *SoleProprietorship `json:"soleProprietorship,omitempty"`
 	Trust              *Trust              `json:"trust,omitempty"`
 	// The type of legal entity.  Possible values: **individual**, **organization**, **soleProprietorship**, or **trust**.
-	Type *string `json:"type,omitempty"`
+	Type                      *string                    `json:"type,omitempty"`
+	UnincorporatedPartnership *UnincorporatedPartnership `json:"unincorporatedPartnership,omitempty"`
 }
 
 // NewLegalEntityInfo instantiates a new LegalEntityInfo object
@@ -306,6 +307,38 @@ func (o *LegalEntityInfo) SetType(v string) {
 	o.Type = &v
 }
 
+// GetUnincorporatedPartnership returns the UnincorporatedPartnership field value if set, zero value otherwise.
+func (o *LegalEntityInfo) GetUnincorporatedPartnership() UnincorporatedPartnership {
+	if o == nil || common.IsNil(o.UnincorporatedPartnership) {
+		var ret UnincorporatedPartnership
+		return ret
+	}
+	return *o.UnincorporatedPartnership
+}
+
+// GetUnincorporatedPartnershipOk returns a tuple with the UnincorporatedPartnership field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LegalEntityInfo) GetUnincorporatedPartnershipOk() (*UnincorporatedPartnership, bool) {
+	if o == nil || common.IsNil(o.UnincorporatedPartnership) {
+		return nil, false
+	}
+	return o.UnincorporatedPartnership, true
+}
+
+// HasUnincorporatedPartnership returns a boolean if a field has been set.
+func (o *LegalEntityInfo) HasUnincorporatedPartnership() bool {
+	if o != nil && !common.IsNil(o.UnincorporatedPartnership) {
+		return true
+	}
+
+	return false
+}
+
+// SetUnincorporatedPartnership gets a reference to the given UnincorporatedPartnership and assigns it to the UnincorporatedPartnership field.
+func (o *LegalEntityInfo) SetUnincorporatedPartnership(v UnincorporatedPartnership) {
+	o.UnincorporatedPartnership = &v
+}
+
 func (o LegalEntityInfo) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -339,6 +372,9 @@ func (o LegalEntityInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type
+	}
+	if !common.IsNil(o.UnincorporatedPartnership) {
+		toSerialize["unincorporatedPartnership"] = o.UnincorporatedPartnership
 	}
 	return toSerialize, nil
 }

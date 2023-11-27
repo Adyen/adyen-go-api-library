@@ -21,7 +21,7 @@ var _ common.MappedNullable = &CheckoutQrCodeAction{}
 type CheckoutQrCodeAction struct {
 	// Expiry time of the QR code.
 	ExpiresAt *string `json:"expiresAt,omitempty"`
-	// A value that must be submitted to the `/payments/details` endpoint to verify this payment.
+	// Encoded payment data.
 	PaymentData *string `json:"paymentData,omitempty"`
 	// Specifies the payment method.
 	PaymentMethodType *string `json:"paymentMethodType,omitempty"`

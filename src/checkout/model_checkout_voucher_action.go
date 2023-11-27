@@ -42,7 +42,7 @@ type CheckoutVoucherAction struct {
 	MerchantReference *string `json:"merchantReference,omitempty"`
 	// A base64 encoded signature of all properties
 	PassCreationToken *string `json:"passCreationToken,omitempty"`
-	// A value that must be submitted to the `/payments/details` endpoint to verify this payment.
+	// Encoded payment data.
 	PaymentData *string `json:"paymentData,omitempty"`
 	// Specifies the payment method.
 	PaymentMethodType *string `json:"paymentMethodType,omitempty"`

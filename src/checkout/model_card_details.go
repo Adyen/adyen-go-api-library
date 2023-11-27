@@ -802,7 +802,7 @@ func (v *NullableCardDetails) UnmarshalJSON(src []byte) error {
 }
 
 func (o *CardDetails) isValidFundingSource() bool {
-	var allowedEnumValues = []string{"debit"}
+	var allowedEnumValues = []string{"credit", "debit"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetFundingSource() == allowed {
 			return true
