@@ -272,7 +272,7 @@ func (v *NullableTransferRoute) UnmarshalJSON(src []byte) error {
 }
 
 func (o *TransferRoute) isValidCategory() bool {
-	var allowedEnumValues = []string{"bank", "card", "grants", "internal", "issuedCard", "migration", "platformPayment", "upgrade"}
+	var allowedEnumValues = []string{"bank", "card", "grants", "internal", "issuedCard", "migration", "platformPayment", "topUp", "upgrade"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetCategory() == allowed {
 			return true

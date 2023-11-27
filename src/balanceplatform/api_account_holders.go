@@ -328,7 +328,7 @@ type AccountHoldersApiGetTaxFormInput struct {
 	year     *int32
 }
 
-// The type of tax form you want to retrieve. Accepted values are **us1099k** and **us1099nec**
+// The type of tax form you want to retrieve. Accepted values are **US1099k** and **US1099nec**
 func (r AccountHoldersApiGetTaxFormInput) FormType(formType string) AccountHoldersApiGetTaxFormInput {
 	r.formType = &formType
 	return r

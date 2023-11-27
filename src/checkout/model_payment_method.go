@@ -424,7 +424,7 @@ func (v *NullablePaymentMethod) UnmarshalJSON(src []byte) error {
 }
 
 func (o *PaymentMethod) isValidFundingSource() bool {
-	var allowedEnumValues = []string{"debit"}
+	var allowedEnumValues = []string{"credit", "debit"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetFundingSource() == allowed {
 			return true

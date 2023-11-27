@@ -19,21 +19,23 @@ var _ common.MappedNullable = &TransactionRuleRestrictions{}
 
 // TransactionRuleRestrictions struct for TransactionRuleRestrictions
 type TransactionRuleRestrictions struct {
-	ActiveNetworkTokens      *ActiveNetworkTokensRestriction      `json:"activeNetworkTokens,omitempty"`
-	BrandVariants            *BrandVariantsRestriction            `json:"brandVariants,omitempty"`
-	CounterpartyBank         *CounterpartyBankRestriction         `json:"counterpartyBank,omitempty"`
-	Countries                *CountriesRestriction                `json:"countries,omitempty"`
-	DayOfWeek                *DayOfWeekRestriction                `json:"dayOfWeek,omitempty"`
-	DifferentCurrencies      *DifferentCurrenciesRestriction      `json:"differentCurrencies,omitempty"`
-	EntryModes               *EntryModesRestriction               `json:"entryModes,omitempty"`
-	InternationalTransaction *InternationalTransactionRestriction `json:"internationalTransaction,omitempty"`
-	MatchingTransactions     *MatchingTransactionsRestriction     `json:"matchingTransactions,omitempty"`
-	Mccs                     *MccsRestriction                     `json:"mccs,omitempty"`
-	MerchantNames            *MerchantNamesRestriction            `json:"merchantNames,omitempty"`
-	Merchants                *MerchantsRestriction                `json:"merchants,omitempty"`
-	ProcessingTypes          *ProcessingTypesRestriction          `json:"processingTypes,omitempty"`
-	TimeOfDay                *TimeOfDayRestriction                `json:"timeOfDay,omitempty"`
-	TotalAmount              *TotalAmountRestriction              `json:"totalAmount,omitempty"`
+	ActiveNetworkTokens         *ActiveNetworkTokensRestriction      `json:"activeNetworkTokens,omitempty"`
+	BrandVariants               *BrandVariantsRestriction            `json:"brandVariants,omitempty"`
+	CounterpartyBank            *CounterpartyBankRestriction         `json:"counterpartyBank,omitempty"`
+	Countries                   *CountriesRestriction                `json:"countries,omitempty"`
+	DayOfWeek                   *DayOfWeekRestriction                `json:"dayOfWeek,omitempty"`
+	DifferentCurrencies         *DifferentCurrenciesRestriction      `json:"differentCurrencies,omitempty"`
+	EntryModes                  *EntryModesRestriction               `json:"entryModes,omitempty"`
+	InternationalTransaction    *InternationalTransactionRestriction `json:"internationalTransaction,omitempty"`
+	MatchingTransactions        *MatchingTransactionsRestriction     `json:"matchingTransactions,omitempty"`
+	Mccs                        *MccsRestriction                     `json:"mccs,omitempty"`
+	MerchantNames               *MerchantNamesRestriction            `json:"merchantNames,omitempty"`
+	Merchants                   *MerchantsRestriction                `json:"merchants,omitempty"`
+	ProcessingTypes             *ProcessingTypesRestriction          `json:"processingTypes,omitempty"`
+	SameAmountRestriction       *SameAmountRestriction               `json:"sameAmountRestriction,omitempty"`
+	SameCounterpartyRestriction *SameCounterpartyRestriction         `json:"sameCounterpartyRestriction,omitempty"`
+	TimeOfDay                   *TimeOfDayRestriction                `json:"timeOfDay,omitempty"`
+	TotalAmount                 *TotalAmountRestriction              `json:"totalAmount,omitempty"`
 }
 
 // NewTransactionRuleRestrictions instantiates a new TransactionRuleRestrictions object
@@ -469,6 +471,70 @@ func (o *TransactionRuleRestrictions) SetProcessingTypes(v ProcessingTypesRestri
 	o.ProcessingTypes = &v
 }
 
+// GetSameAmountRestriction returns the SameAmountRestriction field value if set, zero value otherwise.
+func (o *TransactionRuleRestrictions) GetSameAmountRestriction() SameAmountRestriction {
+	if o == nil || common.IsNil(o.SameAmountRestriction) {
+		var ret SameAmountRestriction
+		return ret
+	}
+	return *o.SameAmountRestriction
+}
+
+// GetSameAmountRestrictionOk returns a tuple with the SameAmountRestriction field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionRuleRestrictions) GetSameAmountRestrictionOk() (*SameAmountRestriction, bool) {
+	if o == nil || common.IsNil(o.SameAmountRestriction) {
+		return nil, false
+	}
+	return o.SameAmountRestriction, true
+}
+
+// HasSameAmountRestriction returns a boolean if a field has been set.
+func (o *TransactionRuleRestrictions) HasSameAmountRestriction() bool {
+	if o != nil && !common.IsNil(o.SameAmountRestriction) {
+		return true
+	}
+
+	return false
+}
+
+// SetSameAmountRestriction gets a reference to the given SameAmountRestriction and assigns it to the SameAmountRestriction field.
+func (o *TransactionRuleRestrictions) SetSameAmountRestriction(v SameAmountRestriction) {
+	o.SameAmountRestriction = &v
+}
+
+// GetSameCounterpartyRestriction returns the SameCounterpartyRestriction field value if set, zero value otherwise.
+func (o *TransactionRuleRestrictions) GetSameCounterpartyRestriction() SameCounterpartyRestriction {
+	if o == nil || common.IsNil(o.SameCounterpartyRestriction) {
+		var ret SameCounterpartyRestriction
+		return ret
+	}
+	return *o.SameCounterpartyRestriction
+}
+
+// GetSameCounterpartyRestrictionOk returns a tuple with the SameCounterpartyRestriction field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionRuleRestrictions) GetSameCounterpartyRestrictionOk() (*SameCounterpartyRestriction, bool) {
+	if o == nil || common.IsNil(o.SameCounterpartyRestriction) {
+		return nil, false
+	}
+	return o.SameCounterpartyRestriction, true
+}
+
+// HasSameCounterpartyRestriction returns a boolean if a field has been set.
+func (o *TransactionRuleRestrictions) HasSameCounterpartyRestriction() bool {
+	if o != nil && !common.IsNil(o.SameCounterpartyRestriction) {
+		return true
+	}
+
+	return false
+}
+
+// SetSameCounterpartyRestriction gets a reference to the given SameCounterpartyRestriction and assigns it to the SameCounterpartyRestriction field.
+func (o *TransactionRuleRestrictions) SetSameCounterpartyRestriction(v SameCounterpartyRestriction) {
+	o.SameCounterpartyRestriction = &v
+}
+
 // GetTimeOfDay returns the TimeOfDay field value if set, zero value otherwise.
 func (o *TransactionRuleRestrictions) GetTimeOfDay() TimeOfDayRestriction {
 	if o == nil || common.IsNil(o.TimeOfDay) {
@@ -581,6 +647,12 @@ func (o TransactionRuleRestrictions) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.ProcessingTypes) {
 		toSerialize["processingTypes"] = o.ProcessingTypes
+	}
+	if !common.IsNil(o.SameAmountRestriction) {
+		toSerialize["sameAmountRestriction"] = o.SameAmountRestriction
+	}
+	if !common.IsNil(o.SameCounterpartyRestriction) {
+		toSerialize["sameCounterpartyRestriction"] = o.SameCounterpartyRestriction
 	}
 	if !common.IsNil(o.TimeOfDay) {
 		toSerialize["timeOfDay"] = o.TimeOfDay

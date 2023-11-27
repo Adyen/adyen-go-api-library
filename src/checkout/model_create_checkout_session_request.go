@@ -115,6 +115,8 @@ type CreateCheckoutSessionRequest struct {
 	StorePaymentMethodMode *string `json:"storePaymentMethodMode,omitempty"`
 	// The shopper's telephone number.
 	TelephoneNumber *string `json:"telephoneNumber,omitempty"`
+	// Sets a custom theme for the Adyen-hosted payment page. The value can be any of the **Theme ID** values from your Customer Area.
+	ThemeId *string `json:"themeId,omitempty"`
 	// If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only), and not the payment authorisation.
 	// Deprecated
 	ThreeDSAuthenticationOnly *bool `json:"threeDSAuthenticationOnly,omitempty"`
@@ -1883,6 +1885,38 @@ func (o *CreateCheckoutSessionRequest) SetTelephoneNumber(v string) {
 	o.TelephoneNumber = &v
 }
 
+// GetThemeId returns the ThemeId field value if set, zero value otherwise.
+func (o *CreateCheckoutSessionRequest) GetThemeId() string {
+	if o == nil || common.IsNil(o.ThemeId) {
+		var ret string
+		return ret
+	}
+	return *o.ThemeId
+}
+
+// GetThemeIdOk returns a tuple with the ThemeId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCheckoutSessionRequest) GetThemeIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.ThemeId) {
+		return nil, false
+	}
+	return o.ThemeId, true
+}
+
+// HasThemeId returns a boolean if a field has been set.
+func (o *CreateCheckoutSessionRequest) HasThemeId() bool {
+	if o != nil && !common.IsNil(o.ThemeId) {
+		return true
+	}
+
+	return false
+}
+
+// SetThemeId gets a reference to the given string and assigns it to the ThemeId field.
+func (o *CreateCheckoutSessionRequest) SetThemeId(v string) {
+	o.ThemeId = &v
+}
+
 // GetThreeDSAuthenticationOnly returns the ThreeDSAuthenticationOnly field value if set, zero value otherwise.
 // Deprecated
 func (o *CreateCheckoutSessionRequest) GetThreeDSAuthenticationOnly() bool {
@@ -2116,6 +2150,9 @@ func (o CreateCheckoutSessionRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.TelephoneNumber) {
 		toSerialize["telephoneNumber"] = o.TelephoneNumber
+	}
+	if !common.IsNil(o.ThemeId) {
+		toSerialize["themeId"] = o.ThemeId
 	}
 	if !common.IsNil(o.ThreeDSAuthenticationOnly) {
 		toSerialize["threeDSAuthenticationOnly"] = o.ThreeDSAuthenticationOnly
