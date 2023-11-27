@@ -29,7 +29,7 @@ func NewAPIClient(client *common.Client) *APIClient {
 	c := &APIClient{}
     c.common.Client = client
     c.common.BasePath = func() string {
-        return client.Cfg.Endpoint
+        return client.Cfg.PaymentEndpoint
     }
 
 	// API Services

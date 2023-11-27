@@ -10,8 +10,7 @@ package transferwebhook
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v8/src/common"
+    "github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the TransactionEventViolation type satisfies the MappedNullable interface at compile time
@@ -20,9 +19,9 @@ var _ common.MappedNullable = &TransactionEventViolation{}
 // TransactionEventViolation struct for TransactionEventViolation
 type TransactionEventViolation struct {
 	// An explanation about why the transaction rule failed.
-	Reason                *string                   `json:"reason,omitempty"`
-	TransactionRule       *TransactionRuleReference `json:"transactionRule,omitempty"`
-	TransactionRuleSource *TransactionRuleSource    `json:"transactionRuleSource,omitempty"`
+	Reason *string `json:"reason,omitempty"`
+	TransactionRule *TransactionRuleReference `json:"transactionRule,omitempty"`
+	TransactionRuleSource *TransactionRuleSource `json:"transactionRuleSource,omitempty"`
 }
 
 // NewTransactionEventViolation instantiates a new TransactionEventViolation object
@@ -139,7 +138,7 @@ func (o *TransactionEventViolation) SetTransactionRuleSource(v TransactionRuleSo
 }
 
 func (o TransactionEventViolation) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +194,6 @@ func (v *NullableTransactionEventViolation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

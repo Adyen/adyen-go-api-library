@@ -10,9 +10,8 @@ package management
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v8/src/common"
 	"time"
-
-	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the CustomNotification type satisfies the MappedNullable interface at compile time
@@ -27,11 +26,11 @@ type CustomNotification struct {
 	EventDate *time.Time `json:"eventDate,omitempty"`
 	// Your reference for the custom test notification.
 	MerchantReference *string `json:"merchantReference,omitempty"`
-	// The payment method for the payment that the notification is about. Possible values: * **amex** * **visa** * **mc** * **maestro** * **bcmc** * **paypal**  * **sms**  * **bankTransfer_NL** * **bankTransfer_DE** * **bankTransfer_BE** * **ideal** * **elv** * **sepadirectdebit**
+	// The payment method for the payment that the notification is about. Possible values: * **amex** * **visa** * **mc** * **maestro** * **bcmc** * **paypal**  * **sms**  * **bankTransfer_NL** * **bankTransfer_DE** * **bankTransfer_BE** * **ideal** * **elv** * **sepadirectdebit** 
 	PaymentMethod *string `json:"paymentMethod,omitempty"`
 	// A descripton of what caused the notification.
 	Reason *string `json:"reason,omitempty"`
-	// The outcome of the event which the notification is about. Set to either **true** or **false**.
+	// The outcome of the event which the notification is about. Set to either **true** or **false**. 
 	Success *bool `json:"success,omitempty"`
 }
 
@@ -277,7 +276,7 @@ func (o *CustomNotification) SetSuccess(v bool) {
 }
 
 func (o CustomNotification) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -345,3 +344,6 @@ func (v *NullableCustomNotification) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

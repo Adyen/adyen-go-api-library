@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v8/src/common"
+    "github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the DifferentCurrenciesRestriction type satisfies the MappedNullable interface at compile time
@@ -21,7 +20,7 @@ var _ common.MappedNullable = &DifferentCurrenciesRestriction{}
 type DifferentCurrenciesRestriction struct {
 	// Defines how the condition must be evaluated.
 	Operation string `json:"operation"`
-	// Checks the currency of the payment against the currency of the payment instrument.  Possible values:  - **true**: The currency of the payment is different from the currency of the payment instrument.  - **false**: The currencies are the same.
+	// Checks the currency of the payment against the currency of the payment instrument.  Possible values:  - **true**: The currency of the payment is different from the currency of the payment instrument.  - **false**: The currencies are the same.  
 	Value *bool `json:"value,omitempty"`
 }
 
@@ -100,7 +99,7 @@ func (o *DifferentCurrenciesRestriction) SetValue(v bool) {
 }
 
 func (o DifferentCurrenciesRestriction) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -151,3 +150,6 @@ func (v *NullableDifferentCurrenciesRestriction) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

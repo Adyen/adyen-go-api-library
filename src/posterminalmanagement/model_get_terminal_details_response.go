@@ -10,9 +10,8 @@ package posterminalmanagement
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v8/src/common"
 	"time"
-
-	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the GetTerminalDetailsResponse type satisfies the MappedNullable interface at compile time
@@ -59,8 +58,8 @@ type GetTerminalDetailsResponse struct {
 	// On a terminal that supports 3G or 4G connectivity, indicates the status of the SIM card in the terminal: ACTIVE or INVENTORY.
 	SimStatus *string `json:"simStatus,omitempty"`
 	// The store code of the store that the terminal is assigned to.
-	Store        *string `json:"store,omitempty"`
-	StoreDetails *Store  `json:"storeDetails,omitempty"`
+	Store *string `json:"store,omitempty"`
+	StoreDetails *Store `json:"storeDetails,omitempty"`
 	// The unique terminal ID.
 	Terminal string `json:"terminal"`
 	// The status of the terminal:   - `OnlineToday`, `OnlineLast1Day`, `OnlineLast2Days` etcetera to `OnlineLast7Days`: Indicates when in the past week the terminal was last online.   - `SwitchedOff`: Indicates it was more than a week ago that the terminal was last online.   - `ReAssignToInventoryPending`, `ReAssignToStorePending`, `ReAssignToMerchantInventoryPending`: Indicates the terminal is scheduled to be reassigned.
@@ -875,7 +874,7 @@ func (o *GetTerminalDetailsResponse) SetWifiMac(v string) {
 }
 
 func (o GetTerminalDetailsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -994,12 +993,14 @@ func (v *NullableGetTerminalDetailsResponse) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *GetTerminalDetailsResponse) isValidTerminalStatus() bool {
-	var allowedEnumValues = []string{"OnlineLast1Day", "OnlineLast2Days", "OnlineLast3Days", "OnlineLast4Days", "OnlineLast5Days", "OnlineLast6Days", "OnlineLast7Days", "OnlineToday", "ReAssignToInventoryPending", "ReAssignToMerchantInventoryPending", "ReAssignToStorePending", "SwitchedOff"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetTerminalStatus() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "OnlineLast1Day", "OnlineLast2Days", "OnlineLast3Days", "OnlineLast4Days", "OnlineLast5Days", "OnlineLast6Days", "OnlineLast7Days", "OnlineToday", "ReAssignToInventoryPending", "ReAssignToMerchantInventoryPending", "ReAssignToStorePending", "SwitchedOff" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetTerminalStatus() == allowed {
+            return true
+        }
+    }
+    return false
 }
+
