@@ -1,3 +1,5 @@
+goimports:=$(shell go env GOPATH)/bin/goimports
+
 build:
 	@echo "Building Adyen Go API library"
 	go build -o bin/main main.go
@@ -10,6 +12,13 @@ test:
 	@echo "Testing Adyen Go API library"
 	go test ./...
 
+# Download the import optimizer (and code formatter)
+$(goimports):
+	go install golang.org/x/tools/cmd/goimports@latest
+
+fmt: $(goimports)
+	$(goimports) -w src
+
 verify: build run test
 
 ## Automation
@@ -18,7 +27,6 @@ openapi-generator-version:=6.5.0
 openapi-generator-url:=https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/$(openapi-generator-version)/openapi-generator-cli-$(openapi-generator-version).jar
 openapi-generator-jar:=bin/openapi-generator-cli.jar
 openapi-generator-cli:=java -jar $(openapi-generator-jar)
-goimports:=$(shell go env GOPATH)/bin/goimports
 
 generator:=go
 services:=balancecontrol balanceplatform acswebhook configurationwebhook reportwebhook transferwebhook binlookup checkout legalentity management managementwebhook payments payout posterminalmanagement recurring storedvalue transfers dataprotection
@@ -103,10 +111,6 @@ templates: $(openapi-generator-jar)
 $(openapi-generator-jar):
 	mkdir -p bin
 	wget --quiet -o /dev/null $(openapi-generator-url) -O $(openapi-generator-jar)
-
-# Download the import optimizer (and code formatter)
-$(goimports):
-	go install golang.org/x/tools/cmd/goimports@latest
 
 # Discard generated artifacts and changed models
 clean:
