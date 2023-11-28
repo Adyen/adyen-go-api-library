@@ -10,6 +10,9 @@ test:
 	@echo "Testing Adyen Go API library"
 	go test ./...
 
+fmt: $(goimports)
+	$(goimports) -w src
+
 verify: build run test
 
 ## Automation
