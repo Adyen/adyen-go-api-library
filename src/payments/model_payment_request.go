@@ -2016,7 +2016,7 @@ func (o *PaymentRequest) isValidEntityType() bool {
 	return false
 }
 func (o *PaymentRequest) isValidFundingSource() bool {
-	var allowedEnumValues = []string{"debit"}
+	var allowedEnumValues = []string{"credit", "debit"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetFundingSource() == allowed {
 			return true

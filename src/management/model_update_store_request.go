@@ -25,8 +25,10 @@ type UpdateStoreRequest struct {
 	// The description of the store.
 	Description *string `json:"description,omitempty"`
 	// When using the Zip payment method: The location ID that Zip has assigned to your store.
-	ExternalReferenceId *string                  `json:"externalReferenceId,omitempty"`
-	SplitConfiguration  *StoreSplitConfiguration `json:"splitConfiguration,omitempty"`
+	ExternalReferenceId *string `json:"externalReferenceId,omitempty"`
+	// The phone number of the store, including '+' and country code in the [E.164](https://en.wikipedia.org/wiki/E.164) format. If passed in a different format, we convert and validate the phone number against E.164.
+	PhoneNumber        *string                  `json:"phoneNumber,omitempty"`
+	SplitConfiguration *StoreSplitConfiguration `json:"splitConfiguration,omitempty"`
 	// The status of the store. Possible values are:  - **active**: This value is assigned automatically when a store is created.  - **inactive**: The maximum [transaction limits and number of Store-and-Forward transactions](https://docs.adyen.com/point-of-sale/determine-account-structure/configure-features#payment-features) for the store are set to 0. This blocks new transactions, but captures are still possible. - **closed**: The terminals of the store are reassigned to the merchant inventory, so they can't process payments.  You can change the status from **active** to **inactive**, and from **inactive** to **active** or **closed**.  Once **closed**, a store can't be reopened.
 	Status *string `json:"status,omitempty"`
 }
@@ -176,6 +178,38 @@ func (o *UpdateStoreRequest) SetExternalReferenceId(v string) {
 	o.ExternalReferenceId = &v
 }
 
+// GetPhoneNumber returns the PhoneNumber field value if set, zero value otherwise.
+func (o *UpdateStoreRequest) GetPhoneNumber() string {
+	if o == nil || common.IsNil(o.PhoneNumber) {
+		var ret string
+		return ret
+	}
+	return *o.PhoneNumber
+}
+
+// GetPhoneNumberOk returns a tuple with the PhoneNumber field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateStoreRequest) GetPhoneNumberOk() (*string, bool) {
+	if o == nil || common.IsNil(o.PhoneNumber) {
+		return nil, false
+	}
+	return o.PhoneNumber, true
+}
+
+// HasPhoneNumber returns a boolean if a field has been set.
+func (o *UpdateStoreRequest) HasPhoneNumber() bool {
+	if o != nil && !common.IsNil(o.PhoneNumber) {
+		return true
+	}
+
+	return false
+}
+
+// SetPhoneNumber gets a reference to the given string and assigns it to the PhoneNumber field.
+func (o *UpdateStoreRequest) SetPhoneNumber(v string) {
+	o.PhoneNumber = &v
+}
+
 // GetSplitConfiguration returns the SplitConfiguration field value if set, zero value otherwise.
 func (o *UpdateStoreRequest) GetSplitConfiguration() StoreSplitConfiguration {
 	if o == nil || common.IsNil(o.SplitConfiguration) {
@@ -261,6 +295,9 @@ func (o UpdateStoreRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.ExternalReferenceId) {
 		toSerialize["externalReferenceId"] = o.ExternalReferenceId
+	}
+	if !common.IsNil(o.PhoneNumber) {
+		toSerialize["phoneNumber"] = o.PhoneNumber
 	}
 	if !common.IsNil(o.SplitConfiguration) {
 		toSerialize["splitConfiguration"] = o.SplitConfiguration

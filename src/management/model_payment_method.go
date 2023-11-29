@@ -22,6 +22,7 @@ type PaymentMethod struct {
 	AfterpayTouch *AfterpayTouchInfo `json:"afterpayTouch,omitempty"`
 	// Indicates whether receiving payments is allowed. This value is set to **true** by Adyen after screening your merchant account.
 	Allowed  *bool         `json:"allowed,omitempty"`
+	Amex     *AmexInfo     `json:"amex,omitempty"`
 	ApplePay *ApplePayInfo `json:"applePay,omitempty"`
 	Bcmc     *BcmcInfo     `json:"bcmc,omitempty"`
 	// The unique identifier of the business line.
@@ -150,6 +151,38 @@ func (o *PaymentMethod) HasAllowed() bool {
 // SetAllowed gets a reference to the given bool and assigns it to the Allowed field.
 func (o *PaymentMethod) SetAllowed(v bool) {
 	o.Allowed = &v
+}
+
+// GetAmex returns the Amex field value if set, zero value otherwise.
+func (o *PaymentMethod) GetAmex() AmexInfo {
+	if o == nil || common.IsNil(o.Amex) {
+		var ret AmexInfo
+		return ret
+	}
+	return *o.Amex
+}
+
+// GetAmexOk returns a tuple with the Amex field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethod) GetAmexOk() (*AmexInfo, bool) {
+	if o == nil || common.IsNil(o.Amex) {
+		return nil, false
+	}
+	return o.Amex, true
+}
+
+// HasAmex returns a boolean if a field has been set.
+func (o *PaymentMethod) HasAmex() bool {
+	if o != nil && !common.IsNil(o.Amex) {
+		return true
+	}
+
+	return false
+}
+
+// SetAmex gets a reference to the given AmexInfo and assigns it to the Amex field.
+func (o *PaymentMethod) SetAmex(v AmexInfo) {
+	o.Amex = &v
 }
 
 // GetApplePay returns the ApplePay field value if set, zero value otherwise.
@@ -1279,6 +1312,9 @@ func (o PaymentMethod) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Allowed) {
 		toSerialize["allowed"] = o.Allowed
+	}
+	if !common.IsNil(o.Amex) {
+		toSerialize["amex"] = o.Amex
 	}
 	if !common.IsNil(o.ApplePay) {
 		toSerialize["applePay"] = o.ApplePay
