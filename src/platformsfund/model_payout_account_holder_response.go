@@ -9,6 +9,7 @@
  */
 
 package platformsfund
+
 // PayoutAccountHolderResponse struct for PayoutAccountHolderResponse
 type PayoutAccountHolderResponse struct {
 	// The unique ID of the Bank Account to which the payout was made.

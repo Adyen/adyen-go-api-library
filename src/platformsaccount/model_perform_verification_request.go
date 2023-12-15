@@ -9,6 +9,7 @@
  */
 
 package platformsaccount
+
 // PerformVerificationRequest struct for PerformVerificationRequest
 type PerformVerificationRequest struct {
 	// The code of the account holder to verify.

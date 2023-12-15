@@ -9,6 +9,7 @@
  */
 
 package platformsfund
+
 // Amount struct for Amount
 type Amount struct {
 	// The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes).

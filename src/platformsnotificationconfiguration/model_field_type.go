@@ -9,6 +9,7 @@
  */
 
 package platformsnotificationconfiguration
+
 // FieldType struct for FieldType
 type FieldType struct {
 	// The full name of the property.

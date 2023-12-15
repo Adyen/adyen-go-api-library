@@ -18,9 +18,9 @@ import (
 // UpdateAccountHolderResponse struct for UpdateAccountHolderResponse
 type UpdateAccountHolderResponse struct {
 	// The code of the account holder.
-	AccountHolderCode *string `json:"accountHolderCode,omitempty"`
+	AccountHolderCode    *string               `json:"accountHolderCode,omitempty"`
 	AccountHolderDetails *AccountHolderDetails `json:"accountHolderDetails,omitempty"`
-	AccountHolderStatus AccountHolderStatus `json:"accountHolderStatus"`
+	AccountHolderStatus  AccountHolderStatus   `json:"accountHolderStatus"`
 	// The description of the account holder.
 	Description *string `json:"description,omitempty"`
 	// in case the account holder has not been updated, contains account holder fields, that did not pass the validation.
@@ -32,7 +32,7 @@ type UpdateAccountHolderResponse struct {
 	// The reference of a request. Can be used to uniquely identify the request.
 	PspReference *string `json:"pspReference,omitempty"`
 	// The result code.
-	ResultCode *string `json:"resultCode,omitempty"`
+	ResultCode   *string               `json:"resultCode,omitempty"`
 	Verification KYCVerificationResult `json:"verification"`
 	// The identifier of the profile that applies to this entity.
 	VerificationProfile *string `json:"verificationProfile,omitempty"`
@@ -42,7 +42,7 @@ type UpdateAccountHolderResponse struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateAccountHolderResponse(accountHolderStatus AccountHolderStatus, legalEntity string, verification KYCVerificationResult, ) *UpdateAccountHolderResponse {
+func NewUpdateAccountHolderResponse(accountHolderStatus AccountHolderStatus, legalEntity string, verification KYCVerificationResult) *UpdateAccountHolderResponse {
 	this := UpdateAccountHolderResponse{}
 	this.AccountHolderStatus = accountHolderStatus
 	this.LegalEntity = legalEntity
@@ -124,7 +124,7 @@ func (o *UpdateAccountHolderResponse) SetAccountHolderDetails(v AccountHolderDet
 
 // GetAccountHolderStatus returns the AccountHolderStatus field value
 func (o *UpdateAccountHolderResponse) GetAccountHolderStatus() AccountHolderStatus {
-	if o == nil  {
+	if o == nil {
 		var ret AccountHolderStatus
 		return ret
 	}
@@ -135,7 +135,7 @@ func (o *UpdateAccountHolderResponse) GetAccountHolderStatus() AccountHolderStat
 // GetAccountHolderStatusOk returns a tuple with the AccountHolderStatus field value
 // and a boolean to check if the value has been set.
 func (o *UpdateAccountHolderResponse) GetAccountHolderStatusOk() (*AccountHolderStatus, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.AccountHolderStatus, true
@@ -212,7 +212,7 @@ func (o *UpdateAccountHolderResponse) SetInvalidFields(v []ErrorFieldType) {
 
 // GetLegalEntity returns the LegalEntity field value
 func (o *UpdateAccountHolderResponse) GetLegalEntity() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -223,7 +223,7 @@ func (o *UpdateAccountHolderResponse) GetLegalEntity() string {
 // GetLegalEntityOk returns a tuple with the LegalEntity field value
 // and a boolean to check if the value has been set.
 func (o *UpdateAccountHolderResponse) GetLegalEntityOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.LegalEntity, true
@@ -332,7 +332,7 @@ func (o *UpdateAccountHolderResponse) SetResultCode(v string) {
 
 // GetVerification returns the Verification field value
 func (o *UpdateAccountHolderResponse) GetVerification() KYCVerificationResult {
-	if o == nil  {
+	if o == nil {
 		var ret KYCVerificationResult
 		return ret
 	}
@@ -343,7 +343,7 @@ func (o *UpdateAccountHolderResponse) GetVerification() KYCVerificationResult {
 // GetVerificationOk returns a tuple with the Verification field value
 // and a boolean to check if the value has been set.
 func (o *UpdateAccountHolderResponse) GetVerificationOk() (*KYCVerificationResult, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Verification, true
@@ -459,5 +459,3 @@ func (v *NullableUpdateAccountHolderResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

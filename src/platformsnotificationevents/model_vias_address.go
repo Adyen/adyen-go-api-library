@@ -35,7 +35,7 @@ type ViasAddress struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewViasAddress(country string, ) *ViasAddress {
+func NewViasAddress(country string) *ViasAddress {
 	this := ViasAddress{}
 	this.Country = country
 	return &this
@@ -83,7 +83,7 @@ func (o *ViasAddress) SetCity(v string) {
 
 // GetCountry returns the Country field value
 func (o *ViasAddress) GetCountry() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -94,7 +94,7 @@ func (o *ViasAddress) GetCountry() string {
 // GetCountryOk returns a tuple with the Country field value
 // and a boolean to check if the value has been set.
 func (o *ViasAddress) GetCountryOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Country, true
@@ -291,5 +291,3 @@ func (v *NullableViasAddress) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

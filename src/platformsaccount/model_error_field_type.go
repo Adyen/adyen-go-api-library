@@ -9,11 +9,12 @@
  */
 
 package platformsaccount
+
 // ErrorFieldType struct for ErrorFieldType
 type ErrorFieldType struct {
 	// The validation error code.
 	ErrorCode int32 `json:"errorCode,omitempty"`
 	// A description of the validation error.
-	ErrorDescription string `json:"errorDescription,omitempty"`
-	FieldType *FieldType `json:"fieldType,omitempty"`
+	ErrorDescription string     `json:"errorDescription,omitempty"`
+	FieldType        *FieldType `json:"fieldType,omitempty"`
 }

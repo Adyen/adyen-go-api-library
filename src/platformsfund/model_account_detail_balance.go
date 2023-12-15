@@ -9,9 +9,10 @@
  */
 
 package platformsfund
+
 // AccountDetailBalance struct for AccountDetailBalance
 type AccountDetailBalance struct {
 	// The code of the account that holds the balance.
-	AccountCode string `json:"accountCode,omitempty"`
+	AccountCode   string         `json:"accountCode,omitempty"`
 	DetailBalance *DetailBalance `json:"detailBalance,omitempty"`
 }

@@ -23,7 +23,7 @@ type ScheduledRefundsNotificationContent struct {
 	AccountHolderCode string `json:"accountHolderCode"`
 	// Invalid fields list.
 	InvalidFields *[]ErrorFieldType `json:"invalidFields,omitempty"`
-	LastPayout Transaction `json:"lastPayout"`
+	LastPayout    Transaction       `json:"lastPayout"`
 	// A list of the refunds that have been scheduled and their results.
 	RefundResults []RefundResult `json:"refundResults"`
 }
@@ -32,7 +32,7 @@ type ScheduledRefundsNotificationContent struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewScheduledRefundsNotificationContent(accountCode string, accountHolderCode string, lastPayout Transaction, refundResults []RefundResult, ) *ScheduledRefundsNotificationContent {
+func NewScheduledRefundsNotificationContent(accountCode string, accountHolderCode string, lastPayout Transaction, refundResults []RefundResult) *ScheduledRefundsNotificationContent {
 	this := ScheduledRefundsNotificationContent{}
 	this.AccountCode = accountCode
 	this.AccountHolderCode = accountHolderCode
@@ -51,7 +51,7 @@ func NewScheduledRefundsNotificationContentWithDefaults() *ScheduledRefundsNotif
 
 // GetAccountCode returns the AccountCode field value
 func (o *ScheduledRefundsNotificationContent) GetAccountCode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -62,7 +62,7 @@ func (o *ScheduledRefundsNotificationContent) GetAccountCode() string {
 // GetAccountCodeOk returns a tuple with the AccountCode field value
 // and a boolean to check if the value has been set.
 func (o *ScheduledRefundsNotificationContent) GetAccountCodeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.AccountCode, true
@@ -75,7 +75,7 @@ func (o *ScheduledRefundsNotificationContent) SetAccountCode(v string) {
 
 // GetAccountHolderCode returns the AccountHolderCode field value
 func (o *ScheduledRefundsNotificationContent) GetAccountHolderCode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -86,7 +86,7 @@ func (o *ScheduledRefundsNotificationContent) GetAccountHolderCode() string {
 // GetAccountHolderCodeOk returns a tuple with the AccountHolderCode field value
 // and a boolean to check if the value has been set.
 func (o *ScheduledRefundsNotificationContent) GetAccountHolderCodeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.AccountHolderCode, true
@@ -131,7 +131,7 @@ func (o *ScheduledRefundsNotificationContent) SetInvalidFields(v []ErrorFieldTyp
 
 // GetLastPayout returns the LastPayout field value
 func (o *ScheduledRefundsNotificationContent) GetLastPayout() Transaction {
-	if o == nil  {
+	if o == nil {
 		var ret Transaction
 		return ret
 	}
@@ -142,7 +142,7 @@ func (o *ScheduledRefundsNotificationContent) GetLastPayout() Transaction {
 // GetLastPayoutOk returns a tuple with the LastPayout field value
 // and a boolean to check if the value has been set.
 func (o *ScheduledRefundsNotificationContent) GetLastPayoutOk() (*Transaction, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.LastPayout, true
@@ -155,7 +155,7 @@ func (o *ScheduledRefundsNotificationContent) SetLastPayout(v Transaction) {
 
 // GetRefundResults returns the RefundResults field value
 func (o *ScheduledRefundsNotificationContent) GetRefundResults() []RefundResult {
-	if o == nil  {
+	if o == nil {
 		var ret []RefundResult
 		return ret
 	}
@@ -166,7 +166,7 @@ func (o *ScheduledRefundsNotificationContent) GetRefundResults() []RefundResult 
 // GetRefundResultsOk returns a tuple with the RefundResults field value
 // and a boolean to check if the value has been set.
 func (o *ScheduledRefundsNotificationContent) GetRefundResultsOk() (*[]RefundResult, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.RefundResults, true
@@ -232,5 +232,3 @@ func (v *NullableScheduledRefundsNotificationContent) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -9,6 +9,7 @@
  */
 
 package platformsaccount
+
 // BusinessDetails struct for BusinessDetails
 type BusinessDetails struct {
 	// The registered name of the company (if it differs from the legal name of the company).

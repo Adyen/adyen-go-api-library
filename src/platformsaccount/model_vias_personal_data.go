@@ -9,6 +9,7 @@
  */
 
 package platformsaccount
+
 // ViasPersonalData struct for ViasPersonalData
 type ViasPersonalData struct {
 	// The date of birth of the person. The date should be in ISO-8601 format yyyy-mm-dd (e.g. 2000-01-31).

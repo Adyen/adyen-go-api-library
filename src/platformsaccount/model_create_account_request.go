@@ -9,6 +9,7 @@
  */
 
 package platformsaccount
+
 // CreateAccountRequest struct for CreateAccountRequest
 type CreateAccountRequest struct {
 	// The code of Account Holder under which to create the account.

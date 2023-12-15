@@ -31,7 +31,7 @@ type ViasName struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewViasName(firstName string, gender string, lastName string, ) *ViasName {
+func NewViasName(firstName string, gender string, lastName string) *ViasName {
 	this := ViasName{}
 	this.FirstName = firstName
 	this.Gender = gender
@@ -49,7 +49,7 @@ func NewViasNameWithDefaults() *ViasName {
 
 // GetFirstName returns the FirstName field value
 func (o *ViasName) GetFirstName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -60,7 +60,7 @@ func (o *ViasName) GetFirstName() string {
 // GetFirstNameOk returns a tuple with the FirstName field value
 // and a boolean to check if the value has been set.
 func (o *ViasName) GetFirstNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.FirstName, true
@@ -73,7 +73,7 @@ func (o *ViasName) SetFirstName(v string) {
 
 // GetGender returns the Gender field value
 func (o *ViasName) GetGender() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -84,7 +84,7 @@ func (o *ViasName) GetGender() string {
 // GetGenderOk returns a tuple with the Gender field value
 // and a boolean to check if the value has been set.
 func (o *ViasName) GetGenderOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Gender, true
@@ -129,7 +129,7 @@ func (o *ViasName) SetInfix(v string) {
 
 // GetLastName returns the LastName field value
 func (o *ViasName) GetLastName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -140,7 +140,7 @@ func (o *ViasName) GetLastName() string {
 // GetLastNameOk returns a tuple with the LastName field value
 // and a boolean to check if the value has been set.
 func (o *ViasName) GetLastNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.LastName, true
@@ -203,5 +203,3 @@ func (v *NullableViasName) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

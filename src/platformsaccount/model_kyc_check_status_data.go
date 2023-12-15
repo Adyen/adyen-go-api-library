@@ -9,12 +9,13 @@
  */
 
 package platformsaccount
+
 // KYCCheckStatusData struct for KYCCheckStatusData
 type KYCCheckStatusData struct {
 	// A list of the fields required for execution of the check.
 	RequiredFields []string `json:"requiredFields,omitempty"`
 	// The status of the check. >Permitted Values: `DATA_PROVIDED`, `PASSED`, `PENDING`, `AWAITING_DATA`, `RETRY_LIMIT_REACHED`, `INVALID_DATA`, `FAILED`.
-	Status string `json:"status"`
+	Status  string           `json:"status"`
 	Summary *KYCCheckSummary `json:"summary,omitempty"`
 	// The type of check. >Permitted Values: `COMPANY_VERIFICATION`, `IDENTITY_VERIFICATION`, `PASSPORT_VERIFICATION`, `BANK_ACCOUNT_VERIFICATION`, `NONPROFIT_VERIFICATION`, `CARD_VERIFICATION`.
 	Type string `json:"type"`

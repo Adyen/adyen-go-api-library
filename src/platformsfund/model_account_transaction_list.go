@@ -9,6 +9,7 @@
  */
 
 package platformsfund
+
 // AccountTransactionList struct for AccountTransactionList
 type AccountTransactionList struct {
 	// The code of the account.

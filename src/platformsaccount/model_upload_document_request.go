@@ -9,9 +9,10 @@
  */
 
 package platformsaccount
+
 // UploadDocumentRequest struct for UploadDocumentRequest
 type UploadDocumentRequest struct {
 	// The content of the document as represented by a Base64-encoded string.  To learn about requirements, see [Bank account check](https://docs.adyen.com/platforms/onboarding-and-verification/verification-checks/bank-account-check#requirements) and [Photo ID check](https://docs.adyen.com/platforms/onboarding-and-verification/verification-checks/photo-id-check#requirements).
-	DocumentContent string `json:"documentContent"`
-	DocumentDetail DocumentDetail `json:"documentDetail"`
+	DocumentContent string         `json:"documentContent"`
+	DocumentDetail  DocumentDetail `json:"documentDetail"`
 }

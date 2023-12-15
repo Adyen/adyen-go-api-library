@@ -9,9 +9,11 @@
  */
 
 package platformsaccount
+
 import (
 	"time"
 )
+
 // PayoutScheduleResponse struct for PayoutScheduleResponse
 type PayoutScheduleResponse struct {
 	// The date of the next scheduled payout.

@@ -9,6 +9,7 @@
  */
 
 package platformsfund
+
 // TransferFundsRequest struct for TransferFundsRequest
 type TransferFundsRequest struct {
 	Amount Amount `json:"amount"`

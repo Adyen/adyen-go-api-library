@@ -9,6 +9,7 @@
  */
 
 package platformsaccount
+
 // CreateAccountResponse struct for CreateAccountResponse
 type CreateAccountResponse struct {
 	// The code of the new account.
@@ -21,10 +22,10 @@ type CreateAccountResponse struct {
 	Description string `json:"description,omitempty"`
 	// A list of fields that caused the `/createAccount` request to fail.
 	InvalidFields *[]ErrorFieldType `json:"invalidFields,omitempty"`
-	Metadata map[string]string `json:"metadata,omitempty"`
+	Metadata      map[string]string `json:"metadata,omitempty"`
 	// The payout method code held by the account holder to couple the account with. Scheduled card payouts will be sent using this payout method code.
-	PayoutMethodCode string `json:"payoutMethodCode,omitempty"`
-	PayoutSchedule *PayoutScheduleResponse `json:"payoutSchedule,omitempty"`
+	PayoutMethodCode string                  `json:"payoutMethodCode,omitempty"`
+	PayoutSchedule   *PayoutScheduleResponse `json:"payoutSchedule,omitempty"`
 	// Speed with which payouts for this account are processed. Permitted values: `STANDARD`, `SAME_DAY`.
 	PayoutSpeed string `json:"payoutSpeed,omitempty"`
 	// The reference of a request. Can be used to uniquely identify the request.

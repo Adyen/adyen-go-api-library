@@ -9,8 +9,9 @@
  */
 
 package platformsnotificationconfiguration
+
 // ExchangeMessage struct for ExchangeMessage
 type ExchangeMessage struct {
-	MessageCode string `json:"messageCode,omitempty"`
+	MessageCode        string `json:"messageCode,omitempty"`
 	MessageDescription string `json:"messageDescription,omitempty"`
 }

@@ -18,7 +18,7 @@ import (
 // AccountHolderVerificationNotificationContent struct for AccountHolderVerificationNotificationContent
 type AccountHolderVerificationNotificationContent struct {
 	// The code of the account holder.
-	AccountHolderCode string `json:"accountHolderCode"`
+	AccountHolderCode  string              `json:"accountHolderCode"`
 	KycCheckStatusData *KYCCheckStatusData `json:"kycCheckStatusData,omitempty"`
 	// The unique code of the payout method that has been verified.
 	PayoutMethodCode *string `json:"payoutMethodCode,omitempty"`
@@ -30,7 +30,7 @@ type AccountHolderVerificationNotificationContent struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccountHolderVerificationNotificationContent(accountHolderCode string, ) *AccountHolderVerificationNotificationContent {
+func NewAccountHolderVerificationNotificationContent(accountHolderCode string) *AccountHolderVerificationNotificationContent {
 	this := AccountHolderVerificationNotificationContent{}
 	this.AccountHolderCode = accountHolderCode
 	return &this
@@ -46,7 +46,7 @@ func NewAccountHolderVerificationNotificationContentWithDefaults() *AccountHolde
 
 // GetAccountHolderCode returns the AccountHolderCode field value
 func (o *AccountHolderVerificationNotificationContent) GetAccountHolderCode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -57,7 +57,7 @@ func (o *AccountHolderVerificationNotificationContent) GetAccountHolderCode() st
 // GetAccountHolderCodeOk returns a tuple with the AccountHolderCode field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderVerificationNotificationContent) GetAccountHolderCodeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.AccountHolderCode, true
@@ -216,5 +216,3 @@ func (v *NullableAccountHolderVerificationNotificationContent) UnmarshalJSON(src
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -9,6 +9,7 @@
  */
 
 package platformsfund
+
 // BankAccountDetail struct for BankAccountDetail
 type BankAccountDetail struct {
 	// The bank account number (without separators). >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
@@ -19,7 +20,7 @@ type BankAccountDetail struct {
 	BankAccountName string `json:"bankAccountName,omitempty"`
 	// Merchant reference to the bank account.
 	BankAccountReference string `json:"bankAccountReference,omitempty"`
-	// The unique identifier (UUID) of the Bank Account. >If, during an account holder create or update request, this field is left blank (but other fields provided), a new Bank Account will be created with a procedurally-generated UUID.  >If, during an account holder create request, a UUID is provided, the creation of the Bank Account will fail while the creation of the account holder will continue.  >If, during an account holder update request, a UUID that is not correlated with an existing Bank Account is provided, the update of the account holder will fail.  >If, during an account holder update request, a UUID that is correlated with an existing Bank Account is provided, the existing Bank Account will be updated. 
+	// The unique identifier (UUID) of the Bank Account. >If, during an account holder create or update request, this field is left blank (but other fields provided), a new Bank Account will be created with a procedurally-generated UUID.  >If, during an account holder create request, a UUID is provided, the creation of the Bank Account will fail while the creation of the account holder will continue.  >If, during an account holder update request, a UUID that is not correlated with an existing Bank Account is provided, the update of the account holder will fail.  >If, during an account holder update request, a UUID that is correlated with an existing Bank Account is provided, the existing Bank Account will be updated.
 	BankAccountUUID string `json:"bankAccountUUID,omitempty"`
 	// The bank identifier code. >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
 	BankBicSwift string `json:"bankBicSwift,omitempty"`
@@ -43,7 +44,7 @@ type BankAccountDetail struct {
 	OwnerCity string `json:"ownerCity,omitempty"`
 	// The country code of the country of residence of the bank account owner. >The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').  >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
 	OwnerCountryCode string `json:"ownerCountryCode,omitempty"`
-	// The date of birth of the bank account owner. 
+	// The date of birth of the bank account owner.
 	OwnerDateOfBirth string `json:"ownerDateOfBirth,omitempty"`
 	// The house name or number of the residence of the bank account owner. >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
 	OwnerHouseNumberOrName string `json:"ownerHouseNumberOrName,omitempty"`

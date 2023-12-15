@@ -20,9 +20,9 @@ type AccountHolderStatusChangeNotificationContent struct {
 	// The code of the account holder.
 	AccountHolderCode string `json:"accountHolderCode"`
 	// in case the account holder has not been updated, contains account holder fields, that did not pass the validation.
-	InvalidFields *[]ErrorFieldType `json:"invalidFields,omitempty"`
-	NewStatus AccountHolderStatus `json:"newStatus"`
-	OldStatus AccountHolderStatus `json:"oldStatus"`
+	InvalidFields *[]ErrorFieldType   `json:"invalidFields,omitempty"`
+	NewStatus     AccountHolderStatus `json:"newStatus"`
+	OldStatus     AccountHolderStatus `json:"oldStatus"`
 	// The reason for the status change.
 	Reason *string `json:"reason,omitempty"`
 }
@@ -31,7 +31,7 @@ type AccountHolderStatusChangeNotificationContent struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccountHolderStatusChangeNotificationContent(accountHolderCode string, newStatus AccountHolderStatus, oldStatus AccountHolderStatus, ) *AccountHolderStatusChangeNotificationContent {
+func NewAccountHolderStatusChangeNotificationContent(accountHolderCode string, newStatus AccountHolderStatus, oldStatus AccountHolderStatus) *AccountHolderStatusChangeNotificationContent {
 	this := AccountHolderStatusChangeNotificationContent{}
 	this.AccountHolderCode = accountHolderCode
 	this.NewStatus = newStatus
@@ -49,7 +49,7 @@ func NewAccountHolderStatusChangeNotificationContentWithDefaults() *AccountHolde
 
 // GetAccountHolderCode returns the AccountHolderCode field value
 func (o *AccountHolderStatusChangeNotificationContent) GetAccountHolderCode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -60,7 +60,7 @@ func (o *AccountHolderStatusChangeNotificationContent) GetAccountHolderCode() st
 // GetAccountHolderCodeOk returns a tuple with the AccountHolderCode field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderStatusChangeNotificationContent) GetAccountHolderCodeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.AccountHolderCode, true
@@ -105,7 +105,7 @@ func (o *AccountHolderStatusChangeNotificationContent) SetInvalidFields(v []Erro
 
 // GetNewStatus returns the NewStatus field value
 func (o *AccountHolderStatusChangeNotificationContent) GetNewStatus() AccountHolderStatus {
-	if o == nil  {
+	if o == nil {
 		var ret AccountHolderStatus
 		return ret
 	}
@@ -116,7 +116,7 @@ func (o *AccountHolderStatusChangeNotificationContent) GetNewStatus() AccountHol
 // GetNewStatusOk returns a tuple with the NewStatus field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderStatusChangeNotificationContent) GetNewStatusOk() (*AccountHolderStatus, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.NewStatus, true
@@ -129,7 +129,7 @@ func (o *AccountHolderStatusChangeNotificationContent) SetNewStatus(v AccountHol
 
 // GetOldStatus returns the OldStatus field value
 func (o *AccountHolderStatusChangeNotificationContent) GetOldStatus() AccountHolderStatus {
-	if o == nil  {
+	if o == nil {
 		var ret AccountHolderStatus
 		return ret
 	}
@@ -140,7 +140,7 @@ func (o *AccountHolderStatusChangeNotificationContent) GetOldStatus() AccountHol
 // GetOldStatusOk returns a tuple with the OldStatus field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderStatusChangeNotificationContent) GetOldStatusOk() (*AccountHolderStatus, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.OldStatus, true
@@ -238,5 +238,3 @@ func (v *NullableAccountHolderStatusChangeNotificationContent) UnmarshalJSON(src
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

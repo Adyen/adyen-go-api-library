@@ -10,16 +10,15 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v8/src/common"
 	"fmt"
 )
 
 // DonationPaymentMethod - The type and required details of a payment method to use.
 type DonationPaymentMethod struct {
-	ApplePayDetails *ApplePayDetails
-	CardDetails *CardDetails
-	GooglePayDetails *GooglePayDetails
-	IdealDetails *IdealDetails
+	ApplePayDetails      *ApplePayDetails
+	CardDetails          *CardDetails
+	GooglePayDetails     *GooglePayDetails
+	IdealDetails         *IdealDetails
 	PayWithGoogleDetails *PayWithGoogleDetails
 }
 
@@ -58,7 +57,6 @@ func PayWithGoogleDetailsAsDonationPaymentMethod(v *PayWithGoogleDetails) Donati
 	}
 }
 
-
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *DonationPaymentMethod) UnmarshalJSON(data []byte) error {
 	var err error
@@ -69,7 +67,7 @@ func (dst *DonationPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonApplePayDetails, _ := json.Marshal(dst.ApplePayDetails)
 		if string(jsonApplePayDetails) == "{}" || !dst.ApplePayDetails.isValidType() { // empty struct
 			dst.ApplePayDetails = nil
-        } else {
+		} else {
 			match++
 		}
 	} else {
@@ -82,7 +80,7 @@ func (dst *DonationPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonCardDetails, _ := json.Marshal(dst.CardDetails)
 		if string(jsonCardDetails) == "{}" || !dst.CardDetails.isValidType() { // empty struct
 			dst.CardDetails = nil
-        } else {
+		} else {
 			match++
 		}
 	} else {
@@ -95,7 +93,7 @@ func (dst *DonationPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonGooglePayDetails, _ := json.Marshal(dst.GooglePayDetails)
 		if string(jsonGooglePayDetails) == "{}" || !dst.GooglePayDetails.isValidType() { // empty struct
 			dst.GooglePayDetails = nil
-        } else {
+		} else {
 			match++
 		}
 	} else {
@@ -108,7 +106,7 @@ func (dst *DonationPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonIdealDetails, _ := json.Marshal(dst.IdealDetails)
 		if string(jsonIdealDetails) == "{}" || !dst.IdealDetails.isValidType() { // empty struct
 			dst.IdealDetails = nil
-        } else {
+		} else {
 			match++
 		}
 	} else {
@@ -121,7 +119,7 @@ func (dst *DonationPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonPayWithGoogleDetails, _ := json.Marshal(dst.PayWithGoogleDetails)
 		if string(jsonPayWithGoogleDetails) == "{}" || !dst.PayWithGoogleDetails.isValidType() { // empty struct
 			dst.PayWithGoogleDetails = nil
-        } else {
+		} else {
 			match++
 		}
 	} else {
@@ -170,7 +168,7 @@ func (src DonationPaymentMethod) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *DonationPaymentMethod) GetActualInstance() (interface{}) {
+func (obj *DonationPaymentMethod) GetActualInstance() interface{} {
 	if obj == nil {
 		return nil
 	}
@@ -233,5 +231,3 @@ func (v *NullableDonationPaymentMethod) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

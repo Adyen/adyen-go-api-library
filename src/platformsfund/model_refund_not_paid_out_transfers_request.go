@@ -9,6 +9,7 @@
  */
 
 package platformsfund
+
 // RefundNotPaidOutTransfersRequest struct for RefundNotPaidOutTransfersRequest
 type RefundNotPaidOutTransfersRequest struct {
 	// The code of the account from which to perform the refund(s).

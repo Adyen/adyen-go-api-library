@@ -9,6 +9,7 @@
  */
 
 package platformsaccount
+
 // ViasName struct for ViasName
 type ViasName struct {
 	// The first name.

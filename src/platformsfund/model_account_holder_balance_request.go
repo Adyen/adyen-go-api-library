@@ -9,6 +9,7 @@
  */
 
 package platformsfund
+
 // AccountHolderBalanceRequest struct for AccountHolderBalanceRequest
 type AccountHolderBalanceRequest struct {
 	// The code of the Account Holder of which to retrieve the balance.

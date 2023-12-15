@@ -9,6 +9,7 @@
  */
 
 package platformsfund
+
 // TransactionListForAccount struct for TransactionListForAccount
 type TransactionListForAccount struct {
 	// The account for which to retrieve the transactions.

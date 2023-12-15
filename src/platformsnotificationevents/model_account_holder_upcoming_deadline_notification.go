@@ -19,7 +19,7 @@ import (
 // AccountHolderUpcomingDeadlineNotification struct for AccountHolderUpcomingDeadlineNotification
 type AccountHolderUpcomingDeadlineNotification struct {
 	Content *AccountHolderUpcomingDeadlineNotificationContent `json:"content,omitempty"`
-	Error *NotificationErrorContainer `json:"error,omitempty"`
+	Error   *NotificationErrorContainer                       `json:"error,omitempty"`
 	// The date and time when an event has been completed.
 	EventDate time.Time `json:"eventDate"`
 	// The event type of the notification.
@@ -36,7 +36,7 @@ type AccountHolderUpcomingDeadlineNotification struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccountHolderUpcomingDeadlineNotification(eventDate time.Time, eventType string, executingUserKey string, live bool, pspReference string, ) *AccountHolderUpcomingDeadlineNotification {
+func NewAccountHolderUpcomingDeadlineNotification(eventDate time.Time, eventType string, executingUserKey string, live bool, pspReference string) *AccountHolderUpcomingDeadlineNotification {
 	this := AccountHolderUpcomingDeadlineNotification{}
 	this.EventDate = eventDate
 	this.EventType = eventType
@@ -120,7 +120,7 @@ func (o *AccountHolderUpcomingDeadlineNotification) SetError(v NotificationError
 
 // GetEventDate returns the EventDate field value
 func (o *AccountHolderUpcomingDeadlineNotification) GetEventDate() time.Time {
-	if o == nil  {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
@@ -131,7 +131,7 @@ func (o *AccountHolderUpcomingDeadlineNotification) GetEventDate() time.Time {
 // GetEventDateOk returns a tuple with the EventDate field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderUpcomingDeadlineNotification) GetEventDateOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.EventDate, true
@@ -144,7 +144,7 @@ func (o *AccountHolderUpcomingDeadlineNotification) SetEventDate(v time.Time) {
 
 // GetEventType returns the EventType field value
 func (o *AccountHolderUpcomingDeadlineNotification) GetEventType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -155,7 +155,7 @@ func (o *AccountHolderUpcomingDeadlineNotification) GetEventType() string {
 // GetEventTypeOk returns a tuple with the EventType field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderUpcomingDeadlineNotification) GetEventTypeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.EventType, true
@@ -168,7 +168,7 @@ func (o *AccountHolderUpcomingDeadlineNotification) SetEventType(v string) {
 
 // GetExecutingUserKey returns the ExecutingUserKey field value
 func (o *AccountHolderUpcomingDeadlineNotification) GetExecutingUserKey() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -179,7 +179,7 @@ func (o *AccountHolderUpcomingDeadlineNotification) GetExecutingUserKey() string
 // GetExecutingUserKeyOk returns a tuple with the ExecutingUserKey field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderUpcomingDeadlineNotification) GetExecutingUserKeyOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ExecutingUserKey, true
@@ -192,7 +192,7 @@ func (o *AccountHolderUpcomingDeadlineNotification) SetExecutingUserKey(v string
 
 // GetLive returns the Live field value
 func (o *AccountHolderUpcomingDeadlineNotification) GetLive() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -203,7 +203,7 @@ func (o *AccountHolderUpcomingDeadlineNotification) GetLive() bool {
 // GetLiveOk returns a tuple with the Live field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderUpcomingDeadlineNotification) GetLiveOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Live, true
@@ -216,7 +216,7 @@ func (o *AccountHolderUpcomingDeadlineNotification) SetLive(v bool) {
 
 // GetPspReference returns the PspReference field value
 func (o *AccountHolderUpcomingDeadlineNotification) GetPspReference() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -227,7 +227,7 @@ func (o *AccountHolderUpcomingDeadlineNotification) GetPspReference() string {
 // GetPspReferenceOk returns a tuple with the PspReference field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderUpcomingDeadlineNotification) GetPspReferenceOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PspReference, true
@@ -299,5 +299,3 @@ func (v *NullableAccountHolderUpcomingDeadlineNotification) UnmarshalJSON(src []
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

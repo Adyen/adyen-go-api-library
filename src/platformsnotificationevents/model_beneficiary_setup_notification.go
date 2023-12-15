@@ -19,7 +19,7 @@ import (
 // BeneficiarySetupNotification struct for BeneficiarySetupNotification
 type BeneficiarySetupNotification struct {
 	Content BeneficiarySetupNotificationContent `json:"content"`
-	Error *NotificationErrorContainer `json:"error,omitempty"`
+	Error   *NotificationErrorContainer         `json:"error,omitempty"`
 	// The date and time when an event has been completed.
 	EventDate time.Time `json:"eventDate"`
 	// The event type of the notification.
@@ -36,7 +36,7 @@ type BeneficiarySetupNotification struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBeneficiarySetupNotification(content BeneficiarySetupNotificationContent, eventDate time.Time, eventType string, executingUserKey string, live bool, pspReference string, ) *BeneficiarySetupNotification {
+func NewBeneficiarySetupNotification(content BeneficiarySetupNotificationContent, eventDate time.Time, eventType string, executingUserKey string, live bool, pspReference string) *BeneficiarySetupNotification {
 	this := BeneficiarySetupNotification{}
 	this.Content = content
 	this.EventDate = eventDate
@@ -57,7 +57,7 @@ func NewBeneficiarySetupNotificationWithDefaults() *BeneficiarySetupNotification
 
 // GetContent returns the Content field value
 func (o *BeneficiarySetupNotification) GetContent() BeneficiarySetupNotificationContent {
-	if o == nil  {
+	if o == nil {
 		var ret BeneficiarySetupNotificationContent
 		return ret
 	}
@@ -68,7 +68,7 @@ func (o *BeneficiarySetupNotification) GetContent() BeneficiarySetupNotification
 // GetContentOk returns a tuple with the Content field value
 // and a boolean to check if the value has been set.
 func (o *BeneficiarySetupNotification) GetContentOk() (*BeneficiarySetupNotificationContent, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Content, true
@@ -113,7 +113,7 @@ func (o *BeneficiarySetupNotification) SetError(v NotificationErrorContainer) {
 
 // GetEventDate returns the EventDate field value
 func (o *BeneficiarySetupNotification) GetEventDate() time.Time {
-	if o == nil  {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
@@ -124,7 +124,7 @@ func (o *BeneficiarySetupNotification) GetEventDate() time.Time {
 // GetEventDateOk returns a tuple with the EventDate field value
 // and a boolean to check if the value has been set.
 func (o *BeneficiarySetupNotification) GetEventDateOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.EventDate, true
@@ -137,7 +137,7 @@ func (o *BeneficiarySetupNotification) SetEventDate(v time.Time) {
 
 // GetEventType returns the EventType field value
 func (o *BeneficiarySetupNotification) GetEventType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -148,7 +148,7 @@ func (o *BeneficiarySetupNotification) GetEventType() string {
 // GetEventTypeOk returns a tuple with the EventType field value
 // and a boolean to check if the value has been set.
 func (o *BeneficiarySetupNotification) GetEventTypeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.EventType, true
@@ -161,7 +161,7 @@ func (o *BeneficiarySetupNotification) SetEventType(v string) {
 
 // GetExecutingUserKey returns the ExecutingUserKey field value
 func (o *BeneficiarySetupNotification) GetExecutingUserKey() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -172,7 +172,7 @@ func (o *BeneficiarySetupNotification) GetExecutingUserKey() string {
 // GetExecutingUserKeyOk returns a tuple with the ExecutingUserKey field value
 // and a boolean to check if the value has been set.
 func (o *BeneficiarySetupNotification) GetExecutingUserKeyOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ExecutingUserKey, true
@@ -185,7 +185,7 @@ func (o *BeneficiarySetupNotification) SetExecutingUserKey(v string) {
 
 // GetLive returns the Live field value
 func (o *BeneficiarySetupNotification) GetLive() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -196,7 +196,7 @@ func (o *BeneficiarySetupNotification) GetLive() bool {
 // GetLiveOk returns a tuple with the Live field value
 // and a boolean to check if the value has been set.
 func (o *BeneficiarySetupNotification) GetLiveOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Live, true
@@ -209,7 +209,7 @@ func (o *BeneficiarySetupNotification) SetLive(v bool) {
 
 // GetPspReference returns the PspReference field value
 func (o *BeneficiarySetupNotification) GetPspReference() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -220,7 +220,7 @@ func (o *BeneficiarySetupNotification) GetPspReference() string {
 // GetPspReferenceOk returns a tuple with the PspReference field value
 // and a boolean to check if the value has been set.
 func (o *BeneficiarySetupNotification) GetPspReferenceOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PspReference, true
@@ -292,5 +292,3 @@ func (v *NullableBeneficiarySetupNotification) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

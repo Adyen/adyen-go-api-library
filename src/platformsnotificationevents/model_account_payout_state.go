@@ -25,7 +25,7 @@ type AccountPayoutState struct {
 	Disabled *bool `json:"disabled,omitempty"`
 	// The reason why payouts (to all of the account holder's accounts) have been disabled (by Adyen). If payouts have been disabled by Adyen, this field will explain why. If this field is blank, payouts have not been disabled by Adyen.
 	NotAllowedReason *string `json:"notAllowedReason,omitempty"`
-	PayoutLimit *Amount `json:"payoutLimit,omitempty"`
+	PayoutLimit      *Amount `json:"payoutLimit,omitempty"`
 	// The payout tier that the account holder occupies.
 	TierNumber *int32 `json:"tierNumber,omitempty"`
 }
@@ -297,5 +297,3 @@ func (v *NullableAccountPayoutState) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

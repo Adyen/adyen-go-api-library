@@ -17,18 +17,18 @@ import (
 
 // PayoutMethod struct for PayoutMethod
 type PayoutMethod struct {
-	MerchantAccount string `json:"merchantAccount"`
-	PayoutMethodCode *string `json:"payoutMethodCode,omitempty"`
-	PayoutMethodType *string `json:"payoutMethodType,omitempty"`
-	RecurringDetailReference string `json:"recurringDetailReference"`
-	ShopperReference string `json:"shopperReference"`
+	MerchantAccount          string  `json:"merchantAccount"`
+	PayoutMethodCode         *string `json:"payoutMethodCode,omitempty"`
+	PayoutMethodType         *string `json:"payoutMethodType,omitempty"`
+	RecurringDetailReference string  `json:"recurringDetailReference"`
+	ShopperReference         string  `json:"shopperReference"`
 }
 
 // NewPayoutMethod instantiates a new PayoutMethod object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPayoutMethod(merchantAccount string, recurringDetailReference string, shopperReference string, ) *PayoutMethod {
+func NewPayoutMethod(merchantAccount string, recurringDetailReference string, shopperReference string) *PayoutMethod {
 	this := PayoutMethod{}
 	this.MerchantAccount = merchantAccount
 	this.RecurringDetailReference = recurringDetailReference
@@ -46,7 +46,7 @@ func NewPayoutMethodWithDefaults() *PayoutMethod {
 
 // GetMerchantAccount returns the MerchantAccount field value
 func (o *PayoutMethod) GetMerchantAccount() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -57,7 +57,7 @@ func (o *PayoutMethod) GetMerchantAccount() string {
 // GetMerchantAccountOk returns a tuple with the MerchantAccount field value
 // and a boolean to check if the value has been set.
 func (o *PayoutMethod) GetMerchantAccountOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.MerchantAccount, true
@@ -134,7 +134,7 @@ func (o *PayoutMethod) SetPayoutMethodType(v string) {
 
 // GetRecurringDetailReference returns the RecurringDetailReference field value
 func (o *PayoutMethod) GetRecurringDetailReference() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -145,7 +145,7 @@ func (o *PayoutMethod) GetRecurringDetailReference() string {
 // GetRecurringDetailReferenceOk returns a tuple with the RecurringDetailReference field value
 // and a boolean to check if the value has been set.
 func (o *PayoutMethod) GetRecurringDetailReferenceOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.RecurringDetailReference, true
@@ -158,7 +158,7 @@ func (o *PayoutMethod) SetRecurringDetailReference(v string) {
 
 // GetShopperReference returns the ShopperReference field value
 func (o *PayoutMethod) GetShopperReference() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -169,7 +169,7 @@ func (o *PayoutMethod) GetShopperReference() string {
 // GetShopperReferenceOk returns a tuple with the ShopperReference field value
 // and a boolean to check if the value has been set.
 func (o *PayoutMethod) GetShopperReferenceOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ShopperReference, true
@@ -235,5 +235,3 @@ func (v *NullablePayoutMethod) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

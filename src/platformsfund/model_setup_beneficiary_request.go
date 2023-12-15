@@ -9,6 +9,7 @@
  */
 
 package platformsfund
+
 // SetupBeneficiaryRequest struct for SetupBeneficiaryRequest
 type SetupBeneficiaryRequest struct {
 	// The destination account code.

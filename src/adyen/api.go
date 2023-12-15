@@ -8,8 +8,9 @@ package adyen
 
 import (
 	"fmt"
-	"github.com/adyen/adyen-go-api-library/v8/src/dataprotection"
 	"net/http"
+
+	"github.com/adyen/adyen-go-api-library/v8/src/dataprotection"
 
 	"github.com/adyen/adyen-go-api-library/v8/src/balancecontrol"
 	"github.com/adyen/adyen-go-api-library/v8/src/balanceplatform"

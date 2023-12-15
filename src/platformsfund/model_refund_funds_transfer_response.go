@@ -9,13 +9,14 @@
  */
 
 package platformsfund
+
 // RefundFundsTransferResponse struct for RefundFundsTransferResponse
 type RefundFundsTransferResponse struct {
 	// Contains field validation errors that would prevent requests from being processed.
 	InvalidFields *[]ErrorFieldType `json:"invalidFields,omitempty"`
 	// The value supplied by the executing user when initiating the transfer refund; may be used to link multiple transactions.
 	MerchantReference string `json:"merchantReference,omitempty"`
-	Message string `json:"message,omitempty"`
+	Message           string `json:"message,omitempty"`
 	// A PSP reference of the original fund transfer.
 	OriginalReference string `json:"originalReference,omitempty"`
 	// The reference of a request. Can be used to uniquely identify the request.

@@ -9,6 +9,7 @@
  */
 
 package platformsaccount
+
 // PersonalDocumentData struct for PersonalDocumentData
 type PersonalDocumentData struct {
 	// The expiration date of the document. The date should be in ISO-8601 format yyyy-mm-dd (e.g. 2000-01-31).

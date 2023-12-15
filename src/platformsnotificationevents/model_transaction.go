@@ -18,7 +18,7 @@ import (
 
 // Transaction struct for Transaction
 type Transaction struct {
-	Amount *Amount `json:"amount,omitempty"`
+	Amount            *Amount            `json:"amount,omitempty"`
 	BankAccountDetail *BankAccountDetail `json:"bankAccountDetail,omitempty"`
 	// The merchant reference of a related capture.
 	CaptureMerchantReference *string `json:"captureMerchantReference,omitempty"`
@@ -667,5 +667,3 @@ func (v *NullableTransaction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

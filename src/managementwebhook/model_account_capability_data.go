@@ -10,7 +10,8 @@ package managementwebhook
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v8/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the AccountCapabilityData type satisfies the MappedNullable interface at compile time
@@ -30,7 +31,7 @@ type AccountCapabilityData struct {
 	Requested bool `json:"requested"`
 	// The level that you requested for the capability. Some capabilities have different levels which correspond to thresholds. Higher levels may require additional checks and increased monitoring.Possible values: **notApplicable**, **low**, **medium**, **high**.
 	RequestedLevel string `json:"requestedLevel"`
-	// The status of the verification checks for the capability.  Possible values:  * **pending**: Adyen is running the verification.  * **invalid**: The verification failed. Check if the `errors` array contains more information.  * **valid**: The verification was successful.  * **rejected**: Adyen checked the information and found reasons to not allow the capability. 
+	// The status of the verification checks for the capability.  Possible values:  * **pending**: Adyen is running the verification.  * **invalid**: The verification failed. Check if the `errors` array contains more information.  * **valid**: The verification was successful.  * **rejected**: Adyen checked the information and found reasons to not allow the capability.
 	VerificationStatus *string `json:"verificationStatus,omitempty"`
 }
 
@@ -262,7 +263,7 @@ func (o *AccountCapabilityData) SetVerificationStatus(v string) {
 }
 
 func (o AccountCapabilityData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -326,6 +327,3 @@ func (v *NullableAccountCapabilityData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

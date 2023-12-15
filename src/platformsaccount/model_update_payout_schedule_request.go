@@ -9,6 +9,7 @@
  */
 
 package platformsaccount
+
 // UpdatePayoutScheduleRequest struct for UpdatePayoutScheduleRequest
 type UpdatePayoutScheduleRequest struct {
 	// Direction on how to handle any payouts that have already been scheduled. Permitted values: * `CLOSE` will close the existing batch of payouts. * `UPDATE` will reschedule the existing batch to the new schedule. * `NOTHING` (**default**) will allow the payout to proceed.

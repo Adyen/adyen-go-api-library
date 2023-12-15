@@ -9,6 +9,7 @@
  */
 
 package platformsnotificationconfiguration
+
 // GenericResponse struct for GenericResponse
 type GenericResponse struct {
 	// Contains field validation errors that would prevent requests from being processed.

@@ -9,6 +9,7 @@
  */
 
 package platformsaccount
+
 // GetAccountHolderRequest struct for GetAccountHolderRequest
 type GetAccountHolderRequest struct {
 	// The code of the account of which to retrieve the details. > Required if no `accountHolderCode` is provided.

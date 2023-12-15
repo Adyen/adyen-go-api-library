@@ -9,6 +9,7 @@
  */
 
 package platformsaccount
+
 // DeleteBankAccountRequest struct for DeleteBankAccountRequest
 type DeleteBankAccountRequest struct {
 	// The code of the Account Holder from which to delete the Bank Account(s).

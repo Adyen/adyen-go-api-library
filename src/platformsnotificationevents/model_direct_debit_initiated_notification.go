@@ -19,7 +19,7 @@ import (
 // DirectDebitInitiatedNotification struct for DirectDebitInitiatedNotification
 type DirectDebitInitiatedNotification struct {
 	Content *DirectDebitInitiatedNotificationContent `json:"content,omitempty"`
-	Error *NotificationErrorContainer `json:"error,omitempty"`
+	Error   *NotificationErrorContainer              `json:"error,omitempty"`
 	// The date and time when an event has been completed.
 	EventDate time.Time `json:"eventDate"`
 	// The event type of the notification.
@@ -36,7 +36,7 @@ type DirectDebitInitiatedNotification struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDirectDebitInitiatedNotification(eventDate time.Time, eventType string, executingUserKey string, live bool, pspReference string, ) *DirectDebitInitiatedNotification {
+func NewDirectDebitInitiatedNotification(eventDate time.Time, eventType string, executingUserKey string, live bool, pspReference string) *DirectDebitInitiatedNotification {
 	this := DirectDebitInitiatedNotification{}
 	this.EventDate = eventDate
 	this.EventType = eventType
@@ -120,7 +120,7 @@ func (o *DirectDebitInitiatedNotification) SetError(v NotificationErrorContainer
 
 // GetEventDate returns the EventDate field value
 func (o *DirectDebitInitiatedNotification) GetEventDate() time.Time {
-	if o == nil  {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
@@ -131,7 +131,7 @@ func (o *DirectDebitInitiatedNotification) GetEventDate() time.Time {
 // GetEventDateOk returns a tuple with the EventDate field value
 // and a boolean to check if the value has been set.
 func (o *DirectDebitInitiatedNotification) GetEventDateOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.EventDate, true
@@ -144,7 +144,7 @@ func (o *DirectDebitInitiatedNotification) SetEventDate(v time.Time) {
 
 // GetEventType returns the EventType field value
 func (o *DirectDebitInitiatedNotification) GetEventType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -155,7 +155,7 @@ func (o *DirectDebitInitiatedNotification) GetEventType() string {
 // GetEventTypeOk returns a tuple with the EventType field value
 // and a boolean to check if the value has been set.
 func (o *DirectDebitInitiatedNotification) GetEventTypeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.EventType, true
@@ -168,7 +168,7 @@ func (o *DirectDebitInitiatedNotification) SetEventType(v string) {
 
 // GetExecutingUserKey returns the ExecutingUserKey field value
 func (o *DirectDebitInitiatedNotification) GetExecutingUserKey() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -179,7 +179,7 @@ func (o *DirectDebitInitiatedNotification) GetExecutingUserKey() string {
 // GetExecutingUserKeyOk returns a tuple with the ExecutingUserKey field value
 // and a boolean to check if the value has been set.
 func (o *DirectDebitInitiatedNotification) GetExecutingUserKeyOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ExecutingUserKey, true
@@ -192,7 +192,7 @@ func (o *DirectDebitInitiatedNotification) SetExecutingUserKey(v string) {
 
 // GetLive returns the Live field value
 func (o *DirectDebitInitiatedNotification) GetLive() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -203,7 +203,7 @@ func (o *DirectDebitInitiatedNotification) GetLive() bool {
 // GetLiveOk returns a tuple with the Live field value
 // and a boolean to check if the value has been set.
 func (o *DirectDebitInitiatedNotification) GetLiveOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Live, true
@@ -216,7 +216,7 @@ func (o *DirectDebitInitiatedNotification) SetLive(v bool) {
 
 // GetPspReference returns the PspReference field value
 func (o *DirectDebitInitiatedNotification) GetPspReference() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -227,7 +227,7 @@ func (o *DirectDebitInitiatedNotification) GetPspReference() string {
 // GetPspReferenceOk returns a tuple with the PspReference field value
 // and a boolean to check if the value has been set.
 func (o *DirectDebitInitiatedNotification) GetPspReferenceOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PspReference, true
@@ -299,5 +299,3 @@ func (v *NullableDirectDebitInitiatedNotification) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

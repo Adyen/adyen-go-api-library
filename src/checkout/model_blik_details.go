@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v8/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the BlikDetails type satisfies the MappedNullable interface at compile time
@@ -212,7 +213,7 @@ func (o *BlikDetails) SetType(v string) {
 }
 
 func (o BlikDetails) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -275,14 +276,12 @@ func (v *NullableBlikDetails) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *BlikDetails) isValidType() bool {
-    var allowedEnumValues = []string{ "blik" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"blik"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

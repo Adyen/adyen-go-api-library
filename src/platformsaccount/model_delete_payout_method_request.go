@@ -9,6 +9,7 @@
  */
 
 package platformsaccount
+
 // DeletePayoutMethodRequest struct for DeletePayoutMethodRequest
 type DeletePayoutMethodRequest struct {
 	// The code of the account holder, from which to delete the payout methods.

@@ -9,14 +9,15 @@
  */
 
 package platformsaccount
+
 // CreateAccountHolderResponse struct for CreateAccountHolderResponse
 type CreateAccountHolderResponse struct {
 	// The code of a new account created for the account holder.
 	AccountCode string `json:"accountCode,omitempty"`
 	// The code of the new account holder.
-	AccountHolderCode string `json:"accountHolderCode"`
+	AccountHolderCode    string               `json:"accountHolderCode"`
 	AccountHolderDetails AccountHolderDetails `json:"accountHolderDetails"`
-	AccountHolderStatus AccountHolderStatus `json:"accountHolderStatus"`
+	AccountHolderStatus  AccountHolderStatus  `json:"accountHolderStatus"`
 	// The description of the new account holder.
 	Description string `json:"description,omitempty"`
 	// A list of fields that caused the `/createAccountHolder` request to fail.
@@ -28,7 +29,7 @@ type CreateAccountHolderResponse struct {
 	// The reference of a request. Can be used to uniquely identify the request.
 	PspReference string `json:"pspReference,omitempty"`
 	// The result code.
-	ResultCode string `json:"resultCode,omitempty"`
+	ResultCode   string                `json:"resultCode,omitempty"`
 	Verification KYCVerificationResult `json:"verification"`
 	// The identifier of the profile that applies to this entity.
 	VerificationProfile string `json:"verificationProfile,omitempty"`

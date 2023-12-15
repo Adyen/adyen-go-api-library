@@ -19,7 +19,7 @@ import (
 // AccountHolderPayoutNotification struct for AccountHolderPayoutNotification
 type AccountHolderPayoutNotification struct {
 	Content AccountHolderPayoutNotificationContent `json:"content"`
-	Error *NotificationErrorContainer `json:"error,omitempty"`
+	Error   *NotificationErrorContainer            `json:"error,omitempty"`
 	// The date and time when an event has been completed.
 	EventDate time.Time `json:"eventDate"`
 	// The event type of the notification.
@@ -36,7 +36,7 @@ type AccountHolderPayoutNotification struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccountHolderPayoutNotification(content AccountHolderPayoutNotificationContent, eventDate time.Time, eventType string, executingUserKey string, live bool, pspReference string, ) *AccountHolderPayoutNotification {
+func NewAccountHolderPayoutNotification(content AccountHolderPayoutNotificationContent, eventDate time.Time, eventType string, executingUserKey string, live bool, pspReference string) *AccountHolderPayoutNotification {
 	this := AccountHolderPayoutNotification{}
 	this.Content = content
 	this.EventDate = eventDate
@@ -57,7 +57,7 @@ func NewAccountHolderPayoutNotificationWithDefaults() *AccountHolderPayoutNotifi
 
 // GetContent returns the Content field value
 func (o *AccountHolderPayoutNotification) GetContent() AccountHolderPayoutNotificationContent {
-	if o == nil  {
+	if o == nil {
 		var ret AccountHolderPayoutNotificationContent
 		return ret
 	}
@@ -68,7 +68,7 @@ func (o *AccountHolderPayoutNotification) GetContent() AccountHolderPayoutNotifi
 // GetContentOk returns a tuple with the Content field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderPayoutNotification) GetContentOk() (*AccountHolderPayoutNotificationContent, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Content, true
@@ -113,7 +113,7 @@ func (o *AccountHolderPayoutNotification) SetError(v NotificationErrorContainer)
 
 // GetEventDate returns the EventDate field value
 func (o *AccountHolderPayoutNotification) GetEventDate() time.Time {
-	if o == nil  {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
@@ -124,7 +124,7 @@ func (o *AccountHolderPayoutNotification) GetEventDate() time.Time {
 // GetEventDateOk returns a tuple with the EventDate field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderPayoutNotification) GetEventDateOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.EventDate, true
@@ -137,7 +137,7 @@ func (o *AccountHolderPayoutNotification) SetEventDate(v time.Time) {
 
 // GetEventType returns the EventType field value
 func (o *AccountHolderPayoutNotification) GetEventType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -148,7 +148,7 @@ func (o *AccountHolderPayoutNotification) GetEventType() string {
 // GetEventTypeOk returns a tuple with the EventType field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderPayoutNotification) GetEventTypeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.EventType, true
@@ -161,7 +161,7 @@ func (o *AccountHolderPayoutNotification) SetEventType(v string) {
 
 // GetExecutingUserKey returns the ExecutingUserKey field value
 func (o *AccountHolderPayoutNotification) GetExecutingUserKey() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -172,7 +172,7 @@ func (o *AccountHolderPayoutNotification) GetExecutingUserKey() string {
 // GetExecutingUserKeyOk returns a tuple with the ExecutingUserKey field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderPayoutNotification) GetExecutingUserKeyOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ExecutingUserKey, true
@@ -185,7 +185,7 @@ func (o *AccountHolderPayoutNotification) SetExecutingUserKey(v string) {
 
 // GetLive returns the Live field value
 func (o *AccountHolderPayoutNotification) GetLive() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -196,7 +196,7 @@ func (o *AccountHolderPayoutNotification) GetLive() bool {
 // GetLiveOk returns a tuple with the Live field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderPayoutNotification) GetLiveOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Live, true
@@ -209,7 +209,7 @@ func (o *AccountHolderPayoutNotification) SetLive(v bool) {
 
 // GetPspReference returns the PspReference field value
 func (o *AccountHolderPayoutNotification) GetPspReference() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -220,7 +220,7 @@ func (o *AccountHolderPayoutNotification) GetPspReference() string {
 // GetPspReferenceOk returns a tuple with the PspReference field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderPayoutNotification) GetPspReferenceOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PspReference, true
@@ -292,5 +292,3 @@ func (v *NullableAccountHolderPayoutNotification) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

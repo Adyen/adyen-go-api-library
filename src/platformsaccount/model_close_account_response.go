@@ -9,6 +9,7 @@
  */
 
 package platformsaccount
+
 // CloseAccountResponse struct for CloseAccountResponse
 type CloseAccountResponse struct {
 	// The account code of the account that is closed.

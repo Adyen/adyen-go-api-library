@@ -9,6 +9,7 @@
  */
 
 package platformsaccount
+
 // KYCVerificationResult struct for KYCVerificationResult
 type KYCVerificationResult struct {
 	AccountHolder *KYCCheckResult `json:"accountHolder,omitempty"`

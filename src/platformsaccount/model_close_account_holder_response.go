@@ -9,6 +9,7 @@
  */
 
 package platformsaccount
+
 // CloseAccountHolderResponse struct for CloseAccountHolderResponse
 type CloseAccountHolderResponse struct {
 	AccountHolderStatus AccountHolderStatus `json:"accountHolderStatus"`

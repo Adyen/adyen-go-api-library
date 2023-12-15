@@ -9,6 +9,7 @@
  */
 
 package platformsnotificationconfiguration
+
 // NotificationConfigurationDetails struct for NotificationConfigurationDetails
 type NotificationConfigurationDetails struct {
 	// Indicates whether the notification subscription is active.

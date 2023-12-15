@@ -21,12 +21,12 @@ type AccountHolderDetails struct {
 	// Each of the bank accounts associated with the account holder. > Each array entry should represent one bank account. > For comprehensive detail regarding the required `BankAccountDetail` fields, please refer to the [KYC Verification documentation](https://docs.adyen.com/platforms/onboarding-and-verification/verification-checks).
 	BankAccountDetails *[]BankAccountDetail `json:"bankAccountDetails,omitempty"`
 	// The opaque reference value returned by the Adyen API during bank account login.
-	BankAggregatorDataReference *string `json:"bankAggregatorDataReference,omitempty"`
-	BusinessDetails *BusinessDetails `json:"businessDetails,omitempty"`
+	BankAggregatorDataReference *string          `json:"bankAggregatorDataReference,omitempty"`
+	BusinessDetails             *BusinessDetails `json:"businessDetails,omitempty"`
 	// The email address of the account holder.
 	Email string `json:"email"`
 	// The phone number of the account holder provided as a single string. It will be handled as a landline phone. **Examples:** \"0031 6 11 22 33 44\", \"+316/1122-3344\", \"(0031) 611223344\"
-	FullPhoneNumber string `json:"fullPhoneNumber"`
+	FullPhoneNumber   string             `json:"fullPhoneNumber"`
 	IndividualDetails *IndividualDetails `json:"individualDetails,omitempty"`
 	// The Merchant Category Code of the account holder. > If not specified in the request, this will be derived from the platform account (which is configured by Adyen).
 	MerchantCategoryCode *string `json:"merchantCategoryCode,omitempty"`
@@ -42,7 +42,7 @@ type AccountHolderDetails struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccountHolderDetails(email string, fullPhoneNumber string, webAddress string, ) *AccountHolderDetails {
+func NewAccountHolderDetails(email string, fullPhoneNumber string, webAddress string) *AccountHolderDetails {
 	this := AccountHolderDetails{}
 	this.Email = email
 	this.FullPhoneNumber = fullPhoneNumber
@@ -188,7 +188,7 @@ func (o *AccountHolderDetails) SetBusinessDetails(v BusinessDetails) {
 
 // GetEmail returns the Email field value
 func (o *AccountHolderDetails) GetEmail() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -199,7 +199,7 @@ func (o *AccountHolderDetails) GetEmail() string {
 // GetEmailOk returns a tuple with the Email field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderDetails) GetEmailOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Email, true
@@ -212,7 +212,7 @@ func (o *AccountHolderDetails) SetEmail(v string) {
 
 // GetFullPhoneNumber returns the FullPhoneNumber field value
 func (o *AccountHolderDetails) GetFullPhoneNumber() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -223,7 +223,7 @@ func (o *AccountHolderDetails) GetFullPhoneNumber() string {
 // GetFullPhoneNumberOk returns a tuple with the FullPhoneNumber field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderDetails) GetFullPhoneNumberOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.FullPhoneNumber, true
@@ -364,7 +364,7 @@ func (o *AccountHolderDetails) SetPayoutMethods(v []PayoutMethod) {
 
 // GetWebAddress returns the WebAddress field value
 func (o *AccountHolderDetails) GetWebAddress() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -375,7 +375,7 @@ func (o *AccountHolderDetails) GetWebAddress() string {
 // GetWebAddressOk returns a tuple with the WebAddress field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderDetails) GetWebAddressOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.WebAddress, true
@@ -459,5 +459,3 @@ func (v *NullableAccountHolderDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -9,6 +9,7 @@
  */
 
 package platformsaccount
+
 // ViasPhoneNumber struct for ViasPhoneNumber
 type ViasPhoneNumber struct {
 	// The two-character country code of the phone number. >The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').

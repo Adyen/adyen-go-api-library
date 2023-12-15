@@ -20,7 +20,7 @@ type AccountHolderUpcomingDeadlineNotificationContent struct {
 	// The code of the account holder whom the event refers to.
 	AccountHolderCode *string `json:"accountHolderCode,omitempty"`
 	// The event name that will be trigger if no action is taken.
-	Event *string `json:"event,omitempty"`
+	Event         *string    `json:"event,omitempty"`
 	ExecutionDate *LocalDate `json:"executionDate,omitempty"`
 	// The reason that leads to scheduling of the event.
 	Reason *string `json:"reason,omitempty"`
@@ -223,5 +223,3 @@ func (v *NullableAccountHolderUpcomingDeadlineNotificationContent) UnmarshalJSON
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

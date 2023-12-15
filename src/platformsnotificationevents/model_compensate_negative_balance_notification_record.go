@@ -20,7 +20,7 @@ import (
 type CompensateNegativeBalanceNotificationRecord struct {
 	// The code of the account whose negative balance has been compensated.
 	AccountCode string `json:"accountCode"`
-	Amount Amount `json:"amount"`
+	Amount      Amount `json:"amount"`
 	// The date on which the compensation took place.
 	TransferDate time.Time `json:"transferDate"`
 }
@@ -29,7 +29,7 @@ type CompensateNegativeBalanceNotificationRecord struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCompensateNegativeBalanceNotificationRecord(accountCode string, amount Amount, transferDate time.Time, ) *CompensateNegativeBalanceNotificationRecord {
+func NewCompensateNegativeBalanceNotificationRecord(accountCode string, amount Amount, transferDate time.Time) *CompensateNegativeBalanceNotificationRecord {
 	this := CompensateNegativeBalanceNotificationRecord{}
 	this.AccountCode = accountCode
 	this.Amount = amount
@@ -47,7 +47,7 @@ func NewCompensateNegativeBalanceNotificationRecordWithDefaults() *CompensateNeg
 
 // GetAccountCode returns the AccountCode field value
 func (o *CompensateNegativeBalanceNotificationRecord) GetAccountCode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -58,7 +58,7 @@ func (o *CompensateNegativeBalanceNotificationRecord) GetAccountCode() string {
 // GetAccountCodeOk returns a tuple with the AccountCode field value
 // and a boolean to check if the value has been set.
 func (o *CompensateNegativeBalanceNotificationRecord) GetAccountCodeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.AccountCode, true
@@ -71,7 +71,7 @@ func (o *CompensateNegativeBalanceNotificationRecord) SetAccountCode(v string) {
 
 // GetAmount returns the Amount field value
 func (o *CompensateNegativeBalanceNotificationRecord) GetAmount() Amount {
-	if o == nil  {
+	if o == nil {
 		var ret Amount
 		return ret
 	}
@@ -82,7 +82,7 @@ func (o *CompensateNegativeBalanceNotificationRecord) GetAmount() Amount {
 // GetAmountOk returns a tuple with the Amount field value
 // and a boolean to check if the value has been set.
 func (o *CompensateNegativeBalanceNotificationRecord) GetAmountOk() (*Amount, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Amount, true
@@ -95,7 +95,7 @@ func (o *CompensateNegativeBalanceNotificationRecord) SetAmount(v Amount) {
 
 // GetTransferDate returns the TransferDate field value
 func (o *CompensateNegativeBalanceNotificationRecord) GetTransferDate() time.Time {
-	if o == nil  {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
@@ -106,7 +106,7 @@ func (o *CompensateNegativeBalanceNotificationRecord) GetTransferDate() time.Tim
 // GetTransferDateOk returns a tuple with the TransferDate field value
 // and a boolean to check if the value has been set.
 func (o *CompensateNegativeBalanceNotificationRecord) GetTransferDateOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.TransferDate, true
@@ -166,5 +166,3 @@ func (v *NullableCompensateNegativeBalanceNotificationRecord) UnmarshalJSON(src 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

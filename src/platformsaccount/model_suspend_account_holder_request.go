@@ -9,6 +9,7 @@
  */
 
 package platformsaccount
+
 // SuspendAccountHolderRequest struct for SuspendAccountHolderRequest
 type SuspendAccountHolderRequest struct {
 	// The code of the account holder to be suspended.

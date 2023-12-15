@@ -19,7 +19,7 @@ import (
 // AccountHolderStoreStatusChangeNotification struct for AccountHolderStoreStatusChangeNotification
 type AccountHolderStoreStatusChangeNotification struct {
 	Content *AccountHolderStoreStatusChangeNotificationContent `json:"content,omitempty"`
-	Error *NotificationErrorContainer `json:"error,omitempty"`
+	Error   *NotificationErrorContainer                        `json:"error,omitempty"`
 	// The date and time when an event has been completed.
 	EventDate time.Time `json:"eventDate"`
 	// The event type of the notification.
@@ -36,7 +36,7 @@ type AccountHolderStoreStatusChangeNotification struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccountHolderStoreStatusChangeNotification(eventDate time.Time, eventType string, executingUserKey string, live bool, pspReference string, ) *AccountHolderStoreStatusChangeNotification {
+func NewAccountHolderStoreStatusChangeNotification(eventDate time.Time, eventType string, executingUserKey string, live bool, pspReference string) *AccountHolderStoreStatusChangeNotification {
 	this := AccountHolderStoreStatusChangeNotification{}
 	this.EventDate = eventDate
 	this.EventType = eventType
@@ -120,7 +120,7 @@ func (o *AccountHolderStoreStatusChangeNotification) SetError(v NotificationErro
 
 // GetEventDate returns the EventDate field value
 func (o *AccountHolderStoreStatusChangeNotification) GetEventDate() time.Time {
-	if o == nil  {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
@@ -131,7 +131,7 @@ func (o *AccountHolderStoreStatusChangeNotification) GetEventDate() time.Time {
 // GetEventDateOk returns a tuple with the EventDate field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderStoreStatusChangeNotification) GetEventDateOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.EventDate, true
@@ -144,7 +144,7 @@ func (o *AccountHolderStoreStatusChangeNotification) SetEventDate(v time.Time) {
 
 // GetEventType returns the EventType field value
 func (o *AccountHolderStoreStatusChangeNotification) GetEventType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -155,7 +155,7 @@ func (o *AccountHolderStoreStatusChangeNotification) GetEventType() string {
 // GetEventTypeOk returns a tuple with the EventType field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderStoreStatusChangeNotification) GetEventTypeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.EventType, true
@@ -168,7 +168,7 @@ func (o *AccountHolderStoreStatusChangeNotification) SetEventType(v string) {
 
 // GetExecutingUserKey returns the ExecutingUserKey field value
 func (o *AccountHolderStoreStatusChangeNotification) GetExecutingUserKey() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -179,7 +179,7 @@ func (o *AccountHolderStoreStatusChangeNotification) GetExecutingUserKey() strin
 // GetExecutingUserKeyOk returns a tuple with the ExecutingUserKey field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderStoreStatusChangeNotification) GetExecutingUserKeyOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ExecutingUserKey, true
@@ -192,7 +192,7 @@ func (o *AccountHolderStoreStatusChangeNotification) SetExecutingUserKey(v strin
 
 // GetLive returns the Live field value
 func (o *AccountHolderStoreStatusChangeNotification) GetLive() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -203,7 +203,7 @@ func (o *AccountHolderStoreStatusChangeNotification) GetLive() bool {
 // GetLiveOk returns a tuple with the Live field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderStoreStatusChangeNotification) GetLiveOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Live, true
@@ -216,7 +216,7 @@ func (o *AccountHolderStoreStatusChangeNotification) SetLive(v bool) {
 
 // GetPspReference returns the PspReference field value
 func (o *AccountHolderStoreStatusChangeNotification) GetPspReference() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -227,7 +227,7 @@ func (o *AccountHolderStoreStatusChangeNotification) GetPspReference() string {
 // GetPspReferenceOk returns a tuple with the PspReference field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderStoreStatusChangeNotification) GetPspReferenceOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PspReference, true
@@ -299,5 +299,3 @@ func (v *NullableAccountHolderStoreStatusChangeNotification) UnmarshalJSON(src [
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

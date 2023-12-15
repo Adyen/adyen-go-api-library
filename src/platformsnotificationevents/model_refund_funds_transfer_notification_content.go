@@ -23,15 +23,15 @@ type RefundFundsTransferNotificationContent struct {
 	// A value that can be supplied at the discretion of the executing user in order to link multiple transactions to one another.
 	MerchantReference *string `json:"merchantReference,omitempty"`
 	// A PSP reference of the original fund transfer.
-	OriginalReference string `json:"originalReference"`
-	Status *OperationStatus `json:"status,omitempty"`
+	OriginalReference string           `json:"originalReference"`
+	Status            *OperationStatus `json:"status,omitempty"`
 }
 
 // NewRefundFundsTransferNotificationContent instantiates a new RefundFundsTransferNotificationContent object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRefundFundsTransferNotificationContent(amount Amount, originalReference string, ) *RefundFundsTransferNotificationContent {
+func NewRefundFundsTransferNotificationContent(amount Amount, originalReference string) *RefundFundsTransferNotificationContent {
 	this := RefundFundsTransferNotificationContent{}
 	this.Amount = amount
 	this.OriginalReference = originalReference
@@ -48,7 +48,7 @@ func NewRefundFundsTransferNotificationContentWithDefaults() *RefundFundsTransfe
 
 // GetAmount returns the Amount field value
 func (o *RefundFundsTransferNotificationContent) GetAmount() Amount {
-	if o == nil  {
+	if o == nil {
 		var ret Amount
 		return ret
 	}
@@ -59,7 +59,7 @@ func (o *RefundFundsTransferNotificationContent) GetAmount() Amount {
 // GetAmountOk returns a tuple with the Amount field value
 // and a boolean to check if the value has been set.
 func (o *RefundFundsTransferNotificationContent) GetAmountOk() (*Amount, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Amount, true
@@ -136,7 +136,7 @@ func (o *RefundFundsTransferNotificationContent) SetMerchantReference(v string) 
 
 // GetOriginalReference returns the OriginalReference field value
 func (o *RefundFundsTransferNotificationContent) GetOriginalReference() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -147,7 +147,7 @@ func (o *RefundFundsTransferNotificationContent) GetOriginalReference() string {
 // GetOriginalReferenceOk returns a tuple with the OriginalReference field value
 // and a boolean to check if the value has been set.
 func (o *RefundFundsTransferNotificationContent) GetOriginalReferenceOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.OriginalReference, true
@@ -245,5 +245,3 @@ func (v *NullableRefundFundsTransferNotificationContent) UnmarshalJSON(src []byt
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

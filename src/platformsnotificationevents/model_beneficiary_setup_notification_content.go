@@ -38,7 +38,7 @@ type BeneficiarySetupNotificationContent struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBeneficiarySetupNotificationContent(destinationAccountCode string, destinationAccountHolderCode string, sourceAccountCode string, sourceAccountHolderCode string, transferDate time.Time, ) *BeneficiarySetupNotificationContent {
+func NewBeneficiarySetupNotificationContent(destinationAccountCode string, destinationAccountHolderCode string, sourceAccountCode string, sourceAccountHolderCode string, transferDate time.Time) *BeneficiarySetupNotificationContent {
 	this := BeneficiarySetupNotificationContent{}
 	this.DestinationAccountCode = destinationAccountCode
 	this.DestinationAccountHolderCode = destinationAccountHolderCode
@@ -58,7 +58,7 @@ func NewBeneficiarySetupNotificationContentWithDefaults() *BeneficiarySetupNotif
 
 // GetDestinationAccountCode returns the DestinationAccountCode field value
 func (o *BeneficiarySetupNotificationContent) GetDestinationAccountCode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -69,7 +69,7 @@ func (o *BeneficiarySetupNotificationContent) GetDestinationAccountCode() string
 // GetDestinationAccountCodeOk returns a tuple with the DestinationAccountCode field value
 // and a boolean to check if the value has been set.
 func (o *BeneficiarySetupNotificationContent) GetDestinationAccountCodeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.DestinationAccountCode, true
@@ -82,7 +82,7 @@ func (o *BeneficiarySetupNotificationContent) SetDestinationAccountCode(v string
 
 // GetDestinationAccountHolderCode returns the DestinationAccountHolderCode field value
 func (o *BeneficiarySetupNotificationContent) GetDestinationAccountHolderCode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -93,7 +93,7 @@ func (o *BeneficiarySetupNotificationContent) GetDestinationAccountHolderCode() 
 // GetDestinationAccountHolderCodeOk returns a tuple with the DestinationAccountHolderCode field value
 // and a boolean to check if the value has been set.
 func (o *BeneficiarySetupNotificationContent) GetDestinationAccountHolderCodeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.DestinationAccountHolderCode, true
@@ -170,7 +170,7 @@ func (o *BeneficiarySetupNotificationContent) SetMerchantReference(v string) {
 
 // GetSourceAccountCode returns the SourceAccountCode field value
 func (o *BeneficiarySetupNotificationContent) GetSourceAccountCode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -181,7 +181,7 @@ func (o *BeneficiarySetupNotificationContent) GetSourceAccountCode() string {
 // GetSourceAccountCodeOk returns a tuple with the SourceAccountCode field value
 // and a boolean to check if the value has been set.
 func (o *BeneficiarySetupNotificationContent) GetSourceAccountCodeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.SourceAccountCode, true
@@ -194,7 +194,7 @@ func (o *BeneficiarySetupNotificationContent) SetSourceAccountCode(v string) {
 
 // GetSourceAccountHolderCode returns the SourceAccountHolderCode field value
 func (o *BeneficiarySetupNotificationContent) GetSourceAccountHolderCode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -205,7 +205,7 @@ func (o *BeneficiarySetupNotificationContent) GetSourceAccountHolderCode() strin
 // GetSourceAccountHolderCodeOk returns a tuple with the SourceAccountHolderCode field value
 // and a boolean to check if the value has been set.
 func (o *BeneficiarySetupNotificationContent) GetSourceAccountHolderCodeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.SourceAccountHolderCode, true
@@ -218,7 +218,7 @@ func (o *BeneficiarySetupNotificationContent) SetSourceAccountHolderCode(v strin
 
 // GetTransferDate returns the TransferDate field value
 func (o *BeneficiarySetupNotificationContent) GetTransferDate() time.Time {
-	if o == nil  {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
@@ -229,7 +229,7 @@ func (o *BeneficiarySetupNotificationContent) GetTransferDate() time.Time {
 // GetTransferDateOk returns a tuple with the TransferDate field value
 // and a boolean to check if the value has been set.
 func (o *BeneficiarySetupNotificationContent) GetTransferDateOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.TransferDate, true
@@ -301,5 +301,3 @@ func (v *NullableBeneficiarySetupNotificationContent) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
