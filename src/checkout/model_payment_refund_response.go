@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v8/src/common"
+    "github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the PaymentRefundResponse type satisfies the MappedNullable interface at compile time
@@ -26,7 +25,7 @@ type PaymentRefundResponse struct {
 	MerchantAccount string `json:"merchantAccount"`
 	// Your reason for the refund request.
 	MerchantRefundReason *string `json:"merchantRefundReason,omitempty"`
-	// The [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference) of the payment to refund.
+	// The [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference) of the payment to refund. 
 	PaymentPspReference string `json:"paymentPspReference"`
 	// Adyen's 16-character reference associated with the refund request.
 	PspReference string `json:"pspReference"`
@@ -36,6 +35,8 @@ type PaymentRefundResponse struct {
 	Splits []Split `json:"splits,omitempty"`
 	// The status of your request. This will always have the value **received**.
 	Status string `json:"status"`
+	// The online store or [physical store](https://docs.adyen.com/point-of-sale/design-your-integration/determine-account-structure/#create-stores) that is processing the refund. This must be the same as the store name configured in your Customer Area.  Otherwise, you get an error and the refund fails.
+	Store *string `json:"store,omitempty"`
 }
 
 // NewPaymentRefundResponse instantiates a new PaymentRefundResponse object
@@ -308,8 +309,40 @@ func (o *PaymentRefundResponse) SetStatus(v string) {
 	o.Status = v
 }
 
+// GetStore returns the Store field value if set, zero value otherwise.
+func (o *PaymentRefundResponse) GetStore() string {
+	if o == nil || common.IsNil(o.Store) {
+		var ret string
+		return ret
+	}
+	return *o.Store
+}
+
+// GetStoreOk returns a tuple with the Store field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentRefundResponse) GetStoreOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Store) {
+		return nil, false
+	}
+	return o.Store, true
+}
+
+// HasStore returns a boolean if a field has been set.
+func (o *PaymentRefundResponse) HasStore() bool {
+	if o != nil && !common.IsNil(o.Store) {
+		return true
+	}
+
+	return false
+}
+
+// SetStore gets a reference to the given string and assigns it to the Store field.
+func (o *PaymentRefundResponse) SetStore(v string) {
+	o.Store = &v
+}
+
 func (o PaymentRefundResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -335,6 +368,9 @@ func (o PaymentRefundResponse) ToMap() (map[string]interface{}, error) {
 		toSerialize["splits"] = o.Splits
 	}
 	toSerialize["status"] = o.Status
+	if !common.IsNil(o.Store) {
+		toSerialize["store"] = o.Store
+	}
 	return toSerialize, nil
 }
 
@@ -374,21 +410,23 @@ func (v *NullablePaymentRefundResponse) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *PaymentRefundResponse) isValidMerchantRefundReason() bool {
-	var allowedEnumValues = []string{"FRAUD", "CUSTOMER REQUEST", "RETURN", "DUPLICATE", "OTHER"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetMerchantRefundReason() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "FRAUD", "CUSTOMER REQUEST", "RETURN", "DUPLICATE", "OTHER" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetMerchantRefundReason() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *PaymentRefundResponse) isValidStatus() bool {
-	var allowedEnumValues = []string{"received"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetStatus() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "received" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetStatus() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

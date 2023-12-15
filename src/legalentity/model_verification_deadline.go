@@ -10,9 +10,8 @@ package legalentity
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v8/src/common"
 	"time"
-
-	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the VerificationDeadline type satisfies the MappedNullable interface at compile time
@@ -20,7 +19,7 @@ var _ common.MappedNullable = &VerificationDeadline{}
 
 // VerificationDeadline struct for VerificationDeadline
 type VerificationDeadline struct {
-	// The names of the capabilities to be disallowed.
+	// The list of capabilities that will be disallowed if information is not reviewed by the time of the deadline
 	Capabilities []string `json:"capabilities"`
 	// The unique identifiers of the bank account(s) that the deadline applies to
 	EntityIds []string `json:"entityIds,omitempty"`
@@ -128,7 +127,7 @@ func (o *VerificationDeadline) SetExpiresAt(v time.Time) {
 }
 
 func (o VerificationDeadline) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -180,3 +179,6 @@ func (v *NullableVerificationDeadline) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

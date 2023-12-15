@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v8/src/common"
+    "github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the TransferInstrumentReference type satisfies the MappedNullable interface at compile time
@@ -23,7 +22,7 @@ type TransferInstrumentReference struct {
 	AccountIdentifier string `json:"accountIdentifier"`
 	// The unique identifier of the resource.
 	Id string `json:"id"`
-	// Four last digits of the bank account number.
+	// Four last digits of the bank account number. If the transfer instrument is created using [instant bank account verification](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-08-hosted-onboarding), and it is a virtual bank account, these digits may be different from the last four digits of the masked account number.
 	RealLastFour *string `json:"realLastFour,omitempty"`
 	// Identifies if the bank account was created through [instant bank verification](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-08-hosted-onboarding).
 	TrustedSource *bool `json:"trustedSource,omitempty"`
@@ -161,7 +160,7 @@ func (o *TransferInstrumentReference) SetTrustedSource(v bool) {
 }
 
 func (o TransferInstrumentReference) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -216,3 +215,6 @@ func (v *NullableTransferInstrumentReference) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

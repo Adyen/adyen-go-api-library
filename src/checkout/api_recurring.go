@@ -10,11 +10,10 @@ package checkout
 
 import (
 	"context"
-	"net/http"
-	"net/url"
-	"strings"
-
-	"github.com/adyen/adyen-go-api-library/v8/src/common"
+    "net/http"
+    "net/url"
+    "strings"
+    "github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // RecurringApi service
@@ -23,8 +22,8 @@ type RecurringApi common.Service
 // All parameters accepted by RecurringApi.DeleteTokenForStoredPaymentDetails
 type RecurringApiDeleteTokenForStoredPaymentDetailsInput struct {
 	storedPaymentMethodId string
-	shopperReference      *string
-	merchantAccount       *string
+	shopperReference *string
+	merchantAccount *string
 }
 
 // Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters. &gt; Your reference must not include personally identifiable information (PII), for example name or email address.
@@ -38,6 +37,7 @@ func (r RecurringApiDeleteTokenForStoredPaymentDetailsInput) MerchantAccount(mer
 	r.merchantAccount = &merchantAccount
 	return r
 }
+
 
 /*
 Prepare a request for DeleteTokenForStoredPaymentDetails
@@ -60,35 +60,37 @@ Deletes the token identified in the path. The token can no longer be used with p
 @return *http.Response, error
 */
 func (a *RecurringApi) DeleteTokenForStoredPaymentDetails(ctx context.Context, r RecurringApiDeleteTokenForStoredPaymentDetailsInput) (*http.Response, error) {
-	var res interface{}
+    var res interface{}
 	path := "/storedPaymentMethods/{storedPaymentMethodId}"
-	path = strings.Replace(path, "{"+"storedPaymentMethodId"+"}", url.PathEscape(common.ParameterValueToString(r.storedPaymentMethodId, "storedPaymentMethodId")), -1)
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	if r.shopperReference != nil {
-		common.ParameterAddToQuery(queryParams, "shopperReference", r.shopperReference, "")
-	}
-	if r.merchantAccount != nil {
-		common.ParameterAddToQuery(queryParams, "merchantAccount", r.merchantAccount, "")
-	}
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		nil,
-		res,
-		http.MethodDelete,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    path = strings.Replace(path, "{"+"storedPaymentMethodId"+"}", url.PathEscape(common.ParameterValueToString(r.storedPaymentMethodId, "storedPaymentMethodId")), -1)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    if r.shopperReference != nil {
+        common.ParameterAddToQuery(queryParams, "shopperReference", r.shopperReference, "")
+    }
+    if r.merchantAccount != nil {
+        common.ParameterAddToQuery(queryParams, "merchantAccount", r.merchantAccount, "")
+    }
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        nil,
+        res,
+        http.MethodDelete,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return httpRes, err
+
+    return httpRes, err
 }
+
 
 // All parameters accepted by RecurringApi.GetTokensForStoredPaymentDetails
 type RecurringApiGetTokensForStoredPaymentDetailsInput struct {
 	shopperReference *string
-	merchantAccount  *string
+	merchantAccount *string
 }
 
 // Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters. &gt; Your reference must not include personally identifiable information (PII), for example name or email address.
@@ -103,13 +105,15 @@ func (r RecurringApiGetTokensForStoredPaymentDetailsInput) MerchantAccount(merch
 	return r
 }
 
+
 /*
 Prepare a request for GetTokensForStoredPaymentDetails
 
 @return RecurringApiGetTokensForStoredPaymentDetailsInput
 */
 func (a *RecurringApi) GetTokensForStoredPaymentDetailsInput() RecurringApiGetTokensForStoredPaymentDetailsInput {
-	return RecurringApiGetTokensForStoredPaymentDetailsInput{}
+	return RecurringApiGetTokensForStoredPaymentDetailsInput{
+	}
 }
 
 /*
@@ -124,26 +128,28 @@ Lists the tokens for stored payment details for the shopper identified in the pa
 @return ListStoredPaymentMethodsResponse, *http.Response, error
 */
 func (a *RecurringApi) GetTokensForStoredPaymentDetails(ctx context.Context, r RecurringApiGetTokensForStoredPaymentDetailsInput) (ListStoredPaymentMethodsResponse, *http.Response, error) {
-	res := &ListStoredPaymentMethodsResponse{}
+    res := &ListStoredPaymentMethodsResponse{}
 	path := "/storedPaymentMethods"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	if r.shopperReference != nil {
-		common.ParameterAddToQuery(queryParams, "shopperReference", r.shopperReference, "")
-	}
-	if r.merchantAccount != nil {
-		common.ParameterAddToQuery(queryParams, "merchantAccount", r.merchantAccount, "")
-	}
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		nil,
-		res,
-		http.MethodGet,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    if r.shopperReference != nil {
+        common.ParameterAddToQuery(queryParams, "shopperReference", r.shopperReference, "")
+    }
+    if r.merchantAccount != nil {
+        common.ParameterAddToQuery(queryParams, "merchantAccount", r.merchantAccount, "")
+    }
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        nil,
+        res,
+        http.MethodGet,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+

@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v8/src/common"
+    "github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the DeliveryAddress type satisfies the MappedNullable interface at compile time
@@ -22,11 +21,11 @@ type DeliveryAddress struct {
 	// The name of the city. Maximum length: 3000 characters.
 	City string `json:"city"`
 	// The two-character ISO-3166-1 alpha-2 country code. For example, **US**. > If you don't know the country or are not collecting the country from the shopper, provide `country` as `ZZ`.
-	Country   string  `json:"country"`
+	Country string `json:"country"`
 	FirstName *string `json:"firstName,omitempty"`
 	// The number or name of the house. Maximum length: 3000 characters.
-	HouseNumberOrName string  `json:"houseNumberOrName"`
-	LastName          *string `json:"lastName,omitempty"`
+	HouseNumberOrName string `json:"houseNumberOrName"`
+	LastName *string `json:"lastName,omitempty"`
 	// A maximum of five digits for an address in the US, or a maximum of ten characters for an address in all other countries.
 	PostalCode string `json:"postalCode"`
 	// The two-character ISO 3166-2 state or province code. For example, **CA** in the US or **ON** in Canada. > Required for the US and Canada.
@@ -274,7 +273,7 @@ func (o *DeliveryAddress) SetStreet(v string) {
 }
 
 func (o DeliveryAddress) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -335,3 +334,6 @@ func (v *NullableDeliveryAddress) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

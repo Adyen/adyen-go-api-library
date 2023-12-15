@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v8/src/common"
+    "github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the LegalEntityInfoRequiredType type satisfies the MappedNullable interface at compile time
@@ -23,15 +22,17 @@ type LegalEntityInfoRequiredType struct {
 	Capabilities *map[string]LegalEntityCapability `json:"capabilities,omitempty"`
 	// List of legal entities associated with the current legal entity. For example, ultimate beneficial owners associated with an organization through ownership or control, or as signatories.
 	EntityAssociations []LegalEntityAssociation `json:"entityAssociations,omitempty"`
-	Individual         *Individual              `json:"individual,omitempty"`
-	Organization       *Organization            `json:"organization,omitempty"`
+	Individual *Individual `json:"individual,omitempty"`
+	Organization *Organization `json:"organization,omitempty"`
 	// Your reference for the legal entity, maximum 150 characters.
-	Reference          *string             `json:"reference,omitempty"`
+	Reference *string `json:"reference,omitempty"`
 	SoleProprietorship *SoleProprietorship `json:"soleProprietorship,omitempty"`
-	Trust              *Trust              `json:"trust,omitempty"`
+	Trust *Trust `json:"trust,omitempty"`
 	// The type of legal entity.   Possible values: **individual**, **organization**, **soleProprietorship**, or **trust**.
-	Type                      string                     `json:"type"`
+	Type string `json:"type"`
 	UnincorporatedPartnership *UnincorporatedPartnership `json:"unincorporatedPartnership,omitempty"`
+	// A key-value pair that specifies the [verification process](https://docs.adyen.com/marketplaces-and-platforms/collect-verification-details/) for a legal entity. Set to **upfront** for [upfront verification](https://docs.adyen.com/marketplaces-and-platforms/collect-verification-details#upfront).
+	VerificationPlan *string `json:"verificationPlan,omitempty"`
 }
 
 // NewLegalEntityInfoRequiredType instantiates a new LegalEntityInfoRequiredType object
@@ -332,8 +333,40 @@ func (o *LegalEntityInfoRequiredType) SetUnincorporatedPartnership(v Unincorpora
 	o.UnincorporatedPartnership = &v
 }
 
+// GetVerificationPlan returns the VerificationPlan field value if set, zero value otherwise.
+func (o *LegalEntityInfoRequiredType) GetVerificationPlan() string {
+	if o == nil || common.IsNil(o.VerificationPlan) {
+		var ret string
+		return ret
+	}
+	return *o.VerificationPlan
+}
+
+// GetVerificationPlanOk returns a tuple with the VerificationPlan field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LegalEntityInfoRequiredType) GetVerificationPlanOk() (*string, bool) {
+	if o == nil || common.IsNil(o.VerificationPlan) {
+		return nil, false
+	}
+	return o.VerificationPlan, true
+}
+
+// HasVerificationPlan returns a boolean if a field has been set.
+func (o *LegalEntityInfoRequiredType) HasVerificationPlan() bool {
+	if o != nil && !common.IsNil(o.VerificationPlan) {
+		return true
+	}
+
+	return false
+}
+
+// SetVerificationPlan gets a reference to the given string and assigns it to the VerificationPlan field.
+func (o *LegalEntityInfoRequiredType) SetVerificationPlan(v string) {
+	o.VerificationPlan = &v
+}
+
 func (o LegalEntityInfoRequiredType) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -366,6 +399,9 @@ func (o LegalEntityInfoRequiredType) ToMap() (map[string]interface{}, error) {
 	toSerialize["type"] = o.Type
 	if !common.IsNil(o.UnincorporatedPartnership) {
 		toSerialize["unincorporatedPartnership"] = o.UnincorporatedPartnership
+	}
+	if !common.IsNil(o.VerificationPlan) {
+		toSerialize["verificationPlan"] = o.VerificationPlan
 	}
 	return toSerialize, nil
 }
@@ -406,12 +442,14 @@ func (v *NullableLegalEntityInfoRequiredType) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *LegalEntityInfoRequiredType) isValidType() bool {
-	var allowedEnumValues = []string{"individual", "organization", "soleProprietorship", "trust", "unincorporatedPartnership"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "individual", "organization", "soleProprietorship", "trust", "unincorporatedPartnership" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

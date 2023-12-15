@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v8/src/common"
+    "github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the SoleProprietorship type satisfies the MappedNullable interface at compile time
@@ -23,12 +22,14 @@ type SoleProprietorship struct {
 	CountryOfGoverningLaw string `json:"countryOfGoverningLaw"`
 	// The date when the legal arrangement was incorporated in YYYY-MM-DD format.
 	DateOfIncorporation *string `json:"dateOfIncorporation,omitempty"`
+	// Short description about the Legal Arrangement.
+	Description *string `json:"description,omitempty"`
 	// The registered name, if different from the `name`.
 	DoingBusinessAs *string `json:"doingBusinessAs,omitempty"`
 	// The legal name.
-	Name                     string   `json:"name"`
+	Name string `json:"name"`
 	PrincipalPlaceOfBusiness *Address `json:"principalPlaceOfBusiness,omitempty"`
-	RegisteredAddress        Address  `json:"registeredAddress"`
+	RegisteredAddress Address `json:"registeredAddress"`
 	// The registration number.
 	RegistrationNumber *string `json:"registrationNumber,omitempty"`
 	// The tax information of the entity.
@@ -113,6 +114,38 @@ func (o *SoleProprietorship) HasDateOfIncorporation() bool {
 // SetDateOfIncorporation gets a reference to the given string and assigns it to the DateOfIncorporation field.
 func (o *SoleProprietorship) SetDateOfIncorporation(v string) {
 	o.DateOfIncorporation = &v
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *SoleProprietorship) GetDescription() string {
+	if o == nil || common.IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SoleProprietorship) GetDescriptionOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *SoleProprietorship) HasDescription() bool {
+	if o != nil && !common.IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *SoleProprietorship) SetDescription(v string) {
+	o.Description = &v
 }
 
 // GetDoingBusinessAs returns the DoingBusinessAs field value if set, zero value otherwise.
@@ -356,7 +389,7 @@ func (o *SoleProprietorship) SetVatNumber(v string) {
 }
 
 func (o SoleProprietorship) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -368,6 +401,9 @@ func (o SoleProprietorship) ToMap() (map[string]interface{}, error) {
 	toSerialize["countryOfGoverningLaw"] = o.CountryOfGoverningLaw
 	if !common.IsNil(o.DateOfIncorporation) {
 		toSerialize["dateOfIncorporation"] = o.DateOfIncorporation
+	}
+	if !common.IsNil(o.Description) {
+		toSerialize["description"] = o.Description
 	}
 	if !common.IsNil(o.DoingBusinessAs) {
 		toSerialize["doingBusinessAs"] = o.DoingBusinessAs
@@ -428,12 +464,14 @@ func (v *NullableSoleProprietorship) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *SoleProprietorship) isValidVatAbsenceReason() bool {
-	var allowedEnumValues = []string{"industryExemption", "belowTaxThreshold"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetVatAbsenceReason() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "industryExemption", "belowTaxThreshold" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetVatAbsenceReason() == allowed {
+            return true
+        }
+    }
+    return false
 }
+
