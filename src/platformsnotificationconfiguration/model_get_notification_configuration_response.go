@@ -9,6 +9,7 @@
  */
 
 package platformsnotificationconfiguration
+
 // GetNotificationConfigurationResponse struct for GetNotificationConfigurationResponse
 type GetNotificationConfigurationResponse struct {
 	ConfigurationDetails NotificationConfigurationDetails `json:"configurationDetails"`

@@ -20,9 +20,9 @@ type AccountProcessingState struct {
 	// The reason why processing has been disabled.
 	DisableReason *string `json:"disableReason,omitempty"`
 	// Indicates whether the processing of payments is allowed.
-	Disabled *bool `json:"disabled,omitempty"`
+	Disabled      *bool   `json:"disabled,omitempty"`
 	ProcessedFrom *Amount `json:"processedFrom,omitempty"`
-	ProcessedTo *Amount `json:"processedTo,omitempty"`
+	ProcessedTo   *Amount `json:"processedTo,omitempty"`
 	// The processing tier that the account holder occupies.
 	TierNumber *int32 `json:"tierNumber,omitempty"`
 }
@@ -259,5 +259,3 @@ func (v *NullableAccountProcessingState) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

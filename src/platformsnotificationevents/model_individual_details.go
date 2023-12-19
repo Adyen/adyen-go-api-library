@@ -17,7 +17,7 @@ import (
 
 // IndividualDetails struct for IndividualDetails
 type IndividualDetails struct {
-	Name *ViasName `json:"name,omitempty"`
+	Name         *ViasName         `json:"name,omitempty"`
 	PersonalData *ViasPersonalData `json:"personalData,omitempty"`
 }
 
@@ -148,5 +148,3 @@ func (v *NullableIndividualDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

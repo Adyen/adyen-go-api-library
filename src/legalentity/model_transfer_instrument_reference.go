@@ -23,7 +23,7 @@ type TransferInstrumentReference struct {
 	AccountIdentifier string `json:"accountIdentifier"`
 	// The unique identifier of the resource.
 	Id string `json:"id"`
-	// Four last digits of the bank account number.
+	// Four last digits of the bank account number. If the transfer instrument is created using [instant bank account verification](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-08-hosted-onboarding), and it is a virtual bank account, these digits may be different from the last four digits of the masked account number.
 	RealLastFour *string `json:"realLastFour,omitempty"`
 	// Identifies if the bank account was created through [instant bank verification](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-08-hosted-onboarding).
 	TrustedSource *bool `json:"trustedSource,omitempty"`

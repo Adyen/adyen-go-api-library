@@ -36,6 +36,7 @@ type TerminalSettings struct {
 	Signature         *Signature         `json:"signature,omitempty"`
 	Standalone        *Standalone        `json:"standalone,omitempty"`
 	Surcharge         *Surcharge         `json:"surcharge,omitempty"`
+	TapToPay          *TapToPay          `json:"tapToPay,omitempty"`
 	Timeouts          *Timeouts          `json:"timeouts,omitempty"`
 	WifiProfiles      *WifiProfiles      `json:"wifiProfiles,omitempty"`
 }
@@ -569,6 +570,38 @@ func (o *TerminalSettings) SetSurcharge(v Surcharge) {
 	o.Surcharge = &v
 }
 
+// GetTapToPay returns the TapToPay field value if set, zero value otherwise.
+func (o *TerminalSettings) GetTapToPay() TapToPay {
+	if o == nil || common.IsNil(o.TapToPay) {
+		var ret TapToPay
+		return ret
+	}
+	return *o.TapToPay
+}
+
+// GetTapToPayOk returns a tuple with the TapToPay field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TerminalSettings) GetTapToPayOk() (*TapToPay, bool) {
+	if o == nil || common.IsNil(o.TapToPay) {
+		return nil, false
+	}
+	return o.TapToPay, true
+}
+
+// HasTapToPay returns a boolean if a field has been set.
+func (o *TerminalSettings) HasTapToPay() bool {
+	if o != nil && !common.IsNil(o.TapToPay) {
+		return true
+	}
+
+	return false
+}
+
+// SetTapToPay gets a reference to the given TapToPay and assigns it to the TapToPay field.
+func (o *TerminalSettings) SetTapToPay(v TapToPay) {
+	o.TapToPay = &v
+}
+
 // GetTimeouts returns the Timeouts field value if set, zero value otherwise.
 func (o *TerminalSettings) GetTimeouts() Timeouts {
 	if o == nil || common.IsNil(o.Timeouts) {
@@ -690,6 +723,9 @@ func (o TerminalSettings) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Surcharge) {
 		toSerialize["surcharge"] = o.Surcharge
+	}
+	if !common.IsNil(o.TapToPay) {
+		toSerialize["tapToPay"] = o.TapToPay
 	}
 	if !common.IsNil(o.Timeouts) {
 		toSerialize["timeouts"] = o.Timeouts

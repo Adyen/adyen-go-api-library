@@ -9,15 +9,17 @@
  */
 
 package platformsaccount
+
 import (
 	"time"
 )
+
 // GetAccountHolderResponse struct for GetAccountHolderResponse
 type GetAccountHolderResponse struct {
 	// The code of the account holder.
-	AccountHolderCode string `json:"accountHolderCode"`
+	AccountHolderCode    string               `json:"accountHolderCode"`
 	AccountHolderDetails AccountHolderDetails `json:"accountHolderDetails"`
-	AccountHolderStatus AccountHolderStatus `json:"accountHolderStatus"`
+	AccountHolderStatus  AccountHolderStatus  `json:"accountHolderStatus"`
 	// A list of the accounts under the account holder.
 	Accounts *[]Account `json:"accounts,omitempty"`
 	// The description of the account holder.
@@ -33,8 +35,8 @@ type GetAccountHolderResponse struct {
 	// The result code.
 	ResultCode string `json:"resultCode,omitempty"`
 	// The time that shows how up to date is the information in the response.
-	SystemUpToDateTime *time.Time `json:"systemUpToDateTime,omitempty"`
-	Verification KYCVerificationResult `json:"verification"`
+	SystemUpToDateTime *time.Time            `json:"systemUpToDateTime,omitempty"`
+	Verification       KYCVerificationResult `json:"verification"`
 	// The identifier of the profile that applies to this entity.
 	VerificationProfile string `json:"verificationProfile,omitempty"`
 }

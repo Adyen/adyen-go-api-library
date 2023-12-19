@@ -20,8 +20,8 @@ type ErrorFieldType struct {
 	// The validation error code.
 	ErrorCode *int32 `json:"errorCode,omitempty"`
 	// A description of the validation error.
-	ErrorDescription *string `json:"errorDescription,omitempty"`
-	FieldType *FieldType `json:"fieldType,omitempty"`
+	ErrorDescription *string    `json:"errorDescription,omitempty"`
+	FieldType        *FieldType `json:"fieldType,omitempty"`
 }
 
 // NewErrorFieldType instantiates a new ErrorFieldType object
@@ -186,5 +186,3 @@ func (v *NullableErrorFieldType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

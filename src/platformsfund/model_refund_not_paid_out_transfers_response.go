@@ -9,6 +9,7 @@
  */
 
 package platformsfund
+
 // RefundNotPaidOutTransfersResponse struct for RefundNotPaidOutTransfersResponse
 type RefundNotPaidOutTransfersResponse struct {
 	// Contains field validation errors that would prevent requests from being processed.

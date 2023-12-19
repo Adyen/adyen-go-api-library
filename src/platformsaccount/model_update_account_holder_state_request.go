@@ -9,6 +9,7 @@
  */
 
 package platformsaccount
+
 // UpdateAccountHolderStateRequest struct for UpdateAccountHolderStateRequest
 type UpdateAccountHolderStateRequest struct {
 	// The code of the Account Holder on which to update the state.

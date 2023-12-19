@@ -9,6 +9,7 @@
  */
 
 package platformsaccount
+
 // AccountPayoutState struct for AccountPayoutState
 type AccountPayoutState struct {
 	// Indicates whether payouts are allowed. This field is the overarching payout status, and is the aggregate of multiple conditions (e.g., KYC status, disabled flag, etc). If this field is false, no payouts will be permitted for any of the account holder's accounts. If this field is true, payouts will be permitted for any of the account holder's accounts.
@@ -18,8 +19,8 @@ type AccountPayoutState struct {
 	// Indicates whether payouts have been disabled (by the platform) for all of the account holder's accounts. A platform may enable and disable this field at their discretion. If this field is true, `allowPayout` will be false and no payouts will be permitted for any of the account holder's accounts. If this field is false, `allowPayout` may or may not be enabled, depending on other factors.
 	Disabled bool `json:"disabled,omitempty"`
 	// The reason why payouts (to all of the account holder's accounts) have been disabled (by Adyen). If payouts have been disabled by Adyen, this field will explain why. If this field is blank, payouts have not been disabled by Adyen.
-	NotAllowedReason string `json:"notAllowedReason,omitempty"`
-	PayoutLimit *Amount `json:"payoutLimit,omitempty"`
+	NotAllowedReason string  `json:"notAllowedReason,omitempty"`
+	PayoutLimit      *Amount `json:"payoutLimit,omitempty"`
 	// The payout tier that the account holder occupies.
 	TierNumber int32 `json:"tierNumber,omitempty"`
 }

@@ -20,9 +20,9 @@ type CreateAccountHolderResponse struct {
 	// The code of a new account created for the account holder.
 	AccountCode *string `json:"accountCode,omitempty"`
 	// The code of the new account holder.
-	AccountHolderCode string `json:"accountHolderCode"`
+	AccountHolderCode    string               `json:"accountHolderCode"`
 	AccountHolderDetails AccountHolderDetails `json:"accountHolderDetails"`
-	AccountHolderStatus AccountHolderStatus `json:"accountHolderStatus"`
+	AccountHolderStatus  AccountHolderStatus  `json:"accountHolderStatus"`
 	// The description of the new account holder.
 	Description *string `json:"description,omitempty"`
 	// A list of fields that caused the `/createAccountHolder` request to fail.
@@ -34,7 +34,7 @@ type CreateAccountHolderResponse struct {
 	// The reference of a request. Can be used to uniquely identify the request.
 	PspReference *string `json:"pspReference,omitempty"`
 	// The result code.
-	ResultCode *string `json:"resultCode,omitempty"`
+	ResultCode   *string               `json:"resultCode,omitempty"`
 	Verification KYCVerificationResult `json:"verification"`
 	// The identifier of the profile that applies to this entity.
 	VerificationProfile *string `json:"verificationProfile,omitempty"`
@@ -44,7 +44,7 @@ type CreateAccountHolderResponse struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAccountHolderResponse(accountHolderCode string, accountHolderDetails AccountHolderDetails, accountHolderStatus AccountHolderStatus, legalEntity string, verification KYCVerificationResult, ) *CreateAccountHolderResponse {
+func NewCreateAccountHolderResponse(accountHolderCode string, accountHolderDetails AccountHolderDetails, accountHolderStatus AccountHolderStatus, legalEntity string, verification KYCVerificationResult) *CreateAccountHolderResponse {
 	this := CreateAccountHolderResponse{}
 	this.AccountHolderCode = accountHolderCode
 	this.AccountHolderDetails = accountHolderDetails
@@ -96,7 +96,7 @@ func (o *CreateAccountHolderResponse) SetAccountCode(v string) {
 
 // GetAccountHolderCode returns the AccountHolderCode field value
 func (o *CreateAccountHolderResponse) GetAccountHolderCode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -107,7 +107,7 @@ func (o *CreateAccountHolderResponse) GetAccountHolderCode() string {
 // GetAccountHolderCodeOk returns a tuple with the AccountHolderCode field value
 // and a boolean to check if the value has been set.
 func (o *CreateAccountHolderResponse) GetAccountHolderCodeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.AccountHolderCode, true
@@ -120,7 +120,7 @@ func (o *CreateAccountHolderResponse) SetAccountHolderCode(v string) {
 
 // GetAccountHolderDetails returns the AccountHolderDetails field value
 func (o *CreateAccountHolderResponse) GetAccountHolderDetails() AccountHolderDetails {
-	if o == nil  {
+	if o == nil {
 		var ret AccountHolderDetails
 		return ret
 	}
@@ -131,7 +131,7 @@ func (o *CreateAccountHolderResponse) GetAccountHolderDetails() AccountHolderDet
 // GetAccountHolderDetailsOk returns a tuple with the AccountHolderDetails field value
 // and a boolean to check if the value has been set.
 func (o *CreateAccountHolderResponse) GetAccountHolderDetailsOk() (*AccountHolderDetails, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.AccountHolderDetails, true
@@ -144,7 +144,7 @@ func (o *CreateAccountHolderResponse) SetAccountHolderDetails(v AccountHolderDet
 
 // GetAccountHolderStatus returns the AccountHolderStatus field value
 func (o *CreateAccountHolderResponse) GetAccountHolderStatus() AccountHolderStatus {
-	if o == nil  {
+	if o == nil {
 		var ret AccountHolderStatus
 		return ret
 	}
@@ -155,7 +155,7 @@ func (o *CreateAccountHolderResponse) GetAccountHolderStatus() AccountHolderStat
 // GetAccountHolderStatusOk returns a tuple with the AccountHolderStatus field value
 // and a boolean to check if the value has been set.
 func (o *CreateAccountHolderResponse) GetAccountHolderStatusOk() (*AccountHolderStatus, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.AccountHolderStatus, true
@@ -232,7 +232,7 @@ func (o *CreateAccountHolderResponse) SetInvalidFields(v []ErrorFieldType) {
 
 // GetLegalEntity returns the LegalEntity field value
 func (o *CreateAccountHolderResponse) GetLegalEntity() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -243,7 +243,7 @@ func (o *CreateAccountHolderResponse) GetLegalEntity() string {
 // GetLegalEntityOk returns a tuple with the LegalEntity field value
 // and a boolean to check if the value has been set.
 func (o *CreateAccountHolderResponse) GetLegalEntityOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.LegalEntity, true
@@ -352,7 +352,7 @@ func (o *CreateAccountHolderResponse) SetResultCode(v string) {
 
 // GetVerification returns the Verification field value
 func (o *CreateAccountHolderResponse) GetVerification() KYCVerificationResult {
-	if o == nil  {
+	if o == nil {
 		var ret KYCVerificationResult
 		return ret
 	}
@@ -363,7 +363,7 @@ func (o *CreateAccountHolderResponse) GetVerification() KYCVerificationResult {
 // GetVerificationOk returns a tuple with the Verification field value
 // and a boolean to check if the value has been set.
 func (o *CreateAccountHolderResponse) GetVerificationOk() (*KYCVerificationResult, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Verification, true
@@ -482,5 +482,3 @@ func (v *NullableCreateAccountHolderResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

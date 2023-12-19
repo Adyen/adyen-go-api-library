@@ -9,6 +9,7 @@
  */
 
 package platformsaccount
+
 // ViasAddress struct for ViasAddress
 type ViasAddress struct {
 	// The name of the city. >Required if either `houseNumberOrName`, `street`, `postalCode`, or `stateOrProvince` are provided.

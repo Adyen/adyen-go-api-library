@@ -22,10 +22,10 @@ type AccountHolderPayoutNotificationContent struct {
 	// The code of the Account Holder to which the payout was made.
 	AccountHolderCode string `json:"accountHolderCode"`
 	// The payout amounts (per currency).
-	Amounts *[]Amount `json:"amounts,omitempty"`
+	Amounts           *[]Amount          `json:"amounts,omitempty"`
 	BankAccountDetail *BankAccountDetail `json:"bankAccountDetail,omitempty"`
 	// A description of the payout.
-	Description *string `json:"description,omitempty"`
+	Description          *string    `json:"description,omitempty"`
 	EstimatedArrivalDate *LocalDate `json:"estimatedArrivalDate,omitempty"`
 	// Invalid fields list.
 	InvalidFields *[]ErrorFieldType `json:"invalidFields,omitempty"`
@@ -44,15 +44,15 @@ type AccountHolderPayoutNotificationContent struct {
 	// Payout transaction id.
 	PayoutReference *int64 `json:"payoutReference,omitempty"`
 	// Speed with which payouts for this account are processed. Permitted values: `STANDARD`, `SAME_DAY`.
-	PayoutSpeed *string `json:"payoutSpeed,omitempty"`
-	Status *OperationStatus `json:"status,omitempty"`
+	PayoutSpeed *string          `json:"payoutSpeed,omitempty"`
+	Status      *OperationStatus `json:"status,omitempty"`
 }
 
 // NewAccountHolderPayoutNotificationContent instantiates a new AccountHolderPayoutNotificationContent object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccountHolderPayoutNotificationContent(accountCode string, accountHolderCode string, ) *AccountHolderPayoutNotificationContent {
+func NewAccountHolderPayoutNotificationContent(accountCode string, accountHolderCode string) *AccountHolderPayoutNotificationContent {
 	this := AccountHolderPayoutNotificationContent{}
 	this.AccountCode = accountCode
 	this.AccountHolderCode = accountHolderCode
@@ -69,7 +69,7 @@ func NewAccountHolderPayoutNotificationContentWithDefaults() *AccountHolderPayou
 
 // GetAccountCode returns the AccountCode field value
 func (o *AccountHolderPayoutNotificationContent) GetAccountCode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -80,7 +80,7 @@ func (o *AccountHolderPayoutNotificationContent) GetAccountCode() string {
 // GetAccountCodeOk returns a tuple with the AccountCode field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderPayoutNotificationContent) GetAccountCodeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.AccountCode, true
@@ -93,7 +93,7 @@ func (o *AccountHolderPayoutNotificationContent) SetAccountCode(v string) {
 
 // GetAccountHolderCode returns the AccountHolderCode field value
 func (o *AccountHolderPayoutNotificationContent) GetAccountHolderCode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -104,7 +104,7 @@ func (o *AccountHolderPayoutNotificationContent) GetAccountHolderCode() string {
 // GetAccountHolderCodeOk returns a tuple with the AccountHolderCode field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderPayoutNotificationContent) GetAccountHolderCodeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.AccountHolderCode, true
@@ -651,5 +651,3 @@ func (v *NullableAccountHolderPayoutNotificationContent) UnmarshalJSON(src []byt
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

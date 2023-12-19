@@ -19,7 +19,7 @@ import (
 // AccountHolderCreateNotification struct for AccountHolderCreateNotification
 type AccountHolderCreateNotification struct {
 	Content CreateAccountHolderResponse `json:"content"`
-	Error *NotificationErrorContainer `json:"error,omitempty"`
+	Error   *NotificationErrorContainer `json:"error,omitempty"`
 	// The date and time when an event has been completed.
 	EventDate time.Time `json:"eventDate"`
 	// The event type of the notification.
@@ -36,7 +36,7 @@ type AccountHolderCreateNotification struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccountHolderCreateNotification(content CreateAccountHolderResponse, eventDate time.Time, eventType string, executingUserKey string, live bool, pspReference string, ) *AccountHolderCreateNotification {
+func NewAccountHolderCreateNotification(content CreateAccountHolderResponse, eventDate time.Time, eventType string, executingUserKey string, live bool, pspReference string) *AccountHolderCreateNotification {
 	this := AccountHolderCreateNotification{}
 	this.Content = content
 	this.EventDate = eventDate
@@ -57,7 +57,7 @@ func NewAccountHolderCreateNotificationWithDefaults() *AccountHolderCreateNotifi
 
 // GetContent returns the Content field value
 func (o *AccountHolderCreateNotification) GetContent() CreateAccountHolderResponse {
-	if o == nil  {
+	if o == nil {
 		var ret CreateAccountHolderResponse
 		return ret
 	}
@@ -68,7 +68,7 @@ func (o *AccountHolderCreateNotification) GetContent() CreateAccountHolderRespon
 // GetContentOk returns a tuple with the Content field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderCreateNotification) GetContentOk() (*CreateAccountHolderResponse, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Content, true
@@ -113,7 +113,7 @@ func (o *AccountHolderCreateNotification) SetError(v NotificationErrorContainer)
 
 // GetEventDate returns the EventDate field value
 func (o *AccountHolderCreateNotification) GetEventDate() time.Time {
-	if o == nil  {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
@@ -124,7 +124,7 @@ func (o *AccountHolderCreateNotification) GetEventDate() time.Time {
 // GetEventDateOk returns a tuple with the EventDate field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderCreateNotification) GetEventDateOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.EventDate, true
@@ -137,7 +137,7 @@ func (o *AccountHolderCreateNotification) SetEventDate(v time.Time) {
 
 // GetEventType returns the EventType field value
 func (o *AccountHolderCreateNotification) GetEventType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -148,7 +148,7 @@ func (o *AccountHolderCreateNotification) GetEventType() string {
 // GetEventTypeOk returns a tuple with the EventType field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderCreateNotification) GetEventTypeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.EventType, true
@@ -161,7 +161,7 @@ func (o *AccountHolderCreateNotification) SetEventType(v string) {
 
 // GetExecutingUserKey returns the ExecutingUserKey field value
 func (o *AccountHolderCreateNotification) GetExecutingUserKey() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -172,7 +172,7 @@ func (o *AccountHolderCreateNotification) GetExecutingUserKey() string {
 // GetExecutingUserKeyOk returns a tuple with the ExecutingUserKey field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderCreateNotification) GetExecutingUserKeyOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ExecutingUserKey, true
@@ -185,7 +185,7 @@ func (o *AccountHolderCreateNotification) SetExecutingUserKey(v string) {
 
 // GetLive returns the Live field value
 func (o *AccountHolderCreateNotification) GetLive() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -196,7 +196,7 @@ func (o *AccountHolderCreateNotification) GetLive() bool {
 // GetLiveOk returns a tuple with the Live field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderCreateNotification) GetLiveOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Live, true
@@ -209,7 +209,7 @@ func (o *AccountHolderCreateNotification) SetLive(v bool) {
 
 // GetPspReference returns the PspReference field value
 func (o *AccountHolderCreateNotification) GetPspReference() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -220,7 +220,7 @@ func (o *AccountHolderCreateNotification) GetPspReference() string {
 // GetPspReferenceOk returns a tuple with the PspReference field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderCreateNotification) GetPspReferenceOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PspReference, true
@@ -292,5 +292,3 @@ func (v *NullableAccountHolderCreateNotification) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

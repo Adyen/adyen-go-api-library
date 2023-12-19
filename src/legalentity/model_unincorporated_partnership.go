@@ -23,6 +23,8 @@ type UnincorporatedPartnership struct {
 	CountryOfGoverningLaw string `json:"countryOfGoverningLaw"`
 	// The date when the legal arrangement was incorporated in YYYY-MM-DD format.
 	DateOfIncorporation *string `json:"dateOfIncorporation,omitempty"`
+	// Short description about the Legal Arrangement.
+	Description *string `json:"description,omitempty"`
 	// The registered name, if different from the `name`.
 	DoingBusinessAs *string `json:"doingBusinessAs,omitempty"`
 	// The legal name.
@@ -116,6 +118,38 @@ func (o *UnincorporatedPartnership) HasDateOfIncorporation() bool {
 // SetDateOfIncorporation gets a reference to the given string and assigns it to the DateOfIncorporation field.
 func (o *UnincorporatedPartnership) SetDateOfIncorporation(v string) {
 	o.DateOfIncorporation = &v
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *UnincorporatedPartnership) GetDescription() string {
+	if o == nil || common.IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UnincorporatedPartnership) GetDescriptionOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *UnincorporatedPartnership) HasDescription() bool {
+	if o != nil && !common.IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *UnincorporatedPartnership) SetDescription(v string) {
+	o.Description = &v
 }
 
 // GetDoingBusinessAs returns the DoingBusinessAs field value if set, zero value otherwise.
@@ -395,6 +429,9 @@ func (o UnincorporatedPartnership) ToMap() (map[string]interface{}, error) {
 	toSerialize["countryOfGoverningLaw"] = o.CountryOfGoverningLaw
 	if !common.IsNil(o.DateOfIncorporation) {
 		toSerialize["dateOfIncorporation"] = o.DateOfIncorporation
+	}
+	if !common.IsNil(o.Description) {
+		toSerialize["description"] = o.Description
 	}
 	if !common.IsNil(o.DoingBusinessAs) {
 		toSerialize["doingBusinessAs"] = o.DoingBusinessAs

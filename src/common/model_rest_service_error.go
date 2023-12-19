@@ -26,7 +26,7 @@ type RestServiceError struct {
 	// Detailed explanation of each validation error, when applicable.
 	InvalidFields []InvalidFieldWrapper `json:"invalidFields,omitempty"`
 	// A unique reference for the request, essentially the same as `pspReference`.
-	RequestId *string     `json:"requestId,omitempty"`
+	RequestId *string `json:"requestId,omitempty"`
 	// The HTTP status code.
 	Status int32 `json:"status"`
 	// A short, human-readable summary of the problem type.
@@ -282,7 +282,7 @@ func (o RestServiceError) MarshalJSON() ([]byte, error) {
 }
 
 func (o RestServiceError) Error() string {
-    return "{" + o.GetType() + "," + o.GetDetail() + "," + o.GetErrorCode() + "," + o.GetRequestId() + "," + string(o.GetStatus()) + "," + o.GetErrorCode() + "," + o.GetTitle() + "}"
+	return "{" + o.GetType() + "," + o.GetDetail() + "," + o.GetErrorCode() + "," + o.GetRequestId() + "," + string(o.GetStatus()) + "," + o.GetErrorCode() + "," + o.GetTitle() + "}"
 }
 
 func (o RestServiceError) ToMap() (map[string]interface{}, error) {
@@ -298,7 +298,7 @@ func (o RestServiceError) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RequestId) {
 		toSerialize["requestId"] = o.RequestId
 	}
-	
+
 	toSerialize["status"] = o.Status
 	toSerialize["title"] = o.Title
 	toSerialize["type"] = o.Type

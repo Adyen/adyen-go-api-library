@@ -9,6 +9,7 @@
  */
 
 package platformsfund
+
 // SetupBeneficiaryResponse struct for SetupBeneficiaryResponse
 type SetupBeneficiaryResponse struct {
 	// Contains field validation errors that would prevent requests from being processed.

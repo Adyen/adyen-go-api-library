@@ -30,7 +30,7 @@ type AccountEvent struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccountEvent(event string, executionDate time.Time, reason string, ) *AccountEvent {
+func NewAccountEvent(event string, executionDate time.Time, reason string) *AccountEvent {
 	this := AccountEvent{}
 	this.Event = event
 	this.ExecutionDate = executionDate
@@ -48,7 +48,7 @@ func NewAccountEventWithDefaults() *AccountEvent {
 
 // GetEvent returns the Event field value
 func (o *AccountEvent) GetEvent() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -59,7 +59,7 @@ func (o *AccountEvent) GetEvent() string {
 // GetEventOk returns a tuple with the Event field value
 // and a boolean to check if the value has been set.
 func (o *AccountEvent) GetEventOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Event, true
@@ -72,7 +72,7 @@ func (o *AccountEvent) SetEvent(v string) {
 
 // GetExecutionDate returns the ExecutionDate field value
 func (o *AccountEvent) GetExecutionDate() time.Time {
-	if o == nil  {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
@@ -83,7 +83,7 @@ func (o *AccountEvent) GetExecutionDate() time.Time {
 // GetExecutionDateOk returns a tuple with the ExecutionDate field value
 // and a boolean to check if the value has been set.
 func (o *AccountEvent) GetExecutionDateOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ExecutionDate, true
@@ -96,7 +96,7 @@ func (o *AccountEvent) SetExecutionDate(v time.Time) {
 
 // GetReason returns the Reason field value
 func (o *AccountEvent) GetReason() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -107,7 +107,7 @@ func (o *AccountEvent) GetReason() string {
 // GetReasonOk returns a tuple with the Reason field value
 // and a boolean to check if the value has been set.
 func (o *AccountEvent) GetReasonOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Reason, true
@@ -167,5 +167,3 @@ func (v *NullableAccountEvent) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

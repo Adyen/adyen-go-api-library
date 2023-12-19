@@ -9,6 +9,7 @@
  */
 
 package platformsaccount
+
 // KYCShareholderCheckResult struct for KYCShareholderCheckResult
 type KYCShareholderCheckResult struct {
 	// A list of the checks and their statuses.

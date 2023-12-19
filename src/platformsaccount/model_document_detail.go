@@ -9,6 +9,7 @@
  */
 
 package platformsaccount
+
 // DocumentDetail struct for DocumentDetail
 type DocumentDetail struct {
 	// The code of account holder, to which the document applies.

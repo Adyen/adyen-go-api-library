@@ -9,18 +9,19 @@
  */
 
 package platformsaccount
+
 // AccountHolderDetails struct for AccountHolderDetails
 type AccountHolderDetails struct {
 	Address *ViasAddress `json:"address,omitempty"`
 	// Each of the bank accounts associated with the account holder. > Each array entry should represent one bank account. > For comprehensive detail regarding the required `BankAccountDetail` fields, please refer to the [KYC Verification documentation](https://docs.adyen.com/platforms/onboarding-and-verification/verification-checks).
 	BankAccountDetails *[]BankAccountDetail `json:"bankAccountDetails,omitempty"`
 	// The opaque reference value returned by the Adyen API during bank account login.
-	BankAggregatorDataReference string `json:"bankAggregatorDataReference,omitempty"`
-	BusinessDetails *BusinessDetails `json:"businessDetails,omitempty"`
+	BankAggregatorDataReference string           `json:"bankAggregatorDataReference,omitempty"`
+	BusinessDetails             *BusinessDetails `json:"businessDetails,omitempty"`
 	// The email address of the account holder.
 	Email string `json:"email"`
 	// The phone number of the account holder provided as a single string. It will be handled as a landline phone. **Examples:** \"0031 6 11 22 33 44\", \"+316/1122-3344\", \"(0031) 611223344\"
-	FullPhoneNumber string `json:"fullPhoneNumber"`
+	FullPhoneNumber   string             `json:"fullPhoneNumber"`
 	IndividualDetails *IndividualDetails `json:"individualDetails,omitempty"`
 	// The Merchant Category Code of the account holder. > If not specified in the request, this will be derived from the platform account (which is configured by Adyen).
 	MerchantCategoryCode string `json:"merchantCategoryCode,omitempty"`

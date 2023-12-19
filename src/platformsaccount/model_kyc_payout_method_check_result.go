@@ -9,6 +9,7 @@
  */
 
 package platformsaccount
+
 // KYCPayoutMethodCheckResult struct for KYCPayoutMethodCheckResult
 type KYCPayoutMethodCheckResult struct {
 	// A list of the checks and their statuses.

@@ -45,6 +45,8 @@ type LegalEntity struct {
 	UnincorporatedPartnership *UnincorporatedPartnership `json:"unincorporatedPartnership,omitempty"`
 	// List of verification deadlines and the capabilities that will be disallowed if verification errors are not resolved.
 	VerificationDeadlines []VerificationDeadline `json:"verificationDeadlines,omitempty"`
+	// A key-value pair that specifies the [verification process](https://docs.adyen.com/marketplaces-and-platforms/collect-verification-details/) for a legal entity. Set to **upfront** for [upfront verification](https://docs.adyen.com/marketplaces-and-platforms/collect-verification-details#upfront).
+	VerificationPlan *string `json:"verificationPlan,omitempty"`
 }
 
 // NewLegalEntity instantiates a new LegalEntity object
@@ -540,6 +542,38 @@ func (o *LegalEntity) SetVerificationDeadlines(v []VerificationDeadline) {
 	o.VerificationDeadlines = v
 }
 
+// GetVerificationPlan returns the VerificationPlan field value if set, zero value otherwise.
+func (o *LegalEntity) GetVerificationPlan() string {
+	if o == nil || common.IsNil(o.VerificationPlan) {
+		var ret string
+		return ret
+	}
+	return *o.VerificationPlan
+}
+
+// GetVerificationPlanOk returns a tuple with the VerificationPlan field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LegalEntity) GetVerificationPlanOk() (*string, bool) {
+	if o == nil || common.IsNil(o.VerificationPlan) {
+		return nil, false
+	}
+	return o.VerificationPlan, true
+}
+
+// HasVerificationPlan returns a boolean if a field has been set.
+func (o *LegalEntity) HasVerificationPlan() bool {
+	if o != nil && !common.IsNil(o.VerificationPlan) {
+		return true
+	}
+
+	return false
+}
+
+// SetVerificationPlan gets a reference to the given string and assigns it to the VerificationPlan field.
+func (o *LegalEntity) SetVerificationPlan(v string) {
+	o.VerificationPlan = &v
+}
+
 func (o LegalEntity) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -592,6 +626,9 @@ func (o LegalEntity) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.VerificationDeadlines) {
 		toSerialize["verificationDeadlines"] = o.VerificationDeadlines
+	}
+	if !common.IsNil(o.VerificationPlan) {
+		toSerialize["verificationPlan"] = o.VerificationPlan
 	}
 	return toSerialize, nil
 }

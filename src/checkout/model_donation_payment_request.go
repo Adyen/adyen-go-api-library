@@ -45,7 +45,7 @@ type DonationPaymentRequest struct {
 	// A string containing the shopper's device fingerprint. For more information, refer to [Device fingerprinting](https://docs.adyen.com/risk-management/device-fingerprinting).
 	DeviceFingerprint *string `json:"deviceFingerprint,omitempty"`
 	// Donation account to which the transaction is credited.
-	DonationAccount string `json:"donationAccount"`
+	DonationAccount *string `json:"donationAccount,omitempty"`
 	// PSP reference of the transaction from which the donation token is generated. Required when `donationToken` is provided.
 	DonationOriginalPspReference *string `json:"donationOriginalPspReference,omitempty"`
 	// Donation token received in the `/payments` call.
@@ -98,10 +98,9 @@ type DonationPaymentRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDonationPaymentRequest(amount Amount, donationAccount string, merchantAccount string, paymentMethod DonationPaymentMethod, reference string, returnUrl string) *DonationPaymentRequest {
+func NewDonationPaymentRequest(amount Amount, merchantAccount string, paymentMethod DonationPaymentMethod, reference string, returnUrl string) *DonationPaymentRequest {
 	this := DonationPaymentRequest{}
 	this.Amount = amount
-	this.DonationAccount = donationAccount
 	this.MerchantAccount = merchantAccount
 	this.PaymentMethod = paymentMethod
 	this.Reference = reference
@@ -596,28 +595,36 @@ func (o *DonationPaymentRequest) SetDeviceFingerprint(v string) {
 	o.DeviceFingerprint = &v
 }
 
-// GetDonationAccount returns the DonationAccount field value
+// GetDonationAccount returns the DonationAccount field value if set, zero value otherwise.
 func (o *DonationPaymentRequest) GetDonationAccount() string {
-	if o == nil {
+	if o == nil || common.IsNil(o.DonationAccount) {
 		var ret string
 		return ret
 	}
-
-	return o.DonationAccount
+	return *o.DonationAccount
 }
 
-// GetDonationAccountOk returns a tuple with the DonationAccount field value
+// GetDonationAccountOk returns a tuple with the DonationAccount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DonationPaymentRequest) GetDonationAccountOk() (*string, bool) {
-	if o == nil {
+	if o == nil || common.IsNil(o.DonationAccount) {
 		return nil, false
 	}
-	return &o.DonationAccount, true
+	return o.DonationAccount, true
 }
 
-// SetDonationAccount sets field value
+// HasDonationAccount returns a boolean if a field has been set.
+func (o *DonationPaymentRequest) HasDonationAccount() bool {
+	if o != nil && !common.IsNil(o.DonationAccount) {
+		return true
+	}
+
+	return false
+}
+
+// SetDonationAccount gets a reference to the given string and assigns it to the DonationAccount field.
 func (o *DonationPaymentRequest) SetDonationAccount(v string) {
-	o.DonationAccount = v
+	o.DonationAccount = &v
 }
 
 // GetDonationOriginalPspReference returns the DonationOriginalPspReference field value if set, zero value otherwise.
@@ -1444,7 +1451,9 @@ func (o DonationPaymentRequest) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.DeviceFingerprint) {
 		toSerialize["deviceFingerprint"] = o.DeviceFingerprint
 	}
-	toSerialize["donationAccount"] = o.DonationAccount
+	if !common.IsNil(o.DonationAccount) {
+		toSerialize["donationAccount"] = o.DonationAccount
+	}
 	if !common.IsNil(o.DonationOriginalPspReference) {
 		toSerialize["donationOriginalPspReference"] = o.DonationOriginalPspReference
 	}

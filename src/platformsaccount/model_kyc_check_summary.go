@@ -9,6 +9,7 @@
  */
 
 package platformsaccount
+
 // KYCCheckSummary struct for KYCCheckSummary
 type KYCCheckSummary struct {
 	// The code of the check.

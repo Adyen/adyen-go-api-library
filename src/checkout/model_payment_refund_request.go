@@ -31,6 +31,8 @@ type PaymentRefundRequest struct {
 	Reference *string `json:"reference,omitempty"`
 	// An array of objects specifying how the amount should be split between accounts when using Adyen for Platforms. For details, refer to [Providing split information](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information).
 	Splits []Split `json:"splits,omitempty"`
+	// The online store or [physical store](https://docs.adyen.com/point-of-sale/design-your-integration/determine-account-structure/#create-stores) that is processing the refund. This must be the same as the store name configured in your Customer Area.  Otherwise, you get an error and the refund fails.
+	Store *string `json:"store,omitempty"`
 }
 
 // NewPaymentRefundRequest instantiates a new PaymentRefundRequest object
@@ -260,6 +262,38 @@ func (o *PaymentRefundRequest) SetSplits(v []Split) {
 	o.Splits = v
 }
 
+// GetStore returns the Store field value if set, zero value otherwise.
+func (o *PaymentRefundRequest) GetStore() string {
+	if o == nil || common.IsNil(o.Store) {
+		var ret string
+		return ret
+	}
+	return *o.Store
+}
+
+// GetStoreOk returns a tuple with the Store field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentRefundRequest) GetStoreOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Store) {
+		return nil, false
+	}
+	return o.Store, true
+}
+
+// HasStore returns a boolean if a field has been set.
+func (o *PaymentRefundRequest) HasStore() bool {
+	if o != nil && !common.IsNil(o.Store) {
+		return true
+	}
+
+	return false
+}
+
+// SetStore gets a reference to the given string and assigns it to the Store field.
+func (o *PaymentRefundRequest) SetStore(v string) {
+	o.Store = &v
+}
+
 func (o PaymentRefundRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -286,6 +320,9 @@ func (o PaymentRefundRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Splits) {
 		toSerialize["splits"] = o.Splits
+	}
+	if !common.IsNil(o.Store) {
+		toSerialize["store"] = o.Store
 	}
 	return toSerialize, nil
 }

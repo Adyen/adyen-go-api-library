@@ -9,17 +9,18 @@
  */
 
 package platformsaccount
+
 // ShareholderContact struct for ShareholderContact
 type ShareholderContact struct {
 	Address *ViasAddress `json:"address,omitempty"`
 	// The e-mail address of the contact.
 	Email string `json:"email,omitempty"`
 	// The phone number of the contact provided as a single string.  It will be handled as a landline phone. **Examples:** \"0031 6 11 22 33 44\", \"+316/1122-3344\", \"(0031) 611223344\"
-	FullPhoneNumber string `json:"fullPhoneNumber,omitempty"`
-	Name *ViasName `json:"name,omitempty"`
-	PersonalData *ViasPersonalData `json:"personalData,omitempty"`
-	PhoneNumber *ViasPhoneNumber `json:"phoneNumber,omitempty"`
-	// The unique identifier (UUID) of the Shareholder. >**If, during an Account Holder create or update request, this field is left blank (but other fields provided), a new Shareholder will be created with a procedurally-generated UUID.**  >**If, during an Account Holder create request, a UUID is provided, the creation of the Shareholder will fail while the creation of the Account Holder will continue.**  >**If, during an Account Holder update request, a UUID that is not correlated with an existing Shareholder is provided, the update of the Shareholder will fail.**  >**If, during an Account Holder update request, a UUID that is correlated with an existing Shareholder is provided, the existing Shareholder will be updated.** 
+	FullPhoneNumber string            `json:"fullPhoneNumber,omitempty"`
+	Name            *ViasName         `json:"name,omitempty"`
+	PersonalData    *ViasPersonalData `json:"personalData,omitempty"`
+	PhoneNumber     *ViasPhoneNumber  `json:"phoneNumber,omitempty"`
+	// The unique identifier (UUID) of the Shareholder. >**If, during an Account Holder create or update request, this field is left blank (but other fields provided), a new Shareholder will be created with a procedurally-generated UUID.**  >**If, during an Account Holder create request, a UUID is provided, the creation of the Shareholder will fail while the creation of the Account Holder will continue.**  >**If, during an Account Holder update request, a UUID that is not correlated with an existing Shareholder is provided, the update of the Shareholder will fail.**  >**If, during an Account Holder update request, a UUID that is correlated with an existing Shareholder is provided, the existing Shareholder will be updated.**
 	ShareholderCode string `json:"shareholderCode,omitempty"`
 	// Merchant reference to the Shareholder.
 	ShareholderReference string `json:"shareholderReference,omitempty"`

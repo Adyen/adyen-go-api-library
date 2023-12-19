@@ -9,6 +9,7 @@
  */
 
 package platformsnotificationconfiguration
+
 // TestNotificationConfigurationResponse struct for TestNotificationConfigurationResponse
 type TestNotificationConfigurationResponse struct {
 	// Any error messages encountered.

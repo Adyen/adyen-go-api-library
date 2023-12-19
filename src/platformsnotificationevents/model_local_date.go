@@ -18,7 +18,7 @@ import (
 // LocalDate struct for LocalDate
 type LocalDate struct {
 	Month *int32 `json:"month,omitempty"`
-	Year *int32 `json:"year,omitempty"`
+	Year  *int32 `json:"year,omitempty"`
 }
 
 // NewLocalDate instantiates a new LocalDate object
@@ -148,5 +148,3 @@ func (v *NullableLocalDate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

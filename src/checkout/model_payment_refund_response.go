@@ -36,6 +36,8 @@ type PaymentRefundResponse struct {
 	Splits []Split `json:"splits,omitempty"`
 	// The status of your request. This will always have the value **received**.
 	Status string `json:"status"`
+	// The online store or [physical store](https://docs.adyen.com/point-of-sale/design-your-integration/determine-account-structure/#create-stores) that is processing the refund. This must be the same as the store name configured in your Customer Area.  Otherwise, you get an error and the refund fails.
+	Store *string `json:"store,omitempty"`
 }
 
 // NewPaymentRefundResponse instantiates a new PaymentRefundResponse object
@@ -308,6 +310,38 @@ func (o *PaymentRefundResponse) SetStatus(v string) {
 	o.Status = v
 }
 
+// GetStore returns the Store field value if set, zero value otherwise.
+func (o *PaymentRefundResponse) GetStore() string {
+	if o == nil || common.IsNil(o.Store) {
+		var ret string
+		return ret
+	}
+	return *o.Store
+}
+
+// GetStoreOk returns a tuple with the Store field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentRefundResponse) GetStoreOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Store) {
+		return nil, false
+	}
+	return o.Store, true
+}
+
+// HasStore returns a boolean if a field has been set.
+func (o *PaymentRefundResponse) HasStore() bool {
+	if o != nil && !common.IsNil(o.Store) {
+		return true
+	}
+
+	return false
+}
+
+// SetStore gets a reference to the given string and assigns it to the Store field.
+func (o *PaymentRefundResponse) SetStore(v string) {
+	o.Store = &v
+}
+
 func (o PaymentRefundResponse) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -335,6 +369,9 @@ func (o PaymentRefundResponse) ToMap() (map[string]interface{}, error) {
 		toSerialize["splits"] = o.Splits
 	}
 	toSerialize["status"] = o.Status
+	if !common.IsNil(o.Store) {
+		toSerialize["store"] = o.Store
+	}
 	return toSerialize, nil
 }
 

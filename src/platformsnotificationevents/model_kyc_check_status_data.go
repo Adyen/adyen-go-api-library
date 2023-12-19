@@ -20,7 +20,7 @@ type KYCCheckStatusData struct {
 	// A list of the fields required for execution of the check.
 	RequiredFields *[]string `json:"requiredFields,omitempty"`
 	// The status of the check. >Permitted Values: `DATA_PROVIDED`, `PASSED`, `PENDING`, `AWAITING_DATA`, `RETRY_LIMIT_REACHED`, `INVALID_DATA`, `FAILED`.
-	Status string `json:"status"`
+	Status  string           `json:"status"`
 	Summary *KYCCheckSummary `json:"summary,omitempty"`
 	// The type of check. >Permitted Values: `COMPANY_VERIFICATION`, `IDENTITY_VERIFICATION`, `PASSPORT_VERIFICATION`, `BANK_ACCOUNT_VERIFICATION`, `NONPROFIT_VERIFICATION`, `CARD_VERIFICATION`.
 	Type string `json:"type"`
@@ -30,7 +30,7 @@ type KYCCheckStatusData struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewKYCCheckStatusData(status string, type_ string, ) *KYCCheckStatusData {
+func NewKYCCheckStatusData(status string, type_ string) *KYCCheckStatusData {
 	this := KYCCheckStatusData{}
 	this.Status = status
 	this.Type = type_
@@ -79,7 +79,7 @@ func (o *KYCCheckStatusData) SetRequiredFields(v []string) {
 
 // GetStatus returns the Status field value
 func (o *KYCCheckStatusData) GetStatus() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -90,7 +90,7 @@ func (o *KYCCheckStatusData) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
 func (o *KYCCheckStatusData) GetStatusOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Status, true
@@ -135,7 +135,7 @@ func (o *KYCCheckStatusData) SetSummary(v KYCCheckSummary) {
 
 // GetType returns the Type field value
 func (o *KYCCheckStatusData) GetType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -146,7 +146,7 @@ func (o *KYCCheckStatusData) GetType() string {
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
 func (o *KYCCheckStatusData) GetTypeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Type, true
@@ -209,5 +209,3 @@ func (v *NullableKYCCheckStatusData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

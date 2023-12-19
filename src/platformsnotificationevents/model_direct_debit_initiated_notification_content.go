@@ -18,19 +18,19 @@ import (
 // DirectDebitInitiatedNotificationContent struct for DirectDebitInitiatedNotificationContent
 type DirectDebitInitiatedNotificationContent struct {
 	// The code of the account.
-	AccountCode string `json:"accountCode"`
-	Amount Amount `json:"amount"`
+	AccountCode         string     `json:"accountCode"`
+	Amount              Amount     `json:"amount"`
 	DebitInitiationDate *LocalDate `json:"debitInitiationDate,omitempty"`
 	// The code of the merchant account.
-	MerchantAccountCode string `json:"merchantAccountCode"`
-	Status *OperationStatus `json:"status,omitempty"`
+	MerchantAccountCode string           `json:"merchantAccountCode"`
+	Status              *OperationStatus `json:"status,omitempty"`
 }
 
 // NewDirectDebitInitiatedNotificationContent instantiates a new DirectDebitInitiatedNotificationContent object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDirectDebitInitiatedNotificationContent(accountCode string, amount Amount, merchantAccountCode string, ) *DirectDebitInitiatedNotificationContent {
+func NewDirectDebitInitiatedNotificationContent(accountCode string, amount Amount, merchantAccountCode string) *DirectDebitInitiatedNotificationContent {
 	this := DirectDebitInitiatedNotificationContent{}
 	this.AccountCode = accountCode
 	this.Amount = amount
@@ -48,7 +48,7 @@ func NewDirectDebitInitiatedNotificationContentWithDefaults() *DirectDebitInitia
 
 // GetAccountCode returns the AccountCode field value
 func (o *DirectDebitInitiatedNotificationContent) GetAccountCode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -59,7 +59,7 @@ func (o *DirectDebitInitiatedNotificationContent) GetAccountCode() string {
 // GetAccountCodeOk returns a tuple with the AccountCode field value
 // and a boolean to check if the value has been set.
 func (o *DirectDebitInitiatedNotificationContent) GetAccountCodeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.AccountCode, true
@@ -72,7 +72,7 @@ func (o *DirectDebitInitiatedNotificationContent) SetAccountCode(v string) {
 
 // GetAmount returns the Amount field value
 func (o *DirectDebitInitiatedNotificationContent) GetAmount() Amount {
-	if o == nil  {
+	if o == nil {
 		var ret Amount
 		return ret
 	}
@@ -83,7 +83,7 @@ func (o *DirectDebitInitiatedNotificationContent) GetAmount() Amount {
 // GetAmountOk returns a tuple with the Amount field value
 // and a boolean to check if the value has been set.
 func (o *DirectDebitInitiatedNotificationContent) GetAmountOk() (*Amount, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Amount, true
@@ -128,7 +128,7 @@ func (o *DirectDebitInitiatedNotificationContent) SetDebitInitiationDate(v Local
 
 // GetMerchantAccountCode returns the MerchantAccountCode field value
 func (o *DirectDebitInitiatedNotificationContent) GetMerchantAccountCode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -139,7 +139,7 @@ func (o *DirectDebitInitiatedNotificationContent) GetMerchantAccountCode() strin
 // GetMerchantAccountCodeOk returns a tuple with the MerchantAccountCode field value
 // and a boolean to check if the value has been set.
 func (o *DirectDebitInitiatedNotificationContent) GetMerchantAccountCodeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.MerchantAccountCode, true
@@ -237,5 +237,3 @@ func (v *NullableDirectDebitInitiatedNotificationContent) UnmarshalJSON(src []by
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

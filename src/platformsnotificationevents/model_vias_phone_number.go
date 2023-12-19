@@ -29,7 +29,7 @@ type ViasPhoneNumber struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewViasPhoneNumber(phoneCountryCode string, phoneNumber string, ) *ViasPhoneNumber {
+func NewViasPhoneNumber(phoneCountryCode string, phoneNumber string) *ViasPhoneNumber {
 	this := ViasPhoneNumber{}
 	this.PhoneCountryCode = phoneCountryCode
 	this.PhoneNumber = phoneNumber
@@ -46,7 +46,7 @@ func NewViasPhoneNumberWithDefaults() *ViasPhoneNumber {
 
 // GetPhoneCountryCode returns the PhoneCountryCode field value
 func (o *ViasPhoneNumber) GetPhoneCountryCode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -57,7 +57,7 @@ func (o *ViasPhoneNumber) GetPhoneCountryCode() string {
 // GetPhoneCountryCodeOk returns a tuple with the PhoneCountryCode field value
 // and a boolean to check if the value has been set.
 func (o *ViasPhoneNumber) GetPhoneCountryCodeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PhoneCountryCode, true
@@ -70,7 +70,7 @@ func (o *ViasPhoneNumber) SetPhoneCountryCode(v string) {
 
 // GetPhoneNumber returns the PhoneNumber field value
 func (o *ViasPhoneNumber) GetPhoneNumber() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -81,7 +81,7 @@ func (o *ViasPhoneNumber) GetPhoneNumber() string {
 // GetPhoneNumberOk returns a tuple with the PhoneNumber field value
 // and a boolean to check if the value has been set.
 func (o *ViasPhoneNumber) GetPhoneNumberOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PhoneNumber, true
@@ -173,5 +173,3 @@ func (v *NullableViasPhoneNumber) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

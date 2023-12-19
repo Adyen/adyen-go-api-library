@@ -9,6 +9,7 @@
  */
 
 package platformsaccount
+
 // GetUploadedDocumentsResponse struct for GetUploadedDocumentsResponse
 type GetUploadedDocumentsResponse struct {
 	// A list of the documents and their details.

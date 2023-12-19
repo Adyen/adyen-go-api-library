@@ -28,7 +28,7 @@ type RefundResult struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRefundResult(originalTransaction Transaction, pspReference string, ) *RefundResult {
+func NewRefundResult(originalTransaction Transaction, pspReference string) *RefundResult {
 	this := RefundResult{}
 	this.OriginalTransaction = originalTransaction
 	this.PspReference = pspReference
@@ -45,7 +45,7 @@ func NewRefundResultWithDefaults() *RefundResult {
 
 // GetOriginalTransaction returns the OriginalTransaction field value
 func (o *RefundResult) GetOriginalTransaction() Transaction {
-	if o == nil  {
+	if o == nil {
 		var ret Transaction
 		return ret
 	}
@@ -56,7 +56,7 @@ func (o *RefundResult) GetOriginalTransaction() Transaction {
 // GetOriginalTransactionOk returns a tuple with the OriginalTransaction field value
 // and a boolean to check if the value has been set.
 func (o *RefundResult) GetOriginalTransactionOk() (*Transaction, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.OriginalTransaction, true
@@ -69,7 +69,7 @@ func (o *RefundResult) SetOriginalTransaction(v Transaction) {
 
 // GetPspReference returns the PspReference field value
 func (o *RefundResult) GetPspReference() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -80,7 +80,7 @@ func (o *RefundResult) GetPspReference() string {
 // GetPspReferenceOk returns a tuple with the PspReference field value
 // and a boolean to check if the value has been set.
 func (o *RefundResult) GetPspReferenceOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PspReference, true
@@ -172,5 +172,3 @@ func (v *NullableRefundResult) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

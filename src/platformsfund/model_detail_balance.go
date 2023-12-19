@@ -9,6 +9,7 @@
  */
 
 package platformsfund
+
 // DetailBalance struct for DetailBalance
 type DetailBalance struct {
 	// The list of balances held by the account.

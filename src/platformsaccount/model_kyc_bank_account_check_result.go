@@ -9,6 +9,7 @@
  */
 
 package platformsaccount
+
 // KYCBankAccountCheckResult struct for KYCBankAccountCheckResult
 type KYCBankAccountCheckResult struct {
 	// The unique ID of the bank account to which the check applies.

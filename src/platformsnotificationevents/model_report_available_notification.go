@@ -19,7 +19,7 @@ import (
 // ReportAvailableNotification struct for ReportAvailableNotification
 type ReportAvailableNotification struct {
 	Content ReportAvailableNotificationContent `json:"content"`
-	Error *NotificationErrorContainer `json:"error,omitempty"`
+	Error   *NotificationErrorContainer        `json:"error,omitempty"`
 	// The date and time when an event has been completed.
 	EventDate time.Time `json:"eventDate"`
 	// The event type of the notification.
@@ -36,7 +36,7 @@ type ReportAvailableNotification struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewReportAvailableNotification(content ReportAvailableNotificationContent, eventDate time.Time, eventType string, executingUserKey string, live bool, pspReference string, ) *ReportAvailableNotification {
+func NewReportAvailableNotification(content ReportAvailableNotificationContent, eventDate time.Time, eventType string, executingUserKey string, live bool, pspReference string) *ReportAvailableNotification {
 	this := ReportAvailableNotification{}
 	this.Content = content
 	this.EventDate = eventDate
@@ -57,7 +57,7 @@ func NewReportAvailableNotificationWithDefaults() *ReportAvailableNotification {
 
 // GetContent returns the Content field value
 func (o *ReportAvailableNotification) GetContent() ReportAvailableNotificationContent {
-	if o == nil  {
+	if o == nil {
 		var ret ReportAvailableNotificationContent
 		return ret
 	}
@@ -68,7 +68,7 @@ func (o *ReportAvailableNotification) GetContent() ReportAvailableNotificationCo
 // GetContentOk returns a tuple with the Content field value
 // and a boolean to check if the value has been set.
 func (o *ReportAvailableNotification) GetContentOk() (*ReportAvailableNotificationContent, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Content, true
@@ -113,7 +113,7 @@ func (o *ReportAvailableNotification) SetError(v NotificationErrorContainer) {
 
 // GetEventDate returns the EventDate field value
 func (o *ReportAvailableNotification) GetEventDate() time.Time {
-	if o == nil  {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
@@ -124,7 +124,7 @@ func (o *ReportAvailableNotification) GetEventDate() time.Time {
 // GetEventDateOk returns a tuple with the EventDate field value
 // and a boolean to check if the value has been set.
 func (o *ReportAvailableNotification) GetEventDateOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.EventDate, true
@@ -137,7 +137,7 @@ func (o *ReportAvailableNotification) SetEventDate(v time.Time) {
 
 // GetEventType returns the EventType field value
 func (o *ReportAvailableNotification) GetEventType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -148,7 +148,7 @@ func (o *ReportAvailableNotification) GetEventType() string {
 // GetEventTypeOk returns a tuple with the EventType field value
 // and a boolean to check if the value has been set.
 func (o *ReportAvailableNotification) GetEventTypeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.EventType, true
@@ -161,7 +161,7 @@ func (o *ReportAvailableNotification) SetEventType(v string) {
 
 // GetExecutingUserKey returns the ExecutingUserKey field value
 func (o *ReportAvailableNotification) GetExecutingUserKey() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -172,7 +172,7 @@ func (o *ReportAvailableNotification) GetExecutingUserKey() string {
 // GetExecutingUserKeyOk returns a tuple with the ExecutingUserKey field value
 // and a boolean to check if the value has been set.
 func (o *ReportAvailableNotification) GetExecutingUserKeyOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ExecutingUserKey, true
@@ -185,7 +185,7 @@ func (o *ReportAvailableNotification) SetExecutingUserKey(v string) {
 
 // GetLive returns the Live field value
 func (o *ReportAvailableNotification) GetLive() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -196,7 +196,7 @@ func (o *ReportAvailableNotification) GetLive() bool {
 // GetLiveOk returns a tuple with the Live field value
 // and a boolean to check if the value has been set.
 func (o *ReportAvailableNotification) GetLiveOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Live, true
@@ -209,7 +209,7 @@ func (o *ReportAvailableNotification) SetLive(v bool) {
 
 // GetPspReference returns the PspReference field value
 func (o *ReportAvailableNotification) GetPspReference() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -220,7 +220,7 @@ func (o *ReportAvailableNotification) GetPspReference() string {
 // GetPspReferenceOk returns a tuple with the PspReference field value
 // and a boolean to check if the value has been set.
 func (o *ReportAvailableNotification) GetPspReferenceOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PspReference, true
@@ -292,5 +292,3 @@ func (v *NullableReportAvailableNotification) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

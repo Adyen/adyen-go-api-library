@@ -9,6 +9,7 @@
  */
 
 package platformsnotificationconfiguration
+
 // GetNotificationConfigurationRequest struct for GetNotificationConfigurationRequest
 type GetNotificationConfigurationRequest struct {
 	// The ID of the notification subscription configuration whose details are to be retrieved.

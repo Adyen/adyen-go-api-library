@@ -9,6 +9,7 @@
  */
 
 package platformsfund
+
 // RefundFundsTransferRequest struct for RefundFundsTransferRequest
 type RefundFundsTransferRequest struct {
 	Amount Amount `json:"amount"`

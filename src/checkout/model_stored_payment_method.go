@@ -19,6 +19,10 @@ var _ common.MappedNullable = &StoredPaymentMethod{}
 
 // StoredPaymentMethod struct for StoredPaymentMethod
 type StoredPaymentMethod struct {
+	// The bank account number (without separators).
+	BankAccountNumber *string `json:"bankAccountNumber,omitempty"`
+	// The location id of the bank. The field value is `nil` in most cases.
+	BankLocationId *string `json:"bankLocationId,omitempty"`
 	// The brand of the card.
 	Brand *string `json:"brand,omitempty"`
 	// The month the card expires.
@@ -31,6 +35,8 @@ type StoredPaymentMethod struct {
 	Iban *string `json:"iban,omitempty"`
 	// A unique identifier of this stored payment method.
 	Id *string `json:"id,omitempty"`
+	// The shopper’s issuer account label
+	Label *string `json:"label,omitempty"`
 	// The last four digits of the PAN.
 	LastFour *string `json:"lastFour,omitempty"`
 	// The display name of the stored payment method.
@@ -64,6 +70,70 @@ func NewStoredPaymentMethod() *StoredPaymentMethod {
 func NewStoredPaymentMethodWithDefaults() *StoredPaymentMethod {
 	this := StoredPaymentMethod{}
 	return &this
+}
+
+// GetBankAccountNumber returns the BankAccountNumber field value if set, zero value otherwise.
+func (o *StoredPaymentMethod) GetBankAccountNumber() string {
+	if o == nil || common.IsNil(o.BankAccountNumber) {
+		var ret string
+		return ret
+	}
+	return *o.BankAccountNumber
+}
+
+// GetBankAccountNumberOk returns a tuple with the BankAccountNumber field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoredPaymentMethod) GetBankAccountNumberOk() (*string, bool) {
+	if o == nil || common.IsNil(o.BankAccountNumber) {
+		return nil, false
+	}
+	return o.BankAccountNumber, true
+}
+
+// HasBankAccountNumber returns a boolean if a field has been set.
+func (o *StoredPaymentMethod) HasBankAccountNumber() bool {
+	if o != nil && !common.IsNil(o.BankAccountNumber) {
+		return true
+	}
+
+	return false
+}
+
+// SetBankAccountNumber gets a reference to the given string and assigns it to the BankAccountNumber field.
+func (o *StoredPaymentMethod) SetBankAccountNumber(v string) {
+	o.BankAccountNumber = &v
+}
+
+// GetBankLocationId returns the BankLocationId field value if set, zero value otherwise.
+func (o *StoredPaymentMethod) GetBankLocationId() string {
+	if o == nil || common.IsNil(o.BankLocationId) {
+		var ret string
+		return ret
+	}
+	return *o.BankLocationId
+}
+
+// GetBankLocationIdOk returns a tuple with the BankLocationId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoredPaymentMethod) GetBankLocationIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.BankLocationId) {
+		return nil, false
+	}
+	return o.BankLocationId, true
+}
+
+// HasBankLocationId returns a boolean if a field has been set.
+func (o *StoredPaymentMethod) HasBankLocationId() bool {
+	if o != nil && !common.IsNil(o.BankLocationId) {
+		return true
+	}
+
+	return false
+}
+
+// SetBankLocationId gets a reference to the given string and assigns it to the BankLocationId field.
+func (o *StoredPaymentMethod) SetBankLocationId(v string) {
+	o.BankLocationId = &v
 }
 
 // GetBrand returns the Brand field value if set, zero value otherwise.
@@ -256,6 +326,38 @@ func (o *StoredPaymentMethod) HasId() bool {
 // SetId gets a reference to the given string and assigns it to the Id field.
 func (o *StoredPaymentMethod) SetId(v string) {
 	o.Id = &v
+}
+
+// GetLabel returns the Label field value if set, zero value otherwise.
+func (o *StoredPaymentMethod) GetLabel() string {
+	if o == nil || common.IsNil(o.Label) {
+		var ret string
+		return ret
+	}
+	return *o.Label
+}
+
+// GetLabelOk returns a tuple with the Label field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoredPaymentMethod) GetLabelOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Label) {
+		return nil, false
+	}
+	return o.Label, true
+}
+
+// HasLabel returns a boolean if a field has been set.
+func (o *StoredPaymentMethod) HasLabel() bool {
+	if o != nil && !common.IsNil(o.Label) {
+		return true
+	}
+
+	return false
+}
+
+// SetLabel gets a reference to the given string and assigns it to the Label field.
+func (o *StoredPaymentMethod) SetLabel(v string) {
+	o.Label = &v
 }
 
 // GetLastFour returns the LastFour field value if set, zero value otherwise.
@@ -524,6 +626,12 @@ func (o StoredPaymentMethod) MarshalJSON() ([]byte, error) {
 
 func (o StoredPaymentMethod) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.BankAccountNumber) {
+		toSerialize["bankAccountNumber"] = o.BankAccountNumber
+	}
+	if !common.IsNil(o.BankLocationId) {
+		toSerialize["bankLocationId"] = o.BankLocationId
+	}
 	if !common.IsNil(o.Brand) {
 		toSerialize["brand"] = o.Brand
 	}
@@ -541,6 +649,9 @@ func (o StoredPaymentMethod) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Id) {
 		toSerialize["id"] = o.Id
+	}
+	if !common.IsNil(o.Label) {
+		toSerialize["label"] = o.Label
 	}
 	if !common.IsNil(o.LastFour) {
 		toSerialize["lastFour"] = o.LastFour

@@ -25,7 +25,7 @@ type CompensateNegativeBalanceNotificationContent struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCompensateNegativeBalanceNotificationContent(records []CompensateNegativeBalanceNotificationRecord, ) *CompensateNegativeBalanceNotificationContent {
+func NewCompensateNegativeBalanceNotificationContent(records []CompensateNegativeBalanceNotificationRecord) *CompensateNegativeBalanceNotificationContent {
 	this := CompensateNegativeBalanceNotificationContent{}
 	this.Records = records
 	return &this
@@ -41,7 +41,7 @@ func NewCompensateNegativeBalanceNotificationContentWithDefaults() *CompensateNe
 
 // GetRecords returns the Records field value
 func (o *CompensateNegativeBalanceNotificationContent) GetRecords() []CompensateNegativeBalanceNotificationRecord {
-	if o == nil  {
+	if o == nil {
 		var ret []CompensateNegativeBalanceNotificationRecord
 		return ret
 	}
@@ -52,7 +52,7 @@ func (o *CompensateNegativeBalanceNotificationContent) GetRecords() []Compensate
 // GetRecordsOk returns a tuple with the Records field value
 // and a boolean to check if the value has been set.
 func (o *CompensateNegativeBalanceNotificationContent) GetRecordsOk() (*[]CompensateNegativeBalanceNotificationRecord, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Records, true
@@ -106,5 +106,3 @@ func (v *NullableCompensateNegativeBalanceNotificationContent) UnmarshalJSON(src
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

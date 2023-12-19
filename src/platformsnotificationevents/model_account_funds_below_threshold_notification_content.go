@@ -18,10 +18,10 @@ import (
 // AccountFundsBelowThresholdNotificationContent struct for AccountFundsBelowThresholdNotificationContent
 type AccountFundsBelowThresholdNotificationContent struct {
 	// The code of the account with funds under threshold
-	AccountCode string `json:"accountCode"`
-	BalanceDate *LocalDate `json:"balanceDate,omitempty"`
-	CurrentFunds *Amount `json:"currentFunds,omitempty"`
-	FundThreshold Amount `json:"fundThreshold"`
+	AccountCode   string     `json:"accountCode"`
+	BalanceDate   *LocalDate `json:"balanceDate,omitempty"`
+	CurrentFunds  *Amount    `json:"currentFunds,omitempty"`
+	FundThreshold Amount     `json:"fundThreshold"`
 	// The code of the merchant account.
 	MerchantAccountCode string `json:"merchantAccountCode"`
 }
@@ -30,7 +30,7 @@ type AccountFundsBelowThresholdNotificationContent struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccountFundsBelowThresholdNotificationContent(accountCode string, fundThreshold Amount, merchantAccountCode string, ) *AccountFundsBelowThresholdNotificationContent {
+func NewAccountFundsBelowThresholdNotificationContent(accountCode string, fundThreshold Amount, merchantAccountCode string) *AccountFundsBelowThresholdNotificationContent {
 	this := AccountFundsBelowThresholdNotificationContent{}
 	this.AccountCode = accountCode
 	this.FundThreshold = fundThreshold
@@ -48,7 +48,7 @@ func NewAccountFundsBelowThresholdNotificationContentWithDefaults() *AccountFund
 
 // GetAccountCode returns the AccountCode field value
 func (o *AccountFundsBelowThresholdNotificationContent) GetAccountCode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -59,7 +59,7 @@ func (o *AccountFundsBelowThresholdNotificationContent) GetAccountCode() string 
 // GetAccountCodeOk returns a tuple with the AccountCode field value
 // and a boolean to check if the value has been set.
 func (o *AccountFundsBelowThresholdNotificationContent) GetAccountCodeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.AccountCode, true
@@ -136,7 +136,7 @@ func (o *AccountFundsBelowThresholdNotificationContent) SetCurrentFunds(v Amount
 
 // GetFundThreshold returns the FundThreshold field value
 func (o *AccountFundsBelowThresholdNotificationContent) GetFundThreshold() Amount {
-	if o == nil  {
+	if o == nil {
 		var ret Amount
 		return ret
 	}
@@ -147,7 +147,7 @@ func (o *AccountFundsBelowThresholdNotificationContent) GetFundThreshold() Amoun
 // GetFundThresholdOk returns a tuple with the FundThreshold field value
 // and a boolean to check if the value has been set.
 func (o *AccountFundsBelowThresholdNotificationContent) GetFundThresholdOk() (*Amount, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.FundThreshold, true
@@ -160,7 +160,7 @@ func (o *AccountFundsBelowThresholdNotificationContent) SetFundThreshold(v Amoun
 
 // GetMerchantAccountCode returns the MerchantAccountCode field value
 func (o *AccountFundsBelowThresholdNotificationContent) GetMerchantAccountCode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -171,7 +171,7 @@ func (o *AccountFundsBelowThresholdNotificationContent) GetMerchantAccountCode()
 // GetMerchantAccountCodeOk returns a tuple with the MerchantAccountCode field value
 // and a boolean to check if the value has been set.
 func (o *AccountFundsBelowThresholdNotificationContent) GetMerchantAccountCodeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.MerchantAccountCode, true
@@ -237,5 +237,3 @@ func (v *NullableAccountFundsBelowThresholdNotificationContent) UnmarshalJSON(sr
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

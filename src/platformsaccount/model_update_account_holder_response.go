@@ -9,12 +9,13 @@
  */
 
 package platformsaccount
+
 // UpdateAccountHolderResponse struct for UpdateAccountHolderResponse
 type UpdateAccountHolderResponse struct {
 	// The code of the account holder.
-	AccountHolderCode string `json:"accountHolderCode,omitempty"`
+	AccountHolderCode    string                `json:"accountHolderCode,omitempty"`
 	AccountHolderDetails *AccountHolderDetails `json:"accountHolderDetails,omitempty"`
-	AccountHolderStatus AccountHolderStatus `json:"accountHolderStatus"`
+	AccountHolderStatus  AccountHolderStatus   `json:"accountHolderStatus"`
 	// The description of the account holder.
 	Description string `json:"description,omitempty"`
 	// in case the account holder has not been updated, contains account holder fields, that did not pass the validation.
@@ -26,7 +27,7 @@ type UpdateAccountHolderResponse struct {
 	// The reference of a request. Can be used to uniquely identify the request.
 	PspReference string `json:"pspReference,omitempty"`
 	// The result code.
-	ResultCode string `json:"resultCode,omitempty"`
+	ResultCode   string                `json:"resultCode,omitempty"`
 	Verification KYCVerificationResult `json:"verification"`
 	// The identifier of the profile that applies to this entity.
 	VerificationProfile string `json:"verificationProfile,omitempty"`

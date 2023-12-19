@@ -37,7 +37,7 @@ type AccountHolderStoreStatusChangeNotificationContent struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccountHolderStoreStatusChangeNotificationContent(accountHolderCode string, newStatus string, oldStatus string, store string, storeReference string, ) *AccountHolderStoreStatusChangeNotificationContent {
+func NewAccountHolderStoreStatusChangeNotificationContent(accountHolderCode string, newStatus string, oldStatus string, store string, storeReference string) *AccountHolderStoreStatusChangeNotificationContent {
 	this := AccountHolderStoreStatusChangeNotificationContent{}
 	this.AccountHolderCode = accountHolderCode
 	this.NewStatus = newStatus
@@ -57,7 +57,7 @@ func NewAccountHolderStoreStatusChangeNotificationContentWithDefaults() *Account
 
 // GetAccountHolderCode returns the AccountHolderCode field value
 func (o *AccountHolderStoreStatusChangeNotificationContent) GetAccountHolderCode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -68,7 +68,7 @@ func (o *AccountHolderStoreStatusChangeNotificationContent) GetAccountHolderCode
 // GetAccountHolderCodeOk returns a tuple with the AccountHolderCode field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderStoreStatusChangeNotificationContent) GetAccountHolderCodeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.AccountHolderCode, true
@@ -113,7 +113,7 @@ func (o *AccountHolderStoreStatusChangeNotificationContent) SetInvalidFields(v [
 
 // GetNewStatus returns the NewStatus field value
 func (o *AccountHolderStoreStatusChangeNotificationContent) GetNewStatus() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -124,7 +124,7 @@ func (o *AccountHolderStoreStatusChangeNotificationContent) GetNewStatus() strin
 // GetNewStatusOk returns a tuple with the NewStatus field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderStoreStatusChangeNotificationContent) GetNewStatusOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.NewStatus, true
@@ -137,7 +137,7 @@ func (o *AccountHolderStoreStatusChangeNotificationContent) SetNewStatus(v strin
 
 // GetOldStatus returns the OldStatus field value
 func (o *AccountHolderStoreStatusChangeNotificationContent) GetOldStatus() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -148,7 +148,7 @@ func (o *AccountHolderStoreStatusChangeNotificationContent) GetOldStatus() strin
 // GetOldStatusOk returns a tuple with the OldStatus field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderStoreStatusChangeNotificationContent) GetOldStatusOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.OldStatus, true
@@ -193,7 +193,7 @@ func (o *AccountHolderStoreStatusChangeNotificationContent) SetReason(v string) 
 
 // GetStore returns the Store field value
 func (o *AccountHolderStoreStatusChangeNotificationContent) GetStore() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -204,7 +204,7 @@ func (o *AccountHolderStoreStatusChangeNotificationContent) GetStore() string {
 // GetStoreOk returns a tuple with the Store field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderStoreStatusChangeNotificationContent) GetStoreOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Store, true
@@ -217,7 +217,7 @@ func (o *AccountHolderStoreStatusChangeNotificationContent) SetStore(v string) {
 
 // GetStoreReference returns the StoreReference field value
 func (o *AccountHolderStoreStatusChangeNotificationContent) GetStoreReference() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -228,7 +228,7 @@ func (o *AccountHolderStoreStatusChangeNotificationContent) GetStoreReference() 
 // GetStoreReferenceOk returns a tuple with the StoreReference field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderStoreStatusChangeNotificationContent) GetStoreReferenceOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.StoreReference, true
@@ -300,5 +300,3 @@ func (v *NullableAccountHolderStoreStatusChangeNotificationContent) UnmarshalJSO
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

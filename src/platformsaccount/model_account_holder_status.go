@@ -9,11 +9,12 @@
  */
 
 package platformsaccount
+
 // AccountHolderStatus struct for AccountHolderStatus
 type AccountHolderStatus struct {
 	// A list of events scheduled for the account holder.
-	Events *[]AccountEvent `json:"events,omitempty"`
-	PayoutState *AccountPayoutState `json:"payoutState,omitempty"`
+	Events          *[]AccountEvent         `json:"events,omitempty"`
+	PayoutState     *AccountPayoutState     `json:"payoutState,omitempty"`
 	ProcessingState *AccountProcessingState `json:"processingState,omitempty"`
 	// The status of the account holder. >Permitted values: `Active`, `Inactive`, `Suspended`, `Closed`.
 	Status string `json:"status"`

@@ -26,11 +26,11 @@ type CreateAccountResponse struct {
 	// The description of the account.
 	Description *string `json:"description,omitempty"`
 	// A list of fields that caused the `/createAccount` request to fail.
-	InvalidFields *[]ErrorFieldType `json:"invalidFields,omitempty"`
-	Metadata *map[string]string `json:"metadata,omitempty"`
+	InvalidFields *[]ErrorFieldType  `json:"invalidFields,omitempty"`
+	Metadata      *map[string]string `json:"metadata,omitempty"`
 	// The payout method code held by the account holder to couple the account with. Scheduled card payouts will be sent using this payout method code.
-	PayoutMethodCode *string `json:"payoutMethodCode,omitempty"`
-	PayoutSchedule *PayoutScheduleResponse `json:"payoutSchedule,omitempty"`
+	PayoutMethodCode *string                 `json:"payoutMethodCode,omitempty"`
+	PayoutSchedule   *PayoutScheduleResponse `json:"payoutSchedule,omitempty"`
 	// Speed with which payouts for this account are processed. Permitted values: `STANDARD`, `SAME_DAY`.
 	PayoutSpeed *string `json:"payoutSpeed,omitempty"`
 	// The reference of a request. Can be used to uniquely identify the request.
@@ -45,7 +45,7 @@ type CreateAccountResponse struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAccountResponse(accountCode string, accountHolderCode string, status string, ) *CreateAccountResponse {
+func NewCreateAccountResponse(accountCode string, accountHolderCode string, status string) *CreateAccountResponse {
 	this := CreateAccountResponse{}
 	this.AccountCode = accountCode
 	this.AccountHolderCode = accountHolderCode
@@ -63,7 +63,7 @@ func NewCreateAccountResponseWithDefaults() *CreateAccountResponse {
 
 // GetAccountCode returns the AccountCode field value
 func (o *CreateAccountResponse) GetAccountCode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -74,7 +74,7 @@ func (o *CreateAccountResponse) GetAccountCode() string {
 // GetAccountCodeOk returns a tuple with the AccountCode field value
 // and a boolean to check if the value has been set.
 func (o *CreateAccountResponse) GetAccountCodeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.AccountCode, true
@@ -87,7 +87,7 @@ func (o *CreateAccountResponse) SetAccountCode(v string) {
 
 // GetAccountHolderCode returns the AccountHolderCode field value
 func (o *CreateAccountResponse) GetAccountHolderCode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -98,7 +98,7 @@ func (o *CreateAccountResponse) GetAccountHolderCode() string {
 // GetAccountHolderCodeOk returns a tuple with the AccountHolderCode field value
 // and a boolean to check if the value has been set.
 func (o *CreateAccountResponse) GetAccountHolderCodeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.AccountHolderCode, true
@@ -399,7 +399,7 @@ func (o *CreateAccountResponse) SetResultCode(v string) {
 
 // GetStatus returns the Status field value
 func (o *CreateAccountResponse) GetStatus() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -410,7 +410,7 @@ func (o *CreateAccountResponse) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
 func (o *CreateAccountResponse) GetStatusOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Status, true
@@ -497,5 +497,3 @@ func (v *NullableCreateAccountResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

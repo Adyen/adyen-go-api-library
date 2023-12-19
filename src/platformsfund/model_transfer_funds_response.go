@@ -9,6 +9,7 @@
  */
 
 package platformsfund
+
 // TransferFundsResponse struct for TransferFundsResponse
 type TransferFundsResponse struct {
 	// Contains field validation errors that would prevent requests from being processed.

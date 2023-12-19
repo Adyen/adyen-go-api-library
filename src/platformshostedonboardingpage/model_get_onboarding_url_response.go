@@ -9,6 +9,7 @@
  */
 
 package platformshostedonboardingpage
+
 // GetOnboardingUrlResponse struct for GetOnboardingUrlResponse
 type GetOnboardingUrlResponse struct {
 	// Contains field validation errors that would prevent requests from being processed.

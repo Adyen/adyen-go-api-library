@@ -9,6 +9,7 @@
  */
 
 package platformsfund
+
 // AccountHolderBalanceResponse struct for AccountHolderBalanceResponse
 type AccountHolderBalanceResponse struct {
 	// A list of each account and their balances.
@@ -18,6 +19,6 @@ type AccountHolderBalanceResponse struct {
 	// The reference of a request. Can be used to uniquely identify the request.
 	PspReference string `json:"pspReference,omitempty"`
 	// The result code.
-	ResultCode string `json:"resultCode,omitempty"`
+	ResultCode   string         `json:"resultCode,omitempty"`
 	TotalBalance *DetailBalance `json:"totalBalance,omitempty"`
 }

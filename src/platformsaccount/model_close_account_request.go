@@ -9,6 +9,7 @@
  */
 
 package platformsaccount
+
 // CloseAccountRequest struct for CloseAccountRequest
 type CloseAccountRequest struct {
 	// The code of account to be closed.

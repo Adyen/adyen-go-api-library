@@ -9,10 +9,11 @@
  */
 
 package platformsaccount
+
 // GetAccountHolderStatusResponse struct for GetAccountHolderStatusResponse
 type GetAccountHolderStatusResponse struct {
 	// The code of the Account Holder.
-	AccountHolderCode string `json:"accountHolderCode"`
+	AccountHolderCode   string              `json:"accountHolderCode"`
 	AccountHolderStatus AccountHolderStatus `json:"accountHolderStatus"`
 	// Contains field validation errors that would prevent requests from being processed.
 	InvalidFields *[]ErrorFieldType `json:"invalidFields,omitempty"`

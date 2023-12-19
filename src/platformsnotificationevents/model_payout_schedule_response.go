@@ -28,7 +28,7 @@ type PayoutScheduleResponse struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPayoutScheduleResponse(nextScheduledPayout time.Time, schedule string, ) *PayoutScheduleResponse {
+func NewPayoutScheduleResponse(nextScheduledPayout time.Time, schedule string) *PayoutScheduleResponse {
 	this := PayoutScheduleResponse{}
 	this.NextScheduledPayout = nextScheduledPayout
 	this.Schedule = schedule
@@ -45,7 +45,7 @@ func NewPayoutScheduleResponseWithDefaults() *PayoutScheduleResponse {
 
 // GetNextScheduledPayout returns the NextScheduledPayout field value
 func (o *PayoutScheduleResponse) GetNextScheduledPayout() time.Time {
-	if o == nil  {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
@@ -56,7 +56,7 @@ func (o *PayoutScheduleResponse) GetNextScheduledPayout() time.Time {
 // GetNextScheduledPayoutOk returns a tuple with the NextScheduledPayout field value
 // and a boolean to check if the value has been set.
 func (o *PayoutScheduleResponse) GetNextScheduledPayoutOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.NextScheduledPayout, true
@@ -69,7 +69,7 @@ func (o *PayoutScheduleResponse) SetNextScheduledPayout(v time.Time) {
 
 // GetSchedule returns the Schedule field value
 func (o *PayoutScheduleResponse) GetSchedule() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -80,7 +80,7 @@ func (o *PayoutScheduleResponse) GetSchedule() string {
 // GetScheduleOk returns a tuple with the Schedule field value
 // and a boolean to check if the value has been set.
 func (o *PayoutScheduleResponse) GetScheduleOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Schedule, true
@@ -137,5 +137,3 @@ func (v *NullablePayoutScheduleResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -18,8 +18,8 @@ import (
 // AccountHolderStatus struct for AccountHolderStatus
 type AccountHolderStatus struct {
 	// A list of events scheduled for the account holder.
-	Events *[]AccountEvent `json:"events,omitempty"`
-	PayoutState *AccountPayoutState `json:"payoutState,omitempty"`
+	Events          *[]AccountEvent         `json:"events,omitempty"`
+	PayoutState     *AccountPayoutState     `json:"payoutState,omitempty"`
 	ProcessingState *AccountProcessingState `json:"processingState,omitempty"`
 	// The status of the account holder. >Permitted values: `Active`, `Inactive`, `Suspended`, `Closed`.
 	Status string `json:"status"`
@@ -31,7 +31,7 @@ type AccountHolderStatus struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccountHolderStatus(status string, ) *AccountHolderStatus {
+func NewAccountHolderStatus(status string) *AccountHolderStatus {
 	this := AccountHolderStatus{}
 	this.Status = status
 	return &this
@@ -143,7 +143,7 @@ func (o *AccountHolderStatus) SetProcessingState(v AccountProcessingState) {
 
 // GetStatus returns the Status field value
 func (o *AccountHolderStatus) GetStatus() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -154,7 +154,7 @@ func (o *AccountHolderStatus) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
 func (o *AccountHolderStatus) GetStatusOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Status, true
@@ -252,5 +252,3 @@ func (v *NullableAccountHolderStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

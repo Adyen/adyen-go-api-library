@@ -9,6 +9,7 @@
  */
 
 package platformsnotificationconfiguration
+
 // GetNotificationConfigurationListResponse struct for GetNotificationConfigurationListResponse
 type GetNotificationConfigurationListResponse struct {
 	// Details of the notification subscription configurations.

@@ -9,10 +9,11 @@
  */
 
 package platformsaccount
+
 // CreateAccountHolderRequest struct for CreateAccountHolderRequest
 type CreateAccountHolderRequest struct {
 	// The desired code of the prospective account holder. > Must be between three (3) and fifty (50) characters long. Only letters, digits, and hyphens (-) are permitted.
-	AccountHolderCode string `json:"accountHolderCode"`
+	AccountHolderCode    string               `json:"accountHolderCode"`
 	AccountHolderDetails AccountHolderDetails `json:"accountHolderDetails"`
 	// If set to true, an account with the default options is created for this account holder. **Default Value:** true
 	CreateDefaultAccount bool `json:"createDefaultAccount,omitempty"`

@@ -9,6 +9,7 @@
  */
 
 package platformsaccount
+
 // GetUploadedDocumentsRequest struct for GetUploadedDocumentsRequest
 type GetUploadedDocumentsRequest struct {
 	// The code of the Account Holder for which to retrieve the documents.

@@ -25,8 +25,8 @@ type TransferFundsNotificationContent struct {
 	// The reference provided by the merchant.
 	MerchantReference *string `json:"merchantReference,omitempty"`
 	// The code of the Account from which funds were debited.
-	SourceAccountCode string `json:"sourceAccountCode"`
-	Status *OperationStatus `json:"status,omitempty"`
+	SourceAccountCode string           `json:"sourceAccountCode"`
+	Status            *OperationStatus `json:"status,omitempty"`
 	// The transfer code.
 	TransferCode string `json:"transferCode"`
 }
@@ -35,7 +35,7 @@ type TransferFundsNotificationContent struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTransferFundsNotificationContent(amount Amount, destinationAccountCode string, sourceAccountCode string, transferCode string, ) *TransferFundsNotificationContent {
+func NewTransferFundsNotificationContent(amount Amount, destinationAccountCode string, sourceAccountCode string, transferCode string) *TransferFundsNotificationContent {
 	this := TransferFundsNotificationContent{}
 	this.Amount = amount
 	this.DestinationAccountCode = destinationAccountCode
@@ -54,7 +54,7 @@ func NewTransferFundsNotificationContentWithDefaults() *TransferFundsNotificatio
 
 // GetAmount returns the Amount field value
 func (o *TransferFundsNotificationContent) GetAmount() Amount {
-	if o == nil  {
+	if o == nil {
 		var ret Amount
 		return ret
 	}
@@ -65,7 +65,7 @@ func (o *TransferFundsNotificationContent) GetAmount() Amount {
 // GetAmountOk returns a tuple with the Amount field value
 // and a boolean to check if the value has been set.
 func (o *TransferFundsNotificationContent) GetAmountOk() (*Amount, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Amount, true
@@ -78,7 +78,7 @@ func (o *TransferFundsNotificationContent) SetAmount(v Amount) {
 
 // GetDestinationAccountCode returns the DestinationAccountCode field value
 func (o *TransferFundsNotificationContent) GetDestinationAccountCode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -89,7 +89,7 @@ func (o *TransferFundsNotificationContent) GetDestinationAccountCode() string {
 // GetDestinationAccountCodeOk returns a tuple with the DestinationAccountCode field value
 // and a boolean to check if the value has been set.
 func (o *TransferFundsNotificationContent) GetDestinationAccountCodeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.DestinationAccountCode, true
@@ -166,7 +166,7 @@ func (o *TransferFundsNotificationContent) SetMerchantReference(v string) {
 
 // GetSourceAccountCode returns the SourceAccountCode field value
 func (o *TransferFundsNotificationContent) GetSourceAccountCode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -177,7 +177,7 @@ func (o *TransferFundsNotificationContent) GetSourceAccountCode() string {
 // GetSourceAccountCodeOk returns a tuple with the SourceAccountCode field value
 // and a boolean to check if the value has been set.
 func (o *TransferFundsNotificationContent) GetSourceAccountCodeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.SourceAccountCode, true
@@ -222,7 +222,7 @@ func (o *TransferFundsNotificationContent) SetStatus(v OperationStatus) {
 
 // GetTransferCode returns the TransferCode field value
 func (o *TransferFundsNotificationContent) GetTransferCode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -233,7 +233,7 @@ func (o *TransferFundsNotificationContent) GetTransferCode() string {
 // GetTransferCodeOk returns a tuple with the TransferCode field value
 // and a boolean to check if the value has been set.
 func (o *TransferFundsNotificationContent) GetTransferCodeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.TransferCode, true
@@ -305,5 +305,3 @@ func (v *NullableTransferFundsNotificationContent) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

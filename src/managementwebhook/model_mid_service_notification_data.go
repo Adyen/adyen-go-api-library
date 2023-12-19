@@ -29,7 +29,7 @@ type MidServiceNotificationData struct {
 	MerchantId string `json:"merchantId"`
 	// Your reference for the payment method.
 	Reference *string `json:"reference,omitempty"`
-	// The status of the request to add a payment method. Possible values:  * **success**: the payment method was added. * **failure**: the request failed. * **dataRequired**: the request is in a draft state because the required KYC data are missing. To check what data are missing, [get the details of the legal entity](https://docs.adyen.com/api-explorer/legalentity/latest/get/legalEntities/_id_). * **capabilityPending**: the **receivePayments** capability is not allowed. * **updatesExpected**: the **receivePayments** capability is not allowed and the required KYC data are missing. To check what data are missing, [get the details of the legal entity](https://docs.adyen.com/api-explorer/legalentity/latest/get/legalEntities/_id_).
+	// The status of the request to add a payment method. Possible values:  * **success**: the payment method was added. * **failure**: the request failed. * **capabilityPending**: the **receivePayments** capability is not allowed.
 	Status string `json:"status"`
 	// The unique identifier of the [store](https://docs.adyen.com/api-explorer/#/ManagementService/latest/post/merchants/{id}/paymentMethodSettings__reqParam_storeId), if any.
 	StoreId *string `json:"storeId,omitempty"`

@@ -9,6 +9,7 @@
  */
 
 package platformsfund
+
 // AccountHolderTransactionListResponse struct for AccountHolderTransactionListResponse
 type AccountHolderTransactionListResponse struct {
 	// A list of the transactions.

@@ -9,6 +9,7 @@
  */
 
 package platformsnotificationconfiguration
+
 // DeleteNotificationConfigurationRequest struct for DeleteNotificationConfigurationRequest
 type DeleteNotificationConfigurationRequest struct {
 	// A list of IDs of the notification subscription configurations to be deleted.

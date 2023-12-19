@@ -18,15 +18,15 @@ import (
 // PaymentFailureNotificationContent struct for PaymentFailureNotificationContent
 type PaymentFailureNotificationContent struct {
 	// Missing or invalid fields that caused the payment error.
-	ErrorFields []ErrorFieldType `json:"errorFields"`
-	ErrorMessage Message `json:"errorMessage"`
+	ErrorFields  []ErrorFieldType `json:"errorFields"`
+	ErrorMessage Message          `json:"errorMessage"`
 }
 
 // NewPaymentFailureNotificationContent instantiates a new PaymentFailureNotificationContent object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPaymentFailureNotificationContent(errorFields []ErrorFieldType, errorMessage Message, ) *PaymentFailureNotificationContent {
+func NewPaymentFailureNotificationContent(errorFields []ErrorFieldType, errorMessage Message) *PaymentFailureNotificationContent {
 	this := PaymentFailureNotificationContent{}
 	this.ErrorFields = errorFields
 	this.ErrorMessage = errorMessage
@@ -43,7 +43,7 @@ func NewPaymentFailureNotificationContentWithDefaults() *PaymentFailureNotificat
 
 // GetErrorFields returns the ErrorFields field value
 func (o *PaymentFailureNotificationContent) GetErrorFields() []ErrorFieldType {
-	if o == nil  {
+	if o == nil {
 		var ret []ErrorFieldType
 		return ret
 	}
@@ -54,7 +54,7 @@ func (o *PaymentFailureNotificationContent) GetErrorFields() []ErrorFieldType {
 // GetErrorFieldsOk returns a tuple with the ErrorFields field value
 // and a boolean to check if the value has been set.
 func (o *PaymentFailureNotificationContent) GetErrorFieldsOk() (*[]ErrorFieldType, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ErrorFields, true
@@ -67,7 +67,7 @@ func (o *PaymentFailureNotificationContent) SetErrorFields(v []ErrorFieldType) {
 
 // GetErrorMessage returns the ErrorMessage field value
 func (o *PaymentFailureNotificationContent) GetErrorMessage() Message {
-	if o == nil  {
+	if o == nil {
 		var ret Message
 		return ret
 	}
@@ -78,7 +78,7 @@ func (o *PaymentFailureNotificationContent) GetErrorMessage() Message {
 // GetErrorMessageOk returns a tuple with the ErrorMessage field value
 // and a boolean to check if the value has been set.
 func (o *PaymentFailureNotificationContent) GetErrorMessageOk() (*Message, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ErrorMessage, true
@@ -135,5 +135,3 @@ func (v *NullablePaymentFailureNotificationContent) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

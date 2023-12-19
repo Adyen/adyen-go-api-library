@@ -9,13 +9,14 @@
  */
 
 package platformsfund
+
 // PayoutAccountHolderRequest struct for PayoutAccountHolderRequest
 type PayoutAccountHolderRequest struct {
 	// The code of the account from which the payout is to be made.
 	AccountCode string `json:"accountCode"`
 	// The code of the Account Holder who owns the account from which the payout is to be made. The Account Holder is the party to which the payout will be made.
 	AccountHolderCode string `json:"accountHolderCode"`
-	Amount Amount `json:"amount"`
+	Amount            Amount `json:"amount"`
 	// The unique ID of the Bank Account held by the Account Holder to which the payout is to be made. If left blank, a bank account is automatically selected.
 	BankAccountUUID string `json:"bankAccountUUID,omitempty"`
 	// A description of the payout. Maximum 35 characters. Allowed: **abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/?:().,'+ \";**

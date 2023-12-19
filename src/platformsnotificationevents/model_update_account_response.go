@@ -24,11 +24,11 @@ type UpdateAccountResponse struct {
 	// The description of the account.
 	Description *string `json:"description,omitempty"`
 	// A list of fields that caused the `/updateAccount` request to fail.
-	InvalidFields *[]ErrorFieldType `json:"invalidFields,omitempty"`
-	Metadata *map[string]string `json:"metadata,omitempty"`
+	InvalidFields *[]ErrorFieldType  `json:"invalidFields,omitempty"`
+	Metadata      *map[string]string `json:"metadata,omitempty"`
 	// The payout method code held by the account holder to couple the account with. Scheduled card payouts will be sent using this payout method code.
-	PayoutMethodCode *string `json:"payoutMethodCode,omitempty"`
-	PayoutSchedule *PayoutScheduleResponse `json:"payoutSchedule,omitempty"`
+	PayoutMethodCode *string                 `json:"payoutMethodCode,omitempty"`
+	PayoutSchedule   *PayoutScheduleResponse `json:"payoutSchedule,omitempty"`
 	// Speed with which payouts for this account are processed. Permitted values: `STANDARD`, `SAME_DAY`.
 	PayoutSpeed *string `json:"payoutSpeed,omitempty"`
 	// The reference of a request. Can be used to uniquely identify the request.
@@ -41,7 +41,7 @@ type UpdateAccountResponse struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateAccountResponse(accountCode string, ) *UpdateAccountResponse {
+func NewUpdateAccountResponse(accountCode string) *UpdateAccountResponse {
 	this := UpdateAccountResponse{}
 	this.AccountCode = accountCode
 	return &this
@@ -57,7 +57,7 @@ func NewUpdateAccountResponseWithDefaults() *UpdateAccountResponse {
 
 // GetAccountCode returns the AccountCode field value
 func (o *UpdateAccountResponse) GetAccountCode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -68,7 +68,7 @@ func (o *UpdateAccountResponse) GetAccountCode() string {
 // GetAccountCodeOk returns a tuple with the AccountCode field value
 // and a boolean to check if the value has been set.
 func (o *UpdateAccountResponse) GetAccountCodeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.AccountCode, true
@@ -437,5 +437,3 @@ func (v *NullableUpdateAccountResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

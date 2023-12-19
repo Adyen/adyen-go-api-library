@@ -9,6 +9,7 @@
  */
 
 package platformsaccount
+
 // DeleteShareholderRequest struct for DeleteShareholderRequest
 type DeleteShareholderRequest struct {
 	// The code of the Account Holder from which to delete the Shareholders.

@@ -9,10 +9,11 @@
  */
 
 package platformsaccount
+
 // UpdateAccountHolderRequest struct for UpdateAccountHolderRequest
 type UpdateAccountHolderRequest struct {
 	// The code of the Account Holder to be updated.
-	AccountHolderCode string `json:"accountHolderCode"`
+	AccountHolderCode    string                `json:"accountHolderCode"`
 	AccountHolderDetails *AccountHolderDetails `json:"accountHolderDetails,omitempty"`
 	// A description of the account holder, maximum 256 characters. You can use alphanumeric characters (A-Z, a-z, 0-9), white spaces, and underscores `_`.
 	Description string `json:"description,omitempty"`

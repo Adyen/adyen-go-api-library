@@ -9,11 +9,12 @@
  */
 
 package platformsaccount
+
 // PayoutMethod struct for PayoutMethod
 type PayoutMethod struct {
-	MerchantAccount string `json:"merchantAccount"`
-	PayoutMethodCode string `json:"payoutMethodCode,omitempty"`
-	PayoutMethodType string `json:"payoutMethodType,omitempty"`
+	MerchantAccount          string `json:"merchantAccount"`
+	PayoutMethodCode         string `json:"payoutMethodCode,omitempty"`
+	PayoutMethodType         string `json:"payoutMethodType,omitempty"`
 	RecurringDetailReference string `json:"recurringDetailReference"`
-	ShopperReference string `json:"shopperReference"`
+	ShopperReference         string `json:"shopperReference"`
 }

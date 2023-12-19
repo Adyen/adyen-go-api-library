@@ -9,6 +9,7 @@
  */
 
 package platformsfund
+
 // AccountHolderTransactionListRequest struct for AccountHolderTransactionListRequest
 type AccountHolderTransactionListRequest struct {
 	// The code of the account holder that owns the account(s) of which retrieve the transaction list.

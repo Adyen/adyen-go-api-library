@@ -65,6 +65,51 @@ func (a *LegalEntitiesApi) CheckLegalEntitysVerificationErrors(ctx context.Conte
 	return *res, httpRes, err
 }
 
+// All parameters accepted by LegalEntitiesApi.ConfirmDataReview
+type LegalEntitiesApiConfirmDataReviewInput struct {
+	id string
+}
+
+/*
+Prepare a request for ConfirmDataReview
+@param id The unique identifier of the legal entity.
+@return LegalEntitiesApiConfirmDataReviewInput
+*/
+func (a *LegalEntitiesApi) ConfirmDataReviewInput(id string) LegalEntitiesApiConfirmDataReviewInput {
+	return LegalEntitiesApiConfirmDataReviewInput{
+		id: id,
+	}
+}
+
+/*
+ConfirmDataReview Confirm data review
+
+Confirms that your user has reviewed the data for the legal entity specified in the path. Call this endpoint to inform Adyen that your user reviewed and verified that the data is up-to-date. The endpoint returns the timestamp of when Adyen received the request.
+
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r LegalEntitiesApiConfirmDataReviewInput - Request parameters, see ConfirmDataReviewInput
+@return DataReviewConfirmationResponse, *http.Response, error
+*/
+func (a *LegalEntitiesApi) ConfirmDataReview(ctx context.Context, r LegalEntitiesApiConfirmDataReviewInput) (DataReviewConfirmationResponse, *http.Response, error) {
+	res := &DataReviewConfirmationResponse{}
+	path := "/legalEntities/{id}/confirmDataReview"
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	return *res, httpRes, err
+}
+
 // All parameters accepted by LegalEntitiesApi.CreateLegalEntity
 type LegalEntitiesApiCreateLegalEntityInput struct {
 	xRequestedVerificationCode  *string

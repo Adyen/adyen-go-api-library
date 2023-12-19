@@ -9,9 +9,11 @@
  */
 
 package platformsaccount
+
 import (
 	"time"
 )
+
 // AccountEvent struct for AccountEvent
 type AccountEvent struct {
 	// The event. >Permitted values: `InactivateAccount`, `RefundNotPaidOutTransfers`. For more information, refer to [Verification checks](https://docs.adyen.com/platforms/onboarding-and-verification/verification-checks).

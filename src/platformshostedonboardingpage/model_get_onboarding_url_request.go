@@ -9,6 +9,7 @@
  */
 
 package platformshostedonboardingpage
+
 // GetOnboardingUrlRequest struct for GetOnboardingUrlRequest
 type GetOnboardingUrlRequest struct {
 	// The account holder code you provided when you created the account holder.

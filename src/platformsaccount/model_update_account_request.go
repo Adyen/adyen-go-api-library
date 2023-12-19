@@ -9,6 +9,7 @@
  */
 
 package platformsaccount
+
 // UpdateAccountRequest struct for UpdateAccountRequest
 type UpdateAccountRequest struct {
 	// The code of the account to update.
@@ -20,8 +21,8 @@ type UpdateAccountRequest struct {
 	// A set of key and value pairs for general use by the merchant. The keys do not have specific names and may be used for storing miscellaneous data as desired. > Note that during an update of metadata, the omission of existing key-value pairs will result in the deletion of those key-value pairs.
 	Metadata map[string]string `json:"metadata,omitempty"`
 	// The payout method code held by the account holder to couple the account with. Scheduled card payouts will be sent using this payout method code.
-	PayoutMethodCode string `json:"payoutMethodCode,omitempty"`
-	PayoutSchedule *UpdatePayoutScheduleRequest `json:"payoutSchedule,omitempty"`
+	PayoutMethodCode string                       `json:"payoutMethodCode,omitempty"`
+	PayoutSchedule   *UpdatePayoutScheduleRequest `json:"payoutSchedule,omitempty"`
 	// Speed with which payouts for this account are processed. Permitted values: `STANDARD`, `SAME_DAY`.
 	PayoutSpeed string `json:"payoutSpeed,omitempty"`
 }

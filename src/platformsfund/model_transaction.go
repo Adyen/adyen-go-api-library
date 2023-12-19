@@ -9,12 +9,14 @@
  */
 
 package platformsfund
+
 import (
 	"time"
 )
+
 // Transaction struct for Transaction
 type Transaction struct {
-	Amount *Amount `json:"amount,omitempty"`
+	Amount            *Amount            `json:"amount,omitempty"`
 	BankAccountDetail *BankAccountDetail `json:"bankAccountDetail,omitempty"`
 	// The merchant reference of a related capture.
 	CaptureMerchantReference string `json:"captureMerchantReference,omitempty"`

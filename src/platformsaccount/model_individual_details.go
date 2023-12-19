@@ -9,8 +9,9 @@
  */
 
 package platformsaccount
+
 // IndividualDetails struct for IndividualDetails
 type IndividualDetails struct {
-	Name *ViasName `json:"name,omitempty"`
+	Name         *ViasName         `json:"name,omitempty"`
 	PersonalData *ViasPersonalData `json:"personalData,omitempty"`
 }

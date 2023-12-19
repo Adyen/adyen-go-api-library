@@ -9,6 +9,7 @@
  */
 
 package platformsaccount
+
 // UnSuspendAccountHolderRequest struct for UnSuspendAccountHolderRequest
 type UnSuspendAccountHolderRequest struct {
 	// The code of the account holder to be reinstated.
