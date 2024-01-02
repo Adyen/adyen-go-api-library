@@ -145,6 +145,19 @@ req = req.RecurringDetailsRequest(recurring.RecurringDetailsRequest{
 res, httpRes, err := service.ListRecurringDetails(context.Background(), req)
 ```
 
+## Unmarshalling JSON Strings
+In some setups you might need to unmarshal JSON strings to request objects. For example, when using the libraries in combination with Dropin/Components. Please use following methodology when unmarshalling JSON strings:
+
+```go
+import (
+	"encoding/json"
+	"github.com/adyen/adyen-go-api-library/v8/src/checkout"
+)
+paymentRequest := checkout.PaymentRequest{}
+error := json.Unmarshal([]byte("YOUR_JSON_STRING"), &paymentRequest)
+
+```
+
 ### Using the webhook parser
 
 ```go
