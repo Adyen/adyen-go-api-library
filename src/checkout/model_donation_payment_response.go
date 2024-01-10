@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v8/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the DonationPaymentResponse type satisfies the MappedNullable interface at compile time
@@ -24,8 +25,8 @@ type DonationPaymentResponse struct {
 	// Your unique resource identifier.
 	Id *string `json:"id,omitempty"`
 	// The merchant account identifier, with which you want to process the transaction.
-	MerchantAccount *string `json:"merchantAccount,omitempty"`
-	Payment *PaymentResponse `json:"payment,omitempty"`
+	MerchantAccount *string          `json:"merchantAccount,omitempty"`
+	Payment         *PaymentResponse `json:"payment,omitempty"`
 	// The reference to uniquely identify a payment. This reference is used in all communication with you about the payment status. We recommend using a unique value per payment; however, it is not a requirement. If you need to provide multiple references for a transaction, separate them with hyphens (\"-\"). Maximum length: 80 characters.
 	Reference *string `json:"reference,omitempty"`
 	// The status of the donation transaction.  Possible values: * **completed** * **pending** * **refused**
@@ -274,7 +275,7 @@ func (o *DonationPaymentResponse) SetStatus(v string) {
 }
 
 func (o DonationPaymentResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -343,14 +344,12 @@ func (v *NullableDonationPaymentResponse) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *DonationPaymentResponse) isValidStatus() bool {
-    var allowedEnumValues = []string{ "completed", "pending", "refused" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetStatus() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"completed", "pending", "refused"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetStatus() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

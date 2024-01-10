@@ -10,7 +10,8 @@ package transfers
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v8/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the PlatformPayment type satisfies the MappedNullable interface at compile time
@@ -246,7 +247,7 @@ func (o *PlatformPayment) SetType(v string) {
 }
 
 func (o PlatformPayment) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -312,23 +313,21 @@ func (v *NullablePlatformPayment) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *PlatformPayment) isValidPlatformPaymentType() bool {
-    var allowedEnumValues = []string{ "AcquiringFees", "AdyenCommission", "AdyenFees", "AdyenMarkup", "BalanceAccount", "Commission", "Default", "Interchange", "PaymentFee", "Remainder", "SchemeFee", "TopUp", "VAT" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetPlatformPaymentType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"AcquiringFees", "AdyenCommission", "AdyenFees", "AdyenMarkup", "BalanceAccount", "Commission", "Default", "Interchange", "PaymentFee", "Remainder", "SchemeFee", "TopUp", "VAT"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetPlatformPaymentType() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *PlatformPayment) isValidType() bool {
-    var allowedEnumValues = []string{ "platformPayment" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"platformPayment"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v8/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the ApplePayDonations type satisfies the MappedNullable interface at compile time
@@ -243,7 +244,7 @@ func (o *ApplePayDonations) SetType(v string) {
 }
 
 func (o ApplePayDonations) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -307,23 +308,21 @@ func (v *NullableApplePayDonations) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *ApplePayDonations) isValidFundingSource() bool {
-    var allowedEnumValues = []string{ "credit", "debit" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetFundingSource() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"credit", "debit"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetFundingSource() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *ApplePayDonations) isValidType() bool {
-    var allowedEnumValues = []string{ "applepay" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"applepay"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

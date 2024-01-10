@@ -10,28 +10,27 @@ package balanceplatform
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v8/src/common"
 	"fmt"
 )
 
 // BankAccountIdentificationValidationRequestAccountIdentification - Bank account identification.
 type BankAccountIdentificationValidationRequestAccountIdentification struct {
-	AULocalAccountIdentification *AULocalAccountIdentification
-	BRLocalAccountIdentification *BRLocalAccountIdentification
-	CALocalAccountIdentification *CALocalAccountIdentification
-	CZLocalAccountIdentification *CZLocalAccountIdentification
-	DKLocalAccountIdentification *DKLocalAccountIdentification
-	HKLocalAccountIdentification *HKLocalAccountIdentification
-	HULocalAccountIdentification *HULocalAccountIdentification
-	IbanAccountIdentification *IbanAccountIdentification
-	NOLocalAccountIdentification *NOLocalAccountIdentification
-	NZLocalAccountIdentification *NZLocalAccountIdentification
+	AULocalAccountIdentification      *AULocalAccountIdentification
+	BRLocalAccountIdentification      *BRLocalAccountIdentification
+	CALocalAccountIdentification      *CALocalAccountIdentification
+	CZLocalAccountIdentification      *CZLocalAccountIdentification
+	DKLocalAccountIdentification      *DKLocalAccountIdentification
+	HKLocalAccountIdentification      *HKLocalAccountIdentification
+	HULocalAccountIdentification      *HULocalAccountIdentification
+	IbanAccountIdentification         *IbanAccountIdentification
+	NOLocalAccountIdentification      *NOLocalAccountIdentification
+	NZLocalAccountIdentification      *NZLocalAccountIdentification
 	NumberAndBicAccountIdentification *NumberAndBicAccountIdentification
-	PLLocalAccountIdentification *PLLocalAccountIdentification
-	SELocalAccountIdentification *SELocalAccountIdentification
-	SGLocalAccountIdentification *SGLocalAccountIdentification
-	UKLocalAccountIdentification *UKLocalAccountIdentification
-	USLocalAccountIdentification *USLocalAccountIdentification
+	PLLocalAccountIdentification      *PLLocalAccountIdentification
+	SELocalAccountIdentification      *SELocalAccountIdentification
+	SGLocalAccountIdentification      *SGLocalAccountIdentification
+	UKLocalAccountIdentification      *UKLocalAccountIdentification
+	USLocalAccountIdentification      *USLocalAccountIdentification
 }
 
 // AULocalAccountIdentificationAsBankAccountIdentificationValidationRequestAccountIdentification is a convenience function that returns AULocalAccountIdentification wrapped in BankAccountIdentificationValidationRequestAccountIdentification
@@ -146,7 +145,6 @@ func USLocalAccountIdentificationAsBankAccountIdentificationValidationRequestAcc
 	}
 }
 
-
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *BankAccountIdentificationValidationRequestAccountIdentification) UnmarshalJSON(data []byte) error {
 	var err error
@@ -157,7 +155,7 @@ func (dst *BankAccountIdentificationValidationRequestAccountIdentification) Unma
 		jsonAULocalAccountIdentification, _ := json.Marshal(dst.AULocalAccountIdentification)
 		if string(jsonAULocalAccountIdentification) == "{}" || !dst.AULocalAccountIdentification.isValidType() { // empty struct
 			dst.AULocalAccountIdentification = nil
-        } else {
+		} else {
 			match++
 		}
 	} else {
@@ -170,7 +168,7 @@ func (dst *BankAccountIdentificationValidationRequestAccountIdentification) Unma
 		jsonBRLocalAccountIdentification, _ := json.Marshal(dst.BRLocalAccountIdentification)
 		if string(jsonBRLocalAccountIdentification) == "{}" || !dst.BRLocalAccountIdentification.isValidType() { // empty struct
 			dst.BRLocalAccountIdentification = nil
-        } else {
+		} else {
 			match++
 		}
 	} else {
@@ -183,7 +181,7 @@ func (dst *BankAccountIdentificationValidationRequestAccountIdentification) Unma
 		jsonCALocalAccountIdentification, _ := json.Marshal(dst.CALocalAccountIdentification)
 		if string(jsonCALocalAccountIdentification) == "{}" || !dst.CALocalAccountIdentification.isValidType() { // empty struct
 			dst.CALocalAccountIdentification = nil
-        } else {
+		} else {
 			match++
 		}
 	} else {
@@ -196,7 +194,7 @@ func (dst *BankAccountIdentificationValidationRequestAccountIdentification) Unma
 		jsonCZLocalAccountIdentification, _ := json.Marshal(dst.CZLocalAccountIdentification)
 		if string(jsonCZLocalAccountIdentification) == "{}" || !dst.CZLocalAccountIdentification.isValidType() { // empty struct
 			dst.CZLocalAccountIdentification = nil
-        } else {
+		} else {
 			match++
 		}
 	} else {
@@ -209,7 +207,7 @@ func (dst *BankAccountIdentificationValidationRequestAccountIdentification) Unma
 		jsonDKLocalAccountIdentification, _ := json.Marshal(dst.DKLocalAccountIdentification)
 		if string(jsonDKLocalAccountIdentification) == "{}" || !dst.DKLocalAccountIdentification.isValidType() { // empty struct
 			dst.DKLocalAccountIdentification = nil
-        } else {
+		} else {
 			match++
 		}
 	} else {
@@ -222,7 +220,7 @@ func (dst *BankAccountIdentificationValidationRequestAccountIdentification) Unma
 		jsonHKLocalAccountIdentification, _ := json.Marshal(dst.HKLocalAccountIdentification)
 		if string(jsonHKLocalAccountIdentification) == "{}" || !dst.HKLocalAccountIdentification.isValidType() { // empty struct
 			dst.HKLocalAccountIdentification = nil
-        } else {
+		} else {
 			match++
 		}
 	} else {
@@ -235,7 +233,7 @@ func (dst *BankAccountIdentificationValidationRequestAccountIdentification) Unma
 		jsonHULocalAccountIdentification, _ := json.Marshal(dst.HULocalAccountIdentification)
 		if string(jsonHULocalAccountIdentification) == "{}" || !dst.HULocalAccountIdentification.isValidType() { // empty struct
 			dst.HULocalAccountIdentification = nil
-        } else {
+		} else {
 			match++
 		}
 	} else {
@@ -248,7 +246,7 @@ func (dst *BankAccountIdentificationValidationRequestAccountIdentification) Unma
 		jsonIbanAccountIdentification, _ := json.Marshal(dst.IbanAccountIdentification)
 		if string(jsonIbanAccountIdentification) == "{}" || !dst.IbanAccountIdentification.isValidType() { // empty struct
 			dst.IbanAccountIdentification = nil
-        } else {
+		} else {
 			match++
 		}
 	} else {
@@ -261,7 +259,7 @@ func (dst *BankAccountIdentificationValidationRequestAccountIdentification) Unma
 		jsonNOLocalAccountIdentification, _ := json.Marshal(dst.NOLocalAccountIdentification)
 		if string(jsonNOLocalAccountIdentification) == "{}" || !dst.NOLocalAccountIdentification.isValidType() { // empty struct
 			dst.NOLocalAccountIdentification = nil
-        } else {
+		} else {
 			match++
 		}
 	} else {
@@ -274,7 +272,7 @@ func (dst *BankAccountIdentificationValidationRequestAccountIdentification) Unma
 		jsonNZLocalAccountIdentification, _ := json.Marshal(dst.NZLocalAccountIdentification)
 		if string(jsonNZLocalAccountIdentification) == "{}" || !dst.NZLocalAccountIdentification.isValidType() { // empty struct
 			dst.NZLocalAccountIdentification = nil
-        } else {
+		} else {
 			match++
 		}
 	} else {
@@ -287,7 +285,7 @@ func (dst *BankAccountIdentificationValidationRequestAccountIdentification) Unma
 		jsonNumberAndBicAccountIdentification, _ := json.Marshal(dst.NumberAndBicAccountIdentification)
 		if string(jsonNumberAndBicAccountIdentification) == "{}" || !dst.NumberAndBicAccountIdentification.isValidType() { // empty struct
 			dst.NumberAndBicAccountIdentification = nil
-        } else {
+		} else {
 			match++
 		}
 	} else {
@@ -300,7 +298,7 @@ func (dst *BankAccountIdentificationValidationRequestAccountIdentification) Unma
 		jsonPLLocalAccountIdentification, _ := json.Marshal(dst.PLLocalAccountIdentification)
 		if string(jsonPLLocalAccountIdentification) == "{}" || !dst.PLLocalAccountIdentification.isValidType() { // empty struct
 			dst.PLLocalAccountIdentification = nil
-        } else {
+		} else {
 			match++
 		}
 	} else {
@@ -313,7 +311,7 @@ func (dst *BankAccountIdentificationValidationRequestAccountIdentification) Unma
 		jsonSELocalAccountIdentification, _ := json.Marshal(dst.SELocalAccountIdentification)
 		if string(jsonSELocalAccountIdentification) == "{}" || !dst.SELocalAccountIdentification.isValidType() { // empty struct
 			dst.SELocalAccountIdentification = nil
-        } else {
+		} else {
 			match++
 		}
 	} else {
@@ -326,7 +324,7 @@ func (dst *BankAccountIdentificationValidationRequestAccountIdentification) Unma
 		jsonSGLocalAccountIdentification, _ := json.Marshal(dst.SGLocalAccountIdentification)
 		if string(jsonSGLocalAccountIdentification) == "{}" || !dst.SGLocalAccountIdentification.isValidType() { // empty struct
 			dst.SGLocalAccountIdentification = nil
-        } else {
+		} else {
 			match++
 		}
 	} else {
@@ -339,7 +337,7 @@ func (dst *BankAccountIdentificationValidationRequestAccountIdentification) Unma
 		jsonUKLocalAccountIdentification, _ := json.Marshal(dst.UKLocalAccountIdentification)
 		if string(jsonUKLocalAccountIdentification) == "{}" || !dst.UKLocalAccountIdentification.isValidType() { // empty struct
 			dst.UKLocalAccountIdentification = nil
-        } else {
+		} else {
 			match++
 		}
 	} else {
@@ -352,7 +350,7 @@ func (dst *BankAccountIdentificationValidationRequestAccountIdentification) Unma
 		jsonUSLocalAccountIdentification, _ := json.Marshal(dst.USLocalAccountIdentification)
 		if string(jsonUSLocalAccountIdentification) == "{}" || !dst.USLocalAccountIdentification.isValidType() { // empty struct
 			dst.USLocalAccountIdentification = nil
-        } else {
+		} else {
 			match++
 		}
 	} else {
@@ -456,7 +454,7 @@ func (src BankAccountIdentificationValidationRequestAccountIdentification) Marsh
 }
 
 // Get the actual instance
-func (obj *BankAccountIdentificationValidationRequestAccountIdentification) GetActualInstance() (interface{}) {
+func (obj *BankAccountIdentificationValidationRequestAccountIdentification) GetActualInstance() interface{} {
 	if obj == nil {
 		return nil
 	}
@@ -563,5 +561,3 @@ func (v *NullableBankAccountIdentificationValidationRequestAccountIdentification
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

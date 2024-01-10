@@ -10,7 +10,8 @@ package configurationwebhook
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v8/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the Contact type satisfies the MappedNullable interface at compile time
@@ -22,10 +23,10 @@ type Contact struct {
 	// The e-mail address of the contact.
 	Email *string `json:"email,omitempty"`
 	// The phone number of the contact provided as a single string.  It will be handled as a landline phone. **Examples:** \"0031 6 11 22 33 44\", \"+316/1122-3344\", \"(0031) 611223344\"
-	FullPhoneNumber *string `json:"fullPhoneNumber,omitempty"`
-	Name *Name `json:"name,omitempty"`
-	PersonalData *PersonalData `json:"personalData,omitempty"`
-	PhoneNumber *PhoneNumber `json:"phoneNumber,omitempty"`
+	FullPhoneNumber *string       `json:"fullPhoneNumber,omitempty"`
+	Name            *Name         `json:"name,omitempty"`
+	PersonalData    *PersonalData `json:"personalData,omitempty"`
+	PhoneNumber     *PhoneNumber  `json:"phoneNumber,omitempty"`
 	// The URL of the website of the contact.
 	WebAddress *string `json:"webAddress,omitempty"`
 }
@@ -272,7 +273,7 @@ func (o *Contact) SetWebAddress(v string) {
 }
 
 func (o Contact) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -340,6 +341,3 @@ func (v *NullableContact) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

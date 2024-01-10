@@ -10,7 +10,8 @@ package management
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v8/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the Store type satisfies the MappedNullable interface at compile time
@@ -18,7 +19,7 @@ var _ common.MappedNullable = &Store{}
 
 // Store struct for Store
 type Store struct {
-	Links *Links `json:"_links,omitempty"`
+	Links   *Links         `json:"_links,omitempty"`
 	Address *StoreLocation `json:"address,omitempty"`
 	// The unique identifiers of the [business lines](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/businesslines__resParam_id) that the store is associated with.  If not specified, the business line of the merchant account is used. Required when there are multiple business lines under the merchant account.
 	BusinessLineIds []string `json:"businessLineIds,omitempty"`
@@ -30,12 +31,12 @@ type Store struct {
 	Id *string `json:"id,omitempty"`
 	// The unique identifier of the merchant account that the store belongs to.
 	MerchantId *string `json:"merchantId,omitempty"`
-	// The phone number of the store, including '+' and country code in the [E.164](https://en.wikipedia.org/wiki/E.164) format. If passed in a different format, we convert and validate the phone number against E.164. 
+	// The phone number of the store, including '+' and country code in the [E.164](https://en.wikipedia.org/wiki/E.164) format. If passed in a different format, we convert and validate the phone number against E.164.
 	PhoneNumber *string `json:"phoneNumber,omitempty"`
 	// A reference to recognize the store by. Also known as the store code.  Allowed characters: lowercase and uppercase letters without diacritics, numbers 0 through 9, hyphen (-), and underscore (_)
 	Reference *string `json:"reference,omitempty"`
 	// The store name shown on the shopper's bank or credit card statement and on the shopper receipt.
-	ShopperStatement *string `json:"shopperStatement,omitempty"`
+	ShopperStatement   *string                  `json:"shopperStatement,omitempty"`
 	SplitConfiguration *StoreSplitConfiguration `json:"splitConfiguration,omitempty"`
 	// The status of the store. Possible values are:  - **active**. This value is assigned automatically when a store is created.  - **inactive**. The terminals under the store are blocked from accepting new transactions, but capturing outstanding transactions is still possible. - **closed**. This status is irreversible. The terminals under the store are reassigned to the merchant inventory.
 	Status *string `json:"status,omitempty"`
@@ -443,7 +444,7 @@ func (o *Store) SetStatus(v string) {
 }
 
 func (o Store) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -527,14 +528,12 @@ func (v *NullableStore) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *Store) isValidStatus() bool {
-    var allowedEnumValues = []string{ "active", "closed", "inactive" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetStatus() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"active", "closed", "inactive"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetStatus() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

@@ -10,7 +10,8 @@ package balanceplatform
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v8/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the SameCounterpartyRestriction type satisfies the MappedNullable interface at compile time
@@ -20,7 +21,7 @@ var _ common.MappedNullable = &SameCounterpartyRestriction{}
 type SameCounterpartyRestriction struct {
 	// Defines how the condition must be evaluated.
 	Operation string `json:"operation"`
-	Value *bool `json:"value,omitempty"`
+	Value     *bool  `json:"value,omitempty"`
 }
 
 // NewSameCounterpartyRestriction instantiates a new SameCounterpartyRestriction object
@@ -98,7 +99,7 @@ func (o *SameCounterpartyRestriction) SetValue(v bool) {
 }
 
 func (o SameCounterpartyRestriction) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -149,6 +150,3 @@ func (v *NullableSameCounterpartyRestriction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

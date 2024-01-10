@@ -10,13 +10,12 @@ package balanceplatform
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v8/src/common"
 	"fmt"
 )
 
 // PaymentInstrumentBankAccount - Contains the business account details. Returned when you create a payment instrument with `type` **bankAccount**.
 type PaymentInstrumentBankAccount struct {
-	IbanAccountIdentification *IbanAccountIdentification
+	IbanAccountIdentification    *IbanAccountIdentification
 	USLocalAccountIdentification *USLocalAccountIdentification
 }
 
@@ -34,7 +33,6 @@ func USLocalAccountIdentificationAsPaymentInstrumentBankAccount(v *USLocalAccoun
 	}
 }
 
-
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *PaymentInstrumentBankAccount) UnmarshalJSON(data []byte) error {
 	var err error
@@ -45,7 +43,7 @@ func (dst *PaymentInstrumentBankAccount) UnmarshalJSON(data []byte) error {
 		jsonIbanAccountIdentification, _ := json.Marshal(dst.IbanAccountIdentification)
 		if string(jsonIbanAccountIdentification) == "{}" || !dst.IbanAccountIdentification.isValidType() { // empty struct
 			dst.IbanAccountIdentification = nil
-        } else {
+		} else {
 			match++
 		}
 	} else {
@@ -58,7 +56,7 @@ func (dst *PaymentInstrumentBankAccount) UnmarshalJSON(data []byte) error {
 		jsonUSLocalAccountIdentification, _ := json.Marshal(dst.USLocalAccountIdentification)
 		if string(jsonUSLocalAccountIdentification) == "{}" || !dst.USLocalAccountIdentification.isValidType() { // empty struct
 			dst.USLocalAccountIdentification = nil
-        } else {
+		} else {
 			match++
 		}
 	} else {
@@ -92,7 +90,7 @@ func (src PaymentInstrumentBankAccount) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *PaymentInstrumentBankAccount) GetActualInstance() (interface{}) {
+func (obj *PaymentInstrumentBankAccount) GetActualInstance() interface{} {
 	if obj == nil {
 		return nil
 	}
@@ -143,5 +141,3 @@ func (v *NullablePaymentInstrumentBankAccount) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
