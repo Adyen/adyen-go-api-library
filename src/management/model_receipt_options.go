@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v8/src/common"
+    "github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the ReceiptOptions type satisfies the MappedNullable interface at compile time
@@ -21,6 +20,8 @@ var _ common.MappedNullable = &ReceiptOptions{}
 type ReceiptOptions struct {
 	// The receipt logo converted to a Base64-encoded string. The image must be a .bmp file of < 256 KB, dimensions 240 (H) x 384 (W) px.
 	Logo *string `json:"logo,omitempty"`
+	// Indicates whether a screen appears asking if you want to print the shopper receipt.
+	PromptBeforePrinting *bool `json:"promptBeforePrinting,omitempty"`
 	// Data to print on the receipt as a QR code. This can include static text and the following variables:  - `${merchantreference}`: the merchant reference of the transaction. - `${pspreference}`: the PSP reference of the transaction.   For example, **http://www.example.com/order/${pspreference}/${merchantreference}**.
 	QrCodeData *string `json:"qrCodeData,omitempty"`
 }
@@ -74,6 +75,38 @@ func (o *ReceiptOptions) SetLogo(v string) {
 	o.Logo = &v
 }
 
+// GetPromptBeforePrinting returns the PromptBeforePrinting field value if set, zero value otherwise.
+func (o *ReceiptOptions) GetPromptBeforePrinting() bool {
+	if o == nil || common.IsNil(o.PromptBeforePrinting) {
+		var ret bool
+		return ret
+	}
+	return *o.PromptBeforePrinting
+}
+
+// GetPromptBeforePrintingOk returns a tuple with the PromptBeforePrinting field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ReceiptOptions) GetPromptBeforePrintingOk() (*bool, bool) {
+	if o == nil || common.IsNil(o.PromptBeforePrinting) {
+		return nil, false
+	}
+	return o.PromptBeforePrinting, true
+}
+
+// HasPromptBeforePrinting returns a boolean if a field has been set.
+func (o *ReceiptOptions) HasPromptBeforePrinting() bool {
+	if o != nil && !common.IsNil(o.PromptBeforePrinting) {
+		return true
+	}
+
+	return false
+}
+
+// SetPromptBeforePrinting gets a reference to the given bool and assigns it to the PromptBeforePrinting field.
+func (o *ReceiptOptions) SetPromptBeforePrinting(v bool) {
+	o.PromptBeforePrinting = &v
+}
+
 // GetQrCodeData returns the QrCodeData field value if set, zero value otherwise.
 func (o *ReceiptOptions) GetQrCodeData() string {
 	if o == nil || common.IsNil(o.QrCodeData) {
@@ -107,7 +140,7 @@ func (o *ReceiptOptions) SetQrCodeData(v string) {
 }
 
 func (o ReceiptOptions) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -118,6 +151,9 @@ func (o ReceiptOptions) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.Logo) {
 		toSerialize["logo"] = o.Logo
+	}
+	if !common.IsNil(o.PromptBeforePrinting) {
+		toSerialize["promptBeforePrinting"] = o.PromptBeforePrinting
 	}
 	if !common.IsNil(o.QrCodeData) {
 		toSerialize["qrCodeData"] = o.QrCodeData
@@ -160,3 +196,6 @@ func (v *NullableReceiptOptions) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v8/src/common"
+    "github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the PaymentMethod type satisfies the MappedNullable interface at compile time
@@ -26,8 +25,8 @@ type PaymentMethod struct {
 	// The configuration of the payment method.
 	Configuration *map[string]string `json:"configuration,omitempty"`
 	// The funding source of the payment method.
-	FundingSource *string             `json:"fundingSource,omitempty"`
-	Group         *PaymentMethodGroup `json:"group,omitempty"`
+	FundingSource *string `json:"fundingSource,omitempty"`
+	Group *PaymentMethodGroup `json:"group,omitempty"`
 	// All input details to be provided to complete the payment with this payment method.
 	// Deprecated
 	InputDetails []InputDetail `json:"inputDetails,omitempty"`
@@ -348,7 +347,7 @@ func (o *PaymentMethod) SetType(v string) {
 }
 
 func (o PaymentMethod) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -423,12 +422,14 @@ func (v *NullablePaymentMethod) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *PaymentMethod) isValidFundingSource() bool {
-	var allowedEnumValues = []string{"credit", "debit"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetFundingSource() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "credit", "debit" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetFundingSource() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

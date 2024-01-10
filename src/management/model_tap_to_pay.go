@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v8/src/common"
+    "github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the TapToPay type satisfies the MappedNullable interface at compile time
@@ -19,7 +18,7 @@ var _ common.MappedNullable = &TapToPay{}
 
 // TapToPay struct for TapToPay
 type TapToPay struct {
-	// Platform merchants can customize the text that appears on the TapToPay screen during a transaction
+	// The text shown on the screen during the Tap to Pay transaction.
 	MerchantDisplayName *string `json:"merchantDisplayName,omitempty"`
 }
 
@@ -73,7 +72,7 @@ func (o *TapToPay) SetMerchantDisplayName(v string) {
 }
 
 func (o TapToPay) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -123,3 +122,6 @@ func (v *NullableTapToPay) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

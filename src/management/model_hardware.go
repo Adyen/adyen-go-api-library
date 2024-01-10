@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v8/src/common"
+    "github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the Hardware type satisfies the MappedNullable interface at compile time
@@ -21,7 +20,9 @@ var _ common.MappedNullable = &Hardware{}
 type Hardware struct {
 	// The brightness of the display when the terminal is being used, expressed as a percentage.
 	DisplayMaximumBackLight *int32 `json:"displayMaximumBackLight,omitempty"`
-	// The hour of the day when the terminal is set to reboot to apply the configuration and software updates. By default, the restart hour is at 6:00 AM in the timezone of the terminal Minimum vaoue: 0, maximum value: 23.
+	// The hour of the day when the terminal is set to reset the Totals report. By default, the reset hour is at 6:00 AM in the timezone of the terminal. Minimum value: 0, maximum value: 23.
+	ResetTotalsHour *int32 `json:"resetTotalsHour,omitempty"`
+	// The hour of the day when the terminal is set to reboot to apply the configuration and software updates. By default, the restart hour is at 6:00 AM in the timezone of the terminal. Minimum value: 0, maximum value: 23.
 	RestartHour *int32 `json:"restartHour,omitempty"`
 }
 
@@ -74,6 +75,38 @@ func (o *Hardware) SetDisplayMaximumBackLight(v int32) {
 	o.DisplayMaximumBackLight = &v
 }
 
+// GetResetTotalsHour returns the ResetTotalsHour field value if set, zero value otherwise.
+func (o *Hardware) GetResetTotalsHour() int32 {
+	if o == nil || common.IsNil(o.ResetTotalsHour) {
+		var ret int32
+		return ret
+	}
+	return *o.ResetTotalsHour
+}
+
+// GetResetTotalsHourOk returns a tuple with the ResetTotalsHour field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Hardware) GetResetTotalsHourOk() (*int32, bool) {
+	if o == nil || common.IsNil(o.ResetTotalsHour) {
+		return nil, false
+	}
+	return o.ResetTotalsHour, true
+}
+
+// HasResetTotalsHour returns a boolean if a field has been set.
+func (o *Hardware) HasResetTotalsHour() bool {
+	if o != nil && !common.IsNil(o.ResetTotalsHour) {
+		return true
+	}
+
+	return false
+}
+
+// SetResetTotalsHour gets a reference to the given int32 and assigns it to the ResetTotalsHour field.
+func (o *Hardware) SetResetTotalsHour(v int32) {
+	o.ResetTotalsHour = &v
+}
+
 // GetRestartHour returns the RestartHour field value if set, zero value otherwise.
 func (o *Hardware) GetRestartHour() int32 {
 	if o == nil || common.IsNil(o.RestartHour) {
@@ -107,7 +140,7 @@ func (o *Hardware) SetRestartHour(v int32) {
 }
 
 func (o Hardware) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -118,6 +151,9 @@ func (o Hardware) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.DisplayMaximumBackLight) {
 		toSerialize["displayMaximumBackLight"] = o.DisplayMaximumBackLight
+	}
+	if !common.IsNil(o.ResetTotalsHour) {
+		toSerialize["resetTotalsHour"] = o.ResetTotalsHour
 	}
 	if !common.IsNil(o.RestartHour) {
 		toSerialize["restartHour"] = o.RestartHour
@@ -160,3 +196,6 @@ func (v *NullableHardware) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

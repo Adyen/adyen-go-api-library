@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v8/src/common"
+    "github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the GooglePayDetails type satisfies the MappedNullable interface at compile time
@@ -23,6 +22,8 @@ type GooglePayDetails struct {
 	CheckoutAttemptId *string `json:"checkoutAttemptId,omitempty"`
 	// The funding source that should be used when multiple sources are available. For Brazilian combo cards, by default the funding source is credit. To use debit, set this value to **debit**.
 	FundingSource *string `json:"fundingSource,omitempty"`
+	// The selected payment card network. 
+	GooglePayCardNetwork *string `json:"googlePayCardNetwork,omitempty"`
 	// The `token` that you obtained from the [Google Pay API](https://developers.google.com/pay/api/web/reference/response-objects#PaymentData) `PaymentData` response.
 	GooglePayToken string `json:"googlePayToken"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
@@ -118,6 +119,38 @@ func (o *GooglePayDetails) HasFundingSource() bool {
 // SetFundingSource gets a reference to the given string and assigns it to the FundingSource field.
 func (o *GooglePayDetails) SetFundingSource(v string) {
 	o.FundingSource = &v
+}
+
+// GetGooglePayCardNetwork returns the GooglePayCardNetwork field value if set, zero value otherwise.
+func (o *GooglePayDetails) GetGooglePayCardNetwork() string {
+	if o == nil || common.IsNil(o.GooglePayCardNetwork) {
+		var ret string
+		return ret
+	}
+	return *o.GooglePayCardNetwork
+}
+
+// GetGooglePayCardNetworkOk returns a tuple with the GooglePayCardNetwork field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GooglePayDetails) GetGooglePayCardNetworkOk() (*string, bool) {
+	if o == nil || common.IsNil(o.GooglePayCardNetwork) {
+		return nil, false
+	}
+	return o.GooglePayCardNetwork, true
+}
+
+// HasGooglePayCardNetwork returns a boolean if a field has been set.
+func (o *GooglePayDetails) HasGooglePayCardNetwork() bool {
+	if o != nil && !common.IsNil(o.GooglePayCardNetwork) {
+		return true
+	}
+
+	return false
+}
+
+// SetGooglePayCardNetwork gets a reference to the given string and assigns it to the GooglePayCardNetwork field.
+func (o *GooglePayDetails) SetGooglePayCardNetwork(v string) {
+	o.GooglePayCardNetwork = &v
 }
 
 // GetGooglePayToken returns the GooglePayToken field value
@@ -244,7 +277,7 @@ func (o *GooglePayDetails) SetType(v string) {
 }
 
 func (o GooglePayDetails) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -258,6 +291,9 @@ func (o GooglePayDetails) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.FundingSource) {
 		toSerialize["fundingSource"] = o.FundingSource
+	}
+	if !common.IsNil(o.GooglePayCardNetwork) {
+		toSerialize["googlePayCardNetwork"] = o.GooglePayCardNetwork
 	}
 	toSerialize["googlePayToken"] = o.GooglePayToken
 	if !common.IsNil(o.RecurringDetailReference) {
@@ -308,21 +344,23 @@ func (v *NullableGooglePayDetails) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *GooglePayDetails) isValidFundingSource() bool {
-	var allowedEnumValues = []string{"credit", "debit"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetFundingSource() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "credit", "debit" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetFundingSource() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *GooglePayDetails) isValidType() bool {
-	var allowedEnumValues = []string{"googlepay"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "googlepay" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

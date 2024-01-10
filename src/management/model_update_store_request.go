@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v8/src/common"
+    "github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the UpdateStoreRequest type satisfies the MappedNullable interface at compile time
@@ -26,8 +25,8 @@ type UpdateStoreRequest struct {
 	Description *string `json:"description,omitempty"`
 	// When using the Zip payment method: The location ID that Zip has assigned to your store.
 	ExternalReferenceId *string `json:"externalReferenceId,omitempty"`
-	// The phone number of the store, including '+' and country code in the [E.164](https://en.wikipedia.org/wiki/E.164) format. If passed in a different format, we convert and validate the phone number against E.164.
-	PhoneNumber        *string                  `json:"phoneNumber,omitempty"`
+	// The phone number of the store, including '+' and country code in the [E.164](https://en.wikipedia.org/wiki/E.164) format. If passed in a different format, we convert and validate the phone number against E.164. 
+	PhoneNumber *string `json:"phoneNumber,omitempty"`
 	SplitConfiguration *StoreSplitConfiguration `json:"splitConfiguration,omitempty"`
 	// The status of the store. Possible values are:  - **active**: This value is assigned automatically when a store is created.  - **inactive**: The maximum [transaction limits and number of Store-and-Forward transactions](https://docs.adyen.com/point-of-sale/determine-account-structure/configure-features#payment-features) for the store are set to 0. This blocks new transactions, but captures are still possible. - **closed**: The terminals of the store are reassigned to the merchant inventory, so they can't process payments.  You can change the status from **active** to **inactive**, and from **inactive** to **active** or **closed**.  Once **closed**, a store can't be reopened.
 	Status *string `json:"status,omitempty"`
@@ -275,7 +274,7 @@ func (o *UpdateStoreRequest) SetStatus(v string) {
 }
 
 func (o UpdateStoreRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -344,12 +343,14 @@ func (v *NullableUpdateStoreRequest) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *UpdateStoreRequest) isValidStatus() bool {
-	var allowedEnumValues = []string{"active", "closed", "inactive"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetStatus() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "active", "closed", "inactive" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetStatus() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

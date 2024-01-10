@@ -10,129 +10,131 @@ package checkout
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v8/src/common"
 	"fmt"
 )
 
 // DonationPaymentMethod - The type and required details of a payment method to use.
 type DonationPaymentMethod struct {
-	ApplePayDetails      *ApplePayDetails
-	CardDetails          *CardDetails
-	GooglePayDetails     *GooglePayDetails
-	IdealDetails         *IdealDetails
-	PayWithGoogleDetails *PayWithGoogleDetails
+	ApplePayDonations *ApplePayDonations
+	CardDonations *CardDonations
+	GooglePayDonations *GooglePayDonations
+	IdealDonations *IdealDonations
+	PayWithGoogleDonations *PayWithGoogleDonations
 }
 
-// ApplePayDetailsAsDonationPaymentMethod is a convenience function that returns ApplePayDetails wrapped in DonationPaymentMethod
-func ApplePayDetailsAsDonationPaymentMethod(v *ApplePayDetails) DonationPaymentMethod {
+// ApplePayDonationsAsDonationPaymentMethod is a convenience function that returns ApplePayDonations wrapped in DonationPaymentMethod
+func ApplePayDonationsAsDonationPaymentMethod(v *ApplePayDonations) DonationPaymentMethod {
 	return DonationPaymentMethod{
-		ApplePayDetails: v,
+		ApplePayDonations: v,
 	}
 }
 
-// CardDetailsAsDonationPaymentMethod is a convenience function that returns CardDetails wrapped in DonationPaymentMethod
-func CardDetailsAsDonationPaymentMethod(v *CardDetails) DonationPaymentMethod {
+// CardDonationsAsDonationPaymentMethod is a convenience function that returns CardDonations wrapped in DonationPaymentMethod
+func CardDonationsAsDonationPaymentMethod(v *CardDonations) DonationPaymentMethod {
 	return DonationPaymentMethod{
-		CardDetails: v,
+		CardDonations: v,
 	}
 }
 
-// GooglePayDetailsAsDonationPaymentMethod is a convenience function that returns GooglePayDetails wrapped in DonationPaymentMethod
-func GooglePayDetailsAsDonationPaymentMethod(v *GooglePayDetails) DonationPaymentMethod {
+// GooglePayDonationsAsDonationPaymentMethod is a convenience function that returns GooglePayDonations wrapped in DonationPaymentMethod
+func GooglePayDonationsAsDonationPaymentMethod(v *GooglePayDonations) DonationPaymentMethod {
 	return DonationPaymentMethod{
-		GooglePayDetails: v,
+		GooglePayDonations: v,
 	}
 }
 
-// IdealDetailsAsDonationPaymentMethod is a convenience function that returns IdealDetails wrapped in DonationPaymentMethod
-func IdealDetailsAsDonationPaymentMethod(v *IdealDetails) DonationPaymentMethod {
+// IdealDonationsAsDonationPaymentMethod is a convenience function that returns IdealDonations wrapped in DonationPaymentMethod
+func IdealDonationsAsDonationPaymentMethod(v *IdealDonations) DonationPaymentMethod {
 	return DonationPaymentMethod{
-		IdealDetails: v,
+		IdealDonations: v,
 	}
 }
 
-// PayWithGoogleDetailsAsDonationPaymentMethod is a convenience function that returns PayWithGoogleDetails wrapped in DonationPaymentMethod
-func PayWithGoogleDetailsAsDonationPaymentMethod(v *PayWithGoogleDetails) DonationPaymentMethod {
+// PayWithGoogleDonationsAsDonationPaymentMethod is a convenience function that returns PayWithGoogleDonations wrapped in DonationPaymentMethod
+func PayWithGoogleDonationsAsDonationPaymentMethod(v *PayWithGoogleDonations) DonationPaymentMethod {
 	return DonationPaymentMethod{
-		PayWithGoogleDetails: v,
+		PayWithGoogleDonations: v,
 	}
 }
+
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *DonationPaymentMethod) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into ApplePayDetails
-	err = json.Unmarshal(data, &dst.ApplePayDetails)
+	// try to unmarshal data into ApplePayDonations
+	err = json.Unmarshal(data, &dst.ApplePayDonations)
 	if err == nil {
-		jsonApplePayDetails, _ := json.Marshal(dst.ApplePayDetails)
-		if string(jsonApplePayDetails) == "{}" || !dst.ApplePayDetails.isValidType() { // empty struct
-			dst.ApplePayDetails = nil
-		} else {
+		jsonApplePayDonations, _ := json.Marshal(dst.ApplePayDonations)
+		if string(jsonApplePayDonations) == "{}" || !dst.ApplePayDonations.isValidType() { // empty struct
+			dst.ApplePayDonations = nil
+        } else {
 			match++
 		}
 	} else {
-		dst.ApplePayDetails = nil
+		dst.ApplePayDonations = nil
 	}
 
-	// try to unmarshal data into CardDetails
-	err = json.Unmarshal(data, &dst.CardDetails)
+	// try to unmarshal data into CardDonations
+	err = json.Unmarshal(data, &dst.CardDonations)
 	if err == nil {
-		jsonCardDetails, _ := json.Marshal(dst.CardDetails)
-		if string(jsonCardDetails) == "{}" || !dst.CardDetails.isValidType() { // empty struct
-			dst.CardDetails = nil
-		} else {
+		jsonCardDonations, _ := json.Marshal(dst.CardDonations)
+		if string(jsonCardDonations) == "{}" || !dst.CardDonations.isValidType() { // empty struct
+			dst.CardDonations = nil
+        } else {
 			match++
 		}
 	} else {
-		dst.CardDetails = nil
+		dst.CardDonations = nil
 	}
 
-	// try to unmarshal data into GooglePayDetails
-	err = json.Unmarshal(data, &dst.GooglePayDetails)
+	// try to unmarshal data into GooglePayDonations
+	err = json.Unmarshal(data, &dst.GooglePayDonations)
 	if err == nil {
-		jsonGooglePayDetails, _ := json.Marshal(dst.GooglePayDetails)
-		if string(jsonGooglePayDetails) == "{}" || !dst.GooglePayDetails.isValidType() { // empty struct
-			dst.GooglePayDetails = nil
-		} else {
+		jsonGooglePayDonations, _ := json.Marshal(dst.GooglePayDonations)
+		if string(jsonGooglePayDonations) == "{}" || !dst.GooglePayDonations.isValidType() { // empty struct
+			dst.GooglePayDonations = nil
+        } else {
 			match++
 		}
 	} else {
-		dst.GooglePayDetails = nil
+		dst.GooglePayDonations = nil
 	}
 
-	// try to unmarshal data into IdealDetails
-	err = json.Unmarshal(data, &dst.IdealDetails)
+	// try to unmarshal data into IdealDonations
+	err = json.Unmarshal(data, &dst.IdealDonations)
 	if err == nil {
-		jsonIdealDetails, _ := json.Marshal(dst.IdealDetails)
-		if string(jsonIdealDetails) == "{}" || !dst.IdealDetails.isValidType() { // empty struct
-			dst.IdealDetails = nil
-		} else {
+		jsonIdealDonations, _ := json.Marshal(dst.IdealDonations)
+		if string(jsonIdealDonations) == "{}" || !dst.IdealDonations.isValidType() { // empty struct
+			dst.IdealDonations = nil
+        } else {
 			match++
 		}
 	} else {
-		dst.IdealDetails = nil
+		dst.IdealDonations = nil
 	}
 
-	// try to unmarshal data into PayWithGoogleDetails
-	err = json.Unmarshal(data, &dst.PayWithGoogleDetails)
+	// try to unmarshal data into PayWithGoogleDonations
+	err = json.Unmarshal(data, &dst.PayWithGoogleDonations)
 	if err == nil {
-		jsonPayWithGoogleDetails, _ := json.Marshal(dst.PayWithGoogleDetails)
-		if string(jsonPayWithGoogleDetails) == "{}" || !dst.PayWithGoogleDetails.isValidType() { // empty struct
-			dst.PayWithGoogleDetails = nil
-		} else {
+		jsonPayWithGoogleDonations, _ := json.Marshal(dst.PayWithGoogleDonations)
+		if string(jsonPayWithGoogleDonations) == "{}" || !dst.PayWithGoogleDonations.isValidType() { // empty struct
+			dst.PayWithGoogleDonations = nil
+        } else {
 			match++
 		}
 	} else {
-		dst.PayWithGoogleDetails = nil
+		dst.PayWithGoogleDonations = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.ApplePayDetails = nil
-		dst.CardDetails = nil
-		dst.GooglePayDetails = nil
-		dst.IdealDetails = nil
-		dst.PayWithGoogleDetails = nil
+		dst.ApplePayDonations = nil
+		dst.CardDonations = nil
+		dst.GooglePayDonations = nil
+		dst.IdealDonations = nil
+		dst.PayWithGoogleDonations = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(DonationPaymentMethod)")
 	} else if match == 1 {
@@ -144,52 +146,52 @@ func (dst *DonationPaymentMethod) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src DonationPaymentMethod) MarshalJSON() ([]byte, error) {
-	if src.ApplePayDetails != nil {
-		return json.Marshal(&src.ApplePayDetails)
+	if src.ApplePayDonations != nil {
+		return json.Marshal(&src.ApplePayDonations)
 	}
 
-	if src.CardDetails != nil {
-		return json.Marshal(&src.CardDetails)
+	if src.CardDonations != nil {
+		return json.Marshal(&src.CardDonations)
 	}
 
-	if src.GooglePayDetails != nil {
-		return json.Marshal(&src.GooglePayDetails)
+	if src.GooglePayDonations != nil {
+		return json.Marshal(&src.GooglePayDonations)
 	}
 
-	if src.IdealDetails != nil {
-		return json.Marshal(&src.IdealDetails)
+	if src.IdealDonations != nil {
+		return json.Marshal(&src.IdealDonations)
 	}
 
-	if src.PayWithGoogleDetails != nil {
-		return json.Marshal(&src.PayWithGoogleDetails)
+	if src.PayWithGoogleDonations != nil {
+		return json.Marshal(&src.PayWithGoogleDonations)
 	}
 
 	return nil, nil // no data in oneOf schemas
 }
 
 // Get the actual instance
-func (obj *DonationPaymentMethod) GetActualInstance() interface{} {
+func (obj *DonationPaymentMethod) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.ApplePayDetails != nil {
-		return obj.ApplePayDetails
+	if obj.ApplePayDonations != nil {
+		return obj.ApplePayDonations
 	}
 
-	if obj.CardDetails != nil {
-		return obj.CardDetails
+	if obj.CardDonations != nil {
+		return obj.CardDonations
 	}
 
-	if obj.GooglePayDetails != nil {
-		return obj.GooglePayDetails
+	if obj.GooglePayDonations != nil {
+		return obj.GooglePayDonations
 	}
 
-	if obj.IdealDetails != nil {
-		return obj.IdealDetails
+	if obj.IdealDonations != nil {
+		return obj.IdealDonations
 	}
 
-	if obj.PayWithGoogleDetails != nil {
-		return obj.PayWithGoogleDetails
+	if obj.PayWithGoogleDonations != nil {
+		return obj.PayWithGoogleDonations
 	}
 
 	// all schemas are nil
@@ -231,3 +233,5 @@ func (v *NullableDonationPaymentMethod) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

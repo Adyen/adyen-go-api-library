@@ -10,8 +10,8 @@ package managementwebhook
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v8/src/common"
+    "github.com/adyen/adyen-go-api-library/v8/src/common"
+	"time"
 )
 
 // checks if the AccountCapabilityData type satisfies the MappedNullable interface at compile time
@@ -31,7 +31,9 @@ type AccountCapabilityData struct {
 	Requested bool `json:"requested"`
 	// The level that you requested for the capability. Some capabilities have different levels which correspond to thresholds. Higher levels may require additional checks and increased monitoring.Possible values: **notApplicable**, **low**, **medium**, **high**.
 	RequestedLevel string `json:"requestedLevel"`
-	// The status of the verification checks for the capability.  Possible values:  * **pending**: Adyen is running the verification.  * **invalid**: The verification failed. Check if the `errors` array contains more information.  * **valid**: The verification was successful.  * **rejected**: Adyen checked the information and found reasons to not allow the capability.
+	// The verification deadline for the capability that will be disallowed if verification errors are not resolved.
+	VerificationDeadline *time.Time `json:"verificationDeadline,omitempty"`
+	// The status of the verification checks for the capability.  Possible values:  * **pending**: Adyen is running the verification.  * **invalid**: The verification failed. Check if the `errors` array contains more information.  * **valid**: The verification was successful.  * **rejected**: Adyen checked the information and found reasons to not allow the capability. 
 	VerificationStatus *string `json:"verificationStatus,omitempty"`
 }
 
@@ -230,6 +232,38 @@ func (o *AccountCapabilityData) SetRequestedLevel(v string) {
 	o.RequestedLevel = v
 }
 
+// GetVerificationDeadline returns the VerificationDeadline field value if set, zero value otherwise.
+func (o *AccountCapabilityData) GetVerificationDeadline() time.Time {
+	if o == nil || common.IsNil(o.VerificationDeadline) {
+		var ret time.Time
+		return ret
+	}
+	return *o.VerificationDeadline
+}
+
+// GetVerificationDeadlineOk returns a tuple with the VerificationDeadline field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AccountCapabilityData) GetVerificationDeadlineOk() (*time.Time, bool) {
+	if o == nil || common.IsNil(o.VerificationDeadline) {
+		return nil, false
+	}
+	return o.VerificationDeadline, true
+}
+
+// HasVerificationDeadline returns a boolean if a field has been set.
+func (o *AccountCapabilityData) HasVerificationDeadline() bool {
+	if o != nil && !common.IsNil(o.VerificationDeadline) {
+		return true
+	}
+
+	return false
+}
+
+// SetVerificationDeadline gets a reference to the given time.Time and assigns it to the VerificationDeadline field.
+func (o *AccountCapabilityData) SetVerificationDeadline(v time.Time) {
+	o.VerificationDeadline = &v
+}
+
 // GetVerificationStatus returns the VerificationStatus field value if set, zero value otherwise.
 func (o *AccountCapabilityData) GetVerificationStatus() string {
 	if o == nil || common.IsNil(o.VerificationStatus) {
@@ -263,7 +297,7 @@ func (o *AccountCapabilityData) SetVerificationStatus(v string) {
 }
 
 func (o AccountCapabilityData) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -286,6 +320,9 @@ func (o AccountCapabilityData) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["requested"] = o.Requested
 	toSerialize["requestedLevel"] = o.RequestedLevel
+	if !common.IsNil(o.VerificationDeadline) {
+		toSerialize["verificationDeadline"] = o.VerificationDeadline
+	}
 	if !common.IsNil(o.VerificationStatus) {
 		toSerialize["verificationStatus"] = o.VerificationStatus
 	}
@@ -327,3 +364,6 @@ func (v *NullableAccountCapabilityData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

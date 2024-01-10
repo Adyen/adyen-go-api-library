@@ -10,9 +10,8 @@ package transferwebhook
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v8/src/common"
 	"time"
-
-	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the TransferEvent type satisfies the MappedNullable interface at compile time
@@ -28,17 +27,13 @@ type TransferEvent struct {
 	// The estimated time the beneficiary should have access to the funds.
 	EstimatedArrivalTime *time.Time `json:"estimatedArrivalTime,omitempty"`
 	// The unique identifier of the transfer event.
-	Id           *string       `json:"id,omitempty"`
+	Id *string `json:"id,omitempty"`
 	Modification *Modification `json:"modification,omitempty"`
 	// The list of the balance mutation per event.
-	Mutations      []BalanceMutation `json:"mutations,omitempty"`
-	OriginalAmount *Amount           `json:"originalAmount,omitempty"`
+	Mutations []BalanceMutation `json:"mutations,omitempty"`
+	OriginalAmount *Amount `json:"originalAmount,omitempty"`
 	// The reason for the transfer status.
 	Reason *string `json:"reason,omitempty"`
-	// SchemeTraceID retrieved from scheme.
-	SchemeTraceID *string `json:"schemeTraceID,omitempty"`
-	// SchemeUniqueTransactionID retrieved from scheme.
-	SchemeUniqueTransactionID *string `json:"schemeUniqueTransactionID,omitempty"`
 	// The status of the transfer event.
 	Status *string `json:"status,omitempty"`
 	// The id of the transaction that is related to this accounting event. Only sent for events of type **accounting** where the balance changes.
@@ -356,70 +351,6 @@ func (o *TransferEvent) SetReason(v string) {
 	o.Reason = &v
 }
 
-// GetSchemeTraceID returns the SchemeTraceID field value if set, zero value otherwise.
-func (o *TransferEvent) GetSchemeTraceID() string {
-	if o == nil || common.IsNil(o.SchemeTraceID) {
-		var ret string
-		return ret
-	}
-	return *o.SchemeTraceID
-}
-
-// GetSchemeTraceIDOk returns a tuple with the SchemeTraceID field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TransferEvent) GetSchemeTraceIDOk() (*string, bool) {
-	if o == nil || common.IsNil(o.SchemeTraceID) {
-		return nil, false
-	}
-	return o.SchemeTraceID, true
-}
-
-// HasSchemeTraceID returns a boolean if a field has been set.
-func (o *TransferEvent) HasSchemeTraceID() bool {
-	if o != nil && !common.IsNil(o.SchemeTraceID) {
-		return true
-	}
-
-	return false
-}
-
-// SetSchemeTraceID gets a reference to the given string and assigns it to the SchemeTraceID field.
-func (o *TransferEvent) SetSchemeTraceID(v string) {
-	o.SchemeTraceID = &v
-}
-
-// GetSchemeUniqueTransactionID returns the SchemeUniqueTransactionID field value if set, zero value otherwise.
-func (o *TransferEvent) GetSchemeUniqueTransactionID() string {
-	if o == nil || common.IsNil(o.SchemeUniqueTransactionID) {
-		var ret string
-		return ret
-	}
-	return *o.SchemeUniqueTransactionID
-}
-
-// GetSchemeUniqueTransactionIDOk returns a tuple with the SchemeUniqueTransactionID field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TransferEvent) GetSchemeUniqueTransactionIDOk() (*string, bool) {
-	if o == nil || common.IsNil(o.SchemeUniqueTransactionID) {
-		return nil, false
-	}
-	return o.SchemeUniqueTransactionID, true
-}
-
-// HasSchemeUniqueTransactionID returns a boolean if a field has been set.
-func (o *TransferEvent) HasSchemeUniqueTransactionID() bool {
-	if o != nil && !common.IsNil(o.SchemeUniqueTransactionID) {
-		return true
-	}
-
-	return false
-}
-
-// SetSchemeUniqueTransactionID gets a reference to the given string and assigns it to the SchemeUniqueTransactionID field.
-func (o *TransferEvent) SetSchemeUniqueTransactionID(v string) {
-	o.SchemeUniqueTransactionID = &v
-}
-
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *TransferEvent) GetStatus() string {
 	if o == nil || common.IsNil(o.Status) {
@@ -581,7 +512,7 @@ func (o *TransferEvent) SetValueDate(v time.Time) {
 }
 
 func (o TransferEvent) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -616,12 +547,6 @@ func (o TransferEvent) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Reason) {
 		toSerialize["reason"] = o.Reason
-	}
-	if !common.IsNil(o.SchemeTraceID) {
-		toSerialize["schemeTraceID"] = o.SchemeTraceID
-	}
-	if !common.IsNil(o.SchemeUniqueTransactionID) {
-		toSerialize["schemeUniqueTransactionID"] = o.SchemeUniqueTransactionID
 	}
 	if !common.IsNil(o.Status) {
 		toSerialize["status"] = o.Status
@@ -677,30 +602,32 @@ func (v *NullableTransferEvent) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *TransferEvent) isValidReason() bool {
-	var allowedEnumValues = []string{"amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declinedByTransactionRule", "error", "notEnoughBalance", "refusedByCounterpartyBank", "routeNotFound", "scaFailed", "unknown"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetReason() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declinedByTransactionRule", "error", "notEnoughBalance", "refusedByCounterpartyBank", "routeNotFound", "scaFailed", "unknown" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetReason() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *TransferEvent) isValidStatus() bool {
-	var allowedEnumValues = []string{"approvalPending", "atmWithdrawal", "atmWithdrawalReversalPending", "atmWithdrawalReversed", "authAdjustmentAuthorised", "authAdjustmentError", "authAdjustmentRefused", "authorised", "bankTransfer", "bankTransferPending", "booked", "bookingPending", "cancelled", "capturePending", "captureReversalPending", "captureReversed", "captured", "capturedExternally", "chargeback", "chargebackExternally", "chargebackPending", "chargebackReversalPending", "chargebackReversed", "credited", "depositCorrection", "depositCorrectionPending", "dispute", "disputeClosed", "disputeExpired", "disputeNeedsReview", "error", "expired", "failed", "fee", "feePending", "internalTransfer", "internalTransferPending", "invoiceDeduction", "invoiceDeductionPending", "manualCorrectionPending", "manuallyCorrected", "matchedStatement", "matchedStatementPending", "merchantPayin", "merchantPayinPending", "merchantPayinReversed", "merchantPayinReversedPending", "miscCost", "miscCostPending", "paymentCost", "paymentCostPending", "received", "refundPending", "refundReversalPending", "refundReversed", "refunded", "refundedExternally", "refused", "reserveAdjustment", "reserveAdjustmentPending", "returned", "secondChargeback", "secondChargebackPending", "undefined"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetStatus() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "approvalPending", "atmWithdrawal", "atmWithdrawalReversalPending", "atmWithdrawalReversed", "authAdjustmentAuthorised", "authAdjustmentError", "authAdjustmentRefused", "authorised", "bankTransfer", "bankTransferPending", "booked", "bookingPending", "cancelled", "capturePending", "captureReversalPending", "captureReversed", "captured", "capturedExternally", "chargeback", "chargebackExternally", "chargebackPending", "chargebackReversalPending", "chargebackReversed", "credited", "depositCorrection", "depositCorrectionPending", "dispute", "disputeClosed", "disputeExpired", "disputeNeedsReview", "error", "expired", "failed", "fee", "feePending", "internalTransfer", "internalTransferPending", "invoiceDeduction", "invoiceDeductionPending", "manualCorrectionPending", "manuallyCorrected", "matchedStatement", "matchedStatementPending", "merchantPayin", "merchantPayinPending", "merchantPayinReversed", "merchantPayinReversedPending", "miscCost", "miscCostPending", "paymentCost", "paymentCostPending", "received", "refundPending", "refundReversalPending", "refundReversed", "refunded", "refundedExternally", "refused", "reserveAdjustment", "reserveAdjustmentPending", "returned", "secondChargeback", "secondChargebackPending", "undefined" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetStatus() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *TransferEvent) isValidType() bool {
-	var allowedEnumValues = []string{"accounting", "tracking"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "accounting", "tracking" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+
