@@ -21,6 +21,8 @@ type APIClient struct {
 
 	ClassicCheckoutSDKApi *ClassicCheckoutSDKApi
 
+	DonationsApi *DonationsApi
+
 	ModificationsApi *ModificationsApi
 
 	OrdersApi *OrdersApi
@@ -44,6 +46,7 @@ func NewAPIClient(client *common.Client) *APIClient {
 
 	// API Services
 	c.ClassicCheckoutSDKApi = (*ClassicCheckoutSDKApi)(&c.common)
+	c.DonationsApi = (*DonationsApi)(&c.common)
 	c.ModificationsApi = (*ModificationsApi)(&c.common)
 	c.OrdersApi = (*OrdersApi)(&c.common)
 	c.PaymentLinksApi = (*PaymentLinksApi)(&c.common)

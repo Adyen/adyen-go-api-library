@@ -22,7 +22,7 @@ type BusinessLineInfo struct {
 	// The capability for which you are creating the business line.  Possible values: **receivePayments**, **receiveFromPlatformPayments**, **issueBankAccount**
 	// Deprecated
 	Capability *string `json:"capability,omitempty"`
-	// A code that represents the industry of the legal entity. For example, **4431A** for computer software stores.
+	// A code that represents the [industry of the legal entity](https://docs.adyen.com/marketplaces-and-platforms/verification-requirements/reference-additional-products/#list-industry-codes). For example, **4431A** for computer software stores.
 	IndustryCode string `json:"industryCode"`
 	// Unique identifier of the [legal entity](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/legalEntities__resParam_id) that owns the business line.
 	LegalEntityId string `json:"legalEntityId"`

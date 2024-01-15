@@ -24,7 +24,7 @@ type TransfersApi common.Service
 
 // All parameters accepted by TransfersApi.ReturnTransfer
 type TransfersApiReturnTransferInput struct {
-	id                    string
+	transferId            string
 	returnTransferRequest *ReturnTransferRequest
 }
 
@@ -35,12 +35,12 @@ func (r TransfersApiReturnTransferInput) ReturnTransferRequest(returnTransferReq
 
 /*
 Prepare a request for ReturnTransfer
-@param id The unique identifier of the transfer to be returned.
+@param transferId The unique identifier of the transfer to be returned.
 @return TransfersApiReturnTransferInput
 */
-func (a *TransfersApi) ReturnTransferInput(id string) TransfersApiReturnTransferInput {
+func (a *TransfersApi) ReturnTransferInput(transferId string) TransfersApiReturnTransferInput {
 	return TransfersApiReturnTransferInput{
-		id: id,
+		transferId: transferId,
 	}
 }
 
@@ -55,8 +55,8 @@ Returns previously transferred funds without creating a new `transferId`.
 */
 func (a *TransfersApi) ReturnTransfer(ctx context.Context, r TransfersApiReturnTransferInput) (ReturnTransferResponse, *http.Response, error) {
 	res := &ReturnTransferResponse{}
-	path := "/transfers/{id}/returns"
-	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	path := "/transfers/{transferId}/returns"
+	path = strings.Replace(path, "{"+"transferId"+"}", url.PathEscape(common.ParameterValueToString(r.transferId, "transferId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
 	httpRes, err := common.SendAPIRequest(

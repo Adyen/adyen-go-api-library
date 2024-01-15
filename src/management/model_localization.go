@@ -21,6 +21,8 @@ var _ common.MappedNullable = &Localization{}
 type Localization struct {
 	// Language of the terminal.
 	Language *string `json:"language,omitempty"`
+	// Secondary language of the terminal.
+	SecondaryLanguage *string `json:"secondaryLanguage,omitempty"`
 }
 
 // NewLocalization instantiates a new Localization object
@@ -72,6 +74,38 @@ func (o *Localization) SetLanguage(v string) {
 	o.Language = &v
 }
 
+// GetSecondaryLanguage returns the SecondaryLanguage field value if set, zero value otherwise.
+func (o *Localization) GetSecondaryLanguage() string {
+	if o == nil || common.IsNil(o.SecondaryLanguage) {
+		var ret string
+		return ret
+	}
+	return *o.SecondaryLanguage
+}
+
+// GetSecondaryLanguageOk returns a tuple with the SecondaryLanguage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Localization) GetSecondaryLanguageOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SecondaryLanguage) {
+		return nil, false
+	}
+	return o.SecondaryLanguage, true
+}
+
+// HasSecondaryLanguage returns a boolean if a field has been set.
+func (o *Localization) HasSecondaryLanguage() bool {
+	if o != nil && !common.IsNil(o.SecondaryLanguage) {
+		return true
+	}
+
+	return false
+}
+
+// SetSecondaryLanguage gets a reference to the given string and assigns it to the SecondaryLanguage field.
+func (o *Localization) SetSecondaryLanguage(v string) {
+	o.SecondaryLanguage = &v
+}
+
 func (o Localization) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -84,6 +118,9 @@ func (o Localization) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.Language) {
 		toSerialize["language"] = o.Language
+	}
+	if !common.IsNil(o.SecondaryLanguage) {
+		toSerialize["secondaryLanguage"] = o.SecondaryLanguage
 	}
 	return toSerialize, nil
 }

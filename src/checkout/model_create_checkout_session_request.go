@@ -101,6 +101,8 @@ type CreateCheckoutSessionRequest struct {
 	ShopperStatement *string `json:"shopperStatement,omitempty"`
 	// Set to true to show the payment amount per installment.
 	ShowInstallmentAmount *bool `json:"showInstallmentAmount,omitempty"`
+	// Set to **true** to show a button that lets the shopper remove a stored payment method.
+	ShowRemovePaymentMethodButton *bool `json:"showRemovePaymentMethodButton,omitempty"`
 	// The shopper's social security number.
 	SocialSecurityNumber *string `json:"socialSecurityNumber,omitempty"`
 	// Boolean value indicating whether the card payment method should be split into separate debit and credit options.
@@ -1661,6 +1663,38 @@ func (o *CreateCheckoutSessionRequest) SetShowInstallmentAmount(v bool) {
 	o.ShowInstallmentAmount = &v
 }
 
+// GetShowRemovePaymentMethodButton returns the ShowRemovePaymentMethodButton field value if set, zero value otherwise.
+func (o *CreateCheckoutSessionRequest) GetShowRemovePaymentMethodButton() bool {
+	if o == nil || common.IsNil(o.ShowRemovePaymentMethodButton) {
+		var ret bool
+		return ret
+	}
+	return *o.ShowRemovePaymentMethodButton
+}
+
+// GetShowRemovePaymentMethodButtonOk returns a tuple with the ShowRemovePaymentMethodButton field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCheckoutSessionRequest) GetShowRemovePaymentMethodButtonOk() (*bool, bool) {
+	if o == nil || common.IsNil(o.ShowRemovePaymentMethodButton) {
+		return nil, false
+	}
+	return o.ShowRemovePaymentMethodButton, true
+}
+
+// HasShowRemovePaymentMethodButton returns a boolean if a field has been set.
+func (o *CreateCheckoutSessionRequest) HasShowRemovePaymentMethodButton() bool {
+	if o != nil && !common.IsNil(o.ShowRemovePaymentMethodButton) {
+		return true
+	}
+
+	return false
+}
+
+// SetShowRemovePaymentMethodButton gets a reference to the given bool and assigns it to the ShowRemovePaymentMethodButton field.
+func (o *CreateCheckoutSessionRequest) SetShowRemovePaymentMethodButton(v bool) {
+	o.ShowRemovePaymentMethodButton = &v
+}
+
 // GetSocialSecurityNumber returns the SocialSecurityNumber field value if set, zero value otherwise.
 func (o *CreateCheckoutSessionRequest) GetSocialSecurityNumber() string {
 	if o == nil || common.IsNil(o.SocialSecurityNumber) {
@@ -2129,6 +2163,9 @@ func (o CreateCheckoutSessionRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.ShowInstallmentAmount) {
 		toSerialize["showInstallmentAmount"] = o.ShowInstallmentAmount
+	}
+	if !common.IsNil(o.ShowRemovePaymentMethodButton) {
+		toSerialize["showRemovePaymentMethodButton"] = o.ShowRemovePaymentMethodButton
 	}
 	if !common.IsNil(o.SocialSecurityNumber) {
 		toSerialize["socialSecurityNumber"] = o.SocialSecurityNumber

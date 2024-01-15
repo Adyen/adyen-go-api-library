@@ -23,7 +23,7 @@ type ReturnTransferResponse struct {
 	Id *string `json:"id,omitempty"`
 	// Your internal reference for the return.
 	Reference *string `json:"reference,omitempty"`
-	// The resulting status of the return.  For example: **authorised**, **booked**, **error**.
+	// The resulting status of the return.  Possible values: **Authorised**, **Declined**.
 	Status *string `json:"status,omitempty"`
 	// The unique identifier of the original transfer.
 	TransferId *string `json:"transferId,omitempty"`

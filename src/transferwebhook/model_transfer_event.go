@@ -35,10 +35,6 @@ type TransferEvent struct {
 	OriginalAmount *Amount           `json:"originalAmount,omitempty"`
 	// The reason for the transfer status.
 	Reason *string `json:"reason,omitempty"`
-	// SchemeTraceID retrieved from scheme.
-	SchemeTraceID *string `json:"schemeTraceID,omitempty"`
-	// SchemeUniqueTransactionID retrieved from scheme.
-	SchemeUniqueTransactionID *string `json:"schemeUniqueTransactionID,omitempty"`
 	// The status of the transfer event.
 	Status *string `json:"status,omitempty"`
 	// The id of the transaction that is related to this accounting event. Only sent for events of type **accounting** where the balance changes.
@@ -356,70 +352,6 @@ func (o *TransferEvent) SetReason(v string) {
 	o.Reason = &v
 }
 
-// GetSchemeTraceID returns the SchemeTraceID field value if set, zero value otherwise.
-func (o *TransferEvent) GetSchemeTraceID() string {
-	if o == nil || common.IsNil(o.SchemeTraceID) {
-		var ret string
-		return ret
-	}
-	return *o.SchemeTraceID
-}
-
-// GetSchemeTraceIDOk returns a tuple with the SchemeTraceID field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TransferEvent) GetSchemeTraceIDOk() (*string, bool) {
-	if o == nil || common.IsNil(o.SchemeTraceID) {
-		return nil, false
-	}
-	return o.SchemeTraceID, true
-}
-
-// HasSchemeTraceID returns a boolean if a field has been set.
-func (o *TransferEvent) HasSchemeTraceID() bool {
-	if o != nil && !common.IsNil(o.SchemeTraceID) {
-		return true
-	}
-
-	return false
-}
-
-// SetSchemeTraceID gets a reference to the given string and assigns it to the SchemeTraceID field.
-func (o *TransferEvent) SetSchemeTraceID(v string) {
-	o.SchemeTraceID = &v
-}
-
-// GetSchemeUniqueTransactionID returns the SchemeUniqueTransactionID field value if set, zero value otherwise.
-func (o *TransferEvent) GetSchemeUniqueTransactionID() string {
-	if o == nil || common.IsNil(o.SchemeUniqueTransactionID) {
-		var ret string
-		return ret
-	}
-	return *o.SchemeUniqueTransactionID
-}
-
-// GetSchemeUniqueTransactionIDOk returns a tuple with the SchemeUniqueTransactionID field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TransferEvent) GetSchemeUniqueTransactionIDOk() (*string, bool) {
-	if o == nil || common.IsNil(o.SchemeUniqueTransactionID) {
-		return nil, false
-	}
-	return o.SchemeUniqueTransactionID, true
-}
-
-// HasSchemeUniqueTransactionID returns a boolean if a field has been set.
-func (o *TransferEvent) HasSchemeUniqueTransactionID() bool {
-	if o != nil && !common.IsNil(o.SchemeUniqueTransactionID) {
-		return true
-	}
-
-	return false
-}
-
-// SetSchemeUniqueTransactionID gets a reference to the given string and assigns it to the SchemeUniqueTransactionID field.
-func (o *TransferEvent) SetSchemeUniqueTransactionID(v string) {
-	o.SchemeUniqueTransactionID = &v
-}
-
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *TransferEvent) GetStatus() string {
 	if o == nil || common.IsNil(o.Status) {
@@ -616,12 +548,6 @@ func (o TransferEvent) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Reason) {
 		toSerialize["reason"] = o.Reason
-	}
-	if !common.IsNil(o.SchemeTraceID) {
-		toSerialize["schemeTraceID"] = o.SchemeTraceID
-	}
-	if !common.IsNil(o.SchemeUniqueTransactionID) {
-		toSerialize["schemeUniqueTransactionID"] = o.SchemeUniqueTransactionID
 	}
 	if !common.IsNil(o.Status) {
 		toSerialize["status"] = o.Status

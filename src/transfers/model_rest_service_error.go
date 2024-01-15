@@ -28,9 +28,8 @@ type RestServiceError struct {
 	// Detailed explanation of each validation error, when applicable.
 	InvalidFields []InvalidField `json:"invalidFields,omitempty"`
 	// A unique reference for the request, essentially the same as `pspReference`.
-	RequestId *string `json:"requestId,omitempty"`
-	// JSON response payload.
-	Response map[string]interface{} `json:"response,omitempty"`
+	RequestId *string                `json:"requestId,omitempty"`
+	Response  map[string]interface{} `json:"response,omitempty"`
 	// The HTTP status code.
 	Status int32 `json:"status"`
 	// A short, human-readable summary of the problem type.

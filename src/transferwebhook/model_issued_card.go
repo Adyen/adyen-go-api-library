@@ -19,11 +19,17 @@ var _ common.MappedNullable = &IssuedCard{}
 
 // IssuedCard struct for IssuedCard
 type IssuedCard struct {
+	// The authorisation type. For example, **defaultAuthorisation**, **preAuthorisation**, **finalAuthorisation**
+	AuthorisationType *string `json:"authorisationType,omitempty"`
 	// Indicates the method used for entering the PAN to initiate a transaction.  Possible values: **manual**, **chip**, **magstripe**, **contactless**, **cof**, **ecommerce**, **token**.
 	PanEntryMode *string `json:"panEntryMode,omitempty"`
 	// Contains information about how the payment was processed. For example, **ecommerce** for online or **pos** for in-person payments.
 	ProcessingType           *string                   `json:"processingType,omitempty"`
 	RelayedAuthorisationData *RelayedAuthorisationData `json:"relayedAuthorisationData,omitempty"`
+	// The identifier of the original payment provided by the scheme. The Id could be alphanumeric or numeric depending on the scheme. The schemeTraceID should be referring to an original schemeUniqueTransactionID provided in an earlier payment (not necessarily processed by Adyen). Instances of available schemeTraceId is authAdjustment or recurring payments.
+	SchemeTraceId *string `json:"schemeTraceId,omitempty"`
+	// The unique identifier created by the scheme. The ID could be alphanumeric or numeric depending on the scheme.
+	SchemeUniqueTransactionId *string `json:"schemeUniqueTransactionId,omitempty"`
 	// **issuedCard**
 	Type *string `json:"type,omitempty"`
 	// The evaluation of the validation facts. See [validation checks](https://docs.adyen.com/issuing/validation-checks) for more information.
@@ -49,6 +55,38 @@ func NewIssuedCardWithDefaults() *IssuedCard {
 	var type_ string = "issuedCard"
 	this.Type = &type_
 	return &this
+}
+
+// GetAuthorisationType returns the AuthorisationType field value if set, zero value otherwise.
+func (o *IssuedCard) GetAuthorisationType() string {
+	if o == nil || common.IsNil(o.AuthorisationType) {
+		var ret string
+		return ret
+	}
+	return *o.AuthorisationType
+}
+
+// GetAuthorisationTypeOk returns a tuple with the AuthorisationType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IssuedCard) GetAuthorisationTypeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.AuthorisationType) {
+		return nil, false
+	}
+	return o.AuthorisationType, true
+}
+
+// HasAuthorisationType returns a boolean if a field has been set.
+func (o *IssuedCard) HasAuthorisationType() bool {
+	if o != nil && !common.IsNil(o.AuthorisationType) {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthorisationType gets a reference to the given string and assigns it to the AuthorisationType field.
+func (o *IssuedCard) SetAuthorisationType(v string) {
+	o.AuthorisationType = &v
 }
 
 // GetPanEntryMode returns the PanEntryMode field value if set, zero value otherwise.
@@ -147,6 +185,70 @@ func (o *IssuedCard) SetRelayedAuthorisationData(v RelayedAuthorisationData) {
 	o.RelayedAuthorisationData = &v
 }
 
+// GetSchemeTraceId returns the SchemeTraceId field value if set, zero value otherwise.
+func (o *IssuedCard) GetSchemeTraceId() string {
+	if o == nil || common.IsNil(o.SchemeTraceId) {
+		var ret string
+		return ret
+	}
+	return *o.SchemeTraceId
+}
+
+// GetSchemeTraceIdOk returns a tuple with the SchemeTraceId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IssuedCard) GetSchemeTraceIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SchemeTraceId) {
+		return nil, false
+	}
+	return o.SchemeTraceId, true
+}
+
+// HasSchemeTraceId returns a boolean if a field has been set.
+func (o *IssuedCard) HasSchemeTraceId() bool {
+	if o != nil && !common.IsNil(o.SchemeTraceId) {
+		return true
+	}
+
+	return false
+}
+
+// SetSchemeTraceId gets a reference to the given string and assigns it to the SchemeTraceId field.
+func (o *IssuedCard) SetSchemeTraceId(v string) {
+	o.SchemeTraceId = &v
+}
+
+// GetSchemeUniqueTransactionId returns the SchemeUniqueTransactionId field value if set, zero value otherwise.
+func (o *IssuedCard) GetSchemeUniqueTransactionId() string {
+	if o == nil || common.IsNil(o.SchemeUniqueTransactionId) {
+		var ret string
+		return ret
+	}
+	return *o.SchemeUniqueTransactionId
+}
+
+// GetSchemeUniqueTransactionIdOk returns a tuple with the SchemeUniqueTransactionId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IssuedCard) GetSchemeUniqueTransactionIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SchemeUniqueTransactionId) {
+		return nil, false
+	}
+	return o.SchemeUniqueTransactionId, true
+}
+
+// HasSchemeUniqueTransactionId returns a boolean if a field has been set.
+func (o *IssuedCard) HasSchemeUniqueTransactionId() bool {
+	if o != nil && !common.IsNil(o.SchemeUniqueTransactionId) {
+		return true
+	}
+
+	return false
+}
+
+// SetSchemeUniqueTransactionId gets a reference to the given string and assigns it to the SchemeUniqueTransactionId field.
+func (o *IssuedCard) SetSchemeUniqueTransactionId(v string) {
+	o.SchemeUniqueTransactionId = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *IssuedCard) GetType() string {
 	if o == nil || common.IsNil(o.Type) {
@@ -221,6 +323,9 @@ func (o IssuedCard) MarshalJSON() ([]byte, error) {
 
 func (o IssuedCard) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.AuthorisationType) {
+		toSerialize["authorisationType"] = o.AuthorisationType
+	}
 	if !common.IsNil(o.PanEntryMode) {
 		toSerialize["panEntryMode"] = o.PanEntryMode
 	}
@@ -229,6 +334,12 @@ func (o IssuedCard) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.RelayedAuthorisationData) {
 		toSerialize["relayedAuthorisationData"] = o.RelayedAuthorisationData
+	}
+	if !common.IsNil(o.SchemeTraceId) {
+		toSerialize["schemeTraceId"] = o.SchemeTraceId
+	}
+	if !common.IsNil(o.SchemeUniqueTransactionId) {
+		toSerialize["schemeUniqueTransactionId"] = o.SchemeUniqueTransactionId
 	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type

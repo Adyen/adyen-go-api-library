@@ -28,9 +28,9 @@ type TransferData struct {
 	// The list of the latest balance statuses in the transfer.
 	Balances []BalanceMutation `json:"balances,omitempty"`
 	// The category of transfer.  Possible values:   - **bank**: Transfer to a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id) or a bank account.  - **internal**: Transfer to another [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id) within your platform.  - **issuedCard**: Transfer initiated by a Adyen-issued card.  - **platformPayment**: Fund movements related to payments that are acquired for your users.
-	Category     string                    `json:"category"`
-	CategoryData *TransferDataCategoryData `json:"categoryData,omitempty"`
-	Counterparty *CounterpartyV3           `json:"counterparty,omitempty"`
+	Category     string                            `json:"category"`
+	CategoryData *TransferDataCategoryData         `json:"categoryData,omitempty"`
+	Counterparty *TransferNotificationCounterParty `json:"counterparty,omitempty"`
 	// The date and time when the event was triggered, in ISO 8601 extended format. For example, **2020-12-18T10:15:30+01:00**.
 	CreationDate *time.Time `json:"creationDate,omitempty"`
 	// Your description for the transfer. It is used by most banks as the transfer description. We recommend sending a maximum of 140 characters, otherwise the description may be truncated.  Supported characters: **[a-z] [A-Z] [0-9] / - ?** **: ( ) . , ' + Space**  Supported characters for **regular** and **fast** transfers to a US counterparty: **[a-z] [A-Z] [0-9] & $ % # @** **~ = + - _ ' \" ! ?**
@@ -287,9 +287,9 @@ func (o *TransferData) SetCategoryData(v TransferDataCategoryData) {
 }
 
 // GetCounterparty returns the Counterparty field value if set, zero value otherwise.
-func (o *TransferData) GetCounterparty() CounterpartyV3 {
+func (o *TransferData) GetCounterparty() TransferNotificationCounterParty {
 	if o == nil || common.IsNil(o.Counterparty) {
-		var ret CounterpartyV3
+		var ret TransferNotificationCounterParty
 		return ret
 	}
 	return *o.Counterparty
@@ -297,7 +297,7 @@ func (o *TransferData) GetCounterparty() CounterpartyV3 {
 
 // GetCounterpartyOk returns a tuple with the Counterparty field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TransferData) GetCounterpartyOk() (*CounterpartyV3, bool) {
+func (o *TransferData) GetCounterpartyOk() (*TransferNotificationCounterParty, bool) {
 	if o == nil || common.IsNil(o.Counterparty) {
 		return nil, false
 	}
@@ -313,8 +313,8 @@ func (o *TransferData) HasCounterparty() bool {
 	return false
 }
 
-// SetCounterparty gets a reference to the given CounterpartyV3 and assigns it to the Counterparty field.
-func (o *TransferData) SetCounterparty(v CounterpartyV3) {
+// SetCounterparty gets a reference to the given TransferNotificationCounterParty and assigns it to the Counterparty field.
+func (o *TransferData) SetCounterparty(v TransferNotificationCounterParty) {
 	o.Counterparty = &v
 }
 

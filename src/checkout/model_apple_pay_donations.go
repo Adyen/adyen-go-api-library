@@ -14,52 +14,74 @@ import (
 	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
-// checks if the GooglePayDetails type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &GooglePayDetails{}
+// checks if the ApplePayDonations type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &ApplePayDonations{}
 
-// GooglePayDetails struct for GooglePayDetails
-type GooglePayDetails struct {
+// ApplePayDonations struct for ApplePayDonations
+type ApplePayDonations struct {
+	// The stringified and base64 encoded `paymentData` you retrieved from the Apple framework.
+	ApplePayToken string `json:"applePayToken"`
 	// The checkout attempt identifier.
 	CheckoutAttemptId *string `json:"checkoutAttemptId,omitempty"`
 	// The funding source that should be used when multiple sources are available. For Brazilian combo cards, by default the funding source is credit. To use debit, set this value to **debit**.
 	FundingSource *string `json:"fundingSource,omitempty"`
-	// The selected payment card network.
-	GooglePayCardNetwork *string `json:"googlePayCardNetwork,omitempty"`
-	// The `token` that you obtained from the [Google Pay API](https://developers.google.com/pay/api/web/reference/response-objects#PaymentData) `PaymentData` response.
-	GooglePayToken string `json:"googlePayToken"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
 	// Deprecated
 	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
 	StoredPaymentMethodId *string `json:"storedPaymentMethodId,omitempty"`
-	// **googlepay**, **paywithgoogle**
+	// **applepay**
 	Type *string `json:"type,omitempty"`
 }
 
-// NewGooglePayDetails instantiates a new GooglePayDetails object
+// NewApplePayDonations instantiates a new ApplePayDonations object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGooglePayDetails(googlePayToken string) *GooglePayDetails {
-	this := GooglePayDetails{}
-	this.GooglePayToken = googlePayToken
-	var type_ string = "googlepay"
+func NewApplePayDonations(applePayToken string) *ApplePayDonations {
+	this := ApplePayDonations{}
+	this.ApplePayToken = applePayToken
+	var type_ string = "applepay"
 	this.Type = &type_
 	return &this
 }
 
-// NewGooglePayDetailsWithDefaults instantiates a new GooglePayDetails object
+// NewApplePayDonationsWithDefaults instantiates a new ApplePayDonations object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewGooglePayDetailsWithDefaults() *GooglePayDetails {
-	this := GooglePayDetails{}
-	var type_ string = "googlepay"
+func NewApplePayDonationsWithDefaults() *ApplePayDonations {
+	this := ApplePayDonations{}
+	var type_ string = "applepay"
 	this.Type = &type_
 	return &this
+}
+
+// GetApplePayToken returns the ApplePayToken field value
+func (o *ApplePayDonations) GetApplePayToken() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ApplePayToken
+}
+
+// GetApplePayTokenOk returns a tuple with the ApplePayToken field value
+// and a boolean to check if the value has been set.
+func (o *ApplePayDonations) GetApplePayTokenOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ApplePayToken, true
+}
+
+// SetApplePayToken sets field value
+func (o *ApplePayDonations) SetApplePayToken(v string) {
+	o.ApplePayToken = v
 }
 
 // GetCheckoutAttemptId returns the CheckoutAttemptId field value if set, zero value otherwise.
-func (o *GooglePayDetails) GetCheckoutAttemptId() string {
+func (o *ApplePayDonations) GetCheckoutAttemptId() string {
 	if o == nil || common.IsNil(o.CheckoutAttemptId) {
 		var ret string
 		return ret
@@ -69,7 +91,7 @@ func (o *GooglePayDetails) GetCheckoutAttemptId() string {
 
 // GetCheckoutAttemptIdOk returns a tuple with the CheckoutAttemptId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GooglePayDetails) GetCheckoutAttemptIdOk() (*string, bool) {
+func (o *ApplePayDonations) GetCheckoutAttemptIdOk() (*string, bool) {
 	if o == nil || common.IsNil(o.CheckoutAttemptId) {
 		return nil, false
 	}
@@ -77,7 +99,7 @@ func (o *GooglePayDetails) GetCheckoutAttemptIdOk() (*string, bool) {
 }
 
 // HasCheckoutAttemptId returns a boolean if a field has been set.
-func (o *GooglePayDetails) HasCheckoutAttemptId() bool {
+func (o *ApplePayDonations) HasCheckoutAttemptId() bool {
 	if o != nil && !common.IsNil(o.CheckoutAttemptId) {
 		return true
 	}
@@ -86,12 +108,12 @@ func (o *GooglePayDetails) HasCheckoutAttemptId() bool {
 }
 
 // SetCheckoutAttemptId gets a reference to the given string and assigns it to the CheckoutAttemptId field.
-func (o *GooglePayDetails) SetCheckoutAttemptId(v string) {
+func (o *ApplePayDonations) SetCheckoutAttemptId(v string) {
 	o.CheckoutAttemptId = &v
 }
 
 // GetFundingSource returns the FundingSource field value if set, zero value otherwise.
-func (o *GooglePayDetails) GetFundingSource() string {
+func (o *ApplePayDonations) GetFundingSource() string {
 	if o == nil || common.IsNil(o.FundingSource) {
 		var ret string
 		return ret
@@ -101,7 +123,7 @@ func (o *GooglePayDetails) GetFundingSource() string {
 
 // GetFundingSourceOk returns a tuple with the FundingSource field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GooglePayDetails) GetFundingSourceOk() (*string, bool) {
+func (o *ApplePayDonations) GetFundingSourceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.FundingSource) {
 		return nil, false
 	}
@@ -109,7 +131,7 @@ func (o *GooglePayDetails) GetFundingSourceOk() (*string, bool) {
 }
 
 // HasFundingSource returns a boolean if a field has been set.
-func (o *GooglePayDetails) HasFundingSource() bool {
+func (o *ApplePayDonations) HasFundingSource() bool {
 	if o != nil && !common.IsNil(o.FundingSource) {
 		return true
 	}
@@ -118,69 +140,13 @@ func (o *GooglePayDetails) HasFundingSource() bool {
 }
 
 // SetFundingSource gets a reference to the given string and assigns it to the FundingSource field.
-func (o *GooglePayDetails) SetFundingSource(v string) {
+func (o *ApplePayDonations) SetFundingSource(v string) {
 	o.FundingSource = &v
-}
-
-// GetGooglePayCardNetwork returns the GooglePayCardNetwork field value if set, zero value otherwise.
-func (o *GooglePayDetails) GetGooglePayCardNetwork() string {
-	if o == nil || common.IsNil(o.GooglePayCardNetwork) {
-		var ret string
-		return ret
-	}
-	return *o.GooglePayCardNetwork
-}
-
-// GetGooglePayCardNetworkOk returns a tuple with the GooglePayCardNetwork field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GooglePayDetails) GetGooglePayCardNetworkOk() (*string, bool) {
-	if o == nil || common.IsNil(o.GooglePayCardNetwork) {
-		return nil, false
-	}
-	return o.GooglePayCardNetwork, true
-}
-
-// HasGooglePayCardNetwork returns a boolean if a field has been set.
-func (o *GooglePayDetails) HasGooglePayCardNetwork() bool {
-	if o != nil && !common.IsNil(o.GooglePayCardNetwork) {
-		return true
-	}
-
-	return false
-}
-
-// SetGooglePayCardNetwork gets a reference to the given string and assigns it to the GooglePayCardNetwork field.
-func (o *GooglePayDetails) SetGooglePayCardNetwork(v string) {
-	o.GooglePayCardNetwork = &v
-}
-
-// GetGooglePayToken returns the GooglePayToken field value
-func (o *GooglePayDetails) GetGooglePayToken() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.GooglePayToken
-}
-
-// GetGooglePayTokenOk returns a tuple with the GooglePayToken field value
-// and a boolean to check if the value has been set.
-func (o *GooglePayDetails) GetGooglePayTokenOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.GooglePayToken, true
-}
-
-// SetGooglePayToken sets field value
-func (o *GooglePayDetails) SetGooglePayToken(v string) {
-	o.GooglePayToken = v
 }
 
 // GetRecurringDetailReference returns the RecurringDetailReference field value if set, zero value otherwise.
 // Deprecated
-func (o *GooglePayDetails) GetRecurringDetailReference() string {
+func (o *ApplePayDonations) GetRecurringDetailReference() string {
 	if o == nil || common.IsNil(o.RecurringDetailReference) {
 		var ret string
 		return ret
@@ -191,7 +157,7 @@ func (o *GooglePayDetails) GetRecurringDetailReference() string {
 // GetRecurringDetailReferenceOk returns a tuple with the RecurringDetailReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // Deprecated
-func (o *GooglePayDetails) GetRecurringDetailReferenceOk() (*string, bool) {
+func (o *ApplePayDonations) GetRecurringDetailReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.RecurringDetailReference) {
 		return nil, false
 	}
@@ -199,7 +165,7 @@ func (o *GooglePayDetails) GetRecurringDetailReferenceOk() (*string, bool) {
 }
 
 // HasRecurringDetailReference returns a boolean if a field has been set.
-func (o *GooglePayDetails) HasRecurringDetailReference() bool {
+func (o *ApplePayDonations) HasRecurringDetailReference() bool {
 	if o != nil && !common.IsNil(o.RecurringDetailReference) {
 		return true
 	}
@@ -209,12 +175,12 @@ func (o *GooglePayDetails) HasRecurringDetailReference() bool {
 
 // SetRecurringDetailReference gets a reference to the given string and assigns it to the RecurringDetailReference field.
 // Deprecated
-func (o *GooglePayDetails) SetRecurringDetailReference(v string) {
+func (o *ApplePayDonations) SetRecurringDetailReference(v string) {
 	o.RecurringDetailReference = &v
 }
 
 // GetStoredPaymentMethodId returns the StoredPaymentMethodId field value if set, zero value otherwise.
-func (o *GooglePayDetails) GetStoredPaymentMethodId() string {
+func (o *ApplePayDonations) GetStoredPaymentMethodId() string {
 	if o == nil || common.IsNil(o.StoredPaymentMethodId) {
 		var ret string
 		return ret
@@ -224,7 +190,7 @@ func (o *GooglePayDetails) GetStoredPaymentMethodId() string {
 
 // GetStoredPaymentMethodIdOk returns a tuple with the StoredPaymentMethodId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GooglePayDetails) GetStoredPaymentMethodIdOk() (*string, bool) {
+func (o *ApplePayDonations) GetStoredPaymentMethodIdOk() (*string, bool) {
 	if o == nil || common.IsNil(o.StoredPaymentMethodId) {
 		return nil, false
 	}
@@ -232,7 +198,7 @@ func (o *GooglePayDetails) GetStoredPaymentMethodIdOk() (*string, bool) {
 }
 
 // HasStoredPaymentMethodId returns a boolean if a field has been set.
-func (o *GooglePayDetails) HasStoredPaymentMethodId() bool {
+func (o *ApplePayDonations) HasStoredPaymentMethodId() bool {
 	if o != nil && !common.IsNil(o.StoredPaymentMethodId) {
 		return true
 	}
@@ -241,12 +207,12 @@ func (o *GooglePayDetails) HasStoredPaymentMethodId() bool {
 }
 
 // SetStoredPaymentMethodId gets a reference to the given string and assigns it to the StoredPaymentMethodId field.
-func (o *GooglePayDetails) SetStoredPaymentMethodId(v string) {
+func (o *ApplePayDonations) SetStoredPaymentMethodId(v string) {
 	o.StoredPaymentMethodId = &v
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
-func (o *GooglePayDetails) GetType() string {
+func (o *ApplePayDonations) GetType() string {
 	if o == nil || common.IsNil(o.Type) {
 		var ret string
 		return ret
@@ -256,7 +222,7 @@ func (o *GooglePayDetails) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GooglePayDetails) GetTypeOk() (*string, bool) {
+func (o *ApplePayDonations) GetTypeOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Type) {
 		return nil, false
 	}
@@ -264,7 +230,7 @@ func (o *GooglePayDetails) GetTypeOk() (*string, bool) {
 }
 
 // HasType returns a boolean if a field has been set.
-func (o *GooglePayDetails) HasType() bool {
+func (o *ApplePayDonations) HasType() bool {
 	if o != nil && !common.IsNil(o.Type) {
 		return true
 	}
@@ -273,11 +239,11 @@ func (o *GooglePayDetails) HasType() bool {
 }
 
 // SetType gets a reference to the given string and assigns it to the Type field.
-func (o *GooglePayDetails) SetType(v string) {
+func (o *ApplePayDonations) SetType(v string) {
 	o.Type = &v
 }
 
-func (o GooglePayDetails) MarshalJSON() ([]byte, error) {
+func (o ApplePayDonations) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -285,18 +251,15 @@ func (o GooglePayDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GooglePayDetails) ToMap() (map[string]interface{}, error) {
+func (o ApplePayDonations) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["applePayToken"] = o.ApplePayToken
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
 	if !common.IsNil(o.FundingSource) {
 		toSerialize["fundingSource"] = o.FundingSource
 	}
-	if !common.IsNil(o.GooglePayCardNetwork) {
-		toSerialize["googlePayCardNetwork"] = o.GooglePayCardNetwork
-	}
-	toSerialize["googlePayToken"] = o.GooglePayToken
 	if !common.IsNil(o.RecurringDetailReference) {
 		toSerialize["recurringDetailReference"] = o.RecurringDetailReference
 	}
@@ -309,43 +272,43 @@ func (o GooglePayDetails) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableGooglePayDetails struct {
-	value *GooglePayDetails
+type NullableApplePayDonations struct {
+	value *ApplePayDonations
 	isSet bool
 }
 
-func (v NullableGooglePayDetails) Get() *GooglePayDetails {
+func (v NullableApplePayDonations) Get() *ApplePayDonations {
 	return v.value
 }
 
-func (v *NullableGooglePayDetails) Set(val *GooglePayDetails) {
+func (v *NullableApplePayDonations) Set(val *ApplePayDonations) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableGooglePayDetails) IsSet() bool {
+func (v NullableApplePayDonations) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableGooglePayDetails) Unset() {
+func (v *NullableApplePayDonations) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableGooglePayDetails(val *GooglePayDetails) *NullableGooglePayDetails {
-	return &NullableGooglePayDetails{value: val, isSet: true}
+func NewNullableApplePayDonations(val *ApplePayDonations) *NullableApplePayDonations {
+	return &NullableApplePayDonations{value: val, isSet: true}
 }
 
-func (v NullableGooglePayDetails) MarshalJSON() ([]byte, error) {
+func (v NullableApplePayDonations) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableGooglePayDetails) UnmarshalJSON(src []byte) error {
+func (v *NullableApplePayDonations) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
 
-func (o *GooglePayDetails) isValidFundingSource() bool {
+func (o *ApplePayDonations) isValidFundingSource() bool {
 	var allowedEnumValues = []string{"credit", "debit"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetFundingSource() == allowed {
@@ -354,8 +317,8 @@ func (o *GooglePayDetails) isValidFundingSource() bool {
 	}
 	return false
 }
-func (o *GooglePayDetails) isValidType() bool {
-	var allowedEnumValues = []string{"googlepay"}
+func (o *ApplePayDonations) isValidType() bool {
+	var allowedEnumValues = []string{"applepay"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

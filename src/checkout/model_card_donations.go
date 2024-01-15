@@ -14,11 +14,11 @@ import (
 	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
-// checks if the CardDetails type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &CardDetails{}
+// checks if the CardDonations type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &CardDonations{}
 
-// CardDetails struct for CardDetails
-type CardDetails struct {
+// CardDonations struct for CardDonations
+type CardDonations struct {
 	// Secondary brand of the card. For example: **plastix**, **hmclub**.
 	Brand *string `json:"brand,omitempty"`
 	// The checkout attempt identifier.
@@ -60,29 +60,29 @@ type CardDetails struct {
 	Type *string `json:"type,omitempty"`
 }
 
-// NewCardDetails instantiates a new CardDetails object
+// NewCardDonations instantiates a new CardDonations object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCardDetails() *CardDetails {
-	this := CardDetails{}
+func NewCardDonations() *CardDonations {
+	this := CardDonations{}
 	var type_ string = "scheme"
 	this.Type = &type_
 	return &this
 }
 
-// NewCardDetailsWithDefaults instantiates a new CardDetails object
+// NewCardDonationsWithDefaults instantiates a new CardDonations object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCardDetailsWithDefaults() *CardDetails {
-	this := CardDetails{}
+func NewCardDonationsWithDefaults() *CardDonations {
+	this := CardDonations{}
 	var type_ string = "scheme"
 	this.Type = &type_
 	return &this
 }
 
 // GetBrand returns the Brand field value if set, zero value otherwise.
-func (o *CardDetails) GetBrand() string {
+func (o *CardDonations) GetBrand() string {
 	if o == nil || common.IsNil(o.Brand) {
 		var ret string
 		return ret
@@ -92,7 +92,7 @@ func (o *CardDetails) GetBrand() string {
 
 // GetBrandOk returns a tuple with the Brand field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardDetails) GetBrandOk() (*string, bool) {
+func (o *CardDonations) GetBrandOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Brand) {
 		return nil, false
 	}
@@ -100,7 +100,7 @@ func (o *CardDetails) GetBrandOk() (*string, bool) {
 }
 
 // HasBrand returns a boolean if a field has been set.
-func (o *CardDetails) HasBrand() bool {
+func (o *CardDonations) HasBrand() bool {
 	if o != nil && !common.IsNil(o.Brand) {
 		return true
 	}
@@ -109,12 +109,12 @@ func (o *CardDetails) HasBrand() bool {
 }
 
 // SetBrand gets a reference to the given string and assigns it to the Brand field.
-func (o *CardDetails) SetBrand(v string) {
+func (o *CardDonations) SetBrand(v string) {
 	o.Brand = &v
 }
 
 // GetCheckoutAttemptId returns the CheckoutAttemptId field value if set, zero value otherwise.
-func (o *CardDetails) GetCheckoutAttemptId() string {
+func (o *CardDonations) GetCheckoutAttemptId() string {
 	if o == nil || common.IsNil(o.CheckoutAttemptId) {
 		var ret string
 		return ret
@@ -124,7 +124,7 @@ func (o *CardDetails) GetCheckoutAttemptId() string {
 
 // GetCheckoutAttemptIdOk returns a tuple with the CheckoutAttemptId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardDetails) GetCheckoutAttemptIdOk() (*string, bool) {
+func (o *CardDonations) GetCheckoutAttemptIdOk() (*string, bool) {
 	if o == nil || common.IsNil(o.CheckoutAttemptId) {
 		return nil, false
 	}
@@ -132,7 +132,7 @@ func (o *CardDetails) GetCheckoutAttemptIdOk() (*string, bool) {
 }
 
 // HasCheckoutAttemptId returns a boolean if a field has been set.
-func (o *CardDetails) HasCheckoutAttemptId() bool {
+func (o *CardDonations) HasCheckoutAttemptId() bool {
 	if o != nil && !common.IsNil(o.CheckoutAttemptId) {
 		return true
 	}
@@ -141,13 +141,13 @@ func (o *CardDetails) HasCheckoutAttemptId() bool {
 }
 
 // SetCheckoutAttemptId gets a reference to the given string and assigns it to the CheckoutAttemptId field.
-func (o *CardDetails) SetCheckoutAttemptId(v string) {
+func (o *CardDonations) SetCheckoutAttemptId(v string) {
 	o.CheckoutAttemptId = &v
 }
 
 // GetCupsecureplusSmscode returns the CupsecureplusSmscode field value if set, zero value otherwise.
 // Deprecated
-func (o *CardDetails) GetCupsecureplusSmscode() string {
+func (o *CardDonations) GetCupsecureplusSmscode() string {
 	if o == nil || common.IsNil(o.CupsecureplusSmscode) {
 		var ret string
 		return ret
@@ -158,7 +158,7 @@ func (o *CardDetails) GetCupsecureplusSmscode() string {
 // GetCupsecureplusSmscodeOk returns a tuple with the CupsecureplusSmscode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // Deprecated
-func (o *CardDetails) GetCupsecureplusSmscodeOk() (*string, bool) {
+func (o *CardDonations) GetCupsecureplusSmscodeOk() (*string, bool) {
 	if o == nil || common.IsNil(o.CupsecureplusSmscode) {
 		return nil, false
 	}
@@ -166,7 +166,7 @@ func (o *CardDetails) GetCupsecureplusSmscodeOk() (*string, bool) {
 }
 
 // HasCupsecureplusSmscode returns a boolean if a field has been set.
-func (o *CardDetails) HasCupsecureplusSmscode() bool {
+func (o *CardDonations) HasCupsecureplusSmscode() bool {
 	if o != nil && !common.IsNil(o.CupsecureplusSmscode) {
 		return true
 	}
@@ -176,12 +176,12 @@ func (o *CardDetails) HasCupsecureplusSmscode() bool {
 
 // SetCupsecureplusSmscode gets a reference to the given string and assigns it to the CupsecureplusSmscode field.
 // Deprecated
-func (o *CardDetails) SetCupsecureplusSmscode(v string) {
+func (o *CardDonations) SetCupsecureplusSmscode(v string) {
 	o.CupsecureplusSmscode = &v
 }
 
 // GetCvc returns the Cvc field value if set, zero value otherwise.
-func (o *CardDetails) GetCvc() string {
+func (o *CardDonations) GetCvc() string {
 	if o == nil || common.IsNil(o.Cvc) {
 		var ret string
 		return ret
@@ -191,7 +191,7 @@ func (o *CardDetails) GetCvc() string {
 
 // GetCvcOk returns a tuple with the Cvc field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardDetails) GetCvcOk() (*string, bool) {
+func (o *CardDonations) GetCvcOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Cvc) {
 		return nil, false
 	}
@@ -199,7 +199,7 @@ func (o *CardDetails) GetCvcOk() (*string, bool) {
 }
 
 // HasCvc returns a boolean if a field has been set.
-func (o *CardDetails) HasCvc() bool {
+func (o *CardDonations) HasCvc() bool {
 	if o != nil && !common.IsNil(o.Cvc) {
 		return true
 	}
@@ -208,12 +208,12 @@ func (o *CardDetails) HasCvc() bool {
 }
 
 // SetCvc gets a reference to the given string and assigns it to the Cvc field.
-func (o *CardDetails) SetCvc(v string) {
+func (o *CardDonations) SetCvc(v string) {
 	o.Cvc = &v
 }
 
 // GetEncryptedCardNumber returns the EncryptedCardNumber field value if set, zero value otherwise.
-func (o *CardDetails) GetEncryptedCardNumber() string {
+func (o *CardDonations) GetEncryptedCardNumber() string {
 	if o == nil || common.IsNil(o.EncryptedCardNumber) {
 		var ret string
 		return ret
@@ -223,7 +223,7 @@ func (o *CardDetails) GetEncryptedCardNumber() string {
 
 // GetEncryptedCardNumberOk returns a tuple with the EncryptedCardNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardDetails) GetEncryptedCardNumberOk() (*string, bool) {
+func (o *CardDonations) GetEncryptedCardNumberOk() (*string, bool) {
 	if o == nil || common.IsNil(o.EncryptedCardNumber) {
 		return nil, false
 	}
@@ -231,7 +231,7 @@ func (o *CardDetails) GetEncryptedCardNumberOk() (*string, bool) {
 }
 
 // HasEncryptedCardNumber returns a boolean if a field has been set.
-func (o *CardDetails) HasEncryptedCardNumber() bool {
+func (o *CardDonations) HasEncryptedCardNumber() bool {
 	if o != nil && !common.IsNil(o.EncryptedCardNumber) {
 		return true
 	}
@@ -240,12 +240,12 @@ func (o *CardDetails) HasEncryptedCardNumber() bool {
 }
 
 // SetEncryptedCardNumber gets a reference to the given string and assigns it to the EncryptedCardNumber field.
-func (o *CardDetails) SetEncryptedCardNumber(v string) {
+func (o *CardDonations) SetEncryptedCardNumber(v string) {
 	o.EncryptedCardNumber = &v
 }
 
 // GetEncryptedExpiryMonth returns the EncryptedExpiryMonth field value if set, zero value otherwise.
-func (o *CardDetails) GetEncryptedExpiryMonth() string {
+func (o *CardDonations) GetEncryptedExpiryMonth() string {
 	if o == nil || common.IsNil(o.EncryptedExpiryMonth) {
 		var ret string
 		return ret
@@ -255,7 +255,7 @@ func (o *CardDetails) GetEncryptedExpiryMonth() string {
 
 // GetEncryptedExpiryMonthOk returns a tuple with the EncryptedExpiryMonth field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardDetails) GetEncryptedExpiryMonthOk() (*string, bool) {
+func (o *CardDonations) GetEncryptedExpiryMonthOk() (*string, bool) {
 	if o == nil || common.IsNil(o.EncryptedExpiryMonth) {
 		return nil, false
 	}
@@ -263,7 +263,7 @@ func (o *CardDetails) GetEncryptedExpiryMonthOk() (*string, bool) {
 }
 
 // HasEncryptedExpiryMonth returns a boolean if a field has been set.
-func (o *CardDetails) HasEncryptedExpiryMonth() bool {
+func (o *CardDonations) HasEncryptedExpiryMonth() bool {
 	if o != nil && !common.IsNil(o.EncryptedExpiryMonth) {
 		return true
 	}
@@ -272,12 +272,12 @@ func (o *CardDetails) HasEncryptedExpiryMonth() bool {
 }
 
 // SetEncryptedExpiryMonth gets a reference to the given string and assigns it to the EncryptedExpiryMonth field.
-func (o *CardDetails) SetEncryptedExpiryMonth(v string) {
+func (o *CardDonations) SetEncryptedExpiryMonth(v string) {
 	o.EncryptedExpiryMonth = &v
 }
 
 // GetEncryptedExpiryYear returns the EncryptedExpiryYear field value if set, zero value otherwise.
-func (o *CardDetails) GetEncryptedExpiryYear() string {
+func (o *CardDonations) GetEncryptedExpiryYear() string {
 	if o == nil || common.IsNil(o.EncryptedExpiryYear) {
 		var ret string
 		return ret
@@ -287,7 +287,7 @@ func (o *CardDetails) GetEncryptedExpiryYear() string {
 
 // GetEncryptedExpiryYearOk returns a tuple with the EncryptedExpiryYear field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardDetails) GetEncryptedExpiryYearOk() (*string, bool) {
+func (o *CardDonations) GetEncryptedExpiryYearOk() (*string, bool) {
 	if o == nil || common.IsNil(o.EncryptedExpiryYear) {
 		return nil, false
 	}
@@ -295,7 +295,7 @@ func (o *CardDetails) GetEncryptedExpiryYearOk() (*string, bool) {
 }
 
 // HasEncryptedExpiryYear returns a boolean if a field has been set.
-func (o *CardDetails) HasEncryptedExpiryYear() bool {
+func (o *CardDonations) HasEncryptedExpiryYear() bool {
 	if o != nil && !common.IsNil(o.EncryptedExpiryYear) {
 		return true
 	}
@@ -304,12 +304,12 @@ func (o *CardDetails) HasEncryptedExpiryYear() bool {
 }
 
 // SetEncryptedExpiryYear gets a reference to the given string and assigns it to the EncryptedExpiryYear field.
-func (o *CardDetails) SetEncryptedExpiryYear(v string) {
+func (o *CardDonations) SetEncryptedExpiryYear(v string) {
 	o.EncryptedExpiryYear = &v
 }
 
 // GetEncryptedSecurityCode returns the EncryptedSecurityCode field value if set, zero value otherwise.
-func (o *CardDetails) GetEncryptedSecurityCode() string {
+func (o *CardDonations) GetEncryptedSecurityCode() string {
 	if o == nil || common.IsNil(o.EncryptedSecurityCode) {
 		var ret string
 		return ret
@@ -319,7 +319,7 @@ func (o *CardDetails) GetEncryptedSecurityCode() string {
 
 // GetEncryptedSecurityCodeOk returns a tuple with the EncryptedSecurityCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardDetails) GetEncryptedSecurityCodeOk() (*string, bool) {
+func (o *CardDonations) GetEncryptedSecurityCodeOk() (*string, bool) {
 	if o == nil || common.IsNil(o.EncryptedSecurityCode) {
 		return nil, false
 	}
@@ -327,7 +327,7 @@ func (o *CardDetails) GetEncryptedSecurityCodeOk() (*string, bool) {
 }
 
 // HasEncryptedSecurityCode returns a boolean if a field has been set.
-func (o *CardDetails) HasEncryptedSecurityCode() bool {
+func (o *CardDonations) HasEncryptedSecurityCode() bool {
 	if o != nil && !common.IsNil(o.EncryptedSecurityCode) {
 		return true
 	}
@@ -336,12 +336,12 @@ func (o *CardDetails) HasEncryptedSecurityCode() bool {
 }
 
 // SetEncryptedSecurityCode gets a reference to the given string and assigns it to the EncryptedSecurityCode field.
-func (o *CardDetails) SetEncryptedSecurityCode(v string) {
+func (o *CardDonations) SetEncryptedSecurityCode(v string) {
 	o.EncryptedSecurityCode = &v
 }
 
 // GetExpiryMonth returns the ExpiryMonth field value if set, zero value otherwise.
-func (o *CardDetails) GetExpiryMonth() string {
+func (o *CardDonations) GetExpiryMonth() string {
 	if o == nil || common.IsNil(o.ExpiryMonth) {
 		var ret string
 		return ret
@@ -351,7 +351,7 @@ func (o *CardDetails) GetExpiryMonth() string {
 
 // GetExpiryMonthOk returns a tuple with the ExpiryMonth field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardDetails) GetExpiryMonthOk() (*string, bool) {
+func (o *CardDonations) GetExpiryMonthOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ExpiryMonth) {
 		return nil, false
 	}
@@ -359,7 +359,7 @@ func (o *CardDetails) GetExpiryMonthOk() (*string, bool) {
 }
 
 // HasExpiryMonth returns a boolean if a field has been set.
-func (o *CardDetails) HasExpiryMonth() bool {
+func (o *CardDonations) HasExpiryMonth() bool {
 	if o != nil && !common.IsNil(o.ExpiryMonth) {
 		return true
 	}
@@ -368,12 +368,12 @@ func (o *CardDetails) HasExpiryMonth() bool {
 }
 
 // SetExpiryMonth gets a reference to the given string and assigns it to the ExpiryMonth field.
-func (o *CardDetails) SetExpiryMonth(v string) {
+func (o *CardDonations) SetExpiryMonth(v string) {
 	o.ExpiryMonth = &v
 }
 
 // GetExpiryYear returns the ExpiryYear field value if set, zero value otherwise.
-func (o *CardDetails) GetExpiryYear() string {
+func (o *CardDonations) GetExpiryYear() string {
 	if o == nil || common.IsNil(o.ExpiryYear) {
 		var ret string
 		return ret
@@ -383,7 +383,7 @@ func (o *CardDetails) GetExpiryYear() string {
 
 // GetExpiryYearOk returns a tuple with the ExpiryYear field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardDetails) GetExpiryYearOk() (*string, bool) {
+func (o *CardDonations) GetExpiryYearOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ExpiryYear) {
 		return nil, false
 	}
@@ -391,7 +391,7 @@ func (o *CardDetails) GetExpiryYearOk() (*string, bool) {
 }
 
 // HasExpiryYear returns a boolean if a field has been set.
-func (o *CardDetails) HasExpiryYear() bool {
+func (o *CardDonations) HasExpiryYear() bool {
 	if o != nil && !common.IsNil(o.ExpiryYear) {
 		return true
 	}
@@ -400,12 +400,12 @@ func (o *CardDetails) HasExpiryYear() bool {
 }
 
 // SetExpiryYear gets a reference to the given string and assigns it to the ExpiryYear field.
-func (o *CardDetails) SetExpiryYear(v string) {
+func (o *CardDonations) SetExpiryYear(v string) {
 	o.ExpiryYear = &v
 }
 
 // GetFundingSource returns the FundingSource field value if set, zero value otherwise.
-func (o *CardDetails) GetFundingSource() string {
+func (o *CardDonations) GetFundingSource() string {
 	if o == nil || common.IsNil(o.FundingSource) {
 		var ret string
 		return ret
@@ -415,7 +415,7 @@ func (o *CardDetails) GetFundingSource() string {
 
 // GetFundingSourceOk returns a tuple with the FundingSource field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardDetails) GetFundingSourceOk() (*string, bool) {
+func (o *CardDonations) GetFundingSourceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.FundingSource) {
 		return nil, false
 	}
@@ -423,7 +423,7 @@ func (o *CardDetails) GetFundingSourceOk() (*string, bool) {
 }
 
 // HasFundingSource returns a boolean if a field has been set.
-func (o *CardDetails) HasFundingSource() bool {
+func (o *CardDonations) HasFundingSource() bool {
 	if o != nil && !common.IsNil(o.FundingSource) {
 		return true
 	}
@@ -432,12 +432,12 @@ func (o *CardDetails) HasFundingSource() bool {
 }
 
 // SetFundingSource gets a reference to the given string and assigns it to the FundingSource field.
-func (o *CardDetails) SetFundingSource(v string) {
+func (o *CardDonations) SetFundingSource(v string) {
 	o.FundingSource = &v
 }
 
 // GetHolderName returns the HolderName field value if set, zero value otherwise.
-func (o *CardDetails) GetHolderName() string {
+func (o *CardDonations) GetHolderName() string {
 	if o == nil || common.IsNil(o.HolderName) {
 		var ret string
 		return ret
@@ -447,7 +447,7 @@ func (o *CardDetails) GetHolderName() string {
 
 // GetHolderNameOk returns a tuple with the HolderName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardDetails) GetHolderNameOk() (*string, bool) {
+func (o *CardDonations) GetHolderNameOk() (*string, bool) {
 	if o == nil || common.IsNil(o.HolderName) {
 		return nil, false
 	}
@@ -455,7 +455,7 @@ func (o *CardDetails) GetHolderNameOk() (*string, bool) {
 }
 
 // HasHolderName returns a boolean if a field has been set.
-func (o *CardDetails) HasHolderName() bool {
+func (o *CardDonations) HasHolderName() bool {
 	if o != nil && !common.IsNil(o.HolderName) {
 		return true
 	}
@@ -464,12 +464,12 @@ func (o *CardDetails) HasHolderName() bool {
 }
 
 // SetHolderName gets a reference to the given string and assigns it to the HolderName field.
-func (o *CardDetails) SetHolderName(v string) {
+func (o *CardDonations) SetHolderName(v string) {
 	o.HolderName = &v
 }
 
 // GetNetworkPaymentReference returns the NetworkPaymentReference field value if set, zero value otherwise.
-func (o *CardDetails) GetNetworkPaymentReference() string {
+func (o *CardDonations) GetNetworkPaymentReference() string {
 	if o == nil || common.IsNil(o.NetworkPaymentReference) {
 		var ret string
 		return ret
@@ -479,7 +479,7 @@ func (o *CardDetails) GetNetworkPaymentReference() string {
 
 // GetNetworkPaymentReferenceOk returns a tuple with the NetworkPaymentReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardDetails) GetNetworkPaymentReferenceOk() (*string, bool) {
+func (o *CardDonations) GetNetworkPaymentReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.NetworkPaymentReference) {
 		return nil, false
 	}
@@ -487,7 +487,7 @@ func (o *CardDetails) GetNetworkPaymentReferenceOk() (*string, bool) {
 }
 
 // HasNetworkPaymentReference returns a boolean if a field has been set.
-func (o *CardDetails) HasNetworkPaymentReference() bool {
+func (o *CardDonations) HasNetworkPaymentReference() bool {
 	if o != nil && !common.IsNil(o.NetworkPaymentReference) {
 		return true
 	}
@@ -496,12 +496,12 @@ func (o *CardDetails) HasNetworkPaymentReference() bool {
 }
 
 // SetNetworkPaymentReference gets a reference to the given string and assigns it to the NetworkPaymentReference field.
-func (o *CardDetails) SetNetworkPaymentReference(v string) {
+func (o *CardDonations) SetNetworkPaymentReference(v string) {
 	o.NetworkPaymentReference = &v
 }
 
 // GetNumber returns the Number field value if set, zero value otherwise.
-func (o *CardDetails) GetNumber() string {
+func (o *CardDonations) GetNumber() string {
 	if o == nil || common.IsNil(o.Number) {
 		var ret string
 		return ret
@@ -511,7 +511,7 @@ func (o *CardDetails) GetNumber() string {
 
 // GetNumberOk returns a tuple with the Number field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardDetails) GetNumberOk() (*string, bool) {
+func (o *CardDonations) GetNumberOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Number) {
 		return nil, false
 	}
@@ -519,7 +519,7 @@ func (o *CardDetails) GetNumberOk() (*string, bool) {
 }
 
 // HasNumber returns a boolean if a field has been set.
-func (o *CardDetails) HasNumber() bool {
+func (o *CardDonations) HasNumber() bool {
 	if o != nil && !common.IsNil(o.Number) {
 		return true
 	}
@@ -528,13 +528,13 @@ func (o *CardDetails) HasNumber() bool {
 }
 
 // SetNumber gets a reference to the given string and assigns it to the Number field.
-func (o *CardDetails) SetNumber(v string) {
+func (o *CardDonations) SetNumber(v string) {
 	o.Number = &v
 }
 
 // GetRecurringDetailReference returns the RecurringDetailReference field value if set, zero value otherwise.
 // Deprecated
-func (o *CardDetails) GetRecurringDetailReference() string {
+func (o *CardDonations) GetRecurringDetailReference() string {
 	if o == nil || common.IsNil(o.RecurringDetailReference) {
 		var ret string
 		return ret
@@ -545,7 +545,7 @@ func (o *CardDetails) GetRecurringDetailReference() string {
 // GetRecurringDetailReferenceOk returns a tuple with the RecurringDetailReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // Deprecated
-func (o *CardDetails) GetRecurringDetailReferenceOk() (*string, bool) {
+func (o *CardDonations) GetRecurringDetailReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.RecurringDetailReference) {
 		return nil, false
 	}
@@ -553,7 +553,7 @@ func (o *CardDetails) GetRecurringDetailReferenceOk() (*string, bool) {
 }
 
 // HasRecurringDetailReference returns a boolean if a field has been set.
-func (o *CardDetails) HasRecurringDetailReference() bool {
+func (o *CardDonations) HasRecurringDetailReference() bool {
 	if o != nil && !common.IsNil(o.RecurringDetailReference) {
 		return true
 	}
@@ -563,12 +563,12 @@ func (o *CardDetails) HasRecurringDetailReference() bool {
 
 // SetRecurringDetailReference gets a reference to the given string and assigns it to the RecurringDetailReference field.
 // Deprecated
-func (o *CardDetails) SetRecurringDetailReference(v string) {
+func (o *CardDonations) SetRecurringDetailReference(v string) {
 	o.RecurringDetailReference = &v
 }
 
 // GetShopperNotificationReference returns the ShopperNotificationReference field value if set, zero value otherwise.
-func (o *CardDetails) GetShopperNotificationReference() string {
+func (o *CardDonations) GetShopperNotificationReference() string {
 	if o == nil || common.IsNil(o.ShopperNotificationReference) {
 		var ret string
 		return ret
@@ -578,7 +578,7 @@ func (o *CardDetails) GetShopperNotificationReference() string {
 
 // GetShopperNotificationReferenceOk returns a tuple with the ShopperNotificationReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardDetails) GetShopperNotificationReferenceOk() (*string, bool) {
+func (o *CardDonations) GetShopperNotificationReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ShopperNotificationReference) {
 		return nil, false
 	}
@@ -586,7 +586,7 @@ func (o *CardDetails) GetShopperNotificationReferenceOk() (*string, bool) {
 }
 
 // HasShopperNotificationReference returns a boolean if a field has been set.
-func (o *CardDetails) HasShopperNotificationReference() bool {
+func (o *CardDonations) HasShopperNotificationReference() bool {
 	if o != nil && !common.IsNil(o.ShopperNotificationReference) {
 		return true
 	}
@@ -595,12 +595,12 @@ func (o *CardDetails) HasShopperNotificationReference() bool {
 }
 
 // SetShopperNotificationReference gets a reference to the given string and assigns it to the ShopperNotificationReference field.
-func (o *CardDetails) SetShopperNotificationReference(v string) {
+func (o *CardDonations) SetShopperNotificationReference(v string) {
 	o.ShopperNotificationReference = &v
 }
 
 // GetStoredPaymentMethodId returns the StoredPaymentMethodId field value if set, zero value otherwise.
-func (o *CardDetails) GetStoredPaymentMethodId() string {
+func (o *CardDonations) GetStoredPaymentMethodId() string {
 	if o == nil || common.IsNil(o.StoredPaymentMethodId) {
 		var ret string
 		return ret
@@ -610,7 +610,7 @@ func (o *CardDetails) GetStoredPaymentMethodId() string {
 
 // GetStoredPaymentMethodIdOk returns a tuple with the StoredPaymentMethodId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardDetails) GetStoredPaymentMethodIdOk() (*string, bool) {
+func (o *CardDonations) GetStoredPaymentMethodIdOk() (*string, bool) {
 	if o == nil || common.IsNil(o.StoredPaymentMethodId) {
 		return nil, false
 	}
@@ -618,7 +618,7 @@ func (o *CardDetails) GetStoredPaymentMethodIdOk() (*string, bool) {
 }
 
 // HasStoredPaymentMethodId returns a boolean if a field has been set.
-func (o *CardDetails) HasStoredPaymentMethodId() bool {
+func (o *CardDonations) HasStoredPaymentMethodId() bool {
 	if o != nil && !common.IsNil(o.StoredPaymentMethodId) {
 		return true
 	}
@@ -627,12 +627,12 @@ func (o *CardDetails) HasStoredPaymentMethodId() bool {
 }
 
 // SetStoredPaymentMethodId gets a reference to the given string and assigns it to the StoredPaymentMethodId field.
-func (o *CardDetails) SetStoredPaymentMethodId(v string) {
+func (o *CardDonations) SetStoredPaymentMethodId(v string) {
 	o.StoredPaymentMethodId = &v
 }
 
 // GetThreeDS2SdkVersion returns the ThreeDS2SdkVersion field value if set, zero value otherwise.
-func (o *CardDetails) GetThreeDS2SdkVersion() string {
+func (o *CardDonations) GetThreeDS2SdkVersion() string {
 	if o == nil || common.IsNil(o.ThreeDS2SdkVersion) {
 		var ret string
 		return ret
@@ -642,7 +642,7 @@ func (o *CardDetails) GetThreeDS2SdkVersion() string {
 
 // GetThreeDS2SdkVersionOk returns a tuple with the ThreeDS2SdkVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardDetails) GetThreeDS2SdkVersionOk() (*string, bool) {
+func (o *CardDonations) GetThreeDS2SdkVersionOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ThreeDS2SdkVersion) {
 		return nil, false
 	}
@@ -650,7 +650,7 @@ func (o *CardDetails) GetThreeDS2SdkVersionOk() (*string, bool) {
 }
 
 // HasThreeDS2SdkVersion returns a boolean if a field has been set.
-func (o *CardDetails) HasThreeDS2SdkVersion() bool {
+func (o *CardDonations) HasThreeDS2SdkVersion() bool {
 	if o != nil && !common.IsNil(o.ThreeDS2SdkVersion) {
 		return true
 	}
@@ -659,12 +659,12 @@ func (o *CardDetails) HasThreeDS2SdkVersion() bool {
 }
 
 // SetThreeDS2SdkVersion gets a reference to the given string and assigns it to the ThreeDS2SdkVersion field.
-func (o *CardDetails) SetThreeDS2SdkVersion(v string) {
+func (o *CardDonations) SetThreeDS2SdkVersion(v string) {
 	o.ThreeDS2SdkVersion = &v
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
-func (o *CardDetails) GetType() string {
+func (o *CardDonations) GetType() string {
 	if o == nil || common.IsNil(o.Type) {
 		var ret string
 		return ret
@@ -674,7 +674,7 @@ func (o *CardDetails) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardDetails) GetTypeOk() (*string, bool) {
+func (o *CardDonations) GetTypeOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Type) {
 		return nil, false
 	}
@@ -682,7 +682,7 @@ func (o *CardDetails) GetTypeOk() (*string, bool) {
 }
 
 // HasType returns a boolean if a field has been set.
-func (o *CardDetails) HasType() bool {
+func (o *CardDonations) HasType() bool {
 	if o != nil && !common.IsNil(o.Type) {
 		return true
 	}
@@ -691,11 +691,11 @@ func (o *CardDetails) HasType() bool {
 }
 
 // SetType gets a reference to the given string and assigns it to the Type field.
-func (o *CardDetails) SetType(v string) {
+func (o *CardDonations) SetType(v string) {
 	o.Type = &v
 }
 
-func (o CardDetails) MarshalJSON() ([]byte, error) {
+func (o CardDonations) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -703,7 +703,7 @@ func (o CardDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CardDetails) ToMap() (map[string]interface{}, error) {
+func (o CardDonations) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.Brand) {
 		toSerialize["brand"] = o.Brand
@@ -765,43 +765,43 @@ func (o CardDetails) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableCardDetails struct {
-	value *CardDetails
+type NullableCardDonations struct {
+	value *CardDonations
 	isSet bool
 }
 
-func (v NullableCardDetails) Get() *CardDetails {
+func (v NullableCardDonations) Get() *CardDonations {
 	return v.value
 }
 
-func (v *NullableCardDetails) Set(val *CardDetails) {
+func (v *NullableCardDonations) Set(val *CardDonations) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCardDetails) IsSet() bool {
+func (v NullableCardDonations) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCardDetails) Unset() {
+func (v *NullableCardDonations) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCardDetails(val *CardDetails) *NullableCardDetails {
-	return &NullableCardDetails{value: val, isSet: true}
+func NewNullableCardDonations(val *CardDonations) *NullableCardDonations {
+	return &NullableCardDonations{value: val, isSet: true}
 }
 
-func (v NullableCardDetails) MarshalJSON() ([]byte, error) {
+func (v NullableCardDonations) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCardDetails) UnmarshalJSON(src []byte) error {
+func (v *NullableCardDonations) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
 
-func (o *CardDetails) isValidFundingSource() bool {
+func (o *CardDonations) isValidFundingSource() bool {
 	var allowedEnumValues = []string{"credit", "debit"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetFundingSource() == allowed {
@@ -810,7 +810,7 @@ func (o *CardDetails) isValidFundingSource() bool {
 	}
 	return false
 }
-func (o *CardDetails) isValidType() bool {
+func (o *CardDonations) isValidType() bool {
 	var allowedEnumValues = []string{"bcmc", "scheme", "networkToken", "giftcard", "card"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {

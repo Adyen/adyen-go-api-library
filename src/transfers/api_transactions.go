@@ -200,7 +200,7 @@ type TransactionsApiGetTransactionInput struct {
 
 /*
 Prepare a request for GetTransaction
-@param id Unique identifier of the transaction.
+@param id The unique identifier of the transaction.
 @return TransactionsApiGetTransactionInput
 */
 func (a *TransactionsApi) GetTransactionInput(id string) TransactionsApiGetTransactionInput {

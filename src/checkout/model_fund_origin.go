@@ -20,7 +20,12 @@ var _ common.MappedNullable = &FundOrigin{}
 // FundOrigin struct for FundOrigin
 type FundOrigin struct {
 	BillingAddress *Address `json:"billingAddress,omitempty"`
-	ShopperName    *Name    `json:"shopperName,omitempty"`
+	// Email address of the person.
+	ShopperEmail *string `json:"shopperEmail,omitempty"`
+	ShopperName  *Name   `json:"shopperName,omitempty"`
+	// Phone number of the person
+	TelephoneNumber  *string `json:"telephoneNumber,omitempty"`
+	WalletIdentifier *string `json:"walletIdentifier,omitempty"`
 }
 
 // NewFundOrigin instantiates a new FundOrigin object
@@ -72,6 +77,38 @@ func (o *FundOrigin) SetBillingAddress(v Address) {
 	o.BillingAddress = &v
 }
 
+// GetShopperEmail returns the ShopperEmail field value if set, zero value otherwise.
+func (o *FundOrigin) GetShopperEmail() string {
+	if o == nil || common.IsNil(o.ShopperEmail) {
+		var ret string
+		return ret
+	}
+	return *o.ShopperEmail
+}
+
+// GetShopperEmailOk returns a tuple with the ShopperEmail field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FundOrigin) GetShopperEmailOk() (*string, bool) {
+	if o == nil || common.IsNil(o.ShopperEmail) {
+		return nil, false
+	}
+	return o.ShopperEmail, true
+}
+
+// HasShopperEmail returns a boolean if a field has been set.
+func (o *FundOrigin) HasShopperEmail() bool {
+	if o != nil && !common.IsNil(o.ShopperEmail) {
+		return true
+	}
+
+	return false
+}
+
+// SetShopperEmail gets a reference to the given string and assigns it to the ShopperEmail field.
+func (o *FundOrigin) SetShopperEmail(v string) {
+	o.ShopperEmail = &v
+}
+
 // GetShopperName returns the ShopperName field value if set, zero value otherwise.
 func (o *FundOrigin) GetShopperName() Name {
 	if o == nil || common.IsNil(o.ShopperName) {
@@ -104,6 +141,70 @@ func (o *FundOrigin) SetShopperName(v Name) {
 	o.ShopperName = &v
 }
 
+// GetTelephoneNumber returns the TelephoneNumber field value if set, zero value otherwise.
+func (o *FundOrigin) GetTelephoneNumber() string {
+	if o == nil || common.IsNil(o.TelephoneNumber) {
+		var ret string
+		return ret
+	}
+	return *o.TelephoneNumber
+}
+
+// GetTelephoneNumberOk returns a tuple with the TelephoneNumber field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FundOrigin) GetTelephoneNumberOk() (*string, bool) {
+	if o == nil || common.IsNil(o.TelephoneNumber) {
+		return nil, false
+	}
+	return o.TelephoneNumber, true
+}
+
+// HasTelephoneNumber returns a boolean if a field has been set.
+func (o *FundOrigin) HasTelephoneNumber() bool {
+	if o != nil && !common.IsNil(o.TelephoneNumber) {
+		return true
+	}
+
+	return false
+}
+
+// SetTelephoneNumber gets a reference to the given string and assigns it to the TelephoneNumber field.
+func (o *FundOrigin) SetTelephoneNumber(v string) {
+	o.TelephoneNumber = &v
+}
+
+// GetWalletIdentifier returns the WalletIdentifier field value if set, zero value otherwise.
+func (o *FundOrigin) GetWalletIdentifier() string {
+	if o == nil || common.IsNil(o.WalletIdentifier) {
+		var ret string
+		return ret
+	}
+	return *o.WalletIdentifier
+}
+
+// GetWalletIdentifierOk returns a tuple with the WalletIdentifier field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FundOrigin) GetWalletIdentifierOk() (*string, bool) {
+	if o == nil || common.IsNil(o.WalletIdentifier) {
+		return nil, false
+	}
+	return o.WalletIdentifier, true
+}
+
+// HasWalletIdentifier returns a boolean if a field has been set.
+func (o *FundOrigin) HasWalletIdentifier() bool {
+	if o != nil && !common.IsNil(o.WalletIdentifier) {
+		return true
+	}
+
+	return false
+}
+
+// SetWalletIdentifier gets a reference to the given string and assigns it to the WalletIdentifier field.
+func (o *FundOrigin) SetWalletIdentifier(v string) {
+	o.WalletIdentifier = &v
+}
+
 func (o FundOrigin) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -117,8 +218,17 @@ func (o FundOrigin) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.BillingAddress) {
 		toSerialize["billingAddress"] = o.BillingAddress
 	}
+	if !common.IsNil(o.ShopperEmail) {
+		toSerialize["shopperEmail"] = o.ShopperEmail
+	}
 	if !common.IsNil(o.ShopperName) {
 		toSerialize["shopperName"] = o.ShopperName
+	}
+	if !common.IsNil(o.TelephoneNumber) {
+		toSerialize["telephoneNumber"] = o.TelephoneNumber
+	}
+	if !common.IsNil(o.WalletIdentifier) {
+		toSerialize["walletIdentifier"] = o.WalletIdentifier
 	}
 	return toSerialize, nil
 }

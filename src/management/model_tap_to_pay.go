@@ -19,7 +19,7 @@ var _ common.MappedNullable = &TapToPay{}
 
 // TapToPay struct for TapToPay
 type TapToPay struct {
-	// Platform merchants can customize the text that appears on the TapToPay screen during a transaction
+	// The text shown on the screen during the Tap to Pay transaction.
 	MerchantDisplayName *string `json:"merchantDisplayName,omitempty"`
 }
 

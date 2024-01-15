@@ -177,7 +177,7 @@ func (r PCIQuestionnairesApiSignPciQuestionnaireInput) PciSigningRequest(pciSign
 
 /*
 Prepare a request for SignPciQuestionnaire
-@param id The legal entity ID of the individual who signed the PCI questionnaire.
+@param id The legal entity ID of the user that has a contractual relationship with your platform.
 @return PCIQuestionnairesApiSignPciQuestionnaireInput
 */
 func (a *PCIQuestionnairesApi) SignPciQuestionnaireInput(id string) PCIQuestionnairesApiSignPciQuestionnaireInput {

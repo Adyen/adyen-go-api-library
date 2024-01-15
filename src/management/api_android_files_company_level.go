@@ -415,10 +415,10 @@ To make this request, your API credential must have the following [role](https:/
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r AndroidFilesCompanyLevelApiUploadAndroidAppInput - Request parameters, see UploadAndroidAppInput
-@return *http.Response, error
+@return UploadAndroidAppResponse, *http.Response, error
 */
-func (a *AndroidFilesCompanyLevelApi) UploadAndroidApp(ctx context.Context, r AndroidFilesCompanyLevelApiUploadAndroidAppInput) (*http.Response, error) {
-	var res interface{}
+func (a *AndroidFilesCompanyLevelApi) UploadAndroidApp(ctx context.Context, r AndroidFilesCompanyLevelApiUploadAndroidAppInput) (UploadAndroidAppResponse, *http.Response, error) {
+	res := &UploadAndroidAppResponse{}
 	path := "/companies/{companyId}/androidApps"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
 	queryParams := url.Values{}
@@ -435,7 +435,7 @@ func (a *AndroidFilesCompanyLevelApi) UploadAndroidApp(ctx context.Context, r An
 	)
 
 	if httpRes == nil {
-		return httpRes, err
+		return *res, httpRes, err
 	}
 
 	var serviceError common.RestServiceError
@@ -443,42 +443,42 @@ func (a *AndroidFilesCompanyLevelApi) UploadAndroidApp(ctx context.Context, r An
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
-			return httpRes, decodeError
+			return *res, httpRes, decodeError
 		}
-		return httpRes, serviceError
+		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 401 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
-			return httpRes, decodeError
+			return *res, httpRes, decodeError
 		}
-		return httpRes, serviceError
+		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 403 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
-			return httpRes, decodeError
+			return *res, httpRes, decodeError
 		}
-		return httpRes, serviceError
+		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 422 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
-			return httpRes, decodeError
+			return *res, httpRes, decodeError
 		}
-		return httpRes, serviceError
+		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
-			return httpRes, decodeError
+			return *res, httpRes, decodeError
 		}
-		return httpRes, serviceError
+		return *res, httpRes, serviceError
 	}
 
-	return httpRes, err
+	return *res, httpRes, err
 }
