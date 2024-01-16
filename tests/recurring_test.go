@@ -112,7 +112,7 @@ func Test_Recurring(t *testing.T) {
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
 			assert.Equal(t, true, strings.Contains(err.Error(), "PaymentDetail not found"))
-			assert.Equal(t, 500, httpRes.StatusCode)
+			assert.Equal(t, 422, httpRes.StatusCode)
 			require.NotNil(t, res)
 			assert.Equal(t, "PaymentDetail not found", err.(common.APIError).Message)
 		})
