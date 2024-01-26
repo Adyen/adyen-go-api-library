@@ -20,8 +20,9 @@ var _ common.MappedNullable = &PaymentInstrumentInfo{}
 // PaymentInstrumentInfo struct for PaymentInstrumentInfo
 type PaymentInstrumentInfo struct {
 	// The unique identifier of the [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/v1/post/balanceAccounts__resParam_id) associated with the payment instrument.
-	BalanceAccountId string    `json:"balanceAccountId"`
-	Card             *CardInfo `json:"card,omitempty"`
+	BalanceAccountId string            `json:"balanceAccountId"`
+	BankAccount      *BankAccountModel `json:"bankAccount,omitempty"`
+	Card             *CardInfo         `json:"card,omitempty"`
 	// Your description for the payment instrument, maximum 300 characters.
 	Description *string `json:"description,omitempty"`
 	// The two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code where the payment instrument is issued. For example, **NL** or **US**.
@@ -80,6 +81,38 @@ func (o *PaymentInstrumentInfo) GetBalanceAccountIdOk() (*string, bool) {
 // SetBalanceAccountId sets field value
 func (o *PaymentInstrumentInfo) SetBalanceAccountId(v string) {
 	o.BalanceAccountId = v
+}
+
+// GetBankAccount returns the BankAccount field value if set, zero value otherwise.
+func (o *PaymentInstrumentInfo) GetBankAccount() BankAccountModel {
+	if o == nil || common.IsNil(o.BankAccount) {
+		var ret BankAccountModel
+		return ret
+	}
+	return *o.BankAccount
+}
+
+// GetBankAccountOk returns a tuple with the BankAccount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentInstrumentInfo) GetBankAccountOk() (*BankAccountModel, bool) {
+	if o == nil || common.IsNil(o.BankAccount) {
+		return nil, false
+	}
+	return o.BankAccount, true
+}
+
+// HasBankAccount returns a boolean if a field has been set.
+func (o *PaymentInstrumentInfo) HasBankAccount() bool {
+	if o != nil && !common.IsNil(o.BankAccount) {
+		return true
+	}
+
+	return false
+}
+
+// SetBankAccount gets a reference to the given BankAccountModel and assigns it to the BankAccount field.
+func (o *PaymentInstrumentInfo) SetBankAccount(v BankAccountModel) {
+	o.BankAccount = &v
 }
 
 // GetCard returns the Card field value if set, zero value otherwise.
@@ -333,6 +366,9 @@ func (o PaymentInstrumentInfo) MarshalJSON() ([]byte, error) {
 func (o PaymentInstrumentInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["balanceAccountId"] = o.BalanceAccountId
+	if !common.IsNil(o.BankAccount) {
+		toSerialize["bankAccount"] = o.BankAccount
+	}
 	if !common.IsNil(o.Card) {
 		toSerialize["card"] = o.Card
 	}

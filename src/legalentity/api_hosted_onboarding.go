@@ -47,7 +47,7 @@ GetLinkToAdyenhostedOnboardingPage Get a link to an Adyen-hosted onboarding page
 
 Returns a link to an Adyen-hosted onboarding page where you need to redirect your user.
 
->If you are using hosted onboarding, [only use v2](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-01-legal-entity-management-api-3) for your API requests.
+>If you are using hosted onboarding and just beginning your integration, use v3 for your API requests. Otherwise, use v2.
 
 
 
@@ -94,7 +94,7 @@ func (a *HostedOnboardingApi) GetOnboardingLinkThemeInput(id string) HostedOnboa
 /*
 GetOnboardingLinkTheme Get an onboarding link theme
 
-Returns the details of the theme identified in the path.>If you are using hosted onboarding, [only use v2](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-01-legal-entity-management-api-3) for your API requests.
+Returns the details of the theme identified in the path.>If you are using hosted onboarding and just beginning your integration, use v3 for your API requests. Otherwise, use v2.
 
 
 
@@ -140,7 +140,7 @@ ListHostedOnboardingPageThemes Get a list of hosted onboarding page themes
 
 Returns a list of hosted onboarding page themes.
 
->If you are using hosted onboarding, [only use v2](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-01-legal-entity-management-api-3) for your API requests.
+>If you are using hosted onboarding and just beginning your integration, use v3 for your API requests. Otherwise, use v2.
 
 
 

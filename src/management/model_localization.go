@@ -23,6 +23,8 @@ type Localization struct {
 	Language *string `json:"language,omitempty"`
 	// Secondary language of the terminal.
 	SecondaryLanguage *string `json:"secondaryLanguage,omitempty"`
+	// The time zone of the terminal.
+	Timezone *string `json:"timezone,omitempty"`
 }
 
 // NewLocalization instantiates a new Localization object
@@ -106,6 +108,38 @@ func (o *Localization) SetSecondaryLanguage(v string) {
 	o.SecondaryLanguage = &v
 }
 
+// GetTimezone returns the Timezone field value if set, zero value otherwise.
+func (o *Localization) GetTimezone() string {
+	if o == nil || common.IsNil(o.Timezone) {
+		var ret string
+		return ret
+	}
+	return *o.Timezone
+}
+
+// GetTimezoneOk returns a tuple with the Timezone field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Localization) GetTimezoneOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Timezone) {
+		return nil, false
+	}
+	return o.Timezone, true
+}
+
+// HasTimezone returns a boolean if a field has been set.
+func (o *Localization) HasTimezone() bool {
+	if o != nil && !common.IsNil(o.Timezone) {
+		return true
+	}
+
+	return false
+}
+
+// SetTimezone gets a reference to the given string and assigns it to the Timezone field.
+func (o *Localization) SetTimezone(v string) {
+	o.Timezone = &v
+}
+
 func (o Localization) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -121,6 +155,9 @@ func (o Localization) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.SecondaryLanguage) {
 		toSerialize["secondaryLanguage"] = o.SecondaryLanguage
+	}
+	if !common.IsNil(o.Timezone) {
+		toSerialize["timezone"] = o.Timezone
 	}
 	return toSerialize, nil
 }

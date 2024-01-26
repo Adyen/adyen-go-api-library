@@ -46,7 +46,7 @@ Creates a business line.
 
 This resource contains information about your user's line of business, including their industry and their source of funds. Adyen uses this information to verify your users as required by payment industry regulations. Adyen informs you of the verification results through webhooks or API responses.
 
->If you are using hosted onboarding, [only use v2](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-01-legal-entity-management-api-3) for your API requests.
+>If you are using hosted onboarding and just beginning your integration, use v3 for your API requests. Otherwise, use v2.
 
 
 

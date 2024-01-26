@@ -22,7 +22,7 @@ type PaymentMethodSetupInfo struct {
 	AfterpayTouch *AfterpayTouchInfo `json:"afterpayTouch,omitempty"`
 	ApplePay      *ApplePayInfo      `json:"applePay,omitempty"`
 	Bcmc          *BcmcInfo          `json:"bcmc,omitempty"`
-	// The unique identifier of the business line.
+	// The unique identifier of the business line. Required if you have a [platform setup](https://docs.adyen.com/marketplaces-and-platforms/platform-structure-resources/platform-setup/).
 	BusinessLineId  *string              `json:"businessLineId,omitempty"`
 	CartesBancaires *CartesBancairesInfo `json:"cartesBancaires,omitempty"`
 	Clearpay        *ClearpayInfo        `json:"clearpay,omitempty"`
