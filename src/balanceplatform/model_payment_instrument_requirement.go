@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v8/src/common"
+    "github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the PaymentInstrumentRequirement type satisfies the MappedNullable interface at compile time
@@ -21,7 +20,7 @@ var _ common.MappedNullable = &PaymentInstrumentRequirement{}
 type PaymentInstrumentRequirement struct {
 	// Specifies the requirements for the payment instrument that need to be included in the request for a particular route.
 	Description *string `json:"description,omitempty"`
-	// The two-character ISO-3166-1 alpha-2 country code of the counterparty. For example, **US** or **NL**.
+	// The two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code where the payment instrument is issued. For example, **NL** or **US**.
 	IssuingCountryCode *string `json:"issuingCountryCode,omitempty"`
 	// Specifies if the requirement only applies to transfers to another balance platform.
 	OnlyForCrossBalancePlatform *bool `json:"onlyForCrossBalancePlatform,omitempty"`
@@ -204,7 +203,7 @@ func (o *PaymentInstrumentRequirement) SetType(v string) {
 }
 
 func (o PaymentInstrumentRequirement) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -265,21 +264,23 @@ func (v *NullablePaymentInstrumentRequirement) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *PaymentInstrumentRequirement) isValidPaymentInstrumentType() bool {
-	var allowedEnumValues = []string{"BankAccount", "Card"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetPaymentInstrumentType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "BankAccount", "Card" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetPaymentInstrumentType() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *PaymentInstrumentRequirement) isValidType() bool {
-	var allowedEnumValues = []string{"paymentInstrumentRequirement"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "paymentInstrumentRequirement" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

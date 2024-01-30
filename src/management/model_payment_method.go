@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v8/src/common"
+    "github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the PaymentMethod type satisfies the MappedNullable interface at compile time
@@ -21,53 +20,53 @@ var _ common.MappedNullable = &PaymentMethod{}
 type PaymentMethod struct {
 	AfterpayTouch *AfterpayTouchInfo `json:"afterpayTouch,omitempty"`
 	// Indicates whether receiving payments is allowed. This value is set to **true** by Adyen after screening your merchant account.
-	Allowed  *bool         `json:"allowed,omitempty"`
+	Allowed *bool `json:"allowed,omitempty"`
 	ApplePay *ApplePayInfo `json:"applePay,omitempty"`
-	Bcmc     *BcmcInfo     `json:"bcmc,omitempty"`
-	// The unique identifier of the business line.
-	BusinessLineId  *string              `json:"businessLineId,omitempty"`
+	Bcmc *BcmcInfo `json:"bcmc,omitempty"`
+	// The unique identifier of the business line. Required if you have a [platform setup](https://docs.adyen.com/marketplaces-and-platforms/platform-structure-resources/platform-setup/).
+	BusinessLineId *string `json:"businessLineId,omitempty"`
 	CartesBancaires *CartesBancairesInfo `json:"cartesBancaires,omitempty"`
-	Clearpay        *ClearpayInfo        `json:"clearpay,omitempty"`
+	Clearpay *ClearpayInfo `json:"clearpay,omitempty"`
 	// The list of countries where a payment method is available. By default, all countries supported by the payment method.
-	Countries []string              `json:"countries,omitempty"`
-	Cup       *GenericPmWithTdiInfo `json:"cup,omitempty"`
+	Countries []string `json:"countries,omitempty"`
+	Cup *GenericPmWithTdiInfo `json:"cup,omitempty"`
 	// The list of currencies that a payment method supports. By default, all currencies supported by the payment method.
 	Currencies []string `json:"currencies,omitempty"`
 	// The list of custom routing flags to route payment to the intended acquirer.
-	CustomRoutingFlags []string              `json:"customRoutingFlags,omitempty"`
-	Diners             *GenericPmWithTdiInfo `json:"diners,omitempty"`
-	Discover           *GenericPmWithTdiInfo `json:"discover,omitempty"`
-	EftposAustralia    *GenericPmWithTdiInfo `json:"eftpos_australia,omitempty"`
+	CustomRoutingFlags []string `json:"customRoutingFlags,omitempty"`
+	Diners *GenericPmWithTdiInfo `json:"diners,omitempty"`
+	Discover *GenericPmWithTdiInfo `json:"discover,omitempty"`
+	EftposAustralia *GenericPmWithTdiInfo `json:"eftpos_australia,omitempty"`
 	// Indicates whether the payment method is enabled (**true**) or disabled (**false**).
-	Enabled   *bool                 `json:"enabled,omitempty"`
-	GiroPay   *GiroPayInfo          `json:"giroPay,omitempty"`
-	Girocard  *GenericPmWithTdiInfo `json:"girocard,omitempty"`
-	GooglePay *GooglePayInfo        `json:"googlePay,omitempty"`
+	Enabled *bool `json:"enabled,omitempty"`
+	GiroPay *GiroPayInfo `json:"giroPay,omitempty"`
+	Girocard *GenericPmWithTdiInfo `json:"girocard,omitempty"`
+	GooglePay *GooglePayInfo `json:"googlePay,omitempty"`
 	// The identifier of the resource.
-	Id            string                `json:"id"`
-	Ideal         *GenericPmWithTdiInfo `json:"ideal,omitempty"`
-	InteracCard   *GenericPmWithTdiInfo `json:"interac_card,omitempty"`
-	Jcb           *GenericPmWithTdiInfo `json:"jcb,omitempty"`
-	Klarna        *KlarnaInfo           `json:"klarna,omitempty"`
-	Maestro       *GenericPmWithTdiInfo `json:"maestro,omitempty"`
-	Mc            *GenericPmWithTdiInfo `json:"mc,omitempty"`
-	MealVoucherFR *MealVoucherFRInfo    `json:"mealVoucher_FR,omitempty"`
-	Paypal        *PayPalInfo           `json:"paypal,omitempty"`
+	Id string `json:"id"`
+	Ideal *GenericPmWithTdiInfo `json:"ideal,omitempty"`
+	InteracCard *GenericPmWithTdiInfo `json:"interac_card,omitempty"`
+	Jcb *GenericPmWithTdiInfo `json:"jcb,omitempty"`
+	Klarna *KlarnaInfo `json:"klarna,omitempty"`
+	Maestro *GenericPmWithTdiInfo `json:"maestro,omitempty"`
+	Mc *GenericPmWithTdiInfo `json:"mc,omitempty"`
+	MealVoucherFR *MealVoucherFRInfo `json:"mealVoucher_FR,omitempty"`
+	Paypal *PayPalInfo `json:"paypal,omitempty"`
 	// Your reference for the payment method. Supported characters a-z, A-Z, 0-9.
 	Reference *string `json:"reference,omitempty"`
 	// The sales channel.
-	ShopperInteraction *string     `json:"shopperInteraction,omitempty"`
-	Sofort             *SofortInfo `json:"sofort,omitempty"`
+	ShopperInteraction *string `json:"shopperInteraction,omitempty"`
+	Sofort *SofortInfo `json:"sofort,omitempty"`
 	// The unique identifier of the store for which to configure the payment method, if any.
-	StoreIds []string   `json:"storeIds,omitempty"`
-	Swish    *SwishInfo `json:"swish,omitempty"`
-	Twint    *TwintInfo `json:"twint,omitempty"`
+	StoreIds []string `json:"storeIds,omitempty"`
+	Swish *SwishInfo `json:"swish,omitempty"`
+	Twint *TwintInfo `json:"twint,omitempty"`
 	// Payment method [variant](https://docs.adyen.com/development-resources/paymentmethodvariant#management-api).
 	Type *string `json:"type,omitempty"`
 	// Payment method status. Possible values: * **valid** * **pending** * **invalid** * **rejected**
-	VerificationStatus *string               `json:"verificationStatus,omitempty"`
-	Vipps              *VippsInfo            `json:"vipps,omitempty"`
-	Visa               *GenericPmWithTdiInfo `json:"visa,omitempty"`
+	VerificationStatus *string `json:"verificationStatus,omitempty"`
+	Vipps *VippsInfo `json:"vipps,omitempty"`
+	Visa *GenericPmWithTdiInfo `json:"visa,omitempty"`
 }
 
 // NewPaymentMethod instantiates a new PaymentMethod object
@@ -1265,7 +1264,7 @@ func (o *PaymentMethod) SetVisa(v GenericPmWithTdiInfo) {
 }
 
 func (o PaymentMethod) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -1422,12 +1421,14 @@ func (v *NullablePaymentMethod) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *PaymentMethod) isValidVerificationStatus() bool {
-	var allowedEnumValues = []string{"valid", "pending", "invalid", "rejected"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetVerificationStatus() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "valid", "pending", "invalid", "rejected" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetVerificationStatus() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

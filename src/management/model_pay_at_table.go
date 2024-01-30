@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v8/src/common"
+    "github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the PayAtTable type satisfies the MappedNullable interface at compile time
@@ -23,6 +22,8 @@ type PayAtTable struct {
 	AuthenticationMethod *string `json:"authenticationMethod,omitempty"`
 	// Enable Pay at table.
 	EnablePayAtTable *bool `json:"enablePayAtTable,omitempty"`
+	// Sets the allowed payment instrument for Pay at table transactions.  Can be: **cash** or **card**. If not set, the terminal presents both options.
+	PaymentInstrument *string `json:"paymentInstrument,omitempty"`
 }
 
 // NewPayAtTable instantiates a new PayAtTable object
@@ -106,8 +107,40 @@ func (o *PayAtTable) SetEnablePayAtTable(v bool) {
 	o.EnablePayAtTable = &v
 }
 
+// GetPaymentInstrument returns the PaymentInstrument field value if set, zero value otherwise.
+func (o *PayAtTable) GetPaymentInstrument() string {
+	if o == nil || common.IsNil(o.PaymentInstrument) {
+		var ret string
+		return ret
+	}
+	return *o.PaymentInstrument
+}
+
+// GetPaymentInstrumentOk returns a tuple with the PaymentInstrument field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PayAtTable) GetPaymentInstrumentOk() (*string, bool) {
+	if o == nil || common.IsNil(o.PaymentInstrument) {
+		return nil, false
+	}
+	return o.PaymentInstrument, true
+}
+
+// HasPaymentInstrument returns a boolean if a field has been set.
+func (o *PayAtTable) HasPaymentInstrument() bool {
+	if o != nil && !common.IsNil(o.PaymentInstrument) {
+		return true
+	}
+
+	return false
+}
+
+// SetPaymentInstrument gets a reference to the given string and assigns it to the PaymentInstrument field.
+func (o *PayAtTable) SetPaymentInstrument(v string) {
+	o.PaymentInstrument = &v
+}
+
 func (o PayAtTable) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -121,6 +154,9 @@ func (o PayAtTable) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.EnablePayAtTable) {
 		toSerialize["enablePayAtTable"] = o.EnablePayAtTable
+	}
+	if !common.IsNil(o.PaymentInstrument) {
+		toSerialize["paymentInstrument"] = o.PaymentInstrument
 	}
 	return toSerialize, nil
 }
@@ -161,12 +197,23 @@ func (v *NullablePayAtTable) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *PayAtTable) isValidAuthenticationMethod() bool {
-	var allowedEnumValues = []string{"MAGSWIPE", "MKE"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetAuthenticationMethod() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "MAGSWIPE", "MKE" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetAuthenticationMethod() == allowed {
+            return true
+        }
+    }
+    return false
 }
+func (o *PayAtTable) isValidPaymentInstrument() bool {
+    var allowedEnumValues = []string{ "Cash", "Card" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetPaymentInstrument() == allowed {
+            return true
+        }
+    }
+    return false
+}
+

@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v8/src/common"
+    "github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the PaymentInstrumentUpdateRequest type satisfies the MappedNullable interface at compile time
@@ -20,9 +19,9 @@ var _ common.MappedNullable = &PaymentInstrumentUpdateRequest{}
 // PaymentInstrumentUpdateRequest struct for PaymentInstrumentUpdateRequest
 type PaymentInstrumentUpdateRequest struct {
 	// The unique identifier of the balance account associated with this payment instrument. >You can only change the balance account ID if the payment instrument has **inactive** status.
-	BalanceAccountId *string   `json:"balanceAccountId,omitempty"`
-	Card             *CardInfo `json:"card,omitempty"`
-	// The status of the payment instrument. If a status is not specified when creating a payment instrument, it is set to **active** by default. However, there can be exceptions for cards based on the `card.formFactor` and the `issuingCountryCode`. For example, when issuing physical cards in the US, the default status is **inactive**.  Possible values:    * **active**:  The payment instrument is active and can be used to make payments.    * **inactive**: The payment instrument is inactive and cannot be used to make payments.    * **suspended**: The payment instrument is suspended, either because it was stolen or lost.    * **closed**: The payment instrument is permanently closed. This action cannot be undone.
+	BalanceAccountId *string `json:"balanceAccountId,omitempty"`
+	Card *CardInfo `json:"card,omitempty"`
+	// The status of the payment instrument. If a status is not specified when creating a payment instrument, it is set to **active** by default. However, there can be exceptions for cards based on the `card.formFactor` and the `issuingCountryCode`. For example, when issuing physical cards in the US, the default status is **inactive**.  Possible values:    * **active**:  The payment instrument is active and can be used to make payments.    * **inactive**: The payment instrument is inactive and cannot be used to make payments.    * **suspended**: The payment instrument is suspended, either because it was stolen or lost.    * **closed**: The payment instrument is permanently closed. This action cannot be undone.   
 	Status *string `json:"status,omitempty"`
 	// Comment for the status of the payment instrument.  Required if `statusReason` is **other**.
 	StatusComment *string `json:"statusComment,omitempty"`
@@ -208,7 +207,7 @@ func (o *PaymentInstrumentUpdateRequest) SetStatusReason(v string) {
 }
 
 func (o PaymentInstrumentUpdateRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -271,21 +270,23 @@ func (v *NullablePaymentInstrumentUpdateRequest) UnmarshalJSON(src []byte) error
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *PaymentInstrumentUpdateRequest) isValidStatus() bool {
-	var allowedEnumValues = []string{"active", "closed", "inactive", "suspended"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetStatus() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "active", "closed", "inactive", "suspended" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetStatus() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *PaymentInstrumentUpdateRequest) isValidStatusReason() bool {
-	var allowedEnumValues = []string{"accountClosure", "damaged", "endOfLife", "expired", "lost", "other", "stolen", "suspectedFraud", "transactionRule"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetStatusReason() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "accountClosure", "damaged", "endOfLife", "expired", "lost", "other", "stolen", "suspectedFraud", "transactionRule" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetStatusReason() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

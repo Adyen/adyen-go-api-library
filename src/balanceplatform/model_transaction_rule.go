@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v8/src/common"
+    "github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the TransactionRule type satisfies the MappedNullable interface at compile time
@@ -24,25 +23,25 @@ type TransactionRule struct {
 	// Your description for the transaction rule, maximum 300 characters.
 	Description string `json:"description"`
 	// The date when the rule will stop being evaluated, in ISO 8601 extended offset date-time format. For example, **2020-12-18T10:15:30+01:00**.  If not provided, the rule will be evaluated until the rule status is set to **inactive**.
-	EndDate   *string                  `json:"endDate,omitempty"`
+	EndDate *string `json:"endDate,omitempty"`
 	EntityKey TransactionRuleEntityKey `json:"entityKey"`
 	// The unique identifier of the transaction rule.
-	Id       *string                 `json:"id,omitempty"`
+	Id *string `json:"id,omitempty"`
 	Interval TransactionRuleInterval `json:"interval"`
 	// The [outcome](https://docs.adyen.com/issuing/transaction-rules#outcome) that will be applied when a transaction meets the conditions of the rule. If not provided, by default, this is set to **hardBlock**.  Possible values:   * **hardBlock**: the transaction is declined.  * **scoreBased**: the transaction is assigned the `score` you specified. Adyen calculates the total score and if it exceeds 100, the transaction is declined.
 	OutcomeType *string `json:"outcomeType,omitempty"`
 	// Your reference for the transaction rule, maximum 150 characters.
 	Reference string `json:"reference"`
 	// Indicates the type of request to which the rule applies. If not provided, by default, this is set to **authorization**.  Possible values: **authorization**, **authentication**, **tokenization**, **bankTransfer**.
-	RequestType      *string                     `json:"requestType,omitempty"`
+	RequestType *string `json:"requestType,omitempty"`
 	RuleRestrictions TransactionRuleRestrictions `json:"ruleRestrictions"`
 	// A positive or negative score applied to the transaction if it meets the conditions of the rule. Required when `outcomeType` is **scoreBased**.  The value must be between **-100** and **100**.
 	Score *int32 `json:"score,omitempty"`
-	// The date when the rule will start to be evaluated, in ISO 8601 extended offset date-time format. For example, **2020-12-18T10:15:30+01:00**.  If not provided when creating a transaction rule, the `startDate` is set to the date when the rule status is set to **active**.
+	// The date when the rule will start to be evaluated, in ISO 8601 extended offset date-time format. For example, **2020-12-18T10:15:30+01:00**.  If not provided when creating a transaction rule, the `startDate` is set to the date when the rule status is set to **active**.   
 	StartDate *string `json:"startDate,omitempty"`
 	// The status of the transaction rule. If you provide a `startDate` in the request, the rule is automatically created  with an **active** status.   Possible values: **active**, **inactive**.
 	Status *string `json:"status,omitempty"`
-	// The [type of rule](https://docs.adyen.com/issuing/transaction-rules#rule-types), which defines if a rule blocks transactions based on individual characteristics or accumulates data.  Possible values:  * **blockList**: decline a transaction when the conditions are met.  * **maxUsage**: add the amount or number of transactions for the lifetime of a payment instrument, and then decline a transaction when the specified limits are met.  * **velocity**: add the amount or number of transactions based on a specified time interval, and then decline a transaction when the specified limits are met.
+	// The [type of rule](https://docs.adyen.com/issuing/transaction-rules#rule-types), which defines if a rule blocks transactions based on individual characteristics or accumulates data.  Possible values:  * **blockList**: decline a transaction when the conditions are met.  * **maxUsage**: add the amount or number of transactions for the lifetime of a payment instrument, and then decline a transaction when the specified limits are met.  * **velocity**: add the amount or number of transactions based on a specified time interval, and then decline a transaction when the specified limits are met. 
 	Type string `json:"type"`
 }
 
@@ -470,7 +469,7 @@ func (o *TransactionRule) SetType(v string) {
 }
 
 func (o TransactionRule) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -548,39 +547,41 @@ func (v *NullableTransactionRule) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *TransactionRule) isValidOutcomeType() bool {
-	var allowedEnumValues = []string{"enforceSCA", "hardBlock", "scoreBased"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetOutcomeType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "enforceSCA", "hardBlock", "scoreBased" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetOutcomeType() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *TransactionRule) isValidRequestType() bool {
-	var allowedEnumValues = []string{"authentication", "authorization", "bankTransfer", "tokenization"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetRequestType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "authentication", "authorization", "bankTransfer", "tokenization" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetRequestType() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *TransactionRule) isValidStatus() bool {
-	var allowedEnumValues = []string{"active", "inactive"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetStatus() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "active", "inactive" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetStatus() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *TransactionRule) isValidType() bool {
-	var allowedEnumValues = []string{"allowList", "blockList", "maxUsage", "velocity"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "allowList", "blockList", "maxUsage", "velocity" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

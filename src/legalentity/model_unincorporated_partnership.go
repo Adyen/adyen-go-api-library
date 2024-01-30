@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v8/src/common"
+    "github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the UnincorporatedPartnership type satisfies the MappedNullable interface at compile time
@@ -28,14 +27,14 @@ type UnincorporatedPartnership struct {
 	// The registered name, if different from the `name`.
 	DoingBusinessAs *string `json:"doingBusinessAs,omitempty"`
 	// The legal name.
-	Name                     string   `json:"name"`
+	Name string `json:"name"`
 	PrincipalPlaceOfBusiness *Address `json:"principalPlaceOfBusiness,omitempty"`
-	RegisteredAddress        Address  `json:"registeredAddress"`
+	RegisteredAddress Address `json:"registeredAddress"`
 	// The registration number.
 	RegistrationNumber *string `json:"registrationNumber,omitempty"`
 	// The tax information of the entity.
 	TaxInformation []TaxInformation `json:"taxInformation,omitempty"`
-	// Type of Partnership.  Possible values: *  **limitedPartnership** *  **generalPartnership** *  **familyPartnership** *  **commercialPartnership** *  **publicPartnership** *  **otherPartnership** *  **gbr** *  **gmbh** *  **kgaa** *  **cv** *  **vof** *  **maatschap** *  **privateFundLimitedPartnership** *  **businessTrustEntity** *  **businessPartnership**
+	// Type of Partnership.  Possible values: *  **limitedPartnership** *  **generalPartnership** *  **familyPartnership** *  **commercialPartnership** *  **publicPartnership** *  **otherPartnership** *  **gbr** *  **gmbh** *  **kgaa** *  **cv** *  **vof** *  **maatschap** *  **privateFundLimitedPartnership** *  **businessTrustEntity** *  **businessPartnership**  
 	Type string `json:"type"`
 	// The reason for not providing a VAT number.  Possible values: **industryExemption**, **belowTaxThreshold**.
 	VatAbsenceReason *string `json:"vatAbsenceReason,omitempty"`
@@ -417,7 +416,7 @@ func (o *UnincorporatedPartnership) SetVatNumber(v string) {
 }
 
 func (o UnincorporatedPartnership) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -493,21 +492,23 @@ func (v *NullableUnincorporatedPartnership) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *UnincorporatedPartnership) isValidType() bool {
-	var allowedEnumValues = []string{"limitedPartnership", "generalPartnership", "familyPartnership", "commercialPartnership", "publicPartnership", "otherPartnership", "gbr", "gmbh", "kgaa", "cv", "vof", "maatschap", "privateFundLimitedPartnership", "businessTrustEntity", "businessPartnership"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "limitedPartnership", "generalPartnership", "familyPartnership", "commercialPartnership", "publicPartnership", "otherPartnership", "gbr", "gmbh", "kgaa", "cv", "vof", "maatschap", "privateFundLimitedPartnership", "businessTrustEntity", "businessPartnership" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *UnincorporatedPartnership) isValidVatAbsenceReason() bool {
-	var allowedEnumValues = []string{"industryExemption", "belowTaxThreshold"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetVatAbsenceReason() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "industryExemption", "belowTaxThreshold" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetVatAbsenceReason() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

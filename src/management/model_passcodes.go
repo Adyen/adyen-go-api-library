@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v8/src/common"
+    "github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the Passcodes type satisfies the MappedNullable interface at compile time
@@ -21,7 +20,7 @@ var _ common.MappedNullable = &Passcodes{}
 type Passcodes struct {
 	// The passcode for the Admin menu and the Settings menu.
 	AdminMenuPin *string `json:"adminMenuPin,omitempty"`
-	// The passcode for unreferenced refunds on standalone terminals.
+	// The passcode for referenced and unreferenced refunds on standalone terminals.
 	RefundPin *string `json:"refundPin,omitempty"`
 	// The passcode to unlock the terminal screen after a timeout.
 	ScreenLockPin *string `json:"screenLockPin,omitempty"`
@@ -175,7 +174,7 @@ func (o *Passcodes) SetTxMenuPin(v string) {
 }
 
 func (o Passcodes) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -234,3 +233,6 @@ func (v *NullablePasscodes) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
