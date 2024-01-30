@@ -10,8 +10,9 @@ package balanceplatform
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v8/src/common"
 	"time"
+
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the CardOrderItem type satisfies the MappedNullable interface at compile time
@@ -20,8 +21,8 @@ var _ common.MappedNullable = &CardOrderItem{}
 // CardOrderItem struct for CardOrderItem
 type CardOrderItem struct {
 	// The unique identifier of the balance platform.
-	BalancePlatform *string `json:"balancePlatform,omitempty"`
-	Card *CardOrderItemDeliveryStatus `json:"card,omitempty"`
+	BalancePlatform *string                      `json:"balancePlatform,omitempty"`
+	Card            *CardOrderItemDeliveryStatus `json:"card,omitempty"`
 	// The unique identifier of the card order item.
 	CardOrderItemId *string `json:"cardOrderItemId,omitempty"`
 	// The date and time when the event was triggered, in ISO 8601 extended format. For example, **2020-12-18T10:15:30+01:00**.
@@ -29,8 +30,8 @@ type CardOrderItem struct {
 	// The ID of the resource.
 	Id *string `json:"id,omitempty"`
 	// The unique identifier of the payment instrument related to the card order item.
-	PaymentInstrumentId *string `json:"paymentInstrumentId,omitempty"`
-	Pin *CardOrderItemDeliveryStatus `json:"pin,omitempty"`
+	PaymentInstrumentId *string                      `json:"paymentInstrumentId,omitempty"`
+	Pin                 *CardOrderItemDeliveryStatus `json:"pin,omitempty"`
 	// The shipping method used to deliver the card or the PIN.
 	ShippingMethod *string `json:"shippingMethod,omitempty"`
 }
@@ -309,7 +310,7 @@ func (o *CardOrderItem) SetShippingMethod(v string) {
 }
 
 func (o CardOrderItem) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -380,6 +381,3 @@ func (v *NullableCardOrderItem) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

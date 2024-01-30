@@ -10,7 +10,8 @@ package configurationwebhook
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v8/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the SweepConfigurationNotificationRequest type satisfies the MappedNullable interface at compile time
@@ -118,7 +119,7 @@ func (o *SweepConfigurationNotificationRequest) SetType(v string) {
 }
 
 func (o SweepConfigurationNotificationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -169,14 +170,12 @@ func (v *NullableSweepConfigurationNotificationRequest) UnmarshalJSON(src []byte
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *SweepConfigurationNotificationRequest) isValidType() bool {
-    var allowedEnumValues = []string{ "balancePlatform.balanceAccountSweep.created", "balancePlatform.balanceAccountSweep.updated", "balancePlatform.balanceAccountSweep.deleted" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"balancePlatform.balanceAccountSweep.created", "balancePlatform.balanceAccountSweep.updated", "balancePlatform.balanceAccountSweep.deleted"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

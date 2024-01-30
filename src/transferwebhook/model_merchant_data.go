@@ -10,7 +10,8 @@ package transferwebhook
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v8/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the MerchantData type satisfies the MappedNullable interface at compile time
@@ -23,7 +24,7 @@ type MerchantData struct {
 	// The merchant category code.
 	Mcc *string `json:"mcc,omitempty"`
 	// The merchant identifier.
-	MerchantId *string `json:"merchantId,omitempty"`
+	MerchantId   *string       `json:"merchantId,omitempty"`
 	NameLocation *NameLocation `json:"nameLocation,omitempty"`
 	// The merchant postal code.
 	PostalCode *string `json:"postalCode,omitempty"`
@@ -207,7 +208,7 @@ func (o *MerchantData) SetPostalCode(v string) {
 }
 
 func (o MerchantData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -269,6 +270,3 @@ func (v *NullableMerchantData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

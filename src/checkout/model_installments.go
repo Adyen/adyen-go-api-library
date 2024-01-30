@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v8/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the Installments type satisfies the MappedNullable interface at compile time
@@ -18,7 +19,7 @@ var _ common.MappedNullable = &Installments{}
 
 // Installments struct for Installments
 type Installments struct {
-	// The installment plan, used for [card installments in Japan](https://docs.adyen.com/payment-methods/cards/credit-card-installments#make-a-payment-japan). By default, this is set to **regular**. Possible values: * **regular** * **revolving** 
+	// The installment plan, used for [card installments in Japan](https://docs.adyen.com/payment-methods/cards/credit-card-installments#make-a-payment-japan). By default, this is set to **regular**. Possible values: * **regular** * **revolving**
 	Plan *string `json:"plan,omitempty"`
 	// Defines the number of installments. Its value needs to be greater than zero.  Usually, the maximum allowed number of installments is capped. For example, it may not be possible to split a payment in more than 24 installments. The acquirer sets this upper limit, so its value may vary.
 	Value int32 `json:"value"`
@@ -99,7 +100,7 @@ func (o *Installments) SetValue(v int32) {
 }
 
 func (o Installments) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -151,14 +152,12 @@ func (v *NullableInstallments) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *Installments) isValidPlan() bool {
-    var allowedEnumValues = []string{ "regular", "revolving" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetPlan() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"regular", "revolving"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetPlan() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

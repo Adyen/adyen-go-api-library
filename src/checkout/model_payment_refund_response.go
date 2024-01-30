@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v8/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the PaymentRefundResponse type satisfies the MappedNullable interface at compile time
@@ -25,7 +26,7 @@ type PaymentRefundResponse struct {
 	MerchantAccount string `json:"merchantAccount"`
 	// Your reason for the refund request.
 	MerchantRefundReason *string `json:"merchantRefundReason,omitempty"`
-	// The [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference) of the payment to refund. 
+	// The [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference) of the payment to refund.
 	PaymentPspReference string `json:"paymentPspReference"`
 	// Adyen's 16-character reference associated with the refund request.
 	PspReference string `json:"pspReference"`
@@ -342,7 +343,7 @@ func (o *PaymentRefundResponse) SetStore(v string) {
 }
 
 func (o PaymentRefundResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -410,23 +411,21 @@ func (v *NullablePaymentRefundResponse) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *PaymentRefundResponse) isValidMerchantRefundReason() bool {
-    var allowedEnumValues = []string{ "FRAUD", "CUSTOMER REQUEST", "RETURN", "DUPLICATE", "OTHER" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetMerchantRefundReason() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"FRAUD", "CUSTOMER REQUEST", "RETURN", "DUPLICATE", "OTHER"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetMerchantRefundReason() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *PaymentRefundResponse) isValidStatus() bool {
-    var allowedEnumValues = []string{ "received" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetStatus() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"received"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetStatus() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

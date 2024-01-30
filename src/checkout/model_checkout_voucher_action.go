@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v8/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
 
 // checks if the CheckoutVoucherAction type satisfies the MappedNullable interface at compile time
@@ -27,7 +28,7 @@ type CheckoutVoucherAction struct {
 	// An entity number of Multibanco.
 	Entity *string `json:"entity,omitempty"`
 	// The date time of the voucher expiry.
-	ExpiresAt *string `json:"expiresAt,omitempty"`
+	ExpiresAt     *string `json:"expiresAt,omitempty"`
 	InitialAmount *Amount `json:"initialAmount,omitempty"`
 	// The URL to the detailed instructions to make payment using the voucher.
 	InstructionsUrl *string `json:"instructionsUrl,omitempty"`
@@ -51,7 +52,7 @@ type CheckoutVoucherAction struct {
 	ShopperEmail *string `json:"shopperEmail,omitempty"`
 	// The shopper name.
 	ShopperName *string `json:"shopperName,omitempty"`
-	Surcharge *Amount `json:"surcharge,omitempty"`
+	Surcharge   *Amount `json:"surcharge,omitempty"`
 	TotalAmount *Amount `json:"totalAmount,omitempty"`
 	// **voucher**
 	Type string `json:"type"`
@@ -742,7 +743,7 @@ func (o *CheckoutVoucherAction) SetUrl(v string) {
 }
 
 func (o CheckoutVoucherAction) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -851,14 +852,12 @@ func (v *NullableCheckoutVoucherAction) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *CheckoutVoucherAction) isValidType() bool {
-    var allowedEnumValues = []string{ "voucher" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"voucher"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-
