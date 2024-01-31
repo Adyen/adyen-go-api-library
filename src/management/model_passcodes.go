@@ -21,7 +21,7 @@ var _ common.MappedNullable = &Passcodes{}
 type Passcodes struct {
 	// The passcode for the Admin menu and the Settings menu.
 	AdminMenuPin *string `json:"adminMenuPin,omitempty"`
-	// The passcode for unreferenced refunds on standalone terminals.
+	// The passcode for referenced and unreferenced refunds on standalone terminals.
 	RefundPin *string `json:"refundPin,omitempty"`
 	// The passcode to unlock the terminal screen after a timeout.
 	ScreenLockPin *string `json:"screenLockPin,omitempty"`

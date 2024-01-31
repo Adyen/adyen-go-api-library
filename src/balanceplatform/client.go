@@ -25,11 +25,15 @@ type APIClient struct {
 
 	BankAccountValidationApi *BankAccountValidationApi
 
+	CardOrdersApi *CardOrdersApi
+
 	GrantAccountsApi *GrantAccountsApi
 
 	GrantOffersApi *GrantOffersApi
 
 	NetworkTokensApi *NetworkTokensApi
+
+	PINFunctionalityApi *PINFunctionalityApi
 
 	PaymentInstrumentGroupsApi *PaymentInstrumentGroupsApi
 
@@ -54,9 +58,11 @@ func NewAPIClient(client *common.Client) *APIClient {
 	c.AccountHoldersApi = (*AccountHoldersApi)(&c.common)
 	c.BalanceAccountsApi = (*BalanceAccountsApi)(&c.common)
 	c.BankAccountValidationApi = (*BankAccountValidationApi)(&c.common)
+	c.CardOrdersApi = (*CardOrdersApi)(&c.common)
 	c.GrantAccountsApi = (*GrantAccountsApi)(&c.common)
 	c.GrantOffersApi = (*GrantOffersApi)(&c.common)
 	c.NetworkTokensApi = (*NetworkTokensApi)(&c.common)
+	c.PINFunctionalityApi = (*PINFunctionalityApi)(&c.common)
 	c.PaymentInstrumentGroupsApi = (*PaymentInstrumentGroupsApi)(&c.common)
 	c.PaymentInstrumentsApi = (*PaymentInstrumentsApi)(&c.common)
 	c.PlatformApi = (*PlatformApi)(&c.common)

@@ -21,7 +21,7 @@ var _ common.MappedNullable = &PaymentInstrumentRequirement{}
 type PaymentInstrumentRequirement struct {
 	// Specifies the requirements for the payment instrument that need to be included in the request for a particular route.
 	Description *string `json:"description,omitempty"`
-	// The two-character ISO-3166-1 alpha-2 country code of the counterparty. For example, **US** or **NL**.
+	// The two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code where the payment instrument is issued. For example, **NL** or **US**.
 	IssuingCountryCode *string `json:"issuingCountryCode,omitempty"`
 	// Specifies if the requirement only applies to transfers to another balance platform.
 	OnlyForCrossBalancePlatform *bool `json:"onlyForCrossBalancePlatform,omitempty"`

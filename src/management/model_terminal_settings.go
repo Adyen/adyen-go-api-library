@@ -33,6 +33,7 @@ type TerminalSettings struct {
 	Payment           *Payment           `json:"payment,omitempty"`
 	ReceiptOptions    *ReceiptOptions    `json:"receiptOptions,omitempty"`
 	ReceiptPrinting   *ReceiptPrinting   `json:"receiptPrinting,omitempty"`
+	Refunds           *Refunds           `json:"refunds,omitempty"`
 	Signature         *Signature         `json:"signature,omitempty"`
 	Standalone        *Standalone        `json:"standalone,omitempty"`
 	Surcharge         *Surcharge         `json:"surcharge,omitempty"`
@@ -474,6 +475,38 @@ func (o *TerminalSettings) SetReceiptPrinting(v ReceiptPrinting) {
 	o.ReceiptPrinting = &v
 }
 
+// GetRefunds returns the Refunds field value if set, zero value otherwise.
+func (o *TerminalSettings) GetRefunds() Refunds {
+	if o == nil || common.IsNil(o.Refunds) {
+		var ret Refunds
+		return ret
+	}
+	return *o.Refunds
+}
+
+// GetRefundsOk returns a tuple with the Refunds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TerminalSettings) GetRefundsOk() (*Refunds, bool) {
+	if o == nil || common.IsNil(o.Refunds) {
+		return nil, false
+	}
+	return o.Refunds, true
+}
+
+// HasRefunds returns a boolean if a field has been set.
+func (o *TerminalSettings) HasRefunds() bool {
+	if o != nil && !common.IsNil(o.Refunds) {
+		return true
+	}
+
+	return false
+}
+
+// SetRefunds gets a reference to the given Refunds and assigns it to the Refunds field.
+func (o *TerminalSettings) SetRefunds(v Refunds) {
+	o.Refunds = &v
+}
+
 // GetSignature returns the Signature field value if set, zero value otherwise.
 func (o *TerminalSettings) GetSignature() Signature {
 	if o == nil || common.IsNil(o.Signature) {
@@ -714,6 +747,9 @@ func (o TerminalSettings) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.ReceiptPrinting) {
 		toSerialize["receiptPrinting"] = o.ReceiptPrinting
+	}
+	if !common.IsNil(o.Refunds) {
+		toSerialize["refunds"] = o.Refunds
 	}
 	if !common.IsNil(o.Signature) {
 		toSerialize["signature"] = o.Signature

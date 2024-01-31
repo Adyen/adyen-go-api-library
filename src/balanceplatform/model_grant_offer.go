@@ -10,6 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
+	"time"
 
 	"github.com/adyen/adyen-go-api-library/v8/src/common"
 )
@@ -23,13 +24,15 @@ type GrantOffer struct {
 	AccountHolderId string  `json:"accountHolderId"`
 	Amount          *Amount `json:"amount,omitempty"`
 	// The contract type of the grant offer. Possible value: **cashAdvance**, **loan**.
-	ContractType *string                `json:"contractType,omitempty"`
-	ExpiresAt    map[string]interface{} `json:"expiresAt,omitempty"`
-	Fee          *Fee                   `json:"fee,omitempty"`
+	ContractType *string `json:"contractType,omitempty"`
+	// The end date of the grant offer validity period.
+	ExpiresAt *time.Time `json:"expiresAt,omitempty"`
+	Fee       *Fee       `json:"fee,omitempty"`
 	// The unique identifier of the grant offer.
-	Id        *string                `json:"id,omitempty"`
-	Repayment *Repayment             `json:"repayment,omitempty"`
-	StartsAt  map[string]interface{} `json:"startsAt,omitempty"`
+	Id        *string    `json:"id,omitempty"`
+	Repayment *Repayment `json:"repayment,omitempty"`
+	// The starting date of the grant offer validity period.
+	StartsAt *time.Time `json:"startsAt,omitempty"`
 }
 
 // NewGrantOffer instantiates a new GrantOffer object
@@ -139,19 +142,19 @@ func (o *GrantOffer) SetContractType(v string) {
 }
 
 // GetExpiresAt returns the ExpiresAt field value if set, zero value otherwise.
-func (o *GrantOffer) GetExpiresAt() map[string]interface{} {
+func (o *GrantOffer) GetExpiresAt() time.Time {
 	if o == nil || common.IsNil(o.ExpiresAt) {
-		var ret map[string]interface{}
+		var ret time.Time
 		return ret
 	}
-	return o.ExpiresAt
+	return *o.ExpiresAt
 }
 
 // GetExpiresAtOk returns a tuple with the ExpiresAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GrantOffer) GetExpiresAtOk() (map[string]interface{}, bool) {
+func (o *GrantOffer) GetExpiresAtOk() (*time.Time, bool) {
 	if o == nil || common.IsNil(o.ExpiresAt) {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
 	return o.ExpiresAt, true
 }
@@ -165,9 +168,9 @@ func (o *GrantOffer) HasExpiresAt() bool {
 	return false
 }
 
-// SetExpiresAt gets a reference to the given map[string]interface{} and assigns it to the ExpiresAt field.
-func (o *GrantOffer) SetExpiresAt(v map[string]interface{}) {
-	o.ExpiresAt = v
+// SetExpiresAt gets a reference to the given time.Time and assigns it to the ExpiresAt field.
+func (o *GrantOffer) SetExpiresAt(v time.Time) {
+	o.ExpiresAt = &v
 }
 
 // GetFee returns the Fee field value if set, zero value otherwise.
@@ -267,19 +270,19 @@ func (o *GrantOffer) SetRepayment(v Repayment) {
 }
 
 // GetStartsAt returns the StartsAt field value if set, zero value otherwise.
-func (o *GrantOffer) GetStartsAt() map[string]interface{} {
+func (o *GrantOffer) GetStartsAt() time.Time {
 	if o == nil || common.IsNil(o.StartsAt) {
-		var ret map[string]interface{}
+		var ret time.Time
 		return ret
 	}
-	return o.StartsAt
+	return *o.StartsAt
 }
 
 // GetStartsAtOk returns a tuple with the StartsAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GrantOffer) GetStartsAtOk() (map[string]interface{}, bool) {
+func (o *GrantOffer) GetStartsAtOk() (*time.Time, bool) {
 	if o == nil || common.IsNil(o.StartsAt) {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
 	return o.StartsAt, true
 }
@@ -293,9 +296,9 @@ func (o *GrantOffer) HasStartsAt() bool {
 	return false
 }
 
-// SetStartsAt gets a reference to the given map[string]interface{} and assigns it to the StartsAt field.
-func (o *GrantOffer) SetStartsAt(v map[string]interface{}) {
-	o.StartsAt = v
+// SetStartsAt gets a reference to the given time.Time and assigns it to the StartsAt field.
+func (o *GrantOffer) SetStartsAt(v time.Time) {
+	o.StartsAt = &v
 }
 
 func (o GrantOffer) MarshalJSON() ([]byte, error) {

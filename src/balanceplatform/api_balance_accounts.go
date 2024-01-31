@@ -308,119 +308,6 @@ func (a *BalanceAccountsApi) DeleteSweep(ctx context.Context, r BalanceAccountsA
 	return httpRes, err
 }
 
-// All parameters accepted by BalanceAccountsApi.GetAllPaymentInstrumentsForBalanceAccount
-type BalanceAccountsApiGetAllPaymentInstrumentsForBalanceAccountInput struct {
-	id     string
-	offset *int32
-	limit  *int32
-}
-
-// The number of items that you want to skip.
-func (r BalanceAccountsApiGetAllPaymentInstrumentsForBalanceAccountInput) Offset(offset int32) BalanceAccountsApiGetAllPaymentInstrumentsForBalanceAccountInput {
-	r.offset = &offset
-	return r
-}
-
-// The number of items returned per page, maximum 100 items. By default, the response returns 10 items per page.
-func (r BalanceAccountsApiGetAllPaymentInstrumentsForBalanceAccountInput) Limit(limit int32) BalanceAccountsApiGetAllPaymentInstrumentsForBalanceAccountInput {
-	r.limit = &limit
-	return r
-}
-
-/*
-Prepare a request for GetAllPaymentInstrumentsForBalanceAccount
-@param id The unique identifier of the balance account.
-@return BalanceAccountsApiGetAllPaymentInstrumentsForBalanceAccountInput
-*/
-func (a *BalanceAccountsApi) GetAllPaymentInstrumentsForBalanceAccountInput(id string) BalanceAccountsApiGetAllPaymentInstrumentsForBalanceAccountInput {
-	return BalanceAccountsApiGetAllPaymentInstrumentsForBalanceAccountInput{
-		id: id,
-	}
-}
-
-/*
-GetAllPaymentInstrumentsForBalanceAccount Get all payment instruments for a balance account
-
-Returns a paginated list of the payment instruments associated with a balance account.
-
-To fetch multiple pages, use the query parameters.For example, to limit the page to 3 payment instruments and to skip the first 6, use `/balanceAccounts/{id}/paymentInstruments?limit=3&offset=6`.
-
-@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@param r BalanceAccountsApiGetAllPaymentInstrumentsForBalanceAccountInput - Request parameters, see GetAllPaymentInstrumentsForBalanceAccountInput
-@return PaginatedPaymentInstrumentsResponse, *http.Response, error
-*/
-func (a *BalanceAccountsApi) GetAllPaymentInstrumentsForBalanceAccount(ctx context.Context, r BalanceAccountsApiGetAllPaymentInstrumentsForBalanceAccountInput) (PaginatedPaymentInstrumentsResponse, *http.Response, error) {
-	res := &PaginatedPaymentInstrumentsResponse{}
-	path := "/balanceAccounts/{id}/paymentInstruments"
-	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	if r.offset != nil {
-		common.ParameterAddToQuery(queryParams, "offset", r.offset, "")
-	}
-	if r.limit != nil {
-		common.ParameterAddToQuery(queryParams, "limit", r.limit, "")
-	}
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		nil,
-		res,
-		http.MethodGet,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
-
-	if httpRes == nil {
-		return *res, httpRes, err
-	}
-
-	var serviceError common.RestServiceError
-	if httpRes.StatusCode == 400 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 401 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 403 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 422 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 500 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-
-	return *res, httpRes, err
-}
-
 // All parameters accepted by BalanceAccountsApi.GetAllSweepsForBalanceAccount
 type BalanceAccountsApiGetAllSweepsForBalanceAccountInput struct {
 	balanceAccountId string
@@ -565,6 +452,129 @@ func (a *BalanceAccountsApi) GetBalanceAccount(ctx context.Context, r BalanceAcc
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 400 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+
+	return *res, httpRes, err
+}
+
+// All parameters accepted by BalanceAccountsApi.GetPaymentInstrumentsLinkedToBalanceAccount
+type BalanceAccountsApiGetPaymentInstrumentsLinkedToBalanceAccountInput struct {
+	id     string
+	offset *int32
+	limit  *int32
+	status *string
+}
+
+// The number of items that you want to skip.
+func (r BalanceAccountsApiGetPaymentInstrumentsLinkedToBalanceAccountInput) Offset(offset int32) BalanceAccountsApiGetPaymentInstrumentsLinkedToBalanceAccountInput {
+	r.offset = &offset
+	return r
+}
+
+// The number of items returned per page, maximum 100 items. By default, the response returns 10 items per page.
+func (r BalanceAccountsApiGetPaymentInstrumentsLinkedToBalanceAccountInput) Limit(limit int32) BalanceAccountsApiGetPaymentInstrumentsLinkedToBalanceAccountInput {
+	r.limit = &limit
+	return r
+}
+
+// The status of the payment instruments that you want to get. By default, the response includes payment instruments with any status.
+func (r BalanceAccountsApiGetPaymentInstrumentsLinkedToBalanceAccountInput) Status(status string) BalanceAccountsApiGetPaymentInstrumentsLinkedToBalanceAccountInput {
+	r.status = &status
+	return r
+}
+
+/*
+Prepare a request for GetPaymentInstrumentsLinkedToBalanceAccount
+@param id The unique identifier of the balance account.
+@return BalanceAccountsApiGetPaymentInstrumentsLinkedToBalanceAccountInput
+*/
+func (a *BalanceAccountsApi) GetPaymentInstrumentsLinkedToBalanceAccountInput(id string) BalanceAccountsApiGetPaymentInstrumentsLinkedToBalanceAccountInput {
+	return BalanceAccountsApiGetPaymentInstrumentsLinkedToBalanceAccountInput{
+		id: id,
+	}
+}
+
+/*
+GetPaymentInstrumentsLinkedToBalanceAccount Get payment instruments linked to a balance account
+
+Returns a paginated list of the payment instruments associated with a balance account.
+
+To fetch multiple pages, use the query parameters.For example, to limit the page to 3 payment instruments which are in active status and to skip the first 6, use `/balanceAccounts/{id}/paymentInstruments?limit=3&offset=6&status=active`.
+
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r BalanceAccountsApiGetPaymentInstrumentsLinkedToBalanceAccountInput - Request parameters, see GetPaymentInstrumentsLinkedToBalanceAccountInput
+@return PaginatedPaymentInstrumentsResponse, *http.Response, error
+*/
+func (a *BalanceAccountsApi) GetPaymentInstrumentsLinkedToBalanceAccount(ctx context.Context, r BalanceAccountsApiGetPaymentInstrumentsLinkedToBalanceAccountInput) (PaginatedPaymentInstrumentsResponse, *http.Response, error) {
+	res := &PaginatedPaymentInstrumentsResponse{}
+	path := "/balanceAccounts/{id}/paymentInstruments"
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.offset != nil {
+		common.ParameterAddToQuery(queryParams, "offset", r.offset, "")
+	}
+	if r.limit != nil {
+		common.ParameterAddToQuery(queryParams, "limit", r.limit, "")
+	}
+	if r.status != nil {
+		common.ParameterAddToQuery(queryParams, "status", r.status, "")
+	}
 	httpRes, err := common.SendAPIRequest(
 		ctx,
 		a.Client,
