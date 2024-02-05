@@ -12,7 +12,7 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/adyen/adyen-go-api-library/v8/src/common"
+	"github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the ForexQuote type satisfies the MappedNullable interface at compile time
