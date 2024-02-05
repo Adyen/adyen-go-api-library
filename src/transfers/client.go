@@ -9,7 +9,7 @@ API version: 4
 package transfers
 
 import (
-	"github.com/adyen/adyen-go-api-library/v8/src/common"
+	"github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // APIClient manages communication with the Transfers API API v4

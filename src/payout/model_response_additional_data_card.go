@@ -11,7 +11,7 @@ package payout
 import (
 	"encoding/json"
 
-	"github.com/adyen/adyen-go-api-library/v8/src/common"
+	"github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the ResponseAdditionalDataCard type satisfies the MappedNullable interface at compile time

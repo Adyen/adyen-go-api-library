@@ -2,14 +2,14 @@ package tests
 
 import (
 	"context"
-	"github.com/adyen/adyen-go-api-library/v8/src/balancecontrol"
+	"github.com/adyen/adyen-go-api-library/v9/src/balancecontrol"
 	"io"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 
-	"github.com/adyen/adyen-go-api-library/v8/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v8/src/common"
+	"github.com/adyen/adyen-go-api-library/v9/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v9/src/common"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
