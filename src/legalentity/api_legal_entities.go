@@ -10,10 +10,11 @@ package legalentity
 
 import (
 	"context"
-    "net/http"
-    "net/url"
-    "strings"
-    "github.com/adyen/adyen-go-api-library/v9/src/common"
+	"net/http"
+	"net/url"
+	"strings"
+
+	"github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // LegalEntitiesApi service
@@ -23,7 +24,6 @@ type LegalEntitiesApi common.Service
 type LegalEntitiesApiCheckLegalEntitysVerificationErrorsInput struct {
 	id string
 }
-
 
 /*
 Prepare a request for CheckLegalEntitysVerificationErrors
@@ -46,32 +46,29 @@ Returns the verification errors for a legal entity and its supporting entities.
 @return VerificationErrors, *http.Response, error
 */
 func (a *LegalEntitiesApi) CheckLegalEntitysVerificationErrors(ctx context.Context, r LegalEntitiesApiCheckLegalEntitysVerificationErrorsInput) (VerificationErrors, *http.Response, error) {
-    res := &VerificationErrors{}
+	res := &VerificationErrors{}
 	path := "/legalEntities/{id}/checkVerificationErrors"
-    path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by LegalEntitiesApi.ConfirmDataReview
 type LegalEntitiesApiConfirmDataReviewInput struct {
 	id string
 }
-
 
 /*
 Prepare a request for ConfirmDataReview
@@ -94,30 +91,28 @@ Confirms that your user has reviewed the data for the legal entity specified in 
 @return DataReviewConfirmationResponse, *http.Response, error
 */
 func (a *LegalEntitiesApi) ConfirmDataReview(ctx context.Context, r LegalEntitiesApiConfirmDataReviewInput) (DataReviewConfirmationResponse, *http.Response, error) {
-    res := &DataReviewConfirmationResponse{}
+	res := &DataReviewConfirmationResponse{}
 	path := "/legalEntities/{id}/confirmDataReview"
-    path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by LegalEntitiesApi.CreateLegalEntity
 type LegalEntitiesApiCreateLegalEntityInput struct {
-	xRequestedVerificationCode *string
+	xRequestedVerificationCode  *string
 	legalEntityInfoRequiredType *LegalEntityInfoRequiredType
 }
 
@@ -132,23 +127,21 @@ func (r LegalEntitiesApiCreateLegalEntityInput) LegalEntityInfoRequiredType(lega
 	return r
 }
 
-
 /*
 Prepare a request for CreateLegalEntity
 
 @return LegalEntitiesApiCreateLegalEntityInput
 */
 func (a *LegalEntitiesApi) CreateLegalEntityInput() LegalEntitiesApiCreateLegalEntityInput {
-	return LegalEntitiesApiCreateLegalEntityInput{
-	}
+	return LegalEntitiesApiCreateLegalEntityInput{}
 }
 
 /*
 CreateLegalEntity Create a legal entity
 
-Creates a legal entity. 
+Creates a legal entity.
 
-This resource contains information about the user that will be onboarded in your platform. Adyen uses this information to perform verification checks as required by payment industry regulations. Adyen informs you of the verification results through webhooks or API responses. 
+This resource contains information about the user that will be onboarded in your platform. Adyen uses this information to perform verification checks as required by payment industry regulations. Adyen informs you of the verification results through webhooks or API responses.
 
 >If you are using hosted onboarding and just beginning your integration, use v3 for your API requests. Otherwise, use v2.
 
@@ -159,34 +152,31 @@ This resource contains information about the user that will be onboarded in your
 @return LegalEntity, *http.Response, error
 */
 func (a *LegalEntitiesApi) CreateLegalEntity(ctx context.Context, r LegalEntitiesApiCreateLegalEntityInput) (LegalEntity, *http.Response, error) {
-    res := &LegalEntity{}
+	res := &LegalEntity{}
 	path := "/legalEntities"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    if r.xRequestedVerificationCode != nil {
-        common.ParameterAddToHeaderOrQuery(headerParams, "x-requested-verification-code", r.xRequestedVerificationCode, "")
-    }
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.legalEntityInfoRequiredType,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.xRequestedVerificationCode != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "x-requested-verification-code", r.xRequestedVerificationCode, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.legalEntityInfoRequiredType,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by LegalEntitiesApi.GetAllBusinessLinesUnderLegalEntity
 type LegalEntitiesApiGetAllBusinessLinesUnderLegalEntityInput struct {
 	id string
 }
-
 
 /*
 Prepare a request for GetAllBusinessLinesUnderLegalEntity
@@ -209,32 +199,29 @@ Returns the business lines owned by a legal entity.
 @return BusinessLines, *http.Response, error
 */
 func (a *LegalEntitiesApi) GetAllBusinessLinesUnderLegalEntity(ctx context.Context, r LegalEntitiesApiGetAllBusinessLinesUnderLegalEntityInput) (BusinessLines, *http.Response, error) {
-    res := &BusinessLines{}
+	res := &BusinessLines{}
 	path := "/legalEntities/{id}/businessLines"
-    path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodGet,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by LegalEntitiesApi.GetLegalEntity
 type LegalEntitiesApiGetLegalEntityInput struct {
 	id string
 }
-
 
 /*
 Prepare a request for GetLegalEntity
@@ -257,32 +244,30 @@ Returns a legal entity.
 @return LegalEntity, *http.Response, error
 */
 func (a *LegalEntitiesApi) GetLegalEntity(ctx context.Context, r LegalEntitiesApiGetLegalEntityInput) (LegalEntity, *http.Response, error) {
-    res := &LegalEntity{}
+	res := &LegalEntity{}
 	path := "/legalEntities/{id}"
-    path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodGet,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by LegalEntitiesApi.UpdateLegalEntity
 type LegalEntitiesApiUpdateLegalEntityInput struct {
-	id string
+	id                         string
 	xRequestedVerificationCode *string
-	legalEntityInfo *LegalEntityInfo
+	legalEntityInfo            *LegalEntityInfo
 }
 
 // Use the requested verification code 0_0001 to resolve any suberrors associated with the legal entity. Requested verification codes can only be used in your test environment.
@@ -295,7 +280,6 @@ func (r LegalEntitiesApiUpdateLegalEntityInput) LegalEntityInfo(legalEntityInfo 
 	r.legalEntityInfo = &legalEntityInfo
 	return r
 }
-
 
 /*
 Prepare a request for UpdateLegalEntity
@@ -320,26 +304,24 @@ Updates a legal entity.
 @return LegalEntity, *http.Response, error
 */
 func (a *LegalEntitiesApi) UpdateLegalEntity(ctx context.Context, r LegalEntitiesApiUpdateLegalEntityInput) (LegalEntity, *http.Response, error) {
-    res := &LegalEntity{}
+	res := &LegalEntity{}
 	path := "/legalEntities/{id}"
-    path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    if r.xRequestedVerificationCode != nil {
-        common.ParameterAddToHeaderOrQuery(headerParams, "x-requested-verification-code", r.xRequestedVerificationCode, "")
-    }
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.legalEntityInfo,
-        res,
-        http.MethodPatch,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.xRequestedVerificationCode != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "x-requested-verification-code", r.xRequestedVerificationCode, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.legalEntityInfo,
+		res,
+		http.MethodPatch,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-

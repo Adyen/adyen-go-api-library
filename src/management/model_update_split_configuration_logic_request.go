@@ -10,7 +10,8 @@ package management
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v9/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the UpdateSplitConfigurationLogicRequest type satisfies the MappedNullable interface at compile time
@@ -19,7 +20,7 @@ var _ common.MappedNullable = &UpdateSplitConfigurationLogicRequest{}
 // UpdateSplitConfigurationLogicRequest struct for UpdateSplitConfigurationLogicRequest
 type UpdateSplitConfigurationLogicRequest struct {
 	// Specifies the logic to apply when booking the transaction fees. Should be combined with adyenFees.  Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**.
-	AcquiringFees *string `json:"acquiringFees,omitempty"`
+	AcquiringFees        *string               `json:"acquiringFees,omitempty"`
 	AdditionalCommission *AdditionalCommission `json:"additionalCommission,omitempty"`
 	// Specifies the logic to apply when booking the transaction fees. Should be combined with schemeFee, interchange & adyenMarkup.  Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**.
 	AdyenCommission *string `json:"adyenCommission,omitempty"`
@@ -30,8 +31,8 @@ type UpdateSplitConfigurationLogicRequest struct {
 	// Specifies the logic to apply when booking the chargeback amount.  Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**, **deductAccordingToSplitRatio**.
 	Chargeback *string `json:"chargeback,omitempty"`
 	// Specifies the logic to apply when allocating the chargeback costs.  Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**
-	ChargebackCostAllocation *string `json:"chargebackCostAllocation,omitempty"`
-	Commission Commission `json:"commission"`
+	ChargebackCostAllocation *string    `json:"chargebackCostAllocation,omitempty"`
+	Commission               Commission `json:"commission"`
 	// Specifies the logic to apply when booking the transaction fees. Should be combined with schemeFee, adyenCommission & adyenMarkup.  Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**.
 	Interchange *string `json:"interchange,omitempty"`
 	// Specifies the logic to apply when booking the transaction fees. Cannot be combined with other fees.  Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**.
@@ -539,7 +540,7 @@ func (o *UpdateSplitConfigurationLogicRequest) SetTip(v string) {
 }
 
 func (o UpdateSplitConfigurationLogicRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -630,113 +631,111 @@ func (v *NullableUpdateSplitConfigurationLogicRequest) UnmarshalJSON(src []byte)
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *UpdateSplitConfigurationLogicRequest) isValidAcquiringFees() bool {
-    var allowedEnumValues = []string{ "deductFromLiableAccount", "deductFromOneBalanceAccount" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetAcquiringFees() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"deductFromLiableAccount", "deductFromOneBalanceAccount"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetAcquiringFees() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *UpdateSplitConfigurationLogicRequest) isValidAdyenCommission() bool {
-    var allowedEnumValues = []string{ "deductFromLiableAccount", "deductFromOneBalanceAccount" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetAdyenCommission() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"deductFromLiableAccount", "deductFromOneBalanceAccount"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetAdyenCommission() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *UpdateSplitConfigurationLogicRequest) isValidAdyenFees() bool {
-    var allowedEnumValues = []string{ "deductFromLiableAccount", "deductFromOneBalanceAccount" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetAdyenFees() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"deductFromLiableAccount", "deductFromOneBalanceAccount"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetAdyenFees() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *UpdateSplitConfigurationLogicRequest) isValidAdyenMarkup() bool {
-    var allowedEnumValues = []string{ "deductFromLiableAccount", "deductFromOneBalanceAccount" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetAdyenMarkup() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"deductFromLiableAccount", "deductFromOneBalanceAccount"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetAdyenMarkup() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *UpdateSplitConfigurationLogicRequest) isValidChargeback() bool {
-    var allowedEnumValues = []string{ "deductFromLiableAccount", "deductFromOneBalanceAccount", "deductAccordingToSplitRatio" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetChargeback() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"deductFromLiableAccount", "deductFromOneBalanceAccount", "deductAccordingToSplitRatio"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetChargeback() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *UpdateSplitConfigurationLogicRequest) isValidChargebackCostAllocation() bool {
-    var allowedEnumValues = []string{ "deductFromLiableAccount", "deductFromOneBalanceAccount" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetChargebackCostAllocation() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"deductFromLiableAccount", "deductFromOneBalanceAccount"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetChargebackCostAllocation() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *UpdateSplitConfigurationLogicRequest) isValidInterchange() bool {
-    var allowedEnumValues = []string{ "deductFromLiableAccount", "deductFromOneBalanceAccount" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetInterchange() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"deductFromLiableAccount", "deductFromOneBalanceAccount"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetInterchange() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *UpdateSplitConfigurationLogicRequest) isValidPaymentFee() bool {
-    var allowedEnumValues = []string{ "deductFromLiableAccount", "deductFromOneBalanceAccount" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetPaymentFee() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"deductFromLiableAccount", "deductFromOneBalanceAccount"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetPaymentFee() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *UpdateSplitConfigurationLogicRequest) isValidRemainder() bool {
-    var allowedEnumValues = []string{ "addToLiableAccount", "addToOneBalanceAccount" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetRemainder() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"addToLiableAccount", "addToOneBalanceAccount"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetRemainder() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *UpdateSplitConfigurationLogicRequest) isValidSchemeFee() bool {
-    var allowedEnumValues = []string{ "deductFromLiableAccount", "deductFromOneBalanceAccount" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetSchemeFee() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"deductFromLiableAccount", "deductFromOneBalanceAccount"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetSchemeFee() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *UpdateSplitConfigurationLogicRequest) isValidSurcharge() bool {
-    var allowedEnumValues = []string{ "addToLiableAccount", "addToOneBalanceAccount" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetSurcharge() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"addToLiableAccount", "addToOneBalanceAccount"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetSurcharge() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *UpdateSplitConfigurationLogicRequest) isValidTip() bool {
-    var allowedEnumValues = []string{ "addToLiableAccount", "addToOneBalanceAccount" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetTip() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"addToLiableAccount", "addToOneBalanceAccount"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetTip() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

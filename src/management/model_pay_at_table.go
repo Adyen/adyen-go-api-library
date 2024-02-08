@@ -10,7 +10,8 @@ package management
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v9/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the PayAtTable type satisfies the MappedNullable interface at compile time
@@ -140,7 +141,7 @@ func (o *PayAtTable) SetPaymentInstrument(v string) {
 }
 
 func (o PayAtTable) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -197,23 +198,21 @@ func (v *NullablePayAtTable) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *PayAtTable) isValidAuthenticationMethod() bool {
-    var allowedEnumValues = []string{ "MAGSWIPE", "MKE" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetAuthenticationMethod() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"MAGSWIPE", "MKE"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetAuthenticationMethod() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *PayAtTable) isValidPaymentInstrument() bool {
-    var allowedEnumValues = []string{ "Cash", "Card" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetPaymentInstrument() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"Cash", "Card"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetPaymentInstrument() == allowed {
+			return true
+		}
+	}
+	return false
 }
-
