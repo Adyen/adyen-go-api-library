@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the UpdatePaymentMethodInfo type satisfies the MappedNullable interface at compile time
@@ -19,27 +18,29 @@ var _ common.MappedNullable = &UpdatePaymentMethodInfo{}
 
 // UpdatePaymentMethodInfo struct for UpdatePaymentMethodInfo
 type UpdatePaymentMethodInfo struct {
-	Bcmc            *BcmcInfo            `json:"bcmc,omitempty"`
+	Bcmc *BcmcInfo `json:"bcmc,omitempty"`
 	CartesBancaires *CartesBancairesInfo `json:"cartesBancaires,omitempty"`
 	// The list of countries where a payment method is available. By default, all countries supported by the payment method.
-	Countries []string              `json:"countries,omitempty"`
-	Cup       *GenericPmWithTdiInfo `json:"cup,omitempty"`
+	Countries []string `json:"countries,omitempty"`
+	Cup *GenericPmWithTdiInfo `json:"cup,omitempty"`
 	// The list of currencies that a payment method supports. By default, all currencies supported by the payment method.
-	Currencies      []string              `json:"currencies,omitempty"`
-	Diners          *GenericPmWithTdiInfo `json:"diners,omitempty"`
-	Discover        *GenericPmWithTdiInfo `json:"discover,omitempty"`
+	Currencies []string `json:"currencies,omitempty"`
+	// Custom routing flags for acquirer routing.
+	CustomRoutingFlags []string `json:"customRoutingFlags,omitempty"`
+	Diners *GenericPmWithTdiInfo `json:"diners,omitempty"`
+	Discover *GenericPmWithTdiInfo `json:"discover,omitempty"`
 	EftposAustralia *GenericPmWithTdiInfo `json:"eftpos_australia,omitempty"`
 	// Indicates whether the payment method is enabled (**true**) or disabled (**false**).
-	Enabled     *bool                 `json:"enabled,omitempty"`
-	Girocard    *GenericPmWithTdiInfo `json:"girocard,omitempty"`
-	Ideal       *GenericPmWithTdiInfo `json:"ideal,omitempty"`
+	Enabled *bool `json:"enabled,omitempty"`
+	Girocard *GenericPmWithTdiInfo `json:"girocard,omitempty"`
+	Ideal *GenericPmWithTdiInfo `json:"ideal,omitempty"`
 	InteracCard *GenericPmWithTdiInfo `json:"interac_card,omitempty"`
-	Jcb         *GenericPmWithTdiInfo `json:"jcb,omitempty"`
-	Maestro     *GenericPmWithTdiInfo `json:"maestro,omitempty"`
-	Mc          *GenericPmWithTdiInfo `json:"mc,omitempty"`
+	Jcb *GenericPmWithTdiInfo `json:"jcb,omitempty"`
+	Maestro *GenericPmWithTdiInfo `json:"maestro,omitempty"`
+	Mc *GenericPmWithTdiInfo `json:"mc,omitempty"`
 	// The list of stores for this payment method
-	StoreIds []string              `json:"storeIds,omitempty"`
-	Visa     *GenericPmWithTdiInfo `json:"visa,omitempty"`
+	StoreIds []string `json:"storeIds,omitempty"`
+	Visa *GenericPmWithTdiInfo `json:"visa,omitempty"`
 }
 
 // NewUpdatePaymentMethodInfo instantiates a new UpdatePaymentMethodInfo object
@@ -217,6 +218,38 @@ func (o *UpdatePaymentMethodInfo) HasCurrencies() bool {
 // SetCurrencies gets a reference to the given []string and assigns it to the Currencies field.
 func (o *UpdatePaymentMethodInfo) SetCurrencies(v []string) {
 	o.Currencies = v
+}
+
+// GetCustomRoutingFlags returns the CustomRoutingFlags field value if set, zero value otherwise.
+func (o *UpdatePaymentMethodInfo) GetCustomRoutingFlags() []string {
+	if o == nil || common.IsNil(o.CustomRoutingFlags) {
+		var ret []string
+		return ret
+	}
+	return o.CustomRoutingFlags
+}
+
+// GetCustomRoutingFlagsOk returns a tuple with the CustomRoutingFlags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdatePaymentMethodInfo) GetCustomRoutingFlagsOk() ([]string, bool) {
+	if o == nil || common.IsNil(o.CustomRoutingFlags) {
+		return nil, false
+	}
+	return o.CustomRoutingFlags, true
+}
+
+// HasCustomRoutingFlags returns a boolean if a field has been set.
+func (o *UpdatePaymentMethodInfo) HasCustomRoutingFlags() bool {
+	if o != nil && !common.IsNil(o.CustomRoutingFlags) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomRoutingFlags gets a reference to the given []string and assigns it to the CustomRoutingFlags field.
+func (o *UpdatePaymentMethodInfo) SetCustomRoutingFlags(v []string) {
+	o.CustomRoutingFlags = v
 }
 
 // GetDiners returns the Diners field value if set, zero value otherwise.
@@ -604,7 +637,7 @@ func (o *UpdatePaymentMethodInfo) SetVisa(v GenericPmWithTdiInfo) {
 }
 
 func (o UpdatePaymentMethodInfo) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -627,6 +660,9 @@ func (o UpdatePaymentMethodInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Currencies) {
 		toSerialize["currencies"] = o.Currencies
+	}
+	if !common.IsNil(o.CustomRoutingFlags) {
+		toSerialize["customRoutingFlags"] = o.CustomRoutingFlags
 	}
 	if !common.IsNil(o.Diners) {
 		toSerialize["diners"] = o.Diners
@@ -702,3 +738,6 @@ func (v *NullableUpdatePaymentMethodInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

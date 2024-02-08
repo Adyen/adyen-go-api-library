@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the AchDetails type satisfies the MappedNullable interface at compile time
@@ -380,7 +379,7 @@ func (o *AchDetails) SetType(v string) {
 }
 
 func (o AchDetails) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -456,21 +455,23 @@ func (v *NullableAchDetails) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *AchDetails) isValidBankAccountType() bool {
-	var allowedEnumValues = []string{"balance", "checking", "deposit", "general", "other", "payment", "savings"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetBankAccountType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "balance", "checking", "deposit", "general", "other", "payment", "savings" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetBankAccountType() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *AchDetails) isValidType() bool {
-	var allowedEnumValues = []string{"ach", "ach_plaid"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "ach", "ach_plaid" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

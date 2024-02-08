@@ -10,9 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 	"time"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the CreateCheckoutSessionRequest type satisfies the MappedNullable interface at compile time
@@ -20,29 +19,29 @@ var _ common.MappedNullable = &CreateCheckoutSessionRequest{}
 
 // CreateCheckoutSessionRequest struct for CreateCheckoutSessionRequest
 type CreateCheckoutSessionRequest struct {
-	AccountInfo      *AccountInfo `json:"accountInfo,omitempty"`
-	AdditionalAmount *Amount      `json:"additionalAmount,omitempty"`
+	AccountInfo *AccountInfo `json:"accountInfo,omitempty"`
+	AdditionalAmount *Amount `json:"additionalAmount,omitempty"`
 	// This field contains additional data, which may be required for a particular payment request.  The `additionalData` object consists of entries, each of which includes the key and value.
 	AdditionalData *map[string]string `json:"additionalData,omitempty"`
 	// List of payment methods to be presented to the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).  Example: `\"allowedPaymentMethods\":[\"ideal\",\"giropay\"]`
-	AllowedPaymentMethods []string            `json:"allowedPaymentMethods,omitempty"`
-	Amount                Amount              `json:"amount"`
-	ApplicationInfo       *ApplicationInfo    `json:"applicationInfo,omitempty"`
-	AuthenticationData    *AuthenticationData `json:"authenticationData,omitempty"`
-	BillingAddress        *BillingAddress     `json:"billingAddress,omitempty"`
+	AllowedPaymentMethods []string `json:"allowedPaymentMethods,omitempty"`
+	Amount Amount `json:"amount"`
+	ApplicationInfo *ApplicationInfo `json:"applicationInfo,omitempty"`
+	AuthenticationData *AuthenticationData `json:"authenticationData,omitempty"`
+	BillingAddress *BillingAddress `json:"billingAddress,omitempty"`
 	// List of payment methods to be hidden from the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).  Example: `\"blockedPaymentMethods\":[\"ideal\",\"giropay\"]`
 	BlockedPaymentMethods []string `json:"blockedPaymentMethods,omitempty"`
 	// The delay between the authorisation and scheduled auto-capture, specified in hours.
 	CaptureDelayHours *int32 `json:"captureDelayHours,omitempty"`
 	// The platform where a payment transaction takes place. This field is optional for filtering out payment methods that are only available on specific platforms. If this value is not set, then we will try to infer it from the `sdkVersion` or `token`.  Possible values: * **iOS** * **Android** * **Web**
-	Channel *string  `json:"channel,omitempty"`
+	Channel *string `json:"channel,omitempty"`
 	Company *Company `json:"company,omitempty"`
 	// The shopper's two-letter country code.
 	CountryCode *string `json:"countryCode,omitempty"`
 	// The shopper's date of birth.  Format [ISO-8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DD
 	DateOfBirth *string `json:"dateOfBirth,omitempty"`
 	// The date and time when the purchased goods should be delivered.  [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format: YYYY-MM-DDThh:mm:ss+TZD, for example, **2020-12-18T10:15:30+01:00**.
-	DeliverAt       *time.Time       `json:"deliverAt,omitempty"`
+	DeliverAt *time.Time `json:"deliverAt,omitempty"`
 	DeliveryAddress *DeliveryAddress `json:"deliveryAddress,omitempty"`
 	// When true and `shopperReference` is provided, the shopper will be asked if the payment details should be stored for future one-click payments.
 	EnableOneClick *bool `json:"enableOneClick,omitempty"`
@@ -51,31 +50,31 @@ type CreateCheckoutSessionRequest struct {
 	// When true and `shopperReference` is provided, the payment details will be tokenized for recurring payments.
 	EnableRecurring *bool `json:"enableRecurring,omitempty"`
 	// The date the session expires in [ISO8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. When not specified, the expiry date is set to 1 hour after session creation. You cannot set the session expiry to more than 24 hours after session creation.
-	ExpiresAt     *time.Time     `json:"expiresAt,omitempty"`
-	FundOrigin    *FundOrigin    `json:"fundOrigin,omitempty"`
+	ExpiresAt *time.Time `json:"expiresAt,omitempty"`
+	FundOrigin *FundOrigin `json:"fundOrigin,omitempty"`
 	FundRecipient *FundRecipient `json:"fundRecipient,omitempty"`
 	// A set of key-value pairs that specifies the installment options available per payment method. The key must be a payment method name in lowercase. For example, **card** to specify installment options for all cards, or **visa** or **mc**. The value must be an object containing the installment options.
 	InstallmentOptions *map[string]CheckoutSessionInstallmentOption `json:"installmentOptions,omitempty"`
 	// Price and product information about the purchased items, to be included on the invoice sent to the shopper. > This field is required for 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, and Zip.
 	LineItems []LineItem `json:"lineItems,omitempty"`
-	Mandate   *Mandate   `json:"mandate,omitempty"`
+	Mandate *Mandate `json:"mandate,omitempty"`
 	// The [merchant category code](https://en.wikipedia.org/wiki/Merchant_category_code) (MCC) is a four-digit number, which relates to a particular market segment. This code reflects the predominant activity that is conducted by the merchant.
 	Mcc *string `json:"mcc,omitempty"`
 	// The merchant account identifier, with which you want to process the transaction.
 	MerchantAccount string `json:"merchantAccount"`
 	// This reference allows linking multiple transactions to each other for reporting purposes (i.e. order auth-rate). The reference should be unique per billing cycle. The same merchant order reference should never be reused after the first authorised attempt. If used, this field should be supplied for all incoming authorisations. > We strongly recommend you send the `merchantOrderReference` value to benefit from linking payment requests when authorisation retries take place. In addition, we recommend you provide `retry.orderAttemptNumber`, `retry.chainAttemptNumber`, and `retry.skipRetry` values in `PaymentRequest.additionalData`.
 	MerchantOrderReference *string `json:"merchantOrderReference,omitempty"`
-	// Metadata consists of entries, each of which includes a key and a value. Limits: * Maximum 20 key-value pairs per request. * Maximum 20 characters per key. * Maximum 80 characters per value.
+	// Metadata consists of entries, each of which includes a key and a value. Limits: * Maximum 20 key-value pairs per request. * Maximum 20 characters per key. * Maximum 80 characters per value. 
 	Metadata *map[string]string `json:"metadata,omitempty"`
 	// Indicates the type of front end integration. Possible values: * **embedded** (default): Drop-in or Components integration * **hosted**: Hosted Checkout integration
-	Mode                    *string                  `json:"mode,omitempty"`
-	MpiData                 *ThreeDSecureData        `json:"mpiData,omitempty"`
+	Mode *string `json:"mode,omitempty"`
+	MpiData *ThreeDSecureData `json:"mpiData,omitempty"`
 	PlatformChargebackLogic *PlatformChargebackLogic `json:"platformChargebackLogic,omitempty"`
 	// Date after which no further authorisations shall be performed. Only for 3D Secure 2.
 	RecurringExpiry *string `json:"recurringExpiry,omitempty"`
 	// Minimum number of days between authorisations. Only for 3D Secure 2.
 	RecurringFrequency *string `json:"recurringFrequency,omitempty"`
-	// Defines a recurring payment type. Required when creating a token to store payment details. Allowed values: * `Subscription` – A transaction for a fixed or variable amount, which follows a fixed schedule. * `CardOnFile` – With a card-on-file (CoF) transaction, card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction. * `UnscheduledCardOnFile` – An unscheduled card-on-file (UCoF) transaction is a transaction that occurs on a non-fixed schedule and/or have variable amounts. For example, automatic top-ups when a cardholder's balance drops below a certain amount.
+	// Defines a recurring payment type. Required when creating a token to store payment details. Allowed values: * `Subscription` – A transaction for a fixed or variable amount, which follows a fixed schedule. * `CardOnFile` – With a card-on-file (CoF) transaction, card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction. * `UnscheduledCardOnFile` – An unscheduled card-on-file (UCoF) transaction is a transaction that occurs on a non-fixed schedule and/or have variable amounts. For example, automatic top-ups when a cardholder's balance drops below a certain amount. 
 	RecurringProcessingModel *string `json:"recurringProcessingModel,omitempty"`
 	// Specifies the redirect method (GET or POST) when redirecting back from the issuer.
 	RedirectFromIssuerMethod *string `json:"redirectFromIssuerMethod,omitempty"`
@@ -84,8 +83,8 @@ type CreateCheckoutSessionRequest struct {
 	// The reference to uniquely identify a payment.
 	Reference string `json:"reference"`
 	// The URL to return to when a redirect payment is completed.
-	ReturnUrl string    `json:"returnUrl"`
-	RiskData  *RiskData `json:"riskData,omitempty"`
+	ReturnUrl string `json:"returnUrl"`
+	RiskData *RiskData `json:"riskData,omitempty"`
 	// The shopper's email address.
 	ShopperEmail *string `json:"shopperEmail,omitempty"`
 	// The shopper's IP address. In general, we recommend that you provide this data, as it is used in a number of risk checks (for instance, number of payment attempts or location-based checks). > For 3D Secure 2 transactions, schemes require `shopperIP` for all browser-based implementations. This field is also mandatory for some merchants depending on your business model. For more information, [contact Support](https://www.adyen.help/hc/en-us/requests/new).
@@ -94,7 +93,7 @@ type CreateCheckoutSessionRequest struct {
 	ShopperInteraction *string `json:"shopperInteraction,omitempty"`
 	// The combination of a language code and a country code to specify the language to be used in the payment.
 	ShopperLocale *string `json:"shopperLocale,omitempty"`
-	ShopperName   *Name   `json:"shopperName,omitempty"`
+	ShopperName *Name `json:"shopperName,omitempty"`
 	// Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters. > Your reference must not include personally identifiable information (PII), for example name or email address.
 	ShopperReference *string `json:"shopperReference,omitempty"`
 	// The text to be shown on the shopper's bank statement.  We recommend sending a maximum of 22 characters, otherwise banks might truncate the string.  Allowed characters: **a-z**, **A-Z**, **0-9**, spaces, and special characters **. , ' _ - ? + * /_**.
@@ -109,7 +108,7 @@ type CreateCheckoutSessionRequest struct {
 	SplitCardFundingSources *bool `json:"splitCardFundingSources,omitempty"`
 	// An array of objects specifying how to split a payment when using [Adyen for Platforms](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information), [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic/processing-payments#providing-split-information), or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
 	Splits []Split `json:"splits,omitempty"`
-	// The ecommerce or point-of-sale store that is processing the payment. Used in:  * [Partner platform integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for the [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic). * [Platform setup integrations](https://docs.adyen.com/marketplaces-and-platforms/additional-for-platform-setup/route-payment-to-store) for the [Balance Platform](https://docs.adyen.com/marketplaces-and-platforms).
+	// Required for Adyen for Platforms integrations if you have a platform setup. This is your [reference](https://docs.adyen.com/api-explorer/Management/3/post/merchants/(merchantId)/stores#request-reference) (on [balance platform](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments)) or the [storeReference](https://docs.adyen.com/api-explorer/Account/latest/post/updateAccountHolder#request-accountHolderDetails-storeDetails-storeReference) (in the [classic integration](https://docs.adyen.com/marketplaces-and-platforms/processing-payments/route-payment-to-store/#route-a-payment-to-a-store)) for the ecommerce or point-of-sale store that is processing the payment.
 	Store *string `json:"store,omitempty"`
 	// When this is set to **true** and the `shopperReference` is provided, the payment details will be stored.
 	StorePaymentMethod *bool `json:"storePaymentMethod,omitempty"`
@@ -2019,7 +2018,7 @@ func (o *CreateCheckoutSessionRequest) SetTrustedShopper(v bool) {
 }
 
 func (o CreateCheckoutSessionRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -2236,48 +2235,50 @@ func (v *NullableCreateCheckoutSessionRequest) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *CreateCheckoutSessionRequest) isValidChannel() bool {
-	var allowedEnumValues = []string{"iOS", "Android", "Web"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetChannel() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "iOS", "Android", "Web" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetChannel() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *CreateCheckoutSessionRequest) isValidMode() bool {
-	var allowedEnumValues = []string{"embedded", "hosted"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetMode() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "embedded", "hosted" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetMode() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *CreateCheckoutSessionRequest) isValidRecurringProcessingModel() bool {
-	var allowedEnumValues = []string{"CardOnFile", "Subscription", "UnscheduledCardOnFile"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetRecurringProcessingModel() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "CardOnFile", "Subscription", "UnscheduledCardOnFile" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetRecurringProcessingModel() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *CreateCheckoutSessionRequest) isValidShopperInteraction() bool {
-	var allowedEnumValues = []string{"Ecommerce", "ContAuth", "Moto", "POS"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetShopperInteraction() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "Ecommerce", "ContAuth", "Moto", "POS" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetShopperInteraction() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *CreateCheckoutSessionRequest) isValidStorePaymentMethodMode() bool {
-	var allowedEnumValues = []string{"askForConsent", "disabled", "enabled"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetStorePaymentMethodMode() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "askForConsent", "disabled", "enabled" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetStorePaymentMethodMode() == allowed {
+            return true
+        }
+    }
+    return false
 }
+
