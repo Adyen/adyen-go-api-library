@@ -25,10 +25,12 @@ type UpdatePaymentMethodInfo struct {
 	Countries []string              `json:"countries,omitempty"`
 	Cup       *GenericPmWithTdiInfo `json:"cup,omitempty"`
 	// The list of currencies that a payment method supports. By default, all currencies supported by the payment method.
-	Currencies      []string              `json:"currencies,omitempty"`
-	Diners          *GenericPmWithTdiInfo `json:"diners,omitempty"`
-	Discover        *GenericPmWithTdiInfo `json:"discover,omitempty"`
-	EftposAustralia *GenericPmWithTdiInfo `json:"eftpos_australia,omitempty"`
+	Currencies []string `json:"currencies,omitempty"`
+	// Custom routing flags for acquirer routing.
+	CustomRoutingFlags []string              `json:"customRoutingFlags,omitempty"`
+	Diners             *GenericPmWithTdiInfo `json:"diners,omitempty"`
+	Discover           *GenericPmWithTdiInfo `json:"discover,omitempty"`
+	EftposAustralia    *GenericPmWithTdiInfo `json:"eftpos_australia,omitempty"`
 	// Indicates whether the payment method is enabled (**true**) or disabled (**false**).
 	Enabled     *bool                 `json:"enabled,omitempty"`
 	Girocard    *GenericPmWithTdiInfo `json:"girocard,omitempty"`
@@ -217,6 +219,38 @@ func (o *UpdatePaymentMethodInfo) HasCurrencies() bool {
 // SetCurrencies gets a reference to the given []string and assigns it to the Currencies field.
 func (o *UpdatePaymentMethodInfo) SetCurrencies(v []string) {
 	o.Currencies = v
+}
+
+// GetCustomRoutingFlags returns the CustomRoutingFlags field value if set, zero value otherwise.
+func (o *UpdatePaymentMethodInfo) GetCustomRoutingFlags() []string {
+	if o == nil || common.IsNil(o.CustomRoutingFlags) {
+		var ret []string
+		return ret
+	}
+	return o.CustomRoutingFlags
+}
+
+// GetCustomRoutingFlagsOk returns a tuple with the CustomRoutingFlags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdatePaymentMethodInfo) GetCustomRoutingFlagsOk() ([]string, bool) {
+	if o == nil || common.IsNil(o.CustomRoutingFlags) {
+		return nil, false
+	}
+	return o.CustomRoutingFlags, true
+}
+
+// HasCustomRoutingFlags returns a boolean if a field has been set.
+func (o *UpdatePaymentMethodInfo) HasCustomRoutingFlags() bool {
+	if o != nil && !common.IsNil(o.CustomRoutingFlags) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomRoutingFlags gets a reference to the given []string and assigns it to the CustomRoutingFlags field.
+func (o *UpdatePaymentMethodInfo) SetCustomRoutingFlags(v []string) {
+	o.CustomRoutingFlags = v
 }
 
 // GetDiners returns the Diners field value if set, zero value otherwise.
@@ -627,6 +661,9 @@ func (o UpdatePaymentMethodInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Currencies) {
 		toSerialize["currencies"] = o.Currencies
+	}
+	if !common.IsNil(o.CustomRoutingFlags) {
+		toSerialize["customRoutingFlags"] = o.CustomRoutingFlags
 	}
 	if !common.IsNil(o.Diners) {
 		toSerialize["diners"] = o.Diners

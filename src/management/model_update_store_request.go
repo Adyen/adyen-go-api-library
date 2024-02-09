@@ -24,7 +24,7 @@ type UpdateStoreRequest struct {
 	BusinessLineIds []string `json:"businessLineIds,omitempty"`
 	// The description of the store.
 	Description *string `json:"description,omitempty"`
-	// When using the Zip payment method: The location ID that Zip has assigned to your store.
+	// The unique identifier of the store, used by certain payment methods and tax authorities. Accepts up to 14 digits.  Required for CNPJ in Brazil, in the format 00.000.000/00git00-00 separated by dots, slashes, hyphens, or without separators.  Optional for Zip in Australia and SIRET in France, required except for nonprofit organizations and incorporated associations.
 	ExternalReferenceId *string `json:"externalReferenceId,omitempty"`
 	// The phone number of the store, including '+' and country code in the [E.164](https://en.wikipedia.org/wiki/E.164) format. If passed in a different format, we convert and validate the phone number against E.164.
 	PhoneNumber        *string                  `json:"phoneNumber,omitempty"`
