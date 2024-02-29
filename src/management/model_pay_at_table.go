@@ -24,7 +24,7 @@ type PayAtTable struct {
 	// Enable Pay at table.
 	EnablePayAtTable *bool `json:"enablePayAtTable,omitempty"`
 	// Sets the allowed payment instrument for Pay at table transactions.  Can be: **cash** or **card**. If not set, the terminal presents both options.
-	PaymentInstrument NullableString `json:"paymentInstrument,omitempty"`
+	PaymentInstrument common.NullableString `json:"paymentInstrument,omitempty"`
 }
 
 // NewPayAtTable instantiates a new PayAtTable object
