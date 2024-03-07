@@ -54,7 +54,6 @@ Adds the new domain to the list of Apple Pay domains that are registered with th
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Payment methods read and write
 
-
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r PaymentMethodsMerchantLevelApiAddApplePayDomainInput - Request parameters, see AddApplePayDomainInput
 @return *http.Response, error
@@ -107,6 +106,14 @@ func (a *PaymentMethodsMerchantLevelApi) AddApplePayDomain(ctx context.Context, 
 		return httpRes, serviceError
 	}
 	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
+		return httpRes, serviceError
+	}
+	if httpRes.StatusCode == 429 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -178,7 +185,6 @@ Returns details for all payment methods of the merchant account identified in th
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Payment methods read
 
-
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r PaymentMethodsMerchantLevelApiGetAllPaymentMethodsInput - Request parameters, see GetAllPaymentMethodsInput
 @return PaymentMethodResponse, *http.Response, error
@@ -249,6 +255,14 @@ func (a *PaymentMethodsMerchantLevelApi) GetAllPaymentMethods(ctx context.Contex
 		}
 		return *res, httpRes, serviceError
 	}
+	if httpRes.StatusCode == 429 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -286,7 +300,6 @@ Returns all Apple Pay domains that are registered with the merchant account and 
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Payment methods read
-
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r PaymentMethodsMerchantLevelApiGetApplePayDomainsInput - Request parameters, see GetApplePayDomainsInput
@@ -385,7 +398,6 @@ Returns details for the merchant account and the payment method identified in th
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Payment methods read
 
-
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r PaymentMethodsMerchantLevelApiGetPaymentMethodDetailsInput - Request parameters, see GetPaymentMethodDetailsInput
 @return PaymentMethod, *http.Response, error
@@ -445,6 +457,14 @@ func (a *PaymentMethodsMerchantLevelApi) GetPaymentMethodDetails(ctx context.Con
 		}
 		return *res, httpRes, serviceError
 	}
+	if httpRes.StatusCode == 429 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -486,7 +506,6 @@ Sends a request to add a new payment method to the merchant account identified i
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Payment methods read and write
-
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r PaymentMethodsMerchantLevelApiRequestPaymentMethodInput - Request parameters, see RequestPaymentMethodInput
@@ -546,6 +565,14 @@ func (a *PaymentMethodsMerchantLevelApi) RequestPaymentMethod(ctx context.Contex
 		}
 		return *res, httpRes, serviceError
 	}
+	if httpRes.StatusCode == 429 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
 	if httpRes.StatusCode == 500 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
@@ -589,7 +616,6 @@ Updates payment method details for the merchant account and the payment method i
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Payment methods read and write
-
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r PaymentMethodsMerchantLevelApiUpdatePaymentMethodInput - Request parameters, see UpdatePaymentMethodInput
@@ -643,6 +669,14 @@ func (a *PaymentMethodsMerchantLevelApi) UpdatePaymentMethod(ctx context.Context
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 429 {
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {

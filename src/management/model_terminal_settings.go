@@ -22,24 +22,25 @@ type TerminalSettings struct {
 	CardholderReceipt *CardholderReceipt `json:"cardholderReceipt,omitempty"`
 	Connectivity      *Connectivity      `json:"connectivity,omitempty"`
 	// Settings for tipping with or without predefined options to choose from. The maximum number of predefined options is four, or three plus the option to enter a custom tip.
-	Gratuities        []Gratuity         `json:"gratuities,omitempty"`
-	Hardware          *Hardware          `json:"hardware,omitempty"`
-	Localization      *Localization      `json:"localization,omitempty"`
-	Nexo              *Nexo              `json:"nexo,omitempty"`
-	OfflineProcessing *OfflineProcessing `json:"offlineProcessing,omitempty"`
-	Opi               *Opi               `json:"opi,omitempty"`
-	Passcodes         *Passcodes         `json:"passcodes,omitempty"`
-	PayAtTable        *PayAtTable        `json:"payAtTable,omitempty"`
-	Payment           *Payment           `json:"payment,omitempty"`
-	ReceiptOptions    *ReceiptOptions    `json:"receiptOptions,omitempty"`
-	ReceiptPrinting   *ReceiptPrinting   `json:"receiptPrinting,omitempty"`
-	Refunds           *Refunds           `json:"refunds,omitempty"`
-	Signature         *Signature         `json:"signature,omitempty"`
-	Standalone        *Standalone        `json:"standalone,omitempty"`
-	Surcharge         *Surcharge         `json:"surcharge,omitempty"`
-	TapToPay          *TapToPay          `json:"tapToPay,omitempty"`
-	Timeouts          *Timeouts          `json:"timeouts,omitempty"`
-	WifiProfiles      *WifiProfiles      `json:"wifiProfiles,omitempty"`
+	Gratuities           []Gratuity            `json:"gratuities,omitempty"`
+	Hardware             *Hardware             `json:"hardware,omitempty"`
+	Localization         *Localization         `json:"localization,omitempty"`
+	Nexo                 *Nexo                 `json:"nexo,omitempty"`
+	OfflineProcessing    *OfflineProcessing    `json:"offlineProcessing,omitempty"`
+	Opi                  *Opi                  `json:"opi,omitempty"`
+	Passcodes            *Passcodes            `json:"passcodes,omitempty"`
+	PayAtTable           *PayAtTable           `json:"payAtTable,omitempty"`
+	Payment              *Payment              `json:"payment,omitempty"`
+	ReceiptOptions       *ReceiptOptions       `json:"receiptOptions,omitempty"`
+	ReceiptPrinting      *ReceiptPrinting      `json:"receiptPrinting,omitempty"`
+	Refunds              *Refunds              `json:"refunds,omitempty"`
+	Signature            *Signature            `json:"signature,omitempty"`
+	Standalone           *Standalone           `json:"standalone,omitempty"`
+	Surcharge            *Surcharge            `json:"surcharge,omitempty"`
+	TapToPay             *TapToPay             `json:"tapToPay,omitempty"`
+	TerminalInstructions *TerminalInstructions `json:"terminalInstructions,omitempty"`
+	Timeouts             *Timeouts             `json:"timeouts,omitempty"`
+	WifiProfiles         *WifiProfiles         `json:"wifiProfiles,omitempty"`
 }
 
 // NewTerminalSettings instantiates a new TerminalSettings object
@@ -635,6 +636,38 @@ func (o *TerminalSettings) SetTapToPay(v TapToPay) {
 	o.TapToPay = &v
 }
 
+// GetTerminalInstructions returns the TerminalInstructions field value if set, zero value otherwise.
+func (o *TerminalSettings) GetTerminalInstructions() TerminalInstructions {
+	if o == nil || common.IsNil(o.TerminalInstructions) {
+		var ret TerminalInstructions
+		return ret
+	}
+	return *o.TerminalInstructions
+}
+
+// GetTerminalInstructionsOk returns a tuple with the TerminalInstructions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TerminalSettings) GetTerminalInstructionsOk() (*TerminalInstructions, bool) {
+	if o == nil || common.IsNil(o.TerminalInstructions) {
+		return nil, false
+	}
+	return o.TerminalInstructions, true
+}
+
+// HasTerminalInstructions returns a boolean if a field has been set.
+func (o *TerminalSettings) HasTerminalInstructions() bool {
+	if o != nil && !common.IsNil(o.TerminalInstructions) {
+		return true
+	}
+
+	return false
+}
+
+// SetTerminalInstructions gets a reference to the given TerminalInstructions and assigns it to the TerminalInstructions field.
+func (o *TerminalSettings) SetTerminalInstructions(v TerminalInstructions) {
+	o.TerminalInstructions = &v
+}
+
 // GetTimeouts returns the Timeouts field value if set, zero value otherwise.
 func (o *TerminalSettings) GetTimeouts() Timeouts {
 	if o == nil || common.IsNil(o.Timeouts) {
@@ -762,6 +795,9 @@ func (o TerminalSettings) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.TapToPay) {
 		toSerialize["tapToPay"] = o.TapToPay
+	}
+	if !common.IsNil(o.TerminalInstructions) {
+		toSerialize["terminalInstructions"] = o.TerminalInstructions
 	}
 	if !common.IsNil(o.Timeouts) {
 		toSerialize["timeouts"] = o.Timeouts

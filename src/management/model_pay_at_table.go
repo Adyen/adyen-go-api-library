@@ -24,7 +24,7 @@ type PayAtTable struct {
 	// Enable Pay at table.
 	EnablePayAtTable *bool `json:"enablePayAtTable,omitempty"`
 	// Sets the allowed payment instrument for Pay at table transactions.  Can be: **cash** or **card**. If not set, the terminal presents both options.
-	PaymentInstrument *string `json:"paymentInstrument,omitempty"`
+	PaymentInstrument common.NullableString `json:"paymentInstrument,omitempty"`
 }
 
 // NewPayAtTable instantiates a new PayAtTable object
@@ -108,36 +108,47 @@ func (o *PayAtTable) SetEnablePayAtTable(v bool) {
 	o.EnablePayAtTable = &v
 }
 
-// GetPaymentInstrument returns the PaymentInstrument field value if set, zero value otherwise.
+// GetPaymentInstrument returns the PaymentInstrument field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PayAtTable) GetPaymentInstrument() string {
-	if o == nil || common.IsNil(o.PaymentInstrument) {
+	if o == nil || common.IsNil(o.PaymentInstrument.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.PaymentInstrument
+	return *o.PaymentInstrument.Get()
 }
 
 // GetPaymentInstrumentOk returns a tuple with the PaymentInstrument field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PayAtTable) GetPaymentInstrumentOk() (*string, bool) {
-	if o == nil || common.IsNil(o.PaymentInstrument) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PaymentInstrument, true
+	return o.PaymentInstrument.Get(), o.PaymentInstrument.IsSet()
 }
 
 // HasPaymentInstrument returns a boolean if a field has been set.
 func (o *PayAtTable) HasPaymentInstrument() bool {
-	if o != nil && !common.IsNil(o.PaymentInstrument) {
+	if o != nil && o.PaymentInstrument.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPaymentInstrument gets a reference to the given string and assigns it to the PaymentInstrument field.
+// SetPaymentInstrument gets a reference to the given NullableString and assigns it to the PaymentInstrument field.
 func (o *PayAtTable) SetPaymentInstrument(v string) {
-	o.PaymentInstrument = &v
+	o.PaymentInstrument.Set(&v)
+}
+
+// SetPaymentInstrumentNil sets the value for PaymentInstrument to be an explicit nil
+func (o *PayAtTable) SetPaymentInstrumentNil() {
+	o.PaymentInstrument.Set(nil)
+}
+
+// UnsetPaymentInstrument ensures that no value is present for PaymentInstrument, not even an explicit nil
+func (o *PayAtTable) UnsetPaymentInstrument() {
+	o.PaymentInstrument.Unset()
 }
 
 func (o PayAtTable) MarshalJSON() ([]byte, error) {
@@ -156,8 +167,8 @@ func (o PayAtTable) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.EnablePayAtTable) {
 		toSerialize["enablePayAtTable"] = o.EnablePayAtTable
 	}
-	if !common.IsNil(o.PaymentInstrument) {
-		toSerialize["paymentInstrument"] = o.PaymentInstrument
+	if o.PaymentInstrument.IsSet() {
+		toSerialize["paymentInstrument"] = o.PaymentInstrument.Get()
 	}
 	return toSerialize, nil
 }

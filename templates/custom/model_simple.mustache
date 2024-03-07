@@ -22,7 +22,7 @@ type {{classname}} struct {
 {{#deprecated}}
 	// Deprecated
 {{/deprecated}}
-	{{name}} {{^required}}{{^isNullable}}{{^isArray}}{{^isFreeFormObject}}*{{/isFreeFormObject}}{{/isArray}}{{/isNullable}}{{/required}}{{{dataType}}} `json:"{{baseName}}{{^required}},omitempty{{/required}}"{{#withXml}} xml:"{{baseName}}{{#isXmlAttribute}},attr{{/isXmlAttribute}}"{{/withXml}}{{#vendorExtensions.x-go-custom-tag}} {{{.}}}{{/vendorExtensions.x-go-custom-tag}}`
+	{{name}} {{^required}}{{^isNullable}}{{^isArray}}{{^isFreeFormObject}}*{{/isFreeFormObject}}{{/isArray}}{{/isNullable}}{{/required}}{{#isNullable}}common.{{/isNullable}}{{{dataType}}} `json:"{{baseName}}{{^required}},omitempty{{/required}}"{{#withXml}} xml:"{{baseName}}{{#isXmlAttribute}},attr{{/isXmlAttribute}}"{{/withXml}}{{#vendorExtensions.x-go-custom-tag}} {{{.}}}{{/vendorExtensions.x-go-custom-tag}}`
 {{/vars}}
 {{#isAdditionalPropertiesTrue}}
 	AdditionalProperties map[string]interface{}
@@ -49,7 +49,7 @@ func New{{classname}}({{#requiredVars}}{{nameInCamelCase}} {{dataType}}{{^-last}
 {{^isReadOnly}}
 {{#isNullable}}
 	var {{nameInCamelCase}} {{{datatypeWithEnum}}} = {{{.}}}
-	this.{{name}} = *New{{{dataType}}}(&{{nameInCamelCase}})
+	this.{{name}} = *common.New{{{dataType}}}(&{{nameInCamelCase}})
 {{/isNullable}}
 {{^isNullable}}
 	var {{nameInCamelCase}} {{{dataType}}} = {{{.}}}
@@ -75,7 +75,7 @@ func New{{classname}}WithDefaults() *{{classname}} {
 {{#isNullable}}
 {{!we use datatypeWithEnum here, since it will represent the non-nullable name of the datatype, e.g. int64 for NullableInt64}}
 	var {{nameInCamelCase}} {{{datatypeWithEnum}}} = {{{.}}}
-	this.{{name}} = *New{{{dataType}}}(&{{nameInCamelCase}})
+	this.{{name}} = *common.New{{{dataType}}}(&{{nameInCamelCase}})
 {{/isNullable}}
 {{^isNullable}}
 	var {{nameInCamelCase}} {{{dataType}}} = {{{.}}}

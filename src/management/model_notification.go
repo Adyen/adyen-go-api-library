@@ -273,7 +273,7 @@ func (v *NullableNotification) UnmarshalJSON(src []byte) error {
 }
 
 func (o *Notification) isValidCategory() bool {
-	var allowedEnumValues = []string{"SaleWakeUp", "KeyPressed"}
+	var allowedEnumValues = []string{"SaleWakeUp", "KeyPressed", ""}
 	for _, allowed := range allowedEnumValues {
 		if o.GetCategory() == allowed {
 			return true
