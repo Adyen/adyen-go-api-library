@@ -10,8 +10,7 @@ package transfers
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the NumberAndBicAccountIdentification type satisfies the MappedNullable interface at compile time
@@ -20,10 +19,12 @@ var _ common.MappedNullable = &NumberAndBicAccountIdentification{}
 // NumberAndBicAccountIdentification struct for NumberAndBicAccountIdentification
 type NumberAndBicAccountIdentification struct {
 	// The bank account number, without separators or whitespace. The length and format depends on the bank or country.
-	AccountNumber                string                        `json:"accountNumber"`
+	AccountNumber string `json:"accountNumber"`
 	AdditionalBankIdentification *AdditionalBankIdentification `json:"additionalBankIdentification,omitempty"`
 	// The bank's 8- or 11-character BIC or SWIFT code.
 	Bic string `json:"bic"`
+	// The form factor of the account.  Possible values: **physical**, **virtual**. Default value: **physical**.
+	FormFactor common.NullableString `json:"formFactor,omitempty"`
 	// **numberAndBic**
 	Type string `json:"type"`
 }
@@ -36,6 +37,8 @@ func NewNumberAndBicAccountIdentification(accountNumber string, bic string, type
 	this := NumberAndBicAccountIdentification{}
 	this.AccountNumber = accountNumber
 	this.Bic = bic
+	var formFactor string = "physical"
+	this.FormFactor = *common.NewNullableString(&formFactor)
 	this.Type = type_
 	return &this
 }
@@ -45,6 +48,8 @@ func NewNumberAndBicAccountIdentification(accountNumber string, bic string, type
 // but it doesn't guarantee that properties required by API are set
 func NewNumberAndBicAccountIdentificationWithDefaults() *NumberAndBicAccountIdentification {
 	this := NumberAndBicAccountIdentification{}
+	var formFactor string = "physical"
+	this.FormFactor = *common.NewNullableString(&formFactor)
 	var type_ string = "numberAndBic"
 	this.Type = type_
 	return &this
@@ -130,6 +135,48 @@ func (o *NumberAndBicAccountIdentification) SetBic(v string) {
 	o.Bic = v
 }
 
+// GetFormFactor returns the FormFactor field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NumberAndBicAccountIdentification) GetFormFactor() string {
+	if o == nil || common.IsNil(o.FormFactor.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.FormFactor.Get()
+}
+
+// GetFormFactorOk returns a tuple with the FormFactor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NumberAndBicAccountIdentification) GetFormFactorOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FormFactor.Get(), o.FormFactor.IsSet()
+}
+
+// HasFormFactor returns a boolean if a field has been set.
+func (o *NumberAndBicAccountIdentification) HasFormFactor() bool {
+	if o != nil && o.FormFactor.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFormFactor gets a reference to the given NullableString and assigns it to the FormFactor field.
+func (o *NumberAndBicAccountIdentification) SetFormFactor(v string) {
+	o.FormFactor.Set(&v)
+}
+// SetFormFactorNil sets the value for FormFactor to be an explicit nil
+func (o *NumberAndBicAccountIdentification) SetFormFactorNil() {
+	o.FormFactor.Set(nil)
+}
+
+// UnsetFormFactor ensures that no value is present for FormFactor, not even an explicit nil
+func (o *NumberAndBicAccountIdentification) UnsetFormFactor() {
+	o.FormFactor.Unset()
+}
+
 // GetType returns the Type field value
 func (o *NumberAndBicAccountIdentification) GetType() string {
 	if o == nil {
@@ -155,7 +202,7 @@ func (o *NumberAndBicAccountIdentification) SetType(v string) {
 }
 
 func (o NumberAndBicAccountIdentification) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -169,6 +216,9 @@ func (o NumberAndBicAccountIdentification) ToMap() (map[string]interface{}, erro
 		toSerialize["additionalBankIdentification"] = o.AdditionalBankIdentification
 	}
 	toSerialize["bic"] = o.Bic
+	if o.FormFactor.IsSet() {
+		toSerialize["formFactor"] = o.FormFactor.Get()
+	}
 	toSerialize["type"] = o.Type
 	return toSerialize, nil
 }
@@ -209,12 +259,14 @@ func (v *NullableNumberAndBicAccountIdentification) UnmarshalJSON(src []byte) er
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *NumberAndBicAccountIdentification) isValidType() bool {
-	var allowedEnumValues = []string{"numberAndBic"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "numberAndBic" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

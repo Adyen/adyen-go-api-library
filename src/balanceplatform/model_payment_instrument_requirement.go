@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the PaymentInstrumentRequirement type satisfies the MappedNullable interface at compile time
@@ -23,6 +22,8 @@ type PaymentInstrumentRequirement struct {
 	Description *string `json:"description,omitempty"`
 	// The two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code where the payment instrument is issued. For example, **NL** or **US**.
 	IssuingCountryCode *string `json:"issuingCountryCode,omitempty"`
+	// The two-character ISO-3166-1 alpha-2 country code list for payment instruments.
+	IssuingCountryCodes []string `json:"issuingCountryCodes,omitempty"`
 	// Specifies if the requirement only applies to transfers to another balance platform.
 	OnlyForCrossBalancePlatform *bool `json:"onlyForCrossBalancePlatform,omitempty"`
 	// The type of the payment instrument. For example, \"BankAccount\" or \"Card\".
@@ -115,6 +116,38 @@ func (o *PaymentInstrumentRequirement) SetIssuingCountryCode(v string) {
 	o.IssuingCountryCode = &v
 }
 
+// GetIssuingCountryCodes returns the IssuingCountryCodes field value if set, zero value otherwise.
+func (o *PaymentInstrumentRequirement) GetIssuingCountryCodes() []string {
+	if o == nil || common.IsNil(o.IssuingCountryCodes) {
+		var ret []string
+		return ret
+	}
+	return o.IssuingCountryCodes
+}
+
+// GetIssuingCountryCodesOk returns a tuple with the IssuingCountryCodes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentInstrumentRequirement) GetIssuingCountryCodesOk() ([]string, bool) {
+	if o == nil || common.IsNil(o.IssuingCountryCodes) {
+		return nil, false
+	}
+	return o.IssuingCountryCodes, true
+}
+
+// HasIssuingCountryCodes returns a boolean if a field has been set.
+func (o *PaymentInstrumentRequirement) HasIssuingCountryCodes() bool {
+	if o != nil && !common.IsNil(o.IssuingCountryCodes) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssuingCountryCodes gets a reference to the given []string and assigns it to the IssuingCountryCodes field.
+func (o *PaymentInstrumentRequirement) SetIssuingCountryCodes(v []string) {
+	o.IssuingCountryCodes = v
+}
+
 // GetOnlyForCrossBalancePlatform returns the OnlyForCrossBalancePlatform field value if set, zero value otherwise.
 func (o *PaymentInstrumentRequirement) GetOnlyForCrossBalancePlatform() bool {
 	if o == nil || common.IsNil(o.OnlyForCrossBalancePlatform) {
@@ -204,7 +237,7 @@ func (o *PaymentInstrumentRequirement) SetType(v string) {
 }
 
 func (o PaymentInstrumentRequirement) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -218,6 +251,9 @@ func (o PaymentInstrumentRequirement) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.IssuingCountryCode) {
 		toSerialize["issuingCountryCode"] = o.IssuingCountryCode
+	}
+	if !common.IsNil(o.IssuingCountryCodes) {
+		toSerialize["issuingCountryCodes"] = o.IssuingCountryCodes
 	}
 	if !common.IsNil(o.OnlyForCrossBalancePlatform) {
 		toSerialize["onlyForCrossBalancePlatform"] = o.OnlyForCrossBalancePlatform
@@ -265,21 +301,23 @@ func (v *NullablePaymentInstrumentRequirement) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *PaymentInstrumentRequirement) isValidPaymentInstrumentType() bool {
-	var allowedEnumValues = []string{"BankAccount", "Card"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetPaymentInstrumentType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "BankAccount", "Card" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetPaymentInstrumentType() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *PaymentInstrumentRequirement) isValidType() bool {
-	var allowedEnumValues = []string{"paymentInstrumentRequirement"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "paymentInstrumentRequirement" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

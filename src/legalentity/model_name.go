@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the Name type satisfies the MappedNullable interface at compile time
@@ -19,11 +18,11 @@ var _ common.MappedNullable = &Name{}
 
 // Name struct for Name
 type Name struct {
-	// The individual's first name.
+	// The individual's first name. Must not be blank.
 	FirstName string `json:"firstName"`
 	// The infix in the individual's name, if any.
 	Infix *string `json:"infix,omitempty"`
-	// The individual's last name.
+	// The individual's last name. Must not be blank.
 	LastName string `json:"lastName"`
 }
 
@@ -127,7 +126,7 @@ func (o *Name) SetLastName(v string) {
 }
 
 func (o Name) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -179,3 +178,6 @@ func (v *NullableName) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

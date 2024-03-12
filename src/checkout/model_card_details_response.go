@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the CardDetailsResponse type satisfies the MappedNullable interface at compile time
@@ -21,6 +20,8 @@ var _ common.MappedNullable = &CardDetailsResponse{}
 type CardDetailsResponse struct {
 	// The list of brands identified for the card.
 	Brands []CardBrandDetails `json:"brands,omitempty"`
+	// The two-letter country code  of the country where the card was issued.
+	IssuingCountryCode *string `json:"issuingCountryCode,omitempty"`
 }
 
 // NewCardDetailsResponse instantiates a new CardDetailsResponse object
@@ -72,8 +73,40 @@ func (o *CardDetailsResponse) SetBrands(v []CardBrandDetails) {
 	o.Brands = v
 }
 
+// GetIssuingCountryCode returns the IssuingCountryCode field value if set, zero value otherwise.
+func (o *CardDetailsResponse) GetIssuingCountryCode() string {
+	if o == nil || common.IsNil(o.IssuingCountryCode) {
+		var ret string
+		return ret
+	}
+	return *o.IssuingCountryCode
+}
+
+// GetIssuingCountryCodeOk returns a tuple with the IssuingCountryCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CardDetailsResponse) GetIssuingCountryCodeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.IssuingCountryCode) {
+		return nil, false
+	}
+	return o.IssuingCountryCode, true
+}
+
+// HasIssuingCountryCode returns a boolean if a field has been set.
+func (o *CardDetailsResponse) HasIssuingCountryCode() bool {
+	if o != nil && !common.IsNil(o.IssuingCountryCode) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssuingCountryCode gets a reference to the given string and assigns it to the IssuingCountryCode field.
+func (o *CardDetailsResponse) SetIssuingCountryCode(v string) {
+	o.IssuingCountryCode = &v
+}
+
 func (o CardDetailsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -84,6 +117,9 @@ func (o CardDetailsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.Brands) {
 		toSerialize["brands"] = o.Brands
+	}
+	if !common.IsNil(o.IssuingCountryCode) {
+		toSerialize["issuingCountryCode"] = o.IssuingCountryCode
 	}
 	return toSerialize, nil
 }
@@ -123,3 +159,6 @@ func (v *NullableCardDetailsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the RevealPinRequest type satisfies the MappedNullable interface at compile time
@@ -19,9 +18,9 @@ var _ common.MappedNullable = &RevealPinRequest{}
 
 // RevealPinRequest struct for RevealPinRequest
 type RevealPinRequest struct {
-	// Symmetric session key encrypted under the public key.
+	// The symmetric session key that you encrypted with the [public key](https://docs.adyen.com/api-explorer/balanceplatform/2/get/publicKey) that you received from Adyen.
 	EncryptedKey string `json:"encryptedKey"`
-	// The unique identifier of the payment instrument.
+	// The unique identifier of the payment instrument, which is the card for which you are managing the PIN.
 	PaymentInstrumentId string `json:"paymentInstrumentId"`
 }
 
@@ -93,7 +92,7 @@ func (o *RevealPinRequest) SetPaymentInstrumentId(v string) {
 }
 
 func (o RevealPinRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -142,3 +141,6 @@ func (v *NullableRevealPinRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

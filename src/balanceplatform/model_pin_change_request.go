@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the PinChangeRequest type satisfies the MappedNullable interface at compile time
@@ -19,13 +18,13 @@ var _ common.MappedNullable = &PinChangeRequest{}
 
 // PinChangeRequest struct for PinChangeRequest
 type PinChangeRequest struct {
-	// Symmetric session key encrypted under the public key.
+	// The symmetric session key that you encrypted with the [public key](https://docs.adyen.com/api-explorer/balanceplatform/2/get/publicKey) that you received from Adyen.
 	EncryptedKey string `json:"encryptedKey"`
-	// The encrypted PIN block
+	// The encrypted [PIN block](https://www.pcisecuritystandards.org/glossary/pin-block).
 	EncryptedPinBlock string `json:"encryptedPinBlock"`
-	// The unique identifier of the payment instrument.
+	// The unique identifier of the payment instrument, which is the card for which you are managing the PIN.
 	PaymentInstrumentId string `json:"paymentInstrumentId"`
-	// The token which is used to construct the pinblock.
+	// The 16-digit token that you used to generate the `encryptedPinBlock`.
 	Token string `json:"token"`
 }
 
@@ -147,7 +146,7 @@ func (o *PinChangeRequest) SetToken(v string) {
 }
 
 func (o PinChangeRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -198,3 +197,6 @@ func (v *NullablePinChangeRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

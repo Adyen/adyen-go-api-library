@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the CALocalAccountIdentification type satisfies the MappedNullable interface at compile time
@@ -23,6 +22,8 @@ type CALocalAccountIdentification struct {
 	AccountNumber string `json:"accountNumber"`
 	// The bank account type.  Possible values: **checking** or **savings**. Defaults to **checking**.
 	AccountType *string `json:"accountType,omitempty"`
+	// Business accounts with a `formFactor` value of **physical** are business accounts issued under the central bank of that country. The default value is **physical** for NL, US, and UK business accounts.   Adyen creates a local IBAN for business accounts when the `formFactor` value is set to **virtual**. The local IBANs that are supported are for DE and FR, which reference a physical NL account, with funds being routed through the central bank of NL.
+	FormFactor common.NullableString `json:"formFactor,omitempty"`
 	// The 3-digit institution number, without separators or whitespace.
 	InstitutionNumber string `json:"institutionNumber"`
 	// The 5-digit transit number, without separators or whitespace.
@@ -40,6 +41,8 @@ func NewCALocalAccountIdentification(accountNumber string, institutionNumber str
 	this.AccountNumber = accountNumber
 	var accountType string = "checking"
 	this.AccountType = &accountType
+	var formFactor string = "physical"
+	this.FormFactor = *common.NewNullableString(&formFactor)
 	this.InstitutionNumber = institutionNumber
 	this.TransitNumber = transitNumber
 	this.Type = type_
@@ -53,6 +56,8 @@ func NewCALocalAccountIdentificationWithDefaults() *CALocalAccountIdentification
 	this := CALocalAccountIdentification{}
 	var accountType string = "checking"
 	this.AccountType = &accountType
+	var formFactor string = "physical"
+	this.FormFactor = *common.NewNullableString(&formFactor)
 	var type_ string = "caLocal"
 	this.Type = type_
 	return &this
@@ -112,6 +117,48 @@ func (o *CALocalAccountIdentification) HasAccountType() bool {
 // SetAccountType gets a reference to the given string and assigns it to the AccountType field.
 func (o *CALocalAccountIdentification) SetAccountType(v string) {
 	o.AccountType = &v
+}
+
+// GetFormFactor returns the FormFactor field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CALocalAccountIdentification) GetFormFactor() string {
+	if o == nil || common.IsNil(o.FormFactor.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.FormFactor.Get()
+}
+
+// GetFormFactorOk returns a tuple with the FormFactor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CALocalAccountIdentification) GetFormFactorOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FormFactor.Get(), o.FormFactor.IsSet()
+}
+
+// HasFormFactor returns a boolean if a field has been set.
+func (o *CALocalAccountIdentification) HasFormFactor() bool {
+	if o != nil && o.FormFactor.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFormFactor gets a reference to the given NullableString and assigns it to the FormFactor field.
+func (o *CALocalAccountIdentification) SetFormFactor(v string) {
+	o.FormFactor.Set(&v)
+}
+// SetFormFactorNil sets the value for FormFactor to be an explicit nil
+func (o *CALocalAccountIdentification) SetFormFactorNil() {
+	o.FormFactor.Set(nil)
+}
+
+// UnsetFormFactor ensures that no value is present for FormFactor, not even an explicit nil
+func (o *CALocalAccountIdentification) UnsetFormFactor() {
+	o.FormFactor.Unset()
 }
 
 // GetInstitutionNumber returns the InstitutionNumber field value
@@ -187,7 +234,7 @@ func (o *CALocalAccountIdentification) SetType(v string) {
 }
 
 func (o CALocalAccountIdentification) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -199,6 +246,9 @@ func (o CALocalAccountIdentification) ToMap() (map[string]interface{}, error) {
 	toSerialize["accountNumber"] = o.AccountNumber
 	if !common.IsNil(o.AccountType) {
 		toSerialize["accountType"] = o.AccountType
+	}
+	if o.FormFactor.IsSet() {
+		toSerialize["formFactor"] = o.FormFactor.Get()
 	}
 	toSerialize["institutionNumber"] = o.InstitutionNumber
 	toSerialize["transitNumber"] = o.TransitNumber
@@ -242,21 +292,23 @@ func (v *NullableCALocalAccountIdentification) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *CALocalAccountIdentification) isValidAccountType() bool {
-	var allowedEnumValues = []string{"checking", "savings"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetAccountType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "checking", "savings" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetAccountType() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *CALocalAccountIdentification) isValidType() bool {
-	var allowedEnumValues = []string{"caLocal"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "caLocal" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

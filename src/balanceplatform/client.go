@@ -9,7 +9,7 @@ API version: 2
 package balanceplatform
 
 import (
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // APIClient manages communication with the Configuration API API v2
@@ -31,9 +31,9 @@ type APIClient struct {
 
 	GrantOffersApi *GrantOffersApi
 
-	NetworkTokensApi *NetworkTokensApi
+	ManageCardPINApi *ManageCardPINApi
 
-	PINFunctionalityApi *PINFunctionalityApi
+	NetworkTokensApi *NetworkTokensApi
 
 	PaymentInstrumentGroupsApi *PaymentInstrumentGroupsApi
 
@@ -49,10 +49,10 @@ type APIClient struct {
 // NewAPIClient creates a new API client.
 func NewAPIClient(client *common.Client) *APIClient {
 	c := &APIClient{}
-	c.common.Client = client
-	c.common.BasePath = func() string {
-		return client.Cfg.BalancePlatformEndpoint
-	}
+    c.common.Client = client
+    c.common.BasePath = func() string {
+        return client.Cfg.BalancePlatformEndpoint
+    }
 
 	// API Services
 	c.AccountHoldersApi = (*AccountHoldersApi)(&c.common)
@@ -61,8 +61,8 @@ func NewAPIClient(client *common.Client) *APIClient {
 	c.CardOrdersApi = (*CardOrdersApi)(&c.common)
 	c.GrantAccountsApi = (*GrantAccountsApi)(&c.common)
 	c.GrantOffersApi = (*GrantOffersApi)(&c.common)
+	c.ManageCardPINApi = (*ManageCardPINApi)(&c.common)
 	c.NetworkTokensApi = (*NetworkTokensApi)(&c.common)
-	c.PINFunctionalityApi = (*PINFunctionalityApi)(&c.common)
 	c.PaymentInstrumentGroupsApi = (*PaymentInstrumentGroupsApi)(&c.common)
 	c.PaymentInstrumentsApi = (*PaymentInstrumentsApi)(&c.common)
 	c.PlatformApi = (*PlatformApi)(&c.common)

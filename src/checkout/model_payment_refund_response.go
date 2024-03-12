@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the PaymentRefundResponse type satisfies the MappedNullable interface at compile time
@@ -25,8 +24,8 @@ type PaymentRefundResponse struct {
 	// The merchant account that is used to process the payment.
 	MerchantAccount string `json:"merchantAccount"`
 	// Your reason for the refund request.
-	MerchantRefundReason *string `json:"merchantRefundReason,omitempty"`
-	// The [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference) of the payment to refund.
+	MerchantRefundReason common.NullableString `json:"merchantRefundReason,omitempty"`
+	// The [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference) of the payment to refund. 
 	PaymentPspReference string `json:"paymentPspReference"`
 	// Adyen's 16-character reference associated with the refund request.
 	PspReference string `json:"pspReference"`
@@ -142,36 +141,46 @@ func (o *PaymentRefundResponse) SetMerchantAccount(v string) {
 	o.MerchantAccount = v
 }
 
-// GetMerchantRefundReason returns the MerchantRefundReason field value if set, zero value otherwise.
+// GetMerchantRefundReason returns the MerchantRefundReason field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PaymentRefundResponse) GetMerchantRefundReason() string {
-	if o == nil || common.IsNil(o.MerchantRefundReason) {
+	if o == nil || common.IsNil(o.MerchantRefundReason.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.MerchantRefundReason
+	return *o.MerchantRefundReason.Get()
 }
 
 // GetMerchantRefundReasonOk returns a tuple with the MerchantRefundReason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PaymentRefundResponse) GetMerchantRefundReasonOk() (*string, bool) {
-	if o == nil || common.IsNil(o.MerchantRefundReason) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MerchantRefundReason, true
+	return o.MerchantRefundReason.Get(), o.MerchantRefundReason.IsSet()
 }
 
 // HasMerchantRefundReason returns a boolean if a field has been set.
 func (o *PaymentRefundResponse) HasMerchantRefundReason() bool {
-	if o != nil && !common.IsNil(o.MerchantRefundReason) {
+	if o != nil && o.MerchantRefundReason.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetMerchantRefundReason gets a reference to the given string and assigns it to the MerchantRefundReason field.
+// SetMerchantRefundReason gets a reference to the given NullableString and assigns it to the MerchantRefundReason field.
 func (o *PaymentRefundResponse) SetMerchantRefundReason(v string) {
-	o.MerchantRefundReason = &v
+	o.MerchantRefundReason.Set(&v)
+}
+// SetMerchantRefundReasonNil sets the value for MerchantRefundReason to be an explicit nil
+func (o *PaymentRefundResponse) SetMerchantRefundReasonNil() {
+	o.MerchantRefundReason.Set(nil)
+}
+
+// UnsetMerchantRefundReason ensures that no value is present for MerchantRefundReason, not even an explicit nil
+func (o *PaymentRefundResponse) UnsetMerchantRefundReason() {
+	o.MerchantRefundReason.Unset()
 }
 
 // GetPaymentPspReference returns the PaymentPspReference field value
@@ -343,7 +352,7 @@ func (o *PaymentRefundResponse) SetStore(v string) {
 }
 
 func (o PaymentRefundResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -357,8 +366,8 @@ func (o PaymentRefundResponse) ToMap() (map[string]interface{}, error) {
 		toSerialize["lineItems"] = o.LineItems
 	}
 	toSerialize["merchantAccount"] = o.MerchantAccount
-	if !common.IsNil(o.MerchantRefundReason) {
-		toSerialize["merchantRefundReason"] = o.MerchantRefundReason
+	if o.MerchantRefundReason.IsSet() {
+		toSerialize["merchantRefundReason"] = o.MerchantRefundReason.Get()
 	}
 	toSerialize["paymentPspReference"] = o.PaymentPspReference
 	toSerialize["pspReference"] = o.PspReference
@@ -411,21 +420,23 @@ func (v *NullablePaymentRefundResponse) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *PaymentRefundResponse) isValidMerchantRefundReason() bool {
-	var allowedEnumValues = []string{"FRAUD", "CUSTOMER REQUEST", "RETURN", "DUPLICATE", "OTHER"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetMerchantRefundReason() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "FRAUD", "CUSTOMER REQUEST", "RETURN", "DUPLICATE", "OTHER" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetMerchantRefundReason() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *PaymentRefundResponse) isValidStatus() bool {
-	var allowedEnumValues = []string{"received"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetStatus() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "received" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetStatus() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

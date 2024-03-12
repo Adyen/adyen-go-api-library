@@ -10,9 +10,8 @@ package transfers
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 	"time"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the Transaction type satisfies the MappedNullable interface at compile time
@@ -20,8 +19,8 @@ var _ common.MappedNullable = &Transaction{}
 
 // Transaction struct for Transaction
 type Transaction struct {
-	AccountHolder  ResourceReference `json:"accountHolder"`
-	Amount         Amount            `json:"amount"`
+	AccountHolder ResourceReference `json:"accountHolder"`
+	Amount Amount `json:"amount"`
 	BalanceAccount ResourceReference `json:"balanceAccount"`
 	// The unique identifier of the balance platform.
 	BalancePlatform string `json:"balancePlatform"`
@@ -31,9 +30,9 @@ type Transaction struct {
 	CreationDate *time.Time `json:"creationDate,omitempty"`
 	// The unique identifier of the transaction.
 	Id string `json:"id"`
-	// The status of the transaction.   Possible values:  * **pending**: The transaction is still pending.  * **booked**: The transaction has been booked to the balance account.
-	Status   string        `json:"status"`
-	Transfer *TransferData `json:"transfer,omitempty"`
+	// The status of the transaction.   Possible values:  * **pending**: The transaction is still pending.  * **booked**: The transaction has been booked to the balance account.  
+	Status string `json:"status"`
+	Transfer *TransferView `json:"transfer,omitempty"`
 	// The date the transfer amount becomes available in the balance account.
 	ValueDate time.Time `json:"valueDate"`
 }
@@ -264,9 +263,9 @@ func (o *Transaction) SetStatus(v string) {
 }
 
 // GetTransfer returns the Transfer field value if set, zero value otherwise.
-func (o *Transaction) GetTransfer() TransferData {
+func (o *Transaction) GetTransfer() TransferView {
 	if o == nil || common.IsNil(o.Transfer) {
-		var ret TransferData
+		var ret TransferView
 		return ret
 	}
 	return *o.Transfer
@@ -274,7 +273,7 @@ func (o *Transaction) GetTransfer() TransferData {
 
 // GetTransferOk returns a tuple with the Transfer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetTransferOk() (*TransferData, bool) {
+func (o *Transaction) GetTransferOk() (*TransferView, bool) {
 	if o == nil || common.IsNil(o.Transfer) {
 		return nil, false
 	}
@@ -290,8 +289,8 @@ func (o *Transaction) HasTransfer() bool {
 	return false
 }
 
-// SetTransfer gets a reference to the given TransferData and assigns it to the Transfer field.
-func (o *Transaction) SetTransfer(v TransferData) {
+// SetTransfer gets a reference to the given TransferView and assigns it to the Transfer field.
+func (o *Transaction) SetTransfer(v TransferView) {
 	o.Transfer = &v
 }
 
@@ -320,7 +319,7 @@ func (o *Transaction) SetValueDate(v time.Time) {
 }
 
 func (o Transaction) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -382,12 +381,14 @@ func (v *NullableTransaction) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *Transaction) isValidStatus() bool {
-	var allowedEnumValues = []string{"booked", "pending"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetStatus() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "booked", "pending" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetStatus() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

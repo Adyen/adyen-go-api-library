@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the UpdateSplitConfigurationLogicRequest type satisfies the MappedNullable interface at compile time
@@ -19,33 +18,37 @@ var _ common.MappedNullable = &UpdateSplitConfigurationLogicRequest{}
 
 // UpdateSplitConfigurationLogicRequest struct for UpdateSplitConfigurationLogicRequest
 type UpdateSplitConfigurationLogicRequest struct {
-	// Specifies the logic to apply when booking the transaction fees. Should be combined with adyenFees.  Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**.
-	AcquiringFees        *string               `json:"acquiringFees,omitempty"`
+	// Deducts the acquiring fees (the aggregated amount of interchange and scheme fee) from the specified balance account.  Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**.
+	AcquiringFees *string `json:"acquiringFees,omitempty"`
 	AdditionalCommission *AdditionalCommission `json:"additionalCommission,omitempty"`
-	// Specifies the logic to apply when booking the transaction fees. Should be combined with schemeFee, interchange & adyenMarkup.  Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**.
+	// Deducts the transaction fee due to Adyen under [blended rates](https://www.adyen.com/knowledge-hub/guides/payments-training-guide/get-the-best-from-your-card-processing) from the specified balance account.  Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**.
 	AdyenCommission *string `json:"adyenCommission,omitempty"`
-	// Specifies the logic to apply when booking the transaction fees. Should be combined with acquiringFees.  Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**.
+	// Deducts the fees due to Adyen (markup or commission) from the specified balance account.  Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**.
 	AdyenFees *string `json:"adyenFees,omitempty"`
-	// Specifies the logic to apply when booking the transaction fees. Should be combined with schemeFee, adyenCommission & interchange.  Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**.
+	// Deducts the transaction fee due to Adyen under [Interchange ++ pricing](https://www.adyen.com/what-is-interchange) from the specified balance account.  Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**.
 	AdyenMarkup *string `json:"adyenMarkup,omitempty"`
-	// Specifies the logic to apply when booking the chargeback amount.  Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**, **deductAccordingToSplitRatio**.
+	// Specifies how and from which balance account(s) to deduct the chargeback amount.  Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**, **deductAccordingToSplitRatio**.
 	Chargeback *string `json:"chargeback,omitempty"`
-	// Specifies the logic to apply when allocating the chargeback costs.  Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**
-	ChargebackCostAllocation *string    `json:"chargebackCostAllocation,omitempty"`
-	Commission               Commission `json:"commission"`
-	// Specifies the logic to apply when booking the transaction fees. Should be combined with schemeFee, adyenCommission & adyenMarkup.  Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**.
+	// Deducts the chargeback costs from the specified balance account.  Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**
+	ChargebackCostAllocation *string `json:"chargebackCostAllocation,omitempty"`
+	Commission Commission `json:"commission"`
+	// Deducts the interchange fee from specified balance account.  Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**.
 	Interchange *string `json:"interchange,omitempty"`
-	// Specifies the logic to apply when booking the transaction fees. Cannot be combined with other fees.  Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**.
+	// Deducts all transaction fees incurred by the payment from the specified balance account. The transaction fees include the acquiring fees (interchange and scheme fee), and the fees due to Adyen (markup or commission). You can book any and all these fees to different balance account by specifying other transaction fee parameters in your split configuration profile:  - [`adyenCommission`](https://docs.adyen.com/api-explorer/Management/latest/post/merchants/(merchantId)/splitConfigurations#request-rules-splitLogic-adyenCommission): The transaction fee due to Adyen under [blended rates](https://www.adyen.com/knowledge-hub/interchange-fees-explained#interchange-vs-blended). - [`adyenMarkup`](https://docs.adyen.com/api-explorer/Management/latest/post/merchants/(merchantId)/splitConfigurations#request-rules-splitLogic-adyenMarkup): The transaction fee due to Adyen under [Interchange ++ pricing](https://www.adyen.com/knowledge-hub/interchange-fees-explained#interchange-vs-blended). - [`schemeFee`](https://docs.adyen.com/api-explorer/Management/latest/post/merchants/(merchantId)/splitConfigurations#request-rules-splitLogic-schemeFee): The fee paid to the card scheme for using their network. - [`interchange`](https://docs.adyen.com/api-explorer/Management/latest/post/merchants/(merchantId)/splitConfigurations#request-rules-splitLogic-interchange): The fee paid to the issuer for each payment transaction made with the card network. - [`adyenFees`](https://docs.adyen.com/api-explorer/Management/latest/post/merchants/(merchantId)/splitConfigurations#request-rules-splitLogic-adyenFees): The aggregated amount of Adyen's commission and markup. - [`acquiringFees`](https://docs.adyen.com/api-explorer/Management/latest/post/merchants/(merchantId)/splitConfigurations#request-rules-splitLogic-acquiringFees): The aggregated amount of the interchange and scheme fees.  If you don't include at least one transaction fee type in the `splitLogic` object, Adyen updates the payment request with the `paymentFee` parameter, booking all transaction fees to your platform's liable balance account.  Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**.
 	PaymentFee *string `json:"paymentFee,omitempty"`
-	// Specifies the logic to apply when booking the amount left over after currency conversion.  Possible values: **addToLiableAccount**, **addToOneBalanceAccount**.
+	// Specifies how and from which balance account(s) to deduct the refund amount.  Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**, **deductAccordingToSplitRatio**
+	Refund *string `json:"refund,omitempty"`
+	// Deducts the refund costs from the specified balance account.  Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**
+	RefundCostAllocation *string `json:"refundCostAllocation,omitempty"`
+	// Books the amount left over after currency conversion to the specified balance account.  Possible values: **addToLiableAccount**, **addToOneBalanceAccount**.
 	Remainder *string `json:"remainder,omitempty"`
-	// Specifies the logic to apply when booking the transaction fees. Should be combined with interchange, adyenCommission & adyenMarkup.  Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**.
+	// Deducts the scheme fee from the specified balance account.  Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**.
 	SchemeFee *string `json:"schemeFee,omitempty"`
-	// Unique identifier of the split logic that is applied when the split configuration conditions are met.
+	// Unique identifier of the collection of split instructions that are applied when the rule conditions are met.
 	SplitLogicId *string `json:"splitLogicId,omitempty"`
-	// Specifies the logic to apply when booking the surcharge amount.  Possible values: **addToLiableAccount**, **addToOneBalanceAccount**
+	// Books the surcharge amount to the specified balance account.  Possible values: **addToLiableAccount**, **addToOneBalanceAccount**
 	Surcharge *string `json:"surcharge,omitempty"`
-	// Specifies the logic to apply when booking tips (gratuity).  Possible values: **addToLiableAccount**, **addToOneBalanceAccount**.
+	// Books the tips (gratuity) to the specified balance account.  Possible values: **addToLiableAccount**, **addToOneBalanceAccount**.
 	Tip *string `json:"tip,omitempty"`
 }
 
@@ -379,6 +382,70 @@ func (o *UpdateSplitConfigurationLogicRequest) SetPaymentFee(v string) {
 	o.PaymentFee = &v
 }
 
+// GetRefund returns the Refund field value if set, zero value otherwise.
+func (o *UpdateSplitConfigurationLogicRequest) GetRefund() string {
+	if o == nil || common.IsNil(o.Refund) {
+		var ret string
+		return ret
+	}
+	return *o.Refund
+}
+
+// GetRefundOk returns a tuple with the Refund field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateSplitConfigurationLogicRequest) GetRefundOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Refund) {
+		return nil, false
+	}
+	return o.Refund, true
+}
+
+// HasRefund returns a boolean if a field has been set.
+func (o *UpdateSplitConfigurationLogicRequest) HasRefund() bool {
+	if o != nil && !common.IsNil(o.Refund) {
+		return true
+	}
+
+	return false
+}
+
+// SetRefund gets a reference to the given string and assigns it to the Refund field.
+func (o *UpdateSplitConfigurationLogicRequest) SetRefund(v string) {
+	o.Refund = &v
+}
+
+// GetRefundCostAllocation returns the RefundCostAllocation field value if set, zero value otherwise.
+func (o *UpdateSplitConfigurationLogicRequest) GetRefundCostAllocation() string {
+	if o == nil || common.IsNil(o.RefundCostAllocation) {
+		var ret string
+		return ret
+	}
+	return *o.RefundCostAllocation
+}
+
+// GetRefundCostAllocationOk returns a tuple with the RefundCostAllocation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateSplitConfigurationLogicRequest) GetRefundCostAllocationOk() (*string, bool) {
+	if o == nil || common.IsNil(o.RefundCostAllocation) {
+		return nil, false
+	}
+	return o.RefundCostAllocation, true
+}
+
+// HasRefundCostAllocation returns a boolean if a field has been set.
+func (o *UpdateSplitConfigurationLogicRequest) HasRefundCostAllocation() bool {
+	if o != nil && !common.IsNil(o.RefundCostAllocation) {
+		return true
+	}
+
+	return false
+}
+
+// SetRefundCostAllocation gets a reference to the given string and assigns it to the RefundCostAllocation field.
+func (o *UpdateSplitConfigurationLogicRequest) SetRefundCostAllocation(v string) {
+	o.RefundCostAllocation = &v
+}
+
 // GetRemainder returns the Remainder field value if set, zero value otherwise.
 func (o *UpdateSplitConfigurationLogicRequest) GetRemainder() string {
 	if o == nil || common.IsNil(o.Remainder) {
@@ -540,7 +607,7 @@ func (o *UpdateSplitConfigurationLogicRequest) SetTip(v string) {
 }
 
 func (o UpdateSplitConfigurationLogicRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -576,6 +643,12 @@ func (o UpdateSplitConfigurationLogicRequest) ToMap() (map[string]interface{}, e
 	}
 	if !common.IsNil(o.PaymentFee) {
 		toSerialize["paymentFee"] = o.PaymentFee
+	}
+	if !common.IsNil(o.Refund) {
+		toSerialize["refund"] = o.Refund
+	}
+	if !common.IsNil(o.RefundCostAllocation) {
+		toSerialize["refundCostAllocation"] = o.RefundCostAllocation
 	}
 	if !common.IsNil(o.Remainder) {
 		toSerialize["remainder"] = o.Remainder
@@ -631,111 +704,131 @@ func (v *NullableUpdateSplitConfigurationLogicRequest) UnmarshalJSON(src []byte)
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *UpdateSplitConfigurationLogicRequest) isValidAcquiringFees() bool {
-	var allowedEnumValues = []string{"deductFromLiableAccount", "deductFromOneBalanceAccount"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetAcquiringFees() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "deductFromLiableAccount", "deductFromOneBalanceAccount" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetAcquiringFees() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *UpdateSplitConfigurationLogicRequest) isValidAdyenCommission() bool {
-	var allowedEnumValues = []string{"deductFromLiableAccount", "deductFromOneBalanceAccount"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetAdyenCommission() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "deductFromLiableAccount", "deductFromOneBalanceAccount" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetAdyenCommission() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *UpdateSplitConfigurationLogicRequest) isValidAdyenFees() bool {
-	var allowedEnumValues = []string{"deductFromLiableAccount", "deductFromOneBalanceAccount"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetAdyenFees() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "deductFromLiableAccount", "deductFromOneBalanceAccount" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetAdyenFees() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *UpdateSplitConfigurationLogicRequest) isValidAdyenMarkup() bool {
-	var allowedEnumValues = []string{"deductFromLiableAccount", "deductFromOneBalanceAccount"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetAdyenMarkup() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "deductFromLiableAccount", "deductFromOneBalanceAccount" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetAdyenMarkup() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *UpdateSplitConfigurationLogicRequest) isValidChargeback() bool {
-	var allowedEnumValues = []string{"deductFromLiableAccount", "deductFromOneBalanceAccount", "deductAccordingToSplitRatio"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetChargeback() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "deductFromLiableAccount", "deductFromOneBalanceAccount", "deductAccordingToSplitRatio" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetChargeback() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *UpdateSplitConfigurationLogicRequest) isValidChargebackCostAllocation() bool {
-	var allowedEnumValues = []string{"deductFromLiableAccount", "deductFromOneBalanceAccount"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetChargebackCostAllocation() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "deductFromLiableAccount", "deductFromOneBalanceAccount" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetChargebackCostAllocation() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *UpdateSplitConfigurationLogicRequest) isValidInterchange() bool {
-	var allowedEnumValues = []string{"deductFromLiableAccount", "deductFromOneBalanceAccount"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetInterchange() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "deductFromLiableAccount", "deductFromOneBalanceAccount" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetInterchange() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *UpdateSplitConfigurationLogicRequest) isValidPaymentFee() bool {
-	var allowedEnumValues = []string{"deductFromLiableAccount", "deductFromOneBalanceAccount"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetPaymentFee() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "deductFromLiableAccount", "deductFromOneBalanceAccount" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetPaymentFee() == allowed {
+            return true
+        }
+    }
+    return false
+}
+func (o *UpdateSplitConfigurationLogicRequest) isValidRefund() bool {
+    var allowedEnumValues = []string{ "deductFromLiableAccount", "deductFromOneBalanceAccount", "deductAccordingToSplitRatio" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetRefund() == allowed {
+            return true
+        }
+    }
+    return false
+}
+func (o *UpdateSplitConfigurationLogicRequest) isValidRefundCostAllocation() bool {
+    var allowedEnumValues = []string{ "deductFromLiableAccount", "deductFromOneBalanceAccount" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetRefundCostAllocation() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *UpdateSplitConfigurationLogicRequest) isValidRemainder() bool {
-	var allowedEnumValues = []string{"addToLiableAccount", "addToOneBalanceAccount"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetRemainder() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "addToLiableAccount", "addToOneBalanceAccount" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetRemainder() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *UpdateSplitConfigurationLogicRequest) isValidSchemeFee() bool {
-	var allowedEnumValues = []string{"deductFromLiableAccount", "deductFromOneBalanceAccount"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetSchemeFee() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "deductFromLiableAccount", "deductFromOneBalanceAccount" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetSchemeFee() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *UpdateSplitConfigurationLogicRequest) isValidSurcharge() bool {
-	var allowedEnumValues = []string{"addToLiableAccount", "addToOneBalanceAccount"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetSurcharge() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "addToLiableAccount", "addToOneBalanceAccount" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetSurcharge() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *UpdateSplitConfigurationLogicRequest) isValidTip() bool {
-	var allowedEnumValues = []string{"addToLiableAccount", "addToOneBalanceAccount"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetTip() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "addToLiableAccount", "addToOneBalanceAccount" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetTip() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

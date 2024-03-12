@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the RevealPinResponse type satisfies the MappedNullable interface at compile time
@@ -19,9 +18,9 @@ var _ common.MappedNullable = &RevealPinResponse{}
 
 // RevealPinResponse struct for RevealPinResponse
 type RevealPinResponse struct {
-	// The encrypted PIN block.
+	// The encrypted [PIN block](https://www.pcisecuritystandards.org/glossary/pin-block).
 	EncryptedPinBlock string `json:"encryptedPinBlock"`
-	// The encrypted PIN block extraction token.
+	// The 16-digit token that you need to extract the `encryptedPinBlock`.
 	Token string `json:"token"`
 }
 
@@ -93,7 +92,7 @@ func (o *RevealPinResponse) SetToken(v string) {
 }
 
 func (o RevealPinResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -142,3 +141,6 @@ func (v *NullableRevealPinResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

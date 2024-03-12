@@ -10,9 +10,8 @@ package transfers
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 	"time"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the Transfer type satisfies the MappedNullable interface at compile time
@@ -20,13 +19,13 @@ var _ common.MappedNullable = &Transfer{}
 
 // Transfer struct for Transfer
 type Transfer struct {
-	AccountHolder  *ResourceReference `json:"accountHolder,omitempty"`
-	Amount         Amount             `json:"amount"`
+	AccountHolder *ResourceReference `json:"accountHolder,omitempty"`
+	Amount Amount `json:"amount"`
 	BalanceAccount *ResourceReference `json:"balanceAccount,omitempty"`
 	// The category of transfer.  Possible values:   - **bank**: Transfer to a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id) or a bank account.  - **internal**: Transfer to another [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id) within your platform.  - **issuedCard**: Transfer initiated by a Adyen-issued card.  - **platformPayment**: Fund movements related to payments that are acquired for your users.
-	Category     string                `json:"category"`
+	Category string `json:"category"`
 	CategoryData *TransferCategoryData `json:"categoryData,omitempty"`
-	Counterparty CounterpartyV3        `json:"counterparty"`
+	Counterparty CounterpartyV3 `json:"counterparty"`
 	// The date and time when the event was triggered, in ISO 8601 extended format. For example, **2020-12-18T10:15:30+01:00**.
 	CreationDate *time.Time `json:"creationDate,omitempty"`
 	// Your description for the transfer. It is used by most banks as the transfer description. We recommend sending a maximum of 140 characters, otherwise the description may be truncated.  Supported characters: **[a-z] [A-Z] [0-9] / - ?** **: ( ) . , ' + Space**  Supported characters for **regular** and **fast** transfers to a US counterparty: **[a-z] [A-Z] [0-9] & $ % # @** **~ = + - _ ' \" ! ?**
@@ -34,7 +33,7 @@ type Transfer struct {
 	// The direction of the transfer.  Possible values: **incoming**, **outgoing**.
 	Direction *string `json:"direction,omitempty"`
 	// The ID of the resource.
-	Id                *string            `json:"id,omitempty"`
+	Id *string `json:"id,omitempty"`
 	PaymentInstrument *PaymentInstrument `json:"paymentInstrument,omitempty"`
 	// Additional information about the status of the transfer.
 	Reason *string `json:"reason,omitempty"`
@@ -44,6 +43,8 @@ type Transfer struct {
 	ReferenceForBeneficiary *string `json:"referenceForBeneficiary,omitempty"`
 	// The result of the transfer.   For example, **authorised**, **refused**, or **error**.
 	Status string `json:"status"`
+	// The type of transfer or transaction. For example, **refund**, **payment**, **internalTransfer**, **bankTransfer**.
+	Type *string `json:"type,omitempty"`
 }
 
 // NewTransfer instantiates a new Transfer object
@@ -515,8 +516,40 @@ func (o *Transfer) SetStatus(v string) {
 	o.Status = v
 }
 
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *Transfer) GetType() string {
+	if o == nil || common.IsNil(o.Type) {
+		var ret string
+		return ret
+	}
+	return *o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Transfer) GetTypeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Type) {
+		return nil, false
+	}
+	return o.Type, true
+}
+
+// HasType returns a boolean if a field has been set.
+func (o *Transfer) HasType() bool {
+	if o != nil && !common.IsNil(o.Type) {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given string and assigns it to the Type field.
+func (o *Transfer) SetType(v string) {
+	o.Type = &v
+}
+
 func (o Transfer) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -562,6 +595,9 @@ func (o Transfer) ToMap() (map[string]interface{}, error) {
 		toSerialize["referenceForBeneficiary"] = o.ReferenceForBeneficiary
 	}
 	toSerialize["status"] = o.Status
+	if !common.IsNil(o.Type) {
+		toSerialize["type"] = o.Type
+	}
 	return toSerialize, nil
 }
 
@@ -601,39 +637,50 @@ func (v *NullableTransfer) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *Transfer) isValidCategory() bool {
-	var allowedEnumValues = []string{"bank", "internal", "issuedCard", "platformPayment"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetCategory() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "bank", "internal", "issuedCard", "platformPayment" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetCategory() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *Transfer) isValidDirection() bool {
-	var allowedEnumValues = []string{"incoming", "outgoing"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetDirection() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "incoming", "outgoing" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetDirection() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *Transfer) isValidReason() bool {
-	var allowedEnumValues = []string{"amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declinedByTransactionRule", "error", "notEnoughBalance", "refusedByCounterpartyBank", "routeNotFound", "scaFailed", "unknown"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetReason() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declinedByTransactionRule", "error", "notEnoughBalance", "refusedByCounterpartyBank", "routeNotFound", "scaFailed", "unknown" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetReason() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *Transfer) isValidStatus() bool {
-	var allowedEnumValues = []string{"approvalPending", "atmWithdrawal", "atmWithdrawalReversalPending", "atmWithdrawalReversed", "authAdjustmentAuthorised", "authAdjustmentError", "authAdjustmentRefused", "authorised", "bankTransfer", "bankTransferPending", "booked", "bookingPending", "cancelled", "capturePending", "captureReversalPending", "captureReversed", "captured", "capturedExternally", "chargeback", "chargebackExternally", "chargebackPending", "chargebackReversalPending", "chargebackReversed", "credited", "depositCorrection", "depositCorrectionPending", "dispute", "disputeClosed", "disputeExpired", "disputeNeedsReview", "error", "expired", "failed", "fee", "feePending", "internalTransfer", "internalTransferPending", "invoiceDeduction", "invoiceDeductionPending", "manualCorrectionPending", "manuallyCorrected", "matchedStatement", "matchedStatementPending", "merchantPayin", "merchantPayinPending", "merchantPayinReversed", "merchantPayinReversedPending", "miscCost", "miscCostPending", "paymentCost", "paymentCostPending", "received", "refundPending", "refundReversalPending", "refundReversed", "refunded", "refundedExternally", "refused", "reserveAdjustment", "reserveAdjustmentPending", "returned", "secondChargeback", "secondChargebackPending", "undefined"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetStatus() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "approvalPending", "atmWithdrawal", "atmWithdrawalReversalPending", "atmWithdrawalReversed", "authAdjustmentAuthorised", "authAdjustmentError", "authAdjustmentRefused", "authorised", "bankTransfer", "bankTransferPending", "booked", "bookingPending", "cancelled", "capturePending", "captureReversalPending", "captureReversed", "captured", "capturedExternally", "chargeback", "chargebackExternally", "chargebackPending", "chargebackReversalPending", "chargebackReversed", "credited", "depositCorrection", "depositCorrectionPending", "dispute", "disputeClosed", "disputeExpired", "disputeNeedsReview", "error", "expired", "failed", "fee", "feePending", "internalTransfer", "internalTransferPending", "invoiceDeduction", "invoiceDeductionPending", "manualCorrectionPending", "manuallyCorrected", "matchedStatement", "matchedStatementPending", "merchantPayin", "merchantPayinPending", "merchantPayinReversed", "merchantPayinReversedPending", "miscCost", "miscCostPending", "paymentCost", "paymentCostPending", "received", "refundPending", "refundReversalPending", "refundReversed", "refunded", "refundedExternally", "refused", "rejected", "reserveAdjustment", "reserveAdjustmentPending", "returned", "secondChargeback", "secondChargebackPending", "undefined" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetStatus() == allowed {
+            return true
+        }
+    }
+    return false
 }
+func (o *Transfer) isValidType() bool {
+    var allowedEnumValues = []string{ "atmWithdrawal", "atmWithdrawalReversal", "balanceAdjustment", "balanceMigration", "balanceRollover", "bankDirectDebit", "bankTransfer", "capture", "captureReversal", "cardTransfer", "cashOutFee", "cashOutFunding", "cashOutInstruction", "chargeback", "chargebackCorrection", "chargebackReversal", "chargebackReversalCorrection", "depositCorrection", "fee", "grant", "installment", "installmentReversal", "internalDirectDebit", "internalTransfer", "invoiceDeduction", "leftover", "manualCorrection", "miscCost", "payment", "paymentCost", "refund", "refundReversal", "repayment", "reserveAdjustment", "secondChargeback", "secondChargebackCorrection" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
+}
+

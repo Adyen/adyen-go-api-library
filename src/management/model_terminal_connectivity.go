@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the TerminalConnectivity type satisfies the MappedNullable interface at compile time
@@ -20,9 +19,9 @@ var _ common.MappedNullable = &TerminalConnectivity{}
 // TerminalConnectivity struct for TerminalConnectivity
 type TerminalConnectivity struct {
 	Bluetooth *TerminalConnectivityBluetooth `json:"bluetooth,omitempty"`
-	Cellular  *TerminalConnectivityCellular  `json:"cellular,omitempty"`
-	Ethernet  *TerminalConnectivityEthernet  `json:"ethernet,omitempty"`
-	Wifi      *TerminalConnectivityWifi      `json:"wifi,omitempty"`
+	Cellular *TerminalConnectivityCellular `json:"cellular,omitempty"`
+	Ethernet *TerminalConnectivityEthernet `json:"ethernet,omitempty"`
+	Wifi *TerminalConnectivityWifi `json:"wifi,omitempty"`
 }
 
 // NewTerminalConnectivity instantiates a new TerminalConnectivity object
@@ -171,7 +170,7 @@ func (o *TerminalConnectivity) SetWifi(v TerminalConnectivityWifi) {
 }
 
 func (o TerminalConnectivity) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -230,3 +229,6 @@ func (v *NullableTerminalConnectivity) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

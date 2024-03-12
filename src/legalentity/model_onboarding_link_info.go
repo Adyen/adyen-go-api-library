@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the OnboardingLinkInfo type satisfies the MappedNullable interface at compile time
@@ -23,7 +22,7 @@ type OnboardingLinkInfo struct {
 	Locale *string `json:"locale,omitempty"`
 	// The URL where the user is redirected after they complete hosted onboarding.
 	RedirectUrl *string `json:"redirectUrl,omitempty"`
-	// Boolean key-value pairs indicating the settings for the hosted onboarding page. The keys are the settings.  Possible keys:  By default, these values are set to **true**. Set to **false** to not allow the action.  - **changeLegalEntityType**: The user can change their legal entity type.  - **editPrefilledCountry**: The user can change the country of their legal entity's address, for example the registered address of an organization.  By default, these values are set to **false**. Set to **true** to allow the action.  - **allowBankAccountFormatSelection**: The user can select the format for their payout account if applicable.  - **allowIntraRegionCrossBorderPayout**: The user can select a payout account in a different EU/EEA country than the country of their legal entity.  By default, these value are set to **false**. Set the following values to **true** to require the user to sign PCI questionnaires based on their sales channels. The user must sign PCI questionnaires for all relevant sales channels.  - **requirePciSignEcommerce**  - **requirePciSignPos**  - **requirePciSignEcomMoto**  - **requirePciSignPosMoto**
+	// Boolean key-value pairs indicating the settings for the hosted onboarding page. The keys are the settings.  Possible keys:  By default, these values are set to **true**. Set to **false** to not allow the action.  - **changeLegalEntityType**: The user can change their legal entity type.  - **editPrefilledCountry**: The user can change the country of their legal entity's address, for example the registered address of an organization.  By default, these values are set to **false**. Set to **true** to allow the action.  - **allowBankAccountFormatSelection**: The user can select the format for their payout account if applicable.  - **allowIntraRegionCrossBorderPayout**: The user can select a payout account in a different EU/EEA country (including Switzerland and the UK) than the country of their legal entity.  By default, these value are set to **false**. Set the following values to **true** to require the user to sign PCI questionnaires based on their sales channels. The user must sign PCI questionnaires for all relevant sales channels.  - **requirePciSignEcommerce**  - **requirePciSignPos**  - **requirePciSignEcomMoto**  - **requirePciSignPosMoto**  
 	Settings *map[string]bool `json:"settings,omitempty"`
 	// The unique identifier of the hosted onboarding theme.
 	ThemeId *string `json:"themeId,omitempty"`
@@ -175,7 +174,7 @@ func (o *OnboardingLinkInfo) SetThemeId(v string) {
 }
 
 func (o OnboardingLinkInfo) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -234,3 +233,6 @@ func (v *NullableOnboardingLinkInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

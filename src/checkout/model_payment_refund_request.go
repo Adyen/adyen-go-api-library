@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the PaymentRefundRequest type satisfies the MappedNullable interface at compile time
@@ -19,14 +18,14 @@ var _ common.MappedNullable = &PaymentRefundRequest{}
 
 // PaymentRefundRequest struct for PaymentRefundRequest
 type PaymentRefundRequest struct {
-	Amount          Amount           `json:"amount"`
+	Amount Amount `json:"amount"`
 	ApplicationInfo *ApplicationInfo `json:"applicationInfo,omitempty"`
 	// Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment). > This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Atome, Clearpay, Klarna, Ratepay, Walley, and Zip.
 	LineItems []LineItem `json:"lineItems,omitempty"`
 	// The merchant account that is used to process the payment.
 	MerchantAccount string `json:"merchantAccount"`
 	// Your reason for the refund request
-	MerchantRefundReason *string `json:"merchantRefundReason,omitempty"`
+	MerchantRefundReason common.NullableString `json:"merchantRefundReason,omitempty"`
 	// Your reference for the refund request. Maximum length: 80 characters.
 	Reference *string `json:"reference,omitempty"`
 	// An array of objects specifying how the amount should be split between accounts when using Adyen for Platforms. For details, refer to [Providing split information](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information).
@@ -166,36 +165,46 @@ func (o *PaymentRefundRequest) SetMerchantAccount(v string) {
 	o.MerchantAccount = v
 }
 
-// GetMerchantRefundReason returns the MerchantRefundReason field value if set, zero value otherwise.
+// GetMerchantRefundReason returns the MerchantRefundReason field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PaymentRefundRequest) GetMerchantRefundReason() string {
-	if o == nil || common.IsNil(o.MerchantRefundReason) {
+	if o == nil || common.IsNil(o.MerchantRefundReason.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.MerchantRefundReason
+	return *o.MerchantRefundReason.Get()
 }
 
 // GetMerchantRefundReasonOk returns a tuple with the MerchantRefundReason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PaymentRefundRequest) GetMerchantRefundReasonOk() (*string, bool) {
-	if o == nil || common.IsNil(o.MerchantRefundReason) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MerchantRefundReason, true
+	return o.MerchantRefundReason.Get(), o.MerchantRefundReason.IsSet()
 }
 
 // HasMerchantRefundReason returns a boolean if a field has been set.
 func (o *PaymentRefundRequest) HasMerchantRefundReason() bool {
-	if o != nil && !common.IsNil(o.MerchantRefundReason) {
+	if o != nil && o.MerchantRefundReason.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetMerchantRefundReason gets a reference to the given string and assigns it to the MerchantRefundReason field.
+// SetMerchantRefundReason gets a reference to the given NullableString and assigns it to the MerchantRefundReason field.
 func (o *PaymentRefundRequest) SetMerchantRefundReason(v string) {
-	o.MerchantRefundReason = &v
+	o.MerchantRefundReason.Set(&v)
+}
+// SetMerchantRefundReasonNil sets the value for MerchantRefundReason to be an explicit nil
+func (o *PaymentRefundRequest) SetMerchantRefundReasonNil() {
+	o.MerchantRefundReason.Set(nil)
+}
+
+// UnsetMerchantRefundReason ensures that no value is present for MerchantRefundReason, not even an explicit nil
+func (o *PaymentRefundRequest) UnsetMerchantRefundReason() {
+	o.MerchantRefundReason.Unset()
 }
 
 // GetReference returns the Reference field value if set, zero value otherwise.
@@ -295,7 +304,7 @@ func (o *PaymentRefundRequest) SetStore(v string) {
 }
 
 func (o PaymentRefundRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -312,8 +321,8 @@ func (o PaymentRefundRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["lineItems"] = o.LineItems
 	}
 	toSerialize["merchantAccount"] = o.MerchantAccount
-	if !common.IsNil(o.MerchantRefundReason) {
-		toSerialize["merchantRefundReason"] = o.MerchantRefundReason
+	if o.MerchantRefundReason.IsSet() {
+		toSerialize["merchantRefundReason"] = o.MerchantRefundReason.Get()
 	}
 	if !common.IsNil(o.Reference) {
 		toSerialize["reference"] = o.Reference
@@ -363,12 +372,14 @@ func (v *NullablePaymentRefundRequest) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *PaymentRefundRequest) isValidMerchantRefundReason() bool {
-	var allowedEnumValues = []string{"FRAUD", "CUSTOMER REQUEST", "RETURN", "DUPLICATE", "OTHER"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetMerchantRefundReason() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "FRAUD", "CUSTOMER REQUEST", "RETURN", "DUPLICATE", "OTHER" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetMerchantRefundReason() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

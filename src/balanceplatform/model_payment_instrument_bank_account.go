@@ -10,12 +10,14 @@ package balanceplatform
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 	"fmt"
 )
 
 // PaymentInstrumentBankAccount - Contains the business account details. Returned when you create a payment instrument with `type` **bankAccount**.
 type PaymentInstrumentBankAccount struct {
-	IbanAccountIdentification    *IbanAccountIdentification
+	IbanAccountIdentification *IbanAccountIdentification
+	UKLocalAccountIdentification *UKLocalAccountIdentification
 	USLocalAccountIdentification *USLocalAccountIdentification
 }
 
@@ -26,12 +28,20 @@ func IbanAccountIdentificationAsPaymentInstrumentBankAccount(v *IbanAccountIdent
 	}
 }
 
+// UKLocalAccountIdentificationAsPaymentInstrumentBankAccount is a convenience function that returns UKLocalAccountIdentification wrapped in PaymentInstrumentBankAccount
+func UKLocalAccountIdentificationAsPaymentInstrumentBankAccount(v *UKLocalAccountIdentification) PaymentInstrumentBankAccount {
+	return PaymentInstrumentBankAccount{
+		UKLocalAccountIdentification: v,
+	}
+}
+
 // USLocalAccountIdentificationAsPaymentInstrumentBankAccount is a convenience function that returns USLocalAccountIdentification wrapped in PaymentInstrumentBankAccount
 func USLocalAccountIdentificationAsPaymentInstrumentBankAccount(v *USLocalAccountIdentification) PaymentInstrumentBankAccount {
 	return PaymentInstrumentBankAccount{
 		USLocalAccountIdentification: v,
 	}
 }
+
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *PaymentInstrumentBankAccount) UnmarshalJSON(data []byte) error {
@@ -43,11 +53,24 @@ func (dst *PaymentInstrumentBankAccount) UnmarshalJSON(data []byte) error {
 		jsonIbanAccountIdentification, _ := json.Marshal(dst.IbanAccountIdentification)
 		if string(jsonIbanAccountIdentification) == "{}" || !dst.IbanAccountIdentification.isValidType() { // empty struct
 			dst.IbanAccountIdentification = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
 		dst.IbanAccountIdentification = nil
+	}
+
+	// try to unmarshal data into UKLocalAccountIdentification
+	err = json.Unmarshal(data, &dst.UKLocalAccountIdentification)
+	if err == nil {
+		jsonUKLocalAccountIdentification, _ := json.Marshal(dst.UKLocalAccountIdentification)
+		if string(jsonUKLocalAccountIdentification) == "{}" || !dst.UKLocalAccountIdentification.isValidType() { // empty struct
+			dst.UKLocalAccountIdentification = nil
+        } else {
+			match++
+		}
+	} else {
+		dst.UKLocalAccountIdentification = nil
 	}
 
 	// try to unmarshal data into USLocalAccountIdentification
@@ -56,7 +79,7 @@ func (dst *PaymentInstrumentBankAccount) UnmarshalJSON(data []byte) error {
 		jsonUSLocalAccountIdentification, _ := json.Marshal(dst.USLocalAccountIdentification)
 		if string(jsonUSLocalAccountIdentification) == "{}" || !dst.USLocalAccountIdentification.isValidType() { // empty struct
 			dst.USLocalAccountIdentification = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -66,6 +89,7 @@ func (dst *PaymentInstrumentBankAccount) UnmarshalJSON(data []byte) error {
 	if match > 1 { // more than 1 match
 		// reset to nil
 		dst.IbanAccountIdentification = nil
+		dst.UKLocalAccountIdentification = nil
 		dst.USLocalAccountIdentification = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(PaymentInstrumentBankAccount)")
@@ -82,6 +106,10 @@ func (src PaymentInstrumentBankAccount) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.IbanAccountIdentification)
 	}
 
+	if src.UKLocalAccountIdentification != nil {
+		return json.Marshal(&src.UKLocalAccountIdentification)
+	}
+
 	if src.USLocalAccountIdentification != nil {
 		return json.Marshal(&src.USLocalAccountIdentification)
 	}
@@ -90,12 +118,16 @@ func (src PaymentInstrumentBankAccount) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *PaymentInstrumentBankAccount) GetActualInstance() interface{} {
+func (obj *PaymentInstrumentBankAccount) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
 	if obj.IbanAccountIdentification != nil {
 		return obj.IbanAccountIdentification
+	}
+
+	if obj.UKLocalAccountIdentification != nil {
+		return obj.UKLocalAccountIdentification
 	}
 
 	if obj.USLocalAccountIdentification != nil {
@@ -141,3 +173,5 @@ func (v *NullablePaymentInstrumentBankAccount) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
