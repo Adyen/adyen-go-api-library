@@ -19,13 +19,13 @@ var _ common.MappedNullable = &PinChangeRequest{}
 
 // PinChangeRequest struct for PinChangeRequest
 type PinChangeRequest struct {
-	// Symmetric session key encrypted under the public key.
+	// The symmetric session key that you encrypted with the [public key](https://docs.adyen.com/api-explorer/balanceplatform/2/get/publicKey) that you received from Adyen.
 	EncryptedKey string `json:"encryptedKey"`
-	// The encrypted PIN block
+	// The encrypted [PIN block](https://www.pcisecuritystandards.org/glossary/pin-block).
 	EncryptedPinBlock string `json:"encryptedPinBlock"`
-	// The unique identifier of the payment instrument.
+	// The unique identifier of the payment instrument, which is the card for which you are managing the PIN.
 	PaymentInstrumentId string `json:"paymentInstrumentId"`
-	// The token which is used to construct the pinblock.
+	// The 16-digit token that you used to generate the `encryptedPinBlock`.
 	Token string `json:"token"`
 }
 

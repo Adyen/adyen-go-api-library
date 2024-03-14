@@ -20,7 +20,7 @@ var _ common.MappedNullable = &AchDetails{}
 // AchDetails struct for AchDetails
 type AchDetails struct {
 	// The bank account number (without separators).
-	BankAccountNumber string `json:"bankAccountNumber"`
+	BankAccountNumber *string `json:"bankAccountNumber,omitempty"`
 	// The bank account type (checking, savings...).
 	BankAccountType *string `json:"bankAccountType,omitempty"`
 	// The bank routing number of the account. The field value is `nil` in most cases.
@@ -46,9 +46,8 @@ type AchDetails struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAchDetails(bankAccountNumber string) *AchDetails {
+func NewAchDetails() *AchDetails {
 	this := AchDetails{}
-	this.BankAccountNumber = bankAccountNumber
 	var type_ string = "ach"
 	this.Type = &type_
 	return &this
@@ -64,28 +63,36 @@ func NewAchDetailsWithDefaults() *AchDetails {
 	return &this
 }
 
-// GetBankAccountNumber returns the BankAccountNumber field value
+// GetBankAccountNumber returns the BankAccountNumber field value if set, zero value otherwise.
 func (o *AchDetails) GetBankAccountNumber() string {
-	if o == nil {
+	if o == nil || common.IsNil(o.BankAccountNumber) {
 		var ret string
 		return ret
 	}
-
-	return o.BankAccountNumber
+	return *o.BankAccountNumber
 }
 
-// GetBankAccountNumberOk returns a tuple with the BankAccountNumber field value
+// GetBankAccountNumberOk returns a tuple with the BankAccountNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AchDetails) GetBankAccountNumberOk() (*string, bool) {
-	if o == nil {
+	if o == nil || common.IsNil(o.BankAccountNumber) {
 		return nil, false
 	}
-	return &o.BankAccountNumber, true
+	return o.BankAccountNumber, true
 }
 
-// SetBankAccountNumber sets field value
+// HasBankAccountNumber returns a boolean if a field has been set.
+func (o *AchDetails) HasBankAccountNumber() bool {
+	if o != nil && !common.IsNil(o.BankAccountNumber) {
+		return true
+	}
+
+	return false
+}
+
+// SetBankAccountNumber gets a reference to the given string and assigns it to the BankAccountNumber field.
 func (o *AchDetails) SetBankAccountNumber(v string) {
-	o.BankAccountNumber = v
+	o.BankAccountNumber = &v
 }
 
 // GetBankAccountType returns the BankAccountType field value if set, zero value otherwise.
@@ -389,7 +396,9 @@ func (o AchDetails) MarshalJSON() ([]byte, error) {
 
 func (o AchDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["bankAccountNumber"] = o.BankAccountNumber
+	if !common.IsNil(o.BankAccountNumber) {
+		toSerialize["bankAccountNumber"] = o.BankAccountNumber
+	}
 	if !common.IsNil(o.BankAccountType) {
 		toSerialize["bankAccountType"] = o.BankAccountType
 	}

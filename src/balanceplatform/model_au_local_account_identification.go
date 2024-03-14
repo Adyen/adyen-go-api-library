@@ -23,6 +23,8 @@ type AULocalAccountIdentification struct {
 	AccountNumber string `json:"accountNumber"`
 	// The 6-digit [Bank State Branch (BSB) code](https://en.wikipedia.org/wiki/Bank_state_branch), without separators or whitespace.
 	BsbCode string `json:"bsbCode"`
+	// The form factor of the account.  Possible values: **physical**, **virtual**. Default value: **physical**.
+	FormFactor common.NullableString `json:"formFactor,omitempty"`
 	// **auLocal**
 	Type string `json:"type"`
 }
@@ -35,6 +37,8 @@ func NewAULocalAccountIdentification(accountNumber string, bsbCode string, type_
 	this := AULocalAccountIdentification{}
 	this.AccountNumber = accountNumber
 	this.BsbCode = bsbCode
+	var formFactor string = "physical"
+	this.FormFactor = *common.NewNullableString(&formFactor)
 	this.Type = type_
 	return &this
 }
@@ -44,6 +48,8 @@ func NewAULocalAccountIdentification(accountNumber string, bsbCode string, type_
 // but it doesn't guarantee that properties required by API are set
 func NewAULocalAccountIdentificationWithDefaults() *AULocalAccountIdentification {
 	this := AULocalAccountIdentification{}
+	var formFactor string = "physical"
+	this.FormFactor = *common.NewNullableString(&formFactor)
 	var type_ string = "auLocal"
 	this.Type = type_
 	return &this
@@ -97,6 +103,49 @@ func (o *AULocalAccountIdentification) SetBsbCode(v string) {
 	o.BsbCode = v
 }
 
+// GetFormFactor returns the FormFactor field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AULocalAccountIdentification) GetFormFactor() string {
+	if o == nil || common.IsNil(o.FormFactor.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.FormFactor.Get()
+}
+
+// GetFormFactorOk returns a tuple with the FormFactor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AULocalAccountIdentification) GetFormFactorOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FormFactor.Get(), o.FormFactor.IsSet()
+}
+
+// HasFormFactor returns a boolean if a field has been set.
+func (o *AULocalAccountIdentification) HasFormFactor() bool {
+	if o != nil && o.FormFactor.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFormFactor gets a reference to the given NullableString and assigns it to the FormFactor field.
+func (o *AULocalAccountIdentification) SetFormFactor(v string) {
+	o.FormFactor.Set(&v)
+}
+
+// SetFormFactorNil sets the value for FormFactor to be an explicit nil
+func (o *AULocalAccountIdentification) SetFormFactorNil() {
+	o.FormFactor.Set(nil)
+}
+
+// UnsetFormFactor ensures that no value is present for FormFactor, not even an explicit nil
+func (o *AULocalAccountIdentification) UnsetFormFactor() {
+	o.FormFactor.Unset()
+}
+
 // GetType returns the Type field value
 func (o *AULocalAccountIdentification) GetType() string {
 	if o == nil {
@@ -133,6 +182,9 @@ func (o AULocalAccountIdentification) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["accountNumber"] = o.AccountNumber
 	toSerialize["bsbCode"] = o.BsbCode
+	if o.FormFactor.IsSet() {
+		toSerialize["formFactor"] = o.FormFactor.Get()
+	}
 	toSerialize["type"] = o.Type
 	return toSerialize, nil
 }

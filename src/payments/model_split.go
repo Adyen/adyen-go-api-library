@@ -263,7 +263,7 @@ func (v *NullableSplit) UnmarshalJSON(src []byte) error {
 }
 
 func (o *Split) isValidType() bool {
-	var allowedEnumValues = []string{"BalanceAccount", "Commission", "Default", "MarketPlace", "PaymentFee", "Remainder", "Surcharge", "Tip", "VAT"}
+	var allowedEnumValues = []string{"AcquiringFees", "AdyenCommission", "AdyenFees", "AdyenMarkup", "BalanceAccount", "Commission", "Default", "Interchange", "MarketPlace", "PaymentFee", "Remainder", "SchemeFee", "Surcharge", "Tip", "VAT"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

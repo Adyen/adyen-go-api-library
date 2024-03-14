@@ -19,6 +19,7 @@ var _ common.MappedNullable = &Link{}
 
 // Link struct for Link
 type Link struct {
+	// The link to the resource.
 	Href *string `json:"href,omitempty"`
 }
 

@@ -248,6 +248,8 @@ func (r ModificationsApiDonateInput) DonationRequest(donationRequest DonationReq
 Prepare a request for Donate
 
 @return ModificationsApiDonateInput
+
+Deprecated
 */
 func (a *ModificationsApi) DonateInput() ModificationsApiDonateInput {
 	return ModificationsApiDonateInput{}
@@ -263,6 +265,8 @@ Schedules a new payment to be created (including a new authorisation request) fo
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r ModificationsApiDonateInput - Request parameters, see DonateInput
 @return ModificationResult, *http.Response, error
+
+    Deprecated
 */
 func (a *ModificationsApi) Donate(ctx context.Context, r ModificationsApiDonateInput) (ModificationResult, *http.Response, error) {
 	res := &ModificationResult{}

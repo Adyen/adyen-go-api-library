@@ -485,6 +485,108 @@ func (a *PaymentInstrumentsApi) ListNetworkTokens(ctx context.Context, r Payment
 	return *res, httpRes, err
 }
 
+// All parameters accepted by PaymentInstrumentsApi.RevealDataOfPaymentInstrument
+type PaymentInstrumentsApiRevealDataOfPaymentInstrumentInput struct {
+	paymentInstrumentRevealRequest *PaymentInstrumentRevealRequest
+}
+
+func (r PaymentInstrumentsApiRevealDataOfPaymentInstrumentInput) PaymentInstrumentRevealRequest(paymentInstrumentRevealRequest PaymentInstrumentRevealRequest) PaymentInstrumentsApiRevealDataOfPaymentInstrumentInput {
+	r.paymentInstrumentRevealRequest = &paymentInstrumentRevealRequest
+	return r
+}
+
+/*
+Prepare a request for RevealDataOfPaymentInstrument
+
+@return PaymentInstrumentsApiRevealDataOfPaymentInstrumentInput
+*/
+func (a *PaymentInstrumentsApi) RevealDataOfPaymentInstrumentInput() PaymentInstrumentsApiRevealDataOfPaymentInstrumentInput {
+	return PaymentInstrumentsApiRevealDataOfPaymentInstrumentInput{}
+}
+
+/*
+RevealDataOfPaymentInstrument Reveal the data of a payment instrument
+
+Returns the encrypted data of a specified payment instrument. These data include:
+
+- The primary account number (PAN)
+- The card verification code (CVC)
+- The expiry date
+
+You can decrypt the data to reveal it in your user interface.
+
+To make this request, your API credential must have the following role:
+* Bank Issuing PAN Reveal Webservice role
+
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r PaymentInstrumentsApiRevealDataOfPaymentInstrumentInput - Request parameters, see RevealDataOfPaymentInstrumentInput
+@return PaymentInstrumentRevealResponse, *http.Response, error
+*/
+func (a *PaymentInstrumentsApi) RevealDataOfPaymentInstrument(ctx context.Context, r PaymentInstrumentsApiRevealDataOfPaymentInstrumentInput) (PaymentInstrumentRevealResponse, *http.Response, error) {
+	res := &PaymentInstrumentRevealResponse{}
+	path := "/paymentInstruments/reveal"
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.paymentInstrumentRevealRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 400 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+
+	return *res, httpRes, err
+}
+
 // All parameters accepted by PaymentInstrumentsApi.UpdatePaymentInstrument
 type PaymentInstrumentsApiUpdatePaymentInstrumentInput struct {
 	id                             string

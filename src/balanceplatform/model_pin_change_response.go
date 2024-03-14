@@ -19,7 +19,7 @@ var _ common.MappedNullable = &PinChangeResponse{}
 
 // PinChangeResponse struct for PinChangeResponse
 type PinChangeResponse struct {
-	// The pin change status.
+	// The status of the request for PIN change.  Possible values: **completed**, **pending**, **unavailable**.
 	Status string `json:"status"`
 }
 

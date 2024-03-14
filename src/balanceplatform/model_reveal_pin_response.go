@@ -19,9 +19,9 @@ var _ common.MappedNullable = &RevealPinResponse{}
 
 // RevealPinResponse struct for RevealPinResponse
 type RevealPinResponse struct {
-	// The encrypted PIN block.
+	// The encrypted [PIN block](https://www.pcisecuritystandards.org/glossary/pin-block).
 	EncryptedPinBlock string `json:"encryptedPinBlock"`
-	// The encrypted PIN block extraction token.
+	// The 16-digit token that you need to extract the `encryptedPinBlock`.
 	Token string `json:"token"`
 }
 

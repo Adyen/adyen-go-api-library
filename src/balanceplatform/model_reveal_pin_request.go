@@ -19,9 +19,9 @@ var _ common.MappedNullable = &RevealPinRequest{}
 
 // RevealPinRequest struct for RevealPinRequest
 type RevealPinRequest struct {
-	// Symmetric session key encrypted under the public key.
+	// The symmetric session key that you encrypted with the [public key](https://docs.adyen.com/api-explorer/balanceplatform/2/get/publicKey) that you received from Adyen.
 	EncryptedKey string `json:"encryptedKey"`
-	// The unique identifier of the payment instrument.
+	// The unique identifier of the payment instrument, which is the card for which you are managing the PIN.
 	PaymentInstrumentId string `json:"paymentInstrumentId"`
 }
 

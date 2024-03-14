@@ -67,7 +67,14 @@ func (a *DocumentsApi) DeleteDocument(ctx context.Context, r DocumentsApiDeleteD
 
 // All parameters accepted by DocumentsApi.GetDocument
 type DocumentsApiGetDocumentInput struct {
-	id string
+	id          string
+	skipContent *bool
+}
+
+// Do not load document content while fetching the document.
+func (r DocumentsApiGetDocumentInput) SkipContent(skipContent bool) DocumentsApiGetDocumentInput {
+	r.skipContent = &skipContent
+	return r
 }
 
 /*
@@ -96,6 +103,9 @@ func (a *DocumentsApi) GetDocument(ctx context.Context, r DocumentsApiGetDocumen
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
+	if r.skipContent != nil {
+		common.ParameterAddToQuery(queryParams, "skipContent", r.skipContent, "")
+	}
 	httpRes, err := common.SendAPIRequest(
 		ctx,
 		a.Client,

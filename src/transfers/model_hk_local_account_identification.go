@@ -23,6 +23,8 @@ type HKLocalAccountIdentification struct {
 	AccountNumber string `json:"accountNumber"`
 	// The 3-digit clearing code, without separators or whitespace.
 	ClearingCode string `json:"clearingCode"`
+	// The form factor of the account.  Possible values: **physical**, **virtual**. Default value: **physical**.
+	FormFactor common.NullableString `json:"formFactor,omitempty"`
 	// **hkLocal**
 	Type string `json:"type"`
 }
@@ -35,6 +37,8 @@ func NewHKLocalAccountIdentification(accountNumber string, clearingCode string, 
 	this := HKLocalAccountIdentification{}
 	this.AccountNumber = accountNumber
 	this.ClearingCode = clearingCode
+	var formFactor string = "physical"
+	this.FormFactor = *common.NewNullableString(&formFactor)
 	this.Type = type_
 	return &this
 }
@@ -44,6 +48,8 @@ func NewHKLocalAccountIdentification(accountNumber string, clearingCode string, 
 // but it doesn't guarantee that properties required by API are set
 func NewHKLocalAccountIdentificationWithDefaults() *HKLocalAccountIdentification {
 	this := HKLocalAccountIdentification{}
+	var formFactor string = "physical"
+	this.FormFactor = *common.NewNullableString(&formFactor)
 	var type_ string = "hkLocal"
 	this.Type = type_
 	return &this
@@ -97,6 +103,49 @@ func (o *HKLocalAccountIdentification) SetClearingCode(v string) {
 	o.ClearingCode = v
 }
 
+// GetFormFactor returns the FormFactor field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HKLocalAccountIdentification) GetFormFactor() string {
+	if o == nil || common.IsNil(o.FormFactor.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.FormFactor.Get()
+}
+
+// GetFormFactorOk returns a tuple with the FormFactor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HKLocalAccountIdentification) GetFormFactorOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FormFactor.Get(), o.FormFactor.IsSet()
+}
+
+// HasFormFactor returns a boolean if a field has been set.
+func (o *HKLocalAccountIdentification) HasFormFactor() bool {
+	if o != nil && o.FormFactor.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFormFactor gets a reference to the given NullableString and assigns it to the FormFactor field.
+func (o *HKLocalAccountIdentification) SetFormFactor(v string) {
+	o.FormFactor.Set(&v)
+}
+
+// SetFormFactorNil sets the value for FormFactor to be an explicit nil
+func (o *HKLocalAccountIdentification) SetFormFactorNil() {
+	o.FormFactor.Set(nil)
+}
+
+// UnsetFormFactor ensures that no value is present for FormFactor, not even an explicit nil
+func (o *HKLocalAccountIdentification) UnsetFormFactor() {
+	o.FormFactor.Unset()
+}
+
 // GetType returns the Type field value
 func (o *HKLocalAccountIdentification) GetType() string {
 	if o == nil {
@@ -133,6 +182,9 @@ func (o HKLocalAccountIdentification) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["accountNumber"] = o.AccountNumber
 	toSerialize["clearingCode"] = o.ClearingCode
+	if o.FormFactor.IsSet() {
+		toSerialize["formFactor"] = o.FormFactor.Get()
+	}
 	toSerialize["type"] = o.Type
 	return toSerialize, nil
 }

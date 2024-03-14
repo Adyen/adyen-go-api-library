@@ -26,8 +26,9 @@ type TransferRoute struct {
 	// The three-character ISO currency code of transfer. For example, **USD** or **EUR**.
 	Currency *string `json:"currency,omitempty"`
 	// The priority for the bank transfer. This sets the speed at which the transfer is sent and the fees that you have to pay. Possible values:  * **regular**: For normal, low-value transactions.  * **fast**: Faster way to transfer funds but has higher fees. Recommended for high-priority, low-value transactions.  * **wire**: Fastest way to transfer funds but has the highest fees. Recommended for high-priority, high-value transactions.  * **instant**: Instant way to transfer funds in [SEPA countries](https://www.ecb.europa.eu/paym/integration/retail/sepa/html/index.en.html).  * **crossBorder**: High-value transfer to a recipient in a different country.  * **internal**: Transfer to an Adyen-issued business bank account (by bank account number/IBAN).
-	Priority     *string                    `json:"priority,omitempty"`
-	Requirements *TransferRouteRequirements `json:"requirements,omitempty"`
+	Priority *string `json:"priority,omitempty"`
+	// A set of rules defined by clearing houses and banking partners. Your transfer request must adhere to these rules to ensure successful initiation of transfer. Based on the priority, one or more requirements may be returned. Each requirement is defined with a `type` and `description`.
+	Requirements []TransferRouteRequirementsInner `json:"requirements,omitempty"`
 }
 
 // NewTransferRoute instantiates a new TransferRoute object
@@ -176,17 +177,17 @@ func (o *TransferRoute) SetPriority(v string) {
 }
 
 // GetRequirements returns the Requirements field value if set, zero value otherwise.
-func (o *TransferRoute) GetRequirements() TransferRouteRequirements {
+func (o *TransferRoute) GetRequirements() []TransferRouteRequirementsInner {
 	if o == nil || common.IsNil(o.Requirements) {
-		var ret TransferRouteRequirements
+		var ret []TransferRouteRequirementsInner
 		return ret
 	}
-	return *o.Requirements
+	return o.Requirements
 }
 
 // GetRequirementsOk returns a tuple with the Requirements field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TransferRoute) GetRequirementsOk() (*TransferRouteRequirements, bool) {
+func (o *TransferRoute) GetRequirementsOk() ([]TransferRouteRequirementsInner, bool) {
 	if o == nil || common.IsNil(o.Requirements) {
 		return nil, false
 	}
@@ -202,9 +203,9 @@ func (o *TransferRoute) HasRequirements() bool {
 	return false
 }
 
-// SetRequirements gets a reference to the given TransferRouteRequirements and assigns it to the Requirements field.
-func (o *TransferRoute) SetRequirements(v TransferRouteRequirements) {
-	o.Requirements = &v
+// SetRequirements gets a reference to the given []TransferRouteRequirementsInner and assigns it to the Requirements field.
+func (o *TransferRoute) SetRequirements(v []TransferRouteRequirementsInner) {
+	o.Requirements = v
 }
 
 func (o TransferRoute) MarshalJSON() ([]byte, error) {

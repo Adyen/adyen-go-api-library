@@ -18,6 +18,7 @@ type CheckoutPaymentMethod struct {
 	AchDetails                        *AchDetails
 	AfterpayDetails                   *AfterpayDetails
 	AmazonPayDetails                  *AmazonPayDetails
+	AncvDetails                       *AncvDetails
 	AndroidPayDetails                 *AndroidPayDetails
 	ApplePayDetails                   *ApplePayDetails
 	BacsDirectDebitDetails            *BacsDirectDebitDetails
@@ -74,6 +75,13 @@ func AfterpayDetailsAsCheckoutPaymentMethod(v *AfterpayDetails) CheckoutPaymentM
 func AmazonPayDetailsAsCheckoutPaymentMethod(v *AmazonPayDetails) CheckoutPaymentMethod {
 	return CheckoutPaymentMethod{
 		AmazonPayDetails: v,
+	}
+}
+
+// AncvDetailsAsCheckoutPaymentMethod is a convenience function that returns AncvDetails wrapped in CheckoutPaymentMethod
+func AncvDetailsAsCheckoutPaymentMethod(v *AncvDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
+		AncvDetails: v,
 	}
 }
 
@@ -370,6 +378,19 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		}
 	} else {
 		dst.AmazonPayDetails = nil
+	}
+
+	// try to unmarshal data into AncvDetails
+	err = json.Unmarshal(data, &dst.AncvDetails)
+	if err == nil {
+		jsonAncvDetails, _ := json.Marshal(dst.AncvDetails)
+		if string(jsonAncvDetails) == "{}" || !dst.AncvDetails.isValidType() { // empty struct
+			dst.AncvDetails = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.AncvDetails = nil
 	}
 
 	// try to unmarshal data into AndroidPayDetails
@@ -845,6 +866,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		dst.AchDetails = nil
 		dst.AfterpayDetails = nil
 		dst.AmazonPayDetails = nil
+		dst.AncvDetails = nil
 		dst.AndroidPayDetails = nil
 		dst.ApplePayDetails = nil
 		dst.BacsDirectDebitDetails = nil
@@ -902,6 +924,10 @@ func (src CheckoutPaymentMethod) MarshalJSON() ([]byte, error) {
 
 	if src.AmazonPayDetails != nil {
 		return json.Marshal(&src.AmazonPayDetails)
+	}
+
+	if src.AncvDetails != nil {
+		return json.Marshal(&src.AncvDetails)
 	}
 
 	if src.AndroidPayDetails != nil {
@@ -1066,6 +1092,10 @@ func (obj *CheckoutPaymentMethod) GetActualInstance() interface{} {
 
 	if obj.AmazonPayDetails != nil {
 		return obj.AmazonPayDetails
+	}
+
+	if obj.AncvDetails != nil {
+		return obj.AncvDetails
 	}
 
 	if obj.AndroidPayDetails != nil {

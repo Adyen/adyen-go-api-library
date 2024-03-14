@@ -44,6 +44,8 @@ type Transfer struct {
 	ReferenceForBeneficiary *string `json:"referenceForBeneficiary,omitempty"`
 	// The result of the transfer.   For example, **authorised**, **refused**, or **error**.
 	Status string `json:"status"`
+	// The type of transfer or transaction. For example, **refund**, **payment**, **internalTransfer**, **bankTransfer**.
+	Type *string `json:"type,omitempty"`
 }
 
 // NewTransfer instantiates a new Transfer object
@@ -515,6 +517,38 @@ func (o *Transfer) SetStatus(v string) {
 	o.Status = v
 }
 
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *Transfer) GetType() string {
+	if o == nil || common.IsNil(o.Type) {
+		var ret string
+		return ret
+	}
+	return *o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Transfer) GetTypeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Type) {
+		return nil, false
+	}
+	return o.Type, true
+}
+
+// HasType returns a boolean if a field has been set.
+func (o *Transfer) HasType() bool {
+	if o != nil && !common.IsNil(o.Type) {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given string and assigns it to the Type field.
+func (o *Transfer) SetType(v string) {
+	o.Type = &v
+}
+
 func (o Transfer) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -562,6 +596,9 @@ func (o Transfer) ToMap() (map[string]interface{}, error) {
 		toSerialize["referenceForBeneficiary"] = o.ReferenceForBeneficiary
 	}
 	toSerialize["status"] = o.Status
+	if !common.IsNil(o.Type) {
+		toSerialize["type"] = o.Type
+	}
 	return toSerialize, nil
 }
 
@@ -629,9 +666,18 @@ func (o *Transfer) isValidReason() bool {
 	return false
 }
 func (o *Transfer) isValidStatus() bool {
-	var allowedEnumValues = []string{"approvalPending", "atmWithdrawal", "atmWithdrawalReversalPending", "atmWithdrawalReversed", "authAdjustmentAuthorised", "authAdjustmentError", "authAdjustmentRefused", "authorised", "bankTransfer", "bankTransferPending", "booked", "bookingPending", "cancelled", "capturePending", "captureReversalPending", "captureReversed", "captured", "capturedExternally", "chargeback", "chargebackExternally", "chargebackPending", "chargebackReversalPending", "chargebackReversed", "credited", "depositCorrection", "depositCorrectionPending", "dispute", "disputeClosed", "disputeExpired", "disputeNeedsReview", "error", "expired", "failed", "fee", "feePending", "internalTransfer", "internalTransferPending", "invoiceDeduction", "invoiceDeductionPending", "manualCorrectionPending", "manuallyCorrected", "matchedStatement", "matchedStatementPending", "merchantPayin", "merchantPayinPending", "merchantPayinReversed", "merchantPayinReversedPending", "miscCost", "miscCostPending", "paymentCost", "paymentCostPending", "received", "refundPending", "refundReversalPending", "refundReversed", "refunded", "refundedExternally", "refused", "reserveAdjustment", "reserveAdjustmentPending", "returned", "secondChargeback", "secondChargebackPending", "undefined"}
+	var allowedEnumValues = []string{"approvalPending", "atmWithdrawal", "atmWithdrawalReversalPending", "atmWithdrawalReversed", "authAdjustmentAuthorised", "authAdjustmentError", "authAdjustmentRefused", "authorised", "bankTransfer", "bankTransferPending", "booked", "bookingPending", "cancelled", "capturePending", "captureReversalPending", "captureReversed", "captured", "capturedExternally", "chargeback", "chargebackExternally", "chargebackPending", "chargebackReversalPending", "chargebackReversed", "credited", "depositCorrection", "depositCorrectionPending", "dispute", "disputeClosed", "disputeExpired", "disputeNeedsReview", "error", "expired", "failed", "fee", "feePending", "internalTransfer", "internalTransferPending", "invoiceDeduction", "invoiceDeductionPending", "manualCorrectionPending", "manuallyCorrected", "matchedStatement", "matchedStatementPending", "merchantPayin", "merchantPayinPending", "merchantPayinReversed", "merchantPayinReversedPending", "miscCost", "miscCostPending", "paymentCost", "paymentCostPending", "received", "refundPending", "refundReversalPending", "refundReversed", "refunded", "refundedExternally", "refused", "rejected", "reserveAdjustment", "reserveAdjustmentPending", "returned", "secondChargeback", "secondChargebackPending", "undefined"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetStatus() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *Transfer) isValidType() bool {
+	var allowedEnumValues = []string{"atmWithdrawal", "atmWithdrawalReversal", "balanceAdjustment", "balanceMigration", "balanceRollover", "bankDirectDebit", "bankTransfer", "capture", "captureReversal", "cardTransfer", "cashOutFee", "cashOutFunding", "cashOutInstruction", "chargeback", "chargebackCorrection", "chargebackReversal", "chargebackReversalCorrection", "depositCorrection", "fee", "grant", "installment", "installmentReversal", "internalDirectDebit", "internalTransfer", "invoiceDeduction", "leftover", "manualCorrection", "miscCost", "payment", "paymentCost", "refund", "refundReversal", "repayment", "reserveAdjustment", "secondChargeback", "secondChargebackCorrection"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
 			return true
 		}
 	}

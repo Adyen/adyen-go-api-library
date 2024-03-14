@@ -36,6 +36,7 @@ type TerminalSettings struct {
 	Refunds              *Refunds              `json:"refunds,omitempty"`
 	Signature            *Signature            `json:"signature,omitempty"`
 	Standalone           *Standalone           `json:"standalone,omitempty"`
+	StoreAndForward      *StoreAndForward      `json:"storeAndForward,omitempty"`
 	Surcharge            *Surcharge            `json:"surcharge,omitempty"`
 	TapToPay             *TapToPay             `json:"tapToPay,omitempty"`
 	TerminalInstructions *TerminalInstructions `json:"terminalInstructions,omitempty"`
@@ -572,6 +573,38 @@ func (o *TerminalSettings) SetStandalone(v Standalone) {
 	o.Standalone = &v
 }
 
+// GetStoreAndForward returns the StoreAndForward field value if set, zero value otherwise.
+func (o *TerminalSettings) GetStoreAndForward() StoreAndForward {
+	if o == nil || common.IsNil(o.StoreAndForward) {
+		var ret StoreAndForward
+		return ret
+	}
+	return *o.StoreAndForward
+}
+
+// GetStoreAndForwardOk returns a tuple with the StoreAndForward field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TerminalSettings) GetStoreAndForwardOk() (*StoreAndForward, bool) {
+	if o == nil || common.IsNil(o.StoreAndForward) {
+		return nil, false
+	}
+	return o.StoreAndForward, true
+}
+
+// HasStoreAndForward returns a boolean if a field has been set.
+func (o *TerminalSettings) HasStoreAndForward() bool {
+	if o != nil && !common.IsNil(o.StoreAndForward) {
+		return true
+	}
+
+	return false
+}
+
+// SetStoreAndForward gets a reference to the given StoreAndForward and assigns it to the StoreAndForward field.
+func (o *TerminalSettings) SetStoreAndForward(v StoreAndForward) {
+	o.StoreAndForward = &v
+}
+
 // GetSurcharge returns the Surcharge field value if set, zero value otherwise.
 func (o *TerminalSettings) GetSurcharge() Surcharge {
 	if o == nil || common.IsNil(o.Surcharge) {
@@ -789,6 +822,9 @@ func (o TerminalSettings) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Standalone) {
 		toSerialize["standalone"] = o.Standalone
+	}
+	if !common.IsNil(o.StoreAndForward) {
+		toSerialize["storeAndForward"] = o.StoreAndForward
 	}
 	if !common.IsNil(o.Surcharge) {
 		toSerialize["surcharge"] = o.Surcharge

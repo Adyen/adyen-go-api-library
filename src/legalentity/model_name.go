@@ -19,11 +19,11 @@ var _ common.MappedNullable = &Name{}
 
 // Name struct for Name
 type Name struct {
-	// The individual's first name.
+	// The individual's first name. Must not be blank.
 	FirstName string `json:"firstName"`
 	// The infix in the individual's name, if any.
 	Infix *string `json:"infix,omitempty"`
-	// The individual's last name.
+	// The individual's last name. Must not be blank.
 	LastName string `json:"lastName"`
 }
 

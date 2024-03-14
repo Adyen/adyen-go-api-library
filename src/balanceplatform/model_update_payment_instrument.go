@@ -19,6 +19,8 @@ var _ common.MappedNullable = &UpdatePaymentInstrument{}
 
 // UpdatePaymentInstrument struct for UpdatePaymentInstrument
 type UpdatePaymentInstrument struct {
+	// Contains optional, additional business account details. Returned when you create a payment instrument with `type` **bankAccount**.
+	AdditionalBankAccountIdentifications []PaymentInstrumentAdditionalBankAccountIdentificationsInner `json:"additionalBankAccountIdentifications,omitempty"`
 	// The unique identifier of the [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/v1/post/balanceAccounts__resParam_id) associated with the payment instrument.
 	BalanceAccountId string                        `json:"balanceAccountId"`
 	BankAccount      *PaymentInstrumentBankAccount `json:"bankAccount,omitempty"`
@@ -62,6 +64,38 @@ func NewUpdatePaymentInstrument(balanceAccountId string, id string, issuingCount
 func NewUpdatePaymentInstrumentWithDefaults() *UpdatePaymentInstrument {
 	this := UpdatePaymentInstrument{}
 	return &this
+}
+
+// GetAdditionalBankAccountIdentifications returns the AdditionalBankAccountIdentifications field value if set, zero value otherwise.
+func (o *UpdatePaymentInstrument) GetAdditionalBankAccountIdentifications() []PaymentInstrumentAdditionalBankAccountIdentificationsInner {
+	if o == nil || common.IsNil(o.AdditionalBankAccountIdentifications) {
+		var ret []PaymentInstrumentAdditionalBankAccountIdentificationsInner
+		return ret
+	}
+	return o.AdditionalBankAccountIdentifications
+}
+
+// GetAdditionalBankAccountIdentificationsOk returns a tuple with the AdditionalBankAccountIdentifications field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdatePaymentInstrument) GetAdditionalBankAccountIdentificationsOk() ([]PaymentInstrumentAdditionalBankAccountIdentificationsInner, bool) {
+	if o == nil || common.IsNil(o.AdditionalBankAccountIdentifications) {
+		return nil, false
+	}
+	return o.AdditionalBankAccountIdentifications, true
+}
+
+// HasAdditionalBankAccountIdentifications returns a boolean if a field has been set.
+func (o *UpdatePaymentInstrument) HasAdditionalBankAccountIdentifications() bool {
+	if o != nil && !common.IsNil(o.AdditionalBankAccountIdentifications) {
+		return true
+	}
+
+	return false
+}
+
+// SetAdditionalBankAccountIdentifications gets a reference to the given []PaymentInstrumentAdditionalBankAccountIdentificationsInner and assigns it to the AdditionalBankAccountIdentifications field.
+func (o *UpdatePaymentInstrument) SetAdditionalBankAccountIdentifications(v []PaymentInstrumentAdditionalBankAccountIdentificationsInner) {
+	o.AdditionalBankAccountIdentifications = v
 }
 
 // GetBalanceAccountId returns the BalanceAccountId field value
@@ -426,6 +460,9 @@ func (o UpdatePaymentInstrument) MarshalJSON() ([]byte, error) {
 
 func (o UpdatePaymentInstrument) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.AdditionalBankAccountIdentifications) {
+		toSerialize["additionalBankAccountIdentifications"] = o.AdditionalBankAccountIdentifications
+	}
 	toSerialize["balanceAccountId"] = o.BalanceAccountId
 	if !common.IsNil(o.BankAccount) {
 		toSerialize["bankAccount"] = o.BankAccount

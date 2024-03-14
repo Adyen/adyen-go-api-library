@@ -19,8 +19,11 @@ var _ common.MappedNullable = &BankIdentification{}
 
 // BankIdentification struct for BankIdentification
 type BankIdentification struct {
-	Country            *string `json:"country,omitempty"`
-	Identification     *string `json:"identification,omitempty"`
+	// Two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code.
+	Country *string `json:"country,omitempty"`
+	// The bank identification code.
+	Identification *string `json:"identification,omitempty"`
+	// The type of the identification.  Possible values: **iban**, **routingNumber**.
 	IdentificationType *string `json:"identificationType,omitempty"`
 }
 

@@ -56,10 +56,10 @@ To make this request, your API credential must have the following [roles](https:
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r AllowedOriginsMerchantLevelApiCreateAllowedOriginInput - Request parameters, see CreateAllowedOriginInput
-@return AllowedOriginsResponse, *http.Response, error
+@return AllowedOrigin, *http.Response, error
 */
-func (a *AllowedOriginsMerchantLevelApi) CreateAllowedOrigin(ctx context.Context, r AllowedOriginsMerchantLevelApiCreateAllowedOriginInput) (AllowedOriginsResponse, *http.Response, error) {
-	res := &AllowedOriginsResponse{}
+func (a *AllowedOriginsMerchantLevelApi) CreateAllowedOrigin(ctx context.Context, r AllowedOriginsMerchantLevelApiCreateAllowedOriginInput) (AllowedOrigin, *http.Response, error) {
+	res := &AllowedOrigin{}
 	path := "/merchants/{merchantId}/apiCredentials/{apiCredentialId}/allowedOrigins"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"apiCredentialId"+"}", url.PathEscape(common.ParameterValueToString(r.apiCredentialId, "apiCredentialId")), -1)

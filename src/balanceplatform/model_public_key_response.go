@@ -19,7 +19,7 @@ var _ common.MappedNullable = &PublicKeyResponse{}
 
 // PublicKeyResponse struct for PublicKeyResponse
 type PublicKeyResponse struct {
-	// The public key to be used for encrypting the symmetric session key.
+	// The public key you need for encrypting a symmetric session key.
 	PublicKey string `json:"publicKey"`
 	// The expiry date of the public key.
 	PublicKeyExpiryDate string `json:"publicKeyExpiryDate"`

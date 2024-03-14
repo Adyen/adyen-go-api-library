@@ -28,7 +28,7 @@ type TermsOfServiceAcceptanceInfo struct {
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
 	// An Adyen-generated reference for the accepted Terms of Service.
 	Id *string `json:"id,omitempty"`
-	// The type of Terms of Service.  Possible values: *  **adyenForPlatformsManage** *  **adyenIssuing** *  **adyenForPlatformsAdvanced** *  **adyenCapital** *  **adyenAccount** *  **adyenCard** *  **adyenFranchisee**
+	// The type of Terms of Service.  Possible values: *  **adyenForPlatformsManage** *  **adyenIssuing** *  **adyenForPlatformsAdvanced** *  **adyenCapital** *  **adyenAccount** *  **adyenCard** *  **adyenFranchisee** *  **adyenPccr**
 	Type *string `json:"type,omitempty"`
 }
 
@@ -274,7 +274,7 @@ func (v *NullableTermsOfServiceAcceptanceInfo) UnmarshalJSON(src []byte) error {
 }
 
 func (o *TermsOfServiceAcceptanceInfo) isValidType() bool {
-	var allowedEnumValues = []string{"adyenAccount", "adyenCapital", "adyenCard", "adyenForPlatformsAdvanced", "adyenForPlatformsManage", "adyenFranchisee", "adyenIssuing"}
+	var allowedEnumValues = []string{"adyenAccount", "adyenCapital", "adyenCard", "adyenForPlatformsAdvanced", "adyenForPlatformsManage", "adyenFranchisee", "adyenIssuing", "adyenPccr"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

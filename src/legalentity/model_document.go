@@ -45,7 +45,7 @@ type Document struct {
 	// The number in the document.
 	Number *string      `json:"number,omitempty"`
 	Owner  *OwnerEntity `json:"owner,omitempty"`
-	// Type of document, used when providing an ID number or uploading a document. The possible values depend on the legal entity type.  * For **organization**, the `type` values can be **proofOfAddress**, **registrationDocument**, **vatDocument**, **proofOfOrganizationTaxInfo**, **proofOfOwnership**, **proofOfIndustry**, or **proofOfFundingOrWealthSource**.  * For **individual**, the `type` values can be **identityCard**, **driversLicense**, **passport**, **proofOfNationalIdNumber**, **proofOfResidency**, **proofOfIndustry**, **proofOfIndividualTaxId**, or **proofOfFundingOrWealthSource**.  * For **soleProprietorship**, the `type` values can be **constitutionalDocument**, **proofOfAddress**, or **proofOfIndustry**.  * Use **bankStatement** to upload documents for a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id).
+	// Type of document, used when providing an ID number or uploading a document. The possible values depend on the legal entity type.  * For **organization**, the `type` values can be **proofOfAddress**, **registrationDocument**, **vatDocument**, **proofOfOrganizationTaxInfo**, **proofOfOwnership**, **proofOfIndustry**, **proofOfSignatory**, or **proofOfFundingOrWealthSource**.  * For **individual**, the `type` values can be **identityCard**, **driversLicense**, **passport**, **liveSelfie**, **proofOfNationalIdNumber**, **proofOfResidency**, **proofOfIndustry**, **proofOfIndividualTaxId**, or **proofOfFundingOrWealthSource**.  * For **soleProprietorship**, the `type` values can be **constitutionalDocument**, **proofOfAddress**, or **proofOfIndustry**.  * Use **bankStatement** to upload documents for a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id).
 	Type string `json:"type"`
 }
 
@@ -562,7 +562,7 @@ func (v *NullableDocument) UnmarshalJSON(src []byte) error {
 }
 
 func (o *Document) isValidType() bool {
-	var allowedEnumValues = []string{"bankStatement", "driversLicense", "identityCard", "nationalIdNumber", "passport", "proofOfAddress", "proofOfNationalIdNumber", "proofOfResidency", "registrationDocument", "vatDocument", "proofOfOrganizationTaxInfo", "proofOfIndustry", "constitutionalDocument", "proofOfFundingOrWealthSource"}
+	var allowedEnumValues = []string{"bankStatement", "driversLicense", "identityCard", "nationalIdNumber", "passport", "proofOfAddress", "proofOfNationalIdNumber", "proofOfResidency", "registrationDocument", "vatDocument", "proofOfOrganizationTaxInfo", "proofOfIndividualTaxId", "proofOfOwnership", "proofOfSignatory", "liveSelfie", "proofOfIndustry", "constitutionalDocument", "proofOfFundingOrWealthSource"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

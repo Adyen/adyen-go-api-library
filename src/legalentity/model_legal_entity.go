@@ -41,8 +41,7 @@ type LegalEntity struct {
 	TransferInstruments []TransferInstrumentReference `json:"transferInstruments,omitempty"`
 	Trust               *Trust                        `json:"trust,omitempty"`
 	// The type of legal entity.  Possible values: **individual**, **organization**, **soleProprietorship**, or **trust**.
-	Type                      *string                    `json:"type,omitempty"`
-	UnincorporatedPartnership *UnincorporatedPartnership `json:"unincorporatedPartnership,omitempty"`
+	Type *string `json:"type,omitempty"`
 	// List of verification deadlines and the capabilities that will be disallowed if verification errors are not resolved.
 	VerificationDeadlines []VerificationDeadline `json:"verificationDeadlines,omitempty"`
 	// A key-value pair that specifies the [verification process](https://docs.adyen.com/marketplaces-and-platforms/collect-verification-details/) for a legal entity. Set to **upfront** for [upfront verification](https://docs.adyen.com/marketplaces-and-platforms/collect-verification-details#upfront).
@@ -478,38 +477,6 @@ func (o *LegalEntity) SetType(v string) {
 	o.Type = &v
 }
 
-// GetUnincorporatedPartnership returns the UnincorporatedPartnership field value if set, zero value otherwise.
-func (o *LegalEntity) GetUnincorporatedPartnership() UnincorporatedPartnership {
-	if o == nil || common.IsNil(o.UnincorporatedPartnership) {
-		var ret UnincorporatedPartnership
-		return ret
-	}
-	return *o.UnincorporatedPartnership
-}
-
-// GetUnincorporatedPartnershipOk returns a tuple with the UnincorporatedPartnership field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *LegalEntity) GetUnincorporatedPartnershipOk() (*UnincorporatedPartnership, bool) {
-	if o == nil || common.IsNil(o.UnincorporatedPartnership) {
-		return nil, false
-	}
-	return o.UnincorporatedPartnership, true
-}
-
-// HasUnincorporatedPartnership returns a boolean if a field has been set.
-func (o *LegalEntity) HasUnincorporatedPartnership() bool {
-	if o != nil && !common.IsNil(o.UnincorporatedPartnership) {
-		return true
-	}
-
-	return false
-}
-
-// SetUnincorporatedPartnership gets a reference to the given UnincorporatedPartnership and assigns it to the UnincorporatedPartnership field.
-func (o *LegalEntity) SetUnincorporatedPartnership(v UnincorporatedPartnership) {
-	o.UnincorporatedPartnership = &v
-}
-
 // GetVerificationDeadlines returns the VerificationDeadlines field value if set, zero value otherwise.
 func (o *LegalEntity) GetVerificationDeadlines() []VerificationDeadline {
 	if o == nil || common.IsNil(o.VerificationDeadlines) {
@@ -620,9 +587,6 @@ func (o LegalEntity) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type
-	}
-	if !common.IsNil(o.UnincorporatedPartnership) {
-		toSerialize["unincorporatedPartnership"] = o.UnincorporatedPartnership
 	}
 	if !common.IsNil(o.VerificationDeadlines) {
 		toSerialize["verificationDeadlines"] = o.VerificationDeadlines

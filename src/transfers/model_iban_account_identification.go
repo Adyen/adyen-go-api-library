@@ -19,6 +19,8 @@ var _ common.MappedNullable = &IbanAccountIdentification{}
 
 // IbanAccountIdentification struct for IbanAccountIdentification
 type IbanAccountIdentification struct {
+	// The form factor of the account.  Possible values: **physical**, **virtual**. Default value: **physical**.
+	FormFactor common.NullableString `json:"formFactor,omitempty"`
 	// The international bank account number as defined in the [ISO-13616](https://www.iso.org/standard/81090.html) standard.
 	Iban string `json:"iban"`
 	// **iban**
@@ -31,6 +33,8 @@ type IbanAccountIdentification struct {
 // will change when the set of required properties is changed
 func NewIbanAccountIdentification(iban string, type_ string) *IbanAccountIdentification {
 	this := IbanAccountIdentification{}
+	var formFactor string = "physical"
+	this.FormFactor = *common.NewNullableString(&formFactor)
 	this.Iban = iban
 	this.Type = type_
 	return &this
@@ -41,9 +45,54 @@ func NewIbanAccountIdentification(iban string, type_ string) *IbanAccountIdentif
 // but it doesn't guarantee that properties required by API are set
 func NewIbanAccountIdentificationWithDefaults() *IbanAccountIdentification {
 	this := IbanAccountIdentification{}
+	var formFactor string = "physical"
+	this.FormFactor = *common.NewNullableString(&formFactor)
 	var type_ string = "iban"
 	this.Type = type_
 	return &this
+}
+
+// GetFormFactor returns the FormFactor field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *IbanAccountIdentification) GetFormFactor() string {
+	if o == nil || common.IsNil(o.FormFactor.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.FormFactor.Get()
+}
+
+// GetFormFactorOk returns a tuple with the FormFactor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *IbanAccountIdentification) GetFormFactorOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FormFactor.Get(), o.FormFactor.IsSet()
+}
+
+// HasFormFactor returns a boolean if a field has been set.
+func (o *IbanAccountIdentification) HasFormFactor() bool {
+	if o != nil && o.FormFactor.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFormFactor gets a reference to the given NullableString and assigns it to the FormFactor field.
+func (o *IbanAccountIdentification) SetFormFactor(v string) {
+	o.FormFactor.Set(&v)
+}
+
+// SetFormFactorNil sets the value for FormFactor to be an explicit nil
+func (o *IbanAccountIdentification) SetFormFactorNil() {
+	o.FormFactor.Set(nil)
+}
+
+// UnsetFormFactor ensures that no value is present for FormFactor, not even an explicit nil
+func (o *IbanAccountIdentification) UnsetFormFactor() {
+	o.FormFactor.Unset()
 }
 
 // GetIban returns the Iban field value
@@ -104,6 +153,9 @@ func (o IbanAccountIdentification) MarshalJSON() ([]byte, error) {
 
 func (o IbanAccountIdentification) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if o.FormFactor.IsSet() {
+		toSerialize["formFactor"] = o.FormFactor.Get()
+	}
 	toSerialize["iban"] = o.Iban
 	toSerialize["type"] = o.Type
 	return toSerialize, nil

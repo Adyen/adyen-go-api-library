@@ -23,6 +23,8 @@ type PaymentInstrumentRequirement struct {
 	Description *string `json:"description,omitempty"`
 	// The two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code where the payment instrument is issued. For example, **NL** or **US**.
 	IssuingCountryCode *string `json:"issuingCountryCode,omitempty"`
+	// The two-character ISO-3166-1 alpha-2 country code list for payment instruments.
+	IssuingCountryCodes []string `json:"issuingCountryCodes,omitempty"`
 	// Specifies if the requirement only applies to transfers to another balance platform.
 	OnlyForCrossBalancePlatform *bool `json:"onlyForCrossBalancePlatform,omitempty"`
 	// The type of the payment instrument. For example, \"BankAccount\" or \"Card\".
@@ -113,6 +115,38 @@ func (o *PaymentInstrumentRequirement) HasIssuingCountryCode() bool {
 // SetIssuingCountryCode gets a reference to the given string and assigns it to the IssuingCountryCode field.
 func (o *PaymentInstrumentRequirement) SetIssuingCountryCode(v string) {
 	o.IssuingCountryCode = &v
+}
+
+// GetIssuingCountryCodes returns the IssuingCountryCodes field value if set, zero value otherwise.
+func (o *PaymentInstrumentRequirement) GetIssuingCountryCodes() []string {
+	if o == nil || common.IsNil(o.IssuingCountryCodes) {
+		var ret []string
+		return ret
+	}
+	return o.IssuingCountryCodes
+}
+
+// GetIssuingCountryCodesOk returns a tuple with the IssuingCountryCodes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentInstrumentRequirement) GetIssuingCountryCodesOk() ([]string, bool) {
+	if o == nil || common.IsNil(o.IssuingCountryCodes) {
+		return nil, false
+	}
+	return o.IssuingCountryCodes, true
+}
+
+// HasIssuingCountryCodes returns a boolean if a field has been set.
+func (o *PaymentInstrumentRequirement) HasIssuingCountryCodes() bool {
+	if o != nil && !common.IsNil(o.IssuingCountryCodes) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssuingCountryCodes gets a reference to the given []string and assigns it to the IssuingCountryCodes field.
+func (o *PaymentInstrumentRequirement) SetIssuingCountryCodes(v []string) {
+	o.IssuingCountryCodes = v
 }
 
 // GetOnlyForCrossBalancePlatform returns the OnlyForCrossBalancePlatform field value if set, zero value otherwise.
@@ -218,6 +252,9 @@ func (o PaymentInstrumentRequirement) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.IssuingCountryCode) {
 		toSerialize["issuingCountryCode"] = o.IssuingCountryCode
+	}
+	if !common.IsNil(o.IssuingCountryCodes) {
+		toSerialize["issuingCountryCodes"] = o.IssuingCountryCodes
 	}
 	if !common.IsNil(o.OnlyForCrossBalancePlatform) {
 		toSerialize["onlyForCrossBalancePlatform"] = o.OnlyForCrossBalancePlatform

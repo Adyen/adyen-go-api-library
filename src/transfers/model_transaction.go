@@ -33,7 +33,7 @@ type Transaction struct {
 	Id string `json:"id"`
 	// The status of the transaction.   Possible values:  * **pending**: The transaction is still pending.  * **booked**: The transaction has been booked to the balance account.
 	Status   string        `json:"status"`
-	Transfer *TransferData `json:"transfer,omitempty"`
+	Transfer *TransferView `json:"transfer,omitempty"`
 	// The date the transfer amount becomes available in the balance account.
 	ValueDate time.Time `json:"valueDate"`
 }
@@ -264,9 +264,9 @@ func (o *Transaction) SetStatus(v string) {
 }
 
 // GetTransfer returns the Transfer field value if set, zero value otherwise.
-func (o *Transaction) GetTransfer() TransferData {
+func (o *Transaction) GetTransfer() TransferView {
 	if o == nil || common.IsNil(o.Transfer) {
-		var ret TransferData
+		var ret TransferView
 		return ret
 	}
 	return *o.Transfer
@@ -274,7 +274,7 @@ func (o *Transaction) GetTransfer() TransferData {
 
 // GetTransferOk returns a tuple with the Transfer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetTransferOk() (*TransferData, bool) {
+func (o *Transaction) GetTransferOk() (*TransferView, bool) {
 	if o == nil || common.IsNil(o.Transfer) {
 		return nil, false
 	}
@@ -290,8 +290,8 @@ func (o *Transaction) HasTransfer() bool {
 	return false
 }
 
-// SetTransfer gets a reference to the given TransferData and assigns it to the Transfer field.
-func (o *Transaction) SetTransfer(v TransferData) {
+// SetTransfer gets a reference to the given TransferView and assigns it to the Transfer field.
+func (o *Transaction) SetTransfer(v TransferView) {
 	o.Transfer = &v
 }
 
