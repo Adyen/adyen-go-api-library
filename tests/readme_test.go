@@ -27,7 +27,7 @@ func ExamplePaymentsApi_PaymentMethods() {
 	res, httpRes, err := service.PaymentsApi.PaymentMethods(context.Background(), req)
 
 	fmt.Println(res.GetPaymentMethods(), httpRes.StatusCode, err)
-	// Output: [] 401 401 : HTTP Status Response - Unauthorized (security: 000)
+	// Output: [] 401 401 Unauthorized: HTTP Status Response - Unauthorized (security: 000)
 }
 
 func ExampleLiveEnv() {
@@ -108,7 +108,7 @@ func ExampleError() {
 	fmt.Println(err.Error())
 	// Output:
 	// 401 HTTP Status Response - Unauthorized 000 security
-	// 401 : HTTP Status Response - Unauthorized (security: 000)
+	// 401 Unauthorized: HTTP Status Response - Unauthorized (security: 000)
 }
 
 func ExampleCustomHTTPClientConfiguration() {
