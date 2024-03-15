@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the NZLocalAccountIdentification type satisfies the MappedNullable interface at compile time
@@ -108,7 +107,6 @@ func (o *NZLocalAccountIdentification) HasFormFactor() bool {
 func (o *NZLocalAccountIdentification) SetFormFactor(v string) {
 	o.FormFactor.Set(&v)
 }
-
 // SetFormFactorNil sets the value for FormFactor to be an explicit nil
 func (o *NZLocalAccountIdentification) SetFormFactorNil() {
 	o.FormFactor.Set(nil)
@@ -144,7 +142,7 @@ func (o *NZLocalAccountIdentification) SetType(v string) {
 }
 
 func (o NZLocalAccountIdentification) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -197,12 +195,14 @@ func (v *NullableNZLocalAccountIdentification) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *NZLocalAccountIdentification) isValidType() bool {
-	var allowedEnumValues = []string{"nzLocal"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "nzLocal" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

@@ -10,9 +10,8 @@ package management
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 	"time"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the Terminal type satisfies the MappedNullable interface at compile time
@@ -20,7 +19,7 @@ var _ common.MappedNullable = &Terminal{}
 
 // Terminal struct for Terminal
 type Terminal struct {
-	Assignment   *TerminalAssignment   `json:"assignment,omitempty"`
+	Assignment *TerminalAssignment `json:"assignment,omitempty"`
 	Connectivity *TerminalConnectivity `json:"connectivity,omitempty"`
 	// The software release currently in use on the terminal.
 	FirmwareVersion *string `json:"firmwareVersion,omitempty"`
@@ -32,6 +31,8 @@ type Terminal struct {
 	LastTransactionAt *time.Time `json:"lastTransactionAt,omitempty"`
 	// The model name of the terminal.
 	Model *string `json:"model,omitempty"`
+	// The exact time of the terminal reboot, in the timezone of the terminal in **HH:mm** format.
+	RestartLocalTime *string `json:"restartLocalTime,omitempty"`
 	// The serial number of the terminal.
 	SerialNumber *string `json:"serialNumber,omitempty"`
 }
@@ -277,6 +278,38 @@ func (o *Terminal) SetModel(v string) {
 	o.Model = &v
 }
 
+// GetRestartLocalTime returns the RestartLocalTime field value if set, zero value otherwise.
+func (o *Terminal) GetRestartLocalTime() string {
+	if o == nil || common.IsNil(o.RestartLocalTime) {
+		var ret string
+		return ret
+	}
+	return *o.RestartLocalTime
+}
+
+// GetRestartLocalTimeOk returns a tuple with the RestartLocalTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Terminal) GetRestartLocalTimeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.RestartLocalTime) {
+		return nil, false
+	}
+	return o.RestartLocalTime, true
+}
+
+// HasRestartLocalTime returns a boolean if a field has been set.
+func (o *Terminal) HasRestartLocalTime() bool {
+	if o != nil && !common.IsNil(o.RestartLocalTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetRestartLocalTime gets a reference to the given string and assigns it to the RestartLocalTime field.
+func (o *Terminal) SetRestartLocalTime(v string) {
+	o.RestartLocalTime = &v
+}
+
 // GetSerialNumber returns the SerialNumber field value if set, zero value otherwise.
 func (o *Terminal) GetSerialNumber() string {
 	if o == nil || common.IsNil(o.SerialNumber) {
@@ -310,7 +343,7 @@ func (o *Terminal) SetSerialNumber(v string) {
 }
 
 func (o Terminal) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -339,6 +372,9 @@ func (o Terminal) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Model) {
 		toSerialize["model"] = o.Model
+	}
+	if !common.IsNil(o.RestartLocalTime) {
+		toSerialize["restartLocalTime"] = o.RestartLocalTime
 	}
 	if !common.IsNil(o.SerialNumber) {
 		toSerialize["serialNumber"] = o.SerialNumber
@@ -381,3 +417,6 @@ func (v *NullableTerminal) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
