@@ -32,6 +32,8 @@ type Terminal struct {
 	LastTransactionAt *time.Time `json:"lastTransactionAt,omitempty"`
 	// The model name of the terminal.
 	Model *string `json:"model,omitempty"`
+	// The exact time of the terminal reboot, in the timezone of the terminal in **HH:mm** format.
+	RestartLocalTime *string `json:"restartLocalTime,omitempty"`
 	// The serial number of the terminal.
 	SerialNumber *string `json:"serialNumber,omitempty"`
 }
@@ -277,6 +279,38 @@ func (o *Terminal) SetModel(v string) {
 	o.Model = &v
 }
 
+// GetRestartLocalTime returns the RestartLocalTime field value if set, zero value otherwise.
+func (o *Terminal) GetRestartLocalTime() string {
+	if o == nil || common.IsNil(o.RestartLocalTime) {
+		var ret string
+		return ret
+	}
+	return *o.RestartLocalTime
+}
+
+// GetRestartLocalTimeOk returns a tuple with the RestartLocalTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Terminal) GetRestartLocalTimeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.RestartLocalTime) {
+		return nil, false
+	}
+	return o.RestartLocalTime, true
+}
+
+// HasRestartLocalTime returns a boolean if a field has been set.
+func (o *Terminal) HasRestartLocalTime() bool {
+	if o != nil && !common.IsNil(o.RestartLocalTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetRestartLocalTime gets a reference to the given string and assigns it to the RestartLocalTime field.
+func (o *Terminal) SetRestartLocalTime(v string) {
+	o.RestartLocalTime = &v
+}
+
 // GetSerialNumber returns the SerialNumber field value if set, zero value otherwise.
 func (o *Terminal) GetSerialNumber() string {
 	if o == nil || common.IsNil(o.SerialNumber) {
@@ -339,6 +373,9 @@ func (o Terminal) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Model) {
 		toSerialize["model"] = o.Model
+	}
+	if !common.IsNil(o.RestartLocalTime) {
+		toSerialize["restartLocalTime"] = o.RestartLocalTime
 	}
 	if !common.IsNil(o.SerialNumber) {
 		toSerialize["serialNumber"] = o.SerialNumber
