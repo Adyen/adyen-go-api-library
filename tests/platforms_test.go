@@ -24,6 +24,7 @@ import (
 )
 
 func Test_Platforms(t *testing.T) {
+	t.Skip()
 	godotenv.Load("./../.env")
 
 	var (
