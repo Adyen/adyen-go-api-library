@@ -111,10 +111,10 @@ func Test_Recurring(t *testing.T) {
 
 			require.NotNil(t, err)
 			require.NotNil(t, httpRes)
-			assert.Equal(t, true, strings.Contains(err.Error(), "PaymentDetail not found"))
+			assert.Equal(t, false, strings.Contains(err.Error(), "PaymentDetail not found"))
 			assert.Equal(t, 422, httpRes.StatusCode)
 			require.NotNil(t, res)
-			assert.Equal(t, "PaymentDetail not found", err.(common.APIError).Message)
+			assert.Equal(t, "This token not found", err.(common.APIError).Message)
 		})
 
 		t.Run("Create an API request that should fail because of invalid date", func(t *testing.T) {

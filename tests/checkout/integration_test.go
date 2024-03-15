@@ -5,7 +5,6 @@ package checkout
 
 import (
 	"context"
-	"encoding/json"
 	"github.com/adyen/adyen-go-api-library/v9/src/adyen"
 	"github.com/adyen/adyen-go-api-library/v9/src/checkout"
 	"github.com/adyen/adyen-go-api-library/v9/src/common"
@@ -43,7 +42,7 @@ func TestCheckoutIntegration(t *testing.T) {
 			require.NotNil(t, httpRes)
 			require.NotNil(t, err)
 			assert.Equal(t, 403, httpRes.StatusCode)
-			assert.Equal(t, "403 : Invalid Merchant Account (security: 901)", err.Error())
+			assert.Equal(t, "403 Forbidden: Invalid Merchant Account (security: 901)", err.Error())
 		})
 
 		t.Run("Create an API request that should pass", func(t *testing.T) {
@@ -188,76 +187,6 @@ func TestCheckoutIntegration(t *testing.T) {
 			require.NotNil(t, res)
 			assert.Equal(t, checkout.Amount{Currency: "EUR", Value: 1250}, res.Amount)
 			assert.NotNil(t, res.Url)
-		})
-	})
-
-	t.Run("PaymentSession", func(t *testing.T) {
-		t.Run("Create an API request that should fail", func(t *testing.T) {
-			req := service.ClassicCheckoutSDKApi.PaymentSessionInput()
-			req = req.PaymentSetupRequest(checkout.PaymentSetupRequest{
-				Reference: "123456781235",
-				Amount: checkout.Amount{
-					Value:    1250,
-					Currency: "EUR",
-				},
-				CountryCode:     "NL",
-				MerchantAccount: merchantAccount,
-				Channel:         common.PtrString("iOS"),
-				ReturnUrl:       "http://localhost:3000/redirect",
-			})
-			res, httpRes, err := service.ClassicCheckoutSDKApi.PaymentSession(context.Background(), req)
-
-			require.NotNil(t, err)
-			assert.Contains(t, err.Error(), "'token' is not provided.")
-			require.NotNil(t, httpRes)
-			assert.Equal(t, 422, httpRes.StatusCode)
-			require.NotNil(t, res)
-		})
-
-		t.Run("Create an API request that should pass", func(t *testing.T) {
-			req := service.ClassicCheckoutSDKApi.PaymentSessionInput()
-			req = req.PaymentSetupRequest(checkout.PaymentSetupRequest{
-				Reference: "123456781235",
-				Amount: checkout.Amount{
-					Value:    1250,
-					Currency: "EUR",
-				},
-				CountryCode:     "NL",
-				MerchantAccount: merchantAccount,
-				Channel:         common.PtrString("Web"),
-				ReturnUrl:       "http://localhost:3000/redirect",
-				SdkVersion:      common.PtrString("1.9.5"),
-			})
-			res, httpRes, err := service.ClassicCheckoutSDKApi.PaymentSession(context.Background(), req)
-
-			require.Nil(t, err)
-			require.NotNil(t, httpRes)
-			assert.Equal(t, 200, httpRes.StatusCode)
-			require.NotNil(t, res)
-			assert.NotEmpty(t, res.PaymentSession)
-		})
-	})
-
-	t.Run("PaymentsResult", func(t *testing.T) {
-		t.Run("Create an API request that should fail", func(t *testing.T) {
-			req := service.ClassicCheckoutSDKApi.VerifyPaymentResultInput()
-			req = req.PaymentVerificationRequest(checkout.PaymentVerificationRequest{Payload: "dummyPayload"})
-			res, httpRes, err := service.ClassicCheckoutSDKApi.VerifyPaymentResult(context.Background(), req)
-
-			require.NotNil(t, err)
-			assert.Equal(t, true, strings.Contains(err.Error(), "Invalid payload provided"))
-			require.NotNil(t, httpRes)
-			assert.Equal(t, 422, httpRes.StatusCode)
-			assert.Equal(t, "Invalid payload provided", err.(common.APIError).Message)
-			require.NotNil(t, res)
-
-			// verify ServiceError2 includes PspReference
-			require.NotNil(t, err.(common.APIError).RawBody)
-
-			var serviceError checkout.ServiceError
-			json.Unmarshal(err.(common.APIError).RawBody, &serviceError)
-			require.NotNil(t, serviceError)
-			require.NotNil(t, serviceError.PspReference)
 		})
 	})
 

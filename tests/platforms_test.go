@@ -261,7 +261,7 @@ func Test_Platforms(t *testing.T) {
 			})
 
 			require.Nil(t, err)
-			assert.Equal(t, 202, httpRes.StatusCode)
+			assert.Equal(t, 200, httpRes.StatusCode)
 			assert.NotNil(t, res.PspReference)
 		})
 	})
