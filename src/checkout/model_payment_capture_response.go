@@ -31,7 +31,7 @@ type PaymentCaptureResponse struct {
 	PspReference string `json:"pspReference"`
 	// Your reference for the capture request.
 	Reference *string `json:"reference,omitempty"`
-	// An array of objects specifying how the amount should be split between accounts when using Adyen for Platforms. For details, refer to [Providing split information](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information).
+	// An array of objects specifying how the amount should be split between accounts when using Adyen for Platforms. For more information, see how to process payments for [marketplaces](https://docs.adyen.com/marketplaces/split-payments) or [platforms](https://docs.adyen.com/platforms/online-payments/split-payments/).
 	Splits []Split `json:"splits,omitempty"`
 	// The status of your request. This will always have the value **received**.
 	Status string `json:"status"`

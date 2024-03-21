@@ -24,7 +24,7 @@ type BusinessLine struct {
 	Capability *string `json:"capability,omitempty"`
 	// The unique identifier of the business line.
 	Id string `json:"id"`
-	// A code that represents the [industry of the legal entity](https://docs.adyen.com/marketplaces-and-platforms/verification-requirements/reference-additional-products/#list-industry-codes). For example, **4431A** for computer software stores.
+	// A code that represents the industry of the legal entity for [marketplaces](https://docs.adyen.com/marketplaces/verification-requirements/reference-additional-products/#list-industry-codes) or [platforms](https://docs.adyen.com/platforms/verification-requirements/reference-additional-products/#list-industry-codes). For example, **4431A** for computer software stores.
 	IndustryCode string `json:"industryCode"`
 	// Unique identifier of the [legal entity](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/legalEntities__resParam_id) that owns the business line.
 	LegalEntityId string `json:"legalEntityId"`

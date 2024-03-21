@@ -28,7 +28,7 @@ type PaymentCaptureRequest struct {
 	PlatformChargebackLogic *PlatformChargebackLogic `json:"platformChargebackLogic,omitempty"`
 	// Your reference for the capture request. Maximum length: 80 characters.
 	Reference *string `json:"reference,omitempty"`
-	// An array of objects specifying how the amount should be split between accounts when using Adyen for Platforms. For details, refer to [Providing split information](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information).
+	// An array of objects specifying how the amount should be split between accounts when using Adyen for Platforms. For more information, see how to process payments for [marketplaces](https://docs.adyen.com/marketplaces/split-payments) or [platforms](https://docs.adyen.com/platforms/online-payments/split-payments/).
 	Splits []Split `json:"splits,omitempty"`
 	// A List of sub-merchants.
 	SubMerchants []SubMerchantInfo `json:"subMerchants,omitempty"`

@@ -82,7 +82,7 @@ type PaymentLinkResponse struct {
 	SocialSecurityNumber *string `json:"socialSecurityNumber,omitempty"`
 	// Boolean value indicating whether the card payment method should be split into separate debit and credit options.
 	SplitCardFundingSources *bool `json:"splitCardFundingSources,omitempty"`
-	// An array of objects specifying how to split a payment when using [Adyen for Platforms](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information), [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic/processing-payments#providing-split-information), or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
+	// An array of objects specifying how to split a payment when using [Adyen for Platforms](https://docs.adyen.com/platforms/processing-payments#providing-split-information), [Classic Platforms integration](https://docs.adyen.com/classic-platforms/processing-payments#providing-split-information), or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
 	Splits []Split `json:"splits,omitempty"`
 	// Status of the payment link. Possible values: * **active**: The link can be used to make payments. * **expired**: The expiry date for the payment link has passed. Shoppers can no longer use the link to make payments. * **completed**: The shopper completed the payment. * **paymentPending**: The shopper is in the process of making the payment. Applies to payment methods with an asynchronous flow.
 	Status string `json:"status"`

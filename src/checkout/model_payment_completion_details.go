@@ -54,6 +54,8 @@ type PaymentCompletionDetails struct {
 	Threeds2ChallengeResult *string `json:"threeds2.challengeResult,omitempty"`
 	// Base64-encoded string returned by the Component after the challenge flow. It contains the following parameter: `threeDSCompInd`.
 	Threeds2Fingerprint *string `json:"threeds2.fingerprint,omitempty"`
+	// PayPalv2-generated token for recurring payments.
+	VaultToken *string `json:"vaultToken,omitempty"`
 }
 
 // NewPaymentCompletionDetails instantiates a new PaymentCompletionDetails object
@@ -649,6 +651,38 @@ func (o *PaymentCompletionDetails) SetThreeds2Fingerprint(v string) {
 	o.Threeds2Fingerprint = &v
 }
 
+// GetVaultToken returns the VaultToken field value if set, zero value otherwise.
+func (o *PaymentCompletionDetails) GetVaultToken() string {
+	if o == nil || common.IsNil(o.VaultToken) {
+		var ret string
+		return ret
+	}
+	return *o.VaultToken
+}
+
+// GetVaultTokenOk returns a tuple with the VaultToken field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentCompletionDetails) GetVaultTokenOk() (*string, bool) {
+	if o == nil || common.IsNil(o.VaultToken) {
+		return nil, false
+	}
+	return o.VaultToken, true
+}
+
+// HasVaultToken returns a boolean if a field has been set.
+func (o *PaymentCompletionDetails) HasVaultToken() bool {
+	if o != nil && !common.IsNil(o.VaultToken) {
+		return true
+	}
+
+	return false
+}
+
+// SetVaultToken gets a reference to the given string and assigns it to the VaultToken field.
+func (o *PaymentCompletionDetails) SetVaultToken(v string) {
+	o.VaultToken = &v
+}
+
 func (o PaymentCompletionDetails) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -712,6 +746,9 @@ func (o PaymentCompletionDetails) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Threeds2Fingerprint) {
 		toSerialize["threeds2.fingerprint"] = o.Threeds2Fingerprint
+	}
+	if !common.IsNil(o.VaultToken) {
+		toSerialize["vaultToken"] = o.VaultToken
 	}
 	return toSerialize, nil
 }

@@ -32,7 +32,7 @@ type PaymentAmountUpdateResponse struct {
 	PspReference string `json:"pspReference"`
 	// Your reference for the amount update request. Maximum length: 80 characters.
 	Reference string `json:"reference"`
-	// An array of objects specifying how the amount should be split between accounts when using Adyen for Platforms. For details, refer to [Providing split information](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information).
+	// An array of objects specifying how the amount should be split between accounts when using Adyen for Platforms. For more information, see how to process payments for [marketplaces](https://docs.adyen.com/marketplaces/process-payments) or [platforms](https://docs.adyen.com/platforms/process-payments).
 	Splits []Split `json:"splits,omitempty"`
 	// The status of your request. This will always have the value **received**.
 	Status string `json:"status"`

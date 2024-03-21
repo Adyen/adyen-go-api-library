@@ -147,3 +147,60 @@ func (a *RecurringApi) GetTokensForStoredPaymentDetails(ctx context.Context, r R
 
 	return *res, httpRes, err
 }
+
+// All parameters accepted by RecurringApi.StoredPaymentMethods
+type RecurringApiStoredPaymentMethodsInput struct {
+	idempotencyKey             *string
+	storedPaymentMethodRequest *StoredPaymentMethodRequest
+}
+
+// A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
+func (r RecurringApiStoredPaymentMethodsInput) IdempotencyKey(idempotencyKey string) RecurringApiStoredPaymentMethodsInput {
+	r.idempotencyKey = &idempotencyKey
+	return r
+}
+
+func (r RecurringApiStoredPaymentMethodsInput) StoredPaymentMethodRequest(storedPaymentMethodRequest StoredPaymentMethodRequest) RecurringApiStoredPaymentMethodsInput {
+	r.storedPaymentMethodRequest = &storedPaymentMethodRequest
+	return r
+}
+
+/*
+Prepare a request for StoredPaymentMethods
+
+@return RecurringApiStoredPaymentMethodsInput
+*/
+func (a *RecurringApi) StoredPaymentMethodsInput() RecurringApiStoredPaymentMethodsInput {
+	return RecurringApiStoredPaymentMethodsInput{}
+}
+
+/*
+StoredPaymentMethods Create a token to store payment details
+
+Creates a token to store the shopper's payment details. This token can be used for the shopper's future payments.
+
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r RecurringApiStoredPaymentMethodsInput - Request parameters, see StoredPaymentMethodsInput
+@return StoredPaymentMethodResource, *http.Response, error
+*/
+func (a *RecurringApi) StoredPaymentMethods(ctx context.Context, r RecurringApiStoredPaymentMethodsInput) (StoredPaymentMethodResource, *http.Response, error) {
+	res := &StoredPaymentMethodResource{}
+	path := "/storedPaymentMethods"
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.idempotencyKey != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.storedPaymentMethodRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	return *res, httpRes, err
+}

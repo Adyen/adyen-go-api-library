@@ -80,7 +80,7 @@ type PaymentLinkRequest struct {
 	SocialSecurityNumber *string `json:"socialSecurityNumber,omitempty"`
 	// Boolean value indicating whether the card payment method should be split into separate debit and credit options.
 	SplitCardFundingSources *bool `json:"splitCardFundingSources,omitempty"`
-	// An array of objects specifying how to split a payment when using [Adyen for Platforms](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information), [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic/processing-payments#providing-split-information), or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
+	// An array of objects specifying how to split a payment when using [Adyen for Platforms](https://docs.adyen.com/platforms/processing-payments#providing-split-information), [Classic Platforms integration](https://docs.adyen.com/classic-platforms/processing-payments#providing-split-information), or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
 	Splits []Split `json:"splits,omitempty"`
 	// The physical store, for which this payment is processed.
 	Store *string `json:"store,omitempty"`
