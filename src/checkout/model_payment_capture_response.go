@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the PaymentCaptureResponse type satisfies the MappedNullable interface at compile time
@@ -24,14 +23,14 @@ type PaymentCaptureResponse struct {
 	LineItems []LineItem `json:"lineItems,omitempty"`
 	// The merchant account that is used to process the payment.
 	MerchantAccount string `json:"merchantAccount"`
-	// The [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference) of the payment to capture.
-	PaymentPspReference     string                   `json:"paymentPspReference"`
+	// The [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference) of the payment to capture. 
+	PaymentPspReference string `json:"paymentPspReference"`
 	PlatformChargebackLogic *PlatformChargebackLogic `json:"platformChargebackLogic,omitempty"`
 	// Adyen's 16-character reference associated with the capture request.
 	PspReference string `json:"pspReference"`
 	// Your reference for the capture request.
 	Reference *string `json:"reference,omitempty"`
-	// An array of objects specifying how the amount should be split between accounts when using Adyen for Platforms. For details, refer to [Providing split information](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information).
+	// An array of objects specifying how the amount should be split between accounts when using Adyen for Platforms. For more information, see how to process payments for [marketplaces](https://docs.adyen.com/marketplaces/split-payments) or [platforms](https://docs.adyen.com/platforms/online-payments/split-payments/).
 	Splits []Split `json:"splits,omitempty"`
 	// The status of your request. This will always have the value **received**.
 	Status string `json:"status"`
@@ -342,7 +341,7 @@ func (o *PaymentCaptureResponse) SetSubMerchants(v []SubMerchantInfo) {
 }
 
 func (o PaymentCaptureResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -410,12 +409,14 @@ func (v *NullablePaymentCaptureResponse) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *PaymentCaptureResponse) isValidStatus() bool {
-	var allowedEnumValues = []string{"received"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetStatus() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "received" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetStatus() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

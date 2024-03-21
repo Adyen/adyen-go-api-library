@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the PaymentMethodsRequest type satisfies the MappedNullable interface at compile time
@@ -23,7 +22,7 @@ type PaymentMethodsRequest struct {
 	AdditionalData *map[string]string `json:"additionalData,omitempty"`
 	// List of payment methods to be presented to the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).  Example: `\"allowedPaymentMethods\":[\"ideal\",\"giropay\"]`
 	AllowedPaymentMethods []string `json:"allowedPaymentMethods,omitempty"`
-	Amount                *Amount  `json:"amount,omitempty"`
+	Amount *Amount `json:"amount,omitempty"`
 	// List of payment methods to be hidden from the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).  Example: `\"blockedPaymentMethods\":[\"ideal\",\"giropay\"]`
 	BlockedPaymentMethods []string `json:"blockedPaymentMethods,omitempty"`
 	// The platform where a payment transaction takes place. This field can be used for filtering out payment methods that are only available on specific platforms. Possible values: * iOS * Android * Web
@@ -31,15 +30,15 @@ type PaymentMethodsRequest struct {
 	// The shopper's country code.
 	CountryCode *string `json:"countryCode,omitempty"`
 	// The merchant account identifier, with which you want to process the transaction.
-	MerchantAccount string              `json:"merchantAccount"`
-	Order           *EncryptedOrderData `json:"order,omitempty"`
+	MerchantAccount string `json:"merchantAccount"`
+	Order *EncryptedOrderData `json:"order,omitempty"`
 	// The combination of a language code and a country code to specify the language to be used in the payment.
 	ShopperLocale *string `json:"shopperLocale,omitempty"`
 	// Required for recurring payments.  Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters. > Your reference must not include personally identifiable information (PII), for example name or email address.
 	ShopperReference *string `json:"shopperReference,omitempty"`
 	// Boolean value indicating whether the card payment method should be split into separate debit and credit options.
 	SplitCardFundingSources *bool `json:"splitCardFundingSources,omitempty"`
-	// Required for Adyen for Platforms integrations if you have a platform setup. This is your [reference](https://docs.adyen.com/api-explorer/Management/3/post/merchants/(merchantId)/stores#request-reference) (on [balance platform](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments)) or the [storeReference](https://docs.adyen.com/api-explorer/Account/latest/post/updateAccountHolder#request-accountHolderDetails-storeDetails-storeReference) (in the [classic integration](https://docs.adyen.com/marketplaces-and-platforms/processing-payments/route-payment-to-store/#route-a-payment-to-a-store)) for the ecommerce or point-of-sale store that is processing the payment.
+	// Required for Adyen for Platforms integrations if you are a platform model. This is your [reference](https://docs.adyen.com/api-explorer/Management/3/post/merchants/(merchantId)/stores#request-reference) (on [balance platform](https://docs.adyen.com/platforms)) or the [storeReference](https://docs.adyen.com/api-explorer/Account/latest/post/updateAccountHolder#request-accountHolderDetails-storeDetails-storeReference) (in the [classic integration](https://docs.adyen.com/classic-platforms/processing-payments/route-payment-to-store/#route-a-payment-to-a-store)) for the ecommerce or point-of-sale store that is processing the payment.
 	Store *string `json:"store,omitempty"`
 }
 
@@ -442,7 +441,7 @@ func (o *PaymentMethodsRequest) SetStore(v string) {
 }
 
 func (o PaymentMethodsRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -524,12 +523,14 @@ func (v *NullablePaymentMethodsRequest) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *PaymentMethodsRequest) isValidChannel() bool {
-	var allowedEnumValues = []string{"iOS", "Android", "Web"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetChannel() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "iOS", "Android", "Web" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetChannel() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

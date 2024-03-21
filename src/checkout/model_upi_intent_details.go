@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the UpiIntentDetails type satisfies the MappedNullable interface at compile time
@@ -19,6 +18,8 @@ var _ common.MappedNullable = &UpiIntentDetails{}
 
 // UpiIntentDetails struct for UpiIntentDetails
 type UpiIntentDetails struct {
+	// TPAP (Third Party Application) Id that is being used to make the UPI payment
+	AppId *string `json:"appId,omitempty"`
 	// The checkout attempt identifier.
 	CheckoutAttemptId *string `json:"checkoutAttemptId,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
@@ -50,6 +51,38 @@ func NewUpiIntentDetailsWithDefaults() *UpiIntentDetails {
 	var type_ string = "upi_intent"
 	this.Type = type_
 	return &this
+}
+
+// GetAppId returns the AppId field value if set, zero value otherwise.
+func (o *UpiIntentDetails) GetAppId() string {
+	if o == nil || common.IsNil(o.AppId) {
+		var ret string
+		return ret
+	}
+	return *o.AppId
+}
+
+// GetAppIdOk returns a tuple with the AppId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpiIntentDetails) GetAppIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.AppId) {
+		return nil, false
+	}
+	return o.AppId, true
+}
+
+// HasAppId returns a boolean if a field has been set.
+func (o *UpiIntentDetails) HasAppId() bool {
+	if o != nil && !common.IsNil(o.AppId) {
+		return true
+	}
+
+	return false
+}
+
+// SetAppId gets a reference to the given string and assigns it to the AppId field.
+func (o *UpiIntentDetails) SetAppId(v string) {
+	o.AppId = &v
 }
 
 // GetCheckoutAttemptId returns the CheckoutAttemptId field value if set, zero value otherwise.
@@ -208,7 +241,7 @@ func (o *UpiIntentDetails) SetType(v string) {
 }
 
 func (o UpiIntentDetails) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -217,6 +250,9 @@ func (o UpiIntentDetails) MarshalJSON() ([]byte, error) {
 
 func (o UpiIntentDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.AppId) {
+		toSerialize["appId"] = o.AppId
+	}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
@@ -269,12 +305,14 @@ func (v *NullableUpiIntentDetails) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *UpiIntentDetails) isValidType() bool {
-	var allowedEnumValues = []string{"upi_intent"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "upi_intent" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+
