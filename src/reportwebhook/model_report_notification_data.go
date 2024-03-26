@@ -10,9 +10,8 @@ package reportwebhook
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 	"time"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the ReportNotificationData type satisfies the MappedNullable interface at compile time
@@ -20,7 +19,7 @@ var _ common.MappedNullable = &ReportNotificationData{}
 
 // ReportNotificationData struct for ReportNotificationData
 type ReportNotificationData struct {
-	AccountHolder  *ResourceReference `json:"accountHolder,omitempty"`
+	AccountHolder *ResourceReference `json:"accountHolder,omitempty"`
 	BalanceAccount *ResourceReference `json:"balanceAccount,omitempty"`
 	// The unique identifier of the balance platform.
 	BalancePlatform *string `json:"balancePlatform,omitempty"`
@@ -255,7 +254,7 @@ func (o *ReportNotificationData) SetReportType(v string) {
 }
 
 func (o ReportNotificationData) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -317,3 +316,6 @@ func (v *NullableReportNotificationData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
