@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v9/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the FundRecipient type satisfies the MappedNullable interface at compile time
@@ -18,16 +19,16 @@ var _ common.MappedNullable = &FundRecipient{}
 
 // FundRecipient struct for FundRecipient
 type FundRecipient struct {
-	BillingAddress *Address `json:"billingAddress,omitempty"`
-	PaymentMethod *CardDetails `json:"paymentMethod,omitempty"`
+	BillingAddress *Address     `json:"billingAddress,omitempty"`
+	PaymentMethod  *CardDetails `json:"paymentMethod,omitempty"`
 	// the email address of the person
 	ShopperEmail *string `json:"shopperEmail,omitempty"`
-	ShopperName *Name `json:"shopperName,omitempty"`
+	ShopperName  *Name   `json:"shopperName,omitempty"`
 	// Required for recurring payments.  Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters. > Your reference must not include personally identifiable information (PII), for example name or email address.
 	ShopperReference *string `json:"shopperReference,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
-	StoredPaymentMethodId *string `json:"storedPaymentMethodId,omitempty"`
-	SubMerchant *SubMerchant `json:"subMerchant,omitempty"`
+	StoredPaymentMethodId *string      `json:"storedPaymentMethodId,omitempty"`
+	SubMerchant           *SubMerchant `json:"subMerchant,omitempty"`
 	// the telephone number of the person
 	TelephoneNumber *string `json:"telephoneNumber,omitempty"`
 	// indicates where the money is going
@@ -374,7 +375,7 @@ func (o *FundRecipient) SetWalletOwnerTaxId(v string) {
 }
 
 func (o FundRecipient) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -451,6 +452,3 @@ func (v *NullableFundRecipient) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-
