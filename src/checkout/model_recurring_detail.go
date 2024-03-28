@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v9/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the RecurringDetail type satisfies the MappedNullable interface at compile time
@@ -25,8 +26,8 @@ type RecurringDetail struct {
 	// The configuration of the payment method.
 	Configuration *map[string]string `json:"configuration,omitempty"`
 	// The funding source of the payment method.
-	FundingSource *string `json:"fundingSource,omitempty"`
-	Group *PaymentMethodGroup `json:"group,omitempty"`
+	FundingSource *string             `json:"fundingSource,omitempty"`
+	Group         *PaymentMethodGroup `json:"group,omitempty"`
 	// All input details to be provided to complete the payment with this payment method.
 	// Deprecated
 	InputDetails []InputDetail `json:"inputDetails,omitempty"`
@@ -35,8 +36,8 @@ type RecurringDetail struct {
 	// The displayable name of this payment method.
 	Name *string `json:"name,omitempty"`
 	// The reference that uniquely identifies the recurring detail.
-	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
-	StoredDetails *StoredDetails `json:"storedDetails,omitempty"`
+	RecurringDetailReference *string        `json:"recurringDetailReference,omitempty"`
+	StoredDetails            *StoredDetails `json:"storedDetails,omitempty"`
 	// The unique payment method code.
 	Type *string `json:"type,omitempty"`
 }
@@ -414,7 +415,7 @@ func (o *RecurringDetail) SetType(v string) {
 }
 
 func (o RecurringDetail) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -495,14 +496,12 @@ func (v *NullableRecurringDetail) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *RecurringDetail) isValidFundingSource() bool {
-    var allowedEnumValues = []string{ "credit", "debit" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetFundingSource() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"credit", "debit"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetFundingSource() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

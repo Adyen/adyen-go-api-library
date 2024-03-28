@@ -10,10 +10,10 @@ package checkout
 
 import (
 	"context"
-    "net/http"
-    "net/url"
-    "strings"
-    "github.com/adyen/adyen-go-api-library/v9/src/common"
+	"net/http"
+	"net/url"
+
+	"github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // DonationsApi service
@@ -21,7 +21,7 @@ type DonationsApi common.Service
 
 // All parameters accepted by DonationsApi.Donations
 type DonationsApiDonationsInput struct {
-	idempotencyKey *string
+	idempotencyKey         *string
 	donationPaymentRequest *DonationPaymentRequest
 }
 
@@ -36,15 +36,13 @@ func (r DonationsApiDonationsInput) DonationPaymentRequest(donationPaymentReques
 	return r
 }
 
-
 /*
 Prepare a request for Donations
 
 @return DonationsApiDonationsInput
 */
 func (a *DonationsApi) DonationsInput() DonationsApiDonationsInput {
-	return DonationsApiDonationsInput{
-	}
+	return DonationsApiDonationsInput{}
 }
 
 /*
@@ -59,25 +57,23 @@ For more information, see [Donations](https://docs.adyen.com/online-payments/don
 @return DonationPaymentResponse, *http.Response, error
 */
 func (a *DonationsApi) Donations(ctx context.Context, r DonationsApiDonationsInput) (DonationPaymentResponse, *http.Response, error) {
-    res := &DonationPaymentResponse{}
+	res := &DonationPaymentResponse{}
 	path := "/donations"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    if r.idempotencyKey != nil {
-        common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
-    }
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.donationPaymentRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.idempotencyKey != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.donationPaymentRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-

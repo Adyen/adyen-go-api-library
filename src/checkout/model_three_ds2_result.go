@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v9/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the ThreeDS2Result type satisfies the MappedNullable interface at compile time
@@ -28,7 +29,7 @@ type ThreeDS2Result struct {
 	DsTransID *string `json:"dsTransID,omitempty"`
 	// The `eci` value as defined in the 3D Secure 2 specification.
 	Eci *string `json:"eci,omitempty"`
-	// Indicates the exemption type that was applied by the issuer to the authentication, if exemption applied. Allowed values: * `lowValue` * `secureCorporate` * `trustedBeneficiary` * `transactionRiskAnalysis` 
+	// Indicates the exemption type that was applied by the issuer to the authentication, if exemption applied. Allowed values: * `lowValue` * `secureCorporate` * `trustedBeneficiary` * `transactionRiskAnalysis`
 	ExemptionIndicator *string `json:"exemptionIndicator,omitempty"`
 	// The `messageVersion` value as defined in the 3D Secure 2 specification.
 	MessageVersion *string `json:"messageVersion,omitempty"`
@@ -514,7 +515,7 @@ func (o *ThreeDS2Result) SetWhiteListStatus(v string) {
 }
 
 func (o ThreeDS2Result) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -604,32 +605,30 @@ func (v *NullableThreeDS2Result) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *ThreeDS2Result) isValidChallengeCancel() bool {
-    var allowedEnumValues = []string{ "01", "02", "03", "04", "05", "06", "07" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetChallengeCancel() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"01", "02", "03", "04", "05", "06", "07"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetChallengeCancel() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *ThreeDS2Result) isValidExemptionIndicator() bool {
-    var allowedEnumValues = []string{ "lowValue", "secureCorporate", "trustedBeneficiary", "transactionRiskAnalysis" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetExemptionIndicator() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"lowValue", "secureCorporate", "trustedBeneficiary", "transactionRiskAnalysis"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetExemptionIndicator() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *ThreeDS2Result) isValidThreeDSRequestorChallengeInd() bool {
-    var allowedEnumValues = []string{ "01", "02", "03", "04", "05", "06" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetThreeDSRequestorChallengeInd() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"01", "02", "03", "04", "05", "06"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetThreeDSRequestorChallengeInd() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

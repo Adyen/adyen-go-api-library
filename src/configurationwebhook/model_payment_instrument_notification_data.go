@@ -10,7 +10,8 @@ package configurationwebhook
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v9/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the PaymentInstrumentNotificationData type satisfies the MappedNullable interface at compile time
@@ -19,7 +20,7 @@ var _ common.MappedNullable = &PaymentInstrumentNotificationData{}
 // PaymentInstrumentNotificationData struct for PaymentInstrumentNotificationData
 type PaymentInstrumentNotificationData struct {
 	// The unique identifier of the balance platform.
-	BalancePlatform *string `json:"balancePlatform,omitempty"`
+	BalancePlatform   *string            `json:"balancePlatform,omitempty"`
 	PaymentInstrument *PaymentInstrument `json:"paymentInstrument,omitempty"`
 }
 
@@ -105,7 +106,7 @@ func (o *PaymentInstrumentNotificationData) SetPaymentInstrument(v PaymentInstru
 }
 
 func (o PaymentInstrumentNotificationData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,6 +159,3 @@ func (v *NullablePaymentInstrumentNotificationData) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

@@ -10,7 +10,8 @@ package legalentity
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v9/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the CapabilityProblemEntity type satisfies the MappedNullable interface at compile time
@@ -19,10 +20,10 @@ var _ common.MappedNullable = &CapabilityProblemEntity{}
 // CapabilityProblemEntity struct for CapabilityProblemEntity
 type CapabilityProblemEntity struct {
 	// List of document IDs corresponding to the verification errors from capabilities.
-	Documents []string `json:"documents,omitempty"`
-	Id *string `json:"id,omitempty"`
-	Owner *CapabilityProblemEntityRecursive `json:"owner,omitempty"`
-	Type *string `json:"type,omitempty"`
+	Documents []string                          `json:"documents,omitempty"`
+	Id        *string                           `json:"id,omitempty"`
+	Owner     *CapabilityProblemEntityRecursive `json:"owner,omitempty"`
+	Type      *string                           `json:"type,omitempty"`
 }
 
 // NewCapabilityProblemEntity instantiates a new CapabilityProblemEntity object
@@ -171,7 +172,7 @@ func (o *CapabilityProblemEntity) SetType(v string) {
 }
 
 func (o CapabilityProblemEntity) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -231,14 +232,12 @@ func (v *NullableCapabilityProblemEntity) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *CapabilityProblemEntity) isValidType() bool {
-    var allowedEnumValues = []string{ "BankAccount", "Document", "LegalEntity", "product" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"BankAccount", "Document", "LegalEntity", "product"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

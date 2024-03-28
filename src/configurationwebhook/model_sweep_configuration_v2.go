@@ -10,7 +10,8 @@ package configurationwebhook
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v9/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the SweepConfigurationV2 type satisfies the MappedNullable interface at compile time
@@ -26,12 +27,12 @@ type SweepConfigurationV2 struct {
 	// The unique identifier of the sweep.
 	Id string `json:"id"`
 	// The reason for disabling the sweep.
-	Reason *string `json:"reason,omitempty"`
+	Reason   *string       `json:"reason,omitempty"`
 	Schedule SweepSchedule `json:"schedule"`
-	// The status of the sweep. If not provided, by default, this is set to **active**.  Possible values:    * **active**:  the sweep is enabled and funds will be pulled in or pushed out based on the defined configuration.    * **inactive**: the sweep is disabled and cannot be triggered.   
-	Status *string `json:"status,omitempty"`
-	SweepAmount *Amount `json:"sweepAmount,omitempty"`
-	TargetAmount *Amount `json:"targetAmount,omitempty"`
+	// The status of the sweep. If not provided, by default, this is set to **active**.  Possible values:    * **active**:  the sweep is enabled and funds will be pulled in or pushed out based on the defined configuration.    * **inactive**: the sweep is disabled and cannot be triggered.
+	Status        *string `json:"status,omitempty"`
+	SweepAmount   *Amount `json:"sweepAmount,omitempty"`
+	TargetAmount  *Amount `json:"targetAmount,omitempty"`
 	TriggerAmount *Amount `json:"triggerAmount,omitempty"`
 	// The direction of sweep, whether pushing out or pulling in funds to the balance account. If not provided, by default, this is set to **push**.  Possible values:   * **push**: _push out funds_ to a destination balance account or transfer instrument.   * **pull**: _pull in funds_ from a source merchant account, transfer instrument, or balance account.
 	Type *string `json:"type,omitempty"`
@@ -383,7 +384,7 @@ func (o *SweepConfigurationV2) SetType(v string) {
 }
 
 func (o SweepConfigurationV2) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -456,32 +457,30 @@ func (v *NullableSweepConfigurationV2) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *SweepConfigurationV2) isValidReason() bool {
-    var allowedEnumValues = []string{ "amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declinedByTransactionRule", "error", "notEnoughBalance", "refusedByCounterpartyBank", "routeNotFound", "scaFailed", "unknown" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetReason() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declinedByTransactionRule", "error", "notEnoughBalance", "refusedByCounterpartyBank", "routeNotFound", "scaFailed", "unknown"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetReason() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *SweepConfigurationV2) isValidStatus() bool {
-    var allowedEnumValues = []string{ "active", "inactive" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetStatus() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"active", "inactive"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetStatus() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *SweepConfigurationV2) isValidType() bool {
-    var allowedEnumValues = []string{ "pull", "push" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"pull", "push"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

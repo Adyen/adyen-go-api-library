@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v9/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the SubMerchantInfo type satisfies the MappedNullable interface at compile time
@@ -19,10 +20,10 @@ var _ common.MappedNullable = &SubMerchantInfo{}
 // SubMerchantInfo struct for SubMerchantInfo
 type SubMerchantInfo struct {
 	Address *BillingAddress `json:"address,omitempty"`
-	Id *string `json:"id,omitempty"`
-	Mcc *string `json:"mcc,omitempty"`
-	Name *string `json:"name,omitempty"`
-	TaxId *string `json:"taxId,omitempty"`
+	Id      *string         `json:"id,omitempty"`
+	Mcc     *string         `json:"mcc,omitempty"`
+	Name    *string         `json:"name,omitempty"`
+	TaxId   *string         `json:"taxId,omitempty"`
 }
 
 // NewSubMerchantInfo instantiates a new SubMerchantInfo object
@@ -203,7 +204,7 @@ func (o *SubMerchantInfo) SetTaxId(v string) {
 }
 
 func (o SubMerchantInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -265,6 +266,3 @@ func (v *NullableSubMerchantInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

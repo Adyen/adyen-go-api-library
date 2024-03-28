@@ -10,7 +10,8 @@ package management
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v9/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the AfterpayTouchInfo type satisfies the MappedNullable interface at compile time
@@ -65,7 +66,7 @@ func (o *AfterpayTouchInfo) SetSupportUrl(v string) {
 }
 
 func (o AfterpayTouchInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -113,6 +114,3 @@ func (v *NullableAfterpayTouchInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

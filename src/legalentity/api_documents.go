@@ -10,10 +10,11 @@ package legalentity
 
 import (
 	"context"
-    "net/http"
-    "net/url"
-    "strings"
-    "github.com/adyen/adyen-go-api-library/v9/src/common"
+	"net/http"
+	"net/url"
+	"strings"
+
+	"github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // DocumentsApi service
@@ -23,7 +24,6 @@ type DocumentsApi common.Service
 type DocumentsApiDeleteDocumentInput struct {
 	id string
 }
-
 
 /*
 Prepare a request for DeleteDocument
@@ -46,30 +46,28 @@ Deletes a document.
 @return *http.Response, error
 */
 func (a *DocumentsApi) DeleteDocument(ctx context.Context, r DocumentsApiDeleteDocumentInput) (*http.Response, error) {
-    var res interface{}
+	var res interface{}
 	path := "/documents/{id}"
-    path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodDelete,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodDelete,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return httpRes, err
+	return httpRes, err
 }
-
 
 // All parameters accepted by DocumentsApi.GetDocument
 type DocumentsApiGetDocumentInput struct {
-	id string
+	id          string
 	skipContent *bool
 }
 
@@ -78,7 +76,6 @@ func (r DocumentsApiGetDocumentInput) SkipContent(skipContent bool) DocumentsApi
 	r.skipContent = &skipContent
 	return r
 }
-
 
 /*
 Prepare a request for GetDocument
@@ -101,35 +98,33 @@ Returns a document.
 @return Document, *http.Response, error
 */
 func (a *DocumentsApi) GetDocument(ctx context.Context, r DocumentsApiGetDocumentInput) (Document, *http.Response, error) {
-    res := &Document{}
+	res := &Document{}
 	path := "/documents/{id}"
-    path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    if r.skipContent != nil {
-        common.ParameterAddToQuery(queryParams, "skipContent", r.skipContent, "")
-    }
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodGet,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.skipContent != nil {
+		common.ParameterAddToQuery(queryParams, "skipContent", r.skipContent, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by DocumentsApi.UpdateDocument
 type DocumentsApiUpdateDocumentInput struct {
-	id string
+	id                         string
 	xRequestedVerificationCode *string
-	document *Document
+	document                   *Document
 }
 
 // Use the requested verification code 0_0001 to resolve any suberrors associated with the document. Requested verification codes can only be used in your test environment.
@@ -142,7 +137,6 @@ func (r DocumentsApiUpdateDocumentInput) Document(document Document) DocumentsAp
 	r.document = &document
 	return r
 }
-
 
 /*
 Prepare a request for UpdateDocument
@@ -167,34 +161,32 @@ Updates a document.
 @return Document, *http.Response, error
 */
 func (a *DocumentsApi) UpdateDocument(ctx context.Context, r DocumentsApiUpdateDocumentInput) (Document, *http.Response, error) {
-    res := &Document{}
+	res := &Document{}
 	path := "/documents/{id}"
-    path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    if r.xRequestedVerificationCode != nil {
-        common.ParameterAddToHeaderOrQuery(headerParams, "x-requested-verification-code", r.xRequestedVerificationCode, "")
-    }
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.document,
-        res,
-        http.MethodPatch,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.xRequestedVerificationCode != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "x-requested-verification-code", r.xRequestedVerificationCode, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.document,
+		res,
+		http.MethodPatch,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by DocumentsApi.UploadDocumentForVerificationChecks
 type DocumentsApiUploadDocumentForVerificationChecksInput struct {
 	xRequestedVerificationCode *string
-	document *Document
+	document                   *Document
 }
 
 // Use a suberror code as your requested verification code. You can include one code at a time in your request header. Requested verification codes can only be used in your test environment.
@@ -208,15 +200,13 @@ func (r DocumentsApiUploadDocumentForVerificationChecksInput) Document(document 
 	return r
 }
 
-
 /*
 Prepare a request for UploadDocumentForVerificationChecks
 
 @return DocumentsApiUploadDocumentForVerificationChecksInput
 */
 func (a *DocumentsApi) UploadDocumentForVerificationChecksInput() DocumentsApiUploadDocumentForVerificationChecksInput {
-	return DocumentsApiUploadDocumentForVerificationChecksInput{
-	}
+	return DocumentsApiUploadDocumentForVerificationChecksInput{}
 }
 
 /*
@@ -235,25 +225,23 @@ Uploads a document for verification checks.
 @return Document, *http.Response, error
 */
 func (a *DocumentsApi) UploadDocumentForVerificationChecks(ctx context.Context, r DocumentsApiUploadDocumentForVerificationChecksInput) (Document, *http.Response, error) {
-    res := &Document{}
+	res := &Document{}
 	path := "/documents"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    if r.xRequestedVerificationCode != nil {
-        common.ParameterAddToHeaderOrQuery(headerParams, "x-requested-verification-code", r.xRequestedVerificationCode, "")
-    }
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.document,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.xRequestedVerificationCode != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "x-requested-verification-code", r.xRequestedVerificationCode, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.document,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
