@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the StoredPaymentMethodRequest type satisfies the MappedNullable interface at compile time
@@ -20,9 +19,9 @@ var _ common.MappedNullable = &StoredPaymentMethodRequest{}
 // StoredPaymentMethodRequest struct for StoredPaymentMethodRequest
 type StoredPaymentMethodRequest struct {
 	// The merchant account identifier, with which you want to process the transaction.
-	MerchantAccount string               `json:"merchantAccount"`
-	PaymentMethod   PaymentMethodToStore `json:"paymentMethod"`
-	// Defines a recurring payment type. Required when creating a token to store payment details. Allowed values: * `Subscription` – A transaction for a fixed or variable amount, which follows a fixed schedule. * `CardOnFile` – With a card-on-file (CoF) transaction, card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction. * `UnscheduledCardOnFile` – An unscheduled card-on-file (UCoF) transaction is a transaction that occurs on a non-fixed schedule and/or have variable amounts. For example, automatic top-ups when a cardholder's balance drops below a certain amount.
+	MerchantAccount string `json:"merchantAccount"`
+	PaymentMethod PaymentMethodToStore `json:"paymentMethod"`
+	// Defines a recurring payment type. Required when creating a token to store payment details. Allowed values: * `Subscription` – A transaction for a fixed or variable amount, which follows a fixed schedule. * `CardOnFile` – With a card-on-file (CoF) transaction, card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction. * `UnscheduledCardOnFile` – An unscheduled card-on-file (UCoF) transaction is a transaction that occurs on a non-fixed schedule and/or have variable amounts. For example, automatic top-ups when a cardholder's balance drops below a certain amount. 
 	RecurringProcessingModel string `json:"recurringProcessingModel"`
 	// The shopper's email address. We recommend that you provide this data, as it is used in velocity fraud checks.
 	ShopperEmail *string `json:"shopperEmail,omitempty"`
@@ -214,7 +213,7 @@ func (o *StoredPaymentMethodRequest) SetShopperReference(v string) {
 }
 
 func (o StoredPaymentMethodRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -272,12 +271,14 @@ func (v *NullableStoredPaymentMethodRequest) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *StoredPaymentMethodRequest) isValidRecurringProcessingModel() bool {
-	var allowedEnumValues = []string{"CardOnFile", "Subscription", "UnscheduledCardOnFile"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetRecurringProcessingModel() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "CardOnFile", "Subscription", "UnscheduledCardOnFile" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetRecurringProcessingModel() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

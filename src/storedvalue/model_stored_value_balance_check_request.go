@@ -10,8 +10,7 @@ package storedvalue
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the StoredValueBalanceCheckRequest type satisfies the MappedNullable interface at compile time
@@ -23,13 +22,13 @@ type StoredValueBalanceCheckRequest struct {
 	// The merchant account identifier, with which you want to process the transaction.
 	MerchantAccount string `json:"merchantAccount"`
 	// The collection that contains the type of the payment method and its specific information if available
-	PaymentMethod            map[string]string `json:"paymentMethod"`
-	RecurringDetailReference *string           `json:"recurringDetailReference,omitempty"`
+	PaymentMethod map[string]string `json:"paymentMethod"`
+	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
 	// The reference to uniquely identify a payment. This reference is used in all communication with you about the payment status. We recommend using a unique value per payment; however, it is not a requirement. If you need to provide multiple references for a transaction, separate them with hyphens (\"-\"). Maximum length: 80 characters.
 	Reference string `json:"reference"`
 	// Specifies the sales channel, through which the shopper gives their card details, and whether the shopper is a returning customer. For the web service API, Adyen assumes Ecommerce shopper interaction by default.  This field has the following possible values: * `Ecommerce` - Online transactions where the cardholder is present (online). For better authorisation rates, we recommend sending the card security code (CSC) along with the request. * `ContAuth` - Card on file and/or subscription transactions, where the cardholder is known to the merchant (returning customer). If the shopper is present (online), you can supply also the CSC to improve authorisation (one-click payment). * `Moto` - Mail-order and telephone-order transactions where the shopper is in contact with the merchant via email or telephone. * `POS` - Point-of-sale transactions where the shopper is physically present to make a payment using a secure payment terminal.
 	ShopperInteraction *string `json:"shopperInteraction,omitempty"`
-	ShopperReference   *string `json:"shopperReference,omitempty"`
+	ShopperReference *string `json:"shopperReference,omitempty"`
 	// The physical store, for which this payment is processed.
 	Store *string `json:"store,omitempty"`
 }
@@ -287,7 +286,7 @@ func (o *StoredValueBalanceCheckRequest) SetStore(v string) {
 }
 
 func (o StoredValueBalanceCheckRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -353,12 +352,14 @@ func (v *NullableStoredValueBalanceCheckRequest) UnmarshalJSON(src []byte) error
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *StoredValueBalanceCheckRequest) isValidShopperInteraction() bool {
-	var allowedEnumValues = []string{"Ecommerce", "ContAuth", "Moto", "POS"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetShopperInteraction() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "Ecommerce", "ContAuth", "Moto", "POS" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetShopperInteraction() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

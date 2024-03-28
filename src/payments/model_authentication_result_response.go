@@ -10,8 +10,7 @@ package payments
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the AuthenticationResultResponse type satisfies the MappedNullable interface at compile time
@@ -105,7 +104,7 @@ func (o *AuthenticationResultResponse) SetThreeDS2Result(v ThreeDS2Result) {
 }
 
 func (o AuthenticationResultResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +157,6 @@ func (v *NullableAuthenticationResultResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

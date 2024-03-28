@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the BcmcInfo type satisfies the MappedNullable interface at compile time
@@ -20,7 +19,7 @@ var _ common.MappedNullable = &BcmcInfo{}
 // BcmcInfo struct for BcmcInfo
 type BcmcInfo struct {
 	// Indicates if [Bancontact mobile](https://docs.adyen.com/payment-methods/bancontact/bancontact-mobile) is enabled.
-	EnableBcmcMobile       *bool                       `json:"enableBcmcMobile,omitempty"`
+	EnableBcmcMobile *bool `json:"enableBcmcMobile,omitempty"`
 	TransactionDescription *TransactionDescriptionInfo `json:"transactionDescription,omitempty"`
 }
 
@@ -106,7 +105,7 @@ func (o *BcmcInfo) SetTransactionDescription(v TransactionDescriptionInfo) {
 }
 
 func (o BcmcInfo) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -159,3 +158,6 @@ func (v *NullableBcmcInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

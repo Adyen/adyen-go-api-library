@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the WebDataExemption type satisfies the MappedNullable interface at compile time
@@ -73,7 +72,7 @@ func (o *WebDataExemption) SetReason(v string) {
 }
 
 func (o WebDataExemption) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -124,12 +123,14 @@ func (v *NullableWebDataExemption) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *WebDataExemption) isValidReason() bool {
-	var allowedEnumValues = []string{"noOnlinePresence", "notCollectedDuringOnboarding"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetReason() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "noOnlinePresence", "notCollectedDuringOnboarding" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetReason() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

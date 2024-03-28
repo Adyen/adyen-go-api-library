@@ -10,8 +10,7 @@ package configurationwebhook
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the BalanceAccount type satisfies the MappedNullable interface at compile time
@@ -34,11 +33,11 @@ type BalanceAccount struct {
 	// The unique identifier of the account of the migrated account holder in the classic integration.
 	MigratedAccountCode *string `json:"migratedAccountCode,omitempty"`
 	// List of [payment instruments](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/paymentInstruments) associated with the balance account.
-	PaymentInstruments           []PaymentInstrumentReference  `json:"paymentInstruments,omitempty"`
+	PaymentInstruments []PaymentInstrumentReference `json:"paymentInstruments,omitempty"`
 	PlatformPaymentConfiguration *PlatformPaymentConfiguration `json:"platformPaymentConfiguration,omitempty"`
 	// Your reference for the balance account, maximum 150 characters.
 	Reference *string `json:"reference,omitempty"`
-	// The status of the balance account, set to **Active** by default.
+	// The status of the balance account, set to **Active** by default.  
 	Status *string `json:"status,omitempty"`
 	// The time zone of the balance account. For example, **Europe/Amsterdam**. Defaults to the time zone of the account holder if no time zone is set. For possible values, see the [list of time zone codes](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 	TimeZone *string `json:"timeZone,omitempty"`
@@ -432,7 +431,7 @@ func (o *BalanceAccount) SetTimeZone(v string) {
 }
 
 func (o BalanceAccount) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -512,12 +511,14 @@ func (v *NullableBalanceAccount) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *BalanceAccount) isValidStatus() bool {
-	var allowedEnumValues = []string{"Active", "Closed", "Inactive", "Suspended"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetStatus() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "Active", "Closed", "Inactive", "Suspended" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetStatus() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

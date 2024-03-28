@@ -10,8 +10,7 @@ package transfers
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the CounterpartyInfoV3 type satisfies the MappedNullable interface at compile time
@@ -20,8 +19,8 @@ var _ common.MappedNullable = &CounterpartyInfoV3{}
 // CounterpartyInfoV3 struct for CounterpartyInfoV3
 type CounterpartyInfoV3 struct {
 	// Unique identifier of the [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id).
-	BalanceAccountId *string        `json:"balanceAccountId,omitempty"`
-	BankAccount      *BankAccountV3 `json:"bankAccount,omitempty"`
+	BalanceAccountId *string `json:"balanceAccountId,omitempty"`
+	BankAccount *BankAccountV3 `json:"bankAccount,omitempty"`
 	// Unique identifier of the [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id).
 	TransferInstrumentId *string `json:"transferInstrumentId,omitempty"`
 }
@@ -140,7 +139,7 @@ func (o *CounterpartyInfoV3) SetTransferInstrumentId(v string) {
 }
 
 func (o CounterpartyInfoV3) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,3 +195,6 @@ func (v *NullableCounterpartyInfoV3) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

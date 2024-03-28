@@ -10,8 +10,7 @@ package transferwebhook
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the IbanAccountIdentification type satisfies the MappedNullable interface at compile time
@@ -84,7 +83,6 @@ func (o *IbanAccountIdentification) HasFormFactor() bool {
 func (o *IbanAccountIdentification) SetFormFactor(v string) {
 	o.FormFactor.Set(&v)
 }
-
 // SetFormFactorNil sets the value for FormFactor to be an explicit nil
 func (o *IbanAccountIdentification) SetFormFactorNil() {
 	o.FormFactor.Set(nil)
@@ -144,7 +142,7 @@ func (o *IbanAccountIdentification) SetType(v string) {
 }
 
 func (o IbanAccountIdentification) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -197,12 +195,14 @@ func (v *NullableIbanAccountIdentification) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *IbanAccountIdentification) isValidType() bool {
-	var allowedEnumValues = []string{"iban"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "iban" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

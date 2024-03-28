@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the AccountHolderCapability type satisfies the MappedNullable interface at compile time
@@ -22,7 +21,7 @@ type AccountHolderCapability struct {
 	// Indicates whether the capability is allowed. Adyen sets this to **true** if the verification is successful and the account holder is permitted to use the capability.
 	Allowed *bool `json:"allowed,omitempty"`
 	// The capability level that is allowed for the account holder.  Possible values: **notApplicable**, **low**, **medium**, **high**.
-	AllowedLevel    *string             `json:"allowedLevel,omitempty"`
+	AllowedLevel *string `json:"allowedLevel,omitempty"`
 	AllowedSettings *CapabilitySettings `json:"allowedSettings,omitempty"`
 	// Indicates whether the capability is enabled. If **false**, the capability is temporarily disabled for the account holder.
 	Enabled *bool `json:"enabled,omitempty"`
@@ -31,11 +30,11 @@ type AccountHolderCapability struct {
 	// Indicates whether the capability is requested. To check whether the account holder is permitted to use the capability, refer to the `allowed` field.
 	Requested *bool `json:"requested,omitempty"`
 	// The requested level of the capability. Some capabilities, such as those used in [card issuing](https://docs.adyen.com/issuing/add-capabilities#capability-levels), have different levels. Levels increase the capability, but also require additional checks and increased monitoring.  Possible values: **notApplicable**, **low**, **medium**, **high**.
-	RequestedLevel    *string             `json:"requestedLevel,omitempty"`
+	RequestedLevel *string `json:"requestedLevel,omitempty"`
 	RequestedSettings *CapabilitySettings `json:"requestedSettings,omitempty"`
-	// Contains the status of the transfer instruments associated with this capability.
+	// Contains the status of the transfer instruments associated with this capability. 
 	TransferInstruments []AccountSupportingEntityCapability `json:"transferInstruments,omitempty"`
-	// The status of the verification checks for the capability.  Possible values:  * **pending**: Adyen is running the verification.  * **invalid**: The verification failed. Check if the `errors` array contains more information.  * **valid**: The verification has been successfully completed.  * **rejected**: Adyen has verified the information, but found reasons to not allow the capability.
+	// The status of the verification checks for the capability.  Possible values:  * **pending**: Adyen is running the verification.  * **invalid**: The verification failed. Check if the `errors` array contains more information.  * **valid**: The verification has been successfully completed.  * **rejected**: Adyen has verified the information, but found reasons to not allow the capability. 
 	VerificationStatus *string `json:"verificationStatus,omitempty"`
 }
 
@@ -377,7 +376,7 @@ func (o *AccountHolderCapability) SetVerificationStatus(v string) {
 }
 
 func (o AccountHolderCapability) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -455,30 +454,32 @@ func (v *NullableAccountHolderCapability) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *AccountHolderCapability) isValidAllowedLevel() bool {
-	var allowedEnumValues = []string{"high", "low", "medium", "notApplicable"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetAllowedLevel() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "high", "low", "medium", "notApplicable" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetAllowedLevel() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *AccountHolderCapability) isValidRequestedLevel() bool {
-	var allowedEnumValues = []string{"high", "low", "medium", "notApplicable"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetRequestedLevel() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "high", "low", "medium", "notApplicable" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetRequestedLevel() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *AccountHolderCapability) isValidVerificationStatus() bool {
-	var allowedEnumValues = []string{"invalid", "pending", "rejected", "valid"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetVerificationStatus() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "invalid", "pending", "rejected", "valid" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetVerificationStatus() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

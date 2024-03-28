@@ -10,8 +10,7 @@ package transferwebhook
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the HKLocalAccountIdentification type satisfies the MappedNullable interface at compile time
@@ -135,7 +134,6 @@ func (o *HKLocalAccountIdentification) HasFormFactor() bool {
 func (o *HKLocalAccountIdentification) SetFormFactor(v string) {
 	o.FormFactor.Set(&v)
 }
-
 // SetFormFactorNil sets the value for FormFactor to be an explicit nil
 func (o *HKLocalAccountIdentification) SetFormFactorNil() {
 	o.FormFactor.Set(nil)
@@ -171,7 +169,7 @@ func (o *HKLocalAccountIdentification) SetType(v string) {
 }
 
 func (o HKLocalAccountIdentification) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -225,12 +223,14 @@ func (v *NullableHKLocalAccountIdentification) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *HKLocalAccountIdentification) isValidType() bool {
-	var allowedEnumValues = []string{"hkLocal"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "hkLocal" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

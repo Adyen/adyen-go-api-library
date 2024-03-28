@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the AdditionalSettings type satisfies the MappedNullable interface at compile time
@@ -19,7 +18,7 @@ var _ common.MappedNullable = &AdditionalSettings{}
 
 // AdditionalSettings struct for AdditionalSettings
 type AdditionalSettings struct {
-	// Object containing list of event codes for which the notifcation will be sent.
+	// Object containing list of event codes for which the notifcation will be sent. 
 	IncludeEventCodes []string `json:"includeEventCodes,omitempty"`
 	// Object containing boolean key-value pairs. The key can be any [standard webhook additional setting](https://docs.adyen.com/development-resources/webhooks/additional-settings), and the value indicates if the setting is enabled. For example, `captureDelayHours`: **true** means the standard notifications you get will contain the number of hours remaining until the payment will be captured.
 	Properties *map[string]bool `json:"properties,omitempty"`
@@ -107,7 +106,7 @@ func (o *AdditionalSettings) SetProperties(v map[string]bool) {
 }
 
 func (o AdditionalSettings) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -160,3 +159,6 @@ func (v *NullableAdditionalSettings) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

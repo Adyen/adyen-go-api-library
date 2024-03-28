@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the StoredDetails type satisfies the MappedNullable interface at compile time
@@ -20,7 +19,7 @@ var _ common.MappedNullable = &StoredDetails{}
 // StoredDetails struct for StoredDetails
 type StoredDetails struct {
 	Bank *BankAccount `json:"bank,omitempty"`
-	Card *Card        `json:"card,omitempty"`
+	Card *Card `json:"card,omitempty"`
 	// The email associated with stored payment details.
 	EmailAddress *string `json:"emailAddress,omitempty"`
 }
@@ -139,7 +138,7 @@ func (o *StoredDetails) SetEmailAddress(v string) {
 }
 
 func (o StoredDetails) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +194,6 @@ func (v *NullableStoredDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
