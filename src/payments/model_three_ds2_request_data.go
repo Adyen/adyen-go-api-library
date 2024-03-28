@@ -51,8 +51,6 @@ type ThreeDS2RequestData struct {
 	PayTokenInd *bool `json:"payTokenInd,omitempty"`
 	// Indicates the type of payment for which an authentication is requested (message extension)
 	PaymentAuthenticationUseCase *string `json:"paymentAuthenticationUseCase,omitempty"`
-	// The platform of the shopper. Allowed values: * `iOS` * `android` * `browser`
-	Platform *string `json:"platform,omitempty"`
 	// Indicates the maximum number of authorisations permitted for instalment payments. Length: 1–3 characters.
 	PurchaseInstalData *string `json:"purchaseInstalData,omitempty"`
 	// Date after which no further authorisations shall be performed. Format: YYYYMMDD
@@ -661,38 +659,6 @@ func (o *ThreeDS2RequestData) HasPaymentAuthenticationUseCase() bool {
 // SetPaymentAuthenticationUseCase gets a reference to the given string and assigns it to the PaymentAuthenticationUseCase field.
 func (o *ThreeDS2RequestData) SetPaymentAuthenticationUseCase(v string) {
 	o.PaymentAuthenticationUseCase = &v
-}
-
-// GetPlatform returns the Platform field value if set, zero value otherwise.
-func (o *ThreeDS2RequestData) GetPlatform() string {
-	if o == nil || common.IsNil(o.Platform) {
-		var ret string
-		return ret
-	}
-	return *o.Platform
-}
-
-// GetPlatformOk returns a tuple with the Platform field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ThreeDS2RequestData) GetPlatformOk() (*string, bool) {
-	if o == nil || common.IsNil(o.Platform) {
-		return nil, false
-	}
-	return o.Platform, true
-}
-
-// HasPlatform returns a boolean if a field has been set.
-func (o *ThreeDS2RequestData) HasPlatform() bool {
-	if o != nil && !common.IsNil(o.Platform) {
-		return true
-	}
-
-	return false
-}
-
-// SetPlatform gets a reference to the given string and assigns it to the Platform field.
-func (o *ThreeDS2RequestData) SetPlatform(v string) {
-	o.Platform = &v
 }
 
 // GetPurchaseInstalData returns the PurchaseInstalData field value if set, zero value otherwise.
@@ -1458,9 +1424,6 @@ func (o ThreeDS2RequestData) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.PaymentAuthenticationUseCase) {
 		toSerialize["paymentAuthenticationUseCase"] = o.PaymentAuthenticationUseCase
 	}
-	if !common.IsNil(o.Platform) {
-		toSerialize["platform"] = o.Platform
-	}
 	if !common.IsNil(o.PurchaseInstalData) {
 		toSerialize["purchaseInstalData"] = o.PurchaseInstalData
 	}
@@ -1588,15 +1551,6 @@ func (o *ThreeDS2RequestData) isValidChallengeIndicator() bool {
 	var allowedEnumValues = []string{"noPreference", "requestNoChallenge", "requestChallenge", "requestChallengeAsMandate"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetChallengeIndicator() == allowed {
-			return true
-		}
-	}
-	return false
-}
-func (o *ThreeDS2RequestData) isValidPlatform() bool {
-	var allowedEnumValues = []string{"iOS", "android", "browser"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetPlatform() == allowed {
 			return true
 		}
 	}

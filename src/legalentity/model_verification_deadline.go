@@ -22,7 +22,7 @@ var _ common.MappedNullable = &VerificationDeadline{}
 type VerificationDeadline struct {
 	// The list of capabilities that will be disallowed if information is not reviewed by the time of the deadline
 	Capabilities []string `json:"capabilities"`
-	// The unique identifiers of the bank account(s) that the deadline applies to
+	// The unique identifiers of the legal entity or supporting entities that the deadline applies to
 	EntityIds []string `json:"entityIds,omitempty"`
 	// The date that verification is due by before capabilities are disallowed.
 	ExpiresAt time.Time `json:"expiresAt"`

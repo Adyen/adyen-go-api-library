@@ -41,6 +41,8 @@ type PaymentMethodsRequest struct {
 	SplitCardFundingSources *bool `json:"splitCardFundingSources,omitempty"`
 	// Required for Adyen for Platforms integrations if you are a platform model. This is your [reference](https://docs.adyen.com/api-explorer/Management/3/post/merchants/(merchantId)/stores#request-reference) (on [balance platform](https://docs.adyen.com/platforms)) or the [storeReference](https://docs.adyen.com/api-explorer/Account/latest/post/updateAccountHolder#request-accountHolderDetails-storeDetails-storeReference) (in the [classic integration](https://docs.adyen.com/classic-platforms/processing-payments/route-payment-to-store/#route-a-payment-to-a-store)) for the ecommerce or point-of-sale store that is processing the payment.
 	Store *string `json:"store,omitempty"`
+	// Specifies how payment methods should be filtered based on the 'store' parameter:   - 'exclusive': Only payment methods belonging to the specified 'store' are returned.   - 'inclusive': Payment methods from the 'store' and those not associated with any other store are returned.   - 'skipFilter': All payment methods are returned, regardless of store association.
+	StoreFiltrationMode *string `json:"storeFiltrationMode,omitempty"`
 }
 
 // NewPaymentMethodsRequest instantiates a new PaymentMethodsRequest object
@@ -441,6 +443,38 @@ func (o *PaymentMethodsRequest) SetStore(v string) {
 	o.Store = &v
 }
 
+// GetStoreFiltrationMode returns the StoreFiltrationMode field value if set, zero value otherwise.
+func (o *PaymentMethodsRequest) GetStoreFiltrationMode() string {
+	if o == nil || common.IsNil(o.StoreFiltrationMode) {
+		var ret string
+		return ret
+	}
+	return *o.StoreFiltrationMode
+}
+
+// GetStoreFiltrationModeOk returns a tuple with the StoreFiltrationMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodsRequest) GetStoreFiltrationModeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.StoreFiltrationMode) {
+		return nil, false
+	}
+	return o.StoreFiltrationMode, true
+}
+
+// HasStoreFiltrationMode returns a boolean if a field has been set.
+func (o *PaymentMethodsRequest) HasStoreFiltrationMode() bool {
+	if o != nil && !common.IsNil(o.StoreFiltrationMode) {
+		return true
+	}
+
+	return false
+}
+
+// SetStoreFiltrationMode gets a reference to the given string and assigns it to the StoreFiltrationMode field.
+func (o *PaymentMethodsRequest) SetStoreFiltrationMode(v string) {
+	o.StoreFiltrationMode = &v
+}
+
 func (o PaymentMethodsRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -485,6 +519,9 @@ func (o PaymentMethodsRequest) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Store) {
 		toSerialize["store"] = o.Store
 	}
+	if !common.IsNil(o.StoreFiltrationMode) {
+		toSerialize["storeFiltrationMode"] = o.StoreFiltrationMode
+	}
 	return toSerialize, nil
 }
 
@@ -528,6 +565,15 @@ func (o *PaymentMethodsRequest) isValidChannel() bool {
 	var allowedEnumValues = []string{"iOS", "Android", "Web"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetChannel() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *PaymentMethodsRequest) isValidStoreFiltrationMode() bool {
+	var allowedEnumValues = []string{"exclusive", "inclusive", "skipFilter"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetStoreFiltrationMode() == allowed {
 			return true
 		}
 	}

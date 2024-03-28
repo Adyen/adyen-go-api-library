@@ -148,7 +148,7 @@ Cancels a payment if it has not been captured yet, or refunds it if it has alrea
 
 Do not use this endpoint for payments that involve:
  * [Multiple partial captures](https://docs.adyen.com/online-payments/capture).
- * [Split data](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information) either at time of payment or capture for Adyen for Platforms.
+ * [Split data](https://docs.adyen.com/classic-platforms/processing-payments#providing-split-information) either at time of payment or capture for Adyen for Platforms.
 
  Instead, check if the payment has been captured and make a corresponding [`/refund`](https://docs.adyen.com/api-explorer/#/Payment/refund) or [`/cancel`](https://docs.adyen.com/api-explorer/#/Payment/cancel) call.
 

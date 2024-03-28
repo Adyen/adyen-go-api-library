@@ -139,3 +139,60 @@ func (a *UtilityApi) OriginKeys(ctx context.Context, r UtilityApiOriginKeysInput
 
 	return *res, httpRes, err
 }
+
+// All parameters accepted by UtilityApi.UpdatesOrderForPaypalExpressCheckout
+type UtilityApiUpdatesOrderForPaypalExpressCheckoutInput struct {
+	idempotencyKey           *string
+	paypalUpdateOrderRequest *PaypalUpdateOrderRequest
+}
+
+// A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
+func (r UtilityApiUpdatesOrderForPaypalExpressCheckoutInput) IdempotencyKey(idempotencyKey string) UtilityApiUpdatesOrderForPaypalExpressCheckoutInput {
+	r.idempotencyKey = &idempotencyKey
+	return r
+}
+
+func (r UtilityApiUpdatesOrderForPaypalExpressCheckoutInput) PaypalUpdateOrderRequest(paypalUpdateOrderRequest PaypalUpdateOrderRequest) UtilityApiUpdatesOrderForPaypalExpressCheckoutInput {
+	r.paypalUpdateOrderRequest = &paypalUpdateOrderRequest
+	return r
+}
+
+/*
+Prepare a request for UpdatesOrderForPaypalExpressCheckout
+
+@return UtilityApiUpdatesOrderForPaypalExpressCheckoutInput
+*/
+func (a *UtilityApi) UpdatesOrderForPaypalExpressCheckoutInput() UtilityApiUpdatesOrderForPaypalExpressCheckoutInput {
+	return UtilityApiUpdatesOrderForPaypalExpressCheckoutInput{}
+}
+
+/*
+UpdatesOrderForPaypalExpressCheckout Updates the order for PayPal Express Checkout
+
+Updates the order for PayPal Express Checkout. This can be used to update the PayPal lightbox with an updated amount and delivery methods based on the delivery address.
+
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r UtilityApiUpdatesOrderForPaypalExpressCheckoutInput - Request parameters, see UpdatesOrderForPaypalExpressCheckoutInput
+@return PaypalUpdateOrderResponse, *http.Response, error
+*/
+func (a *UtilityApi) UpdatesOrderForPaypalExpressCheckout(ctx context.Context, r UtilityApiUpdatesOrderForPaypalExpressCheckoutInput) (PaypalUpdateOrderResponse, *http.Response, error) {
+	res := &PaypalUpdateOrderResponse{}
+	path := "/paypal/updateOrder"
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.idempotencyKey != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.paypalUpdateOrderRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	return *res, httpRes, err
+}

@@ -23,8 +23,6 @@ type SELocalAccountIdentification struct {
 	AccountNumber string `json:"accountNumber"`
 	// The 4- to 5-digit clearing number ([Clearingnummer](https://sv.wikipedia.org/wiki/Clearingnummer)), without separators or whitespace.
 	ClearingNumber string `json:"clearingNumber"`
-	// Business accounts with a `formFactor` value of **physical** are business accounts issued under the central bank of that country. The default value is **physical** for NL, US, and UK business accounts.   Adyen creates a local IBAN for business accounts when the `formFactor` value is set to **virtual**. The local IBANs that are supported are for DE and FR, which reference a physical NL account, with funds being routed through the central bank of NL.
-	FormFactor common.NullableString `json:"formFactor,omitempty"`
 	// **seLocal**
 	Type string `json:"type"`
 }
@@ -37,8 +35,6 @@ func NewSELocalAccountIdentification(accountNumber string, clearingNumber string
 	this := SELocalAccountIdentification{}
 	this.AccountNumber = accountNumber
 	this.ClearingNumber = clearingNumber
-	var formFactor string = "physical"
-	this.FormFactor = *common.NewNullableString(&formFactor)
 	this.Type = type_
 	return &this
 }
@@ -48,8 +44,6 @@ func NewSELocalAccountIdentification(accountNumber string, clearingNumber string
 // but it doesn't guarantee that properties required by API are set
 func NewSELocalAccountIdentificationWithDefaults() *SELocalAccountIdentification {
 	this := SELocalAccountIdentification{}
-	var formFactor string = "physical"
-	this.FormFactor = *common.NewNullableString(&formFactor)
 	var type_ string = "seLocal"
 	this.Type = type_
 	return &this
@@ -103,49 +97,6 @@ func (o *SELocalAccountIdentification) SetClearingNumber(v string) {
 	o.ClearingNumber = v
 }
 
-// GetFormFactor returns the FormFactor field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SELocalAccountIdentification) GetFormFactor() string {
-	if o == nil || common.IsNil(o.FormFactor.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.FormFactor.Get()
-}
-
-// GetFormFactorOk returns a tuple with the FormFactor field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SELocalAccountIdentification) GetFormFactorOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.FormFactor.Get(), o.FormFactor.IsSet()
-}
-
-// HasFormFactor returns a boolean if a field has been set.
-func (o *SELocalAccountIdentification) HasFormFactor() bool {
-	if o != nil && o.FormFactor.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetFormFactor gets a reference to the given NullableString and assigns it to the FormFactor field.
-func (o *SELocalAccountIdentification) SetFormFactor(v string) {
-	o.FormFactor.Set(&v)
-}
-
-// SetFormFactorNil sets the value for FormFactor to be an explicit nil
-func (o *SELocalAccountIdentification) SetFormFactorNil() {
-	o.FormFactor.Set(nil)
-}
-
-// UnsetFormFactor ensures that no value is present for FormFactor, not even an explicit nil
-func (o *SELocalAccountIdentification) UnsetFormFactor() {
-	o.FormFactor.Unset()
-}
-
 // GetType returns the Type field value
 func (o *SELocalAccountIdentification) GetType() string {
 	if o == nil {
@@ -182,9 +133,6 @@ func (o SELocalAccountIdentification) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["accountNumber"] = o.AccountNumber
 	toSerialize["clearingNumber"] = o.ClearingNumber
-	if o.FormFactor.IsSet() {
-		toSerialize["formFactor"] = o.FormFactor.Get()
-	}
 	toSerialize["type"] = o.Type
 	return toSerialize, nil
 }

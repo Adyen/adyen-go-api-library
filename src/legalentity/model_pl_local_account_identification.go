@@ -21,8 +21,6 @@ var _ common.MappedNullable = &PLLocalAccountIdentification{}
 type PLLocalAccountIdentification struct {
 	// The 26-digit bank account number ([Numer rachunku](https://pl.wikipedia.org/wiki/Numer_Rachunku_Bankowego)), without separators or whitespace.
 	AccountNumber string `json:"accountNumber"`
-	// Business accounts with a `formFactor` value of **physical** are business accounts issued under the central bank of that country. The default value is **physical** for NL, US, and UK business accounts.   Adyen creates a local IBAN for business accounts when the `formFactor` value is set to **virtual**. The local IBANs that are supported are for DE and FR, which reference a physical NL account, with funds being routed through the central bank of NL.
-	FormFactor common.NullableString `json:"formFactor,omitempty"`
 	// **plLocal**
 	Type string `json:"type"`
 }
@@ -34,8 +32,6 @@ type PLLocalAccountIdentification struct {
 func NewPLLocalAccountIdentification(accountNumber string, type_ string) *PLLocalAccountIdentification {
 	this := PLLocalAccountIdentification{}
 	this.AccountNumber = accountNumber
-	var formFactor string = "physical"
-	this.FormFactor = *common.NewNullableString(&formFactor)
 	this.Type = type_
 	return &this
 }
@@ -45,8 +41,6 @@ func NewPLLocalAccountIdentification(accountNumber string, type_ string) *PLLoca
 // but it doesn't guarantee that properties required by API are set
 func NewPLLocalAccountIdentificationWithDefaults() *PLLocalAccountIdentification {
 	this := PLLocalAccountIdentification{}
-	var formFactor string = "physical"
-	this.FormFactor = *common.NewNullableString(&formFactor)
 	var type_ string = "plLocal"
 	this.Type = type_
 	return &this
@@ -74,49 +68,6 @@ func (o *PLLocalAccountIdentification) GetAccountNumberOk() (*string, bool) {
 // SetAccountNumber sets field value
 func (o *PLLocalAccountIdentification) SetAccountNumber(v string) {
 	o.AccountNumber = v
-}
-
-// GetFormFactor returns the FormFactor field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PLLocalAccountIdentification) GetFormFactor() string {
-	if o == nil || common.IsNil(o.FormFactor.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.FormFactor.Get()
-}
-
-// GetFormFactorOk returns a tuple with the FormFactor field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PLLocalAccountIdentification) GetFormFactorOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.FormFactor.Get(), o.FormFactor.IsSet()
-}
-
-// HasFormFactor returns a boolean if a field has been set.
-func (o *PLLocalAccountIdentification) HasFormFactor() bool {
-	if o != nil && o.FormFactor.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetFormFactor gets a reference to the given NullableString and assigns it to the FormFactor field.
-func (o *PLLocalAccountIdentification) SetFormFactor(v string) {
-	o.FormFactor.Set(&v)
-}
-
-// SetFormFactorNil sets the value for FormFactor to be an explicit nil
-func (o *PLLocalAccountIdentification) SetFormFactorNil() {
-	o.FormFactor.Set(nil)
-}
-
-// UnsetFormFactor ensures that no value is present for FormFactor, not even an explicit nil
-func (o *PLLocalAccountIdentification) UnsetFormFactor() {
-	o.FormFactor.Unset()
 }
 
 // GetType returns the Type field value
@@ -154,9 +105,6 @@ func (o PLLocalAccountIdentification) MarshalJSON() ([]byte, error) {
 func (o PLLocalAccountIdentification) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["accountNumber"] = o.AccountNumber
-	if o.FormFactor.IsSet() {
-		toSerialize["formFactor"] = o.FormFactor.Get()
-	}
 	toSerialize["type"] = o.Type
 	return toSerialize, nil
 }
