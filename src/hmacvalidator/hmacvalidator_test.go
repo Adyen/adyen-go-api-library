@@ -29,6 +29,27 @@ var notificationRequestItem = webhook.NotificationRequestItem{
 	Success:             "true",
 }
 
+// webhook payload as string
+const payloadAsString = `{
+    "type": "merchant.created",
+    "environment": "test",
+    "createdAt": "01-01-2024",
+    "data": {
+        "capabilities": {
+            "sendToTransferInstrument": {
+                "requested": true,
+                "requestedLevel": "notApplicable"
+            }
+        },
+        "companyId": "YOUR_COMPANY_ID",
+        "merchantId": YOUR_MERCHANT_ACCOUNT",
+        "status": "PreActive"
+    }
+}`
+
+// signature for the webhook payload above
+const expectedSignFromPayloadAsString = "yitBTPnDGtbAMG9rTxUa1e6lFGpa4PnrD6rErOmEhJ8="
+
 func Test_Hmacvalidator(t *testing.T) {
 	t.Run("GetDataToSign", func(t *testing.T) {
 		t.Run("Get correct data", func(t *testing.T) {
@@ -66,6 +87,14 @@ func Test_Hmacvalidator(t *testing.T) {
 		t.Run("Get Invalid HMAC", func(t *testing.T) {
 			notificationRequestItem.AdditionalData = &map[string]interface{}{"hmacSignature": "InvalidSignature"}
 			assert.False(t, ValidateHmac(notificationRequestItem, key))
+		})
+	})
+	t.Run("ValidateHmacPayload", func(t *testing.T) {
+		t.Run("Validate HMAC from string payload", func(t *testing.T) {
+			assert.True(t, ValidateHmacPayload(expectedSignFromPayloadAsString, key, payloadAsString))
+		})
+		t.Run("Test invalid HMAC from string payload", func(t *testing.T) {
+			assert.False(t, ValidateHmacPayload("invalidSignature=", key, payloadAsString))
 		})
 	})
 }
