@@ -94,7 +94,7 @@ func Test_Hmacvalidator(t *testing.T) {
 			assert.True(t, ValidateHmacPayload(expectedSignFromPayloadAsString, key, payloadAsString))
 		})
 		t.Run("Test invalid HMAC from string payload", func(t *testing.T) {
-			assert.False(t, ValidateHmacPayload("invalidSignature=", key, payloadAsString))
+			assert.False(t, ValidateHmacPayload("MismatchingHmacKey=", key, payloadAsString))
 		})
 	})
 }
