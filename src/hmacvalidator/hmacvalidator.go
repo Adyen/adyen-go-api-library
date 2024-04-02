@@ -25,7 +25,12 @@ func CalculateHmac(data interface{}, secret string) (string, error) {
 	}
 }
 
-// ValidateHmac calculates the HMAC of the notification request item and checks if it matches with the given key
+// ValidateHmac validates the HMAC signature of the NotificationRequestItem object. Use for webhooks that provide the
+// hmacSignature as part of the payload `AdditionalData` (i.e. Payments)
+//
+// Params:
+// notificationRequestItem: NotificationRequestItem object
+// key: HMAC key to generate the signature
 func ValidateHmac(notificationRequestItem webhook.NotificationRequestItem, key string) bool {
 	expectedSign, err := CalculateHmac(notificationRequestItem, key)
 	if err != nil {
@@ -35,7 +40,22 @@ func ValidateHmac(notificationRequestItem webhook.NotificationRequestItem, key s
 	return expectedSign == merchantSign
 }
 
-// GetDataToSign converts a notification request item to string, which later on can be used for calculating a HMAC
+// ValidateHmacPayload validates the HMAC signature of a payload against an expected signature. Use for webhooks that provide the
+// hmacSignature in the HTTP header (i.e. Banking, Management API)
+//
+// Params:
+// hmacSignature: HMAC signature to validate
+// key: HMAC key to generate the signature
+// payload: webhook payload
+func ValidateHmacPayload(hmacSignature string, key string, payload string) bool {
+	expectedSign, err := CalculateHmac(payload, key)
+	if err != nil {
+		return false
+	}
+	return expectedSign == hmacSignature
+}
+
+// GetDataToSign converts a notificationRequestItem to string, which later on can be used for calculating a HMAC
 func GetDataToSign(notificationRequestItem interface{}) string {
 	switch item := notificationRequestItem.(type) {
 	case webhook.NotificationRequestItem:
