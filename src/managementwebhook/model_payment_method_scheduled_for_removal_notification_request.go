@@ -10,8 +10,9 @@ package managementwebhook
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v9/src/common"
 	"time"
+
+	"github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the PaymentMethodScheduledForRemovalNotificationRequest type satisfies the MappedNullable interface at compile time
@@ -20,8 +21,8 @@ var _ common.MappedNullable = &PaymentMethodScheduledForRemovalNotificationReque
 // PaymentMethodScheduledForRemovalNotificationRequest struct for PaymentMethodScheduledForRemovalNotificationRequest
 type PaymentMethodScheduledForRemovalNotificationRequest struct {
 	// Timestamp for when the webhook was created.
-	CreatedAt time.Time `json:"createdAt"`
-	Data MidServiceNotificationData `json:"data"`
+	CreatedAt time.Time                  `json:"createdAt"`
+	Data      MidServiceNotificationData `json:"data"`
 	// The environment from which the webhook originated.  Possible values: **test**, **live**.
 	Environment string `json:"environment"`
 	// Type of notification.
@@ -146,7 +147,7 @@ func (o *PaymentMethodScheduledForRemovalNotificationRequest) SetType(v string) 
 }
 
 func (o PaymentMethodScheduledForRemovalNotificationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -198,14 +199,12 @@ func (v *NullablePaymentMethodScheduledForRemovalNotificationRequest) UnmarshalJ
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *PaymentMethodScheduledForRemovalNotificationRequest) isValidType() bool {
-    var allowedEnumValues = []string{ "paymentMethod.requestScheduledForRemoval" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"paymentMethod.requestScheduledForRemoval"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-
