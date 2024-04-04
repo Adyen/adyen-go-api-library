@@ -482,3 +482,95 @@ func (a *AndroidFilesCompanyLevelApi) UploadAndroidApp(ctx context.Context, r An
 
 	return *res, httpRes, err
 }
+
+// All parameters accepted by AndroidFilesCompanyLevelApi.UploadAndroidCertificate
+type AndroidFilesCompanyLevelApiUploadAndroidCertificateInput struct {
+	companyId string
+}
+
+/*
+Prepare a request for UploadAndroidCertificate
+@param companyId The unique identifier of the company account.
+@return AndroidFilesCompanyLevelApiUploadAndroidCertificateInput
+*/
+func (a *AndroidFilesCompanyLevelApi) UploadAndroidCertificateInput(companyId string) AndroidFilesCompanyLevelApiUploadAndroidCertificateInput {
+	return AndroidFilesCompanyLevelApiUploadAndroidCertificateInput{
+		companyId: companyId,
+	}
+}
+
+/*
+UploadAndroidCertificate Upload Android Certificate
+
+Uploads an Android Certificate file to Adyen.
+
+
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r AndroidFilesCompanyLevelApiUploadAndroidCertificateInput - Request parameters, see UploadAndroidCertificateInput
+@return UploadAndroidCertificateResponse, *http.Response, error
+*/
+func (a *AndroidFilesCompanyLevelApi) UploadAndroidCertificate(ctx context.Context, r AndroidFilesCompanyLevelApiUploadAndroidCertificateInput) (UploadAndroidCertificateResponse, *http.Response, error) {
+	res := &UploadAndroidCertificateResponse{}
+	path := "/companies/{companyId}/androidCertificates"
+	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 400 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+
+	return *res, httpRes, err
+}

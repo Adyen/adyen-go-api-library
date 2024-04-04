@@ -21,7 +21,7 @@ var _ common.MappedNullable = &FundRecipient{}
 type FundRecipient struct {
 	BillingAddress *Address     `json:"billingAddress,omitempty"`
 	PaymentMethod  *CardDetails `json:"paymentMethod,omitempty"`
-	// the email address of the person
+	// The email address of the shopper.
 	ShopperEmail *string `json:"shopperEmail,omitempty"`
 	ShopperName  *Name   `json:"shopperName,omitempty"`
 	// Required for recurring payments.  Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters. > Your reference must not include personally identifiable information (PII), for example name or email address.
@@ -29,11 +29,11 @@ type FundRecipient struct {
 	// This is the `recurringDetailReference` returned in the response when you created the token.
 	StoredPaymentMethodId *string      `json:"storedPaymentMethodId,omitempty"`
 	SubMerchant           *SubMerchant `json:"subMerchant,omitempty"`
-	// the telephone number of the person
+	// The telephone number of the shopper.
 	TelephoneNumber *string `json:"telephoneNumber,omitempty"`
-	// indicates where the money is going
+	// Indicates where the money is going.
 	WalletIdentifier *string `json:"walletIdentifier,omitempty"`
-	// indicates the tax identifier of the fund recepient
+	// Indicates the tax identifier of the fund recepient
 	WalletOwnerTaxId *string `json:"walletOwnerTaxId,omitempty"`
 }
 
