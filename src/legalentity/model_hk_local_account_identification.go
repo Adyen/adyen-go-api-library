@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the HKLocalAccountIdentification type satisfies the MappedNullable interface at compile time
@@ -21,10 +20,6 @@ var _ common.MappedNullable = &HKLocalAccountIdentification{}
 type HKLocalAccountIdentification struct {
 	// The 9- to 15-character bank account number (alphanumeric), without separators or whitespace. Starts with the 3-digit branch code.
 	AccountNumber string `json:"accountNumber"`
-	// The bank's name.
-	BankName *string `json:"bankName,omitempty"`
-	// The bank's 8- or 11-character BIC or SWIFT code.
-	Bic *string `json:"bic,omitempty"`
 	// The 3-digit clearing code, without separators or whitespace.
 	ClearingCode string `json:"clearingCode"`
 	// **hkLocal**
@@ -77,70 +72,6 @@ func (o *HKLocalAccountIdentification) SetAccountNumber(v string) {
 	o.AccountNumber = v
 }
 
-// GetBankName returns the BankName field value if set, zero value otherwise.
-func (o *HKLocalAccountIdentification) GetBankName() string {
-	if o == nil || common.IsNil(o.BankName) {
-		var ret string
-		return ret
-	}
-	return *o.BankName
-}
-
-// GetBankNameOk returns a tuple with the BankName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *HKLocalAccountIdentification) GetBankNameOk() (*string, bool) {
-	if o == nil || common.IsNil(o.BankName) {
-		return nil, false
-	}
-	return o.BankName, true
-}
-
-// HasBankName returns a boolean if a field has been set.
-func (o *HKLocalAccountIdentification) HasBankName() bool {
-	if o != nil && !common.IsNil(o.BankName) {
-		return true
-	}
-
-	return false
-}
-
-// SetBankName gets a reference to the given string and assigns it to the BankName field.
-func (o *HKLocalAccountIdentification) SetBankName(v string) {
-	o.BankName = &v
-}
-
-// GetBic returns the Bic field value if set, zero value otherwise.
-func (o *HKLocalAccountIdentification) GetBic() string {
-	if o == nil || common.IsNil(o.Bic) {
-		var ret string
-		return ret
-	}
-	return *o.Bic
-}
-
-// GetBicOk returns a tuple with the Bic field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *HKLocalAccountIdentification) GetBicOk() (*string, bool) {
-	if o == nil || common.IsNil(o.Bic) {
-		return nil, false
-	}
-	return o.Bic, true
-}
-
-// HasBic returns a boolean if a field has been set.
-func (o *HKLocalAccountIdentification) HasBic() bool {
-	if o != nil && !common.IsNil(o.Bic) {
-		return true
-	}
-
-	return false
-}
-
-// SetBic gets a reference to the given string and assigns it to the Bic field.
-func (o *HKLocalAccountIdentification) SetBic(v string) {
-	o.Bic = &v
-}
-
 // GetClearingCode returns the ClearingCode field value
 func (o *HKLocalAccountIdentification) GetClearingCode() string {
 	if o == nil {
@@ -190,7 +121,7 @@ func (o *HKLocalAccountIdentification) SetType(v string) {
 }
 
 func (o HKLocalAccountIdentification) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -200,12 +131,6 @@ func (o HKLocalAccountIdentification) MarshalJSON() ([]byte, error) {
 func (o HKLocalAccountIdentification) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["accountNumber"] = o.AccountNumber
-	if !common.IsNil(o.BankName) {
-		toSerialize["bankName"] = o.BankName
-	}
-	if !common.IsNil(o.Bic) {
-		toSerialize["bic"] = o.Bic
-	}
 	toSerialize["clearingCode"] = o.ClearingCode
 	toSerialize["type"] = o.Type
 	return toSerialize, nil
@@ -247,12 +172,14 @@ func (v *NullableHKLocalAccountIdentification) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *HKLocalAccountIdentification) isValidType() bool {
-	var allowedEnumValues = []string{"hkLocal"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "hkLocal" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

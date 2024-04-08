@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the TerminalOrderRequest type satisfies the MappedNullable interface at compile time
@@ -19,7 +18,7 @@ var _ common.MappedNullable = &TerminalOrderRequest{}
 
 // TerminalOrderRequest struct for TerminalOrderRequest
 type TerminalOrderRequest struct {
-	// The identification of the billing entity to use for the order.
+	// The identification of the billing entity to use for the order.    > When ordering products in Brazil, you do not need to include the `billingEntityId` in the request.
 	BillingEntityId *string `json:"billingEntityId,omitempty"`
 	// The merchant-defined purchase order reference.
 	CustomerOrderReference *string `json:"customerOrderReference,omitempty"`
@@ -243,7 +242,7 @@ func (o *TerminalOrderRequest) SetTaxId(v string) {
 }
 
 func (o TerminalOrderRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -308,3 +307,6 @@ func (v *NullableTerminalOrderRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
