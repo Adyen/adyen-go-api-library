@@ -25,6 +25,7 @@ type CheckoutPaymentMethod struct {
 	BillDeskDetails                   *BillDeskDetails
 	BlikDetails                       *BlikDetails
 	CardDetails                       *CardDetails
+	CashAppDetails                    *CashAppDetails
 	CellulantDetails                  *CellulantDetails
 	DokuDetails                       *DokuDetails
 	DotpayDetails                     *DotpayDetails
@@ -124,6 +125,13 @@ func BlikDetailsAsCheckoutPaymentMethod(v *BlikDetails) CheckoutPaymentMethod {
 func CardDetailsAsCheckoutPaymentMethod(v *CardDetails) CheckoutPaymentMethod {
 	return CheckoutPaymentMethod{
 		CardDetails: v,
+	}
+}
+
+// CashAppDetailsAsCheckoutPaymentMethod is a convenience function that returns CashAppDetails wrapped in CheckoutPaymentMethod
+func CashAppDetailsAsCheckoutPaymentMethod(v *CashAppDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
+		CashAppDetails: v,
 	}
 }
 
@@ -469,6 +477,19 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		}
 	} else {
 		dst.CardDetails = nil
+	}
+
+	// try to unmarshal data into CashAppDetails
+	err = json.Unmarshal(data, &dst.CashAppDetails)
+	if err == nil {
+		jsonCashAppDetails, _ := json.Marshal(dst.CashAppDetails)
+		if string(jsonCashAppDetails) == "{}" || !dst.CashAppDetails.isValidType() { // empty struct
+			dst.CashAppDetails = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.CashAppDetails = nil
 	}
 
 	// try to unmarshal data into CellulantDetails
@@ -873,6 +894,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		dst.BillDeskDetails = nil
 		dst.BlikDetails = nil
 		dst.CardDetails = nil
+		dst.CashAppDetails = nil
 		dst.CellulantDetails = nil
 		dst.DokuDetails = nil
 		dst.DotpayDetails = nil
@@ -952,6 +974,10 @@ func (src CheckoutPaymentMethod) MarshalJSON() ([]byte, error) {
 
 	if src.CardDetails != nil {
 		return json.Marshal(&src.CardDetails)
+	}
+
+	if src.CashAppDetails != nil {
+		return json.Marshal(&src.CashAppDetails)
 	}
 
 	if src.CellulantDetails != nil {
@@ -1120,6 +1146,10 @@ func (obj *CheckoutPaymentMethod) GetActualInstance() interface{} {
 
 	if obj.CardDetails != nil {
 		return obj.CardDetails
+	}
+
+	if obj.CashAppDetails != nil {
+		return obj.CashAppDetails
 	}
 
 	if obj.CellulantDetails != nil {

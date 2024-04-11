@@ -236,7 +236,7 @@ func (v *NullableTaxReportingClassification) UnmarshalJSON(src []byte) error {
 }
 
 func (o *TaxReportingClassification) isValidBusinessType() bool {
-	var allowedEnumValues = []string{"other", "listedPublicCompany", "subsidiaryOfListedPublicCompany", "governmentalOrganization", "internationalOrganization", "financialInstitution."}
+	var allowedEnumValues = []string{"other", "listedPublicCompany", "subsidiaryOfListedPublicCompany", "governmentalOrganization", "internationalOrganization", "financialInstitution"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetBusinessType() == allowed {
 			return true

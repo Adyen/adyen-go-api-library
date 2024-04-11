@@ -19,7 +19,7 @@ var _ common.MappedNullable = &TerminalOrderRequest{}
 
 // TerminalOrderRequest struct for TerminalOrderRequest
 type TerminalOrderRequest struct {
-	// The identification of the billing entity to use for the order.
+	// The identification of the billing entity to use for the order.    > When ordering products in Brazil, you do not need to include the `billingEntityId` in the request.
 	BillingEntityId *string `json:"billingEntityId,omitempty"`
 	// The merchant-defined purchase order reference.
 	CustomerOrderReference *string `json:"customerOrderReference,omitempty"`
