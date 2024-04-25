@@ -20,6 +20,7 @@ var _ common.MappedNullable = &PaymentMethodSetupInfo{}
 // PaymentMethodSetupInfo struct for PaymentMethodSetupInfo
 type PaymentMethodSetupInfo struct {
 	AfterpayTouch *AfterpayTouchInfo `json:"afterpayTouch,omitempty"`
+	Amex          *AmexInfo          `json:"amex,omitempty"`
 	ApplePay      *ApplePayInfo      `json:"applePay,omitempty"`
 	Bcmc          *BcmcInfo          `json:"bcmc,omitempty"`
 	// The unique identifier of the business line. Required if you are a [platform model](https://docs.adyen.com/platforms).
@@ -110,6 +111,38 @@ func (o *PaymentMethodSetupInfo) HasAfterpayTouch() bool {
 // SetAfterpayTouch gets a reference to the given AfterpayTouchInfo and assigns it to the AfterpayTouch field.
 func (o *PaymentMethodSetupInfo) SetAfterpayTouch(v AfterpayTouchInfo) {
 	o.AfterpayTouch = &v
+}
+
+// GetAmex returns the Amex field value if set, zero value otherwise.
+func (o *PaymentMethodSetupInfo) GetAmex() AmexInfo {
+	if o == nil || common.IsNil(o.Amex) {
+		var ret AmexInfo
+		return ret
+	}
+	return *o.Amex
+}
+
+// GetAmexOk returns a tuple with the Amex field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodSetupInfo) GetAmexOk() (*AmexInfo, bool) {
+	if o == nil || common.IsNil(o.Amex) {
+		return nil, false
+	}
+	return o.Amex, true
+}
+
+// HasAmex returns a boolean if a field has been set.
+func (o *PaymentMethodSetupInfo) HasAmex() bool {
+	if o != nil && !common.IsNil(o.Amex) {
+		return true
+	}
+
+	return false
+}
+
+// SetAmex gets a reference to the given AmexInfo and assigns it to the Amex field.
+func (o *PaymentMethodSetupInfo) SetAmex(v AmexInfo) {
+	o.Amex = &v
 }
 
 // GetApplePay returns the ApplePay field value if set, zero value otherwise.
@@ -1141,6 +1174,9 @@ func (o PaymentMethodSetupInfo) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.AfterpayTouch) {
 		toSerialize["afterpayTouch"] = o.AfterpayTouch
 	}
+	if !common.IsNil(o.Amex) {
+		toSerialize["amex"] = o.Amex
+	}
 	if !common.IsNil(o.ApplePay) {
 		toSerialize["applePay"] = o.ApplePay
 	}
@@ -1284,7 +1320,7 @@ func (o *PaymentMethodSetupInfo) isValidShopperInteraction() bool {
 	return false
 }
 func (o *PaymentMethodSetupInfo) isValidType() bool {
-	var allowedEnumValues = []string{"afterpaytouch", "alipay", "alipay_hk", "amex", "applepay", "bcmc", "blik", "cartebancaire", "clearpay", "cup", "diners", "directdebit_GB", "discover", "ebanking_FI", "eftpos_australia", "elo", "elocredit", "elodebit", "girocard", "googlepay", "hiper", "hipercard", "ideal", "interac_card", "jcb", "klarna", "klarna_account", "klarna_paynow", "maestro", "mbway", "mc", "mcdebit", "mealVoucher_FR", "mobilepay", "multibanco", "onlineBanking_PL", "paybybank", "paypal", "payshop", "swish", "trustly", "twint", "twint_pos", "vipps", "visa", "visadebit", "vpay", "wechatpay", "wechatpay_pos"}
+	var allowedEnumValues = []string{"afterpaytouch", "alipay", "alipay_hk", "amex", "applepay", "bcmc", "blik", "cartebancaire", "clearpay", "clicktopay", "cup", "diners", "directdebit_GB", "discover", "ebanking_FI", "eftpos_australia", "elo", "elocredit", "elodebit", "girocard", "googlepay", "hiper", "hipercard", "ideal", "interac_card", "jcb", "klarna", "klarna_account", "klarna_paynow", "maestro", "mbway", "mc", "mcdebit", "mealVoucher_FR", "mobilepay", "multibanco", "onlineBanking_PL", "paybybank", "paypal", "payshop", "swish", "trustly", "twint", "twint_pos", "vipps", "visa", "visadebit", "vpay", "wechatpay", "wechatpay_pos"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

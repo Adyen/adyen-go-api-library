@@ -19,9 +19,11 @@ var _ common.MappedNullable = &AmexInfo{}
 
 // AmexInfo struct for AmexInfo
 type AmexInfo struct {
-	// MID number. Format: 10 numeric characters
+	// MID (Merchant ID) number. Format: 10 numeric characters.  Must be provided only when requesting `gatewayContract` or `paymentDesignatorContract` service levels.
 	MidNumber *string `json:"midNumber,omitempty"`
-	// Service level
+	// Indicates whether the Amex Merchant ID is reused from a previously setup Amex payment method.  This is only applicable for `gatewayContract` and `paymentDesignatorContract` service levels.  The default value is `false`.
+	ReuseMidNumber *bool `json:"reuseMidNumber,omitempty"`
+	// Specifies the service level (settlement type) of this payment method. Possible values: * **noContract** — Adyen holds the contract with American Express. * **gatewayContract** — American Express receives the settlement and handles disputes. They then pay out to the merchant directly. * **paymentDesignatorContract** — Adyen receives the settlement and handles disputes. Adyen then pays out to the merchant.
 	ServiceLevel string `json:"serviceLevel"`
 }
 
@@ -31,6 +33,8 @@ type AmexInfo struct {
 // will change when the set of required properties is changed
 func NewAmexInfo(serviceLevel string) *AmexInfo {
 	this := AmexInfo{}
+	var reuseMidNumber bool = false
+	this.ReuseMidNumber = &reuseMidNumber
 	this.ServiceLevel = serviceLevel
 	return &this
 }
@@ -40,6 +44,8 @@ func NewAmexInfo(serviceLevel string) *AmexInfo {
 // but it doesn't guarantee that properties required by API are set
 func NewAmexInfoWithDefaults() *AmexInfo {
 	this := AmexInfo{}
+	var reuseMidNumber bool = false
+	this.ReuseMidNumber = &reuseMidNumber
 	return &this
 }
 
@@ -73,6 +79,38 @@ func (o *AmexInfo) HasMidNumber() bool {
 // SetMidNumber gets a reference to the given string and assigns it to the MidNumber field.
 func (o *AmexInfo) SetMidNumber(v string) {
 	o.MidNumber = &v
+}
+
+// GetReuseMidNumber returns the ReuseMidNumber field value if set, zero value otherwise.
+func (o *AmexInfo) GetReuseMidNumber() bool {
+	if o == nil || common.IsNil(o.ReuseMidNumber) {
+		var ret bool
+		return ret
+	}
+	return *o.ReuseMidNumber
+}
+
+// GetReuseMidNumberOk returns a tuple with the ReuseMidNumber field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AmexInfo) GetReuseMidNumberOk() (*bool, bool) {
+	if o == nil || common.IsNil(o.ReuseMidNumber) {
+		return nil, false
+	}
+	return o.ReuseMidNumber, true
+}
+
+// HasReuseMidNumber returns a boolean if a field has been set.
+func (o *AmexInfo) HasReuseMidNumber() bool {
+	if o != nil && !common.IsNil(o.ReuseMidNumber) {
+		return true
+	}
+
+	return false
+}
+
+// SetReuseMidNumber gets a reference to the given bool and assigns it to the ReuseMidNumber field.
+func (o *AmexInfo) SetReuseMidNumber(v bool) {
+	o.ReuseMidNumber = &v
 }
 
 // GetServiceLevel returns the ServiceLevel field value
@@ -111,6 +149,9 @@ func (o AmexInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.MidNumber) {
 		toSerialize["midNumber"] = o.MidNumber
+	}
+	if !common.IsNil(o.ReuseMidNumber) {
+		toSerialize["reuseMidNumber"] = o.ReuseMidNumber
 	}
 	toSerialize["serviceLevel"] = o.ServiceLevel
 	return toSerialize, nil

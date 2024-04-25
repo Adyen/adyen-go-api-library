@@ -19,9 +19,11 @@ var _ common.MappedNullable = &Installments{}
 
 // Installments struct for Installments
 type Installments struct {
-	// The installment plan, used for [card installments in Japan](https://docs.adyen.com/payment-methods/cards/credit-card-installments#make-a-payment-japan). By default, this is set to **regular**. Possible values: * **regular** * **revolving**
+	// Defines the bonus percentage, refund percentage or if the transaction is Buy now Pay later. Used for [card installments in Mexico](https://docs.adyen.com/payment-methods/cards/credit-card-installments/#getting-paid-mexico)
+	Extra *int32 `json:"extra,omitempty"`
+	// The installment plan, used for [card installments in Japan](https://docs.adyen.com/payment-methods/cards/credit-card-installments#make-a-payment-japan). and [Mexico](https://docs.adyen.com/payment-methods/cards/credit-card-installments/#getting-paid-mexico). By default, this is set to **regular**.
 	Plan *string `json:"plan,omitempty"`
-	// Defines the number of installments. Its value needs to be greater than zero.  Usually, the maximum allowed number of installments is capped. For example, it may not be possible to split a payment in more than 24 installments. The acquirer sets this upper limit, so its value may vary.
+	// Defines the number of installments. Usually, the maximum allowed number of installments is capped. For example, it may not be possible to split a payment in more than 24 installments. The acquirer sets this upper limit, so its value may vary. This value can be zero for Installments processed in Mexico.
 	Value int32 `json:"value"`
 }
 
@@ -41,6 +43,38 @@ func NewInstallments(value int32) *Installments {
 func NewInstallmentsWithDefaults() *Installments {
 	this := Installments{}
 	return &this
+}
+
+// GetExtra returns the Extra field value if set, zero value otherwise.
+func (o *Installments) GetExtra() int32 {
+	if o == nil || common.IsNil(o.Extra) {
+		var ret int32
+		return ret
+	}
+	return *o.Extra
+}
+
+// GetExtraOk returns a tuple with the Extra field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Installments) GetExtraOk() (*int32, bool) {
+	if o == nil || common.IsNil(o.Extra) {
+		return nil, false
+	}
+	return o.Extra, true
+}
+
+// HasExtra returns a boolean if a field has been set.
+func (o *Installments) HasExtra() bool {
+	if o != nil && !common.IsNil(o.Extra) {
+		return true
+	}
+
+	return false
+}
+
+// SetExtra gets a reference to the given int32 and assigns it to the Extra field.
+func (o *Installments) SetExtra(v int32) {
+	o.Extra = &v
 }
 
 // GetPlan returns the Plan field value if set, zero value otherwise.
@@ -109,6 +143,9 @@ func (o Installments) MarshalJSON() ([]byte, error) {
 
 func (o Installments) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.Extra) {
+		toSerialize["extra"] = o.Extra
+	}
 	if !common.IsNil(o.Plan) {
 		toSerialize["plan"] = o.Plan
 	}
@@ -153,7 +190,7 @@ func (v *NullableInstallments) UnmarshalJSON(src []byte) error {
 }
 
 func (o *Installments) isValidPlan() bool {
-	var allowedEnumValues = []string{"regular", "revolving"}
+	var allowedEnumValues = []string{"buynow_paylater", "interes_refund_prctg", "interest_bonus", "nointeres_refund_prctg", "nointerest_bonus", "refund_prctg", "regular", "revolving", "with_interest"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetPlan() == allowed {
 			return true
