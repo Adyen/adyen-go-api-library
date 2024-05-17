@@ -10,7 +10,8 @@ package transfers
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v9/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the ConfirmationTrackingData type satisfies the MappedNullable interface at compile time
@@ -94,7 +95,7 @@ func (o *ConfirmationTrackingData) SetType(v string) {
 }
 
 func (o ConfirmationTrackingData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -144,23 +145,21 @@ func (v *NullableConfirmationTrackingData) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *ConfirmationTrackingData) isValidStatus() bool {
-    var allowedEnumValues = []string{ "credited" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetStatus() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"credited"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetStatus() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *ConfirmationTrackingData) isValidType() bool {
-    var allowedEnumValues = []string{ "confirmation" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"confirmation"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

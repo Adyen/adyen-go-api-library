@@ -10,7 +10,8 @@ package configurationwebhook
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v9/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the AccountHolder type satisfies the MappedNullable interface at compile time
@@ -21,8 +22,8 @@ type AccountHolder struct {
 	// The unique identifier of the [balance platform](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balancePlatforms/{id}__queryParam_id) to which the account holder belongs. Required in the request if your API credentials can be used for multiple balance platforms.
 	BalancePlatform *string `json:"balancePlatform,omitempty"`
 	// Contains key-value pairs that specify the actions that an account holder can do in your platform. The key is a capability required for your integration. For example, **issueCard** for Issuing. The value is an object containing the settings for the capability.
-	Capabilities *map[string]AccountHolderCapability `json:"capabilities,omitempty"`
-	ContactDetails *ContactDetails `json:"contactDetails,omitempty"`
+	Capabilities   *map[string]AccountHolderCapability `json:"capabilities,omitempty"`
+	ContactDetails *ContactDetails                     `json:"contactDetails,omitempty"`
 	// Your description for the account holder.
 	Description *string `json:"description,omitempty"`
 	// The unique identifier of the account holder.
@@ -465,7 +466,7 @@ func (o *AccountHolder) SetVerificationDeadlines(v []VerificationDeadline) {
 }
 
 func (o AccountHolder) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -548,14 +549,12 @@ func (v *NullableAccountHolder) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *AccountHolder) isValidStatus() bool {
-    var allowedEnumValues = []string{ "active", "closed", "suspended" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetStatus() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"active", "closed", "suspended"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetStatus() == allowed {
+			return true
+		}
+	}
+	return false
 }
-
