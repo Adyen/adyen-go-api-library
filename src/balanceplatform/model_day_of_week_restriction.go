@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the DayOfWeekRestriction type satisfies the MappedNullable interface at compile time
@@ -21,7 +20,7 @@ var _ common.MappedNullable = &DayOfWeekRestriction{}
 type DayOfWeekRestriction struct {
 	// Defines how the condition must be evaluated.
 	Operation string `json:"operation"`
-	// List of days of the week.  Possible values: **monday**, **tuesday**, **wednesday**, **thursday**, **friday**, **saturday**, **sunday**.
+	// List of days of the week.  Possible values: **monday**, **tuesday**, **wednesday**, **thursday**, **friday**, **saturday**, **sunday**.  
 	Value []string `json:"value,omitempty"`
 }
 
@@ -100,7 +99,7 @@ func (o *DayOfWeekRestriction) SetValue(v []string) {
 }
 
 func (o DayOfWeekRestriction) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -151,3 +150,6 @@ func (v *NullableDayOfWeekRestriction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

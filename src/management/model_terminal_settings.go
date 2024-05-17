@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the TerminalSettings type satisfies the MappedNullable interface at compile time
@@ -20,28 +19,28 @@ var _ common.MappedNullable = &TerminalSettings{}
 // TerminalSettings struct for TerminalSettings
 type TerminalSettings struct {
 	CardholderReceipt *CardholderReceipt `json:"cardholderReceipt,omitempty"`
-	Connectivity      *Connectivity      `json:"connectivity,omitempty"`
+	Connectivity *Connectivity `json:"connectivity,omitempty"`
 	// Settings for tipping with or without predefined options to choose from. The maximum number of predefined options is four, or three plus the option to enter a custom tip.
-	Gratuities           []Gratuity            `json:"gratuities,omitempty"`
-	Hardware             *Hardware             `json:"hardware,omitempty"`
-	Localization         *Localization         `json:"localization,omitempty"`
-	Nexo                 *Nexo                 `json:"nexo,omitempty"`
-	OfflineProcessing    *OfflineProcessing    `json:"offlineProcessing,omitempty"`
-	Opi                  *Opi                  `json:"opi,omitempty"`
-	Passcodes            *Passcodes            `json:"passcodes,omitempty"`
-	PayAtTable           *PayAtTable           `json:"payAtTable,omitempty"`
-	Payment              *Payment              `json:"payment,omitempty"`
-	ReceiptOptions       *ReceiptOptions       `json:"receiptOptions,omitempty"`
-	ReceiptPrinting      *ReceiptPrinting      `json:"receiptPrinting,omitempty"`
-	Refunds              *Refunds              `json:"refunds,omitempty"`
-	Signature            *Signature            `json:"signature,omitempty"`
-	Standalone           *Standalone           `json:"standalone,omitempty"`
-	StoreAndForward      *StoreAndForward      `json:"storeAndForward,omitempty"`
-	Surcharge            *Surcharge            `json:"surcharge,omitempty"`
-	TapToPay             *TapToPay             `json:"tapToPay,omitempty"`
+	Gratuities []Gratuity `json:"gratuities,omitempty"`
+	Hardware *Hardware `json:"hardware,omitempty"`
+	Localization *Localization `json:"localization,omitempty"`
+	Nexo *Nexo `json:"nexo,omitempty"`
+	OfflineProcessing *OfflineProcessing `json:"offlineProcessing,omitempty"`
+	Opi *Opi `json:"opi,omitempty"`
+	Passcodes *Passcodes `json:"passcodes,omitempty"`
+	PayAtTable *PayAtTable `json:"payAtTable,omitempty"`
+	Payment *Payment `json:"payment,omitempty"`
+	ReceiptOptions *ReceiptOptions `json:"receiptOptions,omitempty"`
+	ReceiptPrinting *ReceiptPrinting `json:"receiptPrinting,omitempty"`
+	Refunds *Refunds `json:"refunds,omitempty"`
+	Signature *Signature `json:"signature,omitempty"`
+	Standalone *Standalone `json:"standalone,omitempty"`
+	StoreAndForward *StoreAndForward `json:"storeAndForward,omitempty"`
+	Surcharge *Surcharge `json:"surcharge,omitempty"`
+	TapToPay *TapToPay `json:"tapToPay,omitempty"`
 	TerminalInstructions *TerminalInstructions `json:"terminalInstructions,omitempty"`
-	Timeouts             *Timeouts             `json:"timeouts,omitempty"`
-	WifiProfiles         *WifiProfiles         `json:"wifiProfiles,omitempty"`
+	Timeouts *Timeouts `json:"timeouts,omitempty"`
+	WifiProfiles *WifiProfiles `json:"wifiProfiles,omitempty"`
 }
 
 // NewTerminalSettings instantiates a new TerminalSettings object
@@ -125,9 +124,9 @@ func (o *TerminalSettings) SetConnectivity(v Connectivity) {
 	o.Connectivity = &v
 }
 
-// GetGratuities returns the Gratuities field value if set, zero value otherwise.
+// GetGratuities returns the Gratuities field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TerminalSettings) GetGratuities() []Gratuity {
-	if o == nil || common.IsNil(o.Gratuities) {
+	if o == nil {
 		var ret []Gratuity
 		return ret
 	}
@@ -136,6 +135,7 @@ func (o *TerminalSettings) GetGratuities() []Gratuity {
 
 // GetGratuitiesOk returns a tuple with the Gratuities field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TerminalSettings) GetGratuitiesOk() ([]Gratuity, bool) {
 	if o == nil || common.IsNil(o.Gratuities) {
 		return nil, false
@@ -145,7 +145,7 @@ func (o *TerminalSettings) GetGratuitiesOk() ([]Gratuity, bool) {
 
 // HasGratuities returns a boolean if a field has been set.
 func (o *TerminalSettings) HasGratuities() bool {
-	if o != nil && !common.IsNil(o.Gratuities) {
+	if o != nil && common.IsNil(o.Gratuities) {
 		return true
 	}
 
@@ -766,7 +766,7 @@ func (o *TerminalSettings) SetWifiProfiles(v WifiProfiles) {
 }
 
 func (o TerminalSettings) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -781,7 +781,7 @@ func (o TerminalSettings) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Connectivity) {
 		toSerialize["connectivity"] = o.Connectivity
 	}
-	if !common.IsNil(o.Gratuities) {
+	if o.Gratuities != nil {
 		toSerialize["gratuities"] = o.Gratuities
 	}
 	if !common.IsNil(o.Hardware) {
@@ -879,3 +879,6 @@ func (v *NullableTerminalSettings) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

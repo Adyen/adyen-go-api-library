@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the OnboardingLinkInfo type satisfies the MappedNullable interface at compile time
@@ -23,8 +22,7 @@ type OnboardingLinkInfo struct {
 	Locale *string `json:"locale,omitempty"`
 	// The URL where the user is redirected after they complete hosted onboarding.
 	RedirectUrl *string `json:"redirectUrl,omitempty"`
-	// Boolean key-value pairs indicating the settings for the hosted onboarding page. The keys are the settings.  Possible keys:  By default, these values are set to **true**. Set to **false** to not allow the action.  - **changeLegalEntityType**: The user can change their legal entity type.  - **editPrefilledCountry**: The user can change the country of their legal entity's address, for example the registered address of an organization.  By default, these values are set to **false**. Set to **true** to allow the action.  - **allowBankAccountFormatSelection**: The user can select the format for their payout account if applicable.  - **allowIntraRegionCrossBorderPayout**: The user can select a payout account in a different EU/EEA country (including Switzerland and the UK) than the country of their legal entity.  By default, these value are set to **false**. Set the following values to **true** to require the user to sign PCI questionnaires based on their sales channels. The user must sign PCI questionnaires for all relevant sales channels.  - **requirePciSignEcommerce**  - **requirePciSignPos**  - **requirePciSignEcomMoto**  - **requirePciSignPosMoto**
-	Settings *map[string]bool `json:"settings,omitempty"`
+	Settings *OnboardingLinkSettings `json:"settings,omitempty"`
 	// The unique identifier of the hosted onboarding theme.
 	ThemeId *string `json:"themeId,omitempty"`
 }
@@ -111,9 +109,9 @@ func (o *OnboardingLinkInfo) SetRedirectUrl(v string) {
 }
 
 // GetSettings returns the Settings field value if set, zero value otherwise.
-func (o *OnboardingLinkInfo) GetSettings() map[string]bool {
+func (o *OnboardingLinkInfo) GetSettings() OnboardingLinkSettings {
 	if o == nil || common.IsNil(o.Settings) {
-		var ret map[string]bool
+		var ret OnboardingLinkSettings
 		return ret
 	}
 	return *o.Settings
@@ -121,7 +119,7 @@ func (o *OnboardingLinkInfo) GetSettings() map[string]bool {
 
 // GetSettingsOk returns a tuple with the Settings field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OnboardingLinkInfo) GetSettingsOk() (*map[string]bool, bool) {
+func (o *OnboardingLinkInfo) GetSettingsOk() (*OnboardingLinkSettings, bool) {
 	if o == nil || common.IsNil(o.Settings) {
 		return nil, false
 	}
@@ -137,8 +135,8 @@ func (o *OnboardingLinkInfo) HasSettings() bool {
 	return false
 }
 
-// SetSettings gets a reference to the given map[string]bool and assigns it to the Settings field.
-func (o *OnboardingLinkInfo) SetSettings(v map[string]bool) {
+// SetSettings gets a reference to the given OnboardingLinkSettings and assigns it to the Settings field.
+func (o *OnboardingLinkInfo) SetSettings(v OnboardingLinkSettings) {
 	o.Settings = &v
 }
 
@@ -175,7 +173,7 @@ func (o *OnboardingLinkInfo) SetThemeId(v string) {
 }
 
 func (o OnboardingLinkInfo) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -234,3 +232,6 @@ func (v *NullableOnboardingLinkInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

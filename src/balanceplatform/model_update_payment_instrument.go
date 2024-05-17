@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the UpdatePaymentInstrument type satisfies the MappedNullable interface at compile time
@@ -20,11 +19,12 @@ var _ common.MappedNullable = &UpdatePaymentInstrument{}
 // UpdatePaymentInstrument struct for UpdatePaymentInstrument
 type UpdatePaymentInstrument struct {
 	// Contains optional, additional business account details. Returned when you create a payment instrument with `type` **bankAccount**.
+	// Deprecated
 	AdditionalBankAccountIdentifications []PaymentInstrumentAdditionalBankAccountIdentificationsInner `json:"additionalBankAccountIdentifications,omitempty"`
 	// The unique identifier of the [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/v1/post/balanceAccounts__resParam_id) associated with the payment instrument.
-	BalanceAccountId string                        `json:"balanceAccountId"`
-	BankAccount      *PaymentInstrumentBankAccount `json:"bankAccount,omitempty"`
-	Card             *Card                         `json:"card,omitempty"`
+	BalanceAccountId string `json:"balanceAccountId"`
+	BankAccount *BankAccountDetails `json:"bankAccount,omitempty"`
+	Card *Card `json:"card,omitempty"`
 	// Your description for the payment instrument, maximum 300 characters.
 	Description *string `json:"description,omitempty"`
 	// The unique identifier of the payment instrument.
@@ -35,13 +35,13 @@ type UpdatePaymentInstrument struct {
 	PaymentInstrumentGroupId *string `json:"paymentInstrumentGroupId,omitempty"`
 	// Your reference for the payment instrument, maximum 150 characters.
 	Reference *string `json:"reference,omitempty"`
-	// The status of the payment instrument. If a status is not specified when creating a payment instrument, it is set to **active** by default. However, there can be exceptions for cards based on the `card.formFactor` and the `issuingCountryCode`. For example, when issuing physical cards in the US, the default status is **inactive**.  Possible values:    * **active**:  The payment instrument is active and can be used to make payments.    * **inactive**: The payment instrument is inactive and cannot be used to make payments.    * **suspended**: The payment instrument is suspended, either because it was stolen or lost.    * **closed**: The payment instrument is permanently closed. This action cannot be undone.
+	// The status of the payment instrument. If a status is not specified when creating a payment instrument, it is set to **active** by default. However, there can be exceptions for cards based on the `card.formFactor` and the `issuingCountryCode`. For example, when issuing physical cards in the US, the default status is **inactive**.  Possible values:    * **active**:  The payment instrument is active and can be used to make payments.    * **inactive**: The payment instrument is inactive and cannot be used to make payments.    * **suspended**: The payment instrument is suspended, either because it was stolen or lost.    * **closed**: The payment instrument is permanently closed. This action cannot be undone.   
 	Status *string `json:"status,omitempty"`
 	// Comment for the status of the payment instrument.  Required if `statusReason` is **other**.
 	StatusComment *string `json:"statusComment,omitempty"`
 	// The reason for the status of the payment instrument.  Possible values: **accountClosure**, **damaged**, **endOfLife**, **expired**, **lost**, **stolen**, **suspectedFraud**, **transactionRule**, **other**. If the reason is **other**, you must also send the `statusComment` parameter describing the status change.
 	StatusReason *string `json:"statusReason,omitempty"`
-	// Type of payment instrument.  Possible value: **card**, **bankAccount**.
+	// Type of payment instrument.  Possible value: **card**, **bankAccount**. 
 	Type string `json:"type"`
 }
 
@@ -67,6 +67,7 @@ func NewUpdatePaymentInstrumentWithDefaults() *UpdatePaymentInstrument {
 }
 
 // GetAdditionalBankAccountIdentifications returns the AdditionalBankAccountIdentifications field value if set, zero value otherwise.
+// Deprecated
 func (o *UpdatePaymentInstrument) GetAdditionalBankAccountIdentifications() []PaymentInstrumentAdditionalBankAccountIdentificationsInner {
 	if o == nil || common.IsNil(o.AdditionalBankAccountIdentifications) {
 		var ret []PaymentInstrumentAdditionalBankAccountIdentificationsInner
@@ -77,6 +78,7 @@ func (o *UpdatePaymentInstrument) GetAdditionalBankAccountIdentifications() []Pa
 
 // GetAdditionalBankAccountIdentificationsOk returns a tuple with the AdditionalBankAccountIdentifications field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *UpdatePaymentInstrument) GetAdditionalBankAccountIdentificationsOk() ([]PaymentInstrumentAdditionalBankAccountIdentificationsInner, bool) {
 	if o == nil || common.IsNil(o.AdditionalBankAccountIdentifications) {
 		return nil, false
@@ -94,6 +96,7 @@ func (o *UpdatePaymentInstrument) HasAdditionalBankAccountIdentifications() bool
 }
 
 // SetAdditionalBankAccountIdentifications gets a reference to the given []PaymentInstrumentAdditionalBankAccountIdentificationsInner and assigns it to the AdditionalBankAccountIdentifications field.
+// Deprecated
 func (o *UpdatePaymentInstrument) SetAdditionalBankAccountIdentifications(v []PaymentInstrumentAdditionalBankAccountIdentificationsInner) {
 	o.AdditionalBankAccountIdentifications = v
 }
@@ -123,9 +126,9 @@ func (o *UpdatePaymentInstrument) SetBalanceAccountId(v string) {
 }
 
 // GetBankAccount returns the BankAccount field value if set, zero value otherwise.
-func (o *UpdatePaymentInstrument) GetBankAccount() PaymentInstrumentBankAccount {
+func (o *UpdatePaymentInstrument) GetBankAccount() BankAccountDetails {
 	if o == nil || common.IsNil(o.BankAccount) {
-		var ret PaymentInstrumentBankAccount
+		var ret BankAccountDetails
 		return ret
 	}
 	return *o.BankAccount
@@ -133,7 +136,7 @@ func (o *UpdatePaymentInstrument) GetBankAccount() PaymentInstrumentBankAccount 
 
 // GetBankAccountOk returns a tuple with the BankAccount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdatePaymentInstrument) GetBankAccountOk() (*PaymentInstrumentBankAccount, bool) {
+func (o *UpdatePaymentInstrument) GetBankAccountOk() (*BankAccountDetails, bool) {
 	if o == nil || common.IsNil(o.BankAccount) {
 		return nil, false
 	}
@@ -149,8 +152,8 @@ func (o *UpdatePaymentInstrument) HasBankAccount() bool {
 	return false
 }
 
-// SetBankAccount gets a reference to the given PaymentInstrumentBankAccount and assigns it to the BankAccount field.
-func (o *UpdatePaymentInstrument) SetBankAccount(v PaymentInstrumentBankAccount) {
+// SetBankAccount gets a reference to the given BankAccountDetails and assigns it to the BankAccount field.
+func (o *UpdatePaymentInstrument) SetBankAccount(v BankAccountDetails) {
 	o.BankAccount = &v
 }
 
@@ -451,7 +454,7 @@ func (o *UpdatePaymentInstrument) SetType(v string) {
 }
 
 func (o UpdatePaymentInstrument) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -530,30 +533,32 @@ func (v *NullableUpdatePaymentInstrument) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *UpdatePaymentInstrument) isValidStatus() bool {
-	var allowedEnumValues = []string{"active", "closed", "inactive", "suspended"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetStatus() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "active", "closed", "inactive", "suspended" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetStatus() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *UpdatePaymentInstrument) isValidStatusReason() bool {
-	var allowedEnumValues = []string{"accountClosure", "damaged", "endOfLife", "expired", "lost", "other", "stolen", "suspectedFraud", "transactionRule"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetStatusReason() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "accountClosure", "damaged", "endOfLife", "expired", "lost", "other", "stolen", "suspectedFraud", "transactionRule" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetStatusReason() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *UpdatePaymentInstrument) isValidType() bool {
-	var allowedEnumValues = []string{"bankAccount", "card"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "bankAccount", "card" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the TransactionRuleInterval type satisfies the MappedNullable interface at compile time
@@ -22,13 +21,13 @@ type TransactionRuleInterval struct {
 	// The day of month, used when the `duration.unit` is **months**. If not provided, by default, this is set to **1**, the first day of the month.
 	DayOfMonth *int32 `json:"dayOfMonth,omitempty"`
 	// The day of week, used when the `duration.unit` is **weeks**. If not provided, by default, this is set to **monday**.  Possible values: **sunday**, **monday**, **tuesday**, **wednesday**, **thursday**, **friday**.
-	DayOfWeek *string   `json:"dayOfWeek,omitempty"`
-	Duration  *Duration `json:"duration,omitempty"`
+	DayOfWeek *string `json:"dayOfWeek,omitempty"`
+	Duration *Duration `json:"duration,omitempty"`
 	// The time of day, in **hh:mm:ss** format, used when the `duration.unit` is **hours**. If not provided, by default, this is set to **00:00:00**.
 	TimeOfDay *string `json:"timeOfDay,omitempty"`
 	// The [time zone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). For example, **Europe/Amsterdam**. By default, this is set to **UTC**.
 	TimeZone *string `json:"timeZone,omitempty"`
-	// The [type of interval](https://docs.adyen.com/issuing/transaction-rules#time-intervals) during which the rule conditions and limits apply, and how often counters are reset.  Possible values:   * **perTransaction**: conditions are evaluated and the counters are reset for every transaction.  * **daily**: the counters are reset daily at 00:00:00 UTC.  * **weekly**: the counters are reset every Monday at 00:00:00 UTC.   * **monthly**: the counters reset every first day of the month at 00:00:00 UTC.   * **lifetime**: conditions are applied to the lifetime of the payment instrument.  * **rolling**: conditions are applied and the counters are reset based on a `duration`. If the reset date and time are not provided, Adyen applies the default reset time similar to fixed intervals. For example, if the duration is every two weeks, the counter resets every third Monday at 00:00:00 UTC.  * **sliding**: conditions are applied and the counters are reset based on the current time and a `duration` that you specify.
+	// The [type of interval](https://docs.adyen.com/issuing/transaction-rules#time-intervals) during which the rule conditions and limits apply, and how often counters are reset.  Possible values:   * **perTransaction**: conditions are evaluated and the counters are reset for every transaction.  * **daily**: the counters are reset daily at 00:00:00 CET.  * **weekly**: the counters are reset every Monday at 00:00:00 CET.   * **monthly**: the counters reset every first day of the month at 00:00:00 CET.   * **lifetime**: conditions are applied to the lifetime of the payment instrument.  * **rolling**: conditions are applied and the counters are reset based on a `duration`. If the reset date and time are not provided, Adyen applies the default reset time similar to fixed intervals. For example, if the duration is every two weeks, the counter resets every third Monday at 00:00:00 CET.  * **sliding**: conditions are applied and the counters are reset based on the current time and a `duration` that you specify.
 	Type string `json:"type"`
 }
 
@@ -235,7 +234,7 @@ func (o *TransactionRuleInterval) SetType(v string) {
 }
 
 func (o TransactionRuleInterval) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -299,21 +298,23 @@ func (v *NullableTransactionRuleInterval) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *TransactionRuleInterval) isValidDayOfWeek() bool {
-	var allowedEnumValues = []string{"friday", "monday", "saturday", "sunday", "thursday", "tuesday", "wednesday"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetDayOfWeek() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "friday", "monday", "saturday", "sunday", "thursday", "tuesday", "wednesday" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetDayOfWeek() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *TransactionRuleInterval) isValidType() bool {
-	var allowedEnumValues = []string{"daily", "lifetime", "monthly", "perTransaction", "rolling", "sliding", "weekly"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "daily", "lifetime", "monthly", "perTransaction", "rolling", "sliding", "weekly" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

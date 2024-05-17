@@ -10,8 +10,7 @@ package transferwebhook
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the BRLocalAccountIdentification type satisfies the MappedNullable interface at compile time
@@ -25,8 +24,8 @@ type BRLocalAccountIdentification struct {
 	BankCode string `json:"bankCode"`
 	// The bank account branch number, without separators or whitespace.
 	BranchNumber string `json:"branchNumber"`
-	// The form factor of the account.  Possible values: **physical**, **virtual**. Default value: **physical**.
-	FormFactor common.NullableString `json:"formFactor,omitempty"`
+	// The 8-digit ISPB, with leading zeros.
+	Ispb *string `json:"ispb,omitempty"`
 	// **brLocal**
 	Type string `json:"type"`
 }
@@ -40,8 +39,6 @@ func NewBRLocalAccountIdentification(accountNumber string, bankCode string, bran
 	this.AccountNumber = accountNumber
 	this.BankCode = bankCode
 	this.BranchNumber = branchNumber
-	var formFactor string = "physical"
-	this.FormFactor = *common.NewNullableString(&formFactor)
 	this.Type = type_
 	return &this
 }
@@ -51,8 +48,6 @@ func NewBRLocalAccountIdentification(accountNumber string, bankCode string, bran
 // but it doesn't guarantee that properties required by API are set
 func NewBRLocalAccountIdentificationWithDefaults() *BRLocalAccountIdentification {
 	this := BRLocalAccountIdentification{}
-	var formFactor string = "physical"
-	this.FormFactor = *common.NewNullableString(&formFactor)
 	var type_ string = "brLocal"
 	this.Type = type_
 	return &this
@@ -130,47 +125,36 @@ func (o *BRLocalAccountIdentification) SetBranchNumber(v string) {
 	o.BranchNumber = v
 }
 
-// GetFormFactor returns the FormFactor field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BRLocalAccountIdentification) GetFormFactor() string {
-	if o == nil || common.IsNil(o.FormFactor.Get()) {
+// GetIspb returns the Ispb field value if set, zero value otherwise.
+func (o *BRLocalAccountIdentification) GetIspb() string {
+	if o == nil || common.IsNil(o.Ispb) {
 		var ret string
 		return ret
 	}
-	return *o.FormFactor.Get()
+	return *o.Ispb
 }
 
-// GetFormFactorOk returns a tuple with the FormFactor field value if set, nil otherwise
+// GetIspbOk returns a tuple with the Ispb field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BRLocalAccountIdentification) GetFormFactorOk() (*string, bool) {
-	if o == nil {
+func (o *BRLocalAccountIdentification) GetIspbOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Ispb) {
 		return nil, false
 	}
-	return o.FormFactor.Get(), o.FormFactor.IsSet()
+	return o.Ispb, true
 }
 
-// HasFormFactor returns a boolean if a field has been set.
-func (o *BRLocalAccountIdentification) HasFormFactor() bool {
-	if o != nil && o.FormFactor.IsSet() {
+// HasIspb returns a boolean if a field has been set.
+func (o *BRLocalAccountIdentification) HasIspb() bool {
+	if o != nil && !common.IsNil(o.Ispb) {
 		return true
 	}
 
 	return false
 }
 
-// SetFormFactor gets a reference to the given NullableString and assigns it to the FormFactor field.
-func (o *BRLocalAccountIdentification) SetFormFactor(v string) {
-	o.FormFactor.Set(&v)
-}
-
-// SetFormFactorNil sets the value for FormFactor to be an explicit nil
-func (o *BRLocalAccountIdentification) SetFormFactorNil() {
-	o.FormFactor.Set(nil)
-}
-
-// UnsetFormFactor ensures that no value is present for FormFactor, not even an explicit nil
-func (o *BRLocalAccountIdentification) UnsetFormFactor() {
-	o.FormFactor.Unset()
+// SetIspb gets a reference to the given string and assigns it to the Ispb field.
+func (o *BRLocalAccountIdentification) SetIspb(v string) {
+	o.Ispb = &v
 }
 
 // GetType returns the Type field value
@@ -198,7 +182,7 @@ func (o *BRLocalAccountIdentification) SetType(v string) {
 }
 
 func (o BRLocalAccountIdentification) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -210,8 +194,8 @@ func (o BRLocalAccountIdentification) ToMap() (map[string]interface{}, error) {
 	toSerialize["accountNumber"] = o.AccountNumber
 	toSerialize["bankCode"] = o.BankCode
 	toSerialize["branchNumber"] = o.BranchNumber
-	if o.FormFactor.IsSet() {
-		toSerialize["formFactor"] = o.FormFactor.Get()
+	if !common.IsNil(o.Ispb) {
+		toSerialize["ispb"] = o.Ispb
 	}
 	toSerialize["type"] = o.Type
 	return toSerialize, nil
@@ -253,12 +237,14 @@ func (v *NullableBRLocalAccountIdentification) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *BRLocalAccountIdentification) isValidType() bool {
-	var allowedEnumValues = []string{"brLocal"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "brLocal" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the PaymentInstrumentGroup type satisfies the MappedNullable interface at compile time
@@ -21,13 +20,13 @@ var _ common.MappedNullable = &PaymentInstrumentGroup{}
 type PaymentInstrumentGroup struct {
 	// The unique identifier of the [balance platform](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balancePlatforms/{id}__queryParam_id) to which the payment instrument group belongs.
 	BalancePlatform string `json:"balancePlatform"`
-	// Your description for the payment instrument group, maximum 300 characters.
+	// Your description for the payment instrument group.
 	Description *string `json:"description,omitempty"`
 	// The unique identifier of the payment instrument group.
 	Id *string `json:"id,omitempty"`
 	// Properties of the payment instrument group.
 	Properties *map[string]string `json:"properties,omitempty"`
-	// Your reference for the payment instrument group, maximum 150 characters.
+	// Your reference for the payment instrument group.
 	Reference *string `json:"reference,omitempty"`
 	// The tx variant of the payment instrument group.
 	TxVariant string `json:"txVariant"`
@@ -229,7 +228,7 @@ func (o *PaymentInstrumentGroup) SetTxVariant(v string) {
 }
 
 func (o PaymentInstrumentGroup) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -290,3 +289,6 @@ func (v *NullablePaymentInstrumentGroup) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

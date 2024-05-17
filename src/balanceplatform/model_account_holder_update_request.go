@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the AccountHolderUpdateRequest type satisfies the MappedNullable interface at compile time
@@ -22,9 +21,9 @@ type AccountHolderUpdateRequest struct {
 	// The unique identifier of the [balance platform](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balancePlatforms/{id}__queryParam_id) to which the account holder belongs. Required in the request if your API credentials can be used for multiple balance platforms.
 	BalancePlatform *string `json:"balancePlatform,omitempty"`
 	// Contains key-value pairs that specify the actions that an account holder can do in your platform. The key is a capability required for your integration. For example, **issueCard** for Issuing. The value is an object containing the settings for the capability.
-	Capabilities   *map[string]AccountHolderCapability `json:"capabilities,omitempty"`
-	ContactDetails *ContactDetails                     `json:"contactDetails,omitempty"`
-	// Your description for the account holder, maximum 300 characters.
+	Capabilities *map[string]AccountHolderCapability `json:"capabilities,omitempty"`
+	ContactDetails *ContactDetails `json:"contactDetails,omitempty"`
+	// Your description for the account holder.
 	Description *string `json:"description,omitempty"`
 	// A set of key and value pairs for general use. The keys do not have specific names and may be used for storing miscellaneous data as desired. > Note that during an update of metadata, the omission of existing key-value pairs will result in the deletion of those key-value pairs.
 	Metadata *map[string]string `json:"metadata,omitempty"`
@@ -32,9 +31,9 @@ type AccountHolderUpdateRequest struct {
 	MigratedAccountHolderCode *string `json:"migratedAccountHolderCode,omitempty"`
 	// The ID of the account holder's primary balance account. By default, this is set to the first balance account that you create for the account holder. To assign a different balance account, send a PATCH request.
 	PrimaryBalanceAccount *string `json:"primaryBalanceAccount,omitempty"`
-	// Your reference for the account holder, maximum 150 characters.
+	// Your reference for the account holder.
 	Reference *string `json:"reference,omitempty"`
-	// The status of the account holder.  Possible values:    * **active**: The account holder is active. This is the default status when creating an account holder.    * **inactive (Deprecated)**: The account holder is temporarily inactive due to missing KYC details. You can set the account back to active by providing the missing KYC details.    * **suspended**: The account holder is permanently deactivated by Adyen. This action cannot be undone.   * **closed**: The account holder is permanently deactivated by you. This action cannot be undone.
+	// The status of the account holder.  Possible values:    * **active**: The account holder is active. This is the default status when creating an account holder.    * **suspended**: The account holder is permanently deactivated by Adyen. This action cannot be undone.   * **closed**: The account holder is permanently deactivated by you. This action cannot be undone.
 	Status *string `json:"status,omitempty"`
 	// The time zone of the account holder. For example, **Europe/Amsterdam**. Defaults to the time zone of the balance platform if no time zone is set. For possible values, see the [list of time zone codes](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 	TimeZone *string `json:"timeZone,omitempty"`
@@ -412,7 +411,7 @@ func (o *AccountHolderUpdateRequest) SetVerificationDeadlines(v []VerificationDe
 }
 
 func (o AccountHolderUpdateRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -493,12 +492,14 @@ func (v *NullableAccountHolderUpdateRequest) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *AccountHolderUpdateRequest) isValidStatus() bool {
-	var allowedEnumValues = []string{"active", "closed", "inactive", "suspended"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetStatus() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "active", "closed", "suspended" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetStatus() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

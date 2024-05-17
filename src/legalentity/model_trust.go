@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the Trust type satisfies the MappedNullable interface at compile time
@@ -23,16 +22,16 @@ type Trust struct {
 	CountryOfGoverningLaw string `json:"countryOfGoverningLaw"`
 	// The date when the legal arrangement was incorporated in YYYY-MM-DD format.
 	DateOfIncorporation *string `json:"dateOfIncorporation,omitempty"`
-	// Short description about the trust.
-	Description *string `json:"description,omitempty"`
 	// The registered name, if different from the `name`.
 	DoingBusinessAs *string `json:"doingBusinessAs,omitempty"`
 	// The legal name.
-	Name                     string   `json:"name"`
+	Name string `json:"name"`
 	PrincipalPlaceOfBusiness *Address `json:"principalPlaceOfBusiness,omitempty"`
-	RegisteredAddress        Address  `json:"registeredAddress"`
+	RegisteredAddress Address `json:"registeredAddress"`
 	// The registration number.
 	RegistrationNumber *string `json:"registrationNumber,omitempty"`
+	// The tax information is absent.
+	TaxAbsent common.NullableBool `json:"taxAbsent,omitempty"`
 	// The tax information of the entity.
 	TaxInformation []TaxInformation `json:"taxInformation,omitempty"`
 	// Type of trust.  Possible values for Australian trusts: **cashManagementTrust**, **corporateUnitTrust**, **deceasedEstate**, **discretionaryInvestmentTrust**, **discretionaryServicesManagementTrust**, **discretionaryTradingTrust**, **firstHomeSaverAccountsTrust**, **fixedTrust**, **fixedUnitTrust**, **hybridTrust**, **listedPublicUnitTrust**, **otherTrust**, **pooledSuperannuationTrust**, **publicTradingTrust**, **unlistedPublicUnitTrust**.
@@ -120,38 +119,6 @@ func (o *Trust) HasDateOfIncorporation() bool {
 // SetDateOfIncorporation gets a reference to the given string and assigns it to the DateOfIncorporation field.
 func (o *Trust) SetDateOfIncorporation(v string) {
 	o.DateOfIncorporation = &v
-}
-
-// GetDescription returns the Description field value if set, zero value otherwise.
-func (o *Trust) GetDescription() string {
-	if o == nil || common.IsNil(o.Description) {
-		var ret string
-		return ret
-	}
-	return *o.Description
-}
-
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Trust) GetDescriptionOk() (*string, bool) {
-	if o == nil || common.IsNil(o.Description) {
-		return nil, false
-	}
-	return o.Description, true
-}
-
-// HasDescription returns a boolean if a field has been set.
-func (o *Trust) HasDescription() bool {
-	if o != nil && !common.IsNil(o.Description) {
-		return true
-	}
-
-	return false
-}
-
-// SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *Trust) SetDescription(v string) {
-	o.Description = &v
 }
 
 // GetDoingBusinessAs returns the DoingBusinessAs field value if set, zero value otherwise.
@@ -296,6 +263,48 @@ func (o *Trust) HasRegistrationNumber() bool {
 // SetRegistrationNumber gets a reference to the given string and assigns it to the RegistrationNumber field.
 func (o *Trust) SetRegistrationNumber(v string) {
 	o.RegistrationNumber = &v
+}
+
+// GetTaxAbsent returns the TaxAbsent field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Trust) GetTaxAbsent() bool {
+	if o == nil || common.IsNil(o.TaxAbsent.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.TaxAbsent.Get()
+}
+
+// GetTaxAbsentOk returns a tuple with the TaxAbsent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Trust) GetTaxAbsentOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TaxAbsent.Get(), o.TaxAbsent.IsSet()
+}
+
+// HasTaxAbsent returns a boolean if a field has been set.
+func (o *Trust) HasTaxAbsent() bool {
+	if o != nil && o.TaxAbsent.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTaxAbsent gets a reference to the given NullableBool and assigns it to the TaxAbsent field.
+func (o *Trust) SetTaxAbsent(v bool) {
+	o.TaxAbsent.Set(&v)
+}
+// SetTaxAbsentNil sets the value for TaxAbsent to be an explicit nil
+func (o *Trust) SetTaxAbsentNil() {
+	o.TaxAbsent.Set(nil)
+}
+
+// UnsetTaxAbsent ensures that no value is present for TaxAbsent, not even an explicit nil
+func (o *Trust) UnsetTaxAbsent() {
+	o.TaxAbsent.Unset()
 }
 
 // GetTaxInformation returns the TaxInformation field value if set, zero value otherwise.
@@ -451,7 +460,7 @@ func (o *Trust) SetVatNumber(v string) {
 }
 
 func (o Trust) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -464,9 +473,6 @@ func (o Trust) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.DateOfIncorporation) {
 		toSerialize["dateOfIncorporation"] = o.DateOfIncorporation
 	}
-	if !common.IsNil(o.Description) {
-		toSerialize["description"] = o.Description
-	}
 	if !common.IsNil(o.DoingBusinessAs) {
 		toSerialize["doingBusinessAs"] = o.DoingBusinessAs
 	}
@@ -477,6 +483,9 @@ func (o Trust) ToMap() (map[string]interface{}, error) {
 	toSerialize["registeredAddress"] = o.RegisteredAddress
 	if !common.IsNil(o.RegistrationNumber) {
 		toSerialize["registrationNumber"] = o.RegistrationNumber
+	}
+	if o.TaxAbsent.IsSet() {
+		toSerialize["taxAbsent"] = o.TaxAbsent.Get()
 	}
 	if !common.IsNil(o.TaxInformation) {
 		toSerialize["taxInformation"] = o.TaxInformation
@@ -530,21 +539,23 @@ func (v *NullableTrust) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *Trust) isValidType() bool {
-	var allowedEnumValues = []string{"cashManagementTrust", "corporateUnitTrust", "deceasedEstate", "discretionaryInvestmentTrust", "discretionaryServicesManagementTrust", "discretionaryTradingTrust", "firstHomeSaverAccountsTrust", "fixedTrust", "fixedUnitTrust", "hybridTrust", "listedPublicUnitTrust", "otherTrust", "pooledSuperannuationTrust", "publicTradingTrust", "unlistedPublicUnitTrust"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "cashManagementTrust", "corporateUnitTrust", "deceasedEstate", "discretionaryInvestmentTrust", "discretionaryServicesManagementTrust", "discretionaryTradingTrust", "firstHomeSaverAccountsTrust", "fixedTrust", "fixedUnitTrust", "hybridTrust", "listedPublicUnitTrust", "otherTrust", "pooledSuperannuationTrust", "publicTradingTrust", "unlistedPublicUnitTrust" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *Trust) isValidVatAbsenceReason() bool {
-	var allowedEnumValues = []string{"industryExemption", "belowTaxThreshold"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetVatAbsenceReason() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "industryExemption", "belowTaxThreshold" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetVatAbsenceReason() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

@@ -10,8 +10,7 @@ package transfers
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the CZLocalAccountIdentification type satisfies the MappedNullable interface at compile time
@@ -23,8 +22,6 @@ type CZLocalAccountIdentification struct {
 	AccountNumber string `json:"accountNumber"`
 	// The 4-digit bank code (Kód banky), without separators or whitespace.
 	BankCode string `json:"bankCode"`
-	// The form factor of the account.  Possible values: **physical**, **virtual**. Default value: **physical**.
-	FormFactor common.NullableString `json:"formFactor,omitempty"`
 	// **czLocal**
 	Type string `json:"type"`
 }
@@ -37,8 +34,6 @@ func NewCZLocalAccountIdentification(accountNumber string, bankCode string, type
 	this := CZLocalAccountIdentification{}
 	this.AccountNumber = accountNumber
 	this.BankCode = bankCode
-	var formFactor string = "physical"
-	this.FormFactor = *common.NewNullableString(&formFactor)
 	this.Type = type_
 	return &this
 }
@@ -48,8 +43,6 @@ func NewCZLocalAccountIdentification(accountNumber string, bankCode string, type
 // but it doesn't guarantee that properties required by API are set
 func NewCZLocalAccountIdentificationWithDefaults() *CZLocalAccountIdentification {
 	this := CZLocalAccountIdentification{}
-	var formFactor string = "physical"
-	this.FormFactor = *common.NewNullableString(&formFactor)
 	var type_ string = "czLocal"
 	this.Type = type_
 	return &this
@@ -103,49 +96,6 @@ func (o *CZLocalAccountIdentification) SetBankCode(v string) {
 	o.BankCode = v
 }
 
-// GetFormFactor returns the FormFactor field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CZLocalAccountIdentification) GetFormFactor() string {
-	if o == nil || common.IsNil(o.FormFactor.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.FormFactor.Get()
-}
-
-// GetFormFactorOk returns a tuple with the FormFactor field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CZLocalAccountIdentification) GetFormFactorOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.FormFactor.Get(), o.FormFactor.IsSet()
-}
-
-// HasFormFactor returns a boolean if a field has been set.
-func (o *CZLocalAccountIdentification) HasFormFactor() bool {
-	if o != nil && o.FormFactor.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetFormFactor gets a reference to the given NullableString and assigns it to the FormFactor field.
-func (o *CZLocalAccountIdentification) SetFormFactor(v string) {
-	o.FormFactor.Set(&v)
-}
-
-// SetFormFactorNil sets the value for FormFactor to be an explicit nil
-func (o *CZLocalAccountIdentification) SetFormFactorNil() {
-	o.FormFactor.Set(nil)
-}
-
-// UnsetFormFactor ensures that no value is present for FormFactor, not even an explicit nil
-func (o *CZLocalAccountIdentification) UnsetFormFactor() {
-	o.FormFactor.Unset()
-}
-
 // GetType returns the Type field value
 func (o *CZLocalAccountIdentification) GetType() string {
 	if o == nil {
@@ -171,7 +121,7 @@ func (o *CZLocalAccountIdentification) SetType(v string) {
 }
 
 func (o CZLocalAccountIdentification) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -182,9 +132,6 @@ func (o CZLocalAccountIdentification) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["accountNumber"] = o.AccountNumber
 	toSerialize["bankCode"] = o.BankCode
-	if o.FormFactor.IsSet() {
-		toSerialize["formFactor"] = o.FormFactor.Get()
-	}
 	toSerialize["type"] = o.Type
 	return toSerialize, nil
 }
@@ -225,12 +172,14 @@ func (v *NullableCZLocalAccountIdentification) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *CZLocalAccountIdentification) isValidType() bool {
-	var allowedEnumValues = []string{"czLocal"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "czLocal" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

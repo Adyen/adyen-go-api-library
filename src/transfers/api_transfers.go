@@ -10,14 +10,10 @@ package transfers
 
 import (
 	"context"
-	"encoding/json"
-	"io/ioutil"
-	"net/http"
-	"net/url"
-	"strings"
-	"time"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "net/http"
+    "net/url"
+    "strings"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // TransfersApi service
@@ -25,16 +21,16 @@ type TransfersApi common.Service
 
 // All parameters accepted by TransfersApi.GetAllTransfers
 type TransfersApiGetAllTransfersInput struct {
-	createdSince        *time.Time
-	createdUntil        *time.Time
-	balancePlatform     *string
-	accountHolderId     *string
-	balanceAccountId    *string
+	createdSince *time.Time
+	createdUntil *time.Time
+	balancePlatform *string
+	accountHolderId *string
+	balanceAccountId *string
 	paymentInstrumentId *string
-	reference           *string
-	category            *string
-	cursor              *string
-	limit               *int32
+	reference *string
+	category *string
+	cursor *string
+	limit *int32
 }
 
 // Only include transfers that have been created on or after this point in time. The value must be in ISO 8601 format. For example, **2021-05-30T15:07:40Z**.
@@ -97,13 +93,15 @@ func (r TransfersApiGetAllTransfersInput) Limit(limit int32) TransfersApiGetAllT
 	return r
 }
 
+
 /*
 Prepare a request for GetAllTransfers
 
 @return TransfersApiGetAllTransfersInput
 */
 func (a *TransfersApi) GetAllTransfersInput() TransfersApiGetAllTransfersInput {
-	return TransfersApiGetAllTransfersInput{}
+	return TransfersApiGetAllTransfersInput{
+	}
 }
 
 /*
@@ -125,96 +123,98 @@ This endpoint supports cursor-based pagination. The response returns the first p
 @return FindTransfersResponse, *http.Response, error
 */
 func (a *TransfersApi) GetAllTransfers(ctx context.Context, r TransfersApiGetAllTransfersInput) (FindTransfersResponse, *http.Response, error) {
-	res := &FindTransfersResponse{}
+    res := &FindTransfersResponse{}
 	path := "/transfers"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	if r.balancePlatform != nil {
-		common.ParameterAddToQuery(queryParams, "balancePlatform", r.balancePlatform, "")
-	}
-	if r.accountHolderId != nil {
-		common.ParameterAddToQuery(queryParams, "accountHolderId", r.accountHolderId, "")
-	}
-	if r.balanceAccountId != nil {
-		common.ParameterAddToQuery(queryParams, "balanceAccountId", r.balanceAccountId, "")
-	}
-	if r.paymentInstrumentId != nil {
-		common.ParameterAddToQuery(queryParams, "paymentInstrumentId", r.paymentInstrumentId, "")
-	}
-	if r.reference != nil {
-		common.ParameterAddToQuery(queryParams, "reference", r.reference, "")
-	}
-	if r.category != nil {
-		common.ParameterAddToQuery(queryParams, "category", r.category, "")
-	}
-	if r.createdSince != nil {
-		common.ParameterAddToQuery(queryParams, "createdSince", r.createdSince, "")
-	}
-	if r.createdUntil != nil {
-		common.ParameterAddToQuery(queryParams, "createdUntil", r.createdUntil, "")
-	}
-	if r.cursor != nil {
-		common.ParameterAddToQuery(queryParams, "cursor", r.cursor, "")
-	}
-	if r.limit != nil {
-		common.ParameterAddToQuery(queryParams, "limit", r.limit, "")
-	}
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		nil,
-		res,
-		http.MethodGet,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    if r.balancePlatform != nil {
+        common.ParameterAddToQuery(queryParams, "balancePlatform", r.balancePlatform, "")
+    }
+    if r.accountHolderId != nil {
+        common.ParameterAddToQuery(queryParams, "accountHolderId", r.accountHolderId, "")
+    }
+    if r.balanceAccountId != nil {
+        common.ParameterAddToQuery(queryParams, "balanceAccountId", r.balanceAccountId, "")
+    }
+    if r.paymentInstrumentId != nil {
+        common.ParameterAddToQuery(queryParams, "paymentInstrumentId", r.paymentInstrumentId, "")
+    }
+    if r.reference != nil {
+        common.ParameterAddToQuery(queryParams, "reference", r.reference, "")
+    }
+    if r.category != nil {
+        common.ParameterAddToQuery(queryParams, "category", r.category, "")
+    }
+    if r.createdSince != nil {
+        common.ParameterAddToQuery(queryParams, "createdSince", r.createdSince, "")
+    }
+    if r.createdUntil != nil {
+        common.ParameterAddToQuery(queryParams, "createdUntil", r.createdUntil, "")
+    }
+    if r.cursor != nil {
+        common.ParameterAddToQuery(queryParams, "cursor", r.cursor, "")
+    }
+    if r.limit != nil {
+        common.ParameterAddToQuery(queryParams, "limit", r.limit, "")
+    }
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        nil,
+        res,
+        http.MethodGet,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	if httpRes == nil {
-		return *res, httpRes, err
-	}
+    if httpRes == nil {
+        return *res, httpRes, err
+    }
 
-	var serviceError common.RestServiceError
-	if httpRes.StatusCode == 401 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 403 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 422 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 500 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
+    var serviceError common.RestServiceError
+                        if httpRes.StatusCode == 401 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 403 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 422 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 500 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
 
-	return *res, httpRes, err
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by TransfersApi.GetTransfer
 type TransfersApiGetTransferInput struct {
 	id string
 }
+
 
 /*
 Prepare a request for GetTransfer
@@ -237,66 +237,67 @@ Returns a transfer.
 @return TransferData, *http.Response, error
 */
 func (a *TransfersApi) GetTransfer(ctx context.Context, r TransfersApiGetTransferInput) (TransferData, *http.Response, error) {
-	res := &TransferData{}
+    res := &TransferData{}
 	path := "/transfers/{id}"
-	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		nil,
-		res,
-		http.MethodGet,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        nil,
+        res,
+        http.MethodGet,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	if httpRes == nil {
-		return *res, httpRes, err
-	}
+    if httpRes == nil {
+        return *res, httpRes, err
+    }
 
-	var serviceError common.RestServiceError
-	if httpRes.StatusCode == 401 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 403 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 422 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 500 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
+    var serviceError common.RestServiceError
+                        if httpRes.StatusCode == 401 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 403 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 422 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 500 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
 
-	return *res, httpRes, err
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by TransfersApi.ReturnTransfer
 type TransfersApiReturnTransferInput struct {
-	transferId            string
+	transferId string
 	returnTransferRequest *ReturnTransferRequest
 }
 
@@ -304,6 +305,7 @@ func (r TransfersApiReturnTransferInput) ReturnTransferRequest(returnTransferReq
 	r.returnTransferRequest = &returnTransferRequest
 	return r
 }
+
 
 /*
 Prepare a request for ReturnTransfer
@@ -319,74 +321,75 @@ func (a *TransfersApi) ReturnTransferInput(transferId string) TransfersApiReturn
 /*
 ReturnTransfer Return a transfer
 
-Returns previously transferred funds without creating a new `transferId`.
+Initiates the return of previously transferred funds without creating a new `transferId`.
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TransfersApiReturnTransferInput - Request parameters, see ReturnTransferInput
 @return ReturnTransferResponse, *http.Response, error
 */
 func (a *TransfersApi) ReturnTransfer(ctx context.Context, r TransfersApiReturnTransferInput) (ReturnTransferResponse, *http.Response, error) {
-	res := &ReturnTransferResponse{}
+    res := &ReturnTransferResponse{}
 	path := "/transfers/{transferId}/returns"
-	path = strings.Replace(path, "{"+"transferId"+"}", url.PathEscape(common.ParameterValueToString(r.transferId, "transferId")), -1)
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.returnTransferRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    path = strings.Replace(path, "{"+"transferId"+"}", url.PathEscape(common.ParameterValueToString(r.transferId, "transferId")), -1)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.returnTransferRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	if httpRes == nil {
-		return *res, httpRes, err
-	}
+    if httpRes == nil {
+        return *res, httpRes, err
+    }
 
-	var serviceError common.RestServiceError
-	if httpRes.StatusCode == 401 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 403 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 422 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 500 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
+    var serviceError common.RestServiceError
+                        if httpRes.StatusCode == 401 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 403 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 422 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 500 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
 
-	return *res, httpRes, err
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by TransfersApi.TransferFunds
 type TransfersApiTransferFundsInput struct {
 	wWWAuthenticate *string
-	transferInfo    *TransferInfo
+	transferInfo *TransferInfo
 }
 
 // Header for authenticating through SCA
@@ -400,13 +403,15 @@ func (r TransfersApiTransferFundsInput) TransferInfo(transferInfo TransferInfo) 
 	return r
 }
 
+
 /*
 Prepare a request for TransferFunds
 
 @return TransfersApiTransferFundsInput
 */
 func (a *TransfersApi) TransferFundsInput() TransfersApiTransferFundsInput {
-	return TransfersApiTransferFundsInput{}
+	return TransfersApiTransferFundsInput{
+	}
 }
 
 /*
@@ -423,61 +428,62 @@ To use this endpoint, you need an additional role for your API credential and tr
 @return Transfer, *http.Response, error
 */
 func (a *TransfersApi) TransferFunds(ctx context.Context, r TransfersApiTransferFundsInput) (Transfer, *http.Response, error) {
-	res := &Transfer{}
+    res := &Transfer{}
 	path := "/transfers"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	if r.wWWAuthenticate != nil {
-		common.ParameterAddToHeaderOrQuery(headerParams, "WWW-Authenticate", r.wWWAuthenticate, "")
-	}
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.transferInfo,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    if r.wWWAuthenticate != nil {
+        common.ParameterAddToHeaderOrQuery(headerParams, "WWW-Authenticate", r.wWWAuthenticate, "")
+    }
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.transferInfo,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	if httpRes == nil {
-		return *res, httpRes, err
-	}
+    if httpRes == nil {
+        return *res, httpRes, err
+    }
 
-	var serviceError common.RestServiceError
-	if httpRes.StatusCode == 401 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 403 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 422 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 500 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
+    var serviceError common.RestServiceError
+                        if httpRes.StatusCode == 401 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 403 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 422 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 500 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
 
-	return *res, httpRes, err
+    return *res, httpRes, err
 }
+

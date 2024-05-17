@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the BalanceAccountUpdateRequest type satisfies the MappedNullable interface at compile time
@@ -21,14 +20,14 @@ var _ common.MappedNullable = &BalanceAccountUpdateRequest{}
 type BalanceAccountUpdateRequest struct {
 	// The unique identifier of the [account holder](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/accountHolders__resParam_id) associated with the balance account.
 	AccountHolderId *string `json:"accountHolderId,omitempty"`
-	// A human-readable description of the balance account, maximum 300 characters. You can use this parameter to distinguish between multiple balance accounts under an account holder.
+	// A human-readable description of the balance account. You can use this parameter to distinguish between multiple balance accounts under an account holder.
 	Description *string `json:"description,omitempty"`
 	// A set of key and value pairs for general use. The keys do not have specific names and may be used for storing miscellaneous data as desired. > Note that during an update of metadata, the omission of existing key-value pairs will result in the deletion of those key-value pairs.
-	Metadata                     *map[string]string            `json:"metadata,omitempty"`
+	Metadata *map[string]string `json:"metadata,omitempty"`
 	PlatformPaymentConfiguration *PlatformPaymentConfiguration `json:"platformPaymentConfiguration,omitempty"`
-	// Your reference to the balance account, maximum 150 characters.
+	// Your reference to the balance account.
 	Reference *string `json:"reference,omitempty"`
-	// The status of the balance account. Payment instruments linked to the balance account can only be used if the balance account status is **active**.  Possible values: **active**, **inactive**, **closed**, **suspended**.
+	// The status of the balance account. Payment instruments linked to the balance account can only be used if the balance account status is **active**.  Possible values: **active**, **closed**, **suspended**.
 	Status *string `json:"status,omitempty"`
 	// The time zone of the balance account. For example, **Europe/Amsterdam**. Defaults to the time zone of the account holder if no time zone is set. For possible values, see the [list of time zone codes](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 	TimeZone *string `json:"timeZone,omitempty"`
@@ -276,7 +275,7 @@ func (o *BalanceAccountUpdateRequest) SetTimeZone(v string) {
 }
 
 func (o BalanceAccountUpdateRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -345,12 +344,14 @@ func (v *NullableBalanceAccountUpdateRequest) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *BalanceAccountUpdateRequest) isValidStatus() bool {
-	var allowedEnumValues = []string{"active", "closed", "inactive", "suspended"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetStatus() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "active", "closed", "inactive", "suspended" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetStatus() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

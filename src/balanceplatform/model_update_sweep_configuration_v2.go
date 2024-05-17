@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the UpdateSweepConfigurationV2 type satisfies the MappedNullable interface at compile time
@@ -20,7 +19,7 @@ var _ common.MappedNullable = &UpdateSweepConfigurationV2{}
 // UpdateSweepConfigurationV2 struct for UpdateSweepConfigurationV2
 type UpdateSweepConfigurationV2 struct {
 	// The type of transfer that results from the sweep.  Possible values:   - **bank**: Sweep to a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id).  - **internal**: Transfer to another [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id) within your platform.  Required when setting `priorities`.
-	Category     *string            `json:"category,omitempty"`
+	Category *string `json:"category,omitempty"`
 	Counterparty *SweepCounterparty `json:"counterparty,omitempty"`
 	// The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes) in uppercase. For example, **EUR**.  The sweep currency must match any of the [balances currencies](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balanceAccounts/{id}__resParam_balances).
 	Currency *string `json:"currency,omitempty"`
@@ -28,15 +27,19 @@ type UpdateSweepConfigurationV2 struct {
 	Description *string `json:"description,omitempty"`
 	// The unique identifier of the sweep.
 	Id *string `json:"id,omitempty"`
-	// The list of priorities for the bank transfer. This sets the speed at which the transfer is sent and the fees that you have to pay. You can provide multiple priorities. Adyen will try to pay out using the priority listed first, and if that's not possible, it moves on to the next option in the order of provided priorities.  Possible values:  * **regular**: For normal, low-value transactions.  * **fast**: Faster way to transfer funds but has higher fees. Recommended for high-priority, low-value transactions.  * **wire**: Fastest way to transfer funds but has the highest fees. Recommended for high-priority, high-value transactions.  * **instant**: Instant way to transfer funds in [SEPA countries](https://www.ecb.europa.eu/paym/integration/retail/sepa/html/index.en.html).  * **crossBorder**: High-value transfer to a recipient in a different country.  * **internal**: Transfer to an Adyen-issued business bank account (by bank account number/IBAN).  Set `category` to **bank**. For more details, see [optional priorities setup](https://docs.adyen.com/marketplaces-and-platforms/payout-to-users/scheduled-payouts#optional-priorities-setup).
+	// The list of priorities for the bank transfer. This sets the speed at which the transfer is sent and the fees that you have to pay. You can provide multiple priorities. Adyen will try to pay out using the priority you list first. If that's not possible, it moves on to the next option in the order of your provided priorities.  Possible values:  * **regular**: For normal, low-value transactions.  * **fast**: Faster way to transfer funds but has higher fees. Recommended for high-priority, low-value transactions.  * **wire**: Fastest way to transfer funds but has the highest fees. Recommended for high-priority, high-value transactions.  * **instant**: Instant way to transfer funds in [SEPA countries](https://www.ecb.europa.eu/paym/integration/retail/sepa/html/index.en.html).  * **crossBorder**: High-value transfer to a recipient in a different country.  * **internal**: Transfer to an Adyen-issued business bank account (by bank account number/IBAN).  Set `category` to **bank**. For more details, see optional priorities setup for [marketplaces](https://docs.adyen.com/marketplaces/payout-to-users/scheduled-payouts#optional-priorities-setup) or [platforms](https://docs.adyen.com/platforms/payout-to-users/scheduled-payouts#optional-priorities-setup).
 	Priorities []string `json:"priorities,omitempty"`
 	// The reason for disabling the sweep.
-	Reason   *string        `json:"reason,omitempty"`
+	Reason *string `json:"reason,omitempty"`
+	// Your reference for the sweep configuration.
+	Reference *string `json:"reference,omitempty"`
+	// The reference sent to or received from the counterparty. Only alphanumeric characters are allowed.
+	ReferenceForBeneficiary *string `json:"referenceForBeneficiary,omitempty"`
 	Schedule *SweepSchedule `json:"schedule,omitempty"`
-	// The status of the sweep. If not provided, by default, this is set to **active**.  Possible values:    * **active**:  the sweep is enabled and funds will be pulled in or pushed out based on the defined configuration.    * **inactive**: the sweep is disabled and cannot be triggered.
-	Status        *string `json:"status,omitempty"`
-	SweepAmount   *Amount `json:"sweepAmount,omitempty"`
-	TargetAmount  *Amount `json:"targetAmount,omitempty"`
+	// The status of the sweep. If not provided, by default, this is set to **active**.  Possible values:    * **active**:  the sweep is enabled and funds will be pulled in or pushed out based on the defined configuration.    * **inactive**: the sweep is disabled and cannot be triggered.   
+	Status *string `json:"status,omitempty"`
+	SweepAmount *Amount `json:"sweepAmount,omitempty"`
+	TargetAmount *Amount `json:"targetAmount,omitempty"`
 	TriggerAmount *Amount `json:"triggerAmount,omitempty"`
 	// The direction of sweep, whether pushing out or pulling in funds to the balance account. If not provided, by default, this is set to **push**.  Possible values:   * **push**: _push out funds_ to a destination balance account or transfer instrument.   * **pull**: _pull in funds_ from a source merchant account, transfer instrument, or balance account.
 	Type *string `json:"type,omitempty"`
@@ -287,6 +290,70 @@ func (o *UpdateSweepConfigurationV2) SetReason(v string) {
 	o.Reason = &v
 }
 
+// GetReference returns the Reference field value if set, zero value otherwise.
+func (o *UpdateSweepConfigurationV2) GetReference() string {
+	if o == nil || common.IsNil(o.Reference) {
+		var ret string
+		return ret
+	}
+	return *o.Reference
+}
+
+// GetReferenceOk returns a tuple with the Reference field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateSweepConfigurationV2) GetReferenceOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Reference) {
+		return nil, false
+	}
+	return o.Reference, true
+}
+
+// HasReference returns a boolean if a field has been set.
+func (o *UpdateSweepConfigurationV2) HasReference() bool {
+	if o != nil && !common.IsNil(o.Reference) {
+		return true
+	}
+
+	return false
+}
+
+// SetReference gets a reference to the given string and assigns it to the Reference field.
+func (o *UpdateSweepConfigurationV2) SetReference(v string) {
+	o.Reference = &v
+}
+
+// GetReferenceForBeneficiary returns the ReferenceForBeneficiary field value if set, zero value otherwise.
+func (o *UpdateSweepConfigurationV2) GetReferenceForBeneficiary() string {
+	if o == nil || common.IsNil(o.ReferenceForBeneficiary) {
+		var ret string
+		return ret
+	}
+	return *o.ReferenceForBeneficiary
+}
+
+// GetReferenceForBeneficiaryOk returns a tuple with the ReferenceForBeneficiary field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateSweepConfigurationV2) GetReferenceForBeneficiaryOk() (*string, bool) {
+	if o == nil || common.IsNil(o.ReferenceForBeneficiary) {
+		return nil, false
+	}
+	return o.ReferenceForBeneficiary, true
+}
+
+// HasReferenceForBeneficiary returns a boolean if a field has been set.
+func (o *UpdateSweepConfigurationV2) HasReferenceForBeneficiary() bool {
+	if o != nil && !common.IsNil(o.ReferenceForBeneficiary) {
+		return true
+	}
+
+	return false
+}
+
+// SetReferenceForBeneficiary gets a reference to the given string and assigns it to the ReferenceForBeneficiary field.
+func (o *UpdateSweepConfigurationV2) SetReferenceForBeneficiary(v string) {
+	o.ReferenceForBeneficiary = &v
+}
+
 // GetSchedule returns the Schedule field value if set, zero value otherwise.
 func (o *UpdateSweepConfigurationV2) GetSchedule() SweepSchedule {
 	if o == nil || common.IsNil(o.Schedule) {
@@ -480,7 +547,7 @@ func (o *UpdateSweepConfigurationV2) SetType(v string) {
 }
 
 func (o UpdateSweepConfigurationV2) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -509,6 +576,12 @@ func (o UpdateSweepConfigurationV2) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Reason) {
 		toSerialize["reason"] = o.Reason
+	}
+	if !common.IsNil(o.Reference) {
+		toSerialize["reference"] = o.Reference
+	}
+	if !common.IsNil(o.ReferenceForBeneficiary) {
+		toSerialize["referenceForBeneficiary"] = o.ReferenceForBeneficiary
 	}
 	if !common.IsNil(o.Schedule) {
 		toSerialize["schedule"] = o.Schedule
@@ -567,39 +640,41 @@ func (v *NullableUpdateSweepConfigurationV2) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *UpdateSweepConfigurationV2) isValidCategory() bool {
-	var allowedEnumValues = []string{"bank", "internal", "platformPayment"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetCategory() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "bank", "internal", "platformPayment" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetCategory() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *UpdateSweepConfigurationV2) isValidReason() bool {
-	var allowedEnumValues = []string{"amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declinedByTransactionRule", "error", "notEnoughBalance", "refusedByCounterpartyBank", "routeNotFound", "scaFailed", "unknown"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetReason() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declinedByTransactionRule", "error", "notEnoughBalance", "pendingApproval", "refusedByCounterpartyBank", "routeNotFound", "scaFailed", "unknown" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetReason() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *UpdateSweepConfigurationV2) isValidStatus() bool {
-	var allowedEnumValues = []string{"active", "inactive"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetStatus() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "active", "inactive" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetStatus() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *UpdateSweepConfigurationV2) isValidType() bool {
-	var allowedEnumValues = []string{"pull", "push"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "pull", "push" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

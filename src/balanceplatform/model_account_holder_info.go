@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the AccountHolderInfo type satisfies the MappedNullable interface at compile time
@@ -22,9 +21,9 @@ type AccountHolderInfo struct {
 	// The unique identifier of the [balance platform](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balancePlatforms/{id}__queryParam_id) to which the account holder belongs. Required in the request if your API credentials can be used for multiple balance platforms.
 	BalancePlatform *string `json:"balancePlatform,omitempty"`
 	// Contains key-value pairs that specify the actions that an account holder can do in your platform. The key is a capability required for your integration. For example, **issueCard** for Issuing. The value is an object containing the settings for the capability.
-	Capabilities   *map[string]AccountHolderCapability `json:"capabilities,omitempty"`
-	ContactDetails *ContactDetails                     `json:"contactDetails,omitempty"`
-	// Your description for the account holder, maximum 300 characters.
+	Capabilities *map[string]AccountHolderCapability `json:"capabilities,omitempty"`
+	ContactDetails *ContactDetails `json:"contactDetails,omitempty"`
+	// Your description for the account holder.
 	Description *string `json:"description,omitempty"`
 	// The unique identifier of the [legal entity](https://docs.adyen.com/api-explorer/legalentity/latest/post/legalEntities#responses-200-id) associated with the account holder. Adyen performs a verification process against the legal entity of the account holder.
 	LegalEntityId string `json:"legalEntityId"`
@@ -32,7 +31,7 @@ type AccountHolderInfo struct {
 	Metadata *map[string]string `json:"metadata,omitempty"`
 	// The unique identifier of the migrated account holder in the classic integration.
 	MigratedAccountHolderCode *string `json:"migratedAccountHolderCode,omitempty"`
-	// Your reference for the account holder, maximum 150 characters.
+	// Your reference for the account holder.
 	Reference *string `json:"reference,omitempty"`
 	// The time zone of the account holder. For example, **Europe/Amsterdam**. Defaults to the time zone of the balance platform if no time zone is set. For possible values, see the [list of time zone codes](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 	TimeZone *string `json:"timeZone,omitempty"`
@@ -337,7 +336,7 @@ func (o *AccountHolderInfo) SetTimeZone(v string) {
 }
 
 func (o AccountHolderInfo) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -409,3 +408,6 @@ func (v *NullableAccountHolderInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

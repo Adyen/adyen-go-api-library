@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the TransactionRuleRestrictions type satisfies the MappedNullable interface at compile time
@@ -19,23 +18,24 @@ var _ common.MappedNullable = &TransactionRuleRestrictions{}
 
 // TransactionRuleRestrictions struct for TransactionRuleRestrictions
 type TransactionRuleRestrictions struct {
-	ActiveNetworkTokens         *ActiveNetworkTokensRestriction      `json:"activeNetworkTokens,omitempty"`
-	BrandVariants               *BrandVariantsRestriction            `json:"brandVariants,omitempty"`
-	CounterpartyBank            *CounterpartyBankRestriction         `json:"counterpartyBank,omitempty"`
-	Countries                   *CountriesRestriction                `json:"countries,omitempty"`
-	DayOfWeek                   *DayOfWeekRestriction                `json:"dayOfWeek,omitempty"`
-	DifferentCurrencies         *DifferentCurrenciesRestriction      `json:"differentCurrencies,omitempty"`
-	EntryModes                  *EntryModesRestriction               `json:"entryModes,omitempty"`
-	InternationalTransaction    *InternationalTransactionRestriction `json:"internationalTransaction,omitempty"`
-	MatchingTransactions        *MatchingTransactionsRestriction     `json:"matchingTransactions,omitempty"`
-	Mccs                        *MccsRestriction                     `json:"mccs,omitempty"`
-	MerchantNames               *MerchantNamesRestriction            `json:"merchantNames,omitempty"`
-	Merchants                   *MerchantsRestriction                `json:"merchants,omitempty"`
-	ProcessingTypes             *ProcessingTypesRestriction          `json:"processingTypes,omitempty"`
-	SameAmountRestriction       *SameAmountRestriction               `json:"sameAmountRestriction,omitempty"`
-	SameCounterpartyRestriction *SameCounterpartyRestriction         `json:"sameCounterpartyRestriction,omitempty"`
-	TimeOfDay                   *TimeOfDayRestriction                `json:"timeOfDay,omitempty"`
-	TotalAmount                 *TotalAmountRestriction              `json:"totalAmount,omitempty"`
+	ActiveNetworkTokens *ActiveNetworkTokensRestriction `json:"activeNetworkTokens,omitempty"`
+	BrandVariants *BrandVariantsRestriction `json:"brandVariants,omitempty"`
+	CounterpartyBank *CounterpartyBankRestriction `json:"counterpartyBank,omitempty"`
+	Countries *CountriesRestriction `json:"countries,omitempty"`
+	DayOfWeek *DayOfWeekRestriction `json:"dayOfWeek,omitempty"`
+	DifferentCurrencies *DifferentCurrenciesRestriction `json:"differentCurrencies,omitempty"`
+	EntryModes *EntryModesRestriction `json:"entryModes,omitempty"`
+	InternationalTransaction *InternationalTransactionRestriction `json:"internationalTransaction,omitempty"`
+	MatchingTransactions *MatchingTransactionsRestriction `json:"matchingTransactions,omitempty"`
+	Mccs *MccsRestriction `json:"mccs,omitempty"`
+	MerchantNames *MerchantNamesRestriction `json:"merchantNames,omitempty"`
+	Merchants *MerchantsRestriction `json:"merchants,omitempty"`
+	ProcessingTypes *ProcessingTypesRestriction `json:"processingTypes,omitempty"`
+	RiskScores *RiskScoresRestriction `json:"riskScores,omitempty"`
+	SameAmountRestriction *SameAmountRestriction `json:"sameAmountRestriction,omitempty"`
+	SameCounterpartyRestriction *SameCounterpartyRestriction `json:"sameCounterpartyRestriction,omitempty"`
+	TimeOfDay *TimeOfDayRestriction `json:"timeOfDay,omitempty"`
+	TotalAmount *TotalAmountRestriction `json:"totalAmount,omitempty"`
 }
 
 // NewTransactionRuleRestrictions instantiates a new TransactionRuleRestrictions object
@@ -471,6 +471,38 @@ func (o *TransactionRuleRestrictions) SetProcessingTypes(v ProcessingTypesRestri
 	o.ProcessingTypes = &v
 }
 
+// GetRiskScores returns the RiskScores field value if set, zero value otherwise.
+func (o *TransactionRuleRestrictions) GetRiskScores() RiskScoresRestriction {
+	if o == nil || common.IsNil(o.RiskScores) {
+		var ret RiskScoresRestriction
+		return ret
+	}
+	return *o.RiskScores
+}
+
+// GetRiskScoresOk returns a tuple with the RiskScores field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionRuleRestrictions) GetRiskScoresOk() (*RiskScoresRestriction, bool) {
+	if o == nil || common.IsNil(o.RiskScores) {
+		return nil, false
+	}
+	return o.RiskScores, true
+}
+
+// HasRiskScores returns a boolean if a field has been set.
+func (o *TransactionRuleRestrictions) HasRiskScores() bool {
+	if o != nil && !common.IsNil(o.RiskScores) {
+		return true
+	}
+
+	return false
+}
+
+// SetRiskScores gets a reference to the given RiskScoresRestriction and assigns it to the RiskScores field.
+func (o *TransactionRuleRestrictions) SetRiskScores(v RiskScoresRestriction) {
+	o.RiskScores = &v
+}
+
 // GetSameAmountRestriction returns the SameAmountRestriction field value if set, zero value otherwise.
 func (o *TransactionRuleRestrictions) GetSameAmountRestriction() SameAmountRestriction {
 	if o == nil || common.IsNil(o.SameAmountRestriction) {
@@ -600,7 +632,7 @@ func (o *TransactionRuleRestrictions) SetTotalAmount(v TotalAmountRestriction) {
 }
 
 func (o TransactionRuleRestrictions) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -647,6 +679,9 @@ func (o TransactionRuleRestrictions) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.ProcessingTypes) {
 		toSerialize["processingTypes"] = o.ProcessingTypes
+	}
+	if !common.IsNil(o.RiskScores) {
+		toSerialize["riskScores"] = o.RiskScores
 	}
 	if !common.IsNil(o.SameAmountRestriction) {
 		toSerialize["sameAmountRestriction"] = o.SameAmountRestriction
@@ -698,3 +733,6 @@ func (v *NullableTransactionRuleRestrictions) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

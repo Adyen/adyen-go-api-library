@@ -10,8 +10,7 @@ package payments
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the FundDestination type satisfies the MappedNullable interface at compile time
@@ -21,18 +20,20 @@ var _ common.MappedNullable = &FundDestination{}
 type FundDestination struct {
 	// a map of name/value pairs for passing in additional/industry-specific data
 	AdditionalData *map[string]string `json:"additionalData,omitempty"`
-	BillingAddress *Address           `json:"billingAddress,omitempty"`
-	Card           *Card              `json:"card,omitempty"`
+	BillingAddress *Address `json:"billingAddress,omitempty"`
+	Card *Card `json:"card,omitempty"`
 	// The `recurringDetailReference` you want to use for this payment. The value `LATEST` can be used to select the most recently stored recurring detail.
 	SelectedRecurringDetailReference *string `json:"selectedRecurringDetailReference,omitempty"`
 	// the email address of the person
 	ShopperEmail *string `json:"shopperEmail,omitempty"`
-	ShopperName  *Name   `json:"shopperName,omitempty"`
+	ShopperName *Name `json:"shopperName,omitempty"`
 	// Required for recurring payments.  Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters. > Your reference must not include personally identifiable information (PII), for example name or email address.
-	ShopperReference *string      `json:"shopperReference,omitempty"`
-	SubMerchant      *SubMerchant `json:"subMerchant,omitempty"`
+	ShopperReference *string `json:"shopperReference,omitempty"`
+	SubMerchant *SubMerchant `json:"subMerchant,omitempty"`
 	// the telephone number of the person
 	TelephoneNumber *string `json:"telephoneNumber,omitempty"`
+	// The purpose of a digital wallet transaction.
+	WalletPurpose *string `json:"walletPurpose,omitempty"`
 }
 
 // NewFundDestination instantiates a new FundDestination object
@@ -340,8 +341,40 @@ func (o *FundDestination) SetTelephoneNumber(v string) {
 	o.TelephoneNumber = &v
 }
 
+// GetWalletPurpose returns the WalletPurpose field value if set, zero value otherwise.
+func (o *FundDestination) GetWalletPurpose() string {
+	if o == nil || common.IsNil(o.WalletPurpose) {
+		var ret string
+		return ret
+	}
+	return *o.WalletPurpose
+}
+
+// GetWalletPurposeOk returns a tuple with the WalletPurpose field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FundDestination) GetWalletPurposeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.WalletPurpose) {
+		return nil, false
+	}
+	return o.WalletPurpose, true
+}
+
+// HasWalletPurpose returns a boolean if a field has been set.
+func (o *FundDestination) HasWalletPurpose() bool {
+	if o != nil && !common.IsNil(o.WalletPurpose) {
+		return true
+	}
+
+	return false
+}
+
+// SetWalletPurpose gets a reference to the given string and assigns it to the WalletPurpose field.
+func (o *FundDestination) SetWalletPurpose(v string) {
+	o.WalletPurpose = &v
+}
+
 func (o FundDestination) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -376,6 +409,9 @@ func (o FundDestination) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.TelephoneNumber) {
 		toSerialize["telephoneNumber"] = o.TelephoneNumber
+	}
+	if !common.IsNil(o.WalletPurpose) {
+		toSerialize["walletPurpose"] = o.WalletPurpose
 	}
 	return toSerialize, nil
 }
@@ -415,3 +451,6 @@ func (v *NullableFundDestination) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
