@@ -22,9 +22,8 @@ type OnboardingLinkInfo struct {
 	// The language that will be used for the page, specified by a combination of two letter [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language and [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. See possible valuesfor [marketplaces](https://docs.adyen.com/marketplaces/onboard-users/hosted#supported-languages) or [platforms](https://docs.adyen.com/platforms/onboard-users/hosted#supported-languages).   If not specified in the request or if the language is not supported, the page uses the browser language. If the browser language is not supported, the page uses **en-US** by default.
 	Locale *string `json:"locale,omitempty"`
 	// The URL where the user is redirected after they complete hosted onboarding.
-	RedirectUrl *string `json:"redirectUrl,omitempty"`
-	// Boolean key-value pairs indicating the settings for the hosted onboarding page. The keys are the settings.  Possible keys:  By default, these values are set to **true**. Set to **false** to not allow the action.  - **changeLegalEntityType**: The user can change their legal entity type.  - **editPrefilledCountry**: The user can change the country of their legal entity's address, for example the registered address of an organization.  By default, these values are set to **false**. Set to **true** to allow the action.  - **allowBankAccountFormatSelection**: The user can select the format for their payout account if applicable.  - **allowIntraRegionCrossBorderPayout**: The user can select a payout account in a different EU/EEA country (including Switzerland and the UK) than the country of their legal entity.  By default, these value are set to **false**. Set the following values to **true** to require the user to sign PCI questionnaires based on their sales channels. The user must sign PCI questionnaires for all relevant sales channels.  - **requirePciSignEcommerce**  - **requirePciSignPos**  - **requirePciSignEcomMoto**  - **requirePciSignPosMoto**
-	Settings *map[string]bool `json:"settings,omitempty"`
+	RedirectUrl *string                 `json:"redirectUrl,omitempty"`
+	Settings    *OnboardingLinkSettings `json:"settings,omitempty"`
 	// The unique identifier of the hosted onboarding theme.
 	ThemeId *string `json:"themeId,omitempty"`
 }
@@ -111,9 +110,9 @@ func (o *OnboardingLinkInfo) SetRedirectUrl(v string) {
 }
 
 // GetSettings returns the Settings field value if set, zero value otherwise.
-func (o *OnboardingLinkInfo) GetSettings() map[string]bool {
+func (o *OnboardingLinkInfo) GetSettings() OnboardingLinkSettings {
 	if o == nil || common.IsNil(o.Settings) {
-		var ret map[string]bool
+		var ret OnboardingLinkSettings
 		return ret
 	}
 	return *o.Settings
@@ -121,7 +120,7 @@ func (o *OnboardingLinkInfo) GetSettings() map[string]bool {
 
 // GetSettingsOk returns a tuple with the Settings field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OnboardingLinkInfo) GetSettingsOk() (*map[string]bool, bool) {
+func (o *OnboardingLinkInfo) GetSettingsOk() (*OnboardingLinkSettings, bool) {
 	if o == nil || common.IsNil(o.Settings) {
 		return nil, false
 	}
@@ -137,8 +136,8 @@ func (o *OnboardingLinkInfo) HasSettings() bool {
 	return false
 }
 
-// SetSettings gets a reference to the given map[string]bool and assigns it to the Settings field.
-func (o *OnboardingLinkInfo) SetSettings(v map[string]bool) {
+// SetSettings gets a reference to the given OnboardingLinkSettings and assigns it to the Settings field.
+func (o *OnboardingLinkInfo) SetSettings(v OnboardingLinkSettings) {
 	o.Settings = &v
 }
 

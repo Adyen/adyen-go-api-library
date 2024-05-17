@@ -19,8 +19,8 @@ var _ common.MappedNullable = &BankAccountModel{}
 
 // BankAccountModel struct for BankAccountModel
 type BankAccountModel struct {
-	// Form factor of the bank account - **virtual** or **physical** (default)
-	FormFactor *string `json:"formFactor,omitempty"`
+	// Business accounts with a `formFactor` value of **physical** are business accounts issued under the central bank of that country. The default value is **physical** for NL, US, and UK business accounts.   Adyen creates a local IBAN for business accounts when the `formFactor` value is set to **virtual**. The local IBANs that are supported are for DE and FR, which reference a physical NL account, with funds being routed through the central bank of NL.
+	FormFactor common.NullableString `json:"formFactor,omitempty"`
 }
 
 // NewBankAccountModel instantiates a new BankAccountModel object
@@ -29,6 +29,8 @@ type BankAccountModel struct {
 // will change when the set of required properties is changed
 func NewBankAccountModel() *BankAccountModel {
 	this := BankAccountModel{}
+	var formFactor = "physical"
+	this.FormFactor = *common.NewNullableString(&formFactor)
 	return &this
 }
 
@@ -37,39 +39,52 @@ func NewBankAccountModel() *BankAccountModel {
 // but it doesn't guarantee that properties required by API are set
 func NewBankAccountModelWithDefaults() *BankAccountModel {
 	this := BankAccountModel{}
+	var formFactor = "physical"
+	this.FormFactor = *common.NewNullableString(&formFactor)
 	return &this
 }
 
-// GetFormFactor returns the FormFactor field value if set, zero value otherwise.
+// GetFormFactor returns the FormFactor field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BankAccountModel) GetFormFactor() string {
-	if o == nil || common.IsNil(o.FormFactor) {
+	if o == nil || common.IsNil(o.FormFactor.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.FormFactor
+	return *o.FormFactor.Get()
 }
 
 // GetFormFactorOk returns a tuple with the FormFactor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BankAccountModel) GetFormFactorOk() (*string, bool) {
-	if o == nil || common.IsNil(o.FormFactor) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FormFactor, true
+	return o.FormFactor.Get(), o.FormFactor.IsSet()
 }
 
 // HasFormFactor returns a boolean if a field has been set.
 func (o *BankAccountModel) HasFormFactor() bool {
-	if o != nil && !common.IsNil(o.FormFactor) {
+	if o != nil && o.FormFactor.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetFormFactor gets a reference to the given string and assigns it to the FormFactor field.
+// SetFormFactor gets a reference to the given NullableString and assigns it to the FormFactor field.
 func (o *BankAccountModel) SetFormFactor(v string) {
-	o.FormFactor = &v
+	o.FormFactor.Set(&v)
+}
+
+// SetFormFactorNil sets the value for FormFactor to be an explicit nil
+func (o *BankAccountModel) SetFormFactorNil() {
+	o.FormFactor.Set(nil)
+}
+
+// UnsetFormFactor ensures that no value is present for FormFactor, not even an explicit nil
+func (o *BankAccountModel) UnsetFormFactor() {
+	o.FormFactor.Unset()
 }
 
 func (o BankAccountModel) MarshalJSON() ([]byte, error) {
@@ -82,8 +97,8 @@ func (o BankAccountModel) MarshalJSON() ([]byte, error) {
 
 func (o BankAccountModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !common.IsNil(o.FormFactor) {
-		toSerialize["formFactor"] = o.FormFactor
+	if o.FormFactor.IsSet() {
+		toSerialize["formFactor"] = o.FormFactor.Get()
 	}
 	return toSerialize, nil
 }

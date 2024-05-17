@@ -32,7 +32,7 @@ type IdentificationData struct {
 	NationalIdExempt *bool `json:"nationalIdExempt,omitempty"`
 	// The number in the document.
 	Number *string `json:"number,omitempty"`
-	// Type of identity data. For **individual**, the `type` value is **nationalIdNumber**.
+	// Type of identity data. For individuals, the `type` value is **nationalIdNumber**. For individuals in these countries, the following types are supported.  - Australia: **driversLicense**, **passport**  - Hong Kong: **driversLicense**, **nationalIdNumber**, **passport**  - New Zealand: **driversLicense**, **passport**  - Singapore: **driversLicense**, **nationalIdNumber**, **passport**
 	Type string `json:"type"`
 }
 
@@ -342,7 +342,7 @@ func (v *NullableIdentificationData) UnmarshalJSON(src []byte) error {
 }
 
 func (o *IdentificationData) isValidType() bool {
-	var allowedEnumValues = []string{"nationalIdNumber"}
+	var allowedEnumValues = []string{"nationalIdNumber", "passport", "driversLicense", "identityCard"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

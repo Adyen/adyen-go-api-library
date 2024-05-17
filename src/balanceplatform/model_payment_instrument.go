@@ -20,11 +20,12 @@ var _ common.MappedNullable = &PaymentInstrument{}
 // PaymentInstrument struct for PaymentInstrument
 type PaymentInstrument struct {
 	// Contains optional, additional business account details. Returned when you create a payment instrument with `type` **bankAccount**.
+	// Deprecated
 	AdditionalBankAccountIdentifications []PaymentInstrumentAdditionalBankAccountIdentificationsInner `json:"additionalBankAccountIdentifications,omitempty"`
 	// The unique identifier of the [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/v1/post/balanceAccounts__resParam_id) associated with the payment instrument.
-	BalanceAccountId string                        `json:"balanceAccountId"`
-	BankAccount      *PaymentInstrumentBankAccount `json:"bankAccount,omitempty"`
-	Card             *Card                         `json:"card,omitempty"`
+	BalanceAccountId string              `json:"balanceAccountId"`
+	BankAccount      *BankAccountDetails `json:"bankAccount,omitempty"`
+	Card             *Card               `json:"card,omitempty"`
 	// Your description for the payment instrument, maximum 300 characters.
 	Description *string `json:"description,omitempty"`
 	// The unique identifier of the payment instrument.
@@ -65,6 +66,7 @@ func NewPaymentInstrumentWithDefaults() *PaymentInstrument {
 }
 
 // GetAdditionalBankAccountIdentifications returns the AdditionalBankAccountIdentifications field value if set, zero value otherwise.
+// Deprecated
 func (o *PaymentInstrument) GetAdditionalBankAccountIdentifications() []PaymentInstrumentAdditionalBankAccountIdentificationsInner {
 	if o == nil || common.IsNil(o.AdditionalBankAccountIdentifications) {
 		var ret []PaymentInstrumentAdditionalBankAccountIdentificationsInner
@@ -75,6 +77,7 @@ func (o *PaymentInstrument) GetAdditionalBankAccountIdentifications() []PaymentI
 
 // GetAdditionalBankAccountIdentificationsOk returns a tuple with the AdditionalBankAccountIdentifications field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *PaymentInstrument) GetAdditionalBankAccountIdentificationsOk() ([]PaymentInstrumentAdditionalBankAccountIdentificationsInner, bool) {
 	if o == nil || common.IsNil(o.AdditionalBankAccountIdentifications) {
 		return nil, false
@@ -92,6 +95,7 @@ func (o *PaymentInstrument) HasAdditionalBankAccountIdentifications() bool {
 }
 
 // SetAdditionalBankAccountIdentifications gets a reference to the given []PaymentInstrumentAdditionalBankAccountIdentificationsInner and assigns it to the AdditionalBankAccountIdentifications field.
+// Deprecated
 func (o *PaymentInstrument) SetAdditionalBankAccountIdentifications(v []PaymentInstrumentAdditionalBankAccountIdentificationsInner) {
 	o.AdditionalBankAccountIdentifications = v
 }
@@ -121,9 +125,9 @@ func (o *PaymentInstrument) SetBalanceAccountId(v string) {
 }
 
 // GetBankAccount returns the BankAccount field value if set, zero value otherwise.
-func (o *PaymentInstrument) GetBankAccount() PaymentInstrumentBankAccount {
+func (o *PaymentInstrument) GetBankAccount() BankAccountDetails {
 	if o == nil || common.IsNil(o.BankAccount) {
-		var ret PaymentInstrumentBankAccount
+		var ret BankAccountDetails
 		return ret
 	}
 	return *o.BankAccount
@@ -131,7 +135,7 @@ func (o *PaymentInstrument) GetBankAccount() PaymentInstrumentBankAccount {
 
 // GetBankAccountOk returns a tuple with the BankAccount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentInstrument) GetBankAccountOk() (*PaymentInstrumentBankAccount, bool) {
+func (o *PaymentInstrument) GetBankAccountOk() (*BankAccountDetails, bool) {
 	if o == nil || common.IsNil(o.BankAccount) {
 		return nil, false
 	}
@@ -147,8 +151,8 @@ func (o *PaymentInstrument) HasBankAccount() bool {
 	return false
 }
 
-// SetBankAccount gets a reference to the given PaymentInstrumentBankAccount and assigns it to the BankAccount field.
-func (o *PaymentInstrument) SetBankAccount(v PaymentInstrumentBankAccount) {
+// SetBankAccount gets a reference to the given BankAccountDetails and assigns it to the BankAccount field.
+func (o *PaymentInstrument) SetBankAccount(v BankAccountDetails) {
 	o.BankAccount = &v
 }
 

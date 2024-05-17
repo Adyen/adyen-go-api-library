@@ -41,7 +41,7 @@ func (a *GrantAccountsApi) GetGrantAccountInput(id string) GrantAccountsApiGetGr
 /*
 GetGrantAccount Get a grant account
 
-Returns the details of the [grant account](https://docs.adyen.com/marketplaces-and-platforms/capital#grant-account).
+Returns the details of the [grant account](https://docs.adyen.com/platforms/capital#grant-account).
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r GrantAccountsApiGetGrantAccountInput - Request parameters, see GetGrantAccountInput

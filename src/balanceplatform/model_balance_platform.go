@@ -19,7 +19,7 @@ var _ common.MappedNullable = &BalancePlatform{}
 
 // BalancePlatform struct for BalancePlatform
 type BalancePlatform struct {
-	// Your description of the balance platform, maximum 300 characters.
+	// Your description of the balance platform.
 	Description *string `json:"description,omitempty"`
 	// The unique identifier of the balance platform.
 	Id string `json:"id"`

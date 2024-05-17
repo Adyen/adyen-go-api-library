@@ -51,9 +51,9 @@ type TransferData struct {
 	// The sequence number of the transfer notification. The numbers start from 1 and increase with each new notification for a specific transfer.  It can help you restore the correct sequence of events even if they arrive out of order.
 	SequenceNumber *int32 `json:"sequenceNumber,omitempty"`
 	// The result of the transfer.   For example, **authorised**, **refused**, or **error**.
-	Status                 string                                `json:"status"`
-	Tracking               *TransferNotificationTransferTracking `json:"tracking,omitempty"`
-	TransactionRulesResult *TransactionRulesResult               `json:"transactionRulesResult,omitempty"`
+	Status                 string                  `json:"status"`
+	Tracking               *TransferDataTracking   `json:"tracking,omitempty"`
+	TransactionRulesResult *TransactionRulesResult `json:"transactionRulesResult,omitempty"`
 	// The type of transfer or transaction. For example, **refund**, **payment**, **internalTransfer**, **bankTransfer**.
 	Type *string `json:"type,omitempty"`
 }
@@ -663,9 +663,9 @@ func (o *TransferData) SetStatus(v string) {
 }
 
 // GetTracking returns the Tracking field value if set, zero value otherwise.
-func (o *TransferData) GetTracking() TransferNotificationTransferTracking {
+func (o *TransferData) GetTracking() TransferDataTracking {
 	if o == nil || common.IsNil(o.Tracking) {
-		var ret TransferNotificationTransferTracking
+		var ret TransferDataTracking
 		return ret
 	}
 	return *o.Tracking
@@ -673,7 +673,7 @@ func (o *TransferData) GetTracking() TransferNotificationTransferTracking {
 
 // GetTrackingOk returns a tuple with the Tracking field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TransferData) GetTrackingOk() (*TransferNotificationTransferTracking, bool) {
+func (o *TransferData) GetTrackingOk() (*TransferDataTracking, bool) {
 	if o == nil || common.IsNil(o.Tracking) {
 		return nil, false
 	}
@@ -689,8 +689,8 @@ func (o *TransferData) HasTracking() bool {
 	return false
 }
 
-// SetTracking gets a reference to the given TransferNotificationTransferTracking and assigns it to the Tracking field.
-func (o *TransferData) SetTracking(v TransferNotificationTransferTracking) {
+// SetTracking gets a reference to the given TransferDataTracking and assigns it to the Tracking field.
+func (o *TransferData) SetTracking(v TransferDataTracking) {
 	o.Tracking = &v
 }
 
@@ -886,7 +886,7 @@ func (o *TransferData) isValidDirection() bool {
 	return false
 }
 func (o *TransferData) isValidReason() bool {
-	var allowedEnumValues = []string{"amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declinedByTransactionRule", "error", "notEnoughBalance", "refusedByCounterpartyBank", "routeNotFound", "scaFailed", "unknown"}
+	var allowedEnumValues = []string{"amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declinedByTransactionRule", "error", "notEnoughBalance", "pendingApproval", "refusedByCounterpartyBank", "routeNotFound", "scaFailed", "unknown"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetReason() == allowed {
 			return true
@@ -904,7 +904,7 @@ func (o *TransferData) isValidStatus() bool {
 	return false
 }
 func (o *TransferData) isValidType() bool {
-	var allowedEnumValues = []string{"atmWithdrawal", "atmWithdrawalReversal", "balanceAdjustment", "balanceMigration", "balanceRollover", "bankDirectDebit", "bankTransfer", "capture", "captureReversal", "cardTransfer", "cashOutFee", "cashOutFunding", "cashOutInstruction", "chargeback", "chargebackCorrection", "chargebackReversal", "chargebackReversalCorrection", "depositCorrection", "fee", "grant", "installment", "installmentReversal", "internalDirectDebit", "internalTransfer", "invoiceDeduction", "leftover", "manualCorrection", "miscCost", "payment", "paymentCost", "refund", "refundReversal", "repayment", "reserveAdjustment", "secondChargeback", "secondChargebackCorrection"}
+	var allowedEnumValues = []string{"atmWithdrawal", "atmWithdrawalReversal", "balanceAdjustment", "balanceMigration", "balanceRollover", "bankDirectDebit", "bankTransfer", "capitalFundsCollection", "capture", "captureReversal", "cardTransfer", "cashOutFee", "cashOutFunding", "cashOutInstruction", "chargeback", "chargebackCorrection", "chargebackReversal", "chargebackReversalCorrection", "depositCorrection", "fee", "grant", "installment", "installmentReversal", "internalDirectDebit", "internalTransfer", "invoiceDeduction", "leftover", "manualCorrection", "miscCost", "payment", "paymentCost", "refund", "refundReversal", "repayment", "reserveAdjustment", "secondChargeback", "secondChargebackCorrection"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

@@ -19,6 +19,7 @@ var _ common.MappedNullable = &TransferView{}
 
 // TransferView struct for TransferView
 type TransferView struct {
+	CategoryData *TransferCategoryData `json:"categoryData,omitempty"`
 	// The ID of the resource.
 	Id *string `json:"id,omitempty"`
 	// The [`reference`](https://docs.adyen.com/api-explorer/#/transfers/latest/post/transfers__reqParam_reference) from the `/transfers` request. If you haven't provided any, Adyen generates a unique reference.
@@ -41,6 +42,38 @@ func NewTransferView(reference string) *TransferView {
 func NewTransferViewWithDefaults() *TransferView {
 	this := TransferView{}
 	return &this
+}
+
+// GetCategoryData returns the CategoryData field value if set, zero value otherwise.
+func (o *TransferView) GetCategoryData() TransferCategoryData {
+	if o == nil || common.IsNil(o.CategoryData) {
+		var ret TransferCategoryData
+		return ret
+	}
+	return *o.CategoryData
+}
+
+// GetCategoryDataOk returns a tuple with the CategoryData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransferView) GetCategoryDataOk() (*TransferCategoryData, bool) {
+	if o == nil || common.IsNil(o.CategoryData) {
+		return nil, false
+	}
+	return o.CategoryData, true
+}
+
+// HasCategoryData returns a boolean if a field has been set.
+func (o *TransferView) HasCategoryData() bool {
+	if o != nil && !common.IsNil(o.CategoryData) {
+		return true
+	}
+
+	return false
+}
+
+// SetCategoryData gets a reference to the given TransferCategoryData and assigns it to the CategoryData field.
+func (o *TransferView) SetCategoryData(v TransferCategoryData) {
+	o.CategoryData = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -109,6 +142,9 @@ func (o TransferView) MarshalJSON() ([]byte, error) {
 
 func (o TransferView) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.CategoryData) {
+		toSerialize["categoryData"] = o.CategoryData
+	}
 	if !common.IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}

@@ -23,8 +23,6 @@ type SoleProprietorship struct {
 	CountryOfGoverningLaw string `json:"countryOfGoverningLaw"`
 	// The date when the legal arrangement was incorporated in YYYY-MM-DD format.
 	DateOfIncorporation *string `json:"dateOfIncorporation,omitempty"`
-	// Short description about the Legal Arrangement.
-	Description *string `json:"description,omitempty"`
 	// The registered name, if different from the `name`.
 	DoingBusinessAs *string `json:"doingBusinessAs,omitempty"`
 	// The legal name.
@@ -33,6 +31,8 @@ type SoleProprietorship struct {
 	RegisteredAddress        Address  `json:"registeredAddress"`
 	// The registration number.
 	RegistrationNumber *string `json:"registrationNumber,omitempty"`
+	// The tax information is absent.
+	TaxAbsent common.NullableBool `json:"taxAbsent,omitempty"`
 	// The tax information of the entity.
 	TaxInformation []TaxInformation `json:"taxInformation,omitempty"`
 	// The reason for not providing a VAT number.  Possible values: **industryExemption**, **belowTaxThreshold**.
@@ -115,38 +115,6 @@ func (o *SoleProprietorship) HasDateOfIncorporation() bool {
 // SetDateOfIncorporation gets a reference to the given string and assigns it to the DateOfIncorporation field.
 func (o *SoleProprietorship) SetDateOfIncorporation(v string) {
 	o.DateOfIncorporation = &v
-}
-
-// GetDescription returns the Description field value if set, zero value otherwise.
-func (o *SoleProprietorship) GetDescription() string {
-	if o == nil || common.IsNil(o.Description) {
-		var ret string
-		return ret
-	}
-	return *o.Description
-}
-
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SoleProprietorship) GetDescriptionOk() (*string, bool) {
-	if o == nil || common.IsNil(o.Description) {
-		return nil, false
-	}
-	return o.Description, true
-}
-
-// HasDescription returns a boolean if a field has been set.
-func (o *SoleProprietorship) HasDescription() bool {
-	if o != nil && !common.IsNil(o.Description) {
-		return true
-	}
-
-	return false
-}
-
-// SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *SoleProprietorship) SetDescription(v string) {
-	o.Description = &v
 }
 
 // GetDoingBusinessAs returns the DoingBusinessAs field value if set, zero value otherwise.
@@ -293,6 +261,49 @@ func (o *SoleProprietorship) SetRegistrationNumber(v string) {
 	o.RegistrationNumber = &v
 }
 
+// GetTaxAbsent returns the TaxAbsent field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SoleProprietorship) GetTaxAbsent() bool {
+	if o == nil || common.IsNil(o.TaxAbsent.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.TaxAbsent.Get()
+}
+
+// GetTaxAbsentOk returns a tuple with the TaxAbsent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SoleProprietorship) GetTaxAbsentOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TaxAbsent.Get(), o.TaxAbsent.IsSet()
+}
+
+// HasTaxAbsent returns a boolean if a field has been set.
+func (o *SoleProprietorship) HasTaxAbsent() bool {
+	if o != nil && o.TaxAbsent.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTaxAbsent gets a reference to the given NullableBool and assigns it to the TaxAbsent field.
+func (o *SoleProprietorship) SetTaxAbsent(v bool) {
+	o.TaxAbsent.Set(&v)
+}
+
+// SetTaxAbsentNil sets the value for TaxAbsent to be an explicit nil
+func (o *SoleProprietorship) SetTaxAbsentNil() {
+	o.TaxAbsent.Set(nil)
+}
+
+// UnsetTaxAbsent ensures that no value is present for TaxAbsent, not even an explicit nil
+func (o *SoleProprietorship) UnsetTaxAbsent() {
+	o.TaxAbsent.Unset()
+}
+
 // GetTaxInformation returns the TaxInformation field value if set, zero value otherwise.
 func (o *SoleProprietorship) GetTaxInformation() []TaxInformation {
 	if o == nil || common.IsNil(o.TaxInformation) {
@@ -403,9 +414,6 @@ func (o SoleProprietorship) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.DateOfIncorporation) {
 		toSerialize["dateOfIncorporation"] = o.DateOfIncorporation
 	}
-	if !common.IsNil(o.Description) {
-		toSerialize["description"] = o.Description
-	}
 	if !common.IsNil(o.DoingBusinessAs) {
 		toSerialize["doingBusinessAs"] = o.DoingBusinessAs
 	}
@@ -416,6 +424,9 @@ func (o SoleProprietorship) ToMap() (map[string]interface{}, error) {
 	toSerialize["registeredAddress"] = o.RegisteredAddress
 	if !common.IsNil(o.RegistrationNumber) {
 		toSerialize["registrationNumber"] = o.RegistrationNumber
+	}
+	if o.TaxAbsent.IsSet() {
+		toSerialize["taxAbsent"] = o.TaxAbsent.Get()
 	}
 	if !common.IsNil(o.TaxInformation) {
 		toSerialize["taxInformation"] = o.TaxInformation

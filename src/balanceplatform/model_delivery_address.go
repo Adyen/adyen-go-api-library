@@ -23,15 +23,15 @@ type DeliveryAddress struct {
 	City *string `json:"city,omitempty"`
 	// The two-character ISO-3166-1 alpha-2 country code. For example, **US**. >If you don't know the country or are not collecting the country from the shopper, provide `country` as `ZZ`.
 	Country string `json:"country"`
-	// The street name. For example, if the address is \"Rokin 49\", provide \"Rokin\".
+	// The name of the street. Do not include the number of the building.  For example, if the address is Simon Carmiggeltstraat 6-50, provide **Simon Carmiggeltstraat**.
 	Line1 *string `json:"line1,omitempty"`
-	// The house number or name. For example, if the address is \"Rokin 49\", provide \"49\".
+	// The number of the building.  For example, if the address is Simon Carmiggeltstraat 6-50, provide **6-50**.
 	Line2 *string `json:"line2,omitempty"`
-	// Optional information about the address.
+	// Additional information about the delivery address.
 	Line3 *string `json:"line3,omitempty"`
 	// The postal code. Maximum length: * 5 digits for an address in the US. * 10 characters for an address in all other countries.
 	PostalCode *string `json:"postalCode,omitempty"`
-	// The two-letterISO 3166-2 state or province code. For example, **CA** in the US or **ON** in Canada. > Required for the US and Canada.
+	// The two-letter ISO 3166-2 state or province code. For example, **CA** in the US or **ON** in Canada. > Required for the US and Canada.
 	StateOrProvince *string `json:"stateOrProvince,omitempty"`
 }
 

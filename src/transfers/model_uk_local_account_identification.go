@@ -21,8 +21,6 @@ var _ common.MappedNullable = &UKLocalAccountIdentification{}
 type UKLocalAccountIdentification struct {
 	// The 8-digit bank account number, without separators or whitespace.
 	AccountNumber string `json:"accountNumber"`
-	// The form factor of the account.  Possible values: **physical**, **virtual**. Default value: **physical**.
-	FormFactor common.NullableString `json:"formFactor,omitempty"`
 	// The 6-digit [sort code](https://en.wikipedia.org/wiki/Sort_code), without separators or whitespace.
 	SortCode string `json:"sortCode"`
 	// **ukLocal**
@@ -36,8 +34,6 @@ type UKLocalAccountIdentification struct {
 func NewUKLocalAccountIdentification(accountNumber string, sortCode string, type_ string) *UKLocalAccountIdentification {
 	this := UKLocalAccountIdentification{}
 	this.AccountNumber = accountNumber
-	var formFactor string = "physical"
-	this.FormFactor = *common.NewNullableString(&formFactor)
 	this.SortCode = sortCode
 	this.Type = type_
 	return &this
@@ -48,8 +44,6 @@ func NewUKLocalAccountIdentification(accountNumber string, sortCode string, type
 // but it doesn't guarantee that properties required by API are set
 func NewUKLocalAccountIdentificationWithDefaults() *UKLocalAccountIdentification {
 	this := UKLocalAccountIdentification{}
-	var formFactor string = "physical"
-	this.FormFactor = *common.NewNullableString(&formFactor)
 	var type_ string = "ukLocal"
 	this.Type = type_
 	return &this
@@ -77,49 +71,6 @@ func (o *UKLocalAccountIdentification) GetAccountNumberOk() (*string, bool) {
 // SetAccountNumber sets field value
 func (o *UKLocalAccountIdentification) SetAccountNumber(v string) {
 	o.AccountNumber = v
-}
-
-// GetFormFactor returns the FormFactor field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *UKLocalAccountIdentification) GetFormFactor() string {
-	if o == nil || common.IsNil(o.FormFactor.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.FormFactor.Get()
-}
-
-// GetFormFactorOk returns a tuple with the FormFactor field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *UKLocalAccountIdentification) GetFormFactorOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.FormFactor.Get(), o.FormFactor.IsSet()
-}
-
-// HasFormFactor returns a boolean if a field has been set.
-func (o *UKLocalAccountIdentification) HasFormFactor() bool {
-	if o != nil && o.FormFactor.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetFormFactor gets a reference to the given NullableString and assigns it to the FormFactor field.
-func (o *UKLocalAccountIdentification) SetFormFactor(v string) {
-	o.FormFactor.Set(&v)
-}
-
-// SetFormFactorNil sets the value for FormFactor to be an explicit nil
-func (o *UKLocalAccountIdentification) SetFormFactorNil() {
-	o.FormFactor.Set(nil)
-}
-
-// UnsetFormFactor ensures that no value is present for FormFactor, not even an explicit nil
-func (o *UKLocalAccountIdentification) UnsetFormFactor() {
-	o.FormFactor.Unset()
 }
 
 // GetSortCode returns the SortCode field value
@@ -181,9 +132,6 @@ func (o UKLocalAccountIdentification) MarshalJSON() ([]byte, error) {
 func (o UKLocalAccountIdentification) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["accountNumber"] = o.AccountNumber
-	if o.FormFactor.IsSet() {
-		toSerialize["formFactor"] = o.FormFactor.Get()
-	}
 	toSerialize["sortCode"] = o.SortCode
 	toSerialize["type"] = o.Type
 	return toSerialize, nil

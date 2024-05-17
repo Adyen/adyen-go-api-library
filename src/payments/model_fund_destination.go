@@ -33,6 +33,8 @@ type FundDestination struct {
 	SubMerchant      *SubMerchant `json:"subMerchant,omitempty"`
 	// the telephone number of the person
 	TelephoneNumber *string `json:"telephoneNumber,omitempty"`
+	// The purpose of a digital wallet transaction.
+	WalletPurpose *string `json:"walletPurpose,omitempty"`
 }
 
 // NewFundDestination instantiates a new FundDestination object
@@ -340,6 +342,38 @@ func (o *FundDestination) SetTelephoneNumber(v string) {
 	o.TelephoneNumber = &v
 }
 
+// GetWalletPurpose returns the WalletPurpose field value if set, zero value otherwise.
+func (o *FundDestination) GetWalletPurpose() string {
+	if o == nil || common.IsNil(o.WalletPurpose) {
+		var ret string
+		return ret
+	}
+	return *o.WalletPurpose
+}
+
+// GetWalletPurposeOk returns a tuple with the WalletPurpose field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FundDestination) GetWalletPurposeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.WalletPurpose) {
+		return nil, false
+	}
+	return o.WalletPurpose, true
+}
+
+// HasWalletPurpose returns a boolean if a field has been set.
+func (o *FundDestination) HasWalletPurpose() bool {
+	if o != nil && !common.IsNil(o.WalletPurpose) {
+		return true
+	}
+
+	return false
+}
+
+// SetWalletPurpose gets a reference to the given string and assigns it to the WalletPurpose field.
+func (o *FundDestination) SetWalletPurpose(v string) {
+	o.WalletPurpose = &v
+}
+
 func (o FundDestination) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -376,6 +410,9 @@ func (o FundDestination) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.TelephoneNumber) {
 		toSerialize["telephoneNumber"] = o.TelephoneNumber
+	}
+	if !common.IsNil(o.WalletPurpose) {
+		toSerialize["walletPurpose"] = o.WalletPurpose
 	}
 	return toSerialize, nil
 }

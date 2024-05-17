@@ -19,11 +19,11 @@ var _ common.MappedNullable = &CounterpartyV3{}
 
 // CounterpartyV3 struct for CounterpartyV3
 type CounterpartyV3 struct {
-	// Unique identifier of the [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id).
+	// The unique identifier of the [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id).
 	BalanceAccountId *string        `json:"balanceAccountId,omitempty"`
 	BankAccount      *BankAccountV3 `json:"bankAccount,omitempty"`
 	Merchant         *MerchantData  `json:"merchant,omitempty"`
-	// Unique identifier of the [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id).
+	// The unique identifier of the [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id).
 	TransferInstrumentId *string `json:"transferInstrumentId,omitempty"`
 }
 

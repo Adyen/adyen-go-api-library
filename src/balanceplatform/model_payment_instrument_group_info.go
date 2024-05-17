@@ -21,11 +21,11 @@ var _ common.MappedNullable = &PaymentInstrumentGroupInfo{}
 type PaymentInstrumentGroupInfo struct {
 	// The unique identifier of the [balance platform](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balancePlatforms/{id}__queryParam_id) to which the payment instrument group belongs.
 	BalancePlatform string `json:"balancePlatform"`
-	// Your description for the payment instrument group, maximum 300 characters.
+	// Your description for the payment instrument group.
 	Description *string `json:"description,omitempty"`
 	// Properties of the payment instrument group.
 	Properties *map[string]string `json:"properties,omitempty"`
-	// Your reference for the payment instrument group, maximum 150 characters.
+	// Your reference for the payment instrument group.
 	Reference *string `json:"reference,omitempty"`
 	// The tx variant of the payment instrument group.
 	TxVariant string `json:"txVariant"`

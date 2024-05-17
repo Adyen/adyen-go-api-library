@@ -20,6 +20,8 @@ var _ common.MappedNullable = &DeliveryContact{}
 // DeliveryContact struct for DeliveryContact
 type DeliveryContact struct {
 	Address DeliveryAddress `json:"address"`
+	// The company name of the contact.
+	Company *string `json:"company,omitempty"`
 	// The email address of the contact.
 	Email *string `json:"email,omitempty"`
 	// The full phone number of the contact provided as a single string. It will be handled as a landline phone. **Examples:** \"0031 6 11 22 33 44\", \"+316/1122-3344\", \"(0031) 611223344\"
@@ -71,6 +73,38 @@ func (o *DeliveryContact) GetAddressOk() (*DeliveryAddress, bool) {
 // SetAddress sets field value
 func (o *DeliveryContact) SetAddress(v DeliveryAddress) {
 	o.Address = v
+}
+
+// GetCompany returns the Company field value if set, zero value otherwise.
+func (o *DeliveryContact) GetCompany() string {
+	if o == nil || common.IsNil(o.Company) {
+		var ret string
+		return ret
+	}
+	return *o.Company
+}
+
+// GetCompanyOk returns a tuple with the Company field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DeliveryContact) GetCompanyOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Company) {
+		return nil, false
+	}
+	return o.Company, true
+}
+
+// HasCompany returns a boolean if a field has been set.
+func (o *DeliveryContact) HasCompany() bool {
+	if o != nil && !common.IsNil(o.Company) {
+		return true
+	}
+
+	return false
+}
+
+// SetCompany gets a reference to the given string and assigns it to the Company field.
+func (o *DeliveryContact) SetCompany(v string) {
+	o.Company = &v
 }
 
 // GetEmail returns the Email field value if set, zero value otherwise.
@@ -236,6 +270,9 @@ func (o DeliveryContact) MarshalJSON() ([]byte, error) {
 func (o DeliveryContact) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["address"] = o.Address
+	if !common.IsNil(o.Company) {
+		toSerialize["company"] = o.Company
+	}
 	if !common.IsNil(o.Email) {
 		toSerialize["email"] = o.Email
 	}

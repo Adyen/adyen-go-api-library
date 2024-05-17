@@ -125,9 +125,9 @@ func (o *TerminalSettings) SetConnectivity(v Connectivity) {
 	o.Connectivity = &v
 }
 
-// GetGratuities returns the Gratuities field value if set, zero value otherwise.
+// GetGratuities returns the Gratuities field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TerminalSettings) GetGratuities() []Gratuity {
-	if o == nil || common.IsNil(o.Gratuities) {
+	if o == nil {
 		var ret []Gratuity
 		return ret
 	}
@@ -136,6 +136,7 @@ func (o *TerminalSettings) GetGratuities() []Gratuity {
 
 // GetGratuitiesOk returns a tuple with the Gratuities field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TerminalSettings) GetGratuitiesOk() ([]Gratuity, bool) {
 	if o == nil || common.IsNil(o.Gratuities) {
 		return nil, false
@@ -145,7 +146,7 @@ func (o *TerminalSettings) GetGratuitiesOk() ([]Gratuity, bool) {
 
 // HasGratuities returns a boolean if a field has been set.
 func (o *TerminalSettings) HasGratuities() bool {
-	if o != nil && !common.IsNil(o.Gratuities) {
+	if o != nil && common.IsNil(o.Gratuities) {
 		return true
 	}
 
@@ -781,7 +782,7 @@ func (o TerminalSettings) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Connectivity) {
 		toSerialize["connectivity"] = o.Connectivity
 	}
-	if !common.IsNil(o.Gratuities) {
+	if o.Gratuities != nil {
 		toSerialize["gratuities"] = o.Gratuities
 	}
 	if !common.IsNil(o.Hardware) {

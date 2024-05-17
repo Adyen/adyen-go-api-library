@@ -21,7 +21,7 @@ var _ common.MappedNullable = &TransactionRule{}
 type TransactionRule struct {
 	// The level at which data must be accumulated, used in rules with `type` **velocity** or **maxUsage**. The level must be the [same or lower in hierarchy](https://docs.adyen.com/issuing/transaction-rules#accumulate-data) than the `entityKey`.  If not provided, by default, the rule will accumulate data at the **paymentInstrument** level.  Possible values: **paymentInstrument**, **paymentInstrumentGroup**, **balanceAccount**, **accountHolder**, **balancePlatform**.
 	AggregationLevel *string `json:"aggregationLevel,omitempty"`
-	// Your description for the transaction rule, maximum 300 characters.
+	// Your description for the transaction rule.
 	Description string `json:"description"`
 	// The date when the rule will stop being evaluated, in ISO 8601 extended offset date-time format. For example, **2020-12-18T10:15:30+01:00**.  If not provided, the rule will be evaluated until the rule status is set to **inactive**.
 	EndDate   *string                  `json:"endDate,omitempty"`
@@ -31,7 +31,7 @@ type TransactionRule struct {
 	Interval TransactionRuleInterval `json:"interval"`
 	// The [outcome](https://docs.adyen.com/issuing/transaction-rules#outcome) that will be applied when a transaction meets the conditions of the rule. If not provided, by default, this is set to **hardBlock**.  Possible values:   * **hardBlock**: the transaction is declined.  * **scoreBased**: the transaction is assigned the `score` you specified. Adyen calculates the total score and if it exceeds 100, the transaction is declined.
 	OutcomeType *string `json:"outcomeType,omitempty"`
-	// Your reference for the transaction rule, maximum 150 characters.
+	// Your reference for the transaction rule.
 	Reference string `json:"reference"`
 	// Indicates the type of request to which the rule applies. If not provided, by default, this is set to **authorization**.  Possible values: **authorization**, **authentication**, **tokenization**, **bankTransfer**.
 	RequestType      *string                     `json:"requestType,omitempty"`
@@ -549,7 +549,7 @@ func (v *NullableTransactionRule) UnmarshalJSON(src []byte) error {
 }
 
 func (o *TransactionRule) isValidOutcomeType() bool {
-	var allowedEnumValues = []string{"enforceSCA", "hardBlock", "scoreBased"}
+	var allowedEnumValues = []string{"enforceSCA", "hardBlock", "scoreBased", "timedBlock"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetOutcomeType() == allowed {
 			return true

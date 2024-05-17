@@ -45,7 +45,7 @@ func (a *GrantOffersApi) GetAllAvailableGrantOffersInput() GrantOffersApiGetAllA
 /*
 GetAllAvailableGrantOffers Get all available grant offers
 
-Returns a list of all [grant offers](https://docs.adyen.com/marketplaces-and-platforms/capital#grant-offers) available for `accountHolderId` specified as a query parameter.
+Returns a list of all [grant offers](https://docs.adyen.com/platforms/capital#grant-offers) available for `accountHolderId` specified as a query parameter.
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r GrantOffersApiGetAllAvailableGrantOffersInput - Request parameters, see GetAllAvailableGrantOffersInput

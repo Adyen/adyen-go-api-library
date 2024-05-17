@@ -26,7 +26,9 @@ type TransferEvent struct {
 	// The date when the transfer request was sent.
 	BookingDate *time.Time `json:"bookingDate,omitempty"`
 	// The estimated time the beneficiary should have access to the funds.
-	EstimatedArrivalTime *time.Time `json:"estimatedArrivalTime,omitempty"`
+	// Deprecated
+	EstimatedArrivalTime *time.Time      `json:"estimatedArrivalTime,omitempty"`
+	ExternalReason       *ExternalReason `json:"externalReason,omitempty"`
 	// The unique identifier of the transfer event.
 	Id           *string       `json:"id,omitempty"`
 	Modification *Modification `json:"modification,omitempty"`
@@ -36,7 +38,8 @@ type TransferEvent struct {
 	// The reason for the transfer status.
 	Reason *string `json:"reason,omitempty"`
 	// The status of the transfer event.
-	Status *string `json:"status,omitempty"`
+	Status       *string                    `json:"status,omitempty"`
+	TrackingData *TransferEventTrackingData `json:"trackingData,omitempty"`
 	// The id of the transaction that is related to this accounting event. Only sent for events of type **accounting** where the balance changes.
 	TransactionId *string `json:"transactionId,omitempty"`
 	// The type of the transfer event. Possible values: **accounting**, **tracking**.
@@ -161,6 +164,7 @@ func (o *TransferEvent) SetBookingDate(v time.Time) {
 }
 
 // GetEstimatedArrivalTime returns the EstimatedArrivalTime field value if set, zero value otherwise.
+// Deprecated
 func (o *TransferEvent) GetEstimatedArrivalTime() time.Time {
 	if o == nil || common.IsNil(o.EstimatedArrivalTime) {
 		var ret time.Time
@@ -171,6 +175,7 @@ func (o *TransferEvent) GetEstimatedArrivalTime() time.Time {
 
 // GetEstimatedArrivalTimeOk returns a tuple with the EstimatedArrivalTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *TransferEvent) GetEstimatedArrivalTimeOk() (*time.Time, bool) {
 	if o == nil || common.IsNil(o.EstimatedArrivalTime) {
 		return nil, false
@@ -188,8 +193,41 @@ func (o *TransferEvent) HasEstimatedArrivalTime() bool {
 }
 
 // SetEstimatedArrivalTime gets a reference to the given time.Time and assigns it to the EstimatedArrivalTime field.
+// Deprecated
 func (o *TransferEvent) SetEstimatedArrivalTime(v time.Time) {
 	o.EstimatedArrivalTime = &v
+}
+
+// GetExternalReason returns the ExternalReason field value if set, zero value otherwise.
+func (o *TransferEvent) GetExternalReason() ExternalReason {
+	if o == nil || common.IsNil(o.ExternalReason) {
+		var ret ExternalReason
+		return ret
+	}
+	return *o.ExternalReason
+}
+
+// GetExternalReasonOk returns a tuple with the ExternalReason field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransferEvent) GetExternalReasonOk() (*ExternalReason, bool) {
+	if o == nil || common.IsNil(o.ExternalReason) {
+		return nil, false
+	}
+	return o.ExternalReason, true
+}
+
+// HasExternalReason returns a boolean if a field has been set.
+func (o *TransferEvent) HasExternalReason() bool {
+	if o != nil && !common.IsNil(o.ExternalReason) {
+		return true
+	}
+
+	return false
+}
+
+// SetExternalReason gets a reference to the given ExternalReason and assigns it to the ExternalReason field.
+func (o *TransferEvent) SetExternalReason(v ExternalReason) {
+	o.ExternalReason = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -384,6 +422,38 @@ func (o *TransferEvent) SetStatus(v string) {
 	o.Status = &v
 }
 
+// GetTrackingData returns the TrackingData field value if set, zero value otherwise.
+func (o *TransferEvent) GetTrackingData() TransferEventTrackingData {
+	if o == nil || common.IsNil(o.TrackingData) {
+		var ret TransferEventTrackingData
+		return ret
+	}
+	return *o.TrackingData
+}
+
+// GetTrackingDataOk returns a tuple with the TrackingData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransferEvent) GetTrackingDataOk() (*TransferEventTrackingData, bool) {
+	if o == nil || common.IsNil(o.TrackingData) {
+		return nil, false
+	}
+	return o.TrackingData, true
+}
+
+// HasTrackingData returns a boolean if a field has been set.
+func (o *TransferEvent) HasTrackingData() bool {
+	if o != nil && !common.IsNil(o.TrackingData) {
+		return true
+	}
+
+	return false
+}
+
+// SetTrackingData gets a reference to the given TransferEventTrackingData and assigns it to the TrackingData field.
+func (o *TransferEvent) SetTrackingData(v TransferEventTrackingData) {
+	o.TrackingData = &v
+}
+
 // GetTransactionId returns the TransactionId field value if set, zero value otherwise.
 func (o *TransferEvent) GetTransactionId() string {
 	if o == nil || common.IsNil(o.TransactionId) {
@@ -534,6 +604,9 @@ func (o TransferEvent) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.EstimatedArrivalTime) {
 		toSerialize["estimatedArrivalTime"] = o.EstimatedArrivalTime
 	}
+	if !common.IsNil(o.ExternalReason) {
+		toSerialize["externalReason"] = o.ExternalReason
+	}
 	if !common.IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
@@ -551,6 +624,9 @@ func (o TransferEvent) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Status) {
 		toSerialize["status"] = o.Status
+	}
+	if !common.IsNil(o.TrackingData) {
+		toSerialize["trackingData"] = o.TrackingData
 	}
 	if !common.IsNil(o.TransactionId) {
 		toSerialize["transactionId"] = o.TransactionId
@@ -604,7 +680,7 @@ func (v *NullableTransferEvent) UnmarshalJSON(src []byte) error {
 }
 
 func (o *TransferEvent) isValidReason() bool {
-	var allowedEnumValues = []string{"amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declinedByTransactionRule", "error", "notEnoughBalance", "refusedByCounterpartyBank", "routeNotFound", "scaFailed", "unknown"}
+	var allowedEnumValues = []string{"amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declinedByTransactionRule", "error", "notEnoughBalance", "pendingApproval", "refusedByCounterpartyBank", "routeNotFound", "scaFailed", "unknown"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetReason() == allowed {
 			return true

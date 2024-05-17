@@ -29,8 +29,13 @@ type Transaction struct {
 	BookingDate time.Time `json:"bookingDate"`
 	// The date and time when the event was triggered, in ISO 8601 extended format. For example, **2020-12-18T10:15:30+01:00**.
 	CreationDate *time.Time `json:"creationDate,omitempty"`
+	// The `description` from the `/transfers` request.
+	Description *string `json:"description,omitempty"`
 	// The unique identifier of the transaction.
-	Id string `json:"id"`
+	Id                string             `json:"id"`
+	PaymentInstrument *PaymentInstrument `json:"paymentInstrument,omitempty"`
+	// The reference sent to or received from the counterparty.  * For outgoing funds, this is the [`referenceForBeneficiary`](https://docs.adyen.com/api-explorer/#/transfers/latest/post/transfers__resParam_referenceForBeneficiary) from the  [`/transfers`](https://docs.adyen.com/api-explorer/#/transfers/latest/post/transfers__reqParam_referenceForBeneficiary) request.   * For incoming funds, this is the reference from the sender.
+	ReferenceForBeneficiary *string `json:"referenceForBeneficiary,omitempty"`
 	// The status of the transaction.   Possible values:  * **pending**: The transaction is still pending.  * **booked**: The transaction has been booked to the balance account.
 	Status   string        `json:"status"`
 	Transfer *TransferView `json:"transfer,omitempty"`
@@ -215,6 +220,38 @@ func (o *Transaction) SetCreationDate(v time.Time) {
 	o.CreationDate = &v
 }
 
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *Transaction) GetDescription() string {
+	if o == nil || common.IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Transaction) GetDescriptionOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *Transaction) HasDescription() bool {
+	if o != nil && !common.IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *Transaction) SetDescription(v string) {
+	o.Description = &v
+}
+
 // GetId returns the Id field value
 func (o *Transaction) GetId() string {
 	if o == nil {
@@ -237,6 +274,70 @@ func (o *Transaction) GetIdOk() (*string, bool) {
 // SetId sets field value
 func (o *Transaction) SetId(v string) {
 	o.Id = v
+}
+
+// GetPaymentInstrument returns the PaymentInstrument field value if set, zero value otherwise.
+func (o *Transaction) GetPaymentInstrument() PaymentInstrument {
+	if o == nil || common.IsNil(o.PaymentInstrument) {
+		var ret PaymentInstrument
+		return ret
+	}
+	return *o.PaymentInstrument
+}
+
+// GetPaymentInstrumentOk returns a tuple with the PaymentInstrument field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Transaction) GetPaymentInstrumentOk() (*PaymentInstrument, bool) {
+	if o == nil || common.IsNil(o.PaymentInstrument) {
+		return nil, false
+	}
+	return o.PaymentInstrument, true
+}
+
+// HasPaymentInstrument returns a boolean if a field has been set.
+func (o *Transaction) HasPaymentInstrument() bool {
+	if o != nil && !common.IsNil(o.PaymentInstrument) {
+		return true
+	}
+
+	return false
+}
+
+// SetPaymentInstrument gets a reference to the given PaymentInstrument and assigns it to the PaymentInstrument field.
+func (o *Transaction) SetPaymentInstrument(v PaymentInstrument) {
+	o.PaymentInstrument = &v
+}
+
+// GetReferenceForBeneficiary returns the ReferenceForBeneficiary field value if set, zero value otherwise.
+func (o *Transaction) GetReferenceForBeneficiary() string {
+	if o == nil || common.IsNil(o.ReferenceForBeneficiary) {
+		var ret string
+		return ret
+	}
+	return *o.ReferenceForBeneficiary
+}
+
+// GetReferenceForBeneficiaryOk returns a tuple with the ReferenceForBeneficiary field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Transaction) GetReferenceForBeneficiaryOk() (*string, bool) {
+	if o == nil || common.IsNil(o.ReferenceForBeneficiary) {
+		return nil, false
+	}
+	return o.ReferenceForBeneficiary, true
+}
+
+// HasReferenceForBeneficiary returns a boolean if a field has been set.
+func (o *Transaction) HasReferenceForBeneficiary() bool {
+	if o != nil && !common.IsNil(o.ReferenceForBeneficiary) {
+		return true
+	}
+
+	return false
+}
+
+// SetReferenceForBeneficiary gets a reference to the given string and assigns it to the ReferenceForBeneficiary field.
+func (o *Transaction) SetReferenceForBeneficiary(v string) {
+	o.ReferenceForBeneficiary = &v
 }
 
 // GetStatus returns the Status field value
@@ -337,7 +438,16 @@ func (o Transaction) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.CreationDate) {
 		toSerialize["creationDate"] = o.CreationDate
 	}
+	if !common.IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
 	toSerialize["id"] = o.Id
+	if !common.IsNil(o.PaymentInstrument) {
+		toSerialize["paymentInstrument"] = o.PaymentInstrument
+	}
+	if !common.IsNil(o.ReferenceForBeneficiary) {
+		toSerialize["referenceForBeneficiary"] = o.ReferenceForBeneficiary
+	}
 	toSerialize["status"] = o.Status
 	if !common.IsNil(o.Transfer) {
 		toSerialize["transfer"] = o.Transfer

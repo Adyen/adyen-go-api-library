@@ -22,11 +22,11 @@ type PartyIdentification struct {
 	Address *Address `json:"address,omitempty"`
 	// The date of birth of the individual in [ISO-8601](https://www.w3.org/TR/NOTE-datetime) format. For example, **YYYY-MM-DD**. Should not be before January 1, 1900.  Allowed only when `type` is **individual**.
 	DateOfBirth *string `json:"dateOfBirth,omitempty"`
-	// First name of the individual.  Allowed only when `type` is **individual**.
+	// First name of the individual.  Allowed only when `type` is **individual**.  Supported characters: [a-z] [A-Z] - . / — and Space.
 	FirstName *string `json:"firstName,omitempty"`
-	// The name of the entity.
+	// The name of the entity.  Supported characters: [a-z] [A-Z] [0-9] , . ; : - — / \\ + & ! ? @ ( ) \" ' and Space.
 	FullName string `json:"fullName"`
-	// Last name of the individual.  Allowed only when `type` is **individual**.
+	// Last name of the individual.  Allowed only when `type` is **individual**.  Supported characters: [a-z] [A-Z] - . / — and Space.
 	LastName *string `json:"lastName,omitempty"`
 	// A unique reference to identify the party or counterparty involved in transfers. This identifier ensures consistency and uniqueness throughout all transactions initiated to and from the same party. For example, your client's unique wallet or payee ID.
 	Reference *string `json:"reference,omitempty"`

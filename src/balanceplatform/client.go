@@ -33,6 +33,8 @@ type APIClient struct {
 
 	ManageCardPINApi *ManageCardPINApi
 
+	ManageSCADevicesApi *ManageSCADevicesApi
+
 	NetworkTokensApi *NetworkTokensApi
 
 	PaymentInstrumentGroupsApi *PaymentInstrumentGroupsApi
@@ -62,6 +64,7 @@ func NewAPIClient(client *common.Client) *APIClient {
 	c.GrantAccountsApi = (*GrantAccountsApi)(&c.common)
 	c.GrantOffersApi = (*GrantOffersApi)(&c.common)
 	c.ManageCardPINApi = (*ManageCardPINApi)(&c.common)
+	c.ManageSCADevicesApi = (*ManageSCADevicesApi)(&c.common)
 	c.NetworkTokensApi = (*NetworkTokensApi)(&c.common)
 	c.PaymentInstrumentGroupsApi = (*PaymentInstrumentGroupsApi)(&c.common)
 	c.PaymentInstrumentsApi = (*PaymentInstrumentsApi)(&c.common)

@@ -354,7 +354,7 @@ func (a *AccountHoldersApi) GetTaxFormInput(id string) AccountHoldersApiGetTaxFo
 /*
 GetTaxForm Get a tax form
 
-Generates a tax form for account holders operating in the US. For more information, refer to [Providing tax forms](https://docs.adyen.com/marketplaces-and-platforms/us-tax-forms/).
+Generates a tax form for account holders operating in the US. For more information, refer to US tax forms for [marketplaces](https://docs.adyen.com/marketplaces/us-tax-forms/) or [platforms](https://docs.adyen.com/platforms/us-tax-forms/) .
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r AccountHoldersApiGetTaxFormInput - Request parameters, see GetTaxFormInput

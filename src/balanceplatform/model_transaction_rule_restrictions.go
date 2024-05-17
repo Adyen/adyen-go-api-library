@@ -32,6 +32,7 @@ type TransactionRuleRestrictions struct {
 	MerchantNames               *MerchantNamesRestriction            `json:"merchantNames,omitempty"`
 	Merchants                   *MerchantsRestriction                `json:"merchants,omitempty"`
 	ProcessingTypes             *ProcessingTypesRestriction          `json:"processingTypes,omitempty"`
+	RiskScores                  *RiskScoresRestriction               `json:"riskScores,omitempty"`
 	SameAmountRestriction       *SameAmountRestriction               `json:"sameAmountRestriction,omitempty"`
 	SameCounterpartyRestriction *SameCounterpartyRestriction         `json:"sameCounterpartyRestriction,omitempty"`
 	TimeOfDay                   *TimeOfDayRestriction                `json:"timeOfDay,omitempty"`
@@ -471,6 +472,38 @@ func (o *TransactionRuleRestrictions) SetProcessingTypes(v ProcessingTypesRestri
 	o.ProcessingTypes = &v
 }
 
+// GetRiskScores returns the RiskScores field value if set, zero value otherwise.
+func (o *TransactionRuleRestrictions) GetRiskScores() RiskScoresRestriction {
+	if o == nil || common.IsNil(o.RiskScores) {
+		var ret RiskScoresRestriction
+		return ret
+	}
+	return *o.RiskScores
+}
+
+// GetRiskScoresOk returns a tuple with the RiskScores field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionRuleRestrictions) GetRiskScoresOk() (*RiskScoresRestriction, bool) {
+	if o == nil || common.IsNil(o.RiskScores) {
+		return nil, false
+	}
+	return o.RiskScores, true
+}
+
+// HasRiskScores returns a boolean if a field has been set.
+func (o *TransactionRuleRestrictions) HasRiskScores() bool {
+	if o != nil && !common.IsNil(o.RiskScores) {
+		return true
+	}
+
+	return false
+}
+
+// SetRiskScores gets a reference to the given RiskScoresRestriction and assigns it to the RiskScores field.
+func (o *TransactionRuleRestrictions) SetRiskScores(v RiskScoresRestriction) {
+	o.RiskScores = &v
+}
+
 // GetSameAmountRestriction returns the SameAmountRestriction field value if set, zero value otherwise.
 func (o *TransactionRuleRestrictions) GetSameAmountRestriction() SameAmountRestriction {
 	if o == nil || common.IsNil(o.SameAmountRestriction) {
@@ -647,6 +680,9 @@ func (o TransactionRuleRestrictions) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.ProcessingTypes) {
 		toSerialize["processingTypes"] = o.ProcessingTypes
+	}
+	if !common.IsNil(o.RiskScores) {
+		toSerialize["riskScores"] = o.RiskScores
 	}
 	if !common.IsNil(o.SameAmountRestriction) {
 		toSerialize["sameAmountRestriction"] = o.SameAmountRestriction

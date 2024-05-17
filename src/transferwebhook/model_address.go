@@ -19,17 +19,17 @@ var _ common.MappedNullable = &Address{}
 
 // Address struct for Address
 type Address struct {
-	// The name of the city.
+	// The name of the city.  Supported characters: [a-z] [A-Z] [0-9] . - — / # , ’ ° ( ) : ; [ ] & \\ | and Space.
 	City *string `json:"city,omitempty"`
 	// The two-character ISO 3166-1 alpha-2 country code. For example, **US**, **NL**, or **GB**.
 	Country string `json:"country"`
-	// First line of the street address.
+	// First line of the street address.  Supported characters: [a-z] [A-Z] [0-9] . - — / # , ’ ° ( ) : ; [ ] & \\ | and Space.
 	Line1 *string `json:"line1,omitempty"`
-	// Second line of the street address.
+	// Second line of the street address.  Supported characters: [a-z] [A-Z] [0-9] . - — / # , ’ ° ( ) : ; [ ] & \\ | and Space.
 	Line2 *string `json:"line2,omitempty"`
-	// The postal code. Maximum length: * 5 digits for an address in the US. * 10 characters for an address in all other countries.
+	// The postal code. Maximum length: * 5 digits for an address in the US. * 10 characters for an address in all other countries.  Supported characters: [a-z] [A-Z] [0-9] and Space.
 	PostalCode *string `json:"postalCode,omitempty"`
-	// The two-letter ISO 3166-2 state or province code. For example, **CA** in the US or **ON** in Canada. > Required for the US and Canada.
+	//    The two-letter ISO 3166-2 state or province code. For example, **CA** in the US or **ON** in Canada.    > Required for the US and Canada.
 	StateOrProvince *string `json:"stateOrProvince,omitempty"`
 }
 

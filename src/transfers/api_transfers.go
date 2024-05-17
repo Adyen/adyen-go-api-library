@@ -319,7 +319,7 @@ func (a *TransfersApi) ReturnTransferInput(transferId string) TransfersApiReturn
 /*
 ReturnTransfer Return a transfer
 
-Returns previously transferred funds without creating a new `transferId`.
+Initiates the return of previously transferred funds without creating a new `transferId`.
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TransfersApiReturnTransferInput - Request parameters, see ReturnTransferInput

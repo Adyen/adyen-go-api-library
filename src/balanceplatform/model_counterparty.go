@@ -20,7 +20,7 @@ var _ common.MappedNullable = &Counterparty{}
 // Counterparty struct for Counterparty
 type Counterparty struct {
 	BankAccount *BankAccount `json:"bankAccount,omitempty"`
-	// Unique identifier of the [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id).
+	// The unique identifier of the [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id).
 	TransferInstrumentId *string `json:"transferInstrumentId,omitempty"`
 }
 
