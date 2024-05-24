@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the OnboardingLinkSettings type satisfies the MappedNullable interface at compile time
@@ -19,21 +18,21 @@ var _ common.MappedNullable = &OnboardingLinkSettings{}
 
 // OnboardingLinkSettings struct for OnboardingLinkSettings
 type OnboardingLinkSettings struct {
-	AcceptedCountries                        []string `json:"acceptedCountries,omitempty"`
-	AllowBankAccountFormatSelection          *bool    `json:"allowBankAccountFormatSelection,omitempty"`
-	AllowIntraRegionCrossBorderPayout        *bool    `json:"allowIntraRegionCrossBorderPayout,omitempty"`
-	ChangeLegalEntityType                    *bool    `json:"changeLegalEntityType,omitempty"`
-	EditPrefilledCountry                     *bool    `json:"editPrefilledCountry,omitempty"`
-	HideOnboardingIntroductionIndividual     *bool    `json:"hideOnboardingIntroductionIndividual,omitempty"`
-	HideOnboardingIntroductionOrganization   *bool    `json:"hideOnboardingIntroductionOrganization,omitempty"`
-	HideOnboardingIntroductionSoleProprietor *bool    `json:"hideOnboardingIntroductionSoleProprietor,omitempty"`
-	HideOnboardingIntroductionTrust          *bool    `json:"hideOnboardingIntroductionTrust,omitempty"`
-	InstantBankVerification                  *bool    `json:"instantBankVerification,omitempty"`
-	RequirePciSignEcomMoto                   *bool    `json:"requirePciSignEcomMoto,omitempty"`
-	RequirePciSignEcommerce                  *bool    `json:"requirePciSignEcommerce,omitempty"`
-	RequirePciSignPos                        *bool    `json:"requirePciSignPos,omitempty"`
-	RequirePciSignPosMoto                    *bool    `json:"requirePciSignPosMoto,omitempty"`
-	TransferInstrumentLimit                  *int32   `json:"transferInstrumentLimit,omitempty"`
+	AcceptedCountries []string `json:"acceptedCountries,omitempty"`
+	AllowBankAccountFormatSelection *bool `json:"allowBankAccountFormatSelection,omitempty"`
+	AllowIntraRegionCrossBorderPayout *bool `json:"allowIntraRegionCrossBorderPayout,omitempty"`
+	ChangeLegalEntityType *bool `json:"changeLegalEntityType,omitempty"`
+	EditPrefilledCountry *bool `json:"editPrefilledCountry,omitempty"`
+	HideOnboardingIntroductionIndividual *bool `json:"hideOnboardingIntroductionIndividual,omitempty"`
+	HideOnboardingIntroductionOrganization *bool `json:"hideOnboardingIntroductionOrganization,omitempty"`
+	HideOnboardingIntroductionSoleProprietor *bool `json:"hideOnboardingIntroductionSoleProprietor,omitempty"`
+	HideOnboardingIntroductionTrust *bool `json:"hideOnboardingIntroductionTrust,omitempty"`
+	InstantBankVerification *bool `json:"instantBankVerification,omitempty"`
+	RequirePciSignEcomMoto *bool `json:"requirePciSignEcomMoto,omitempty"`
+	RequirePciSignEcommerce *bool `json:"requirePciSignEcommerce,omitempty"`
+	RequirePciSignPos *bool `json:"requirePciSignPos,omitempty"`
+	RequirePciSignPosMoto *bool `json:"requirePciSignPosMoto,omitempty"`
+	TransferInstrumentLimit *int32 `json:"transferInstrumentLimit,omitempty"`
 }
 
 // NewOnboardingLinkSettings instantiates a new OnboardingLinkSettings object
@@ -534,7 +533,7 @@ func (o *OnboardingLinkSettings) SetTransferInstrumentLimit(v int32) {
 }
 
 func (o OnboardingLinkSettings) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -626,3 +625,6 @@ func (v *NullableOnboardingLinkSettings) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

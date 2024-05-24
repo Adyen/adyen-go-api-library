@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the SubMerchantInfo type satisfies the MappedNullable interface at compile time
@@ -20,10 +19,11 @@ var _ common.MappedNullable = &SubMerchantInfo{}
 // SubMerchantInfo struct for SubMerchantInfo
 type SubMerchantInfo struct {
 	Address *BillingAddress `json:"address,omitempty"`
-	Id      *string         `json:"id,omitempty"`
-	Mcc     *string         `json:"mcc,omitempty"`
-	Name    *string         `json:"name,omitempty"`
-	TaxId   *string         `json:"taxId,omitempty"`
+	Id *string `json:"id,omitempty"`
+	Mcc *string `json:"mcc,omitempty"`
+	Name *string `json:"name,omitempty"`
+	RegisteredSince *string `json:"registeredSince,omitempty"`
+	TaxId *string `json:"taxId,omitempty"`
 }
 
 // NewSubMerchantInfo instantiates a new SubMerchantInfo object
@@ -171,6 +171,38 @@ func (o *SubMerchantInfo) SetName(v string) {
 	o.Name = &v
 }
 
+// GetRegisteredSince returns the RegisteredSince field value if set, zero value otherwise.
+func (o *SubMerchantInfo) GetRegisteredSince() string {
+	if o == nil || common.IsNil(o.RegisteredSince) {
+		var ret string
+		return ret
+	}
+	return *o.RegisteredSince
+}
+
+// GetRegisteredSinceOk returns a tuple with the RegisteredSince field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SubMerchantInfo) GetRegisteredSinceOk() (*string, bool) {
+	if o == nil || common.IsNil(o.RegisteredSince) {
+		return nil, false
+	}
+	return o.RegisteredSince, true
+}
+
+// HasRegisteredSince returns a boolean if a field has been set.
+func (o *SubMerchantInfo) HasRegisteredSince() bool {
+	if o != nil && !common.IsNil(o.RegisteredSince) {
+		return true
+	}
+
+	return false
+}
+
+// SetRegisteredSince gets a reference to the given string and assigns it to the RegisteredSince field.
+func (o *SubMerchantInfo) SetRegisteredSince(v string) {
+	o.RegisteredSince = &v
+}
+
 // GetTaxId returns the TaxId field value if set, zero value otherwise.
 func (o *SubMerchantInfo) GetTaxId() string {
 	if o == nil || common.IsNil(o.TaxId) {
@@ -204,7 +236,7 @@ func (o *SubMerchantInfo) SetTaxId(v string) {
 }
 
 func (o SubMerchantInfo) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -224,6 +256,9 @@ func (o SubMerchantInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Name) {
 		toSerialize["name"] = o.Name
+	}
+	if !common.IsNil(o.RegisteredSince) {
+		toSerialize["registeredSince"] = o.RegisteredSince
 	}
 	if !common.IsNil(o.TaxId) {
 		toSerialize["taxId"] = o.TaxId
@@ -266,3 +301,6 @@ func (v *NullableSubMerchantInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

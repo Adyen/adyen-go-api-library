@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the RecurringDetail type satisfies the MappedNullable interface at compile time
@@ -19,6 +18,8 @@ var _ common.MappedNullable = &RecurringDetail{}
 
 // RecurringDetail struct for RecurringDetail
 type RecurringDetail struct {
+	// A list of apps for this payment method.
+	Apps []PaymentMethodUPIApps `json:"apps,omitempty"`
 	// Brand for the selected gift card. For example: plastix, hmclub.
 	Brand *string `json:"brand,omitempty"`
 	// List of possible brands. For example: visa, mc.
@@ -26,8 +27,8 @@ type RecurringDetail struct {
 	// The configuration of the payment method.
 	Configuration *map[string]string `json:"configuration,omitempty"`
 	// The funding source of the payment method.
-	FundingSource *string             `json:"fundingSource,omitempty"`
-	Group         *PaymentMethodGroup `json:"group,omitempty"`
+	FundingSource *string `json:"fundingSource,omitempty"`
+	Group *PaymentMethodGroup `json:"group,omitempty"`
 	// All input details to be provided to complete the payment with this payment method.
 	// Deprecated
 	InputDetails []InputDetail `json:"inputDetails,omitempty"`
@@ -36,8 +37,8 @@ type RecurringDetail struct {
 	// The displayable name of this payment method.
 	Name *string `json:"name,omitempty"`
 	// The reference that uniquely identifies the recurring detail.
-	RecurringDetailReference *string        `json:"recurringDetailReference,omitempty"`
-	StoredDetails            *StoredDetails `json:"storedDetails,omitempty"`
+	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
+	StoredDetails *StoredDetails `json:"storedDetails,omitempty"`
 	// The unique payment method code.
 	Type *string `json:"type,omitempty"`
 }
@@ -57,6 +58,38 @@ func NewRecurringDetail() *RecurringDetail {
 func NewRecurringDetailWithDefaults() *RecurringDetail {
 	this := RecurringDetail{}
 	return &this
+}
+
+// GetApps returns the Apps field value if set, zero value otherwise.
+func (o *RecurringDetail) GetApps() []PaymentMethodUPIApps {
+	if o == nil || common.IsNil(o.Apps) {
+		var ret []PaymentMethodUPIApps
+		return ret
+	}
+	return o.Apps
+}
+
+// GetAppsOk returns a tuple with the Apps field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RecurringDetail) GetAppsOk() ([]PaymentMethodUPIApps, bool) {
+	if o == nil || common.IsNil(o.Apps) {
+		return nil, false
+	}
+	return o.Apps, true
+}
+
+// HasApps returns a boolean if a field has been set.
+func (o *RecurringDetail) HasApps() bool {
+	if o != nil && !common.IsNil(o.Apps) {
+		return true
+	}
+
+	return false
+}
+
+// SetApps gets a reference to the given []PaymentMethodUPIApps and assigns it to the Apps field.
+func (o *RecurringDetail) SetApps(v []PaymentMethodUPIApps) {
+	o.Apps = v
 }
 
 // GetBrand returns the Brand field value if set, zero value otherwise.
@@ -415,7 +448,7 @@ func (o *RecurringDetail) SetType(v string) {
 }
 
 func (o RecurringDetail) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -424,6 +457,9 @@ func (o RecurringDetail) MarshalJSON() ([]byte, error) {
 
 func (o RecurringDetail) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.Apps) {
+		toSerialize["apps"] = o.Apps
+	}
 	if !common.IsNil(o.Brand) {
 		toSerialize["brand"] = o.Brand
 	}
@@ -496,12 +532,14 @@ func (v *NullableRecurringDetail) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *RecurringDetail) isValidFundingSource() bool {
-	var allowedEnumValues = []string{"credit", "debit"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetFundingSource() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "credit", "debit" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetFundingSource() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

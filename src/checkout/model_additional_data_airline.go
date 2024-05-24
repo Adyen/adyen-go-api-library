@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the AdditionalDataAirline type satisfies the MappedNullable interface at compile time
@@ -37,6 +36,8 @@ type AdditionalDataAirline struct {
 	AirlineDocumentType *string `json:"airline.document_type,omitempty"`
 	// The flight departure date. Local time `(HH:mm)` is optional. * Date format: `yyyy-MM-dd` * Date and time format: `yyyy-MM-dd HH:mm` * minLength: 10 characters * maxLength: 16 characters
 	AirlineFlightDate *string `json:"airline.flight_date,omitempty"`
+	// The date that the ticket was issued to the passenger. * minLength: 6 characters * maxLength: 6 characters * Date format: YYMMDD
+	AirlineIssueDate *string `json:"airline.issue_date,omitempty"`
 	// The [IATA](https://www.iata.org/services/pages/codes.aspx) 2-letter accounting code (PAX) that identifies the carrier. This field is required if the airline data includes leg details. * Example: KLM = KL * minLength: 2 characters * maxLength: 2 characters * Must not be all spaces *Must not be all zeros.
 	AirlineLegCarrierCode *string `json:"airline.leg.carrier_code,omitempty"`
 	// A one-letter travel class identifier.  The following are common:  * F: first class * J: business class * Y: economy class * W: premium economy  * Encoding: ASCII * minLength: 1 character * maxLength: 1 character * Must not be all spaces *Must not be all zeros.
@@ -381,6 +382,38 @@ func (o *AdditionalDataAirline) HasAirlineFlightDate() bool {
 // SetAirlineFlightDate gets a reference to the given string and assigns it to the AirlineFlightDate field.
 func (o *AdditionalDataAirline) SetAirlineFlightDate(v string) {
 	o.AirlineFlightDate = &v
+}
+
+// GetAirlineIssueDate returns the AirlineIssueDate field value if set, zero value otherwise.
+func (o *AdditionalDataAirline) GetAirlineIssueDate() string {
+	if o == nil || common.IsNil(o.AirlineIssueDate) {
+		var ret string
+		return ret
+	}
+	return *o.AirlineIssueDate
+}
+
+// GetAirlineIssueDateOk returns a tuple with the AirlineIssueDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AdditionalDataAirline) GetAirlineIssueDateOk() (*string, bool) {
+	if o == nil || common.IsNil(o.AirlineIssueDate) {
+		return nil, false
+	}
+	return o.AirlineIssueDate, true
+}
+
+// HasAirlineIssueDate returns a boolean if a field has been set.
+func (o *AdditionalDataAirline) HasAirlineIssueDate() bool {
+	if o != nil && !common.IsNil(o.AirlineIssueDate) {
+		return true
+	}
+
+	return false
+}
+
+// SetAirlineIssueDate gets a reference to the given string and assigns it to the AirlineIssueDate field.
+func (o *AdditionalDataAirline) SetAirlineIssueDate(v string) {
+	o.AirlineIssueDate = &v
 }
 
 // GetAirlineLegCarrierCode returns the AirlineLegCarrierCode field value if set, zero value otherwise.
@@ -984,7 +1017,7 @@ func (o *AdditionalDataAirline) SetAirlineTravelAgencyName(v string) {
 }
 
 func (o AdditionalDataAirline) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -1019,6 +1052,9 @@ func (o AdditionalDataAirline) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.AirlineFlightDate) {
 		toSerialize["airline.flight_date"] = o.AirlineFlightDate
+	}
+	if !common.IsNil(o.AirlineIssueDate) {
+		toSerialize["airline.issue_date"] = o.AirlineIssueDate
 	}
 	if !common.IsNil(o.AirlineLegCarrierCode) {
 		toSerialize["airline.leg.carrier_code"] = o.AirlineLegCarrierCode
@@ -1113,3 +1149,6 @@ func (v *NullableAdditionalDataAirline) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

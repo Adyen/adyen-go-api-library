@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the PaymentMethod type satisfies the MappedNullable interface at compile time
@@ -19,6 +18,8 @@ var _ common.MappedNullable = &PaymentMethod{}
 
 // PaymentMethod struct for PaymentMethod
 type PaymentMethod struct {
+	// A list of apps for this payment method.
+	Apps []PaymentMethodUPIApps `json:"apps,omitempty"`
 	// Brand for the selected gift card. For example: plastix, hmclub.
 	Brand *string `json:"brand,omitempty"`
 	// List of possible brands. For example: visa, mc.
@@ -26,8 +27,8 @@ type PaymentMethod struct {
 	// The configuration of the payment method.
 	Configuration *map[string]string `json:"configuration,omitempty"`
 	// The funding source of the payment method.
-	FundingSource *string             `json:"fundingSource,omitempty"`
-	Group         *PaymentMethodGroup `json:"group,omitempty"`
+	FundingSource *string `json:"fundingSource,omitempty"`
+	Group *PaymentMethodGroup `json:"group,omitempty"`
 	// All input details to be provided to complete the payment with this payment method.
 	// Deprecated
 	InputDetails []InputDetail `json:"inputDetails,omitempty"`
@@ -54,6 +55,38 @@ func NewPaymentMethod() *PaymentMethod {
 func NewPaymentMethodWithDefaults() *PaymentMethod {
 	this := PaymentMethod{}
 	return &this
+}
+
+// GetApps returns the Apps field value if set, zero value otherwise.
+func (o *PaymentMethod) GetApps() []PaymentMethodUPIApps {
+	if o == nil || common.IsNil(o.Apps) {
+		var ret []PaymentMethodUPIApps
+		return ret
+	}
+	return o.Apps
+}
+
+// GetAppsOk returns a tuple with the Apps field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethod) GetAppsOk() ([]PaymentMethodUPIApps, bool) {
+	if o == nil || common.IsNil(o.Apps) {
+		return nil, false
+	}
+	return o.Apps, true
+}
+
+// HasApps returns a boolean if a field has been set.
+func (o *PaymentMethod) HasApps() bool {
+	if o != nil && !common.IsNil(o.Apps) {
+		return true
+	}
+
+	return false
+}
+
+// SetApps gets a reference to the given []PaymentMethodUPIApps and assigns it to the Apps field.
+func (o *PaymentMethod) SetApps(v []PaymentMethodUPIApps) {
+	o.Apps = v
 }
 
 // GetBrand returns the Brand field value if set, zero value otherwise.
@@ -348,7 +381,7 @@ func (o *PaymentMethod) SetType(v string) {
 }
 
 func (o PaymentMethod) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -357,6 +390,9 @@ func (o PaymentMethod) MarshalJSON() ([]byte, error) {
 
 func (o PaymentMethod) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.Apps) {
+		toSerialize["apps"] = o.Apps
+	}
 	if !common.IsNil(o.Brand) {
 		toSerialize["brand"] = o.Brand
 	}
@@ -423,12 +459,14 @@ func (v *NullablePaymentMethod) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *PaymentMethod) isValidFundingSource() bool {
-	var allowedEnumValues = []string{"credit", "debit"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetFundingSource() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "credit", "debit" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetFundingSource() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

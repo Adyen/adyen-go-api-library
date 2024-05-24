@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the Webhook type satisfies the MappedNullable interface at compile time
@@ -29,11 +28,11 @@ type Webhook struct {
 	// Reference to the account the webook is set on.
 	AccountReference *string `json:"accountReference,omitempty"`
 	// Indicates if the webhook configuration is active. The field must be **true** for you to receive webhooks about events related an account.
-	Active             bool                        `json:"active"`
+	Active bool `json:"active"`
 	AdditionalSettings *AdditionalSettingsResponse `json:"additionalSettings,omitempty"`
 	// The alias of our SSL certificate. When you receive a notification from us, the alias from the HMAC signature will match this alias.
 	CertificateAlias *string `json:"certificateAlias,omitempty"`
-	// Format or protocol for receiving webhooks. Possible values: * **soap** * **http** * **json**
+	// Format or protocol for receiving webhooks. Possible values: * **soap** * **http** * **json** 
 	CommunicationFormat string `json:"communicationFormat"`
 	// Your description for this webhook configuration.
 	Description *string `json:"description,omitempty"`
@@ -757,7 +756,7 @@ func (o *Webhook) SetUsername(v string) {
 }
 
 func (o Webhook) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -863,39 +862,41 @@ func (v *NullableWebhook) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *Webhook) isValidCommunicationFormat() bool {
-	var allowedEnumValues = []string{"http", "json", "soap"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetCommunicationFormat() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "http", "json", "soap" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetCommunicationFormat() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *Webhook) isValidEncryptionProtocol() bool {
-	var allowedEnumValues = []string{"HTTP", "TLSv1.2", "TLSv1.3"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetEncryptionProtocol() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "HTTP", "TLSv1.2", "TLSv1.3" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetEncryptionProtocol() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *Webhook) isValidFilterMerchantAccountType() bool {
-	var allowedEnumValues = []string{"allAccounts", "excludeAccounts", "includeAccounts"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetFilterMerchantAccountType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "allAccounts", "excludeAccounts", "includeAccounts" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetFilterMerchantAccountType() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *Webhook) isValidNetworkType() bool {
-	var allowedEnumValues = []string{"local", "public"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetNetworkType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "local", "public" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetNetworkType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

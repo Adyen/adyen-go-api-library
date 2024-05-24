@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the LineItem type satisfies the MappedNullable interface at compile time
@@ -37,6 +36,8 @@ type LineItem struct {
 	ItemCategory *string `json:"itemCategory,omitempty"`
 	// Manufacturer of the item.
 	Manufacturer *string `json:"manufacturer,omitempty"`
+	// Marketplace seller id.
+	MarketplaceSellerId *string `json:"marketplaceSellerId,omitempty"`
 	// Link to the purchased item.
 	ProductUrl *string `json:"productUrl,omitempty"`
 	// Number of items.
@@ -360,6 +361,38 @@ func (o *LineItem) SetManufacturer(v string) {
 	o.Manufacturer = &v
 }
 
+// GetMarketplaceSellerId returns the MarketplaceSellerId field value if set, zero value otherwise.
+func (o *LineItem) GetMarketplaceSellerId() string {
+	if o == nil || common.IsNil(o.MarketplaceSellerId) {
+		var ret string
+		return ret
+	}
+	return *o.MarketplaceSellerId
+}
+
+// GetMarketplaceSellerIdOk returns a tuple with the MarketplaceSellerId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LineItem) GetMarketplaceSellerIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.MarketplaceSellerId) {
+		return nil, false
+	}
+	return o.MarketplaceSellerId, true
+}
+
+// HasMarketplaceSellerId returns a boolean if a field has been set.
+func (o *LineItem) HasMarketplaceSellerId() bool {
+	if o != nil && !common.IsNil(o.MarketplaceSellerId) {
+		return true
+	}
+
+	return false
+}
+
+// SetMarketplaceSellerId gets a reference to the given string and assigns it to the MarketplaceSellerId field.
+func (o *LineItem) SetMarketplaceSellerId(v string) {
+	o.MarketplaceSellerId = &v
+}
+
 // GetProductUrl returns the ProductUrl field value if set, zero value otherwise.
 func (o *LineItem) GetProductUrl() string {
 	if o == nil || common.IsNil(o.ProductUrl) {
@@ -617,7 +650,7 @@ func (o *LineItem) SetUpc(v string) {
 }
 
 func (o LineItem) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -652,6 +685,9 @@ func (o LineItem) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Manufacturer) {
 		toSerialize["manufacturer"] = o.Manufacturer
+	}
+	if !common.IsNil(o.MarketplaceSellerId) {
+		toSerialize["marketplaceSellerId"] = o.MarketplaceSellerId
 	}
 	if !common.IsNil(o.ProductUrl) {
 		toSerialize["productUrl"] = o.ProductUrl
@@ -715,3 +751,6 @@ func (v *NullableLineItem) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the PaymentCompletionDetails type satisfies the MappedNullable interface at compile time
@@ -24,7 +23,7 @@ type PaymentCompletionDetails struct {
 	// (3D) Payment Authentication Request data for the card issuer.
 	PaReq *string `json:"PaReq,omitempty"`
 	// (3D) Payment Authentication Response data by the card issuer.
-	PaRes              *string `json:"PaRes,omitempty"`
+	PaRes *string `json:"PaRes,omitempty"`
 	AuthorizationToken *string `json:"authorization_token,omitempty"`
 	// PayPal-generated token for recurring payments.
 	BillingToken *string `json:"billingToken,omitempty"`
@@ -48,6 +47,8 @@ type PaymentCompletionDetails struct {
 	RedirectResult *string `json:"redirectResult,omitempty"`
 	// Value you received from the WeChat Pay SDK.
 	ResultCode *string `json:"resultCode,omitempty"`
+	// The query string as appended to the `returnURL` when using direct issuer links .
+	ReturnUrlQueryString *string `json:"returnUrlQueryString,omitempty"`
 	// Base64-encoded string returned by the Component after the challenge flow. It contains the following parameters: `transStatus`, `authorisationToken`.
 	ThreeDSResult *string `json:"threeDSResult,omitempty"`
 	// Base64-encoded string returned by the Component after the challenge flow. It contains the following parameter: `transStatus`.
@@ -555,6 +556,38 @@ func (o *PaymentCompletionDetails) SetResultCode(v string) {
 	o.ResultCode = &v
 }
 
+// GetReturnUrlQueryString returns the ReturnUrlQueryString field value if set, zero value otherwise.
+func (o *PaymentCompletionDetails) GetReturnUrlQueryString() string {
+	if o == nil || common.IsNil(o.ReturnUrlQueryString) {
+		var ret string
+		return ret
+	}
+	return *o.ReturnUrlQueryString
+}
+
+// GetReturnUrlQueryStringOk returns a tuple with the ReturnUrlQueryString field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentCompletionDetails) GetReturnUrlQueryStringOk() (*string, bool) {
+	if o == nil || common.IsNil(o.ReturnUrlQueryString) {
+		return nil, false
+	}
+	return o.ReturnUrlQueryString, true
+}
+
+// HasReturnUrlQueryString returns a boolean if a field has been set.
+func (o *PaymentCompletionDetails) HasReturnUrlQueryString() bool {
+	if o != nil && !common.IsNil(o.ReturnUrlQueryString) {
+		return true
+	}
+
+	return false
+}
+
+// SetReturnUrlQueryString gets a reference to the given string and assigns it to the ReturnUrlQueryString field.
+func (o *PaymentCompletionDetails) SetReturnUrlQueryString(v string) {
+	o.ReturnUrlQueryString = &v
+}
+
 // GetThreeDSResult returns the ThreeDSResult field value if set, zero value otherwise.
 func (o *PaymentCompletionDetails) GetThreeDSResult() string {
 	if o == nil || common.IsNil(o.ThreeDSResult) {
@@ -684,7 +717,7 @@ func (o *PaymentCompletionDetails) SetVaultToken(v string) {
 }
 
 func (o PaymentCompletionDetails) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -738,6 +771,9 @@ func (o PaymentCompletionDetails) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.ResultCode) {
 		toSerialize["resultCode"] = o.ResultCode
 	}
+	if !common.IsNil(o.ReturnUrlQueryString) {
+		toSerialize["returnUrlQueryString"] = o.ReturnUrlQueryString
+	}
 	if !common.IsNil(o.ThreeDSResult) {
 		toSerialize["threeDSResult"] = o.ThreeDSResult
 	}
@@ -788,3 +824,6 @@ func (v *NullablePaymentCompletionDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

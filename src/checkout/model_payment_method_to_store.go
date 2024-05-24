@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the PaymentMethodToStore type satisfies the MappedNullable interface at compile time
@@ -39,6 +38,8 @@ type PaymentMethodToStore struct {
 	HolderName *string `json:"holderName,omitempty"`
 	// The card number. Only collect raw card data if you are [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide).
 	Number *string `json:"number,omitempty"`
+	// Set to **scheme**.
+	Type *string `json:"type,omitempty"`
 }
 
 // NewPaymentMethodToStore instantiates a new PaymentMethodToStore object
@@ -378,8 +379,40 @@ func (o *PaymentMethodToStore) SetNumber(v string) {
 	o.Number = &v
 }
 
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *PaymentMethodToStore) GetType() string {
+	if o == nil || common.IsNil(o.Type) {
+		var ret string
+		return ret
+	}
+	return *o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodToStore) GetTypeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Type) {
+		return nil, false
+	}
+	return o.Type, true
+}
+
+// HasType returns a boolean if a field has been set.
+func (o *PaymentMethodToStore) HasType() bool {
+	if o != nil && !common.IsNil(o.Type) {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given string and assigns it to the Type field.
+func (o *PaymentMethodToStore) SetType(v string) {
+	o.Type = &v
+}
+
 func (o PaymentMethodToStore) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -417,6 +450,9 @@ func (o PaymentMethodToStore) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Number) {
 		toSerialize["number"] = o.Number
+	}
+	if !common.IsNil(o.Type) {
+		toSerialize["type"] = o.Type
 	}
 	return toSerialize, nil
 }
@@ -456,3 +492,6 @@ func (v *NullablePaymentMethodToStore) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
