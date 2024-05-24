@@ -10,7 +10,8 @@ package legalentity
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v9/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the Individual type satisfies the MappedNullable interface at compile time
@@ -20,16 +21,16 @@ var _ common.MappedNullable = &Individual{}
 type Individual struct {
 	BirthData *BirthData `json:"birthData,omitempty"`
 	// The email address of the legal entity.
-	Email *string `json:"email,omitempty"`
+	Email              *string             `json:"email,omitempty"`
 	IdentificationData *IdentificationData `json:"identificationData,omitempty"`
-	Name Name `json:"name"`
+	Name               Name                `json:"name"`
 	// The individual's nationality.
-	Nationality *string `json:"nationality,omitempty"`
-	Phone *PhoneNumber `json:"phone,omitempty"`
-	ResidentialAddress Address `json:"residentialAddress"`
+	Nationality        *string      `json:"nationality,omitempty"`
+	Phone              *PhoneNumber `json:"phone,omitempty"`
+	ResidentialAddress Address      `json:"residentialAddress"`
 	// The tax information of the individual.
 	TaxInformation []TaxInformation `json:"taxInformation,omitempty"`
-	WebData *WebData `json:"webData,omitempty"`
+	WebData        *WebData         `json:"webData,omitempty"`
 }
 
 // NewIndividual instantiates a new Individual object
@@ -324,7 +325,7 @@ func (o *Individual) SetWebData(v WebData) {
 }
 
 func (o Individual) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -394,6 +395,3 @@ func (v *NullableIndividual) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

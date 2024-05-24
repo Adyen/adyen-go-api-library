@@ -10,7 +10,8 @@ package management
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v9/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the TerminalConnectivityCellular type satisfies the MappedNullable interface at compile time
@@ -106,7 +107,7 @@ func (o *TerminalConnectivityCellular) SetStatus(v string) {
 }
 
 func (o TerminalConnectivityCellular) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -160,14 +161,12 @@ func (v *NullableTerminalConnectivityCellular) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *TerminalConnectivityCellular) isValidStatus() bool {
-    var allowedEnumValues = []string{ "activated", "deactivated", "deprecated", "inventory", "readyForActivation" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetStatus() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"activated", "deactivated", "deprecated", "inventory", "readyForActivation"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetStatus() == allowed {
+			return true
+		}
+	}
+	return false
 }
-
