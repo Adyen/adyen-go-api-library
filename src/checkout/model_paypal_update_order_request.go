@@ -27,7 +27,8 @@ type PaypalUpdateOrderRequest struct {
 	// The original `pspReference` from the `/payments` response.
 	PspReference *string `json:"pspReference,omitempty"`
 	// The original `sessionId` from the `/sessions` response.
-	SessionId *string `json:"sessionId,omitempty"`
+	SessionId *string   `json:"sessionId,omitempty"`
+	TaxTotal  *TaxTotal `json:"taxTotal,omitempty"`
 }
 
 // NewPaypalUpdateOrderRequest instantiates a new PaypalUpdateOrderRequest object
@@ -207,6 +208,38 @@ func (o *PaypalUpdateOrderRequest) SetSessionId(v string) {
 	o.SessionId = &v
 }
 
+// GetTaxTotal returns the TaxTotal field value if set, zero value otherwise.
+func (o *PaypalUpdateOrderRequest) GetTaxTotal() TaxTotal {
+	if o == nil || common.IsNil(o.TaxTotal) {
+		var ret TaxTotal
+		return ret
+	}
+	return *o.TaxTotal
+}
+
+// GetTaxTotalOk returns a tuple with the TaxTotal field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaypalUpdateOrderRequest) GetTaxTotalOk() (*TaxTotal, bool) {
+	if o == nil || common.IsNil(o.TaxTotal) {
+		return nil, false
+	}
+	return o.TaxTotal, true
+}
+
+// HasTaxTotal returns a boolean if a field has been set.
+func (o *PaypalUpdateOrderRequest) HasTaxTotal() bool {
+	if o != nil && !common.IsNil(o.TaxTotal) {
+		return true
+	}
+
+	return false
+}
+
+// SetTaxTotal gets a reference to the given TaxTotal and assigns it to the TaxTotal field.
+func (o *PaypalUpdateOrderRequest) SetTaxTotal(v TaxTotal) {
+	o.TaxTotal = &v
+}
+
 func (o PaypalUpdateOrderRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -231,6 +264,9 @@ func (o PaypalUpdateOrderRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.SessionId) {
 		toSerialize["sessionId"] = o.SessionId
+	}
+	if !common.IsNil(o.TaxTotal) {
+		toSerialize["taxTotal"] = o.TaxTotal
 	}
 	return toSerialize, nil
 }

@@ -265,7 +265,7 @@ func (v *NullableEcontextVoucherDetails) UnmarshalJSON(src []byte) error {
 }
 
 func (o *EcontextVoucherDetails) isValidType() bool {
-	var allowedEnumValues = []string{"econtext_seveneleven", "econtext_stores"}
+	var allowedEnumValues = []string{"econtext_seven_eleven", "econtext_online", "econtext", "econtext_stores", "econtext_atm"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

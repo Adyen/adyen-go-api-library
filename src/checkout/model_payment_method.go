@@ -19,6 +19,8 @@ var _ common.MappedNullable = &PaymentMethod{}
 
 // PaymentMethod struct for PaymentMethod
 type PaymentMethod struct {
+	// A list of apps for this payment method.
+	Apps []PaymentMethodUPIApps `json:"apps,omitempty"`
 	// Brand for the selected gift card. For example: plastix, hmclub.
 	Brand *string `json:"brand,omitempty"`
 	// List of possible brands. For example: visa, mc.
@@ -54,6 +56,38 @@ func NewPaymentMethod() *PaymentMethod {
 func NewPaymentMethodWithDefaults() *PaymentMethod {
 	this := PaymentMethod{}
 	return &this
+}
+
+// GetApps returns the Apps field value if set, zero value otherwise.
+func (o *PaymentMethod) GetApps() []PaymentMethodUPIApps {
+	if o == nil || common.IsNil(o.Apps) {
+		var ret []PaymentMethodUPIApps
+		return ret
+	}
+	return o.Apps
+}
+
+// GetAppsOk returns a tuple with the Apps field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethod) GetAppsOk() ([]PaymentMethodUPIApps, bool) {
+	if o == nil || common.IsNil(o.Apps) {
+		return nil, false
+	}
+	return o.Apps, true
+}
+
+// HasApps returns a boolean if a field has been set.
+func (o *PaymentMethod) HasApps() bool {
+	if o != nil && !common.IsNil(o.Apps) {
+		return true
+	}
+
+	return false
+}
+
+// SetApps gets a reference to the given []PaymentMethodUPIApps and assigns it to the Apps field.
+func (o *PaymentMethod) SetApps(v []PaymentMethodUPIApps) {
+	o.Apps = v
 }
 
 // GetBrand returns the Brand field value if set, zero value otherwise.
@@ -357,6 +391,9 @@ func (o PaymentMethod) MarshalJSON() ([]byte, error) {
 
 func (o PaymentMethod) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.Apps) {
+		toSerialize["apps"] = o.Apps
+	}
 	if !common.IsNil(o.Brand) {
 		toSerialize["brand"] = o.Brand
 	}

@@ -13,7 +13,7 @@ import (
 	"fmt"
 )
 
-// TransferDataTracking - Most recent tracking information for the transfer.
+// TransferDataTracking - The latest tracking information of the transfer.
 type TransferDataTracking struct {
 	ConfirmationTrackingData   *ConfirmationTrackingData
 	EstimationTrackingData     *EstimationTrackingData

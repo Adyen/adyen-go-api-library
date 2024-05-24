@@ -22,7 +22,7 @@ var _ common.MappedNullable = &EstimationTrackingData{}
 type EstimationTrackingData struct {
 	// The estimated time the beneficiary should have access to the funds.
 	EstimatedArrivalTime time.Time `json:"estimatedArrivalTime"`
-	// **estimation**
+	// The type of tracking event.   Possible values:   - **estimation**: the estimated date and time of when the funds will be credited has been determined.
 	Type string `json:"type"`
 }
 
