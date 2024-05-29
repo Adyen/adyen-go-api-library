@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the TaxReportingClassification type satisfies the MappedNullable interface at compile time
@@ -23,7 +22,7 @@ type TaxReportingClassification struct {
 	BusinessType *string `json:"businessType,omitempty"`
 	// The Global Intermediary Identification Number (GIIN) required for FATCA. Only required if the organization is a US financial institution and the `businessType` is **financialInstitution**.
 	FinancialInstitutionNumber *string `json:"financialInstitutionNumber,omitempty"`
-	// The organization's main source of income.  Possible values: **businessOperation**, **realEstateSales**, **investmentInterestOrRoyalty**, **propertyRental**, **other**.
+	// The organization's main source of income. Only required if `businessType` is **other**.  Possible values: **businessOperation**, **realEstateSales**, **investmentInterestOrRoyalty**, **propertyRental**, **other**.
 	MainSourceOfIncome *string `json:"mainSourceOfIncome,omitempty"`
 	// The tax reporting classification type.  Possible values: **nonFinancialNonReportable**, **financialNonReportable**, **nonFinancialActive**, **nonFinancialPassive**.
 	Type *string `json:"type,omitempty"`
@@ -175,7 +174,7 @@ func (o *TaxReportingClassification) SetType(v string) {
 }
 
 func (o TaxReportingClassification) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -235,30 +234,32 @@ func (v *NullableTaxReportingClassification) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *TaxReportingClassification) isValidBusinessType() bool {
-	var allowedEnumValues = []string{"other", "listedPublicCompany", "subsidiaryOfListedPublicCompany", "governmentalOrganization", "internationalOrganization", "financialInstitution"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetBusinessType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "other", "listedPublicCompany", "subsidiaryOfListedPublicCompany", "governmentalOrganization", "internationalOrganization", "financialInstitution" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetBusinessType() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *TaxReportingClassification) isValidMainSourceOfIncome() bool {
-	var allowedEnumValues = []string{"businessOperation", "realEstateSales", "investmentInterestOrRoyalty", "propertyRental", "other"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetMainSourceOfIncome() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "businessOperation", "realEstateSales", "investmentInterestOrRoyalty", "propertyRental", "other" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetMainSourceOfIncome() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *TaxReportingClassification) isValidType() bool {
-	var allowedEnumValues = []string{"nonFinancialNonReportable", "financialNonReportable", "nonFinancialActive", "nonFinancialPassive"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "nonFinancialNonReportable", "financialNonReportable", "nonFinancialActive", "nonFinancialPassive" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

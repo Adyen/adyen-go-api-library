@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the CardDetails type satisfies the MappedNullable interface at compile time
@@ -52,6 +51,12 @@ type CardDetails struct {
 	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
 	// The `shopperNotificationReference` returned in the response when you requested to notify the shopper. Used only for recurring payments in India.
 	ShopperNotificationReference *string `json:"shopperNotificationReference,omitempty"`
+	// An identifier used for the Click to Pay transaction.
+	SrcCorrelationId *string `json:"srcCorrelationId,omitempty"`
+	// The scheme that is being used for Click to Pay.
+	SrcScheme *string `json:"srcScheme,omitempty"`
+	// The reference for the Click to Pay token.
+	SrcTokenReference *string `json:"srcTokenReference,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
 	StoredPaymentMethodId *string `json:"storedPaymentMethodId,omitempty"`
 	// Required for mobile integrations. Version of the 3D Secure 2 mobile SDK.
@@ -599,6 +604,102 @@ func (o *CardDetails) SetShopperNotificationReference(v string) {
 	o.ShopperNotificationReference = &v
 }
 
+// GetSrcCorrelationId returns the SrcCorrelationId field value if set, zero value otherwise.
+func (o *CardDetails) GetSrcCorrelationId() string {
+	if o == nil || common.IsNil(o.SrcCorrelationId) {
+		var ret string
+		return ret
+	}
+	return *o.SrcCorrelationId
+}
+
+// GetSrcCorrelationIdOk returns a tuple with the SrcCorrelationId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CardDetails) GetSrcCorrelationIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SrcCorrelationId) {
+		return nil, false
+	}
+	return o.SrcCorrelationId, true
+}
+
+// HasSrcCorrelationId returns a boolean if a field has been set.
+func (o *CardDetails) HasSrcCorrelationId() bool {
+	if o != nil && !common.IsNil(o.SrcCorrelationId) {
+		return true
+	}
+
+	return false
+}
+
+// SetSrcCorrelationId gets a reference to the given string and assigns it to the SrcCorrelationId field.
+func (o *CardDetails) SetSrcCorrelationId(v string) {
+	o.SrcCorrelationId = &v
+}
+
+// GetSrcScheme returns the SrcScheme field value if set, zero value otherwise.
+func (o *CardDetails) GetSrcScheme() string {
+	if o == nil || common.IsNil(o.SrcScheme) {
+		var ret string
+		return ret
+	}
+	return *o.SrcScheme
+}
+
+// GetSrcSchemeOk returns a tuple with the SrcScheme field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CardDetails) GetSrcSchemeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SrcScheme) {
+		return nil, false
+	}
+	return o.SrcScheme, true
+}
+
+// HasSrcScheme returns a boolean if a field has been set.
+func (o *CardDetails) HasSrcScheme() bool {
+	if o != nil && !common.IsNil(o.SrcScheme) {
+		return true
+	}
+
+	return false
+}
+
+// SetSrcScheme gets a reference to the given string and assigns it to the SrcScheme field.
+func (o *CardDetails) SetSrcScheme(v string) {
+	o.SrcScheme = &v
+}
+
+// GetSrcTokenReference returns the SrcTokenReference field value if set, zero value otherwise.
+func (o *CardDetails) GetSrcTokenReference() string {
+	if o == nil || common.IsNil(o.SrcTokenReference) {
+		var ret string
+		return ret
+	}
+	return *o.SrcTokenReference
+}
+
+// GetSrcTokenReferenceOk returns a tuple with the SrcTokenReference field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CardDetails) GetSrcTokenReferenceOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SrcTokenReference) {
+		return nil, false
+	}
+	return o.SrcTokenReference, true
+}
+
+// HasSrcTokenReference returns a boolean if a field has been set.
+func (o *CardDetails) HasSrcTokenReference() bool {
+	if o != nil && !common.IsNil(o.SrcTokenReference) {
+		return true
+	}
+
+	return false
+}
+
+// SetSrcTokenReference gets a reference to the given string and assigns it to the SrcTokenReference field.
+func (o *CardDetails) SetSrcTokenReference(v string) {
+	o.SrcTokenReference = &v
+}
+
 // GetStoredPaymentMethodId returns the StoredPaymentMethodId field value if set, zero value otherwise.
 func (o *CardDetails) GetStoredPaymentMethodId() string {
 	if o == nil || common.IsNil(o.StoredPaymentMethodId) {
@@ -696,7 +797,7 @@ func (o *CardDetails) SetType(v string) {
 }
 
 func (o CardDetails) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -753,6 +854,15 @@ func (o CardDetails) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.ShopperNotificationReference) {
 		toSerialize["shopperNotificationReference"] = o.ShopperNotificationReference
 	}
+	if !common.IsNil(o.SrcCorrelationId) {
+		toSerialize["srcCorrelationId"] = o.SrcCorrelationId
+	}
+	if !common.IsNil(o.SrcScheme) {
+		toSerialize["srcScheme"] = o.SrcScheme
+	}
+	if !common.IsNil(o.SrcTokenReference) {
+		toSerialize["srcTokenReference"] = o.SrcTokenReference
+	}
 	if !common.IsNil(o.StoredPaymentMethodId) {
 		toSerialize["storedPaymentMethodId"] = o.StoredPaymentMethodId
 	}
@@ -801,21 +911,23 @@ func (v *NullableCardDetails) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *CardDetails) isValidFundingSource() bool {
-	var allowedEnumValues = []string{"credit", "debit"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetFundingSource() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "credit", "debit" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetFundingSource() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *CardDetails) isValidType() bool {
-	var allowedEnumValues = []string{"bcmc", "scheme", "networkToken", "giftcard", "card"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "bcmc", "scheme", "networkToken", "giftcard", "card" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+
