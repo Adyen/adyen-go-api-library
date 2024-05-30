@@ -19,7 +19,7 @@ var _ common.MappedNullable = &TerminalSettingsNotificationResponse{}
 
 // TerminalSettingsNotificationResponse struct for TerminalSettingsNotificationResponse
 type TerminalSettingsNotificationResponse struct {
-	// Respond with **HTTP 200 OK** and `[accepted]` in the response body to [accept the webhook](https://docs.adyen.com/development-resources/webhooks#accept-notifications).
+	// Respond with any **2xx** HTTP status code to [accept the webhook](https://docs.adyen.com/development-resources/webhooks#accept-notifications).
 	NotificationResponse *string `json:"notificationResponse,omitempty"`
 }
 

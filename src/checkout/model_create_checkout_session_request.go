@@ -44,11 +44,11 @@ type CreateCheckoutSessionRequest struct {
 	// The date and time when the purchased goods should be delivered.  [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format: YYYY-MM-DDThh:mm:ss+TZD, for example, **2020-12-18T10:15:30+01:00**.
 	DeliverAt       *time.Time       `json:"deliverAt,omitempty"`
 	DeliveryAddress *DeliveryAddress `json:"deliveryAddress,omitempty"`
-	// When true and `shopperReference` is provided, the shopper will be asked if the payment details should be stored for future one-click payments.
+	// When true and `shopperReference` is provided, the shopper will be asked if the payment details should be stored for future [one-click payments](https://docs.adyen.com/get-started-with-adyen/payment-glossary/#one-click-payments-definition).
 	EnableOneClick *bool `json:"enableOneClick,omitempty"`
 	// When true and `shopperReference` is provided, the payment details will be tokenized for payouts.
 	EnablePayOut *bool `json:"enablePayOut,omitempty"`
-	// When true and `shopperReference` is provided, the payment details will be tokenized for recurring payments.
+	// When true and `shopperReference` is provided, the payment details will be stored for [recurring payments](https://docs.adyen.com/online-payments/tokenization/#recurring-payment-types) where the shopper is not present, such as subscription or automatic top-up payments.
 	EnableRecurring *bool `json:"enableRecurring,omitempty"`
 	// The date the session expires in [ISO8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. When not specified, the expiry date is set to 1 hour after session creation. You cannot set the session expiry to more than 24 hours after session creation.
 	ExpiresAt     *time.Time     `json:"expiresAt,omitempty"`
@@ -111,7 +111,7 @@ type CreateCheckoutSessionRequest struct {
 	Splits []Split `json:"splits,omitempty"`
 	// Required for Adyen for Platforms integrations if you are a platform model. This is your [reference](https://docs.adyen.com/api-explorer/Management/3/post/merchants/(merchantId)/stores#request-reference) (on [balance platform](https://docs.adyen.com/platforms)) or the [storeReference](https://docs.adyen.com/api-explorer/Account/latest/post/updateAccountHolder#request-accountHolderDetails-storeDetails-storeReference) (in the [classic integration](https://docs.adyen.com/classic-platforms/processing-payments/route-payment-to-store/#route-a-payment-to-a-store)) for the ecommerce or point-of-sale store that is processing the payment.
 	Store *string `json:"store,omitempty"`
-	// When this is set to **true** and the `shopperReference` is provided, the payment details will be stored.
+	// When true and `shopperReference` is provided, the payment details will be stored for future [recurring payments](https://docs.adyen.com/online-payments/tokenization/#recurring-payment-types).
 	StorePaymentMethod *bool `json:"storePaymentMethod,omitempty"`
 	// Indicates if the details of the payment method will be stored for the shopper. Possible values: * **disabled** – No details will be stored (default). * **askForConsent** – If the `shopperReference` is provided, the UI lets the shopper choose if they want their payment details to be stored. * **enabled** – If the `shopperReference` is provided, the details will be stored without asking the shopper for consent.
 	StorePaymentMethodMode *string `json:"storePaymentMethodMode,omitempty"`

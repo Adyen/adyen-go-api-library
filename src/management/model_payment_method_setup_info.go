@@ -58,9 +58,11 @@ type PaymentMethodSetupInfo struct {
 	Swish    *SwishInfo `json:"swish,omitempty"`
 	Twint    *TwintInfo `json:"twint,omitempty"`
 	// Payment method [variant](https://docs.adyen.com/development-resources/paymentmethodvariant#management-api).
-	Type  string                `json:"type"`
-	Vipps *VippsInfo            `json:"vipps,omitempty"`
-	Visa  *GenericPmWithTdiInfo `json:"visa,omitempty"`
+	Type         string                `json:"type"`
+	Vipps        *VippsInfo            `json:"vipps,omitempty"`
+	Visa         *GenericPmWithTdiInfo `json:"visa,omitempty"`
+	Wechatpay    *WeChatPayInfo        `json:"wechatpay,omitempty"`
+	WechatpayPos *WeChatPayPosInfo     `json:"wechatpay_pos,omitempty"`
 }
 
 // NewPaymentMethodSetupInfo instantiates a new PaymentMethodSetupInfo object
@@ -1161,6 +1163,70 @@ func (o *PaymentMethodSetupInfo) SetVisa(v GenericPmWithTdiInfo) {
 	o.Visa = &v
 }
 
+// GetWechatpay returns the Wechatpay field value if set, zero value otherwise.
+func (o *PaymentMethodSetupInfo) GetWechatpay() WeChatPayInfo {
+	if o == nil || common.IsNil(o.Wechatpay) {
+		var ret WeChatPayInfo
+		return ret
+	}
+	return *o.Wechatpay
+}
+
+// GetWechatpayOk returns a tuple with the Wechatpay field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodSetupInfo) GetWechatpayOk() (*WeChatPayInfo, bool) {
+	if o == nil || common.IsNil(o.Wechatpay) {
+		return nil, false
+	}
+	return o.Wechatpay, true
+}
+
+// HasWechatpay returns a boolean if a field has been set.
+func (o *PaymentMethodSetupInfo) HasWechatpay() bool {
+	if o != nil && !common.IsNil(o.Wechatpay) {
+		return true
+	}
+
+	return false
+}
+
+// SetWechatpay gets a reference to the given WeChatPayInfo and assigns it to the Wechatpay field.
+func (o *PaymentMethodSetupInfo) SetWechatpay(v WeChatPayInfo) {
+	o.Wechatpay = &v
+}
+
+// GetWechatpayPos returns the WechatpayPos field value if set, zero value otherwise.
+func (o *PaymentMethodSetupInfo) GetWechatpayPos() WeChatPayPosInfo {
+	if o == nil || common.IsNil(o.WechatpayPos) {
+		var ret WeChatPayPosInfo
+		return ret
+	}
+	return *o.WechatpayPos
+}
+
+// GetWechatpayPosOk returns a tuple with the WechatpayPos field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodSetupInfo) GetWechatpayPosOk() (*WeChatPayPosInfo, bool) {
+	if o == nil || common.IsNil(o.WechatpayPos) {
+		return nil, false
+	}
+	return o.WechatpayPos, true
+}
+
+// HasWechatpayPos returns a boolean if a field has been set.
+func (o *PaymentMethodSetupInfo) HasWechatpayPos() bool {
+	if o != nil && !common.IsNil(o.WechatpayPos) {
+		return true
+	}
+
+	return false
+}
+
+// SetWechatpayPos gets a reference to the given WeChatPayPosInfo and assigns it to the WechatpayPos field.
+func (o *PaymentMethodSetupInfo) SetWechatpayPos(v WeChatPayPosInfo) {
+	o.WechatpayPos = &v
+}
+
 func (o PaymentMethodSetupInfo) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -1270,6 +1336,12 @@ func (o PaymentMethodSetupInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Visa) {
 		toSerialize["visa"] = o.Visa
+	}
+	if !common.IsNil(o.Wechatpay) {
+		toSerialize["wechatpay"] = o.Wechatpay
+	}
+	if !common.IsNil(o.WechatpayPos) {
+		toSerialize["wechatpay_pos"] = o.WechatpayPos
 	}
 	return toSerialize, nil
 }

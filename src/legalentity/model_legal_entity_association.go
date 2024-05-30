@@ -329,7 +329,7 @@ func (v *NullableLegalEntityAssociation) UnmarshalJSON(src []byte) error {
 }
 
 func (o *LegalEntityAssociation) isValidType() bool {
-	var allowedEnumValues = []string{"definedBeneficiary", "director", "pciSignatory", "protector", "secondaryTrustee", "settlor", "signatory", "soleProprietorship", "trust", "trustOwnership", "uboThroughControl", "uboThroughOwnership", "ultimateParentCompany", "undefinedBeneficiary"}
+	var allowedEnumValues = []string{"definedBeneficiary", "director", "immediateParentCompany", "pciSignatory", "protector", "secondaryTrustee", "settlor", "signatory", "soleProprietorship", "trust", "trustOwnership", "uboThroughControl", "uboThroughOwnership", "ultimateParentCompany", "undefinedBeneficiary"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

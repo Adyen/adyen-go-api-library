@@ -52,6 +52,12 @@ type CardDonations struct {
 	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
 	// The `shopperNotificationReference` returned in the response when you requested to notify the shopper. Used only for recurring payments in India.
 	ShopperNotificationReference *string `json:"shopperNotificationReference,omitempty"`
+	// An identifier used for the Click to Pay transaction.
+	SrcCorrelationId *string `json:"srcCorrelationId,omitempty"`
+	// The scheme that is being used for Click to Pay.
+	SrcScheme *string `json:"srcScheme,omitempty"`
+	// The reference for the Click to Pay token.
+	SrcTokenReference *string `json:"srcTokenReference,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
 	StoredPaymentMethodId *string `json:"storedPaymentMethodId,omitempty"`
 	// Required for mobile integrations. Version of the 3D Secure 2 mobile SDK.
@@ -599,6 +605,102 @@ func (o *CardDonations) SetShopperNotificationReference(v string) {
 	o.ShopperNotificationReference = &v
 }
 
+// GetSrcCorrelationId returns the SrcCorrelationId field value if set, zero value otherwise.
+func (o *CardDonations) GetSrcCorrelationId() string {
+	if o == nil || common.IsNil(o.SrcCorrelationId) {
+		var ret string
+		return ret
+	}
+	return *o.SrcCorrelationId
+}
+
+// GetSrcCorrelationIdOk returns a tuple with the SrcCorrelationId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CardDonations) GetSrcCorrelationIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SrcCorrelationId) {
+		return nil, false
+	}
+	return o.SrcCorrelationId, true
+}
+
+// HasSrcCorrelationId returns a boolean if a field has been set.
+func (o *CardDonations) HasSrcCorrelationId() bool {
+	if o != nil && !common.IsNil(o.SrcCorrelationId) {
+		return true
+	}
+
+	return false
+}
+
+// SetSrcCorrelationId gets a reference to the given string and assigns it to the SrcCorrelationId field.
+func (o *CardDonations) SetSrcCorrelationId(v string) {
+	o.SrcCorrelationId = &v
+}
+
+// GetSrcScheme returns the SrcScheme field value if set, zero value otherwise.
+func (o *CardDonations) GetSrcScheme() string {
+	if o == nil || common.IsNil(o.SrcScheme) {
+		var ret string
+		return ret
+	}
+	return *o.SrcScheme
+}
+
+// GetSrcSchemeOk returns a tuple with the SrcScheme field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CardDonations) GetSrcSchemeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SrcScheme) {
+		return nil, false
+	}
+	return o.SrcScheme, true
+}
+
+// HasSrcScheme returns a boolean if a field has been set.
+func (o *CardDonations) HasSrcScheme() bool {
+	if o != nil && !common.IsNil(o.SrcScheme) {
+		return true
+	}
+
+	return false
+}
+
+// SetSrcScheme gets a reference to the given string and assigns it to the SrcScheme field.
+func (o *CardDonations) SetSrcScheme(v string) {
+	o.SrcScheme = &v
+}
+
+// GetSrcTokenReference returns the SrcTokenReference field value if set, zero value otherwise.
+func (o *CardDonations) GetSrcTokenReference() string {
+	if o == nil || common.IsNil(o.SrcTokenReference) {
+		var ret string
+		return ret
+	}
+	return *o.SrcTokenReference
+}
+
+// GetSrcTokenReferenceOk returns a tuple with the SrcTokenReference field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CardDonations) GetSrcTokenReferenceOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SrcTokenReference) {
+		return nil, false
+	}
+	return o.SrcTokenReference, true
+}
+
+// HasSrcTokenReference returns a boolean if a field has been set.
+func (o *CardDonations) HasSrcTokenReference() bool {
+	if o != nil && !common.IsNil(o.SrcTokenReference) {
+		return true
+	}
+
+	return false
+}
+
+// SetSrcTokenReference gets a reference to the given string and assigns it to the SrcTokenReference field.
+func (o *CardDonations) SetSrcTokenReference(v string) {
+	o.SrcTokenReference = &v
+}
+
 // GetStoredPaymentMethodId returns the StoredPaymentMethodId field value if set, zero value otherwise.
 func (o *CardDonations) GetStoredPaymentMethodId() string {
 	if o == nil || common.IsNil(o.StoredPaymentMethodId) {
@@ -752,6 +854,15 @@ func (o CardDonations) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.ShopperNotificationReference) {
 		toSerialize["shopperNotificationReference"] = o.ShopperNotificationReference
+	}
+	if !common.IsNil(o.SrcCorrelationId) {
+		toSerialize["srcCorrelationId"] = o.SrcCorrelationId
+	}
+	if !common.IsNil(o.SrcScheme) {
+		toSerialize["srcScheme"] = o.SrcScheme
+	}
+	if !common.IsNil(o.SrcTokenReference) {
+		toSerialize["srcTokenReference"] = o.SrcTokenReference
 	}
 	if !common.IsNil(o.StoredPaymentMethodId) {
 		toSerialize["storedPaymentMethodId"] = o.StoredPaymentMethodId

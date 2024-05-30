@@ -387,6 +387,104 @@ func (a *AndroidFilesCompanyLevelApi) ListAndroidCertificates(ctx context.Contex
 	return *res, httpRes, err
 }
 
+// All parameters accepted by AndroidFilesCompanyLevelApi.ReprocessAndroidApp
+type AndroidFilesCompanyLevelApiReprocessAndroidAppInput struct {
+	companyId string
+	id        string
+}
+
+/*
+Prepare a request for ReprocessAndroidApp
+@param companyId The unique identifier of the company account.@param id The unique identifier of the app.
+@return AndroidFilesCompanyLevelApiReprocessAndroidAppInput
+*/
+func (a *AndroidFilesCompanyLevelApi) ReprocessAndroidAppInput(companyId string, id string) AndroidFilesCompanyLevelApiReprocessAndroidAppInput {
+	return AndroidFilesCompanyLevelApiReprocessAndroidAppInput{
+		companyId: companyId,
+		id:        id,
+	}
+}
+
+/*
+ReprocessAndroidApp Reprocess Android App
+
+Reuploads the Android app identified in the path.
+To make this request, your API credential must have this [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+* Management API—Android files read and write
+
+>By choosing to upload, install, or run any third-party applications on an Adyen payment terminal, you accept full responsibility and liability for any consequences of uploading, installing, or running any such applications.
+
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r AndroidFilesCompanyLevelApiReprocessAndroidAppInput - Request parameters, see ReprocessAndroidAppInput
+@return ReprocessAndroidAppResponse, *http.Response, error
+*/
+func (a *AndroidFilesCompanyLevelApi) ReprocessAndroidApp(ctx context.Context, r AndroidFilesCompanyLevelApiReprocessAndroidAppInput) (ReprocessAndroidAppResponse, *http.Response, error) {
+	res := &ReprocessAndroidAppResponse{}
+	path := "/companies/{companyId}/androidApps/{id}"
+	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodPatch,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 400 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+
+	return *res, httpRes, err
+}
+
 // All parameters accepted by AndroidFilesCompanyLevelApi.UploadAndroidApp
 type AndroidFilesCompanyLevelApiUploadAndroidAppInput struct {
 	companyId string

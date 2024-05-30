@@ -23,7 +23,7 @@ type TaxReportingClassification struct {
 	BusinessType *string `json:"businessType,omitempty"`
 	// The Global Intermediary Identification Number (GIIN) required for FATCA. Only required if the organization is a US financial institution and the `businessType` is **financialInstitution**.
 	FinancialInstitutionNumber *string `json:"financialInstitutionNumber,omitempty"`
-	// The organization's main source of income.  Possible values: **businessOperation**, **realEstateSales**, **investmentInterestOrRoyalty**, **propertyRental**, **other**.
+	// The organization's main source of income. Only required if `businessType` is **other**.  Possible values: **businessOperation**, **realEstateSales**, **investmentInterestOrRoyalty**, **propertyRental**, **other**.
 	MainSourceOfIncome *string `json:"mainSourceOfIncome,omitempty"`
 	// The tax reporting classification type.  Possible values: **nonFinancialNonReportable**, **financialNonReportable**, **nonFinancialActive**, **nonFinancialPassive**.
 	Type *string `json:"type,omitempty"`

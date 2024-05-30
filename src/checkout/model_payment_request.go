@@ -52,11 +52,11 @@ type PaymentRequest struct {
 	DeliveryDate *time.Time `json:"deliveryDate,omitempty"`
 	// A string containing the shopper's device fingerprint. For more information, refer to [Device fingerprinting](https://docs.adyen.com/risk-management/device-fingerprinting).
 	DeviceFingerprint *string `json:"deviceFingerprint,omitempty"`
-	// When true and `shopperReference` is provided, the shopper will be asked if the payment details should be stored for future one-click payments.
+	// When true and `shopperReference` is provided, the shopper will be asked if the payment details should be stored for future [one-click payments](https://docs.adyen.com/get-started-with-adyen/payment-glossary/#one-click-payments-definition).
 	EnableOneClick *bool `json:"enableOneClick,omitempty"`
 	// When true and `shopperReference` is provided, the payment details will be tokenized for payouts.
 	EnablePayOut *bool `json:"enablePayOut,omitempty"`
-	// When true and `shopperReference` is provided, the payment details will be tokenized for recurring payments.
+	// When true and `shopperReference` is provided, the payment details will be stored for [recurring payments](https://docs.adyen.com/online-payments/tokenization/#recurring-payment-types) where the shopper is not present, such as subscription or automatic top-up payments.
 	EnableRecurring *bool `json:"enableRecurring,omitempty"`
 	// The type of the entity the payment is processed for.
 	EntityType *string `json:"entityType,omitempty"`
@@ -125,7 +125,7 @@ type PaymentRequest struct {
 	Splits []Split `json:"splits,omitempty"`
 	// Required for Adyen for Platforms integrations if you are a platform model. This is your [reference](https://docs.adyen.com/api-explorer/Management/3/post/merchants/(merchantId)/stores#request-reference) (on [balance platform](https://docs.adyen.com/platforms)) or the [storeReference](https://docs.adyen.com/api-explorer/Account/latest/post/updateAccountHolder#request-accountHolderDetails-storeDetails-storeReference) (in the [classic integration](https://docs.adyen.com/classic-platforms/processing-payments/route-payment-to-store/#route-a-payment-to-a-store)) for the ecommerce or point-of-sale store that is processing the payment.
 	Store *string `json:"store,omitempty"`
-	// When true and `shopperReference` is provided, the payment details will be stored.
+	// When true and `shopperReference` is provided, the payment details will be stored for future [recurring payments](https://docs.adyen.com/online-payments/tokenization/#recurring-payment-types).
 	StorePaymentMethod *bool `json:"storePaymentMethod,omitempty"`
 	// The shopper's telephone number.
 	TelephoneNumber     *string                `json:"telephoneNumber,omitempty"`
