@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v9/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the GooglePayDonations type satisfies the MappedNullable interface at compile time
@@ -22,7 +23,7 @@ type GooglePayDonations struct {
 	CheckoutAttemptId *string `json:"checkoutAttemptId,omitempty"`
 	// The funding source that should be used when multiple sources are available. For Brazilian combo cards, by default the funding source is credit. To use debit, set this value to **debit**.
 	FundingSource *string `json:"fundingSource,omitempty"`
-	// The selected payment card network. 
+	// The selected payment card network.
 	GooglePayCardNetwork *string `json:"googlePayCardNetwork,omitempty"`
 	// The `token` that you obtained from the [Google Pay API](https://developers.google.com/pay/api/web/reference/response-objects#PaymentData) `PaymentData` response.
 	GooglePayToken string `json:"googlePayToken"`
@@ -311,7 +312,7 @@ func (o *GooglePayDonations) SetType(v string) {
 }
 
 func (o GooglePayDonations) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -381,23 +382,21 @@ func (v *NullableGooglePayDonations) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *GooglePayDonations) isValidFundingSource() bool {
-    var allowedEnumValues = []string{ "credit", "debit" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetFundingSource() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"credit", "debit"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetFundingSource() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *GooglePayDonations) isValidType() bool {
-    var allowedEnumValues = []string{ "googlepay" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"googlepay"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

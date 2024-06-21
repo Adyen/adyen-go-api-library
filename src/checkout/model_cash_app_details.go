@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v9/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the CashAppDetails type satisfies the MappedNullable interface at compile time
@@ -386,7 +387,7 @@ func (o *CashAppDetails) SetType(v string) {
 }
 
 func (o CashAppDetails) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -464,14 +465,12 @@ func (v *NullableCashAppDetails) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *CashAppDetails) isValidType() bool {
-    var allowedEnumValues = []string{ "cashapp" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"cashapp"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

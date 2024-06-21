@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v9/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the DeviceRenderOptions type satisfies the MappedNullable interface at compile time
@@ -110,7 +111,7 @@ func (o *DeviceRenderOptions) SetSdkUiType(v []string) {
 }
 
 func (o DeviceRenderOptions) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -164,14 +165,12 @@ func (v *NullableDeviceRenderOptions) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *DeviceRenderOptions) isValidSdkInterface() bool {
-    var allowedEnumValues = []string{ "native", "html", "both" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetSdkInterface() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"native", "html", "both"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetSdkInterface() == allowed {
+			return true
+		}
+	}
+	return false
 }
-
