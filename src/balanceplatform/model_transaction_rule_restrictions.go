@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the TransactionRuleRestrictions type satisfies the MappedNullable interface at compile time
@@ -19,24 +18,25 @@ var _ common.MappedNullable = &TransactionRuleRestrictions{}
 
 // TransactionRuleRestrictions struct for TransactionRuleRestrictions
 type TransactionRuleRestrictions struct {
-	ActiveNetworkTokens         *ActiveNetworkTokensRestriction      `json:"activeNetworkTokens,omitempty"`
-	BrandVariants               *BrandVariantsRestriction            `json:"brandVariants,omitempty"`
-	CounterpartyBank            *CounterpartyBankRestriction         `json:"counterpartyBank,omitempty"`
-	Countries                   *CountriesRestriction                `json:"countries,omitempty"`
-	DayOfWeek                   *DayOfWeekRestriction                `json:"dayOfWeek,omitempty"`
-	DifferentCurrencies         *DifferentCurrenciesRestriction      `json:"differentCurrencies,omitempty"`
-	EntryModes                  *EntryModesRestriction               `json:"entryModes,omitempty"`
-	InternationalTransaction    *InternationalTransactionRestriction `json:"internationalTransaction,omitempty"`
-	MatchingTransactions        *MatchingTransactionsRestriction     `json:"matchingTransactions,omitempty"`
-	Mccs                        *MccsRestriction                     `json:"mccs,omitempty"`
-	MerchantNames               *MerchantNamesRestriction            `json:"merchantNames,omitempty"`
-	Merchants                   *MerchantsRestriction                `json:"merchants,omitempty"`
-	ProcessingTypes             *ProcessingTypesRestriction          `json:"processingTypes,omitempty"`
-	RiskScores                  *RiskScoresRestriction               `json:"riskScores,omitempty"`
-	SameAmountRestriction       *SameAmountRestriction               `json:"sameAmountRestriction,omitempty"`
-	SameCounterpartyRestriction *SameCounterpartyRestriction         `json:"sameCounterpartyRestriction,omitempty"`
-	TimeOfDay                   *TimeOfDayRestriction                `json:"timeOfDay,omitempty"`
-	TotalAmount                 *TotalAmountRestriction              `json:"totalAmount,omitempty"`
+	ActiveNetworkTokens *ActiveNetworkTokensRestriction `json:"activeNetworkTokens,omitempty"`
+	BrandVariants *BrandVariantsRestriction `json:"brandVariants,omitempty"`
+	CounterpartyBank *CounterpartyBankRestriction `json:"counterpartyBank,omitempty"`
+	Countries *CountriesRestriction `json:"countries,omitempty"`
+	DayOfWeek *DayOfWeekRestriction `json:"dayOfWeek,omitempty"`
+	DifferentCurrencies *DifferentCurrenciesRestriction `json:"differentCurrencies,omitempty"`
+	EntryModes *EntryModesRestriction `json:"entryModes,omitempty"`
+	InternationalTransaction *InternationalTransactionRestriction `json:"internationalTransaction,omitempty"`
+	MatchingTransactions *MatchingTransactionsRestriction `json:"matchingTransactions,omitempty"`
+	MatchingValues *MatchingValuesRestriction `json:"matchingValues,omitempty"`
+	Mccs *MccsRestriction `json:"mccs,omitempty"`
+	MerchantNames *MerchantNamesRestriction `json:"merchantNames,omitempty"`
+	Merchants *MerchantsRestriction `json:"merchants,omitempty"`
+	ProcessingTypes *ProcessingTypesRestriction `json:"processingTypes,omitempty"`
+	RiskScores *RiskScoresRestriction `json:"riskScores,omitempty"`
+	SameAmountRestriction *SameAmountRestriction `json:"sameAmountRestriction,omitempty"`
+	SameCounterpartyRestriction *SameCounterpartyRestriction `json:"sameCounterpartyRestriction,omitempty"`
+	TimeOfDay *TimeOfDayRestriction `json:"timeOfDay,omitempty"`
+	TotalAmount *TotalAmountRestriction `json:"totalAmount,omitempty"`
 }
 
 // NewTransactionRuleRestrictions instantiates a new TransactionRuleRestrictions object
@@ -344,6 +344,38 @@ func (o *TransactionRuleRestrictions) SetMatchingTransactions(v MatchingTransact
 	o.MatchingTransactions = &v
 }
 
+// GetMatchingValues returns the MatchingValues field value if set, zero value otherwise.
+func (o *TransactionRuleRestrictions) GetMatchingValues() MatchingValuesRestriction {
+	if o == nil || common.IsNil(o.MatchingValues) {
+		var ret MatchingValuesRestriction
+		return ret
+	}
+	return *o.MatchingValues
+}
+
+// GetMatchingValuesOk returns a tuple with the MatchingValues field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionRuleRestrictions) GetMatchingValuesOk() (*MatchingValuesRestriction, bool) {
+	if o == nil || common.IsNil(o.MatchingValues) {
+		return nil, false
+	}
+	return o.MatchingValues, true
+}
+
+// HasMatchingValues returns a boolean if a field has been set.
+func (o *TransactionRuleRestrictions) HasMatchingValues() bool {
+	if o != nil && !common.IsNil(o.MatchingValues) {
+		return true
+	}
+
+	return false
+}
+
+// SetMatchingValues gets a reference to the given MatchingValuesRestriction and assigns it to the MatchingValues field.
+func (o *TransactionRuleRestrictions) SetMatchingValues(v MatchingValuesRestriction) {
+	o.MatchingValues = &v
+}
+
 // GetMccs returns the Mccs field value if set, zero value otherwise.
 func (o *TransactionRuleRestrictions) GetMccs() MccsRestriction {
 	if o == nil || common.IsNil(o.Mccs) {
@@ -633,7 +665,7 @@ func (o *TransactionRuleRestrictions) SetTotalAmount(v TotalAmountRestriction) {
 }
 
 func (o TransactionRuleRestrictions) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -668,6 +700,9 @@ func (o TransactionRuleRestrictions) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.MatchingTransactions) {
 		toSerialize["matchingTransactions"] = o.MatchingTransactions
+	}
+	if !common.IsNil(o.MatchingValues) {
+		toSerialize["matchingValues"] = o.MatchingValues
 	}
 	if !common.IsNil(o.Mccs) {
 		toSerialize["mccs"] = o.Mccs
@@ -734,3 +769,6 @@ func (v *NullableTransactionRuleRestrictions) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

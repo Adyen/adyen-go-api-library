@@ -10,8 +10,7 @@ package transferwebhook
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the PartyIdentification type satisfies the MappedNullable interface at compile time
@@ -22,11 +21,11 @@ type PartyIdentification struct {
 	Address *Address `json:"address,omitempty"`
 	// The date of birth of the individual in [ISO-8601](https://www.w3.org/TR/NOTE-datetime) format. For example, **YYYY-MM-DD**. Should not be before January 1, 1900.  Allowed only when `type` is **individual**.
 	DateOfBirth *string `json:"dateOfBirth,omitempty"`
-	// First name of the individual.  Allowed only when `type` is **individual**.  Supported characters: [a-z] [A-Z] - . / — and Space.
+	// First name of the individual.  Allowed only when `type` is **individual**.  Supported characters: [a-z] [A-Z] - . / — and Space. 
 	FirstName *string `json:"firstName,omitempty"`
-	// The name of the entity.  Supported characters: [a-z] [A-Z] [0-9] , . ; : - — / \\ + & ! ? @ ( ) \" ' and Space.
+	// The name of the entity.  Supported characters: [a-z] [A-Z] [0-9] , . ; : - — / \\ + & ! ? @ ( ) \" ' and Space. 
 	FullName string `json:"fullName"`
-	// Last name of the individual.  Allowed only when `type` is **individual**.  Supported characters: [a-z] [A-Z] - . / — and Space.
+	// Last name of the individual.  Allowed only when `type` is **individual**.  Supported characters: [a-z] [A-Z] - . / — and Space. 
 	LastName *string `json:"lastName,omitempty"`
 	// A unique reference to identify the party or counterparty involved in transfers. This identifier ensures consistency and uniqueness throughout all transactions initiated to and from the same party. For example, your client's unique wallet or payee ID.
 	Reference *string `json:"reference,omitempty"`
@@ -273,7 +272,7 @@ func (o *PartyIdentification) SetType(v string) {
 }
 
 func (o PartyIdentification) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -340,12 +339,14 @@ func (v *NullablePartyIdentification) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *PartyIdentification) isValidType() bool {
-	var allowedEnumValues = []string{"individual", "organization", "unknown"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "individual", "organization", "unknown" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

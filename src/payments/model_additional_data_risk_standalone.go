@@ -10,8 +10,7 @@ package payments
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the AdditionalDataRiskStandalone type satisfies the MappedNullable interface at compile time
@@ -37,7 +36,7 @@ type AdditionalDataRiskStandalone struct {
 	PayPalTransactionId *string `json:"PayPal.TransactionId,omitempty"`
 	// Raw AVS result received from the acquirer, where available. Example: D
 	AvsResultRaw *string `json:"avsResultRaw,omitempty"`
-	// The Bank Identification Number of a credit card, which is the first six digits of a card number. Required for [tokenized card request](https://docs.adyen.com/risk-management/standalone-risk#tokenised-pan-request).
+	// The Bank Identification Number of a credit card, which is the first six digits of a card number. Required for [tokenized card request](https://docs.adyen.com/online-payments/tokenization).
 	Bin *string `json:"bin,omitempty"`
 	// Raw CVC result received from the acquirer, where available. Example: 1
 	CvcResultRaw *string `json:"cvcResultRaw,omitempty"`
@@ -549,7 +548,7 @@ func (o *AdditionalDataRiskStandalone) SetTokenDataType(v string) {
 }
 
 func (o AdditionalDataRiskStandalone) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -641,3 +640,6 @@ func (v *NullableAdditionalDataRiskStandalone) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

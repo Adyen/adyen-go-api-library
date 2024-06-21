@@ -10,8 +10,7 @@ package reportwebhook
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the BalancePlatformNotificationResponse type satisfies the MappedNullable interface at compile time
@@ -19,7 +18,7 @@ var _ common.MappedNullable = &BalancePlatformNotificationResponse{}
 
 // BalancePlatformNotificationResponse struct for BalancePlatformNotificationResponse
 type BalancePlatformNotificationResponse struct {
-	// Respond with **HTTP 200 OK** and `[accepted]` in the response body to [accept the webhook](https://docs.adyen.com/development-resources/webhooks#accept-notifications).
+	// Respond with any **2xx** HTTP status code to [accept the webhook](https://docs.adyen.com/development-resources/webhooks#accept-notifications).
 	NotificationResponse *string `json:"notificationResponse,omitempty"`
 }
 
@@ -73,7 +72,7 @@ func (o *BalancePlatformNotificationResponse) SetNotificationResponse(v string) 
 }
 
 func (o BalancePlatformNotificationResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -123,3 +122,6 @@ func (v *NullableBalancePlatformNotificationResponse) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

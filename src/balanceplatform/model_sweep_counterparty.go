@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the SweepCounterparty type satisfies the MappedNullable interface at compile time
@@ -19,11 +18,11 @@ var _ common.MappedNullable = &SweepCounterparty{}
 
 // SweepCounterparty struct for SweepCounterparty
 type SweepCounterparty struct {
-	// The unique identifier of the destination or source [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id).   You can only use this for periodic sweep schedules such as `schedule.type` **daily** or **monthly**.
+	// The unique identifier of the destination or source [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id).   > If you are updating the counterparty from a transfer instrument to a balance account, set `transferInstrumentId` to **null**.
 	BalanceAccountId *string `json:"balanceAccountId,omitempty"`
-	// The merchant account that will be the source of funds.  You can only use this parameter with sweeps of `type` **pull** and `schedule.type` **balance**, and if you are processing payments with Adyen.
+	// The merchant account that will be the source of funds.  You can only use this parameter with sweeps of `type` **pull** and if you are processing payments with Adyen.
 	MerchantAccount *string `json:"merchantAccount,omitempty"`
-	// The unique identifier of the destination or source [transfer instrument](https://docs.adyen.com/api-explorer/legalentity/latest/post/transferInstruments#responses-200-id) depending on the sweep `type`.  To set up automated top-up sweeps to balance accounts in your [marketplace](https://docs.adyen.com/marketplaces/top-up-balance-account/#before-you-begin) or [platform](https://docs.adyen.com/platforms/top-up-balance-account/#before-you-begin), use this parameter in combination with a `merchantAccount` and a sweep `type` of **pull**.  Top-up sweeps start a direct debit request from the source transfer instrument. Contact Adyen Support to enable this feature.
+	// The unique identifier of the destination or source [transfer instrument](https://docs.adyen.com/api-explorer/legalentity/latest/post/transferInstruments#responses-200-id) depending on the sweep `type`  . To set up automated top-up sweeps to balance accounts in your [marketplace](https://docs.adyen.com/marketplaces/top-up-balance-account/#before-you-begin) or [platform](https://docs.adyen.com/platforms/top-up-balance-account/#before-you-begin), use this parameter in combination with a `merchantAccount` and a sweep `type` of **pull**.  Top-up sweeps start a direct debit request from the source transfer instrument. Contact Adyen Support to enable this feature.> If you are updating the counterparty from a balance account to a transfer instrument, set `balanceAccountId` to **null**.
 	TransferInstrumentId *string `json:"transferInstrumentId,omitempty"`
 }
 
@@ -141,7 +140,7 @@ func (o *SweepCounterparty) SetTransferInstrumentId(v string) {
 }
 
 func (o SweepCounterparty) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -197,3 +196,6 @@ func (v *NullableSweepCounterparty) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

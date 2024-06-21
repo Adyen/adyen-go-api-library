@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the GooglePayDonations type satisfies the MappedNullable interface at compile time
@@ -23,7 +22,7 @@ type GooglePayDonations struct {
 	CheckoutAttemptId *string `json:"checkoutAttemptId,omitempty"`
 	// The funding source that should be used when multiple sources are available. For Brazilian combo cards, by default the funding source is credit. To use debit, set this value to **debit**.
 	FundingSource *string `json:"fundingSource,omitempty"`
-	// The selected payment card network.
+	// The selected payment card network. 
 	GooglePayCardNetwork *string `json:"googlePayCardNetwork,omitempty"`
 	// The `token` that you obtained from the [Google Pay API](https://developers.google.com/pay/api/web/reference/response-objects#PaymentData) `PaymentData` response.
 	GooglePayToken string `json:"googlePayToken"`
@@ -32,6 +31,8 @@ type GooglePayDonations struct {
 	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
 	StoredPaymentMethodId *string `json:"storedPaymentMethodId,omitempty"`
+	// Required for mobile integrations. Version of the 3D Secure 2 mobile SDK.
+	ThreeDS2SdkVersion *string `json:"threeDS2SdkVersion,omitempty"`
 	// **googlepay**, **paywithgoogle**
 	Type *string `json:"type,omitempty"`
 }
@@ -245,6 +246,38 @@ func (o *GooglePayDonations) SetStoredPaymentMethodId(v string) {
 	o.StoredPaymentMethodId = &v
 }
 
+// GetThreeDS2SdkVersion returns the ThreeDS2SdkVersion field value if set, zero value otherwise.
+func (o *GooglePayDonations) GetThreeDS2SdkVersion() string {
+	if o == nil || common.IsNil(o.ThreeDS2SdkVersion) {
+		var ret string
+		return ret
+	}
+	return *o.ThreeDS2SdkVersion
+}
+
+// GetThreeDS2SdkVersionOk returns a tuple with the ThreeDS2SdkVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GooglePayDonations) GetThreeDS2SdkVersionOk() (*string, bool) {
+	if o == nil || common.IsNil(o.ThreeDS2SdkVersion) {
+		return nil, false
+	}
+	return o.ThreeDS2SdkVersion, true
+}
+
+// HasThreeDS2SdkVersion returns a boolean if a field has been set.
+func (o *GooglePayDonations) HasThreeDS2SdkVersion() bool {
+	if o != nil && !common.IsNil(o.ThreeDS2SdkVersion) {
+		return true
+	}
+
+	return false
+}
+
+// SetThreeDS2SdkVersion gets a reference to the given string and assigns it to the ThreeDS2SdkVersion field.
+func (o *GooglePayDonations) SetThreeDS2SdkVersion(v string) {
+	o.ThreeDS2SdkVersion = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *GooglePayDonations) GetType() string {
 	if o == nil || common.IsNil(o.Type) {
@@ -278,7 +311,7 @@ func (o *GooglePayDonations) SetType(v string) {
 }
 
 func (o GooglePayDonations) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -302,6 +335,9 @@ func (o GooglePayDonations) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.StoredPaymentMethodId) {
 		toSerialize["storedPaymentMethodId"] = o.StoredPaymentMethodId
+	}
+	if !common.IsNil(o.ThreeDS2SdkVersion) {
+		toSerialize["threeDS2SdkVersion"] = o.ThreeDS2SdkVersion
 	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type
@@ -345,21 +381,23 @@ func (v *NullableGooglePayDonations) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *GooglePayDonations) isValidFundingSource() bool {
-	var allowedEnumValues = []string{"credit", "debit"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetFundingSource() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "credit", "debit" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetFundingSource() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *GooglePayDonations) isValidType() bool {
-	var allowedEnumValues = []string{"googlepay"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "googlepay" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

@@ -10,9 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 	"time"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the PaymentLinkRequest type satisfies the MappedNullable interface at compile time
@@ -21,10 +20,10 @@ var _ common.MappedNullable = &PaymentLinkRequest{}
 // PaymentLinkRequest struct for PaymentLinkRequest
 type PaymentLinkRequest struct {
 	// List of payment methods to be presented to the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).  Example: `\"allowedPaymentMethods\":[\"ideal\",\"giropay\"]`
-	AllowedPaymentMethods []string         `json:"allowedPaymentMethods,omitempty"`
-	Amount                Amount           `json:"amount"`
-	ApplicationInfo       *ApplicationInfo `json:"applicationInfo,omitempty"`
-	BillingAddress        *Address         `json:"billingAddress,omitempty"`
+	AllowedPaymentMethods []string `json:"allowedPaymentMethods,omitempty"`
+	Amount Amount `json:"amount"`
+	ApplicationInfo *ApplicationInfo `json:"applicationInfo,omitempty"`
+	BillingAddress *Address `json:"billingAddress,omitempty"`
 	// List of payment methods to be hidden from the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).  Example: `\"blockedPaymentMethods\":[\"ideal\",\"giropay\"]`
 	BlockedPaymentMethods []string `json:"blockedPaymentMethods,omitempty"`
 	// The delay between the authorisation and scheduled auto-capture, specified in hours.
@@ -34,8 +33,8 @@ type PaymentLinkRequest struct {
 	// The shopper's date of birth.  Format [ISO-8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DD
 	DateOfBirth *string `json:"dateOfBirth,omitempty"`
 	// The date and time when the purchased goods should be delivered.  [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format: YYYY-MM-DDThh:mm:ss+TZD, for example, **2020-12-18T10:15:30+01:00**.
-	DeliverAt       *time.Time `json:"deliverAt,omitempty"`
-	DeliveryAddress *Address   `json:"deliveryAddress,omitempty"`
+	DeliverAt *time.Time `json:"deliverAt,omitempty"`
+	DeliveryAddress *Address `json:"deliveryAddress,omitempty"`
 	// A short description visible on the payment page. Maximum length: 280 characters.
 	Description *string `json:"description,omitempty"`
 	// The date when the payment link expires.  [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format with time zone offset: YYYY-MM-DDThh:mm:ss+TZD, for example, **2020-12-18T10:15:30+01:00**.  The maximum expiry date is 70 days after the payment link is created.  If not provided, the payment link expires 24 hours after it was created.
@@ -54,22 +53,23 @@ type PaymentLinkRequest struct {
 	MerchantOrderReference *string `json:"merchantOrderReference,omitempty"`
 	// Metadata consists of entries, each of which includes a key and a value. Limitations: * Maximum 20 key-value pairs per request. Otherwise, error \"177\" occurs: \"Metadata size exceeds limit\" * Maximum 20 characters per key. Otherwise, error \"178\" occurs: \"Metadata key size exceeds limit\" * A key cannot have the name `checkout.linkId`. Any value that you provide with this key is going to be replaced by the real payment link ID.
 	Metadata *map[string]string `json:"metadata,omitempty"`
-	// Defines a recurring payment type. Required when `storePaymentMethodMode` is set to **askForConsent** or **enabled**. Possible values: * **Subscription** – A transaction for a fixed or variable amount, which follows a fixed schedule. * **CardOnFile** – With a card-on-file (CoF) transaction, card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction. * **UnscheduledCardOnFile** – An unscheduled card-on-file (UCoF) transaction is a transaction that occurs on a non-fixed schedule and/or has variable amounts. For example, automatic top-ups when a cardholder's balance drops below a certain amount.
+	PlatformChargebackLogic *PlatformChargebackLogic `json:"platformChargebackLogic,omitempty"`
+	// Defines a recurring payment type. Required when `storePaymentMethodMode` is set to **askForConsent** or **enabled**. Possible values: * **Subscription** – A transaction for a fixed or variable amount, which follows a fixed schedule. * **CardOnFile** – With a card-on-file (CoF) transaction, card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction. * **UnscheduledCardOnFile** – An unscheduled card-on-file (UCoF) transaction is a transaction that occurs on a non-fixed schedule and/or has variable amounts. For example, automatic top-ups when a cardholder's balance drops below a certain amount. 
 	RecurringProcessingModel *string `json:"recurringProcessingModel,omitempty"`
 	// A reference that is used to uniquely identify the payment in future communications about the payment status.
 	Reference string `json:"reference"`
-	// List of fields that the shopper has to provide on the payment page before completing the payment. For more information, refer to [Provide shopper information](https://docs.adyen.com/unified-commerce/pay-by-link/payment-links/api#shopper-information).  Possible values: * **billingAddress** – The address where to send the invoice. * **deliveryAddress** – The address where the purchased goods should be delivered. * **shopperEmail** – The shopper's email address. * **shopperName** – The shopper's full name. * **telephoneNumber** – The shopper's phone number.
+	// List of fields that the shopper has to provide on the payment page before completing the payment. For more information, refer to [Provide shopper information](https://docs.adyen.com/unified-commerce/pay-by-link/payment-links/api#shopper-information).  Possible values: * **billingAddress** – The address where to send the invoice. * **deliveryAddress** – The address where the purchased goods should be delivered. * **shopperEmail** – The shopper's email address. * **shopperName** – The shopper's full name. * **telephoneNumber** – The shopper's phone number. 
 	RequiredShopperFields []string `json:"requiredShopperFields,omitempty"`
 	// Website URL used for redirection after payment is completed. If provided, a **Continue** button will be shown on the payment page. If shoppers select the button, they are redirected to the specified URL.
 	ReturnUrl *string `json:"returnUrl,omitempty"`
 	// Indicates whether the payment link can be reused for multiple payments. If not provided, this defaults to **false** which means the link can be used for one successful payment only.
-	Reusable *bool     `json:"reusable,omitempty"`
+	Reusable *bool `json:"reusable,omitempty"`
 	RiskData *RiskData `json:"riskData,omitempty"`
 	// The shopper's email address.
 	ShopperEmail *string `json:"shopperEmail,omitempty"`
 	// The language to be used in the payment page, specified by a combination of a language and country code. For example, `en-US`.  For a list of shopper locales that Pay by Link supports, refer to [Language and localization](https://docs.adyen.com/unified-commerce/pay-by-link/payment-links/api#language).
 	ShopperLocale *string `json:"shopperLocale,omitempty"`
-	ShopperName   *Name   `json:"shopperName,omitempty"`
+	ShopperName *Name `json:"shopperName,omitempty"`
 	// Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters. > Your reference must not include personally identifiable information (PII), for example name or email address.
 	ShopperReference *string `json:"shopperReference,omitempty"`
 	// The text to be shown on the shopper's bank statement.  We recommend sending a maximum of 22 characters, otherwise banks might truncate the string.  Allowed characters: **a-z**, **A-Z**, **0-9**, spaces, and special characters **. , ' _ - ? + * /_**.
@@ -80,7 +80,7 @@ type PaymentLinkRequest struct {
 	SocialSecurityNumber *string `json:"socialSecurityNumber,omitempty"`
 	// Boolean value indicating whether the card payment method should be split into separate debit and credit options.
 	SplitCardFundingSources *bool `json:"splitCardFundingSources,omitempty"`
-	// An array of objects specifying how to split a payment when using [Adyen for Platforms](https://docs.adyen.com/platforms/processing-payments#providing-split-information), [Classic Platforms integration](https://docs.adyen.com/classic-platforms/processing-payments#providing-split-information), or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
+	// An array of objects specifying how to split a payment when using [Adyen for Platforms](https://docs.adyen.com/platforms/process-payments#providing-split-information), [Classic Platforms integration](https://docs.adyen.com/classic-platforms/processing-payments#providing-split-information), or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
 	Splits []Split `json:"splits,omitempty"`
 	// The physical store, for which this payment is processed.
 	Store *string `json:"store,omitempty"`
@@ -90,6 +90,7 @@ type PaymentLinkRequest struct {
 	TelephoneNumber *string `json:"telephoneNumber,omitempty"`
 	// A [theme](https://docs.adyen.com/unified-commerce/pay-by-link/payment-links/api#themes) to customize the appearance of the payment page. If not specified, the payment page is rendered according to the theme set as default in your Customer Area.
 	ThemeId *string `json:"themeId,omitempty"`
+	ThreeDS2RequestData *CheckoutSessionThreeDS2RequestData `json:"threeDS2RequestData,omitempty"`
 }
 
 // NewPaymentLinkRequest instantiates a new PaymentLinkRequest object
@@ -712,6 +713,38 @@ func (o *PaymentLinkRequest) SetMetadata(v map[string]string) {
 	o.Metadata = &v
 }
 
+// GetPlatformChargebackLogic returns the PlatformChargebackLogic field value if set, zero value otherwise.
+func (o *PaymentLinkRequest) GetPlatformChargebackLogic() PlatformChargebackLogic {
+	if o == nil || common.IsNil(o.PlatformChargebackLogic) {
+		var ret PlatformChargebackLogic
+		return ret
+	}
+	return *o.PlatformChargebackLogic
+}
+
+// GetPlatformChargebackLogicOk returns a tuple with the PlatformChargebackLogic field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentLinkRequest) GetPlatformChargebackLogicOk() (*PlatformChargebackLogic, bool) {
+	if o == nil || common.IsNil(o.PlatformChargebackLogic) {
+		return nil, false
+	}
+	return o.PlatformChargebackLogic, true
+}
+
+// HasPlatformChargebackLogic returns a boolean if a field has been set.
+func (o *PaymentLinkRequest) HasPlatformChargebackLogic() bool {
+	if o != nil && !common.IsNil(o.PlatformChargebackLogic) {
+		return true
+	}
+
+	return false
+}
+
+// SetPlatformChargebackLogic gets a reference to the given PlatformChargebackLogic and assigns it to the PlatformChargebackLogic field.
+func (o *PaymentLinkRequest) SetPlatformChargebackLogic(v PlatformChargebackLogic) {
+	o.PlatformChargebackLogic = &v
+}
+
 // GetRecurringProcessingModel returns the RecurringProcessingModel field value if set, zero value otherwise.
 func (o *PaymentLinkRequest) GetRecurringProcessingModel() string {
 	if o == nil || common.IsNil(o.RecurringProcessingModel) {
@@ -1312,8 +1345,40 @@ func (o *PaymentLinkRequest) SetThemeId(v string) {
 	o.ThemeId = &v
 }
 
+// GetThreeDS2RequestData returns the ThreeDS2RequestData field value if set, zero value otherwise.
+func (o *PaymentLinkRequest) GetThreeDS2RequestData() CheckoutSessionThreeDS2RequestData {
+	if o == nil || common.IsNil(o.ThreeDS2RequestData) {
+		var ret CheckoutSessionThreeDS2RequestData
+		return ret
+	}
+	return *o.ThreeDS2RequestData
+}
+
+// GetThreeDS2RequestDataOk returns a tuple with the ThreeDS2RequestData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentLinkRequest) GetThreeDS2RequestDataOk() (*CheckoutSessionThreeDS2RequestData, bool) {
+	if o == nil || common.IsNil(o.ThreeDS2RequestData) {
+		return nil, false
+	}
+	return o.ThreeDS2RequestData, true
+}
+
+// HasThreeDS2RequestData returns a boolean if a field has been set.
+func (o *PaymentLinkRequest) HasThreeDS2RequestData() bool {
+	if o != nil && !common.IsNil(o.ThreeDS2RequestData) {
+		return true
+	}
+
+	return false
+}
+
+// SetThreeDS2RequestData gets a reference to the given CheckoutSessionThreeDS2RequestData and assigns it to the ThreeDS2RequestData field.
+func (o *PaymentLinkRequest) SetThreeDS2RequestData(v CheckoutSessionThreeDS2RequestData) {
+	o.ThreeDS2RequestData = &v
+}
+
 func (o PaymentLinkRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -1375,6 +1440,9 @@ func (o PaymentLinkRequest) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
 	}
+	if !common.IsNil(o.PlatformChargebackLogic) {
+		toSerialize["platformChargebackLogic"] = o.PlatformChargebackLogic
+	}
 	if !common.IsNil(o.RecurringProcessingModel) {
 		toSerialize["recurringProcessingModel"] = o.RecurringProcessingModel
 	}
@@ -1430,6 +1498,9 @@ func (o PaymentLinkRequest) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.ThemeId) {
 		toSerialize["themeId"] = o.ThemeId
 	}
+	if !common.IsNil(o.ThreeDS2RequestData) {
+		toSerialize["threeDS2RequestData"] = o.ThreeDS2RequestData
+	}
 	return toSerialize, nil
 }
 
@@ -1469,21 +1540,23 @@ func (v *NullablePaymentLinkRequest) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *PaymentLinkRequest) isValidRecurringProcessingModel() bool {
-	var allowedEnumValues = []string{"CardOnFile", "Subscription", "UnscheduledCardOnFile"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetRecurringProcessingModel() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "CardOnFile", "Subscription", "UnscheduledCardOnFile" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetRecurringProcessingModel() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *PaymentLinkRequest) isValidStorePaymentMethodMode() bool {
-	var allowedEnumValues = []string{"askForConsent", "disabled", "enabled"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetStorePaymentMethodMode() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "askForConsent", "disabled", "enabled" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetStorePaymentMethodMode() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

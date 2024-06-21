@@ -10,9 +10,8 @@ package payments
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 	"time"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the PaymentRequest type satisfies the MappedNullable interface at compile time
@@ -20,22 +19,22 @@ var _ common.MappedNullable = &PaymentRequest{}
 
 // PaymentRequest struct for PaymentRequest
 type PaymentRequest struct {
-	AccountInfo      *AccountInfo `json:"accountInfo,omitempty"`
-	AdditionalAmount *Amount      `json:"additionalAmount,omitempty"`
+	AccountInfo *AccountInfo `json:"accountInfo,omitempty"`
+	AdditionalAmount *Amount `json:"additionalAmount,omitempty"`
 	// This field contains additional data, which may be required for a particular payment request.  The `additionalData` object consists of entries, each of which includes the key and value.
-	AdditionalData  *map[string]string `json:"additionalData,omitempty"`
-	Amount          Amount             `json:"amount"`
-	ApplicationInfo *ApplicationInfo   `json:"applicationInfo,omitempty"`
-	BankAccount     *BankAccount       `json:"bankAccount,omitempty"`
-	BillingAddress  *Address           `json:"billingAddress,omitempty"`
-	BrowserInfo     *BrowserInfo       `json:"browserInfo,omitempty"`
+	AdditionalData *map[string]string `json:"additionalData,omitempty"`
+	Amount Amount `json:"amount"`
+	ApplicationInfo *ApplicationInfo `json:"applicationInfo,omitempty"`
+	BankAccount *BankAccount `json:"bankAccount,omitempty"`
+	BillingAddress *Address `json:"billingAddress,omitempty"`
+	BrowserInfo *BrowserInfo `json:"browserInfo,omitempty"`
 	// The delay between the authorisation and scheduled auto-capture, specified in hours.
 	CaptureDelayHours *int32 `json:"captureDelayHours,omitempty"`
-	Card              *Card  `json:"card,omitempty"`
+	Card *Card `json:"card,omitempty"`
 	// The shopper's date of birth.  Format [ISO-8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DD
-	DateOfBirth     *string     `json:"dateOfBirth,omitempty"`
-	DccQuote        *ForexQuote `json:"dccQuote,omitempty"`
-	DeliveryAddress *Address    `json:"deliveryAddress,omitempty"`
+	DateOfBirth *string `json:"dateOfBirth,omitempty"`
+	DccQuote *ForexQuote `json:"dccQuote,omitempty"`
+	DeliveryAddress *Address `json:"deliveryAddress,omitempty"`
 	// The date and time the purchased goods should be delivered.  Format [ISO 8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DDThh:mm:ss.sssTZD  Example: 2017-07-17T13:42:40.428+01:00
 	DeliveryDate *time.Time `json:"deliveryDate,omitempty"`
 	// A string containing the shopper's device fingerprint. For more information, refer to [Device fingerprinting](https://docs.adyen.com/risk-management/device-fingerprinting).
@@ -43,35 +42,36 @@ type PaymentRequest struct {
 	// The type of the entity the payment is processed for.
 	EntityType *string `json:"entityType,omitempty"`
 	// An integer value that is added to the normal fraud score. The value can be either positive or negative.
-	FraudOffset     *int32           `json:"fraudOffset,omitempty"`
+	FraudOffset *int32 `json:"fraudOffset,omitempty"`
 	FundDestination *FundDestination `json:"fundDestination,omitempty"`
-	FundSource      *FundSource      `json:"fundSource,omitempty"`
+	FundSource *FundSource `json:"fundSource,omitempty"`
 	// The funding source that should be used when multiple sources are available. For Brazilian combo cards, by default the funding source is credit. To use debit, set this value to **debit**.
-	FundingSource *string       `json:"fundingSource,omitempty"`
-	Installments  *Installments `json:"installments,omitempty"`
+	FundingSource *string `json:"fundingSource,omitempty"`
+	Installments *Installments `json:"installments,omitempty"`
 	// The `localizedShopperStatement` field lets you use dynamic values for your shopper statement in a local character set. If not supplied, left empty, or for cross-border transactions, **shopperStatement** is used.  Adyen currently supports the ja-Kana character set for Visa and Mastercard payments in Japan using Japanese cards. This character set supports:  * UTF-8 based Katakana, capital letters, numbers and special characters.  * Half-width or full-width characters.
 	LocalizedShopperStatement *map[string]string `json:"localizedShopperStatement,omitempty"`
-	Mandate                   *Mandate           `json:"mandate,omitempty"`
+	Mandate *Mandate `json:"mandate,omitempty"`
 	// The [merchant category code](https://en.wikipedia.org/wiki/Merchant_category_code) (MCC) is a four-digit number, which relates to a particular market segment. This code reflects the predominant activity that is conducted by the merchant.
 	Mcc *string `json:"mcc,omitempty"`
 	// The merchant account identifier, with which you want to process the transaction.
 	MerchantAccount string `json:"merchantAccount"`
 	// This reference allows linking multiple transactions to each other for reporting purposes (i.e. order auth-rate). The reference should be unique per billing cycle. The same merchant order reference should never be reused after the first authorised attempt. If used, this field should be supplied for all incoming authorisations. > We strongly recommend you send the `merchantOrderReference` value to benefit from linking payment requests when authorisation retries take place. In addition, we recommend you provide `retry.orderAttemptNumber`, `retry.chainAttemptNumber`, and `retry.skipRetry` values in `PaymentRequest.additionalData`.
-	MerchantOrderReference *string                `json:"merchantOrderReference,omitempty"`
-	MerchantRiskIndicator  *MerchantRiskIndicator `json:"merchantRiskIndicator,omitempty"`
-	// Metadata consists of entries, each of which includes a key and a value. Limits: * Maximum 20 key-value pairs per request. When exceeding, the \"177\" error occurs: \"Metadata size exceeds limit\". * Maximum 20 characters per key. * Maximum 80 characters per value.
+	MerchantOrderReference *string `json:"merchantOrderReference,omitempty"`
+	MerchantRiskIndicator *MerchantRiskIndicator `json:"merchantRiskIndicator,omitempty"`
+	// Metadata consists of entries, each of which includes a key and a value. Limits: * Maximum 20 key-value pairs per request. When exceeding, the \"177\" error occurs: \"Metadata size exceeds limit\". * Maximum 20 characters per key. * Maximum 80 characters per value. 
 	Metadata *map[string]string `json:"metadata,omitempty"`
-	MpiData  *ThreeDSecureData  `json:"mpiData,omitempty"`
+	MpiData *ThreeDSecureData `json:"mpiData,omitempty"`
 	// The two-character country code of the shopper's nationality.
 	Nationality *string `json:"nationality,omitempty"`
 	// When you are doing multiple partial (gift card) payments, this is the `pspReference` of the first payment. We use this to link the multiple payments to each other. As your own reference for linking multiple payments, use the `merchantOrderReference`instead.
-	OrderReference          *string                  `json:"orderReference,omitempty"`
+	OrderReference *string `json:"orderReference,omitempty"`
 	PlatformChargebackLogic *PlatformChargebackLogic `json:"platformChargebackLogic,omitempty"`
-	Recurring               *Recurring               `json:"recurring,omitempty"`
-	// Defines a recurring payment type. Required when creating a token to store payment details or using stored payment details. Allowed values: * `Subscription` – A transaction for a fixed or variable amount, which follows a fixed schedule. * `CardOnFile` – With a card-on-file (CoF) transaction, card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction. * `UnscheduledCardOnFile` – An unscheduled card-on-file (UCoF) transaction is a transaction that occurs on a non-fixed schedule and/or have variable amounts. For example, automatic top-ups when a cardholder's balance drops below a certain amount.
+	Recurring *Recurring `json:"recurring,omitempty"`
+	// Defines a recurring payment type. Required when creating a token to store payment details or using stored payment details. Allowed values: * `Subscription` – A transaction for a fixed or variable amount, which follows a fixed schedule. * `CardOnFile` – With a card-on-file (CoF) transaction, card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction. * `UnscheduledCardOnFile` – An unscheduled card-on-file (UCoF) transaction is a transaction that occurs on a non-fixed schedule and/or have variable amounts. For example, automatic top-ups when a cardholder's balance drops below a certain amount. 
 	RecurringProcessingModel *string `json:"recurringProcessingModel,omitempty"`
 	// The reference to uniquely identify a payment. This reference is used in all communication with you about the payment status. We recommend using a unique value per payment; however, it is not a requirement. If you need to provide multiple references for a transaction, separate them with hyphens (\"-\"). Maximum length: 80 characters.
 	Reference string `json:"reference"`
+	SecureRemoteCommerceCheckoutData *SecureRemoteCommerceCheckoutData `json:"secureRemoteCommerceCheckoutData,omitempty"`
 	// Some payment methods require defining a value for this field to specify how to process the transaction.  For the Bancontact payment method, it can be set to: * `maestro` (default), to be processed like a Maestro card, or * `bcmc`, to be processed like a Bancontact card.
 	SelectedBrand *string `json:"selectedBrand,omitempty"`
 	// The `recurringDetailReference` you want to use for this payment. The value `LATEST` can be used to select the most recently stored recurring detail.
@@ -86,7 +86,7 @@ type PaymentRequest struct {
 	ShopperInteraction *string `json:"shopperInteraction,omitempty"`
 	// The combination of a language code and a country code to specify the language to be used in the payment.
 	ShopperLocale *string `json:"shopperLocale,omitempty"`
-	ShopperName   *Name   `json:"shopperName,omitempty"`
+	ShopperName *Name `json:"shopperName,omitempty"`
 	// Required for recurring payments.  Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters. > Your reference must not include personally identifiable information (PII), for example name or email address.
 	ShopperReference *string `json:"shopperReference,omitempty"`
 	// The text to be shown on the shopper's bank statement.  We recommend sending a maximum of 22 characters, otherwise banks might truncate the string.  Allowed characters: **a-z**, **A-Z**, **0-9**, spaces, and special characters **. , ' _ - ? + * /_**.
@@ -98,7 +98,7 @@ type PaymentRequest struct {
 	// Required for Adyen for Platforms integrations if you are a platform model. This is your [reference](https://docs.adyen.com/api-explorer/Management/3/post/merchants/(merchantId)/stores#request-reference) (on [balance platform](https://docs.adyen.com/platforms)) or the [storeReference](https://docs.adyen.com/api-explorer/Account/latest/post/updateAccountHolder#request-accountHolderDetails-storeDetails-storeReference) (in the [classic integration](https://docs.adyen.com/classic-platforms/processing-payments/route-payment-to-store/#route-a-payment-to-a-store)) for the ecommerce or point-of-sale store that is processing the payment.
 	Store *string `json:"store,omitempty"`
 	// The shopper's telephone number.
-	TelephoneNumber     *string              `json:"telephoneNumber,omitempty"`
+	TelephoneNumber *string `json:"telephoneNumber,omitempty"`
 	ThreeDS2RequestData *ThreeDS2RequestData `json:"threeDS2RequestData,omitempty"`
 	// If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only), and not the payment authorisation.
 	ThreeDSAuthenticationOnly *bool `json:"threeDSAuthenticationOnly,omitempty"`
@@ -1228,6 +1228,38 @@ func (o *PaymentRequest) SetReference(v string) {
 	o.Reference = v
 }
 
+// GetSecureRemoteCommerceCheckoutData returns the SecureRemoteCommerceCheckoutData field value if set, zero value otherwise.
+func (o *PaymentRequest) GetSecureRemoteCommerceCheckoutData() SecureRemoteCommerceCheckoutData {
+	if o == nil || common.IsNil(o.SecureRemoteCommerceCheckoutData) {
+		var ret SecureRemoteCommerceCheckoutData
+		return ret
+	}
+	return *o.SecureRemoteCommerceCheckoutData
+}
+
+// GetSecureRemoteCommerceCheckoutDataOk returns a tuple with the SecureRemoteCommerceCheckoutData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentRequest) GetSecureRemoteCommerceCheckoutDataOk() (*SecureRemoteCommerceCheckoutData, bool) {
+	if o == nil || common.IsNil(o.SecureRemoteCommerceCheckoutData) {
+		return nil, false
+	}
+	return o.SecureRemoteCommerceCheckoutData, true
+}
+
+// HasSecureRemoteCommerceCheckoutData returns a boolean if a field has been set.
+func (o *PaymentRequest) HasSecureRemoteCommerceCheckoutData() bool {
+	if o != nil && !common.IsNil(o.SecureRemoteCommerceCheckoutData) {
+		return true
+	}
+
+	return false
+}
+
+// SetSecureRemoteCommerceCheckoutData gets a reference to the given SecureRemoteCommerceCheckoutData and assigns it to the SecureRemoteCommerceCheckoutData field.
+func (o *PaymentRequest) SetSecureRemoteCommerceCheckoutData(v SecureRemoteCommerceCheckoutData) {
+	o.SecureRemoteCommerceCheckoutData = &v
+}
+
 // GetSelectedBrand returns the SelectedBrand field value if set, zero value otherwise.
 func (o *PaymentRequest) GetSelectedBrand() string {
 	if o == nil || common.IsNil(o.SelectedBrand) {
@@ -1805,7 +1837,7 @@ func (o *PaymentRequest) SetTrustedShopper(v bool) {
 }
 
 func (o PaymentRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -1913,6 +1945,9 @@ func (o PaymentRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["recurringProcessingModel"] = o.RecurringProcessingModel
 	}
 	toSerialize["reference"] = o.Reference
+	if !common.IsNil(o.SecureRemoteCommerceCheckoutData) {
+		toSerialize["secureRemoteCommerceCheckoutData"] = o.SecureRemoteCommerceCheckoutData
+	}
 	if !common.IsNil(o.SelectedBrand) {
 		toSerialize["selectedBrand"] = o.SelectedBrand
 	}
@@ -2006,39 +2041,41 @@ func (v *NullablePaymentRequest) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *PaymentRequest) isValidEntityType() bool {
-	var allowedEnumValues = []string{"NaturalPerson", "CompanyName"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetEntityType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "NaturalPerson", "CompanyName" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetEntityType() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *PaymentRequest) isValidFundingSource() bool {
-	var allowedEnumValues = []string{"credit", "debit"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetFundingSource() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "credit", "debit" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetFundingSource() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *PaymentRequest) isValidRecurringProcessingModel() bool {
-	var allowedEnumValues = []string{"CardOnFile", "Subscription", "UnscheduledCardOnFile"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetRecurringProcessingModel() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "CardOnFile", "Subscription", "UnscheduledCardOnFile" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetRecurringProcessingModel() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *PaymentRequest) isValidShopperInteraction() bool {
-	var allowedEnumValues = []string{"Ecommerce", "ContAuth", "Moto", "POS"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetShopperInteraction() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "Ecommerce", "ContAuth", "Moto", "POS" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetShopperInteraction() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

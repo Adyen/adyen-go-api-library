@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the CreateSweepConfigurationV2 type satisfies the MappedNullable interface at compile time
@@ -20,25 +19,25 @@ var _ common.MappedNullable = &CreateSweepConfigurationV2{}
 // CreateSweepConfigurationV2 struct for CreateSweepConfigurationV2
 type CreateSweepConfigurationV2 struct {
 	// The type of transfer that results from the sweep.  Possible values:   - **bank**: Sweep to a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id).  - **internal**: Transfer to another [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id) within your platform.  Required when setting `priorities`.
-	Category     *string           `json:"category,omitempty"`
+	Category *string `json:"category,omitempty"`
 	Counterparty SweepCounterparty `json:"counterparty"`
 	// The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes) in uppercase. For example, **EUR**.  The sweep currency must match any of the [balances currencies](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balanceAccounts/{id}__resParam_balances).
 	Currency string `json:"currency"`
 	// The message that will be used in the sweep transfer's description body with a maximum length of 140 characters.  If the message is longer after replacing placeholders, the message will be cut off at 140 characters.
 	Description *string `json:"description,omitempty"`
-	// The list of priorities for the bank transfer. This sets the speed at which the transfer is sent and the fees that you have to pay. You can provide multiple priorities. Adyen will try to pay out using the priority you list first. If that's not possible, it moves on to the next option in the order of your provided priorities.  Possible values:  * **regular**: For normal, low-value transactions.  * **fast**: Faster way to transfer funds but has higher fees. Recommended for high-priority, low-value transactions.  * **wire**: Fastest way to transfer funds but has the highest fees. Recommended for high-priority, high-value transactions.  * **instant**: Instant way to transfer funds in [SEPA countries](https://www.ecb.europa.eu/paym/integration/retail/sepa/html/index.en.html).  * **crossBorder**: High-value transfer to a recipient in a different country.  * **internal**: Transfer to an Adyen-issued business bank account (by bank account number/IBAN).  Set `category` to **bank**. For more details, see optional priorities setup for [marketplaces](https://docs.adyen.com/marketplaces/payout-to-users/scheduled-payouts#optional-priorities-setup) or [platforms](https://docs.adyen.com/platforms/payout-to-users/scheduled-payouts#optional-priorities-setup).
+	// The list of priorities for the bank transfer. This sets the speed at which the transfer is sent and the fees that you have to pay. You can provide multiple priorities. Adyen will try to pay out using the priority you list first. If that's not possible, it moves on to the next option in the order of your provided priorities.  Possible values:  * **regular**: for normal, low-value transactions.  * **fast**: a faster way to transfer funds, but the fees are higher. Recommended for high-priority, low-value transactions.  * **wire**: the fastest way to transfer funds, but this has the highest fees. Recommended for high-priority, high-value transactions.  * **instant**: for instant funds transfers in [SEPA countries](https://www.ecb.europa.eu/paym/integration/retail/sepa/html/index.en.html).  * **crossBorder**: for high-value transfers to a recipient in a different country.  * **internal**: for transfers to an Adyen-issued business bank account (by bank account number/IBAN).  Set `category` to **bank**. For more details, see optional priorities setup for [marketplaces](https://docs.adyen.com/marketplaces/payout-to-users/scheduled-payouts#optional-priorities-setup) or [platforms](https://docs.adyen.com/platforms/payout-to-users/scheduled-payouts#optional-priorities-setup).
 	Priorities []string `json:"priorities,omitempty"`
 	// The reason for disabling the sweep.
 	Reason *string `json:"reason,omitempty"`
 	// Your reference for the sweep configuration.
 	Reference *string `json:"reference,omitempty"`
 	// The reference sent to or received from the counterparty. Only alphanumeric characters are allowed.
-	ReferenceForBeneficiary *string       `json:"referenceForBeneficiary,omitempty"`
-	Schedule                SweepSchedule `json:"schedule"`
-	// The status of the sweep. If not provided, by default, this is set to **active**.  Possible values:    * **active**:  the sweep is enabled and funds will be pulled in or pushed out based on the defined configuration.    * **inactive**: the sweep is disabled and cannot be triggered.
-	Status        *string `json:"status,omitempty"`
-	SweepAmount   *Amount `json:"sweepAmount,omitempty"`
-	TargetAmount  *Amount `json:"targetAmount,omitempty"`
+	ReferenceForBeneficiary *string `json:"referenceForBeneficiary,omitempty"`
+	Schedule SweepSchedule `json:"schedule"`
+	// The status of the sweep. If not provided, by default, this is set to **active**.  Possible values:    * **active**:  the sweep is enabled and funds will be pulled in or pushed out based on the defined configuration.    * **inactive**: the sweep is disabled and cannot be triggered.   
+	Status *string `json:"status,omitempty"`
+	SweepAmount *Amount `json:"sweepAmount,omitempty"`
+	TargetAmount *Amount `json:"targetAmount,omitempty"`
 	TriggerAmount *Amount `json:"triggerAmount,omitempty"`
 	// The direction of sweep, whether pushing out or pulling in funds to the balance account. If not provided, by default, this is set to **push**.  Possible values:   * **push**: _push out funds_ to a destination balance account or transfer instrument.   * **pull**: _pull in funds_ from a source merchant account, transfer instrument, or balance account.
 	Type *string `json:"type,omitempty"`
@@ -493,7 +492,7 @@ func (o *CreateSweepConfigurationV2) SetType(v string) {
 }
 
 func (o CreateSweepConfigurationV2) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -577,39 +576,41 @@ func (v *NullableCreateSweepConfigurationV2) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *CreateSweepConfigurationV2) isValidCategory() bool {
-	var allowedEnumValues = []string{"bank", "internal", "platformPayment"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetCategory() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "bank", "internal", "platformPayment" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetCategory() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *CreateSweepConfigurationV2) isValidReason() bool {
-	var allowedEnumValues = []string{"amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declinedByTransactionRule", "error", "notEnoughBalance", "pendingApproval", "refusedByCounterpartyBank", "routeNotFound", "scaFailed", "unknown"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetReason() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declined", "declinedByTransactionRule", "error", "notEnoughBalance", "pendingApproval", "refusedByCounterpartyBank", "routeNotFound", "scaFailed", "unknown" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetReason() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *CreateSweepConfigurationV2) isValidStatus() bool {
-	var allowedEnumValues = []string{"active", "inactive"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetStatus() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "active", "inactive" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetStatus() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *CreateSweepConfigurationV2) isValidType() bool {
-	var allowedEnumValues = []string{"pull", "push"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "pull", "push" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

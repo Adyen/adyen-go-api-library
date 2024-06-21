@@ -10,9 +10,8 @@ package transferwebhook
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 	"time"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the TransferEvent type satisfies the MappedNullable interface at compile time
@@ -23,22 +22,23 @@ type TransferEvent struct {
 	Amount *Amount `json:"amount,omitempty"`
 	// The amount adjustments in this transfer.
 	AmountAdjustments []AmountAdjustment `json:"amountAdjustments,omitempty"`
+	// Scheme unique arn identifier useful for tracing captures, chargebacks, refunds, etc.
+	Arn *string `json:"arn,omitempty"`
 	// The date when the transfer request was sent.
 	BookingDate *time.Time `json:"bookingDate,omitempty"`
-	// The estimated time the beneficiary should have access to the funds.
-	// Deprecated
-	EstimatedArrivalTime *time.Time      `json:"estimatedArrivalTime,omitempty"`
-	ExternalReason       *ExternalReason `json:"externalReason,omitempty"`
+	// The estimated time when the beneficiary should have access to the funds.
+	EstimatedArrivalTime *time.Time `json:"estimatedArrivalTime,omitempty"`
+	ExternalReason *ExternalReason `json:"externalReason,omitempty"`
 	// The unique identifier of the transfer event.
-	Id           *string       `json:"id,omitempty"`
+	Id *string `json:"id,omitempty"`
 	Modification *Modification `json:"modification,omitempty"`
-	// The list of the balance mutation per event.
-	Mutations      []BalanceMutation `json:"mutations,omitempty"`
-	OriginalAmount *Amount           `json:"originalAmount,omitempty"`
+	// The list of balance mutations per event.
+	Mutations []BalanceMutation `json:"mutations,omitempty"`
+	OriginalAmount *Amount `json:"originalAmount,omitempty"`
 	// The reason for the transfer status.
 	Reason *string `json:"reason,omitempty"`
 	// The status of the transfer event.
-	Status       *string                    `json:"status,omitempty"`
+	Status *string `json:"status,omitempty"`
 	TrackingData *TransferEventTrackingData `json:"trackingData,omitempty"`
 	// The id of the transaction that is related to this accounting event. Only sent for events of type **accounting** where the balance changes.
 	TransactionId *string `json:"transactionId,omitempty"`
@@ -131,6 +131,38 @@ func (o *TransferEvent) SetAmountAdjustments(v []AmountAdjustment) {
 	o.AmountAdjustments = v
 }
 
+// GetArn returns the Arn field value if set, zero value otherwise.
+func (o *TransferEvent) GetArn() string {
+	if o == nil || common.IsNil(o.Arn) {
+		var ret string
+		return ret
+	}
+	return *o.Arn
+}
+
+// GetArnOk returns a tuple with the Arn field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransferEvent) GetArnOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Arn) {
+		return nil, false
+	}
+	return o.Arn, true
+}
+
+// HasArn returns a boolean if a field has been set.
+func (o *TransferEvent) HasArn() bool {
+	if o != nil && !common.IsNil(o.Arn) {
+		return true
+	}
+
+	return false
+}
+
+// SetArn gets a reference to the given string and assigns it to the Arn field.
+func (o *TransferEvent) SetArn(v string) {
+	o.Arn = &v
+}
+
 // GetBookingDate returns the BookingDate field value if set, zero value otherwise.
 func (o *TransferEvent) GetBookingDate() time.Time {
 	if o == nil || common.IsNil(o.BookingDate) {
@@ -164,7 +196,6 @@ func (o *TransferEvent) SetBookingDate(v time.Time) {
 }
 
 // GetEstimatedArrivalTime returns the EstimatedArrivalTime field value if set, zero value otherwise.
-// Deprecated
 func (o *TransferEvent) GetEstimatedArrivalTime() time.Time {
 	if o == nil || common.IsNil(o.EstimatedArrivalTime) {
 		var ret time.Time
@@ -175,7 +206,6 @@ func (o *TransferEvent) GetEstimatedArrivalTime() time.Time {
 
 // GetEstimatedArrivalTimeOk returns a tuple with the EstimatedArrivalTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *TransferEvent) GetEstimatedArrivalTimeOk() (*time.Time, bool) {
 	if o == nil || common.IsNil(o.EstimatedArrivalTime) {
 		return nil, false
@@ -193,7 +223,6 @@ func (o *TransferEvent) HasEstimatedArrivalTime() bool {
 }
 
 // SetEstimatedArrivalTime gets a reference to the given time.Time and assigns it to the EstimatedArrivalTime field.
-// Deprecated
 func (o *TransferEvent) SetEstimatedArrivalTime(v time.Time) {
 	o.EstimatedArrivalTime = &v
 }
@@ -583,7 +612,7 @@ func (o *TransferEvent) SetValueDate(v time.Time) {
 }
 
 func (o TransferEvent) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -597,6 +626,9 @@ func (o TransferEvent) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.AmountAdjustments) {
 		toSerialize["amountAdjustments"] = o.AmountAdjustments
+	}
+	if !common.IsNil(o.Arn) {
+		toSerialize["arn"] = o.Arn
 	}
 	if !common.IsNil(o.BookingDate) {
 		toSerialize["bookingDate"] = o.BookingDate
@@ -679,30 +711,32 @@ func (v *NullableTransferEvent) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *TransferEvent) isValidReason() bool {
-	var allowedEnumValues = []string{"amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declinedByTransactionRule", "error", "notEnoughBalance", "pendingApproval", "refusedByCounterpartyBank", "routeNotFound", "scaFailed", "unknown"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetReason() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declined", "declinedByTransactionRule", "error", "notEnoughBalance", "pendingApproval", "refusedByCounterpartyBank", "routeNotFound", "scaFailed", "unknown" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetReason() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *TransferEvent) isValidStatus() bool {
-	var allowedEnumValues = []string{"approvalPending", "atmWithdrawal", "atmWithdrawalReversalPending", "atmWithdrawalReversed", "authAdjustmentAuthorised", "authAdjustmentError", "authAdjustmentRefused", "authorised", "bankTransfer", "bankTransferPending", "booked", "bookingPending", "cancelled", "capturePending", "captureReversalPending", "captureReversed", "captured", "capturedExternally", "chargeback", "chargebackExternally", "chargebackPending", "chargebackReversalPending", "chargebackReversed", "credited", "depositCorrection", "depositCorrectionPending", "dispute", "disputeClosed", "disputeExpired", "disputeNeedsReview", "error", "expired", "failed", "fee", "feePending", "internalTransfer", "internalTransferPending", "invoiceDeduction", "invoiceDeductionPending", "manualCorrectionPending", "manuallyCorrected", "matchedStatement", "matchedStatementPending", "merchantPayin", "merchantPayinPending", "merchantPayinReversed", "merchantPayinReversedPending", "miscCost", "miscCostPending", "paymentCost", "paymentCostPending", "received", "refundPending", "refundReversalPending", "refundReversed", "refunded", "refundedExternally", "refused", "rejected", "reserveAdjustment", "reserveAdjustmentPending", "returned", "secondChargeback", "secondChargebackPending", "undefined"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetStatus() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "approvalPending", "atmWithdrawal", "atmWithdrawalReversalPending", "atmWithdrawalReversed", "authAdjustmentAuthorised", "authAdjustmentError", "authAdjustmentRefused", "authorised", "bankTransfer", "bankTransferPending", "booked", "bookingPending", "cancelled", "capturePending", "captureReversalPending", "captureReversed", "captured", "capturedExternally", "chargeback", "chargebackExternally", "chargebackPending", "chargebackReversalPending", "chargebackReversed", "credited", "depositCorrection", "depositCorrectionPending", "dispute", "disputeClosed", "disputeExpired", "disputeNeedsReview", "error", "expired", "failed", "fee", "feePending", "internalTransfer", "internalTransferPending", "invoiceDeduction", "invoiceDeductionPending", "manualCorrectionPending", "manuallyCorrected", "matchedStatement", "matchedStatementPending", "merchantPayin", "merchantPayinPending", "merchantPayinReversed", "merchantPayinReversedPending", "miscCost", "miscCostPending", "paymentCost", "paymentCostPending", "received", "refundPending", "refundReversalPending", "refundReversed", "refunded", "refundedExternally", "refused", "rejected", "reserveAdjustment", "reserveAdjustmentPending", "returned", "secondChargeback", "secondChargebackPending", "undefined" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetStatus() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *TransferEvent) isValidType() bool {
-	var allowedEnumValues = []string{"accounting", "tracking"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "accounting", "tracking" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

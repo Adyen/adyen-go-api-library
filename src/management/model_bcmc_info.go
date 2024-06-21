@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v9/src/common"
 )
 
 // checks if the BcmcInfo type satisfies the MappedNullable interface at compile time
@@ -20,8 +19,7 @@ var _ common.MappedNullable = &BcmcInfo{}
 // BcmcInfo struct for BcmcInfo
 type BcmcInfo struct {
 	// Indicates if [Bancontact mobile](https://docs.adyen.com/payment-methods/bancontact/bancontact-mobile) is enabled.
-	EnableBcmcMobile       *bool                       `json:"enableBcmcMobile,omitempty"`
-	TransactionDescription *TransactionDescriptionInfo `json:"transactionDescription,omitempty"`
+	EnableBcmcMobile *bool `json:"enableBcmcMobile,omitempty"`
 }
 
 // NewBcmcInfo instantiates a new BcmcInfo object
@@ -73,40 +71,8 @@ func (o *BcmcInfo) SetEnableBcmcMobile(v bool) {
 	o.EnableBcmcMobile = &v
 }
 
-// GetTransactionDescription returns the TransactionDescription field value if set, zero value otherwise.
-func (o *BcmcInfo) GetTransactionDescription() TransactionDescriptionInfo {
-	if o == nil || common.IsNil(o.TransactionDescription) {
-		var ret TransactionDescriptionInfo
-		return ret
-	}
-	return *o.TransactionDescription
-}
-
-// GetTransactionDescriptionOk returns a tuple with the TransactionDescription field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BcmcInfo) GetTransactionDescriptionOk() (*TransactionDescriptionInfo, bool) {
-	if o == nil || common.IsNil(o.TransactionDescription) {
-		return nil, false
-	}
-	return o.TransactionDescription, true
-}
-
-// HasTransactionDescription returns a boolean if a field has been set.
-func (o *BcmcInfo) HasTransactionDescription() bool {
-	if o != nil && !common.IsNil(o.TransactionDescription) {
-		return true
-	}
-
-	return false
-}
-
-// SetTransactionDescription gets a reference to the given TransactionDescriptionInfo and assigns it to the TransactionDescription field.
-func (o *BcmcInfo) SetTransactionDescription(v TransactionDescriptionInfo) {
-	o.TransactionDescription = &v
-}
-
 func (o BcmcInfo) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -117,9 +83,6 @@ func (o BcmcInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.EnableBcmcMobile) {
 		toSerialize["enableBcmcMobile"] = o.EnableBcmcMobile
-	}
-	if !common.IsNil(o.TransactionDescription) {
-		toSerialize["transactionDescription"] = o.TransactionDescription
 	}
 	return toSerialize, nil
 }
@@ -159,3 +122,6 @@ func (v *NullableBcmcInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
