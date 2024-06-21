@@ -20,11 +20,15 @@ var _ common.MappedNullable = &SubMerchantInfo{}
 // SubMerchantInfo struct for SubMerchantInfo
 type SubMerchantInfo struct {
 	Address         *BillingAddress `json:"address,omitempty"`
+	Amount          *Amount         `json:"amount,omitempty"`
+	Email           *string         `json:"email,omitempty"`
 	Id              *string         `json:"id,omitempty"`
 	Mcc             *string         `json:"mcc,omitempty"`
 	Name            *string         `json:"name,omitempty"`
+	PhoneNumber     *string         `json:"phoneNumber,omitempty"`
 	RegisteredSince *string         `json:"registeredSince,omitempty"`
 	TaxId           *string         `json:"taxId,omitempty"`
+	Url             *string         `json:"url,omitempty"`
 }
 
 // NewSubMerchantInfo instantiates a new SubMerchantInfo object
@@ -74,6 +78,70 @@ func (o *SubMerchantInfo) HasAddress() bool {
 // SetAddress gets a reference to the given BillingAddress and assigns it to the Address field.
 func (o *SubMerchantInfo) SetAddress(v BillingAddress) {
 	o.Address = &v
+}
+
+// GetAmount returns the Amount field value if set, zero value otherwise.
+func (o *SubMerchantInfo) GetAmount() Amount {
+	if o == nil || common.IsNil(o.Amount) {
+		var ret Amount
+		return ret
+	}
+	return *o.Amount
+}
+
+// GetAmountOk returns a tuple with the Amount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SubMerchantInfo) GetAmountOk() (*Amount, bool) {
+	if o == nil || common.IsNil(o.Amount) {
+		return nil, false
+	}
+	return o.Amount, true
+}
+
+// HasAmount returns a boolean if a field has been set.
+func (o *SubMerchantInfo) HasAmount() bool {
+	if o != nil && !common.IsNil(o.Amount) {
+		return true
+	}
+
+	return false
+}
+
+// SetAmount gets a reference to the given Amount and assigns it to the Amount field.
+func (o *SubMerchantInfo) SetAmount(v Amount) {
+	o.Amount = &v
+}
+
+// GetEmail returns the Email field value if set, zero value otherwise.
+func (o *SubMerchantInfo) GetEmail() string {
+	if o == nil || common.IsNil(o.Email) {
+		var ret string
+		return ret
+	}
+	return *o.Email
+}
+
+// GetEmailOk returns a tuple with the Email field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SubMerchantInfo) GetEmailOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Email) {
+		return nil, false
+	}
+	return o.Email, true
+}
+
+// HasEmail returns a boolean if a field has been set.
+func (o *SubMerchantInfo) HasEmail() bool {
+	if o != nil && !common.IsNil(o.Email) {
+		return true
+	}
+
+	return false
+}
+
+// SetEmail gets a reference to the given string and assigns it to the Email field.
+func (o *SubMerchantInfo) SetEmail(v string) {
+	o.Email = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -172,6 +240,38 @@ func (o *SubMerchantInfo) SetName(v string) {
 	o.Name = &v
 }
 
+// GetPhoneNumber returns the PhoneNumber field value if set, zero value otherwise.
+func (o *SubMerchantInfo) GetPhoneNumber() string {
+	if o == nil || common.IsNil(o.PhoneNumber) {
+		var ret string
+		return ret
+	}
+	return *o.PhoneNumber
+}
+
+// GetPhoneNumberOk returns a tuple with the PhoneNumber field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SubMerchantInfo) GetPhoneNumberOk() (*string, bool) {
+	if o == nil || common.IsNil(o.PhoneNumber) {
+		return nil, false
+	}
+	return o.PhoneNumber, true
+}
+
+// HasPhoneNumber returns a boolean if a field has been set.
+func (o *SubMerchantInfo) HasPhoneNumber() bool {
+	if o != nil && !common.IsNil(o.PhoneNumber) {
+		return true
+	}
+
+	return false
+}
+
+// SetPhoneNumber gets a reference to the given string and assigns it to the PhoneNumber field.
+func (o *SubMerchantInfo) SetPhoneNumber(v string) {
+	o.PhoneNumber = &v
+}
+
 // GetRegisteredSince returns the RegisteredSince field value if set, zero value otherwise.
 func (o *SubMerchantInfo) GetRegisteredSince() string {
 	if o == nil || common.IsNil(o.RegisteredSince) {
@@ -236,6 +336,38 @@ func (o *SubMerchantInfo) SetTaxId(v string) {
 	o.TaxId = &v
 }
 
+// GetUrl returns the Url field value if set, zero value otherwise.
+func (o *SubMerchantInfo) GetUrl() string {
+	if o == nil || common.IsNil(o.Url) {
+		var ret string
+		return ret
+	}
+	return *o.Url
+}
+
+// GetUrlOk returns a tuple with the Url field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SubMerchantInfo) GetUrlOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Url) {
+		return nil, false
+	}
+	return o.Url, true
+}
+
+// HasUrl returns a boolean if a field has been set.
+func (o *SubMerchantInfo) HasUrl() bool {
+	if o != nil && !common.IsNil(o.Url) {
+		return true
+	}
+
+	return false
+}
+
+// SetUrl gets a reference to the given string and assigns it to the Url field.
+func (o *SubMerchantInfo) SetUrl(v string) {
+	o.Url = &v
+}
+
 func (o SubMerchantInfo) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -249,6 +381,12 @@ func (o SubMerchantInfo) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Address) {
 		toSerialize["address"] = o.Address
 	}
+	if !common.IsNil(o.Amount) {
+		toSerialize["amount"] = o.Amount
+	}
+	if !common.IsNil(o.Email) {
+		toSerialize["email"] = o.Email
+	}
 	if !common.IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
@@ -258,11 +396,17 @@ func (o SubMerchantInfo) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+	if !common.IsNil(o.PhoneNumber) {
+		toSerialize["phoneNumber"] = o.PhoneNumber
+	}
 	if !common.IsNil(o.RegisteredSince) {
 		toSerialize["registeredSince"] = o.RegisteredSince
 	}
 	if !common.IsNil(o.TaxId) {
 		toSerialize["taxId"] = o.TaxId
+	}
+	if !common.IsNil(o.Url) {
+		toSerialize["url"] = o.Url
 	}
 	return toSerialize, nil
 }

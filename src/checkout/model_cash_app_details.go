@@ -36,6 +36,8 @@ type CashAppDetails struct {
 	RequestId *string `json:"requestId,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
 	StoredPaymentMethodId *string `json:"storedPaymentMethodId,omitempty"`
+	// The payment method subtype.
+	Subtype *string `json:"subtype,omitempty"`
 	// cashapp
 	Type *string `json:"type,omitempty"`
 }
@@ -320,6 +322,38 @@ func (o *CashAppDetails) SetStoredPaymentMethodId(v string) {
 	o.StoredPaymentMethodId = &v
 }
 
+// GetSubtype returns the Subtype field value if set, zero value otherwise.
+func (o *CashAppDetails) GetSubtype() string {
+	if o == nil || common.IsNil(o.Subtype) {
+		var ret string
+		return ret
+	}
+	return *o.Subtype
+}
+
+// GetSubtypeOk returns a tuple with the Subtype field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CashAppDetails) GetSubtypeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Subtype) {
+		return nil, false
+	}
+	return o.Subtype, true
+}
+
+// HasSubtype returns a boolean if a field has been set.
+func (o *CashAppDetails) HasSubtype() bool {
+	if o != nil && !common.IsNil(o.Subtype) {
+		return true
+	}
+
+	return false
+}
+
+// SetSubtype gets a reference to the given string and assigns it to the Subtype field.
+func (o *CashAppDetails) SetSubtype(v string) {
+	o.Subtype = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *CashAppDetails) GetType() string {
 	if o == nil || common.IsNil(o.Type) {
@@ -385,6 +419,9 @@ func (o CashAppDetails) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.StoredPaymentMethodId) {
 		toSerialize["storedPaymentMethodId"] = o.StoredPaymentMethodId
+	}
+	if !common.IsNil(o.Subtype) {
+		toSerialize["subtype"] = o.Subtype
 	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type

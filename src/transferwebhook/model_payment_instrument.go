@@ -25,7 +25,7 @@ type PaymentInstrument struct {
 	Id *string `json:"id,omitempty"`
 	// The reference for the resource.
 	Reference *string `json:"reference,omitempty"`
-	// The type of wallet the network token is associated with.
+	// The type of wallet that the network token is associated with.
 	TokenType *string `json:"tokenType,omitempty"`
 }
 

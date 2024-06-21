@@ -28,6 +28,7 @@ type TransactionRuleRestrictions struct {
 	EntryModes                  *EntryModesRestriction               `json:"entryModes,omitempty"`
 	InternationalTransaction    *InternationalTransactionRestriction `json:"internationalTransaction,omitempty"`
 	MatchingTransactions        *MatchingTransactionsRestriction     `json:"matchingTransactions,omitempty"`
+	MatchingValues              *MatchingValuesRestriction           `json:"matchingValues,omitempty"`
 	Mccs                        *MccsRestriction                     `json:"mccs,omitempty"`
 	MerchantNames               *MerchantNamesRestriction            `json:"merchantNames,omitempty"`
 	Merchants                   *MerchantsRestriction                `json:"merchants,omitempty"`
@@ -342,6 +343,38 @@ func (o *TransactionRuleRestrictions) HasMatchingTransactions() bool {
 // SetMatchingTransactions gets a reference to the given MatchingTransactionsRestriction and assigns it to the MatchingTransactions field.
 func (o *TransactionRuleRestrictions) SetMatchingTransactions(v MatchingTransactionsRestriction) {
 	o.MatchingTransactions = &v
+}
+
+// GetMatchingValues returns the MatchingValues field value if set, zero value otherwise.
+func (o *TransactionRuleRestrictions) GetMatchingValues() MatchingValuesRestriction {
+	if o == nil || common.IsNil(o.MatchingValues) {
+		var ret MatchingValuesRestriction
+		return ret
+	}
+	return *o.MatchingValues
+}
+
+// GetMatchingValuesOk returns a tuple with the MatchingValues field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionRuleRestrictions) GetMatchingValuesOk() (*MatchingValuesRestriction, bool) {
+	if o == nil || common.IsNil(o.MatchingValues) {
+		return nil, false
+	}
+	return o.MatchingValues, true
+}
+
+// HasMatchingValues returns a boolean if a field has been set.
+func (o *TransactionRuleRestrictions) HasMatchingValues() bool {
+	if o != nil && !common.IsNil(o.MatchingValues) {
+		return true
+	}
+
+	return false
+}
+
+// SetMatchingValues gets a reference to the given MatchingValuesRestriction and assigns it to the MatchingValues field.
+func (o *TransactionRuleRestrictions) SetMatchingValues(v MatchingValuesRestriction) {
+	o.MatchingValues = &v
 }
 
 // GetMccs returns the Mccs field value if set, zero value otherwise.
@@ -668,6 +701,9 @@ func (o TransactionRuleRestrictions) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.MatchingTransactions) {
 		toSerialize["matchingTransactions"] = o.MatchingTransactions
+	}
+	if !common.IsNil(o.MatchingValues) {
+		toSerialize["matchingValues"] = o.MatchingValues
 	}
 	if !common.IsNil(o.Mccs) {
 		toSerialize["mccs"] = o.Mccs

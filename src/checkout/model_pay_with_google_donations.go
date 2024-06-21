@@ -30,6 +30,8 @@ type PayWithGoogleDonations struct {
 	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
 	StoredPaymentMethodId *string `json:"storedPaymentMethodId,omitempty"`
+	// Required for mobile integrations. Version of the 3D Secure 2 mobile SDK.
+	ThreeDS2SdkVersion *string `json:"threeDS2SdkVersion,omitempty"`
 	// **paywithgoogle**
 	Type *string `json:"type,omitempty"`
 }
@@ -211,6 +213,38 @@ func (o *PayWithGoogleDonations) SetStoredPaymentMethodId(v string) {
 	o.StoredPaymentMethodId = &v
 }
 
+// GetThreeDS2SdkVersion returns the ThreeDS2SdkVersion field value if set, zero value otherwise.
+func (o *PayWithGoogleDonations) GetThreeDS2SdkVersion() string {
+	if o == nil || common.IsNil(o.ThreeDS2SdkVersion) {
+		var ret string
+		return ret
+	}
+	return *o.ThreeDS2SdkVersion
+}
+
+// GetThreeDS2SdkVersionOk returns a tuple with the ThreeDS2SdkVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PayWithGoogleDonations) GetThreeDS2SdkVersionOk() (*string, bool) {
+	if o == nil || common.IsNil(o.ThreeDS2SdkVersion) {
+		return nil, false
+	}
+	return o.ThreeDS2SdkVersion, true
+}
+
+// HasThreeDS2SdkVersion returns a boolean if a field has been set.
+func (o *PayWithGoogleDonations) HasThreeDS2SdkVersion() bool {
+	if o != nil && !common.IsNil(o.ThreeDS2SdkVersion) {
+		return true
+	}
+
+	return false
+}
+
+// SetThreeDS2SdkVersion gets a reference to the given string and assigns it to the ThreeDS2SdkVersion field.
+func (o *PayWithGoogleDonations) SetThreeDS2SdkVersion(v string) {
+	o.ThreeDS2SdkVersion = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *PayWithGoogleDonations) GetType() string {
 	if o == nil || common.IsNil(o.Type) {
@@ -265,6 +299,9 @@ func (o PayWithGoogleDonations) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.StoredPaymentMethodId) {
 		toSerialize["storedPaymentMethodId"] = o.StoredPaymentMethodId
+	}
+	if !common.IsNil(o.ThreeDS2SdkVersion) {
+		toSerialize["threeDS2SdkVersion"] = o.ThreeDS2SdkVersion
 	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type

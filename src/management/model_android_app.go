@@ -21,8 +21,11 @@ var _ common.MappedNullable = &AndroidApp{}
 type AndroidApp struct {
 	// The description that was provided when uploading the app. The description is not shown on the terminal.
 	Description *string `json:"description,omitempty"`
-	// The error code of the app. It exists if the status is error or invalid.
+	// The error code of the Android app with the `status` of either **error** or **invalid**.
+	// Deprecated
 	ErrorCode *string `json:"errorCode,omitempty"`
+	// The list of errors of the Android app.
+	Errors []AndroidAppError `json:"errors,omitempty"`
 	// The unique identifier of the app.
 	Id string `json:"id"`
 	// The app name that is shown on the terminal.
@@ -89,6 +92,7 @@ func (o *AndroidApp) SetDescription(v string) {
 }
 
 // GetErrorCode returns the ErrorCode field value if set, zero value otherwise.
+// Deprecated
 func (o *AndroidApp) GetErrorCode() string {
 	if o == nil || common.IsNil(o.ErrorCode) {
 		var ret string
@@ -99,6 +103,7 @@ func (o *AndroidApp) GetErrorCode() string {
 
 // GetErrorCodeOk returns a tuple with the ErrorCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *AndroidApp) GetErrorCodeOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ErrorCode) {
 		return nil, false
@@ -116,8 +121,41 @@ func (o *AndroidApp) HasErrorCode() bool {
 }
 
 // SetErrorCode gets a reference to the given string and assigns it to the ErrorCode field.
+// Deprecated
 func (o *AndroidApp) SetErrorCode(v string) {
 	o.ErrorCode = &v
+}
+
+// GetErrors returns the Errors field value if set, zero value otherwise.
+func (o *AndroidApp) GetErrors() []AndroidAppError {
+	if o == nil || common.IsNil(o.Errors) {
+		var ret []AndroidAppError
+		return ret
+	}
+	return o.Errors
+}
+
+// GetErrorsOk returns a tuple with the Errors field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AndroidApp) GetErrorsOk() ([]AndroidAppError, bool) {
+	if o == nil || common.IsNil(o.Errors) {
+		return nil, false
+	}
+	return o.Errors, true
+}
+
+// HasErrors returns a boolean if a field has been set.
+func (o *AndroidApp) HasErrors() bool {
+	if o != nil && !common.IsNil(o.Errors) {
+		return true
+	}
+
+	return false
+}
+
+// SetErrors gets a reference to the given []AndroidAppError and assigns it to the Errors field.
+func (o *AndroidApp) SetErrors(v []AndroidAppError) {
+	o.Errors = v
 }
 
 // GetId returns the Id field value
@@ -311,6 +349,9 @@ func (o AndroidApp) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.ErrorCode) {
 		toSerialize["errorCode"] = o.ErrorCode
+	}
+	if !common.IsNil(o.Errors) {
+		toSerialize["errors"] = o.Errors
 	}
 	toSerialize["id"] = o.Id
 	if !common.IsNil(o.Label) {

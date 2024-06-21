@@ -19,6 +19,8 @@ var _ common.MappedNullable = &AdditionalDataLodging{}
 
 // AdditionalDataLodging struct for AdditionalDataLodging
 type AdditionalDataLodging struct {
+	// A code that corresponds to the category of lodging charges for the payment. Possible values: * 1: Lodging * 2: No show reservation * 3: Advanced deposit
+	LodgingSpecialProgramCode *string `json:"lodging.SpecialProgramCode,omitempty"`
 	// The arrival date. * Date format: **yyyyMmDd**. For example, for 2023 April 22, **20230422**.
 	LodgingCheckInDate *string `json:"lodging.checkInDate,omitempty"`
 	// The departure date. * Date format: **yyyyMmDd**. For example, for 2023 April 22, **20230422**.
@@ -68,6 +70,38 @@ func NewAdditionalDataLodging() *AdditionalDataLodging {
 func NewAdditionalDataLodgingWithDefaults() *AdditionalDataLodging {
 	this := AdditionalDataLodging{}
 	return &this
+}
+
+// GetLodgingSpecialProgramCode returns the LodgingSpecialProgramCode field value if set, zero value otherwise.
+func (o *AdditionalDataLodging) GetLodgingSpecialProgramCode() string {
+	if o == nil || common.IsNil(o.LodgingSpecialProgramCode) {
+		var ret string
+		return ret
+	}
+	return *o.LodgingSpecialProgramCode
+}
+
+// GetLodgingSpecialProgramCodeOk returns a tuple with the LodgingSpecialProgramCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AdditionalDataLodging) GetLodgingSpecialProgramCodeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.LodgingSpecialProgramCode) {
+		return nil, false
+	}
+	return o.LodgingSpecialProgramCode, true
+}
+
+// HasLodgingSpecialProgramCode returns a boolean if a field has been set.
+func (o *AdditionalDataLodging) HasLodgingSpecialProgramCode() bool {
+	if o != nil && !common.IsNil(o.LodgingSpecialProgramCode) {
+		return true
+	}
+
+	return false
+}
+
+// SetLodgingSpecialProgramCode gets a reference to the given string and assigns it to the LodgingSpecialProgramCode field.
+func (o *AdditionalDataLodging) SetLodgingSpecialProgramCode(v string) {
+	o.LodgingSpecialProgramCode = &v
 }
 
 // GetLodgingCheckInDate returns the LodgingCheckInDate field value if set, zero value otherwise.
@@ -592,6 +626,9 @@ func (o AdditionalDataLodging) MarshalJSON() ([]byte, error) {
 
 func (o AdditionalDataLodging) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.LodgingSpecialProgramCode) {
+		toSerialize["lodging.SpecialProgramCode"] = o.LodgingSpecialProgramCode
+	}
 	if !common.IsNil(o.LodgingCheckInDate) {
 		toSerialize["lodging.checkInDate"] = o.LodgingCheckInDate
 	}

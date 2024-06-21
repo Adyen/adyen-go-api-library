@@ -71,7 +71,8 @@ type PaymentRequest struct {
 	// Defines a recurring payment type. Required when creating a token to store payment details or using stored payment details. Allowed values: * `Subscription` – A transaction for a fixed or variable amount, which follows a fixed schedule. * `CardOnFile` – With a card-on-file (CoF) transaction, card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction. * `UnscheduledCardOnFile` – An unscheduled card-on-file (UCoF) transaction is a transaction that occurs on a non-fixed schedule and/or have variable amounts. For example, automatic top-ups when a cardholder's balance drops below a certain amount.
 	RecurringProcessingModel *string `json:"recurringProcessingModel,omitempty"`
 	// The reference to uniquely identify a payment. This reference is used in all communication with you about the payment status. We recommend using a unique value per payment; however, it is not a requirement. If you need to provide multiple references for a transaction, separate them with hyphens (\"-\"). Maximum length: 80 characters.
-	Reference string `json:"reference"`
+	Reference                        string                            `json:"reference"`
+	SecureRemoteCommerceCheckoutData *SecureRemoteCommerceCheckoutData `json:"secureRemoteCommerceCheckoutData,omitempty"`
 	// Some payment methods require defining a value for this field to specify how to process the transaction.  For the Bancontact payment method, it can be set to: * `maestro` (default), to be processed like a Maestro card, or * `bcmc`, to be processed like a Bancontact card.
 	SelectedBrand *string `json:"selectedBrand,omitempty"`
 	// The `recurringDetailReference` you want to use for this payment. The value `LATEST` can be used to select the most recently stored recurring detail.
@@ -1228,6 +1229,38 @@ func (o *PaymentRequest) SetReference(v string) {
 	o.Reference = v
 }
 
+// GetSecureRemoteCommerceCheckoutData returns the SecureRemoteCommerceCheckoutData field value if set, zero value otherwise.
+func (o *PaymentRequest) GetSecureRemoteCommerceCheckoutData() SecureRemoteCommerceCheckoutData {
+	if o == nil || common.IsNil(o.SecureRemoteCommerceCheckoutData) {
+		var ret SecureRemoteCommerceCheckoutData
+		return ret
+	}
+	return *o.SecureRemoteCommerceCheckoutData
+}
+
+// GetSecureRemoteCommerceCheckoutDataOk returns a tuple with the SecureRemoteCommerceCheckoutData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentRequest) GetSecureRemoteCommerceCheckoutDataOk() (*SecureRemoteCommerceCheckoutData, bool) {
+	if o == nil || common.IsNil(o.SecureRemoteCommerceCheckoutData) {
+		return nil, false
+	}
+	return o.SecureRemoteCommerceCheckoutData, true
+}
+
+// HasSecureRemoteCommerceCheckoutData returns a boolean if a field has been set.
+func (o *PaymentRequest) HasSecureRemoteCommerceCheckoutData() bool {
+	if o != nil && !common.IsNil(o.SecureRemoteCommerceCheckoutData) {
+		return true
+	}
+
+	return false
+}
+
+// SetSecureRemoteCommerceCheckoutData gets a reference to the given SecureRemoteCommerceCheckoutData and assigns it to the SecureRemoteCommerceCheckoutData field.
+func (o *PaymentRequest) SetSecureRemoteCommerceCheckoutData(v SecureRemoteCommerceCheckoutData) {
+	o.SecureRemoteCommerceCheckoutData = &v
+}
+
 // GetSelectedBrand returns the SelectedBrand field value if set, zero value otherwise.
 func (o *PaymentRequest) GetSelectedBrand() string {
 	if o == nil || common.IsNil(o.SelectedBrand) {
@@ -1913,6 +1946,9 @@ func (o PaymentRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["recurringProcessingModel"] = o.RecurringProcessingModel
 	}
 	toSerialize["reference"] = o.Reference
+	if !common.IsNil(o.SecureRemoteCommerceCheckoutData) {
+		toSerialize["secureRemoteCommerceCheckoutData"] = o.SecureRemoteCommerceCheckoutData
+	}
 	if !common.IsNil(o.SelectedBrand) {
 		toSerialize["selectedBrand"] = o.SelectedBrand
 	}

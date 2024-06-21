@@ -37,7 +37,7 @@ type AdditionalDataRiskStandalone struct {
 	PayPalTransactionId *string `json:"PayPal.TransactionId,omitempty"`
 	// Raw AVS result received from the acquirer, where available. Example: D
 	AvsResultRaw *string `json:"avsResultRaw,omitempty"`
-	// The Bank Identification Number of a credit card, which is the first six digits of a card number. Required for [tokenized card request](https://docs.adyen.com/risk-management/standalone-risk#tokenised-pan-request).
+	// The Bank Identification Number of a credit card, which is the first six digits of a card number. Required for [tokenized card request](https://docs.adyen.com/online-payments/tokenization).
 	Bin *string `json:"bin,omitempty"`
 	// Raw CVC result received from the acquirer, where available. Example: 1
 	CvcResultRaw *string `json:"cvcResultRaw,omitempty"`

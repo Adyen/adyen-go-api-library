@@ -38,6 +38,8 @@ type PaymentInstrument struct {
 	Reference *string `json:"reference,omitempty"`
 	// The status of the payment instrument. If a status is not specified when creating a payment instrument, it is set to **active** by default. However, there can be exceptions for cards based on the `card.formFactor` and the `issuingCountryCode`. For example, when issuing physical cards in the US, the default status is **inactive**.  Possible values:    * **active**:  The payment instrument is active and can be used to make payments.    * **inactive**: The payment instrument is inactive and cannot be used to make payments.    * **suspended**: The payment instrument is suspended, either because it was stolen or lost.    * **closed**: The payment instrument is permanently closed. This action cannot be undone.
 	Status *string `json:"status,omitempty"`
+	// The status comment provides additional information for the statusReason of the payment instrument.
+	StatusComment *string `json:"statusComment,omitempty"`
 	// The reason for the status of the payment instrument.  Possible values: **accountClosure**, **damaged**, **endOfLife**, **expired**, **lost**, **stolen**, **suspectedFraud**, **transactionRule**, **other**. If the reason is **other**, you must also send the `statusComment` parameter describing the status change.
 	StatusReason *string `json:"statusReason,omitempty"`
 	// Type of payment instrument.  Possible value: **card**, **bankAccount**.
@@ -364,6 +366,38 @@ func (o *PaymentInstrument) SetStatus(v string) {
 	o.Status = &v
 }
 
+// GetStatusComment returns the StatusComment field value if set, zero value otherwise.
+func (o *PaymentInstrument) GetStatusComment() string {
+	if o == nil || common.IsNil(o.StatusComment) {
+		var ret string
+		return ret
+	}
+	return *o.StatusComment
+}
+
+// GetStatusCommentOk returns a tuple with the StatusComment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentInstrument) GetStatusCommentOk() (*string, bool) {
+	if o == nil || common.IsNil(o.StatusComment) {
+		return nil, false
+	}
+	return o.StatusComment, true
+}
+
+// HasStatusComment returns a boolean if a field has been set.
+func (o *PaymentInstrument) HasStatusComment() bool {
+	if o != nil && !common.IsNil(o.StatusComment) {
+		return true
+	}
+
+	return false
+}
+
+// SetStatusComment gets a reference to the given string and assigns it to the StatusComment field.
+func (o *PaymentInstrument) SetStatusComment(v string) {
+	o.StatusComment = &v
+}
+
 // GetStatusReason returns the StatusReason field value if set, zero value otherwise.
 func (o *PaymentInstrument) GetStatusReason() string {
 	if o == nil || common.IsNil(o.StatusReason) {
@@ -453,6 +487,9 @@ func (o PaymentInstrument) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Status) {
 		toSerialize["status"] = o.Status
+	}
+	if !common.IsNil(o.StatusComment) {
+		toSerialize["statusComment"] = o.StatusComment
 	}
 	if !common.IsNil(o.StatusReason) {
 		toSerialize["statusReason"] = o.StatusReason

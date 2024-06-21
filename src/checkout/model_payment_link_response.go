@@ -55,7 +55,8 @@ type PaymentLinkResponse struct {
 	// This reference allows linking multiple transactions to each other for reporting purposes (for example, order auth-rate). The reference should be unique per billing cycle.
 	MerchantOrderReference *string `json:"merchantOrderReference,omitempty"`
 	// Metadata consists of entries, each of which includes a key and a value. Limitations: * Maximum 20 key-value pairs per request. Otherwise, error \"177\" occurs: \"Metadata size exceeds limit\" * Maximum 20 characters per key. Otherwise, error \"178\" occurs: \"Metadata key size exceeds limit\" * A key cannot have the name `checkout.linkId`. Any value that you provide with this key is going to be replaced by the real payment link ID.
-	Metadata *map[string]string `json:"metadata,omitempty"`
+	Metadata                *map[string]string       `json:"metadata,omitempty"`
+	PlatformChargebackLogic *PlatformChargebackLogic `json:"platformChargebackLogic,omitempty"`
 	// Defines a recurring payment type. Required when `storePaymentMethodMode` is set to **askForConsent** or **enabled**. Possible values: * **Subscription** – A transaction for a fixed or variable amount, which follows a fixed schedule. * **CardOnFile** – With a card-on-file (CoF) transaction, card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction. * **UnscheduledCardOnFile** – An unscheduled card-on-file (UCoF) transaction is a transaction that occurs on a non-fixed schedule and/or has variable amounts. For example, automatic top-ups when a cardholder's balance drops below a certain amount.
 	RecurringProcessingModel *string `json:"recurringProcessingModel,omitempty"`
 	// A reference that is used to uniquely identify the payment in future communications about the payment status.
@@ -82,7 +83,7 @@ type PaymentLinkResponse struct {
 	SocialSecurityNumber *string `json:"socialSecurityNumber,omitempty"`
 	// Boolean value indicating whether the card payment method should be split into separate debit and credit options.
 	SplitCardFundingSources *bool `json:"splitCardFundingSources,omitempty"`
-	// An array of objects specifying how to split a payment when using [Adyen for Platforms](https://docs.adyen.com/platforms/processing-payments#providing-split-information), [Classic Platforms integration](https://docs.adyen.com/classic-platforms/processing-payments#providing-split-information), or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
+	// An array of objects specifying how to split a payment when using [Adyen for Platforms](https://docs.adyen.com/platforms/process-payments#providing-split-information), [Classic Platforms integration](https://docs.adyen.com/classic-platforms/processing-payments#providing-split-information), or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
 	Splits []Split `json:"splits,omitempty"`
 	// Status of the payment link. Possible values: * **active**: The link can be used to make payments. * **expired**: The expiry date for the payment link has passed. Shoppers can no longer use the link to make payments. * **completed**: The shopper completed the payment. * **paymentPending**: The shopper is in the process of making the payment. Applies to payment methods with an asynchronous flow.
 	Status string `json:"status"`
@@ -93,7 +94,8 @@ type PaymentLinkResponse struct {
 	// The shopper's telephone number.
 	TelephoneNumber *string `json:"telephoneNumber,omitempty"`
 	// A [theme](https://docs.adyen.com/unified-commerce/pay-by-link/payment-links/api#themes) to customize the appearance of the payment page. If not specified, the payment page is rendered according to the theme set as default in your Customer Area.
-	ThemeId *string `json:"themeId,omitempty"`
+	ThemeId             *string                             `json:"themeId,omitempty"`
+	ThreeDS2RequestData *CheckoutSessionThreeDS2RequestData `json:"threeDS2RequestData,omitempty"`
 	// The date when the payment link status was updated.  [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format: YYYY-MM-DDThh:mm:ss+TZD, for example, **2020-12-18T10:15:30+01:00**.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 	// The URL at which the shopper can complete the payment.
@@ -747,6 +749,38 @@ func (o *PaymentLinkResponse) SetMetadata(v map[string]string) {
 	o.Metadata = &v
 }
 
+// GetPlatformChargebackLogic returns the PlatformChargebackLogic field value if set, zero value otherwise.
+func (o *PaymentLinkResponse) GetPlatformChargebackLogic() PlatformChargebackLogic {
+	if o == nil || common.IsNil(o.PlatformChargebackLogic) {
+		var ret PlatformChargebackLogic
+		return ret
+	}
+	return *o.PlatformChargebackLogic
+}
+
+// GetPlatformChargebackLogicOk returns a tuple with the PlatformChargebackLogic field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentLinkResponse) GetPlatformChargebackLogicOk() (*PlatformChargebackLogic, bool) {
+	if o == nil || common.IsNil(o.PlatformChargebackLogic) {
+		return nil, false
+	}
+	return o.PlatformChargebackLogic, true
+}
+
+// HasPlatformChargebackLogic returns a boolean if a field has been set.
+func (o *PaymentLinkResponse) HasPlatformChargebackLogic() bool {
+	if o != nil && !common.IsNil(o.PlatformChargebackLogic) {
+		return true
+	}
+
+	return false
+}
+
+// SetPlatformChargebackLogic gets a reference to the given PlatformChargebackLogic and assigns it to the PlatformChargebackLogic field.
+func (o *PaymentLinkResponse) SetPlatformChargebackLogic(v PlatformChargebackLogic) {
+	o.PlatformChargebackLogic = &v
+}
+
 // GetRecurringProcessingModel returns the RecurringProcessingModel field value if set, zero value otherwise.
 func (o *PaymentLinkResponse) GetRecurringProcessingModel() string {
 	if o == nil || common.IsNil(o.RecurringProcessingModel) {
@@ -1371,6 +1405,38 @@ func (o *PaymentLinkResponse) SetThemeId(v string) {
 	o.ThemeId = &v
 }
 
+// GetThreeDS2RequestData returns the ThreeDS2RequestData field value if set, zero value otherwise.
+func (o *PaymentLinkResponse) GetThreeDS2RequestData() CheckoutSessionThreeDS2RequestData {
+	if o == nil || common.IsNil(o.ThreeDS2RequestData) {
+		var ret CheckoutSessionThreeDS2RequestData
+		return ret
+	}
+	return *o.ThreeDS2RequestData
+}
+
+// GetThreeDS2RequestDataOk returns a tuple with the ThreeDS2RequestData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentLinkResponse) GetThreeDS2RequestDataOk() (*CheckoutSessionThreeDS2RequestData, bool) {
+	if o == nil || common.IsNil(o.ThreeDS2RequestData) {
+		return nil, false
+	}
+	return o.ThreeDS2RequestData, true
+}
+
+// HasThreeDS2RequestData returns a boolean if a field has been set.
+func (o *PaymentLinkResponse) HasThreeDS2RequestData() bool {
+	if o != nil && !common.IsNil(o.ThreeDS2RequestData) {
+		return true
+	}
+
+	return false
+}
+
+// SetThreeDS2RequestData gets a reference to the given CheckoutSessionThreeDS2RequestData and assigns it to the ThreeDS2RequestData field.
+func (o *PaymentLinkResponse) SetThreeDS2RequestData(v CheckoutSessionThreeDS2RequestData) {
+	o.ThreeDS2RequestData = &v
+}
+
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
 func (o *PaymentLinkResponse) GetUpdatedAt() time.Time {
 	if o == nil || common.IsNil(o.UpdatedAt) {
@@ -1491,6 +1557,9 @@ func (o PaymentLinkResponse) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
 	}
+	if !common.IsNil(o.PlatformChargebackLogic) {
+		toSerialize["platformChargebackLogic"] = o.PlatformChargebackLogic
+	}
 	if !common.IsNil(o.RecurringProcessingModel) {
 		toSerialize["recurringProcessingModel"] = o.RecurringProcessingModel
 	}
@@ -1546,6 +1615,9 @@ func (o PaymentLinkResponse) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.ThemeId) {
 		toSerialize["themeId"] = o.ThemeId
+	}
+	if !common.IsNil(o.ThreeDS2RequestData) {
+		toSerialize["threeDS2RequestData"] = o.ThreeDS2RequestData
 	}
 	if !common.IsNil(o.UpdatedAt) {
 		toSerialize["updatedAt"] = o.UpdatedAt

@@ -23,16 +23,17 @@ type TransferEvent struct {
 	Amount *Amount `json:"amount,omitempty"`
 	// The amount adjustments in this transfer.
 	AmountAdjustments []AmountAdjustment `json:"amountAdjustments,omitempty"`
+	// Scheme unique arn identifier useful for tracing captures, chargebacks, refunds, etc.
+	Arn *string `json:"arn,omitempty"`
 	// The date when the transfer request was sent.
 	BookingDate *time.Time `json:"bookingDate,omitempty"`
-	// The estimated time the beneficiary should have access to the funds.
-	// Deprecated
+	// The estimated time when the beneficiary should have access to the funds.
 	EstimatedArrivalTime *time.Time      `json:"estimatedArrivalTime,omitempty"`
 	ExternalReason       *ExternalReason `json:"externalReason,omitempty"`
 	// The unique identifier of the transfer event.
 	Id           *string       `json:"id,omitempty"`
 	Modification *Modification `json:"modification,omitempty"`
-	// The list of the balance mutation per event.
+	// The list of balance mutations per event.
 	Mutations      []BalanceMutation `json:"mutations,omitempty"`
 	OriginalAmount *Amount           `json:"originalAmount,omitempty"`
 	// The reason for the transfer status.
@@ -131,6 +132,38 @@ func (o *TransferEvent) SetAmountAdjustments(v []AmountAdjustment) {
 	o.AmountAdjustments = v
 }
 
+// GetArn returns the Arn field value if set, zero value otherwise.
+func (o *TransferEvent) GetArn() string {
+	if o == nil || common.IsNil(o.Arn) {
+		var ret string
+		return ret
+	}
+	return *o.Arn
+}
+
+// GetArnOk returns a tuple with the Arn field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransferEvent) GetArnOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Arn) {
+		return nil, false
+	}
+	return o.Arn, true
+}
+
+// HasArn returns a boolean if a field has been set.
+func (o *TransferEvent) HasArn() bool {
+	if o != nil && !common.IsNil(o.Arn) {
+		return true
+	}
+
+	return false
+}
+
+// SetArn gets a reference to the given string and assigns it to the Arn field.
+func (o *TransferEvent) SetArn(v string) {
+	o.Arn = &v
+}
+
 // GetBookingDate returns the BookingDate field value if set, zero value otherwise.
 func (o *TransferEvent) GetBookingDate() time.Time {
 	if o == nil || common.IsNil(o.BookingDate) {
@@ -164,7 +197,6 @@ func (o *TransferEvent) SetBookingDate(v time.Time) {
 }
 
 // GetEstimatedArrivalTime returns the EstimatedArrivalTime field value if set, zero value otherwise.
-// Deprecated
 func (o *TransferEvent) GetEstimatedArrivalTime() time.Time {
 	if o == nil || common.IsNil(o.EstimatedArrivalTime) {
 		var ret time.Time
@@ -175,7 +207,6 @@ func (o *TransferEvent) GetEstimatedArrivalTime() time.Time {
 
 // GetEstimatedArrivalTimeOk returns a tuple with the EstimatedArrivalTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *TransferEvent) GetEstimatedArrivalTimeOk() (*time.Time, bool) {
 	if o == nil || common.IsNil(o.EstimatedArrivalTime) {
 		return nil, false
@@ -193,7 +224,6 @@ func (o *TransferEvent) HasEstimatedArrivalTime() bool {
 }
 
 // SetEstimatedArrivalTime gets a reference to the given time.Time and assigns it to the EstimatedArrivalTime field.
-// Deprecated
 func (o *TransferEvent) SetEstimatedArrivalTime(v time.Time) {
 	o.EstimatedArrivalTime = &v
 }
@@ -598,6 +628,9 @@ func (o TransferEvent) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.AmountAdjustments) {
 		toSerialize["amountAdjustments"] = o.AmountAdjustments
 	}
+	if !common.IsNil(o.Arn) {
+		toSerialize["arn"] = o.Arn
+	}
 	if !common.IsNil(o.BookingDate) {
 		toSerialize["bookingDate"] = o.BookingDate
 	}
@@ -680,7 +713,7 @@ func (v *NullableTransferEvent) UnmarshalJSON(src []byte) error {
 }
 
 func (o *TransferEvent) isValidReason() bool {
-	var allowedEnumValues = []string{"amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declinedByTransactionRule", "error", "notEnoughBalance", "pendingApproval", "refusedByCounterpartyBank", "routeNotFound", "scaFailed", "unknown"}
+	var allowedEnumValues = []string{"amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declined", "declinedByTransactionRule", "error", "notEnoughBalance", "pendingApproval", "refusedByCounterpartyBank", "routeNotFound", "scaFailed", "unknown"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetReason() == allowed {
 			return true

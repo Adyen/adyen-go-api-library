@@ -111,7 +111,7 @@ type CreateCheckoutSessionResponse struct {
 	SocialSecurityNumber *string `json:"socialSecurityNumber,omitempty"`
 	// Boolean value indicating whether the card payment method should be split into separate debit and credit options.
 	SplitCardFundingSources *bool `json:"splitCardFundingSources,omitempty"`
-	// An array of objects specifying how to split a payment when using [Adyen for Platforms](https://docs.adyen.com/platforms/processing-payments#providing-split-information), [Classic Platforms integration](https://docs.adyen.com/classic-platforms/processing-payments#providing-split-information), or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
+	// An array of objects specifying how to split a payment when using [Adyen for Platforms](https://docs.adyen.com/platforms/process-payments#providing-split-information), [Classic Platforms integration](https://docs.adyen.com/classic-platforms/processing-payments#providing-split-information), or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
 	Splits []Split `json:"splits,omitempty"`
 	// Required for Adyen for Platforms integrations if you are a platform model. This is your [reference](https://docs.adyen.com/api-explorer/Management/3/post/merchants/(merchantId)/stores#request-reference) (on [balance platform](https://docs.adyen.com/platforms)) or the [storeReference](https://docs.adyen.com/api-explorer/Account/latest/post/updateAccountHolder#request-accountHolderDetails-storeDetails-storeReference) (in the [classic integration](https://docs.adyen.com/classic-platforms/processing-payments/route-payment-to-store/#route-a-payment-to-a-store)) for the ecommerce or point-of-sale store that is processing the payment.
 	Store *string `json:"store,omitempty"`
@@ -122,7 +122,8 @@ type CreateCheckoutSessionResponse struct {
 	// The shopper's telephone number.
 	TelephoneNumber *string `json:"telephoneNumber,omitempty"`
 	// Sets a custom theme for [Hosted Checkout](https://docs.adyen.com/online-payments/build-your-integration/?platform=Web&integration=Hosted+Checkout). The value can be any of the **Theme ID** values from your Customer Area.
-	ThemeId *string `json:"themeId,omitempty"`
+	ThemeId             *string                             `json:"themeId,omitempty"`
+	ThreeDS2RequestData *CheckoutSessionThreeDS2RequestData `json:"threeDS2RequestData,omitempty"`
 	// If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only), and not the payment authorisation.
 	// Deprecated
 	ThreeDSAuthenticationOnly *bool `json:"threeDSAuthenticationOnly,omitempty"`
@@ -2007,6 +2008,38 @@ func (o *CreateCheckoutSessionResponse) SetThemeId(v string) {
 	o.ThemeId = &v
 }
 
+// GetThreeDS2RequestData returns the ThreeDS2RequestData field value if set, zero value otherwise.
+func (o *CreateCheckoutSessionResponse) GetThreeDS2RequestData() CheckoutSessionThreeDS2RequestData {
+	if o == nil || common.IsNil(o.ThreeDS2RequestData) {
+		var ret CheckoutSessionThreeDS2RequestData
+		return ret
+	}
+	return *o.ThreeDS2RequestData
+}
+
+// GetThreeDS2RequestDataOk returns a tuple with the ThreeDS2RequestData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCheckoutSessionResponse) GetThreeDS2RequestDataOk() (*CheckoutSessionThreeDS2RequestData, bool) {
+	if o == nil || common.IsNil(o.ThreeDS2RequestData) {
+		return nil, false
+	}
+	return o.ThreeDS2RequestData, true
+}
+
+// HasThreeDS2RequestData returns a boolean if a field has been set.
+func (o *CreateCheckoutSessionResponse) HasThreeDS2RequestData() bool {
+	if o != nil && !common.IsNil(o.ThreeDS2RequestData) {
+		return true
+	}
+
+	return false
+}
+
+// SetThreeDS2RequestData gets a reference to the given CheckoutSessionThreeDS2RequestData and assigns it to the ThreeDS2RequestData field.
+func (o *CreateCheckoutSessionResponse) SetThreeDS2RequestData(v CheckoutSessionThreeDS2RequestData) {
+	o.ThreeDS2RequestData = &v
+}
+
 // GetThreeDSAuthenticationOnly returns the ThreeDSAuthenticationOnly field value if set, zero value otherwise.
 // Deprecated
 func (o *CreateCheckoutSessionResponse) GetThreeDSAuthenticationOnly() bool {
@@ -2280,6 +2313,9 @@ func (o CreateCheckoutSessionResponse) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.ThemeId) {
 		toSerialize["themeId"] = o.ThemeId
+	}
+	if !common.IsNil(o.ThreeDS2RequestData) {
+		toSerialize["threeDS2RequestData"] = o.ThreeDS2RequestData
 	}
 	if !common.IsNil(o.ThreeDSAuthenticationOnly) {
 		toSerialize["threeDSAuthenticationOnly"] = o.ThreeDSAuthenticationOnly

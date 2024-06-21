@@ -40,7 +40,7 @@ type CheckoutVoucherAction struct {
 	MerchantName *string `json:"merchantName,omitempty"`
 	// The merchant reference.
 	MerchantReference *string `json:"merchantReference,omitempty"`
-	// A base64 encoded signature of all properties
+	// A Base64-encoded token containing all properties of the voucher. For iOS, you can use this to pass a voucher to Apple Wallet.
 	PassCreationToken *string `json:"passCreationToken,omitempty"`
 	// Encoded payment data.
 	PaymentData *string `json:"paymentData,omitempty"`

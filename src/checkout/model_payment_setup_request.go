@@ -88,7 +88,8 @@ type PaymentSetupRequest struct {
 	ReturnUrl string    `json:"returnUrl"`
 	RiskData  *RiskData `json:"riskData,omitempty"`
 	// The version of the SDK you are using (for Web SDK integrations only).
-	SdkVersion *string `json:"sdkVersion,omitempty"`
+	SdkVersion                       *string                           `json:"sdkVersion,omitempty"`
+	SecureRemoteCommerceCheckoutData *SecureRemoteCommerceCheckoutData `json:"secureRemoteCommerceCheckoutData,omitempty"`
 	// The date and time until when the session remains valid, in [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format.  For example: 2020-07-18T15:42:40.428+01:00
 	SessionValidity *string `json:"sessionValidity,omitempty"`
 	// The shopper's email address. We recommend that you provide this data, as it is used in velocity fraud checks. > For 3D Secure 2 transactions, schemes require `shopperEmail` for all browser-based and mobile implementations.
@@ -1392,6 +1393,38 @@ func (o *PaymentSetupRequest) SetSdkVersion(v string) {
 	o.SdkVersion = &v
 }
 
+// GetSecureRemoteCommerceCheckoutData returns the SecureRemoteCommerceCheckoutData field value if set, zero value otherwise.
+func (o *PaymentSetupRequest) GetSecureRemoteCommerceCheckoutData() SecureRemoteCommerceCheckoutData {
+	if o == nil || common.IsNil(o.SecureRemoteCommerceCheckoutData) {
+		var ret SecureRemoteCommerceCheckoutData
+		return ret
+	}
+	return *o.SecureRemoteCommerceCheckoutData
+}
+
+// GetSecureRemoteCommerceCheckoutDataOk returns a tuple with the SecureRemoteCommerceCheckoutData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentSetupRequest) GetSecureRemoteCommerceCheckoutDataOk() (*SecureRemoteCommerceCheckoutData, bool) {
+	if o == nil || common.IsNil(o.SecureRemoteCommerceCheckoutData) {
+		return nil, false
+	}
+	return o.SecureRemoteCommerceCheckoutData, true
+}
+
+// HasSecureRemoteCommerceCheckoutData returns a boolean if a field has been set.
+func (o *PaymentSetupRequest) HasSecureRemoteCommerceCheckoutData() bool {
+	if o != nil && !common.IsNil(o.SecureRemoteCommerceCheckoutData) {
+		return true
+	}
+
+	return false
+}
+
+// SetSecureRemoteCommerceCheckoutData gets a reference to the given SecureRemoteCommerceCheckoutData and assigns it to the SecureRemoteCommerceCheckoutData field.
+func (o *PaymentSetupRequest) SetSecureRemoteCommerceCheckoutData(v SecureRemoteCommerceCheckoutData) {
+	o.SecureRemoteCommerceCheckoutData = &v
+}
+
 // GetSessionValidity returns the SessionValidity field value if set, zero value otherwise.
 func (o *PaymentSetupRequest) GetSessionValidity() string {
 	if o == nil || common.IsNil(o.SessionValidity) {
@@ -2026,6 +2059,9 @@ func (o PaymentSetupRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.SdkVersion) {
 		toSerialize["sdkVersion"] = o.SdkVersion
+	}
+	if !common.IsNil(o.SecureRemoteCommerceCheckoutData) {
+		toSerialize["secureRemoteCommerceCheckoutData"] = o.SecureRemoteCommerceCheckoutData
 	}
 	if !common.IsNil(o.SessionValidity) {
 		toSerialize["sessionValidity"] = o.SessionValidity

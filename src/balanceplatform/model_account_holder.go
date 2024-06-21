@@ -22,8 +22,9 @@ type AccountHolder struct {
 	// The unique identifier of the [balance platform](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balancePlatforms/{id}__queryParam_id) to which the account holder belongs. Required in the request if your API credentials can be used for multiple balance platforms.
 	BalancePlatform *string `json:"balancePlatform,omitempty"`
 	// Contains key-value pairs that specify the actions that an account holder can do in your platform. The key is a capability required for your integration. For example, **issueCard** for Issuing. The value is an object containing the settings for the capability.
-	Capabilities   *map[string]AccountHolderCapability `json:"capabilities,omitempty"`
-	ContactDetails *ContactDetails                     `json:"contactDetails,omitempty"`
+	Capabilities *map[string]AccountHolderCapability `json:"capabilities,omitempty"`
+	// Deprecated
+	ContactDetails *ContactDetails `json:"contactDetails,omitempty"`
 	// Your description for the account holder.
 	Description *string `json:"description,omitempty"`
 	// The unique identifier of the account holder.
@@ -130,6 +131,7 @@ func (o *AccountHolder) SetCapabilities(v map[string]AccountHolderCapability) {
 }
 
 // GetContactDetails returns the ContactDetails field value if set, zero value otherwise.
+// Deprecated
 func (o *AccountHolder) GetContactDetails() ContactDetails {
 	if o == nil || common.IsNil(o.ContactDetails) {
 		var ret ContactDetails
@@ -140,6 +142,7 @@ func (o *AccountHolder) GetContactDetails() ContactDetails {
 
 // GetContactDetailsOk returns a tuple with the ContactDetails field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *AccountHolder) GetContactDetailsOk() (*ContactDetails, bool) {
 	if o == nil || common.IsNil(o.ContactDetails) {
 		return nil, false
@@ -157,6 +160,7 @@ func (o *AccountHolder) HasContactDetails() bool {
 }
 
 // SetContactDetails gets a reference to the given ContactDetails and assigns it to the ContactDetails field.
+// Deprecated
 func (o *AccountHolder) SetContactDetails(v ContactDetails) {
 	o.ContactDetails = &v
 }

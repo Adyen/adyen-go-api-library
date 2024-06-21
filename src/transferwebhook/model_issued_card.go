@@ -26,9 +26,9 @@ type IssuedCard struct {
 	// Contains information about how the payment was processed. For example, **ecommerce** for online or **pos** for in-person payments.
 	ProcessingType           *string                   `json:"processingType,omitempty"`
 	RelayedAuthorisationData *RelayedAuthorisationData `json:"relayedAuthorisationData,omitempty"`
-	// The identifier of the original payment provided by the scheme. The Id could be alphanumeric or numeric depending on the scheme. The schemeTraceID should be referring to an original schemeUniqueTransactionID provided in an earlier payment (not necessarily processed by Adyen). Instances of available schemeTraceId is authAdjustment or recurring payments.
+	// The identifier of the original payment. This ID is provided by the scheme and can be alphanumeric or numeric, depending on the scheme. The `schemeTraceID` should refer to an original `schemeUniqueTransactionID` provided in an earlier payment (not necessarily processed by Adyen). A `schemeTraceId` is typically available for authorization adjustments or recurring payments.
 	SchemeTraceId *string `json:"schemeTraceId,omitempty"`
-	// The unique identifier created by the scheme. The ID could be alphanumeric or numeric depending on the scheme.
+	// The unique identifier created by the scheme. This ID can be alphanumeric or numeric depending on the scheme.
 	SchemeUniqueTransactionId *string `json:"schemeUniqueTransactionId,omitempty"`
 	// **issuedCard**
 	Type *string `json:"type,omitempty"`
