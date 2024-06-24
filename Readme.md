@@ -68,7 +68,7 @@ The library supports all webhooks under the following model directories:
 You can use go modules to add our library to your project
 
 ```bash
-go get github.com/adyen/adyen-go-api-library/v9@v10.3.0
+go get github.com/adyen/adyen-go-api-library/v10@v10.3.0
 ```
 
 ## Usage examples
@@ -78,9 +78,9 @@ go get github.com/adyen/adyen-go-api-library/v9@v10.3.0
 ```go
 import (
 	"context"
-	"github.com/adyen/adyen-go-api-library/v9/src/checkout"
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
-	"github.com/adyen/adyen-go-api-library/v9/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v10/src/checkout"
+	"github.com/adyen/adyen-go-api-library/v10/src/common"
+	"github.com/adyen/adyen-go-api-library/v10/src/adyen"
 )
 
 client := adyen.NewClient(&common.Config{
@@ -100,9 +100,9 @@ res, httpRes, err := service.PaymentsApi.PaymentMethods(context.Background(), re
 
 ```go
 import (
-    "github.com/adyen/adyen-go-api-library/v9/src/checkout"
-    "github.com/adyen/adyen-go-api-library/v9/src/common"
-    "github.com/adyen/adyen-go-api-library/v9/src/adyen"
+    "github.com/adyen/adyen-go-api-library/v10/src/checkout"
+    "github.com/adyen/adyen-go-api-library/v10/src/common"
+    "github.com/adyen/adyen-go-api-library/v10/src/adyen"
 )
 
 client := adyen.NewClient(&common.Config{
@@ -123,9 +123,9 @@ res, httpRes, err := service.PaymentsApi.PaymentMethods(context.Background(), re
 
 ```go
 import (
-    "github.com/adyen/adyen-go-api-library/v9/src/recurring"
-    "github.com/adyen/adyen-go-api-library/v9/src/common"
-    "github.com/adyen/adyen-go-api-library/v9/src/adyen"
+    "github.com/adyen/adyen-go-api-library/v10/src/recurring"
+    "github.com/adyen/adyen-go-api-library/v10/src/common"
+    "github.com/adyen/adyen-go-api-library/v10/src/adyen"
 )
 
 client := adyen.NewClient(&common.Config{
@@ -153,7 +153,7 @@ In some setups you might need to unmarshal JSON strings to request objects. For 
 ```go
 import (
 	"encoding/json"
-	"github.com/adyen/adyen-go-api-library/v9/src/checkout"
+	"github.com/adyen/adyen-go-api-library/v10/src/checkout"
 )
 paymentRequest := checkout.PaymentRequest{}
 error := json.Unmarshal([]byte("YOUR_JSON_STRING"), &paymentRequest)
@@ -164,7 +164,7 @@ error := json.Unmarshal([]byte("YOUR_JSON_STRING"), &paymentRequest)
 
 ```go
 import (
-	"github.com/adyen/adyen-go-api-library/v9/src/webhook"
+	"github.com/adyen/adyen-go-api-library/v10/src/webhook"
 )
 
 msg, err := webhook.HandleRequest(`{"live": "false", "notificationItems": []}`)
@@ -174,9 +174,9 @@ msg, err := webhook.HandleRequest(`{"live": "false", "notificationItems": []}`)
 
 ```go
 import (
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
-	"github.com/adyen/adyen-go-api-library/v9/src/checkout"
-	"github.com/adyen/adyen-go-api-library/v9/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v10/src/common"
+	"github.com/adyen/adyen-go-api-library/v10/src/checkout"
+	"github.com/adyen/adyen-go-api-library/v10/src/adyen"
 )
 
 client := adyen.NewClient(&common.Config{

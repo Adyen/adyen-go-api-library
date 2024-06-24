@@ -11,7 +11,7 @@ package transferwebhook
 import (
 	"encoding/json"
 
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+	"github.com/adyen/adyen-go-api-library/v10/src/common"
 )
 
 // checks if the CounterpartyV3 type satisfies the MappedNullable interface at compile time

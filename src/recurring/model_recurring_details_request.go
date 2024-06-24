@@ -11,7 +11,7 @@ package recurring
 import (
 	"encoding/json"
 
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+	"github.com/adyen/adyen-go-api-library/v10/src/common"
 )
 
 // checks if the RecurringDetailsRequest type satisfies the MappedNullable interface at compile time
