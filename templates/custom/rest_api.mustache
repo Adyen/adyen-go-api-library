@@ -9,7 +9,7 @@ import (
     _nethttp "net/http"
     "net/url"
     "strings"
-    "github.com/adyen/adyen-go-api-library/v9/src/common"
+    "github.com/adyen/adyen-go-api-library/v10/src/common"
 )
 
 // {{classname}} {{classname}} service
@@ -136,13 +136,13 @@ func (a *{{{classname}}}) {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecas
      defer httpRes.Body.Close()
 {{#responses}}
     {{#dataType}}
-    
+
         {{^is1xx}}
             {{^is2xx}}
                 {{#range}}
-                
+
                     {{#is3xx}}
-                   
+
                         if httpRes.StatusCode >= 300 && httpRes.StatusCode < 400 {
                     {{/is3xx}}
                     {{#is4xx}}
