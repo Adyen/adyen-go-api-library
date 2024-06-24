@@ -2,9 +2,9 @@ package legalentity
 
 import (
 	"context"
-	"github.com/adyen/adyen-go-api-library/v9/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
-	"github.com/adyen/adyen-go-api-library/v9/src/legalentity"
+	"github.com/adyen/adyen-go-api-library/v10/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v10/src/common"
+	"github.com/adyen/adyen-go-api-library/v10/src/legalentity"
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"net/http/httptest"

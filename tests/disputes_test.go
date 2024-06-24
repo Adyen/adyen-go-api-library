@@ -8,9 +8,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/adyen/adyen-go-api-library/v9/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
-	"github.com/adyen/adyen-go-api-library/v9/src/disputes"
+	"github.com/adyen/adyen-go-api-library/v10/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v10/src/common"
+	"github.com/adyen/adyen-go-api-library/v10/src/disputes"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

@@ -9,7 +9,7 @@ API version: 3
 package management
 
 import (
-	"github.com/adyen/adyen-go-api-library/v9/src/common"
+	"github.com/adyen/adyen-go-api-library/v10/src/common"
 )
 
 // APIClient manages communication with the Management API API v3
