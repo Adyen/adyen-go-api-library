@@ -10,7 +10,8 @@ package management
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v10/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v10/src/common"
 )
 
 // checks if the UpdateMerchantUserRequest type satisfies the MappedNullable interface at compile time
@@ -24,7 +25,7 @@ type UpdateMerchantUserRequest struct {
 	Active *bool `json:"active,omitempty"`
 	// The email address of the user.
 	Email *string `json:"email,omitempty"`
-	Name *Name2 `json:"name,omitempty"`
+	Name  *Name2  `json:"name,omitempty"`
 	// The list of [roles](https://docs.adyen.com/account/user-roles) for this user.
 	Roles []string `json:"roles,omitempty"`
 	// The [tz database name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) of the time zone of the user. For example, **Europe/Amsterdam**.
@@ -241,7 +242,7 @@ func (o *UpdateMerchantUserRequest) SetTimeZoneCode(v string) {
 }
 
 func (o UpdateMerchantUserRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -306,6 +307,3 @@ func (v *NullableUpdateMerchantUserRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-
