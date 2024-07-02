@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v10/src/common"
+    "github.com/adyen/adyen-go-api-library/v10/src/common"
 )
 
 // checks if the Configuration type satisfies the MappedNullable interface at compile time
@@ -21,9 +20,9 @@ var _ common.MappedNullable = &Configuration{}
 type Configuration struct {
 	Avs *Avs `json:"avs,omitempty"`
 	// Determines whether the cardholder name should be provided or not.  Permitted values: * NONE * OPTIONAL * REQUIRED
-	CardHolderName *string             `json:"cardHolderName,omitempty"`
-	Installments   *InstallmentsNumber `json:"installments,omitempty"`
-	ShopperInput   *ShopperInput       `json:"shopperInput,omitempty"`
+	CardHolderName *string `json:"cardHolderName,omitempty"`
+	Installments *InstallmentsNumber `json:"installments,omitempty"`
+	ShopperInput *ShopperInput `json:"shopperInput,omitempty"`
 }
 
 // NewConfiguration instantiates a new Configuration object
@@ -172,7 +171,7 @@ func (o *Configuration) SetShopperInput(v ShopperInput) {
 }
 
 func (o Configuration) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -232,12 +231,14 @@ func (v *NullableConfiguration) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *Configuration) isValidCardHolderName() bool {
-	var allowedEnumValues = []string{"NONE", "OPTIONAL", "REQUIRED"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetCardHolderName() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "NONE", "OPTIONAL", "REQUIRED" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetCardHolderName() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

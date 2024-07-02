@@ -10,26 +10,27 @@ package legalentity
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v10/src/common"
 	"fmt"
 )
 
 // BankAccountInfoAccountIdentification - Identification of the bank account.
 type BankAccountInfoAccountIdentification struct {
-	AULocalAccountIdentification      *AULocalAccountIdentification
-	CALocalAccountIdentification      *CALocalAccountIdentification
-	CZLocalAccountIdentification      *CZLocalAccountIdentification
-	DKLocalAccountIdentification      *DKLocalAccountIdentification
-	HKLocalAccountIdentification      *HKLocalAccountIdentification
-	HULocalAccountIdentification      *HULocalAccountIdentification
-	IbanAccountIdentification         *IbanAccountIdentification
-	NOLocalAccountIdentification      *NOLocalAccountIdentification
-	NZLocalAccountIdentification      *NZLocalAccountIdentification
+	AULocalAccountIdentification *AULocalAccountIdentification
+	CALocalAccountIdentification *CALocalAccountIdentification
+	CZLocalAccountIdentification *CZLocalAccountIdentification
+	DKLocalAccountIdentification *DKLocalAccountIdentification
+	HKLocalAccountIdentification *HKLocalAccountIdentification
+	HULocalAccountIdentification *HULocalAccountIdentification
+	IbanAccountIdentification *IbanAccountIdentification
+	NOLocalAccountIdentification *NOLocalAccountIdentification
+	NZLocalAccountIdentification *NZLocalAccountIdentification
 	NumberAndBicAccountIdentification *NumberAndBicAccountIdentification
-	PLLocalAccountIdentification      *PLLocalAccountIdentification
-	SELocalAccountIdentification      *SELocalAccountIdentification
-	SGLocalAccountIdentification      *SGLocalAccountIdentification
-	UKLocalAccountIdentification      *UKLocalAccountIdentification
-	USLocalAccountIdentification      *USLocalAccountIdentification
+	PLLocalAccountIdentification *PLLocalAccountIdentification
+	SELocalAccountIdentification *SELocalAccountIdentification
+	SGLocalAccountIdentification *SGLocalAccountIdentification
+	UKLocalAccountIdentification *UKLocalAccountIdentification
+	USLocalAccountIdentification *USLocalAccountIdentification
 }
 
 // AULocalAccountIdentificationAsBankAccountInfoAccountIdentification is a convenience function that returns AULocalAccountIdentification wrapped in BankAccountInfoAccountIdentification
@@ -137,6 +138,7 @@ func USLocalAccountIdentificationAsBankAccountInfoAccountIdentification(v *USLoc
 	}
 }
 
+
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *BankAccountInfoAccountIdentification) UnmarshalJSON(data []byte) error {
 	var err error
@@ -147,7 +149,7 @@ func (dst *BankAccountInfoAccountIdentification) UnmarshalJSON(data []byte) erro
 		jsonAULocalAccountIdentification, _ := json.Marshal(dst.AULocalAccountIdentification)
 		if string(jsonAULocalAccountIdentification) == "{}" || !dst.AULocalAccountIdentification.isValidType() { // empty struct
 			dst.AULocalAccountIdentification = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -160,7 +162,7 @@ func (dst *BankAccountInfoAccountIdentification) UnmarshalJSON(data []byte) erro
 		jsonCALocalAccountIdentification, _ := json.Marshal(dst.CALocalAccountIdentification)
 		if string(jsonCALocalAccountIdentification) == "{}" || !dst.CALocalAccountIdentification.isValidType() { // empty struct
 			dst.CALocalAccountIdentification = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -173,7 +175,7 @@ func (dst *BankAccountInfoAccountIdentification) UnmarshalJSON(data []byte) erro
 		jsonCZLocalAccountIdentification, _ := json.Marshal(dst.CZLocalAccountIdentification)
 		if string(jsonCZLocalAccountIdentification) == "{}" || !dst.CZLocalAccountIdentification.isValidType() { // empty struct
 			dst.CZLocalAccountIdentification = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -186,7 +188,7 @@ func (dst *BankAccountInfoAccountIdentification) UnmarshalJSON(data []byte) erro
 		jsonDKLocalAccountIdentification, _ := json.Marshal(dst.DKLocalAccountIdentification)
 		if string(jsonDKLocalAccountIdentification) == "{}" || !dst.DKLocalAccountIdentification.isValidType() { // empty struct
 			dst.DKLocalAccountIdentification = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -199,7 +201,7 @@ func (dst *BankAccountInfoAccountIdentification) UnmarshalJSON(data []byte) erro
 		jsonHKLocalAccountIdentification, _ := json.Marshal(dst.HKLocalAccountIdentification)
 		if string(jsonHKLocalAccountIdentification) == "{}" || !dst.HKLocalAccountIdentification.isValidType() { // empty struct
 			dst.HKLocalAccountIdentification = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -212,7 +214,7 @@ func (dst *BankAccountInfoAccountIdentification) UnmarshalJSON(data []byte) erro
 		jsonHULocalAccountIdentification, _ := json.Marshal(dst.HULocalAccountIdentification)
 		if string(jsonHULocalAccountIdentification) == "{}" || !dst.HULocalAccountIdentification.isValidType() { // empty struct
 			dst.HULocalAccountIdentification = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -225,7 +227,7 @@ func (dst *BankAccountInfoAccountIdentification) UnmarshalJSON(data []byte) erro
 		jsonIbanAccountIdentification, _ := json.Marshal(dst.IbanAccountIdentification)
 		if string(jsonIbanAccountIdentification) == "{}" || !dst.IbanAccountIdentification.isValidType() { // empty struct
 			dst.IbanAccountIdentification = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -238,7 +240,7 @@ func (dst *BankAccountInfoAccountIdentification) UnmarshalJSON(data []byte) erro
 		jsonNOLocalAccountIdentification, _ := json.Marshal(dst.NOLocalAccountIdentification)
 		if string(jsonNOLocalAccountIdentification) == "{}" || !dst.NOLocalAccountIdentification.isValidType() { // empty struct
 			dst.NOLocalAccountIdentification = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -251,7 +253,7 @@ func (dst *BankAccountInfoAccountIdentification) UnmarshalJSON(data []byte) erro
 		jsonNZLocalAccountIdentification, _ := json.Marshal(dst.NZLocalAccountIdentification)
 		if string(jsonNZLocalAccountIdentification) == "{}" || !dst.NZLocalAccountIdentification.isValidType() { // empty struct
 			dst.NZLocalAccountIdentification = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -264,7 +266,7 @@ func (dst *BankAccountInfoAccountIdentification) UnmarshalJSON(data []byte) erro
 		jsonNumberAndBicAccountIdentification, _ := json.Marshal(dst.NumberAndBicAccountIdentification)
 		if string(jsonNumberAndBicAccountIdentification) == "{}" || !dst.NumberAndBicAccountIdentification.isValidType() { // empty struct
 			dst.NumberAndBicAccountIdentification = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -277,7 +279,7 @@ func (dst *BankAccountInfoAccountIdentification) UnmarshalJSON(data []byte) erro
 		jsonPLLocalAccountIdentification, _ := json.Marshal(dst.PLLocalAccountIdentification)
 		if string(jsonPLLocalAccountIdentification) == "{}" || !dst.PLLocalAccountIdentification.isValidType() { // empty struct
 			dst.PLLocalAccountIdentification = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -290,7 +292,7 @@ func (dst *BankAccountInfoAccountIdentification) UnmarshalJSON(data []byte) erro
 		jsonSELocalAccountIdentification, _ := json.Marshal(dst.SELocalAccountIdentification)
 		if string(jsonSELocalAccountIdentification) == "{}" || !dst.SELocalAccountIdentification.isValidType() { // empty struct
 			dst.SELocalAccountIdentification = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -303,7 +305,7 @@ func (dst *BankAccountInfoAccountIdentification) UnmarshalJSON(data []byte) erro
 		jsonSGLocalAccountIdentification, _ := json.Marshal(dst.SGLocalAccountIdentification)
 		if string(jsonSGLocalAccountIdentification) == "{}" || !dst.SGLocalAccountIdentification.isValidType() { // empty struct
 			dst.SGLocalAccountIdentification = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -316,7 +318,7 @@ func (dst *BankAccountInfoAccountIdentification) UnmarshalJSON(data []byte) erro
 		jsonUKLocalAccountIdentification, _ := json.Marshal(dst.UKLocalAccountIdentification)
 		if string(jsonUKLocalAccountIdentification) == "{}" || !dst.UKLocalAccountIdentification.isValidType() { // empty struct
 			dst.UKLocalAccountIdentification = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -329,7 +331,7 @@ func (dst *BankAccountInfoAccountIdentification) UnmarshalJSON(data []byte) erro
 		jsonUSLocalAccountIdentification, _ := json.Marshal(dst.USLocalAccountIdentification)
 		if string(jsonUSLocalAccountIdentification) == "{}" || !dst.USLocalAccountIdentification.isValidType() { // empty struct
 			dst.USLocalAccountIdentification = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -428,7 +430,7 @@ func (src BankAccountInfoAccountIdentification) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *BankAccountInfoAccountIdentification) GetActualInstance() interface{} {
+func (obj *BankAccountInfoAccountIdentification) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
@@ -531,3 +533,5 @@ func (v *NullableBankAccountInfoAccountIdentification) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
