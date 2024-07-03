@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v10/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v10/src/common"
 )
 
 // checks if the ThreeDS2RequestFields type satisfies the MappedNullable interface at compile time
@@ -30,18 +31,18 @@ type ThreeDS2RequestFields struct {
 	// If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only), and not the payment authorisation.
 	// Deprecated
 	AuthenticationOnly *bool `json:"authenticationOnly,omitempty"`
-	// Possibility to specify a preference for receiving a challenge from the issuer. Allowed values: * `noPreference` * `requestNoChallenge` * `requestChallenge` * `requestChallengeAsMandate` 
+	// Possibility to specify a preference for receiving a challenge from the issuer. Allowed values: * `noPreference` * `requestNoChallenge` * `requestChallenge` * `requestChallengeAsMandate`
 	// Deprecated
-	ChallengeIndicator *string `json:"challengeIndicator,omitempty"`
+	ChallengeIndicator  *string              `json:"challengeIndicator,omitempty"`
 	DeviceRenderOptions *DeviceRenderOptions `json:"deviceRenderOptions,omitempty"`
-	HomePhone *Phone `json:"homePhone,omitempty"`
+	HomePhone           *Phone               `json:"homePhone,omitempty"`
 	// Required for merchants that have been enrolled for 3D Secure 2 by another party than Adyen, mostly [authentication-only integrations](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only). The `mcc` is a four-digit code with which the previously given `acquirerMerchantID` is registered at the scheme.
 	Mcc *string `json:"mcc,omitempty"`
 	// Required for [authentication-only integration](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only). The merchant name that the issuer presents to the shopper if they get a challenge. We recommend to use the same value that you will use in the authorization. Maximum length is 40 characters. > Optional for a [full 3D Secure 2 integration](https://docs.adyen.com/online-payments/3d-secure/native-3ds2/api-integration). Use this field if you are enrolled for 3D Secure 2 with us and want to override the merchant name already configured on your account.
 	MerchantName *string `json:"merchantName,omitempty"`
 	// The `messageVersion` value indicating the 3D Secure 2 protocol version.
 	MessageVersion *string `json:"messageVersion,omitempty"`
-	MobilePhone *Phone `json:"mobilePhone,omitempty"`
+	MobilePhone    *Phone  `json:"mobilePhone,omitempty"`
 	// URL to where the issuer should send the `CRes`. Required if you are not using components for `channel` **Web** or if you are using classic integration `deviceChannel` **browser**.
 	NotificationURL *string `json:"notificationURL,omitempty"`
 	// Value **true** indicates that the transaction was de-tokenised prior to being received by the ACS.
@@ -55,7 +56,7 @@ type ThreeDS2RequestFields struct {
 	// Indicates the minimum number of days between authorisations. Maximum length: 4 characters.
 	RecurringFrequency *string `json:"recurringFrequency,omitempty"`
 	// The `sdkAppID` value as received from the 3D Secure 2 SDK.
-	SdkAppID *string `json:"sdkAppID,omitempty"`
+	SdkAppID       *string         `json:"sdkAppID,omitempty"`
 	SdkEphemPubKey *SDKEphemPubKey `json:"sdkEphemPubKey,omitempty"`
 	// The maximum amount of time in minutes for the 3D Secure 2 authentication process. Optional and only for `deviceChannel` set to **app**. Defaults to **60** minutes.
 	SdkMaxTimeout *int32 `json:"sdkMaxTimeout,omitempty"`
@@ -66,14 +67,14 @@ type ThreeDS2RequestFields struct {
 	// Completion indicator for the device fingerprinting.
 	ThreeDSCompInd *string `json:"threeDSCompInd,omitempty"`
 	// Indicates the type of Authentication request.
-	ThreeDSRequestorAuthenticationInd *string `json:"threeDSRequestorAuthenticationInd,omitempty"`
+	ThreeDSRequestorAuthenticationInd  *string                             `json:"threeDSRequestorAuthenticationInd,omitempty"`
 	ThreeDSRequestorAuthenticationInfo *ThreeDSRequestorAuthenticationInfo `json:"threeDSRequestorAuthenticationInfo,omitempty"`
 	// Indicates whether a challenge is requested for this transaction. Possible values: * **01** — No preference * **02** — No challenge requested * **03** — Challenge requested (3DS Requestor preference) * **04** — Challenge requested (Mandate) * **05** — No challenge (transactional risk analysis is already performed) * **06** — Data Only
 	ThreeDSRequestorChallengeInd *string `json:"threeDSRequestorChallengeInd,omitempty"`
 	// Required for [authentication-only integration](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only) for Visa. Unique 3D Secure requestor identifier assigned by the Directory Server when you enrol for 3D Secure 2.
 	ThreeDSRequestorID *string `json:"threeDSRequestorID,omitempty"`
 	// Required for [authentication-only integration](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only) for Visa. Unique 3D Secure requestor name assigned by the Directory Server when you enrol for 3D Secure 2.
-	ThreeDSRequestorName *string `json:"threeDSRequestorName,omitempty"`
+	ThreeDSRequestorName                    *string                                  `json:"threeDSRequestorName,omitempty"`
 	ThreeDSRequestorPriorAuthenticationInfo *ThreeDSRequestorPriorAuthenticationInfo `json:"threeDSRequestorPriorAuthenticationInfo,omitempty"`
 	// URL of the (customer service) website that will be shown to the shopper in case of technical errors during the 3D Secure 2 process.
 	ThreeDSRequestorURL *string `json:"threeDSRequestorURL,omitempty"`
@@ -83,7 +84,7 @@ type ThreeDS2RequestFields struct {
 	TransactionType *string `json:"transactionType,omitempty"`
 	// The `whiteListStatus` value returned from a previous 3D Secure 2 transaction, only applicable for 3D Secure 2 protocol version 2.2.0.
 	WhiteListStatus *string `json:"whiteListStatus,omitempty"`
-	WorkPhone *Phone `json:"workPhone,omitempty"`
+	WorkPhone       *Phone  `json:"workPhone,omitempty"`
 }
 
 // NewThreeDS2RequestFields instantiates a new ThreeDS2RequestFields object
@@ -1270,7 +1271,7 @@ func (o *ThreeDS2RequestFields) SetWorkPhone(v Phone) {
 }
 
 func (o ThreeDS2RequestFields) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -1426,59 +1427,57 @@ func (v *NullableThreeDS2RequestFields) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *ThreeDS2RequestFields) isValidAcctType() bool {
-    var allowedEnumValues = []string{ "01", "02", "03" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetAcctType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"01", "02", "03"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetAcctType() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *ThreeDS2RequestFields) isValidAddrMatch() bool {
-    var allowedEnumValues = []string{ "Y", "N" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetAddrMatch() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"Y", "N"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetAddrMatch() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *ThreeDS2RequestFields) isValidChallengeIndicator() bool {
-    var allowedEnumValues = []string{ "noPreference", "requestNoChallenge", "requestChallenge", "requestChallengeAsMandate" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetChallengeIndicator() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"noPreference", "requestNoChallenge", "requestChallenge", "requestChallengeAsMandate"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetChallengeIndicator() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *ThreeDS2RequestFields) isValidThreeDSRequestorChallengeInd() bool {
-    var allowedEnumValues = []string{ "01", "02", "03", "04", "05", "06" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetThreeDSRequestorChallengeInd() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"01", "02", "03", "04", "05", "06"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetThreeDSRequestorChallengeInd() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *ThreeDS2RequestFields) isValidTransType() bool {
-    var allowedEnumValues = []string{ "01", "03", "10", "11", "28" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetTransType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"01", "03", "10", "11", "28"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetTransType() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *ThreeDS2RequestFields) isValidTransactionType() bool {
-    var allowedEnumValues = []string{ "goodsOrServicePurchase", "checkAcceptance", "accountFunding", "quasiCashTransaction", "prepaidActivationAndLoad" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetTransactionType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"goodsOrServicePurchase", "checkAcceptance", "accountFunding", "quasiCashTransaction", "prepaidActivationAndLoad"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetTransactionType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

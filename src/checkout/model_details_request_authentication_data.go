@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v10/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v10/src/common"
 )
 
 // checks if the DetailsRequestAuthenticationData type satisfies the MappedNullable interface at compile time
@@ -76,7 +77,7 @@ func (o *DetailsRequestAuthenticationData) SetAuthenticationOnly(v bool) {
 }
 
 func (o DetailsRequestAuthenticationData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -126,6 +127,3 @@ func (v *NullableDetailsRequestAuthenticationData) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

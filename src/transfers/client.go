@@ -9,7 +9,7 @@ API version: 4
 package transfers
 
 import (
-    "github.com/adyen/adyen-go-api-library/v10/src/common"
+	"github.com/adyen/adyen-go-api-library/v10/src/common"
 )
 
 // APIClient manages communication with the Transfers API API v4
@@ -29,10 +29,10 @@ type APIClient struct {
 // NewAPIClient creates a new API client.
 func NewAPIClient(client *common.Client) *APIClient {
 	c := &APIClient{}
-    c.common.Client = client
-    c.common.BasePath = func() string {
-        return client.Cfg.TransfersEndpoint
-    }
+	c.common.Client = client
+	c.common.BasePath = func() string {
+		return client.Cfg.TransfersEndpoint
+	}
 
 	// API Services
 	c.CapitalApi = (*CapitalApi)(&c.common)

@@ -10,7 +10,8 @@ package transferwebhook
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v10/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v10/src/common"
 )
 
 // checks if the BankAccountV3 type satisfies the MappedNullable interface at compile time
@@ -18,7 +19,7 @@ var _ common.MappedNullable = &BankAccountV3{}
 
 // BankAccountV3 struct for BankAccountV3
 type BankAccountV3 struct {
-	AccountHolder PartyIdentification `json:"accountHolder"`
+	AccountHolder         PartyIdentification                `json:"accountHolder"`
 	AccountIdentification BankAccountV3AccountIdentification `json:"accountIdentification"`
 }
 
@@ -90,7 +91,7 @@ func (o *BankAccountV3) SetAccountIdentification(v BankAccountV3AccountIdentific
 }
 
 func (o BankAccountV3) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -139,6 +140,3 @@ func (v *NullableBankAccountV3) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

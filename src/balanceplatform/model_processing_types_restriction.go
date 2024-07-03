@@ -10,7 +10,8 @@ package balanceplatform
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v10/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v10/src/common"
 )
 
 // checks if the ProcessingTypesRestriction type satisfies the MappedNullable interface at compile time
@@ -20,7 +21,7 @@ var _ common.MappedNullable = &ProcessingTypesRestriction{}
 type ProcessingTypesRestriction struct {
 	// Defines how the condition must be evaluated.
 	Operation string `json:"operation"`
-	// List of processing types.  Possible values: **atmWithdraw**, **balanceInquiry**, **ecommerce**, **moto**, **pos**, **recurring**, **token**.  
+	// List of processing types.  Possible values: **atmWithdraw**, **balanceInquiry**, **ecommerce**, **moto**, **pos**, **recurring**, **token**.
 	Value []string `json:"value,omitempty"`
 }
 
@@ -99,7 +100,7 @@ func (o *ProcessingTypesRestriction) SetValue(v []string) {
 }
 
 func (o ProcessingTypesRestriction) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -150,6 +151,3 @@ func (v *NullableProcessingTypesRestriction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

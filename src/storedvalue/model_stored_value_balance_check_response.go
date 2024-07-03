@@ -10,7 +10,8 @@ package storedvalue
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v10/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v10/src/common"
 )
 
 // checks if the StoredValueBalanceCheckResponse type satisfies the MappedNullable interface at compile time
@@ -23,7 +24,7 @@ type StoredValueBalanceCheckResponse struct {
 	PspReference *string `json:"pspReference,omitempty"`
 	// If the transaction is refused or an error occurs, this field holds Adyen's mapped reason for the refusal or a description of the error.  When a transaction fails, the authorisation response includes `resultCode` and `refusalReason` values.
 	RefusalReason *string `json:"refusalReason,omitempty"`
-	// The result of the payment. Possible values:  * **Success** – The operation has been completed successfully.  * **Refused** – The operation was refused. The reason is given in the `refusalReason` field.  * **Error** – There was an error when the operation was processed. The reason is given in the `refusalReason` field.  * **NotEnoughBalance** – The amount on the payment method is lower than the amount given in the request. Only applicable to balance checks.  
+	// The result of the payment. Possible values:  * **Success** – The operation has been completed successfully.  * **Refused** – The operation was refused. The reason is given in the `refusalReason` field.  * **Error** – There was an error when the operation was processed. The reason is given in the `refusalReason` field.  * **NotEnoughBalance** – The amount on the payment method is lower than the amount given in the request. Only applicable to balance checks.
 	ResultCode *string `json:"resultCode,omitempty"`
 	// Raw refusal reason received from the third party, where available
 	ThirdPartyRefusalReason *string `json:"thirdPartyRefusalReason,omitempty"`
@@ -207,7 +208,7 @@ func (o *StoredValueBalanceCheckResponse) SetThirdPartyRefusalReason(v string) {
 }
 
 func (o StoredValueBalanceCheckResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -270,14 +271,12 @@ func (v *NullableStoredValueBalanceCheckResponse) UnmarshalJSON(src []byte) erro
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *StoredValueBalanceCheckResponse) isValidResultCode() bool {
-    var allowedEnumValues = []string{ "Success", "Refused", "Error", "NotEnoughBalance" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetResultCode() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"Success", "Refused", "Error", "NotEnoughBalance"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetResultCode() == allowed {
+			return true
+		}
+	}
+	return false
 }
-
