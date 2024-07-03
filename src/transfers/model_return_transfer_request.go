@@ -10,8 +10,7 @@ package transfers
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v10/src/common"
+    "github.com/adyen/adyen-go-api-library/v10/src/common"
 )
 
 // checks if the ReturnTransferRequest type satisfies the MappedNullable interface at compile time
@@ -20,7 +19,7 @@ var _ common.MappedNullable = &ReturnTransferRequest{}
 // ReturnTransferRequest struct for ReturnTransferRequest
 type ReturnTransferRequest struct {
 	Amount Amount `json:"amount"`
-	// Your internal reference for the return. If you don't provide this in the request, Adyen generates a unique reference. This reference is used in all communication with you about the instruction status.  We recommend using a unique value per instruction. If you need to provide multiple references for a transaction, separate them with hyphens (\"-\").
+	// Your internal reference for the return. If you don't provide this in the request, Adyen generates a unique reference. This reference is used in all communication with you about the instruction status.  We recommend using a unique value per instruction. If you need to provide multiple references for a transaction, separate them with hyphens (\"-\"). 
 	Reference *string `json:"reference,omitempty"`
 }
 
@@ -99,7 +98,7 @@ func (o *ReturnTransferRequest) SetReference(v string) {
 }
 
 func (o ReturnTransferRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -150,3 +149,6 @@ func (v *NullableReturnTransferRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

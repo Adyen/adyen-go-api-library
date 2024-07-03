@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v10/src/common"
+    "github.com/adyen/adyen-go-api-library/v10/src/common"
 )
 
 // checks if the ShopperInput type satisfies the MappedNullable interface at compile time
@@ -141,7 +140,7 @@ func (o *ShopperInput) SetPersonalDetails(v string) {
 }
 
 func (o ShopperInput) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -198,30 +197,32 @@ func (v *NullableShopperInput) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *ShopperInput) isValidBillingAddress() bool {
-	var allowedEnumValues = []string{"editable", "hidden", "readOnly"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetBillingAddress() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "editable", "hidden", "readOnly" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetBillingAddress() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *ShopperInput) isValidDeliveryAddress() bool {
-	var allowedEnumValues = []string{"editable", "hidden", "readOnly"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetDeliveryAddress() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "editable", "hidden", "readOnly" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetDeliveryAddress() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *ShopperInput) isValidPersonalDetails() bool {
-	var allowedEnumValues = []string{"editable", "hidden", "readOnly"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetPersonalDetails() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "editable", "hidden", "readOnly" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetPersonalDetails() == allowed {
+            return true
+        }
+    }
+    return false
 }
+
