@@ -252,6 +252,8 @@ ListAllWebhooks List all webhooks
 
 Lists all webhook configurations for the merchant account.
 
+> This call does not return webhook configurations for the company account to which the specified merchant account belongs. You can see these in your Customer Area under **Developers** > **Webhooks**.
+
 To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Webhooks read
 * Management API—Webhooks read and write
