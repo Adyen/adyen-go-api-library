@@ -10,8 +10,9 @@ package management
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v10/src/common"
 	"time"
+
+	"github.com/adyen/adyen-go-api-library/v10/src/common"
 )
 
 // checks if the Terminal type satisfies the MappedNullable interface at compile time
@@ -19,7 +20,7 @@ var _ common.MappedNullable = &Terminal{}
 
 // Terminal struct for Terminal
 type Terminal struct {
-	Assignment *TerminalAssignment `json:"assignment,omitempty"`
+	Assignment   *TerminalAssignment   `json:"assignment,omitempty"`
 	Connectivity *TerminalConnectivity `json:"connectivity,omitempty"`
 	// The software release currently in use on the terminal.
 	FirmwareVersion *string `json:"firmwareVersion,omitempty"`
@@ -343,7 +344,7 @@ func (o *Terminal) SetSerialNumber(v string) {
 }
 
 func (o Terminal) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -417,6 +418,3 @@ func (v *NullableTerminal) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-
