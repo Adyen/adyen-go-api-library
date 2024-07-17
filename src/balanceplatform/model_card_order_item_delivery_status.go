@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v10/src/common"
+    "github.com/adyen/adyen-go-api-library/v10/src/common"
 )
 
 // checks if the CardOrderItemDeliveryStatus type satisfies the MappedNullable interface at compile time
@@ -141,7 +140,7 @@ func (o *CardOrderItemDeliveryStatus) SetTrackingNumber(v string) {
 }
 
 func (o CardOrderItemDeliveryStatus) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -198,12 +197,14 @@ func (v *NullableCardOrderItemDeliveryStatus) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *CardOrderItemDeliveryStatus) isValidStatus() bool {
-	var allowedEnumValues = []string{"created", "delivered", "notApplicable", "processing", "produced", "rejected", "shipped", "unknown"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetStatus() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "created", "delivered", "notApplicable", "processing", "produced", "rejected", "shipped", "unknown" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetStatus() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

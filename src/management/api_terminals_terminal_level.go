@@ -10,13 +10,10 @@ package management
 
 import (
 	"context"
-	"encoding/json"
-	"io/ioutil"
-	"net/http"
-	"net/url"
-	"strings"
-
-	"github.com/adyen/adyen-go-api-library/v10/src/common"
+    "net/http"
+    "net/url"
+    "strings"
+    "github.com/adyen/adyen-go-api-library/v10/src/common"
 )
 
 // TerminalsTerminalLevelApi service
@@ -25,13 +22,13 @@ type TerminalsTerminalLevelApi common.Service
 // All parameters accepted by TerminalsTerminalLevelApi.ListTerminals
 type TerminalsTerminalLevelApiListTerminalsInput struct {
 	searchQuery *string
-	otpQuery    *string
-	countries   *string
+	otpQuery *string
+	countries *string
 	merchantIds *string
-	storeIds    *string
+	storeIds *string
 	brandModels *string
-	pageNumber  *int32
-	pageSize    *int32
+	pageNumber *int32
+	pageSize *int32
 }
 
 // Returns terminals with an ID that contains the specified string. If present, other query parameters are ignored.
@@ -82,19 +79,21 @@ func (r TerminalsTerminalLevelApiListTerminalsInput) PageSize(pageSize int32) Te
 	return r
 }
 
+
 /*
 Prepare a request for ListTerminals
 
 @return TerminalsTerminalLevelApiListTerminalsInput
 */
 func (a *TerminalsTerminalLevelApi) ListTerminalsInput() TerminalsTerminalLevelApiListTerminalsInput {
-	return TerminalsTerminalLevelApiListTerminalsInput{}
+	return TerminalsTerminalLevelApiListTerminalsInput{
+	}
 }
 
 /*
 ListTerminals Get a list of terminals
 
-Returns the payment terminals that the API credential has access to and that match the query parameters.
+Returns the payment terminals that the API credential has access to and that match the query parameters. 
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API — Terminal actions read
 
@@ -103,97 +102,98 @@ To make this request, your API credential must have the following [roles](https:
 @return ListTerminalsResponse, *http.Response, error
 */
 func (a *TerminalsTerminalLevelApi) ListTerminals(ctx context.Context, r TerminalsTerminalLevelApiListTerminalsInput) (ListTerminalsResponse, *http.Response, error) {
-	res := &ListTerminalsResponse{}
+    res := &ListTerminalsResponse{}
 	path := "/terminals"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	if r.searchQuery != nil {
-		common.ParameterAddToQuery(queryParams, "searchQuery", r.searchQuery, "")
-	}
-	if r.otpQuery != nil {
-		common.ParameterAddToQuery(queryParams, "otpQuery", r.otpQuery, "")
-	}
-	if r.countries != nil {
-		common.ParameterAddToQuery(queryParams, "countries", r.countries, "")
-	}
-	if r.merchantIds != nil {
-		common.ParameterAddToQuery(queryParams, "merchantIds", r.merchantIds, "")
-	}
-	if r.storeIds != nil {
-		common.ParameterAddToQuery(queryParams, "storeIds", r.storeIds, "")
-	}
-	if r.brandModels != nil {
-		common.ParameterAddToQuery(queryParams, "brandModels", r.brandModels, "")
-	}
-	if r.pageNumber != nil {
-		common.ParameterAddToQuery(queryParams, "pageNumber", r.pageNumber, "")
-	}
-	if r.pageSize != nil {
-		common.ParameterAddToQuery(queryParams, "pageSize", r.pageSize, "")
-	}
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		nil,
-		res,
-		http.MethodGet,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    if r.searchQuery != nil {
+        common.ParameterAddToQuery(queryParams, "searchQuery", r.searchQuery, "")
+    }
+    if r.otpQuery != nil {
+        common.ParameterAddToQuery(queryParams, "otpQuery", r.otpQuery, "")
+    }
+    if r.countries != nil {
+        common.ParameterAddToQuery(queryParams, "countries", r.countries, "")
+    }
+    if r.merchantIds != nil {
+        common.ParameterAddToQuery(queryParams, "merchantIds", r.merchantIds, "")
+    }
+    if r.storeIds != nil {
+        common.ParameterAddToQuery(queryParams, "storeIds", r.storeIds, "")
+    }
+    if r.brandModels != nil {
+        common.ParameterAddToQuery(queryParams, "brandModels", r.brandModels, "")
+    }
+    if r.pageNumber != nil {
+        common.ParameterAddToQuery(queryParams, "pageNumber", r.pageNumber, "")
+    }
+    if r.pageSize != nil {
+        common.ParameterAddToQuery(queryParams, "pageSize", r.pageSize, "")
+    }
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        nil,
+        res,
+        http.MethodGet,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	if httpRes == nil {
-		return *res, httpRes, err
-	}
+    if httpRes == nil {
+        return *res, httpRes, err
+    }
 
-	var serviceError common.RestServiceError
-	if httpRes.StatusCode == 400 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 401 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 403 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 422 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 500 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
+    var serviceError common.RestServiceError
+                        if httpRes.StatusCode == 400 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 401 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 403 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 422 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 500 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
 
-	return *res, httpRes, err
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by TerminalsTerminalLevelApi.ReassignTerminal
 type TerminalsTerminalLevelApiReassignTerminalInput struct {
-	terminalId                  string
+	terminalId string
 	terminalReassignmentRequest *TerminalReassignmentRequest
 }
 
@@ -201,6 +201,7 @@ func (r TerminalsTerminalLevelApiReassignTerminalInput) TerminalReassignmentRequ
 	r.terminalReassignmentRequest = &terminalReassignmentRequest
 	return r
 }
+
 
 /*
 Prepare a request for ReassignTerminal
@@ -226,67 +227,68 @@ To make this request, your API credential must have the following [role](https:/
 @return *http.Response, error
 */
 func (a *TerminalsTerminalLevelApi) ReassignTerminal(ctx context.Context, r TerminalsTerminalLevelApiReassignTerminalInput) (*http.Response, error) {
-	var res interface{}
+    var res interface{}
 	path := "/terminals/{terminalId}/reassign"
-	path = strings.Replace(path, "{"+"terminalId"+"}", url.PathEscape(common.ParameterValueToString(r.terminalId, "terminalId")), -1)
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.terminalReassignmentRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    path = strings.Replace(path, "{"+"terminalId"+"}", url.PathEscape(common.ParameterValueToString(r.terminalId, "terminalId")), -1)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.terminalReassignmentRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	if httpRes == nil {
-		return httpRes, err
-	}
+    if httpRes == nil {
+        return httpRes, err
+    }
 
-	var serviceError common.RestServiceError
-	if httpRes.StatusCode == 400 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return httpRes, decodeError
-		}
-		return httpRes, serviceError
-	}
-	if httpRes.StatusCode == 401 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return httpRes, decodeError
-		}
-		return httpRes, serviceError
-	}
-	if httpRes.StatusCode == 403 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return httpRes, decodeError
-		}
-		return httpRes, serviceError
-	}
-	if httpRes.StatusCode == 422 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return httpRes, decodeError
-		}
-		return httpRes, serviceError
-	}
-	if httpRes.StatusCode == 500 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return httpRes, decodeError
-		}
-		return httpRes, serviceError
-	}
+    var serviceError common.RestServiceError
+                        if httpRes.StatusCode == 400 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return httpRes, decodeError
+                            }
+                            return httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 401 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return httpRes, decodeError
+                            }
+                            return httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 403 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return httpRes, decodeError
+                            }
+                            return httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 422 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return httpRes, decodeError
+                            }
+                            return httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 500 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return httpRes, decodeError
+                            }
+                            return httpRes, serviceError
+                        }
 
-	return httpRes, err
+    return httpRes, err
 }
+

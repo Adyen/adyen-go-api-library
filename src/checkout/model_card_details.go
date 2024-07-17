@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v10/src/common"
+    "github.com/adyen/adyen-go-api-library/v10/src/common"
 )
 
 // checks if the CardDetails type satisfies the MappedNullable interface at compile time
@@ -54,6 +53,8 @@ type CardDetails struct {
 	ShopperNotificationReference *string `json:"shopperNotificationReference,omitempty"`
 	// An identifier used for the Click to Pay transaction.
 	SrcCorrelationId *string `json:"srcCorrelationId,omitempty"`
+	// The SRC reference for the Click to Pay token.
+	SrcDigitalCardId *string `json:"srcDigitalCardId,omitempty"`
 	// The scheme that is being used for Click to Pay.
 	SrcScheme *string `json:"srcScheme,omitempty"`
 	// The reference for the Click to Pay token.
@@ -637,6 +638,38 @@ func (o *CardDetails) SetSrcCorrelationId(v string) {
 	o.SrcCorrelationId = &v
 }
 
+// GetSrcDigitalCardId returns the SrcDigitalCardId field value if set, zero value otherwise.
+func (o *CardDetails) GetSrcDigitalCardId() string {
+	if o == nil || common.IsNil(o.SrcDigitalCardId) {
+		var ret string
+		return ret
+	}
+	return *o.SrcDigitalCardId
+}
+
+// GetSrcDigitalCardIdOk returns a tuple with the SrcDigitalCardId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CardDetails) GetSrcDigitalCardIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SrcDigitalCardId) {
+		return nil, false
+	}
+	return o.SrcDigitalCardId, true
+}
+
+// HasSrcDigitalCardId returns a boolean if a field has been set.
+func (o *CardDetails) HasSrcDigitalCardId() bool {
+	if o != nil && !common.IsNil(o.SrcDigitalCardId) {
+		return true
+	}
+
+	return false
+}
+
+// SetSrcDigitalCardId gets a reference to the given string and assigns it to the SrcDigitalCardId field.
+func (o *CardDetails) SetSrcDigitalCardId(v string) {
+	o.SrcDigitalCardId = &v
+}
+
 // GetSrcScheme returns the SrcScheme field value if set, zero value otherwise.
 func (o *CardDetails) GetSrcScheme() string {
 	if o == nil || common.IsNil(o.SrcScheme) {
@@ -798,7 +831,7 @@ func (o *CardDetails) SetType(v string) {
 }
 
 func (o CardDetails) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -858,6 +891,9 @@ func (o CardDetails) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.SrcCorrelationId) {
 		toSerialize["srcCorrelationId"] = o.SrcCorrelationId
 	}
+	if !common.IsNil(o.SrcDigitalCardId) {
+		toSerialize["srcDigitalCardId"] = o.SrcDigitalCardId
+	}
 	if !common.IsNil(o.SrcScheme) {
 		toSerialize["srcScheme"] = o.SrcScheme
 	}
@@ -912,21 +948,23 @@ func (v *NullableCardDetails) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *CardDetails) isValidFundingSource() bool {
-	var allowedEnumValues = []string{"credit", "debit"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetFundingSource() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "credit", "debit" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetFundingSource() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *CardDetails) isValidType() bool {
-	var allowedEnumValues = []string{"bcmc", "scheme", "networkToken", "giftcard", "card"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "bcmc", "scheme", "networkToken", "giftcard", "card" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

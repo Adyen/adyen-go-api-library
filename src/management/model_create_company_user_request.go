@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v10/src/common"
+    "github.com/adyen/adyen-go-api-library/v10/src/common"
 )
 
 // checks if the CreateCompanyUserRequest type satisfies the MappedNullable interface at compile time
@@ -25,7 +24,9 @@ type CreateCompanyUserRequest struct {
 	AssociatedMerchantAccounts []string `json:"associatedMerchantAccounts,omitempty"`
 	// The email address of the user.
 	Email string `json:"email"`
-	Name  Name   `json:"name"`
+	// The requested login method for the user. To use SSO, you must already have SSO configured with Adyen before creating the user.  Possible values: **Username & account**, **Email**, or **SSO** 
+	LoginMethod *string `json:"loginMethod,omitempty"`
+	Name Name `json:"name"`
 	// The list of [roles](https://docs.adyen.com/account/user-roles) for this user.
 	Roles []string `json:"roles,omitempty"`
 	// The [tz database name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) of the time zone of the user. For example, **Europe/Amsterdam**.
@@ -142,6 +143,38 @@ func (o *CreateCompanyUserRequest) SetEmail(v string) {
 	o.Email = v
 }
 
+// GetLoginMethod returns the LoginMethod field value if set, zero value otherwise.
+func (o *CreateCompanyUserRequest) GetLoginMethod() string {
+	if o == nil || common.IsNil(o.LoginMethod) {
+		var ret string
+		return ret
+	}
+	return *o.LoginMethod
+}
+
+// GetLoginMethodOk returns a tuple with the LoginMethod field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCompanyUserRequest) GetLoginMethodOk() (*string, bool) {
+	if o == nil || common.IsNil(o.LoginMethod) {
+		return nil, false
+	}
+	return o.LoginMethod, true
+}
+
+// HasLoginMethod returns a boolean if a field has been set.
+func (o *CreateCompanyUserRequest) HasLoginMethod() bool {
+	if o != nil && !common.IsNil(o.LoginMethod) {
+		return true
+	}
+
+	return false
+}
+
+// SetLoginMethod gets a reference to the given string and assigns it to the LoginMethod field.
+func (o *CreateCompanyUserRequest) SetLoginMethod(v string) {
+	o.LoginMethod = &v
+}
+
 // GetName returns the Name field value
 func (o *CreateCompanyUserRequest) GetName() Name {
 	if o == nil {
@@ -255,7 +288,7 @@ func (o *CreateCompanyUserRequest) SetUsername(v string) {
 }
 
 func (o CreateCompanyUserRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -271,6 +304,9 @@ func (o CreateCompanyUserRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["associatedMerchantAccounts"] = o.AssociatedMerchantAccounts
 	}
 	toSerialize["email"] = o.Email
+	if !common.IsNil(o.LoginMethod) {
+		toSerialize["loginMethod"] = o.LoginMethod
+	}
 	toSerialize["name"] = o.Name
 	if !common.IsNil(o.Roles) {
 		toSerialize["roles"] = o.Roles
@@ -317,3 +353,6 @@ func (v *NullableCreateCompanyUserRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

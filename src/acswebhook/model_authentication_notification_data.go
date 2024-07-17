@@ -10,8 +10,7 @@ package acswebhook
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v10/src/common"
+    "github.com/adyen/adyen-go-api-library/v10/src/common"
 )
 
 // checks if the AuthenticationNotificationData type satisfies the MappedNullable interface at compile time
@@ -25,8 +24,8 @@ type AuthenticationNotificationData struct {
 	// Unique identifier of the authentication.
 	Id string `json:"id"`
 	// Unique identifier of the payment instrument that was used for the authentication.
-	PaymentInstrumentId string       `json:"paymentInstrumentId"`
-	Purchase            PurchaseInfo `json:"purchase"`
+	PaymentInstrumentId string `json:"paymentInstrumentId"`
+	Purchase PurchaseInfo `json:"purchase"`
 	// Outcome of the authentication. Allowed values: * authenticated * rejected * error
 	Status string `json:"status"`
 }
@@ -206,7 +205,7 @@ func (o *AuthenticationNotificationData) SetStatus(v string) {
 }
 
 func (o AuthenticationNotificationData) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -262,12 +261,14 @@ func (v *NullableAuthenticationNotificationData) UnmarshalJSON(src []byte) error
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *AuthenticationNotificationData) isValidStatus() bool {
-	var allowedEnumValues = []string{"authenticated", "rejected", "error"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetStatus() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "authenticated", "rejected", "error" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetStatus() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

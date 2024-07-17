@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v10/src/common"
+    "github.com/adyen/adyen-go-api-library/v10/src/common"
 )
 
 // checks if the GenericIssuerPaymentMethodDetails type satisfies the MappedNullable interface at compile time
@@ -199,7 +198,7 @@ func (o *GenericIssuerPaymentMethodDetails) SetType(v string) {
 }
 
 func (o GenericIssuerPaymentMethodDetails) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -258,12 +257,14 @@ func (v *NullableGenericIssuerPaymentMethodDetails) UnmarshalJSON(src []byte) er
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *GenericIssuerPaymentMethodDetails) isValidType() bool {
-	var allowedEnumValues = []string{"onlineBanking_PL", "eps", "onlineBanking_SK", "onlineBanking_CZ"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "onlineBanking_PL", "eps", "onlineBanking_SK", "onlineBanking_CZ" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

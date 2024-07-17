@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v10/src/common"
+    "github.com/adyen/adyen-go-api-library/v10/src/common"
 )
 
 // checks if the IdealDetails type satisfies the MappedNullable interface at compile time
@@ -22,7 +21,7 @@ type IdealDetails struct {
 	// The checkout attempt identifier.
 	CheckoutAttemptId *string `json:"checkoutAttemptId,omitempty"`
 	// The iDEAL issuer value of the shopper's selected bank. Set this to an **id** of an iDEAL issuer to preselect it.
-	Issuer string `json:"issuer"`
+	Issuer *string `json:"issuer,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
 	// Deprecated
 	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
@@ -36,9 +35,8 @@ type IdealDetails struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIdealDetails(issuer string) *IdealDetails {
+func NewIdealDetails() *IdealDetails {
 	this := IdealDetails{}
-	this.Issuer = issuer
 	var type_ string = "ideal"
 	this.Type = &type_
 	return &this
@@ -86,28 +84,36 @@ func (o *IdealDetails) SetCheckoutAttemptId(v string) {
 	o.CheckoutAttemptId = &v
 }
 
-// GetIssuer returns the Issuer field value
+// GetIssuer returns the Issuer field value if set, zero value otherwise.
 func (o *IdealDetails) GetIssuer() string {
-	if o == nil {
+	if o == nil || common.IsNil(o.Issuer) {
 		var ret string
 		return ret
 	}
-
-	return o.Issuer
+	return *o.Issuer
 }
 
-// GetIssuerOk returns a tuple with the Issuer field value
+// GetIssuerOk returns a tuple with the Issuer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IdealDetails) GetIssuerOk() (*string, bool) {
-	if o == nil {
+	if o == nil || common.IsNil(o.Issuer) {
 		return nil, false
 	}
-	return &o.Issuer, true
+	return o.Issuer, true
 }
 
-// SetIssuer sets field value
+// HasIssuer returns a boolean if a field has been set.
+func (o *IdealDetails) HasIssuer() bool {
+	if o != nil && !common.IsNil(o.Issuer) {
+		return true
+	}
+
+	return false
+}
+
+// SetIssuer gets a reference to the given string and assigns it to the Issuer field.
 func (o *IdealDetails) SetIssuer(v string) {
-	o.Issuer = v
+	o.Issuer = &v
 }
 
 // GetRecurringDetailReference returns the RecurringDetailReference field value if set, zero value otherwise.
@@ -210,7 +216,7 @@ func (o *IdealDetails) SetType(v string) {
 }
 
 func (o IdealDetails) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -222,7 +228,9 @@ func (o IdealDetails) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
-	toSerialize["issuer"] = o.Issuer
+	if !common.IsNil(o.Issuer) {
+		toSerialize["issuer"] = o.Issuer
+	}
 	if !common.IsNil(o.RecurringDetailReference) {
 		toSerialize["recurringDetailReference"] = o.RecurringDetailReference
 	}
@@ -271,12 +279,14 @@ func (v *NullableIdealDetails) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *IdealDetails) isValidType() bool {
-	var allowedEnumValues = []string{"ideal"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "ideal" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

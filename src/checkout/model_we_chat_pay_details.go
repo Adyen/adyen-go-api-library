@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v10/src/common"
+    "github.com/adyen/adyen-go-api-library/v10/src/common"
 )
 
 // checks if the WeChatPayDetails type satisfies the MappedNullable interface at compile time
@@ -111,7 +110,7 @@ func (o *WeChatPayDetails) SetType(v string) {
 }
 
 func (o WeChatPayDetails) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -165,12 +164,14 @@ func (v *NullableWeChatPayDetails) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *WeChatPayDetails) isValidType() bool {
-	var allowedEnumValues = []string{"wechatpay", "wechatpay_pos"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "wechatpay", "wechatpay_pos" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+
