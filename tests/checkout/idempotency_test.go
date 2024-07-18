@@ -11,9 +11,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/adyen/adyen-go-api-library/v10/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v10/src/checkout"
-	"github.com/adyen/adyen-go-api-library/v10/src/common"
+	"github.com/adyen/adyen-go-api-library/v11/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v11/src/checkout"
+	"github.com/adyen/adyen-go-api-library/v11/src/common"
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/require"
 )

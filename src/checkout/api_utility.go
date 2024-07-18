@@ -13,7 +13,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/adyen/adyen-go-api-library/v10/src/common"
+	"github.com/adyen/adyen-go-api-library/v11/src/common"
 )
 
 // UtilityApi service
@@ -116,7 +116,7 @@ This operation takes the origin domains and returns a JSON object containing the
 @param r UtilityApiOriginKeysInput - Request parameters, see OriginKeysInput
 @return UtilityResponse, *http.Response, error
 
-    Deprecated
+	Deprecated
 */
 func (a *UtilityApi) OriginKeys(ctx context.Context, r UtilityApiOriginKeysInput) (UtilityResponse, *http.Response, error) {
 	res := &UtilityResponse{}

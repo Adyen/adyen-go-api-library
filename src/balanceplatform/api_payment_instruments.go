@@ -16,7 +16,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/adyen/adyen-go-api-library/v10/src/common"
+	"github.com/adyen/adyen-go-api-library/v11/src/common"
 )
 
 // PaymentInstrumentsApi service
@@ -46,7 +46,7 @@ CreatePaymentInstrument Create a payment instrument
 
 Creates a payment instrument to issue a physical card, a virtual card, or a business account to your user.
 
- For more information, refer to [Issue cards](https://docs.adyen.com/issuing/create-cards) or [Issue business accounts](https://docs.adyen.com/platforms/business-accounts).
+	For more information, refer to [Issue cards](https://docs.adyen.com/issuing/create-cards) or [Issue business accounts](https://docs.adyen.com/platforms/business-accounts).
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r PaymentInstrumentsApiCreatePaymentInstrumentInput - Request parameters, see CreatePaymentInstrumentInput

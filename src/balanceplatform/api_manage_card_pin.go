@@ -15,7 +15,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/adyen/adyen-go-api-library/v10/src/common"
+	"github.com/adyen/adyen-go-api-library/v11/src/common"
 )
 
 // ManageCardPINApi service
@@ -141,7 +141,8 @@ PublicKey Get an RSA public key
 
 Get an [RSA](https://en.wikipedia.org/wiki/RSA_(cryptosystem)) public key to encrypt or decrypt card data.
 
- You need the RSA public key to generate the `encryptedKey` required to:
+	You need the RSA public key to generate the `encryptedKey` required to:
+
 - [Change a PIN](https://docs.adyen.com/api-explorer/balanceplatform/2/post/pins/change).
 - [Reveal a PIN](https://docs.adyen.com/api-explorer/balanceplatform/2/post/pins/reveal).
 - [Reveal a PAN](https://docs.adyen.com/api-explorer/balanceplatform/2/post/paymentInstruments/reveal).

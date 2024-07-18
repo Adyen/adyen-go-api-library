@@ -16,7 +16,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/adyen/adyen-go-api-library/v10/src/common"
+	"github.com/adyen/adyen-go-api-library/v11/src/common"
 )
 
 // ManageSCADevicesApi service
@@ -48,8 +48,6 @@ func (a *ManageSCADevicesApi) CompleteRegistrationOfScaDeviceInput(id string) Ma
 CompleteRegistrationOfScaDevice Complete the registration of an SCA device
 
 Completes the registration of an SCA device by validating the authentication data of the device. You can register SCA devices for [business accounts](https://docs.adyen.com/platforms/business-accounts/sca) or [Adyen-issued cards](https://docs.adyen.com/issuing/3d-secure/oob-auth-sdk).
-
-
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r ManageSCADevicesApiCompleteRegistrationOfScaDeviceInput - Request parameters, see CompleteRegistrationOfScaDeviceInput

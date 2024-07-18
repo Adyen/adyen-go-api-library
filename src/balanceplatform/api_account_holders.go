@@ -16,7 +16,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/adyen/adyen-go-api-library/v10/src/common"
+	"github.com/adyen/adyen-go-api-library/v11/src/common"
 )
 
 // AccountHoldersApi service
@@ -45,8 +45,6 @@ func (a *AccountHoldersApi) CreateAccountHolderInput() AccountHoldersApiCreateAc
 CreateAccountHolder Create an account holder
 
 Creates an account holder linked to a [legal entity](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/legalEntities).
-
-
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r AccountHoldersApiCreateAccountHolderInput - Request parameters, see CreateAccountHolderInput
