@@ -2,10 +2,10 @@ package checkout
 
 import (
 	"context"
-	"github.com/adyen/adyen-go-api-library/v10/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v10/src/checkout"
-	"github.com/adyen/adyen-go-api-library/v10/src/common"
-	"github.com/adyen/adyen-go-api-library/v10/tests"
+	"github.com/adyen/adyen-go-api-library/v11/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v11/src/checkout"
+	"github.com/adyen/adyen-go-api-library/v11/src/common"
+	"github.com/adyen/adyen-go-api-library/v11/tests"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"io"

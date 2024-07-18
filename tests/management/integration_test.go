@@ -6,8 +6,8 @@ package management
 import (
 	"context"
 	"errors"
-	"github.com/adyen/adyen-go-api-library/v10/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v10/src/common"
+	"github.com/adyen/adyen-go-api-library/v11/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v11/src/common"
 	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

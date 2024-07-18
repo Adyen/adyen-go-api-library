@@ -13,7 +13,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/adyen/adyen-go-api-library/v10/src/common"
+	"github.com/adyen/adyen-go-api-library/v11/src/common"
 )
 
 // ClassicCheckoutSDKApi service
@@ -58,7 +58,7 @@ For more information, refer to [How it works](https://docs.adyen.com/online-paym
 @param r ClassicCheckoutSDKApiPaymentSessionInput - Request parameters, see PaymentSessionInput
 @return PaymentSetupResponse, *http.Response, error
 
-    Deprecated
+	Deprecated
 */
 func (a *ClassicCheckoutSDKApi) PaymentSession(ctx context.Context, r ClassicCheckoutSDKApiPaymentSessionInput) (PaymentSetupResponse, *http.Response, error) {
 	res := &PaymentSetupResponse{}
@@ -121,7 +121,7 @@ For more information, refer to [How it works](https://docs.adyen.com/online-paym
 @param r ClassicCheckoutSDKApiVerifyPaymentResultInput - Request parameters, see VerifyPaymentResultInput
 @return PaymentVerificationResponse, *http.Response, error
 
-    Deprecated
+	Deprecated
 */
 func (a *ClassicCheckoutSDKApi) VerifyPaymentResult(ctx context.Context, r ClassicCheckoutSDKApiVerifyPaymentResultInput) (PaymentVerificationResponse, *http.Response, error) {
 	res := &PaymentVerificationResponse{}

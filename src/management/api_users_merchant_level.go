@@ -16,7 +16,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/adyen/adyen-go-api-library/v10/src/common"
+	"github.com/adyen/adyen-go-api-library/v11/src/common"
 )
 
 // UsersMerchantLevelApi service
@@ -51,7 +51,6 @@ Creates a user for the `merchantId` specified in the path.
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Users read and write
-
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r UsersMerchantLevelApiCreateNewUserInput - Request parameters, see CreateNewUserInput
@@ -148,7 +147,6 @@ Returns user details for the `userId` and the `merchantId` specified in the path
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Users read and write
-
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r UsersMerchantLevelApiGetUserDetailsInput - Request parameters, see GetUserDetailsInput
@@ -266,7 +264,6 @@ Returns a list of users associated with the `merchantId` specified in the path.
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Users read and write
 
-
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r UsersMerchantLevelApiListUsersInput - Request parameters, see ListUsersInput
 @return ListMerchantUsersResponse, *http.Response, error
@@ -377,7 +374,6 @@ Updates user details for the `userId` and the `merchantId` specified in the path
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Users read and write
-
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r UsersMerchantLevelApiUpdateUserInput - Request parameters, see UpdateUserInput
