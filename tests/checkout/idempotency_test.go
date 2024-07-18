@@ -56,9 +56,7 @@ func Test_Checkout_Idempotency_Race(t *testing.T) {
 				defer cancel()
 				body := checkout.PaymentRequest{
 					Reference: ref,
-					PaymentMethod: checkout.IdealDetailsAsCheckoutPaymentMethod(&checkout.IdealDetails{
-						Issuer: "1121",
-					}),
+					PaymentMethod: checkout.IdealDetailsAsCheckoutPaymentMethod(&checkout.IdealDetails{}),
 				}
 				req := service.PaymentsApi.PaymentsInput().IdempotencyKey(idempotencyKey).PaymentRequest(body)
 				_, _, err := service.PaymentsApi.Payments(ctx, req)
