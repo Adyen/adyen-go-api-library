@@ -23,7 +23,9 @@ type CreateMerchantUserRequest struct {
 	AccountGroups []string `json:"accountGroups,omitempty"`
 	// The email address of the user.
 	Email string `json:"email"`
-	Name  Name   `json:"name"`
+	// The requested login method for the user. To use SSO, you must already have SSO configured with Adyen before creating the user.  Possible values: **Username & account**, **Email**, or **SSO**
+	LoginMethod *string `json:"loginMethod,omitempty"`
+	Name        Name    `json:"name"`
 	// The list of [roles](https://docs.adyen.com/account/user-roles) for this user.
 	Roles []string `json:"roles,omitempty"`
 	// The [tz database name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) of the time zone of the user. For example, **Europe/Amsterdam**.
@@ -106,6 +108,38 @@ func (o *CreateMerchantUserRequest) GetEmailOk() (*string, bool) {
 // SetEmail sets field value
 func (o *CreateMerchantUserRequest) SetEmail(v string) {
 	o.Email = v
+}
+
+// GetLoginMethod returns the LoginMethod field value if set, zero value otherwise.
+func (o *CreateMerchantUserRequest) GetLoginMethod() string {
+	if o == nil || common.IsNil(o.LoginMethod) {
+		var ret string
+		return ret
+	}
+	return *o.LoginMethod
+}
+
+// GetLoginMethodOk returns a tuple with the LoginMethod field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateMerchantUserRequest) GetLoginMethodOk() (*string, bool) {
+	if o == nil || common.IsNil(o.LoginMethod) {
+		return nil, false
+	}
+	return o.LoginMethod, true
+}
+
+// HasLoginMethod returns a boolean if a field has been set.
+func (o *CreateMerchantUserRequest) HasLoginMethod() bool {
+	if o != nil && !common.IsNil(o.LoginMethod) {
+		return true
+	}
+
+	return false
+}
+
+// SetLoginMethod gets a reference to the given string and assigns it to the LoginMethod field.
+func (o *CreateMerchantUserRequest) SetLoginMethod(v string) {
+	o.LoginMethod = &v
 }
 
 // GetName returns the Name field value
@@ -234,6 +268,9 @@ func (o CreateMerchantUserRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["accountGroups"] = o.AccountGroups
 	}
 	toSerialize["email"] = o.Email
+	if !common.IsNil(o.LoginMethod) {
+		toSerialize["loginMethod"] = o.LoginMethod
+	}
 	toSerialize["name"] = o.Name
 	if !common.IsNil(o.Roles) {
 		toSerialize["roles"] = o.Roles

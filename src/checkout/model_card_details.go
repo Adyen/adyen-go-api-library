@@ -54,6 +54,8 @@ type CardDetails struct {
 	ShopperNotificationReference *string `json:"shopperNotificationReference,omitempty"`
 	// An identifier used for the Click to Pay transaction.
 	SrcCorrelationId *string `json:"srcCorrelationId,omitempty"`
+	// The SRC reference for the Click to Pay token.
+	SrcDigitalCardId *string `json:"srcDigitalCardId,omitempty"`
 	// The scheme that is being used for Click to Pay.
 	SrcScheme *string `json:"srcScheme,omitempty"`
 	// The reference for the Click to Pay token.
@@ -637,6 +639,38 @@ func (o *CardDetails) SetSrcCorrelationId(v string) {
 	o.SrcCorrelationId = &v
 }
 
+// GetSrcDigitalCardId returns the SrcDigitalCardId field value if set, zero value otherwise.
+func (o *CardDetails) GetSrcDigitalCardId() string {
+	if o == nil || common.IsNil(o.SrcDigitalCardId) {
+		var ret string
+		return ret
+	}
+	return *o.SrcDigitalCardId
+}
+
+// GetSrcDigitalCardIdOk returns a tuple with the SrcDigitalCardId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CardDetails) GetSrcDigitalCardIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SrcDigitalCardId) {
+		return nil, false
+	}
+	return o.SrcDigitalCardId, true
+}
+
+// HasSrcDigitalCardId returns a boolean if a field has been set.
+func (o *CardDetails) HasSrcDigitalCardId() bool {
+	if o != nil && !common.IsNil(o.SrcDigitalCardId) {
+		return true
+	}
+
+	return false
+}
+
+// SetSrcDigitalCardId gets a reference to the given string and assigns it to the SrcDigitalCardId field.
+func (o *CardDetails) SetSrcDigitalCardId(v string) {
+	o.SrcDigitalCardId = &v
+}
+
 // GetSrcScheme returns the SrcScheme field value if set, zero value otherwise.
 func (o *CardDetails) GetSrcScheme() string {
 	if o == nil || common.IsNil(o.SrcScheme) {
@@ -857,6 +891,9 @@ func (o CardDetails) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.SrcCorrelationId) {
 		toSerialize["srcCorrelationId"] = o.SrcCorrelationId
+	}
+	if !common.IsNil(o.SrcDigitalCardId) {
+		toSerialize["srcDigitalCardId"] = o.SrcDigitalCardId
 	}
 	if !common.IsNil(o.SrcScheme) {
 		toSerialize["srcScheme"] = o.SrcScheme

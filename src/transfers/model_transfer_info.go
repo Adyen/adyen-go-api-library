@@ -29,6 +29,8 @@ type TransferInfo struct {
 	Description *string `json:"description,omitempty"`
 	// The unique identifier of the source [payment instrument](https://docs.adyen.com/api-explorer/balanceplatform/latest/post/paymentInstruments#responses-200-id).  If you want to make a transfer using a **virtual** **bankAccount**, you must specify the payment instrument ID of the **virtual** **bankAccount**. If you only specify a balance account ID, Adyen uses the default **physical** **bankAccount** payment instrument assigned to the balance account.
 	PaymentInstrumentId *string `json:"paymentInstrumentId,omitempty"`
+	//  The list of priorities for the bank transfer. This sets the speed at which the transfer is sent and the fees that you have to pay. You can provide multiple priorities. Adyen will try to pay out using the priority you list first. If that's not possible, it moves on to the next option in the order of your provided priorities.   Possible values:  * **regular**: for normal, low-value transactions.  * **fast**: a faster way to transfer funds, but the fees are higher. Recommended for high-priority, low-value transactions.  * **wire**: the fastest way to transfer funds, but this has the highest fees. Recommended for high-priority, high-value transactions.  * **instant**: for instant funds transfers in [SEPA countries](https://www.ecb.europa.eu/paym/integration/retail/sepa/html/index.en.html).  * **crossBorder**: for high-value transfers to a recipient in a different country.  * **internal**: for transfers to an Adyen-issued business bank account (by bank account number/IBAN).  Required for transfers with `category` **bank**. For more details, see [fallback priorities](https://docs.adyen.com/payouts/payout-service/payout-to-users/#fallback-priorities).
+	Priorities []string `json:"priorities,omitempty"`
 	// The priority for the bank transfer. This sets the speed at which the transfer is sent and the fees that you have to pay. Required for transfers with `category` **bank**.  Possible values:  * **regular**: for normal, low-value transactions.  * **fast**: a faster way to transfer funds, but the fees are higher. Recommended for high-priority, low-value transactions.  * **wire**: the fastest way to transfer funds, but this has the highest fees. Recommended for high-priority, high-value transactions.  * **instant**: for instant funds transfers in [SEPA countries](https://www.ecb.europa.eu/paym/integration/retail/sepa/html/index.en.html).  * **crossBorder**: for high-value transfers to a recipient in a different country.  * **internal**: for transfers to an Adyen-issued business bank account (by bank account number/IBAN).
 	Priority *string `json:"priority,omitempty"`
 	// Your reference for the transfer, used internally within your platform. If you don't provide this in the request, Adyen generates a unique reference.
@@ -228,6 +230,38 @@ func (o *TransferInfo) SetPaymentInstrumentId(v string) {
 	o.PaymentInstrumentId = &v
 }
 
+// GetPriorities returns the Priorities field value if set, zero value otherwise.
+func (o *TransferInfo) GetPriorities() []string {
+	if o == nil || common.IsNil(o.Priorities) {
+		var ret []string
+		return ret
+	}
+	return o.Priorities
+}
+
+// GetPrioritiesOk returns a tuple with the Priorities field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransferInfo) GetPrioritiesOk() ([]string, bool) {
+	if o == nil || common.IsNil(o.Priorities) {
+		return nil, false
+	}
+	return o.Priorities, true
+}
+
+// HasPriorities returns a boolean if a field has been set.
+func (o *TransferInfo) HasPriorities() bool {
+	if o != nil && !common.IsNil(o.Priorities) {
+		return true
+	}
+
+	return false
+}
+
+// SetPriorities gets a reference to the given []string and assigns it to the Priorities field.
+func (o *TransferInfo) SetPriorities(v []string) {
+	o.Priorities = v
+}
+
 // GetPriority returns the Priority field value if set, zero value otherwise.
 func (o *TransferInfo) GetPriority() string {
 	if o == nil || common.IsNil(o.Priority) {
@@ -409,6 +443,9 @@ func (o TransferInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.PaymentInstrumentId) {
 		toSerialize["paymentInstrumentId"] = o.PaymentInstrumentId
+	}
+	if !common.IsNil(o.Priorities) {
+		toSerialize["priorities"] = o.Priorities
 	}
 	if !common.IsNil(o.Priority) {
 		toSerialize["priority"] = o.Priority

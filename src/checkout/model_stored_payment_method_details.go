@@ -240,7 +240,7 @@ func (v *NullableStoredPaymentMethodDetails) UnmarshalJSON(src []byte) error {
 }
 
 func (o *StoredPaymentMethodDetails) isValidType() bool {
-	var allowedEnumValues = []string{"bcmc_mobile", "bcmc_mobile_QR", "bcmc_mobile_app", "momo_wallet", "momo_wallet_app", "twint", "paymaya_wallet", "grabpay_SG", "grabpay_MY", "grabpay_TH", "grabpay_ID", "grabpay_VN", "grabpay_PH", "oxxo", "gcash", "dana", "kakaopay", "truemoney"}
+	var allowedEnumValues = []string{"bcmc_mobile", "bcmc_mobile_QR", "bcmc_mobile_app", "bankTransfer_IBAN", "momo_wallet", "momo_wallet_app", "twint", "paymaya_wallet", "grabpay_SG", "grabpay_MY", "grabpay_TH", "grabpay_ID", "grabpay_VN", "grabpay_PH", "oxxo", "gcash", "dana", "kakaopay", "truemoney"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true
