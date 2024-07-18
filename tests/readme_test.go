@@ -85,7 +85,7 @@ func ExampleError() {
 	service := client.Checkout()
 
 	req := service.PaymentsApi.PaymentsInput()
-	paymentMethod := checkout.IdealDetailsAsCheckoutPaymentMethod(checkout.NewIdealDetails("1121"))
+	paymentMethod := checkout.IdealDetailsAsCheckoutPaymentMethod(checkout.NewIdealDetails())
 	_, httpRes, err := service.PaymentsApi.Payments(context.Background(), req.PaymentRequest(checkout.PaymentRequest{
 		Reference: "123456781235",
 		Amount: checkout.Amount{
