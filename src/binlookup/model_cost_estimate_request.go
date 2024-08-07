@@ -10,7 +10,8 @@ package binlookup
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v11/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v11/src/common"
 )
 
 // checks if the CostEstimateRequest type satisfies the MappedNullable interface at compile time
@@ -18,16 +19,16 @@ var _ common.MappedNullable = &CostEstimateRequest{}
 
 // CostEstimateRequest struct for CostEstimateRequest
 type CostEstimateRequest struct {
-	Amount Amount `json:"amount"`
+	Amount      Amount                   `json:"amount"`
 	Assumptions *CostEstimateAssumptions `json:"assumptions,omitempty"`
 	// The card number (4-19 characters) for PCI compliant use cases. Do not use any separators.  > Either the `cardNumber` or `encryptedCardNumber` field must be provided in a payment request.
 	CardNumber *string `json:"cardNumber,omitempty"`
 	// Encrypted data that stores card information for non PCI-compliant use cases. The encrypted data must be created with the Checkout Card Component or Secured Fields Component, and must contain the `encryptedCardNumber` field.  > Either the `cardNumber` or `encryptedCardNumber` field must be provided in a payment request.
 	EncryptedCardNumber *string `json:"encryptedCardNumber,omitempty"`
 	// The merchant account identifier you want to process the (transaction) request with.
-	MerchantAccount string `json:"merchantAccount"`
+	MerchantAccount string           `json:"merchantAccount"`
 	MerchantDetails *MerchantDetails `json:"merchantDetails,omitempty"`
-	Recurring *Recurring `json:"recurring,omitempty"`
+	Recurring       *Recurring       `json:"recurring,omitempty"`
 	// The `recurringDetailReference` you want to use for this cost estimate. The value `LATEST` can be used to select the most recently stored recurring detail.
 	SelectedRecurringDetailReference *string `json:"selectedRecurringDetailReference,omitempty"`
 	// Specifies the sales channel, through which the shopper gives their card details, and whether the shopper is a returning customer. For the web service API, Adyen assumes Ecommerce shopper interaction by default.  This field has the following possible values: * `Ecommerce` - Online transactions where the cardholder is present (online). For better authorisation rates, we recommend sending the card security code (CSC) along with the request. * `ContAuth` - Card on file and/or subscription transactions, where the card holder is known to the merchant (returning customer). If the shopper is present (online), you can supply also the CSC to improve authorisation (one-click payment). * `Moto` - Mail-order and telephone-order transactions where the shopper is in contact with the merchant via email or telephone. * `POS` - Point-of-sale transactions where the shopper is physically present to make a payment using a secure payment terminal.
@@ -360,7 +361,7 @@ func (o *CostEstimateRequest) SetShopperReference(v string) {
 }
 
 func (o CostEstimateRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -434,14 +435,12 @@ func (v *NullableCostEstimateRequest) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *CostEstimateRequest) isValidShopperInteraction() bool {
-    var allowedEnumValues = []string{ "Ecommerce", "ContAuth", "Moto", "POS" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetShopperInteraction() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"Ecommerce", "ContAuth", "Moto", "POS"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetShopperInteraction() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

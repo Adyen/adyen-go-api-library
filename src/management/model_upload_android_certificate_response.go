@@ -10,7 +10,8 @@ package management
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v11/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v11/src/common"
 )
 
 // checks if the UploadAndroidCertificateResponse type satisfies the MappedNullable interface at compile time
@@ -72,7 +73,7 @@ func (o *UploadAndroidCertificateResponse) SetId(v string) {
 }
 
 func (o UploadAndroidCertificateResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -122,6 +123,3 @@ func (v *NullableUploadAndroidCertificateResponse) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

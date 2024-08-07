@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v11/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v11/src/common"
 )
 
 // checks if the DokuDetails type satisfies the MappedNullable interface at compile time
@@ -180,7 +181,7 @@ func (o *DokuDetails) SetType(v string) {
 }
 
 func (o DokuDetails) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -235,14 +236,12 @@ func (v *NullableDokuDetails) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *DokuDetails) isValidType() bool {
-    var allowedEnumValues = []string{ "doku_mandiri_va", "doku_cimb_va", "doku_danamon_va", "doku_bni_va", "doku_permata_lite_atm", "doku_bri_va", "doku_bca_va", "doku_alfamart", "doku_indomaret", "doku_wallet", "doku_ovo" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"doku_mandiri_va", "doku_cimb_va", "doku_danamon_va", "doku_bni_va", "doku_permata_lite_atm", "doku_bri_va", "doku_bca_va", "doku_alfamart", "doku_indomaret", "doku_wallet", "doku_ovo"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

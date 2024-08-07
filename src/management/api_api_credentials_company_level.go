@@ -10,10 +10,13 @@ package management
 
 import (
 	"context"
-    "net/http"
-    "net/url"
-    "strings"
-    "github.com/adyen/adyen-go-api-library/v11/src/common"
+	"encoding/json"
+	"io/ioutil"
+	"net/http"
+	"net/url"
+	"strings"
+
+	"github.com/adyen/adyen-go-api-library/v11/src/common"
 )
 
 // APICredentialsCompanyLevelApi service
@@ -21,7 +24,7 @@ type APICredentialsCompanyLevelApi common.Service
 
 // All parameters accepted by APICredentialsCompanyLevelApi.CreateApiCredential
 type APICredentialsCompanyLevelApiCreateApiCredentialInput struct {
-	companyId string
+	companyId                         string
 	createCompanyApiCredentialRequest *CreateCompanyApiCredentialRequest
 }
 
@@ -29,7 +32,6 @@ func (r APICredentialsCompanyLevelApiCreateApiCredentialInput) CreateCompanyApiC
 	r.createCompanyApiCredentialRequest = &createCompanyApiCredentialRequest
 	return r
 }
-
 
 /*
 Prepare a request for CreateApiCredential
@@ -64,78 +66,76 @@ To make this request, your API credential must have the following [roles](https:
 @return CreateCompanyApiCredentialResponse, *http.Response, error
 */
 func (a *APICredentialsCompanyLevelApi) CreateApiCredential(ctx context.Context, r APICredentialsCompanyLevelApiCreateApiCredentialInput) (CreateCompanyApiCredentialResponse, *http.Response, error) {
-    res := &CreateCompanyApiCredentialResponse{}
+	res := &CreateCompanyApiCredentialResponse{}
 	path := "/companies/{companyId}/apiCredentials"
-    path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.createCompanyApiCredentialRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.createCompanyApiCredentialRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-    if httpRes == nil {
-        return *res, httpRes, err
-    }
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
-    var serviceError common.RestServiceError
-                        if httpRes.StatusCode == 400 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 401 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 403 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 422 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 500 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 400 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
 
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by APICredentialsCompanyLevelApi.GetApiCredential
 type APICredentialsCompanyLevelApiGetApiCredentialInput struct {
-	companyId string
+	companyId       string
 	apiCredentialId string
 }
-
 
 /*
 Prepare a request for GetApiCredential
@@ -144,7 +144,7 @@ Prepare a request for GetApiCredential
 */
 func (a *APICredentialsCompanyLevelApi) GetApiCredentialInput(companyId string, apiCredentialId string) APICredentialsCompanyLevelApiGetApiCredentialInput {
 	return APICredentialsCompanyLevelApiGetApiCredentialInput{
-		companyId: companyId,
+		companyId:       companyId,
 		apiCredentialId: apiCredentialId,
 	}
 }
@@ -162,78 +162,77 @@ To make this request, your API credential must have the following [roles](https:
 @return CompanyApiCredential, *http.Response, error
 */
 func (a *APICredentialsCompanyLevelApi) GetApiCredential(ctx context.Context, r APICredentialsCompanyLevelApiGetApiCredentialInput) (CompanyApiCredential, *http.Response, error) {
-    res := &CompanyApiCredential{}
+	res := &CompanyApiCredential{}
 	path := "/companies/{companyId}/apiCredentials/{apiCredentialId}"
-    path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
-    path = strings.Replace(path, "{"+"apiCredentialId"+"}", url.PathEscape(common.ParameterValueToString(r.apiCredentialId, "apiCredentialId")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodGet,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
+	path = strings.Replace(path, "{"+"apiCredentialId"+"}", url.PathEscape(common.ParameterValueToString(r.apiCredentialId, "apiCredentialId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-    if httpRes == nil {
-        return *res, httpRes, err
-    }
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
-    var serviceError common.RestServiceError
-                        if httpRes.StatusCode == 400 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 401 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 403 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 422 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 500 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 400 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
 
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by APICredentialsCompanyLevelApi.ListApiCredentials
 type APICredentialsCompanyLevelApiListApiCredentialsInput struct {
-	companyId string
+	companyId  string
 	pageNumber *int32
-	pageSize *int32
+	pageSize   *int32
 }
 
 // The number of the page to fetch.
@@ -247,7 +246,6 @@ func (r APICredentialsCompanyLevelApiListApiCredentialsInput) PageSize(pageSize 
 	r.pageSize = &pageSize
 	return r
 }
-
 
 /*
 Prepare a request for ListApiCredentials
@@ -273,82 +271,81 @@ To make this request, your API credential must have the following [roles](https:
 @return ListCompanyApiCredentialsResponse, *http.Response, error
 */
 func (a *APICredentialsCompanyLevelApi) ListApiCredentials(ctx context.Context, r APICredentialsCompanyLevelApiListApiCredentialsInput) (ListCompanyApiCredentialsResponse, *http.Response, error) {
-    res := &ListCompanyApiCredentialsResponse{}
+	res := &ListCompanyApiCredentialsResponse{}
 	path := "/companies/{companyId}/apiCredentials"
-    path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    if r.pageNumber != nil {
-        common.ParameterAddToQuery(queryParams, "pageNumber", r.pageNumber, "")
-    }
-    if r.pageSize != nil {
-        common.ParameterAddToQuery(queryParams, "pageSize", r.pageSize, "")
-    }
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodGet,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.pageNumber != nil {
+		common.ParameterAddToQuery(queryParams, "pageNumber", r.pageNumber, "")
+	}
+	if r.pageSize != nil {
+		common.ParameterAddToQuery(queryParams, "pageSize", r.pageSize, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-    if httpRes == nil {
-        return *res, httpRes, err
-    }
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
-    var serviceError common.RestServiceError
-                        if httpRes.StatusCode == 400 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 401 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 403 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 422 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 500 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 400 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
 
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by APICredentialsCompanyLevelApi.UpdateApiCredential
 type APICredentialsCompanyLevelApiUpdateApiCredentialInput struct {
-	companyId string
-	apiCredentialId string
+	companyId                         string
+	apiCredentialId                   string
 	updateCompanyApiCredentialRequest *UpdateCompanyApiCredentialRequest
 }
 
@@ -357,7 +354,6 @@ func (r APICredentialsCompanyLevelApiUpdateApiCredentialInput) UpdateCompanyApiC
 	return r
 }
 
-
 /*
 Prepare a request for UpdateApiCredential
 @param companyId The unique identifier of the company account.@param apiCredentialId Unique identifier of the API credential.
@@ -365,7 +361,7 @@ Prepare a request for UpdateApiCredential
 */
 func (a *APICredentialsCompanyLevelApi) UpdateApiCredentialInput(companyId string, apiCredentialId string) APICredentialsCompanyLevelApiUpdateApiCredentialInput {
 	return APICredentialsCompanyLevelApiUpdateApiCredentialInput{
-		companyId: companyId,
+		companyId:       companyId,
 		apiCredentialId: apiCredentialId,
 	}
 }
@@ -373,7 +369,7 @@ func (a *APICredentialsCompanyLevelApi) UpdateApiCredentialInput(companyId strin
 /*
 UpdateApiCredential Update an API credential.
 
-Changes the API credential's roles, merchant account access, or allowed origins. The request has the new values for the fields you want to change. The response contains the full updated API credential, including the new values from the request. 
+Changes the API credential's roles, merchant account access, or allowed origins. The request has the new values for the fields you want to change. The response contains the full updated API credential, including the new values from the request.
 
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—API credentials read and write
@@ -383,69 +379,68 @@ To make this request, your API credential must have the following [roles](https:
 @return CompanyApiCredential, *http.Response, error
 */
 func (a *APICredentialsCompanyLevelApi) UpdateApiCredential(ctx context.Context, r APICredentialsCompanyLevelApiUpdateApiCredentialInput) (CompanyApiCredential, *http.Response, error) {
-    res := &CompanyApiCredential{}
+	res := &CompanyApiCredential{}
 	path := "/companies/{companyId}/apiCredentials/{apiCredentialId}"
-    path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
-    path = strings.Replace(path, "{"+"apiCredentialId"+"}", url.PathEscape(common.ParameterValueToString(r.apiCredentialId, "apiCredentialId")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.updateCompanyApiCredentialRequest,
-        res,
-        http.MethodPatch,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
+	path = strings.Replace(path, "{"+"apiCredentialId"+"}", url.PathEscape(common.ParameterValueToString(r.apiCredentialId, "apiCredentialId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.updateCompanyApiCredentialRequest,
+		res,
+		http.MethodPatch,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-    if httpRes == nil {
-        return *res, httpRes, err
-    }
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
-    var serviceError common.RestServiceError
-                        if httpRes.StatusCode == 400 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 401 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 403 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 422 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 500 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 400 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
 
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-

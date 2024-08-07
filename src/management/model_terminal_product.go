@@ -10,7 +10,8 @@ package management
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v11/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v11/src/common"
 )
 
 // checks if the TerminalProduct type satisfies the MappedNullable interface at compile time
@@ -25,7 +26,7 @@ type TerminalProduct struct {
 	// A list of parts included in the terminal package.
 	ItemsIncluded []string `json:"itemsIncluded,omitempty"`
 	// The descriptive name of the product.
-	Name *string `json:"name,omitempty"`
+	Name  *string               `json:"name,omitempty"`
 	Price *TerminalProductPrice `json:"price,omitempty"`
 }
 
@@ -207,7 +208,7 @@ func (o *TerminalProduct) SetPrice(v TerminalProductPrice) {
 }
 
 func (o TerminalProduct) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -269,6 +270,3 @@ func (v *NullableTerminalProduct) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

@@ -10,7 +10,8 @@ package transfers
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v11/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v11/src/common"
 )
 
 // checks if the CardIdentification type satisfies the MappedNullable interface at compile time
@@ -30,7 +31,7 @@ type CardIdentification struct {
 	StartMonth *string `json:"startMonth,omitempty"`
 	// The year when the card was issued. Applies only to some UK debit cards.  Format: four digits. For example: 2020
 	StartYear *string `json:"startYear,omitempty"`
-	// The unique [token](/payouts/payout-service/pay-out-to-cards/manage-card-information#save-card-details) created to identify the counterparty.  
+	// The unique [token](/payouts/payout-service/pay-out-to-cards/manage-card-information#save-card-details) created to identify the counterparty.
 	StoredPaymentMethodId *string `json:"storedPaymentMethodId,omitempty"`
 }
 
@@ -276,7 +277,7 @@ func (o *CardIdentification) SetStoredPaymentMethodId(v string) {
 }
 
 func (o CardIdentification) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -344,6 +345,3 @@ func (v *NullableCardIdentification) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-
