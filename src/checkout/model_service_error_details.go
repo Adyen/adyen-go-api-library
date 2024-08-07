@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v11/src/common"
+    "github.com/adyen/adyen-go-api-library/v11/src/common"
 )
 
 // checks if the ServiceErrorDetails type satisfies the MappedNullable interface at compile time
@@ -19,9 +18,9 @@ var _ common.MappedNullable = &ServiceErrorDetails{}
 
 // ServiceErrorDetails struct for ServiceErrorDetails
 type ServiceErrorDetails struct {
-	ErrorCode    *string `json:"errorCode,omitempty"`
-	ErrorType    *string `json:"errorType,omitempty"`
-	Message      *string `json:"message,omitempty"`
+	ErrorCode *string `json:"errorCode,omitempty"`
+	ErrorType *string `json:"errorType,omitempty"`
+	Message *string `json:"message,omitempty"`
 	PspReference *string `json:"pspReference,omitempty"`
 }
 
@@ -171,7 +170,7 @@ func (o *ServiceErrorDetails) SetPspReference(v string) {
 }
 
 func (o ServiceErrorDetails) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -230,3 +229,6 @@ func (v *NullableServiceErrorDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

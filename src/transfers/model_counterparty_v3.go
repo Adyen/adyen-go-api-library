@@ -10,8 +10,7 @@ package transfers
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v11/src/common"
+    "github.com/adyen/adyen-go-api-library/v11/src/common"
 )
 
 // checks if the CounterpartyV3 type satisfies the MappedNullable interface at compile time
@@ -19,11 +18,12 @@ var _ common.MappedNullable = &CounterpartyV3{}
 
 // CounterpartyV3 struct for CounterpartyV3
 type CounterpartyV3 struct {
-	// The unique identifier of the [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id).
-	BalanceAccountId *string        `json:"balanceAccountId,omitempty"`
-	BankAccount      *BankAccountV3 `json:"bankAccount,omitempty"`
-	Merchant         *MerchantData  `json:"merchant,omitempty"`
-	// The unique identifier of the [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id).
+	// The unique identifier of the counterparty [balance account](https://docs.adyen.com/api-explorer/balanceplatform/latest/post/balanceAccounts#responses-200-id).
+	BalanceAccountId *string `json:"balanceAccountId,omitempty"`
+	BankAccount *BankAccountV3 `json:"bankAccount,omitempty"`
+	Card *Card `json:"card,omitempty"`
+	Merchant *MerchantData `json:"merchant,omitempty"`
+	// The unique identifier of the counterparty [transfer instrument](https://docs.adyen.com/api-explorer/legalentity/latest/post/transferInstruments#responses-200-id).
 	TransferInstrumentId *string `json:"transferInstrumentId,omitempty"`
 }
 
@@ -108,6 +108,38 @@ func (o *CounterpartyV3) SetBankAccount(v BankAccountV3) {
 	o.BankAccount = &v
 }
 
+// GetCard returns the Card field value if set, zero value otherwise.
+func (o *CounterpartyV3) GetCard() Card {
+	if o == nil || common.IsNil(o.Card) {
+		var ret Card
+		return ret
+	}
+	return *o.Card
+}
+
+// GetCardOk returns a tuple with the Card field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CounterpartyV3) GetCardOk() (*Card, bool) {
+	if o == nil || common.IsNil(o.Card) {
+		return nil, false
+	}
+	return o.Card, true
+}
+
+// HasCard returns a boolean if a field has been set.
+func (o *CounterpartyV3) HasCard() bool {
+	if o != nil && !common.IsNil(o.Card) {
+		return true
+	}
+
+	return false
+}
+
+// SetCard gets a reference to the given Card and assigns it to the Card field.
+func (o *CounterpartyV3) SetCard(v Card) {
+	o.Card = &v
+}
+
 // GetMerchant returns the Merchant field value if set, zero value otherwise.
 func (o *CounterpartyV3) GetMerchant() MerchantData {
 	if o == nil || common.IsNil(o.Merchant) {
@@ -173,7 +205,7 @@ func (o *CounterpartyV3) SetTransferInstrumentId(v string) {
 }
 
 func (o CounterpartyV3) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -187,6 +219,9 @@ func (o CounterpartyV3) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.BankAccount) {
 		toSerialize["bankAccount"] = o.BankAccount
+	}
+	if !common.IsNil(o.Card) {
+		toSerialize["card"] = o.Card
 	}
 	if !common.IsNil(o.Merchant) {
 		toSerialize["merchant"] = o.Merchant
@@ -232,3 +267,6 @@ func (v *NullableCounterpartyV3) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

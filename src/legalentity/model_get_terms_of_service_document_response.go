@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v11/src/common"
+    "github.com/adyen/adyen-go-api-library/v11/src/common"
 )
 
 // checks if the GetTermsOfServiceDocumentResponse type satisfies the MappedNullable interface at compile time
@@ -25,9 +24,11 @@ type GetTermsOfServiceDocumentResponse struct {
 	Id *string `json:"id,omitempty"`
 	// The language used for the Terms of Service document, specified by the two-letter [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code. Possible value: **en** for English.
 	Language *string `json:"language,omitempty"`
+	// The format of the Terms of Service document.
+	TermsOfServiceDocumentFormat *string `json:"termsOfServiceDocumentFormat,omitempty"`
 	// The unique identifier of the Terms of Service document.
 	TermsOfServiceDocumentId *string `json:"termsOfServiceDocumentId,omitempty"`
-	// The type of Terms of Service.  Possible values: *  **adyenForPlatformsManage** *  **adyenIssuing** *  **adyenForPlatformsAdvanced** *  **adyenCapital** *  **adyenAccount** *  **adyenCard** *  **adyenFranchisee** *  **adyenPccr**
+	// The type of Terms of Service.  Possible values: *  **adyenForPlatformsManage** *  **adyenIssuing** *  **adyenForPlatformsAdvanced** *  **adyenCapital** *  **adyenAccount** *  **adyenCard** *  **adyenFranchisee** *  **adyenPccr**  
 	Type *string `json:"type,omitempty"`
 }
 
@@ -144,6 +145,38 @@ func (o *GetTermsOfServiceDocumentResponse) SetLanguage(v string) {
 	o.Language = &v
 }
 
+// GetTermsOfServiceDocumentFormat returns the TermsOfServiceDocumentFormat field value if set, zero value otherwise.
+func (o *GetTermsOfServiceDocumentResponse) GetTermsOfServiceDocumentFormat() string {
+	if o == nil || common.IsNil(o.TermsOfServiceDocumentFormat) {
+		var ret string
+		return ret
+	}
+	return *o.TermsOfServiceDocumentFormat
+}
+
+// GetTermsOfServiceDocumentFormatOk returns a tuple with the TermsOfServiceDocumentFormat field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetTermsOfServiceDocumentResponse) GetTermsOfServiceDocumentFormatOk() (*string, bool) {
+	if o == nil || common.IsNil(o.TermsOfServiceDocumentFormat) {
+		return nil, false
+	}
+	return o.TermsOfServiceDocumentFormat, true
+}
+
+// HasTermsOfServiceDocumentFormat returns a boolean if a field has been set.
+func (o *GetTermsOfServiceDocumentResponse) HasTermsOfServiceDocumentFormat() bool {
+	if o != nil && !common.IsNil(o.TermsOfServiceDocumentFormat) {
+		return true
+	}
+
+	return false
+}
+
+// SetTermsOfServiceDocumentFormat gets a reference to the given string and assigns it to the TermsOfServiceDocumentFormat field.
+func (o *GetTermsOfServiceDocumentResponse) SetTermsOfServiceDocumentFormat(v string) {
+	o.TermsOfServiceDocumentFormat = &v
+}
+
 // GetTermsOfServiceDocumentId returns the TermsOfServiceDocumentId field value if set, zero value otherwise.
 func (o *GetTermsOfServiceDocumentResponse) GetTermsOfServiceDocumentId() string {
 	if o == nil || common.IsNil(o.TermsOfServiceDocumentId) {
@@ -209,7 +242,7 @@ func (o *GetTermsOfServiceDocumentResponse) SetType(v string) {
 }
 
 func (o GetTermsOfServiceDocumentResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -226,6 +259,9 @@ func (o GetTermsOfServiceDocumentResponse) ToMap() (map[string]interface{}, erro
 	}
 	if !common.IsNil(o.Language) {
 		toSerialize["language"] = o.Language
+	}
+	if !common.IsNil(o.TermsOfServiceDocumentFormat) {
+		toSerialize["termsOfServiceDocumentFormat"] = o.TermsOfServiceDocumentFormat
 	}
 	if !common.IsNil(o.TermsOfServiceDocumentId) {
 		toSerialize["termsOfServiceDocumentId"] = o.TermsOfServiceDocumentId
@@ -272,12 +308,14 @@ func (v *NullableGetTermsOfServiceDocumentResponse) UnmarshalJSON(src []byte) er
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *GetTermsOfServiceDocumentResponse) isValidType() bool {
-	var allowedEnumValues = []string{"adyenAccount", "adyenCapital", "adyenCard", "adyenForPlatformsAdvanced", "adyenForPlatformsManage", "adyenFranchisee", "adyenIssuing", "adyenPccr"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "adyenAccount", "adyenCapital", "adyenCard", "adyenForPlatformsAdvanced", "adyenForPlatformsManage", "adyenFranchisee", "adyenIssuing", "adyenPccr" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

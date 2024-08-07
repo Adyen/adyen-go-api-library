@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v11/src/common"
+    "github.com/adyen/adyen-go-api-library/v11/src/common"
 )
 
 // checks if the RegisterSCARequest type satisfies the MappedNullable interface at compile time
@@ -20,7 +19,7 @@ var _ common.MappedNullable = &RegisterSCARequest{}
 // RegisterSCARequest struct for RegisterSCARequest
 type RegisterSCARequest struct {
 	// The unique identifier of the payment instrument for which you are registering the SCA device.
-	PaymentInstrumentId          string                      `json:"paymentInstrumentId"`
+	PaymentInstrumentId string `json:"paymentInstrumentId"`
 	StrongCustomerAuthentication DelegatedAuthenticationData `json:"strongCustomerAuthentication"`
 }
 
@@ -92,7 +91,7 @@ func (o *RegisterSCARequest) SetStrongCustomerAuthentication(v DelegatedAuthenti
 }
 
 func (o RegisterSCARequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -141,3 +140,6 @@ func (v *NullableRegisterSCARequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

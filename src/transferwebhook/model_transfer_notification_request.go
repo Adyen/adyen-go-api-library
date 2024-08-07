@@ -10,8 +10,7 @@ package transferwebhook
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v11/src/common"
+    "github.com/adyen/adyen-go-api-library/v11/src/common"
 )
 
 // checks if the TransferNotificationRequest type satisfies the MappedNullable interface at compile time
@@ -126,7 +125,7 @@ func (o *TransferNotificationRequest) SetType(v string) {
 }
 
 func (o TransferNotificationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -179,12 +178,14 @@ func (v *NullableTransferNotificationRequest) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *TransferNotificationRequest) isValidType() bool {
-	var allowedEnumValues = []string{"balancePlatform.transfer.created", "balancePlatform.transfer.updated"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "balancePlatform.transfer.created", "balancePlatform.transfer.updated" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

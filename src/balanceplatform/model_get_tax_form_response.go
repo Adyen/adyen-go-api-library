@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v11/src/common"
+    "github.com/adyen/adyen-go-api-library/v11/src/common"
 )
 
 // checks if the GetTaxFormResponse type satisfies the MappedNullable interface at compile time
@@ -21,7 +20,7 @@ var _ common.MappedNullable = &GetTaxFormResponse{}
 type GetTaxFormResponse struct {
 	// The content of the tax form in Base64 format.
 	Content string `json:"content"`
-	// The content type of the tax form.  Possible values: *  **application/pdf**
+	// The content type of the tax form.  Possible values: *  **application/pdf**  
 	ContentType *string `json:"contentType,omitempty"`
 }
 
@@ -100,7 +99,7 @@ func (o *GetTaxFormResponse) SetContentType(v string) {
 }
 
 func (o GetTaxFormResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -152,12 +151,14 @@ func (v *NullableGetTaxFormResponse) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *GetTaxFormResponse) isValidContentType() bool {
-	var allowedEnumValues = []string{"application/pdf"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetContentType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "application/pdf" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetContentType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

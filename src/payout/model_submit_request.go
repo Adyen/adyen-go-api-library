@@ -10,8 +10,7 @@ package payout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v11/src/common"
+    "github.com/adyen/adyen-go-api-library/v11/src/common"
 )
 
 // checks if the SubmitRequest type satisfies the MappedNullable interface at compile time
@@ -21,7 +20,7 @@ var _ common.MappedNullable = &SubmitRequest{}
 type SubmitRequest struct {
 	// This field contains additional data, which may be required for a particular request.
 	AdditionalData *map[string]string `json:"additionalData,omitempty"`
-	Amount         Amount             `json:"amount"`
+	Amount Amount `json:"amount"`
 	// The date of birth. Format: ISO-8601; example: YYYY-MM-DD  For Paysafecard it must be the same as used when registering the Paysafecard account.  > This field is mandatory for natural persons.  > This field is required to update the existing `dateOfBirth` that is associated with this recurring contract.
 	DateOfBirth *string `json:"dateOfBirth,omitempty"`
 	// The type of the entity the payout is processed for.  Allowed values: * NaturalPerson * Company > This field is required to update the existing `entityType` that is associated with this recurring contract.
@@ -31,15 +30,15 @@ type SubmitRequest struct {
 	// The merchant account identifier you want to process the transaction request with.
 	MerchantAccount string `json:"merchantAccount"`
 	// The shopper's nationality.  A valid value is an ISO 2-character country code (e.g. 'NL').  > This field is required to update the existing nationality that is associated with this recurring contract.
-	Nationality *string   `json:"nationality,omitempty"`
-	Recurring   Recurring `json:"recurring"`
+	Nationality *string `json:"nationality,omitempty"`
+	Recurring Recurring `json:"recurring"`
 	// The merchant reference for this payout. This reference will be used in all communication to the merchant about the status of the payout. Although it is a good idea to make sure it is unique, this is not a requirement.
 	Reference string `json:"reference"`
 	// This is the `recurringDetailReference` you want to use for this payout.  You can use the value LATEST to select the most recently used recurring detail.
 	SelectedRecurringDetailReference string `json:"selectedRecurringDetailReference"`
 	// The shopper's email address.
 	ShopperEmail string `json:"shopperEmail"`
-	ShopperName  *Name  `json:"shopperName,omitempty"`
+	ShopperName *Name `json:"shopperName,omitempty"`
 	// The shopper's reference for the payout transaction.
 	ShopperReference string `json:"shopperReference"`
 	// The description of this payout. This description is shown on the bank statement of the shopper (if this is supported by the chosen payment method).
@@ -497,7 +496,7 @@ func (o *SubmitRequest) SetSocialSecurityNumber(v string) {
 }
 
 func (o SubmitRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -576,12 +575,14 @@ func (v *NullableSubmitRequest) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *SubmitRequest) isValidEntityType() bool {
-	var allowedEnumValues = []string{"NaturalPerson", "Company"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetEntityType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "NaturalPerson", "Company" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetEntityType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+
