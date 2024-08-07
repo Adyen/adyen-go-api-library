@@ -19,6 +19,8 @@ var _ common.MappedNullable = &Organization{}
 
 // Organization struct for Organization
 type Organization struct {
+	// The two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code of the governing country.
+	CountryOfGoverningLaw *string `json:"countryOfGoverningLaw,omitempty"`
 	// The date when the organization was incorporated in YYYY-MM-DD format.
 	DateOfIncorporation *string `json:"dateOfIncorporation,omitempty"`
 	// Your description for the organization.
@@ -64,6 +66,38 @@ func NewOrganization(legalName string, registeredAddress Address) *Organization 
 func NewOrganizationWithDefaults() *Organization {
 	this := Organization{}
 	return &this
+}
+
+// GetCountryOfGoverningLaw returns the CountryOfGoverningLaw field value if set, zero value otherwise.
+func (o *Organization) GetCountryOfGoverningLaw() string {
+	if o == nil || common.IsNil(o.CountryOfGoverningLaw) {
+		var ret string
+		return ret
+	}
+	return *o.CountryOfGoverningLaw
+}
+
+// GetCountryOfGoverningLawOk returns a tuple with the CountryOfGoverningLaw field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Organization) GetCountryOfGoverningLawOk() (*string, bool) {
+	if o == nil || common.IsNil(o.CountryOfGoverningLaw) {
+		return nil, false
+	}
+	return o.CountryOfGoverningLaw, true
+}
+
+// HasCountryOfGoverningLaw returns a boolean if a field has been set.
+func (o *Organization) HasCountryOfGoverningLaw() bool {
+	if o != nil && !common.IsNil(o.CountryOfGoverningLaw) {
+		return true
+	}
+
+	return false
+}
+
+// SetCountryOfGoverningLaw gets a reference to the given string and assigns it to the CountryOfGoverningLaw field.
+func (o *Organization) SetCountryOfGoverningLaw(v string) {
+	o.CountryOfGoverningLaw = &v
 }
 
 // GetDateOfIncorporation returns the DateOfIncorporation field value if set, zero value otherwise.
@@ -572,6 +606,9 @@ func (o Organization) MarshalJSON() ([]byte, error) {
 
 func (o Organization) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.CountryOfGoverningLaw) {
+		toSerialize["countryOfGoverningLaw"] = o.CountryOfGoverningLaw
+	}
 	if !common.IsNil(o.DateOfIncorporation) {
 		toSerialize["dateOfIncorporation"] = o.DateOfIncorporation
 	}

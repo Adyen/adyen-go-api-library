@@ -23,7 +23,7 @@ type Transfer struct {
 	AccountHolder  *ResourceReference `json:"accountHolder,omitempty"`
 	Amount         Amount             `json:"amount"`
 	BalanceAccount *ResourceReference `json:"balanceAccount,omitempty"`
-	// The category of the transfer.  Possible values:   - **bank**: a transfer involving a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id) or a bank account.  - **internal**: a transfer between [balance accounts](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id) within your platform.  - **issuedCard**: a transfer initiated by an Adyen-issued card.  - **platformPayment**: funds movements related to payments that are acquired for your users.
+	// The category of the transfer.  Possible values:   - **bank**: a transfer involving a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id) or a bank account.  - **card**: a transfer involving a third-party card.  - **internal**: a transfer between [balance accounts](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id) within your platform.  - **issuedCard**: a transfer initiated by an Adyen-issued card.  - **platformPayment**: funds movements related to payments that are acquired for your users.
 	Category     string                `json:"category"`
 	CategoryData *TransferCategoryData `json:"categoryData,omitempty"`
 	Counterparty CounterpartyV3        `json:"counterparty"`
@@ -639,7 +639,7 @@ func (v *NullableTransfer) UnmarshalJSON(src []byte) error {
 }
 
 func (o *Transfer) isValidCategory() bool {
-	var allowedEnumValues = []string{"bank", "internal", "issuedCard", "platformPayment"}
+	var allowedEnumValues = []string{"bank", "card", "internal", "issuedCard", "platformPayment"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetCategory() == allowed {
 			return true
@@ -675,7 +675,7 @@ func (o *Transfer) isValidStatus() bool {
 	return false
 }
 func (o *Transfer) isValidType() bool {
-	var allowedEnumValues = []string{"atmWithdrawal", "atmWithdrawalReversal", "balanceAdjustment", "balanceMigration", "balanceRollover", "bankDirectDebit", "bankTransfer", "capitalFundsCollection", "capture", "captureReversal", "cardTransfer", "cashOutFee", "cashOutFunding", "cashOutInstruction", "cashoutFee", "cashoutFunding", "cashoutRepayment", "chargeback", "chargebackCorrection", "chargebackReversal", "chargebackReversalCorrection", "depositCorrection", "fee", "grant", "installment", "installmentReversal", "internalDirectDebit", "internalTransfer", "invoiceDeduction", "leftover", "manualCorrection", "miscCost", "payment", "paymentCost", "refund", "refundReversal", "repayment", "reserveAdjustment", "secondChargeback", "secondChargebackCorrection"}
+	var allowedEnumValues = []string{"payment", "capture", "captureReversal", "refund", "refundReversal", "chargeback", "chargebackCorrection", "chargebackReversal", "chargebackReversalCorrection", "secondChargeback", "secondChargebackCorrection", "atmWithdrawal", "atmWithdrawalReversal", "internalTransfer", "internalDirectDebit", "manualCorrection", "invoiceDeduction", "depositCorrection", "reserveAdjustment", "bankTransfer", "bankDirectDebit", "cardTransfer", "miscCost", "paymentCost", "fee", "leftover", "grant", "capitalFundsCollection", "cashOutInstruction", "cashoutFee", "cashoutRepayment", "cashoutFunding", "repayment", "installment", "installmentReversal", "balanceAdjustment", "balanceRollover", "balanceMigration"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

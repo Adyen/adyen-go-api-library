@@ -54,9 +54,10 @@ type PaymentMethodSetupInfo struct {
 	ShopperInteraction *string     `json:"shopperInteraction,omitempty"`
 	Sofort             *SofortInfo `json:"sofort,omitempty"`
 	// The unique identifier of the store for which to configure the payment method, if any.
-	StoreIds []string   `json:"storeIds,omitempty"`
-	Swish    *SwishInfo `json:"swish,omitempty"`
-	Twint    *TwintInfo `json:"twint,omitempty"`
+	StoreIds []string    `json:"storeIds,omitempty"`
+	Swish    *SwishInfo  `json:"swish,omitempty"`
+	Ticket   *TicketInfo `json:"ticket,omitempty"`
+	Twint    *TwintInfo  `json:"twint,omitempty"`
 	// Payment method [variant](https://docs.adyen.com/development-resources/paymentmethodvariant#management-api).
 	Type         string                `json:"type"`
 	Vipps        *VippsInfo            `json:"vipps,omitempty"`
@@ -1043,6 +1044,38 @@ func (o *PaymentMethodSetupInfo) SetSwish(v SwishInfo) {
 	o.Swish = &v
 }
 
+// GetTicket returns the Ticket field value if set, zero value otherwise.
+func (o *PaymentMethodSetupInfo) GetTicket() TicketInfo {
+	if o == nil || common.IsNil(o.Ticket) {
+		var ret TicketInfo
+		return ret
+	}
+	return *o.Ticket
+}
+
+// GetTicketOk returns a tuple with the Ticket field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodSetupInfo) GetTicketOk() (*TicketInfo, bool) {
+	if o == nil || common.IsNil(o.Ticket) {
+		return nil, false
+	}
+	return o.Ticket, true
+}
+
+// HasTicket returns a boolean if a field has been set.
+func (o *PaymentMethodSetupInfo) HasTicket() bool {
+	if o != nil && !common.IsNil(o.Ticket) {
+		return true
+	}
+
+	return false
+}
+
+// SetTicket gets a reference to the given TicketInfo and assigns it to the Ticket field.
+func (o *PaymentMethodSetupInfo) SetTicket(v TicketInfo) {
+	o.Ticket = &v
+}
+
 // GetTwint returns the Twint field value if set, zero value otherwise.
 func (o *PaymentMethodSetupInfo) GetTwint() TwintInfo {
 	if o == nil || common.IsNil(o.Twint) {
@@ -1327,6 +1360,9 @@ func (o PaymentMethodSetupInfo) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Swish) {
 		toSerialize["swish"] = o.Swish
 	}
+	if !common.IsNil(o.Ticket) {
+		toSerialize["ticket"] = o.Ticket
+	}
 	if !common.IsNil(o.Twint) {
 		toSerialize["twint"] = o.Twint
 	}
@@ -1392,7 +1428,7 @@ func (o *PaymentMethodSetupInfo) isValidShopperInteraction() bool {
 	return false
 }
 func (o *PaymentMethodSetupInfo) isValidType() bool {
-	var allowedEnumValues = []string{"afterpaytouch", "alipay", "alipay_hk", "amex", "applepay", "bcmc", "blik", "cartebancaire", "clearpay", "clicktopay", "cup", "diners", "directdebit_GB", "discover", "ebanking_FI", "eftpos_australia", "elo", "elocredit", "elodebit", "girocard", "googlepay", "hiper", "hipercard", "ideal", "interac_card", "jcb", "klarna", "klarna_account", "klarna_paynow", "maestro", "mbway", "mc", "mcdebit", "mealVoucher_FR", "mobilepay", "multibanco", "onlineBanking_PL", "paybybank", "paypal", "payshop", "swish", "trustly", "twint", "twint_pos", "vipps", "visa", "visadebit", "vpay", "wechatpay", "wechatpay_pos"}
+	var allowedEnumValues = []string{"afterpaytouch", "alipay", "alipay_hk", "amex", "applepay", "bcmc", "blik", "cartebancaire", "clearpay", "clicktopay", "cup", "diners", "directdebit_GB", "discover", "ebanking_FI", "eftpos_australia", "elo", "elocredit", "elodebit", "girocard", "googlepay", "hiper", "hipercard", "ideal", "interac_card", "jcb", "klarna", "klarna_account", "klarna_paynow", "maestro", "mbway", "mc", "mcdebit", "mealVoucher_FR", "mobilepay", "multibanco", "onlineBanking_PL", "paybybank", "paynow", "paynow_pos", "paypal", "payshop", "swish", "ticket", "trustly", "twint", "twint_pos", "vipps", "visa", "visadebit", "vpay", "wechatpay", "wechatpay_pos"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

@@ -32,7 +32,7 @@ type IdentificationData struct {
 	NationalIdExempt *bool `json:"nationalIdExempt,omitempty"`
 	// The number in the document.
 	Number *string `json:"number,omitempty"`
-	// Type of identity data. For individuals, the `type` value is **nationalIdNumber**. For individuals in these countries, the following types are supported.  - Australia: **driversLicense**, **passport**  - Hong Kong: **driversLicense**, **nationalIdNumber**, **passport**  - New Zealand: **driversLicense**, **passport**  - Singapore: **driversLicense**, **nationalIdNumber**, **passport**
+	// Type of identity data. For individuals, the following types are supported:  - Australia: **driversLicense**, **passport**  - Hong Kong: **driversLicense**, **nationalIdNumber**, **passport**  - New Zealand: **driversLicense**, **passport**  - Singapore: **driversLicense**, **nationalIdNumber**, **passport**   - All other supported countries: **nationalIdNumber
 	Type string `json:"type"`
 }
 

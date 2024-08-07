@@ -46,6 +46,8 @@ type DonationPaymentRequest struct {
 	DeviceFingerprint *string `json:"deviceFingerprint,omitempty"`
 	// Donation account to which the transaction is credited.
 	DonationAccount *string `json:"donationAccount,omitempty"`
+	// The donation campaign ID received in the `/donationCampaigns` call.
+	DonationCampaignId *string `json:"donationCampaignId,omitempty"`
 	// PSP reference of the transaction from which the donation token is generated. Required when `donationToken` is provided.
 	DonationOriginalPspReference *string `json:"donationOriginalPspReference,omitempty"`
 	// Donation token received in the `/payments` call.
@@ -625,6 +627,38 @@ func (o *DonationPaymentRequest) HasDonationAccount() bool {
 // SetDonationAccount gets a reference to the given string and assigns it to the DonationAccount field.
 func (o *DonationPaymentRequest) SetDonationAccount(v string) {
 	o.DonationAccount = &v
+}
+
+// GetDonationCampaignId returns the DonationCampaignId field value if set, zero value otherwise.
+func (o *DonationPaymentRequest) GetDonationCampaignId() string {
+	if o == nil || common.IsNil(o.DonationCampaignId) {
+		var ret string
+		return ret
+	}
+	return *o.DonationCampaignId
+}
+
+// GetDonationCampaignIdOk returns a tuple with the DonationCampaignId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DonationPaymentRequest) GetDonationCampaignIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.DonationCampaignId) {
+		return nil, false
+	}
+	return o.DonationCampaignId, true
+}
+
+// HasDonationCampaignId returns a boolean if a field has been set.
+func (o *DonationPaymentRequest) HasDonationCampaignId() bool {
+	if o != nil && !common.IsNil(o.DonationCampaignId) {
+		return true
+	}
+
+	return false
+}
+
+// SetDonationCampaignId gets a reference to the given string and assigns it to the DonationCampaignId field.
+func (o *DonationPaymentRequest) SetDonationCampaignId(v string) {
+	o.DonationCampaignId = &v
 }
 
 // GetDonationOriginalPspReference returns the DonationOriginalPspReference field value if set, zero value otherwise.
@@ -1453,6 +1487,9 @@ func (o DonationPaymentRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.DonationAccount) {
 		toSerialize["donationAccount"] = o.DonationAccount
+	}
+	if !common.IsNil(o.DonationCampaignId) {
+		toSerialize["donationCampaignId"] = o.DonationCampaignId
 	}
 	if !common.IsNil(o.DonationOriginalPspReference) {
 		toSerialize["donationOriginalPspReference"] = o.DonationOriginalPspReference

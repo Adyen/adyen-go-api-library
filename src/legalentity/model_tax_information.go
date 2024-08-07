@@ -23,7 +23,7 @@ type TaxInformation struct {
 	Country *string `json:"country,omitempty"`
 	// The tax ID number (TIN) of the organization or individual.
 	Number *string `json:"number,omitempty"`
-	// The TIN type depending on the country where it was issued. Provide only for countries that have multiple tax IDs, such as Sweden, the UK, or the US. For example, provide **SSN**, **EIN**, or **ITIN** for the US.
+	// The TIN type depending on the country where it was issued. Only provide if the country has multiple tax IDs: Singapore, Sweden, the UK, or the US. For example, provide **SSN**, **EIN**, or **ITIN** for the US.
 	Type *string `json:"type,omitempty"`
 }
 

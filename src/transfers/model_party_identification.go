@@ -20,17 +20,17 @@ var _ common.MappedNullable = &PartyIdentification{}
 // PartyIdentification struct for PartyIdentification
 type PartyIdentification struct {
 	Address *Address `json:"address,omitempty"`
-	// The date of birth of the individual in [ISO-8601](https://www.w3.org/TR/NOTE-datetime) format. For example, **YYYY-MM-DD**. Should not be before January 1, 1900.  Allowed only when `type` is **individual**.
+	// The date of birth of the individual in [ISO-8601](https://www.w3.org/TR/NOTE-datetime) format. For example, **YYYY-MM-DD**.  Allowed only when `type` is **individual**.
 	DateOfBirth *string `json:"dateOfBirth,omitempty"`
-	// First name of the individual.  Allowed only when `type` is **individual**.  Supported characters: [a-z] [A-Z] - . / — and Space.
+	// The first name of the individual.  Supported characters: [a-z] [A-Z] - . / — and space.  This parameter is: - Allowed only when `type` is **individual**. - Required when `category` is **card**.
 	FirstName *string `json:"firstName,omitempty"`
-	// The name of the entity.  Supported characters: [a-z] [A-Z] [0-9] , . ; : - — / \\ + & ! ? @ ( ) \" ' and Space.
-	FullName string `json:"fullName"`
-	// Last name of the individual.  Allowed only when `type` is **individual**.  Supported characters: [a-z] [A-Z] - . / — and Space.
+	// The full name of the entity that owns the bank account or card.  Supported characters: [a-z] [A-Z] [0-9] , . ; : - — / \\ + & ! ? @ ( ) \" ' and space.  Required when `category` is **bank**.
+	FullName *string `json:"fullName,omitempty"`
+	// The last name of the individual.  Supported characters: [a-z] [A-Z] - . / — and space.  This parameter is: - Allowed only when `type` is **individual**. - Required when `category` is **card**.
 	LastName *string `json:"lastName,omitempty"`
-	// A unique reference to identify the party or counterparty involved in transfers. This identifier ensures consistency and uniqueness throughout all transactions initiated to and from the same party. For example, your client's unique wallet or payee ID.
+	// A unique reference to identify the party or counterparty involved in the transfer. For example, your client's unique wallet or payee ID.  Required when you include `cardIdentification.storedPaymentMethodId`.
 	Reference *string `json:"reference,omitempty"`
-	// The type of entity that owns the bank account.   Possible values: **individual**, **organization**, or **unknown**.
+	// The type of entity that owns the bank account or card.  Possible values: **individual**, **organization**, or **unknown**.  Required when `category` is **card**. In this case, the value must be **individual**.
 	Type *string `json:"type,omitempty"`
 }
 
@@ -38,9 +38,8 @@ type PartyIdentification struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPartyIdentification(fullName string) *PartyIdentification {
+func NewPartyIdentification() *PartyIdentification {
 	this := PartyIdentification{}
-	this.FullName = fullName
 	var type_ string = "unknown"
 	this.Type = &type_
 	return &this
@@ -152,28 +151,36 @@ func (o *PartyIdentification) SetFirstName(v string) {
 	o.FirstName = &v
 }
 
-// GetFullName returns the FullName field value
+// GetFullName returns the FullName field value if set, zero value otherwise.
 func (o *PartyIdentification) GetFullName() string {
-	if o == nil {
+	if o == nil || common.IsNil(o.FullName) {
 		var ret string
 		return ret
 	}
-
-	return o.FullName
+	return *o.FullName
 }
 
-// GetFullNameOk returns a tuple with the FullName field value
+// GetFullNameOk returns a tuple with the FullName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PartyIdentification) GetFullNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || common.IsNil(o.FullName) {
 		return nil, false
 	}
-	return &o.FullName, true
+	return o.FullName, true
 }
 
-// SetFullName sets field value
+// HasFullName returns a boolean if a field has been set.
+func (o *PartyIdentification) HasFullName() bool {
+	if o != nil && !common.IsNil(o.FullName) {
+		return true
+	}
+
+	return false
+}
+
+// SetFullName gets a reference to the given string and assigns it to the FullName field.
 func (o *PartyIdentification) SetFullName(v string) {
-	o.FullName = v
+	o.FullName = &v
 }
 
 // GetLastName returns the LastName field value if set, zero value otherwise.
@@ -291,7 +298,9 @@ func (o PartyIdentification) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.FirstName) {
 		toSerialize["firstName"] = o.FirstName
 	}
-	toSerialize["fullName"] = o.FullName
+	if !common.IsNil(o.FullName) {
+		toSerialize["fullName"] = o.FullName
+	}
 	if !common.IsNil(o.LastName) {
 		toSerialize["lastName"] = o.LastName
 	}

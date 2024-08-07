@@ -21,6 +21,8 @@ var _ common.MappedNullable = &GetTermsOfServiceDocumentRequest{}
 type GetTermsOfServiceDocumentRequest struct {
 	// The language to be used for the Terms of Service document, specified by the two-letter [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code. Possible value: **en** for English.
 	Language string `json:"language"`
+	// The requested format for the Terms of Service document. Default value: JSON. Possible values: JSON or PDF.
+	TermsOfServiceDocumentFormat *string `json:"termsOfServiceDocumentFormat,omitempty"`
 	// The type of Terms of Service.  Possible values: *  **adyenForPlatformsManage** *  **adyenIssuing** *  **adyenForPlatformsAdvanced** *  **adyenCapital** *  **adyenAccount** *  **adyenCard** *  **adyenFranchisee** *  **adyenPccr**
 	Type string `json:"type"`
 }
@@ -68,6 +70,38 @@ func (o *GetTermsOfServiceDocumentRequest) SetLanguage(v string) {
 	o.Language = v
 }
 
+// GetTermsOfServiceDocumentFormat returns the TermsOfServiceDocumentFormat field value if set, zero value otherwise.
+func (o *GetTermsOfServiceDocumentRequest) GetTermsOfServiceDocumentFormat() string {
+	if o == nil || common.IsNil(o.TermsOfServiceDocumentFormat) {
+		var ret string
+		return ret
+	}
+	return *o.TermsOfServiceDocumentFormat
+}
+
+// GetTermsOfServiceDocumentFormatOk returns a tuple with the TermsOfServiceDocumentFormat field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetTermsOfServiceDocumentRequest) GetTermsOfServiceDocumentFormatOk() (*string, bool) {
+	if o == nil || common.IsNil(o.TermsOfServiceDocumentFormat) {
+		return nil, false
+	}
+	return o.TermsOfServiceDocumentFormat, true
+}
+
+// HasTermsOfServiceDocumentFormat returns a boolean if a field has been set.
+func (o *GetTermsOfServiceDocumentRequest) HasTermsOfServiceDocumentFormat() bool {
+	if o != nil && !common.IsNil(o.TermsOfServiceDocumentFormat) {
+		return true
+	}
+
+	return false
+}
+
+// SetTermsOfServiceDocumentFormat gets a reference to the given string and assigns it to the TermsOfServiceDocumentFormat field.
+func (o *GetTermsOfServiceDocumentRequest) SetTermsOfServiceDocumentFormat(v string) {
+	o.TermsOfServiceDocumentFormat = &v
+}
+
 // GetType returns the Type field value
 func (o *GetTermsOfServiceDocumentRequest) GetType() string {
 	if o == nil {
@@ -103,6 +137,9 @@ func (o GetTermsOfServiceDocumentRequest) MarshalJSON() ([]byte, error) {
 func (o GetTermsOfServiceDocumentRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["language"] = o.Language
+	if !common.IsNil(o.TermsOfServiceDocumentFormat) {
+		toSerialize["termsOfServiceDocumentFormat"] = o.TermsOfServiceDocumentFormat
+	}
 	toSerialize["type"] = o.Type
 	return toSerialize, nil
 }

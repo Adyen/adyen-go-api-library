@@ -60,9 +60,10 @@ type PaymentMethod struct {
 	ShopperInteraction *string     `json:"shopperInteraction,omitempty"`
 	Sofort             *SofortInfo `json:"sofort,omitempty"`
 	// The unique identifier of the store for which to configure the payment method, if any.
-	StoreIds []string   `json:"storeIds,omitempty"`
-	Swish    *SwishInfo `json:"swish,omitempty"`
-	Twint    *TwintInfo `json:"twint,omitempty"`
+	StoreIds []string    `json:"storeIds,omitempty"`
+	Swish    *SwishInfo  `json:"swish,omitempty"`
+	Ticket   *TicketInfo `json:"ticket,omitempty"`
+	Twint    *TwintInfo  `json:"twint,omitempty"`
 	// Payment method [variant](https://docs.adyen.com/development-resources/paymentmethodvariant#management-api).
 	Type *string `json:"type,omitempty"`
 	// Payment method status. Possible values: * **valid** * **pending** * **invalid** * **rejected**
@@ -1139,6 +1140,38 @@ func (o *PaymentMethod) SetSwish(v SwishInfo) {
 	o.Swish = &v
 }
 
+// GetTicket returns the Ticket field value if set, zero value otherwise.
+func (o *PaymentMethod) GetTicket() TicketInfo {
+	if o == nil || common.IsNil(o.Ticket) {
+		var ret TicketInfo
+		return ret
+	}
+	return *o.Ticket
+}
+
+// GetTicketOk returns a tuple with the Ticket field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethod) GetTicketOk() (*TicketInfo, bool) {
+	if o == nil || common.IsNil(o.Ticket) {
+		return nil, false
+	}
+	return o.Ticket, true
+}
+
+// HasTicket returns a boolean if a field has been set.
+func (o *PaymentMethod) HasTicket() bool {
+	if o != nil && !common.IsNil(o.Ticket) {
+		return true
+	}
+
+	return false
+}
+
+// SetTicket gets a reference to the given TicketInfo and assigns it to the Ticket field.
+func (o *PaymentMethod) SetTicket(v TicketInfo) {
+	o.Ticket = &v
+}
+
 // GetTwint returns the Twint field value if set, zero value otherwise.
 func (o *PaymentMethod) GetTwint() TwintInfo {
 	if o == nil || common.IsNil(o.Twint) {
@@ -1469,6 +1502,9 @@ func (o PaymentMethod) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Swish) {
 		toSerialize["swish"] = o.Swish
+	}
+	if !common.IsNil(o.Ticket) {
+		toSerialize["ticket"] = o.Ticket
 	}
 	if !common.IsNil(o.Twint) {
 		toSerialize["twint"] = o.Twint

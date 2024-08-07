@@ -44,7 +44,7 @@ type LegalEntity struct {
 	Type *string `json:"type,omitempty"`
 	// List of verification deadlines and the capabilities that will be disallowed if verification errors are not resolved.
 	VerificationDeadlines []VerificationDeadline `json:"verificationDeadlines,omitempty"`
-	// A key-value pair that specifies the verification process for a legal entity. Set to **upfront** for upfront verification for [marketplaces](https://docs.adyen.com/marketplaces/onboard-users#upfront).
+	// A key-value pair that specifies the verification process for a legal entity. Set to **upfront** for upfront verification for [marketplaces](https://docs.adyen.com/marketplaces/verification-overview/verification-types/#upfront-verification).
 	VerificationPlan *string `json:"verificationPlan,omitempty"`
 }
 
