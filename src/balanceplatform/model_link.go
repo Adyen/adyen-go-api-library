@@ -10,7 +10,8 @@ package balanceplatform
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v11/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v11/src/common"
 )
 
 // checks if the Link type satisfies the MappedNullable interface at compile time
@@ -18,11 +19,11 @@ var _ common.MappedNullable = &Link{}
 
 // Link struct for Link
 type Link struct {
-	First *Href `json:"first,omitempty"`
-	Last *Href `json:"last,omitempty"`
-	Next *Href `json:"next,omitempty"`
+	First    *Href `json:"first,omitempty"`
+	Last     *Href `json:"last,omitempty"`
+	Next     *Href `json:"next,omitempty"`
 	Previous *Href `json:"previous,omitempty"`
-	Self *Href `json:"self,omitempty"`
+	Self     *Href `json:"self,omitempty"`
 }
 
 // NewLink instantiates a new Link object
@@ -203,7 +204,7 @@ func (o *Link) SetSelf(v Href) {
 }
 
 func (o Link) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -265,6 +266,3 @@ func (v *NullableLink) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

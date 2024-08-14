@@ -10,7 +10,8 @@ package legalentity
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v11/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v11/src/common"
 )
 
 // checks if the SupportingEntityCapability type satisfies the MappedNullable interface at compile time
@@ -20,11 +21,11 @@ var _ common.MappedNullable = &SupportingEntityCapability{}
 type SupportingEntityCapability struct {
 	// Indicates whether the capability is allowed for the supporting entity.  If a capability is allowed for a supporting entity but not for the parent legal entity, this means the legal entity has other supporting entities that failed verification.  **You can use the allowed supporting entity** regardless of the verification status of other supporting entities.
 	Allowed *bool `json:"allowed,omitempty"`
-	// Supporting entity reference 
+	// Supporting entity reference
 	Id *string `json:"id,omitempty"`
-	// Indicates whether the supporting entity capability is requested. 
+	// Indicates whether the supporting entity capability is requested.
 	Requested *bool `json:"requested,omitempty"`
-	// The status of the verification checks for the capability of the supporting entity.  Possible values:  * **pending**: Adyen is running the verification.  * **invalid**: The verification failed. Check if the `errors` array contains more information.  * **valid**: The verification has been successfully completed.  * **rejected**: Adyen has verified the information, but found reasons to not allow the capability. 
+	// The status of the verification checks for the capability of the supporting entity.  Possible values:  * **pending**: Adyen is running the verification.  * **invalid**: The verification failed. Check if the `errors` array contains more information.  * **valid**: The verification has been successfully completed.  * **rejected**: Adyen has verified the information, but found reasons to not allow the capability.
 	VerificationStatus *string `json:"verificationStatus,omitempty"`
 }
 
@@ -174,7 +175,7 @@ func (o *SupportingEntityCapability) SetVerificationStatus(v string) {
 }
 
 func (o SupportingEntityCapability) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -233,6 +234,3 @@ func (v *NullableSupportingEntityCapability) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

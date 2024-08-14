@@ -10,8 +10,9 @@ package recurring
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v11/src/common"
 	"time"
+
+	"github.com/adyen/adyen-go-api-library/v11/src/common"
 )
 
 // checks if the RecurringDetail type satisfies the MappedNullable interface at compile time
@@ -24,10 +25,10 @@ type RecurringDetail struct {
 	// The alias of the credit card number.  Applies only to recurring contracts storing credit card details
 	Alias *string `json:"alias,omitempty"`
 	// The alias type of the credit card number.  Applies only to recurring contracts storing credit card details.
-	AliasType *string `json:"aliasType,omitempty"`
-	Bank *BankAccount `json:"bank,omitempty"`
-	BillingAddress *Address `json:"billingAddress,omitempty"`
-	Card *Card `json:"card,omitempty"`
+	AliasType      *string      `json:"aliasType,omitempty"`
+	Bank           *BankAccount `json:"bank,omitempty"`
+	BillingAddress *Address     `json:"billingAddress,omitempty"`
+	Card           *Card        `json:"card,omitempty"`
 	// Types of recurring contracts.
 	ContractTypes []string `json:"contractTypes,omitempty"`
 	// The date when the recurring details were created.
@@ -42,10 +43,10 @@ type RecurringDetail struct {
 	PaymentMethodVariant *string `json:"paymentMethodVariant,omitempty"`
 	// The reference that uniquely identifies the recurring detail.
 	RecurringDetailReference string `json:"recurringDetailReference"`
-	ShopperName *Name `json:"shopperName,omitempty"`
+	ShopperName              *Name  `json:"shopperName,omitempty"`
 	// A shopper's social security number (only in countries where it is legal to collect).
-	SocialSecurityNumber *string `json:"socialSecurityNumber,omitempty"`
-	TokenDetails *TokenDetails `json:"tokenDetails,omitempty"`
+	SocialSecurityNumber *string       `json:"socialSecurityNumber,omitempty"`
+	TokenDetails         *TokenDetails `json:"tokenDetails,omitempty"`
 	// The payment method, such as “mc\", \"visa\", \"ideal\", \"paypal\".
 	Variant string `json:"variant"`
 }
@@ -598,7 +599,7 @@ func (o *RecurringDetail) SetVariant(v string) {
 }
 
 func (o RecurringDetail) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -692,6 +693,3 @@ func (v *NullableRecurringDetail) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-
