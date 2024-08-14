@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v11/src/common"
+    "github.com/adyen/adyen-go-api-library/v11/src/common"
 )
 
 // checks if the OnboardingLinkSettings type satisfies the MappedNullable interface at compile time
@@ -19,21 +18,36 @@ var _ common.MappedNullable = &OnboardingLinkSettings{}
 
 // OnboardingLinkSettings struct for OnboardingLinkSettings
 type OnboardingLinkSettings struct {
-	AcceptedCountries                        []string `json:"acceptedCountries,omitempty"`
-	AllowBankAccountFormatSelection          *bool    `json:"allowBankAccountFormatSelection,omitempty"`
-	AllowIntraRegionCrossBorderPayout        *bool    `json:"allowIntraRegionCrossBorderPayout,omitempty"`
-	ChangeLegalEntityType                    *bool    `json:"changeLegalEntityType,omitempty"`
-	EditPrefilledCountry                     *bool    `json:"editPrefilledCountry,omitempty"`
-	HideOnboardingIntroductionIndividual     *bool    `json:"hideOnboardingIntroductionIndividual,omitempty"`
-	HideOnboardingIntroductionOrganization   *bool    `json:"hideOnboardingIntroductionOrganization,omitempty"`
-	HideOnboardingIntroductionSoleProprietor *bool    `json:"hideOnboardingIntroductionSoleProprietor,omitempty"`
-	HideOnboardingIntroductionTrust          *bool    `json:"hideOnboardingIntroductionTrust,omitempty"`
-	InstantBankVerification                  *bool    `json:"instantBankVerification,omitempty"`
-	RequirePciSignEcomMoto                   *bool    `json:"requirePciSignEcomMoto,omitempty"`
-	RequirePciSignEcommerce                  *bool    `json:"requirePciSignEcommerce,omitempty"`
-	RequirePciSignPos                        *bool    `json:"requirePciSignPos,omitempty"`
-	RequirePciSignPosMoto                    *bool    `json:"requirePciSignPosMoto,omitempty"`
-	TransferInstrumentLimit                  *int32   `json:"transferInstrumentLimit,omitempty"`
+	// The list of countries the user can choose from in hosted onboarding when `editPrefilledCountry` is allowed.  The value must be in the two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code format.  The array is empty by default, allowing all [countries and regions supported by hosted onboarding](https://docs.adyen.com/platforms/onboard-users/#hosted-onboarding).
+	AcceptedCountries []string `json:"acceptedCountries,omitempty"`
+	// Default value: **false**  Indicates if the user can select the format for their payout account (if applicable).
+	AllowBankAccountFormatSelection *bool `json:"allowBankAccountFormatSelection,omitempty"`
+	// Default value: **false**  Indicates if the user can select a payout account in a different EU/EEA location (including Switzerland and the UK) than the location of their legal entity.
+	AllowIntraRegionCrossBorderPayout *bool `json:"allowIntraRegionCrossBorderPayout,omitempty"`
+	// Default value: **true**  Indicates if the user can change their legal entity type.
+	ChangeLegalEntityType *bool `json:"changeLegalEntityType,omitempty"`
+	// Default value: **true**  Indicates if the user can change the country of their legal entity's address, for example the registered address of an organization.
+	EditPrefilledCountry *bool `json:"editPrefilledCountry,omitempty"`
+	// Default value: **false**  Indicates if the user of the individual legal entity type can view the introduction screen. The introduction screen provides brief instructions for the subsequent steps in the hosted onboarding process.
+	HideOnboardingIntroductionIndividual *bool `json:"hideOnboardingIntroductionIndividual,omitempty"`
+	// Default value: **false**  Indicates if the user of the organization legal entity type can view the introduction screen. The introduction screen provides brief instructions for the subsequent steps in the hosted onboarding process.
+	HideOnboardingIntroductionOrganization *bool `json:"hideOnboardingIntroductionOrganization,omitempty"`
+	// Default value: **false**  Indicates if the user of the sole proprietorship legal entity type can view the introduction screen. The introduction screen provides brief instructions for the subsequent steps in the hosted onboarding process.
+	HideOnboardingIntroductionSoleProprietor *bool `json:"hideOnboardingIntroductionSoleProprietor,omitempty"`
+	// Default value: **false**  Indicates if the user of the trust legal entity type can view the introduction screen. The introduction screen provides brief instructions for the subsequent steps in the hosted onboarding process.
+	HideOnboardingIntroductionTrust *bool `json:"hideOnboardingIntroductionTrust,omitempty"`
+	// Default value: **true**  Indicates if the user can initiate the verification process through open banking providers, like Plaid or Tink.
+	InstantBankVerification *bool `json:"instantBankVerification,omitempty"`
+	// Default value: **false**  Indicates if the user is required to sign a PCI questionnaires for the **ecomMoto** sales channel type.
+	RequirePciSignEcomMoto *bool `json:"requirePciSignEcomMoto,omitempty"`
+	// Default value: **false**  Indicates if the user is required to sign a PCI questionnaires for the **eCommerce** sales channel type.
+	RequirePciSignEcommerce *bool `json:"requirePciSignEcommerce,omitempty"`
+	// Default value: **false**  Indicates if the user is required to sign a PCI questionnaires for the **pos** sales channel type.
+	RequirePciSignPos *bool `json:"requirePciSignPos,omitempty"`
+	// Default value: **false**  Indicates if the user is required to sign a PCI questionnaires for the **posMoto** sales channel type.
+	RequirePciSignPosMoto *bool `json:"requirePciSignPosMoto,omitempty"`
+	// The maximum number of transfer instruments the user can create.
+	TransferInstrumentLimit *int32 `json:"transferInstrumentLimit,omitempty"`
 }
 
 // NewOnboardingLinkSettings instantiates a new OnboardingLinkSettings object
@@ -534,7 +548,7 @@ func (o *OnboardingLinkSettings) SetTransferInstrumentLimit(v int32) {
 }
 
 func (o OnboardingLinkSettings) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -626,3 +640,6 @@ func (v *NullableOnboardingLinkSettings) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

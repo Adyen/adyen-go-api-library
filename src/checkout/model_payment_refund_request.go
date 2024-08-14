@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v11/src/common"
+    "github.com/adyen/adyen-go-api-library/v11/src/common"
 )
 
 // checks if the PaymentRefundRequest type satisfies the MappedNullable interface at compile time
@@ -19,7 +18,7 @@ var _ common.MappedNullable = &PaymentRefundRequest{}
 
 // PaymentRefundRequest struct for PaymentRefundRequest
 type PaymentRefundRequest struct {
-	Amount          Amount           `json:"amount"`
+	Amount Amount `json:"amount"`
 	ApplicationInfo *ApplicationInfo `json:"applicationInfo,omitempty"`
 	// Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment). > This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Atome, Clearpay, Klarna, Ratepay, Walley, and Zip.
 	LineItems []LineItem `json:"lineItems,omitempty"`
@@ -198,7 +197,6 @@ func (o *PaymentRefundRequest) HasMerchantRefundReason() bool {
 func (o *PaymentRefundRequest) SetMerchantRefundReason(v string) {
 	o.MerchantRefundReason.Set(&v)
 }
-
 // SetMerchantRefundReasonNil sets the value for MerchantRefundReason to be an explicit nil
 func (o *PaymentRefundRequest) SetMerchantRefundReasonNil() {
 	o.MerchantRefundReason.Set(nil)
@@ -306,7 +304,7 @@ func (o *PaymentRefundRequest) SetStore(v string) {
 }
 
 func (o PaymentRefundRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -374,12 +372,14 @@ func (v *NullablePaymentRefundRequest) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *PaymentRefundRequest) isValidMerchantRefundReason() bool {
-	var allowedEnumValues = []string{"FRAUD", "CUSTOMER REQUEST", "RETURN", "DUPLICATE", "OTHER"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetMerchantRefundReason() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "FRAUD", "CUSTOMER REQUEST", "RETURN", "DUPLICATE", "OTHER" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetMerchantRefundReason() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v11/src/common"
+    "github.com/adyen/adyen-go-api-library/v11/src/common"
 )
 
 // checks if the DataReviewConfirmationResponse type satisfies the MappedNullable interface at compile time
@@ -73,7 +72,7 @@ func (o *DataReviewConfirmationResponse) SetDataReviewedAt(v string) {
 }
 
 func (o DataReviewConfirmationResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -123,3 +122,6 @@ func (v *NullableDataReviewConfirmationResponse) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

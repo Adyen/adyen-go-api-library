@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v11/src/common"
+    "github.com/adyen/adyen-go-api-library/v11/src/common"
 )
 
 // checks if the TaxInformation type satisfies the MappedNullable interface at compile time
@@ -23,7 +22,7 @@ type TaxInformation struct {
 	Country *string `json:"country,omitempty"`
 	// The tax ID number (TIN) of the organization or individual.
 	Number *string `json:"number,omitempty"`
-	// The TIN type depending on the country where it was issued. Provide only for countries that have multiple tax IDs, such as Sweden, the UK, or the US. For example, provide **SSN**, **EIN**, or **ITIN** for the US.
+	// The TIN type depending on the country where it was issued. Only provide if the country has multiple tax IDs: Singapore, Sweden, the UK, or the US. For example, provide **SSN**, **EIN**, or **ITIN** for the US.
 	Type *string `json:"type,omitempty"`
 }
 
@@ -141,7 +140,7 @@ func (o *TaxInformation) SetType(v string) {
 }
 
 func (o TaxInformation) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -197,3 +196,6 @@ func (v *NullableTaxInformation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

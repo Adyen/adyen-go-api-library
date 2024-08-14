@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v11/src/common"
+    "github.com/adyen/adyen-go-api-library/v11/src/common"
 )
 
 // checks if the UpdateCompanyUserRequest type satisfies the MappedNullable interface at compile time
@@ -27,9 +26,9 @@ type UpdateCompanyUserRequest struct {
 	AssociatedMerchantAccounts []string `json:"associatedMerchantAccounts,omitempty"`
 	// The email address of the user.
 	Email *string `json:"email,omitempty"`
-	// The requested login method for the user. To use SSO, you must already have SSO configured with Adyen before creating the user.  Possible values: **Username & account**, **Email**, or **SSO**
+	// The requested login method for the user. To use SSO, you must already have SSO configured with Adyen before creating the user.  Possible values: **Username & account**, **Email**, or **SSO** 
 	LoginMethod *string `json:"loginMethod,omitempty"`
-	Name        *Name2  `json:"name,omitempty"`
+	Name *Name2 `json:"name,omitempty"`
 	// The list of [roles](https://docs.adyen.com/account/user-roles) for this user.
 	Roles []string `json:"roles,omitempty"`
 	// The [tz database name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) of the time zone of the user. For example, **Europe/Amsterdam**.
@@ -310,7 +309,7 @@ func (o *UpdateCompanyUserRequest) SetTimeZoneCode(v string) {
 }
 
 func (o UpdateCompanyUserRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -381,3 +380,6 @@ func (v *NullableUpdateCompanyUserRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

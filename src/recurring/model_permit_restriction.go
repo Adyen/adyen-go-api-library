@@ -10,8 +10,7 @@ package recurring
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v11/src/common"
+    "github.com/adyen/adyen-go-api-library/v11/src/common"
 )
 
 // checks if the PermitRestriction type satisfies the MappedNullable interface at compile time
@@ -19,7 +18,7 @@ var _ common.MappedNullable = &PermitRestriction{}
 
 // PermitRestriction struct for PermitRestriction
 type PermitRestriction struct {
-	MaxAmount              *Amount `json:"maxAmount,omitempty"`
+	MaxAmount *Amount `json:"maxAmount,omitempty"`
 	SingleTransactionLimit *Amount `json:"singleTransactionLimit,omitempty"`
 	// Only a single payment can be made using this permit if set to true, otherwise multiple payments are allowed.
 	SingleUse *bool `json:"singleUse,omitempty"`
@@ -139,7 +138,7 @@ func (o *PermitRestriction) SetSingleUse(v bool) {
 }
 
 func (o PermitRestriction) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +194,6 @@ func (v *NullablePermitRestriction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

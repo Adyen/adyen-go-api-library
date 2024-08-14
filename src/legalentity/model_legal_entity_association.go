@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v11/src/common"
+    "github.com/adyen/adyen-go-api-library/v11/src/common"
 )
 
 // checks if the LegalEntityAssociation type satisfies the MappedNullable interface at compile time
@@ -29,9 +28,11 @@ type LegalEntityAssociation struct {
 	LegalEntityId string `json:"legalEntityId"`
 	// The name of the associated [legal entity](https://docs.adyen.com/api-explorer/legalentity/latest/post/legalEntities#responses-200-id).  - For **individual**, `name.firstName` and `name.lastName`. - For **organization**, `legalName`. - For **soleProprietorship**, `name`.
 	Name *string `json:"name,omitempty"`
+	// The individual's relationship to a legal representative if the `type` is **legalRepresentative**. Possible values: **parent**, **guardian**.
+	Relationship *string `json:"relationship,omitempty"`
 	// Defines the Kyc Exemption Reason for a Settlor associated with a trust.  For example, **professionalServiceProvider**, **deceased**, or **contributionBelowThreshold**.
 	SettlorExemptionReason []string `json:"settlorExemptionReason,omitempty"`
-	// Defines the relationship of the legal entity to the current legal entity.  Possible values for organizations: **uboThroughOwnership**, **uboThroughControl**, **director**, **signatory**, or **ultimateParentCompany**.  Possible values for sole proprietorships: **soleProprietorship**.  Possible value for trusts: **trust**  Possible values for trust members: **definedBeneficiary**, **protector**, **secondaryTrustee**, **settlor**, **uboThroughControl**, or **uboThroughOwnership**.
+	// Defines the relationship of the legal entity to the current legal entity.  Possible value for individuals: **legalRepresentative**.  Possible values for organizations: **uboThroughOwnership**, **uboThroughControl**, **director**, **signatory**, or **ultimateParentCompany**.  Possible values for sole proprietorships: **soleProprietorship**.  Possible value for trusts: **trust**.  Possible values for trust members: **definedBeneficiary**, **protector**, **secondaryTrustee**, **settlor**, **uboThroughControl**, or **uboThroughOwnership**.
 	Type string `json:"type"`
 }
 
@@ -206,6 +207,38 @@ func (o *LegalEntityAssociation) SetName(v string) {
 	o.Name = &v
 }
 
+// GetRelationship returns the Relationship field value if set, zero value otherwise.
+func (o *LegalEntityAssociation) GetRelationship() string {
+	if o == nil || common.IsNil(o.Relationship) {
+		var ret string
+		return ret
+	}
+	return *o.Relationship
+}
+
+// GetRelationshipOk returns a tuple with the Relationship field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LegalEntityAssociation) GetRelationshipOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Relationship) {
+		return nil, false
+	}
+	return o.Relationship, true
+}
+
+// HasRelationship returns a boolean if a field has been set.
+func (o *LegalEntityAssociation) HasRelationship() bool {
+	if o != nil && !common.IsNil(o.Relationship) {
+		return true
+	}
+
+	return false
+}
+
+// SetRelationship gets a reference to the given string and assigns it to the Relationship field.
+func (o *LegalEntityAssociation) SetRelationship(v string) {
+	o.Relationship = &v
+}
+
 // GetSettlorExemptionReason returns the SettlorExemptionReason field value if set, zero value otherwise.
 func (o *LegalEntityAssociation) GetSettlorExemptionReason() []string {
 	if o == nil || common.IsNil(o.SettlorExemptionReason) {
@@ -263,7 +296,7 @@ func (o *LegalEntityAssociation) SetType(v string) {
 }
 
 func (o LegalEntityAssociation) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -284,6 +317,9 @@ func (o LegalEntityAssociation) ToMap() (map[string]interface{}, error) {
 	toSerialize["legalEntityId"] = o.LegalEntityId
 	if !common.IsNil(o.Name) {
 		toSerialize["name"] = o.Name
+	}
+	if !common.IsNil(o.Relationship) {
+		toSerialize["relationship"] = o.Relationship
 	}
 	if !common.IsNil(o.SettlorExemptionReason) {
 		toSerialize["settlorExemptionReason"] = o.SettlorExemptionReason
@@ -328,12 +364,14 @@ func (v *NullableLegalEntityAssociation) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *LegalEntityAssociation) isValidType() bool {
-	var allowedEnumValues = []string{"definedBeneficiary", "director", "immediateParentCompany", "pciSignatory", "protector", "secondaryTrustee", "settlor", "signatory", "soleProprietorship", "trust", "trustOwnership", "uboThroughControl", "uboThroughOwnership", "ultimateParentCompany", "undefinedBeneficiary"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "definedBeneficiary", "director", "immediateParentCompany", "legalRepresentative", "pciSignatory", "protector", "secondaryTrustee", "settlor", "signatory", "soleProprietorship", "trust", "trustOwnership", "uboThroughControl", "uboThroughOwnership", "ultimateParentCompany", "undefinedBeneficiary" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

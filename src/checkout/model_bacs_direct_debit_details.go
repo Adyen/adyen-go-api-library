@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v11/src/common"
+    "github.com/adyen/adyen-go-api-library/v11/src/common"
 )
 
 // checks if the BacsDirectDebitDetails type satisfies the MappedNullable interface at compile time
@@ -32,6 +31,8 @@ type BacsDirectDebitDetails struct {
 	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
 	StoredPaymentMethodId *string `json:"storedPaymentMethodId,omitempty"`
+	// The unique identifier of your user's verified transfer instrument, which you can use to top up their balance accounts.
+	TransferInstrumentId *string `json:"transferInstrumentId,omitempty"`
 	// **directdebit_GB**
 	Type *string `json:"type,omitempty"`
 }
@@ -252,6 +253,38 @@ func (o *BacsDirectDebitDetails) SetStoredPaymentMethodId(v string) {
 	o.StoredPaymentMethodId = &v
 }
 
+// GetTransferInstrumentId returns the TransferInstrumentId field value if set, zero value otherwise.
+func (o *BacsDirectDebitDetails) GetTransferInstrumentId() string {
+	if o == nil || common.IsNil(o.TransferInstrumentId) {
+		var ret string
+		return ret
+	}
+	return *o.TransferInstrumentId
+}
+
+// GetTransferInstrumentIdOk returns a tuple with the TransferInstrumentId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BacsDirectDebitDetails) GetTransferInstrumentIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.TransferInstrumentId) {
+		return nil, false
+	}
+	return o.TransferInstrumentId, true
+}
+
+// HasTransferInstrumentId returns a boolean if a field has been set.
+func (o *BacsDirectDebitDetails) HasTransferInstrumentId() bool {
+	if o != nil && !common.IsNil(o.TransferInstrumentId) {
+		return true
+	}
+
+	return false
+}
+
+// SetTransferInstrumentId gets a reference to the given string and assigns it to the TransferInstrumentId field.
+func (o *BacsDirectDebitDetails) SetTransferInstrumentId(v string) {
+	o.TransferInstrumentId = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *BacsDirectDebitDetails) GetType() string {
 	if o == nil || common.IsNil(o.Type) {
@@ -285,7 +318,7 @@ func (o *BacsDirectDebitDetails) SetType(v string) {
 }
 
 func (o BacsDirectDebitDetails) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -311,6 +344,9 @@ func (o BacsDirectDebitDetails) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.StoredPaymentMethodId) {
 		toSerialize["storedPaymentMethodId"] = o.StoredPaymentMethodId
+	}
+	if !common.IsNil(o.TransferInstrumentId) {
+		toSerialize["transferInstrumentId"] = o.TransferInstrumentId
 	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type
@@ -354,12 +390,14 @@ func (v *NullableBacsDirectDebitDetails) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *BacsDirectDebitDetails) isValidType() bool {
-	var allowedEnumValues = []string{"directdebit_GB"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "directdebit_GB" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

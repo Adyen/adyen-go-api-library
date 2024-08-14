@@ -10,10 +10,10 @@ package checkout
 
 import (
 	"context"
-	"net/http"
-	"net/url"
-
-	"github.com/adyen/adyen-go-api-library/v11/src/common"
+    "net/http"
+    "net/url"
+    "strings"
+    "github.com/adyen/adyen-go-api-library/v11/src/common"
 )
 
 // OrdersApi service
@@ -21,7 +21,7 @@ type OrdersApi common.Service
 
 // All parameters accepted by OrdersApi.CancelOrder
 type OrdersApiCancelOrderInput struct {
-	idempotencyKey     *string
+	idempotencyKey *string
 	cancelOrderRequest *CancelOrderRequest
 }
 
@@ -36,13 +36,15 @@ func (r OrdersApiCancelOrderInput) CancelOrderRequest(cancelOrderRequest CancelO
 	return r
 }
 
+
 /*
 Prepare a request for CancelOrder
 
 @return OrdersApiCancelOrderInput
 */
 func (a *OrdersApi) CancelOrderInput() OrdersApiCancelOrderInput {
-	return OrdersApiCancelOrderInput{}
+	return OrdersApiCancelOrderInput{
+	}
 }
 
 /*
@@ -55,30 +57,32 @@ Cancels an order. Cancellation of an order results in an automatic rollback of a
 @return CancelOrderResponse, *http.Response, error
 */
 func (a *OrdersApi) CancelOrder(ctx context.Context, r OrdersApiCancelOrderInput) (CancelOrderResponse, *http.Response, error) {
-	res := &CancelOrderResponse{}
+    res := &CancelOrderResponse{}
 	path := "/orders/cancel"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	if r.idempotencyKey != nil {
-		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
-	}
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.cancelOrderRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    if r.idempotencyKey != nil {
+        common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
+    }
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.cancelOrderRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by OrdersApi.GetBalanceOfGiftCard
 type OrdersApiGetBalanceOfGiftCardInput struct {
-	idempotencyKey      *string
+	idempotencyKey *string
 	balanceCheckRequest *BalanceCheckRequest
 }
 
@@ -93,13 +97,15 @@ func (r OrdersApiGetBalanceOfGiftCardInput) BalanceCheckRequest(balanceCheckRequ
 	return r
 }
 
+
 /*
 Prepare a request for GetBalanceOfGiftCard
 
 @return OrdersApiGetBalanceOfGiftCardInput
 */
 func (a *OrdersApi) GetBalanceOfGiftCardInput() OrdersApiGetBalanceOfGiftCardInput {
-	return OrdersApiGetBalanceOfGiftCardInput{}
+	return OrdersApiGetBalanceOfGiftCardInput{
+	}
 }
 
 /*
@@ -112,30 +118,32 @@ Retrieves the balance remaining on a shopper's gift card. To check a gift card's
 @return BalanceCheckResponse, *http.Response, error
 */
 func (a *OrdersApi) GetBalanceOfGiftCard(ctx context.Context, r OrdersApiGetBalanceOfGiftCardInput) (BalanceCheckResponse, *http.Response, error) {
-	res := &BalanceCheckResponse{}
+    res := &BalanceCheckResponse{}
 	path := "/paymentMethods/balance"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	if r.idempotencyKey != nil {
-		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
-	}
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.balanceCheckRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    if r.idempotencyKey != nil {
+        common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
+    }
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.balanceCheckRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by OrdersApi.Orders
 type OrdersApiOrdersInput struct {
-	idempotencyKey     *string
+	idempotencyKey *string
 	createOrderRequest *CreateOrderRequest
 }
 
@@ -150,13 +158,15 @@ func (r OrdersApiOrdersInput) CreateOrderRequest(createOrderRequest CreateOrderR
 	return r
 }
 
+
 /*
 Prepare a request for Orders
 
 @return OrdersApiOrdersInput
 */
 func (a *OrdersApi) OrdersInput() OrdersApiOrdersInput {
-	return OrdersApiOrdersInput{}
+	return OrdersApiOrdersInput{
+	}
 }
 
 /*
@@ -169,23 +179,25 @@ Creates an order to be used for partial payments. Make a POST `/orders` call bef
 @return CreateOrderResponse, *http.Response, error
 */
 func (a *OrdersApi) Orders(ctx context.Context, r OrdersApiOrdersInput) (CreateOrderResponse, *http.Response, error) {
-	res := &CreateOrderResponse{}
+    res := &CreateOrderResponse{}
 	path := "/orders"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	if r.idempotencyKey != nil {
-		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
-	}
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.createOrderRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    if r.idempotencyKey != nil {
+        common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
+    }
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.createOrderRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+
