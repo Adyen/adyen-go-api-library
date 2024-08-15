@@ -147,12 +147,10 @@ CancelOrRefund Cancel or refund a payment
 Cancels a payment if it has not been captured yet, or refunds it if it has already been captured. This is useful when it is not certain if the payment has been captured or not (for example, when using auto-capture).
 
 Do not use this endpoint for payments that involve:
+ * [Multiple partial captures](https://docs.adyen.com/online-payments/capture).
+ * [Split data](https://docs.adyen.com/classic-platforms/processing-payments#providing-split-information) either at time of payment or capture for Adyen for Platforms.
 
-  - [Multiple partial captures](https://docs.adyen.com/online-payments/capture).
-
-  - [Split data](https://docs.adyen.com/classic-platforms/processing-payments#providing-split-information) either at time of payment or capture for Adyen for Platforms.
-
-    Instead, check if the payment has been captured and make a corresponding [`/refund`](https://docs.adyen.com/api-explorer/#/Payment/refund) or [`/cancel`](https://docs.adyen.com/api-explorer/#/Payment/cancel) call.
+ Instead, check if the payment has been captured and make a corresponding [`/refund`](https://docs.adyen.com/api-explorer/#/Payment/refund) or [`/cancel`](https://docs.adyen.com/api-explorer/#/Payment/cancel) call.
 
 For more information, refer to [Cancel or refund](https://docs.adyen.com/online-payments/classic-integrations/modify-payments/cancel-or-refund).
 
@@ -211,6 +209,8 @@ For more information refer to [Capture](https://docs.adyen.com/online-payments/c
 
 > This endpoint is part of our [classic API integration](https://docs.adyen.com/online-payments/classic-integrations/api-integration-ecommerce). If using a [newer integration](https://docs.adyen.com/online-payments), use the [`/payments/{paymentPspReference}/captures`](https://docs.adyen.com/api-explorer/#/CheckoutService/v67/post/payments/{paymentPspReference}/captures) endpoint on Checkout API instead.
 
+
+
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r ModificationsApiCaptureInput - Request parameters, see CaptureInput
 @return ModificationResult, *http.Response, error
@@ -266,7 +266,7 @@ Schedules a new payment to be created (including a new authorisation request) fo
 @param r ModificationsApiDonateInput - Request parameters, see DonateInput
 @return ModificationResult, *http.Response, error
 
-	Deprecated
+    Deprecated
 */
 func (a *ModificationsApi) Donate(ctx context.Context, r ModificationsApiDonateInput) (ModificationResult, *http.Response, error) {
 	res := &ModificationResult{}

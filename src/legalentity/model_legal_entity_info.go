@@ -31,7 +31,7 @@ type LegalEntityInfo struct {
 	Trust              *Trust              `json:"trust,omitempty"`
 	// The type of legal entity.  Possible values: **individual**, **organization**, **soleProprietorship**, or **trust**.
 	Type *string `json:"type,omitempty"`
-	// A key-value pair that specifies the verification process for a legal entity. Set to **upfront** for upfront verification for [marketplaces](https://docs.adyen.com/marketplaces/onboard-users#upfront).
+	// A key-value pair that specifies the verification process for a legal entity. Set to **upfront** for upfront verification for [marketplaces](https://docs.adyen.com/marketplaces/verification-overview/verification-types/#upfront-verification).
 	VerificationPlan *string `json:"verificationPlan,omitempty"`
 }
 

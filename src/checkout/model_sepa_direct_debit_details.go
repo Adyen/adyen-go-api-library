@@ -30,6 +30,8 @@ type SepaDirectDebitDetails struct {
 	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
 	StoredPaymentMethodId *string `json:"storedPaymentMethodId,omitempty"`
+	// The unique identifier of your user's verified transfer instrument, which you can use to top up their balance accounts.
+	TransferInstrumentId *string `json:"transferInstrumentId,omitempty"`
 	// **sepadirectdebit**
 	Type *string `json:"type,omitempty"`
 }
@@ -204,6 +206,38 @@ func (o *SepaDirectDebitDetails) SetStoredPaymentMethodId(v string) {
 	o.StoredPaymentMethodId = &v
 }
 
+// GetTransferInstrumentId returns the TransferInstrumentId field value if set, zero value otherwise.
+func (o *SepaDirectDebitDetails) GetTransferInstrumentId() string {
+	if o == nil || common.IsNil(o.TransferInstrumentId) {
+		var ret string
+		return ret
+	}
+	return *o.TransferInstrumentId
+}
+
+// GetTransferInstrumentIdOk returns a tuple with the TransferInstrumentId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SepaDirectDebitDetails) GetTransferInstrumentIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.TransferInstrumentId) {
+		return nil, false
+	}
+	return o.TransferInstrumentId, true
+}
+
+// HasTransferInstrumentId returns a boolean if a field has been set.
+func (o *SepaDirectDebitDetails) HasTransferInstrumentId() bool {
+	if o != nil && !common.IsNil(o.TransferInstrumentId) {
+		return true
+	}
+
+	return false
+}
+
+// SetTransferInstrumentId gets a reference to the given string and assigns it to the TransferInstrumentId field.
+func (o *SepaDirectDebitDetails) SetTransferInstrumentId(v string) {
+	o.TransferInstrumentId = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *SepaDirectDebitDetails) GetType() string {
 	if o == nil || common.IsNil(o.Type) {
@@ -256,6 +290,9 @@ func (o SepaDirectDebitDetails) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.StoredPaymentMethodId) {
 		toSerialize["storedPaymentMethodId"] = o.StoredPaymentMethodId
+	}
+	if !common.IsNil(o.TransferInstrumentId) {
+		toSerialize["transferInstrumentId"] = o.TransferInstrumentId
 	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type

@@ -10,6 +10,8 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/adyen/adyen-go-api-library/v11/src/paymentsapp"
+
 	"github.com/adyen/adyen-go-api-library/v11/src/dataprotection"
 
 	"github.com/adyen/adyen-go-api-library/v11/src/balancecontrol"
@@ -66,6 +68,7 @@ const (
 	MarketpayNotificationAPIVersion = "v6"
 	MarketpayHopAPIVersion          = "v6"
 	PaymentAPIVersion               = "v68"
+	PaymentsAppAPIVersion           = "v1"
 	RecurringAPIVersion             = "v68"
 	CheckoutAPIVersion              = "v71"
 	BinLookupAPIVersion             = "v54"
@@ -88,6 +91,7 @@ type APIClient struct {
 	// API Services
 	checkout       *checkout.APIClient
 	payments       *payments.APIClient
+	paymentsApp    *paymentsapp.PaymentsAppApi
 	payout         *payout.APIClient
 	recurring      *recurring.GeneralApi
 	binLookup      *binlookup.GeneralApi
@@ -191,6 +195,18 @@ func NewClient(cfg *common.Config) *APIClient {
 }
 
 // API Services
+func (c *APIClient) PaymentsApp() *paymentsapp.PaymentsAppApi {
+	if c.paymentsApp == nil {
+		c.paymentsApp = &paymentsapp.PaymentsAppApi{
+			Client: c.client,
+			BasePath: func() string {
+				// enpdoint has same base url as management
+				return fmt.Sprintf("%s/%s", c.client.Cfg.PaymentsAppEndpoint, PaymentsAppAPIVersion)
+			},
+		}
+	}
+	return c.paymentsApp
+}
 
 func (c *APIClient) Checkout() *checkout.APIClient {
 	if c.checkout == nil {
@@ -408,6 +424,7 @@ func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix
 		c.client.Cfg.BalancePlatformEndpoint = BalancePlatformEndpointLive
 		c.client.Cfg.TransfersEndpoint = TransfersEndpointLive
 		c.client.Cfg.ManagementEndpoint = ManagementEndpointLive
+		c.client.Cfg.PaymentsAppEndpoint = ManagementEndpointLive
 		c.client.Cfg.LegalEntityEndpoint = LegalEntityEntityLive
 		c.client.Cfg.PosTerminalManagementEndpoint = PosTerminalManagementEndpointLive
 		c.client.Cfg.DataProtectionEndpoint = DataProtectionEndpointLive
@@ -421,6 +438,7 @@ func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix
 		c.client.Cfg.BalancePlatformEndpoint = BalancePlatformEndpointTest
 		c.client.Cfg.TransfersEndpoint = TransfersEndpointTest
 		c.client.Cfg.ManagementEndpoint = ManagementEndpointTest
+		c.client.Cfg.PaymentsAppEndpoint = ManagementEndpointTest
 		c.client.Cfg.LegalEntityEndpoint = LegalEntityEntityTest
 		c.client.Cfg.PosTerminalManagementEndpoint = PosTerminalManagementEndpointTest
 		c.client.Cfg.DataProtectionEndpoint = DataProtectionEndpointTest
@@ -429,6 +447,7 @@ func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix
 	c.client.Cfg.CheckoutEndpoint += "/" + CheckoutAPIVersion
 	c.client.Cfg.BalancePlatformEndpoint += "/" + BalancePlatformAPIVersion
 	c.client.Cfg.ManagementEndpoint += "/" + ManagementAPIVersion
+	c.client.Cfg.PaymentsAppEndpoint += "/" + PaymentsAppAPIVersion
 	c.client.Cfg.LegalEntityEndpoint += "/" + LegalEntityAPIVersion
 }
 

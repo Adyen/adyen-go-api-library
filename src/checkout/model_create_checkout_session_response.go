@@ -115,6 +115,8 @@ type CreateCheckoutSessionResponse struct {
 	Splits []Split `json:"splits,omitempty"`
 	// Required for Adyen for Platforms integrations if you are a platform model. This is your [reference](https://docs.adyen.com/api-explorer/Management/3/post/merchants/(merchantId)/stores#request-reference) (on [balance platform](https://docs.adyen.com/platforms)) or the [storeReference](https://docs.adyen.com/api-explorer/Account/latest/post/updateAccountHolder#request-accountHolderDetails-storeDetails-storeReference) (in the [classic integration](https://docs.adyen.com/classic-platforms/processing-payments/route-payment-to-store/#route-a-payment-to-a-store)) for the ecommerce or point-of-sale store that is processing the payment.
 	Store *string `json:"store,omitempty"`
+	// Specifies how payment methods should be filtered based on the 'store' parameter:   - 'exclusive': Only payment methods belonging to the specified 'store' are returned.   - 'inclusive': Payment methods from the 'store' and those not associated with any other store are returned.   - 'skipFilter': All payment methods are returned, regardless of store association.
+	StoreFiltrationMode *string `json:"storeFiltrationMode,omitempty"`
 	// When true and `shopperReference` is provided, the payment details will be stored for future [recurring payments](https://docs.adyen.com/online-payments/tokenization/#recurring-payment-types).
 	StorePaymentMethod *bool `json:"storePaymentMethod,omitempty"`
 	// Indicates if the details of the payment method will be stored for the shopper. Possible values: * **disabled** – No details will be stored (default). * **askForConsent** – If the `shopperReference` is provided, the UI lets the shopper choose if they want their payment details to be stored. * **enabled** – If the `shopperReference` is provided, the details will be stored without asking the shopper for consent.
@@ -1880,6 +1882,38 @@ func (o *CreateCheckoutSessionResponse) SetStore(v string) {
 	o.Store = &v
 }
 
+// GetStoreFiltrationMode returns the StoreFiltrationMode field value if set, zero value otherwise.
+func (o *CreateCheckoutSessionResponse) GetStoreFiltrationMode() string {
+	if o == nil || common.IsNil(o.StoreFiltrationMode) {
+		var ret string
+		return ret
+	}
+	return *o.StoreFiltrationMode
+}
+
+// GetStoreFiltrationModeOk returns a tuple with the StoreFiltrationMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCheckoutSessionResponse) GetStoreFiltrationModeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.StoreFiltrationMode) {
+		return nil, false
+	}
+	return o.StoreFiltrationMode, true
+}
+
+// HasStoreFiltrationMode returns a boolean if a field has been set.
+func (o *CreateCheckoutSessionResponse) HasStoreFiltrationMode() bool {
+	if o != nil && !common.IsNil(o.StoreFiltrationMode) {
+		return true
+	}
+
+	return false
+}
+
+// SetStoreFiltrationMode gets a reference to the given string and assigns it to the StoreFiltrationMode field.
+func (o *CreateCheckoutSessionResponse) SetStoreFiltrationMode(v string) {
+	o.StoreFiltrationMode = &v
+}
+
 // GetStorePaymentMethod returns the StorePaymentMethod field value if set, zero value otherwise.
 func (o *CreateCheckoutSessionResponse) GetStorePaymentMethod() bool {
 	if o == nil || common.IsNil(o.StorePaymentMethod) {
@@ -2302,6 +2336,9 @@ func (o CreateCheckoutSessionResponse) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Store) {
 		toSerialize["store"] = o.Store
 	}
+	if !common.IsNil(o.StoreFiltrationMode) {
+		toSerialize["storeFiltrationMode"] = o.StoreFiltrationMode
+	}
 	if !common.IsNil(o.StorePaymentMethod) {
 		toSerialize["storePaymentMethod"] = o.StorePaymentMethod
 	}
@@ -2396,6 +2433,15 @@ func (o *CreateCheckoutSessionResponse) isValidShopperInteraction() bool {
 	var allowedEnumValues = []string{"Ecommerce", "ContAuth", "Moto", "POS"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetShopperInteraction() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *CreateCheckoutSessionResponse) isValidStoreFiltrationMode() bool {
+	var allowedEnumValues = []string{"exclusive", "inclusive", "skipFilter"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetStoreFiltrationMode() == allowed {
 			return true
 		}
 	}
