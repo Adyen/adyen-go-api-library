@@ -17,7 +17,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/adyen/adyen-go-api-library/v11/src/common"
+	"github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // CardOrdersApi service
