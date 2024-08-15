@@ -8,8 +8,9 @@ package adyen
 
 import (
 	"fmt"
-	"github.com/adyen/adyen-go-api-library/v11/src/paymentsapp"
 	"net/http"
+
+	"github.com/adyen/adyen-go-api-library/v11/src/paymentsapp"
 
 	"github.com/adyen/adyen-go-api-library/v11/src/dataprotection"
 
