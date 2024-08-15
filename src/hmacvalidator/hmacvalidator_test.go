@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/adyen/adyen-go-api-library/v11/src/webhook"
+	"github.com/adyen/adyen-go-api-library/v12/src/webhook"
 	"github.com/stretchr/testify/assert"
 )
 

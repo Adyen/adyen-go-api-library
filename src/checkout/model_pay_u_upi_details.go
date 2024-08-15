@@ -11,7 +11,7 @@ package checkout
 import (
 	"encoding/json"
 
-	"github.com/adyen/adyen-go-api-library/v11/src/common"
+	"github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the PayUUpiDetails type satisfies the MappedNullable interface at compile time

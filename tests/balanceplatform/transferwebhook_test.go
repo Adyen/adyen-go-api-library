@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/adyen/adyen-go-api-library/v11/src/transferwebhook"
+	"github.com/adyen/adyen-go-api-library/v12/src/transferwebhook"
 )
 
 func TestHandleTransferNotificationRequest(t *testing.T) {

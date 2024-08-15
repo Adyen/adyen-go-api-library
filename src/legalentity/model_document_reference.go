@@ -12,7 +12,7 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/adyen/adyen-go-api-library/v11/src/common"
+	"github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the DocumentReference type satisfies the MappedNullable interface at compile time
