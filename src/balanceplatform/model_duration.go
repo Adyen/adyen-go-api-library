@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the Duration type satisfies the MappedNullable interface at compile time
@@ -107,7 +106,7 @@ func (o *Duration) SetValue(v int32) {
 }
 
 func (o Duration) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -161,12 +160,14 @@ func (v *NullableDuration) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *Duration) isValidUnit() bool {
-	var allowedEnumValues = []string{"days", "hours", "minutes", "months", "weeks"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetUnit() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "days", "hours", "minutes", "months", "weeks" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetUnit() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

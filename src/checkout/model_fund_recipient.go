@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the FundRecipient type satisfies the MappedNullable interface at compile time
@@ -19,16 +18,18 @@ var _ common.MappedNullable = &FundRecipient{}
 
 // FundRecipient struct for FundRecipient
 type FundRecipient struct {
-	BillingAddress *Address     `json:"billingAddress,omitempty"`
-	PaymentMethod  *CardDetails `json:"paymentMethod,omitempty"`
+	// Fund Recipient Iban for C2C payments
+	IBAN *string `json:"IBAN,omitempty"`
+	BillingAddress *Address `json:"billingAddress,omitempty"`
+	PaymentMethod *CardDetails `json:"paymentMethod,omitempty"`
 	// The email address of the shopper.
 	ShopperEmail *string `json:"shopperEmail,omitempty"`
-	ShopperName  *Name   `json:"shopperName,omitempty"`
+	ShopperName *Name `json:"shopperName,omitempty"`
 	// Required for recurring payments.  Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters. > Your reference must not include personally identifiable information (PII), for example name or email address.
 	ShopperReference *string `json:"shopperReference,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
-	StoredPaymentMethodId *string      `json:"storedPaymentMethodId,omitempty"`
-	SubMerchant           *SubMerchant `json:"subMerchant,omitempty"`
+	StoredPaymentMethodId *string `json:"storedPaymentMethodId,omitempty"`
+	SubMerchant *SubMerchant `json:"subMerchant,omitempty"`
 	// The telephone number of the shopper.
 	TelephoneNumber *string `json:"telephoneNumber,omitempty"`
 	// Indicates where the money is going.
@@ -52,6 +53,38 @@ func NewFundRecipient() *FundRecipient {
 func NewFundRecipientWithDefaults() *FundRecipient {
 	this := FundRecipient{}
 	return &this
+}
+
+// GetIBAN returns the IBAN field value if set, zero value otherwise.
+func (o *FundRecipient) GetIBAN() string {
+	if o == nil || common.IsNil(o.IBAN) {
+		var ret string
+		return ret
+	}
+	return *o.IBAN
+}
+
+// GetIBANOk returns a tuple with the IBAN field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FundRecipient) GetIBANOk() (*string, bool) {
+	if o == nil || common.IsNil(o.IBAN) {
+		return nil, false
+	}
+	return o.IBAN, true
+}
+
+// HasIBAN returns a boolean if a field has been set.
+func (o *FundRecipient) HasIBAN() bool {
+	if o != nil && !common.IsNil(o.IBAN) {
+		return true
+	}
+
+	return false
+}
+
+// SetIBAN gets a reference to the given string and assigns it to the IBAN field.
+func (o *FundRecipient) SetIBAN(v string) {
+	o.IBAN = &v
 }
 
 // GetBillingAddress returns the BillingAddress field value if set, zero value otherwise.
@@ -375,7 +408,7 @@ func (o *FundRecipient) SetWalletOwnerTaxId(v string) {
 }
 
 func (o FundRecipient) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -384,6 +417,9 @@ func (o FundRecipient) MarshalJSON() ([]byte, error) {
 
 func (o FundRecipient) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.IBAN) {
+		toSerialize["IBAN"] = o.IBAN
+	}
 	if !common.IsNil(o.BillingAddress) {
 		toSerialize["billingAddress"] = o.BillingAddress
 	}
@@ -452,3 +488,6 @@ func (v *NullableFundRecipient) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

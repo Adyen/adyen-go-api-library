@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the Donation type satisfies the MappedNullable interface at compile time
@@ -21,7 +20,7 @@ var _ common.MappedNullable = &Donation{}
 type Donation struct {
 	// The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes/).
 	Currency string `json:"currency"`
-	// The [type of donation](https://docs.adyen.com/online-payments/donations/#donation-types).\"Possible values:\\n\\n**roundup**: a donation where the original transaction amount is rounded up as a donation.**fixedAmounts**: a donation where you show fixed donations amounts that the shopper can select from.
+	// The [type of donation](https://docs.adyen.com/online-payments/donations/#donation-types).  Possible values: * **roundup**: a donation where the original transaction amount is rounded up as a donation. * **fixedAmounts**: a donation where you show fixed donations amounts that the shopper can select from.
 	DonationType string `json:"donationType"`
 	// The maximum amount a transaction can be rounded up to make a donation. This field is only present when `donationType` is **roundup**.
 	MaxRoundupAmount *int64 `json:"maxRoundupAmount,omitempty"`
@@ -161,7 +160,7 @@ func (o *Donation) SetValues(v []int64) {
 }
 
 func (o Donation) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -216,3 +215,6 @@ func (v *NullableDonation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

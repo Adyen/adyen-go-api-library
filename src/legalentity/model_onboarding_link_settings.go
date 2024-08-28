@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the OnboardingLinkSettings type satisfies the MappedNullable interface at compile time
@@ -29,13 +28,13 @@ type OnboardingLinkSettings struct {
 	ChangeLegalEntityType *bool `json:"changeLegalEntityType,omitempty"`
 	// Default value: **true**  Indicates if the user can change the country of their legal entity's address, for example the registered address of an organization.
 	EditPrefilledCountry *bool `json:"editPrefilledCountry,omitempty"`
-	// Default value: **false**  Indicates if the user of the individual legal entity type can view the introduction screen. The introduction screen provides brief instructions for the subsequent steps in the hosted onboarding process.
+	// Default value: **true**  Indicates whether the introduction screen is hidden for the user of the individual legal entity type. The introduction screen provides brief instructions for the subsequent steps in the hosted onboarding process.
 	HideOnboardingIntroductionIndividual *bool `json:"hideOnboardingIntroductionIndividual,omitempty"`
-	// Default value: **false**  Indicates if the user of the organization legal entity type can view the introduction screen. The introduction screen provides brief instructions for the subsequent steps in the hosted onboarding process.
+	// Default value: **true**  Indicates whether the introduction screen is hidden for the user of the organization legal entity type. The introduction screen provides brief instructions for the subsequent steps in the hosted onboarding process.
 	HideOnboardingIntroductionOrganization *bool `json:"hideOnboardingIntroductionOrganization,omitempty"`
-	// Default value: **false**  Indicates if the user of the sole proprietorship legal entity type can view the introduction screen. The introduction screen provides brief instructions for the subsequent steps in the hosted onboarding process.
+	// Default value: **true**  Indicates whether the introduction screen is hidden for the user of the sole proprietorship legal entity type. The introduction screen provides brief instructions for the subsequent steps in the hosted onboarding process.
 	HideOnboardingIntroductionSoleProprietor *bool `json:"hideOnboardingIntroductionSoleProprietor,omitempty"`
-	// Default value: **false**  Indicates if the user of the trust legal entity type can view the introduction screen. The introduction screen provides brief instructions for the subsequent steps in the hosted onboarding process.
+	// Default value: **true**  Indicates whether the introduction screen is hidden for the user of the trust legal entity type. The introduction screen provides brief instructions for the subsequent steps in the hosted onboarding process.
 	HideOnboardingIntroductionTrust *bool `json:"hideOnboardingIntroductionTrust,omitempty"`
 	// Default value: **true**  Indicates if the user can initiate the verification process through open banking providers, like Plaid or Tink.
 	InstantBankVerification *bool `json:"instantBankVerification,omitempty"`
@@ -549,7 +548,7 @@ func (o *OnboardingLinkSettings) SetTransferInstrumentLimit(v int32) {
 }
 
 func (o OnboardingLinkSettings) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -641,3 +640,6 @@ func (v *NullableOnboardingLinkSettings) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

@@ -10,8 +10,7 @@ package payments
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the Split type satisfies the MappedNullable interface at compile time
@@ -20,13 +19,13 @@ var _ common.MappedNullable = &Split{}
 // Split struct for Split
 type Split struct {
 	// The unique identifier of the account to which the split amount is booked. Required if `type` is **MarketPlace** or **BalanceAccount**.  * [Classic Platforms integration](https://docs.adyen.com/classic-platforms): The [`accountCode`](https://docs.adyen.com/api-explorer/Account/latest/post/updateAccount#request-accountCode) of the account to which the split amount is booked. * [Balance Platform](https://docs.adyen.com/adyen-for-platforms-model): The [`balanceAccountId`](https://docs.adyen.com/api-explorer/balanceplatform/latest/get/balanceAccounts/_id_#path-id) of the account to which the split amount is booked.
-	Account *string      `json:"account,omitempty"`
-	Amount  *SplitAmount `json:"amount,omitempty"`
+	Account *string `json:"account,omitempty"`
+	Amount *SplitAmount `json:"amount,omitempty"`
 	// Your description for the split item.
 	Description *string `json:"description,omitempty"`
 	// Your unique reference for the part of the payment booked to the specified `account`.  This is required if `type` is **MarketPlace** ([Classic Platforms integration](https://docs.adyen.com/classic-platforms)) or **BalanceAccount** ([Balance Platform](https://docs.adyen.com/adyen-for-platforms-model)).  For the other types, we also recommend providing a **unique** reference so you can reconcile the split and the associated payment in the transaction overview and in the reports.
 	Reference *string `json:"reference,omitempty"`
-	// The part of the payment you want to book to the specified `account`.  Possible values for the [Balance Platform](https://docs.adyen.com/adyen-for-platforms-model): * **BalanceAccount**: books part of the payment (specified in `amount`) to the specified `account`. * Transaction fees types that you can book to the specified `account`:    * **AcquiringFees**: the aggregated amount of the interchange and scheme fees.    * **PaymentFee**: the aggregated amount of all transaction fees.    * **AdyenFees**: the aggregated amount of Adyen's commission and markup fees.    * **AdyenCommission**: the transaction fees due to Adyen under [blended rates](https://www.adyen.com/knowledge-hub/interchange-fees-explained).    * **AdyenMarkup**: the transaction fees due to Adyen under [Interchange ++ pricing](https://www.adyen.com/knowledge-hub/interchange-fees-explained).    * **Interchange**: the fees paid to the issuer for each payment made with the card network.    * **SchemeFee**: the fees paid to the card scheme for using their network.  * **Remainder**: the amount left over after a currency conversion, booked to the specified `account`. * **VAT**: the value-added tax charged on the payment, booked to your platforms liable balance account. * **Commission**: your platform's commission (specified in `amount`) on the payment, booked to your liable balance account. * **Default**: in very specific use cases, allows you to book the specified `amount` to the specified `account`. For more information, contact Adyen support.  Possible values for the [Classic Platforms integration](https://docs.adyen.com/classic-platforms): **Commission**, **Default**, **Marketplace**, **PaymentFee**, **VAT**.
+	// The part of the payment you want to book to the specified `account`.  Possible values for the [Balance Platform](https://docs.adyen.com/adyen-for-platforms-model): * **BalanceAccount**: books part of the payment (specified in `amount`) to the specified `account`. * Transaction fees types that you can book to the specified `account`:    * **AcquiringFees**: the aggregated amount of the interchange and scheme fees.    * **PaymentFee**: the aggregated amount of all transaction fees.    * **AdyenFees**: the aggregated amount of Adyen's commission and markup fees.    * **AdyenCommission**: the transaction fees due to Adyen under [blended rates](https://www.adyen.com/knowledge-hub/interchange-fees-explained).    * **AdyenMarkup**: the transaction fees due to Adyen under [Interchange ++ pricing](https://www.adyen.com/knowledge-hub/interchange-fees-explained).    * **Interchange**: the fees paid to the issuer for each payment made with the card network.    * **SchemeFee**: the fees paid to the card scheme for using their network.  * **Commission**: your platform's commission on the payment (specified in `amount`), booked to your liable balance account. * **Remainder**: the amount left over after a currency conversion, booked to the specified `account`. * **TopUp**: allows you and your users to top up balance accounts using direct debit, card payments, or other payment methods. * **VAT**: the value-added tax charged on the payment, booked to your platforms liable balance account. * **Commission**: your platform's commission (specified in `amount`) on the payment, booked to your liable balance account. * **Default**: in very specific use cases, allows you to book the specified `amount` to the specified `account`. For more information, contact Adyen support.  Possible values for the [Classic Platforms integration](https://docs.adyen.com/classic-platforms): **Commission**, **Default**, **Marketplace**, **PaymentFee**, **VAT**.
 	Type string `json:"type"`
 }
 
@@ -201,7 +200,7 @@ func (o *Split) SetType(v string) {
 }
 
 func (o Split) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -262,12 +261,14 @@ func (v *NullableSplit) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *Split) isValidType() bool {
-	var allowedEnumValues = []string{"AcquiringFees", "AdyenCommission", "AdyenFees", "AdyenMarkup", "BalanceAccount", "Commission", "Default", "Interchange", "MarketPlace", "PaymentFee", "Remainder", "SchemeFee", "Surcharge", "Tip", "VAT"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "AcquiringFees", "AdyenCommission", "AdyenFees", "AdyenMarkup", "BalanceAccount", "Commission", "Default", "Interchange", "MarketPlace", "PaymentFee", "Remainder", "SchemeFee", "Surcharge", "Tip", "VAT" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+
