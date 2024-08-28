@@ -10,7 +10,8 @@ package transfers
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v12/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the CapitalGrant type satisfies the MappedNullable interface at compile time
@@ -18,16 +19,16 @@ var _ common.MappedNullable = &CapitalGrant{}
 
 // CapitalGrant struct for CapitalGrant
 type CapitalGrant struct {
-	Amount *Amount `json:"amount,omitempty"`
-	Balances CapitalBalance `json:"balances"`
-	Counterparty *Counterparty `json:"counterparty,omitempty"`
-	Fee *Fee `json:"fee,omitempty"`
+	Amount       *Amount        `json:"amount,omitempty"`
+	Balances     CapitalBalance `json:"balances"`
+	Counterparty *Counterparty  `json:"counterparty,omitempty"`
+	Fee          *Fee           `json:"fee,omitempty"`
 	// The identifier of the grant account used for the grant.
 	GrantAccountId string `json:"grantAccountId"`
 	// The identifier of the grant offer that has been selected and from which the grant details will be used.
 	GrantOfferId string `json:"grantOfferId"`
 	// The identifier of the grant reference.
-	Id string `json:"id"`
+	Id        string     `json:"id"`
 	Repayment *Repayment `json:"repayment,omitempty"`
 	// The current status of the grant. Possible values: **Pending**, **Active**, **Repaid**.
 	Status string `json:"status"`
@@ -304,7 +305,7 @@ func (o *CapitalGrant) SetStatus(v string) {
 }
 
 func (o CapitalGrant) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -369,14 +370,12 @@ func (v *NullableCapitalGrant) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *CapitalGrant) isValidStatus() bool {
-    var allowedEnumValues = []string{ "Pending", "Active", "Repaid" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetStatus() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"Pending", "Active", "Repaid"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetStatus() == allowed {
+			return true
+		}
+	}
+	return false
 }
-
