@@ -418,7 +418,7 @@ func (v *NullablePayPalDetails) UnmarshalJSON(src []byte) error {
 }
 
 func (o *PayPalDetails) isValidSubtype() bool {
-	var allowedEnumValues = []string{"redirect", "sdk"}
+	var allowedEnumValues = []string{"express", "redirect", "sdk"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetSubtype() == allowed {
 			return true

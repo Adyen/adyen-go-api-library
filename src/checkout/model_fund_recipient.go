@@ -19,6 +19,8 @@ var _ common.MappedNullable = &FundRecipient{}
 
 // FundRecipient struct for FundRecipient
 type FundRecipient struct {
+	// Fund Recipient Iban for C2C payments
+	IBAN           *string      `json:"IBAN,omitempty"`
 	BillingAddress *Address     `json:"billingAddress,omitempty"`
 	PaymentMethod  *CardDetails `json:"paymentMethod,omitempty"`
 	// The email address of the shopper.
@@ -52,6 +54,38 @@ func NewFundRecipient() *FundRecipient {
 func NewFundRecipientWithDefaults() *FundRecipient {
 	this := FundRecipient{}
 	return &this
+}
+
+// GetIBAN returns the IBAN field value if set, zero value otherwise.
+func (o *FundRecipient) GetIBAN() string {
+	if o == nil || common.IsNil(o.IBAN) {
+		var ret string
+		return ret
+	}
+	return *o.IBAN
+}
+
+// GetIBANOk returns a tuple with the IBAN field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FundRecipient) GetIBANOk() (*string, bool) {
+	if o == nil || common.IsNil(o.IBAN) {
+		return nil, false
+	}
+	return o.IBAN, true
+}
+
+// HasIBAN returns a boolean if a field has been set.
+func (o *FundRecipient) HasIBAN() bool {
+	if o != nil && !common.IsNil(o.IBAN) {
+		return true
+	}
+
+	return false
+}
+
+// SetIBAN gets a reference to the given string and assigns it to the IBAN field.
+func (o *FundRecipient) SetIBAN(v string) {
+	o.IBAN = &v
 }
 
 // GetBillingAddress returns the BillingAddress field value if set, zero value otherwise.
@@ -384,6 +418,9 @@ func (o FundRecipient) MarshalJSON() ([]byte, error) {
 
 func (o FundRecipient) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.IBAN) {
+		toSerialize["IBAN"] = o.IBAN
+	}
 	if !common.IsNil(o.BillingAddress) {
 		toSerialize["billingAddress"] = o.BillingAddress
 	}

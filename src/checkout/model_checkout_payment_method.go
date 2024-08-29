@@ -43,6 +43,7 @@ type CheckoutPaymentMethod struct {
 	OpenInvoiceDetails                *OpenInvoiceDetails
 	PayByBankDetails                  *PayByBankDetails
 	PayPalDetails                     *PayPalDetails
+	PayToDetails                      *PayToDetails
 	PayUUpiDetails                    *PayUUpiDetails
 	PayWithGoogleDetails              *PayWithGoogleDetails
 	PaymentDetails                    *PaymentDetails
@@ -252,6 +253,13 @@ func PayByBankDetailsAsCheckoutPaymentMethod(v *PayByBankDetails) CheckoutPaymen
 func PayPalDetailsAsCheckoutPaymentMethod(v *PayPalDetails) CheckoutPaymentMethod {
 	return CheckoutPaymentMethod{
 		PayPalDetails: v,
+	}
+}
+
+// PayToDetailsAsCheckoutPaymentMethod is a convenience function that returns PayToDetails wrapped in CheckoutPaymentMethod
+func PayToDetailsAsCheckoutPaymentMethod(v *PayToDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
+		PayToDetails: v,
 	}
 }
 
@@ -721,6 +729,19 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		dst.PayPalDetails = nil
 	}
 
+	// try to unmarshal data into PayToDetails
+	err = json.Unmarshal(data, &dst.PayToDetails)
+	if err == nil {
+		jsonPayToDetails, _ := json.Marshal(dst.PayToDetails)
+		if string(jsonPayToDetails) == "{}" || !dst.PayToDetails.isValidType() { // empty struct
+			dst.PayToDetails = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.PayToDetails = nil
+	}
+
 	// try to unmarshal data into PayUUpiDetails
 	err = json.Unmarshal(data, &dst.PayUUpiDetails)
 	if err == nil {
@@ -933,6 +954,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		dst.OpenInvoiceDetails = nil
 		dst.PayByBankDetails = nil
 		dst.PayPalDetails = nil
+		dst.PayToDetails = nil
 		dst.PayUUpiDetails = nil
 		dst.PayWithGoogleDetails = nil
 		dst.PaymentDetails = nil
@@ -1068,6 +1090,10 @@ func (src CheckoutPaymentMethod) MarshalJSON() ([]byte, error) {
 
 	if src.PayPalDetails != nil {
 		return json.Marshal(&src.PayPalDetails)
+	}
+
+	if src.PayToDetails != nil {
+		return json.Marshal(&src.PayToDetails)
 	}
 
 	if src.PayUUpiDetails != nil {
@@ -1244,6 +1270,10 @@ func (obj *CheckoutPaymentMethod) GetActualInstance() interface{} {
 
 	if obj.PayPalDetails != nil {
 		return obj.PayPalDetails
+	}
+
+	if obj.PayToDetails != nil {
+		return obj.PayToDetails
 	}
 
 	if obj.PayUUpiDetails != nil {

@@ -21,7 +21,7 @@ var _ common.MappedNullable = &Donation{}
 type Donation struct {
 	// The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes/).
 	Currency string `json:"currency"`
-	// The [type of donation](https://docs.adyen.com/online-payments/donations/#donation-types).\"Possible values:\\n\\n**roundup**: a donation where the original transaction amount is rounded up as a donation.**fixedAmounts**: a donation where you show fixed donations amounts that the shopper can select from.
+	// The [type of donation](https://docs.adyen.com/online-payments/donations/#donation-types).  Possible values: * **roundup**: a donation where the original transaction amount is rounded up as a donation. * **fixedAmounts**: a donation where you show fixed donations amounts that the shopper can select from.
 	DonationType string `json:"donationType"`
 	// The maximum amount a transaction can be rounded up to make a donation. This field is only present when `donationType` is **roundup**.
 	MaxRoundupAmount *int64 `json:"maxRoundupAmount,omitempty"`

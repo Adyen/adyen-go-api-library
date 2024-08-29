@@ -39,7 +39,9 @@ type PaymentLinkRequest struct {
 	// A short description visible on the payment page. Maximum length: 280 characters.
 	Description *string `json:"description,omitempty"`
 	// The date when the payment link expires.  [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format with time zone offset: YYYY-MM-DDThh:mm:ss+TZD, for example, **2020-12-18T10:15:30+01:00**.  The maximum expiry date is 70 days after the payment link is created.  If not provided, the payment link expires 24 hours after it was created.
-	ExpiresAt *time.Time `json:"expiresAt,omitempty"`
+	ExpiresAt     *time.Time     `json:"expiresAt,omitempty"`
+	FundOrigin    *FundOrigin    `json:"fundOrigin,omitempty"`
+	FundRecipient *FundRecipient `json:"fundRecipient,omitempty"`
 	// A set of key-value pairs that specifies the installment options available per payment method. The key must be a payment method name in lowercase. For example, **card** to specify installment options for all cards, or **visa** or **mc**. The value must be an object containing the installment options.
 	InstallmentOptions *map[string]InstallmentOption `json:"installmentOptions,omitempty"`
 	// Price and product information about the purchased items, to be included on the invoice sent to the shopper. This parameter is required for open invoice (_buy now, pay later_) payment methods such Afterpay, Clearpay, Klarna, RatePay, and Zip.
@@ -496,6 +498,70 @@ func (o *PaymentLinkRequest) HasExpiresAt() bool {
 // SetExpiresAt gets a reference to the given time.Time and assigns it to the ExpiresAt field.
 func (o *PaymentLinkRequest) SetExpiresAt(v time.Time) {
 	o.ExpiresAt = &v
+}
+
+// GetFundOrigin returns the FundOrigin field value if set, zero value otherwise.
+func (o *PaymentLinkRequest) GetFundOrigin() FundOrigin {
+	if o == nil || common.IsNil(o.FundOrigin) {
+		var ret FundOrigin
+		return ret
+	}
+	return *o.FundOrigin
+}
+
+// GetFundOriginOk returns a tuple with the FundOrigin field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentLinkRequest) GetFundOriginOk() (*FundOrigin, bool) {
+	if o == nil || common.IsNil(o.FundOrigin) {
+		return nil, false
+	}
+	return o.FundOrigin, true
+}
+
+// HasFundOrigin returns a boolean if a field has been set.
+func (o *PaymentLinkRequest) HasFundOrigin() bool {
+	if o != nil && !common.IsNil(o.FundOrigin) {
+		return true
+	}
+
+	return false
+}
+
+// SetFundOrigin gets a reference to the given FundOrigin and assigns it to the FundOrigin field.
+func (o *PaymentLinkRequest) SetFundOrigin(v FundOrigin) {
+	o.FundOrigin = &v
+}
+
+// GetFundRecipient returns the FundRecipient field value if set, zero value otherwise.
+func (o *PaymentLinkRequest) GetFundRecipient() FundRecipient {
+	if o == nil || common.IsNil(o.FundRecipient) {
+		var ret FundRecipient
+		return ret
+	}
+	return *o.FundRecipient
+}
+
+// GetFundRecipientOk returns a tuple with the FundRecipient field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentLinkRequest) GetFundRecipientOk() (*FundRecipient, bool) {
+	if o == nil || common.IsNil(o.FundRecipient) {
+		return nil, false
+	}
+	return o.FundRecipient, true
+}
+
+// HasFundRecipient returns a boolean if a field has been set.
+func (o *PaymentLinkRequest) HasFundRecipient() bool {
+	if o != nil && !common.IsNil(o.FundRecipient) {
+		return true
+	}
+
+	return false
+}
+
+// SetFundRecipient gets a reference to the given FundRecipient and assigns it to the FundRecipient field.
+func (o *PaymentLinkRequest) SetFundRecipient(v FundRecipient) {
+	o.FundRecipient = &v
 }
 
 // GetInstallmentOptions returns the InstallmentOptions field value if set, zero value otherwise.
@@ -1421,6 +1487,12 @@ func (o PaymentLinkRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.ExpiresAt) {
 		toSerialize["expiresAt"] = o.ExpiresAt
+	}
+	if !common.IsNil(o.FundOrigin) {
+		toSerialize["fundOrigin"] = o.FundOrigin
+	}
+	if !common.IsNil(o.FundRecipient) {
+		toSerialize["fundRecipient"] = o.FundRecipient
 	}
 	if !common.IsNil(o.InstallmentOptions) {
 		toSerialize["installmentOptions"] = o.InstallmentOptions

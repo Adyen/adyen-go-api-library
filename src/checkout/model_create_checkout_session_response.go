@@ -85,7 +85,7 @@ type CreateCheckoutSessionResponse struct {
 	RedirectToIssuerMethod *string `json:"redirectToIssuerMethod,omitempty"`
 	// The reference to uniquely identify a payment.
 	Reference string `json:"reference"`
-	// The URL to return to when a redirect payment is completed.
+	// The URL to return to in case of a redirection. The format depends on the channel.  * For web, include the protocol `http://` or `https://`. You can also include your own additional query parameters, for example, shopper ID or order reference number. Example: `https://your-company.com/checkout?shopperOrder=12xy` * For iOS, use the custom URL for your app. To know more about setting custom URL schemes, refer to the [Apple Developer documentation](https://developer.apple.com/documentation/uikit/inter-process_communication/allowing_apps_and_websites_to_link_to_your_content/defining_a_custom_url_scheme_for_your_app). Example: `my-app://` * For Android, use a custom URL handled by an Activity on your app. You can configure it with an [intent filter](https://developer.android.com/guide/components/intents-filters). Example: `my-app://your.package.name` If the URL to return to includes non-ASCII characters, like spaces or special letters, URL encode the value. > The URL must not include personally identifiable information (PII), for example name or email address.
 	ReturnUrl string    `json:"returnUrl"`
 	RiskData  *RiskData `json:"riskData,omitempty"`
 	// The payment session data you need to pass to your front end.
@@ -115,7 +115,7 @@ type CreateCheckoutSessionResponse struct {
 	Splits []Split `json:"splits,omitempty"`
 	// Required for Adyen for Platforms integrations if you are a platform model. This is your [reference](https://docs.adyen.com/api-explorer/Management/3/post/merchants/(merchantId)/stores#request-reference) (on [balance platform](https://docs.adyen.com/platforms)) or the [storeReference](https://docs.adyen.com/api-explorer/Account/latest/post/updateAccountHolder#request-accountHolderDetails-storeDetails-storeReference) (in the [classic integration](https://docs.adyen.com/classic-platforms/processing-payments/route-payment-to-store/#route-a-payment-to-a-store)) for the ecommerce or point-of-sale store that is processing the payment.
 	Store *string `json:"store,omitempty"`
-	// Specifies how payment methods should be filtered based on the 'store' parameter:   - 'exclusive': Only payment methods belonging to the specified 'store' are returned.   - 'inclusive': Payment methods from the 'store' and those not associated with any other store are returned.   - 'skipFilter': All payment methods are returned, regardless of store association.
+	// Specifies how payment methods should be filtered based on the 'store' parameter:   - 'exclusive': Only payment methods belonging to the specified 'store' are returned.   - 'inclusive': Payment methods from the 'store' and those not associated with any other store are returned.
 	StoreFiltrationMode *string `json:"storeFiltrationMode,omitempty"`
 	// When true and `shopperReference` is provided, the payment details will be stored for future [recurring payments](https://docs.adyen.com/online-payments/tokenization/#recurring-payment-types).
 	StorePaymentMethod *bool `json:"storePaymentMethod,omitempty"`

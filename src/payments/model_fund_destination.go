@@ -19,6 +19,8 @@ var _ common.MappedNullable = &FundDestination{}
 
 // FundDestination struct for FundDestination
 type FundDestination struct {
+	// Bank Account Number of the recipient
+	IBAN *string `json:"IBAN,omitempty"`
 	// a map of name/value pairs for passing in additional/industry-specific data
 	AdditionalData *map[string]string `json:"additionalData,omitempty"`
 	BillingAddress *Address           `json:"billingAddress,omitempty"`
@@ -52,6 +54,38 @@ func NewFundDestination() *FundDestination {
 func NewFundDestinationWithDefaults() *FundDestination {
 	this := FundDestination{}
 	return &this
+}
+
+// GetIBAN returns the IBAN field value if set, zero value otherwise.
+func (o *FundDestination) GetIBAN() string {
+	if o == nil || common.IsNil(o.IBAN) {
+		var ret string
+		return ret
+	}
+	return *o.IBAN
+}
+
+// GetIBANOk returns a tuple with the IBAN field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FundDestination) GetIBANOk() (*string, bool) {
+	if o == nil || common.IsNil(o.IBAN) {
+		return nil, false
+	}
+	return o.IBAN, true
+}
+
+// HasIBAN returns a boolean if a field has been set.
+func (o *FundDestination) HasIBAN() bool {
+	if o != nil && !common.IsNil(o.IBAN) {
+		return true
+	}
+
+	return false
+}
+
+// SetIBAN gets a reference to the given string and assigns it to the IBAN field.
+func (o *FundDestination) SetIBAN(v string) {
+	o.IBAN = &v
 }
 
 // GetAdditionalData returns the AdditionalData field value if set, zero value otherwise.
@@ -384,6 +418,9 @@ func (o FundDestination) MarshalJSON() ([]byte, error) {
 
 func (o FundDestination) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.IBAN) {
+		toSerialize["IBAN"] = o.IBAN
+	}
 	if !common.IsNil(o.AdditionalData) {
 		toSerialize["additionalData"] = o.AdditionalData
 	}
