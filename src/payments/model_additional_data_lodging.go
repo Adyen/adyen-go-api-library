@@ -10,8 +10,7 @@ package payments
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the AdditionalDataLodging type satisfies the MappedNullable interface at compile time
@@ -25,13 +24,13 @@ type AdditionalDataLodging struct {
 	LodgingCheckInDate *string `json:"lodging.checkInDate,omitempty"`
 	// The departure date. * Date format: **yyyyMmDd**. For example, for 2023 April 22, **20230422**.
 	LodgingCheckOutDate *string `json:"lodging.checkOutDate,omitempty"`
-	// The toll-free phone number for the lodging. * Format: numeric * Max length: 17 characters. * For US and CA numbers must be 10 characters in length * Must not start with a space * Must not contain any special characters such as + or - *Must not be all zeros.
+	// The toll-free phone number for the lodging. * Format: numeric * Max length: 17 characters. * For US and CA numbers must be 10 characters in length * Must not start with a space * Must not contain any special characters such as + or - * Must not be all zeros.
 	LodgingCustomerServiceTollFreeNumber *string `json:"lodging.customerServiceTollFreeNumber,omitempty"`
 	// Identifies that the facility complies with the Hotel and Motel Fire Safety Act of 1990. Must be 'Y' or 'N'. * Format: alphabetic * Max length: 1 character
 	LodgingFireSafetyActIndicator *string `json:"lodging.fireSafetyActIndicator,omitempty"`
 	// The folio cash advances, in [minor units](https://docs.adyen.com/development-resources/currency-codes). * Format: numeric * Max length: 12 characters
 	LodgingFolioCashAdvances *string `json:"lodging.folioCashAdvances,omitempty"`
-	// The card acceptor’s internal invoice or billing ID reference number. * Max length: 25 characters. * Must not start with a space *Must not be all zeros.
+	// The card acceptor’s internal invoice or billing ID reference number. * Max length: 25 characters * Must not start with a space * Must not contain any special characters * Must not be all zeros.
 	LodgingFolioNumber *string `json:"lodging.folioNumber,omitempty"`
 	// Any charges for food and beverages associated with the booking, in [minor units](https://docs.adyen.com/development-resources/currency-codes). * Format: numeric * Max length: 12 characters
 	LodgingFoodBeverageCharges *string `json:"lodging.foodBeverageCharges,omitempty"`
@@ -39,7 +38,7 @@ type AdditionalDataLodging struct {
 	LodgingNoShowIndicator *string `json:"lodging.noShowIndicator,omitempty"`
 	// The prepaid expenses for the booking. * Format: numeric * Max length: 12 characters
 	LodgingPrepaidExpenses *string `json:"lodging.prepaidExpenses,omitempty"`
-	// The lodging property location's phone number. * Format: numeric. * Min length: 10 characters * Max length: 17 characters * For US and CA numbers must be 10 characters in length * Must not start with a space * Must not contain any special characters such as + or - *Must not be all zeros.
+	// The lodging property location's phone number. * Format: numeric * Min length: 10 characters * Max length: 17 characters * For US and CA numbers must be 10 characters in length * Must not start with a space * Must not contain any special characters such as + or - * Must not be all zeros.
 	LodgingPropertyPhoneNumber *string `json:"lodging.propertyPhoneNumber,omitempty"`
 	// The total number of nights the room is booked for. * Format: numeric * Must be a number between 0 and 99 * Max length: 4 characters
 	LodgingRoom1NumberOfNights *string `json:"lodging.room1.numberOfNights,omitempty"`
@@ -617,7 +616,7 @@ func (o *AdditionalDataLodging) SetTravelEntertainmentAuthDataMarket(v string) {
 }
 
 func (o AdditionalDataLodging) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -715,3 +714,6 @@ func (v *NullableAdditionalDataLodging) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

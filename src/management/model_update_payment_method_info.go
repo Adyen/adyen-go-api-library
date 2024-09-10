@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the UpdatePaymentMethodInfo type satisfies the MappedNullable interface at compile time
@@ -19,29 +18,33 @@ var _ common.MappedNullable = &UpdatePaymentMethodInfo{}
 
 // UpdatePaymentMethodInfo struct for UpdatePaymentMethodInfo
 type UpdatePaymentMethodInfo struct {
-	Bcmc            *BcmcInfo            `json:"bcmc,omitempty"`
+	Accel *AccelInfo `json:"accel,omitempty"`
+	Bcmc *BcmcInfo `json:"bcmc,omitempty"`
 	CartesBancaires *CartesBancairesInfo `json:"cartesBancaires,omitempty"`
 	// The list of countries where a payment method is available. By default, all countries supported by the payment method.
-	Countries []string              `json:"countries,omitempty"`
-	Cup       *GenericPmWithTdiInfo `json:"cup,omitempty"`
+	Countries []string `json:"countries,omitempty"`
+	Cup *GenericPmWithTdiInfo `json:"cup,omitempty"`
 	// The list of currencies that a payment method supports. By default, all currencies supported by the payment method.
 	Currencies []string `json:"currencies,omitempty"`
 	// Custom routing flags for acquirer routing.
-	CustomRoutingFlags []string              `json:"customRoutingFlags,omitempty"`
-	Diners             *GenericPmWithTdiInfo `json:"diners,omitempty"`
-	Discover           *GenericPmWithTdiInfo `json:"discover,omitempty"`
-	EftposAustralia    *GenericPmWithTdiInfo `json:"eftpos_australia,omitempty"`
+	CustomRoutingFlags []string `json:"customRoutingFlags,omitempty"`
+	Diners *GenericPmWithTdiInfo `json:"diners,omitempty"`
+	Discover *GenericPmWithTdiInfo `json:"discover,omitempty"`
+	EftposAustralia *GenericPmWithTdiInfo `json:"eftpos_australia,omitempty"`
 	// Indicates whether the payment method is enabled (**true**) or disabled (**false**).
-	Enabled     *bool                 `json:"enabled,omitempty"`
-	Girocard    *GenericPmWithTdiInfo `json:"girocard,omitempty"`
-	Ideal       *GenericPmWithTdiInfo `json:"ideal,omitempty"`
+	Enabled *bool `json:"enabled,omitempty"`
+	Girocard *GenericPmWithTdiInfo `json:"girocard,omitempty"`
+	Ideal *GenericPmWithTdiInfo `json:"ideal,omitempty"`
 	InteracCard *GenericPmWithTdiInfo `json:"interac_card,omitempty"`
-	Jcb         *GenericPmWithTdiInfo `json:"jcb,omitempty"`
-	Maestro     *GenericPmWithTdiInfo `json:"maestro,omitempty"`
-	Mc          *GenericPmWithTdiInfo `json:"mc,omitempty"`
+	Jcb *GenericPmWithTdiInfo `json:"jcb,omitempty"`
+	Maestro *GenericPmWithTdiInfo `json:"maestro,omitempty"`
+	Mc *GenericPmWithTdiInfo `json:"mc,omitempty"`
+	Nyce *NyceInfo `json:"nyce,omitempty"`
+	Pulse *PulseInfo `json:"pulse,omitempty"`
+	Star *StarInfo `json:"star,omitempty"`
 	// The list of stores for this payment method
-	StoreIds []string              `json:"storeIds,omitempty"`
-	Visa     *GenericPmWithTdiInfo `json:"visa,omitempty"`
+	StoreIds []string `json:"storeIds,omitempty"`
+	Visa *GenericPmWithTdiInfo `json:"visa,omitempty"`
 }
 
 // NewUpdatePaymentMethodInfo instantiates a new UpdatePaymentMethodInfo object
@@ -59,6 +62,38 @@ func NewUpdatePaymentMethodInfo() *UpdatePaymentMethodInfo {
 func NewUpdatePaymentMethodInfoWithDefaults() *UpdatePaymentMethodInfo {
 	this := UpdatePaymentMethodInfo{}
 	return &this
+}
+
+// GetAccel returns the Accel field value if set, zero value otherwise.
+func (o *UpdatePaymentMethodInfo) GetAccel() AccelInfo {
+	if o == nil || common.IsNil(o.Accel) {
+		var ret AccelInfo
+		return ret
+	}
+	return *o.Accel
+}
+
+// GetAccelOk returns a tuple with the Accel field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdatePaymentMethodInfo) GetAccelOk() (*AccelInfo, bool) {
+	if o == nil || common.IsNil(o.Accel) {
+		return nil, false
+	}
+	return o.Accel, true
+}
+
+// HasAccel returns a boolean if a field has been set.
+func (o *UpdatePaymentMethodInfo) HasAccel() bool {
+	if o != nil && !common.IsNil(o.Accel) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccel gets a reference to the given AccelInfo and assigns it to the Accel field.
+func (o *UpdatePaymentMethodInfo) SetAccel(v AccelInfo) {
+	o.Accel = &v
 }
 
 // GetBcmc returns the Bcmc field value if set, zero value otherwise.
@@ -573,6 +608,102 @@ func (o *UpdatePaymentMethodInfo) SetMc(v GenericPmWithTdiInfo) {
 	o.Mc = &v
 }
 
+// GetNyce returns the Nyce field value if set, zero value otherwise.
+func (o *UpdatePaymentMethodInfo) GetNyce() NyceInfo {
+	if o == nil || common.IsNil(o.Nyce) {
+		var ret NyceInfo
+		return ret
+	}
+	return *o.Nyce
+}
+
+// GetNyceOk returns a tuple with the Nyce field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdatePaymentMethodInfo) GetNyceOk() (*NyceInfo, bool) {
+	if o == nil || common.IsNil(o.Nyce) {
+		return nil, false
+	}
+	return o.Nyce, true
+}
+
+// HasNyce returns a boolean if a field has been set.
+func (o *UpdatePaymentMethodInfo) HasNyce() bool {
+	if o != nil && !common.IsNil(o.Nyce) {
+		return true
+	}
+
+	return false
+}
+
+// SetNyce gets a reference to the given NyceInfo and assigns it to the Nyce field.
+func (o *UpdatePaymentMethodInfo) SetNyce(v NyceInfo) {
+	o.Nyce = &v
+}
+
+// GetPulse returns the Pulse field value if set, zero value otherwise.
+func (o *UpdatePaymentMethodInfo) GetPulse() PulseInfo {
+	if o == nil || common.IsNil(o.Pulse) {
+		var ret PulseInfo
+		return ret
+	}
+	return *o.Pulse
+}
+
+// GetPulseOk returns a tuple with the Pulse field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdatePaymentMethodInfo) GetPulseOk() (*PulseInfo, bool) {
+	if o == nil || common.IsNil(o.Pulse) {
+		return nil, false
+	}
+	return o.Pulse, true
+}
+
+// HasPulse returns a boolean if a field has been set.
+func (o *UpdatePaymentMethodInfo) HasPulse() bool {
+	if o != nil && !common.IsNil(o.Pulse) {
+		return true
+	}
+
+	return false
+}
+
+// SetPulse gets a reference to the given PulseInfo and assigns it to the Pulse field.
+func (o *UpdatePaymentMethodInfo) SetPulse(v PulseInfo) {
+	o.Pulse = &v
+}
+
+// GetStar returns the Star field value if set, zero value otherwise.
+func (o *UpdatePaymentMethodInfo) GetStar() StarInfo {
+	if o == nil || common.IsNil(o.Star) {
+		var ret StarInfo
+		return ret
+	}
+	return *o.Star
+}
+
+// GetStarOk returns a tuple with the Star field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdatePaymentMethodInfo) GetStarOk() (*StarInfo, bool) {
+	if o == nil || common.IsNil(o.Star) {
+		return nil, false
+	}
+	return o.Star, true
+}
+
+// HasStar returns a boolean if a field has been set.
+func (o *UpdatePaymentMethodInfo) HasStar() bool {
+	if o != nil && !common.IsNil(o.Star) {
+		return true
+	}
+
+	return false
+}
+
+// SetStar gets a reference to the given StarInfo and assigns it to the Star field.
+func (o *UpdatePaymentMethodInfo) SetStar(v StarInfo) {
+	o.Star = &v
+}
+
 // GetStoreIds returns the StoreIds field value if set, zero value otherwise.
 func (o *UpdatePaymentMethodInfo) GetStoreIds() []string {
 	if o == nil || common.IsNil(o.StoreIds) {
@@ -638,7 +769,7 @@ func (o *UpdatePaymentMethodInfo) SetVisa(v GenericPmWithTdiInfo) {
 }
 
 func (o UpdatePaymentMethodInfo) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -647,6 +778,9 @@ func (o UpdatePaymentMethodInfo) MarshalJSON() ([]byte, error) {
 
 func (o UpdatePaymentMethodInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.Accel) {
+		toSerialize["accel"] = o.Accel
+	}
 	if !common.IsNil(o.Bcmc) {
 		toSerialize["bcmc"] = o.Bcmc
 	}
@@ -695,6 +829,15 @@ func (o UpdatePaymentMethodInfo) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Mc) {
 		toSerialize["mc"] = o.Mc
 	}
+	if !common.IsNil(o.Nyce) {
+		toSerialize["nyce"] = o.Nyce
+	}
+	if !common.IsNil(o.Pulse) {
+		toSerialize["pulse"] = o.Pulse
+	}
+	if !common.IsNil(o.Star) {
+		toSerialize["star"] = o.Star
+	}
 	if !common.IsNil(o.StoreIds) {
 		toSerialize["storeIds"] = o.StoreIds
 	}
@@ -739,3 +882,6 @@ func (v *NullableUpdatePaymentMethodInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

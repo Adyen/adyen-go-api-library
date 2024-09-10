@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the SubMerchantInfo type satisfies the MappedNullable interface at compile time
@@ -19,16 +18,23 @@ var _ common.MappedNullable = &SubMerchantInfo{}
 
 // SubMerchantInfo struct for SubMerchantInfo
 type SubMerchantInfo struct {
-	Address         *BillingAddress `json:"address,omitempty"`
-	Amount          *Amount         `json:"amount,omitempty"`
-	Email           *string         `json:"email,omitempty"`
-	Id              *string         `json:"id,omitempty"`
-	Mcc             *string         `json:"mcc,omitempty"`
-	Name            *string         `json:"name,omitempty"`
-	PhoneNumber     *string         `json:"phoneNumber,omitempty"`
-	RegisteredSince *string         `json:"registeredSince,omitempty"`
-	TaxId           *string         `json:"taxId,omitempty"`
-	Url             *string         `json:"url,omitempty"`
+	Address *BillingAddress `json:"address,omitempty"`
+	Amount *Amount `json:"amount,omitempty"`
+	// Required for transactions performed by registered payment facilitators. The email associated with the sub-merchant's account.
+	Email *string `json:"email,omitempty"`
+	// Required for transactions performed by registered payment facilitators. A unique identifier that you create for the sub-merchant, used by schemes to identify the sub-merchant.  * Format: Alphanumeric * Maximum length: 15 characters
+	Id *string `json:"id,omitempty"`
+	// Required for transactions performed by registered payment facilitators. The sub-merchant's 4-digit Merchant Category Code (MCC).  * Format: Numeric * Fixed length: 4 digits
+	Mcc *string `json:"mcc,omitempty"`
+	// Required for transactions performed by registered payment facilitators. The name of the sub-merchant. Based on scheme specifications, this value will overwrite the shopper statement that will appear in the card statement. * Format: Alphanumeric * Maximum length: 22 characters
+	Name *string `json:"name,omitempty"`
+	// Required for transactions performed by registered payment facilitators. The phone number associated with the sub-merchant's account.
+	PhoneNumber *string `json:"phoneNumber,omitempty"`
+	RegisteredSince *string `json:"registeredSince,omitempty"`
+	// Required for transactions performed by registered payment facilitators. The tax ID of the sub-merchant. * Format: Numeric * Fixed length: 11 digits for the CPF or 14 digits for the CNPJ
+	TaxId *string `json:"taxId,omitempty"`
+	// Required for transactions performed by registered payment facilitators. The sub-merchant's URL on the platform, i.e. the sub-merchant's shop.
+	Url *string `json:"url,omitempty"`
 }
 
 // NewSubMerchantInfo instantiates a new SubMerchantInfo object
@@ -369,7 +375,7 @@ func (o *SubMerchantInfo) SetUrl(v string) {
 }
 
 func (o SubMerchantInfo) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -446,3 +452,6 @@ func (v *NullableSubMerchantInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

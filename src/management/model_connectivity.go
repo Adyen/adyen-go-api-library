@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the Connectivity type satisfies the MappedNullable interface at compile time
@@ -21,6 +20,7 @@ var _ common.MappedNullable = &Connectivity{}
 type Connectivity struct {
 	// Indicates the status of the SIM card in the payment terminal. Can be updated and received only at terminal level, and only for models that support cellular connectivity.  Possible values: * **ACTIVATED**: the SIM card is activated. Cellular connectivity may still need to be enabled on the terminal itself, in the **Network** settings. * **INVENTORY**: the SIM card is not activated. The terminal can't use cellular connectivity.
 	SimcardStatus *string `json:"simcardStatus,omitempty"`
+	TerminalIPAddressURL *EventUrl `json:"terminalIPAddressURL,omitempty"`
 }
 
 // NewConnectivity instantiates a new Connectivity object
@@ -72,8 +72,40 @@ func (o *Connectivity) SetSimcardStatus(v string) {
 	o.SimcardStatus = &v
 }
 
+// GetTerminalIPAddressURL returns the TerminalIPAddressURL field value if set, zero value otherwise.
+func (o *Connectivity) GetTerminalIPAddressURL() EventUrl {
+	if o == nil || common.IsNil(o.TerminalIPAddressURL) {
+		var ret EventUrl
+		return ret
+	}
+	return *o.TerminalIPAddressURL
+}
+
+// GetTerminalIPAddressURLOk returns a tuple with the TerminalIPAddressURL field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Connectivity) GetTerminalIPAddressURLOk() (*EventUrl, bool) {
+	if o == nil || common.IsNil(o.TerminalIPAddressURL) {
+		return nil, false
+	}
+	return o.TerminalIPAddressURL, true
+}
+
+// HasTerminalIPAddressURL returns a boolean if a field has been set.
+func (o *Connectivity) HasTerminalIPAddressURL() bool {
+	if o != nil && !common.IsNil(o.TerminalIPAddressURL) {
+		return true
+	}
+
+	return false
+}
+
+// SetTerminalIPAddressURL gets a reference to the given EventUrl and assigns it to the TerminalIPAddressURL field.
+func (o *Connectivity) SetTerminalIPAddressURL(v EventUrl) {
+	o.TerminalIPAddressURL = &v
+}
+
 func (o Connectivity) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -84,6 +116,9 @@ func (o Connectivity) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.SimcardStatus) {
 		toSerialize["simcardStatus"] = o.SimcardStatus
+	}
+	if !common.IsNil(o.TerminalIPAddressURL) {
+		toSerialize["terminalIPAddressURL"] = o.TerminalIPAddressURL
 	}
 	return toSerialize, nil
 }
@@ -124,12 +159,14 @@ func (v *NullableConnectivity) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *Connectivity) isValidSimcardStatus() bool {
-	var allowedEnumValues = []string{"ACTIVATED", "INVENTORY"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetSimcardStatus() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "ACTIVATED", "INVENTORY" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetSimcardStatus() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

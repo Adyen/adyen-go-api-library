@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the WebhookLinks type satisfies the MappedNullable interface at compile time
@@ -19,11 +18,11 @@ var _ common.MappedNullable = &WebhookLinks{}
 
 // WebhookLinks struct for WebhookLinks
 type WebhookLinks struct {
-	Company      *LinksElement `json:"company,omitempty"`
-	GenerateHmac LinksElement  `json:"generateHmac"`
-	Merchant     *LinksElement `json:"merchant,omitempty"`
-	Self         LinksElement  `json:"self"`
-	TestWebhook  LinksElement  `json:"testWebhook"`
+	Company *LinksElement `json:"company,omitempty"`
+	GenerateHmac LinksElement `json:"generateHmac"`
+	Merchant *LinksElement `json:"merchant,omitempty"`
+	Self LinksElement `json:"self"`
+	TestWebhook LinksElement `json:"testWebhook"`
 }
 
 // NewWebhookLinks instantiates a new WebhookLinks object
@@ -183,7 +182,7 @@ func (o *WebhookLinks) SetTestWebhook(v LinksElement) {
 }
 
 func (o WebhookLinks) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -239,3 +238,6 @@ func (v *NullableWebhookLinks) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
