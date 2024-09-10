@@ -10,10 +10,10 @@ package payout
 
 import (
 	"context"
-    "net/http"
-    "net/url"
-    "strings"
-    "github.com/adyen/adyen-go-api-library/v12/src/common"
+	"net/http"
+	"net/url"
+
+	"github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // ReviewingApi service
@@ -29,15 +29,13 @@ func (r ReviewingApiConfirmThirdPartyInput) ModifyRequest(modifyRequest ModifyRe
 	return r
 }
 
-
 /*
 Prepare a request for ConfirmThirdParty
 
 @return ReviewingApiConfirmThirdPartyInput
 */
 func (a *ReviewingApi) ConfirmThirdPartyInput() ReviewingApiConfirmThirdPartyInput {
-	return ReviewingApiConfirmThirdPartyInput{
-	}
+	return ReviewingApiConfirmThirdPartyInput{}
 }
 
 /*
@@ -52,25 +50,23 @@ To cancel a payout, use the `/declineThirdParty` endpoint.
 @return ModifyResponse, *http.Response, error
 */
 func (a *ReviewingApi) ConfirmThirdParty(ctx context.Context, r ReviewingApiConfirmThirdPartyInput) (ModifyResponse, *http.Response, error) {
-    res := &ModifyResponse{}
+	res := &ModifyResponse{}
 	path := "/confirmThirdParty"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.modifyRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.modifyRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by ReviewingApi.DeclineThirdParty
 type ReviewingApiDeclineThirdPartyInput struct {
@@ -82,15 +78,13 @@ func (r ReviewingApiDeclineThirdPartyInput) ModifyRequest(modifyRequest ModifyRe
 	return r
 }
 
-
 /*
 Prepare a request for DeclineThirdParty
 
 @return ReviewingApiDeclineThirdPartyInput
 */
 func (a *ReviewingApi) DeclineThirdPartyInput() ReviewingApiDeclineThirdPartyInput {
-	return ReviewingApiDeclineThirdPartyInput{
-	}
+	return ReviewingApiDeclineThirdPartyInput{}
 }
 
 /*
@@ -105,22 +99,20 @@ To confirm and send a payout, use the `/confirmThirdParty` endpoint.
 @return ModifyResponse, *http.Response, error
 */
 func (a *ReviewingApi) DeclineThirdParty(ctx context.Context, r ReviewingApiDeclineThirdPartyInput) (ModifyResponse, *http.Response, error) {
-    res := &ModifyResponse{}
+	res := &ModifyResponse{}
 	path := "/declineThirdParty"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.modifyRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.modifyRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
