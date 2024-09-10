@@ -14,7 +14,7 @@ test:
 
 # Download the import optimizer (and code formatter)
 $(goimports):
-	go install golang.org/x/tools/cmd/goimports@latest
+	go install golang.org/x/tools/cmd/goimports@v0.24.0
 
 fmt: $(goimports)
 	$(goimports) -w src
