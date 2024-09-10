@@ -16,6 +16,7 @@ import (
 // PaymentResponseAction - Action to be taken for completing the payment.
 type PaymentResponseAction struct {
 	CheckoutAwaitAction                   *CheckoutAwaitAction
+	CheckoutBankTransferAction            *CheckoutBankTransferAction
 	CheckoutDelegatedAuthenticationAction *CheckoutDelegatedAuthenticationAction
 	CheckoutNativeRedirectAction          *CheckoutNativeRedirectAction
 	CheckoutQrCodeAction                  *CheckoutQrCodeAction
@@ -29,6 +30,13 @@ type PaymentResponseAction struct {
 func CheckoutAwaitActionAsPaymentResponseAction(v *CheckoutAwaitAction) PaymentResponseAction {
 	return PaymentResponseAction{
 		CheckoutAwaitAction: v,
+	}
+}
+
+// CheckoutBankTransferActionAsPaymentResponseAction is a convenience function that returns CheckoutBankTransferAction wrapped in PaymentResponseAction
+func CheckoutBankTransferActionAsPaymentResponseAction(v *CheckoutBankTransferAction) PaymentResponseAction {
+	return PaymentResponseAction{
+		CheckoutBankTransferAction: v,
 	}
 }
 
@@ -96,6 +104,19 @@ func (dst *PaymentResponseAction) UnmarshalJSON(data []byte) error {
 		}
 	} else {
 		dst.CheckoutAwaitAction = nil
+	}
+
+	// try to unmarshal data into CheckoutBankTransferAction
+	err = json.Unmarshal(data, &dst.CheckoutBankTransferAction)
+	if err == nil {
+		jsonCheckoutBankTransferAction, _ := json.Marshal(dst.CheckoutBankTransferAction)
+		if string(jsonCheckoutBankTransferAction) == "{}" || !dst.CheckoutBankTransferAction.isValidType() { // empty struct
+			dst.CheckoutBankTransferAction = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.CheckoutBankTransferAction = nil
 	}
 
 	// try to unmarshal data into CheckoutDelegatedAuthenticationAction
@@ -192,6 +213,7 @@ func (dst *PaymentResponseAction) UnmarshalJSON(data []byte) error {
 	if match > 1 { // more than 1 match
 		// reset to nil
 		dst.CheckoutAwaitAction = nil
+		dst.CheckoutBankTransferAction = nil
 		dst.CheckoutDelegatedAuthenticationAction = nil
 		dst.CheckoutNativeRedirectAction = nil
 		dst.CheckoutQrCodeAction = nil
@@ -212,6 +234,10 @@ func (dst *PaymentResponseAction) UnmarshalJSON(data []byte) error {
 func (src PaymentResponseAction) MarshalJSON() ([]byte, error) {
 	if src.CheckoutAwaitAction != nil {
 		return json.Marshal(&src.CheckoutAwaitAction)
+	}
+
+	if src.CheckoutBankTransferAction != nil {
+		return json.Marshal(&src.CheckoutBankTransferAction)
 	}
 
 	if src.CheckoutDelegatedAuthenticationAction != nil {
@@ -252,6 +278,10 @@ func (obj *PaymentResponseAction) GetActualInstance() interface{} {
 	}
 	if obj.CheckoutAwaitAction != nil {
 		return obj.CheckoutAwaitAction
+	}
+
+	if obj.CheckoutBankTransferAction != nil {
+		return obj.CheckoutBankTransferAction
 	}
 
 	if obj.CheckoutDelegatedAuthenticationAction != nil {

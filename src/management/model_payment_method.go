@@ -19,6 +19,7 @@ var _ common.MappedNullable = &PaymentMethod{}
 
 // PaymentMethod struct for PaymentMethod
 type PaymentMethod struct {
+	Accel         *AccelInfo         `json:"accel,omitempty"`
 	AfterpayTouch *AfterpayTouchInfo `json:"afterpayTouch,omitempty"`
 	// Indicates whether receiving payments is allowed. This value is set to **true** by Adyen after screening your merchant account.
 	Allowed  *bool         `json:"allowed,omitempty"`
@@ -53,12 +54,17 @@ type PaymentMethod struct {
 	Maestro       *GenericPmWithTdiInfo `json:"maestro,omitempty"`
 	Mc            *GenericPmWithTdiInfo `json:"mc,omitempty"`
 	MealVoucherFR *MealVoucherFRInfo    `json:"mealVoucher_FR,omitempty"`
+	Nyce          *NyceInfo             `json:"nyce,omitempty"`
+	Payme         *PayMeInfo            `json:"payme,omitempty"`
 	Paypal        *PayPalInfo           `json:"paypal,omitempty"`
+	Pulse         *PulseInfo            `json:"pulse,omitempty"`
 	// Your reference for the payment method. Supported characters a-z, A-Z, 0-9.
 	Reference *string `json:"reference,omitempty"`
 	// The sales channel.
 	ShopperInteraction *string     `json:"shopperInteraction,omitempty"`
+	Sodexo             *SodexoInfo `json:"sodexo,omitempty"`
 	Sofort             *SofortInfo `json:"sofort,omitempty"`
+	Star               *StarInfo   `json:"star,omitempty"`
 	// The unique identifier of the store for which to configure the payment method, if any.
 	StoreIds []string    `json:"storeIds,omitempty"`
 	Swish    *SwishInfo  `json:"swish,omitempty"`
@@ -90,6 +96,38 @@ func NewPaymentMethod(id string) *PaymentMethod {
 func NewPaymentMethodWithDefaults() *PaymentMethod {
 	this := PaymentMethod{}
 	return &this
+}
+
+// GetAccel returns the Accel field value if set, zero value otherwise.
+func (o *PaymentMethod) GetAccel() AccelInfo {
+	if o == nil || common.IsNil(o.Accel) {
+		var ret AccelInfo
+		return ret
+	}
+	return *o.Accel
+}
+
+// GetAccelOk returns a tuple with the Accel field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethod) GetAccelOk() (*AccelInfo, bool) {
+	if o == nil || common.IsNil(o.Accel) {
+		return nil, false
+	}
+	return o.Accel, true
+}
+
+// HasAccel returns a boolean if a field has been set.
+func (o *PaymentMethod) HasAccel() bool {
+	if o != nil && !common.IsNil(o.Accel) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccel gets a reference to the given AccelInfo and assigns it to the Accel field.
+func (o *PaymentMethod) SetAccel(v AccelInfo) {
+	o.Accel = &v
 }
 
 // GetAfterpayTouch returns the AfterpayTouch field value if set, zero value otherwise.
@@ -948,6 +986,70 @@ func (o *PaymentMethod) SetMealVoucherFR(v MealVoucherFRInfo) {
 	o.MealVoucherFR = &v
 }
 
+// GetNyce returns the Nyce field value if set, zero value otherwise.
+func (o *PaymentMethod) GetNyce() NyceInfo {
+	if o == nil || common.IsNil(o.Nyce) {
+		var ret NyceInfo
+		return ret
+	}
+	return *o.Nyce
+}
+
+// GetNyceOk returns a tuple with the Nyce field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethod) GetNyceOk() (*NyceInfo, bool) {
+	if o == nil || common.IsNil(o.Nyce) {
+		return nil, false
+	}
+	return o.Nyce, true
+}
+
+// HasNyce returns a boolean if a field has been set.
+func (o *PaymentMethod) HasNyce() bool {
+	if o != nil && !common.IsNil(o.Nyce) {
+		return true
+	}
+
+	return false
+}
+
+// SetNyce gets a reference to the given NyceInfo and assigns it to the Nyce field.
+func (o *PaymentMethod) SetNyce(v NyceInfo) {
+	o.Nyce = &v
+}
+
+// GetPayme returns the Payme field value if set, zero value otherwise.
+func (o *PaymentMethod) GetPayme() PayMeInfo {
+	if o == nil || common.IsNil(o.Payme) {
+		var ret PayMeInfo
+		return ret
+	}
+	return *o.Payme
+}
+
+// GetPaymeOk returns a tuple with the Payme field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethod) GetPaymeOk() (*PayMeInfo, bool) {
+	if o == nil || common.IsNil(o.Payme) {
+		return nil, false
+	}
+	return o.Payme, true
+}
+
+// HasPayme returns a boolean if a field has been set.
+func (o *PaymentMethod) HasPayme() bool {
+	if o != nil && !common.IsNil(o.Payme) {
+		return true
+	}
+
+	return false
+}
+
+// SetPayme gets a reference to the given PayMeInfo and assigns it to the Payme field.
+func (o *PaymentMethod) SetPayme(v PayMeInfo) {
+	o.Payme = &v
+}
+
 // GetPaypal returns the Paypal field value if set, zero value otherwise.
 func (o *PaymentMethod) GetPaypal() PayPalInfo {
 	if o == nil || common.IsNil(o.Paypal) {
@@ -978,6 +1080,38 @@ func (o *PaymentMethod) HasPaypal() bool {
 // SetPaypal gets a reference to the given PayPalInfo and assigns it to the Paypal field.
 func (o *PaymentMethod) SetPaypal(v PayPalInfo) {
 	o.Paypal = &v
+}
+
+// GetPulse returns the Pulse field value if set, zero value otherwise.
+func (o *PaymentMethod) GetPulse() PulseInfo {
+	if o == nil || common.IsNil(o.Pulse) {
+		var ret PulseInfo
+		return ret
+	}
+	return *o.Pulse
+}
+
+// GetPulseOk returns a tuple with the Pulse field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethod) GetPulseOk() (*PulseInfo, bool) {
+	if o == nil || common.IsNil(o.Pulse) {
+		return nil, false
+	}
+	return o.Pulse, true
+}
+
+// HasPulse returns a boolean if a field has been set.
+func (o *PaymentMethod) HasPulse() bool {
+	if o != nil && !common.IsNil(o.Pulse) {
+		return true
+	}
+
+	return false
+}
+
+// SetPulse gets a reference to the given PulseInfo and assigns it to the Pulse field.
+func (o *PaymentMethod) SetPulse(v PulseInfo) {
+	o.Pulse = &v
 }
 
 // GetReference returns the Reference field value if set, zero value otherwise.
@@ -1044,6 +1178,38 @@ func (o *PaymentMethod) SetShopperInteraction(v string) {
 	o.ShopperInteraction = &v
 }
 
+// GetSodexo returns the Sodexo field value if set, zero value otherwise.
+func (o *PaymentMethod) GetSodexo() SodexoInfo {
+	if o == nil || common.IsNil(o.Sodexo) {
+		var ret SodexoInfo
+		return ret
+	}
+	return *o.Sodexo
+}
+
+// GetSodexoOk returns a tuple with the Sodexo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethod) GetSodexoOk() (*SodexoInfo, bool) {
+	if o == nil || common.IsNil(o.Sodexo) {
+		return nil, false
+	}
+	return o.Sodexo, true
+}
+
+// HasSodexo returns a boolean if a field has been set.
+func (o *PaymentMethod) HasSodexo() bool {
+	if o != nil && !common.IsNil(o.Sodexo) {
+		return true
+	}
+
+	return false
+}
+
+// SetSodexo gets a reference to the given SodexoInfo and assigns it to the Sodexo field.
+func (o *PaymentMethod) SetSodexo(v SodexoInfo) {
+	o.Sodexo = &v
+}
+
 // GetSofort returns the Sofort field value if set, zero value otherwise.
 func (o *PaymentMethod) GetSofort() SofortInfo {
 	if o == nil || common.IsNil(o.Sofort) {
@@ -1074,6 +1240,38 @@ func (o *PaymentMethod) HasSofort() bool {
 // SetSofort gets a reference to the given SofortInfo and assigns it to the Sofort field.
 func (o *PaymentMethod) SetSofort(v SofortInfo) {
 	o.Sofort = &v
+}
+
+// GetStar returns the Star field value if set, zero value otherwise.
+func (o *PaymentMethod) GetStar() StarInfo {
+	if o == nil || common.IsNil(o.Star) {
+		var ret StarInfo
+		return ret
+	}
+	return *o.Star
+}
+
+// GetStarOk returns a tuple with the Star field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethod) GetStarOk() (*StarInfo, bool) {
+	if o == nil || common.IsNil(o.Star) {
+		return nil, false
+	}
+	return o.Star, true
+}
+
+// HasStar returns a boolean if a field has been set.
+func (o *PaymentMethod) HasStar() bool {
+	if o != nil && !common.IsNil(o.Star) {
+		return true
+	}
+
+	return false
+}
+
+// SetStar gets a reference to the given StarInfo and assigns it to the Star field.
+func (o *PaymentMethod) SetStar(v StarInfo) {
+	o.Star = &v
 }
 
 // GetStoreIds returns the StoreIds field value if set, zero value otherwise.
@@ -1406,6 +1604,9 @@ func (o PaymentMethod) MarshalJSON() ([]byte, error) {
 
 func (o PaymentMethod) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.Accel) {
+		toSerialize["accel"] = o.Accel
+	}
 	if !common.IsNil(o.AfterpayTouch) {
 		toSerialize["afterpayTouch"] = o.AfterpayTouch
 	}
@@ -1485,8 +1686,17 @@ func (o PaymentMethod) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.MealVoucherFR) {
 		toSerialize["mealVoucher_FR"] = o.MealVoucherFR
 	}
+	if !common.IsNil(o.Nyce) {
+		toSerialize["nyce"] = o.Nyce
+	}
+	if !common.IsNil(o.Payme) {
+		toSerialize["payme"] = o.Payme
+	}
 	if !common.IsNil(o.Paypal) {
 		toSerialize["paypal"] = o.Paypal
+	}
+	if !common.IsNil(o.Pulse) {
+		toSerialize["pulse"] = o.Pulse
 	}
 	if !common.IsNil(o.Reference) {
 		toSerialize["reference"] = o.Reference
@@ -1494,8 +1704,14 @@ func (o PaymentMethod) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.ShopperInteraction) {
 		toSerialize["shopperInteraction"] = o.ShopperInteraction
 	}
+	if !common.IsNil(o.Sodexo) {
+		toSerialize["sodexo"] = o.Sodexo
+	}
 	if !common.IsNil(o.Sofort) {
 		toSerialize["sofort"] = o.Sofort
+	}
+	if !common.IsNil(o.Star) {
+		toSerialize["star"] = o.Star
 	}
 	if !common.IsNil(o.StoreIds) {
 		toSerialize["storeIds"] = o.StoreIds

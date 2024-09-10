@@ -127,6 +127,8 @@ type PaymentRequest struct {
 	Store *string `json:"store,omitempty"`
 	// When true and `shopperReference` is provided, the payment details will be stored for future [recurring payments](https://docs.adyen.com/online-payments/tokenization/#recurring-payment-types).
 	StorePaymentMethod *bool `json:"storePaymentMethod,omitempty"`
+	// This field contains additional information on the submerchant, who is onboarded to an acquirer through a payment facilitator or aggregator
+	SubMerchants []SubMerchantInfo `json:"subMerchants,omitempty"`
 	// The shopper's telephone number.
 	TelephoneNumber     *string                `json:"telephoneNumber,omitempty"`
 	ThreeDS2RequestData *ThreeDS2RequestFields `json:"threeDS2RequestData,omitempty"`
@@ -2145,6 +2147,38 @@ func (o *PaymentRequest) SetStorePaymentMethod(v bool) {
 	o.StorePaymentMethod = &v
 }
 
+// GetSubMerchants returns the SubMerchants field value if set, zero value otherwise.
+func (o *PaymentRequest) GetSubMerchants() []SubMerchantInfo {
+	if o == nil || common.IsNil(o.SubMerchants) {
+		var ret []SubMerchantInfo
+		return ret
+	}
+	return o.SubMerchants
+}
+
+// GetSubMerchantsOk returns a tuple with the SubMerchants field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentRequest) GetSubMerchantsOk() ([]SubMerchantInfo, bool) {
+	if o == nil || common.IsNil(o.SubMerchants) {
+		return nil, false
+	}
+	return o.SubMerchants, true
+}
+
+// HasSubMerchants returns a boolean if a field has been set.
+func (o *PaymentRequest) HasSubMerchants() bool {
+	if o != nil && !common.IsNil(o.SubMerchants) {
+		return true
+	}
+
+	return false
+}
+
+// SetSubMerchants gets a reference to the given []SubMerchantInfo and assigns it to the SubMerchants field.
+func (o *PaymentRequest) SetSubMerchants(v []SubMerchantInfo) {
+	o.SubMerchants = v
+}
+
 // GetTelephoneNumber returns the TelephoneNumber field value if set, zero value otherwise.
 func (o *PaymentRequest) GetTelephoneNumber() string {
 	if o == nil || common.IsNil(o.TelephoneNumber) {
@@ -2464,6 +2498,9 @@ func (o PaymentRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.StorePaymentMethod) {
 		toSerialize["storePaymentMethod"] = o.StorePaymentMethod
+	}
+	if !common.IsNil(o.SubMerchants) {
+		toSerialize["subMerchants"] = o.SubMerchants
 	}
 	if !common.IsNil(o.TelephoneNumber) {
 		toSerialize["telephoneNumber"] = o.TelephoneNumber

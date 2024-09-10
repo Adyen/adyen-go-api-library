@@ -43,7 +43,7 @@ type CardDetails struct {
 	FundingSource *string `json:"fundingSource,omitempty"`
 	// The name of the card holder.
 	HolderName *string `json:"holderName,omitempty"`
-	// The network token reference. This is the [`networkTxReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_additionalData-ResponseAdditionalDataCommon-networkTxReference) from the response to the first payment.
+	// The transaction identifier from card schemes. This is the [`networkTxReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_additionalData-ResponseAdditionalDataCommon-networkTxReference) from the response to the first payment.
 	NetworkPaymentReference *string `json:"networkPaymentReference,omitempty"`
 	// The card number. Only collect raw card data if you are [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide).
 	Number *string `json:"number,omitempty"`

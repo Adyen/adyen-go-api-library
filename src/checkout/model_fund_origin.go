@@ -20,11 +20,12 @@ var _ common.MappedNullable = &FundOrigin{}
 // FundOrigin struct for FundOrigin
 type FundOrigin struct {
 	BillingAddress *Address `json:"billingAddress,omitempty"`
-	// Email address of the person.
+	// The email address of the person funding the money.
 	ShopperEmail *string `json:"shopperEmail,omitempty"`
 	ShopperName  *Name   `json:"shopperName,omitempty"`
-	// Phone number of the person
-	TelephoneNumber  *string `json:"telephoneNumber,omitempty"`
+	// The phone number of the person funding the money.
+	TelephoneNumber *string `json:"telephoneNumber,omitempty"`
+	// The unique identifier of the wallet where the funds are coming from.
 	WalletIdentifier *string `json:"walletIdentifier,omitempty"`
 }
 

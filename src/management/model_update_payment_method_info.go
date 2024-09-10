@@ -19,6 +19,7 @@ var _ common.MappedNullable = &UpdatePaymentMethodInfo{}
 
 // UpdatePaymentMethodInfo struct for UpdatePaymentMethodInfo
 type UpdatePaymentMethodInfo struct {
+	Accel           *AccelInfo           `json:"accel,omitempty"`
 	Bcmc            *BcmcInfo            `json:"bcmc,omitempty"`
 	CartesBancaires *CartesBancairesInfo `json:"cartesBancaires,omitempty"`
 	// The list of countries where a payment method is available. By default, all countries supported by the payment method.
@@ -39,6 +40,9 @@ type UpdatePaymentMethodInfo struct {
 	Jcb         *GenericPmWithTdiInfo `json:"jcb,omitempty"`
 	Maestro     *GenericPmWithTdiInfo `json:"maestro,omitempty"`
 	Mc          *GenericPmWithTdiInfo `json:"mc,omitempty"`
+	Nyce        *NyceInfo             `json:"nyce,omitempty"`
+	Pulse       *PulseInfo            `json:"pulse,omitempty"`
+	Star        *StarInfo             `json:"star,omitempty"`
 	// The list of stores for this payment method
 	StoreIds []string              `json:"storeIds,omitempty"`
 	Visa     *GenericPmWithTdiInfo `json:"visa,omitempty"`
@@ -59,6 +63,38 @@ func NewUpdatePaymentMethodInfo() *UpdatePaymentMethodInfo {
 func NewUpdatePaymentMethodInfoWithDefaults() *UpdatePaymentMethodInfo {
 	this := UpdatePaymentMethodInfo{}
 	return &this
+}
+
+// GetAccel returns the Accel field value if set, zero value otherwise.
+func (o *UpdatePaymentMethodInfo) GetAccel() AccelInfo {
+	if o == nil || common.IsNil(o.Accel) {
+		var ret AccelInfo
+		return ret
+	}
+	return *o.Accel
+}
+
+// GetAccelOk returns a tuple with the Accel field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdatePaymentMethodInfo) GetAccelOk() (*AccelInfo, bool) {
+	if o == nil || common.IsNil(o.Accel) {
+		return nil, false
+	}
+	return o.Accel, true
+}
+
+// HasAccel returns a boolean if a field has been set.
+func (o *UpdatePaymentMethodInfo) HasAccel() bool {
+	if o != nil && !common.IsNil(o.Accel) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccel gets a reference to the given AccelInfo and assigns it to the Accel field.
+func (o *UpdatePaymentMethodInfo) SetAccel(v AccelInfo) {
+	o.Accel = &v
 }
 
 // GetBcmc returns the Bcmc field value if set, zero value otherwise.
@@ -573,6 +609,102 @@ func (o *UpdatePaymentMethodInfo) SetMc(v GenericPmWithTdiInfo) {
 	o.Mc = &v
 }
 
+// GetNyce returns the Nyce field value if set, zero value otherwise.
+func (o *UpdatePaymentMethodInfo) GetNyce() NyceInfo {
+	if o == nil || common.IsNil(o.Nyce) {
+		var ret NyceInfo
+		return ret
+	}
+	return *o.Nyce
+}
+
+// GetNyceOk returns a tuple with the Nyce field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdatePaymentMethodInfo) GetNyceOk() (*NyceInfo, bool) {
+	if o == nil || common.IsNil(o.Nyce) {
+		return nil, false
+	}
+	return o.Nyce, true
+}
+
+// HasNyce returns a boolean if a field has been set.
+func (o *UpdatePaymentMethodInfo) HasNyce() bool {
+	if o != nil && !common.IsNil(o.Nyce) {
+		return true
+	}
+
+	return false
+}
+
+// SetNyce gets a reference to the given NyceInfo and assigns it to the Nyce field.
+func (o *UpdatePaymentMethodInfo) SetNyce(v NyceInfo) {
+	o.Nyce = &v
+}
+
+// GetPulse returns the Pulse field value if set, zero value otherwise.
+func (o *UpdatePaymentMethodInfo) GetPulse() PulseInfo {
+	if o == nil || common.IsNil(o.Pulse) {
+		var ret PulseInfo
+		return ret
+	}
+	return *o.Pulse
+}
+
+// GetPulseOk returns a tuple with the Pulse field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdatePaymentMethodInfo) GetPulseOk() (*PulseInfo, bool) {
+	if o == nil || common.IsNil(o.Pulse) {
+		return nil, false
+	}
+	return o.Pulse, true
+}
+
+// HasPulse returns a boolean if a field has been set.
+func (o *UpdatePaymentMethodInfo) HasPulse() bool {
+	if o != nil && !common.IsNil(o.Pulse) {
+		return true
+	}
+
+	return false
+}
+
+// SetPulse gets a reference to the given PulseInfo and assigns it to the Pulse field.
+func (o *UpdatePaymentMethodInfo) SetPulse(v PulseInfo) {
+	o.Pulse = &v
+}
+
+// GetStar returns the Star field value if set, zero value otherwise.
+func (o *UpdatePaymentMethodInfo) GetStar() StarInfo {
+	if o == nil || common.IsNil(o.Star) {
+		var ret StarInfo
+		return ret
+	}
+	return *o.Star
+}
+
+// GetStarOk returns a tuple with the Star field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdatePaymentMethodInfo) GetStarOk() (*StarInfo, bool) {
+	if o == nil || common.IsNil(o.Star) {
+		return nil, false
+	}
+	return o.Star, true
+}
+
+// HasStar returns a boolean if a field has been set.
+func (o *UpdatePaymentMethodInfo) HasStar() bool {
+	if o != nil && !common.IsNil(o.Star) {
+		return true
+	}
+
+	return false
+}
+
+// SetStar gets a reference to the given StarInfo and assigns it to the Star field.
+func (o *UpdatePaymentMethodInfo) SetStar(v StarInfo) {
+	o.Star = &v
+}
+
 // GetStoreIds returns the StoreIds field value if set, zero value otherwise.
 func (o *UpdatePaymentMethodInfo) GetStoreIds() []string {
 	if o == nil || common.IsNil(o.StoreIds) {
@@ -647,6 +779,9 @@ func (o UpdatePaymentMethodInfo) MarshalJSON() ([]byte, error) {
 
 func (o UpdatePaymentMethodInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.Accel) {
+		toSerialize["accel"] = o.Accel
+	}
 	if !common.IsNil(o.Bcmc) {
 		toSerialize["bcmc"] = o.Bcmc
 	}
@@ -694,6 +829,15 @@ func (o UpdatePaymentMethodInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Mc) {
 		toSerialize["mc"] = o.Mc
+	}
+	if !common.IsNil(o.Nyce) {
+		toSerialize["nyce"] = o.Nyce
+	}
+	if !common.IsNil(o.Pulse) {
+		toSerialize["pulse"] = o.Pulse
+	}
+	if !common.IsNil(o.Star) {
+		toSerialize["star"] = o.Star
 	}
 	if !common.IsNil(o.StoreIds) {
 		toSerialize["storeIds"] = o.StoreIds

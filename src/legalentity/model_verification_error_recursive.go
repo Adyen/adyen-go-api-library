@@ -25,7 +25,7 @@ type VerificationErrorRecursive struct {
 	Code *string `json:"code,omitempty"`
 	// The general error message.
 	Message *string `json:"message,omitempty"`
-	// The type of error.
+	// The type of error.  Possible values: *  **invalidInput** *  **dataMissing** *  **pendingStatus** *  **rejected** *  **dataReview**
 	Type *string `json:"type,omitempty"`
 	// An object containing possible solutions to fix a verification error.
 	RemediatingActions []RemediatingAction `json:"remediatingActions,omitempty"`

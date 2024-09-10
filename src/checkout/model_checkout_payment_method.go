@@ -31,6 +31,7 @@ type CheckoutPaymentMethod struct {
 	DotpayDetails                     *DotpayDetails
 	DragonpayDetails                  *DragonpayDetails
 	EcontextVoucherDetails            *EcontextVoucherDetails
+	EftDetails                        *EftDetails
 	GenericIssuerPaymentMethodDetails *GenericIssuerPaymentMethodDetails
 	GiropayDetails                    *GiropayDetails
 	GooglePayDetails                  *GooglePayDetails
@@ -169,6 +170,13 @@ func DragonpayDetailsAsCheckoutPaymentMethod(v *DragonpayDetails) CheckoutPaymen
 func EcontextVoucherDetailsAsCheckoutPaymentMethod(v *EcontextVoucherDetails) CheckoutPaymentMethod {
 	return CheckoutPaymentMethod{
 		EcontextVoucherDetails: v,
+	}
+}
+
+// EftDetailsAsCheckoutPaymentMethod is a convenience function that returns EftDetails wrapped in CheckoutPaymentMethod
+func EftDetailsAsCheckoutPaymentMethod(v *EftDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
+		EftDetails: v,
 	}
 }
 
@@ -573,6 +581,19 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		dst.EcontextVoucherDetails = nil
 	}
 
+	// try to unmarshal data into EftDetails
+	err = json.Unmarshal(data, &dst.EftDetails)
+	if err == nil {
+		jsonEftDetails, _ := json.Marshal(dst.EftDetails)
+		if string(jsonEftDetails) == "{}" || !dst.EftDetails.isValidType() { // empty struct
+			dst.EftDetails = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.EftDetails = nil
+	}
+
 	// try to unmarshal data into GenericIssuerPaymentMethodDetails
 	err = json.Unmarshal(data, &dst.GenericIssuerPaymentMethodDetails)
 	if err == nil {
@@ -942,6 +963,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		dst.DotpayDetails = nil
 		dst.DragonpayDetails = nil
 		dst.EcontextVoucherDetails = nil
+		dst.EftDetails = nil
 		dst.GenericIssuerPaymentMethodDetails = nil
 		dst.GiropayDetails = nil
 		dst.GooglePayDetails = nil
@@ -1042,6 +1064,10 @@ func (src CheckoutPaymentMethod) MarshalJSON() ([]byte, error) {
 
 	if src.EcontextVoucherDetails != nil {
 		return json.Marshal(&src.EcontextVoucherDetails)
+	}
+
+	if src.EftDetails != nil {
+		return json.Marshal(&src.EftDetails)
 	}
 
 	if src.GenericIssuerPaymentMethodDetails != nil {
@@ -1222,6 +1248,10 @@ func (obj *CheckoutPaymentMethod) GetActualInstance() interface{} {
 
 	if obj.EcontextVoucherDetails != nil {
 		return obj.EcontextVoucherDetails
+	}
+
+	if obj.EftDetails != nil {
+		return obj.EftDetails
 	}
 
 	if obj.GenericIssuerPaymentMethodDetails != nil {
