@@ -10,10 +10,10 @@ package payout
 
 import (
 	"context"
-    "net/http"
-    "net/url"
-    "strings"
-    "github.com/adyen/adyen-go-api-library/v12/src/common"
+	"net/http"
+	"net/url"
+
+	"github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // InitializationApi service
@@ -29,15 +29,13 @@ func (r InitializationApiStoreDetailInput) StoreDetailRequest(storeDetailRequest
 	return r
 }
 
-
 /*
 Prepare a request for StoreDetail
 
 @return InitializationApiStoreDetailInput
 */
 func (a *InitializationApi) StoreDetailInput() InitializationApiStoreDetailInput {
-	return InitializationApiStoreDetailInput{
-	}
+	return InitializationApiStoreDetailInput{}
 }
 
 /*
@@ -57,25 +55,23 @@ Stores payment details under the `PAYOUT` recurring contract. These payment deta
 @return StoreDetailResponse, *http.Response, error
 */
 func (a *InitializationApi) StoreDetail(ctx context.Context, r InitializationApiStoreDetailInput) (StoreDetailResponse, *http.Response, error) {
-    res := &StoreDetailResponse{}
+	res := &StoreDetailResponse{}
 	path := "/storeDetail"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.storeDetailRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.storeDetailRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by InitializationApi.StoreDetailAndSubmitThirdParty
 type InitializationApiStoreDetailAndSubmitThirdPartyInput struct {
@@ -87,15 +83,13 @@ func (r InitializationApiStoreDetailAndSubmitThirdPartyInput) StoreDetailAndSubm
 	return r
 }
 
-
 /*
 Prepare a request for StoreDetailAndSubmitThirdParty
 
 @return InitializationApiStoreDetailAndSubmitThirdPartyInput
 */
 func (a *InitializationApi) StoreDetailAndSubmitThirdPartyInput() InitializationApiStoreDetailAndSubmitThirdPartyInput {
-	return InitializationApiStoreDetailAndSubmitThirdPartyInput{
-	}
+	return InitializationApiStoreDetailAndSubmitThirdPartyInput{}
 }
 
 /*
@@ -117,25 +111,23 @@ The submitted payout must be confirmed or declined either by a reviewer or via `
 @return StoreDetailAndSubmitResponse, *http.Response, error
 */
 func (a *InitializationApi) StoreDetailAndSubmitThirdParty(ctx context.Context, r InitializationApiStoreDetailAndSubmitThirdPartyInput) (StoreDetailAndSubmitResponse, *http.Response, error) {
-    res := &StoreDetailAndSubmitResponse{}
+	res := &StoreDetailAndSubmitResponse{}
 	path := "/storeDetailAndSubmitThirdParty"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.storeDetailAndSubmitRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.storeDetailAndSubmitRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by InitializationApi.SubmitThirdParty
 type InitializationApiSubmitThirdPartyInput struct {
@@ -147,15 +139,13 @@ func (r InitializationApiSubmitThirdPartyInput) SubmitRequest(submitRequest Subm
 	return r
 }
 
-
 /*
 Prepare a request for SubmitThirdParty
 
 @return InitializationApiSubmitThirdPartyInput
 */
 func (a *InitializationApi) SubmitThirdPartyInput() InitializationApiSubmitThirdPartyInput {
-	return InitializationApiSubmitThirdPartyInput{
-	}
+	return InitializationApiSubmitThirdPartyInput{}
 }
 
 /*
@@ -177,22 +167,20 @@ The submitted payout must be confirmed or declined either by a reviewer or via `
 @return SubmitResponse, *http.Response, error
 */
 func (a *InitializationApi) SubmitThirdParty(ctx context.Context, r InitializationApiSubmitThirdPartyInput) (SubmitResponse, *http.Response, error) {
-    res := &SubmitResponse{}
+	res := &SubmitResponse{}
 	path := "/submitThirdParty"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.submitRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.submitRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-

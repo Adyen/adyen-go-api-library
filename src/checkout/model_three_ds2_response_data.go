@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v12/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the ThreeDS2ResponseData type satisfies the MappedNullable interface at compile time
@@ -19,24 +20,24 @@ var _ common.MappedNullable = &ThreeDS2ResponseData{}
 // ThreeDS2ResponseData struct for ThreeDS2ResponseData
 type ThreeDS2ResponseData struct {
 	AcsChallengeMandated *string `json:"acsChallengeMandated,omitempty"`
-	AcsOperatorID *string `json:"acsOperatorID,omitempty"`
-	AcsReferenceNumber *string `json:"acsReferenceNumber,omitempty"`
-	AcsSignedContent *string `json:"acsSignedContent,omitempty"`
-	AcsTransID *string `json:"acsTransID,omitempty"`
-	AcsURL *string `json:"acsURL,omitempty"`
-	AuthenticationType *string `json:"authenticationType,omitempty"`
-	CardHolderInfo *string `json:"cardHolderInfo,omitempty"`
-	CavvAlgorithm *string `json:"cavvAlgorithm,omitempty"`
-	ChallengeIndicator *string `json:"challengeIndicator,omitempty"`
-	DsReferenceNumber *string `json:"dsReferenceNumber,omitempty"`
-	DsTransID *string `json:"dsTransID,omitempty"`
-	ExemptionIndicator *string `json:"exemptionIndicator,omitempty"`
-	MessageVersion *string `json:"messageVersion,omitempty"`
-	RiskScore *string `json:"riskScore,omitempty"`
-	SdkEphemPubKey *string `json:"sdkEphemPubKey,omitempty"`
+	AcsOperatorID        *string `json:"acsOperatorID,omitempty"`
+	AcsReferenceNumber   *string `json:"acsReferenceNumber,omitempty"`
+	AcsSignedContent     *string `json:"acsSignedContent,omitempty"`
+	AcsTransID           *string `json:"acsTransID,omitempty"`
+	AcsURL               *string `json:"acsURL,omitempty"`
+	AuthenticationType   *string `json:"authenticationType,omitempty"`
+	CardHolderInfo       *string `json:"cardHolderInfo,omitempty"`
+	CavvAlgorithm        *string `json:"cavvAlgorithm,omitempty"`
+	ChallengeIndicator   *string `json:"challengeIndicator,omitempty"`
+	DsReferenceNumber    *string `json:"dsReferenceNumber,omitempty"`
+	DsTransID            *string `json:"dsTransID,omitempty"`
+	ExemptionIndicator   *string `json:"exemptionIndicator,omitempty"`
+	MessageVersion       *string `json:"messageVersion,omitempty"`
+	RiskScore            *string `json:"riskScore,omitempty"`
+	SdkEphemPubKey       *string `json:"sdkEphemPubKey,omitempty"`
 	ThreeDSServerTransID *string `json:"threeDSServerTransID,omitempty"`
-	TransStatus *string `json:"transStatus,omitempty"`
-	TransStatusReason *string `json:"transStatusReason,omitempty"`
+	TransStatus          *string `json:"transStatus,omitempty"`
+	TransStatusReason    *string `json:"transStatusReason,omitempty"`
 }
 
 // NewThreeDS2ResponseData instantiates a new ThreeDS2ResponseData object
@@ -665,7 +666,7 @@ func (o *ThreeDS2ResponseData) SetTransStatusReason(v string) {
 }
 
 func (o ThreeDS2ResponseData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -769,6 +770,3 @@ func (v *NullableThreeDS2ResponseData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

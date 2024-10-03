@@ -10,10 +10,11 @@ package legalentity
 
 import (
 	"context"
-    "net/http"
-    "net/url"
-    "strings"
-    "github.com/adyen/adyen-go-api-library/v12/src/common"
+	"net/http"
+	"net/url"
+	"strings"
+
+	"github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // PCIQuestionnairesApi service
@@ -21,7 +22,7 @@ type PCIQuestionnairesApi common.Service
 
 // All parameters accepted by PCIQuestionnairesApi.GeneratePciQuestionnaire
 type PCIQuestionnairesApiGeneratePciQuestionnaireInput struct {
-	id string
+	id                            string
 	generatePciDescriptionRequest *GeneratePciDescriptionRequest
 }
 
@@ -29,7 +30,6 @@ func (r PCIQuestionnairesApiGeneratePciQuestionnaireInput) GeneratePciDescriptio
 	r.generatePciDescriptionRequest = &generatePciDescriptionRequest
 	return r
 }
-
 
 /*
 Prepare a request for GeneratePciQuestionnaire
@@ -52,33 +52,30 @@ Generates the required PCI questionnaires based on the user's [salesChannel](htt
 @return GeneratePciDescriptionResponse, *http.Response, error
 */
 func (a *PCIQuestionnairesApi) GeneratePciQuestionnaire(ctx context.Context, r PCIQuestionnairesApiGeneratePciQuestionnaireInput) (GeneratePciDescriptionResponse, *http.Response, error) {
-    res := &GeneratePciDescriptionResponse{}
+	res := &GeneratePciDescriptionResponse{}
 	path := "/legalEntities/{id}/pciQuestionnaires/generatePciTemplates"
-    path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.generatePciDescriptionRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.generatePciDescriptionRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by PCIQuestionnairesApi.GetPciQuestionnaire
 type PCIQuestionnairesApiGetPciQuestionnaireInput struct {
-	id string
+	id    string
 	pciid string
 }
-
 
 /*
 Prepare a request for GetPciQuestionnaire
@@ -87,7 +84,7 @@ Prepare a request for GetPciQuestionnaire
 */
 func (a *PCIQuestionnairesApi) GetPciQuestionnaireInput(id string, pciid string) PCIQuestionnairesApiGetPciQuestionnaireInput {
 	return PCIQuestionnairesApiGetPciQuestionnaireInput{
-		id: id,
+		id:    id,
 		pciid: pciid,
 	}
 }
@@ -102,33 +99,30 @@ Returns the signed PCI questionnaire.
 @return GetPciQuestionnaireResponse, *http.Response, error
 */
 func (a *PCIQuestionnairesApi) GetPciQuestionnaire(ctx context.Context, r PCIQuestionnairesApiGetPciQuestionnaireInput) (GetPciQuestionnaireResponse, *http.Response, error) {
-    res := &GetPciQuestionnaireResponse{}
+	res := &GetPciQuestionnaireResponse{}
 	path := "/legalEntities/{id}/pciQuestionnaires/{pciid}"
-    path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-    path = strings.Replace(path, "{"+"pciid"+"}", url.PathEscape(common.ParameterValueToString(r.pciid, "pciid")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodGet,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	path = strings.Replace(path, "{"+"pciid"+"}", url.PathEscape(common.ParameterValueToString(r.pciid, "pciid")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by PCIQuestionnairesApi.GetPciQuestionnaireDetails
 type PCIQuestionnairesApiGetPciQuestionnaireDetailsInput struct {
 	id string
 }
-
 
 /*
 Prepare a request for GetPciQuestionnaireDetails
@@ -151,30 +145,28 @@ Get a list of signed PCI questionnaires.
 @return GetPciQuestionnaireInfosResponse, *http.Response, error
 */
 func (a *PCIQuestionnairesApi) GetPciQuestionnaireDetails(ctx context.Context, r PCIQuestionnairesApiGetPciQuestionnaireDetailsInput) (GetPciQuestionnaireInfosResponse, *http.Response, error) {
-    res := &GetPciQuestionnaireInfosResponse{}
+	res := &GetPciQuestionnaireInfosResponse{}
 	path := "/legalEntities/{id}/pciQuestionnaires"
-    path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodGet,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by PCIQuestionnairesApi.SignPciQuestionnaire
 type PCIQuestionnairesApiSignPciQuestionnaireInput struct {
-	id string
+	id                string
 	pciSigningRequest *PciSigningRequest
 }
 
@@ -182,7 +174,6 @@ func (r PCIQuestionnairesApiSignPciQuestionnaireInput) PciSigningRequest(pciSign
 	r.pciSigningRequest = &pciSigningRequest
 	return r
 }
-
 
 /*
 Prepare a request for SignPciQuestionnaire
@@ -205,23 +196,21 @@ Signs the required PCI questionnaire.
 @return PciSigningResponse, *http.Response, error
 */
 func (a *PCIQuestionnairesApi) SignPciQuestionnaire(ctx context.Context, r PCIQuestionnairesApiSignPciQuestionnaireInput) (PciSigningResponse, *http.Response, error) {
-    res := &PciSigningResponse{}
+	res := &PciSigningResponse{}
 	path := "/legalEntities/{id}/pciQuestionnaires/signPciTemplates"
-    path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.pciSigningRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.pciSigningRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
