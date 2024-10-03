@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the CreateOrderResponse type satisfies the MappedNullable interface at compile time
@@ -21,9 +20,9 @@ var _ common.MappedNullable = &CreateOrderResponse{}
 type CreateOrderResponse struct {
 	// Contains additional information about the payment. Some data fields are included only if you select them first: Go to **Customer Area** > **Developers** > **Additional data**.
 	AdditionalData *map[string]string `json:"additionalData,omitempty"`
-	Amount         Amount             `json:"amount"`
+	Amount Amount `json:"amount"`
 	// The date that the order will expire.
-	ExpiresAt   string       `json:"expiresAt"`
+	ExpiresAt string `json:"expiresAt"`
 	FraudResult *FraudResult `json:"fraudResult,omitempty"`
 	// The encrypted data that will be used by merchant for adding payments to the order.
 	OrderData string `json:"orderData"`
@@ -32,8 +31,8 @@ type CreateOrderResponse struct {
 	// The reference provided by merchant for creating the order.
 	Reference *string `json:"reference,omitempty"`
 	// If the payment's authorisation is refused or an error occurs during authorisation, this field holds Adyen's mapped reason for the refusal or a description of the error. When a transaction fails, the authorisation response includes `resultCode` and `refusalReason` values.  For more information, see [Refusal reasons](https://docs.adyen.com/development-resources/refusal-reasons).
-	RefusalReason   *string `json:"refusalReason,omitempty"`
-	RemainingAmount Amount  `json:"remainingAmount"`
+	RefusalReason *string `json:"refusalReason,omitempty"`
+	RemainingAmount Amount `json:"remainingAmount"`
 	// The result of the order creation request.  The value is always **Success**.
 	ResultCode string `json:"resultCode"`
 }
@@ -341,7 +340,7 @@ func (o *CreateOrderResponse) SetResultCode(v string) {
 }
 
 func (o CreateOrderResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -409,12 +408,14 @@ func (v *NullableCreateOrderResponse) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *CreateOrderResponse) isValidResultCode() bool {
-	var allowedEnumValues = []string{"Success"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetResultCode() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "Success" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetResultCode() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

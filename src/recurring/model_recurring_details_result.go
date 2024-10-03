@@ -10,9 +10,8 @@ package recurring
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 	"time"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the RecurringDetailsResult type satisfies the MappedNullable interface at compile time
@@ -176,7 +175,7 @@ func (o *RecurringDetailsResult) SetShopperReference(v string) {
 }
 
 func (o RecurringDetailsResult) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -235,3 +234,6 @@ func (v *NullableRecurringDetailsResult) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

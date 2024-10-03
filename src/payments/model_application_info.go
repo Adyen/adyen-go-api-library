@@ -10,8 +10,7 @@ package payments
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the ApplicationInfo type satisfies the MappedNullable interface at compile time
@@ -19,11 +18,11 @@ var _ common.MappedNullable = &ApplicationInfo{}
 
 // ApplicationInfo struct for ApplicationInfo
 type ApplicationInfo struct {
-	AdyenLibrary             *CommonField              `json:"adyenLibrary,omitempty"`
-	AdyenPaymentSource       *CommonField              `json:"adyenPaymentSource,omitempty"`
-	ExternalPlatform         *ExternalPlatform         `json:"externalPlatform,omitempty"`
-	MerchantApplication      *CommonField              `json:"merchantApplication,omitempty"`
-	MerchantDevice           *MerchantDevice           `json:"merchantDevice,omitempty"`
+	AdyenLibrary *CommonField `json:"adyenLibrary,omitempty"`
+	AdyenPaymentSource *CommonField `json:"adyenPaymentSource,omitempty"`
+	ExternalPlatform *ExternalPlatform `json:"externalPlatform,omitempty"`
+	MerchantApplication *CommonField `json:"merchantApplication,omitempty"`
+	MerchantDevice *MerchantDevice `json:"merchantDevice,omitempty"`
 	ShopperInteractionDevice *ShopperInteractionDevice `json:"shopperInteractionDevice,omitempty"`
 }
 
@@ -237,7 +236,7 @@ func (o *ApplicationInfo) SetShopperInteractionDevice(v ShopperInteractionDevice
 }
 
 func (o ApplicationInfo) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -302,3 +301,6 @@ func (v *NullableApplicationInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

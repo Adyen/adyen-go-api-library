@@ -10,10 +10,10 @@ package payout
 
 import (
 	"context"
-	"net/http"
-	"net/url"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+    "net/http"
+    "net/url"
+    "strings"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // InstantPayoutsApi service
@@ -29,17 +29,26 @@ func (r InstantPayoutsApiPayoutInput) PayoutRequest(payoutRequest PayoutRequest)
 	return r
 }
 
+
 /*
 Prepare a request for Payout
 
 @return InstantPayoutsApiPayoutInput
 */
 func (a *InstantPayoutsApi) PayoutInput() InstantPayoutsApiPayoutInput {
-	return InstantPayoutsApiPayoutInput{}
+	return InstantPayoutsApiPayoutInput{
+	}
 }
 
 /*
 Payout Make an instant card payout
+
+> This endpoint is **deprecated** and no longer supports new integrations. If you are:
+>- Building a new integration, use the POST [/transfers](https://docs.adyen.com/api-explorer/transfers/latest/post/transfers) endpoint instead.
+> - Already using the Payout API, reach out to your Adyen contact to learn how to migrate to the Transfers API.
+>
+> For more information about the payout features of the Transfers API, see our [Payouts](https://docs.adyen.com/payouts/payout-service) documentation.
+
 
 With this call, you can pay out to your customers, and funds will be made available within 30 minutes on the cardholder's bank account (this is dependent on whether the issuer supports this functionality). Instant card payouts are only supported for Visa and Mastercard cards.
 
@@ -48,20 +57,22 @@ With this call, you can pay out to your customers, and funds will be made availa
 @return PayoutResponse, *http.Response, error
 */
 func (a *InstantPayoutsApi) Payout(ctx context.Context, r InstantPayoutsApiPayoutInput) (PayoutResponse, *http.Response, error) {
-	res := &PayoutResponse{}
+    res := &PayoutResponse{}
 	path := "/payout"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.payoutRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.payoutRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+

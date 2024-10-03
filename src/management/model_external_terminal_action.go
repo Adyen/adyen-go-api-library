@@ -10,9 +10,8 @@ package management
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 	"time"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the ExternalTerminalAction type satisfies the MappedNullable interface at compile time
@@ -312,7 +311,7 @@ func (o *ExternalTerminalAction) SetTerminalId(v string) {
 }
 
 func (o ExternalTerminalAction) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -383,3 +382,6 @@ func (v *NullableExternalTerminalAction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

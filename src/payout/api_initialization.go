@@ -10,10 +10,10 @@ package payout
 
 import (
 	"context"
-	"net/http"
-	"net/url"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+    "net/http"
+    "net/url"
+    "strings"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // InitializationApi service
@@ -29,17 +29,26 @@ func (r InitializationApiStoreDetailInput) StoreDetailRequest(storeDetailRequest
 	return r
 }
 
+
 /*
 Prepare a request for StoreDetail
 
 @return InitializationApiStoreDetailInput
 */
 func (a *InitializationApi) StoreDetailInput() InitializationApiStoreDetailInput {
-	return InitializationApiStoreDetailInput{}
+	return InitializationApiStoreDetailInput{
+	}
 }
 
 /*
 StoreDetail Store payout details
+
+> This endpoint is **deprecated** and no longer supports new integrations. If you are:
+>- Building a new integration, use the [Transfers API](https://docs.adyen.com/api-explorer/transfers/latest/overview) instead.
+> - Already using the Payout API, reach out to your Adyen contact to learn how to migrate to the Transfers API.
+>
+> For more information about the payout features of the Transfers API, see our [Payouts](https://docs.adyen.com/payouts/payout-service) documentation.
+
 
 Stores payment details under the `PAYOUT` recurring contract. These payment details can be used later to submit a payout via the `/submitThirdParty` call.
 
@@ -48,23 +57,25 @@ Stores payment details under the `PAYOUT` recurring contract. These payment deta
 @return StoreDetailResponse, *http.Response, error
 */
 func (a *InitializationApi) StoreDetail(ctx context.Context, r InitializationApiStoreDetailInput) (StoreDetailResponse, *http.Response, error) {
-	res := &StoreDetailResponse{}
+    res := &StoreDetailResponse{}
 	path := "/storeDetail"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.storeDetailRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.storeDetailRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by InitializationApi.StoreDetailAndSubmitThirdParty
 type InitializationApiStoreDetailAndSubmitThirdPartyInput struct {
@@ -76,17 +87,26 @@ func (r InitializationApiStoreDetailAndSubmitThirdPartyInput) StoreDetailAndSubm
 	return r
 }
 
+
 /*
 Prepare a request for StoreDetailAndSubmitThirdParty
 
 @return InitializationApiStoreDetailAndSubmitThirdPartyInput
 */
 func (a *InitializationApi) StoreDetailAndSubmitThirdPartyInput() InitializationApiStoreDetailAndSubmitThirdPartyInput {
-	return InitializationApiStoreDetailAndSubmitThirdPartyInput{}
+	return InitializationApiStoreDetailAndSubmitThirdPartyInput{
+	}
 }
 
 /*
 StoreDetailAndSubmitThirdParty Store details and submit a payout
+
+> This endpoint is **deprecated** and no longer supports new integrations. If you are:
+>- Building a new integration, use the POST [/transfers](https://docs.adyen.com/api-explorer/transfers/latest/post/transfers) endpoint instead.
+> - Already using the Payout API, reach out to your Adyen contact to learn how to migrate to the Transfers API.
+>
+> For more information about the payout features of the Transfers API, see our [Payouts](https://docs.adyen.com/payouts/payout-service) documentation.
+
 
 Submits a payout and stores its details for subsequent payouts.
 
@@ -97,23 +117,25 @@ The submitted payout must be confirmed or declined either by a reviewer or via `
 @return StoreDetailAndSubmitResponse, *http.Response, error
 */
 func (a *InitializationApi) StoreDetailAndSubmitThirdParty(ctx context.Context, r InitializationApiStoreDetailAndSubmitThirdPartyInput) (StoreDetailAndSubmitResponse, *http.Response, error) {
-	res := &StoreDetailAndSubmitResponse{}
+    res := &StoreDetailAndSubmitResponse{}
 	path := "/storeDetailAndSubmitThirdParty"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.storeDetailAndSubmitRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.storeDetailAndSubmitRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by InitializationApi.SubmitThirdParty
 type InitializationApiSubmitThirdPartyInput struct {
@@ -125,17 +147,26 @@ func (r InitializationApiSubmitThirdPartyInput) SubmitRequest(submitRequest Subm
 	return r
 }
 
+
 /*
 Prepare a request for SubmitThirdParty
 
 @return InitializationApiSubmitThirdPartyInput
 */
 func (a *InitializationApi) SubmitThirdPartyInput() InitializationApiSubmitThirdPartyInput {
-	return InitializationApiSubmitThirdPartyInput{}
+	return InitializationApiSubmitThirdPartyInput{
+	}
 }
 
 /*
 SubmitThirdParty Submit a payout
+
+> This endpoint is **deprecated** and no longer supports new integrations. If you are:
+>- Building a new integration, use the POST [/transfers](https://docs.adyen.com/api-explorer/transfers/latest/post/transfers) endpoint instead.
+> - Already using the Payout API, reach out to your Adyen contact to learn how to migrate to the Transfers API.
+>
+> For more information about the payout features of the Transfers API, see our [Payouts](https://docs.adyen.com/payouts/payout-service) documentation.
+
 
 Submits a payout using the previously stored payment details. To store payment details, use the `/storeDetail` API call.
 
@@ -146,20 +177,22 @@ The submitted payout must be confirmed or declined either by a reviewer or via `
 @return SubmitResponse, *http.Response, error
 */
 func (a *InitializationApi) SubmitThirdParty(ctx context.Context, r InitializationApiSubmitThirdPartyInput) (SubmitResponse, *http.Response, error) {
-	res := &SubmitResponse{}
+    res := &SubmitResponse{}
 	path := "/submitThirdParty"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.submitRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.submitRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+
