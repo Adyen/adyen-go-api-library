@@ -20,7 +20,7 @@ var _ common.MappedNullable = &CreateOrderRequest{}
 // CreateOrderRequest struct for CreateOrderRequest
 type CreateOrderRequest struct {
 	Amount Amount `json:"amount"`
-	// The date that order expires; e.g. 2019-03-23T12:25:28Z. If not provided, the default expiry duration is 1 day.
+	// The date when the order should expire. If not provided, the default expiry duration is 1 day.  [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format: YYYY-MM-DDThh:mm:ss+TZD, for example, **2020-12-18T10:15:30+01:00**.
 	ExpiresAt *string `json:"expiresAt,omitempty"`
 	// The merchant account identifier, with which you want to process the order.
 	MerchantAccount string `json:"merchantAccount"`

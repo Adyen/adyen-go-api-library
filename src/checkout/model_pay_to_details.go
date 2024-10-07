@@ -21,8 +21,13 @@ var _ common.MappedNullable = &PayToDetails{}
 type PayToDetails struct {
 	// The checkout attempt identifier.
 	CheckoutAttemptId *string `json:"checkoutAttemptId,omitempty"`
+	// This is the `recurringDetailReference` returned in the response when you created the token.
+	// Deprecated
+	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
 	// The shopper's banking details or payId reference, used to complete payment.
 	ShopperAccountIdentifier *string `json:"shopperAccountIdentifier,omitempty"`
+	// This is the `recurringDetailReference` returned in the response when you created the token.
+	StoredPaymentMethodId *string `json:"storedPaymentMethodId,omitempty"`
 	// **payto**
 	Type *string `json:"type,omitempty"`
 }
@@ -80,6 +85,41 @@ func (o *PayToDetails) SetCheckoutAttemptId(v string) {
 	o.CheckoutAttemptId = &v
 }
 
+// GetRecurringDetailReference returns the RecurringDetailReference field value if set, zero value otherwise.
+// Deprecated
+func (o *PayToDetails) GetRecurringDetailReference() string {
+	if o == nil || common.IsNil(o.RecurringDetailReference) {
+		var ret string
+		return ret
+	}
+	return *o.RecurringDetailReference
+}
+
+// GetRecurringDetailReferenceOk returns a tuple with the RecurringDetailReference field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// Deprecated
+func (o *PayToDetails) GetRecurringDetailReferenceOk() (*string, bool) {
+	if o == nil || common.IsNil(o.RecurringDetailReference) {
+		return nil, false
+	}
+	return o.RecurringDetailReference, true
+}
+
+// HasRecurringDetailReference returns a boolean if a field has been set.
+func (o *PayToDetails) HasRecurringDetailReference() bool {
+	if o != nil && !common.IsNil(o.RecurringDetailReference) {
+		return true
+	}
+
+	return false
+}
+
+// SetRecurringDetailReference gets a reference to the given string and assigns it to the RecurringDetailReference field.
+// Deprecated
+func (o *PayToDetails) SetRecurringDetailReference(v string) {
+	o.RecurringDetailReference = &v
+}
+
 // GetShopperAccountIdentifier returns the ShopperAccountIdentifier field value if set, zero value otherwise.
 func (o *PayToDetails) GetShopperAccountIdentifier() string {
 	if o == nil || common.IsNil(o.ShopperAccountIdentifier) {
@@ -110,6 +150,38 @@ func (o *PayToDetails) HasShopperAccountIdentifier() bool {
 // SetShopperAccountIdentifier gets a reference to the given string and assigns it to the ShopperAccountIdentifier field.
 func (o *PayToDetails) SetShopperAccountIdentifier(v string) {
 	o.ShopperAccountIdentifier = &v
+}
+
+// GetStoredPaymentMethodId returns the StoredPaymentMethodId field value if set, zero value otherwise.
+func (o *PayToDetails) GetStoredPaymentMethodId() string {
+	if o == nil || common.IsNil(o.StoredPaymentMethodId) {
+		var ret string
+		return ret
+	}
+	return *o.StoredPaymentMethodId
+}
+
+// GetStoredPaymentMethodIdOk returns a tuple with the StoredPaymentMethodId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PayToDetails) GetStoredPaymentMethodIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.StoredPaymentMethodId) {
+		return nil, false
+	}
+	return o.StoredPaymentMethodId, true
+}
+
+// HasStoredPaymentMethodId returns a boolean if a field has been set.
+func (o *PayToDetails) HasStoredPaymentMethodId() bool {
+	if o != nil && !common.IsNil(o.StoredPaymentMethodId) {
+		return true
+	}
+
+	return false
+}
+
+// SetStoredPaymentMethodId gets a reference to the given string and assigns it to the StoredPaymentMethodId field.
+func (o *PayToDetails) SetStoredPaymentMethodId(v string) {
+	o.StoredPaymentMethodId = &v
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
@@ -157,8 +229,14 @@ func (o PayToDetails) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
+	if !common.IsNil(o.RecurringDetailReference) {
+		toSerialize["recurringDetailReference"] = o.RecurringDetailReference
+	}
 	if !common.IsNil(o.ShopperAccountIdentifier) {
 		toSerialize["shopperAccountIdentifier"] = o.ShopperAccountIdentifier
+	}
+	if !common.IsNil(o.StoredPaymentMethodId) {
+		toSerialize["storedPaymentMethodId"] = o.StoredPaymentMethodId
 	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type

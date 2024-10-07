@@ -35,8 +35,10 @@ type FundRecipient struct {
 	TelephoneNumber *string `json:"telephoneNumber,omitempty"`
 	// Indicates where the money is going.
 	WalletIdentifier *string `json:"walletIdentifier,omitempty"`
-	// Indicates the tax identifier of the fund recepient
+	// Indicates the tax identifier of the fund recipient
 	WalletOwnerTaxId *string `json:"walletOwnerTaxId,omitempty"`
+	// The purpose of a digital wallet transaction
+	WalletPurpose *string `json:"walletPurpose,omitempty"`
 }
 
 // NewFundRecipient instantiates a new FundRecipient object
@@ -408,6 +410,38 @@ func (o *FundRecipient) SetWalletOwnerTaxId(v string) {
 	o.WalletOwnerTaxId = &v
 }
 
+// GetWalletPurpose returns the WalletPurpose field value if set, zero value otherwise.
+func (o *FundRecipient) GetWalletPurpose() string {
+	if o == nil || common.IsNil(o.WalletPurpose) {
+		var ret string
+		return ret
+	}
+	return *o.WalletPurpose
+}
+
+// GetWalletPurposeOk returns a tuple with the WalletPurpose field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FundRecipient) GetWalletPurposeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.WalletPurpose) {
+		return nil, false
+	}
+	return o.WalletPurpose, true
+}
+
+// HasWalletPurpose returns a boolean if a field has been set.
+func (o *FundRecipient) HasWalletPurpose() bool {
+	if o != nil && !common.IsNil(o.WalletPurpose) {
+		return true
+	}
+
+	return false
+}
+
+// SetWalletPurpose gets a reference to the given string and assigns it to the WalletPurpose field.
+func (o *FundRecipient) SetWalletPurpose(v string) {
+	o.WalletPurpose = &v
+}
+
 func (o FundRecipient) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -451,6 +485,9 @@ func (o FundRecipient) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.WalletOwnerTaxId) {
 		toSerialize["walletOwnerTaxId"] = o.WalletOwnerTaxId
 	}
+	if !common.IsNil(o.WalletPurpose) {
+		toSerialize["walletPurpose"] = o.WalletPurpose
+	}
 	return toSerialize, nil
 }
 
@@ -488,4 +525,14 @@ func (v NullableFundRecipient) MarshalJSON() ([]byte, error) {
 func (v *NullableFundRecipient) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
+}
+
+func (o *FundRecipient) isValidWalletPurpose() bool {
+	var allowedEnumValues = []string{"identifiedBoleto", "transferDifferentWallet", "transferOwnWallet", "transferSameWallet", "unidentifiedBoleto"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetWalletPurpose() == allowed {
+			return true
+		}
+	}
+	return false
 }

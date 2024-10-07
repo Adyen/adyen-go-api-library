@@ -43,7 +43,7 @@ type PaymentMethodSetupInfo struct {
 	GooglePay          *GooglePayInfo        `json:"googlePay,omitempty"`
 	Ideal              *GenericPmWithTdiInfo `json:"ideal,omitempty"`
 	InteracCard        *GenericPmWithTdiInfo `json:"interac_card,omitempty"`
-	Jcb                *GenericPmWithTdiInfo `json:"jcb,omitempty"`
+	Jcb                *JCBInfo              `json:"jcb,omitempty"`
 	Klarna             *KlarnaInfo           `json:"klarna,omitempty"`
 	Maestro            *GenericPmWithTdiInfo `json:"maestro,omitempty"`
 	Mc                 *GenericPmWithTdiInfo `json:"mc,omitempty"`
@@ -731,9 +731,9 @@ func (o *PaymentMethodSetupInfo) SetInteracCard(v GenericPmWithTdiInfo) {
 }
 
 // GetJcb returns the Jcb field value if set, zero value otherwise.
-func (o *PaymentMethodSetupInfo) GetJcb() GenericPmWithTdiInfo {
+func (o *PaymentMethodSetupInfo) GetJcb() JCBInfo {
 	if o == nil || common.IsNil(o.Jcb) {
-		var ret GenericPmWithTdiInfo
+		var ret JCBInfo
 		return ret
 	}
 	return *o.Jcb
@@ -741,7 +741,7 @@ func (o *PaymentMethodSetupInfo) GetJcb() GenericPmWithTdiInfo {
 
 // GetJcbOk returns a tuple with the Jcb field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentMethodSetupInfo) GetJcbOk() (*GenericPmWithTdiInfo, bool) {
+func (o *PaymentMethodSetupInfo) GetJcbOk() (*JCBInfo, bool) {
 	if o == nil || common.IsNil(o.Jcb) {
 		return nil, false
 	}
@@ -757,8 +757,8 @@ func (o *PaymentMethodSetupInfo) HasJcb() bool {
 	return false
 }
 
-// SetJcb gets a reference to the given GenericPmWithTdiInfo and assigns it to the Jcb field.
-func (o *PaymentMethodSetupInfo) SetJcb(v GenericPmWithTdiInfo) {
+// SetJcb gets a reference to the given JCBInfo and assigns it to the Jcb field.
+func (o *PaymentMethodSetupInfo) SetJcb(v JCBInfo) {
 	o.Jcb = &v
 }
 

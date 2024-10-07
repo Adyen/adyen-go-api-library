@@ -21,6 +21,10 @@ var _ common.MappedNullable = &CardDetailsResponse{}
 type CardDetailsResponse struct {
 	// The list of brands identified for the card.
 	Brands []CardBrandDetails `json:"brands,omitempty"`
+	// The funding source of the card, for example **DEBIT**, **CREDIT**, or **PREPAID**.
+	FundingSource *string `json:"fundingSource,omitempty"`
+	// Indicates if this is a commercial card or a consumer card. If **true**, it is a commercial card. If **false**, it is a consumer card.
+	IsCardCommercial *bool `json:"isCardCommercial,omitempty"`
 	// The two-letter country code  of the country where the card was issued.
 	IssuingCountryCode *string `json:"issuingCountryCode,omitempty"`
 }
@@ -74,6 +78,70 @@ func (o *CardDetailsResponse) SetBrands(v []CardBrandDetails) {
 	o.Brands = v
 }
 
+// GetFundingSource returns the FundingSource field value if set, zero value otherwise.
+func (o *CardDetailsResponse) GetFundingSource() string {
+	if o == nil || common.IsNil(o.FundingSource) {
+		var ret string
+		return ret
+	}
+	return *o.FundingSource
+}
+
+// GetFundingSourceOk returns a tuple with the FundingSource field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CardDetailsResponse) GetFundingSourceOk() (*string, bool) {
+	if o == nil || common.IsNil(o.FundingSource) {
+		return nil, false
+	}
+	return o.FundingSource, true
+}
+
+// HasFundingSource returns a boolean if a field has been set.
+func (o *CardDetailsResponse) HasFundingSource() bool {
+	if o != nil && !common.IsNil(o.FundingSource) {
+		return true
+	}
+
+	return false
+}
+
+// SetFundingSource gets a reference to the given string and assigns it to the FundingSource field.
+func (o *CardDetailsResponse) SetFundingSource(v string) {
+	o.FundingSource = &v
+}
+
+// GetIsCardCommercial returns the IsCardCommercial field value if set, zero value otherwise.
+func (o *CardDetailsResponse) GetIsCardCommercial() bool {
+	if o == nil || common.IsNil(o.IsCardCommercial) {
+		var ret bool
+		return ret
+	}
+	return *o.IsCardCommercial
+}
+
+// GetIsCardCommercialOk returns a tuple with the IsCardCommercial field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CardDetailsResponse) GetIsCardCommercialOk() (*bool, bool) {
+	if o == nil || common.IsNil(o.IsCardCommercial) {
+		return nil, false
+	}
+	return o.IsCardCommercial, true
+}
+
+// HasIsCardCommercial returns a boolean if a field has been set.
+func (o *CardDetailsResponse) HasIsCardCommercial() bool {
+	if o != nil && !common.IsNil(o.IsCardCommercial) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsCardCommercial gets a reference to the given bool and assigns it to the IsCardCommercial field.
+func (o *CardDetailsResponse) SetIsCardCommercial(v bool) {
+	o.IsCardCommercial = &v
+}
+
 // GetIssuingCountryCode returns the IssuingCountryCode field value if set, zero value otherwise.
 func (o *CardDetailsResponse) GetIssuingCountryCode() string {
 	if o == nil || common.IsNil(o.IssuingCountryCode) {
@@ -118,6 +186,12 @@ func (o CardDetailsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.Brands) {
 		toSerialize["brands"] = o.Brands
+	}
+	if !common.IsNil(o.FundingSource) {
+		toSerialize["fundingSource"] = o.FundingSource
+	}
+	if !common.IsNil(o.IsCardCommercial) {
+		toSerialize["isCardCommercial"] = o.IsCardCommercial
 	}
 	if !common.IsNil(o.IssuingCountryCode) {
 		toSerialize["issuingCountryCode"] = o.IssuingCountryCode

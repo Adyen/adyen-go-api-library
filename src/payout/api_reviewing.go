@@ -41,6 +41,13 @@ func (a *ReviewingApi) ConfirmThirdPartyInput() ReviewingApiConfirmThirdPartyInp
 /*
 ConfirmThirdParty Confirm a payout
 
+> This endpoint is **deprecated** and no longer supports new integrations. If you are:
+>- Building a new integration, use the [Transfers API](https://docs.adyen.com/api-explorer/transfers/latest/overview) instead.
+> - Already using the Payout API, reach out to your Adyen contact to learn how to migrate to the Transfers API.
+>
+> For more information about the payout features of the Transfers API, see our [Payouts](https://docs.adyen.com/payouts/payout-service) documentation.
+
+
 Confirms a previously submitted payout.
 
 To cancel a payout, use the `/declineThirdParty` endpoint.
@@ -89,6 +96,13 @@ func (a *ReviewingApi) DeclineThirdPartyInput() ReviewingApiDeclineThirdPartyInp
 
 /*
 DeclineThirdParty Cancel a payout
+
+> This endpoint is **deprecated** and no longer supports new integrations. If you are:
+>- Building a new integration, use the [Transfers API](https://docs.adyen.com/api-explorer/transfers/latest/overview) instead.
+> - Already using the Payout API, reach out to your Adyen contact to learn how to migrate to the Transfers API.
+>
+> For more information about the payout features of the Transfers API, see our [Payouts](https://docs.adyen.com/payouts/payout-service) documentation.
+
 
 Cancels a previously submitted payout.
 

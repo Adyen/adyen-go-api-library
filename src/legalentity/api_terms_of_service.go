@@ -34,7 +34,7 @@ func (r TermsOfServiceApiAcceptTermsOfServiceInput) AcceptTermsOfServiceRequest(
 
 /*
 Prepare a request for AcceptTermsOfService
-@param id The unique identifier of the legal entity. For sole proprietorships, this is the individual legal entity ID of the owner. For organizations, this is the ID of the organization.@param termsofservicedocumentid The unique identifier of the Terms of Service document.
+@param id The unique identifier of the legal entity.  For sole proprietorships, this is the individual legal entity ID of the owner.  For organizations, this is the ID of the organization.  For legal representatives of individuals, this is the ID of the individual.  @param termsofservicedocumentid The unique identifier of the Terms of Service document.
 @return TermsOfServiceApiAcceptTermsOfServiceInput
 */
 func (a *TermsOfServiceApi) AcceptTermsOfServiceInput(id string, termsofservicedocumentid string) TermsOfServiceApiAcceptTermsOfServiceInput {

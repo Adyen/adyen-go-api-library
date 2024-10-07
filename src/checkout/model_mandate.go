@@ -27,6 +27,8 @@ type Mandate struct {
 	BillingAttemptsRule *string `json:"billingAttemptsRule,omitempty"`
 	// The number of the day, on which the recurring debit can happen. Should be within the same calendar month as the mandate recurring date.  Possible values: 1-31 based on the `frequency`.
 	BillingDay *string `json:"billingDay,omitempty"`
+	// The number of transactions that can be performed within the given frequency.
+	Count *string `json:"count,omitempty"`
 	// End date of the billing plan, in YYYY-MM-DD format.
 	EndsAt string `json:"endsAt"`
 	// The frequency with which a shopper should be charged.  Possible values: **daily**, **weekly**, **biWeekly**, **monthly**, **quarterly**, **halfYearly**, **yearly**.
@@ -177,6 +179,38 @@ func (o *Mandate) SetBillingDay(v string) {
 	o.BillingDay = &v
 }
 
+// GetCount returns the Count field value if set, zero value otherwise.
+func (o *Mandate) GetCount() string {
+	if o == nil || common.IsNil(o.Count) {
+		var ret string
+		return ret
+	}
+	return *o.Count
+}
+
+// GetCountOk returns a tuple with the Count field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Mandate) GetCountOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Count) {
+		return nil, false
+	}
+	return o.Count, true
+}
+
+// HasCount returns a boolean if a field has been set.
+func (o *Mandate) HasCount() bool {
+	if o != nil && !common.IsNil(o.Count) {
+		return true
+	}
+
+	return false
+}
+
+// SetCount gets a reference to the given string and assigns it to the Count field.
+func (o *Mandate) SetCount(v string) {
+	o.Count = &v
+}
+
 // GetEndsAt returns the EndsAt field value
 func (o *Mandate) GetEndsAt() string {
 	if o == nil {
@@ -308,6 +342,9 @@ func (o Mandate) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.BillingDay) {
 		toSerialize["billingDay"] = o.BillingDay
+	}
+	if !common.IsNil(o.Count) {
+		toSerialize["count"] = o.Count
 	}
 	toSerialize["endsAt"] = o.EndsAt
 	toSerialize["frequency"] = o.Frequency

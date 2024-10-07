@@ -29,6 +29,8 @@ type APIClient struct {
 
 	PCIQuestionnairesApi *PCIQuestionnairesApi
 
+	TaxEDeliveryConsentApi *TaxEDeliveryConsentApi
+
 	TermsOfServiceApi *TermsOfServiceApi
 
 	TransferInstrumentsApi *TransferInstrumentsApi
@@ -48,6 +50,7 @@ func NewAPIClient(client *common.Client) *APIClient {
 	c.HostedOnboardingApi = (*HostedOnboardingApi)(&c.common)
 	c.LegalEntitiesApi = (*LegalEntitiesApi)(&c.common)
 	c.PCIQuestionnairesApi = (*PCIQuestionnairesApi)(&c.common)
+	c.TaxEDeliveryConsentApi = (*TaxEDeliveryConsentApi)(&c.common)
 	c.TermsOfServiceApi = (*TermsOfServiceApi)(&c.common)
 	c.TransferInstrumentsApi = (*TransferInstrumentsApi)(&c.common)
 

@@ -41,6 +41,13 @@ func (a *InitializationApi) StoreDetailInput() InitializationApiStoreDetailInput
 /*
 StoreDetail Store payout details
 
+> This endpoint is **deprecated** and no longer supports new integrations. If you are:
+>- Building a new integration, use the [Transfers API](https://docs.adyen.com/api-explorer/transfers/latest/overview) instead.
+> - Already using the Payout API, reach out to your Adyen contact to learn how to migrate to the Transfers API.
+>
+> For more information about the payout features of the Transfers API, see our [Payouts](https://docs.adyen.com/payouts/payout-service) documentation.
+
+
 Stores payment details under the `PAYOUT` recurring contract. These payment details can be used later to submit a payout via the `/submitThirdParty` call.
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -87,6 +94,13 @@ func (a *InitializationApi) StoreDetailAndSubmitThirdPartyInput() Initialization
 
 /*
 StoreDetailAndSubmitThirdParty Store details and submit a payout
+
+> This endpoint is **deprecated** and no longer supports new integrations. If you are:
+>- Building a new integration, use the POST [/transfers](https://docs.adyen.com/api-explorer/transfers/latest/post/transfers) endpoint instead.
+> - Already using the Payout API, reach out to your Adyen contact to learn how to migrate to the Transfers API.
+>
+> For more information about the payout features of the Transfers API, see our [Payouts](https://docs.adyen.com/payouts/payout-service) documentation.
+
 
 Submits a payout and stores its details for subsequent payouts.
 
@@ -136,6 +150,13 @@ func (a *InitializationApi) SubmitThirdPartyInput() InitializationApiSubmitThird
 
 /*
 SubmitThirdParty Submit a payout
+
+> This endpoint is **deprecated** and no longer supports new integrations. If you are:
+>- Building a new integration, use the POST [/transfers](https://docs.adyen.com/api-explorer/transfers/latest/post/transfers) endpoint instead.
+> - Already using the Payout API, reach out to your Adyen contact to learn how to migrate to the Transfers API.
+>
+> For more information about the payout features of the Transfers API, see our [Payouts](https://docs.adyen.com/payouts/payout-service) documentation.
+
 
 Submits a payout using the previously stored payment details. To store payment details, use the `/storeDetail` API call.
 

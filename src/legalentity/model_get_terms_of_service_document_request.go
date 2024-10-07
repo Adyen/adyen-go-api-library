@@ -21,9 +21,9 @@ var _ common.MappedNullable = &GetTermsOfServiceDocumentRequest{}
 type GetTermsOfServiceDocumentRequest struct {
 	// The language to be used for the Terms of Service document, specified by the two-letter [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code. Possible value: **en** for English.
 	Language string `json:"language"`
-	// The requested format for the Terms of Service document. Default value: JSON. Possible values: JSON or PDF.
+	// The requested format for the Terms of Service document. Default value: JSON. Possible values: **JSON**, **PDF**, or **TXT**.
 	TermsOfServiceDocumentFormat *string `json:"termsOfServiceDocumentFormat,omitempty"`
-	// The type of Terms of Service.  Possible values: *  **adyenForPlatformsManage** *  **adyenIssuing** *  **adyenForPlatformsAdvanced** *  **adyenCapital** *  **adyenAccount** *  **adyenCard** *  **adyenFranchisee** *  **adyenPccr**
+	// The type of Terms of Service.  Possible values: *  **adyenForPlatformsManage** *  **adyenIssuing** *  **adyenForPlatformsAdvanced** *  **adyenCapital** *  **adyenAccount** *  **adyenCard** *  **adyenFranchisee** *  **adyenPccr** *  **adyenChargeCard**
 	Type string `json:"type"`
 }
 
@@ -181,7 +181,7 @@ func (v *NullableGetTermsOfServiceDocumentRequest) UnmarshalJSON(src []byte) err
 }
 
 func (o *GetTermsOfServiceDocumentRequest) isValidType() bool {
-	var allowedEnumValues = []string{"adyenAccount", "adyenCapital", "adyenCard", "adyenForPlatformsAdvanced", "adyenForPlatformsManage", "adyenFranchisee", "adyenIssuing", "adyenPccr"}
+	var allowedEnumValues = []string{"adyenAccount", "adyenCapital", "adyenCard", "adyenChargeCard", "adyenForPlatformsAdvanced", "adyenForPlatformsManage", "adyenFranchisee", "adyenIssuing", "adyenPccr"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

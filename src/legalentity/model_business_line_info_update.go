@@ -19,17 +19,10 @@ var _ common.MappedNullable = &BusinessLineInfoUpdate{}
 
 // BusinessLineInfoUpdate struct for BusinessLineInfoUpdate
 type BusinessLineInfoUpdate struct {
-	// The capability for which you are creating the business line. For example, **receivePayments**.
-	// Deprecated
-	Capability *string `json:"capability,omitempty"`
 	// A code that represents the industry of your legal entity. For example, **4431A** for computer software stores.
 	IndustryCode *string `json:"industryCode,omitempty"`
-	// Unique identifier of the [legal entity](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/legalEntities__resParam_id) that owns the business line.
-	LegalEntityId *string `json:"legalEntityId,omitempty"`
 	// A list of channels where goods or services are sold.  Possible values: **pos**, **posMoto**, **eCommerce**, **ecomMoto**, **payByLink**.  Required only in combination with the `service` **paymentProcessing**.
-	SalesChannels []string `json:"salesChannels,omitempty"`
-	// The service for which you are creating the business line.    Possible values: *  **paymentProcessing** *  **banking**
-	Service       *string        `json:"service,omitempty"`
+	SalesChannels []string       `json:"salesChannels,omitempty"`
 	SourceOfFunds *SourceOfFunds `json:"sourceOfFunds,omitempty"`
 	// List of website URLs where your user's goods or services are sold. When this is required for a service but your user does not have an online presence, provide the reason in the `webDataExemption` object.
 	WebData          []WebData         `json:"webData,omitempty"`
@@ -51,41 +44,6 @@ func NewBusinessLineInfoUpdate() *BusinessLineInfoUpdate {
 func NewBusinessLineInfoUpdateWithDefaults() *BusinessLineInfoUpdate {
 	this := BusinessLineInfoUpdate{}
 	return &this
-}
-
-// GetCapability returns the Capability field value if set, zero value otherwise.
-// Deprecated
-func (o *BusinessLineInfoUpdate) GetCapability() string {
-	if o == nil || common.IsNil(o.Capability) {
-		var ret string
-		return ret
-	}
-	return *o.Capability
-}
-
-// GetCapabilityOk returns a tuple with the Capability field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// Deprecated
-func (o *BusinessLineInfoUpdate) GetCapabilityOk() (*string, bool) {
-	if o == nil || common.IsNil(o.Capability) {
-		return nil, false
-	}
-	return o.Capability, true
-}
-
-// HasCapability returns a boolean if a field has been set.
-func (o *BusinessLineInfoUpdate) HasCapability() bool {
-	if o != nil && !common.IsNil(o.Capability) {
-		return true
-	}
-
-	return false
-}
-
-// SetCapability gets a reference to the given string and assigns it to the Capability field.
-// Deprecated
-func (o *BusinessLineInfoUpdate) SetCapability(v string) {
-	o.Capability = &v
 }
 
 // GetIndustryCode returns the IndustryCode field value if set, zero value otherwise.
@@ -120,38 +78,6 @@ func (o *BusinessLineInfoUpdate) SetIndustryCode(v string) {
 	o.IndustryCode = &v
 }
 
-// GetLegalEntityId returns the LegalEntityId field value if set, zero value otherwise.
-func (o *BusinessLineInfoUpdate) GetLegalEntityId() string {
-	if o == nil || common.IsNil(o.LegalEntityId) {
-		var ret string
-		return ret
-	}
-	return *o.LegalEntityId
-}
-
-// GetLegalEntityIdOk returns a tuple with the LegalEntityId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BusinessLineInfoUpdate) GetLegalEntityIdOk() (*string, bool) {
-	if o == nil || common.IsNil(o.LegalEntityId) {
-		return nil, false
-	}
-	return o.LegalEntityId, true
-}
-
-// HasLegalEntityId returns a boolean if a field has been set.
-func (o *BusinessLineInfoUpdate) HasLegalEntityId() bool {
-	if o != nil && !common.IsNil(o.LegalEntityId) {
-		return true
-	}
-
-	return false
-}
-
-// SetLegalEntityId gets a reference to the given string and assigns it to the LegalEntityId field.
-func (o *BusinessLineInfoUpdate) SetLegalEntityId(v string) {
-	o.LegalEntityId = &v
-}
-
 // GetSalesChannels returns the SalesChannels field value if set, zero value otherwise.
 func (o *BusinessLineInfoUpdate) GetSalesChannels() []string {
 	if o == nil || common.IsNil(o.SalesChannels) {
@@ -182,38 +108,6 @@ func (o *BusinessLineInfoUpdate) HasSalesChannels() bool {
 // SetSalesChannels gets a reference to the given []string and assigns it to the SalesChannels field.
 func (o *BusinessLineInfoUpdate) SetSalesChannels(v []string) {
 	o.SalesChannels = v
-}
-
-// GetService returns the Service field value if set, zero value otherwise.
-func (o *BusinessLineInfoUpdate) GetService() string {
-	if o == nil || common.IsNil(o.Service) {
-		var ret string
-		return ret
-	}
-	return *o.Service
-}
-
-// GetServiceOk returns a tuple with the Service field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BusinessLineInfoUpdate) GetServiceOk() (*string, bool) {
-	if o == nil || common.IsNil(o.Service) {
-		return nil, false
-	}
-	return o.Service, true
-}
-
-// HasService returns a boolean if a field has been set.
-func (o *BusinessLineInfoUpdate) HasService() bool {
-	if o != nil && !common.IsNil(o.Service) {
-		return true
-	}
-
-	return false
-}
-
-// SetService gets a reference to the given string and assigns it to the Service field.
-func (o *BusinessLineInfoUpdate) SetService(v string) {
-	o.Service = &v
 }
 
 // GetSourceOfFunds returns the SourceOfFunds field value if set, zero value otherwise.
@@ -322,20 +216,11 @@ func (o BusinessLineInfoUpdate) MarshalJSON() ([]byte, error) {
 
 func (o BusinessLineInfoUpdate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !common.IsNil(o.Capability) {
-		toSerialize["capability"] = o.Capability
-	}
 	if !common.IsNil(o.IndustryCode) {
 		toSerialize["industryCode"] = o.IndustryCode
 	}
-	if !common.IsNil(o.LegalEntityId) {
-		toSerialize["legalEntityId"] = o.LegalEntityId
-	}
 	if !common.IsNil(o.SalesChannels) {
 		toSerialize["salesChannels"] = o.SalesChannels
-	}
-	if !common.IsNil(o.Service) {
-		toSerialize["service"] = o.Service
 	}
 	if !common.IsNil(o.SourceOfFunds) {
 		toSerialize["sourceOfFunds"] = o.SourceOfFunds
@@ -383,23 +268,4 @@ func (v NullableBusinessLineInfoUpdate) MarshalJSON() ([]byte, error) {
 func (v *NullableBusinessLineInfoUpdate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
-}
-
-func (o *BusinessLineInfoUpdate) isValidCapability() bool {
-	var allowedEnumValues = []string{"receivePayments", "receiveFromPlatformPayments", "issueBankAccount"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetCapability() == allowed {
-			return true
-		}
-	}
-	return false
-}
-func (o *BusinessLineInfoUpdate) isValidService() bool {
-	var allowedEnumValues = []string{"paymentProcessing", "banking"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetService() == allowed {
-			return true
-		}
-	}
-	return false
 }

@@ -29,7 +29,7 @@ type CustomNotification struct {
 	MerchantReference *string `json:"merchantReference,omitempty"`
 	// The payment method for the payment that the notification is about. Possible values: * **amex** * **visa** * **mc** * **maestro** * **bcmc** * **paypal**  * **sms**  * **bankTransfer_NL** * **bankTransfer_DE** * **bankTransfer_BE** * **ideal** * **elv** * **sepadirectdebit**
 	PaymentMethod *string `json:"paymentMethod,omitempty"`
-	// A descripton of what caused the notification.
+	// A description of what caused the notification.
 	Reason *string `json:"reason,omitempty"`
 	// The outcome of the event which the notification is about. Set to either **true** or **false**.
 	Success *bool `json:"success,omitempty"`

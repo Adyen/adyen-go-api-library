@@ -44,7 +44,7 @@ type PaymentLinkRequest struct {
 	FundRecipient *FundRecipient `json:"fundRecipient,omitempty"`
 	// A set of key-value pairs that specifies the installment options available per payment method. The key must be a payment method name in lowercase. For example, **card** to specify installment options for all cards, or **visa** or **mc**. The value must be an object containing the installment options.
 	InstallmentOptions *map[string]InstallmentOption `json:"installmentOptions,omitempty"`
-	// Price and product information about the purchased items, to be included on the invoice sent to the shopper. This parameter is required for open invoice (_buy now, pay later_) payment methods such Afterpay, Clearpay, Klarna, RatePay, and Zip.
+	// Price and product information about the purchased items, to be included on the invoice sent to the shopper. This parameter is required for open invoice (_buy now, pay later_) payment methods such Afterpay, Clearpay, Klarna, RatePay, Riverty, and Zip.
 	LineItems []LineItem `json:"lineItems,omitempty"`
 	// Indicates if the payment must be [captured manually](https://docs.adyen.com/online-payments/capture).
 	ManualCapture *bool `json:"manualCapture,omitempty"`

@@ -19,9 +19,9 @@ var _ common.MappedNullable = &AdditionalSettingsResponse{}
 
 // AdditionalSettingsResponse struct for AdditionalSettingsResponse
 type AdditionalSettingsResponse struct {
-	// Object containing list of event codes for which the notifcation will not be sent.
+	// Object containing list of event codes for which the notification will not be sent.
 	ExcludeEventCodes []string `json:"excludeEventCodes,omitempty"`
-	// Object containing list of event codes for which the notifcation will be sent.
+	// Object containing list of event codes for which the notification will be sent.
 	IncludeEventCodes []string `json:"includeEventCodes,omitempty"`
 	// Object containing boolean key-value pairs. The key can be any [standard webhook additional setting](https://docs.adyen.com/development-resources/webhooks/additional-settings), and the value indicates if the setting is enabled. For example, `captureDelayHours`: **true** means the standard notifications you get will contain the number of hours remaining until the payment will be captured.
 	Properties *map[string]bool `json:"properties,omitempty"`

@@ -19,7 +19,7 @@ var _ common.MappedNullable = &AcceptTermsOfServiceRequest{}
 
 // AcceptTermsOfServiceRequest struct for AcceptTermsOfServiceRequest
 type AcceptTermsOfServiceRequest struct {
-	// The legal entity ID of the user accepting the Terms of Service.  For organizations, this must be the individual legal entity ID of an authorized signatory for the organization.  For sole proprietorships, this must be the individual legal entity ID of the owner.
+	// The legal entity ID of the user accepting the Terms of Service.  For organizations, this must be the individual legal entity ID of an authorized signatory for the organization.  For sole proprietorships, this must be the individual legal entity ID of the owner.  For individuals, this must be the individual legal entity id of either the individual, parent, or guardian.
 	AcceptedBy string `json:"acceptedBy"`
 	// The IP address of the user accepting the Terms of Service.
 	IpAddress *string `json:"ipAddress,omitempty"`
