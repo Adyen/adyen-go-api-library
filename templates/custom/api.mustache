@@ -29,8 +29,9 @@ type {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{oper
 // {{.}}
 {{/description}}
 {{#isDeprecated}}
-// Deprecated {{#vendorExtensions.x-deprecatedInVersion}}since {{#appName}}{{{.}}}{{/appName}} v{{#vendorExtensions.x-deprecatedInVersion}}{{.}}{{/vendorExtensions.x-deprecatedInVersion}}
-// {{#vendorExtensions.x-deprecatedMessage}}{{{.}}}{{/vendorExtensions.x-deprecatedMessage}}{{/vendorExtensions.x-deprecatedInVersion}}
+//
+// Deprecated {{#vendorExtensions.x-deprecatedInVersion}}since {{#appName}}{{{.}}}{{/appName}} v{{.}}{{/vendorExtensions.x-deprecatedInVersion}}{{#vendorExtensions.x-deprecatedMessage}}
+// {{{.}}}{{/vendorExtensions.x-deprecatedMessage}}
 {{/isDeprecated}}
 func (r {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Input) {{vendorExtensions.x-export-param-name}}({{paramName}} {{{dataType}}}) {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Input {
 	r.{{paramName}} = {{^isFile}}&{{/isFile}}{{paramName}}
@@ -47,8 +48,8 @@ Prepare a request for {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}
 @return {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Input
 {{#isDeprecated}}
 
-Deprecated {{#vendorExtensions.x-deprecatedInVersion}}since {{#appName}}{{{.}}}{{/appName}} v{{#vendorExtensions.x-deprecatedInVersion}}{{.}}{{/vendorExtensions.x-deprecatedInVersion}}
-{{#vendorExtensions.x-deprecatedMessage}}{{{.}}}{{/vendorExtensions.x-deprecatedMessage}}{{/vendorExtensions.x-deprecatedInVersion}}
+Deprecated {{#vendorExtensions.x-deprecatedInVersion}}since {{#appName}}{{{.}}}{{/appName}} v{{.}}{{/vendorExtensions.x-deprecatedInVersion}}{{#vendorExtensions.x-deprecatedMessage}}
+{{{.}}}{{/vendorExtensions.x-deprecatedMessage}}
 {{/isDeprecated}}
 */
 func (a *{{{classname}}}) {{{nickname}}}Input({{#pathParams}}{{paramName}} {{{dataType}}}{{^-last}}, {{/-last}}{{/pathParams}}) {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Input {
@@ -71,8 +72,8 @@ func (a *{{{classname}}}) {{{nickname}}}Input({{#pathParams}}{{paramName}} {{{da
 @return {{#returnType}}{{{returnType}}}, {{/returnType}}*http.Response, error
 {{#isDeprecated}}
 
-Deprecated {{#vendorExtensions.x-deprecatedInVersion}}since {{#appName}}{{{.}}}{{/appName}} v{{#vendorExtensions.x-deprecatedInVersion}}{{.}}{{/vendorExtensions.x-deprecatedInVersion}}
-{{#vendorExtensions.x-deprecatedMessage}}{{{.}}}{{/vendorExtensions.x-deprecatedMessage}}{{/vendorExtensions.x-deprecatedInVersion}}
+Deprecated {{#vendorExtensions.x-deprecatedInVersion}}since {{#appName}}{{{.}}}{{/appName}} v{{.}}{{/vendorExtensions.x-deprecatedInVersion}}{{#vendorExtensions.x-deprecatedMessage}}
+{{{.}}}{{/vendorExtensions.x-deprecatedMessage}}
 {{/isDeprecated}}
 */
 func (a *{{{classname}}}) {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}(ctx context.Context, r {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Input) ({{#returnType}}{{{returnType}}}, {{/returnType}}*http.Response, error) {
