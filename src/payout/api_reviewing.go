@@ -41,9 +41,14 @@ func (a *ReviewingApi) ConfirmThirdPartyInput() ReviewingApiConfirmThirdPartyInp
 /*
 ConfirmThirdParty Confirm a payout
 
-> This endpoint is **deprecated** and no longer supports new integrations. If you are:
->- Building a new integration, use the [Transfers API](https://docs.adyen.com/api-explorer/transfers/latest/overview) instead.
-> - Already using the Payout API, reach out to your Adyen contact to learn how to migrate to the Transfers API.
+> This endpoint is **deprecated** and no longer supports new integrations. Do one of the following:
+>- If you are building a new integration, use the [Transfers API](https://docs.adyen.com/api-explorer/transfers/latest/overview) instead.
+> - If you are already using the Payout API, reach out to your Adyen contact to learn how to migrate to the Transfers API.
+>
+> With the Transfers API, you can:
+> - Handle multiple payout use cases with a single API.
+> - Use new payout functionalities, such as instant payouts to bank accounts.
+> - Receive webhooks with more details and defined transfer states.
 >
 > For more information about the payout features of the Transfers API, see our [Payouts](https://docs.adyen.com/payouts/payout-service) documentation.
 
@@ -97,9 +102,14 @@ func (a *ReviewingApi) DeclineThirdPartyInput() ReviewingApiDeclineThirdPartyInp
 /*
 DeclineThirdParty Cancel a payout
 
-> This endpoint is **deprecated** and no longer supports new integrations. If you are:
->- Building a new integration, use the [Transfers API](https://docs.adyen.com/api-explorer/transfers/latest/overview) instead.
-> - Already using the Payout API, reach out to your Adyen contact to learn how to migrate to the Transfers API.
+> This endpoint is **deprecated** and no longer supports new integrations. Do one of the following:
+>- If you are building a new integration, use the [Transfers API](https://docs.adyen.com/api-explorer/transfers/latest/overview) instead.
+> - If you are already using the Payout API, reach out to your Adyen contact to learn how to migrate to the Transfers API.
+>
+> With the Transfers API, you can:
+> - Handle multiple payout use cases with a single API.
+> - Use new payout functionalities, such as instant payouts to bank accounts.
+> - Receive webhooks with more details and defined transfer states.
 >
 > For more information about the payout features of the Transfers API, see our [Payouts](https://docs.adyen.com/payouts/payout-service) documentation.
 
