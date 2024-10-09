@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the JCBInfo type satisfies the MappedNullable interface at compile time
@@ -24,7 +23,7 @@ type JCBInfo struct {
 	// Indicates whether the JCB Merchant ID is reused from a previously setup JCB payment method.  This is applicable for both `noContract` and `gatewayContract` service levels.  The default value is `false`.
 	ReuseMidNumber *bool `json:"reuseMidNumber,omitempty"`
 	// Specifies the service level (settlement type) of this payment method. Possible values: * **noContract** — Adyen holds the contract with JCB. * **gatewayContract** — JCB receives the settlement and handles disputes. They then pay out to the merchant directly.
-	ServiceLevel           string                      `json:"serviceLevel"`
+	ServiceLevel string `json:"serviceLevel"`
 	TransactionDescription *TransactionDescriptionInfo `json:"transactionDescription,omitempty"`
 }
 
@@ -171,7 +170,7 @@ func (o *JCBInfo) SetTransactionDescription(v TransactionDescriptionInfo) {
 }
 
 func (o JCBInfo) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -229,12 +228,14 @@ func (v *NullableJCBInfo) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *JCBInfo) isValidServiceLevel() bool {
-	var allowedEnumValues = []string{"noContract", "gatewayContract"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetServiceLevel() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "noContract", "gatewayContract" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetServiceLevel() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

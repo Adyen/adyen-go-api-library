@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the CheckoutDelegatedAuthenticationAction type satisfies the MappedNullable interface at compile time
@@ -236,7 +235,7 @@ func (o *CheckoutDelegatedAuthenticationAction) SetUrl(v string) {
 }
 
 func (o CheckoutDelegatedAuthenticationAction) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -300,12 +299,14 @@ func (v *NullableCheckoutDelegatedAuthenticationAction) UnmarshalJSON(src []byte
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *CheckoutDelegatedAuthenticationAction) isValidType() bool {
-	var allowedEnumValues = []string{"delegatedAuthentication"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "delegatedAuthentication" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

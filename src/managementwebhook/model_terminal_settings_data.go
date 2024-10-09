@@ -10,8 +10,7 @@ package managementwebhook
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the TerminalSettingsData type satisfies the MappedNullable interface at compile time
@@ -229,7 +228,7 @@ func (o *TerminalSettingsData) SetUser(v string) {
 }
 
 func (o TerminalSettingsData) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -291,12 +290,14 @@ func (v *NullableTerminalSettingsData) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *TerminalSettingsData) isValidUpdateSource() bool {
-	var allowedEnumValues = []string{"Customer Area", "Management Api"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetUpdateSource() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "Customer Area", "Management Api" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetUpdateSource() == allowed {
+            return true
+        }
+    }
+    return false
 }
+
