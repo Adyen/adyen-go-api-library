@@ -10,7 +10,8 @@ package storedvalue
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v12/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the StoredValueIssueResponse type satisfies the MappedNullable interface at compile time
@@ -19,7 +20,7 @@ var _ common.MappedNullable = &StoredValueIssueResponse{}
 // StoredValueIssueResponse struct for StoredValueIssueResponse
 type StoredValueIssueResponse struct {
 	// Authorisation code: * When the payment is authorised, this field holds the authorisation code for the payment. * When the payment is not authorised, this field is empty.
-	AuthCode *string `json:"authCode,omitempty"`
+	AuthCode       *string `json:"authCode,omitempty"`
 	CurrentBalance *Amount `json:"currentBalance,omitempty"`
 	// The collection that contains the type of the payment method and its specific information if available
 	PaymentMethod *map[string]string `json:"paymentMethod,omitempty"`
@@ -27,7 +28,7 @@ type StoredValueIssueResponse struct {
 	PspReference *string `json:"pspReference,omitempty"`
 	// If the transaction is refused or an error occurs, this field holds Adyen's mapped reason for the refusal or a description of the error.  When a transaction fails, the authorisation response includes `resultCode` and `refusalReason` values.
 	RefusalReason *string `json:"refusalReason,omitempty"`
-	// The result of the payment. Possible values:  * **Success** – The operation has been completed successfully.  * **Refused** – The operation was refused. The reason is given in the `refusalReason` field.  * **Error** – There was an error when the operation was processed. The reason is given in the `refusalReason` field.  * **NotEnoughBalance** – The amount on the payment method is lower than the amount given in the request. Only applicable to balance checks.  
+	// The result of the payment. Possible values:  * **Success** – The operation has been completed successfully.  * **Refused** – The operation was refused. The reason is given in the `refusalReason` field.  * **Error** – There was an error when the operation was processed. The reason is given in the `refusalReason` field.  * **NotEnoughBalance** – The amount on the payment method is lower than the amount given in the request. Only applicable to balance checks.
 	ResultCode *string `json:"resultCode,omitempty"`
 	// Raw refusal reason received from the third party, where available
 	ThirdPartyRefusalReason *string `json:"thirdPartyRefusalReason,omitempty"`
@@ -275,7 +276,7 @@ func (o *StoredValueIssueResponse) SetThirdPartyRefusalReason(v string) {
 }
 
 func (o StoredValueIssueResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -344,14 +345,12 @@ func (v *NullableStoredValueIssueResponse) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *StoredValueIssueResponse) isValidResultCode() bool {
-    var allowedEnumValues = []string{ "Success", "Refused", "Error", "NotEnoughBalance" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetResultCode() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"Success", "Refused", "Error", "NotEnoughBalance"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetResultCode() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

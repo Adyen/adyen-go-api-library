@@ -10,7 +10,8 @@ package management
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v12/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the NyceInfo type satisfies the MappedNullable interface at compile time
@@ -18,8 +19,8 @@ var _ common.MappedNullable = &NyceInfo{}
 
 // NyceInfo struct for NyceInfo
 type NyceInfo struct {
-	// The type of transactions processed over this payment method.  Allowed values: - **pos** for in-person payments.  - **billpay** for subscription payments, both the initial payment and the later recurring payments. These transactions have `recurringProcessingModel` **Subscription**.  - **ecom** for all other card not present transactions. This includes non-recurring transactions and transactions with `recurringProcessingModel` **CardOnFile** or **UnscheduledCardOnFile**. 
-	ProcessingType string `json:"processingType"`
+	// The type of transactions processed over this payment method.  Allowed values: - **pos** for in-person payments.  - **billpay** for subscription payments, both the initial payment and the later recurring payments. These transactions have `recurringProcessingModel` **Subscription**.  - **ecom** for all other card not present transactions. This includes non-recurring transactions and transactions with `recurringProcessingModel` **CardOnFile** or **UnscheduledCardOnFile**.
+	ProcessingType         string                      `json:"processingType"`
 	TransactionDescription *TransactionDescriptionInfo `json:"transactionDescription,omitempty"`
 }
 
@@ -98,7 +99,7 @@ func (o *NyceInfo) SetTransactionDescription(v TransactionDescriptionInfo) {
 }
 
 func (o NyceInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -150,14 +151,12 @@ func (v *NullableNyceInfo) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *NyceInfo) isValidProcessingType() bool {
-    var allowedEnumValues = []string{ "billpay", "ecom", "pos" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetProcessingType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"billpay", "ecom", "pos"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetProcessingType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-
