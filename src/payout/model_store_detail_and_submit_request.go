@@ -10,8 +10,7 @@ package payout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the StoreDetailAndSubmitRequest type satisfies the MappedNullable interface at compile time
@@ -21,10 +20,10 @@ var _ common.MappedNullable = &StoreDetailAndSubmitRequest{}
 type StoreDetailAndSubmitRequest struct {
 	// This field contains additional data, which may be required for a particular request.
 	AdditionalData *map[string]string `json:"additionalData,omitempty"`
-	Amount         Amount             `json:"amount"`
-	Bank           *BankAccount       `json:"bank,omitempty"`
-	BillingAddress *Address           `json:"billingAddress,omitempty"`
-	Card           *Card              `json:"card,omitempty"`
+	Amount Amount `json:"amount"`
+	Bank *BankAccount `json:"bank,omitempty"`
+	BillingAddress *Address `json:"billingAddress,omitempty"`
+	Card *Card `json:"card,omitempty"`
 	// The date of birth. Format: [ISO-8601](https://www.w3.org/TR/NOTE-datetime); example: YYYY-MM-DD For Paysafecard it must be the same as used when registering the Paysafecard account. > This field is mandatory for natural persons.
 	DateOfBirth string `json:"dateOfBirth"`
 	// The type of the entity the payout is processed for.
@@ -34,15 +33,15 @@ type StoreDetailAndSubmitRequest struct {
 	// The merchant account identifier, with which you want to process the transaction.
 	MerchantAccount string `json:"merchantAccount"`
 	// The shopper's nationality.  A valid value is an ISO 2-character country code (e.g. 'NL').
-	Nationality string    `json:"nationality"`
-	Recurring   Recurring `json:"recurring"`
+	Nationality string `json:"nationality"`
+	Recurring Recurring `json:"recurring"`
 	// The merchant reference for this payment. This reference will be used in all communication to the merchant about the status of the payout. Although it is a good idea to make sure it is unique, this is not a requirement.
 	Reference string `json:"reference"`
 	// The name of the brand to make a payout to.  For Paysafecard it must be set to `paysafecard`.
 	SelectedBrand *string `json:"selectedBrand,omitempty"`
 	// The shopper's email address.
 	ShopperEmail string `json:"shopperEmail"`
-	ShopperName  *Name  `json:"shopperName,omitempty"`
+	ShopperName *Name `json:"shopperName,omitempty"`
 	// The shopper's reference for the payment transaction.
 	ShopperReference string `json:"shopperReference"`
 	// The description of this payout. This description is shown on the bank statement of the shopper (if this is supported by the chosen payment method).
@@ -616,7 +615,7 @@ func (o *StoreDetailAndSubmitRequest) SetTelephoneNumber(v string) {
 }
 
 func (o StoreDetailAndSubmitRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -703,12 +702,14 @@ func (v *NullableStoreDetailAndSubmitRequest) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *StoreDetailAndSubmitRequest) isValidEntityType() bool {
-	var allowedEnumValues = []string{"NaturalPerson", "Company"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetEntityType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "NaturalPerson", "Company" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetEntityType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

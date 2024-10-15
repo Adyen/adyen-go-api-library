@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the AdditionalData3DSecure type satisfies the MappedNullable interface at compile time
@@ -19,19 +18,21 @@ var _ common.MappedNullable = &AdditionalData3DSecure{}
 
 // AdditionalData3DSecure struct for AdditionalData3DSecure
 type AdditionalData3DSecure struct {
-	// Indicates if you are able to process 3D Secure 2 transactions natively on your payment page. Send this parameter when you are using `/payments` endpoint with any of our [native 3D Secure 2 solutions](https://docs.adyen.com/online-payments/3d-secure/native-3ds2).   > This parameter only indicates readiness to support native 3D Secure 2 authentication. To specify if you _want_ to perform 3D Secure, use [Dynamic 3D Secure](/risk-management/dynamic-3d-secure) or send the `executeThreeD` parameter.  Possible values: * **true** - Ready to support native 3D Secure 2 authentication. Setting this to true does not mean always applying 3D Secure 2. Adyen selects redirect or native authentication based on your configuration to optimize authorization rates and improve the shopper's experience. * **false** – Not ready to support native 3D Secure 2 authentication. Adyen offers redirect 3D Secure 2 authentication instead, based on your configuration.
-	// Deprecated
+	// Indicates if you are able to process 3D Secure 2 transactions natively on your payment page. Send this parameter when you are using `/payments` endpoint with any of our [native 3D Secure 2 solutions](https://docs.adyen.com/online-payments/3d-secure/native-3ds2).   > This parameter only indicates readiness to support native 3D Secure 2 authentication. To specify if you _want_ to perform 3D Secure, use [Dynamic 3D Secure](/risk-management/dynamic-3d-secure) or send the `executeThreeD` parameter.  Possible values: * **true** - Ready to support native 3D Secure 2 authentication. Setting this to true does not mean always applying 3D Secure 2. Adyen selects redirect or native authentication based on your configuration to optimize authorization rates and improve the shopper's experience. * **false** – Not ready to support native 3D Secure 2 authentication. Adyen offers redirect 3D Secure 2 authentication instead, based on your configuration. 
+    // Deprecated since Adyen Checkout API v69
+    // Use `authenticationData.threeDSRequestData.nativeThreeDS` instead.
 	Allow3DS2 *string `json:"allow3DS2,omitempty"`
 	// Dimensions of the 3DS2 challenge window to be displayed to the cardholder.  Possible values:  * **01** - size of 250x400  * **02** - size of 390x400 * **03** - size of 500x600 * **04** - size of 600x400 * **05** - Fullscreen
 	ChallengeWindowSize *string `json:"challengeWindowSize,omitempty"`
-	// Indicates if you want to perform 3D Secure authentication on a transaction.   > Alternatively, you can use [Dynamic 3D Secure](/risk-management/dynamic-3d-secure) to configure rules for applying 3D Secure.  Possible values: * **true** – Perform 3D Secure authentication. * **false** – Don't perform 3D Secure authentication. Note that this setting results in refusals if the issuer mandates 3D Secure because of the PSD2 directive  or other, national regulations.
-	// Deprecated
+	// Indicates if you want to perform 3D Secure authentication on a transaction.   > Alternatively, you can use [Dynamic 3D Secure](/risk-management/dynamic-3d-secure) to configure rules for applying 3D Secure.  Possible values: * **true** – Perform 3D Secure authentication. * **false** – Don't perform 3D Secure authentication. Note that this setting results in refusals if the issuer mandates 3D Secure because of the PSD2 directive  or other, national regulations.  
+    // Deprecated since Adyen Checkout API v69
+    // Use [`authenticationData.attemptAuthentication`](https://docs.adyen.com/api-explorer/Checkout/latest/post/payments?target=_blank#request-authenticationData-attemptAuthentication) instead
 	ExecuteThreeD *string `json:"executeThreeD,omitempty"`
 	// In case of Secure+, this field must be set to **CUPSecurePlus**.
 	MpiImplementationType *string `json:"mpiImplementationType,omitempty"`
-	// Indicates the [exemption type](https://docs.adyen.com/payments-fundamentals/psd2-sca-compliance-and-implementation-guide#specifypreferenceinyourapirequest) that you want to request for the transaction.   Possible values: * **lowValue**  * **secureCorporate**  * **trustedBeneficiary**  * **transactionRiskAnalysis**
+	// Indicates the [exemption type](https://docs.adyen.com/payments-fundamentals/psd2-sca-compliance-and-implementation-guide#specifypreferenceinyourapirequest) that you want to request for the transaction.   Possible values: * **lowValue**  * **secureCorporate**  * **trustedBeneficiary**  * **transactionRiskAnalysis** 
 	ScaExemption *string `json:"scaExemption,omitempty"`
-	// Indicates your preference for the 3D Secure version.  > If you use this parameter, you override the checks from Adyen's Authentication Engine. We recommend to use this field only if you have an extensive knowledge of 3D Secure.  Possible values: * **1.0.2**: Apply 3D Secure version 1.0.2.  * **2.1.0**: Apply 3D Secure version 2.1.0.  * **2.2.0**: Apply 3D Secure version 2.2.0. If the issuer does not support version 2.2.0, we will fall back to 2.1.0.  The following rules apply: * If you prefer 2.1.0 or 2.2.0 but we receive a negative `transStatus` in the `ARes`, we will apply the fallback policy configured in your account. For example, if the configuration is to fall back to 3D Secure 1, we will apply version 1.0.2. * If you prefer 2.1.0 or 2.2.0 but the BIN is not enrolled, you will receive an error.
+	// Indicates your preference for the 3D Secure version.  > If you use this parameter, you override the checks from Adyen's Authentication Engine. We recommend to use this field only if you have an extensive knowledge of 3D Secure.  Possible values: * **1.0.2**: Apply 3D Secure version 1.0.2.  * **2.1.0**: Apply 3D Secure version 2.1.0.  * **2.2.0**: Apply 3D Secure version 2.2.0. If the issuer does not support version 2.2.0, we will fall back to 2.1.0.  The following rules apply: * If you prefer 2.1.0 or 2.2.0 but we receive a negative `transStatus` in the `ARes`, we will apply the fallback policy configured in your account. For example, if the configuration is to fall back to 3D Secure 1, we will apply version 1.0.2. * If you prefer 2.1.0 or 2.2.0 but the BIN is not enrolled, you will receive an error.  
 	ThreeDSVersion *string `json:"threeDSVersion,omitempty"`
 }
 
@@ -53,7 +54,8 @@ func NewAdditionalData3DSecureWithDefaults() *AdditionalData3DSecure {
 }
 
 // GetAllow3DS2 returns the Allow3DS2 field value if set, zero value otherwise.
-// Deprecated
+// Deprecated since Adyen Checkout API v69
+// Use `authenticationData.threeDSRequestData.nativeThreeDS` instead.
 func (o *AdditionalData3DSecure) GetAllow3DS2() string {
 	if o == nil || common.IsNil(o.Allow3DS2) {
 		var ret string
@@ -64,7 +66,8 @@ func (o *AdditionalData3DSecure) GetAllow3DS2() string {
 
 // GetAllow3DS2Ok returns a tuple with the Allow3DS2 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
+// Deprecated since Adyen Checkout API v69
+// Use `authenticationData.threeDSRequestData.nativeThreeDS` instead.
 func (o *AdditionalData3DSecure) GetAllow3DS2Ok() (*string, bool) {
 	if o == nil || common.IsNil(o.Allow3DS2) {
 		return nil, false
@@ -82,7 +85,8 @@ func (o *AdditionalData3DSecure) HasAllow3DS2() bool {
 }
 
 // SetAllow3DS2 gets a reference to the given string and assigns it to the Allow3DS2 field.
-// Deprecated
+// Deprecated since Adyen Checkout API v69
+// Use `authenticationData.threeDSRequestData.nativeThreeDS` instead.
 func (o *AdditionalData3DSecure) SetAllow3DS2(v string) {
 	o.Allow3DS2 = &v
 }
@@ -120,7 +124,8 @@ func (o *AdditionalData3DSecure) SetChallengeWindowSize(v string) {
 }
 
 // GetExecuteThreeD returns the ExecuteThreeD field value if set, zero value otherwise.
-// Deprecated
+// Deprecated since Adyen Checkout API v69
+// Use [`authenticationData.attemptAuthentication`](https://docs.adyen.com/api-explorer/Checkout/latest/post/payments?target=_blank#request-authenticationData-attemptAuthentication) instead
 func (o *AdditionalData3DSecure) GetExecuteThreeD() string {
 	if o == nil || common.IsNil(o.ExecuteThreeD) {
 		var ret string
@@ -131,7 +136,8 @@ func (o *AdditionalData3DSecure) GetExecuteThreeD() string {
 
 // GetExecuteThreeDOk returns a tuple with the ExecuteThreeD field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
+// Deprecated since Adyen Checkout API v69
+// Use [`authenticationData.attemptAuthentication`](https://docs.adyen.com/api-explorer/Checkout/latest/post/payments?target=_blank#request-authenticationData-attemptAuthentication) instead
 func (o *AdditionalData3DSecure) GetExecuteThreeDOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ExecuteThreeD) {
 		return nil, false
@@ -149,7 +155,8 @@ func (o *AdditionalData3DSecure) HasExecuteThreeD() bool {
 }
 
 // SetExecuteThreeD gets a reference to the given string and assigns it to the ExecuteThreeD field.
-// Deprecated
+// Deprecated since Adyen Checkout API v69
+// Use [`authenticationData.attemptAuthentication`](https://docs.adyen.com/api-explorer/Checkout/latest/post/payments?target=_blank#request-authenticationData-attemptAuthentication) instead
 func (o *AdditionalData3DSecure) SetExecuteThreeD(v string) {
 	o.ExecuteThreeD = &v
 }
@@ -251,7 +258,7 @@ func (o *AdditionalData3DSecure) SetThreeDSVersion(v string) {
 }
 
 func (o AdditionalData3DSecure) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -317,12 +324,14 @@ func (v *NullableAdditionalData3DSecure) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *AdditionalData3DSecure) isValidChallengeWindowSize() bool {
-	var allowedEnumValues = []string{"01", "02", "03", "04", "05"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetChallengeWindowSize() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "01", "02", "03", "04", "05" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetChallengeWindowSize() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

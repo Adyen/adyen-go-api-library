@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the BusinessLineInfo type satisfies the MappedNullable interface at compile time
@@ -20,7 +19,8 @@ var _ common.MappedNullable = &BusinessLineInfo{}
 // BusinessLineInfo struct for BusinessLineInfo
 type BusinessLineInfo struct {
 	// The capability for which you are creating the business line.  Possible values: **receivePayments**, **receiveFromPlatformPayments**, **issueBankAccount**
-	// Deprecated
+    // Deprecated since Legal Entity Management API v3
+    // Use `service` instead.
 	Capability *string `json:"capability,omitempty"`
 	// A code that represents the industry of the legal entity for [marketplaces](https://docs.adyen.com/marketplaces/verification-requirements/reference-additional-products/#list-industry-codes) or [platforms](https://docs.adyen.com/platforms/verification-requirements/reference-additional-products/#list-industry-codes). For example, **4431A** for computer software stores.
 	IndustryCode string `json:"industryCode"`
@@ -28,11 +28,11 @@ type BusinessLineInfo struct {
 	LegalEntityId string `json:"legalEntityId"`
 	// A list of channels where goods or services are sold.  Possible values: **pos**, **posMoto**, **eCommerce**, **ecomMoto**, **payByLink**.  Required only in combination with the `service` **paymentProcessing**.
 	SalesChannels []string `json:"salesChannels,omitempty"`
-	// The service for which you are creating the business line.    Possible values: *  **paymentProcessing** *  **banking**
-	Service       string         `json:"service"`
+	// The service for which you are creating the business line.    Possible values: *  **paymentProcessing** *  **banking**  
+	Service string `json:"service"`
 	SourceOfFunds *SourceOfFunds `json:"sourceOfFunds,omitempty"`
 	// List of website URLs where your user's goods or services are sold. When this is required for a service but your user does not have an online presence, provide the reason in the `webDataExemption` object.
-	WebData          []WebData         `json:"webData,omitempty"`
+	WebData []WebData `json:"webData,omitempty"`
 	WebDataExemption *WebDataExemption `json:"webDataExemption,omitempty"`
 }
 
@@ -57,7 +57,8 @@ func NewBusinessLineInfoWithDefaults() *BusinessLineInfo {
 }
 
 // GetCapability returns the Capability field value if set, zero value otherwise.
-// Deprecated
+// Deprecated since Legal Entity Management API v3
+// Use `service` instead.
 func (o *BusinessLineInfo) GetCapability() string {
 	if o == nil || common.IsNil(o.Capability) {
 		var ret string
@@ -68,7 +69,8 @@ func (o *BusinessLineInfo) GetCapability() string {
 
 // GetCapabilityOk returns a tuple with the Capability field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
+// Deprecated since Legal Entity Management API v3
+// Use `service` instead.
 func (o *BusinessLineInfo) GetCapabilityOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Capability) {
 		return nil, false
@@ -86,7 +88,8 @@ func (o *BusinessLineInfo) HasCapability() bool {
 }
 
 // SetCapability gets a reference to the given string and assigns it to the Capability field.
-// Deprecated
+// Deprecated since Legal Entity Management API v3
+// Use `service` instead.
 func (o *BusinessLineInfo) SetCapability(v string) {
 	o.Capability = &v
 }
@@ -292,7 +295,7 @@ func (o *BusinessLineInfo) SetWebDataExemption(v WebDataExemption) {
 }
 
 func (o BusinessLineInfo) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -358,21 +361,23 @@ func (v *NullableBusinessLineInfo) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *BusinessLineInfo) isValidCapability() bool {
-	var allowedEnumValues = []string{"receivePayments", "receiveFromPlatformPayments", "issueBankAccount"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetCapability() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "receivePayments", "receiveFromPlatformPayments", "issueBankAccount" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetCapability() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *BusinessLineInfo) isValidService() bool {
-	var allowedEnumValues = []string{"paymentProcessing", "banking"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetService() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "paymentProcessing", "banking" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetService() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

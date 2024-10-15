@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the SplitConfiguration type satisfies the MappedNullable interface at compile time
@@ -25,8 +24,6 @@ type SplitConfiguration struct {
 	Rules []SplitConfigurationRule `json:"rules"`
 	// Unique identifier of the split configuration.
 	SplitConfigurationId *string `json:"splitConfigurationId,omitempty"`
-	// List of stores to which the split configuration applies.
-	Stores []string `json:"stores,omitempty"`
 }
 
 // NewSplitConfiguration instantiates a new SplitConfiguration object
@@ -128,40 +125,8 @@ func (o *SplitConfiguration) SetSplitConfigurationId(v string) {
 	o.SplitConfigurationId = &v
 }
 
-// GetStores returns the Stores field value if set, zero value otherwise.
-func (o *SplitConfiguration) GetStores() []string {
-	if o == nil || common.IsNil(o.Stores) {
-		var ret []string
-		return ret
-	}
-	return o.Stores
-}
-
-// GetStoresOk returns a tuple with the Stores field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SplitConfiguration) GetStoresOk() ([]string, bool) {
-	if o == nil || common.IsNil(o.Stores) {
-		return nil, false
-	}
-	return o.Stores, true
-}
-
-// HasStores returns a boolean if a field has been set.
-func (o *SplitConfiguration) HasStores() bool {
-	if o != nil && !common.IsNil(o.Stores) {
-		return true
-	}
-
-	return false
-}
-
-// SetStores gets a reference to the given []string and assigns it to the Stores field.
-func (o *SplitConfiguration) SetStores(v []string) {
-	o.Stores = v
-}
-
 func (o SplitConfiguration) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -174,9 +139,6 @@ func (o SplitConfiguration) ToMap() (map[string]interface{}, error) {
 	toSerialize["rules"] = o.Rules
 	if !common.IsNil(o.SplitConfigurationId) {
 		toSerialize["splitConfigurationId"] = o.SplitConfigurationId
-	}
-	if !common.IsNil(o.Stores) {
-		toSerialize["stores"] = o.Stores
 	}
 	return toSerialize, nil
 }
@@ -216,3 +178,6 @@ func (v *NullableSplitConfiguration) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

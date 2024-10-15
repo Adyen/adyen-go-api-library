@@ -10,10 +10,10 @@ package checkout
 
 import (
 	"context"
-	"net/http"
-	"net/url"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+    "net/http"
+    "net/url"
+    "strings"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // ClassicCheckoutSDKApi service
@@ -21,7 +21,7 @@ type ClassicCheckoutSDKApi common.Service
 
 // All parameters accepted by ClassicCheckoutSDKApi.PaymentSession
 type ClassicCheckoutSDKApiPaymentSessionInput struct {
-	idempotencyKey      *string
+	idempotencyKey *string
 	paymentSetupRequest *PaymentSetupRequest
 }
 
@@ -36,15 +36,17 @@ func (r ClassicCheckoutSDKApiPaymentSessionInput) PaymentSetupRequest(paymentSet
 	return r
 }
 
+
 /*
 Prepare a request for PaymentSession
 
 @return ClassicCheckoutSDKApiPaymentSessionInput
 
-Deprecated
+Deprecated since Adyen Checkout API v37
 */
 func (a *ClassicCheckoutSDKApi) PaymentSessionInput() ClassicCheckoutSDKApiPaymentSessionInput {
-	return ClassicCheckoutSDKApiPaymentSessionInput{}
+	return ClassicCheckoutSDKApiPaymentSessionInput{
+	}
 }
 
 /*
@@ -58,33 +60,35 @@ For more information, refer to [How it works](https://docs.adyen.com/online-paym
 @param r ClassicCheckoutSDKApiPaymentSessionInput - Request parameters, see PaymentSessionInput
 @return PaymentSetupResponse, *http.Response, error
 
-    Deprecated
+Deprecated since Adyen Checkout API v37
 */
 func (a *ClassicCheckoutSDKApi) PaymentSession(ctx context.Context, r ClassicCheckoutSDKApiPaymentSessionInput) (PaymentSetupResponse, *http.Response, error) {
-	res := &PaymentSetupResponse{}
+    res := &PaymentSetupResponse{}
 	path := "/paymentSession"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	if r.idempotencyKey != nil {
-		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
-	}
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.paymentSetupRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    if r.idempotencyKey != nil {
+        common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
+    }
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.paymentSetupRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by ClassicCheckoutSDKApi.VerifyPaymentResult
 type ClassicCheckoutSDKApiVerifyPaymentResultInput struct {
-	idempotencyKey             *string
+	idempotencyKey *string
 	paymentVerificationRequest *PaymentVerificationRequest
 }
 
@@ -99,15 +103,17 @@ func (r ClassicCheckoutSDKApiVerifyPaymentResultInput) PaymentVerificationReques
 	return r
 }
 
+
 /*
 Prepare a request for VerifyPaymentResult
 
 @return ClassicCheckoutSDKApiVerifyPaymentResultInput
 
-Deprecated
+Deprecated since Adyen Checkout API v37
 */
 func (a *ClassicCheckoutSDKApi) VerifyPaymentResultInput() ClassicCheckoutSDKApiVerifyPaymentResultInput {
-	return ClassicCheckoutSDKApiVerifyPaymentResultInput{}
+	return ClassicCheckoutSDKApiVerifyPaymentResultInput{
+	}
 }
 
 /*
@@ -121,26 +127,28 @@ For more information, refer to [How it works](https://docs.adyen.com/online-paym
 @param r ClassicCheckoutSDKApiVerifyPaymentResultInput - Request parameters, see VerifyPaymentResultInput
 @return PaymentVerificationResponse, *http.Response, error
 
-    Deprecated
+Deprecated since Adyen Checkout API v37
 */
 func (a *ClassicCheckoutSDKApi) VerifyPaymentResult(ctx context.Context, r ClassicCheckoutSDKApiVerifyPaymentResultInput) (PaymentVerificationResponse, *http.Response, error) {
-	res := &PaymentVerificationResponse{}
+    res := &PaymentVerificationResponse{}
 	path := "/payments/result"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	if r.idempotencyKey != nil {
-		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
-	}
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.paymentVerificationRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    if r.idempotencyKey != nil {
+        common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
+    }
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.paymentVerificationRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+

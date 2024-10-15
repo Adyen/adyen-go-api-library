@@ -10,9 +10,8 @@ package legalentity
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 	"time"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the Document type satisfies the MappedNullable interface at compile time
@@ -28,23 +27,23 @@ type Document struct {
 	// Your description for the document.
 	Description string `json:"description"`
 	// The expiry date of the document, in YYYY-MM-DD format.
-	// Deprecated
+    // Deprecated since Legal Entity Management API v1
 	ExpiryDate *string `json:"expiryDate,omitempty"`
 	// The filename of the document.
 	FileName *string `json:"fileName,omitempty"`
 	// The unique identifier of the document.
 	Id *string `json:"id,omitempty"`
 	// The two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code where the document was issued. For example, **US**.
-	// Deprecated
+    // Deprecated since Legal Entity Management API v1
 	IssuerCountry *string `json:"issuerCountry,omitempty"`
 	// The state or province where the document was issued (AU only).
-	// Deprecated
+    // Deprecated since Legal Entity Management API v1
 	IssuerState *string `json:"issuerState,omitempty"`
 	// The modification date of the document.
 	ModificationDate *time.Time `json:"modificationDate,omitempty"`
 	// The number in the document.
-	Number *string      `json:"number,omitempty"`
-	Owner  *OwnerEntity `json:"owner,omitempty"`
+	Number *string `json:"number,omitempty"`
+	Owner *OwnerEntity `json:"owner,omitempty"`
 	// Type of document, used when providing an ID number or uploading a document. The possible values depend on the legal entity type.  * For **organization**, the `type` values can be **proofOfAddress**, **registrationDocument**, **vatDocument**, **proofOfOrganizationTaxInfo**, **proofOfOwnership**, **proofOfIndustry**, **proofOfSignatory**, or **proofOfFundingOrWealthSource**.  * For **individual**, the `type` values can be **identityCard**, **driversLicense**, **passport**, **liveSelfie**, **proofOfNationalIdNumber**, **proofOfResidency**, **proofOfIndustry**, **proofOfIndividualTaxId**, **proofOfFundingOrWealthSource** or **proofOfRelationship**.  * For **soleProprietorship**, the `type` values can be **constitutionalDocument**, **proofOfAddress**, or **proofOfIndustry**.  * For **trust**, the `type` value can be **constitutionalDocument**.  * Use **bankStatement** to upload documents for a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id).
 	Type string `json:"type"`
 }
@@ -189,7 +188,7 @@ func (o *Document) SetDescription(v string) {
 }
 
 // GetExpiryDate returns the ExpiryDate field value if set, zero value otherwise.
-// Deprecated
+// Deprecated since Legal Entity Management API v1
 func (o *Document) GetExpiryDate() string {
 	if o == nil || common.IsNil(o.ExpiryDate) {
 		var ret string
@@ -200,7 +199,7 @@ func (o *Document) GetExpiryDate() string {
 
 // GetExpiryDateOk returns a tuple with the ExpiryDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
+// Deprecated since Legal Entity Management API v1
 func (o *Document) GetExpiryDateOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ExpiryDate) {
 		return nil, false
@@ -218,7 +217,7 @@ func (o *Document) HasExpiryDate() bool {
 }
 
 // SetExpiryDate gets a reference to the given string and assigns it to the ExpiryDate field.
-// Deprecated
+// Deprecated since Legal Entity Management API v1
 func (o *Document) SetExpiryDate(v string) {
 	o.ExpiryDate = &v
 }
@@ -288,7 +287,7 @@ func (o *Document) SetId(v string) {
 }
 
 // GetIssuerCountry returns the IssuerCountry field value if set, zero value otherwise.
-// Deprecated
+// Deprecated since Legal Entity Management API v1
 func (o *Document) GetIssuerCountry() string {
 	if o == nil || common.IsNil(o.IssuerCountry) {
 		var ret string
@@ -299,7 +298,7 @@ func (o *Document) GetIssuerCountry() string {
 
 // GetIssuerCountryOk returns a tuple with the IssuerCountry field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
+// Deprecated since Legal Entity Management API v1
 func (o *Document) GetIssuerCountryOk() (*string, bool) {
 	if o == nil || common.IsNil(o.IssuerCountry) {
 		return nil, false
@@ -317,13 +316,13 @@ func (o *Document) HasIssuerCountry() bool {
 }
 
 // SetIssuerCountry gets a reference to the given string and assigns it to the IssuerCountry field.
-// Deprecated
+// Deprecated since Legal Entity Management API v1
 func (o *Document) SetIssuerCountry(v string) {
 	o.IssuerCountry = &v
 }
 
 // GetIssuerState returns the IssuerState field value if set, zero value otherwise.
-// Deprecated
+// Deprecated since Legal Entity Management API v1
 func (o *Document) GetIssuerState() string {
 	if o == nil || common.IsNil(o.IssuerState) {
 		var ret string
@@ -334,7 +333,7 @@ func (o *Document) GetIssuerState() string {
 
 // GetIssuerStateOk returns a tuple with the IssuerState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
+// Deprecated since Legal Entity Management API v1
 func (o *Document) GetIssuerStateOk() (*string, bool) {
 	if o == nil || common.IsNil(o.IssuerState) {
 		return nil, false
@@ -352,7 +351,7 @@ func (o *Document) HasIssuerState() bool {
 }
 
 // SetIssuerState gets a reference to the given string and assigns it to the IssuerState field.
-// Deprecated
+// Deprecated since Legal Entity Management API v1
 func (o *Document) SetIssuerState(v string) {
 	o.IssuerState = &v
 }
@@ -478,7 +477,7 @@ func (o *Document) SetType(v string) {
 }
 
 func (o Document) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -561,12 +560,14 @@ func (v *NullableDocument) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *Document) isValidType() bool {
-	var allowedEnumValues = []string{"bankStatement", "driversLicense", "identityCard", "nationalIdNumber", "passport", "proofOfAddress", "proofOfNationalIdNumber", "proofOfResidency", "registrationDocument", "vatDocument", "proofOfOrganizationTaxInfo", "proofOfIndividualTaxId", "proofOfOwnership", "proofOfSignatory", "liveSelfie", "proofOfIndustry", "constitutionalDocument", "proofOfFundingOrWealthSource", "proofOfRelationship"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "bankStatement", "driversLicense", "identityCard", "nationalIdNumber", "passport", "proofOfAddress", "proofOfNationalIdNumber", "proofOfResidency", "registrationDocument", "vatDocument", "proofOfOrganizationTaxInfo", "proofOfIndividualTaxId", "proofOfOwnership", "proofOfSignatory", "liveSelfie", "proofOfIndustry", "constitutionalDocument", "proofOfFundingOrWealthSource", "proofOfRelationship" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

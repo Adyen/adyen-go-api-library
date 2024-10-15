@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the BankAccountInfo type satisfies the MappedNullable interface at compile time
@@ -21,7 +20,7 @@ var _ common.MappedNullable = &BankAccountInfo{}
 type BankAccountInfo struct {
 	AccountIdentification *BankAccountInfoAccountIdentification `json:"accountIdentification,omitempty"`
 	// The type of bank account.
-	// Deprecated
+    // Deprecated since Legal Entity Management API v2
 	AccountType *string `json:"accountType,omitempty"`
 	// The name of the banking institution where the bank account is held.
 	BankName *string `json:"bankName,omitempty"`
@@ -81,7 +80,7 @@ func (o *BankAccountInfo) SetAccountIdentification(v BankAccountInfoAccountIdent
 }
 
 // GetAccountType returns the AccountType field value if set, zero value otherwise.
-// Deprecated
+// Deprecated since Legal Entity Management API v2
 func (o *BankAccountInfo) GetAccountType() string {
 	if o == nil || common.IsNil(o.AccountType) {
 		var ret string
@@ -92,7 +91,7 @@ func (o *BankAccountInfo) GetAccountType() string {
 
 // GetAccountTypeOk returns a tuple with the AccountType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
+// Deprecated since Legal Entity Management API v2
 func (o *BankAccountInfo) GetAccountTypeOk() (*string, bool) {
 	if o == nil || common.IsNil(o.AccountType) {
 		return nil, false
@@ -110,7 +109,7 @@ func (o *BankAccountInfo) HasAccountType() bool {
 }
 
 // SetAccountType gets a reference to the given string and assigns it to the AccountType field.
-// Deprecated
+// Deprecated since Legal Entity Management API v2
 func (o *BankAccountInfo) SetAccountType(v string) {
 	o.AccountType = &v
 }
@@ -212,7 +211,7 @@ func (o *BankAccountInfo) SetTrustedSource(v bool) {
 }
 
 func (o BankAccountInfo) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -274,3 +273,6 @@ func (v *NullableBankAccountInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

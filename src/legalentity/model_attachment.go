@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the Attachment type satisfies the MappedNullable interface at compile time
@@ -21,11 +20,11 @@ var _ common.MappedNullable = &Attachment{}
 type Attachment struct {
 	// The document in Base64-encoded string format.
 	Content string `json:"content"`
-	// The file format.   Possible values: **application/pdf**, **image/jpg**, **image/jpeg**, **image/png**.
-	// Deprecated
+	// The file format.   Possible values: **application/pdf**, **image/jpg**, **image/jpeg**, **image/png**. 
+    // Deprecated since Legal Entity Management API v1
 	ContentType *string `json:"contentType,omitempty"`
 	// The name of the file including the file extension.
-	// Deprecated
+    // Deprecated since Legal Entity Management API v1
 	Filename *string `json:"filename,omitempty"`
 	// The name of the file including the file extension.
 	PageName *string `json:"pageName,omitempty"`
@@ -76,7 +75,7 @@ func (o *Attachment) SetContent(v string) {
 }
 
 // GetContentType returns the ContentType field value if set, zero value otherwise.
-// Deprecated
+// Deprecated since Legal Entity Management API v1
 func (o *Attachment) GetContentType() string {
 	if o == nil || common.IsNil(o.ContentType) {
 		var ret string
@@ -87,7 +86,7 @@ func (o *Attachment) GetContentType() string {
 
 // GetContentTypeOk returns a tuple with the ContentType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
+// Deprecated since Legal Entity Management API v1
 func (o *Attachment) GetContentTypeOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ContentType) {
 		return nil, false
@@ -105,13 +104,13 @@ func (o *Attachment) HasContentType() bool {
 }
 
 // SetContentType gets a reference to the given string and assigns it to the ContentType field.
-// Deprecated
+// Deprecated since Legal Entity Management API v1
 func (o *Attachment) SetContentType(v string) {
 	o.ContentType = &v
 }
 
 // GetFilename returns the Filename field value if set, zero value otherwise.
-// Deprecated
+// Deprecated since Legal Entity Management API v1
 func (o *Attachment) GetFilename() string {
 	if o == nil || common.IsNil(o.Filename) {
 		var ret string
@@ -122,7 +121,7 @@ func (o *Attachment) GetFilename() string {
 
 // GetFilenameOk returns a tuple with the Filename field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
+// Deprecated since Legal Entity Management API v1
 func (o *Attachment) GetFilenameOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Filename) {
 		return nil, false
@@ -140,7 +139,7 @@ func (o *Attachment) HasFilename() bool {
 }
 
 // SetFilename gets a reference to the given string and assigns it to the Filename field.
-// Deprecated
+// Deprecated since Legal Entity Management API v1
 func (o *Attachment) SetFilename(v string) {
 	o.Filename = &v
 }
@@ -210,7 +209,7 @@ func (o *Attachment) SetPageType(v string) {
 }
 
 func (o Attachment) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -270,3 +269,6 @@ func (v *NullableAttachment) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

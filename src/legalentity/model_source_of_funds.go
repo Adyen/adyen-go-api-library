@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the SourceOfFunds type satisfies the MappedNullable interface at compile time
@@ -20,7 +19,8 @@ var _ common.MappedNullable = &SourceOfFunds{}
 // SourceOfFunds struct for SourceOfFunds
 type SourceOfFunds struct {
 	// The unique identifier of the business line that will be the source of funds.This must be a business line for a **receivePayments** or **receiveFromPlatformPayments** capability.
-	// Deprecated
+    // Deprecated since Legal Entity Management API v3
+    // This field will be removed in v4.
 	AcquiringBusinessLineId *string `json:"acquiringBusinessLineId,omitempty"`
 	// Indicates whether the funds are coming from transactions processed by Adyen. If **false**, a `description` is required.
 	AdyenProcessedFunds *bool `json:"adyenProcessedFunds,omitempty"`
@@ -48,7 +48,8 @@ func NewSourceOfFundsWithDefaults() *SourceOfFunds {
 }
 
 // GetAcquiringBusinessLineId returns the AcquiringBusinessLineId field value if set, zero value otherwise.
-// Deprecated
+// Deprecated since Legal Entity Management API v3
+// This field will be removed in v4.
 func (o *SourceOfFunds) GetAcquiringBusinessLineId() string {
 	if o == nil || common.IsNil(o.AcquiringBusinessLineId) {
 		var ret string
@@ -59,7 +60,8 @@ func (o *SourceOfFunds) GetAcquiringBusinessLineId() string {
 
 // GetAcquiringBusinessLineIdOk returns a tuple with the AcquiringBusinessLineId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
+// Deprecated since Legal Entity Management API v3
+// This field will be removed in v4.
 func (o *SourceOfFunds) GetAcquiringBusinessLineIdOk() (*string, bool) {
 	if o == nil || common.IsNil(o.AcquiringBusinessLineId) {
 		return nil, false
@@ -77,7 +79,8 @@ func (o *SourceOfFunds) HasAcquiringBusinessLineId() bool {
 }
 
 // SetAcquiringBusinessLineId gets a reference to the given string and assigns it to the AcquiringBusinessLineId field.
-// Deprecated
+// Deprecated since Legal Entity Management API v3
+// This field will be removed in v4.
 func (o *SourceOfFunds) SetAcquiringBusinessLineId(v string) {
 	o.AcquiringBusinessLineId = &v
 }
@@ -179,7 +182,7 @@ func (o *SourceOfFunds) SetType(v string) {
 }
 
 func (o SourceOfFunds) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -239,12 +242,14 @@ func (v *NullableSourceOfFunds) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *SourceOfFunds) isValidType() bool {
-	var allowedEnumValues = []string{"business"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "business" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

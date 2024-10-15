@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the CardDetails type satisfies the MappedNullable interface at compile time
@@ -23,7 +22,7 @@ type CardDetails struct {
 	Brand *string `json:"brand,omitempty"`
 	// The checkout attempt identifier.
 	CheckoutAttemptId *string `json:"checkoutAttemptId,omitempty"`
-	// Deprecated
+    // Deprecated 
 	CupsecureplusSmscode *string `json:"cupsecureplus.smscode,omitempty"`
 	// The card verification code. Only collect raw card data if you are [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide).
 	Cvc *string `json:"cvc,omitempty"`
@@ -48,7 +47,8 @@ type CardDetails struct {
 	// The card number. Only collect raw card data if you are [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide).
 	Number *string `json:"number,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
-	// Deprecated
+    // Deprecated since Adyen Checkout API v49
+    // Use `storedPaymentMethodId` instead.
 	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
 	// The `shopperNotificationReference` returned in the response when you requested to notify the shopper. Used only for recurring payments in India.
 	ShopperNotificationReference *string `json:"shopperNotificationReference,omitempty"`
@@ -154,7 +154,7 @@ func (o *CardDetails) SetCheckoutAttemptId(v string) {
 }
 
 // GetCupsecureplusSmscode returns the CupsecureplusSmscode field value if set, zero value otherwise.
-// Deprecated
+// Deprecated 
 func (o *CardDetails) GetCupsecureplusSmscode() string {
 	if o == nil || common.IsNil(o.CupsecureplusSmscode) {
 		var ret string
@@ -165,7 +165,7 @@ func (o *CardDetails) GetCupsecureplusSmscode() string {
 
 // GetCupsecureplusSmscodeOk returns a tuple with the CupsecureplusSmscode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
+// Deprecated 
 func (o *CardDetails) GetCupsecureplusSmscodeOk() (*string, bool) {
 	if o == nil || common.IsNil(o.CupsecureplusSmscode) {
 		return nil, false
@@ -183,7 +183,7 @@ func (o *CardDetails) HasCupsecureplusSmscode() bool {
 }
 
 // SetCupsecureplusSmscode gets a reference to the given string and assigns it to the CupsecureplusSmscode field.
-// Deprecated
+// Deprecated 
 func (o *CardDetails) SetCupsecureplusSmscode(v string) {
 	o.CupsecureplusSmscode = &v
 }
@@ -541,7 +541,8 @@ func (o *CardDetails) SetNumber(v string) {
 }
 
 // GetRecurringDetailReference returns the RecurringDetailReference field value if set, zero value otherwise.
-// Deprecated
+// Deprecated since Adyen Checkout API v49
+// Use `storedPaymentMethodId` instead.
 func (o *CardDetails) GetRecurringDetailReference() string {
 	if o == nil || common.IsNil(o.RecurringDetailReference) {
 		var ret string
@@ -552,7 +553,8 @@ func (o *CardDetails) GetRecurringDetailReference() string {
 
 // GetRecurringDetailReferenceOk returns a tuple with the RecurringDetailReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
+// Deprecated since Adyen Checkout API v49
+// Use `storedPaymentMethodId` instead.
 func (o *CardDetails) GetRecurringDetailReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.RecurringDetailReference) {
 		return nil, false
@@ -570,7 +572,8 @@ func (o *CardDetails) HasRecurringDetailReference() bool {
 }
 
 // SetRecurringDetailReference gets a reference to the given string and assigns it to the RecurringDetailReference field.
-// Deprecated
+// Deprecated since Adyen Checkout API v49
+// Use `storedPaymentMethodId` instead.
 func (o *CardDetails) SetRecurringDetailReference(v string) {
 	o.RecurringDetailReference = &v
 }
@@ -832,7 +835,7 @@ func (o *CardDetails) SetType(v string) {
 }
 
 func (o CardDetails) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -949,21 +952,23 @@ func (v *NullableCardDetails) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *CardDetails) isValidFundingSource() bool {
-	var allowedEnumValues = []string{"credit", "debit"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetFundingSource() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "credit", "debit" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetFundingSource() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *CardDetails) isValidType() bool {
-	var allowedEnumValues = []string{"bcmc", "scheme", "networkToken", "giftcard", "card"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "bcmc", "scheme", "networkToken", "giftcard", "card" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

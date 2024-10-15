@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the Nexo type satisfies the MappedNullable interface at compile time
@@ -19,13 +18,14 @@ var _ common.MappedNullable = &Nexo{}
 
 // Nexo struct for Nexo
 type Nexo struct {
-	DisplayUrls   *NotificationUrl `json:"displayUrls,omitempty"`
-	EncryptionKey *Key             `json:"encryptionKey,omitempty"`
-	EventUrls     *EventUrl        `json:"eventUrls,omitempty"`
+	DisplayUrls *NotificationUrl `json:"displayUrls,omitempty"`
+	EncryptionKey *Key `json:"encryptionKey,omitempty"`
+	EventUrls *EventUrl `json:"eventUrls,omitempty"`
 	// One or more URLs to send event messages to when using Terminal API.
-	// Deprecated
-	NexoEventUrls []string      `json:"nexoEventUrls,omitempty"`
-	Notification  *Notification `json:"notification,omitempty"`
+    // Deprecated since Management API v1
+    // Use `eventUrls` instead.
+	NexoEventUrls []string `json:"nexoEventUrls,omitempty"`
+	Notification *Notification `json:"notification,omitempty"`
 }
 
 // NewNexo instantiates a new Nexo object
@@ -142,7 +142,8 @@ func (o *Nexo) SetEventUrls(v EventUrl) {
 }
 
 // GetNexoEventUrls returns the NexoEventUrls field value if set, zero value otherwise.
-// Deprecated
+// Deprecated since Management API v1
+// Use `eventUrls` instead.
 func (o *Nexo) GetNexoEventUrls() []string {
 	if o == nil || common.IsNil(o.NexoEventUrls) {
 		var ret []string
@@ -153,7 +154,8 @@ func (o *Nexo) GetNexoEventUrls() []string {
 
 // GetNexoEventUrlsOk returns a tuple with the NexoEventUrls field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
+// Deprecated since Management API v1
+// Use `eventUrls` instead.
 func (o *Nexo) GetNexoEventUrlsOk() ([]string, bool) {
 	if o == nil || common.IsNil(o.NexoEventUrls) {
 		return nil, false
@@ -171,7 +173,8 @@ func (o *Nexo) HasNexoEventUrls() bool {
 }
 
 // SetNexoEventUrls gets a reference to the given []string and assigns it to the NexoEventUrls field.
-// Deprecated
+// Deprecated since Management API v1
+// Use `eventUrls` instead.
 func (o *Nexo) SetNexoEventUrls(v []string) {
 	o.NexoEventUrls = v
 }
@@ -209,7 +212,7 @@ func (o *Nexo) SetNotification(v Notification) {
 }
 
 func (o Nexo) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -271,3 +274,6 @@ func (v *NullableNexo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
