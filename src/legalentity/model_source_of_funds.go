@@ -20,7 +20,8 @@ var _ common.MappedNullable = &SourceOfFunds{}
 // SourceOfFunds struct for SourceOfFunds
 type SourceOfFunds struct {
 	// The unique identifier of the business line that will be the source of funds.This must be a business line for a **receivePayments** or **receiveFromPlatformPayments** capability.
-	// Deprecated
+	// Deprecated since Legal Entity Management API v3
+	// This field will be removed in v4.
 	AcquiringBusinessLineId *string `json:"acquiringBusinessLineId,omitempty"`
 	// Indicates whether the funds are coming from transactions processed by Adyen. If **false**, a `description` is required.
 	AdyenProcessedFunds *bool `json:"adyenProcessedFunds,omitempty"`
@@ -48,7 +49,8 @@ func NewSourceOfFundsWithDefaults() *SourceOfFunds {
 }
 
 // GetAcquiringBusinessLineId returns the AcquiringBusinessLineId field value if set, zero value otherwise.
-// Deprecated
+// Deprecated since Legal Entity Management API v3
+// This field will be removed in v4.
 func (o *SourceOfFunds) GetAcquiringBusinessLineId() string {
 	if o == nil || common.IsNil(o.AcquiringBusinessLineId) {
 		var ret string
@@ -59,7 +61,8 @@ func (o *SourceOfFunds) GetAcquiringBusinessLineId() string {
 
 // GetAcquiringBusinessLineIdOk returns a tuple with the AcquiringBusinessLineId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
+// Deprecated since Legal Entity Management API v3
+// This field will be removed in v4.
 func (o *SourceOfFunds) GetAcquiringBusinessLineIdOk() (*string, bool) {
 	if o == nil || common.IsNil(o.AcquiringBusinessLineId) {
 		return nil, false
@@ -77,7 +80,8 @@ func (o *SourceOfFunds) HasAcquiringBusinessLineId() bool {
 }
 
 // SetAcquiringBusinessLineId gets a reference to the given string and assigns it to the AcquiringBusinessLineId field.
-// Deprecated
+// Deprecated since Legal Entity Management API v3
+// This field will be removed in v4.
 func (o *SourceOfFunds) SetAcquiringBusinessLineId(v string) {
 	o.AcquiringBusinessLineId = &v
 }

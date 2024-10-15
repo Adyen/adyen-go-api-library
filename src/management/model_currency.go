@@ -23,6 +23,8 @@ type Currency struct {
 	Amount *int32 `json:"amount,omitempty"`
 	// Three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes). For example, **AUD**.
 	CurrencyCode string `json:"currencyCode"`
+	// The maximum surcharge amount per transaction, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
+	MaxAmount *int32 `json:"maxAmount,omitempty"`
 	// Surcharge percentage per transaction. The maximum number of decimal places is two. For example, **1%** or **2.27%**.
 	Percentage *float64 `json:"percentage,omitempty"`
 }
@@ -101,6 +103,38 @@ func (o *Currency) SetCurrencyCode(v string) {
 	o.CurrencyCode = v
 }
 
+// GetMaxAmount returns the MaxAmount field value if set, zero value otherwise.
+func (o *Currency) GetMaxAmount() int32 {
+	if o == nil || common.IsNil(o.MaxAmount) {
+		var ret int32
+		return ret
+	}
+	return *o.MaxAmount
+}
+
+// GetMaxAmountOk returns a tuple with the MaxAmount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Currency) GetMaxAmountOk() (*int32, bool) {
+	if o == nil || common.IsNil(o.MaxAmount) {
+		return nil, false
+	}
+	return o.MaxAmount, true
+}
+
+// HasMaxAmount returns a boolean if a field has been set.
+func (o *Currency) HasMaxAmount() bool {
+	if o != nil && !common.IsNil(o.MaxAmount) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxAmount gets a reference to the given int32 and assigns it to the MaxAmount field.
+func (o *Currency) SetMaxAmount(v int32) {
+	o.MaxAmount = &v
+}
+
 // GetPercentage returns the Percentage field value if set, zero value otherwise.
 func (o *Currency) GetPercentage() float64 {
 	if o == nil || common.IsNil(o.Percentage) {
@@ -147,6 +181,9 @@ func (o Currency) ToMap() (map[string]interface{}, error) {
 		toSerialize["amount"] = o.Amount
 	}
 	toSerialize["currencyCode"] = o.CurrencyCode
+	if !common.IsNil(o.MaxAmount) {
+		toSerialize["maxAmount"] = o.MaxAmount
+	}
 	if !common.IsNil(o.Percentage) {
 		toSerialize["percentage"] = o.Percentage
 	}

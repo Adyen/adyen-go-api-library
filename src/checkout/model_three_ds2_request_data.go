@@ -29,10 +29,12 @@ type ThreeDS2RequestData struct {
 	// Indicates whether the Cardholder Shipping Address and Cardholder Billing Address are the same. Allowed values: * **Y** — Shipping Address matches Billing Address. * **N** — Shipping Address does not match Billing Address.
 	AddrMatch *string `json:"addrMatch,omitempty"`
 	// If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only), and not the payment authorisation.
-	// Deprecated
+	// Deprecated since Adyen Checkout API v50
+	// Use `threeDSAuthenticationOnly` instead.
 	AuthenticationOnly *bool `json:"authenticationOnly,omitempty"`
 	// Possibility to specify a preference for receiving a challenge from the issuer. Allowed values: * `noPreference` * `requestNoChallenge` * `requestChallenge` * `requestChallengeAsMandate`
-	// Deprecated
+	// Deprecated since Adyen Checkout API v68
+	// Use `threeDSRequestorChallengeInd` instead.
 	ChallengeIndicator *string `json:"challengeIndicator,omitempty"`
 	// The environment of the shopper. Allowed values: * `app` * `browser`
 	DeviceChannel       string               `json:"deviceChannel"`
@@ -280,7 +282,8 @@ func (o *ThreeDS2RequestData) SetAddrMatch(v string) {
 }
 
 // GetAuthenticationOnly returns the AuthenticationOnly field value if set, zero value otherwise.
-// Deprecated
+// Deprecated since Adyen Checkout API v50
+// Use `threeDSAuthenticationOnly` instead.
 func (o *ThreeDS2RequestData) GetAuthenticationOnly() bool {
 	if o == nil || common.IsNil(o.AuthenticationOnly) {
 		var ret bool
@@ -291,7 +294,8 @@ func (o *ThreeDS2RequestData) GetAuthenticationOnly() bool {
 
 // GetAuthenticationOnlyOk returns a tuple with the AuthenticationOnly field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
+// Deprecated since Adyen Checkout API v50
+// Use `threeDSAuthenticationOnly` instead.
 func (o *ThreeDS2RequestData) GetAuthenticationOnlyOk() (*bool, bool) {
 	if o == nil || common.IsNil(o.AuthenticationOnly) {
 		return nil, false
@@ -309,13 +313,15 @@ func (o *ThreeDS2RequestData) HasAuthenticationOnly() bool {
 }
 
 // SetAuthenticationOnly gets a reference to the given bool and assigns it to the AuthenticationOnly field.
-// Deprecated
+// Deprecated since Adyen Checkout API v50
+// Use `threeDSAuthenticationOnly` instead.
 func (o *ThreeDS2RequestData) SetAuthenticationOnly(v bool) {
 	o.AuthenticationOnly = &v
 }
 
 // GetChallengeIndicator returns the ChallengeIndicator field value if set, zero value otherwise.
-// Deprecated
+// Deprecated since Adyen Checkout API v68
+// Use `threeDSRequestorChallengeInd` instead.
 func (o *ThreeDS2RequestData) GetChallengeIndicator() string {
 	if o == nil || common.IsNil(o.ChallengeIndicator) {
 		var ret string
@@ -326,7 +332,8 @@ func (o *ThreeDS2RequestData) GetChallengeIndicator() string {
 
 // GetChallengeIndicatorOk returns a tuple with the ChallengeIndicator field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
+// Deprecated since Adyen Checkout API v68
+// Use `threeDSRequestorChallengeInd` instead.
 func (o *ThreeDS2RequestData) GetChallengeIndicatorOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ChallengeIndicator) {
 		return nil, false
@@ -344,7 +351,8 @@ func (o *ThreeDS2RequestData) HasChallengeIndicator() bool {
 }
 
 // SetChallengeIndicator gets a reference to the given string and assigns it to the ChallengeIndicator field.
-// Deprecated
+// Deprecated since Adyen Checkout API v68
+// Use `threeDSRequestorChallengeInd` instead.
 func (o *ThreeDS2RequestData) SetChallengeIndicator(v string) {
 	o.ChallengeIndicator = &v
 }

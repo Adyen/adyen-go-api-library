@@ -30,7 +30,8 @@ type CashAppDetails struct {
 	// Cash App issued onFileGrantId for recurring payment
 	OnFileGrantId *string `json:"onFileGrantId,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
-	// Deprecated
+	// Deprecated since Adyen Checkout API v49
+	// Use `storedPaymentMethodId` instead.
 	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
 	// Cash App request id
 	RequestId *string `json:"requestId,omitempty"`
@@ -224,7 +225,8 @@ func (o *CashAppDetails) SetOnFileGrantId(v string) {
 }
 
 // GetRecurringDetailReference returns the RecurringDetailReference field value if set, zero value otherwise.
-// Deprecated
+// Deprecated since Adyen Checkout API v49
+// Use `storedPaymentMethodId` instead.
 func (o *CashAppDetails) GetRecurringDetailReference() string {
 	if o == nil || common.IsNil(o.RecurringDetailReference) {
 		var ret string
@@ -235,7 +237,8 @@ func (o *CashAppDetails) GetRecurringDetailReference() string {
 
 // GetRecurringDetailReferenceOk returns a tuple with the RecurringDetailReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
+// Deprecated since Adyen Checkout API v49
+// Use `storedPaymentMethodId` instead.
 func (o *CashAppDetails) GetRecurringDetailReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.RecurringDetailReference) {
 		return nil, false
@@ -253,7 +256,8 @@ func (o *CashAppDetails) HasRecurringDetailReference() bool {
 }
 
 // SetRecurringDetailReference gets a reference to the given string and assigns it to the RecurringDetailReference field.
-// Deprecated
+// Deprecated since Adyen Checkout API v49
+// Use `storedPaymentMethodId` instead.
 func (o *CashAppDetails) SetRecurringDetailReference(v string) {
 	o.RecurringDetailReference = &v
 }

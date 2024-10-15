@@ -127,7 +127,8 @@ type CreateCheckoutSessionResponse struct {
 	ThemeId             *string                             `json:"themeId,omitempty"`
 	ThreeDS2RequestData *CheckoutSessionThreeDS2RequestData `json:"threeDS2RequestData,omitempty"`
 	// If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only), and not the payment authorisation.
-	// Deprecated
+	// Deprecated since Adyen Checkout API v69
+	// Use `authenticationData.authenticationOnly` instead.
 	ThreeDSAuthenticationOnly *bool `json:"threeDSAuthenticationOnly,omitempty"`
 	// Set to true if the payment should be routed to a trusted MID.
 	TrustedShopper *bool `json:"trustedShopper,omitempty"`
@@ -2075,7 +2076,8 @@ func (o *CreateCheckoutSessionResponse) SetThreeDS2RequestData(v CheckoutSession
 }
 
 // GetThreeDSAuthenticationOnly returns the ThreeDSAuthenticationOnly field value if set, zero value otherwise.
-// Deprecated
+// Deprecated since Adyen Checkout API v69
+// Use `authenticationData.authenticationOnly` instead.
 func (o *CreateCheckoutSessionResponse) GetThreeDSAuthenticationOnly() bool {
 	if o == nil || common.IsNil(o.ThreeDSAuthenticationOnly) {
 		var ret bool
@@ -2086,7 +2088,8 @@ func (o *CreateCheckoutSessionResponse) GetThreeDSAuthenticationOnly() bool {
 
 // GetThreeDSAuthenticationOnlyOk returns a tuple with the ThreeDSAuthenticationOnly field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
+// Deprecated since Adyen Checkout API v69
+// Use `authenticationData.authenticationOnly` instead.
 func (o *CreateCheckoutSessionResponse) GetThreeDSAuthenticationOnlyOk() (*bool, bool) {
 	if o == nil || common.IsNil(o.ThreeDSAuthenticationOnly) {
 		return nil, false
@@ -2104,7 +2107,8 @@ func (o *CreateCheckoutSessionResponse) HasThreeDSAuthenticationOnly() bool {
 }
 
 // SetThreeDSAuthenticationOnly gets a reference to the given bool and assigns it to the ThreeDSAuthenticationOnly field.
-// Deprecated
+// Deprecated since Adyen Checkout API v69
+// Use `authenticationData.authenticationOnly` instead.
 func (o *CreateCheckoutSessionResponse) SetThreeDSAuthenticationOnly(v bool) {
 	o.ThreeDSAuthenticationOnly = &v
 }

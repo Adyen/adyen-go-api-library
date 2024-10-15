@@ -22,7 +22,8 @@ type PayUUpiDetails struct {
 	// The checkout attempt identifier.
 	CheckoutAttemptId *string `json:"checkoutAttemptId,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
-	// Deprecated
+	// Deprecated since Adyen Checkout API v49
+	// Use `storedPaymentMethodId` instead.
 	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
 	// The `shopperNotificationReference` returned in the response when you requested to notify the shopper. Used for recurring payment only.
 	ShopperNotificationReference *string `json:"shopperNotificationReference,omitempty"`
@@ -87,7 +88,8 @@ func (o *PayUUpiDetails) SetCheckoutAttemptId(v string) {
 }
 
 // GetRecurringDetailReference returns the RecurringDetailReference field value if set, zero value otherwise.
-// Deprecated
+// Deprecated since Adyen Checkout API v49
+// Use `storedPaymentMethodId` instead.
 func (o *PayUUpiDetails) GetRecurringDetailReference() string {
 	if o == nil || common.IsNil(o.RecurringDetailReference) {
 		var ret string
@@ -98,7 +100,8 @@ func (o *PayUUpiDetails) GetRecurringDetailReference() string {
 
 // GetRecurringDetailReferenceOk returns a tuple with the RecurringDetailReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
+// Deprecated since Adyen Checkout API v49
+// Use `storedPaymentMethodId` instead.
 func (o *PayUUpiDetails) GetRecurringDetailReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.RecurringDetailReference) {
 		return nil, false
@@ -116,7 +119,8 @@ func (o *PayUUpiDetails) HasRecurringDetailReference() bool {
 }
 
 // SetRecurringDetailReference gets a reference to the given string and assigns it to the RecurringDetailReference field.
-// Deprecated
+// Deprecated since Adyen Checkout API v49
+// Use `storedPaymentMethodId` instead.
 func (o *PayUUpiDetails) SetRecurringDetailReference(v string) {
 	o.RecurringDetailReference = &v
 }

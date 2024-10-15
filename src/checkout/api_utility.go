@@ -100,7 +100,7 @@ Prepare a request for OriginKeys
 
 @return UtilityApiOriginKeysInput
 
-Deprecated
+Deprecated since Adyen Checkout API v67
 */
 func (a *UtilityApi) OriginKeysInput() UtilityApiOriginKeysInput {
 	return UtilityApiOriginKeysInput{}
@@ -116,7 +116,7 @@ This operation takes the origin domains and returns a JSON object containing the
 @param r UtilityApiOriginKeysInput - Request parameters, see OriginKeysInput
 @return UtilityResponse, *http.Response, error
 
-    Deprecated
+Deprecated since Adyen Checkout API v67
 */
 func (a *UtilityApi) OriginKeys(ctx context.Context, r UtilityApiOriginKeysInput) (UtilityResponse, *http.Response, error) {
 	res := &UtilityResponse{}

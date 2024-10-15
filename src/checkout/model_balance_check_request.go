@@ -90,7 +90,8 @@ type BalanceCheckRequest struct {
 	TelephoneNumber     *string              `json:"telephoneNumber,omitempty"`
 	ThreeDS2RequestData *ThreeDS2RequestData `json:"threeDS2RequestData,omitempty"`
 	// If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only), and not the payment authorisation.
-	// Deprecated
+	// Deprecated since Adyen Checkout API v69
+	// Use `authenticationData.authenticationOnly` instead.
 	ThreeDSAuthenticationOnly *bool `json:"threeDSAuthenticationOnly,omitempty"`
 	// The reference value to aggregate sales totals in reporting. When not specified, the store field is used (if available).
 	TotalsGroup *string `json:"totalsGroup,omitempty"`
@@ -1411,7 +1412,8 @@ func (o *BalanceCheckRequest) SetThreeDS2RequestData(v ThreeDS2RequestData) {
 }
 
 // GetThreeDSAuthenticationOnly returns the ThreeDSAuthenticationOnly field value if set, zero value otherwise.
-// Deprecated
+// Deprecated since Adyen Checkout API v69
+// Use `authenticationData.authenticationOnly` instead.
 func (o *BalanceCheckRequest) GetThreeDSAuthenticationOnly() bool {
 	if o == nil || common.IsNil(o.ThreeDSAuthenticationOnly) {
 		var ret bool
@@ -1422,7 +1424,8 @@ func (o *BalanceCheckRequest) GetThreeDSAuthenticationOnly() bool {
 
 // GetThreeDSAuthenticationOnlyOk returns a tuple with the ThreeDSAuthenticationOnly field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
+// Deprecated since Adyen Checkout API v69
+// Use `authenticationData.authenticationOnly` instead.
 func (o *BalanceCheckRequest) GetThreeDSAuthenticationOnlyOk() (*bool, bool) {
 	if o == nil || common.IsNil(o.ThreeDSAuthenticationOnly) {
 		return nil, false
@@ -1440,7 +1443,8 @@ func (o *BalanceCheckRequest) HasThreeDSAuthenticationOnly() bool {
 }
 
 // SetThreeDSAuthenticationOnly gets a reference to the given bool and assigns it to the ThreeDSAuthenticationOnly field.
-// Deprecated
+// Deprecated since Adyen Checkout API v69
+// Use `authenticationData.authenticationOnly` instead.
 func (o *BalanceCheckRequest) SetThreeDSAuthenticationOnly(v bool) {
 	o.ThreeDSAuthenticationOnly = &v
 }

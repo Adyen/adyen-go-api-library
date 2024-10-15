@@ -21,9 +21,11 @@ var _ common.MappedNullable = &Configuration{}
 type Configuration struct {
 	// Payment method, like **eftpos_australia** or **mc**. See the [possible values](https://docs.adyen.com/development-resources/paymentmethodvariant#management-api).
 	Brand string `json:"brand"`
-	// Countries, to filter different surcharge amounts for domestic or international cards.
+	// Set to **true** to apply surcharges only to commercial/business cards.
+	Commercial *bool `json:"commercial,omitempty"`
+	// The country/region of the card issuer. If used, the surcharge settings only apply to the card issued in that country/region.
 	Country []string `json:"country,omitempty"`
-	// Currency, and surcharge percentage or amount.
+	// Currency and percentage or amount of the surcharge.
 	Currencies []Currency `json:"currencies"`
 	// Funding source. Possible values: * **Credit** * **Debit**
 	Sources []string `json:"sources,omitempty"`
@@ -70,6 +72,38 @@ func (o *Configuration) GetBrandOk() (*string, bool) {
 // SetBrand sets field value
 func (o *Configuration) SetBrand(v string) {
 	o.Brand = v
+}
+
+// GetCommercial returns the Commercial field value if set, zero value otherwise.
+func (o *Configuration) GetCommercial() bool {
+	if o == nil || common.IsNil(o.Commercial) {
+		var ret bool
+		return ret
+	}
+	return *o.Commercial
+}
+
+// GetCommercialOk returns a tuple with the Commercial field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Configuration) GetCommercialOk() (*bool, bool) {
+	if o == nil || common.IsNil(o.Commercial) {
+		return nil, false
+	}
+	return o.Commercial, true
+}
+
+// HasCommercial returns a boolean if a field has been set.
+func (o *Configuration) HasCommercial() bool {
+	if o != nil && !common.IsNil(o.Commercial) {
+		return true
+	}
+
+	return false
+}
+
+// SetCommercial gets a reference to the given bool and assigns it to the Commercial field.
+func (o *Configuration) SetCommercial(v bool) {
+	o.Commercial = &v
 }
 
 // GetCountry returns the Country field value if set, zero value otherwise.
@@ -171,6 +205,9 @@ func (o Configuration) MarshalJSON() ([]byte, error) {
 func (o Configuration) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["brand"] = o.Brand
+	if !common.IsNil(o.Commercial) {
+		toSerialize["commercial"] = o.Commercial
+	}
 	if !common.IsNil(o.Country) {
 		toSerialize["country"] = o.Country
 	}

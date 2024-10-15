@@ -20,7 +20,8 @@ var _ common.MappedNullable = &BusinessLine{}
 // BusinessLine struct for BusinessLine
 type BusinessLine struct {
 	// The capability for which you are creating the business line.  Possible values: **receivePayments**, **receiveFromPlatformPayments**, **issueBankAccount**
-	// Deprecated
+	// Deprecated since Legal Entity Management API v3
+	// Use `service` instead.
 	Capability *string `json:"capability,omitempty"`
 	// The unique identifier of the business line.
 	Id string `json:"id"`
@@ -62,7 +63,8 @@ func NewBusinessLineWithDefaults() *BusinessLine {
 }
 
 // GetCapability returns the Capability field value if set, zero value otherwise.
-// Deprecated
+// Deprecated since Legal Entity Management API v3
+// Use `service` instead.
 func (o *BusinessLine) GetCapability() string {
 	if o == nil || common.IsNil(o.Capability) {
 		var ret string
@@ -73,7 +75,8 @@ func (o *BusinessLine) GetCapability() string {
 
 // GetCapabilityOk returns a tuple with the Capability field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
+// Deprecated since Legal Entity Management API v3
+// Use `service` instead.
 func (o *BusinessLine) GetCapabilityOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Capability) {
 		return nil, false
@@ -91,7 +94,8 @@ func (o *BusinessLine) HasCapability() bool {
 }
 
 // SetCapability gets a reference to the given string and assigns it to the Capability field.
-// Deprecated
+// Deprecated since Legal Entity Management API v3
+// Use `service` instead.
 func (o *BusinessLine) SetCapability(v string) {
 	o.Capability = &v
 }

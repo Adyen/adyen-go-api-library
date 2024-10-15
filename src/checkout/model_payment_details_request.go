@@ -24,7 +24,8 @@ type PaymentDetailsRequest struct {
 	// Encoded payment data. For [authorizing a payment after using 3D Secure 2 Authentication-only](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only/#authorise-the-payment-with-adyen):  If you received `resultCode`: **AuthenticationNotRequired** in the `/payments` response, use the `threeDSPaymentData` from the same response.  If you received `resultCode`: **AuthenticationFinished** in the `/payments` response, use the `action.paymentData` from the same response.
 	PaymentData *string `json:"paymentData,omitempty"`
 	// Change the `authenticationOnly` indicator originally set in the `/payments` request. Only needs to be set if you want to modify the value set previously.
-	// Deprecated
+	// Deprecated since Adyen Checkout API v69
+	// Use `authenticationData.authenticationOnly` instead.
 	ThreeDSAuthenticationOnly *bool `json:"threeDSAuthenticationOnly,omitempty"`
 }
 
@@ -135,7 +136,8 @@ func (o *PaymentDetailsRequest) SetPaymentData(v string) {
 }
 
 // GetThreeDSAuthenticationOnly returns the ThreeDSAuthenticationOnly field value if set, zero value otherwise.
-// Deprecated
+// Deprecated since Adyen Checkout API v69
+// Use `authenticationData.authenticationOnly` instead.
 func (o *PaymentDetailsRequest) GetThreeDSAuthenticationOnly() bool {
 	if o == nil || common.IsNil(o.ThreeDSAuthenticationOnly) {
 		var ret bool
@@ -146,7 +148,8 @@ func (o *PaymentDetailsRequest) GetThreeDSAuthenticationOnly() bool {
 
 // GetThreeDSAuthenticationOnlyOk returns a tuple with the ThreeDSAuthenticationOnly field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
+// Deprecated since Adyen Checkout API v69
+// Use `authenticationData.authenticationOnly` instead.
 func (o *PaymentDetailsRequest) GetThreeDSAuthenticationOnlyOk() (*bool, bool) {
 	if o == nil || common.IsNil(o.ThreeDSAuthenticationOnly) {
 		return nil, false
@@ -164,7 +167,8 @@ func (o *PaymentDetailsRequest) HasThreeDSAuthenticationOnly() bool {
 }
 
 // SetThreeDSAuthenticationOnly gets a reference to the given bool and assigns it to the ThreeDSAuthenticationOnly field.
-// Deprecated
+// Deprecated since Adyen Checkout API v69
+// Use `authenticationData.authenticationOnly` instead.
 func (o *PaymentDetailsRequest) SetThreeDSAuthenticationOnly(v bool) {
 	o.ThreeDSAuthenticationOnly = &v
 }

@@ -24,7 +24,7 @@ type IdentificationData struct {
 	// The expiry date of the document, in YYYY-MM-DD format.
 	ExpiryDate *string `json:"expiryDate,omitempty"`
 	// The two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code where the document was issued. For example, **US**.
-	// Deprecated
+	// Deprecated since Legal Entity Management API v1
 	IssuerCountry *string `json:"issuerCountry,omitempty"`
 	// The state or province where the document was issued (AU only).
 	IssuerState *string `json:"issuerState,omitempty"`
@@ -119,7 +119,7 @@ func (o *IdentificationData) SetExpiryDate(v string) {
 }
 
 // GetIssuerCountry returns the IssuerCountry field value if set, zero value otherwise.
-// Deprecated
+// Deprecated since Legal Entity Management API v1
 func (o *IdentificationData) GetIssuerCountry() string {
 	if o == nil || common.IsNil(o.IssuerCountry) {
 		var ret string
@@ -130,7 +130,7 @@ func (o *IdentificationData) GetIssuerCountry() string {
 
 // GetIssuerCountryOk returns a tuple with the IssuerCountry field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
+// Deprecated since Legal Entity Management API v1
 func (o *IdentificationData) GetIssuerCountryOk() (*string, bool) {
 	if o == nil || common.IsNil(o.IssuerCountry) {
 		return nil, false
@@ -148,7 +148,7 @@ func (o *IdentificationData) HasIssuerCountry() bool {
 }
 
 // SetIssuerCountry gets a reference to the given string and assigns it to the IssuerCountry field.
-// Deprecated
+// Deprecated since Legal Entity Management API v1
 func (o *IdentificationData) SetIssuerCountry(v string) {
 	o.IssuerCountry = &v
 }

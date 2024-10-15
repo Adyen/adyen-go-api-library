@@ -266,7 +266,7 @@ Schedules a new payment to be created (including a new authorisation request) fo
 @param r ModificationsApiDonateInput - Request parameters, see DonateInput
 @return ModificationResult, *http.Response, error
 
-    Deprecated
+Deprecated
 */
 func (a *ModificationsApi) Donate(ctx context.Context, r ModificationsApiDonateInput) (ModificationResult, *http.Response, error) {
 	res := &ModificationResult{}

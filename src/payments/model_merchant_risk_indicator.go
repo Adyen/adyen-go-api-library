@@ -25,7 +25,8 @@ type MerchantRiskIndicator struct {
 	// Indicator regarding the delivery address. Allowed values: * `shipToBillingAddress` * `shipToVerifiedAddress` * `shipToNewAddress` * `shipToStore` * `digitalGoods` * `goodsNotShipped` * `other`
 	DeliveryAddressIndicator *string `json:"deliveryAddressIndicator,omitempty"`
 	// The delivery email address (for digital goods).
-	// Deprecated
+	// Deprecated since Adyen Payment API v68
+	// Use `deliveryEmailAddress` instead.
 	DeliveryEmail *string `json:"deliveryEmail,omitempty"`
 	// For Electronic delivery, the email address to which the merchandise was delivered. Maximum length: 254 characters.
 	DeliveryEmailAddress *string `json:"deliveryEmailAddress,omitempty"`
@@ -132,7 +133,8 @@ func (o *MerchantRiskIndicator) SetDeliveryAddressIndicator(v string) {
 }
 
 // GetDeliveryEmail returns the DeliveryEmail field value if set, zero value otherwise.
-// Deprecated
+// Deprecated since Adyen Payment API v68
+// Use `deliveryEmailAddress` instead.
 func (o *MerchantRiskIndicator) GetDeliveryEmail() string {
 	if o == nil || common.IsNil(o.DeliveryEmail) {
 		var ret string
@@ -143,7 +145,8 @@ func (o *MerchantRiskIndicator) GetDeliveryEmail() string {
 
 // GetDeliveryEmailOk returns a tuple with the DeliveryEmail field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
+// Deprecated since Adyen Payment API v68
+// Use `deliveryEmailAddress` instead.
 func (o *MerchantRiskIndicator) GetDeliveryEmailOk() (*string, bool) {
 	if o == nil || common.IsNil(o.DeliveryEmail) {
 		return nil, false
@@ -161,7 +164,8 @@ func (o *MerchantRiskIndicator) HasDeliveryEmail() bool {
 }
 
 // SetDeliveryEmail gets a reference to the given string and assigns it to the DeliveryEmail field.
-// Deprecated
+// Deprecated since Adyen Payment API v68
+// Use `deliveryEmailAddress` instead.
 func (o *MerchantRiskIndicator) SetDeliveryEmail(v string) {
 	o.DeliveryEmail = &v
 }

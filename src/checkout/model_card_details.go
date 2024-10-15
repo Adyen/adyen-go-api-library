@@ -48,7 +48,8 @@ type CardDetails struct {
 	// The card number. Only collect raw card data if you are [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide).
 	Number *string `json:"number,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
-	// Deprecated
+	// Deprecated since Adyen Checkout API v49
+	// Use `storedPaymentMethodId` instead.
 	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
 	// The `shopperNotificationReference` returned in the response when you requested to notify the shopper. Used only for recurring payments in India.
 	ShopperNotificationReference *string `json:"shopperNotificationReference,omitempty"`
@@ -541,7 +542,8 @@ func (o *CardDetails) SetNumber(v string) {
 }
 
 // GetRecurringDetailReference returns the RecurringDetailReference field value if set, zero value otherwise.
-// Deprecated
+// Deprecated since Adyen Checkout API v49
+// Use `storedPaymentMethodId` instead.
 func (o *CardDetails) GetRecurringDetailReference() string {
 	if o == nil || common.IsNil(o.RecurringDetailReference) {
 		var ret string
@@ -552,7 +554,8 @@ func (o *CardDetails) GetRecurringDetailReference() string {
 
 // GetRecurringDetailReferenceOk returns a tuple with the RecurringDetailReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
+// Deprecated since Adyen Checkout API v49
+// Use `storedPaymentMethodId` instead.
 func (o *CardDetails) GetRecurringDetailReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.RecurringDetailReference) {
 		return nil, false
@@ -570,7 +573,8 @@ func (o *CardDetails) HasRecurringDetailReference() bool {
 }
 
 // SetRecurringDetailReference gets a reference to the given string and assigns it to the RecurringDetailReference field.
-// Deprecated
+// Deprecated since Adyen Checkout API v49
+// Use `storedPaymentMethodId` instead.
 func (o *CardDetails) SetRecurringDetailReference(v string) {
 	o.RecurringDetailReference = &v
 }

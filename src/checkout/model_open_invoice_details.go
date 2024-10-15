@@ -28,7 +28,8 @@ type OpenInvoiceDetails struct {
 	// Shopper name, date of birth, phone number, and email address.
 	PersonalDetails *string `json:"personalDetails,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
-	// Deprecated
+	// Deprecated since Adyen Checkout API v49
+	// Use `storedPaymentMethodId` instead.
 	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
 	StoredPaymentMethodId *string `json:"storedPaymentMethodId,omitempty"`
@@ -186,7 +187,8 @@ func (o *OpenInvoiceDetails) SetPersonalDetails(v string) {
 }
 
 // GetRecurringDetailReference returns the RecurringDetailReference field value if set, zero value otherwise.
-// Deprecated
+// Deprecated since Adyen Checkout API v49
+// Use `storedPaymentMethodId` instead.
 func (o *OpenInvoiceDetails) GetRecurringDetailReference() string {
 	if o == nil || common.IsNil(o.RecurringDetailReference) {
 		var ret string
@@ -197,7 +199,8 @@ func (o *OpenInvoiceDetails) GetRecurringDetailReference() string {
 
 // GetRecurringDetailReferenceOk returns a tuple with the RecurringDetailReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
+// Deprecated since Adyen Checkout API v49
+// Use `storedPaymentMethodId` instead.
 func (o *OpenInvoiceDetails) GetRecurringDetailReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.RecurringDetailReference) {
 		return nil, false
@@ -215,7 +218,8 @@ func (o *OpenInvoiceDetails) HasRecurringDetailReference() bool {
 }
 
 // SetRecurringDetailReference gets a reference to the given string and assigns it to the RecurringDetailReference field.
-// Deprecated
+// Deprecated since Adyen Checkout API v49
+// Use `storedPaymentMethodId` instead.
 func (o *OpenInvoiceDetails) SetRecurringDetailReference(v string) {
 	o.RecurringDetailReference = &v
 }

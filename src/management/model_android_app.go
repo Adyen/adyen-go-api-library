@@ -22,7 +22,8 @@ type AndroidApp struct {
 	// The description that was provided when uploading the app. The description is not shown on the terminal.
 	Description *string `json:"description,omitempty"`
 	// The error code of the Android app with the `status` of either **error** or **invalid**.
-	// Deprecated
+	// Deprecated since Management API v3
+	// Use `errors` instead.
 	ErrorCode *string `json:"errorCode,omitempty"`
 	// The list of errors of the Android app.
 	Errors []AndroidAppError `json:"errors,omitempty"`
@@ -92,7 +93,8 @@ func (o *AndroidApp) SetDescription(v string) {
 }
 
 // GetErrorCode returns the ErrorCode field value if set, zero value otherwise.
-// Deprecated
+// Deprecated since Management API v3
+// Use `errors` instead.
 func (o *AndroidApp) GetErrorCode() string {
 	if o == nil || common.IsNil(o.ErrorCode) {
 		var ret string
@@ -103,7 +105,8 @@ func (o *AndroidApp) GetErrorCode() string {
 
 // GetErrorCodeOk returns a tuple with the ErrorCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
+// Deprecated since Management API v3
+// Use `errors` instead.
 func (o *AndroidApp) GetErrorCodeOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ErrorCode) {
 		return nil, false
@@ -121,7 +124,8 @@ func (o *AndroidApp) HasErrorCode() bool {
 }
 
 // SetErrorCode gets a reference to the given string and assigns it to the ErrorCode field.
-// Deprecated
+// Deprecated since Management API v3
+// Use `errors` instead.
 func (o *AndroidApp) SetErrorCode(v string) {
 	o.ErrorCode = &v
 }

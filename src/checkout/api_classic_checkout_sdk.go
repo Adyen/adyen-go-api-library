@@ -41,7 +41,7 @@ Prepare a request for PaymentSession
 
 @return ClassicCheckoutSDKApiPaymentSessionInput
 
-Deprecated
+Deprecated since Adyen Checkout API v37
 */
 func (a *ClassicCheckoutSDKApi) PaymentSessionInput() ClassicCheckoutSDKApiPaymentSessionInput {
 	return ClassicCheckoutSDKApiPaymentSessionInput{}
@@ -58,7 +58,7 @@ For more information, refer to [How it works](https://docs.adyen.com/online-paym
 @param r ClassicCheckoutSDKApiPaymentSessionInput - Request parameters, see PaymentSessionInput
 @return PaymentSetupResponse, *http.Response, error
 
-    Deprecated
+Deprecated since Adyen Checkout API v37
 */
 func (a *ClassicCheckoutSDKApi) PaymentSession(ctx context.Context, r ClassicCheckoutSDKApiPaymentSessionInput) (PaymentSetupResponse, *http.Response, error) {
 	res := &PaymentSetupResponse{}
@@ -104,7 +104,7 @@ Prepare a request for VerifyPaymentResult
 
 @return ClassicCheckoutSDKApiVerifyPaymentResultInput
 
-Deprecated
+Deprecated since Adyen Checkout API v37
 */
 func (a *ClassicCheckoutSDKApi) VerifyPaymentResultInput() ClassicCheckoutSDKApiVerifyPaymentResultInput {
 	return ClassicCheckoutSDKApiVerifyPaymentResultInput{}
@@ -121,7 +121,7 @@ For more information, refer to [How it works](https://docs.adyen.com/online-paym
 @param r ClassicCheckoutSDKApiVerifyPaymentResultInput - Request parameters, see VerifyPaymentResultInput
 @return PaymentVerificationResponse, *http.Response, error
 
-    Deprecated
+Deprecated since Adyen Checkout API v37
 */
 func (a *ClassicCheckoutSDKApi) VerifyPaymentResult(ctx context.Context, r ClassicCheckoutSDKApiVerifyPaymentResultInput) (PaymentVerificationResponse, *http.Response, error) {
 	res := &PaymentVerificationResponse{}

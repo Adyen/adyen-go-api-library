@@ -28,17 +28,17 @@ type Document struct {
 	// Your description for the document.
 	Description string `json:"description"`
 	// The expiry date of the document, in YYYY-MM-DD format.
-	// Deprecated
+	// Deprecated since Legal Entity Management API v1
 	ExpiryDate *string `json:"expiryDate,omitempty"`
 	// The filename of the document.
 	FileName *string `json:"fileName,omitempty"`
 	// The unique identifier of the document.
 	Id *string `json:"id,omitempty"`
 	// The two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code where the document was issued. For example, **US**.
-	// Deprecated
+	// Deprecated since Legal Entity Management API v1
 	IssuerCountry *string `json:"issuerCountry,omitempty"`
 	// The state or province where the document was issued (AU only).
-	// Deprecated
+	// Deprecated since Legal Entity Management API v1
 	IssuerState *string `json:"issuerState,omitempty"`
 	// The modification date of the document.
 	ModificationDate *time.Time `json:"modificationDate,omitempty"`
@@ -189,7 +189,7 @@ func (o *Document) SetDescription(v string) {
 }
 
 // GetExpiryDate returns the ExpiryDate field value if set, zero value otherwise.
-// Deprecated
+// Deprecated since Legal Entity Management API v1
 func (o *Document) GetExpiryDate() string {
 	if o == nil || common.IsNil(o.ExpiryDate) {
 		var ret string
@@ -200,7 +200,7 @@ func (o *Document) GetExpiryDate() string {
 
 // GetExpiryDateOk returns a tuple with the ExpiryDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
+// Deprecated since Legal Entity Management API v1
 func (o *Document) GetExpiryDateOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ExpiryDate) {
 		return nil, false
@@ -218,7 +218,7 @@ func (o *Document) HasExpiryDate() bool {
 }
 
 // SetExpiryDate gets a reference to the given string and assigns it to the ExpiryDate field.
-// Deprecated
+// Deprecated since Legal Entity Management API v1
 func (o *Document) SetExpiryDate(v string) {
 	o.ExpiryDate = &v
 }
@@ -288,7 +288,7 @@ func (o *Document) SetId(v string) {
 }
 
 // GetIssuerCountry returns the IssuerCountry field value if set, zero value otherwise.
-// Deprecated
+// Deprecated since Legal Entity Management API v1
 func (o *Document) GetIssuerCountry() string {
 	if o == nil || common.IsNil(o.IssuerCountry) {
 		var ret string
@@ -299,7 +299,7 @@ func (o *Document) GetIssuerCountry() string {
 
 // GetIssuerCountryOk returns a tuple with the IssuerCountry field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
+// Deprecated since Legal Entity Management API v1
 func (o *Document) GetIssuerCountryOk() (*string, bool) {
 	if o == nil || common.IsNil(o.IssuerCountry) {
 		return nil, false
@@ -317,13 +317,13 @@ func (o *Document) HasIssuerCountry() bool {
 }
 
 // SetIssuerCountry gets a reference to the given string and assigns it to the IssuerCountry field.
-// Deprecated
+// Deprecated since Legal Entity Management API v1
 func (o *Document) SetIssuerCountry(v string) {
 	o.IssuerCountry = &v
 }
 
 // GetIssuerState returns the IssuerState field value if set, zero value otherwise.
-// Deprecated
+// Deprecated since Legal Entity Management API v1
 func (o *Document) GetIssuerState() string {
 	if o == nil || common.IsNil(o.IssuerState) {
 		var ret string
@@ -334,7 +334,7 @@ func (o *Document) GetIssuerState() string {
 
 // GetIssuerStateOk returns a tuple with the IssuerState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
+// Deprecated since Legal Entity Management API v1
 func (o *Document) GetIssuerStateOk() (*string, bool) {
 	if o == nil || common.IsNil(o.IssuerState) {
 		return nil, false
@@ -352,7 +352,7 @@ func (o *Document) HasIssuerState() bool {
 }
 
 // SetIssuerState gets a reference to the given string and assigns it to the IssuerState field.
-// Deprecated
+// Deprecated since Legal Entity Management API v1
 func (o *Document) SetIssuerState(v string) {
 	o.IssuerState = &v
 }

@@ -21,7 +21,7 @@ var _ common.MappedNullable = &Surcharge{}
 type Surcharge struct {
 	// Show the surcharge details on the terminal, so the shopper can confirm.
 	AskConfirmation *bool `json:"askConfirmation,omitempty"`
-	// Surcharge fees or percentages for specific payment methods, funding sources (credit or debit), and currencies.
+	// Surcharge fees or percentages for specific cards, funding sources (credit or debit), and currencies.
 	Configurations []Configuration `json:"configurations,omitempty"`
 }
 
