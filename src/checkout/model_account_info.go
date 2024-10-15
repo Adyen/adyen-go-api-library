@@ -10,8 +10,9 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v12/src/common"
 	"time"
+
+	"github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the AccountInfo type satisfies the MappedNullable interface at compile time
@@ -36,12 +37,12 @@ type AccountInfo struct {
 	// Indicator for the length of time since this delivery address was first used. Allowed values: * thisTransaction * lessThan30Days * from30To60Days * moreThan60Days
 	DeliveryAddressUsageIndicator *string `json:"deliveryAddressUsageIndicator,omitempty"`
 	// Shopper's home phone number (including the country code).
-    // Deprecated since Adyen Checkout API v68
-    // Use `ThreeDS2RequestData.homePhone` instead.
+	// Deprecated since Adyen Checkout API v68
+	// Use `ThreeDS2RequestData.homePhone` instead.
 	HomePhone *string `json:"homePhone,omitempty"`
 	// Shopper's mobile phone number (including the country code).
-    // Deprecated since Adyen Checkout API v68
-    // Use `ThreeDS2RequestData.mobilePhone` instead.
+	// Deprecated since Adyen Checkout API v68
+	// Use `ThreeDS2RequestData.mobilePhone` instead.
 	MobilePhone *string `json:"mobilePhone,omitempty"`
 	// Date when the shopper last changed their password.
 	PasswordChangeDate *time.Time `json:"passwordChangeDate,omitempty"`
@@ -60,8 +61,8 @@ type AccountInfo struct {
 	// Whether suspicious activity was recorded on this account.
 	SuspiciousActivity *bool `json:"suspiciousActivity,omitempty"`
 	// Shopper's work phone number (including the country code).
-    // Deprecated since Adyen Checkout API v68
-    // Use `ThreeDS2RequestData.workPhone` instead.
+	// Deprecated since Adyen Checkout API v68
+	// Use `ThreeDS2RequestData.workPhone` instead.
 	WorkPhone *string `json:"workPhone,omitempty"`
 }
 
@@ -709,7 +710,7 @@ func (o *AccountInfo) SetWorkPhone(v string) {
 }
 
 func (o AccountInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -814,59 +815,57 @@ func (v *NullableAccountInfo) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *AccountInfo) isValidAccountAgeIndicator() bool {
-    var allowedEnumValues = []string{ "notApplicable", "thisTransaction", "lessThan30Days", "from30To60Days", "moreThan60Days" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetAccountAgeIndicator() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"notApplicable", "thisTransaction", "lessThan30Days", "from30To60Days", "moreThan60Days"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetAccountAgeIndicator() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *AccountInfo) isValidAccountChangeIndicator() bool {
-    var allowedEnumValues = []string{ "thisTransaction", "lessThan30Days", "from30To60Days", "moreThan60Days" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetAccountChangeIndicator() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"thisTransaction", "lessThan30Days", "from30To60Days", "moreThan60Days"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetAccountChangeIndicator() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *AccountInfo) isValidAccountType() bool {
-    var allowedEnumValues = []string{ "notApplicable", "credit", "debit" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetAccountType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"notApplicable", "credit", "debit"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetAccountType() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *AccountInfo) isValidDeliveryAddressUsageIndicator() bool {
-    var allowedEnumValues = []string{ "thisTransaction", "lessThan30Days", "from30To60Days", "moreThan60Days" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetDeliveryAddressUsageIndicator() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"thisTransaction", "lessThan30Days", "from30To60Days", "moreThan60Days"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetDeliveryAddressUsageIndicator() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *AccountInfo) isValidPasswordChangeIndicator() bool {
-    var allowedEnumValues = []string{ "notApplicable", "thisTransaction", "lessThan30Days", "from30To60Days", "moreThan60Days" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetPasswordChangeIndicator() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"notApplicable", "thisTransaction", "lessThan30Days", "from30To60Days", "moreThan60Days"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetPasswordChangeIndicator() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *AccountInfo) isValidPaymentAccountIndicator() bool {
-    var allowedEnumValues = []string{ "notApplicable", "thisTransaction", "lessThan30Days", "from30To60Days", "moreThan60Days" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetPaymentAccountIndicator() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"notApplicable", "thisTransaction", "lessThan30Days", "from30To60Days", "moreThan60Days"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetPaymentAccountIndicator() == allowed {
+			return true
+		}
+	}
+	return false
 }
-
