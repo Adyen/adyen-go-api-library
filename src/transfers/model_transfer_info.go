@@ -36,7 +36,8 @@ type TransferInfo struct {
 	// Your reference for the transfer, used internally within your platform. If you don't provide this in the request, Adyen generates a unique reference.
 	Reference *string `json:"reference,omitempty"`
 	//  A reference that is sent to the recipient. This reference is also sent in all webhooks related to the transfer, so you can use it to track statuses for both parties involved in the funds movement.   Supported characters: **a-z**, **A-Z**, **0-9**. The maximum length depends on the `category`.  - **internal**: 80 characters  - **bank**: 35 characters when transferring to an IBAN, 15 characters for others.
-	ReferenceForBeneficiary *string `json:"referenceForBeneficiary,omitempty"`
+	ReferenceForBeneficiary *string                `json:"referenceForBeneficiary,omitempty"`
+	Review                  *TransferRequestReview `json:"review,omitempty"`
 	// The type of transfer.  Possible values:   - **bankTransfer**: for push transfers to a transfer instrument or a bank account. The `category` must be **bank**. - **internalTransfer**: for push transfers between balance accounts. The `category` must be **internal**. - **internalDirectDebit**: for pull transfers (direct debits) between balance accounts. The `category` must be **internal**.
 	Type          *string                      `json:"type,omitempty"`
 	UltimateParty *UltimatePartyIdentification `json:"ultimateParty,omitempty"`
@@ -358,6 +359,38 @@ func (o *TransferInfo) SetReferenceForBeneficiary(v string) {
 	o.ReferenceForBeneficiary = &v
 }
 
+// GetReview returns the Review field value if set, zero value otherwise.
+func (o *TransferInfo) GetReview() TransferRequestReview {
+	if o == nil || common.IsNil(o.Review) {
+		var ret TransferRequestReview
+		return ret
+	}
+	return *o.Review
+}
+
+// GetReviewOk returns a tuple with the Review field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransferInfo) GetReviewOk() (*TransferRequestReview, bool) {
+	if o == nil || common.IsNil(o.Review) {
+		return nil, false
+	}
+	return o.Review, true
+}
+
+// HasReview returns a boolean if a field has been set.
+func (o *TransferInfo) HasReview() bool {
+	if o != nil && !common.IsNil(o.Review) {
+		return true
+	}
+
+	return false
+}
+
+// SetReview gets a reference to the given TransferRequestReview and assigns it to the Review field.
+func (o *TransferInfo) SetReview(v TransferRequestReview) {
+	o.Review = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *TransferInfo) GetType() string {
 	if o == nil || common.IsNil(o.Type) {
@@ -455,6 +488,9 @@ func (o TransferInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.ReferenceForBeneficiary) {
 		toSerialize["referenceForBeneficiary"] = o.ReferenceForBeneficiary
+	}
+	if !common.IsNil(o.Review) {
+		toSerialize["review"] = o.Review
 	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type

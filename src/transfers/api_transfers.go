@@ -23,6 +23,198 @@ import (
 // TransfersApi service
 type TransfersApi common.Service
 
+// All parameters accepted by TransfersApi.ApproveInitiatedTransfers
+type TransfersApiApproveInitiatedTransfersInput struct {
+	wWWAuthenticate         *string
+	approveTransfersRequest *ApproveTransfersRequest
+}
+
+// Header for authenticating through SCA
+func (r TransfersApiApproveInitiatedTransfersInput) WWWAuthenticate(wWWAuthenticate string) TransfersApiApproveInitiatedTransfersInput {
+	r.wWWAuthenticate = &wWWAuthenticate
+	return r
+}
+
+func (r TransfersApiApproveInitiatedTransfersInput) ApproveTransfersRequest(approveTransfersRequest ApproveTransfersRequest) TransfersApiApproveInitiatedTransfersInput {
+	r.approveTransfersRequest = &approveTransfersRequest
+	return r
+}
+
+/*
+Prepare a request for ApproveInitiatedTransfers
+
+@return TransfersApiApproveInitiatedTransfersInput
+*/
+func (a *TransfersApi) ApproveInitiatedTransfersInput() TransfersApiApproveInitiatedTransfersInput {
+	return TransfersApiApproveInitiatedTransfersInput{}
+}
+
+/*
+ApproveInitiatedTransfers Approve initiated transfers
+
+Initiates the approval of a list of transfers that triggered an additional [review](https://docs.adyen.com/api-explorer/transfers/latest/post/transfers#request-review). Adyen sends the outcome of the approval request through webhooks.
+
+To use this endpoint:
+- Your API credential must have the **TransferService Approve** [role](https://docs.adyen.com/platforms/manage-access/webservice-roles/?tab=transfers_3).
+- The account holder must have the required [capabilities](https://docs.adyen.com/platforms/verification-overview/capabilities).
+
+Reach out to your Adyen contact to set up these permissions.
+
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r TransfersApiApproveInitiatedTransfersInput - Request parameters, see ApproveInitiatedTransfersInput
+@return *http.Response, error
+*/
+func (a *TransfersApi) ApproveInitiatedTransfers(ctx context.Context, r TransfersApiApproveInitiatedTransfersInput) (*http.Response, error) {
+	var res interface{}
+	path := "/transfers/approve"
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.wWWAuthenticate != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "WWW-Authenticate", r.wWWAuthenticate, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.approveTransfersRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes == nil {
+		return httpRes, err
+	}
+
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
+		return httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
+		return httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
+		return httpRes, serviceError
+	}
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
+		return httpRes, serviceError
+	}
+
+	return httpRes, err
+}
+
+// All parameters accepted by TransfersApi.CancelInitiatedTransfers
+type TransfersApiCancelInitiatedTransfersInput struct {
+	cancelTransfersRequest *CancelTransfersRequest
+}
+
+func (r TransfersApiCancelInitiatedTransfersInput) CancelTransfersRequest(cancelTransfersRequest CancelTransfersRequest) TransfersApiCancelInitiatedTransfersInput {
+	r.cancelTransfersRequest = &cancelTransfersRequest
+	return r
+}
+
+/*
+Prepare a request for CancelInitiatedTransfers
+
+@return TransfersApiCancelInitiatedTransfersInput
+*/
+func (a *TransfersApi) CancelInitiatedTransfersInput() TransfersApiCancelInitiatedTransfersInput {
+	return TransfersApiCancelInitiatedTransfersInput{}
+}
+
+/*
+CancelInitiatedTransfers Cancel initiated transfers
+
+Initiates the cancellation of a list of transfers that triggered an additional [review](https://docs.adyen.com/api-explorer/transfers/latest/post/transfers#request-review). Adyen sends the outcome of the cancel request through webhooks.
+
+To use this endpoint:
+- Your API credential must have the **TransferService Approve** [role](https://docs.adyen.com/platforms/manage-access/webservice-roles/?tab=transfers_3).
+- The account holder must have the required [capabilities](https://docs.adyen.com/platforms/verification-overview/capabilities).
+
+Reach out to your Adyen contact to set up these permissions.
+
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r TransfersApiCancelInitiatedTransfersInput - Request parameters, see CancelInitiatedTransfersInput
+@return *http.Response, error
+*/
+func (a *TransfersApi) CancelInitiatedTransfers(ctx context.Context, r TransfersApiCancelInitiatedTransfersInput) (*http.Response, error) {
+	var res interface{}
+	path := "/transfers/cancel"
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.cancelTransfersRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes == nil {
+		return httpRes, err
+	}
+
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
+		return httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
+		return httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
+		return httpRes, serviceError
+	}
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
+		return httpRes, serviceError
+	}
+
+	return httpRes, err
+}
+
 // All parameters accepted by TransfersApi.GetAllTransfers
 type TransfersApiGetAllTransfersInput struct {
 	createdSince        *time.Time
@@ -230,7 +422,7 @@ func (a *TransfersApi) GetTransferInput(id string) TransfersApiGetTransferInput 
 /*
 GetTransfer Get a transfer
 
-Returns a transfer.
+Returns the details of a specified transfer.
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TransfersApiGetTransferInput - Request parameters, see GetTransferInput
@@ -414,9 +606,19 @@ TransferFunds Transfer funds
 
 >Versions 1 and 2 of the Transfers API are deprecated. If you are just starting your implementation, use the latest version.
 
-Starts a request to transfer funds to [balance accounts](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts), [transfer instruments](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments), or third-party bank accounts. Adyen sends the outcome of the transfer request through webhooks.
+Starts a request to transfer funds to:
+- [Balance accounts](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts)
+- [Transfer instruments](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments)
+- [Third-party bank accounts](https://docs.adyen.com/payouts/payout-service/pay-out-to-bank-accounts)
+- [Third-party cards](https://docs.adyen.com/payouts/payout-service/pay-out-to-cards)
 
-To use this endpoint, you need an additional role for your API credential and transfers must be enabled for the source balance account. Your Adyen contact will set these up for you.
+Adyen sends the outcome of the transfer request through webhooks.
+
+To use this endpoint:
+- Your API credential must have the **TransferService Webservice Initiate** [role](https://docs.adyen.com/platforms/manage-access/webservice-roles/?tab=transfers_3).
+- The account holder must have the required [capabilities](https://docs.adyen.com/platforms/verification-overview/capabilities).
+
+Reach out to your Adyen contact to set up these permissions.
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TransfersApiTransferFundsInput - Request parameters, see TransferFundsInput

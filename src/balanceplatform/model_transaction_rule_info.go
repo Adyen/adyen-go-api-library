@@ -27,7 +27,7 @@ type TransactionRuleInfo struct {
 	EndDate   *string                  `json:"endDate,omitempty"`
 	EntityKey TransactionRuleEntityKey `json:"entityKey"`
 	Interval  TransactionRuleInterval  `json:"interval"`
-	// The [outcome](https://docs.adyen.com/issuing/transaction-rules#outcome) that will be applied when a transaction meets the conditions of the rule. If not provided, by default, this is set to **hardBlock**.  Possible values:   * **hardBlock**: the transaction is declined.  * **scoreBased**: the transaction is assigned the `score` you specified. Adyen calculates the total score and if it exceeds 100, the transaction is declined.
+	// The [outcome](https://docs.adyen.com/issuing/transaction-rules#outcome) that will be applied when a transaction meets the conditions of the rule.  Possible values: * **hardBlock**: the transaction is declined. * **scoreBased**: the transaction is assigned the `score` you specified. Adyen calculates the total score and if it exceeds 100, declines the Transaction.  Default value: **hardBlock**.  > **scoreBased** is not allowed when `requestType` is **bankTransfer**.
 	OutcomeType *string `json:"outcomeType,omitempty"`
 	// Your reference for the transaction rule.
 	Reference string `json:"reference"`
