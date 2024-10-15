@@ -10,9 +10,8 @@ package transferwebhook
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 	"time"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the TransferData type satisfies the MappedNullable interface at compile time
@@ -20,27 +19,28 @@ var _ common.MappedNullable = &TransferData{}
 
 // TransferData struct for TransferData
 type TransferData struct {
-	AccountHolder  *ResourceReference `json:"accountHolder,omitempty"`
-	Amount         Amount             `json:"amount"`
+	AccountHolder *ResourceReference `json:"accountHolder,omitempty"`
+	Amount Amount `json:"amount"`
 	BalanceAccount *ResourceReference `json:"balanceAccount,omitempty"`
 	// The unique identifier of the balance platform.
 	BalancePlatform *string `json:"balancePlatform,omitempty"`
 	// The list of the latest balance statuses in the transfer.
 	Balances []BalanceMutation `json:"balances,omitempty"`
 	// The category of the transfer.  Possible values:   - **bank**: a transfer involving a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id) or a bank account.  - **card**: a transfer involving a third-party card.  - **internal**: a transfer between [balance accounts](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id) within your platform.  - **issuedCard**: a transfer initiated by an Adyen-issued card.  - **platformPayment**: funds movements related to payments that are acquired for your users.
-	Category     string                            `json:"category"`
-	CategoryData *TransferDataCategoryData         `json:"categoryData,omitempty"`
+	Category string `json:"category"`
+	CategoryData *TransferDataCategoryData `json:"categoryData,omitempty"`
 	Counterparty *TransferNotificationCounterParty `json:"counterparty,omitempty"`
 	// The date and time when the event was triggered, in ISO 8601 extended format. For example, **2020-12-18T10:15:30+01:00**.
 	CreationDate *time.Time `json:"creationDate,omitempty"`
 	// Your description for the transfer. It is used by most banks as the transfer description. We recommend sending a maximum of 140 characters, otherwise the description may be truncated.  Supported characters: **[a-z] [A-Z] [0-9] / - ?** **: ( ) . , ' + Space**  Supported characters for **regular** and **fast** transfers to a US counterparty: **[a-z] [A-Z] [0-9] & $ % # @** **~ = + - _ ' \" ! ?**
 	Description *string `json:"description,omitempty"`
+	DirectDebitInformation *DirectDebitInformation `json:"directDebitInformation,omitempty"`
 	// The direction of the transfer.  Possible values: **incoming**, **outgoing**.
 	Direction *string `json:"direction,omitempty"`
 	// The list of events leading up to the current status of the transfer.
 	Events []TransferEvent `json:"events,omitempty"`
 	// The ID of the resource.
-	Id                *string            `json:"id,omitempty"`
+	Id *string `json:"id,omitempty"`
 	PaymentInstrument *PaymentInstrument `json:"paymentInstrument,omitempty"`
 	// Additional information about the status of the transfer.
 	Reason *string `json:"reason,omitempty"`
@@ -48,11 +48,12 @@ type TransferData struct {
 	Reference *string `json:"reference,omitempty"`
 	//  A reference that is sent to the recipient. This reference is also sent in all webhooks related to the transfer, so you can use it to track statuses for both the source and recipient of funds.   Supported characters: **a-z**, **A-Z**, **0-9**.The maximum length depends on the `category`.   - **internal**: 80 characters  - **bank**: 35 characters when transferring to an IBAN, 15 characters for others.
 	ReferenceForBeneficiary *string `json:"referenceForBeneficiary,omitempty"`
+	Review *TransferReview `json:"review,omitempty"`
 	// The sequence number of the transfer webhook. The numbers start from 1 and increase with each new webhook for a specific transfer.  The sequence number can help you restore the correct sequence of events even if they arrive out of order.
 	SequenceNumber *int32 `json:"sequenceNumber,omitempty"`
 	// The result of the transfer.   For example, **authorised**, **refused**, or **error**.
-	Status                 string                  `json:"status"`
-	Tracking               *TransferDataTracking   `json:"tracking,omitempty"`
+	Status string `json:"status"`
+	Tracking *TransferDataTracking `json:"tracking,omitempty"`
 	TransactionRulesResult *TransactionRulesResult `json:"transactionRulesResult,omitempty"`
 	// The type of transfer or transaction. For example, **refund**, **payment**, **internalTransfer**, **bankTransfer**.
 	Type *string `json:"type,omitempty"`
@@ -382,6 +383,38 @@ func (o *TransferData) SetDescription(v string) {
 	o.Description = &v
 }
 
+// GetDirectDebitInformation returns the DirectDebitInformation field value if set, zero value otherwise.
+func (o *TransferData) GetDirectDebitInformation() DirectDebitInformation {
+	if o == nil || common.IsNil(o.DirectDebitInformation) {
+		var ret DirectDebitInformation
+		return ret
+	}
+	return *o.DirectDebitInformation
+}
+
+// GetDirectDebitInformationOk returns a tuple with the DirectDebitInformation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransferData) GetDirectDebitInformationOk() (*DirectDebitInformation, bool) {
+	if o == nil || common.IsNil(o.DirectDebitInformation) {
+		return nil, false
+	}
+	return o.DirectDebitInformation, true
+}
+
+// HasDirectDebitInformation returns a boolean if a field has been set.
+func (o *TransferData) HasDirectDebitInformation() bool {
+	if o != nil && !common.IsNil(o.DirectDebitInformation) {
+		return true
+	}
+
+	return false
+}
+
+// SetDirectDebitInformation gets a reference to the given DirectDebitInformation and assigns it to the DirectDebitInformation field.
+func (o *TransferData) SetDirectDebitInformation(v DirectDebitInformation) {
+	o.DirectDebitInformation = &v
+}
+
 // GetDirection returns the Direction field value if set, zero value otherwise.
 func (o *TransferData) GetDirection() string {
 	if o == nil || common.IsNil(o.Direction) {
@@ -606,6 +639,38 @@ func (o *TransferData) SetReferenceForBeneficiary(v string) {
 	o.ReferenceForBeneficiary = &v
 }
 
+// GetReview returns the Review field value if set, zero value otherwise.
+func (o *TransferData) GetReview() TransferReview {
+	if o == nil || common.IsNil(o.Review) {
+		var ret TransferReview
+		return ret
+	}
+	return *o.Review
+}
+
+// GetReviewOk returns a tuple with the Review field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransferData) GetReviewOk() (*TransferReview, bool) {
+	if o == nil || common.IsNil(o.Review) {
+		return nil, false
+	}
+	return o.Review, true
+}
+
+// HasReview returns a boolean if a field has been set.
+func (o *TransferData) HasReview() bool {
+	if o != nil && !common.IsNil(o.Review) {
+		return true
+	}
+
+	return false
+}
+
+// SetReview gets a reference to the given TransferReview and assigns it to the Review field.
+func (o *TransferData) SetReview(v TransferReview) {
+	o.Review = &v
+}
+
 // GetSequenceNumber returns the SequenceNumber field value if set, zero value otherwise.
 func (o *TransferData) GetSequenceNumber() int32 {
 	if o == nil || common.IsNil(o.SequenceNumber) {
@@ -759,7 +824,7 @@ func (o *TransferData) SetType(v string) {
 }
 
 func (o TransferData) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -794,6 +859,9 @@ func (o TransferData) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
+	if !common.IsNil(o.DirectDebitInformation) {
+		toSerialize["directDebitInformation"] = o.DirectDebitInformation
+	}
 	if !common.IsNil(o.Direction) {
 		toSerialize["direction"] = o.Direction
 	}
@@ -814,6 +882,9 @@ func (o TransferData) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.ReferenceForBeneficiary) {
 		toSerialize["referenceForBeneficiary"] = o.ReferenceForBeneficiary
+	}
+	if !common.IsNil(o.Review) {
+		toSerialize["review"] = o.Review
 	}
 	if !common.IsNil(o.SequenceNumber) {
 		toSerialize["sequenceNumber"] = o.SequenceNumber
@@ -867,48 +938,50 @@ func (v *NullableTransferData) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *TransferData) isValidCategory() bool {
-	var allowedEnumValues = []string{"bank", "card", "internal", "issuedCard", "platformPayment"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetCategory() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "bank", "card", "internal", "issuedCard", "platformPayment" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetCategory() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *TransferData) isValidDirection() bool {
-	var allowedEnumValues = []string{"incoming", "outgoing"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetDirection() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "incoming", "outgoing" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetDirection() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *TransferData) isValidReason() bool {
-	var allowedEnumValues = []string{"amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declined", "declinedByTransactionRule", "error", "notEnoughBalance", "pendingApproval", "refusedByCounterpartyBank", "routeNotFound", "scaFailed", "unknown"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetReason() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "accountHierarchyNotActive", "amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declined", "declinedByTransactionRule", "directDebitNotSupported", "error", "notEnoughBalance", "pendingApproval", "pendingExecution", "refusedByCounterpartyBank", "routeNotFound", "scaFailed", "transferInstrumentDoesNotExist", "unknown" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetReason() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *TransferData) isValidStatus() bool {
-	var allowedEnumValues = []string{"approvalPending", "atmWithdrawal", "atmWithdrawalReversalPending", "atmWithdrawalReversed", "authAdjustmentAuthorised", "authAdjustmentError", "authAdjustmentRefused", "authorised", "bankTransfer", "bankTransferPending", "booked", "bookingPending", "cancelled", "capturePending", "captureReversalPending", "captureReversed", "captured", "capturedExternally", "chargeback", "chargebackExternally", "chargebackPending", "chargebackReversalPending", "chargebackReversed", "credited", "depositCorrection", "depositCorrectionPending", "dispute", "disputeClosed", "disputeExpired", "disputeNeedsReview", "error", "expired", "failed", "fee", "feePending", "internalTransfer", "internalTransferPending", "invoiceDeduction", "invoiceDeductionPending", "manualCorrectionPending", "manuallyCorrected", "matchedStatement", "matchedStatementPending", "merchantPayin", "merchantPayinPending", "merchantPayinReversed", "merchantPayinReversedPending", "miscCost", "miscCostPending", "paymentCost", "paymentCostPending", "pendingApproval", "received", "refundPending", "refundReversalPending", "refundReversed", "refunded", "refundedExternally", "refused", "rejected", "reserveAdjustment", "reserveAdjustmentPending", "returned", "secondChargeback", "secondChargebackPending", "undefined"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetStatus() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "approvalPending", "atmWithdrawal", "atmWithdrawalReversalPending", "atmWithdrawalReversed", "authAdjustmentAuthorised", "authAdjustmentError", "authAdjustmentRefused", "authorised", "bankTransfer", "bankTransferPending", "booked", "bookingPending", "cancelled", "capturePending", "captureReversalPending", "captureReversed", "captured", "capturedExternally", "chargeback", "chargebackExternally", "chargebackPending", "chargebackReversalPending", "chargebackReversed", "credited", "depositCorrection", "depositCorrectionPending", "dispute", "disputeClosed", "disputeExpired", "disputeNeedsReview", "error", "expired", "failed", "fee", "feePending", "internalTransfer", "internalTransferPending", "invoiceDeduction", "invoiceDeductionPending", "manualCorrectionPending", "manuallyCorrected", "matchedStatement", "matchedStatementPending", "merchantPayin", "merchantPayinPending", "merchantPayinReversed", "merchantPayinReversedPending", "miscCost", "miscCostPending", "paymentCost", "paymentCostPending", "pendingApproval", "pendingExecution", "received", "refundPending", "refundReversalPending", "refundReversed", "refunded", "refundedExternally", "refused", "rejected", "reserveAdjustment", "reserveAdjustmentPending", "returned", "secondChargeback", "secondChargebackPending", "undefined" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetStatus() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *TransferData) isValidType() bool {
-	var allowedEnumValues = []string{"payment", "capture", "captureReversal", "refund", "refundReversal", "chargeback", "chargebackCorrection", "chargebackReversal", "chargebackReversalCorrection", "secondChargeback", "secondChargebackCorrection", "atmWithdrawal", "atmWithdrawalReversal", "internalTransfer", "internalDirectDebit", "manualCorrection", "invoiceDeduction", "depositCorrection", "reserveAdjustment", "bankTransfer", "bankDirectDebit", "cardTransfer", "miscCost", "paymentCost", "fee", "leftover", "grant", "capitalFundsCollection", "cashOutInstruction", "cashoutFee", "cashoutRepayment", "cashoutFunding", "repayment", "installment", "installmentReversal", "balanceAdjustment", "balanceRollover", "balanceMigration"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "payment", "capture", "captureReversal", "refund", "refundReversal", "chargeback", "chargebackCorrection", "chargebackReversal", "chargebackReversalCorrection", "secondChargeback", "secondChargebackCorrection", "atmWithdrawal", "atmWithdrawalReversal", "internalTransfer", "internalDirectDebit", "manualCorrection", "invoiceDeduction", "depositCorrection", "reserveAdjustment", "bankTransfer", "bankDirectDebit", "cardTransfer", "miscCost", "paymentCost", "fee", "leftover", "grant", "capitalFundsCollection", "cashOutInstruction", "cashoutFee", "cashoutRepayment", "cashoutFunding", "repayment", "installment", "installmentReversal", "balanceAdjustment", "balanceRollover", "balanceMigration" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

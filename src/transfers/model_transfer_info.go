@@ -10,8 +10,7 @@ package transfers
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the TransferInfo type satisfies the MappedNullable interface at compile time
@@ -23,7 +22,7 @@ type TransferInfo struct {
 	// The unique identifier of the source [balance account](https://docs.adyen.com/api-explorer/balanceplatform/latest/post/balanceAccounts#responses-200-id).  If you want to make a transfer using a **virtual** **bankAccount** assigned to the balance account, you must specify the [payment instrument ID](https://docs.adyen.com/api-explorer/balanceplatform/latest/post/paymentInstruments#responses-200-id) of the **virtual** **bankAccount**. If you only specify a balance account ID, Adyen uses the default **physical** **bankAccount** payment instrument assigned to the balance account.
 	BalanceAccountId *string `json:"balanceAccountId,omitempty"`
 	// The category of the transfer.  Possible values:   - **bank**: a transfer involving a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id) or a bank account.  - **card**: a transfer involving a third-party card.  - **internal**: a transfer between [balance accounts](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id) within your platform.  - **issuedCard**: a transfer initiated by a Adyen-issued card.  - **platformPayment**: funds movements related to payments that are acquired for your users.
-	Category     string             `json:"category"`
+	Category string `json:"category"`
 	Counterparty CounterpartyInfoV3 `json:"counterparty"`
 	// Your description for the transfer. It is used by most banks as the transfer description. We recommend sending a maximum of 140 characters, otherwise the description may be truncated.  Supported characters: **[a-z] [A-Z] [0-9] / - ?** **: ( ) . , ' + Space**  Supported characters for **regular** and **fast** transfers to a US counterparty: **[a-z] [A-Z] [0-9] & $ % # @** **~ = + - _ ' \" ! ?**
 	Description *string `json:"description,omitempty"`
@@ -37,8 +36,9 @@ type TransferInfo struct {
 	Reference *string `json:"reference,omitempty"`
 	//  A reference that is sent to the recipient. This reference is also sent in all webhooks related to the transfer, so you can use it to track statuses for both parties involved in the funds movement.   Supported characters: **a-z**, **A-Z**, **0-9**. The maximum length depends on the `category`.  - **internal**: 80 characters  - **bank**: 35 characters when transferring to an IBAN, 15 characters for others.
 	ReferenceForBeneficiary *string `json:"referenceForBeneficiary,omitempty"`
-	// The type of transfer.  Possible values:   - **bankTransfer**: for push transfers to a transfer instrument or a bank account. The `category` must be **bank**. - **internalTransfer**: for push transfers between balance accounts. The `category` must be **internal**. - **internalDirectDebit**: for pull transfers (direct debits) between balance accounts. The `category` must be **internal**.
-	Type          *string                      `json:"type,omitempty"`
+	Review *TransferRequestReview `json:"review,omitempty"`
+	// The type of transfer.  Possible values:   - **bankTransfer**: for push transfers to a transfer instrument or a bank account. The `category` must be **bank**. - **internalTransfer**: for push transfers between balance accounts. The `category` must be **internal**. - **internalDirectDebit**: for pull transfers (direct debits) between balance accounts. The `category` must be **internal**.   
+	Type *string `json:"type,omitempty"`
 	UltimateParty *UltimatePartyIdentification `json:"ultimateParty,omitempty"`
 }
 
@@ -358,6 +358,38 @@ func (o *TransferInfo) SetReferenceForBeneficiary(v string) {
 	o.ReferenceForBeneficiary = &v
 }
 
+// GetReview returns the Review field value if set, zero value otherwise.
+func (o *TransferInfo) GetReview() TransferRequestReview {
+	if o == nil || common.IsNil(o.Review) {
+		var ret TransferRequestReview
+		return ret
+	}
+	return *o.Review
+}
+
+// GetReviewOk returns a tuple with the Review field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransferInfo) GetReviewOk() (*TransferRequestReview, bool) {
+	if o == nil || common.IsNil(o.Review) {
+		return nil, false
+	}
+	return o.Review, true
+}
+
+// HasReview returns a boolean if a field has been set.
+func (o *TransferInfo) HasReview() bool {
+	if o != nil && !common.IsNil(o.Review) {
+		return true
+	}
+
+	return false
+}
+
+// SetReview gets a reference to the given TransferRequestReview and assigns it to the Review field.
+func (o *TransferInfo) SetReview(v TransferRequestReview) {
+	o.Review = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *TransferInfo) GetType() string {
 	if o == nil || common.IsNil(o.Type) {
@@ -423,7 +455,7 @@ func (o *TransferInfo) SetUltimateParty(v UltimatePartyIdentification) {
 }
 
 func (o TransferInfo) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -455,6 +487,9 @@ func (o TransferInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.ReferenceForBeneficiary) {
 		toSerialize["referenceForBeneficiary"] = o.ReferenceForBeneficiary
+	}
+	if !common.IsNil(o.Review) {
+		toSerialize["review"] = o.Review
 	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type
@@ -501,30 +536,32 @@ func (v *NullableTransferInfo) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *TransferInfo) isValidCategory() bool {
-	var allowedEnumValues = []string{"bank", "card", "internal", "issuedCard", "platformPayment"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetCategory() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "bank", "card", "internal", "issuedCard", "platformPayment" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetCategory() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *TransferInfo) isValidPriority() bool {
-	var allowedEnumValues = []string{"crossBorder", "fast", "instant", "internal", "regular", "wire"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetPriority() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "crossBorder", "fast", "instant", "internal", "regular", "wire" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetPriority() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *TransferInfo) isValidType() bool {
-	var allowedEnumValues = []string{"bankTransfer", "internalTransfer", "internalDirectDebit"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "bankTransfer", "internalTransfer", "internalDirectDebit" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the TransferRouteRequest type satisfies the MappedNullable interface at compile time
@@ -23,8 +22,8 @@ type TransferRouteRequest struct {
 	BalanceAccountId *string `json:"balanceAccountId,omitempty"`
 	// The unique identifier assigned to the balance platform associated with the account holder.
 	BalancePlatform string `json:"balancePlatform"`
-	//  The type of transfer. Possible values:    - **bank**: Transfer to a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id) or a bank account.
-	Category     string        `json:"category"`
+	//  The type of transfer. Possible values:    - **bank**: Transfer to a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id) or a bank account. 
+	Category string `json:"category"`
 	Counterparty *Counterparty `json:"counterparty,omitempty"`
 	// The two-character ISO-3166-1 alpha-2 country code of the counterparty. For example, **US** or **NL**.  > Either `counterparty` or `country` field must be provided in a transfer route request.
 	Country *string `json:"country,omitempty"`
@@ -255,7 +254,7 @@ func (o *TransferRouteRequest) SetPriorities(v []string) {
 }
 
 func (o TransferRouteRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -318,12 +317,14 @@ func (v *NullableTransferRouteRequest) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *TransferRouteRequest) isValidCategory() bool {
-	var allowedEnumValues = []string{"bank"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetCategory() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "bank" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetCategory() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

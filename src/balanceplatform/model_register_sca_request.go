@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the RegisterSCARequest type satisfies the MappedNullable interface at compile time
@@ -19,8 +18,10 @@ var _ common.MappedNullable = &RegisterSCARequest{}
 
 // RegisterSCARequest struct for RegisterSCARequest
 type RegisterSCARequest struct {
+	// The name of the SCA device that you are registering. You can use it to help your users identify the device.  If you do not specify a `name`, Adyen automatically generates one.
+	Name *string `json:"name,omitempty"`
 	// The unique identifier of the payment instrument for which you are registering the SCA device.
-	PaymentInstrumentId          string                      `json:"paymentInstrumentId"`
+	PaymentInstrumentId string `json:"paymentInstrumentId"`
 	StrongCustomerAuthentication DelegatedAuthenticationData `json:"strongCustomerAuthentication"`
 }
 
@@ -41,6 +42,38 @@ func NewRegisterSCARequest(paymentInstrumentId string, strongCustomerAuthenticat
 func NewRegisterSCARequestWithDefaults() *RegisterSCARequest {
 	this := RegisterSCARequest{}
 	return &this
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *RegisterSCARequest) GetName() string {
+	if o == nil || common.IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RegisterSCARequest) GetNameOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *RegisterSCARequest) HasName() bool {
+	if o != nil && !common.IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *RegisterSCARequest) SetName(v string) {
+	o.Name = &v
 }
 
 // GetPaymentInstrumentId returns the PaymentInstrumentId field value
@@ -92,7 +125,7 @@ func (o *RegisterSCARequest) SetStrongCustomerAuthentication(v DelegatedAuthenti
 }
 
 func (o RegisterSCARequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -101,6 +134,9 @@ func (o RegisterSCARequest) MarshalJSON() ([]byte, error) {
 
 func (o RegisterSCARequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
 	toSerialize["paymentInstrumentId"] = o.PaymentInstrumentId
 	toSerialize["strongCustomerAuthentication"] = o.StrongCustomerAuthentication
 	return toSerialize, nil
@@ -141,3 +177,6 @@ func (v *NullableRegisterSCARequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the UpdateCompanyWebhookRequest type satisfies the MappedNullable interface at compile time
@@ -26,9 +25,9 @@ type UpdateCompanyWebhookRequest struct {
 	// Indicates if untrusted SSL certificates are accepted. Default value: **false**.
 	AcceptsUntrustedRootCertificate *bool `json:"acceptsUntrustedRootCertificate,omitempty"`
 	// Indicates if the webhook configuration is active. The field must be **true** for us to send webhooks about events related an account.
-	Active             *bool               `json:"active,omitempty"`
+	Active *bool `json:"active,omitempty"`
 	AdditionalSettings *AdditionalSettings `json:"additionalSettings,omitempty"`
-	// Format or protocol for receiving webhooks. Possible values: * **soap** * **http** * **json**
+	// Format or protocol for receiving webhooks. Possible values: * **soap** * **http** * **json** 
 	CommunicationFormat *string `json:"communicationFormat,omitempty"`
 	// Your description for this webhook configuration.
 	Description *string `json:"description,omitempty"`
@@ -548,7 +547,7 @@ func (o *UpdateCompanyWebhookRequest) SetUsername(v string) {
 }
 
 func (o UpdateCompanyWebhookRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -641,39 +640,41 @@ func (v *NullableUpdateCompanyWebhookRequest) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *UpdateCompanyWebhookRequest) isValidCommunicationFormat() bool {
-	var allowedEnumValues = []string{"http", "json", "soap"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetCommunicationFormat() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "http", "json", "soap" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetCommunicationFormat() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *UpdateCompanyWebhookRequest) isValidEncryptionProtocol() bool {
-	var allowedEnumValues = []string{"HTTP", "TLSv1.2", "TLSv1.3"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetEncryptionProtocol() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "HTTP", "TLSv1.2", "TLSv1.3" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetEncryptionProtocol() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *UpdateCompanyWebhookRequest) isValidFilterMerchantAccountType() bool {
-	var allowedEnumValues = []string{"allAccounts", "excludeAccounts", "includeAccounts"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetFilterMerchantAccountType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "allAccounts", "excludeAccounts", "includeAccounts" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetFilterMerchantAccountType() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *UpdateCompanyWebhookRequest) isValidNetworkType() bool {
-	var allowedEnumValues = []string{"local", "public"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetNetworkType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "local", "public" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetNetworkType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

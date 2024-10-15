@@ -10,8 +10,7 @@ package configurationwebhook
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the BankAccountDetails type satisfies the MappedNullable interface at compile time
@@ -23,6 +22,8 @@ type BankAccountDetails struct {
 	AccountNumber *string `json:"accountNumber,omitempty"`
 	// The bank account type.  Possible values: **checking** or **savings**. Defaults to **checking**.
 	AccountType *string `json:"accountType,omitempty"`
+	// The bank account branch number, without separators or whitespace
+	BranchNumber *string `json:"branchNumber,omitempty"`
 	// Business accounts with a `formFactor` value of **physical** are business accounts issued under the central bank of that country. The default value is **physical** for NL, US, and UK business accounts.   Adyen creates a local IBAN for business accounts when the `formFactor` value is set to **virtual**. The local IBANs that are supported are for DE and FR, which reference a physical NL account, with funds being routed through the central bank of NL.
 	FormFactor *string `json:"formFactor,omitempty"`
 	// The international bank account number as defined in the [ISO-13616](https://www.iso.org/standard/81090.html) standard.
@@ -125,6 +126,38 @@ func (o *BankAccountDetails) HasAccountType() bool {
 // SetAccountType gets a reference to the given string and assigns it to the AccountType field.
 func (o *BankAccountDetails) SetAccountType(v string) {
 	o.AccountType = &v
+}
+
+// GetBranchNumber returns the BranchNumber field value if set, zero value otherwise.
+func (o *BankAccountDetails) GetBranchNumber() string {
+	if o == nil || common.IsNil(o.BranchNumber) {
+		var ret string
+		return ret
+	}
+	return *o.BranchNumber
+}
+
+// GetBranchNumberOk returns a tuple with the BranchNumber field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BankAccountDetails) GetBranchNumberOk() (*string, bool) {
+	if o == nil || common.IsNil(o.BranchNumber) {
+		return nil, false
+	}
+	return o.BranchNumber, true
+}
+
+// HasBranchNumber returns a boolean if a field has been set.
+func (o *BankAccountDetails) HasBranchNumber() bool {
+	if o != nil && !common.IsNil(o.BranchNumber) {
+		return true
+	}
+
+	return false
+}
+
+// SetBranchNumber gets a reference to the given string and assigns it to the BranchNumber field.
+func (o *BankAccountDetails) SetBranchNumber(v string) {
+	o.BranchNumber = &v
 }
 
 // GetFormFactor returns the FormFactor field value if set, zero value otherwise.
@@ -280,7 +313,7 @@ func (o *BankAccountDetails) SetType(v string) {
 }
 
 func (o BankAccountDetails) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -294,6 +327,9 @@ func (o BankAccountDetails) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.AccountType) {
 		toSerialize["accountType"] = o.AccountType
+	}
+	if !common.IsNil(o.BranchNumber) {
+		toSerialize["branchNumber"] = o.BranchNumber
 	}
 	if !common.IsNil(o.FormFactor) {
 		toSerialize["formFactor"] = o.FormFactor
@@ -346,3 +382,6 @@ func (v *NullableBankAccountDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
