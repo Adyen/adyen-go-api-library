@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v12/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the DonationCampaign type satisfies the MappedNullable interface at compile time
@@ -24,8 +25,8 @@ type DonationCampaign struct {
 	// The name of the donation campaign..
 	CampaignName *string `json:"campaignName,omitempty"`
 	// The cause of the nonprofit.
-	CauseName *string `json:"causeName,omitempty"`
-	Donation *Donation `json:"donation,omitempty"`
+	CauseName *string   `json:"causeName,omitempty"`
+	Donation  *Donation `json:"donation,omitempty"`
 	// The unique campaign ID of the donation campaign.
 	Id *string `json:"id,omitempty"`
 	// The URL for the logo of the nonprofit.
@@ -410,7 +411,7 @@ func (o *DonationCampaign) SetTermsAndConditionsUrl(v string) {
 }
 
 func (o DonationCampaign) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -490,6 +491,3 @@ func (v *NullableDonationCampaign) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

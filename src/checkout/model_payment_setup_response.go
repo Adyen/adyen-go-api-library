@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v12/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the PaymentSetupResponse type satisfies the MappedNullable interface at compile time
@@ -21,7 +22,7 @@ type PaymentSetupResponse struct {
 	// The encoded payment session that you need to pass to the SDK.
 	PaymentSession *string `json:"paymentSession,omitempty"`
 	// The detailed list of stored payment details required to generate payment forms. Will be empty if oneClick is set to false in the request.
-    // Deprecated 
+	// Deprecated
 	RecurringDetails []RecurringDetail `json:"recurringDetails,omitempty"`
 }
 
@@ -75,7 +76,7 @@ func (o *PaymentSetupResponse) SetPaymentSession(v string) {
 }
 
 // GetRecurringDetails returns the RecurringDetails field value if set, zero value otherwise.
-// Deprecated 
+// Deprecated
 func (o *PaymentSetupResponse) GetRecurringDetails() []RecurringDetail {
 	if o == nil || common.IsNil(o.RecurringDetails) {
 		var ret []RecurringDetail
@@ -86,7 +87,7 @@ func (o *PaymentSetupResponse) GetRecurringDetails() []RecurringDetail {
 
 // GetRecurringDetailsOk returns a tuple with the RecurringDetails field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated 
+// Deprecated
 func (o *PaymentSetupResponse) GetRecurringDetailsOk() ([]RecurringDetail, bool) {
 	if o == nil || common.IsNil(o.RecurringDetails) {
 		return nil, false
@@ -104,13 +105,13 @@ func (o *PaymentSetupResponse) HasRecurringDetails() bool {
 }
 
 // SetRecurringDetails gets a reference to the given []RecurringDetail and assigns it to the RecurringDetails field.
-// Deprecated 
+// Deprecated
 func (o *PaymentSetupResponse) SetRecurringDetails(v []RecurringDetail) {
 	o.RecurringDetails = v
 }
 
 func (o PaymentSetupResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -163,6 +164,3 @@ func (v *NullablePaymentSetupResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

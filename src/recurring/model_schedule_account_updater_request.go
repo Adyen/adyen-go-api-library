@@ -10,7 +10,8 @@ package recurring
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v12/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the ScheduleAccountUpdaterRequest type satisfies the MappedNullable interface at compile time
@@ -20,7 +21,7 @@ var _ common.MappedNullable = &ScheduleAccountUpdaterRequest{}
 type ScheduleAccountUpdaterRequest struct {
 	// This field contains additional data, which may be required for a particular request.
 	AdditionalData *map[string]string `json:"additionalData,omitempty"`
-	Card *Card `json:"card,omitempty"`
+	Card           *Card              `json:"card,omitempty"`
 	// Account of the merchant.
 	MerchantAccount string `json:"merchantAccount"`
 	// A reference that merchants can apply for the call.
@@ -227,7 +228,7 @@ func (o *ScheduleAccountUpdaterRequest) SetShopperReference(v string) {
 }
 
 func (o ScheduleAccountUpdaterRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -288,6 +289,3 @@ func (v *NullableScheduleAccountUpdaterRequest) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

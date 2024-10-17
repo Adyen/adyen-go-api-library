@@ -10,7 +10,8 @@ package management
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v12/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the PaginationLinks type satisfies the MappedNullable interface at compile time
@@ -18,11 +19,11 @@ var _ common.MappedNullable = &PaginationLinks{}
 
 // PaginationLinks struct for PaginationLinks
 type PaginationLinks struct {
-	First LinksElement `json:"first"`
-	Last LinksElement `json:"last"`
-	Next *LinksElement `json:"next,omitempty"`
-	Prev *LinksElement `json:"prev,omitempty"`
-	Self LinksElement `json:"self"`
+	First LinksElement  `json:"first"`
+	Last  LinksElement  `json:"last"`
+	Next  *LinksElement `json:"next,omitempty"`
+	Prev  *LinksElement `json:"prev,omitempty"`
+	Self  LinksElement  `json:"self"`
 }
 
 // NewPaginationLinks instantiates a new PaginationLinks object
@@ -182,7 +183,7 @@ func (o *PaginationLinks) SetSelf(v LinksElement) {
 }
 
 func (o PaginationLinks) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -238,6 +239,3 @@ func (v *NullablePaginationLinks) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-
