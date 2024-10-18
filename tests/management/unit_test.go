@@ -50,6 +50,18 @@ func Test_ManagementAPI(t *testing.T) {
 				model := management.NewRestServiceErrorWithDefaults()
 				mockResponse(http.StatusForbidden, w, model)
 			}
+		case "POST":
+			switch strings.TrimSpace(r.URL.Path) {
+			case "/merchants/12345/stores":
+				model := management.NewRestServiceErrorWithDefaults()
+				model.SetInvalidFields([]management.InvalidField{
+					{
+						Message: "Phone number is invalid",
+						Name:    "phoneNumber",
+					},
+				})
+				mockResponse(http.StatusUnprocessableEntity, w, model)
+			}
 		}
 	}))
 	defer mockServer.Close()
@@ -143,6 +155,19 @@ func Test_ManagementAPI(t *testing.T) {
 			}
 			assert.Equal(t, 403, httpRes.StatusCode)
 			require.NotNil(t, serviceError)
+		})
+	})
+
+	t.Run("Test create a store", func(t *testing.T) {
+		t.Run("Create an API request that should fail", func(t *testing.T) {
+			req := service.AccountStoreLevelApi.CreateStoreByMerchantIdInput("12345")
+			_, httpRes, serviceError := service.AccountStoreLevelApi.CreateStoreByMerchantId(context.Background(), req)
+			var restServiceErr common.RestServiceError
+			errors.As(serviceError, &restServiceErr)
+
+			assert.Equal(t, 422, httpRes.StatusCode)
+			assert.True(t, restServiceErr.HasInvalidFields())
+			assert.Equal(t, "phoneNumber", restServiceErr.GetInvalidFields()[0].GetName())
 		})
 	})
 }
