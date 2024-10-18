@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+    "github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the ApiCredentialLinks type satisfies the MappedNullable interface at compile time
@@ -19,12 +18,12 @@ var _ common.MappedNullable = &ApiCredentialLinks{}
 
 // ApiCredentialLinks struct for ApiCredentialLinks
 type ApiCredentialLinks struct {
-	AllowedOrigins    *LinksElement `json:"allowedOrigins,omitempty"`
-	Company           *LinksElement `json:"company,omitempty"`
-	GenerateApiKey    *LinksElement `json:"generateApiKey,omitempty"`
+	AllowedOrigins *LinksElement `json:"allowedOrigins,omitempty"`
+	Company *LinksElement `json:"company,omitempty"`
+	GenerateApiKey *LinksElement `json:"generateApiKey,omitempty"`
 	GenerateClientKey *LinksElement `json:"generateClientKey,omitempty"`
-	Merchant          *LinksElement `json:"merchant,omitempty"`
-	Self              LinksElement  `json:"self"`
+	Merchant *LinksElement `json:"merchant,omitempty"`
+	Self LinksElement `json:"self"`
 }
 
 // NewApiCredentialLinks instantiates a new ApiCredentialLinks object
@@ -230,7 +229,7 @@ func (o *ApiCredentialLinks) SetSelf(v LinksElement) {
 }
 
 func (o ApiCredentialLinks) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -293,3 +292,6 @@ func (v *NullableApiCredentialLinks) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
