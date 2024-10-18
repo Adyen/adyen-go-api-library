@@ -10,7 +10,8 @@ package transferwebhook
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v12/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the CALocalAccountIdentification type satisfies the MappedNullable interface at compile time
@@ -186,7 +187,7 @@ func (o *CALocalAccountIdentification) SetType(v string) {
 }
 
 func (o CALocalAccountIdentification) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -241,23 +242,21 @@ func (v *NullableCALocalAccountIdentification) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *CALocalAccountIdentification) isValidAccountType() bool {
-    var allowedEnumValues = []string{ "checking", "savings" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetAccountType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"checking", "savings"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetAccountType() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *CALocalAccountIdentification) isValidType() bool {
-    var allowedEnumValues = []string{ "caLocal" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"caLocal"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

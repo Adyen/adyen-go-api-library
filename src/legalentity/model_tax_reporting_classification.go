@@ -10,7 +10,8 @@ package legalentity
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v12/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the TaxReportingClassification type satisfies the MappedNullable interface at compile time
@@ -174,7 +175,7 @@ func (o *TaxReportingClassification) SetType(v string) {
 }
 
 func (o TaxReportingClassification) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -234,32 +235,30 @@ func (v *NullableTaxReportingClassification) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *TaxReportingClassification) isValidBusinessType() bool {
-    var allowedEnumValues = []string{ "other", "listedPublicCompany", "subsidiaryOfListedPublicCompany", "governmentalOrganization", "internationalOrganization", "financialInstitution" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetBusinessType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"other", "listedPublicCompany", "subsidiaryOfListedPublicCompany", "governmentalOrganization", "internationalOrganization", "financialInstitution"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetBusinessType() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *TaxReportingClassification) isValidMainSourceOfIncome() bool {
-    var allowedEnumValues = []string{ "businessOperation", "realEstateSales", "investmentInterestOrRoyalty", "propertyRental", "other" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetMainSourceOfIncome() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"businessOperation", "realEstateSales", "investmentInterestOrRoyalty", "propertyRental", "other"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetMainSourceOfIncome() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *TaxReportingClassification) isValidType() bool {
-    var allowedEnumValues = []string{ "nonFinancialNonReportable", "financialNonReportable", "nonFinancialActive", "nonFinancialPassive" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"nonFinancialNonReportable", "financialNonReportable", "nonFinancialActive", "nonFinancialPassive"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

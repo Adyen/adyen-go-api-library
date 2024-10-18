@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v12/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the PaymentAmountUpdateRequest type satisfies the MappedNullable interface at compile time
@@ -18,7 +19,7 @@ var _ common.MappedNullable = &PaymentAmountUpdateRequest{}
 
 // PaymentAmountUpdateRequest struct for PaymentAmountUpdateRequest
 type PaymentAmountUpdateRequest struct {
-	Amount Amount `json:"amount"`
+	Amount          Amount           `json:"amount"`
 	ApplicationInfo *ApplicationInfo `json:"applicationInfo,omitempty"`
 	// The reason for the amount update. Possible values:  * **delayedCharge**  * **noShow**  * **installment**
 	IndustryUsage *string `json:"industryUsage,omitempty"`
@@ -260,7 +261,7 @@ func (o *PaymentAmountUpdateRequest) SetSplits(v []Split) {
 }
 
 func (o PaymentAmountUpdateRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -325,14 +326,12 @@ func (v *NullablePaymentAmountUpdateRequest) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *PaymentAmountUpdateRequest) isValidIndustryUsage() bool {
-    var allowedEnumValues = []string{ "delayedCharge", "installment", "noShow" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetIndustryUsage() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"delayedCharge", "installment", "noShow"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetIndustryUsage() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

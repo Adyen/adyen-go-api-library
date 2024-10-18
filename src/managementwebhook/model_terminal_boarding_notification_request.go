@@ -10,8 +10,9 @@ package managementwebhook
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v12/src/common"
 	"time"
+
+	"github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the TerminalBoardingNotificationRequest type satisfies the MappedNullable interface at compile time
@@ -20,8 +21,8 @@ var _ common.MappedNullable = &TerminalBoardingNotificationRequest{}
 // TerminalBoardingNotificationRequest struct for TerminalBoardingNotificationRequest
 type TerminalBoardingNotificationRequest struct {
 	// Timestamp for when the webhook was created.
-	CreatedAt time.Time `json:"createdAt"`
-	Data TerminalBoardingData `json:"data"`
+	CreatedAt time.Time            `json:"createdAt"`
+	Data      TerminalBoardingData `json:"data"`
 	// The environment from which the webhook originated.  Possible values: **test**, **live**.
 	Environment string `json:"environment"`
 	// Type of notification.
@@ -146,7 +147,7 @@ func (o *TerminalBoardingNotificationRequest) SetType(v string) {
 }
 
 func (o TerminalBoardingNotificationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -198,14 +199,12 @@ func (v *NullableTerminalBoardingNotificationRequest) UnmarshalJSON(src []byte) 
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *TerminalBoardingNotificationRequest) isValidType() bool {
-    var allowedEnumValues = []string{ "terminalBoarding.triggered" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"terminalBoarding.triggered"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-
