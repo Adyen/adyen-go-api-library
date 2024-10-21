@@ -10,7 +10,8 @@ package legalentity
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v12/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the Organization type satisfies the MappedNullable interface at compile time
@@ -29,23 +30,23 @@ type Organization struct {
 	// The email address of the legal entity.
 	Email *string `json:"email,omitempty"`
 	// The organization's legal name.
-	LegalName string `json:"legalName"`
-	Phone *PhoneNumber `json:"phone,omitempty"`
-	PrincipalPlaceOfBusiness *Address `json:"principalPlaceOfBusiness,omitempty"`
-	RegisteredAddress Address `json:"registeredAddress"`
+	LegalName                string       `json:"legalName"`
+	Phone                    *PhoneNumber `json:"phone,omitempty"`
+	PrincipalPlaceOfBusiness *Address     `json:"principalPlaceOfBusiness,omitempty"`
+	RegisteredAddress        Address      `json:"registeredAddress"`
 	// The organization's registration number.
-	RegistrationNumber *string `json:"registrationNumber,omitempty"`
-	StockData *StockData `json:"stockData,omitempty"`
+	RegistrationNumber *string    `json:"registrationNumber,omitempty"`
+	StockData          *StockData `json:"stockData,omitempty"`
 	// The tax information of the organization.
-	TaxInformation []TaxInformation `json:"taxInformation,omitempty"`
+	TaxInformation             []TaxInformation            `json:"taxInformation,omitempty"`
 	TaxReportingClassification *TaxReportingClassification `json:"taxReportingClassification,omitempty"`
 	// Type of organization.  Possible values: **associationIncorporated**, **governmentalOrganization**, **listedPublicCompany**, **nonProfit**, **partnershipIncorporated**, **privateCompany**.
 	Type *string `json:"type,omitempty"`
 	// The reason the organization has not provided a VAT number.  Possible values: **industryExemption**, **belowTaxThreshold**.
 	VatAbsenceReason *string `json:"vatAbsenceReason,omitempty"`
 	// The organization's VAT number.
-	VatNumber *string `json:"vatNumber,omitempty"`
-	WebData *WebData `json:"webData,omitempty"`
+	VatNumber *string  `json:"vatNumber,omitempty"`
+	WebData   *WebData `json:"webData,omitempty"`
 }
 
 // NewOrganization instantiates a new Organization object
@@ -596,7 +597,7 @@ func (o *Organization) SetWebData(v WebData) {
 }
 
 func (o Organization) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -691,23 +692,21 @@ func (v *NullableOrganization) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *Organization) isValidType() bool {
-    var allowedEnumValues = []string{ "associationIncorporated", "governmentalOrganization", "listedPublicCompany", "nonProfit", "partnershipIncorporated", "privateCompany" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"associationIncorporated", "governmentalOrganization", "listedPublicCompany", "nonProfit", "partnershipIncorporated", "privateCompany"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *Organization) isValidVatAbsenceReason() bool {
-    var allowedEnumValues = []string{ "industryExemption", "belowTaxThreshold" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetVatAbsenceReason() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"industryExemption", "belowTaxThreshold"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetVatAbsenceReason() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

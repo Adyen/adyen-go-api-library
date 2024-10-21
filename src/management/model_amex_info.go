@@ -10,7 +10,8 @@ package management
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v12/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v12/src/common"
 )
 
 // checks if the AmexInfo type satisfies the MappedNullable interface at compile time
@@ -137,7 +138,7 @@ func (o *AmexInfo) SetServiceLevel(v string) {
 }
 
 func (o AmexInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -192,14 +193,12 @@ func (v *NullableAmexInfo) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *AmexInfo) isValidServiceLevel() bool {
-    var allowedEnumValues = []string{ "noContract", "gatewayContract", "paymentDesignatorContract" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetServiceLevel() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"noContract", "gatewayContract", "paymentDesignatorContract"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetServiceLevel() == allowed {
+			return true
+		}
+	}
+	return false
 }
-
