@@ -5,9 +5,9 @@ package checkout
 
 import (
 	"context"
-	"github.com/adyen/adyen-go-api-library/v13/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v13/src/checkout"
-	"github.com/adyen/adyen-go-api-library/v13/src/common"
+	"github.com/adyen/adyen-go-api-library/v14/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v14/src/checkout"
+	"github.com/adyen/adyen-go-api-library/v14/src/common"
 	"github.com/google/uuid"
 	"io/ioutil"
 	"os"
