@@ -14,7 +14,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+	"github.com/adyen/adyen-go-api-library/v13/src/common"
 )
 
 // LegalEntitiesApi service
@@ -142,8 +142,6 @@ CreateLegalEntity Create a legal entity
 Creates a legal entity.
 
 This resource contains information about the user that will be onboarded in your platform. Adyen uses this information to perform verification checks as required by payment industry regulations. Adyen informs you of the verification results through webhooks or API responses.
-
-
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r LegalEntitiesApiCreateLegalEntityInput - Request parameters, see CreateLegalEntityInput
@@ -295,7 +293,7 @@ UpdateLegalEntity Update a legal entity
 
 Updates a legal entity.
 
- >To change the legal entity type, include only the new `type` in your request. To update the `entityAssociations` array, you need to replace the entire array. For example, if the array has 3 entries and you want to remove 1 entry, you need to PATCH the resource with the remaining 2 entries.
+	>To change the legal entity type, include only the new `type` in your request. To update the `entityAssociations` array, you need to replace the entire array. For example, if the array has 3 entries and you want to remove 1 entry, you need to PATCH the resource with the remaining 2 entries.
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r LegalEntitiesApiUpdateLegalEntityInput - Request parameters, see UpdateLegalEntityInput

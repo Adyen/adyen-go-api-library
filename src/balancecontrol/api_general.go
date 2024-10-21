@@ -13,7 +13,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+	"github.com/adyen/adyen-go-api-library/v13/src/common"
 )
 
 // GeneralApi service
@@ -50,7 +50,6 @@ Starts a balance transfer request between merchant accounts. The following condi
 * The source and destination merchant accounts must have at least one common processing currency.
 
 When sending multiple API requests with the same source and destination merchant accounts, send the requests sequentially and *not* in parallel. Some requests may not be processed if the requests are sent in parallel.
-
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r GeneralApiBalanceTransferInput - Request parameters, see BalanceTransferInput
