@@ -9,7 +9,7 @@ API version: 3
 package transferwebhook
 
 import (
-	"github.com/adyen/adyen-go-api-library/v13/src/common"
+	"github.com/adyen/adyen-go-api-library/v14/src/common"
 )
 
 // APIClient manages communication with the Transfer webhooks API v3

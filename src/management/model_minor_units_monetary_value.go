@@ -11,7 +11,7 @@ package management
 import (
 	"encoding/json"
 
-	"github.com/adyen/adyen-go-api-library/v13/src/common"
+	"github.com/adyen/adyen-go-api-library/v14/src/common"
 )
 
 // checks if the MinorUnitsMonetaryValue type satisfies the MappedNullable interface at compile time
