@@ -16,7 +16,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+	"github.com/adyen/adyen-go-api-library/v13/src/common"
 )
 
 // TerminalOrdersMerchantLevelApi service
@@ -1049,7 +1049,8 @@ Updating is only possible while the order has the status **Placed**.
 
 The request body only needs to contain what you want to change.
 However, to update the products in the `items` array, you must provide the entire array. For example, if the array has three items:
- To remove one item, the array must include the remaining two items. Or to add one item, the array must include all four items.
+
+	To remove one item, the array must include the remaining two items. Or to add one item, the array must include all four items.
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Terminal ordering read and write

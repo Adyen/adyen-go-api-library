@@ -13,7 +13,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+	"github.com/adyen/adyen-go-api-library/v13/src/common"
 )
 
 // ReviewingApi service
@@ -51,7 +51,6 @@ ConfirmThirdParty Confirm a payout
 > - Receive webhooks with more details and defined transfer states.
 >
 > For more information about the payout features of the Transfers API, see our [Payouts](https://docs.adyen.com/payouts/payout-service) documentation.
-
 
 Confirms a previously submitted payout.
 
@@ -112,7 +111,6 @@ DeclineThirdParty Cancel a payout
 > - Receive webhooks with more details and defined transfer states.
 >
 > For more information about the payout features of the Transfers API, see our [Payouts](https://docs.adyen.com/payouts/payout-service) documentation.
-
 
 Cancels a previously submitted payout.
 

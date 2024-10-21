@@ -13,7 +13,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+	"github.com/adyen/adyen-go-api-library/v13/src/common"
 )
 
 // InitializationApi service
@@ -51,7 +51,6 @@ StoreDetail Store payout details
 > - Receive webhooks with more details and defined transfer states.
 >
 > For more information about the payout features of the Transfers API, see our [Payouts](https://docs.adyen.com/payouts/payout-service) documentation.
-
 
 Stores payment details under the `PAYOUT` recurring contract. These payment details can be used later to submit a payout via the `/submitThirdParty` call.
 
@@ -110,7 +109,6 @@ StoreDetailAndSubmitThirdParty Store details and submit a payout
 > - Receive webhooks with more details and defined transfer states.
 >
 > For more information about the payout features of the Transfers API, see our [Payouts](https://docs.adyen.com/payouts/payout-service) documentation.
-
 
 Submits a payout and stores its details for subsequent payouts.
 
@@ -171,7 +169,6 @@ SubmitThirdParty Submit a payout
 > - Receive webhooks with more details and defined transfer states.
 >
 > For more information about the payout features of the Transfers API, see our [Payouts](https://docs.adyen.com/payouts/payout-service) documentation.
-
 
 Submits a payout using the previously stored payment details. To store payment details, use the `/storeDetail` API call.
 

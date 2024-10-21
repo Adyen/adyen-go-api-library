@@ -11,7 +11,7 @@ package payout
 import (
 	"encoding/json"
 
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+	"github.com/adyen/adyen-go-api-library/v13/src/common"
 )
 
 // checks if the FundSource type satisfies the MappedNullable interface at compile time
