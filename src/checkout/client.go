@@ -9,7 +9,7 @@ API version: 71
 package checkout
 
 import (
-	"github.com/adyen/adyen-go-api-library/v12/src/common"
+	"github.com/adyen/adyen-go-api-library/v13/src/common"
 )
 
 // APIClient manages communication with the Adyen Checkout API API v71
