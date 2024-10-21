@@ -181,7 +181,7 @@ func (v *NullableModificationResult) UnmarshalJSON(src []byte) error {
 }
 
 func (o *ModificationResult) isValidResponse() bool {
-	var allowedEnumValues = []string{"[capture-received]", "[cancel-received]", "[refund-received]", "[cancelOrRefund-received]", "[adjustAuthorisation-received]", "[donation-received]", "[technical-cancel-received]", "[voidPendingRefund-received]"}
+	var allowedEnumValues = []string{"[capture-received]", "[cancel-received]", "[refund-received]", "[cancelOrRefund-received]", "[adjustAuthorisation-received]", "[donation-received]", "[technical-cancel-received]", "[voidPendingRefund-received]", "Authorised"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetResponse() == allowed {
 			return true
