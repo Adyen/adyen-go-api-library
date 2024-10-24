@@ -10,7 +10,8 @@ package configurationwebhook
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v14/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v14/src/common"
 )
 
 // checks if the BalanceAccountNotificationRequest type satisfies the MappedNullable interface at compile time
@@ -118,7 +119,7 @@ func (o *BalanceAccountNotificationRequest) SetType(v string) {
 }
 
 func (o BalanceAccountNotificationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -169,14 +170,12 @@ func (v *NullableBalanceAccountNotificationRequest) UnmarshalJSON(src []byte) er
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *BalanceAccountNotificationRequest) isValidType() bool {
-    var allowedEnumValues = []string{ "balancePlatform.balanceAccount.updated", "balancePlatform.balanceAccount.created" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"balancePlatform.balanceAccount.updated", "balancePlatform.balanceAccount.created"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

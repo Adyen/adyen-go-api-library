@@ -10,7 +10,8 @@ package payout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v14/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v14/src/common"
 )
 
 // checks if the PayoutRequest type satisfies the MappedNullable interface at compile time
@@ -18,15 +19,15 @@ var _ common.MappedNullable = &PayoutRequest{}
 
 // PayoutRequest struct for PayoutRequest
 type PayoutRequest struct {
-	Amount Amount `json:"amount"`
+	Amount         Amount   `json:"amount"`
 	BillingAddress *Address `json:"billingAddress,omitempty"`
-	Card *Card `json:"card,omitempty"`
+	Card           *Card    `json:"card,omitempty"`
 	// An integer value that is added to the normal fraud score. The value can be either positive or negative.
-	FraudOffset *int32 `json:"fraudOffset,omitempty"`
-	FundSource *FundSource `json:"fundSource,omitempty"`
+	FraudOffset *int32      `json:"fraudOffset,omitempty"`
+	FundSource  *FundSource `json:"fundSource,omitempty"`
 	// The merchant account identifier, with which you want to process the transaction.
-	MerchantAccount string `json:"merchantAccount"`
-	Recurring *Recurring `json:"recurring,omitempty"`
+	MerchantAccount string     `json:"merchantAccount"`
+	Recurring       *Recurring `json:"recurring,omitempty"`
 	// The reference to uniquely identify a payment. This reference is used in all communication with you about the payment status. We recommend using a unique value per payment; however, it is not a requirement. If you need to provide multiple references for a transaction, separate them with hyphens (\"-\"). Maximum length: 80 characters.
 	Reference string `json:"reference"`
 	// The `recurringDetailReference` you want to use for this payment. The value `LATEST` can be used to select the most recently stored recurring detail.
@@ -35,7 +36,7 @@ type PayoutRequest struct {
 	ShopperEmail *string `json:"shopperEmail,omitempty"`
 	// Specifies the sales channel, through which the shopper gives their card details, and whether the shopper is a returning customer. For the web service API, Adyen assumes Ecommerce shopper interaction by default.  This field has the following possible values: * `Ecommerce` - Online transactions where the cardholder is present (online). For better authorisation rates, we recommend sending the card security code (CSC) along with the request. * `ContAuth` - Card on file and/or subscription transactions, where the cardholder is known to the merchant (returning customer). If the shopper is present (online), you can supply also the CSC to improve authorisation (one-click payment). * `Moto` - Mail-order and telephone-order transactions where the shopper is in contact with the merchant via email or telephone. * `POS` - Point-of-sale transactions where the shopper is physically present to make a payment using a secure payment terminal.
 	ShopperInteraction *string `json:"shopperInteraction,omitempty"`
-	ShopperName *Name `json:"shopperName,omitempty"`
+	ShopperName        *Name   `json:"shopperName,omitempty"`
 	// Required for recurring payments.  Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters. > Your reference must not include personally identifiable information (PII), for example name or email address.
 	ShopperReference *string `json:"shopperReference,omitempty"`
 	// The shopper's telephone number.
@@ -487,7 +488,7 @@ func (o *PayoutRequest) SetTelephoneNumber(v string) {
 }
 
 func (o PayoutRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -571,14 +572,12 @@ func (v *NullablePayoutRequest) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *PayoutRequest) isValidShopperInteraction() bool {
-    var allowedEnumValues = []string{ "Ecommerce", "ContAuth", "Moto", "POS" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetShopperInteraction() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"Ecommerce", "ContAuth", "Moto", "POS"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetShopperInteraction() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

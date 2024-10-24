@@ -10,8 +10,9 @@ package reportwebhook
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v14/src/common"
 	"time"
+
+	"github.com/adyen/adyen-go-api-library/v14/src/common"
 )
 
 // checks if the ReportNotificationData type satisfies the MappedNullable interface at compile time
@@ -19,7 +20,7 @@ var _ common.MappedNullable = &ReportNotificationData{}
 
 // ReportNotificationData struct for ReportNotificationData
 type ReportNotificationData struct {
-	AccountHolder *ResourceReference `json:"accountHolder,omitempty"`
+	AccountHolder  *ResourceReference `json:"accountHolder,omitempty"`
 	BalanceAccount *ResourceReference `json:"balanceAccount,omitempty"`
 	// The unique identifier of the balance platform.
 	BalancePlatform *string `json:"balancePlatform,omitempty"`
@@ -29,7 +30,7 @@ type ReportNotificationData struct {
 	DownloadUrl string `json:"downloadUrl"`
 	// The filename of the report.
 	FileName string `json:"fileName"`
-	// The type of report. Possible values:  - `balanceplatform_accounting_interactive_report` - `balanceplatform_accounting_report` - `balanceplatform_balance_report` - `balanceplatform_fee_report` - `balanceplatform_payment_instrument_report` - `balanceplatform_payout_report` - `balanceplatform_statement_report`  
+	// The type of report. Possible values:  - `balanceplatform_accounting_interactive_report` - `balanceplatform_accounting_report` - `balanceplatform_balance_report` - `balanceplatform_fee_report` - `balanceplatform_payment_instrument_report` - `balanceplatform_payout_report` - `balanceplatform_statement_report`
 	ReportType string `json:"reportType"`
 }
 
@@ -254,7 +255,7 @@ func (o *ReportNotificationData) SetReportType(v string) {
 }
 
 func (o ReportNotificationData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -316,6 +317,3 @@ func (v *NullableReportNotificationData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

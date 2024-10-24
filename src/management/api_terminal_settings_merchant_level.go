@@ -10,10 +10,13 @@ package management
 
 import (
 	"context"
-    "net/http"
-    "net/url"
-    "strings"
-    "github.com/adyen/adyen-go-api-library/v14/src/common"
+	"encoding/json"
+	"io/ioutil"
+	"net/http"
+	"net/url"
+	"strings"
+
+	"github.com/adyen/adyen-go-api-library/v14/src/common"
 )
 
 // TerminalSettingsMerchantLevelApi service
@@ -22,7 +25,7 @@ type TerminalSettingsMerchantLevelApi common.Service
 // All parameters accepted by TerminalSettingsMerchantLevelApi.GetTerminalLogo
 type TerminalSettingsMerchantLevelApiGetTerminalLogoInput struct {
 	merchantId string
-	model *string
+	model      *string
 }
 
 // The terminal model. Possible values: E355, VX675WIFIBT, VX680, VX690, VX700, VX820, M400, MX925, P400Plus, UX300, UX410, V200cPlus, V240mPlus, V400cPlus, V400m, e280, e285, e285p, S1E, S1EL, S1F2, S1L, S1U, S7T.
@@ -30,7 +33,6 @@ func (r TerminalSettingsMerchantLevelApiGetTerminalLogoInput) Model(model string
 	r.model = &model
 	return r
 }
-
 
 /*
 Prepare a request for GetTerminalLogo
@@ -46,8 +48,8 @@ func (a *TerminalSettingsMerchantLevelApi) GetTerminalLogoInput(merchantId strin
 /*
 GetTerminalLogo Get the terminal logo
 
-Returns the logo that is configured for a specific payment terminal model at the merchant account identified in the path. 
-The logo is returned as a Base64-encoded string. You need to Base64-decode the string to get the actual image file. 
+Returns the logo that is configured for a specific payment terminal model at the merchant account identified in the path.
+The logo is returned as a Base64-encoded string. You need to Base64-decode the string to get the actual image file.
 This logo applies to all terminals of the specified model under the merchant account, unless a different logo is configured at a lower level (store or individual terminal).
 
 To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
@@ -59,80 +61,78 @@ To make this request, your API credential must have one of the following [roles]
 @return Logo, *http.Response, error
 */
 func (a *TerminalSettingsMerchantLevelApi) GetTerminalLogo(ctx context.Context, r TerminalSettingsMerchantLevelApiGetTerminalLogoInput) (Logo, *http.Response, error) {
-    res := &Logo{}
+	res := &Logo{}
 	path := "/merchants/{merchantId}/terminalLogos"
-    path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    if r.model != nil {
-        common.ParameterAddToQuery(queryParams, "model", r.model, "")
-    }
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodGet,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.model != nil {
+		common.ParameterAddToQuery(queryParams, "model", r.model, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-    if httpRes == nil {
-        return *res, httpRes, err
-    }
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
-    var serviceError common.RestServiceError
-                        if httpRes.StatusCode == 400 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 401 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 403 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 422 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 500 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 400 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
 
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by TerminalSettingsMerchantLevelApi.GetTerminalSettings
 type TerminalSettingsMerchantLevelApiGetTerminalSettingsInput struct {
 	merchantId string
 }
-
 
 /*
 Prepare a request for GetTerminalSettings
@@ -159,77 +159,76 @@ To make this request, your API credential must have one of the following [roles]
 @return TerminalSettings, *http.Response, error
 */
 func (a *TerminalSettingsMerchantLevelApi) GetTerminalSettings(ctx context.Context, r TerminalSettingsMerchantLevelApiGetTerminalSettingsInput) (TerminalSettings, *http.Response, error) {
-    res := &TerminalSettings{}
+	res := &TerminalSettings{}
 	path := "/merchants/{merchantId}/terminalSettings"
-    path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodGet,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-    if httpRes == nil {
-        return *res, httpRes, err
-    }
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
-    var serviceError common.RestServiceError
-                        if httpRes.StatusCode == 400 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 401 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 403 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 422 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 500 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 400 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
 
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by TerminalSettingsMerchantLevelApi.UpdateTerminalLogo
 type TerminalSettingsMerchantLevelApiUpdateTerminalLogoInput struct {
 	merchantId string
-	model *string
-	logo *Logo
+	model      *string
+	logo       *Logo
 }
 
 // The terminal model. Allowed values: E355, VX675WIFIBT, VX680, VX690, VX700, VX820, M400, MX925, P400Plus, UX300, UX410, V200cPlus, V240mPlus, V400cPlus, V400m, e280, e285, e285p, S1E, S1EL, S1F2, S1L, S1U, S7T.
@@ -242,7 +241,6 @@ func (r TerminalSettingsMerchantLevelApiUpdateTerminalLogoInput) Logo(logo Logo)
 	r.logo = &logo
 	return r
 }
-
 
 /*
 Prepare a request for UpdateTerminalLogo
@@ -258,7 +256,7 @@ func (a *TerminalSettingsMerchantLevelApi) UpdateTerminalLogoInput(merchantId st
 /*
 UpdateTerminalLogo Update the terminal logo
 
-Updates the logo for a specific payment terminal model at the merchant account identified in the path. You can update the logo for only one terminal model at a time. 
+Updates the logo for a specific payment terminal model at the merchant account identified in the path. You can update the logo for only one terminal model at a time.
 This logo applies to all terminals of the specified model under the merchant account, unless a different logo is configured at a lower level (store or individual terminal).
 
 * To change the logo, specify the image file as a Base64-encoded string.
@@ -272,78 +270,77 @@ To make this request, your API credential must have the following [role](https:/
 @return Logo, *http.Response, error
 */
 func (a *TerminalSettingsMerchantLevelApi) UpdateTerminalLogo(ctx context.Context, r TerminalSettingsMerchantLevelApiUpdateTerminalLogoInput) (Logo, *http.Response, error) {
-    res := &Logo{}
+	res := &Logo{}
 	path := "/merchants/{merchantId}/terminalLogos"
-    path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    if r.model != nil {
-        common.ParameterAddToQuery(queryParams, "model", r.model, "")
-    }
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.logo,
-        res,
-        http.MethodPatch,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.model != nil {
+		common.ParameterAddToQuery(queryParams, "model", r.model, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.logo,
+		res,
+		http.MethodPatch,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-    if httpRes == nil {
-        return *res, httpRes, err
-    }
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
-    var serviceError common.RestServiceError
-                        if httpRes.StatusCode == 400 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 401 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 403 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 422 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 500 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 400 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
 
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by TerminalSettingsMerchantLevelApi.UpdateTerminalSettings
 type TerminalSettingsMerchantLevelApiUpdateTerminalSettingsInput struct {
-	merchantId string
+	merchantId       string
 	terminalSettings *TerminalSettings
 }
 
@@ -351,7 +348,6 @@ func (r TerminalSettingsMerchantLevelApiUpdateTerminalSettingsInput) TerminalSet
 	r.terminalSettings = &terminalSettings
 	return r
 }
-
 
 /*
 Prepare a request for UpdateTerminalSettings
@@ -382,68 +378,67 @@ To make this request, your API credential must have the following [role](https:/
 @return TerminalSettings, *http.Response, error
 */
 func (a *TerminalSettingsMerchantLevelApi) UpdateTerminalSettings(ctx context.Context, r TerminalSettingsMerchantLevelApiUpdateTerminalSettingsInput) (TerminalSettings, *http.Response, error) {
-    res := &TerminalSettings{}
+	res := &TerminalSettings{}
 	path := "/merchants/{merchantId}/terminalSettings"
-    path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.terminalSettings,
-        res,
-        http.MethodPatch,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.terminalSettings,
+		res,
+		http.MethodPatch,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-    if httpRes == nil {
-        return *res, httpRes, err
-    }
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
-    var serviceError common.RestServiceError
-                        if httpRes.StatusCode == 400 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 401 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 403 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 422 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 500 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 400 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
 
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-

@@ -10,7 +10,8 @@ package legalentity
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v14/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v14/src/common"
 )
 
 // checks if the GetPciQuestionnaireInfosResponse type satisfies the MappedNullable interface at compile time
@@ -72,7 +73,7 @@ func (o *GetPciQuestionnaireInfosResponse) SetData(v []PciDocumentInfo) {
 }
 
 func (o GetPciQuestionnaireInfosResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -122,6 +123,3 @@ func (v *NullableGetPciQuestionnaireInfosResponse) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

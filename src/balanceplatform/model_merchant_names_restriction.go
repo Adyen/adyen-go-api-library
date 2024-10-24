@@ -10,7 +10,8 @@ package balanceplatform
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v14/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v14/src/common"
 )
 
 // checks if the MerchantNamesRestriction type satisfies the MappedNullable interface at compile time
@@ -19,8 +20,8 @@ var _ common.MappedNullable = &MerchantNamesRestriction{}
 // MerchantNamesRestriction struct for MerchantNamesRestriction
 type MerchantNamesRestriction struct {
 	// Defines how the condition must be evaluated.
-	Operation string `json:"operation"`
-	Value []StringMatch `json:"value,omitempty"`
+	Operation string        `json:"operation"`
+	Value     []StringMatch `json:"value,omitempty"`
 }
 
 // NewMerchantNamesRestriction instantiates a new MerchantNamesRestriction object
@@ -98,7 +99,7 @@ func (o *MerchantNamesRestriction) SetValue(v []StringMatch) {
 }
 
 func (o MerchantNamesRestriction) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -149,6 +150,3 @@ func (v *NullableMerchantNamesRestriction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

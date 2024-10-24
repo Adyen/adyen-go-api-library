@@ -10,7 +10,8 @@ package management
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v14/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v14/src/common"
 )
 
 // checks if the TicketInfo type satisfies the MappedNullable interface at compile time
@@ -72,7 +73,7 @@ func (o *TicketInfo) SetRequestorId(v string) {
 }
 
 func (o TicketInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -122,6 +123,3 @@ func (v *NullableTicketInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

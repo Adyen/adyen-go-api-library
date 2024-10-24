@@ -10,7 +10,8 @@ package payments
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v14/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v14/src/common"
 )
 
 // checks if the ThreeDSRequestorPriorAuthenticationInfo type satisfies the MappedNullable interface at compile time
@@ -174,7 +175,7 @@ func (o *ThreeDSRequestorPriorAuthenticationInfo) SetThreeDSReqPriorRef(v string
 }
 
 func (o ThreeDSRequestorPriorAuthenticationInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -234,14 +235,12 @@ func (v *NullableThreeDSRequestorPriorAuthenticationInfo) UnmarshalJSON(src []by
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *ThreeDSRequestorPriorAuthenticationInfo) isValidThreeDSReqPriorAuthMethod() bool {
-    var allowedEnumValues = []string{ "01", "02", "03", "04" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetThreeDSReqPriorAuthMethod() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"01", "02", "03", "04"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetThreeDSReqPriorAuthMethod() == allowed {
+			return true
+		}
+	}
+	return false
 }
-
