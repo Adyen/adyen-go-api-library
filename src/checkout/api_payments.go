@@ -53,6 +53,8 @@ Send a request with at least the first 6 digits of the card number to get a resp
 
 If you have an API-only integration and collect card data, use this endpoint to find out if the shopper's card is co-branded. For co-branded cards, you must let the shopper choose the brand to pay with  if you support both brands.
 
+
+
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r PaymentsApiCardDetailsInput - Request parameters, see CardDetailsInput
 @return CardDetailsResponse, *http.Response, error
@@ -283,6 +285,8 @@ func (a *PaymentsApi) PaymentsDetailsInput() PaymentsApiPaymentsDetailsInput {
 PaymentsDetails Submit details for a payment
 
 Submits details for a payment created using `/payments`. This step is only needed when no final state has been reached on the `/payments` request, for example when the shopper was redirected to another page to complete the payment.
+
+
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r PaymentsApiPaymentsDetailsInput - Request parameters, see PaymentsDetailsInput

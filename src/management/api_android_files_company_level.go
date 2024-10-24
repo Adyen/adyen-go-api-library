@@ -602,6 +602,7 @@ UploadAndroidCertificate Upload Android Certificate
 
 Uploads an Android Certificate file to Adyen.
 
+
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r AndroidFilesCompanyLevelApiUploadAndroidCertificateInput - Request parameters, see UploadAndroidCertificateInput
 @return UploadAndroidCertificateResponse, *http.Response, error

@@ -117,6 +117,8 @@ GetTokensForStoredPaymentDetails Get tokens for stored payment details
 
 Lists the tokens for stored payment details for the shopper identified in the path, if there are any available. The token ID can be used with payment requests for the shopper's payment. A summary of the stored details is included.
 
+
+
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r RecurringApiGetTokensForStoredPaymentDetailsInput - Request parameters, see GetTokensForStoredPaymentDetailsInput
 @return ListStoredPaymentMethodsResponse, *http.Response, error

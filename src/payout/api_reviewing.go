@@ -52,6 +52,7 @@ ConfirmThirdParty Confirm a payout
 >
 > For more information about the payout features of the Transfers API, see our [Payouts](https://docs.adyen.com/payouts/payout-service) documentation.
 
+
 Confirms a previously submitted payout.
 
 To cancel a payout, use the `/declineThirdParty` endpoint.
@@ -111,6 +112,7 @@ DeclineThirdParty Cancel a payout
 > - Receive webhooks with more details and defined transfer states.
 >
 > For more information about the payout features of the Transfers API, see our [Payouts](https://docs.adyen.com/payouts/payout-service) documentation.
+
 
 Cancels a previously submitted payout.
 

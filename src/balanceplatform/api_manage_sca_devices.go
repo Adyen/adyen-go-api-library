@@ -49,6 +49,8 @@ CompleteRegistrationOfScaDevice Complete the registration of an SCA device
 
 Completes the registration of an SCA device by validating the authentication data of the device. You can register SCA devices for [business accounts](https://docs.adyen.com/platforms/business-accounts/sca) or [Adyen-issued cards](https://docs.adyen.com/issuing/3d-secure/oob-auth-sdk).
 
+
+
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r ManageSCADevicesApiCompleteRegistrationOfScaDeviceInput - Request parameters, see CompleteRegistrationOfScaDeviceInput
 @return RegisterSCAFinalResponse, *http.Response, error

@@ -9,7 +9,7 @@ API version: 3
 package legalentity
 
 import (
-    "github.com/adyen/adyen-go-api-library/v14/src/common"
+	"github.com/adyen/adyen-go-api-library/v14/src/common"
 )
 
 // APIClient manages communication with the Legal Entity Management API API v3
@@ -39,10 +39,10 @@ type APIClient struct {
 // NewAPIClient creates a new API client.
 func NewAPIClient(client *common.Client) *APIClient {
 	c := &APIClient{}
-    c.common.Client = client
-    c.common.BasePath = func() string {
-        return client.Cfg.LegalEntityEndpoint
-    }
+	c.common.Client = client
+	c.common.BasePath = func() string {
+		return client.Cfg.LegalEntityEndpoint
+	}
 
 	// API Services
 	c.BusinessLinesApi = (*BusinessLinesApi)(&c.common)
