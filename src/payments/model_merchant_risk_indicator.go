@@ -10,9 +10,8 @@ package payments
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v14/src/common"
 	"time"
-
-	"github.com/adyen/adyen-go-api-library/v14/src/common"
 )
 
 // checks if the MerchantRiskIndicator type satisfies the MappedNullable interface at compile time
@@ -25,14 +24,14 @@ type MerchantRiskIndicator struct {
 	// Indicator regarding the delivery address. Allowed values: * `shipToBillingAddress` * `shipToVerifiedAddress` * `shipToNewAddress` * `shipToStore` * `digitalGoods` * `goodsNotShipped` * `other`
 	DeliveryAddressIndicator *string `json:"deliveryAddressIndicator,omitempty"`
 	// The delivery email address (for digital goods).
-	// Deprecated since Adyen Payment API v68
-	// Use `deliveryEmailAddress` instead.
+    // Deprecated since Adyen Payment API v68
+    // Use `deliveryEmailAddress` instead.
 	DeliveryEmail *string `json:"deliveryEmail,omitempty"`
 	// For Electronic delivery, the email address to which the merchandise was delivered. Maximum length: 254 characters.
 	DeliveryEmailAddress *string `json:"deliveryEmailAddress,omitempty"`
 	// The estimated delivery time for the shopper to receive the goods. Allowed values: * `electronicDelivery` * `sameDayShipping` * `overnightShipping` * `twoOrMoreDaysShipping`
 	DeliveryTimeframe *string `json:"deliveryTimeframe,omitempty"`
-	GiftCardAmount    *Amount `json:"giftCardAmount,omitempty"`
+	GiftCardAmount *Amount `json:"giftCardAmount,omitempty"`
 	// For prepaid or gift card purchase, total count of individual prepaid or gift cards/codes purchased.
 	GiftCardCount *int32 `json:"giftCardCount,omitempty"`
 	// For prepaid or gift card purchase, [ISO 4217](https://www.iso.org/iso-4217-currency-codes.html) three-digit currency code of the gift card, other than those listed in Table A.5 of the EMVCo 3D Secure Protocol and Core Functions Specification.
@@ -523,7 +522,7 @@ func (o *MerchantRiskIndicator) SetShipIndicator(v string) {
 }
 
 func (o MerchantRiskIndicator) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -613,21 +612,23 @@ func (v *NullableMerchantRiskIndicator) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *MerchantRiskIndicator) isValidDeliveryAddressIndicator() bool {
-	var allowedEnumValues = []string{"shipToBillingAddress", "shipToVerifiedAddress", "shipToNewAddress", "shipToStore", "digitalGoods", "goodsNotShipped", "other"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetDeliveryAddressIndicator() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "shipToBillingAddress", "shipToVerifiedAddress", "shipToNewAddress", "shipToStore", "digitalGoods", "goodsNotShipped", "other" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetDeliveryAddressIndicator() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *MerchantRiskIndicator) isValidDeliveryTimeframe() bool {
-	var allowedEnumValues = []string{"electronicDelivery", "sameDayShipping", "overnightShipping", "twoOrMoreDaysShipping"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetDeliveryTimeframe() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "electronicDelivery", "sameDayShipping", "overnightShipping", "twoOrMoreDaysShipping" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetDeliveryTimeframe() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

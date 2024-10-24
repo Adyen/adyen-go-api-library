@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v14/src/common"
+    "github.com/adyen/adyen-go-api-library/v14/src/common"
 )
 
 // checks if the Phone type satisfies the MappedNullable interface at compile time
@@ -21,7 +20,7 @@ var _ common.MappedNullable = &Phone{}
 type Phone struct {
 	// The full phone number provided as a single string.  For example, **\"0031 6 11 22 33 44\"**, **\"+316/1122-3344\"**,    or **\"(0031) 611223344\"**.
 	Number string `json:"number"`
-	// Type of phone number. Possible values:  **Landline**, **Mobile**.
+	// Type of phone number. Possible values:  **Landline**, **Mobile**. 
 	Type string `json:"type"`
 }
 
@@ -93,7 +92,7 @@ func (o *Phone) SetType(v string) {
 }
 
 func (o Phone) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -143,12 +142,14 @@ func (v *NullablePhone) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *Phone) isValidType() bool {
-	var allowedEnumValues = []string{"landline", "mobile"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "landline", "mobile" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

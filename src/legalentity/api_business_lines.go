@@ -10,11 +10,10 @@ package legalentity
 
 import (
 	"context"
-	"net/http"
-	"net/url"
-	"strings"
-
-	"github.com/adyen/adyen-go-api-library/v14/src/common"
+    "net/http"
+    "net/url"
+    "strings"
+    "github.com/adyen/adyen-go-api-library/v14/src/common"
 )
 
 // BusinessLinesApi service
@@ -30,49 +29,56 @@ func (r BusinessLinesApiCreateBusinessLineInput) BusinessLineInfo(businessLineIn
 	return r
 }
 
+
 /*
 Prepare a request for CreateBusinessLine
 
 @return BusinessLinesApiCreateBusinessLineInput
 */
 func (a *BusinessLinesApi) CreateBusinessLineInput() BusinessLinesApiCreateBusinessLineInput {
-	return BusinessLinesApiCreateBusinessLineInput{}
+	return BusinessLinesApiCreateBusinessLineInput{
+	}
 }
 
 /*
 CreateBusinessLine Create a business line
 
-Creates a business line.
+Creates a business line. 
 
 This resource contains information about your user's line of business, including their industry and their source of funds. Adyen uses this information to verify your users as required by payment industry regulations. Adyen informs you of the verification results through webhooks or API responses.
+
+
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r BusinessLinesApiCreateBusinessLineInput - Request parameters, see CreateBusinessLineInput
 @return BusinessLine, *http.Response, error
 */
 func (a *BusinessLinesApi) CreateBusinessLine(ctx context.Context, r BusinessLinesApiCreateBusinessLineInput) (BusinessLine, *http.Response, error) {
-	res := &BusinessLine{}
+    res := &BusinessLine{}
 	path := "/businessLines"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.businessLineInfo,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.businessLineInfo,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by BusinessLinesApi.DeleteBusinessLine
 type BusinessLinesApiDeleteBusinessLineInput struct {
 	id string
 }
+
 
 /*
 Prepare a request for DeleteBusinessLine
@@ -90,36 +96,39 @@ DeleteBusinessLine Delete a business line
 
 Deletes a business line.
 
-	>If you delete a business line linked to a [payment method](https://docs.adyen.com/development-resources/paymentmethodvariant#management-api), it can affect your merchant account's ability to use the [payment method](https://docs.adyen.com/api-explorer/Management/latest/post/merchants/_merchantId_/paymentMethodSettings). The business line is removed from all linked merchant accounts.
+ >If you delete a business line linked to a [payment method](https://docs.adyen.com/development-resources/paymentmethodvariant#management-api), it can affect your merchant account's ability to use the [payment method](https://docs.adyen.com/api-explorer/Management/latest/post/merchants/_merchantId_/paymentMethodSettings). The business line is removed from all linked merchant accounts.
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r BusinessLinesApiDeleteBusinessLineInput - Request parameters, see DeleteBusinessLineInput
 @return *http.Response, error
 */
 func (a *BusinessLinesApi) DeleteBusinessLine(ctx context.Context, r BusinessLinesApiDeleteBusinessLineInput) (*http.Response, error) {
-	var res interface{}
+    var res interface{}
 	path := "/businessLines/{id}"
-	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		nil,
-		res,
-		http.MethodDelete,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        nil,
+        res,
+        http.MethodDelete,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return httpRes, err
+
+    return httpRes, err
 }
+
 
 // All parameters accepted by BusinessLinesApi.GetBusinessLine
 type BusinessLinesApiGetBusinessLineInput struct {
 	id string
 }
+
 
 /*
 Prepare a request for GetBusinessLine
@@ -142,28 +151,30 @@ Returns the detail of a business line.
 @return BusinessLine, *http.Response, error
 */
 func (a *BusinessLinesApi) GetBusinessLine(ctx context.Context, r BusinessLinesApiGetBusinessLineInput) (BusinessLine, *http.Response, error) {
-	res := &BusinessLine{}
+    res := &BusinessLine{}
 	path := "/businessLines/{id}"
-	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		nil,
-		res,
-		http.MethodGet,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        nil,
+        res,
+        http.MethodGet,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by BusinessLinesApi.UpdateBusinessLine
 type BusinessLinesApiUpdateBusinessLineInput struct {
-	id                     string
+	id string
 	businessLineInfoUpdate *BusinessLineInfoUpdate
 }
 
@@ -171,6 +182,7 @@ func (r BusinessLinesApiUpdateBusinessLineInput) BusinessLineInfoUpdate(business
 	r.businessLineInfoUpdate = &businessLineInfoUpdate
 	return r
 }
+
 
 /*
 Prepare a request for UpdateBusinessLine
@@ -193,21 +205,23 @@ Updates a business line.
 @return BusinessLine, *http.Response, error
 */
 func (a *BusinessLinesApi) UpdateBusinessLine(ctx context.Context, r BusinessLinesApiUpdateBusinessLineInput) (BusinessLine, *http.Response, error) {
-	res := &BusinessLine{}
+    res := &BusinessLine{}
 	path := "/businessLines/{id}"
-	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.businessLineInfoUpdate,
-		res,
-		http.MethodPatch,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.businessLineInfoUpdate,
+        res,
+        http.MethodPatch,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+

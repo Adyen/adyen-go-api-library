@@ -10,8 +10,7 @@ package transfers
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v14/src/common"
+    "github.com/adyen/adyen-go-api-library/v14/src/common"
 )
 
 // checks if the AmountAdjustment type satisfies the MappedNullable interface at compile time
@@ -140,7 +139,7 @@ func (o *AmountAdjustment) SetBasepoints(v int32) {
 }
 
 func (o AmountAdjustment) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -197,12 +196,14 @@ func (v *NullableAmountAdjustment) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *AmountAdjustment) isValidAmountAdjustmentType() bool {
-	var allowedEnumValues = []string{"atmMarkup", "authHoldReserve", "exchange", "forexMarkup"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetAmountAdjustmentType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "atmMarkup", "authHoldReserve", "exchange", "forexMarkup" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetAmountAdjustmentType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

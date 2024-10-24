@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v14/src/common"
+    "github.com/adyen/adyen-go-api-library/v14/src/common"
 )
 
 // checks if the SamsungPayDetails type satisfies the MappedNullable interface at compile time
@@ -24,8 +23,8 @@ type SamsungPayDetails struct {
 	// The funding source that should be used when multiple sources are available. For Brazilian combo cards, by default the funding source is credit. To use debit, set this value to **debit**.
 	FundingSource *string `json:"fundingSource,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
-	// Deprecated since Adyen Checkout API v49
-	// Use `storedPaymentMethodId` instead.
+    // Deprecated since Adyen Checkout API v49
+    // Use `storedPaymentMethodId` instead.
 	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
 	// The payload you received from the Samsung Pay SDK response.
 	SamsungPayToken string `json:"samsungPayToken"`
@@ -248,7 +247,7 @@ func (o *SamsungPayDetails) SetType(v string) {
 }
 
 func (o SamsungPayDetails) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -312,21 +311,23 @@ func (v *NullableSamsungPayDetails) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *SamsungPayDetails) isValidFundingSource() bool {
-	var allowedEnumValues = []string{"credit", "debit"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetFundingSource() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "credit", "debit" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetFundingSource() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *SamsungPayDetails) isValidType() bool {
-	var allowedEnumValues = []string{"samsungpay"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "samsungpay" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

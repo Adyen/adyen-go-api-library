@@ -10,9 +10,8 @@ package recurring
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v14/src/common"
 	"time"
-
-	"github.com/adyen/adyen-go-api-library/v14/src/common"
 )
 
 // checks if the Permit type satisfies the MappedNullable interface at compile time
@@ -23,8 +22,8 @@ type Permit struct {
 	// Partner ID (when using the permit-per-partner token sharing model).
 	PartnerId *string `json:"partnerId,omitempty"`
 	// The profile to apply to this permit (when using the shared permits model).
-	ProfileReference *string            `json:"profileReference,omitempty"`
-	Restriction      *PermitRestriction `json:"restriction,omitempty"`
+	ProfileReference *string `json:"profileReference,omitempty"`
+	Restriction *PermitRestriction `json:"restriction,omitempty"`
 	// The key to link permit requests to permit results.
 	ResultKey *string `json:"resultKey,omitempty"`
 	// The expiry date for this permit.
@@ -209,7 +208,7 @@ func (o *Permit) SetValidTillDate(v time.Time) {
 }
 
 func (o Permit) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -271,3 +270,6 @@ func (v *NullablePermit) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
