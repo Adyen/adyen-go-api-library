@@ -23,7 +23,7 @@ type ThreeDSRequestData struct {
 	ChallengeWindowSize *string `json:"challengeWindowSize,omitempty"`
 	// Flag for data only flow.
 	DataOnly *string `json:"dataOnly,omitempty"`
-	// Indicates if [native 3D Secure authentication](https://docs.adyen.com/online-payments/3d-secure/native-3ds2) should be used when available.  Possible values: * **preferred**: Use native 3D Secure authentication when available.
+	// Indicates if [native 3D Secure authentication](https://docs.adyen.com/online-payments/3d-secure/native-3ds2) should be used when available.  Possible values: * **preferred**: Use native 3D Secure authentication when available. * **disabled**: Only use the redirect 3D Secure authentication flow.
 	NativeThreeDS *string `json:"nativeThreeDS,omitempty"`
 	// The version of 3D Secure to use.  Possible values:  * **2.1.0** * **2.2.0**
 	ThreeDSVersion *string `json:"threeDSVersion,omitempty"`
@@ -254,7 +254,7 @@ func (o *ThreeDSRequestData) isValidDataOnly() bool {
 	return false
 }
 func (o *ThreeDSRequestData) isValidNativeThreeDS() bool {
-	var allowedEnumValues = []string{"preferred"}
+	var allowedEnumValues = []string{"preferred", "disabled"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetNativeThreeDS() == allowed {
 			return true

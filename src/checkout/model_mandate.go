@@ -31,7 +31,7 @@ type Mandate struct {
 	Count *string `json:"count,omitempty"`
 	// End date of the billing plan, in YYYY-MM-DD format.
 	EndsAt string `json:"endsAt"`
-	// The frequency with which a shopper should be charged.  Possible values: **daily**, **weekly**, **biWeekly**, **monthly**, **quarterly**, **halfYearly**, **yearly**.
+	// The frequency with which a shopper should be charged.  Possible values: **adhoc**, **daily**, **weekly**, **biWeekly**, **monthly**, **quarterly**, **halfYearly**, **yearly**.
 	Frequency string `json:"frequency"`
 	// The message shown by UPI to the shopper on the approval screen.
 	Remarks *string `json:"remarks,omitempty"`

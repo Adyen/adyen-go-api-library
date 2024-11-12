@@ -52,6 +52,7 @@ StoreDetail Store payout details
 >
 > For more information about the payout features of the Transfers API, see our [Payouts](https://docs.adyen.com/payouts/payout-service) documentation.
 
+
 Stores payment details under the `PAYOUT` recurring contract. These payment details can be used later to submit a payout via the `/submitThirdParty` call.
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -109,6 +110,7 @@ StoreDetailAndSubmitThirdParty Store details and submit a payout
 > - Receive webhooks with more details and defined transfer states.
 >
 > For more information about the payout features of the Transfers API, see our [Payouts](https://docs.adyen.com/payouts/payout-service) documentation.
+
 
 Submits a payout and stores its details for subsequent payouts.
 
@@ -169,6 +171,7 @@ SubmitThirdParty Submit a payout
 > - Receive webhooks with more details and defined transfer states.
 >
 > For more information about the payout features of the Transfers API, see our [Payouts](https://docs.adyen.com/payouts/payout-service) documentation.
+
 
 Submits a payout using the previously stored payment details. To store payment details, use the `/storeDetail` API call.
 

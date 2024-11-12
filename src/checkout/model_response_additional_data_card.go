@@ -31,6 +31,8 @@ type ResponseAdditionalDataCard struct {
 	CardIssuingCurrency *string `json:"cardIssuingCurrency,omitempty"`
 	// The card payment method used for the transaction.  Example: amex
 	CardPaymentMethod *string `json:"cardPaymentMethod,omitempty"`
+	// The Card Product ID represents the type of card following card scheme product definitions and can be returned for Adyen Acquiring service level payments.  Possible values Visa: * **A** - Visa Traditional * **B** - Visa Traditional Rewards * **C** - Visa Signature * **D** - Visa Signature Preferred * **F** - Visa Classic  Possible values Mastercard: * **MCC** - Mastercard Card * **MCE** - Mastercard Electronic Card * **MCF** - Mastercard Corporate Fleet Card * **MCG** - Gold Mastercard Card * **MCH** - Mastercard Premium Charge * **MCI** - Mastercard Select Debit
+	CardProductId *string `json:"cardProductId,omitempty"`
 	// The last four digits of a card number.  > Returned only in case of a card payment.
 	CardSummary *string `json:"cardSummary,omitempty"`
 	// The first eight digits of the card number. Only returned if the card number is 16 digits or more.  This is the [Bank Identification Number (BIN)](https://docs.adyen.com/get-started-with-adyen/payment-glossary#bank-identification-number-bin) for card numbers with an eight-digit BIN.  Example: 52123423
@@ -246,6 +248,38 @@ func (o *ResponseAdditionalDataCard) SetCardPaymentMethod(v string) {
 	o.CardPaymentMethod = &v
 }
 
+// GetCardProductId returns the CardProductId field value if set, zero value otherwise.
+func (o *ResponseAdditionalDataCard) GetCardProductId() string {
+	if o == nil || common.IsNil(o.CardProductId) {
+		var ret string
+		return ret
+	}
+	return *o.CardProductId
+}
+
+// GetCardProductIdOk returns a tuple with the CardProductId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResponseAdditionalDataCard) GetCardProductIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.CardProductId) {
+		return nil, false
+	}
+	return o.CardProductId, true
+}
+
+// HasCardProductId returns a boolean if a field has been set.
+func (o *ResponseAdditionalDataCard) HasCardProductId() bool {
+	if o != nil && !common.IsNil(o.CardProductId) {
+		return true
+	}
+
+	return false
+}
+
+// SetCardProductId gets a reference to the given string and assigns it to the CardProductId field.
+func (o *ResponseAdditionalDataCard) SetCardProductId(v string) {
+	o.CardProductId = &v
+}
+
 // GetCardSummary returns the CardSummary field value if set, zero value otherwise.
 func (o *ResponseAdditionalDataCard) GetCardSummary() string {
 	if o == nil || common.IsNil(o.CardSummary) {
@@ -338,6 +372,9 @@ func (o ResponseAdditionalDataCard) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.CardPaymentMethod) {
 		toSerialize["cardPaymentMethod"] = o.CardPaymentMethod
 	}
+	if !common.IsNil(o.CardProductId) {
+		toSerialize["cardProductId"] = o.CardProductId
+	}
 	if !common.IsNil(o.CardSummary) {
 		toSerialize["cardSummary"] = o.CardSummary
 	}
@@ -381,4 +418,14 @@ func (v NullableResponseAdditionalDataCard) MarshalJSON() ([]byte, error) {
 func (v *NullableResponseAdditionalDataCard) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
+}
+
+func (o *ResponseAdditionalDataCard) isValidCardProductId() bool {
+	var allowedEnumValues = []string{"A", "B", "C", "D", "F", "MCC", "MCE", "MCF", "MCG", "MCH", "MCI"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetCardProductId() == allowed {
+			return true
+		}
+	}
+	return false
 }

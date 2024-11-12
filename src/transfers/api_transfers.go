@@ -25,8 +25,15 @@ type TransfersApi common.Service
 
 // All parameters accepted by TransfersApi.ApproveInitiatedTransfers
 type TransfersApiApproveInitiatedTransfersInput struct {
+	idempotencyKey          *string
 	wWWAuthenticate         *string
 	approveTransfersRequest *ApproveTransfersRequest
+}
+
+// A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
+func (r TransfersApiApproveInitiatedTransfersInput) IdempotencyKey(idempotencyKey string) TransfersApiApproveInitiatedTransfersInput {
+	r.idempotencyKey = &idempotencyKey
+	return r
 }
 
 // Header for authenticating through SCA
@@ -69,6 +76,9 @@ func (a *TransfersApi) ApproveInitiatedTransfers(ctx context.Context, r Transfer
 	path := "/transfers/approve"
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
+	if r.idempotencyKey != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
+	}
 	if r.wWWAuthenticate != nil {
 		common.ParameterAddToHeaderOrQuery(headerParams, "WWW-Authenticate", r.wWWAuthenticate, "")
 	}
@@ -126,7 +136,14 @@ func (a *TransfersApi) ApproveInitiatedTransfers(ctx context.Context, r Transfer
 
 // All parameters accepted by TransfersApi.CancelInitiatedTransfers
 type TransfersApiCancelInitiatedTransfersInput struct {
+	idempotencyKey         *string
 	cancelTransfersRequest *CancelTransfersRequest
+}
+
+// A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
+func (r TransfersApiCancelInitiatedTransfersInput) IdempotencyKey(idempotencyKey string) TransfersApiCancelInitiatedTransfersInput {
+	r.idempotencyKey = &idempotencyKey
+	return r
 }
 
 func (r TransfersApiCancelInitiatedTransfersInput) CancelTransfersRequest(cancelTransfersRequest CancelTransfersRequest) TransfersApiCancelInitiatedTransfersInput {
@@ -163,6 +180,9 @@ func (a *TransfersApi) CancelInitiatedTransfers(ctx context.Context, r Transfers
 	path := "/transfers/cancel"
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
+	if r.idempotencyKey != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
+	}
 	httpRes, err := common.SendAPIRequest(
 		ctx,
 		a.Client,
@@ -309,6 +329,8 @@ When making this request, you must include at least one of the following:
 - `balancePlatform`.
 
 This endpoint supports cursor-based pagination. The response returns the first page of results, and returns links to the next and previous pages when applicable. You can use the links to page through the results.
+
+
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TransfersApiGetAllTransfersInput - Request parameters, see GetAllTransfersInput
@@ -487,7 +509,14 @@ func (a *TransfersApi) GetTransfer(ctx context.Context, r TransfersApiGetTransfe
 // All parameters accepted by TransfersApi.ReturnTransfer
 type TransfersApiReturnTransferInput struct {
 	transferId            string
+	idempotencyKey        *string
 	returnTransferRequest *ReturnTransferRequest
+}
+
+// A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
+func (r TransfersApiReturnTransferInput) IdempotencyKey(idempotencyKey string) TransfersApiReturnTransferInput {
+	r.idempotencyKey = &idempotencyKey
+	return r
 }
 
 func (r TransfersApiReturnTransferInput) ReturnTransferRequest(returnTransferRequest ReturnTransferRequest) TransfersApiReturnTransferInput {
@@ -521,6 +550,9 @@ func (a *TransfersApi) ReturnTransfer(ctx context.Context, r TransfersApiReturnT
 	path = strings.Replace(path, "{"+"transferId"+"}", url.PathEscape(common.ParameterValueToString(r.transferId, "transferId")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
+	if r.idempotencyKey != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
+	}
 	httpRes, err := common.SendAPIRequest(
 		ctx,
 		a.Client,
@@ -575,8 +607,15 @@ func (a *TransfersApi) ReturnTransfer(ctx context.Context, r TransfersApiReturnT
 
 // All parameters accepted by TransfersApi.TransferFunds
 type TransfersApiTransferFundsInput struct {
+	idempotencyKey  *string
 	wWWAuthenticate *string
 	transferInfo    *TransferInfo
+}
+
+// A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
+func (r TransfersApiTransferFundsInput) IdempotencyKey(idempotencyKey string) TransfersApiTransferFundsInput {
+	r.idempotencyKey = &idempotencyKey
+	return r
 }
 
 // Header for authenticating through SCA
@@ -627,6 +666,9 @@ func (a *TransfersApi) TransferFunds(ctx context.Context, r TransfersApiTransfer
 	path := "/transfers"
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
+	if r.idempotencyKey != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
+	}
 	if r.wWWAuthenticate != nil {
 		common.ParameterAddToHeaderOrQuery(headerParams, "WWW-Authenticate", r.wWWAuthenticate, "")
 	}

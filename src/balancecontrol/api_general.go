@@ -51,6 +51,7 @@ Starts a balance transfer request between merchant accounts. The following condi
 
 When sending multiple API requests with the same source and destination merchant accounts, send the requests sequentially and *not* in parallel. Some requests may not be processed if the requests are sent in parallel.
 
+
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r GeneralApiBalanceTransferInput - Request parameters, see BalanceTransferInput
 @return BalanceTransferResponse, *http.Response, error

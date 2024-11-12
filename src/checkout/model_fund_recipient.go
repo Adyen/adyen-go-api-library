@@ -19,7 +19,7 @@ var _ common.MappedNullable = &FundRecipient{}
 
 // FundRecipient struct for FundRecipient
 type FundRecipient struct {
-	// Fund Recipient Iban for C2C payments
+	// The IBAN of the bank account where the funds are being transferred to.
 	IBAN           *string      `json:"IBAN,omitempty"`
 	BillingAddress *Address     `json:"billingAddress,omitempty"`
 	PaymentMethod  *CardDetails `json:"paymentMethod,omitempty"`
@@ -33,11 +33,11 @@ type FundRecipient struct {
 	SubMerchant           *SubMerchant `json:"subMerchant,omitempty"`
 	// The telephone number of the shopper.
 	TelephoneNumber *string `json:"telephoneNumber,omitempty"`
-	// Indicates where the money is going.
+	// The unique identifier for the wallet the funds are being transferred to. You can use the shopper reference or any other identifier.
 	WalletIdentifier *string `json:"walletIdentifier,omitempty"`
-	// Indicates the tax identifier of the fund recipient
+	// The tax identifier of the person receiving the funds.
 	WalletOwnerTaxId *string `json:"walletOwnerTaxId,omitempty"`
-	// The purpose of a digital wallet transaction
+	// The purpose of a digital wallet transaction.
 	WalletPurpose *string `json:"walletPurpose,omitempty"`
 }
 

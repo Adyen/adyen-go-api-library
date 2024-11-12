@@ -228,7 +228,14 @@ func (a *CapitalApi) GetGrantReferenceDetails(ctx context.Context, r CapitalApiG
 
 // All parameters accepted by CapitalApi.RequestGrantPayout
 type CapitalApiRequestGrantPayoutInput struct {
+	idempotencyKey   *string
 	capitalGrantInfo *CapitalGrantInfo
+}
+
+// A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
+func (r CapitalApiRequestGrantPayoutInput) IdempotencyKey(idempotencyKey string) CapitalApiRequestGrantPayoutInput {
+	r.idempotencyKey = &idempotencyKey
+	return r
 }
 
 func (r CapitalApiRequestGrantPayoutInput) CapitalGrantInfo(capitalGrantInfo CapitalGrantInfo) CapitalApiRequestGrantPayoutInput {
@@ -259,6 +266,9 @@ func (a *CapitalApi) RequestGrantPayout(ctx context.Context, r CapitalApiRequest
 	path := "/grants"
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
+	if r.idempotencyKey != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
+	}
 	httpRes, err := common.SendAPIRequest(
 		ctx,
 		a.Client,

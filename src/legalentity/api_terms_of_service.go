@@ -74,6 +74,64 @@ func (a *TermsOfServiceApi) AcceptTermsOfService(ctx context.Context, r TermsOfS
 	return *res, httpRes, err
 }
 
+// All parameters accepted by TermsOfServiceApi.GetAcceptedTermsOfServiceDocument
+type TermsOfServiceApiGetAcceptedTermsOfServiceDocumentInput struct {
+	id                                string
+	termsofserviceacceptancereference string
+	termsOfServiceDocumentFormat      *string
+}
+
+// The format of the Terms of Service document. Possible values: **JSON**, **PDF**, or **TXT**
+func (r TermsOfServiceApiGetAcceptedTermsOfServiceDocumentInput) TermsOfServiceDocumentFormat(termsOfServiceDocumentFormat string) TermsOfServiceApiGetAcceptedTermsOfServiceDocumentInput {
+	r.termsOfServiceDocumentFormat = &termsOfServiceDocumentFormat
+	return r
+}
+
+/*
+Prepare a request for GetAcceptedTermsOfServiceDocument
+@param id The unique identifier of the legal entity. For sole proprietorship, this is the individual legal entity ID of the owner. For organizations, this is the ID of the organization.@param termsofserviceacceptancereference An Adyen-generated reference for the accepted Terms of Service.
+@return TermsOfServiceApiGetAcceptedTermsOfServiceDocumentInput
+*/
+func (a *TermsOfServiceApi) GetAcceptedTermsOfServiceDocumentInput(id string, termsofserviceacceptancereference string) TermsOfServiceApiGetAcceptedTermsOfServiceDocumentInput {
+	return TermsOfServiceApiGetAcceptedTermsOfServiceDocumentInput{
+		id:                                id,
+		termsofserviceacceptancereference: termsofserviceacceptancereference,
+	}
+}
+
+/*
+GetAcceptedTermsOfServiceDocument Get accepted Terms of Service document
+
+Returns the accepted Terms of Service document for a legal entity.
+
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r TermsOfServiceApiGetAcceptedTermsOfServiceDocumentInput - Request parameters, see GetAcceptedTermsOfServiceDocumentInput
+@return GetAcceptedTermsOfServiceDocumentResponse, *http.Response, error
+*/
+func (a *TermsOfServiceApi) GetAcceptedTermsOfServiceDocument(ctx context.Context, r TermsOfServiceApiGetAcceptedTermsOfServiceDocumentInput) (GetAcceptedTermsOfServiceDocumentResponse, *http.Response, error) {
+	res := &GetAcceptedTermsOfServiceDocumentResponse{}
+	path := "/legalEntities/{id}/acceptedTermsOfServiceDocument/{termsofserviceacceptancereference}"
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	path = strings.Replace(path, "{"+"termsofserviceacceptancereference"+"}", url.PathEscape(common.ParameterValueToString(r.termsofserviceacceptancereference, "termsofserviceacceptancereference")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.termsOfServiceDocumentFormat != nil {
+		common.ParameterAddToQuery(queryParams, "termsOfServiceDocumentFormat", r.termsOfServiceDocumentFormat, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	return *res, httpRes, err
+}
+
 // All parameters accepted by TermsOfServiceApi.GetTermsOfServiceDocument
 type TermsOfServiceApiGetTermsOfServiceDocumentInput struct {
 	id                               string

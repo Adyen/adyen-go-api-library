@@ -47,6 +47,8 @@ GetLinkToAdyenhostedOnboardingPage Get a link to an Adyen-hosted onboarding page
 
 Returns a link to an Adyen-hosted onboarding page where you need to redirect your user.
 
+
+
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r HostedOnboardingApiGetLinkToAdyenhostedOnboardingPageInput - Request parameters, see GetLinkToAdyenhostedOnboardingPageInput
 @return OnboardingLink, *http.Response, error
@@ -133,6 +135,8 @@ func (a *HostedOnboardingApi) ListHostedOnboardingPageThemesInput() HostedOnboar
 ListHostedOnboardingPageThemes Get a list of hosted onboarding page themes
 
 Returns a list of hosted onboarding page themes.
+
+
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r HostedOnboardingApiListHostedOnboardingPageThemesInput - Request parameters, see ListHostedOnboardingPageThemesInput
