@@ -1,4 +1,0 @@
-# OpenAPI Generator Ignore
-
-# Single class service does not need an "index" to group multiple tags
-client.go

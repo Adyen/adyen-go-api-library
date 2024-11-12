@@ -10,55 +10,59 @@ package checkout
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v14/src/common"
 	"fmt"
 )
 
 // CheckoutPaymentMethod - The type and required details of a payment method to use.
 type CheckoutPaymentMethod struct {
-	AchDetails                        *AchDetails
-	AfterpayDetails                   *AfterpayDetails
-	AmazonPayDetails                  *AmazonPayDetails
-	AncvDetails                       *AncvDetails
-	AndroidPayDetails                 *AndroidPayDetails
-	ApplePayDetails                   *ApplePayDetails
-	BacsDirectDebitDetails            *BacsDirectDebitDetails
-	BillDeskDetails                   *BillDeskDetails
-	BlikDetails                       *BlikDetails
-	CardDetails                       *CardDetails
-	CashAppDetails                    *CashAppDetails
-	CellulantDetails                  *CellulantDetails
-	DokuDetails                       *DokuDetails
-	DotpayDetails                     *DotpayDetails
-	DragonpayDetails                  *DragonpayDetails
-	EcontextVoucherDetails            *EcontextVoucherDetails
-	EftDetails                        *EftDetails
+	AchDetails *AchDetails
+	AfterpayDetails *AfterpayDetails
+	AmazonPayDetails *AmazonPayDetails
+	AncvDetails *AncvDetails
+	AndroidPayDetails *AndroidPayDetails
+	ApplePayDetails *ApplePayDetails
+	BacsDirectDebitDetails *BacsDirectDebitDetails
+	BillDeskDetails *BillDeskDetails
+	BlikDetails *BlikDetails
+	CardDetails *CardDetails
+	CashAppDetails *CashAppDetails
+	CellulantDetails *CellulantDetails
+	DokuDetails *DokuDetails
+	DotpayDetails *DotpayDetails
+	DragonpayDetails *DragonpayDetails
+	EBankingFinlandDetails *EBankingFinlandDetails
+	EcontextVoucherDetails *EcontextVoucherDetails
+	EftDetails *EftDetails
 	GenericIssuerPaymentMethodDetails *GenericIssuerPaymentMethodDetails
-	GiropayDetails                    *GiropayDetails
-	GooglePayDetails                  *GooglePayDetails
-	IdealDetails                      *IdealDetails
-	KlarnaDetails                     *KlarnaDetails
-	MasterpassDetails                 *MasterpassDetails
-	MbwayDetails                      *MbwayDetails
-	MobilePayDetails                  *MobilePayDetails
-	MolPayDetails                     *MolPayDetails
-	OpenInvoiceDetails                *OpenInvoiceDetails
-	PayByBankDetails                  *PayByBankDetails
-	PayPalDetails                     *PayPalDetails
-	PayToDetails                      *PayToDetails
-	PayUUpiDetails                    *PayUUpiDetails
-	PayWithGoogleDetails              *PayWithGoogleDetails
-	PaymentDetails                    *PaymentDetails
-	RatepayDetails                    *RatepayDetails
-	SamsungPayDetails                 *SamsungPayDetails
-	SepaDirectDebitDetails            *SepaDirectDebitDetails
-	StoredPaymentMethodDetails        *StoredPaymentMethodDetails
-	UpiCollectDetails                 *UpiCollectDetails
-	UpiIntentDetails                  *UpiIntentDetails
-	VippsDetails                      *VippsDetails
-	VisaCheckoutDetails               *VisaCheckoutDetails
-	WeChatPayDetails                  *WeChatPayDetails
-	WeChatPayMiniProgramDetails       *WeChatPayMiniProgramDetails
-	ZipDetails                        *ZipDetails
+	GiropayDetails *GiropayDetails
+	GooglePayDetails *GooglePayDetails
+	IdealDetails *IdealDetails
+	KlarnaDetails *KlarnaDetails
+	MasterpassDetails *MasterpassDetails
+	MbwayDetails *MbwayDetails
+	MobilePayDetails *MobilePayDetails
+	MolPayDetails *MolPayDetails
+	OpenInvoiceDetails *OpenInvoiceDetails
+	PayByBankAISDirectDebitDetails *PayByBankAISDirectDebitDetails
+	PayByBankDetails *PayByBankDetails
+	PayPalDetails *PayPalDetails
+	PayToDetails *PayToDetails
+	PayUUpiDetails *PayUUpiDetails
+	PayWithGoogleDetails *PayWithGoogleDetails
+	PaymentDetails *PaymentDetails
+	RatepayDetails *RatepayDetails
+	SamsungPayDetails *SamsungPayDetails
+	SepaDirectDebitDetails *SepaDirectDebitDetails
+	StoredPaymentMethodDetails *StoredPaymentMethodDetails
+	TwintDetails *TwintDetails
+	UpiCollectDetails *UpiCollectDetails
+	UpiIntentDetails *UpiIntentDetails
+	VippsDetails *VippsDetails
+	VisaCheckoutDetails *VisaCheckoutDetails
+	WeChatPayDetails *WeChatPayDetails
+	WeChatPayMiniProgramDetails *WeChatPayMiniProgramDetails
+	ZipDetails *ZipDetails
 }
 
 // AchDetailsAsCheckoutPaymentMethod is a convenience function that returns AchDetails wrapped in CheckoutPaymentMethod
@@ -166,6 +170,13 @@ func DragonpayDetailsAsCheckoutPaymentMethod(v *DragonpayDetails) CheckoutPaymen
 	}
 }
 
+// EBankingFinlandDetailsAsCheckoutPaymentMethod is a convenience function that returns EBankingFinlandDetails wrapped in CheckoutPaymentMethod
+func EBankingFinlandDetailsAsCheckoutPaymentMethod(v *EBankingFinlandDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
+		EBankingFinlandDetails: v,
+	}
+}
+
 // EcontextVoucherDetailsAsCheckoutPaymentMethod is a convenience function that returns EcontextVoucherDetails wrapped in CheckoutPaymentMethod
 func EcontextVoucherDetailsAsCheckoutPaymentMethod(v *EcontextVoucherDetails) CheckoutPaymentMethod {
 	return CheckoutPaymentMethod{
@@ -250,6 +261,13 @@ func OpenInvoiceDetailsAsCheckoutPaymentMethod(v *OpenInvoiceDetails) CheckoutPa
 	}
 }
 
+// PayByBankAISDirectDebitDetailsAsCheckoutPaymentMethod is a convenience function that returns PayByBankAISDirectDebitDetails wrapped in CheckoutPaymentMethod
+func PayByBankAISDirectDebitDetailsAsCheckoutPaymentMethod(v *PayByBankAISDirectDebitDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
+		PayByBankAISDirectDebitDetails: v,
+	}
+}
+
 // PayByBankDetailsAsCheckoutPaymentMethod is a convenience function that returns PayByBankDetails wrapped in CheckoutPaymentMethod
 func PayByBankDetailsAsCheckoutPaymentMethod(v *PayByBankDetails) CheckoutPaymentMethod {
 	return CheckoutPaymentMethod{
@@ -320,6 +338,13 @@ func StoredPaymentMethodDetailsAsCheckoutPaymentMethod(v *StoredPaymentMethodDet
 	}
 }
 
+// TwintDetailsAsCheckoutPaymentMethod is a convenience function that returns TwintDetails wrapped in CheckoutPaymentMethod
+func TwintDetailsAsCheckoutPaymentMethod(v *TwintDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
+		TwintDetails: v,
+	}
+}
+
 // UpiCollectDetailsAsCheckoutPaymentMethod is a convenience function that returns UpiCollectDetails wrapped in CheckoutPaymentMethod
 func UpiCollectDetailsAsCheckoutPaymentMethod(v *UpiCollectDetails) CheckoutPaymentMethod {
 	return CheckoutPaymentMethod{
@@ -369,6 +394,7 @@ func ZipDetailsAsCheckoutPaymentMethod(v *ZipDetails) CheckoutPaymentMethod {
 	}
 }
 
+
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	var err error
@@ -379,7 +405,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonAchDetails, _ := json.Marshal(dst.AchDetails)
 		if string(jsonAchDetails) == "{}" || !dst.AchDetails.isValidType() { // empty struct
 			dst.AchDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -392,7 +418,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonAfterpayDetails, _ := json.Marshal(dst.AfterpayDetails)
 		if string(jsonAfterpayDetails) == "{}" || !dst.AfterpayDetails.isValidType() { // empty struct
 			dst.AfterpayDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -405,7 +431,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonAmazonPayDetails, _ := json.Marshal(dst.AmazonPayDetails)
 		if string(jsonAmazonPayDetails) == "{}" || !dst.AmazonPayDetails.isValidType() { // empty struct
 			dst.AmazonPayDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -418,7 +444,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonAncvDetails, _ := json.Marshal(dst.AncvDetails)
 		if string(jsonAncvDetails) == "{}" || !dst.AncvDetails.isValidType() { // empty struct
 			dst.AncvDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -431,7 +457,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonAndroidPayDetails, _ := json.Marshal(dst.AndroidPayDetails)
 		if string(jsonAndroidPayDetails) == "{}" || !dst.AndroidPayDetails.isValidType() { // empty struct
 			dst.AndroidPayDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -444,7 +470,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonApplePayDetails, _ := json.Marshal(dst.ApplePayDetails)
 		if string(jsonApplePayDetails) == "{}" || !dst.ApplePayDetails.isValidType() { // empty struct
 			dst.ApplePayDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -457,7 +483,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonBacsDirectDebitDetails, _ := json.Marshal(dst.BacsDirectDebitDetails)
 		if string(jsonBacsDirectDebitDetails) == "{}" || !dst.BacsDirectDebitDetails.isValidType() { // empty struct
 			dst.BacsDirectDebitDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -470,7 +496,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonBillDeskDetails, _ := json.Marshal(dst.BillDeskDetails)
 		if string(jsonBillDeskDetails) == "{}" || !dst.BillDeskDetails.isValidType() { // empty struct
 			dst.BillDeskDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -483,7 +509,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonBlikDetails, _ := json.Marshal(dst.BlikDetails)
 		if string(jsonBlikDetails) == "{}" || !dst.BlikDetails.isValidType() { // empty struct
 			dst.BlikDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -496,7 +522,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonCardDetails, _ := json.Marshal(dst.CardDetails)
 		if string(jsonCardDetails) == "{}" || !dst.CardDetails.isValidType() { // empty struct
 			dst.CardDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -509,7 +535,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonCashAppDetails, _ := json.Marshal(dst.CashAppDetails)
 		if string(jsonCashAppDetails) == "{}" || !dst.CashAppDetails.isValidType() { // empty struct
 			dst.CashAppDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -522,7 +548,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonCellulantDetails, _ := json.Marshal(dst.CellulantDetails)
 		if string(jsonCellulantDetails) == "{}" || !dst.CellulantDetails.isValidType() { // empty struct
 			dst.CellulantDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -535,7 +561,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonDokuDetails, _ := json.Marshal(dst.DokuDetails)
 		if string(jsonDokuDetails) == "{}" || !dst.DokuDetails.isValidType() { // empty struct
 			dst.DokuDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -548,7 +574,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonDotpayDetails, _ := json.Marshal(dst.DotpayDetails)
 		if string(jsonDotpayDetails) == "{}" || !dst.DotpayDetails.isValidType() { // empty struct
 			dst.DotpayDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -561,11 +587,24 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonDragonpayDetails, _ := json.Marshal(dst.DragonpayDetails)
 		if string(jsonDragonpayDetails) == "{}" || !dst.DragonpayDetails.isValidType() { // empty struct
 			dst.DragonpayDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
 		dst.DragonpayDetails = nil
+	}
+
+	// try to unmarshal data into EBankingFinlandDetails
+	err = json.Unmarshal(data, &dst.EBankingFinlandDetails)
+	if err == nil {
+		jsonEBankingFinlandDetails, _ := json.Marshal(dst.EBankingFinlandDetails)
+		if string(jsonEBankingFinlandDetails) == "{}" || !dst.EBankingFinlandDetails.isValidType() { // empty struct
+			dst.EBankingFinlandDetails = nil
+        } else {
+			match++
+		}
+	} else {
+		dst.EBankingFinlandDetails = nil
 	}
 
 	// try to unmarshal data into EcontextVoucherDetails
@@ -574,7 +613,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonEcontextVoucherDetails, _ := json.Marshal(dst.EcontextVoucherDetails)
 		if string(jsonEcontextVoucherDetails) == "{}" || !dst.EcontextVoucherDetails.isValidType() { // empty struct
 			dst.EcontextVoucherDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -587,7 +626,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonEftDetails, _ := json.Marshal(dst.EftDetails)
 		if string(jsonEftDetails) == "{}" || !dst.EftDetails.isValidType() { // empty struct
 			dst.EftDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -600,7 +639,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonGenericIssuerPaymentMethodDetails, _ := json.Marshal(dst.GenericIssuerPaymentMethodDetails)
 		if string(jsonGenericIssuerPaymentMethodDetails) == "{}" || !dst.GenericIssuerPaymentMethodDetails.isValidType() { // empty struct
 			dst.GenericIssuerPaymentMethodDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -613,7 +652,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonGiropayDetails, _ := json.Marshal(dst.GiropayDetails)
 		if string(jsonGiropayDetails) == "{}" || !dst.GiropayDetails.isValidType() { // empty struct
 			dst.GiropayDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -626,7 +665,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonGooglePayDetails, _ := json.Marshal(dst.GooglePayDetails)
 		if string(jsonGooglePayDetails) == "{}" || !dst.GooglePayDetails.isValidType() { // empty struct
 			dst.GooglePayDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -639,7 +678,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonIdealDetails, _ := json.Marshal(dst.IdealDetails)
 		if string(jsonIdealDetails) == "{}" || !dst.IdealDetails.isValidType() { // empty struct
 			dst.IdealDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -652,7 +691,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonKlarnaDetails, _ := json.Marshal(dst.KlarnaDetails)
 		if string(jsonKlarnaDetails) == "{}" || !dst.KlarnaDetails.isValidType() { // empty struct
 			dst.KlarnaDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -665,7 +704,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonMasterpassDetails, _ := json.Marshal(dst.MasterpassDetails)
 		if string(jsonMasterpassDetails) == "{}" || !dst.MasterpassDetails.isValidType() { // empty struct
 			dst.MasterpassDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -678,7 +717,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonMbwayDetails, _ := json.Marshal(dst.MbwayDetails)
 		if string(jsonMbwayDetails) == "{}" || !dst.MbwayDetails.isValidType() { // empty struct
 			dst.MbwayDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -691,7 +730,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonMobilePayDetails, _ := json.Marshal(dst.MobilePayDetails)
 		if string(jsonMobilePayDetails) == "{}" || !dst.MobilePayDetails.isValidType() { // empty struct
 			dst.MobilePayDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -704,7 +743,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonMolPayDetails, _ := json.Marshal(dst.MolPayDetails)
 		if string(jsonMolPayDetails) == "{}" || !dst.MolPayDetails.isValidType() { // empty struct
 			dst.MolPayDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -717,11 +756,24 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonOpenInvoiceDetails, _ := json.Marshal(dst.OpenInvoiceDetails)
 		if string(jsonOpenInvoiceDetails) == "{}" || !dst.OpenInvoiceDetails.isValidType() { // empty struct
 			dst.OpenInvoiceDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
 		dst.OpenInvoiceDetails = nil
+	}
+
+	// try to unmarshal data into PayByBankAISDirectDebitDetails
+	err = json.Unmarshal(data, &dst.PayByBankAISDirectDebitDetails)
+	if err == nil {
+		jsonPayByBankAISDirectDebitDetails, _ := json.Marshal(dst.PayByBankAISDirectDebitDetails)
+		if string(jsonPayByBankAISDirectDebitDetails) == "{}" || !dst.PayByBankAISDirectDebitDetails.isValidType() { // empty struct
+			dst.PayByBankAISDirectDebitDetails = nil
+        } else {
+			match++
+		}
+	} else {
+		dst.PayByBankAISDirectDebitDetails = nil
 	}
 
 	// try to unmarshal data into PayByBankDetails
@@ -730,7 +782,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonPayByBankDetails, _ := json.Marshal(dst.PayByBankDetails)
 		if string(jsonPayByBankDetails) == "{}" || !dst.PayByBankDetails.isValidType() { // empty struct
 			dst.PayByBankDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -743,7 +795,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonPayPalDetails, _ := json.Marshal(dst.PayPalDetails)
 		if string(jsonPayPalDetails) == "{}" || !dst.PayPalDetails.isValidType() { // empty struct
 			dst.PayPalDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -756,7 +808,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonPayToDetails, _ := json.Marshal(dst.PayToDetails)
 		if string(jsonPayToDetails) == "{}" || !dst.PayToDetails.isValidType() { // empty struct
 			dst.PayToDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -769,7 +821,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonPayUUpiDetails, _ := json.Marshal(dst.PayUUpiDetails)
 		if string(jsonPayUUpiDetails) == "{}" || !dst.PayUUpiDetails.isValidType() { // empty struct
 			dst.PayUUpiDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -782,7 +834,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonPayWithGoogleDetails, _ := json.Marshal(dst.PayWithGoogleDetails)
 		if string(jsonPayWithGoogleDetails) == "{}" || !dst.PayWithGoogleDetails.isValidType() { // empty struct
 			dst.PayWithGoogleDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -795,7 +847,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonPaymentDetails, _ := json.Marshal(dst.PaymentDetails)
 		if string(jsonPaymentDetails) == "{}" || !dst.PaymentDetails.isValidType() { // empty struct
 			dst.PaymentDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -808,7 +860,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonRatepayDetails, _ := json.Marshal(dst.RatepayDetails)
 		if string(jsonRatepayDetails) == "{}" || !dst.RatepayDetails.isValidType() { // empty struct
 			dst.RatepayDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -821,7 +873,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonSamsungPayDetails, _ := json.Marshal(dst.SamsungPayDetails)
 		if string(jsonSamsungPayDetails) == "{}" || !dst.SamsungPayDetails.isValidType() { // empty struct
 			dst.SamsungPayDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -834,7 +886,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonSepaDirectDebitDetails, _ := json.Marshal(dst.SepaDirectDebitDetails)
 		if string(jsonSepaDirectDebitDetails) == "{}" || !dst.SepaDirectDebitDetails.isValidType() { // empty struct
 			dst.SepaDirectDebitDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -847,11 +899,24 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonStoredPaymentMethodDetails, _ := json.Marshal(dst.StoredPaymentMethodDetails)
 		if string(jsonStoredPaymentMethodDetails) == "{}" || !dst.StoredPaymentMethodDetails.isValidType() { // empty struct
 			dst.StoredPaymentMethodDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
 		dst.StoredPaymentMethodDetails = nil
+	}
+
+	// try to unmarshal data into TwintDetails
+	err = json.Unmarshal(data, &dst.TwintDetails)
+	if err == nil {
+		jsonTwintDetails, _ := json.Marshal(dst.TwintDetails)
+		if string(jsonTwintDetails) == "{}" || !dst.TwintDetails.isValidType() { // empty struct
+			dst.TwintDetails = nil
+        } else {
+			match++
+		}
+	} else {
+		dst.TwintDetails = nil
 	}
 
 	// try to unmarshal data into UpiCollectDetails
@@ -860,7 +925,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonUpiCollectDetails, _ := json.Marshal(dst.UpiCollectDetails)
 		if string(jsonUpiCollectDetails) == "{}" || !dst.UpiCollectDetails.isValidType() { // empty struct
 			dst.UpiCollectDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -873,7 +938,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonUpiIntentDetails, _ := json.Marshal(dst.UpiIntentDetails)
 		if string(jsonUpiIntentDetails) == "{}" || !dst.UpiIntentDetails.isValidType() { // empty struct
 			dst.UpiIntentDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -886,7 +951,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonVippsDetails, _ := json.Marshal(dst.VippsDetails)
 		if string(jsonVippsDetails) == "{}" || !dst.VippsDetails.isValidType() { // empty struct
 			dst.VippsDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -899,7 +964,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonVisaCheckoutDetails, _ := json.Marshal(dst.VisaCheckoutDetails)
 		if string(jsonVisaCheckoutDetails) == "{}" || !dst.VisaCheckoutDetails.isValidType() { // empty struct
 			dst.VisaCheckoutDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -912,7 +977,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonWeChatPayDetails, _ := json.Marshal(dst.WeChatPayDetails)
 		if string(jsonWeChatPayDetails) == "{}" || !dst.WeChatPayDetails.isValidType() { // empty struct
 			dst.WeChatPayDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -925,7 +990,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonWeChatPayMiniProgramDetails, _ := json.Marshal(dst.WeChatPayMiniProgramDetails)
 		if string(jsonWeChatPayMiniProgramDetails) == "{}" || !dst.WeChatPayMiniProgramDetails.isValidType() { // empty struct
 			dst.WeChatPayMiniProgramDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -938,7 +1003,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonZipDetails, _ := json.Marshal(dst.ZipDetails)
 		if string(jsonZipDetails) == "{}" || !dst.ZipDetails.isValidType() { // empty struct
 			dst.ZipDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -962,6 +1027,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		dst.DokuDetails = nil
 		dst.DotpayDetails = nil
 		dst.DragonpayDetails = nil
+		dst.EBankingFinlandDetails = nil
 		dst.EcontextVoucherDetails = nil
 		dst.EftDetails = nil
 		dst.GenericIssuerPaymentMethodDetails = nil
@@ -974,6 +1040,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		dst.MobilePayDetails = nil
 		dst.MolPayDetails = nil
 		dst.OpenInvoiceDetails = nil
+		dst.PayByBankAISDirectDebitDetails = nil
 		dst.PayByBankDetails = nil
 		dst.PayPalDetails = nil
 		dst.PayToDetails = nil
@@ -984,6 +1051,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		dst.SamsungPayDetails = nil
 		dst.SepaDirectDebitDetails = nil
 		dst.StoredPaymentMethodDetails = nil
+		dst.TwintDetails = nil
 		dst.UpiCollectDetails = nil
 		dst.UpiIntentDetails = nil
 		dst.VippsDetails = nil
@@ -1062,6 +1130,10 @@ func (src CheckoutPaymentMethod) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.DragonpayDetails)
 	}
 
+	if src.EBankingFinlandDetails != nil {
+		return json.Marshal(&src.EBankingFinlandDetails)
+	}
+
 	if src.EcontextVoucherDetails != nil {
 		return json.Marshal(&src.EcontextVoucherDetails)
 	}
@@ -1110,6 +1182,10 @@ func (src CheckoutPaymentMethod) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.OpenInvoiceDetails)
 	}
 
+	if src.PayByBankAISDirectDebitDetails != nil {
+		return json.Marshal(&src.PayByBankAISDirectDebitDetails)
+	}
+
 	if src.PayByBankDetails != nil {
 		return json.Marshal(&src.PayByBankDetails)
 	}
@@ -1150,6 +1226,10 @@ func (src CheckoutPaymentMethod) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.StoredPaymentMethodDetails)
 	}
 
+	if src.TwintDetails != nil {
+		return json.Marshal(&src.TwintDetails)
+	}
+
 	if src.UpiCollectDetails != nil {
 		return json.Marshal(&src.UpiCollectDetails)
 	}
@@ -1182,7 +1262,7 @@ func (src CheckoutPaymentMethod) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *CheckoutPaymentMethod) GetActualInstance() interface{} {
+func (obj *CheckoutPaymentMethod) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
@@ -1246,6 +1326,10 @@ func (obj *CheckoutPaymentMethod) GetActualInstance() interface{} {
 		return obj.DragonpayDetails
 	}
 
+	if obj.EBankingFinlandDetails != nil {
+		return obj.EBankingFinlandDetails
+	}
+
 	if obj.EcontextVoucherDetails != nil {
 		return obj.EcontextVoucherDetails
 	}
@@ -1294,6 +1378,10 @@ func (obj *CheckoutPaymentMethod) GetActualInstance() interface{} {
 		return obj.OpenInvoiceDetails
 	}
 
+	if obj.PayByBankAISDirectDebitDetails != nil {
+		return obj.PayByBankAISDirectDebitDetails
+	}
+
 	if obj.PayByBankDetails != nil {
 		return obj.PayByBankDetails
 	}
@@ -1332,6 +1420,10 @@ func (obj *CheckoutPaymentMethod) GetActualInstance() interface{} {
 
 	if obj.StoredPaymentMethodDetails != nil {
 		return obj.StoredPaymentMethodDetails
+	}
+
+	if obj.TwintDetails != nil {
+		return obj.TwintDetails
 	}
 
 	if obj.UpiCollectDetails != nil {
@@ -1401,3 +1493,5 @@ func (v *NullableCheckoutPaymentMethod) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

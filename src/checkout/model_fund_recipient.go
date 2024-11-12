@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v14/src/common"
+    "github.com/adyen/adyen-go-api-library/v14/src/common"
 )
 
 // checks if the FundRecipient type satisfies the MappedNullable interface at compile time
@@ -19,25 +18,25 @@ var _ common.MappedNullable = &FundRecipient{}
 
 // FundRecipient struct for FundRecipient
 type FundRecipient struct {
-	// Fund Recipient Iban for C2C payments
-	IBAN           *string      `json:"IBAN,omitempty"`
-	BillingAddress *Address     `json:"billingAddress,omitempty"`
-	PaymentMethod  *CardDetails `json:"paymentMethod,omitempty"`
+	// The IBAN of the bank account where the funds are being transferred to.
+	IBAN *string `json:"IBAN,omitempty"`
+	BillingAddress *Address `json:"billingAddress,omitempty"`
+	PaymentMethod *CardDetails `json:"paymentMethod,omitempty"`
 	// The email address of the shopper.
 	ShopperEmail *string `json:"shopperEmail,omitempty"`
-	ShopperName  *Name   `json:"shopperName,omitempty"`
+	ShopperName *Name `json:"shopperName,omitempty"`
 	// Required for recurring payments.  Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters. > Your reference must not include personally identifiable information (PII), for example name or email address.
 	ShopperReference *string `json:"shopperReference,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
-	StoredPaymentMethodId *string      `json:"storedPaymentMethodId,omitempty"`
-	SubMerchant           *SubMerchant `json:"subMerchant,omitempty"`
+	StoredPaymentMethodId *string `json:"storedPaymentMethodId,omitempty"`
+	SubMerchant *SubMerchant `json:"subMerchant,omitempty"`
 	// The telephone number of the shopper.
 	TelephoneNumber *string `json:"telephoneNumber,omitempty"`
-	// Indicates where the money is going.
+	// The unique identifier for the wallet the funds are being transferred to. You can use the shopper reference or any other identifier.
 	WalletIdentifier *string `json:"walletIdentifier,omitempty"`
-	// Indicates the tax identifier of the fund recipient
+	// The tax identifier of the person receiving the funds.
 	WalletOwnerTaxId *string `json:"walletOwnerTaxId,omitempty"`
-	// The purpose of a digital wallet transaction
+	// The purpose of a digital wallet transaction.
 	WalletPurpose *string `json:"walletPurpose,omitempty"`
 }
 
@@ -443,7 +442,7 @@ func (o *FundRecipient) SetWalletPurpose(v string) {
 }
 
 func (o FundRecipient) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -527,12 +526,14 @@ func (v *NullableFundRecipient) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *FundRecipient) isValidWalletPurpose() bool {
-	var allowedEnumValues = []string{"identifiedBoleto", "transferDifferentWallet", "transferOwnWallet", "transferSameWallet", "unidentifiedBoleto"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetWalletPurpose() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "identifiedBoleto", "transferDifferentWallet", "transferOwnWallet", "transferSameWallet", "unidentifiedBoleto" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetWalletPurpose() == allowed {
+            return true
+        }
+    }
+    return false
 }
+
