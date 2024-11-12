@@ -10,7 +10,8 @@ package transfers
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v14/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v14/src/common"
 )
 
 // checks if the ReturnTransferResponse type satisfies the MappedNullable interface at compile time
@@ -174,7 +175,7 @@ func (o *ReturnTransferResponse) SetTransferId(v string) {
 }
 
 func (o ReturnTransferResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -234,14 +235,12 @@ func (v *NullableReturnTransferResponse) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *ReturnTransferResponse) isValidStatus() bool {
-    var allowedEnumValues = []string{ "Authorised", "Declined" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetStatus() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"Authorised", "Declined"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetStatus() == allowed {
+			return true
+		}
+	}
+	return false
 }
-
