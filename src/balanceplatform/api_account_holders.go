@@ -321,6 +321,97 @@ func (a *AccountHoldersApi) GetAllBalanceAccountsOfAccountHolder(ctx context.Con
 	return *res, httpRes, err
 }
 
+// All parameters accepted by AccountHoldersApi.GetAllTransactionRulesForAccountHolder
+type AccountHoldersApiGetAllTransactionRulesForAccountHolderInput struct {
+	id string
+}
+
+/*
+Prepare a request for GetAllTransactionRulesForAccountHolder
+@param id The unique identifier of the account holder.
+@return AccountHoldersApiGetAllTransactionRulesForAccountHolderInput
+*/
+func (a *AccountHoldersApi) GetAllTransactionRulesForAccountHolderInput(id string) AccountHoldersApiGetAllTransactionRulesForAccountHolderInput {
+	return AccountHoldersApiGetAllTransactionRulesForAccountHolderInput{
+		id: id,
+	}
+}
+
+/*
+GetAllTransactionRulesForAccountHolder Get all transaction rules for an account holder
+
+Returns a list of transaction rules associated with an account holder.
+
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r AccountHoldersApiGetAllTransactionRulesForAccountHolderInput - Request parameters, see GetAllTransactionRulesForAccountHolderInput
+@return TransactionRulesResponse, *http.Response, error
+*/
+func (a *AccountHoldersApi) GetAllTransactionRulesForAccountHolder(ctx context.Context, r AccountHoldersApiGetAllTransactionRulesForAccountHolderInput) (TransactionRulesResponse, *http.Response, error) {
+	res := &TransactionRulesResponse{}
+	path := "/accountHolders/{id}/transactionRules"
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 400 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+
+	return *res, httpRes, err
+}
+
 // All parameters accepted by AccountHoldersApi.GetTaxForm
 type AccountHoldersApiGetTaxFormInput struct {
 	id       string

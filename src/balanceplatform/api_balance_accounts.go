@@ -421,6 +421,97 @@ func (a *BalanceAccountsApi) GetAllSweepsForBalanceAccount(ctx context.Context, 
 	return *res, httpRes, err
 }
 
+// All parameters accepted by BalanceAccountsApi.GetAllTransactionRulesForBalanceAccount
+type BalanceAccountsApiGetAllTransactionRulesForBalanceAccountInput struct {
+	id string
+}
+
+/*
+Prepare a request for GetAllTransactionRulesForBalanceAccount
+@param id The unique identifier of the balance account.
+@return BalanceAccountsApiGetAllTransactionRulesForBalanceAccountInput
+*/
+func (a *BalanceAccountsApi) GetAllTransactionRulesForBalanceAccountInput(id string) BalanceAccountsApiGetAllTransactionRulesForBalanceAccountInput {
+	return BalanceAccountsApiGetAllTransactionRulesForBalanceAccountInput{
+		id: id,
+	}
+}
+
+/*
+GetAllTransactionRulesForBalanceAccount Get all transaction rules for a balance account
+
+Returns a list of transaction rules associated with a balance account.
+
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r BalanceAccountsApiGetAllTransactionRulesForBalanceAccountInput - Request parameters, see GetAllTransactionRulesForBalanceAccountInput
+@return TransactionRulesResponse, *http.Response, error
+*/
+func (a *BalanceAccountsApi) GetAllTransactionRulesForBalanceAccount(ctx context.Context, r BalanceAccountsApiGetAllTransactionRulesForBalanceAccountInput) (TransactionRulesResponse, *http.Response, error) {
+	res := &TransactionRulesResponse{}
+	path := "/balanceAccounts/{id}/transactionRules"
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 400 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+
+	return *res, httpRes, err
+}
+
 // All parameters accepted by BalanceAccountsApi.GetBalanceAccount
 type BalanceAccountsApiGetBalanceAccountInput struct {
 	id string

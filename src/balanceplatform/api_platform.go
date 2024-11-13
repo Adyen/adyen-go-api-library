@@ -135,6 +135,97 @@ func (a *PlatformApi) GetAllAccountHoldersUnderBalancePlatform(ctx context.Conte
 	return *res, httpRes, err
 }
 
+// All parameters accepted by PlatformApi.GetAllTransactionRulesForBalancePlatform
+type PlatformApiGetAllTransactionRulesForBalancePlatformInput struct {
+	id string
+}
+
+/*
+Prepare a request for GetAllTransactionRulesForBalancePlatform
+@param id The unique identifier of the balance platform.
+@return PlatformApiGetAllTransactionRulesForBalancePlatformInput
+*/
+func (a *PlatformApi) GetAllTransactionRulesForBalancePlatformInput(id string) PlatformApiGetAllTransactionRulesForBalancePlatformInput {
+	return PlatformApiGetAllTransactionRulesForBalancePlatformInput{
+		id: id,
+	}
+}
+
+/*
+GetAllTransactionRulesForBalancePlatform Get all transaction rules for a balance platform
+
+Returns a list of transaction rules associated with a balance platform.
+
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r PlatformApiGetAllTransactionRulesForBalancePlatformInput - Request parameters, see GetAllTransactionRulesForBalancePlatformInput
+@return TransactionRulesResponse, *http.Response, error
+*/
+func (a *PlatformApi) GetAllTransactionRulesForBalancePlatform(ctx context.Context, r PlatformApiGetAllTransactionRulesForBalancePlatformInput) (TransactionRulesResponse, *http.Response, error) {
+	res := &TransactionRulesResponse{}
+	path := "/balancePlatforms/{id}/transactionRules"
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 400 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+
+	return *res, httpRes, err
+}
+
 // All parameters accepted by PlatformApi.GetBalancePlatform
 type PlatformApiGetBalancePlatformInput struct {
 	id string

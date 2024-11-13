@@ -47,7 +47,7 @@ type TransferEvent struct {
 	Type *string `json:"type,omitempty"`
 	// The date when the tracking status was updated.
 	UpdateDate *time.Time `json:"updateDate,omitempty"`
-	// A future date, when the funds are expected to be deducted from or credited to the balance account.
+	// The date when the funds are expected to be deducted from or credited to the balance account. This date can be in either the past or future.
 	ValueDate *time.Time `json:"valueDate,omitempty"`
 }
 
@@ -713,7 +713,7 @@ func (v *NullableTransferEvent) UnmarshalJSON(src []byte) error {
 }
 
 func (o *TransferEvent) isValidReason() bool {
-	var allowedEnumValues = []string{"accountHierarchyNotActive", "amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declined", "declinedByTransactionRule", "directDebitNotSupported", "error", "notEnoughBalance", "pendingApproval", "pendingExecution", "refusedByCounterpartyBank", "routeNotFound", "scaFailed", "transferInstrumentDoesNotExist", "unknown"}
+	var allowedEnumValues = []string{"accountHierarchyNotActive", "amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declined", "declinedByTransactionRule", "directDebitNotSupported", "error", "notEnoughBalance", "pendingApproval", "pendingExecution", "refusedByCounterpartyBank", "refusedByCustomer", "routeNotFound", "scaFailed", "transferInstrumentDoesNotExist", "unknown"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetReason() == allowed {
 			return true

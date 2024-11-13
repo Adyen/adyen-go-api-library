@@ -43,7 +43,7 @@ type UpdatePaymentInstrument struct {
 	StatusComment *string `json:"statusComment,omitempty"`
 	// The reason for the status of the payment instrument.  Possible values: **accountClosure**, **damaged**, **endOfLife**, **expired**, **lost**, **stolen**, **suspectedFraud**, **transactionRule**, **other**. If the reason is **other**, you must also send the `statusComment` parameter describing the status change.
 	StatusReason *string `json:"statusReason,omitempty"`
-	// Type of payment instrument.  Possible value: **card**, **bankAccount**.
+	// The type of payment instrument.  Possible values: **card**, **bankAccount**.
 	Type string `json:"type"`
 }
 

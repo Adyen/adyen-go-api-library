@@ -249,13 +249,13 @@ type TransfersApiGetAllTransfersInput struct {
 	limit               *int32
 }
 
-// Only include transfers that have been created on or after this point in time. The value must be in ISO 8601 format. For example, **2021-05-30T15:07:40Z**.
+// Only include transfers that have been created on or after this point in time. The value must be in ISO 8601 format and not earlier than 6 months before the &#x60;createdUntil&#x60; date. For example, **2021-05-30T15:07:40Z**.
 func (r TransfersApiGetAllTransfersInput) CreatedSince(createdSince time.Time) TransfersApiGetAllTransfersInput {
 	r.createdSince = &createdSince
 	return r
 }
 
-// Only include transfers that have been created on or before this point in time. The value must be in ISO 8601 format. For example, **2021-05-30T15:07:40Z**.
+// Only include transfers that have been created on or before this point in time. The value must be in ISO 8601 format and not later than 6 months after the &#x60;createdSince&#x60; date. For example, **2021-05-30T15:07:40Z**.
 func (r TransfersApiGetAllTransfersInput) CreatedUntil(createdUntil time.Time) TransfersApiGetAllTransfersInput {
 	r.createdUntil = &createdUntil
 	return r
