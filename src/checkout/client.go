@@ -9,7 +9,7 @@ API version: 71
 package checkout
 
 import (
-    "github.com/adyen/adyen-go-api-library/v14/src/common"
+	"github.com/adyen/adyen-go-api-library/v14/src/common"
 )
 
 // APIClient manages communication with the Adyen Checkout API API v71
@@ -37,10 +37,10 @@ type APIClient struct {
 // NewAPIClient creates a new API client.
 func NewAPIClient(client *common.Client) *APIClient {
 	c := &APIClient{}
-    c.common.Client = client
-    c.common.BasePath = func() string {
-        return client.Cfg.CheckoutEndpoint
-    }
+	c.common.Client = client
+	c.common.BasePath = func() string {
+		return client.Cfg.CheckoutEndpoint
+	}
 
 	// API Services
 	c.DonationsApi = (*DonationsApi)(&c.common)

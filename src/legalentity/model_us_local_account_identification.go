@@ -10,7 +10,8 @@ package legalentity
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v14/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v14/src/common"
 )
 
 // checks if the USLocalAccountIdentification type satisfies the MappedNullable interface at compile time
@@ -159,7 +160,7 @@ func (o *USLocalAccountIdentification) SetType(v string) {
 }
 
 func (o USLocalAccountIdentification) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -213,23 +214,21 @@ func (v *NullableUSLocalAccountIdentification) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *USLocalAccountIdentification) isValidAccountType() bool {
-    var allowedEnumValues = []string{ "checking", "savings" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetAccountType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"checking", "savings"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetAccountType() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *USLocalAccountIdentification) isValidType() bool {
-    var allowedEnumValues = []string{ "usLocal" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"usLocal"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-
