@@ -10,15 +10,19 @@ package balanceplatform
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v14/src/common"
 	"fmt"
 )
 
 // TransferRouteRequirementsInner - struct for TransferRouteRequirementsInner
 type TransferRouteRequirementsInner struct {
-	AddressRequirement                       *AddressRequirement
-	AmountMinMaxRequirement                  *AmountMinMaxRequirement
+	AddressRequirement *AddressRequirement
+	AmountMinMaxRequirement *AmountMinMaxRequirement
+	AmountNonZeroDecimalsRequirement *AmountNonZeroDecimalsRequirement
 	BankAccountIdentificationTypeRequirement *BankAccountIdentificationTypeRequirement
-	PaymentInstrumentRequirement             *PaymentInstrumentRequirement
+	IbanAccountIdentificationRequirement *IbanAccountIdentificationRequirement
+	PaymentInstrumentRequirement *PaymentInstrumentRequirement
+	USInternationalAchAddressRequirement *USInternationalAchAddressRequirement
 }
 
 // AddressRequirementAsTransferRouteRequirementsInner is a convenience function that returns AddressRequirement wrapped in TransferRouteRequirementsInner
@@ -35,10 +39,24 @@ func AmountMinMaxRequirementAsTransferRouteRequirementsInner(v *AmountMinMaxRequ
 	}
 }
 
+// AmountNonZeroDecimalsRequirementAsTransferRouteRequirementsInner is a convenience function that returns AmountNonZeroDecimalsRequirement wrapped in TransferRouteRequirementsInner
+func AmountNonZeroDecimalsRequirementAsTransferRouteRequirementsInner(v *AmountNonZeroDecimalsRequirement) TransferRouteRequirementsInner {
+	return TransferRouteRequirementsInner{
+		AmountNonZeroDecimalsRequirement: v,
+	}
+}
+
 // BankAccountIdentificationTypeRequirementAsTransferRouteRequirementsInner is a convenience function that returns BankAccountIdentificationTypeRequirement wrapped in TransferRouteRequirementsInner
 func BankAccountIdentificationTypeRequirementAsTransferRouteRequirementsInner(v *BankAccountIdentificationTypeRequirement) TransferRouteRequirementsInner {
 	return TransferRouteRequirementsInner{
 		BankAccountIdentificationTypeRequirement: v,
+	}
+}
+
+// IbanAccountIdentificationRequirementAsTransferRouteRequirementsInner is a convenience function that returns IbanAccountIdentificationRequirement wrapped in TransferRouteRequirementsInner
+func IbanAccountIdentificationRequirementAsTransferRouteRequirementsInner(v *IbanAccountIdentificationRequirement) TransferRouteRequirementsInner {
+	return TransferRouteRequirementsInner{
+		IbanAccountIdentificationRequirement: v,
 	}
 }
 
@@ -48,6 +66,14 @@ func PaymentInstrumentRequirementAsTransferRouteRequirementsInner(v *PaymentInst
 		PaymentInstrumentRequirement: v,
 	}
 }
+
+// USInternationalAchAddressRequirementAsTransferRouteRequirementsInner is a convenience function that returns USInternationalAchAddressRequirement wrapped in TransferRouteRequirementsInner
+func USInternationalAchAddressRequirementAsTransferRouteRequirementsInner(v *USInternationalAchAddressRequirement) TransferRouteRequirementsInner {
+	return TransferRouteRequirementsInner{
+		USInternationalAchAddressRequirement: v,
+	}
+}
+
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *TransferRouteRequirementsInner) UnmarshalJSON(data []byte) error {
@@ -59,7 +85,7 @@ func (dst *TransferRouteRequirementsInner) UnmarshalJSON(data []byte) error {
 		jsonAddressRequirement, _ := json.Marshal(dst.AddressRequirement)
 		if string(jsonAddressRequirement) == "{}" || !dst.AddressRequirement.isValidType() { // empty struct
 			dst.AddressRequirement = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -72,11 +98,24 @@ func (dst *TransferRouteRequirementsInner) UnmarshalJSON(data []byte) error {
 		jsonAmountMinMaxRequirement, _ := json.Marshal(dst.AmountMinMaxRequirement)
 		if string(jsonAmountMinMaxRequirement) == "{}" || !dst.AmountMinMaxRequirement.isValidType() { // empty struct
 			dst.AmountMinMaxRequirement = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
 		dst.AmountMinMaxRequirement = nil
+	}
+
+	// try to unmarshal data into AmountNonZeroDecimalsRequirement
+	err = json.Unmarshal(data, &dst.AmountNonZeroDecimalsRequirement)
+	if err == nil {
+		jsonAmountNonZeroDecimalsRequirement, _ := json.Marshal(dst.AmountNonZeroDecimalsRequirement)
+		if string(jsonAmountNonZeroDecimalsRequirement) == "{}" || !dst.AmountNonZeroDecimalsRequirement.isValidType() { // empty struct
+			dst.AmountNonZeroDecimalsRequirement = nil
+        } else {
+			match++
+		}
+	} else {
+		dst.AmountNonZeroDecimalsRequirement = nil
 	}
 
 	// try to unmarshal data into BankAccountIdentificationTypeRequirement
@@ -85,11 +124,24 @@ func (dst *TransferRouteRequirementsInner) UnmarshalJSON(data []byte) error {
 		jsonBankAccountIdentificationTypeRequirement, _ := json.Marshal(dst.BankAccountIdentificationTypeRequirement)
 		if string(jsonBankAccountIdentificationTypeRequirement) == "{}" || !dst.BankAccountIdentificationTypeRequirement.isValidType() { // empty struct
 			dst.BankAccountIdentificationTypeRequirement = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
 		dst.BankAccountIdentificationTypeRequirement = nil
+	}
+
+	// try to unmarshal data into IbanAccountIdentificationRequirement
+	err = json.Unmarshal(data, &dst.IbanAccountIdentificationRequirement)
+	if err == nil {
+		jsonIbanAccountIdentificationRequirement, _ := json.Marshal(dst.IbanAccountIdentificationRequirement)
+		if string(jsonIbanAccountIdentificationRequirement) == "{}" || !dst.IbanAccountIdentificationRequirement.isValidType() { // empty struct
+			dst.IbanAccountIdentificationRequirement = nil
+        } else {
+			match++
+		}
+	} else {
+		dst.IbanAccountIdentificationRequirement = nil
 	}
 
 	// try to unmarshal data into PaymentInstrumentRequirement
@@ -98,19 +150,35 @@ func (dst *TransferRouteRequirementsInner) UnmarshalJSON(data []byte) error {
 		jsonPaymentInstrumentRequirement, _ := json.Marshal(dst.PaymentInstrumentRequirement)
 		if string(jsonPaymentInstrumentRequirement) == "{}" || !dst.PaymentInstrumentRequirement.isValidType() { // empty struct
 			dst.PaymentInstrumentRequirement = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
 		dst.PaymentInstrumentRequirement = nil
 	}
 
+	// try to unmarshal data into USInternationalAchAddressRequirement
+	err = json.Unmarshal(data, &dst.USInternationalAchAddressRequirement)
+	if err == nil {
+		jsonUSInternationalAchAddressRequirement, _ := json.Marshal(dst.USInternationalAchAddressRequirement)
+		if string(jsonUSInternationalAchAddressRequirement) == "{}" || !dst.USInternationalAchAddressRequirement.isValidType() { // empty struct
+			dst.USInternationalAchAddressRequirement = nil
+        } else {
+			match++
+		}
+	} else {
+		dst.USInternationalAchAddressRequirement = nil
+	}
+
 	if match > 1 { // more than 1 match
 		// reset to nil
 		dst.AddressRequirement = nil
 		dst.AmountMinMaxRequirement = nil
+		dst.AmountNonZeroDecimalsRequirement = nil
 		dst.BankAccountIdentificationTypeRequirement = nil
+		dst.IbanAccountIdentificationRequirement = nil
 		dst.PaymentInstrumentRequirement = nil
+		dst.USInternationalAchAddressRequirement = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(TransferRouteRequirementsInner)")
 	} else if match == 1 {
@@ -130,19 +198,31 @@ func (src TransferRouteRequirementsInner) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.AmountMinMaxRequirement)
 	}
 
+	if src.AmountNonZeroDecimalsRequirement != nil {
+		return json.Marshal(&src.AmountNonZeroDecimalsRequirement)
+	}
+
 	if src.BankAccountIdentificationTypeRequirement != nil {
 		return json.Marshal(&src.BankAccountIdentificationTypeRequirement)
+	}
+
+	if src.IbanAccountIdentificationRequirement != nil {
+		return json.Marshal(&src.IbanAccountIdentificationRequirement)
 	}
 
 	if src.PaymentInstrumentRequirement != nil {
 		return json.Marshal(&src.PaymentInstrumentRequirement)
 	}
 
+	if src.USInternationalAchAddressRequirement != nil {
+		return json.Marshal(&src.USInternationalAchAddressRequirement)
+	}
+
 	return nil, nil // no data in oneOf schemas
 }
 
 // Get the actual instance
-func (obj *TransferRouteRequirementsInner) GetActualInstance() interface{} {
+func (obj *TransferRouteRequirementsInner) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
@@ -154,12 +234,24 @@ func (obj *TransferRouteRequirementsInner) GetActualInstance() interface{} {
 		return obj.AmountMinMaxRequirement
 	}
 
+	if obj.AmountNonZeroDecimalsRequirement != nil {
+		return obj.AmountNonZeroDecimalsRequirement
+	}
+
 	if obj.BankAccountIdentificationTypeRequirement != nil {
 		return obj.BankAccountIdentificationTypeRequirement
 	}
 
+	if obj.IbanAccountIdentificationRequirement != nil {
+		return obj.IbanAccountIdentificationRequirement
+	}
+
 	if obj.PaymentInstrumentRequirement != nil {
 		return obj.PaymentInstrumentRequirement
+	}
+
+	if obj.USInternationalAchAddressRequirement != nil {
+		return obj.USInternationalAchAddressRequirement
 	}
 
 	// all schemas are nil
@@ -201,3 +293,5 @@ func (v *NullableTransferRouteRequirementsInner) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
