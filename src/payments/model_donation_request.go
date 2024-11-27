@@ -10,7 +10,8 @@ package payments
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v14/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v14/src/common"
 )
 
 // checks if the DonationRequest type satisfies the MappedNullable interface at compile time
@@ -21,10 +22,10 @@ type DonationRequest struct {
 	// The Adyen account name of the charity.
 	DonationAccount string `json:"donationAccount"`
 	// The merchant account that is used to process the payment.
-	MerchantAccount string `json:"merchantAccount"`
+	MerchantAccount    string `json:"merchantAccount"`
 	ModificationAmount Amount `json:"modificationAmount"`
-	// The original pspReference of the payment to modify. This reference is returned in: * authorisation response * authorisation notification  
-	OriginalReference *string `json:"originalReference,omitempty"`
+	// The original pspReference of the payment to modify. This reference is returned in: * authorisation response * authorisation notification
+	OriginalReference       *string                  `json:"originalReference,omitempty"`
 	PlatformChargebackLogic *PlatformChargebackLogic `json:"platformChargebackLogic,omitempty"`
 	// Your reference for the payment modification. This reference is visible in Customer Area and in reports. Maximum length: 80 characters.
 	Reference *string `json:"reference,omitempty"`
@@ -219,7 +220,7 @@ func (o *DonationRequest) SetReference(v string) {
 }
 
 func (o DonationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -278,6 +279,3 @@ func (v *NullableDonationRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-
