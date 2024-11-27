@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v14/src/common"
+    "github.com/adyen/adyen-go-api-library/v14/src/common"
 )
 
 // checks if the PhoneNumber type satisfies the MappedNullable interface at compile time
@@ -21,7 +20,9 @@ var _ common.MappedNullable = &PhoneNumber{}
 type PhoneNumber struct {
 	// The full phone number, including the country code. For example, **+3112345678**.
 	Number string `json:"number"`
-	// The type of phone number.  Possible values: **mobile**, **landline**, **sip**, **fax.**
+	// The two-letter [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code prefix of the phone number. For example, **US** or **NL**.  The value of the `phoneCountryCode` is determined by the country code digit(s) of `phone.number`
+	PhoneCountryCode *string `json:"phoneCountryCode,omitempty"`
+	// The type of phone number.  Possible values: **mobile**, **landline**, **sip**, **fax.** 
 	Type *string `json:"type,omitempty"`
 }
 
@@ -67,6 +68,38 @@ func (o *PhoneNumber) SetNumber(v string) {
 	o.Number = v
 }
 
+// GetPhoneCountryCode returns the PhoneCountryCode field value if set, zero value otherwise.
+func (o *PhoneNumber) GetPhoneCountryCode() string {
+	if o == nil || common.IsNil(o.PhoneCountryCode) {
+		var ret string
+		return ret
+	}
+	return *o.PhoneCountryCode
+}
+
+// GetPhoneCountryCodeOk returns a tuple with the PhoneCountryCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PhoneNumber) GetPhoneCountryCodeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.PhoneCountryCode) {
+		return nil, false
+	}
+	return o.PhoneCountryCode, true
+}
+
+// HasPhoneCountryCode returns a boolean if a field has been set.
+func (o *PhoneNumber) HasPhoneCountryCode() bool {
+	if o != nil && !common.IsNil(o.PhoneCountryCode) {
+		return true
+	}
+
+	return false
+}
+
+// SetPhoneCountryCode gets a reference to the given string and assigns it to the PhoneCountryCode field.
+func (o *PhoneNumber) SetPhoneCountryCode(v string) {
+	o.PhoneCountryCode = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *PhoneNumber) GetType() string {
 	if o == nil || common.IsNil(o.Type) {
@@ -100,7 +133,7 @@ func (o *PhoneNumber) SetType(v string) {
 }
 
 func (o PhoneNumber) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -110,6 +143,9 @@ func (o PhoneNumber) MarshalJSON() ([]byte, error) {
 func (o PhoneNumber) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["number"] = o.Number
+	if !common.IsNil(o.PhoneCountryCode) {
+		toSerialize["phoneCountryCode"] = o.PhoneCountryCode
+	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
@@ -151,3 +187,6 @@ func (v *NullablePhoneNumber) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

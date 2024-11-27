@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v14/src/common"
+    "github.com/adyen/adyen-go-api-library/v14/src/common"
 )
 
 // checks if the CardConfiguration type satisfies the MappedNullable interface at compile time
@@ -22,8 +21,8 @@ type CardConfiguration struct {
 	// Overrides the activation label design ID defined in the `configurationProfileId`. The activation label is attached to the card and contains the activation instructions.
 	Activation *string `json:"activation,omitempty"`
 	// Your app's URL, if you want to activate cards through your app. For example, **my-app://ref1236a7d**. A QR code is created based on this URL, and is included in the carrier. Before you use this field, reach out to your Adyen contact to set up the QR code process.   Maximum length: 255 characters.
-	ActivationUrl *string      `json:"activationUrl,omitempty"`
-	BulkAddress   *BulkAddress `json:"bulkAddress,omitempty"`
+	ActivationUrl *string `json:"activationUrl,omitempty"`
+	BulkAddress *BulkAddress `json:"bulkAddress,omitempty"`
 	// The ID of the card image. This is the image that will be printed on the full front of the card.
 	CardImageId *string `json:"cardImageId,omitempty"`
 	// Overrides the carrier design ID defined in the `configurationProfileId`. The carrier is the letter or packaging to which the card is attached.
@@ -34,7 +33,7 @@ type CardConfiguration struct {
 	ConfigurationProfileId string `json:"configurationProfileId"`
 	// The three-letter [ISO-4217](https://en.wikipedia.org/wiki/ISO_4217) currency code of the card. For example, **EUR**.
 	Currency *string `json:"currency,omitempty"`
-	// Overrides the envelope design ID defined in the `configurationProfileId`.
+	// Overrides the envelope design ID defined in the `configurationProfileId`. 
 	Envelope *string `json:"envelope,omitempty"`
 	// Overrides the insert design ID defined in the `configurationProfileId`. An insert is any additional material, such as marketing materials, that are shipped together with the card.
 	Insert *string `json:"insert,omitempty"`
@@ -507,7 +506,7 @@ func (o *CardConfiguration) SetShipmentMethod(v string) {
 }
 
 func (o CardConfiguration) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -594,3 +593,6 @@ func (v *NullableCardConfiguration) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

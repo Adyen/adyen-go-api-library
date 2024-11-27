@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v14/src/common"
+    "github.com/adyen/adyen-go-api-library/v14/src/common"
 )
 
 // checks if the CreateSweepConfigurationV2 type satisfies the MappedNullable interface at compile time
@@ -20,7 +19,7 @@ var _ common.MappedNullable = &CreateSweepConfigurationV2{}
 // CreateSweepConfigurationV2 struct for CreateSweepConfigurationV2
 type CreateSweepConfigurationV2 struct {
 	// The type of transfer that results from the sweep.  Possible values:   - **bank**: Sweep to a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id).  - **internal**: Transfer to another [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id) within your platform.  Required when setting `priorities`.
-	Category     *string           `json:"category,omitempty"`
+	Category *string `json:"category,omitempty"`
 	Counterparty SweepCounterparty `json:"counterparty"`
 	// The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes) in uppercase. For example, **EUR**.  The sweep currency must match any of the [balances currencies](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balanceAccounts/{id}__resParam_balances).
 	Currency string `json:"currency"`
@@ -30,15 +29,17 @@ type CreateSweepConfigurationV2 struct {
 	Priorities []string `json:"priorities,omitempty"`
 	// The reason for disabling the sweep.
 	Reason *string `json:"reason,omitempty"`
+	// The human readable reason for disabling the sweep.
+	ReasonDetail *string `json:"reasonDetail,omitempty"`
 	// Your reference for the sweep configuration.
 	Reference *string `json:"reference,omitempty"`
 	// The reference sent to or received from the counterparty. Only alphanumeric characters are allowed.
-	ReferenceForBeneficiary *string       `json:"referenceForBeneficiary,omitempty"`
-	Schedule                SweepSchedule `json:"schedule"`
-	// The status of the sweep. If not provided, by default, this is set to **active**.  Possible values:    * **active**:  the sweep is enabled and funds will be pulled in or pushed out based on the defined configuration.    * **inactive**: the sweep is disabled and cannot be triggered.
-	Status        *string `json:"status,omitempty"`
-	SweepAmount   *Amount `json:"sweepAmount,omitempty"`
-	TargetAmount  *Amount `json:"targetAmount,omitempty"`
+	ReferenceForBeneficiary *string `json:"referenceForBeneficiary,omitempty"`
+	Schedule SweepSchedule `json:"schedule"`
+	// The status of the sweep. If not provided, by default, this is set to **active**.  Possible values:    * **active**:  the sweep is enabled and funds will be pulled in or pushed out based on the defined configuration.    * **inactive**: the sweep is disabled and cannot be triggered.   
+	Status *string `json:"status,omitempty"`
+	SweepAmount *Amount `json:"sweepAmount,omitempty"`
+	TargetAmount *Amount `json:"targetAmount,omitempty"`
 	TriggerAmount *Amount `json:"triggerAmount,omitempty"`
 	// The direction of sweep, whether pushing out or pulling in funds to the balance account. If not provided, by default, this is set to **push**.  Possible values:   * **push**: _push out funds_ to a destination balance account or transfer instrument.   * **pull**: _pull in funds_ from a source merchant account, transfer instrument, or balance account.
 	Type *string `json:"type,omitempty"`
@@ -242,6 +243,38 @@ func (o *CreateSweepConfigurationV2) HasReason() bool {
 // SetReason gets a reference to the given string and assigns it to the Reason field.
 func (o *CreateSweepConfigurationV2) SetReason(v string) {
 	o.Reason = &v
+}
+
+// GetReasonDetail returns the ReasonDetail field value if set, zero value otherwise.
+func (o *CreateSweepConfigurationV2) GetReasonDetail() string {
+	if o == nil || common.IsNil(o.ReasonDetail) {
+		var ret string
+		return ret
+	}
+	return *o.ReasonDetail
+}
+
+// GetReasonDetailOk returns a tuple with the ReasonDetail field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateSweepConfigurationV2) GetReasonDetailOk() (*string, bool) {
+	if o == nil || common.IsNil(o.ReasonDetail) {
+		return nil, false
+	}
+	return o.ReasonDetail, true
+}
+
+// HasReasonDetail returns a boolean if a field has been set.
+func (o *CreateSweepConfigurationV2) HasReasonDetail() bool {
+	if o != nil && !common.IsNil(o.ReasonDetail) {
+		return true
+	}
+
+	return false
+}
+
+// SetReasonDetail gets a reference to the given string and assigns it to the ReasonDetail field.
+func (o *CreateSweepConfigurationV2) SetReasonDetail(v string) {
+	o.ReasonDetail = &v
 }
 
 // GetReference returns the Reference field value if set, zero value otherwise.
@@ -493,7 +526,7 @@ func (o *CreateSweepConfigurationV2) SetType(v string) {
 }
 
 func (o CreateSweepConfigurationV2) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -515,6 +548,9 @@ func (o CreateSweepConfigurationV2) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Reason) {
 		toSerialize["reason"] = o.Reason
+	}
+	if !common.IsNil(o.ReasonDetail) {
+		toSerialize["reasonDetail"] = o.ReasonDetail
 	}
 	if !common.IsNil(o.Reference) {
 		toSerialize["reference"] = o.Reference
@@ -577,39 +613,41 @@ func (v *NullableCreateSweepConfigurationV2) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *CreateSweepConfigurationV2) isValidCategory() bool {
-	var allowedEnumValues = []string{"bank", "internal", "platformPayment"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetCategory() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "bank", "internal", "platformPayment" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetCategory() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *CreateSweepConfigurationV2) isValidReason() bool {
-	var allowedEnumValues = []string{"accountHierarchyNotActive", "amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declined", "declinedByTransactionRule", "directDebitNotSupported", "error", "notEnoughBalance", "pendingApproval", "pendingExecution", "refusedByCounterpartyBank", "refusedByCustomer", "routeNotFound", "scaFailed", "transferInstrumentDoesNotExist", "unknown"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetReason() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "accountHierarchyNotActive", "amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declined", "declinedByTransactionRule", "directDebitNotSupported", "error", "notEnoughBalance", "pendingApproval", "pendingExecution", "refusedByCounterpartyBank", "refusedByCustomer", "routeNotFound", "scaFailed", "transferInstrumentDoesNotExist", "unknown" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetReason() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *CreateSweepConfigurationV2) isValidStatus() bool {
-	var allowedEnumValues = []string{"active", "inactive"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetStatus() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "active", "inactive" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetStatus() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *CreateSweepConfigurationV2) isValidType() bool {
-	var allowedEnumValues = []string{"pull", "push"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "pull", "push" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+
