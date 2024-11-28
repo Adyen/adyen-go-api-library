@@ -35,7 +35,7 @@ type PaymentMethodSetupInfo struct {
 	Currencies []string `json:"currencies,omitempty"`
 	// The list of custom routing flags to route payment to the intended acquirer.
 	CustomRoutingFlags []string              `json:"customRoutingFlags,omitempty"`
-	Diners             *GenericPmWithTdiInfo `json:"diners,omitempty"`
+	Diners             *DinersInfo           `json:"diners,omitempty"`
 	Discover           *GenericPmWithTdiInfo `json:"discover,omitempty"`
 	EftposAustralia    *GenericPmWithTdiInfo `json:"eftpos_australia,omitempty"`
 	GiroPay            *GiroPayInfo          `json:"giroPay,omitempty"`
@@ -475,9 +475,9 @@ func (o *PaymentMethodSetupInfo) SetCustomRoutingFlags(v []string) {
 }
 
 // GetDiners returns the Diners field value if set, zero value otherwise.
-func (o *PaymentMethodSetupInfo) GetDiners() GenericPmWithTdiInfo {
+func (o *PaymentMethodSetupInfo) GetDiners() DinersInfo {
 	if o == nil || common.IsNil(o.Diners) {
-		var ret GenericPmWithTdiInfo
+		var ret DinersInfo
 		return ret
 	}
 	return *o.Diners
@@ -485,7 +485,7 @@ func (o *PaymentMethodSetupInfo) GetDiners() GenericPmWithTdiInfo {
 
 // GetDinersOk returns a tuple with the Diners field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentMethodSetupInfo) GetDinersOk() (*GenericPmWithTdiInfo, bool) {
+func (o *PaymentMethodSetupInfo) GetDinersOk() (*DinersInfo, bool) {
 	if o == nil || common.IsNil(o.Diners) {
 		return nil, false
 	}
@@ -501,8 +501,8 @@ func (o *PaymentMethodSetupInfo) HasDiners() bool {
 	return false
 }
 
-// SetDiners gets a reference to the given GenericPmWithTdiInfo and assigns it to the Diners field.
-func (o *PaymentMethodSetupInfo) SetDiners(v GenericPmWithTdiInfo) {
+// SetDiners gets a reference to the given DinersInfo and assigns it to the Diners field.
+func (o *PaymentMethodSetupInfo) SetDiners(v DinersInfo) {
 	o.Diners = &v
 }
 
@@ -1644,7 +1644,7 @@ func (o *PaymentMethodSetupInfo) isValidShopperInteraction() bool {
 	return false
 }
 func (o *PaymentMethodSetupInfo) isValidType() bool {
-	var allowedEnumValues = []string{"accel", "afterpaytouch", "alelo", "alipay", "alipay_hk", "amex", "applepay", "banese_card", "banese_card_credit", "banese_card_debit", "banese_card_prepaid", "bcmc", "blik", "cartebancaire", "clearpay", "clicktopay", "credtodos", "credtodos_private_credit", "credtodos_private_debit", "cup", "diners", "directdebit_GB", "discover", "ebanking_FI", "eftpos_australia", "elo", "elocredit", "elodebit", "girocard", "googlepay", "hiper", "hipercard", "ideal", "interac_card", "jcb", "klarna", "klarna_account", "klarna_paynow", "maestro", "mbway", "mc", "mcdebit", "mealVoucher_FR", "mobilepay", "multibanco", "nyce", "onlineBanking_PL", "paybybank", "payme", "payme_pos", "paynow", "paynow_pos", "paypal", "payshop", "pulse", "sodexo", "star", "swish", "ticket", "todo_giftcard", "trustly", "twint", "twint_pos", "up_brazil_credit", "vale_refeicao", "vale_refeicao_prepaid", "vipps", "visa", "visadebit", "vpay", "wechatpay", "wechatpay_pos"}
+	var allowedEnumValues = []string{"accel", "affirm", "afterpaytouch", "alelo", "alipay", "alipay_hk", "amex", "applepay", "banese_card", "banese_card_credit", "banese_card_debit", "banese_card_prepaid", "bcmc", "blik", "cartebancaire", "clearpay", "clicktopay", "credtodos", "credtodos_private_credit", "credtodos_private_debit", "cup", "diners", "directdebit_GB", "discover", "ebanking_FI", "eftpos_australia", "elo", "elocredit", "elodebit", "girocard", "googlepay", "hiper", "hipercard", "ideal", "interac_card", "jcb", "klarna", "klarna_account", "klarna_paynow", "maestro", "mbway", "mc", "mcdebit", "mealVoucher_FR", "mobilepay", "multibanco", "nyce", "onlineBanking_PL", "paybybank", "payme", "payme_pos", "paynow", "paynow_pos", "paypal", "payshop", "pulse", "sodexo", "star", "swish", "ticket", "todo_giftcard", "trustly", "twint", "twint_pos", "up_brazil_credit", "vale_refeicao", "vale_refeicao_prepaid", "vipps", "visa", "visadebit", "vpay", "wechatpay", "wechatpay_pos"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

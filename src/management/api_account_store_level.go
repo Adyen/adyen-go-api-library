@@ -49,6 +49,8 @@ Creates a store for the merchant account specified in the request.
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Stores read and write
 
+In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
+
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r AccountStoreLevelApiCreateStoreInput - Request parameters, see CreateStoreInput
 @return Store, *http.Response, error
@@ -148,6 +150,8 @@ Creates a store for the merchant account identified in the path.
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Stores read and write
 
+In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
+
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r AccountStoreLevelApiCreateStoreByMerchantIdInput - Request parameters, see CreateStoreByMerchantIdInput
 @return Store, *http.Response, error
@@ -245,6 +249,8 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Stores read
 * Management API—Stores read and write
 
+In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
+
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r AccountStoreLevelApiGetStoreInput - Request parameters, see GetStoreInput
 @return Store, *http.Response, error
@@ -340,6 +346,8 @@ Returns the details of the store identified in the path.
 To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Stores read
 * Management API—Stores read and write
+
+In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r AccountStoreLevelApiGetStoreByIdInput - Request parameters, see GetStoreByIdInput
@@ -460,6 +468,8 @@ Returns a list of stores. The list is grouped into pages as defined by the query
 To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Stores read
 * Management API—Stores read and write
+
+In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r AccountStoreLevelApiListStoresInput - Request parameters, see ListStoresInput
@@ -588,6 +598,8 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Stores read
 * Management API—Stores read and write
 
+In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
+
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r AccountStoreLevelApiListStoresByMerchantIdInput - Request parameters, see ListStoresByMerchantIdInput
 @return ListStoresResponse, *http.Response, error
@@ -699,6 +711,8 @@ Updates the store identified in the path. You can only update some store paramet
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Stores read and write
 
+In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
+
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r AccountStoreLevelApiUpdateStoreInput - Request parameters, see UpdateStoreInput
 @return Store, *http.Response, error
@@ -800,6 +814,8 @@ You can only update some store parameters.
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Stores read and write
+
+In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r AccountStoreLevelApiUpdateStoreByIdInput - Request parameters, see UpdateStoreByIdInput

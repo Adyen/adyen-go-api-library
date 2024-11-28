@@ -50,6 +50,8 @@ To cancel an order, make a POST call without a request body. The response return
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Terminal ordering read and write
 
+In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
+
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TerminalOrdersCompanyLevelApiCancelOrderInput - Request parameters, see CancelOrderInput
 @return TerminalOrder, *http.Response, error
@@ -152,6 +154,8 @@ To make this request, your API credential must have the following [role](https:/
 * Management API—Terminal ordering read and write
 >Requests to the Management API test endpoint do not create actual orders for test terminals. To order test terminals, you need to [submit a sales order](https://docs.adyen.com/point-of-sale/managing-terminals/order-terminals/#sales-order-steps) in your Customer Area.
 
+In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
+
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TerminalOrdersCompanyLevelApiCreateOrderInput - Request parameters, see CreateOrderInput
 @return TerminalOrder, *http.Response, error
@@ -252,6 +256,8 @@ Creates a shipping location for the company identified in the path. A shipping l
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Terminal ordering read and write
 
+In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
+
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TerminalOrdersCompanyLevelApiCreateShippingLocationInput - Request parameters, see CreateShippingLocationInput
 @return ShippingLocation, *http.Response, error
@@ -348,6 +354,8 @@ Returns the details of the terminal products order identified in the path.
 To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Terminal ordering read
 * Management API—Terminal ordering read and write
+
+In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TerminalOrdersCompanyLevelApiGetOrderInput - Request parameters, see GetOrderInput
@@ -452,6 +460,8 @@ A billing entity is a legal entity where we charge orders to. An order for termi
 To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Terminal ordering read
 * Management API—Terminal ordering read and write
+
+In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TerminalOrdersCompanyLevelApiListBillingEntitiesInput - Request parameters, see ListBillingEntitiesInput
@@ -579,6 +589,8 @@ To filter the list, use one or more of the query parameters.
 To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Terminal ordering read
 * Management API—Terminal ordering read and write
+
+In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TerminalOrdersCompanyLevelApiListOrdersInput - Request parameters, see ListOrdersInput
@@ -709,6 +721,8 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Terminal ordering read
 * Management API—Terminal ordering read and write
 
+In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
+
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TerminalOrdersCompanyLevelApiListShippingLocationsInput - Request parameters, see ListShippingLocationsInput
 @return ShippingLocationsResponse, *http.Response, error
@@ -813,6 +827,8 @@ The response includes the terminal model ID, which can be used as a query parame
 To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Terminal ordering read
 * Management API—Terminal ordering read and write
+
+In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TerminalOrdersCompanyLevelApiListTerminalModelsInput - Request parameters, see ListTerminalModelsInput
@@ -937,6 +953,8 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Terminal ordering read
 * Management API—Terminal ordering read and write
 
+In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
+
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TerminalOrdersCompanyLevelApiListTerminalProductsInput - Request parameters, see ListTerminalProductsInput
 @return TerminalProductsResponse, *http.Response, error
@@ -1055,6 +1073,8 @@ However, to update the products in the `items` array, you must provide the entir
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Terminal ordering read and write
+
+In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TerminalOrdersCompanyLevelApiUpdateOrderInput - Request parameters, see UpdateOrderInput

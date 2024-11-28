@@ -23,12 +23,13 @@ type PaymentRequest struct {
 	AccountInfo      *AccountInfo `json:"accountInfo,omitempty"`
 	AdditionalAmount *Amount      `json:"additionalAmount,omitempty"`
 	// This field contains additional data, which may be required for a particular payment request.  The `additionalData` object consists of entries, each of which includes the key and value.
-	AdditionalData     *map[string]string  `json:"additionalData,omitempty"`
-	Amount             Amount              `json:"amount"`
-	ApplicationInfo    *ApplicationInfo    `json:"applicationInfo,omitempty"`
-	AuthenticationData *AuthenticationData `json:"authenticationData,omitempty"`
-	BillingAddress     *BillingAddress     `json:"billingAddress,omitempty"`
-	BrowserInfo        *BrowserInfo        `json:"browserInfo,omitempty"`
+	AdditionalData     *map[string]string   `json:"additionalData,omitempty"`
+	Amount             Amount               `json:"amount"`
+	ApplicationInfo    *ApplicationInfo     `json:"applicationInfo,omitempty"`
+	AuthenticationData *AuthenticationData  `json:"authenticationData,omitempty"`
+	BankAccount        *CheckoutBankAccount `json:"bankAccount,omitempty"`
+	BillingAddress     *BillingAddress      `json:"billingAddress,omitempty"`
+	BrowserInfo        *BrowserInfo         `json:"browserInfo,omitempty"`
 	// The delay between the authorisation and scheduled auto-capture, specified in hours.
 	CaptureDelayHours *int32 `json:"captureDelayHours,omitempty"`
 	// The platform where a payment transaction takes place. This field is optional for filtering out payment methods that are only available on specific platforms. If this value is not set, then we will try to infer it from the `sdkVersion` or `token`.  Possible values: * iOS * Android * Web
@@ -108,6 +109,8 @@ type PaymentRequest struct {
 	RiskData  *RiskData `json:"riskData,omitempty"`
 	// The date and time until when the session remains valid, in [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format.  For example: 2020-07-18T15:42:40.428+01:00
 	SessionValidity *string `json:"sessionValidity,omitempty"`
+	// A unique ID that can be used to associate `/paymentMethods` and `/payments` requests with the same shopper transaction, offering insights into conversion rates.
+	ShopperConversionId *string `json:"shopperConversionId,omitempty"`
 	// The shopper's email address. We recommend that you provide this data, as it is used in velocity fraud checks. > For 3D Secure 2 transactions, schemes require `shopperEmail` for all browser-based and mobile implementations.
 	ShopperEmail *string `json:"shopperEmail,omitempty"`
 	// The shopper's IP address. In general, we recommend that you provide this data, as it is used in a number of risk checks (for instance, number of payment attempts or location-based checks). > For 3D Secure 2 transactions, schemes require `shopperIP` for all browser-based implementations. This field is also mandatory for some merchants depending on your business model. For more information, [contact Support](https://www.adyen.help/hc/en-us/requests/new).
@@ -350,6 +353,38 @@ func (o *PaymentRequest) HasAuthenticationData() bool {
 // SetAuthenticationData gets a reference to the given AuthenticationData and assigns it to the AuthenticationData field.
 func (o *PaymentRequest) SetAuthenticationData(v AuthenticationData) {
 	o.AuthenticationData = &v
+}
+
+// GetBankAccount returns the BankAccount field value if set, zero value otherwise.
+func (o *PaymentRequest) GetBankAccount() CheckoutBankAccount {
+	if o == nil || common.IsNil(o.BankAccount) {
+		var ret CheckoutBankAccount
+		return ret
+	}
+	return *o.BankAccount
+}
+
+// GetBankAccountOk returns a tuple with the BankAccount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentRequest) GetBankAccountOk() (*CheckoutBankAccount, bool) {
+	if o == nil || common.IsNil(o.BankAccount) {
+		return nil, false
+	}
+	return o.BankAccount, true
+}
+
+// HasBankAccount returns a boolean if a field has been set.
+func (o *PaymentRequest) HasBankAccount() bool {
+	if o != nil && !common.IsNil(o.BankAccount) {
+		return true
+	}
+
+	return false
+}
+
+// SetBankAccount gets a reference to the given CheckoutBankAccount and assigns it to the BankAccount field.
+func (o *PaymentRequest) SetBankAccount(v CheckoutBankAccount) {
+	o.BankAccount = &v
 }
 
 // GetBillingAddress returns the BillingAddress field value if set, zero value otherwise.
@@ -1804,6 +1839,38 @@ func (o *PaymentRequest) SetSessionValidity(v string) {
 	o.SessionValidity = &v
 }
 
+// GetShopperConversionId returns the ShopperConversionId field value if set, zero value otherwise.
+func (o *PaymentRequest) GetShopperConversionId() string {
+	if o == nil || common.IsNil(o.ShopperConversionId) {
+		var ret string
+		return ret
+	}
+	return *o.ShopperConversionId
+}
+
+// GetShopperConversionIdOk returns a tuple with the ShopperConversionId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentRequest) GetShopperConversionIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.ShopperConversionId) {
+		return nil, false
+	}
+	return o.ShopperConversionId, true
+}
+
+// HasShopperConversionId returns a boolean if a field has been set.
+func (o *PaymentRequest) HasShopperConversionId() bool {
+	if o != nil && !common.IsNil(o.ShopperConversionId) {
+		return true
+	}
+
+	return false
+}
+
+// SetShopperConversionId gets a reference to the given string and assigns it to the ShopperConversionId field.
+func (o *PaymentRequest) SetShopperConversionId(v string) {
+	o.ShopperConversionId = &v
+}
+
 // GetShopperEmail returns the ShopperEmail field value if set, zero value otherwise.
 func (o *PaymentRequest) GetShopperEmail() string {
 	if o == nil || common.IsNil(o.ShopperEmail) {
@@ -2348,6 +2415,9 @@ func (o PaymentRequest) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.AuthenticationData) {
 		toSerialize["authenticationData"] = o.AuthenticationData
 	}
+	if !common.IsNil(o.BankAccount) {
+		toSerialize["bankAccount"] = o.BankAccount
+	}
 	if !common.IsNil(o.BillingAddress) {
 		toSerialize["billingAddress"] = o.BillingAddress
 	}
@@ -2477,6 +2547,9 @@ func (o PaymentRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.SessionValidity) {
 		toSerialize["sessionValidity"] = o.SessionValidity
+	}
+	if !common.IsNil(o.ShopperConversionId) {
+		toSerialize["shopperConversionId"] = o.ShopperConversionId
 	}
 	if !common.IsNil(o.ShopperEmail) {
 		toSerialize["shopperEmail"] = o.ShopperEmail

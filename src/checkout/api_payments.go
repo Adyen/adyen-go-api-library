@@ -47,9 +47,11 @@ func (a *PaymentsApi) CardDetailsInput() PaymentsApiCardDetailsInput {
 }
 
 /*
-CardDetails Get the list of brands on the card
+CardDetails Get the brands and other details of a card
 
-Send a request with at least the first 6 digits of the card number to get a response with an array of brands on the card. If you include [your supported brands](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/cardDetails__reqParam_supportedBrands) in the request, the response also tells you if you support each [brand that was identified](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/cardDetails__resParam_details).
+Use this endpoint to get information about the card or network token that enables you to decideon the routing of the transaction and the eligibility of the card for the type of transaction.
+
+If you include [your supported brands](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/cardDetails__reqParam_supportedBrands) in the request, the response also tells you if you support each [brand that was identified on the card](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/cardDetails__resParam_details).
 
 If you have an API-only integration and collect card data, use this endpoint to find out if the shopper's card is co-branded. For co-branded cards, you must let the shopper choose the brand to pay with  if you support both brands.
 
