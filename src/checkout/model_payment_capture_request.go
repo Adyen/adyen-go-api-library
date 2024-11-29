@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v14/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v14/src/common"
 )
 
 // checks if the PaymentCaptureRequest type satisfies the MappedNullable interface at compile time
@@ -18,12 +19,12 @@ var _ common.MappedNullable = &PaymentCaptureRequest{}
 
 // PaymentCaptureRequest struct for PaymentCaptureRequest
 type PaymentCaptureRequest struct {
-	Amount Amount `json:"amount"`
+	Amount          Amount           `json:"amount"`
 	ApplicationInfo *ApplicationInfo `json:"applicationInfo,omitempty"`
 	// Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment). > This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Atome, Clearpay, Klarna, Ratepay, Walley, and Zip.
 	LineItems []LineItem `json:"lineItems,omitempty"`
 	// The merchant account that is used to process the payment.
-	MerchantAccount string `json:"merchantAccount"`
+	MerchantAccount         string                   `json:"merchantAccount"`
 	PlatformChargebackLogic *PlatformChargebackLogic `json:"platformChargebackLogic,omitempty"`
 	// Your reference for the capture request. Maximum length: 80 characters.
 	Reference *string `json:"reference,omitempty"`
@@ -293,7 +294,7 @@ func (o *PaymentCaptureRequest) SetSubMerchants(v []SubMerchantInfo) {
 }
 
 func (o PaymentCaptureRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -360,6 +361,3 @@ func (v *NullablePaymentCaptureRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

@@ -10,8 +10,9 @@ package balanceplatform
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v14/src/common"
 	"time"
+
+	"github.com/adyen/adyen-go-api-library/v14/src/common"
 )
 
 // checks if the NetworkToken type satisfies the MappedNullable interface at compile time
@@ -22,8 +23,8 @@ type NetworkToken struct {
 	// The card brand variant of the payment instrument associated with the network token. For example, **mc_prepaid_mrw**.
 	BrandVariant *string `json:"brandVariant,omitempty"`
 	// Date and time when the network token was created, in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) extended format. For example, **2020-12-18T10:15:30+01:00**..
-	CreationDate *time.Time `json:"creationDate,omitempty"`
-	Device *DeviceInfo `json:"device,omitempty"`
+	CreationDate *time.Time  `json:"creationDate,omitempty"`
+	Device       *DeviceInfo `json:"device,omitempty"`
 	// The unique identifier of the network token.
 	Id *string `json:"id,omitempty"`
 	// The unique identifier of the payment instrument to which this network token belongs to.
@@ -310,7 +311,7 @@ func (o *NetworkToken) SetType(v string) {
 }
 
 func (o NetworkToken) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -382,14 +383,12 @@ func (v *NullableNetworkToken) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *NetworkToken) isValidStatus() bool {
-    var allowedEnumValues = []string{ "active", "inactive", "suspended", "closed" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetStatus() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"active", "inactive", "suspended", "closed"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetStatus() == allowed {
+			return true
+		}
+	}
+	return false
 }
-
