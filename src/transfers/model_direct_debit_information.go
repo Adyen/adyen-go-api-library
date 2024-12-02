@@ -12,7 +12,7 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/adyen/adyen-go-api-library/v14/src/common"
+	"github.com/adyen/adyen-go-api-library/v15/src/common"
 )
 
 // checks if the DirectDebitInformation type satisfies the MappedNullable interface at compile time
