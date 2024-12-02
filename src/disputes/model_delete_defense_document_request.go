@@ -11,7 +11,7 @@ package disputes
 import (
 	"encoding/json"
 
-	"github.com/adyen/adyen-go-api-library/v14/src/common"
+	"github.com/adyen/adyen-go-api-library/v15/src/common"
 )
 
 // checks if the DeleteDefenseDocumentRequest type satisfies the MappedNullable interface at compile time
