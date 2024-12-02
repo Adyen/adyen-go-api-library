@@ -9,7 +9,7 @@ API version: 68
 package payments
 
 import (
-	"github.com/adyen/adyen-go-api-library/v14/src/common"
+	"github.com/adyen/adyen-go-api-library/v15/src/common"
 )
 
 // APIClient manages communication with the Adyen Payment API API v68
