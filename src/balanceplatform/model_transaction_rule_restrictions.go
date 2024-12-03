@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v16/src/common"
+    "github.com/adyen/adyen-go-api-library/v16/src/common"
 )
 
 // checks if the TransactionRuleRestrictions type satisfies the MappedNullable interface at compile time
@@ -19,25 +18,25 @@ var _ common.MappedNullable = &TransactionRuleRestrictions{}
 
 // TransactionRuleRestrictions struct for TransactionRuleRestrictions
 type TransactionRuleRestrictions struct {
-	ActiveNetworkTokens         *ActiveNetworkTokensRestriction      `json:"activeNetworkTokens,omitempty"`
-	BrandVariants               *BrandVariantsRestriction            `json:"brandVariants,omitempty"`
-	CounterpartyBank            *CounterpartyBankRestriction         `json:"counterpartyBank,omitempty"`
-	Countries                   *CountriesRestriction                `json:"countries,omitempty"`
-	DayOfWeek                   *DayOfWeekRestriction                `json:"dayOfWeek,omitempty"`
-	DifferentCurrencies         *DifferentCurrenciesRestriction      `json:"differentCurrencies,omitempty"`
-	EntryModes                  *EntryModesRestriction               `json:"entryModes,omitempty"`
-	InternationalTransaction    *InternationalTransactionRestriction `json:"internationalTransaction,omitempty"`
-	MatchingTransactions        *MatchingTransactionsRestriction     `json:"matchingTransactions,omitempty"`
-	MatchingValues              *MatchingValuesRestriction           `json:"matchingValues,omitempty"`
-	Mccs                        *MccsRestriction                     `json:"mccs,omitempty"`
-	MerchantNames               *MerchantNamesRestriction            `json:"merchantNames,omitempty"`
-	Merchants                   *MerchantsRestriction                `json:"merchants,omitempty"`
-	ProcessingTypes             *ProcessingTypesRestriction          `json:"processingTypes,omitempty"`
-	RiskScores                  *RiskScoresRestriction               `json:"riskScores,omitempty"`
-	SameAmountRestriction       *SameAmountRestriction               `json:"sameAmountRestriction,omitempty"`
-	SameCounterpartyRestriction *SameCounterpartyRestriction         `json:"sameCounterpartyRestriction,omitempty"`
-	TimeOfDay                   *TimeOfDayRestriction                `json:"timeOfDay,omitempty"`
-	TotalAmount                 *TotalAmountRestriction              `json:"totalAmount,omitempty"`
+	ActiveNetworkTokens *ActiveNetworkTokensRestriction `json:"activeNetworkTokens,omitempty"`
+	BrandVariants *BrandVariantsRestriction `json:"brandVariants,omitempty"`
+	CounterpartyBank *CounterpartyBankRestriction `json:"counterpartyBank,omitempty"`
+	Countries *CountriesRestriction `json:"countries,omitempty"`
+	DayOfWeek *DayOfWeekRestriction `json:"dayOfWeek,omitempty"`
+	DifferentCurrencies *DifferentCurrenciesRestriction `json:"differentCurrencies,omitempty"`
+	EntryModes *EntryModesRestriction `json:"entryModes,omitempty"`
+	InternationalTransaction *InternationalTransactionRestriction `json:"internationalTransaction,omitempty"`
+	MatchingTransactions *MatchingTransactionsRestriction `json:"matchingTransactions,omitempty"`
+	MatchingValues *MatchingValuesRestriction `json:"matchingValues,omitempty"`
+	Mccs *MccsRestriction `json:"mccs,omitempty"`
+	MerchantNames *MerchantNamesRestriction `json:"merchantNames,omitempty"`
+	Merchants *MerchantsRestriction `json:"merchants,omitempty"`
+	ProcessingTypes *ProcessingTypesRestriction `json:"processingTypes,omitempty"`
+	RiskScores *RiskScoresRestriction `json:"riskScores,omitempty"`
+	SameAmountRestriction *SameAmountRestriction `json:"sameAmountRestriction,omitempty"`
+	SameCounterpartyRestriction *SameCounterpartyRestriction `json:"sameCounterpartyRestriction,omitempty"`
+	TimeOfDay *TimeOfDayRestriction `json:"timeOfDay,omitempty"`
+	TotalAmount *TotalAmountRestriction `json:"totalAmount,omitempty"`
 }
 
 // NewTransactionRuleRestrictions instantiates a new TransactionRuleRestrictions object
@@ -666,7 +665,7 @@ func (o *TransactionRuleRestrictions) SetTotalAmount(v TotalAmountRestriction) {
 }
 
 func (o TransactionRuleRestrictions) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -770,3 +769,6 @@ func (v *NullableTransactionRuleRestrictions) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
