@@ -262,6 +262,7 @@ Read our [**contribution guidelines**](CONTRIBUTING.md) to find out how.
 
 We value your input! Help us enhance our API Libraries and improve the integration experience by providing your feedback. Please take a moment to fill out [our feedback form](https://forms.gle/A4EERrR6CWgKWe5r9) to share your thoughts, suggestions or ideas.
 
-## Licence
+## License
 
 MIT license. For more information, see the LICENSE file.
+
