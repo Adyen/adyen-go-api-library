@@ -10,7 +10,8 @@ package management
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v15/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v15/src/common"
 )
 
 // checks if the StoreAndForward type satisfies the MappedNullable interface at compile time
@@ -21,7 +22,7 @@ type StoreAndForward struct {
 	// The maximum amount that the terminal accepts for a single store-and-forward payment.
 	MaxAmount []MinorUnitsMonetaryValue `json:"maxAmount,omitempty"`
 	// The maximum number of store-and-forward transactions per terminal that you can process while offline.
-	MaxPayments *int32 `json:"maxPayments,omitempty"`
+	MaxPayments        *int32              `json:"maxPayments,omitempty"`
 	SupportedCardTypes *SupportedCardTypes `json:"supportedCardTypes,omitempty"`
 }
 
@@ -139,7 +140,7 @@ func (o *StoreAndForward) SetSupportedCardTypes(v SupportedCardTypes) {
 }
 
 func (o StoreAndForward) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,6 +196,3 @@ func (v *NullableStoreAndForward) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

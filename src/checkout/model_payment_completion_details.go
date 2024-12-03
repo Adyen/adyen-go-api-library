@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v15/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v15/src/common"
 )
 
 // checks if the PaymentCompletionDetails type satisfies the MappedNullable interface at compile time
@@ -23,7 +24,7 @@ type PaymentCompletionDetails struct {
 	// (3D) Payment Authentication Request data for the card issuer.
 	PaReq *string `json:"PaReq,omitempty"`
 	// (3D) Payment Authentication Response data by the card issuer.
-	PaRes *string `json:"PaRes,omitempty"`
+	PaRes              *string `json:"PaRes,omitempty"`
 	AuthorizationToken *string `json:"authorization_token,omitempty"`
 	// PayPal-generated token for recurring payments.
 	BillingToken *string `json:"billingToken,omitempty"`
@@ -717,7 +718,7 @@ func (o *PaymentCompletionDetails) SetVaultToken(v string) {
 }
 
 func (o PaymentCompletionDetails) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -824,6 +825,3 @@ func (v *NullablePaymentCompletionDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

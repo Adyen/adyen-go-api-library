@@ -10,7 +10,8 @@ package management
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v15/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v15/src/common"
 )
 
 // checks if the TerminalOrderRequest type satisfies the MappedNullable interface at compile time
@@ -242,7 +243,7 @@ func (o *TerminalOrderRequest) SetTaxId(v string) {
 }
 
 func (o TerminalOrderRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -307,6 +308,3 @@ func (v *NullableTerminalOrderRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

@@ -10,7 +10,8 @@ package payments
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v15/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v15/src/common"
 )
 
 // checks if the ModificationResult type satisfies the MappedNullable interface at compile time
@@ -126,7 +127,7 @@ func (o *ModificationResult) SetResponse(v string) {
 }
 
 func (o ModificationResult) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -179,14 +180,12 @@ func (v *NullableModificationResult) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *ModificationResult) isValidResponse() bool {
-    var allowedEnumValues = []string{ "[capture-received]", "[cancel-received]", "[refund-received]", "[cancelOrRefund-received]", "[adjustAuthorisation-received]", "[donation-received]", "[technical-cancel-received]", "[voidPendingRefund-received]", "Authorised" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetResponse() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"[capture-received]", "[cancel-received]", "[refund-received]", "[cancelOrRefund-received]", "[adjustAuthorisation-received]", "[donation-received]", "[technical-cancel-received]", "[voidPendingRefund-received]", "Authorised"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetResponse() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

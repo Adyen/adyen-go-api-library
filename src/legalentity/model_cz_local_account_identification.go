@@ -10,7 +10,8 @@ package legalentity
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v15/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v15/src/common"
 )
 
 // checks if the CZLocalAccountIdentification type satisfies the MappedNullable interface at compile time
@@ -121,7 +122,7 @@ func (o *CZLocalAccountIdentification) SetType(v string) {
 }
 
 func (o CZLocalAccountIdentification) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -172,14 +173,12 @@ func (v *NullableCZLocalAccountIdentification) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *CZLocalAccountIdentification) isValidType() bool {
-    var allowedEnumValues = []string{ "czLocal" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"czLocal"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

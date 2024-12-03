@@ -10,7 +10,8 @@ package management
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v15/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v15/src/common"
 )
 
 // checks if the Connectivity type satisfies the MappedNullable interface at compile time
@@ -19,7 +20,7 @@ var _ common.MappedNullable = &Connectivity{}
 // Connectivity struct for Connectivity
 type Connectivity struct {
 	// Indicates the status of the SIM card in the payment terminal. Can be updated and received only at terminal level, and only for models that support cellular connectivity.  Possible values: * **ACTIVATED**: the SIM card is activated. Cellular connectivity may still need to be enabled on the terminal itself, in the **Network** settings. * **INVENTORY**: the SIM card is not activated. The terminal can't use cellular connectivity.
-	SimcardStatus *string `json:"simcardStatus,omitempty"`
+	SimcardStatus        *string   `json:"simcardStatus,omitempty"`
 	TerminalIPAddressURL *EventUrl `json:"terminalIPAddressURL,omitempty"`
 }
 
@@ -105,7 +106,7 @@ func (o *Connectivity) SetTerminalIPAddressURL(v EventUrl) {
 }
 
 func (o Connectivity) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -159,14 +160,12 @@ func (v *NullableConnectivity) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *Connectivity) isValidSimcardStatus() bool {
-    var allowedEnumValues = []string{ "ACTIVATED", "INVENTORY" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetSimcardStatus() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"ACTIVATED", "INVENTORY"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetSimcardStatus() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

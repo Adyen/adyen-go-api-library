@@ -10,10 +10,10 @@ package posterminalmanagement
 
 import (
 	"context"
-    "net/http"
-    "net/url"
-    "strings"
-    "github.com/adyen/adyen-go-api-library/v15/src/common"
+	"net/http"
+	"net/url"
+
+	"github.com/adyen/adyen-go-api-library/v15/src/common"
 )
 
 // GeneralApi service
@@ -29,15 +29,13 @@ func (r GeneralApiAssignTerminalsInput) AssignTerminalsRequest(assignTerminalsRe
 	return r
 }
 
-
 /*
 Prepare a request for AssignTerminals
 
 @return GeneralApiAssignTerminalsInput
 */
 func (a *GeneralApi) AssignTerminalsInput() GeneralApiAssignTerminalsInput {
-	return GeneralApiAssignTerminalsInput{
-	}
+	return GeneralApiAssignTerminalsInput{}
 }
 
 /*
@@ -50,25 +48,23 @@ Assigns one or more payment terminals to a merchant account or a store. You can 
 @return AssignTerminalsResponse, *http.Response, error
 */
 func (a *GeneralApi) AssignTerminals(ctx context.Context, r GeneralApiAssignTerminalsInput) (AssignTerminalsResponse, *http.Response, error) {
-    res := &AssignTerminalsResponse{}
+	res := &AssignTerminalsResponse{}
 	path := "/assignTerminals"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.assignTerminalsRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.assignTerminalsRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by GeneralApi.FindTerminal
 type GeneralApiFindTerminalInput struct {
@@ -80,15 +76,13 @@ func (r GeneralApiFindTerminalInput) FindTerminalRequest(findTerminalRequest Fin
 	return r
 }
 
-
 /*
 Prepare a request for FindTerminal
 
 @return GeneralApiFindTerminalInput
 */
 func (a *GeneralApi) FindTerminalInput() GeneralApiFindTerminalInput {
-	return GeneralApiFindTerminalInput{
-	}
+	return GeneralApiFindTerminalInput{}
 }
 
 /*
@@ -101,25 +95,23 @@ Returns the company account, merchant account, or store that a payment terminal 
 @return FindTerminalResponse, *http.Response, error
 */
 func (a *GeneralApi) FindTerminal(ctx context.Context, r GeneralApiFindTerminalInput) (FindTerminalResponse, *http.Response, error) {
-    res := &FindTerminalResponse{}
+	res := &FindTerminalResponse{}
 	path := "/findTerminal"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.findTerminalRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.findTerminalRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by GeneralApi.GetStoresUnderAccount
 type GeneralApiGetStoresUnderAccountInput struct {
@@ -131,15 +123,13 @@ func (r GeneralApiGetStoresUnderAccountInput) GetStoresUnderAccountRequest(getSt
 	return r
 }
 
-
 /*
 Prepare a request for GetStoresUnderAccount
 
 @return GeneralApiGetStoresUnderAccountInput
 */
 func (a *GeneralApi) GetStoresUnderAccountInput() GeneralApiGetStoresUnderAccountInput {
-	return GeneralApiGetStoresUnderAccountInput{
-	}
+	return GeneralApiGetStoresUnderAccountInput{}
 }
 
 /*
@@ -152,25 +142,23 @@ Returns a list of stores associated with a company account or a merchant account
 @return GetStoresUnderAccountResponse, *http.Response, error
 */
 func (a *GeneralApi) GetStoresUnderAccount(ctx context.Context, r GeneralApiGetStoresUnderAccountInput) (GetStoresUnderAccountResponse, *http.Response, error) {
-    res := &GetStoresUnderAccountResponse{}
+	res := &GetStoresUnderAccountResponse{}
 	path := "/getStoresUnderAccount"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.getStoresUnderAccountRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.getStoresUnderAccountRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by GeneralApi.GetTerminalDetails
 type GeneralApiGetTerminalDetailsInput struct {
@@ -182,15 +170,13 @@ func (r GeneralApiGetTerminalDetailsInput) GetTerminalDetailsRequest(getTerminal
 	return r
 }
 
-
 /*
 Prepare a request for GetTerminalDetails
 
 @return GeneralApiGetTerminalDetailsInput
 */
 func (a *GeneralApi) GetTerminalDetailsInput() GeneralApiGetTerminalDetailsInput {
-	return GeneralApiGetTerminalDetailsInput{
-	}
+	return GeneralApiGetTerminalDetailsInput{}
 }
 
 /*
@@ -203,25 +189,23 @@ Returns the details of a payment terminal, including where the terminal is assig
 @return GetTerminalDetailsResponse, *http.Response, error
 */
 func (a *GeneralApi) GetTerminalDetails(ctx context.Context, r GeneralApiGetTerminalDetailsInput) (GetTerminalDetailsResponse, *http.Response, error) {
-    res := &GetTerminalDetailsResponse{}
+	res := &GetTerminalDetailsResponse{}
 	path := "/getTerminalDetails"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.getTerminalDetailsRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.getTerminalDetailsRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by GeneralApi.GetTerminalsUnderAccount
 type GeneralApiGetTerminalsUnderAccountInput struct {
@@ -233,15 +217,13 @@ func (r GeneralApiGetTerminalsUnderAccountInput) GetTerminalsUnderAccountRequest
 	return r
 }
 
-
 /*
 Prepare a request for GetTerminalsUnderAccount
 
 @return GeneralApiGetTerminalsUnderAccountInput
 */
 func (a *GeneralApi) GetTerminalsUnderAccountInput() GeneralApiGetTerminalsUnderAccountInput {
-	return GeneralApiGetTerminalsUnderAccountInput{
-	}
+	return GeneralApiGetTerminalsUnderAccountInput{}
 }
 
 /*
@@ -254,22 +236,20 @@ Returns a list of payment terminals associated with a company account, merchant 
 @return GetTerminalsUnderAccountResponse, *http.Response, error
 */
 func (a *GeneralApi) GetTerminalsUnderAccount(ctx context.Context, r GeneralApiGetTerminalsUnderAccountInput) (GetTerminalsUnderAccountResponse, *http.Response, error) {
-    res := &GetTerminalsUnderAccountResponse{}
+	res := &GetTerminalsUnderAccountResponse{}
 	path := "/getTerminalsUnderAccount"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.getTerminalsUnderAccountRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.getTerminalsUnderAccountRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-

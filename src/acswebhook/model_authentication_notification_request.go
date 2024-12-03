@@ -10,7 +10,8 @@ package acswebhook
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v15/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v15/src/common"
 )
 
 // checks if the AuthenticationNotificationRequest type satisfies the MappedNullable interface at compile time
@@ -118,7 +119,7 @@ func (o *AuthenticationNotificationRequest) SetType(v string) {
 }
 
 func (o AuthenticationNotificationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -169,14 +170,12 @@ func (v *NullableAuthenticationNotificationRequest) UnmarshalJSON(src []byte) er
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *AuthenticationNotificationRequest) isValidType() bool {
-    var allowedEnumValues = []string{ "balancePlatform.authentication.created" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"balancePlatform.authentication.created"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

@@ -10,7 +10,8 @@ package recurring
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v15/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v15/src/common"
 )
 
 // checks if the TokenDetails type satisfies the MappedNullable interface at compile time
@@ -18,8 +19,8 @@ var _ common.MappedNullable = &TokenDetails{}
 
 // TokenDetails struct for TokenDetails
 type TokenDetails struct {
-	TokenData *map[string]string `json:"tokenData,omitempty"`
-	TokenDataType *string `json:"tokenDataType,omitempty"`
+	TokenData     *map[string]string `json:"tokenData,omitempty"`
+	TokenDataType *string            `json:"tokenDataType,omitempty"`
 }
 
 // NewTokenDetails instantiates a new TokenDetails object
@@ -104,7 +105,7 @@ func (o *TokenDetails) SetTokenDataType(v string) {
 }
 
 func (o TokenDetails) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,6 +158,3 @@ func (v *NullableTokenDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

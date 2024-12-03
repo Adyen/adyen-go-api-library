@@ -10,7 +10,8 @@ package disputes
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v15/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v15/src/common"
 )
 
 // checks if the SupplyDefenseDocumentRequest type satisfies the MappedNullable interface at compile time
@@ -119,7 +120,7 @@ func (o *SupplyDefenseDocumentRequest) SetMerchantAccountCode(v string) {
 }
 
 func (o SupplyDefenseDocumentRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -169,6 +170,3 @@ func (v *NullableSupplyDefenseDocumentRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

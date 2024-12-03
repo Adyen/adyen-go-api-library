@@ -10,7 +10,8 @@ package disputewebhook
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v15/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v15/src/common"
 )
 
 // checks if the BalancePlatformNotificationResponse type satisfies the MappedNullable interface at compile time
@@ -72,7 +73,7 @@ func (o *BalancePlatformNotificationResponse) SetNotificationResponse(v string) 
 }
 
 func (o BalancePlatformNotificationResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -122,6 +123,3 @@ func (v *NullableBalancePlatformNotificationResponse) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-
