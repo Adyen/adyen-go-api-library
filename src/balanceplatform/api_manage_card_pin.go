@@ -10,12 +10,10 @@ package balanceplatform
 
 import (
 	"context"
-	"encoding/json"
-	"io/ioutil"
-	"net/http"
-	"net/url"
-
-	"github.com/adyen/adyen-go-api-library/v14/src/common"
+    "net/http"
+    "net/url"
+    "strings"
+    "github.com/adyen/adyen-go-api-library/v14/src/common"
 )
 
 // ManageCardPINApi service
@@ -31,13 +29,15 @@ func (r ManageCardPINApiChangeCardPinInput) PinChangeRequest(pinChangeRequest Pi
 	return r
 }
 
+
 /*
 Prepare a request for ChangeCardPin
 
 @return ManageCardPINApiChangeCardPinInput
 */
 func (a *ManageCardPINApi) ChangeCardPinInput() ManageCardPINApiChangeCardPinInput {
-	return ManageCardPINApiChangeCardPinInput{}
+	return ManageCardPINApiChangeCardPinInput{
+	}
 }
 
 /*
@@ -53,66 +53,67 @@ To make this request, your API credential must have the following role:
 @return PinChangeResponse, *http.Response, error
 */
 func (a *ManageCardPINApi) ChangeCardPin(ctx context.Context, r ManageCardPINApiChangeCardPinInput) (PinChangeResponse, *http.Response, error) {
-	res := &PinChangeResponse{}
+    res := &PinChangeResponse{}
 	path := "/pins/change"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.pinChangeRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.pinChangeRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	if httpRes == nil {
-		return *res, httpRes, err
-	}
+    if httpRes == nil {
+        return *res, httpRes, err
+    }
 
-	var serviceError common.RestServiceError
-	if httpRes.StatusCode == 401 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 403 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 422 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 500 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
+    var serviceError common.RestServiceError
+                        if httpRes.StatusCode == 401 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 403 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 422 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 500 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
 
-	return *res, httpRes, err
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by ManageCardPINApi.PublicKey
 type ManageCardPINApiPublicKeyInput struct {
 	purpose *string
-	format  *string
+	format *string
 }
 
 // The purpose of the public key.  Possible values: **pinChange**, **pinReveal**, **panReveal**.  Default value: **pinReveal**.
@@ -127,13 +128,15 @@ func (r ManageCardPINApiPublicKeyInput) Format(format string) ManageCardPINApiPu
 	return r
 }
 
+
 /*
 Prepare a request for PublicKey
 
 @return ManageCardPINApiPublicKeyInput
 */
 func (a *ManageCardPINApi) PublicKeyInput() ManageCardPINApiPublicKeyInput {
-	return ManageCardPINApiPublicKeyInput{}
+	return ManageCardPINApiPublicKeyInput{
+	}
 }
 
 /*
@@ -151,67 +154,68 @@ Get an [RSA](https://en.wikipedia.org/wiki/RSA_(cryptosystem)) public key to enc
 @return PublicKeyResponse, *http.Response, error
 */
 func (a *ManageCardPINApi) PublicKey(ctx context.Context, r ManageCardPINApiPublicKeyInput) (PublicKeyResponse, *http.Response, error) {
-	res := &PublicKeyResponse{}
+    res := &PublicKeyResponse{}
 	path := "/publicKey"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	if r.purpose != nil {
-		common.ParameterAddToQuery(queryParams, "purpose", r.purpose, "")
-	}
-	if r.format != nil {
-		common.ParameterAddToQuery(queryParams, "format", r.format, "")
-	}
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		nil,
-		res,
-		http.MethodGet,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    if r.purpose != nil {
+        common.ParameterAddToQuery(queryParams, "purpose", r.purpose, "")
+    }
+    if r.format != nil {
+        common.ParameterAddToQuery(queryParams, "format", r.format, "")
+    }
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        nil,
+        res,
+        http.MethodGet,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	if httpRes == nil {
-		return *res, httpRes, err
-	}
+    if httpRes == nil {
+        return *res, httpRes, err
+    }
 
-	var serviceError common.RestServiceError
-	if httpRes.StatusCode == 401 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 403 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 422 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 500 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
+    var serviceError common.RestServiceError
+                        if httpRes.StatusCode == 401 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 403 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 422 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 500 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
 
-	return *res, httpRes, err
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by ManageCardPINApi.RevealCardPin
 type ManageCardPINApiRevealCardPinInput struct {
@@ -223,13 +227,15 @@ func (r ManageCardPINApiRevealCardPinInput) RevealPinRequest(revealPinRequest Re
 	return r
 }
 
+
 /*
 Prepare a request for RevealCardPin
 
 @return ManageCardPINApiRevealCardPinInput
 */
 func (a *ManageCardPINApi) RevealCardPinInput() ManageCardPINApiRevealCardPinInput {
-	return ManageCardPINApiRevealCardPinInput{}
+	return ManageCardPINApiRevealCardPinInput{
+	}
 }
 
 /*
@@ -245,58 +251,59 @@ To make this request, your API credential must have the following role:
 @return RevealPinResponse, *http.Response, error
 */
 func (a *ManageCardPINApi) RevealCardPin(ctx context.Context, r ManageCardPINApiRevealCardPinInput) (RevealPinResponse, *http.Response, error) {
-	res := &RevealPinResponse{}
+    res := &RevealPinResponse{}
 	path := "/pins/reveal"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.revealPinRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.revealPinRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	if httpRes == nil {
-		return *res, httpRes, err
-	}
+    if httpRes == nil {
+        return *res, httpRes, err
+    }
 
-	var serviceError common.RestServiceError
-	if httpRes.StatusCode == 401 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 403 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 422 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 500 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
+    var serviceError common.RestServiceError
+                        if httpRes.StatusCode == 401 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 403 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 422 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 500 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
 
-	return *res, httpRes, err
+    return *res, httpRes, err
 }
+

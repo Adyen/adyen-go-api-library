@@ -10,11 +10,10 @@ package checkout
 
 import (
 	"context"
-	"net/http"
-	"net/url"
-	"strings"
-
-	"github.com/adyen/adyen-go-api-library/v14/src/common"
+    "net/http"
+    "net/url"
+    "strings"
+    "github.com/adyen/adyen-go-api-library/v14/src/common"
 )
 
 // PaymentsApi service
@@ -22,7 +21,7 @@ type PaymentsApi common.Service
 
 // All parameters accepted by PaymentsApi.CardDetails
 type PaymentsApiCardDetailsInput struct {
-	idempotencyKey     *string
+	idempotencyKey *string
 	cardDetailsRequest *CardDetailsRequest
 }
 
@@ -37,13 +36,15 @@ func (r PaymentsApiCardDetailsInput) CardDetailsRequest(cardDetailsRequest CardD
 	return r
 }
 
+
 /*
 Prepare a request for CardDetails
 
 @return PaymentsApiCardDetailsInput
 */
 func (a *PaymentsApi) CardDetailsInput() PaymentsApiCardDetailsInput {
-	return PaymentsApiCardDetailsInput{}
+	return PaymentsApiCardDetailsInput{
+	}
 }
 
 /*
@@ -62,30 +63,32 @@ If you have an API-only integration and collect card data, use this endpoint to 
 @return CardDetailsResponse, *http.Response, error
 */
 func (a *PaymentsApi) CardDetails(ctx context.Context, r PaymentsApiCardDetailsInput) (CardDetailsResponse, *http.Response, error) {
-	res := &CardDetailsResponse{}
+    res := &CardDetailsResponse{}
 	path := "/cardDetails"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	if r.idempotencyKey != nil {
-		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
-	}
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.cardDetailsRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    if r.idempotencyKey != nil {
+        common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
+    }
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.cardDetailsRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by PaymentsApi.GetResultOfPaymentSession
 type PaymentsApiGetResultOfPaymentSessionInput struct {
-	sessionId     string
+	sessionId string
 	sessionResult *string
 }
 
@@ -94,6 +97,7 @@ func (r PaymentsApiGetResultOfPaymentSessionInput) SessionResult(sessionResult s
 	r.sessionResult = &sessionResult
 	return r
 }
+
 
 /*
 Prepare a request for GetResultOfPaymentSession
@@ -116,31 +120,33 @@ Returns the status of the payment session with the `sessionId` and `sessionResul
 @return SessionResultResponse, *http.Response, error
 */
 func (a *PaymentsApi) GetResultOfPaymentSession(ctx context.Context, r PaymentsApiGetResultOfPaymentSessionInput) (SessionResultResponse, *http.Response, error) {
-	res := &SessionResultResponse{}
+    res := &SessionResultResponse{}
 	path := "/sessions/{sessionId}"
-	path = strings.Replace(path, "{"+"sessionId"+"}", url.PathEscape(common.ParameterValueToString(r.sessionId, "sessionId")), -1)
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	if r.sessionResult != nil {
-		common.ParameterAddToQuery(queryParams, "sessionResult", r.sessionResult, "")
-	}
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		nil,
-		res,
-		http.MethodGet,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    path = strings.Replace(path, "{"+"sessionId"+"}", url.PathEscape(common.ParameterValueToString(r.sessionId, "sessionId")), -1)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    if r.sessionResult != nil {
+        common.ParameterAddToQuery(queryParams, "sessionResult", r.sessionResult, "")
+    }
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        nil,
+        res,
+        http.MethodGet,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by PaymentsApi.PaymentMethods
 type PaymentsApiPaymentMethodsInput struct {
-	idempotencyKey        *string
+	idempotencyKey *string
 	paymentMethodsRequest *PaymentMethodsRequest
 }
 
@@ -155,13 +161,15 @@ func (r PaymentsApiPaymentMethodsInput) PaymentMethodsRequest(paymentMethodsRequ
 	return r
 }
 
+
 /*
 Prepare a request for PaymentMethods
 
 @return PaymentsApiPaymentMethodsInput
 */
 func (a *PaymentsApi) PaymentMethodsInput() PaymentsApiPaymentMethodsInput {
-	return PaymentsApiPaymentMethodsInput{}
+	return PaymentsApiPaymentMethodsInput{
+	}
 }
 
 /*
@@ -176,26 +184,28 @@ Although we highly recommend using this endpoint to ensure you are always offeri
 @return PaymentMethodsResponse, *http.Response, error
 */
 func (a *PaymentsApi) PaymentMethods(ctx context.Context, r PaymentsApiPaymentMethodsInput) (PaymentMethodsResponse, *http.Response, error) {
-	res := &PaymentMethodsResponse{}
+    res := &PaymentMethodsResponse{}
 	path := "/paymentMethods"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	if r.idempotencyKey != nil {
-		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
-	}
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.paymentMethodsRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    if r.idempotencyKey != nil {
+        common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
+    }
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.paymentMethodsRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by PaymentsApi.Payments
 type PaymentsApiPaymentsInput struct {
@@ -214,52 +224,56 @@ func (r PaymentsApiPaymentsInput) PaymentRequest(paymentRequest PaymentRequest) 
 	return r
 }
 
+
 /*
 Prepare a request for Payments
 
 @return PaymentsApiPaymentsInput
 */
 func (a *PaymentsApi) PaymentsInput() PaymentsApiPaymentsInput {
-	return PaymentsApiPaymentsInput{}
+	return PaymentsApiPaymentsInput{
+	}
 }
 
 /*
 Payments Start a transaction
 
-Sends payment parameters (like amount, country, and currency) together with other required input details collected from the shopper. To know more about required parameters for specific payment methods, refer to our [payment method guides](https://docs.adyen.com/payment-methods).
+Sends payment parameters (like amount, country, and currency) together with other required input details collected from the shopper. To know more about required parameters for specific payment methods, refer to our [payment method guides](https://docs.adyen.com/payment-methods). 
 The response depends on the [payment flow](https://docs.adyen.com/payment-methods#payment-flow):
-* For a direct flow, the response includes a `pspReference` and a `resultCode` with the payment result, for example **Authorised** or **Refused**.
-* For a redirect or additional action, the response contains an `action` object.
+* For a direct flow, the response includes a `pspReference` and a `resultCode` with the payment result, for example **Authorised** or **Refused**. 
+* For a redirect or additional action, the response contains an `action` object. 
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r PaymentsApiPaymentsInput - Request parameters, see PaymentsInput
 @return PaymentResponse, *http.Response, error
 */
 func (a *PaymentsApi) Payments(ctx context.Context, r PaymentsApiPaymentsInput) (PaymentResponse, *http.Response, error) {
-	res := &PaymentResponse{}
+    res := &PaymentResponse{}
 	path := "/payments"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	if r.idempotencyKey != nil {
-		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
-	}
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.paymentRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    if r.idempotencyKey != nil {
+        common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
+    }
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.paymentRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by PaymentsApi.PaymentsDetails
 type PaymentsApiPaymentsDetailsInput struct {
-	idempotencyKey        *string
+	idempotencyKey *string
 	paymentDetailsRequest *PaymentDetailsRequest
 }
 
@@ -274,13 +288,15 @@ func (r PaymentsApiPaymentsDetailsInput) PaymentDetailsRequest(paymentDetailsReq
 	return r
 }
 
+
 /*
 Prepare a request for PaymentsDetails
 
 @return PaymentsApiPaymentsDetailsInput
 */
 func (a *PaymentsApi) PaymentsDetailsInput() PaymentsApiPaymentsDetailsInput {
-	return PaymentsApiPaymentsDetailsInput{}
+	return PaymentsApiPaymentsDetailsInput{
+	}
 }
 
 /*
@@ -295,30 +311,32 @@ Submits details for a payment created using `/payments`. This step is only neede
 @return PaymentDetailsResponse, *http.Response, error
 */
 func (a *PaymentsApi) PaymentsDetails(ctx context.Context, r PaymentsApiPaymentsDetailsInput) (PaymentDetailsResponse, *http.Response, error) {
-	res := &PaymentDetailsResponse{}
+    res := &PaymentDetailsResponse{}
 	path := "/payments/details"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	if r.idempotencyKey != nil {
-		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
-	}
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.paymentDetailsRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    if r.idempotencyKey != nil {
+        common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
+    }
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.paymentDetailsRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by PaymentsApi.Sessions
 type PaymentsApiSessionsInput struct {
-	idempotencyKey               *string
+	idempotencyKey *string
 	createCheckoutSessionRequest *CreateCheckoutSessionRequest
 }
 
@@ -333,13 +351,15 @@ func (r PaymentsApiSessionsInput) CreateCheckoutSessionRequest(createCheckoutSes
 	return r
 }
 
+
 /*
 Prepare a request for Sessions
 
 @return PaymentsApiSessionsInput
 */
 func (a *PaymentsApi) SessionsInput() PaymentsApiSessionsInput {
-	return PaymentsApiSessionsInput{}
+	return PaymentsApiSessionsInput{
+	}
 }
 
 /*
@@ -356,23 +376,25 @@ You get the payment outcome asynchronously, in an [AUTHORISATION](https://docs.a
 @return CreateCheckoutSessionResponse, *http.Response, error
 */
 func (a *PaymentsApi) Sessions(ctx context.Context, r PaymentsApiSessionsInput) (CreateCheckoutSessionResponse, *http.Response, error) {
-	res := &CreateCheckoutSessionResponse{}
+    res := &CreateCheckoutSessionResponse{}
 	path := "/sessions"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	if r.idempotencyKey != nil {
-		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
-	}
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.createCheckoutSessionRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    if r.idempotencyKey != nil {
+        common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
+    }
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.createCheckoutSessionRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+
