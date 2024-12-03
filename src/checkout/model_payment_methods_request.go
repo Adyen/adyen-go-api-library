@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v15/src/common"
+    "github.com/adyen/adyen-go-api-library/v15/src/common"
 )
 
 // checks if the PaymentMethodsRequest type satisfies the MappedNullable interface at compile time
@@ -23,7 +22,7 @@ type PaymentMethodsRequest struct {
 	AdditionalData *map[string]string `json:"additionalData,omitempty"`
 	// List of payment methods to be presented to the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).  Example: `\"allowedPaymentMethods\":[\"ideal\",\"giropay\"]`
 	AllowedPaymentMethods []string `json:"allowedPaymentMethods,omitempty"`
-	Amount                *Amount  `json:"amount,omitempty"`
+	Amount *Amount `json:"amount,omitempty"`
 	// List of payment methods to be hidden from the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).  Example: `\"blockedPaymentMethods\":[\"ideal\",\"giropay\"]`
 	BlockedPaymentMethods []string `json:"blockedPaymentMethods,omitempty"`
 	// The platform where a payment transaction takes place. This field can be used for filtering out payment methods that are only available on specific platforms. Possible values: * iOS * Android * Web
@@ -31,8 +30,10 @@ type PaymentMethodsRequest struct {
 	// The shopper's country code.
 	CountryCode *string `json:"countryCode,omitempty"`
 	// The merchant account identifier, with which you want to process the transaction.
-	MerchantAccount string              `json:"merchantAccount"`
-	Order           *EncryptedOrderData `json:"order,omitempty"`
+	MerchantAccount string `json:"merchantAccount"`
+	Order *EncryptedOrderData `json:"order,omitempty"`
+	// A unique ID that can be used to associate `/paymentMethods` and `/payments` requests with the same shopper transaction, offering insights into conversion rates.
+	ShopperConversionId *string `json:"shopperConversionId,omitempty"`
 	// The combination of a language code and a country code to specify the language to be used in the payment.
 	ShopperLocale *string `json:"shopperLocale,omitempty"`
 	// Required for recurring payments.  Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters. > Your reference must not include personally identifiable information (PII), for example name or email address.
@@ -315,6 +316,38 @@ func (o *PaymentMethodsRequest) SetOrder(v EncryptedOrderData) {
 	o.Order = &v
 }
 
+// GetShopperConversionId returns the ShopperConversionId field value if set, zero value otherwise.
+func (o *PaymentMethodsRequest) GetShopperConversionId() string {
+	if o == nil || common.IsNil(o.ShopperConversionId) {
+		var ret string
+		return ret
+	}
+	return *o.ShopperConversionId
+}
+
+// GetShopperConversionIdOk returns a tuple with the ShopperConversionId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodsRequest) GetShopperConversionIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.ShopperConversionId) {
+		return nil, false
+	}
+	return o.ShopperConversionId, true
+}
+
+// HasShopperConversionId returns a boolean if a field has been set.
+func (o *PaymentMethodsRequest) HasShopperConversionId() bool {
+	if o != nil && !common.IsNil(o.ShopperConversionId) {
+		return true
+	}
+
+	return false
+}
+
+// SetShopperConversionId gets a reference to the given string and assigns it to the ShopperConversionId field.
+func (o *PaymentMethodsRequest) SetShopperConversionId(v string) {
+	o.ShopperConversionId = &v
+}
+
 // GetShopperLocale returns the ShopperLocale field value if set, zero value otherwise.
 func (o *PaymentMethodsRequest) GetShopperLocale() string {
 	if o == nil || common.IsNil(o.ShopperLocale) {
@@ -476,7 +509,7 @@ func (o *PaymentMethodsRequest) SetStoreFiltrationMode(v string) {
 }
 
 func (o PaymentMethodsRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -506,6 +539,9 @@ func (o PaymentMethodsRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["merchantAccount"] = o.MerchantAccount
 	if !common.IsNil(o.Order) {
 		toSerialize["order"] = o.Order
+	}
+	if !common.IsNil(o.ShopperConversionId) {
+		toSerialize["shopperConversionId"] = o.ShopperConversionId
 	}
 	if !common.IsNil(o.ShopperLocale) {
 		toSerialize["shopperLocale"] = o.ShopperLocale
@@ -561,21 +597,23 @@ func (v *NullablePaymentMethodsRequest) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *PaymentMethodsRequest) isValidChannel() bool {
-	var allowedEnumValues = []string{"iOS", "Android", "Web"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetChannel() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "iOS", "Android", "Web" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetChannel() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *PaymentMethodsRequest) isValidStoreFiltrationMode() bool {
-	var allowedEnumValues = []string{"exclusive", "inclusive", "skipFilter"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetStoreFiltrationMode() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "exclusive", "inclusive", "skipFilter" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetStoreFiltrationMode() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

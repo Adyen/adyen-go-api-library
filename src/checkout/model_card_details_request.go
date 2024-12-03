@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v15/src/common"
+    "github.com/adyen/adyen-go-api-library/v15/src/common"
 )
 
 // checks if the CardDetailsRequest type satisfies the MappedNullable interface at compile time
@@ -19,7 +18,7 @@ var _ common.MappedNullable = &CardDetailsRequest{}
 
 // CardDetailsRequest struct for CardDetailsRequest
 type CardDetailsRequest struct {
-	// A minimum of the first 8 digits of the card number and a maximum of the full card number. 11 digits gives the best result.   You must be [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide) to collect raw card data.
+	// A minimum of the first eight digits of the card number. The full card number gives the best result.   You must be [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide) to collect raw card data.
 	CardNumber string `json:"cardNumber"`
 	// The shopper country.  Format: [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) Example: NL or DE
 	CountryCode *string `json:"countryCode,omitempty"`
@@ -195,7 +194,7 @@ func (o *CardDetailsRequest) SetSupportedBrands(v []string) {
 }
 
 func (o CardDetailsRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -253,3 +252,6 @@ func (v *NullableCardDetailsRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

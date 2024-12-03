@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v15/src/common"
+    "github.com/adyen/adyen-go-api-library/v15/src/common"
 )
 
 // checks if the AdditionalCommission type satisfies the MappedNullable interface at compile time
@@ -141,7 +140,7 @@ func (o *AdditionalCommission) SetVariablePercentage(v int64) {
 }
 
 func (o AdditionalCommission) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -197,3 +196,6 @@ func (v *NullableAdditionalCommission) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

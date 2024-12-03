@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v15/src/common"
+    "github.com/adyen/adyen-go-api-library/v15/src/common"
 )
 
 // checks if the ThreeDSRequestData type satisfies the MappedNullable interface at compile time
@@ -175,7 +174,7 @@ func (o *ThreeDSRequestData) SetThreeDSVersion(v string) {
 }
 
 func (o ThreeDSRequestData) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -235,39 +234,41 @@ func (v *NullableThreeDSRequestData) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *ThreeDSRequestData) isValidChallengeWindowSize() bool {
-	var allowedEnumValues = []string{"01", "02", "03", "04", "05"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetChallengeWindowSize() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "01", "02", "03", "04", "05" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetChallengeWindowSize() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *ThreeDSRequestData) isValidDataOnly() bool {
-	var allowedEnumValues = []string{"false", "true"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetDataOnly() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "false", "true" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetDataOnly() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *ThreeDSRequestData) isValidNativeThreeDS() bool {
-	var allowedEnumValues = []string{"preferred", "disabled"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetNativeThreeDS() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "preferred", "disabled" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetNativeThreeDS() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *ThreeDSRequestData) isValidThreeDSVersion() bool {
-	var allowedEnumValues = []string{"2.1.0", "2.2.0"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetThreeDSVersion() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "2.1.0", "2.2.0" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetThreeDSVersion() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

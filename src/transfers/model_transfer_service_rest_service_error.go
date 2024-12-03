@@ -10,8 +10,7 @@ package transfers
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v15/src/common"
+    "github.com/adyen/adyen-go-api-library/v15/src/common"
 )
 
 // checks if the TransferServiceRestServiceError type satisfies the MappedNullable interface at compile time
@@ -28,8 +27,8 @@ type TransferServiceRestServiceError struct {
 	// Detailed explanation of each validation error, when applicable.
 	InvalidFields []InvalidField `json:"invalidFields,omitempty"`
 	// A unique reference for the request, essentially the same as `pspReference`.
-	RequestId *string                `json:"requestId,omitempty"`
-	Response  map[string]interface{} `json:"response,omitempty"`
+	RequestId *string `json:"requestId,omitempty"`
+	Response map[string]interface{} `json:"response,omitempty"`
 	// Detailed explanation of each attempt to route the transfer with the priorities from the request.
 	RoutingDetails []RoutingDetails `json:"routingDetails,omitempty"`
 	// The HTTP status code.
@@ -343,7 +342,7 @@ func (o *TransferServiceRestServiceError) SetType(v string) {
 }
 
 func (o TransferServiceRestServiceError) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -410,3 +409,6 @@ func (v *NullableTransferServiceRestServiceError) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

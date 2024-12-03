@@ -10,15 +10,16 @@ package transactionwebhook
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v15/src/common"
 	"fmt"
 )
 
 // TransferViewCategoryData - The relevant data according to the transfer category.
 type TransferViewCategoryData struct {
-	BankCategoryData     *BankCategoryData
+	BankCategoryData *BankCategoryData
 	InternalCategoryData *InternalCategoryData
-	IssuedCard           *IssuedCard
-	PlatformPayment      *PlatformPayment
+	IssuedCard *IssuedCard
+	PlatformPayment *PlatformPayment
 }
 
 // BankCategoryDataAsTransferViewCategoryData is a convenience function that returns BankCategoryData wrapped in TransferViewCategoryData
@@ -49,6 +50,7 @@ func PlatformPaymentAsTransferViewCategoryData(v *PlatformPayment) TransferViewC
 	}
 }
 
+
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *TransferViewCategoryData) UnmarshalJSON(data []byte) error {
 	var err error
@@ -59,7 +61,7 @@ func (dst *TransferViewCategoryData) UnmarshalJSON(data []byte) error {
 		jsonBankCategoryData, _ := json.Marshal(dst.BankCategoryData)
 		if string(jsonBankCategoryData) == "{}" || !dst.BankCategoryData.isValidType() { // empty struct
 			dst.BankCategoryData = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -72,7 +74,7 @@ func (dst *TransferViewCategoryData) UnmarshalJSON(data []byte) error {
 		jsonInternalCategoryData, _ := json.Marshal(dst.InternalCategoryData)
 		if string(jsonInternalCategoryData) == "{}" || !dst.InternalCategoryData.isValidType() { // empty struct
 			dst.InternalCategoryData = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -85,7 +87,7 @@ func (dst *TransferViewCategoryData) UnmarshalJSON(data []byte) error {
 		jsonIssuedCard, _ := json.Marshal(dst.IssuedCard)
 		if string(jsonIssuedCard) == "{}" || !dst.IssuedCard.isValidType() { // empty struct
 			dst.IssuedCard = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -98,7 +100,7 @@ func (dst *TransferViewCategoryData) UnmarshalJSON(data []byte) error {
 		jsonPlatformPayment, _ := json.Marshal(dst.PlatformPayment)
 		if string(jsonPlatformPayment) == "{}" || !dst.PlatformPayment.isValidType() { // empty struct
 			dst.PlatformPayment = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -142,7 +144,7 @@ func (src TransferViewCategoryData) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *TransferViewCategoryData) GetActualInstance() interface{} {
+func (obj *TransferViewCategoryData) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
@@ -201,3 +203,5 @@ func (v *NullableTransferViewCategoryData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

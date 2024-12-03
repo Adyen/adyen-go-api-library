@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v15/src/common"
+    "github.com/adyen/adyen-go-api-library/v15/src/common"
 )
 
 // checks if the FundOrigin type satisfies the MappedNullable interface at compile time
@@ -22,7 +21,7 @@ type FundOrigin struct {
 	BillingAddress *Address `json:"billingAddress,omitempty"`
 	// The email address of the person funding the money.
 	ShopperEmail *string `json:"shopperEmail,omitempty"`
-	ShopperName  *Name   `json:"shopperName,omitempty"`
+	ShopperName *Name `json:"shopperName,omitempty"`
 	// The phone number of the person funding the money.
 	TelephoneNumber *string `json:"telephoneNumber,omitempty"`
 	// The unique identifier of the wallet where the funds are coming from.
@@ -207,7 +206,7 @@ func (o *FundOrigin) SetWalletIdentifier(v string) {
 }
 
 func (o FundOrigin) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -269,3 +268,6 @@ func (v *NullableFundOrigin) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v15/src/common"
+    "github.com/adyen/adyen-go-api-library/v15/src/common"
 )
 
 // checks if the IdentificationData type satisfies the MappedNullable interface at compile time
@@ -24,7 +23,7 @@ type IdentificationData struct {
 	// The expiry date of the document, in YYYY-MM-DD format.
 	ExpiryDate *string `json:"expiryDate,omitempty"`
 	// The two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code where the document was issued. For example, **US**.
-	// Deprecated since Legal Entity Management API v1
+    // Deprecated since Legal Entity Management API v1
 	IssuerCountry *string `json:"issuerCountry,omitempty"`
 	// The state or province where the document was issued (AU only).
 	IssuerState *string `json:"issuerState,omitempty"`
@@ -32,7 +31,7 @@ type IdentificationData struct {
 	NationalIdExempt *bool `json:"nationalIdExempt,omitempty"`
 	// The number in the document.
 	Number *string `json:"number,omitempty"`
-	// Type of identity data. For individuals, the following types are supported:  - Australia: **driversLicense**, **passport**  - Hong Kong: **driversLicense**, **nationalIdNumber**, **passport**  - New Zealand: **driversLicense**, **passport**  - Singapore: **driversLicense**, **nationalIdNumber**, **passport**   - All other supported countries: **nationalIdNumber**
+	// Type of identity data. For individuals, the following types are supported. See our [onboarding guide](https://docs.adyen.com/platforms/onboard-users/onboarding-steps/?onboarding_type=custom) for other supported countries.  - Australia: **driversLicense**, **passport**  - Hong Kong: **driversLicense**, **nationalIdNumber**, **passport**  - New Zealand: **driversLicense**, **passport**  - Singapore: **driversLicense**, **nationalIdNumber**, **passport**   - All other supported countries: **nationalIdNumber**
 	Type string `json:"type"`
 }
 
@@ -274,7 +273,7 @@ func (o *IdentificationData) SetType(v string) {
 }
 
 func (o IdentificationData) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -341,12 +340,14 @@ func (v *NullableIdentificationData) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *IdentificationData) isValidType() bool {
-	var allowedEnumValues = []string{"nationalIdNumber", "passport", "driversLicense", "identityCard"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "nationalIdNumber", "passport", "driversLicense", "identityCard" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

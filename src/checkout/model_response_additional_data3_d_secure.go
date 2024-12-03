@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v15/src/common"
+    "github.com/adyen/adyen-go-api-library/v15/src/common"
 )
 
 // checks if the ResponseAdditionalData3DSecure type satisfies the MappedNullable interface at compile time
@@ -19,13 +18,13 @@ var _ common.MappedNullable = &ResponseAdditionalData3DSecure{}
 
 // ResponseAdditionalData3DSecure struct for ResponseAdditionalData3DSecure
 type ResponseAdditionalData3DSecure struct {
-	// Information provided by the issuer to the cardholder. If this field is present, you need to display this information to the cardholder.
+	// Information provided by the issuer to the cardholder. If this field is present, you need to display this information to the cardholder. 
 	CardHolderInfo *string `json:"cardHolderInfo,omitempty"`
 	// The Cardholder Authentication Verification Value (CAVV) for the 3D Secure authentication session, as a Base64-encoded 20-byte array.
 	Cavv *string `json:"cavv,omitempty"`
 	// The CAVV algorithm used.
 	CavvAlgorithm *string `json:"cavvAlgorithm,omitempty"`
-	// Shows the [exemption type](https://docs.adyen.com/payments-fundamentals/psd2-sca-compliance-and-implementation-guide#specifypreferenceinyourapirequest) that Adyen requested for the payment.   Possible values: * **lowValue**  * **secureCorporate**  * **trustedBeneficiary**  * **transactionRiskAnalysis**
+	// Shows the [exemption type](https://docs.adyen.com/payments-fundamentals/psd2-sca-compliance-and-implementation-guide#specifypreferenceinyourapirequest) that Adyen requested for the payment.   Possible values: * **lowValue**  * **secureCorporate**  * **trustedBeneficiary**  * **transactionRiskAnalysis** 
 	ScaExemptionRequested *string `json:"scaExemptionRequested,omitempty"`
 	// Indicates whether a card is enrolled for 3D Secure 2.
 	Threeds2CardEnrolled *bool `json:"threeds2.cardEnrolled,omitempty"`
@@ -209,7 +208,7 @@ func (o *ResponseAdditionalData3DSecure) SetThreeds2CardEnrolled(v bool) {
 }
 
 func (o ResponseAdditionalData3DSecure) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -271,3 +270,6 @@ func (v *NullableResponseAdditionalData3DSecure) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
