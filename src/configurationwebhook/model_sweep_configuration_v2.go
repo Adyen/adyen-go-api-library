@@ -32,8 +32,6 @@ type SweepConfigurationV2 struct {
 	Priorities []string `json:"priorities,omitempty"`
 	// The reason for disabling the sweep.
 	Reason *string `json:"reason,omitempty"`
-	// The human readable reason for disabling the sweep.
-	ReasonDetail *string `json:"reasonDetail,omitempty"`
 	// Your reference for the sweep configuration.
 	Reference *string `json:"reference,omitempty"`
 	// The reference sent to or received from the counterparty. Only alphanumeric characters are allowed.
@@ -271,38 +269,6 @@ func (o *SweepConfigurationV2) HasReason() bool {
 // SetReason gets a reference to the given string and assigns it to the Reason field.
 func (o *SweepConfigurationV2) SetReason(v string) {
 	o.Reason = &v
-}
-
-// GetReasonDetail returns the ReasonDetail field value if set, zero value otherwise.
-func (o *SweepConfigurationV2) GetReasonDetail() string {
-	if o == nil || common.IsNil(o.ReasonDetail) {
-		var ret string
-		return ret
-	}
-	return *o.ReasonDetail
-}
-
-// GetReasonDetailOk returns a tuple with the ReasonDetail field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SweepConfigurationV2) GetReasonDetailOk() (*string, bool) {
-	if o == nil || common.IsNil(o.ReasonDetail) {
-		return nil, false
-	}
-	return o.ReasonDetail, true
-}
-
-// HasReasonDetail returns a boolean if a field has been set.
-func (o *SweepConfigurationV2) HasReasonDetail() bool {
-	if o != nil && !common.IsNil(o.ReasonDetail) {
-		return true
-	}
-
-	return false
-}
-
-// SetReasonDetail gets a reference to the given string and assigns it to the ReasonDetail field.
-func (o *SweepConfigurationV2) SetReasonDetail(v string) {
-	o.ReasonDetail = &v
 }
 
 // GetReference returns the Reference field value if set, zero value otherwise.
@@ -577,9 +543,6 @@ func (o SweepConfigurationV2) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Reason) {
 		toSerialize["reason"] = o.Reason
-	}
-	if !common.IsNil(o.ReasonDetail) {
-		toSerialize["reasonDetail"] = o.ReasonDetail
 	}
 	if !common.IsNil(o.Reference) {
 		toSerialize["reference"] = o.Reference

@@ -58,8 +58,6 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Terminal settings read
 * Management API—Terminal settings read and write
 
-In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
-
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TerminalSettingsStoreLevelApiGetTerminalLogoInput - Request parameters, see GetTerminalLogoInput
 @return Logo, *http.Response, error
@@ -168,8 +166,6 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Terminal settings read
 * Management API—Terminal settings read and write
 
-In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
-
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TerminalSettingsStoreLevelApiGetTerminalLogoByStoreIdInput - Request parameters, see GetTerminalLogoByStoreIdInput
 @return Logo, *http.Response, error
@@ -273,8 +269,6 @@ To make this request, your API credential must have one of the following [roles]
 For [sensitive terminal settings](https://docs.adyen.com/point-of-sale/automating-terminal-management/configure-terminals-api#sensitive-terminal-settings), your API credential must have the following role:
 * Management API—Terminal settings Advanced read and write
 
-In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
-
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TerminalSettingsStoreLevelApiGetTerminalSettingsInput - Request parameters, see GetTerminalSettingsInput
 @return TerminalSettings, *http.Response, error
@@ -373,8 +367,6 @@ To make this request, your API credential must have one of the following [roles]
 
 For [sensitive terminal settings](https://docs.adyen.com/point-of-sale/automating-terminal-management/configure-terminals-api#sensitive-terminal-settings), your API credential must have the following role:
 * Management API—Terminal settings Advanced read and write
-
-In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TerminalSettingsStoreLevelApiGetTerminalSettingsByStoreIdInput - Request parameters, see GetTerminalSettingsByStoreIdInput
@@ -488,8 +480,6 @@ This logo applies to all terminals of the specified model under the store, unles
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Terminal settings read and write
-
-In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TerminalSettingsStoreLevelApiUpdateTerminalLogoInput - Request parameters, see UpdateTerminalLogoInput
@@ -606,8 +596,6 @@ This logo applies to all terminals of the specified model under the store, unles
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Terminal settings read and write
 
-In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
-
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TerminalSettingsStoreLevelApiUpdateTerminalLogoByStoreIdInput - Request parameters, see UpdateTerminalLogoByStoreIdInput
 @return Logo, *http.Response, error
@@ -720,8 +708,6 @@ To make this request, your API credential must have the following [role](https:/
 For [sensitive terminal settings](https://docs.adyen.com/point-of-sale/automating-terminal-management/configure-terminals-api#sensitive-terminal-settings), your API credential must have the following role:
 * Management API—Terminal settings Advanced read and write
 
-In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
-
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TerminalSettingsStoreLevelApiUpdateTerminalSettingsInput - Request parameters, see UpdateTerminalSettingsInput
 @return TerminalSettings, *http.Response, error
@@ -829,8 +815,6 @@ To make this request, your API credential must have the following [role](https:/
 
 For [sensitive terminal settings](https://docs.adyen.com/point-of-sale/automating-terminal-management/configure-terminals-api#sensitive-terminal-settings), your API credential must have the following role:
 * Management API—Terminal settings Advanced read and write
-
-In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TerminalSettingsStoreLevelApiUpdateTerminalSettingsByStoreIdInput - Request parameters, see UpdateTerminalSettingsByStoreIdInput

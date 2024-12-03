@@ -19,12 +19,12 @@ var _ common.MappedNullable = &JCBInfo{}
 
 // JCBInfo struct for JCBInfo
 type JCBInfo struct {
-	// MID (Merchant ID) number. Required for merchants operating in Japan.Format: 14 numeric characters.
+	// MID (Merchant ID) number. Format: 10 numeric characters.  Must be provided for both `noContract` and `gatewayContract` service levels.
 	MidNumber *string `json:"midNumber,omitempty"`
-	// Indicates whether the JCB Merchant ID is reused from a previously setup JCB payment method.  The default value is **false**.For merchants operating in Japan, this field is required and must be set to **true**.
+	// Indicates whether the JCB Merchant ID is reused from a previously setup JCB payment method.  This is applicable for both `noContract` and `gatewayContract` service levels.  The default value is `false`.
 	ReuseMidNumber *bool `json:"reuseMidNumber,omitempty"`
-	// Specifies the service level (settlement type) of this payment method. Required for merchants operating in Japan. Possible values: * **noContract**: Adyen holds the contract with JCB. * **gatewayContract**: JCB receives the settlement and handles disputes, then pays out to you or your sub-merchant directly.
-	ServiceLevel           *string                     `json:"serviceLevel,omitempty"`
+	// Specifies the service level (settlement type) of this payment method. Possible values: * **noContract** — Adyen holds the contract with JCB. * **gatewayContract** — JCB receives the settlement and handles disputes. They then pay out to the merchant directly.
+	ServiceLevel           string                      `json:"serviceLevel"`
 	TransactionDescription *TransactionDescriptionInfo `json:"transactionDescription,omitempty"`
 }
 
@@ -32,10 +32,11 @@ type JCBInfo struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewJCBInfo() *JCBInfo {
+func NewJCBInfo(serviceLevel string) *JCBInfo {
 	this := JCBInfo{}
 	var reuseMidNumber bool = false
 	this.ReuseMidNumber = &reuseMidNumber
+	this.ServiceLevel = serviceLevel
 	return &this
 }
 
@@ -113,36 +114,28 @@ func (o *JCBInfo) SetReuseMidNumber(v bool) {
 	o.ReuseMidNumber = &v
 }
 
-// GetServiceLevel returns the ServiceLevel field value if set, zero value otherwise.
+// GetServiceLevel returns the ServiceLevel field value
 func (o *JCBInfo) GetServiceLevel() string {
-	if o == nil || common.IsNil(o.ServiceLevel) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ServiceLevel
+
+	return o.ServiceLevel
 }
 
-// GetServiceLevelOk returns a tuple with the ServiceLevel field value if set, nil otherwise
+// GetServiceLevelOk returns a tuple with the ServiceLevel field value
 // and a boolean to check if the value has been set.
 func (o *JCBInfo) GetServiceLevelOk() (*string, bool) {
-	if o == nil || common.IsNil(o.ServiceLevel) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ServiceLevel, true
+	return &o.ServiceLevel, true
 }
 
-// HasServiceLevel returns a boolean if a field has been set.
-func (o *JCBInfo) HasServiceLevel() bool {
-	if o != nil && !common.IsNil(o.ServiceLevel) {
-		return true
-	}
-
-	return false
-}
-
-// SetServiceLevel gets a reference to the given string and assigns it to the ServiceLevel field.
+// SetServiceLevel sets field value
 func (o *JCBInfo) SetServiceLevel(v string) {
-	o.ServiceLevel = &v
+	o.ServiceLevel = v
 }
 
 // GetTransactionDescription returns the TransactionDescription field value if set, zero value otherwise.
@@ -193,9 +186,7 @@ func (o JCBInfo) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.ReuseMidNumber) {
 		toSerialize["reuseMidNumber"] = o.ReuseMidNumber
 	}
-	if !common.IsNil(o.ServiceLevel) {
-		toSerialize["serviceLevel"] = o.ServiceLevel
-	}
+	toSerialize["serviceLevel"] = o.ServiceLevel
 	if !common.IsNil(o.TransactionDescription) {
 		toSerialize["transactionDescription"] = o.TransactionDescription
 	}

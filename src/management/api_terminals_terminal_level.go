@@ -98,8 +98,6 @@ Returns the payment terminals that the API credential has access to and that mat
 To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API — Terminal actions read
 
-In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
-
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TerminalsTerminalLevelApiListTerminalsInput - Request parameters, see ListTerminalsInput
 @return ListTerminalsResponse, *http.Response, error
@@ -222,8 +220,6 @@ Reassigns a payment terminal to a company account, merchant account, merchant ac
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Assign Terminal
-
-In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TerminalsTerminalLevelApiReassignTerminalInput - Request parameters, see ReassignTerminalInput

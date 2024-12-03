@@ -50,8 +50,6 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Android files read
 * Management API—Android files read and write
 
-In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
-
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r AndroidFilesCompanyLevelApiGetAndroidAppInput - Request parameters, see GetAndroidAppInput
 @return AndroidApp, *http.Response, error
@@ -178,8 +176,6 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Android files read and write
 * Management API—Terminal actions read
 * Management API—Terminal actions read and write
-
-In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r AndroidFilesCompanyLevelApiListAndroidAppsInput - Request parameters, see ListAndroidAppsInput
@@ -312,8 +308,6 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Terminal actions read
 * Management API—Terminal actions read and write
 
-In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
-
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r AndroidFilesCompanyLevelApiListAndroidCertificatesInput - Request parameters, see ListAndroidCertificatesInput
 @return AndroidCertificatesResponse, *http.Response, error
@@ -418,7 +412,6 @@ Reuploads the Android app identified in the path.
 To make this request, your API credential must have this [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Android files read and write
 
-In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
 >By choosing to upload, install, or run any third-party applications on an Adyen payment terminal, you accept full responsibility and liability for any consequences of uploading, installing, or running any such applications.
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -516,7 +509,6 @@ The maximum APK file size is 200 MB.
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Android files read and write
 
-In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
 >By choosing to upload, install, or run any third-party applications on an Adyen payment terminal, you accept full responsibility and liability for any consequences of uploading, installing, or running any such applications.
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -610,7 +602,6 @@ UploadAndroidCertificate Upload Android Certificate
 
 Uploads an Android Certificate file to Adyen.
 
-In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r AndroidFilesCompanyLevelApiUploadAndroidCertificateInput - Request parameters, see UploadAndroidCertificateInput

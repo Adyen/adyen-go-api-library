@@ -33,8 +33,6 @@ type PaymentMethodsRequest struct {
 	// The merchant account identifier, with which you want to process the transaction.
 	MerchantAccount string              `json:"merchantAccount"`
 	Order           *EncryptedOrderData `json:"order,omitempty"`
-	// A unique ID that can be used to associate `/paymentMethods` and `/payments` requests with the same shopper transaction, offering insights into conversion rates.
-	ShopperConversionId *string `json:"shopperConversionId,omitempty"`
 	// The combination of a language code and a country code to specify the language to be used in the payment.
 	ShopperLocale *string `json:"shopperLocale,omitempty"`
 	// Required for recurring payments.  Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters. > Your reference must not include personally identifiable information (PII), for example name or email address.
@@ -317,38 +315,6 @@ func (o *PaymentMethodsRequest) SetOrder(v EncryptedOrderData) {
 	o.Order = &v
 }
 
-// GetShopperConversionId returns the ShopperConversionId field value if set, zero value otherwise.
-func (o *PaymentMethodsRequest) GetShopperConversionId() string {
-	if o == nil || common.IsNil(o.ShopperConversionId) {
-		var ret string
-		return ret
-	}
-	return *o.ShopperConversionId
-}
-
-// GetShopperConversionIdOk returns a tuple with the ShopperConversionId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PaymentMethodsRequest) GetShopperConversionIdOk() (*string, bool) {
-	if o == nil || common.IsNil(o.ShopperConversionId) {
-		return nil, false
-	}
-	return o.ShopperConversionId, true
-}
-
-// HasShopperConversionId returns a boolean if a field has been set.
-func (o *PaymentMethodsRequest) HasShopperConversionId() bool {
-	if o != nil && !common.IsNil(o.ShopperConversionId) {
-		return true
-	}
-
-	return false
-}
-
-// SetShopperConversionId gets a reference to the given string and assigns it to the ShopperConversionId field.
-func (o *PaymentMethodsRequest) SetShopperConversionId(v string) {
-	o.ShopperConversionId = &v
-}
-
 // GetShopperLocale returns the ShopperLocale field value if set, zero value otherwise.
 func (o *PaymentMethodsRequest) GetShopperLocale() string {
 	if o == nil || common.IsNil(o.ShopperLocale) {
@@ -540,9 +506,6 @@ func (o PaymentMethodsRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["merchantAccount"] = o.MerchantAccount
 	if !common.IsNil(o.Order) {
 		toSerialize["order"] = o.Order
-	}
-	if !common.IsNil(o.ShopperConversionId) {
-		toSerialize["shopperConversionId"] = o.ShopperConversionId
 	}
 	if !common.IsNil(o.ShopperLocale) {
 		toSerialize["shopperLocale"] = o.ShopperLocale
