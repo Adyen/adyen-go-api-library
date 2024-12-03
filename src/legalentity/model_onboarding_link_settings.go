@@ -29,8 +29,6 @@ type OnboardingLinkSettings struct {
 	ChangeLegalEntityType *bool `json:"changeLegalEntityType,omitempty"`
 	// Default value: **true**  Indicates if the user can change the country of their legal entity's address, for example the registered address of an organization.
 	EditPrefilledCountry *bool `json:"editPrefilledCountry,omitempty"`
-	// Default value: **false**  Indicates if only users above the age of 18 can be onboarded.
-	EnforceLegalAge *bool `json:"enforceLegalAge,omitempty"`
 	// Default value: **true**  Indicates whether the introduction screen is hidden for the user of the individual legal entity type. The introduction screen provides brief instructions for the subsequent steps in the hosted onboarding process.
 	HideOnboardingIntroductionIndividual *bool `json:"hideOnboardingIntroductionIndividual,omitempty"`
 	// Default value: **true**  Indicates whether the introduction screen is hidden for the user of the organization legal entity type. The introduction screen provides brief instructions for the subsequent steps in the hosted onboarding process.
@@ -228,38 +226,6 @@ func (o *OnboardingLinkSettings) HasEditPrefilledCountry() bool {
 // SetEditPrefilledCountry gets a reference to the given bool and assigns it to the EditPrefilledCountry field.
 func (o *OnboardingLinkSettings) SetEditPrefilledCountry(v bool) {
 	o.EditPrefilledCountry = &v
-}
-
-// GetEnforceLegalAge returns the EnforceLegalAge field value if set, zero value otherwise.
-func (o *OnboardingLinkSettings) GetEnforceLegalAge() bool {
-	if o == nil || common.IsNil(o.EnforceLegalAge) {
-		var ret bool
-		return ret
-	}
-	return *o.EnforceLegalAge
-}
-
-// GetEnforceLegalAgeOk returns a tuple with the EnforceLegalAge field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *OnboardingLinkSettings) GetEnforceLegalAgeOk() (*bool, bool) {
-	if o == nil || common.IsNil(o.EnforceLegalAge) {
-		return nil, false
-	}
-	return o.EnforceLegalAge, true
-}
-
-// HasEnforceLegalAge returns a boolean if a field has been set.
-func (o *OnboardingLinkSettings) HasEnforceLegalAge() bool {
-	if o != nil && !common.IsNil(o.EnforceLegalAge) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnforceLegalAge gets a reference to the given bool and assigns it to the EnforceLegalAge field.
-func (o *OnboardingLinkSettings) SetEnforceLegalAge(v bool) {
-	o.EnforceLegalAge = &v
 }
 
 // GetHideOnboardingIntroductionIndividual returns the HideOnboardingIntroductionIndividual field value if set, zero value otherwise.
@@ -606,9 +572,6 @@ func (o OnboardingLinkSettings) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.EditPrefilledCountry) {
 		toSerialize["editPrefilledCountry"] = o.EditPrefilledCountry
-	}
-	if !common.IsNil(o.EnforceLegalAge) {
-		toSerialize["enforceLegalAge"] = o.EnforceLegalAge
 	}
 	if !common.IsNil(o.HideOnboardingIntroductionIndividual) {
 		toSerialize["hideOnboardingIntroductionIndividual"] = o.HideOnboardingIntroductionIndividual

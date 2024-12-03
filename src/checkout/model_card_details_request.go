@@ -19,7 +19,7 @@ var _ common.MappedNullable = &CardDetailsRequest{}
 
 // CardDetailsRequest struct for CardDetailsRequest
 type CardDetailsRequest struct {
-	// A minimum of the first eight digits of the card number. The full card number gives the best result.   You must be [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide) to collect raw card data.
+	// A minimum of the first 8 digits of the card number and a maximum of the full card number. 11 digits gives the best result.   You must be [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide) to collect raw card data.
 	CardNumber string `json:"cardNumber"`
 	// The shopper country.  Format: [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) Example: NL or DE
 	CountryCode *string `json:"countryCode,omitempty"`

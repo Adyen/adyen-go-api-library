@@ -48,8 +48,6 @@ To make this request, your API credential must have one of the following [roles]
 * Management API—Terminal actions read
 * Management API—Terminal actions read and write
 
-In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
-
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TerminalActionsCompanyLevelApiGetTerminalActionInput - Request parameters, see GetTerminalActionInput
 @return ExternalTerminalAction, *http.Response, error
@@ -172,8 +170,6 @@ Returns the [terminal actions](https://docs.adyen.com/point-of-sale/automating-t
 To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Terminal actions read
 * Management API—Terminal actions read and write
-
-In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TerminalActionsCompanyLevelApiListTerminalActionsInput - Request parameters, see ListTerminalActionsInput
