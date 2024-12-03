@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v16/src/common"
+    "github.com/adyen/adyen-go-api-library/v16/src/common"
 )
 
 // checks if the UnincorporatedPartnership type satisfies the MappedNullable interface at compile time
@@ -28,15 +27,15 @@ type UnincorporatedPartnership struct {
 	// The registered name, if different from the `name`.
 	DoingBusinessAs *string `json:"doingBusinessAs,omitempty"`
 	// The legal name.
-	Name                     string   `json:"name"`
+	Name string `json:"name"`
 	PrincipalPlaceOfBusiness *Address `json:"principalPlaceOfBusiness,omitempty"`
-	RegisteredAddress        Address  `json:"registeredAddress"`
+	RegisteredAddress Address `json:"registeredAddress"`
 	// The registration number.
 	RegistrationNumber *string `json:"registrationNumber,omitempty"`
 	// The tax information of the entity.
 	TaxInformation []TaxInformation `json:"taxInformation,omitempty"`
-	// Type of Partnership.  Possible values: *  **limitedPartnership** *  **generalPartnership** *  **familyPartnership** *  **commercialPartnership** *  **publicPartnership** *  **otherPartnership** *  **gbr** *  **gmbh** *  **kgaa** *  **cv** *  **vof** *  **maatschap** *  **privateFundLimitedPartnership** *  **businessTrustEntity** *  **businessPartnership**
-	Type string `json:"type"`
+	// Type of Partnership.  Possible values: *  **limitedPartnership** *  **generalPartnership** *  **familyPartnership** *  **commercialPartnership** *  **publicPartnership** *  **otherPartnership** *  **gbr** *  **gmbh** *  **kgaa** *  **cv** *  **vof** *  **maatschap** *  **privateFundLimitedPartnership** *  **businessTrustEntity** *  **businessPartnership** *  **limitedLiabilityPartnership** *  **eg** *  **cooperative** *  **vos** *  **comunidadDeBienes** *  **herenciaYacente** *  **comunidadDePropietarios** *  **sep** *  **sca** *  **bt** *  **kkt** *  **scs** *  **snc**  
+	Type *string `json:"type,omitempty"`
 	// The reason for not providing a VAT number.  Possible values: **industryExemption**, **belowTaxThreshold**.
 	VatAbsenceReason *string `json:"vatAbsenceReason,omitempty"`
 	// The VAT number.
@@ -47,12 +46,11 @@ type UnincorporatedPartnership struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUnincorporatedPartnership(countryOfGoverningLaw string, name string, registeredAddress Address, type_ string) *UnincorporatedPartnership {
+func NewUnincorporatedPartnership(countryOfGoverningLaw string, name string, registeredAddress Address) *UnincorporatedPartnership {
 	this := UnincorporatedPartnership{}
 	this.CountryOfGoverningLaw = countryOfGoverningLaw
 	this.Name = name
 	this.RegisteredAddress = registeredAddress
-	this.Type = type_
 	return &this
 }
 
@@ -328,28 +326,36 @@ func (o *UnincorporatedPartnership) SetTaxInformation(v []TaxInformation) {
 	o.TaxInformation = v
 }
 
-// GetType returns the Type field value
+// GetType returns the Type field value if set, zero value otherwise.
 func (o *UnincorporatedPartnership) GetType() string {
-	if o == nil {
+	if o == nil || common.IsNil(o.Type) {
 		var ret string
 		return ret
 	}
-
-	return o.Type
+	return *o.Type
 }
 
-// GetTypeOk returns a tuple with the Type field value
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UnincorporatedPartnership) GetTypeOk() (*string, bool) {
-	if o == nil {
+	if o == nil || common.IsNil(o.Type) {
 		return nil, false
 	}
-	return &o.Type, true
+	return o.Type, true
 }
 
-// SetType sets field value
+// HasType returns a boolean if a field has been set.
+func (o *UnincorporatedPartnership) HasType() bool {
+	if o != nil && !common.IsNil(o.Type) {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given string and assigns it to the Type field.
 func (o *UnincorporatedPartnership) SetType(v string) {
-	o.Type = v
+	o.Type = &v
 }
 
 // GetVatAbsenceReason returns the VatAbsenceReason field value if set, zero value otherwise.
@@ -417,7 +423,7 @@ func (o *UnincorporatedPartnership) SetVatNumber(v string) {
 }
 
 func (o UnincorporatedPartnership) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -447,7 +453,9 @@ func (o UnincorporatedPartnership) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.TaxInformation) {
 		toSerialize["taxInformation"] = o.TaxInformation
 	}
-	toSerialize["type"] = o.Type
+	if !common.IsNil(o.Type) {
+		toSerialize["type"] = o.Type
+	}
 	if !common.IsNil(o.VatAbsenceReason) {
 		toSerialize["vatAbsenceReason"] = o.VatAbsenceReason
 	}
@@ -493,21 +501,23 @@ func (v *NullableUnincorporatedPartnership) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *UnincorporatedPartnership) isValidType() bool {
-	var allowedEnumValues = []string{"limitedPartnership", "generalPartnership", "familyPartnership", "commercialPartnership", "publicPartnership", "otherPartnership", "gbr", "gmbh", "kgaa", "cv", "vof", "maatschap", "privateFundLimitedPartnership", "businessTrustEntity", "businessPartnership"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "limitedPartnership", "generalPartnership", "familyPartnership", "commercialPartnership", "publicPartnership", "otherPartnership", "gbr", "gmbh", "kgaa", "cv", "vof", "maatschap", "privateFundLimitedPartnership", "businessTrustEntity", "businessPartnership", "limitedLiabilityPartnership", "eg", "cooperative", "vos", "comunidadDeBienes", "herenciaYacente", "comunidadDePropietarios", "sep", "sca", "bt", "kkt", "scs", "snc" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *UnincorporatedPartnership) isValidVatAbsenceReason() bool {
-	var allowedEnumValues = []string{"industryExemption", "belowTaxThreshold"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetVatAbsenceReason() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "industryExemption", "belowTaxThreshold" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetVatAbsenceReason() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

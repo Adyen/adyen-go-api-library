@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v16/src/common"
+    "github.com/adyen/adyen-go-api-library/v16/src/common"
 )
 
 // checks if the LegalEntityInfo type satisfies the MappedNullable interface at compile time
@@ -23,14 +22,15 @@ type LegalEntityInfo struct {
 	Capabilities *map[string]LegalEntityCapability `json:"capabilities,omitempty"`
 	// List of legal entities associated with the current legal entity. For example, ultimate beneficial owners associated with an organization through ownership or control, or as signatories.
 	EntityAssociations []LegalEntityAssociation `json:"entityAssociations,omitempty"`
-	Individual         *Individual              `json:"individual,omitempty"`
-	Organization       *Organization            `json:"organization,omitempty"`
+	Individual *Individual `json:"individual,omitempty"`
+	Organization *Organization `json:"organization,omitempty"`
 	// Your reference for the legal entity, maximum 150 characters.
-	Reference          *string             `json:"reference,omitempty"`
+	Reference *string `json:"reference,omitempty"`
 	SoleProprietorship *SoleProprietorship `json:"soleProprietorship,omitempty"`
-	Trust              *Trust              `json:"trust,omitempty"`
+	Trust *Trust `json:"trust,omitempty"`
 	// The type of legal entity.  Possible values: **individual**, **organization**, **soleProprietorship**, or **trust**.
 	Type *string `json:"type,omitempty"`
+	UnincorporatedPartnership *UnincorporatedPartnership `json:"unincorporatedPartnership,omitempty"`
 	// A key-value pair that specifies the verification process for a legal entity. Set to **upfront** for upfront verification for [marketplaces](https://docs.adyen.com/marketplaces/verification-overview/verification-types/#upfront-verification).
 	VerificationPlan *string `json:"verificationPlan,omitempty"`
 }
@@ -308,6 +308,38 @@ func (o *LegalEntityInfo) SetType(v string) {
 	o.Type = &v
 }
 
+// GetUnincorporatedPartnership returns the UnincorporatedPartnership field value if set, zero value otherwise.
+func (o *LegalEntityInfo) GetUnincorporatedPartnership() UnincorporatedPartnership {
+	if o == nil || common.IsNil(o.UnincorporatedPartnership) {
+		var ret UnincorporatedPartnership
+		return ret
+	}
+	return *o.UnincorporatedPartnership
+}
+
+// GetUnincorporatedPartnershipOk returns a tuple with the UnincorporatedPartnership field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LegalEntityInfo) GetUnincorporatedPartnershipOk() (*UnincorporatedPartnership, bool) {
+	if o == nil || common.IsNil(o.UnincorporatedPartnership) {
+		return nil, false
+	}
+	return o.UnincorporatedPartnership, true
+}
+
+// HasUnincorporatedPartnership returns a boolean if a field has been set.
+func (o *LegalEntityInfo) HasUnincorporatedPartnership() bool {
+	if o != nil && !common.IsNil(o.UnincorporatedPartnership) {
+		return true
+	}
+
+	return false
+}
+
+// SetUnincorporatedPartnership gets a reference to the given UnincorporatedPartnership and assigns it to the UnincorporatedPartnership field.
+func (o *LegalEntityInfo) SetUnincorporatedPartnership(v UnincorporatedPartnership) {
+	o.UnincorporatedPartnership = &v
+}
+
 // GetVerificationPlan returns the VerificationPlan field value if set, zero value otherwise.
 func (o *LegalEntityInfo) GetVerificationPlan() string {
 	if o == nil || common.IsNil(o.VerificationPlan) {
@@ -341,7 +373,7 @@ func (o *LegalEntityInfo) SetVerificationPlan(v string) {
 }
 
 func (o LegalEntityInfo) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -373,6 +405,9 @@ func (o LegalEntityInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type
+	}
+	if !common.IsNil(o.UnincorporatedPartnership) {
+		toSerialize["unincorporatedPartnership"] = o.UnincorporatedPartnership
 	}
 	if !common.IsNil(o.VerificationPlan) {
 		toSerialize["verificationPlan"] = o.VerificationPlan
@@ -416,12 +451,14 @@ func (v *NullableLegalEntityInfo) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *LegalEntityInfo) isValidType() bool {
-	var allowedEnumValues = []string{"individual", "organization", "soleProprietorship", "trust", "unincorporatedPartnership"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "individual", "organization", "soleProprietorship", "trust", "unincorporatedPartnership" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

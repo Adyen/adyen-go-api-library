@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v16/src/common"
+    "github.com/adyen/adyen-go-api-library/v16/src/common"
 )
 
 // checks if the GeneratePciDescriptionResponse type satisfies the MappedNullable interface at compile time
@@ -23,7 +22,7 @@ type GeneratePciDescriptionResponse struct {
 	Content *string `json:"content,omitempty"`
 	// The two-letter [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code for the questionnaire. For example, **en**.
 	Language *string `json:"language,omitempty"`
-	// The array of Adyen-generated unique identifiers for the questionnaires.
+	// The array of Adyen-generated unique identifiers for the questionnaires. If empty, the user is not required to sign questionnaires.
 	PciTemplateReferences []string `json:"pciTemplateReferences,omitempty"`
 }
 
@@ -141,7 +140,7 @@ func (o *GeneratePciDescriptionResponse) SetPciTemplateReferences(v []string) {
 }
 
 func (o GeneratePciDescriptionResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -197,3 +196,6 @@ func (v *NullableGeneratePciDescriptionResponse) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
