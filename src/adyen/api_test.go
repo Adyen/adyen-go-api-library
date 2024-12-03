@@ -10,9 +10,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/adyen/adyen-go-api-library/v14/src/checkout"
-	"github.com/adyen/adyen-go-api-library/v14/src/common"
-	"github.com/adyen/adyen-go-api-library/v14/src/recurring"
+	"github.com/adyen/adyen-go-api-library/v15/src/checkout"
+	"github.com/adyen/adyen-go-api-library/v15/src/common"
+	"github.com/adyen/adyen-go-api-library/v15/src/recurring"
 	"github.com/joho/godotenv"
 
 	"github.com/stretchr/testify/assert"
