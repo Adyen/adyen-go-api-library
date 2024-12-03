@@ -3,9 +3,9 @@ package tests
 import (
 	"context"
 	"errors"
-	"github.com/adyen/adyen-go-api-library/v15/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v15/src/common"
-	"github.com/adyen/adyen-go-api-library/v15/src/storedvalue"
+	"github.com/adyen/adyen-go-api-library/v16/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v16/src/common"
+	"github.com/adyen/adyen-go-api-library/v16/src/storedvalue"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"io"

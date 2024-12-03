@@ -1,5 +1,5 @@
 gitUserId: adyen
-gitRepoId: adyen-go-api-library/v15/src
+gitRepoId: adyen-go-api-library/v16/src
 structPrefix: true
 isGoSubmodule: true
 additionalProperties:
