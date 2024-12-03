@@ -50,7 +50,9 @@ type CheckoutPaymentMethod struct {
 	PayUUpiDetails                    *PayUUpiDetails
 	PayWithGoogleDetails              *PayWithGoogleDetails
 	PaymentDetails                    *PaymentDetails
+	PseDetails                        *PseDetails
 	RatepayDetails                    *RatepayDetails
+	RivertyDetails                    *RivertyDetails
 	SamsungPayDetails                 *SamsungPayDetails
 	SepaDirectDebitDetails            *SepaDirectDebitDetails
 	StoredPaymentMethodDetails        *StoredPaymentMethodDetails
@@ -309,10 +311,24 @@ func PaymentDetailsAsCheckoutPaymentMethod(v *PaymentDetails) CheckoutPaymentMet
 	}
 }
 
+// PseDetailsAsCheckoutPaymentMethod is a convenience function that returns PseDetails wrapped in CheckoutPaymentMethod
+func PseDetailsAsCheckoutPaymentMethod(v *PseDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
+		PseDetails: v,
+	}
+}
+
 // RatepayDetailsAsCheckoutPaymentMethod is a convenience function that returns RatepayDetails wrapped in CheckoutPaymentMethod
 func RatepayDetailsAsCheckoutPaymentMethod(v *RatepayDetails) CheckoutPaymentMethod {
 	return CheckoutPaymentMethod{
 		RatepayDetails: v,
+	}
+}
+
+// RivertyDetailsAsCheckoutPaymentMethod is a convenience function that returns RivertyDetails wrapped in CheckoutPaymentMethod
+func RivertyDetailsAsCheckoutPaymentMethod(v *RivertyDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
+		RivertyDetails: v,
 	}
 }
 
@@ -852,6 +868,19 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		dst.PaymentDetails = nil
 	}
 
+	// try to unmarshal data into PseDetails
+	err = json.Unmarshal(data, &dst.PseDetails)
+	if err == nil {
+		jsonPseDetails, _ := json.Marshal(dst.PseDetails)
+		if string(jsonPseDetails) == "{}" || !dst.PseDetails.isValidType() { // empty struct
+			dst.PseDetails = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.PseDetails = nil
+	}
+
 	// try to unmarshal data into RatepayDetails
 	err = json.Unmarshal(data, &dst.RatepayDetails)
 	if err == nil {
@@ -863,6 +892,19 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		}
 	} else {
 		dst.RatepayDetails = nil
+	}
+
+	// try to unmarshal data into RivertyDetails
+	err = json.Unmarshal(data, &dst.RivertyDetails)
+	if err == nil {
+		jsonRivertyDetails, _ := json.Marshal(dst.RivertyDetails)
+		if string(jsonRivertyDetails) == "{}" || !dst.RivertyDetails.isValidType() { // empty struct
+			dst.RivertyDetails = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.RivertyDetails = nil
 	}
 
 	// try to unmarshal data into SamsungPayDetails
@@ -1045,7 +1087,9 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		dst.PayUUpiDetails = nil
 		dst.PayWithGoogleDetails = nil
 		dst.PaymentDetails = nil
+		dst.PseDetails = nil
 		dst.RatepayDetails = nil
+		dst.RivertyDetails = nil
 		dst.SamsungPayDetails = nil
 		dst.SepaDirectDebitDetails = nil
 		dst.StoredPaymentMethodDetails = nil
@@ -1208,8 +1252,16 @@ func (src CheckoutPaymentMethod) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.PaymentDetails)
 	}
 
+	if src.PseDetails != nil {
+		return json.Marshal(&src.PseDetails)
+	}
+
 	if src.RatepayDetails != nil {
 		return json.Marshal(&src.RatepayDetails)
+	}
+
+	if src.RivertyDetails != nil {
+		return json.Marshal(&src.RivertyDetails)
 	}
 
 	if src.SamsungPayDetails != nil {
@@ -1404,8 +1456,16 @@ func (obj *CheckoutPaymentMethod) GetActualInstance() interface{} {
 		return obj.PaymentDetails
 	}
 
+	if obj.PseDetails != nil {
+		return obj.PseDetails
+	}
+
 	if obj.RatepayDetails != nil {
 		return obj.RatepayDetails
+	}
+
+	if obj.RivertyDetails != nil {
+		return obj.RivertyDetails
 	}
 
 	if obj.SamsungPayDetails != nil {

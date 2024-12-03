@@ -37,7 +37,7 @@ type PaymentMethod struct {
 	Currencies []string `json:"currencies,omitempty"`
 	// The list of custom routing flags to route payment to the intended acquirer.
 	CustomRoutingFlags []string              `json:"customRoutingFlags,omitempty"`
-	Diners             *GenericPmWithTdiInfo `json:"diners,omitempty"`
+	Diners             *DinersInfo           `json:"diners,omitempty"`
 	Discover           *GenericPmWithTdiInfo `json:"discover,omitempty"`
 	EftposAustralia    *GenericPmWithTdiInfo `json:"eftpos_australia,omitempty"`
 	// Indicates whether the payment method is enabled (**true**) or disabled (**false**).
@@ -515,9 +515,9 @@ func (o *PaymentMethod) SetCustomRoutingFlags(v []string) {
 }
 
 // GetDiners returns the Diners field value if set, zero value otherwise.
-func (o *PaymentMethod) GetDiners() GenericPmWithTdiInfo {
+func (o *PaymentMethod) GetDiners() DinersInfo {
 	if o == nil || common.IsNil(o.Diners) {
-		var ret GenericPmWithTdiInfo
+		var ret DinersInfo
 		return ret
 	}
 	return *o.Diners
@@ -525,7 +525,7 @@ func (o *PaymentMethod) GetDiners() GenericPmWithTdiInfo {
 
 // GetDinersOk returns a tuple with the Diners field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentMethod) GetDinersOk() (*GenericPmWithTdiInfo, bool) {
+func (o *PaymentMethod) GetDinersOk() (*DinersInfo, bool) {
 	if o == nil || common.IsNil(o.Diners) {
 		return nil, false
 	}
@@ -541,8 +541,8 @@ func (o *PaymentMethod) HasDiners() bool {
 	return false
 }
 
-// SetDiners gets a reference to the given GenericPmWithTdiInfo and assigns it to the Diners field.
-func (o *PaymentMethod) SetDiners(v GenericPmWithTdiInfo) {
+// SetDiners gets a reference to the given DinersInfo and assigns it to the Diners field.
+func (o *PaymentMethod) SetDiners(v DinersInfo) {
 	o.Diners = &v
 }
 
