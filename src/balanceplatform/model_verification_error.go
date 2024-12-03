@@ -11,7 +11,7 @@ package balanceplatform
 import (
 	"encoding/json"
 
-	"github.com/adyen/adyen-go-api-library/v15/src/common"
+	"github.com/adyen/adyen-go-api-library/v16/src/common"
 )
 
 // checks if the VerificationError type satisfies the MappedNullable interface at compile time
