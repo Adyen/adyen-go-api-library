@@ -1,7 +1,7 @@
 package tests
 
 import (
-	"github.com/adyen/adyen-go-api-library/v14/src/disputewebhook"
+	"github.com/adyen/adyen-go-api-library/v15/src/disputewebhook"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
