@@ -23,7 +23,7 @@ type GeneratePciDescriptionResponse struct {
 	Content *string `json:"content,omitempty"`
 	// The two-letter [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code for the questionnaire. For example, **en**.
 	Language *string `json:"language,omitempty"`
-	// The array of Adyen-generated unique identifiers for the questionnaires.
+	// The array of Adyen-generated unique identifiers for the questionnaires. If empty, the user is not required to sign questionnaires.
 	PciTemplateReferences []string `json:"pciTemplateReferences,omitempty"`
 }
 

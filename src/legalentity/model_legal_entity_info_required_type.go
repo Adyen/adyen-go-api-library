@@ -30,7 +30,8 @@ type LegalEntityInfoRequiredType struct {
 	SoleProprietorship *SoleProprietorship `json:"soleProprietorship,omitempty"`
 	Trust              *Trust              `json:"trust,omitempty"`
 	// The type of legal entity.   Possible values: **individual**, **organization**, **soleProprietorship**, or **trust**.
-	Type string `json:"type"`
+	Type                      string                     `json:"type"`
+	UnincorporatedPartnership *UnincorporatedPartnership `json:"unincorporatedPartnership,omitempty"`
 	// A key-value pair that specifies the verification process for a legal entity. Set to **upfront** for upfront verification for [marketplaces](https://docs.adyen.com/marketplaces/verification-overview/verification-types/#upfront-verification).
 	VerificationPlan *string `json:"verificationPlan,omitempty"`
 }
@@ -301,6 +302,38 @@ func (o *LegalEntityInfoRequiredType) SetType(v string) {
 	o.Type = v
 }
 
+// GetUnincorporatedPartnership returns the UnincorporatedPartnership field value if set, zero value otherwise.
+func (o *LegalEntityInfoRequiredType) GetUnincorporatedPartnership() UnincorporatedPartnership {
+	if o == nil || common.IsNil(o.UnincorporatedPartnership) {
+		var ret UnincorporatedPartnership
+		return ret
+	}
+	return *o.UnincorporatedPartnership
+}
+
+// GetUnincorporatedPartnershipOk returns a tuple with the UnincorporatedPartnership field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LegalEntityInfoRequiredType) GetUnincorporatedPartnershipOk() (*UnincorporatedPartnership, bool) {
+	if o == nil || common.IsNil(o.UnincorporatedPartnership) {
+		return nil, false
+	}
+	return o.UnincorporatedPartnership, true
+}
+
+// HasUnincorporatedPartnership returns a boolean if a field has been set.
+func (o *LegalEntityInfoRequiredType) HasUnincorporatedPartnership() bool {
+	if o != nil && !common.IsNil(o.UnincorporatedPartnership) {
+		return true
+	}
+
+	return false
+}
+
+// SetUnincorporatedPartnership gets a reference to the given UnincorporatedPartnership and assigns it to the UnincorporatedPartnership field.
+func (o *LegalEntityInfoRequiredType) SetUnincorporatedPartnership(v UnincorporatedPartnership) {
+	o.UnincorporatedPartnership = &v
+}
+
 // GetVerificationPlan returns the VerificationPlan field value if set, zero value otherwise.
 func (o *LegalEntityInfoRequiredType) GetVerificationPlan() string {
 	if o == nil || common.IsNil(o.VerificationPlan) {
@@ -365,6 +398,9 @@ func (o LegalEntityInfoRequiredType) ToMap() (map[string]interface{}, error) {
 		toSerialize["trust"] = o.Trust
 	}
 	toSerialize["type"] = o.Type
+	if !common.IsNil(o.UnincorporatedPartnership) {
+		toSerialize["unincorporatedPartnership"] = o.UnincorporatedPartnership
+	}
 	if !common.IsNil(o.VerificationPlan) {
 		toSerialize["verificationPlan"] = o.VerificationPlan
 	}

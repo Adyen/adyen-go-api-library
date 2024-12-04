@@ -33,7 +33,7 @@ type LegalEntityAssociation struct {
 	Relationship *string `json:"relationship,omitempty"`
 	// Defines the Kyc Exemption Reason for a Settlor associated with a trust.  For example, **professionalServiceProvider**, **deceased**, or **contributionBelowThreshold**.
 	SettlorExemptionReason []string `json:"settlorExemptionReason,omitempty"`
-	// Defines the relationship of the legal entity to the current legal entity.  Possible value for individuals: **legalRepresentative**.  Possible values for organizations: **uboThroughOwnership**, **uboThroughControl**, **director**, **signatory**, or **ultimateParentCompany**.  Possible values for sole proprietorships: **soleProprietorship**.  Possible value for trusts: **trust**.  Possible values for trust members: **definedBeneficiary**, **protector**, **secondaryTrustee**, **settlor**, **uboThroughControl**, or **uboThroughOwnership**.
+	// Defines the relationship of the legal entity to the current legal entity.  Possible value for individuals: **legalRepresentative**.  Possible values for organizations: **uboThroughOwnership**, **uboThroughControl**, **director**, **signatory**, or **ultimateParentCompany**.  Possible values for sole proprietorships: **soleProprietorship**.  Possible value for trusts: **trust**.  Possible values for trust members: **definedBeneficiary**, **protector**, **secondaryTrustee**, **settlor**, **uboThroughControl**, or **uboThroughOwnership**.  Possible value for unincorporated partnership: **unincorporatedPartnership**.  Possible values for unincorporated partnership members: **secondaryPartner**, **uboThroughControl**, **uboThroughOwnership**
 	Type string `json:"type"`
 }
 
@@ -366,7 +366,7 @@ func (v *NullableLegalEntityAssociation) UnmarshalJSON(src []byte) error {
 }
 
 func (o *LegalEntityAssociation) isValidType() bool {
-	var allowedEnumValues = []string{"definedBeneficiary", "director", "immediateParentCompany", "legalRepresentative", "pciSignatory", "protector", "secondaryTrustee", "settlor", "signatory", "soleProprietorship", "trust", "trustOwnership", "uboThroughControl", "uboThroughOwnership", "ultimateParentCompany", "undefinedBeneficiary"}
+	var allowedEnumValues = []string{"definedBeneficiary", "director", "immediateParentCompany", "legalRepresentative", "pciSignatory", "protector", "secondaryPartner", "secondaryTrustee", "settlor", "signatory", "soleProprietorship", "trust", "trustOwnership", "uboThroughControl", "uboThroughOwnership", "ultimateParentCompany", "undefinedBeneficiary", "unincorporatedPartnership"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

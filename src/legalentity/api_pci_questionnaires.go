@@ -20,6 +20,57 @@ import (
 // PCIQuestionnairesApi service
 type PCIQuestionnairesApi common.Service
 
+// All parameters accepted by PCIQuestionnairesApi.CalculatePciStatusOfLegalEntity
+type PCIQuestionnairesApiCalculatePciStatusOfLegalEntityInput struct {
+	id                        string
+	calculatePciStatusRequest *CalculatePciStatusRequest
+}
+
+func (r PCIQuestionnairesApiCalculatePciStatusOfLegalEntityInput) CalculatePciStatusRequest(calculatePciStatusRequest CalculatePciStatusRequest) PCIQuestionnairesApiCalculatePciStatusOfLegalEntityInput {
+	r.calculatePciStatusRequest = &calculatePciStatusRequest
+	return r
+}
+
+/*
+Prepare a request for CalculatePciStatusOfLegalEntity
+@param id The unique identifier of the legal entity to calculate PCI status.
+@return PCIQuestionnairesApiCalculatePciStatusOfLegalEntityInput
+*/
+func (a *PCIQuestionnairesApi) CalculatePciStatusOfLegalEntityInput(id string) PCIQuestionnairesApiCalculatePciStatusOfLegalEntityInput {
+	return PCIQuestionnairesApiCalculatePciStatusOfLegalEntityInput{
+		id: id,
+	}
+}
+
+/*
+CalculatePciStatusOfLegalEntity Calculate PCI status of a legal entity
+
+Calculate PCI status of a legal entity.
+
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r PCIQuestionnairesApiCalculatePciStatusOfLegalEntityInput - Request parameters, see CalculatePciStatusOfLegalEntityInput
+@return CalculatePciStatusResponse, *http.Response, error
+*/
+func (a *PCIQuestionnairesApi) CalculatePciStatusOfLegalEntity(ctx context.Context, r PCIQuestionnairesApiCalculatePciStatusOfLegalEntityInput) (CalculatePciStatusResponse, *http.Response, error) {
+	res := &CalculatePciStatusResponse{}
+	path := "/legalEntities/{id}/pciQuestionnaires/signingRequired"
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.calculatePciStatusRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	return *res, httpRes, err
+}
+
 // All parameters accepted by PCIQuestionnairesApi.GeneratePciQuestionnaire
 type PCIQuestionnairesApiGeneratePciQuestionnaireInput struct {
 	id                            string
