@@ -1,27 +1,27 @@
 name: Go Format
 
 on:
-  push:
-    branches:
-      - 'sdk-automation/models'
+    push:
+        branches:
+            - 'sdk-automation/models'
 
 jobs:
-  format:
-    if: ${{ ! startsWith(github.event.head_commit.message, 'style(fmt)') }}
-    permissions:
-      contents: write
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-        with:
-          token: ${{ secrets.ADYEN_AUTOMATION_BOT_ACCESS_TOKEN }}
-      - uses: actions/setup-go@v5
-        with:
-          go-version: 1.18
-      - run: make fmt
-      - run: |
-          git config user.name AdyenAutomationBot
-          git config user.email "${{ secrets.ADYEN_AUTOMATION_BOT_EMAIL }}"
-          git add .
-          git commit -m "style(fmt): code formatted"
-          git push
+    format:
+        if: ${{ github.event.commits!= null && github.event.commits.length > 0 &&!startsWith(github.event.head_commit.message, 'style(fmt)') }}
+        permissions:
+            contents: write
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+              with:
+                  token: ${{ secrets.ADYEN_AUTOMATION_BOT_ACCESS_TOKEN }}
+            - uses: actions/setup-go@v5
+              with:
+                  go-version: 1.18
+            - run: make fmt
+            - run: |
+                  git config user.name AdyenAutomationBot
+                  git config user.email "${{ secrets.ADYEN_AUTOMATION_BOT_EMAIL }}"
+                  git add.
+                  git commit -m "style(fmt): code formatted"
+                  git push
