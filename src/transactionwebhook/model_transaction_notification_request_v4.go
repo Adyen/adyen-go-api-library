@@ -10,6 +10,7 @@ package transactionwebhook
 
 import (
 	"encoding/json"
+	"time"
 
 	"github.com/adyen/adyen-go-api-library/v16/src/common"
 )
@@ -22,6 +23,8 @@ type TransactionNotificationRequestV4 struct {
 	Data Transaction `json:"data"`
 	// The environment from which the webhook originated.  Possible values: **test**, **live**.
 	Environment string `json:"environment"`
+	// When the event was queued.
+	Timestamp *time.Time `json:"timestamp,omitempty"`
 	// Type of the webhook.
 	Type *string `json:"type,omitempty"`
 }
@@ -93,6 +96,38 @@ func (o *TransactionNotificationRequestV4) SetEnvironment(v string) {
 	o.Environment = v
 }
 
+// GetTimestamp returns the Timestamp field value if set, zero value otherwise.
+func (o *TransactionNotificationRequestV4) GetTimestamp() time.Time {
+	if o == nil || common.IsNil(o.Timestamp) {
+		var ret time.Time
+		return ret
+	}
+	return *o.Timestamp
+}
+
+// GetTimestampOk returns a tuple with the Timestamp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionNotificationRequestV4) GetTimestampOk() (*time.Time, bool) {
+	if o == nil || common.IsNil(o.Timestamp) {
+		return nil, false
+	}
+	return o.Timestamp, true
+}
+
+// HasTimestamp returns a boolean if a field has been set.
+func (o *TransactionNotificationRequestV4) HasTimestamp() bool {
+	if o != nil && !common.IsNil(o.Timestamp) {
+		return true
+	}
+
+	return false
+}
+
+// SetTimestamp gets a reference to the given time.Time and assigns it to the Timestamp field.
+func (o *TransactionNotificationRequestV4) SetTimestamp(v time.Time) {
+	o.Timestamp = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *TransactionNotificationRequestV4) GetType() string {
 	if o == nil || common.IsNil(o.Type) {
@@ -137,6 +172,9 @@ func (o TransactionNotificationRequestV4) ToMap() (map[string]interface{}, error
 	toSerialize := map[string]interface{}{}
 	toSerialize["data"] = o.Data
 	toSerialize["environment"] = o.Environment
+	if !common.IsNil(o.Timestamp) {
+		toSerialize["timestamp"] = o.Timestamp
+	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}

@@ -28,8 +28,10 @@ type TransferEvent struct {
 	// The date when the transfer request was sent.
 	BookingDate *time.Time `json:"bookingDate,omitempty"`
 	// The estimated time when the beneficiary should have access to the funds.
-	EstimatedArrivalTime *time.Time      `json:"estimatedArrivalTime,omitempty"`
-	ExternalReason       *ExternalReason `json:"externalReason,omitempty"`
+	EstimatedArrivalTime *time.Time `json:"estimatedArrivalTime,omitempty"`
+	// A list of event data.
+	EventsData     []TransferEventEventsDataInner `json:"eventsData,omitempty"`
+	ExternalReason *ExternalReason                `json:"externalReason,omitempty"`
 	// The unique identifier of the transfer event.
 	Id           *string       `json:"id,omitempty"`
 	Modification *Modification `json:"modification,omitempty"`
@@ -226,6 +228,38 @@ func (o *TransferEvent) HasEstimatedArrivalTime() bool {
 // SetEstimatedArrivalTime gets a reference to the given time.Time and assigns it to the EstimatedArrivalTime field.
 func (o *TransferEvent) SetEstimatedArrivalTime(v time.Time) {
 	o.EstimatedArrivalTime = &v
+}
+
+// GetEventsData returns the EventsData field value if set, zero value otherwise.
+func (o *TransferEvent) GetEventsData() []TransferEventEventsDataInner {
+	if o == nil || common.IsNil(o.EventsData) {
+		var ret []TransferEventEventsDataInner
+		return ret
+	}
+	return o.EventsData
+}
+
+// GetEventsDataOk returns a tuple with the EventsData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransferEvent) GetEventsDataOk() ([]TransferEventEventsDataInner, bool) {
+	if o == nil || common.IsNil(o.EventsData) {
+		return nil, false
+	}
+	return o.EventsData, true
+}
+
+// HasEventsData returns a boolean if a field has been set.
+func (o *TransferEvent) HasEventsData() bool {
+	if o != nil && !common.IsNil(o.EventsData) {
+		return true
+	}
+
+	return false
+}
+
+// SetEventsData gets a reference to the given []TransferEventEventsDataInner and assigns it to the EventsData field.
+func (o *TransferEvent) SetEventsData(v []TransferEventEventsDataInner) {
+	o.EventsData = v
 }
 
 // GetExternalReason returns the ExternalReason field value if set, zero value otherwise.
@@ -636,6 +670,9 @@ func (o TransferEvent) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.EstimatedArrivalTime) {
 		toSerialize["estimatedArrivalTime"] = o.EstimatedArrivalTime
+	}
+	if !common.IsNil(o.EventsData) {
+		toSerialize["eventsData"] = o.EventsData
 	}
 	if !common.IsNil(o.ExternalReason) {
 		toSerialize["externalReason"] = o.ExternalReason
