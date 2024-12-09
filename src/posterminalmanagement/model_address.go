@@ -10,7 +10,8 @@ package posterminalmanagement
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v16/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v16/src/common"
 )
 
 // checks if the Address type satisfies the MappedNullable interface at compile time
@@ -18,12 +19,12 @@ var _ common.MappedNullable = &Address{}
 
 // Address struct for Address
 type Address struct {
-	City *string `json:"city,omitempty"`
-	CountryCode *string `json:"countryCode,omitempty"`
-	PostalCode *string `json:"postalCode,omitempty"`
+	City            *string `json:"city,omitempty"`
+	CountryCode     *string `json:"countryCode,omitempty"`
+	PostalCode      *string `json:"postalCode,omitempty"`
 	StateOrProvince *string `json:"stateOrProvince,omitempty"`
-	StreetAddress *string `json:"streetAddress,omitempty"`
-	StreetAddress2 *string `json:"streetAddress2,omitempty"`
+	StreetAddress   *string `json:"streetAddress,omitempty"`
+	StreetAddress2  *string `json:"streetAddress2,omitempty"`
 }
 
 // NewAddress instantiates a new Address object
@@ -236,7 +237,7 @@ func (o *Address) SetStreetAddress2(v string) {
 }
 
 func (o Address) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -301,6 +302,3 @@ func (v *NullableAddress) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-
