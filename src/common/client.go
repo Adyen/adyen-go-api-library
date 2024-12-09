@@ -161,7 +161,7 @@ func SendAPIRequest(
 		return httpResponse, err
 	}
 
-    c.LogOnError(httpResponse)
+    c.logOnError(httpResponse)
 
 	if httpResponse.StatusCode >= 300 {
 		newErr := NewAPIError(body, httpResponse.Status)
@@ -231,7 +231,7 @@ func (c *Client) CallAPI(request *http.Request) (*http.Response, error) {
 
 // LogOnError log response body when an error occurs
 // the type of error being logged depends on the Configuration
-func (c *Client) LogOnError(httpResponse *http.Response)  {
+func (c *Client) logOnError(httpResponse *http.Response)  {
     if c.Cfg.Log3XXError {
         if httpResponse.StatusCode >= 300 && httpResponse.StatusCode < 400 {
             fmt.Println(httpResponse.Body)
