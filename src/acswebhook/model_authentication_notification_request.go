@@ -10,6 +10,7 @@ package acswebhook
 
 import (
 	"encoding/json"
+	"time"
 
 	"github.com/adyen/adyen-go-api-library/v16/src/common"
 )
@@ -22,6 +23,8 @@ type AuthenticationNotificationRequest struct {
 	Data AuthenticationNotificationData `json:"data"`
 	// The environment from which the webhook originated.  Possible values: **test**, **live**.
 	Environment string `json:"environment"`
+	// When the event was queued.
+	Timestamp *time.Time `json:"timestamp,omitempty"`
 	// Type of notification.
 	Type string `json:"type"`
 }
@@ -94,6 +97,38 @@ func (o *AuthenticationNotificationRequest) SetEnvironment(v string) {
 	o.Environment = v
 }
 
+// GetTimestamp returns the Timestamp field value if set, zero value otherwise.
+func (o *AuthenticationNotificationRequest) GetTimestamp() time.Time {
+	if o == nil || common.IsNil(o.Timestamp) {
+		var ret time.Time
+		return ret
+	}
+	return *o.Timestamp
+}
+
+// GetTimestampOk returns a tuple with the Timestamp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AuthenticationNotificationRequest) GetTimestampOk() (*time.Time, bool) {
+	if o == nil || common.IsNil(o.Timestamp) {
+		return nil, false
+	}
+	return o.Timestamp, true
+}
+
+// HasTimestamp returns a boolean if a field has been set.
+func (o *AuthenticationNotificationRequest) HasTimestamp() bool {
+	if o != nil && !common.IsNil(o.Timestamp) {
+		return true
+	}
+
+	return false
+}
+
+// SetTimestamp gets a reference to the given time.Time and assigns it to the Timestamp field.
+func (o *AuthenticationNotificationRequest) SetTimestamp(v time.Time) {
+	o.Timestamp = &v
+}
+
 // GetType returns the Type field value
 func (o *AuthenticationNotificationRequest) GetType() string {
 	if o == nil {
@@ -130,6 +165,9 @@ func (o AuthenticationNotificationRequest) ToMap() (map[string]interface{}, erro
 	toSerialize := map[string]interface{}{}
 	toSerialize["data"] = o.Data
 	toSerialize["environment"] = o.Environment
+	if !common.IsNil(o.Timestamp) {
+		toSerialize["timestamp"] = o.Timestamp
+	}
 	toSerialize["type"] = o.Type
 	return toSerialize, nil
 }
