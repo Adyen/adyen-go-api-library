@@ -10,8 +10,7 @@ package transfers
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v16/src/common"
+    "github.com/adyen/adyen-go-api-library/v16/src/common"
 )
 
 // checks if the PlatformPayment type satisfies the MappedNullable interface at compile time
@@ -25,7 +24,7 @@ type PlatformPayment struct {
 	ModificationPspReference *string `json:"modificationPspReference,omitempty"`
 	// The payment's merchant reference included in the transfer.
 	PaymentMerchantReference *string `json:"paymentMerchantReference,omitempty"`
-	// The type of the related split.
+	// Specifies the nature of the transfer. This parameter helps categorize transfers so you can reconcile transactions at a later time, using the Balance Platform Accounting Report for [marketplaces](https://docs.adyen.com/marketplaces/reports-and-fees/balance-platform-accounting-report/) or [platforms](https://docs.adyen.com/platforms/reports-and-fees/balance-platform-accounting-report/).  Possible values:  * **AcquiringFees**: for the acquiring fee incurred on a transaction.  * **AdyenCommission**: for the transaction fee due to Adyen under [blended rates](https://www.adyen.com/knowledge-hub/guides/payments-training-guide/get-the-best-from-your-card-processing).  * **AdyenFees**: for all the transaction fees due to Adyen. This is the sum of Adyen's commission and Adyen's markup.  * **AdyenMarkup**: for the transaction fee due to Adyen under [Interchange++ pricing](https://www.adyen.com/pricing).  * **BalanceAccount**: or the sale amount of a transaction.  * **Commission**: for your platform's commission on a transaction.  * **Interchange**: for the interchange fee (fee paid to the issuer) incurred on a transaction.  * **PaymentFee**: for all of the transaction fees.  * **Remainder**: for the left over amount after currency conversion.  * **SchemeFee**: for the scheme fee incurred on a transaction. This is the sum of the interchange fees and the acquiring fees.  * **Surcharge**: for the surcharge paid by the customer on a transaction.  * **Tip**: for the tip paid by the customer.  * **TopUp**: for an incoming transfer to top up your user's balance account.  * **VAT**: for the Value Added Tax.
 	PlatformPaymentType *string `json:"platformPaymentType,omitempty"`
 	// The payment reference included in the transfer.
 	PspPaymentReference *string `json:"pspPaymentReference,omitempty"`
@@ -247,7 +246,7 @@ func (o *PlatformPayment) SetType(v string) {
 }
 
 func (o PlatformPayment) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -313,21 +312,23 @@ func (v *NullablePlatformPayment) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *PlatformPayment) isValidPlatformPaymentType() bool {
-	var allowedEnumValues = []string{"AcquiringFees", "AdyenCommission", "AdyenFees", "AdyenMarkup", "BalanceAccount", "Commission", "Default", "Interchange", "PaymentFee", "Remainder", "SchemeFee", "Surcharge", "Tip", "TopUp", "VAT"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetPlatformPaymentType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "AcquiringFees", "AdyenCommission", "AdyenFees", "AdyenMarkup", "BalanceAccount", "Commission", "Default", "Interchange", "PaymentFee", "Remainder", "SchemeFee", "Surcharge", "Tip", "TopUp", "VAT" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetPlatformPaymentType() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *PlatformPayment) isValidType() bool {
-	var allowedEnumValues = []string{"platformPayment"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "platformPayment" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

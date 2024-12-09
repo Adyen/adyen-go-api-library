@@ -10,8 +10,8 @@ package transferwebhook
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v16/src/common"
+    "github.com/adyen/adyen-go-api-library/v16/src/common"
+	"time"
 )
 
 // checks if the TransferNotificationRequest type satisfies the MappedNullable interface at compile time
@@ -22,6 +22,8 @@ type TransferNotificationRequest struct {
 	Data TransferData `json:"data"`
 	// The environment from which the webhook originated.  Possible values: **test**, **live**.
 	Environment string `json:"environment"`
+	// When the event was queued.
+	Timestamp *time.Time `json:"timestamp,omitempty"`
 	// The type of webhook.
 	Type *string `json:"type,omitempty"`
 }
@@ -93,6 +95,38 @@ func (o *TransferNotificationRequest) SetEnvironment(v string) {
 	o.Environment = v
 }
 
+// GetTimestamp returns the Timestamp field value if set, zero value otherwise.
+func (o *TransferNotificationRequest) GetTimestamp() time.Time {
+	if o == nil || common.IsNil(o.Timestamp) {
+		var ret time.Time
+		return ret
+	}
+	return *o.Timestamp
+}
+
+// GetTimestampOk returns a tuple with the Timestamp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransferNotificationRequest) GetTimestampOk() (*time.Time, bool) {
+	if o == nil || common.IsNil(o.Timestamp) {
+		return nil, false
+	}
+	return o.Timestamp, true
+}
+
+// HasTimestamp returns a boolean if a field has been set.
+func (o *TransferNotificationRequest) HasTimestamp() bool {
+	if o != nil && !common.IsNil(o.Timestamp) {
+		return true
+	}
+
+	return false
+}
+
+// SetTimestamp gets a reference to the given time.Time and assigns it to the Timestamp field.
+func (o *TransferNotificationRequest) SetTimestamp(v time.Time) {
+	o.Timestamp = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *TransferNotificationRequest) GetType() string {
 	if o == nil || common.IsNil(o.Type) {
@@ -126,7 +160,7 @@ func (o *TransferNotificationRequest) SetType(v string) {
 }
 
 func (o TransferNotificationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -137,6 +171,9 @@ func (o TransferNotificationRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["data"] = o.Data
 	toSerialize["environment"] = o.Environment
+	if !common.IsNil(o.Timestamp) {
+		toSerialize["timestamp"] = o.Timestamp
+	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
@@ -179,12 +216,14 @@ func (v *NullableTransferNotificationRequest) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *TransferNotificationRequest) isValidType() bool {
-	var allowedEnumValues = []string{"balancePlatform.transfer.created", "balancePlatform.transfer.updated"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "balancePlatform.transfer.created", "balancePlatform.transfer.updated" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+
