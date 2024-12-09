@@ -161,6 +161,8 @@ func SendAPIRequest(
 		return httpResponse, err
 	}
 
+    c.LogOnError(httpResponse)
+
 	if httpResponse.StatusCode >= 300 {
 		newErr := NewAPIError(body, httpResponse.Status)
 		return httpResponse, newErr
@@ -225,6 +227,28 @@ func (c *Client) CallAPI(request *http.Request) (*http.Response, error) {
 	}
 
 	return resp, err
+}
+
+// LogOnError log response body when an error occurs
+// the type of error being logged depends on the Configuration
+func (c *Client) LogOnError(httpResponse *http.Response)  {
+    if c.Cfg.Log3XXError {
+        if httpResponse.StatusCode >= 300 && httpResponse.StatusCode < 400 {
+            fmt.Println(httpResponse.Body)
+        }
+    }
+
+    if c.Cfg.Log4XXError {
+        if httpResponse.StatusCode >= 400 && httpResponse.StatusCode < 500 {
+            fmt.Println(httpResponse.Body)
+        }
+    }
+
+    if c.Cfg.Log5XXError {
+        if httpResponse.StatusCode >= 500 {
+            fmt.Println(httpResponse.Body)
+        }
+    }
 }
 
 func maskApiKey(request *http.Request) {
@@ -860,3 +884,4 @@ func IdempotencyKey(ctx context.Context) (string, bool) {
 	key, ok := ikey.(string)
 	return key, ok
 }
+
