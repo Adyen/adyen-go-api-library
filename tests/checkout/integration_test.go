@@ -307,7 +307,6 @@ func TestCheckoutIntegration(t *testing.T) {
             e := err.(common.APIError)
 
             require.NotNil(t, e.RawBody)
-            fmt.Println(string(e.RawBody))
 
             assert.Equal(t, float64(422), e.Status)
             assert.Equal(t, "validation", e.Type)
