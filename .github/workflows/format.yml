@@ -20,8 +20,7 @@ jobs:
             - name: Log Commit Details
               run: |
                   echo "github.event.size: ${{ github.event.size }}"
-                  echo "github.event.distinct_size: ${{ github.event.distinct_size }}"
-                  echo "github.event.head_commit.message: ${{ github.event.head_commit.message }}"
+                  echo "github.event.commits: ${{ github.event.commits }}"
 
             - name: Setup Go
               uses: actions/setup-go@v5
