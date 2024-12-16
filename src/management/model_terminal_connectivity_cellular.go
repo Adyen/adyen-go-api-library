@@ -19,9 +19,11 @@ var _ common.MappedNullable = &TerminalConnectivityCellular{}
 
 // TerminalConnectivityCellular struct for TerminalConnectivityCellular
 type TerminalConnectivityCellular struct {
-	// The integrated circuit card identifier (ICCID) of the SIM card in the terminal.
+	// The integrated circuit card identifier (ICCID) of the primary SIM card in the terminal.
 	Iccid *string `json:"iccid,omitempty"`
-	// On a terminal that supports 3G or 4G connectivity, indicates the status of the SIM card in the terminal.
+	// The integrated circuit card identifier (ICCID) of the secondary SIM card in the terminal, typically used for a [third-party SIM card](https://docs.adyen.com/point-of-sale/design-your-integration/network-and-connectivity/cellular-failover/#using-a-third-party-sim-card).
+	Iccid2 *string `json:"iccid2,omitempty"`
+	// On a terminal that supports 3G or 4G connectivity, indicates the status of the primary SIM card in the terminal.
 	Status *string `json:"status,omitempty"`
 }
 
@@ -74,6 +76,38 @@ func (o *TerminalConnectivityCellular) SetIccid(v string) {
 	o.Iccid = &v
 }
 
+// GetIccid2 returns the Iccid2 field value if set, zero value otherwise.
+func (o *TerminalConnectivityCellular) GetIccid2() string {
+	if o == nil || common.IsNil(o.Iccid2) {
+		var ret string
+		return ret
+	}
+	return *o.Iccid2
+}
+
+// GetIccid2Ok returns a tuple with the Iccid2 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TerminalConnectivityCellular) GetIccid2Ok() (*string, bool) {
+	if o == nil || common.IsNil(o.Iccid2) {
+		return nil, false
+	}
+	return o.Iccid2, true
+}
+
+// HasIccid2 returns a boolean if a field has been set.
+func (o *TerminalConnectivityCellular) HasIccid2() bool {
+	if o != nil && !common.IsNil(o.Iccid2) {
+		return true
+	}
+
+	return false
+}
+
+// SetIccid2 gets a reference to the given string and assigns it to the Iccid2 field.
+func (o *TerminalConnectivityCellular) SetIccid2(v string) {
+	o.Iccid2 = &v
+}
+
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *TerminalConnectivityCellular) GetStatus() string {
 	if o == nil || common.IsNil(o.Status) {
@@ -118,6 +152,9 @@ func (o TerminalConnectivityCellular) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.Iccid) {
 		toSerialize["iccid"] = o.Iccid
+	}
+	if !common.IsNil(o.Iccid2) {
+		toSerialize["iccid2"] = o.Iccid2
 	}
 	if !common.IsNil(o.Status) {
 		toSerialize["status"] = o.Status

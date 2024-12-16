@@ -27,7 +27,7 @@ type TransferData struct {
 	BalancePlatform *string `json:"balancePlatform,omitempty"`
 	// The list of the latest balance statuses in the transfer.
 	Balances []BalanceMutation `json:"balances,omitempty"`
-	// The category of the transfer.  Possible values:   - **bank**: a transfer involving a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id) or a bank account.  - **card**: a transfer involving a third-party card.  - **internal**: a transfer between [balance accounts](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id) within your platform.  - **issuedCard**: a transfer initiated by an Adyen-issued card.  - **platformPayment**: funds movements related to payments that are acquired for your users.
+	// The category of the transfer.  Possible values:   - **bank**: a transfer involving a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id) or a bank account.  - **card**: a transfer involving a third-party card.  - **internal**: a transfer between [balance accounts](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id) within your platform.  - **issuedCard**: a transfer initiated by a Adyen-issued card.  - **platformPayment**: funds movements related to payments that are acquired for your users.  - **topUp**: an incoming transfer initiated by your user to top up their balance account.
 	Category     string                            `json:"category"`
 	CategoryData *TransferDataCategoryData         `json:"categoryData,omitempty"`
 	Counterparty *TransferNotificationCounterParty `json:"counterparty,omitempty"`
@@ -38,6 +38,8 @@ type TransferData struct {
 	DirectDebitInformation *DirectDebitInformation `json:"directDebitInformation,omitempty"`
 	// The direction of the transfer.  Possible values: **incoming**, **outgoing**.
 	Direction *string `json:"direction,omitempty"`
+	// The event id listed under events, that triggered the notification.
+	EventId *string `json:"eventId,omitempty"`
 	// The list of events leading up to the current status of the transfer.
 	Events []TransferEvent `json:"events,omitempty"`
 	// The ID of the resource.
@@ -446,6 +448,38 @@ func (o *TransferData) HasDirection() bool {
 // SetDirection gets a reference to the given string and assigns it to the Direction field.
 func (o *TransferData) SetDirection(v string) {
 	o.Direction = &v
+}
+
+// GetEventId returns the EventId field value if set, zero value otherwise.
+func (o *TransferData) GetEventId() string {
+	if o == nil || common.IsNil(o.EventId) {
+		var ret string
+		return ret
+	}
+	return *o.EventId
+}
+
+// GetEventIdOk returns a tuple with the EventId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransferData) GetEventIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.EventId) {
+		return nil, false
+	}
+	return o.EventId, true
+}
+
+// HasEventId returns a boolean if a field has been set.
+func (o *TransferData) HasEventId() bool {
+	if o != nil && !common.IsNil(o.EventId) {
+		return true
+	}
+
+	return false
+}
+
+// SetEventId gets a reference to the given string and assigns it to the EventId field.
+func (o *TransferData) SetEventId(v string) {
+	o.EventId = &v
 }
 
 // GetEvents returns the Events field value if set, zero value otherwise.
@@ -866,6 +900,9 @@ func (o TransferData) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Direction) {
 		toSerialize["direction"] = o.Direction
 	}
+	if !common.IsNil(o.EventId) {
+		toSerialize["eventId"] = o.EventId
+	}
 	if !common.IsNil(o.Events) {
 		toSerialize["events"] = o.Events
 	}
@@ -940,7 +977,7 @@ func (v *NullableTransferData) UnmarshalJSON(src []byte) error {
 }
 
 func (o *TransferData) isValidCategory() bool {
-	var allowedEnumValues = []string{"bank", "card", "internal", "issuedCard", "platformPayment"}
+	var allowedEnumValues = []string{"bank", "card", "internal", "issuedCard", "platformPayment", "topUp"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetCategory() == allowed {
 			return true

@@ -43,7 +43,11 @@ type UpdatePaymentMethodInfo struct {
 	Nyce        *NyceInfo             `json:"nyce,omitempty"`
 	Pulse       *PulseInfo            `json:"pulse,omitempty"`
 	Star        *StarInfo             `json:"star,omitempty"`
+	// The store for this payment method
+	StoreId *string `json:"storeId,omitempty"`
 	// The list of stores for this payment method
+	// Deprecated since Management API v3
+	// Use `storeId` instead. Only one store per payment method is allowed.
 	StoreIds []string              `json:"storeIds,omitempty"`
 	Visa     *GenericPmWithTdiInfo `json:"visa,omitempty"`
 }
@@ -705,7 +709,41 @@ func (o *UpdatePaymentMethodInfo) SetStar(v StarInfo) {
 	o.Star = &v
 }
 
+// GetStoreId returns the StoreId field value if set, zero value otherwise.
+func (o *UpdatePaymentMethodInfo) GetStoreId() string {
+	if o == nil || common.IsNil(o.StoreId) {
+		var ret string
+		return ret
+	}
+	return *o.StoreId
+}
+
+// GetStoreIdOk returns a tuple with the StoreId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdatePaymentMethodInfo) GetStoreIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.StoreId) {
+		return nil, false
+	}
+	return o.StoreId, true
+}
+
+// HasStoreId returns a boolean if a field has been set.
+func (o *UpdatePaymentMethodInfo) HasStoreId() bool {
+	if o != nil && !common.IsNil(o.StoreId) {
+		return true
+	}
+
+	return false
+}
+
+// SetStoreId gets a reference to the given string and assigns it to the StoreId field.
+func (o *UpdatePaymentMethodInfo) SetStoreId(v string) {
+	o.StoreId = &v
+}
+
 // GetStoreIds returns the StoreIds field value if set, zero value otherwise.
+// Deprecated since Management API v3
+// Use `storeId` instead. Only one store per payment method is allowed.
 func (o *UpdatePaymentMethodInfo) GetStoreIds() []string {
 	if o == nil || common.IsNil(o.StoreIds) {
 		var ret []string
@@ -716,6 +754,8 @@ func (o *UpdatePaymentMethodInfo) GetStoreIds() []string {
 
 // GetStoreIdsOk returns a tuple with the StoreIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated since Management API v3
+// Use `storeId` instead. Only one store per payment method is allowed.
 func (o *UpdatePaymentMethodInfo) GetStoreIdsOk() ([]string, bool) {
 	if o == nil || common.IsNil(o.StoreIds) {
 		return nil, false
@@ -733,6 +773,8 @@ func (o *UpdatePaymentMethodInfo) HasStoreIds() bool {
 }
 
 // SetStoreIds gets a reference to the given []string and assigns it to the StoreIds field.
+// Deprecated since Management API v3
+// Use `storeId` instead. Only one store per payment method is allowed.
 func (o *UpdatePaymentMethodInfo) SetStoreIds(v []string) {
 	o.StoreIds = v
 }
@@ -838,6 +880,9 @@ func (o UpdatePaymentMethodInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Star) {
 		toSerialize["star"] = o.Star
+	}
+	if !common.IsNil(o.StoreId) {
+		toSerialize["storeId"] = o.StoreId
 	}
 	if !common.IsNil(o.StoreIds) {
 		toSerialize["storeIds"] = o.StoreIds
