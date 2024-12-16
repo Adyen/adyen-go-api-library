@@ -10,7 +10,8 @@ package management
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v16/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v16/src/common"
 )
 
 // checks if the UpdatePaymentMethodInfo type satisfies the MappedNullable interface at compile time
@@ -18,37 +19,37 @@ var _ common.MappedNullable = &UpdatePaymentMethodInfo{}
 
 // UpdatePaymentMethodInfo struct for UpdatePaymentMethodInfo
 type UpdatePaymentMethodInfo struct {
-	Accel *AccelInfo `json:"accel,omitempty"`
-	Bcmc *BcmcInfo `json:"bcmc,omitempty"`
+	Accel           *AccelInfo           `json:"accel,omitempty"`
+	Bcmc            *BcmcInfo            `json:"bcmc,omitempty"`
 	CartesBancaires *CartesBancairesInfo `json:"cartesBancaires,omitempty"`
 	// The list of countries where a payment method is available. By default, all countries supported by the payment method.
-	Countries []string `json:"countries,omitempty"`
-	Cup *GenericPmWithTdiInfo `json:"cup,omitempty"`
+	Countries []string              `json:"countries,omitempty"`
+	Cup       *GenericPmWithTdiInfo `json:"cup,omitempty"`
 	// The list of currencies that a payment method supports. By default, all currencies supported by the payment method.
 	Currencies []string `json:"currencies,omitempty"`
 	// Custom routing flags for acquirer routing.
-	CustomRoutingFlags []string `json:"customRoutingFlags,omitempty"`
-	Diners *GenericPmWithTdiInfo `json:"diners,omitempty"`
-	Discover *GenericPmWithTdiInfo `json:"discover,omitempty"`
-	EftposAustralia *GenericPmWithTdiInfo `json:"eftpos_australia,omitempty"`
+	CustomRoutingFlags []string              `json:"customRoutingFlags,omitempty"`
+	Diners             *GenericPmWithTdiInfo `json:"diners,omitempty"`
+	Discover           *GenericPmWithTdiInfo `json:"discover,omitempty"`
+	EftposAustralia    *GenericPmWithTdiInfo `json:"eftpos_australia,omitempty"`
 	// Indicates whether the payment method is enabled (**true**) or disabled (**false**).
-	Enabled *bool `json:"enabled,omitempty"`
-	Girocard *GenericPmWithTdiInfo `json:"girocard,omitempty"`
-	Ideal *GenericPmWithTdiInfo `json:"ideal,omitempty"`
+	Enabled     *bool                 `json:"enabled,omitempty"`
+	Girocard    *GenericPmWithTdiInfo `json:"girocard,omitempty"`
+	Ideal       *GenericPmWithTdiInfo `json:"ideal,omitempty"`
 	InteracCard *GenericPmWithTdiInfo `json:"interac_card,omitempty"`
-	Jcb *GenericPmWithTdiInfo `json:"jcb,omitempty"`
-	Maestro *GenericPmWithTdiInfo `json:"maestro,omitempty"`
-	Mc *GenericPmWithTdiInfo `json:"mc,omitempty"`
-	Nyce *NyceInfo `json:"nyce,omitempty"`
-	Pulse *PulseInfo `json:"pulse,omitempty"`
-	Star *StarInfo `json:"star,omitempty"`
+	Jcb         *GenericPmWithTdiInfo `json:"jcb,omitempty"`
+	Maestro     *GenericPmWithTdiInfo `json:"maestro,omitempty"`
+	Mc          *GenericPmWithTdiInfo `json:"mc,omitempty"`
+	Nyce        *NyceInfo             `json:"nyce,omitempty"`
+	Pulse       *PulseInfo            `json:"pulse,omitempty"`
+	Star        *StarInfo             `json:"star,omitempty"`
 	// The store for this payment method
 	StoreId *string `json:"storeId,omitempty"`
 	// The list of stores for this payment method
-    // Deprecated since Management API v3
-    // Use `storeId` instead. Only one store per payment method is allowed.
-	StoreIds []string `json:"storeIds,omitempty"`
-	Visa *GenericPmWithTdiInfo `json:"visa,omitempty"`
+	// Deprecated since Management API v3
+	// Use `storeId` instead. Only one store per payment method is allowed.
+	StoreIds []string              `json:"storeIds,omitempty"`
+	Visa     *GenericPmWithTdiInfo `json:"visa,omitempty"`
 }
 
 // NewUpdatePaymentMethodInfo instantiates a new UpdatePaymentMethodInfo object
@@ -811,7 +812,7 @@ func (o *UpdatePaymentMethodInfo) SetVisa(v GenericPmWithTdiInfo) {
 }
 
 func (o UpdatePaymentMethodInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -927,6 +928,3 @@ func (v *NullableUpdatePaymentMethodInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

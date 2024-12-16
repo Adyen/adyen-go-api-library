@@ -10,7 +10,8 @@ package transfers
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v16/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v16/src/common"
 )
 
 // checks if the InternalCategoryData type satisfies the MappedNullable interface at compile time
@@ -144,7 +145,7 @@ func (o *InternalCategoryData) SetType(v string) {
 }
 
 func (o InternalCategoryData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -201,14 +202,12 @@ func (v *NullableInternalCategoryData) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *InternalCategoryData) isValidType() bool {
-    var allowedEnumValues = []string{ "internal" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"internal"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

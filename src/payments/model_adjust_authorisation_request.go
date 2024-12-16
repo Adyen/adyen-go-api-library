@@ -10,7 +10,8 @@ package payments
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v16/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v16/src/common"
 )
 
 // checks if the AdjustAuthorisationRequest type satisfies the MappedNullable interface at compile time
@@ -21,13 +22,13 @@ type AdjustAuthorisationRequest struct {
 	// This field contains additional data, which may be required for a particular modification request.  The additionalData object consists of entries, each of which includes the key and value.
 	AdditionalData *map[string]string `json:"additionalData,omitempty"`
 	// The merchant account that is used to process the payment.
-	MerchantAccount string `json:"merchantAccount"`
-	ModificationAmount Amount `json:"modificationAmount"`
-	MpiData *ThreeDSecureData `json:"mpiData,omitempty"`
+	MerchantAccount    string            `json:"merchantAccount"`
+	ModificationAmount Amount            `json:"modificationAmount"`
+	MpiData            *ThreeDSecureData `json:"mpiData,omitempty"`
 	// The original merchant reference to cancel.
 	OriginalMerchantReference *string `json:"originalMerchantReference,omitempty"`
-	// The original pspReference of the payment to modify. This reference is returned in: * authorisation response * authorisation notification  
-	OriginalReference string `json:"originalReference"`
+	// The original pspReference of the payment to modify. This reference is returned in: * authorisation response * authorisation notification
+	OriginalReference       string                   `json:"originalReference"`
 	PlatformChargebackLogic *PlatformChargebackLogic `json:"platformChargebackLogic,omitempty"`
 	// Your reference for the payment modification. This reference is visible in Customer Area and in reports. Maximum length: 80 characters.
 	Reference *string `json:"reference,omitempty"`
@@ -388,7 +389,7 @@ func (o *AdjustAuthorisationRequest) SetUniqueTerminalId(v string) {
 }
 
 func (o AdjustAuthorisationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -462,6 +463,3 @@ func (v *NullableAdjustAuthorisationRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-
