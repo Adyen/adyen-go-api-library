@@ -14,10 +14,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/joho/godotenv"
+    "github.com/joho/godotenv"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
+    "github.com/stretchr/testify/assert"
+    "github.com/stretchr/testify/require"
 )
 
 func TestCheckoutIntegration(t *testing.T) {
@@ -302,6 +302,15 @@ func TestCheckoutIntegration(t *testing.T) {
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 422, httpRes.StatusCode)
 			require.NotNil(t, res)
-		})
+
+            // cast to API Error
+            e := err.(common.APIError)
+
+            require.NotNil(t, e.RawBody)
+
+            assert.Equal(t, float64(422), e.Status)
+            assert.Equal(t, "validation", e.Type)
+            assert.Equal(t, "208", e.Code)
+        })
 	})
 }
