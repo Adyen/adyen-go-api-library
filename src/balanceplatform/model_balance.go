@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v16/src/common"
+    "github.com/adyen/adyen-go-api-library/v16/src/common"
 )
 
 // checks if the Balance type satisfies the MappedNullable interface at compile time
@@ -19,15 +18,15 @@ var _ common.MappedNullable = &Balance{}
 
 // Balance struct for Balance
 type Balance struct {
-	// The current balance minus any reserved balance.
+	// The balance available for use.
 	Available int64 `json:"available"`
-	// The current balance of funds in the balance account. These are the funds from all transactions with a value date in the past that have not yet been paid out.
+	// The sum of transactions that have already been settled.
 	Balance int64 `json:"balance"`
 	// The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes) of the balance.
 	Currency string `json:"currency"`
-	// The amount of funds that Adyen has processed for this account, but will be settled in a future date.  For more information, see how to settle funds for users in your [platform](https://docs.adyen.com/platforms/settle-funds) and [marketplace](https://docs.adyen.com/marketplaces/settle-funds).
+	// The sum of the transactions that will be settled in the future.
 	Pending *int64 `json:"pending,omitempty"`
-	// The amount reserved for payments that have been [authorised](https://docs.adyen.com/issuing/payment-stages/#authorised), but not yet [captured](https://docs.adyen.com/issuing/payment-stages/#captured) by the merchant.  Applies only to [Adyen-issued cards](https://docs.adyen.com/issuing).
+	// The balance currently held in reserve.
 	Reserved int64 `json:"reserved"`
 }
 
@@ -181,7 +180,7 @@ func (o *Balance) SetReserved(v int64) {
 }
 
 func (o Balance) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -235,3 +234,6 @@ func (v *NullableBalance) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

@@ -10,8 +10,7 @@ package disputewebhook
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v16/src/common"
+    "github.com/adyen/adyen-go-api-library/v16/src/common"
 )
 
 // checks if the DisputeNotificationRequest type satisfies the MappedNullable interface at compile time
@@ -92,7 +91,7 @@ func (o *DisputeNotificationRequest) SetType(v string) {
 }
 
 func (o DisputeNotificationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -142,12 +141,14 @@ func (v *NullableDisputeNotificationRequest) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *DisputeNotificationRequest) isValidType() bool {
-	var allowedEnumValues = []string{"balancePlatform.dispute.created", "balancePlatform.dispute.updated"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "balancePlatform.dispute.created", "balancePlatform.dispute.updated" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

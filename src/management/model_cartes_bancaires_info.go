@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v16/src/common"
+    "github.com/adyen/adyen-go-api-library/v16/src/common"
 )
 
 // checks if the CartesBancairesInfo type satisfies the MappedNullable interface at compile time
@@ -20,7 +19,7 @@ var _ common.MappedNullable = &CartesBancairesInfo{}
 // CartesBancairesInfo struct for CartesBancairesInfo
 type CartesBancairesInfo struct {
 	// Cartes Bancaires SIRET. Format: 14 digits.
-	Siret                  string                      `json:"siret"`
+	Siret string `json:"siret"`
 	TransactionDescription *TransactionDescriptionInfo `json:"transactionDescription,omitempty"`
 }
 
@@ -99,7 +98,7 @@ func (o *CartesBancairesInfo) SetTransactionDescription(v TransactionDescription
 }
 
 func (o CartesBancairesInfo) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -150,3 +149,6 @@ func (v *NullableCartesBancairesInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

@@ -10,8 +10,7 @@ package configurationwebhook
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v16/src/common"
+    "github.com/adyen/adyen-go-api-library/v16/src/common"
 )
 
 // checks if the PlatformPaymentConfiguration type satisfies the MappedNullable interface at compile time
@@ -21,7 +20,7 @@ var _ common.MappedNullable = &PlatformPaymentConfiguration{}
 type PlatformPaymentConfiguration struct {
 	// Specifies at what time a [sales day](https://docs.adyen.com/platforms/settle-funds/sales-day-settlement#sales-day) ends for this account.  Possible values: Time in **\"HH:MM\"** format. **HH** ranges from **00** to **07**. **MM** must be **00**.  Default value: **\"00:00\"**.
 	SalesDayClosingTime *string `json:"salesDayClosingTime,omitempty"`
-	// Specifies after how many business days the funds in a [settlement batch](https://docs.adyen.com/platforms/settle-funds/sales-day-settlement#settlement-batch) are made available in this balance account.  Possible values: **1** to **10**, or **null**. * Setting this value to an integer enables Sales day settlement in this balance account. See how Sales day settlement works in your [marketplace](https://docs.adyen.com/marketplaces/settle-funds/sales-day-settlement) or [platform](https://docs.adyen.com/platforms/settle-funds/sales-day-settlement). * Setting this value to **null** enables Pass-through settlement in this balance account. See how Pass-through settlement works in your [marketplace](https://docs.adyen.com/marketplaces/settle-funds/pass-through-settlement) or [platform](https://docs.adyen.com/platforms/settle-funds/pass-through-settlement).  Default value: **null**.
+	// Specifies after how many business days the funds in a [settlement batch](https://docs.adyen.com/platforms/settle-funds/sales-day-settlement#settlement-batch) are made available in this balance account.  Possible values: **1** to **20**, or **null**. * Setting this value to an integer enables Sales day settlement in this balance account. See how Sales day settlement works in your [marketplace](https://docs.adyen.com/marketplaces/settle-funds/sales-day-settlement) or [platform](https://docs.adyen.com/platforms/settle-funds/sales-day-settlement). * Setting this value to **null** enables Pass-through settlement in this balance account. See how Pass-through settlement works in your [marketplace](https://docs.adyen.com/marketplaces/settle-funds/pass-through-settlement) or [platform](https://docs.adyen.com/platforms/settle-funds/pass-through-settlement).  Default value: **null**.
 	SettlementDelayDays *int32 `json:"settlementDelayDays,omitempty"`
 }
 
@@ -107,7 +106,7 @@ func (o *PlatformPaymentConfiguration) SetSettlementDelayDays(v int32) {
 }
 
 func (o PlatformPaymentConfiguration) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -160,3 +159,6 @@ func (v *NullablePlatformPaymentConfiguration) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

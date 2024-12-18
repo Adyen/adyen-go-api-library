@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v16/src/common"
+    "github.com/adyen/adyen-go-api-library/v16/src/common"
 )
 
 // checks if the CounterpartyBankRestriction type satisfies the MappedNullable interface at compile time
@@ -21,7 +20,7 @@ var _ common.MappedNullable = &CounterpartyBankRestriction{}
 type CounterpartyBankRestriction struct {
 	// Defines how the condition must be evaluated.
 	Operation string `json:"operation"`
-	// List of counterparty Bank Institutions and the operation.
+	// The list of counterparty bank institutions to be evaluated.
 	Value []BankIdentification `json:"value,omitempty"`
 }
 
@@ -100,7 +99,7 @@ func (o *CounterpartyBankRestriction) SetValue(v []BankIdentification) {
 }
 
 func (o CounterpartyBankRestriction) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -151,3 +150,6 @@ func (v *NullableCounterpartyBankRestriction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
