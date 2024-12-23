@@ -10,13 +10,10 @@ package management
 
 import (
 	"context"
-	"encoding/json"
-	"io/ioutil"
-	"net/http"
-	"net/url"
-	"strings"
-
-	"github.com/adyen/adyen-go-api-library/v16/src/common"
+    "net/http"
+    "net/url"
+    "strings"
+    "github.com/adyen/adyen-go-api-library/v16/src/common"
 )
 
 // SplitConfigurationMerchantLevelApi service
@@ -24,8 +21,8 @@ type SplitConfigurationMerchantLevelApi common.Service
 
 // All parameters accepted by SplitConfigurationMerchantLevelApi.CreateRule
 type SplitConfigurationMerchantLevelApiCreateRuleInput struct {
-	merchantId             string
-	splitConfigurationId   string
+	merchantId string
+	splitConfigurationId string
 	splitConfigurationRule *SplitConfigurationRule
 }
 
@@ -34,6 +31,7 @@ func (r SplitConfigurationMerchantLevelApiCreateRuleInput) SplitConfigurationRul
 	return r
 }
 
+
 /*
 Prepare a request for CreateRule
 @param merchantId The unique identifier of the merchant account.@param splitConfigurationId The unique identifier of the split configuration.
@@ -41,7 +39,7 @@ Prepare a request for CreateRule
 */
 func (a *SplitConfigurationMerchantLevelApi) CreateRuleInput(merchantId string, splitConfigurationId string) SplitConfigurationMerchantLevelApiCreateRuleInput {
 	return SplitConfigurationMerchantLevelApiCreateRuleInput{
-		merchantId:           merchantId,
+		merchantId: merchantId,
 		splitConfigurationId: splitConfigurationId,
 	}
 }
@@ -59,75 +57,76 @@ To make this request, your API credential must have the following [role](https:/
 @return SplitConfiguration, *http.Response, error
 */
 func (a *SplitConfigurationMerchantLevelApi) CreateRule(ctx context.Context, r SplitConfigurationMerchantLevelApiCreateRuleInput) (SplitConfiguration, *http.Response, error) {
-	res := &SplitConfiguration{}
+    res := &SplitConfiguration{}
 	path := "/merchants/{merchantId}/splitConfigurations/{splitConfigurationId}"
-	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
-	path = strings.Replace(path, "{"+"splitConfigurationId"+"}", url.PathEscape(common.ParameterValueToString(r.splitConfigurationId, "splitConfigurationId")), -1)
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.splitConfigurationRule,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
+    path = strings.Replace(path, "{"+"splitConfigurationId"+"}", url.PathEscape(common.ParameterValueToString(r.splitConfigurationId, "splitConfigurationId")), -1)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.splitConfigurationRule,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	if httpRes == nil {
-		return *res, httpRes, err
-	}
+    if httpRes == nil {
+        return *res, httpRes, err
+    }
 
-	var serviceError common.RestServiceError
-	if httpRes.StatusCode == 400 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 401 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 403 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 422 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 500 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
+    var serviceError common.RestServiceError
+                        if httpRes.StatusCode == 400 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 401 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 403 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 422 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 500 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
 
-	return *res, httpRes, err
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by SplitConfigurationMerchantLevelApi.CreateSplitConfiguration
 type SplitConfigurationMerchantLevelApiCreateSplitConfigurationInput struct {
-	merchantId         string
+	merchantId string
 	splitConfiguration *SplitConfiguration
 }
 
@@ -135,6 +134,7 @@ func (r SplitConfigurationMerchantLevelApiCreateSplitConfigurationInput) SplitCo
 	r.splitConfiguration = &splitConfiguration
 	return r
 }
+
 
 /*
 Prepare a request for CreateSplitConfiguration
@@ -160,76 +160,78 @@ To make this request, your API credential must have the following [role](https:/
 @return SplitConfiguration, *http.Response, error
 */
 func (a *SplitConfigurationMerchantLevelApi) CreateSplitConfiguration(ctx context.Context, r SplitConfigurationMerchantLevelApiCreateSplitConfigurationInput) (SplitConfiguration, *http.Response, error) {
-	res := &SplitConfiguration{}
+    res := &SplitConfiguration{}
 	path := "/merchants/{merchantId}/splitConfigurations"
-	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.splitConfiguration,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.splitConfiguration,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	if httpRes == nil {
-		return *res, httpRes, err
-	}
+    if httpRes == nil {
+        return *res, httpRes, err
+    }
 
-	var serviceError common.RestServiceError
-	if httpRes.StatusCode == 400 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 401 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 403 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 422 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 500 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
+    var serviceError common.RestServiceError
+                        if httpRes.StatusCode == 400 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 401 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 403 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 422 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 500 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
 
-	return *res, httpRes, err
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by SplitConfigurationMerchantLevelApi.DeleteSplitConfiguration
 type SplitConfigurationMerchantLevelApiDeleteSplitConfigurationInput struct {
-	merchantId           string
+	merchantId string
 	splitConfigurationId string
 }
+
 
 /*
 Prepare a request for DeleteSplitConfiguration
@@ -238,7 +240,7 @@ Prepare a request for DeleteSplitConfiguration
 */
 func (a *SplitConfigurationMerchantLevelApi) DeleteSplitConfigurationInput(merchantId string, splitConfigurationId string) SplitConfigurationMerchantLevelApiDeleteSplitConfigurationInput {
 	return SplitConfigurationMerchantLevelApiDeleteSplitConfigurationInput{
-		merchantId:           merchantId,
+		merchantId: merchantId,
 		splitConfigurationId: splitConfigurationId,
 	}
 }
@@ -256,78 +258,80 @@ To make this request, your API credential must have the following [role](https:/
 @return SplitConfiguration, *http.Response, error
 */
 func (a *SplitConfigurationMerchantLevelApi) DeleteSplitConfiguration(ctx context.Context, r SplitConfigurationMerchantLevelApiDeleteSplitConfigurationInput) (SplitConfiguration, *http.Response, error) {
-	res := &SplitConfiguration{}
+    res := &SplitConfiguration{}
 	path := "/merchants/{merchantId}/splitConfigurations/{splitConfigurationId}"
-	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
-	path = strings.Replace(path, "{"+"splitConfigurationId"+"}", url.PathEscape(common.ParameterValueToString(r.splitConfigurationId, "splitConfigurationId")), -1)
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		nil,
-		res,
-		http.MethodDelete,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
+    path = strings.Replace(path, "{"+"splitConfigurationId"+"}", url.PathEscape(common.ParameterValueToString(r.splitConfigurationId, "splitConfigurationId")), -1)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        nil,
+        res,
+        http.MethodDelete,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	if httpRes == nil {
-		return *res, httpRes, err
-	}
+    if httpRes == nil {
+        return *res, httpRes, err
+    }
 
-	var serviceError common.RestServiceError
-	if httpRes.StatusCode == 400 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 401 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 403 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 422 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 500 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
+    var serviceError common.RestServiceError
+                        if httpRes.StatusCode == 400 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 401 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 403 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 422 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 500 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
 
-	return *res, httpRes, err
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by SplitConfigurationMerchantLevelApi.DeleteSplitConfigurationRule
 type SplitConfigurationMerchantLevelApiDeleteSplitConfigurationRuleInput struct {
-	merchantId           string
+	merchantId string
 	splitConfigurationId string
-	ruleId               string
+	ruleId string
 }
+
 
 /*
 Prepare a request for DeleteSplitConfigurationRule
@@ -336,9 +340,9 @@ Prepare a request for DeleteSplitConfigurationRule
 */
 func (a *SplitConfigurationMerchantLevelApi) DeleteSplitConfigurationRuleInput(merchantId string, splitConfigurationId string, ruleId string) SplitConfigurationMerchantLevelApiDeleteSplitConfigurationRuleInput {
 	return SplitConfigurationMerchantLevelApiDeleteSplitConfigurationRuleInput{
-		merchantId:           merchantId,
+		merchantId: merchantId,
 		splitConfigurationId: splitConfigurationId,
-		ruleId:               ruleId,
+		ruleId: ruleId,
 	}
 }
 
@@ -355,78 +359,80 @@ To make this request, your API credential must have the following [role](https:/
 @return SplitConfiguration, *http.Response, error
 */
 func (a *SplitConfigurationMerchantLevelApi) DeleteSplitConfigurationRule(ctx context.Context, r SplitConfigurationMerchantLevelApiDeleteSplitConfigurationRuleInput) (SplitConfiguration, *http.Response, error) {
-	res := &SplitConfiguration{}
+    res := &SplitConfiguration{}
 	path := "/merchants/{merchantId}/splitConfigurations/{splitConfigurationId}/rules/{ruleId}"
-	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
-	path = strings.Replace(path, "{"+"splitConfigurationId"+"}", url.PathEscape(common.ParameterValueToString(r.splitConfigurationId, "splitConfigurationId")), -1)
-	path = strings.Replace(path, "{"+"ruleId"+"}", url.PathEscape(common.ParameterValueToString(r.ruleId, "ruleId")), -1)
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		nil,
-		res,
-		http.MethodDelete,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
+    path = strings.Replace(path, "{"+"splitConfigurationId"+"}", url.PathEscape(common.ParameterValueToString(r.splitConfigurationId, "splitConfigurationId")), -1)
+    path = strings.Replace(path, "{"+"ruleId"+"}", url.PathEscape(common.ParameterValueToString(r.ruleId, "ruleId")), -1)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        nil,
+        res,
+        http.MethodDelete,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	if httpRes == nil {
-		return *res, httpRes, err
-	}
+    if httpRes == nil {
+        return *res, httpRes, err
+    }
 
-	var serviceError common.RestServiceError
-	if httpRes.StatusCode == 400 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 401 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 403 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 422 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 500 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
+    var serviceError common.RestServiceError
+                        if httpRes.StatusCode == 400 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 401 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 403 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 422 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 500 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
 
-	return *res, httpRes, err
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by SplitConfigurationMerchantLevelApi.GetSplitConfiguration
 type SplitConfigurationMerchantLevelApiGetSplitConfigurationInput struct {
-	merchantId           string
+	merchantId string
 	splitConfigurationId string
 }
+
 
 /*
 Prepare a request for GetSplitConfiguration
@@ -435,7 +441,7 @@ Prepare a request for GetSplitConfiguration
 */
 func (a *SplitConfigurationMerchantLevelApi) GetSplitConfigurationInput(merchantId string, splitConfigurationId string) SplitConfigurationMerchantLevelApiGetSplitConfigurationInput {
 	return SplitConfigurationMerchantLevelApiGetSplitConfigurationInput{
-		merchantId:           merchantId,
+		merchantId: merchantId,
 		splitConfigurationId: splitConfigurationId,
 	}
 }
@@ -453,76 +459,78 @@ To make this request, your API credential must have the following [role](https:/
 @return SplitConfiguration, *http.Response, error
 */
 func (a *SplitConfigurationMerchantLevelApi) GetSplitConfiguration(ctx context.Context, r SplitConfigurationMerchantLevelApiGetSplitConfigurationInput) (SplitConfiguration, *http.Response, error) {
-	res := &SplitConfiguration{}
+    res := &SplitConfiguration{}
 	path := "/merchants/{merchantId}/splitConfigurations/{splitConfigurationId}"
-	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
-	path = strings.Replace(path, "{"+"splitConfigurationId"+"}", url.PathEscape(common.ParameterValueToString(r.splitConfigurationId, "splitConfigurationId")), -1)
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		nil,
-		res,
-		http.MethodGet,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
+    path = strings.Replace(path, "{"+"splitConfigurationId"+"}", url.PathEscape(common.ParameterValueToString(r.splitConfigurationId, "splitConfigurationId")), -1)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        nil,
+        res,
+        http.MethodGet,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	if httpRes == nil {
-		return *res, httpRes, err
-	}
+    if httpRes == nil {
+        return *res, httpRes, err
+    }
 
-	var serviceError common.RestServiceError
-	if httpRes.StatusCode == 400 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 401 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 403 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 422 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 500 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
+    var serviceError common.RestServiceError
+                        if httpRes.StatusCode == 400 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 401 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 403 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 422 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 500 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
 
-	return *res, httpRes, err
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by SplitConfigurationMerchantLevelApi.ListSplitConfigurations
 type SplitConfigurationMerchantLevelApiListSplitConfigurationsInput struct {
 	merchantId string
 }
+
 
 /*
 Prepare a request for ListSplitConfigurations
@@ -548,76 +556,77 @@ To make this request, your API credential must have the following [role](https:/
 @return SplitConfigurationList, *http.Response, error
 */
 func (a *SplitConfigurationMerchantLevelApi) ListSplitConfigurations(ctx context.Context, r SplitConfigurationMerchantLevelApiListSplitConfigurationsInput) (SplitConfigurationList, *http.Response, error) {
-	res := &SplitConfigurationList{}
+    res := &SplitConfigurationList{}
 	path := "/merchants/{merchantId}/splitConfigurations"
-	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		nil,
-		res,
-		http.MethodGet,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        nil,
+        res,
+        http.MethodGet,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	if httpRes == nil {
-		return *res, httpRes, err
-	}
+    if httpRes == nil {
+        return *res, httpRes, err
+    }
 
-	var serviceError common.RestServiceError
-	if httpRes.StatusCode == 400 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 401 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 403 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 422 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 500 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
+    var serviceError common.RestServiceError
+                        if httpRes.StatusCode == 400 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 401 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 403 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 422 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 500 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
 
-	return *res, httpRes, err
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by SplitConfigurationMerchantLevelApi.UpdateSplitConditions
 type SplitConfigurationMerchantLevelApiUpdateSplitConditionsInput struct {
-	merchantId                          string
-	splitConfigurationId                string
-	ruleId                              string
+	merchantId string
+	splitConfigurationId string
+	ruleId string
 	updateSplitConfigurationRuleRequest *UpdateSplitConfigurationRuleRequest
 }
 
@@ -626,6 +635,7 @@ func (r SplitConfigurationMerchantLevelApiUpdateSplitConditionsInput) UpdateSpli
 	return r
 }
 
+
 /*
 Prepare a request for UpdateSplitConditions
 @param merchantId The unique identifier of the merchant account.@param splitConfigurationId The identifier of the split configuration.@param ruleId The unique identifier of the split configuration rule.
@@ -633,9 +643,9 @@ Prepare a request for UpdateSplitConditions
 */
 func (a *SplitConfigurationMerchantLevelApi) UpdateSplitConditionsInput(merchantId string, splitConfigurationId string, ruleId string) SplitConfigurationMerchantLevelApiUpdateSplitConditionsInput {
 	return SplitConfigurationMerchantLevelApiUpdateSplitConditionsInput{
-		merchantId:           merchantId,
+		merchantId: merchantId,
 		splitConfigurationId: splitConfigurationId,
-		ruleId:               ruleId,
+		ruleId: ruleId,
 	}
 }
 
@@ -652,77 +662,78 @@ To make this request, your API credential must have the following [role](https:/
 @return SplitConfiguration, *http.Response, error
 */
 func (a *SplitConfigurationMerchantLevelApi) UpdateSplitConditions(ctx context.Context, r SplitConfigurationMerchantLevelApiUpdateSplitConditionsInput) (SplitConfiguration, *http.Response, error) {
-	res := &SplitConfiguration{}
+    res := &SplitConfiguration{}
 	path := "/merchants/{merchantId}/splitConfigurations/{splitConfigurationId}/rules/{ruleId}"
-	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
-	path = strings.Replace(path, "{"+"splitConfigurationId"+"}", url.PathEscape(common.ParameterValueToString(r.splitConfigurationId, "splitConfigurationId")), -1)
-	path = strings.Replace(path, "{"+"ruleId"+"}", url.PathEscape(common.ParameterValueToString(r.ruleId, "ruleId")), -1)
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.updateSplitConfigurationRuleRequest,
-		res,
-		http.MethodPatch,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
+    path = strings.Replace(path, "{"+"splitConfigurationId"+"}", url.PathEscape(common.ParameterValueToString(r.splitConfigurationId, "splitConfigurationId")), -1)
+    path = strings.Replace(path, "{"+"ruleId"+"}", url.PathEscape(common.ParameterValueToString(r.ruleId, "ruleId")), -1)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.updateSplitConfigurationRuleRequest,
+        res,
+        http.MethodPatch,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	if httpRes == nil {
-		return *res, httpRes, err
-	}
+    if httpRes == nil {
+        return *res, httpRes, err
+    }
 
-	var serviceError common.RestServiceError
-	if httpRes.StatusCode == 400 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 401 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 403 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 422 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 500 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
+    var serviceError common.RestServiceError
+                        if httpRes.StatusCode == 400 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 401 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 403 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 422 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 500 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
 
-	return *res, httpRes, err
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by SplitConfigurationMerchantLevelApi.UpdateSplitConfigurationDescription
 type SplitConfigurationMerchantLevelApiUpdateSplitConfigurationDescriptionInput struct {
-	merchantId                      string
-	splitConfigurationId            string
+	merchantId string
+	splitConfigurationId string
 	updateSplitConfigurationRequest *UpdateSplitConfigurationRequest
 }
 
@@ -731,6 +742,7 @@ func (r SplitConfigurationMerchantLevelApiUpdateSplitConfigurationDescriptionInp
 	return r
 }
 
+
 /*
 Prepare a request for UpdateSplitConfigurationDescription
 @param merchantId The unique identifier of the merchant account.@param splitConfigurationId The unique identifier of the split configuration.
@@ -738,7 +750,7 @@ Prepare a request for UpdateSplitConfigurationDescription
 */
 func (a *SplitConfigurationMerchantLevelApi) UpdateSplitConfigurationDescriptionInput(merchantId string, splitConfigurationId string) SplitConfigurationMerchantLevelApiUpdateSplitConfigurationDescriptionInput {
 	return SplitConfigurationMerchantLevelApiUpdateSplitConfigurationDescriptionInput{
-		merchantId:           merchantId,
+		merchantId: merchantId,
 		splitConfigurationId: splitConfigurationId,
 	}
 }
@@ -756,78 +768,79 @@ To make this request, your API credential must have the following [role](https:/
 @return SplitConfiguration, *http.Response, error
 */
 func (a *SplitConfigurationMerchantLevelApi) UpdateSplitConfigurationDescription(ctx context.Context, r SplitConfigurationMerchantLevelApiUpdateSplitConfigurationDescriptionInput) (SplitConfiguration, *http.Response, error) {
-	res := &SplitConfiguration{}
+    res := &SplitConfiguration{}
 	path := "/merchants/{merchantId}/splitConfigurations/{splitConfigurationId}"
-	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
-	path = strings.Replace(path, "{"+"splitConfigurationId"+"}", url.PathEscape(common.ParameterValueToString(r.splitConfigurationId, "splitConfigurationId")), -1)
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.updateSplitConfigurationRequest,
-		res,
-		http.MethodPatch,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
+    path = strings.Replace(path, "{"+"splitConfigurationId"+"}", url.PathEscape(common.ParameterValueToString(r.splitConfigurationId, "splitConfigurationId")), -1)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.updateSplitConfigurationRequest,
+        res,
+        http.MethodPatch,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	if httpRes == nil {
-		return *res, httpRes, err
-	}
+    if httpRes == nil {
+        return *res, httpRes, err
+    }
 
-	var serviceError common.RestServiceError
-	if httpRes.StatusCode == 400 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 401 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 403 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 422 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 500 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
+    var serviceError common.RestServiceError
+                        if httpRes.StatusCode == 400 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 401 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 403 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 422 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 500 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
 
-	return *res, httpRes, err
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by SplitConfigurationMerchantLevelApi.UpdateSplitLogic
 type SplitConfigurationMerchantLevelApiUpdateSplitLogicInput struct {
-	merchantId                           string
-	splitConfigurationId                 string
-	ruleId                               string
-	splitLogicId                         string
+	merchantId string
+	splitConfigurationId string
+	ruleId string
+	splitLogicId string
 	updateSplitConfigurationLogicRequest *UpdateSplitConfigurationLogicRequest
 }
 
@@ -836,6 +849,7 @@ func (r SplitConfigurationMerchantLevelApiUpdateSplitLogicInput) UpdateSplitConf
 	return r
 }
 
+
 /*
 Prepare a request for UpdateSplitLogic
 @param merchantId The unique identifier of the merchant account.@param splitConfigurationId The unique identifier of the split configuration.@param ruleId The unique identifier of the split configuration rule.@param splitLogicId The unique identifier of the split configuration split.
@@ -843,10 +857,10 @@ Prepare a request for UpdateSplitLogic
 */
 func (a *SplitConfigurationMerchantLevelApi) UpdateSplitLogicInput(merchantId string, splitConfigurationId string, ruleId string, splitLogicId string) SplitConfigurationMerchantLevelApiUpdateSplitLogicInput {
 	return SplitConfigurationMerchantLevelApiUpdateSplitLogicInput{
-		merchantId:           merchantId,
+		merchantId: merchantId,
 		splitConfigurationId: splitConfigurationId,
-		ruleId:               ruleId,
-		splitLogicId:         splitLogicId,
+		ruleId: ruleId,
+		splitLogicId: splitLogicId,
 	}
 }
 
@@ -863,70 +877,71 @@ To make this request, your API credential must have the following [role](https:/
 @return SplitConfiguration, *http.Response, error
 */
 func (a *SplitConfigurationMerchantLevelApi) UpdateSplitLogic(ctx context.Context, r SplitConfigurationMerchantLevelApiUpdateSplitLogicInput) (SplitConfiguration, *http.Response, error) {
-	res := &SplitConfiguration{}
+    res := &SplitConfiguration{}
 	path := "/merchants/{merchantId}/splitConfigurations/{splitConfigurationId}/rules/{ruleId}/splitLogic/{splitLogicId}"
-	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
-	path = strings.Replace(path, "{"+"splitConfigurationId"+"}", url.PathEscape(common.ParameterValueToString(r.splitConfigurationId, "splitConfigurationId")), -1)
-	path = strings.Replace(path, "{"+"ruleId"+"}", url.PathEscape(common.ParameterValueToString(r.ruleId, "ruleId")), -1)
-	path = strings.Replace(path, "{"+"splitLogicId"+"}", url.PathEscape(common.ParameterValueToString(r.splitLogicId, "splitLogicId")), -1)
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.updateSplitConfigurationLogicRequest,
-		res,
-		http.MethodPatch,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
+    path = strings.Replace(path, "{"+"splitConfigurationId"+"}", url.PathEscape(common.ParameterValueToString(r.splitConfigurationId, "splitConfigurationId")), -1)
+    path = strings.Replace(path, "{"+"ruleId"+"}", url.PathEscape(common.ParameterValueToString(r.ruleId, "ruleId")), -1)
+    path = strings.Replace(path, "{"+"splitLogicId"+"}", url.PathEscape(common.ParameterValueToString(r.splitLogicId, "splitLogicId")), -1)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.updateSplitConfigurationLogicRequest,
+        res,
+        http.MethodPatch,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	if httpRes == nil {
-		return *res, httpRes, err
-	}
+    if httpRes == nil {
+        return *res, httpRes, err
+    }
 
-	var serviceError common.RestServiceError
-	if httpRes.StatusCode == 400 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 401 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 403 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 422 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
-	if httpRes.StatusCode == 500 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return *res, httpRes, decodeError
-		}
-		return *res, httpRes, serviceError
-	}
+    var serviceError common.RestServiceError
+                        if httpRes.StatusCode == 400 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 401 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 403 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 422 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 500 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return *res, httpRes, decodeError
+                            }
+                            return *res, httpRes, serviceError
+                        }
 
-	return *res, httpRes, err
+    return *res, httpRes, err
 }
+

@@ -10,8 +10,8 @@ package configurationwebhook
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v16/src/common"
+    "github.com/adyen/adyen-go-api-library/v16/src/common"
+	"time"
 )
 
 // checks if the CardOrderNotificationRequest type satisfies the MappedNullable interface at compile time
@@ -22,6 +22,8 @@ type CardOrderNotificationRequest struct {
 	Data CardOrderItem `json:"data"`
 	// The environment from which the webhook originated.  Possible values: **test**, **live**.
 	Environment string `json:"environment"`
+	// When the event was queued.
+	Timestamp *time.Time `json:"timestamp,omitempty"`
 	// Type of webhook.
 	Type string `json:"type"`
 }
@@ -94,6 +96,38 @@ func (o *CardOrderNotificationRequest) SetEnvironment(v string) {
 	o.Environment = v
 }
 
+// GetTimestamp returns the Timestamp field value if set, zero value otherwise.
+func (o *CardOrderNotificationRequest) GetTimestamp() time.Time {
+	if o == nil || common.IsNil(o.Timestamp) {
+		var ret time.Time
+		return ret
+	}
+	return *o.Timestamp
+}
+
+// GetTimestampOk returns a tuple with the Timestamp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CardOrderNotificationRequest) GetTimestampOk() (*time.Time, bool) {
+	if o == nil || common.IsNil(o.Timestamp) {
+		return nil, false
+	}
+	return o.Timestamp, true
+}
+
+// HasTimestamp returns a boolean if a field has been set.
+func (o *CardOrderNotificationRequest) HasTimestamp() bool {
+	if o != nil && !common.IsNil(o.Timestamp) {
+		return true
+	}
+
+	return false
+}
+
+// SetTimestamp gets a reference to the given time.Time and assigns it to the Timestamp field.
+func (o *CardOrderNotificationRequest) SetTimestamp(v time.Time) {
+	o.Timestamp = &v
+}
+
 // GetType returns the Type field value
 func (o *CardOrderNotificationRequest) GetType() string {
 	if o == nil {
@@ -119,7 +153,7 @@ func (o *CardOrderNotificationRequest) SetType(v string) {
 }
 
 func (o CardOrderNotificationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -130,6 +164,9 @@ func (o CardOrderNotificationRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["data"] = o.Data
 	toSerialize["environment"] = o.Environment
+	if !common.IsNil(o.Timestamp) {
+		toSerialize["timestamp"] = o.Timestamp
+	}
 	toSerialize["type"] = o.Type
 	return toSerialize, nil
 }
@@ -170,12 +207,14 @@ func (v *NullableCardOrderNotificationRequest) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *CardOrderNotificationRequest) isValidType() bool {
-	var allowedEnumValues = []string{"balancePlatform.cardorder.created", "balancePlatform.cardorder.updated"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "balancePlatform.cardorder.created", "balancePlatform.cardorder.updated" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+
