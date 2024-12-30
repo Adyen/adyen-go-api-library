@@ -69,7 +69,7 @@ The library supports all webhooks under the following model directories:
 You can use go modules to add our library to your project
 
 ```bash
-go get github.com/adyen/adyen-go-api-library/v16@v16.1.0
+go get github.com/adyen/adyen-go-api-library/v16@v16.2.0
 ```
 
 ## Usage examples
