@@ -21,7 +21,7 @@ var _ common.MappedNullable = &CounterpartyBankRestriction{}
 type CounterpartyBankRestriction struct {
 	// Defines how the condition must be evaluated.
 	Operation string `json:"operation"`
-	// List of counterparty Bank Institutions and the operation.
+	// The list of counterparty bank institutions to be evaluated.
 	Value []BankIdentification `json:"value,omitempty"`
 }
 

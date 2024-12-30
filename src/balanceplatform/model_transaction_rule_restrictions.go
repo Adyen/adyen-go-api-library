@@ -22,6 +22,7 @@ type TransactionRuleRestrictions struct {
 	ActiveNetworkTokens         *ActiveNetworkTokensRestriction      `json:"activeNetworkTokens,omitempty"`
 	BrandVariants               *BrandVariantsRestriction            `json:"brandVariants,omitempty"`
 	CounterpartyBank            *CounterpartyBankRestriction         `json:"counterpartyBank,omitempty"`
+	CounterpartyTypes           *CounterpartyTypesRestriction        `json:"counterpartyTypes,omitempty"`
 	Countries                   *CountriesRestriction                `json:"countries,omitempty"`
 	DayOfWeek                   *DayOfWeekRestriction                `json:"dayOfWeek,omitempty"`
 	DifferentCurrencies         *DifferentCurrenciesRestriction      `json:"differentCurrencies,omitempty"`
@@ -36,6 +37,7 @@ type TransactionRuleRestrictions struct {
 	RiskScores                  *RiskScoresRestriction               `json:"riskScores,omitempty"`
 	SameAmountRestriction       *SameAmountRestriction               `json:"sameAmountRestriction,omitempty"`
 	SameCounterpartyRestriction *SameCounterpartyRestriction         `json:"sameCounterpartyRestriction,omitempty"`
+	SourceAccountTypes          *SourceAccountTypesRestriction       `json:"sourceAccountTypes,omitempty"`
 	TimeOfDay                   *TimeOfDayRestriction                `json:"timeOfDay,omitempty"`
 	TotalAmount                 *TotalAmountRestriction              `json:"totalAmount,omitempty"`
 }
@@ -151,6 +153,38 @@ func (o *TransactionRuleRestrictions) HasCounterpartyBank() bool {
 // SetCounterpartyBank gets a reference to the given CounterpartyBankRestriction and assigns it to the CounterpartyBank field.
 func (o *TransactionRuleRestrictions) SetCounterpartyBank(v CounterpartyBankRestriction) {
 	o.CounterpartyBank = &v
+}
+
+// GetCounterpartyTypes returns the CounterpartyTypes field value if set, zero value otherwise.
+func (o *TransactionRuleRestrictions) GetCounterpartyTypes() CounterpartyTypesRestriction {
+	if o == nil || common.IsNil(o.CounterpartyTypes) {
+		var ret CounterpartyTypesRestriction
+		return ret
+	}
+	return *o.CounterpartyTypes
+}
+
+// GetCounterpartyTypesOk returns a tuple with the CounterpartyTypes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionRuleRestrictions) GetCounterpartyTypesOk() (*CounterpartyTypesRestriction, bool) {
+	if o == nil || common.IsNil(o.CounterpartyTypes) {
+		return nil, false
+	}
+	return o.CounterpartyTypes, true
+}
+
+// HasCounterpartyTypes returns a boolean if a field has been set.
+func (o *TransactionRuleRestrictions) HasCounterpartyTypes() bool {
+	if o != nil && !common.IsNil(o.CounterpartyTypes) {
+		return true
+	}
+
+	return false
+}
+
+// SetCounterpartyTypes gets a reference to the given CounterpartyTypesRestriction and assigns it to the CounterpartyTypes field.
+func (o *TransactionRuleRestrictions) SetCounterpartyTypes(v CounterpartyTypesRestriction) {
+	o.CounterpartyTypes = &v
 }
 
 // GetCountries returns the Countries field value if set, zero value otherwise.
@@ -601,6 +635,38 @@ func (o *TransactionRuleRestrictions) SetSameCounterpartyRestriction(v SameCount
 	o.SameCounterpartyRestriction = &v
 }
 
+// GetSourceAccountTypes returns the SourceAccountTypes field value if set, zero value otherwise.
+func (o *TransactionRuleRestrictions) GetSourceAccountTypes() SourceAccountTypesRestriction {
+	if o == nil || common.IsNil(o.SourceAccountTypes) {
+		var ret SourceAccountTypesRestriction
+		return ret
+	}
+	return *o.SourceAccountTypes
+}
+
+// GetSourceAccountTypesOk returns a tuple with the SourceAccountTypes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionRuleRestrictions) GetSourceAccountTypesOk() (*SourceAccountTypesRestriction, bool) {
+	if o == nil || common.IsNil(o.SourceAccountTypes) {
+		return nil, false
+	}
+	return o.SourceAccountTypes, true
+}
+
+// HasSourceAccountTypes returns a boolean if a field has been set.
+func (o *TransactionRuleRestrictions) HasSourceAccountTypes() bool {
+	if o != nil && !common.IsNil(o.SourceAccountTypes) {
+		return true
+	}
+
+	return false
+}
+
+// SetSourceAccountTypes gets a reference to the given SourceAccountTypesRestriction and assigns it to the SourceAccountTypes field.
+func (o *TransactionRuleRestrictions) SetSourceAccountTypes(v SourceAccountTypesRestriction) {
+	o.SourceAccountTypes = &v
+}
+
 // GetTimeOfDay returns the TimeOfDay field value if set, zero value otherwise.
 func (o *TransactionRuleRestrictions) GetTimeOfDay() TimeOfDayRestriction {
 	if o == nil || common.IsNil(o.TimeOfDay) {
@@ -684,6 +750,9 @@ func (o TransactionRuleRestrictions) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.CounterpartyBank) {
 		toSerialize["counterpartyBank"] = o.CounterpartyBank
 	}
+	if !common.IsNil(o.CounterpartyTypes) {
+		toSerialize["counterpartyTypes"] = o.CounterpartyTypes
+	}
 	if !common.IsNil(o.Countries) {
 		toSerialize["countries"] = o.Countries
 	}
@@ -725,6 +794,9 @@ func (o TransactionRuleRestrictions) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.SameCounterpartyRestriction) {
 		toSerialize["sameCounterpartyRestriction"] = o.SameCounterpartyRestriction
+	}
+	if !common.IsNil(o.SourceAccountTypes) {
+		toSerialize["sourceAccountTypes"] = o.SourceAccountTypes
 	}
 	if !common.IsNil(o.TimeOfDay) {
 		toSerialize["timeOfDay"] = o.TimeOfDay
