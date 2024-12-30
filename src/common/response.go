@@ -1,9 +1,3 @@
-/*
- * Adyen Checkout API
- *
- * Contact: support@adyen.com
- */
-
 package common
 
 import (
