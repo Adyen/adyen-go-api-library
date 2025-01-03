@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v16/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v16/src/common"
 )
 
 // checks if the ResponseAdditionalDataCard type satisfies the MappedNullable interface at compile time
@@ -30,7 +31,7 @@ type ResponseAdditionalDataCard struct {
 	CardIssuingCurrency *string `json:"cardIssuingCurrency,omitempty"`
 	// The card payment method used for the transaction.  Example: amex
 	CardPaymentMethod *string `json:"cardPaymentMethod,omitempty"`
-	// The Card Product ID represents the type of card following card scheme product definitions and can be returned for Adyen Acquiring service level payments.  Possible values Visa: * **A** - Visa Traditional * **B** - Visa Traditional Rewards * **C** - Visa Signature * **D** - Visa Signature Preferred * **F** - Visa Classic  Possible values Mastercard: * **MCC** - Mastercard Card * **MCE** - Mastercard Electronic Card * **MCF** - Mastercard Corporate Fleet Card * **MCG** - Gold Mastercard Card * **MCH** - Mastercard Premium Charge * **MCI** - Mastercard Select Debit 
+	// The Card Product ID represents the type of card following card scheme product definitions and can be returned for Adyen Acquiring service level payments.  Possible values Visa: * **A** - Visa Traditional * **B** - Visa Traditional Rewards * **C** - Visa Signature * **D** - Visa Signature Preferred * **F** - Visa Classic  Possible values Mastercard: * **MCC** - Mastercard Card * **MCE** - Mastercard Electronic Card * **MCF** - Mastercard Corporate Fleet Card * **MCG** - Gold Mastercard Card * **MCH** - Mastercard Premium Charge * **MCI** - Mastercard Select Debit
 	CardProductId *string `json:"cardProductId,omitempty"`
 	// The last four digits of a card number.  > Returned only in case of a card payment.
 	CardSummary *string `json:"cardSummary,omitempty"`
@@ -344,7 +345,7 @@ func (o *ResponseAdditionalDataCard) SetIssuerBin(v string) {
 }
 
 func (o ResponseAdditionalDataCard) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -419,14 +420,12 @@ func (v *NullableResponseAdditionalDataCard) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *ResponseAdditionalDataCard) isValidCardProductId() bool {
-    var allowedEnumValues = []string{ "A", "B", "C", "D", "F", "MCC", "MCE", "MCF", "MCG", "MCH", "MCI" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetCardProductId() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"A", "B", "C", "D", "F", "MCC", "MCE", "MCF", "MCG", "MCH", "MCI"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetCardProductId() == allowed {
+			return true
+		}
+	}
+	return false
 }
-
