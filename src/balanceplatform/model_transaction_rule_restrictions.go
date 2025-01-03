@@ -33,6 +33,7 @@ type TransactionRuleRestrictions struct {
 	Mccs                        *MccsRestriction                     `json:"mccs,omitempty"`
 	MerchantNames               *MerchantNamesRestriction            `json:"merchantNames,omitempty"`
 	Merchants                   *MerchantsRestriction                `json:"merchants,omitempty"`
+	Priority                    *PriorityRestriction                 `json:"priority,omitempty"`
 	ProcessingTypes             *ProcessingTypesRestriction          `json:"processingTypes,omitempty"`
 	RiskScores                  *RiskScoresRestriction               `json:"riskScores,omitempty"`
 	SameAmountRestriction       *SameAmountRestriction               `json:"sameAmountRestriction,omitempty"`
@@ -507,6 +508,38 @@ func (o *TransactionRuleRestrictions) SetMerchants(v MerchantsRestriction) {
 	o.Merchants = &v
 }
 
+// GetPriority returns the Priority field value if set, zero value otherwise.
+func (o *TransactionRuleRestrictions) GetPriority() PriorityRestriction {
+	if o == nil || common.IsNil(o.Priority) {
+		var ret PriorityRestriction
+		return ret
+	}
+	return *o.Priority
+}
+
+// GetPriorityOk returns a tuple with the Priority field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionRuleRestrictions) GetPriorityOk() (*PriorityRestriction, bool) {
+	if o == nil || common.IsNil(o.Priority) {
+		return nil, false
+	}
+	return o.Priority, true
+}
+
+// HasPriority returns a boolean if a field has been set.
+func (o *TransactionRuleRestrictions) HasPriority() bool {
+	if o != nil && !common.IsNil(o.Priority) {
+		return true
+	}
+
+	return false
+}
+
+// SetPriority gets a reference to the given PriorityRestriction and assigns it to the Priority field.
+func (o *TransactionRuleRestrictions) SetPriority(v PriorityRestriction) {
+	o.Priority = &v
+}
+
 // GetProcessingTypes returns the ProcessingTypes field value if set, zero value otherwise.
 func (o *TransactionRuleRestrictions) GetProcessingTypes() ProcessingTypesRestriction {
 	if o == nil || common.IsNil(o.ProcessingTypes) {
@@ -782,6 +815,9 @@ func (o TransactionRuleRestrictions) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Merchants) {
 		toSerialize["merchants"] = o.Merchants
+	}
+	if !common.IsNil(o.Priority) {
+		toSerialize["priority"] = o.Priority
 	}
 	if !common.IsNil(o.ProcessingTypes) {
 		toSerialize["processingTypes"] = o.ProcessingTypes
