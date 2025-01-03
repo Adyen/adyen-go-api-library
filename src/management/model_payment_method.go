@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v16/src/common"
+    "github.com/adyen/adyen-go-api-library/v16/src/common"
 )
 
 // checks if the PaymentMethod type satisfies the MappedNullable interface at compile time
@@ -19,65 +18,65 @@ var _ common.MappedNullable = &PaymentMethod{}
 
 // PaymentMethod struct for PaymentMethod
 type PaymentMethod struct {
-	Accel         *AccelInfo         `json:"accel,omitempty"`
+	Accel *AccelInfo `json:"accel,omitempty"`
 	AfterpayTouch *AfterpayTouchInfo `json:"afterpayTouch,omitempty"`
 	// Indicates whether receiving payments is allowed. This value is set to **true** by Adyen after screening your merchant account.
-	Allowed  *bool         `json:"allowed,omitempty"`
-	Amex     *AmexInfo     `json:"amex,omitempty"`
+	Allowed *bool `json:"allowed,omitempty"`
+	Amex *AmexInfo `json:"amex,omitempty"`
 	ApplePay *ApplePayInfo `json:"applePay,omitempty"`
-	Bcmc     *BcmcInfo     `json:"bcmc,omitempty"`
+	Bcmc *BcmcInfo `json:"bcmc,omitempty"`
 	// The unique identifier of the business line. Required if you are a [platform model](https://docs.adyen.com/platforms).
-	BusinessLineId  *string              `json:"businessLineId,omitempty"`
+	BusinessLineId *string `json:"businessLineId,omitempty"`
 	CartesBancaires *CartesBancairesInfo `json:"cartesBancaires,omitempty"`
-	Clearpay        *ClearpayInfo        `json:"clearpay,omitempty"`
+	Clearpay *ClearpayInfo `json:"clearpay,omitempty"`
 	// The list of countries where a payment method is available. By default, all countries supported by the payment method.
-	Countries []string              `json:"countries,omitempty"`
-	Cup       *GenericPmWithTdiInfo `json:"cup,omitempty"`
+	Countries []string `json:"countries,omitempty"`
+	Cup *GenericPmWithTdiInfo `json:"cup,omitempty"`
 	// The list of currencies that a payment method supports. By default, all currencies supported by the payment method.
 	Currencies []string `json:"currencies,omitempty"`
 	// The list of custom routing flags to route payment to the intended acquirer.
-	CustomRoutingFlags []string              `json:"customRoutingFlags,omitempty"`
-	Diners             *DinersInfo           `json:"diners,omitempty"`
-	Discover           *GenericPmWithTdiInfo `json:"discover,omitempty"`
-	EftposAustralia    *GenericPmWithTdiInfo `json:"eftpos_australia,omitempty"`
+	CustomRoutingFlags []string `json:"customRoutingFlags,omitempty"`
+	Diners *DinersInfo `json:"diners,omitempty"`
+	Discover *GenericPmWithTdiInfo `json:"discover,omitempty"`
+	EftposAustralia *GenericPmWithTdiInfo `json:"eftpos_australia,omitempty"`
 	// Indicates whether the payment method is enabled (**true**) or disabled (**false**).
-	Enabled   *bool                 `json:"enabled,omitempty"`
-	GiroPay   *GiroPayInfo          `json:"giroPay,omitempty"`
-	Girocard  *GenericPmWithTdiInfo `json:"girocard,omitempty"`
-	GooglePay *GooglePayInfo        `json:"googlePay,omitempty"`
+	Enabled *bool `json:"enabled,omitempty"`
+	GiroPay *GiroPayInfo `json:"giroPay,omitempty"`
+	Girocard *GenericPmWithTdiInfo `json:"girocard,omitempty"`
+	GooglePay *GooglePayInfo `json:"googlePay,omitempty"`
 	// The identifier of the resource.
-	Id            string                `json:"id"`
-	Ideal         *GenericPmWithTdiInfo `json:"ideal,omitempty"`
-	InteracCard   *GenericPmWithTdiInfo `json:"interac_card,omitempty"`
-	Jcb           *JCBInfo              `json:"jcb,omitempty"`
-	Klarna        *KlarnaInfo           `json:"klarna,omitempty"`
-	Maestro       *GenericPmWithTdiInfo `json:"maestro,omitempty"`
-	Mc            *GenericPmWithTdiInfo `json:"mc,omitempty"`
-	MealVoucherFR *MealVoucherFRInfo    `json:"mealVoucher_FR,omitempty"`
-	Nyce          *NyceInfo             `json:"nyce,omitempty"`
-	Payme         *PayMeInfo            `json:"payme,omitempty"`
-	Paypal        *PayPalInfo           `json:"paypal,omitempty"`
-	Pulse         *PulseInfo            `json:"pulse,omitempty"`
+	Id string `json:"id"`
+	Ideal *GenericPmWithTdiInfo `json:"ideal,omitempty"`
+	InteracCard *GenericPmWithTdiInfo `json:"interac_card,omitempty"`
+	Jcb *JCBInfo `json:"jcb,omitempty"`
+	Klarna *KlarnaInfo `json:"klarna,omitempty"`
+	Maestro *GenericPmWithTdiInfo `json:"maestro,omitempty"`
+	Mc *GenericPmWithTdiInfo `json:"mc,omitempty"`
+	MealVoucherFR *MealVoucherFRInfo `json:"mealVoucher_FR,omitempty"`
+	Nyce *NyceInfo `json:"nyce,omitempty"`
+	Payme *PayMeInfo `json:"payme,omitempty"`
+	Paypal *PayPalInfo `json:"paypal,omitempty"`
+	Pulse *PulseInfo `json:"pulse,omitempty"`
 	// Your reference for the payment method. Supported characters a-z, A-Z, 0-9.
 	Reference *string `json:"reference,omitempty"`
 	// The sales channel.
-	ShopperInteraction *string     `json:"shopperInteraction,omitempty"`
-	Sodexo             *SodexoInfo `json:"sodexo,omitempty"`
-	Sofort             *SofortInfo `json:"sofort,omitempty"`
-	Star               *StarInfo   `json:"star,omitempty"`
+	ShopperInteraction *string `json:"shopperInteraction,omitempty"`
+	Sodexo *SodexoInfo `json:"sodexo,omitempty"`
+	Sofort *SofortInfo `json:"sofort,omitempty"`
+	Star *StarInfo `json:"star,omitempty"`
 	// The unique identifier of the store for which to configure the payment method, if any.
-	StoreIds []string    `json:"storeIds,omitempty"`
-	Swish    *SwishInfo  `json:"swish,omitempty"`
-	Ticket   *TicketInfo `json:"ticket,omitempty"`
-	Twint    *TwintInfo  `json:"twint,omitempty"`
+	StoreIds []string `json:"storeIds,omitempty"`
+	Swish *SwishInfo `json:"swish,omitempty"`
+	Ticket *TicketInfo `json:"ticket,omitempty"`
+	Twint *TwintInfo `json:"twint,omitempty"`
 	// Payment method [variant](https://docs.adyen.com/development-resources/paymentmethodvariant#management-api).
 	Type *string `json:"type,omitempty"`
 	// Payment method status. Possible values: * **valid** * **pending** * **invalid** * **rejected**
-	VerificationStatus *string               `json:"verificationStatus,omitempty"`
-	Vipps              *VippsInfo            `json:"vipps,omitempty"`
-	Visa               *GenericPmWithTdiInfo `json:"visa,omitempty"`
-	Wechatpay          *WeChatPayInfo        `json:"wechatpay,omitempty"`
-	WechatpayPos       *WeChatPayPosInfo     `json:"wechatpay_pos,omitempty"`
+	VerificationStatus *string `json:"verificationStatus,omitempty"`
+	Vipps *VippsInfo `json:"vipps,omitempty"`
+	Visa *GenericPmWithTdiInfo `json:"visa,omitempty"`
+	Wechatpay *WeChatPayInfo `json:"wechatpay,omitempty"`
+	WechatpayPos *WeChatPayPosInfo `json:"wechatpay_pos,omitempty"`
 }
 
 // NewPaymentMethod instantiates a new PaymentMethod object
@@ -1595,7 +1594,7 @@ func (o *PaymentMethod) SetWechatpayPos(v WeChatPayPosInfo) {
 }
 
 func (o PaymentMethod) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -1782,12 +1781,14 @@ func (v *NullablePaymentMethod) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *PaymentMethod) isValidVerificationStatus() bool {
-	var allowedEnumValues = []string{"valid", "pending", "invalid", "rejected"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetVerificationStatus() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "valid", "pending", "invalid", "rejected" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetVerificationStatus() == allowed {
+            return true
+        }
+    }
+    return false
 }
+
