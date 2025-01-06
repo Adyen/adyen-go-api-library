@@ -87,6 +87,7 @@ import (
 client := adyen.NewClient(&common.Config{
     ApiKey:      "your api key",
     Environment: common.TestEnv,
+    Log4XXError: true,
 })
 service := client.Checkout()
 
@@ -109,6 +110,7 @@ import (
 client := adyen.NewClient(&common.Config{
     ApiKey:                "your api key",
     Environment:           common.LiveEnv,
+    Log4XXError: true,
     LiveEndpointURLPrefix: "1797a841fbb37ca7-AdyenDemo", // Refer to https://docs.adyen.com/development-resources/live-endpoints#live-url-prefix
 })
 service := client.Checkout()
@@ -205,6 +207,20 @@ httpStatusCode := httpRes.StatusCode
 errorMessage := err.(common.APIError).Message
 errorCode := err.(common.APIError).Code
 errorType := err.(common.APIError).Type
+```
+
+Consider additional logging when an error occurs:
+```go
+
+client := adyen.NewClient(&common.Config{
+ApiKey:      "your api key",
+Environment: common.TestEnv,
+Log3XXError: true,
+Log4XXError: true,
+Log5XXError: true,
+})
+
+service := client.Checkout()
 ```
 
 ### Custom HTTP Client Configuration
