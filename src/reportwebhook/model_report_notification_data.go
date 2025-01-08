@@ -10,9 +10,8 @@ package reportwebhook
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v16/src/common"
 	"time"
-
-	"github.com/adyen/adyen-go-api-library/v16/src/common"
 )
 
 // checks if the ReportNotificationData type satisfies the MappedNullable interface at compile time
@@ -20,7 +19,7 @@ var _ common.MappedNullable = &ReportNotificationData{}
 
 // ReportNotificationData struct for ReportNotificationData
 type ReportNotificationData struct {
-	AccountHolder  *ResourceReference `json:"accountHolder,omitempty"`
+	AccountHolder *ResourceReference `json:"accountHolder,omitempty"`
 	BalanceAccount *ResourceReference `json:"balanceAccount,omitempty"`
 	// The unique identifier of the balance platform.
 	BalancePlatform *string `json:"balancePlatform,omitempty"`
@@ -30,7 +29,9 @@ type ReportNotificationData struct {
 	DownloadUrl string `json:"downloadUrl"`
 	// The filename of the report.
 	FileName string `json:"fileName"`
-	// The type of report. Possible values:  - `balanceplatform_accounting_interactive_report` - `balanceplatform_accounting_report` - `balanceplatform_balance_report` - `balanceplatform_fee_report` - `balanceplatform_payment_instrument_report` - `balanceplatform_payout_report` - `balanceplatform_statement_report`
+	// The ID of the resource.
+	Id *string `json:"id,omitempty"`
+	// The type of report. Possible values:  - `balanceplatform_accounting_interactive_report` - `balanceplatform_accounting_report` - `balanceplatform_balance_report` - `balanceplatform_fee_report` - `balanceplatform_payment_instrument_report` - `balanceplatform_payout_report` - `balanceplatform_statement_report`  
 	ReportType string `json:"reportType"`
 }
 
@@ -230,6 +231,38 @@ func (o *ReportNotificationData) SetFileName(v string) {
 	o.FileName = v
 }
 
+// GetId returns the Id field value if set, zero value otherwise.
+func (o *ReportNotificationData) GetId() string {
+	if o == nil || common.IsNil(o.Id) {
+		var ret string
+		return ret
+	}
+	return *o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ReportNotificationData) GetIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Id) {
+		return nil, false
+	}
+	return o.Id, true
+}
+
+// HasId returns a boolean if a field has been set.
+func (o *ReportNotificationData) HasId() bool {
+	if o != nil && !common.IsNil(o.Id) {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given string and assigns it to the Id field.
+func (o *ReportNotificationData) SetId(v string) {
+	o.Id = &v
+}
+
 // GetReportType returns the ReportType field value
 func (o *ReportNotificationData) GetReportType() string {
 	if o == nil {
@@ -255,7 +288,7 @@ func (o *ReportNotificationData) SetReportType(v string) {
 }
 
 func (o ReportNotificationData) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -278,6 +311,9 @@ func (o ReportNotificationData) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["downloadUrl"] = o.DownloadUrl
 	toSerialize["fileName"] = o.FileName
+	if !common.IsNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
 	toSerialize["reportType"] = o.ReportType
 	return toSerialize, nil
 }
@@ -317,3 +353,6 @@ func (v *NullableReportNotificationData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

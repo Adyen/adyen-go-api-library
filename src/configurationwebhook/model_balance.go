@@ -10,8 +10,7 @@ package configurationwebhook
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v16/src/common"
+    "github.com/adyen/adyen-go-api-library/v16/src/common"
 )
 
 // checks if the Balance type satisfies the MappedNullable interface at compile time
@@ -21,7 +20,7 @@ var _ common.MappedNullable = &Balance{}
 type Balance struct {
 	// The balance available for use.
 	Available int64 `json:"available"`
-	// The sum of transactions that have already been settled.
+	// The sum of the transactions that have already been settled.
 	Balance int64 `json:"balance"`
 	// The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes) of the balance.
 	Currency string `json:"currency"`
@@ -181,7 +180,7 @@ func (o *Balance) SetReserved(v int64) {
 }
 
 func (o Balance) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -235,3 +234,6 @@ func (v *NullableBalance) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
