@@ -21,7 +21,7 @@ var _ common.MappedNullable = &Balance{}
 type Balance struct {
 	// The balance available for use.
 	Available int64 `json:"available"`
-	// The sum of transactions that have already been settled.
+	// The sum of the transactions that have already been settled.
 	Balance int64 `json:"balance"`
 	// The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes) of the balance.
 	Currency string `json:"currency"`

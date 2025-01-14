@@ -25,7 +25,7 @@ type PaymentRefundRequest struct {
 	LineItems []LineItem `json:"lineItems,omitempty"`
 	// The merchant account that is used to process the payment.
 	MerchantAccount string `json:"merchantAccount"`
-	// Your reason for the refund request
+	// The reason for the refund request.  Possible values:  * **FRAUD**  * **CUSTOMER REQUEST**  * **RETURN**  * **DUPLICATE**  * **OTHER**
 	MerchantRefundReason common.NullableString `json:"merchantRefundReason,omitempty"`
 	// Your reference for the refund request. Maximum length: 80 characters.
 	Reference *string `json:"reference,omitempty"`

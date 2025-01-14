@@ -30,6 +30,8 @@ type ReportNotificationData struct {
 	DownloadUrl string `json:"downloadUrl"`
 	// The filename of the report.
 	FileName string `json:"fileName"`
+	// The ID of the resource.
+	Id *string `json:"id,omitempty"`
 	// The type of report. Possible values:  - `balanceplatform_accounting_interactive_report` - `balanceplatform_accounting_report` - `balanceplatform_balance_report` - `balanceplatform_fee_report` - `balanceplatform_payment_instrument_report` - `balanceplatform_payout_report` - `balanceplatform_statement_report`
 	ReportType string `json:"reportType"`
 }
@@ -230,6 +232,38 @@ func (o *ReportNotificationData) SetFileName(v string) {
 	o.FileName = v
 }
 
+// GetId returns the Id field value if set, zero value otherwise.
+func (o *ReportNotificationData) GetId() string {
+	if o == nil || common.IsNil(o.Id) {
+		var ret string
+		return ret
+	}
+	return *o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ReportNotificationData) GetIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Id) {
+		return nil, false
+	}
+	return o.Id, true
+}
+
+// HasId returns a boolean if a field has been set.
+func (o *ReportNotificationData) HasId() bool {
+	if o != nil && !common.IsNil(o.Id) {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given string and assigns it to the Id field.
+func (o *ReportNotificationData) SetId(v string) {
+	o.Id = &v
+}
+
 // GetReportType returns the ReportType field value
 func (o *ReportNotificationData) GetReportType() string {
 	if o == nil {
@@ -278,6 +312,9 @@ func (o ReportNotificationData) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["downloadUrl"] = o.DownloadUrl
 	toSerialize["fileName"] = o.FileName
+	if !common.IsNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
 	toSerialize["reportType"] = o.ReportType
 	return toSerialize, nil
 }

@@ -25,12 +25,16 @@ type AdditionalDataCommon struct {
 	AllowPartialAuth *string `json:"allowPartialAuth,omitempty"`
 	// Flags a card payment request for either pre-authorisation or final authorisation. For more information, refer to [Authorisation types](https://docs.adyen.com/online-payments/adjust-authorisation#authorisation-types).  Allowed values: * **PreAuth** – flags the payment request to be handled as a pre-authorisation. * **FinalAuth** – flags the payment request to be handled as a final authorisation.
 	AuthorisationType *string `json:"authorisationType,omitempty"`
+	// Set to **true** to enable [Auto Rescue](https://docs.adyen.com/online-payments/auto-rescue/) for a transaction. Use the `maxDaysToRescue` to specify a rescue window.
+	AutoRescue *string `json:"autoRescue,omitempty"`
 	// Allows you to determine or override the acquirer account that should be used for the transaction.  If you need to process a payment with an acquirer different from a default one, you can set up a corresponding configuration on the Adyen payments platform. Then you can pass a custom routing flag in a payment request's additional data to target a specific acquirer.  To enable this functionality, contact [Support](https://www.adyen.help/hc/en-us/requests/new).
 	CustomRoutingFlag *string `json:"customRoutingFlag,omitempty"`
 	// In case of [asynchronous authorisation adjustment](https://docs.adyen.com/online-payments/adjust-authorisation#adjust-authorisation), this field denotes why the additional payment is made.  Possible values:   * **NoShow**: An incremental charge is carried out because of a no-show for a guaranteed reservation.   * **DelayedCharge**: An incremental charge is carried out to process an additional payment after the original services have been rendered and the respective payment has been processed.
 	IndustryUsage *string `json:"industryUsage,omitempty"`
 	// Set to **true** to require [manual capture](https://docs.adyen.com/online-payments/capture) for the transaction.
 	ManualCapture *string `json:"manualCapture,omitempty"`
+	// The rescue window for a transaction, in days, when `autoRescue` is set to **true**. You can specify a value between 1 and 48.  * For [cards](https://docs.adyen.com/online-payments/auto-rescue/cards/), the default is one calendar month.  * For [SEPA](https://docs.adyen.com/online-payments/auto-rescue/sepa/), the default is 42 days.
+	MaxDaysToRescue *string `json:"maxDaysToRescue,omitempty"`
 	// Allows you to link the transaction to the original or previous one in a subscription/card-on-file chain. This field is required for token-based transactions where Adyen does not tokenize the card.  Transaction identifier from card schemes, for example, Mastercard Trace ID or the Visa Transaction ID.  Submit the original transaction ID of the contract in your payment request if you are not tokenizing card details with Adyen and are making a merchant-initiated transaction (MIT) for subsequent charges.  Make sure you are sending `shopperInteraction` **ContAuth** and `recurringProcessingModel` **Subscription** or **UnscheduledCardOnFile** to ensure that the transaction is classified as MIT.
 	NetworkTxReference *string `json:"networkTxReference,omitempty"`
 	// Boolean indicator that can be optionally used for performing debit transactions on combo cards (for example, combo cards in Brazil). This is not mandatory but we recommend that you set this to true if you want to use the `selectedBrand` value to specify how to process the transaction.
@@ -166,6 +170,38 @@ func (o *AdditionalDataCommon) SetAuthorisationType(v string) {
 	o.AuthorisationType = &v
 }
 
+// GetAutoRescue returns the AutoRescue field value if set, zero value otherwise.
+func (o *AdditionalDataCommon) GetAutoRescue() string {
+	if o == nil || common.IsNil(o.AutoRescue) {
+		var ret string
+		return ret
+	}
+	return *o.AutoRescue
+}
+
+// GetAutoRescueOk returns a tuple with the AutoRescue field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AdditionalDataCommon) GetAutoRescueOk() (*string, bool) {
+	if o == nil || common.IsNil(o.AutoRescue) {
+		return nil, false
+	}
+	return o.AutoRescue, true
+}
+
+// HasAutoRescue returns a boolean if a field has been set.
+func (o *AdditionalDataCommon) HasAutoRescue() bool {
+	if o != nil && !common.IsNil(o.AutoRescue) {
+		return true
+	}
+
+	return false
+}
+
+// SetAutoRescue gets a reference to the given string and assigns it to the AutoRescue field.
+func (o *AdditionalDataCommon) SetAutoRescue(v string) {
+	o.AutoRescue = &v
+}
+
 // GetCustomRoutingFlag returns the CustomRoutingFlag field value if set, zero value otherwise.
 func (o *AdditionalDataCommon) GetCustomRoutingFlag() string {
 	if o == nil || common.IsNil(o.CustomRoutingFlag) {
@@ -260,6 +296,38 @@ func (o *AdditionalDataCommon) HasManualCapture() bool {
 // SetManualCapture gets a reference to the given string and assigns it to the ManualCapture field.
 func (o *AdditionalDataCommon) SetManualCapture(v string) {
 	o.ManualCapture = &v
+}
+
+// GetMaxDaysToRescue returns the MaxDaysToRescue field value if set, zero value otherwise.
+func (o *AdditionalDataCommon) GetMaxDaysToRescue() string {
+	if o == nil || common.IsNil(o.MaxDaysToRescue) {
+		var ret string
+		return ret
+	}
+	return *o.MaxDaysToRescue
+}
+
+// GetMaxDaysToRescueOk returns a tuple with the MaxDaysToRescue field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AdditionalDataCommon) GetMaxDaysToRescueOk() (*string, bool) {
+	if o == nil || common.IsNil(o.MaxDaysToRescue) {
+		return nil, false
+	}
+	return o.MaxDaysToRescue, true
+}
+
+// HasMaxDaysToRescue returns a boolean if a field has been set.
+func (o *AdditionalDataCommon) HasMaxDaysToRescue() bool {
+	if o != nil && !common.IsNil(o.MaxDaysToRescue) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxDaysToRescue gets a reference to the given string and assigns it to the MaxDaysToRescue field.
+func (o *AdditionalDataCommon) SetMaxDaysToRescue(v string) {
+	o.MaxDaysToRescue = &v
 }
 
 // GetNetworkTxReference returns the NetworkTxReference field value if set, zero value otherwise.
@@ -601,6 +669,9 @@ func (o AdditionalDataCommon) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.AuthorisationType) {
 		toSerialize["authorisationType"] = o.AuthorisationType
 	}
+	if !common.IsNil(o.AutoRescue) {
+		toSerialize["autoRescue"] = o.AutoRescue
+	}
 	if !common.IsNil(o.CustomRoutingFlag) {
 		toSerialize["customRoutingFlag"] = o.CustomRoutingFlag
 	}
@@ -609,6 +680,9 @@ func (o AdditionalDataCommon) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.ManualCapture) {
 		toSerialize["manualCapture"] = o.ManualCapture
+	}
+	if !common.IsNil(o.MaxDaysToRescue) {
+		toSerialize["maxDaysToRescue"] = o.MaxDaysToRescue
 	}
 	if !common.IsNil(o.NetworkTxReference) {
 		toSerialize["networkTxReference"] = o.NetworkTxReference

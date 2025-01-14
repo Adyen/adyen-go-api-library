@@ -87,12 +87,12 @@ type Config struct {
 	Debug                 bool              `json:"debug,omitempty"`
 	UserAgent             string            `json:"userAgent,omitempty"`
 	HTTPClient            *http.Client
-    // when true logs 3XX errors on stdout
-    Log3XXError           bool              `json:"debug,omitempty"`
-    // when true logs 4XX errors on stdout
-    Log4XXError           bool              `json:"debug,omitempty"`
-    // when true logs 5XX errors on stdout
-    Log5XXError           bool              `json:"debug,omitempty"`
+	// when true logs 3XX errors on stdout
+	Log3XXError bool `json:"debug,omitempty"`
+	// when true logs 4XX errors on stdout
+	Log4XXError bool `json:"debug,omitempty"`
+	// when true logs 5XX errors on stdout
+	Log5XXError bool `json:"debug,omitempty"`
 }
 
 func (c *Config) GetCheckoutEndpoint() (string, error) {
