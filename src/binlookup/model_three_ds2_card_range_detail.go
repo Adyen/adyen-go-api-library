@@ -10,7 +10,8 @@ package binlookup
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v16/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v16/src/common"
 )
 
 // checks if the ThreeDS2CardRangeDetail type satisfies the MappedNullable interface at compile time
@@ -242,7 +243,7 @@ func (o *ThreeDS2CardRangeDetail) SetThreeDSMethodURL(v string) {
 }
 
 func (o ThreeDS2CardRangeDetail) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -307,6 +308,3 @@ func (v *NullableThreeDS2CardRangeDetail) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-
