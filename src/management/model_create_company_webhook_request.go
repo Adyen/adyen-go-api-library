@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v16/src/common"
+    "github.com/adyen/adyen-go-api-library/v16/src/common"
 )
 
 // checks if the CreateCompanyWebhookRequest type satisfies the MappedNullable interface at compile time
@@ -26,15 +25,15 @@ type CreateCompanyWebhookRequest struct {
 	// Indicates if untrusted SSL certificates are accepted. Default value: **false**.
 	AcceptsUntrustedRootCertificate *bool `json:"acceptsUntrustedRootCertificate,omitempty"`
 	// Indicates if the webhook configuration is active. The field must be **true** for us to send webhooks about events related an account.
-	Active             bool                `json:"active"`
+	Active bool `json:"active"`
 	AdditionalSettings *AdditionalSettings `json:"additionalSettings,omitempty"`
-	// Format or protocol for receiving webhooks. Possible values: * **soap** * **http** * **json**
+	// Format or protocol for receiving webhooks. Possible values: * **soap** * **http** * **json** 
 	CommunicationFormat string `json:"communicationFormat"`
 	// Your description for this webhook configuration.
 	Description *string `json:"description,omitempty"`
 	// SSL version to access the public webhook URL specified in the `url` field. Possible values: * **TLSv1.3** * **TLSv1.2** * **HTTP** - Only allowed on Test environment.  If not specified, the webhook will use `sslVersion`: **TLSv1.2**.
 	EncryptionProtocol *string `json:"encryptionProtocol,omitempty"`
-	// Shows how merchant accounts are filtered when configuring the webhook.   Possible values: *  **allAccounts** : Includes all merchant accounts, and does not require specifying `filterMerchantAccounts`. *  **includeAccounts** : The webhook is configured for the merchant accounts listed in `filterMerchantAccounts`. *  **excludeAccounts** : The webhook is not configured for the merchant accounts listed in `filterMerchantAccounts`.
+	// Shows how merchant accounts are filtered when configuring the webhook.   Possible values: *  **allAccounts** : Includes all merchant accounts, and does not require specifying `filterMerchantAccounts`. *  **includeAccounts** : The webhook is configured for the merchant accounts listed in `filterMerchantAccounts`. *  **excludeAccounts** : The webhook is not configured for the merchant accounts listed in `filterMerchantAccounts`.  
 	FilterMerchantAccountType string `json:"filterMerchantAccountType"`
 	// A list of merchant account names that are included or excluded from receiving the webhook. Inclusion or exclusion is based on the value defined for `filterMerchantAccountType`.  Required if `filterMerchantAccountType` is either: * **includeAccounts** * **excludeAccounts**  Not needed for `filterMerchantAccountType`: **allAccounts**.
 	FilterMerchantAccounts []string `json:"filterMerchantAccounts"`
@@ -540,7 +539,7 @@ func (o *CreateCompanyWebhookRequest) SetUsername(v string) {
 }
 
 func (o CreateCompanyWebhookRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -624,39 +623,41 @@ func (v *NullableCreateCompanyWebhookRequest) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *CreateCompanyWebhookRequest) isValidCommunicationFormat() bool {
-	var allowedEnumValues = []string{"http", "json", "soap"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetCommunicationFormat() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "http", "json", "soap" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetCommunicationFormat() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *CreateCompanyWebhookRequest) isValidEncryptionProtocol() bool {
-	var allowedEnumValues = []string{"HTTP", "TLSv1.2", "TLSv1.3"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetEncryptionProtocol() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "HTTP", "TLSv1.2", "TLSv1.3" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetEncryptionProtocol() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *CreateCompanyWebhookRequest) isValidFilterMerchantAccountType() bool {
-	var allowedEnumValues = []string{"allAccounts", "excludeAccounts", "includeAccounts"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetFilterMerchantAccountType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "allAccounts", "excludeAccounts", "includeAccounts" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetFilterMerchantAccountType() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *CreateCompanyWebhookRequest) isValidNetworkType() bool {
-	var allowedEnumValues = []string{"local", "public"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetNetworkType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "local", "public" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetNetworkType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+
