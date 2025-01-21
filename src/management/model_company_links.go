@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v16/src/common"
+    "github.com/adyen/adyen-go-api-library/v16/src/common"
 )
 
 // checks if the CompanyLinks type satisfies the MappedNullable interface at compile time
@@ -20,9 +19,9 @@ var _ common.MappedNullable = &CompanyLinks{}
 // CompanyLinks struct for CompanyLinks
 type CompanyLinks struct {
 	ApiCredentials *LinksElement `json:"apiCredentials,omitempty"`
-	Self           LinksElement  `json:"self"`
-	Users          *LinksElement `json:"users,omitempty"`
-	Webhooks       *LinksElement `json:"webhooks,omitempty"`
+	Self LinksElement `json:"self"`
+	Users *LinksElement `json:"users,omitempty"`
+	Webhooks *LinksElement `json:"webhooks,omitempty"`
 }
 
 // NewCompanyLinks instantiates a new CompanyLinks object
@@ -164,7 +163,7 @@ func (o *CompanyLinks) SetWebhooks(v LinksElement) {
 }
 
 func (o CompanyLinks) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -221,3 +220,6 @@ func (v *NullableCompanyLinks) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
