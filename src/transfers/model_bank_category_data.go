@@ -10,7 +10,8 @@ package transfers
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v16/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v16/src/common"
 )
 
 // checks if the BankCategoryData type satisfies the MappedNullable interface at compile time
@@ -110,7 +111,7 @@ func (o *BankCategoryData) SetType(v string) {
 }
 
 func (o BankCategoryData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -164,23 +165,21 @@ func (v *NullableBankCategoryData) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *BankCategoryData) isValidPriority() bool {
-    var allowedEnumValues = []string{ "crossBorder", "fast", "instant", "internal", "regular", "wire" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetPriority() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"crossBorder", "fast", "instant", "internal", "regular", "wire"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetPriority() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *BankCategoryData) isValidType() bool {
-    var allowedEnumValues = []string{ "bank" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"bank"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v16/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v16/src/common"
 )
 
 // checks if the PaymentDetailsRequest type satisfies the MappedNullable interface at compile time
@@ -19,12 +20,12 @@ var _ common.MappedNullable = &PaymentDetailsRequest{}
 // PaymentDetailsRequest struct for PaymentDetailsRequest
 type PaymentDetailsRequest struct {
 	AuthenticationData *DetailsRequestAuthenticationData `json:"authenticationData,omitempty"`
-	Details PaymentCompletionDetails `json:"details"`
+	Details            PaymentCompletionDetails          `json:"details"`
 	// Encoded payment data. For [authorizing a payment after using 3D Secure 2 Authentication-only](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only/#authorise-the-payment-with-adyen):  If you received `resultCode`: **AuthenticationNotRequired** in the `/payments` response, use the `threeDSPaymentData` from the same response.  If you received `resultCode`: **AuthenticationFinished** in the `/payments` response, use the `action.paymentData` from the same response.
 	PaymentData *string `json:"paymentData,omitempty"`
 	// Change the `authenticationOnly` indicator originally set in the `/payments` request. Only needs to be set if you want to modify the value set previously.
-    // Deprecated since Adyen Checkout API v69
-    // Use `authenticationData.authenticationOnly` instead.
+	// Deprecated since Adyen Checkout API v69
+	// Use `authenticationData.authenticationOnly` instead.
 	ThreeDSAuthenticationOnly *bool `json:"threeDSAuthenticationOnly,omitempty"`
 }
 
@@ -173,7 +174,7 @@ func (o *PaymentDetailsRequest) SetThreeDSAuthenticationOnly(v bool) {
 }
 
 func (o PaymentDetailsRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -230,6 +231,3 @@ func (v *NullablePaymentDetailsRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-
