@@ -5,8 +5,8 @@ package balanceplatform
 
 import (
     "context"
-    "github.com/adyen/adyen-go-api-library/v16/src/adyen"
-    "github.com/adyen/adyen-go-api-library/v16/src/common"
+    "github.com/adyen/adyen-go-api-library/v17/src/adyen"
+    "github.com/adyen/adyen-go-api-library/v17/src/common"
     "github.com/joho/godotenv"
     "github.com/stretchr/testify/assert"
     "github.com/stretchr/testify/require"

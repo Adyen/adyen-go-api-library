@@ -11,7 +11,7 @@ package legalentity
 import (
 	"encoding/json"
 
-	"github.com/adyen/adyen-go-api-library/v16/src/common"
+	"github.com/adyen/adyen-go-api-library/v17/src/common"
 )
 
 // checks if the ServiceError type satisfies the MappedNullable interface at compile time

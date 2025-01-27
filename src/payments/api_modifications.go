@@ -13,7 +13,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/adyen/adyen-go-api-library/v16/src/common"
+	"github.com/adyen/adyen-go-api-library/v17/src/common"
 )
 
 // ModificationsApi service
