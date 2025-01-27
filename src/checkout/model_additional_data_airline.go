@@ -63,8 +63,8 @@ type AdditionalDataAirline struct {
 	AirlinePassengerFirstName *string `json:"airline.passenger.first_name,omitempty"`
 	// The passenger's last name. > This field is required if the airline data includes passenger details or leg details. * Encoding: ASCII
 	AirlinePassengerLastName *string `json:"airline.passenger.last_name,omitempty"`
-	// The passenger's telephone number, including country code. This is an alphanumeric field that can include the '+' and '-' signs. * Encoding: ASCII * minLength: 3 characters * maxLength: 30 characters
-	AirlinePassengerTelephoneNumber *string `json:"airline.passenger.telephone_number,omitempty"`
+	// The passenger's phone number, including country code. This is an alphanumeric field that can include the '+' and '-' signs. * Encoding: ASCII * minLength: 3 characters * maxLength: 30 characters
+	AirlinePassengerPhoneNumber *string `json:"airline.passenger.phone_number,omitempty"`
 	// The IATA passenger type code (PTC). * Encoding: ASCII * minLength: 3 characters * maxLength: 6 characters
 	AirlinePassengerTravellerType *string `json:"airline.passenger.traveller_type,omitempty"`
 	// The passenger's name, initials, and title. * Format: last name + first name or initials + title * Example: *FLYER / MARY MS* * minLength: 1 character * maxLength: 20 characters * If you send more than 20 characters, the name is truncated * Must not be all spaces  *Must not be all zeros.
@@ -801,36 +801,36 @@ func (o *AdditionalDataAirline) SetAirlinePassengerLastName(v string) {
 	o.AirlinePassengerLastName = &v
 }
 
-// GetAirlinePassengerTelephoneNumber returns the AirlinePassengerTelephoneNumber field value if set, zero value otherwise.
-func (o *AdditionalDataAirline) GetAirlinePassengerTelephoneNumber() string {
-	if o == nil || common.IsNil(o.AirlinePassengerTelephoneNumber) {
+// GetAirlinePassengerPhoneNumber returns the AirlinePassengerPhoneNumber field value if set, zero value otherwise.
+func (o *AdditionalDataAirline) GetAirlinePassengerPhoneNumber() string {
+	if o == nil || common.IsNil(o.AirlinePassengerPhoneNumber) {
 		var ret string
 		return ret
 	}
-	return *o.AirlinePassengerTelephoneNumber
+	return *o.AirlinePassengerPhoneNumber
 }
 
-// GetAirlinePassengerTelephoneNumberOk returns a tuple with the AirlinePassengerTelephoneNumber field value if set, nil otherwise
+// GetAirlinePassengerPhoneNumberOk returns a tuple with the AirlinePassengerPhoneNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AdditionalDataAirline) GetAirlinePassengerTelephoneNumberOk() (*string, bool) {
-	if o == nil || common.IsNil(o.AirlinePassengerTelephoneNumber) {
+func (o *AdditionalDataAirline) GetAirlinePassengerPhoneNumberOk() (*string, bool) {
+	if o == nil || common.IsNil(o.AirlinePassengerPhoneNumber) {
 		return nil, false
 	}
-	return o.AirlinePassengerTelephoneNumber, true
+	return o.AirlinePassengerPhoneNumber, true
 }
 
-// HasAirlinePassengerTelephoneNumber returns a boolean if a field has been set.
-func (o *AdditionalDataAirline) HasAirlinePassengerTelephoneNumber() bool {
-	if o != nil && !common.IsNil(o.AirlinePassengerTelephoneNumber) {
+// HasAirlinePassengerPhoneNumber returns a boolean if a field has been set.
+func (o *AdditionalDataAirline) HasAirlinePassengerPhoneNumber() bool {
+	if o != nil && !common.IsNil(o.AirlinePassengerPhoneNumber) {
 		return true
 	}
 
 	return false
 }
 
-// SetAirlinePassengerTelephoneNumber gets a reference to the given string and assigns it to the AirlinePassengerTelephoneNumber field.
-func (o *AdditionalDataAirline) SetAirlinePassengerTelephoneNumber(v string) {
-	o.AirlinePassengerTelephoneNumber = &v
+// SetAirlinePassengerPhoneNumber gets a reference to the given string and assigns it to the AirlinePassengerPhoneNumber field.
+func (o *AdditionalDataAirline) SetAirlinePassengerPhoneNumber(v string) {
+	o.AirlinePassengerPhoneNumber = &v
 }
 
 // GetAirlinePassengerTravellerType returns the AirlinePassengerTravellerType field value if set, zero value otherwise.
@@ -1093,8 +1093,8 @@ func (o AdditionalDataAirline) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.AirlinePassengerLastName) {
 		toSerialize["airline.passenger.last_name"] = o.AirlinePassengerLastName
 	}
-	if !common.IsNil(o.AirlinePassengerTelephoneNumber) {
-		toSerialize["airline.passenger.telephone_number"] = o.AirlinePassengerTelephoneNumber
+	if !common.IsNil(o.AirlinePassengerPhoneNumber) {
+		toSerialize["airline.passenger.phone_number"] = o.AirlinePassengerPhoneNumber
 	}
 	if !common.IsNil(o.AirlinePassengerTravellerType) {
 		toSerialize["airline.passenger.traveller_type"] = o.AirlinePassengerTravellerType

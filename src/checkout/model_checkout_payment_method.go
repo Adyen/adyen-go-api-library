@@ -16,6 +16,7 @@ import (
 // CheckoutPaymentMethod - The type and required details of a payment method to use.
 type CheckoutPaymentMethod struct {
 	AchDetails                        *AchDetails
+	AffirmDetails                     *AffirmDetails
 	AfterpayDetails                   *AfterpayDetails
 	AmazonPayDetails                  *AmazonPayDetails
 	AncvDetails                       *AncvDetails
@@ -46,6 +47,7 @@ type CheckoutPaymentMethod struct {
 	PayByBankAISDirectDebitDetails    *PayByBankAISDirectDebitDetails
 	PayByBankDetails                  *PayByBankDetails
 	PayPalDetails                     *PayPalDetails
+	PayPayDetails                     *PayPayDetails
 	PayToDetails                      *PayToDetails
 	PayUUpiDetails                    *PayUUpiDetails
 	PayWithGoogleDetails              *PayWithGoogleDetails
@@ -70,6 +72,13 @@ type CheckoutPaymentMethod struct {
 func AchDetailsAsCheckoutPaymentMethod(v *AchDetails) CheckoutPaymentMethod {
 	return CheckoutPaymentMethod{
 		AchDetails: v,
+	}
+}
+
+// AffirmDetailsAsCheckoutPaymentMethod is a convenience function that returns AffirmDetails wrapped in CheckoutPaymentMethod
+func AffirmDetailsAsCheckoutPaymentMethod(v *AffirmDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
+		AffirmDetails: v,
 	}
 }
 
@@ -283,6 +292,13 @@ func PayPalDetailsAsCheckoutPaymentMethod(v *PayPalDetails) CheckoutPaymentMetho
 	}
 }
 
+// PayPayDetailsAsCheckoutPaymentMethod is a convenience function that returns PayPayDetails wrapped in CheckoutPaymentMethod
+func PayPayDetailsAsCheckoutPaymentMethod(v *PayPayDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
+		PayPayDetails: v,
+	}
+}
+
 // PayToDetailsAsCheckoutPaymentMethod is a convenience function that returns PayToDetails wrapped in CheckoutPaymentMethod
 func PayToDetailsAsCheckoutPaymentMethod(v *PayToDetails) CheckoutPaymentMethod {
 	return CheckoutPaymentMethod{
@@ -424,6 +440,19 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		}
 	} else {
 		dst.AchDetails = nil
+	}
+
+	// try to unmarshal data into AffirmDetails
+	err = json.Unmarshal(data, &dst.AffirmDetails)
+	if err == nil {
+		jsonAffirmDetails, _ := json.Marshal(dst.AffirmDetails)
+		if string(jsonAffirmDetails) == "{}" || !dst.AffirmDetails.isValidType() { // empty struct
+			dst.AffirmDetails = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.AffirmDetails = nil
 	}
 
 	// try to unmarshal data into AfterpayDetails
@@ -816,6 +845,19 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		dst.PayPalDetails = nil
 	}
 
+	// try to unmarshal data into PayPayDetails
+	err = json.Unmarshal(data, &dst.PayPayDetails)
+	if err == nil {
+		jsonPayPayDetails, _ := json.Marshal(dst.PayPayDetails)
+		if string(jsonPayPayDetails) == "{}" || !dst.PayPayDetails.isValidType() { // empty struct
+			dst.PayPayDetails = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.PayPayDetails = nil
+	}
+
 	// try to unmarshal data into PayToDetails
 	err = json.Unmarshal(data, &dst.PayToDetails)
 	if err == nil {
@@ -1053,6 +1095,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 	if match > 1 { // more than 1 match
 		// reset to nil
 		dst.AchDetails = nil
+		dst.AffirmDetails = nil
 		dst.AfterpayDetails = nil
 		dst.AmazonPayDetails = nil
 		dst.AncvDetails = nil
@@ -1083,6 +1126,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		dst.PayByBankAISDirectDebitDetails = nil
 		dst.PayByBankDetails = nil
 		dst.PayPalDetails = nil
+		dst.PayPayDetails = nil
 		dst.PayToDetails = nil
 		dst.PayUUpiDetails = nil
 		dst.PayWithGoogleDetails = nil
@@ -1114,6 +1158,10 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 func (src CheckoutPaymentMethod) MarshalJSON() ([]byte, error) {
 	if src.AchDetails != nil {
 		return json.Marshal(&src.AchDetails)
+	}
+
+	if src.AffirmDetails != nil {
+		return json.Marshal(&src.AffirmDetails)
 	}
 
 	if src.AfterpayDetails != nil {
@@ -1236,6 +1284,10 @@ func (src CheckoutPaymentMethod) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.PayPalDetails)
 	}
 
+	if src.PayPayDetails != nil {
+		return json.Marshal(&src.PayPayDetails)
+	}
+
 	if src.PayToDetails != nil {
 		return json.Marshal(&src.PayToDetails)
 	}
@@ -1318,6 +1370,10 @@ func (obj *CheckoutPaymentMethod) GetActualInstance() interface{} {
 	}
 	if obj.AchDetails != nil {
 		return obj.AchDetails
+	}
+
+	if obj.AffirmDetails != nil {
+		return obj.AffirmDetails
 	}
 
 	if obj.AfterpayDetails != nil {
@@ -1438,6 +1494,10 @@ func (obj *CheckoutPaymentMethod) GetActualInstance() interface{} {
 
 	if obj.PayPalDetails != nil {
 		return obj.PayPalDetails
+	}
+
+	if obj.PayPayDetails != nil {
+		return obj.PayPayDetails
 	}
 
 	if obj.PayToDetails != nil {
