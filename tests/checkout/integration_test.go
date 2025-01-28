@@ -95,7 +95,6 @@ func TestCheckoutIntegration(t *testing.T) {
 			idempotencyKey := uuid.New().String()
 			ctx := common.WithIdempotencyKey(context.Background(), idempotencyKey)
 			ideal := checkout.NewIdealDetails()
-			ideal.SetIssuer("1121")
 			paymentRequest := *checkout.NewPaymentRequest(
 				*checkout.NewAmount("EUR", int64(1234)),
 				merchantAccount,
