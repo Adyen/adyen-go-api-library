@@ -111,6 +111,84 @@ func TestWebhook_HandleRequest(t *testing.T) {
 			false,
 		},
 		{
+			"should return autorescue success",
+			`{
+                "live": "false",
+                "notificationItems": [
+                  {
+                    "NotificationRequestItem": {
+                      "additionalData": {
+                        "retry.rescueReference": "8826173525728789",
+                        "merchantOrderReference": "8826173525728789",
+                        "hmacSignature": "4g+4ivKK3zox/STWD/K9sDibL/8Ze+fD6ojOCOY="
+                      },
+                      "amount": {
+                        "currency": "EUR",
+                        "value": 1000
+                      },
+                      "eventCode": "AUTORESCUE",
+                      "eventDate": "2021-01-01T01:00:00+01:00",
+                      "merchantAccountCode": "MagentoMerchantTest2",
+                      "merchantReference": "8313842560770002",
+                      "originalReference": "9913140798220028",
+                      "pspReference": "QFQTPCQ8HXSKGK82",
+                      "reason": "",
+                      "success": "true"
+                    }
+                  }
+                ]
+              }
+            `,
+			func(got *webhook.Webhook, t *testing.T) {
+				require.NotNil(t, got)
+				assert.Equal(t, 1, len(got.GetNotificationItems()))
+				ni := got.GetNotificationItems()[0]
+				assert.Equal(t, webhook.EventCodeAutorescue, ni.EventCode)
+				assert.Equal(t, "true", ni.Success)
+				assert.Equal(t, "QFQTPCQ8HXSKGK82", ni.PspReference)
+				assert.Equal(t, "9913140798220028", ni.OriginalReference)
+			},
+			false,
+		},
+		{
+			"should return offer closed success",
+			`{
+                "live": "false",
+                "notificationItems": [
+                  {
+                    "NotificationRequestItem": {
+                      "additionalData": {
+                        "hmacSignature": "t5GOcOQp52ShqINFx+awWdwfduSJK5hWNbBF9/yw=",
+                        "paymentMethodVariant": "ideal"
+                      },
+                      "amount": {
+                        "currency": "EUR",
+                        "value": 1000
+                      },
+                      "eventCode": "OFFER_CLOSED",
+                      "eventDate": "2021-01-01T01:00:00+01:00",
+                      "merchantAccountCode": "MagentoMerchantTest2",
+                      "merchantReference": "8313842560770003",
+                      "paymentMethod": "ideal",
+                      "pspReference": "QFQTPCQ8HXSKGK82",
+                      "reason": "",
+                      "success": "true"
+                    }
+                  }
+                ]
+              }
+            `,
+			func(got *webhook.Webhook, t *testing.T) {
+				require.NotNil(t, got)
+				assert.Equal(t, 1, len(got.GetNotificationItems()))
+				ni := got.GetNotificationItems()[0]
+				assert.Equal(t, webhook.EventCodeOfferClosed, ni.EventCode)
+				assert.Equal(t, "true", ni.Success)
+				assert.Equal(t, "QFQTPCQ8HXSKGK82", ni.PspReference)
+			},
+			false,
+		},
+		{
 			"should return refund fail",
 			`{
                 "live": "false",
