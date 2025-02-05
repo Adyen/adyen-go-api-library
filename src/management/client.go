@@ -9,7 +9,7 @@ API version: 3
 package management
 
 import (
-	"github.com/adyen/adyen-go-api-library/v17/src/common"
+    "github.com/adyen/adyen-go-api-library/v17/src/common"
 )
 
 // APIClient manages communication with the Management API API v3
@@ -81,10 +81,10 @@ type APIClient struct {
 // NewAPIClient creates a new API client.
 func NewAPIClient(client *common.Client) *APIClient {
 	c := &APIClient{}
-	c.common.Client = client
-	c.common.BasePath = func() string {
-		return client.Cfg.ManagementEndpoint
-	}
+    c.common.Client = client
+    c.common.BasePath = func() string {
+        return client.Cfg.ManagementEndpoint
+    }
 
 	// API Services
 	c.APICredentialsCompanyLevelApi = (*APICredentialsCompanyLevelApi)(&c.common)

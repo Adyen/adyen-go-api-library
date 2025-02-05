@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v17/src/common"
+    "github.com/adyen/adyen-go-api-library/v17/src/common"
 )
 
 // checks if the CheckoutBankAccount type satisfies the MappedNullable interface at compile time
@@ -379,7 +378,7 @@ func (o *CheckoutBankAccount) SetTaxId(v string) {
 }
 
 func (o CheckoutBankAccount) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -457,12 +456,14 @@ func (v *NullableCheckoutBankAccount) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *CheckoutBankAccount) isValidAccountType() bool {
-	var allowedEnumValues = []string{"balance", "checking", "deposit", "general", "other", "payment", "savings"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetAccountType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "balance", "checking", "deposit", "general", "other", "payment", "savings" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetAccountType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

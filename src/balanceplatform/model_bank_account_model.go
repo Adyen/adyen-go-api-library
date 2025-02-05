@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v17/src/common"
+    "github.com/adyen/adyen-go-api-library/v17/src/common"
 )
 
 // checks if the BankAccountModel type satisfies the MappedNullable interface at compile time
@@ -76,7 +75,6 @@ func (o *BankAccountModel) HasFormFactor() bool {
 func (o *BankAccountModel) SetFormFactor(v string) {
 	o.FormFactor.Set(&v)
 }
-
 // SetFormFactorNil sets the value for FormFactor to be an explicit nil
 func (o *BankAccountModel) SetFormFactorNil() {
 	o.FormFactor.Set(nil)
@@ -88,7 +86,7 @@ func (o *BankAccountModel) UnsetFormFactor() {
 }
 
 func (o BankAccountModel) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -139,12 +137,14 @@ func (v *NullableBankAccountModel) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *BankAccountModel) isValidFormFactor() bool {
-	var allowedEnumValues = []string{"physical", "unknown", "virtual"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetFormFactor() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "physical", "unknown", "virtual" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetFormFactor() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

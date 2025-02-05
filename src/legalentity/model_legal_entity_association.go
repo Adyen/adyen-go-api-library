@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v17/src/common"
+    "github.com/adyen/adyen-go-api-library/v17/src/common"
 )
 
 // checks if the LegalEntityAssociation type satisfies the MappedNullable interface at compile time
@@ -29,11 +28,13 @@ type LegalEntityAssociation struct {
 	LegalEntityId string `json:"legalEntityId"`
 	// The name of the associated [legal entity](https://docs.adyen.com/api-explorer/legalentity/latest/post/legalEntities#responses-200-id).  - For **individual**, `name.firstName` and `name.lastName`. - For **organization**, `legalName`. - For **soleProprietorship**, `name`.
 	Name *string `json:"name,omitempty"`
+	// Default value: **false**Indicates if the `type` **director**, **secondaryPartner** or **shareholder** is a nominee. Only applicable to New Zealand.
+	Nominee *bool `json:"nominee,omitempty"`
 	// The individual's relationship to a legal representative if the `type` is **legalRepresentative**. Possible values: **parent**, **guardian**.
 	Relationship *string `json:"relationship,omitempty"`
 	// Defines the KYC exemption reason for a settlor associated with a trust. Only applicable to trusts in Australia.  For example, **professionalServiceProvider**, **deceased**, or **contributionBelowThreshold**.
 	SettlorExemptionReason []string `json:"settlorExemptionReason,omitempty"`
-	// Defines the relationship of the legal entity to the current legal entity.  Possible value for individuals: **legalRepresentative**.  Possible values for organizations: **uboThroughOwnership**, **uboThroughControl**, **director**, **signatory**, or **ultimateParentCompany**.  Possible values for sole proprietorships: **soleProprietorship**.  Possible value for trusts: **trust**.  Possible values for trust members: **definedBeneficiary**, **protector**, **secondaryTrustee**, **settlor**, **uboThroughControl**, or **uboThroughOwnership**.  Possible value for unincorporated partnership: **unincorporatedPartnership**.  Possible values for unincorporated partnership members: **secondaryPartner**, **uboThroughControl**, **uboThroughOwnership**
+	// Defines the relationship of the legal entity to the current legal entity.  Possible value for individuals: **legalRepresentative**.  Possible values for organizations: **director**, **signatory**, **trustOwnership**, **uboThroughOwnership**, **uboThroughControl**, or **ultimateParentCompany**.  Possible values for sole proprietorships: **soleProprietorship**.  Possible value for trusts: **trust**.  Possible values for trust members: **definedBeneficiary**, **protector**, **secondaryTrustee**, **settlor**, **uboThroughControl**, or **uboThroughOwnership**.  Possible value for unincorporated partnership: **unincorporatedPartnership**.  Possible values for unincorporated partnership members: **secondaryPartner**, **uboThroughControl**, **uboThroughOwnership**
 	Type string `json:"type"`
 }
 
@@ -208,6 +209,38 @@ func (o *LegalEntityAssociation) SetName(v string) {
 	o.Name = &v
 }
 
+// GetNominee returns the Nominee field value if set, zero value otherwise.
+func (o *LegalEntityAssociation) GetNominee() bool {
+	if o == nil || common.IsNil(o.Nominee) {
+		var ret bool
+		return ret
+	}
+	return *o.Nominee
+}
+
+// GetNomineeOk returns a tuple with the Nominee field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LegalEntityAssociation) GetNomineeOk() (*bool, bool) {
+	if o == nil || common.IsNil(o.Nominee) {
+		return nil, false
+	}
+	return o.Nominee, true
+}
+
+// HasNominee returns a boolean if a field has been set.
+func (o *LegalEntityAssociation) HasNominee() bool {
+	if o != nil && !common.IsNil(o.Nominee) {
+		return true
+	}
+
+	return false
+}
+
+// SetNominee gets a reference to the given bool and assigns it to the Nominee field.
+func (o *LegalEntityAssociation) SetNominee(v bool) {
+	o.Nominee = &v
+}
+
 // GetRelationship returns the Relationship field value if set, zero value otherwise.
 func (o *LegalEntityAssociation) GetRelationship() string {
 	if o == nil || common.IsNil(o.Relationship) {
@@ -297,7 +330,7 @@ func (o *LegalEntityAssociation) SetType(v string) {
 }
 
 func (o LegalEntityAssociation) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -318,6 +351,9 @@ func (o LegalEntityAssociation) ToMap() (map[string]interface{}, error) {
 	toSerialize["legalEntityId"] = o.LegalEntityId
 	if !common.IsNil(o.Name) {
 		toSerialize["name"] = o.Name
+	}
+	if !common.IsNil(o.Nominee) {
+		toSerialize["nominee"] = o.Nominee
 	}
 	if !common.IsNil(o.Relationship) {
 		toSerialize["relationship"] = o.Relationship
@@ -365,12 +401,14 @@ func (v *NullableLegalEntityAssociation) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *LegalEntityAssociation) isValidType() bool {
-	var allowedEnumValues = []string{"definedBeneficiary", "director", "immediateParentCompany", "legalRepresentative", "pciSignatory", "protector", "secondaryPartner", "secondaryTrustee", "settlor", "signatory", "soleProprietorship", "trust", "trustOwnership", "uboThroughControl", "uboThroughOwnership", "ultimateParentCompany", "undefinedBeneficiary", "unincorporatedPartnership"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "definedBeneficiary", "director", "immediateParentCompany", "legalRepresentative", "pciSignatory", "protector", "secondaryPartner", "secondaryTrustee", "settlor", "signatory", "soleProprietorship", "trust", "trustOwnership", "uboThroughControl", "uboThroughOwnership", "ultimateParentCompany", "undefinedBeneficiary", "unincorporatedPartnership" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

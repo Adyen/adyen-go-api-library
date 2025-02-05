@@ -10,10 +10,10 @@ package dataprotection
 
 import (
 	"context"
-	"net/http"
-	"net/url"
-
-	"github.com/adyen/adyen-go-api-library/v17/src/common"
+    "net/http"
+    "net/url"
+    "strings"
+    "github.com/adyen/adyen-go-api-library/v17/src/common"
 )
 
 // GeneralApi service
@@ -29,13 +29,15 @@ func (r GeneralApiRequestSubjectErasureInput) SubjectErasureByPspReferenceReques
 	return r
 }
 
+
 /*
 Prepare a request for RequestSubjectErasure
 
 @return GeneralApiRequestSubjectErasureInput
 */
 func (a *GeneralApi) RequestSubjectErasureInput() GeneralApiRequestSubjectErasureInput {
-	return GeneralApiRequestSubjectErasureInput{}
+	return GeneralApiRequestSubjectErasureInput{
+	}
 }
 
 /*
@@ -48,20 +50,22 @@ Sends the PSP reference containing the shopper data that should be deleted.
 @return SubjectErasureResponse, *http.Response, error
 */
 func (a *GeneralApi) RequestSubjectErasure(ctx context.Context, r GeneralApiRequestSubjectErasureInput) (SubjectErasureResponse, *http.Response, error) {
-	res := &SubjectErasureResponse{}
+    res := &SubjectErasureResponse{}
 	path := "/requestSubjectErasure"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.subjectErasureByPspReferenceRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.subjectErasureByPspReferenceRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+

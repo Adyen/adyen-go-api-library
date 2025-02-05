@@ -10,9 +10,8 @@ package disputewebhook
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v17/src/common"
 	"time"
-
-	"github.com/adyen/adyen-go-api-library/v17/src/common"
 )
 
 // checks if the DisputeEventNotification type satisfies the MappedNullable interface at compile time
@@ -27,7 +26,7 @@ type DisputeEventNotification struct {
 	// The date and time when the event was triggered, in ISO 8601 extended format. For example, **2020-12-18T10:15:30+01:00**.
 	CreationDate *time.Time `json:"creationDate,omitempty"`
 	// Contains information about the dispute.
-	Description    *string `json:"description,omitempty"`
+	Description *string `json:"description,omitempty"`
 	DisputedAmount *Amount `json:"disputedAmount,omitempty"`
 	// The ID of the resource.
 	Id *string `json:"id,omitempty"`
@@ -379,7 +378,7 @@ func (o *DisputeEventNotification) SetType(v string) {
 }
 
 func (o DisputeEventNotification) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -457,12 +456,14 @@ func (v *NullableDisputeEventNotification) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *DisputeEventNotification) isValidType() bool {
-	var allowedEnumValues = []string{"fraud", "notDelivered"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "fraud", "notDelivered" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

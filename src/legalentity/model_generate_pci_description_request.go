@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v17/src/common"
+    "github.com/adyen/adyen-go-api-library/v17/src/common"
 )
 
 // checks if the GeneratePciDescriptionRequest type satisfies the MappedNullable interface at compile time
@@ -19,7 +18,7 @@ var _ common.MappedNullable = &GeneratePciDescriptionRequest{}
 
 // GeneratePciDescriptionRequest struct for GeneratePciDescriptionRequest
 type GeneratePciDescriptionRequest struct {
-	// An array of additional sales channels to generate PCI questionnaires. Include the relevant sales channels if you need your user to sign PCI questionnaires. Not required if you [create stores](https://docs.adyen.com/platforms) and [add payment methods](https://docs.adyen.com/adyen-for-platforms-model) before you generate the questionnaires.  Possible values: *  **eCommerce** *  **pos** *  **ecomMoto** *  **posMoto**
+	// An array of additional sales channels to generate PCI questionnaires. Include the relevant sales channels if you need your user to sign PCI questionnaires. Not required if you [create stores](https://docs.adyen.com/platforms) and [add payment methods](https://docs.adyen.com/adyen-for-platforms-model) before you generate the questionnaires.  Possible values: *  **eCommerce** *  **pos** *  **ecomMoto** *  **posMoto**  
 	AdditionalSalesChannels []string `json:"additionalSalesChannels,omitempty"`
 	// Sets the language of the PCI questionnaire. Its value is a two-character [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) language code, for example, **en**.
 	Language *string `json:"language,omitempty"`
@@ -107,7 +106,7 @@ func (o *GeneratePciDescriptionRequest) SetLanguage(v string) {
 }
 
 func (o GeneratePciDescriptionRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -160,3 +159,6 @@ func (v *NullableGeneratePciDescriptionRequest) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

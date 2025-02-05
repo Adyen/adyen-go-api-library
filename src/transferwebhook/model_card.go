@@ -10,8 +10,7 @@ package transferwebhook
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v17/src/common"
+    "github.com/adyen/adyen-go-api-library/v17/src/common"
 )
 
 // checks if the Card type satisfies the MappedNullable interface at compile time
@@ -19,8 +18,8 @@ var _ common.MappedNullable = &Card{}
 
 // Card struct for Card
 type Card struct {
-	CardHolder         PartyIdentification `json:"cardHolder"`
-	CardIdentification CardIdentification  `json:"cardIdentification"`
+	CardHolder PartyIdentification `json:"cardHolder"`
+	CardIdentification CardIdentification `json:"cardIdentification"`
 }
 
 // NewCard instantiates a new Card object
@@ -91,7 +90,7 @@ func (o *Card) SetCardIdentification(v CardIdentification) {
 }
 
 func (o Card) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -140,3 +139,6 @@ func (v *NullableCard) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

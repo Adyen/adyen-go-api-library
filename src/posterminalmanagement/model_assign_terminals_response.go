@@ -10,8 +10,7 @@ package posterminalmanagement
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v17/src/common"
+    "github.com/adyen/adyen-go-api-library/v17/src/common"
 )
 
 // checks if the AssignTerminalsResponse type satisfies the MappedNullable interface at compile time
@@ -19,7 +18,7 @@ var _ common.MappedNullable = &AssignTerminalsResponse{}
 
 // AssignTerminalsResponse struct for AssignTerminalsResponse
 type AssignTerminalsResponse struct {
-	// Array that returns a list of the terminals, and for each terminal the result of assigning it to an account or store.  The results can be:    - `Done`: The terminal has been assigned.   - `AssignmentScheduled`: The terminal will be assigned asynschronously.   - `RemoveConfigScheduled`: The terminal was previously assigned and boarded. Wait for the terminal to synchronize with the Adyen platform. For more information, refer to [Reassigning boarded terminals](https://docs.adyen.com/point-of-sale/managing-terminals/assign-terminals#reassign-boarded-terminals).   - `Error`: There was an error when assigning the terminal.
+	// Array that returns a list of the terminals, and for each terminal the result of assigning it to an account or store.  The results can be:    - `Done`: The terminal has been assigned.   - `AssignmentScheduled`: The terminal will be assigned asynschronously.   - `RemoveConfigScheduled`: The terminal was previously assigned and boarded. Wait for the terminal to synchronize with the Adyen platform. For more information, refer to [Reassigning boarded terminals](https://docs.adyen.com/point-of-sale/managing-terminals/assign-terminals#reassign-boarded-terminals).   - `Error`: There was an error when assigning the terminal. 
 	Results map[string]string `json:"results"`
 }
 
@@ -66,7 +65,7 @@ func (o *AssignTerminalsResponse) SetResults(v map[string]string) {
 }
 
 func (o AssignTerminalsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -114,3 +113,6 @@ func (v *NullableAssignTerminalsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

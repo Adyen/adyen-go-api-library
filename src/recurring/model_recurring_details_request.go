@@ -10,8 +10,7 @@ package recurring
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v17/src/common"
+    "github.com/adyen/adyen-go-api-library/v17/src/common"
 )
 
 // checks if the RecurringDetailsRequest type satisfies the MappedNullable interface at compile time
@@ -20,8 +19,8 @@ var _ common.MappedNullable = &RecurringDetailsRequest{}
 // RecurringDetailsRequest struct for RecurringDetailsRequest
 type RecurringDetailsRequest struct {
 	// The merchant account identifier you want to process the (transaction) request with.
-	MerchantAccount string     `json:"merchantAccount"`
-	Recurring       *Recurring `json:"recurring,omitempty"`
+	MerchantAccount string `json:"merchantAccount"`
+	Recurring *Recurring `json:"recurring,omitempty"`
 	// The reference you use to uniquely identify the shopper (e.g. user ID or account ID).
 	ShopperReference string `json:"shopperReference"`
 }
@@ -126,7 +125,7 @@ func (o *RecurringDetailsRequest) SetShopperReference(v string) {
 }
 
 func (o RecurringDetailsRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -178,3 +177,6 @@ func (v *NullableRecurringDetailsRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

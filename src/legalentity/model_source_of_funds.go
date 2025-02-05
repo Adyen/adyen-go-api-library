@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v17/src/common"
+    "github.com/adyen/adyen-go-api-library/v17/src/common"
 )
 
 // checks if the SourceOfFunds type satisfies the MappedNullable interface at compile time
@@ -20,8 +19,8 @@ var _ common.MappedNullable = &SourceOfFunds{}
 // SourceOfFunds struct for SourceOfFunds
 type SourceOfFunds struct {
 	// The unique identifier of the business line that will be the source of funds.This must be a business line for a **receivePayments** or **receiveFromPlatformPayments** capability.
-	// Deprecated since Legal Entity Management API v3
-	// This field will be removed in v4.
+    // Deprecated since Legal Entity Management API v3
+    // This field will be removed in v4.
 	AcquiringBusinessLineId *string `json:"acquiringBusinessLineId,omitempty"`
 	// Indicates whether the funds are coming from transactions processed by Adyen. If **false**, a `description` is required.
 	AdyenProcessedFunds *bool `json:"adyenProcessedFunds,omitempty"`
@@ -183,7 +182,7 @@ func (o *SourceOfFunds) SetType(v string) {
 }
 
 func (o SourceOfFunds) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -243,12 +242,14 @@ func (v *NullableSourceOfFunds) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *SourceOfFunds) isValidType() bool {
-	var allowedEnumValues = []string{"business"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "business" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

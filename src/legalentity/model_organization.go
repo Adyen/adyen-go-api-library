@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v17/src/common"
+    "github.com/adyen/adyen-go-api-library/v17/src/common"
 )
 
 // checks if the Organization type satisfies the MappedNullable interface at compile time
@@ -29,24 +28,26 @@ type Organization struct {
 	DoingBusinessAs *string `json:"doingBusinessAs,omitempty"`
 	// The email address of the legal entity.
 	Email *string `json:"email,omitempty"`
+	// The financial report information of the organization.
+	FinancialReports []FinancialReport `json:"financialReports,omitempty"`
 	// The organization's legal name.
-	LegalName                string       `json:"legalName"`
-	Phone                    *PhoneNumber `json:"phone,omitempty"`
-	PrincipalPlaceOfBusiness *Address     `json:"principalPlaceOfBusiness,omitempty"`
-	RegisteredAddress        Address      `json:"registeredAddress"`
+	LegalName string `json:"legalName"`
+	Phone *PhoneNumber `json:"phone,omitempty"`
+	PrincipalPlaceOfBusiness *Address `json:"principalPlaceOfBusiness,omitempty"`
+	RegisteredAddress Address `json:"registeredAddress"`
 	// The organization's registration number.
-	RegistrationNumber *string    `json:"registrationNumber,omitempty"`
-	StockData          *StockData `json:"stockData,omitempty"`
+	RegistrationNumber *string `json:"registrationNumber,omitempty"`
+	StockData *StockData `json:"stockData,omitempty"`
 	// The tax information of the organization.
-	TaxInformation             []TaxInformation            `json:"taxInformation,omitempty"`
+	TaxInformation []TaxInformation `json:"taxInformation,omitempty"`
 	TaxReportingClassification *TaxReportingClassification `json:"taxReportingClassification,omitempty"`
 	// Type of organization.  Possible values: **associationIncorporated**, **governmentalOrganization**, **listedPublicCompany**, **nonProfit**, **partnershipIncorporated**, **privateCompany**.
 	Type *string `json:"type,omitempty"`
 	// The reason the organization has not provided a VAT number.  Possible values: **industryExemption**, **belowTaxThreshold**.
 	VatAbsenceReason *string `json:"vatAbsenceReason,omitempty"`
 	// The organization's VAT number.
-	VatNumber *string  `json:"vatNumber,omitempty"`
-	WebData   *WebData `json:"webData,omitempty"`
+	VatNumber *string `json:"vatNumber,omitempty"`
+	WebData *WebData `json:"webData,omitempty"`
 }
 
 // NewOrganization instantiates a new Organization object
@@ -226,6 +227,38 @@ func (o *Organization) HasEmail() bool {
 // SetEmail gets a reference to the given string and assigns it to the Email field.
 func (o *Organization) SetEmail(v string) {
 	o.Email = &v
+}
+
+// GetFinancialReports returns the FinancialReports field value if set, zero value otherwise.
+func (o *Organization) GetFinancialReports() []FinancialReport {
+	if o == nil || common.IsNil(o.FinancialReports) {
+		var ret []FinancialReport
+		return ret
+	}
+	return o.FinancialReports
+}
+
+// GetFinancialReportsOk returns a tuple with the FinancialReports field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Organization) GetFinancialReportsOk() ([]FinancialReport, bool) {
+	if o == nil || common.IsNil(o.FinancialReports) {
+		return nil, false
+	}
+	return o.FinancialReports, true
+}
+
+// HasFinancialReports returns a boolean if a field has been set.
+func (o *Organization) HasFinancialReports() bool {
+	if o != nil && !common.IsNil(o.FinancialReports) {
+		return true
+	}
+
+	return false
+}
+
+// SetFinancialReports gets a reference to the given []FinancialReport and assigns it to the FinancialReports field.
+func (o *Organization) SetFinancialReports(v []FinancialReport) {
+	o.FinancialReports = v
 }
 
 // GetLegalName returns the LegalName field value
@@ -597,7 +630,7 @@ func (o *Organization) SetWebData(v WebData) {
 }
 
 func (o Organization) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -620,6 +653,9 @@ func (o Organization) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Email) {
 		toSerialize["email"] = o.Email
+	}
+	if !common.IsNil(o.FinancialReports) {
+		toSerialize["financialReports"] = o.FinancialReports
 	}
 	toSerialize["legalName"] = o.LegalName
 	if !common.IsNil(o.Phone) {
@@ -692,21 +728,23 @@ func (v *NullableOrganization) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *Organization) isValidType() bool {
-	var allowedEnumValues = []string{"associationIncorporated", "governmentalOrganization", "listedPublicCompany", "nonProfit", "partnershipIncorporated", "privateCompany"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "associationIncorporated", "governmentalOrganization", "listedPublicCompany", "nonProfit", "partnershipIncorporated", "privateCompany" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *Organization) isValidVatAbsenceReason() bool {
-	var allowedEnumValues = []string{"industryExemption", "belowTaxThreshold"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetVatAbsenceReason() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "industryExemption", "belowTaxThreshold" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetVatAbsenceReason() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v17/src/common"
+    "github.com/adyen/adyen-go-api-library/v17/src/common"
 )
 
 // checks if the SoleProprietorship type satisfies the MappedNullable interface at compile time
@@ -25,10 +24,12 @@ type SoleProprietorship struct {
 	DateOfIncorporation *string `json:"dateOfIncorporation,omitempty"`
 	// The registered name, if different from the `name`.
 	DoingBusinessAs *string `json:"doingBusinessAs,omitempty"`
+	// The information from the financial report of the sole proprietorship.
+	FinancialReports []FinancialReport `json:"financialReports,omitempty"`
 	// The legal name.
-	Name                     string   `json:"name"`
+	Name string `json:"name"`
 	PrincipalPlaceOfBusiness *Address `json:"principalPlaceOfBusiness,omitempty"`
-	RegisteredAddress        Address  `json:"registeredAddress"`
+	RegisteredAddress Address `json:"registeredAddress"`
 	// The registration number.
 	RegistrationNumber *string `json:"registrationNumber,omitempty"`
 	// The tax information is absent.
@@ -147,6 +148,38 @@ func (o *SoleProprietorship) HasDoingBusinessAs() bool {
 // SetDoingBusinessAs gets a reference to the given string and assigns it to the DoingBusinessAs field.
 func (o *SoleProprietorship) SetDoingBusinessAs(v string) {
 	o.DoingBusinessAs = &v
+}
+
+// GetFinancialReports returns the FinancialReports field value if set, zero value otherwise.
+func (o *SoleProprietorship) GetFinancialReports() []FinancialReport {
+	if o == nil || common.IsNil(o.FinancialReports) {
+		var ret []FinancialReport
+		return ret
+	}
+	return o.FinancialReports
+}
+
+// GetFinancialReportsOk returns a tuple with the FinancialReports field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SoleProprietorship) GetFinancialReportsOk() ([]FinancialReport, bool) {
+	if o == nil || common.IsNil(o.FinancialReports) {
+		return nil, false
+	}
+	return o.FinancialReports, true
+}
+
+// HasFinancialReports returns a boolean if a field has been set.
+func (o *SoleProprietorship) HasFinancialReports() bool {
+	if o != nil && !common.IsNil(o.FinancialReports) {
+		return true
+	}
+
+	return false
+}
+
+// SetFinancialReports gets a reference to the given []FinancialReport and assigns it to the FinancialReports field.
+func (o *SoleProprietorship) SetFinancialReports(v []FinancialReport) {
+	o.FinancialReports = v
 }
 
 // GetName returns the Name field value
@@ -293,7 +326,6 @@ func (o *SoleProprietorship) HasTaxAbsent() bool {
 func (o *SoleProprietorship) SetTaxAbsent(v bool) {
 	o.TaxAbsent.Set(&v)
 }
-
 // SetTaxAbsentNil sets the value for TaxAbsent to be an explicit nil
 func (o *SoleProprietorship) SetTaxAbsentNil() {
 	o.TaxAbsent.Set(nil)
@@ -401,7 +433,7 @@ func (o *SoleProprietorship) SetVatNumber(v string) {
 }
 
 func (o SoleProprietorship) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -416,6 +448,9 @@ func (o SoleProprietorship) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.DoingBusinessAs) {
 		toSerialize["doingBusinessAs"] = o.DoingBusinessAs
+	}
+	if !common.IsNil(o.FinancialReports) {
+		toSerialize["financialReports"] = o.FinancialReports
 	}
 	toSerialize["name"] = o.Name
 	if !common.IsNil(o.PrincipalPlaceOfBusiness) {
@@ -476,12 +511,14 @@ func (v *NullableSoleProprietorship) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *SoleProprietorship) isValidVatAbsenceReason() bool {
-	var allowedEnumValues = []string{"industryExemption", "belowTaxThreshold"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetVatAbsenceReason() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "industryExemption", "belowTaxThreshold" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetVatAbsenceReason() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

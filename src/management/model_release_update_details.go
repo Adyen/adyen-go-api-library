@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v17/src/common"
+    "github.com/adyen/adyen-go-api-library/v17/src/common"
 )
 
 // checks if the ReleaseUpdateDetails type satisfies the MappedNullable interface at compile time
@@ -111,7 +110,7 @@ func (o *ReleaseUpdateDetails) SetUpdateAtFirstMaintenanceCall(v bool) {
 }
 
 func (o ReleaseUpdateDetails) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -165,12 +164,14 @@ func (v *NullableReleaseUpdateDetails) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *ReleaseUpdateDetails) isValidType() bool {
-	var allowedEnumValues = []string{"ReleaseUpdate"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "ReleaseUpdate" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

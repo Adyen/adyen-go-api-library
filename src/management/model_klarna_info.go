@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v17/src/common"
+    "github.com/adyen/adyen-go-api-library/v17/src/common"
 )
 
 // checks if the KlarnaInfo type satisfies the MappedNullable interface at compile time
@@ -154,7 +153,7 @@ func (o *KlarnaInfo) SetSupportEmail(v string) {
 }
 
 func (o KlarnaInfo) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -208,12 +207,14 @@ func (v *NullableKlarnaInfo) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *KlarnaInfo) isValidRegion() bool {
-	var allowedEnumValues = []string{"NA", "EU", "CH", "AU"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetRegion() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "NA", "EU", "CH", "AU" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetRegion() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

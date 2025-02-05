@@ -10,9 +10,8 @@ package transferwebhook
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v17/src/common"
 	"time"
-
-	"github.com/adyen/adyen-go-api-library/v17/src/common"
 )
 
 // checks if the TransferEvent type satisfies the MappedNullable interface at compile time
@@ -30,18 +29,18 @@ type TransferEvent struct {
 	// The estimated time when the beneficiary should have access to the funds.
 	EstimatedArrivalTime *time.Time `json:"estimatedArrivalTime,omitempty"`
 	// A list of event data.
-	EventsData     []TransferEventEventsDataInner `json:"eventsData,omitempty"`
-	ExternalReason *ExternalReason                `json:"externalReason,omitempty"`
+	EventsData []TransferEventEventsDataInner `json:"eventsData,omitempty"`
+	ExternalReason *ExternalReason `json:"externalReason,omitempty"`
 	// The unique identifier of the transfer event.
-	Id           *string       `json:"id,omitempty"`
+	Id *string `json:"id,omitempty"`
 	Modification *Modification `json:"modification,omitempty"`
 	// The list of balance mutations per event.
-	Mutations      []BalanceMutation `json:"mutations,omitempty"`
-	OriginalAmount *Amount           `json:"originalAmount,omitempty"`
+	Mutations []BalanceMutation `json:"mutations,omitempty"`
+	OriginalAmount *Amount `json:"originalAmount,omitempty"`
 	// The reason for the transfer status.
 	Reason *string `json:"reason,omitempty"`
 	// The status of the transfer event.
-	Status       *string                    `json:"status,omitempty"`
+	Status *string `json:"status,omitempty"`
 	TrackingData *TransferEventTrackingData `json:"trackingData,omitempty"`
 	// The id of the transaction that is related to this accounting event. Only sent for events of type **accounting** where the balance changes.
 	TransactionId *string `json:"transactionId,omitempty"`
@@ -647,7 +646,7 @@ func (o *TransferEvent) SetValueDate(v time.Time) {
 }
 
 func (o TransferEvent) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -749,30 +748,32 @@ func (v *NullableTransferEvent) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *TransferEvent) isValidReason() bool {
-	var allowedEnumValues = []string{"accountHierarchyNotActive", "amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declined", "declinedByTransactionRule", "directDebitNotSupported", "error", "notEnoughBalance", "pendingApproval", "pendingExecution", "refusedByCounterpartyBank", "refusedByCustomer", "routeNotFound", "scaFailed", "transferInstrumentDoesNotExist", "unknown"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetReason() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "accountHierarchyNotActive", "amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declined", "declinedByTransactionRule", "directDebitNotSupported", "error", "notEnoughBalance", "pendingApproval", "pendingExecution", "refusedByCounterpartyBank", "refusedByCustomer", "routeNotFound", "scaFailed", "transferInstrumentDoesNotExist", "unknown" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetReason() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *TransferEvent) isValidStatus() bool {
-	var allowedEnumValues = []string{"approvalPending", "atmWithdrawal", "atmWithdrawalReversalPending", "atmWithdrawalReversed", "authAdjustmentAuthorised", "authAdjustmentError", "authAdjustmentRefused", "authorised", "bankTransfer", "bankTransferPending", "booked", "bookingPending", "cancelled", "capturePending", "captureReversalPending", "captureReversed", "captured", "capturedExternally", "chargeback", "chargebackExternally", "chargebackPending", "chargebackReversalPending", "chargebackReversed", "credited", "depositCorrection", "depositCorrectionPending", "dispute", "disputeClosed", "disputeExpired", "disputeNeedsReview", "error", "expired", "failed", "fee", "feePending", "internalTransfer", "internalTransferPending", "invoiceDeduction", "invoiceDeductionPending", "manualCorrectionPending", "manuallyCorrected", "matchedStatement", "matchedStatementPending", "merchantPayin", "merchantPayinPending", "merchantPayinReversed", "merchantPayinReversedPending", "miscCost", "miscCostPending", "paymentCost", "paymentCostPending", "pendingApproval", "pendingExecution", "received", "refundPending", "refundReversalPending", "refundReversed", "refunded", "refundedExternally", "refused", "rejected", "reserveAdjustment", "reserveAdjustmentPending", "returned", "secondChargeback", "secondChargebackPending", "undefined"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetStatus() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "approvalPending", "atmWithdrawal", "atmWithdrawalReversalPending", "atmWithdrawalReversed", "authAdjustmentAuthorised", "authAdjustmentError", "authAdjustmentRefused", "authorised", "bankTransfer", "bankTransferPending", "booked", "bookingPending", "cancelled", "capturePending", "captureReversalPending", "captureReversed", "captured", "capturedExternally", "chargeback", "chargebackExternally", "chargebackPending", "chargebackReversalPending", "chargebackReversed", "credited", "depositCorrection", "depositCorrectionPending", "dispute", "disputeClosed", "disputeExpired", "disputeNeedsReview", "error", "expired", "failed", "fee", "feePending", "internalTransfer", "internalTransferPending", "invoiceDeduction", "invoiceDeductionPending", "manualCorrectionPending", "manuallyCorrected", "matchedStatement", "matchedStatementPending", "merchantPayin", "merchantPayinPending", "merchantPayinReversed", "merchantPayinReversedPending", "miscCost", "miscCostPending", "paymentCost", "paymentCostPending", "pendingApproval", "pendingExecution", "received", "refundPending", "refundReversalPending", "refundReversed", "refunded", "refundedExternally", "refused", "rejected", "reserveAdjustment", "reserveAdjustmentPending", "returned", "secondChargeback", "secondChargebackPending", "undefined" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetStatus() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *TransferEvent) isValidType() bool {
-	var allowedEnumValues = []string{"accounting", "tracking"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "accounting", "tracking" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+
