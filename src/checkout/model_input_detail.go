@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v17/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v17/src/common"
 )
 
 // checks if the InputDetail type satisfies the MappedNullable interface at compile time
@@ -23,7 +24,7 @@ type InputDetail struct {
 	// Input details can also be provided recursively.
 	Details []SubInputDetail `json:"details,omitempty"`
 	// Input details can also be provided recursively (deprecated).
-    // Deprecated 
+	// Deprecated
 	InputDetails []SubInputDetail `json:"inputDetails,omitempty"`
 	// In case of a select, the URL from which to query the items.
 	ItemSearchUrl *string `json:"itemSearchUrl,omitempty"`
@@ -121,7 +122,7 @@ func (o *InputDetail) SetDetails(v []SubInputDetail) {
 }
 
 // GetInputDetails returns the InputDetails field value if set, zero value otherwise.
-// Deprecated 
+// Deprecated
 func (o *InputDetail) GetInputDetails() []SubInputDetail {
 	if o == nil || common.IsNil(o.InputDetails) {
 		var ret []SubInputDetail
@@ -132,7 +133,7 @@ func (o *InputDetail) GetInputDetails() []SubInputDetail {
 
 // GetInputDetailsOk returns a tuple with the InputDetails field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated 
+// Deprecated
 func (o *InputDetail) GetInputDetailsOk() ([]SubInputDetail, bool) {
 	if o == nil || common.IsNil(o.InputDetails) {
 		return nil, false
@@ -150,7 +151,7 @@ func (o *InputDetail) HasInputDetails() bool {
 }
 
 // SetInputDetails gets a reference to the given []SubInputDetail and assigns it to the InputDetails field.
-// Deprecated 
+// Deprecated
 func (o *InputDetail) SetInputDetails(v []SubInputDetail) {
 	o.InputDetails = v
 }
@@ -348,7 +349,7 @@ func (o *InputDetail) SetValue(v string) {
 }
 
 func (o InputDetail) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -422,6 +423,3 @@ func (v *NullableInputDetail) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

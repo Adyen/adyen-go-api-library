@@ -10,7 +10,8 @@ package transfers
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v17/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v17/src/common"
 )
 
 // checks if the Airline type satisfies the MappedNullable interface at compile time
@@ -106,7 +107,7 @@ func (o *Airline) SetTicketNumber(v string) {
 }
 
 func (o Airline) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -159,6 +160,3 @@ func (v *NullableAirline) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

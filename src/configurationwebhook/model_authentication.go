@@ -10,7 +10,8 @@ package configurationwebhook
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v17/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v17/src/common"
 )
 
 // checks if the Authentication type satisfies the MappedNullable interface at compile time
@@ -22,7 +23,7 @@ type Authentication struct {
 	Email *string `json:"email,omitempty"`
 	// The password used for 3D Secure password-based authentication. The value must be between 1 to 30 characters and must only contain the following supported characters.  * Characters between **a-z**, **A-Z**, and **0-9**  * Special characters: **äöüßÄÖÜ+-*_/ç%()=?!~#'\",;:$&àùòâôûáúó**
 	Password *string `json:"password,omitempty"`
-	Phone *Phone `json:"phone,omitempty"`
+	Phone    *Phone  `json:"phone,omitempty"`
 }
 
 // NewAuthentication instantiates a new Authentication object
@@ -139,7 +140,7 @@ func (o *Authentication) SetPhone(v Phone) {
 }
 
 func (o Authentication) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,6 +196,3 @@ func (v *NullableAuthentication) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

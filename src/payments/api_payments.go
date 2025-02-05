@@ -10,10 +10,10 @@ package payments
 
 import (
 	"context"
-    "net/http"
-    "net/url"
-    "strings"
-    "github.com/adyen/adyen-go-api-library/v17/src/common"
+	"net/http"
+	"net/url"
+
+	"github.com/adyen/adyen-go-api-library/v17/src/common"
 )
 
 // PaymentsApi service
@@ -29,15 +29,13 @@ func (r PaymentsApiAuthoriseInput) PaymentRequest(paymentRequest PaymentRequest)
 	return r
 }
 
-
 /*
 Prepare a request for Authorise
 
 @return PaymentsApiAuthoriseInput
 */
 func (a *PaymentsApi) AuthoriseInput() PaymentsApiAuthoriseInput {
-	return PaymentsApiAuthoriseInput{
-	}
+	return PaymentsApiAuthoriseInput{}
 }
 
 /*
@@ -51,25 +49,23 @@ Creates a payment with a unique reference (`pspReference`) and attempts to obtai
 @return PaymentResult, *http.Response, error
 */
 func (a *PaymentsApi) Authorise(ctx context.Context, r PaymentsApiAuthoriseInput) (PaymentResult, *http.Response, error) {
-    res := &PaymentResult{}
+	res := &PaymentResult{}
 	path := "/authorise"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.paymentRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.paymentRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by PaymentsApi.Authorise3d
 type PaymentsApiAuthorise3dInput struct {
@@ -81,15 +77,13 @@ func (r PaymentsApiAuthorise3dInput) PaymentRequest3d(paymentRequest3d PaymentRe
 	return r
 }
 
-
 /*
 Prepare a request for Authorise3d
 
 @return PaymentsApiAuthorise3dInput
 */
 func (a *PaymentsApi) Authorise3dInput() PaymentsApiAuthorise3dInput {
-	return PaymentsApiAuthorise3dInput{
-	}
+	return PaymentsApiAuthorise3dInput{}
 }
 
 /*
@@ -104,25 +98,23 @@ For an authenticated 3D Secure session, completes the payment authorisation. Thi
 @return PaymentResult, *http.Response, error
 */
 func (a *PaymentsApi) Authorise3d(ctx context.Context, r PaymentsApiAuthorise3dInput) (PaymentResult, *http.Response, error) {
-    res := &PaymentResult{}
+	res := &PaymentResult{}
 	path := "/authorise3d"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.paymentRequest3d,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.paymentRequest3d,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by PaymentsApi.Authorise3ds2
 type PaymentsApiAuthorise3ds2Input struct {
@@ -134,15 +126,13 @@ func (r PaymentsApiAuthorise3ds2Input) PaymentRequest3ds2(paymentRequest3ds2 Pay
 	return r
 }
 
-
 /*
 Prepare a request for Authorise3ds2
 
 @return PaymentsApiAuthorise3ds2Input
 */
 func (a *PaymentsApi) Authorise3ds2Input() PaymentsApiAuthorise3ds2Input {
-	return PaymentsApiAuthorise3ds2Input{
-	}
+	return PaymentsApiAuthorise3ds2Input{}
 }
 
 /*
@@ -157,25 +147,23 @@ For an authenticated 3D Secure 2 session, completes the payment authorisation. T
 @return PaymentResult, *http.Response, error
 */
 func (a *PaymentsApi) Authorise3ds2(ctx context.Context, r PaymentsApiAuthorise3ds2Input) (PaymentResult, *http.Response, error) {
-    res := &PaymentResult{}
+	res := &PaymentResult{}
 	path := "/authorise3ds2"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.paymentRequest3ds2,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.paymentRequest3ds2,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by PaymentsApi.GetAuthenticationResult
 type PaymentsApiGetAuthenticationResultInput struct {
@@ -187,15 +175,13 @@ func (r PaymentsApiGetAuthenticationResultInput) AuthenticationResultRequest(aut
 	return r
 }
 
-
 /*
 Prepare a request for GetAuthenticationResult
 
 @return PaymentsApiGetAuthenticationResultInput
 */
 func (a *PaymentsApi) GetAuthenticationResultInput() PaymentsApiGetAuthenticationResultInput {
-	return PaymentsApiGetAuthenticationResultInput{
-	}
+	return PaymentsApiGetAuthenticationResultInput{}
 }
 
 /*
@@ -208,25 +194,23 @@ Return the authentication result after doing a 3D Secure authentication only.
 @return AuthenticationResultResponse, *http.Response, error
 */
 func (a *PaymentsApi) GetAuthenticationResult(ctx context.Context, r PaymentsApiGetAuthenticationResultInput) (AuthenticationResultResponse, *http.Response, error) {
-    res := &AuthenticationResultResponse{}
+	res := &AuthenticationResultResponse{}
 	path := "/getAuthenticationResult"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.authenticationResultRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.authenticationResultRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by PaymentsApi.Retrieve3ds2Result
 type PaymentsApiRetrieve3ds2ResultInput struct {
@@ -238,15 +222,13 @@ func (r PaymentsApiRetrieve3ds2ResultInput) ThreeDS2ResultRequest(threeDS2Result
 	return r
 }
 
-
 /*
 Prepare a request for Retrieve3ds2Result
 
 @return PaymentsApiRetrieve3ds2ResultInput
 */
 func (a *PaymentsApi) Retrieve3ds2ResultInput() PaymentsApiRetrieve3ds2ResultInput {
-	return PaymentsApiRetrieve3ds2ResultInput{
-	}
+	return PaymentsApiRetrieve3ds2ResultInput{}
 }
 
 /*
@@ -259,22 +241,20 @@ Retrieves the `threeDS2Result` after doing a 3D Secure 2 authentication only.
 @return ThreeDS2ResultResponse, *http.Response, error
 */
 func (a *PaymentsApi) Retrieve3ds2Result(ctx context.Context, r PaymentsApiRetrieve3ds2ResultInput) (ThreeDS2ResultResponse, *http.Response, error) {
-    res := &ThreeDS2ResultResponse{}
+	res := &ThreeDS2ResultResponse{}
 	path := "/retrieve3ds2Result"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.threeDS2ResultRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.threeDS2ResultRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-

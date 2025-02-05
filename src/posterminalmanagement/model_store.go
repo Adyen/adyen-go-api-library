@@ -10,7 +10,8 @@ package posterminalmanagement
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v17/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v17/src/common"
 )
 
 // checks if the Store type satisfies the MappedNullable interface at compile time
@@ -25,7 +26,7 @@ type Store struct {
 	InStoreTerminals []string `json:"inStoreTerminals,omitempty"`
 	// The code of the merchant account.
 	MerchantAccountCode *string `json:"merchantAccountCode,omitempty"`
-	// The status of the store:  - `PreActive`: the store has been created, but not yet activated.   - `Active`: the store has been activated. This means you can process payments for this store.   - `Inactive`: the store is currently not active.   - `InactiveWithModifications`: the store is currently not active, but payment modifications such as refunds are possible.   - `Closed`: the store has been closed. 
+	// The status of the store:  - `PreActive`: the store has been created, but not yet activated.   - `Active`: the store has been activated. This means you can process payments for this store.   - `Inactive`: the store is currently not active.   - `InactiveWithModifications`: the store is currently not active, but payment modifications such as refunds are possible.   - `Closed`: the store has been closed.
 	Status *string `json:"status,omitempty"`
 	// The code of the store.
 	Store string `json:"store"`
@@ -234,7 +235,7 @@ func (o *Store) SetStore(v string) {
 }
 
 func (o Store) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -297,6 +298,3 @@ func (v *NullableStore) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

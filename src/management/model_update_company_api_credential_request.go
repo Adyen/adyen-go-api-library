@@ -10,7 +10,8 @@ package management
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v17/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v17/src/common"
 )
 
 // checks if the UpdateCompanyApiCredentialRequest type satisfies the MappedNullable interface at compile time
@@ -208,7 +209,7 @@ func (o *UpdateCompanyApiCredentialRequest) SetRoles(v []string) {
 }
 
 func (o UpdateCompanyApiCredentialRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -270,6 +271,3 @@ func (v *NullableUpdateCompanyApiCredentialRequest) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

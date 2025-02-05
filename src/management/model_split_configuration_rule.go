@@ -10,7 +10,8 @@ package management
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v17/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v17/src/common"
 )
 
 // checks if the SplitConfigurationRule type satisfies the MappedNullable interface at compile time
@@ -27,8 +28,8 @@ type SplitConfigurationRule struct {
 	// The unique identifier of the split configuration rule.
 	RuleId *string `json:"ruleId,omitempty"`
 	// The sales channel condition that defines whether the split logic applies.  Possible values: * **Ecommerce**: Online transactions where the cardholder is present. * **ContAuth**: Card on file and/or subscription transactions, where the cardholder is known to the merchant (returning customer). * **Moto**: Mail-order and telephone-order transactions where the customer is in contact with the merchant via email or telephone. * **POS**: Point-of-sale transactions where the customer is physically present to make a payment using a secure payment terminal. * **ANY**: All sales channels.
-	ShopperInteraction string `json:"shopperInteraction"`
-	SplitLogic SplitConfigurationLogic `json:"splitLogic"`
+	ShopperInteraction string                  `json:"shopperInteraction"`
+	SplitLogic         SplitConfigurationLogic `json:"splitLogic"`
 }
 
 // NewSplitConfigurationRule instantiates a new SplitConfigurationRule object
@@ -213,7 +214,7 @@ func (o *SplitConfigurationRule) SetSplitLogic(v SplitConfigurationLogic) {
 }
 
 func (o SplitConfigurationRule) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -271,23 +272,21 @@ func (v *NullableSplitConfigurationRule) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *SplitConfigurationRule) isValidFundingSource() bool {
-    var allowedEnumValues = []string{ "credit", "debit", "ANY" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetFundingSource() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"credit", "debit", "ANY"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetFundingSource() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *SplitConfigurationRule) isValidShopperInteraction() bool {
-    var allowedEnumValues = []string{ "Ecommerce", "ContAuth", "Moto", "POS", "ANY" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetShopperInteraction() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"Ecommerce", "ContAuth", "Moto", "POS", "ANY"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetShopperInteraction() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

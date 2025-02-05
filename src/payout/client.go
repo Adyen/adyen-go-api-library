@@ -9,7 +9,7 @@ API version: 68
 package payout
 
 import (
-    "github.com/adyen/adyen-go-api-library/v17/src/common"
+	"github.com/adyen/adyen-go-api-library/v17/src/common"
 )
 
 // APIClient manages communication with the Adyen Payout API API v68
@@ -29,10 +29,10 @@ type APIClient struct {
 // NewAPIClient creates a new API client.
 func NewAPIClient(client *common.Client) *APIClient {
 	c := &APIClient{}
-    c.common.Client = client
-    c.common.BasePath = func() string {
-        return client.Cfg.Endpoint
-    }
+	c.common.Client = client
+	c.common.BasePath = func() string {
+		return client.Cfg.Endpoint
+	}
 
 	// API Services
 	c.InitializationApi = (*InitializationApi)(&c.common)

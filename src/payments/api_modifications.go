@@ -10,10 +10,10 @@ package payments
 
 import (
 	"context"
-    "net/http"
-    "net/url"
-    "strings"
-    "github.com/adyen/adyen-go-api-library/v17/src/common"
+	"net/http"
+	"net/url"
+
+	"github.com/adyen/adyen-go-api-library/v17/src/common"
 )
 
 // ModificationsApi service
@@ -29,15 +29,13 @@ func (r ModificationsApiAdjustAuthorisationInput) AdjustAuthorisationRequest(adj
 	return r
 }
 
-
 /*
 Prepare a request for AdjustAuthorisation
 
 @return ModificationsApiAdjustAuthorisationInput
 */
 func (a *ModificationsApi) AdjustAuthorisationInput() ModificationsApiAdjustAuthorisationInput {
-	return ModificationsApiAdjustAuthorisationInput{
-	}
+	return ModificationsApiAdjustAuthorisationInput{}
 }
 
 /*
@@ -55,25 +53,23 @@ Allows you to increase or decrease the authorised amount after the initial autho
 @return ModificationResult, *http.Response, error
 */
 func (a *ModificationsApi) AdjustAuthorisation(ctx context.Context, r ModificationsApiAdjustAuthorisationInput) (ModificationResult, *http.Response, error) {
-    res := &ModificationResult{}
+	res := &ModificationResult{}
 	path := "/adjustAuthorisation"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.adjustAuthorisationRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.adjustAuthorisationRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by ModificationsApi.Cancel
 type ModificationsApiCancelInput struct {
@@ -85,15 +81,13 @@ func (r ModificationsApiCancelInput) CancelRequest(cancelRequest CancelRequest) 
 	return r
 }
 
-
 /*
 Prepare a request for Cancel
 
 @return ModificationsApiCancelInput
 */
 func (a *ModificationsApi) CancelInput() ModificationsApiCancelInput {
-	return ModificationsApiCancelInput{
-	}
+	return ModificationsApiCancelInput{}
 }
 
 /*
@@ -110,25 +104,23 @@ For more information, refer to [Cancel](https://docs.adyen.com/online-payments/c
 @return ModificationResult, *http.Response, error
 */
 func (a *ModificationsApi) Cancel(ctx context.Context, r ModificationsApiCancelInput) (ModificationResult, *http.Response, error) {
-    res := &ModificationResult{}
+	res := &ModificationResult{}
 	path := "/cancel"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.cancelRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.cancelRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by ModificationsApi.CancelOrRefund
 type ModificationsApiCancelOrRefundInput struct {
@@ -140,15 +132,13 @@ func (r ModificationsApiCancelOrRefundInput) CancelOrRefundRequest(cancelOrRefun
 	return r
 }
 
-
 /*
 Prepare a request for CancelOrRefund
 
 @return ModificationsApiCancelOrRefundInput
 */
 func (a *ModificationsApi) CancelOrRefundInput() ModificationsApiCancelOrRefundInput {
-	return ModificationsApiCancelOrRefundInput{
-	}
+	return ModificationsApiCancelOrRefundInput{}
 }
 
 /*
@@ -171,25 +161,23 @@ For more information, refer to [Cancel or refund](https://docs.adyen.com/online-
 @return ModificationResult, *http.Response, error
 */
 func (a *ModificationsApi) CancelOrRefund(ctx context.Context, r ModificationsApiCancelOrRefundInput) (ModificationResult, *http.Response, error) {
-    res := &ModificationResult{}
+	res := &ModificationResult{}
 	path := "/cancelOrRefund"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.cancelOrRefundRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.cancelOrRefundRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by ModificationsApi.Capture
 type ModificationsApiCaptureInput struct {
@@ -201,15 +189,13 @@ func (r ModificationsApiCaptureInput) CaptureRequest(captureRequest CaptureReque
 	return r
 }
 
-
 /*
 Prepare a request for Capture
 
 @return ModificationsApiCaptureInput
 */
 func (a *ModificationsApi) CaptureInput() ModificationsApiCaptureInput {
-	return ModificationsApiCaptureInput{
-	}
+	return ModificationsApiCaptureInput{}
 }
 
 /*
@@ -230,25 +216,23 @@ For more information refer to [Capture](https://docs.adyen.com/online-payments/c
 @return ModificationResult, *http.Response, error
 */
 func (a *ModificationsApi) Capture(ctx context.Context, r ModificationsApiCaptureInput) (ModificationResult, *http.Response, error) {
-    res := &ModificationResult{}
+	res := &ModificationResult{}
 	path := "/capture"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.captureRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.captureRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by ModificationsApi.Donate
 type ModificationsApiDonateInput struct {
@@ -260,17 +244,15 @@ func (r ModificationsApiDonateInput) DonationRequest(donationRequest DonationReq
 	return r
 }
 
-
 /*
 Prepare a request for Donate
 
 @return ModificationsApiDonateInput
 
-Deprecated 
+Deprecated
 */
 func (a *ModificationsApi) DonateInput() ModificationsApiDonateInput {
-	return ModificationsApiDonateInput{
-	}
+	return ModificationsApiDonateInput{}
 }
 
 /*
@@ -284,28 +266,26 @@ Schedules a new payment to be created (including a new authorisation request) fo
 @param r ModificationsApiDonateInput - Request parameters, see DonateInput
 @return ModificationResult, *http.Response, error
 
-Deprecated 
+Deprecated
 */
 func (a *ModificationsApi) Donate(ctx context.Context, r ModificationsApiDonateInput) (ModificationResult, *http.Response, error) {
-    res := &ModificationResult{}
+	res := &ModificationResult{}
 	path := "/donate"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.donationRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.donationRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by ModificationsApi.Refund
 type ModificationsApiRefundInput struct {
@@ -317,15 +297,13 @@ func (r ModificationsApiRefundInput) RefundRequest(refundRequest RefundRequest) 
 	return r
 }
 
-
 /*
 Prepare a request for Refund
 
 @return ModificationsApiRefundInput
 */
 func (a *ModificationsApi) RefundInput() ModificationsApiRefundInput {
-	return ModificationsApiRefundInput{
-	}
+	return ModificationsApiRefundInput{}
 }
 
 /*
@@ -345,25 +323,23 @@ For more information, refer to [Refund](https://docs.adyen.com/online-payments/c
 @return ModificationResult, *http.Response, error
 */
 func (a *ModificationsApi) Refund(ctx context.Context, r ModificationsApiRefundInput) (ModificationResult, *http.Response, error) {
-    res := &ModificationResult{}
+	res := &ModificationResult{}
 	path := "/refund"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.refundRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.refundRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by ModificationsApi.TechnicalCancel
 type ModificationsApiTechnicalCancelInput struct {
@@ -375,15 +351,13 @@ func (r ModificationsApiTechnicalCancelInput) TechnicalCancelRequest(technicalCa
 	return r
 }
 
-
 /*
 Prepare a request for TechnicalCancel
 
 @return ModificationsApiTechnicalCancelInput
 */
 func (a *ModificationsApi) TechnicalCancelInput() ModificationsApiTechnicalCancelInput {
-	return ModificationsApiTechnicalCancelInput{
-	}
+	return ModificationsApiTechnicalCancelInput{}
 }
 
 /*
@@ -393,7 +367,7 @@ This endpoint allows you to cancel a payment if you do not have the PSP referenc
 
 In your call, refer to the original payment by using the `reference` that you specified in your payment request.
 
-For more information, see [Technical cancel](https://docs.adyen.com/online-payments/classic-integrations/modify-payments/cancel#technical-cancel). 
+For more information, see [Technical cancel](https://docs.adyen.com/online-payments/classic-integrations/modify-payments/cancel#technical-cancel).
 
 > This endpoint is part of our [classic API integration](https://docs.adyen.com/online-payments/classic-integrations/api-integration-ecommerce). If using a [newer integration](https://docs.adyen.com/online-payments), use the [`/cancels`](https://docs.adyen.com/api-explorer/#/CheckoutService/cancels) endpoint under Checkout API instead.
 
@@ -402,25 +376,23 @@ For more information, see [Technical cancel](https://docs.adyen.com/online-payme
 @return ModificationResult, *http.Response, error
 */
 func (a *ModificationsApi) TechnicalCancel(ctx context.Context, r ModificationsApiTechnicalCancelInput) (ModificationResult, *http.Response, error) {
-    res := &ModificationResult{}
+	res := &ModificationResult{}
 	path := "/technicalCancel"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.technicalCancelRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.technicalCancelRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by ModificationsApi.VoidPendingRefund
 type ModificationsApiVoidPendingRefundInput struct {
@@ -432,15 +404,13 @@ func (r ModificationsApiVoidPendingRefundInput) VoidPendingRefundRequest(voidPen
 	return r
 }
 
-
 /*
 Prepare a request for VoidPendingRefund
 
 @return ModificationsApiVoidPendingRefundInput
 */
 func (a *ModificationsApi) VoidPendingRefundInput() ModificationsApiVoidPendingRefundInput {
-	return ModificationsApiVoidPendingRefundInput{
-	}
+	return ModificationsApiVoidPendingRefundInput{}
 }
 
 /*
@@ -457,22 +427,20 @@ For more information, refer to [Cancel an unreferenced refund](https://docs.adye
 @return ModificationResult, *http.Response, error
 */
 func (a *ModificationsApi) VoidPendingRefund(ctx context.Context, r ModificationsApiVoidPendingRefundInput) (ModificationResult, *http.Response, error) {
-    res := &ModificationResult{}
+	res := &ModificationResult{}
 	path := "/voidPendingRefund"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.voidPendingRefundRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.voidPendingRefundRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-

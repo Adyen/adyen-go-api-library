@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v17/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v17/src/common"
 )
 
 // checks if the StandalonePaymentCancelResponse type satisfies the MappedNullable interface at compile time
@@ -180,7 +181,7 @@ func (o *StandalonePaymentCancelResponse) SetStatus(v string) {
 }
 
 func (o StandalonePaymentCancelResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -235,14 +236,12 @@ func (v *NullableStandalonePaymentCancelResponse) UnmarshalJSON(src []byte) erro
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *StandalonePaymentCancelResponse) isValidStatus() bool {
-    var allowedEnumValues = []string{ "received" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetStatus() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"received"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetStatus() == allowed {
+			return true
+		}
+	}
+	return false
 }
-
