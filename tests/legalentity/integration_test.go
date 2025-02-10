@@ -5,9 +5,9 @@ package legalentity
 
 import (
 	"context"
-	"github.com/adyen/adyen-go-api-library/v17/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v17/src/common"
-    "github.com/adyen/adyen-go-api-library/v17/src/legalentity"
+	"github.com/adyen/adyen-go-api-library/v18/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v18/src/common"
+    "github.com/adyen/adyen-go-api-library/v18/src/legalentity"
     "github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

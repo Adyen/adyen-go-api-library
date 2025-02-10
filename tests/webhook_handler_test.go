@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/adyen/adyen-go-api-library/v17/src/webhook"
+	"github.com/adyen/adyen-go-api-library/v18/src/webhook"
 )
 
 func TestWebhook_HandleRequest(t *testing.T) {

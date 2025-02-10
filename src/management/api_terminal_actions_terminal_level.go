@@ -15,7 +15,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/adyen/adyen-go-api-library/v17/src/common"
+	"github.com/adyen/adyen-go-api-library/v18/src/common"
 )
 
 // TerminalActionsTerminalLevelApi service
