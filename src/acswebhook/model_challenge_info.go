@@ -20,7 +20,7 @@ var _ common.MappedNullable = &ChallengeInfo{}
 
 // ChallengeInfo struct for ChallengeInfo
 type ChallengeInfo struct {
-	// Indicator informing the Access Control Server (ACS) and the Directory Server (DS) that the authentication has been cancelled. For possible values, refer to [3D Secure API reference](https://docs.adyen.com/online-payments/3d-secure/api-reference#mpidata).
+	// Indicator informing the Access Control Server (ACS) and the Directory Server (DS) that the authentication has been cancelled. Possible values: * **00**: Data element is absent or value has been sent back with the key `challengeCancel`. * **01**: Cardholder selected **Cancel**. * **02**: 3DS Requestor cancelled Authentication. * **03**: Transaction abandoned. * **04**: Transaction timed out at ACS — other timeouts. * **05**: Transaction timed out at ACS — first CReq not received by ACS. * **06**: Transaction error. * **07**: Unknown. * **08**: Transaction time out at SDK.
 	ChallengeCancel *string `json:"challengeCancel,omitempty"`
 	// The flow used in the challenge. Possible values:  * **OTP_SMS**: one-time password (OTP) flow * **OOB**: out-of-band (OOB) flow
 	Flow string `json:"flow"`
@@ -293,7 +293,7 @@ func (v *NullableChallengeInfo) UnmarshalJSON(src []byte) error {
 }
 
 func (o *ChallengeInfo) isValidChallengeCancel() bool {
-	var allowedEnumValues = []string{"01", "02", "03", "04", "05", "06", "07"}
+	var allowedEnumValues = []string{"00", "01", "02", "03", "04", "05", "06", "07", "08"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetChallengeCancel() == allowed {
 			return true

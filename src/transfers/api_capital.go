@@ -37,6 +37,9 @@ func (r CapitalApiGetCapitalAccountInput) CounterpartyAccountHolderId(counterpar
 Prepare a request for GetCapitalAccount
 
 @return CapitalApiGetCapitalAccountInput
+
+Deprecated since Transfers API v4
+Use the `/grants` endpoint from the [Capital API](https://docs.adyen.com/api-explorer/capital/latest/get/grants) instead.
 */
 func (a *CapitalApi) GetCapitalAccountInput() CapitalApiGetCapitalAccountInput {
 	return CapitalApiGetCapitalAccountInput{}
@@ -50,6 +53,9 @@ Returns a list of grants with status and outstanding balances.
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r CapitalApiGetCapitalAccountInput - Request parameters, see GetCapitalAccountInput
 @return CapitalGrants, *http.Response, error
+
+Deprecated since Transfers API v4
+Use the `/grants` endpoint from the [Capital API](https://docs.adyen.com/api-explorer/capital/latest/get/grants) instead.
 */
 func (a *CapitalApi) GetCapitalAccount(ctx context.Context, r CapitalApiGetCapitalAccountInput) (CapitalGrants, *http.Response, error) {
 	res := &CapitalGrants{}
@@ -136,6 +142,9 @@ type CapitalApiGetGrantReferenceDetailsInput struct {
 Prepare a request for GetGrantReferenceDetails
 @param id The unique identifier of the grant.
 @return CapitalApiGetGrantReferenceDetailsInput
+
+Deprecated since Transfers API v4
+Use the `/grants/{grantId}` endpoint from the [Capital API](https://docs.adyen.com/api-explorer/capital/latest/get/grants/(grantId)) instead.
 */
 func (a *CapitalApi) GetGrantReferenceDetailsInput(id string) CapitalApiGetGrantReferenceDetailsInput {
 	return CapitalApiGetGrantReferenceDetailsInput{
@@ -151,6 +160,9 @@ Returns the details of a capital account specified in the path.
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r CapitalApiGetGrantReferenceDetailsInput - Request parameters, see GetGrantReferenceDetailsInput
 @return CapitalGrant, *http.Response, error
+
+Deprecated since Transfers API v4
+Use the `/grants/{grantId}` endpoint from the [Capital API](https://docs.adyen.com/api-explorer/capital/latest/get/grants/(grantId)) instead.
 */
 func (a *CapitalApi) GetGrantReferenceDetails(ctx context.Context, r CapitalApiGetGrantReferenceDetailsInput) (CapitalGrant, *http.Response, error) {
 	res := &CapitalGrant{}
@@ -247,6 +259,9 @@ func (r CapitalApiRequestGrantPayoutInput) CapitalGrantInfo(capitalGrantInfo Cap
 Prepare a request for RequestGrantPayout
 
 @return CapitalApiRequestGrantPayoutInput
+
+Deprecated since Transfers API v4
+Use the `/grants` endpoint from the [Capital API](https://docs.adyen.com/api-explorer/capital/latest/post/grants) instead.
 */
 func (a *CapitalApi) RequestGrantPayoutInput() CapitalApiRequestGrantPayoutInput {
 	return CapitalApiRequestGrantPayoutInput{}
@@ -260,6 +275,9 @@ Requests the payout of the selected grant offer.
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r CapitalApiRequestGrantPayoutInput - Request parameters, see RequestGrantPayoutInput
 @return CapitalGrant, *http.Response, error
+
+Deprecated since Transfers API v4
+Use the `/grants` endpoint from the [Capital API](https://docs.adyen.com/api-explorer/capital/latest/post/grants) instead.
 */
 func (a *CapitalApi) RequestGrantPayout(ctx context.Context, r CapitalApiRequestGrantPayoutInput) (CapitalGrant, *http.Response, error) {
 	res := &CapitalGrant{}

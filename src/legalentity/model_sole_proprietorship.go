@@ -25,6 +25,8 @@ type SoleProprietorship struct {
 	DateOfIncorporation *string `json:"dateOfIncorporation,omitempty"`
 	// The registered name, if different from the `name`.
 	DoingBusinessAs *string `json:"doingBusinessAs,omitempty"`
+	// The information from the financial report of the sole proprietorship.
+	FinancialReports []FinancialReport `json:"financialReports,omitempty"`
 	// The legal name.
 	Name                     string   `json:"name"`
 	PrincipalPlaceOfBusiness *Address `json:"principalPlaceOfBusiness,omitempty"`
@@ -147,6 +149,38 @@ func (o *SoleProprietorship) HasDoingBusinessAs() bool {
 // SetDoingBusinessAs gets a reference to the given string and assigns it to the DoingBusinessAs field.
 func (o *SoleProprietorship) SetDoingBusinessAs(v string) {
 	o.DoingBusinessAs = &v
+}
+
+// GetFinancialReports returns the FinancialReports field value if set, zero value otherwise.
+func (o *SoleProprietorship) GetFinancialReports() []FinancialReport {
+	if o == nil || common.IsNil(o.FinancialReports) {
+		var ret []FinancialReport
+		return ret
+	}
+	return o.FinancialReports
+}
+
+// GetFinancialReportsOk returns a tuple with the FinancialReports field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SoleProprietorship) GetFinancialReportsOk() ([]FinancialReport, bool) {
+	if o == nil || common.IsNil(o.FinancialReports) {
+		return nil, false
+	}
+	return o.FinancialReports, true
+}
+
+// HasFinancialReports returns a boolean if a field has been set.
+func (o *SoleProprietorship) HasFinancialReports() bool {
+	if o != nil && !common.IsNil(o.FinancialReports) {
+		return true
+	}
+
+	return false
+}
+
+// SetFinancialReports gets a reference to the given []FinancialReport and assigns it to the FinancialReports field.
+func (o *SoleProprietorship) SetFinancialReports(v []FinancialReport) {
+	o.FinancialReports = v
 }
 
 // GetName returns the Name field value
@@ -416,6 +450,9 @@ func (o SoleProprietorship) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.DoingBusinessAs) {
 		toSerialize["doingBusinessAs"] = o.DoingBusinessAs
+	}
+	if !common.IsNil(o.FinancialReports) {
+		toSerialize["financialReports"] = o.FinancialReports
 	}
 	toSerialize["name"] = o.Name
 	if !common.IsNil(o.PrincipalPlaceOfBusiness) {

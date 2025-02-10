@@ -44,7 +44,9 @@ CreateBusinessLine Create a business line
 
 Creates a business line.
 
-This resource contains information about your user's line of business, including their industry and their source of funds. Adyen uses this information to verify your users as required by payment industry regulations. Adyen informs you of the verification results through webhooks or API responses.
+This resource contains information about your user's line of business, including their industry and their source of funds. Adyen uses this information to verify your users as required by payment industry regulations.Adyen informs you of the verification results through webhooks or API responses.
+
+You can create a maximum of 3 business lines per legal entity for payment processing.
 
 
 

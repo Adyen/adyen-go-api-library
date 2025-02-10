@@ -25,8 +25,6 @@ type CostEstimateResponse struct {
 	CostEstimateReference *string `json:"costEstimateReference,omitempty"`
 	// The result of the cost estimation.
 	ResultCode *string `json:"resultCode,omitempty"`
-	// Indicates the way the charges can be passed on to the cardholder. The following values are possible: * `ZERO` - the charges are not allowed to pass on * `PASSTHROUGH` - the charges can be passed on * `UNLIMITED` - there is no limit on how much surcharge is passed on
-	SurchargeType *string `json:"surchargeType,omitempty"`
 }
 
 // NewCostEstimateResponse instantiates a new CostEstimateResponse object
@@ -174,38 +172,6 @@ func (o *CostEstimateResponse) SetResultCode(v string) {
 	o.ResultCode = &v
 }
 
-// GetSurchargeType returns the SurchargeType field value if set, zero value otherwise.
-func (o *CostEstimateResponse) GetSurchargeType() string {
-	if o == nil || common.IsNil(o.SurchargeType) {
-		var ret string
-		return ret
-	}
-	return *o.SurchargeType
-}
-
-// GetSurchargeTypeOk returns a tuple with the SurchargeType field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CostEstimateResponse) GetSurchargeTypeOk() (*string, bool) {
-	if o == nil || common.IsNil(o.SurchargeType) {
-		return nil, false
-	}
-	return o.SurchargeType, true
-}
-
-// HasSurchargeType returns a boolean if a field has been set.
-func (o *CostEstimateResponse) HasSurchargeType() bool {
-	if o != nil && !common.IsNil(o.SurchargeType) {
-		return true
-	}
-
-	return false
-}
-
-// SetSurchargeType gets a reference to the given string and assigns it to the SurchargeType field.
-func (o *CostEstimateResponse) SetSurchargeType(v string) {
-	o.SurchargeType = &v
-}
-
 func (o CostEstimateResponse) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -227,9 +193,6 @@ func (o CostEstimateResponse) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.ResultCode) {
 		toSerialize["resultCode"] = o.ResultCode
-	}
-	if !common.IsNil(o.SurchargeType) {
-		toSerialize["surchargeType"] = o.SurchargeType
 	}
 	return toSerialize, nil
 }
