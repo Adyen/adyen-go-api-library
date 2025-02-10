@@ -14,7 +14,7 @@ import (
 	_context "context"
 	_nethttp "net/http"
 
-	"github.com/adyen/adyen-go-api-library/v17/src/common"
+	"github.com/adyen/adyen-go-api-library/v18/src/common"
 )
 
 // PlatformsFund PlatformsFund service

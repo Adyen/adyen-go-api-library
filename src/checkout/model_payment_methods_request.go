@@ -11,7 +11,7 @@ package checkout
 import (
 	"encoding/json"
 
-	"github.com/adyen/adyen-go-api-library/v17/src/common"
+	"github.com/adyen/adyen-go-api-library/v18/src/common"
 )
 
 // checks if the PaymentMethodsRequest type satisfies the MappedNullable interface at compile time

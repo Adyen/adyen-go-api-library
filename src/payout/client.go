@@ -9,7 +9,7 @@ API version: 68
 package payout
 
 import (
-	"github.com/adyen/adyen-go-api-library/v17/src/common"
+	"github.com/adyen/adyen-go-api-library/v18/src/common"
 )
 
 // APIClient manages communication with the Adyen Payout API API v68
