@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v18/src/common"
+    "github.com/adyen/adyen-go-api-library/v18/src/common"
 )
 
 // checks if the TransactionRuleRestrictions type satisfies the MappedNullable interface at compile time
@@ -19,28 +18,28 @@ var _ common.MappedNullable = &TransactionRuleRestrictions{}
 
 // TransactionRuleRestrictions struct for TransactionRuleRestrictions
 type TransactionRuleRestrictions struct {
-	ActiveNetworkTokens         *ActiveNetworkTokensRestriction      `json:"activeNetworkTokens,omitempty"`
-	BrandVariants               *BrandVariantsRestriction            `json:"brandVariants,omitempty"`
-	CounterpartyBank            *CounterpartyBankRestriction         `json:"counterpartyBank,omitempty"`
-	CounterpartyTypes           *CounterpartyTypesRestriction        `json:"counterpartyTypes,omitempty"`
-	Countries                   *CountriesRestriction                `json:"countries,omitempty"`
-	DayOfWeek                   *DayOfWeekRestriction                `json:"dayOfWeek,omitempty"`
-	DifferentCurrencies         *DifferentCurrenciesRestriction      `json:"differentCurrencies,omitempty"`
-	EntryModes                  *EntryModesRestriction               `json:"entryModes,omitempty"`
-	InternationalTransaction    *InternationalTransactionRestriction `json:"internationalTransaction,omitempty"`
-	MatchingTransactions        *MatchingTransactionsRestriction     `json:"matchingTransactions,omitempty"`
-	MatchingValues              *MatchingValuesRestriction           `json:"matchingValues,omitempty"`
-	Mccs                        *MccsRestriction                     `json:"mccs,omitempty"`
-	MerchantNames               *MerchantNamesRestriction            `json:"merchantNames,omitempty"`
-	Merchants                   *MerchantsRestriction                `json:"merchants,omitempty"`
-	Priority                    *PriorityRestriction                 `json:"priority,omitempty"`
-	ProcessingTypes             *ProcessingTypesRestriction          `json:"processingTypes,omitempty"`
-	RiskScores                  *RiskScoresRestriction               `json:"riskScores,omitempty"`
-	SameAmountRestriction       *SameAmountRestriction               `json:"sameAmountRestriction,omitempty"`
-	SameCounterpartyRestriction *SameCounterpartyRestriction         `json:"sameCounterpartyRestriction,omitempty"`
-	SourceAccountTypes          *SourceAccountTypesRestriction       `json:"sourceAccountTypes,omitempty"`
-	TimeOfDay                   *TimeOfDayRestriction                `json:"timeOfDay,omitempty"`
-	TotalAmount                 *TotalAmountRestriction              `json:"totalAmount,omitempty"`
+	ActiveNetworkTokens *ActiveNetworkTokensRestriction `json:"activeNetworkTokens,omitempty"`
+	BrandVariants *BrandVariantsRestriction `json:"brandVariants,omitempty"`
+	CounterpartyBank *CounterpartyBankRestriction `json:"counterpartyBank,omitempty"`
+	CounterpartyTypes *CounterpartyTypesRestriction `json:"counterpartyTypes,omitempty"`
+	Countries *CountriesRestriction `json:"countries,omitempty"`
+	DayOfWeek *DayOfWeekRestriction `json:"dayOfWeek,omitempty"`
+	DifferentCurrencies *DifferentCurrenciesRestriction `json:"differentCurrencies,omitempty"`
+	EntryModes *EntryModesRestriction `json:"entryModes,omitempty"`
+	InternationalTransaction *InternationalTransactionRestriction `json:"internationalTransaction,omitempty"`
+	MatchingTransactions *MatchingTransactionsRestriction `json:"matchingTransactions,omitempty"`
+	MatchingValues *MatchingValuesRestriction `json:"matchingValues,omitempty"`
+	Mccs *MccsRestriction `json:"mccs,omitempty"`
+	MerchantNames *MerchantNamesRestriction `json:"merchantNames,omitempty"`
+	Merchants *MerchantsRestriction `json:"merchants,omitempty"`
+	ProcessingTypes *ProcessingTypesRestriction `json:"processingTypes,omitempty"`
+	RiskScores *RiskScoresRestriction `json:"riskScores,omitempty"`
+	SameAmountRestriction *SameAmountRestriction `json:"sameAmountRestriction,omitempty"`
+	SameCounterpartyRestriction *SameCounterpartyRestriction `json:"sameCounterpartyRestriction,omitempty"`
+	SourceAccountTypes *SourceAccountTypesRestriction `json:"sourceAccountTypes,omitempty"`
+	TimeOfDay *TimeOfDayRestriction `json:"timeOfDay,omitempty"`
+	TokenRequestors *TokenRequestorsRestriction `json:"tokenRequestors,omitempty"`
+	TotalAmount *TotalAmountRestriction `json:"totalAmount,omitempty"`
 }
 
 // NewTransactionRuleRestrictions instantiates a new TransactionRuleRestrictions object
@@ -508,38 +507,6 @@ func (o *TransactionRuleRestrictions) SetMerchants(v MerchantsRestriction) {
 	o.Merchants = &v
 }
 
-// GetPriority returns the Priority field value if set, zero value otherwise.
-func (o *TransactionRuleRestrictions) GetPriority() PriorityRestriction {
-	if o == nil || common.IsNil(o.Priority) {
-		var ret PriorityRestriction
-		return ret
-	}
-	return *o.Priority
-}
-
-// GetPriorityOk returns a tuple with the Priority field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TransactionRuleRestrictions) GetPriorityOk() (*PriorityRestriction, bool) {
-	if o == nil || common.IsNil(o.Priority) {
-		return nil, false
-	}
-	return o.Priority, true
-}
-
-// HasPriority returns a boolean if a field has been set.
-func (o *TransactionRuleRestrictions) HasPriority() bool {
-	if o != nil && !common.IsNil(o.Priority) {
-		return true
-	}
-
-	return false
-}
-
-// SetPriority gets a reference to the given PriorityRestriction and assigns it to the Priority field.
-func (o *TransactionRuleRestrictions) SetPriority(v PriorityRestriction) {
-	o.Priority = &v
-}
-
 // GetProcessingTypes returns the ProcessingTypes field value if set, zero value otherwise.
 func (o *TransactionRuleRestrictions) GetProcessingTypes() ProcessingTypesRestriction {
 	if o == nil || common.IsNil(o.ProcessingTypes) {
@@ -732,6 +699,38 @@ func (o *TransactionRuleRestrictions) SetTimeOfDay(v TimeOfDayRestriction) {
 	o.TimeOfDay = &v
 }
 
+// GetTokenRequestors returns the TokenRequestors field value if set, zero value otherwise.
+func (o *TransactionRuleRestrictions) GetTokenRequestors() TokenRequestorsRestriction {
+	if o == nil || common.IsNil(o.TokenRequestors) {
+		var ret TokenRequestorsRestriction
+		return ret
+	}
+	return *o.TokenRequestors
+}
+
+// GetTokenRequestorsOk returns a tuple with the TokenRequestors field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionRuleRestrictions) GetTokenRequestorsOk() (*TokenRequestorsRestriction, bool) {
+	if o == nil || common.IsNil(o.TokenRequestors) {
+		return nil, false
+	}
+	return o.TokenRequestors, true
+}
+
+// HasTokenRequestors returns a boolean if a field has been set.
+func (o *TransactionRuleRestrictions) HasTokenRequestors() bool {
+	if o != nil && !common.IsNil(o.TokenRequestors) {
+		return true
+	}
+
+	return false
+}
+
+// SetTokenRequestors gets a reference to the given TokenRequestorsRestriction and assigns it to the TokenRequestors field.
+func (o *TransactionRuleRestrictions) SetTokenRequestors(v TokenRequestorsRestriction) {
+	o.TokenRequestors = &v
+}
+
 // GetTotalAmount returns the TotalAmount field value if set, zero value otherwise.
 func (o *TransactionRuleRestrictions) GetTotalAmount() TotalAmountRestriction {
 	if o == nil || common.IsNil(o.TotalAmount) {
@@ -765,7 +764,7 @@ func (o *TransactionRuleRestrictions) SetTotalAmount(v TotalAmountRestriction) {
 }
 
 func (o TransactionRuleRestrictions) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -816,9 +815,6 @@ func (o TransactionRuleRestrictions) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Merchants) {
 		toSerialize["merchants"] = o.Merchants
 	}
-	if !common.IsNil(o.Priority) {
-		toSerialize["priority"] = o.Priority
-	}
 	if !common.IsNil(o.ProcessingTypes) {
 		toSerialize["processingTypes"] = o.ProcessingTypes
 	}
@@ -836,6 +832,9 @@ func (o TransactionRuleRestrictions) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.TimeOfDay) {
 		toSerialize["timeOfDay"] = o.TimeOfDay
+	}
+	if !common.IsNil(o.TokenRequestors) {
+		toSerialize["tokenRequestors"] = o.TokenRequestors
 	}
 	if !common.IsNil(o.TotalAmount) {
 		toSerialize["totalAmount"] = o.TotalAmount
@@ -878,3 +877,6 @@ func (v *NullableTransactionRuleRestrictions) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

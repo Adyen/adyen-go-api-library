@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v18/src/common"
+    "github.com/adyen/adyen-go-api-library/v18/src/common"
 )
 
 // checks if the ThreeDSecureData type satisfies the MappedNullable interface at compile time
@@ -447,7 +446,7 @@ func (o *ThreeDSecureData) SetXid(v string) {
 }
 
 func (o ThreeDSecureData) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -531,30 +530,32 @@ func (v *NullableThreeDSecureData) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *ThreeDSecureData) isValidAuthenticationResponse() bool {
-	var allowedEnumValues = []string{"Y", "N", "U", "A"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetAuthenticationResponse() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "Y", "N", "U", "A" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetAuthenticationResponse() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *ThreeDSecureData) isValidChallengeCancel() bool {
-	var allowedEnumValues = []string{"01", "02", "03", "04", "05", "06", "07"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetChallengeCancel() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "01", "02", "03", "04", "05", "06", "07" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetChallengeCancel() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *ThreeDSecureData) isValidDirectoryResponse() bool {
-	var allowedEnumValues = []string{"A", "C", "D", "I", "N", "R", "U", "Y"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetDirectoryResponse() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "A", "C", "D", "I", "N", "R", "U", "Y" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetDirectoryResponse() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

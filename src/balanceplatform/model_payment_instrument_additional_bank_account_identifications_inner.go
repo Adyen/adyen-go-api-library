@@ -10,6 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v18/src/common"
 	"fmt"
 )
 
@@ -25,6 +26,7 @@ func IbanAccountIdentificationAsPaymentInstrumentAdditionalBankAccountIdentifica
 	}
 }
 
+
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *PaymentInstrumentAdditionalBankAccountIdentificationsInner) UnmarshalJSON(data []byte) error {
 	var err error
@@ -35,7 +37,7 @@ func (dst *PaymentInstrumentAdditionalBankAccountIdentificationsInner) Unmarshal
 		jsonIbanAccountIdentification, _ := json.Marshal(dst.IbanAccountIdentification)
 		if string(jsonIbanAccountIdentification) == "{}" || !dst.IbanAccountIdentification.isValidType() { // empty struct
 			dst.IbanAccountIdentification = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -64,7 +66,7 @@ func (src PaymentInstrumentAdditionalBankAccountIdentificationsInner) MarshalJSO
 }
 
 // Get the actual instance
-func (obj *PaymentInstrumentAdditionalBankAccountIdentificationsInner) GetActualInstance() interface{} {
+func (obj *PaymentInstrumentAdditionalBankAccountIdentificationsInner) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
@@ -111,3 +113,5 @@ func (v *NullablePaymentInstrumentAdditionalBankAccountIdentificationsInner) Unm
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

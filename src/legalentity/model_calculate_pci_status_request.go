@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v18/src/common"
+    "github.com/adyen/adyen-go-api-library/v18/src/common"
 )
 
 // checks if the CalculatePciStatusRequest type satisfies the MappedNullable interface at compile time
@@ -19,7 +18,7 @@ var _ common.MappedNullable = &CalculatePciStatusRequest{}
 
 // CalculatePciStatusRequest struct for CalculatePciStatusRequest
 type CalculatePciStatusRequest struct {
-	// An array of additional sales channels to generate PCI questionnaires. Include the relevant sales channels if you need your user to sign PCI questionnaires. Not required if you [create stores](https://docs.adyen.com/platforms) and [add payment methods](https://docs.adyen.com/adyen-for-platforms-model) before you generate the questionnaires.  Possible values: *  **eCommerce** *  **pos** *  **ecomMoto** *  **posMoto**
+	// An array of additional sales channels to generate PCI questionnaires. Include the relevant sales channels if you need your user to sign PCI questionnaires. Not required if you [create stores](https://docs.adyen.com/platforms) and [add payment methods](https://docs.adyen.com/adyen-for-platforms-model) before you generate the questionnaires.  Possible values: *  **eCommerce** *  **pos** *  **ecomMoto** *  **posMoto**  
 	AdditionalSalesChannels []string `json:"additionalSalesChannels,omitempty"`
 }
 
@@ -73,7 +72,7 @@ func (o *CalculatePciStatusRequest) SetAdditionalSalesChannels(v []string) {
 }
 
 func (o CalculatePciStatusRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -123,3 +122,6 @@ func (v *NullableCalculatePciStatusRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

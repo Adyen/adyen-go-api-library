@@ -10,9 +10,8 @@ package payments
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v18/src/common"
 	"time"
-
-	"github.com/adyen/adyen-go-api-library/v18/src/common"
 )
 
 // checks if the ForexQuote type satisfies the MappedNullable interface at compile time
@@ -24,14 +23,14 @@ type ForexQuote struct {
 	Account *string `json:"account,omitempty"`
 	// The account type.
 	AccountType *string `json:"accountType,omitempty"`
-	BaseAmount  *Amount `json:"baseAmount,omitempty"`
+	BaseAmount *Amount `json:"baseAmount,omitempty"`
 	// The base points.
-	BasePoints int32   `json:"basePoints"`
-	Buy        *Amount `json:"buy,omitempty"`
-	Interbank  *Amount `json:"interbank,omitempty"`
+	BasePoints int32 `json:"basePoints"`
+	Buy *Amount `json:"buy,omitempty"`
+	Interbank *Amount `json:"interbank,omitempty"`
 	// The reference assigned to the forex quote request.
 	Reference *string `json:"reference,omitempty"`
-	Sell      *Amount `json:"sell,omitempty"`
+	Sell *Amount `json:"sell,omitempty"`
 	// The signature to validate the integrity.
 	Signature *string `json:"signature,omitempty"`
 	// The source of the forex quote.
@@ -430,7 +429,7 @@ func (o *ForexQuote) SetValidTill(v time.Time) {
 }
 
 func (o ForexQuote) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -509,3 +508,6 @@ func (v *NullableForexQuote) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

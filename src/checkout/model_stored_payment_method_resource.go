@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v18/src/common"
+    "github.com/adyen/adyen-go-api-library/v18/src/common"
 )
 
 // checks if the StoredPaymentMethodResource type satisfies the MappedNullable interface at compile time
@@ -47,7 +46,7 @@ type StoredPaymentMethodResource struct {
 	OwnerName *string `json:"ownerName,omitempty"`
 	// The shopper’s email address.
 	ShopperEmail *string `json:"shopperEmail,omitempty"`
-	// Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters. > Your reference must not include personally identifiable information (PII), for example name or email address.
+	// Your reference to uniquely identify this shopper, for example user ID or account ID. The value is case-sensitive and must be at least three characters. > Your reference must not include personally identifiable information (PII) such as name or email address.
 	ShopperReference *string `json:"shopperReference,omitempty"`
 	// Defines a recurring payment type. Allowed values: * `Subscription` – A transaction for a fixed or variable amount, which follows a fixed schedule. * `CardOnFile` – With a card-on-file (CoF) transaction, card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction. * `UnscheduledCardOnFile` – An unscheduled card-on-file (UCoF) transaction is a transaction that occurs on a non-fixed schedule and/or have variable amounts. For example, automatic top-ups when a cardholder's balance drops below a certain amount.
 	SupportedRecurringProcessingModels []string `json:"supportedRecurringProcessingModels,omitempty"`
@@ -617,7 +616,7 @@ func (o *StoredPaymentMethodResource) SetType(v string) {
 }
 
 func (o StoredPaymentMethodResource) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -715,3 +714,6 @@ func (v *NullableStoredPaymentMethodResource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

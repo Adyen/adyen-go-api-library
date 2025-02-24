@@ -10,8 +10,7 @@ package payments
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v18/src/common"
+    "github.com/adyen/adyen-go-api-library/v18/src/common"
 )
 
 // checks if the FundSource type satisfies the MappedNullable interface at compile time
@@ -21,11 +20,11 @@ var _ common.MappedNullable = &FundSource{}
 type FundSource struct {
 	// A map of name-value pairs for passing additional or industry-specific data.
 	AdditionalData *map[string]string `json:"additionalData,omitempty"`
-	BillingAddress *Address           `json:"billingAddress,omitempty"`
-	Card           *Card              `json:"card,omitempty"`
+	BillingAddress *Address `json:"billingAddress,omitempty"`
+	Card *Card `json:"card,omitempty"`
 	// Email address of the person.
 	ShopperEmail *string `json:"shopperEmail,omitempty"`
-	ShopperName  *Name   `json:"shopperName,omitempty"`
+	ShopperName *Name `json:"shopperName,omitempty"`
 	// Phone number of the person
 	TelephoneNumber *string `json:"telephoneNumber,omitempty"`
 }
@@ -240,7 +239,7 @@ func (o *FundSource) SetTelephoneNumber(v string) {
 }
 
 func (o FundSource) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -305,3 +304,6 @@ func (v *NullableFundSource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

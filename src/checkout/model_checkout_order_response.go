@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v18/src/common"
+    "github.com/adyen/adyen-go-api-library/v18/src/common"
 )
 
 // checks if the CheckoutOrderResponse type satisfies the MappedNullable interface at compile time
@@ -27,7 +26,7 @@ type CheckoutOrderResponse struct {
 	// The `pspReference` that belongs to the order.
 	PspReference string `json:"pspReference"`
 	// The merchant reference for the order.
-	Reference       *string `json:"reference,omitempty"`
+	Reference *string `json:"reference,omitempty"`
 	RemainingAmount *Amount `json:"remainingAmount,omitempty"`
 }
 
@@ -234,7 +233,7 @@ func (o *CheckoutOrderResponse) SetRemainingAmount(v Amount) {
 }
 
 func (o CheckoutOrderResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -297,3 +296,6 @@ func (v *NullableCheckoutOrderResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
