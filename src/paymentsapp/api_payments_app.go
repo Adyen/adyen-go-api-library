@@ -10,10 +10,11 @@ package paymentsapp
 
 import (
 	"context"
-    "net/http"
-    "net/url"
-    "strings"
-    "github.com/adyen/adyen-go-api-library/v18/src/common"
+	"net/http"
+	"net/url"
+	"strings"
+
+	"github.com/adyen/adyen-go-api-library/v18/src/common"
 )
 
 // PaymentsAppApi service
@@ -21,7 +22,7 @@ type PaymentsAppApi common.Service
 
 // All parameters accepted by PaymentsAppApi.GeneratePaymentsAppBoardingTokenForMerchant
 type PaymentsAppApiGeneratePaymentsAppBoardingTokenForMerchantInput struct {
-	merchantId string
+	merchantId           string
 	boardingTokenRequest *BoardingTokenRequest
 }
 
@@ -29,7 +30,6 @@ func (r PaymentsAppApiGeneratePaymentsAppBoardingTokenForMerchantInput) Boarding
 	r.boardingTokenRequest = &boardingTokenRequest
 	return r
 }
-
 
 /*
 Prepare a request for GeneratePaymentsAppBoardingTokenForMerchant
@@ -45,7 +45,7 @@ func (a *PaymentsAppApi) GeneratePaymentsAppBoardingTokenForMerchantInput(mercha
 /*
 GeneratePaymentsAppBoardingTokenForMerchant Create a boarding token - merchant level
 
-Creates a boarding token used to authenticate the installation of a Payments App instance on an Android device. The boarding token is created for the `boardingRequestToken` of the Payments App for the merchant account identified in the path. 
+Creates a boarding token used to authenticate the installation of a Payments App instance on an Android device. The boarding token is created for the `boardingRequestToken` of the Payments App for the merchant account identified in the path.
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Adyen Payments App role
@@ -56,31 +56,29 @@ To make this request, your API credential must have the following [role](https:/
 @return BoardingTokenResponse, *http.Response, error
 */
 func (a *PaymentsAppApi) GeneratePaymentsAppBoardingTokenForMerchant(ctx context.Context, r PaymentsAppApiGeneratePaymentsAppBoardingTokenForMerchantInput) (BoardingTokenResponse, *http.Response, error) {
-    res := &BoardingTokenResponse{}
+	res := &BoardingTokenResponse{}
 	path := "/merchants/{merchantId}/generatePaymentsAppBoardingToken"
-    path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.boardingTokenRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.boardingTokenRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by PaymentsAppApi.GeneratePaymentsAppBoardingTokenForStore
 type PaymentsAppApiGeneratePaymentsAppBoardingTokenForStoreInput struct {
-	merchantId string
-	storeId string
+	merchantId           string
+	storeId              string
 	boardingTokenRequest *BoardingTokenRequest
 }
 
@@ -88,7 +86,6 @@ func (r PaymentsAppApiGeneratePaymentsAppBoardingTokenForStoreInput) BoardingTok
 	r.boardingTokenRequest = &boardingTokenRequest
 	return r
 }
-
 
 /*
 Prepare a request for GeneratePaymentsAppBoardingTokenForStore
@@ -98,7 +95,7 @@ Prepare a request for GeneratePaymentsAppBoardingTokenForStore
 func (a *PaymentsAppApi) GeneratePaymentsAppBoardingTokenForStoreInput(merchantId string, storeId string) PaymentsAppApiGeneratePaymentsAppBoardingTokenForStoreInput {
 	return PaymentsAppApiGeneratePaymentsAppBoardingTokenForStoreInput{
 		merchantId: merchantId,
-		storeId: storeId,
+		storeId:    storeId,
 	}
 }
 
@@ -116,34 +113,32 @@ To make this request, your API credential must have the following [role](https:/
 @return BoardingTokenResponse, *http.Response, error
 */
 func (a *PaymentsAppApi) GeneratePaymentsAppBoardingTokenForStore(ctx context.Context, r PaymentsAppApiGeneratePaymentsAppBoardingTokenForStoreInput) (BoardingTokenResponse, *http.Response, error) {
-    res := &BoardingTokenResponse{}
+	res := &BoardingTokenResponse{}
 	path := "/merchants/{merchantId}/stores/{storeId}/generatePaymentsAppBoardingToken"
-    path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
-    path = strings.Replace(path, "{"+"storeId"+"}", url.PathEscape(common.ParameterValueToString(r.storeId, "storeId")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.boardingTokenRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
+	path = strings.Replace(path, "{"+"storeId"+"}", url.PathEscape(common.ParameterValueToString(r.storeId, "storeId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.boardingTokenRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by PaymentsAppApi.ListPaymentsAppForMerchant
 type PaymentsAppApiListPaymentsAppForMerchantInput struct {
 	merchantId string
-	statuses *string
-	limit *int32
-	offset *int64
+	statuses   *string
+	limit      *int32
+	offset     *int64
 }
 
 // The status of the Payments App. Comma-separated list of one or more values. If no value is provided, the list returns all statuses.   Possible values:  * **BOARDING**   * **BOARDED**   * **REVOKED**
@@ -163,7 +158,6 @@ func (r PaymentsAppApiListPaymentsAppForMerchantInput) Offset(offset int64) Paym
 	r.offset = &offset
 	return r
 }
-
 
 /*
 Prepare a request for ListPaymentsAppForMerchant
@@ -190,43 +184,41 @@ To make this request, your API credential must have the following [role](https:/
 @return PaymentsAppResponse, *http.Response, error
 */
 func (a *PaymentsAppApi) ListPaymentsAppForMerchant(ctx context.Context, r PaymentsAppApiListPaymentsAppForMerchantInput) (PaymentsAppResponse, *http.Response, error) {
-    res := &PaymentsAppResponse{}
+	res := &PaymentsAppResponse{}
 	path := "/merchants/{merchantId}/paymentsApps"
-    path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    if r.statuses != nil {
-        common.ParameterAddToQuery(queryParams, "statuses", r.statuses, "")
-    }
-    if r.limit != nil {
-        common.ParameterAddToQuery(queryParams, "limit", r.limit, "")
-    }
-    if r.offset != nil {
-        common.ParameterAddToQuery(queryParams, "offset", r.offset, "")
-    }
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodGet,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.statuses != nil {
+		common.ParameterAddToQuery(queryParams, "statuses", r.statuses, "")
+	}
+	if r.limit != nil {
+		common.ParameterAddToQuery(queryParams, "limit", r.limit, "")
+	}
+	if r.offset != nil {
+		common.ParameterAddToQuery(queryParams, "offset", r.offset, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by PaymentsAppApi.ListPaymentsAppForStore
 type PaymentsAppApiListPaymentsAppForStoreInput struct {
 	merchantId string
-	storeId string
-	statuses *string
-	limit *int32
-	offset *int64
+	storeId    string
+	statuses   *string
+	limit      *int32
+	offset     *int64
 }
 
 // The status of the Payments App. Comma-separated list of one or more values. If no value is provided, the list returns all statuses.   Possible values:  * **BOARDING**   * **BOARDED**   * **REVOKED**
@@ -247,7 +239,6 @@ func (r PaymentsAppApiListPaymentsAppForStoreInput) Offset(offset int64) Payment
 	return r
 }
 
-
 /*
 Prepare a request for ListPaymentsAppForStore
 @param merchantId The unique identifier of the merchant account.@param storeId The unique identifier of the store.
@@ -256,7 +247,7 @@ Prepare a request for ListPaymentsAppForStore
 func (a *PaymentsAppApi) ListPaymentsAppForStoreInput(merchantId string, storeId string) PaymentsAppApiListPaymentsAppForStoreInput {
 	return PaymentsAppApiListPaymentsAppForStoreInput{
 		merchantId: merchantId,
-		storeId: storeId,
+		storeId:    storeId,
 	}
 }
 
@@ -274,43 +265,40 @@ To make this request, your API credential must have the following [role](https:/
 @return PaymentsAppResponse, *http.Response, error
 */
 func (a *PaymentsAppApi) ListPaymentsAppForStore(ctx context.Context, r PaymentsAppApiListPaymentsAppForStoreInput) (PaymentsAppResponse, *http.Response, error) {
-    res := &PaymentsAppResponse{}
+	res := &PaymentsAppResponse{}
 	path := "/merchants/{merchantId}/stores/{storeId}/paymentsApps"
-    path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
-    path = strings.Replace(path, "{"+"storeId"+"}", url.PathEscape(common.ParameterValueToString(r.storeId, "storeId")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    if r.statuses != nil {
-        common.ParameterAddToQuery(queryParams, "statuses", r.statuses, "")
-    }
-    if r.limit != nil {
-        common.ParameterAddToQuery(queryParams, "limit", r.limit, "")
-    }
-    if r.offset != nil {
-        common.ParameterAddToQuery(queryParams, "offset", r.offset, "")
-    }
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodGet,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
+	path = strings.Replace(path, "{"+"storeId"+"}", url.PathEscape(common.ParameterValueToString(r.storeId, "storeId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.statuses != nil {
+		common.ParameterAddToQuery(queryParams, "statuses", r.statuses, "")
+	}
+	if r.limit != nil {
+		common.ParameterAddToQuery(queryParams, "limit", r.limit, "")
+	}
+	if r.offset != nil {
+		common.ParameterAddToQuery(queryParams, "offset", r.offset, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by PaymentsAppApi.RevokePaymentsApp
 type PaymentsAppApiRevokePaymentsAppInput struct {
-	merchantId string
+	merchantId     string
 	installationId string
 }
-
 
 /*
 Prepare a request for RevokePaymentsApp
@@ -319,7 +307,7 @@ Prepare a request for RevokePaymentsApp
 */
 func (a *PaymentsAppApi) RevokePaymentsAppInput(merchantId string, installationId string) PaymentsAppApiRevokePaymentsAppInput {
 	return PaymentsAppApiRevokePaymentsAppInput{
-		merchantId: merchantId,
+		merchantId:     merchantId,
 		installationId: installationId,
 	}
 }
@@ -338,24 +326,22 @@ To make this request, your API credential must have the following [role](https:/
 @return *http.Response, error
 */
 func (a *PaymentsAppApi) RevokePaymentsApp(ctx context.Context, r PaymentsAppApiRevokePaymentsAppInput) (*http.Response, error) {
-    var res interface{}
+	var res interface{}
 	path := "/merchants/{merchantId}/paymentsApps/{installationId}/revoke"
-    path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
-    path = strings.Replace(path, "{"+"installationId"+"}", url.PathEscape(common.ParameterValueToString(r.installationId, "installationId")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
+	path = strings.Replace(path, "{"+"installationId"+"}", url.PathEscape(common.ParameterValueToString(r.installationId, "installationId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return httpRes, err
+	return httpRes, err
 }
-

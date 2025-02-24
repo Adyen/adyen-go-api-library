@@ -10,10 +10,10 @@ package disputes
 
 import (
 	"context"
-    "net/http"
-    "net/url"
-    "strings"
-    "github.com/adyen/adyen-go-api-library/v18/src/common"
+	"net/http"
+	"net/url"
+
+	"github.com/adyen/adyen-go-api-library/v18/src/common"
 )
 
 // GeneralApi service
@@ -29,15 +29,13 @@ func (r GeneralApiAcceptDisputeInput) AcceptDisputeRequest(acceptDisputeRequest 
 	return r
 }
 
-
 /*
 Prepare a request for AcceptDispute
 
 @return GeneralApiAcceptDisputeInput
 */
 func (a *GeneralApi) AcceptDisputeInput() GeneralApiAcceptDisputeInput {
-	return GeneralApiAcceptDisputeInput{
-	}
+	return GeneralApiAcceptDisputeInput{}
 }
 
 /*
@@ -50,25 +48,23 @@ Accepts a specific dispute.
 @return AcceptDisputeResponse, *http.Response, error
 */
 func (a *GeneralApi) AcceptDispute(ctx context.Context, r GeneralApiAcceptDisputeInput) (AcceptDisputeResponse, *http.Response, error) {
-    res := &AcceptDisputeResponse{}
+	res := &AcceptDisputeResponse{}
 	path := "/acceptDispute"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.acceptDisputeRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.acceptDisputeRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by GeneralApi.DefendDispute
 type GeneralApiDefendDisputeInput struct {
@@ -80,15 +76,13 @@ func (r GeneralApiDefendDisputeInput) DefendDisputeRequest(defendDisputeRequest 
 	return r
 }
 
-
 /*
 Prepare a request for DefendDispute
 
 @return GeneralApiDefendDisputeInput
 */
 func (a *GeneralApi) DefendDisputeInput() GeneralApiDefendDisputeInput {
-	return GeneralApiDefendDisputeInput{
-	}
+	return GeneralApiDefendDisputeInput{}
 }
 
 /*
@@ -101,25 +95,23 @@ Defends a specific dispute.
 @return DefendDisputeResponse, *http.Response, error
 */
 func (a *GeneralApi) DefendDispute(ctx context.Context, r GeneralApiDefendDisputeInput) (DefendDisputeResponse, *http.Response, error) {
-    res := &DefendDisputeResponse{}
+	res := &DefendDisputeResponse{}
 	path := "/defendDispute"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.defendDisputeRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.defendDisputeRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by GeneralApi.DeleteDisputeDefenseDocument
 type GeneralApiDeleteDisputeDefenseDocumentInput struct {
@@ -131,15 +123,13 @@ func (r GeneralApiDeleteDisputeDefenseDocumentInput) DeleteDefenseDocumentReques
 	return r
 }
 
-
 /*
 Prepare a request for DeleteDisputeDefenseDocument
 
 @return GeneralApiDeleteDisputeDefenseDocumentInput
 */
 func (a *GeneralApi) DeleteDisputeDefenseDocumentInput() GeneralApiDeleteDisputeDefenseDocumentInput {
-	return GeneralApiDeleteDisputeDefenseDocumentInput{
-	}
+	return GeneralApiDeleteDisputeDefenseDocumentInput{}
 }
 
 /*
@@ -152,25 +142,23 @@ Deletes a specific dispute defense document that was supplied earlier.
 @return DeleteDefenseDocumentResponse, *http.Response, error
 */
 func (a *GeneralApi) DeleteDisputeDefenseDocument(ctx context.Context, r GeneralApiDeleteDisputeDefenseDocumentInput) (DeleteDefenseDocumentResponse, *http.Response, error) {
-    res := &DeleteDefenseDocumentResponse{}
+	res := &DeleteDefenseDocumentResponse{}
 	path := "/deleteDisputeDefenseDocument"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.deleteDefenseDocumentRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.deleteDefenseDocumentRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by GeneralApi.RetrieveApplicableDefenseReasons
 type GeneralApiRetrieveApplicableDefenseReasonsInput struct {
@@ -182,15 +170,13 @@ func (r GeneralApiRetrieveApplicableDefenseReasonsInput) DefenseReasonsRequest(d
 	return r
 }
 
-
 /*
 Prepare a request for RetrieveApplicableDefenseReasons
 
 @return GeneralApiRetrieveApplicableDefenseReasonsInput
 */
 func (a *GeneralApi) RetrieveApplicableDefenseReasonsInput() GeneralApiRetrieveApplicableDefenseReasonsInput {
-	return GeneralApiRetrieveApplicableDefenseReasonsInput{
-	}
+	return GeneralApiRetrieveApplicableDefenseReasonsInput{}
 }
 
 /*
@@ -203,25 +189,23 @@ Returns a list of all applicable defense reasons to defend a specific dispute.
 @return DefenseReasonsResponse, *http.Response, error
 */
 func (a *GeneralApi) RetrieveApplicableDefenseReasons(ctx context.Context, r GeneralApiRetrieveApplicableDefenseReasonsInput) (DefenseReasonsResponse, *http.Response, error) {
-    res := &DefenseReasonsResponse{}
+	res := &DefenseReasonsResponse{}
 	path := "/retrieveApplicableDefenseReasons"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.defenseReasonsRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.defenseReasonsRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by GeneralApi.SupplyDefenseDocument
 type GeneralApiSupplyDefenseDocumentInput struct {
@@ -233,15 +217,13 @@ func (r GeneralApiSupplyDefenseDocumentInput) SupplyDefenseDocumentRequest(suppl
 	return r
 }
 
-
 /*
 Prepare a request for SupplyDefenseDocument
 
 @return GeneralApiSupplyDefenseDocumentInput
 */
 func (a *GeneralApi) SupplyDefenseDocumentInput() GeneralApiSupplyDefenseDocumentInput {
-	return GeneralApiSupplyDefenseDocumentInput{
-	}
+	return GeneralApiSupplyDefenseDocumentInput{}
 }
 
 /*
@@ -254,22 +236,20 @@ Supplies a specific dispute defense document.
 @return SupplyDefenseDocumentResponse, *http.Response, error
 */
 func (a *GeneralApi) SupplyDefenseDocument(ctx context.Context, r GeneralApiSupplyDefenseDocumentInput) (SupplyDefenseDocumentResponse, *http.Response, error) {
-    res := &SupplyDefenseDocumentResponse{}
+	res := &SupplyDefenseDocumentResponse{}
 	path := "/supplyDefenseDocument"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.supplyDefenseDocumentRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.supplyDefenseDocumentRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-

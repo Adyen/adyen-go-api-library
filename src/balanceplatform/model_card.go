@@ -10,7 +10,8 @@ package balanceplatform
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v18/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v18/src/common"
 )
 
 // checks if the Card type satisfies the MappedNullable interface at compile time
@@ -26,12 +27,12 @@ type Card struct {
 	// The brand variant of the physical or the virtual card. For example, **visadebit** or **mcprepaid**. >Reach out to your Adyen contact to get the values relevant for your integration.
 	BrandVariant string `json:"brandVariant"`
 	// The name of the cardholder.  Maximum length: 26 characters.
-	CardholderName string `json:"cardholderName"`
-	Configuration *CardConfiguration `json:"configuration,omitempty"`
+	CardholderName string             `json:"cardholderName"`
+	Configuration  *CardConfiguration `json:"configuration,omitempty"`
 	// The CVC2 value of the card. > The CVC2 is not sent by default. This is only returned in the `POST` response for single-use virtual cards.
-	Cvc *string `json:"cvc,omitempty"`
+	Cvc             *string          `json:"cvc,omitempty"`
 	DeliveryContact *DeliveryContact `json:"deliveryContact,omitempty"`
-	Expiration *Expiry `json:"expiration,omitempty"`
+	Expiration      *Expiry          `json:"expiration,omitempty"`
 	// The form factor of the card. Possible values: **virtual**, **physical**.
 	FormFactor string `json:"formFactor"`
 	// Last last four digits of the card number.
@@ -441,7 +442,7 @@ func (o *Card) SetThreeDSecure(v string) {
 }
 
 func (o Card) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -518,14 +519,12 @@ func (v *NullableCard) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *Card) isValidFormFactor() bool {
-    var allowedEnumValues = []string{ "physical", "unknown", "virtual" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetFormFactor() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"physical", "unknown", "virtual"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetFormFactor() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

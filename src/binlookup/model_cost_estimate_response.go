@@ -10,7 +10,8 @@ package binlookup
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v18/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v18/src/common"
 )
 
 // checks if the CostEstimateResponse type satisfies the MappedNullable interface at compile time
@@ -18,8 +19,8 @@ var _ common.MappedNullable = &CostEstimateResponse{}
 
 // CostEstimateResponse struct for CostEstimateResponse
 type CostEstimateResponse struct {
-	CardBin *CardBin `json:"cardBin,omitempty"`
-	CostEstimateAmount *Amount `json:"costEstimateAmount,omitempty"`
+	CardBin            *CardBin `json:"cardBin,omitempty"`
+	CostEstimateAmount *Amount  `json:"costEstimateAmount,omitempty"`
 	// Adyen's 16-character reference associated with the request.
 	CostEstimateReference *string `json:"costEstimateReference,omitempty"`
 	// The result of the cost estimation.
@@ -172,7 +173,7 @@ func (o *CostEstimateResponse) SetResultCode(v string) {
 }
 
 func (o CostEstimateResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -231,6 +232,3 @@ func (v *NullableCostEstimateResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

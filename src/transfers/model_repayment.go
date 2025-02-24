@@ -10,7 +10,8 @@ package transfers
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v18/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v18/src/common"
 )
 
 // checks if the Repayment type satisfies the MappedNullable interface at compile time
@@ -19,9 +20,9 @@ var _ common.MappedNullable = &Repayment{}
 // Repayment struct for Repayment
 type Repayment struct {
 	// The repayment that is deducted daily from incoming net volume, in [basis points](https://www.investopedia.com/terms/b/basispoint.asp).
-	BasisPoints int32 `json:"basisPoints"`
-	Term *RepaymentTerm `json:"term,omitempty"`
-	Threshold *ThresholdRepayment `json:"threshold,omitempty"`
+	BasisPoints int32               `json:"basisPoints"`
+	Term        *RepaymentTerm      `json:"term,omitempty"`
+	Threshold   *ThresholdRepayment `json:"threshold,omitempty"`
 }
 
 // NewRepayment instantiates a new Repayment object
@@ -131,7 +132,7 @@ func (o *Repayment) SetThreshold(v ThresholdRepayment) {
 }
 
 func (o Repayment) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -185,6 +186,3 @@ func (v *NullableRepayment) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

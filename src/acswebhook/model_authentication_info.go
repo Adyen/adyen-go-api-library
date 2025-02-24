@@ -10,8 +10,9 @@ package acswebhook
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v18/src/common"
 	"time"
+
+	"github.com/adyen/adyen-go-api-library/v18/src/common"
 )
 
 // checks if the AuthenticationInfo type satisfies the MappedNullable interface at compile time
@@ -20,9 +21,9 @@ var _ common.MappedNullable = &AuthenticationInfo{}
 // AuthenticationInfo struct for AuthenticationInfo
 type AuthenticationInfo struct {
 	// Universally unique transaction identifier assigned by the Access Control Server (ACS) to identify a single transaction.
-	AcsTransId string `json:"acsTransId"`
-	Challenge *ChallengeInfo `json:"challenge,omitempty"`
-	// Specifies a preference for receiving a challenge. Possible values:  * **01**: No preference * **02**: No challenge requested * **03**: Challenge requested (preference) * **04**: Challenge requested (mandate) * **05**: No challenge requested (transactional risk analysis is already performed) * **07**: No challenge requested (SCA is already performed) * **08**: No challenge requested (trusted beneficiaries exemption of no challenge required) * **09**: Challenge requested (trusted beneficiaries prompt requested if challenge required) * **80**: No challenge requested (secure corporate payment with Mastercard) * **82**: No challenge requested (secure corporate payment with Visa) 
+	AcsTransId string         `json:"acsTransId"`
+	Challenge  *ChallengeInfo `json:"challenge,omitempty"`
+	// Specifies a preference for receiving a challenge. Possible values:  * **01**: No preference * **02**: No challenge requested * **03**: Challenge requested (preference) * **04**: Challenge requested (mandate) * **05**: No challenge requested (transactional risk analysis is already performed) * **07**: No challenge requested (SCA is already performed) * **08**: No challenge requested (trusted beneficiaries exemption of no challenge required) * **09**: Challenge requested (trusted beneficiaries prompt requested if challenge required) * **80**: No challenge requested (secure corporate payment with Mastercard) * **82**: No challenge requested (secure corporate payment with Visa)
 	ChallengeIndicator string `json:"challengeIndicator"`
 	// Date and time in UTC of the cardholder authentication.   [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format: YYYY-MM-DDThh:mm:ss+TZD, for example, **2020-12-18T10:15:30+01:00**.
 	CreatedAt time.Time `json:"createdAt"`
@@ -30,7 +31,7 @@ type AuthenticationInfo struct {
 	DeviceChannel string `json:"deviceChannel"`
 	// Universally unique transaction identifier assigned by the DS (card scheme) to identify a single transaction.
 	DsTransID string `json:"dsTransID"`
-	// Indicates the exemption type that was applied to the authentication by the issuer, if exemption applied. Possible values:  * **lowValue** * **secureCorporate** * **trustedBeneficiary** * **transactionRiskAnalysis** * **acquirerExemption** * **noExemptionApplied** * **visaDAFExemption** 
+	// Indicates the exemption type that was applied to the authentication by the issuer, if exemption applied. Possible values:  * **lowValue** * **secureCorporate** * **trustedBeneficiary** * **transactionRiskAnalysis** * **acquirerExemption** * **noExemptionApplied** * **visaDAFExemption**
 	ExemptionIndicator *string `json:"exemptionIndicator,omitempty"`
 	// Indicates if the purchase was in the PSD2 scope.
 	InPSD2Scope bool `json:"inPSD2Scope"`
@@ -42,7 +43,7 @@ type AuthenticationInfo struct {
 	RiskScore *int32 `json:"riskScore,omitempty"`
 	// The `threeDSServerTransID` value as defined in the 3D Secure 2 specification.
 	ThreeDSServerTransID string `json:"threeDSServerTransID"`
-	// The `transStatus` value as defined in the 3D Secure 2 specification. Possible values:  * **Y**: Authentication / Account verification successful. * **N**: Not Authenticated / Account not verified. Transaction denied. * **U**: Authentication / Account verification could not be performed. * **I**: Informational Only / 3D Secure Requestor challenge preference acknowledged. * **R**: Authentication / Account verification rejected by the Issuer. 
+	// The `transStatus` value as defined in the 3D Secure 2 specification. Possible values:  * **Y**: Authentication / Account verification successful. * **N**: Not Authenticated / Account not verified. Transaction denied. * **U**: Authentication / Account verification could not be performed. * **I**: Informational Only / 3D Secure Requestor challenge preference acknowledged. * **R**: Authentication / Account verification rejected by the Issuer.
 	TransStatus string `json:"transStatus"`
 	// Provides information on why the `transStatus` field has the specified value. For possible values, refer to [our docs](https://docs.adyen.com/online-payments/3d-secure/api-reference#possible-transstatusreason-values).
 	TransStatusReason *string `json:"transStatusReason,omitempty"`
@@ -471,7 +472,7 @@ func (o *AuthenticationInfo) SetType(v string) {
 }
 
 func (o AuthenticationInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -542,68 +543,66 @@ func (v *NullableAuthenticationInfo) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *AuthenticationInfo) isValidChallengeIndicator() bool {
-    var allowedEnumValues = []string{ "01", "02", "03", "04", "05", "07", "08", "09", "80", "82" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetChallengeIndicator() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"01", "02", "03", "04", "05", "07", "08", "09", "80", "82"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetChallengeIndicator() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *AuthenticationInfo) isValidDeviceChannel() bool {
-    var allowedEnumValues = []string{ "app", "browser", "ThreeDSRequestorInitiated" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetDeviceChannel() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"app", "browser", "ThreeDSRequestorInitiated"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetDeviceChannel() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *AuthenticationInfo) isValidExemptionIndicator() bool {
-    var allowedEnumValues = []string{ "lowValue", "secureCorporate", "trustedBeneficiary", "transactionRiskAnalysis", "acquirerExemption", "noExemptionApplied", "visaDAFExemption" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetExemptionIndicator() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"lowValue", "secureCorporate", "trustedBeneficiary", "transactionRiskAnalysis", "acquirerExemption", "noExemptionApplied", "visaDAFExemption"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetExemptionIndicator() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *AuthenticationInfo) isValidMessageCategory() bool {
-    var allowedEnumValues = []string{ "payment", "nonPayment" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetMessageCategory() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"payment", "nonPayment"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetMessageCategory() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *AuthenticationInfo) isValidTransStatus() bool {
-    var allowedEnumValues = []string{ "Y", "N", "R", "I", "U" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetTransStatus() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"Y", "N", "R", "I", "U"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetTransStatus() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *AuthenticationInfo) isValidTransStatusReason() bool {
-    var allowedEnumValues = []string{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "80", "81", "82", "83", "84", "85", "86", "87", "88" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetTransStatusReason() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "80", "81", "82", "83", "84", "85", "86", "87", "88"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetTransStatusReason() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *AuthenticationInfo) isValidType() bool {
-    var allowedEnumValues = []string{ "frictionless", "challenge" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"frictionless", "challenge"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

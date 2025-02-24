@@ -10,7 +10,8 @@ package balanceplatform
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v18/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v18/src/common"
 )
 
 // checks if the TimeOfDayRestriction type satisfies the MappedNullable interface at compile time
@@ -19,8 +20,8 @@ var _ common.MappedNullable = &TimeOfDayRestriction{}
 // TimeOfDayRestriction struct for TimeOfDayRestriction
 type TimeOfDayRestriction struct {
 	// Defines how the condition must be evaluated.
-	Operation string `json:"operation"`
-	Value *TimeOfDay `json:"value,omitempty"`
+	Operation string     `json:"operation"`
+	Value     *TimeOfDay `json:"value,omitempty"`
 }
 
 // NewTimeOfDayRestriction instantiates a new TimeOfDayRestriction object
@@ -98,7 +99,7 @@ func (o *TimeOfDayRestriction) SetValue(v TimeOfDay) {
 }
 
 func (o TimeOfDayRestriction) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -149,6 +150,3 @@ func (v *NullableTimeOfDayRestriction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

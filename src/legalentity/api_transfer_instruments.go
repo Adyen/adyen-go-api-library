@@ -10,10 +10,11 @@ package legalentity
 
 import (
 	"context"
-    "net/http"
-    "net/url"
-    "strings"
-    "github.com/adyen/adyen-go-api-library/v18/src/common"
+	"net/http"
+	"net/url"
+	"strings"
+
+	"github.com/adyen/adyen-go-api-library/v18/src/common"
 )
 
 // TransferInstrumentsApi service
@@ -22,7 +23,7 @@ type TransferInstrumentsApi common.Service
 // All parameters accepted by TransferInstrumentsApi.CreateTransferInstrument
 type TransferInstrumentsApiCreateTransferInstrumentInput struct {
 	xRequestedVerificationCode *string
-	transferInstrumentInfo *TransferInstrumentInfo
+	transferInstrumentInfo     *TransferInstrumentInfo
 }
 
 // Use a suberror code as your requested verification code. You can include one code at a time in your request header. Requested verification codes can only be used in your test environment.
@@ -36,21 +37,19 @@ func (r TransferInstrumentsApiCreateTransferInstrumentInput) TransferInstrumentI
 	return r
 }
 
-
 /*
 Prepare a request for CreateTransferInstrument
 
 @return TransferInstrumentsApiCreateTransferInstrumentInput
 */
 func (a *TransferInstrumentsApi) CreateTransferInstrumentInput() TransferInstrumentsApiCreateTransferInstrumentInput {
-	return TransferInstrumentsApiCreateTransferInstrumentInput{
-	}
+	return TransferInstrumentsApiCreateTransferInstrumentInput{}
 }
 
 /*
 CreateTransferInstrument Create a transfer instrument
 
-Creates a transfer instrument. 
+Creates a transfer instrument.
 
 A transfer instrument is a bank account that a legal entity owns. Adyen performs verification checks on the transfer instrument as required by payment industry regulations. We inform you of the verification results through webhooks or API responses.
 
@@ -61,34 +60,31 @@ When the transfer instrument passes the verification checks, you can start sendi
 @return TransferInstrument, *http.Response, error
 */
 func (a *TransferInstrumentsApi) CreateTransferInstrument(ctx context.Context, r TransferInstrumentsApiCreateTransferInstrumentInput) (TransferInstrument, *http.Response, error) {
-    res := &TransferInstrument{}
+	res := &TransferInstrument{}
 	path := "/transferInstruments"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    if r.xRequestedVerificationCode != nil {
-        common.ParameterAddToHeaderOrQuery(headerParams, "x-requested-verification-code", r.xRequestedVerificationCode, "")
-    }
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.transferInstrumentInfo,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.xRequestedVerificationCode != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "x-requested-verification-code", r.xRequestedVerificationCode, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.transferInstrumentInfo,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by TransferInstrumentsApi.DeleteTransferInstrument
 type TransferInstrumentsApiDeleteTransferInstrumentInput struct {
 	id string
 }
-
 
 /*
 Prepare a request for DeleteTransferInstrument
@@ -111,32 +107,29 @@ Deletes a transfer instrument.
 @return *http.Response, error
 */
 func (a *TransferInstrumentsApi) DeleteTransferInstrument(ctx context.Context, r TransferInstrumentsApiDeleteTransferInstrumentInput) (*http.Response, error) {
-    var res interface{}
+	var res interface{}
 	path := "/transferInstruments/{id}"
-    path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodDelete,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodDelete,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return httpRes, err
+	return httpRes, err
 }
-
 
 // All parameters accepted by TransferInstrumentsApi.GetTransferInstrument
 type TransferInstrumentsApiGetTransferInstrumentInput struct {
 	id string
 }
-
 
 /*
 Prepare a request for GetTransferInstrument
@@ -159,32 +152,30 @@ Returns the details of a transfer instrument.
 @return TransferInstrument, *http.Response, error
 */
 func (a *TransferInstrumentsApi) GetTransferInstrument(ctx context.Context, r TransferInstrumentsApiGetTransferInstrumentInput) (TransferInstrument, *http.Response, error) {
-    res := &TransferInstrument{}
+	res := &TransferInstrument{}
 	path := "/transferInstruments/{id}"
-    path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodGet,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by TransferInstrumentsApi.UpdateTransferInstrument
 type TransferInstrumentsApiUpdateTransferInstrumentInput struct {
-	id string
+	id                         string
 	xRequestedVerificationCode *string
-	transferInstrumentInfo *TransferInstrumentInfo
+	transferInstrumentInfo     *TransferInstrumentInfo
 }
 
 // Use the requested verification code 0_0001 to resolve any suberrors associated with the transfer instrument. Requested verification codes can only be used in your test environment.
@@ -197,7 +188,6 @@ func (r TransferInstrumentsApiUpdateTransferInstrumentInput) TransferInstrumentI
 	r.transferInstrumentInfo = &transferInstrumentInfo
 	return r
 }
-
 
 /*
 Prepare a request for UpdateTransferInstrument
@@ -220,26 +210,24 @@ Updates a transfer instrument.
 @return TransferInstrument, *http.Response, error
 */
 func (a *TransferInstrumentsApi) UpdateTransferInstrument(ctx context.Context, r TransferInstrumentsApiUpdateTransferInstrumentInput) (TransferInstrument, *http.Response, error) {
-    res := &TransferInstrument{}
+	res := &TransferInstrument{}
 	path := "/transferInstruments/{id}"
-    path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    if r.xRequestedVerificationCode != nil {
-        common.ParameterAddToHeaderOrQuery(headerParams, "x-requested-verification-code", r.xRequestedVerificationCode, "")
-    }
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.transferInstrumentInfo,
-        res,
-        http.MethodPatch,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.xRequestedVerificationCode != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "x-requested-verification-code", r.xRequestedVerificationCode, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.transferInstrumentInfo,
+		res,
+		http.MethodPatch,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-

@@ -10,7 +10,8 @@ package balanceplatform
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v18/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v18/src/common"
 )
 
 // checks if the AmountNonZeroDecimalsRequirement type satisfies the MappedNullable interface at compile time
@@ -101,7 +102,7 @@ func (o *AmountNonZeroDecimalsRequirement) SetType(v string) {
 }
 
 func (o AmountNonZeroDecimalsRequirement) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,14 +154,12 @@ func (v *NullableAmountNonZeroDecimalsRequirement) UnmarshalJSON(src []byte) err
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *AmountNonZeroDecimalsRequirement) isValidType() bool {
-    var allowedEnumValues = []string{ "amountNonZeroDecimalsRequirement" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"amountNonZeroDecimalsRequirement"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

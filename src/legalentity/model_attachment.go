@@ -10,7 +10,8 @@ package legalentity
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v18/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v18/src/common"
 )
 
 // checks if the Attachment type satisfies the MappedNullable interface at compile time
@@ -20,11 +21,11 @@ var _ common.MappedNullable = &Attachment{}
 type Attachment struct {
 	// The document in Base64-encoded string format.
 	Content string `json:"content"`
-	// The file format.   Possible values: **application/pdf**, **image/jpg**, **image/jpeg**, **image/png**. 
-    // Deprecated since Legal Entity Management API v1
+	// The file format.   Possible values: **application/pdf**, **image/jpg**, **image/jpeg**, **image/png**.
+	// Deprecated since Legal Entity Management API v1
 	ContentType *string `json:"contentType,omitempty"`
 	// The name of the file including the file extension.
-    // Deprecated since Legal Entity Management API v1
+	// Deprecated since Legal Entity Management API v1
 	Filename *string `json:"filename,omitempty"`
 	// The name of the file including the file extension.
 	PageName *string `json:"pageName,omitempty"`
@@ -209,7 +210,7 @@ func (o *Attachment) SetPageType(v string) {
 }
 
 func (o Attachment) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -269,6 +270,3 @@ func (v *NullableAttachment) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-
