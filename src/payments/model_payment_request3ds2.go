@@ -12,7 +12,7 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/adyen/adyen-go-api-library/v18/src/common"
+	"github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // checks if the PaymentRequest3ds2 type satisfies the MappedNullable interface at compile time
