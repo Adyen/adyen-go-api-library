@@ -37,7 +37,7 @@ type PaymentMethodsRequest struct {
 	ShopperConversionId *string `json:"shopperConversionId,omitempty"`
 	// The combination of a language code and a country code to specify the language to be used in the payment.
 	ShopperLocale *string `json:"shopperLocale,omitempty"`
-	// Required for recurring payments.  Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters. > Your reference must not include personally identifiable information (PII), for example name or email address.
+	// Required for recurring payments.  Your reference to uniquely identify this shopper, for example user ID or account ID. The value is case-sensitive and must be at least three characters. > Your reference must not include personally identifiable information (PII) such as name or email address.
 	ShopperReference *string `json:"shopperReference,omitempty"`
 	// Boolean value indicating whether the card payment method should be split into separate debit and credit options.
 	SplitCardFundingSources *bool `json:"splitCardFundingSources,omitempty"`

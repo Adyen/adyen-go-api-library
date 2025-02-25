@@ -41,6 +41,8 @@ type CardDonations struct {
 	ExpiryMonth *string `json:"expiryMonth,omitempty"`
 	// The card expiry year. Only collect raw card data if you are [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide).
 	ExpiryYear *string `json:"expiryYear,omitempty"`
+	// The encoded fastlane data blob
+	FastlaneData *string `json:"fastlaneData,omitempty"`
 	// The funding source that should be used when multiple sources are available. For Brazilian combo cards, by default the funding source is credit. To use debit, set this value to **debit**.
 	FundingSource *string `json:"fundingSource,omitempty"`
 	// The name of the card holder.
@@ -445,6 +447,38 @@ func (o *CardDonations) HasExpiryYear() bool {
 // SetExpiryYear gets a reference to the given string and assigns it to the ExpiryYear field.
 func (o *CardDonations) SetExpiryYear(v string) {
 	o.ExpiryYear = &v
+}
+
+// GetFastlaneData returns the FastlaneData field value if set, zero value otherwise.
+func (o *CardDonations) GetFastlaneData() string {
+	if o == nil || common.IsNil(o.FastlaneData) {
+		var ret string
+		return ret
+	}
+	return *o.FastlaneData
+}
+
+// GetFastlaneDataOk returns a tuple with the FastlaneData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CardDonations) GetFastlaneDataOk() (*string, bool) {
+	if o == nil || common.IsNil(o.FastlaneData) {
+		return nil, false
+	}
+	return o.FastlaneData, true
+}
+
+// HasFastlaneData returns a boolean if a field has been set.
+func (o *CardDonations) HasFastlaneData() bool {
+	if o != nil && !common.IsNil(o.FastlaneData) {
+		return true
+	}
+
+	return false
+}
+
+// SetFastlaneData gets a reference to the given string and assigns it to the FastlaneData field.
+func (o *CardDonations) SetFastlaneData(v string) {
+	o.FastlaneData = &v
 }
 
 // GetFundingSource returns the FundingSource field value if set, zero value otherwise.
@@ -911,6 +945,9 @@ func (o CardDonations) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.ExpiryYear) {
 		toSerialize["expiryYear"] = o.ExpiryYear
+	}
+	if !common.IsNil(o.FastlaneData) {
+		toSerialize["fastlaneData"] = o.FastlaneData
 	}
 	if !common.IsNil(o.FundingSource) {
 		toSerialize["fundingSource"] = o.FundingSource

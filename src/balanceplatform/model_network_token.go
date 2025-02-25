@@ -33,7 +33,7 @@ type NetworkToken struct {
 	Status *string `json:"status,omitempty"`
 	// The last four digits of the network token `id`.
 	TokenLastFour *string `json:"tokenLastFour,omitempty"`
-	// The type of wallet the network token is associated with. For example, **applePay**.
+	// The type of network token. For example, **wallet**, **cof**.
 	Type *string `json:"type,omitempty"`
 }
 

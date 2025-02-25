@@ -73,7 +73,7 @@ type PaymentLinkRequest struct {
 	// The language to be used in the payment page, specified by a combination of a language and country code. For example, `en-US`.  For a list of shopper locales that Pay by Link supports, refer to [Language and localization](https://docs.adyen.com/unified-commerce/pay-by-link/payment-links/api#language).
 	ShopperLocale *string `json:"shopperLocale,omitempty"`
 	ShopperName   *Name   `json:"shopperName,omitempty"`
-	// Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters. > Your reference must not include personally identifiable information (PII), for example name or email address.
+	// Your reference to uniquely identify this shopper, for example user ID or account ID. The value is case-sensitive and must be at least three characters. > Your reference must not include personally identifiable information (PII) such as name or email address.
 	ShopperReference *string `json:"shopperReference,omitempty"`
 	// The text to be shown on the shopper's bank statement.  We recommend sending a maximum of 22 characters, otherwise banks might truncate the string.  Allowed characters: **a-z**, **A-Z**, **0-9**, spaces, and special characters **. , ' _ - ? + * /_**.
 	ShopperStatement *string `json:"shopperStatement,omitempty"`

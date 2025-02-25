@@ -14,36 +14,36 @@ import (
 	"github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
-// checks if the PriorityRestriction type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &PriorityRestriction{}
+// checks if the TokenRequestorsRestriction type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &TokenRequestorsRestriction{}
 
-// PriorityRestriction struct for PriorityRestriction
-type PriorityRestriction struct {
+// TokenRequestorsRestriction struct for TokenRequestorsRestriction
+type TokenRequestorsRestriction struct {
 	// Defines how the condition must be evaluated.
 	Operation string   `json:"operation"`
 	Value     []string `json:"value,omitempty"`
 }
 
-// NewPriorityRestriction instantiates a new PriorityRestriction object
+// NewTokenRequestorsRestriction instantiates a new TokenRequestorsRestriction object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPriorityRestriction(operation string) *PriorityRestriction {
-	this := PriorityRestriction{}
+func NewTokenRequestorsRestriction(operation string) *TokenRequestorsRestriction {
+	this := TokenRequestorsRestriction{}
 	this.Operation = operation
 	return &this
 }
 
-// NewPriorityRestrictionWithDefaults instantiates a new PriorityRestriction object
+// NewTokenRequestorsRestrictionWithDefaults instantiates a new TokenRequestorsRestriction object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewPriorityRestrictionWithDefaults() *PriorityRestriction {
-	this := PriorityRestriction{}
+func NewTokenRequestorsRestrictionWithDefaults() *TokenRequestorsRestriction {
+	this := TokenRequestorsRestriction{}
 	return &this
 }
 
 // GetOperation returns the Operation field value
-func (o *PriorityRestriction) GetOperation() string {
+func (o *TokenRequestorsRestriction) GetOperation() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -54,7 +54,7 @@ func (o *PriorityRestriction) GetOperation() string {
 
 // GetOperationOk returns a tuple with the Operation field value
 // and a boolean to check if the value has been set.
-func (o *PriorityRestriction) GetOperationOk() (*string, bool) {
+func (o *TokenRequestorsRestriction) GetOperationOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -62,12 +62,12 @@ func (o *PriorityRestriction) GetOperationOk() (*string, bool) {
 }
 
 // SetOperation sets field value
-func (o *PriorityRestriction) SetOperation(v string) {
+func (o *TokenRequestorsRestriction) SetOperation(v string) {
 	o.Operation = v
 }
 
 // GetValue returns the Value field value if set, zero value otherwise.
-func (o *PriorityRestriction) GetValue() []string {
+func (o *TokenRequestorsRestriction) GetValue() []string {
 	if o == nil || common.IsNil(o.Value) {
 		var ret []string
 		return ret
@@ -77,7 +77,7 @@ func (o *PriorityRestriction) GetValue() []string {
 
 // GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PriorityRestriction) GetValueOk() ([]string, bool) {
+func (o *TokenRequestorsRestriction) GetValueOk() ([]string, bool) {
 	if o == nil || common.IsNil(o.Value) {
 		return nil, false
 	}
@@ -85,7 +85,7 @@ func (o *PriorityRestriction) GetValueOk() ([]string, bool) {
 }
 
 // HasValue returns a boolean if a field has been set.
-func (o *PriorityRestriction) HasValue() bool {
+func (o *TokenRequestorsRestriction) HasValue() bool {
 	if o != nil && !common.IsNil(o.Value) {
 		return true
 	}
@@ -94,11 +94,11 @@ func (o *PriorityRestriction) HasValue() bool {
 }
 
 // SetValue gets a reference to the given []string and assigns it to the Value field.
-func (o *PriorityRestriction) SetValue(v []string) {
+func (o *TokenRequestorsRestriction) SetValue(v []string) {
 	o.Value = v
 }
 
-func (o PriorityRestriction) MarshalJSON() ([]byte, error) {
+func (o TokenRequestorsRestriction) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -106,7 +106,7 @@ func (o PriorityRestriction) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PriorityRestriction) ToMap() (map[string]interface{}, error) {
+func (o TokenRequestorsRestriction) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["operation"] = o.Operation
 	if !common.IsNil(o.Value) {
@@ -115,38 +115,38 @@ func (o PriorityRestriction) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullablePriorityRestriction struct {
-	value *PriorityRestriction
+type NullableTokenRequestorsRestriction struct {
+	value *TokenRequestorsRestriction
 	isSet bool
 }
 
-func (v NullablePriorityRestriction) Get() *PriorityRestriction {
+func (v NullableTokenRequestorsRestriction) Get() *TokenRequestorsRestriction {
 	return v.value
 }
 
-func (v *NullablePriorityRestriction) Set(val *PriorityRestriction) {
+func (v *NullableTokenRequestorsRestriction) Set(val *TokenRequestorsRestriction) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullablePriorityRestriction) IsSet() bool {
+func (v NullableTokenRequestorsRestriction) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullablePriorityRestriction) Unset() {
+func (v *NullableTokenRequestorsRestriction) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullablePriorityRestriction(val *PriorityRestriction) *NullablePriorityRestriction {
-	return &NullablePriorityRestriction{value: val, isSet: true}
+func NewNullableTokenRequestorsRestriction(val *TokenRequestorsRestriction) *NullableTokenRequestorsRestriction {
+	return &NullableTokenRequestorsRestriction{value: val, isSet: true}
 }
 
-func (v NullablePriorityRestriction) MarshalJSON() ([]byte, error) {
+func (v NullableTokenRequestorsRestriction) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullablePriorityRestriction) UnmarshalJSON(src []byte) error {
+func (v *NullableTokenRequestorsRestriction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

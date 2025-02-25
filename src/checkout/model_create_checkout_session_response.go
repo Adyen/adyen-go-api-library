@@ -99,7 +99,7 @@ type CreateCheckoutSessionResponse struct {
 	// The combination of a language code and a country code to specify the language to be used in the payment.
 	ShopperLocale *string `json:"shopperLocale,omitempty"`
 	ShopperName   *Name   `json:"shopperName,omitempty"`
-	// Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters. > Your reference must not include personally identifiable information (PII), for example name or email address.
+	// Your reference to uniquely identify this shopper, for example user ID or account ID. The value is case-sensitive and must be at least three characters. > Your reference must not include personally identifiable information (PII) such as name or email address.
 	ShopperReference *string `json:"shopperReference,omitempty"`
 	// The text to be shown on the shopper's bank statement.  We recommend sending a maximum of 22 characters, otherwise banks might truncate the string.  Allowed characters: **a-z**, **A-Z**, **0-9**, spaces, and special characters **. , ' _ - ? + * /_**.
 	ShopperStatement *string `json:"shopperStatement,omitempty"`
