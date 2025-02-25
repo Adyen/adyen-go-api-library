@@ -37,6 +37,9 @@ func (r GrantOffersApiGetAllAvailableGrantOffersInput) AccountHolderId(accountHo
 Prepare a request for GetAllAvailableGrantOffers
 
 @return GrantOffersApiGetAllAvailableGrantOffersInput
+
+Deprecated since Configuration API v2
+Use the `/grantOffers` endpoint from the [Capital API](https://docs.adyen.com/api-explorer/capital/latest/get/grantOffers) instead.
 */
 func (a *GrantOffersApi) GetAllAvailableGrantOffersInput() GrantOffersApiGetAllAvailableGrantOffersInput {
 	return GrantOffersApiGetAllAvailableGrantOffersInput{}
@@ -50,6 +53,9 @@ Returns a list of all [grant offers](https://docs.adyen.com/platforms/capital#gr
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r GrantOffersApiGetAllAvailableGrantOffersInput - Request parameters, see GetAllAvailableGrantOffersInput
 @return GrantOffers, *http.Response, error
+
+Deprecated since Configuration API v2
+Use the `/grantOffers` endpoint from the [Capital API](https://docs.adyen.com/api-explorer/capital/latest/get/grantOffers) instead.
 */
 func (a *GrantOffersApi) GetAllAvailableGrantOffers(ctx context.Context, r GrantOffersApiGetAllAvailableGrantOffersInput) (GrantOffers, *http.Response, error) {
 	res := &GrantOffers{}
@@ -128,6 +134,9 @@ type GrantOffersApiGetGrantOfferInput struct {
 Prepare a request for GetGrantOffer
 @param grantOfferId The unique identifier of the grant offer.
 @return GrantOffersApiGetGrantOfferInput
+
+Deprecated since Configuration API v2
+Use the `/grantOffers/{id}` endpoint from the [Capital API](https://docs.adyen.com/api-explorer/capital/latest/get/grantOffers/(id)) instead.
 */
 func (a *GrantOffersApi) GetGrantOfferInput(grantOfferId string) GrantOffersApiGetGrantOfferInput {
 	return GrantOffersApiGetGrantOfferInput{
@@ -143,6 +152,9 @@ Returns the details of a single grant offer.
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r GrantOffersApiGetGrantOfferInput - Request parameters, see GetGrantOfferInput
 @return GrantOffer, *http.Response, error
+
+Deprecated since Configuration API v2
+Use the `/grantOffers/{id}` endpoint from the [Capital API](https://docs.adyen.com/api-explorer/capital/latest/get/grantOffers/(id)) instead.
 */
 func (a *GrantOffersApi) GetGrantOffer(ctx context.Context, r GrantOffersApiGetGrantOfferInput) (GrantOffer, *http.Response, error) {
 	res := &GrantOffer{}

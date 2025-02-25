@@ -22,6 +22,105 @@ import (
 // ManageSCADevicesApi service
 type ManageSCADevicesApi common.Service
 
+// All parameters accepted by ManageSCADevicesApi.CompleteAssociationBetweenScaDeviceAndResource
+type ManageSCADevicesApiCompleteAssociationBetweenScaDeviceAndResourceInput struct {
+	deviceId                   string
+	associationFinaliseRequest *AssociationFinaliseRequest
+}
+
+func (r ManageSCADevicesApiCompleteAssociationBetweenScaDeviceAndResourceInput) AssociationFinaliseRequest(associationFinaliseRequest AssociationFinaliseRequest) ManageSCADevicesApiCompleteAssociationBetweenScaDeviceAndResourceInput {
+	r.associationFinaliseRequest = &associationFinaliseRequest
+	return r
+}
+
+/*
+Prepare a request for CompleteAssociationBetweenScaDeviceAndResource
+@param deviceId The unique identifier of the SCA device that you are associating with a resource.
+@return ManageSCADevicesApiCompleteAssociationBetweenScaDeviceAndResourceInput
+*/
+func (a *ManageSCADevicesApi) CompleteAssociationBetweenScaDeviceAndResourceInput(deviceId string) ManageSCADevicesApiCompleteAssociationBetweenScaDeviceAndResourceInput {
+	return ManageSCADevicesApiCompleteAssociationBetweenScaDeviceAndResourceInput{
+		deviceId: deviceId,
+	}
+}
+
+/*
+CompleteAssociationBetweenScaDeviceAndResource Complete an association between an SCA device and a resource
+
+Completes an association between a user's registered SCA device and an Adyen resource. For example, you can associate an SCA device with additional [business accounts](https://docs.adyen.com/platforms/business-accounts/sca/register-devices) or [Adyen-issued cards](https://docs.adyen.com/issuing/3d-secure/oob-auth-sdk/register-devices).
+
+To complete the association, this endpoint validates the authentication data of the registered device.
+
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r ManageSCADevicesApiCompleteAssociationBetweenScaDeviceAndResourceInput - Request parameters, see CompleteAssociationBetweenScaDeviceAndResourceInput
+@return AssociationFinaliseResponse, *http.Response, error
+*/
+func (a *ManageSCADevicesApi) CompleteAssociationBetweenScaDeviceAndResource(ctx context.Context, r ManageSCADevicesApiCompleteAssociationBetweenScaDeviceAndResourceInput) (AssociationFinaliseResponse, *http.Response, error) {
+	res := &AssociationFinaliseResponse{}
+	path := "/registeredDevices/{deviceId}/associations"
+	path = strings.Replace(path, "{"+"deviceId"+"}", url.PathEscape(common.ParameterValueToString(r.deviceId, "deviceId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.associationFinaliseRequest,
+		res,
+		http.MethodPatch,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 400 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+
+	return *res, httpRes, err
+}
+
 // All parameters accepted by ManageSCADevicesApi.CompleteRegistrationOfScaDevice
 type ManageSCADevicesApiCompleteRegistrationOfScaDeviceInput struct {
 	id                 string
@@ -220,6 +319,103 @@ func (a *ManageSCADevicesApi) DeleteRegistrationOfScaDevice(ctx context.Context,
 	}
 
 	return httpRes, err
+}
+
+// All parameters accepted by ManageSCADevicesApi.InitiateAssociationBetweenScaDeviceAndResource
+type ManageSCADevicesApiInitiateAssociationBetweenScaDeviceAndResourceInput struct {
+	deviceId                   string
+	associationInitiateRequest *AssociationInitiateRequest
+}
+
+func (r ManageSCADevicesApiInitiateAssociationBetweenScaDeviceAndResourceInput) AssociationInitiateRequest(associationInitiateRequest AssociationInitiateRequest) ManageSCADevicesApiInitiateAssociationBetweenScaDeviceAndResourceInput {
+	r.associationInitiateRequest = &associationInitiateRequest
+	return r
+}
+
+/*
+Prepare a request for InitiateAssociationBetweenScaDeviceAndResource
+@param deviceId The unique identifier of the SCA device that you are associating with a resource.
+@return ManageSCADevicesApiInitiateAssociationBetweenScaDeviceAndResourceInput
+*/
+func (a *ManageSCADevicesApi) InitiateAssociationBetweenScaDeviceAndResourceInput(deviceId string) ManageSCADevicesApiInitiateAssociationBetweenScaDeviceAndResourceInput {
+	return ManageSCADevicesApiInitiateAssociationBetweenScaDeviceAndResourceInput{
+		deviceId: deviceId,
+	}
+}
+
+/*
+InitiateAssociationBetweenScaDeviceAndResource Initiate an association between an SCA device and a resource
+
+Initiates an association between a user's registered SCA device and an Adyen resource. For example, you can associate an SCA device with additional [business accounts](https://docs.adyen.com/platforms/business-accounts/sca/register-devices) or [Adyen-issued cards](https://docs.adyen.com/issuing/3d-secure/oob-auth-sdk/register-devices).
+
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r ManageSCADevicesApiInitiateAssociationBetweenScaDeviceAndResourceInput - Request parameters, see InitiateAssociationBetweenScaDeviceAndResourceInput
+@return AssociationInitiateResponse, *http.Response, error
+*/
+func (a *ManageSCADevicesApi) InitiateAssociationBetweenScaDeviceAndResource(ctx context.Context, r ManageSCADevicesApiInitiateAssociationBetweenScaDeviceAndResourceInput) (AssociationInitiateResponse, *http.Response, error) {
+	res := &AssociationInitiateResponse{}
+	path := "/registeredDevices/{deviceId}/associations"
+	path = strings.Replace(path, "{"+"deviceId"+"}", url.PathEscape(common.ParameterValueToString(r.deviceId, "deviceId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.associationInitiateRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 400 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+
+	return *res, httpRes, err
 }
 
 // All parameters accepted by ManageSCADevicesApi.InitiateRegistrationOfScaDevice

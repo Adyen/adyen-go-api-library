@@ -31,6 +31,9 @@ type GrantAccountsApiGetGrantAccountInput struct {
 Prepare a request for GetGrantAccount
 @param id The unique identifier of the grant account.
 @return GrantAccountsApiGetGrantAccountInput
+
+Deprecated since Configuration API v2
+Use the `/grantAccounts/{id}` endpoint from the [Capital API](https://docs.adyen.com/api-explorer/capital/latest/get/grantAccounts/(id)) instead.
 */
 func (a *GrantAccountsApi) GetGrantAccountInput(id string) GrantAccountsApiGetGrantAccountInput {
 	return GrantAccountsApiGetGrantAccountInput{
@@ -46,6 +49,9 @@ Returns the details of the [grant account](https://docs.adyen.com/platforms/capi
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r GrantAccountsApiGetGrantAccountInput - Request parameters, see GetGrantAccountInput
 @return CapitalGrantAccount, *http.Response, error
+
+Deprecated since Configuration API v2
+Use the `/grantAccounts/{id}` endpoint from the [Capital API](https://docs.adyen.com/api-explorer/capital/latest/get/grantAccounts/(id)) instead.
 */
 func (a *GrantAccountsApi) GetGrantAccount(ctx context.Context, r GrantAccountsApiGetGrantAccountInput) (CapitalGrantAccount, *http.Response, error) {
 	res := &CapitalGrantAccount{}

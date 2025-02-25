@@ -345,7 +345,7 @@ func (a *PaymentsApi) SessionsInput() PaymentsApiSessionsInput {
 /*
 Sessions Create a payment session
 
-Creates a payment session for [Web Drop-in](https://docs.adyen.com/online-payments/web-drop-in) and [Web Components](https://docs.adyen.com/online-payments/web-components) integrations.
+Creates a payment session for [Drop-in](https://docs.adyen.com/online-payments/build-your-integration/sessions-flow/?platform=Web&integration=Drop-in), [Components](https://docs.adyen.com/online-payments/build-your-integration/sessions-flow/?platform=Web&integration=Components), and [Hosted Checkout](https://docs.adyen.com/online-payments/build-your-integration/sessions-flow/?platform=Web&integration=Hosted+Checkout) integrations.
 
 The response contains encrypted payment session data. The front end then uses the session data to make any required server-side calls for the payment flow.
 

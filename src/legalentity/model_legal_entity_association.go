@@ -29,7 +29,7 @@ type LegalEntityAssociation struct {
 	LegalEntityId string `json:"legalEntityId"`
 	// The name of the associated [legal entity](https://docs.adyen.com/api-explorer/legalentity/latest/post/legalEntities#responses-200-id).  - For **individual**, `name.firstName` and `name.lastName`. - For **organization**, `legalName`. - For **soleProprietorship**, `name`.
 	Name *string `json:"name,omitempty"`
-	// Default value: **false**Indicates if the `type` **director**, **secondaryPartner** or **shareholder** is a nominee. Only applicable to New Zealand.
+	// Default value: **false** Set to **true** if the entity association `type` **director**, **secondaryPartner** or **shareholder** is also a nominee. Only applicable to New Zealand.
 	Nominee *bool `json:"nominee,omitempty"`
 	// The individual's relationship to a legal representative if the `type` is **legalRepresentative**. Possible values: **parent**, **guardian**.
 	Relationship *string `json:"relationship,omitempty"`

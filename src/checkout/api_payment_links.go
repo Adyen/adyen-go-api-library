@@ -94,7 +94,7 @@ func (a *PaymentLinksApi) PaymentLinksInput() PaymentLinksApiPaymentLinksInput {
 /*
 PaymentLinks Create a payment link
 
-Creates a payment link to our hosted payment form where shoppers can pay. The list of payment methods presented to the shopper depends on the `currency` and `country` parameters sent in the request.
+Creates a payment link to a [Pay by Link](https://docs.adyen.com/unified-commerce/pay-by-link/) page where the shopper can pay. The list of payment methods presented to the shopper depends on the `currency` and `country` parameters sent in the request.
 
 For more information, refer to [Pay by Link documentation](https://docs.adyen.com/online-payments/pay-by-link#create-payment-links-through-api).
 

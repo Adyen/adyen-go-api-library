@@ -26,7 +26,7 @@ type FundRecipient struct {
 	// The email address of the shopper.
 	ShopperEmail *string `json:"shopperEmail,omitempty"`
 	ShopperName  *Name   `json:"shopperName,omitempty"`
-	// Required for recurring payments.  Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters. > Your reference must not include personally identifiable information (PII), for example name or email address.
+	// Required for recurring payments.  Your reference to uniquely identify this shopper, for example user ID or account ID. The value is case-sensitive and must be at least three characters. > Your reference must not include personally identifiable information (PII) such as name or email address.
 	ShopperReference *string `json:"shopperReference,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
 	StoredPaymentMethodId *string      `json:"storedPaymentMethodId,omitempty"`

@@ -39,7 +39,7 @@ type AccountHolder struct {
 	PrimaryBalanceAccount *string `json:"primaryBalanceAccount,omitempty"`
 	// Your reference for the account holder.
 	Reference *string `json:"reference,omitempty"`
-	// The status of the account holder.  Possible values:    * **active**: The account holder is active. This is the default status when creating an account holder.    * **suspended**: The account holder is permanently deactivated by Adyen. This action cannot be undone.   * **closed**: The account holder is permanently deactivated by you. This action cannot be undone.
+	// The status of the account holder.  Possible values:    * **active**: The account holder is active and allowed to use its capabilities. This is the initial status for account holders and balance accounts. You can change this status to **suspended** or **closed**.    * **suspended**: The account holder is temporarily disabled and payouts are blocked. You can change this status to **active** or **closed**.   * **closed**: The account holder and all of its capabilities are permanently disabled. This is a final status and cannot be changed.
 	Status *string `json:"status,omitempty"`
 	// The time zone of the account holder. For example, **Europe/Amsterdam**. Defaults to the time zone of the balance platform if no time zone is set. For possible values, see the [list of time zone codes](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 	TimeZone *string `json:"timeZone,omitempty"`

@@ -34,6 +34,7 @@ type CheckoutPaymentMethod struct {
 	EBankingFinlandDetails            *EBankingFinlandDetails
 	EcontextVoucherDetails            *EcontextVoucherDetails
 	EftDetails                        *EftDetails
+	FastlaneDetails                   *FastlaneDetails
 	GenericIssuerPaymentMethodDetails *GenericIssuerPaymentMethodDetails
 	GiropayDetails                    *GiropayDetails
 	GooglePayDetails                  *GooglePayDetails
@@ -198,6 +199,13 @@ func EcontextVoucherDetailsAsCheckoutPaymentMethod(v *EcontextVoucherDetails) Ch
 func EftDetailsAsCheckoutPaymentMethod(v *EftDetails) CheckoutPaymentMethod {
 	return CheckoutPaymentMethod{
 		EftDetails: v,
+	}
+}
+
+// FastlaneDetailsAsCheckoutPaymentMethod is a convenience function that returns FastlaneDetails wrapped in CheckoutPaymentMethod
+func FastlaneDetailsAsCheckoutPaymentMethod(v *FastlaneDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
+		FastlaneDetails: v,
 	}
 }
 
@@ -676,6 +684,19 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		dst.EftDetails = nil
 	}
 
+	// try to unmarshal data into FastlaneDetails
+	err = json.Unmarshal(data, &dst.FastlaneDetails)
+	if err == nil {
+		jsonFastlaneDetails, _ := json.Marshal(dst.FastlaneDetails)
+		if string(jsonFastlaneDetails) == "{}" || !dst.FastlaneDetails.isValidType() { // empty struct
+			dst.FastlaneDetails = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.FastlaneDetails = nil
+	}
+
 	// try to unmarshal data into GenericIssuerPaymentMethodDetails
 	err = json.Unmarshal(data, &dst.GenericIssuerPaymentMethodDetails)
 	if err == nil {
@@ -1113,6 +1134,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		dst.EBankingFinlandDetails = nil
 		dst.EcontextVoucherDetails = nil
 		dst.EftDetails = nil
+		dst.FastlaneDetails = nil
 		dst.GenericIssuerPaymentMethodDetails = nil
 		dst.GiropayDetails = nil
 		dst.GooglePayDetails = nil
@@ -1230,6 +1252,10 @@ func (src CheckoutPaymentMethod) MarshalJSON() ([]byte, error) {
 
 	if src.EftDetails != nil {
 		return json.Marshal(&src.EftDetails)
+	}
+
+	if src.FastlaneDetails != nil {
+		return json.Marshal(&src.FastlaneDetails)
 	}
 
 	if src.GenericIssuerPaymentMethodDetails != nil {
@@ -1442,6 +1468,10 @@ func (obj *CheckoutPaymentMethod) GetActualInstance() interface{} {
 
 	if obj.EftDetails != nil {
 		return obj.EftDetails
+	}
+
+	if obj.FastlaneDetails != nil {
+		return obj.FastlaneDetails
 	}
 
 	if obj.GenericIssuerPaymentMethodDetails != nil {
