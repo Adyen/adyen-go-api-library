@@ -7,8 +7,8 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/adyen/adyen-go-api-library/v18/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v18/src/common"
+	"github.com/adyen/adyen-go-api-library/v19/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v19/src/common"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

@@ -9,7 +9,7 @@ API version: 3
 package legalentity
 
 import (
-	"github.com/adyen/adyen-go-api-library/v18/src/common"
+	"github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // APIClient manages communication with the Legal Entity Management API API v3

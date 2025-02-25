@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	// "github.com///testify/require"
 
-	"github.com/adyen/adyen-go-api-library/v18/src/configurationwebhook"
+	"github.com/adyen/adyen-go-api-library/v19/src/configurationwebhook"
 )
 
 func TestHandleAccountHolderNotificationRequest(t *testing.T) {
