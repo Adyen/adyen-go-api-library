@@ -10,7 +10,8 @@ package legalentity
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v19/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // checks if the LegalEntity type satisfies the MappedNullable interface at compile time
@@ -23,25 +24,25 @@ type LegalEntity struct {
 	// List of documents uploaded for the legal entity.
 	DocumentDetails []DocumentReference `json:"documentDetails,omitempty"`
 	// List of documents uploaded for the legal entity.
-    // Deprecated since Legal Entity Management API v1
-    // Use the `documentDetails` array instead.
+	// Deprecated since Legal Entity Management API v1
+	// Use the `documentDetails` array instead.
 	Documents []EntityReference `json:"documents,omitempty"`
 	// List of legal entities associated with the current legal entity. For example, ultimate beneficial owners associated with an organization through ownership or control, or as signatories.
 	EntityAssociations []LegalEntityAssociation `json:"entityAssociations,omitempty"`
 	// The unique identifier of the legal entity.
-	Id string `json:"id"`
-	Individual *Individual `json:"individual,omitempty"`
+	Id           string        `json:"id"`
+	Individual   *Individual   `json:"individual,omitempty"`
 	Organization *Organization `json:"organization,omitempty"`
 	// List of verification errors related to capabilities for the legal entity.
 	Problems []CapabilityProblem `json:"problems,omitempty"`
 	// Your reference for the legal entity, maximum 150 characters.
-	Reference *string `json:"reference,omitempty"`
+	Reference          *string             `json:"reference,omitempty"`
 	SoleProprietorship *SoleProprietorship `json:"soleProprietorship,omitempty"`
 	// List of transfer instruments that the legal entity owns.
 	TransferInstruments []TransferInstrumentReference `json:"transferInstruments,omitempty"`
-	Trust *Trust `json:"trust,omitempty"`
+	Trust               *Trust                        `json:"trust,omitempty"`
 	// The type of legal entity.  Possible values: **individual**, **organization**, **soleProprietorship**, or **trust**.
-	Type *string `json:"type,omitempty"`
+	Type                      *string                    `json:"type,omitempty"`
 	UnincorporatedPartnership *UnincorporatedPartnership `json:"unincorporatedPartnership,omitempty"`
 	// List of verification deadlines and the capabilities that will be disallowed if verification errors are not resolved.
 	VerificationDeadlines []VerificationDeadline `json:"verificationDeadlines,omitempty"`
@@ -578,7 +579,7 @@ func (o *LegalEntity) SetVerificationPlan(v string) {
 }
 
 func (o LegalEntity) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -672,14 +673,12 @@ func (v *NullableLegalEntity) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *LegalEntity) isValidType() bool {
-    var allowedEnumValues = []string{ "individual", "organization", "soleProprietorship", "trust", "unincorporatedPartnership" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"individual", "organization", "soleProprietorship", "trust", "unincorporatedPartnership"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

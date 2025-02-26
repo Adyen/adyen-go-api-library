@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v19/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // checks if the CardDonations type satisfies the MappedNullable interface at compile time
@@ -22,7 +23,7 @@ type CardDonations struct {
 	Brand *string `json:"brand,omitempty"`
 	// The checkout attempt identifier.
 	CheckoutAttemptId *string `json:"checkoutAttemptId,omitempty"`
-    // Deprecated 
+	// Deprecated
 	CupsecureplusSmscode *string `json:"cupsecureplus.smscode,omitempty"`
 	// The card verification code. Only collect raw card data if you are [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide).
 	Cvc *string `json:"cvc,omitempty"`
@@ -51,8 +52,8 @@ type CardDonations struct {
 	// The card number. Only collect raw card data if you are [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide).
 	Number *string `json:"number,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
-    // Deprecated since Adyen Checkout API v49
-    // Use `storedPaymentMethodId` instead.
+	// Deprecated since Adyen Checkout API v49
+	// Use `storedPaymentMethodId` instead.
 	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
 	// The `shopperNotificationReference` returned in the response when you requested to notify the shopper. Used only for recurring payments in India.
 	ShopperNotificationReference *string `json:"shopperNotificationReference,omitempty"`
@@ -158,7 +159,7 @@ func (o *CardDonations) SetCheckoutAttemptId(v string) {
 }
 
 // GetCupsecureplusSmscode returns the CupsecureplusSmscode field value if set, zero value otherwise.
-// Deprecated 
+// Deprecated
 func (o *CardDonations) GetCupsecureplusSmscode() string {
 	if o == nil || common.IsNil(o.CupsecureplusSmscode) {
 		var ret string
@@ -169,7 +170,7 @@ func (o *CardDonations) GetCupsecureplusSmscode() string {
 
 // GetCupsecureplusSmscodeOk returns a tuple with the CupsecureplusSmscode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated 
+// Deprecated
 func (o *CardDonations) GetCupsecureplusSmscodeOk() (*string, bool) {
 	if o == nil || common.IsNil(o.CupsecureplusSmscode) {
 		return nil, false
@@ -187,7 +188,7 @@ func (o *CardDonations) HasCupsecureplusSmscode() bool {
 }
 
 // SetCupsecureplusSmscode gets a reference to the given string and assigns it to the CupsecureplusSmscode field.
-// Deprecated 
+// Deprecated
 func (o *CardDonations) SetCupsecureplusSmscode(v string) {
 	o.CupsecureplusSmscode = &v
 }
@@ -903,7 +904,7 @@ func (o *CardDonations) SetType(v string) {
 }
 
 func (o CardDonations) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -1026,23 +1027,21 @@ func (v *NullableCardDonations) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *CardDonations) isValidFundingSource() bool {
-    var allowedEnumValues = []string{ "credit", "debit" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetFundingSource() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"credit", "debit"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetFundingSource() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *CardDonations) isValidType() bool {
-    var allowedEnumValues = []string{ "bcmc", "scheme", "networkToken", "giftcard", "card", "clicktopay" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"bcmc", "scheme", "networkToken", "giftcard", "card", "clicktopay"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-
