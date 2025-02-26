@@ -21,7 +21,7 @@ var _ common.MappedNullable = &SplitConfigurationRule{}
 type SplitConfigurationRule struct {
 	// The currency condition that defines whether the split logic applies. Its value must be a three-character [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217).
 	Currency string `json:"currency"`
-	// The funding source condition of the payment method (only for cards).  Possible values: **credit**, **debit**, or **ANY**.
+	// The funding source of the payment method. This only applies to card transactions.  Possible values: * **credit** * **debit** * **prepaid** * **deferred_debit** * **charged** * **ANY**
 	FundingSource *string `json:"fundingSource,omitempty"`
 	// The payment method condition that defines whether the split logic applies.  Possible values: * [Payment method variant](https://docs.adyen.com/development-resources/paymentmethodvariant): Apply the split logic for a specific payment method. * **ANY**: Apply the split logic for all available payment methods.
 	PaymentMethod string `json:"paymentMethod"`

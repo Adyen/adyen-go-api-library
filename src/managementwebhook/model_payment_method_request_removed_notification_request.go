@@ -200,7 +200,7 @@ func (v *NullablePaymentMethodRequestRemovedNotificationRequest) UnmarshalJSON(s
 }
 
 func (o *PaymentMethodRequestRemovedNotificationRequest) isValidType() bool {
-	var allowedEnumValues = []string{"paymentMethod.requestRemoved"}
+	var allowedEnumValues = []string{"paymentMethodRequest.removed"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

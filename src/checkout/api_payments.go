@@ -167,9 +167,7 @@ func (a *PaymentsApi) PaymentMethodsInput() PaymentsApiPaymentMethodsInput {
 /*
 PaymentMethods Get a list of available payment methods
 
-Queries the available payment methods for a transaction based on the transaction context (like amount, country, and currency). Besides giving back a list of the available payment methods, the response also returns which input details you need to collect from the shopper (to be submitted to `/payments`).
-
-Although we highly recommend using this endpoint to ensure you are always offering the most up-to-date list of payment methods, its usage is optional. You can, for example, also cache the `/paymentMethods` response and update it once a week.
+Retrieves the list of available payment methods for the transaction, based on the transaction information like amount, country, and currency.
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r PaymentsApiPaymentMethodsInput - Request parameters, see PaymentMethodsInput

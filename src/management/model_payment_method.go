@@ -20,6 +20,7 @@ var _ common.MappedNullable = &PaymentMethod{}
 // PaymentMethod struct for PaymentMethod
 type PaymentMethod struct {
 	Accel         *AccelInfo         `json:"accel,omitempty"`
+	Affirm        *AffirmInfo        `json:"affirm,omitempty"`
 	AfterpayTouch *AfterpayTouchInfo `json:"afterpayTouch,omitempty"`
 	// Indicates whether receiving payments is allowed. This value is set to **true** by Adyen after screening your merchant account.
 	Allowed  *bool         `json:"allowed,omitempty"`
@@ -39,6 +40,7 @@ type PaymentMethod struct {
 	CustomRoutingFlags []string              `json:"customRoutingFlags,omitempty"`
 	Diners             *DinersInfo           `json:"diners,omitempty"`
 	Discover           *GenericPmWithTdiInfo `json:"discover,omitempty"`
+	EftDirectdebitCA   *GenericPmWithTdiInfo `json:"eft_directdebit_CA,omitempty"`
 	EftposAustralia    *GenericPmWithTdiInfo `json:"eftpos_australia,omitempty"`
 	// Indicates whether the payment method is enabled (**true**) or disabled (**false**).
 	Enabled   *bool                 `json:"enabled,omitempty"`
@@ -57,6 +59,7 @@ type PaymentMethod struct {
 	Nyce          *NyceInfo             `json:"nyce,omitempty"`
 	Payme         *PayMeInfo            `json:"payme,omitempty"`
 	Paypal        *PayPalInfo           `json:"paypal,omitempty"`
+	Payto         *PayToInfo            `json:"payto,omitempty"`
 	Pulse         *PulseInfo            `json:"pulse,omitempty"`
 	// Your reference for the payment method. Supported characters a-z, A-Z, 0-9.
 	Reference *string `json:"reference,omitempty"`
@@ -128,6 +131,38 @@ func (o *PaymentMethod) HasAccel() bool {
 // SetAccel gets a reference to the given AccelInfo and assigns it to the Accel field.
 func (o *PaymentMethod) SetAccel(v AccelInfo) {
 	o.Accel = &v
+}
+
+// GetAffirm returns the Affirm field value if set, zero value otherwise.
+func (o *PaymentMethod) GetAffirm() AffirmInfo {
+	if o == nil || common.IsNil(o.Affirm) {
+		var ret AffirmInfo
+		return ret
+	}
+	return *o.Affirm
+}
+
+// GetAffirmOk returns a tuple with the Affirm field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethod) GetAffirmOk() (*AffirmInfo, bool) {
+	if o == nil || common.IsNil(o.Affirm) {
+		return nil, false
+	}
+	return o.Affirm, true
+}
+
+// HasAffirm returns a boolean if a field has been set.
+func (o *PaymentMethod) HasAffirm() bool {
+	if o != nil && !common.IsNil(o.Affirm) {
+		return true
+	}
+
+	return false
+}
+
+// SetAffirm gets a reference to the given AffirmInfo and assigns it to the Affirm field.
+func (o *PaymentMethod) SetAffirm(v AffirmInfo) {
+	o.Affirm = &v
 }
 
 // GetAfterpayTouch returns the AfterpayTouch field value if set, zero value otherwise.
@@ -576,6 +611,38 @@ func (o *PaymentMethod) HasDiscover() bool {
 // SetDiscover gets a reference to the given GenericPmWithTdiInfo and assigns it to the Discover field.
 func (o *PaymentMethod) SetDiscover(v GenericPmWithTdiInfo) {
 	o.Discover = &v
+}
+
+// GetEftDirectdebitCA returns the EftDirectdebitCA field value if set, zero value otherwise.
+func (o *PaymentMethod) GetEftDirectdebitCA() GenericPmWithTdiInfo {
+	if o == nil || common.IsNil(o.EftDirectdebitCA) {
+		var ret GenericPmWithTdiInfo
+		return ret
+	}
+	return *o.EftDirectdebitCA
+}
+
+// GetEftDirectdebitCAOk returns a tuple with the EftDirectdebitCA field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethod) GetEftDirectdebitCAOk() (*GenericPmWithTdiInfo, bool) {
+	if o == nil || common.IsNil(o.EftDirectdebitCA) {
+		return nil, false
+	}
+	return o.EftDirectdebitCA, true
+}
+
+// HasEftDirectdebitCA returns a boolean if a field has been set.
+func (o *PaymentMethod) HasEftDirectdebitCA() bool {
+	if o != nil && !common.IsNil(o.EftDirectdebitCA) {
+		return true
+	}
+
+	return false
+}
+
+// SetEftDirectdebitCA gets a reference to the given GenericPmWithTdiInfo and assigns it to the EftDirectdebitCA field.
+func (o *PaymentMethod) SetEftDirectdebitCA(v GenericPmWithTdiInfo) {
+	o.EftDirectdebitCA = &v
 }
 
 // GetEftposAustralia returns the EftposAustralia field value if set, zero value otherwise.
@@ -1080,6 +1147,38 @@ func (o *PaymentMethod) HasPaypal() bool {
 // SetPaypal gets a reference to the given PayPalInfo and assigns it to the Paypal field.
 func (o *PaymentMethod) SetPaypal(v PayPalInfo) {
 	o.Paypal = &v
+}
+
+// GetPayto returns the Payto field value if set, zero value otherwise.
+func (o *PaymentMethod) GetPayto() PayToInfo {
+	if o == nil || common.IsNil(o.Payto) {
+		var ret PayToInfo
+		return ret
+	}
+	return *o.Payto
+}
+
+// GetPaytoOk returns a tuple with the Payto field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethod) GetPaytoOk() (*PayToInfo, bool) {
+	if o == nil || common.IsNil(o.Payto) {
+		return nil, false
+	}
+	return o.Payto, true
+}
+
+// HasPayto returns a boolean if a field has been set.
+func (o *PaymentMethod) HasPayto() bool {
+	if o != nil && !common.IsNil(o.Payto) {
+		return true
+	}
+
+	return false
+}
+
+// SetPayto gets a reference to the given PayToInfo and assigns it to the Payto field.
+func (o *PaymentMethod) SetPayto(v PayToInfo) {
+	o.Payto = &v
 }
 
 // GetPulse returns the Pulse field value if set, zero value otherwise.
@@ -1607,6 +1706,9 @@ func (o PaymentMethod) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Accel) {
 		toSerialize["accel"] = o.Accel
 	}
+	if !common.IsNil(o.Affirm) {
+		toSerialize["affirm"] = o.Affirm
+	}
 	if !common.IsNil(o.AfterpayTouch) {
 		toSerialize["afterpayTouch"] = o.AfterpayTouch
 	}
@@ -1648,6 +1750,9 @@ func (o PaymentMethod) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Discover) {
 		toSerialize["discover"] = o.Discover
+	}
+	if !common.IsNil(o.EftDirectdebitCA) {
+		toSerialize["eft_directdebit_CA"] = o.EftDirectdebitCA
 	}
 	if !common.IsNil(o.EftposAustralia) {
 		toSerialize["eftpos_australia"] = o.EftposAustralia
@@ -1694,6 +1799,9 @@ func (o PaymentMethod) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Paypal) {
 		toSerialize["paypal"] = o.Paypal
+	}
+	if !common.IsNil(o.Payto) {
+		toSerialize["payto"] = o.Payto
 	}
 	if !common.IsNil(o.Pulse) {
 		toSerialize["pulse"] = o.Pulse

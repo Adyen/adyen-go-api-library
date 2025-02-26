@@ -31,6 +31,7 @@ type UpdatePaymentMethodInfo struct {
 	CustomRoutingFlags []string              `json:"customRoutingFlags,omitempty"`
 	Diners             *GenericPmWithTdiInfo `json:"diners,omitempty"`
 	Discover           *GenericPmWithTdiInfo `json:"discover,omitempty"`
+	EftDirectdebitCA   *GenericPmWithTdiInfo `json:"eft_directdebit_CA,omitempty"`
 	EftposAustralia    *GenericPmWithTdiInfo `json:"eftpos_australia,omitempty"`
 	// Indicates whether the payment method is enabled (**true**) or disabled (**false**).
 	Enabled     *bool                 `json:"enabled,omitempty"`
@@ -355,6 +356,38 @@ func (o *UpdatePaymentMethodInfo) HasDiscover() bool {
 // SetDiscover gets a reference to the given GenericPmWithTdiInfo and assigns it to the Discover field.
 func (o *UpdatePaymentMethodInfo) SetDiscover(v GenericPmWithTdiInfo) {
 	o.Discover = &v
+}
+
+// GetEftDirectdebitCA returns the EftDirectdebitCA field value if set, zero value otherwise.
+func (o *UpdatePaymentMethodInfo) GetEftDirectdebitCA() GenericPmWithTdiInfo {
+	if o == nil || common.IsNil(o.EftDirectdebitCA) {
+		var ret GenericPmWithTdiInfo
+		return ret
+	}
+	return *o.EftDirectdebitCA
+}
+
+// GetEftDirectdebitCAOk returns a tuple with the EftDirectdebitCA field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdatePaymentMethodInfo) GetEftDirectdebitCAOk() (*GenericPmWithTdiInfo, bool) {
+	if o == nil || common.IsNil(o.EftDirectdebitCA) {
+		return nil, false
+	}
+	return o.EftDirectdebitCA, true
+}
+
+// HasEftDirectdebitCA returns a boolean if a field has been set.
+func (o *UpdatePaymentMethodInfo) HasEftDirectdebitCA() bool {
+	if o != nil && !common.IsNil(o.EftDirectdebitCA) {
+		return true
+	}
+
+	return false
+}
+
+// SetEftDirectdebitCA gets a reference to the given GenericPmWithTdiInfo and assigns it to the EftDirectdebitCA field.
+func (o *UpdatePaymentMethodInfo) SetEftDirectdebitCA(v GenericPmWithTdiInfo) {
+	o.EftDirectdebitCA = &v
 }
 
 // GetEftposAustralia returns the EftposAustralia field value if set, zero value otherwise.
@@ -847,6 +880,9 @@ func (o UpdatePaymentMethodInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Discover) {
 		toSerialize["discover"] = o.Discover
+	}
+	if !common.IsNil(o.EftDirectdebitCA) {
+		toSerialize["eft_directdebit_CA"] = o.EftDirectdebitCA
 	}
 	if !common.IsNil(o.EftposAustralia) {
 		toSerialize["eftpos_australia"] = o.EftposAustralia

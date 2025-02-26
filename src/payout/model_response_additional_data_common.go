@@ -133,9 +133,15 @@ type ResponseAdditionalDataCommon struct {
 	ThreeDOfferedResponse *string `json:"threeDOfferedResponse,omitempty"`
 	// The 3D Secure 2 version.
 	ThreeDSVersion *string `json:"threeDSVersion,omitempty"`
+	// The provided reference of the shopper.
+	TokenizationShopperReference *string `json:"tokenization.shopperReference,omitempty"`
+	// The store operation performed on the token.
+	TokenizationStoreOperationType *string `json:"tokenization.store.operationType,omitempty"`
+	// The reference that uniquely identifies tokenized payment details.
+	TokenizationStoredPaymentMethodId *string `json:"tokenization.storedPaymentMethodId,omitempty"`
 	// The `visaTransactionId`, has a fixed length of 15 numeric characters.  > Contact Support Team to enable this field.
 	VisaTransactionId *string `json:"visaTransactionId,omitempty"`
-	// The 3DS transaction ID of the 3DS session sent in notifications. The value is Base64-encoded and is returned for transactions with directoryResponse 'N' or 'Y'. If you want to submit the xid in your 3D Secure 1 request, use the `mpiData.xid`, field.  Example: ODgxNDc2MDg2MDExODk5MAAAAAA=
+	// The 3DS transaction ID of the 3DS session sent in notifications. The value is Base64-encoded and is returned for transactions with directoryResponse 'N' or 'Y'.   Example: ODgxNDc2MDg2MDExODk5MAAAAAA=
 	Xid *string `json:"xid,omitempty"`
 }
 
@@ -1980,6 +1986,102 @@ func (o *ResponseAdditionalDataCommon) SetThreeDSVersion(v string) {
 	o.ThreeDSVersion = &v
 }
 
+// GetTokenizationShopperReference returns the TokenizationShopperReference field value if set, zero value otherwise.
+func (o *ResponseAdditionalDataCommon) GetTokenizationShopperReference() string {
+	if o == nil || common.IsNil(o.TokenizationShopperReference) {
+		var ret string
+		return ret
+	}
+	return *o.TokenizationShopperReference
+}
+
+// GetTokenizationShopperReferenceOk returns a tuple with the TokenizationShopperReference field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResponseAdditionalDataCommon) GetTokenizationShopperReferenceOk() (*string, bool) {
+	if o == nil || common.IsNil(o.TokenizationShopperReference) {
+		return nil, false
+	}
+	return o.TokenizationShopperReference, true
+}
+
+// HasTokenizationShopperReference returns a boolean if a field has been set.
+func (o *ResponseAdditionalDataCommon) HasTokenizationShopperReference() bool {
+	if o != nil && !common.IsNil(o.TokenizationShopperReference) {
+		return true
+	}
+
+	return false
+}
+
+// SetTokenizationShopperReference gets a reference to the given string and assigns it to the TokenizationShopperReference field.
+func (o *ResponseAdditionalDataCommon) SetTokenizationShopperReference(v string) {
+	o.TokenizationShopperReference = &v
+}
+
+// GetTokenizationStoreOperationType returns the TokenizationStoreOperationType field value if set, zero value otherwise.
+func (o *ResponseAdditionalDataCommon) GetTokenizationStoreOperationType() string {
+	if o == nil || common.IsNil(o.TokenizationStoreOperationType) {
+		var ret string
+		return ret
+	}
+	return *o.TokenizationStoreOperationType
+}
+
+// GetTokenizationStoreOperationTypeOk returns a tuple with the TokenizationStoreOperationType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResponseAdditionalDataCommon) GetTokenizationStoreOperationTypeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.TokenizationStoreOperationType) {
+		return nil, false
+	}
+	return o.TokenizationStoreOperationType, true
+}
+
+// HasTokenizationStoreOperationType returns a boolean if a field has been set.
+func (o *ResponseAdditionalDataCommon) HasTokenizationStoreOperationType() bool {
+	if o != nil && !common.IsNil(o.TokenizationStoreOperationType) {
+		return true
+	}
+
+	return false
+}
+
+// SetTokenizationStoreOperationType gets a reference to the given string and assigns it to the TokenizationStoreOperationType field.
+func (o *ResponseAdditionalDataCommon) SetTokenizationStoreOperationType(v string) {
+	o.TokenizationStoreOperationType = &v
+}
+
+// GetTokenizationStoredPaymentMethodId returns the TokenizationStoredPaymentMethodId field value if set, zero value otherwise.
+func (o *ResponseAdditionalDataCommon) GetTokenizationStoredPaymentMethodId() string {
+	if o == nil || common.IsNil(o.TokenizationStoredPaymentMethodId) {
+		var ret string
+		return ret
+	}
+	return *o.TokenizationStoredPaymentMethodId
+}
+
+// GetTokenizationStoredPaymentMethodIdOk returns a tuple with the TokenizationStoredPaymentMethodId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResponseAdditionalDataCommon) GetTokenizationStoredPaymentMethodIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.TokenizationStoredPaymentMethodId) {
+		return nil, false
+	}
+	return o.TokenizationStoredPaymentMethodId, true
+}
+
+// HasTokenizationStoredPaymentMethodId returns a boolean if a field has been set.
+func (o *ResponseAdditionalDataCommon) HasTokenizationStoredPaymentMethodId() bool {
+	if o != nil && !common.IsNil(o.TokenizationStoredPaymentMethodId) {
+		return true
+	}
+
+	return false
+}
+
+// SetTokenizationStoredPaymentMethodId gets a reference to the given string and assigns it to the TokenizationStoredPaymentMethodId field.
+func (o *ResponseAdditionalDataCommon) SetTokenizationStoredPaymentMethodId(v string) {
+	o.TokenizationStoredPaymentMethodId = &v
+}
+
 // GetVisaTransactionId returns the VisaTransactionId field value if set, zero value otherwise.
 func (o *ResponseAdditionalDataCommon) GetVisaTransactionId() string {
 	if o == nil || common.IsNil(o.VisaTransactionId) {
@@ -2225,6 +2327,15 @@ func (o ResponseAdditionalDataCommon) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.ThreeDSVersion) {
 		toSerialize["threeDSVersion"] = o.ThreeDSVersion
 	}
+	if !common.IsNil(o.TokenizationShopperReference) {
+		toSerialize["tokenization.shopperReference"] = o.TokenizationShopperReference
+	}
+	if !common.IsNil(o.TokenizationStoreOperationType) {
+		toSerialize["tokenization.store.operationType"] = o.TokenizationStoreOperationType
+	}
+	if !common.IsNil(o.TokenizationStoredPaymentMethodId) {
+		toSerialize["tokenization.storedPaymentMethodId"] = o.TokenizationStoredPaymentMethodId
+	}
 	if !common.IsNil(o.VisaTransactionId) {
 		toSerialize["visaTransactionId"] = o.VisaTransactionId
 	}
@@ -2283,6 +2394,15 @@ func (o *ResponseAdditionalDataCommon) isValidRecurringProcessingModel() bool {
 	var allowedEnumValues = []string{"CardOnFile", "Subscription", "UnscheduledCardOnFile"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetRecurringProcessingModel() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *ResponseAdditionalDataCommon) isValidTokenizationStoreOperationType() bool {
+	var allowedEnumValues = []string{"created", "updated", "alreadyStored"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetTokenizationStoreOperationType() == allowed {
 			return true
 		}
 	}
