@@ -10,8 +10,7 @@ package transfers
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v19/src/common"
+    "github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // checks if the RoutingDetails type satisfies the MappedNullable interface at compile time
@@ -175,7 +174,7 @@ func (o *RoutingDetails) SetTitle(v string) {
 }
 
 func (o RoutingDetails) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -235,12 +234,14 @@ func (v *NullableRoutingDetails) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *RoutingDetails) isValidPriority() bool {
-	var allowedEnumValues = []string{"crossBorder", "fast", "instant", "internal", "regular", "wire"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetPriority() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "crossBorder", "fast", "instant", "internal", "regular", "wire" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetPriority() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

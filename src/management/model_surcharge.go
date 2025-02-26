@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v19/src/common"
+    "github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // checks if the Surcharge type satisfies the MappedNullable interface at compile time
@@ -23,6 +22,8 @@ type Surcharge struct {
 	AskConfirmation *bool `json:"askConfirmation,omitempty"`
 	// Surcharge fees or percentages for specific cards, funding sources (credit or debit), and currencies.
 	Configurations []Configuration `json:"configurations,omitempty"`
+	// Exclude the tip amount from the surcharge calculation.
+	ExcludeGratuityFromSurcharge *bool `json:"excludeGratuityFromSurcharge,omitempty"`
 }
 
 // NewSurcharge instantiates a new Surcharge object
@@ -106,8 +107,40 @@ func (o *Surcharge) SetConfigurations(v []Configuration) {
 	o.Configurations = v
 }
 
+// GetExcludeGratuityFromSurcharge returns the ExcludeGratuityFromSurcharge field value if set, zero value otherwise.
+func (o *Surcharge) GetExcludeGratuityFromSurcharge() bool {
+	if o == nil || common.IsNil(o.ExcludeGratuityFromSurcharge) {
+		var ret bool
+		return ret
+	}
+	return *o.ExcludeGratuityFromSurcharge
+}
+
+// GetExcludeGratuityFromSurchargeOk returns a tuple with the ExcludeGratuityFromSurcharge field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Surcharge) GetExcludeGratuityFromSurchargeOk() (*bool, bool) {
+	if o == nil || common.IsNil(o.ExcludeGratuityFromSurcharge) {
+		return nil, false
+	}
+	return o.ExcludeGratuityFromSurcharge, true
+}
+
+// HasExcludeGratuityFromSurcharge returns a boolean if a field has been set.
+func (o *Surcharge) HasExcludeGratuityFromSurcharge() bool {
+	if o != nil && !common.IsNil(o.ExcludeGratuityFromSurcharge) {
+		return true
+	}
+
+	return false
+}
+
+// SetExcludeGratuityFromSurcharge gets a reference to the given bool and assigns it to the ExcludeGratuityFromSurcharge field.
+func (o *Surcharge) SetExcludeGratuityFromSurcharge(v bool) {
+	o.ExcludeGratuityFromSurcharge = &v
+}
+
 func (o Surcharge) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -121,6 +154,9 @@ func (o Surcharge) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Configurations) {
 		toSerialize["configurations"] = o.Configurations
+	}
+	if !common.IsNil(o.ExcludeGratuityFromSurcharge) {
+		toSerialize["excludeGratuityFromSurcharge"] = o.ExcludeGratuityFromSurcharge
 	}
 	return toSerialize, nil
 }
@@ -160,3 +196,6 @@ func (v *NullableSurcharge) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

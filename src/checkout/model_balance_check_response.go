@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v19/src/common"
+    "github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // checks if the BalanceCheckResponse type satisfies the MappedNullable interface at compile time
@@ -21,14 +20,14 @@ var _ common.MappedNullable = &BalanceCheckResponse{}
 type BalanceCheckResponse struct {
 	// Contains additional information about the payment. Some data fields are included only if you select them first: Go to **Customer Area** > **Developers** > **Additional data**.
 	AdditionalData *map[string]string `json:"additionalData,omitempty"`
-	Balance        Amount             `json:"balance"`
-	FraudResult    *FraudResult       `json:"fraudResult,omitempty"`
+	Balance Amount `json:"balance"`
+	FraudResult *FraudResult `json:"fraudResult,omitempty"`
 	// Adyen's 16-character reference associated with the transaction/request. This value is globally unique; quote it when communicating with us about this request.
 	PspReference *string `json:"pspReference,omitempty"`
 	// If the payment's authorisation is refused or an error occurs during authorisation, this field holds Adyen's mapped reason for the refusal or a description of the error. When a transaction fails, the authorisation response includes `resultCode` and `refusalReason` values.  For more information, see [Refusal reasons](https://docs.adyen.com/development-resources/refusal-reasons).
 	RefusalReason *string `json:"refusalReason,omitempty"`
 	// The result of the cancellation request.  Possible values:  * **Success** – Indicates that the balance check was successful. * **NotEnoughBalance** – Commonly indicates that the card did not have enough balance to pay the amount in the request, or that the currency of the balance on the card did not match the currency of the requested amount. * **Failed** – Indicates that the balance check failed.
-	ResultCode       string  `json:"resultCode"`
+	ResultCode string `json:"resultCode"`
 	TransactionLimit *Amount `json:"transactionLimit,omitempty"`
 }
 
@@ -260,7 +259,7 @@ func (o *BalanceCheckResponse) SetTransactionLimit(v Amount) {
 }
 
 func (o BalanceCheckResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -325,12 +324,14 @@ func (v *NullableBalanceCheckResponse) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *BalanceCheckResponse) isValidResultCode() bool {
-	var allowedEnumValues = []string{"Success", "NotEnoughBalance", "Failed"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetResultCode() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "Success", "NotEnoughBalance", "Failed" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetResultCode() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

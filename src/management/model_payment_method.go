@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v19/src/common"
+    "github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // checks if the PaymentMethod type satisfies the MappedNullable interface at compile time
@@ -19,65 +18,68 @@ var _ common.MappedNullable = &PaymentMethod{}
 
 // PaymentMethod struct for PaymentMethod
 type PaymentMethod struct {
-	Accel         *AccelInfo         `json:"accel,omitempty"`
+	Accel *AccelInfo `json:"accel,omitempty"`
+	Affirm *AffirmInfo `json:"affirm,omitempty"`
 	AfterpayTouch *AfterpayTouchInfo `json:"afterpayTouch,omitempty"`
 	// Indicates whether receiving payments is allowed. This value is set to **true** by Adyen after screening your merchant account.
-	Allowed  *bool         `json:"allowed,omitempty"`
-	Amex     *AmexInfo     `json:"amex,omitempty"`
+	Allowed *bool `json:"allowed,omitempty"`
+	Amex *AmexInfo `json:"amex,omitempty"`
 	ApplePay *ApplePayInfo `json:"applePay,omitempty"`
-	Bcmc     *BcmcInfo     `json:"bcmc,omitempty"`
+	Bcmc *BcmcInfo `json:"bcmc,omitempty"`
 	// The unique identifier of the business line. Required if you are a [platform model](https://docs.adyen.com/platforms).
-	BusinessLineId  *string              `json:"businessLineId,omitempty"`
+	BusinessLineId *string `json:"businessLineId,omitempty"`
 	CartesBancaires *CartesBancairesInfo `json:"cartesBancaires,omitempty"`
-	Clearpay        *ClearpayInfo        `json:"clearpay,omitempty"`
+	Clearpay *ClearpayInfo `json:"clearpay,omitempty"`
 	// The list of countries where a payment method is available. By default, all countries supported by the payment method.
-	Countries []string              `json:"countries,omitempty"`
-	Cup       *GenericPmWithTdiInfo `json:"cup,omitempty"`
+	Countries []string `json:"countries,omitempty"`
+	Cup *GenericPmWithTdiInfo `json:"cup,omitempty"`
 	// The list of currencies that a payment method supports. By default, all currencies supported by the payment method.
 	Currencies []string `json:"currencies,omitempty"`
 	// The list of custom routing flags to route payment to the intended acquirer.
-	CustomRoutingFlags []string              `json:"customRoutingFlags,omitempty"`
-	Diners             *DinersInfo           `json:"diners,omitempty"`
-	Discover           *GenericPmWithTdiInfo `json:"discover,omitempty"`
-	EftposAustralia    *GenericPmWithTdiInfo `json:"eftpos_australia,omitempty"`
+	CustomRoutingFlags []string `json:"customRoutingFlags,omitempty"`
+	Diners *DinersInfo `json:"diners,omitempty"`
+	Discover *GenericPmWithTdiInfo `json:"discover,omitempty"`
+	EftDirectdebitCA *GenericPmWithTdiInfo `json:"eft_directdebit_CA,omitempty"`
+	EftposAustralia *GenericPmWithTdiInfo `json:"eftpos_australia,omitempty"`
 	// Indicates whether the payment method is enabled (**true**) or disabled (**false**).
-	Enabled   *bool                 `json:"enabled,omitempty"`
-	GiroPay   *GiroPayInfo          `json:"giroPay,omitempty"`
-	Girocard  *GenericPmWithTdiInfo `json:"girocard,omitempty"`
-	GooglePay *GooglePayInfo        `json:"googlePay,omitempty"`
+	Enabled *bool `json:"enabled,omitempty"`
+	GiroPay *GiroPayInfo `json:"giroPay,omitempty"`
+	Girocard *GenericPmWithTdiInfo `json:"girocard,omitempty"`
+	GooglePay *GooglePayInfo `json:"googlePay,omitempty"`
 	// The identifier of the resource.
-	Id            string                `json:"id"`
-	Ideal         *GenericPmWithTdiInfo `json:"ideal,omitempty"`
-	InteracCard   *GenericPmWithTdiInfo `json:"interac_card,omitempty"`
-	Jcb           *JCBInfo              `json:"jcb,omitempty"`
-	Klarna        *KlarnaInfo           `json:"klarna,omitempty"`
-	Maestro       *GenericPmWithTdiInfo `json:"maestro,omitempty"`
-	Mc            *GenericPmWithTdiInfo `json:"mc,omitempty"`
-	MealVoucherFR *MealVoucherFRInfo    `json:"mealVoucher_FR,omitempty"`
-	Nyce          *NyceInfo             `json:"nyce,omitempty"`
-	Payme         *PayMeInfo            `json:"payme,omitempty"`
-	Paypal        *PayPalInfo           `json:"paypal,omitempty"`
-	Pulse         *PulseInfo            `json:"pulse,omitempty"`
+	Id string `json:"id"`
+	Ideal *GenericPmWithTdiInfo `json:"ideal,omitempty"`
+	InteracCard *GenericPmWithTdiInfo `json:"interac_card,omitempty"`
+	Jcb *JCBInfo `json:"jcb,omitempty"`
+	Klarna *KlarnaInfo `json:"klarna,omitempty"`
+	Maestro *GenericPmWithTdiInfo `json:"maestro,omitempty"`
+	Mc *GenericPmWithTdiInfo `json:"mc,omitempty"`
+	MealVoucherFR *MealVoucherFRInfo `json:"mealVoucher_FR,omitempty"`
+	Nyce *NyceInfo `json:"nyce,omitempty"`
+	Payme *PayMeInfo `json:"payme,omitempty"`
+	Paypal *PayPalInfo `json:"paypal,omitempty"`
+	Payto *PayToInfo `json:"payto,omitempty"`
+	Pulse *PulseInfo `json:"pulse,omitempty"`
 	// Your reference for the payment method. Supported characters a-z, A-Z, 0-9.
 	Reference *string `json:"reference,omitempty"`
 	// The sales channel.
-	ShopperInteraction *string     `json:"shopperInteraction,omitempty"`
-	Sodexo             *SodexoInfo `json:"sodexo,omitempty"`
-	Sofort             *SofortInfo `json:"sofort,omitempty"`
-	Star               *StarInfo   `json:"star,omitempty"`
+	ShopperInteraction *string `json:"shopperInteraction,omitempty"`
+	Sodexo *SodexoInfo `json:"sodexo,omitempty"`
+	Sofort *SofortInfo `json:"sofort,omitempty"`
+	Star *StarInfo `json:"star,omitempty"`
 	// The unique identifier of the store for which to configure the payment method, if any.
-	StoreIds []string    `json:"storeIds,omitempty"`
-	Swish    *SwishInfo  `json:"swish,omitempty"`
-	Ticket   *TicketInfo `json:"ticket,omitempty"`
-	Twint    *TwintInfo  `json:"twint,omitempty"`
+	StoreIds []string `json:"storeIds,omitempty"`
+	Swish *SwishInfo `json:"swish,omitempty"`
+	Ticket *TicketInfo `json:"ticket,omitempty"`
+	Twint *TwintInfo `json:"twint,omitempty"`
 	// Payment method [variant](https://docs.adyen.com/development-resources/paymentmethodvariant#management-api).
 	Type *string `json:"type,omitempty"`
 	// Payment method status. Possible values: * **valid** * **pending** * **invalid** * **rejected**
-	VerificationStatus *string               `json:"verificationStatus,omitempty"`
-	Vipps              *VippsInfo            `json:"vipps,omitempty"`
-	Visa               *GenericPmWithTdiInfo `json:"visa,omitempty"`
-	Wechatpay          *WeChatPayInfo        `json:"wechatpay,omitempty"`
-	WechatpayPos       *WeChatPayPosInfo     `json:"wechatpay_pos,omitempty"`
+	VerificationStatus *string `json:"verificationStatus,omitempty"`
+	Vipps *VippsInfo `json:"vipps,omitempty"`
+	Visa *GenericPmWithTdiInfo `json:"visa,omitempty"`
+	Wechatpay *WeChatPayInfo `json:"wechatpay,omitempty"`
+	WechatpayPos *WeChatPayPosInfo `json:"wechatpay_pos,omitempty"`
 }
 
 // NewPaymentMethod instantiates a new PaymentMethod object
@@ -128,6 +130,38 @@ func (o *PaymentMethod) HasAccel() bool {
 // SetAccel gets a reference to the given AccelInfo and assigns it to the Accel field.
 func (o *PaymentMethod) SetAccel(v AccelInfo) {
 	o.Accel = &v
+}
+
+// GetAffirm returns the Affirm field value if set, zero value otherwise.
+func (o *PaymentMethod) GetAffirm() AffirmInfo {
+	if o == nil || common.IsNil(o.Affirm) {
+		var ret AffirmInfo
+		return ret
+	}
+	return *o.Affirm
+}
+
+// GetAffirmOk returns a tuple with the Affirm field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethod) GetAffirmOk() (*AffirmInfo, bool) {
+	if o == nil || common.IsNil(o.Affirm) {
+		return nil, false
+	}
+	return o.Affirm, true
+}
+
+// HasAffirm returns a boolean if a field has been set.
+func (o *PaymentMethod) HasAffirm() bool {
+	if o != nil && !common.IsNil(o.Affirm) {
+		return true
+	}
+
+	return false
+}
+
+// SetAffirm gets a reference to the given AffirmInfo and assigns it to the Affirm field.
+func (o *PaymentMethod) SetAffirm(v AffirmInfo) {
+	o.Affirm = &v
 }
 
 // GetAfterpayTouch returns the AfterpayTouch field value if set, zero value otherwise.
@@ -576,6 +610,38 @@ func (o *PaymentMethod) HasDiscover() bool {
 // SetDiscover gets a reference to the given GenericPmWithTdiInfo and assigns it to the Discover field.
 func (o *PaymentMethod) SetDiscover(v GenericPmWithTdiInfo) {
 	o.Discover = &v
+}
+
+// GetEftDirectdebitCA returns the EftDirectdebitCA field value if set, zero value otherwise.
+func (o *PaymentMethod) GetEftDirectdebitCA() GenericPmWithTdiInfo {
+	if o == nil || common.IsNil(o.EftDirectdebitCA) {
+		var ret GenericPmWithTdiInfo
+		return ret
+	}
+	return *o.EftDirectdebitCA
+}
+
+// GetEftDirectdebitCAOk returns a tuple with the EftDirectdebitCA field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethod) GetEftDirectdebitCAOk() (*GenericPmWithTdiInfo, bool) {
+	if o == nil || common.IsNil(o.EftDirectdebitCA) {
+		return nil, false
+	}
+	return o.EftDirectdebitCA, true
+}
+
+// HasEftDirectdebitCA returns a boolean if a field has been set.
+func (o *PaymentMethod) HasEftDirectdebitCA() bool {
+	if o != nil && !common.IsNil(o.EftDirectdebitCA) {
+		return true
+	}
+
+	return false
+}
+
+// SetEftDirectdebitCA gets a reference to the given GenericPmWithTdiInfo and assigns it to the EftDirectdebitCA field.
+func (o *PaymentMethod) SetEftDirectdebitCA(v GenericPmWithTdiInfo) {
+	o.EftDirectdebitCA = &v
 }
 
 // GetEftposAustralia returns the EftposAustralia field value if set, zero value otherwise.
@@ -1080,6 +1146,38 @@ func (o *PaymentMethod) HasPaypal() bool {
 // SetPaypal gets a reference to the given PayPalInfo and assigns it to the Paypal field.
 func (o *PaymentMethod) SetPaypal(v PayPalInfo) {
 	o.Paypal = &v
+}
+
+// GetPayto returns the Payto field value if set, zero value otherwise.
+func (o *PaymentMethod) GetPayto() PayToInfo {
+	if o == nil || common.IsNil(o.Payto) {
+		var ret PayToInfo
+		return ret
+	}
+	return *o.Payto
+}
+
+// GetPaytoOk returns a tuple with the Payto field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethod) GetPaytoOk() (*PayToInfo, bool) {
+	if o == nil || common.IsNil(o.Payto) {
+		return nil, false
+	}
+	return o.Payto, true
+}
+
+// HasPayto returns a boolean if a field has been set.
+func (o *PaymentMethod) HasPayto() bool {
+	if o != nil && !common.IsNil(o.Payto) {
+		return true
+	}
+
+	return false
+}
+
+// SetPayto gets a reference to the given PayToInfo and assigns it to the Payto field.
+func (o *PaymentMethod) SetPayto(v PayToInfo) {
+	o.Payto = &v
 }
 
 // GetPulse returns the Pulse field value if set, zero value otherwise.
@@ -1595,7 +1693,7 @@ func (o *PaymentMethod) SetWechatpayPos(v WeChatPayPosInfo) {
 }
 
 func (o PaymentMethod) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -1606,6 +1704,9 @@ func (o PaymentMethod) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.Accel) {
 		toSerialize["accel"] = o.Accel
+	}
+	if !common.IsNil(o.Affirm) {
+		toSerialize["affirm"] = o.Affirm
 	}
 	if !common.IsNil(o.AfterpayTouch) {
 		toSerialize["afterpayTouch"] = o.AfterpayTouch
@@ -1648,6 +1749,9 @@ func (o PaymentMethod) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Discover) {
 		toSerialize["discover"] = o.Discover
+	}
+	if !common.IsNil(o.EftDirectdebitCA) {
+		toSerialize["eft_directdebit_CA"] = o.EftDirectdebitCA
 	}
 	if !common.IsNil(o.EftposAustralia) {
 		toSerialize["eftpos_australia"] = o.EftposAustralia
@@ -1694,6 +1798,9 @@ func (o PaymentMethod) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Paypal) {
 		toSerialize["paypal"] = o.Paypal
+	}
+	if !common.IsNil(o.Payto) {
+		toSerialize["payto"] = o.Payto
 	}
 	if !common.IsNil(o.Pulse) {
 		toSerialize["pulse"] = o.Pulse
@@ -1782,12 +1889,14 @@ func (v *NullablePaymentMethod) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *PaymentMethod) isValidVerificationStatus() bool {
-	var allowedEnumValues = []string{"valid", "pending", "invalid", "rejected"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetVerificationStatus() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "valid", "pending", "invalid", "rejected" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetVerificationStatus() == allowed {
+            return true
+        }
+    }
+    return false
 }
+
