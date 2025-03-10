@@ -256,7 +256,17 @@ func TestCheckoutIntegration(t *testing.T) {
 		})
 
 		t.Run("Create an API request that should fail", func(t *testing.T) {
-			body := checkout.CreateCheckoutSessionRequest{}
+			// Body without Reference 
+			body := checkout.CreateCheckoutSessionRequest{
+				Amount: checkout.Amount{
+					Value:    1250,
+					Currency: "EUR",
+				},
+				CountryCode:     common.PtrString("NL"),
+				MerchantAccount: merchantAccount,
+				Channel:         common.PtrString("Web"),
+				ReturnUrl:       "http://localhost:3000/redirect",
+			}
 			req := service.PaymentsApi.SessionsInput().CreateCheckoutSessionRequest(body)
 
 			res, httpRes, err := service.PaymentsApi.Sessions(context.Background(), req)
