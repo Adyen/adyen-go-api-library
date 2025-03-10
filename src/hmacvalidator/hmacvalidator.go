@@ -11,7 +11,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/adyen/adyen-go-api-library/v19/src/webhook"
+	"github.com/adyen/adyen-go-api-library/v20/src/webhook"
 )
 
 // CalculateHmac calculates the SHA-256 HMAC for the given data and key

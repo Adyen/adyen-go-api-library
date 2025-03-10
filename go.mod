@@ -1,4 +1,4 @@
-module github.com/adyen/adyen-go-api-library/v19
+module github.com/adyen/adyen-go-api-library/v20
 
 go 1.13
 
