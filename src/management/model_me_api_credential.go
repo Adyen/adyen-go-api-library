@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v19/src/common"
+    "github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // checks if the MeApiCredential type satisfies the MappedNullable interface at compile time
@@ -26,8 +25,6 @@ type MeApiCredential struct {
 	AllowedIpAddresses []string `json:"allowedIpAddresses"`
 	// List containing the [allowed origins](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins) linked to the API credential.
 	AllowedOrigins []AllowedOrigin `json:"allowedOrigins,omitempty"`
-	// List of merchant accounts that the API credential has explicit access to.   If the credential has access to a company, this implies access to all merchant accounts and no merchants for that company will be included.
-	AssociatedMerchantAccounts []string `json:"associatedMerchantAccounts,omitempty"`
 	// Public key used for [client-side authentication](https://docs.adyen.com/development-resources/client-side-authentication). The client key is required for Drop-in and Components integrations.
 	ClientKey string `json:"clientKey"`
 	// Name of the company linked to the API credential.
@@ -175,38 +172,6 @@ func (o *MeApiCredential) HasAllowedOrigins() bool {
 // SetAllowedOrigins gets a reference to the given []AllowedOrigin and assigns it to the AllowedOrigins field.
 func (o *MeApiCredential) SetAllowedOrigins(v []AllowedOrigin) {
 	o.AllowedOrigins = v
-}
-
-// GetAssociatedMerchantAccounts returns the AssociatedMerchantAccounts field value if set, zero value otherwise.
-func (o *MeApiCredential) GetAssociatedMerchantAccounts() []string {
-	if o == nil || common.IsNil(o.AssociatedMerchantAccounts) {
-		var ret []string
-		return ret
-	}
-	return o.AssociatedMerchantAccounts
-}
-
-// GetAssociatedMerchantAccountsOk returns a tuple with the AssociatedMerchantAccounts field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *MeApiCredential) GetAssociatedMerchantAccountsOk() ([]string, bool) {
-	if o == nil || common.IsNil(o.AssociatedMerchantAccounts) {
-		return nil, false
-	}
-	return o.AssociatedMerchantAccounts, true
-}
-
-// HasAssociatedMerchantAccounts returns a boolean if a field has been set.
-func (o *MeApiCredential) HasAssociatedMerchantAccounts() bool {
-	if o != nil && !common.IsNil(o.AssociatedMerchantAccounts) {
-		return true
-	}
-
-	return false
-}
-
-// SetAssociatedMerchantAccounts gets a reference to the given []string and assigns it to the AssociatedMerchantAccounts field.
-func (o *MeApiCredential) SetAssociatedMerchantAccounts(v []string) {
-	o.AssociatedMerchantAccounts = v
 }
 
 // GetClientKey returns the ClientKey field value
@@ -370,7 +335,7 @@ func (o *MeApiCredential) SetUsername(v string) {
 }
 
 func (o MeApiCredential) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -386,9 +351,6 @@ func (o MeApiCredential) ToMap() (map[string]interface{}, error) {
 	toSerialize["allowedIpAddresses"] = o.AllowedIpAddresses
 	if !common.IsNil(o.AllowedOrigins) {
 		toSerialize["allowedOrigins"] = o.AllowedOrigins
-	}
-	if !common.IsNil(o.AssociatedMerchantAccounts) {
-		toSerialize["associatedMerchantAccounts"] = o.AssociatedMerchantAccounts
 	}
 	toSerialize["clientKey"] = o.ClientKey
 	if !common.IsNil(o.CompanyName) {
@@ -438,3 +400,6 @@ func (v *NullableMeApiCredential) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

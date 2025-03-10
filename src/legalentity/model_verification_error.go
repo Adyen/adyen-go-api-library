@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v19/src/common"
+    "github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // checks if the VerificationError type satisfies the MappedNullable interface at compile time
@@ -29,7 +28,7 @@ type VerificationError struct {
 	RemediatingActions []RemediatingAction `json:"remediatingActions,omitempty"`
 	// An array containing more granular information about the cause of the verification error.
 	SubErrors []VerificationErrorRecursive `json:"subErrors,omitempty"`
-	// The type of error.  Possible values: *  **invalidInput** *  **dataMissing** *  **pendingStatus** *  **rejected** *  **dataReview**
+	// The type of error.  Possible values: *  **invalidInput** *  **dataMissing** *  **pendingStatus** *  **rejected** *  **dataReview**  
 	Type *string `json:"type,omitempty"`
 }
 
@@ -243,7 +242,7 @@ func (o *VerificationError) SetType(v string) {
 }
 
 func (o VerificationError) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -309,12 +308,14 @@ func (v *NullableVerificationError) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *VerificationError) isValidType() bool {
-	var allowedEnumValues = []string{"dataMissing", "dataReview", "invalidInput", "pendingStatus", "rejected"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "dataMissing", "dataReview", "invalidInput", "pendingStatus", "rejected" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

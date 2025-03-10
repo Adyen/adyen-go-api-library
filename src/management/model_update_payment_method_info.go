@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v19/src/common"
+    "github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // checks if the UpdatePaymentMethodInfo type satisfies the MappedNullable interface at compile time
@@ -19,37 +18,38 @@ var _ common.MappedNullable = &UpdatePaymentMethodInfo{}
 
 // UpdatePaymentMethodInfo struct for UpdatePaymentMethodInfo
 type UpdatePaymentMethodInfo struct {
-	Accel           *AccelInfo           `json:"accel,omitempty"`
-	Bcmc            *BcmcInfo            `json:"bcmc,omitempty"`
+	Accel *AccelInfo `json:"accel,omitempty"`
+	Bcmc *BcmcInfo `json:"bcmc,omitempty"`
 	CartesBancaires *CartesBancairesInfo `json:"cartesBancaires,omitempty"`
 	// The list of countries where a payment method is available. By default, all countries supported by the payment method.
-	Countries []string              `json:"countries,omitempty"`
-	Cup       *GenericPmWithTdiInfo `json:"cup,omitempty"`
+	Countries []string `json:"countries,omitempty"`
+	Cup *GenericPmWithTdiInfo `json:"cup,omitempty"`
 	// The list of currencies that a payment method supports. By default, all currencies supported by the payment method.
 	Currencies []string `json:"currencies,omitempty"`
 	// Custom routing flags for acquirer routing.
-	CustomRoutingFlags []string              `json:"customRoutingFlags,omitempty"`
-	Diners             *GenericPmWithTdiInfo `json:"diners,omitempty"`
-	Discover           *GenericPmWithTdiInfo `json:"discover,omitempty"`
-	EftposAustralia    *GenericPmWithTdiInfo `json:"eftpos_australia,omitempty"`
+	CustomRoutingFlags []string `json:"customRoutingFlags,omitempty"`
+	Diners *GenericPmWithTdiInfo `json:"diners,omitempty"`
+	Discover *GenericPmWithTdiInfo `json:"discover,omitempty"`
+	EftDirectdebitCA *GenericPmWithTdiInfo `json:"eft_directdebit_CA,omitempty"`
+	EftposAustralia *GenericPmWithTdiInfo `json:"eftpos_australia,omitempty"`
 	// Indicates whether the payment method is enabled (**true**) or disabled (**false**).
-	Enabled     *bool                 `json:"enabled,omitempty"`
-	Girocard    *GenericPmWithTdiInfo `json:"girocard,omitempty"`
-	Ideal       *GenericPmWithTdiInfo `json:"ideal,omitempty"`
+	Enabled *bool `json:"enabled,omitempty"`
+	Girocard *GenericPmWithTdiInfo `json:"girocard,omitempty"`
+	Ideal *GenericPmWithTdiInfo `json:"ideal,omitempty"`
 	InteracCard *GenericPmWithTdiInfo `json:"interac_card,omitempty"`
-	Jcb         *GenericPmWithTdiInfo `json:"jcb,omitempty"`
-	Maestro     *GenericPmWithTdiInfo `json:"maestro,omitempty"`
-	Mc          *GenericPmWithTdiInfo `json:"mc,omitempty"`
-	Nyce        *NyceInfo             `json:"nyce,omitempty"`
-	Pulse       *PulseInfo            `json:"pulse,omitempty"`
-	Star        *StarInfo             `json:"star,omitempty"`
+	Jcb *GenericPmWithTdiInfo `json:"jcb,omitempty"`
+	Maestro *GenericPmWithTdiInfo `json:"maestro,omitempty"`
+	Mc *GenericPmWithTdiInfo `json:"mc,omitempty"`
+	Nyce *NyceInfo `json:"nyce,omitempty"`
+	Pulse *PulseInfo `json:"pulse,omitempty"`
+	Star *StarInfo `json:"star,omitempty"`
 	// The store for this payment method
 	StoreId *string `json:"storeId,omitempty"`
 	// The list of stores for this payment method
-	// Deprecated since Management API v3
-	// Use `storeId` instead. Only one store per payment method is allowed.
-	StoreIds []string              `json:"storeIds,omitempty"`
-	Visa     *GenericPmWithTdiInfo `json:"visa,omitempty"`
+    // Deprecated since Management API v3
+    // Use `storeId` instead. Only one store per payment method is allowed.
+	StoreIds []string `json:"storeIds,omitempty"`
+	Visa *GenericPmWithTdiInfo `json:"visa,omitempty"`
 }
 
 // NewUpdatePaymentMethodInfo instantiates a new UpdatePaymentMethodInfo object
@@ -355,6 +355,38 @@ func (o *UpdatePaymentMethodInfo) HasDiscover() bool {
 // SetDiscover gets a reference to the given GenericPmWithTdiInfo and assigns it to the Discover field.
 func (o *UpdatePaymentMethodInfo) SetDiscover(v GenericPmWithTdiInfo) {
 	o.Discover = &v
+}
+
+// GetEftDirectdebitCA returns the EftDirectdebitCA field value if set, zero value otherwise.
+func (o *UpdatePaymentMethodInfo) GetEftDirectdebitCA() GenericPmWithTdiInfo {
+	if o == nil || common.IsNil(o.EftDirectdebitCA) {
+		var ret GenericPmWithTdiInfo
+		return ret
+	}
+	return *o.EftDirectdebitCA
+}
+
+// GetEftDirectdebitCAOk returns a tuple with the EftDirectdebitCA field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdatePaymentMethodInfo) GetEftDirectdebitCAOk() (*GenericPmWithTdiInfo, bool) {
+	if o == nil || common.IsNil(o.EftDirectdebitCA) {
+		return nil, false
+	}
+	return o.EftDirectdebitCA, true
+}
+
+// HasEftDirectdebitCA returns a boolean if a field has been set.
+func (o *UpdatePaymentMethodInfo) HasEftDirectdebitCA() bool {
+	if o != nil && !common.IsNil(o.EftDirectdebitCA) {
+		return true
+	}
+
+	return false
+}
+
+// SetEftDirectdebitCA gets a reference to the given GenericPmWithTdiInfo and assigns it to the EftDirectdebitCA field.
+func (o *UpdatePaymentMethodInfo) SetEftDirectdebitCA(v GenericPmWithTdiInfo) {
+	o.EftDirectdebitCA = &v
 }
 
 // GetEftposAustralia returns the EftposAustralia field value if set, zero value otherwise.
@@ -812,7 +844,7 @@ func (o *UpdatePaymentMethodInfo) SetVisa(v GenericPmWithTdiInfo) {
 }
 
 func (o UpdatePaymentMethodInfo) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -847,6 +879,9 @@ func (o UpdatePaymentMethodInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Discover) {
 		toSerialize["discover"] = o.Discover
+	}
+	if !common.IsNil(o.EftDirectdebitCA) {
+		toSerialize["eft_directdebit_CA"] = o.EftDirectdebitCA
 	}
 	if !common.IsNil(o.EftposAustralia) {
 		toSerialize["eftpos_australia"] = o.EftposAustralia
@@ -928,3 +963,6 @@ func (v *NullableUpdatePaymentMethodInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

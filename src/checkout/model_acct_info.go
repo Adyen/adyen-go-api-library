@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v19/src/common"
+    "github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // checks if the AcctInfo type satisfies the MappedNullable interface at compile time
@@ -583,7 +582,7 @@ func (o *AcctInfo) SetTxnActivityYear(v string) {
 }
 
 func (o AcctInfo) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -679,66 +678,68 @@ func (v *NullableAcctInfo) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *AcctInfo) isValidChAccAgeInd() bool {
-	var allowedEnumValues = []string{"01", "02", "03", "04", "05"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetChAccAgeInd() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "01", "02", "03", "04", "05" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetChAccAgeInd() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *AcctInfo) isValidChAccChangeInd() bool {
-	var allowedEnumValues = []string{"01", "02", "03", "04"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetChAccChangeInd() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "01", "02", "03", "04" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetChAccChangeInd() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *AcctInfo) isValidChAccPwChangeInd() bool {
-	var allowedEnumValues = []string{"01", "02", "03", "04", "05"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetChAccPwChangeInd() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "01", "02", "03", "04", "05" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetChAccPwChangeInd() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *AcctInfo) isValidPaymentAccInd() bool {
-	var allowedEnumValues = []string{"01", "02", "03", "04", "05"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetPaymentAccInd() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "01", "02", "03", "04", "05" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetPaymentAccInd() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *AcctInfo) isValidShipAddressUsageInd() bool {
-	var allowedEnumValues = []string{"01", "02", "03", "04"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetShipAddressUsageInd() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "01", "02", "03", "04" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetShipAddressUsageInd() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *AcctInfo) isValidShipNameIndicator() bool {
-	var allowedEnumValues = []string{"01", "02"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetShipNameIndicator() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "01", "02" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetShipNameIndicator() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *AcctInfo) isValidSuspiciousAccActivity() bool {
-	var allowedEnumValues = []string{"01", "02"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetSuspiciousAccActivity() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "01", "02" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetSuspiciousAccActivity() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

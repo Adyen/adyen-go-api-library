@@ -10,8 +10,7 @@ package payments
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v19/src/common"
+    "github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // checks if the AdditionalDataLevel23 type satisfies the MappedNullable interface at compile time
@@ -19,39 +18,39 @@ var _ common.MappedNullable = &AdditionalDataLevel23{}
 
 // AdditionalDataLevel23 struct for AdditionalDataLevel23
 type AdditionalDataLevel23 struct {
-	// The customer code. * Encoding: ASCII * Max length: 25 characters * Must not start with a space or be all spaces * Must not be all zeros.
+	// The reference number to identify the customer and their order.  * Encoding: ASCII * Max length: 25 characters * Must not start with a space or be all spaces. * Must not be all zeros.
 	EnhancedSchemeDataCustomerReference *string `json:"enhancedSchemeData.customerReference,omitempty"`
 	// The three-letter [ISO 3166-1 alpha-3 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) for the destination address. * Encoding: ASCII * Fixed length: 3 characters
 	EnhancedSchemeDataDestinationCountryCode *string `json:"enhancedSchemeData.destinationCountryCode,omitempty"`
-	// The postal code of the destination address. * Encoding: ASCII * Max length: 10 characters * Must not start with a space
+	// The postal code of the destination address. * Encoding: ASCII * Max length: 10 characters * Must not start with a space. * For the US, it must be in five or nine digits format. For example, 10001 or 10001-0000. * For Canada, it must be in 6 digits format. For example, M4B 1G5.
 	EnhancedSchemeDataDestinationPostalCode *string `json:"enhancedSchemeData.destinationPostalCode,omitempty"`
-	// Destination state or province code. * Encoding: ASCII * Max length: 3 characters * Must not start with a space
+	// The state or province code of the destination address. * Encoding: ASCII * Max length: 3 characters * Must not start with a space.
 	EnhancedSchemeDataDestinationStateProvinceCode *string `json:"enhancedSchemeData.destinationStateProvinceCode,omitempty"`
-	// The duty amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes). * For example, 2000 means USD 20.00. * Encoding: Numeric * Max length: 12 characters
+	// The duty tax amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes). * For example, 2000 means USD 20.00. * Encoding: Numeric * Max length: 12 characters
 	EnhancedSchemeDataDutyAmount *string `json:"enhancedSchemeData.dutyAmount,omitempty"`
-	// The shipping amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes). * For example, 2000 means USD 20.00. * Encoding: Numeric *Max length: 12 characters
+	// The shipping amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes). * For example, 2000 means USD 20.00. * Encoding: Numeric * Max length: 12 characters
 	EnhancedSchemeDataFreightAmount *string `json:"enhancedSchemeData.freightAmount,omitempty"`
-	// The [UNSPC commodity code](https://www.unspsc.org/) of the item. * Encoding: ASCII * Max length: 12 characters * Must not start with a space or be all spaces * Must not be all zeros.
+	// The code that identifies the item in a standardized commodity coding scheme. There are different commodity coding schemes: * [UNSPSC commodity codes](https://www.unspsc.org/) * [HS commodity codes](https://www.wcoomd.org/en/topics/nomenclature/overview.aspx) * [NAICS commodity codes](https://www.census.gov/naics/) * [NAPCS commodity codes](https://www.census.gov/naics/napcs/)   * Encoding: ASCII * Max length: 12 characters * Must not start with a space or be all spaces. * Must not be all zeros.
 	EnhancedSchemeDataItemDetailLineItemNrCommodityCode *string `json:"enhancedSchemeData.itemDetailLine[itemNr].commodityCode,omitempty"`
-	// A description of the item. * Encoding: ASCII * Max length: 26 characters * Must not start with a space or be all spaces * Must not be all zeros.
+	// A description of the item. * Encoding: ASCII * Max length: 26 characters * Must not be a single character. * Must not be blank. * Must not start with a space or be all spaces. * Must not be all zeros.
 	EnhancedSchemeDataItemDetailLineItemNrDescription *string `json:"enhancedSchemeData.itemDetailLine[itemNr].description,omitempty"`
 	// The discount amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes). * For example, 2000 means USD 20.00. * Encoding: Numeric * Max length: 12 characters
 	EnhancedSchemeDataItemDetailLineItemNrDiscountAmount *string `json:"enhancedSchemeData.itemDetailLine[itemNr].discountAmount,omitempty"`
-	// The product code. * Encoding: ASCII. * Max length: 12 characters * Must not start with a space or be all spaces * Must not be all zeros.
+	// The product code. Must be a unique product code associated with the item or service. This can be your unique code for the item, or the manufacturer's product code.  * Encoding: ASCII. * Max length: 12 characters * Must not start with a space or be all spaces. * Must not be all zeros.
 	EnhancedSchemeDataItemDetailLineItemNrProductCode *string `json:"enhancedSchemeData.itemDetailLine[itemNr].productCode,omitempty"`
-	// The number of items. Must be an integer greater than zero. * Encoding: Numeric * Max length: 12 characters * Must not start with a space or be all spaces
+	// The number of items. Must be an integer greater than zero. * Encoding: Numeric * Max length: 12 characters * Must not start with a space or be all spaces.
 	EnhancedSchemeDataItemDetailLineItemNrQuantity *string `json:"enhancedSchemeData.itemDetailLine[itemNr].quantity,omitempty"`
-	// The total amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes). * For example, 2000 means USD 20.00. * Max length: 12 characters * Must not start with a space or be all spaces * Must not be all zeros.
+	// The total amount for the line item, in [minor units](https://docs.adyen.com/development-resources/currency-codes). See [Amount requirements for level 2/3 ESD](https://docs.adyen.com//payment-methods/cards/enhanced-scheme-data/l2-l3#amount-requirements) to learn more about how to calculate the line item total. * For example, 2000 means USD 20.00. * Max length: 12 characters * Must not start with a space or be all spaces. * Must not be all zeros.
 	EnhancedSchemeDataItemDetailLineItemNrTotalAmount *string `json:"enhancedSchemeData.itemDetailLine[itemNr].totalAmount,omitempty"`
-	// The unit of measurement for an item. * Encoding: ASCII  Max length: 3 characters * Must not start with a space or be all spaces * Must not be all zeros.
+	// The unit of measurement for an item. * Encoding: ASCII * Max length: 3 characters * Must not start with a space or be all spaces. * Must not be all zeros.
 	EnhancedSchemeDataItemDetailLineItemNrUnitOfMeasure *string `json:"enhancedSchemeData.itemDetailLine[itemNr].unitOfMeasure,omitempty"`
 	// The unit price in [minor units](https://docs.adyen.com/development-resources/currency-codes). * For example, 2000 means USD 20.00. * Encoding: Numeric * Max length: 12 characters * Must not be all zeros.
 	EnhancedSchemeDataItemDetailLineItemNrUnitPrice *string `json:"enhancedSchemeData.itemDetailLine[itemNr].unitPrice,omitempty"`
 	// The order date. * Format: `ddMMyy` * Encoding: ASCII * Max length: 6 characters
 	EnhancedSchemeDataOrderDate *string `json:"enhancedSchemeData.orderDate,omitempty"`
-	// The postal code of the address the item is shipped from. * Encoding: ASCII * Max length: 10 characters * Must not start with a space or be all spaces * Must not be all zeros.
+	// The postal code of the address where the item is shipped from. * Encoding: ASCII * Max length: 10 characters * Must not start with a space or be all spaces. * Must not be all zeros.For the US, it must be in five or nine digits format. For example, 10001 or 10001-0000. * For Canada, it must be in 6 digits format. For example, M4B 1G5.
 	EnhancedSchemeDataShipFromPostalCode *string `json:"enhancedSchemeData.shipFromPostalCode,omitempty"`
-	// The total tax amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes). * For example, 2000 means USD 20.00. *Encoding: Numeric *Max length: 12 characters * Must not be all zeros.
+	// The amount of state or provincial [tax included in the total transaction amount](https://docs.adyen.com/payment-methods/cards/enhanced-scheme-data/l2-l3#requirements-to-send-level-2-3-esd), in [minor units](https://docs.adyen.com/development-resources/currency-codes).  * For example, 2000 means USD 20.00. * Encoding: Numeric  * Max length: 12 characters * Must not be all zeros.
 	EnhancedSchemeDataTotalTaxAmount *string `json:"enhancedSchemeData.totalTaxAmount,omitempty"`
 }
 
@@ -617,7 +616,7 @@ func (o *AdditionalDataLevel23) SetEnhancedSchemeDataTotalTaxAmount(v string) {
 }
 
 func (o AdditionalDataLevel23) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -715,3 +714,6 @@ func (v *NullableAdditionalDataLevel23) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

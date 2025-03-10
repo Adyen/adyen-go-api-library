@@ -10,8 +10,7 @@ package payments
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v19/src/common"
+    "github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // checks if the ThreeDSecureData type satisfies the MappedNullable interface at compile time
@@ -19,7 +18,7 @@ var _ common.MappedNullable = &ThreeDSecureData{}
 
 // ThreeDSecureData struct for ThreeDSecureData
 type ThreeDSecureData struct {
-	// In 3D Secure 1, the authentication response if the shopper was redirected.  In 3D Secure 2, this is the `transStatus` from the challenge result. If the transaction was frictionless, omit this parameter.
+	// In 3D Secure 2, this is the `transStatus` from the challenge result. If the transaction was frictionless, omit this parameter.  
 	AuthenticationResponse *string `json:"authenticationResponse,omitempty"`
 	// The cardholder authentication value (base64 encoded, 20 bytes in a decoded form).
 	Cavv *string `json:"cavv,omitempty"`
@@ -27,7 +26,7 @@ type ThreeDSecureData struct {
 	CavvAlgorithm *string `json:"cavvAlgorithm,omitempty"`
 	// Indicator informing the Access Control Server (ACS) and the Directory Server (DS) that the authentication has been cancelled. For possible values, refer to [3D Secure API reference](https://docs.adyen.com/online-payments/3d-secure/api-reference#mpidata).
 	ChallengeCancel *string `json:"challengeCancel,omitempty"`
-	// In 3D Secure 1, this is the enrollment response from the 3D directory server.  In 3D Secure 2, this is the `transStatus` from the `ARes`.
+	// In 3D Secure 2, this is the `transStatus` from the `ARes`.  
 	DirectoryResponse *string `json:"directoryResponse,omitempty"`
 	// Supported for 3D Secure 2. The unique transaction identifier assigned by the Directory Server (DS) to identify a single transaction.
 	DsTransID *string `json:"dsTransID,omitempty"`
@@ -447,7 +446,7 @@ func (o *ThreeDSecureData) SetXid(v string) {
 }
 
 func (o ThreeDSecureData) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -531,30 +530,32 @@ func (v *NullableThreeDSecureData) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *ThreeDSecureData) isValidAuthenticationResponse() bool {
-	var allowedEnumValues = []string{"Y", "N", "U", "A"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetAuthenticationResponse() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "Y", "N", "U", "A" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetAuthenticationResponse() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *ThreeDSecureData) isValidChallengeCancel() bool {
-	var allowedEnumValues = []string{"01", "02", "03", "04", "05", "06", "07"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetChallengeCancel() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "01", "02", "03", "04", "05", "06", "07" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetChallengeCancel() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *ThreeDSecureData) isValidDirectoryResponse() bool {
-	var allowedEnumValues = []string{"A", "C", "D", "I", "N", "R", "U", "Y"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetDirectoryResponse() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "A", "C", "D", "I", "N", "R", "U", "Y" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetDirectoryResponse() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

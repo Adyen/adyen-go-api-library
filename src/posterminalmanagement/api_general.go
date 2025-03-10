@@ -10,10 +10,10 @@ package posterminalmanagement
 
 import (
 	"context"
-	"net/http"
-	"net/url"
-
-	"github.com/adyen/adyen-go-api-library/v19/src/common"
+    "net/http"
+    "net/url"
+    "strings"
+    "github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // GeneralApi service
@@ -29,6 +29,7 @@ func (r GeneralApiAssignTerminalsInput) AssignTerminalsRequest(assignTerminalsRe
 	return r
 }
 
+
 /*
 Prepare a request for AssignTerminals
 
@@ -38,7 +39,8 @@ Deprecated since POS Terminal Management API v1
 Use [Management API](https://docs.adyen.com/api-explorer/Management/latest/overview).
 */
 func (a *GeneralApi) AssignTerminalsInput() GeneralApiAssignTerminalsInput {
-	return GeneralApiAssignTerminalsInput{}
+	return GeneralApiAssignTerminalsInput{
+	}
 }
 
 /*
@@ -56,23 +58,25 @@ Deprecated since POS Terminal Management API v1
 Use [Management API](https://docs.adyen.com/api-explorer/Management/latest/overview).
 */
 func (a *GeneralApi) AssignTerminals(ctx context.Context, r GeneralApiAssignTerminalsInput) (AssignTerminalsResponse, *http.Response, error) {
-	res := &AssignTerminalsResponse{}
+    res := &AssignTerminalsResponse{}
 	path := "/assignTerminals"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.assignTerminalsRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.assignTerminalsRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by GeneralApi.FindTerminal
 type GeneralApiFindTerminalInput struct {
@@ -84,6 +88,7 @@ func (r GeneralApiFindTerminalInput) FindTerminalRequest(findTerminalRequest Fin
 	return r
 }
 
+
 /*
 Prepare a request for FindTerminal
 
@@ -93,7 +98,8 @@ Deprecated since POS Terminal Management API v1
 Use [Management API](https://docs.adyen.com/api-explorer/Management/latest/overview).
 */
 func (a *GeneralApi) FindTerminalInput() GeneralApiFindTerminalInput {
-	return GeneralApiFindTerminalInput{}
+	return GeneralApiFindTerminalInput{
+	}
 }
 
 /*
@@ -111,23 +117,25 @@ Deprecated since POS Terminal Management API v1
 Use [Management API](https://docs.adyen.com/api-explorer/Management/latest/overview).
 */
 func (a *GeneralApi) FindTerminal(ctx context.Context, r GeneralApiFindTerminalInput) (FindTerminalResponse, *http.Response, error) {
-	res := &FindTerminalResponse{}
+    res := &FindTerminalResponse{}
 	path := "/findTerminal"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.findTerminalRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.findTerminalRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by GeneralApi.GetStoresUnderAccount
 type GeneralApiGetStoresUnderAccountInput struct {
@@ -139,6 +147,7 @@ func (r GeneralApiGetStoresUnderAccountInput) GetStoresUnderAccountRequest(getSt
 	return r
 }
 
+
 /*
 Prepare a request for GetStoresUnderAccount
 
@@ -148,7 +157,8 @@ Deprecated since POS Terminal Management API v1
 Use [Management API](https://docs.adyen.com/api-explorer/Management/latest/overview).
 */
 func (a *GeneralApi) GetStoresUnderAccountInput() GeneralApiGetStoresUnderAccountInput {
-	return GeneralApiGetStoresUnderAccountInput{}
+	return GeneralApiGetStoresUnderAccountInput{
+	}
 }
 
 /*
@@ -166,23 +176,25 @@ Deprecated since POS Terminal Management API v1
 Use [Management API](https://docs.adyen.com/api-explorer/Management/latest/overview).
 */
 func (a *GeneralApi) GetStoresUnderAccount(ctx context.Context, r GeneralApiGetStoresUnderAccountInput) (GetStoresUnderAccountResponse, *http.Response, error) {
-	res := &GetStoresUnderAccountResponse{}
+    res := &GetStoresUnderAccountResponse{}
 	path := "/getStoresUnderAccount"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.getStoresUnderAccountRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.getStoresUnderAccountRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by GeneralApi.GetTerminalDetails
 type GeneralApiGetTerminalDetailsInput struct {
@@ -194,6 +206,7 @@ func (r GeneralApiGetTerminalDetailsInput) GetTerminalDetailsRequest(getTerminal
 	return r
 }
 
+
 /*
 Prepare a request for GetTerminalDetails
 
@@ -203,7 +216,8 @@ Deprecated since POS Terminal Management API v1
 Use [Management API](https://docs.adyen.com/api-explorer/Management/latest/overview).
 */
 func (a *GeneralApi) GetTerminalDetailsInput() GeneralApiGetTerminalDetailsInput {
-	return GeneralApiGetTerminalDetailsInput{}
+	return GeneralApiGetTerminalDetailsInput{
+	}
 }
 
 /*
@@ -221,23 +235,25 @@ Deprecated since POS Terminal Management API v1
 Use [Management API](https://docs.adyen.com/api-explorer/Management/latest/overview).
 */
 func (a *GeneralApi) GetTerminalDetails(ctx context.Context, r GeneralApiGetTerminalDetailsInput) (GetTerminalDetailsResponse, *http.Response, error) {
-	res := &GetTerminalDetailsResponse{}
+    res := &GetTerminalDetailsResponse{}
 	path := "/getTerminalDetails"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.getTerminalDetailsRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.getTerminalDetailsRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by GeneralApi.GetTerminalsUnderAccount
 type GeneralApiGetTerminalsUnderAccountInput struct {
@@ -249,6 +265,7 @@ func (r GeneralApiGetTerminalsUnderAccountInput) GetTerminalsUnderAccountRequest
 	return r
 }
 
+
 /*
 Prepare a request for GetTerminalsUnderAccount
 
@@ -258,7 +275,8 @@ Deprecated since POS Terminal Management API v1
 Use [Management API](https://docs.adyen.com/api-explorer/Management/latest/overview).
 */
 func (a *GeneralApi) GetTerminalsUnderAccountInput() GeneralApiGetTerminalsUnderAccountInput {
-	return GeneralApiGetTerminalsUnderAccountInput{}
+	return GeneralApiGetTerminalsUnderAccountInput{
+	}
 }
 
 /*
@@ -276,20 +294,22 @@ Deprecated since POS Terminal Management API v1
 Use [Management API](https://docs.adyen.com/api-explorer/Management/latest/overview).
 */
 func (a *GeneralApi) GetTerminalsUnderAccount(ctx context.Context, r GeneralApiGetTerminalsUnderAccountInput) (GetTerminalsUnderAccountResponse, *http.Response, error) {
-	res := &GetTerminalsUnderAccountResponse{}
+    res := &GetTerminalsUnderAccountResponse{}
 	path := "/getTerminalsUnderAccount"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.getTerminalsUnderAccountRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.getTerminalsUnderAccountRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+

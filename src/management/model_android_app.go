@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v19/src/common"
+    "github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // checks if the AndroidApp type satisfies the MappedNullable interface at compile time
@@ -22,8 +21,8 @@ type AndroidApp struct {
 	// The description that was provided when uploading the app. The description is not shown on the terminal.
 	Description *string `json:"description,omitempty"`
 	// The error code of the Android app with the `status` of either **error** or **invalid**.
-	// Deprecated since Management API v3
-	// Use `errors` instead.
+    // Deprecated since Management API v3
+    // Use `errors` instead.
 	ErrorCode *string `json:"errorCode,omitempty"`
 	// The list of errors of the Android app.
 	Errors []AndroidAppError `json:"errors,omitempty"`
@@ -339,7 +338,7 @@ func (o *AndroidApp) SetVersionName(v string) {
 }
 
 func (o AndroidApp) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -409,3 +408,15 @@ func (v *NullableAndroidApp) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+func (o *AndroidApp) isValidStatus() bool {
+    var allowedEnumValues = []string{ "archived", "error", "invalid", "processing", "ready" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetStatus() == allowed {
+            return true
+        }
+    }
+    return false
+}
+

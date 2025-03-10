@@ -10,8 +10,7 @@ package managementwebhook
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v19/src/common"
+    "github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // checks if the MidServiceNotificationData type satisfies the MappedNullable interface at compile time
@@ -29,7 +28,7 @@ type MidServiceNotificationData struct {
 	MerchantId string `json:"merchantId"`
 	// Your reference for the payment method.
 	Reference *string `json:"reference,omitempty"`
-	// The status of the request to add a payment method. Possible values:  * **success**: the payment method was added. * **failure**: the request failed. * **capabilityPending**: the **receivePayments** capability is not allowed.
+	// The status of the request to add a payment method. Possible values:  * **success**: the payment method was added. * **failure**: the request failed. * **capabilityPending**: the **receivePayments** capability is not allowed. 
 	Status string `json:"status"`
 	// The unique identifier of the [store](https://docs.adyen.com/api-explorer/#/ManagementService/latest/post/merchants/{id}/paymentMethodSettings__reqParam_storeId), if any.
 	StoreId *string `json:"storeId,omitempty"`
@@ -317,7 +316,7 @@ func (o *MidServiceNotificationData) SetVerificationStatus(v string) {
 }
 
 func (o MidServiceNotificationData) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -384,21 +383,23 @@ func (v *NullableMidServiceNotificationData) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *MidServiceNotificationData) isValidStatus() bool {
-	var allowedEnumValues = []string{"success", "failure", "capabilityPending", "dataRequired", "updatesExpected"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetStatus() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "success", "failure", "capabilityPending", "dataRequired", "updatesExpected" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetStatus() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *MidServiceNotificationData) isValidVerificationStatus() bool {
-	var allowedEnumValues = []string{"valid", "pending", "invalid", "rejected"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetVerificationStatus() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "valid", "pending", "invalid", "rejected" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetVerificationStatus() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

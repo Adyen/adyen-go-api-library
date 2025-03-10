@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v19/src/common"
+    "github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // checks if the AchDetails type satisfies the MappedNullable interface at compile time
@@ -19,6 +18,8 @@ var _ common.MappedNullable = &AchDetails{}
 
 // AchDetails struct for AchDetails
 type AchDetails struct {
+	// The account holder type (personal or business).
+	AccountHolderType *string `json:"accountHolderType,omitempty"`
 	// The bank account number (without separators).
 	BankAccountNumber *string `json:"bankAccountNumber,omitempty"`
 	// The bank account type (checking, savings...).
@@ -34,8 +35,8 @@ type AchDetails struct {
 	// The name of the bank account holder. If you submit a name with non-Latin characters, we automatically replace some of them with corresponding Latin characters to meet the FATF recommendations. For example: * χ12 is converted to ch12. * üA is converted to euA. * Peter Møller is converted to Peter Mller, because banks don't accept 'ø'. After replacement, the ownerName must have at least three alphanumeric characters (A-Z, a-z, 0-9), and at least one of them must be a valid Latin character (A-Z, a-z). For example: * John17 - allowed. * J17 - allowed. * 171 - not allowed. * John-7 - allowed. > If provided details don't match the required format, the response returns the error message: 203 'Invalid bank account holder name'.
 	OwnerName *string `json:"ownerName,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
-	// Deprecated since Adyen Checkout API v49
-	// Use `storedPaymentMethodId` instead.
+    // Deprecated since Adyen Checkout API v49
+    // Use `storedPaymentMethodId` instead.
 	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
 	StoredPaymentMethodId *string `json:"storedPaymentMethodId,omitempty"`
@@ -64,6 +65,38 @@ func NewAchDetailsWithDefaults() *AchDetails {
 	var type_ string = "ach"
 	this.Type = &type_
 	return &this
+}
+
+// GetAccountHolderType returns the AccountHolderType field value if set, zero value otherwise.
+func (o *AchDetails) GetAccountHolderType() string {
+	if o == nil || common.IsNil(o.AccountHolderType) {
+		var ret string
+		return ret
+	}
+	return *o.AccountHolderType
+}
+
+// GetAccountHolderTypeOk returns a tuple with the AccountHolderType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AchDetails) GetAccountHolderTypeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.AccountHolderType) {
+		return nil, false
+	}
+	return o.AccountHolderType, true
+}
+
+// HasAccountHolderType returns a boolean if a field has been set.
+func (o *AchDetails) HasAccountHolderType() bool {
+	if o != nil && !common.IsNil(o.AccountHolderType) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccountHolderType gets a reference to the given string and assigns it to the AccountHolderType field.
+func (o *AchDetails) SetAccountHolderType(v string) {
+	o.AccountHolderType = &v
 }
 
 // GetBankAccountNumber returns the BankAccountNumber field value if set, zero value otherwise.
@@ -425,7 +458,7 @@ func (o *AchDetails) SetType(v string) {
 }
 
 func (o AchDetails) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -434,6 +467,9 @@ func (o AchDetails) MarshalJSON() ([]byte, error) {
 
 func (o AchDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.AccountHolderType) {
+		toSerialize["accountHolderType"] = o.AccountHolderType
+	}
 	if !common.IsNil(o.BankAccountNumber) {
 		toSerialize["bankAccountNumber"] = o.BankAccountNumber
 	}
@@ -506,21 +542,32 @@ func (v *NullableAchDetails) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
+func (o *AchDetails) isValidAccountHolderType() bool {
+    var allowedEnumValues = []string{ "business", "personal" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetAccountHolderType() == allowed {
+            return true
+        }
+    }
+    return false
+}
 func (o *AchDetails) isValidBankAccountType() bool {
-	var allowedEnumValues = []string{"balance", "checking", "deposit", "general", "other", "payment", "savings"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetBankAccountType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "balance", "checking", "deposit", "general", "other", "payment", "savings" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetBankAccountType() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *AchDetails) isValidType() bool {
-	var allowedEnumValues = []string{"ach", "ach_plaid"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "ach", "ach_plaid" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

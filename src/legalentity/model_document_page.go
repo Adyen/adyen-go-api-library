@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v19/src/common"
+    "github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // checks if the DocumentPage type satisfies the MappedNullable interface at compile time
@@ -19,9 +18,9 @@ var _ common.MappedNullable = &DocumentPage{}
 
 // DocumentPage struct for DocumentPage
 type DocumentPage struct {
-	PageName   *string `json:"pageName,omitempty"`
-	PageNumber *int32  `json:"pageNumber,omitempty"`
-	Type       *string `json:"type,omitempty"`
+	PageName *string `json:"pageName,omitempty"`
+	PageNumber *int32 `json:"pageNumber,omitempty"`
+	Type *string `json:"type,omitempty"`
 }
 
 // NewDocumentPage instantiates a new DocumentPage object
@@ -138,7 +137,7 @@ func (o *DocumentPage) SetType(v string) {
 }
 
 func (o DocumentPage) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,12 +194,14 @@ func (v *NullableDocumentPage) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *DocumentPage) isValidType() bool {
-	var allowedEnumValues = []string{"BACK", "FRONT", "UNDEFINED"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "BACK", "FRONT", "UNDEFINED" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

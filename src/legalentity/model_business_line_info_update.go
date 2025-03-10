@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v19/src/common"
+    "github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // checks if the BusinessLineInfoUpdate type satisfies the MappedNullable interface at compile time
@@ -22,10 +21,10 @@ type BusinessLineInfoUpdate struct {
 	// A code that represents the industry of your legal entity. For example, **4431A** for computer software stores.
 	IndustryCode *string `json:"industryCode,omitempty"`
 	// A list of channels where goods or services are sold.  Possible values: **pos**, **posMoto**, **eCommerce**, **ecomMoto**, **payByLink**.  Required only in combination with the `service` **paymentProcessing**.
-	SalesChannels []string       `json:"salesChannels,omitempty"`
+	SalesChannels []string `json:"salesChannels,omitempty"`
 	SourceOfFunds *SourceOfFunds `json:"sourceOfFunds,omitempty"`
 	// List of website URLs where your user's goods or services are sold. When this is required for a service but your user does not have an online presence, provide the reason in the `webDataExemption` object.
-	WebData          []WebData         `json:"webData,omitempty"`
+	WebData []WebData `json:"webData,omitempty"`
 	WebDataExemption *WebDataExemption `json:"webDataExemption,omitempty"`
 }
 
@@ -207,7 +206,7 @@ func (o *BusinessLineInfoUpdate) SetWebDataExemption(v WebDataExemption) {
 }
 
 func (o BusinessLineInfoUpdate) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -269,3 +268,6 @@ func (v *NullableBusinessLineInfoUpdate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

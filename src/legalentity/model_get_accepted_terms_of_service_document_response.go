@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v19/src/common"
+    "github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // checks if the GetAcceptedTermsOfServiceDocumentResponse type satisfies the MappedNullable interface at compile time
@@ -175,7 +174,7 @@ func (o *GetAcceptedTermsOfServiceDocumentResponse) SetTermsOfServiceDocumentFor
 }
 
 func (o GetAcceptedTermsOfServiceDocumentResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -235,12 +234,14 @@ func (v *NullableGetAcceptedTermsOfServiceDocumentResponse) UnmarshalJSON(src []
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *GetAcceptedTermsOfServiceDocumentResponse) isValidTermsOfServiceDocumentFormat() bool {
-	var allowedEnumValues = []string{"JSON", "PDF", "TXT"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetTermsOfServiceDocumentFormat() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "JSON", "PDF", "TXT" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetTermsOfServiceDocumentFormat() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v19/src/common"
+    "github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // checks if the VippsDetails type satisfies the MappedNullable interface at compile time
@@ -22,12 +21,12 @@ type VippsDetails struct {
 	// The checkout attempt identifier.
 	CheckoutAttemptId *string `json:"checkoutAttemptId,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
-	// Deprecated since Adyen Checkout API v49
-	// Use `storedPaymentMethodId` instead.
+    // Deprecated since Adyen Checkout API v49
+    // Use `storedPaymentMethodId` instead.
 	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
 	StoredPaymentMethodId *string `json:"storedPaymentMethodId,omitempty"`
-	//
+	// 
 	TelephoneNumber string `json:"telephoneNumber"`
 	// **vipps**
 	Type *string `json:"type,omitempty"`
@@ -214,7 +213,7 @@ func (o *VippsDetails) SetType(v string) {
 }
 
 func (o VippsDetails) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -275,12 +274,14 @@ func (v *NullableVippsDetails) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *VippsDetails) isValidType() bool {
-	var allowedEnumValues = []string{"vipps"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "vipps" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

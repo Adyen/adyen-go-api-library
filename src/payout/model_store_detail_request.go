@@ -10,8 +10,7 @@ package payout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v19/src/common"
+    "github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // checks if the StoreDetailRequest type satisfies the MappedNullable interface at compile time
@@ -21,9 +20,9 @@ var _ common.MappedNullable = &StoreDetailRequest{}
 type StoreDetailRequest struct {
 	// This field contains additional data, which may be required for a particular request.
 	AdditionalData *map[string]string `json:"additionalData,omitempty"`
-	Bank           *BankAccount       `json:"bank,omitempty"`
-	BillingAddress *Address           `json:"billingAddress,omitempty"`
-	Card           *Card              `json:"card,omitempty"`
+	Bank *BankAccount `json:"bank,omitempty"`
+	BillingAddress *Address `json:"billingAddress,omitempty"`
+	Card *Card `json:"card,omitempty"`
 	// The date of birth. Format: [ISO-8601](https://www.w3.org/TR/NOTE-datetime); example: YYYY-MM-DD For Paysafecard it must be the same as used when registering the Paysafecard account. > This field is mandatory for natural persons.
 	DateOfBirth string `json:"dateOfBirth"`
 	// The type of the entity the payout is processed for.
@@ -33,13 +32,13 @@ type StoreDetailRequest struct {
 	// The merchant account identifier, with which you want to process the transaction.
 	MerchantAccount string `json:"merchantAccount"`
 	// The shopper's nationality.  A valid value is an ISO 2-character country code (e.g. 'NL').
-	Nationality string    `json:"nationality"`
-	Recurring   Recurring `json:"recurring"`
+	Nationality string `json:"nationality"`
+	Recurring Recurring `json:"recurring"`
 	// The name of the brand to make a payout to.  For Paysafecard it must be set to `paysafecard`.
 	SelectedBrand *string `json:"selectedBrand,omitempty"`
 	// The shopper's email address.
 	ShopperEmail string `json:"shopperEmail"`
-	ShopperName  *Name  `json:"shopperName,omitempty"`
+	ShopperName *Name `json:"shopperName,omitempty"`
 	// The shopper's reference for the payment transaction.
 	ShopperReference string `json:"shopperReference"`
 	// The shopper's social security number.
@@ -529,7 +528,7 @@ func (o *StoreDetailRequest) SetTelephoneNumber(v string) {
 }
 
 func (o StoreDetailRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -611,12 +610,14 @@ func (v *NullableStoreDetailRequest) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *StoreDetailRequest) isValidEntityType() bool {
-	var allowedEnumValues = []string{"NaturalPerson", "Company"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetEntityType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "NaturalPerson", "Company" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetEntityType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v19/src/common"
+    "github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // checks if the User type satisfies the MappedNullable interface at compile time
@@ -29,8 +28,8 @@ type User struct {
 	// The email address of the user.
 	Email string `json:"email"`
 	// The unique identifier of the user.
-	Id   string `json:"id"`
-	Name *Name  `json:"name,omitempty"`
+	Id string `json:"id"`
+	Name *Name `json:"name,omitempty"`
 	// The list of [roles](https://docs.adyen.com/account/user-roles) for this user.
 	Roles []string `json:"roles"`
 	// The [tz database name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) of the time zone of the user. For example, **Europe/Amsterdam**.
@@ -342,7 +341,7 @@ func (o *User) SetUsername(v string) {
 }
 
 func (o User) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -409,3 +408,6 @@ func (v *NullableUser) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

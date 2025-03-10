@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v19/src/common"
+    "github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // checks if the UpdateSplitConfigurationRuleRequest type satisfies the MappedNullable interface at compile time
@@ -21,7 +20,7 @@ var _ common.MappedNullable = &UpdateSplitConfigurationRuleRequest{}
 type UpdateSplitConfigurationRuleRequest struct {
 	// The currency condition that defines whether the split logic applies. Its value must be a three-character [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217).
 	Currency string `json:"currency"`
-	// The funding source condition of the payment method (only for cards).  Possible values: **credit**, **debit**, or **ANY**.
+	// The funding source of the payment method. This only applies to card transactions.  Possible values: * **credit** * **debit** * **prepaid** * **deferred_debit** * **charged** * **ANY**
 	FundingSource *string `json:"fundingSource,omitempty"`
 	// The payment method condition that defines whether the split logic applies.  Possible values: * [Payment method variant](https://docs.adyen.com/development-resources/paymentmethodvariant): Apply the split logic for a specific payment method. * **ANY**: Apply the split logic for all available payment methods.
 	PaymentMethod string `json:"paymentMethod"`
@@ -154,7 +153,7 @@ func (o *UpdateSplitConfigurationRuleRequest) SetShopperInteraction(v string) {
 }
 
 func (o UpdateSplitConfigurationRuleRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -207,3 +206,6 @@ func (v *NullableUpdateSplitConfigurationRuleRequest) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

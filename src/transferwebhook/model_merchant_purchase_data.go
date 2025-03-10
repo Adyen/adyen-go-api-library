@@ -10,8 +10,7 @@ package transferwebhook
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v19/src/common"
+    "github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // checks if the MerchantPurchaseData type satisfies the MappedNullable interface at compile time
@@ -20,6 +19,8 @@ var _ common.MappedNullable = &MerchantPurchaseData{}
 // MerchantPurchaseData struct for MerchantPurchaseData
 type MerchantPurchaseData struct {
 	Airline *Airline `json:"airline,omitempty"`
+	// Lodging information.
+	Lodging []Lodging `json:"lodging,omitempty"`
 	// The type of events data.   Possible values:    - **merchantPurchaseData**: merchant purchase data
 	Type string `json:"type"`
 }
@@ -76,6 +77,38 @@ func (o *MerchantPurchaseData) SetAirline(v Airline) {
 	o.Airline = &v
 }
 
+// GetLodging returns the Lodging field value if set, zero value otherwise.
+func (o *MerchantPurchaseData) GetLodging() []Lodging {
+	if o == nil || common.IsNil(o.Lodging) {
+		var ret []Lodging
+		return ret
+	}
+	return o.Lodging
+}
+
+// GetLodgingOk returns a tuple with the Lodging field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MerchantPurchaseData) GetLodgingOk() ([]Lodging, bool) {
+	if o == nil || common.IsNil(o.Lodging) {
+		return nil, false
+	}
+	return o.Lodging, true
+}
+
+// HasLodging returns a boolean if a field has been set.
+func (o *MerchantPurchaseData) HasLodging() bool {
+	if o != nil && !common.IsNil(o.Lodging) {
+		return true
+	}
+
+	return false
+}
+
+// SetLodging gets a reference to the given []Lodging and assigns it to the Lodging field.
+func (o *MerchantPurchaseData) SetLodging(v []Lodging) {
+	o.Lodging = v
+}
+
 // GetType returns the Type field value
 func (o *MerchantPurchaseData) GetType() string {
 	if o == nil {
@@ -101,7 +134,7 @@ func (o *MerchantPurchaseData) SetType(v string) {
 }
 
 func (o MerchantPurchaseData) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -112,6 +145,9 @@ func (o MerchantPurchaseData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.Airline) {
 		toSerialize["airline"] = o.Airline
+	}
+	if !common.IsNil(o.Lodging) {
+		toSerialize["lodging"] = o.Lodging
 	}
 	toSerialize["type"] = o.Type
 	return toSerialize, nil
@@ -153,12 +189,14 @@ func (v *NullableMerchantPurchaseData) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *MerchantPurchaseData) isValidType() bool {
-	var allowedEnumValues = []string{"merchantPurchaseData"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "merchantPurchaseData" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+
