@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v19/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // checks if the PaymentReversalResponse type satisfies the MappedNullable interface at compile time
@@ -20,7 +21,7 @@ var _ common.MappedNullable = &PaymentReversalResponse{}
 type PaymentReversalResponse struct {
 	// The merchant account that is used to process the payment.
 	MerchantAccount string `json:"merchantAccount"`
-	// The [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference) of the payment to reverse. 
+	// The [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference) of the payment to reverse.
 	PaymentPspReference string `json:"paymentPspReference"`
 	// Adyen's 16-character reference associated with the reversal request.
 	PspReference string `json:"pspReference"`
@@ -180,7 +181,7 @@ func (o *PaymentReversalResponse) SetStatus(v string) {
 }
 
 func (o PaymentReversalResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -235,14 +236,12 @@ func (v *NullablePaymentReversalResponse) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *PaymentReversalResponse) isValidStatus() bool {
-    var allowedEnumValues = []string{ "received" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetStatus() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"received"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetStatus() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

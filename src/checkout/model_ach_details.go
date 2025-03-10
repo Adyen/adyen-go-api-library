@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v19/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // checks if the AchDetails type satisfies the MappedNullable interface at compile time
@@ -35,8 +36,8 @@ type AchDetails struct {
 	// The name of the bank account holder. If you submit a name with non-Latin characters, we automatically replace some of them with corresponding Latin characters to meet the FATF recommendations. For example: * χ12 is converted to ch12. * üA is converted to euA. * Peter Møller is converted to Peter Mller, because banks don't accept 'ø'. After replacement, the ownerName must have at least three alphanumeric characters (A-Z, a-z, 0-9), and at least one of them must be a valid Latin character (A-Z, a-z). For example: * John17 - allowed. * J17 - allowed. * 171 - not allowed. * John-7 - allowed. > If provided details don't match the required format, the response returns the error message: 203 'Invalid bank account holder name'.
 	OwnerName *string `json:"ownerName,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
-    // Deprecated since Adyen Checkout API v49
-    // Use `storedPaymentMethodId` instead.
+	// Deprecated since Adyen Checkout API v49
+	// Use `storedPaymentMethodId` instead.
 	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
 	StoredPaymentMethodId *string `json:"storedPaymentMethodId,omitempty"`
@@ -458,7 +459,7 @@ func (o *AchDetails) SetType(v string) {
 }
 
 func (o AchDetails) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -542,32 +543,30 @@ func (v *NullableAchDetails) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *AchDetails) isValidAccountHolderType() bool {
-    var allowedEnumValues = []string{ "business", "personal" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetAccountHolderType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"business", "personal"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetAccountHolderType() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *AchDetails) isValidBankAccountType() bool {
-    var allowedEnumValues = []string{ "balance", "checking", "deposit", "general", "other", "payment", "savings" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetBankAccountType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"balance", "checking", "deposit", "general", "other", "payment", "savings"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetBankAccountType() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *AchDetails) isValidType() bool {
-    var allowedEnumValues = []string{ "ach", "ach_plaid" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"ach", "ach_plaid"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

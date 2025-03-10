@@ -10,7 +10,8 @@ package management
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v19/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // checks if the TerminalAssignment type satisfies the MappedNullable interface at compile time
@@ -21,9 +22,9 @@ type TerminalAssignment struct {
 	// The unique identifier of the company account to which terminal is assigned.
 	CompanyId string `json:"companyId"`
 	// The unique identifier of the merchant account to which terminal is assigned.
-	MerchantId *string `json:"merchantId,omitempty"`
+	MerchantId         *string                     `json:"merchantId,omitempty"`
 	ReassignmentTarget *TerminalReassignmentTarget `json:"reassignmentTarget,omitempty"`
-	// The status of the reassignment. Possible values:   * `reassignmentInProgress`: the terminal was boarded and is now scheduled to remove the configuration. Wait for the terminal to synchronize with the Adyen platform.  * `deployed`: the terminal is deployed and reassigned.   * `inventory`: the terminal is in inventory and cannot process transactions.   * `boarded`: the terminal is boarded to a store, or a merchant account representing a store, and can process transactions.  
+	// The status of the reassignment. Possible values:   * `reassignmentInProgress`: the terminal was boarded and is now scheduled to remove the configuration. Wait for the terminal to synchronize with the Adyen platform.  * `deployed`: the terminal is deployed and reassigned.   * `inventory`: the terminal is in inventory and cannot process transactions.   * `boarded`: the terminal is boarded to a store, or a merchant account representing a store, and can process transactions.
 	Status string `json:"status"`
 	// The unique identifier of the store to which terminal is assigned.
 	StoreId *string `json:"storeId,omitempty"`
@@ -193,7 +194,7 @@ func (o *TerminalAssignment) SetStoreId(v string) {
 }
 
 func (o TerminalAssignment) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -252,14 +253,12 @@ func (v *NullableTerminalAssignment) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *TerminalAssignment) isValidStatus() bool {
-    var allowedEnumValues = []string{ "boarded", "deployed", "inventory", "reassignmentInProgress" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetStatus() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"boarded", "deployed", "inventory", "reassignmentInProgress"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetStatus() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

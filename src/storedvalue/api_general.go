@@ -10,10 +10,10 @@ package storedvalue
 
 import (
 	"context"
-    "net/http"
-    "net/url"
-    "strings"
-    "github.com/adyen/adyen-go-api-library/v19/src/common"
+	"net/http"
+	"net/url"
+
+	"github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // GeneralApi service
@@ -29,15 +29,13 @@ func (r GeneralApiChangeStatusInput) StoredValueStatusChangeRequest(storedValueS
 	return r
 }
 
-
 /*
 Prepare a request for ChangeStatus
 
 @return GeneralApiChangeStatusInput
 */
 func (a *GeneralApi) ChangeStatusInput() GeneralApiChangeStatusInput {
-	return GeneralApiChangeStatusInput{
-	}
+	return GeneralApiChangeStatusInput{}
 }
 
 /*
@@ -50,25 +48,23 @@ Changes the status of the provided payment method to the specified status.
 @return StoredValueStatusChangeResponse, *http.Response, error
 */
 func (a *GeneralApi) ChangeStatus(ctx context.Context, r GeneralApiChangeStatusInput) (StoredValueStatusChangeResponse, *http.Response, error) {
-    res := &StoredValueStatusChangeResponse{}
+	res := &StoredValueStatusChangeResponse{}
 	path := "/changeStatus"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.storedValueStatusChangeRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.storedValueStatusChangeRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by GeneralApi.CheckBalance
 type GeneralApiCheckBalanceInput struct {
@@ -80,15 +76,13 @@ func (r GeneralApiCheckBalanceInput) StoredValueBalanceCheckRequest(storedValueB
 	return r
 }
 
-
 /*
 Prepare a request for CheckBalance
 
 @return GeneralApiCheckBalanceInput
 */
 func (a *GeneralApi) CheckBalanceInput() GeneralApiCheckBalanceInput {
-	return GeneralApiCheckBalanceInput{
-	}
+	return GeneralApiCheckBalanceInput{}
 }
 
 /*
@@ -101,25 +95,23 @@ Checks the balance of the provided payment method.
 @return StoredValueBalanceCheckResponse, *http.Response, error
 */
 func (a *GeneralApi) CheckBalance(ctx context.Context, r GeneralApiCheckBalanceInput) (StoredValueBalanceCheckResponse, *http.Response, error) {
-    res := &StoredValueBalanceCheckResponse{}
+	res := &StoredValueBalanceCheckResponse{}
 	path := "/checkBalance"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.storedValueBalanceCheckRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.storedValueBalanceCheckRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by GeneralApi.Issue
 type GeneralApiIssueInput struct {
@@ -131,15 +123,13 @@ func (r GeneralApiIssueInput) StoredValueIssueRequest(storedValueIssueRequest St
 	return r
 }
 
-
 /*
 Prepare a request for Issue
 
 @return GeneralApiIssueInput
 */
 func (a *GeneralApi) IssueInput() GeneralApiIssueInput {
-	return GeneralApiIssueInput{
-	}
+	return GeneralApiIssueInput{}
 }
 
 /*
@@ -152,25 +142,23 @@ Issues a new card of the given payment method.
 @return StoredValueIssueResponse, *http.Response, error
 */
 func (a *GeneralApi) Issue(ctx context.Context, r GeneralApiIssueInput) (StoredValueIssueResponse, *http.Response, error) {
-    res := &StoredValueIssueResponse{}
+	res := &StoredValueIssueResponse{}
 	path := "/issue"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.storedValueIssueRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.storedValueIssueRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by GeneralApi.Load
 type GeneralApiLoadInput struct {
@@ -182,15 +170,13 @@ func (r GeneralApiLoadInput) StoredValueLoadRequest(storedValueLoadRequest Store
 	return r
 }
 
-
 /*
 Prepare a request for Load
 
 @return GeneralApiLoadInput
 */
 func (a *GeneralApi) LoadInput() GeneralApiLoadInput {
-	return GeneralApiLoadInput{
-	}
+	return GeneralApiLoadInput{}
 }
 
 /*
@@ -203,25 +189,23 @@ Loads the payment method with the specified funds.
 @return StoredValueLoadResponse, *http.Response, error
 */
 func (a *GeneralApi) Load(ctx context.Context, r GeneralApiLoadInput) (StoredValueLoadResponse, *http.Response, error) {
-    res := &StoredValueLoadResponse{}
+	res := &StoredValueLoadResponse{}
 	path := "/load"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.storedValueLoadRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.storedValueLoadRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by GeneralApi.MergeBalance
 type GeneralApiMergeBalanceInput struct {
@@ -233,15 +217,13 @@ func (r GeneralApiMergeBalanceInput) StoredValueBalanceMergeRequest(storedValueB
 	return r
 }
 
-
 /*
 Prepare a request for MergeBalance
 
 @return GeneralApiMergeBalanceInput
 */
 func (a *GeneralApi) MergeBalanceInput() GeneralApiMergeBalanceInput {
-	return GeneralApiMergeBalanceInput{
-	}
+	return GeneralApiMergeBalanceInput{}
 }
 
 /*
@@ -254,25 +236,23 @@ Increases the balance of the paymentmethod by the full amount left on the source
 @return StoredValueBalanceMergeResponse, *http.Response, error
 */
 func (a *GeneralApi) MergeBalance(ctx context.Context, r GeneralApiMergeBalanceInput) (StoredValueBalanceMergeResponse, *http.Response, error) {
-    res := &StoredValueBalanceMergeResponse{}
+	res := &StoredValueBalanceMergeResponse{}
 	path := "/mergeBalance"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.storedValueBalanceMergeRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.storedValueBalanceMergeRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by GeneralApi.VoidTransaction
 type GeneralApiVoidTransactionInput struct {
@@ -284,15 +264,13 @@ func (r GeneralApiVoidTransactionInput) StoredValueVoidRequest(storedValueVoidRe
 	return r
 }
 
-
 /*
 Prepare a request for VoidTransaction
 
 @return GeneralApiVoidTransactionInput
 */
 func (a *GeneralApi) VoidTransactionInput() GeneralApiVoidTransactionInput {
-	return GeneralApiVoidTransactionInput{
-	}
+	return GeneralApiVoidTransactionInput{}
 }
 
 /*
@@ -305,22 +283,20 @@ Voids the referenced stored value transaction.
 @return StoredValueVoidResponse, *http.Response, error
 */
 func (a *GeneralApi) VoidTransaction(ctx context.Context, r GeneralApiVoidTransactionInput) (StoredValueVoidResponse, *http.Response, error) {
-    res := &StoredValueVoidResponse{}
+	res := &StoredValueVoidResponse{}
 	path := "/voidTransaction"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.storedValueVoidRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.storedValueVoidRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-

@@ -10,7 +10,8 @@ package management
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v19/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // checks if the CreateMerchantApiCredentialRequest type satisfies the MappedNullable interface at compile time
@@ -140,7 +141,7 @@ func (o *CreateMerchantApiCredentialRequest) SetRoles(v []string) {
 }
 
 func (o CreateMerchantApiCredentialRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,6 +197,3 @@ func (v *NullableCreateMerchantApiCredentialRequest) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

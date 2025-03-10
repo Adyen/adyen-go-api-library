@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v19/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // checks if the StoredPaymentMethodDetails type satisfies the MappedNullable interface at compile time
@@ -21,8 +22,8 @@ type StoredPaymentMethodDetails struct {
 	// The checkout attempt identifier.
 	CheckoutAttemptId *string `json:"checkoutAttemptId,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
-    // Deprecated since Adyen Checkout API v49
-    // Use `storedPaymentMethodId` instead.
+	// Deprecated since Adyen Checkout API v49
+	// Use `storedPaymentMethodId` instead.
 	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
 	StoredPaymentMethodId *string `json:"storedPaymentMethodId,omitempty"`
@@ -182,7 +183,7 @@ func (o *StoredPaymentMethodDetails) SetType(v string) {
 }
 
 func (o StoredPaymentMethodDetails) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -242,14 +243,12 @@ func (v *NullableStoredPaymentMethodDetails) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *StoredPaymentMethodDetails) isValidType() bool {
-    var allowedEnumValues = []string{ "bcmc_mobile", "bcmc_mobile_QR", "bcmc_mobile_app", "momo_wallet", "momo_wallet_app", "paymaya_wallet", "grabpay_SG", "grabpay_MY", "grabpay_TH", "grabpay_ID", "grabpay_VN", "grabpay_PH", "oxxo", "gcash", "dana", "kakaopay", "truemoney" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"bcmc_mobile", "bcmc_mobile_QR", "bcmc_mobile_app", "momo_wallet", "momo_wallet_app", "paymaya_wallet", "grabpay_SG", "grabpay_MY", "grabpay_TH", "grabpay_ID", "grabpay_VN", "grabpay_PH", "oxxo", "gcash", "dana", "kakaopay", "truemoney"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

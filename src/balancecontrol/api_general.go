@@ -10,10 +10,10 @@ package balancecontrol
 
 import (
 	"context"
-    "net/http"
-    "net/url"
-    "strings"
-    "github.com/adyen/adyen-go-api-library/v19/src/common"
+	"net/http"
+	"net/url"
+
+	"github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // GeneralApi service
@@ -29,7 +29,6 @@ func (r GeneralApiBalanceTransferInput) BalanceTransferRequest(balanceTransferRe
 	return r
 }
 
-
 /*
 Prepare a request for BalanceTransfer
 
@@ -38,8 +37,7 @@ Prepare a request for BalanceTransfer
 Deprecated since Adyen Balance Control API v1
 */
 func (a *GeneralApi) BalanceTransferInput() GeneralApiBalanceTransferInput {
-	return GeneralApiBalanceTransferInput{
-	}
+	return GeneralApiBalanceTransferInput{}
 }
 
 /*
@@ -63,22 +61,20 @@ When sending multiple API requests with the same source and destination merchant
 Deprecated since Adyen Balance Control API v1
 */
 func (a *GeneralApi) BalanceTransfer(ctx context.Context, r GeneralApiBalanceTransferInput) (BalanceTransferResponse, *http.Response, error) {
-    res := &BalanceTransferResponse{}
+	res := &BalanceTransferResponse{}
 	path := "/balanceTransfer"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.balanceTransferRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.balanceTransferRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-

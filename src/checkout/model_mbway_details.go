@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v19/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // checks if the MbwayDetails type satisfies the MappedNullable interface at compile time
@@ -20,9 +21,9 @@ var _ common.MappedNullable = &MbwayDetails{}
 type MbwayDetails struct {
 	// The checkout attempt identifier.
 	CheckoutAttemptId *string `json:"checkoutAttemptId,omitempty"`
-	// 
+	//
 	ShopperEmail string `json:"shopperEmail"`
-	// 
+	//
 	TelephoneNumber string `json:"telephoneNumber"`
 	// **mbway**
 	Type *string `json:"type,omitempty"`
@@ -164,7 +165,7 @@ func (o *MbwayDetails) SetType(v string) {
 }
 
 func (o MbwayDetails) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -220,14 +221,12 @@ func (v *NullableMbwayDetails) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *MbwayDetails) isValidType() bool {
-    var allowedEnumValues = []string{ "mbway" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"mbway"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

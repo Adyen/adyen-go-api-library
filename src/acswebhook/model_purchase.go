@@ -10,8 +10,9 @@ package acswebhook
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v19/src/common"
 	"time"
+
+	"github.com/adyen/adyen-go-api-library/v19/src/common"
 )
 
 // checks if the Purchase type satisfies the MappedNullable interface at compile time
@@ -22,7 +23,7 @@ type Purchase struct {
 	// The time of the purchase.
 	Date time.Time `json:"date"`
 	// The name of the merchant.
-	MerchantName string `json:"merchantName"`
+	MerchantName   string `json:"merchantName"`
 	OriginalAmount Amount `json:"originalAmount"`
 }
 
@@ -119,7 +120,7 @@ func (o *Purchase) SetOriginalAmount(v Amount) {
 }
 
 func (o Purchase) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -169,6 +170,3 @@ func (v *NullablePurchase) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-
