@@ -19,6 +19,8 @@ var _ common.MappedNullable = &AchDetails{}
 
 // AchDetails struct for AchDetails
 type AchDetails struct {
+	// The account holder type (personal or business).
+	AccountHolderType *string `json:"accountHolderType,omitempty"`
 	// The bank account number (without separators).
 	BankAccountNumber *string `json:"bankAccountNumber,omitempty"`
 	// The bank account type (checking, savings...).
@@ -64,6 +66,38 @@ func NewAchDetailsWithDefaults() *AchDetails {
 	var type_ string = "ach"
 	this.Type = &type_
 	return &this
+}
+
+// GetAccountHolderType returns the AccountHolderType field value if set, zero value otherwise.
+func (o *AchDetails) GetAccountHolderType() string {
+	if o == nil || common.IsNil(o.AccountHolderType) {
+		var ret string
+		return ret
+	}
+	return *o.AccountHolderType
+}
+
+// GetAccountHolderTypeOk returns a tuple with the AccountHolderType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AchDetails) GetAccountHolderTypeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.AccountHolderType) {
+		return nil, false
+	}
+	return o.AccountHolderType, true
+}
+
+// HasAccountHolderType returns a boolean if a field has been set.
+func (o *AchDetails) HasAccountHolderType() bool {
+	if o != nil && !common.IsNil(o.AccountHolderType) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccountHolderType gets a reference to the given string and assigns it to the AccountHolderType field.
+func (o *AchDetails) SetAccountHolderType(v string) {
+	o.AccountHolderType = &v
 }
 
 // GetBankAccountNumber returns the BankAccountNumber field value if set, zero value otherwise.
@@ -434,6 +468,9 @@ func (o AchDetails) MarshalJSON() ([]byte, error) {
 
 func (o AchDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.AccountHolderType) {
+		toSerialize["accountHolderType"] = o.AccountHolderType
+	}
 	if !common.IsNil(o.BankAccountNumber) {
 		toSerialize["bankAccountNumber"] = o.BankAccountNumber
 	}
@@ -506,6 +543,15 @@ func (v *NullableAchDetails) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+func (o *AchDetails) isValidAccountHolderType() bool {
+	var allowedEnumValues = []string{"business", "personal"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetAccountHolderType() == allowed {
+			return true
+		}
+	}
+	return false
+}
 func (o *AchDetails) isValidBankAccountType() bool {
 	var allowedEnumValues = []string{"balance", "checking", "deposit", "general", "other", "payment", "savings"}
 	for _, allowed := range allowedEnumValues {

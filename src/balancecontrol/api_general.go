@@ -33,6 +33,8 @@ func (r GeneralApiBalanceTransferInput) BalanceTransferRequest(balanceTransferRe
 Prepare a request for BalanceTransfer
 
 @return GeneralApiBalanceTransferInput
+
+Deprecated since Adyen Balance Control API v1
 */
 func (a *GeneralApi) BalanceTransferInput() GeneralApiBalanceTransferInput {
 	return GeneralApiBalanceTransferInput{}
@@ -55,6 +57,8 @@ When sending multiple API requests with the same source and destination merchant
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r GeneralApiBalanceTransferInput - Request parameters, see BalanceTransferInput
 @return BalanceTransferResponse, *http.Response, error
+
+Deprecated since Adyen Balance Control API v1
 */
 func (a *GeneralApi) BalanceTransfer(ctx context.Context, r GeneralApiBalanceTransferInput) (BalanceTransferResponse, *http.Response, error) {
 	res := &BalanceTransferResponse{}

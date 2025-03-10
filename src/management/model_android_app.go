@@ -409,3 +409,13 @@ func (v *NullableAndroidApp) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *AndroidApp) isValidStatus() bool {
+	var allowedEnumValues = []string{"archived", "error", "invalid", "processing", "ready"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetStatus() == allowed {
+			return true
+		}
+	}
+	return false
+}

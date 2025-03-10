@@ -53,6 +53,7 @@ type CheckoutPaymentMethod struct {
 	PayUUpiDetails                    *PayUUpiDetails
 	PayWithGoogleDetails              *PayWithGoogleDetails
 	PaymentDetails                    *PaymentDetails
+	PixDetails                        *PixDetails
 	PseDetails                        *PseDetails
 	RatepayDetails                    *RatepayDetails
 	RivertyDetails                    *RivertyDetails
@@ -332,6 +333,13 @@ func PayWithGoogleDetailsAsCheckoutPaymentMethod(v *PayWithGoogleDetails) Checko
 func PaymentDetailsAsCheckoutPaymentMethod(v *PaymentDetails) CheckoutPaymentMethod {
 	return CheckoutPaymentMethod{
 		PaymentDetails: v,
+	}
+}
+
+// PixDetailsAsCheckoutPaymentMethod is a convenience function that returns PixDetails wrapped in CheckoutPaymentMethod
+func PixDetailsAsCheckoutPaymentMethod(v *PixDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
+		PixDetails: v,
 	}
 }
 
@@ -931,6 +939,19 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		dst.PaymentDetails = nil
 	}
 
+	// try to unmarshal data into PixDetails
+	err = json.Unmarshal(data, &dst.PixDetails)
+	if err == nil {
+		jsonPixDetails, _ := json.Marshal(dst.PixDetails)
+		if string(jsonPixDetails) == "{}" || !dst.PixDetails.isValidType() { // empty struct
+			dst.PixDetails = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.PixDetails = nil
+	}
+
 	// try to unmarshal data into PseDetails
 	err = json.Unmarshal(data, &dst.PseDetails)
 	if err == nil {
@@ -1153,6 +1174,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		dst.PayUUpiDetails = nil
 		dst.PayWithGoogleDetails = nil
 		dst.PaymentDetails = nil
+		dst.PixDetails = nil
 		dst.PseDetails = nil
 		dst.RatepayDetails = nil
 		dst.RivertyDetails = nil
@@ -1328,6 +1350,10 @@ func (src CheckoutPaymentMethod) MarshalJSON() ([]byte, error) {
 
 	if src.PaymentDetails != nil {
 		return json.Marshal(&src.PaymentDetails)
+	}
+
+	if src.PixDetails != nil {
+		return json.Marshal(&src.PixDetails)
 	}
 
 	if src.PseDetails != nil {
@@ -1544,6 +1570,10 @@ func (obj *CheckoutPaymentMethod) GetActualInstance() interface{} {
 
 	if obj.PaymentDetails != nil {
 		return obj.PaymentDetails
+	}
+
+	if obj.PixDetails != nil {
+		return obj.PixDetails
 	}
 
 	if obj.PseDetails != nil {

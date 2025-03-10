@@ -200,7 +200,7 @@ func (v *NullablePaymentMethodScheduledForRemovalNotificationRequest) UnmarshalJ
 }
 
 func (o *PaymentMethodScheduledForRemovalNotificationRequest) isValidType() bool {
-	var allowedEnumValues = []string{"paymentMethod.requestScheduledForRemoval"}
+	var allowedEnumValues = []string{"paymentMethodRequest.scheduledForRemoval"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

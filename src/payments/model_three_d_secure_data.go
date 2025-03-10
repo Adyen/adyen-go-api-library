@@ -19,7 +19,7 @@ var _ common.MappedNullable = &ThreeDSecureData{}
 
 // ThreeDSecureData struct for ThreeDSecureData
 type ThreeDSecureData struct {
-	// In 3D Secure 1, the authentication response if the shopper was redirected.  In 3D Secure 2, this is the `transStatus` from the challenge result. If the transaction was frictionless, omit this parameter.
+	// In 3D Secure 2, this is the `transStatus` from the challenge result. If the transaction was frictionless, omit this parameter.
 	AuthenticationResponse *string `json:"authenticationResponse,omitempty"`
 	// The cardholder authentication value (base64 encoded, 20 bytes in a decoded form).
 	Cavv *string `json:"cavv,omitempty"`
@@ -27,7 +27,7 @@ type ThreeDSecureData struct {
 	CavvAlgorithm *string `json:"cavvAlgorithm,omitempty"`
 	// Indicator informing the Access Control Server (ACS) and the Directory Server (DS) that the authentication has been cancelled. For possible values, refer to [3D Secure API reference](https://docs.adyen.com/online-payments/3d-secure/api-reference#mpidata).
 	ChallengeCancel *string `json:"challengeCancel,omitempty"`
-	// In 3D Secure 1, this is the enrollment response from the 3D directory server.  In 3D Secure 2, this is the `transStatus` from the `ARes`.
+	// In 3D Secure 2, this is the `transStatus` from the `ARes`.
 	DirectoryResponse *string `json:"directoryResponse,omitempty"`
 	// Supported for 3D Secure 2. The unique transaction identifier assigned by the Directory Server (DS) to identify a single transaction.
 	DsTransID *string `json:"dsTransID,omitempty"`

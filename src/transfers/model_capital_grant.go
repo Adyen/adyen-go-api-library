@@ -30,7 +30,7 @@ type CapitalGrant struct {
 	// The identifier of the grant reference.
 	Id        string     `json:"id"`
 	Repayment *Repayment `json:"repayment,omitempty"`
-	// The current status of the grant. Possible values: **Pending**, **Active**, **Repaid**.
+	// The current status of the grant. Possible values: **Pending**, **Active**, **Repaid**, **WrittenOff**, **Failed**, **Revoked**.
 	Status string `json:"status"`
 }
 
@@ -371,7 +371,7 @@ func (v *NullableCapitalGrant) UnmarshalJSON(src []byte) error {
 }
 
 func (o *CapitalGrant) isValidStatus() bool {
-	var allowedEnumValues = []string{"Pending", "Active", "Repaid"}
+	var allowedEnumValues = []string{"Pending", "Active", "Repaid", "Failed", "WrittenOff", "Revoked"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetStatus() == allowed {
 			return true

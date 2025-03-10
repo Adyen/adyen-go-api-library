@@ -21,7 +21,7 @@ var _ common.MappedNullable = &TransferEvent{}
 // TransferEvent struct for TransferEvent
 type TransferEvent struct {
 	Amount *Amount `json:"amount,omitempty"`
-	// The amount adjustments in this transfer.
+	// The amount adjustments in this transfer. Only applicable for [issuing](https://docs.adyen.com/issuing/) integrations.
 	AmountAdjustments []AmountAdjustment `json:"amountAdjustments,omitempty"`
 	// Scheme unique arn identifier useful for tracing captures, chargebacks, refunds, etc.
 	Arn *string `json:"arn,omitempty"`

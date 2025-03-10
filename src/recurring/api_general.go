@@ -1,5 +1,5 @@
 /*
-Adyen Recurring API
+Adyen Recurring API (deprecated)
 
 API version: 68
 */
@@ -33,6 +33,8 @@ func (r GeneralApiCreatePermitInput) CreatePermitRequest(createPermitRequest Cre
 Prepare a request for CreatePermit
 
 @return GeneralApiCreatePermitInput
+
+Deprecated since Adyen Recurring API (deprecated) v68
 */
 func (a *GeneralApi) CreatePermitInput() GeneralApiCreatePermitInput {
 	return GeneralApiCreatePermitInput{}
@@ -46,6 +48,8 @@ Create permits for a recurring contract, including support for defining restrict
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r GeneralApiCreatePermitInput - Request parameters, see CreatePermitInput
 @return CreatePermitResult, *http.Response, error
+
+Deprecated since Adyen Recurring API (deprecated) v68
 */
 func (a *GeneralApi) CreatePermit(ctx context.Context, r GeneralApiCreatePermitInput) (CreatePermitResult, *http.Response, error) {
 	res := &CreatePermitResult{}
@@ -80,6 +84,8 @@ func (r GeneralApiDisableInput) DisableRequest(disableRequest DisableRequest) Ge
 Prepare a request for Disable
 
 @return GeneralApiDisableInput
+
+Deprecated since Adyen Recurring API (deprecated) v68
 */
 func (a *GeneralApi) DisableInput() GeneralApiDisableInput {
 	return GeneralApiDisableInput{}
@@ -95,6 +101,8 @@ For more information, refer to [Disable stored details](https://docs.adyen.com/c
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r GeneralApiDisableInput - Request parameters, see DisableInput
 @return DisableResult, *http.Response, error
+
+Deprecated since Adyen Recurring API (deprecated) v68
 */
 func (a *GeneralApi) Disable(ctx context.Context, r GeneralApiDisableInput) (DisableResult, *http.Response, error) {
 	res := &DisableResult{}
@@ -129,6 +137,8 @@ func (r GeneralApiDisablePermitInput) DisablePermitRequest(disablePermitRequest 
 Prepare a request for DisablePermit
 
 @return GeneralApiDisablePermitInput
+
+Deprecated since Adyen Recurring API (deprecated) v68
 */
 func (a *GeneralApi) DisablePermitInput() GeneralApiDisablePermitInput {
 	return GeneralApiDisablePermitInput{}
@@ -142,6 +152,8 @@ Disable a permit that was previously linked to a recurringDetailReference.
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r GeneralApiDisablePermitInput - Request parameters, see DisablePermitInput
 @return DisablePermitResult, *http.Response, error
+
+Deprecated since Adyen Recurring API (deprecated) v68
 */
 func (a *GeneralApi) DisablePermit(ctx context.Context, r GeneralApiDisablePermitInput) (DisablePermitResult, *http.Response, error) {
 	res := &DisablePermitResult{}
@@ -176,6 +188,8 @@ func (r GeneralApiListRecurringDetailsInput) RecurringDetailsRequest(recurringDe
 Prepare a request for ListRecurringDetails
 
 @return GeneralApiListRecurringDetailsInput
+
+Deprecated since Adyen Recurring API (deprecated) v68
 */
 func (a *GeneralApi) ListRecurringDetailsInput() GeneralApiListRecurringDetailsInput {
 	return GeneralApiListRecurringDetailsInput{}
@@ -191,6 +205,8 @@ For more information, refer to [Retrieve stored details](https://docs.adyen.com/
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r GeneralApiListRecurringDetailsInput - Request parameters, see ListRecurringDetailsInput
 @return RecurringDetailsResult, *http.Response, error
+
+Deprecated since Adyen Recurring API (deprecated) v68
 */
 func (a *GeneralApi) ListRecurringDetails(ctx context.Context, r GeneralApiListRecurringDetailsInput) (RecurringDetailsResult, *http.Response, error) {
 	res := &RecurringDetailsResult{}
@@ -225,6 +241,8 @@ func (r GeneralApiNotifyShopperInput) NotifyShopperRequest(notifyShopperRequest 
 Prepare a request for NotifyShopper
 
 @return GeneralApiNotifyShopperInput
+
+Deprecated since Adyen Recurring API (deprecated) v68
 */
 func (a *GeneralApi) NotifyShopperInput() GeneralApiNotifyShopperInput {
 	return GeneralApiNotifyShopperInput{}
@@ -238,6 +256,8 @@ Sends a request to the issuer so they can inform the shopper about the upcoming 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r GeneralApiNotifyShopperInput - Request parameters, see NotifyShopperInput
 @return NotifyShopperResult, *http.Response, error
+
+Deprecated since Adyen Recurring API (deprecated) v68
 */
 func (a *GeneralApi) NotifyShopper(ctx context.Context, r GeneralApiNotifyShopperInput) (NotifyShopperResult, *http.Response, error) {
 	res := &NotifyShopperResult{}
@@ -272,6 +292,8 @@ func (r GeneralApiScheduleAccountUpdaterInput) ScheduleAccountUpdaterRequest(sch
 Prepare a request for ScheduleAccountUpdater
 
 @return GeneralApiScheduleAccountUpdaterInput
+
+Deprecated since Adyen Recurring API (deprecated) v68
 */
 func (a *GeneralApi) ScheduleAccountUpdaterInput() GeneralApiScheduleAccountUpdaterInput {
 	return GeneralApiScheduleAccountUpdaterInput{}
@@ -287,6 +309,8 @@ When making the API call, you can submit either the credit card information, or 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r GeneralApiScheduleAccountUpdaterInput - Request parameters, see ScheduleAccountUpdaterInput
 @return ScheduleAccountUpdaterResult, *http.Response, error
+
+Deprecated since Adyen Recurring API (deprecated) v68
 */
 func (a *GeneralApi) ScheduleAccountUpdater(ctx context.Context, r GeneralApiScheduleAccountUpdaterInput) (ScheduleAccountUpdaterResult, *http.Response, error) {
 	res := &ScheduleAccountUpdaterResult{}
