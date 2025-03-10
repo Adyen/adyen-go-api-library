@@ -12,7 +12,7 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/adyen/adyen-go-api-library/v19/src/common"
+	"github.com/adyen/adyen-go-api-library/v20/src/common"
 )
 
 // checks if the RecurringDetail type satisfies the MappedNullable interface at compile time

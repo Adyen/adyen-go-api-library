@@ -15,7 +15,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/adyen/adyen-go-api-library/v19/src/common"
+	"github.com/adyen/adyen-go-api-library/v20/src/common"
 )
 
 // TransferRoutesApi service
