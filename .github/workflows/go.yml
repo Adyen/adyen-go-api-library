@@ -1,37 +1,85 @@
-name: Go
+name: Go CI
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+      - sdk-automation/models
+      - promote/main
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
+      - sdk-automation/models
+      - promote/main
+  workflow_dispatch: {}
 
 jobs:
-  build:
-    name: Build & Verify
+  go-test:
+    name: Build and Test
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        go-version: ['1.13', '1.17', '1.21']
+
     steps:
-    - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-    - uses: actions/setup-go@v5
-      with:
-        go-version: 1.13
-    - name: Get dependencies
-      run: go get -v -t -d ./...
-    - name: Build
-      run: go build -v .
-    - name: Test
-      run: go test -v ./... -tags $GO_TEST_TAGS
-      env:
-        GO_TEST_TAGS: ${{ contains(github.event.pull_request.labels.*.name, 'release') && 'integration' || 'unit' }}
-        ADYEN_API_KEY: ${{ secrets.ADYEN_API_KEY }}
-        ADYEN_MERCHANT: ${{ secrets.ADYEN_MERCHANT }}
-        ADYEN_PASSWORD: ${{ secrets.ADYEN_PASSWORD }}
-        ADYEN_REVIEWPAYOUT_APIKEY: ${{ secrets.ADYEN_REVIEWPAYOUT_APIKEY }}
-        ADYEN_REVIEWPAYOUT_PASSWORD: ${{ secrets.ADYENREVIEWPAYOUT_PASSWORD }}
-        ADYEN_REVIEWPAYOUT_USER: ${{ secrets.ADYENREVIEWPAYOUT_USER }}
-        ADYEN_STOREPAYOUT_APIKEY: ${{ secrets.ADYEN_STOREPAYOUT_APIKEY }}
-        ADYEN_STOREPAYOUT_PASSWORD: ${{ secrets.ADYEN_STOREPAYOUT_PASSWORD }}
-        ADYEN_STOREPAYOUT_USER: ${{ secrets.ADYEN_STOREPAYOUT_USER }}
-        ADYEN_USER: ${{ secrets.ADYEN_USER }}
-        ADYEN_MARKETPLACE_USER: ${{ secrets.ADYEN_MARKETPLACE_USER }}
-        ADYEN_MARKETPLACE_PASSWORD: ${{ secrets.ADYEN_MARKETPLACE_PASSWORD }}
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: ${{ matrix.go-version }}
+      - name: Cache Go modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/go-build
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+      - name: Get dependencies
+        run: go get -v -t -d ./...
+      - name: Build
+        run: go build -v .
+      - name: Test
+        run: go test -v ./... -tags unit
+
+  release-integration-test:
+    name: Release Integration Tests
+    runs-on: ubuntu-latest
+    needs: go-test
+    if: |
+      github.event_name == 'pull_request' &&
+      contains(github.event.pull_request.labels.*.name, 'release') &&
+      github.event.pull_request.head.repo.full_name == github.repository
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+      - name: Cache Go modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/go-build
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+      - name: Get dependencies
+        run: go get -v -t -d ./...
+      - name: Run Integration Tests
+        run: go test -v ./... -tags integration
+        env:
+          ADYEN_API_KEY: ${{ secrets.ADYEN_API_KEY }}
+          ADYEN_MERCHANT: ${{ secrets.ADYEN_MERCHANT }}
+          ADYEN_PASSWORD: ${{ secrets.ADYEN_PASSWORD }}
+          ADYEN_REVIEWPAYOUT_APIKEY: ${{ secrets.ADYEN_REVIEWPAYOUT_APIKEY }}
+          ADYEN_REVIEWPAYOUT_PASSWORD: ${{ secrets.ADYENREVIEWPAYOUT_PASSWORD }}
+          ADYEN_REVIEWPAYOUT_USER: ${{ secrets.ADYENREVIEWPAYOUT_USER }}
+          ADYEN_STOREPAYOUT_APIKEY: ${{ secrets.ADYEN_STOREPAYOUT_APIKEY }}
+          ADYEN_STOREPAYOUT_PASSWORD: ${{ secrets.ADYEN_STOREPAYOUT_PASSWORD }}
+          ADYEN_STOREPAYOUT_USER: ${{ secrets.ADYEN_STOREPAYOUT_USER }}
+          ADYEN_USER: ${{ secrets.ADYEN_USER }}
+          ADYEN_MARKETPLACE_USER: ${{ secrets.ADYEN_MARKETPLACE_USER }}
+          ADYEN_MARKETPLACE_PASSWORD: ${{ secrets.ADYEN_MARKETPLACE_PASSWORD }}
