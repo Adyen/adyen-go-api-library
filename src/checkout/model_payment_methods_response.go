@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v20/src/common"
+    "github.com/adyen/adyen-go-api-library/v20/src/common"
 )
 
 // checks if the PaymentMethodsResponse type satisfies the MappedNullable interface at compile time
@@ -22,7 +21,7 @@ type PaymentMethodsResponse struct {
 	// Detailed list of payment methods required to generate payment forms.
 	PaymentMethods []PaymentMethod `json:"paymentMethods,omitempty"`
 	// List of all stored payment methods.
-	StoredPaymentMethods []StoredPaymentMethod `json:"storedPaymentMethods,omitempty"`
+	StoredPaymentMethods []PaymentMethodsResponseStoredPaymentMethodsInner `json:"storedPaymentMethods,omitempty"`
 }
 
 // NewPaymentMethodsResponse instantiates a new PaymentMethodsResponse object
@@ -75,9 +74,9 @@ func (o *PaymentMethodsResponse) SetPaymentMethods(v []PaymentMethod) {
 }
 
 // GetStoredPaymentMethods returns the StoredPaymentMethods field value if set, zero value otherwise.
-func (o *PaymentMethodsResponse) GetStoredPaymentMethods() []StoredPaymentMethod {
+func (o *PaymentMethodsResponse) GetStoredPaymentMethods() []PaymentMethodsResponseStoredPaymentMethodsInner {
 	if o == nil || common.IsNil(o.StoredPaymentMethods) {
-		var ret []StoredPaymentMethod
+		var ret []PaymentMethodsResponseStoredPaymentMethodsInner
 		return ret
 	}
 	return o.StoredPaymentMethods
@@ -85,7 +84,7 @@ func (o *PaymentMethodsResponse) GetStoredPaymentMethods() []StoredPaymentMethod
 
 // GetStoredPaymentMethodsOk returns a tuple with the StoredPaymentMethods field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentMethodsResponse) GetStoredPaymentMethodsOk() ([]StoredPaymentMethod, bool) {
+func (o *PaymentMethodsResponse) GetStoredPaymentMethodsOk() ([]PaymentMethodsResponseStoredPaymentMethodsInner, bool) {
 	if o == nil || common.IsNil(o.StoredPaymentMethods) {
 		return nil, false
 	}
@@ -101,13 +100,13 @@ func (o *PaymentMethodsResponse) HasStoredPaymentMethods() bool {
 	return false
 }
 
-// SetStoredPaymentMethods gets a reference to the given []StoredPaymentMethod and assigns it to the StoredPaymentMethods field.
-func (o *PaymentMethodsResponse) SetStoredPaymentMethods(v []StoredPaymentMethod) {
+// SetStoredPaymentMethods gets a reference to the given []PaymentMethodsResponseStoredPaymentMethodsInner and assigns it to the StoredPaymentMethods field.
+func (o *PaymentMethodsResponse) SetStoredPaymentMethods(v []PaymentMethodsResponseStoredPaymentMethodsInner) {
 	o.StoredPaymentMethods = v
 }
 
 func (o PaymentMethodsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -160,3 +159,6 @@ func (v *NullablePaymentMethodsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

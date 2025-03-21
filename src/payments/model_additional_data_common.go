@@ -10,8 +10,7 @@ package payments
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v20/src/common"
+    "github.com/adyen/adyen-go-api-library/v20/src/common"
 )
 
 // checks if the AdditionalDataCommon type satisfies the MappedNullable interface at compile time
@@ -19,6 +18,8 @@ var _ common.MappedNullable = &AdditionalDataCommon{}
 
 // AdditionalDataCommon struct for AdditionalDataCommon
 type AdditionalDataCommon struct {
+	// Triggers test scenarios that allow to replicate certain acquirer response codes. See [Testing result codes and refusal reasons](https://docs.adyen.com/development-resources/testing/result-codes/) to learn about the possible values, and the `refusalReason` values you can trigger. 
+	RequestedTestAcquirerResponseCode *string `json:"RequestedTestAcquirerResponseCode,omitempty"`
 	// Triggers test scenarios that allow to replicate certain communication errors.  Allowed values: * **NO_CONNECTION_AVAILABLE** – There wasn't a connection available to service the outgoing communication. This is a transient, retriable error since no messaging could be initiated to an issuing system (or third-party acquiring system). Therefore, the header Transient-Error: true is returned in the response. A subsequent request using the same idempotency key will be processed as if it was the first request. * **IOEXCEPTION_RECEIVED** – Something went wrong during transmission of the message or receiving the response. This is a classified as non-transient because the message could have been received by the issuing party and been acted upon. No transient error header is returned. If using idempotency, the (error) response is stored as the final result for the idempotency key. Subsequent messages with the same idempotency key not be processed beyond returning the stored response.
 	RequestedTestErrorResponseCode *string `json:"RequestedTestErrorResponseCode,omitempty"`
 	// Set to true to authorise a part of the requested amount in case the cardholder does not have enough funds on their account.  If a payment was partially authorised, the response includes resultCode: PartiallyAuthorised and the authorised amount in additionalData.authorisedAmountValue. To enable this functionality, contact our Support Team.
@@ -72,6 +73,38 @@ func NewAdditionalDataCommon() *AdditionalDataCommon {
 func NewAdditionalDataCommonWithDefaults() *AdditionalDataCommon {
 	this := AdditionalDataCommon{}
 	return &this
+}
+
+// GetRequestedTestAcquirerResponseCode returns the RequestedTestAcquirerResponseCode field value if set, zero value otherwise.
+func (o *AdditionalDataCommon) GetRequestedTestAcquirerResponseCode() string {
+	if o == nil || common.IsNil(o.RequestedTestAcquirerResponseCode) {
+		var ret string
+		return ret
+	}
+	return *o.RequestedTestAcquirerResponseCode
+}
+
+// GetRequestedTestAcquirerResponseCodeOk returns a tuple with the RequestedTestAcquirerResponseCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AdditionalDataCommon) GetRequestedTestAcquirerResponseCodeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.RequestedTestAcquirerResponseCode) {
+		return nil, false
+	}
+	return o.RequestedTestAcquirerResponseCode, true
+}
+
+// HasRequestedTestAcquirerResponseCode returns a boolean if a field has been set.
+func (o *AdditionalDataCommon) HasRequestedTestAcquirerResponseCode() bool {
+	if o != nil && !common.IsNil(o.RequestedTestAcquirerResponseCode) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequestedTestAcquirerResponseCode gets a reference to the given string and assigns it to the RequestedTestAcquirerResponseCode field.
+func (o *AdditionalDataCommon) SetRequestedTestAcquirerResponseCode(v string) {
+	o.RequestedTestAcquirerResponseCode = &v
 }
 
 // GetRequestedTestErrorResponseCode returns the RequestedTestErrorResponseCode field value if set, zero value otherwise.
@@ -651,7 +684,7 @@ func (o *AdditionalDataCommon) SetSubMerchantTaxId(v string) {
 }
 
 func (o AdditionalDataCommon) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -660,6 +693,9 @@ func (o AdditionalDataCommon) MarshalJSON() ([]byte, error) {
 
 func (o AdditionalDataCommon) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.RequestedTestAcquirerResponseCode) {
+		toSerialize["RequestedTestAcquirerResponseCode"] = o.RequestedTestAcquirerResponseCode
+	}
 	if !common.IsNil(o.RequestedTestErrorResponseCode) {
 		toSerialize["RequestedTestErrorResponseCode"] = o.RequestedTestErrorResponseCode
 	}
@@ -753,12 +789,14 @@ func (v *NullableAdditionalDataCommon) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *AdditionalDataCommon) isValidIndustryUsage() bool {
-	var allowedEnumValues = []string{"NoShow", "DelayedCharge"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetIndustryUsage() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "NoShow", "DelayedCharge" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetIndustryUsage() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

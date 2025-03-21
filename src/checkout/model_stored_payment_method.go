@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v20/src/common"
+    "github.com/adyen/adyen-go-api-library/v20/src/common"
 )
 
 // checks if the StoredPaymentMethod type satisfies the MappedNullable interface at compile time
@@ -25,7 +24,7 @@ type StoredPaymentMethod struct {
 	BankLocationId *string `json:"bankLocationId,omitempty"`
 	// The brand of the card.
 	Brand *string `json:"brand,omitempty"`
-	// The month the card expires.
+	// The two-digit month when the card expires
 	ExpiryMonth *string `json:"expiryMonth,omitempty"`
 	// The last two digits of the year the card expires. For example, **22** for the year 2022.
 	ExpiryYear *string `json:"expiryYear,omitempty"`
@@ -617,7 +616,7 @@ func (o *StoredPaymentMethod) SetType(v string) {
 }
 
 func (o StoredPaymentMethod) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -715,3 +714,6 @@ func (v *NullableStoredPaymentMethod) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
