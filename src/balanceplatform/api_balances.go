@@ -10,10 +10,13 @@ package balanceplatform
 
 import (
 	"context"
-    "net/http"
-    "net/url"
-    "strings"
-    "github.com/adyen/adyen-go-api-library/v20/src/common"
+	"encoding/json"
+	"io/ioutil"
+	"net/http"
+	"net/url"
+	"strings"
+
+	"github.com/adyen/adyen-go-api-library/v20/src/common"
 )
 
 // BalancesApi service
@@ -22,9 +25,8 @@ type BalancesApi common.Service
 // All parameters accepted by BalancesApi.BalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsGet
 type BalancesApiBalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsGetInput struct {
 	balancePlatformId string
-	webhookId string
+	webhookId         string
 }
-
 
 /*
 Prepare a request for BalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsGet
@@ -34,7 +36,7 @@ Prepare a request for BalancePlatformsBalancePlatformIdWebhooksWebhookIdSettings
 func (a *BalancesApi) BalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsGetInput(balancePlatformId string, webhookId string) BalancesApiBalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsGetInput {
 	return BalancesApiBalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsGetInput{
 		balancePlatformId: balancePlatformId,
-		webhookId: webhookId,
+		webhookId:         webhookId,
 	}
 }
 
@@ -48,85 +50,84 @@ Returns all settings configured for triggering [balance webhooks](https://docs.a
 @return []WebhookSettingResponse, *http.Response, error
 */
 func (a *BalancesApi) BalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsGet(ctx context.Context, r BalancesApiBalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsGetInput) ([]WebhookSettingResponse, *http.Response, error) {
-    res := &[]WebhookSettingResponse{}
+	res := &[]WebhookSettingResponse{}
 	path := "/balancePlatforms/{balancePlatformId}/webhooks/{webhookId}/settings"
-    path = strings.Replace(path, "{"+"balancePlatformId"+"}", url.PathEscape(common.ParameterValueToString(r.balancePlatformId, "balancePlatformId")), -1)
-    path = strings.Replace(path, "{"+"webhookId"+"}", url.PathEscape(common.ParameterValueToString(r.webhookId, "webhookId")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodGet,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"balancePlatformId"+"}", url.PathEscape(common.ParameterValueToString(r.balancePlatformId, "balancePlatformId")), -1)
+	path = strings.Replace(path, "{"+"webhookId"+"}", url.PathEscape(common.ParameterValueToString(r.webhookId, "webhookId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-    if httpRes == nil {
-        return *res, httpRes, err
-    }
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
-    var serviceError common.RestServiceError
-                        if httpRes.StatusCode == 400 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 401 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 403 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 404 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 422 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 500 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 400 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 404 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
 
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by BalancesApi.BalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsPost
 type BalancesApiBalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsPostInput struct {
-	balancePlatformId string
-	webhookId string
+	balancePlatformId             string
+	webhookId                     string
 	balanceWebhookSettingsRequest *BalanceWebhookSettingsRequest
 }
 
@@ -134,7 +135,6 @@ func (r BalancesApiBalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsPos
 	r.balanceWebhookSettingsRequest = &balanceWebhookSettingsRequest
 	return r
 }
-
 
 /*
 Prepare a request for BalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsPost
@@ -144,7 +144,7 @@ Prepare a request for BalancePlatformsBalancePlatformIdWebhooksWebhookIdSettings
 func (a *BalancesApi) BalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsPostInput(balancePlatformId string, webhookId string) BalancesApiBalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsPostInput {
 	return BalancesApiBalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsPostInput{
 		balancePlatformId: balancePlatformId,
-		webhookId: webhookId,
+		webhookId:         webhookId,
 	}
 }
 
@@ -166,88 +166,86 @@ You can get notified about balance changes in your entire balance platform, in t
 @return WebhookSettingResponse, *http.Response, error
 */
 func (a *BalancesApi) BalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsPost(ctx context.Context, r BalancesApiBalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsPostInput) (WebhookSettingResponse, *http.Response, error) {
-    res := &WebhookSettingResponse{}
+	res := &WebhookSettingResponse{}
 	path := "/balancePlatforms/{balancePlatformId}/webhooks/{webhookId}/settings"
-    path = strings.Replace(path, "{"+"balancePlatformId"+"}", url.PathEscape(common.ParameterValueToString(r.balancePlatformId, "balancePlatformId")), -1)
-    path = strings.Replace(path, "{"+"webhookId"+"}", url.PathEscape(common.ParameterValueToString(r.webhookId, "webhookId")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.balanceWebhookSettingsRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"balancePlatformId"+"}", url.PathEscape(common.ParameterValueToString(r.balancePlatformId, "balancePlatformId")), -1)
+	path = strings.Replace(path, "{"+"webhookId"+"}", url.PathEscape(common.ParameterValueToString(r.webhookId, "webhookId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.balanceWebhookSettingsRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-    if httpRes == nil {
-        return *res, httpRes, err
-    }
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
-    var serviceError common.RestServiceError
-                        if httpRes.StatusCode == 400 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 401 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 403 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 404 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 422 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 500 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 400 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 404 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
 
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by BalancesApi.BalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsSettingIdDelete
 type BalancesApiBalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsSettingIdDeleteInput struct {
 	balancePlatformId string
-	webhookId string
-	settingId string
+	webhookId         string
+	settingId         string
 }
-
 
 /*
 Prepare a request for BalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsSettingIdDelete
@@ -257,8 +255,8 @@ Prepare a request for BalancePlatformsBalancePlatformIdWebhooksWebhookIdSettings
 func (a *BalancesApi) BalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsSettingIdDeleteInput(balancePlatformId string, webhookId string, settingId string) BalancesApiBalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsSettingIdDeleteInput {
 	return BalancesApiBalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsSettingIdDeleteInput{
 		balancePlatformId: balancePlatformId,
-		webhookId: webhookId,
-		settingId: settingId,
+		webhookId:         webhookId,
+		settingId:         settingId,
 	}
 }
 
@@ -272,89 +270,87 @@ Deletes a setting that contains the conditions for triggering [balance webhooks]
 @return *http.Response, error
 */
 func (a *BalancesApi) BalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsSettingIdDelete(ctx context.Context, r BalancesApiBalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsSettingIdDeleteInput) (*http.Response, error) {
-    var res interface{}
+	var res interface{}
 	path := "/balancePlatforms/{balancePlatformId}/webhooks/{webhookId}/settings/{settingId}"
-    path = strings.Replace(path, "{"+"balancePlatformId"+"}", url.PathEscape(common.ParameterValueToString(r.balancePlatformId, "balancePlatformId")), -1)
-    path = strings.Replace(path, "{"+"webhookId"+"}", url.PathEscape(common.ParameterValueToString(r.webhookId, "webhookId")), -1)
-    path = strings.Replace(path, "{"+"settingId"+"}", url.PathEscape(common.ParameterValueToString(r.settingId, "settingId")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodDelete,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"balancePlatformId"+"}", url.PathEscape(common.ParameterValueToString(r.balancePlatformId, "balancePlatformId")), -1)
+	path = strings.Replace(path, "{"+"webhookId"+"}", url.PathEscape(common.ParameterValueToString(r.webhookId, "webhookId")), -1)
+	path = strings.Replace(path, "{"+"settingId"+"}", url.PathEscape(common.ParameterValueToString(r.settingId, "settingId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodDelete,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-    if httpRes == nil {
-        return httpRes, err
-    }
+	if httpRes == nil {
+		return httpRes, err
+	}
 
-    var serviceError common.RestServiceError
-                        if httpRes.StatusCode == 400 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return httpRes, decodeError
-                            }
-                            return httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 401 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return httpRes, decodeError
-                            }
-                            return httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 403 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return httpRes, decodeError
-                            }
-                            return httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 404 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return httpRes, decodeError
-                            }
-                            return httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 422 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return httpRes, decodeError
-                            }
-                            return httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 500 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return httpRes, decodeError
-                            }
-                            return httpRes, serviceError
-                        }
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 400 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
+		return httpRes, serviceError
+	}
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
+		return httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
+		return httpRes, serviceError
+	}
+	if httpRes.StatusCode == 404 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
+		return httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
+		return httpRes, serviceError
+	}
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
+		return httpRes, serviceError
+	}
 
-    return httpRes, err
+	return httpRes, err
 }
-
 
 // All parameters accepted by BalancesApi.BalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsSettingIdGet
 type BalancesApiBalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsSettingIdGetInput struct {
 	balancePlatformId string
-	webhookId string
-	settingId string
+	webhookId         string
+	settingId         string
 }
-
 
 /*
 Prepare a request for BalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsSettingIdGet
@@ -364,8 +360,8 @@ Prepare a request for BalancePlatformsBalancePlatformIdWebhooksWebhookIdSettings
 func (a *BalancesApi) BalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsSettingIdGetInput(balancePlatformId string, webhookId string, settingId string) BalancesApiBalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsSettingIdGetInput {
 	return BalancesApiBalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsSettingIdGetInput{
 		balancePlatformId: balancePlatformId,
-		webhookId: webhookId,
-		settingId: settingId,
+		webhookId:         webhookId,
+		settingId:         settingId,
 	}
 }
 
@@ -379,87 +375,86 @@ Returns the details of a specific balance webhook setting configured for trigger
 @return WebhookSettingResponse, *http.Response, error
 */
 func (a *BalancesApi) BalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsSettingIdGet(ctx context.Context, r BalancesApiBalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsSettingIdGetInput) (WebhookSettingResponse, *http.Response, error) {
-    res := &WebhookSettingResponse{}
+	res := &WebhookSettingResponse{}
 	path := "/balancePlatforms/{balancePlatformId}/webhooks/{webhookId}/settings/{settingId}"
-    path = strings.Replace(path, "{"+"balancePlatformId"+"}", url.PathEscape(common.ParameterValueToString(r.balancePlatformId, "balancePlatformId")), -1)
-    path = strings.Replace(path, "{"+"webhookId"+"}", url.PathEscape(common.ParameterValueToString(r.webhookId, "webhookId")), -1)
-    path = strings.Replace(path, "{"+"settingId"+"}", url.PathEscape(common.ParameterValueToString(r.settingId, "settingId")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodGet,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"balancePlatformId"+"}", url.PathEscape(common.ParameterValueToString(r.balancePlatformId, "balancePlatformId")), -1)
+	path = strings.Replace(path, "{"+"webhookId"+"}", url.PathEscape(common.ParameterValueToString(r.webhookId, "webhookId")), -1)
+	path = strings.Replace(path, "{"+"settingId"+"}", url.PathEscape(common.ParameterValueToString(r.settingId, "settingId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-    if httpRes == nil {
-        return *res, httpRes, err
-    }
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
-    var serviceError common.RestServiceError
-                        if httpRes.StatusCode == 400 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 401 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 403 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 404 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 422 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 500 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 400 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 404 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
 
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by BalancesApi.BalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsSettingIdPatch
 type BalancesApiBalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsSettingIdPatchInput struct {
-	balancePlatformId string
-	webhookId string
-	settingId string
+	balancePlatformId                      string
+	webhookId                              string
+	settingId                              string
 	patchableBalanceWebhookSettingsRequest *PatchableBalanceWebhookSettingsRequest
 }
 
@@ -467,7 +462,6 @@ func (r BalancesApiBalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsSet
 	r.patchableBalanceWebhookSettingsRequest = &patchableBalanceWebhookSettingsRequest
 	return r
 }
-
 
 /*
 Prepare a request for BalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsSettingIdPatch
@@ -477,8 +471,8 @@ Prepare a request for BalancePlatformsBalancePlatformIdWebhooksWebhookIdSettings
 func (a *BalancesApi) BalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsSettingIdPatchInput(balancePlatformId string, webhookId string, settingId string) BalancesApiBalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsSettingIdPatchInput {
 	return BalancesApiBalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsSettingIdPatchInput{
 		balancePlatformId: balancePlatformId,
-		webhookId: webhookId,
-		settingId: settingId,
+		webhookId:         webhookId,
+		settingId:         settingId,
 	}
 }
 
@@ -492,78 +486,77 @@ Updates the conditions the balance change needs to meet for Adyen to send a [bal
 @return WebhookSettingResponse, *http.Response, error
 */
 func (a *BalancesApi) BalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsSettingIdPatch(ctx context.Context, r BalancesApiBalancePlatformsBalancePlatformIdWebhooksWebhookIdSettingsSettingIdPatchInput) (WebhookSettingResponse, *http.Response, error) {
-    res := &WebhookSettingResponse{}
+	res := &WebhookSettingResponse{}
 	path := "/balancePlatforms/{balancePlatformId}/webhooks/{webhookId}/settings/{settingId}"
-    path = strings.Replace(path, "{"+"balancePlatformId"+"}", url.PathEscape(common.ParameterValueToString(r.balancePlatformId, "balancePlatformId")), -1)
-    path = strings.Replace(path, "{"+"webhookId"+"}", url.PathEscape(common.ParameterValueToString(r.webhookId, "webhookId")), -1)
-    path = strings.Replace(path, "{"+"settingId"+"}", url.PathEscape(common.ParameterValueToString(r.settingId, "settingId")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.patchableBalanceWebhookSettingsRequest,
-        res,
-        http.MethodPatch,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"balancePlatformId"+"}", url.PathEscape(common.ParameterValueToString(r.balancePlatformId, "balancePlatformId")), -1)
+	path = strings.Replace(path, "{"+"webhookId"+"}", url.PathEscape(common.ParameterValueToString(r.webhookId, "webhookId")), -1)
+	path = strings.Replace(path, "{"+"settingId"+"}", url.PathEscape(common.ParameterValueToString(r.settingId, "settingId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.patchableBalanceWebhookSettingsRequest,
+		res,
+		http.MethodPatch,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-    if httpRes == nil {
-        return *res, httpRes, err
-    }
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
-    var serviceError common.RestServiceError
-                        if httpRes.StatusCode == 400 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 401 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 403 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 404 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 422 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 500 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 400 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 404 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
 
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-

@@ -10,7 +10,8 @@ package balanceplatform
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v20/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v20/src/common"
 )
 
 // checks if the WebhookSettingResponse type satisfies the MappedNullable interface at compile time
@@ -21,10 +22,10 @@ type WebhookSettingResponse struct {
 	// The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes) of the balance.
 	Currency string `json:"currency"`
 	// The unique identifier of the webhook setting.
-	Id string `json:"id"`
-	Status string `json:"status"`
-	Target Target `json:"target"`
-	Type SettingType `json:"type"`
+	Id     string      `json:"id"`
+	Status string      `json:"status"`
+	Target Target      `json:"target"`
+	Type   SettingType `json:"type"`
 }
 
 // NewWebhookSettingResponse instantiates a new WebhookSettingResponse object
@@ -170,7 +171,7 @@ func (o *WebhookSettingResponse) SetType(v SettingType) {
 }
 
 func (o WebhookSettingResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -222,6 +223,3 @@ func (v *NullableWebhookSettingResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-
