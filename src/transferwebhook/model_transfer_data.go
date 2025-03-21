@@ -38,7 +38,7 @@ type TransferData struct {
 	DirectDebitInformation *DirectDebitInformation `json:"directDebitInformation,omitempty"`
 	// The direction of the transfer.  Possible values: **incoming**, **outgoing**.
 	Direction *string `json:"direction,omitempty"`
-	// The event id listed under events, that triggered the notification.
+	// The unique identifier of the latest transfer event. Included only when the `category` is **issuedCard**.
 	EventId *string `json:"eventId,omitempty"`
 	// The list of events leading up to the current status of the transfer.
 	Events []TransferEvent `json:"events,omitempty"`
@@ -995,7 +995,7 @@ func (o *TransferData) isValidDirection() bool {
 	return false
 }
 func (o *TransferData) isValidReason() bool {
-	var allowedEnumValues = []string{"accountHierarchyNotActive", "amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declined", "declinedByTransactionRule", "directDebitNotSupported", "error", "notEnoughBalance", "pendingApproval", "pendingExecution", "refusedByCounterpartyBank", "refusedByCustomer", "routeNotFound", "scaFailed", "transferInstrumentDoesNotExist", "unknown"}
+	var allowedEnumValues = []string{"accountHierarchyNotActive", "amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declined", "declinedByTransactionRule", "directDebitNotSupported", "error", "notEnoughBalance", "pending", "pendingApproval", "pendingExecution", "refusedByCounterpartyBank", "refusedByCustomer", "routeNotFound", "scaFailed", "transferInstrumentDoesNotExist", "unknown"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetReason() == allowed {
 			return true

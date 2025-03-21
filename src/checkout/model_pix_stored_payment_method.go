@@ -14,11 +14,11 @@ import (
 	"github.com/adyen/adyen-go-api-library/v20/src/common"
 )
 
-// checks if the StoredPaymentMethod type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &StoredPaymentMethod{}
+// checks if the PixStoredPaymentMethod type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &PixStoredPaymentMethod{}
 
-// StoredPaymentMethod struct for StoredPaymentMethod
-type StoredPaymentMethod struct {
+// PixStoredPaymentMethod struct for PixStoredPaymentMethod
+type PixStoredPaymentMethod struct {
 	// The bank account number (without separators).
 	BankAccountNumber *string `json:"bankAccountNumber,omitempty"`
 	// The location id of the bank. The field value is `nil` in most cases.
@@ -55,25 +55,25 @@ type StoredPaymentMethod struct {
 	Type *string `json:"type,omitempty"`
 }
 
-// NewStoredPaymentMethod instantiates a new StoredPaymentMethod object
+// NewPixStoredPaymentMethod instantiates a new PixStoredPaymentMethod object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStoredPaymentMethod() *StoredPaymentMethod {
-	this := StoredPaymentMethod{}
+func NewPixStoredPaymentMethod() *PixStoredPaymentMethod {
+	this := PixStoredPaymentMethod{}
 	return &this
 }
 
-// NewStoredPaymentMethodWithDefaults instantiates a new StoredPaymentMethod object
+// NewPixStoredPaymentMethodWithDefaults instantiates a new PixStoredPaymentMethod object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewStoredPaymentMethodWithDefaults() *StoredPaymentMethod {
-	this := StoredPaymentMethod{}
+func NewPixStoredPaymentMethodWithDefaults() *PixStoredPaymentMethod {
+	this := PixStoredPaymentMethod{}
 	return &this
 }
 
 // GetBankAccountNumber returns the BankAccountNumber field value if set, zero value otherwise.
-func (o *StoredPaymentMethod) GetBankAccountNumber() string {
+func (o *PixStoredPaymentMethod) GetBankAccountNumber() string {
 	if o == nil || common.IsNil(o.BankAccountNumber) {
 		var ret string
 		return ret
@@ -83,7 +83,7 @@ func (o *StoredPaymentMethod) GetBankAccountNumber() string {
 
 // GetBankAccountNumberOk returns a tuple with the BankAccountNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StoredPaymentMethod) GetBankAccountNumberOk() (*string, bool) {
+func (o *PixStoredPaymentMethod) GetBankAccountNumberOk() (*string, bool) {
 	if o == nil || common.IsNil(o.BankAccountNumber) {
 		return nil, false
 	}
@@ -91,7 +91,7 @@ func (o *StoredPaymentMethod) GetBankAccountNumberOk() (*string, bool) {
 }
 
 // HasBankAccountNumber returns a boolean if a field has been set.
-func (o *StoredPaymentMethod) HasBankAccountNumber() bool {
+func (o *PixStoredPaymentMethod) HasBankAccountNumber() bool {
 	if o != nil && !common.IsNil(o.BankAccountNumber) {
 		return true
 	}
@@ -100,12 +100,12 @@ func (o *StoredPaymentMethod) HasBankAccountNumber() bool {
 }
 
 // SetBankAccountNumber gets a reference to the given string and assigns it to the BankAccountNumber field.
-func (o *StoredPaymentMethod) SetBankAccountNumber(v string) {
+func (o *PixStoredPaymentMethod) SetBankAccountNumber(v string) {
 	o.BankAccountNumber = &v
 }
 
 // GetBankLocationId returns the BankLocationId field value if set, zero value otherwise.
-func (o *StoredPaymentMethod) GetBankLocationId() string {
+func (o *PixStoredPaymentMethod) GetBankLocationId() string {
 	if o == nil || common.IsNil(o.BankLocationId) {
 		var ret string
 		return ret
@@ -115,7 +115,7 @@ func (o *StoredPaymentMethod) GetBankLocationId() string {
 
 // GetBankLocationIdOk returns a tuple with the BankLocationId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StoredPaymentMethod) GetBankLocationIdOk() (*string, bool) {
+func (o *PixStoredPaymentMethod) GetBankLocationIdOk() (*string, bool) {
 	if o == nil || common.IsNil(o.BankLocationId) {
 		return nil, false
 	}
@@ -123,7 +123,7 @@ func (o *StoredPaymentMethod) GetBankLocationIdOk() (*string, bool) {
 }
 
 // HasBankLocationId returns a boolean if a field has been set.
-func (o *StoredPaymentMethod) HasBankLocationId() bool {
+func (o *PixStoredPaymentMethod) HasBankLocationId() bool {
 	if o != nil && !common.IsNil(o.BankLocationId) {
 		return true
 	}
@@ -132,12 +132,12 @@ func (o *StoredPaymentMethod) HasBankLocationId() bool {
 }
 
 // SetBankLocationId gets a reference to the given string and assigns it to the BankLocationId field.
-func (o *StoredPaymentMethod) SetBankLocationId(v string) {
+func (o *PixStoredPaymentMethod) SetBankLocationId(v string) {
 	o.BankLocationId = &v
 }
 
 // GetBrand returns the Brand field value if set, zero value otherwise.
-func (o *StoredPaymentMethod) GetBrand() string {
+func (o *PixStoredPaymentMethod) GetBrand() string {
 	if o == nil || common.IsNil(o.Brand) {
 		var ret string
 		return ret
@@ -147,7 +147,7 @@ func (o *StoredPaymentMethod) GetBrand() string {
 
 // GetBrandOk returns a tuple with the Brand field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StoredPaymentMethod) GetBrandOk() (*string, bool) {
+func (o *PixStoredPaymentMethod) GetBrandOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Brand) {
 		return nil, false
 	}
@@ -155,7 +155,7 @@ func (o *StoredPaymentMethod) GetBrandOk() (*string, bool) {
 }
 
 // HasBrand returns a boolean if a field has been set.
-func (o *StoredPaymentMethod) HasBrand() bool {
+func (o *PixStoredPaymentMethod) HasBrand() bool {
 	if o != nil && !common.IsNil(o.Brand) {
 		return true
 	}
@@ -164,12 +164,12 @@ func (o *StoredPaymentMethod) HasBrand() bool {
 }
 
 // SetBrand gets a reference to the given string and assigns it to the Brand field.
-func (o *StoredPaymentMethod) SetBrand(v string) {
+func (o *PixStoredPaymentMethod) SetBrand(v string) {
 	o.Brand = &v
 }
 
 // GetExpiryMonth returns the ExpiryMonth field value if set, zero value otherwise.
-func (o *StoredPaymentMethod) GetExpiryMonth() string {
+func (o *PixStoredPaymentMethod) GetExpiryMonth() string {
 	if o == nil || common.IsNil(o.ExpiryMonth) {
 		var ret string
 		return ret
@@ -179,7 +179,7 @@ func (o *StoredPaymentMethod) GetExpiryMonth() string {
 
 // GetExpiryMonthOk returns a tuple with the ExpiryMonth field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StoredPaymentMethod) GetExpiryMonthOk() (*string, bool) {
+func (o *PixStoredPaymentMethod) GetExpiryMonthOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ExpiryMonth) {
 		return nil, false
 	}
@@ -187,7 +187,7 @@ func (o *StoredPaymentMethod) GetExpiryMonthOk() (*string, bool) {
 }
 
 // HasExpiryMonth returns a boolean if a field has been set.
-func (o *StoredPaymentMethod) HasExpiryMonth() bool {
+func (o *PixStoredPaymentMethod) HasExpiryMonth() bool {
 	if o != nil && !common.IsNil(o.ExpiryMonth) {
 		return true
 	}
@@ -196,12 +196,12 @@ func (o *StoredPaymentMethod) HasExpiryMonth() bool {
 }
 
 // SetExpiryMonth gets a reference to the given string and assigns it to the ExpiryMonth field.
-func (o *StoredPaymentMethod) SetExpiryMonth(v string) {
+func (o *PixStoredPaymentMethod) SetExpiryMonth(v string) {
 	o.ExpiryMonth = &v
 }
 
 // GetExpiryYear returns the ExpiryYear field value if set, zero value otherwise.
-func (o *StoredPaymentMethod) GetExpiryYear() string {
+func (o *PixStoredPaymentMethod) GetExpiryYear() string {
 	if o == nil || common.IsNil(o.ExpiryYear) {
 		var ret string
 		return ret
@@ -211,7 +211,7 @@ func (o *StoredPaymentMethod) GetExpiryYear() string {
 
 // GetExpiryYearOk returns a tuple with the ExpiryYear field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StoredPaymentMethod) GetExpiryYearOk() (*string, bool) {
+func (o *PixStoredPaymentMethod) GetExpiryYearOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ExpiryYear) {
 		return nil, false
 	}
@@ -219,7 +219,7 @@ func (o *StoredPaymentMethod) GetExpiryYearOk() (*string, bool) {
 }
 
 // HasExpiryYear returns a boolean if a field has been set.
-func (o *StoredPaymentMethod) HasExpiryYear() bool {
+func (o *PixStoredPaymentMethod) HasExpiryYear() bool {
 	if o != nil && !common.IsNil(o.ExpiryYear) {
 		return true
 	}
@@ -228,12 +228,12 @@ func (o *StoredPaymentMethod) HasExpiryYear() bool {
 }
 
 // SetExpiryYear gets a reference to the given string and assigns it to the ExpiryYear field.
-func (o *StoredPaymentMethod) SetExpiryYear(v string) {
+func (o *PixStoredPaymentMethod) SetExpiryYear(v string) {
 	o.ExpiryYear = &v
 }
 
 // GetHolderName returns the HolderName field value if set, zero value otherwise.
-func (o *StoredPaymentMethod) GetHolderName() string {
+func (o *PixStoredPaymentMethod) GetHolderName() string {
 	if o == nil || common.IsNil(o.HolderName) {
 		var ret string
 		return ret
@@ -243,7 +243,7 @@ func (o *StoredPaymentMethod) GetHolderName() string {
 
 // GetHolderNameOk returns a tuple with the HolderName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StoredPaymentMethod) GetHolderNameOk() (*string, bool) {
+func (o *PixStoredPaymentMethod) GetHolderNameOk() (*string, bool) {
 	if o == nil || common.IsNil(o.HolderName) {
 		return nil, false
 	}
@@ -251,7 +251,7 @@ func (o *StoredPaymentMethod) GetHolderNameOk() (*string, bool) {
 }
 
 // HasHolderName returns a boolean if a field has been set.
-func (o *StoredPaymentMethod) HasHolderName() bool {
+func (o *PixStoredPaymentMethod) HasHolderName() bool {
 	if o != nil && !common.IsNil(o.HolderName) {
 		return true
 	}
@@ -260,12 +260,12 @@ func (o *StoredPaymentMethod) HasHolderName() bool {
 }
 
 // SetHolderName gets a reference to the given string and assigns it to the HolderName field.
-func (o *StoredPaymentMethod) SetHolderName(v string) {
+func (o *PixStoredPaymentMethod) SetHolderName(v string) {
 	o.HolderName = &v
 }
 
 // GetIban returns the Iban field value if set, zero value otherwise.
-func (o *StoredPaymentMethod) GetIban() string {
+func (o *PixStoredPaymentMethod) GetIban() string {
 	if o == nil || common.IsNil(o.Iban) {
 		var ret string
 		return ret
@@ -275,7 +275,7 @@ func (o *StoredPaymentMethod) GetIban() string {
 
 // GetIbanOk returns a tuple with the Iban field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StoredPaymentMethod) GetIbanOk() (*string, bool) {
+func (o *PixStoredPaymentMethod) GetIbanOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Iban) {
 		return nil, false
 	}
@@ -283,7 +283,7 @@ func (o *StoredPaymentMethod) GetIbanOk() (*string, bool) {
 }
 
 // HasIban returns a boolean if a field has been set.
-func (o *StoredPaymentMethod) HasIban() bool {
+func (o *PixStoredPaymentMethod) HasIban() bool {
 	if o != nil && !common.IsNil(o.Iban) {
 		return true
 	}
@@ -292,12 +292,12 @@ func (o *StoredPaymentMethod) HasIban() bool {
 }
 
 // SetIban gets a reference to the given string and assigns it to the Iban field.
-func (o *StoredPaymentMethod) SetIban(v string) {
+func (o *PixStoredPaymentMethod) SetIban(v string) {
 	o.Iban = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *StoredPaymentMethod) GetId() string {
+func (o *PixStoredPaymentMethod) GetId() string {
 	if o == nil || common.IsNil(o.Id) {
 		var ret string
 		return ret
@@ -307,7 +307,7 @@ func (o *StoredPaymentMethod) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StoredPaymentMethod) GetIdOk() (*string, bool) {
+func (o *PixStoredPaymentMethod) GetIdOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Id) {
 		return nil, false
 	}
@@ -315,7 +315,7 @@ func (o *StoredPaymentMethod) GetIdOk() (*string, bool) {
 }
 
 // HasId returns a boolean if a field has been set.
-func (o *StoredPaymentMethod) HasId() bool {
+func (o *PixStoredPaymentMethod) HasId() bool {
 	if o != nil && !common.IsNil(o.Id) {
 		return true
 	}
@@ -324,12 +324,12 @@ func (o *StoredPaymentMethod) HasId() bool {
 }
 
 // SetId gets a reference to the given string and assigns it to the Id field.
-func (o *StoredPaymentMethod) SetId(v string) {
+func (o *PixStoredPaymentMethod) SetId(v string) {
 	o.Id = &v
 }
 
 // GetLabel returns the Label field value if set, zero value otherwise.
-func (o *StoredPaymentMethod) GetLabel() string {
+func (o *PixStoredPaymentMethod) GetLabel() string {
 	if o == nil || common.IsNil(o.Label) {
 		var ret string
 		return ret
@@ -339,7 +339,7 @@ func (o *StoredPaymentMethod) GetLabel() string {
 
 // GetLabelOk returns a tuple with the Label field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StoredPaymentMethod) GetLabelOk() (*string, bool) {
+func (o *PixStoredPaymentMethod) GetLabelOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Label) {
 		return nil, false
 	}
@@ -347,7 +347,7 @@ func (o *StoredPaymentMethod) GetLabelOk() (*string, bool) {
 }
 
 // HasLabel returns a boolean if a field has been set.
-func (o *StoredPaymentMethod) HasLabel() bool {
+func (o *PixStoredPaymentMethod) HasLabel() bool {
 	if o != nil && !common.IsNil(o.Label) {
 		return true
 	}
@@ -356,12 +356,12 @@ func (o *StoredPaymentMethod) HasLabel() bool {
 }
 
 // SetLabel gets a reference to the given string and assigns it to the Label field.
-func (o *StoredPaymentMethod) SetLabel(v string) {
+func (o *PixStoredPaymentMethod) SetLabel(v string) {
 	o.Label = &v
 }
 
 // GetLastFour returns the LastFour field value if set, zero value otherwise.
-func (o *StoredPaymentMethod) GetLastFour() string {
+func (o *PixStoredPaymentMethod) GetLastFour() string {
 	if o == nil || common.IsNil(o.LastFour) {
 		var ret string
 		return ret
@@ -371,7 +371,7 @@ func (o *StoredPaymentMethod) GetLastFour() string {
 
 // GetLastFourOk returns a tuple with the LastFour field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StoredPaymentMethod) GetLastFourOk() (*string, bool) {
+func (o *PixStoredPaymentMethod) GetLastFourOk() (*string, bool) {
 	if o == nil || common.IsNil(o.LastFour) {
 		return nil, false
 	}
@@ -379,7 +379,7 @@ func (o *StoredPaymentMethod) GetLastFourOk() (*string, bool) {
 }
 
 // HasLastFour returns a boolean if a field has been set.
-func (o *StoredPaymentMethod) HasLastFour() bool {
+func (o *PixStoredPaymentMethod) HasLastFour() bool {
 	if o != nil && !common.IsNil(o.LastFour) {
 		return true
 	}
@@ -388,12 +388,12 @@ func (o *StoredPaymentMethod) HasLastFour() bool {
 }
 
 // SetLastFour gets a reference to the given string and assigns it to the LastFour field.
-func (o *StoredPaymentMethod) SetLastFour(v string) {
+func (o *PixStoredPaymentMethod) SetLastFour(v string) {
 	o.LastFour = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
-func (o *StoredPaymentMethod) GetName() string {
+func (o *PixStoredPaymentMethod) GetName() string {
 	if o == nil || common.IsNil(o.Name) {
 		var ret string
 		return ret
@@ -403,7 +403,7 @@ func (o *StoredPaymentMethod) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StoredPaymentMethod) GetNameOk() (*string, bool) {
+func (o *PixStoredPaymentMethod) GetNameOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Name) {
 		return nil, false
 	}
@@ -411,7 +411,7 @@ func (o *StoredPaymentMethod) GetNameOk() (*string, bool) {
 }
 
 // HasName returns a boolean if a field has been set.
-func (o *StoredPaymentMethod) HasName() bool {
+func (o *PixStoredPaymentMethod) HasName() bool {
 	if o != nil && !common.IsNil(o.Name) {
 		return true
 	}
@@ -420,12 +420,12 @@ func (o *StoredPaymentMethod) HasName() bool {
 }
 
 // SetName gets a reference to the given string and assigns it to the Name field.
-func (o *StoredPaymentMethod) SetName(v string) {
+func (o *PixStoredPaymentMethod) SetName(v string) {
 	o.Name = &v
 }
 
 // GetNetworkTxReference returns the NetworkTxReference field value if set, zero value otherwise.
-func (o *StoredPaymentMethod) GetNetworkTxReference() string {
+func (o *PixStoredPaymentMethod) GetNetworkTxReference() string {
 	if o == nil || common.IsNil(o.NetworkTxReference) {
 		var ret string
 		return ret
@@ -435,7 +435,7 @@ func (o *StoredPaymentMethod) GetNetworkTxReference() string {
 
 // GetNetworkTxReferenceOk returns a tuple with the NetworkTxReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StoredPaymentMethod) GetNetworkTxReferenceOk() (*string, bool) {
+func (o *PixStoredPaymentMethod) GetNetworkTxReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.NetworkTxReference) {
 		return nil, false
 	}
@@ -443,7 +443,7 @@ func (o *StoredPaymentMethod) GetNetworkTxReferenceOk() (*string, bool) {
 }
 
 // HasNetworkTxReference returns a boolean if a field has been set.
-func (o *StoredPaymentMethod) HasNetworkTxReference() bool {
+func (o *PixStoredPaymentMethod) HasNetworkTxReference() bool {
 	if o != nil && !common.IsNil(o.NetworkTxReference) {
 		return true
 	}
@@ -452,12 +452,12 @@ func (o *StoredPaymentMethod) HasNetworkTxReference() bool {
 }
 
 // SetNetworkTxReference gets a reference to the given string and assigns it to the NetworkTxReference field.
-func (o *StoredPaymentMethod) SetNetworkTxReference(v string) {
+func (o *PixStoredPaymentMethod) SetNetworkTxReference(v string) {
 	o.NetworkTxReference = &v
 }
 
 // GetOwnerName returns the OwnerName field value if set, zero value otherwise.
-func (o *StoredPaymentMethod) GetOwnerName() string {
+func (o *PixStoredPaymentMethod) GetOwnerName() string {
 	if o == nil || common.IsNil(o.OwnerName) {
 		var ret string
 		return ret
@@ -467,7 +467,7 @@ func (o *StoredPaymentMethod) GetOwnerName() string {
 
 // GetOwnerNameOk returns a tuple with the OwnerName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StoredPaymentMethod) GetOwnerNameOk() (*string, bool) {
+func (o *PixStoredPaymentMethod) GetOwnerNameOk() (*string, bool) {
 	if o == nil || common.IsNil(o.OwnerName) {
 		return nil, false
 	}
@@ -475,7 +475,7 @@ func (o *StoredPaymentMethod) GetOwnerNameOk() (*string, bool) {
 }
 
 // HasOwnerName returns a boolean if a field has been set.
-func (o *StoredPaymentMethod) HasOwnerName() bool {
+func (o *PixStoredPaymentMethod) HasOwnerName() bool {
 	if o != nil && !common.IsNil(o.OwnerName) {
 		return true
 	}
@@ -484,12 +484,12 @@ func (o *StoredPaymentMethod) HasOwnerName() bool {
 }
 
 // SetOwnerName gets a reference to the given string and assigns it to the OwnerName field.
-func (o *StoredPaymentMethod) SetOwnerName(v string) {
+func (o *PixStoredPaymentMethod) SetOwnerName(v string) {
 	o.OwnerName = &v
 }
 
 // GetShopperEmail returns the ShopperEmail field value if set, zero value otherwise.
-func (o *StoredPaymentMethod) GetShopperEmail() string {
+func (o *PixStoredPaymentMethod) GetShopperEmail() string {
 	if o == nil || common.IsNil(o.ShopperEmail) {
 		var ret string
 		return ret
@@ -499,7 +499,7 @@ func (o *StoredPaymentMethod) GetShopperEmail() string {
 
 // GetShopperEmailOk returns a tuple with the ShopperEmail field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StoredPaymentMethod) GetShopperEmailOk() (*string, bool) {
+func (o *PixStoredPaymentMethod) GetShopperEmailOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ShopperEmail) {
 		return nil, false
 	}
@@ -507,7 +507,7 @@ func (o *StoredPaymentMethod) GetShopperEmailOk() (*string, bool) {
 }
 
 // HasShopperEmail returns a boolean if a field has been set.
-func (o *StoredPaymentMethod) HasShopperEmail() bool {
+func (o *PixStoredPaymentMethod) HasShopperEmail() bool {
 	if o != nil && !common.IsNil(o.ShopperEmail) {
 		return true
 	}
@@ -516,12 +516,12 @@ func (o *StoredPaymentMethod) HasShopperEmail() bool {
 }
 
 // SetShopperEmail gets a reference to the given string and assigns it to the ShopperEmail field.
-func (o *StoredPaymentMethod) SetShopperEmail(v string) {
+func (o *PixStoredPaymentMethod) SetShopperEmail(v string) {
 	o.ShopperEmail = &v
 }
 
 // GetSupportedRecurringProcessingModels returns the SupportedRecurringProcessingModels field value if set, zero value otherwise.
-func (o *StoredPaymentMethod) GetSupportedRecurringProcessingModels() []string {
+func (o *PixStoredPaymentMethod) GetSupportedRecurringProcessingModels() []string {
 	if o == nil || common.IsNil(o.SupportedRecurringProcessingModels) {
 		var ret []string
 		return ret
@@ -531,7 +531,7 @@ func (o *StoredPaymentMethod) GetSupportedRecurringProcessingModels() []string {
 
 // GetSupportedRecurringProcessingModelsOk returns a tuple with the SupportedRecurringProcessingModels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StoredPaymentMethod) GetSupportedRecurringProcessingModelsOk() ([]string, bool) {
+func (o *PixStoredPaymentMethod) GetSupportedRecurringProcessingModelsOk() ([]string, bool) {
 	if o == nil || common.IsNil(o.SupportedRecurringProcessingModels) {
 		return nil, false
 	}
@@ -539,7 +539,7 @@ func (o *StoredPaymentMethod) GetSupportedRecurringProcessingModelsOk() ([]strin
 }
 
 // HasSupportedRecurringProcessingModels returns a boolean if a field has been set.
-func (o *StoredPaymentMethod) HasSupportedRecurringProcessingModels() bool {
+func (o *PixStoredPaymentMethod) HasSupportedRecurringProcessingModels() bool {
 	if o != nil && !common.IsNil(o.SupportedRecurringProcessingModels) {
 		return true
 	}
@@ -548,12 +548,12 @@ func (o *StoredPaymentMethod) HasSupportedRecurringProcessingModels() bool {
 }
 
 // SetSupportedRecurringProcessingModels gets a reference to the given []string and assigns it to the SupportedRecurringProcessingModels field.
-func (o *StoredPaymentMethod) SetSupportedRecurringProcessingModels(v []string) {
+func (o *PixStoredPaymentMethod) SetSupportedRecurringProcessingModels(v []string) {
 	o.SupportedRecurringProcessingModels = v
 }
 
 // GetSupportedShopperInteractions returns the SupportedShopperInteractions field value if set, zero value otherwise.
-func (o *StoredPaymentMethod) GetSupportedShopperInteractions() []string {
+func (o *PixStoredPaymentMethod) GetSupportedShopperInteractions() []string {
 	if o == nil || common.IsNil(o.SupportedShopperInteractions) {
 		var ret []string
 		return ret
@@ -563,7 +563,7 @@ func (o *StoredPaymentMethod) GetSupportedShopperInteractions() []string {
 
 // GetSupportedShopperInteractionsOk returns a tuple with the SupportedShopperInteractions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StoredPaymentMethod) GetSupportedShopperInteractionsOk() ([]string, bool) {
+func (o *PixStoredPaymentMethod) GetSupportedShopperInteractionsOk() ([]string, bool) {
 	if o == nil || common.IsNil(o.SupportedShopperInteractions) {
 		return nil, false
 	}
@@ -571,7 +571,7 @@ func (o *StoredPaymentMethod) GetSupportedShopperInteractionsOk() ([]string, boo
 }
 
 // HasSupportedShopperInteractions returns a boolean if a field has been set.
-func (o *StoredPaymentMethod) HasSupportedShopperInteractions() bool {
+func (o *PixStoredPaymentMethod) HasSupportedShopperInteractions() bool {
 	if o != nil && !common.IsNil(o.SupportedShopperInteractions) {
 		return true
 	}
@@ -580,12 +580,12 @@ func (o *StoredPaymentMethod) HasSupportedShopperInteractions() bool {
 }
 
 // SetSupportedShopperInteractions gets a reference to the given []string and assigns it to the SupportedShopperInteractions field.
-func (o *StoredPaymentMethod) SetSupportedShopperInteractions(v []string) {
+func (o *PixStoredPaymentMethod) SetSupportedShopperInteractions(v []string) {
 	o.SupportedShopperInteractions = v
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
-func (o *StoredPaymentMethod) GetType() string {
+func (o *PixStoredPaymentMethod) GetType() string {
 	if o == nil || common.IsNil(o.Type) {
 		var ret string
 		return ret
@@ -595,7 +595,7 @@ func (o *StoredPaymentMethod) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StoredPaymentMethod) GetTypeOk() (*string, bool) {
+func (o *PixStoredPaymentMethod) GetTypeOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Type) {
 		return nil, false
 	}
@@ -603,7 +603,7 @@ func (o *StoredPaymentMethod) GetTypeOk() (*string, bool) {
 }
 
 // HasType returns a boolean if a field has been set.
-func (o *StoredPaymentMethod) HasType() bool {
+func (o *PixStoredPaymentMethod) HasType() bool {
 	if o != nil && !common.IsNil(o.Type) {
 		return true
 	}
@@ -612,11 +612,11 @@ func (o *StoredPaymentMethod) HasType() bool {
 }
 
 // SetType gets a reference to the given string and assigns it to the Type field.
-func (o *StoredPaymentMethod) SetType(v string) {
+func (o *PixStoredPaymentMethod) SetType(v string) {
 	o.Type = &v
 }
 
-func (o StoredPaymentMethod) MarshalJSON() ([]byte, error) {
+func (o PixStoredPaymentMethod) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -624,7 +624,7 @@ func (o StoredPaymentMethod) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o StoredPaymentMethod) ToMap() (map[string]interface{}, error) {
+func (o PixStoredPaymentMethod) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.BankAccountNumber) {
 		toSerialize["bankAccountNumber"] = o.BankAccountNumber
@@ -680,38 +680,48 @@ func (o StoredPaymentMethod) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableStoredPaymentMethod struct {
-	value *StoredPaymentMethod
+type NullablePixStoredPaymentMethod struct {
+	value *PixStoredPaymentMethod
 	isSet bool
 }
 
-func (v NullableStoredPaymentMethod) Get() *StoredPaymentMethod {
+func (v NullablePixStoredPaymentMethod) Get() *PixStoredPaymentMethod {
 	return v.value
 }
 
-func (v *NullableStoredPaymentMethod) Set(val *StoredPaymentMethod) {
+func (v *NullablePixStoredPaymentMethod) Set(val *PixStoredPaymentMethod) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableStoredPaymentMethod) IsSet() bool {
+func (v NullablePixStoredPaymentMethod) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableStoredPaymentMethod) Unset() {
+func (v *NullablePixStoredPaymentMethod) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableStoredPaymentMethod(val *StoredPaymentMethod) *NullableStoredPaymentMethod {
-	return &NullableStoredPaymentMethod{value: val, isSet: true}
+func NewNullablePixStoredPaymentMethod(val *PixStoredPaymentMethod) *NullablePixStoredPaymentMethod {
+	return &NullablePixStoredPaymentMethod{value: val, isSet: true}
 }
 
-func (v NullableStoredPaymentMethod) MarshalJSON() ([]byte, error) {
+func (v NullablePixStoredPaymentMethod) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableStoredPaymentMethod) UnmarshalJSON(src []byte) error {
+func (v *NullablePixStoredPaymentMethod) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
+}
+
+func (o *PixStoredPaymentMethod) isValidType() bool {
+	var allowedEnumValues = []string{"pix"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
