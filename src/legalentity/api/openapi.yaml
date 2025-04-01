@@ -2162,7 +2162,7 @@ components:
       description: Example request for creating a hosted onboarding link
       summary: Create a hosted onboarding link
       value:
-        redirectUrl: https://your.redirect-url.com/
+        redirectUrl: https://example.com/
         locale: nl-NL
     post-legalEntities-id-onboardingLinks-createOnboardingLink-200:
       description: Example response for a hosted onboarding link
