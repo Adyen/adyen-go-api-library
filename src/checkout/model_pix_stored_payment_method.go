@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v20/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v20/src/common"
 )
 
 // checks if the PixStoredPaymentMethod type satisfies the MappedNullable interface at compile time
@@ -616,7 +617,7 @@ func (o *PixStoredPaymentMethod) SetType(v string) {
 }
 
 func (o PixStoredPaymentMethod) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -715,14 +716,12 @@ func (v *NullablePixStoredPaymentMethod) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *PixStoredPaymentMethod) isValidType() bool {
-    var allowedEnumValues = []string{ "pix" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"pix"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-
