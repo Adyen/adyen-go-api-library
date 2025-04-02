@@ -10,8 +10,7 @@ package acswebhook
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v20/src/common"
+    "github.com/adyen/adyen-go-api-library/v20/src/common"
 )
 
 // checks if the RelayedAuthenticationRequest type satisfies the MappedNullable interface at compile time
@@ -22,8 +21,8 @@ type RelayedAuthenticationRequest struct {
 	// The unique identifier of the challenge.
 	Id string `json:"id"`
 	// The unique identifier of the [payment instrument](https://docs.adyen.com/api-explorer/balanceplatform/latest/get/paymentInstruments/_id_) used for the purchase.
-	PaymentInstrumentId string   `json:"paymentInstrumentId"`
-	Purchase            Purchase `json:"purchase"`
+	PaymentInstrumentId string `json:"paymentInstrumentId"`
+	Purchase Purchase `json:"purchase"`
 }
 
 // NewRelayedAuthenticationRequest instantiates a new RelayedAuthenticationRequest object
@@ -119,7 +118,7 @@ func (o *RelayedAuthenticationRequest) SetPurchase(v Purchase) {
 }
 
 func (o RelayedAuthenticationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -169,3 +168,6 @@ func (v *NullableRelayedAuthenticationRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
