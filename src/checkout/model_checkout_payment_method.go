@@ -55,6 +55,7 @@ type CheckoutPaymentMethod struct {
 	PaymentDetails                    *PaymentDetails
 	PixDetails                        *PixDetails
 	PseDetails                        *PseDetails
+	RakutenPayDetails                 *RakutenPayDetails
 	RatepayDetails                    *RatepayDetails
 	RivertyDetails                    *RivertyDetails
 	SamsungPayDetails                 *SamsungPayDetails
@@ -347,6 +348,13 @@ func PixDetailsAsCheckoutPaymentMethod(v *PixDetails) CheckoutPaymentMethod {
 func PseDetailsAsCheckoutPaymentMethod(v *PseDetails) CheckoutPaymentMethod {
 	return CheckoutPaymentMethod{
 		PseDetails: v,
+	}
+}
+
+// RakutenPayDetailsAsCheckoutPaymentMethod is a convenience function that returns RakutenPayDetails wrapped in CheckoutPaymentMethod
+func RakutenPayDetailsAsCheckoutPaymentMethod(v *RakutenPayDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
+		RakutenPayDetails: v,
 	}
 }
 
@@ -965,6 +973,19 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		dst.PseDetails = nil
 	}
 
+	// try to unmarshal data into RakutenPayDetails
+	err = json.Unmarshal(data, &dst.RakutenPayDetails)
+	if err == nil {
+		jsonRakutenPayDetails, _ := json.Marshal(dst.RakutenPayDetails)
+		if string(jsonRakutenPayDetails) == "{}" || !dst.RakutenPayDetails.isValidType() { // empty struct
+			dst.RakutenPayDetails = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.RakutenPayDetails = nil
+	}
+
 	// try to unmarshal data into RatepayDetails
 	err = json.Unmarshal(data, &dst.RatepayDetails)
 	if err == nil {
@@ -1176,6 +1197,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		dst.PaymentDetails = nil
 		dst.PixDetails = nil
 		dst.PseDetails = nil
+		dst.RakutenPayDetails = nil
 		dst.RatepayDetails = nil
 		dst.RivertyDetails = nil
 		dst.SamsungPayDetails = nil
@@ -1358,6 +1380,10 @@ func (src CheckoutPaymentMethod) MarshalJSON() ([]byte, error) {
 
 	if src.PseDetails != nil {
 		return json.Marshal(&src.PseDetails)
+	}
+
+	if src.RakutenPayDetails != nil {
+		return json.Marshal(&src.RakutenPayDetails)
 	}
 
 	if src.RatepayDetails != nil {
@@ -1578,6 +1604,10 @@ func (obj *CheckoutPaymentMethod) GetActualInstance() interface{} {
 
 	if obj.PseDetails != nil {
 		return obj.PseDetails
+	}
+
+	if obj.RakutenPayDetails != nil {
+		return obj.RakutenPayDetails
 	}
 
 	if obj.RatepayDetails != nil {

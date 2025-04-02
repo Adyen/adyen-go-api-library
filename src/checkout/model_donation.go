@@ -25,6 +25,8 @@ type Donation struct {
 	DonationType string `json:"donationType"`
 	// The maximum amount a transaction can be rounded up to make a donation. This field is only present when `donationType` is **roundup**.
 	MaxRoundupAmount *int64 `json:"maxRoundupAmount,omitempty"`
+	// The [type of donation](https://docs.adyen.com/online-payments/donations/#donation-types).  Possible values: * **roundup**: a donation where the original transaction amount is rounded up as a donation. * **fixedAmounts**: a donation where you show fixed donation amounts that the shopper can select from.
+	Type string `json:"type"`
 	// The fixed donation amounts in [minor units](https://docs.adyen.com/development-resources/currency-codes//#minor-units). This field is only present when `donationType` is **fixedAmounts**.
 	Values []int64 `json:"values,omitempty"`
 }
@@ -33,10 +35,11 @@ type Donation struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDonation(currency string, donationType string) *Donation {
+func NewDonation(currency string, donationType string, type_ string) *Donation {
 	this := Donation{}
 	this.Currency = currency
 	this.DonationType = donationType
+	this.Type = type_
 	return &this
 }
 
@@ -128,6 +131,30 @@ func (o *Donation) SetMaxRoundupAmount(v int64) {
 	o.MaxRoundupAmount = &v
 }
 
+// GetType returns the Type field value
+func (o *Donation) GetType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value
+// and a boolean to check if the value has been set.
+func (o *Donation) GetTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Type, true
+}
+
+// SetType sets field value
+func (o *Donation) SetType(v string) {
+	o.Type = v
+}
+
 // GetValues returns the Values field value if set, zero value otherwise.
 func (o *Donation) GetValues() []int64 {
 	if o == nil || common.IsNil(o.Values) {
@@ -175,6 +202,7 @@ func (o Donation) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.MaxRoundupAmount) {
 		toSerialize["maxRoundupAmount"] = o.MaxRoundupAmount
 	}
+	toSerialize["type"] = o.Type
 	if !common.IsNil(o.Values) {
 		toSerialize["values"] = o.Values
 	}

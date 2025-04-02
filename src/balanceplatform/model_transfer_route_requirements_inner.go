@@ -21,6 +21,7 @@ type TransferRouteRequirementsInner struct {
 	BankAccountIdentificationTypeRequirement *BankAccountIdentificationTypeRequirement
 	IbanAccountIdentificationRequirement     *IbanAccountIdentificationRequirement
 	PaymentInstrumentRequirement             *PaymentInstrumentRequirement
+	USInstantPayoutAddressRequirement        *USInstantPayoutAddressRequirement
 	USInternationalAchAddressRequirement     *USInternationalAchAddressRequirement
 }
 
@@ -63,6 +64,13 @@ func IbanAccountIdentificationRequirementAsTransferRouteRequirementsInner(v *Iba
 func PaymentInstrumentRequirementAsTransferRouteRequirementsInner(v *PaymentInstrumentRequirement) TransferRouteRequirementsInner {
 	return TransferRouteRequirementsInner{
 		PaymentInstrumentRequirement: v,
+	}
+}
+
+// USInstantPayoutAddressRequirementAsTransferRouteRequirementsInner is a convenience function that returns USInstantPayoutAddressRequirement wrapped in TransferRouteRequirementsInner
+func USInstantPayoutAddressRequirementAsTransferRouteRequirementsInner(v *USInstantPayoutAddressRequirement) TransferRouteRequirementsInner {
+	return TransferRouteRequirementsInner{
+		USInstantPayoutAddressRequirement: v,
 	}
 }
 
@@ -155,6 +163,19 @@ func (dst *TransferRouteRequirementsInner) UnmarshalJSON(data []byte) error {
 		dst.PaymentInstrumentRequirement = nil
 	}
 
+	// try to unmarshal data into USInstantPayoutAddressRequirement
+	err = json.Unmarshal(data, &dst.USInstantPayoutAddressRequirement)
+	if err == nil {
+		jsonUSInstantPayoutAddressRequirement, _ := json.Marshal(dst.USInstantPayoutAddressRequirement)
+		if string(jsonUSInstantPayoutAddressRequirement) == "{}" || !dst.USInstantPayoutAddressRequirement.isValidType() { // empty struct
+			dst.USInstantPayoutAddressRequirement = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.USInstantPayoutAddressRequirement = nil
+	}
+
 	// try to unmarshal data into USInternationalAchAddressRequirement
 	err = json.Unmarshal(data, &dst.USInternationalAchAddressRequirement)
 	if err == nil {
@@ -176,6 +197,7 @@ func (dst *TransferRouteRequirementsInner) UnmarshalJSON(data []byte) error {
 		dst.BankAccountIdentificationTypeRequirement = nil
 		dst.IbanAccountIdentificationRequirement = nil
 		dst.PaymentInstrumentRequirement = nil
+		dst.USInstantPayoutAddressRequirement = nil
 		dst.USInternationalAchAddressRequirement = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(TransferRouteRequirementsInner)")
@@ -212,6 +234,10 @@ func (src TransferRouteRequirementsInner) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.PaymentInstrumentRequirement)
 	}
 
+	if src.USInstantPayoutAddressRequirement != nil {
+		return json.Marshal(&src.USInstantPayoutAddressRequirement)
+	}
+
 	if src.USInternationalAchAddressRequirement != nil {
 		return json.Marshal(&src.USInternationalAchAddressRequirement)
 	}
@@ -246,6 +272,10 @@ func (obj *TransferRouteRequirementsInner) GetActualInstance() interface{} {
 
 	if obj.PaymentInstrumentRequirement != nil {
 		return obj.PaymentInstrumentRequirement
+	}
+
+	if obj.USInstantPayoutAddressRequirement != nil {
+		return obj.USInstantPayoutAddressRequirement
 	}
 
 	if obj.USInternationalAchAddressRequirement != nil {
