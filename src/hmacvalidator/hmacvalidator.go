@@ -32,6 +32,11 @@ func CalculateHmac(data interface{}, secret string) (string, error) {
 // notificationRequestItem: NotificationRequestItem object
 // key: HMAC key to generate the signature
 func ValidateHmac(notificationRequestItem webhook.NotificationRequestItem, key string) bool {
+	// Check for nil AdditionalData first to prevent code panic.
+	if notificationRequestItem.AdditionalData == nil {
+		return false
+	}
+
 	expectedSign, err := CalculateHmac(notificationRequestItem, key)
 	if err != nil {
 		return false
