@@ -121,7 +121,8 @@ func ExampleCustomHTTPClientConfiguration() {
 	})
 
 	fmt.Println(client.BinLookup().Client.Cfg.HTTPClient.Timeout)
-	// Output: 512ms
+	// Output: Custom http.Client is provided 
+	// 512ms
 }
 
 func ExampleProxy() {
