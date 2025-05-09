@@ -60,7 +60,8 @@ type PaymentRequest struct {
 	// When true and `shopperReference` is provided, the payment details will be tokenized for payouts.
 	EnablePayOut *bool `json:"enablePayOut,omitempty"`
 	// When true and `shopperReference` is provided, the payment details will be stored for [recurring payments](https://docs.adyen.com/online-payments/tokenization/#recurring-payment-types) where the shopper is not present, such as subscription or automatic top-up payments.
-	EnableRecurring *bool `json:"enableRecurring,omitempty"`
+	EnableRecurring    *bool               `json:"enableRecurring,omitempty"`
+	EnhancedSchemeData *EnhancedSchemeData `json:"enhancedSchemeData,omitempty"`
 	// The type of the entity the payment is processed for.
 	EntityType *string `json:"entityType,omitempty"`
 	// An integer value that is added to the normal fraud score. The value can be either positive or negative.
@@ -104,7 +105,7 @@ type PaymentRequest struct {
 	RedirectToIssuerMethod *string `json:"redirectToIssuerMethod,omitempty"`
 	// The reference to uniquely identify a payment. This reference is used in all communication with you about the payment status. We recommend using a unique value per payment; however, it is not a requirement. If you need to provide multiple references for a transaction, separate them with hyphens (\"-\"). Maximum length: 80 characters.
 	Reference string `json:"reference"`
-	// The URL to return to in case of a redirection. The format depends on the channel.  * For web, include the protocol `http://` or `https://`. You can also include your own additional query parameters, for example, shopper ID or order reference number. Example: `https://your-company.com/checkout?shopperOrder=12xy` * For iOS, use the custom URL for your app. To know more about setting custom URL schemes, refer to the [Apple Developer documentation](https://developer.apple.com/documentation/uikit/inter-process_communication/allowing_apps_and_websites_to_link_to_your_content/defining_a_custom_url_scheme_for_your_app). Example: `my-app://` * For Android, use a custom URL handled by an Activity on your app. You can configure it with an [intent filter](https://developer.android.com/guide/components/intents-filters). Example: `my-app://your.package.name`  If the URL to return to includes non-ASCII characters, like spaces or special letters, URL encode the value. > The URL must not include personally identifiable information (PII), for example name or email address.
+	// The URL to return to in case of a redirection. The format depends on the channel.  * For web, include the protocol `http://` or `https://`. You can also include your own additional query parameters, for example, shopper ID or order reference number. Example: `https://your-company.example.com/checkout?shopperOrder=12xy` * For iOS, use the custom URL for your app. To know more about setting custom URL schemes, refer to the [Apple Developer documentation](https://developer.apple.com/documentation/uikit/inter-process_communication/allowing_apps_and_websites_to_link_to_your_content/defining_a_custom_url_scheme_for_your_app). Example: `my-app://` * For Android, use a custom URL handled by an Activity on your app. You can configure it with an [intent filter](https://developer.android.com/guide/components/intents-filters). Example: `my-app://your.package.name`  If the URL to return to includes non-ASCII characters, like spaces or special letters, URL encode the value. > The URL must not include personally identifiable information (PII), for example name or email address.
 	ReturnUrl string    `json:"returnUrl"`
 	RiskData  *RiskData `json:"riskData,omitempty"`
 	// The date and time until when the session remains valid, in [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format.  For example: 2020-07-18T15:42:40.428+01:00
@@ -134,6 +135,7 @@ type PaymentRequest struct {
 	StorePaymentMethod *bool `json:"storePaymentMethod,omitempty"`
 	// This field contains additional information on the submerchant, who is onboarded to an acquirer through a payment facilitator or aggregator
 	SubMerchants []SubMerchantInfo `json:"subMerchants,omitempty"`
+	Surcharge    *Surcharge        `json:"surcharge,omitempty"`
 	// The shopper's telephone number.
 	TelephoneNumber     *string                `json:"telephoneNumber,omitempty"`
 	ThreeDS2RequestData *ThreeDS2RequestFields `json:"threeDS2RequestData,omitempty"`
@@ -941,6 +943,38 @@ func (o *PaymentRequest) HasEnableRecurring() bool {
 // SetEnableRecurring gets a reference to the given bool and assigns it to the EnableRecurring field.
 func (o *PaymentRequest) SetEnableRecurring(v bool) {
 	o.EnableRecurring = &v
+}
+
+// GetEnhancedSchemeData returns the EnhancedSchemeData field value if set, zero value otherwise.
+func (o *PaymentRequest) GetEnhancedSchemeData() EnhancedSchemeData {
+	if o == nil || common.IsNil(o.EnhancedSchemeData) {
+		var ret EnhancedSchemeData
+		return ret
+	}
+	return *o.EnhancedSchemeData
+}
+
+// GetEnhancedSchemeDataOk returns a tuple with the EnhancedSchemeData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentRequest) GetEnhancedSchemeDataOk() (*EnhancedSchemeData, bool) {
+	if o == nil || common.IsNil(o.EnhancedSchemeData) {
+		return nil, false
+	}
+	return o.EnhancedSchemeData, true
+}
+
+// HasEnhancedSchemeData returns a boolean if a field has been set.
+func (o *PaymentRequest) HasEnhancedSchemeData() bool {
+	if o != nil && !common.IsNil(o.EnhancedSchemeData) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnhancedSchemeData gets a reference to the given EnhancedSchemeData and assigns it to the EnhancedSchemeData field.
+func (o *PaymentRequest) SetEnhancedSchemeData(v EnhancedSchemeData) {
+	o.EnhancedSchemeData = &v
 }
 
 // GetEntityType returns the EntityType field value if set, zero value otherwise.
@@ -2255,6 +2289,38 @@ func (o *PaymentRequest) SetSubMerchants(v []SubMerchantInfo) {
 	o.SubMerchants = v
 }
 
+// GetSurcharge returns the Surcharge field value if set, zero value otherwise.
+func (o *PaymentRequest) GetSurcharge() Surcharge {
+	if o == nil || common.IsNil(o.Surcharge) {
+		var ret Surcharge
+		return ret
+	}
+	return *o.Surcharge
+}
+
+// GetSurchargeOk returns a tuple with the Surcharge field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentRequest) GetSurchargeOk() (*Surcharge, bool) {
+	if o == nil || common.IsNil(o.Surcharge) {
+		return nil, false
+	}
+	return o.Surcharge, true
+}
+
+// HasSurcharge returns a boolean if a field has been set.
+func (o *PaymentRequest) HasSurcharge() bool {
+	if o != nil && !common.IsNil(o.Surcharge) {
+		return true
+	}
+
+	return false
+}
+
+// SetSurcharge gets a reference to the given Surcharge and assigns it to the Surcharge field.
+func (o *PaymentRequest) SetSurcharge(v Surcharge) {
+	o.Surcharge = &v
+}
+
 // GetTelephoneNumber returns the TelephoneNumber field value if set, zero value otherwise.
 func (o *PaymentRequest) GetTelephoneNumber() string {
 	if o == nil || common.IsNil(o.TelephoneNumber) {
@@ -2469,6 +2535,9 @@ func (o PaymentRequest) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.EnableRecurring) {
 		toSerialize["enableRecurring"] = o.EnableRecurring
 	}
+	if !common.IsNil(o.EnhancedSchemeData) {
+		toSerialize["enhancedSchemeData"] = o.EnhancedSchemeData
+	}
 	if !common.IsNil(o.EntityType) {
 		toSerialize["entityType"] = o.EntityType
 	}
@@ -2586,6 +2655,9 @@ func (o PaymentRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.SubMerchants) {
 		toSerialize["subMerchants"] = o.SubMerchants
+	}
+	if !common.IsNil(o.Surcharge) {
+		toSerialize["surcharge"] = o.Surcharge
 	}
 	if !common.IsNil(o.TelephoneNumber) {
 		toSerialize["telephoneNumber"] = o.TelephoneNumber

@@ -23,7 +23,7 @@ type BalanceAccount struct {
 	AccountHolderId string `json:"accountHolderId"`
 	// List of balances with the amount and currency.
 	Balances []Balance `json:"balances,omitempty"`
-	// The default three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes) of the balance account. The default value is **EUR**. > After a balance account is created, you cannot change its default currency.
+	// The default three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes) of the balance account. This is the currency displayed on the Balance Account overview page in your Customer Area. The default value is **EUR**. > After a balance account is created, you cannot change its default currency.
 	DefaultCurrencyCode *string `json:"defaultCurrencyCode,omitempty"`
 	// A human-readable description of the balance account, maximum 300 characters. You can use this parameter to distinguish between multiple balance accounts under an account holder.
 	Description *string `json:"description,omitempty"`

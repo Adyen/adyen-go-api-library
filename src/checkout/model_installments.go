@@ -190,7 +190,7 @@ func (v *NullableInstallments) UnmarshalJSON(src []byte) error {
 }
 
 func (o *Installments) isValidPlan() bool {
-	var allowedEnumValues = []string{"buynow_paylater", "interes_refund_prctg", "interest_bonus", "nointeres_refund_prctg", "nointerest_bonus", "refund_prctg", "regular", "revolving", "with_interest"}
+	var allowedEnumValues = []string{"bonus", "buynow_paylater", "interes_refund_prctg", "interest_bonus", "nointeres_refund_prctg", "nointerest_bonus", "refund_prctg", "regular", "revolving", "with_interest"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetPlan() == allowed {
 			return true
