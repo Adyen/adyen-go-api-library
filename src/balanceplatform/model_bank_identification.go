@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v20/src/common"
+    "github.com/adyen/adyen-go-api-library/v20/src/common"
 )
 
 // checks if the BankIdentification type satisfies the MappedNullable interface at compile time
@@ -23,7 +22,7 @@ type BankIdentification struct {
 	Country *string `json:"country,omitempty"`
 	// The bank identification code.
 	Identification *string `json:"identification,omitempty"`
-	// The type of the identification.  Possible values: **iban**, **routingNumber**, **sortCode**.
+	// The type of the identification.  Possible values: **iban**, **routingNumber**, **sortCode**, **bic**.
 	IdentificationType *string `json:"identificationType,omitempty"`
 }
 
@@ -141,7 +140,7 @@ func (o *BankIdentification) SetIdentificationType(v string) {
 }
 
 func (o BankIdentification) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -198,12 +197,14 @@ func (v *NullableBankIdentification) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *BankIdentification) isValidIdentificationType() bool {
-	var allowedEnumValues = []string{"iban", "routingNumber", "sortCode"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetIdentificationType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "bic", "iban", "routingNumber", "sortCode" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetIdentificationType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

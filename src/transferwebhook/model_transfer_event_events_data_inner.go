@@ -10,12 +10,21 @@ package transferwebhook
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v20/src/common"
 	"fmt"
 )
 
 // TransferEventEventsDataInner - struct for TransferEventEventsDataInner
 type TransferEventEventsDataInner struct {
+	IssuingTransactionData *IssuingTransactionData
 	MerchantPurchaseData *MerchantPurchaseData
+}
+
+// IssuingTransactionDataAsTransferEventEventsDataInner is a convenience function that returns IssuingTransactionData wrapped in TransferEventEventsDataInner
+func IssuingTransactionDataAsTransferEventEventsDataInner(v *IssuingTransactionData) TransferEventEventsDataInner {
+	return TransferEventEventsDataInner{
+		IssuingTransactionData: v,
+	}
 }
 
 // MerchantPurchaseDataAsTransferEventEventsDataInner is a convenience function that returns MerchantPurchaseData wrapped in TransferEventEventsDataInner
@@ -25,17 +34,31 @@ func MerchantPurchaseDataAsTransferEventEventsDataInner(v *MerchantPurchaseData)
 	}
 }
 
+
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *TransferEventEventsDataInner) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
+	// try to unmarshal data into IssuingTransactionData
+	err = json.Unmarshal(data, &dst.IssuingTransactionData)
+	if err == nil {
+		jsonIssuingTransactionData, _ := json.Marshal(dst.IssuingTransactionData)
+		if string(jsonIssuingTransactionData) == "{}" || !dst.IssuingTransactionData.isValidType() { // empty struct
+			dst.IssuingTransactionData = nil
+        } else {
+			match++
+		}
+	} else {
+		dst.IssuingTransactionData = nil
+	}
+
 	// try to unmarshal data into MerchantPurchaseData
 	err = json.Unmarshal(data, &dst.MerchantPurchaseData)
 	if err == nil {
 		jsonMerchantPurchaseData, _ := json.Marshal(dst.MerchantPurchaseData)
 		if string(jsonMerchantPurchaseData) == "{}" || !dst.MerchantPurchaseData.isValidType() { // empty struct
 			dst.MerchantPurchaseData = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -44,6 +67,7 @@ func (dst *TransferEventEventsDataInner) UnmarshalJSON(data []byte) error {
 
 	if match > 1 { // more than 1 match
 		// reset to nil
+		dst.IssuingTransactionData = nil
 		dst.MerchantPurchaseData = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(TransferEventEventsDataInner)")
@@ -56,6 +80,10 @@ func (dst *TransferEventEventsDataInner) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src TransferEventEventsDataInner) MarshalJSON() ([]byte, error) {
+	if src.IssuingTransactionData != nil {
+		return json.Marshal(&src.IssuingTransactionData)
+	}
+
 	if src.MerchantPurchaseData != nil {
 		return json.Marshal(&src.MerchantPurchaseData)
 	}
@@ -64,10 +92,14 @@ func (src TransferEventEventsDataInner) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *TransferEventEventsDataInner) GetActualInstance() interface{} {
+func (obj *TransferEventEventsDataInner) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
+	if obj.IssuingTransactionData != nil {
+		return obj.IssuingTransactionData
+	}
+
 	if obj.MerchantPurchaseData != nil {
 		return obj.MerchantPurchaseData
 	}
@@ -111,3 +143,5 @@ func (v *NullableTransferEventEventsDataInner) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
