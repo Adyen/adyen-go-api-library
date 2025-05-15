@@ -750,7 +750,7 @@ func (v *NullableTransferEvent) UnmarshalJSON(src []byte) error {
 }
 
 func (o *TransferEvent) isValidReason() bool {
-	var allowedEnumValues = []string{"accountHierarchyNotActive", "amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declined", "declinedByTransactionRule", "directDebitNotSupported", "error", "notEnoughBalance", "pendingApproval", "pendingExecution", "refusedByCounterpartyBank", "refusedByCustomer", "routeNotFound", "scaFailed", "transferInstrumentDoesNotExist", "unknown"}
+	var allowedEnumValues = []string{"accountHierarchyNotActive", "amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declined", "declinedByTransactionRule", "directDebitNotSupported", "error", "notEnoughBalance", "pending", "pendingApproval", "pendingExecution", "refusedByCounterpartyBank", "refusedByCustomer", "routeNotFound", "scaFailed", "transferInstrumentDoesNotExist", "unknown"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetReason() == allowed {
 			return true

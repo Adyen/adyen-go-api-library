@@ -38,10 +38,11 @@ type TransferData struct {
 	DirectDebitInformation *DirectDebitInformation `json:"directDebitInformation,omitempty"`
 	// The direction of the transfer.  Possible values: **incoming**, **outgoing**.
 	Direction *string `json:"direction,omitempty"`
-	// The event id listed under events, that triggered the notification.
+	// The unique identifier of the latest transfer event. Included only when the `category` is **issuedCard**.
 	EventId *string `json:"eventId,omitempty"`
 	// The list of events leading up to the current status of the transfer.
-	Events []TransferEvent `json:"events,omitempty"`
+	Events         []TransferEvent `json:"events,omitempty"`
+	ExternalReason *ExternalReason `json:"externalReason,omitempty"`
 	// The ID of the resource.
 	Id                *string            `json:"id,omitempty"`
 	PaymentInstrument *PaymentInstrument `json:"paymentInstrument,omitempty"`
@@ -514,6 +515,38 @@ func (o *TransferData) SetEvents(v []TransferEvent) {
 	o.Events = v
 }
 
+// GetExternalReason returns the ExternalReason field value if set, zero value otherwise.
+func (o *TransferData) GetExternalReason() ExternalReason {
+	if o == nil || common.IsNil(o.ExternalReason) {
+		var ret ExternalReason
+		return ret
+	}
+	return *o.ExternalReason
+}
+
+// GetExternalReasonOk returns a tuple with the ExternalReason field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransferData) GetExternalReasonOk() (*ExternalReason, bool) {
+	if o == nil || common.IsNil(o.ExternalReason) {
+		return nil, false
+	}
+	return o.ExternalReason, true
+}
+
+// HasExternalReason returns a boolean if a field has been set.
+func (o *TransferData) HasExternalReason() bool {
+	if o != nil && !common.IsNil(o.ExternalReason) {
+		return true
+	}
+
+	return false
+}
+
+// SetExternalReason gets a reference to the given ExternalReason and assigns it to the ExternalReason field.
+func (o *TransferData) SetExternalReason(v ExternalReason) {
+	o.ExternalReason = &v
+}
+
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *TransferData) GetId() string {
 	if o == nil || common.IsNil(o.Id) {
@@ -906,6 +939,9 @@ func (o TransferData) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Events) {
 		toSerialize["events"] = o.Events
 	}
+	if !common.IsNil(o.ExternalReason) {
+		toSerialize["externalReason"] = o.ExternalReason
+	}
 	if !common.IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
@@ -995,7 +1031,7 @@ func (o *TransferData) isValidDirection() bool {
 	return false
 }
 func (o *TransferData) isValidReason() bool {
-	var allowedEnumValues = []string{"accountHierarchyNotActive", "amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declined", "declinedByTransactionRule", "directDebitNotSupported", "error", "notEnoughBalance", "pendingApproval", "pendingExecution", "refusedByCounterpartyBank", "refusedByCustomer", "routeNotFound", "scaFailed", "transferInstrumentDoesNotExist", "unknown"}
+	var allowedEnumValues = []string{"accountHierarchyNotActive", "amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declined", "declinedByTransactionRule", "directDebitNotSupported", "error", "notEnoughBalance", "pending", "pendingApproval", "pendingExecution", "refusedByCounterpartyBank", "refusedByCustomer", "routeNotFound", "scaFailed", "transferInstrumentDoesNotExist", "unknown"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetReason() == allowed {
 			return true
