@@ -19,6 +19,8 @@ var _ common.MappedNullable = &AfterpayTouchInfo{}
 
 // AfterpayTouchInfo struct for AfterpayTouchInfo
 type AfterpayTouchInfo struct {
+	// Support Email
+	SupportEmail *string `json:"supportEmail,omitempty"`
 	// Support Url
 	SupportUrl string `json:"supportUrl"`
 }
@@ -39,6 +41,38 @@ func NewAfterpayTouchInfo(supportUrl string) *AfterpayTouchInfo {
 func NewAfterpayTouchInfoWithDefaults() *AfterpayTouchInfo {
 	this := AfterpayTouchInfo{}
 	return &this
+}
+
+// GetSupportEmail returns the SupportEmail field value if set, zero value otherwise.
+func (o *AfterpayTouchInfo) GetSupportEmail() string {
+	if o == nil || common.IsNil(o.SupportEmail) {
+		var ret string
+		return ret
+	}
+	return *o.SupportEmail
+}
+
+// GetSupportEmailOk returns a tuple with the SupportEmail field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AfterpayTouchInfo) GetSupportEmailOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SupportEmail) {
+		return nil, false
+	}
+	return o.SupportEmail, true
+}
+
+// HasSupportEmail returns a boolean if a field has been set.
+func (o *AfterpayTouchInfo) HasSupportEmail() bool {
+	if o != nil && !common.IsNil(o.SupportEmail) {
+		return true
+	}
+
+	return false
+}
+
+// SetSupportEmail gets a reference to the given string and assigns it to the SupportEmail field.
+func (o *AfterpayTouchInfo) SetSupportEmail(v string) {
+	o.SupportEmail = &v
 }
 
 // GetSupportUrl returns the SupportUrl field value
@@ -75,6 +109,9 @@ func (o AfterpayTouchInfo) MarshalJSON() ([]byte, error) {
 
 func (o AfterpayTouchInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.SupportEmail) {
+		toSerialize["supportEmail"] = o.SupportEmail
+	}
 	toSerialize["supportUrl"] = o.SupportUrl
 	return toSerialize, nil
 }

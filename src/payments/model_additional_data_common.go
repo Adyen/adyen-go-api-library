@@ -19,6 +19,8 @@ var _ common.MappedNullable = &AdditionalDataCommon{}
 
 // AdditionalDataCommon struct for AdditionalDataCommon
 type AdditionalDataCommon struct {
+	// Triggers test scenarios that allow to replicate certain acquirer response codes. See [Testing result codes and refusal reasons](https://docs.adyen.com/development-resources/testing/result-codes/) to learn about the possible values, and the `refusalReason` values you can trigger.
+	RequestedTestAcquirerResponseCode *string `json:"RequestedTestAcquirerResponseCode,omitempty"`
 	// Triggers test scenarios that allow to replicate certain communication errors.  Allowed values: * **NO_CONNECTION_AVAILABLE** – There wasn't a connection available to service the outgoing communication. This is a transient, retriable error since no messaging could be initiated to an issuing system (or third-party acquiring system). Therefore, the header Transient-Error: true is returned in the response. A subsequent request using the same idempotency key will be processed as if it was the first request. * **IOEXCEPTION_RECEIVED** – Something went wrong during transmission of the message or receiving the response. This is a classified as non-transient because the message could have been received by the issuing party and been acted upon. No transient error header is returned. If using idempotency, the (error) response is stored as the final result for the idempotency key. Subsequent messages with the same idempotency key not be processed beyond returning the stored response.
 	RequestedTestErrorResponseCode *string `json:"RequestedTestErrorResponseCode,omitempty"`
 	// Set to true to authorise a part of the requested amount in case the cardholder does not have enough funds on their account.  If a payment was partially authorised, the response includes resultCode: PartiallyAuthorised and the authorised amount in additionalData.authorisedAmountValue. To enable this functionality, contact our Support Team.
@@ -43,10 +45,14 @@ type AdditionalDataCommon struct {
 	SubMerchantCity *string `json:"subMerchantCity,omitempty"`
 	// This field is required if the transaction is performed by a registered payment facilitator. This field must contain the three-letter country code of the actual merchant's address. * Format: alpha-numeric. * Fixed length: 3 characters.
 	SubMerchantCountry *string `json:"subMerchantCountry,omitempty"`
+	// This field is required for transactions performed by registered payment facilitators. This field contains the email address of the sub-merchant. * Format: Alphanumeric * Maximum length: 40 characters
+	SubMerchantEmail *string `json:"subMerchantEmail,omitempty"`
 	// This field contains an identifier of the actual merchant when a transaction is submitted via a payment facilitator. The payment facilitator must send in this unique ID.  A unique identifier per submerchant that is required if the transaction is performed by a registered payment facilitator. * Format: alpha-numeric. * Fixed length: 15 characters.
 	SubMerchantID *string `json:"subMerchantID,omitempty"`
 	// This field is required if the transaction is performed by a registered payment facilitator. This field must contain the name of the actual merchant. * Format: alpha-numeric. * Maximum length: 22 characters.
 	SubMerchantName *string `json:"subMerchantName,omitempty"`
+	// This field is required for transactions performed by registered payment facilitators. This field contains the phone number of the sub-merchant.* Format: Alphanumeric * Maximum length: 20 characters
+	SubMerchantPhoneNumber *string `json:"subMerchantPhoneNumber,omitempty"`
 	// This field is required if the transaction is performed by a registered payment facilitator. This field must contain the postal code of the actual merchant's address. * Format: alpha-numeric. * Maximum length: 10 characters.
 	SubMerchantPostalCode *string `json:"subMerchantPostalCode,omitempty"`
 	// This field is required if the transaction is performed by a registered payment facilitator, and if applicable to the country. This field must contain the state code of the actual merchant's address. * Format: alpha-numeric. * Maximum length: 3 characters.
@@ -72,6 +78,38 @@ func NewAdditionalDataCommon() *AdditionalDataCommon {
 func NewAdditionalDataCommonWithDefaults() *AdditionalDataCommon {
 	this := AdditionalDataCommon{}
 	return &this
+}
+
+// GetRequestedTestAcquirerResponseCode returns the RequestedTestAcquirerResponseCode field value if set, zero value otherwise.
+func (o *AdditionalDataCommon) GetRequestedTestAcquirerResponseCode() string {
+	if o == nil || common.IsNil(o.RequestedTestAcquirerResponseCode) {
+		var ret string
+		return ret
+	}
+	return *o.RequestedTestAcquirerResponseCode
+}
+
+// GetRequestedTestAcquirerResponseCodeOk returns a tuple with the RequestedTestAcquirerResponseCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AdditionalDataCommon) GetRequestedTestAcquirerResponseCodeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.RequestedTestAcquirerResponseCode) {
+		return nil, false
+	}
+	return o.RequestedTestAcquirerResponseCode, true
+}
+
+// HasRequestedTestAcquirerResponseCode returns a boolean if a field has been set.
+func (o *AdditionalDataCommon) HasRequestedTestAcquirerResponseCode() bool {
+	if o != nil && !common.IsNil(o.RequestedTestAcquirerResponseCode) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequestedTestAcquirerResponseCode gets a reference to the given string and assigns it to the RequestedTestAcquirerResponseCode field.
+func (o *AdditionalDataCommon) SetRequestedTestAcquirerResponseCode(v string) {
+	o.RequestedTestAcquirerResponseCode = &v
 }
 
 // GetRequestedTestErrorResponseCode returns the RequestedTestErrorResponseCode field value if set, zero value otherwise.
@@ -458,6 +496,38 @@ func (o *AdditionalDataCommon) SetSubMerchantCountry(v string) {
 	o.SubMerchantCountry = &v
 }
 
+// GetSubMerchantEmail returns the SubMerchantEmail field value if set, zero value otherwise.
+func (o *AdditionalDataCommon) GetSubMerchantEmail() string {
+	if o == nil || common.IsNil(o.SubMerchantEmail) {
+		var ret string
+		return ret
+	}
+	return *o.SubMerchantEmail
+}
+
+// GetSubMerchantEmailOk returns a tuple with the SubMerchantEmail field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AdditionalDataCommon) GetSubMerchantEmailOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SubMerchantEmail) {
+		return nil, false
+	}
+	return o.SubMerchantEmail, true
+}
+
+// HasSubMerchantEmail returns a boolean if a field has been set.
+func (o *AdditionalDataCommon) HasSubMerchantEmail() bool {
+	if o != nil && !common.IsNil(o.SubMerchantEmail) {
+		return true
+	}
+
+	return false
+}
+
+// SetSubMerchantEmail gets a reference to the given string and assigns it to the SubMerchantEmail field.
+func (o *AdditionalDataCommon) SetSubMerchantEmail(v string) {
+	o.SubMerchantEmail = &v
+}
+
 // GetSubMerchantID returns the SubMerchantID field value if set, zero value otherwise.
 func (o *AdditionalDataCommon) GetSubMerchantID() string {
 	if o == nil || common.IsNil(o.SubMerchantID) {
@@ -520,6 +590,38 @@ func (o *AdditionalDataCommon) HasSubMerchantName() bool {
 // SetSubMerchantName gets a reference to the given string and assigns it to the SubMerchantName field.
 func (o *AdditionalDataCommon) SetSubMerchantName(v string) {
 	o.SubMerchantName = &v
+}
+
+// GetSubMerchantPhoneNumber returns the SubMerchantPhoneNumber field value if set, zero value otherwise.
+func (o *AdditionalDataCommon) GetSubMerchantPhoneNumber() string {
+	if o == nil || common.IsNil(o.SubMerchantPhoneNumber) {
+		var ret string
+		return ret
+	}
+	return *o.SubMerchantPhoneNumber
+}
+
+// GetSubMerchantPhoneNumberOk returns a tuple with the SubMerchantPhoneNumber field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AdditionalDataCommon) GetSubMerchantPhoneNumberOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SubMerchantPhoneNumber) {
+		return nil, false
+	}
+	return o.SubMerchantPhoneNumber, true
+}
+
+// HasSubMerchantPhoneNumber returns a boolean if a field has been set.
+func (o *AdditionalDataCommon) HasSubMerchantPhoneNumber() bool {
+	if o != nil && !common.IsNil(o.SubMerchantPhoneNumber) {
+		return true
+	}
+
+	return false
+}
+
+// SetSubMerchantPhoneNumber gets a reference to the given string and assigns it to the SubMerchantPhoneNumber field.
+func (o *AdditionalDataCommon) SetSubMerchantPhoneNumber(v string) {
+	o.SubMerchantPhoneNumber = &v
 }
 
 // GetSubMerchantPostalCode returns the SubMerchantPostalCode field value if set, zero value otherwise.
@@ -660,6 +762,9 @@ func (o AdditionalDataCommon) MarshalJSON() ([]byte, error) {
 
 func (o AdditionalDataCommon) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.RequestedTestAcquirerResponseCode) {
+		toSerialize["RequestedTestAcquirerResponseCode"] = o.RequestedTestAcquirerResponseCode
+	}
 	if !common.IsNil(o.RequestedTestErrorResponseCode) {
 		toSerialize["RequestedTestErrorResponseCode"] = o.RequestedTestErrorResponseCode
 	}
@@ -696,11 +801,17 @@ func (o AdditionalDataCommon) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.SubMerchantCountry) {
 		toSerialize["subMerchantCountry"] = o.SubMerchantCountry
 	}
+	if !common.IsNil(o.SubMerchantEmail) {
+		toSerialize["subMerchantEmail"] = o.SubMerchantEmail
+	}
 	if !common.IsNil(o.SubMerchantID) {
 		toSerialize["subMerchantID"] = o.SubMerchantID
 	}
 	if !common.IsNil(o.SubMerchantName) {
 		toSerialize["subMerchantName"] = o.SubMerchantName
+	}
+	if !common.IsNil(o.SubMerchantPhoneNumber) {
+		toSerialize["subMerchantPhoneNumber"] = o.SubMerchantPhoneNumber
 	}
 	if !common.IsNil(o.SubMerchantPostalCode) {
 		toSerialize["subMerchantPostalCode"] = o.SubMerchantPostalCode
