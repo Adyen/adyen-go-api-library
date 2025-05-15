@@ -23,6 +23,8 @@ type PaymentMethodToStore struct {
 	Brand *string `json:"brand,omitempty"`
 	// The card verification code. Only collect raw card data if you are [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide).
 	Cvc *string `json:"cvc,omitempty"`
+	// The encrypted card.
+	EncryptedCard *string `json:"encryptedCard,omitempty"`
 	// The encrypted card number.
 	EncryptedCardNumber *string `json:"encryptedCardNumber,omitempty"`
 	// The encrypted card expiry month.
@@ -122,6 +124,38 @@ func (o *PaymentMethodToStore) HasCvc() bool {
 // SetCvc gets a reference to the given string and assigns it to the Cvc field.
 func (o *PaymentMethodToStore) SetCvc(v string) {
 	o.Cvc = &v
+}
+
+// GetEncryptedCard returns the EncryptedCard field value if set, zero value otherwise.
+func (o *PaymentMethodToStore) GetEncryptedCard() string {
+	if o == nil || common.IsNil(o.EncryptedCard) {
+		var ret string
+		return ret
+	}
+	return *o.EncryptedCard
+}
+
+// GetEncryptedCardOk returns a tuple with the EncryptedCard field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodToStore) GetEncryptedCardOk() (*string, bool) {
+	if o == nil || common.IsNil(o.EncryptedCard) {
+		return nil, false
+	}
+	return o.EncryptedCard, true
+}
+
+// HasEncryptedCard returns a boolean if a field has been set.
+func (o *PaymentMethodToStore) HasEncryptedCard() bool {
+	if o != nil && !common.IsNil(o.EncryptedCard) {
+		return true
+	}
+
+	return false
+}
+
+// SetEncryptedCard gets a reference to the given string and assigns it to the EncryptedCard field.
+func (o *PaymentMethodToStore) SetEncryptedCard(v string) {
+	o.EncryptedCard = &v
 }
 
 // GetEncryptedCardNumber returns the EncryptedCardNumber field value if set, zero value otherwise.
@@ -427,6 +461,9 @@ func (o PaymentMethodToStore) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Cvc) {
 		toSerialize["cvc"] = o.Cvc
+	}
+	if !common.IsNil(o.EncryptedCard) {
+		toSerialize["encryptedCard"] = o.EncryptedCard
 	}
 	if !common.IsNil(o.EncryptedCardNumber) {
 		toSerialize["encryptedCardNumber"] = o.EncryptedCardNumber

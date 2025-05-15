@@ -29,14 +29,12 @@ type CheckoutPaymentMethod struct {
 	CashAppDetails                    *CashAppDetails
 	CellulantDetails                  *CellulantDetails
 	DokuDetails                       *DokuDetails
-	DotpayDetails                     *DotpayDetails
 	DragonpayDetails                  *DragonpayDetails
 	EBankingFinlandDetails            *EBankingFinlandDetails
 	EcontextVoucherDetails            *EcontextVoucherDetails
 	EftDetails                        *EftDetails
 	FastlaneDetails                   *FastlaneDetails
 	GenericIssuerPaymentMethodDetails *GenericIssuerPaymentMethodDetails
-	GiropayDetails                    *GiropayDetails
 	GooglePayDetails                  *GooglePayDetails
 	IdealDetails                      *IdealDetails
 	KlarnaDetails                     *KlarnaDetails
@@ -55,6 +53,7 @@ type CheckoutPaymentMethod struct {
 	PaymentDetails                    *PaymentDetails
 	PixDetails                        *PixDetails
 	PseDetails                        *PseDetails
+	RakutenPayDetails                 *RakutenPayDetails
 	RatepayDetails                    *RatepayDetails
 	RivertyDetails                    *RivertyDetails
 	SamsungPayDetails                 *SamsungPayDetails
@@ -168,13 +167,6 @@ func DokuDetailsAsCheckoutPaymentMethod(v *DokuDetails) CheckoutPaymentMethod {
 	}
 }
 
-// DotpayDetailsAsCheckoutPaymentMethod is a convenience function that returns DotpayDetails wrapped in CheckoutPaymentMethod
-func DotpayDetailsAsCheckoutPaymentMethod(v *DotpayDetails) CheckoutPaymentMethod {
-	return CheckoutPaymentMethod{
-		DotpayDetails: v,
-	}
-}
-
 // DragonpayDetailsAsCheckoutPaymentMethod is a convenience function that returns DragonpayDetails wrapped in CheckoutPaymentMethod
 func DragonpayDetailsAsCheckoutPaymentMethod(v *DragonpayDetails) CheckoutPaymentMethod {
 	return CheckoutPaymentMethod{
@@ -214,13 +206,6 @@ func FastlaneDetailsAsCheckoutPaymentMethod(v *FastlaneDetails) CheckoutPaymentM
 func GenericIssuerPaymentMethodDetailsAsCheckoutPaymentMethod(v *GenericIssuerPaymentMethodDetails) CheckoutPaymentMethod {
 	return CheckoutPaymentMethod{
 		GenericIssuerPaymentMethodDetails: v,
-	}
-}
-
-// GiropayDetailsAsCheckoutPaymentMethod is a convenience function that returns GiropayDetails wrapped in CheckoutPaymentMethod
-func GiropayDetailsAsCheckoutPaymentMethod(v *GiropayDetails) CheckoutPaymentMethod {
-	return CheckoutPaymentMethod{
-		GiropayDetails: v,
 	}
 }
 
@@ -347,6 +332,13 @@ func PixDetailsAsCheckoutPaymentMethod(v *PixDetails) CheckoutPaymentMethod {
 func PseDetailsAsCheckoutPaymentMethod(v *PseDetails) CheckoutPaymentMethod {
 	return CheckoutPaymentMethod{
 		PseDetails: v,
+	}
+}
+
+// RakutenPayDetailsAsCheckoutPaymentMethod is a convenience function that returns RakutenPayDetails wrapped in CheckoutPaymentMethod
+func RakutenPayDetailsAsCheckoutPaymentMethod(v *RakutenPayDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
+		RakutenPayDetails: v,
 	}
 }
 
@@ -627,19 +619,6 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		dst.DokuDetails = nil
 	}
 
-	// try to unmarshal data into DotpayDetails
-	err = json.Unmarshal(data, &dst.DotpayDetails)
-	if err == nil {
-		jsonDotpayDetails, _ := json.Marshal(dst.DotpayDetails)
-		if string(jsonDotpayDetails) == "{}" || !dst.DotpayDetails.isValidType() { // empty struct
-			dst.DotpayDetails = nil
-		} else {
-			match++
-		}
-	} else {
-		dst.DotpayDetails = nil
-	}
-
 	// try to unmarshal data into DragonpayDetails
 	err = json.Unmarshal(data, &dst.DragonpayDetails)
 	if err == nil {
@@ -716,19 +695,6 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		}
 	} else {
 		dst.GenericIssuerPaymentMethodDetails = nil
-	}
-
-	// try to unmarshal data into GiropayDetails
-	err = json.Unmarshal(data, &dst.GiropayDetails)
-	if err == nil {
-		jsonGiropayDetails, _ := json.Marshal(dst.GiropayDetails)
-		if string(jsonGiropayDetails) == "{}" || !dst.GiropayDetails.isValidType() { // empty struct
-			dst.GiropayDetails = nil
-		} else {
-			match++
-		}
-	} else {
-		dst.GiropayDetails = nil
 	}
 
 	// try to unmarshal data into GooglePayDetails
@@ -965,6 +931,19 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		dst.PseDetails = nil
 	}
 
+	// try to unmarshal data into RakutenPayDetails
+	err = json.Unmarshal(data, &dst.RakutenPayDetails)
+	if err == nil {
+		jsonRakutenPayDetails, _ := json.Marshal(dst.RakutenPayDetails)
+		if string(jsonRakutenPayDetails) == "{}" || !dst.RakutenPayDetails.isValidType() { // empty struct
+			dst.RakutenPayDetails = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.RakutenPayDetails = nil
+	}
+
 	// try to unmarshal data into RatepayDetails
 	err = json.Unmarshal(data, &dst.RatepayDetails)
 	if err == nil {
@@ -1150,14 +1129,12 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		dst.CashAppDetails = nil
 		dst.CellulantDetails = nil
 		dst.DokuDetails = nil
-		dst.DotpayDetails = nil
 		dst.DragonpayDetails = nil
 		dst.EBankingFinlandDetails = nil
 		dst.EcontextVoucherDetails = nil
 		dst.EftDetails = nil
 		dst.FastlaneDetails = nil
 		dst.GenericIssuerPaymentMethodDetails = nil
-		dst.GiropayDetails = nil
 		dst.GooglePayDetails = nil
 		dst.IdealDetails = nil
 		dst.KlarnaDetails = nil
@@ -1176,6 +1153,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		dst.PaymentDetails = nil
 		dst.PixDetails = nil
 		dst.PseDetails = nil
+		dst.RakutenPayDetails = nil
 		dst.RatepayDetails = nil
 		dst.RivertyDetails = nil
 		dst.SamsungPayDetails = nil
@@ -1256,10 +1234,6 @@ func (src CheckoutPaymentMethod) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.DokuDetails)
 	}
 
-	if src.DotpayDetails != nil {
-		return json.Marshal(&src.DotpayDetails)
-	}
-
 	if src.DragonpayDetails != nil {
 		return json.Marshal(&src.DragonpayDetails)
 	}
@@ -1282,10 +1256,6 @@ func (src CheckoutPaymentMethod) MarshalJSON() ([]byte, error) {
 
 	if src.GenericIssuerPaymentMethodDetails != nil {
 		return json.Marshal(&src.GenericIssuerPaymentMethodDetails)
-	}
-
-	if src.GiropayDetails != nil {
-		return json.Marshal(&src.GiropayDetails)
 	}
 
 	if src.GooglePayDetails != nil {
@@ -1358,6 +1328,10 @@ func (src CheckoutPaymentMethod) MarshalJSON() ([]byte, error) {
 
 	if src.PseDetails != nil {
 		return json.Marshal(&src.PseDetails)
+	}
+
+	if src.RakutenPayDetails != nil {
+		return json.Marshal(&src.RakutenPayDetails)
 	}
 
 	if src.RatepayDetails != nil {
@@ -1476,10 +1450,6 @@ func (obj *CheckoutPaymentMethod) GetActualInstance() interface{} {
 		return obj.DokuDetails
 	}
 
-	if obj.DotpayDetails != nil {
-		return obj.DotpayDetails
-	}
-
 	if obj.DragonpayDetails != nil {
 		return obj.DragonpayDetails
 	}
@@ -1502,10 +1472,6 @@ func (obj *CheckoutPaymentMethod) GetActualInstance() interface{} {
 
 	if obj.GenericIssuerPaymentMethodDetails != nil {
 		return obj.GenericIssuerPaymentMethodDetails
-	}
-
-	if obj.GiropayDetails != nil {
-		return obj.GiropayDetails
 	}
 
 	if obj.GooglePayDetails != nil {
@@ -1578,6 +1544,10 @@ func (obj *CheckoutPaymentMethod) GetActualInstance() interface{} {
 
 	if obj.PseDetails != nil {
 		return obj.PseDetails
+	}
+
+	if obj.RakutenPayDetails != nil {
+		return obj.RakutenPayDetails
 	}
 
 	if obj.RatepayDetails != nil {

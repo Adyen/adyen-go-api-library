@@ -20,12 +20,12 @@ var _ common.MappedNullable = &PaymentLinkResponse{}
 
 // PaymentLinkResponse struct for PaymentLinkResponse
 type PaymentLinkResponse struct {
-	// List of payment methods to be presented to the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).  Example: `\"allowedPaymentMethods\":[\"ideal\",\"giropay\"]`
+	// List of payment methods to be presented to the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).  Example: `\"allowedPaymentMethods\":[\"ideal\",\"applepay\"]`
 	AllowedPaymentMethods []string         `json:"allowedPaymentMethods,omitempty"`
 	Amount                Amount           `json:"amount"`
 	ApplicationInfo       *ApplicationInfo `json:"applicationInfo,omitempty"`
 	BillingAddress        *Address         `json:"billingAddress,omitempty"`
-	// List of payment methods to be hidden from the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).  Example: `\"blockedPaymentMethods\":[\"ideal\",\"giropay\"]`
+	// List of payment methods to be hidden from the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).  Example: `\"blockedPaymentMethods\":[\"ideal\",\"applepay\"]`
 	BlockedPaymentMethods []string `json:"blockedPaymentMethods,omitempty"`
 	// The delay between the authorisation and scheduled auto-capture, specified in hours.
 	CaptureDelayHours *int32 `json:"captureDelayHours,omitempty"`
