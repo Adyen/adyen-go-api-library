@@ -117,17 +117,17 @@ type APIClient struct {
 
 // optionally a custom http.Client can be passed via the Config allow for advanced features such as caching.
 func NewClient(cfg *common.Config) *APIClient {
-	
+
 	if cfg.HTTPClient == nil {
 		// init http.Client with default settings
 		cfg.HTTPClient = http.DefaultClient
 		if cfg.ConnectionTimeoutMillis != 0 {
 			// set timeout as defined in config
 			cfg.HTTPClient.Timeout = cfg.ConnectionTimeoutMillis
-		 } else {
+		} else {
 			// set default timeout to 60 seconds otherwise
 			cfg.HTTPClient.Timeout = 60 * time.Second
-		}	
+		}
 	} else {
 		fmt.Println("Custom http.Client is provided")
 	}
