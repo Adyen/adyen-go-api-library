@@ -21,6 +21,8 @@ var _ common.MappedNullable = &TransferReview{}
 type TransferReview struct {
 	// Shows the number of [approvals](https://docs.adyen.com/api-explorer/transfers/latest/post/transfers/approve) required to process the transfer.
 	NumberOfApprovalsRequired *int32 `json:"numberOfApprovalsRequired,omitempty"`
+	// Shows the status of the Strong Customer Authentication (SCA) process.  Possible values: **required**, **notApplicable**.
+	ScaOnApproval *string `json:"scaOnApproval,omitempty"`
 }
 
 // NewTransferReview instantiates a new TransferReview object
@@ -72,6 +74,38 @@ func (o *TransferReview) SetNumberOfApprovalsRequired(v int32) {
 	o.NumberOfApprovalsRequired = &v
 }
 
+// GetScaOnApproval returns the ScaOnApproval field value if set, zero value otherwise.
+func (o *TransferReview) GetScaOnApproval() string {
+	if o == nil || common.IsNil(o.ScaOnApproval) {
+		var ret string
+		return ret
+	}
+	return *o.ScaOnApproval
+}
+
+// GetScaOnApprovalOk returns a tuple with the ScaOnApproval field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransferReview) GetScaOnApprovalOk() (*string, bool) {
+	if o == nil || common.IsNil(o.ScaOnApproval) {
+		return nil, false
+	}
+	return o.ScaOnApproval, true
+}
+
+// HasScaOnApproval returns a boolean if a field has been set.
+func (o *TransferReview) HasScaOnApproval() bool {
+	if o != nil && !common.IsNil(o.ScaOnApproval) {
+		return true
+	}
+
+	return false
+}
+
+// SetScaOnApproval gets a reference to the given string and assigns it to the ScaOnApproval field.
+func (o *TransferReview) SetScaOnApproval(v string) {
+	o.ScaOnApproval = &v
+}
+
 func (o TransferReview) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -84,6 +118,9 @@ func (o TransferReview) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.NumberOfApprovalsRequired) {
 		toSerialize["numberOfApprovalsRequired"] = o.NumberOfApprovalsRequired
+	}
+	if !common.IsNil(o.ScaOnApproval) {
+		toSerialize["scaOnApproval"] = o.ScaOnApproval
 	}
 	return toSerialize, nil
 }
@@ -122,4 +159,14 @@ func (v NullableTransferReview) MarshalJSON() ([]byte, error) {
 func (v *NullableTransferReview) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
+}
+
+func (o *TransferReview) isValidScaOnApproval() bool {
+	var allowedEnumValues = []string{"completed", "notApplicable", "required"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetScaOnApproval() == allowed {
+			return true
+		}
+	}
+	return false
 }
