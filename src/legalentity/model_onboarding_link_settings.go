@@ -23,6 +23,8 @@ type OnboardingLinkSettings struct {
 	AcceptedCountries []string `json:"acceptedCountries,omitempty"`
 	// Default value: **false**  Indicates if the user can select the format for their payout account (if applicable).
 	AllowBankAccountFormatSelection *bool `json:"allowBankAccountFormatSelection,omitempty"`
+	// Default value: **true**  Indicates whether the debug user interface (UI) is enabled. The debug UI provides information for your support staff to diagnose and resolve user issues during onboarding. It can be accessed using a keyboard shortcut.
+	AllowDebugUi *bool `json:"allowDebugUi,omitempty"`
 	// Default value: **false**  Indicates if the user can select a payout account in a different EU/EEA location (including Switzerland and the UK) than the location of their legal entity.
 	AllowIntraRegionCrossBorderPayout *bool `json:"allowIntraRegionCrossBorderPayout,omitempty"`
 	// Default value: **true**  Indicates if the user can change their legal entity type.
@@ -132,6 +134,38 @@ func (o *OnboardingLinkSettings) HasAllowBankAccountFormatSelection() bool {
 // SetAllowBankAccountFormatSelection gets a reference to the given bool and assigns it to the AllowBankAccountFormatSelection field.
 func (o *OnboardingLinkSettings) SetAllowBankAccountFormatSelection(v bool) {
 	o.AllowBankAccountFormatSelection = &v
+}
+
+// GetAllowDebugUi returns the AllowDebugUi field value if set, zero value otherwise.
+func (o *OnboardingLinkSettings) GetAllowDebugUi() bool {
+	if o == nil || common.IsNil(o.AllowDebugUi) {
+		var ret bool
+		return ret
+	}
+	return *o.AllowDebugUi
+}
+
+// GetAllowDebugUiOk returns a tuple with the AllowDebugUi field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OnboardingLinkSettings) GetAllowDebugUiOk() (*bool, bool) {
+	if o == nil || common.IsNil(o.AllowDebugUi) {
+		return nil, false
+	}
+	return o.AllowDebugUi, true
+}
+
+// HasAllowDebugUi returns a boolean if a field has been set.
+func (o *OnboardingLinkSettings) HasAllowDebugUi() bool {
+	if o != nil && !common.IsNil(o.AllowDebugUi) {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowDebugUi gets a reference to the given bool and assigns it to the AllowDebugUi field.
+func (o *OnboardingLinkSettings) SetAllowDebugUi(v bool) {
+	o.AllowDebugUi = &v
 }
 
 // GetAllowIntraRegionCrossBorderPayout returns the AllowIntraRegionCrossBorderPayout field value if set, zero value otherwise.
@@ -597,6 +631,9 @@ func (o OnboardingLinkSettings) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.AllowBankAccountFormatSelection) {
 		toSerialize["allowBankAccountFormatSelection"] = o.AllowBankAccountFormatSelection
+	}
+	if !common.IsNil(o.AllowDebugUi) {
+		toSerialize["allowDebugUi"] = o.AllowDebugUi
 	}
 	if !common.IsNil(o.AllowIntraRegionCrossBorderPayout) {
 		toSerialize["allowIntraRegionCrossBorderPayout"] = o.AllowIntraRegionCrossBorderPayout
