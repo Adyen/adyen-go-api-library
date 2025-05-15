@@ -25,7 +25,7 @@ type StoredPaymentMethod struct {
 	BankLocationId *string `json:"bankLocationId,omitempty"`
 	// The brand of the card.
 	Brand *string `json:"brand,omitempty"`
-	// The month the card expires.
+	// The two-digit month when the card expires
 	ExpiryMonth *string `json:"expiryMonth,omitempty"`
 	// The last two digits of the year the card expires. For example, **22** for the year 2022.
 	ExpiryYear *string `json:"expiryYear,omitempty"`

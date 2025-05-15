@@ -19,8 +19,9 @@ var _ common.MappedNullable = &PaymentCaptureRequest{}
 
 // PaymentCaptureRequest struct for PaymentCaptureRequest
 type PaymentCaptureRequest struct {
-	Amount          Amount           `json:"amount"`
-	ApplicationInfo *ApplicationInfo `json:"applicationInfo,omitempty"`
+	Amount             Amount              `json:"amount"`
+	ApplicationInfo    *ApplicationInfo    `json:"applicationInfo,omitempty"`
+	EnhancedSchemeData *EnhancedSchemeData `json:"enhancedSchemeData,omitempty"`
 	// Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment). > This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Atome, Clearpay, Klarna, Ratepay, Walley, and Zip.
 	LineItems []LineItem `json:"lineItems,omitempty"`
 	// The merchant account that is used to process the payment.
@@ -107,6 +108,38 @@ func (o *PaymentCaptureRequest) HasApplicationInfo() bool {
 // SetApplicationInfo gets a reference to the given ApplicationInfo and assigns it to the ApplicationInfo field.
 func (o *PaymentCaptureRequest) SetApplicationInfo(v ApplicationInfo) {
 	o.ApplicationInfo = &v
+}
+
+// GetEnhancedSchemeData returns the EnhancedSchemeData field value if set, zero value otherwise.
+func (o *PaymentCaptureRequest) GetEnhancedSchemeData() EnhancedSchemeData {
+	if o == nil || common.IsNil(o.EnhancedSchemeData) {
+		var ret EnhancedSchemeData
+		return ret
+	}
+	return *o.EnhancedSchemeData
+}
+
+// GetEnhancedSchemeDataOk returns a tuple with the EnhancedSchemeData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentCaptureRequest) GetEnhancedSchemeDataOk() (*EnhancedSchemeData, bool) {
+	if o == nil || common.IsNil(o.EnhancedSchemeData) {
+		return nil, false
+	}
+	return o.EnhancedSchemeData, true
+}
+
+// HasEnhancedSchemeData returns a boolean if a field has been set.
+func (o *PaymentCaptureRequest) HasEnhancedSchemeData() bool {
+	if o != nil && !common.IsNil(o.EnhancedSchemeData) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnhancedSchemeData gets a reference to the given EnhancedSchemeData and assigns it to the EnhancedSchemeData field.
+func (o *PaymentCaptureRequest) SetEnhancedSchemeData(v EnhancedSchemeData) {
+	o.EnhancedSchemeData = &v
 }
 
 // GetLineItems returns the LineItems field value if set, zero value otherwise.
@@ -306,6 +339,9 @@ func (o PaymentCaptureRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["amount"] = o.Amount
 	if !common.IsNil(o.ApplicationInfo) {
 		toSerialize["applicationInfo"] = o.ApplicationInfo
+	}
+	if !common.IsNil(o.EnhancedSchemeData) {
+		toSerialize["enhancedSchemeData"] = o.EnhancedSchemeData
 	}
 	if !common.IsNil(o.LineItems) {
 		toSerialize["lineItems"] = o.LineItems
