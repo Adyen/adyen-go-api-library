@@ -61,7 +61,6 @@ type Config struct {
 	MerchantAccount               string        `json:"merchantAccount,omitempty"`
 	Environment                   Environment   `json:"environment,omitempty"`
 	Endpoint                      string        `json:"endpoint,omitempty"`
-	MarketPayEndpoint             string        `json:"marketPayEndpoint,omitempty"`
 	ApiKey                        string        `json:"apiKey,omitempty"`
 	ConnectionTimeoutMillis       time.Duration `json:"connectionTimeoutMillis,omitempty"`
 	CertificatePath               string        `json:"certificatePath,omitempty"`
