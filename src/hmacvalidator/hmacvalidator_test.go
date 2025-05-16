@@ -89,11 +89,11 @@ func Test_Hmacvalidator(t *testing.T) {
 			assert.False(t, ValidateHmac(notificationRequestItem, key))
 		})
 		t.Run("Nil AdditionalData", func(t *testing.T) {
-            // Create a copy and set AdditionalData to nil.
-            testItem := notificationRequestItem
-            testItem.AdditionalData = nil
-            assert.False(t, ValidateHmac(testItem, key))
-        })
+			// Create a copy and set AdditionalData to nil.
+			testItem := notificationRequestItem
+			testItem.AdditionalData = nil
+			assert.False(t, ValidateHmac(testItem, key))
+		})
 	})
 	t.Run("ValidateHmacPayload", func(t *testing.T) {
 		t.Run("Validate HMAC from string payload", func(t *testing.T) {
