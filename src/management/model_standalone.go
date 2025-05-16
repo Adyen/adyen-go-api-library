@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v20/src/common"
+    "github.com/adyen/adyen-go-api-library/v20/src/common"
 )
 
 // checks if the Standalone type satisfies the MappedNullable interface at compile time
@@ -21,6 +20,8 @@ var _ common.MappedNullable = &Standalone{}
 type Standalone struct {
 	// The default currency of the standalone payment terminal as an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code.
 	CurrencyCode *string `json:"currencyCode,omitempty"`
+	// Indicates whether the tipping options specified in `gratuities` are enabled on the standalone terminal.
+	EnableGratuities *bool `json:"enableGratuities,omitempty"`
 	// Enable standalone mode.
 	EnableStandalone *bool `json:"enableStandalone,omitempty"`
 }
@@ -74,6 +75,38 @@ func (o *Standalone) SetCurrencyCode(v string) {
 	o.CurrencyCode = &v
 }
 
+// GetEnableGratuities returns the EnableGratuities field value if set, zero value otherwise.
+func (o *Standalone) GetEnableGratuities() bool {
+	if o == nil || common.IsNil(o.EnableGratuities) {
+		var ret bool
+		return ret
+	}
+	return *o.EnableGratuities
+}
+
+// GetEnableGratuitiesOk returns a tuple with the EnableGratuities field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Standalone) GetEnableGratuitiesOk() (*bool, bool) {
+	if o == nil || common.IsNil(o.EnableGratuities) {
+		return nil, false
+	}
+	return o.EnableGratuities, true
+}
+
+// HasEnableGratuities returns a boolean if a field has been set.
+func (o *Standalone) HasEnableGratuities() bool {
+	if o != nil && !common.IsNil(o.EnableGratuities) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnableGratuities gets a reference to the given bool and assigns it to the EnableGratuities field.
+func (o *Standalone) SetEnableGratuities(v bool) {
+	o.EnableGratuities = &v
+}
+
 // GetEnableStandalone returns the EnableStandalone field value if set, zero value otherwise.
 func (o *Standalone) GetEnableStandalone() bool {
 	if o == nil || common.IsNil(o.EnableStandalone) {
@@ -107,7 +140,7 @@ func (o *Standalone) SetEnableStandalone(v bool) {
 }
 
 func (o Standalone) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -118,6 +151,9 @@ func (o Standalone) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.CurrencyCode) {
 		toSerialize["currencyCode"] = o.CurrencyCode
+	}
+	if !common.IsNil(o.EnableGratuities) {
+		toSerialize["enableGratuities"] = o.EnableGratuities
 	}
 	if !common.IsNil(o.EnableStandalone) {
 		toSerialize["enableStandalone"] = o.EnableStandalone
@@ -160,3 +196,6 @@ func (v *NullableStandalone) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

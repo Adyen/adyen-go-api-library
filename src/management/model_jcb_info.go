@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v20/src/common"
+    "github.com/adyen/adyen-go-api-library/v20/src/common"
 )
 
 // checks if the JCBInfo type satisfies the MappedNullable interface at compile time
@@ -19,12 +18,12 @@ var _ common.MappedNullable = &JCBInfo{}
 
 // JCBInfo struct for JCBInfo
 type JCBInfo struct {
-	// MID (Merchant ID) number. Required for merchants operating in Japan.Format: 14 numeric characters.
+	// MID (Merchant ID) number. Required for merchants operating in Japan or merchants operating in Canada, Australia and New Zealand when requesting `gatewayContract` or `paymentDesignatorContract` service levels.Format: 14 numeric characters for Japan, 10 numeric characters for Canada, Australia and New Zealand.
 	MidNumber *string `json:"midNumber,omitempty"`
 	// Indicates whether the JCB Merchant ID is reused from a previously setup JCB payment method.  The default value is **false**.For merchants operating in Japan, this field is required and must be set to **true**.
 	ReuseMidNumber *bool `json:"reuseMidNumber,omitempty"`
-	// Specifies the service level (settlement type) of this payment method. Required for merchants operating in Japan. Possible values: * **noContract**: Adyen holds the contract with JCB. * **gatewayContract**: JCB receives the settlement and handles disputes, then pays out to you or your sub-merchant directly.
-	ServiceLevel           *string                     `json:"serviceLevel,omitempty"`
+	// Specifies the service level (settlement type) of this payment method. Required for merchants operating in Japan. Possible values: * **noContract**: Adyen holds the contract with JCB for merchants operating in Japan or American Express for merchants operating in Canada, Australia and New Zealand. * **gatewayContract**: JCB or American Express receives the settlement and handles disputes, then pays out to you or your sub-merchant directly. * **paymentDesignatorContract**: Available only for merchants operating in Canada, Australia and New Zealand. Adyen receives the settlement, and handles disputes and payouts.
+	ServiceLevel *string `json:"serviceLevel,omitempty"`
 	TransactionDescription *TransactionDescriptionInfo `json:"transactionDescription,omitempty"`
 }
 
@@ -178,7 +177,7 @@ func (o *JCBInfo) SetTransactionDescription(v TransactionDescriptionInfo) {
 }
 
 func (o JCBInfo) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -238,12 +237,14 @@ func (v *NullableJCBInfo) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *JCBInfo) isValidServiceLevel() bool {
-	var allowedEnumValues = []string{"noContract", "gatewayContract"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetServiceLevel() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "noContract", "gatewayContract", "paymentDesignatorContract" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetServiceLevel() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

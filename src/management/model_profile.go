@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v20/src/common"
+    "github.com/adyen/adyen-go-api-library/v20/src/common"
 )
 
 // checks if the Profile type satisfies the MappedNullable interface at compile time
@@ -29,16 +28,18 @@ type Profile struct {
 	Channel *int32 `json:"channel,omitempty"`
 	// Indicates whether this is your preferred wireless network. If **true**, the terminal will try connecting to this network first.
 	DefaultProfile *bool `json:"defaultProfile,omitempty"`
+	// Specifies the server domain name for EAP-TLS and EAP-PEAP WiFi profiles on Android 11 and above.
+	DomainSuffix *string `json:"domainSuffix,omitempty"`
 	// For `authType` **wpa-eap** or **wpa2-eap**. Possible values: **tls**, **peap**, **leap**, **fast**
-	Eap           *string `json:"eap,omitempty"`
-	EapCaCert     *File   `json:"eapCaCert,omitempty"`
-	EapClientCert *File   `json:"eapClientCert,omitempty"`
-	EapClientKey  *File   `json:"eapClientKey,omitempty"`
+	Eap *string `json:"eap,omitempty"`
+	EapCaCert *File `json:"eapCaCert,omitempty"`
+	EapClientCert *File `json:"eapClientCert,omitempty"`
+	EapClientKey *File `json:"eapClientKey,omitempty"`
 	// For `eap` **tls**. The password of the RSA key file, if that file is password-protected.
 	EapClientPwd *string `json:"eapClientPwd,omitempty"`
 	// For `authType` **wpa-eap** or **wpa2-eap**. The EAP-PEAP username from your MS-CHAP account. Must match the configuration of your RADIUS server.
-	EapIdentity         *string `json:"eapIdentity,omitempty"`
-	EapIntermediateCert *File   `json:"eapIntermediateCert,omitempty"`
+	EapIdentity *string `json:"eapIdentity,omitempty"`
+	EapIntermediateCert *File `json:"eapIntermediateCert,omitempty"`
 	// For `eap` **peap**. The EAP-PEAP password from your MS-CHAP account. Must match the configuration of your RADIUS server.
 	EapPwd *string `json:"eapPwd,omitempty"`
 	// Indicates if the network doesn't broadcast its SSID. Mandatory for Android terminals, because these terminals rely on this setting to be able to connect to any network.
@@ -216,6 +217,38 @@ func (o *Profile) HasDefaultProfile() bool {
 // SetDefaultProfile gets a reference to the given bool and assigns it to the DefaultProfile field.
 func (o *Profile) SetDefaultProfile(v bool) {
 	o.DefaultProfile = &v
+}
+
+// GetDomainSuffix returns the DomainSuffix field value if set, zero value otherwise.
+func (o *Profile) GetDomainSuffix() string {
+	if o == nil || common.IsNil(o.DomainSuffix) {
+		var ret string
+		return ret
+	}
+	return *o.DomainSuffix
+}
+
+// GetDomainSuffixOk returns a tuple with the DomainSuffix field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Profile) GetDomainSuffixOk() (*string, bool) {
+	if o == nil || common.IsNil(o.DomainSuffix) {
+		return nil, false
+	}
+	return o.DomainSuffix, true
+}
+
+// HasDomainSuffix returns a boolean if a field has been set.
+func (o *Profile) HasDomainSuffix() bool {
+	if o != nil && !common.IsNil(o.DomainSuffix) {
+		return true
+	}
+
+	return false
+}
+
+// SetDomainSuffix gets a reference to the given string and assigns it to the DomainSuffix field.
+func (o *Profile) SetDomainSuffix(v string) {
+	o.DomainSuffix = &v
 }
 
 // GetEap returns the Eap field value if set, zero value otherwise.
@@ -619,7 +652,7 @@ func (o *Profile) SetWsec(v string) {
 }
 
 func (o Profile) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -638,6 +671,9 @@ func (o Profile) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.DefaultProfile) {
 		toSerialize["defaultProfile"] = o.DefaultProfile
+	}
+	if !common.IsNil(o.DomainSuffix) {
+		toSerialize["domainSuffix"] = o.DomainSuffix
 	}
 	if !common.IsNil(o.Eap) {
 		toSerialize["eap"] = o.Eap
@@ -712,3 +748,6 @@ func (v *NullableProfile) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
