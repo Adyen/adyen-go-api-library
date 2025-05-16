@@ -34,16 +34,17 @@ type UpdatePaymentMethodInfo struct {
 	EftDirectdebitCA   *GenericPmWithTdiInfo `json:"eft_directdebit_CA,omitempty"`
 	EftposAustralia    *GenericPmWithTdiInfo `json:"eftpos_australia,omitempty"`
 	// Indicates whether the payment method is enabled (**true**) or disabled (**false**).
-	Enabled     *bool                 `json:"enabled,omitempty"`
-	Girocard    *GenericPmWithTdiInfo `json:"girocard,omitempty"`
-	Ideal       *GenericPmWithTdiInfo `json:"ideal,omitempty"`
-	InteracCard *GenericPmWithTdiInfo `json:"interac_card,omitempty"`
-	Jcb         *GenericPmWithTdiInfo `json:"jcb,omitempty"`
-	Maestro     *GenericPmWithTdiInfo `json:"maestro,omitempty"`
-	Mc          *GenericPmWithTdiInfo `json:"mc,omitempty"`
-	Nyce        *NyceInfo             `json:"nyce,omitempty"`
-	Pulse       *PulseInfo            `json:"pulse,omitempty"`
-	Star        *StarInfo             `json:"star,omitempty"`
+	Enabled        *bool                 `json:"enabled,omitempty"`
+	Girocard       *GenericPmWithTdiInfo `json:"girocard,omitempty"`
+	Ideal          *GenericPmWithTdiInfo `json:"ideal,omitempty"`
+	InteracCard    *GenericPmWithTdiInfo `json:"interac_card,omitempty"`
+	Jcb            *GenericPmWithTdiInfo `json:"jcb,omitempty"`
+	Maestro        *GenericPmWithTdiInfo `json:"maestro,omitempty"`
+	Mc             *GenericPmWithTdiInfo `json:"mc,omitempty"`
+	Nyce           *NyceInfo             `json:"nyce,omitempty"`
+	PaybybankPlaid *PayByBankPlaidInfo   `json:"paybybank_plaid,omitempty"`
+	Pulse          *PulseInfo            `json:"pulse,omitempty"`
+	Star           *StarInfo             `json:"star,omitempty"`
 	// The store for this payment method
 	StoreId *string `json:"storeId,omitempty"`
 	// The list of stores for this payment method
@@ -678,6 +679,38 @@ func (o *UpdatePaymentMethodInfo) SetNyce(v NyceInfo) {
 	o.Nyce = &v
 }
 
+// GetPaybybankPlaid returns the PaybybankPlaid field value if set, zero value otherwise.
+func (o *UpdatePaymentMethodInfo) GetPaybybankPlaid() PayByBankPlaidInfo {
+	if o == nil || common.IsNil(o.PaybybankPlaid) {
+		var ret PayByBankPlaidInfo
+		return ret
+	}
+	return *o.PaybybankPlaid
+}
+
+// GetPaybybankPlaidOk returns a tuple with the PaybybankPlaid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdatePaymentMethodInfo) GetPaybybankPlaidOk() (*PayByBankPlaidInfo, bool) {
+	if o == nil || common.IsNil(o.PaybybankPlaid) {
+		return nil, false
+	}
+	return o.PaybybankPlaid, true
+}
+
+// HasPaybybankPlaid returns a boolean if a field has been set.
+func (o *UpdatePaymentMethodInfo) HasPaybybankPlaid() bool {
+	if o != nil && !common.IsNil(o.PaybybankPlaid) {
+		return true
+	}
+
+	return false
+}
+
+// SetPaybybankPlaid gets a reference to the given PayByBankPlaidInfo and assigns it to the PaybybankPlaid field.
+func (o *UpdatePaymentMethodInfo) SetPaybybankPlaid(v PayByBankPlaidInfo) {
+	o.PaybybankPlaid = &v
+}
+
 // GetPulse returns the Pulse field value if set, zero value otherwise.
 func (o *UpdatePaymentMethodInfo) GetPulse() PulseInfo {
 	if o == nil || common.IsNil(o.Pulse) {
@@ -910,6 +943,9 @@ func (o UpdatePaymentMethodInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Nyce) {
 		toSerialize["nyce"] = o.Nyce
+	}
+	if !common.IsNil(o.PaybybankPlaid) {
+		toSerialize["paybybank_plaid"] = o.PaybybankPlaid
 	}
 	if !common.IsNil(o.Pulse) {
 		toSerialize["pulse"] = o.Pulse

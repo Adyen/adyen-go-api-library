@@ -1,5 +1,5 @@
 /*
-Adyen Recurring API (deprecated)
+Adyen Recurring API
 
 API version: 68
 */

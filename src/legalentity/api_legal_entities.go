@@ -295,7 +295,9 @@ UpdateLegalEntity Update a legal entity
 
 Updates a legal entity.
 
- >To change the legal entity type, include only the new `type` in your request. To update the `entityAssociations` array, you need to replace the entire array. For example, if the array has 3 entries and you want to remove 1 entry, you need to PATCH the resource with the remaining 2 entries.
+ >To change the legal entity type, include only the new `type` in your request.
+
+If you need to update information for the legal entity, make a separate request. To update the `entityAssociations` array, you need to replace the entire array.For example, if the array has 3 entries and you want to remove 1 entry, you need to PATCH the resource with the remaining 2 entries.
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r LegalEntitiesApiUpdateLegalEntityInput - Request parameters, see UpdateLegalEntityInput

@@ -37,6 +37,10 @@ type PaymentInstrument struct {
 	PaymentInstrumentGroupId *string `json:"paymentInstrumentGroupId,omitempty"`
 	// Your reference for the payment instrument, maximum 150 characters.
 	Reference *string `json:"reference,omitempty"`
+	// The unique identifier of the payment instrument that replaced this payment instrument.
+	ReplacedById *string `json:"replacedById,omitempty"`
+	// The unique identifier of the payment instrument that is replaced by this payment instrument.
+	ReplacementOfId *string `json:"replacementOfId,omitempty"`
 	// The status of the payment instrument. If a status is not specified when creating a payment instrument, it is set to **active** by default. However, there can be exceptions for cards based on the `card.formFactor` and the `issuingCountryCode`. For example, when issuing physical cards in the US, the default status is **inactive**.  Possible values:    * **active**:  The payment instrument is active and can be used to make payments.    * **inactive**: The payment instrument is inactive and cannot be used to make payments.    * **suspended**: The payment instrument is suspended, either because it was stolen or lost.    * **closed**: The payment instrument is permanently closed. This action cannot be undone.
 	Status *string `json:"status,omitempty"`
 	// The status comment provides additional information for the statusReason of the payment instrument.
@@ -338,6 +342,70 @@ func (o *PaymentInstrument) SetReference(v string) {
 	o.Reference = &v
 }
 
+// GetReplacedById returns the ReplacedById field value if set, zero value otherwise.
+func (o *PaymentInstrument) GetReplacedById() string {
+	if o == nil || common.IsNil(o.ReplacedById) {
+		var ret string
+		return ret
+	}
+	return *o.ReplacedById
+}
+
+// GetReplacedByIdOk returns a tuple with the ReplacedById field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentInstrument) GetReplacedByIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.ReplacedById) {
+		return nil, false
+	}
+	return o.ReplacedById, true
+}
+
+// HasReplacedById returns a boolean if a field has been set.
+func (o *PaymentInstrument) HasReplacedById() bool {
+	if o != nil && !common.IsNil(o.ReplacedById) {
+		return true
+	}
+
+	return false
+}
+
+// SetReplacedById gets a reference to the given string and assigns it to the ReplacedById field.
+func (o *PaymentInstrument) SetReplacedById(v string) {
+	o.ReplacedById = &v
+}
+
+// GetReplacementOfId returns the ReplacementOfId field value if set, zero value otherwise.
+func (o *PaymentInstrument) GetReplacementOfId() string {
+	if o == nil || common.IsNil(o.ReplacementOfId) {
+		var ret string
+		return ret
+	}
+	return *o.ReplacementOfId
+}
+
+// GetReplacementOfIdOk returns a tuple with the ReplacementOfId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentInstrument) GetReplacementOfIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.ReplacementOfId) {
+		return nil, false
+	}
+	return o.ReplacementOfId, true
+}
+
+// HasReplacementOfId returns a boolean if a field has been set.
+func (o *PaymentInstrument) HasReplacementOfId() bool {
+	if o != nil && !common.IsNil(o.ReplacementOfId) {
+		return true
+	}
+
+	return false
+}
+
+// SetReplacementOfId gets a reference to the given string and assigns it to the ReplacementOfId field.
+func (o *PaymentInstrument) SetReplacementOfId(v string) {
+	o.ReplacementOfId = &v
+}
+
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *PaymentInstrument) GetStatus() string {
 	if o == nil || common.IsNil(o.Status) {
@@ -488,6 +556,12 @@ func (o PaymentInstrument) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Reference) {
 		toSerialize["reference"] = o.Reference
+	}
+	if !common.IsNil(o.ReplacedById) {
+		toSerialize["replacedById"] = o.ReplacedById
+	}
+	if !common.IsNil(o.ReplacementOfId) {
+		toSerialize["replacementOfId"] = o.ReplacementOfId
 	}
 	if !common.IsNil(o.Status) {
 		toSerialize["status"] = o.Status

@@ -273,7 +273,7 @@ func (v *NullableSplitConfigurationRule) UnmarshalJSON(src []byte) error {
 }
 
 func (o *SplitConfigurationRule) isValidFundingSource() bool {
-	var allowedEnumValues = []string{"credit", "debit", "ANY"}
+	var allowedEnumValues = []string{"charged", "credit", "debit", "deferred_debit", "prepaid", "ANY"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetFundingSource() == allowed {
 			return true
