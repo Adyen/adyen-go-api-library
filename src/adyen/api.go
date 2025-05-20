@@ -25,10 +25,6 @@ import (
 	"github.com/adyen/adyen-go-api-library/v20/src/management"
 	"github.com/adyen/adyen-go-api-library/v20/src/payments"
 	"github.com/adyen/adyen-go-api-library/v20/src/payout"
-	"github.com/adyen/adyen-go-api-library/v20/src/platformsaccount"
-	"github.com/adyen/adyen-go-api-library/v20/src/platformsfund"
-	"github.com/adyen/adyen-go-api-library/v20/src/platformshostedonboardingpage"
-	"github.com/adyen/adyen-go-api-library/v20/src/platformsnotificationconfiguration"
 	"github.com/adyen/adyen-go-api-library/v20/src/posterminalmanagement"
 	"github.com/adyen/adyen-go-api-library/v20/src/recurring"
 	"github.com/adyen/adyen-go-api-library/v20/src/storedvalue"
@@ -40,8 +36,6 @@ const (
 	EndpointTest                      = "https://pal-test.adyen.com"
 	EndpointLive                      = "https://pal-live.adyen.com"
 	EndpointLiveSuffix                = "-pal-live.adyenpayments.com"
-	MarketpayEndpointTest             = "https://cal-test.adyen.com/cal/services"
-	MarketpayEndpointLive             = "https://cal-live.adyen.com/cal/services"
 	CheckoutEndpointTest              = "https://checkout-test.adyen.com/checkout"
 	CheckoutEndpointLiveSuffix        = "-checkout-live.adyenpayments.com/checkout"
 	TerminalAPIEndpointTest           = "https://terminal-api-test.adyen.com"
@@ -64,10 +58,6 @@ const (
 
 // also update LibVersion in src/common/configuration.go when a version is updated and a major lib version is released
 const (
-	MarketpayAccountAPIVersion      = "v6"
-	MarketpayFundAPIVersion         = "v6"
-	MarketpayNotificationAPIVersion = "v6"
-	MarketpayHopAPIVersion          = "v6"
 	PaymentAPIVersion               = "v68"
 	PaymentsAppAPIVersion           = "v1"
 	RecurringAPIVersion             = "v68"
@@ -97,14 +87,6 @@ type APIClient struct {
 	recurring      *recurring.GeneralApi
 	binLookup      *binlookup.GeneralApi
 	balancecontrol *balancecontrol.GeneralApi
-	// Deprecated: Please migrate to the new Adyen For Platforms.
-	platformsAccount *platformsaccount.PlatformsAccount
-	// Deprecated: Please migrate to the new Adyen For Platforms.
-	platformsFund *platformsfund.PlatformsFund
-	// Deprecated: Please migrate to the new Adyen For Platforms.
-	platformsHostedOnboardingPage *platformshostedonboardingpage.PlatformsHostedOnboardingPage
-	// Deprecated: Please migrate to the new Adyen For Platforms.
-	platformsNotificationConfiguration *platformsnotificationconfiguration.PlatformsNotificationConfiguration
 	posTerminalManagement              *posterminalmanagement.GeneralApi
 	disputes                           *disputes.GeneralApi
 	storedValue                        *storedvalue.GeneralApi
@@ -115,9 +97,9 @@ type APIClient struct {
 	dataProtection                     *dataprotection.GeneralApi
 }
 
-// optionally a custom http.Client can be passed via the Config allow for advanced features such as caching.
+// NewClient optionally a custom http.Client can be passed via the Config allow for advanced features such as caching.
 func NewClient(cfg *common.Config) *APIClient {
-	
+
 	if cfg.HTTPClient == nil {
 		// init http.Client with default settings
 		cfg.HTTPClient = http.DefaultClient
@@ -127,7 +109,7 @@ func NewClient(cfg *common.Config) *APIClient {
 		 } else {
 			// set default timeout to 60 seconds otherwise
 			cfg.HTTPClient.Timeout = 60 * time.Second
-		}	
+		}
 	} else {
 		fmt.Println("Custom http.Client is provided")
 	}
@@ -292,58 +274,6 @@ func (c *APIClient) Disputes() *disputes.GeneralApi {
 	return c.disputes
 }
 
-// Deprecated: Please migrate to the new Adyen For Platforms.
-func (c *APIClient) PlatformsAccount() *platformsaccount.PlatformsAccount {
-	if c.platformsAccount == nil {
-		c.platformsAccount = &platformsaccount.PlatformsAccount{
-			Client: c.client,
-			BasePath: func() string {
-				return fmt.Sprintf("%s/Account/%s", c.client.Cfg.MarketPayEndpoint, MarketpayAccountAPIVersion)
-			},
-		}
-	}
-	return c.platformsAccount
-}
-
-// Deprecated: Please migrate to the new Adyen For Platforms.
-func (c *APIClient) PlatformsFund() *platformsfund.PlatformsFund {
-	if c.platformsFund == nil {
-		c.platformsFund = &platformsfund.PlatformsFund{
-			Client: c.client,
-			BasePath: func() string {
-				return fmt.Sprintf("%s/Fund/%s", c.client.Cfg.MarketPayEndpoint, MarketpayFundAPIVersion)
-			},
-		}
-	}
-	return c.platformsFund
-}
-
-// Deprecated: Please migrate to the new Adyen For Platforms.
-func (c *APIClient) PlatformsHostedOnboardingPage() *platformshostedonboardingpage.PlatformsHostedOnboardingPage {
-	if c.platformsHostedOnboardingPage == nil {
-		c.platformsHostedOnboardingPage = &platformshostedonboardingpage.PlatformsHostedOnboardingPage{
-			Client: c.client,
-			BasePath: func() string {
-				return fmt.Sprintf("%s/Hop/%s", c.client.Cfg.MarketPayEndpoint, MarketpayHopAPIVersion)
-			},
-		}
-	}
-	return c.platformsHostedOnboardingPage
-}
-
-// Deprecated: Please migrate to the new Adyen For Platforms.
-func (c *APIClient) PlatformsNotificationConfiguration() *platformsnotificationconfiguration.PlatformsNotificationConfiguration {
-	if c.platformsNotificationConfiguration == nil {
-		c.platformsNotificationConfiguration = &platformsnotificationconfiguration.PlatformsNotificationConfiguration{
-			Client: c.client,
-			BasePath: func() string {
-				return fmt.Sprintf("%s/Notification/%s", c.client.Cfg.MarketPayEndpoint, MarketpayNotificationAPIVersion)
-			},
-		}
-	}
-	return c.platformsNotificationConfiguration
-}
-
 func (c *APIClient) DataProtection() *dataprotection.GeneralApi {
 	if c.dataProtection == nil {
 		c.dataProtection = &dataprotection.GeneralApi{
@@ -365,7 +295,6 @@ SetEnvironment This defines the payment environment for live or test
 func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix string) {
 	if env == common.LiveEnv {
 		c.client.Cfg.Environment = env
-		c.client.Cfg.MarketPayEndpoint = MarketpayEndpointLive
 		c.client.Cfg.DisputesEndpoint = DisputesEndpointLive
 		if liveEndpointURLPrefix != "" {
 			c.client.Cfg.Endpoint = EndpointProtocol + liveEndpointURLPrefix + EndpointLiveSuffix
@@ -385,7 +314,6 @@ func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix
 	} else {
 		c.client.Cfg.Environment = env
 		c.client.Cfg.Endpoint = EndpointTest
-		c.client.Cfg.MarketPayEndpoint = MarketpayEndpointTest
 		c.client.Cfg.CheckoutEndpoint = CheckoutEndpointTest
 		c.client.Cfg.TerminalApiCloudEndpoint = TerminalAPIEndpointTest
 		c.client.Cfg.DisputesEndpoint = DisputesEndpointTest
