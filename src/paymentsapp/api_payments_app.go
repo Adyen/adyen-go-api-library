@@ -50,7 +50,6 @@ Creates a boarding token used to authenticate the installation of a Payments App
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Adyen Payments App role
 
-
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r PaymentsAppApiGeneratePaymentsAppBoardingTokenForMerchantInput - Request parameters, see GeneratePaymentsAppBoardingTokenForMerchantInput
 @return BoardingTokenResponse, *http.Response, error
@@ -106,7 +105,6 @@ Creates a boarding token used to authenticate the installation of a Payments App
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Adyen Payments App role
-
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r PaymentsAppApiGeneratePaymentsAppBoardingTokenForStoreInput - Request parameters, see GeneratePaymentsAppBoardingTokenForStoreInput
@@ -177,7 +175,6 @@ Returns the list of Payments App instances for the merchant account identified i
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Adyen Payments App role
-
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r PaymentsAppApiListPaymentsAppForMerchantInput - Request parameters, see ListPaymentsAppForMerchantInput
@@ -259,7 +256,6 @@ Returns the list of Payments App instances for the store identified in the path.
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Adyen Payments App role
 
-
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r PaymentsAppApiListPaymentsAppForStoreInput - Request parameters, see ListPaymentsAppForStoreInput
 @return PaymentsAppResponse, *http.Response, error
@@ -319,7 +315,6 @@ Revokes the authentication of the Payments App instance for the `installationId`
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Adyen Payments App role
-
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r PaymentsAppApiRevokePaymentsAppInput - Request parameters, see RevokePaymentsAppInput

@@ -45,8 +45,6 @@ Establishes a secure communications session between the POS Mobile SDK and the A
 The request sends a setup token that identifies the SDK and the device. The response returns a session token that the SDK can use to authenticate responses received from the Adyen payments platform.
 >This request applies to **mobile in-person** transactions. You cannot use this request to create online payments sessions.
 
-
-
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r GeneralApiCreateCommunicationSessionInput - Request parameters, see CreateCommunicationSessionInput
 @return CreateSessionResponse, *http.Response, error
