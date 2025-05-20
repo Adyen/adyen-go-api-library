@@ -330,8 +330,6 @@ When making this request, you must include at least one of the following:
 
 This endpoint supports cursor-based pagination. The response returns the first page of results, and returns links to the next and previous pages when applicable. You can use the links to page through the results.
 
-
-
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TransfersApiGetAllTransfersInput - Request parameters, see GetAllTransfersInput
 @return FindTransfersResponse, *http.Response, error

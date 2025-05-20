@@ -229,7 +229,7 @@ func (a *GeneralApi) MergeBalanceInput() GeneralApiMergeBalanceInput {
 /*
 MergeBalance Merge the balance of two cards.
 
-Increases the balance of the paymentmethod by the full amount left on the source paymentmethod
+# Increases the balance of the paymentmethod by the full amount left on the source paymentmethod
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r GeneralApiMergeBalanceInput - Request parameters, see MergeBalanceInput

@@ -22,7 +22,7 @@ var _ common.MappedNullable = &ChallengeInfo{}
 type ChallengeInfo struct {
 	// Indicator informing the Access Control Server (ACS) and the Directory Server (DS) that the authentication has been cancelled. Possible values: * **00**: Data element is absent or value has been sent back with the key `challengeCancel`. * **01**: Cardholder selected **Cancel**. * **02**: 3DS Requestor cancelled Authentication. * **03**: Transaction abandoned. * **04**: Transaction timed out at ACS — other timeouts. * **05**: Transaction timed out at ACS — first CReq not received by ACS. * **06**: Transaction error. * **07**: Unknown. * **08**: Transaction time out at SDK.
 	ChallengeCancel *string `json:"challengeCancel,omitempty"`
-	// The flow used in the challenge. Possible values:  * **OTP_SMS**: one-time password (OTP) flow * **OOB**: out-of-band (OOB) flow
+	// The flow used in the challenge. Possible values:  * **PWD_OTP_PHONE_FL**: one-time password (OTP) flow via SMS * **PWD_OTP_EMAIL_FL**: one-time password (OTP) flow via email * **OOB_TRIGGER_FL**: out-of-band (OOB) flow
 	Flow string `json:"flow"`
 	// The last time of interaction with the challenge.
 	LastInteraction time.Time `json:"lastInteraction"`
@@ -302,7 +302,7 @@ func (o *ChallengeInfo) isValidChallengeCancel() bool {
 	return false
 }
 func (o *ChallengeInfo) isValidFlow() bool {
-	var allowedEnumValues = []string{"OTP_SMS", "OOB"}
+	var allowedEnumValues = []string{"PWD_OTP_PHONE_FL", "PWD_OTP_EMAIL_FL", "OOB_TRIGGER_FL"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetFlow() == allowed {
 			return true

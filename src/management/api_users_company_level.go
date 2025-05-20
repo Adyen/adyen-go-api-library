@@ -52,7 +52,6 @@ Creates the user for the `companyId` identified in the path.
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Users read and write
 
-
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r UsersCompanyLevelApiCreateNewUserInput - Request parameters, see CreateNewUserInput
 @return CreateCompanyUserResponse, *http.Response, error
@@ -148,7 +147,6 @@ Returns user details for the `userId` and the `companyId` identified in the path
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Users read and write
-
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r UsersCompanyLevelApiGetUserDetailsInput - Request parameters, see GetUserDetailsInput
@@ -266,7 +264,6 @@ Returns the list of users for the `companyId` identified in the path.
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Users read and write
 
-
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r UsersCompanyLevelApiListUsersInput - Request parameters, see ListUsersInput
 @return ListCompanyUsersResponse, *http.Response, error
@@ -377,7 +374,6 @@ Updates user details for the `userId` and the `companyId` identified in the path
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Users read and write
-
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r UsersCompanyLevelApiUpdateUserDetailsInput - Request parameters, see UpdateUserDetailsInput

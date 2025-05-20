@@ -314,7 +314,7 @@ func (v *NullablePlatformPayment) UnmarshalJSON(src []byte) error {
 }
 
 func (o *PlatformPayment) isValidPlatformPaymentType() bool {
-	var allowedEnumValues = []string{"AcquiringFees", "AdyenCommission", "AdyenFees", "AdyenMarkup", "BalanceAccount", "Commission", "DCCPlatformCommission", "Default", "Interchange", "PaymentFee", "Remainder", "SchemeFee", "Surcharge", "Tip", "TopUp", "VAT"}
+	var allowedEnumValues = []string{"AcquiringFees", "AdyenCommission", "AdyenFees", "AdyenMarkup", "BalanceAccount", "ChargebackRemainder", "Commission", "DCCPlatformCommission", "Default", "Interchange", "PaymentFee", "Remainder", "SchemeFee", "Surcharge", "Tip", "TopUp", "VAT"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetPlatformPaymentType() == allowed {
 			return true
