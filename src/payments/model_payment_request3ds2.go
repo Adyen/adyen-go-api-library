@@ -41,7 +41,7 @@ type PaymentRequest3ds2 struct {
 	// An integer value that is added to the normal fraud score. The value can be either positive or negative.
 	FraudOffset  *int32        `json:"fraudOffset,omitempty"`
 	Installments *Installments `json:"installments,omitempty"`
-	// The `localizedShopperStatement` field lets you use dynamic values for your shopper statement in a local character set. If not supplied, left empty, or for cross-border transactions, **shopperStatement** is used.  Adyen currently supports the ja-Kana character set for Visa and Mastercard payments in Japan using Japanese cards. This character set supports:  * UTF-8 based Katakana, capital letters, numbers and special characters.  * Half-width or full-width characters.
+	// The `localizedShopperStatement` field lets you use dynamic values for your shopper statement in a local character set. If not supplied, left empty, or for cross-border transactions, **shopperStatement** is used.  Adyen currently supports the ja-Kana and ja-Hani character set for Visa, Mastercard and JCB payments in Japan using Japanese cards. This character set supports:  * UTF-8 based Katakana, Kanji, capital letters, numbers and special characters.  * Half-width or full-width characters.
 	LocalizedShopperStatement *map[string]string `json:"localizedShopperStatement,omitempty"`
 	// The [merchant category code](https://en.wikipedia.org/wiki/Merchant_category_code) (MCC) is a four-digit number, which relates to a particular market segment. This code reflects the predominant activity that is conducted by the merchant.
 	Mcc *string `json:"mcc,omitempty"`

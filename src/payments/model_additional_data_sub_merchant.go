@@ -25,12 +25,16 @@ type AdditionalDataSubMerchant struct {
 	SubMerchantSubSellerSubSellerNrCity *string `json:"subMerchant.subSeller[subSellerNr].city,omitempty"`
 	// Required for transactions performed by registered payment facilitators. The three-letter country code of the sub-merchant's address. For example, **BRA** for Brazil.  * Format: [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) * Fixed length: 3 characters
 	SubMerchantSubSellerSubSellerNrCountry *string `json:"subMerchant.subSeller[subSellerNr].country,omitempty"`
+	// Required for transactions performed by registered payment facilitators. The email address of the sub-merchant. * Format: Alphanumeric * Maximum length: 40 characters
+	SubMerchantSubSellerSubSellerNrEmail *string `json:"subMerchant.subSeller[subSellerNr].email,omitempty"`
 	// Required for transactions performed by registered payment facilitators. A unique identifier that you create for the sub-merchant, used by schemes to identify the sub-merchant.  * Format: Alphanumeric * Maximum length: 15 characters
 	SubMerchantSubSellerSubSellerNrId *string `json:"subMerchant.subSeller[subSellerNr].id,omitempty"`
 	// Required for transactions performed by registered payment facilitators. The sub-merchant's 4-digit Merchant Category Code (MCC).  * Format: Numeric * Fixed length: 4 digits
 	SubMerchantSubSellerSubSellerNrMcc *string `json:"subMerchant.subSeller[subSellerNr].mcc,omitempty"`
 	// Required for transactions performed by registered payment facilitators. The name of the sub-merchant. Based on scheme specifications, this value will overwrite the shopper statement  that will appear in the card statement. * Format: Alphanumeric * Maximum length: 22 characters
 	SubMerchantSubSellerSubSellerNrName *string `json:"subMerchant.subSeller[subSellerNr].name,omitempty"`
+	// Required for transactions performed by registered payment facilitators. The phone number of the sub-merchant.* Format: Alphanumeric * Maximum length: 20 characters
+	SubMerchantSubSellerSubSellerNrPhoneNumber *string `json:"subMerchant.subSeller[subSellerNr].phoneNumber,omitempty"`
 	// Required for transactions performed by registered payment facilitators. The postal code of the sub-merchant's address, without dashes. * Format: Numeric * Fixed length: 8 digits
 	SubMerchantSubSellerSubSellerNrPostalCode *string `json:"subMerchant.subSeller[subSellerNr].postalCode,omitempty"`
 	// Required for transactions performed by registered payment facilitators. The state code of the sub-merchant's address, if applicable to the country. * Format: Alphanumeric * Maximum length: 2 characters
@@ -154,6 +158,38 @@ func (o *AdditionalDataSubMerchant) SetSubMerchantSubSellerSubSellerNrCountry(v 
 	o.SubMerchantSubSellerSubSellerNrCountry = &v
 }
 
+// GetSubMerchantSubSellerSubSellerNrEmail returns the SubMerchantSubSellerSubSellerNrEmail field value if set, zero value otherwise.
+func (o *AdditionalDataSubMerchant) GetSubMerchantSubSellerSubSellerNrEmail() string {
+	if o == nil || common.IsNil(o.SubMerchantSubSellerSubSellerNrEmail) {
+		var ret string
+		return ret
+	}
+	return *o.SubMerchantSubSellerSubSellerNrEmail
+}
+
+// GetSubMerchantSubSellerSubSellerNrEmailOk returns a tuple with the SubMerchantSubSellerSubSellerNrEmail field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AdditionalDataSubMerchant) GetSubMerchantSubSellerSubSellerNrEmailOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SubMerchantSubSellerSubSellerNrEmail) {
+		return nil, false
+	}
+	return o.SubMerchantSubSellerSubSellerNrEmail, true
+}
+
+// HasSubMerchantSubSellerSubSellerNrEmail returns a boolean if a field has been set.
+func (o *AdditionalDataSubMerchant) HasSubMerchantSubSellerSubSellerNrEmail() bool {
+	if o != nil && !common.IsNil(o.SubMerchantSubSellerSubSellerNrEmail) {
+		return true
+	}
+
+	return false
+}
+
+// SetSubMerchantSubSellerSubSellerNrEmail gets a reference to the given string and assigns it to the SubMerchantSubSellerSubSellerNrEmail field.
+func (o *AdditionalDataSubMerchant) SetSubMerchantSubSellerSubSellerNrEmail(v string) {
+	o.SubMerchantSubSellerSubSellerNrEmail = &v
+}
+
 // GetSubMerchantSubSellerSubSellerNrId returns the SubMerchantSubSellerSubSellerNrId field value if set, zero value otherwise.
 func (o *AdditionalDataSubMerchant) GetSubMerchantSubSellerSubSellerNrId() string {
 	if o == nil || common.IsNil(o.SubMerchantSubSellerSubSellerNrId) {
@@ -248,6 +284,38 @@ func (o *AdditionalDataSubMerchant) HasSubMerchantSubSellerSubSellerNrName() boo
 // SetSubMerchantSubSellerSubSellerNrName gets a reference to the given string and assigns it to the SubMerchantSubSellerSubSellerNrName field.
 func (o *AdditionalDataSubMerchant) SetSubMerchantSubSellerSubSellerNrName(v string) {
 	o.SubMerchantSubSellerSubSellerNrName = &v
+}
+
+// GetSubMerchantSubSellerSubSellerNrPhoneNumber returns the SubMerchantSubSellerSubSellerNrPhoneNumber field value if set, zero value otherwise.
+func (o *AdditionalDataSubMerchant) GetSubMerchantSubSellerSubSellerNrPhoneNumber() string {
+	if o == nil || common.IsNil(o.SubMerchantSubSellerSubSellerNrPhoneNumber) {
+		var ret string
+		return ret
+	}
+	return *o.SubMerchantSubSellerSubSellerNrPhoneNumber
+}
+
+// GetSubMerchantSubSellerSubSellerNrPhoneNumberOk returns a tuple with the SubMerchantSubSellerSubSellerNrPhoneNumber field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AdditionalDataSubMerchant) GetSubMerchantSubSellerSubSellerNrPhoneNumberOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SubMerchantSubSellerSubSellerNrPhoneNumber) {
+		return nil, false
+	}
+	return o.SubMerchantSubSellerSubSellerNrPhoneNumber, true
+}
+
+// HasSubMerchantSubSellerSubSellerNrPhoneNumber returns a boolean if a field has been set.
+func (o *AdditionalDataSubMerchant) HasSubMerchantSubSellerSubSellerNrPhoneNumber() bool {
+	if o != nil && !common.IsNil(o.SubMerchantSubSellerSubSellerNrPhoneNumber) {
+		return true
+	}
+
+	return false
+}
+
+// SetSubMerchantSubSellerSubSellerNrPhoneNumber gets a reference to the given string and assigns it to the SubMerchantSubSellerSubSellerNrPhoneNumber field.
+func (o *AdditionalDataSubMerchant) SetSubMerchantSubSellerSubSellerNrPhoneNumber(v string) {
+	o.SubMerchantSubSellerSubSellerNrPhoneNumber = &v
 }
 
 // GetSubMerchantSubSellerSubSellerNrPostalCode returns the SubMerchantSubSellerSubSellerNrPostalCode field value if set, zero value otherwise.
@@ -397,6 +465,9 @@ func (o AdditionalDataSubMerchant) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.SubMerchantSubSellerSubSellerNrCountry) {
 		toSerialize["subMerchant.subSeller[subSellerNr].country"] = o.SubMerchantSubSellerSubSellerNrCountry
 	}
+	if !common.IsNil(o.SubMerchantSubSellerSubSellerNrEmail) {
+		toSerialize["subMerchant.subSeller[subSellerNr].email"] = o.SubMerchantSubSellerSubSellerNrEmail
+	}
 	if !common.IsNil(o.SubMerchantSubSellerSubSellerNrId) {
 		toSerialize["subMerchant.subSeller[subSellerNr].id"] = o.SubMerchantSubSellerSubSellerNrId
 	}
@@ -405,6 +476,9 @@ func (o AdditionalDataSubMerchant) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.SubMerchantSubSellerSubSellerNrName) {
 		toSerialize["subMerchant.subSeller[subSellerNr].name"] = o.SubMerchantSubSellerSubSellerNrName
+	}
+	if !common.IsNil(o.SubMerchantSubSellerSubSellerNrPhoneNumber) {
+		toSerialize["subMerchant.subSeller[subSellerNr].phoneNumber"] = o.SubMerchantSubSellerSubSellerNrPhoneNumber
 	}
 	if !common.IsNil(o.SubMerchantSubSellerSubSellerNrPostalCode) {
 		toSerialize["subMerchant.subSeller[subSellerNr].postalCode"] = o.SubMerchantSubSellerSubSellerNrPostalCode

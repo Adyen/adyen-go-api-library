@@ -106,7 +106,7 @@ func NewClient(cfg *common.Config) *APIClient {
 		if cfg.ConnectionTimeoutMillis != 0 {
 			// set timeout as defined in config
 			cfg.HTTPClient.Timeout = cfg.ConnectionTimeoutMillis
-		 } else {
+		} else {
 			// set default timeout to 60 seconds otherwise
 			cfg.HTTPClient.Timeout = 60 * time.Second
 		}

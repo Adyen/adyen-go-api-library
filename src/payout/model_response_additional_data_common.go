@@ -65,6 +65,8 @@ type ResponseAdditionalDataCommon struct {
 	FraudManualReview *string `json:"fraudManualReview,omitempty"`
 	// The fraud result properties of the payment.
 	FraudResultType *string `json:"fraudResultType,omitempty"`
+	// The risk level of the transaction as classified by the [machine learning](https://docs.adyen.com/risk-management/configure-your-risk-profile/machine-learning-rules/) fraud risk rule. The risk level indicates the likelihood that a transaction will result in a fraudulent dispute. The possible return values are:\\n* veryLow\\n* low\\n* medium\\n* high\\n* veryHigh\\n\\n>
+	FraudRiskLevel *string `json:"fraudRiskLevel,omitempty"`
 	// Information regarding the funding type of the card. The possible return values are: * CHARGE * CREDIT * DEBIT * PREPAID * PREPAID_RELOADABLE  * PREPAID_NONRELOADABLE * DEFFERED_DEBIT  > This functionality requires additional configuration on Adyen's end. To enable it, contact the Support Team.  For receiving this field in the notification, enable **Include Funding Source** in **Notifications** > **Additional settings**.
 	FundingSource *string `json:"fundingSource,omitempty"`
 	// Indicates availability of funds.  Visa: * \"I\" (fast funds are supported) * \"N\" (otherwise)  Mastercard: * \"I\" (product type is Prepaid or Debit, or issuing country is in CEE/HGEM list) * \"N\" (otherwise)  > Returned when you verify a card BIN or estimate costs, and only if payoutEligible is \"Y\" or \"D\".
@@ -900,6 +902,38 @@ func (o *ResponseAdditionalDataCommon) HasFraudResultType() bool {
 // SetFraudResultType gets a reference to the given string and assigns it to the FraudResultType field.
 func (o *ResponseAdditionalDataCommon) SetFraudResultType(v string) {
 	o.FraudResultType = &v
+}
+
+// GetFraudRiskLevel returns the FraudRiskLevel field value if set, zero value otherwise.
+func (o *ResponseAdditionalDataCommon) GetFraudRiskLevel() string {
+	if o == nil || common.IsNil(o.FraudRiskLevel) {
+		var ret string
+		return ret
+	}
+	return *o.FraudRiskLevel
+}
+
+// GetFraudRiskLevelOk returns a tuple with the FraudRiskLevel field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResponseAdditionalDataCommon) GetFraudRiskLevelOk() (*string, bool) {
+	if o == nil || common.IsNil(o.FraudRiskLevel) {
+		return nil, false
+	}
+	return o.FraudRiskLevel, true
+}
+
+// HasFraudRiskLevel returns a boolean if a field has been set.
+func (o *ResponseAdditionalDataCommon) HasFraudRiskLevel() bool {
+	if o != nil && !common.IsNil(o.FraudRiskLevel) {
+		return true
+	}
+
+	return false
+}
+
+// SetFraudRiskLevel gets a reference to the given string and assigns it to the FraudRiskLevel field.
+func (o *ResponseAdditionalDataCommon) SetFraudRiskLevel(v string) {
+	o.FraudRiskLevel = &v
 }
 
 // GetFundingSource returns the FundingSource field value if set, zero value otherwise.
@@ -2241,6 +2275,9 @@ func (o ResponseAdditionalDataCommon) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.FraudResultType) {
 		toSerialize["fraudResultType"] = o.FraudResultType
 	}
+	if !common.IsNil(o.FraudRiskLevel) {
+		toSerialize["fraudRiskLevel"] = o.FraudRiskLevel
+	}
 	if !common.IsNil(o.FundingSource) {
 		toSerialize["fundingSource"] = o.FundingSource
 	}
@@ -2401,6 +2438,15 @@ func (o *ResponseAdditionalDataCommon) isValidFraudResultType() bool {
 	var allowedEnumValues = []string{"GREEN", "FRAUD"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetFraudResultType() == allowed {
+			return true
+		}
+	}
+	return false
+}
+func (o *ResponseAdditionalDataCommon) isValidFraudRiskLevel() bool {
+	var allowedEnumValues = []string{"veryLow", "low", "medium", "high", "veryHigh"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetFraudRiskLevel() == allowed {
 			return true
 		}
 	}

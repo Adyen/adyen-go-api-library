@@ -40,7 +40,6 @@ type PaymentMethodSetupInfo struct {
 	Discover           *GenericPmWithTdiInfo `json:"discover,omitempty"`
 	EftDirectdebitCA   *GenericPmWithTdiInfo `json:"eft_directdebit_CA,omitempty"`
 	EftposAustralia    *GenericPmWithTdiInfo `json:"eftpos_australia,omitempty"`
-	GiroPay            *GiroPayInfo          `json:"giroPay,omitempty"`
 	Girocard           *GenericPmWithTdiInfo `json:"girocard,omitempty"`
 	GooglePay          *GooglePayInfo        `json:"googlePay,omitempty"`
 	Ideal              *GenericPmWithTdiInfo `json:"ideal,omitempty"`
@@ -51,6 +50,7 @@ type PaymentMethodSetupInfo struct {
 	Mc                 *GenericPmWithTdiInfo `json:"mc,omitempty"`
 	MealVoucherFR      *MealVoucherFRInfo    `json:"mealVoucher_FR,omitempty"`
 	Nyce               *NyceInfo             `json:"nyce,omitempty"`
+	PaybybankPlaid     *PayByBankPlaidInfo   `json:"paybybank_plaid,omitempty"`
 	Payme              *PayMeInfo            `json:"payme,omitempty"`
 	Paypal             *PayPalInfo           `json:"paypal,omitempty"`
 	Payto              *PayToInfo            `json:"payto,omitempty"`
@@ -637,38 +637,6 @@ func (o *PaymentMethodSetupInfo) SetEftposAustralia(v GenericPmWithTdiInfo) {
 	o.EftposAustralia = &v
 }
 
-// GetGiroPay returns the GiroPay field value if set, zero value otherwise.
-func (o *PaymentMethodSetupInfo) GetGiroPay() GiroPayInfo {
-	if o == nil || common.IsNil(o.GiroPay) {
-		var ret GiroPayInfo
-		return ret
-	}
-	return *o.GiroPay
-}
-
-// GetGiroPayOk returns a tuple with the GiroPay field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PaymentMethodSetupInfo) GetGiroPayOk() (*GiroPayInfo, bool) {
-	if o == nil || common.IsNil(o.GiroPay) {
-		return nil, false
-	}
-	return o.GiroPay, true
-}
-
-// HasGiroPay returns a boolean if a field has been set.
-func (o *PaymentMethodSetupInfo) HasGiroPay() bool {
-	if o != nil && !common.IsNil(o.GiroPay) {
-		return true
-	}
-
-	return false
-}
-
-// SetGiroPay gets a reference to the given GiroPayInfo and assigns it to the GiroPay field.
-func (o *PaymentMethodSetupInfo) SetGiroPay(v GiroPayInfo) {
-	o.GiroPay = &v
-}
-
 // GetGirocard returns the Girocard field value if set, zero value otherwise.
 func (o *PaymentMethodSetupInfo) GetGirocard() GenericPmWithTdiInfo {
 	if o == nil || common.IsNil(o.Girocard) {
@@ -987,6 +955,38 @@ func (o *PaymentMethodSetupInfo) HasNyce() bool {
 // SetNyce gets a reference to the given NyceInfo and assigns it to the Nyce field.
 func (o *PaymentMethodSetupInfo) SetNyce(v NyceInfo) {
 	o.Nyce = &v
+}
+
+// GetPaybybankPlaid returns the PaybybankPlaid field value if set, zero value otherwise.
+func (o *PaymentMethodSetupInfo) GetPaybybankPlaid() PayByBankPlaidInfo {
+	if o == nil || common.IsNil(o.PaybybankPlaid) {
+		var ret PayByBankPlaidInfo
+		return ret
+	}
+	return *o.PaybybankPlaid
+}
+
+// GetPaybybankPlaidOk returns a tuple with the PaybybankPlaid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodSetupInfo) GetPaybybankPlaidOk() (*PayByBankPlaidInfo, bool) {
+	if o == nil || common.IsNil(o.PaybybankPlaid) {
+		return nil, false
+	}
+	return o.PaybybankPlaid, true
+}
+
+// HasPaybybankPlaid returns a boolean if a field has been set.
+func (o *PaymentMethodSetupInfo) HasPaybybankPlaid() bool {
+	if o != nil && !common.IsNil(o.PaybybankPlaid) {
+		return true
+	}
+
+	return false
+}
+
+// SetPaybybankPlaid gets a reference to the given PayByBankPlaidInfo and assigns it to the PaybybankPlaid field.
+func (o *PaymentMethodSetupInfo) SetPaybybankPlaid(v PayByBankPlaidInfo) {
+	o.PaybybankPlaid = &v
 }
 
 // GetPayme returns the Payme field value if set, zero value otherwise.
@@ -1618,9 +1618,6 @@ func (o PaymentMethodSetupInfo) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.EftposAustralia) {
 		toSerialize["eftpos_australia"] = o.EftposAustralia
 	}
-	if !common.IsNil(o.GiroPay) {
-		toSerialize["giroPay"] = o.GiroPay
-	}
 	if !common.IsNil(o.Girocard) {
 		toSerialize["girocard"] = o.Girocard
 	}
@@ -1650,6 +1647,9 @@ func (o PaymentMethodSetupInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Nyce) {
 		toSerialize["nyce"] = o.Nyce
+	}
+	if !common.IsNil(o.PaybybankPlaid) {
+		toSerialize["paybybank_plaid"] = o.PaybybankPlaid
 	}
 	if !common.IsNil(o.Payme) {
 		toSerialize["payme"] = o.Payme
@@ -1752,7 +1752,7 @@ func (o *PaymentMethodSetupInfo) isValidShopperInteraction() bool {
 	return false
 }
 func (o *PaymentMethodSetupInfo) isValidType() bool {
-	var allowedEnumValues = []string{"accel", "ach", "affirm", "afterpaytouch", "alelo", "alipay", "alipay_hk", "alipay_wap", "amex", "applepay", "banese_card", "banese_card_credit", "banese_card_debit", "banese_card_prepaid", "bcmc", "blik", "cartebancaire", "clearpay", "clicktopay", "credtodos", "credtodos_private_credit", "credtodos_private_debit", "cup", "diners", "directdebit_GB", "discover", "ebanking_FI", "eft_directdebit_CA", "eftpos_australia", "elo", "elocredit", "elodebit", "girocard", "googlepay", "hiper", "hipercard", "ideal", "interac_card", "jcb", "klarna", "klarna_account", "klarna_paynow", "maestro", "mbway", "mc", "mcdebit", "mealVoucher_FR", "mobilepay", "multibanco", "nyce", "onlineBanking_PL", "paybybank", "payme", "payme_pos", "paynow", "paynow_pos", "paypal", "payshop", "payto", "pulse", "sodexo", "star", "swish", "ticket", "todo_giftcard", "trustly", "twint", "twint_pos", "up_brazil_credit", "vale_refeicao", "vale_refeicao_prepaid", "vipps", "visa", "visadebit", "vpay", "wechatpay", "wechatpay_pos"}
+	var allowedEnumValues = []string{"accel", "ach", "affirm", "afterpaytouch", "alelo", "alipay", "alipay_hk", "alipay_wap", "amex", "applepay", "banese_card", "banese_card_credit", "banese_card_debit", "banese_card_prepaid", "bcmc", "blik", "cartebancaire", "clearpay", "clicktopay", "credtodos", "credtodos_private_credit", "credtodos_private_debit", "cup", "diners", "directdebit_GB", "discover", "ebanking_FI", "eft_directdebit_CA", "eftpos_australia", "elo", "elocredit", "elodebit", "girocard", "googlepay", "hiper", "hipercard", "ideal", "interac_card", "jcb", "klarna", "klarna_account", "klarna_paynow", "maestro", "mbway", "mc", "mcdebit", "mealVoucher_FR", "mobilepay", "multibanco", "nyce", "onlineBanking_PL", "paybybank", "paybybank_plaid", "payme", "payme_pos", "paynow", "paynow_pos", "paypal", "payto", "pulse", "sodexo", "star", "swish", "ticket", "todo_giftcard", "trustly", "twint", "twint_pos", "up_brazil_credit", "vale_refeicao", "vale_refeicao_prepaid", "vipps", "visa", "visadebit", "vpay", "wechatpay", "wechatpay_pos"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true
