@@ -27,7 +27,7 @@ type PayByBankAISDirectDebitDetails struct {
 	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
 	StoredPaymentMethodId *string `json:"storedPaymentMethodId,omitempty"`
-	// **paybybank_**
+	// **paybybank_AIS_DD**
 	Type string `json:"type"`
 }
 

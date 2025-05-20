@@ -19,7 +19,7 @@ var _ common.MappedNullable = &CheckoutSessionInstallmentOption{}
 
 // CheckoutSessionInstallmentOption struct for CheckoutSessionInstallmentOption
 type CheckoutSessionInstallmentOption struct {
-	// Defines the type of installment plan. If not set, defaults to **regular**.  Possible values: * **regular** * **revolving**
+	// Defines the type of installment plan. If not set, defaults to **regular**.  Possible values: * **regular** * **revolving*** **bonus** * **with_interest** * **buynow_paylater** * **nointerest_bonus** * **interest_bonus** * **refund_prctg** * **nointeres_refund_prctg** * **interes_refund_prctg**
 	Plans []string `json:"plans,omitempty"`
 	// Preselected number of installments offered for this payment method.
 	PreselectedValue *int32 `json:"preselectedValue,omitempty"`
