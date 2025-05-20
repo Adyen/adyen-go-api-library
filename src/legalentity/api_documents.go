@@ -154,7 +154,7 @@ UpdateDocument Update a document
 
 Updates a document.
 
- >You can upload a maximum of 15 pages for photo IDs.
+	>You can upload a maximum of 15 pages for photo IDs.
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r DocumentsApiUpdateDocumentInput - Request parameters, see UpdateDocumentInput
@@ -214,11 +214,11 @@ UploadDocumentForVerificationChecks Upload a document for verification checks
 
 Uploads a document for verification checks.
 
- Adyen uses the information from the [legal entity](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/legalEntities) to run automated verification checks. If these checks fail, you will be notified to provide additional documents.
+	Adyen uses the information from the [legal entity](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/legalEntities) to run automated verification checks. If these checks fail, you will be notified to provide additional documents.
 
- You should only upload documents when Adyen requests additional information for the legal entity.
+	You should only upload documents when Adyen requests additional information for the legal entity.
 
- >You can upload a maximum of 15 pages for photo IDs.
+	>You can upload a maximum of 15 pages for photo IDs.
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r DocumentsApiUploadDocumentForVerificationChecksInput - Request parameters, see UploadDocumentForVerificationChecksInput

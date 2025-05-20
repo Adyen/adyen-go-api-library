@@ -48,8 +48,6 @@ This resource contains information about your user's line of business, including
 
 You can create a maximum of 200 business lines per legal entity for payment processing.
 
-
-
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r BusinessLinesApiCreateBusinessLineInput - Request parameters, see CreateBusinessLineInput
 @return BusinessLine, *http.Response, error
@@ -94,7 +92,7 @@ DeleteBusinessLine Delete a business line
 
 Deletes a business line.
 
- >If you delete a business line linked to a [payment method](https://docs.adyen.com/development-resources/paymentmethodvariant#management-api), it can affect your merchant account's ability to use the [payment method](https://docs.adyen.com/api-explorer/Management/latest/post/merchants/_merchantId_/paymentMethodSettings). The business line is removed from all linked merchant accounts.
+	>If you delete a business line linked to a [payment method](https://docs.adyen.com/development-resources/paymentmethodvariant#management-api), it can affect your merchant account's ability to use the [payment method](https://docs.adyen.com/api-explorer/Management/latest/post/merchants/_merchantId_/paymentMethodSettings). The business line is removed from all linked merchant accounts.
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r BusinessLinesApiDeleteBusinessLineInput - Request parameters, see DeleteBusinessLineInput

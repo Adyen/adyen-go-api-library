@@ -19,7 +19,7 @@ const (
 	EventCodeChargeback               = "CHARGEBACK"
 	EventCodeChargebackReversed       = "CHARGEBACK_REVERSED"
 	EventCodeExpire                   = "EXPIRE"
-    EventCodeIssuerComments           = "ISSUER_COMMENTS"
+	EventCodeIssuerComments           = "ISSUER_COMMENTS"
 	EventCodeHandledExternally        = "HANDLED_EXTERNALLY"
 	EventCodeManualReviewAccept       = "MANUAL_REVIEW_ACCEPT"
 	EventCodeManualReviewReject       = "MANUAL_REVIEW_REJECT"
