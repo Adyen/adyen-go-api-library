@@ -42,6 +42,7 @@ type TransferData struct {
 	EventId *string `json:"eventId,omitempty"`
 	// The list of events leading up to the current status of the transfer.
 	Events         []TransferEvent `json:"events,omitempty"`
+	ExecutionDate  *ExecutionDate  `json:"executionDate,omitempty"`
 	ExternalReason *ExternalReason `json:"externalReason,omitempty"`
 	// The ID of the resource.
 	Id                *string            `json:"id,omitempty"`
@@ -515,6 +516,38 @@ func (o *TransferData) SetEvents(v []TransferEvent) {
 	o.Events = v
 }
 
+// GetExecutionDate returns the ExecutionDate field value if set, zero value otherwise.
+func (o *TransferData) GetExecutionDate() ExecutionDate {
+	if o == nil || common.IsNil(o.ExecutionDate) {
+		var ret ExecutionDate
+		return ret
+	}
+	return *o.ExecutionDate
+}
+
+// GetExecutionDateOk returns a tuple with the ExecutionDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransferData) GetExecutionDateOk() (*ExecutionDate, bool) {
+	if o == nil || common.IsNil(o.ExecutionDate) {
+		return nil, false
+	}
+	return o.ExecutionDate, true
+}
+
+// HasExecutionDate returns a boolean if a field has been set.
+func (o *TransferData) HasExecutionDate() bool {
+	if o != nil && !common.IsNil(o.ExecutionDate) {
+		return true
+	}
+
+	return false
+}
+
+// SetExecutionDate gets a reference to the given ExecutionDate and assigns it to the ExecutionDate field.
+func (o *TransferData) SetExecutionDate(v ExecutionDate) {
+	o.ExecutionDate = &v
+}
+
 // GetExternalReason returns the ExternalReason field value if set, zero value otherwise.
 func (o *TransferData) GetExternalReason() ExternalReason {
 	if o == nil || common.IsNil(o.ExternalReason) {
@@ -938,6 +971,9 @@ func (o TransferData) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Events) {
 		toSerialize["events"] = o.Events
+	}
+	if !common.IsNil(o.ExecutionDate) {
+		toSerialize["executionDate"] = o.ExecutionDate
 	}
 	if !common.IsNil(o.ExternalReason) {
 		toSerialize["externalReason"] = o.ExternalReason
