@@ -10,9 +10,8 @@ package balancewebhook
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v20/src/common"
 	"time"
-
-	"github.com/adyen/adyen-go-api-library/v20/src/common"
 )
 
 // checks if the BalanceNotificationData type satisfies the MappedNullable interface at compile time
@@ -23,8 +22,8 @@ type BalanceNotificationData struct {
 	// The unique identifier of the balance account.
 	BalanceAccountId string `json:"balanceAccountId"`
 	// The unique identifier of the balance platform.
-	BalancePlatform *string  `json:"balancePlatform,omitempty"`
-	Balances        Balances `json:"balances"`
+	BalancePlatform *string `json:"balancePlatform,omitempty"`
+	Balances Balances `json:"balances"`
 	// The date and time when the event was triggered, in ISO 8601 extended format. For example, **2020-12-18T10:15:30+01:00**.
 	CreationDate *time.Time `json:"creationDate,omitempty"`
 	// TThe three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes).
@@ -249,7 +248,7 @@ func (o *BalanceNotificationData) SetSettingIds(v []string) {
 }
 
 func (o BalanceNotificationData) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -309,3 +308,6 @@ func (v *NullableBalanceNotificationData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

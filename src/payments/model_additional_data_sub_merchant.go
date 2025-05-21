@@ -10,8 +10,7 @@ package payments
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v20/src/common"
+    "github.com/adyen/adyen-go-api-library/v20/src/common"
 )
 
 // checks if the AdditionalDataSubMerchant type satisfies the MappedNullable interface at compile time
@@ -447,7 +446,7 @@ func (o *AdditionalDataSubMerchant) SetSubMerchantSubSellerSubSellerNrTaxId(v st
 }
 
 func (o AdditionalDataSubMerchant) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -530,3 +529,6 @@ func (v *NullableAdditionalDataSubMerchant) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

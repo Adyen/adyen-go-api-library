@@ -10,9 +10,8 @@ package legalentity
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v20/src/common"
 	"time"
-
-	"github.com/adyen/adyen-go-api-library/v20/src/common"
 )
 
 // checks if the TermsOfServiceAcceptanceInfo type satisfies the MappedNullable interface at compile time
@@ -24,12 +23,14 @@ type TermsOfServiceAcceptanceInfo struct {
 	AcceptedBy *string `json:"acceptedBy,omitempty"`
 	// The unique identifier of the legal entity for which the Terms of Service are accepted.
 	AcceptedFor *string `json:"acceptedFor,omitempty"`
-	// The date when the Terms of Service were accepted.
+	// The date when the Terms of Service were accepted, in ISO 8601 extended format. For example, 2022-12-18T10:15:30+01:00.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
 	// An Adyen-generated reference for the accepted Terms of Service.
 	Id *string `json:"id,omitempty"`
-	// The type of Terms of Service.  Possible values: *  **adyenForPlatformsManage** *  **adyenIssuing** *  **adyenForPlatformsAdvanced** *  **adyenCapital** *  **adyenAccount** *  **adyenCard** *  **adyenFranchisee** *  **adyenPccr** *  **adyenChargeCard**
+	// The type of Terms of Service.  Possible values: *  **adyenForPlatformsManage** *  **adyenIssuing** *  **adyenForPlatformsAdvanced** *  **adyenCapital** *  **adyenAccount** *  **adyenCard** *  **adyenFranchisee** *  **adyenPccr** *  **adyenChargeCard** *  **kycOnInvite**  
 	Type *string `json:"type,omitempty"`
+	// The expiration date for the Terms of Service acceptance, in ISO 8601 extended format. For example, 2022-12-18T00:00:00+01:00.
+	ValidTo *time.Time `json:"validTo,omitempty"`
 }
 
 // NewTermsOfServiceAcceptanceInfo instantiates a new TermsOfServiceAcceptanceInfo object
@@ -209,8 +210,40 @@ func (o *TermsOfServiceAcceptanceInfo) SetType(v string) {
 	o.Type = &v
 }
 
+// GetValidTo returns the ValidTo field value if set, zero value otherwise.
+func (o *TermsOfServiceAcceptanceInfo) GetValidTo() time.Time {
+	if o == nil || common.IsNil(o.ValidTo) {
+		var ret time.Time
+		return ret
+	}
+	return *o.ValidTo
+}
+
+// GetValidToOk returns a tuple with the ValidTo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TermsOfServiceAcceptanceInfo) GetValidToOk() (*time.Time, bool) {
+	if o == nil || common.IsNil(o.ValidTo) {
+		return nil, false
+	}
+	return o.ValidTo, true
+}
+
+// HasValidTo returns a boolean if a field has been set.
+func (o *TermsOfServiceAcceptanceInfo) HasValidTo() bool {
+	if o != nil && !common.IsNil(o.ValidTo) {
+		return true
+	}
+
+	return false
+}
+
+// SetValidTo gets a reference to the given time.Time and assigns it to the ValidTo field.
+func (o *TermsOfServiceAcceptanceInfo) SetValidTo(v time.Time) {
+	o.ValidTo = &v
+}
+
 func (o TermsOfServiceAcceptanceInfo) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -233,6 +266,9 @@ func (o TermsOfServiceAcceptanceInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type
+	}
+	if !common.IsNil(o.ValidTo) {
+		toSerialize["validTo"] = o.ValidTo
 	}
 	return toSerialize, nil
 }
@@ -273,12 +309,14 @@ func (v *NullableTermsOfServiceAcceptanceInfo) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *TermsOfServiceAcceptanceInfo) isValidType() bool {
-	var allowedEnumValues = []string{"adyenAccount", "adyenCapital", "adyenCard", "adyenChargeCard", "adyenForPlatformsAdvanced", "adyenForPlatformsManage", "adyenFranchisee", "adyenIssuing", "adyenPccr"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "adyenAccount", "adyenCapital", "adyenCard", "adyenChargeCard", "adyenForPlatformsAdvanced", "adyenForPlatformsManage", "adyenFranchisee", "adyenIssuing", "adyenPccr", "kycOnInvite" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+
