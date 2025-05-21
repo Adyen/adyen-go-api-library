@@ -10,10 +10,10 @@ package sessionauthentication
 
 import (
 	"context"
-    "net/http"
-    "net/url"
-    "strings"
-    "github.com/adyen/adyen-go-api-library/v20/src/common"
+	"net/http"
+	"net/url"
+
+	"github.com/adyen/adyen-go-api-library/v20/src/common"
 )
 
 // SessionAuthenticationApi service
@@ -29,15 +29,13 @@ func (r SessionAuthenticationApiCreateAuthenticationSessionInput) Authentication
 	return r
 }
 
-
 /*
 Prepare a request for CreateAuthenticationSession
 
 @return SessionAuthenticationApiCreateAuthenticationSessionInput
 */
 func (a *SessionAuthenticationApi) CreateAuthenticationSessionInput() SessionAuthenticationApiCreateAuthenticationSessionInput {
-	return SessionAuthenticationApiCreateAuthenticationSessionInput{
-	}
+	return SessionAuthenticationApiCreateAuthenticationSessionInput{}
 }
 
 /*
@@ -56,22 +54,20 @@ To create a token, you must meet specific requirements. These requirements vary 
 @return AuthenticationSessionResponse, *http.Response, error
 */
 func (a *SessionAuthenticationApi) CreateAuthenticationSession(ctx context.Context, r SessionAuthenticationApiCreateAuthenticationSessionInput) (AuthenticationSessionResponse, *http.Response, error) {
-    res := &AuthenticationSessionResponse{}
+	res := &AuthenticationSessionResponse{}
 	path := "/sessions"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.authenticationSessionRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.authenticationSessionRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-

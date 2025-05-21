@@ -10,7 +10,8 @@ package configurationwebhook
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v20/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v20/src/common"
 )
 
 // checks if the NetworkTokenNotificationDataV2 type satisfies the MappedNullable interface at compile time
@@ -37,7 +38,7 @@ type NetworkTokenNotificationDataV2 struct {
 	Type *string `json:"type,omitempty"`
 	// The rules used to validate the request for provisioning the network token.
 	ValidationFacts []ValidationFacts `json:"validationFacts,omitempty"`
-	Wallet *Wallet `json:"wallet,omitempty"`
+	Wallet          *Wallet           `json:"wallet,omitempty"`
 }
 
 // NewNetworkTokenNotificationDataV2 instantiates a new NetworkTokenNotificationDataV2 object
@@ -410,7 +411,7 @@ func (o *NetworkTokenNotificationDataV2) SetWallet(v Wallet) {
 }
 
 func (o NetworkTokenNotificationDataV2) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -490,6 +491,3 @@ func (v *NullableNetworkTokenNotificationDataV2) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-
