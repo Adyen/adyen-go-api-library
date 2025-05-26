@@ -19,28 +19,30 @@ var _ common.MappedNullable = &TransactionRuleRestrictions{}
 
 // TransactionRuleRestrictions struct for TransactionRuleRestrictions
 type TransactionRuleRestrictions struct {
-	ActiveNetworkTokens         *ActiveNetworkTokensRestriction      `json:"activeNetworkTokens,omitempty"`
-	BrandVariants               *BrandVariantsRestriction            `json:"brandVariants,omitempty"`
-	CounterpartyBank            *CounterpartyBankRestriction         `json:"counterpartyBank,omitempty"`
-	CounterpartyTypes           *CounterpartyTypesRestriction        `json:"counterpartyTypes,omitempty"`
-	Countries                   *CountriesRestriction                `json:"countries,omitempty"`
-	DayOfWeek                   *DayOfWeekRestriction                `json:"dayOfWeek,omitempty"`
-	DifferentCurrencies         *DifferentCurrenciesRestriction      `json:"differentCurrencies,omitempty"`
-	EntryModes                  *EntryModesRestriction               `json:"entryModes,omitempty"`
-	InternationalTransaction    *InternationalTransactionRestriction `json:"internationalTransaction,omitempty"`
-	MatchingTransactions        *MatchingTransactionsRestriction     `json:"matchingTransactions,omitempty"`
-	MatchingValues              *MatchingValuesRestriction           `json:"matchingValues,omitempty"`
-	Mccs                        *MccsRestriction                     `json:"mccs,omitempty"`
-	MerchantNames               *MerchantNamesRestriction            `json:"merchantNames,omitempty"`
-	Merchants                   *MerchantsRestriction                `json:"merchants,omitempty"`
-	ProcessingTypes             *ProcessingTypesRestriction          `json:"processingTypes,omitempty"`
-	RiskScores                  *RiskScoresRestriction               `json:"riskScores,omitempty"`
-	SameAmountRestriction       *SameAmountRestriction               `json:"sameAmountRestriction,omitempty"`
-	SameCounterpartyRestriction *SameCounterpartyRestriction         `json:"sameCounterpartyRestriction,omitempty"`
-	SourceAccountTypes          *SourceAccountTypesRestriction       `json:"sourceAccountTypes,omitempty"`
-	TimeOfDay                   *TimeOfDayRestriction                `json:"timeOfDay,omitempty"`
-	TokenRequestors             *TokenRequestorsRestriction          `json:"tokenRequestors,omitempty"`
-	TotalAmount                 *TotalAmountRestriction              `json:"totalAmount,omitempty"`
+	ActiveNetworkTokens         *ActiveNetworkTokensRestriction        `json:"activeNetworkTokens,omitempty"`
+	BrandVariants               *BrandVariantsRestriction              `json:"brandVariants,omitempty"`
+	CounterpartyBank            *CounterpartyBankRestriction           `json:"counterpartyBank,omitempty"`
+	CounterpartyTypes           *CounterpartyTypesRestriction          `json:"counterpartyTypes,omitempty"`
+	Countries                   *CountriesRestriction                  `json:"countries,omitempty"`
+	DayOfWeek                   *DayOfWeekRestriction                  `json:"dayOfWeek,omitempty"`
+	DifferentCurrencies         *DifferentCurrenciesRestriction        `json:"differentCurrencies,omitempty"`
+	EntryModes                  *EntryModesRestriction                 `json:"entryModes,omitempty"`
+	InternationalTransaction    *InternationalTransactionRestriction   `json:"internationalTransaction,omitempty"`
+	MatchingTransactions        *MatchingTransactionsRestriction       `json:"matchingTransactions,omitempty"`
+	MatchingValues              *MatchingValuesRestriction             `json:"matchingValues,omitempty"`
+	Mccs                        *MccsRestriction                       `json:"mccs,omitempty"`
+	MerchantNames               *MerchantNamesRestriction              `json:"merchantNames,omitempty"`
+	Merchants                   *MerchantsRestriction                  `json:"merchants,omitempty"`
+	ProcessingTypes             *ProcessingTypesRestriction            `json:"processingTypes,omitempty"`
+	RiskScores                  *RiskScoresRestriction                 `json:"riskScores,omitempty"`
+	SameAmountRestriction       *SameAmountRestriction                 `json:"sameAmountRestriction,omitempty"`
+	SameCounterpartyRestriction *SameCounterpartyRestriction           `json:"sameCounterpartyRestriction,omitempty"`
+	SourceAccountTypes          *SourceAccountTypesRestriction         `json:"sourceAccountTypes,omitempty"`
+	TimeOfDay                   *TimeOfDayRestriction                  `json:"timeOfDay,omitempty"`
+	TokenRequestors             *TokenRequestorsRestriction            `json:"tokenRequestors,omitempty"`
+	TotalAmount                 *TotalAmountRestriction                `json:"totalAmount,omitempty"`
+	WalletProviderAccountScore  *WalletProviderAccountScoreRestriction `json:"walletProviderAccountScore,omitempty"`
+	WalletProviderDeviceScore   *WalletProviderDeviceScore             `json:"walletProviderDeviceScore,omitempty"`
 }
 
 // NewTransactionRuleRestrictions instantiates a new TransactionRuleRestrictions object
@@ -764,6 +766,70 @@ func (o *TransactionRuleRestrictions) SetTotalAmount(v TotalAmountRestriction) {
 	o.TotalAmount = &v
 }
 
+// GetWalletProviderAccountScore returns the WalletProviderAccountScore field value if set, zero value otherwise.
+func (o *TransactionRuleRestrictions) GetWalletProviderAccountScore() WalletProviderAccountScoreRestriction {
+	if o == nil || common.IsNil(o.WalletProviderAccountScore) {
+		var ret WalletProviderAccountScoreRestriction
+		return ret
+	}
+	return *o.WalletProviderAccountScore
+}
+
+// GetWalletProviderAccountScoreOk returns a tuple with the WalletProviderAccountScore field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionRuleRestrictions) GetWalletProviderAccountScoreOk() (*WalletProviderAccountScoreRestriction, bool) {
+	if o == nil || common.IsNil(o.WalletProviderAccountScore) {
+		return nil, false
+	}
+	return o.WalletProviderAccountScore, true
+}
+
+// HasWalletProviderAccountScore returns a boolean if a field has been set.
+func (o *TransactionRuleRestrictions) HasWalletProviderAccountScore() bool {
+	if o != nil && !common.IsNil(o.WalletProviderAccountScore) {
+		return true
+	}
+
+	return false
+}
+
+// SetWalletProviderAccountScore gets a reference to the given WalletProviderAccountScoreRestriction and assigns it to the WalletProviderAccountScore field.
+func (o *TransactionRuleRestrictions) SetWalletProviderAccountScore(v WalletProviderAccountScoreRestriction) {
+	o.WalletProviderAccountScore = &v
+}
+
+// GetWalletProviderDeviceScore returns the WalletProviderDeviceScore field value if set, zero value otherwise.
+func (o *TransactionRuleRestrictions) GetWalletProviderDeviceScore() WalletProviderDeviceScore {
+	if o == nil || common.IsNil(o.WalletProviderDeviceScore) {
+		var ret WalletProviderDeviceScore
+		return ret
+	}
+	return *o.WalletProviderDeviceScore
+}
+
+// GetWalletProviderDeviceScoreOk returns a tuple with the WalletProviderDeviceScore field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionRuleRestrictions) GetWalletProviderDeviceScoreOk() (*WalletProviderDeviceScore, bool) {
+	if o == nil || common.IsNil(o.WalletProviderDeviceScore) {
+		return nil, false
+	}
+	return o.WalletProviderDeviceScore, true
+}
+
+// HasWalletProviderDeviceScore returns a boolean if a field has been set.
+func (o *TransactionRuleRestrictions) HasWalletProviderDeviceScore() bool {
+	if o != nil && !common.IsNil(o.WalletProviderDeviceScore) {
+		return true
+	}
+
+	return false
+}
+
+// SetWalletProviderDeviceScore gets a reference to the given WalletProviderDeviceScore and assigns it to the WalletProviderDeviceScore field.
+func (o *TransactionRuleRestrictions) SetWalletProviderDeviceScore(v WalletProviderDeviceScore) {
+	o.WalletProviderDeviceScore = &v
+}
+
 func (o TransactionRuleRestrictions) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -839,6 +905,12 @@ func (o TransactionRuleRestrictions) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.TotalAmount) {
 		toSerialize["totalAmount"] = o.TotalAmount
+	}
+	if !common.IsNil(o.WalletProviderAccountScore) {
+		toSerialize["walletProviderAccountScore"] = o.WalletProviderAccountScore
+	}
+	if !common.IsNil(o.WalletProviderDeviceScore) {
+		toSerialize["walletProviderDeviceScore"] = o.WalletProviderDeviceScore
 	}
 	return toSerialize, nil
 }

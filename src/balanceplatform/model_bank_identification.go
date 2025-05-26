@@ -23,7 +23,7 @@ type BankIdentification struct {
 	Country *string `json:"country,omitempty"`
 	// The bank identification code.
 	Identification *string `json:"identification,omitempty"`
-	// The type of the identification.  Possible values: **iban**, **routingNumber**, **sortCode**.
+	// The type of the identification.  Possible values: **iban**, **routingNumber**, **sortCode**, **bic**.
 	IdentificationType *string `json:"identificationType,omitempty"`
 }
 
@@ -199,7 +199,7 @@ func (v *NullableBankIdentification) UnmarshalJSON(src []byte) error {
 }
 
 func (o *BankIdentification) isValidIdentificationType() bool {
-	var allowedEnumValues = []string{"iban", "routingNumber", "sortCode"}
+	var allowedEnumValues = []string{"bic", "iban", "routingNumber", "sortCode"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetIdentificationType() == allowed {
 			return true
