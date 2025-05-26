@@ -1,83 +1,102 @@
 name: Go CI
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-      - sdk-automation/models
-      - promote/main
-  workflow_dispatch: {}
+    push:
+        branches:
+            - main
+    pull_request:
+        branches:
+            - main
+            - sdk-automation/models
+            - promote/main
+    workflow_dispatch: {}
 
 jobs:
-  go-test:
-    name: Build and Test
-    runs-on: ubuntu-latest
+    go-test:
+        name: Build and Test
+        runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        go-version: ['1.13', '1.17', '1.21']
+        strategy:
+            matrix:
+                go-version: ['1.13', '1.17', '1.21']
 
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-go@v5
-        with:
-          go-version: ${{ matrix.go-version }}
-      - name: Cache Go modules
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cache/go-build
-            ~/go/pkg/mod
-          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-go-
-      - name: Get dependencies
-        run: go get -v -t -d ./...
-      - name: Build
-        run: go build -v .
-      - name: Test
-        run: go test -v ./... -tags unit
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
 
-  release-integration-test:
-    name: Release Integration Tests
-    runs-on: ubuntu-latest
-    needs: go-test
-    if: |
-      github.event_name == 'pull_request' &&
-      contains(github.event.pull_request.labels.*.name, 'release') &&
-      github.event.pull_request.head.repo.full_name == github.repository
+            - name: Set up Go
+              uses: actions/setup-go@v5
+              with:
+                  go-version: ${{ matrix.go-version }}
 
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-go@v5
-        with:
-          go-version: '1.21'
-      - name: Cache Go modules
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cache/go-build
-            ~/go/pkg/mod
-          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-go-
-      - name: Get dependencies
-        run: go get -v -t -d ./...
-      - name: Run Integration Tests
-        run: go test -v ./... -tags integration
-        env:
-          ADYEN_API_KEY: ${{ secrets.ADYEN_API_KEY }}
-          ADYEN_MERCHANT: ${{ secrets.ADYEN_MERCHANT }}
-          ADYEN_PASSWORD: ${{ secrets.ADYEN_PASSWORD }}
-          ADYEN_REVIEWPAYOUT_APIKEY: ${{ secrets.ADYEN_REVIEWPAYOUT_APIKEY }}
-          ADYEN_REVIEWPAYOUT_PASSWORD: ${{ secrets.ADYENREVIEWPAYOUT_PASSWORD }}
-          ADYEN_REVIEWPAYOUT_USER: ${{ secrets.ADYENREVIEWPAYOUT_USER }}
-          ADYEN_STOREPAYOUT_APIKEY: ${{ secrets.ADYEN_STOREPAYOUT_APIKEY }}
-          ADYEN_STOREPAYOUT_PASSWORD: ${{ secrets.ADYEN_STOREPAYOUT_PASSWORD }}
-          ADYEN_STOREPAYOUT_USER: ${{ secrets.ADYEN_STOREPAYOUT_USER }}
-          ADYEN_USER: ${{ secrets.ADYEN_USER }}
-          ADYEN_MARKETPLACE_USER: ${{ secrets.ADYEN_MARKETPLACE_USER }}
-          ADYEN_MARKETPLACE_PASSWORD: ${{ secrets.ADYEN_MARKETPLACE_PASSWORD }}
+            - name: Clean module cache directory
+              run: rm -rf ~/go/pkg/mod
+
+            - name: Cache Go modules
+              uses: actions/cache@v4
+              with:
+                  path: |
+                      ~/.cache/go-build
+                      ~/go/pkg/mod
+                  key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+                  restore-keys: |
+                      ${{ runner.os }}-go-
+
+            - name: Download dependencies
+              run: go mod download
+
+            - name: Build
+              run: go build -v .
+
+            - name: Run tests
+              run: go test -v ./... -tags unit
+
+    release-integration-test:
+        name: Release Integration Tests
+        runs-on: ubuntu-latest
+        needs: go-test
+        if: |
+            github.event_name == 'pull_request' &&
+            contains(github.event.pull_request.labels.*.name, 'release') &&
+            github.event.pull_request.head.repo.full_name == github.repository
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Set up Go
+              uses: actions/setup-go@v5
+              with:
+                  go-version: '1.21'
+
+            - name: Clean module cache directory
+              run: rm -rf ~/go/pkg/mod
+
+            - name: Cache Go modules
+              uses: actions/cache@v4
+              with:
+                  path: |
+                      ~/.cache/go-build
+                      ~/go/pkg/mod
+                  key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+                  restore-keys: |
+                      ${{ runner.os }}-go-
+
+            - name: Download dependencies
+              run: go mod download
+
+            - name: Run Integration Tests
+              run: go test -v ./... -tags integration
+              env:
+                  ADYEN_API_KEY: ${{ secrets.ADYEN_API_KEY }}
+                  ADYEN_MERCHANT: ${{ secrets.ADYEN_MERCHANT }}
+                  ADYEN_PASSWORD: ${{ secrets.ADYEN_PASSWORD }}
+                  ADYEN_REVIEWPAYOUT_APIKEY: ${{ secrets.ADYEN_REVIEWPAYOUT_APIKEY }}
+                  ADYEN_REVIEWPAYOUT_PASSWORD: ${{ secrets.ADYENREVIEWPAYOUT_PASSWORD }}
+                  ADYEN_REVIEWPAYOUT_USER: ${{ secrets.ADYENREVIEWPAYOUT_USER }}
+                  ADYEN_STOREPAYOUT_APIKEY: ${{ secrets.ADYEN_STOREPAYOUT_APIKEY }}
+                  ADYEN_STOREPAYOUT_PASSWORD: ${{ secrets.ADYEN_STOREPAYOUT_PASSWORD }}
+                  ADYEN_STOREPAYOUT_USER: ${{ secrets.ADYEN_STOREPAYOUT_USER }}
+                  ADYEN_USER: ${{ secrets.ADYEN_USER }}
+                  ADYEN_MARKETPLACE_USER: ${{ secrets.ADYEN_MARKETPLACE_USER }}
+                  ADYEN_MARKETPLACE_PASSWORD: ${{ secrets.ADYEN_MARKETPLACE_PASSWORD }}
