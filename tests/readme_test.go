@@ -3,11 +3,11 @@ package tests
 import (
 	"context"
 	"fmt"
-	"github.com/adyen/adyen-go-api-library/v20/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v20/src/checkout"
-	"github.com/adyen/adyen-go-api-library/v20/src/common"
-	"github.com/adyen/adyen-go-api-library/v20/src/recurring"
-	"github.com/adyen/adyen-go-api-library/v20/src/webhook"
+	"github.com/adyen/adyen-go-api-library/v21/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v21/src/checkout"
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
+	"github.com/adyen/adyen-go-api-library/v21/src/recurring"
+	"github.com/adyen/adyen-go-api-library/v21/src/webhook"
 	"net/http"
 	"net/url"
 	"time"
@@ -121,7 +121,7 @@ func ExampleCustomHTTPClientConfiguration() {
 	})
 
 	fmt.Println(client.BinLookup().Client.Cfg.HTTPClient.Timeout)
-	// Output: Custom http.Client is provided 
+	// Output: Custom http.Client is provided
 	// 512ms
 }
 

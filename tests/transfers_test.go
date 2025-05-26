@@ -3,15 +3,15 @@ package tests
 import (
 	"context"
 	"errors"
-	"github.com/adyen/adyen-go-api-library/v20/src/transfers"
+	"github.com/adyen/adyen-go-api-library/v21/src/transfers"
 	"io"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 	"time"
 
-	"github.com/adyen/adyen-go-api-library/v20/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v20/src/common"
+	"github.com/adyen/adyen-go-api-library/v21/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
