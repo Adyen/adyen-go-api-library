@@ -1,7 +1,7 @@
 package balanceplatform
 
 import (
-	"github.com/adyen/adyen-go-api-library/v20/src/balancewebhook"
+	"github.com/adyen/adyen-go-api-library/v21/src/balancewebhook"
 	"testing"
 
 	"github.com/stretchr/testify/assert"

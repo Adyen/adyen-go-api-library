@@ -5,9 +5,9 @@ package checkout
 
 import (
 	"context"
-	"github.com/adyen/adyen-go-api-library/v20/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v20/src/checkout"
-	"github.com/adyen/adyen-go-api-library/v20/src/common"
+	"github.com/adyen/adyen-go-api-library/v21/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v21/src/checkout"
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 	"github.com/google/uuid"
 	"io/ioutil"
 	"os"
@@ -256,7 +256,7 @@ func TestCheckoutIntegration(t *testing.T) {
 		})
 
 		t.Run("Create an API request that should fail", func(t *testing.T) {
-			// Body without Reference 
+			// Body without Reference
 			body := checkout.CreateCheckoutSessionRequest{
 				Amount: checkout.Amount{
 					Value:    1250,

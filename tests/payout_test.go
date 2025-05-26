@@ -11,9 +11,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/adyen/adyen-go-api-library/v20/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v20/src/common"
-	"github.com/adyen/adyen-go-api-library/v20/src/payout"
+	"github.com/adyen/adyen-go-api-library/v21/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
+	"github.com/adyen/adyen-go-api-library/v21/src/payout"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

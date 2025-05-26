@@ -3,8 +3,8 @@ package legalentity
 import (
 	"context"
 	"encoding/json"
-	"github.com/adyen/adyen-go-api-library/v20/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v20/src/common"
+	"github.com/adyen/adyen-go-api-library/v21/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"net/http/httptest"
