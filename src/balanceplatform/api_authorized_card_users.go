@@ -10,10 +10,13 @@ package balanceplatform
 
 import (
 	"context"
-    "net/http"
-    "net/url"
-    "strings"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+	"encoding/json"
+	"io/ioutil"
+	"net/http"
+	"net/url"
+	"strings"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // AuthorizedCardUsersApi service
@@ -23,7 +26,6 @@ type AuthorizedCardUsersApi common.Service
 type AuthorizedCardUsersApiPaymentInstrumentsPaymentInstrumentIdAuthorisedCardUsersDeleteInput struct {
 	paymentInstrumentId string
 }
-
 
 /*
 Prepare a request for PaymentInstrumentsPaymentInstrumentIdAuthorisedCardUsersDelete
@@ -46,53 +48,51 @@ Deletes the list of authorized users assigned to a card.
 @return *http.Response, error
 */
 func (a *AuthorizedCardUsersApi) PaymentInstrumentsPaymentInstrumentIdAuthorisedCardUsersDelete(ctx context.Context, r AuthorizedCardUsersApiPaymentInstrumentsPaymentInstrumentIdAuthorisedCardUsersDeleteInput) (*http.Response, error) {
-    var res interface{}
+	var res interface{}
 	path := "/paymentInstruments/{paymentInstrumentId}/authorisedCardUsers"
-    path = strings.Replace(path, "{"+"paymentInstrumentId"+"}", url.PathEscape(common.ParameterValueToString(r.paymentInstrumentId, "paymentInstrumentId")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodDelete,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"paymentInstrumentId"+"}", url.PathEscape(common.ParameterValueToString(r.paymentInstrumentId, "paymentInstrumentId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodDelete,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-    if httpRes == nil {
-        return httpRes, err
-    }
+	if httpRes == nil {
+		return httpRes, err
+	}
 
-    var serviceError common.RestServiceError
-                        if httpRes.StatusCode == 401 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return httpRes, decodeError
-                            }
-                            return httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 403 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return httpRes, decodeError
-                            }
-                            return httpRes, serviceError
-                        }
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
+		return httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
+		return httpRes, serviceError
+	}
 
-    return httpRes, err
+	return httpRes, err
 }
-
 
 // All parameters accepted by AuthorizedCardUsersApi.PaymentInstrumentsPaymentInstrumentIdAuthorisedCardUsersGet
 type AuthorizedCardUsersApiPaymentInstrumentsPaymentInstrumentIdAuthorisedCardUsersGetInput struct {
 	paymentInstrumentId string
 }
-
 
 /*
 Prepare a request for PaymentInstrumentsPaymentInstrumentIdAuthorisedCardUsersGet
@@ -115,63 +115,62 @@ Returns the authorized users for a card.
 @return AuthorisedCardUsers, *http.Response, error
 */
 func (a *AuthorizedCardUsersApi) PaymentInstrumentsPaymentInstrumentIdAuthorisedCardUsersGet(ctx context.Context, r AuthorizedCardUsersApiPaymentInstrumentsPaymentInstrumentIdAuthorisedCardUsersGetInput) (AuthorisedCardUsers, *http.Response, error) {
-    res := &AuthorisedCardUsers{}
+	res := &AuthorisedCardUsers{}
 	path := "/paymentInstruments/{paymentInstrumentId}/authorisedCardUsers"
-    path = strings.Replace(path, "{"+"paymentInstrumentId"+"}", url.PathEscape(common.ParameterValueToString(r.paymentInstrumentId, "paymentInstrumentId")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodGet,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"paymentInstrumentId"+"}", url.PathEscape(common.ParameterValueToString(r.paymentInstrumentId, "paymentInstrumentId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-    if httpRes == nil {
-        return *res, httpRes, err
-    }
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
-    var serviceError common.RestServiceError
-                        if httpRes.StatusCode == 401 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 403 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 404 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 422 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 404 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
 
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by AuthorizedCardUsersApi.PaymentInstrumentsPaymentInstrumentIdAuthorisedCardUsersPatch
 type AuthorizedCardUsersApiPaymentInstrumentsPaymentInstrumentIdAuthorisedCardUsersPatchInput struct {
@@ -183,7 +182,6 @@ func (r AuthorizedCardUsersApiPaymentInstrumentsPaymentInstrumentIdAuthorisedCar
 	r.authorisedCardUsers = &authorisedCardUsers
 	return r
 }
-
 
 /*
 Prepare a request for PaymentInstrumentsPaymentInstrumentIdAuthorisedCardUsersPatch
@@ -208,63 +206,62 @@ Updates the list of authorized users for a card.
 @return *http.Response, error
 */
 func (a *AuthorizedCardUsersApi) PaymentInstrumentsPaymentInstrumentIdAuthorisedCardUsersPatch(ctx context.Context, r AuthorizedCardUsersApiPaymentInstrumentsPaymentInstrumentIdAuthorisedCardUsersPatchInput) (*http.Response, error) {
-    var res interface{}
+	var res interface{}
 	path := "/paymentInstruments/{paymentInstrumentId}/authorisedCardUsers"
-    path = strings.Replace(path, "{"+"paymentInstrumentId"+"}", url.PathEscape(common.ParameterValueToString(r.paymentInstrumentId, "paymentInstrumentId")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.authorisedCardUsers,
-        res,
-        http.MethodPatch,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"paymentInstrumentId"+"}", url.PathEscape(common.ParameterValueToString(r.paymentInstrumentId, "paymentInstrumentId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.authorisedCardUsers,
+		res,
+		http.MethodPatch,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-    if httpRes == nil {
-        return httpRes, err
-    }
+	if httpRes == nil {
+		return httpRes, err
+	}
 
-    var serviceError common.RestServiceError
-                        if httpRes.StatusCode == 400 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return httpRes, decodeError
-                            }
-                            return httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 401 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return httpRes, decodeError
-                            }
-                            return httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 403 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return httpRes, decodeError
-                            }
-                            return httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 422 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return httpRes, decodeError
-                            }
-                            return httpRes, serviceError
-                        }
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 400 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
+		return httpRes, serviceError
+	}
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
+		return httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
+		return httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
+		return httpRes, serviceError
+	}
 
-    return httpRes, err
+	return httpRes, err
 }
-
 
 // All parameters accepted by AuthorizedCardUsersApi.PaymentInstrumentsPaymentInstrumentIdAuthorisedCardUsersPost
 type AuthorizedCardUsersApiPaymentInstrumentsPaymentInstrumentIdAuthorisedCardUsersPostInput struct {
@@ -276,7 +273,6 @@ func (r AuthorizedCardUsersApiPaymentInstrumentsPaymentInstrumentIdAuthorisedCar
 	r.authorisedCardUsers = &authorisedCardUsers
 	return r
 }
-
 
 /*
 Prepare a request for PaymentInstrumentsPaymentInstrumentIdAuthorisedCardUsersPost
@@ -299,60 +295,59 @@ Assigns authorized users to a card. Users must have the **authorisedPaymentInstr
 @return *http.Response, error
 */
 func (a *AuthorizedCardUsersApi) PaymentInstrumentsPaymentInstrumentIdAuthorisedCardUsersPost(ctx context.Context, r AuthorizedCardUsersApiPaymentInstrumentsPaymentInstrumentIdAuthorisedCardUsersPostInput) (*http.Response, error) {
-    var res interface{}
+	var res interface{}
 	path := "/paymentInstruments/{paymentInstrumentId}/authorisedCardUsers"
-    path = strings.Replace(path, "{"+"paymentInstrumentId"+"}", url.PathEscape(common.ParameterValueToString(r.paymentInstrumentId, "paymentInstrumentId")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.authorisedCardUsers,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"paymentInstrumentId"+"}", url.PathEscape(common.ParameterValueToString(r.paymentInstrumentId, "paymentInstrumentId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.authorisedCardUsers,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-    if httpRes == nil {
-        return httpRes, err
-    }
+	if httpRes == nil {
+		return httpRes, err
+	}
 
-    var serviceError common.RestServiceError
-                        if httpRes.StatusCode == 400 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return httpRes, decodeError
-                            }
-                            return httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 401 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return httpRes, decodeError
-                            }
-                            return httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 403 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return httpRes, decodeError
-                            }
-                            return httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 422 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return httpRes, decodeError
-                            }
-                            return httpRes, serviceError
-                        }
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 400 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
+		return httpRes, serviceError
+	}
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
+		return httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
+		return httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
+		return httpRes, serviceError
+	}
 
-    return httpRes, err
+	return httpRes, err
 }
-
