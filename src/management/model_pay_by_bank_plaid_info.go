@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the PayByBankPlaidInfo type satisfies the MappedNullable interface at compile time
@@ -32,7 +31,7 @@ type PayByBankPlaidInfo struct {
 	// The state/province of the merchant.
 	MerchantStateProvince *string `json:"merchantStateProvince,omitempty"`
 	// The street address of the merchant.
-	MerchantStreetAddress  *string                     `json:"merchantStreetAddress,omitempty"`
+	MerchantStreetAddress *string `json:"merchantStreetAddress,omitempty"`
 	TransactionDescription *TransactionDescriptionInfo `json:"transactionDescription,omitempty"`
 	// The zip code of the account.
 	ZipCode *string `json:"zipCode,omitempty"`
@@ -344,7 +343,7 @@ func (o *PayByBankPlaidInfo) SetZipCode(v string) {
 }
 
 func (o PayByBankPlaidInfo) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -418,3 +417,6 @@ func (v *NullablePayByBankPlaidInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the AdditionalDataOpenInvoice type satisfies the MappedNullable interface at compile time
@@ -651,7 +650,7 @@ func (o *AdditionalDataOpenInvoice) SetOpeninvoicedataLineItemNrTrackingUri(v st
 }
 
 func (o AdditionalDataOpenInvoice) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -752,3 +751,6 @@ func (v *NullableAdditionalDataOpenInvoice) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
