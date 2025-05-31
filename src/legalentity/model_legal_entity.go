@@ -19,7 +19,7 @@ var _ common.MappedNullable = &LegalEntity{}
 
 // LegalEntity struct for LegalEntity
 type LegalEntity struct {
-	// Contains key-value pairs that specify the actions that the legal entity can do in your platform.The key is a capability required for your integration. For example, **issueCard** for Issuing.The value is an object containing the settings for the capability.
+	// Contains key-value pairs that specify the actions that the legal entity can do in your platform.The key is a capability required for your integration. For example, **issueCard** for Issuing. The value is an object containing the settings for the capability.
 	Capabilities *map[string]LegalEntityCapability `json:"capabilities,omitempty"`
 	// List of documents uploaded for the legal entity.
 	DocumentDetails []DocumentReference `json:"documentDetails,omitempty"`
