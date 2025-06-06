@@ -10,15 +10,16 @@ package management
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 	"fmt"
 )
 
 // ScheduleTerminalActionsRequestActionDetails - Information about the action to take.
 type ScheduleTerminalActionsRequestActionDetails struct {
-	InstallAndroidAppDetails           *InstallAndroidAppDetails
-	InstallAndroidCertificateDetails   *InstallAndroidCertificateDetails
-	ReleaseUpdateDetails               *ReleaseUpdateDetails
-	UninstallAndroidAppDetails         *UninstallAndroidAppDetails
+	InstallAndroidAppDetails *InstallAndroidAppDetails
+	InstallAndroidCertificateDetails *InstallAndroidCertificateDetails
+	ReleaseUpdateDetails *ReleaseUpdateDetails
+	UninstallAndroidAppDetails *UninstallAndroidAppDetails
 	UninstallAndroidCertificateDetails *UninstallAndroidCertificateDetails
 }
 
@@ -57,6 +58,7 @@ func UninstallAndroidCertificateDetailsAsScheduleTerminalActionsRequestActionDet
 	}
 }
 
+
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *ScheduleTerminalActionsRequestActionDetails) UnmarshalJSON(data []byte) error {
 	var err error
@@ -67,7 +69,7 @@ func (dst *ScheduleTerminalActionsRequestActionDetails) UnmarshalJSON(data []byt
 		jsonInstallAndroidAppDetails, _ := json.Marshal(dst.InstallAndroidAppDetails)
 		if string(jsonInstallAndroidAppDetails) == "{}" || !dst.InstallAndroidAppDetails.isValidType() { // empty struct
 			dst.InstallAndroidAppDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -80,7 +82,7 @@ func (dst *ScheduleTerminalActionsRequestActionDetails) UnmarshalJSON(data []byt
 		jsonInstallAndroidCertificateDetails, _ := json.Marshal(dst.InstallAndroidCertificateDetails)
 		if string(jsonInstallAndroidCertificateDetails) == "{}" || !dst.InstallAndroidCertificateDetails.isValidType() { // empty struct
 			dst.InstallAndroidCertificateDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -93,7 +95,7 @@ func (dst *ScheduleTerminalActionsRequestActionDetails) UnmarshalJSON(data []byt
 		jsonReleaseUpdateDetails, _ := json.Marshal(dst.ReleaseUpdateDetails)
 		if string(jsonReleaseUpdateDetails) == "{}" || !dst.ReleaseUpdateDetails.isValidType() { // empty struct
 			dst.ReleaseUpdateDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -106,7 +108,7 @@ func (dst *ScheduleTerminalActionsRequestActionDetails) UnmarshalJSON(data []byt
 		jsonUninstallAndroidAppDetails, _ := json.Marshal(dst.UninstallAndroidAppDetails)
 		if string(jsonUninstallAndroidAppDetails) == "{}" || !dst.UninstallAndroidAppDetails.isValidType() { // empty struct
 			dst.UninstallAndroidAppDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -119,7 +121,7 @@ func (dst *ScheduleTerminalActionsRequestActionDetails) UnmarshalJSON(data []byt
 		jsonUninstallAndroidCertificateDetails, _ := json.Marshal(dst.UninstallAndroidCertificateDetails)
 		if string(jsonUninstallAndroidCertificateDetails) == "{}" || !dst.UninstallAndroidCertificateDetails.isValidType() { // empty struct
 			dst.UninstallAndroidCertificateDetails = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -168,7 +170,7 @@ func (src ScheduleTerminalActionsRequestActionDetails) MarshalJSON() ([]byte, er
 }
 
 // Get the actual instance
-func (obj *ScheduleTerminalActionsRequestActionDetails) GetActualInstance() interface{} {
+func (obj *ScheduleTerminalActionsRequestActionDetails) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
@@ -231,3 +233,5 @@ func (v *NullableScheduleTerminalActionsRequestActionDetails) UnmarshalJSON(src 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

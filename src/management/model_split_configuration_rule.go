@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the SplitConfigurationRule type satisfies the MappedNullable interface at compile time
@@ -25,11 +24,13 @@ type SplitConfigurationRule struct {
 	FundingSource *string `json:"fundingSource,omitempty"`
 	// The payment method condition that defines whether the split logic applies.  Possible values: * [Payment method variant](https://docs.adyen.com/development-resources/paymentmethodvariant): Apply the split logic for a specific payment method. * **ANY**: Apply the split logic for all available payment methods.
 	PaymentMethod string `json:"paymentMethod"`
+	// 
+	Regionality *string `json:"regionality,omitempty"`
 	// The unique identifier of the split configuration rule.
 	RuleId *string `json:"ruleId,omitempty"`
 	// The sales channel condition that defines whether the split logic applies.  Possible values: * **Ecommerce**: Online transactions where the cardholder is present. * **ContAuth**: Card on file and/or subscription transactions, where the cardholder is known to the merchant (returning customer). * **Moto**: Mail-order and telephone-order transactions where the customer is in contact with the merchant via email or telephone. * **POS**: Point-of-sale transactions where the customer is physically present to make a payment using a secure payment terminal. * **ANY**: All sales channels.
-	ShopperInteraction string                  `json:"shopperInteraction"`
-	SplitLogic         SplitConfigurationLogic `json:"splitLogic"`
+	ShopperInteraction string `json:"shopperInteraction"`
+	SplitLogic SplitConfigurationLogic `json:"splitLogic"`
 }
 
 // NewSplitConfigurationRule instantiates a new SplitConfigurationRule object
@@ -133,6 +134,38 @@ func (o *SplitConfigurationRule) SetPaymentMethod(v string) {
 	o.PaymentMethod = v
 }
 
+// GetRegionality returns the Regionality field value if set, zero value otherwise.
+func (o *SplitConfigurationRule) GetRegionality() string {
+	if o == nil || common.IsNil(o.Regionality) {
+		var ret string
+		return ret
+	}
+	return *o.Regionality
+}
+
+// GetRegionalityOk returns a tuple with the Regionality field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SplitConfigurationRule) GetRegionalityOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Regionality) {
+		return nil, false
+	}
+	return o.Regionality, true
+}
+
+// HasRegionality returns a boolean if a field has been set.
+func (o *SplitConfigurationRule) HasRegionality() bool {
+	if o != nil && !common.IsNil(o.Regionality) {
+		return true
+	}
+
+	return false
+}
+
+// SetRegionality gets a reference to the given string and assigns it to the Regionality field.
+func (o *SplitConfigurationRule) SetRegionality(v string) {
+	o.Regionality = &v
+}
+
 // GetRuleId returns the RuleId field value if set, zero value otherwise.
 func (o *SplitConfigurationRule) GetRuleId() string {
 	if o == nil || common.IsNil(o.RuleId) {
@@ -214,7 +247,7 @@ func (o *SplitConfigurationRule) SetSplitLogic(v SplitConfigurationLogic) {
 }
 
 func (o SplitConfigurationRule) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -228,6 +261,9 @@ func (o SplitConfigurationRule) ToMap() (map[string]interface{}, error) {
 		toSerialize["fundingSource"] = o.FundingSource
 	}
 	toSerialize["paymentMethod"] = o.PaymentMethod
+	if !common.IsNil(o.Regionality) {
+		toSerialize["regionality"] = o.Regionality
+	}
 	if !common.IsNil(o.RuleId) {
 		toSerialize["ruleId"] = o.RuleId
 	}
@@ -272,21 +308,32 @@ func (v *NullableSplitConfigurationRule) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *SplitConfigurationRule) isValidFundingSource() bool {
-	var allowedEnumValues = []string{"charged", "credit", "debit", "deferred_debit", "prepaid", "ANY"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetFundingSource() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "charged", "credit", "debit", "deferred_debit", "prepaid", "ANY" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetFundingSource() == allowed {
+            return true
+        }
+    }
+    return false
+}
+func (o *SplitConfigurationRule) isValidRegionality() bool {
+    var allowedEnumValues = []string{ "international", "intraRegional", "interRegional", "ANY" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetRegionality() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *SplitConfigurationRule) isValidShopperInteraction() bool {
-	var allowedEnumValues = []string{"Ecommerce", "ContAuth", "Moto", "POS", "ANY"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetShopperInteraction() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "Ecommerce", "ContAuth", "Moto", "POS", "ANY" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetShopperInteraction() == allowed {
+            return true
+        }
+    }
+    return false
 }
+
