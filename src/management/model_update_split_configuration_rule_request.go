@@ -25,6 +25,8 @@ type UpdateSplitConfigurationRuleRequest struct {
 	FundingSource *string `json:"fundingSource,omitempty"`
 	// The payment method condition that defines whether the split logic applies.  Possible values: * [Payment method variant](https://docs.adyen.com/development-resources/paymentmethodvariant): Apply the split logic for a specific payment method. * **ANY**: Apply the split logic for all available payment methods.
 	PaymentMethod string `json:"paymentMethod"`
+	//
+	Regionality *string `json:"regionality,omitempty"`
 	// The sales channel condition that defines whether the split logic applies.  Possible values: * **Ecommerce**: Online transactions where the cardholder is present. * **ContAuth**: Card on file and/or subscription transactions, where the cardholder is known to the merchant (returning customer). * **Moto**: Mail-order and telephone-order transactions where the customer is in contact with the merchant via email or telephone. * **POS**: Point-of-sale transactions where the customer is physically present to make a payment using a secure payment terminal. * **ANY**: All sales channels.
 	ShopperInteraction string `json:"shopperInteraction"`
 }
@@ -129,6 +131,38 @@ func (o *UpdateSplitConfigurationRuleRequest) SetPaymentMethod(v string) {
 	o.PaymentMethod = v
 }
 
+// GetRegionality returns the Regionality field value if set, zero value otherwise.
+func (o *UpdateSplitConfigurationRuleRequest) GetRegionality() string {
+	if o == nil || common.IsNil(o.Regionality) {
+		var ret string
+		return ret
+	}
+	return *o.Regionality
+}
+
+// GetRegionalityOk returns a tuple with the Regionality field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateSplitConfigurationRuleRequest) GetRegionalityOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Regionality) {
+		return nil, false
+	}
+	return o.Regionality, true
+}
+
+// HasRegionality returns a boolean if a field has been set.
+func (o *UpdateSplitConfigurationRuleRequest) HasRegionality() bool {
+	if o != nil && !common.IsNil(o.Regionality) {
+		return true
+	}
+
+	return false
+}
+
+// SetRegionality gets a reference to the given string and assigns it to the Regionality field.
+func (o *UpdateSplitConfigurationRuleRequest) SetRegionality(v string) {
+	o.Regionality = &v
+}
+
 // GetShopperInteraction returns the ShopperInteraction field value
 func (o *UpdateSplitConfigurationRuleRequest) GetShopperInteraction() string {
 	if o == nil {
@@ -168,6 +202,9 @@ func (o UpdateSplitConfigurationRuleRequest) ToMap() (map[string]interface{}, er
 		toSerialize["fundingSource"] = o.FundingSource
 	}
 	toSerialize["paymentMethod"] = o.PaymentMethod
+	if !common.IsNil(o.Regionality) {
+		toSerialize["regionality"] = o.Regionality
+	}
 	toSerialize["shopperInteraction"] = o.ShopperInteraction
 	return toSerialize, nil
 }
