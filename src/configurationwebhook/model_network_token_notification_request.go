@@ -10,8 +10,9 @@ package configurationwebhook
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
 	"time"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the NetworkTokenNotificationRequest type satisfies the MappedNullable interface at compile time
@@ -153,7 +154,7 @@ func (o *NetworkTokenNotificationRequest) SetType(v string) {
 }
 
 func (o NetworkTokenNotificationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -207,14 +208,12 @@ func (v *NullableNetworkTokenNotificationRequest) UnmarshalJSON(src []byte) erro
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *NetworkTokenNotificationRequest) isValidType() bool {
-    var allowedEnumValues = []string{ "balancePlatform.networkToken.created", "balancePlatform.networkToken.updated" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"balancePlatform.networkToken.created", "balancePlatform.networkToken.updated"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

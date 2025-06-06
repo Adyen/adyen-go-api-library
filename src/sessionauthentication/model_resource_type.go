@@ -10,7 +10,6 @@ package sessionauthentication
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
 	"fmt"
 )
 
@@ -19,10 +18,10 @@ type ResourceType string
 
 // List of ResourceType
 const (
-	LEGAL_ENTITY ResourceType = "legalEntity"
-	BALANCE_ACCOUNT ResourceType = "balanceAccount"
-	ACCOUNT_HOLDER ResourceType = "accountHolder"
-	MERCHANT_ACCOUNT ResourceType = "merchantAccount"
+	LEGAL_ENTITY       ResourceType = "legalEntity"
+	BALANCE_ACCOUNT    ResourceType = "balanceAccount"
+	ACCOUNT_HOLDER     ResourceType = "accountHolder"
+	MERCHANT_ACCOUNT   ResourceType = "merchantAccount"
 	PAYMENT_INSTRUMENT ResourceType = "paymentInstrument"
 )
 
@@ -113,4 +112,3 @@ func (v *NullableResourceType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
