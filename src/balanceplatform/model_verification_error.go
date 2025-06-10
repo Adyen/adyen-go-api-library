@@ -29,7 +29,7 @@ type VerificationError struct {
 	RemediatingActions []RemediatingAction `json:"remediatingActions,omitempty"`
 	// Contains more granular information about the verification error.
 	SubErrors []VerificationErrorRecursive `json:"subErrors,omitempty"`
-	// The type of error.   Possible values: **invalidInput**, **dataMissing**.
+	// The type of error.    Possible values: *  **invalidInput** *  **dataMissing** *  **pendingStatus**
 	Type *string `json:"type,omitempty"`
 }
 

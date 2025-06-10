@@ -33,7 +33,8 @@ type Transfer struct {
 	Description            *string                 `json:"description,omitempty"`
 	DirectDebitInformation *DirectDebitInformation `json:"directDebitInformation,omitempty"`
 	// The direction of the transfer.  Possible values: **incoming**, **outgoing**.
-	Direction *string `json:"direction,omitempty"`
+	Direction     *string        `json:"direction,omitempty"`
+	ExecutionDate *ExecutionDate `json:"executionDate,omitempty"`
 	// The ID of the resource.
 	Id                *string            `json:"id,omitempty"`
 	PaymentInstrument *PaymentInstrument `json:"paymentInstrument,omitempty"`
@@ -367,6 +368,38 @@ func (o *Transfer) SetDirection(v string) {
 	o.Direction = &v
 }
 
+// GetExecutionDate returns the ExecutionDate field value if set, zero value otherwise.
+func (o *Transfer) GetExecutionDate() ExecutionDate {
+	if o == nil || common.IsNil(o.ExecutionDate) {
+		var ret ExecutionDate
+		return ret
+	}
+	return *o.ExecutionDate
+}
+
+// GetExecutionDateOk returns a tuple with the ExecutionDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Transfer) GetExecutionDateOk() (*ExecutionDate, bool) {
+	if o == nil || common.IsNil(o.ExecutionDate) {
+		return nil, false
+	}
+	return o.ExecutionDate, true
+}
+
+// HasExecutionDate returns a boolean if a field has been set.
+func (o *Transfer) HasExecutionDate() bool {
+	if o != nil && !common.IsNil(o.ExecutionDate) {
+		return true
+	}
+
+	return false
+}
+
+// SetExecutionDate gets a reference to the given ExecutionDate and assigns it to the ExecutionDate field.
+func (o *Transfer) SetExecutionDate(v ExecutionDate) {
+	o.ExecutionDate = &v
+}
+
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *Transfer) GetId() string {
 	if o == nil || common.IsNil(o.Id) {
@@ -648,6 +681,9 @@ func (o Transfer) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Direction) {
 		toSerialize["direction"] = o.Direction
+	}
+	if !common.IsNil(o.ExecutionDate) {
+		toSerialize["executionDate"] = o.ExecutionDate
 	}
 	if !common.IsNil(o.Id) {
 		toSerialize["id"] = o.Id
