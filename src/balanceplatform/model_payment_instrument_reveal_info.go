@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the PaymentInstrumentRevealInfo type satisfies the MappedNullable interface at compile time
@@ -20,7 +19,7 @@ var _ common.MappedNullable = &PaymentInstrumentRevealInfo{}
 // PaymentInstrumentRevealInfo struct for PaymentInstrumentRevealInfo
 type PaymentInstrumentRevealInfo struct {
 	// The CVC2 value of the card.
-	Cvc        string `json:"cvc"`
+	Cvc string `json:"cvc"`
 	Expiration Expiry `json:"expiration"`
 	// The primary account number (PAN) of the card.
 	Pan string `json:"pan"`
@@ -119,7 +118,7 @@ func (o *PaymentInstrumentRevealInfo) SetPan(v string) {
 }
 
 func (o PaymentInstrumentRevealInfo) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -169,3 +168,6 @@ func (v *NullablePaymentInstrumentRevealInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

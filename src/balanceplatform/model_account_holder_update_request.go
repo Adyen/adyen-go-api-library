@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the AccountHolderUpdateRequest type satisfies the MappedNullable interface at compile time
@@ -23,7 +22,7 @@ type AccountHolderUpdateRequest struct {
 	BalancePlatform *string `json:"balancePlatform,omitempty"`
 	// Contains key-value pairs that specify the actions that an account holder can do in your platform. The key is a capability required for your integration. For example, **issueCard** for Issuing. The value is an object containing the settings for the capability.
 	Capabilities *map[string]AccountHolderCapability `json:"capabilities,omitempty"`
-	// Deprecated
+    // Deprecated 
 	ContactDetails *ContactDetails `json:"contactDetails,omitempty"`
 	// Your description for the account holder.
 	Description *string `json:"description,omitempty"`
@@ -125,7 +124,7 @@ func (o *AccountHolderUpdateRequest) SetCapabilities(v map[string]AccountHolderC
 }
 
 // GetContactDetails returns the ContactDetails field value if set, zero value otherwise.
-// Deprecated
+// Deprecated 
 func (o *AccountHolderUpdateRequest) GetContactDetails() ContactDetails {
 	if o == nil || common.IsNil(o.ContactDetails) {
 		var ret ContactDetails
@@ -136,7 +135,7 @@ func (o *AccountHolderUpdateRequest) GetContactDetails() ContactDetails {
 
 // GetContactDetailsOk returns a tuple with the ContactDetails field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
+// Deprecated 
 func (o *AccountHolderUpdateRequest) GetContactDetailsOk() (*ContactDetails, bool) {
 	if o == nil || common.IsNil(o.ContactDetails) {
 		return nil, false
@@ -154,7 +153,7 @@ func (o *AccountHolderUpdateRequest) HasContactDetails() bool {
 }
 
 // SetContactDetails gets a reference to the given ContactDetails and assigns it to the ContactDetails field.
-// Deprecated
+// Deprecated 
 func (o *AccountHolderUpdateRequest) SetContactDetails(v ContactDetails) {
 	o.ContactDetails = &v
 }
@@ -416,7 +415,7 @@ func (o *AccountHolderUpdateRequest) SetVerificationDeadlines(v []VerificationDe
 }
 
 func (o AccountHolderUpdateRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -497,12 +496,14 @@ func (v *NullableAccountHolderUpdateRequest) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *AccountHolderUpdateRequest) isValidStatus() bool {
-	var allowedEnumValues = []string{"active", "closed", "suspended"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetStatus() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "active", "closed", "suspended" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetStatus() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

@@ -10,11 +10,10 @@ package legalentity
 
 import (
 	"context"
-	"net/http"
-	"net/url"
-	"strings"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "net/http"
+    "net/url"
+    "strings"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // TaxEDeliveryConsentApi service
@@ -24,6 +23,7 @@ type TaxEDeliveryConsentApi common.Service
 type TaxEDeliveryConsentApiCheckStatusOfConsentForElectronicDeliveryOfTaxFormsInput struct {
 	id string
 }
+
 
 /*
 Prepare a request for CheckStatusOfConsentForElectronicDeliveryOfTaxForms
@@ -41,33 +41,45 @@ CheckStatusOfConsentForElectronicDeliveryOfTaxForms Check the status of consent 
 
 Returns the consent status for electronic delivery of tax forms.
 
+Requests to this endpoint are subject to rate limits:
+
+- Live environments: 700 requests per 5 seconds.
+
+- Test environments: 200 requests per 5 seconds.
+
+- Failed requests are subject to a limit of 5 failures per 10 seconds.
+
+
+
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TaxEDeliveryConsentApiCheckStatusOfConsentForElectronicDeliveryOfTaxFormsInput - Request parameters, see CheckStatusOfConsentForElectronicDeliveryOfTaxFormsInput
 @return CheckTaxElectronicDeliveryConsentResponse, *http.Response, error
 */
 func (a *TaxEDeliveryConsentApi) CheckStatusOfConsentForElectronicDeliveryOfTaxForms(ctx context.Context, r TaxEDeliveryConsentApiCheckStatusOfConsentForElectronicDeliveryOfTaxFormsInput) (CheckTaxElectronicDeliveryConsentResponse, *http.Response, error) {
-	res := &CheckTaxElectronicDeliveryConsentResponse{}
+    res := &CheckTaxElectronicDeliveryConsentResponse{}
 	path := "/legalEntities/{id}/checkTaxElectronicDeliveryConsent"
-	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		nil,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        nil,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by TaxEDeliveryConsentApi.SetConsentStatusForElectronicDeliveryOfTaxForms
 type TaxEDeliveryConsentApiSetConsentStatusForElectronicDeliveryOfTaxFormsInput struct {
-	id                                     string
+	id string
 	setTaxElectronicDeliveryConsentRequest *SetTaxElectronicDeliveryConsentRequest
 }
 
@@ -75,6 +87,7 @@ func (r TaxEDeliveryConsentApiSetConsentStatusForElectronicDeliveryOfTaxFormsInp
 	r.setTaxElectronicDeliveryConsentRequest = &setTaxElectronicDeliveryConsentRequest
 	return r
 }
+
 
 /*
 Prepare a request for SetConsentStatusForElectronicDeliveryOfTaxForms
@@ -92,26 +105,38 @@ SetConsentStatusForElectronicDeliveryOfTaxForms Set the consent status for elect
 
 Set the consent status for electronic delivery of tax forms.
 
+Requests to this endpoint are subject to rate limits:
+
+- Live environments: 700 requests per 5 seconds.
+
+- Test environments: 200 requests per 5 seconds.
+
+- Failed requests are subject to a limit of 5 failures per 10 seconds.
+
+
+
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TaxEDeliveryConsentApiSetConsentStatusForElectronicDeliveryOfTaxFormsInput - Request parameters, see SetConsentStatusForElectronicDeliveryOfTaxFormsInput
 @return *http.Response, error
 */
 func (a *TaxEDeliveryConsentApi) SetConsentStatusForElectronicDeliveryOfTaxForms(ctx context.Context, r TaxEDeliveryConsentApiSetConsentStatusForElectronicDeliveryOfTaxFormsInput) (*http.Response, error) {
-	var res interface{}
+    var res interface{}
 	path := "/legalEntities/{id}/setTaxElectronicDeliveryConsent"
-	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.setTaxElectronicDeliveryConsentRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.setTaxElectronicDeliveryConsentRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return httpRes, err
+
+    return httpRes, err
 }
+

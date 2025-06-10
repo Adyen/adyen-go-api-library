@@ -10,8 +10,7 @@ package transfers
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the TransferNotificationValidationFact type satisfies the MappedNullable interface at compile time
@@ -107,7 +106,7 @@ func (o *TransferNotificationValidationFact) SetType(v string) {
 }
 
 func (o TransferNotificationValidationFact) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -160,3 +159,6 @@ func (v *NullableTransferNotificationValidationFact) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
