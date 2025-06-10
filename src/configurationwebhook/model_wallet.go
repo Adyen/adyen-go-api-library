@@ -10,7 +10,8 @@ package configurationwebhook
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the Wallet type satisfies the MappedNullable interface at compile time
@@ -20,7 +21,7 @@ var _ common.MappedNullable = &Wallet{}
 type Wallet struct {
 	// The confidence score of the wallet account, calculated by the wallet provider.  A high score means that account is considered trustworthy. A low score means that the account is considered suspicious.  Possible values: **1** to **5**.
 	AccountScore *string `json:"accountScore,omitempty"`
-	Device *Device `json:"device,omitempty"`
+	Device       *Device `json:"device,omitempty"`
 	// The confidence score of the device, calculated by the wallet provider.  A high score means that device is considered trustworthy. A low score means that the device is considered suspicious.  Possible values: **1** to **5**.
 	DeviceScore *string `json:"deviceScore,omitempty"`
 	// The method used for provisioning the network token.  Possible values: **push**, **manual**.
@@ -241,7 +242,7 @@ func (o *Wallet) SetType(v string) {
 }
 
 func (o Wallet) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -306,6 +307,3 @@ func (v *NullableWallet) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-
