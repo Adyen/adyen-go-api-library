@@ -245,6 +245,7 @@ type TransfersApiGetAllTransfersInput struct {
 	paymentInstrumentId *string
 	reference           *string
 	category            *string
+	sortOrder           *string
 	cursor              *string
 	limit               *int32
 }
@@ -297,6 +298,12 @@ func (r TransfersApiGetAllTransfersInput) Category(category string) TransfersApi
 	return r
 }
 
+// The transfers sorting order.  Possible values:   - **asc**: Ascending order, from older to most recent.  - **desc**: Descending order, from most recent to older.
+func (r TransfersApiGetAllTransfersInput) SortOrder(sortOrder string) TransfersApiGetAllTransfersInput {
+	r.sortOrder = &sortOrder
+	return r
+}
+
 // The &#x60;cursor&#x60; returned in the links of the previous response.
 func (r TransfersApiGetAllTransfersInput) Cursor(cursor string) TransfersApiGetAllTransfersInput {
 	r.cursor = &cursor
@@ -330,6 +337,8 @@ When making this request, you must include at least one of the following:
 
 This endpoint supports cursor-based pagination. The response returns the first page of results, and returns links to the next and previous pages when applicable. You can use the links to page through the results.
 
+
+
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TransfersApiGetAllTransfersInput - Request parameters, see GetAllTransfersInput
 @return FindTransfersResponse, *http.Response, error
@@ -362,6 +371,9 @@ func (a *TransfersApi) GetAllTransfers(ctx context.Context, r TransfersApiGetAll
 	}
 	if r.createdUntil != nil {
 		common.ParameterAddToQuery(queryParams, "createdUntil", r.createdUntil, "")
+	}
+	if r.sortOrder != nil {
+		common.ParameterAddToQuery(queryParams, "sortOrder", r.sortOrder, "")
 	}
 	if r.cursor != nil {
 		common.ParameterAddToQuery(queryParams, "cursor", r.cursor, "")

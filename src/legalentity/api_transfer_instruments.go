@@ -55,6 +55,16 @@ A transfer instrument is a bank account that a legal entity owns. Adyen performs
 
 When the transfer instrument passes the verification checks, you can start sending funds from the balance platform to the transfer instrument (such as payouts).
 
+Requests to this endpoint are subject to rate limits:
+
+- Live environments: 700 requests per 5 seconds.
+
+- Test environments: 200 requests per 5 seconds.
+
+- Failed requests are subject to a limit of 5 failures per 10 seconds.
+
+
+
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TransferInstrumentsApiCreateTransferInstrumentInput - Request parameters, see CreateTransferInstrumentInput
 @return TransferInstrument, *http.Response, error
@@ -102,6 +112,16 @@ DeleteTransferInstrument Delete a transfer instrument
 
 Deletes a transfer instrument.
 
+Requests to this endpoint are subject to rate limits:
+
+- Live environments: 700 requests per 5 seconds.
+
+- Test environments: 200 requests per 5 seconds.
+
+- Failed requests are subject to a limit of 5 failures per 10 seconds.
+
+
+
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TransferInstrumentsApiDeleteTransferInstrumentInput - Request parameters, see DeleteTransferInstrumentInput
 @return *http.Response, error
@@ -146,6 +166,16 @@ func (a *TransferInstrumentsApi) GetTransferInstrumentInput(id string) TransferI
 GetTransferInstrument Get a transfer instrument
 
 Returns the details of a transfer instrument.
+
+Requests to this endpoint are subject to rate limits:
+
+- Live environments: 700 requests per 5 seconds.
+
+- Test environments: 200 requests per 5 seconds.
+
+- Failed requests are subject to a limit of 5 failures per 10 seconds.
+
+
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TransferInstrumentsApiGetTransferInstrumentInput - Request parameters, see GetTransferInstrumentInput
@@ -204,6 +234,16 @@ func (a *TransferInstrumentsApi) UpdateTransferInstrumentInput(id string) Transf
 UpdateTransferInstrument Update a transfer instrument
 
 Updates a transfer instrument.
+
+Requests to this endpoint are subject to rate limits:
+
+- Live environments: 700 requests per 5 seconds.
+
+- Test environments: 200 requests per 5 seconds.
+
+- Failed requests are subject to a limit of 5 failures per 10 seconds.
+
+
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TransferInstrumentsApiUpdateTransferInstrumentInput - Request parameters, see UpdateTransferInstrumentInput

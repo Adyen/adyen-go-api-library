@@ -40,6 +40,7 @@ type UpdatePaymentMethodInfo struct {
 	InteracCard    *GenericPmWithTdiInfo `json:"interac_card,omitempty"`
 	Jcb            *GenericPmWithTdiInfo `json:"jcb,omitempty"`
 	Maestro        *GenericPmWithTdiInfo `json:"maestro,omitempty"`
+	MaestroUsa     *GenericPmWithTdiInfo `json:"maestro_usa,omitempty"`
 	Mc             *GenericPmWithTdiInfo `json:"mc,omitempty"`
 	Nyce           *NyceInfo             `json:"nyce,omitempty"`
 	PaybybankPlaid *PayByBankPlaidInfo   `json:"paybybank_plaid,omitempty"`
@@ -615,6 +616,38 @@ func (o *UpdatePaymentMethodInfo) SetMaestro(v GenericPmWithTdiInfo) {
 	o.Maestro = &v
 }
 
+// GetMaestroUsa returns the MaestroUsa field value if set, zero value otherwise.
+func (o *UpdatePaymentMethodInfo) GetMaestroUsa() GenericPmWithTdiInfo {
+	if o == nil || common.IsNil(o.MaestroUsa) {
+		var ret GenericPmWithTdiInfo
+		return ret
+	}
+	return *o.MaestroUsa
+}
+
+// GetMaestroUsaOk returns a tuple with the MaestroUsa field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdatePaymentMethodInfo) GetMaestroUsaOk() (*GenericPmWithTdiInfo, bool) {
+	if o == nil || common.IsNil(o.MaestroUsa) {
+		return nil, false
+	}
+	return o.MaestroUsa, true
+}
+
+// HasMaestroUsa returns a boolean if a field has been set.
+func (o *UpdatePaymentMethodInfo) HasMaestroUsa() bool {
+	if o != nil && !common.IsNil(o.MaestroUsa) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaestroUsa gets a reference to the given GenericPmWithTdiInfo and assigns it to the MaestroUsa field.
+func (o *UpdatePaymentMethodInfo) SetMaestroUsa(v GenericPmWithTdiInfo) {
+	o.MaestroUsa = &v
+}
+
 // GetMc returns the Mc field value if set, zero value otherwise.
 func (o *UpdatePaymentMethodInfo) GetMc() GenericPmWithTdiInfo {
 	if o == nil || common.IsNil(o.Mc) {
@@ -937,6 +970,9 @@ func (o UpdatePaymentMethodInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Maestro) {
 		toSerialize["maestro"] = o.Maestro
+	}
+	if !common.IsNil(o.MaestroUsa) {
+		toSerialize["maestro_usa"] = o.MaestroUsa
 	}
 	if !common.IsNil(o.Mc) {
 		toSerialize["mc"] = o.Mc

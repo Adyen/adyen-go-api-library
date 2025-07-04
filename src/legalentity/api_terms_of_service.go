@@ -49,6 +49,16 @@ AcceptTermsOfService Accept Terms of Service
 
 Accepts Terms of Service.
 
+Requests to this endpoint are subject to rate limits:
+
+- Live environments: 700 requests per 5 seconds.
+
+- Test environments: 200 requests per 5 seconds.
+
+- Failed requests are subject to a limit of 5 failures per 10 seconds.
+
+
+
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TermsOfServiceApiAcceptTermsOfServiceInput - Request parameters, see AcceptTermsOfServiceInput
 @return AcceptTermsOfServiceResponse, *http.Response, error
@@ -103,6 +113,16 @@ func (a *TermsOfServiceApi) GetAcceptedTermsOfServiceDocumentInput(id string, te
 GetAcceptedTermsOfServiceDocument Get accepted Terms of Service document
 
 Returns the accepted Terms of Service document for a legal entity.
+
+Requests to this endpoint are subject to rate limits:
+
+- Live environments: 700 requests per 5 seconds.
+
+- Test environments: 200 requests per 5 seconds.
+
+- Failed requests are subject to a limit of 5 failures per 10 seconds.
+
+
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TermsOfServiceApiGetAcceptedTermsOfServiceDocumentInput - Request parameters, see GetAcceptedTermsOfServiceDocumentInput
@@ -159,6 +179,16 @@ GetTermsOfServiceDocument Get Terms of Service document
 
 Returns the Terms of Service document for a legal entity.
 
+Requests to this endpoint are subject to rate limits:
+
+- Live environments: 700 requests per 5 seconds.
+
+- Test environments: 200 requests per 5 seconds.
+
+- Failed requests are subject to a limit of 5 failures per 10 seconds.
+
+
+
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TermsOfServiceApiGetTermsOfServiceDocumentInput - Request parameters, see GetTermsOfServiceDocumentInput
 @return GetTermsOfServiceDocumentResponse, *http.Response, error
@@ -204,6 +234,16 @@ GetTermsOfServiceInformationForLegalEntity Get Terms of Service information for 
 
 Returns Terms of Service information for a legal entity.
 
+Requests to this endpoint are subject to rate limits:
+
+- Live environments: 700 requests per 5 seconds.
+
+- Test environments: 200 requests per 5 seconds.
+
+- Failed requests are subject to a limit of 5 failures per 10 seconds.
+
+
+
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TermsOfServiceApiGetTermsOfServiceInformationForLegalEntityInput - Request parameters, see GetTermsOfServiceInformationForLegalEntityInput
 @return GetTermsOfServiceAcceptanceInfosResponse, *http.Response, error
@@ -248,6 +288,16 @@ func (a *TermsOfServiceApi) GetTermsOfServiceStatusInput(id string) TermsOfServi
 GetTermsOfServiceStatus Get Terms of Service status
 
 Returns the required types of Terms of Service that need to be accepted by a legal entity.
+
+Requests to this endpoint are subject to rate limits:
+
+- Live environments: 700 requests per 5 seconds.
+
+- Test environments: 200 requests per 5 seconds.
+
+- Failed requests are subject to a limit of 5 failures per 10 seconds.
+
+
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TermsOfServiceApiGetTermsOfServiceStatusInput - Request parameters, see GetTermsOfServiceStatusInput

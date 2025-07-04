@@ -19,7 +19,7 @@ var _ common.MappedNullable = &ConfirmationTrackingData{}
 
 // ConfirmationTrackingData struct for ConfirmationTrackingData
 type ConfirmationTrackingData struct {
-	// The status of the transfer.  Possible values:    - **credited**: the funds are credited to your user's transfer instrument or bank account.
+	// The status of the transfer.  Possible values:   - **credited**: the funds are credited to your user's transfer instrument or bank account.
 	Status string `json:"status"`
 	// The type of the tracking event.  Possible values:   - **confirmation**: the transfer passed Adyen's internal review.
 	Type string `json:"type"`

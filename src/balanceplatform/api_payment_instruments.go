@@ -22,6 +22,103 @@ import (
 // PaymentInstrumentsApi service
 type PaymentInstrumentsApi common.Service
 
+// All parameters accepted by PaymentInstrumentsApi.CreateNetworkTokenActivationData
+type PaymentInstrumentsApiCreateNetworkTokenActivationDataInput struct {
+	id                                string
+	networkTokenActivationDataRequest *NetworkTokenActivationDataRequest
+}
+
+func (r PaymentInstrumentsApiCreateNetworkTokenActivationDataInput) NetworkTokenActivationDataRequest(networkTokenActivationDataRequest NetworkTokenActivationDataRequest) PaymentInstrumentsApiCreateNetworkTokenActivationDataInput {
+	r.networkTokenActivationDataRequest = &networkTokenActivationDataRequest
+	return r
+}
+
+/*
+Prepare a request for CreateNetworkTokenActivationData
+@param id The unique identifier of the payment instrument.
+@return PaymentInstrumentsApiCreateNetworkTokenActivationDataInput
+*/
+func (a *PaymentInstrumentsApi) CreateNetworkTokenActivationDataInput(id string) PaymentInstrumentsApiCreateNetworkTokenActivationDataInput {
+	return PaymentInstrumentsApiCreateNetworkTokenActivationDataInput{
+		id: id,
+	}
+}
+
+/*
+CreateNetworkTokenActivationData Create network token activation data
+
+Create network token activation data for a payment instrument.
+
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r PaymentInstrumentsApiCreateNetworkTokenActivationDataInput - Request parameters, see CreateNetworkTokenActivationDataInput
+@return NetworkTokenActivationDataResponse, *http.Response, error
+*/
+func (a *PaymentInstrumentsApi) CreateNetworkTokenActivationData(ctx context.Context, r PaymentInstrumentsApiCreateNetworkTokenActivationDataInput) (NetworkTokenActivationDataResponse, *http.Response, error) {
+	res := &NetworkTokenActivationDataResponse{}
+	path := "/paymentInstruments/{id}/networkTokenActivationData"
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.networkTokenActivationDataRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 400 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+
+	return *res, httpRes, err
+}
+
 // All parameters accepted by PaymentInstrumentsApi.CreatePaymentInstrument
 type PaymentInstrumentsApiCreatePaymentInstrumentInput struct {
 	paymentInstrumentInfo *PaymentInstrumentInfo
@@ -46,7 +143,7 @@ CreatePaymentInstrument Create a payment instrument
 
 Creates a payment instrument to issue a physical card, a virtual card, or a business account to your user.
 
-	For more information, refer to [Issue cards](https://docs.adyen.com/issuing/create-cards) or [Issue business accounts](https://docs.adyen.com/platforms/business-accounts).
+ For more information, refer to [Issue cards](https://docs.adyen.com/issuing/create-cards) or [Issue business accounts](https://docs.adyen.com/platforms/business-accounts).
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r PaymentInstrumentsApiCreatePaymentInstrumentInput - Request parameters, see CreatePaymentInstrumentInput
@@ -145,6 +242,97 @@ Returns a list of transaction rules associated with a payment instrument.
 func (a *PaymentInstrumentsApi) GetAllTransactionRulesForPaymentInstrument(ctx context.Context, r PaymentInstrumentsApiGetAllTransactionRulesForPaymentInstrumentInput) (TransactionRulesResponse, *http.Response, error) {
 	res := &TransactionRulesResponse{}
 	path := "/paymentInstruments/{id}/transactionRules"
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
+
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 400 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+
+	return *res, httpRes, err
+}
+
+// All parameters accepted by PaymentInstrumentsApi.GetNetworkTokenActivationData
+type PaymentInstrumentsApiGetNetworkTokenActivationDataInput struct {
+	id string
+}
+
+/*
+Prepare a request for GetNetworkTokenActivationData
+@param id The unique identifier of the payment instrument.
+@return PaymentInstrumentsApiGetNetworkTokenActivationDataInput
+*/
+func (a *PaymentInstrumentsApi) GetNetworkTokenActivationDataInput(id string) PaymentInstrumentsApiGetNetworkTokenActivationDataInput {
+	return PaymentInstrumentsApiGetNetworkTokenActivationDataInput{
+		id: id,
+	}
+}
+
+/*
+GetNetworkTokenActivationData Get network token activation data
+
+Get network token activation data for a payment instrument.
+
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r PaymentInstrumentsApiGetNetworkTokenActivationDataInput - Request parameters, see GetNetworkTokenActivationDataInput
+@return NetworkTokenActivationDataResponse, *http.Response, error
+*/
+func (a *PaymentInstrumentsApi) GetNetworkTokenActivationData(ctx context.Context, r PaymentInstrumentsApiGetNetworkTokenActivationDataInput) (NetworkTokenActivationDataResponse, *http.Response, error) {
+	res := &NetworkTokenActivationDataResponse{}
+	path := "/paymentInstruments/{id}/networkTokenActivationData"
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)

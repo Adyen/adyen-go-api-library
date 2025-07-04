@@ -32,6 +32,7 @@ type TransactionsApiGetAllTransactionsInput struct {
 	accountHolderId     *string
 	balanceAccountId    *string
 	cursor              *string
+	sortOrder           *string
 	limit               *int32
 }
 
@@ -77,6 +78,12 @@ func (r TransactionsApiGetAllTransactionsInput) Cursor(cursor string) Transactio
 	return r
 }
 
+// The transactions sorting order.  Possible values:   - **asc**: Ascending order, from older to most recent.  - **desc**: Descending order, from most recent to older.
+func (r TransactionsApiGetAllTransactionsInput) SortOrder(sortOrder string) TransactionsApiGetAllTransactionsInput {
+	r.sortOrder = &sortOrder
+	return r
+}
+
 // The number of items returned per page, maximum of 100 items. By default, the response returns 10 items per page.
 func (r TransactionsApiGetAllTransactionsInput) Limit(limit int32) TransactionsApiGetAllTransactionsInput {
 	r.limit = &limit
@@ -105,6 +112,8 @@ When making this request, you must include at least one of the following:
 - `balancePlatform`.
 
 This endpoint supports cursor-based pagination. The response returns the first page of results, and returns links to the next and previous pages when applicable. You can use the links to page through the results.
+
+
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TransactionsApiGetAllTransactionsInput - Request parameters, see GetAllTransactionsInput
@@ -135,6 +144,9 @@ func (a *TransactionsApi) GetAllTransactions(ctx context.Context, r Transactions
 	}
 	if r.createdUntil != nil {
 		common.ParameterAddToQuery(queryParams, "createdUntil", r.createdUntil, "")
+	}
+	if r.sortOrder != nil {
+		common.ParameterAddToQuery(queryParams, "sortOrder", r.sortOrder, "")
 	}
 	if r.limit != nil {
 		common.ParameterAddToQuery(queryParams, "limit", r.limit, "")
