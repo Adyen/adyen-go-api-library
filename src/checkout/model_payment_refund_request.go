@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the PaymentRefundRequest type satisfies the MappedNullable interface at compile time
@@ -19,13 +18,15 @@ var _ common.MappedNullable = &PaymentRefundRequest{}
 
 // PaymentRefundRequest struct for PaymentRefundRequest
 type PaymentRefundRequest struct {
-	Amount          Amount           `json:"amount"`
+	Amount Amount `json:"amount"`
 	ApplicationInfo *ApplicationInfo `json:"applicationInfo,omitempty"`
+	// This is only available for PayPal refunds. The [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference) of the specific capture to refund.
+	CapturePspReference *string `json:"capturePspReference,omitempty"`
 	// Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment). > This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Atome, Clearpay, Klarna, Ratepay, Walley, and Zip.
 	LineItems []LineItem `json:"lineItems,omitempty"`
 	// The merchant account that is used to process the payment.
 	MerchantAccount string `json:"merchantAccount"`
-	// The reason for the refund request.  Possible values:  * **FRAUD**  * **CUSTOMER REQUEST**  * **RETURN**  * **DUPLICATE**  * **OTHER**
+	// The reason for the refund request.  Possible values:  * **FRAUD**  * **CUSTOMER REQUEST**  * **RETURN**  * **DUPLICATE**  * **OTHER**  
 	MerchantRefundReason common.NullableString `json:"merchantRefundReason,omitempty"`
 	// Your reference for the refund request. Maximum length: 80 characters.
 	Reference *string `json:"reference,omitempty"`
@@ -108,6 +109,38 @@ func (o *PaymentRefundRequest) HasApplicationInfo() bool {
 // SetApplicationInfo gets a reference to the given ApplicationInfo and assigns it to the ApplicationInfo field.
 func (o *PaymentRefundRequest) SetApplicationInfo(v ApplicationInfo) {
 	o.ApplicationInfo = &v
+}
+
+// GetCapturePspReference returns the CapturePspReference field value if set, zero value otherwise.
+func (o *PaymentRefundRequest) GetCapturePspReference() string {
+	if o == nil || common.IsNil(o.CapturePspReference) {
+		var ret string
+		return ret
+	}
+	return *o.CapturePspReference
+}
+
+// GetCapturePspReferenceOk returns a tuple with the CapturePspReference field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentRefundRequest) GetCapturePspReferenceOk() (*string, bool) {
+	if o == nil || common.IsNil(o.CapturePspReference) {
+		return nil, false
+	}
+	return o.CapturePspReference, true
+}
+
+// HasCapturePspReference returns a boolean if a field has been set.
+func (o *PaymentRefundRequest) HasCapturePspReference() bool {
+	if o != nil && !common.IsNil(o.CapturePspReference) {
+		return true
+	}
+
+	return false
+}
+
+// SetCapturePspReference gets a reference to the given string and assigns it to the CapturePspReference field.
+func (o *PaymentRefundRequest) SetCapturePspReference(v string) {
+	o.CapturePspReference = &v
 }
 
 // GetLineItems returns the LineItems field value if set, zero value otherwise.
@@ -198,7 +231,6 @@ func (o *PaymentRefundRequest) HasMerchantRefundReason() bool {
 func (o *PaymentRefundRequest) SetMerchantRefundReason(v string) {
 	o.MerchantRefundReason.Set(&v)
 }
-
 // SetMerchantRefundReasonNil sets the value for MerchantRefundReason to be an explicit nil
 func (o *PaymentRefundRequest) SetMerchantRefundReasonNil() {
 	o.MerchantRefundReason.Set(nil)
@@ -306,7 +338,7 @@ func (o *PaymentRefundRequest) SetStore(v string) {
 }
 
 func (o PaymentRefundRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -318,6 +350,9 @@ func (o PaymentRefundRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["amount"] = o.Amount
 	if !common.IsNil(o.ApplicationInfo) {
 		toSerialize["applicationInfo"] = o.ApplicationInfo
+	}
+	if !common.IsNil(o.CapturePspReference) {
+		toSerialize["capturePspReference"] = o.CapturePspReference
 	}
 	if !common.IsNil(o.LineItems) {
 		toSerialize["lineItems"] = o.LineItems
@@ -374,12 +409,14 @@ func (v *NullablePaymentRefundRequest) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *PaymentRefundRequest) isValidMerchantRefundReason() bool {
-	var allowedEnumValues = []string{"FRAUD", "CUSTOMER REQUEST", "RETURN", "DUPLICATE", "OTHER"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetMerchantRefundReason() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "FRAUD", "CUSTOMER REQUEST", "RETURN", "DUPLICATE", "OTHER" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetMerchantRefundReason() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

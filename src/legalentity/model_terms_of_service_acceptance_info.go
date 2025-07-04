@@ -10,9 +10,8 @@ package legalentity
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 	"time"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the TermsOfServiceAcceptanceInfo type satisfies the MappedNullable interface at compile time
@@ -28,7 +27,7 @@ type TermsOfServiceAcceptanceInfo struct {
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
 	// An Adyen-generated reference for the accepted Terms of Service.
 	Id *string `json:"id,omitempty"`
-	// The type of Terms of Service.  Possible values: *  **adyenForPlatformsManage** *  **adyenIssuing** *  **adyenForPlatformsAdvanced** *  **adyenCapital** *  **adyenAccount** *  **adyenCard** *  **adyenFranchisee** *  **adyenPccr** *  **adyenChargeCard**
+	// The type of Terms of Service.  Possible values: *  **adyenForPlatformsManage** *  **adyenIssuing** *  **adyenForPlatformsAdvanced** *  **adyenCapital** *  **adyenAccount** *  **adyenCard** *  **adyenFranchisee** *  **adyenPccr** *  **adyenChargeCard** *  **kycOnInvite**  
 	Type *string `json:"type,omitempty"`
 	// The expiration date for the Terms of Service acceptance, in ISO 8601 extended format. For example, 2022-12-18T00:00:00+01:00.
 	ValidTo *time.Time `json:"validTo,omitempty"`
@@ -244,7 +243,7 @@ func (o *TermsOfServiceAcceptanceInfo) SetValidTo(v time.Time) {
 }
 
 func (o TermsOfServiceAcceptanceInfo) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -310,12 +309,14 @@ func (v *NullableTermsOfServiceAcceptanceInfo) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *TermsOfServiceAcceptanceInfo) isValidType() bool {
-	var allowedEnumValues = []string{"adyenAccount", "adyenCapital", "adyenCard", "adyenChargeCard", "adyenForPlatformsAdvanced", "adyenForPlatformsManage", "adyenFranchisee", "adyenIssuing", "adyenPccr"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "adyenAccount", "adyenCapital", "adyenCard", "adyenChargeCard", "adyenForPlatformsAdvanced", "adyenForPlatformsManage", "adyenFranchisee", "adyenIssuing", "adyenPccr", "kycOnInvite" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+
