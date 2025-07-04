@@ -10,7 +10,8 @@ package transfers
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the TransferNotificationCounterParty type satisfies the MappedNullable interface at compile time
@@ -19,10 +20,10 @@ var _ common.MappedNullable = &TransferNotificationCounterParty{}
 // TransferNotificationCounterParty struct for TransferNotificationCounterParty
 type TransferNotificationCounterParty struct {
 	// The unique identifier of the counterparty [balance account](https://docs.adyen.com/api-explorer/balanceplatform/latest/post/balanceAccounts#responses-200-id).
-	BalanceAccountId *string `json:"balanceAccountId,omitempty"`
-	BankAccount *BankAccountV3 `json:"bankAccount,omitempty"`
-	Card *Card `json:"card,omitempty"`
-	Merchant *TransferNotificationMerchantData `json:"merchant,omitempty"`
+	BalanceAccountId *string                           `json:"balanceAccountId,omitempty"`
+	BankAccount      *BankAccountV3                    `json:"bankAccount,omitempty"`
+	Card             *Card                             `json:"card,omitempty"`
+	Merchant         *TransferNotificationMerchantData `json:"merchant,omitempty"`
 	// The unique identifier of the counterparty [transfer instrument](https://docs.adyen.com/api-explorer/legalentity/latest/post/transferInstruments#responses-200-id).
 	TransferInstrumentId *string `json:"transferInstrumentId,omitempty"`
 }
@@ -205,7 +206,7 @@ func (o *TransferNotificationCounterParty) SetTransferInstrumentId(v string) {
 }
 
 func (o TransferNotificationCounterParty) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -267,6 +268,3 @@ func (v *NullableTransferNotificationCounterParty) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-
