@@ -2,6 +2,7 @@ package tests
 
 import (
 	"encoding/json"
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 	"testing"
 
 	"github.com/adyen/adyen-go-api-library/v21/src/checkout"
@@ -161,5 +162,38 @@ func TestPaymentRequest_UnmarshalJSON(t *testing.T) {
         }`
 		err := json.Unmarshal([]byte(inputJson), &pm)
 		require.ErrorContains(t, err, "data failed to match schemas in oneOf(CheckoutPaymentMethod)")
+	})
+
+	// test serialization (Marshal)
+	t.Run("Sessions", func(t *testing.T) {
+		expected := `{"amount":{"currency":"EUR","value":1250},"channel":"Web","countryCode":"NL","merchantAccount":"merchantAccount","reference":"123456781235","returnUrl":"http://localhost:3000/redirect"}`
+
+		body := checkout.CreateCheckoutSessionRequest{
+			Reference: "123456781235",
+			Amount: checkout.Amount{
+				Value:    1250,
+				Currency: "EUR",
+			},
+			CountryCode:     common.PtrString("NL"),
+			MerchantAccount: "merchantAccount",
+			Channel:         common.PtrString("Web"),
+			ReturnUrl:       "http://localhost:3000/redirect",
+		}
+
+		data, err := json.Marshal(body)
+		require.NoError(t, err)
+
+		// Unmarshal expected JSON into map
+		var expectedMap map[string]interface{}
+		err = json.Unmarshal([]byte(expected), &expectedMap)
+		require.NoError(t, err)
+
+		// Unmarshal actual JSON into map
+		var actualMap map[string]interface{}
+		err = json.Unmarshal(data, &actualMap)
+		require.NoError(t, err)
+
+		// Compare maps
+		assert.Equal(t, expectedMap, actualMap)
 	})
 }
