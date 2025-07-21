@@ -48,7 +48,7 @@ The library supports all webhooks under the following model directories:
 
 ## Prerequisites
 
--   Go 1.13 or higher
+-   Go 1.23 or higher
 -   [Adyen test account](https://docs.adyen.com/get-started-with-adyen)
 -   [API key](https://docs.adyen.com/development-resources/api-credentials#generate-api-key). For testing, your API credential needs to have the [API PCI Payments role](https://docs.adyen.com/development-resources/api-credentials#roles).
 -   [Basic Authentication](https://docs.adyen.com/development-resources/api-credentials#basic-authentication) (for Legal Entity Management API only). 

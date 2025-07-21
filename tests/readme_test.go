@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-func ExamplePaymentsApi_PaymentMethods() {
+func PaymentsApi_PaymentMethods() {
 	client := adyen.NewClient(&common.Config{
 		ApiKey:      "your api key",
 		Environment: common.TestEnv,
@@ -30,7 +30,7 @@ func ExamplePaymentsApi_PaymentMethods() {
 	// Output: [] 401 401 Unauthorized: HTTP Status Response - Unauthorized (security: 000)
 }
 
-func ExampleLiveEnv() {
+func LiveEnv() {
 	client := adyen.NewClient(&common.Config{
 		ApiKey:                "your api key",
 		Environment:           common.LiveEnv,
@@ -48,7 +48,7 @@ func ExampleLiveEnv() {
 	// Output: [] <nil> https://1797a841fbb37ca7-AdyenDemo-checkout-live.adyenpayments.com/checkout/v71/paymentMethods
 }
 
-func ExampleBasicAuth() {
+func BasicAuth() {
 	client := adyen.NewClient(&common.Config{
 		Username:    "your ws user",
 		Password:    "your secret password",
@@ -70,14 +70,14 @@ func ExampleBasicAuth() {
 	fmt.Println(res, httpRes, err)
 }
 
-func ExampleWebhook() {
+func Webhook() {
 	msg, err := webhook.HandleRequest(`{"live": "false", "notificationItems": []}`)
 
 	fmt.Println(msg.Live, len(msg.GetNotificationItems()), err)
 	// Output: false 0 <nil>
 }
 
-func ExampleError() {
+func Error() {
 	client := adyen.NewClient(&common.Config{
 		ApiKey:      "your api key",
 		Environment: common.TestEnv,
@@ -111,7 +111,7 @@ func ExampleError() {
 	// 401 Unauthorized: HTTP Status Response - Unauthorized (security: 000)
 }
 
-func ExampleCustomHTTPClientConfiguration() {
+func CustomHTTPClientConfiguration() {
 	client := adyen.NewClient(&common.Config{
 		HTTPClient: &http.Client{
 			Timeout: 512 * time.Millisecond,
@@ -125,7 +125,7 @@ func ExampleCustomHTTPClientConfiguration() {
 	// 512ms
 }
 
-func ExampleProxy() {
+func Proxy() {
 	// creating the proxyURL
 	proxyURL, _ := url.Parse("http://myproxy:7000")
 	transport := &http.Transport{
