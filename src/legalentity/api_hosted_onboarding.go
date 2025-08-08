@@ -10,10 +10,11 @@ package legalentity
 
 import (
 	"context"
-    "net/http"
-    "net/url"
-    "strings"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+	"net/http"
+	"net/url"
+	"strings"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // HostedOnboardingApi service
@@ -21,7 +22,7 @@ type HostedOnboardingApi common.Service
 
 // All parameters accepted by HostedOnboardingApi.GetLinkToAdyenhostedOnboardingPage
 type HostedOnboardingApiGetLinkToAdyenhostedOnboardingPageInput struct {
-	id string
+	id                 string
 	onboardingLinkInfo *OnboardingLinkInfo
 }
 
@@ -29,7 +30,6 @@ func (r HostedOnboardingApiGetLinkToAdyenhostedOnboardingPageInput) OnboardingLi
 	r.onboardingLinkInfo = &onboardingLinkInfo
 	return r
 }
-
 
 /*
 Prepare a request for GetLinkToAdyenhostedOnboardingPage
@@ -55,39 +55,34 @@ Requests to this endpoint are subject to rate limits:
 
 - Failed requests are subject to a limit of 5 failures per 10 seconds.
 
-
-
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r HostedOnboardingApiGetLinkToAdyenhostedOnboardingPageInput - Request parameters, see GetLinkToAdyenhostedOnboardingPageInput
 @return OnboardingLink, *http.Response, error
 */
 func (a *HostedOnboardingApi) GetLinkToAdyenhostedOnboardingPage(ctx context.Context, r HostedOnboardingApiGetLinkToAdyenhostedOnboardingPageInput) (OnboardingLink, *http.Response, error) {
-    res := &OnboardingLink{}
+	res := &OnboardingLink{}
 	path := "/legalEntities/{id}/onboardingLinks"
-    path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.onboardingLinkInfo,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.onboardingLinkInfo,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by HostedOnboardingApi.GetOnboardingLinkTheme
 type HostedOnboardingApiGetOnboardingLinkThemeInput struct {
 	id string
 }
-
 
 /*
 Prepare a request for GetOnboardingLinkTheme
@@ -113,38 +108,33 @@ Requests to this endpoint are subject to rate limits:
 
 - Failed requests are subject to a limit of 5 failures per 10 seconds.
 
-
-
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r HostedOnboardingApiGetOnboardingLinkThemeInput - Request parameters, see GetOnboardingLinkThemeInput
 @return OnboardingTheme, *http.Response, error
 */
 func (a *HostedOnboardingApi) GetOnboardingLinkTheme(ctx context.Context, r HostedOnboardingApiGetOnboardingLinkThemeInput) (OnboardingTheme, *http.Response, error) {
-    res := &OnboardingTheme{}
+	res := &OnboardingTheme{}
 	path := "/themes/{id}"
-    path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodGet,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by HostedOnboardingApi.ListHostedOnboardingPageThemes
 type HostedOnboardingApiListHostedOnboardingPageThemesInput struct {
 }
-
 
 /*
 Prepare a request for ListHostedOnboardingPageThemes
@@ -152,8 +142,7 @@ Prepare a request for ListHostedOnboardingPageThemes
 @return HostedOnboardingApiListHostedOnboardingPageThemesInput
 */
 func (a *HostedOnboardingApi) ListHostedOnboardingPageThemesInput() HostedOnboardingApiListHostedOnboardingPageThemesInput {
-	return HostedOnboardingApiListHostedOnboardingPageThemesInput{
-	}
+	return HostedOnboardingApiListHostedOnboardingPageThemesInput{}
 }
 
 /*
@@ -169,29 +158,25 @@ Requests to this endpoint are subject to rate limits:
 
 - Failed requests are subject to a limit of 5 failures per 10 seconds.
 
-
-
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r HostedOnboardingApiListHostedOnboardingPageThemesInput - Request parameters, see ListHostedOnboardingPageThemesInput
 @return OnboardingThemes, *http.Response, error
 */
 func (a *HostedOnboardingApi) ListHostedOnboardingPageThemes(ctx context.Context, r HostedOnboardingApiListHostedOnboardingPageThemesInput) (OnboardingThemes, *http.Response, error) {
-    res := &OnboardingThemes{}
+	res := &OnboardingThemes{}
 	path := "/themes"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodGet,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-

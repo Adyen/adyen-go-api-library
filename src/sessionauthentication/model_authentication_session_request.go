@@ -10,7 +10,8 @@ package sessionauthentication
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the AuthenticationSessionRequest type satisfies the MappedNullable interface at compile time
@@ -19,9 +20,9 @@ var _ common.MappedNullable = &AuthenticationSessionRequest{}
 // AuthenticationSessionRequest struct for AuthenticationSessionRequest
 type AuthenticationSessionRequest struct {
 	// The URL where the component will appear. In your live environment, you must protect the URL with an SSL certificate and ensure that it starts with `https://`.
-	AllowOrigin string `json:"allowOrigin"`
-	Policy Policy `json:"policy"`
-	Product ProductType `json:"product"`
+	AllowOrigin string      `json:"allowOrigin"`
+	Policy      Policy      `json:"policy"`
+	Product     ProductType `json:"product"`
 }
 
 // NewAuthenticationSessionRequest instantiates a new AuthenticationSessionRequest object
@@ -117,7 +118,7 @@ func (o *AuthenticationSessionRequest) SetProduct(v ProductType) {
 }
 
 func (o AuthenticationSessionRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -167,6 +168,3 @@ func (v *NullableAuthenticationSessionRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

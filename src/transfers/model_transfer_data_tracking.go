@@ -10,15 +10,13 @@ package transfers
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
-	"time"
 	"fmt"
 )
 
 // TransferDataTracking - The latest tracking information of the transfer.
 type TransferDataTracking struct {
-	ConfirmationTrackingData *ConfirmationTrackingData
-	EstimationTrackingData *EstimationTrackingData
+	ConfirmationTrackingData   *ConfirmationTrackingData
+	EstimationTrackingData     *EstimationTrackingData
 	InternalReviewTrackingData *InternalReviewTrackingData
 }
 
@@ -43,7 +41,6 @@ func InternalReviewTrackingDataAsTransferDataTracking(v *InternalReviewTrackingD
 	}
 }
 
-
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *TransferDataTracking) UnmarshalJSON(data []byte) error {
 	var err error
@@ -54,7 +51,7 @@ func (dst *TransferDataTracking) UnmarshalJSON(data []byte) error {
 		jsonConfirmationTrackingData, _ := json.Marshal(dst.ConfirmationTrackingData)
 		if string(jsonConfirmationTrackingData) == "{}" || !dst.ConfirmationTrackingData.isValidType() { // empty struct
 			dst.ConfirmationTrackingData = nil
-        } else {
+		} else {
 			match++
 		}
 	} else {
@@ -67,7 +64,7 @@ func (dst *TransferDataTracking) UnmarshalJSON(data []byte) error {
 		jsonEstimationTrackingData, _ := json.Marshal(dst.EstimationTrackingData)
 		if string(jsonEstimationTrackingData) == "{}" || !dst.EstimationTrackingData.isValidType() { // empty struct
 			dst.EstimationTrackingData = nil
-        } else {
+		} else {
 			match++
 		}
 	} else {
@@ -80,7 +77,7 @@ func (dst *TransferDataTracking) UnmarshalJSON(data []byte) error {
 		jsonInternalReviewTrackingData, _ := json.Marshal(dst.InternalReviewTrackingData)
 		if string(jsonInternalReviewTrackingData) == "{}" || !dst.InternalReviewTrackingData.isValidType() { // empty struct
 			dst.InternalReviewTrackingData = nil
-        } else {
+		} else {
 			match++
 		}
 	} else {
@@ -119,7 +116,7 @@ func (src TransferDataTracking) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *TransferDataTracking) GetActualInstance() (interface{}) {
+func (obj *TransferDataTracking) GetActualInstance() interface{} {
 	if obj == nil {
 		return nil
 	}
@@ -174,5 +171,3 @@ func (v *NullableTransferDataTracking) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
