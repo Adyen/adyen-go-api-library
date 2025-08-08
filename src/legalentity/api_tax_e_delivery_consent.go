@@ -41,6 +41,14 @@ CheckStatusOfConsentForElectronicDeliveryOfTaxForms Check the status of consent 
 
 Returns the consent status for electronic delivery of tax forms.
 
+Requests to this endpoint are subject to rate limits:
+
+- Live environments: 700 requests per 5 seconds.
+
+- Test environments: 200 requests per 5 seconds.
+
+- Failed requests are subject to a limit of 5 failures per 10 seconds.
+
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TaxEDeliveryConsentApiCheckStatusOfConsentForElectronicDeliveryOfTaxFormsInput - Request parameters, see CheckStatusOfConsentForElectronicDeliveryOfTaxFormsInput
 @return CheckTaxElectronicDeliveryConsentResponse, *http.Response, error
@@ -91,6 +99,14 @@ func (a *TaxEDeliveryConsentApi) SetConsentStatusForElectronicDeliveryOfTaxForms
 SetConsentStatusForElectronicDeliveryOfTaxForms Set the consent status for electronic delivery of tax forms
 
 Set the consent status for electronic delivery of tax forms.
+
+Requests to this endpoint are subject to rate limits:
+
+- Live environments: 700 requests per 5 seconds.
+
+- Test environments: 200 requests per 5 seconds.
+
+- Failed requests are subject to a limit of 5 failures per 10 seconds.
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TaxEDeliveryConsentApiSetConsentStatusForElectronicDeliveryOfTaxFormsInput - Request parameters, see SetConsentStatusForElectronicDeliveryOfTaxFormsInput

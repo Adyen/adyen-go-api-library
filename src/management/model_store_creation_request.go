@@ -33,6 +33,7 @@ type StoreCreationRequest struct {
 	// The store name to be shown on the shopper's bank or credit card statement and on the shopper receipt. Maximum length: 22 characters; can't be all numbers.
 	ShopperStatement   string                   `json:"shopperStatement"`
 	SplitConfiguration *StoreSplitConfiguration `json:"splitConfiguration,omitempty"`
+	SubMerchantData    *SubMerchantData         `json:"subMerchantData,omitempty"`
 }
 
 // NewStoreCreationRequest instantiates a new StoreCreationRequest object
@@ -280,6 +281,38 @@ func (o *StoreCreationRequest) SetSplitConfiguration(v StoreSplitConfiguration) 
 	o.SplitConfiguration = &v
 }
 
+// GetSubMerchantData returns the SubMerchantData field value if set, zero value otherwise.
+func (o *StoreCreationRequest) GetSubMerchantData() SubMerchantData {
+	if o == nil || common.IsNil(o.SubMerchantData) {
+		var ret SubMerchantData
+		return ret
+	}
+	return *o.SubMerchantData
+}
+
+// GetSubMerchantDataOk returns a tuple with the SubMerchantData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoreCreationRequest) GetSubMerchantDataOk() (*SubMerchantData, bool) {
+	if o == nil || common.IsNil(o.SubMerchantData) {
+		return nil, false
+	}
+	return o.SubMerchantData, true
+}
+
+// HasSubMerchantData returns a boolean if a field has been set.
+func (o *StoreCreationRequest) HasSubMerchantData() bool {
+	if o != nil && !common.IsNil(o.SubMerchantData) {
+		return true
+	}
+
+	return false
+}
+
+// SetSubMerchantData gets a reference to the given SubMerchantData and assigns it to the SubMerchantData field.
+func (o *StoreCreationRequest) SetSubMerchantData(v SubMerchantData) {
+	o.SubMerchantData = &v
+}
+
 func (o StoreCreationRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -305,6 +338,9 @@ func (o StoreCreationRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["shopperStatement"] = o.ShopperStatement
 	if !common.IsNil(o.SplitConfiguration) {
 		toSerialize["splitConfiguration"] = o.SplitConfiguration
+	}
+	if !common.IsNil(o.SubMerchantData) {
+		toSerialize["subMerchantData"] = o.SubMerchantData
 	}
 	return toSerialize, nil
 }

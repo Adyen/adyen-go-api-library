@@ -22,6 +22,7 @@ type PaymentMethodSetupInfo struct {
 	Accel         *AccelInfo         `json:"accel,omitempty"`
 	Affirm        *AffirmInfo        `json:"affirm,omitempty"`
 	AfterpayTouch *AfterpayTouchInfo `json:"afterpayTouch,omitempty"`
+	AlipayPlus    *AlipayPlusInfo    `json:"alipayPlus,omitempty"`
 	Amex          *AmexInfo          `json:"amex,omitempty"`
 	ApplePay      *ApplePayInfo      `json:"applePay,omitempty"`
 	Bcmc          *BcmcInfo          `json:"bcmc,omitempty"`
@@ -47,6 +48,7 @@ type PaymentMethodSetupInfo struct {
 	Jcb                *JCBInfo              `json:"jcb,omitempty"`
 	Klarna             *KlarnaInfo           `json:"klarna,omitempty"`
 	Maestro            *GenericPmWithTdiInfo `json:"maestro,omitempty"`
+	MaestroUsa         *GenericPmWithTdiInfo `json:"maestro_usa,omitempty"`
 	Mc                 *GenericPmWithTdiInfo `json:"mc,omitempty"`
 	MealVoucherFR      *MealVoucherFRInfo    `json:"mealVoucher_FR,omitempty"`
 	Nyce               *NyceInfo             `json:"nyce,omitempty"`
@@ -187,6 +189,38 @@ func (o *PaymentMethodSetupInfo) HasAfterpayTouch() bool {
 // SetAfterpayTouch gets a reference to the given AfterpayTouchInfo and assigns it to the AfterpayTouch field.
 func (o *PaymentMethodSetupInfo) SetAfterpayTouch(v AfterpayTouchInfo) {
 	o.AfterpayTouch = &v
+}
+
+// GetAlipayPlus returns the AlipayPlus field value if set, zero value otherwise.
+func (o *PaymentMethodSetupInfo) GetAlipayPlus() AlipayPlusInfo {
+	if o == nil || common.IsNil(o.AlipayPlus) {
+		var ret AlipayPlusInfo
+		return ret
+	}
+	return *o.AlipayPlus
+}
+
+// GetAlipayPlusOk returns a tuple with the AlipayPlus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodSetupInfo) GetAlipayPlusOk() (*AlipayPlusInfo, bool) {
+	if o == nil || common.IsNil(o.AlipayPlus) {
+		return nil, false
+	}
+	return o.AlipayPlus, true
+}
+
+// HasAlipayPlus returns a boolean if a field has been set.
+func (o *PaymentMethodSetupInfo) HasAlipayPlus() bool {
+	if o != nil && !common.IsNil(o.AlipayPlus) {
+		return true
+	}
+
+	return false
+}
+
+// SetAlipayPlus gets a reference to the given AlipayPlusInfo and assigns it to the AlipayPlus field.
+func (o *PaymentMethodSetupInfo) SetAlipayPlus(v AlipayPlusInfo) {
+	o.AlipayPlus = &v
 }
 
 // GetAmex returns the Amex field value if set, zero value otherwise.
@@ -859,6 +893,38 @@ func (o *PaymentMethodSetupInfo) HasMaestro() bool {
 // SetMaestro gets a reference to the given GenericPmWithTdiInfo and assigns it to the Maestro field.
 func (o *PaymentMethodSetupInfo) SetMaestro(v GenericPmWithTdiInfo) {
 	o.Maestro = &v
+}
+
+// GetMaestroUsa returns the MaestroUsa field value if set, zero value otherwise.
+func (o *PaymentMethodSetupInfo) GetMaestroUsa() GenericPmWithTdiInfo {
+	if o == nil || common.IsNil(o.MaestroUsa) {
+		var ret GenericPmWithTdiInfo
+		return ret
+	}
+	return *o.MaestroUsa
+}
+
+// GetMaestroUsaOk returns a tuple with the MaestroUsa field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodSetupInfo) GetMaestroUsaOk() (*GenericPmWithTdiInfo, bool) {
+	if o == nil || common.IsNil(o.MaestroUsa) {
+		return nil, false
+	}
+	return o.MaestroUsa, true
+}
+
+// HasMaestroUsa returns a boolean if a field has been set.
+func (o *PaymentMethodSetupInfo) HasMaestroUsa() bool {
+	if o != nil && !common.IsNil(o.MaestroUsa) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaestroUsa gets a reference to the given GenericPmWithTdiInfo and assigns it to the MaestroUsa field.
+func (o *PaymentMethodSetupInfo) SetMaestroUsa(v GenericPmWithTdiInfo) {
+	o.MaestroUsa = &v
 }
 
 // GetMc returns the Mc field value if set, zero value otherwise.
@@ -1576,6 +1642,9 @@ func (o PaymentMethodSetupInfo) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.AfterpayTouch) {
 		toSerialize["afterpayTouch"] = o.AfterpayTouch
 	}
+	if !common.IsNil(o.AlipayPlus) {
+		toSerialize["alipayPlus"] = o.AlipayPlus
+	}
 	if !common.IsNil(o.Amex) {
 		toSerialize["amex"] = o.Amex
 	}
@@ -1638,6 +1707,9 @@ func (o PaymentMethodSetupInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Maestro) {
 		toSerialize["maestro"] = o.Maestro
+	}
+	if !common.IsNil(o.MaestroUsa) {
+		toSerialize["maestro_usa"] = o.MaestroUsa
 	}
 	if !common.IsNil(o.Mc) {
 		toSerialize["mc"] = o.Mc
@@ -1752,7 +1824,7 @@ func (o *PaymentMethodSetupInfo) isValidShopperInteraction() bool {
 	return false
 }
 func (o *PaymentMethodSetupInfo) isValidType() bool {
-	var allowedEnumValues = []string{"accel", "ach", "affirm", "afterpaytouch", "alelo", "alipay", "alipay_hk", "alipay_wap", "amex", "applepay", "banese_card", "banese_card_credit", "banese_card_debit", "banese_card_prepaid", "bcmc", "blik", "cartebancaire", "clearpay", "clicktopay", "credtodos", "credtodos_private_credit", "credtodos_private_debit", "cup", "diners", "directdebit_GB", "discover", "ebanking_FI", "eft_directdebit_CA", "eftpos_australia", "elo", "elocredit", "elodebit", "girocard", "googlepay", "hiper", "hipercard", "ideal", "interac_card", "jcb", "klarna", "klarna_account", "klarna_paynow", "maestro", "mbway", "mc", "mcdebit", "mealVoucher_FR", "mobilepay", "multibanco", "nyce", "onlineBanking_PL", "paybybank", "paybybank_plaid", "payme", "payme_pos", "paynow", "paynow_pos", "paypal", "payto", "pulse", "sodexo", "star", "swish", "ticket", "todo_giftcard", "trustly", "twint", "twint_pos", "up_brazil_credit", "vale_refeicao", "vale_refeicao_prepaid", "vipps", "visa", "visadebit", "vpay", "wechatpay", "wechatpay_pos"}
+	var allowedEnumValues = []string{"accel", "ach", "affirm", "afterpaytouch", "alelo", "alipay", "alipay_hk", "alipay_plus", "alipay_wap", "amex", "applepay", "avancard", "avancard_credit", "avancard_debit", "banese_card", "banese_card_credit", "banese_card_debit", "banese_card_prepaid", "bcmc", "blik", "cartebancaire", "clearpay", "clicktopay", "cooper", "cooper_credit", "cooper_debit", "cooper_food_debit", "cooper_meal_debit", "cooper_prepaid", "cooper_private_credit", "cooper_retail_credit", "credtodos", "credtodos_private_credit", "credtodos_private_debit", "cup", "diners", "directdebit_GB", "discover", "ebanking_FI", "eft_directdebit_CA", "eftpos_australia", "elo", "elocredit", "elodebit", "girocard", "googlepay", "green_card", "green_card_credit", "green_card_debit", "green_card_food_prepaid", "green_card_meal_prepaid", "green_card_prepaid", "hiper", "hipercard", "ideal", "interac_card", "jcb", "klarna", "klarna_account", "klarna_paynow", "le_card", "le_card_credit", "le_card_debit", "maestro", "maestro_usa", "maxifrota", "maxifrota_prepaid", "mbway", "mc", "mcdebit", "mealVoucher_FR", "megaleve", "megaleve_credit", "megaleve_debit", "mobilepay", "multibanco", "nutricash", "nutricash_prepaid", "nyce", "onlineBanking_PL", "paybybank", "paybybank_plaid", "payme", "payme_pos", "paynow", "paynow_pos", "paypal", "payto", "personal_card", "personal_card_credit", "personal_card_debit", "pulse", "senff", "senff_credit", "sodexo", "star", "swish", "ticket", "todo_giftcard", "trustly", "twint", "twint_pos", "up_brazil", "up_brazil_credit", "up_brazil_debit", "up_brazil_prepaid", "vale_refeicao", "vale_refeicao_prepaid", "vegas_card", "vegas_card_credit", "vegas_card_debit", "vero_card", "vero_card_credit", "vero_card_debit", "vero_card_prepaid", "vipps", "visa", "visadebit", "vpay", "wechatpay", "wechatpay_pos"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

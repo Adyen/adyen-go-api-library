@@ -19,7 +19,8 @@ var _ common.MappedNullable = &PaymentCancelRequest{}
 
 // PaymentCancelRequest struct for PaymentCancelRequest
 type PaymentCancelRequest struct {
-	ApplicationInfo *ApplicationInfo `json:"applicationInfo,omitempty"`
+	ApplicationInfo    *ApplicationInfo    `json:"applicationInfo,omitempty"`
+	EnhancedSchemeData *EnhancedSchemeData `json:"enhancedSchemeData,omitempty"`
 	// The merchant account that is used to process the payment.
 	MerchantAccount string `json:"merchantAccount"`
 	// Your reference for the cancel request. Maximum length: 80 characters.
@@ -74,6 +75,38 @@ func (o *PaymentCancelRequest) HasApplicationInfo() bool {
 // SetApplicationInfo gets a reference to the given ApplicationInfo and assigns it to the ApplicationInfo field.
 func (o *PaymentCancelRequest) SetApplicationInfo(v ApplicationInfo) {
 	o.ApplicationInfo = &v
+}
+
+// GetEnhancedSchemeData returns the EnhancedSchemeData field value if set, zero value otherwise.
+func (o *PaymentCancelRequest) GetEnhancedSchemeData() EnhancedSchemeData {
+	if o == nil || common.IsNil(o.EnhancedSchemeData) {
+		var ret EnhancedSchemeData
+		return ret
+	}
+	return *o.EnhancedSchemeData
+}
+
+// GetEnhancedSchemeDataOk returns a tuple with the EnhancedSchemeData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentCancelRequest) GetEnhancedSchemeDataOk() (*EnhancedSchemeData, bool) {
+	if o == nil || common.IsNil(o.EnhancedSchemeData) {
+		return nil, false
+	}
+	return o.EnhancedSchemeData, true
+}
+
+// HasEnhancedSchemeData returns a boolean if a field has been set.
+func (o *PaymentCancelRequest) HasEnhancedSchemeData() bool {
+	if o != nil && !common.IsNil(o.EnhancedSchemeData) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnhancedSchemeData gets a reference to the given EnhancedSchemeData and assigns it to the EnhancedSchemeData field.
+func (o *PaymentCancelRequest) SetEnhancedSchemeData(v EnhancedSchemeData) {
+	o.EnhancedSchemeData = &v
 }
 
 // GetMerchantAccount returns the MerchantAccount field value
@@ -144,6 +177,9 @@ func (o PaymentCancelRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.ApplicationInfo) {
 		toSerialize["applicationInfo"] = o.ApplicationInfo
+	}
+	if !common.IsNil(o.EnhancedSchemeData) {
+		toSerialize["enhancedSchemeData"] = o.EnhancedSchemeData
 	}
 	toSerialize["merchantAccount"] = o.MerchantAccount
 	if !common.IsNil(o.Reference) {

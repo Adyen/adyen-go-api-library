@@ -22,6 +22,7 @@ type PaymentMethod struct {
 	Accel         *AccelInfo         `json:"accel,omitempty"`
 	Affirm        *AffirmInfo        `json:"affirm,omitempty"`
 	AfterpayTouch *AfterpayTouchInfo `json:"afterpayTouch,omitempty"`
+	AlipayPlus    *AlipayPlusInfo    `json:"alipayPlus,omitempty"`
 	// Indicates whether receiving payments is allowed. This value is set to **true** by Adyen after screening your merchant account.
 	Allowed  *bool         `json:"allowed,omitempty"`
 	Amex     *AmexInfo     `json:"amex,omitempty"`
@@ -53,6 +54,7 @@ type PaymentMethod struct {
 	Jcb            *JCBInfo              `json:"jcb,omitempty"`
 	Klarna         *KlarnaInfo           `json:"klarna,omitempty"`
 	Maestro        *GenericPmWithTdiInfo `json:"maestro,omitempty"`
+	MaestroUsa     *GenericPmWithTdiInfo `json:"maestro_usa,omitempty"`
 	Mc             *GenericPmWithTdiInfo `json:"mc,omitempty"`
 	MealVoucherFR  *MealVoucherFRInfo    `json:"mealVoucher_FR,omitempty"`
 	Nyce           *NyceInfo             `json:"nyce,omitempty"`
@@ -195,6 +197,38 @@ func (o *PaymentMethod) HasAfterpayTouch() bool {
 // SetAfterpayTouch gets a reference to the given AfterpayTouchInfo and assigns it to the AfterpayTouch field.
 func (o *PaymentMethod) SetAfterpayTouch(v AfterpayTouchInfo) {
 	o.AfterpayTouch = &v
+}
+
+// GetAlipayPlus returns the AlipayPlus field value if set, zero value otherwise.
+func (o *PaymentMethod) GetAlipayPlus() AlipayPlusInfo {
+	if o == nil || common.IsNil(o.AlipayPlus) {
+		var ret AlipayPlusInfo
+		return ret
+	}
+	return *o.AlipayPlus
+}
+
+// GetAlipayPlusOk returns a tuple with the AlipayPlus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethod) GetAlipayPlusOk() (*AlipayPlusInfo, bool) {
+	if o == nil || common.IsNil(o.AlipayPlus) {
+		return nil, false
+	}
+	return o.AlipayPlus, true
+}
+
+// HasAlipayPlus returns a boolean if a field has been set.
+func (o *PaymentMethod) HasAlipayPlus() bool {
+	if o != nil && !common.IsNil(o.AlipayPlus) {
+		return true
+	}
+
+	return false
+}
+
+// SetAlipayPlus gets a reference to the given AlipayPlusInfo and assigns it to the AlipayPlus field.
+func (o *PaymentMethod) SetAlipayPlus(v AlipayPlusInfo) {
+	o.AlipayPlus = &v
 }
 
 // GetAllowed returns the Allowed field value if set, zero value otherwise.
@@ -957,6 +991,38 @@ func (o *PaymentMethod) SetMaestro(v GenericPmWithTdiInfo) {
 	o.Maestro = &v
 }
 
+// GetMaestroUsa returns the MaestroUsa field value if set, zero value otherwise.
+func (o *PaymentMethod) GetMaestroUsa() GenericPmWithTdiInfo {
+	if o == nil || common.IsNil(o.MaestroUsa) {
+		var ret GenericPmWithTdiInfo
+		return ret
+	}
+	return *o.MaestroUsa
+}
+
+// GetMaestroUsaOk returns a tuple with the MaestroUsa field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethod) GetMaestroUsaOk() (*GenericPmWithTdiInfo, bool) {
+	if o == nil || common.IsNil(o.MaestroUsa) {
+		return nil, false
+	}
+	return o.MaestroUsa, true
+}
+
+// HasMaestroUsa returns a boolean if a field has been set.
+func (o *PaymentMethod) HasMaestroUsa() bool {
+	if o != nil && !common.IsNil(o.MaestroUsa) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaestroUsa gets a reference to the given GenericPmWithTdiInfo and assigns it to the MaestroUsa field.
+func (o *PaymentMethod) SetMaestroUsa(v GenericPmWithTdiInfo) {
+	o.MaestroUsa = &v
+}
+
 // GetMc returns the Mc field value if set, zero value otherwise.
 func (o *PaymentMethod) GetMc() GenericPmWithTdiInfo {
 	if o == nil || common.IsNil(o.Mc) {
@@ -1712,6 +1778,9 @@ func (o PaymentMethod) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.AfterpayTouch) {
 		toSerialize["afterpayTouch"] = o.AfterpayTouch
 	}
+	if !common.IsNil(o.AlipayPlus) {
+		toSerialize["alipayPlus"] = o.AlipayPlus
+	}
 	if !common.IsNil(o.Allowed) {
 		toSerialize["allowed"] = o.Allowed
 	}
@@ -1781,6 +1850,9 @@ func (o PaymentMethod) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Maestro) {
 		toSerialize["maestro"] = o.Maestro
+	}
+	if !common.IsNil(o.MaestroUsa) {
+		toSerialize["maestro_usa"] = o.MaestroUsa
 	}
 	if !common.IsNil(o.Mc) {
 		toSerialize["mc"] = o.Mc
