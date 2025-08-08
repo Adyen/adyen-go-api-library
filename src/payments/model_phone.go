@@ -10,8 +10,7 @@ package payments
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the Phone type satisfies the MappedNullable interface at compile time
@@ -19,9 +18,9 @@ var _ common.MappedNullable = &Phone{}
 
 // Phone struct for Phone
 type Phone struct {
-	// Country code. Length: 1–3 characters.
+	// Country code. Length: 1–3 digits.
 	Cc *string `json:"cc,omitempty"`
-	// Subscriber number. Maximum length: 15 characters.
+	// Subscriber number. Length: 4-15  digits.
 	Subscriber *string `json:"subscriber,omitempty"`
 }
 
@@ -107,7 +106,7 @@ func (o *Phone) SetSubscriber(v string) {
 }
 
 func (o Phone) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -160,3 +159,6 @@ func (v *NullablePhone) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

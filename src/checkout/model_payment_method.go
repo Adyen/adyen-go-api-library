@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the PaymentMethod type satisfies the MappedNullable interface at compile time
@@ -28,15 +27,17 @@ type PaymentMethod struct {
 	// The configuration of the payment method.
 	Configuration *map[string]string `json:"configuration,omitempty"`
 	// The funding source of the payment method.
-	FundingSource *string             `json:"fundingSource,omitempty"`
-	Group         *PaymentMethodGroup `json:"group,omitempty"`
+	FundingSource *string `json:"fundingSource,omitempty"`
+	Group *PaymentMethodGroup `json:"group,omitempty"`
 	// All input details to be provided to complete the payment with this payment method.
-	// Deprecated
+    // Deprecated 
 	InputDetails []InputDetail `json:"inputDetails,omitempty"`
 	// A list of issuers for this payment method.
 	Issuers []PaymentMethodIssuer `json:"issuers,omitempty"`
 	// The displayable name of this payment method.
 	Name *string `json:"name,omitempty"`
+	// Indicates whether this payment method should be promoted or not.
+	Promoted *bool `json:"promoted,omitempty"`
 	// The unique payment method code.
 	Type *string `json:"type,omitempty"`
 }
@@ -251,7 +252,7 @@ func (o *PaymentMethod) SetGroup(v PaymentMethodGroup) {
 }
 
 // GetInputDetails returns the InputDetails field value if set, zero value otherwise.
-// Deprecated
+// Deprecated 
 func (o *PaymentMethod) GetInputDetails() []InputDetail {
 	if o == nil || common.IsNil(o.InputDetails) {
 		var ret []InputDetail
@@ -262,7 +263,7 @@ func (o *PaymentMethod) GetInputDetails() []InputDetail {
 
 // GetInputDetailsOk returns a tuple with the InputDetails field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
+// Deprecated 
 func (o *PaymentMethod) GetInputDetailsOk() ([]InputDetail, bool) {
 	if o == nil || common.IsNil(o.InputDetails) {
 		return nil, false
@@ -280,7 +281,7 @@ func (o *PaymentMethod) HasInputDetails() bool {
 }
 
 // SetInputDetails gets a reference to the given []InputDetail and assigns it to the InputDetails field.
-// Deprecated
+// Deprecated 
 func (o *PaymentMethod) SetInputDetails(v []InputDetail) {
 	o.InputDetails = v
 }
@@ -349,6 +350,38 @@ func (o *PaymentMethod) SetName(v string) {
 	o.Name = &v
 }
 
+// GetPromoted returns the Promoted field value if set, zero value otherwise.
+func (o *PaymentMethod) GetPromoted() bool {
+	if o == nil || common.IsNil(o.Promoted) {
+		var ret bool
+		return ret
+	}
+	return *o.Promoted
+}
+
+// GetPromotedOk returns a tuple with the Promoted field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethod) GetPromotedOk() (*bool, bool) {
+	if o == nil || common.IsNil(o.Promoted) {
+		return nil, false
+	}
+	return o.Promoted, true
+}
+
+// HasPromoted returns a boolean if a field has been set.
+func (o *PaymentMethod) HasPromoted() bool {
+	if o != nil && !common.IsNil(o.Promoted) {
+		return true
+	}
+
+	return false
+}
+
+// SetPromoted gets a reference to the given bool and assigns it to the Promoted field.
+func (o *PaymentMethod) SetPromoted(v bool) {
+	o.Promoted = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *PaymentMethod) GetType() string {
 	if o == nil || common.IsNil(o.Type) {
@@ -382,7 +415,7 @@ func (o *PaymentMethod) SetType(v string) {
 }
 
 func (o PaymentMethod) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -417,6 +450,9 @@ func (o PaymentMethod) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Name) {
 		toSerialize["name"] = o.Name
+	}
+	if !common.IsNil(o.Promoted) {
+		toSerialize["promoted"] = o.Promoted
 	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type
@@ -460,12 +496,14 @@ func (v *NullablePaymentMethod) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *PaymentMethod) isValidFundingSource() bool {
-	var allowedEnumValues = []string{"credit", "debit"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetFundingSource() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "credit", "debit" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetFundingSource() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

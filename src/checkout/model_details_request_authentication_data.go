@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the DetailsRequestAuthenticationData type satisfies the MappedNullable interface at compile time
@@ -19,7 +18,7 @@ var _ common.MappedNullable = &DetailsRequestAuthenticationData{}
 
 // DetailsRequestAuthenticationData struct for DetailsRequestAuthenticationData
 type DetailsRequestAuthenticationData struct {
-	// If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only), and not the payment authorisation. Default: *false**.
+	// Required to trigger the [authentication-only flow](https://docs.adyen.com/online-payments/3d-secure/authentication-only/). If set to **true**, you will only perform the 3D Secure 2 authentication, and will not proceed to the payment authorization.Default: **false**.
 	AuthenticationOnly *bool `json:"authenticationOnly,omitempty"`
 }
 
@@ -77,7 +76,7 @@ func (o *DetailsRequestAuthenticationData) SetAuthenticationOnly(v bool) {
 }
 
 func (o DetailsRequestAuthenticationData) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -127,3 +126,6 @@ func (v *NullableDetailsRequestAuthenticationData) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

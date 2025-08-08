@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the StandalonePaymentCancelRequest type satisfies the MappedNullable interface at compile time
@@ -20,6 +19,7 @@ var _ common.MappedNullable = &StandalonePaymentCancelRequest{}
 // StandalonePaymentCancelRequest struct for StandalonePaymentCancelRequest
 type StandalonePaymentCancelRequest struct {
 	ApplicationInfo *ApplicationInfo `json:"applicationInfo,omitempty"`
+	EnhancedSchemeData *EnhancedSchemeData `json:"enhancedSchemeData,omitempty"`
 	// The merchant account that is used to process the payment.
 	MerchantAccount string `json:"merchantAccount"`
 	// The [`reference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__reqParam_reference) of the payment that you want to cancel.
@@ -77,6 +77,38 @@ func (o *StandalonePaymentCancelRequest) HasApplicationInfo() bool {
 // SetApplicationInfo gets a reference to the given ApplicationInfo and assigns it to the ApplicationInfo field.
 func (o *StandalonePaymentCancelRequest) SetApplicationInfo(v ApplicationInfo) {
 	o.ApplicationInfo = &v
+}
+
+// GetEnhancedSchemeData returns the EnhancedSchemeData field value if set, zero value otherwise.
+func (o *StandalonePaymentCancelRequest) GetEnhancedSchemeData() EnhancedSchemeData {
+	if o == nil || common.IsNil(o.EnhancedSchemeData) {
+		var ret EnhancedSchemeData
+		return ret
+	}
+	return *o.EnhancedSchemeData
+}
+
+// GetEnhancedSchemeDataOk returns a tuple with the EnhancedSchemeData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StandalonePaymentCancelRequest) GetEnhancedSchemeDataOk() (*EnhancedSchemeData, bool) {
+	if o == nil || common.IsNil(o.EnhancedSchemeData) {
+		return nil, false
+	}
+	return o.EnhancedSchemeData, true
+}
+
+// HasEnhancedSchemeData returns a boolean if a field has been set.
+func (o *StandalonePaymentCancelRequest) HasEnhancedSchemeData() bool {
+	if o != nil && !common.IsNil(o.EnhancedSchemeData) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnhancedSchemeData gets a reference to the given EnhancedSchemeData and assigns it to the EnhancedSchemeData field.
+func (o *StandalonePaymentCancelRequest) SetEnhancedSchemeData(v EnhancedSchemeData) {
+	o.EnhancedSchemeData = &v
 }
 
 // GetMerchantAccount returns the MerchantAccount field value
@@ -160,7 +192,7 @@ func (o *StandalonePaymentCancelRequest) SetReference(v string) {
 }
 
 func (o StandalonePaymentCancelRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -171,6 +203,9 @@ func (o StandalonePaymentCancelRequest) ToMap() (map[string]interface{}, error) 
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.ApplicationInfo) {
 		toSerialize["applicationInfo"] = o.ApplicationInfo
+	}
+	if !common.IsNil(o.EnhancedSchemeData) {
+		toSerialize["enhancedSchemeData"] = o.EnhancedSchemeData
 	}
 	toSerialize["merchantAccount"] = o.MerchantAccount
 	toSerialize["paymentReference"] = o.PaymentReference
@@ -215,3 +250,6 @@ func (v *NullableStandalonePaymentCancelRequest) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

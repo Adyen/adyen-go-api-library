@@ -1,5 +1,5 @@
 /*
-Negative balance compensation warning
+Negative balance compensation warning 
 
 API version: 1
 */
@@ -10,9 +10,8 @@ package negativebalancewarningwebhook
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 	"time"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the NegativeBalanceCompensationWarningNotificationData type satisfies the MappedNullable interface at compile time
@@ -21,10 +20,10 @@ var _ common.MappedNullable = &NegativeBalanceCompensationWarningNotificationDat
 // NegativeBalanceCompensationWarningNotificationData struct for NegativeBalanceCompensationWarningNotificationData
 type NegativeBalanceCompensationWarningNotificationData struct {
 	AccountHolder *ResourceReference `json:"accountHolder,omitempty"`
-	Amount        *Amount            `json:"amount,omitempty"`
+	Amount *Amount `json:"amount,omitempty"`
 	// The unique identifier of the balance platform.
 	BalancePlatform *string `json:"balancePlatform,omitempty"`
-	// The date and time when the event was triggered, in ISO 8601 extended format. For example, **2020-12-18T10:15:30+01:00**.
+	// The date and time when the event was triggered, in ISO 8601 extended format. For example, **2025-03-19T10:15:30+01:00**.
 	CreationDate *time.Time `json:"creationDate,omitempty"`
 	// The ID of the resource.
 	Id *string `json:"id,omitempty"`
@@ -310,7 +309,7 @@ func (o *NegativeBalanceCompensationWarningNotificationData) SetScheduledCompens
 }
 
 func (o NegativeBalanceCompensationWarningNotificationData) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -381,3 +380,6 @@ func (v *NullableNegativeBalanceCompensationWarningNotificationData) UnmarshalJS
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
