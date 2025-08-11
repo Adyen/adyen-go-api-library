@@ -10,7 +10,8 @@ package balanceplatform
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the BalanceWebhookSettingInfo type satisfies the MappedNullable interface at compile time
@@ -179,7 +180,7 @@ func (o *BalanceWebhookSettingInfo) SetType(v string) {
 }
 
 func (o BalanceWebhookSettingInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -234,23 +235,21 @@ func (v *NullableBalanceWebhookSettingInfo) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *BalanceWebhookSettingInfo) isValidStatus() bool {
-    var allowedEnumValues = []string{ "active", "inactive" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetStatus() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"active", "inactive"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetStatus() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *BalanceWebhookSettingInfo) isValidType() bool {
-    var allowedEnumValues = []string{ "balance" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"balance"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

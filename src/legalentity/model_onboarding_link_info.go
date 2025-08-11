@@ -10,7 +10,8 @@ package legalentity
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the OnboardingLinkInfo type satisfies the MappedNullable interface at compile time
@@ -21,8 +22,8 @@ type OnboardingLinkInfo struct {
 	// The language that will be used for the page, specified by a combination of two letter [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language and [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. See possible valuesfor [marketplaces](https://docs.adyen.com/marketplaces/onboard-users/hosted#supported-languages) or [platforms](https://docs.adyen.com/platforms/onboard-users/hosted#supported-languages).   If not specified in the request or if the language is not supported, the page uses the browser language. If the browser language is not supported, the page uses **en-US** by default.
 	Locale *string `json:"locale,omitempty"`
 	// The URL where the user is redirected after they complete hosted onboarding.
-	RedirectUrl *string `json:"redirectUrl,omitempty"`
-	Settings *OnboardingLinkSettings `json:"settings,omitempty"`
+	RedirectUrl *string                 `json:"redirectUrl,omitempty"`
+	Settings    *OnboardingLinkSettings `json:"settings,omitempty"`
 	// The unique identifier of the hosted onboarding theme.
 	ThemeId *string `json:"themeId,omitempty"`
 }
@@ -173,7 +174,7 @@ func (o *OnboardingLinkInfo) SetThemeId(v string) {
 }
 
 func (o OnboardingLinkInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -232,6 +233,3 @@ func (v *NullableOnboardingLinkInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

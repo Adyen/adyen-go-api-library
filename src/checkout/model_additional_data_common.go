@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the AdditionalDataCommon type satisfies the MappedNullable interface at compile time
@@ -18,7 +19,7 @@ var _ common.MappedNullable = &AdditionalDataCommon{}
 
 // AdditionalDataCommon struct for AdditionalDataCommon
 type AdditionalDataCommon struct {
-	// Triggers test scenarios that allow to replicate certain acquirer response codes. See [Testing result codes and refusal reasons](https://docs.adyen.com/development-resources/testing/result-codes/) to learn about the possible values, and the `refusalReason` values you can trigger. 
+	// Triggers test scenarios that allow to replicate certain acquirer response codes. See [Testing result codes and refusal reasons](https://docs.adyen.com/development-resources/testing/result-codes/) to learn about the possible values, and the `refusalReason` values you can trigger.
 	RequestedTestAcquirerResponseCode *string `json:"RequestedTestAcquirerResponseCode,omitempty"`
 	// Triggers test scenarios that allow to replicate certain communication errors.  Allowed values: * **NO_CONNECTION_AVAILABLE** – There wasn't a connection available to service the outgoing communication. This is a transient, retriable error since no messaging could be initiated to an issuing system (or third-party acquiring system). Therefore, the header Transient-Error: true is returned in the response. A subsequent request using the same idempotency key will be processed as if it was the first request. * **IOEXCEPTION_RECEIVED** – Something went wrong during transmission of the message or receiving the response. This is a classified as non-transient because the message could have been received by the issuing party and been acted upon. No transient error header is returned. If using idempotency, the (error) response is stored as the final result for the idempotency key. Subsequent messages with the same idempotency key not be processed beyond returning the stored response.
 	RequestedTestErrorResponseCode *string `json:"RequestedTestErrorResponseCode,omitempty"`
@@ -752,7 +753,7 @@ func (o *AdditionalDataCommon) SetSubMerchantTaxId(v string) {
 }
 
 func (o AdditionalDataCommon) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -863,14 +864,12 @@ func (v *NullableAdditionalDataCommon) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *AdditionalDataCommon) isValidIndustryUsage() bool {
-    var allowedEnumValues = []string{ "NoShow", "DelayedCharge" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetIndustryUsage() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"NoShow", "DelayedCharge"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetIndustryUsage() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

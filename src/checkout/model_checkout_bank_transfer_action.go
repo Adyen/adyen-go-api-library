@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the CheckoutBankTransferAction type satisfies the MappedNullable interface at compile time
@@ -37,7 +38,7 @@ type CheckoutBankTransferAction struct {
 	// The e-mail of the shopper, included if an e-mail was sent to the shopper.
 	ShopperEmail *string `json:"shopperEmail,omitempty"`
 	// The sort code of the bank transfer.
-	SortCode *string `json:"sortCode,omitempty"`
+	SortCode    *string `json:"sortCode,omitempty"`
 	TotalAmount *Amount `json:"totalAmount,omitempty"`
 	// The type of the action.
 	Type string `json:"type"`
@@ -472,7 +473,7 @@ func (o *CheckoutBankTransferAction) SetUrl(v string) {
 }
 
 func (o CheckoutBankTransferAction) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -557,14 +558,12 @@ func (v *NullableCheckoutBankTransferAction) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *CheckoutBankTransferAction) isValidType() bool {
-    var allowedEnumValues = []string{ "bankTransfer" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"bankTransfer"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

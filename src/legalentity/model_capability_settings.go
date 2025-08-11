@@ -10,7 +10,8 @@ package legalentity
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the CapabilitySettings type satisfies the MappedNullable interface at compile time
@@ -25,7 +26,7 @@ type CapabilitySettings struct {
 	// The funding source of the card, for example **debit**.
 	FundingSource []string `json:"fundingSource,omitempty"`
 	// The period when the rule conditions apply.
-	Interval *string `json:"interval,omitempty"`
+	Interval  *string `json:"interval,omitempty"`
 	MaxAmount *Amount `json:"maxAmount,omitempty"`
 }
 
@@ -207,7 +208,7 @@ func (o *CapabilitySettings) SetMaxAmount(v Amount) {
 }
 
 func (o CapabilitySettings) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -270,14 +271,12 @@ func (v *NullableCapabilitySettings) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *CapabilitySettings) isValidInterval() bool {
-    var allowedEnumValues = []string{ "daily", "monthly", "weekly" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetInterval() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"daily", "monthly", "weekly"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetInterval() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

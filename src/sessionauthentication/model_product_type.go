@@ -10,7 +10,6 @@ package sessionauthentication
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
 	"fmt"
 )
 
@@ -20,7 +19,7 @@ type ProductType string
 // List of ProductType
 const (
 	ONBOARDING ProductType = "onboarding"
-	PLATFORM ProductType = "platform"
+	PLATFORM   ProductType = "platform"
 )
 
 // All allowed values of ProductType enum
@@ -107,4 +106,3 @@ func (v *NullableProductType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

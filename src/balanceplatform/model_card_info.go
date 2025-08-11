@@ -10,7 +10,8 @@ package balanceplatform
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the CardInfo type satisfies the MappedNullable interface at compile time
@@ -24,9 +25,9 @@ type CardInfo struct {
 	// The brand variant of the physical or the virtual card. For example, **visadebit** or **mcprepaid**. >Reach out to your Adyen contact to get the values relevant for your integration.
 	BrandVariant string `json:"brandVariant"`
 	// The name of the cardholder.  Maximum length: 26 characters.
-	CardholderName string `json:"cardholderName"`
-	Configuration *CardConfiguration `json:"configuration,omitempty"`
-	DeliveryContact *DeliveryContact `json:"deliveryContact,omitempty"`
+	CardholderName  string             `json:"cardholderName"`
+	Configuration   *CardConfiguration `json:"configuration,omitempty"`
+	DeliveryContact *DeliveryContact   `json:"deliveryContact,omitempty"`
 	// The form factor of the card. Possible values: **virtual**, **physical**.
 	FormFactor string `json:"formFactor"`
 	// The 3DS configuration of the physical or the virtual card. Possible values: **fullySupported**, **secureCorporate**. > Reach out to your Adyen contact to get the values relevant for your integration.
@@ -313,7 +314,7 @@ func (o *CardInfo) SetUsage(v string) {
 }
 
 func (o CardInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -380,14 +381,12 @@ func (v *NullableCardInfo) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *CardInfo) isValidFormFactor() bool {
-    var allowedEnumValues = []string{ "physical", "unknown", "virtual" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetFormFactor() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"physical", "unknown", "virtual"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetFormFactor() == allowed {
+			return true
+		}
+	}
+	return false
 }
-
