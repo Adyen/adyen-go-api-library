@@ -10,9 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 	"time"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the Leg type satisfies the MappedNullable interface at compile time
@@ -32,7 +31,7 @@ type Leg struct {
 	DepartureTax *int64 `json:"departureTax,omitempty"`
 	// The [IATA](https://www.iata.org/services/pages/codes.aspx) 3-letter airport code of the destination airport. This field is required if the airline data includes leg details. * Example: Amsterdam = AMS * Encoding: ASCII * minLength: 3 characters * maxLength: 3 characters * Must not start with a space or be all spaces. * Must not be all zeros.
 	DestinationAirportCode *string `json:"destinationAirportCode,omitempty"`
-	// The [fare basis code](https://en.wikipedia.org/wiki/Fare_basis_code), alphanumeric. * minLength: 1 character * maxLength: 6 characters * Must not start with a space or be all spaces. * Must not be all zeros.
+	// The [fare basis code](https://en.wikipedia.org/wiki/Fare_basis_code), alphanumeric. * minLength: 1 character * maxLength: 15 characters * Must not start with a space or be all spaces. * Must not be all zeros.
 	FareBasisCode *string `json:"fareBasisCode,omitempty"`
 	// The flight identifier. * minLength: 1 character * maxLength: 5 characters * Must not start with a space or be all spaces. * Must not be all zeros.
 	FlightNumber *string `json:"flightNumber,omitempty"`
@@ -346,7 +345,7 @@ func (o *Leg) SetStopOverCode(v string) {
 }
 
 func (o Leg) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -420,3 +419,6 @@ func (v *NullableLeg) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the AdditionalDataSubMerchant type satisfies the MappedNullable interface at compile time
@@ -31,7 +30,7 @@ type AdditionalDataSubMerchant struct {
 	SubMerchantSubSellerSubSellerNrId *string `json:"subMerchant.subSeller[subSellerNr].id,omitempty"`
 	// Required for transactions performed by registered payment facilitators. The sub-merchant's 4-digit Merchant Category Code (MCC).  * Format: Numeric * Fixed length: 4 digits
 	SubMerchantSubSellerSubSellerNrMcc *string `json:"subMerchant.subSeller[subSellerNr].mcc,omitempty"`
-	// Required for transactions performed by registered payment facilitators. The name of the sub-merchant. Based on scheme specifications, this value will overwrite the shopper statement  that will appear in the card statement. * Format: Alphanumeric * Maximum length: 22 characters
+	// Required for transactions performed by registered payment facilitators. The name of the sub-merchant. Based on scheme specifications, this value will overwrite the shopper statement  that will appear in the card statement. Exception: for acquirers in Brazil, this value does not overwrite the shopper statement. * Format: Alphanumeric * Maximum length: 22 characters
 	SubMerchantSubSellerSubSellerNrName *string `json:"subMerchant.subSeller[subSellerNr].name,omitempty"`
 	// Required for transactions performed by registered payment facilitators. The phone number of the sub-merchant.* Format: Alphanumeric * Maximum length: 20 characters
 	SubMerchantSubSellerSubSellerNrPhoneNumber *string `json:"subMerchant.subSeller[subSellerNr].phoneNumber,omitempty"`
@@ -447,7 +446,7 @@ func (o *AdditionalDataSubMerchant) SetSubMerchantSubSellerSubSellerNrTaxId(v st
 }
 
 func (o AdditionalDataSubMerchant) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -530,3 +529,6 @@ func (v *NullableAdditionalDataSubMerchant) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

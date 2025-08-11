@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the Card type satisfies the MappedNullable interface at compile time
@@ -27,20 +26,22 @@ type Card struct {
 	// The brand variant of the physical or the virtual card. For example, **visadebit** or **mcprepaid**. >Reach out to your Adyen contact to get the values relevant for your integration.
 	BrandVariant string `json:"brandVariant"`
 	// The name of the cardholder.  Maximum length: 26 characters.
-	CardholderName string             `json:"cardholderName"`
-	Configuration  *CardConfiguration `json:"configuration,omitempty"`
+	CardholderName string `json:"cardholderName"`
+	Configuration *CardConfiguration `json:"configuration,omitempty"`
 	// The CVC2 value of the card. > The CVC2 is not sent by default. This is only returned in the `POST` response for single-use virtual cards.
-	Cvc             *string          `json:"cvc,omitempty"`
+	Cvc *string `json:"cvc,omitempty"`
 	DeliveryContact *DeliveryContact `json:"deliveryContact,omitempty"`
-	Expiration      *Expiry          `json:"expiration,omitempty"`
+	Expiration *Expiry `json:"expiration,omitempty"`
 	// The form factor of the card. Possible values: **virtual**, **physical**.
 	FormFactor string `json:"formFactor"`
 	// Last last four digits of the card number.
 	LastFour *string `json:"lastFour,omitempty"`
 	// The primary account number (PAN) of the card. > The PAN is masked by default and returned only for single-use virtual cards.
 	Number string `json:"number"`
-	// Allocates a specific product range for either a physical or a virtual card. Possible values: **fullySupported**, **secureCorporate**. >Reach out to your Adyen contact to get the values relevant for your integration.
+	// The 3DS configuration of the physical or the virtual card. Possible values: **fullySupported**, **secureCorporate**. > Reach out to your Adyen contact to get the values relevant for your integration.
 	ThreeDSecure *string `json:"threeDSecure,omitempty"`
+	// Specifies how many times the card can be used. Possible values: **singleUse**, **multiUse**.  > Reach out to your Adyen contact to determine the value relevant for your integration.
+	Usage *string `json:"usage,omitempty"`
 }
 
 // NewCard instantiates a new Card object
@@ -441,8 +442,40 @@ func (o *Card) SetThreeDSecure(v string) {
 	o.ThreeDSecure = &v
 }
 
+// GetUsage returns the Usage field value if set, zero value otherwise.
+func (o *Card) GetUsage() string {
+	if o == nil || common.IsNil(o.Usage) {
+		var ret string
+		return ret
+	}
+	return *o.Usage
+}
+
+// GetUsageOk returns a tuple with the Usage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Card) GetUsageOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Usage) {
+		return nil, false
+	}
+	return o.Usage, true
+}
+
+// HasUsage returns a boolean if a field has been set.
+func (o *Card) HasUsage() bool {
+	if o != nil && !common.IsNil(o.Usage) {
+		return true
+	}
+
+	return false
+}
+
+// SetUsage gets a reference to the given string and assigns it to the Usage field.
+func (o *Card) SetUsage(v string) {
+	o.Usage = &v
+}
+
 func (o Card) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -479,6 +512,9 @@ func (o Card) ToMap() (map[string]interface{}, error) {
 	toSerialize["number"] = o.Number
 	if !common.IsNil(o.ThreeDSecure) {
 		toSerialize["threeDSecure"] = o.ThreeDSecure
+	}
+	if !common.IsNil(o.Usage) {
+		toSerialize["usage"] = o.Usage
 	}
 	return toSerialize, nil
 }
@@ -519,12 +555,14 @@ func (v *NullableCard) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *Card) isValidFormFactor() bool {
-	var allowedEnumValues = []string{"physical", "unknown", "virtual"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetFormFactor() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "physical", "unknown", "virtual" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetFormFactor() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

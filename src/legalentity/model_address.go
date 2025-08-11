@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the Address type satisfies the MappedNullable interface at compile time
@@ -23,9 +22,9 @@ type Address struct {
 	City *string `json:"city,omitempty"`
 	// The two-letter [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code.
 	Country string `json:"country"`
-	// Postal code. Required if `stateOrProvince` and/or `city` is provided.
+	// The postal code. Required if `stateOrProvince` and/or `city` is provided.  When using alphanumeric postal codes, all letters must be uppercase. For example, 1234 AB or SW1A 1AA.
 	PostalCode *string `json:"postalCode,omitempty"`
-	// The two-letter ISO 3166-2 state or province code. For example, **CA** in the US.  If you specify the state or province, you must also send `city`, `postalCode`, and `street`.
+	// The two-letter ISO 3166-2 state or province code. For example, **CA** in the US. Required for Australia and New Zealand.  If you specify the state or province, you must also send `city`, `postalCode`, and `street`.
 	StateOrProvince *string `json:"stateOrProvince,omitempty"`
 	// The name of the street, and the house or building number. Required if `stateOrProvince` and/or `city` is provided.
 	Street *string `json:"street,omitempty"`
@@ -236,7 +235,7 @@ func (o *Address) SetStreet2(v string) {
 }
 
 func (o Address) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -299,3 +298,6 @@ func (v *NullableAddress) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
