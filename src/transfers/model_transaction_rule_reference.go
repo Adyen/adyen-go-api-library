@@ -10,8 +10,7 @@ package transfers
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the TransactionRuleReference type satisfies the MappedNullable interface at compile time
@@ -27,7 +26,7 @@ type TransactionRuleReference struct {
 	OutcomeType *string `json:"outcomeType,omitempty"`
 	// The reference for the resource.
 	Reference *string `json:"reference,omitempty"`
-	// The score of the rule in case it's a scoreBased rule.
+	// The transaction score determined by the rule. Returned only when `outcomeType` is **scoreBased**.
 	Score *int32 `json:"score,omitempty"`
 }
 
@@ -209,7 +208,7 @@ func (o *TransactionRuleReference) SetScore(v int32) {
 }
 
 func (o TransactionRuleReference) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -271,3 +270,6 @@ func (v *NullableTransactionRuleReference) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

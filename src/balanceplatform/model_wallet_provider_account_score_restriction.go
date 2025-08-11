@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the WalletProviderAccountScoreRestriction type satisfies the MappedNullable interface at compile time
@@ -21,7 +20,7 @@ var _ common.MappedNullable = &WalletProviderAccountScoreRestriction{}
 type WalletProviderAccountScoreRestriction struct {
 	// Defines how the condition must be evaluated.
 	Operation string `json:"operation"`
-	Value     *int32 `json:"value,omitempty"`
+	Value *int32 `json:"value,omitempty"`
 }
 
 // NewWalletProviderAccountScoreRestriction instantiates a new WalletProviderAccountScoreRestriction object
@@ -99,7 +98,7 @@ func (o *WalletProviderAccountScoreRestriction) SetValue(v int32) {
 }
 
 func (o WalletProviderAccountScoreRestriction) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -150,3 +149,6 @@ func (v *NullableWalletProviderAccountScoreRestriction) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
