@@ -70,7 +70,7 @@ const (
 	BalancePlatformAPIVersion       = "v2"
 	TransfersAPIVersion             = "v4"
 	ManagementAPIVersion            = "v3"
-	LegalEntityAPIVersion           = "v3"
+	LegalEntityAPIVersion           = "v4"
 	PosTerminalManagementAPIVersion = "v1"
 	DataProtectionAPIVersion        = "v1"
 )
@@ -80,21 +80,21 @@ const (
 type APIClient struct {
 	client *common.Client
 	// API Services
-	checkout       *checkout.APIClient
-	payments       *payments.APIClient
-	paymentsApp    *paymentsapp.PaymentsAppApi
-	payout         *payout.APIClient
-	recurring      *recurring.GeneralApi
-	binLookup      *binlookup.GeneralApi
-	balancecontrol *balancecontrol.GeneralApi
-	posTerminalManagement              *posterminalmanagement.GeneralApi
-	disputes                           *disputes.GeneralApi
-	storedValue                        *storedvalue.GeneralApi
-	balancePlatform                    *balanceplatform.APIClient
-	transfers                          *transfers.APIClient
-	management                         *management.APIClient
-	legalEntity                        *legalentity.APIClient
-	dataProtection                     *dataprotection.GeneralApi
+	checkout              *checkout.APIClient
+	payments              *payments.APIClient
+	paymentsApp           *paymentsapp.PaymentsAppApi
+	payout                *payout.APIClient
+	recurring             *recurring.GeneralApi
+	binLookup             *binlookup.GeneralApi
+	balancecontrol        *balancecontrol.GeneralApi
+	posTerminalManagement *posterminalmanagement.GeneralApi
+	disputes              *disputes.GeneralApi
+	storedValue           *storedvalue.GeneralApi
+	balancePlatform       *balanceplatform.APIClient
+	transfers             *transfers.APIClient
+	management            *management.APIClient
+	legalEntity           *legalentity.APIClient
+	dataProtection        *dataprotection.GeneralApi
 }
 
 // NewClient optionally a custom http.Client can be passed via the Config allow for advanced features such as caching.
