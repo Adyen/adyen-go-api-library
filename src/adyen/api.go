@@ -70,7 +70,7 @@ const (
 	BalancePlatformAPIVersion       = "v2"
 	TransfersAPIVersion             = "v4"
 	ManagementAPIVersion            = "v3"
-	LegalEntityAPIVersion           = "v3"
+	LegalEntityAPIVersion           = "v4"
 	PosTerminalManagementAPIVersion = "v1"
 	DataProtectionAPIVersion        = "v1"
 )
