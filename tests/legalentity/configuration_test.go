@@ -3,12 +3,13 @@ package legalentity
 import (
 	"context"
 	"encoding/json"
-	"github.com/adyen/adyen-go-api-library/v21/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
-	"github.com/stretchr/testify/assert"
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
+	"github.com/stretchr/testify/assert"
 )
 
 func Test_LegalEntity_Configuration(t *testing.T) {
@@ -16,11 +17,11 @@ func Test_LegalEntity_Configuration(t *testing.T) {
 		testClient := adyen.NewClient(&common.Config{
 			Environment: common.TestEnv,
 		})
-		assert.Equal(t, "https://kyc-test.adyen.com/lem/v3", testClient.LegalEntity().BusinessLinesApi.BasePath())
+		assert.Equal(t, "https://kyc-test.adyen.com/lem/v4", testClient.LegalEntity().BusinessLinesApi.BasePath())
 		liveClient := adyen.NewClient(&common.Config{
 			Environment: common.LiveEnv,
 		})
-		assert.Equal(t, "https://kyc-live.adyen.com/lem/v3", liveClient.LegalEntity().DocumentsApi.BasePath())
+		assert.Equal(t, "https://kyc-live.adyen.com/lem/v4", liveClient.LegalEntity().DocumentsApi.BasePath())
 	})
 
 	basicAuthClient := adyen.NewClient(&common.Config{
