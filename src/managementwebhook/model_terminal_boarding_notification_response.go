@@ -19,7 +19,7 @@ var _ common.MappedNullable = &TerminalBoardingNotificationResponse{}
 
 // TerminalBoardingNotificationResponse struct for TerminalBoardingNotificationResponse
 type TerminalBoardingNotificationResponse struct {
-	// Respond with any **2xx** HTTP status code to [accept the webhook](https://docs.adyen.com/development-resources/webhooks#accept-notifications).
+	// Respond with any **2xx** HTTP status code to [accept the webhook](https://docs.adyen.com/development-resources/webhooks/#accept-webhooks).
 	NotificationResponse *string `json:"notificationResponse,omitempty"`
 }
 
