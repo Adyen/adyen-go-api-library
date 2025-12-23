@@ -19,7 +19,7 @@ var _ common.MappedNullable = &BalanceAccount{}
 
 // BalanceAccount struct for BalanceAccount
 type BalanceAccount struct {
-	// The unique identifier of the [account holder](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/accountHolders__resParam_id) associated with the balance account.
+	// The unique identifier of the [account holder](https://docs.adyen.com/api-explorer/balanceplatform/latest/post/accountHolders#responses-200-id) associated with the balance account.
 	AccountHolderId string `json:"accountHolderId"`
 	// List of balances with the amount and currency.
 	Balances []Balance `json:"balances,omitempty"`

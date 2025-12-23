@@ -43,6 +43,7 @@ type TransactionRuleRestrictions struct {
 	TotalAmount                 *TotalAmountRestriction                `json:"totalAmount,omitempty"`
 	WalletProviderAccountScore  *WalletProviderAccountScoreRestriction `json:"walletProviderAccountScore,omitempty"`
 	WalletProviderDeviceScore   *WalletProviderDeviceScore             `json:"walletProviderDeviceScore,omitempty"`
+	WalletProviderDeviceType    *WalletProviderDeviceType              `json:"walletProviderDeviceType,omitempty"`
 }
 
 // NewTransactionRuleRestrictions instantiates a new TransactionRuleRestrictions object
@@ -830,6 +831,38 @@ func (o *TransactionRuleRestrictions) SetWalletProviderDeviceScore(v WalletProvi
 	o.WalletProviderDeviceScore = &v
 }
 
+// GetWalletProviderDeviceType returns the WalletProviderDeviceType field value if set, zero value otherwise.
+func (o *TransactionRuleRestrictions) GetWalletProviderDeviceType() WalletProviderDeviceType {
+	if o == nil || common.IsNil(o.WalletProviderDeviceType) {
+		var ret WalletProviderDeviceType
+		return ret
+	}
+	return *o.WalletProviderDeviceType
+}
+
+// GetWalletProviderDeviceTypeOk returns a tuple with the WalletProviderDeviceType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionRuleRestrictions) GetWalletProviderDeviceTypeOk() (*WalletProviderDeviceType, bool) {
+	if o == nil || common.IsNil(o.WalletProviderDeviceType) {
+		return nil, false
+	}
+	return o.WalletProviderDeviceType, true
+}
+
+// HasWalletProviderDeviceType returns a boolean if a field has been set.
+func (o *TransactionRuleRestrictions) HasWalletProviderDeviceType() bool {
+	if o != nil && !common.IsNil(o.WalletProviderDeviceType) {
+		return true
+	}
+
+	return false
+}
+
+// SetWalletProviderDeviceType gets a reference to the given WalletProviderDeviceType and assigns it to the WalletProviderDeviceType field.
+func (o *TransactionRuleRestrictions) SetWalletProviderDeviceType(v WalletProviderDeviceType) {
+	o.WalletProviderDeviceType = &v
+}
+
 func (o TransactionRuleRestrictions) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -911,6 +944,9 @@ func (o TransactionRuleRestrictions) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.WalletProviderDeviceScore) {
 		toSerialize["walletProviderDeviceScore"] = o.WalletProviderDeviceScore
+	}
+	if !common.IsNil(o.WalletProviderDeviceType) {
+		toSerialize["walletProviderDeviceType"] = o.WalletProviderDeviceType
 	}
 	return toSerialize, nil
 }
