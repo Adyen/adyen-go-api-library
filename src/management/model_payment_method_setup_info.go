@@ -10,7 +10,8 @@ package management
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the PaymentMethodSetupInfo type satisfies the MappedNullable interface at compile time
@@ -18,66 +19,66 @@ var _ common.MappedNullable = &PaymentMethodSetupInfo{}
 
 // PaymentMethodSetupInfo struct for PaymentMethodSetupInfo
 type PaymentMethodSetupInfo struct {
-	Accel *AccelInfo `json:"accel,omitempty"`
-	Affirm *AffirmInfo `json:"affirm,omitempty"`
+	Accel         *AccelInfo         `json:"accel,omitempty"`
+	Affirm        *AffirmInfo        `json:"affirm,omitempty"`
 	AfterpayTouch *AfterpayTouchInfo `json:"afterpayTouch,omitempty"`
-	AlipayPlus *AlipayPlusInfo `json:"alipayPlus,omitempty"`
-	Amex *AmexInfo `json:"amex,omitempty"`
-	ApplePay *ApplePayInfo `json:"applePay,omitempty"`
-	Bcmc *BcmcInfo `json:"bcmc,omitempty"`
+	AlipayPlus    *AlipayPlusInfo    `json:"alipayPlus,omitempty"`
+	Amex          *AmexInfo          `json:"amex,omitempty"`
+	ApplePay      *ApplePayInfo      `json:"applePay,omitempty"`
+	Bcmc          *BcmcInfo          `json:"bcmc,omitempty"`
 	// The unique identifier of the business line. Required if you are a [platform model](https://docs.adyen.com/platforms).
-	BusinessLineId *string `json:"businessLineId,omitempty"`
+	BusinessLineId  *string              `json:"businessLineId,omitempty"`
 	CartesBancaires *CartesBancairesInfo `json:"cartesBancaires,omitempty"`
-	Clearpay *ClearpayInfo `json:"clearpay,omitempty"`
+	Clearpay        *ClearpayInfo        `json:"clearpay,omitempty"`
 	// The list of countries where a payment method is available. By default, all countries supported by the payment method.
-	Countries []string `json:"countries,omitempty"`
-	Cup *GenericPmWithTdiInfo `json:"cup,omitempty"`
+	Countries []string              `json:"countries,omitempty"`
+	Cup       *GenericPmWithTdiInfo `json:"cup,omitempty"`
 	// The list of currencies that a payment method supports. By default, all currencies supported by the payment method.
 	Currencies []string `json:"currencies,omitempty"`
 	// The list of custom routing flags to route payment to the intended acquirer.
-	CustomRoutingFlags []string `json:"customRoutingFlags,omitempty"`
-	Diners *DinersInfo `json:"diners,omitempty"`
-	Discover *GenericPmWithTdiInfo `json:"discover,omitempty"`
-	EftDirectdebitCA *GenericPmWithTdiInfo `json:"eft_directdebit_CA,omitempty"`
-	EftposAustralia *GenericPmWithTdiInfo `json:"eftpos_australia,omitempty"`
-	Girocard *GenericPmWithTdiInfo `json:"girocard,omitempty"`
-	Givex *GivexInfo `json:"givex,omitempty"`
-	GooglePay *GooglePayInfo `json:"googlePay,omitempty"`
-	Ideal *GenericPmWithTdiInfo `json:"ideal,omitempty"`
-	InteracCard *GenericPmWithTdiInfo `json:"interac_card,omitempty"`
-	Jcb *JCBInfo `json:"jcb,omitempty"`
-	Klarna *KlarnaInfo `json:"klarna,omitempty"`
-	Maestro *GenericPmWithTdiInfo `json:"maestro,omitempty"`
-	MaestroUsa *GenericPmWithTdiInfo `json:"maestro_usa,omitempty"`
-	Mc *GenericPmWithTdiInfo `json:"mc,omitempty"`
-	MealVoucherFR *MealVoucherFRInfo `json:"mealVoucher_FR,omitempty"`
-	Nyce *NyceInfo `json:"nyce,omitempty"`
-	PaybybankPlaid *PayByBankPlaidInfo `json:"paybybank_plaid,omitempty"`
-	Payme *PayMeInfo `json:"payme,omitempty"`
-	Paypal *PayPalInfo `json:"paypal,omitempty"`
-	Payto *PayToInfo `json:"payto,omitempty"`
-	Pulse *PulseInfo `json:"pulse,omitempty"`
+	CustomRoutingFlags []string              `json:"customRoutingFlags,omitempty"`
+	Diners             *DinersInfo           `json:"diners,omitempty"`
+	Discover           *GenericPmWithTdiInfo `json:"discover,omitempty"`
+	EftDirectdebitCA   *GenericPmWithTdiInfo `json:"eft_directdebit_CA,omitempty"`
+	EftposAustralia    *GenericPmWithTdiInfo `json:"eftpos_australia,omitempty"`
+	Girocard           *GenericPmWithTdiInfo `json:"girocard,omitempty"`
+	Givex              *GivexInfo            `json:"givex,omitempty"`
+	GooglePay          *GooglePayInfo        `json:"googlePay,omitempty"`
+	Ideal              *GenericPmWithTdiInfo `json:"ideal,omitempty"`
+	InteracCard        *GenericPmWithTdiInfo `json:"interac_card,omitempty"`
+	Jcb                *JCBInfo              `json:"jcb,omitempty"`
+	Klarna             *KlarnaInfo           `json:"klarna,omitempty"`
+	Maestro            *GenericPmWithTdiInfo `json:"maestro,omitempty"`
+	MaestroUsa         *GenericPmWithTdiInfo `json:"maestro_usa,omitempty"`
+	Mc                 *GenericPmWithTdiInfo `json:"mc,omitempty"`
+	MealVoucherFR      *MealVoucherFRInfo    `json:"mealVoucher_FR,omitempty"`
+	Nyce               *NyceInfo             `json:"nyce,omitempty"`
+	PaybybankPlaid     *PayByBankPlaidInfo   `json:"paybybank_plaid,omitempty"`
+	Payme              *PayMeInfo            `json:"payme,omitempty"`
+	Paypal             *PayPalInfo           `json:"paypal,omitempty"`
+	Payto              *PayToInfo            `json:"payto,omitempty"`
+	Pulse              *PulseInfo            `json:"pulse,omitempty"`
 	// Your reference for the payment method. Supported characters a-z, A-Z, 0-9.
-	Reference *string `json:"reference,omitempty"`
+	Reference       *string              `json:"reference,omitempty"`
 	Sepadirectdebit *SepaDirectDebitInfo `json:"sepadirectdebit,omitempty"`
-	// The sales channel. Required if the merchant account does not have a sales channel. When you provide this field, it overrides the default sales channel set on the merchant account.  Possible values: **eCommerce**, **pos**, **contAuth**, and **moto**. 
-	ShopperInteraction *string `json:"shopperInteraction,omitempty"`
-	Sodexo *SodexoInfo `json:"sodexo,omitempty"`
-	Sofort *SofortInfo `json:"sofort,omitempty"`
-	Star *StarInfo `json:"star,omitempty"`
+	// The sales channel. Required if the merchant account does not have a sales channel. When you provide this field, it overrides the default sales channel set on the merchant account.  Possible values: **eCommerce**, **pos**, **contAuth**, and **moto**.
+	ShopperInteraction *string     `json:"shopperInteraction,omitempty"`
+	Sodexo             *SodexoInfo `json:"sodexo,omitempty"`
+	Sofort             *SofortInfo `json:"sofort,omitempty"`
+	Star               *StarInfo   `json:"star,omitempty"`
 	// The unique identifier of the store for which to configure the payment method, if any.
-	StoreIds []string `json:"storeIds,omitempty"`
-	Svs *SvsInfo `json:"svs,omitempty"`
-	Swish *SwishInfo `json:"swish,omitempty"`
-	Ticket *TicketInfo `json:"ticket,omitempty"`
-	Twint *TwintInfo `json:"twint,omitempty"`
+	StoreIds []string    `json:"storeIds,omitempty"`
+	Svs      *SvsInfo    `json:"svs,omitempty"`
+	Swish    *SwishInfo  `json:"swish,omitempty"`
+	Ticket   *TicketInfo `json:"ticket,omitempty"`
+	Twint    *TwintInfo  `json:"twint,omitempty"`
 	// Payment method [variant](https://docs.adyen.com/development-resources/paymentmethodvariant#management-api).
-	Type string `json:"type"`
-	Valuelink *ValuelinkInfo `json:"valuelink,omitempty"`
-	Vipps *VippsInfo `json:"vipps,omitempty"`
-	Visa *GenericPmWithTdiInfo `json:"visa,omitempty"`
-	Wechatpay *WeChatPayInfo `json:"wechatpay,omitempty"`
-	WechatpayPos *WeChatPayPosInfo `json:"wechatpay_pos,omitempty"`
+	Type         string                `json:"type"`
+	Valuelink    *ValuelinkInfo        `json:"valuelink,omitempty"`
+	Vipps        *VippsInfo            `json:"vipps,omitempty"`
+	Visa         *GenericPmWithTdiInfo `json:"visa,omitempty"`
+	Wechatpay    *WeChatPayInfo        `json:"wechatpay,omitempty"`
+	WechatpayPos *WeChatPayPosInfo     `json:"wechatpay_pos,omitempty"`
 }
 
 // NewPaymentMethodSetupInfo instantiates a new PaymentMethodSetupInfo object
@@ -1755,7 +1756,7 @@ func (o *PaymentMethodSetupInfo) SetWechatpayPos(v WeChatPayPosInfo) {
 }
 
 func (o PaymentMethodSetupInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -1957,23 +1958,21 @@ func (v *NullablePaymentMethodSetupInfo) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *PaymentMethodSetupInfo) isValidShopperInteraction() bool {
-    var allowedEnumValues = []string{ "eCommerce", "pos", "moto", "contAuth" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetShopperInteraction() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"eCommerce", "pos", "moto", "contAuth"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetShopperInteraction() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *PaymentMethodSetupInfo) isValidType() bool {
-    var allowedEnumValues = []string{ "abrapetite", "abrapetite_credit", "abrapetite_debit", "abrapetite_prepaid", "accel", "ach", "affirm", "afterpaytouch", "alelo", "alipay", "alipay_hk", "alipay_plus", "alipay_wap", "amex", "applepay", "avancard", "avancard_credit", "avancard_debit", "banese_card", "banese_card_credit", "banese_card_debit", "banese_card_prepaid", "bcmc", "blik", "blik_pos", "br_schemes", "cartebancaire", "clearpay", "clicktopay", "cooper", "cooper_credit", "cooper_debit", "cooper_food_debit", "cooper_meal_debit", "cooper_prepaid", "cooper_private_credit", "cooper_retail_credit", "credtodos", "credtodos_private_credit", "credtodos_private_debit", "cup", "diners", "directdebit_GB", "discover", "ebanking_FI", "eft_directdebit_CA", "eftpos_australia", "elo", "elocredit", "elodebit", "girocard", "givex", "googlepay", "green_card", "green_card_credit", "green_card_debit", "green_card_food_prepaid", "green_card_meal_prepaid", "green_card_prepaid", "hiper", "hipercard", "ideal", "interac_card", "jcb", "klarna", "klarna_account", "klarna_b2b", "klarna_paynow", "le_card", "le_card_credit", "le_card_debit", "maestro", "maestro_usa", "maxifrota", "maxifrota_prepaid", "mbway", "mc", "mcdebit", "mealVoucher_FR", "megaleve", "megaleve_credit", "megaleve_debit", "mobilepay", "multibanco", "nutricash", "nutricash_prepaid", "nyce", "onlineBanking_PL", "paybybank", "paybybank_plaid", "payme", "payme_pos", "paynow", "paynow_pos", "paypal", "payto", "personal_card", "personal_card_credit", "personal_card_debit", "pulse", "romcard", "romcard_credit", "romcard_debit", "senff", "senff_credit", "sepadirectdebit", "sodexo", "star", "svs", "swish", "ticket", "todo_giftcard", "trustly", "twint", "twint_pos", "up_brazil", "up_brazil_credit", "up_brazil_debit", "up_brazil_prepaid", "vale_refeicao", "vale_refeicao_prepaid", "valuelink", "vegas_card", "vegas_card_credit", "vegas_card_debit", "vero_card", "vero_card_credit", "vero_card_debit", "vero_card_prepaid", "vipps", "visa", "visadebit", "vpay", "wechatpay", "wechatpay_pos" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"abrapetite", "abrapetite_credit", "abrapetite_debit", "abrapetite_prepaid", "accel", "ach", "affirm", "afterpaytouch", "alelo", "alipay", "alipay_hk", "alipay_plus", "alipay_wap", "amex", "applepay", "avancard", "avancard_credit", "avancard_debit", "banese_card", "banese_card_credit", "banese_card_debit", "banese_card_prepaid", "bcmc", "blik", "blik_pos", "br_schemes", "cartebancaire", "clearpay", "clicktopay", "cooper", "cooper_credit", "cooper_debit", "cooper_food_debit", "cooper_meal_debit", "cooper_prepaid", "cooper_private_credit", "cooper_retail_credit", "credtodos", "credtodos_private_credit", "credtodos_private_debit", "cup", "diners", "directdebit_GB", "discover", "ebanking_FI", "eft_directdebit_CA", "eftpos_australia", "elo", "elocredit", "elodebit", "girocard", "givex", "googlepay", "green_card", "green_card_credit", "green_card_debit", "green_card_food_prepaid", "green_card_meal_prepaid", "green_card_prepaid", "hiper", "hipercard", "ideal", "interac_card", "jcb", "klarna", "klarna_account", "klarna_b2b", "klarna_paynow", "le_card", "le_card_credit", "le_card_debit", "maestro", "maestro_usa", "maxifrota", "maxifrota_prepaid", "mbway", "mc", "mcdebit", "mealVoucher_FR", "megaleve", "megaleve_credit", "megaleve_debit", "mobilepay", "multibanco", "nutricash", "nutricash_prepaid", "nyce", "onlineBanking_PL", "paybybank", "paybybank_plaid", "payme", "payme_pos", "paynow", "paynow_pos", "paypal", "payto", "personal_card", "personal_card_credit", "personal_card_debit", "pulse", "romcard", "romcard_credit", "romcard_debit", "senff", "senff_credit", "sepadirectdebit", "sodexo", "star", "svs", "swish", "ticket", "todo_giftcard", "trustly", "twint", "twint_pos", "up_brazil", "up_brazil_credit", "up_brazil_debit", "up_brazil_prepaid", "vale_refeicao", "vale_refeicao_prepaid", "valuelink", "vegas_card", "vegas_card_credit", "vegas_card_debit", "vero_card", "vero_card_credit", "vero_card_debit", "vero_card_prepaid", "vipps", "visa", "visadebit", "vpay", "wechatpay", "wechatpay_pos"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-
