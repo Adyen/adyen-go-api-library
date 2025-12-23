@@ -10,10 +10,10 @@ package recurring
 
 import (
 	"context"
-	"net/http"
-	"net/url"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "net/http"
+    "net/url"
+    "strings"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // GeneralApi service
@@ -29,6 +29,7 @@ func (r GeneralApiCreatePermitInput) CreatePermitRequest(createPermitRequest Cre
 	return r
 }
 
+
 /*
 Prepare a request for CreatePermit
 
@@ -37,7 +38,8 @@ Prepare a request for CreatePermit
 Deprecated since Adyen Recurring API v68
 */
 func (a *GeneralApi) CreatePermitInput() GeneralApiCreatePermitInput {
-	return GeneralApiCreatePermitInput{}
+	return GeneralApiCreatePermitInput{
+	}
 }
 
 /*
@@ -52,23 +54,25 @@ Create permits for a recurring contract, including support for defining restrict
 Deprecated since Adyen Recurring API v68
 */
 func (a *GeneralApi) CreatePermit(ctx context.Context, r GeneralApiCreatePermitInput) (CreatePermitResult, *http.Response, error) {
-	res := &CreatePermitResult{}
+    res := &CreatePermitResult{}
 	path := "/createPermit"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.createPermitRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.createPermitRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by GeneralApi.Disable
 type GeneralApiDisableInput struct {
@@ -80,15 +84,15 @@ func (r GeneralApiDisableInput) DisableRequest(disableRequest DisableRequest) Ge
 	return r
 }
 
+
 /*
 Prepare a request for Disable
 
 @return GeneralApiDisableInput
-
-Deprecated since Adyen Recurring API v68
 */
 func (a *GeneralApi) DisableInput() GeneralApiDisableInput {
-	return GeneralApiDisableInput{}
+	return GeneralApiDisableInput{
+	}
 }
 
 /*
@@ -101,27 +105,27 @@ For more information, refer to [Disable stored details](https://docs.adyen.com/c
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r GeneralApiDisableInput - Request parameters, see DisableInput
 @return DisableResult, *http.Response, error
-
-Deprecated since Adyen Recurring API v68
 */
 func (a *GeneralApi) Disable(ctx context.Context, r GeneralApiDisableInput) (DisableResult, *http.Response, error) {
-	res := &DisableResult{}
+    res := &DisableResult{}
 	path := "/disable"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.disableRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.disableRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by GeneralApi.DisablePermit
 type GeneralApiDisablePermitInput struct {
@@ -133,6 +137,7 @@ func (r GeneralApiDisablePermitInput) DisablePermitRequest(disablePermitRequest 
 	return r
 }
 
+
 /*
 Prepare a request for DisablePermit
 
@@ -141,7 +146,8 @@ Prepare a request for DisablePermit
 Deprecated since Adyen Recurring API v68
 */
 func (a *GeneralApi) DisablePermitInput() GeneralApiDisablePermitInput {
-	return GeneralApiDisablePermitInput{}
+	return GeneralApiDisablePermitInput{
+	}
 }
 
 /*
@@ -156,23 +162,25 @@ Disable a permit that was previously linked to a recurringDetailReference.
 Deprecated since Adyen Recurring API v68
 */
 func (a *GeneralApi) DisablePermit(ctx context.Context, r GeneralApiDisablePermitInput) (DisablePermitResult, *http.Response, error) {
-	res := &DisablePermitResult{}
+    res := &DisablePermitResult{}
 	path := "/disablePermit"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.disablePermitRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.disablePermitRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by GeneralApi.ListRecurringDetails
 type GeneralApiListRecurringDetailsInput struct {
@@ -184,15 +192,15 @@ func (r GeneralApiListRecurringDetailsInput) RecurringDetailsRequest(recurringDe
 	return r
 }
 
+
 /*
 Prepare a request for ListRecurringDetails
 
 @return GeneralApiListRecurringDetailsInput
-
-Deprecated since Adyen Recurring API v68
 */
 func (a *GeneralApi) ListRecurringDetailsInput() GeneralApiListRecurringDetailsInput {
-	return GeneralApiListRecurringDetailsInput{}
+	return GeneralApiListRecurringDetailsInput{
+	}
 }
 
 /*
@@ -205,27 +213,27 @@ For more information, refer to [Retrieve stored details](https://docs.adyen.com/
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r GeneralApiListRecurringDetailsInput - Request parameters, see ListRecurringDetailsInput
 @return RecurringDetailsResult, *http.Response, error
-
-Deprecated since Adyen Recurring API v68
 */
 func (a *GeneralApi) ListRecurringDetails(ctx context.Context, r GeneralApiListRecurringDetailsInput) (RecurringDetailsResult, *http.Response, error) {
-	res := &RecurringDetailsResult{}
+    res := &RecurringDetailsResult{}
 	path := "/listRecurringDetails"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.recurringDetailsRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.recurringDetailsRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by GeneralApi.NotifyShopper
 type GeneralApiNotifyShopperInput struct {
@@ -237,15 +245,15 @@ func (r GeneralApiNotifyShopperInput) NotifyShopperRequest(notifyShopperRequest 
 	return r
 }
 
+
 /*
 Prepare a request for NotifyShopper
 
 @return GeneralApiNotifyShopperInput
-
-Deprecated since Adyen Recurring API v68
 */
 func (a *GeneralApi) NotifyShopperInput() GeneralApiNotifyShopperInput {
-	return GeneralApiNotifyShopperInput{}
+	return GeneralApiNotifyShopperInput{
+	}
 }
 
 /*
@@ -256,27 +264,27 @@ Sends a request to the issuer so they can inform the shopper about the upcoming 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r GeneralApiNotifyShopperInput - Request parameters, see NotifyShopperInput
 @return NotifyShopperResult, *http.Response, error
-
-Deprecated since Adyen Recurring API v68
 */
 func (a *GeneralApi) NotifyShopper(ctx context.Context, r GeneralApiNotifyShopperInput) (NotifyShopperResult, *http.Response, error) {
-	res := &NotifyShopperResult{}
+    res := &NotifyShopperResult{}
 	path := "/notifyShopper"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.notifyShopperRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.notifyShopperRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by GeneralApi.ScheduleAccountUpdater
 type GeneralApiScheduleAccountUpdaterInput struct {
@@ -288,15 +296,15 @@ func (r GeneralApiScheduleAccountUpdaterInput) ScheduleAccountUpdaterRequest(sch
 	return r
 }
 
+
 /*
 Prepare a request for ScheduleAccountUpdater
 
 @return GeneralApiScheduleAccountUpdaterInput
-
-Deprecated since Adyen Recurring API v68
 */
 func (a *GeneralApi) ScheduleAccountUpdaterInput() GeneralApiScheduleAccountUpdaterInput {
-	return GeneralApiScheduleAccountUpdaterInput{}
+	return GeneralApiScheduleAccountUpdaterInput{
+	}
 }
 
 /*
@@ -309,24 +317,24 @@ When making the API call, you can submit either the credit card information, or 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r GeneralApiScheduleAccountUpdaterInput - Request parameters, see ScheduleAccountUpdaterInput
 @return ScheduleAccountUpdaterResult, *http.Response, error
-
-Deprecated since Adyen Recurring API v68
 */
 func (a *GeneralApi) ScheduleAccountUpdater(ctx context.Context, r GeneralApiScheduleAccountUpdaterInput) (ScheduleAccountUpdaterResult, *http.Response, error) {
-	res := &ScheduleAccountUpdaterResult{}
+    res := &ScheduleAccountUpdaterResult{}
 	path := "/scheduleAccountUpdater"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.scheduleAccountUpdaterRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.scheduleAccountUpdaterRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+
