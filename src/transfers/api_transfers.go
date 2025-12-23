@@ -245,6 +245,7 @@ type TransfersApiGetAllTransfersInput struct {
 	paymentInstrumentId *string
 	reference           *string
 	category            *string
+	sortOrder           *string
 	cursor              *string
 	limit               *int32
 }
@@ -294,6 +295,12 @@ func (r TransfersApiGetAllTransfersInput) Reference(reference string) TransfersA
 // The type of transfer.  Possible values:   - **bank**: Transfer to a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id) or a bank account.  - **internal**: Transfer to another [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id) within your platform.  - **issuedCard**: Transfer initiated by a Adyen-issued card.  - **platformPayment**: Fund movements related to payments that are acquired for your users.
 func (r TransfersApiGetAllTransfersInput) Category(category string) TransfersApiGetAllTransfersInput {
 	r.category = &category
+	return r
+}
+
+// Determines the sort order of the returned transfers. The sort order is based on the creation date of the transfers.  Possible values:   - **asc**: Ascending order, from oldest to most recent.  - **desc**: Descending order, from most recent to oldest.  Default value: **asc**.
+func (r TransfersApiGetAllTransfersInput) SortOrder(sortOrder string) TransfersApiGetAllTransfersInput {
+	r.sortOrder = &sortOrder
 	return r
 }
 
@@ -362,6 +369,9 @@ func (a *TransfersApi) GetAllTransfers(ctx context.Context, r TransfersApiGetAll
 	}
 	if r.createdUntil != nil {
 		common.ParameterAddToQuery(queryParams, "createdUntil", r.createdUntil, "")
+	}
+	if r.sortOrder != nil {
+		common.ParameterAddToQuery(queryParams, "sortOrder", r.sortOrder, "")
 	}
 	if r.cursor != nil {
 		common.ParameterAddToQuery(queryParams, "cursor", r.cursor, "")

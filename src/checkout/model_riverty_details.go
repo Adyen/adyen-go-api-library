@@ -37,6 +37,8 @@ type RivertyDetails struct {
 	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
 	StoredPaymentMethodId *string `json:"storedPaymentMethodId,omitempty"`
+	// The payment method subtype.
+	Subtype *string `json:"subtype,omitempty"`
 	// **riverty**
 	Type string `json:"type"`
 }
@@ -323,6 +325,38 @@ func (o *RivertyDetails) SetStoredPaymentMethodId(v string) {
 	o.StoredPaymentMethodId = &v
 }
 
+// GetSubtype returns the Subtype field value if set, zero value otherwise.
+func (o *RivertyDetails) GetSubtype() string {
+	if o == nil || common.IsNil(o.Subtype) {
+		var ret string
+		return ret
+	}
+	return *o.Subtype
+}
+
+// GetSubtypeOk returns a tuple with the Subtype field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RivertyDetails) GetSubtypeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Subtype) {
+		return nil, false
+	}
+	return o.Subtype, true
+}
+
+// HasSubtype returns a boolean if a field has been set.
+func (o *RivertyDetails) HasSubtype() bool {
+	if o != nil && !common.IsNil(o.Subtype) {
+		return true
+	}
+
+	return false
+}
+
+// SetSubtype gets a reference to the given string and assigns it to the Subtype field.
+func (o *RivertyDetails) SetSubtype(v string) {
+	o.Subtype = &v
+}
+
 // GetType returns the Type field value
 func (o *RivertyDetails) GetType() string {
 	if o == nil {
@@ -381,6 +415,9 @@ func (o RivertyDetails) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.StoredPaymentMethodId) {
 		toSerialize["storedPaymentMethodId"] = o.StoredPaymentMethodId
 	}
+	if !common.IsNil(o.Subtype) {
+		toSerialize["subtype"] = o.Subtype
+	}
 	toSerialize["type"] = o.Type
 	return toSerialize, nil
 }
@@ -422,7 +459,7 @@ func (v *NullableRivertyDetails) UnmarshalJSON(src []byte) error {
 }
 
 func (o *RivertyDetails) isValidType() bool {
-	var allowedEnumValues = []string{"riverty", "riverty_account", "sepadirectdebit_riverty"}
+	var allowedEnumValues = []string{"riverty", "riverty_account", "riverty_installments", "sepadirectdebit_riverty"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

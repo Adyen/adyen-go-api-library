@@ -19,6 +19,7 @@ var _ common.MappedNullable = &PaymentDetailsResponse{}
 
 // PaymentDetailsResponse struct for PaymentDetailsResponse
 type PaymentDetailsResponse struct {
+	Action *PaymentDetailsResponseAction `json:"action,omitempty"`
 	// Contains additional information about the payment. Some data fields are included only if you select them first: Go to **Customer Area** > **Developers** > **Additional data**.
 	AdditionalData *map[string]string `json:"additionalData,omitempty"`
 	Amount         *Amount            `json:"amount,omitempty"`
@@ -60,6 +61,38 @@ func NewPaymentDetailsResponse() *PaymentDetailsResponse {
 func NewPaymentDetailsResponseWithDefaults() *PaymentDetailsResponse {
 	this := PaymentDetailsResponse{}
 	return &this
+}
+
+// GetAction returns the Action field value if set, zero value otherwise.
+func (o *PaymentDetailsResponse) GetAction() PaymentDetailsResponseAction {
+	if o == nil || common.IsNil(o.Action) {
+		var ret PaymentDetailsResponseAction
+		return ret
+	}
+	return *o.Action
+}
+
+// GetActionOk returns a tuple with the Action field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentDetailsResponse) GetActionOk() (*PaymentDetailsResponseAction, bool) {
+	if o == nil || common.IsNil(o.Action) {
+		return nil, false
+	}
+	return o.Action, true
+}
+
+// HasAction returns a boolean if a field has been set.
+func (o *PaymentDetailsResponse) HasAction() bool {
+	if o != nil && !common.IsNil(o.Action) {
+		return true
+	}
+
+	return false
+}
+
+// SetAction gets a reference to the given PaymentDetailsResponseAction and assigns it to the Action field.
+func (o *PaymentDetailsResponse) SetAction(v PaymentDetailsResponseAction) {
+	o.Action = &v
 }
 
 // GetAdditionalData returns the AdditionalData field value if set, zero value otherwise.
@@ -552,6 +585,9 @@ func (o PaymentDetailsResponse) MarshalJSON() ([]byte, error) {
 
 func (o PaymentDetailsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.Action) {
+		toSerialize["action"] = o.Action
+	}
 	if !common.IsNil(o.AdditionalData) {
 		toSerialize["additionalData"] = o.AdditionalData
 	}

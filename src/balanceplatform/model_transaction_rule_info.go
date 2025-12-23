@@ -23,7 +23,7 @@ type TransactionRuleInfo struct {
 	AggregationLevel *string `json:"aggregationLevel,omitempty"`
 	// Your description for the transaction rule.
 	Description string `json:"description"`
-	// The date when the rule will stop being evaluated, in ISO 8601 extended offset date-time format. For example, **2020-12-18T10:15:30+01:00**.  If not provided, the rule will be evaluated until the rule status is set to **inactive**.
+	// The date when the rule will stop being evaluated, in ISO 8601 extended offset date-time format. For example, **2025-03-19T10:15:30+01:00**.  If not provided, the rule will be evaluated until the rule status is set to **inactive**.
 	EndDate   *string                  `json:"endDate,omitempty"`
 	EntityKey TransactionRuleEntityKey `json:"entityKey"`
 	Interval  TransactionRuleInterval  `json:"interval"`
@@ -36,7 +36,7 @@ type TransactionRuleInfo struct {
 	RuleRestrictions TransactionRuleRestrictions `json:"ruleRestrictions"`
 	// A positive or negative score applied to the transaction if it meets the conditions of the rule. Required when `outcomeType` is **scoreBased**.  The value must be between **-100** and **100**.
 	Score *int32 `json:"score,omitempty"`
-	// The date when the rule will start to be evaluated, in ISO 8601 extended offset date-time format. For example, **2020-12-18T10:15:30+01:00**.  If not provided when creating a transaction rule, the `startDate` is set to the date when the rule status is set to **active**.
+	// The date when the rule will start to be evaluated, in ISO 8601 extended offset date-time format. For example, **2025-03-19T10:15:30+01:00**.  If not provided when creating a transaction rule, the `startDate` is set to the date when the rule status is set to **active**.
 	StartDate *string `json:"startDate,omitempty"`
 	// The status of the transaction rule. If you provide a `startDate` in the request, the rule is automatically created  with an **active** status.   Possible values: **active**, **inactive**.
 	Status *string `json:"status,omitempty"`
