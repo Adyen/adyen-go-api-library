@@ -10,7 +10,8 @@ package transfers
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the FundingInstrument type satisfies the MappedNullable interface at compile time
@@ -173,7 +174,7 @@ func (o *FundingInstrument) SetSourceOfFunds(v string) {
 }
 
 func (o FundingInstrument) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -233,14 +234,12 @@ func (v *NullableFundingInstrument) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *FundingInstrument) isValidSourceOfFunds() bool {
-    var allowedEnumValues = []string{ "DEBIT", "DEPOSIT_ACCOUNT" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetSourceOfFunds() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"DEBIT", "DEPOSIT_ACCOUNT"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetSourceOfFunds() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

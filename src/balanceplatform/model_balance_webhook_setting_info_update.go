@@ -10,7 +10,8 @@ package balanceplatform
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the BalanceWebhookSettingInfoUpdate type satisfies the MappedNullable interface at compile time
@@ -23,7 +24,7 @@ type BalanceWebhookSettingInfoUpdate struct {
 	// The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes) of the balance.
 	Currency *string `json:"currency,omitempty"`
 	// The status of the webhook setting. Possible values:  * **active**: You receive a balance webhook if any of the conditions in this setting are met. * **inactive**: You do not receive a balance webhook even if the conditions in this settings are met.
-	Status *string `json:"status,omitempty"`
+	Status *string       `json:"status,omitempty"`
 	Target *TargetUpdate `json:"target,omitempty"`
 	// The type of the webhook you are configuring. Set to **balance**.
 	Type *string `json:"type,omitempty"`
@@ -207,7 +208,7 @@ func (o *BalanceWebhookSettingInfoUpdate) SetType(v string) {
 }
 
 func (o BalanceWebhookSettingInfoUpdate) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -270,23 +271,21 @@ func (v *NullableBalanceWebhookSettingInfoUpdate) UnmarshalJSON(src []byte) erro
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *BalanceWebhookSettingInfoUpdate) isValidStatus() bool {
-    var allowedEnumValues = []string{ "active", "inactive" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetStatus() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"active", "inactive"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetStatus() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *BalanceWebhookSettingInfoUpdate) isValidType() bool {
-    var allowedEnumValues = []string{ "balance" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"balance"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

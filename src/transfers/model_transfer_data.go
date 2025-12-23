@@ -10,8 +10,9 @@ package transfers
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
 	"time"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the TransferData type satisfies the MappedNullable interface at compile time
@@ -19,49 +20,49 @@ var _ common.MappedNullable = &TransferData{}
 
 // TransferData struct for TransferData
 type TransferData struct {
-	AccountHolder *ResourceReference `json:"accountHolder,omitempty"`
-	Amount Amount `json:"amount"`
+	AccountHolder  *ResourceReference `json:"accountHolder,omitempty"`
+	Amount         Amount             `json:"amount"`
 	BalanceAccount *ResourceReference `json:"balanceAccount,omitempty"`
 	// The unique identifier of the balance platform.
 	BalancePlatform *string `json:"balancePlatform,omitempty"`
 	// The list of the latest balance statuses in the transfer.
 	Balances []BalanceMutation `json:"balances,omitempty"`
 	// The category of the transfer.  Possible values:   - **bank**: A transfer involving a [transfer instrument](https://docs.adyen.com/api-explorer/legalentity/latest/post/transferInstruments#responses-200-id) or a bank account.  - **card**: A transfer involving a third-party card.  - **internal**: A transfer between [balance accounts](https://docs.adyen.com/api-explorer/balanceplatform/latest/post/balanceAccounts#responses-200-id) within your platform.  - **issuedCard**: A transfer initiated by an Adyen-issued card.  - **platformPayment**: Funds movements related to payments that are acquired for your users.  - **topUp**: An incoming transfer initiated by your user to top up their balance account.
-	Category string `json:"category"`
-	CategoryData *TransferCategoryData `json:"categoryData,omitempty"`
+	Category     string                            `json:"category"`
+	CategoryData *TransferCategoryData             `json:"categoryData,omitempty"`
 	Counterparty *TransferNotificationCounterParty `json:"counterparty,omitempty"`
 	// The date and time when the transfer was created, in ISO 8601 extended format. For example, **2020-12-18T10:15:30+01:00**.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
 	// The date and time when the event was triggered, in ISO 8601 extended format. For example, **2020-12-18T10:15:30+01:00**.
-    // Deprecated since Transfers API v3
-    // Use createdAt or updatedAt
+	// Deprecated since Transfers API v3
+	// Use createdAt or updatedAt
 	CreationDate *time.Time `json:"creationDate,omitempty"`
 	// Your description for the transfer. It is used by most banks as the transfer description. We recommend sending a maximum of 140 characters, otherwise the description may be truncated.  Supported characters: **[a-z] [A-Z] [0-9] / - ?** **: ( ) . , ' + Space**  Supported characters for **regular** and **fast** transfers to a US counterparty: **[a-z] [A-Z] [0-9] & $ % # @** **~ = + - _ ' \" ! ?**
-	Description *string `json:"description,omitempty"`
+	Description            *string                 `json:"description,omitempty"`
 	DirectDebitInformation *DirectDebitInformation `json:"directDebitInformation,omitempty"`
 	// The direction of the transfer.  Possible values: **incoming**, **outgoing**.
 	Direction *string `json:"direction,omitempty"`
 	// The unique identifier of the latest transfer event. Included only when the `category` is **issuedCard**.
 	EventId *string `json:"eventId,omitempty"`
 	// The list of events leading up to the current status of the transfer.
-	Events []TransferEvent `json:"events,omitempty"`
-	ExecutionDate *ExecutionDate `json:"executionDate,omitempty"`
+	Events         []TransferEvent `json:"events,omitempty"`
+	ExecutionDate  *ExecutionDate  `json:"executionDate,omitempty"`
 	ExternalReason *ExternalReason `json:"externalReason,omitempty"`
 	// The ID of the resource.
-	Id *string `json:"id,omitempty"`
+	Id                *string            `json:"id,omitempty"`
 	PaymentInstrument *PaymentInstrument `json:"paymentInstrument,omitempty"`
 	// Additional information about the status of the transfer.
 	Reason *string `json:"reason,omitempty"`
 	// Your reference for the transfer, used internally within your platform. If you don't provide this in the request, Adyen generates a unique reference.
 	Reference *string `json:"reference,omitempty"`
 	//  A reference that is sent to the recipient. This reference is also sent in all webhooks related to the transfer, so you can use it to track statuses for both the source and recipient of funds.   Supported characters: **a-z**, **A-Z**, **0-9**.The maximum length depends on the `category`.   - **internal**: 80 characters  - **bank**: 35 characters when transferring to an IBAN, 15 characters for others.
-	ReferenceForBeneficiary *string `json:"referenceForBeneficiary,omitempty"`
-	Review *TransferReview `json:"review,omitempty"`
+	ReferenceForBeneficiary *string         `json:"referenceForBeneficiary,omitempty"`
+	Review                  *TransferReview `json:"review,omitempty"`
 	// The sequence number of the transfer webhook. The numbers start from 1 and increase with each new webhook for a specific transfer.  The sequence number can help you restore the correct sequence of events even if they arrive out of order.
 	SequenceNumber *int32 `json:"sequenceNumber,omitempty"`
 	// The result of the transfer.  For example:  - **received**: an outgoing transfer request is created. - **refused**: the transfer request is rejected by Adyen for one of the following reasons:   - Lack of funds in the balance account.   - Transfer limit exceeded.   - Transaction rule requirements violated. - **authorised**: the transfer request is authorized and the funds are reserved. - **booked**: the funds are deducted from your user's balance account.  - **failed**: the transfer is rejected by the counterparty's bank. - **returned**: the transfer is returned by the counterparty's bank.
-	Status string `json:"status"`
-	Tracking *TransferDataTracking `json:"tracking,omitempty"`
+	Status                 string                  `json:"status"`
+	Tracking               *TransferDataTracking   `json:"tracking,omitempty"`
 	TransactionRulesResult *TransactionRulesResult `json:"transactionRulesResult,omitempty"`
 	// The type of transfer or transaction. For example, **refund**, **payment**, **internalTransfer**, **bankTransfer**.
 	Type *string `json:"type,omitempty"`
@@ -1000,7 +1001,7 @@ func (o *TransferData) SetUpdatedAt(v time.Time) {
 }
 
 func (o TransferData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -1129,50 +1130,48 @@ func (v *NullableTransferData) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *TransferData) isValidCategory() bool {
-    var allowedEnumValues = []string{ "bank", "card", "internal", "issuedCard", "platformPayment", "topUp" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetCategory() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"bank", "card", "internal", "issuedCard", "platformPayment", "topUp"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetCategory() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *TransferData) isValidDirection() bool {
-    var allowedEnumValues = []string{ "incoming", "outgoing" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetDirection() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"incoming", "outgoing"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetDirection() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *TransferData) isValidReason() bool {
-    var allowedEnumValues = []string{ "accountHierarchyNotActive", "amountLimitExceeded", "approvalExpired", "approved", "avsDeclined", "balanceAccountTemporarilyBlockedByTransactionRule", "blockCard", "callReferral", "cancelled", "captureCard", "cardExpired", "cardholderAuthenticationRequired", "cashbackAmountExceedsLimit", "cavvDeclined", "contactlessFallback", "contactlessLimitReached", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "cryptographicFailure", "cvcDeclined", "declined", "declinedByBapValidation", "declinedByTransactionRule", "declinedNonGeneric", "directDebitNotSupported", "doNotHonor", "domesticDebitTransactionNotAllowed", "duplicateTransmissionDetected", "error", "formatError", "fraud", "fraudCancelled", "honorWithId", "internalTimeout", "invalidAccount", "invalidAmount", "invalidAuthorizationLifeCycle", "invalidCard", "invalidExpiryDate", "invalidFromAccount", "invalidIssuer", "invalidMerchant", "invalidPin", "invalidToAccount", "invalidTransaction", "issuerSuspectedFraud", "lostCard", "mobilePinRequired", "noCheckingAccount", "noSavingsAccount", "not3dAuthenticated", "notEnoughBalance", "notSubmitted", "notSupported", "partiallyApproved", "pending", "pendingApproval", "pendingExecution", "pinNotChanged", "pinRequired", "pinTriesExceeded", "pinValidationNotPossible", "purchaseAmountOnlyNoCashBack", "refusedByCounterpartyBank", "refusedByCustomer", "restrictedCard", "revocationOfAuth", "routeNotFound", "scaAuthenticationRequired", "scaFailed", "schemeAdvice", "securityViolation", "shopperCancelled", "stolenCard", "threedsDynamicLinkingMismatch", "transactionNotPermitted", "transferInstrumentDoesNotExist", "unableToRouteTransaction", "unknown", "withdrawalAmountExceeded", "withdrawalCountExceeded" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetReason() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"accountHierarchyNotActive", "amountLimitExceeded", "approvalExpired", "approved", "avsDeclined", "balanceAccountTemporarilyBlockedByTransactionRule", "blockCard", "callReferral", "cancelled", "captureCard", "cardExpired", "cardholderAuthenticationRequired", "cashbackAmountExceedsLimit", "cavvDeclined", "contactlessFallback", "contactlessLimitReached", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "cryptographicFailure", "cvcDeclined", "declined", "declinedByBapValidation", "declinedByTransactionRule", "declinedNonGeneric", "directDebitNotSupported", "doNotHonor", "domesticDebitTransactionNotAllowed", "duplicateTransmissionDetected", "error", "formatError", "fraud", "fraudCancelled", "honorWithId", "internalTimeout", "invalidAccount", "invalidAmount", "invalidAuthorizationLifeCycle", "invalidCard", "invalidExpiryDate", "invalidFromAccount", "invalidIssuer", "invalidMerchant", "invalidPin", "invalidToAccount", "invalidTransaction", "issuerSuspectedFraud", "lostCard", "mobilePinRequired", "noCheckingAccount", "noSavingsAccount", "not3dAuthenticated", "notEnoughBalance", "notSubmitted", "notSupported", "partiallyApproved", "pending", "pendingApproval", "pendingExecution", "pinNotChanged", "pinRequired", "pinTriesExceeded", "pinValidationNotPossible", "purchaseAmountOnlyNoCashBack", "refusedByCounterpartyBank", "refusedByCustomer", "restrictedCard", "revocationOfAuth", "routeNotFound", "scaAuthenticationRequired", "scaFailed", "schemeAdvice", "securityViolation", "shopperCancelled", "stolenCard", "threedsDynamicLinkingMismatch", "transactionNotPermitted", "transferInstrumentDoesNotExist", "unableToRouteTransaction", "unknown", "withdrawalAmountExceeded", "withdrawalCountExceeded"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetReason() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *TransferData) isValidStatus() bool {
-    var allowedEnumValues = []string{ "approvalPending", "atmWithdrawal", "atmWithdrawalReversalPending", "atmWithdrawalReversed", "authAdjustmentAuthorised", "authAdjustmentError", "authAdjustmentRefused", "authorised", "bankTransfer", "bankTransferPending", "booked", "bookingPending", "cancelled", "capturePending", "captureReversalPending", "captureReversed", "captured", "capturedExternally", "chargeback", "chargebackExternally", "chargebackPending", "chargebackReversalPending", "chargebackReversed", "credited", "depositCorrection", "depositCorrectionPending", "dispute", "disputeClosed", "disputeExpired", "disputeNeedsReview", "error", "expired", "failed", "fee", "feePending", "internalTransfer", "internalTransferPending", "invoiceDeduction", "invoiceDeductionPending", "manualCorrectionPending", "manuallyCorrected", "matchedStatement", "matchedStatementPending", "merchantPayin", "merchantPayinPending", "merchantPayinReversed", "merchantPayinReversedPending", "miscCost", "miscCostPending", "paymentCost", "paymentCostPending", "pendingApproval", "pendingExecution", "received", "refundPending", "refundReversalPending", "refundReversed", "refunded", "refundedExternally", "refused", "rejected", "reserveAdjustment", "reserveAdjustmentPending", "returned", "secondChargeback", "secondChargebackPending", "undefined" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetStatus() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"approvalPending", "atmWithdrawal", "atmWithdrawalReversalPending", "atmWithdrawalReversed", "authAdjustmentAuthorised", "authAdjustmentError", "authAdjustmentRefused", "authorised", "bankTransfer", "bankTransferPending", "booked", "bookingPending", "cancelled", "capturePending", "captureReversalPending", "captureReversed", "captured", "capturedExternally", "chargeback", "chargebackExternally", "chargebackPending", "chargebackReversalPending", "chargebackReversed", "credited", "depositCorrection", "depositCorrectionPending", "dispute", "disputeClosed", "disputeExpired", "disputeNeedsReview", "error", "expired", "failed", "fee", "feePending", "internalTransfer", "internalTransferPending", "invoiceDeduction", "invoiceDeductionPending", "manualCorrectionPending", "manuallyCorrected", "matchedStatement", "matchedStatementPending", "merchantPayin", "merchantPayinPending", "merchantPayinReversed", "merchantPayinReversedPending", "miscCost", "miscCostPending", "paymentCost", "paymentCostPending", "pendingApproval", "pendingExecution", "received", "refundPending", "refundReversalPending", "refundReversed", "refunded", "refundedExternally", "refused", "rejected", "reserveAdjustment", "reserveAdjustmentPending", "returned", "secondChargeback", "secondChargebackPending", "undefined"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetStatus() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *TransferData) isValidType() bool {
-    var allowedEnumValues = []string{ "payment", "capture", "captureReversal", "refund", "refundReversal", "chargeback", "chargebackCorrection", "chargebackReversal", "chargebackReversalCorrection", "secondChargeback", "secondChargebackCorrection", "atmWithdrawal", "atmWithdrawalReversal", "internalTransfer", "internalDirectDebit", "manualCorrection", "invoiceDeduction", "depositCorrection", "reserveAdjustment", "bankTransfer", "bankDirectDebit", "cardTransfer", "miscCost", "paymentCost", "fee", "leftover", "grant", "capitalFundsCollection", "cashOutInstruction", "cashoutFee", "cashoutRepayment", "cashoutFunding", "repayment", "installment", "installmentReversal", "balanceAdjustment", "balanceRollover", "balanceMigration" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"payment", "capture", "captureReversal", "refund", "refundReversal", "chargeback", "chargebackCorrection", "chargebackReversal", "chargebackReversalCorrection", "secondChargeback", "secondChargebackCorrection", "atmWithdrawal", "atmWithdrawalReversal", "internalTransfer", "internalDirectDebit", "manualCorrection", "invoiceDeduction", "depositCorrection", "reserveAdjustment", "bankTransfer", "bankDirectDebit", "cardTransfer", "miscCost", "paymentCost", "fee", "leftover", "grant", "capitalFundsCollection", "cashOutInstruction", "cashoutFee", "cashoutRepayment", "cashoutFunding", "repayment", "installment", "installmentReversal", "balanceAdjustment", "balanceRollover", "balanceMigration"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-
