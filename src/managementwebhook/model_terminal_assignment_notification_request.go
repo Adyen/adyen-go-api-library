@@ -10,7 +10,8 @@ package managementwebhook
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the TerminalAssignmentNotificationRequest type satisfies the MappedNullable interface at compile time
@@ -214,7 +215,7 @@ func (o *TerminalAssignmentNotificationRequest) SetUniqueTerminalId(v string) {
 }
 
 func (o TerminalAssignmentNotificationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -271,6 +272,3 @@ func (v *NullableTerminalAssignmentNotificationRequest) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-
