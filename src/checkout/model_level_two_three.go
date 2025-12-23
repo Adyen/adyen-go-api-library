@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the LevelTwoThree type satisfies the MappedNullable interface at compile time
@@ -19,8 +20,8 @@ var _ common.MappedNullable = &LevelTwoThree{}
 // LevelTwoThree struct for LevelTwoThree
 type LevelTwoThree struct {
 	// The reference number to identify the customer and their order. * Format: ASCII * Max length: 25 characters * Must not start with a space or be all spaces. * Must not be all zeros.
-	CustomerReferenceNumber *string `json:"customerReferenceNumber,omitempty"`
-	Destination *Destination `json:"destination,omitempty"`
+	CustomerReferenceNumber *string      `json:"customerReferenceNumber,omitempty"`
+	Destination             *Destination `json:"destination,omitempty"`
 	// The duty tax amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes). * For example, 2000 means USD 20.00. * Encoding: Numeric * Max value: 10000000000
 	DutyAmount *int64 `json:"dutyAmount,omitempty"`
 	// The shipping amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes). * For example, 2000 means USD 20.00. * Encoding: Numeric * Max value: 10000000000
@@ -309,7 +310,7 @@ func (o *LevelTwoThree) SetTotalTaxAmount(v int64) {
 }
 
 func (o LevelTwoThree) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -380,6 +381,3 @@ func (v *NullableLevelTwoThree) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the PixRecurring type satisfies the MappedNullable interface at compile time
@@ -29,7 +30,7 @@ type PixRecurring struct {
 	MinAmount *Amount `json:"minAmount,omitempty"`
 	// The pspReference for the failed recurring payment. Find this in AUTHORISATION webhook you received after the billing date.
 	OriginalPspReference *string `json:"originalPspReference,omitempty"`
-	RecurringAmount *Amount `json:"recurringAmount,omitempty"`
+	RecurringAmount      *Amount `json:"recurringAmount,omitempty"`
 	// The text that that will be shown on the shopper's bank statement for the recurring payments. We recommend to add a descriptive text about the subscription to let your shoppers recognize your recurring payments. Maximum length: 35 characters.
 	RecurringStatement *string `json:"recurringStatement,omitempty"`
 	// When set to true, you can retry for failed recurring payments. The default value is true.
@@ -376,7 +377,7 @@ func (o *PixRecurring) SetStartsAt(v string) {
 }
 
 func (o PixRecurring) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -454,14 +455,12 @@ func (v *NullablePixRecurring) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *PixRecurring) isValidFrequency() bool {
-    var allowedEnumValues = []string{ "weekly", "monthly", "quarterly", "half-yearly", "yearly" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetFrequency() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"weekly", "monthly", "quarterly", "half-yearly", "yearly"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetFrequency() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

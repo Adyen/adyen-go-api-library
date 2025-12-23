@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the KlarnaDetails type satisfies the MappedNullable interface at compile time
@@ -27,8 +28,8 @@ type KlarnaDetails struct {
 	// Shopper name, date of birth, phone number, and email address.
 	PersonalDetails *string `json:"personalDetails,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
-    // Deprecated since Adyen Checkout API v49
-    // Use `storedPaymentMethodId` instead.
+	// Deprecated since Adyen Checkout API v49
+	// Use `storedPaymentMethodId` instead.
 	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
 	// Base64-encoded JSON object containing SDK related parameters required by the SDK
 	SdkData *string `json:"sdkData,omitempty"`
@@ -347,7 +348,7 @@ func (o *KlarnaDetails) SetType(v string) {
 }
 
 func (o KlarnaDetails) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -420,14 +421,12 @@ func (v *NullableKlarnaDetails) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *KlarnaDetails) isValidType() bool {
-    var allowedEnumValues = []string{ "klarna", "klarnapayments", "klarnapayments_account", "klarnapayments_b2b", "klarna_paynow", "klarna_account", "klarna_b2b" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"klarna", "klarnapayments", "klarnapayments_account", "klarnapayments_b2b", "klarna_paynow", "klarna_account", "klarna_b2b"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

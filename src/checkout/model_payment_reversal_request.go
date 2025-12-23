@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the PaymentReversalRequest type satisfies the MappedNullable interface at compile time
@@ -18,7 +19,7 @@ var _ common.MappedNullable = &PaymentReversalRequest{}
 
 // PaymentReversalRequest struct for PaymentReversalRequest
 type PaymentReversalRequest struct {
-	ApplicationInfo *ApplicationInfo `json:"applicationInfo,omitempty"`
+	ApplicationInfo    *ApplicationInfo    `json:"applicationInfo,omitempty"`
 	EnhancedSchemeData *EnhancedSchemeData `json:"enhancedSchemeData,omitempty"`
 	// The merchant account that is used to process the payment.
 	MerchantAccount string `json:"merchantAccount"`
@@ -165,7 +166,7 @@ func (o *PaymentReversalRequest) SetReference(v string) {
 }
 
 func (o PaymentReversalRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -222,6 +223,3 @@ func (v *NullablePaymentReversalRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-
