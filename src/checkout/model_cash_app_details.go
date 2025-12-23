@@ -35,6 +35,8 @@ type CashAppDetails struct {
 	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
 	// Cash App request id
 	RequestId *string `json:"requestId,omitempty"`
+	// Base64-encoded JSON object containing SDK related parameters required by the SDK
+	SdkData *string `json:"sdkData,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
 	StoredPaymentMethodId *string `json:"storedPaymentMethodId,omitempty"`
 	// The payment method subtype.
@@ -294,6 +296,38 @@ func (o *CashAppDetails) SetRequestId(v string) {
 	o.RequestId = &v
 }
 
+// GetSdkData returns the SdkData field value if set, zero value otherwise.
+func (o *CashAppDetails) GetSdkData() string {
+	if o == nil || common.IsNil(o.SdkData) {
+		var ret string
+		return ret
+	}
+	return *o.SdkData
+}
+
+// GetSdkDataOk returns a tuple with the SdkData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CashAppDetails) GetSdkDataOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SdkData) {
+		return nil, false
+	}
+	return o.SdkData, true
+}
+
+// HasSdkData returns a boolean if a field has been set.
+func (o *CashAppDetails) HasSdkData() bool {
+	if o != nil && !common.IsNil(o.SdkData) {
+		return true
+	}
+
+	return false
+}
+
+// SetSdkData gets a reference to the given string and assigns it to the SdkData field.
+func (o *CashAppDetails) SetSdkData(v string) {
+	o.SdkData = &v
+}
+
 // GetStoredPaymentMethodId returns the StoredPaymentMethodId field value if set, zero value otherwise.
 func (o *CashAppDetails) GetStoredPaymentMethodId() string {
 	if o == nil || common.IsNil(o.StoredPaymentMethodId) {
@@ -420,6 +454,9 @@ func (o CashAppDetails) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.RequestId) {
 		toSerialize["requestId"] = o.RequestId
+	}
+	if !common.IsNil(o.SdkData) {
+		toSerialize["sdkData"] = o.SdkData
 	}
 	if !common.IsNil(o.StoredPaymentMethodId) {
 		toSerialize["storedPaymentMethodId"] = o.StoredPaymentMethodId

@@ -33,6 +33,7 @@ type CheckoutPaymentMethod struct {
 	EBankingFinlandDetails            *EBankingFinlandDetails
 	EcontextVoucherDetails            *EcontextVoucherDetails
 	EftDetails                        *EftDetails
+	ExternalTokenDetails              *ExternalTokenDetails
 	FastlaneDetails                   *FastlaneDetails
 	GenericIssuerPaymentMethodDetails *GenericIssuerPaymentMethodDetails
 	GooglePayDetails                  *GooglePayDetails
@@ -62,6 +63,7 @@ type CheckoutPaymentMethod struct {
 	TwintDetails                      *TwintDetails
 	UpiCollectDetails                 *UpiCollectDetails
 	UpiIntentDetails                  *UpiIntentDetails
+	UpiQrDetails                      *UpiQrDetails
 	VippsDetails                      *VippsDetails
 	VisaCheckoutDetails               *VisaCheckoutDetails
 	WeChatPayDetails                  *WeChatPayDetails
@@ -192,6 +194,13 @@ func EcontextVoucherDetailsAsCheckoutPaymentMethod(v *EcontextVoucherDetails) Ch
 func EftDetailsAsCheckoutPaymentMethod(v *EftDetails) CheckoutPaymentMethod {
 	return CheckoutPaymentMethod{
 		EftDetails: v,
+	}
+}
+
+// ExternalTokenDetailsAsCheckoutPaymentMethod is a convenience function that returns ExternalTokenDetails wrapped in CheckoutPaymentMethod
+func ExternalTokenDetailsAsCheckoutPaymentMethod(v *ExternalTokenDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
+		ExternalTokenDetails: v,
 	}
 }
 
@@ -395,6 +404,13 @@ func UpiCollectDetailsAsCheckoutPaymentMethod(v *UpiCollectDetails) CheckoutPaym
 func UpiIntentDetailsAsCheckoutPaymentMethod(v *UpiIntentDetails) CheckoutPaymentMethod {
 	return CheckoutPaymentMethod{
 		UpiIntentDetails: v,
+	}
+}
+
+// UpiQrDetailsAsCheckoutPaymentMethod is a convenience function that returns UpiQrDetails wrapped in CheckoutPaymentMethod
+func UpiQrDetailsAsCheckoutPaymentMethod(v *UpiQrDetails) CheckoutPaymentMethod {
+	return CheckoutPaymentMethod{
+		UpiQrDetails: v,
 	}
 }
 
@@ -669,6 +685,19 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		}
 	} else {
 		dst.EftDetails = nil
+	}
+
+	// try to unmarshal data into ExternalTokenDetails
+	err = json.Unmarshal(data, &dst.ExternalTokenDetails)
+	if err == nil {
+		jsonExternalTokenDetails, _ := json.Marshal(dst.ExternalTokenDetails)
+		if string(jsonExternalTokenDetails) == "{}" || !dst.ExternalTokenDetails.isValidType() { // empty struct
+			dst.ExternalTokenDetails = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.ExternalTokenDetails = nil
 	}
 
 	// try to unmarshal data into FastlaneDetails
@@ -1048,6 +1077,19 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		dst.UpiIntentDetails = nil
 	}
 
+	// try to unmarshal data into UpiQrDetails
+	err = json.Unmarshal(data, &dst.UpiQrDetails)
+	if err == nil {
+		jsonUpiQrDetails, _ := json.Marshal(dst.UpiQrDetails)
+		if string(jsonUpiQrDetails) == "{}" || !dst.UpiQrDetails.isValidType() { // empty struct
+			dst.UpiQrDetails = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.UpiQrDetails = nil
+	}
+
 	// try to unmarshal data into VippsDetails
 	err = json.Unmarshal(data, &dst.VippsDetails)
 	if err == nil {
@@ -1133,6 +1175,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		dst.EBankingFinlandDetails = nil
 		dst.EcontextVoucherDetails = nil
 		dst.EftDetails = nil
+		dst.ExternalTokenDetails = nil
 		dst.FastlaneDetails = nil
 		dst.GenericIssuerPaymentMethodDetails = nil
 		dst.GooglePayDetails = nil
@@ -1162,6 +1205,7 @@ func (dst *CheckoutPaymentMethod) UnmarshalJSON(data []byte) error {
 		dst.TwintDetails = nil
 		dst.UpiCollectDetails = nil
 		dst.UpiIntentDetails = nil
+		dst.UpiQrDetails = nil
 		dst.VippsDetails = nil
 		dst.VisaCheckoutDetails = nil
 		dst.WeChatPayDetails = nil
@@ -1248,6 +1292,10 @@ func (src CheckoutPaymentMethod) MarshalJSON() ([]byte, error) {
 
 	if src.EftDetails != nil {
 		return json.Marshal(&src.EftDetails)
+	}
+
+	if src.ExternalTokenDetails != nil {
+		return json.Marshal(&src.ExternalTokenDetails)
 	}
 
 	if src.FastlaneDetails != nil {
@@ -1366,6 +1414,10 @@ func (src CheckoutPaymentMethod) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.UpiIntentDetails)
 	}
 
+	if src.UpiQrDetails != nil {
+		return json.Marshal(&src.UpiQrDetails)
+	}
+
 	if src.VippsDetails != nil {
 		return json.Marshal(&src.VippsDetails)
 	}
@@ -1464,6 +1516,10 @@ func (obj *CheckoutPaymentMethod) GetActualInstance() interface{} {
 
 	if obj.EftDetails != nil {
 		return obj.EftDetails
+	}
+
+	if obj.ExternalTokenDetails != nil {
+		return obj.ExternalTokenDetails
 	}
 
 	if obj.FastlaneDetails != nil {
@@ -1580,6 +1636,10 @@ func (obj *CheckoutPaymentMethod) GetActualInstance() interface{} {
 
 	if obj.UpiIntentDetails != nil {
 		return obj.UpiIntentDetails
+	}
+
+	if obj.UpiQrDetails != nil {
+		return obj.UpiQrDetails
 	}
 
 	if obj.VippsDetails != nil {

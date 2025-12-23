@@ -53,7 +53,7 @@ type DonationPaymentRequest struct {
 	DonationOriginalPspReference *string `json:"donationOriginalPspReference,omitempty"`
 	// Donation token received in the `/payments` call.
 	DonationToken *string `json:"donationToken,omitempty"`
-	// Price and product information about the purchased items, to be included on the invoice sent to the shopper. > This field is required for 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, Riverty, and Zip.
+	// Price and product information about the purchased items, to be included on the invoice sent to the shopper. > This field is required for 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, and Riverty.
 	LineItems []LineItem `json:"lineItems,omitempty"`
 	// The merchant account identifier, with which you want to process the transaction.
 	MerchantAccount       string                 `json:"merchantAccount"`
@@ -61,9 +61,9 @@ type DonationPaymentRequest struct {
 	// Metadata consists of entries, each of which includes a key and a value. Limits: * Maximum 20 key-value pairs per request. When exceeding, the \"177\" error occurs: \"Metadata size exceeds limit\". * Maximum 20 characters per key. * Maximum 80 characters per value.
 	Metadata *map[string]string `json:"metadata,omitempty"`
 	MpiData  *ThreeDSecureData  `json:"mpiData,omitempty"`
-	// Required for the 3D Secure 2 `channel` **Web** integration.  Set this parameter to the origin URL of the page that you are loading the 3D Secure Component from.
-	Origin        *string               `json:"origin,omitempty"`
-	PaymentMethod DonationPaymentMethod `json:"paymentMethod"`
+	// > Required for browser-based (`channel` **Web**) 3D Secure 2 transactions.Set this to the origin URL of the page where you are rendering the Drop-in/Component. Do not include subdirectories and a trailing slash.
+	Origin        *string                `json:"origin,omitempty"`
+	PaymentMethod *DonationPaymentMethod `json:"paymentMethod,omitempty"`
 	// Defines a recurring payment type. Required when creating a token to store payment details or using stored payment details. Allowed values: * `Subscription` – A transaction for a fixed or variable amount, which follows a fixed schedule. * `CardOnFile` – With a card-on-file (CoF) transaction, card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction. * `UnscheduledCardOnFile` – An unscheduled card-on-file (UCoF) transaction is a transaction that occurs on a non-fixed schedule and/or have variable amounts. For example, automatic top-ups when a cardholder's balance drops below a certain amount.
 	RecurringProcessingModel *string `json:"recurringProcessingModel,omitempty"`
 	// Specifies the redirect method (GET or POST) when redirecting back from the issuer.
@@ -72,27 +72,27 @@ type DonationPaymentRequest struct {
 	RedirectToIssuerMethod *string `json:"redirectToIssuerMethod,omitempty"`
 	// The reference to uniquely identify a payment. This reference is used in all communication with you about the payment status. We recommend using a unique value per payment; however, it is not a requirement. If you need to provide multiple references for a transaction, separate them with hyphens (\"-\"). Maximum length: 80 characters.
 	Reference string `json:"reference"`
-	// The URL to return to in case of a redirection. The format depends on the channel. This URL can have a maximum of 1024 characters. * For web, include the protocol `http://` or `https://`. You can also include your own additional query parameters, for example, shopper ID or order reference number. Example: `https://your-company.com/checkout?shopperOrder=12xy` * For iOS, use the custom URL for your app. To know more about setting custom URL schemes, refer to the [Apple Developer documentation](https://developer.apple.com/documentation/uikit/inter-process_communication/allowing_apps_and_websites_to_link_to_your_content/defining_a_custom_url_scheme_for_your_app). Example: `my-app://` * For Android, use a custom URL handled by an Activity on your app. You can configure it with an [intent filter](https://developer.android.com/guide/components/intents-filters). Example: `my-app://your.package.name`  If the URL to return to includes non-ASCII characters, like spaces or special letters, URL encode the value. > The URL must not include personally identifiable information (PII), for example name or email address.
+	// The URL to return to in case of a redirection. The format depends on the channel.  * For web, include the protocol `http://` or `https://`. You can also include your own additional query parameters, for example, shopper ID or order reference number. Example: `https://your-company.example.com/checkout?shopperOrder=12xy` * For iOS, use the custom URL for your app. To know more about setting custom URL schemes, refer to the [Apple Developer documentation](https://developer.apple.com/documentation/uikit/inter-process_communication/allowing_apps_and_websites_to_link_to_your_content/defining_a_custom_url_scheme_for_your_app). Example: `my-app://` * For Android, use a custom URL handled by an Activity on your app. You can configure it with an [intent filter](https://developer.android.com/guide/components/intents-filters). Example: `my-app://your.package.name`  If the URL to return to includes non-ASCII characters, like spaces or special letters, URL encode the value.  We strongly recommend that you use a maximum of 1024 characters.  > The URL must not include personally identifiable information (PII), for example name or email address.
 	ReturnUrl string `json:"returnUrl"`
 	// The date and time until when the session remains valid, in [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format.  For example: 2020-07-18T15:42:40.428+01:00
 	SessionValidity *string `json:"sessionValidity,omitempty"`
-	// The shopper's email address. We recommend that you provide this data, as it is used in velocity fraud checks. > For 3D Secure 2 transactions, schemes require `shopperEmail` for all browser-based and mobile implementations.
+	// The shopper's email address. We recommend that you provide this data, as it is used in velocity fraud checks. > Required for Visa and JCB transactions that require 3D Secure 2 authentication if you did not include the `telephoneNumber`.
 	ShopperEmail *string `json:"shopperEmail,omitempty"`
-	// The shopper's IP address. In general, we recommend that you provide this data, as it is used in a number of risk checks (for instance, number of payment attempts or location-based checks). > For 3D Secure 2 transactions, schemes require `shopperIP` for all browser-based implementations. This field is also mandatory for some merchants depending on your business model. For more information, [contact Support](https://www.adyen.help/hc/en-us/requests/new).
+	// The shopper's IP address. We recommend that you provide this data, as it is used in a number of risk checks (for instance, number of payment attempts or location-based checks). > Required for Visa and JCB transactions that require 3D Secure 2 authentication for all web and mobile integrations, if you did not include the `shopperEmail`. For native mobile integrations, the field is required to support cases where authentication is routed to the redirect flow. This field is also mandatory for some merchants depending on your business model. For more information, [contact Support](https://www.adyen.help/hc/en-us/requests/new).
 	ShopperIP *string `json:"shopperIP,omitempty"`
-	// Specifies the sales channel, through which the shopper gives their card details, and whether the shopper is a returning customer. For the web service API, Adyen assumes Ecommerce shopper interaction by default.  This field has the following possible values: * `Ecommerce` - Online transactions where the cardholder is present (online). For better authorisation rates, we recommend sending the card security code (CSC) along with the request. * `ContAuth` - Card on file and/or subscription transactions, where the cardholder is known to the merchant (returning customer). If the shopper is present (online), you can supply also the CSC to improve authorisation (one-click payment). * `Moto` - Mail-order and telephone-order transactions where the shopper is in contact with the merchant via email or telephone. * `POS` - Point-of-sale transactions where the shopper is physically present to make a payment using a secure payment terminal.
+	// Specifies the sales channel, through which the shopper gives their card details, and whether the shopper is a returning customer. For the web service API, Adyen assumes Ecommerce shopper interaction by default.  This field has the following possible values: * `Ecommerce` - Online transactions where the cardholder is present (online). For better authorization rates, we recommend sending the card security code (CSC) along with the request. * `ContAuth` - Card on file and/or subscription transactions, where the cardholder is known to the merchant (returning customer). If the shopper is present (online), you can supply also the CSC to improve authorization (one-click payment). * `Moto` - Mail-order and telephone-order transactions where the shopper is in contact with the merchant via email or telephone. * `POS` - Point-of-sale transactions where the shopper is physically present to make a payment using a secure payment terminal.
 	ShopperInteraction *string `json:"shopperInteraction,omitempty"`
 	// The combination of a language code and a country code to specify the language to be used in the payment.
-	ShopperLocale *string `json:"shopperLocale,omitempty"`
-	ShopperName   *Name   `json:"shopperName,omitempty"`
+	ShopperLocale *string      `json:"shopperLocale,omitempty"`
+	ShopperName   *ShopperName `json:"shopperName,omitempty"`
 	// Required for recurring payments.  Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters. > Your reference must not include personally identifiable information (PII), for example name or email address.
 	ShopperReference *string `json:"shopperReference,omitempty"`
 	// The shopper's social security number.
 	SocialSecurityNumber *string `json:"socialSecurityNumber,omitempty"`
-	// The shopper's telephone number.
+	// The shopper's telephone number.  The phone number must include a plus sign (+) and a country code (1-3 digits), followed by the number (4-15 digits). If the value you provide does not follow the guidelines, we do not submit it for authentication. > Required for Visa and JCB transactions that require 3D Secure 2 authentication, if you did not include the `shopperEmail`.
 	TelephoneNumber     *string                `json:"telephoneNumber,omitempty"`
 	ThreeDS2RequestData *ThreeDS2RequestFields `json:"threeDS2RequestData,omitempty"`
-	// If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only), and not the payment authorisation.
+	// Required to trigger the [authentication-only flow](https://docs.adyen.com/online-payments/3d-secure/authentication-only/). If set to **true**, you will only perform the 3D Secure 2 authentication, and will not proceed to the payment authorization.Default: **false**.
 	// Deprecated since Adyen Checkout API v69
 	// Use `authenticationData.authenticationOnly` instead.
 	ThreeDSAuthenticationOnly *bool `json:"threeDSAuthenticationOnly,omitempty"`
@@ -102,11 +102,10 @@ type DonationPaymentRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDonationPaymentRequest(amount Amount, merchantAccount string, paymentMethod DonationPaymentMethod, reference string, returnUrl string) *DonationPaymentRequest {
+func NewDonationPaymentRequest(amount Amount, merchantAccount string, reference string, returnUrl string) *DonationPaymentRequest {
 	this := DonationPaymentRequest{}
 	this.Amount = amount
 	this.MerchantAccount = merchantAccount
-	this.PaymentMethod = paymentMethod
 	this.Reference = reference
 	this.ReturnUrl = returnUrl
 	var threeDSAuthenticationOnly bool = false
@@ -914,28 +913,36 @@ func (o *DonationPaymentRequest) SetOrigin(v string) {
 	o.Origin = &v
 }
 
-// GetPaymentMethod returns the PaymentMethod field value
+// GetPaymentMethod returns the PaymentMethod field value if set, zero value otherwise.
 func (o *DonationPaymentRequest) GetPaymentMethod() DonationPaymentMethod {
-	if o == nil {
+	if o == nil || common.IsNil(o.PaymentMethod) {
 		var ret DonationPaymentMethod
 		return ret
 	}
-
-	return o.PaymentMethod
+	return *o.PaymentMethod
 }
 
-// GetPaymentMethodOk returns a tuple with the PaymentMethod field value
+// GetPaymentMethodOk returns a tuple with the PaymentMethod field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DonationPaymentRequest) GetPaymentMethodOk() (*DonationPaymentMethod, bool) {
-	if o == nil {
+	if o == nil || common.IsNil(o.PaymentMethod) {
 		return nil, false
 	}
-	return &o.PaymentMethod, true
+	return o.PaymentMethod, true
 }
 
-// SetPaymentMethod sets field value
+// HasPaymentMethod returns a boolean if a field has been set.
+func (o *DonationPaymentRequest) HasPaymentMethod() bool {
+	if o != nil && !common.IsNil(o.PaymentMethod) {
+		return true
+	}
+
+	return false
+}
+
+// SetPaymentMethod gets a reference to the given DonationPaymentMethod and assigns it to the PaymentMethod field.
 func (o *DonationPaymentRequest) SetPaymentMethod(v DonationPaymentMethod) {
-	o.PaymentMethod = v
+	o.PaymentMethod = &v
 }
 
 // GetRecurringProcessingModel returns the RecurringProcessingModel field value if set, zero value otherwise.
@@ -1243,9 +1250,9 @@ func (o *DonationPaymentRequest) SetShopperLocale(v string) {
 }
 
 // GetShopperName returns the ShopperName field value if set, zero value otherwise.
-func (o *DonationPaymentRequest) GetShopperName() Name {
+func (o *DonationPaymentRequest) GetShopperName() ShopperName {
 	if o == nil || common.IsNil(o.ShopperName) {
-		var ret Name
+		var ret ShopperName
 		return ret
 	}
 	return *o.ShopperName
@@ -1253,7 +1260,7 @@ func (o *DonationPaymentRequest) GetShopperName() Name {
 
 // GetShopperNameOk returns a tuple with the ShopperName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DonationPaymentRequest) GetShopperNameOk() (*Name, bool) {
+func (o *DonationPaymentRequest) GetShopperNameOk() (*ShopperName, bool) {
 	if o == nil || common.IsNil(o.ShopperName) {
 		return nil, false
 	}
@@ -1269,8 +1276,8 @@ func (o *DonationPaymentRequest) HasShopperName() bool {
 	return false
 }
 
-// SetShopperName gets a reference to the given Name and assigns it to the ShopperName field.
-func (o *DonationPaymentRequest) SetShopperName(v Name) {
+// SetShopperName gets a reference to the given ShopperName and assigns it to the ShopperName field.
+func (o *DonationPaymentRequest) SetShopperName(v ShopperName) {
 	o.ShopperName = &v
 }
 
@@ -1521,7 +1528,9 @@ func (o DonationPaymentRequest) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Origin) {
 		toSerialize["origin"] = o.Origin
 	}
-	toSerialize["paymentMethod"] = o.PaymentMethod
+	if !common.IsNil(o.PaymentMethod) {
+		toSerialize["paymentMethod"] = o.PaymentMethod
+	}
 	if !common.IsNil(o.RecurringProcessingModel) {
 		toSerialize["recurringProcessingModel"] = o.RecurringProcessingModel
 	}

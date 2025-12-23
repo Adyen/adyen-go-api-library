@@ -19,9 +19,9 @@ var _ common.MappedNullable = &Phone{}
 
 // Phone struct for Phone
 type Phone struct {
-	// Country code. Length: 1–3 characters.
+	// Country code. Length: 1–3 digits.
 	Cc *string `json:"cc,omitempty"`
-	// Subscriber number. Maximum length: 15 characters.
+	// Subscriber number. Length: 4-15  digits.
 	Subscriber *string `json:"subscriber,omitempty"`
 }
 
