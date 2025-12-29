@@ -7,7 +7,7 @@ This is the Adyen Go API Library, providing Go developers with an easy way to in
 A significant portion of this library, particularly the API services and models, is automatically generated.
 
 - **Engine**: We use [OpenAPI Generator](https://openapi-generator.tech/) with custom [Mustache](https://mustache.github.io/) templates to convert Adyen's OpenAPI specifications into Go code.
-- **Templates**: The custom templates are located in the `/templates` directory. These templates are tailored to fit our custom HTTP client, service structure, and model definitions.
+- **Templates**: The custom templates are located in the `templates/custom` directory. These templates are tailored to fit our custom HTTP client, service structure, and model definitions.
 - **Automation**:
     - **Centralized**: The primary generation process is managed in a separate repository, [`adyen-sdk-automation`](https://github.com/Adyen/adyen-sdk-automation). Changes to the OpenAPI specs trigger a GitHub workflow in that repository, which generates the code and opens Pull Requests in this library.
     - **Local**: For development and testing, you must use the [`adyen-sdk-automation`](https://github.com/Adyen/adyen-sdk-automation) repository.
