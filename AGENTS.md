@@ -45,7 +45,7 @@ To test new features or changes to the templates, you must run the generation pr
 
 - **`adyen.NewClient`**: The main entry point in `src/adyen/api.go`. It creates a new client instance that provides access to all API services.
 - **`common.Config`**: The central struct for configuring the library, including API key, environment, basic authentication credentials, and other settings.
-- **`common.HTTPClient`**: The underlying client responsible for making HTTP requests to the Adyen API. A custom `http.Client` can be injected for advanced configurations like proxies.
+- **Custom `http.Client` injection**: A custom `http.Client` can be injected via the `HTTPClient` field of `common.Config` for advanced configurations like proxies.
 - **`src/{service}`**: Each directory in `src` (e.g., `src/checkout`, `src/management`) represents an API service. These packages contain:
     - The generated API service files (e.g., `api_payments.go`).
     - The generated request and response models (e.g., `model_payment_request.go`).
