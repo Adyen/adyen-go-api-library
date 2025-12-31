@@ -10,8 +10,9 @@ package balancewebhook
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
 	"time"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the ReleasedBlockedBalanceNotificationRequest type satisfies the MappedNullable interface at compile time
@@ -153,7 +154,7 @@ func (o *ReleasedBlockedBalanceNotificationRequest) SetType(v string) {
 }
 
 func (o ReleasedBlockedBalanceNotificationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -207,14 +208,12 @@ func (v *NullableReleasedBlockedBalanceNotificationRequest) UnmarshalJSON(src []
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *ReleasedBlockedBalanceNotificationRequest) isValidType() bool {
-    var allowedEnumValues = []string{ "balancePlatform.balanceAccount.balance.block.released" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"balancePlatform.balanceAccount.balance.block.released"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

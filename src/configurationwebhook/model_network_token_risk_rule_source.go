@@ -10,7 +10,8 @@ package configurationwebhook
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the NetworkTokenRiskRuleSource type satisfies the MappedNullable interface at compile time
@@ -106,7 +107,7 @@ func (o *NetworkTokenRiskRuleSource) SetType(v string) {
 }
 
 func (o NetworkTokenRiskRuleSource) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -159,6 +160,3 @@ func (v *NullableNetworkTokenRiskRuleSource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-
