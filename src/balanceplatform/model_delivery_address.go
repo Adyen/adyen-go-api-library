@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the DeliveryAddress type satisfies the MappedNullable interface at compile time
@@ -31,7 +30,7 @@ type DeliveryAddress struct {
 	Line3 *string `json:"line3,omitempty"`
 	// The postal code. Maximum length: * 5 digits for an address in the US. * 10 characters for an address in all other countries.
 	PostalCode *string `json:"postalCode,omitempty"`
-	// The two-letter ISO 3166-2 state or province code. For example, **CA** in the US or **ON** in Canada. > Required for the US and Canada.
+	// The state or province code, maximum 3 characters. For example, **CA** for California in the US or **ON** for Ontario in Canada. > Required for the US and Canada.
 	StateOrProvince *string `json:"stateOrProvince,omitempty"`
 }
 
@@ -270,7 +269,7 @@ func (o *DeliveryAddress) SetStateOrProvince(v string) {
 }
 
 func (o DeliveryAddress) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -336,3 +335,6 @@ func (v *NullableDeliveryAddress) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
