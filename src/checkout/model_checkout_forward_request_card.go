@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the CheckoutForwardRequestCard type satisfies the MappedNullable interface at compile time
@@ -18,7 +19,7 @@ var _ common.MappedNullable = &CheckoutForwardRequestCard{}
 
 // CheckoutForwardRequestCard struct for CheckoutForwardRequestCard
 type CheckoutForwardRequestCard struct {
-	// The [card verification code](https://docs.adyen.com/payments-fundamentals/payment-glossary#card-security-code-cvc-cvv-cid) (1-20 characters). Depending on the card brand, it is also known as: * CVV2/CVC2 – length: 3 digits * CID – length: 4 digits 
+	// The [card verification code](https://docs.adyen.com/payments-fundamentals/payment-glossary#card-security-code-cvc-cvv-cid) (1-20 characters). Depending on the card brand, it is also known as: * CVV2/CVC2 – length: 3 digits * CID – length: 4 digits
 	Cvc *string `json:"cvc,omitempty"`
 	// The encrypted card number.
 	EncryptedCardNumber *string `json:"encryptedCardNumber,omitempty"`
@@ -382,7 +383,7 @@ func (o *CheckoutForwardRequestCard) SetType(v string) {
 }
 
 func (o CheckoutForwardRequestCard) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -460,14 +461,12 @@ func (v *NullableCheckoutForwardRequestCard) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *CheckoutForwardRequestCard) isValidType() bool {
-    var allowedEnumValues = []string{ "scheme" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"scheme"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

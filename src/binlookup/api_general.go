@@ -10,10 +10,10 @@ package binlookup
 
 import (
 	"context"
-    "net/http"
-    "net/url"
-    "strings"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+	"net/http"
+	"net/url"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // GeneralApi service
@@ -29,15 +29,13 @@ func (r GeneralApiGet3dsAvailabilityInput) ThreeDSAvailabilityRequest(threeDSAva
 	return r
 }
 
-
 /*
 Prepare a request for Get3dsAvailability
 
 @return GeneralApiGet3dsAvailabilityInput
 */
 func (a *GeneralApi) Get3dsAvailabilityInput() GeneralApiGet3dsAvailabilityInput {
-	return GeneralApiGet3dsAvailabilityInput{
-	}
+	return GeneralApiGet3dsAvailabilityInput{}
 }
 
 /*
@@ -52,25 +50,23 @@ For more information, refer to [3D Secure 2](https://docs.adyen.com/online-payme
 @return ThreeDSAvailabilityResponse, *http.Response, error
 */
 func (a *GeneralApi) Get3dsAvailability(ctx context.Context, r GeneralApiGet3dsAvailabilityInput) (ThreeDSAvailabilityResponse, *http.Response, error) {
-    res := &ThreeDSAvailabilityResponse{}
+	res := &ThreeDSAvailabilityResponse{}
 	path := "/get3dsAvailability"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.threeDSAvailabilityRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.threeDSAvailabilityRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by GeneralApi.GetCostEstimate
 type GeneralApiGetCostEstimateInput struct {
@@ -82,15 +78,13 @@ func (r GeneralApiGetCostEstimateInput) CostEstimateRequest(costEstimateRequest 
 	return r
 }
 
-
 /*
 Prepare a request for GetCostEstimate
 
 @return GeneralApiGetCostEstimateInput
 */
 func (a *GeneralApi) GetCostEstimateInput() GeneralApiGetCostEstimateInput {
-	return GeneralApiGetCostEstimateInput{
-	}
+	return GeneralApiGetCostEstimateInput{}
 }
 
 /*
@@ -109,22 +103,20 @@ To retrieve this information, make the call to the `/getCostEstimate` endpoint. 
 @return CostEstimateResponse, *http.Response, error
 */
 func (a *GeneralApi) GetCostEstimate(ctx context.Context, r GeneralApiGetCostEstimateInput) (CostEstimateResponse, *http.Response, error) {
-    res := &CostEstimateResponse{}
+	res := &CostEstimateResponse{}
 	path := "/getCostEstimate"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.costEstimateRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.costEstimateRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-

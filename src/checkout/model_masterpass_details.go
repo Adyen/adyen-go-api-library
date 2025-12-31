@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the MasterpassDetails type satisfies the MappedNullable interface at compile time
@@ -205,7 +206,7 @@ func (o *MasterpassDetails) SetType(v string) {
 }
 
 func (o MasterpassDetails) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -266,23 +267,21 @@ func (v *NullableMasterpassDetails) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *MasterpassDetails) isValidFundingSource() bool {
-    var allowedEnumValues = []string{ "credit", "debit", "prepaid" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetFundingSource() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"credit", "debit", "prepaid"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetFundingSource() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *MasterpassDetails) isValidType() bool {
-    var allowedEnumValues = []string{ "masterpass" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"masterpass"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

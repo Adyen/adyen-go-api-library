@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the CheckoutForwardResponse type satisfies the MappedNullable interface at compile time
@@ -19,8 +20,8 @@ var _ common.MappedNullable = &CheckoutForwardResponse{}
 // CheckoutForwardResponse struct for CheckoutForwardResponse
 type CheckoutForwardResponse struct {
 	// Adyen's 16-character reference associated with the transaction/request. This value is globally unique. Use this reference when you communicate with us about this request.
-	PspReference *string `json:"pspReference,omitempty"`
-	Response CheckoutForwardResponseFromUrl `json:"response"`
+	PspReference *string                        `json:"pspReference,omitempty"`
+	Response     CheckoutForwardResponseFromUrl `json:"response"`
 	// The unique identifier of the token.
 	StoredPaymentMethodId *string `json:"storedPaymentMethodId,omitempty"`
 }
@@ -132,7 +133,7 @@ func (o *CheckoutForwardResponse) SetStoredPaymentMethodId(v string) {
 }
 
 func (o CheckoutForwardResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -186,6 +187,3 @@ func (v *NullableCheckoutForwardResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-
