@@ -10,7 +10,8 @@ package management
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the AffirmInfo type satisfies the MappedNullable interface at compile time
@@ -99,7 +100,7 @@ func (o *AffirmInfo) SetSupportEmail(v string) {
 }
 
 func (o AffirmInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -151,14 +152,12 @@ func (v *NullableAffirmInfo) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *AffirmInfo) isValidPricePlan() bool {
-    var allowedEnumValues = []string{ "BRONZE", "SILVER", "GOLD" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetPricePlan() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"BRONZE", "SILVER", "GOLD"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetPricePlan() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

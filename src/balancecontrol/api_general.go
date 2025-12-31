@@ -10,10 +10,10 @@ package balancecontrol
 
 import (
 	"context"
-    "net/http"
-    "net/url"
-    "strings"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+	"net/http"
+	"net/url"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // GeneralApi service
@@ -29,7 +29,6 @@ func (r GeneralApiBalanceTransferInput) BalanceTransferRequest(balanceTransferRe
 	return r
 }
 
-
 /*
 Prepare a request for BalanceTransfer
 
@@ -38,8 +37,7 @@ Prepare a request for BalanceTransfer
 Deprecated since Adyen Balance Control API v1
 */
 func (a *GeneralApi) BalanceTransferInput() GeneralApiBalanceTransferInput {
-	return GeneralApiBalanceTransferInput{
-	}
+	return GeneralApiBalanceTransferInput{}
 }
 
 /*
@@ -55,7 +53,6 @@ Starts a balance transfer request between merchant accounts. The following condi
 
 When sending multiple API requests with the same source and destination merchant accounts, send the requests sequentially and *not* in parallel. Some requests may not be processed if the requests are sent in parallel.
 
-
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r GeneralApiBalanceTransferInput - Request parameters, see BalanceTransferInput
 @return BalanceTransferResponse, *http.Response, error
@@ -63,22 +60,20 @@ When sending multiple API requests with the same source and destination merchant
 Deprecated since Adyen Balance Control API v1
 */
 func (a *GeneralApi) BalanceTransfer(ctx context.Context, r GeneralApiBalanceTransferInput) (BalanceTransferResponse, *http.Response, error) {
-    res := &BalanceTransferResponse{}
+	res := &BalanceTransferResponse{}
 	path := "/balanceTransfer"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.balanceTransferRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.balanceTransferRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
