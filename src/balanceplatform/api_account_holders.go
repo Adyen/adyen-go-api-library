@@ -412,9 +412,10 @@ func (a *AccountHoldersApi) GetAllTransactionRulesForAccountHolder(ctx context.C
 
 // All parameters accepted by AccountHoldersApi.GetTaxForm
 type AccountHoldersApiGetTaxFormInput struct {
-	id       string
-	formType *string
-	year     *int32
+	id            string
+	formType      *string
+	year          *int32
+	legalEntityId *string
 }
 
 // The type of tax form you want to retrieve. Accepted values are **US1099k** and **US1099nec**
@@ -426,6 +427,12 @@ func (r AccountHoldersApiGetTaxFormInput) FormType(formType string) AccountHolde
 // The tax year in YYYY format for the tax form you want to retrieve
 func (r AccountHoldersApiGetTaxFormInput) Year(year int32) AccountHoldersApiGetTaxFormInput {
 	r.year = &year
+	return r
+}
+
+// The legal entity reference whose tax form you want to retrieve
+func (r AccountHoldersApiGetTaxFormInput) LegalEntityId(legalEntityId string) AccountHoldersApiGetTaxFormInput {
+	r.legalEntityId = &legalEntityId
 	return r
 }
 
@@ -460,6 +467,9 @@ func (a *AccountHoldersApi) GetTaxForm(ctx context.Context, r AccountHoldersApiG
 	}
 	if r.year != nil {
 		common.ParameterAddToQuery(queryParams, "year", r.year, "")
+	}
+	if r.legalEntityId != nil {
+		common.ParameterAddToQuery(queryParams, "legalEntityId", r.legalEntityId, "")
 	}
 	httpRes, err := common.SendAPIRequest(
 		ctx,
