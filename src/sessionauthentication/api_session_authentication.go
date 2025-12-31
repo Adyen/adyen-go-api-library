@@ -10,10 +10,10 @@ package sessionauthentication
 
 import (
 	"context"
-    "net/http"
-    "net/url"
-    "strings"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+	"net/http"
+	"net/url"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // SessionAuthenticationApi service
@@ -29,15 +29,13 @@ func (r SessionAuthenticationApiCreateAuthenticationSessionInput) Authentication
 	return r
 }
 
-
 /*
 Prepare a request for CreateAuthenticationSession
 
 @return SessionAuthenticationApiCreateAuthenticationSessionInput
 */
 func (a *SessionAuthenticationApi) CreateAuthenticationSessionInput() SessionAuthenticationApiCreateAuthenticationSessionInput {
-	return SessionAuthenticationApiCreateAuthenticationSessionInput{
-	}
+	return SessionAuthenticationApiCreateAuthenticationSessionInput{}
 }
 
 /*
@@ -49,29 +47,25 @@ The response contains encrypted session data. The front end then uses the sessio
 
 To create a token, you must meet specific requirements. These requirements vary depending on the type of component. For more information, see the documentation for [Onboarding](https://docs.adyen.com/platforms/onboard-users/components) and [Platform Experience](https://docs.adyen.com/platforms/build-user-dashboards) components.
 
-
-
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r SessionAuthenticationApiCreateAuthenticationSessionInput - Request parameters, see CreateAuthenticationSessionInput
 @return AuthenticationSessionResponse, *http.Response, error
 */
 func (a *SessionAuthenticationApi) CreateAuthenticationSession(ctx context.Context, r SessionAuthenticationApiCreateAuthenticationSessionInput) (AuthenticationSessionResponse, *http.Response, error) {
-    res := &AuthenticationSessionResponse{}
+	res := &AuthenticationSessionResponse{}
 	path := "/sessions"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.authenticationSessionRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.authenticationSessionRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-

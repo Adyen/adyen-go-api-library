@@ -10,14 +10,13 @@ package transfers
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
 	"fmt"
 )
 
 // TransferEventEventsDataInner - struct for TransferEventEventsDataInner
 type TransferEventEventsDataInner struct {
 	IssuingTransactionData *IssuingTransactionData
-	MerchantPurchaseData *MerchantPurchaseData
+	MerchantPurchaseData   *MerchantPurchaseData
 }
 
 // IssuingTransactionDataAsTransferEventEventsDataInner is a convenience function that returns IssuingTransactionData wrapped in TransferEventEventsDataInner
@@ -34,7 +33,6 @@ func MerchantPurchaseDataAsTransferEventEventsDataInner(v *MerchantPurchaseData)
 	}
 }
 
-
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *TransferEventEventsDataInner) UnmarshalJSON(data []byte) error {
 	var err error
@@ -45,7 +43,7 @@ func (dst *TransferEventEventsDataInner) UnmarshalJSON(data []byte) error {
 		jsonIssuingTransactionData, _ := json.Marshal(dst.IssuingTransactionData)
 		if string(jsonIssuingTransactionData) == "{}" || !dst.IssuingTransactionData.isValidType() { // empty struct
 			dst.IssuingTransactionData = nil
-        } else {
+		} else {
 			match++
 		}
 	} else {
@@ -58,7 +56,7 @@ func (dst *TransferEventEventsDataInner) UnmarshalJSON(data []byte) error {
 		jsonMerchantPurchaseData, _ := json.Marshal(dst.MerchantPurchaseData)
 		if string(jsonMerchantPurchaseData) == "{}" || !dst.MerchantPurchaseData.isValidType() { // empty struct
 			dst.MerchantPurchaseData = nil
-        } else {
+		} else {
 			match++
 		}
 	} else {
@@ -92,7 +90,7 @@ func (src TransferEventEventsDataInner) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *TransferEventEventsDataInner) GetActualInstance() (interface{}) {
+func (obj *TransferEventEventsDataInner) GetActualInstance() interface{} {
 	if obj == nil {
 		return nil
 	}
@@ -143,5 +141,3 @@ func (v *NullableTransferEventEventsDataInner) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
