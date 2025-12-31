@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the AmazonPayDetails type satisfies the MappedNullable interface at compile time
@@ -25,6 +24,8 @@ type AmazonPayDetails struct {
 	CheckoutAttemptId *string `json:"checkoutAttemptId,omitempty"`
 	// The `checkoutSessionId` is used to identify the checkout session at the Amazon Pay side. This field is required only for drop-in and components integration, where it replaces the amazonPayToken.
 	CheckoutSessionId *string `json:"checkoutSessionId,omitempty"`
+	// Base64-encoded JSON object containing SDK related parameters required by the SDK
+	SdkData *string `json:"sdkData,omitempty"`
 	// **amazonpay**
 	Type *string `json:"type,omitempty"`
 }
@@ -146,6 +147,38 @@ func (o *AmazonPayDetails) SetCheckoutSessionId(v string) {
 	o.CheckoutSessionId = &v
 }
 
+// GetSdkData returns the SdkData field value if set, zero value otherwise.
+func (o *AmazonPayDetails) GetSdkData() string {
+	if o == nil || common.IsNil(o.SdkData) {
+		var ret string
+		return ret
+	}
+	return *o.SdkData
+}
+
+// GetSdkDataOk returns a tuple with the SdkData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AmazonPayDetails) GetSdkDataOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SdkData) {
+		return nil, false
+	}
+	return o.SdkData, true
+}
+
+// HasSdkData returns a boolean if a field has been set.
+func (o *AmazonPayDetails) HasSdkData() bool {
+	if o != nil && !common.IsNil(o.SdkData) {
+		return true
+	}
+
+	return false
+}
+
+// SetSdkData gets a reference to the given string and assigns it to the SdkData field.
+func (o *AmazonPayDetails) SetSdkData(v string) {
+	o.SdkData = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *AmazonPayDetails) GetType() string {
 	if o == nil || common.IsNil(o.Type) {
@@ -179,7 +212,7 @@ func (o *AmazonPayDetails) SetType(v string) {
 }
 
 func (o AmazonPayDetails) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,6 +229,9 @@ func (o AmazonPayDetails) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.CheckoutSessionId) {
 		toSerialize["checkoutSessionId"] = o.CheckoutSessionId
+	}
+	if !common.IsNil(o.SdkData) {
+		toSerialize["sdkData"] = o.SdkData
 	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type
@@ -239,12 +275,14 @@ func (v *NullableAmazonPayDetails) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *AmazonPayDetails) isValidType() bool {
-	var allowedEnumValues = []string{"amazonpay"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "amazonpay" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

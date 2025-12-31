@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the MasterpassDetails type satisfies the MappedNullable interface at compile time
@@ -25,6 +24,8 @@ type MasterpassDetails struct {
 	FundingSource *string `json:"fundingSource,omitempty"`
 	// The Masterpass transaction ID.
 	MasterpassTransactionId string `json:"masterpassTransactionId"`
+	// Base64-encoded JSON object containing SDK related parameters required by the SDK
+	SdkData *string `json:"sdkData,omitempty"`
 	// **masterpass**
 	Type *string `json:"type,omitempty"`
 }
@@ -139,6 +140,38 @@ func (o *MasterpassDetails) SetMasterpassTransactionId(v string) {
 	o.MasterpassTransactionId = v
 }
 
+// GetSdkData returns the SdkData field value if set, zero value otherwise.
+func (o *MasterpassDetails) GetSdkData() string {
+	if o == nil || common.IsNil(o.SdkData) {
+		var ret string
+		return ret
+	}
+	return *o.SdkData
+}
+
+// GetSdkDataOk returns a tuple with the SdkData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MasterpassDetails) GetSdkDataOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SdkData) {
+		return nil, false
+	}
+	return o.SdkData, true
+}
+
+// HasSdkData returns a boolean if a field has been set.
+func (o *MasterpassDetails) HasSdkData() bool {
+	if o != nil && !common.IsNil(o.SdkData) {
+		return true
+	}
+
+	return false
+}
+
+// SetSdkData gets a reference to the given string and assigns it to the SdkData field.
+func (o *MasterpassDetails) SetSdkData(v string) {
+	o.SdkData = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *MasterpassDetails) GetType() string {
 	if o == nil || common.IsNil(o.Type) {
@@ -172,7 +205,7 @@ func (o *MasterpassDetails) SetType(v string) {
 }
 
 func (o MasterpassDetails) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -188,6 +221,9 @@ func (o MasterpassDetails) ToMap() (map[string]interface{}, error) {
 		toSerialize["fundingSource"] = o.FundingSource
 	}
 	toSerialize["masterpassTransactionId"] = o.MasterpassTransactionId
+	if !common.IsNil(o.SdkData) {
+		toSerialize["sdkData"] = o.SdkData
+	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
@@ -230,21 +266,23 @@ func (v *NullableMasterpassDetails) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *MasterpassDetails) isValidFundingSource() bool {
-	var allowedEnumValues = []string{"credit", "debit"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetFundingSource() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "credit", "debit", "prepaid" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetFundingSource() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *MasterpassDetails) isValidType() bool {
-	var allowedEnumValues = []string{"masterpass"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "masterpass" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

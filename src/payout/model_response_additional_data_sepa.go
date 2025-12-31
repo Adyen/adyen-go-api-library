@@ -10,8 +10,7 @@ package payout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the ResponseAdditionalDataSepa type satisfies the MappedNullable interface at compile time
@@ -23,6 +22,8 @@ type ResponseAdditionalDataSepa struct {
 	SepadirectdebitDateOfSignature *string `json:"sepadirectdebit.dateOfSignature,omitempty"`
 	// Its value corresponds to the pspReference value of the transaction.
 	SepadirectdebitMandateId *string `json:"sepadirectdebit.mandateId,omitempty"`
+	// The date that the the shopper's bank account is charged.
+	SepadirectdebitSepadirectdebitDueDate *string `json:"sepadirectdebit.sepadirectdebit.dueDate,omitempty"`
 	// This field can take one of the following values: * OneOff: (OOFF) Direct debit instruction to initiate exactly one direct debit transaction.  * First: (FRST) Initial/first collection in a series of direct debit instructions. * Recurring: (RCUR) Direct debit instruction to carry out regular direct debit transactions initiated by the creditor. * Final: (FNAL) Last/final collection in a series of direct debit instructions.  Example: OOFF
 	SepadirectdebitSequenceType *string `json:"sepadirectdebit.sequenceType,omitempty"`
 }
@@ -108,6 +109,38 @@ func (o *ResponseAdditionalDataSepa) SetSepadirectdebitMandateId(v string) {
 	o.SepadirectdebitMandateId = &v
 }
 
+// GetSepadirectdebitSepadirectdebitDueDate returns the SepadirectdebitSepadirectdebitDueDate field value if set, zero value otherwise.
+func (o *ResponseAdditionalDataSepa) GetSepadirectdebitSepadirectdebitDueDate() string {
+	if o == nil || common.IsNil(o.SepadirectdebitSepadirectdebitDueDate) {
+		var ret string
+		return ret
+	}
+	return *o.SepadirectdebitSepadirectdebitDueDate
+}
+
+// GetSepadirectdebitSepadirectdebitDueDateOk returns a tuple with the SepadirectdebitSepadirectdebitDueDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResponseAdditionalDataSepa) GetSepadirectdebitSepadirectdebitDueDateOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SepadirectdebitSepadirectdebitDueDate) {
+		return nil, false
+	}
+	return o.SepadirectdebitSepadirectdebitDueDate, true
+}
+
+// HasSepadirectdebitSepadirectdebitDueDate returns a boolean if a field has been set.
+func (o *ResponseAdditionalDataSepa) HasSepadirectdebitSepadirectdebitDueDate() bool {
+	if o != nil && !common.IsNil(o.SepadirectdebitSepadirectdebitDueDate) {
+		return true
+	}
+
+	return false
+}
+
+// SetSepadirectdebitSepadirectdebitDueDate gets a reference to the given string and assigns it to the SepadirectdebitSepadirectdebitDueDate field.
+func (o *ResponseAdditionalDataSepa) SetSepadirectdebitSepadirectdebitDueDate(v string) {
+	o.SepadirectdebitSepadirectdebitDueDate = &v
+}
+
 // GetSepadirectdebitSequenceType returns the SepadirectdebitSequenceType field value if set, zero value otherwise.
 func (o *ResponseAdditionalDataSepa) GetSepadirectdebitSequenceType() string {
 	if o == nil || common.IsNil(o.SepadirectdebitSequenceType) {
@@ -141,7 +174,7 @@ func (o *ResponseAdditionalDataSepa) SetSepadirectdebitSequenceType(v string) {
 }
 
 func (o ResponseAdditionalDataSepa) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -155,6 +188,9 @@ func (o ResponseAdditionalDataSepa) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.SepadirectdebitMandateId) {
 		toSerialize["sepadirectdebit.mandateId"] = o.SepadirectdebitMandateId
+	}
+	if !common.IsNil(o.SepadirectdebitSepadirectdebitDueDate) {
+		toSerialize["sepadirectdebit.sepadirectdebit.dueDate"] = o.SepadirectdebitSepadirectdebitDueDate
 	}
 	if !common.IsNil(o.SepadirectdebitSequenceType) {
 		toSerialize["sepadirectdebit.sequenceType"] = o.SepadirectdebitSequenceType
@@ -197,3 +233,6 @@ func (v *NullableResponseAdditionalDataSepa) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
