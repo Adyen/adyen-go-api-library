@@ -38,7 +38,8 @@ type StoredPaymentMethodResource struct {
 	// The name of the issuer of token or card.
 	IssuerName *string `json:"issuerName,omitempty"`
 	// The last four digits of the PAN.
-	LastFour *string `json:"lastFour,omitempty"`
+	LastFour *string       `json:"lastFour,omitempty"`
+	Mandate  *TokenMandate `json:"mandate,omitempty"`
 	// The display name of the stored payment method.
 	Name *string `json:"name,omitempty"`
 	// Returned in the response if you are not tokenizing with Adyen and are using the Merchant-initiated transactions (MIT) framework from Mastercard or Visa.  This contains either the Mastercard Trace ID or the Visa Transaction ID.
@@ -392,6 +393,38 @@ func (o *StoredPaymentMethodResource) SetLastFour(v string) {
 	o.LastFour = &v
 }
 
+// GetMandate returns the Mandate field value if set, zero value otherwise.
+func (o *StoredPaymentMethodResource) GetMandate() TokenMandate {
+	if o == nil || common.IsNil(o.Mandate) {
+		var ret TokenMandate
+		return ret
+	}
+	return *o.Mandate
+}
+
+// GetMandateOk returns a tuple with the Mandate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoredPaymentMethodResource) GetMandateOk() (*TokenMandate, bool) {
+	if o == nil || common.IsNil(o.Mandate) {
+		return nil, false
+	}
+	return o.Mandate, true
+}
+
+// HasMandate returns a boolean if a field has been set.
+func (o *StoredPaymentMethodResource) HasMandate() bool {
+	if o != nil && !common.IsNil(o.Mandate) {
+		return true
+	}
+
+	return false
+}
+
+// SetMandate gets a reference to the given TokenMandate and assigns it to the Mandate field.
+func (o *StoredPaymentMethodResource) SetMandate(v TokenMandate) {
+	o.Mandate = &v
+}
+
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *StoredPaymentMethodResource) GetName() string {
 	if o == nil || common.IsNil(o.Name) {
@@ -655,6 +688,9 @@ func (o StoredPaymentMethodResource) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.LastFour) {
 		toSerialize["lastFour"] = o.LastFour
+	}
+	if !common.IsNil(o.Mandate) {
+		toSerialize["mandate"] = o.Mandate
 	}
 	if !common.IsNil(o.Name) {
 		toSerialize["name"] = o.Name

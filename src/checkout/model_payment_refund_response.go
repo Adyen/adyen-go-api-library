@@ -20,7 +20,7 @@ var _ common.MappedNullable = &PaymentRefundResponse{}
 // PaymentRefundResponse struct for PaymentRefundResponse
 type PaymentRefundResponse struct {
 	Amount Amount `json:"amount"`
-	// This is only available for PayPal refunds. The [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference) of the specific capture to refund.
+	// This is only available for PayPal refunds. The [`pspReference`](https://docs.adyen.com/api-explorer/Checkout/latest/post/payments#responses-200-pspReference) of the specific capture to refund.
 	CapturePspReference *string `json:"capturePspReference,omitempty"`
 	// Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment). > This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Atome, Clearpay, Klarna, Ratepay, Walley, and Zip.
 	LineItems []LineItem `json:"lineItems,omitempty"`
@@ -28,7 +28,7 @@ type PaymentRefundResponse struct {
 	MerchantAccount string `json:"merchantAccount"`
 	// Your reason for the refund request.
 	MerchantRefundReason common.NullableString `json:"merchantRefundReason,omitempty"`
-	// The [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference) of the payment to refund.
+	// The [`pspReference`](https://docs.adyen.com/api-explorer/Checkout/latest/post/payments#responses-200-pspReference) of the payment to refund.
 	PaymentPspReference string `json:"paymentPspReference"`
 	// Adyen's 16-character reference associated with the refund request.
 	PspReference string `json:"pspReference"`

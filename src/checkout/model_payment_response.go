@@ -27,9 +27,10 @@ type PaymentResponse struct {
 	DonationToken *string      `json:"donationToken,omitempty"`
 	FraudResult   *FraudResult `json:"fraudResult,omitempty"`
 	// The reference to uniquely identify a payment. This reference is used in all communication with you about the payment status. We recommend using a unique value per payment; however, it is not a requirement. If you need to provide multiple references for a transaction, separate them with hyphens (\"-\"). Maximum length: 80 characters.
-	MerchantReference *string                `json:"merchantReference,omitempty"`
-	Order             *CheckoutOrderResponse `json:"order,omitempty"`
-	PaymentMethod     *ResponsePaymentMethod `json:"paymentMethod,omitempty"`
+	MerchantReference  *string                     `json:"merchantReference,omitempty"`
+	Order              *CheckoutOrderResponse      `json:"order,omitempty"`
+	PaymentMethod      *ResponsePaymentMethod      `json:"paymentMethod,omitempty"`
+	PaymentValidations *PaymentValidationsResponse `json:"paymentValidations,omitempty"`
 	// Adyen's 16-character string reference associated with the transaction/request. This value is globally unique; quote it when communicating with us about this request.  > For payment methods that require a redirect or additional action, you will get this value in the `/payments/details` response.
 	PspReference *string `json:"pspReference,omitempty"`
 	// If the payment's authorisation is refused or an error occurs during authorisation, this field holds Adyen's mapped reason for the refusal or a description of the error. When a transaction fails, the authorisation response includes `resultCode` and `refusalReason` values.  For more information, see [Refusal reasons](https://docs.adyen.com/development-resources/refusal-reasons).
@@ -317,6 +318,38 @@ func (o *PaymentResponse) SetPaymentMethod(v ResponsePaymentMethod) {
 	o.PaymentMethod = &v
 }
 
+// GetPaymentValidations returns the PaymentValidations field value if set, zero value otherwise.
+func (o *PaymentResponse) GetPaymentValidations() PaymentValidationsResponse {
+	if o == nil || common.IsNil(o.PaymentValidations) {
+		var ret PaymentValidationsResponse
+		return ret
+	}
+	return *o.PaymentValidations
+}
+
+// GetPaymentValidationsOk returns a tuple with the PaymentValidations field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentResponse) GetPaymentValidationsOk() (*PaymentValidationsResponse, bool) {
+	if o == nil || common.IsNil(o.PaymentValidations) {
+		return nil, false
+	}
+	return o.PaymentValidations, true
+}
+
+// HasPaymentValidations returns a boolean if a field has been set.
+func (o *PaymentResponse) HasPaymentValidations() bool {
+	if o != nil && !common.IsNil(o.PaymentValidations) {
+		return true
+	}
+
+	return false
+}
+
+// SetPaymentValidations gets a reference to the given PaymentValidationsResponse and assigns it to the PaymentValidations field.
+func (o *PaymentResponse) SetPaymentValidations(v PaymentValidationsResponse) {
+	o.PaymentValidations = &v
+}
+
 // GetPspReference returns the PspReference field value if set, zero value otherwise.
 func (o *PaymentResponse) GetPspReference() string {
 	if o == nil || common.IsNil(o.PspReference) {
@@ -574,6 +607,9 @@ func (o PaymentResponse) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.PaymentMethod) {
 		toSerialize["paymentMethod"] = o.PaymentMethod
+	}
+	if !common.IsNil(o.PaymentValidations) {
+		toSerialize["paymentValidations"] = o.PaymentValidations
 	}
 	if !common.IsNil(o.PspReference) {
 		toSerialize["pspReference"] = o.PspReference
