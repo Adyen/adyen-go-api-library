@@ -339,10 +339,14 @@ func (c *Client) PrepareRequest(
 
 	// Add the user agent to the Request.
 	var userAgent string
-	if c.Cfg.ApplicationName != "" {
-		userAgent = fmt.Sprintf("%s %s/%s", c.Cfg.ApplicationName, LibName, LibVersion)
+	if c.Cfg.UserAgent != "" {
+		userAgent = c.Cfg.UserAgent // retain User-Agent as set by the application
 	} else {
-		userAgent = fmt.Sprintf("%s/%s", LibName, LibVersion)
+		if c.Cfg.ApplicationName != "" {
+			userAgent = fmt.Sprintf("%s %s/%s", c.Cfg.ApplicationName, LibName, LibVersion)
+		} else {
+			userAgent = fmt.Sprintf("%s/%s", LibName, LibVersion)
+		}
 	}
 	localVarRequest.Header.Add("User-Agent", userAgent)
 	localVarRequest.Header.Add("adyen-library-name", LibName)
