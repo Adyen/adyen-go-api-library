@@ -338,7 +338,17 @@ func (c *Client) PrepareRequest(
 	}
 
 	// Add the user agent to the Request.
-	localVarRequest.Header.Add("User-Agent", c.Cfg.UserAgent)
+	var userAgent string
+	if c.Cfg.UserAgent != "" {
+		userAgent = c.Cfg.UserAgent // retain User-Agent as set by the application
+	} else {
+		if c.Cfg.ApplicationName != "" {
+			userAgent = fmt.Sprintf("%s %s/%s", c.Cfg.ApplicationName, LibName, LibVersion)
+		} else {
+			userAgent = fmt.Sprintf("%s/%s", LibName, LibVersion)
+		}
+	}
+	localVarRequest.Header.Add("User-Agent", userAgent)
 	localVarRequest.Header.Add("adyen-library-name", LibName)
 	localVarRequest.Header.Add("adyen-library-version", LibVersion)
 	localVarRequest.Header.Add("Cache-Control", "no-cache")

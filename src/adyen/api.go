@@ -117,9 +117,6 @@ func NewClient(cfg *common.Config) *APIClient {
 	if cfg.DefaultHeader == nil {
 		cfg.DefaultHeader = make(map[string]string)
 	}
-	if cfg.UserAgent == "" {
-		cfg.UserAgent = fmt.Sprintf("%s/%s", common.LibName, common.LibVersion)
-	}
 
 	c := &APIClient{}
 	c.client = &common.Client{}
