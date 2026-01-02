@@ -18,11 +18,17 @@ func Test_UserAgent(t *testing.T) {
 		expectedUserAgent := fmt.Sprintf("%s/%s", common.LibName, common.LibVersion)
 
 		handler := func(w http.ResponseWriter, r *http.Request) {
+			// verify User-Agent header
 			userAgent := r.Header.Get("User-Agent")
 			require.Equal(t, expectedUserAgent, userAgent)
+			// verify adyen-library-name header
+			libName := r.Header.Get("adyen-library-name")
+			require.Equal(t, common.LibName, libName)
+			// verify adyen-library-version header
+			libVersion := r.Header.Get("adyen-library-version")
+			require.Equal(t, common.LibVersion, libVersion)
 			w.WriteHeader(http.StatusOK)
 		}
-
 		mockServer := httptest.NewServer(http.HandlerFunc(handler))
 		defer mockServer.Close()
 
@@ -42,8 +48,15 @@ func Test_UserAgent(t *testing.T) {
 		expectedUserAgent := fmt.Sprintf("%s %s/%s", appName, common.LibName, common.LibVersion)
 
 		handler := func(w http.ResponseWriter, r *http.Request) {
+			// verify User-Agent header
 			userAgent := r.Header.Get("User-Agent")
 			require.Equal(t, expectedUserAgent, userAgent)
+			// verify adyen-library-name header
+			libName := r.Header.Get("adyen-library-name")
+			require.Equal(t, common.LibName, libName)
+			// verify adyen-library-version header
+			libVersion := r.Header.Get("adyen-library-version")
+			require.Equal(t, common.LibVersion, libVersion)
 			w.WriteHeader(http.StatusOK)
 		}
 
