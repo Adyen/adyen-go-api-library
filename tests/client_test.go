@@ -14,64 +14,55 @@ import (
 )
 
 func Test_UserAgent(t *testing.T) {
-	t.Run("User-Agent without ApplicationName", func(t *testing.T) {
-		expectedUserAgent := fmt.Sprintf("%s/%s", common.LibName, common.LibVersion)
+	cases := []struct {
+		name              string
+		appName           string
+		expectedUserAgent string
+	}{
+		{
+			name:              "User-Agent without ApplicationName",
+			appName:           "",
+			expectedUserAgent: fmt.Sprintf("%s/%s", common.LibName, common.LibVersion),
+		},
+		{
+			name:              "User-Agent with ApplicationName",
+			appName:           "MyTestApp",
+			expectedUserAgent: fmt.Sprintf("%s %s/%s", "MyTestApp", common.LibName, common.LibVersion),
+		},
+	}
 
-		handler := func(w http.ResponseWriter, r *http.Request) {
-			// verify User-Agent header
-			userAgent := r.Header.Get("User-Agent")
-			require.Equal(t, expectedUserAgent, userAgent)
-			// verify adyen-library-name header
-			libName := r.Header.Get("adyen-library-name")
-			require.Equal(t, common.LibName, libName)
-			// verify adyen-library-version header
-			libVersion := r.Header.Get("adyen-library-version")
-			require.Equal(t, common.LibVersion, libVersion)
-			w.WriteHeader(http.StatusOK)
-		}
-		mockServer := httptest.NewServer(http.HandlerFunc(handler))
-		defer mockServer.Close()
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			handler := func(w http.ResponseWriter, r *http.Request) {
+				// verify User-Agent header
+				userAgent := r.Header.Get("User-Agent")
+				require.Equal(t, tc.expectedUserAgent, userAgent)
+				// verify adyen-library-name header
+				libName := r.Header.Get("adyen-library-name")
+				require.Equal(t, common.LibName, libName)
+				// verify adyen-library-version header
+				libVersion := r.Header.Get("adyen-library-version")
+				require.Equal(t, common.LibVersion, libVersion)
+				w.WriteHeader(http.StatusOK)
+			}
+			mockServer := httptest.NewServer(http.HandlerFunc(handler))
+			defer mockServer.Close()
 
-		client := adyen.NewClient(&common.Config{
-			Environment: common.TestEnv,
-			HTTPClient:  mockServer.Client(),
+			config := &common.Config{
+				Environment: common.TestEnv,
+				HTTPClient:  mockServer.Client(),
+			}
+
+			if tc.appName != "" {
+				config.ApplicationName = tc.appName
+			}
+
+			client := adyen.NewClient(config)
+			client.Payments().PaymentsApi.BasePath = func() string { return mockServer.URL }
+
+			req := client.Payments().PaymentsApi.AuthoriseInput().PaymentRequest(payments.PaymentRequest{})
+			_, _, err := client.Payments().PaymentsApi.Authorise(context.Background(), req)
+			require.NoError(t, err)
 		})
-		client.Payments().PaymentsApi.BasePath = func() string { return mockServer.URL }
-
-		req := client.Payments().PaymentsApi.AuthoriseInput().PaymentRequest(payments.PaymentRequest{})
-		_, _, err := client.Payments().PaymentsApi.Authorise(context.Background(), req)
-		require.NoError(t, err)
-	})
-
-	t.Run("User-Agent with ApplicationName", func(t *testing.T) {
-		appName := "MyTestApp"
-		expectedUserAgent := fmt.Sprintf("%s %s/%s", appName, common.LibName, common.LibVersion)
-
-		handler := func(w http.ResponseWriter, r *http.Request) {
-			// verify User-Agent header
-			userAgent := r.Header.Get("User-Agent")
-			require.Equal(t, expectedUserAgent, userAgent)
-			// verify adyen-library-name header
-			libName := r.Header.Get("adyen-library-name")
-			require.Equal(t, common.LibName, libName)
-			// verify adyen-library-version header
-			libVersion := r.Header.Get("adyen-library-version")
-			require.Equal(t, common.LibVersion, libVersion)
-			w.WriteHeader(http.StatusOK)
-		}
-
-		mockServer := httptest.NewServer(http.HandlerFunc(handler))
-		defer mockServer.Close()
-
-		client := adyen.NewClient(&common.Config{
-			ApplicationName: appName,
-			Environment:     common.TestEnv,
-			HTTPClient:      mockServer.Client(),
-		})
-		client.Payments().PaymentsApi.BasePath = func() string { return mockServer.URL }
-
-		req := client.Payments().PaymentsApi.AuthoriseInput().PaymentRequest(payments.PaymentRequest{})
-		_, _, err := client.Payments().PaymentsApi.Authorise(context.Background(), req)
-		require.NoError(t, err)
-	})
+	}
 }
