@@ -10,8 +10,7 @@ package transfers
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the UltimatePartyIdentification type satisfies the MappedNullable interface at compile time
@@ -22,16 +21,21 @@ type UltimatePartyIdentification struct {
 	Address *Address `json:"address,omitempty"`
 	// The date of birth of the individual in [ISO-8601](https://www.w3.org/TR/NOTE-datetime) format. For example, **YYYY-MM-DD**.  Allowed only when `type` is **individual**.
 	DateOfBirth *string `json:"dateOfBirth,omitempty"`
+	// The email address of the organization or individual. Maximum length: 254 characters.
+	Email *string `json:"email,omitempty"`
 	// The first name of the individual.  Supported characters: [a-z] [A-Z] - . / — and space.  This parameter is: - Allowed only when `type` is **individual**. - Required when `category` is **card**.
 	FirstName *string `json:"firstName,omitempty"`
 	// The full name of the entity that owns the bank account or card.  Supported characters: [a-z] [A-Z] [0-9] , . ; : - — / \\ + & ! ? @ ( ) \" ' and space.  Required when `category` is **bank**.
 	FullName *string `json:"fullName,omitempty"`
+	FundingInstrument *FundingInstrument `json:"fundingInstrument,omitempty"`
 	// The last name of the individual.  Supported characters: [a-z] [A-Z] - . / — and space.  This parameter is: - Allowed only when `type` is **individual**. - Required when `category` is **card**.
 	LastName *string `json:"lastName,omitempty"`
 	// A unique reference to identify the party or counterparty involved in the transfer. For example, your client's unique wallet or payee ID.  Required when you include `cardIdentification.storedPaymentMethodId`.
 	Reference *string `json:"reference,omitempty"`
 	// The type of entity that owns the bank account or card.  Possible values: **individual**, **organization**, or **unknown**.  Required when `category` is **card**. In this case, the value must be **individual**.
 	Type *string `json:"type,omitempty"`
+	// The URL of the organization or individual. Maximum length: 255 characters.
+	Url *string `json:"url,omitempty"`
 }
 
 // NewUltimatePartyIdentification instantiates a new UltimatePartyIdentification object
@@ -119,6 +123,38 @@ func (o *UltimatePartyIdentification) SetDateOfBirth(v string) {
 	o.DateOfBirth = &v
 }
 
+// GetEmail returns the Email field value if set, zero value otherwise.
+func (o *UltimatePartyIdentification) GetEmail() string {
+	if o == nil || common.IsNil(o.Email) {
+		var ret string
+		return ret
+	}
+	return *o.Email
+}
+
+// GetEmailOk returns a tuple with the Email field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UltimatePartyIdentification) GetEmailOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Email) {
+		return nil, false
+	}
+	return o.Email, true
+}
+
+// HasEmail returns a boolean if a field has been set.
+func (o *UltimatePartyIdentification) HasEmail() bool {
+	if o != nil && !common.IsNil(o.Email) {
+		return true
+	}
+
+	return false
+}
+
+// SetEmail gets a reference to the given string and assigns it to the Email field.
+func (o *UltimatePartyIdentification) SetEmail(v string) {
+	o.Email = &v
+}
+
 // GetFirstName returns the FirstName field value if set, zero value otherwise.
 func (o *UltimatePartyIdentification) GetFirstName() string {
 	if o == nil || common.IsNil(o.FirstName) {
@@ -181,6 +217,38 @@ func (o *UltimatePartyIdentification) HasFullName() bool {
 // SetFullName gets a reference to the given string and assigns it to the FullName field.
 func (o *UltimatePartyIdentification) SetFullName(v string) {
 	o.FullName = &v
+}
+
+// GetFundingInstrument returns the FundingInstrument field value if set, zero value otherwise.
+func (o *UltimatePartyIdentification) GetFundingInstrument() FundingInstrument {
+	if o == nil || common.IsNil(o.FundingInstrument) {
+		var ret FundingInstrument
+		return ret
+	}
+	return *o.FundingInstrument
+}
+
+// GetFundingInstrumentOk returns a tuple with the FundingInstrument field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UltimatePartyIdentification) GetFundingInstrumentOk() (*FundingInstrument, bool) {
+	if o == nil || common.IsNil(o.FundingInstrument) {
+		return nil, false
+	}
+	return o.FundingInstrument, true
+}
+
+// HasFundingInstrument returns a boolean if a field has been set.
+func (o *UltimatePartyIdentification) HasFundingInstrument() bool {
+	if o != nil && !common.IsNil(o.FundingInstrument) {
+		return true
+	}
+
+	return false
+}
+
+// SetFundingInstrument gets a reference to the given FundingInstrument and assigns it to the FundingInstrument field.
+func (o *UltimatePartyIdentification) SetFundingInstrument(v FundingInstrument) {
+	o.FundingInstrument = &v
 }
 
 // GetLastName returns the LastName field value if set, zero value otherwise.
@@ -279,8 +347,40 @@ func (o *UltimatePartyIdentification) SetType(v string) {
 	o.Type = &v
 }
 
+// GetUrl returns the Url field value if set, zero value otherwise.
+func (o *UltimatePartyIdentification) GetUrl() string {
+	if o == nil || common.IsNil(o.Url) {
+		var ret string
+		return ret
+	}
+	return *o.Url
+}
+
+// GetUrlOk returns a tuple with the Url field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UltimatePartyIdentification) GetUrlOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Url) {
+		return nil, false
+	}
+	return o.Url, true
+}
+
+// HasUrl returns a boolean if a field has been set.
+func (o *UltimatePartyIdentification) HasUrl() bool {
+	if o != nil && !common.IsNil(o.Url) {
+		return true
+	}
+
+	return false
+}
+
+// SetUrl gets a reference to the given string and assigns it to the Url field.
+func (o *UltimatePartyIdentification) SetUrl(v string) {
+	o.Url = &v
+}
+
 func (o UltimatePartyIdentification) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -295,11 +395,17 @@ func (o UltimatePartyIdentification) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.DateOfBirth) {
 		toSerialize["dateOfBirth"] = o.DateOfBirth
 	}
+	if !common.IsNil(o.Email) {
+		toSerialize["email"] = o.Email
+	}
 	if !common.IsNil(o.FirstName) {
 		toSerialize["firstName"] = o.FirstName
 	}
 	if !common.IsNil(o.FullName) {
 		toSerialize["fullName"] = o.FullName
+	}
+	if !common.IsNil(o.FundingInstrument) {
+		toSerialize["fundingInstrument"] = o.FundingInstrument
 	}
 	if !common.IsNil(o.LastName) {
 		toSerialize["lastName"] = o.LastName
@@ -309,6 +415,9 @@ func (o UltimatePartyIdentification) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type
+	}
+	if !common.IsNil(o.Url) {
+		toSerialize["url"] = o.Url
 	}
 	return toSerialize, nil
 }
@@ -349,12 +458,14 @@ func (v *NullableUltimatePartyIdentification) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *UltimatePartyIdentification) isValidType() bool {
-	var allowedEnumValues = []string{"individual", "organization", "unknown"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "individual", "organization", "unknown" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

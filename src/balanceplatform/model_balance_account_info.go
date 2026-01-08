@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the BalanceAccountInfo type satisfies the MappedNullable interface at compile time
@@ -19,7 +18,7 @@ var _ common.MappedNullable = &BalanceAccountInfo{}
 
 // BalanceAccountInfo struct for BalanceAccountInfo
 type BalanceAccountInfo struct {
-	// The unique identifier of the [account holder](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/accountHolders__resParam_id) associated with the balance account.
+	// The unique identifier of the [account holder](https://docs.adyen.com/api-explorer/balanceplatform/latest/post/accountHolders#responses-200-id) associated with the balance account.
 	AccountHolderId string `json:"accountHolderId"`
 	// The default three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes) of the balance account. This is the currency displayed on the Balance Account overview page in your Customer Area. The default value is **EUR**. > After a balance account is created, you cannot change its default currency.
 	DefaultCurrencyCode *string `json:"defaultCurrencyCode,omitempty"`
@@ -28,7 +27,7 @@ type BalanceAccountInfo struct {
 	// A set of key and value pairs for general use. The keys do not have specific names and may be used for storing miscellaneous data as desired. > Note that during an update of metadata, the omission of existing key-value pairs will result in the deletion of those key-value pairs.
 	Metadata *map[string]string `json:"metadata,omitempty"`
 	// The unique identifier of the account of the migrated account holder in the classic integration.
-	MigratedAccountCode          *string                       `json:"migratedAccountCode,omitempty"`
+	MigratedAccountCode *string `json:"migratedAccountCode,omitempty"`
 	PlatformPaymentConfiguration *PlatformPaymentConfiguration `json:"platformPaymentConfiguration,omitempty"`
 	// Your reference for the balance account, maximum 150 characters.
 	Reference *string `json:"reference,omitempty"`
@@ -303,7 +302,7 @@ func (o *BalanceAccountInfo) SetTimeZone(v string) {
 }
 
 func (o BalanceAccountInfo) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -372,3 +371,6 @@ func (v *NullableBalanceAccountInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
