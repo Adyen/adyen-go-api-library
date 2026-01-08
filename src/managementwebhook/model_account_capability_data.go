@@ -26,7 +26,7 @@ type AccountCapabilityData struct {
 	AllowedLevel *string `json:"allowedLevel,omitempty"`
 	// The name of the capability. For example, **sendToTransferInstrument**.
 	Capability *string `json:"capability,omitempty"`
-	// List of entities that has problems with verification. The information includes the details of the errors and the actions that you can take to resolve them.
+	// List of entities that have problems with verification. The information includes the details of the errors and the actions that you can take to resolve them.
 	Problems []CapabilityProblem `json:"problems,omitempty"`
 	// Indicates whether you requested the capability.
 	Requested bool `json:"requested"`
