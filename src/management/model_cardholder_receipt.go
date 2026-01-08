@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the CardholderReceipt type satisfies the MappedNullable interface at compile time
@@ -19,7 +18,7 @@ var _ common.MappedNullable = &CardholderReceipt{}
 
 // CardholderReceipt struct for CardholderReceipt
 type CardholderReceipt struct {
-	// A custom header to show on the shopper receipt for an authorised transaction. Allows one or two comma-separated header lines, and blank lines. For example, `header,header,filler`
+	// The structure of the header to show on the shopper receipt. You can define the order of one or two header lines and blank lines. For example, **header1,header2,filler**. The text of the header lines is defined in the Customer Area under **In-person payments** > **Terminal settings** > **Receipts** in the **Receipt lines** block.
 	HeaderForAuthorizedReceipt *string `json:"headerForAuthorizedReceipt,omitempty"`
 }
 
@@ -73,7 +72,7 @@ func (o *CardholderReceipt) SetHeaderForAuthorizedReceipt(v string) {
 }
 
 func (o CardholderReceipt) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -123,3 +122,6 @@ func (v *NullableCardholderReceipt) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
