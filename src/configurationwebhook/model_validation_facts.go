@@ -10,7 +10,8 @@ package configurationwebhook
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the ValidationFacts type satisfies the MappedNullable interface at compile time
@@ -140,7 +141,7 @@ func (o *ValidationFacts) SetType(v string) {
 }
 
 func (o ValidationFacts) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -197,14 +198,12 @@ func (v *NullableValidationFacts) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *ValidationFacts) isValidResult() bool {
-    var allowedEnumValues = []string{ "invalid", "notApplicable", "notValidated", "valid" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetResult() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"invalid", "notApplicable", "notValidated", "valid"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetResult() == allowed {
+			return true
+		}
+	}
+	return false
 }
-
