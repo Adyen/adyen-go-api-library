@@ -19,10 +19,12 @@ var _ common.MappedNullable = &SplitConfigurationRule{}
 
 // SplitConfigurationRule struct for SplitConfigurationRule
 type SplitConfigurationRule struct {
+	// The card region condition that determines whether the [split logic](https://docs.adyen.com/api-explorer/Management/latest/post/merchants/(merchantId)/splitConfigurations#request-rules-splitLogic) applies to the transaction.  > This condition is in pilot phase, and not yet available for all platforms.  Possible values: * **domestic**: The card issuer and the store where the transaction is processed are registered in the same country. * **international**: The card issuer and the store where the transaction is processed are registered in different countries or regions. Includes all **interRegional** and **intraRegional** transactions. * **interRegional**: The card issuer and the store where the transaction is processed are registered in different regions. * **intraRegional**: The card issuer and the store where the transaction is processed are registered in different countries, but in the same region. * **ANY**: Applies to all transactions, regardless of the processing and issuing country/region.
+	CardRegion *string `json:"cardRegion,omitempty"`
 	// The currency condition that defines whether the split logic applies. Its value must be a three-character [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217).
 	Currency string `json:"currency"`
-	// The funding source of the payment method. This only applies to card transactions.  Possible values: * **credit** * **debit** * **prepaid** * **deferred_debit** * **charged** * **ANY**
-	FundingSource *string `json:"fundingSource,omitempty"`
+	// The funding source of the payment method.  Possible values: * **credit** * **debit** * **prepaid** * **deferred_debit** * **charged** * **ANY**
+	FundingSource string `json:"fundingSource"`
 	// The payment method condition that defines whether the split logic applies.  Possible values: * [Payment method variant](https://docs.adyen.com/development-resources/paymentmethodvariant): Apply the split logic for a specific payment method. * **ANY**: Apply the split logic for all available payment methods.
 	PaymentMethod string `json:"paymentMethod"`
 	// The unique identifier of the split configuration rule.
@@ -36,9 +38,10 @@ type SplitConfigurationRule struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSplitConfigurationRule(currency string, paymentMethod string, shopperInteraction string, splitLogic SplitConfigurationLogic) *SplitConfigurationRule {
+func NewSplitConfigurationRule(currency string, fundingSource string, paymentMethod string, shopperInteraction string, splitLogic SplitConfigurationLogic) *SplitConfigurationRule {
 	this := SplitConfigurationRule{}
 	this.Currency = currency
+	this.FundingSource = fundingSource
 	this.PaymentMethod = paymentMethod
 	this.ShopperInteraction = shopperInteraction
 	this.SplitLogic = splitLogic
@@ -51,6 +54,38 @@ func NewSplitConfigurationRule(currency string, paymentMethod string, shopperInt
 func NewSplitConfigurationRuleWithDefaults() *SplitConfigurationRule {
 	this := SplitConfigurationRule{}
 	return &this
+}
+
+// GetCardRegion returns the CardRegion field value if set, zero value otherwise.
+func (o *SplitConfigurationRule) GetCardRegion() string {
+	if o == nil || common.IsNil(o.CardRegion) {
+		var ret string
+		return ret
+	}
+	return *o.CardRegion
+}
+
+// GetCardRegionOk returns a tuple with the CardRegion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SplitConfigurationRule) GetCardRegionOk() (*string, bool) {
+	if o == nil || common.IsNil(o.CardRegion) {
+		return nil, false
+	}
+	return o.CardRegion, true
+}
+
+// HasCardRegion returns a boolean if a field has been set.
+func (o *SplitConfigurationRule) HasCardRegion() bool {
+	if o != nil && !common.IsNil(o.CardRegion) {
+		return true
+	}
+
+	return false
+}
+
+// SetCardRegion gets a reference to the given string and assigns it to the CardRegion field.
+func (o *SplitConfigurationRule) SetCardRegion(v string) {
+	o.CardRegion = &v
 }
 
 // GetCurrency returns the Currency field value
@@ -77,36 +112,28 @@ func (o *SplitConfigurationRule) SetCurrency(v string) {
 	o.Currency = v
 }
 
-// GetFundingSource returns the FundingSource field value if set, zero value otherwise.
+// GetFundingSource returns the FundingSource field value
 func (o *SplitConfigurationRule) GetFundingSource() string {
-	if o == nil || common.IsNil(o.FundingSource) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.FundingSource
+
+	return o.FundingSource
 }
 
-// GetFundingSourceOk returns a tuple with the FundingSource field value if set, nil otherwise
+// GetFundingSourceOk returns a tuple with the FundingSource field value
 // and a boolean to check if the value has been set.
 func (o *SplitConfigurationRule) GetFundingSourceOk() (*string, bool) {
-	if o == nil || common.IsNil(o.FundingSource) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FundingSource, true
+	return &o.FundingSource, true
 }
 
-// HasFundingSource returns a boolean if a field has been set.
-func (o *SplitConfigurationRule) HasFundingSource() bool {
-	if o != nil && !common.IsNil(o.FundingSource) {
-		return true
-	}
-
-	return false
-}
-
-// SetFundingSource gets a reference to the given string and assigns it to the FundingSource field.
+// SetFundingSource sets field value
 func (o *SplitConfigurationRule) SetFundingSource(v string) {
-	o.FundingSource = &v
+	o.FundingSource = v
 }
 
 // GetPaymentMethod returns the PaymentMethod field value
@@ -223,10 +250,11 @@ func (o SplitConfigurationRule) MarshalJSON() ([]byte, error) {
 
 func (o SplitConfigurationRule) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["currency"] = o.Currency
-	if !common.IsNil(o.FundingSource) {
-		toSerialize["fundingSource"] = o.FundingSource
+	if !common.IsNil(o.CardRegion) {
+		toSerialize["cardRegion"] = o.CardRegion
 	}
+	toSerialize["currency"] = o.Currency
+	toSerialize["fundingSource"] = o.FundingSource
 	toSerialize["paymentMethod"] = o.PaymentMethod
 	if !common.IsNil(o.RuleId) {
 		toSerialize["ruleId"] = o.RuleId
@@ -272,6 +300,15 @@ func (v *NullableSplitConfigurationRule) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+func (o *SplitConfigurationRule) isValidCardRegion() bool {
+	var allowedEnumValues = []string{"international", "intraRegional", "interRegional", "domestic", "ANY"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetCardRegion() == allowed {
+			return true
+		}
+	}
+	return false
+}
 func (o *SplitConfigurationRule) isValidFundingSource() bool {
 	var allowedEnumValues = []string{"charged", "credit", "debit", "deferred_debit", "prepaid", "ANY"}
 	for _, allowed := range allowedEnumValues {

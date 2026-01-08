@@ -22,6 +22,7 @@ type PaymentMethod struct {
 	Accel         *AccelInfo         `json:"accel,omitempty"`
 	Affirm        *AffirmInfo        `json:"affirm,omitempty"`
 	AfterpayTouch *AfterpayTouchInfo `json:"afterpayTouch,omitempty"`
+	AlipayPlus    *AlipayPlusInfo    `json:"alipayPlus,omitempty"`
 	// Indicates whether receiving payments is allowed. This value is set to **true** by Adyen after screening your merchant account.
 	Allowed  *bool         `json:"allowed,omitempty"`
 	Amex     *AmexInfo     `json:"amex,omitempty"`
@@ -45,6 +46,7 @@ type PaymentMethod struct {
 	// Indicates whether the payment method is enabled (**true**) or disabled (**false**).
 	Enabled   *bool                 `json:"enabled,omitempty"`
 	Girocard  *GenericPmWithTdiInfo `json:"girocard,omitempty"`
+	Givex     *GivexInfo            `json:"givex,omitempty"`
 	GooglePay *GooglePayInfo        `json:"googlePay,omitempty"`
 	// The identifier of the resource.
 	Id             string                `json:"id"`
@@ -53,6 +55,7 @@ type PaymentMethod struct {
 	Jcb            *JCBInfo              `json:"jcb,omitempty"`
 	Klarna         *KlarnaInfo           `json:"klarna,omitempty"`
 	Maestro        *GenericPmWithTdiInfo `json:"maestro,omitempty"`
+	MaestroUsa     *GenericPmWithTdiInfo `json:"maestro_usa,omitempty"`
 	Mc             *GenericPmWithTdiInfo `json:"mc,omitempty"`
 	MealVoucherFR  *MealVoucherFRInfo    `json:"mealVoucher_FR,omitempty"`
 	Nyce           *NyceInfo             `json:"nyce,omitempty"`
@@ -62,7 +65,8 @@ type PaymentMethod struct {
 	Payto          *PayToInfo            `json:"payto,omitempty"`
 	Pulse          *PulseInfo            `json:"pulse,omitempty"`
 	// Your reference for the payment method. Supported characters a-z, A-Z, 0-9.
-	Reference *string `json:"reference,omitempty"`
+	Reference       *string              `json:"reference,omitempty"`
+	Sepadirectdebit *SepaDirectDebitInfo `json:"sepadirectdebit,omitempty"`
 	// The sales channel.
 	ShopperInteraction *string     `json:"shopperInteraction,omitempty"`
 	Sodexo             *SodexoInfo `json:"sodexo,omitempty"`
@@ -70,11 +74,13 @@ type PaymentMethod struct {
 	Star               *StarInfo   `json:"star,omitempty"`
 	// The unique identifier of the store for which to configure the payment method, if any.
 	StoreIds []string    `json:"storeIds,omitempty"`
+	Svs      *SvsInfo    `json:"svs,omitempty"`
 	Swish    *SwishInfo  `json:"swish,omitempty"`
 	Ticket   *TicketInfo `json:"ticket,omitempty"`
 	Twint    *TwintInfo  `json:"twint,omitempty"`
 	// Payment method [variant](https://docs.adyen.com/development-resources/paymentmethodvariant#management-api).
-	Type *string `json:"type,omitempty"`
+	Type      *string        `json:"type,omitempty"`
+	Valuelink *ValuelinkInfo `json:"valuelink,omitempty"`
 	// Payment method status. Possible values: * **valid** * **pending** * **invalid** * **rejected**
 	VerificationStatus *string               `json:"verificationStatus,omitempty"`
 	Vipps              *VippsInfo            `json:"vipps,omitempty"`
@@ -195,6 +201,38 @@ func (o *PaymentMethod) HasAfterpayTouch() bool {
 // SetAfterpayTouch gets a reference to the given AfterpayTouchInfo and assigns it to the AfterpayTouch field.
 func (o *PaymentMethod) SetAfterpayTouch(v AfterpayTouchInfo) {
 	o.AfterpayTouch = &v
+}
+
+// GetAlipayPlus returns the AlipayPlus field value if set, zero value otherwise.
+func (o *PaymentMethod) GetAlipayPlus() AlipayPlusInfo {
+	if o == nil || common.IsNil(o.AlipayPlus) {
+		var ret AlipayPlusInfo
+		return ret
+	}
+	return *o.AlipayPlus
+}
+
+// GetAlipayPlusOk returns a tuple with the AlipayPlus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethod) GetAlipayPlusOk() (*AlipayPlusInfo, bool) {
+	if o == nil || common.IsNil(o.AlipayPlus) {
+		return nil, false
+	}
+	return o.AlipayPlus, true
+}
+
+// HasAlipayPlus returns a boolean if a field has been set.
+func (o *PaymentMethod) HasAlipayPlus() bool {
+	if o != nil && !common.IsNil(o.AlipayPlus) {
+		return true
+	}
+
+	return false
+}
+
+// SetAlipayPlus gets a reference to the given AlipayPlusInfo and assigns it to the AlipayPlus field.
+func (o *PaymentMethod) SetAlipayPlus(v AlipayPlusInfo) {
+	o.AlipayPlus = &v
 }
 
 // GetAllowed returns the Allowed field value if set, zero value otherwise.
@@ -741,6 +779,38 @@ func (o *PaymentMethod) SetGirocard(v GenericPmWithTdiInfo) {
 	o.Girocard = &v
 }
 
+// GetGivex returns the Givex field value if set, zero value otherwise.
+func (o *PaymentMethod) GetGivex() GivexInfo {
+	if o == nil || common.IsNil(o.Givex) {
+		var ret GivexInfo
+		return ret
+	}
+	return *o.Givex
+}
+
+// GetGivexOk returns a tuple with the Givex field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethod) GetGivexOk() (*GivexInfo, bool) {
+	if o == nil || common.IsNil(o.Givex) {
+		return nil, false
+	}
+	return o.Givex, true
+}
+
+// HasGivex returns a boolean if a field has been set.
+func (o *PaymentMethod) HasGivex() bool {
+	if o != nil && !common.IsNil(o.Givex) {
+		return true
+	}
+
+	return false
+}
+
+// SetGivex gets a reference to the given GivexInfo and assigns it to the Givex field.
+func (o *PaymentMethod) SetGivex(v GivexInfo) {
+	o.Givex = &v
+}
+
 // GetGooglePay returns the GooglePay field value if set, zero value otherwise.
 func (o *PaymentMethod) GetGooglePay() GooglePayInfo {
 	if o == nil || common.IsNil(o.GooglePay) {
@@ -955,6 +1025,38 @@ func (o *PaymentMethod) HasMaestro() bool {
 // SetMaestro gets a reference to the given GenericPmWithTdiInfo and assigns it to the Maestro field.
 func (o *PaymentMethod) SetMaestro(v GenericPmWithTdiInfo) {
 	o.Maestro = &v
+}
+
+// GetMaestroUsa returns the MaestroUsa field value if set, zero value otherwise.
+func (o *PaymentMethod) GetMaestroUsa() GenericPmWithTdiInfo {
+	if o == nil || common.IsNil(o.MaestroUsa) {
+		var ret GenericPmWithTdiInfo
+		return ret
+	}
+	return *o.MaestroUsa
+}
+
+// GetMaestroUsaOk returns a tuple with the MaestroUsa field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethod) GetMaestroUsaOk() (*GenericPmWithTdiInfo, bool) {
+	if o == nil || common.IsNil(o.MaestroUsa) {
+		return nil, false
+	}
+	return o.MaestroUsa, true
+}
+
+// HasMaestroUsa returns a boolean if a field has been set.
+func (o *PaymentMethod) HasMaestroUsa() bool {
+	if o != nil && !common.IsNil(o.MaestroUsa) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaestroUsa gets a reference to the given GenericPmWithTdiInfo and assigns it to the MaestroUsa field.
+func (o *PaymentMethod) SetMaestroUsa(v GenericPmWithTdiInfo) {
+	o.MaestroUsa = &v
 }
 
 // GetMc returns the Mc field value if set, zero value otherwise.
@@ -1245,6 +1347,38 @@ func (o *PaymentMethod) SetReference(v string) {
 	o.Reference = &v
 }
 
+// GetSepadirectdebit returns the Sepadirectdebit field value if set, zero value otherwise.
+func (o *PaymentMethod) GetSepadirectdebit() SepaDirectDebitInfo {
+	if o == nil || common.IsNil(o.Sepadirectdebit) {
+		var ret SepaDirectDebitInfo
+		return ret
+	}
+	return *o.Sepadirectdebit
+}
+
+// GetSepadirectdebitOk returns a tuple with the Sepadirectdebit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethod) GetSepadirectdebitOk() (*SepaDirectDebitInfo, bool) {
+	if o == nil || common.IsNil(o.Sepadirectdebit) {
+		return nil, false
+	}
+	return o.Sepadirectdebit, true
+}
+
+// HasSepadirectdebit returns a boolean if a field has been set.
+func (o *PaymentMethod) HasSepadirectdebit() bool {
+	if o != nil && !common.IsNil(o.Sepadirectdebit) {
+		return true
+	}
+
+	return false
+}
+
+// SetSepadirectdebit gets a reference to the given SepaDirectDebitInfo and assigns it to the Sepadirectdebit field.
+func (o *PaymentMethod) SetSepadirectdebit(v SepaDirectDebitInfo) {
+	o.Sepadirectdebit = &v
+}
+
 // GetShopperInteraction returns the ShopperInteraction field value if set, zero value otherwise.
 func (o *PaymentMethod) GetShopperInteraction() string {
 	if o == nil || common.IsNil(o.ShopperInteraction) {
@@ -1405,6 +1539,38 @@ func (o *PaymentMethod) SetStoreIds(v []string) {
 	o.StoreIds = v
 }
 
+// GetSvs returns the Svs field value if set, zero value otherwise.
+func (o *PaymentMethod) GetSvs() SvsInfo {
+	if o == nil || common.IsNil(o.Svs) {
+		var ret SvsInfo
+		return ret
+	}
+	return *o.Svs
+}
+
+// GetSvsOk returns a tuple with the Svs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethod) GetSvsOk() (*SvsInfo, bool) {
+	if o == nil || common.IsNil(o.Svs) {
+		return nil, false
+	}
+	return o.Svs, true
+}
+
+// HasSvs returns a boolean if a field has been set.
+func (o *PaymentMethod) HasSvs() bool {
+	if o != nil && !common.IsNil(o.Svs) {
+		return true
+	}
+
+	return false
+}
+
+// SetSvs gets a reference to the given SvsInfo and assigns it to the Svs field.
+func (o *PaymentMethod) SetSvs(v SvsInfo) {
+	o.Svs = &v
+}
+
 // GetSwish returns the Swish field value if set, zero value otherwise.
 func (o *PaymentMethod) GetSwish() SwishInfo {
 	if o == nil || common.IsNil(o.Swish) {
@@ -1531,6 +1697,38 @@ func (o *PaymentMethod) HasType() bool {
 // SetType gets a reference to the given string and assigns it to the Type field.
 func (o *PaymentMethod) SetType(v string) {
 	o.Type = &v
+}
+
+// GetValuelink returns the Valuelink field value if set, zero value otherwise.
+func (o *PaymentMethod) GetValuelink() ValuelinkInfo {
+	if o == nil || common.IsNil(o.Valuelink) {
+		var ret ValuelinkInfo
+		return ret
+	}
+	return *o.Valuelink
+}
+
+// GetValuelinkOk returns a tuple with the Valuelink field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethod) GetValuelinkOk() (*ValuelinkInfo, bool) {
+	if o == nil || common.IsNil(o.Valuelink) {
+		return nil, false
+	}
+	return o.Valuelink, true
+}
+
+// HasValuelink returns a boolean if a field has been set.
+func (o *PaymentMethod) HasValuelink() bool {
+	if o != nil && !common.IsNil(o.Valuelink) {
+		return true
+	}
+
+	return false
+}
+
+// SetValuelink gets a reference to the given ValuelinkInfo and assigns it to the Valuelink field.
+func (o *PaymentMethod) SetValuelink(v ValuelinkInfo) {
+	o.Valuelink = &v
 }
 
 // GetVerificationStatus returns the VerificationStatus field value if set, zero value otherwise.
@@ -1712,6 +1910,9 @@ func (o PaymentMethod) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.AfterpayTouch) {
 		toSerialize["afterpayTouch"] = o.AfterpayTouch
 	}
+	if !common.IsNil(o.AlipayPlus) {
+		toSerialize["alipayPlus"] = o.AlipayPlus
+	}
 	if !common.IsNil(o.Allowed) {
 		toSerialize["allowed"] = o.Allowed
 	}
@@ -1763,6 +1964,9 @@ func (o PaymentMethod) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Girocard) {
 		toSerialize["girocard"] = o.Girocard
 	}
+	if !common.IsNil(o.Givex) {
+		toSerialize["givex"] = o.Givex
+	}
 	if !common.IsNil(o.GooglePay) {
 		toSerialize["googlePay"] = o.GooglePay
 	}
@@ -1781,6 +1985,9 @@ func (o PaymentMethod) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Maestro) {
 		toSerialize["maestro"] = o.Maestro
+	}
+	if !common.IsNil(o.MaestroUsa) {
+		toSerialize["maestro_usa"] = o.MaestroUsa
 	}
 	if !common.IsNil(o.Mc) {
 		toSerialize["mc"] = o.Mc
@@ -1809,6 +2016,9 @@ func (o PaymentMethod) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Reference) {
 		toSerialize["reference"] = o.Reference
 	}
+	if !common.IsNil(o.Sepadirectdebit) {
+		toSerialize["sepadirectdebit"] = o.Sepadirectdebit
+	}
 	if !common.IsNil(o.ShopperInteraction) {
 		toSerialize["shopperInteraction"] = o.ShopperInteraction
 	}
@@ -1824,6 +2034,9 @@ func (o PaymentMethod) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.StoreIds) {
 		toSerialize["storeIds"] = o.StoreIds
 	}
+	if !common.IsNil(o.Svs) {
+		toSerialize["svs"] = o.Svs
+	}
 	if !common.IsNil(o.Swish) {
 		toSerialize["swish"] = o.Swish
 	}
@@ -1835,6 +2048,9 @@ func (o PaymentMethod) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type
+	}
+	if !common.IsNil(o.Valuelink) {
+		toSerialize["valuelink"] = o.Valuelink
 	}
 	if !common.IsNil(o.VerificationStatus) {
 		toSerialize["verificationStatus"] = o.VerificationStatus
