@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the Payment type satisfies the MappedNullable interface at compile time
@@ -18,11 +19,11 @@ var _ common.MappedNullable = &Payment{}
 
 // Payment struct for Payment
 type Payment struct {
-	Amount *Amount `json:"amount,omitempty"`
+	Amount        *Amount                `json:"amount,omitempty"`
 	PaymentMethod *ResponsePaymentMethod `json:"paymentMethod,omitempty"`
 	// Adyen's 16-character reference associated with the transaction/request. This value is globally unique. Use this reference when you communicate with us about this request.
 	PspReference *string `json:"pspReference,omitempty"`
-	// The result of the payment. For more information, see [Result codes](https://docs.adyen.com/online-payments/payment-result-codes).  Possible values:  * **Authorised** – The payment was successfully authorised. This state serves as an indicator to proceed with the delivery of goods and services. This is a final state. 
+	// The result of the payment. For more information, see [Result codes](https://docs.adyen.com/online-payments/payment-result-codes).  Possible values:  * **Authorised** – The payment was successfully authorised. This state serves as an indicator to proceed with the delivery of goods and services. This is a final state.
 	ResultCode *string `json:"resultCode,omitempty"`
 }
 
@@ -172,7 +173,7 @@ func (o *Payment) SetResultCode(v string) {
 }
 
 func (o Payment) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -232,14 +233,12 @@ func (v *NullablePayment) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *Payment) isValidResultCode() bool {
-    var allowedEnumValues = []string{ "Authorised" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetResultCode() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"Authorised"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetResultCode() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

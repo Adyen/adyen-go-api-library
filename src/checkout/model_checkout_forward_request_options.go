@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the CheckoutForwardRequestOptions type satisfies the MappedNullable interface at compile time
@@ -21,7 +22,7 @@ type CheckoutForwardRequestOptions struct {
 	// Whether to check for a card account update (true) or not (false)
 	AccountUpdate *bool `json:"accountUpdate,omitempty"`
 	// Set to **true** to receive a copy of the request Adyen is making to the third party in the response. Any sensitive information will be masked in the response you receive. This functionality is only available in the test environment.
-	DryRun *bool `json:"dryRun,omitempty"`
+	DryRun       *bool                       `json:"dryRun,omitempty"`
 	NetworkToken *CheckoutNetworkTokenOption `json:"networkToken,omitempty"`
 	// Set in tokenize:true case when forwarding PAN. Addresses to the possible location(s) of networkTxReference in the incoming 3rd party response
 	NetworkTxReferencePaths []string `json:"networkTxReferencePaths,omitempty"`
@@ -207,7 +208,7 @@ func (o *CheckoutForwardRequestOptions) SetTokenize(v bool) {
 }
 
 func (o CheckoutForwardRequestOptions) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -269,6 +270,3 @@ func (v *NullableCheckoutForwardRequestOptions) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

@@ -10,7 +10,6 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
 	"fmt"
 )
 
@@ -26,7 +25,6 @@ func CheckoutThreeDS2ActionAsPaymentDetailsResponseAction(v *CheckoutThreeDS2Act
 	}
 }
 
-
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *PaymentDetailsResponseAction) UnmarshalJSON(data []byte) error {
 	var err error
@@ -37,7 +35,7 @@ func (dst *PaymentDetailsResponseAction) UnmarshalJSON(data []byte) error {
 		jsonCheckoutThreeDS2Action, _ := json.Marshal(dst.CheckoutThreeDS2Action)
 		if string(jsonCheckoutThreeDS2Action) == "{}" || !dst.CheckoutThreeDS2Action.isValidType() { // empty struct
 			dst.CheckoutThreeDS2Action = nil
-        } else {
+		} else {
 			match++
 		}
 	} else {
@@ -66,7 +64,7 @@ func (src PaymentDetailsResponseAction) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *PaymentDetailsResponseAction) GetActualInstance() (interface{}) {
+func (obj *PaymentDetailsResponseAction) GetActualInstance() interface{} {
 	if obj == nil {
 		return nil
 	}
@@ -113,5 +111,3 @@ func (v *NullablePaymentDetailsResponseAction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

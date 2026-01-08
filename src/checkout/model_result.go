@@ -10,7 +10,6 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
 	"fmt"
 )
 
@@ -19,7 +18,7 @@ type Result string
 
 // List of Result
 const (
-	VALID Result = "VALID"
+	VALID   Result = "VALID"
 	INVALID Result = "INVALID"
 	UNKNOWN Result = "UNKNOWN"
 )
@@ -109,4 +108,3 @@ func (v *NullableResult) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

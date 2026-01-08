@@ -10,10 +10,11 @@ package checkout
 
 import (
 	"context"
-    "net/http"
-    "net/url"
-    "strings"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+	"net/http"
+	"net/url"
+	"strings"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // PaymentLinksApi service
@@ -23,7 +24,6 @@ type PaymentLinksApi common.Service
 type PaymentLinksApiGetPaymentLinkInput struct {
 	linkId string
 }
-
 
 /*
 Prepare a request for GetPaymentLink
@@ -46,30 +46,28 @@ Retrieves the payment link details using the payment link `id`.
 @return PaymentLinkResponse, *http.Response, error
 */
 func (a *PaymentLinksApi) GetPaymentLink(ctx context.Context, r PaymentLinksApiGetPaymentLinkInput) (PaymentLinkResponse, *http.Response, error) {
-    res := &PaymentLinkResponse{}
+	res := &PaymentLinkResponse{}
 	path := "/paymentLinks/{linkId}"
-    path = strings.Replace(path, "{"+"linkId"+"}", url.PathEscape(common.ParameterValueToString(r.linkId, "linkId")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodGet,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"linkId"+"}", url.PathEscape(common.ParameterValueToString(r.linkId, "linkId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by PaymentLinksApi.PaymentLinks
 type PaymentLinksApiPaymentLinksInput struct {
-	idempotencyKey *string
+	idempotencyKey     *string
 	paymentLinkRequest *PaymentLinkRequest
 }
 
@@ -84,15 +82,13 @@ func (r PaymentLinksApiPaymentLinksInput) PaymentLinkRequest(paymentLinkRequest 
 	return r
 }
 
-
 /*
 Prepare a request for PaymentLinks
 
 @return PaymentLinksApiPaymentLinksInput
 */
 func (a *PaymentLinksApi) PaymentLinksInput() PaymentLinksApiPaymentLinksInput {
-	return PaymentLinksApiPaymentLinksInput{
-	}
+	return PaymentLinksApiPaymentLinksInput{}
 }
 
 /*
@@ -107,32 +103,30 @@ For more information, refer to [Pay by Link documentation](https://docs.adyen.co
 @return PaymentLinkResponse, *http.Response, error
 */
 func (a *PaymentLinksApi) PaymentLinks(ctx context.Context, r PaymentLinksApiPaymentLinksInput) (PaymentLinkResponse, *http.Response, error) {
-    res := &PaymentLinkResponse{}
+	res := &PaymentLinkResponse{}
 	path := "/paymentLinks"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    if r.idempotencyKey != nil {
-        common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
-    }
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.paymentLinkRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.idempotencyKey != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.paymentLinkRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by PaymentLinksApi.UpdatePaymentLink
 type PaymentLinksApiUpdatePaymentLinkInput struct {
-	linkId string
+	linkId                   string
 	updatePaymentLinkRequest *UpdatePaymentLinkRequest
 }
 
@@ -140,7 +134,6 @@ func (r PaymentLinksApiUpdatePaymentLinkInput) UpdatePaymentLinkRequest(updatePa
 	r.updatePaymentLinkRequest = &updatePaymentLinkRequest
 	return r
 }
-
 
 /*
 Prepare a request for UpdatePaymentLink
@@ -163,23 +156,21 @@ Updates the status of a payment link. Use this endpoint to [force the expiry of 
 @return PaymentLinkResponse, *http.Response, error
 */
 func (a *PaymentLinksApi) UpdatePaymentLink(ctx context.Context, r PaymentLinksApiUpdatePaymentLinkInput) (PaymentLinkResponse, *http.Response, error) {
-    res := &PaymentLinkResponse{}
+	res := &PaymentLinkResponse{}
 	path := "/paymentLinks/{linkId}"
-    path = strings.Replace(path, "{"+"linkId"+"}", url.PathEscape(common.ParameterValueToString(r.linkId, "linkId")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.updatePaymentLinkRequest,
-        res,
-        http.MethodPatch,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"linkId"+"}", url.PathEscape(common.ParameterValueToString(r.linkId, "linkId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.updatePaymentLinkRequest,
+		res,
+		http.MethodPatch,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
