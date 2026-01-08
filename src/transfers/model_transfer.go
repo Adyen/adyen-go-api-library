@@ -23,17 +23,22 @@ type Transfer struct {
 	AccountHolder  *ResourceReference `json:"accountHolder,omitempty"`
 	Amount         Amount             `json:"amount"`
 	BalanceAccount *ResourceReference `json:"balanceAccount,omitempty"`
-	// The category of the transfer.  Possible values:   - **bank**: a transfer involving a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id) or a bank account.  - **card**: a transfer involving a third-party card.  - **internal**: a transfer between [balance accounts](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id) within your platform.  - **issuedCard**: a transfer initiated by a Adyen-issued card.  - **platformPayment**: funds movements related to payments that are acquired for your users.  - **topUp**: an incoming transfer initiated by your user to top up their balance account.
+	// The category of the transfer.  Possible values:   - **bank**: A transfer involving a [transfer instrument](https://docs.adyen.com/api-explorer/legalentity/latest/post/transferInstruments#responses-200-id) or a bank account.  - **card**: A transfer involving a third-party card.  - **internal**: A transfer between [balance accounts](https://docs.adyen.com/api-explorer/balanceplatform/latest/post/balanceAccounts#responses-200-id) within your platform.  - **issuedCard**: A transfer initiated by an Adyen-issued card.  - **platformPayment**: Funds movements related to payments that are acquired for your users.  - **topUp**: An incoming transfer initiated by your user to top up their balance account.
 	Category     string                `json:"category"`
 	CategoryData *TransferCategoryData `json:"categoryData,omitempty"`
 	Counterparty CounterpartyV3        `json:"counterparty"`
+	// The date and time when the transfer was created, in ISO 8601 extended format. For example, **2020-12-18T10:15:30+01:00**.
+	CreatedAt *time.Time `json:"createdAt,omitempty"`
 	// The date and time when the event was triggered, in ISO 8601 extended format. For example, **2020-12-18T10:15:30+01:00**.
+	// Deprecated since Transfers API v3
+	// Use createdAt or updatedAt
 	CreationDate *time.Time `json:"creationDate,omitempty"`
 	// Your description for the transfer. It is used by most banks as the transfer description. We recommend sending a maximum of 140 characters, otherwise the description may be truncated.  Supported characters: **[a-z] [A-Z] [0-9] / - ?** **: ( ) . , ' + Space**  Supported characters for **regular** and **fast** transfers to a US counterparty: **[a-z] [A-Z] [0-9] & $ % # @** **~ = + - _ ' \" ! ?**
 	Description            *string                 `json:"description,omitempty"`
 	DirectDebitInformation *DirectDebitInformation `json:"directDebitInformation,omitempty"`
 	// The direction of the transfer.  Possible values: **incoming**, **outgoing**.
-	Direction *string `json:"direction,omitempty"`
+	Direction     *string        `json:"direction,omitempty"`
+	ExecutionDate *ExecutionDate `json:"executionDate,omitempty"`
 	// The ID of the resource.
 	Id                *string            `json:"id,omitempty"`
 	PaymentInstrument *PaymentInstrument `json:"paymentInstrument,omitempty"`
@@ -44,7 +49,7 @@ type Transfer struct {
 	//  A reference that is sent to the recipient. This reference is also sent in all webhooks related to the transfer, so you can use it to track statuses for both the source and recipient of funds.   Supported characters: **a-z**, **A-Z**, **0-9**.The maximum length depends on the `category`.   - **internal**: 80 characters  - **bank**: 35 characters when transferring to an IBAN, 15 characters for others.
 	ReferenceForBeneficiary *string         `json:"referenceForBeneficiary,omitempty"`
 	Review                  *TransferReview `json:"review,omitempty"`
-	// The result of the transfer.   For example, **authorised**, **refused**, or **error**.
+	// The result of the transfer.  For example:  - **received**: an outgoing transfer request is created. - **refused**: the transfer request is rejected by Adyen for one of the following reasons:   - Lack of funds in the balance account.   - Transfer limit exceeded.   - Transaction rule requirements violated. - **authorised**: the transfer request is authorized and the funds are reserved. - **booked**: the funds are deducted from your user's balance account.  - **failed**: the transfer is rejected by the counterparty's bank. - **returned**: the transfer is returned by the counterparty's bank.
 	Status string `json:"status"`
 	// The type of transfer or transaction. For example, **refund**, **payment**, **internalTransfer**, **bankTransfer**.
 	Type *string `json:"type,omitempty"`
@@ -239,7 +244,41 @@ func (o *Transfer) SetCounterparty(v CounterpartyV3) {
 	o.Counterparty = v
 }
 
+// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+func (o *Transfer) GetCreatedAt() time.Time {
+	if o == nil || common.IsNil(o.CreatedAt) {
+		var ret time.Time
+		return ret
+	}
+	return *o.CreatedAt
+}
+
+// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Transfer) GetCreatedAtOk() (*time.Time, bool) {
+	if o == nil || common.IsNil(o.CreatedAt) {
+		return nil, false
+	}
+	return o.CreatedAt, true
+}
+
+// HasCreatedAt returns a boolean if a field has been set.
+func (o *Transfer) HasCreatedAt() bool {
+	if o != nil && !common.IsNil(o.CreatedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
+func (o *Transfer) SetCreatedAt(v time.Time) {
+	o.CreatedAt = &v
+}
+
 // GetCreationDate returns the CreationDate field value if set, zero value otherwise.
+// Deprecated since Transfers API v3
+// Use createdAt or updatedAt
 func (o *Transfer) GetCreationDate() time.Time {
 	if o == nil || common.IsNil(o.CreationDate) {
 		var ret time.Time
@@ -250,6 +289,8 @@ func (o *Transfer) GetCreationDate() time.Time {
 
 // GetCreationDateOk returns a tuple with the CreationDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated since Transfers API v3
+// Use createdAt or updatedAt
 func (o *Transfer) GetCreationDateOk() (*time.Time, bool) {
 	if o == nil || common.IsNil(o.CreationDate) {
 		return nil, false
@@ -267,6 +308,8 @@ func (o *Transfer) HasCreationDate() bool {
 }
 
 // SetCreationDate gets a reference to the given time.Time and assigns it to the CreationDate field.
+// Deprecated since Transfers API v3
+// Use createdAt or updatedAt
 func (o *Transfer) SetCreationDate(v time.Time) {
 	o.CreationDate = &v
 }
@@ -365,6 +408,38 @@ func (o *Transfer) HasDirection() bool {
 // SetDirection gets a reference to the given string and assigns it to the Direction field.
 func (o *Transfer) SetDirection(v string) {
 	o.Direction = &v
+}
+
+// GetExecutionDate returns the ExecutionDate field value if set, zero value otherwise.
+func (o *Transfer) GetExecutionDate() ExecutionDate {
+	if o == nil || common.IsNil(o.ExecutionDate) {
+		var ret ExecutionDate
+		return ret
+	}
+	return *o.ExecutionDate
+}
+
+// GetExecutionDateOk returns a tuple with the ExecutionDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Transfer) GetExecutionDateOk() (*ExecutionDate, bool) {
+	if o == nil || common.IsNil(o.ExecutionDate) {
+		return nil, false
+	}
+	return o.ExecutionDate, true
+}
+
+// HasExecutionDate returns a boolean if a field has been set.
+func (o *Transfer) HasExecutionDate() bool {
+	if o != nil && !common.IsNil(o.ExecutionDate) {
+		return true
+	}
+
+	return false
+}
+
+// SetExecutionDate gets a reference to the given ExecutionDate and assigns it to the ExecutionDate field.
+func (o *Transfer) SetExecutionDate(v ExecutionDate) {
+	o.ExecutionDate = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -637,6 +712,9 @@ func (o Transfer) ToMap() (map[string]interface{}, error) {
 		toSerialize["categoryData"] = o.CategoryData
 	}
 	toSerialize["counterparty"] = o.Counterparty
+	if !common.IsNil(o.CreatedAt) {
+		toSerialize["createdAt"] = o.CreatedAt
+	}
 	if !common.IsNil(o.CreationDate) {
 		toSerialize["creationDate"] = o.CreationDate
 	}
@@ -648,6 +726,9 @@ func (o Transfer) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Direction) {
 		toSerialize["direction"] = o.Direction
+	}
+	if !common.IsNil(o.ExecutionDate) {
+		toSerialize["executionDate"] = o.ExecutionDate
 	}
 	if !common.IsNil(o.Id) {
 		toSerialize["id"] = o.Id
@@ -729,7 +810,7 @@ func (o *Transfer) isValidDirection() bool {
 	return false
 }
 func (o *Transfer) isValidReason() bool {
-	var allowedEnumValues = []string{"accountHierarchyNotActive", "amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declined", "declinedByTransactionRule", "directDebitNotSupported", "error", "notEnoughBalance", "pending", "pendingApproval", "pendingExecution", "refusedByCounterpartyBank", "refusedByCustomer", "routeNotFound", "scaFailed", "transferInstrumentDoesNotExist", "unknown"}
+	var allowedEnumValues = []string{"accountHierarchyNotActive", "amountLimitExceeded", "approvalExpired", "approved", "avsDeclined", "balanceAccountTemporarilyBlockedByTransactionRule", "blockCard", "callReferral", "cancelled", "captureCard", "cardExpired", "cardholderAuthenticationRequired", "cashbackAmountExceedsLimit", "cavvDeclined", "contactlessFallback", "contactlessLimitReached", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "cryptographicFailure", "cvcDeclined", "declined", "declinedByBapValidation", "declinedByTransactionRule", "declinedNonGeneric", "directDebitNotSupported", "doNotHonor", "domesticDebitTransactionNotAllowed", "duplicateTransmissionDetected", "error", "formatError", "fraud", "fraudCancelled", "honorWithId", "internalTimeout", "invalidAccount", "invalidAmount", "invalidAuthorizationLifeCycle", "invalidCard", "invalidExpiryDate", "invalidFromAccount", "invalidIssuer", "invalidMerchant", "invalidPin", "invalidToAccount", "invalidTransaction", "issuerSuspectedFraud", "lostCard", "mobilePinRequired", "noCheckingAccount", "noSavingsAccount", "not3dAuthenticated", "notEnoughBalance", "notSubmitted", "notSupported", "partiallyApproved", "pending", "pendingApproval", "pendingExecution", "pinNotChanged", "pinRequired", "pinTriesExceeded", "pinValidationNotPossible", "purchaseAmountOnlyNoCashBack", "refusedByCounterpartyBank", "refusedByCustomer", "restrictedCard", "revocationOfAuth", "routeNotFound", "scaAuthenticationRequired", "scaFailed", "schemeAdvice", "securityViolation", "shopperCancelled", "stolenCard", "threedsDynamicLinkingMismatch", "transactionNotPermitted", "transferInstrumentDoesNotExist", "unableToRouteTransaction", "unknown", "withdrawalAmountExceeded", "withdrawalCountExceeded"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetReason() == allowed {
 			return true
