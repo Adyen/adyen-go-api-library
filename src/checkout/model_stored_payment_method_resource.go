@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the StoredPaymentMethodResource type satisfies the MappedNullable interface at compile time
@@ -21,6 +20,8 @@ var _ common.MappedNullable = &StoredPaymentMethodResource{}
 type StoredPaymentMethodResource struct {
 	// The brand of the card.
 	Brand *string `json:"brand,omitempty"`
+	// The bank identification number (BIN) of the card.
+	CardBin *string `json:"cardBin,omitempty"`
 	// The month the card expires.
 	ExpiryMonth *string `json:"expiryMonth,omitempty"`
 	// The last two digits of the year the card expires. For example, **22** for the year 2022.
@@ -39,6 +40,7 @@ type StoredPaymentMethodResource struct {
 	IssuerName *string `json:"issuerName,omitempty"`
 	// The last four digits of the PAN.
 	LastFour *string `json:"lastFour,omitempty"`
+	Mandate *TokenMandate `json:"mandate,omitempty"`
 	// The display name of the stored payment method.
 	Name *string `json:"name,omitempty"`
 	// Returned in the response if you are not tokenizing with Adyen and are using the Merchant-initiated transactions (MIT) framework from Mastercard or Visa.  This contains either the Mastercard Trace ID or the Visa Transaction ID.
@@ -102,6 +104,38 @@ func (o *StoredPaymentMethodResource) HasBrand() bool {
 // SetBrand gets a reference to the given string and assigns it to the Brand field.
 func (o *StoredPaymentMethodResource) SetBrand(v string) {
 	o.Brand = &v
+}
+
+// GetCardBin returns the CardBin field value if set, zero value otherwise.
+func (o *StoredPaymentMethodResource) GetCardBin() string {
+	if o == nil || common.IsNil(o.CardBin) {
+		var ret string
+		return ret
+	}
+	return *o.CardBin
+}
+
+// GetCardBinOk returns a tuple with the CardBin field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoredPaymentMethodResource) GetCardBinOk() (*string, bool) {
+	if o == nil || common.IsNil(o.CardBin) {
+		return nil, false
+	}
+	return o.CardBin, true
+}
+
+// HasCardBin returns a boolean if a field has been set.
+func (o *StoredPaymentMethodResource) HasCardBin() bool {
+	if o != nil && !common.IsNil(o.CardBin) {
+		return true
+	}
+
+	return false
+}
+
+// SetCardBin gets a reference to the given string and assigns it to the CardBin field.
+func (o *StoredPaymentMethodResource) SetCardBin(v string) {
+	o.CardBin = &v
 }
 
 // GetExpiryMonth returns the ExpiryMonth field value if set, zero value otherwise.
@@ -392,6 +426,38 @@ func (o *StoredPaymentMethodResource) SetLastFour(v string) {
 	o.LastFour = &v
 }
 
+// GetMandate returns the Mandate field value if set, zero value otherwise.
+func (o *StoredPaymentMethodResource) GetMandate() TokenMandate {
+	if o == nil || common.IsNil(o.Mandate) {
+		var ret TokenMandate
+		return ret
+	}
+	return *o.Mandate
+}
+
+// GetMandateOk returns a tuple with the Mandate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoredPaymentMethodResource) GetMandateOk() (*TokenMandate, bool) {
+	if o == nil || common.IsNil(o.Mandate) {
+		return nil, false
+	}
+	return o.Mandate, true
+}
+
+// HasMandate returns a boolean if a field has been set.
+func (o *StoredPaymentMethodResource) HasMandate() bool {
+	if o != nil && !common.IsNil(o.Mandate) {
+		return true
+	}
+
+	return false
+}
+
+// SetMandate gets a reference to the given TokenMandate and assigns it to the Mandate field.
+func (o *StoredPaymentMethodResource) SetMandate(v TokenMandate) {
+	o.Mandate = &v
+}
+
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *StoredPaymentMethodResource) GetName() string {
 	if o == nil || common.IsNil(o.Name) {
@@ -617,7 +683,7 @@ func (o *StoredPaymentMethodResource) SetType(v string) {
 }
 
 func (o StoredPaymentMethodResource) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -628,6 +694,9 @@ func (o StoredPaymentMethodResource) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.Brand) {
 		toSerialize["brand"] = o.Brand
+	}
+	if !common.IsNil(o.CardBin) {
+		toSerialize["cardBin"] = o.CardBin
 	}
 	if !common.IsNil(o.ExpiryMonth) {
 		toSerialize["expiryMonth"] = o.ExpiryMonth
@@ -655,6 +724,9 @@ func (o StoredPaymentMethodResource) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.LastFour) {
 		toSerialize["lastFour"] = o.LastFour
+	}
+	if !common.IsNil(o.Mandate) {
+		toSerialize["mandate"] = o.Mandate
 	}
 	if !common.IsNil(o.Name) {
 		toSerialize["name"] = o.Name
@@ -715,3 +787,6 @@ func (v *NullableStoredPaymentMethodResource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

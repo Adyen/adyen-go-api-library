@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the PaymentDetailsResponse type satisfies the MappedNullable interface at compile time
@@ -19,16 +18,18 @@ var _ common.MappedNullable = &PaymentDetailsResponse{}
 
 // PaymentDetailsResponse struct for PaymentDetailsResponse
 type PaymentDetailsResponse struct {
+	Action *PaymentDetailsResponseAction `json:"action,omitempty"`
 	// Contains additional information about the payment. Some data fields are included only if you select them first: Go to **Customer Area** > **Developers** > **Additional data**.
 	AdditionalData *map[string]string `json:"additionalData,omitempty"`
-	Amount         *Amount            `json:"amount,omitempty"`
+	Amount *Amount `json:"amount,omitempty"`
 	// Donation Token containing payment details for Adyen Giving.
-	DonationToken *string      `json:"donationToken,omitempty"`
-	FraudResult   *FraudResult `json:"fraudResult,omitempty"`
+	DonationToken *string `json:"donationToken,omitempty"`
+	FraudResult *FraudResult `json:"fraudResult,omitempty"`
 	// The reference used during the /payments request.
-	MerchantReference *string                `json:"merchantReference,omitempty"`
-	Order             *CheckoutOrderResponse `json:"order,omitempty"`
-	PaymentMethod     *ResponsePaymentMethod `json:"paymentMethod,omitempty"`
+	MerchantReference *string `json:"merchantReference,omitempty"`
+	Order *CheckoutOrderResponse `json:"order,omitempty"`
+	PaymentMethod *ResponsePaymentMethod `json:"paymentMethod,omitempty"`
+	PaymentValidations *PaymentValidationsResponse `json:"paymentValidations,omitempty"`
 	// Adyen's 16-character string reference associated with the transaction/request. This value is globally unique; quote it when communicating with us about this request.
 	PspReference *string `json:"pspReference,omitempty"`
 	// If the payment's authorisation is refused or an error occurs during authorisation, this field holds Adyen's mapped reason for the refusal or a description of the error. When a transaction fails, the authorisation response includes `resultCode` and `refusalReason` values.  For more information, see [Refusal reasons](https://docs.adyen.com/development-resources/refusal-reasons).
@@ -38,9 +39,9 @@ type PaymentDetailsResponse struct {
 	// The result of the payment. For more information, see [Result codes](https://docs.adyen.com/online-payments/payment-result-codes).  Possible values:  * **AuthenticationFinished** – The payment has been successfully authenticated with 3D Secure 2. Returned for 3D Secure 2 authentication-only transactions. * **AuthenticationNotRequired** – The transaction does not require 3D Secure authentication. Returned for [standalone authentication-only integrations](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only). * **Authorised** – The payment was successfully authorised. This state serves as an indicator to proceed with the delivery of goods and services. This is a final state. * **Cancelled** – Indicates the payment has been cancelled (either by the shopper or the merchant) before processing was completed. This is a final state. * **ChallengeShopper** – The issuer requires further shopper interaction before the payment can be authenticated. Returned for 3D Secure 2 transactions. * **Error** – There was an error when the payment was being processed. The reason is given in the `refusalReason` field. This is a final state. * **IdentifyShopper** – The issuer requires the shopper's device fingerprint before the payment can be authenticated. Returned for 3D Secure 2 transactions. * **PartiallyAuthorised** – The payment has been authorised for a partial amount. This happens for card payments when the merchant supports Partial Authorisations and the cardholder has insufficient funds. * **Pending** – Indicates that it is not possible to obtain the final status of the payment. This can happen if the systems providing final status information for the payment are unavailable, or if the shopper needs to take further action to complete the payment. * **PresentToShopper** – Indicates that the response contains additional information that you need to present to a shopper, so that they can use it to complete a payment. * **Received** – Indicates the payment has successfully been received by Adyen, and will be processed. This is the initial state for all payments. * **RedirectShopper** – Indicates the shopper should be redirected to an external web page or app to complete the authorisation. * **Refused** – Indicates the payment was refused. The reason is given in the `refusalReason` field. This is a final state.
 	ResultCode *string `json:"resultCode,omitempty"`
 	// The shopperLocale.
-	ShopperLocale        *string               `json:"shopperLocale,omitempty"`
+	ShopperLocale *string `json:"shopperLocale,omitempty"`
 	ThreeDS2ResponseData *ThreeDS2ResponseData `json:"threeDS2ResponseData,omitempty"`
-	ThreeDS2Result       *ThreeDS2Result       `json:"threeDS2Result,omitempty"`
+	ThreeDS2Result *ThreeDS2Result `json:"threeDS2Result,omitempty"`
 	// When non-empty, contains a value that you must submit to the `/payments/details` endpoint as `paymentData`.
 	ThreeDSPaymentData *string `json:"threeDSPaymentData,omitempty"`
 }
@@ -60,6 +61,38 @@ func NewPaymentDetailsResponse() *PaymentDetailsResponse {
 func NewPaymentDetailsResponseWithDefaults() *PaymentDetailsResponse {
 	this := PaymentDetailsResponse{}
 	return &this
+}
+
+// GetAction returns the Action field value if set, zero value otherwise.
+func (o *PaymentDetailsResponse) GetAction() PaymentDetailsResponseAction {
+	if o == nil || common.IsNil(o.Action) {
+		var ret PaymentDetailsResponseAction
+		return ret
+	}
+	return *o.Action
+}
+
+// GetActionOk returns a tuple with the Action field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentDetailsResponse) GetActionOk() (*PaymentDetailsResponseAction, bool) {
+	if o == nil || common.IsNil(o.Action) {
+		return nil, false
+	}
+	return o.Action, true
+}
+
+// HasAction returns a boolean if a field has been set.
+func (o *PaymentDetailsResponse) HasAction() bool {
+	if o != nil && !common.IsNil(o.Action) {
+		return true
+	}
+
+	return false
+}
+
+// SetAction gets a reference to the given PaymentDetailsResponseAction and assigns it to the Action field.
+func (o *PaymentDetailsResponse) SetAction(v PaymentDetailsResponseAction) {
+	o.Action = &v
 }
 
 // GetAdditionalData returns the AdditionalData field value if set, zero value otherwise.
@@ -284,6 +317,38 @@ func (o *PaymentDetailsResponse) HasPaymentMethod() bool {
 // SetPaymentMethod gets a reference to the given ResponsePaymentMethod and assigns it to the PaymentMethod field.
 func (o *PaymentDetailsResponse) SetPaymentMethod(v ResponsePaymentMethod) {
 	o.PaymentMethod = &v
+}
+
+// GetPaymentValidations returns the PaymentValidations field value if set, zero value otherwise.
+func (o *PaymentDetailsResponse) GetPaymentValidations() PaymentValidationsResponse {
+	if o == nil || common.IsNil(o.PaymentValidations) {
+		var ret PaymentValidationsResponse
+		return ret
+	}
+	return *o.PaymentValidations
+}
+
+// GetPaymentValidationsOk returns a tuple with the PaymentValidations field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentDetailsResponse) GetPaymentValidationsOk() (*PaymentValidationsResponse, bool) {
+	if o == nil || common.IsNil(o.PaymentValidations) {
+		return nil, false
+	}
+	return o.PaymentValidations, true
+}
+
+// HasPaymentValidations returns a boolean if a field has been set.
+func (o *PaymentDetailsResponse) HasPaymentValidations() bool {
+	if o != nil && !common.IsNil(o.PaymentValidations) {
+		return true
+	}
+
+	return false
+}
+
+// SetPaymentValidations gets a reference to the given PaymentValidationsResponse and assigns it to the PaymentValidations field.
+func (o *PaymentDetailsResponse) SetPaymentValidations(v PaymentValidationsResponse) {
+	o.PaymentValidations = &v
 }
 
 // GetPspReference returns the PspReference field value if set, zero value otherwise.
@@ -543,7 +608,7 @@ func (o *PaymentDetailsResponse) SetThreeDSPaymentData(v string) {
 }
 
 func (o PaymentDetailsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -552,6 +617,9 @@ func (o PaymentDetailsResponse) MarshalJSON() ([]byte, error) {
 
 func (o PaymentDetailsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.Action) {
+		toSerialize["action"] = o.Action
+	}
 	if !common.IsNil(o.AdditionalData) {
 		toSerialize["additionalData"] = o.AdditionalData
 	}
@@ -572,6 +640,9 @@ func (o PaymentDetailsResponse) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.PaymentMethod) {
 		toSerialize["paymentMethod"] = o.PaymentMethod
+	}
+	if !common.IsNil(o.PaymentValidations) {
+		toSerialize["paymentValidations"] = o.PaymentValidations
 	}
 	if !common.IsNil(o.PspReference) {
 		toSerialize["pspReference"] = o.PspReference
@@ -636,12 +707,14 @@ func (v *NullablePaymentDetailsResponse) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *PaymentDetailsResponse) isValidResultCode() bool {
-	var allowedEnumValues = []string{"AuthenticationFinished", "AuthenticationNotRequired", "Authorised", "Cancelled", "ChallengeShopper", "Error", "IdentifyShopper", "PartiallyAuthorised", "Pending", "PresentToShopper", "Received", "RedirectShopper", "Refused", "Success"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetResultCode() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "AuthenticationFinished", "AuthenticationNotRequired", "Authorised", "Cancelled", "ChallengeShopper", "Error", "IdentifyShopper", "PartiallyAuthorised", "Pending", "PresentToShopper", "Received", "RedirectShopper", "Refused", "Success" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetResultCode() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the PixRecurring type satisfies the MappedNullable interface at compile time
@@ -21,6 +20,8 @@ var _ common.MappedNullable = &PixRecurring{}
 type PixRecurring struct {
 	// The date on which the shopper's payment method will be charged, in YYYY-MM-DD format.
 	BillingDate *string `json:"billingDate,omitempty"`
+	// Flag used to define whether liquidation can happen only on business days
+	BusinessDayOnly *bool `json:"businessDayOnly,omitempty"`
 	// End date of the billing plan, in YYYY-MM-DD format. The end date must align with the frequency and the start date of the billing plan. If left blank, the subscription will continue indefinitely unless it is cancelled by the shopper.
 	EndsAt *string `json:"endsAt,omitempty"`
 	// The frequency at which the shopper will be charged.
@@ -28,7 +29,7 @@ type PixRecurring struct {
 	MinAmount *Amount `json:"minAmount,omitempty"`
 	// The pspReference for the failed recurring payment. Find this in AUTHORISATION webhook you received after the billing date.
 	OriginalPspReference *string `json:"originalPspReference,omitempty"`
-	RecurringAmount      *Amount `json:"recurringAmount,omitempty"`
+	RecurringAmount *Amount `json:"recurringAmount,omitempty"`
 	// The text that that will be shown on the shopper's bank statement for the recurring payments. We recommend to add a descriptive text about the subscription to let your shoppers recognize your recurring payments. Maximum length: 35 characters.
 	RecurringStatement *string `json:"recurringStatement,omitempty"`
 	// When set to true, you can retry for failed recurring payments. The default value is true.
@@ -84,6 +85,38 @@ func (o *PixRecurring) HasBillingDate() bool {
 // SetBillingDate gets a reference to the given string and assigns it to the BillingDate field.
 func (o *PixRecurring) SetBillingDate(v string) {
 	o.BillingDate = &v
+}
+
+// GetBusinessDayOnly returns the BusinessDayOnly field value if set, zero value otherwise.
+func (o *PixRecurring) GetBusinessDayOnly() bool {
+	if o == nil || common.IsNil(o.BusinessDayOnly) {
+		var ret bool
+		return ret
+	}
+	return *o.BusinessDayOnly
+}
+
+// GetBusinessDayOnlyOk returns a tuple with the BusinessDayOnly field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PixRecurring) GetBusinessDayOnlyOk() (*bool, bool) {
+	if o == nil || common.IsNil(o.BusinessDayOnly) {
+		return nil, false
+	}
+	return o.BusinessDayOnly, true
+}
+
+// HasBusinessDayOnly returns a boolean if a field has been set.
+func (o *PixRecurring) HasBusinessDayOnly() bool {
+	if o != nil && !common.IsNil(o.BusinessDayOnly) {
+		return true
+	}
+
+	return false
+}
+
+// SetBusinessDayOnly gets a reference to the given bool and assigns it to the BusinessDayOnly field.
+func (o *PixRecurring) SetBusinessDayOnly(v bool) {
+	o.BusinessDayOnly = &v
 }
 
 // GetEndsAt returns the EndsAt field value if set, zero value otherwise.
@@ -343,7 +376,7 @@ func (o *PixRecurring) SetStartsAt(v string) {
 }
 
 func (o PixRecurring) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -354,6 +387,9 @@ func (o PixRecurring) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.BillingDate) {
 		toSerialize["billingDate"] = o.BillingDate
+	}
+	if !common.IsNil(o.BusinessDayOnly) {
+		toSerialize["businessDayOnly"] = o.BusinessDayOnly
 	}
 	if !common.IsNil(o.EndsAt) {
 		toSerialize["endsAt"] = o.EndsAt
@@ -418,12 +454,14 @@ func (v *NullablePixRecurring) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *PixRecurring) isValidFrequency() bool {
-	var allowedEnumValues = []string{"weekly", "monthly", "quarterly", "half-yearly", "yearly"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetFrequency() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "weekly", "monthly", "quarterly", "half-yearly", "yearly" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetFrequency() == allowed {
+            return true
+        }
+    }
+    return false
 }
+
