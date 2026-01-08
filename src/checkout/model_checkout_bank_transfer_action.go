@@ -21,10 +21,14 @@ var _ common.MappedNullable = &CheckoutBankTransferAction{}
 type CheckoutBankTransferAction struct {
 	// The account number of the bank transfer.
 	AccountNumber *string `json:"accountNumber,omitempty"`
+	// The bank code of the bank transfer.
+	BankCode *string `json:"bankCode,omitempty"`
 	// The name of the account holder.
 	Beneficiary *string `json:"beneficiary,omitempty"`
 	// The BIC of the IBAN.
 	Bic *string `json:"bic,omitempty"`
+	// The branch code of the bank transfer.
+	BranchCode *string `json:"branchCode,omitempty"`
 	// The url to download payment details with.
 	DownloadUrl *string `json:"downloadUrl,omitempty"`
 	// The IBAN of the bank transfer.
@@ -96,6 +100,38 @@ func (o *CheckoutBankTransferAction) SetAccountNumber(v string) {
 	o.AccountNumber = &v
 }
 
+// GetBankCode returns the BankCode field value if set, zero value otherwise.
+func (o *CheckoutBankTransferAction) GetBankCode() string {
+	if o == nil || common.IsNil(o.BankCode) {
+		var ret string
+		return ret
+	}
+	return *o.BankCode
+}
+
+// GetBankCodeOk returns a tuple with the BankCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CheckoutBankTransferAction) GetBankCodeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.BankCode) {
+		return nil, false
+	}
+	return o.BankCode, true
+}
+
+// HasBankCode returns a boolean if a field has been set.
+func (o *CheckoutBankTransferAction) HasBankCode() bool {
+	if o != nil && !common.IsNil(o.BankCode) {
+		return true
+	}
+
+	return false
+}
+
+// SetBankCode gets a reference to the given string and assigns it to the BankCode field.
+func (o *CheckoutBankTransferAction) SetBankCode(v string) {
+	o.BankCode = &v
+}
+
 // GetBeneficiary returns the Beneficiary field value if set, zero value otherwise.
 func (o *CheckoutBankTransferAction) GetBeneficiary() string {
 	if o == nil || common.IsNil(o.Beneficiary) {
@@ -158,6 +194,38 @@ func (o *CheckoutBankTransferAction) HasBic() bool {
 // SetBic gets a reference to the given string and assigns it to the Bic field.
 func (o *CheckoutBankTransferAction) SetBic(v string) {
 	o.Bic = &v
+}
+
+// GetBranchCode returns the BranchCode field value if set, zero value otherwise.
+func (o *CheckoutBankTransferAction) GetBranchCode() string {
+	if o == nil || common.IsNil(o.BranchCode) {
+		var ret string
+		return ret
+	}
+	return *o.BranchCode
+}
+
+// GetBranchCodeOk returns a tuple with the BranchCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CheckoutBankTransferAction) GetBranchCodeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.BranchCode) {
+		return nil, false
+	}
+	return o.BranchCode, true
+}
+
+// HasBranchCode returns a boolean if a field has been set.
+func (o *CheckoutBankTransferAction) HasBranchCode() bool {
+	if o != nil && !common.IsNil(o.BranchCode) {
+		return true
+	}
+
+	return false
+}
+
+// SetBranchCode gets a reference to the given string and assigns it to the BranchCode field.
+func (o *CheckoutBankTransferAction) SetBranchCode(v string) {
+	o.BranchCode = &v
 }
 
 // GetDownloadUrl returns the DownloadUrl field value if set, zero value otherwise.
@@ -485,11 +553,17 @@ func (o CheckoutBankTransferAction) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.AccountNumber) {
 		toSerialize["accountNumber"] = o.AccountNumber
 	}
+	if !common.IsNil(o.BankCode) {
+		toSerialize["bankCode"] = o.BankCode
+	}
 	if !common.IsNil(o.Beneficiary) {
 		toSerialize["beneficiary"] = o.Beneficiary
 	}
 	if !common.IsNil(o.Bic) {
 		toSerialize["bic"] = o.Bic
+	}
+	if !common.IsNil(o.BranchCode) {
+		toSerialize["branchCode"] = o.BranchCode
 	}
 	if !common.IsNil(o.DownloadUrl) {
 		toSerialize["downloadUrl"] = o.DownloadUrl
