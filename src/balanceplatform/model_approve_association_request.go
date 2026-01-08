@@ -10,7 +10,8 @@ package balanceplatform
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the ApproveAssociationRequest type satisfies the MappedNullable interface at compile time
@@ -19,11 +20,11 @@ var _ common.MappedNullable = &ApproveAssociationRequest{}
 // ApproveAssociationRequest struct for ApproveAssociationRequest
 type ApproveAssociationRequest struct {
 	// The unique identifier of the entity.
-	EntityId string `json:"entityId"`
+	EntityId   string        `json:"entityId"`
 	EntityType ScaEntityType `json:"entityType"`
 	// List of device ids associated to the entity that will be approved.
-	ScaDeviceIds []string `json:"scaDeviceIds"`
-	Status AssociationStatus `json:"status"`
+	ScaDeviceIds []string          `json:"scaDeviceIds"`
+	Status       AssociationStatus `json:"status"`
 }
 
 // NewApproveAssociationRequest instantiates a new ApproveAssociationRequest object
@@ -144,7 +145,7 @@ func (o *ApproveAssociationRequest) SetStatus(v AssociationStatus) {
 }
 
 func (o ApproveAssociationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,6 +196,3 @@ func (v *NullableApproveAssociationRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

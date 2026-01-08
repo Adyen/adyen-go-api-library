@@ -10,7 +10,8 @@ package legalentity
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the PhoneNumber type satisfies the MappedNullable interface at compile time
@@ -22,7 +23,7 @@ type PhoneNumber struct {
 	Number string `json:"number"`
 	// The two-letter [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code prefix of the phone number. For example, **US** or **NL**.  The value of the `phoneCountryCode` is determined by the country code digit(s) of `phone.number`
 	PhoneCountryCode *string `json:"phoneCountryCode,omitempty"`
-	// The type of phone number.  Possible values: **mobile**, **landline**, **sip**, **fax.** 
+	// The type of phone number.  Possible values: **mobile**, **landline**, **sip**, **fax.**
 	Type *string `json:"type,omitempty"`
 }
 
@@ -133,7 +134,7 @@ func (o *PhoneNumber) SetType(v string) {
 }
 
 func (o PhoneNumber) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -187,6 +188,3 @@ func (v *NullablePhoneNumber) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

@@ -10,7 +10,6 @@ package balanceplatform
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
 	"fmt"
 )
 
@@ -19,10 +18,10 @@ type LimitStatus string
 
 // List of LimitStatus
 const (
-	ACTIVE LimitStatus = "active"
-	INACTIVE LimitStatus = "inactive"
+	ACTIVE      LimitStatus = "active"
+	INACTIVE    LimitStatus = "inactive"
 	PENDING_SCA LimitStatus = "pendingSCA"
-	SCHEDULED LimitStatus = "scheduled"
+	SCHEDULED   LimitStatus = "scheduled"
 )
 
 // All allowed values of LimitStatus enum
@@ -111,4 +110,3 @@ func (v *NullableLimitStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

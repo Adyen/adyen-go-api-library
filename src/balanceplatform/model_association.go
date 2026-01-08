@@ -10,7 +10,8 @@ package balanceplatform
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the Association type satisfies the MappedNullable interface at compile time
@@ -19,11 +20,11 @@ var _ common.MappedNullable = &Association{}
 // Association struct for Association
 type Association struct {
 	// The unique identifier of the entity.
-	EntityId string `json:"entityId"`
+	EntityId   string        `json:"entityId"`
 	EntityType ScaEntityType `json:"entityType"`
 	// The unique identifier for the SCA device.
-	ScaDeviceId string `json:"scaDeviceId"`
-	Status AssociationStatus `json:"status"`
+	ScaDeviceId string            `json:"scaDeviceId"`
+	Status      AssociationStatus `json:"status"`
 }
 
 // NewAssociation instantiates a new Association object
@@ -144,7 +145,7 @@ func (o *Association) SetStatus(v AssociationStatus) {
 }
 
 func (o Association) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,6 +196,3 @@ func (v *NullableAssociation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

@@ -10,10 +10,12 @@ package balanceplatform
 
 import (
 	"context"
-    "net/http"
-    "net/url"
-    "strings"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+	"encoding/json"
+	"io/ioutil"
+	"net/http"
+	"net/url"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // SCAAssociationManagementApi service
@@ -21,7 +23,7 @@ type SCAAssociationManagementApi common.Service
 
 // All parameters accepted by SCAAssociationManagementApi.ApproveAssociation
 type SCAAssociationManagementApiApproveAssociationInput struct {
-	wWWAuthenticate *string
+	wWWAuthenticate           *string
 	approveAssociationRequest *ApproveAssociationRequest
 }
 
@@ -36,15 +38,13 @@ func (r SCAAssociationManagementApiApproveAssociationInput) ApproveAssociationRe
 	return r
 }
 
-
 /*
 Prepare a request for ApproveAssociation
 
 @return SCAAssociationManagementApiApproveAssociationInput
 */
 func (a *SCAAssociationManagementApi) ApproveAssociationInput() SCAAssociationManagementApiApproveAssociationInput {
-	return SCAAssociationManagementApiApproveAssociationInput{
-	}
+	return SCAAssociationManagementApiApproveAssociationInput{}
 }
 
 /*
@@ -57,61 +57,60 @@ Approves a previously created association that is in a pending state.
 @return ApproveAssociationResponse, *http.Response, error
 */
 func (a *SCAAssociationManagementApi) ApproveAssociation(ctx context.Context, r SCAAssociationManagementApiApproveAssociationInput) (ApproveAssociationResponse, *http.Response, error) {
-    res := &ApproveAssociationResponse{}
+	res := &ApproveAssociationResponse{}
 	path := "/scaAssociations"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    common.ParameterAddToHeaderOrQuery(headerParams, "WWW-Authenticate", r.wWWAuthenticate, "")
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.approveAssociationRequest,
-        res,
-        http.MethodPatch,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	common.ParameterAddToHeaderOrQuery(headerParams, "WWW-Authenticate", r.wWWAuthenticate, "")
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.approveAssociationRequest,
+		res,
+		http.MethodPatch,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-    if httpRes == nil {
-        return *res, httpRes, err
-    }
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
-    var serviceError common.RestServiceError
-                        if httpRes.StatusCode == 401 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 403 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 500 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
 
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by SCAAssociationManagementApi.ListAssociations
 type SCAAssociationManagementApiListAssociationsInput struct {
 	entityType *ScaEntityType
-	entityId *string
-	pageSize *int32
+	entityId   *string
+	pageSize   *int32
 	pageNumber *int32
 }
 
@@ -139,15 +138,13 @@ func (r SCAAssociationManagementApiListAssociationsInput) PageNumber(pageNumber 
 	return r
 }
 
-
 /*
 Prepare a request for ListAssociations
 
 @return SCAAssociationManagementApiListAssociationsInput
 */
 func (a *SCAAssociationManagementApi) ListAssociationsInput() SCAAssociationManagementApiListAssociationsInput {
-	return SCAAssociationManagementApiListAssociationsInput{
-	}
+	return SCAAssociationManagementApiListAssociationsInput{}
 }
 
 /*
@@ -160,78 +157,77 @@ Returns a paginated list of the SCA devices associated with a specific entity.
 @return ListAssociationsResponse, *http.Response, error
 */
 func (a *SCAAssociationManagementApi) ListAssociations(ctx context.Context, r SCAAssociationManagementApiListAssociationsInput) (ListAssociationsResponse, *http.Response, error) {
-    res := &ListAssociationsResponse{}
+	res := &ListAssociationsResponse{}
 	path := "/scaAssociations"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    if r.entityType != nil {
-        common.ParameterAddToQuery(queryParams, "entityType", r.entityType, "")
-    }
-    if r.entityId != nil {
-        common.ParameterAddToQuery(queryParams, "entityId", r.entityId, "")
-    }
-    if r.pageSize != nil {
-        common.ParameterAddToQuery(queryParams, "pageSize", r.pageSize, "")
-    }
-    if r.pageNumber != nil {
-        common.ParameterAddToQuery(queryParams, "pageNumber", r.pageNumber, "")
-    }
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodGet,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.entityType != nil {
+		common.ParameterAddToQuery(queryParams, "entityType", r.entityType, "")
+	}
+	if r.entityId != nil {
+		common.ParameterAddToQuery(queryParams, "entityId", r.entityId, "")
+	}
+	if r.pageSize != nil {
+		common.ParameterAddToQuery(queryParams, "pageSize", r.pageSize, "")
+	}
+	if r.pageNumber != nil {
+		common.ParameterAddToQuery(queryParams, "pageNumber", r.pageNumber, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-    if httpRes == nil {
-        return *res, httpRes, err
-    }
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
-    var serviceError common.RestServiceError
-                        if httpRes.StatusCode == 400 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 401 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 403 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 500 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 400 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
 
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by SCAAssociationManagementApi.RemoveAssociation
 type SCAAssociationManagementApiRemoveAssociationInput struct {
-	wWWAuthenticate *string
+	wWWAuthenticate          *string
 	removeAssociationRequest *RemoveAssociationRequest
 }
 
@@ -246,15 +242,13 @@ func (r SCAAssociationManagementApiRemoveAssociationInput) RemoveAssociationRequ
 	return r
 }
 
-
 /*
 Prepare a request for RemoveAssociation
 
 @return SCAAssociationManagementApiRemoveAssociationInput
 */
 func (a *SCAAssociationManagementApi) RemoveAssociationInput() SCAAssociationManagementApiRemoveAssociationInput {
-	return SCAAssociationManagementApiRemoveAssociationInput{
-	}
+	return SCAAssociationManagementApiRemoveAssociationInput{}
 }
 
 /*
@@ -267,52 +261,51 @@ Deletes one or more SCA associations for a device.
 @return *http.Response, error
 */
 func (a *SCAAssociationManagementApi) RemoveAssociation(ctx context.Context, r SCAAssociationManagementApiRemoveAssociationInput) (*http.Response, error) {
-    var res interface{}
+	var res interface{}
 	path := "/scaAssociations"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    common.ParameterAddToHeaderOrQuery(headerParams, "WWW-Authenticate", r.wWWAuthenticate, "")
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.removeAssociationRequest,
-        res,
-        http.MethodDelete,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	common.ParameterAddToHeaderOrQuery(headerParams, "WWW-Authenticate", r.wWWAuthenticate, "")
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.removeAssociationRequest,
+		res,
+		http.MethodDelete,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-    if httpRes == nil {
-        return httpRes, err
-    }
+	if httpRes == nil {
+		return httpRes, err
+	}
 
-    var serviceError common.RestServiceError
-                        if httpRes.StatusCode == 401 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return httpRes, decodeError
-                            }
-                            return httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 403 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return httpRes, decodeError
-                            }
-                            return httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 500 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return httpRes, decodeError
-                            }
-                            return httpRes, serviceError
-                        }
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
+		return httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
+		return httpRes, serviceError
+	}
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
+		return httpRes, serviceError
+	}
 
-    return httpRes, err
+	return httpRes, err
 }
-
