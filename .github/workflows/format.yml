@@ -1,42 +1,37 @@
-name: Go Format
+name: Format and Commit Go Code
 
 on:
-    push:
-        branches:
-            - 'sdk-automation/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
-    format:
-        if: ${{ github.event.commits != null && !startsWith(github.event.head_commit.message, 'style(fmt)') }}
-        permissions:
-            contents: write
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout Code
-              uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-              with:
-                  token: ${{ secrets.ADYEN_AUTOMATION_BOT_ACCESS_TOKEN }}
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          token: ${{ secrets.ADYEN_AUTOMATION_BOT_ACCESS_TOKEN }}
+          ref: ${{ github.ref }}
 
-            - name: Log Commit Details
-              run: |
-                  echo "github.event.size: ${{ github.event.size }}"
-                  echo "github.event.commits: ${{ github.event.commits }}"
+      - name: Format Go Code
+        uses: ./.github/actions/format
+        with:
+          path: .
 
-            - name: Setup Go
-              uses: actions/setup-go@41dfa10bad2bb2ae585af6ee5bb4d7d973ad74ed # v5
-              with:
-                  go-version: 1.23
+      - name: Configure Git
+        run: |
+            git config user.name AdyenAutomationBot
+            git config user.email "${{ secrets.ADYEN_AUTOMATION_BOT_EMAIL }}"
 
-            - name: Format Code
-              run: make fmt
-
-            - name: Configure Git
-              run: |
-                  git config user.name AdyenAutomationBot
-                  git config user.email "${{ secrets.ADYEN_AUTOMATION_BOT_EMAIL }}"
-
-            - name: Commit and Push Changes
-              run: |
-                  git add .
-                  git commit -m "style(fmt): code formatted"
-                  git push
+      - name: Commit and Push Changes
+        run: |
+            git add .
+            if git diff --staged --quiet; then
+              echo "No changes to commit"
+            else
+              git commit -m "style(fmt): code formatted"
+              git push
+            fi
