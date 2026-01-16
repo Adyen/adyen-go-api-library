@@ -10,8 +10,7 @@ package transferwebhook
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the BankAccountV3 type satisfies the MappedNullable interface at compile time
@@ -19,8 +18,10 @@ var _ common.MappedNullable = &BankAccountV3{}
 
 // BankAccountV3 struct for BankAccountV3
 type BankAccountV3 struct {
-	AccountHolder         PartyIdentification                `json:"accountHolder"`
+	AccountHolder PartyIdentification `json:"accountHolder"`
 	AccountIdentification BankAccountV3AccountIdentification `json:"accountIdentification"`
+	// The unique token that identifies the stored bank account details of the counterparty for a payout.
+	StoredPaymentMethodId *string `json:"storedPaymentMethodId,omitempty"`
 }
 
 // NewBankAccountV3 instantiates a new BankAccountV3 object
@@ -90,8 +91,40 @@ func (o *BankAccountV3) SetAccountIdentification(v BankAccountV3AccountIdentific
 	o.AccountIdentification = v
 }
 
+// GetStoredPaymentMethodId returns the StoredPaymentMethodId field value if set, zero value otherwise.
+func (o *BankAccountV3) GetStoredPaymentMethodId() string {
+	if o == nil || common.IsNil(o.StoredPaymentMethodId) {
+		var ret string
+		return ret
+	}
+	return *o.StoredPaymentMethodId
+}
+
+// GetStoredPaymentMethodIdOk returns a tuple with the StoredPaymentMethodId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BankAccountV3) GetStoredPaymentMethodIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.StoredPaymentMethodId) {
+		return nil, false
+	}
+	return o.StoredPaymentMethodId, true
+}
+
+// HasStoredPaymentMethodId returns a boolean if a field has been set.
+func (o *BankAccountV3) HasStoredPaymentMethodId() bool {
+	if o != nil && !common.IsNil(o.StoredPaymentMethodId) {
+		return true
+	}
+
+	return false
+}
+
+// SetStoredPaymentMethodId gets a reference to the given string and assigns it to the StoredPaymentMethodId field.
+func (o *BankAccountV3) SetStoredPaymentMethodId(v string) {
+	o.StoredPaymentMethodId = &v
+}
+
 func (o BankAccountV3) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -102,6 +135,9 @@ func (o BankAccountV3) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["accountHolder"] = o.AccountHolder
 	toSerialize["accountIdentification"] = o.AccountIdentification
+	if !common.IsNil(o.StoredPaymentMethodId) {
+		toSerialize["storedPaymentMethodId"] = o.StoredPaymentMethodId
+	}
 	return toSerialize, nil
 }
 
@@ -140,3 +176,6 @@ func (v *NullableBankAccountV3) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
