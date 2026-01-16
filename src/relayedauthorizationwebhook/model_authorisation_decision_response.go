@@ -10,7 +10,8 @@ package relayedauthorizationwebhook
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the AuthorisationDecisionResponse type satisfies the MappedNullable interface at compile time
@@ -99,7 +100,7 @@ func (o *AuthorisationDecisionResponse) SetStatus(v string) {
 }
 
 func (o AuthorisationDecisionResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -151,14 +152,12 @@ func (v *NullableAuthorisationDecisionResponse) UnmarshalJSON(src []byte) error 
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *AuthorisationDecisionResponse) isValidStatus() bool {
-    var allowedEnumValues = []string{ "Authorised", "Refused" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetStatus() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"Authorised", "Refused"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetStatus() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

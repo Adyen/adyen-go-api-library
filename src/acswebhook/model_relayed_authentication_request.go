@@ -10,8 +10,9 @@ package acswebhook
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
 	"time"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the RelayedAuthenticationRequest type satisfies the MappedNullable interface at compile time
@@ -19,13 +20,13 @@ var _ common.MappedNullable = &RelayedAuthenticationRequest{}
 
 // RelayedAuthenticationRequest struct for RelayedAuthenticationRequest
 type RelayedAuthenticationRequest struct {
-	// The environment from which the webhook originated. Possible values: **test**, **live**. 
+	// The environment from which the webhook originated. Possible values: **test**, **live**.
 	Environment string `json:"environment"`
 	// The unique identifier of the challenge.
 	Id string `json:"id"`
 	// The unique identifier of the [payment instrument](https://docs.adyen.com/api-explorer/balanceplatform/latest/get/paymentInstruments/_id_) used for the purchase.
-	PaymentInstrumentId string `json:"paymentInstrumentId"`
-	Purchase Purchase `json:"purchase"`
+	PaymentInstrumentId string   `json:"paymentInstrumentId"`
+	Purchase            Purchase `json:"purchase"`
 	// URL for auto-switching to the threeDS Requestor App. If not present, the threeDS Requestor App doesn't support auto-switching.
 	ThreeDSRequestorAppURL *string `json:"threeDSRequestorAppURL,omitempty"`
 	// When the event was queued.
@@ -241,7 +242,7 @@ func (o *RelayedAuthenticationRequest) SetType(v string) {
 }
 
 func (o RelayedAuthenticationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -300,14 +301,12 @@ func (v *NullableRelayedAuthenticationRequest) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *RelayedAuthenticationRequest) isValidType() bool {
-    var allowedEnumValues = []string{ "balancePlatform.authentication.relayed" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"balancePlatform.authentication.relayed"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

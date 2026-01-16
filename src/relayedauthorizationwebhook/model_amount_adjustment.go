@@ -10,7 +10,8 @@ package relayedauthorizationwebhook
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the AmountAdjustment type satisfies the MappedNullable interface at compile time
@@ -22,7 +23,7 @@ type AmountAdjustment struct {
 	// The type of markup that is applied to an authorised payment.  Possible values: **exchange**, **forexMarkup**, **authHoldReserve**, **atmMarkup**.
 	AmountAdjustmentType *string `json:"amountAdjustmentType,omitempty"`
 	// The basepoints associated with the applied markup.
-	Basepoints *int32 `json:"basepoints,omitempty"`
+	Basepoints  *int32  `json:"basepoints,omitempty"`
 	FixedAmount *Amount `json:"fixedAmount,omitempty"`
 	FloorAmount *Amount `json:"floorAmount,omitempty"`
 	LimitAmount *Amount `json:"limitAmount,omitempty"`
@@ -238,7 +239,7 @@ func (o *AmountAdjustment) SetLimitAmount(v Amount) {
 }
 
 func (o AmountAdjustment) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -304,14 +305,12 @@ func (v *NullableAmountAdjustment) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *AmountAdjustment) isValidAmountAdjustmentType() bool {
-    var allowedEnumValues = []string{ "atmMarkup", "authHoldReserve", "exchange", "forexMarkup" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetAmountAdjustmentType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"atmMarkup", "authHoldReserve", "exchange", "forexMarkup"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetAmountAdjustmentType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-
