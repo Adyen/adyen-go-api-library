@@ -39,7 +39,8 @@ type Store struct {
 	ShopperStatement   *string                  `json:"shopperStatement,omitempty"`
 	SplitConfiguration *StoreSplitConfiguration `json:"splitConfiguration,omitempty"`
 	// The status of the store. Possible values are:  - **active**. This value is assigned automatically when a store is created.  - **inactive**. The terminals under the store are blocked from accepting new transactions, but capturing outstanding transactions is still possible. - **closed**. This status is irreversible. The terminals under the store are reassigned to the merchant inventory.
-	Status *string `json:"status,omitempty"`
+	Status          *string          `json:"status,omitempty"`
+	SubMerchantData *SubMerchantData `json:"subMerchantData,omitempty"`
 }
 
 // NewStore instantiates a new Store object
@@ -443,6 +444,38 @@ func (o *Store) SetStatus(v string) {
 	o.Status = &v
 }
 
+// GetSubMerchantData returns the SubMerchantData field value if set, zero value otherwise.
+func (o *Store) GetSubMerchantData() SubMerchantData {
+	if o == nil || common.IsNil(o.SubMerchantData) {
+		var ret SubMerchantData
+		return ret
+	}
+	return *o.SubMerchantData
+}
+
+// GetSubMerchantDataOk returns a tuple with the SubMerchantData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Store) GetSubMerchantDataOk() (*SubMerchantData, bool) {
+	if o == nil || common.IsNil(o.SubMerchantData) {
+		return nil, false
+	}
+	return o.SubMerchantData, true
+}
+
+// HasSubMerchantData returns a boolean if a field has been set.
+func (o *Store) HasSubMerchantData() bool {
+	if o != nil && !common.IsNil(o.SubMerchantData) {
+		return true
+	}
+
+	return false
+}
+
+// SetSubMerchantData gets a reference to the given SubMerchantData and assigns it to the SubMerchantData field.
+func (o *Store) SetSubMerchantData(v SubMerchantData) {
+	o.SubMerchantData = &v
+}
+
 func (o Store) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -488,6 +521,9 @@ func (o Store) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Status) {
 		toSerialize["status"] = o.Status
+	}
+	if !common.IsNil(o.SubMerchantData) {
+		toSerialize["subMerchantData"] = o.SubMerchantData
 	}
 	return toSerialize, nil
 }

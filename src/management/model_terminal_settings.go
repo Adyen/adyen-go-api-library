@@ -25,6 +25,7 @@ type TerminalSettings struct {
 	Gratuities           []Gratuity            `json:"gratuities,omitempty"`
 	Hardware             *Hardware             `json:"hardware,omitempty"`
 	Localization         *Localization         `json:"localization,omitempty"`
+	Moto                 *Moto                 `json:"moto,omitempty"`
 	Nexo                 *Nexo                 `json:"nexo,omitempty"`
 	OfflineProcessing    *OfflineProcessing    `json:"offlineProcessing,omitempty"`
 	Opi                  *Opi                  `json:"opi,omitempty"`
@@ -220,6 +221,38 @@ func (o *TerminalSettings) HasLocalization() bool {
 // SetLocalization gets a reference to the given Localization and assigns it to the Localization field.
 func (o *TerminalSettings) SetLocalization(v Localization) {
 	o.Localization = &v
+}
+
+// GetMoto returns the Moto field value if set, zero value otherwise.
+func (o *TerminalSettings) GetMoto() Moto {
+	if o == nil || common.IsNil(o.Moto) {
+		var ret Moto
+		return ret
+	}
+	return *o.Moto
+}
+
+// GetMotoOk returns a tuple with the Moto field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TerminalSettings) GetMotoOk() (*Moto, bool) {
+	if o == nil || common.IsNil(o.Moto) {
+		return nil, false
+	}
+	return o.Moto, true
+}
+
+// HasMoto returns a boolean if a field has been set.
+func (o *TerminalSettings) HasMoto() bool {
+	if o != nil && !common.IsNil(o.Moto) {
+		return true
+	}
+
+	return false
+}
+
+// SetMoto gets a reference to the given Moto and assigns it to the Moto field.
+func (o *TerminalSettings) SetMoto(v Moto) {
+	o.Moto = &v
 }
 
 // GetNexo returns the Nexo field value if set, zero value otherwise.
@@ -790,6 +823,9 @@ func (o TerminalSettings) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Localization) {
 		toSerialize["localization"] = o.Localization
+	}
+	if !common.IsNil(o.Moto) {
+		toSerialize["moto"] = o.Moto
 	}
 	if !common.IsNil(o.Nexo) {
 		toSerialize["nexo"] = o.Nexo
