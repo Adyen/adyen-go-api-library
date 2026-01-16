@@ -29,7 +29,8 @@ type IssuedCard struct {
 	// The identifier of the original payment. This ID is provided by the scheme and can be alphanumeric or numeric, depending on the scheme. The `schemeTraceID` should refer to an original `schemeUniqueTransactionID` provided in an earlier payment (not necessarily processed by Adyen). A `schemeTraceId` is typically available for authorization adjustments or recurring payments.
 	SchemeTraceId *string `json:"schemeTraceId,omitempty"`
 	// The unique identifier created by the scheme. This ID can be alphanumeric or numeric depending on the scheme.
-	SchemeUniqueTransactionId *string `json:"schemeUniqueTransactionId,omitempty"`
+	SchemeUniqueTransactionId *string       `json:"schemeUniqueTransactionId,omitempty"`
+	ThreeDSecure              *ThreeDSecure `json:"threeDSecure,omitempty"`
 	// **issuedCard**
 	Type *string `json:"type,omitempty"`
 	// The evaluation of the validation facts. See [validation checks](https://docs.adyen.com/issuing/validation-checks) for more information.
@@ -249,6 +250,38 @@ func (o *IssuedCard) SetSchemeUniqueTransactionId(v string) {
 	o.SchemeUniqueTransactionId = &v
 }
 
+// GetThreeDSecure returns the ThreeDSecure field value if set, zero value otherwise.
+func (o *IssuedCard) GetThreeDSecure() ThreeDSecure {
+	if o == nil || common.IsNil(o.ThreeDSecure) {
+		var ret ThreeDSecure
+		return ret
+	}
+	return *o.ThreeDSecure
+}
+
+// GetThreeDSecureOk returns a tuple with the ThreeDSecure field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IssuedCard) GetThreeDSecureOk() (*ThreeDSecure, bool) {
+	if o == nil || common.IsNil(o.ThreeDSecure) {
+		return nil, false
+	}
+	return o.ThreeDSecure, true
+}
+
+// HasThreeDSecure returns a boolean if a field has been set.
+func (o *IssuedCard) HasThreeDSecure() bool {
+	if o != nil && !common.IsNil(o.ThreeDSecure) {
+		return true
+	}
+
+	return false
+}
+
+// SetThreeDSecure gets a reference to the given ThreeDSecure and assigns it to the ThreeDSecure field.
+func (o *IssuedCard) SetThreeDSecure(v ThreeDSecure) {
+	o.ThreeDSecure = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *IssuedCard) GetType() string {
 	if o == nil || common.IsNil(o.Type) {
@@ -340,6 +373,9 @@ func (o IssuedCard) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.SchemeUniqueTransactionId) {
 		toSerialize["schemeUniqueTransactionId"] = o.SchemeUniqueTransactionId
+	}
+	if !common.IsNil(o.ThreeDSecure) {
+		toSerialize["threeDSecure"] = o.ThreeDSecure
 	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type
