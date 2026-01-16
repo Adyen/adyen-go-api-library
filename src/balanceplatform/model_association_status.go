@@ -10,7 +10,6 @@ package balanceplatform
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
 	"fmt"
 )
 
@@ -20,7 +19,7 @@ type AssociationStatus string
 // List of AssociationStatus
 const (
 	PENDING_APPROVAL AssociationStatus = "pendingApproval"
-	ACTIVE AssociationStatus = "active"
+	ACTIVE           AssociationStatus = "active"
 )
 
 // All allowed values of AssociationStatus enum
@@ -107,4 +106,3 @@ func (v *NullableAssociationStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -10,7 +10,8 @@ package capital
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the HULocalAccountIdentificationAllOf type satisfies the MappedNullable interface at compile time
@@ -110,7 +111,7 @@ func (o *HULocalAccountIdentificationAllOf) SetType(v string) {
 }
 
 func (o HULocalAccountIdentificationAllOf) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -163,6 +164,3 @@ func (v *NullableHULocalAccountIdentificationAllOf) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

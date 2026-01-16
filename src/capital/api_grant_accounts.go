@@ -10,10 +10,11 @@ package capital
 
 import (
 	"context"
-    "net/http"
-    "net/url"
-    "strings"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+	"net/http"
+	"net/url"
+	"strings"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // GrantAccountsApi service
@@ -23,7 +24,6 @@ type GrantAccountsApi common.Service
 type GrantAccountsApiGetGrantAccountInformationInput struct {
 	id string
 }
-
 
 /*
 Prepare a request for GetGrantAccountInformation
@@ -46,23 +46,21 @@ Returns the details of the specified grant account. This account tracks existing
 @return GrantAccount, *http.Response, error
 */
 func (a *GrantAccountsApi) GetGrantAccountInformation(ctx context.Context, r GrantAccountsApiGetGrantAccountInformationInput) (GrantAccount, *http.Response, error) {
-    res := &GrantAccount{}
+	res := &GrantAccount{}
 	path := "/grantAccounts/{id}"
-    path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodGet,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-

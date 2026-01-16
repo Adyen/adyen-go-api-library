@@ -10,7 +10,6 @@ package balanceplatform
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
 	"fmt"
 )
 
@@ -19,7 +18,7 @@ type Scope string
 
 // List of Scope
 const (
-	PER_DAY Scope = "perDay"
+	PER_DAY         Scope = "perDay"
 	PER_TRANSACTION Scope = "perTransaction"
 )
 
@@ -107,4 +106,3 @@ func (v *NullableScope) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -10,10 +10,11 @@ package capital
 
 import (
 	"context"
-    "net/http"
-    "net/url"
-    "strings"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+	"net/http"
+	"net/url"
+	"strings"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // GrantOffersApi service
@@ -30,15 +31,13 @@ func (r GrantOffersApiGetAllGrantOffersInput) AccountHolderId(accountHolderId st
 	return r
 }
 
-
 /*
 Prepare a request for GetAllGrantOffers
 
 @return GrantOffersApiGetAllGrantOffersInput
 */
 func (a *GrantOffersApi) GetAllGrantOffersInput() GrantOffersApiGetAllGrantOffersInput {
-	return GrantOffersApiGetAllGrantOffersInput{
-	}
+	return GrantOffersApiGetAllGrantOffersInput{}
 }
 
 /*
@@ -51,34 +50,31 @@ Returns a list of all [grant offers](https://docs.adyen.com/platforms/capital#gr
 @return GrantOffers, *http.Response, error
 */
 func (a *GrantOffersApi) GetAllGrantOffers(ctx context.Context, r GrantOffersApiGetAllGrantOffersInput) (GrantOffers, *http.Response, error) {
-    res := &GrantOffers{}
+	res := &GrantOffers{}
 	path := "/grantOffers"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    if r.accountHolderId != nil {
-        common.ParameterAddToQuery(queryParams, "accountHolderId", r.accountHolderId, "")
-    }
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodGet,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.accountHolderId != nil {
+		common.ParameterAddToQuery(queryParams, "accountHolderId", r.accountHolderId, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by GrantOffersApi.GetGrantOffer
 type GrantOffersApiGetGrantOfferInput struct {
 	id string
 }
-
 
 /*
 Prepare a request for GetGrantOffer
@@ -101,23 +97,21 @@ Returns the details of the specified grant offer.
 @return GrantOffer, *http.Response, error
 */
 func (a *GrantOffersApi) GetGrantOffer(ctx context.Context, r GrantOffersApiGetGrantOfferInput) (GrantOffer, *http.Response, error) {
-    res := &GrantOffer{}
+	res := &GrantOffer{}
 	path := "/grantOffers/{id}"
-    path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodGet,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-

@@ -10,7 +10,8 @@ package capital
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the NumberAndBicAccountIdentification type satisfies the MappedNullable interface at compile time
@@ -19,7 +20,7 @@ var _ common.MappedNullable = &NumberAndBicAccountIdentification{}
 // NumberAndBicAccountIdentification struct for NumberAndBicAccountIdentification
 type NumberAndBicAccountIdentification struct {
 	// The bank account number, without separators or whitespace. The length and format depends on the bank or country.
-	AccountNumber string `json:"accountNumber"`
+	AccountNumber                string                        `json:"accountNumber"`
 	AdditionalBankIdentification *AdditionalBankIdentification `json:"additionalBankIdentification,omitempty"`
 	// The bank's 8- or 11-character BIC or SWIFT code.
 	Bic string `json:"bic"`
@@ -154,7 +155,7 @@ func (o *NumberAndBicAccountIdentification) SetType(v string) {
 }
 
 func (o NumberAndBicAccountIdentification) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -207,6 +208,3 @@ func (v *NullableNumberAndBicAccountIdentification) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

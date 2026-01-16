@@ -10,7 +10,8 @@ package transfers
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the UltimatePartyIdentification type satisfies the MappedNullable interface at compile time
@@ -26,7 +27,7 @@ type UltimatePartyIdentification struct {
 	// The first name of the individual.  Supported characters: [a-z] [A-Z] - . / — and space.  This parameter is: - Allowed only when `type` is **individual**. - Required when `category` is **card**.
 	FirstName *string `json:"firstName,omitempty"`
 	// The full name of the entity that owns the bank account or card.  Supported characters: [a-z] [A-Z] [0-9] , . ; : - — / \\ + & ! ? @ ( ) \" ' and space.  Required when `category` is **bank**.
-	FullName *string `json:"fullName,omitempty"`
+	FullName          *string            `json:"fullName,omitempty"`
 	FundingInstrument *FundingInstrument `json:"fundingInstrument,omitempty"`
 	// The last name of the individual.  Supported characters: [a-z] [A-Z] - . / — and space.  This parameter is: - Allowed only when `type` is **individual**. - Required when `category` is **card**.
 	LastName *string `json:"lastName,omitempty"`
@@ -380,7 +381,7 @@ func (o *UltimatePartyIdentification) SetUrl(v string) {
 }
 
 func (o UltimatePartyIdentification) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -458,14 +459,12 @@ func (v *NullableUltimatePartyIdentification) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *UltimatePartyIdentification) isValidType() bool {
-    var allowedEnumValues = []string{ "individual", "organization", "unknown" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"individual", "organization", "unknown"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-
