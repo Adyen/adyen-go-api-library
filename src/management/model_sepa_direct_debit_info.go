@@ -10,7 +10,8 @@ package management
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the SepaDirectDebitInfo type satisfies the MappedNullable interface at compile time
@@ -19,7 +20,7 @@ var _ common.MappedNullable = &SepaDirectDebitInfo{}
 // SepaDirectDebitInfo struct for SepaDirectDebitInfo
 type SepaDirectDebitInfo struct {
 	// Creditor id
-	CreditorId *string `json:"creditorId,omitempty"`
+	CreditorId             *string                     `json:"creditorId,omitempty"`
 	TransactionDescription *TransactionDescriptionInfo `json:"transactionDescription,omitempty"`
 }
 
@@ -105,7 +106,7 @@ func (o *SepaDirectDebitInfo) SetTransactionDescription(v TransactionDescription
 }
 
 func (o SepaDirectDebitInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,6 +159,3 @@ func (v *NullableSepaDirectDebitInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-
