@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the CheckoutSessionThreeDS2RequestData type satisfies the MappedNullable interface at compile time
@@ -18,11 +19,11 @@ var _ common.MappedNullable = &CheckoutSessionThreeDS2RequestData{}
 
 // CheckoutSessionThreeDS2RequestData struct for CheckoutSessionThreeDS2RequestData
 type CheckoutSessionThreeDS2RequestData struct {
-	HomePhone *Phone `json:"homePhone,omitempty"`
+	HomePhone   *Phone `json:"homePhone,omitempty"`
 	MobilePhone *Phone `json:"mobilePhone,omitempty"`
 	// Indicates whether a challenge is requested for this transaction. Possible values: * **01** — No preference * **02** — No challenge requested * **03** — Challenge requested (3DS Requestor preference) * **04** — Challenge requested (Mandate) * **05** — No challenge (transactional risk analysis is already performed) * **06** — Data Only
 	ThreeDSRequestorChallengeInd *string `json:"threeDSRequestorChallengeInd,omitempty"`
-	WorkPhone *Phone `json:"workPhone,omitempty"`
+	WorkPhone                    *Phone  `json:"workPhone,omitempty"`
 }
 
 // NewCheckoutSessionThreeDS2RequestData instantiates a new CheckoutSessionThreeDS2RequestData object
@@ -171,7 +172,7 @@ func (o *CheckoutSessionThreeDS2RequestData) SetWorkPhone(v Phone) {
 }
 
 func (o CheckoutSessionThreeDS2RequestData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -231,14 +232,12 @@ func (v *NullableCheckoutSessionThreeDS2RequestData) UnmarshalJSON(src []byte) e
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *CheckoutSessionThreeDS2RequestData) isValidThreeDSRequestorChallengeInd() bool {
-    var allowedEnumValues = []string{ "01", "02", "03", "04", "05", "06" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetThreeDSRequestorChallengeInd() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"01", "02", "03", "04", "05", "06"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetThreeDSRequestorChallengeInd() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

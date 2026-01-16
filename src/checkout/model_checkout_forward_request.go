@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the CheckoutForwardRequest type satisfies the MappedNullable interface at compile time
@@ -23,10 +24,10 @@ type CheckoutForwardRequest struct {
 	// Your merchant account.
 	MerchantAccount string `json:"merchantAccount"`
 	// Merchant defined payment reference.
-	MerchantReference *string `json:"merchantReference,omitempty"`
-	Options *CheckoutForwardRequestOptions `json:"options,omitempty"`
-	PaymentMethod *CheckoutForwardRequestCard `json:"paymentMethod,omitempty"`
-	Request CheckoutOutgoingForwardRequest `json:"request"`
+	MerchantReference *string                        `json:"merchantReference,omitempty"`
+	Options           *CheckoutForwardRequestOptions `json:"options,omitempty"`
+	PaymentMethod     *CheckoutForwardRequestCard    `json:"paymentMethod,omitempty"`
+	Request           CheckoutOutgoingForwardRequest `json:"request"`
 	// Your reference to uniquely identify this shopper, for example user ID or account ID. The value is case-sensitive and must be at least three characters. > Your reference must not include personally identifiable information (PII) such as name or email address.
 	ShopperReference string `json:"shopperReference"`
 	// The unique identifier of the token that you want to forward to the third party. This is the `storedPaymentMethodId` you received in the webhook after you created the token.
@@ -279,7 +280,7 @@ func (o *CheckoutForwardRequest) SetStoredPaymentMethodId(v string) {
 }
 
 func (o CheckoutForwardRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -342,6 +343,3 @@ func (v *NullableCheckoutForwardRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

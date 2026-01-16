@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the TokenMandate type satisfies the MappedNullable interface at compile time
@@ -22,9 +23,9 @@ type TokenMandate struct {
 	AccountIdType *string `json:"accountIdType,omitempty"`
 	// The billing amount (in minor units) of the recurring transactions.
 	Amount string `json:"amount"`
-	// The limitation rule of the billing amount.  Possible values:  * **max**: The transaction amount can not exceed the `amount`.   * **exact**: The transaction amount should be the same as the `amount`.  
+	// The limitation rule of the billing amount.  Possible values:  * **max**: The transaction amount can not exceed the `amount`.   * **exact**: The transaction amount should be the same as the `amount`.
 	AmountRule *string `json:"amountRule,omitempty"`
-	// The rule to specify the period, within which the recurring debit can happen, relative to the mandate recurring date.  Possible values:   * **on**: On a specific date.   * **before**:  Before and on a specific date.   * **after**: On and after a specific date.  
+	// The rule to specify the period, within which the recurring debit can happen, relative to the mandate recurring date.  Possible values:   * **on**: On a specific date.   * **before**:  Before and on a specific date.   * **after**: On and after a specific date.
 	BillingAttemptsRule *string `json:"billingAttemptsRule,omitempty"`
 	// The number of the day, on which the recurring debit can happen. Should be within the same calendar month as the mandate recurring date.  Possible values: 1-31 based on the `frequency`.
 	BillingDay *string `json:"billingDay,omitempty"`
@@ -526,7 +527,7 @@ func (o *TokenMandate) SetTxVariant(v string) {
 }
 
 func (o TokenMandate) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -606,32 +607,30 @@ func (v *NullableTokenMandate) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *TokenMandate) isValidAmountRule() bool {
-    var allowedEnumValues = []string{ "max", "exact" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetAmountRule() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"max", "exact"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetAmountRule() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *TokenMandate) isValidBillingAttemptsRule() bool {
-    var allowedEnumValues = []string{ "on", "before", "after" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetBillingAttemptsRule() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"on", "before", "after"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetBillingAttemptsRule() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *TokenMandate) isValidFrequency() bool {
-    var allowedEnumValues = []string{ "adhoc", "daily", "weekly", "biWeekly", "monthly", "quarterly", "halfYearly", "yearly" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetFrequency() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"adhoc", "daily", "weekly", "biWeekly", "monthly", "quarterly", "halfYearly", "yearly"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetFrequency() == allowed {
+			return true
+		}
+	}
+	return false
 }
-
