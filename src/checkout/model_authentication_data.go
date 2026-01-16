@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the AuthenticationData type satisfies the MappedNullable interface at compile time
@@ -21,8 +20,8 @@ var _ common.MappedNullable = &AuthenticationData{}
 type AuthenticationData struct {
 	// Indicates when 3D Secure authentication should be attempted. This overrides all other rules, including [Dynamic 3D Secure settings](https://docs.adyen.com/risk-management/dynamic-3d-secure).  Possible values:  * **always**: Perform 3D Secure authentication. * **never**: Don't perform 3D Secure authentication. If PSD2 SCA or other national regulations require authentication, the transaction gets declined.
 	AttemptAuthentication *string `json:"attemptAuthentication,omitempty"`
-	// If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only), and not the payment authorisation. Default: **false**.
-	AuthenticationOnly *bool               `json:"authenticationOnly,omitempty"`
+	// Required to trigger the [authentication-only flow](https://docs.adyen.com/online-payments/3d-secure/authentication-only/). If set to **true**, you will only perform the 3D Secure 2 authentication, and will not proceed to the payment authorization. Default: **false**.
+	AuthenticationOnly *bool `json:"authenticationOnly,omitempty"`
 	ThreeDSRequestData *ThreeDSRequestData `json:"threeDSRequestData,omitempty"`
 }
 
@@ -144,7 +143,7 @@ func (o *AuthenticationData) SetThreeDSRequestData(v ThreeDSRequestData) {
 }
 
 func (o AuthenticationData) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -201,12 +200,14 @@ func (v *NullableAuthenticationData) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *AuthenticationData) isValidAttemptAuthentication() bool {
-	var allowedEnumValues = []string{"always", "never"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetAttemptAuthentication() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "always", "never" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetAttemptAuthentication() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

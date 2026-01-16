@@ -10,8 +10,7 @@ package payments
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the ResponseAdditionalDataCommon type satisfies the MappedNullable interface at compile time
@@ -65,7 +64,7 @@ type ResponseAdditionalDataCommon struct {
 	FraudManualReview *string `json:"fraudManualReview,omitempty"`
 	// The fraud result properties of the payment.
 	FraudResultType *string `json:"fraudResultType,omitempty"`
-	// The risk level of the transaction as classified by the [machine learning](https://docs.adyen.com/risk-management/configure-your-risk-profile/machine-learning-rules/) fraud risk rule. The risk level indicates the likelihood that a transaction will result in a fraudulent dispute. The possible return values are:\\n* veryLow\\n* low\\n* medium\\n* high\\n* veryHigh\\n\\n>
+	// The risk level of the transaction as classified by the [machine learning](https://docs.adyen.com/risk-management/configure-your-risk-profile/machine-learning-rules/) fraud risk rule. The risk level indicates the likelihood that a transaction will result in a fraudulent dispute. The possible return values are: * veryLow * low * medium * high * veryHigh 
 	FraudRiskLevel *string `json:"fraudRiskLevel,omitempty"`
 	// Information regarding the funding type of the card. The possible return values are: * CHARGE * CREDIT * DEBIT * PREPAID * PREPAID_RELOADABLE  * PREPAID_NONRELOADABLE * DEFFERED_DEBIT  > This functionality requires additional configuration on Adyen's end. To enable it, contact the Support Team.  For receiving this field in the notification, enable **Include Funding Source** in **Notifications** > **Additional settings**.
 	FundingSource *string `json:"fundingSource,omitempty"`
@@ -106,12 +105,12 @@ type ResponseAdditionalDataCommon struct {
 	// The `pspReference`, of the first recurring payment that created the recurring detail.  This functionality requires additional configuration on Adyen's end. To enable it, contact the Support Team.
 	RecurringFirstPspReference *string `json:"recurring.firstPspReference,omitempty"`
 	// The reference that uniquely identifies the recurring transaction.
-	// Deprecated since Adyen Payment API v68
-	// Use tokenization.storedPaymentMethodId instead.
+    // Deprecated since Adyen Payment API v68
+    // Use tokenization.storedPaymentMethodId instead.
 	RecurringRecurringDetailReference *string `json:"recurring.recurringDetailReference,omitempty"`
 	// The provided reference of the shopper for a recurring transaction.
-	// Deprecated since Adyen Payment API v68
-	// Use tokenization.shopperReference instead.
+    // Deprecated since Adyen Payment API v68
+    // Use tokenization.shopperReference instead.
 	RecurringShopperReference *string `json:"recurring.shopperReference,omitempty"`
 	// The processing model used for the recurring transaction.
 	RecurringProcessingModel *string `json:"recurringProcessingModel,omitempty"`
@@ -141,7 +140,7 @@ type ResponseAdditionalDataCommon struct {
 	ThreeDSVersion *string `json:"threeDSVersion,omitempty"`
 	// The reference for the shopper that you sent when tokenizing the payment details.
 	TokenizationShopperReference *string `json:"tokenization.shopperReference,omitempty"`
-	// The operation performed on the token. Possible values:  * **created**: the token has been created. * **updated**: the existing token has been updated. * **alreadyExisting**: the details have already been stored.
+	// The operation performed on the token. Possible values:  * **created**: the token has been created. * **updated**: the existing token has been updated. * **alreadyExisting**: the details have already been stored. 
 	TokenizationStoreOperationType *string `json:"tokenization.store.operationType,omitempty"`
 	// The reference that uniquely identifies tokenized payment details.
 	TokenizationStoredPaymentMethodId *string `json:"tokenization.storedPaymentMethodId,omitempty"`
@@ -2197,7 +2196,7 @@ func (o *ResponseAdditionalDataCommon) SetXid(v string) {
 }
 
 func (o ResponseAdditionalDataCommon) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -2434,39 +2433,41 @@ func (v *NullableResponseAdditionalDataCommon) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *ResponseAdditionalDataCommon) isValidFraudResultType() bool {
-	var allowedEnumValues = []string{"GREEN", "FRAUD"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetFraudResultType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "GREEN", "FRAUD" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetFraudResultType() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *ResponseAdditionalDataCommon) isValidFraudRiskLevel() bool {
-	var allowedEnumValues = []string{"veryLow", "low", "medium", "high", "veryHigh"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetFraudRiskLevel() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "veryLow", "low", "medium", "high", "veryHigh" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetFraudRiskLevel() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *ResponseAdditionalDataCommon) isValidRecurringProcessingModel() bool {
-	var allowedEnumValues = []string{"CardOnFile", "Subscription", "UnscheduledCardOnFile"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetRecurringProcessingModel() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "CardOnFile", "Subscription", "UnscheduledCardOnFile" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetRecurringProcessingModel() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *ResponseAdditionalDataCommon) isValidTokenizationStoreOperationType() bool {
-	var allowedEnumValues = []string{"created", "updated", "alreadyExisting"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetTokenizationStoreOperationType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "created", "updated", "alreadyExisting" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetTokenizationStoreOperationType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+
