@@ -51,7 +51,7 @@ CancelAuthorisedPayment Cancel an authorised payment
 
 Cancels the authorisation on a payment that has not yet been [captured](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments/{paymentPspReference}/captures), and returns a unique reference for this request. You get the outcome of the request asynchronously, in a [**TECHNICAL_CANCEL** webhook](https://docs.adyen.com/online-payments/cancel#cancellation-webhook).
 
-If you want to cancel a payment using the [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference), use the [`/payments/{paymentPspReference}/cancels`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments/{paymentPspReference}/cancels) endpoint instead.
+If you want to cancel a payment using the [`pspReference`](https://docs.adyen.com/api-explorer/Checkout/latest/post/payments#responses-200-pspReference), use the [`/payments/{paymentPspReference}/cancels`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments/{paymentPspReference}/cancels) endpoint instead.
 
 If you want to cancel a payment but are not sure whether it has been captured, use the [`/payments/{paymentPspReference}/reversals`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments/{paymentPspReference}/reversals) endpoint instead.
 
@@ -103,7 +103,7 @@ func (r ModificationsApiCancelAuthorisedPaymentByPspReferenceInput) PaymentCance
 
 /*
 Prepare a request for CancelAuthorisedPaymentByPspReference
-@param paymentPspReference The [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference) of the payment that you want to cancel.
+@param paymentPspReference The [`pspReference`](https://docs.adyen.com/api-explorer/Checkout/latest/post/payments#responses-200-pspReference) of the payment that you want to cancel.
 @return ModificationsApiCancelAuthorisedPaymentByPspReferenceInput
 */
 func (a *ModificationsApi) CancelAuthorisedPaymentByPspReferenceInput(paymentPspReference string) ModificationsApiCancelAuthorisedPaymentByPspReferenceInput {
@@ -117,7 +117,7 @@ CancelAuthorisedPaymentByPspReference Cancel an authorised payment
 
 Cancels the authorisation on a payment that has not yet been [captured](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments/{paymentPspReference}/captures), and returns a unique reference for this request. You get the outcome of the request asynchronously, in a [**CANCELLATION** webhook](https://docs.adyen.com/online-payments/cancel#cancellation-webhook).
 
-If you want to cancel a payment but don't have the [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference), use the [`/cancels`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/cancels) endpoint instead.
+If you want to cancel a payment but don't have the [`pspReference`](https://docs.adyen.com/api-explorer/Checkout/latest/post/payments#responses-200-pspReference), use the [`/cancels`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/cancels) endpoint instead.
 
 If you want to cancel a payment but are not sure whether it has been captured, use the [`/payments/{paymentPspReference}/reversals`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments/{paymentPspReference}/reversals) endpoint instead.
 
@@ -170,7 +170,7 @@ func (r ModificationsApiCaptureAuthorisedPaymentInput) PaymentCaptureRequest(pay
 
 /*
 Prepare a request for CaptureAuthorisedPayment
-@param paymentPspReference The [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference) of the payment that you want to capture.
+@param paymentPspReference The [`pspReference`](https://docs.adyen.com/api-explorer/Checkout/latest/post/payments#responses-200-pspReference) of the payment that you want to capture.
 @return ModificationsApiCaptureAuthorisedPaymentInput
 */
 func (a *ModificationsApi) CaptureAuthorisedPaymentInput(paymentPspReference string) ModificationsApiCaptureAuthorisedPaymentInput {
@@ -237,7 +237,7 @@ func (r ModificationsApiRefundCapturedPaymentInput) PaymentRefundRequest(payment
 
 /*
 Prepare a request for RefundCapturedPayment
-@param paymentPspReference The [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference) of the payment that you want to refund.
+@param paymentPspReference The [`pspReference`](https://docs.adyen.com/api-explorer/Checkout/latest/post/payments#responses-200-pspReference) of the payment that you want to refund.
 @return ModificationsApiRefundCapturedPaymentInput
 */
 func (a *ModificationsApi) RefundCapturedPaymentInput(paymentPspReference string) ModificationsApiRefundCapturedPaymentInput {
@@ -306,7 +306,7 @@ func (r ModificationsApiRefundOrCancelPaymentInput) PaymentReversalRequest(payme
 
 /*
 Prepare a request for RefundOrCancelPayment
-@param paymentPspReference The [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference) of the payment that you want to reverse.
+@param paymentPspReference The [`pspReference`](https://docs.adyen.com/api-explorer/Checkout/latest/post/payments#responses-200-pspReference) of the payment that you want to reverse.
 @return ModificationsApiRefundOrCancelPaymentInput
 */
 func (a *ModificationsApi) RefundOrCancelPaymentInput(paymentPspReference string) ModificationsApiRefundOrCancelPaymentInput {
@@ -318,7 +318,7 @@ func (a *ModificationsApi) RefundOrCancelPaymentInput(paymentPspReference string
 /*
 RefundOrCancelPayment Refund or cancel a payment
 
-[Refunds](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments/{paymentPspReference}/refunds) a payment if it has already been captured, and [cancels](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments/{paymentPspReference}/cancels) a payment if it has not yet been captured. Returns a unique reference for this request. You get the outcome of the request asynchronously, in a [**CANCEL_OR_REFUND** webhook](https://docs.adyen.com/online-payments/reverse#cancel-or-refund-webhook).
+[Refunds](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments/{paymentPspReference}/refunds) a payment if it has already been captured, and [cancels](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments/{paymentPspReference}/cancels) a payment if it has not yet been captured. Returns a unique reference for this request. You get the outcome of the request asynchronously, in a [**CANCEL_OR_REFUND** webhook](https://docs.adyen.com/online-payments/reversal/#cancel-or-refund-webhook).
 
 The reversed amount is always the full payment amount.
 > Do not use this request for payments that involve multiple partial captures.
@@ -372,7 +372,7 @@ func (r ModificationsApiUpdateAuthorisedAmountInput) PaymentAmountUpdateRequest(
 
 /*
 Prepare a request for UpdateAuthorisedAmount
-@param paymentPspReference The [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference) of the payment.
+@param paymentPspReference The [`pspReference`](https://docs.adyen.com/api-explorer/Checkout/latest/post/payments#responses-200-pspReference) of the payment.
 @return ModificationsApiUpdateAuthorisedAmountInput
 */
 func (a *ModificationsApi) UpdateAuthorisedAmountInput(paymentPspReference string) ModificationsApiUpdateAuthorisedAmountInput {
@@ -384,7 +384,7 @@ func (a *ModificationsApi) UpdateAuthorisedAmountInput(paymentPspReference strin
 /*
 UpdateAuthorisedAmount Update an authorised amount
 
-Increases or decreases the authorised payment amount and returns a unique reference for this request. You get the outcome of the request asynchronously, in an [**AUTHORISATION_ADJUSTMENT** webhook](https://docs.adyen.com/development-resources/webhooks/understand-notifications#event-codes).
+Increases or decreases the authorised payment amount and returns a unique reference for this request. You get the outcome of the request asynchronously, in an [**AUTHORISATION_ADJUSTMENT** webhook](https://docs.adyen.com/development-resources/webhooks/webhook-types/#event-codes).
 
 You can only update authorised amounts that have not yet been [captured](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments/{paymentPspReference}/captures).
 

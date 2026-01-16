@@ -19,7 +19,8 @@ var _ common.MappedNullable = &EnhancedSchemeData{}
 
 // EnhancedSchemeData struct for EnhancedSchemeData
 type EnhancedSchemeData struct {
-	Airline *Airline `json:"airline,omitempty"`
+	Airline       *Airline       `json:"airline,omitempty"`
+	LevelTwoThree *LevelTwoThree `json:"levelTwoThree,omitempty"`
 }
 
 // NewEnhancedSchemeData instantiates a new EnhancedSchemeData object
@@ -71,6 +72,38 @@ func (o *EnhancedSchemeData) SetAirline(v Airline) {
 	o.Airline = &v
 }
 
+// GetLevelTwoThree returns the LevelTwoThree field value if set, zero value otherwise.
+func (o *EnhancedSchemeData) GetLevelTwoThree() LevelTwoThree {
+	if o == nil || common.IsNil(o.LevelTwoThree) {
+		var ret LevelTwoThree
+		return ret
+	}
+	return *o.LevelTwoThree
+}
+
+// GetLevelTwoThreeOk returns a tuple with the LevelTwoThree field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EnhancedSchemeData) GetLevelTwoThreeOk() (*LevelTwoThree, bool) {
+	if o == nil || common.IsNil(o.LevelTwoThree) {
+		return nil, false
+	}
+	return o.LevelTwoThree, true
+}
+
+// HasLevelTwoThree returns a boolean if a field has been set.
+func (o *EnhancedSchemeData) HasLevelTwoThree() bool {
+	if o != nil && !common.IsNil(o.LevelTwoThree) {
+		return true
+	}
+
+	return false
+}
+
+// SetLevelTwoThree gets a reference to the given LevelTwoThree and assigns it to the LevelTwoThree field.
+func (o *EnhancedSchemeData) SetLevelTwoThree(v LevelTwoThree) {
+	o.LevelTwoThree = &v
+}
+
 func (o EnhancedSchemeData) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -83,6 +116,9 @@ func (o EnhancedSchemeData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.Airline) {
 		toSerialize["airline"] = o.Airline
+	}
+	if !common.IsNil(o.LevelTwoThree) {
+		toSerialize["levelTwoThree"] = o.LevelTwoThree
 	}
 	return toSerialize, nil
 }

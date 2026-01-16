@@ -25,6 +25,8 @@ type StoredPaymentMethodDetails struct {
 	// Deprecated since Adyen Checkout API v49
 	// Use `storedPaymentMethodId` instead.
 	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
+	// Base64-encoded JSON object containing SDK related parameters required by the SDK
+	SdkData *string `json:"sdkData,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
 	StoredPaymentMethodId *string `json:"storedPaymentMethodId,omitempty"`
 	// The payment method type.
@@ -118,6 +120,38 @@ func (o *StoredPaymentMethodDetails) SetRecurringDetailReference(v string) {
 	o.RecurringDetailReference = &v
 }
 
+// GetSdkData returns the SdkData field value if set, zero value otherwise.
+func (o *StoredPaymentMethodDetails) GetSdkData() string {
+	if o == nil || common.IsNil(o.SdkData) {
+		var ret string
+		return ret
+	}
+	return *o.SdkData
+}
+
+// GetSdkDataOk returns a tuple with the SdkData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoredPaymentMethodDetails) GetSdkDataOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SdkData) {
+		return nil, false
+	}
+	return o.SdkData, true
+}
+
+// HasSdkData returns a boolean if a field has been set.
+func (o *StoredPaymentMethodDetails) HasSdkData() bool {
+	if o != nil && !common.IsNil(o.SdkData) {
+		return true
+	}
+
+	return false
+}
+
+// SetSdkData gets a reference to the given string and assigns it to the SdkData field.
+func (o *StoredPaymentMethodDetails) SetSdkData(v string) {
+	o.SdkData = &v
+}
+
 // GetStoredPaymentMethodId returns the StoredPaymentMethodId field value if set, zero value otherwise.
 func (o *StoredPaymentMethodDetails) GetStoredPaymentMethodId() string {
 	if o == nil || common.IsNil(o.StoredPaymentMethodId) {
@@ -198,6 +232,9 @@ func (o StoredPaymentMethodDetails) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.RecurringDetailReference) {
 		toSerialize["recurringDetailReference"] = o.RecurringDetailReference
 	}
+	if !common.IsNil(o.SdkData) {
+		toSerialize["sdkData"] = o.SdkData
+	}
 	if !common.IsNil(o.StoredPaymentMethodId) {
 		toSerialize["storedPaymentMethodId"] = o.StoredPaymentMethodId
 	}
@@ -244,7 +281,7 @@ func (v *NullableStoredPaymentMethodDetails) UnmarshalJSON(src []byte) error {
 }
 
 func (o *StoredPaymentMethodDetails) isValidType() bool {
-	var allowedEnumValues = []string{"bcmc_mobile", "bcmc_mobile_QR", "bcmc_mobile_app", "momo_wallet", "momo_wallet_app", "paymaya_wallet", "grabpay_SG", "grabpay_MY", "grabpay_TH", "grabpay_ID", "grabpay_VN", "grabpay_PH", "oxxo", "gcash", "dana", "kakaopay", "truemoney", "paysafecard"}
+	var allowedEnumValues = []string{"alipay_plus", "alipay_plus_alipay_cn", "alipay_plus_alipay_hk", "alipay_plus_dana", "alipay_plus_gcash", "alipay_plus_kakaopay", "alipay_plus_kplus", "alipay_plus_naverpay", "alipay_plus_rabbitlinepay", "alipay_plus_tosspay", "alipay_plus_touchngo", "alipay_plus_truemoney", "bcmc_mobile", "bcmc_mobile_QR", "bcmc_mobile_app", "momo_wallet", "momo_wallet_app", "paymaya_wallet", "grabpay_SG", "grabpay_MY", "grabpay_TH", "grabpay_ID", "grabpay_VN", "grabpay_PH", "oxxo", "gcash", "dana", "kakaopay", "truemoney", "paysafecard"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

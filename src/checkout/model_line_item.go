@@ -19,9 +19,9 @@ var _ common.MappedNullable = &LineItem{}
 
 // LineItem struct for LineItem
 type LineItem struct {
-	// Item amount excluding the tax, in minor units.
+	// Item amount excluding the tax, in [minor units](https://docs.adyen.com/development-resources/currency-codes/#minor-units).
 	AmountExcludingTax *int64 `json:"amountExcludingTax,omitempty"`
-	// Item amount including the tax, in minor units.
+	// Item amount including the tax, in [minor units](https://docs.adyen.com/development-resources/currency-codes/#minor-units).
 	AmountIncludingTax *int64 `json:"amountIncludingTax,omitempty"`
 	// Brand of the item.
 	Brand *string `json:"brand,omitempty"`
@@ -49,9 +49,9 @@ type LineItem struct {
 	Size *string `json:"size,omitempty"`
 	// Stock keeping unit.
 	Sku *string `json:"sku,omitempty"`
-	// Tax amount, in minor units.
+	// Tax amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes/#minor-units).
 	TaxAmount *int64 `json:"taxAmount,omitempty"`
-	// Tax percentage, in minor units.
+	// Tax percentage, represented as a [basis point](https://en.wikipedia.org/wiki/Basis_point) integer. For example:  - **530** for 5.3% (five point three percent)   - **2100** for 21% (twenty-one percent)
 	TaxPercentage *int64 `json:"taxPercentage,omitempty"`
 	// Universal Product Code.
 	Upc *string `json:"upc,omitempty"`
