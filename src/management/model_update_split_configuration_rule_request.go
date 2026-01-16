@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the UpdateSplitConfigurationRuleRequest type satisfies the MappedNullable interface at compile time
@@ -21,8 +20,8 @@ var _ common.MappedNullable = &UpdateSplitConfigurationRuleRequest{}
 type UpdateSplitConfigurationRuleRequest struct {
 	// The currency condition that defines whether the split logic applies. Its value must be a three-character [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217).
 	Currency string `json:"currency"`
-	// The funding source of the payment method. This only applies to card transactions.  Possible values: * **credit** * **debit** * **prepaid** * **deferred_debit** * **charged** * **ANY**
-	FundingSource *string `json:"fundingSource,omitempty"`
+	// The funding source of the payment method.  Possible values: * **credit** * **debit** * **prepaid** * **deferred_debit** * **charged** * **ANY**
+	FundingSource string `json:"fundingSource"`
 	// The payment method condition that defines whether the split logic applies.  Possible values: * [Payment method variant](https://docs.adyen.com/development-resources/paymentmethodvariant): Apply the split logic for a specific payment method. * **ANY**: Apply the split logic for all available payment methods.
 	PaymentMethod string `json:"paymentMethod"`
 	// The sales channel condition that defines whether the split logic applies.  Possible values: * **Ecommerce**: Online transactions where the cardholder is present. * **ContAuth**: Card on file and/or subscription transactions, where the cardholder is known to the merchant (returning customer). * **Moto**: Mail-order and telephone-order transactions where the customer is in contact with the merchant via email or telephone. * **POS**: Point-of-sale transactions where the customer is physically present to make a payment using a secure payment terminal. * **ANY**: All sales channels.
@@ -33,9 +32,10 @@ type UpdateSplitConfigurationRuleRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateSplitConfigurationRuleRequest(currency string, paymentMethod string, shopperInteraction string) *UpdateSplitConfigurationRuleRequest {
+func NewUpdateSplitConfigurationRuleRequest(currency string, fundingSource string, paymentMethod string, shopperInteraction string) *UpdateSplitConfigurationRuleRequest {
 	this := UpdateSplitConfigurationRuleRequest{}
 	this.Currency = currency
+	this.FundingSource = fundingSource
 	this.PaymentMethod = paymentMethod
 	this.ShopperInteraction = shopperInteraction
 	return &this
@@ -73,36 +73,28 @@ func (o *UpdateSplitConfigurationRuleRequest) SetCurrency(v string) {
 	o.Currency = v
 }
 
-// GetFundingSource returns the FundingSource field value if set, zero value otherwise.
+// GetFundingSource returns the FundingSource field value
 func (o *UpdateSplitConfigurationRuleRequest) GetFundingSource() string {
-	if o == nil || common.IsNil(o.FundingSource) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.FundingSource
+
+	return o.FundingSource
 }
 
-// GetFundingSourceOk returns a tuple with the FundingSource field value if set, nil otherwise
+// GetFundingSourceOk returns a tuple with the FundingSource field value
 // and a boolean to check if the value has been set.
 func (o *UpdateSplitConfigurationRuleRequest) GetFundingSourceOk() (*string, bool) {
-	if o == nil || common.IsNil(o.FundingSource) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FundingSource, true
+	return &o.FundingSource, true
 }
 
-// HasFundingSource returns a boolean if a field has been set.
-func (o *UpdateSplitConfigurationRuleRequest) HasFundingSource() bool {
-	if o != nil && !common.IsNil(o.FundingSource) {
-		return true
-	}
-
-	return false
-}
-
-// SetFundingSource gets a reference to the given string and assigns it to the FundingSource field.
+// SetFundingSource sets field value
 func (o *UpdateSplitConfigurationRuleRequest) SetFundingSource(v string) {
-	o.FundingSource = &v
+	o.FundingSource = v
 }
 
 // GetPaymentMethod returns the PaymentMethod field value
@@ -154,7 +146,7 @@ func (o *UpdateSplitConfigurationRuleRequest) SetShopperInteraction(v string) {
 }
 
 func (o UpdateSplitConfigurationRuleRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -164,9 +156,7 @@ func (o UpdateSplitConfigurationRuleRequest) MarshalJSON() ([]byte, error) {
 func (o UpdateSplitConfigurationRuleRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["currency"] = o.Currency
-	if !common.IsNil(o.FundingSource) {
-		toSerialize["fundingSource"] = o.FundingSource
-	}
+	toSerialize["fundingSource"] = o.FundingSource
 	toSerialize["paymentMethod"] = o.PaymentMethod
 	toSerialize["shopperInteraction"] = o.ShopperInteraction
 	return toSerialize, nil
@@ -207,3 +197,6 @@ func (v *NullableUpdateSplitConfigurationRuleRequest) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
