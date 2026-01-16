@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the FinancialReport type satisfies the MappedNullable interface at compile time
@@ -26,7 +25,7 @@ type FinancialReport struct {
 	// The currency used for the annual turnover, balance sheet total, and net assets.
 	CurrencyOfFinancialData *string `json:"currencyOfFinancialData,omitempty"`
 	// The date the financial data were provided, in YYYY-MM-DD format.
-	DateOfFinancialData string `json:"dateOfFinancialData"`
+	DateOfFinancialData *string `json:"dateOfFinancialData,omitempty"`
 	// The number of employees of the business.
 	EmployeeCount *string `json:"employeeCount,omitempty"`
 	// The net assets of the business.
@@ -37,9 +36,8 @@ type FinancialReport struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFinancialReport(dateOfFinancialData string) *FinancialReport {
+func NewFinancialReport() *FinancialReport {
 	this := FinancialReport{}
-	this.DateOfFinancialData = dateOfFinancialData
 	return &this
 }
 
@@ -147,28 +145,36 @@ func (o *FinancialReport) SetCurrencyOfFinancialData(v string) {
 	o.CurrencyOfFinancialData = &v
 }
 
-// GetDateOfFinancialData returns the DateOfFinancialData field value
+// GetDateOfFinancialData returns the DateOfFinancialData field value if set, zero value otherwise.
 func (o *FinancialReport) GetDateOfFinancialData() string {
-	if o == nil {
+	if o == nil || common.IsNil(o.DateOfFinancialData) {
 		var ret string
 		return ret
 	}
-
-	return o.DateOfFinancialData
+	return *o.DateOfFinancialData
 }
 
-// GetDateOfFinancialDataOk returns a tuple with the DateOfFinancialData field value
+// GetDateOfFinancialDataOk returns a tuple with the DateOfFinancialData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FinancialReport) GetDateOfFinancialDataOk() (*string, bool) {
-	if o == nil {
+	if o == nil || common.IsNil(o.DateOfFinancialData) {
 		return nil, false
 	}
-	return &o.DateOfFinancialData, true
+	return o.DateOfFinancialData, true
 }
 
-// SetDateOfFinancialData sets field value
+// HasDateOfFinancialData returns a boolean if a field has been set.
+func (o *FinancialReport) HasDateOfFinancialData() bool {
+	if o != nil && !common.IsNil(o.DateOfFinancialData) {
+		return true
+	}
+
+	return false
+}
+
+// SetDateOfFinancialData gets a reference to the given string and assigns it to the DateOfFinancialData field.
 func (o *FinancialReport) SetDateOfFinancialData(v string) {
-	o.DateOfFinancialData = v
+	o.DateOfFinancialData = &v
 }
 
 // GetEmployeeCount returns the EmployeeCount field value if set, zero value otherwise.
@@ -236,7 +242,7 @@ func (o *FinancialReport) SetNetAssets(v string) {
 }
 
 func (o FinancialReport) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -254,7 +260,9 @@ func (o FinancialReport) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.CurrencyOfFinancialData) {
 		toSerialize["currencyOfFinancialData"] = o.CurrencyOfFinancialData
 	}
-	toSerialize["dateOfFinancialData"] = o.DateOfFinancialData
+	if !common.IsNil(o.DateOfFinancialData) {
+		toSerialize["dateOfFinancialData"] = o.DateOfFinancialData
+	}
 	if !common.IsNil(o.EmployeeCount) {
 		toSerialize["employeeCount"] = o.EmployeeCount
 	}
@@ -299,3 +307,6 @@ func (v *NullableFinancialReport) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

@@ -10,8 +10,7 @@ package transfers
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the TransferInfo type satisfies the MappedNullable interface at compile time
@@ -22,24 +21,25 @@ type TransferInfo struct {
 	Amount Amount `json:"amount"`
 	// The unique identifier of the source [balance account](https://docs.adyen.com/api-explorer/balanceplatform/latest/post/balanceAccounts#responses-200-id).  If you want to make a transfer using a **virtual** **bankAccount** assigned to the balance account, you must specify the [payment instrument ID](https://docs.adyen.com/api-explorer/balanceplatform/latest/post/paymentInstruments#responses-200-id) of the **virtual** **bankAccount**. If you only specify a balance account ID, Adyen uses the default **physical** **bankAccount** payment instrument assigned to the balance account.
 	BalanceAccountId *string `json:"balanceAccountId,omitempty"`
-	// The category of the transfer.  Possible values:   - **bank**: a transfer involving a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id) or a bank account.  - **card**: a transfer involving a third-party card.  - **internal**: a transfer between [balance accounts](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id) within your platform.  - **issuedCard**: a transfer initiated by a Adyen-issued card.  - **platformPayment**: funds movements related to payments that are acquired for your users.  - **topUp**: an incoming transfer initiated by your user to top up their balance account.
-	Category     string             `json:"category"`
+	// The category of the transfer.  Possible values:   - **bank**: A transfer involving a [transfer instrument](https://docs.adyen.com/api-explorer/legalentity/latest/post/transferInstruments#responses-200-id) or a bank account.  - **card**: A transfer involving a third-party card.  - **internal**: A transfer between [balance accounts](https://docs.adyen.com/api-explorer/balanceplatform/latest/post/balanceAccounts#responses-200-id) within your platform.  - **issuedCard**: A transfer initiated by an Adyen-issued card.  - **platformPayment**: Funds movements related to payments that are acquired for your users.  - **topUp**: An incoming transfer initiated by your user to top up their balance account.
+	Category string `json:"category"`
 	Counterparty CounterpartyInfoV3 `json:"counterparty"`
 	// Your description for the transfer. It is used by most banks as the transfer description. We recommend sending a maximum of 140 characters, otherwise the description may be truncated.  Supported characters: **[a-z] [A-Z] [0-9] / - ?** **: ( ) . , ' + Space**  Supported characters for **regular** and **fast** transfers to a US counterparty: **[a-z] [A-Z] [0-9] & $ % # @** **~ = + - _ ' \" ! ?**
 	Description *string `json:"description,omitempty"`
+	ExecutionDate *ExecutionDate `json:"executionDate,omitempty"`
 	// The unique identifier of the source [payment instrument](https://docs.adyen.com/api-explorer/balanceplatform/latest/post/paymentInstruments#responses-200-id).  If you want to make a transfer using a **virtual** **bankAccount**, you must specify the payment instrument ID of the **virtual** **bankAccount**. If you only specify a balance account ID, Adyen uses the default **physical** **bankAccount** payment instrument assigned to the balance account.
 	PaymentInstrumentId *string `json:"paymentInstrumentId,omitempty"`
-	//  The list of priorities for the bank transfer. This sets the speed at which the transfer is sent and the fees that you have to pay. You can provide multiple priorities. Adyen will try to pay out using the priority you list first. If that's not possible, it moves on to the next option in the order of your provided priorities.   Possible values:  * **regular**: for normal, low-value transactions.  * **fast**: a faster way to transfer funds, but the fees are higher. Recommended for high-priority, low-value transactions.  * **wire**: the fastest way to transfer funds, but this has the highest fees. Recommended for high-priority, high-value transactions.  * **instant**: for instant funds transfers in [SEPA countries](https://www.ecb.europa.eu/paym/integration/retail/sepa/html/index.en.html).  * **crossBorder**: for high-value transfers to a recipient in a different country.  * **internal**: for transfers to an Adyen-issued business bank account (by bank account number/IBAN).  Required for transfers with `category` **bank**. For more details, see [fallback priorities](https://docs.adyen.com/payouts/payout-service/payout-to-users/#fallback-priorities).
+	//  The list of priorities for the bank transfer. This sets the speed at which the transfer is sent and the fees that you have to pay. You can provide multiple priorities. Adyen will try to pay out using the priority you list first. If that's not possible, it moves on to the next option in the order of your provided priorities.   Possible values:  * **regular**: For normal, low-value transactions.  * **fast**: A faster way to transfer funds, but the fees are higher. Recommended for high-priority, low-value transactions.  * **wire**: The fastest way to transfer funds, but this has the highest fees. Recommended for high-priority, high-value transactions.  * **instant**: For instant funds transfers within the United States and in [SEPA locations](https://www.ecb.europa.eu/paym/integration/retail/sepa/html/index.en.html).  * **crossBorder**: For high-value transfers to a recipient in a different country.  * **internal**: For transfers to an Adyen-issued business bank account (by bank account number/IBAN).  Required for transfers with `category` **bank**. For more details, see [fallback priorities](https://docs.adyen.com/payouts/payout-service/payout-to-users/#fallback-priorities).
 	Priorities []string `json:"priorities,omitempty"`
-	// The priority for the bank transfer. This sets the speed at which the transfer is sent and the fees that you have to pay. Required for transfers with `category` **bank**.  Possible values:  * **regular**: for normal, low-value transactions.  * **fast**: a faster way to transfer funds, but the fees are higher. Recommended for high-priority, low-value transactions.  * **wire**: the fastest way to transfer funds, but this has the highest fees. Recommended for high-priority, high-value transactions.  * **instant**: for instant funds transfers in [SEPA countries](https://www.ecb.europa.eu/paym/integration/retail/sepa/html/index.en.html).  * **crossBorder**: for high-value transfers to a recipient in a different country.  * **internal**: for transfers to an Adyen-issued business bank account (by bank account number/IBAN).
+	// The priority for the bank transfer. This sets the speed at which the transfer is sent and the fees that you have to pay. Required for transfers with `category` **bank**.  Possible values:  * **regular**: For normal, low-value transactions.  * **fast**: A faster way to transfer funds, but the fees are higher. Recommended for high-priority, low-value transactions.  * **wire**: The fastest way to transfer funds, but this has the highest fees. Recommended for high-priority, high-value transactions.  * **instant**: For instant funds transfers within the United States and in [SEPA locations](https://www.ecb.europa.eu/paym/integration/retail/sepa/html/index.en.html).  * **crossBorder**: For high-value transfers to a recipient in a different country.  * **internal**: For transfers to an Adyen-issued business bank account (by bank account number/IBAN).
 	Priority *string `json:"priority,omitempty"`
 	// Your reference for the transfer, used internally within your platform. If you don't provide this in the request, Adyen generates a unique reference.
 	Reference *string `json:"reference,omitempty"`
 	//  A reference that is sent to the recipient. This reference is also sent in all webhooks related to the transfer, so you can use it to track statuses for both parties involved in the funds movement.   Supported characters: **a-z**, **A-Z**, **0-9**. The maximum length depends on the `category`.  - **internal**: 80 characters  - **bank**: 35 characters when transferring to an IBAN, 15 characters for others.
-	ReferenceForBeneficiary *string                `json:"referenceForBeneficiary,omitempty"`
-	Review                  *TransferRequestReview `json:"review,omitempty"`
-	// The type of transfer.  Possible values:   - **bankTransfer**: for push transfers to a transfer instrument or a bank account. The `category` must be **bank**. - **internalTransfer**: for push transfers between balance accounts. The `category` must be **internal**. - **internalDirectDebit**: for pull transfers (direct debits) between balance accounts. The `category` must be **internal**.
-	Type          *string                      `json:"type,omitempty"`
+	ReferenceForBeneficiary *string `json:"referenceForBeneficiary,omitempty"`
+	Review *TransferRequestReview `json:"review,omitempty"`
+	// The type of transfer.  Possible values:   - **bankTransfer**: for push transfers to a transfer instrument or a bank account. The `category` must be **bank**. - **internalTransfer**: for push transfers between balance accounts. The `category` must be **internal**. - **internalDirectDebit**: for pull transfers (direct debits) between balance accounts. The `category` must be **internal**.   
+	Type *string `json:"type,omitempty"`
 	UltimateParty *UltimatePartyIdentification `json:"ultimateParty,omitempty"`
 }
 
@@ -197,6 +197,38 @@ func (o *TransferInfo) HasDescription() bool {
 // SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *TransferInfo) SetDescription(v string) {
 	o.Description = &v
+}
+
+// GetExecutionDate returns the ExecutionDate field value if set, zero value otherwise.
+func (o *TransferInfo) GetExecutionDate() ExecutionDate {
+	if o == nil || common.IsNil(o.ExecutionDate) {
+		var ret ExecutionDate
+		return ret
+	}
+	return *o.ExecutionDate
+}
+
+// GetExecutionDateOk returns a tuple with the ExecutionDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransferInfo) GetExecutionDateOk() (*ExecutionDate, bool) {
+	if o == nil || common.IsNil(o.ExecutionDate) {
+		return nil, false
+	}
+	return o.ExecutionDate, true
+}
+
+// HasExecutionDate returns a boolean if a field has been set.
+func (o *TransferInfo) HasExecutionDate() bool {
+	if o != nil && !common.IsNil(o.ExecutionDate) {
+		return true
+	}
+
+	return false
+}
+
+// SetExecutionDate gets a reference to the given ExecutionDate and assigns it to the ExecutionDate field.
+func (o *TransferInfo) SetExecutionDate(v ExecutionDate) {
+	o.ExecutionDate = &v
 }
 
 // GetPaymentInstrumentId returns the PaymentInstrumentId field value if set, zero value otherwise.
@@ -456,7 +488,7 @@ func (o *TransferInfo) SetUltimateParty(v UltimatePartyIdentification) {
 }
 
 func (o TransferInfo) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -473,6 +505,9 @@ func (o TransferInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize["counterparty"] = o.Counterparty
 	if !common.IsNil(o.Description) {
 		toSerialize["description"] = o.Description
+	}
+	if !common.IsNil(o.ExecutionDate) {
+		toSerialize["executionDate"] = o.ExecutionDate
 	}
 	if !common.IsNil(o.PaymentInstrumentId) {
 		toSerialize["paymentInstrumentId"] = o.PaymentInstrumentId
@@ -537,30 +572,32 @@ func (v *NullableTransferInfo) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *TransferInfo) isValidCategory() bool {
-	var allowedEnumValues = []string{"bank", "card", "internal", "issuedCard", "platformPayment", "topUp"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetCategory() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "bank", "card", "internal", "issuedCard", "platformPayment", "topUp" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetCategory() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *TransferInfo) isValidPriority() bool {
-	var allowedEnumValues = []string{"crossBorder", "fast", "instant", "internal", "regular", "wire"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetPriority() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "crossBorder", "fast", "instant", "internal", "regular", "wire" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetPriority() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *TransferInfo) isValidType() bool {
-	var allowedEnumValues = []string{"bankTransfer", "internalTransfer", "internalDirectDebit"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "bankTransfer", "internalTransfer", "internalDirectDebit" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

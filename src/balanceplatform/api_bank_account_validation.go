@@ -10,12 +10,10 @@ package balanceplatform
 
 import (
 	"context"
-	"encoding/json"
-	"io/ioutil"
-	"net/http"
-	"net/url"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "net/http"
+    "net/url"
+    "strings"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // BankAccountValidationApi service
@@ -31,13 +29,15 @@ func (r BankAccountValidationApiValidateBankAccountIdentificationInput) BankAcco
 	return r
 }
 
+
 /*
 Prepare a request for ValidateBankAccountIdentification
 
 @return BankAccountValidationApiValidateBankAccountIdentificationInput
 */
 func (a *BankAccountValidationApi) ValidateBankAccountIdentificationInput() BankAccountValidationApiValidateBankAccountIdentificationInput {
-	return BankAccountValidationApiValidateBankAccountIdentificationInput{}
+	return BankAccountValidationApiValidateBankAccountIdentificationInput{
+	}
 }
 
 /*
@@ -50,58 +50,59 @@ Validates bank account identification details. You can use this endpoint to vali
 @return *http.Response, error
 */
 func (a *BankAccountValidationApi) ValidateBankAccountIdentification(ctx context.Context, r BankAccountValidationApiValidateBankAccountIdentificationInput) (*http.Response, error) {
-	var res interface{}
+    var res interface{}
 	path := "/validateBankAccountIdentification"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.bankAccountIdentificationValidationRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.bankAccountIdentificationValidationRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	if httpRes == nil {
-		return httpRes, err
-	}
+    if httpRes == nil {
+        return httpRes, err
+    }
 
-	var serviceError common.RestServiceError
-	if httpRes.StatusCode == 401 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return httpRes, decodeError
-		}
-		return httpRes, serviceError
-	}
-	if httpRes.StatusCode == 403 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return httpRes, decodeError
-		}
-		return httpRes, serviceError
-	}
-	if httpRes.StatusCode == 422 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return httpRes, decodeError
-		}
-		return httpRes, serviceError
-	}
-	if httpRes.StatusCode == 500 {
-		body, _ := ioutil.ReadAll(httpRes.Body)
-		decodeError := json.Unmarshal([]byte(body), &serviceError)
-		if decodeError != nil {
-			return httpRes, decodeError
-		}
-		return httpRes, serviceError
-	}
+    var serviceError common.RestServiceError
+                        if httpRes.StatusCode == 401 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return httpRes, decodeError
+                            }
+                            return httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 403 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return httpRes, decodeError
+                            }
+                            return httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 422 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return httpRes, decodeError
+                            }
+                            return httpRes, serviceError
+                        }
+                        if httpRes.StatusCode == 500 {
+                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            decodeError := json.Unmarshal([]byte(body), &serviceError)
+                            if decodeError != nil {
+                                return httpRes, decodeError
+                            }
+                            return httpRes, serviceError
+                        }
 
-	return httpRes, err
+    return httpRes, err
 }
+
