@@ -10,7 +10,8 @@ package management
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the Key type satisfies the MappedNullable interface at compile time
@@ -20,7 +21,7 @@ var _ common.MappedNullable = &Key{}
 type Key struct {
 	// The unique identifier of the shared key.
 	Identifier *string `json:"identifier,omitempty"`
-	// The secure passphrase to protect the shared key. Must consist of:   * At least 12 characters.  * At least 1 uppercase letter: `[A-Z]`.   * At least 1 lowercase letter: `[a-z]`.   * At least 1 digit: `[0-9]`.    * At least 1 special character. Limited to the following: `~`, `!`, `@`, `#`, `$`, `%`, `^`, `&`, `*`, `(`, `)`, `_`, `+`, `=`, `}`, `{`, `]`, `[`, `;`, `:`, `?`, `.`, `,`, `>`, `<`.    
+	// The secure passphrase to protect the shared key. Must consist of:   * At least 12 characters.  * At least 1 uppercase letter: `[A-Z]`.   * At least 1 lowercase letter: `[a-z]`.   * At least 1 digit: `[0-9]`.    * At least 1 special character. Limited to the following: `~`, `!`, `@`, `#`, `$`, `%`, `^`, `&`, `*`, `(`, `)`, `_`, `+`, `=`, `}`, `{`, `]`, `[`, `;`, `:`, `?`, `.`, `,`, `>`, `<`.
 	Passphrase *string `json:"passphrase,omitempty"`
 	// The version number of the shared key.
 	Version *int32 `json:"version,omitempty"`
@@ -140,7 +141,7 @@ func (o *Key) SetVersion(v int32) {
 }
 
 func (o Key) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,6 +197,3 @@ func (v *NullableKey) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

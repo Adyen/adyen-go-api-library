@@ -10,7 +10,8 @@ package management
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the TerminalOrder type satisfies the MappedNullable interface at compile time
@@ -26,7 +27,7 @@ type TerminalOrder struct {
 	// The products included in the order.
 	Items []OrderItem `json:"items,omitempty"`
 	// The date and time that the order was placed, in UTC ISO 8601 format. For example, \"2011-12-03T10:15:30Z\".
-	OrderDate *string `json:"orderDate,omitempty"`
+	OrderDate        *string           `json:"orderDate,omitempty"`
 	ShippingLocation *ShippingLocation `json:"shippingLocation,omitempty"`
 	// The processing status of the order.
 	Status *string `json:"status,omitempty"`
@@ -308,7 +309,7 @@ func (o *TerminalOrder) SetTrackingUrl(v string) {
 }
 
 func (o TerminalOrder) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -379,6 +380,3 @@ func (v *NullableTerminalOrder) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

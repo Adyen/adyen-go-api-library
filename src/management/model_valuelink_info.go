@@ -10,7 +10,8 @@ package management
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the ValuelinkInfo type satisfies the MappedNullable interface at compile time
@@ -160,7 +161,7 @@ func (o *ValuelinkInfo) SetTerminalId(v string) {
 }
 
 func (o ValuelinkInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -216,14 +217,12 @@ func (v *NullableValuelinkInfo) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *ValuelinkInfo) isValidPinSupport() bool {
-    var allowedEnumValues = []string{ "PIN", "NO PIN" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetPinSupport() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"PIN", "NO PIN"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetPinSupport() == allowed {
+			return true
+		}
+	}
+	return false
 }
-
