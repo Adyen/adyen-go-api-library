@@ -10,9 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 	"time"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the Airline type satisfies the MappedNullable interface at compile time
@@ -35,12 +34,12 @@ type Airline struct {
 	DocumentType *string `json:"documentType,omitempty"`
 	// The flight departure date. Time is optional. * Format for date only: `yyyy-MM-dd` * Format for date and time: `yyyy-MM-ddTHH:mm` * Use local time of departure airport. * minLength: 10 characters * maxLength: 16 characters
 	FlightDate *time.Time `json:"flightDate,omitempty"`
-	Legs       []Leg      `json:"legs,omitempty"`
+	Legs []Leg `json:"legs,omitempty"`
 	// The passenger's name, initials, and title. * Format: last name + first name or initials + title * Example: *FLYER / MARY MS* * minLength: 1 character * maxLength: 20 characters * If you send more than 20 characters, the name is truncated * Must not start with a space or be all spaces. * Must not be all zeros.
-	PassengerName string        `json:"passengerName"`
-	Passengers    []Passenger   `json:"passengers,omitempty"`
-	Ticket        *Ticket       `json:"ticket,omitempty"`
-	TravelAgency  *TravelAgency `json:"travelAgency,omitempty"`
+	PassengerName string `json:"passengerName"`
+	Passengers []Passenger `json:"passengers,omitempty"`
+	Ticket *Ticket `json:"ticket,omitempty"`
+	TravelAgency *TravelAgency `json:"travelAgency,omitempty"`
 }
 
 // NewAirline instantiates a new Airline object
@@ -470,7 +469,7 @@ func (o *Airline) SetTravelAgency(v TravelAgency) {
 }
 
 func (o Airline) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -554,3 +553,6 @@ func (v *NullableAirline) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

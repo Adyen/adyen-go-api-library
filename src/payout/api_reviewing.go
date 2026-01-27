@@ -10,10 +10,10 @@ package payout
 
 import (
 	"context"
-	"net/http"
-	"net/url"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "net/http"
+    "net/url"
+    "strings"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // ReviewingApi service
@@ -29,13 +29,15 @@ func (r ReviewingApiConfirmThirdPartyInput) ModifyRequest(modifyRequest ModifyRe
 	return r
 }
 
+
 /*
 Prepare a request for ConfirmThirdParty
 
 @return ReviewingApiConfirmThirdPartyInput
 */
 func (a *ReviewingApi) ConfirmThirdPartyInput() ReviewingApiConfirmThirdPartyInput {
-	return ReviewingApiConfirmThirdPartyInput{}
+	return ReviewingApiConfirmThirdPartyInput{
+	}
 }
 
 /*
@@ -52,6 +54,7 @@ ConfirmThirdParty Confirm a payout
 >
 > For more information about the payout features of the Transfers API, see our [Payouts](https://docs.adyen.com/payouts/payout-service) documentation.
 
+
 Confirms a previously submitted payout.
 
 To cancel a payout, use the `/declineThirdParty` endpoint.
@@ -61,23 +64,25 @@ To cancel a payout, use the `/declineThirdParty` endpoint.
 @return ModifyResponse, *http.Response, error
 */
 func (a *ReviewingApi) ConfirmThirdParty(ctx context.Context, r ReviewingApiConfirmThirdPartyInput) (ModifyResponse, *http.Response, error) {
-	res := &ModifyResponse{}
+    res := &ModifyResponse{}
 	path := "/confirmThirdParty"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.modifyRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.modifyRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+
 
 // All parameters accepted by ReviewingApi.DeclineThirdParty
 type ReviewingApiDeclineThirdPartyInput struct {
@@ -89,13 +94,15 @@ func (r ReviewingApiDeclineThirdPartyInput) ModifyRequest(modifyRequest ModifyRe
 	return r
 }
 
+
 /*
 Prepare a request for DeclineThirdParty
 
 @return ReviewingApiDeclineThirdPartyInput
 */
 func (a *ReviewingApi) DeclineThirdPartyInput() ReviewingApiDeclineThirdPartyInput {
-	return ReviewingApiDeclineThirdPartyInput{}
+	return ReviewingApiDeclineThirdPartyInput{
+	}
 }
 
 /*
@@ -112,6 +119,7 @@ DeclineThirdParty Cancel a payout
 >
 > For more information about the payout features of the Transfers API, see our [Payouts](https://docs.adyen.com/payouts/payout-service) documentation.
 
+
 Cancels a previously submitted payout.
 
 To confirm and send a payout, use the `/confirmThirdParty` endpoint.
@@ -121,20 +129,22 @@ To confirm and send a payout, use the `/confirmThirdParty` endpoint.
 @return ModifyResponse, *http.Response, error
 */
 func (a *ReviewingApi) DeclineThirdParty(ctx context.Context, r ReviewingApiDeclineThirdPartyInput) (ModifyResponse, *http.Response, error) {
-	res := &ModifyResponse{}
+    res := &ModifyResponse{}
 	path := "/declineThirdParty"
-	queryParams := url.Values{}
-	headerParams := make(map[string]string)
-	httpRes, err := common.SendAPIRequest(
-		ctx,
-		a.Client,
-		r.modifyRequest,
-		res,
-		http.MethodPost,
-		a.BasePath()+path,
-		queryParams,
-		headerParams,
-	)
+    queryParams := url.Values{}
+    headerParams := make(map[string]string)
+    httpRes, err := common.SendAPIRequest(
+        ctx,
+        a.Client,
+        r.modifyRequest,
+        res,
+        http.MethodPost,
+        a.BasePath()+path,
+        queryParams,
+        headerParams,
+    )
 
-	return *res, httpRes, err
+
+    return *res, httpRes, err
 }
+

@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the PayToDetails type satisfies the MappedNullable interface at compile time
@@ -22,9 +21,11 @@ type PayToDetails struct {
 	// The checkout attempt identifier.
 	CheckoutAttemptId *string `json:"checkoutAttemptId,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
-	// Deprecated since Adyen Checkout API v49
-	// Use `storedPaymentMethodId` instead.
+    // Deprecated since Adyen Checkout API v49
+    // Use `storedPaymentMethodId` instead.
 	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
+	// Base64-encoded JSON object containing SDK related parameters required by the SDK
+	SdkData *string `json:"sdkData,omitempty"`
 	// The shopper's banking details or payId reference, used to complete payment.
 	ShopperAccountIdentifier *string `json:"shopperAccountIdentifier,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
@@ -124,6 +125,38 @@ func (o *PayToDetails) SetRecurringDetailReference(v string) {
 	o.RecurringDetailReference = &v
 }
 
+// GetSdkData returns the SdkData field value if set, zero value otherwise.
+func (o *PayToDetails) GetSdkData() string {
+	if o == nil || common.IsNil(o.SdkData) {
+		var ret string
+		return ret
+	}
+	return *o.SdkData
+}
+
+// GetSdkDataOk returns a tuple with the SdkData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PayToDetails) GetSdkDataOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SdkData) {
+		return nil, false
+	}
+	return o.SdkData, true
+}
+
+// HasSdkData returns a boolean if a field has been set.
+func (o *PayToDetails) HasSdkData() bool {
+	if o != nil && !common.IsNil(o.SdkData) {
+		return true
+	}
+
+	return false
+}
+
+// SetSdkData gets a reference to the given string and assigns it to the SdkData field.
+func (o *PayToDetails) SetSdkData(v string) {
+	o.SdkData = &v
+}
+
 // GetShopperAccountIdentifier returns the ShopperAccountIdentifier field value if set, zero value otherwise.
 func (o *PayToDetails) GetShopperAccountIdentifier() string {
 	if o == nil || common.IsNil(o.ShopperAccountIdentifier) {
@@ -221,7 +254,7 @@ func (o *PayToDetails) SetType(v string) {
 }
 
 func (o PayToDetails) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -235,6 +268,9 @@ func (o PayToDetails) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.RecurringDetailReference) {
 		toSerialize["recurringDetailReference"] = o.RecurringDetailReference
+	}
+	if !common.IsNil(o.SdkData) {
+		toSerialize["sdkData"] = o.SdkData
 	}
 	if !common.IsNil(o.ShopperAccountIdentifier) {
 		toSerialize["shopperAccountIdentifier"] = o.ShopperAccountIdentifier
@@ -284,12 +320,14 @@ func (v *NullablePayToDetails) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *PayToDetails) isValidType() bool {
-	var allowedEnumValues = []string{"payto"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "payto" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

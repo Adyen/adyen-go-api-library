@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the PayWithGoogleDetails type satisfies the MappedNullable interface at compile time
@@ -26,9 +25,11 @@ type PayWithGoogleDetails struct {
 	// The `token` that you obtained from the [Google Pay API](https://developers.google.com/pay/api/web/reference/response-objects#PaymentData) `PaymentData` response.
 	GooglePayToken string `json:"googlePayToken"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
-	// Deprecated since Adyen Checkout API v49
-	// Use `storedPaymentMethodId` instead.
+    // Deprecated since Adyen Checkout API v49
+    // Use `storedPaymentMethodId` instead.
 	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
+	// Base64-encoded JSON object containing SDK related parameters required by the SDK
+	SdkData *string `json:"sdkData,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
 	StoredPaymentMethodId *string `json:"storedPaymentMethodId,omitempty"`
 	// Required for mobile integrations. Version of the 3D Secure 2 mobile SDK.
@@ -185,6 +186,38 @@ func (o *PayWithGoogleDetails) SetRecurringDetailReference(v string) {
 	o.RecurringDetailReference = &v
 }
 
+// GetSdkData returns the SdkData field value if set, zero value otherwise.
+func (o *PayWithGoogleDetails) GetSdkData() string {
+	if o == nil || common.IsNil(o.SdkData) {
+		var ret string
+		return ret
+	}
+	return *o.SdkData
+}
+
+// GetSdkDataOk returns a tuple with the SdkData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PayWithGoogleDetails) GetSdkDataOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SdkData) {
+		return nil, false
+	}
+	return o.SdkData, true
+}
+
+// HasSdkData returns a boolean if a field has been set.
+func (o *PayWithGoogleDetails) HasSdkData() bool {
+	if o != nil && !common.IsNil(o.SdkData) {
+		return true
+	}
+
+	return false
+}
+
+// SetSdkData gets a reference to the given string and assigns it to the SdkData field.
+func (o *PayWithGoogleDetails) SetSdkData(v string) {
+	o.SdkData = &v
+}
+
 // GetStoredPaymentMethodId returns the StoredPaymentMethodId field value if set, zero value otherwise.
 func (o *PayWithGoogleDetails) GetStoredPaymentMethodId() string {
 	if o == nil || common.IsNil(o.StoredPaymentMethodId) {
@@ -282,7 +315,7 @@ func (o *PayWithGoogleDetails) SetType(v string) {
 }
 
 func (o PayWithGoogleDetails) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -300,6 +333,9 @@ func (o PayWithGoogleDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize["googlePayToken"] = o.GooglePayToken
 	if !common.IsNil(o.RecurringDetailReference) {
 		toSerialize["recurringDetailReference"] = o.RecurringDetailReference
+	}
+	if !common.IsNil(o.SdkData) {
+		toSerialize["sdkData"] = o.SdkData
 	}
 	if !common.IsNil(o.StoredPaymentMethodId) {
 		toSerialize["storedPaymentMethodId"] = o.StoredPaymentMethodId
@@ -349,21 +385,23 @@ func (v *NullablePayWithGoogleDetails) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *PayWithGoogleDetails) isValidFundingSource() bool {
-	var allowedEnumValues = []string{"credit", "debit"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetFundingSource() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "credit", "debit", "prepaid" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetFundingSource() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *PayWithGoogleDetails) isValidType() bool {
-	var allowedEnumValues = []string{"paywithgoogle"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "paywithgoogle" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

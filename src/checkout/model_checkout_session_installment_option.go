@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the CheckoutSessionInstallmentOption type satisfies the MappedNullable interface at compile time
@@ -19,7 +18,7 @@ var _ common.MappedNullable = &CheckoutSessionInstallmentOption{}
 
 // CheckoutSessionInstallmentOption struct for CheckoutSessionInstallmentOption
 type CheckoutSessionInstallmentOption struct {
-	// Defines the type of installment plan. If not set, defaults to **regular**.  Possible values: * **regular** * **revolving*** **bonus** * **with_interest** * **buynow_paylater** * **nointerest_bonus** * **interest_bonus** * **refund_prctg** * **nointeres_refund_prctg** * **interes_refund_prctg**
+	// Defines the type of installment plan. If not set, defaults to **regular**.  Possible values: * **regular** * **revolving** * **bonus** * **with_interest** * **buynow_paylater** * **nointerest_bonus** * **interest_bonus** * **refund_prctg** * **nointeres_refund_prctg** * **interes_refund_prctg**
 	Plans []string `json:"plans,omitempty"`
 	// Preselected number of installments offered for this payment method.
 	PreselectedValue *int32 `json:"preselectedValue,omitempty"`
@@ -141,7 +140,7 @@ func (o *CheckoutSessionInstallmentOption) SetValues(v []int32) {
 }
 
 func (o CheckoutSessionInstallmentOption) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -197,3 +196,6 @@ func (v *NullableCheckoutSessionInstallmentOption) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

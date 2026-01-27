@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the MbwayDetails type satisfies the MappedNullable interface at compile time
@@ -21,9 +20,11 @@ var _ common.MappedNullable = &MbwayDetails{}
 type MbwayDetails struct {
 	// The checkout attempt identifier.
 	CheckoutAttemptId *string `json:"checkoutAttemptId,omitempty"`
-	//
+	// Base64-encoded JSON object containing SDK related parameters required by the SDK
+	SdkData *string `json:"sdkData,omitempty"`
+	// 
 	ShopperEmail string `json:"shopperEmail"`
-	//
+	// 
 	TelephoneNumber string `json:"telephoneNumber"`
 	// **mbway**
 	Type *string `json:"type,omitempty"`
@@ -82,6 +83,38 @@ func (o *MbwayDetails) HasCheckoutAttemptId() bool {
 // SetCheckoutAttemptId gets a reference to the given string and assigns it to the CheckoutAttemptId field.
 func (o *MbwayDetails) SetCheckoutAttemptId(v string) {
 	o.CheckoutAttemptId = &v
+}
+
+// GetSdkData returns the SdkData field value if set, zero value otherwise.
+func (o *MbwayDetails) GetSdkData() string {
+	if o == nil || common.IsNil(o.SdkData) {
+		var ret string
+		return ret
+	}
+	return *o.SdkData
+}
+
+// GetSdkDataOk returns a tuple with the SdkData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MbwayDetails) GetSdkDataOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SdkData) {
+		return nil, false
+	}
+	return o.SdkData, true
+}
+
+// HasSdkData returns a boolean if a field has been set.
+func (o *MbwayDetails) HasSdkData() bool {
+	if o != nil && !common.IsNil(o.SdkData) {
+		return true
+	}
+
+	return false
+}
+
+// SetSdkData gets a reference to the given string and assigns it to the SdkData field.
+func (o *MbwayDetails) SetSdkData(v string) {
+	o.SdkData = &v
 }
 
 // GetShopperEmail returns the ShopperEmail field value
@@ -165,7 +198,7 @@ func (o *MbwayDetails) SetType(v string) {
 }
 
 func (o MbwayDetails) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -176,6 +209,9 @@ func (o MbwayDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
+	}
+	if !common.IsNil(o.SdkData) {
+		toSerialize["sdkData"] = o.SdkData
 	}
 	toSerialize["shopperEmail"] = o.ShopperEmail
 	toSerialize["telephoneNumber"] = o.TelephoneNumber
@@ -221,12 +257,14 @@ func (v *NullableMbwayDetails) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *MbwayDetails) isValidType() bool {
-	var allowedEnumValues = []string{"mbway"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "mbway" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+
