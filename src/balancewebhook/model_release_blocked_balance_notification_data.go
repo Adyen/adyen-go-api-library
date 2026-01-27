@@ -10,8 +10,9 @@ package balancewebhook
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
 	"time"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the ReleaseBlockedBalanceNotificationData type satisfies the MappedNullable interface at compile time
@@ -19,14 +20,14 @@ var _ common.MappedNullable = &ReleaseBlockedBalanceNotificationData{}
 
 // ReleaseBlockedBalanceNotificationData struct for ReleaseBlockedBalanceNotificationData
 type ReleaseBlockedBalanceNotificationData struct {
-	AccountHolder ResourceReference `json:"accountHolder"`
-	Amount Amount `json:"amount"`
+	AccountHolder  ResourceReference `json:"accountHolder"`
+	Amount         Amount            `json:"amount"`
 	BalanceAccount ResourceReference `json:"balanceAccount"`
 	// The unique identifier of the balance platform.
 	BalancePlatform *string `json:"balancePlatform,omitempty"`
 	// The reference of the batch that was released.
-	BatchReference *string `json:"batchReference,omitempty"`
-	BlockedBalanceAfter *Amount `json:"blockedBalanceAfter,omitempty"`
+	BatchReference       *string `json:"batchReference,omitempty"`
+	BlockedBalanceAfter  *Amount `json:"blockedBalanceAfter,omitempty"`
 	BlockedBalanceBefore *Amount `json:"blockedBalanceBefore,omitempty"`
 	// The date and time when the event was triggered, in ISO 8601 extended format. For example, **2025-03-19T10:15:30+01:00**.
 	CreationDate *time.Time `json:"creationDate,omitempty"`
@@ -353,7 +354,7 @@ func (o *ReleaseBlockedBalanceNotificationData) SetValueDate(v time.Time) {
 }
 
 func (o ReleaseBlockedBalanceNotificationData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -424,6 +425,3 @@ func (v *NullableReleaseBlockedBalanceNotificationData) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

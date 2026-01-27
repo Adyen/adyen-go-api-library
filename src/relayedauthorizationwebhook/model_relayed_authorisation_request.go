@@ -10,7 +10,8 @@ package relayedauthorizationwebhook
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the RelayedAuthorisationRequest type satisfies the MappedNullable interface at compile time
@@ -19,27 +20,27 @@ var _ common.MappedNullable = &RelayedAuthorisationRequest{}
 // RelayedAuthorisationRequest struct for RelayedAuthorisationRequest
 type RelayedAuthorisationRequest struct {
 	AccountHolder *ResourceReference `json:"accountHolder,omitempty"`
-	Amount *Amount `json:"amount,omitempty"`
+	Amount        *Amount            `json:"amount,omitempty"`
 	// The amount adjustments in the transaction.
 	AmountAdjustments []AmountAdjustment `json:"amountAdjustments,omitempty"`
 	// The authorization code for the payment.
-	AuthCode *string `json:"authCode,omitempty"`
+	AuthCode              *string                       `json:"authCode,omitempty"`
 	AuthorisationDecision *AuthorisationDecisionRequest `json:"authorisationDecision,omitempty"`
 	// The authorization type.  Possible values: * **finalAuthorisation** * **preAuthorisation** * **defaultAuthorisation**
-	AuthorisationType *string `json:"authorisationType,omitempty"`
-	BalanceAccount *ResourceReference `json:"balanceAccount,omitempty"`
+	AuthorisationType *string            `json:"authorisationType,omitempty"`
+	BalanceAccount    *ResourceReference `json:"balanceAccount,omitempty"`
 	// The list of balance mutations per event.
 	BalanceMutations []BalanceMutation `json:"balanceMutations,omitempty"`
 	// The unique identifier of the balance platform.
 	BalancePlatform *string `json:"balancePlatform,omitempty"`
 	// The entry mode of the information of the payment instrument. For example: **contactless**, **chip**, **magstripe**.
 	EntryMode *string `json:"entryMode,omitempty"`
-	// The environment from which the webhook originated. Possible values: **test**, **live**. 
+	// The environment from which the webhook originated. Possible values: **test**, **live**.
 	Environment *string `json:"environment,omitempty"`
 	// The unique identifier of the transfer.
-	Id *string `json:"id,omitempty"`
-	MerchantData *MerchantData `json:"merchantData,omitempty"`
-	OriginalAmount *Amount `json:"originalAmount,omitempty"`
+	Id                *string            `json:"id,omitempty"`
+	MerchantData      *MerchantData      `json:"merchantData,omitempty"`
+	OriginalAmount    *Amount            `json:"originalAmount,omitempty"`
 	PaymentInstrument *PaymentInstrument `json:"paymentInstrument,omitempty"`
 	// The processing type used for this payment. For example: **ecommerce**, **pos**, **moto**.
 	ProcessingType *string `json:"processingType,omitempty"`
@@ -52,8 +53,8 @@ type RelayedAuthorisationRequest struct {
 	// The unique identifier created by the scheme. This ID can be alphanumeric or numeric depending on the scheme.
 	SchemeUniqueTransactionId *string `json:"schemeUniqueTransactionId,omitempty"`
 	// The list of transaction scores.
-	Scores []TransactionScoring `json:"scores,omitempty"`
-	ThreeDSecure *ThreeDSecure `json:"threeDSecure,omitempty"`
+	Scores                 []TransactionScoring    `json:"scores,omitempty"`
+	ThreeDSecure           *ThreeDSecure           `json:"threeDSecure,omitempty"`
 	TransactionRulesResult *TransactionRulesResult `json:"transactionRulesResult,omitempty"`
 	// Type of notification.
 	Type *string `json:"type,omitempty"`
@@ -879,7 +880,7 @@ func (o *RelayedAuthorisationRequest) SetValidationResult(v []ValidationResult) 
 }
 
 func (o RelayedAuthorisationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -1002,14 +1003,12 @@ func (v *NullableRelayedAuthorisationRequest) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *RelayedAuthorisationRequest) isValidType() bool {
-    var allowedEnumValues = []string{ "balancePlatform.authorisation.relayed" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"balancePlatform.authorisation.relayed"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-
