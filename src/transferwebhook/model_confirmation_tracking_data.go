@@ -10,8 +10,7 @@ package transferwebhook
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the ConfirmationTrackingData type satisfies the MappedNullable interface at compile time
@@ -19,7 +18,7 @@ var _ common.MappedNullable = &ConfirmationTrackingData{}
 
 // ConfirmationTrackingData struct for ConfirmationTrackingData
 type ConfirmationTrackingData struct {
-	// The status of the transfer.  Possible values:    - **credited**: the funds are credited to your user's transfer instrument or bank account.
+	// The status of the transfer.  Possible values:   - **credited**: the funds are credited to your user's transfer instrument or bank account.- **accepted**: the request is accepted by the integration.
 	Status string `json:"status"`
 	// The type of the tracking event.  Possible values:   - **confirmation**: the transfer passed Adyen's internal review.
 	Type string `json:"type"`
@@ -95,7 +94,7 @@ func (o *ConfirmationTrackingData) SetType(v string) {
 }
 
 func (o ConfirmationTrackingData) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -145,21 +144,23 @@ func (v *NullableConfirmationTrackingData) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *ConfirmationTrackingData) isValidStatus() bool {
-	var allowedEnumValues = []string{"credited"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetStatus() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "credited", "accepted" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetStatus() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *ConfirmationTrackingData) isValidType() bool {
-	var allowedEnumValues = []string{"confirmation"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "confirmation" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+
