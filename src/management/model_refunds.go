@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the Refunds type satisfies the MappedNullable interface at compile time
@@ -20,6 +19,7 @@ var _ common.MappedNullable = &Refunds{}
 // Refunds struct for Refunds
 type Refunds struct {
 	Referenced *Referenced `json:"referenced,omitempty"`
+	Unreferenced *Unreferenced `json:"unreferenced,omitempty"`
 }
 
 // NewRefunds instantiates a new Refunds object
@@ -71,8 +71,40 @@ func (o *Refunds) SetReferenced(v Referenced) {
 	o.Referenced = &v
 }
 
+// GetUnreferenced returns the Unreferenced field value if set, zero value otherwise.
+func (o *Refunds) GetUnreferenced() Unreferenced {
+	if o == nil || common.IsNil(o.Unreferenced) {
+		var ret Unreferenced
+		return ret
+	}
+	return *o.Unreferenced
+}
+
+// GetUnreferencedOk returns a tuple with the Unreferenced field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Refunds) GetUnreferencedOk() (*Unreferenced, bool) {
+	if o == nil || common.IsNil(o.Unreferenced) {
+		return nil, false
+	}
+	return o.Unreferenced, true
+}
+
+// HasUnreferenced returns a boolean if a field has been set.
+func (o *Refunds) HasUnreferenced() bool {
+	if o != nil && !common.IsNil(o.Unreferenced) {
+		return true
+	}
+
+	return false
+}
+
+// SetUnreferenced gets a reference to the given Unreferenced and assigns it to the Unreferenced field.
+func (o *Refunds) SetUnreferenced(v Unreferenced) {
+	o.Unreferenced = &v
+}
+
 func (o Refunds) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -83,6 +115,9 @@ func (o Refunds) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.Referenced) {
 		toSerialize["referenced"] = o.Referenced
+	}
+	if !common.IsNil(o.Unreferenced) {
+		toSerialize["unreferenced"] = o.Unreferenced
 	}
 	return toSerialize, nil
 }
@@ -122,3 +157,6 @@ func (v *NullableRefunds) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
