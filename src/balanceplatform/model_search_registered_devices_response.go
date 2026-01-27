@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the SearchRegisteredDevicesResponse type satisfies the MappedNullable interface at compile time
@@ -23,7 +22,7 @@ type SearchRegisteredDevicesResponse struct {
 	Data []Device `json:"data,omitempty"`
 	// The total amount of registered SCA devices that match the query parameters.
 	ItemsTotal *int32 `json:"itemsTotal,omitempty"`
-	Link       *Link  `json:"link,omitempty"`
+	Link *Link `json:"link,omitempty"`
 	// The total amount of list pages.
 	PagesTotal *int32 `json:"pagesTotal,omitempty"`
 }
@@ -174,7 +173,7 @@ func (o *SearchRegisteredDevicesResponse) SetPagesTotal(v int32) {
 }
 
 func (o SearchRegisteredDevicesResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -233,3 +232,6 @@ func (v *NullableSearchRegisteredDevicesResponse) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

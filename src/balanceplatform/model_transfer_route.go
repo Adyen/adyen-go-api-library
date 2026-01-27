@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the TransferRoute type satisfies the MappedNullable interface at compile time
@@ -19,13 +18,13 @@ var _ common.MappedNullable = &TransferRoute{}
 
 // TransferRoute struct for TransferRoute
 type TransferRoute struct {
-	//  The type of transfer.   Possible values:    - **bank**: Transfer to a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id) or a bank account.
+	//  The type of transfer.   Possible values:    - **bank**: Transfer to a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id) or a bank account. 
 	Category *string `json:"category,omitempty"`
 	// The two-character ISO-3166-1 alpha-2 country code of the counterparty. For example, **US** or **NL**.
 	Country *string `json:"country,omitempty"`
 	// The three-character ISO currency code of transfer. For example, **USD** or **EUR**.
 	Currency *string `json:"currency,omitempty"`
-	// The priority for the bank transfer. This sets the speed at which the transfer is sent and the fees that you have to pay. Possible values:  * **regular**: for normal, low-value transactions.  * **fast**: a faster way to transfer funds, but the fees are higher. Recommended for high-priority, low-value transactions.  * **wire**: the fastest way to transfer funds, but this has the highest fees. Recommended for high-priority, high-value transactions.  * **instant**: for instant funds transfers in [SEPA countries](https://www.ecb.europa.eu/paym/integration/retail/sepa/html/index.en.html).  * **crossBorder**: for high-value transfers to a recipient in a different country.  * **internal**: for transfers to an Adyen-issued business bank account (by bank account number/IBAN).
+	// The priority for the bank transfer. This sets the speed at which the transfer is sent and the fees that you have to pay. Possible values:  * **regular**: For normal, low-value transactions.  * **fast**: A faster way to transfer funds, but the fees are higher. Recommended for high-priority, low-value transactions.  * **wire**: The fastest way to transfer funds, but this has the highest fees. Recommended for high-priority, high-value transactions.  * **instant**: For instant funds transfers within the United States and in [SEPA locations](https://www.ecb.europa.eu/paym/integration/retail/sepa/html/index.en.html).  * **crossBorder**: For high-value transfers to a recipient in a different country.  * **internal**: For transfers to an Adyen-issued business bank account (by bank account number/IBAN).
 	Priority *string `json:"priority,omitempty"`
 	// A set of rules defined by clearing houses and banking partners. Your transfer request must adhere to these rules to ensure successful initiation of transfer. Based on the priority, one or more requirements may be returned. Each requirement is defined with a `type` and `description`.
 	Requirements []TransferRouteRequirementsInner `json:"requirements,omitempty"`
@@ -209,7 +208,7 @@ func (o *TransferRoute) SetRequirements(v []TransferRouteRequirementsInner) {
 }
 
 func (o TransferRoute) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -272,21 +271,23 @@ func (v *NullableTransferRoute) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *TransferRoute) isValidCategory() bool {
-	var allowedEnumValues = []string{"bank", "card", "grants", "internal", "issuedCard", "migration", "platformPayment", "topUp", "upgrade"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetCategory() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "bank", "card", "grants", "interest", "internal", "issuedCard", "migration", "platformPayment", "topUp", "upgrade" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetCategory() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *TransferRoute) isValidPriority() bool {
-	var allowedEnumValues = []string{"crossBorder", "fast", "instant", "internal", "regular", "wire"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetPriority() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "crossBorder", "fast", "instant", "internal", "regular", "wire" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetPriority() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

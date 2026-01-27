@@ -10,8 +10,7 @@ package balanceplatform
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the BulkAddress type satisfies the MappedNullable interface at compile time
@@ -29,8 +28,16 @@ type BulkAddress struct {
 	Email *string `json:"email,omitempty"`
 	// The house number or name.
 	HouseNumberOrName *string `json:"houseNumberOrName,omitempty"`
+	// The name of the street and the number of the building.  For example: **Simon Carmiggeltstraat 6-50**.
+	Line1 *string `json:"line1,omitempty"`
+	// Additional information about the delivery address. For example, an apartment number.
+	Line2 *string `json:"line2,omitempty"`
+	// Additional information about the delivery address.
+	Line3 *string `json:"line3,omitempty"`
 	// The full telephone number.
 	Mobile *string `json:"mobile,omitempty"`
+	// The recipient’s name (person or contact), for example ‘John Doe’.
+	Name *string `json:"name,omitempty"`
 	// The postal code.  Maximum length:  * 5 digits for addresses in the US.  * 10 characters for all other countries.
 	PostalCode *string `json:"postalCode,omitempty"`
 	// The two-letter ISO 3166-2 state or province code.  Maximum length: 2 characters for addresses in the US.
@@ -209,6 +216,102 @@ func (o *BulkAddress) SetHouseNumberOrName(v string) {
 	o.HouseNumberOrName = &v
 }
 
+// GetLine1 returns the Line1 field value if set, zero value otherwise.
+func (o *BulkAddress) GetLine1() string {
+	if o == nil || common.IsNil(o.Line1) {
+		var ret string
+		return ret
+	}
+	return *o.Line1
+}
+
+// GetLine1Ok returns a tuple with the Line1 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkAddress) GetLine1Ok() (*string, bool) {
+	if o == nil || common.IsNil(o.Line1) {
+		return nil, false
+	}
+	return o.Line1, true
+}
+
+// HasLine1 returns a boolean if a field has been set.
+func (o *BulkAddress) HasLine1() bool {
+	if o != nil && !common.IsNil(o.Line1) {
+		return true
+	}
+
+	return false
+}
+
+// SetLine1 gets a reference to the given string and assigns it to the Line1 field.
+func (o *BulkAddress) SetLine1(v string) {
+	o.Line1 = &v
+}
+
+// GetLine2 returns the Line2 field value if set, zero value otherwise.
+func (o *BulkAddress) GetLine2() string {
+	if o == nil || common.IsNil(o.Line2) {
+		var ret string
+		return ret
+	}
+	return *o.Line2
+}
+
+// GetLine2Ok returns a tuple with the Line2 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkAddress) GetLine2Ok() (*string, bool) {
+	if o == nil || common.IsNil(o.Line2) {
+		return nil, false
+	}
+	return o.Line2, true
+}
+
+// HasLine2 returns a boolean if a field has been set.
+func (o *BulkAddress) HasLine2() bool {
+	if o != nil && !common.IsNil(o.Line2) {
+		return true
+	}
+
+	return false
+}
+
+// SetLine2 gets a reference to the given string and assigns it to the Line2 field.
+func (o *BulkAddress) SetLine2(v string) {
+	o.Line2 = &v
+}
+
+// GetLine3 returns the Line3 field value if set, zero value otherwise.
+func (o *BulkAddress) GetLine3() string {
+	if o == nil || common.IsNil(o.Line3) {
+		var ret string
+		return ret
+	}
+	return *o.Line3
+}
+
+// GetLine3Ok returns a tuple with the Line3 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkAddress) GetLine3Ok() (*string, bool) {
+	if o == nil || common.IsNil(o.Line3) {
+		return nil, false
+	}
+	return o.Line3, true
+}
+
+// HasLine3 returns a boolean if a field has been set.
+func (o *BulkAddress) HasLine3() bool {
+	if o != nil && !common.IsNil(o.Line3) {
+		return true
+	}
+
+	return false
+}
+
+// SetLine3 gets a reference to the given string and assigns it to the Line3 field.
+func (o *BulkAddress) SetLine3(v string) {
+	o.Line3 = &v
+}
+
 // GetMobile returns the Mobile field value if set, zero value otherwise.
 func (o *BulkAddress) GetMobile() string {
 	if o == nil || common.IsNil(o.Mobile) {
@@ -239,6 +342,38 @@ func (o *BulkAddress) HasMobile() bool {
 // SetMobile gets a reference to the given string and assigns it to the Mobile field.
 func (o *BulkAddress) SetMobile(v string) {
 	o.Mobile = &v
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *BulkAddress) GetName() string {
+	if o == nil || common.IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkAddress) GetNameOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *BulkAddress) HasName() bool {
+	if o != nil && !common.IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *BulkAddress) SetName(v string) {
+	o.Name = &v
 }
 
 // GetPostalCode returns the PostalCode field value if set, zero value otherwise.
@@ -338,7 +473,7 @@ func (o *BulkAddress) SetStreet(v string) {
 }
 
 func (o BulkAddress) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -360,8 +495,20 @@ func (o BulkAddress) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.HouseNumberOrName) {
 		toSerialize["houseNumberOrName"] = o.HouseNumberOrName
 	}
+	if !common.IsNil(o.Line1) {
+		toSerialize["line1"] = o.Line1
+	}
+	if !common.IsNil(o.Line2) {
+		toSerialize["line2"] = o.Line2
+	}
+	if !common.IsNil(o.Line3) {
+		toSerialize["line3"] = o.Line3
+	}
 	if !common.IsNil(o.Mobile) {
 		toSerialize["mobile"] = o.Mobile
+	}
+	if !common.IsNil(o.Name) {
+		toSerialize["name"] = o.Name
 	}
 	if !common.IsNil(o.PostalCode) {
 		toSerialize["postalCode"] = o.PostalCode
@@ -410,3 +557,6 @@ func (v *NullableBulkAddress) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

@@ -10,8 +10,7 @@ package transfers
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the BankCategoryData type satisfies the MappedNullable interface at compile time
@@ -19,7 +18,7 @@ var _ common.MappedNullable = &BankCategoryData{}
 
 // BankCategoryData struct for BankCategoryData
 type BankCategoryData struct {
-	// The priority for the bank transfer. This sets the speed at which the transfer is sent and the fees that you have to pay. Required for transfers with `category` **bank**.  Possible values:  * **regular**: for normal, low-value transactions.  * **fast**: a faster way to transfer funds, but the fees are higher. Recommended for high-priority, low-value transactions.  * **wire**: the fastest way to transfer funds, but this has the highest fees. Recommended for high-priority, high-value transactions.  * **instant**: for instant funds transfers in [SEPA countries](https://www.ecb.europa.eu/paym/integration/retail/sepa/html/index.en.html).  * **crossBorder**: for high-value transfers to a recipient in a different country.  * **internal**: for transfers to an Adyen-issued business bank account (by bank account number/IBAN).
+	// The priority for the bank transfer. This sets the speed at which the transfer is sent and the fees that you have to pay. Required for transfers with `category` **bank**.  Possible values:  * **regular**: For normal, low-value transactions.  * **fast**: A faster way to transfer funds, but the fees are higher. Recommended for high-priority, low-value transactions.  * **wire**: The fastest way to transfer funds, but this has the highest fees. Recommended for high-priority, high-value transactions.  * **instant**: For instant funds transfers within the United States and in [SEPA locations](https://www.ecb.europa.eu/paym/integration/retail/sepa/html/index.en.html).  * **crossBorder**: For high-value transfers to a recipient in a different country.  * **internal**: For transfers to an Adyen-issued business bank account (by bank account number/IBAN).
 	Priority *string `json:"priority,omitempty"`
 	// **bank**
 	Type *string `json:"type,omitempty"`
@@ -111,7 +110,7 @@ func (o *BankCategoryData) SetType(v string) {
 }
 
 func (o BankCategoryData) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -165,21 +164,23 @@ func (v *NullableBankCategoryData) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *BankCategoryData) isValidPriority() bool {
-	var allowedEnumValues = []string{"crossBorder", "fast", "instant", "internal", "regular", "wire"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetPriority() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "crossBorder", "fast", "instant", "internal", "regular", "wire" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetPriority() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *BankCategoryData) isValidType() bool {
-	var allowedEnumValues = []string{"bank"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "bank" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+
