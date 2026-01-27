@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the PaymentValidationsNameResultResponse type satisfies the MappedNullable interface at compile time
@@ -20,7 +21,7 @@ var _ common.MappedNullable = &PaymentValidationsNameResultResponse{}
 type PaymentValidationsNameResultResponse struct {
 	// Informs you if the first name your shopper provided matches the cardholder first name on file at the issuing bank. The first name is only validated for Visa. Possible values:  **match**, **partialMatch**, **noMatch**
 	FirstName *string `json:"firstName,omitempty"`
-	// Informs you if the full name your shopper provided matches the cardholder name on file at the issuing bank. The full name is the only field that is validated for Mastercard. Possible values:  **match**, **partialMatch**, **noMatch** 
+	// Informs you if the full name your shopper provided matches the cardholder name on file at the issuing bank. The full name is the only field that is validated for Mastercard. Possible values:  **match**, **partialMatch**, **noMatch**
 	FullName *string `json:"fullName,omitempty"`
 	// Informs you if the last name your shopper provided matches the cardholder last name on file at the issuing bank. The last name is only validated for Visa. Possible values:  **match**, **partialMatch**, **noMatch**
 	LastName *string `json:"lastName,omitempty"`
@@ -174,7 +175,7 @@ func (o *PaymentValidationsNameResultResponse) SetMiddleName(v string) {
 }
 
 func (o PaymentValidationsNameResultResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -233,6 +234,3 @@ func (v *NullablePaymentValidationsNameResultResponse) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

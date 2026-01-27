@@ -10,10 +10,11 @@ package checkout
 
 import (
 	"context"
-    "net/http"
-    "net/url"
-    "strings"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+	"net/http"
+	"net/url"
+	"strings"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // RecurringApi service
@@ -22,8 +23,8 @@ type RecurringApi common.Service
 // All parameters accepted by RecurringApi.DeleteTokenForStoredPaymentDetails
 type RecurringApiDeleteTokenForStoredPaymentDetailsInput struct {
 	storedPaymentMethodId string
-	shopperReference *string
-	merchantAccount *string
+	shopperReference      *string
+	merchantAccount       *string
 }
 
 // Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters. &gt; Your reference must not include personally identifiable information (PII), for example name or email address.
@@ -37,7 +38,6 @@ func (r RecurringApiDeleteTokenForStoredPaymentDetailsInput) MerchantAccount(mer
 	r.merchantAccount = &merchantAccount
 	return r
 }
-
 
 /*
 Prepare a request for DeleteTokenForStoredPaymentDetails
@@ -60,36 +60,34 @@ Deletes the token identified in the path. The token can no longer be used with p
 @return *http.Response, error
 */
 func (a *RecurringApi) DeleteTokenForStoredPaymentDetails(ctx context.Context, r RecurringApiDeleteTokenForStoredPaymentDetailsInput) (*http.Response, error) {
-    var res interface{}
+	var res interface{}
 	path := "/storedPaymentMethods/{storedPaymentMethodId}"
-    path = strings.Replace(path, "{"+"storedPaymentMethodId"+"}", url.PathEscape(common.ParameterValueToString(r.storedPaymentMethodId, "storedPaymentMethodId")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    if r.shopperReference != nil {
-        common.ParameterAddToQuery(queryParams, "shopperReference", r.shopperReference, "")
-    }
-    if r.merchantAccount != nil {
-        common.ParameterAddToQuery(queryParams, "merchantAccount", r.merchantAccount, "")
-    }
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodDelete,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"storedPaymentMethodId"+"}", url.PathEscape(common.ParameterValueToString(r.storedPaymentMethodId, "storedPaymentMethodId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.shopperReference != nil {
+		common.ParameterAddToQuery(queryParams, "shopperReference", r.shopperReference, "")
+	}
+	if r.merchantAccount != nil {
+		common.ParameterAddToQuery(queryParams, "merchantAccount", r.merchantAccount, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodDelete,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return httpRes, err
+	return httpRes, err
 }
-
 
 // All parameters accepted by RecurringApi.Forward
 type RecurringApiForwardInput struct {
-	idempotencyKey *string
+	idempotencyKey         *string
 	checkoutForwardRequest *CheckoutForwardRequest
 }
 
@@ -104,15 +102,13 @@ func (r RecurringApiForwardInput) CheckoutForwardRequest(checkoutForwardRequest 
 	return r
 }
 
-
 /*
 Prepare a request for Forward
 
 @return RecurringApiForwardInput
 */
 func (a *RecurringApi) ForwardInput() RecurringApiForwardInput {
-	return RecurringApiForwardInput{
-	}
+	return RecurringApiForwardInput{}
 }
 
 /*
@@ -125,33 +121,31 @@ Forwards the payment details you stored with Adyen to a third-party that you spe
 @return CheckoutForwardResponse, *http.Response, error
 */
 func (a *RecurringApi) Forward(ctx context.Context, r RecurringApiForwardInput) (CheckoutForwardResponse, *http.Response, error) {
-    res := &CheckoutForwardResponse{}
+	res := &CheckoutForwardResponse{}
 	path := "/forward"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    if r.idempotencyKey != nil {
-        common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
-    }
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.checkoutForwardRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.idempotencyKey != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.checkoutForwardRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by RecurringApi.GetTokensForStoredPaymentDetails
 type RecurringApiGetTokensForStoredPaymentDetailsInput struct {
 	shopperReference *string
-	merchantAccount *string
+	merchantAccount  *string
 }
 
 // Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters. &gt; Your reference must not include personally identifiable information (PII), for example name or email address.
@@ -166,15 +160,13 @@ func (r RecurringApiGetTokensForStoredPaymentDetailsInput) MerchantAccount(merch
 	return r
 }
 
-
 /*
 Prepare a request for GetTokensForStoredPaymentDetails
 
 @return RecurringApiGetTokensForStoredPaymentDetailsInput
 */
 func (a *RecurringApi) GetTokensForStoredPaymentDetailsInput() RecurringApiGetTokensForStoredPaymentDetailsInput {
-	return RecurringApiGetTokensForStoredPaymentDetailsInput{
-	}
+	return RecurringApiGetTokensForStoredPaymentDetailsInput{}
 }
 
 /*
@@ -182,42 +174,38 @@ GetTokensForStoredPaymentDetails Get tokens for stored payment details
 
 Lists the tokens for stored payment details for the shopper identified in the path, if there are any available. The token ID can be used with payment requests for the shopper's payment. A summary of the stored details is included.
 
-
-
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r RecurringApiGetTokensForStoredPaymentDetailsInput - Request parameters, see GetTokensForStoredPaymentDetailsInput
 @return ListStoredPaymentMethodsResponse, *http.Response, error
 */
 func (a *RecurringApi) GetTokensForStoredPaymentDetails(ctx context.Context, r RecurringApiGetTokensForStoredPaymentDetailsInput) (ListStoredPaymentMethodsResponse, *http.Response, error) {
-    res := &ListStoredPaymentMethodsResponse{}
+	res := &ListStoredPaymentMethodsResponse{}
 	path := "/storedPaymentMethods"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    if r.shopperReference != nil {
-        common.ParameterAddToQuery(queryParams, "shopperReference", r.shopperReference, "")
-    }
-    if r.merchantAccount != nil {
-        common.ParameterAddToQuery(queryParams, "merchantAccount", r.merchantAccount, "")
-    }
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodGet,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.shopperReference != nil {
+		common.ParameterAddToQuery(queryParams, "shopperReference", r.shopperReference, "")
+	}
+	if r.merchantAccount != nil {
+		common.ParameterAddToQuery(queryParams, "merchantAccount", r.merchantAccount, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by RecurringApi.StoredPaymentMethods
 type RecurringApiStoredPaymentMethodsInput struct {
-	idempotencyKey *string
+	idempotencyKey             *string
 	storedPaymentMethodRequest *StoredPaymentMethodRequest
 }
 
@@ -232,15 +220,13 @@ func (r RecurringApiStoredPaymentMethodsInput) StoredPaymentMethodRequest(stored
 	return r
 }
 
-
 /*
 Prepare a request for StoredPaymentMethods
 
 @return RecurringApiStoredPaymentMethodsInput
 */
 func (a *RecurringApi) StoredPaymentMethodsInput() RecurringApiStoredPaymentMethodsInput {
-	return RecurringApiStoredPaymentMethodsInput{
-	}
+	return RecurringApiStoredPaymentMethodsInput{}
 }
 
 /*
@@ -253,25 +239,23 @@ Creates a token to store the shopper's payment details. This token can be used f
 @return StoredPaymentMethodResource, *http.Response, error
 */
 func (a *RecurringApi) StoredPaymentMethods(ctx context.Context, r RecurringApiStoredPaymentMethodsInput) (StoredPaymentMethodResource, *http.Response, error) {
-    res := &StoredPaymentMethodResource{}
+	res := &StoredPaymentMethodResource{}
 	path := "/storedPaymentMethods"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    if r.idempotencyKey != nil {
-        common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
-    }
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.storedPaymentMethodRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.idempotencyKey != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.storedPaymentMethodRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-

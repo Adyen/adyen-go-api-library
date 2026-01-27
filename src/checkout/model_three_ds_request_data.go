@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the ThreeDSRequestData type satisfies the MappedNullable interface at compile time
@@ -20,7 +21,7 @@ var _ common.MappedNullable = &ThreeDSRequestData{}
 type ThreeDSRequestData struct {
 	// Dimensions of the 3DS2 challenge window to be displayed to the cardholder.  Possible values:  * **01** - size of 250x400  * **02** - size of 390x400 * **03** - size of 500x600 * **04** - size of 600x400 * **05** - Fullscreen
 	ChallengeWindowSize *string `json:"challengeWindowSize,omitempty"`
-	// Required to trigger the [data-only flow](https://docs.adyen.com/online-payments/3d-secure/data-only/). When set to **true**, forces the 3D Secure 2 data-only flow for all transactions where it is possible. 
+	// Required to trigger the [data-only flow](https://docs.adyen.com/online-payments/3d-secure/data-only/). When set to **true**, forces the 3D Secure 2 data-only flow for all transactions where it is possible.
 	DataOnly *string `json:"dataOnly,omitempty"`
 	// Indicates if [native 3D Secure authentication](https://docs.adyen.com/online-payments/3d-secure/native-3ds2) should be triggered when available. Adyen can still select to fallback to the redirect flow to optimize authorization rates and improve the shopper's experience.  Possible values: * **preferred**: Use native 3D Secure authentication when available. * **disabled**: Use the redirect 3D Secure authentication flow.
 	NativeThreeDS *string `json:"nativeThreeDS,omitempty"`
@@ -174,7 +175,7 @@ func (o *ThreeDSRequestData) SetThreeDSVersion(v string) {
 }
 
 func (o ThreeDSRequestData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -234,41 +235,39 @@ func (v *NullableThreeDSRequestData) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *ThreeDSRequestData) isValidChallengeWindowSize() bool {
-    var allowedEnumValues = []string{ "01", "02", "03", "04", "05" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetChallengeWindowSize() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"01", "02", "03", "04", "05"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetChallengeWindowSize() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *ThreeDSRequestData) isValidDataOnly() bool {
-    var allowedEnumValues = []string{ "false", "true" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetDataOnly() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"false", "true"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetDataOnly() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *ThreeDSRequestData) isValidNativeThreeDS() bool {
-    var allowedEnumValues = []string{ "preferred", "disabled" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetNativeThreeDS() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"preferred", "disabled"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetNativeThreeDS() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *ThreeDSRequestData) isValidThreeDSVersion() bool {
-    var allowedEnumValues = []string{ "2.1.0", "2.2.0" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetThreeDSVersion() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"2.1.0", "2.2.0"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetThreeDSVersion() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

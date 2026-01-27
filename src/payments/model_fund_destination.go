@@ -10,7 +10,8 @@ package payments
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the FundDestination type satisfies the MappedNullable interface at compile time
@@ -22,16 +23,16 @@ type FundDestination struct {
 	IBAN *string `json:"IBAN,omitempty"`
 	// a map of name/value pairs for passing in additional/industry-specific data
 	AdditionalData *map[string]string `json:"additionalData,omitempty"`
-	BillingAddress *Address `json:"billingAddress,omitempty"`
-	Card *Card `json:"card,omitempty"`
+	BillingAddress *Address           `json:"billingAddress,omitempty"`
+	Card           *Card              `json:"card,omitempty"`
 	// The `recurringDetailReference` you want to use for this payment. The value `LATEST` can be used to select the most recently stored recurring detail.
 	SelectedRecurringDetailReference *string `json:"selectedRecurringDetailReference,omitempty"`
 	// the email address of the person
 	ShopperEmail *string `json:"shopperEmail,omitempty"`
-	ShopperName *Name `json:"shopperName,omitempty"`
+	ShopperName  *Name   `json:"shopperName,omitempty"`
 	// Required for recurring payments.  Your reference to uniquely identify this shopper, for example user ID or account ID. The value is case-sensitive and must be at least three characters. > Your reference must not include personally identifiable information (PII) such as name or email address.
-	ShopperReference *string `json:"shopperReference,omitempty"`
-	SubMerchant *SubMerchant `json:"subMerchant,omitempty"`
+	ShopperReference *string      `json:"shopperReference,omitempty"`
+	SubMerchant      *SubMerchant `json:"subMerchant,omitempty"`
 	// the telephone number of the person
 	TelephoneNumber *string `json:"telephoneNumber,omitempty"`
 	// The purpose of a digital wallet transaction.
@@ -408,7 +409,7 @@ func (o *FundDestination) SetWalletPurpose(v string) {
 }
 
 func (o FundDestination) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -488,6 +489,3 @@ func (v *NullableFundDestination) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the PaymentValidationsNameResponse type satisfies the MappedNullable interface at compile time
@@ -19,7 +20,7 @@ var _ common.MappedNullable = &PaymentValidationsNameResponse{}
 // PaymentValidationsNameResponse struct for PaymentValidationsNameResponse
 type PaymentValidationsNameResponse struct {
 	RawResponse *PaymentValidationsNameResultRawResponse `json:"rawResponse,omitempty"`
-	Result *PaymentValidationsNameResultResponse `json:"result,omitempty"`
+	Result      *PaymentValidationsNameResultResponse    `json:"result,omitempty"`
 	// Informs you if the name validation was performed. Possible values:  **performed**, **notPerformed**, **notSupported**
 	Status *string `json:"status,omitempty"`
 }
@@ -138,7 +139,7 @@ func (o *PaymentValidationsNameResponse) SetStatus(v string) {
 }
 
 func (o PaymentValidationsNameResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,14 +196,12 @@ func (v *NullablePaymentValidationsNameResponse) UnmarshalJSON(src []byte) error
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *PaymentValidationsNameResponse) isValidStatus() bool {
-    var allowedEnumValues = []string{ "notPerformed", "notSupported", "performed" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetStatus() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"notPerformed", "notSupported", "performed"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetStatus() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

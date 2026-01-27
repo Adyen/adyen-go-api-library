@@ -10,7 +10,8 @@ package checkout
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the StoredPaymentMethodResource type satisfies the MappedNullable interface at compile time
@@ -39,8 +40,8 @@ type StoredPaymentMethodResource struct {
 	// The name of the issuer of token or card.
 	IssuerName *string `json:"issuerName,omitempty"`
 	// The last four digits of the PAN.
-	LastFour *string `json:"lastFour,omitempty"`
-	Mandate *TokenMandate `json:"mandate,omitempty"`
+	LastFour *string       `json:"lastFour,omitempty"`
+	Mandate  *TokenMandate `json:"mandate,omitempty"`
 	// The display name of the stored payment method.
 	Name *string `json:"name,omitempty"`
 	// Returned in the response if you are not tokenizing with Adyen and are using the Merchant-initiated transactions (MIT) framework from Mastercard or Visa.  This contains either the Mastercard Trace ID or the Visa Transaction ID.
@@ -683,7 +684,7 @@ func (o *StoredPaymentMethodResource) SetType(v string) {
 }
 
 func (o StoredPaymentMethodResource) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -787,6 +788,3 @@ func (v *NullableStoredPaymentMethodResource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-
