@@ -10,7 +10,6 @@ package balanceplatform
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
 	"fmt"
 )
 
@@ -20,8 +19,8 @@ type ScaStatus string
 // List of ScaStatus
 const (
 	NOT_PERFORMED ScaStatus = "notPerformed"
-	PENDING ScaStatus = "pending"
-	PERFORMED ScaStatus = "performed"
+	PENDING       ScaStatus = "pending"
+	PERFORMED     ScaStatus = "performed"
 )
 
 // All allowed values of ScaStatus enum
@@ -109,4 +108,3 @@ func (v *NullableScaStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -10,7 +10,8 @@ package capital
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the USLocalAccountIdentificationAllOf type satisfies the MappedNullable interface at compile time
@@ -19,8 +20,8 @@ var _ common.MappedNullable = &USLocalAccountIdentificationAllOf{}
 // USLocalAccountIdentificationAllOf struct for USLocalAccountIdentificationAllOf
 type USLocalAccountIdentificationAllOf struct {
 	// The bank account number, without separators or whitespace.
-	AccountNumber *string `json:"accountNumber,omitempty"`
-	AccountType *USLocalBankAccountType `json:"accountType,omitempty"`
+	AccountNumber *string                 `json:"accountNumber,omitempty"`
+	AccountType   *USLocalBankAccountType `json:"accountType,omitempty"`
 	// The 9-digit [routing number](https://en.wikipedia.org/wiki/ABA_routing_transit_number), without separators or whitespace.
 	RoutingNumber *string `json:"routingNumber,omitempty"`
 	// **usLocal**
@@ -177,7 +178,7 @@ func (o *USLocalAccountIdentificationAllOf) SetType(v string) {
 }
 
 func (o USLocalAccountIdentificationAllOf) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -236,6 +237,3 @@ func (v *NullableUSLocalAccountIdentificationAllOf) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

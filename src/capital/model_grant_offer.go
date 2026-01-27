@@ -10,8 +10,9 @@ package capital
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
 	"time"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the GrantOffer type satisfies the MappedNullable interface at compile time
@@ -20,15 +21,15 @@ var _ common.MappedNullable = &GrantOffer{}
 // GrantOffer struct for GrantOffer
 type GrantOffer struct {
 	// The unique identifier of the account holder to which the grant is offered.
-	AccountHolderId string `json:"accountHolderId"`
-	Amount *Amount `json:"amount,omitempty"`
+	AccountHolderId string  `json:"accountHolderId"`
+	Amount          *Amount `json:"amount,omitempty"`
 	// The contract type of the grant offer. Possible values: **cashAdvance**, **loan**.
 	ContractType *string `json:"contractType,omitempty"`
 	// The date when the grant offer expires.
-	ExpiresAt *time.Time `json:"expiresAt,omitempty"`
-	Fee *GrantOfferFee `json:"fee,omitempty"`
+	ExpiresAt *time.Time     `json:"expiresAt,omitempty"`
+	Fee       *GrantOfferFee `json:"fee,omitempty"`
 	// The unique identifier of the grant offer.
-	Id *string `json:"id,omitempty"`
+	Id        *string    `json:"id,omitempty"`
 	Repayment *Repayment `json:"repayment,omitempty"`
 	// The date when the grant offer becomes available.
 	StartsAt *time.Time `json:"startsAt,omitempty"`
@@ -301,7 +302,7 @@ func (o *GrantOffer) SetStartsAt(v time.Time) {
 }
 
 func (o GrantOffer) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -371,14 +372,12 @@ func (v *NullableGrantOffer) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *GrantOffer) isValidContractType() bool {
-    var allowedEnumValues = []string{ "cashAdvance", "loan" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetContractType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"cashAdvance", "loan"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetContractType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

@@ -10,7 +10,8 @@ package capital
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the DisbursementRepayment type satisfies the MappedNullable interface at compile time
@@ -19,7 +20,7 @@ var _ common.MappedNullable = &DisbursementRepayment{}
 // DisbursementRepayment struct for DisbursementRepayment
 type DisbursementRepayment struct {
 	// The percentage of your user's incoming net volume that is deducted for repaying the grant. The percentage expressed in [basis points](https://www.investopedia.com/terms/b/basispoint.asp).
-	BasisPoints int32 `json:"basisPoints"`
+	BasisPoints       int32  `json:"basisPoints"`
 	UpdateDescription string `json:"updateDescription"`
 }
 
@@ -91,7 +92,7 @@ func (o *DisbursementRepayment) SetUpdateDescription(v string) {
 }
 
 func (o DisbursementRepayment) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -140,6 +141,3 @@ func (v *NullableDisbursementRepayment) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

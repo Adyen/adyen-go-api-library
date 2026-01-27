@@ -10,7 +10,6 @@ package balanceplatform
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
 	"fmt"
 )
 
@@ -20,7 +19,7 @@ type ScaDeviceType string
 // List of ScaDeviceType
 const (
 	BROWSER ScaDeviceType = "browser"
-	IOS ScaDeviceType = "ios"
+	IOS     ScaDeviceType = "ios"
 	ANDROID ScaDeviceType = "android"
 )
 
@@ -109,4 +108,3 @@ func (v *NullableScaDeviceType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

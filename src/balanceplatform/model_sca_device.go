@@ -10,7 +10,8 @@ package balanceplatform
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the ScaDevice type satisfies the MappedNullable interface at compile time
@@ -21,7 +22,7 @@ type ScaDevice struct {
 	// The unique identifier of the SCA device you are registering.
 	Id string `json:"id"`
 	// The name of the SCA device that you are registering. You can use it to help your users identify the device.
-	Name string `json:"name"`
+	Name string        `json:"name"`
 	Type ScaDeviceType `json:"type"`
 }
 
@@ -118,7 +119,7 @@ func (o *ScaDevice) SetType(v ScaDeviceType) {
 }
 
 func (o ScaDevice) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -168,6 +169,3 @@ func (v *NullableScaDevice) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

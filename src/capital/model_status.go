@@ -10,7 +10,8 @@ package capital
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the Status type satisfies the MappedNullable interface at compile time
@@ -18,7 +19,7 @@ var _ common.MappedNullable = &Status{}
 
 // Status struct for Status
 type Status struct {
-	// A list of actions that need to be completed to proceed with the grant. 
+	// A list of actions that need to be completed to proceed with the grant.
 	Actions []Action `json:"actions,omitempty"`
 	// The code for the status of the grant. Possible values: - **Pending** - **Active** - **Repaid** - **WrittenOff** - **Failed** - **Revoked** - **Requested** - **Underwriting** - **Reviewing** - **Assessed** - **Approved** - **Rejected** - **Cancelled**
 	Code string `json:"code"`
@@ -99,7 +100,7 @@ func (o *Status) SetCode(v string) {
 }
 
 func (o Status) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -151,14 +152,12 @@ func (v *NullableStatus) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *Status) isValidCode() bool {
-    var allowedEnumValues = []string{ "Pending", "Active", "Repaid", "WrittenOff", "Failed", "Revoked", "Requested", "Underwriting", "Reviewing", "Assessed", "Approved", "Rejected", "Cancelled" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetCode() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"Pending", "Active", "Repaid", "WrittenOff", "Failed", "Revoked", "Requested", "Underwriting", "Reviewing", "Assessed", "Approved", "Rejected", "Cancelled"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetCode() == allowed {
+			return true
+		}
+	}
+	return false
 }
-

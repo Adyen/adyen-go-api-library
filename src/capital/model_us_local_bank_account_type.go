@@ -10,7 +10,6 @@ package capital
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
 	"fmt"
 )
 
@@ -20,7 +19,7 @@ type USLocalBankAccountType string
 // List of USLocalBankAccountType
 const (
 	CHECKING USLocalBankAccountType = "checking"
-	SAVINGS USLocalBankAccountType = "savings"
+	SAVINGS  USLocalBankAccountType = "savings"
 )
 
 // All allowed values of USLocalBankAccountType enum
@@ -107,4 +106,3 @@ func (v *NullableUSLocalBankAccountType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

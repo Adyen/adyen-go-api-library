@@ -10,7 +10,8 @@ package capital
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the FundsCollection type satisfies the MappedNullable interface at compile time
@@ -19,7 +20,7 @@ var _ common.MappedNullable = &FundsCollection{}
 // FundsCollection struct for FundsCollection
 type FundsCollection struct {
 	AccountIdentification *BankAccountIdentification `json:"accountIdentification,omitempty"`
-	FundsCollectionType *FundsCollectionType `json:"fundsCollectionType,omitempty"`
+	FundsCollectionType   *FundsCollectionType       `json:"fundsCollectionType,omitempty"`
 }
 
 // NewFundsCollection instantiates a new FundsCollection object
@@ -104,7 +105,7 @@ func (o *FundsCollection) SetFundsCollectionType(v FundsCollectionType) {
 }
 
 func (o FundsCollection) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,6 +158,3 @@ func (v *NullableFundsCollection) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-
