@@ -14,44 +14,44 @@ import (
 	"time"
 )
 
-// checks if the BalanceAccountNotificationRequest type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &BalanceAccountNotificationRequest{}
+// checks if the NetworkTokenNotificationRequest type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &NetworkTokenNotificationRequest{}
 
-// BalanceAccountNotificationRequest struct for BalanceAccountNotificationRequest
-type BalanceAccountNotificationRequest struct {
-	Data BalanceAccountNotificationData `json:"data"`
+// NetworkTokenNotificationRequest struct for NetworkTokenNotificationRequest
+type NetworkTokenNotificationRequest struct {
+	Data NetworkTokenNotificationDataV2 `json:"data"`
 	// The environment from which the webhook originated.  Possible values: **test**, **live**.
 	Environment string `json:"environment"`
 	// When the event was queued.
 	Timestamp *time.Time `json:"timestamp,omitempty"`
-	// Type of webhook.
+	// The type of webhook.
 	Type string `json:"type"`
 }
 
-// NewBalanceAccountNotificationRequest instantiates a new BalanceAccountNotificationRequest object
+// NewNetworkTokenNotificationRequest instantiates a new NetworkTokenNotificationRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBalanceAccountNotificationRequest(data BalanceAccountNotificationData, environment string, type_ string) *BalanceAccountNotificationRequest {
-	this := BalanceAccountNotificationRequest{}
+func NewNetworkTokenNotificationRequest(data NetworkTokenNotificationDataV2, environment string, type_ string) *NetworkTokenNotificationRequest {
+	this := NetworkTokenNotificationRequest{}
 	this.Data = data
 	this.Environment = environment
 	this.Type = type_
 	return &this
 }
 
-// NewBalanceAccountNotificationRequestWithDefaults instantiates a new BalanceAccountNotificationRequest object
+// NewNetworkTokenNotificationRequestWithDefaults instantiates a new NetworkTokenNotificationRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewBalanceAccountNotificationRequestWithDefaults() *BalanceAccountNotificationRequest {
-	this := BalanceAccountNotificationRequest{}
+func NewNetworkTokenNotificationRequestWithDefaults() *NetworkTokenNotificationRequest {
+	this := NetworkTokenNotificationRequest{}
 	return &this
 }
 
 // GetData returns the Data field value
-func (o *BalanceAccountNotificationRequest) GetData() BalanceAccountNotificationData {
+func (o *NetworkTokenNotificationRequest) GetData() NetworkTokenNotificationDataV2 {
 	if o == nil {
-		var ret BalanceAccountNotificationData
+		var ret NetworkTokenNotificationDataV2
 		return ret
 	}
 
@@ -60,7 +60,7 @@ func (o *BalanceAccountNotificationRequest) GetData() BalanceAccountNotification
 
 // GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
-func (o *BalanceAccountNotificationRequest) GetDataOk() (*BalanceAccountNotificationData, bool) {
+func (o *NetworkTokenNotificationRequest) GetDataOk() (*NetworkTokenNotificationDataV2, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -68,12 +68,12 @@ func (o *BalanceAccountNotificationRequest) GetDataOk() (*BalanceAccountNotifica
 }
 
 // SetData sets field value
-func (o *BalanceAccountNotificationRequest) SetData(v BalanceAccountNotificationData) {
+func (o *NetworkTokenNotificationRequest) SetData(v NetworkTokenNotificationDataV2) {
 	o.Data = v
 }
 
 // GetEnvironment returns the Environment field value
-func (o *BalanceAccountNotificationRequest) GetEnvironment() string {
+func (o *NetworkTokenNotificationRequest) GetEnvironment() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -84,7 +84,7 @@ func (o *BalanceAccountNotificationRequest) GetEnvironment() string {
 
 // GetEnvironmentOk returns a tuple with the Environment field value
 // and a boolean to check if the value has been set.
-func (o *BalanceAccountNotificationRequest) GetEnvironmentOk() (*string, bool) {
+func (o *NetworkTokenNotificationRequest) GetEnvironmentOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -92,12 +92,12 @@ func (o *BalanceAccountNotificationRequest) GetEnvironmentOk() (*string, bool) {
 }
 
 // SetEnvironment sets field value
-func (o *BalanceAccountNotificationRequest) SetEnvironment(v string) {
+func (o *NetworkTokenNotificationRequest) SetEnvironment(v string) {
 	o.Environment = v
 }
 
 // GetTimestamp returns the Timestamp field value if set, zero value otherwise.
-func (o *BalanceAccountNotificationRequest) GetTimestamp() time.Time {
+func (o *NetworkTokenNotificationRequest) GetTimestamp() time.Time {
 	if o == nil || common.IsNil(o.Timestamp) {
 		var ret time.Time
 		return ret
@@ -107,7 +107,7 @@ func (o *BalanceAccountNotificationRequest) GetTimestamp() time.Time {
 
 // GetTimestampOk returns a tuple with the Timestamp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BalanceAccountNotificationRequest) GetTimestampOk() (*time.Time, bool) {
+func (o *NetworkTokenNotificationRequest) GetTimestampOk() (*time.Time, bool) {
 	if o == nil || common.IsNil(o.Timestamp) {
 		return nil, false
 	}
@@ -115,7 +115,7 @@ func (o *BalanceAccountNotificationRequest) GetTimestampOk() (*time.Time, bool) 
 }
 
 // HasTimestamp returns a boolean if a field has been set.
-func (o *BalanceAccountNotificationRequest) HasTimestamp() bool {
+func (o *NetworkTokenNotificationRequest) HasTimestamp() bool {
 	if o != nil && !common.IsNil(o.Timestamp) {
 		return true
 	}
@@ -124,12 +124,12 @@ func (o *BalanceAccountNotificationRequest) HasTimestamp() bool {
 }
 
 // SetTimestamp gets a reference to the given time.Time and assigns it to the Timestamp field.
-func (o *BalanceAccountNotificationRequest) SetTimestamp(v time.Time) {
+func (o *NetworkTokenNotificationRequest) SetTimestamp(v time.Time) {
 	o.Timestamp = &v
 }
 
 // GetType returns the Type field value
-func (o *BalanceAccountNotificationRequest) GetType() string {
+func (o *NetworkTokenNotificationRequest) GetType() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -140,7 +140,7 @@ func (o *BalanceAccountNotificationRequest) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *BalanceAccountNotificationRequest) GetTypeOk() (*string, bool) {
+func (o *NetworkTokenNotificationRequest) GetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -148,11 +148,11 @@ func (o *BalanceAccountNotificationRequest) GetTypeOk() (*string, bool) {
 }
 
 // SetType sets field value
-func (o *BalanceAccountNotificationRequest) SetType(v string) {
+func (o *NetworkTokenNotificationRequest) SetType(v string) {
 	o.Type = v
 }
 
-func (o BalanceAccountNotificationRequest) MarshalJSON() ([]byte, error) {
+func (o NetworkTokenNotificationRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -160,7 +160,7 @@ func (o BalanceAccountNotificationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BalanceAccountNotificationRequest) ToMap() (map[string]interface{}, error) {
+func (o NetworkTokenNotificationRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["data"] = o.Data
 	toSerialize["environment"] = o.Environment
@@ -171,45 +171,45 @@ func (o BalanceAccountNotificationRequest) ToMap() (map[string]interface{}, erro
 	return toSerialize, nil
 }
 
-type NullableBalanceAccountNotificationRequest struct {
-	value *BalanceAccountNotificationRequest
+type NullableNetworkTokenNotificationRequest struct {
+	value *NetworkTokenNotificationRequest
 	isSet bool
 }
 
-func (v NullableBalanceAccountNotificationRequest) Get() *BalanceAccountNotificationRequest {
+func (v NullableNetworkTokenNotificationRequest) Get() *NetworkTokenNotificationRequest {
 	return v.value
 }
 
-func (v *NullableBalanceAccountNotificationRequest) Set(val *BalanceAccountNotificationRequest) {
+func (v *NullableNetworkTokenNotificationRequest) Set(val *NetworkTokenNotificationRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableBalanceAccountNotificationRequest) IsSet() bool {
+func (v NullableNetworkTokenNotificationRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableBalanceAccountNotificationRequest) Unset() {
+func (v *NullableNetworkTokenNotificationRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableBalanceAccountNotificationRequest(val *BalanceAccountNotificationRequest) *NullableBalanceAccountNotificationRequest {
-	return &NullableBalanceAccountNotificationRequest{value: val, isSet: true}
+func NewNullableNetworkTokenNotificationRequest(val *NetworkTokenNotificationRequest) *NullableNetworkTokenNotificationRequest {
+	return &NullableNetworkTokenNotificationRequest{value: val, isSet: true}
 }
 
-func (v NullableBalanceAccountNotificationRequest) MarshalJSON() ([]byte, error) {
+func (v NullableNetworkTokenNotificationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableBalanceAccountNotificationRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableNetworkTokenNotificationRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
 
 
-func (o *BalanceAccountNotificationRequest) isValidType() bool {
-    var allowedEnumValues = []string{ "balancePlatform.balanceAccount.updated", "balancePlatform.balanceAccount.created" }
+func (o *NetworkTokenNotificationRequest) isValidType() bool {
+    var allowedEnumValues = []string{ "balancePlatform.networkToken.created", "balancePlatform.networkToken.updated" }
     for _, allowed := range allowedEnumValues {
         if o.GetType() == allowed {
             return true
