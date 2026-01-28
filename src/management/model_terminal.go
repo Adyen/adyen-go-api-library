@@ -10,9 +10,8 @@ package management
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 	"time"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the Terminal type satisfies the MappedNullable interface at compile time
@@ -20,12 +19,14 @@ var _ common.MappedNullable = &Terminal{}
 
 // Terminal struct for Terminal
 type Terminal struct {
-	Assignment   *TerminalAssignment   `json:"assignment,omitempty"`
+	Assignment *TerminalAssignment `json:"assignment,omitempty"`
 	Connectivity *TerminalConnectivity `json:"connectivity,omitempty"`
 	// The software release currently in use on the terminal.
 	FirmwareVersion *string `json:"firmwareVersion,omitempty"`
 	// The unique identifier of the terminal.
 	Id *string `json:"id,omitempty"`
+	// A list of Android apps installed on the terminal.
+	InstalledAPKs []InstalledAPKs `json:"installedAPKs,omitempty"`
 	// Date and time of the last activity on the terminal. Not included when the last activity was more than 14 days ago.
 	LastActivityAt *time.Time `json:"lastActivityAt,omitempty"`
 	// Date and time of the last transaction on the terminal. Not included when the last transaction was more than 14 days ago.
@@ -181,6 +182,38 @@ func (o *Terminal) HasId() bool {
 // SetId gets a reference to the given string and assigns it to the Id field.
 func (o *Terminal) SetId(v string) {
 	o.Id = &v
+}
+
+// GetInstalledAPKs returns the InstalledAPKs field value if set, zero value otherwise.
+func (o *Terminal) GetInstalledAPKs() []InstalledAPKs {
+	if o == nil || common.IsNil(o.InstalledAPKs) {
+		var ret []InstalledAPKs
+		return ret
+	}
+	return o.InstalledAPKs
+}
+
+// GetInstalledAPKsOk returns a tuple with the InstalledAPKs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Terminal) GetInstalledAPKsOk() ([]InstalledAPKs, bool) {
+	if o == nil || common.IsNil(o.InstalledAPKs) {
+		return nil, false
+	}
+	return o.InstalledAPKs, true
+}
+
+// HasInstalledAPKs returns a boolean if a field has been set.
+func (o *Terminal) HasInstalledAPKs() bool {
+	if o != nil && !common.IsNil(o.InstalledAPKs) {
+		return true
+	}
+
+	return false
+}
+
+// SetInstalledAPKs gets a reference to the given []InstalledAPKs and assigns it to the InstalledAPKs field.
+func (o *Terminal) SetInstalledAPKs(v []InstalledAPKs) {
+	o.InstalledAPKs = v
 }
 
 // GetLastActivityAt returns the LastActivityAt field value if set, zero value otherwise.
@@ -344,7 +377,7 @@ func (o *Terminal) SetSerialNumber(v string) {
 }
 
 func (o Terminal) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -364,6 +397,9 @@ func (o Terminal) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Id) {
 		toSerialize["id"] = o.Id
+	}
+	if !common.IsNil(o.InstalledAPKs) {
+		toSerialize["installedAPKs"] = o.InstalledAPKs
 	}
 	if !common.IsNil(o.LastActivityAt) {
 		toSerialize["lastActivityAt"] = o.LastActivityAt
@@ -418,3 +454,6 @@ func (v *NullableTerminal) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

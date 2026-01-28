@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the StoreCreationRequest type satisfies the MappedNullable interface at compile time
@@ -24,15 +23,17 @@ type StoreCreationRequest struct {
 	BusinessLineIds []string `json:"businessLineIds,omitempty"`
 	// Your description of the store.
 	Description string `json:"description"`
-	// The unique identifier of the store, used by certain payment methods and tax authorities.  Required for CNPJ in Brazil, in the format 00.000.000/0000-00 separated by dots, slashes, hyphens, or without separators.  Optional for SIRET in France, up to 14 digits.  Optional for Zip in Australia, up to 50 digits.
+	// The unique identifier of the store, used by certain payment methods and tax authorities.  Required for CNPJ in Brazil, in the format 00.000.000/0000-00 separated by dots, slashes, hyphens, or without separators.  Optional for SIRET in France, up to 14 digits.  Optional for Zip in Australia, up to 50 digits.  
 	ExternalReferenceId *string `json:"externalReferenceId,omitempty"`
-	// The phone number of the store, including '+' and country code in the [E.164](https://en.wikipedia.org/wiki/E.164) format. If passed in a different format, we convert and validate the phone number against E.164.
+	LocalizedInformation *LocalizedInformation `json:"localizedInformation,omitempty"`
+	// The phone number of the store, including '+' and country code in the [E.164](https://en.wikipedia.org/wiki/E.164) format. If passed in a different format, we convert and validate the phone number against E.164. 
 	PhoneNumber string `json:"phoneNumber"`
 	// Your reference to recognize the store by. Also known as the store code.  Allowed characters: lowercase and uppercase letters without diacritics, numbers 0 through 9, hyphen (-), and underscore (_).  If you do not provide a reference in your POST request, it is populated with the Adyen-generated [id](https://docs.adyen.com/api-explorer/Management/latest/post/stores#responses-200-id).
 	Reference *string `json:"reference,omitempty"`
 	// The store name to be shown on the shopper's bank or credit card statement and on the shopper receipt. Maximum length: 22 characters; can't be all numbers.
-	ShopperStatement   string                   `json:"shopperStatement"`
+	ShopperStatement string `json:"shopperStatement"`
 	SplitConfiguration *StoreSplitConfiguration `json:"splitConfiguration,omitempty"`
+	SubMerchantData *SubMerchantData `json:"subMerchantData,omitempty"`
 }
 
 // NewStoreCreationRequest instantiates a new StoreCreationRequest object
@@ -168,6 +169,38 @@ func (o *StoreCreationRequest) SetExternalReferenceId(v string) {
 	o.ExternalReferenceId = &v
 }
 
+// GetLocalizedInformation returns the LocalizedInformation field value if set, zero value otherwise.
+func (o *StoreCreationRequest) GetLocalizedInformation() LocalizedInformation {
+	if o == nil || common.IsNil(o.LocalizedInformation) {
+		var ret LocalizedInformation
+		return ret
+	}
+	return *o.LocalizedInformation
+}
+
+// GetLocalizedInformationOk returns a tuple with the LocalizedInformation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoreCreationRequest) GetLocalizedInformationOk() (*LocalizedInformation, bool) {
+	if o == nil || common.IsNil(o.LocalizedInformation) {
+		return nil, false
+	}
+	return o.LocalizedInformation, true
+}
+
+// HasLocalizedInformation returns a boolean if a field has been set.
+func (o *StoreCreationRequest) HasLocalizedInformation() bool {
+	if o != nil && !common.IsNil(o.LocalizedInformation) {
+		return true
+	}
+
+	return false
+}
+
+// SetLocalizedInformation gets a reference to the given LocalizedInformation and assigns it to the LocalizedInformation field.
+func (o *StoreCreationRequest) SetLocalizedInformation(v LocalizedInformation) {
+	o.LocalizedInformation = &v
+}
+
 // GetPhoneNumber returns the PhoneNumber field value
 func (o *StoreCreationRequest) GetPhoneNumber() string {
 	if o == nil {
@@ -280,8 +313,40 @@ func (o *StoreCreationRequest) SetSplitConfiguration(v StoreSplitConfiguration) 
 	o.SplitConfiguration = &v
 }
 
+// GetSubMerchantData returns the SubMerchantData field value if set, zero value otherwise.
+func (o *StoreCreationRequest) GetSubMerchantData() SubMerchantData {
+	if o == nil || common.IsNil(o.SubMerchantData) {
+		var ret SubMerchantData
+		return ret
+	}
+	return *o.SubMerchantData
+}
+
+// GetSubMerchantDataOk returns a tuple with the SubMerchantData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoreCreationRequest) GetSubMerchantDataOk() (*SubMerchantData, bool) {
+	if o == nil || common.IsNil(o.SubMerchantData) {
+		return nil, false
+	}
+	return o.SubMerchantData, true
+}
+
+// HasSubMerchantData returns a boolean if a field has been set.
+func (o *StoreCreationRequest) HasSubMerchantData() bool {
+	if o != nil && !common.IsNil(o.SubMerchantData) {
+		return true
+	}
+
+	return false
+}
+
+// SetSubMerchantData gets a reference to the given SubMerchantData and assigns it to the SubMerchantData field.
+func (o *StoreCreationRequest) SetSubMerchantData(v SubMerchantData) {
+	o.SubMerchantData = &v
+}
+
 func (o StoreCreationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -298,6 +363,9 @@ func (o StoreCreationRequest) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.ExternalReferenceId) {
 		toSerialize["externalReferenceId"] = o.ExternalReferenceId
 	}
+	if !common.IsNil(o.LocalizedInformation) {
+		toSerialize["localizedInformation"] = o.LocalizedInformation
+	}
 	toSerialize["phoneNumber"] = o.PhoneNumber
 	if !common.IsNil(o.Reference) {
 		toSerialize["reference"] = o.Reference
@@ -305,6 +373,9 @@ func (o StoreCreationRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["shopperStatement"] = o.ShopperStatement
 	if !common.IsNil(o.SplitConfiguration) {
 		toSerialize["splitConfiguration"] = o.SplitConfiguration
+	}
+	if !common.IsNil(o.SubMerchantData) {
+		toSerialize["subMerchantData"] = o.SubMerchantData
 	}
 	return toSerialize, nil
 }
@@ -344,3 +415,6 @@ func (v *NullableStoreCreationRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

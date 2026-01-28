@@ -10,8 +10,7 @@ package management
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the Nexo type satisfies the MappedNullable interface at compile time
@@ -19,14 +18,14 @@ var _ common.MappedNullable = &Nexo{}
 
 // Nexo struct for Nexo
 type Nexo struct {
-	DisplayUrls   *NotificationUrl `json:"displayUrls,omitempty"`
-	EncryptionKey *Key             `json:"encryptionKey,omitempty"`
-	EventUrls     *EventUrl        `json:"eventUrls,omitempty"`
+	DisplayUrls *NotificationUrl `json:"displayUrls,omitempty"`
+	EncryptionKey *Key `json:"encryptionKey,omitempty"`
+	EventUrls *EventUrl `json:"eventUrls,omitempty"`
 	// One or more URLs to send event messages to when using Terminal API.
-	// Deprecated since Management API v1
-	// Use `eventUrls` instead.
-	NexoEventUrls []string      `json:"nexoEventUrls,omitempty"`
-	Notification  *Notification `json:"notification,omitempty"`
+    // Deprecated since Management API v1
+    // Use `eventUrls` instead.
+	NexoEventUrls []string `json:"nexoEventUrls,omitempty"`
+	Notification *Notification `json:"notification,omitempty"`
 }
 
 // NewNexo instantiates a new Nexo object
@@ -213,7 +212,7 @@ func (o *Nexo) SetNotification(v Notification) {
 }
 
 func (o Nexo) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -275,3 +274,6 @@ func (v *NullableNexo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
