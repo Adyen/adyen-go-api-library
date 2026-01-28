@@ -10,8 +10,9 @@ package acswebhook
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
 	"time"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the ChallengeInfo type satisfies the MappedNullable interface at compile time
@@ -229,7 +230,7 @@ func (o *ChallengeInfo) SetRetries(v int32) {
 }
 
 func (o ChallengeInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -291,23 +292,21 @@ func (v *NullableChallengeInfo) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *ChallengeInfo) isValidChallengeCancel() bool {
-    var allowedEnumValues = []string{ "00", "01", "02", "03", "04", "05", "06", "07", "08" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetChallengeCancel() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"00", "01", "02", "03", "04", "05", "06", "07", "08"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetChallengeCancel() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *ChallengeInfo) isValidFlow() bool {
-    var allowedEnumValues = []string{ "PWD_OTP_PHONE_FL", "PWD_OTP_EMAIL_FL", "OOB_TRIGGER_FL" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetFlow() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"PWD_OTP_PHONE_FL", "PWD_OTP_EMAIL_FL", "OOB_TRIGGER_FL"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetFlow() == allowed {
+			return true
+		}
+	}
+	return false
 }
-
