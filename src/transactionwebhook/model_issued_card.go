@@ -10,7 +10,8 @@ package transactionwebhook
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the IssuedCard type satisfies the MappedNullable interface at compile time
@@ -23,13 +24,13 @@ type IssuedCard struct {
 	// Indicates the method used for entering the PAN to initiate a transaction.  Possible values: **manual**, **chip**, **magstripe**, **contactless**, **cof**, **ecommerce**, **token**.
 	PanEntryMode *string `json:"panEntryMode,omitempty"`
 	// Contains information about how the payment was processed. For example, **ecommerce** for online or **pos** for in-person payments.
-	ProcessingType *string `json:"processingType,omitempty"`
+	ProcessingType           *string                   `json:"processingType,omitempty"`
 	RelayedAuthorisationData *RelayedAuthorisationData `json:"relayedAuthorisationData,omitempty"`
 	// The identifier of the original payment. This ID is provided by the scheme and can be alphanumeric or numeric, depending on the scheme. The `schemeTraceID` should refer to an original `schemeUniqueTransactionID` provided in an earlier payment (not necessarily processed by Adyen). A `schemeTraceId` is typically available for authorization adjustments or recurring payments.
 	SchemeTraceId *string `json:"schemeTraceId,omitempty"`
 	// The unique identifier created by the scheme. This ID can be alphanumeric or numeric depending on the scheme.
-	SchemeUniqueTransactionId *string `json:"schemeUniqueTransactionId,omitempty"`
-	ThreeDSecure *ThreeDSecure `json:"threeDSecure,omitempty"`
+	SchemeUniqueTransactionId *string       `json:"schemeUniqueTransactionId,omitempty"`
+	ThreeDSecure              *ThreeDSecure `json:"threeDSecure,omitempty"`
 	// **issuedCard**
 	Type *string `json:"type,omitempty"`
 	// The evaluation of the validation facts. See [validation checks](https://docs.adyen.com/issuing/validation-checks) for more information.
@@ -346,7 +347,7 @@ func (o *IssuedCard) SetValidationFacts(v []TransferNotificationValidationFact) 
 }
 
 func (o IssuedCard) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -421,32 +422,30 @@ func (v *NullableIssuedCard) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *IssuedCard) isValidPanEntryMode() bool {
-    var allowedEnumValues = []string{ "chip", "cof", "contactless", "ecommerce", "magstripe", "manual", "token" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetPanEntryMode() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"chip", "cof", "contactless", "ecommerce", "magstripe", "manual", "token"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetPanEntryMode() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *IssuedCard) isValidProcessingType() bool {
-    var allowedEnumValues = []string{ "atmWithdraw", "balanceInquiry", "ecommerce", "moto", "pos", "purchaseWithCashback", "recurring", "token" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetProcessingType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"atmWithdraw", "balanceInquiry", "ecommerce", "moto", "pos", "purchaseWithCashback", "recurring", "token"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetProcessingType() == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (o *IssuedCard) isValidType() bool {
-    var allowedEnumValues = []string{ "issuedCard" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetType() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"issuedCard"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetType() == allowed {
+			return true
+		}
+	}
+	return false
 }
-
