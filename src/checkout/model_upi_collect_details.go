@@ -20,13 +20,15 @@ var _ common.MappedNullable = &UpiCollectDetails{}
 // UpiCollectDetails struct for UpiCollectDetails
 type UpiCollectDetails struct {
 	// The sequence number for the debit. For example, send **2** if this is the second debit for the subscription. The sequence number is included in the notification sent to the shopper.
-	BillingSequenceNumber string `json:"billingSequenceNumber"`
+	BillingSequenceNumber *string `json:"billingSequenceNumber,omitempty"`
 	// The checkout attempt identifier.
 	CheckoutAttemptId *string `json:"checkoutAttemptId,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
 	// Deprecated since Adyen Checkout API v49
 	// Use `storedPaymentMethodId` instead.
 	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
+	// Base64-encoded JSON object containing SDK related parameters required by the SDK
+	SdkData *string `json:"sdkData,omitempty"`
 	// The `shopperNotificationReference` returned in the response when you requested to notify the shopper. Used for recurring payment only.
 	ShopperNotificationReference *string `json:"shopperNotificationReference,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
@@ -41,9 +43,8 @@ type UpiCollectDetails struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpiCollectDetails(billingSequenceNumber string, type_ string) *UpiCollectDetails {
+func NewUpiCollectDetails(type_ string) *UpiCollectDetails {
 	this := UpiCollectDetails{}
-	this.BillingSequenceNumber = billingSequenceNumber
 	this.Type = type_
 	return &this
 }
@@ -58,28 +59,36 @@ func NewUpiCollectDetailsWithDefaults() *UpiCollectDetails {
 	return &this
 }
 
-// GetBillingSequenceNumber returns the BillingSequenceNumber field value
+// GetBillingSequenceNumber returns the BillingSequenceNumber field value if set, zero value otherwise.
 func (o *UpiCollectDetails) GetBillingSequenceNumber() string {
-	if o == nil {
+	if o == nil || common.IsNil(o.BillingSequenceNumber) {
 		var ret string
 		return ret
 	}
-
-	return o.BillingSequenceNumber
+	return *o.BillingSequenceNumber
 }
 
-// GetBillingSequenceNumberOk returns a tuple with the BillingSequenceNumber field value
+// GetBillingSequenceNumberOk returns a tuple with the BillingSequenceNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpiCollectDetails) GetBillingSequenceNumberOk() (*string, bool) {
-	if o == nil {
+	if o == nil || common.IsNil(o.BillingSequenceNumber) {
 		return nil, false
 	}
-	return &o.BillingSequenceNumber, true
+	return o.BillingSequenceNumber, true
 }
 
-// SetBillingSequenceNumber sets field value
+// HasBillingSequenceNumber returns a boolean if a field has been set.
+func (o *UpiCollectDetails) HasBillingSequenceNumber() bool {
+	if o != nil && !common.IsNil(o.BillingSequenceNumber) {
+		return true
+	}
+
+	return false
+}
+
+// SetBillingSequenceNumber gets a reference to the given string and assigns it to the BillingSequenceNumber field.
 func (o *UpiCollectDetails) SetBillingSequenceNumber(v string) {
-	o.BillingSequenceNumber = v
+	o.BillingSequenceNumber = &v
 }
 
 // GetCheckoutAttemptId returns the CheckoutAttemptId field value if set, zero value otherwise.
@@ -150,6 +159,38 @@ func (o *UpiCollectDetails) HasRecurringDetailReference() bool {
 // Use `storedPaymentMethodId` instead.
 func (o *UpiCollectDetails) SetRecurringDetailReference(v string) {
 	o.RecurringDetailReference = &v
+}
+
+// GetSdkData returns the SdkData field value if set, zero value otherwise.
+func (o *UpiCollectDetails) GetSdkData() string {
+	if o == nil || common.IsNil(o.SdkData) {
+		var ret string
+		return ret
+	}
+	return *o.SdkData
+}
+
+// GetSdkDataOk returns a tuple with the SdkData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpiCollectDetails) GetSdkDataOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SdkData) {
+		return nil, false
+	}
+	return o.SdkData, true
+}
+
+// HasSdkData returns a boolean if a field has been set.
+func (o *UpiCollectDetails) HasSdkData() bool {
+	if o != nil && !common.IsNil(o.SdkData) {
+		return true
+	}
+
+	return false
+}
+
+// SetSdkData gets a reference to the given string and assigns it to the SdkData field.
+func (o *UpiCollectDetails) SetSdkData(v string) {
+	o.SdkData = &v
 }
 
 // GetShopperNotificationReference returns the ShopperNotificationReference field value if set, zero value otherwise.
@@ -282,12 +323,17 @@ func (o UpiCollectDetails) MarshalJSON() ([]byte, error) {
 
 func (o UpiCollectDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["billingSequenceNumber"] = o.BillingSequenceNumber
+	if !common.IsNil(o.BillingSequenceNumber) {
+		toSerialize["billingSequenceNumber"] = o.BillingSequenceNumber
+	}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
 	if !common.IsNil(o.RecurringDetailReference) {
 		toSerialize["recurringDetailReference"] = o.RecurringDetailReference
+	}
+	if !common.IsNil(o.SdkData) {
+		toSerialize["sdkData"] = o.SdkData
 	}
 	if !common.IsNil(o.ShopperNotificationReference) {
 		toSerialize["shopperNotificationReference"] = o.ShopperNotificationReference
