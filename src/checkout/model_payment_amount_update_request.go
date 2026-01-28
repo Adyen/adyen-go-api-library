@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the PaymentAmountUpdateRequest type satisfies the MappedNullable interface at compile time
@@ -19,8 +18,9 @@ var _ common.MappedNullable = &PaymentAmountUpdateRequest{}
 
 // PaymentAmountUpdateRequest struct for PaymentAmountUpdateRequest
 type PaymentAmountUpdateRequest struct {
-	Amount          Amount           `json:"amount"`
+	Amount Amount `json:"amount"`
 	ApplicationInfo *ApplicationInfo `json:"applicationInfo,omitempty"`
+	EnhancedSchemeData *EnhancedSchemeData `json:"enhancedSchemeData,omitempty"`
 	// The reason for the amount update. Possible values:  * **delayedCharge**  * **noShow**  * **installment**
 	IndustryUsage *string `json:"industryUsage,omitempty"`
 	// Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment). > This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Atome, Clearpay, Klarna, Ratepay, Walley, and Zip.
@@ -106,6 +106,38 @@ func (o *PaymentAmountUpdateRequest) HasApplicationInfo() bool {
 // SetApplicationInfo gets a reference to the given ApplicationInfo and assigns it to the ApplicationInfo field.
 func (o *PaymentAmountUpdateRequest) SetApplicationInfo(v ApplicationInfo) {
 	o.ApplicationInfo = &v
+}
+
+// GetEnhancedSchemeData returns the EnhancedSchemeData field value if set, zero value otherwise.
+func (o *PaymentAmountUpdateRequest) GetEnhancedSchemeData() EnhancedSchemeData {
+	if o == nil || common.IsNil(o.EnhancedSchemeData) {
+		var ret EnhancedSchemeData
+		return ret
+	}
+	return *o.EnhancedSchemeData
+}
+
+// GetEnhancedSchemeDataOk returns a tuple with the EnhancedSchemeData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentAmountUpdateRequest) GetEnhancedSchemeDataOk() (*EnhancedSchemeData, bool) {
+	if o == nil || common.IsNil(o.EnhancedSchemeData) {
+		return nil, false
+	}
+	return o.EnhancedSchemeData, true
+}
+
+// HasEnhancedSchemeData returns a boolean if a field has been set.
+func (o *PaymentAmountUpdateRequest) HasEnhancedSchemeData() bool {
+	if o != nil && !common.IsNil(o.EnhancedSchemeData) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnhancedSchemeData gets a reference to the given EnhancedSchemeData and assigns it to the EnhancedSchemeData field.
+func (o *PaymentAmountUpdateRequest) SetEnhancedSchemeData(v EnhancedSchemeData) {
+	o.EnhancedSchemeData = &v
 }
 
 // GetIndustryUsage returns the IndustryUsage field value if set, zero value otherwise.
@@ -261,7 +293,7 @@ func (o *PaymentAmountUpdateRequest) SetSplits(v []Split) {
 }
 
 func (o PaymentAmountUpdateRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -273,6 +305,9 @@ func (o PaymentAmountUpdateRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["amount"] = o.Amount
 	if !common.IsNil(o.ApplicationInfo) {
 		toSerialize["applicationInfo"] = o.ApplicationInfo
+	}
+	if !common.IsNil(o.EnhancedSchemeData) {
+		toSerialize["enhancedSchemeData"] = o.EnhancedSchemeData
 	}
 	if !common.IsNil(o.IndustryUsage) {
 		toSerialize["industryUsage"] = o.IndustryUsage
@@ -326,12 +361,14 @@ func (v *NullablePaymentAmountUpdateRequest) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *PaymentAmountUpdateRequest) isValidIndustryUsage() bool {
-	var allowedEnumValues = []string{"delayedCharge", "installment", "noShow"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetIndustryUsage() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "delayedCharge", "installment", "noShow" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetIndustryUsage() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

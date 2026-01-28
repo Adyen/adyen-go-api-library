@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the EcontextVoucherDetails type satisfies the MappedNullable interface at compile time
@@ -25,6 +24,8 @@ type EcontextVoucherDetails struct {
 	FirstName string `json:"firstName"`
 	// The shopper's last name.
 	LastName string `json:"lastName"`
+	// Base64-encoded JSON object containing SDK related parameters required by the SDK
+	SdkData *string `json:"sdkData,omitempty"`
 	// The shopper's email.
 	ShopperEmail string `json:"shopperEmail"`
 	// The shopper's contact number. It must have an international number format, for example **+31 20 779 1846**. Formats like **+31 (0)20 779 1846** or **0031 20 779 1846** are not accepted.
@@ -135,6 +136,38 @@ func (o *EcontextVoucherDetails) SetLastName(v string) {
 	o.LastName = v
 }
 
+// GetSdkData returns the SdkData field value if set, zero value otherwise.
+func (o *EcontextVoucherDetails) GetSdkData() string {
+	if o == nil || common.IsNil(o.SdkData) {
+		var ret string
+		return ret
+	}
+	return *o.SdkData
+}
+
+// GetSdkDataOk returns a tuple with the SdkData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EcontextVoucherDetails) GetSdkDataOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SdkData) {
+		return nil, false
+	}
+	return o.SdkData, true
+}
+
+// HasSdkData returns a boolean if a field has been set.
+func (o *EcontextVoucherDetails) HasSdkData() bool {
+	if o != nil && !common.IsNil(o.SdkData) {
+		return true
+	}
+
+	return false
+}
+
+// SetSdkData gets a reference to the given string and assigns it to the SdkData field.
+func (o *EcontextVoucherDetails) SetSdkData(v string) {
+	o.SdkData = &v
+}
+
 // GetShopperEmail returns the ShopperEmail field value
 func (o *EcontextVoucherDetails) GetShopperEmail() string {
 	if o == nil {
@@ -208,7 +241,7 @@ func (o *EcontextVoucherDetails) SetType(v string) {
 }
 
 func (o EcontextVoucherDetails) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -222,6 +255,9 @@ func (o EcontextVoucherDetails) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["firstName"] = o.FirstName
 	toSerialize["lastName"] = o.LastName
+	if !common.IsNil(o.SdkData) {
+		toSerialize["sdkData"] = o.SdkData
+	}
 	toSerialize["shopperEmail"] = o.ShopperEmail
 	toSerialize["telephoneNumber"] = o.TelephoneNumber
 	toSerialize["type"] = o.Type
@@ -264,12 +300,14 @@ func (v *NullableEcontextVoucherDetails) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *EcontextVoucherDetails) isValidType() bool {
-	var allowedEnumValues = []string{"econtext_seven_eleven", "econtext_online", "econtext", "econtext_stores", "econtext_atm"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "econtext_seven_eleven", "econtext_online", "econtext", "econtext_stores", "econtext_atm" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

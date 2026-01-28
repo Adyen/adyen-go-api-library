@@ -10,8 +10,7 @@ package checkout
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the MolPayDetails type satisfies the MappedNullable interface at compile time
@@ -23,6 +22,8 @@ type MolPayDetails struct {
 	CheckoutAttemptId *string `json:"checkoutAttemptId,omitempty"`
 	// The shopper's bank. Specify this with the issuer value that corresponds to this bank.
 	Issuer string `json:"issuer"`
+	// Base64-encoded JSON object containing SDK related parameters required by the SDK
+	SdkData *string `json:"sdkData,omitempty"`
 	// **molpay**
 	Type string `json:"type"`
 }
@@ -102,6 +103,38 @@ func (o *MolPayDetails) SetIssuer(v string) {
 	o.Issuer = v
 }
 
+// GetSdkData returns the SdkData field value if set, zero value otherwise.
+func (o *MolPayDetails) GetSdkData() string {
+	if o == nil || common.IsNil(o.SdkData) {
+		var ret string
+		return ret
+	}
+	return *o.SdkData
+}
+
+// GetSdkDataOk returns a tuple with the SdkData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MolPayDetails) GetSdkDataOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SdkData) {
+		return nil, false
+	}
+	return o.SdkData, true
+}
+
+// HasSdkData returns a boolean if a field has been set.
+func (o *MolPayDetails) HasSdkData() bool {
+	if o != nil && !common.IsNil(o.SdkData) {
+		return true
+	}
+
+	return false
+}
+
+// SetSdkData gets a reference to the given string and assigns it to the SdkData field.
+func (o *MolPayDetails) SetSdkData(v string) {
+	o.SdkData = &v
+}
+
 // GetType returns the Type field value
 func (o *MolPayDetails) GetType() string {
 	if o == nil {
@@ -127,7 +160,7 @@ func (o *MolPayDetails) SetType(v string) {
 }
 
 func (o MolPayDetails) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -140,6 +173,9 @@ func (o MolPayDetails) ToMap() (map[string]interface{}, error) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
 	toSerialize["issuer"] = o.Issuer
+	if !common.IsNil(o.SdkData) {
+		toSerialize["sdkData"] = o.SdkData
+	}
 	toSerialize["type"] = o.Type
 	return toSerialize, nil
 }
@@ -180,12 +216,14 @@ func (v *NullableMolPayDetails) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *MolPayDetails) isValidType() bool {
-	var allowedEnumValues = []string{"molpay_ebanking_fpx_MY", "molpay_ebanking_TH"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "molpay_ebanking_fpx_MY", "molpay_ebanking_TH" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

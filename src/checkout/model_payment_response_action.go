@@ -10,20 +10,21 @@ package checkout
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 	"fmt"
 )
 
 // PaymentResponseAction - Action to be taken for completing the payment.
 type PaymentResponseAction struct {
-	CheckoutAwaitAction                   *CheckoutAwaitAction
-	CheckoutBankTransferAction            *CheckoutBankTransferAction
+	CheckoutAwaitAction *CheckoutAwaitAction
+	CheckoutBankTransferAction *CheckoutBankTransferAction
 	CheckoutDelegatedAuthenticationAction *CheckoutDelegatedAuthenticationAction
-	CheckoutNativeRedirectAction          *CheckoutNativeRedirectAction
-	CheckoutQrCodeAction                  *CheckoutQrCodeAction
-	CheckoutRedirectAction                *CheckoutRedirectAction
-	CheckoutSDKAction                     *CheckoutSDKAction
-	CheckoutThreeDS2Action                *CheckoutThreeDS2Action
-	CheckoutVoucherAction                 *CheckoutVoucherAction
+	CheckoutNativeRedirectAction *CheckoutNativeRedirectAction
+	CheckoutQrCodeAction *CheckoutQrCodeAction
+	CheckoutRedirectAction *CheckoutRedirectAction
+	CheckoutSDKAction *CheckoutSDKAction
+	CheckoutThreeDS2Action *CheckoutThreeDS2Action
+	CheckoutVoucherAction *CheckoutVoucherAction
 }
 
 // CheckoutAwaitActionAsPaymentResponseAction is a convenience function that returns CheckoutAwaitAction wrapped in PaymentResponseAction
@@ -89,6 +90,7 @@ func CheckoutVoucherActionAsPaymentResponseAction(v *CheckoutVoucherAction) Paym
 	}
 }
 
+
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *PaymentResponseAction) UnmarshalJSON(data []byte) error {
 	var err error
@@ -99,7 +101,7 @@ func (dst *PaymentResponseAction) UnmarshalJSON(data []byte) error {
 		jsonCheckoutAwaitAction, _ := json.Marshal(dst.CheckoutAwaitAction)
 		if string(jsonCheckoutAwaitAction) == "{}" || !dst.CheckoutAwaitAction.isValidType() { // empty struct
 			dst.CheckoutAwaitAction = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -112,7 +114,7 @@ func (dst *PaymentResponseAction) UnmarshalJSON(data []byte) error {
 		jsonCheckoutBankTransferAction, _ := json.Marshal(dst.CheckoutBankTransferAction)
 		if string(jsonCheckoutBankTransferAction) == "{}" || !dst.CheckoutBankTransferAction.isValidType() { // empty struct
 			dst.CheckoutBankTransferAction = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -125,7 +127,7 @@ func (dst *PaymentResponseAction) UnmarshalJSON(data []byte) error {
 		jsonCheckoutDelegatedAuthenticationAction, _ := json.Marshal(dst.CheckoutDelegatedAuthenticationAction)
 		if string(jsonCheckoutDelegatedAuthenticationAction) == "{}" || !dst.CheckoutDelegatedAuthenticationAction.isValidType() { // empty struct
 			dst.CheckoutDelegatedAuthenticationAction = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -138,7 +140,7 @@ func (dst *PaymentResponseAction) UnmarshalJSON(data []byte) error {
 		jsonCheckoutNativeRedirectAction, _ := json.Marshal(dst.CheckoutNativeRedirectAction)
 		if string(jsonCheckoutNativeRedirectAction) == "{}" || !dst.CheckoutNativeRedirectAction.isValidType() { // empty struct
 			dst.CheckoutNativeRedirectAction = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -151,7 +153,7 @@ func (dst *PaymentResponseAction) UnmarshalJSON(data []byte) error {
 		jsonCheckoutQrCodeAction, _ := json.Marshal(dst.CheckoutQrCodeAction)
 		if string(jsonCheckoutQrCodeAction) == "{}" || !dst.CheckoutQrCodeAction.isValidType() { // empty struct
 			dst.CheckoutQrCodeAction = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -164,7 +166,7 @@ func (dst *PaymentResponseAction) UnmarshalJSON(data []byte) error {
 		jsonCheckoutRedirectAction, _ := json.Marshal(dst.CheckoutRedirectAction)
 		if string(jsonCheckoutRedirectAction) == "{}" || !dst.CheckoutRedirectAction.isValidType() { // empty struct
 			dst.CheckoutRedirectAction = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -177,7 +179,7 @@ func (dst *PaymentResponseAction) UnmarshalJSON(data []byte) error {
 		jsonCheckoutSDKAction, _ := json.Marshal(dst.CheckoutSDKAction)
 		if string(jsonCheckoutSDKAction) == "{}" || !dst.CheckoutSDKAction.isValidType() { // empty struct
 			dst.CheckoutSDKAction = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -190,7 +192,7 @@ func (dst *PaymentResponseAction) UnmarshalJSON(data []byte) error {
 		jsonCheckoutThreeDS2Action, _ := json.Marshal(dst.CheckoutThreeDS2Action)
 		if string(jsonCheckoutThreeDS2Action) == "{}" || !dst.CheckoutThreeDS2Action.isValidType() { // empty struct
 			dst.CheckoutThreeDS2Action = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -203,7 +205,7 @@ func (dst *PaymentResponseAction) UnmarshalJSON(data []byte) error {
 		jsonCheckoutVoucherAction, _ := json.Marshal(dst.CheckoutVoucherAction)
 		if string(jsonCheckoutVoucherAction) == "{}" || !dst.CheckoutVoucherAction.isValidType() { // empty struct
 			dst.CheckoutVoucherAction = nil
-		} else {
+        } else {
 			match++
 		}
 	} else {
@@ -272,7 +274,7 @@ func (src PaymentResponseAction) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *PaymentResponseAction) GetActualInstance() interface{} {
+func (obj *PaymentResponseAction) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
@@ -351,3 +353,5 @@ func (v *NullablePaymentResponseAction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
