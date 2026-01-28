@@ -10,10 +10,11 @@ package capital
 
 import (
 	"context"
-    "net/http"
-    "net/url"
-    "strings"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+	"net/http"
+	"net/url"
+	"strings"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // GrantsApi service
@@ -23,7 +24,6 @@ type GrantsApi common.Service
 type GrantsApiGetAllGrantDisbursementsInput struct {
 	grantId string
 }
-
 
 /*
 Prepare a request for GetAllGrantDisbursements
@@ -46,26 +46,24 @@ Returns the disbursements of a specified grant.
 @return Disbursements, *http.Response, error
 */
 func (a *GrantsApi) GetAllGrantDisbursements(ctx context.Context, r GrantsApiGetAllGrantDisbursementsInput) (Disbursements, *http.Response, error) {
-    res := &Disbursements{}
+	res := &Disbursements{}
 	path := "/grants/{grantId}/disbursements"
-    path = strings.Replace(path, "{"+"grantId"+"}", url.PathEscape(common.ParameterValueToString(r.grantId, "grantId")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodGet,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"grantId"+"}", url.PathEscape(common.ParameterValueToString(r.grantId, "grantId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by GrantsApi.GetAllGrants
 type GrantsApiGetAllGrantsInput struct {
@@ -78,15 +76,13 @@ func (r GrantsApiGetAllGrantsInput) CounterpartyAccountHolderId(counterpartyAcco
 	return r
 }
 
-
 /*
 Prepare a request for GetAllGrants
 
 @return GrantsApiGetAllGrantsInput
 */
 func (a *GrantsApi) GetAllGrantsInput() GrantsApiGetAllGrantsInput {
-	return GrantsApiGetAllGrantsInput{
-	}
+	return GrantsApiGetAllGrantsInput{}
 }
 
 /*
@@ -99,34 +95,31 @@ Returns a list of all the grants of a specific account holder.
 @return Grants, *http.Response, error
 */
 func (a *GrantsApi) GetAllGrants(ctx context.Context, r GrantsApiGetAllGrantsInput) (Grants, *http.Response, error) {
-    res := &Grants{}
+	res := &Grants{}
 	path := "/grants"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    if r.counterpartyAccountHolderId != nil {
-        common.ParameterAddToQuery(queryParams, "counterpartyAccountHolderId", r.counterpartyAccountHolderId, "")
-    }
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodGet,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.counterpartyAccountHolderId != nil {
+		common.ParameterAddToQuery(queryParams, "counterpartyAccountHolderId", r.counterpartyAccountHolderId, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by GrantsApi.GetGrant
 type GrantsApiGetGrantInput struct {
 	grantId string
 }
-
 
 /*
 Prepare a request for GetGrant
@@ -149,33 +142,30 @@ Returns the details of the specified grant.
 @return Grant, *http.Response, error
 */
 func (a *GrantsApi) GetGrant(ctx context.Context, r GrantsApiGetGrantInput) (Grant, *http.Response, error) {
-    res := &Grant{}
+	res := &Grant{}
 	path := "/grants/{grantId}"
-    path = strings.Replace(path, "{"+"grantId"+"}", url.PathEscape(common.ParameterValueToString(r.grantId, "grantId")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodGet,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"grantId"+"}", url.PathEscape(common.ParameterValueToString(r.grantId, "grantId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by GrantsApi.GetGrantDisbursement
 type GrantsApiGetGrantDisbursementInput struct {
-	grantId string
+	grantId        string
 	disbursementId string
 }
-
 
 /*
 Prepare a request for GetGrantDisbursement
@@ -184,7 +174,7 @@ Prepare a request for GetGrantDisbursement
 */
 func (a *GrantsApi) GetGrantDisbursementInput(grantId string, disbursementId string) GrantsApiGetGrantDisbursementInput {
 	return GrantsApiGetGrantDisbursementInput{
-		grantId: grantId,
+		grantId:        grantId,
 		disbursementId: disbursementId,
 	}
 }
@@ -199,27 +189,25 @@ Returns the details of a disbursement specified in the path.
 @return Disbursement, *http.Response, error
 */
 func (a *GrantsApi) GetGrantDisbursement(ctx context.Context, r GrantsApiGetGrantDisbursementInput) (Disbursement, *http.Response, error) {
-    res := &Disbursement{}
+	res := &Disbursement{}
 	path := "/grants/{grantId}/disbursements/{disbursementId}"
-    path = strings.Replace(path, "{"+"grantId"+"}", url.PathEscape(common.ParameterValueToString(r.grantId, "grantId")), -1)
-    path = strings.Replace(path, "{"+"disbursementId"+"}", url.PathEscape(common.ParameterValueToString(r.disbursementId, "disbursementId")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodGet,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"grantId"+"}", url.PathEscape(common.ParameterValueToString(r.grantId, "grantId")), -1)
+	path = strings.Replace(path, "{"+"disbursementId"+"}", url.PathEscape(common.ParameterValueToString(r.disbursementId, "disbursementId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by GrantsApi.RequestGrant
 type GrantsApiRequestGrantInput struct {
@@ -231,15 +219,13 @@ func (r GrantsApiRequestGrantInput) GrantInfo(grantInfo GrantInfo) GrantsApiRequ
 	return r
 }
 
-
 /*
 Prepare a request for RequestGrant
 
 @return GrantsApiRequestGrantInput
 */
 func (a *GrantsApi) RequestGrantInput() GrantsApiRequestGrantInput {
-	return GrantsApiRequestGrantInput{
-	}
+	return GrantsApiRequestGrantInput{}
 }
 
 /*
@@ -252,30 +238,28 @@ Make a request for a grant on behalf of an account holder.
 @return Grant, *http.Response, error
 */
 func (a *GrantsApi) RequestGrant(ctx context.Context, r GrantsApiRequestGrantInput) (Grant, *http.Response, error) {
-    res := &Grant{}
+	res := &Grant{}
 	path := "/grants"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.grantInfo,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.grantInfo,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by GrantsApi.UpdateGrantDisbursement
 type GrantsApiUpdateGrantDisbursementInput struct {
-	grantId string
-	disbursementId string
+	grantId                string
+	disbursementId         string
 	disbursementInfoUpdate *DisbursementInfoUpdate
 }
 
@@ -284,7 +268,6 @@ func (r GrantsApiUpdateGrantDisbursementInput) DisbursementInfoUpdate(disburseme
 	return r
 }
 
-
 /*
 Prepare a request for UpdateGrantDisbursement
 @param grantId The unique identifier of the grant reference.@param disbursementId The unique identifier of the disbursement.
@@ -292,7 +275,7 @@ Prepare a request for UpdateGrantDisbursement
 */
 func (a *GrantsApi) UpdateGrantDisbursementInput(grantId string, disbursementId string) GrantsApiUpdateGrantDisbursementInput {
 	return GrantsApiUpdateGrantDisbursementInput{
-		grantId: grantId,
+		grantId:        grantId,
 		disbursementId: disbursementId,
 	}
 }
@@ -307,24 +290,22 @@ Update the percentage of your user's net income that is deducted for repaying th
 @return Disbursement, *http.Response, error
 */
 func (a *GrantsApi) UpdateGrantDisbursement(ctx context.Context, r GrantsApiUpdateGrantDisbursementInput) (Disbursement, *http.Response, error) {
-    res := &Disbursement{}
+	res := &Disbursement{}
 	path := "/grants/{grantId}/disbursements/{disbursementId}"
-    path = strings.Replace(path, "{"+"grantId"+"}", url.PathEscape(common.ParameterValueToString(r.grantId, "grantId")), -1)
-    path = strings.Replace(path, "{"+"disbursementId"+"}", url.PathEscape(common.ParameterValueToString(r.disbursementId, "disbursementId")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.disbursementInfoUpdate,
-        res,
-        http.MethodPatch,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"grantId"+"}", url.PathEscape(common.ParameterValueToString(r.grantId, "grantId")), -1)
+	path = strings.Replace(path, "{"+"disbursementId"+"}", url.PathEscape(common.ParameterValueToString(r.disbursementId, "disbursementId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.disbursementInfoUpdate,
+		res,
+		http.MethodPatch,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-

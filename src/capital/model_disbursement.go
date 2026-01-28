@@ -10,7 +10,8 @@ package capital
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the Disbursement type satisfies the MappedNullable interface at compile time
@@ -20,17 +21,17 @@ var _ common.MappedNullable = &Disbursement{}
 type Disbursement struct {
 	// The unique identifier of the account holder that received the disbursement.
 	AccountHolderId string `json:"accountHolderId"`
-	Amount Amount `json:"amount"`
+	Amount          Amount `json:"amount"`
 	// The unique identifier of the balance account that received the disbursement.
-	BalanceAccountId string `json:"balanceAccountId"`
-	Balances Balance `json:"balances"`
-	Fee Fee `json:"fee"`
+	BalanceAccountId string  `json:"balanceAccountId"`
+	Balances         Balance `json:"balances"`
+	Fee              Fee     `json:"fee"`
 	// Contains information about the accounts that Adyen uses to collect funds related to repayments.
 	FundsCollections []FundsCollection `json:"fundsCollections,omitempty"`
 	// The unique identifier of the grant related to the disbursement.
 	GrantId string `json:"grantId"`
 	// The unique identifier of the disbursement.
-	Id string `json:"id"`
+	Id        string                `json:"id"`
 	Repayment DisbursementRepayment `json:"repayment"`
 }
 
@@ -284,7 +285,7 @@ func (o *Disbursement) SetRepayment(v DisbursementRepayment) {
 }
 
 func (o Disbursement) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -342,6 +343,3 @@ func (v *NullableDisbursement) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

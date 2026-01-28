@@ -10,7 +10,6 @@ package capital
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
 	"fmt"
 )
 
@@ -19,13 +18,13 @@ type AdditionalBankIdentificationTypes string
 
 // List of AdditionalBankIdentificationTypes
 const (
-	AU_BSB_CODE AdditionalBankIdentificationTypes = "auBsbCode"
-	CA_ROUTING_NUMBER AdditionalBankIdentificationTypes = "caRoutingNumber"
-	GB_SORT_CODE AdditionalBankIdentificationTypes = "gbSortCode"
-	HK_BANK_CODE AdditionalBankIdentificationTypes = "hkBankCode"
-	JP_ZENGIN_CODE AdditionalBankIdentificationTypes = "jpZenginCode"
+	AU_BSB_CODE         AdditionalBankIdentificationTypes = "auBsbCode"
+	CA_ROUTING_NUMBER   AdditionalBankIdentificationTypes = "caRoutingNumber"
+	GB_SORT_CODE        AdditionalBankIdentificationTypes = "gbSortCode"
+	HK_BANK_CODE        AdditionalBankIdentificationTypes = "hkBankCode"
+	JP_ZENGIN_CODE      AdditionalBankIdentificationTypes = "jpZenginCode"
 	NZ_BANK_BRANCH_CODE AdditionalBankIdentificationTypes = "nzBankBranchCode"
-	US_ROUTING_NUMBER AdditionalBankIdentificationTypes = "usRoutingNumber"
+	US_ROUTING_NUMBER   AdditionalBankIdentificationTypes = "usRoutingNumber"
 )
 
 // All allowed values of AdditionalBankIdentificationTypes enum
@@ -117,4 +116,3 @@ func (v *NullableAdditionalBankIdentificationTypes) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

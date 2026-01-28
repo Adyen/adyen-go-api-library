@@ -10,7 +10,6 @@ package capital
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
 	"fmt"
 )
 
@@ -20,7 +19,7 @@ type FundsCollectionType string
 // List of FundsCollectionType
 const (
 	UNSCHEDULED_REPAYMENT FundsCollectionType = "UnscheduledRepayment"
-	REVOCATION FundsCollectionType = "Revocation"
+	REVOCATION            FundsCollectionType = "Revocation"
 )
 
 // All allowed values of FundsCollectionType enum
@@ -107,4 +106,3 @@ func (v *NullableFundsCollectionType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
