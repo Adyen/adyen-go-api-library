@@ -10,7 +10,8 @@ package management
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the Refunds type satisfies the MappedNullable interface at compile time
@@ -18,7 +19,7 @@ var _ common.MappedNullable = &Refunds{}
 
 // Refunds struct for Refunds
 type Refunds struct {
-	Referenced *Referenced `json:"referenced,omitempty"`
+	Referenced   *Referenced   `json:"referenced,omitempty"`
 	Unreferenced *Unreferenced `json:"unreferenced,omitempty"`
 }
 
@@ -104,7 +105,7 @@ func (o *Refunds) SetUnreferenced(v Unreferenced) {
 }
 
 func (o Refunds) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,6 +158,3 @@ func (v *NullableRefunds) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

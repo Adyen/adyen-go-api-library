@@ -10,7 +10,8 @@ package management
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the GivexInfo type satisfies the MappedNullable interface at compile time
@@ -146,7 +147,7 @@ func (o *GivexInfo) SetUsername(v string) {
 }
 
 func (o GivexInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -198,14 +199,12 @@ func (v *NullableGivexInfo) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
 func (o *GivexInfo) isValidPaymentFlow() bool {
-    var allowedEnumValues = []string{ "Ecommerce", "POS" }
-    for _, allowed := range allowedEnumValues {
-        if o.GetPaymentFlow() == allowed {
-            return true
-        }
-    }
-    return false
+	var allowedEnumValues = []string{"Ecommerce", "POS"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetPaymentFlow() == allowed {
+			return true
+		}
+	}
+	return false
 }
-
