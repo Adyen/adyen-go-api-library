@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the SourceOfFunds type satisfies the MappedNullable interface at compile time
@@ -20,8 +19,8 @@ var _ common.MappedNullable = &SourceOfFunds{}
 // SourceOfFunds struct for SourceOfFunds
 type SourceOfFunds struct {
 	// Indicates whether the funds are coming from transactions processed by Adyen. If **false**, the `type` is required.
-	AdyenProcessedFunds bool    `json:"adyenProcessedFunds"`
-	Amount              *Amount `json:"amount,omitempty"`
+	AdyenProcessedFunds bool `json:"adyenProcessedFunds"`
+	Amount *Amount `json:"amount,omitempty"`
 	// The number of months that the asset has been in possession of the user.  For example, if the source of funds is of type **cryptocurrencyIncome** then `assetMonthsHeld` is the number of months the user has owned the cryptocurrency.
 	AssetMonthsHeld *int32 `json:"assetMonthsHeld,omitempty"`
 	// Required if `type` is **cryptocurrencyIncome**. The cryptocurrency exchange where the funds were acquired.
@@ -40,7 +39,7 @@ type SourceOfFunds struct {
 	Purpose *string `json:"purpose,omitempty"`
 	// Required if `type` is **donations** or **inheritance**. The relationship of the originator of the funds to the recipient.
 	Relationship *string `json:"relationship,omitempty"`
-	// The type of the source of funds.    Possible values: *  **business** *  **employment** *  **donations** *  **inheritance** *  **financialAid** *  **rentalIncome** *  **dividendIncome** *  **royaltyIncome** *  **thirdPartyFunding** *  **pensionIncome** *  **insuranceSettlement** *  **cryptocurrencyIncome** *  **assetSale** *  **loans** *  **gamblingWinnings**
+	// The type of the source of funds.    Possible values: *  **business** *  **employment** *  **donations** *  **inheritance** *  **financialAid** *  **rentalIncome** *  **dividendIncome** *  **royaltyIncome** *  **thirdPartyFunding** *  **pensionIncome** *  **insuranceSettlement** *  **cryptocurrencyIncome** *  **assetSale** *  **loans** *  **gamblingWinnings**  
 	Type *string `json:"type,omitempty"`
 	// Required if `type` is **gamblingWinnings**. The location of the gambling site for the winnings.  For example, if the source of funds is online gambling, provide the website of the gambling company.
 	Website *string `json:"website,omitempty"`
@@ -473,7 +472,7 @@ func (o *SourceOfFunds) SetWebsite(v string) {
 }
 
 func (o SourceOfFunds) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -558,12 +557,14 @@ func (v *NullableSourceOfFunds) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *SourceOfFunds) isValidType() bool {
-	var allowedEnumValues = []string{"business", "employment", "donations", "inheritance", "financialAid", "rentalIncome", "dividendIncome", "royaltyIncome", "thirdPartyFunding", "pensionIncome", "insuranceSettlement", "cryptocurrencyIncome", "assetSale", "loans", "gamblingWinnings"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "business", "employment", "donations", "inheritance", "financialAid", "rentalIncome", "dividendIncome", "royaltyIncome", "thirdPartyFunding", "pensionIncome", "insuranceSettlement", "cryptocurrencyIncome", "assetSale", "loans", "gamblingWinnings" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

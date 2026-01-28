@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the Organization type satisfies the MappedNullable interface at compile time
@@ -23,7 +22,7 @@ type Organization struct {
 	CountryOfGoverningLaw *string `json:"countryOfGoverningLaw,omitempty"`
 	// The date when the organization was incorporated in YYYY-MM-DD format.
 	DateOfIncorporation *string `json:"dateOfIncorporation,omitempty"`
-	// Required if the value of `statusOfLegalProceeding` is one of the following:  **underJudicialAdministration**, **bankruptcyInsolvency**, **otherLegalMeasures**  The date at which a legal proceeding was initiated, in **YYYY-MM-DD** format. Example: **2000-02-12**
+	// Required if the value of `statusOfLegalProceeding` is one of the following:  **underJudicialAdministration**, **bankruptcyInsolvency**, **otherLegalMeasures**  The date at which a legal proceeding was initiated, in **YYYY-MM-DD** format. Example: **2000-02-12** 
 	DateOfInitiationOfLegalProceeding *string `json:"dateOfInitiationOfLegalProceeding,omitempty"`
 	// Your description for the organization.
 	Description *string `json:"description,omitempty"`
@@ -31,7 +30,7 @@ type Organization struct {
 	DoingBusinessAs *string `json:"doingBusinessAs,omitempty"`
 	// Set this to **true** if the organization or legal arrangement does not have a `Doing business as` name.
 	DoingBusinessAsAbsent common.NullableBool `json:"doingBusinessAsAbsent,omitempty"`
-	// The sector of the economy the legal entity operates within, represented by a 2-4 digit code that may include a \".\". Example: 45.11  You can locate economic sector codes for your area by referencing codes defined by the NACE (Nomenclature of Economic Activities) used in the European Union.
+	// The sector of the economy the legal entity operates within, represented by a 2-4 digit code that may include a \".\". Example: 45.11  You can locate economic sector codes for your area by referencing codes defined by the NACE (Nomenclature of Economic Activities) used in the European Union. 
 	EconomicSector *string `json:"economicSector,omitempty"`
 	// The email address of the legal entity.
 	Email *string `json:"email,omitempty"`
@@ -43,31 +42,31 @@ type Organization struct {
 	HeadOfficeIndicator *bool `json:"headOfficeIndicator,omitempty"`
 	// The institutional sector the organization operates within.
 	InstitutionalSector *string `json:"institutionalSector,omitempty"`
-	// The type of business entity as defined in the national legal system. Use a legal form listed within the accepted legal forms compiled by the Central Bank of Europe.
+	// The type of business entity as defined in the national legal system. Use a legal form listed within the accepted legal forms compiled by the Central Bank of Europe. 
 	LegalForm *string `json:"legalForm,omitempty"`
 	// The organization's legal name.
-	LegalName                string       `json:"legalName"`
-	Phone                    *PhoneNumber `json:"phone,omitempty"`
-	PrincipalPlaceOfBusiness *Address     `json:"principalPlaceOfBusiness,omitempty"`
-	RegisteredAddress        Address      `json:"registeredAddress"`
+	LegalName string `json:"legalName"`
+	Phone *PhoneNumber `json:"phone,omitempty"`
+	PrincipalPlaceOfBusiness *Address `json:"principalPlaceOfBusiness,omitempty"`
+	RegisteredAddress Address `json:"registeredAddress"`
 	// The organization's registration number.
 	RegistrationNumber *string `json:"registrationNumber,omitempty"`
 	// Set this to **true** if the organization does not have a registration number available. Only applicable for organizations in New Zealand, and incorporated partnerships and government organizations in Australia.
 	RegistrationNumberAbsent common.NullableBool `json:"registrationNumberAbsent,omitempty"`
-	// The status of any current or past legal action taken against the legal entity.  Possible values: **noLegalActionsTaken**, **underJudicialAdministration**, **bankruptcyInsolvency**, **otherLegalMeasures**  If the value of this field is **noLegalActionsTaken**, then `dateOfInitiationOfLegalProceeding` is not required. Otherwise, it is required.
-	StatusOfLegalProceeding *string    `json:"statusOfLegalProceeding,omitempty"`
-	StockData               *StockData `json:"stockData,omitempty"`
-	Support                 *Support   `json:"support,omitempty"`
+	// The status of any current or past legal action taken against the legal entity.  Possible values: **noLegalActionsTaken**, **underJudicialAdministration**, **bankruptcyInsolvency**, **otherLegalMeasures**  If the value of this field is **noLegalActionsTaken**, then `dateOfInitiationOfLegalProceeding` is not required. Otherwise, it is required. 
+	StatusOfLegalProceeding *string `json:"statusOfLegalProceeding,omitempty"`
+	StockData *StockData `json:"stockData,omitempty"`
+	Support *Support `json:"support,omitempty"`
 	// The tax information of the organization.
-	TaxInformation             []TaxInformation            `json:"taxInformation,omitempty"`
+	TaxInformation []TaxInformation `json:"taxInformation,omitempty"`
 	TaxReportingClassification *TaxReportingClassification `json:"taxReportingClassification,omitempty"`
 	// Type of organization.  Possible values: **associationIncorporated**, **governmentalOrganization**, **listedPublicCompany**, **nonProfit**, **partnershipIncorporated**, **privateCompany**.
 	Type *string `json:"type,omitempty"`
 	// The reason the organization has not provided a VAT number.  Possible values: **industryExemption**, **belowTaxThreshold**.
 	VatAbsenceReason *string `json:"vatAbsenceReason,omitempty"`
 	// The organization's VAT number.
-	VatNumber *string  `json:"vatNumber,omitempty"`
-	WebData   *WebData `json:"webData,omitempty"`
+	VatNumber *string `json:"vatNumber,omitempty"`
+	WebData *WebData `json:"webData,omitempty"`
 }
 
 // NewOrganization instantiates a new Organization object
@@ -281,7 +280,6 @@ func (o *Organization) HasDoingBusinessAsAbsent() bool {
 func (o *Organization) SetDoingBusinessAsAbsent(v bool) {
 	o.DoingBusinessAsAbsent.Set(&v)
 }
-
 // SetDoingBusinessAsAbsentNil sets the value for DoingBusinessAsAbsent to be an explicit nil
 func (o *Organization) SetDoingBusinessAsAbsentNil() {
 	o.DoingBusinessAsAbsent.Set(nil)
@@ -692,7 +690,6 @@ func (o *Organization) HasRegistrationNumberAbsent() bool {
 func (o *Organization) SetRegistrationNumberAbsent(v bool) {
 	o.RegistrationNumberAbsent.Set(&v)
 }
-
 // SetRegistrationNumberAbsentNil sets the value for RegistrationNumberAbsent to be an explicit nil
 func (o *Organization) SetRegistrationNumberAbsentNil() {
 	o.RegistrationNumberAbsent.Set(nil)
@@ -992,7 +989,7 @@ func (o *Organization) SetWebData(v WebData) {
 }
 
 func (o Organization) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -1120,39 +1117,41 @@ func (v *NullableOrganization) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+
 func (o *Organization) isValidInstitutionalSector() bool {
-	var allowedEnumValues = []string{"nonFinancialCorporation", "centralBank", "creditInstitutions", "depositTakingCorporations", "moneyMarketFunds", "nonMMFInvestmentFunds", "financialVehicleCorporation", "otherFinancialIntermediaries", "financialAuxiliaries", "captiveFinancialInstitutionsAndMoneyLenders", "insuranceCorporations", "pensionFunds", "centralGovernment", "stateGovernment", "localGovernment", "socialSecurityFunds", "nonProfitInstitutionsServingHouseholds"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetInstitutionalSector() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "nonFinancialCorporation", "centralBank", "creditInstitutions", "depositTakingCorporations", "moneyMarketFunds", "nonMMFInvestmentFunds", "financialVehicleCorporation", "otherFinancialIntermediaries", "financialAuxiliaries", "captiveFinancialInstitutionsAndMoneyLenders", "insuranceCorporations", "pensionFunds", "centralGovernment", "stateGovernment", "localGovernment", "socialSecurityFunds", "nonProfitInstitutionsServingHouseholds" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetInstitutionalSector() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *Organization) isValidStatusOfLegalProceeding() bool {
-	var allowedEnumValues = []string{"noLegalActionsTaken", "underJudicialAdministration", "bankruptcyInsolvency", "otherLegalMeasures"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetStatusOfLegalProceeding() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "noLegalActionsTaken", "underJudicialAdministration", "bankruptcyInsolvency", "otherLegalMeasures" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetStatusOfLegalProceeding() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *Organization) isValidType() bool {
-	var allowedEnumValues = []string{"associationIncorporated", "governmentalOrganization", "listedPublicCompany", "nonProfit", "partnershipIncorporated", "privateCompany"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "associationIncorporated", "governmentalOrganization", "listedPublicCompany", "nonProfit", "partnershipIncorporated", "privateCompany" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetType() == allowed {
+            return true
+        }
+    }
+    return false
 }
 func (o *Organization) isValidVatAbsenceReason() bool {
-	var allowedEnumValues = []string{"industryExemption", "belowTaxThreshold"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetVatAbsenceReason() == allowed {
-			return true
-		}
-	}
-	return false
+    var allowedEnumValues = []string{ "industryExemption", "belowTaxThreshold" }
+    for _, allowed := range allowedEnumValues {
+        if o.GetVatAbsenceReason() == allowed {
+            return true
+        }
+    }
+    return false
 }
+

@@ -10,8 +10,7 @@ package legalentity
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the Support type satisfies the MappedNullable interface at compile time
@@ -19,8 +18,8 @@ var _ common.MappedNullable = &Support{}
 
 // Support struct for Support
 type Support struct {
-	// The support email address of the legal entity.
-	Email *string      `json:"email,omitempty"`
+	// The support email address of the legal entity. Required if you have a platform setup.
+	Email *string `json:"email,omitempty"`
 	Phone *PhoneNumber `json:"phone,omitempty"`
 }
 
@@ -106,7 +105,7 @@ func (o *Support) SetPhone(v PhoneNumber) {
 }
 
 func (o Support) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -159,3 +158,6 @@ func (v *NullableSupport) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
