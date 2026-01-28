@@ -21,6 +21,8 @@ var _ common.MappedNullable = &SepaDirectDebitDetails{}
 type SepaDirectDebitDetails struct {
 	// The checkout attempt identifier.
 	CheckoutAttemptId *string `json:"checkoutAttemptId,omitempty"`
+	// The date that the the shopper's bank account is charged.
+	DueDate *string `json:"dueDate,omitempty"`
 	// The International Bank Account Number (IBAN).
 	Iban string `json:"iban"`
 	// The name of the bank account holder.
@@ -29,6 +31,8 @@ type SepaDirectDebitDetails struct {
 	// Deprecated since Adyen Checkout API v49
 	// Use `storedPaymentMethodId` instead.
 	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
+	// Base64-encoded JSON object containing SDK related parameters required by the SDK
+	SdkData *string `json:"sdkData,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
 	StoredPaymentMethodId *string `json:"storedPaymentMethodId,omitempty"`
 	// The unique identifier of your user's verified transfer instrument, which you can use to top up their balance accounts.
@@ -90,6 +94,38 @@ func (o *SepaDirectDebitDetails) HasCheckoutAttemptId() bool {
 // SetCheckoutAttemptId gets a reference to the given string and assigns it to the CheckoutAttemptId field.
 func (o *SepaDirectDebitDetails) SetCheckoutAttemptId(v string) {
 	o.CheckoutAttemptId = &v
+}
+
+// GetDueDate returns the DueDate field value if set, zero value otherwise.
+func (o *SepaDirectDebitDetails) GetDueDate() string {
+	if o == nil || common.IsNil(o.DueDate) {
+		var ret string
+		return ret
+	}
+	return *o.DueDate
+}
+
+// GetDueDateOk returns a tuple with the DueDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SepaDirectDebitDetails) GetDueDateOk() (*string, bool) {
+	if o == nil || common.IsNil(o.DueDate) {
+		return nil, false
+	}
+	return o.DueDate, true
+}
+
+// HasDueDate returns a boolean if a field has been set.
+func (o *SepaDirectDebitDetails) HasDueDate() bool {
+	if o != nil && !common.IsNil(o.DueDate) {
+		return true
+	}
+
+	return false
+}
+
+// SetDueDate gets a reference to the given string and assigns it to the DueDate field.
+func (o *SepaDirectDebitDetails) SetDueDate(v string) {
+	o.DueDate = &v
 }
 
 // GetIban returns the Iban field value
@@ -176,6 +212,38 @@ func (o *SepaDirectDebitDetails) HasRecurringDetailReference() bool {
 // Use `storedPaymentMethodId` instead.
 func (o *SepaDirectDebitDetails) SetRecurringDetailReference(v string) {
 	o.RecurringDetailReference = &v
+}
+
+// GetSdkData returns the SdkData field value if set, zero value otherwise.
+func (o *SepaDirectDebitDetails) GetSdkData() string {
+	if o == nil || common.IsNil(o.SdkData) {
+		var ret string
+		return ret
+	}
+	return *o.SdkData
+}
+
+// GetSdkDataOk returns a tuple with the SdkData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SepaDirectDebitDetails) GetSdkDataOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SdkData) {
+		return nil, false
+	}
+	return o.SdkData, true
+}
+
+// HasSdkData returns a boolean if a field has been set.
+func (o *SepaDirectDebitDetails) HasSdkData() bool {
+	if o != nil && !common.IsNil(o.SdkData) {
+		return true
+	}
+
+	return false
+}
+
+// SetSdkData gets a reference to the given string and assigns it to the SdkData field.
+func (o *SepaDirectDebitDetails) SetSdkData(v string) {
+	o.SdkData = &v
 }
 
 // GetStoredPaymentMethodId returns the StoredPaymentMethodId field value if set, zero value otherwise.
@@ -287,10 +355,16 @@ func (o SepaDirectDebitDetails) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
+	if !common.IsNil(o.DueDate) {
+		toSerialize["dueDate"] = o.DueDate
+	}
 	toSerialize["iban"] = o.Iban
 	toSerialize["ownerName"] = o.OwnerName
 	if !common.IsNil(o.RecurringDetailReference) {
 		toSerialize["recurringDetailReference"] = o.RecurringDetailReference
+	}
+	if !common.IsNil(o.SdkData) {
+		toSerialize["sdkData"] = o.SdkData
 	}
 	if !common.IsNil(o.StoredPaymentMethodId) {
 		toSerialize["storedPaymentMethodId"] = o.StoredPaymentMethodId
