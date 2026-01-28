@@ -10,10 +10,13 @@ package balanceplatform
 
 import (
 	"context"
-    "net/http"
-    "net/url"
-    "strings"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+	"encoding/json"
+	"io/ioutil"
+	"net/http"
+	"net/url"
+	"strings"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // TransferLimitsBalanceAccountLevelApi service
@@ -21,9 +24,9 @@ type TransferLimitsBalanceAccountLevelApi common.Service
 
 // All parameters accepted by TransferLimitsBalanceAccountLevelApi.ApprovePendingTransferLimits
 type TransferLimitsBalanceAccountLevelApiApprovePendingTransferLimitsInput struct {
-	id string
+	id                          string
 	approveTransferLimitRequest *ApproveTransferLimitRequest
-	wWWAuthenticate *string
+	wWWAuthenticate             *string
 }
 
 func (r TransferLimitsBalanceAccountLevelApiApprovePendingTransferLimitsInput) ApproveTransferLimitRequest(approveTransferLimitRequest ApproveTransferLimitRequest) TransferLimitsBalanceAccountLevelApiApprovePendingTransferLimitsInput {
@@ -36,7 +39,6 @@ func (r TransferLimitsBalanceAccountLevelApiApprovePendingTransferLimitsInput) W
 	r.wWWAuthenticate = &wWWAuthenticate
 	return r
 }
-
 
 /*
 Prepare a request for ApprovePendingTransferLimits
@@ -54,70 +56,68 @@ ApprovePendingTransferLimits Approve pending transfer limits
 
 Approve transfer limits that are pending SCA authentication.
 
-
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TransferLimitsBalanceAccountLevelApiApprovePendingTransferLimitsInput - Request parameters, see ApprovePendingTransferLimitsInput
 @return *http.Response, error
 */
 func (a *TransferLimitsBalanceAccountLevelApi) ApprovePendingTransferLimits(ctx context.Context, r TransferLimitsBalanceAccountLevelApiApprovePendingTransferLimitsInput) (*http.Response, error) {
-    var res interface{}
+	var res interface{}
 	path := "/balanceAccounts/{id}/transferLimits/approve"
-    path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    if r.wWWAuthenticate != nil {
-        common.ParameterAddToHeaderOrQuery(headerParams, "WWW-Authenticate", r.wWWAuthenticate, "")
-    }
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.approveTransferLimitRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.wWWAuthenticate != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "WWW-Authenticate", r.wWWAuthenticate, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.approveTransferLimitRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-    if httpRes == nil {
-        return httpRes, err
-    }
+	if httpRes == nil {
+		return httpRes, err
+	}
 
-    var serviceError common.RestServiceError
-                        if httpRes.StatusCode == 401 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return httpRes, decodeError
-                            }
-                            return httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 404 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return httpRes, decodeError
-                            }
-                            return httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 422 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return httpRes, decodeError
-                            }
-                            return httpRes, serviceError
-                        }
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
+		return httpRes, serviceError
+	}
+	if httpRes.StatusCode == 404 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
+		return httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
+		return httpRes, serviceError
+	}
 
-    return httpRes, err
+	return httpRes, err
 }
-
 
 // All parameters accepted by TransferLimitsBalanceAccountLevelApi.CreateTransferLimit
 type TransferLimitsBalanceAccountLevelApiCreateTransferLimitInput struct {
-	id string
+	id                         string
 	createTransferLimitRequest *CreateTransferLimitRequest
-	wWWAuthenticate *string
+	wWWAuthenticate            *string
 }
 
 func (r TransferLimitsBalanceAccountLevelApiCreateTransferLimitInput) CreateTransferLimitRequest(createTransferLimitRequest CreateTransferLimitRequest) TransferLimitsBalanceAccountLevelApiCreateTransferLimitInput {
@@ -130,7 +130,6 @@ func (r TransferLimitsBalanceAccountLevelApiCreateTransferLimitInput) WWWAuthent
 	r.wWWAuthenticate = &wWWAuthenticate
 	return r
 }
-
 
 /*
 Prepare a request for CreateTransferLimit
@@ -148,71 +147,68 @@ CreateTransferLimit Create a transfer limit
 
 Create a transfer limit for your balance account using the unique `id` of your balance account.
 
-
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TransferLimitsBalanceAccountLevelApiCreateTransferLimitInput - Request parameters, see CreateTransferLimitInput
 @return TransferLimit, *http.Response, error
 */
 func (a *TransferLimitsBalanceAccountLevelApi) CreateTransferLimit(ctx context.Context, r TransferLimitsBalanceAccountLevelApiCreateTransferLimitInput) (TransferLimit, *http.Response, error) {
-    res := &TransferLimit{}
+	res := &TransferLimit{}
 	path := "/balanceAccounts/{id}/transferLimits"
-    path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    if r.wWWAuthenticate != nil {
-        common.ParameterAddToHeaderOrQuery(headerParams, "WWW-Authenticate", r.wWWAuthenticate, "")
-    }
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.createTransferLimitRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.wWWAuthenticate != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "WWW-Authenticate", r.wWWAuthenticate, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.createTransferLimitRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-    if httpRes == nil {
-        return *res, httpRes, err
-    }
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
-    var serviceError common.RestServiceError
-                        if httpRes.StatusCode == 400 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 401 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 422 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 400 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
 
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by TransferLimitsBalanceAccountLevelApi.DeletePendingTransferLimit
 type TransferLimitsBalanceAccountLevelApiDeletePendingTransferLimitInput struct {
-	id string
+	id              string
 	transferLimitId string
 }
-
 
 /*
 Prepare a request for DeletePendingTransferLimit
@@ -221,7 +217,7 @@ Prepare a request for DeletePendingTransferLimit
 */
 func (a *TransferLimitsBalanceAccountLevelApi) DeletePendingTransferLimitInput(id string, transferLimitId string) TransferLimitsBalanceAccountLevelApiDeletePendingTransferLimitInput {
 	return TransferLimitsBalanceAccountLevelApiDeletePendingTransferLimitInput{
-		id: id,
+		id:              id,
 		transferLimitId: transferLimitId,
 	}
 }
@@ -231,59 +227,57 @@ DeletePendingTransferLimit Delete a scheduled or pending transfer limit
 
 Delete a scheduled or pending transfer limit using its unique `transferLimitId`. You cannot delete an active limit.
 
-
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TransferLimitsBalanceAccountLevelApiDeletePendingTransferLimitInput - Request parameters, see DeletePendingTransferLimitInput
 @return *http.Response, error
 */
 func (a *TransferLimitsBalanceAccountLevelApi) DeletePendingTransferLimit(ctx context.Context, r TransferLimitsBalanceAccountLevelApiDeletePendingTransferLimitInput) (*http.Response, error) {
-    var res interface{}
+	var res interface{}
 	path := "/balanceAccounts/{id}/transferLimits/{transferLimitId}"
-    path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-    path = strings.Replace(path, "{"+"transferLimitId"+"}", url.PathEscape(common.ParameterValueToString(r.transferLimitId, "transferLimitId")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodDelete,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	path = strings.Replace(path, "{"+"transferLimitId"+"}", url.PathEscape(common.ParameterValueToString(r.transferLimitId, "transferLimitId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodDelete,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-    if httpRes == nil {
-        return httpRes, err
-    }
+	if httpRes == nil {
+		return httpRes, err
+	}
 
-    var serviceError common.RestServiceError
-                        if httpRes.StatusCode == 404 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return httpRes, decodeError
-                            }
-                            return httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 422 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return httpRes, decodeError
-                            }
-                            return httpRes, serviceError
-                        }
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 404 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
+		return httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return httpRes, decodeError
+		}
+		return httpRes, serviceError
+	}
 
-    return httpRes, err
+	return httpRes, err
 }
-
 
 // All parameters accepted by TransferLimitsBalanceAccountLevelApi.GetCurrentTransferLimits
 type TransferLimitsBalanceAccountLevelApiGetCurrentTransferLimitsInput struct {
-	id string
-	scope *Scope
+	id           string
+	scope        *Scope
 	transferType *TransferType
 }
 
@@ -298,7 +292,6 @@ func (r TransferLimitsBalanceAccountLevelApiGetCurrentTransferLimitsInput) Trans
 	r.transferType = &transferType
 	return r
 }
-
 
 /*
 Prepare a request for GetCurrentTransferLimits
@@ -316,66 +309,63 @@ GetCurrentTransferLimits Get all current transfer limits
 
 Get all transfer limits that currently apply to a balance account using the unique `id` of the balance account.
 
-
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TransferLimitsBalanceAccountLevelApiGetCurrentTransferLimitsInput - Request parameters, see GetCurrentTransferLimitsInput
 @return TransferLimitListResponse, *http.Response, error
 */
 func (a *TransferLimitsBalanceAccountLevelApi) GetCurrentTransferLimits(ctx context.Context, r TransferLimitsBalanceAccountLevelApiGetCurrentTransferLimitsInput) (TransferLimitListResponse, *http.Response, error) {
-    res := &TransferLimitListResponse{}
+	res := &TransferLimitListResponse{}
 	path := "/balanceAccounts/{id}/transferLimits/current"
-    path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    if r.scope != nil {
-        common.ParameterAddToQuery(queryParams, "scope", r.scope, "")
-    }
-    if r.transferType != nil {
-        common.ParameterAddToQuery(queryParams, "transferType", r.transferType, "")
-    }
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodGet,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.scope != nil {
+		common.ParameterAddToQuery(queryParams, "scope", r.scope, "")
+	}
+	if r.transferType != nil {
+		common.ParameterAddToQuery(queryParams, "transferType", r.transferType, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-    if httpRes == nil {
-        return *res, httpRes, err
-    }
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
-    var serviceError common.RestServiceError
-                        if httpRes.StatusCode == 404 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 422 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 404 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
 
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by TransferLimitsBalanceAccountLevelApi.GetSpecificTransferLimit
 type TransferLimitsBalanceAccountLevelApiGetSpecificTransferLimitInput struct {
-	id string
+	id              string
 	transferLimitId string
 }
-
 
 /*
 Prepare a request for GetSpecificTransferLimit
@@ -384,7 +374,7 @@ Prepare a request for GetSpecificTransferLimit
 */
 func (a *TransferLimitsBalanceAccountLevelApi) GetSpecificTransferLimitInput(id string, transferLimitId string) TransferLimitsBalanceAccountLevelApiGetSpecificTransferLimitInput {
 	return TransferLimitsBalanceAccountLevelApiGetSpecificTransferLimitInput{
-		id: id,
+		id:              id,
 		transferLimitId: transferLimitId,
 	}
 }
@@ -394,61 +384,59 @@ GetSpecificTransferLimit Get the details of a transfer limit
 
 Get the details of a transfer limit using its unique `transferLimitId`.
 
-
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TransferLimitsBalanceAccountLevelApiGetSpecificTransferLimitInput - Request parameters, see GetSpecificTransferLimitInput
 @return TransferLimit, *http.Response, error
 */
 func (a *TransferLimitsBalanceAccountLevelApi) GetSpecificTransferLimit(ctx context.Context, r TransferLimitsBalanceAccountLevelApiGetSpecificTransferLimitInput) (TransferLimit, *http.Response, error) {
-    res := &TransferLimit{}
+	res := &TransferLimit{}
 	path := "/balanceAccounts/{id}/transferLimits/{transferLimitId}"
-    path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-    path = strings.Replace(path, "{"+"transferLimitId"+"}", url.PathEscape(common.ParameterValueToString(r.transferLimitId, "transferLimitId")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodGet,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	path = strings.Replace(path, "{"+"transferLimitId"+"}", url.PathEscape(common.ParameterValueToString(r.transferLimitId, "transferLimitId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-    if httpRes == nil {
-        return *res, httpRes, err
-    }
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
-    var serviceError common.RestServiceError
-                        if httpRes.StatusCode == 404 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 422 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 404 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
 
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by TransferLimitsBalanceAccountLevelApi.GetTransferLimits
 type TransferLimitsBalanceAccountLevelApiGetTransferLimitsInput struct {
-	id string
-	scope *Scope
+	id           string
+	scope        *Scope
 	transferType *TransferType
-	status *LimitStatus
+	status       *LimitStatus
 }
 
 // The scope to which the transfer limit applies. Possible values: * **perTransaction**: you set a maximum amount for each transfer made from the balance account or balance platform. * **perDay**: you set a maximum total amount for all transfers made from the balance account or balance platform in a day.
@@ -469,7 +457,6 @@ func (r TransferLimitsBalanceAccountLevelApiGetTransferLimitsInput) Status(statu
 	return r
 }
 
-
 /*
 Prepare a request for GetTransferLimits
 @param id The unique identifier of the balance account.
@@ -486,59 +473,57 @@ GetTransferLimits Filter and view the transfer limits
 
 Filter and view the transfer limits configured for a balance account using the balance account's unique `id` and the available query parameters.
 
-
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r TransferLimitsBalanceAccountLevelApiGetTransferLimitsInput - Request parameters, see GetTransferLimitsInput
 @return TransferLimitListResponse, *http.Response, error
 */
 func (a *TransferLimitsBalanceAccountLevelApi) GetTransferLimits(ctx context.Context, r TransferLimitsBalanceAccountLevelApiGetTransferLimitsInput) (TransferLimitListResponse, *http.Response, error) {
-    res := &TransferLimitListResponse{}
+	res := &TransferLimitListResponse{}
 	path := "/balanceAccounts/{id}/transferLimits"
-    path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    if r.scope != nil {
-        common.ParameterAddToQuery(queryParams, "scope", r.scope, "")
-    }
-    if r.transferType != nil {
-        common.ParameterAddToQuery(queryParams, "transferType", r.transferType, "")
-    }
-    if r.status != nil {
-        common.ParameterAddToQuery(queryParams, "status", r.status, "")
-    }
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        nil,
-        res,
-        http.MethodGet,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.scope != nil {
+		common.ParameterAddToQuery(queryParams, "scope", r.scope, "")
+	}
+	if r.transferType != nil {
+		common.ParameterAddToQuery(queryParams, "transferType", r.transferType, "")
+	}
+	if r.status != nil {
+		common.ParameterAddToQuery(queryParams, "status", r.status, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodGet,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-    if httpRes == nil {
-        return *res, httpRes, err
-    }
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
-    var serviceError common.RestServiceError
-                        if httpRes.StatusCode == 404 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 422 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 404 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
 
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-

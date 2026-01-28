@@ -10,7 +10,8 @@ package balanceplatform
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the DeviceInfo type satisfies the MappedNullable interface at compile time
@@ -21,8 +22,8 @@ type DeviceInfo struct {
 	// The type of device used to provision the network token.
 	FormFactor *string `json:"formFactor,omitempty"`
 	// The operating system of the device used to provision the network token.
-	OsName *string `json:"osName,omitempty"`
-	Phone *PhoneInfo `json:"phone,omitempty"`
+	OsName *string    `json:"osName,omitempty"`
+	Phone  *PhoneInfo `json:"phone,omitempty"`
 }
 
 // NewDeviceInfo instantiates a new DeviceInfo object
@@ -139,7 +140,7 @@ func (o *DeviceInfo) SetPhone(v PhoneInfo) {
 }
 
 func (o DeviceInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,6 +196,3 @@ func (v *NullableDeviceInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

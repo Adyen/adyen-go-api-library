@@ -10,7 +10,8 @@ package balanceplatform
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the CardConfiguration type satisfies the MappedNullable interface at compile time
@@ -21,11 +22,11 @@ type CardConfiguration struct {
 	// The activation label attached to the card that contains the activation instructions.  This field overrides the activation label design ID defined in the card configuration profile.
 	Activation *string `json:"activation,omitempty"`
 	// Your app's URL, if you want to activate cards through your app. For example, **my-app://ref1236a7d**. A QR code is created based on this URL, and is included in the carrier. Before you use this field, reach out to your Adyen contact to set up the QR code process.   Maximum length: 255 characters.
-	ActivationUrl *string `json:"activationUrl,omitempty"`
-	BulkAddress *BulkAddress `json:"bulkAddress,omitempty"`
+	ActivationUrl *string      `json:"activationUrl,omitempty"`
+	BulkAddress   *BulkAddress `json:"bulkAddress,omitempty"`
 	// The unique identifier of the card image. This image is printed on the full front of the card.
 	CardImageId *string `json:"cardImageId,omitempty"`
-	// The letter or packaging to which the card is attached.  This field overrides the carrier design ID defined in the card configuration profile. 
+	// The letter or packaging to which the card is attached.  This field overrides the carrier design ID defined in the card configuration profile.
 	Carrier *string `json:"carrier,omitempty"`
 	// The unique identifier of the carrier image. This image is printed on the letter to which the card is attached.
 	CarrierImageId *string `json:"carrierImageId,omitempty"`
@@ -33,7 +34,7 @@ type CardConfiguration struct {
 	ConfigurationProfileId string `json:"configurationProfileId"`
 	// The three-letter [ISO-4217](https://en.wikipedia.org/wiki/ISO_4217) currency code of the card. For example, **EUR**.  This field overrides the existing currency setting on the card configuration profile.
 	Currency *string `json:"currency,omitempty"`
-	// Overrides the envelope design ID defined in the card configuration profile. 
+	// Overrides the envelope design ID defined in the card configuration profile.
 	Envelope *string `json:"envelope,omitempty"`
 	// Any additional material, such as marketing material, that is shipped together with the card.  This field overrides the insert design ID defined in the card configuration profile.
 	Insert *string `json:"insert,omitempty"`
@@ -506,7 +507,7 @@ func (o *CardConfiguration) SetShipmentMethod(v string) {
 }
 
 func (o CardConfiguration) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -593,6 +594,3 @@ func (v *NullableCardConfiguration) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

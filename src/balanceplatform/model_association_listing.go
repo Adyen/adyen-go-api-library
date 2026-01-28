@@ -10,8 +10,9 @@ package balanceplatform
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
 	"time"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the AssociationListing type satisfies the MappedNullable interface at compile time
@@ -22,14 +23,14 @@ type AssociationListing struct {
 	// The date and time when the association was created.
 	CreatedAt time.Time `json:"createdAt"`
 	// The unique identifier of the entity.
-	EntityId string `json:"entityId"`
+	EntityId   string        `json:"entityId"`
 	EntityType ScaEntityType `json:"entityType"`
 	// The unique identifier of the SCA device.
 	ScaDeviceId string `json:"scaDeviceId"`
 	// The human-readable name for the SCA device that was registered.
-	ScaDeviceName *string `json:"scaDeviceName,omitempty"`
-	ScaDeviceType ScaDeviceType `json:"scaDeviceType"`
-	Status AssociationStatus `json:"status"`
+	ScaDeviceName *string           `json:"scaDeviceName,omitempty"`
+	ScaDeviceType ScaDeviceType     `json:"scaDeviceType"`
+	Status        AssociationStatus `json:"status"`
 }
 
 // NewAssociationListing instantiates a new AssociationListing object
@@ -232,7 +233,7 @@ func (o *AssociationListing) SetStatus(v AssociationStatus) {
 }
 
 func (o AssociationListing) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -288,6 +289,3 @@ func (v *NullableAssociationListing) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-

@@ -10,7 +10,6 @@ package balanceplatform
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
 	"fmt"
 )
 
@@ -19,10 +18,10 @@ type ScaExemption string
 
 // List of ScaExemption
 const (
-	SET_BY_PLATFORM ScaExemption = "setByPlatform"
-	INITIAL_LIMIT ScaExemption = "initialLimit"
-	LOWER_LIMIT ScaExemption = "lowerLimit"
-	NOT_REGULATED ScaExemption = "notRegulated"
+	SET_BY_PLATFORM   ScaExemption = "setByPlatform"
+	INITIAL_LIMIT     ScaExemption = "initialLimit"
+	LOWER_LIMIT       ScaExemption = "lowerLimit"
+	NOT_REGULATED     ScaExemption = "notRegulated"
 	ALREADY_PERFORMED ScaExemption = "alreadyPerformed"
 )
 
@@ -113,4 +112,3 @@ func (v *NullableScaExemption) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

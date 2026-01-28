@@ -10,10 +10,13 @@ package balanceplatform
 
 import (
 	"context"
-    "net/http"
-    "net/url"
-    "strings"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
+	"encoding/json"
+	"io/ioutil"
+	"net/http"
+	"net/url"
+	"strings"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // SCADeviceManagementApi service
@@ -29,15 +32,13 @@ func (r SCADeviceManagementApiBeginScaDeviceRegistrationInput) BeginScaDeviceReg
 	return r
 }
 
-
 /*
 Prepare a request for BeginScaDeviceRegistration
 
 @return SCADeviceManagementApiBeginScaDeviceRegistrationInput
 */
 func (a *SCADeviceManagementApi) BeginScaDeviceRegistrationInput() SCADeviceManagementApiBeginScaDeviceRegistrationInput {
-	return SCADeviceManagementApiBeginScaDeviceRegistrationInput{
-	}
+	return SCADeviceManagementApiBeginScaDeviceRegistrationInput{}
 }
 
 /*
@@ -50,74 +51,73 @@ Begins the registration process for a new Strong Customer Authentication (SCA) d
 @return BeginScaDeviceRegistrationResponse, *http.Response, error
 */
 func (a *SCADeviceManagementApi) BeginScaDeviceRegistration(ctx context.Context, r SCADeviceManagementApiBeginScaDeviceRegistrationInput) (BeginScaDeviceRegistrationResponse, *http.Response, error) {
-    res := &BeginScaDeviceRegistrationResponse{}
+	res := &BeginScaDeviceRegistrationResponse{}
 	path := "/scaDevices"
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.beginScaDeviceRegistrationRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.beginScaDeviceRegistrationRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-    if httpRes == nil {
-        return *res, httpRes, err
-    }
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
-    var serviceError common.RestServiceError
-                        if httpRes.StatusCode == 400 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 401 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 403 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 422 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 500 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 400 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
 
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by SCADeviceManagementApi.FinishScaDeviceRegistration
 type SCADeviceManagementApiFinishScaDeviceRegistrationInput struct {
-	deviceId string
+	deviceId                           string
 	finishScaDeviceRegistrationRequest *FinishScaDeviceRegistrationRequest
 }
 
@@ -125,7 +125,6 @@ func (r SCADeviceManagementApiFinishScaDeviceRegistrationInput) FinishScaDeviceR
 	r.finishScaDeviceRegistrationRequest = &finishScaDeviceRegistrationRequest
 	return r
 }
-
 
 /*
 Prepare a request for FinishScaDeviceRegistration
@@ -148,83 +147,82 @@ Finishes the registration process for a new Strong Customer Authentication (SCA)
 @return FinishScaDeviceRegistrationResponse, *http.Response, error
 */
 func (a *SCADeviceManagementApi) FinishScaDeviceRegistration(ctx context.Context, r SCADeviceManagementApiFinishScaDeviceRegistrationInput) (FinishScaDeviceRegistrationResponse, *http.Response, error) {
-    res := &FinishScaDeviceRegistrationResponse{}
+	res := &FinishScaDeviceRegistrationResponse{}
 	path := "/scaDevices/{deviceId}"
-    path = strings.Replace(path, "{"+"deviceId"+"}", url.PathEscape(common.ParameterValueToString(r.deviceId, "deviceId")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.finishScaDeviceRegistrationRequest,
-        res,
-        http.MethodPatch,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"deviceId"+"}", url.PathEscape(common.ParameterValueToString(r.deviceId, "deviceId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.finishScaDeviceRegistrationRequest,
+		res,
+		http.MethodPatch,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-    if httpRes == nil {
-        return *res, httpRes, err
-    }
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
-    var serviceError common.RestServiceError
-                        if httpRes.StatusCode == 400 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 401 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 403 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 404 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 422 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 500 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 400 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 404 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
 
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-
 
 // All parameters accepted by SCADeviceManagementApi.SubmitScaAssociation
 type SCADeviceManagementApiSubmitScaAssociationInput struct {
-	deviceId string
+	deviceId                    string
 	submitScaAssociationRequest *SubmitScaAssociationRequest
 }
 
@@ -232,7 +230,6 @@ func (r SCADeviceManagementApiSubmitScaAssociationInput) SubmitScaAssociationReq
 	r.submitScaAssociationRequest = &submitScaAssociationRequest
 	return r
 }
-
 
 /*
 Prepare a request for SubmitScaAssociation
@@ -255,76 +252,75 @@ Creates an association between an SCA-enabled device and an entity, such as an a
 @return SubmitScaAssociationResponse, *http.Response, error
 */
 func (a *SCADeviceManagementApi) SubmitScaAssociation(ctx context.Context, r SCADeviceManagementApiSubmitScaAssociationInput) (SubmitScaAssociationResponse, *http.Response, error) {
-    res := &SubmitScaAssociationResponse{}
+	res := &SubmitScaAssociationResponse{}
 	path := "/scaDevices/{deviceId}/scaAssociations"
-    path = strings.Replace(path, "{"+"deviceId"+"}", url.PathEscape(common.ParameterValueToString(r.deviceId, "deviceId")), -1)
-    queryParams := url.Values{}
-    headerParams := make(map[string]string)
-    httpRes, err := common.SendAPIRequest(
-        ctx,
-        a.Client,
-        r.submitScaAssociationRequest,
-        res,
-        http.MethodPost,
-        a.BasePath()+path,
-        queryParams,
-        headerParams,
-    )
+	path = strings.Replace(path, "{"+"deviceId"+"}", url.PathEscape(common.ParameterValueToString(r.deviceId, "deviceId")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.submitScaAssociationRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
 
-    if httpRes == nil {
-        return *res, httpRes, err
-    }
+	if httpRes == nil {
+		return *res, httpRes, err
+	}
 
-    var serviceError common.RestServiceError
-                        if httpRes.StatusCode == 400 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 401 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 403 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 404 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 422 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
-                        if httpRes.StatusCode == 500 {
-                            body, _ := ioutil.ReadAll(httpRes.Body)
-                            decodeError := json.Unmarshal([]byte(body), &serviceError)
-                            if decodeError != nil {
-                                return *res, httpRes, decodeError
-                            }
-                            return *res, httpRes, serviceError
-                        }
+	var serviceError common.RestServiceError
+	if httpRes.StatusCode == 400 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 401 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 403 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 404 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 422 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
+	if httpRes.StatusCode == 500 {
+		body, _ := ioutil.ReadAll(httpRes.Body)
+		decodeError := json.Unmarshal([]byte(body), &serviceError)
+		if decodeError != nil {
+			return *res, httpRes, decodeError
+		}
+		return *res, httpRes, serviceError
+	}
 
-    return *res, httpRes, err
+	return *res, httpRes, err
 }
-

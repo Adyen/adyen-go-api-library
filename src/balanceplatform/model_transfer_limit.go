@@ -10,8 +10,9 @@ package balanceplatform
 
 import (
 	"encoding/json"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
 	"time"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the TransferLimit type satisfies the MappedNullable interface at compile time
@@ -23,14 +24,14 @@ type TransferLimit struct {
 	// The date and time when the transfer limit becomes inactive. If you do not specify an end date, the limit stays active until you override it with a new limit.  Format [ISO 8601](https://www.w3.org/TR/NOTE-datetime): **YYYY-MM-DDThh:mm:ss.sssTZD**
 	EndsAt *time.Time `json:"endsAt,omitempty"`
 	// The unique identifier of the transfer limit.
-	Id string `json:"id"`
+	Id          string      `json:"id"`
 	LimitStatus LimitStatus `json:"limitStatus"`
 	// Your reference for the transfer limit.
-	Reference *string `json:"reference,omitempty"`
+	Reference      *string         `json:"reference,omitempty"`
 	ScaInformation *ScaInformation `json:"scaInformation,omitempty"`
-	Scope Scope `json:"scope"`
+	Scope          Scope           `json:"scope"`
 	// The date and time when the transfer limit becomes active. If you specify a date in the future, we will schedule a transfer limit.  Format [ISO 8601](https://www.w3.org/TR/NOTE-datetime): **YYYY-MM-DDThh:mm:ss.sssTZD**
-	StartsAt time.Time `json:"startsAt"`
+	StartsAt     time.Time    `json:"startsAt"`
 	TransferType TransferType `json:"transferType"`
 }
 
@@ -298,7 +299,7 @@ func (o *TransferLimit) SetTransferType(v TransferType) {
 }
 
 func (o TransferLimit) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -360,6 +361,3 @@ func (v *NullableTransferLimit) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
-
