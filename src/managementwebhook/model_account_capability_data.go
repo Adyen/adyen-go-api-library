@@ -10,9 +10,8 @@ package managementwebhook
 
 import (
 	"encoding/json"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 	"time"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the AccountCapabilityData type satisfies the MappedNullable interface at compile time
@@ -26,7 +25,7 @@ type AccountCapabilityData struct {
 	AllowedLevel *string `json:"allowedLevel,omitempty"`
 	// The name of the capability. For example, **sendToTransferInstrument**.
 	Capability *string `json:"capability,omitempty"`
-	// List of entities that has problems with verification. The information includes the details of the errors and the actions that you can take to resolve them.
+	// List of entities that have problems with verification. The information includes the details of the errors and the actions that you can take to resolve them.
 	Problems []CapabilityProblem `json:"problems,omitempty"`
 	// Indicates whether you requested the capability.
 	Requested bool `json:"requested"`
@@ -34,7 +33,7 @@ type AccountCapabilityData struct {
 	RequestedLevel string `json:"requestedLevel"`
 	// The verification deadline for the capability that will be disallowed if verification errors are not resolved.
 	VerificationDeadline *time.Time `json:"verificationDeadline,omitempty"`
-	// The status of the verification checks for the capability.  Possible values:  * **pending**: Adyen is running the verification.  * **invalid**: The verification failed. Check if the `errors` array contains more information.  * **valid**: The verification was successful.  * **rejected**: Adyen checked the information and found reasons to not allow the capability.
+	// The status of the verification checks for the capability.  Possible values:  * **pending**: Adyen is running the verification.  * **invalid**: The verification failed. Check if the `errors` array contains more information.  * **valid**: The verification was successful.  * **rejected**: Adyen checked the information and found reasons to not allow the capability. 
 	VerificationStatus *string `json:"verificationStatus,omitempty"`
 }
 
@@ -298,7 +297,7 @@ func (o *AccountCapabilityData) SetVerificationStatus(v string) {
 }
 
 func (o AccountCapabilityData) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -365,3 +364,6 @@ func (v *NullableAccountCapabilityData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+

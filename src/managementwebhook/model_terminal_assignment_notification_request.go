@@ -10,8 +10,7 @@ package managementwebhook
 
 import (
 	"encoding/json"
-
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
+    "github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // checks if the TerminalAssignmentNotificationRequest type satisfies the MappedNullable interface at compile time
@@ -21,8 +20,10 @@ var _ common.MappedNullable = &TerminalAssignmentNotificationRequest{}
 type TerminalAssignmentNotificationRequest struct {
 	// The unique identifier of the merchant/company account to which the terminal is assigned.
 	AssignedToAccount string `json:"assignedToAccount"`
-	// The unique identifier of the store to which the terminal is assigned.
+	// The store that the terminal is assigned to, identified by the store reference (also known as store code).
 	AssignedToStore *string `json:"assignedToStore,omitempty"`
+	// The unique identifier of the store to which the terminal is assigned.
+	AssignedToStoreId *string `json:"assignedToStoreId,omitempty"`
 	// The date and time when an event has been completed.
 	EventDate string `json:"eventDate"`
 	// The PSP reference of the request from which the notification originates.
@@ -108,6 +109,38 @@ func (o *TerminalAssignmentNotificationRequest) SetAssignedToStore(v string) {
 	o.AssignedToStore = &v
 }
 
+// GetAssignedToStoreId returns the AssignedToStoreId field value if set, zero value otherwise.
+func (o *TerminalAssignmentNotificationRequest) GetAssignedToStoreId() string {
+	if o == nil || common.IsNil(o.AssignedToStoreId) {
+		var ret string
+		return ret
+	}
+	return *o.AssignedToStoreId
+}
+
+// GetAssignedToStoreIdOk returns a tuple with the AssignedToStoreId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TerminalAssignmentNotificationRequest) GetAssignedToStoreIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.AssignedToStoreId) {
+		return nil, false
+	}
+	return o.AssignedToStoreId, true
+}
+
+// HasAssignedToStoreId returns a boolean if a field has been set.
+func (o *TerminalAssignmentNotificationRequest) HasAssignedToStoreId() bool {
+	if o != nil && !common.IsNil(o.AssignedToStoreId) {
+		return true
+	}
+
+	return false
+}
+
+// SetAssignedToStoreId gets a reference to the given string and assigns it to the AssignedToStoreId field.
+func (o *TerminalAssignmentNotificationRequest) SetAssignedToStoreId(v string) {
+	o.AssignedToStoreId = &v
+}
+
 // GetEventDate returns the EventDate field value
 func (o *TerminalAssignmentNotificationRequest) GetEventDate() string {
 	if o == nil {
@@ -181,7 +214,7 @@ func (o *TerminalAssignmentNotificationRequest) SetUniqueTerminalId(v string) {
 }
 
 func (o TerminalAssignmentNotificationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -193,6 +226,9 @@ func (o TerminalAssignmentNotificationRequest) ToMap() (map[string]interface{}, 
 	toSerialize["assignedToAccount"] = o.AssignedToAccount
 	if !common.IsNil(o.AssignedToStore) {
 		toSerialize["assignedToStore"] = o.AssignedToStore
+	}
+	if !common.IsNil(o.AssignedToStoreId) {
+		toSerialize["assignedToStoreId"] = o.AssignedToStoreId
 	}
 	toSerialize["eventDate"] = o.EventDate
 	toSerialize["pspReference"] = o.PspReference
@@ -235,3 +271,6 @@ func (v *NullableTerminalAssignmentNotificationRequest) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
+
