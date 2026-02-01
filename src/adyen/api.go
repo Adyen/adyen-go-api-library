@@ -110,8 +110,6 @@ func NewClient(cfg *common.Config) *APIClient {
 			// set default timeout to 60 seconds otherwise
 			cfg.HTTPClient.Timeout = 60 * time.Second
 		}
-	} else {
-		fmt.Println("Custom http.Client is provided")
 	}
 
 	if cfg.DefaultHeader == nil {
