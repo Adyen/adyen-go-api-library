@@ -27,7 +27,7 @@ type Transaction struct {
 	BalancePlatform string `json:"balancePlatform"`
 	// The date the transaction was booked into the balance account.
 	BookingDate time.Time `json:"bookingDate"`
-	// The date and time when the event was triggered, in ISO 8601 extended format. For example, **2020-12-18T10:15:30+01:00**.
+	// The date and time when the event was triggered, in ISO 8601 extended format. For example, **2025-03-19T10:15:30+01:00**.
 	CreationDate *time.Time `json:"creationDate,omitempty"`
 	// The `description` from the `/transfers` request.
 	Description *string `json:"description,omitempty"`
