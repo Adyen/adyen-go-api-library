@@ -273,7 +273,7 @@ func (v *NullableVerificationError) UnmarshalJSON(src []byte) error {
 }
 
 func (o *VerificationError) isValidType() bool {
-	var allowedEnumValues = []string{"dataMissing", "invalidInput", "pendingStatus"}
+	var allowedEnumValues = []string{"dataMissing", "dataReview", "invalidInput", "pendingStatus"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

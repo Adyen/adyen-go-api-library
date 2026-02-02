@@ -19,7 +19,7 @@ var _ common.MappedNullable = &PaymentMethodNotificationResponse{}
 
 // PaymentMethodNotificationResponse struct for PaymentMethodNotificationResponse
 type PaymentMethodNotificationResponse struct {
-	// Respond with any **2xx** HTTP status code to [accept the webhook](https://docs.adyen.com/development-resources/webhooks#accept-notifications).
+	// Respond with any **2xx** HTTP status code to [accept the webhook](https://docs.adyen.com/development-resources/webhooks/#accept-webhooks).
 	NotificationResponse *string `json:"notificationResponse,omitempty"`
 }
 

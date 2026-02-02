@@ -236,7 +236,7 @@ func (v *NullableVerificationErrorRecursive) UnmarshalJSON(src []byte) error {
 }
 
 func (o *VerificationErrorRecursive) isValidType() bool {
-	var allowedEnumValues = []string{"dataMissing", "invalidInput", "pendingStatus"}
+	var allowedEnumValues = []string{"dataMissing", "dataReview", "invalidInput", "pendingStatus"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true
