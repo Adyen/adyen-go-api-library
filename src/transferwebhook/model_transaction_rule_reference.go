@@ -27,7 +27,7 @@ type TransactionRuleReference struct {
 	OutcomeType *string `json:"outcomeType,omitempty"`
 	// The reference for the resource.
 	Reference *string `json:"reference,omitempty"`
-	// The score of the rule in case it's a scoreBased rule.
+	// The transaction score determined by the rule. Returned only when `outcomeType` is **scoreBased**.
 	Score *int32 `json:"score,omitempty"`
 }
 
