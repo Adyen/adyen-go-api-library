@@ -49,7 +49,7 @@ type PaymentRequest struct {
 	// The funding source that should be used when multiple sources are available. For Brazilian combo cards, by default the funding source is credit. To use debit, set this value to **debit**.
 	FundingSource *string       `json:"fundingSource,omitempty"`
 	Installments  *Installments `json:"installments,omitempty"`
-	// The `localizedShopperStatement` field lets you use dynamic values for your shopper statement in a local character set. If not supplied, left empty, or for cross-border transactions, **shopperStatement** is used.  Adyen currently supports the ja-Kana and ja-Hani character set for Visa, Mastercard and JCB payments in Japan using Japanese cards. This character set supports:  * UTF-8 based Katakana, Kanji, capital letters, numbers and special characters.  * Half-width or full-width characters.
+	// The `localizedShopperStatement` field lets you use dynamic values for your shopper statement in a local character set. If this parameter is left empty, not provided, or not applicable (in case of cross-border transactions), then **shopperStatement** is used.  Currently, `localizedShopperStatement` is only supported for payments with Visa, Mastercard, JCB, Diners, and Discover.  **Supported characters**: Hiragana, Katakana, Kanji, and alphanumeric.
 	LocalizedShopperStatement *map[string]string `json:"localizedShopperStatement,omitempty"`
 	Mandate                   *Mandate           `json:"mandate,omitempty"`
 	// The [merchant category code](https://en.wikipedia.org/wiki/Merchant_category_code) (MCC) is a four-digit number, which relates to a particular market segment. This code reflects the predominant activity that is conducted by the merchant.
@@ -79,9 +79,9 @@ type PaymentRequest struct {
 	SelectedRecurringDetailReference *string `json:"selectedRecurringDetailReference,omitempty"`
 	// A session ID used to identify a payment session.
 	SessionId *string `json:"sessionId,omitempty"`
-	// The shopper's email address. We recommend that you provide this data, as it is used in velocity fraud checks. > For 3D Secure 2 transactions, schemes require `shopperEmail` for all browser-based and mobile implementations.
+	// The shopper's email address. We recommend that you provide this data, as it is used in velocity fraud checks. > Required for Visa and JCB transactions that require 3D Secure 2 authentication if you did not include the `telephoneNumber`.
 	ShopperEmail *string `json:"shopperEmail,omitempty"`
-	// The shopper's IP address. In general, we recommend that you provide this data, as it is used in a number of risk checks (for instance, number of payment attempts or location-based checks). > For 3D Secure 2 transactions, schemes require `shopperIP` for all browser-based implementations. This field is also mandatory for some merchants depending on your business model. For more information, [contact Support](https://www.adyen.help/hc/en-us/requests/new).
+	// The shopper's IP address. We recommend that you provide this data, as it is used in a number of risk checks (for instance, number of payment attempts or location-based checks). > Required for Visa and JCB transactions that require 3D Secure 2 authentication for all web and mobile integrations, if you did not include the `shopperEmail`. For native mobile integrations, the field is required to support cases where authentication is routed to the redirect flow. This field is also mandatory for some merchants depending on your business model. For more information, [contact Support](https://www.adyen.help/hc/en-us/requests/new).
 	ShopperIP *string `json:"shopperIP,omitempty"`
 	// Specifies the sales channel, through which the shopper gives their card details, and whether the shopper is a returning customer. For the web service API, Adyen assumes Ecommerce shopper interaction by default.  This field has the following possible values: * `Ecommerce` - Online transactions where the cardholder is present (online). For better authorisation rates, we recommend sending the card security code (CSC) along with the request. * `ContAuth` - Card on file and/or subscription transactions, where the cardholder is known to the merchant (returning customer). If the shopper is present (online), you can supply also the CSC to improve authorisation (one-click payment). * `Moto` - Mail-order and telephone-order transactions where the shopper is in contact with the merchant via email or telephone. * `POS` - Point-of-sale transactions where the shopper is physically present to make a payment using a secure payment terminal.
 	ShopperInteraction *string `json:"shopperInteraction,omitempty"`
@@ -98,10 +98,10 @@ type PaymentRequest struct {
 	Splits []Split `json:"splits,omitempty"`
 	// Required for Adyen for Platforms integrations if you are a platform model. This is your [reference](https://docs.adyen.com/api-explorer/Management/3/post/merchants/(merchantId)/stores#request-reference) (on [balance platform](https://docs.adyen.com/platforms)) or the [storeReference](https://docs.adyen.com/api-explorer/Account/latest/post/updateAccountHolder#request-accountHolderDetails-storeDetails-storeReference) (in the [classic integration](https://docs.adyen.com/classic-platforms/processing-payments/route-payment-to-store/#route-a-payment-to-a-store)) for the ecommerce or point-of-sale store that is processing the payment.
 	Store *string `json:"store,omitempty"`
-	// The shopper's telephone number.
+	// The shopper's telephone number.  The phone number must include a plus sign (+) and a country code (1-3 digits), followed by the number (4-15 digits). If the value you provide does not follow the guidelines, we do not submit it for authentication. > Required for Visa and JCB transactions that require 3D Secure 2 authentication, if you did not include the `shopperEmail`.
 	TelephoneNumber     *string              `json:"telephoneNumber,omitempty"`
 	ThreeDS2RequestData *ThreeDS2RequestData `json:"threeDS2RequestData,omitempty"`
-	// If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only), and not the payment authorisation.
+	// Required to trigger the [authentication-only flow](https://docs.adyen.com/online-payments/3d-secure/authentication-only/). If set to **true**, you will only perform the 3D Secure 2 authentication, and will not proceed to the payment authorization.Default: **false**.
 	ThreeDSAuthenticationOnly *bool `json:"threeDSAuthenticationOnly,omitempty"`
 	// The reference value to aggregate sales totals in reporting. When not specified, the store field is used (if available).
 	TotalsGroup *string `json:"totalsGroup,omitempty"`
@@ -2052,7 +2052,7 @@ func (o *PaymentRequest) isValidEntityType() bool {
 	return false
 }
 func (o *PaymentRequest) isValidFundingSource() bool {
-	var allowedEnumValues = []string{"credit", "debit"}
+	var allowedEnumValues = []string{"credit", "debit", "prepaid"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetFundingSource() == allowed {
 			return true
