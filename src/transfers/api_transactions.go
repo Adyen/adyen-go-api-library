@@ -32,6 +32,7 @@ type TransactionsApiGetAllTransactionsInput struct {
 	accountHolderId     *string
 	balanceAccountId    *string
 	cursor              *string
+	sortOrder           *string
 	limit               *int32
 }
 
@@ -74,6 +75,12 @@ func (r TransactionsApiGetAllTransactionsInput) BalanceAccountId(balanceAccountI
 // The &#x60;cursor&#x60; returned in the links of the previous response.
 func (r TransactionsApiGetAllTransactionsInput) Cursor(cursor string) TransactionsApiGetAllTransactionsInput {
 	r.cursor = &cursor
+	return r
+}
+
+// Determines the sort order of the returned transactions. The sort order is based on the creation date of the transaction.  Possible values:   - **asc**: Ascending order, from oldest to most recent.  - **desc**: Descending order, from most recent to oldest.  Default value: **asc**.
+func (r TransactionsApiGetAllTransactionsInput) SortOrder(sortOrder string) TransactionsApiGetAllTransactionsInput {
+	r.sortOrder = &sortOrder
 	return r
 }
 
@@ -135,6 +142,9 @@ func (a *TransactionsApi) GetAllTransactions(ctx context.Context, r Transactions
 	}
 	if r.createdUntil != nil {
 		common.ParameterAddToQuery(queryParams, "createdUntil", r.createdUntil, "")
+	}
+	if r.sortOrder != nil {
+		common.ParameterAddToQuery(queryParams, "sortOrder", r.sortOrder, "")
 	}
 	if r.limit != nil {
 		common.ParameterAddToQuery(queryParams, "limit", r.limit, "")
