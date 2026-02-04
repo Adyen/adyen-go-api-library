@@ -19,7 +19,7 @@ var _ common.MappedNullable = &BalancePlatformNotificationResponse{}
 
 // BalancePlatformNotificationResponse struct for BalancePlatformNotificationResponse
 type BalancePlatformNotificationResponse struct {
-	// Respond with any **2xx** HTTP status code to [accept the webhook](https://docs.adyen.com/development-resources/webhooks/#accept-webhooks).
+	// Respond with any **2xx** HTTP status code to [accept the webhook](https://docs.adyen.com/development-resources/webhooks#accept-notifications).
 	NotificationResponse *string `json:"notificationResponse,omitempty"`
 }
 

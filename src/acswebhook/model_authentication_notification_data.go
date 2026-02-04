@@ -22,9 +22,9 @@ type AuthenticationNotificationData struct {
 	Authentication AuthenticationInfo `json:"authentication"`
 	// The unique identifier of the balance platform.
 	BalancePlatform *string `json:"balancePlatform,omitempty"`
-	// The unique identifier of the authentication.
+	// Unique identifier of the authentication.
 	Id string `json:"id"`
-	// The unique identifier of the payment instrument that was used for the authentication.
+	// Unique identifier of the payment instrument that was used for the authentication.
 	PaymentInstrumentId string       `json:"paymentInstrumentId"`
 	Purchase            PurchaseInfo `json:"purchase"`
 	// Outcome of the authentication. Allowed values: * authenticated * rejected * error
