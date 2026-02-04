@@ -10,7 +10,6 @@ package acswebhook
 
 import (
 	"encoding/json"
-	"time"
 
 	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
@@ -20,32 +19,22 @@ var _ common.MappedNullable = &RelayedAuthenticationRequest{}
 
 // RelayedAuthenticationRequest struct for RelayedAuthenticationRequest
 type RelayedAuthenticationRequest struct {
-	// The environment from which the webhook originated. Possible values: **test**, **live**.
-	Environment string `json:"environment"`
 	// The unique identifier of the challenge.
 	Id string `json:"id"`
 	// The unique identifier of the [payment instrument](https://docs.adyen.com/api-explorer/balanceplatform/latest/get/paymentInstruments/_id_) used for the purchase.
 	PaymentInstrumentId string   `json:"paymentInstrumentId"`
 	Purchase            Purchase `json:"purchase"`
-	// URL for auto-switching to the threeDS Requestor App. If not present, the threeDS Requestor App doesn't support auto-switching.
-	ThreeDSRequestorAppURL *string `json:"threeDSRequestorAppURL,omitempty"`
-	// When the event was queued.
-	Timestamp *time.Time `json:"timestamp,omitempty"`
-	// Type of notification.
-	Type string `json:"type"`
 }
 
 // NewRelayedAuthenticationRequest instantiates a new RelayedAuthenticationRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRelayedAuthenticationRequest(environment string, id string, paymentInstrumentId string, purchase Purchase, type_ string) *RelayedAuthenticationRequest {
+func NewRelayedAuthenticationRequest(id string, paymentInstrumentId string, purchase Purchase) *RelayedAuthenticationRequest {
 	this := RelayedAuthenticationRequest{}
-	this.Environment = environment
 	this.Id = id
 	this.PaymentInstrumentId = paymentInstrumentId
 	this.Purchase = purchase
-	this.Type = type_
 	return &this
 }
 
@@ -55,30 +44,6 @@ func NewRelayedAuthenticationRequest(environment string, id string, paymentInstr
 func NewRelayedAuthenticationRequestWithDefaults() *RelayedAuthenticationRequest {
 	this := RelayedAuthenticationRequest{}
 	return &this
-}
-
-// GetEnvironment returns the Environment field value
-func (o *RelayedAuthenticationRequest) GetEnvironment() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Environment
-}
-
-// GetEnvironmentOk returns a tuple with the Environment field value
-// and a boolean to check if the value has been set.
-func (o *RelayedAuthenticationRequest) GetEnvironmentOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Environment, true
-}
-
-// SetEnvironment sets field value
-func (o *RelayedAuthenticationRequest) SetEnvironment(v string) {
-	o.Environment = v
 }
 
 // GetId returns the Id field value
@@ -153,94 +118,6 @@ func (o *RelayedAuthenticationRequest) SetPurchase(v Purchase) {
 	o.Purchase = v
 }
 
-// GetThreeDSRequestorAppURL returns the ThreeDSRequestorAppURL field value if set, zero value otherwise.
-func (o *RelayedAuthenticationRequest) GetThreeDSRequestorAppURL() string {
-	if o == nil || common.IsNil(o.ThreeDSRequestorAppURL) {
-		var ret string
-		return ret
-	}
-	return *o.ThreeDSRequestorAppURL
-}
-
-// GetThreeDSRequestorAppURLOk returns a tuple with the ThreeDSRequestorAppURL field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RelayedAuthenticationRequest) GetThreeDSRequestorAppURLOk() (*string, bool) {
-	if o == nil || common.IsNil(o.ThreeDSRequestorAppURL) {
-		return nil, false
-	}
-	return o.ThreeDSRequestorAppURL, true
-}
-
-// HasThreeDSRequestorAppURL returns a boolean if a field has been set.
-func (o *RelayedAuthenticationRequest) HasThreeDSRequestorAppURL() bool {
-	if o != nil && !common.IsNil(o.ThreeDSRequestorAppURL) {
-		return true
-	}
-
-	return false
-}
-
-// SetThreeDSRequestorAppURL gets a reference to the given string and assigns it to the ThreeDSRequestorAppURL field.
-func (o *RelayedAuthenticationRequest) SetThreeDSRequestorAppURL(v string) {
-	o.ThreeDSRequestorAppURL = &v
-}
-
-// GetTimestamp returns the Timestamp field value if set, zero value otherwise.
-func (o *RelayedAuthenticationRequest) GetTimestamp() time.Time {
-	if o == nil || common.IsNil(o.Timestamp) {
-		var ret time.Time
-		return ret
-	}
-	return *o.Timestamp
-}
-
-// GetTimestampOk returns a tuple with the Timestamp field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RelayedAuthenticationRequest) GetTimestampOk() (*time.Time, bool) {
-	if o == nil || common.IsNil(o.Timestamp) {
-		return nil, false
-	}
-	return o.Timestamp, true
-}
-
-// HasTimestamp returns a boolean if a field has been set.
-func (o *RelayedAuthenticationRequest) HasTimestamp() bool {
-	if o != nil && !common.IsNil(o.Timestamp) {
-		return true
-	}
-
-	return false
-}
-
-// SetTimestamp gets a reference to the given time.Time and assigns it to the Timestamp field.
-func (o *RelayedAuthenticationRequest) SetTimestamp(v time.Time) {
-	o.Timestamp = &v
-}
-
-// GetType returns the Type field value
-func (o *RelayedAuthenticationRequest) GetType() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Type
-}
-
-// GetTypeOk returns a tuple with the Type field value
-// and a boolean to check if the value has been set.
-func (o *RelayedAuthenticationRequest) GetTypeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Type, true
-}
-
-// SetType sets field value
-func (o *RelayedAuthenticationRequest) SetType(v string) {
-	o.Type = v
-}
-
 func (o RelayedAuthenticationRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -251,17 +128,9 @@ func (o RelayedAuthenticationRequest) MarshalJSON() ([]byte, error) {
 
 func (o RelayedAuthenticationRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["environment"] = o.Environment
 	toSerialize["id"] = o.Id
 	toSerialize["paymentInstrumentId"] = o.PaymentInstrumentId
 	toSerialize["purchase"] = o.Purchase
-	if !common.IsNil(o.ThreeDSRequestorAppURL) {
-		toSerialize["threeDSRequestorAppURL"] = o.ThreeDSRequestorAppURL
-	}
-	if !common.IsNil(o.Timestamp) {
-		toSerialize["timestamp"] = o.Timestamp
-	}
-	toSerialize["type"] = o.Type
 	return toSerialize, nil
 }
 
@@ -299,14 +168,4 @@ func (v NullableRelayedAuthenticationRequest) MarshalJSON() ([]byte, error) {
 func (v *NullableRelayedAuthenticationRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
-}
-
-func (o *RelayedAuthenticationRequest) isValidType() bool {
-	var allowedEnumValues = []string{"balancePlatform.authentication.relayed"}
-	for _, allowed := range allowedEnumValues {
-		if o.GetType() == allowed {
-			return true
-		}
-	}
-	return false
 }
