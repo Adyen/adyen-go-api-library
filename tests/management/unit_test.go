@@ -4,17 +4,17 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"fmt"
-	"github.com/adyen/adyen-go-api-library/v21/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
-	"github.com/adyen/adyen-go-api-library/v21/src/management"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 	"net/http"
 	"net/http/httptest"
 	"os"
 	"strings"
 	"testing"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
+	"github.com/adyen/adyen-go-api-library/v21/src/management"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func Test_ManagementAPI(t *testing.T) {
@@ -102,13 +102,7 @@ func Test_ManagementAPI(t *testing.T) {
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 			companyId := "TestCompany123"
 			req := service.AccountCompanyLevelApi.GetCompanyAccountInput(companyId)
-			resp, httpRes, serviceError := service.AccountCompanyLevelApi.GetCompanyAccount(context.Background(), req)
-
-			if httpRes.StatusCode != 500 {
-				fmt.Fprintf(os.Stderr, "Error: %v\n", serviceError)
-				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)
-			}
-
+			_, httpRes, serviceError := service.AccountCompanyLevelApi.GetCompanyAccount(context.Background(), req)
 			assert.Equal(t, 200, httpRes.StatusCode)
 			require.Nil(t, serviceError)
 		})
@@ -116,15 +110,11 @@ func Test_ManagementAPI(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 			companyId := "notExisting"
 			req := service.AccountCompanyLevelApi.GetCompanyAccountInput(companyId)
-			resp, httpRes, serviceError := service.AccountCompanyLevelApi.GetCompanyAccount(context.Background(), req)
+			_, httpRes, serviceError := service.AccountCompanyLevelApi.GetCompanyAccount(context.Background(), req)
 			var restServiceErr common.RestServiceError
 			errors.As(serviceError, &restServiceErr)
-			if restServiceErr.ErrorCode != "500" {
-				fmt.Fprintf(os.Stderr, "Error: %v\n", serviceError)
-				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)
-			}
-
 			assert.Equal(t, 403, httpRes.StatusCode)
+			require.NotNil(t, serviceError)
 		})
 	})
 
@@ -132,13 +122,7 @@ func Test_ManagementAPI(t *testing.T) {
 		t.Run("Create an API request that should pass", func(t *testing.T) {
 			companyId := "TestCompany123"
 			req := service.AccountCompanyLevelApi.ListMerchantAccountsInput(companyId)
-			resp, httpRes, serviceError := service.AccountCompanyLevelApi.ListMerchantAccounts(context.Background(), req)
-
-			if httpRes.StatusCode != 500 {
-				fmt.Fprintf(os.Stderr, "Error: %v\n", serviceError)
-				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)
-			}
-
+			_, httpRes, serviceError := service.AccountCompanyLevelApi.ListMerchantAccounts(context.Background(), req)
 			assert.Equal(t, 200, httpRes.StatusCode)
 			require.Nil(t, serviceError)
 		})
@@ -146,13 +130,9 @@ func Test_ManagementAPI(t *testing.T) {
 		t.Run("Create an API request that should fail", func(t *testing.T) {
 			companyId := "notExisting"
 			req := service.AccountCompanyLevelApi.ListMerchantAccountsInput(companyId)
-			resp, httpRes, serviceError := service.AccountCompanyLevelApi.ListMerchantAccounts(context.Background(), req)
+			_, httpRes, serviceError := service.AccountCompanyLevelApi.ListMerchantAccounts(context.Background(), req)
 			var restServiceErr common.RestServiceError
 			errors.As(serviceError, &restServiceErr)
-			if restServiceErr.ErrorCode != "500" {
-				fmt.Fprintf(os.Stderr, "Error: %v\n", serviceError)
-				fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", resp)
-			}
 			assert.Equal(t, 403, httpRes.StatusCode)
 			require.NotNil(t, serviceError)
 		})
