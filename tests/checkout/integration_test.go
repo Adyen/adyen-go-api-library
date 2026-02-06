@@ -5,19 +5,20 @@ package checkout
 
 import (
 	"context"
-	"github.com/adyen/adyen-go-api-library/v21/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v21/src/checkout"
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
-	"github.com/google/uuid"
 	"io/ioutil"
 	"os"
 	"strings"
 	"testing"
 
-    "github.com/joho/godotenv"
+	"github.com/adyen/adyen-go-api-library/v21/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v21/src/checkout"
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
+	"github.com/google/uuid"
 
-    "github.com/stretchr/testify/assert"
-    "github.com/stretchr/testify/require"
+	"github.com/joho/godotenv"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestCheckoutIntegration(t *testing.T) {
@@ -313,14 +314,14 @@ func TestCheckoutIntegration(t *testing.T) {
 			assert.Equal(t, 422, httpRes.StatusCode)
 			require.NotNil(t, res)
 
-            // cast to API Error
-            e := err.(common.APIError)
+			// cast to API Error
+			e := err.(common.APIError)
 
-            require.NotNil(t, e.RawBody)
+			require.NotNil(t, e.RawBody)
 
-            assert.Equal(t, float64(422), e.Status)
-            assert.Equal(t, "validation", e.Type)
-            assert.Equal(t, "208", e.Code)
-        })
+			assert.Equal(t, float64(422), e.Status)
+			assert.Equal(t, "validation", e.Type)
+			assert.Equal(t, "208", e.Code)
+		})
 	})
 }
