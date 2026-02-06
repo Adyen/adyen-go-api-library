@@ -2,7 +2,7 @@
 
 # Adyen Golang API Client Library
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/adyen/adyen-go-api-library/v8.svg)](https://pkg.go.dev/github.com/adyen/adyen-go-api-library/v8)
+[![Go Version](https://img.shields.io/github/v/tag/Adyen/adyen-go-api-library?label=version)](https://pkg.go.dev/github.com/adyen/adyen-go-api-library/v21?tab=versions)
 
 This is the officially supported golang library for using Adyen's APIs.
 
