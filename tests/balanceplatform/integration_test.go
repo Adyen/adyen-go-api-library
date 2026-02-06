@@ -4,16 +4,17 @@
 package balanceplatform
 
 import (
-    "context"
-    "github.com/adyen/adyen-go-api-library/v21/src/adyen"
-    "github.com/adyen/adyen-go-api-library/v21/src/common"
-    "github.com/joho/godotenv"
-    "github.com/stretchr/testify/assert"
-    "github.com/stretchr/testify/require"
-    "net/http"
-    "net/url"
-    "os"
-    "testing"
+	"context"
+	"net/http"
+	"net/url"
+	"os"
+	"testing"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
+	"github.com/joho/godotenv"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func Test_BalancePlatform_Integration(t *testing.T) {
@@ -21,8 +22,8 @@ func Test_BalancePlatform_Integration(t *testing.T) {
 
 	var apiKey, balancePlatformId, proxy string
 
-    apiKey = os.Getenv("ADYEN_PLATFORM_API_KEY")
-    balancePlatformId = os.Getenv("BALANCE_PLATFORM_ID")
+	apiKey = os.Getenv("ADYEN_PLATFORM_API_KEY")
+	balancePlatformId = os.Getenv("BALANCE_PLATFORM_ID")
 	proxy = os.Getenv("HTTP_PROXY")
 
 	if apiKey == "" || balancePlatformId == "" {
@@ -31,7 +32,7 @@ func Test_BalancePlatform_Integration(t *testing.T) {
 
 	config := common.Config{
 		Environment: common.TestEnv,
-		ApiKey:    apiKey,
+		ApiKey:      apiKey,
 		Debug:       "true" == os.Getenv("DEBUG"),
 	}
 
@@ -55,28 +56,28 @@ func Test_BalancePlatform_Integration(t *testing.T) {
 		assert.Equal(t, balancePlatformId, res.GetId())
 	})
 
-    t.Run("Get a Balance Platform that fails with 422", func(t *testing.T) {
-        req := service.PlatformApi.GetBalancePlatformInput("na")
-        _, httpRes, err := service.PlatformApi.GetBalancePlatform(context.Background(), req)
+	t.Run("Get a Balance Platform that fails with 422", func(t *testing.T) {
+		req := service.PlatformApi.GetBalancePlatformInput("na")
+		_, httpRes, err := service.PlatformApi.GetBalancePlatform(context.Background(), req)
 
-        require.Error(t, err)
-        assert.Equal(t, 422, httpRes.StatusCode)
+		require.Error(t, err)
+		assert.Equal(t, 422, httpRes.StatusCode)
 
-        // cast to RestServiceError
-        restServiceError := err.(common.RestServiceError)
-        assert.Equal(t, "https://docs.adyen.com/errors/not-found", restServiceError.Type)
-        assert.Equal(t, "30_002", restServiceError.ErrorCode)
-    })
+		// cast to RestServiceError
+		restServiceError := err.(common.RestServiceError)
+		assert.Equal(t, "https://docs.adyen.com/errors/not-found", restServiceError.Type)
+		assert.Equal(t, "30_002", restServiceError.ErrorCode)
+	})
 
-    t.Run("Get a Balance Platform that fails with 400", func(t *testing.T) {
+	t.Run("Get a Balance Platform that fails with 400", func(t *testing.T) {
 
-        // log 4xx error
-        service.PlatformApi.Client.Cfg.Log4XXError = true
+		// log 4xx error
+		service.PlatformApi.Client.Cfg.Log4XXError = true
 
-        req := service.PlatformApi.GetBalancePlatformInput("with invalid char//")
-        _, httpRes, err := service.PlatformApi.GetBalancePlatform(context.Background(), req)
+		req := service.PlatformApi.GetBalancePlatformInput("with invalid char//")
+		_, httpRes, err := service.PlatformApi.GetBalancePlatform(context.Background(), req)
 
-        require.Error(t, err)
-        assert.Equal(t, 400, httpRes.StatusCode)
-    })
+		require.Error(t, err)
+		assert.Equal(t, 400, httpRes.StatusCode)
+	})
 }

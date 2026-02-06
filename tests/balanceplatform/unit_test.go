@@ -3,17 +3,18 @@ package balanceplatform
 import (
 	"context"
 	"errors"
+	"io"
+	"net/http"
+	"net/http/httptest"
+	"os"
+	"testing"
+
 	"github.com/adyen/adyen-go-api-library/v21/src/adyen"
 	"github.com/adyen/adyen-go-api-library/v21/src/balanceplatform"
 	"github.com/adyen/adyen-go-api-library/v21/src/common"
 	"github.com/adyen/adyen-go-api-library/v21/tests"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"io"
-	"net/http"
-	"net/http/httptest"
-	"os"
-	"testing"
 )
 
 func TestBalancePlatform(t *testing.T) {

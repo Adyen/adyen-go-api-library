@@ -6,13 +6,14 @@ package management
 import (
 	"context"
 	"errors"
+	"os"
+	"testing"
+
 	"github.com/adyen/adyen-go-api-library/v21/src/adyen"
 	"github.com/adyen/adyen-go-api-library/v21/src/common"
 	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"os"
-	"testing"
 )
 
 func Test_ManagementAPI_Integration(t *testing.T) {
