@@ -19,23 +19,9 @@ var _ common.MappedNullable = &PayByBankPlaidInfo{}
 
 // PayByBankPlaidInfo struct for PayByBankPlaidInfo
 type PayByBankPlaidInfo struct {
-	// Country Code.
-	CountryCode *string `json:"countryCode,omitempty"`
 	// Merchant logo (max. size 150kB). Format: Base64-encoded string.
-	Logo *string `json:"logo,omitempty"`
-	// The city the merchant is doing business in.
-	MerchantCity *string `json:"merchantCity,omitempty"`
-	// Legal Business Name of the Merchant.
-	MerchantLegalName *string `json:"merchantLegalName,omitempty"`
-	// Merchant shop url.
-	MerchantShopUrl *string `json:"merchantShopUrl,omitempty"`
-	// The state/province of the merchant.
-	MerchantStateProvince *string `json:"merchantStateProvince,omitempty"`
-	// The street address of the merchant.
-	MerchantStreetAddress  *string                     `json:"merchantStreetAddress,omitempty"`
+	Logo                   *string                     `json:"logo,omitempty"`
 	TransactionDescription *TransactionDescriptionInfo `json:"transactionDescription,omitempty"`
-	// The zip code of the account.
-	ZipCode *string `json:"zipCode,omitempty"`
 }
 
 // NewPayByBankPlaidInfo instantiates a new PayByBankPlaidInfo object
@@ -53,38 +39,6 @@ func NewPayByBankPlaidInfo() *PayByBankPlaidInfo {
 func NewPayByBankPlaidInfoWithDefaults() *PayByBankPlaidInfo {
 	this := PayByBankPlaidInfo{}
 	return &this
-}
-
-// GetCountryCode returns the CountryCode field value if set, zero value otherwise.
-func (o *PayByBankPlaidInfo) GetCountryCode() string {
-	if o == nil || common.IsNil(o.CountryCode) {
-		var ret string
-		return ret
-	}
-	return *o.CountryCode
-}
-
-// GetCountryCodeOk returns a tuple with the CountryCode field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PayByBankPlaidInfo) GetCountryCodeOk() (*string, bool) {
-	if o == nil || common.IsNil(o.CountryCode) {
-		return nil, false
-	}
-	return o.CountryCode, true
-}
-
-// HasCountryCode returns a boolean if a field has been set.
-func (o *PayByBankPlaidInfo) HasCountryCode() bool {
-	if o != nil && !common.IsNil(o.CountryCode) {
-		return true
-	}
-
-	return false
-}
-
-// SetCountryCode gets a reference to the given string and assigns it to the CountryCode field.
-func (o *PayByBankPlaidInfo) SetCountryCode(v string) {
-	o.CountryCode = &v
 }
 
 // GetLogo returns the Logo field value if set, zero value otherwise.
@@ -119,166 +73,6 @@ func (o *PayByBankPlaidInfo) SetLogo(v string) {
 	o.Logo = &v
 }
 
-// GetMerchantCity returns the MerchantCity field value if set, zero value otherwise.
-func (o *PayByBankPlaidInfo) GetMerchantCity() string {
-	if o == nil || common.IsNil(o.MerchantCity) {
-		var ret string
-		return ret
-	}
-	return *o.MerchantCity
-}
-
-// GetMerchantCityOk returns a tuple with the MerchantCity field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PayByBankPlaidInfo) GetMerchantCityOk() (*string, bool) {
-	if o == nil || common.IsNil(o.MerchantCity) {
-		return nil, false
-	}
-	return o.MerchantCity, true
-}
-
-// HasMerchantCity returns a boolean if a field has been set.
-func (o *PayByBankPlaidInfo) HasMerchantCity() bool {
-	if o != nil && !common.IsNil(o.MerchantCity) {
-		return true
-	}
-
-	return false
-}
-
-// SetMerchantCity gets a reference to the given string and assigns it to the MerchantCity field.
-func (o *PayByBankPlaidInfo) SetMerchantCity(v string) {
-	o.MerchantCity = &v
-}
-
-// GetMerchantLegalName returns the MerchantLegalName field value if set, zero value otherwise.
-func (o *PayByBankPlaidInfo) GetMerchantLegalName() string {
-	if o == nil || common.IsNil(o.MerchantLegalName) {
-		var ret string
-		return ret
-	}
-	return *o.MerchantLegalName
-}
-
-// GetMerchantLegalNameOk returns a tuple with the MerchantLegalName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PayByBankPlaidInfo) GetMerchantLegalNameOk() (*string, bool) {
-	if o == nil || common.IsNil(o.MerchantLegalName) {
-		return nil, false
-	}
-	return o.MerchantLegalName, true
-}
-
-// HasMerchantLegalName returns a boolean if a field has been set.
-func (o *PayByBankPlaidInfo) HasMerchantLegalName() bool {
-	if o != nil && !common.IsNil(o.MerchantLegalName) {
-		return true
-	}
-
-	return false
-}
-
-// SetMerchantLegalName gets a reference to the given string and assigns it to the MerchantLegalName field.
-func (o *PayByBankPlaidInfo) SetMerchantLegalName(v string) {
-	o.MerchantLegalName = &v
-}
-
-// GetMerchantShopUrl returns the MerchantShopUrl field value if set, zero value otherwise.
-func (o *PayByBankPlaidInfo) GetMerchantShopUrl() string {
-	if o == nil || common.IsNil(o.MerchantShopUrl) {
-		var ret string
-		return ret
-	}
-	return *o.MerchantShopUrl
-}
-
-// GetMerchantShopUrlOk returns a tuple with the MerchantShopUrl field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PayByBankPlaidInfo) GetMerchantShopUrlOk() (*string, bool) {
-	if o == nil || common.IsNil(o.MerchantShopUrl) {
-		return nil, false
-	}
-	return o.MerchantShopUrl, true
-}
-
-// HasMerchantShopUrl returns a boolean if a field has been set.
-func (o *PayByBankPlaidInfo) HasMerchantShopUrl() bool {
-	if o != nil && !common.IsNil(o.MerchantShopUrl) {
-		return true
-	}
-
-	return false
-}
-
-// SetMerchantShopUrl gets a reference to the given string and assigns it to the MerchantShopUrl field.
-func (o *PayByBankPlaidInfo) SetMerchantShopUrl(v string) {
-	o.MerchantShopUrl = &v
-}
-
-// GetMerchantStateProvince returns the MerchantStateProvince field value if set, zero value otherwise.
-func (o *PayByBankPlaidInfo) GetMerchantStateProvince() string {
-	if o == nil || common.IsNil(o.MerchantStateProvince) {
-		var ret string
-		return ret
-	}
-	return *o.MerchantStateProvince
-}
-
-// GetMerchantStateProvinceOk returns a tuple with the MerchantStateProvince field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PayByBankPlaidInfo) GetMerchantStateProvinceOk() (*string, bool) {
-	if o == nil || common.IsNil(o.MerchantStateProvince) {
-		return nil, false
-	}
-	return o.MerchantStateProvince, true
-}
-
-// HasMerchantStateProvince returns a boolean if a field has been set.
-func (o *PayByBankPlaidInfo) HasMerchantStateProvince() bool {
-	if o != nil && !common.IsNil(o.MerchantStateProvince) {
-		return true
-	}
-
-	return false
-}
-
-// SetMerchantStateProvince gets a reference to the given string and assigns it to the MerchantStateProvince field.
-func (o *PayByBankPlaidInfo) SetMerchantStateProvince(v string) {
-	o.MerchantStateProvince = &v
-}
-
-// GetMerchantStreetAddress returns the MerchantStreetAddress field value if set, zero value otherwise.
-func (o *PayByBankPlaidInfo) GetMerchantStreetAddress() string {
-	if o == nil || common.IsNil(o.MerchantStreetAddress) {
-		var ret string
-		return ret
-	}
-	return *o.MerchantStreetAddress
-}
-
-// GetMerchantStreetAddressOk returns a tuple with the MerchantStreetAddress field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PayByBankPlaidInfo) GetMerchantStreetAddressOk() (*string, bool) {
-	if o == nil || common.IsNil(o.MerchantStreetAddress) {
-		return nil, false
-	}
-	return o.MerchantStreetAddress, true
-}
-
-// HasMerchantStreetAddress returns a boolean if a field has been set.
-func (o *PayByBankPlaidInfo) HasMerchantStreetAddress() bool {
-	if o != nil && !common.IsNil(o.MerchantStreetAddress) {
-		return true
-	}
-
-	return false
-}
-
-// SetMerchantStreetAddress gets a reference to the given string and assigns it to the MerchantStreetAddress field.
-func (o *PayByBankPlaidInfo) SetMerchantStreetAddress(v string) {
-	o.MerchantStreetAddress = &v
-}
-
 // GetTransactionDescription returns the TransactionDescription field value if set, zero value otherwise.
 func (o *PayByBankPlaidInfo) GetTransactionDescription() TransactionDescriptionInfo {
 	if o == nil || common.IsNil(o.TransactionDescription) {
@@ -311,38 +105,6 @@ func (o *PayByBankPlaidInfo) SetTransactionDescription(v TransactionDescriptionI
 	o.TransactionDescription = &v
 }
 
-// GetZipCode returns the ZipCode field value if set, zero value otherwise.
-func (o *PayByBankPlaidInfo) GetZipCode() string {
-	if o == nil || common.IsNil(o.ZipCode) {
-		var ret string
-		return ret
-	}
-	return *o.ZipCode
-}
-
-// GetZipCodeOk returns a tuple with the ZipCode field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PayByBankPlaidInfo) GetZipCodeOk() (*string, bool) {
-	if o == nil || common.IsNil(o.ZipCode) {
-		return nil, false
-	}
-	return o.ZipCode, true
-}
-
-// HasZipCode returns a boolean if a field has been set.
-func (o *PayByBankPlaidInfo) HasZipCode() bool {
-	if o != nil && !common.IsNil(o.ZipCode) {
-		return true
-	}
-
-	return false
-}
-
-// SetZipCode gets a reference to the given string and assigns it to the ZipCode field.
-func (o *PayByBankPlaidInfo) SetZipCode(v string) {
-	o.ZipCode = &v
-}
-
 func (o PayByBankPlaidInfo) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -353,32 +115,11 @@ func (o PayByBankPlaidInfo) MarshalJSON() ([]byte, error) {
 
 func (o PayByBankPlaidInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !common.IsNil(o.CountryCode) {
-		toSerialize["countryCode"] = o.CountryCode
-	}
 	if !common.IsNil(o.Logo) {
 		toSerialize["logo"] = o.Logo
 	}
-	if !common.IsNil(o.MerchantCity) {
-		toSerialize["merchantCity"] = o.MerchantCity
-	}
-	if !common.IsNil(o.MerchantLegalName) {
-		toSerialize["merchantLegalName"] = o.MerchantLegalName
-	}
-	if !common.IsNil(o.MerchantShopUrl) {
-		toSerialize["merchantShopUrl"] = o.MerchantShopUrl
-	}
-	if !common.IsNil(o.MerchantStateProvince) {
-		toSerialize["merchantStateProvince"] = o.MerchantStateProvince
-	}
-	if !common.IsNil(o.MerchantStreetAddress) {
-		toSerialize["merchantStreetAddress"] = o.MerchantStreetAddress
-	}
 	if !common.IsNil(o.TransactionDescription) {
 		toSerialize["transactionDescription"] = o.TransactionDescription
-	}
-	if !common.IsNil(o.ZipCode) {
-		toSerialize["zipCode"] = o.ZipCode
 	}
 	return toSerialize, nil
 }
