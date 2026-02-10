@@ -820,7 +820,7 @@ func (a *TerminalOrdersMerchantLevelApi) ListTerminalModelsInput(merchantId stri
 /*
 ListTerminalModels Get a list of terminal models
 
-Returns the payment terminal models that merchant account identified in the path has access to. The response includes the terminal model ID, which can be used as a query parameter when getting a list of terminals or a list of products for ordering.
+Returns the payment terminal models that the merchant account identified in the path has access to. The response includes the terminal model ID, which can be used as a query parameter when getting a list of terminals or a list of products for ordering.
 
 To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Terminal ordering read

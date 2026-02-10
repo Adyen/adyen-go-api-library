@@ -49,7 +49,7 @@ func (a *PaymentMethodsMerchantLevelApi) AddApplePayDomainInput(merchantId strin
 /*
 AddApplePayDomain Add an Apple Pay domain
 
-Adds the new domain to the list of Apple Pay domains that are registered with the merchant account and the payment method identified in the path. For more information, see [Apple Pay documentation](https://docs.adyen.com/payment-methods/apple-pay/enable-apple-pay#register-merchant-domain).
+Adds the new domain to the list of Apple Pay domains that are registered with the merchant account and the payment method identified in the path. For more information, see [Apple Pay documentation](https://docs.adyen.com/payment-methods/apple-pay/web-drop-in/?tab=adyen-certificate-live_1#going-live).
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Payment methods read and write
@@ -503,6 +503,7 @@ func (a *PaymentMethodsMerchantLevelApi) RequestPaymentMethodInput(merchantId st
 RequestPaymentMethod Request a payment method
 
 Sends a request to add a new payment method to the merchant account identified in the path.
+Depending the payment method [`type`](https://docs.adyen.com/api-explorer/Management/latest/post/merchants/_merchantId_/paymentMethodSettings#request-type), you may need to send an additional object required for the payment method.
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Payment methods read and write
@@ -613,6 +614,7 @@ func (a *PaymentMethodsMerchantLevelApi) UpdatePaymentMethodInput(merchantId str
 UpdatePaymentMethod Update a payment method
 
 Updates payment method details for the merchant account and the payment method identified in the path.
+Depending the payment method [`type`](https://docs.adyen.com/api-explorer/Management/latest/patch/merchants/_merchantId_/paymentMethodSettings#request-type), you may need to send an additional object required for the payment method.
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Payment methods read and write
