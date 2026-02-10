@@ -25,6 +25,8 @@ type DokuDetails struct {
 	FirstName string `json:"firstName"`
 	// The shopper's last name.
 	LastName string `json:"lastName"`
+	// Base64-encoded JSON object containing SDK related parameters required by the SDK
+	SdkData *string `json:"sdkData,omitempty"`
 	// The shopper's email.
 	ShopperEmail string `json:"shopperEmail"`
 	// **doku**
@@ -132,6 +134,38 @@ func (o *DokuDetails) SetLastName(v string) {
 	o.LastName = v
 }
 
+// GetSdkData returns the SdkData field value if set, zero value otherwise.
+func (o *DokuDetails) GetSdkData() string {
+	if o == nil || common.IsNil(o.SdkData) {
+		var ret string
+		return ret
+	}
+	return *o.SdkData
+}
+
+// GetSdkDataOk returns a tuple with the SdkData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DokuDetails) GetSdkDataOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SdkData) {
+		return nil, false
+	}
+	return o.SdkData, true
+}
+
+// HasSdkData returns a boolean if a field has been set.
+func (o *DokuDetails) HasSdkData() bool {
+	if o != nil && !common.IsNil(o.SdkData) {
+		return true
+	}
+
+	return false
+}
+
+// SetSdkData gets a reference to the given string and assigns it to the SdkData field.
+func (o *DokuDetails) SetSdkData(v string) {
+	o.SdkData = &v
+}
+
 // GetShopperEmail returns the ShopperEmail field value
 func (o *DokuDetails) GetShopperEmail() string {
 	if o == nil {
@@ -195,6 +229,9 @@ func (o DokuDetails) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["firstName"] = o.FirstName
 	toSerialize["lastName"] = o.LastName
+	if !common.IsNil(o.SdkData) {
+		toSerialize["sdkData"] = o.SdkData
+	}
 	toSerialize["shopperEmail"] = o.ShopperEmail
 	toSerialize["type"] = o.Type
 	return toSerialize, nil

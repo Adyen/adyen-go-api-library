@@ -19,6 +19,7 @@ var _ common.MappedNullable = &PaymentDetailsResponse{}
 
 // PaymentDetailsResponse struct for PaymentDetailsResponse
 type PaymentDetailsResponse struct {
+	Action *PaymentDetailsResponseAction `json:"action,omitempty"`
 	// Contains additional information about the payment. Some data fields are included only if you select them first: Go to **Customer Area** > **Developers** > **Additional data**.
 	AdditionalData *map[string]string `json:"additionalData,omitempty"`
 	Amount         *Amount            `json:"amount,omitempty"`
@@ -26,9 +27,10 @@ type PaymentDetailsResponse struct {
 	DonationToken *string      `json:"donationToken,omitempty"`
 	FraudResult   *FraudResult `json:"fraudResult,omitempty"`
 	// The reference used during the /payments request.
-	MerchantReference *string                `json:"merchantReference,omitempty"`
-	Order             *CheckoutOrderResponse `json:"order,omitempty"`
-	PaymentMethod     *ResponsePaymentMethod `json:"paymentMethod,omitempty"`
+	MerchantReference  *string                     `json:"merchantReference,omitempty"`
+	Order              *CheckoutOrderResponse      `json:"order,omitempty"`
+	PaymentMethod      *ResponsePaymentMethod      `json:"paymentMethod,omitempty"`
+	PaymentValidations *PaymentValidationsResponse `json:"paymentValidations,omitempty"`
 	// Adyen's 16-character string reference associated with the transaction/request. This value is globally unique; quote it when communicating with us about this request.
 	PspReference *string `json:"pspReference,omitempty"`
 	// If the payment's authorisation is refused or an error occurs during authorisation, this field holds Adyen's mapped reason for the refusal or a description of the error. When a transaction fails, the authorisation response includes `resultCode` and `refusalReason` values.  For more information, see [Refusal reasons](https://docs.adyen.com/development-resources/refusal-reasons).
@@ -60,6 +62,38 @@ func NewPaymentDetailsResponse() *PaymentDetailsResponse {
 func NewPaymentDetailsResponseWithDefaults() *PaymentDetailsResponse {
 	this := PaymentDetailsResponse{}
 	return &this
+}
+
+// GetAction returns the Action field value if set, zero value otherwise.
+func (o *PaymentDetailsResponse) GetAction() PaymentDetailsResponseAction {
+	if o == nil || common.IsNil(o.Action) {
+		var ret PaymentDetailsResponseAction
+		return ret
+	}
+	return *o.Action
+}
+
+// GetActionOk returns a tuple with the Action field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentDetailsResponse) GetActionOk() (*PaymentDetailsResponseAction, bool) {
+	if o == nil || common.IsNil(o.Action) {
+		return nil, false
+	}
+	return o.Action, true
+}
+
+// HasAction returns a boolean if a field has been set.
+func (o *PaymentDetailsResponse) HasAction() bool {
+	if o != nil && !common.IsNil(o.Action) {
+		return true
+	}
+
+	return false
+}
+
+// SetAction gets a reference to the given PaymentDetailsResponseAction and assigns it to the Action field.
+func (o *PaymentDetailsResponse) SetAction(v PaymentDetailsResponseAction) {
+	o.Action = &v
 }
 
 // GetAdditionalData returns the AdditionalData field value if set, zero value otherwise.
@@ -284,6 +318,38 @@ func (o *PaymentDetailsResponse) HasPaymentMethod() bool {
 // SetPaymentMethod gets a reference to the given ResponsePaymentMethod and assigns it to the PaymentMethod field.
 func (o *PaymentDetailsResponse) SetPaymentMethod(v ResponsePaymentMethod) {
 	o.PaymentMethod = &v
+}
+
+// GetPaymentValidations returns the PaymentValidations field value if set, zero value otherwise.
+func (o *PaymentDetailsResponse) GetPaymentValidations() PaymentValidationsResponse {
+	if o == nil || common.IsNil(o.PaymentValidations) {
+		var ret PaymentValidationsResponse
+		return ret
+	}
+	return *o.PaymentValidations
+}
+
+// GetPaymentValidationsOk returns a tuple with the PaymentValidations field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentDetailsResponse) GetPaymentValidationsOk() (*PaymentValidationsResponse, bool) {
+	if o == nil || common.IsNil(o.PaymentValidations) {
+		return nil, false
+	}
+	return o.PaymentValidations, true
+}
+
+// HasPaymentValidations returns a boolean if a field has been set.
+func (o *PaymentDetailsResponse) HasPaymentValidations() bool {
+	if o != nil && !common.IsNil(o.PaymentValidations) {
+		return true
+	}
+
+	return false
+}
+
+// SetPaymentValidations gets a reference to the given PaymentValidationsResponse and assigns it to the PaymentValidations field.
+func (o *PaymentDetailsResponse) SetPaymentValidations(v PaymentValidationsResponse) {
+	o.PaymentValidations = &v
 }
 
 // GetPspReference returns the PspReference field value if set, zero value otherwise.
@@ -552,6 +618,9 @@ func (o PaymentDetailsResponse) MarshalJSON() ([]byte, error) {
 
 func (o PaymentDetailsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.Action) {
+		toSerialize["action"] = o.Action
+	}
 	if !common.IsNil(o.AdditionalData) {
 		toSerialize["additionalData"] = o.AdditionalData
 	}
@@ -572,6 +641,9 @@ func (o PaymentDetailsResponse) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.PaymentMethod) {
 		toSerialize["paymentMethod"] = o.PaymentMethod
+	}
+	if !common.IsNil(o.PaymentValidations) {
+		toSerialize["paymentValidations"] = o.PaymentValidations
 	}
 	if !common.IsNil(o.PspReference) {
 		toSerialize["pspReference"] = o.PspReference

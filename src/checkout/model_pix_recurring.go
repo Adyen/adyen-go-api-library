@@ -21,6 +21,8 @@ var _ common.MappedNullable = &PixRecurring{}
 type PixRecurring struct {
 	// The date on which the shopper's payment method will be charged, in YYYY-MM-DD format.
 	BillingDate *string `json:"billingDate,omitempty"`
+	// Flag used to define whether liquidation can happen only on business days
+	BusinessDayOnly *bool `json:"businessDayOnly,omitempty"`
 	// End date of the billing plan, in YYYY-MM-DD format. The end date must align with the frequency and the start date of the billing plan. If left blank, the subscription will continue indefinitely unless it is cancelled by the shopper.
 	EndsAt *string `json:"endsAt,omitempty"`
 	// The frequency at which the shopper will be charged.
@@ -84,6 +86,38 @@ func (o *PixRecurring) HasBillingDate() bool {
 // SetBillingDate gets a reference to the given string and assigns it to the BillingDate field.
 func (o *PixRecurring) SetBillingDate(v string) {
 	o.BillingDate = &v
+}
+
+// GetBusinessDayOnly returns the BusinessDayOnly field value if set, zero value otherwise.
+func (o *PixRecurring) GetBusinessDayOnly() bool {
+	if o == nil || common.IsNil(o.BusinessDayOnly) {
+		var ret bool
+		return ret
+	}
+	return *o.BusinessDayOnly
+}
+
+// GetBusinessDayOnlyOk returns a tuple with the BusinessDayOnly field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PixRecurring) GetBusinessDayOnlyOk() (*bool, bool) {
+	if o == nil || common.IsNil(o.BusinessDayOnly) {
+		return nil, false
+	}
+	return o.BusinessDayOnly, true
+}
+
+// HasBusinessDayOnly returns a boolean if a field has been set.
+func (o *PixRecurring) HasBusinessDayOnly() bool {
+	if o != nil && !common.IsNil(o.BusinessDayOnly) {
+		return true
+	}
+
+	return false
+}
+
+// SetBusinessDayOnly gets a reference to the given bool and assigns it to the BusinessDayOnly field.
+func (o *PixRecurring) SetBusinessDayOnly(v bool) {
+	o.BusinessDayOnly = &v
 }
 
 // GetEndsAt returns the EndsAt field value if set, zero value otherwise.
@@ -354,6 +388,9 @@ func (o PixRecurring) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.BillingDate) {
 		toSerialize["billingDate"] = o.BillingDate
+	}
+	if !common.IsNil(o.BusinessDayOnly) {
+		toSerialize["businessDayOnly"] = o.BusinessDayOnly
 	}
 	if !common.IsNil(o.EndsAt) {
 		toSerialize["endsAt"] = o.EndsAt

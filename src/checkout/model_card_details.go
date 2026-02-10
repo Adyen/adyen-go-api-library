@@ -19,6 +19,8 @@ var _ common.MappedNullable = &CardDetails{}
 
 // CardDetails struct for CardDetails
 type CardDetails struct {
+	// The sequence number for the debit. For example, send **2** if this is the second debit for the subscription. The sequence number is included in the notification sent to the shopper.
+	BillingSequenceNumber *string `json:"billingSequenceNumber,omitempty"`
 	// Secondary brand of the card. For example: **plastix**, **hmclub**.
 	Brand *string `json:"brand,omitempty"`
 	// The checkout attempt identifier.
@@ -35,6 +37,8 @@ type CardDetails struct {
 	EncryptedExpiryMonth *string `json:"encryptedExpiryMonth,omitempty"`
 	// The encrypted card expiry year.
 	EncryptedExpiryYear *string `json:"encryptedExpiryYear,omitempty"`
+	// This field contains an encrypted, one-time password or an authentication code provided by the cardholder.
+	EncryptedPassword *string `json:"encryptedPassword,omitempty"`
 	// The encrypted card verification code.
 	EncryptedSecurityCode *string `json:"encryptedSecurityCode,omitempty"`
 	// The card expiry month. Only collect raw card data if you are [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide).
@@ -47,7 +51,7 @@ type CardDetails struct {
 	FundingSource *string `json:"fundingSource,omitempty"`
 	// The name of the card holder.
 	HolderName *string `json:"holderName,omitempty"`
-	// The transaction identifier from card schemes. This is the [`networkTxReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_additionalData-ResponseAdditionalDataCommon-networkTxReference) from the response to the first payment.
+	// The transaction identifier from card schemes. This is the [`networkTxReference`](https://docs.adyen.com/api-explorer/Checkout/latest/post/payments#responses-200-additionalData-ResponseAdditionalDataCommon-networkTxReference) from the response to the first payment.
 	NetworkPaymentReference *string `json:"networkPaymentReference,omitempty"`
 	// The card number. Only collect raw card data if you are [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide).
 	Number *string `json:"number,omitempty"`
@@ -55,6 +59,8 @@ type CardDetails struct {
 	// Deprecated since Adyen Checkout API v49
 	// Use `storedPaymentMethodId` instead.
 	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
+	// Base64-encoded JSON object containing SDK related parameters required by the SDK
+	SdkData *string `json:"sdkData,omitempty"`
 	// The `shopperNotificationReference` returned in the response when you requested to notify the shopper. Used only for recurring payments in India.
 	ShopperNotificationReference *string `json:"shopperNotificationReference,omitempty"`
 	// An identifier used for the Click to Pay transaction.
@@ -92,6 +98,38 @@ func NewCardDetailsWithDefaults() *CardDetails {
 	var type_ string = "scheme"
 	this.Type = &type_
 	return &this
+}
+
+// GetBillingSequenceNumber returns the BillingSequenceNumber field value if set, zero value otherwise.
+func (o *CardDetails) GetBillingSequenceNumber() string {
+	if o == nil || common.IsNil(o.BillingSequenceNumber) {
+		var ret string
+		return ret
+	}
+	return *o.BillingSequenceNumber
+}
+
+// GetBillingSequenceNumberOk returns a tuple with the BillingSequenceNumber field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CardDetails) GetBillingSequenceNumberOk() (*string, bool) {
+	if o == nil || common.IsNil(o.BillingSequenceNumber) {
+		return nil, false
+	}
+	return o.BillingSequenceNumber, true
+}
+
+// HasBillingSequenceNumber returns a boolean if a field has been set.
+func (o *CardDetails) HasBillingSequenceNumber() bool {
+	if o != nil && !common.IsNil(o.BillingSequenceNumber) {
+		return true
+	}
+
+	return false
+}
+
+// SetBillingSequenceNumber gets a reference to the given string and assigns it to the BillingSequenceNumber field.
+func (o *CardDetails) SetBillingSequenceNumber(v string) {
+	o.BillingSequenceNumber = &v
 }
 
 // GetBrand returns the Brand field value if set, zero value otherwise.
@@ -351,6 +389,38 @@ func (o *CardDetails) HasEncryptedExpiryYear() bool {
 // SetEncryptedExpiryYear gets a reference to the given string and assigns it to the EncryptedExpiryYear field.
 func (o *CardDetails) SetEncryptedExpiryYear(v string) {
 	o.EncryptedExpiryYear = &v
+}
+
+// GetEncryptedPassword returns the EncryptedPassword field value if set, zero value otherwise.
+func (o *CardDetails) GetEncryptedPassword() string {
+	if o == nil || common.IsNil(o.EncryptedPassword) {
+		var ret string
+		return ret
+	}
+	return *o.EncryptedPassword
+}
+
+// GetEncryptedPasswordOk returns a tuple with the EncryptedPassword field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CardDetails) GetEncryptedPasswordOk() (*string, bool) {
+	if o == nil || common.IsNil(o.EncryptedPassword) {
+		return nil, false
+	}
+	return o.EncryptedPassword, true
+}
+
+// HasEncryptedPassword returns a boolean if a field has been set.
+func (o *CardDetails) HasEncryptedPassword() bool {
+	if o != nil && !common.IsNil(o.EncryptedPassword) {
+		return true
+	}
+
+	return false
+}
+
+// SetEncryptedPassword gets a reference to the given string and assigns it to the EncryptedPassword field.
+func (o *CardDetails) SetEncryptedPassword(v string) {
+	o.EncryptedPassword = &v
 }
 
 // GetEncryptedSecurityCode returns the EncryptedSecurityCode field value if set, zero value otherwise.
@@ -647,6 +717,38 @@ func (o *CardDetails) SetRecurringDetailReference(v string) {
 	o.RecurringDetailReference = &v
 }
 
+// GetSdkData returns the SdkData field value if set, zero value otherwise.
+func (o *CardDetails) GetSdkData() string {
+	if o == nil || common.IsNil(o.SdkData) {
+		var ret string
+		return ret
+	}
+	return *o.SdkData
+}
+
+// GetSdkDataOk returns a tuple with the SdkData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CardDetails) GetSdkDataOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SdkData) {
+		return nil, false
+	}
+	return o.SdkData, true
+}
+
+// HasSdkData returns a boolean if a field has been set.
+func (o *CardDetails) HasSdkData() bool {
+	if o != nil && !common.IsNil(o.SdkData) {
+		return true
+	}
+
+	return false
+}
+
+// SetSdkData gets a reference to the given string and assigns it to the SdkData field.
+func (o *CardDetails) SetSdkData(v string) {
+	o.SdkData = &v
+}
+
 // GetShopperNotificationReference returns the ShopperNotificationReference field value if set, zero value otherwise.
 func (o *CardDetails) GetShopperNotificationReference() string {
 	if o == nil || common.IsNil(o.ShopperNotificationReference) {
@@ -913,6 +1015,9 @@ func (o CardDetails) MarshalJSON() ([]byte, error) {
 
 func (o CardDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.BillingSequenceNumber) {
+		toSerialize["billingSequenceNumber"] = o.BillingSequenceNumber
+	}
 	if !common.IsNil(o.Brand) {
 		toSerialize["brand"] = o.Brand
 	}
@@ -936,6 +1041,9 @@ func (o CardDetails) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.EncryptedExpiryYear) {
 		toSerialize["encryptedExpiryYear"] = o.EncryptedExpiryYear
+	}
+	if !common.IsNil(o.EncryptedPassword) {
+		toSerialize["encryptedPassword"] = o.EncryptedPassword
 	}
 	if !common.IsNil(o.EncryptedSecurityCode) {
 		toSerialize["encryptedSecurityCode"] = o.EncryptedSecurityCode
@@ -963,6 +1071,9 @@ func (o CardDetails) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.RecurringDetailReference) {
 		toSerialize["recurringDetailReference"] = o.RecurringDetailReference
+	}
+	if !common.IsNil(o.SdkData) {
+		toSerialize["sdkData"] = o.SdkData
 	}
 	if !common.IsNil(o.ShopperNotificationReference) {
 		toSerialize["shopperNotificationReference"] = o.ShopperNotificationReference
@@ -1028,7 +1139,7 @@ func (v *NullableCardDetails) UnmarshalJSON(src []byte) error {
 }
 
 func (o *CardDetails) isValidFundingSource() bool {
-	var allowedEnumValues = []string{"credit", "debit"}
+	var allowedEnumValues = []string{"credit", "debit", "prepaid"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetFundingSource() == allowed {
 			return true

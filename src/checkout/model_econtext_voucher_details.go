@@ -25,6 +25,8 @@ type EcontextVoucherDetails struct {
 	FirstName string `json:"firstName"`
 	// The shopper's last name.
 	LastName string `json:"lastName"`
+	// Base64-encoded JSON object containing SDK related parameters required by the SDK
+	SdkData *string `json:"sdkData,omitempty"`
 	// The shopper's email.
 	ShopperEmail string `json:"shopperEmail"`
 	// The shopper's contact number. It must have an international number format, for example **+31 20 779 1846**. Formats like **+31 (0)20 779 1846** or **0031 20 779 1846** are not accepted.
@@ -135,6 +137,38 @@ func (o *EcontextVoucherDetails) SetLastName(v string) {
 	o.LastName = v
 }
 
+// GetSdkData returns the SdkData field value if set, zero value otherwise.
+func (o *EcontextVoucherDetails) GetSdkData() string {
+	if o == nil || common.IsNil(o.SdkData) {
+		var ret string
+		return ret
+	}
+	return *o.SdkData
+}
+
+// GetSdkDataOk returns a tuple with the SdkData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EcontextVoucherDetails) GetSdkDataOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SdkData) {
+		return nil, false
+	}
+	return o.SdkData, true
+}
+
+// HasSdkData returns a boolean if a field has been set.
+func (o *EcontextVoucherDetails) HasSdkData() bool {
+	if o != nil && !common.IsNil(o.SdkData) {
+		return true
+	}
+
+	return false
+}
+
+// SetSdkData gets a reference to the given string and assigns it to the SdkData field.
+func (o *EcontextVoucherDetails) SetSdkData(v string) {
+	o.SdkData = &v
+}
+
 // GetShopperEmail returns the ShopperEmail field value
 func (o *EcontextVoucherDetails) GetShopperEmail() string {
 	if o == nil {
@@ -222,6 +256,9 @@ func (o EcontextVoucherDetails) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["firstName"] = o.FirstName
 	toSerialize["lastName"] = o.LastName
+	if !common.IsNil(o.SdkData) {
+		toSerialize["sdkData"] = o.SdkData
+	}
 	toSerialize["shopperEmail"] = o.ShopperEmail
 	toSerialize["telephoneNumber"] = o.TelephoneNumber
 	toSerialize["type"] = o.Type

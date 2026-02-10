@@ -21,12 +21,16 @@ var _ common.MappedNullable = &UpiIntentDetails{}
 type UpiIntentDetails struct {
 	// TPAP (Third Party Application) Id that is being used to make the UPI payment
 	AppId *string `json:"appId,omitempty"`
+	// The sequence number for the debit. For example, send **2** if this is the second debit for the subscription. The sequence number is included in the notification sent to the shopper.
+	BillingSequenceNumber *string `json:"billingSequenceNumber,omitempty"`
 	// The checkout attempt identifier.
 	CheckoutAttemptId *string `json:"checkoutAttemptId,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
 	// Deprecated since Adyen Checkout API v49
 	// Use `storedPaymentMethodId` instead.
 	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
+	// Base64-encoded JSON object containing SDK related parameters required by the SDK
+	SdkData *string `json:"sdkData,omitempty"`
 	// The `shopperNotificationReference` returned in the response when you requested to notify the shopper. Used for recurring payment only.
 	ShopperNotificationReference *string `json:"shopperNotificationReference,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
@@ -85,6 +89,38 @@ func (o *UpiIntentDetails) HasAppId() bool {
 // SetAppId gets a reference to the given string and assigns it to the AppId field.
 func (o *UpiIntentDetails) SetAppId(v string) {
 	o.AppId = &v
+}
+
+// GetBillingSequenceNumber returns the BillingSequenceNumber field value if set, zero value otherwise.
+func (o *UpiIntentDetails) GetBillingSequenceNumber() string {
+	if o == nil || common.IsNil(o.BillingSequenceNumber) {
+		var ret string
+		return ret
+	}
+	return *o.BillingSequenceNumber
+}
+
+// GetBillingSequenceNumberOk returns a tuple with the BillingSequenceNumber field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpiIntentDetails) GetBillingSequenceNumberOk() (*string, bool) {
+	if o == nil || common.IsNil(o.BillingSequenceNumber) {
+		return nil, false
+	}
+	return o.BillingSequenceNumber, true
+}
+
+// HasBillingSequenceNumber returns a boolean if a field has been set.
+func (o *UpiIntentDetails) HasBillingSequenceNumber() bool {
+	if o != nil && !common.IsNil(o.BillingSequenceNumber) {
+		return true
+	}
+
+	return false
+}
+
+// SetBillingSequenceNumber gets a reference to the given string and assigns it to the BillingSequenceNumber field.
+func (o *UpiIntentDetails) SetBillingSequenceNumber(v string) {
+	o.BillingSequenceNumber = &v
 }
 
 // GetCheckoutAttemptId returns the CheckoutAttemptId field value if set, zero value otherwise.
@@ -155,6 +191,38 @@ func (o *UpiIntentDetails) HasRecurringDetailReference() bool {
 // Use `storedPaymentMethodId` instead.
 func (o *UpiIntentDetails) SetRecurringDetailReference(v string) {
 	o.RecurringDetailReference = &v
+}
+
+// GetSdkData returns the SdkData field value if set, zero value otherwise.
+func (o *UpiIntentDetails) GetSdkData() string {
+	if o == nil || common.IsNil(o.SdkData) {
+		var ret string
+		return ret
+	}
+	return *o.SdkData
+}
+
+// GetSdkDataOk returns a tuple with the SdkData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpiIntentDetails) GetSdkDataOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SdkData) {
+		return nil, false
+	}
+	return o.SdkData, true
+}
+
+// HasSdkData returns a boolean if a field has been set.
+func (o *UpiIntentDetails) HasSdkData() bool {
+	if o != nil && !common.IsNil(o.SdkData) {
+		return true
+	}
+
+	return false
+}
+
+// SetSdkData gets a reference to the given string and assigns it to the SdkData field.
+func (o *UpiIntentDetails) SetSdkData(v string) {
+	o.SdkData = &v
 }
 
 // GetShopperNotificationReference returns the ShopperNotificationReference field value if set, zero value otherwise.
@@ -258,11 +326,17 @@ func (o UpiIntentDetails) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.AppId) {
 		toSerialize["appId"] = o.AppId
 	}
+	if !common.IsNil(o.BillingSequenceNumber) {
+		toSerialize["billingSequenceNumber"] = o.BillingSequenceNumber
+	}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
 	if !common.IsNil(o.RecurringDetailReference) {
 		toSerialize["recurringDetailReference"] = o.RecurringDetailReference
+	}
+	if !common.IsNil(o.SdkData) {
+		toSerialize["sdkData"] = o.SdkData
 	}
 	if !common.IsNil(o.ShopperNotificationReference) {
 		toSerialize["shopperNotificationReference"] = o.ShopperNotificationReference

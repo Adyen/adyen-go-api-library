@@ -23,6 +23,8 @@ type DragonpayDetails struct {
 	CheckoutAttemptId *string `json:"checkoutAttemptId,omitempty"`
 	// The Dragonpay issuer value of the shopper's selected bank. Set this to an **id** of a Dragonpay issuer to preselect it.
 	Issuer string `json:"issuer"`
+	// Base64-encoded JSON object containing SDK related parameters required by the SDK
+	SdkData *string `json:"sdkData,omitempty"`
 	// The shopper’s email address.
 	ShopperEmail *string `json:"shopperEmail,omitempty"`
 	// **dragonpay**
@@ -104,6 +106,38 @@ func (o *DragonpayDetails) SetIssuer(v string) {
 	o.Issuer = v
 }
 
+// GetSdkData returns the SdkData field value if set, zero value otherwise.
+func (o *DragonpayDetails) GetSdkData() string {
+	if o == nil || common.IsNil(o.SdkData) {
+		var ret string
+		return ret
+	}
+	return *o.SdkData
+}
+
+// GetSdkDataOk returns a tuple with the SdkData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DragonpayDetails) GetSdkDataOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SdkData) {
+		return nil, false
+	}
+	return o.SdkData, true
+}
+
+// HasSdkData returns a boolean if a field has been set.
+func (o *DragonpayDetails) HasSdkData() bool {
+	if o != nil && !common.IsNil(o.SdkData) {
+		return true
+	}
+
+	return false
+}
+
+// SetSdkData gets a reference to the given string and assigns it to the SdkData field.
+func (o *DragonpayDetails) SetSdkData(v string) {
+	o.SdkData = &v
+}
+
 // GetShopperEmail returns the ShopperEmail field value if set, zero value otherwise.
 func (o *DragonpayDetails) GetShopperEmail() string {
 	if o == nil || common.IsNil(o.ShopperEmail) {
@@ -174,6 +208,9 @@ func (o DragonpayDetails) ToMap() (map[string]interface{}, error) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
 	toSerialize["issuer"] = o.Issuer
+	if !common.IsNil(o.SdkData) {
+		toSerialize["sdkData"] = o.SdkData
+	}
 	if !common.IsNil(o.ShopperEmail) {
 		toSerialize["shopperEmail"] = o.ShopperEmail
 	}
