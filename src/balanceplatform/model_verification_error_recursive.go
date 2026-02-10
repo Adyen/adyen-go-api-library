@@ -25,7 +25,7 @@ type VerificationErrorRecursive struct {
 	Code *string `json:"code,omitempty"`
 	// A description of the error.
 	Message *string `json:"message,omitempty"`
-	// The type of error.   Possible values: **invalidInput**, **dataMissing**.
+	// The type of error.    Possible values: *  **invalidInput** *  **dataMissing** *  **pendingStatus** *  **dataReview**
 	Type *string `json:"type,omitempty"`
 	// Contains the actions that you can take to resolve the verification error.
 	RemediatingActions []RemediatingAction `json:"remediatingActions,omitempty"`
@@ -273,7 +273,7 @@ func (v *NullableVerificationErrorRecursive) UnmarshalJSON(src []byte) error {
 }
 
 func (o *VerificationErrorRecursive) isValidType() bool {
-	var allowedEnumValues = []string{"dataMissing", "invalidInput", "pendingStatus"}
+	var allowedEnumValues = []string{"dataMissing", "dataReview", "invalidInput", "pendingStatus"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true
