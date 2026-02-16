@@ -15,8 +15,16 @@ import (
 
 // TransferEventEventsDataInner - struct for TransferEventEventsDataInner
 type TransferEventEventsDataInner struct {
+	InterchangeData        *InterchangeData
 	IssuingTransactionData *IssuingTransactionData
 	MerchantPurchaseData   *MerchantPurchaseData
+}
+
+// InterchangeDataAsTransferEventEventsDataInner is a convenience function that returns InterchangeData wrapped in TransferEventEventsDataInner
+func InterchangeDataAsTransferEventEventsDataInner(v *InterchangeData) TransferEventEventsDataInner {
+	return TransferEventEventsDataInner{
+		InterchangeData: v,
+	}
 }
 
 // IssuingTransactionDataAsTransferEventEventsDataInner is a convenience function that returns IssuingTransactionData wrapped in TransferEventEventsDataInner
@@ -37,6 +45,19 @@ func MerchantPurchaseDataAsTransferEventEventsDataInner(v *MerchantPurchaseData)
 func (dst *TransferEventEventsDataInner) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
+	// try to unmarshal data into InterchangeData
+	err = json.Unmarshal(data, &dst.InterchangeData)
+	if err == nil {
+		jsonInterchangeData, _ := json.Marshal(dst.InterchangeData)
+		if string(jsonInterchangeData) == "{}" || !dst.InterchangeData.isValidType() { // empty struct
+			dst.InterchangeData = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.InterchangeData = nil
+	}
+
 	// try to unmarshal data into IssuingTransactionData
 	err = json.Unmarshal(data, &dst.IssuingTransactionData)
 	if err == nil {
@@ -65,6 +86,7 @@ func (dst *TransferEventEventsDataInner) UnmarshalJSON(data []byte) error {
 
 	if match > 1 { // more than 1 match
 		// reset to nil
+		dst.InterchangeData = nil
 		dst.IssuingTransactionData = nil
 		dst.MerchantPurchaseData = nil
 
@@ -78,6 +100,10 @@ func (dst *TransferEventEventsDataInner) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src TransferEventEventsDataInner) MarshalJSON() ([]byte, error) {
+	if src.InterchangeData != nil {
+		return json.Marshal(&src.InterchangeData)
+	}
+
 	if src.IssuingTransactionData != nil {
 		return json.Marshal(&src.IssuingTransactionData)
 	}
@@ -94,6 +120,10 @@ func (obj *TransferEventEventsDataInner) GetActualInstance() interface{} {
 	if obj == nil {
 		return nil
 	}
+	if obj.InterchangeData != nil {
+		return obj.InterchangeData
+	}
+
 	if obj.IssuingTransactionData != nil {
 		return obj.IssuingTransactionData
 	}
