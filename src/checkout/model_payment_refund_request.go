@@ -21,6 +21,9 @@ var _ common.MappedNullable = &PaymentRefundRequest{}
 type PaymentRefundRequest struct {
 	Amount          Amount           `json:"amount"`
 	ApplicationInfo *ApplicationInfo `json:"applicationInfo,omitempty"`
+	// This is only available for PayPal refunds. The [`pspReference`](https://docs.adyen.com/api-explorer/Checkout/latest/post/payments#responses-200-pspReference) of the specific capture to refund.
+	CapturePspReference *string             `json:"capturePspReference,omitempty"`
+	EnhancedSchemeData  *EnhancedSchemeData `json:"enhancedSchemeData,omitempty"`
 	// Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment). > This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Atome, Clearpay, Klarna, Ratepay, Walley, and Zip.
 	LineItems []LineItem `json:"lineItems,omitempty"`
 	// The merchant account that is used to process the payment.
@@ -108,6 +111,70 @@ func (o *PaymentRefundRequest) HasApplicationInfo() bool {
 // SetApplicationInfo gets a reference to the given ApplicationInfo and assigns it to the ApplicationInfo field.
 func (o *PaymentRefundRequest) SetApplicationInfo(v ApplicationInfo) {
 	o.ApplicationInfo = &v
+}
+
+// GetCapturePspReference returns the CapturePspReference field value if set, zero value otherwise.
+func (o *PaymentRefundRequest) GetCapturePspReference() string {
+	if o == nil || common.IsNil(o.CapturePspReference) {
+		var ret string
+		return ret
+	}
+	return *o.CapturePspReference
+}
+
+// GetCapturePspReferenceOk returns a tuple with the CapturePspReference field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentRefundRequest) GetCapturePspReferenceOk() (*string, bool) {
+	if o == nil || common.IsNil(o.CapturePspReference) {
+		return nil, false
+	}
+	return o.CapturePspReference, true
+}
+
+// HasCapturePspReference returns a boolean if a field has been set.
+func (o *PaymentRefundRequest) HasCapturePspReference() bool {
+	if o != nil && !common.IsNil(o.CapturePspReference) {
+		return true
+	}
+
+	return false
+}
+
+// SetCapturePspReference gets a reference to the given string and assigns it to the CapturePspReference field.
+func (o *PaymentRefundRequest) SetCapturePspReference(v string) {
+	o.CapturePspReference = &v
+}
+
+// GetEnhancedSchemeData returns the EnhancedSchemeData field value if set, zero value otherwise.
+func (o *PaymentRefundRequest) GetEnhancedSchemeData() EnhancedSchemeData {
+	if o == nil || common.IsNil(o.EnhancedSchemeData) {
+		var ret EnhancedSchemeData
+		return ret
+	}
+	return *o.EnhancedSchemeData
+}
+
+// GetEnhancedSchemeDataOk returns a tuple with the EnhancedSchemeData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentRefundRequest) GetEnhancedSchemeDataOk() (*EnhancedSchemeData, bool) {
+	if o == nil || common.IsNil(o.EnhancedSchemeData) {
+		return nil, false
+	}
+	return o.EnhancedSchemeData, true
+}
+
+// HasEnhancedSchemeData returns a boolean if a field has been set.
+func (o *PaymentRefundRequest) HasEnhancedSchemeData() bool {
+	if o != nil && !common.IsNil(o.EnhancedSchemeData) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnhancedSchemeData gets a reference to the given EnhancedSchemeData and assigns it to the EnhancedSchemeData field.
+func (o *PaymentRefundRequest) SetEnhancedSchemeData(v EnhancedSchemeData) {
+	o.EnhancedSchemeData = &v
 }
 
 // GetLineItems returns the LineItems field value if set, zero value otherwise.
@@ -318,6 +385,12 @@ func (o PaymentRefundRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["amount"] = o.Amount
 	if !common.IsNil(o.ApplicationInfo) {
 		toSerialize["applicationInfo"] = o.ApplicationInfo
+	}
+	if !common.IsNil(o.CapturePspReference) {
+		toSerialize["capturePspReference"] = o.CapturePspReference
+	}
+	if !common.IsNil(o.EnhancedSchemeData) {
+		toSerialize["enhancedSchemeData"] = o.EnhancedSchemeData
 	}
 	if !common.IsNil(o.LineItems) {
 		toSerialize["lineItems"] = o.LineItems

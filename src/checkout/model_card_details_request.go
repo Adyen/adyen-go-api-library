@@ -19,15 +19,15 @@ var _ common.MappedNullable = &CardDetailsRequest{}
 
 // CardDetailsRequest struct for CardDetailsRequest
 type CardDetailsRequest struct {
-	// A minimum of the first eight digits of the card number. The full card number gives the best result.   You must be [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide) to collect raw card data. Alternatively, you can use the `encryptedCardNumber` field.
-	CardNumber string `json:"cardNumber"`
+	// A minimum of the first six digits of the card number. The full card number gives the best result.   You must be [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide) to collect raw card data. Alternatively, you can use the `encryptedCardNumber` field.
+	CardNumber *string `json:"cardNumber,omitempty"`
 	// The shopper country.  Format: [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) Example: NL or DE
 	CountryCode *string `json:"countryCode,omitempty"`
 	// The encrypted card number.
 	EncryptedCardNumber *string `json:"encryptedCardNumber,omitempty"`
 	// The merchant account identifier, with which you want to process the transaction.
 	MerchantAccount string `json:"merchantAccount"`
-	// The card brands you support. This is the [`brands`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/paymentMethods__resParam_paymentMethods-brands) array from your [`/paymentMethods`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/paymentMethods) response.   If not included, our API uses the ones configured for your merchant account and, if provided, the country code.
+	// The card brands you support. This is the [`brands`](https://docs.adyen.com/api-explorer/Checkout/latest/post/paymentMethods#responses-200-paymentMethods-brands) array from your [`/paymentMethods`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/paymentMethods) response.   If not included, our API uses the ones configured for your merchant account and, if provided, the country code.
 	SupportedBrands []string `json:"supportedBrands,omitempty"`
 }
 
@@ -35,9 +35,8 @@ type CardDetailsRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCardDetailsRequest(cardNumber string, merchantAccount string) *CardDetailsRequest {
+func NewCardDetailsRequest(merchantAccount string) *CardDetailsRequest {
 	this := CardDetailsRequest{}
-	this.CardNumber = cardNumber
 	this.MerchantAccount = merchantAccount
 	return &this
 }
@@ -50,28 +49,36 @@ func NewCardDetailsRequestWithDefaults() *CardDetailsRequest {
 	return &this
 }
 
-// GetCardNumber returns the CardNumber field value
+// GetCardNumber returns the CardNumber field value if set, zero value otherwise.
 func (o *CardDetailsRequest) GetCardNumber() string {
-	if o == nil {
+	if o == nil || common.IsNil(o.CardNumber) {
 		var ret string
 		return ret
 	}
-
-	return o.CardNumber
+	return *o.CardNumber
 }
 
-// GetCardNumberOk returns a tuple with the CardNumber field value
+// GetCardNumberOk returns a tuple with the CardNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CardDetailsRequest) GetCardNumberOk() (*string, bool) {
-	if o == nil {
+	if o == nil || common.IsNil(o.CardNumber) {
 		return nil, false
 	}
-	return &o.CardNumber, true
+	return o.CardNumber, true
 }
 
-// SetCardNumber sets field value
+// HasCardNumber returns a boolean if a field has been set.
+func (o *CardDetailsRequest) HasCardNumber() bool {
+	if o != nil && !common.IsNil(o.CardNumber) {
+		return true
+	}
+
+	return false
+}
+
+// SetCardNumber gets a reference to the given string and assigns it to the CardNumber field.
 func (o *CardDetailsRequest) SetCardNumber(v string) {
-	o.CardNumber = v
+	o.CardNumber = &v
 }
 
 // GetCountryCode returns the CountryCode field value if set, zero value otherwise.
@@ -204,7 +211,9 @@ func (o CardDetailsRequest) MarshalJSON() ([]byte, error) {
 
 func (o CardDetailsRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["cardNumber"] = o.CardNumber
+	if !common.IsNil(o.CardNumber) {
+		toSerialize["cardNumber"] = o.CardNumber
+	}
 	if !common.IsNil(o.CountryCode) {
 		toSerialize["countryCode"] = o.CountryCode
 	}

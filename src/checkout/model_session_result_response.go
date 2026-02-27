@@ -19,8 +19,14 @@ var _ common.MappedNullable = &SessionResultResponse{}
 
 // SessionResultResponse struct for SessionResultResponse
 type SessionResultResponse struct {
+	// Contains additional information about the payment. Some fields are included only if you enable them. To enable these fields in your Customer Area, go to **Developers** > **Additional data**.
+	AdditionalData *map[string]string `json:"additionalData,omitempty"`
 	// A unique identifier of the session.
 	Id *string `json:"id,omitempty"`
+	// A list of all authorised payments done for this session.
+	Payments []Payment `json:"payments,omitempty"`
+	// The unique reference that you provided in the original `/sessions` request. This identifies the payment and is used in all communication with you about the payment status.
+	Reference *string `json:"reference,omitempty"`
 	// The status of the session. The status included in the response doesn't get updated. Don't make the request again to check for payment status updates.  Possible values: * **completed**: the shopper completed the payment, and the payment was authorized. * **paymentPending**: the shopper is in the process of making the payment. This applies to payment methods with an asynchronous flow, like voucher payments where the shopper completes the payment in a physical shop. * **refused**: the session has been refused, because of too many refused payment attempts. The shopper can no longer complete the payment with this session. * **canceled**: the shopper canceled the payment. * **expired**: the session expired. The shopper can no longer complete the payment with this session. By default, the session expires one hour after it is created.
 	Status *string `json:"status,omitempty"`
 }
@@ -40,6 +46,38 @@ func NewSessionResultResponse() *SessionResultResponse {
 func NewSessionResultResponseWithDefaults() *SessionResultResponse {
 	this := SessionResultResponse{}
 	return &this
+}
+
+// GetAdditionalData returns the AdditionalData field value if set, zero value otherwise.
+func (o *SessionResultResponse) GetAdditionalData() map[string]string {
+	if o == nil || common.IsNil(o.AdditionalData) {
+		var ret map[string]string
+		return ret
+	}
+	return *o.AdditionalData
+}
+
+// GetAdditionalDataOk returns a tuple with the AdditionalData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SessionResultResponse) GetAdditionalDataOk() (*map[string]string, bool) {
+	if o == nil || common.IsNil(o.AdditionalData) {
+		return nil, false
+	}
+	return o.AdditionalData, true
+}
+
+// HasAdditionalData returns a boolean if a field has been set.
+func (o *SessionResultResponse) HasAdditionalData() bool {
+	if o != nil && !common.IsNil(o.AdditionalData) {
+		return true
+	}
+
+	return false
+}
+
+// SetAdditionalData gets a reference to the given map[string]string and assigns it to the AdditionalData field.
+func (o *SessionResultResponse) SetAdditionalData(v map[string]string) {
+	o.AdditionalData = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -72,6 +110,70 @@ func (o *SessionResultResponse) HasId() bool {
 // SetId gets a reference to the given string and assigns it to the Id field.
 func (o *SessionResultResponse) SetId(v string) {
 	o.Id = &v
+}
+
+// GetPayments returns the Payments field value if set, zero value otherwise.
+func (o *SessionResultResponse) GetPayments() []Payment {
+	if o == nil || common.IsNil(o.Payments) {
+		var ret []Payment
+		return ret
+	}
+	return o.Payments
+}
+
+// GetPaymentsOk returns a tuple with the Payments field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SessionResultResponse) GetPaymentsOk() ([]Payment, bool) {
+	if o == nil || common.IsNil(o.Payments) {
+		return nil, false
+	}
+	return o.Payments, true
+}
+
+// HasPayments returns a boolean if a field has been set.
+func (o *SessionResultResponse) HasPayments() bool {
+	if o != nil && !common.IsNil(o.Payments) {
+		return true
+	}
+
+	return false
+}
+
+// SetPayments gets a reference to the given []Payment and assigns it to the Payments field.
+func (o *SessionResultResponse) SetPayments(v []Payment) {
+	o.Payments = v
+}
+
+// GetReference returns the Reference field value if set, zero value otherwise.
+func (o *SessionResultResponse) GetReference() string {
+	if o == nil || common.IsNil(o.Reference) {
+		var ret string
+		return ret
+	}
+	return *o.Reference
+}
+
+// GetReferenceOk returns a tuple with the Reference field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SessionResultResponse) GetReferenceOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Reference) {
+		return nil, false
+	}
+	return o.Reference, true
+}
+
+// HasReference returns a boolean if a field has been set.
+func (o *SessionResultResponse) HasReference() bool {
+	if o != nil && !common.IsNil(o.Reference) {
+		return true
+	}
+
+	return false
+}
+
+// SetReference gets a reference to the given string and assigns it to the Reference field.
+func (o *SessionResultResponse) SetReference(v string) {
+	o.Reference = &v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
@@ -116,8 +218,17 @@ func (o SessionResultResponse) MarshalJSON() ([]byte, error) {
 
 func (o SessionResultResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.AdditionalData) {
+		toSerialize["additionalData"] = o.AdditionalData
+	}
 	if !common.IsNil(o.Id) {
 		toSerialize["id"] = o.Id
+	}
+	if !common.IsNil(o.Payments) {
+		toSerialize["payments"] = o.Payments
+	}
+	if !common.IsNil(o.Reference) {
+		toSerialize["reference"] = o.Reference
 	}
 	if !common.IsNil(o.Status) {
 		toSerialize["status"] = o.Status

@@ -26,7 +26,7 @@ type PaymentAmountUpdateResponse struct {
 	LineItems []LineItem `json:"lineItems,omitempty"`
 	// The merchant account that is used to process the payment.
 	MerchantAccount string `json:"merchantAccount"`
-	// The [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference) of the payment to update.
+	// The [`pspReference`](https://docs.adyen.com/api-explorer/Checkout/latest/post/payments#responses-200-pspReference) of the payment to update.
 	PaymentPspReference string `json:"paymentPspReference"`
 	// Adyen's 16-character reference associated with the amount update request.
 	PspReference string `json:"pspReference"`

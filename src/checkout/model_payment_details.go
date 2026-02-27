@@ -21,6 +21,8 @@ var _ common.MappedNullable = &PaymentDetails{}
 type PaymentDetails struct {
 	// The checkout attempt identifier.
 	CheckoutAttemptId *string `json:"checkoutAttemptId,omitempty"`
+	// Base64-encoded JSON object containing SDK related parameters required by the SDK
+	SdkData *string `json:"sdkData,omitempty"`
 	// The payment method type.
 	Type *string `json:"type,omitempty"`
 }
@@ -74,6 +76,38 @@ func (o *PaymentDetails) SetCheckoutAttemptId(v string) {
 	o.CheckoutAttemptId = &v
 }
 
+// GetSdkData returns the SdkData field value if set, zero value otherwise.
+func (o *PaymentDetails) GetSdkData() string {
+	if o == nil || common.IsNil(o.SdkData) {
+		var ret string
+		return ret
+	}
+	return *o.SdkData
+}
+
+// GetSdkDataOk returns a tuple with the SdkData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentDetails) GetSdkDataOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SdkData) {
+		return nil, false
+	}
+	return o.SdkData, true
+}
+
+// HasSdkData returns a boolean if a field has been set.
+func (o *PaymentDetails) HasSdkData() bool {
+	if o != nil && !common.IsNil(o.SdkData) {
+		return true
+	}
+
+	return false
+}
+
+// SetSdkData gets a reference to the given string and assigns it to the SdkData field.
+func (o *PaymentDetails) SetSdkData(v string) {
+	o.SdkData = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *PaymentDetails) GetType() string {
 	if o == nil || common.IsNil(o.Type) {
@@ -119,6 +153,9 @@ func (o PaymentDetails) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
+	if !common.IsNil(o.SdkData) {
+		toSerialize["sdkData"] = o.SdkData
+	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
@@ -162,7 +199,7 @@ func (v *NullablePaymentDetails) UnmarshalJSON(src []byte) error {
 }
 
 func (o *PaymentDetails) isValidType() bool {
-	var allowedEnumValues = []string{"alipay", "multibanco", "bankTransfer_IBAN", "paybright", "paynow", "affirm_pos", "trustly", "trustlyvector", "oney", "facilypay", "facilypay_3x", "facilypay_4x", "facilypay_6x", "facilypay_10x", "facilypay_12x", "unionpay", "kcp_banktransfer", "kcp_payco", "kcp_creditcard", "wechatpaySDK", "wechatpayQR", "wechatpayWeb", "molpay_boost", "wallet_IN", "payu_IN_cashcard", "payu_IN_nb", "upi_qr", "paytm", "molpay_ebanking_VN", "molpay_ebanking_MY", "molpay_ebanking_direct_MY", "swish", "bizum", "walley", "walley_b2b", "alma", "paypo", "scalapay", "scalapay_3x", "scalapay_4x", "molpay_fpx", "konbini", "directEbanking", "boletobancario", "neteller", "cashticket", "ikano", "karenmillen", "oasis", "warehouse", "primeiropay_boleto", "mada", "benefit", "knet", "omannet", "gopay_wallet", "kcp_naverpay", "onlinebanking_IN", "fawry", "atome", "moneybookers", "naps", "nordea", "boletobancario_bradesco", "boletobancario_itau", "boletobancario_santander", "boletobancario_bancodobrasil", "boletobancario_hsbc", "molpay_maybank2u", "molpay_cimb", "molpay_rhb", "molpay_amb", "molpay_hlb", "molpay_affin_epg", "molpay_bankislam", "molpay_publicbank", "fpx_agrobank", "touchngo", "maybank2u_mae", "duitnow", "promptpay", "twint_pos", "alipay_hk", "alipay_hk_web", "alipay_hk_wap", "alipay_wap", "balanceplatform"}
+	var allowedEnumValues = []string{"alipay", "multibanco", "bankTransfer", "bankTransfer_IBAN", "paybright", "paynow", "affirm_pos", "iris", "trustly", "trustlyvector", "oney", "facilypay", "facilypay_3x", "facilypay_4x", "facilypay_6x", "facilypay_10x", "facilypay_12x", "unionpay", "kcp_banktransfer", "kcp_payco", "kcp_creditcard", "wechatpaySDK", "wechatpayQR", "wechatpayWeb", "molpay_boost", "wallet_IN", "payu_IN_cashcard", "payu_IN_nb", "paytm", "molpay_ebanking_VN", "molpay_ebanking_MY", "molpay_ebanking_direct_MY", "swish", "bizum", "walley", "walley_b2b", "alma", "paypo", "scalapay", "scalapay_3x", "scalapay_4x", "molpay_fpx", "payme", "payme_pos", "konbini", "directEbanking", "boletobancario", "cashticket", "ikano", "karenmillen", "oasis", "warehouse", "primeiropay_boleto", "mada", "benefit", "knet", "omannet", "gopay_wallet", "kcp_naverpay", "fawry", "atome", "naps", "nordea", "boletobancario_bradesco", "boletobancario_itau", "boletobancario_santander", "boletobancario_bancodobrasil", "boletobancario_hsbc", "molpay_maybank2u", "molpay_cimb", "molpay_rhb", "molpay_amb", "molpay_hlb", "molpay_affin_epg", "molpay_bankislam", "molpay_publicbank", "fpx_agrobank", "touchngo", "maybank2u_mae", "duitnow", "promptpay", "twint_pos", "alipay_hk", "alipay_hk_web", "alipay_hk_wap", "alipay_wap", "balanceplatform"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

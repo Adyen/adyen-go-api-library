@@ -85,6 +85,63 @@ func (a *RecurringApi) DeleteTokenForStoredPaymentDetails(ctx context.Context, r
 	return httpRes, err
 }
 
+// All parameters accepted by RecurringApi.Forward
+type RecurringApiForwardInput struct {
+	idempotencyKey         *string
+	checkoutForwardRequest *CheckoutForwardRequest
+}
+
+// A unique identifier for the message with a maximum of 64 characters (we recommend a UUID).
+func (r RecurringApiForwardInput) IdempotencyKey(idempotencyKey string) RecurringApiForwardInput {
+	r.idempotencyKey = &idempotencyKey
+	return r
+}
+
+func (r RecurringApiForwardInput) CheckoutForwardRequest(checkoutForwardRequest CheckoutForwardRequest) RecurringApiForwardInput {
+	r.checkoutForwardRequest = &checkoutForwardRequest
+	return r
+}
+
+/*
+Prepare a request for Forward
+
+@return RecurringApiForwardInput
+*/
+func (a *RecurringApi) ForwardInput() RecurringApiForwardInput {
+	return RecurringApiForwardInput{}
+}
+
+/*
+Forward Forward stored payment details
+
+Forwards the payment details you stored with Adyen to a third-party that you specify and returns the response from the third-party. Supports forwarding stored card details or [network tokens](https://docs.adyen.com/online-payments/network-tokenization). For more information, see [Forward stored payment details](https://docs.adyen.com/online-payments/tokenization/forward-payment-details).
+
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r RecurringApiForwardInput - Request parameters, see ForwardInput
+@return CheckoutForwardResponse, *http.Response, error
+*/
+func (a *RecurringApi) Forward(ctx context.Context, r RecurringApiForwardInput) (CheckoutForwardResponse, *http.Response, error) {
+	res := &CheckoutForwardResponse{}
+	path := "/forward"
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	if r.idempotencyKey != nil {
+		common.ParameterAddToHeaderOrQuery(headerParams, "Idempotency-Key", r.idempotencyKey, "")
+	}
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.checkoutForwardRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	return *res, httpRes, err
+}
+
 // All parameters accepted by RecurringApi.GetTokensForStoredPaymentDetails
 type RecurringApiGetTokensForStoredPaymentDetailsInput struct {
 	shopperReference *string

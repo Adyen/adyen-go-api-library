@@ -23,6 +23,8 @@ type EBankingFinlandDetails struct {
 	CheckoutAttemptId *string `json:"checkoutAttemptId,omitempty"`
 	// The Ebanking Finland issuer value of the shopper's selected bank.
 	Issuer *string `json:"issuer,omitempty"`
+	// Base64-encoded JSON object containing SDK related parameters required by the SDK
+	SdkData *string `json:"sdkData,omitempty"`
 	// **ebanking_FI**
 	Type string `json:"type"`
 }
@@ -111,6 +113,38 @@ func (o *EBankingFinlandDetails) SetIssuer(v string) {
 	o.Issuer = &v
 }
 
+// GetSdkData returns the SdkData field value if set, zero value otherwise.
+func (o *EBankingFinlandDetails) GetSdkData() string {
+	if o == nil || common.IsNil(o.SdkData) {
+		var ret string
+		return ret
+	}
+	return *o.SdkData
+}
+
+// GetSdkDataOk returns a tuple with the SdkData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EBankingFinlandDetails) GetSdkDataOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SdkData) {
+		return nil, false
+	}
+	return o.SdkData, true
+}
+
+// HasSdkData returns a boolean if a field has been set.
+func (o *EBankingFinlandDetails) HasSdkData() bool {
+	if o != nil && !common.IsNil(o.SdkData) {
+		return true
+	}
+
+	return false
+}
+
+// SetSdkData gets a reference to the given string and assigns it to the SdkData field.
+func (o *EBankingFinlandDetails) SetSdkData(v string) {
+	o.SdkData = &v
+}
+
 // GetType returns the Type field value
 func (o *EBankingFinlandDetails) GetType() string {
 	if o == nil {
@@ -150,6 +184,9 @@ func (o EBankingFinlandDetails) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Issuer) {
 		toSerialize["issuer"] = o.Issuer
+	}
+	if !common.IsNil(o.SdkData) {
+		toSerialize["sdkData"] = o.SdkData
 	}
 	toSerialize["type"] = o.Type
 	return toSerialize, nil

@@ -26,7 +26,7 @@ type ThreeDS2RequestData struct {
 	AcquirerBIN *string `json:"acquirerBIN,omitempty"`
 	// Required for [authentication-only integration](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only). The merchantId that is enrolled for 3D Secure 2 by the merchant's acquirer. This string should match the value that you will use in the authorisation. Use 123456 on the Test platform.
 	AcquirerMerchantID *string `json:"acquirerMerchantID,omitempty"`
-	// Indicates whether the Cardholder Shipping Address and Cardholder Billing Address are the same. Allowed values: * **Y** — Shipping Address matches Billing Address. * **N** — Shipping Address does not match Billing Address.
+	// Indicates whether the cardholder shipping address and cardholder billing address are the same. Allowed values: * **Y** — Shipping address matches billing address. * **N** — Shipping address does not match billing address.
 	AddrMatch *string `json:"addrMatch,omitempty"`
 	// If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only), and not the payment authorisation.
 	// Deprecated since Adyen Checkout API v50

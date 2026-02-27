@@ -58,7 +58,7 @@ type CreateCheckoutSessionResponse struct {
 	Id string `json:"id"`
 	// A set of key-value pairs that specifies the installment options available per payment method. The key must be a payment method name in lowercase. For example, **card** to specify installment options for all cards, or **visa** or **mc**. The value must be an object containing the installment options.
 	InstallmentOptions *map[string]CheckoutSessionInstallmentOption `json:"installmentOptions,omitempty"`
-	// Price and product information about the purchased items, to be included on the invoice sent to the shopper. > This field is required for 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, Riverty, and Zip.
+	// Price and product information about the purchased items, to be included on the invoice sent to the shopper. > This field is required for 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, and Riverty.
 	LineItems []LineItem `json:"lineItems,omitempty"`
 	Mandate   *Mandate   `json:"mandate,omitempty"`
 	// The [merchant category code](https://en.wikipedia.org/wiki/Merchant_category_code) (MCC) is a four-digit number, which relates to a particular market segment. This code reflects the predominant activity that is conducted by the merchant.
@@ -85,20 +85,20 @@ type CreateCheckoutSessionResponse struct {
 	RedirectToIssuerMethod *string `json:"redirectToIssuerMethod,omitempty"`
 	// The reference to uniquely identify a payment.
 	Reference string `json:"reference"`
-	// The URL to return to in case of a redirection. The format depends on the channel.  * For web, include the protocol `http://` or `https://`. You can also include your own additional query parameters, for example, shopper ID or order reference number. Example: `https://your-company.com/checkout?shopperOrder=12xy` * For iOS, use the custom URL for your app. To know more about setting custom URL schemes, refer to the [Apple Developer documentation](https://developer.apple.com/documentation/uikit/inter-process_communication/allowing_apps_and_websites_to_link_to_your_content/defining_a_custom_url_scheme_for_your_app). Example: `my-app://` * For Android, use a custom URL handled by an Activity on your app. You can configure it with an [intent filter](https://developer.android.com/guide/components/intents-filters). Example: `my-app://your.package.name`  If the URL to return to includes non-ASCII characters, like spaces or special letters, URL encode the value. > The URL must not include personally identifiable information (PII), for example name or email address.
+	// The URL to return to in case of a redirection. The format depends on the channel.  * For web, include the protocol `http://` or `https://`. You can also include your own additional query parameters, for example, shopper ID or order reference number. Example: `https://your-company.example.com/checkout?shopperOrder=12xy` * For iOS, use the custom URL for your app. To know more about setting custom URL schemes, refer to the [Apple Developer documentation](https://developer.apple.com/documentation/uikit/inter-process_communication/allowing_apps_and_websites_to_link_to_your_content/defining_a_custom_url_scheme_for_your_app). Example: `my-app://` * For Android, use a custom URL handled by an Activity on your app. You can configure it with an [intent filter](https://developer.android.com/guide/components/intents-filters). Example: `my-app://your.package.name`  If the URL to return to includes non-ASCII characters, like spaces or special letters, URL encode the value.  We strongly recommend that you use a maximum of 1024 characters.  > The URL must not include personally identifiable information (PII), for example name or email address.
 	ReturnUrl string    `json:"returnUrl"`
 	RiskData  *RiskData `json:"riskData,omitempty"`
 	// The payment session data you need to pass to your front end.
 	SessionData *string `json:"sessionData,omitempty"`
 	// The shopper's email address.
 	ShopperEmail *string `json:"shopperEmail,omitempty"`
-	// The shopper's IP address. In general, we recommend that you provide this data, as it is used in a number of risk checks (for instance, number of payment attempts or location-based checks). > For 3D Secure 2 transactions, schemes require `shopperIP` for all browser-based implementations. This field is also mandatory for some merchants depending on your business model. For more information, [contact Support](https://www.adyen.help/hc/en-us/requests/new).
+	// The shopper's IP address. We recommend that you provide this data, as it is used in a number of risk checks (for instance, number of payment attempts or location-based checks). > Required for Visa and JCB transactions that require 3D Secure 2 authentication for all web and mobile integrations, if you did not include the `shopperEmail`. For native mobile integrations, the field is required to support cases where authentication is routed to the redirect flow. This field is also mandatory for some merchants depending on your business model. For more information, [contact Support](https://www.adyen.help/hc/en-us/requests/new).
 	ShopperIP *string `json:"shopperIP,omitempty"`
 	// Specifies the sales channel, through which the shopper gives their card details, and whether the shopper is a returning customer. For the web service API, Adyen assumes Ecommerce shopper interaction by default.  This field has the following possible values: * `Ecommerce` - Online transactions where the cardholder is present (online). For better authorisation rates, we recommend sending the card security code (CSC) along with the request. * `ContAuth` - Card on file and/or subscription transactions, where the cardholder is known to the merchant (returning customer). If the shopper is present (online), you can supply also the CSC to improve authorisation (one-click payment). * `Moto` - Mail-order and telephone-order transactions where the shopper is in contact with the merchant via email or telephone. * `POS` - Point-of-sale transactions where the shopper is physically present to make a payment using a secure payment terminal.
 	ShopperInteraction *string `json:"shopperInteraction,omitempty"`
 	// The combination of a language code and a country code to specify the language to be used in the payment.
-	ShopperLocale *string `json:"shopperLocale,omitempty"`
-	ShopperName   *Name   `json:"shopperName,omitempty"`
+	ShopperLocale *string      `json:"shopperLocale,omitempty"`
+	ShopperName   *ShopperName `json:"shopperName,omitempty"`
 	// Your reference to uniquely identify this shopper, for example user ID or account ID. The value is case-sensitive and must be at least three characters. > Your reference must not include personally identifiable information (PII) such as name or email address.
 	ShopperReference *string `json:"shopperReference,omitempty"`
 	// The text to be shown on the shopper's bank statement.  We recommend sending a maximum of 22 characters, otherwise banks might truncate the string.  Allowed characters: **a-z**, **A-Z**, **0-9**, spaces, and special characters **. , ' _ - ? + * /_**.
@@ -119,14 +119,14 @@ type CreateCheckoutSessionResponse struct {
 	StoreFiltrationMode *string `json:"storeFiltrationMode,omitempty"`
 	// When true and `shopperReference` is provided, the payment details will be stored for future [recurring payments](https://docs.adyen.com/online-payments/tokenization/#recurring-payment-types).
 	StorePaymentMethod *bool `json:"storePaymentMethod,omitempty"`
-	// Indicates if the details of the payment method will be stored for the shopper. Possible values: * **disabled** – No details will be stored (default). * **askForConsent** – If the `shopperReference` is provided, the UI lets the shopper choose if they want their payment details to be stored. * **enabled** – If the `shopperReference` is provided, the details will be stored without asking the shopper for consent.
+	// Indicates if the details of the payment method will be stored for the shopper. Possible values: * **disabled** – No details will be stored (default). * **askForConsent** – If the `shopperReference` is provided, the Drop-in/Component shows a checkbox where the shopper can select to store their payment details for card payments. * **enabled** – If the `shopperReference` is provided, the details will be stored without asking the shopper for consent.
 	StorePaymentMethodMode *string `json:"storePaymentMethodMode,omitempty"`
-	// The shopper's telephone number.
+	// The shopper's telephone number.  The phone number must include a plus sign (+) and a country code (1-3 digits), followed by the number (4-15 digits). If the value you provide does not follow the guidelines, we do not submit it for authentication. > Required for Visa and JCB transactions that require 3D Secure 2 authentication, if you did not include the `shopperEmail`.
 	TelephoneNumber *string `json:"telephoneNumber,omitempty"`
 	// Sets a custom theme for [Hosted Checkout](https://docs.adyen.com/online-payments/build-your-integration/?platform=Web&integration=Hosted+Checkout). The value can be any of the **Theme ID** values from your Customer Area.
 	ThemeId             *string                             `json:"themeId,omitempty"`
 	ThreeDS2RequestData *CheckoutSessionThreeDS2RequestData `json:"threeDS2RequestData,omitempty"`
-	// If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only), and not the payment authorisation.
+	// Required to trigger the [authentication-only flow](https://docs.adyen.com/online-payments/3d-secure/authentication-only/). If set to **true**, you will only perform the 3D Secure 2 authentication, and will not proceed to the payment authorization.Default: **false**.
 	// Deprecated since Adyen Checkout API v69
 	// Use `authenticationData.authenticationOnly` instead.
 	ThreeDSAuthenticationOnly *bool `json:"threeDSAuthenticationOnly,omitempty"`
@@ -1596,9 +1596,9 @@ func (o *CreateCheckoutSessionResponse) SetShopperLocale(v string) {
 }
 
 // GetShopperName returns the ShopperName field value if set, zero value otherwise.
-func (o *CreateCheckoutSessionResponse) GetShopperName() Name {
+func (o *CreateCheckoutSessionResponse) GetShopperName() ShopperName {
 	if o == nil || common.IsNil(o.ShopperName) {
-		var ret Name
+		var ret ShopperName
 		return ret
 	}
 	return *o.ShopperName
@@ -1606,7 +1606,7 @@ func (o *CreateCheckoutSessionResponse) GetShopperName() Name {
 
 // GetShopperNameOk returns a tuple with the ShopperName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateCheckoutSessionResponse) GetShopperNameOk() (*Name, bool) {
+func (o *CreateCheckoutSessionResponse) GetShopperNameOk() (*ShopperName, bool) {
 	if o == nil || common.IsNil(o.ShopperName) {
 		return nil, false
 	}
@@ -1622,8 +1622,8 @@ func (o *CreateCheckoutSessionResponse) HasShopperName() bool {
 	return false
 }
 
-// SetShopperName gets a reference to the given Name and assigns it to the ShopperName field.
-func (o *CreateCheckoutSessionResponse) SetShopperName(v Name) {
+// SetShopperName gets a reference to the given ShopperName and assigns it to the ShopperName field.
+func (o *CreateCheckoutSessionResponse) SetShopperName(v ShopperName) {
 	o.ShopperName = &v
 }
 

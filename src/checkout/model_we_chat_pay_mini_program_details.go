@@ -23,6 +23,14 @@ type WeChatPayMiniProgramDetails struct {
 	// The checkout attempt identifier.
 	CheckoutAttemptId *string `json:"checkoutAttemptId,omitempty"`
 	Openid            *string `json:"openid,omitempty"`
+	// This is the `recurringDetailReference` returned in the response when you created the token.
+	// Deprecated since Adyen Checkout API v49
+	// Use `storedPaymentMethodId` instead.
+	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
+	// Base64-encoded JSON object containing SDK related parameters required by the SDK
+	SdkData *string `json:"sdkData,omitempty"`
+	// This is the `recurringDetailReference` returned in the response when you created the token.
+	StoredPaymentMethodId *string `json:"storedPaymentMethodId,omitempty"`
 	// **wechatpayMiniProgram**
 	Type *string `json:"type,omitempty"`
 }
@@ -144,6 +152,108 @@ func (o *WeChatPayMiniProgramDetails) SetOpenid(v string) {
 	o.Openid = &v
 }
 
+// GetRecurringDetailReference returns the RecurringDetailReference field value if set, zero value otherwise.
+// Deprecated since Adyen Checkout API v49
+// Use `storedPaymentMethodId` instead.
+func (o *WeChatPayMiniProgramDetails) GetRecurringDetailReference() string {
+	if o == nil || common.IsNil(o.RecurringDetailReference) {
+		var ret string
+		return ret
+	}
+	return *o.RecurringDetailReference
+}
+
+// GetRecurringDetailReferenceOk returns a tuple with the RecurringDetailReference field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// Deprecated since Adyen Checkout API v49
+// Use `storedPaymentMethodId` instead.
+func (o *WeChatPayMiniProgramDetails) GetRecurringDetailReferenceOk() (*string, bool) {
+	if o == nil || common.IsNil(o.RecurringDetailReference) {
+		return nil, false
+	}
+	return o.RecurringDetailReference, true
+}
+
+// HasRecurringDetailReference returns a boolean if a field has been set.
+func (o *WeChatPayMiniProgramDetails) HasRecurringDetailReference() bool {
+	if o != nil && !common.IsNil(o.RecurringDetailReference) {
+		return true
+	}
+
+	return false
+}
+
+// SetRecurringDetailReference gets a reference to the given string and assigns it to the RecurringDetailReference field.
+// Deprecated since Adyen Checkout API v49
+// Use `storedPaymentMethodId` instead.
+func (o *WeChatPayMiniProgramDetails) SetRecurringDetailReference(v string) {
+	o.RecurringDetailReference = &v
+}
+
+// GetSdkData returns the SdkData field value if set, zero value otherwise.
+func (o *WeChatPayMiniProgramDetails) GetSdkData() string {
+	if o == nil || common.IsNil(o.SdkData) {
+		var ret string
+		return ret
+	}
+	return *o.SdkData
+}
+
+// GetSdkDataOk returns a tuple with the SdkData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WeChatPayMiniProgramDetails) GetSdkDataOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SdkData) {
+		return nil, false
+	}
+	return o.SdkData, true
+}
+
+// HasSdkData returns a boolean if a field has been set.
+func (o *WeChatPayMiniProgramDetails) HasSdkData() bool {
+	if o != nil && !common.IsNil(o.SdkData) {
+		return true
+	}
+
+	return false
+}
+
+// SetSdkData gets a reference to the given string and assigns it to the SdkData field.
+func (o *WeChatPayMiniProgramDetails) SetSdkData(v string) {
+	o.SdkData = &v
+}
+
+// GetStoredPaymentMethodId returns the StoredPaymentMethodId field value if set, zero value otherwise.
+func (o *WeChatPayMiniProgramDetails) GetStoredPaymentMethodId() string {
+	if o == nil || common.IsNil(o.StoredPaymentMethodId) {
+		var ret string
+		return ret
+	}
+	return *o.StoredPaymentMethodId
+}
+
+// GetStoredPaymentMethodIdOk returns a tuple with the StoredPaymentMethodId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WeChatPayMiniProgramDetails) GetStoredPaymentMethodIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.StoredPaymentMethodId) {
+		return nil, false
+	}
+	return o.StoredPaymentMethodId, true
+}
+
+// HasStoredPaymentMethodId returns a boolean if a field has been set.
+func (o *WeChatPayMiniProgramDetails) HasStoredPaymentMethodId() bool {
+	if o != nil && !common.IsNil(o.StoredPaymentMethodId) {
+		return true
+	}
+
+	return false
+}
+
+// SetStoredPaymentMethodId gets a reference to the given string and assigns it to the StoredPaymentMethodId field.
+func (o *WeChatPayMiniProgramDetails) SetStoredPaymentMethodId(v string) {
+	o.StoredPaymentMethodId = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *WeChatPayMiniProgramDetails) GetType() string {
 	if o == nil || common.IsNil(o.Type) {
@@ -194,6 +304,15 @@ func (o WeChatPayMiniProgramDetails) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Openid) {
 		toSerialize["openid"] = o.Openid
+	}
+	if !common.IsNil(o.RecurringDetailReference) {
+		toSerialize["recurringDetailReference"] = o.RecurringDetailReference
+	}
+	if !common.IsNil(o.SdkData) {
+		toSerialize["sdkData"] = o.SdkData
+	}
+	if !common.IsNil(o.StoredPaymentMethodId) {
+		toSerialize["storedPaymentMethodId"] = o.StoredPaymentMethodId
 	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type

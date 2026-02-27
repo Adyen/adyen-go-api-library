@@ -51,7 +51,7 @@ type AdditionalDataAirline struct {
 	AirlineLegDepartTax *string `json:"airline.leg.depart_tax,omitempty"`
 	// The [IATA](https://www.iata.org/services/pages/codes.aspx) 3-letter airport code of the destination airport. This field is required if the airline data includes leg details. * Example: Amsterdam = AMS * Encoding: ASCII * minLength: 3 characters * maxLength: 3 characters * Must not be all spaces * Must not be all zeros.
 	AirlineLegDestinationCode *string `json:"airline.leg.destination_code,omitempty"`
-	// The [fare basis code](https://en.wikipedia.org/wiki/Fare_basis_code), alphanumeric. * minLength: 1 character * maxLength: 6 characters * Must not be all spaces * Must not be all zeros.
+	// The [fare basis code](https://en.wikipedia.org/wiki/Fare_basis_code), alphanumeric. * minLength: 1 character * maxLength: 15 characters * Must not be all spaces * Must not be all zeros.
 	AirlineLegFareBaseCode *string `json:"airline.leg.fare_base_code,omitempty"`
 	// The flight identifier. * minLength: 1 character * maxLength: 5 characters * Must not be all spaces * Must not be all zeros.
 	AirlineLegFlightNumber *string `json:"airline.leg.flight_number,omitempty"`

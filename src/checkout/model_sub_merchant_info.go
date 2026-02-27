@@ -27,7 +27,7 @@ type SubMerchantInfo struct {
 	Id *string `json:"id,omitempty"`
 	// Required for transactions performed by registered payment facilitators. The sub-merchant's 4-digit Merchant Category Code (MCC).  * Format: Numeric * Fixed length: 4 digits
 	Mcc *string `json:"mcc,omitempty"`
-	// Required for transactions performed by registered payment facilitators. The name of the sub-merchant. Based on scheme specifications, this value will overwrite the shopper statement that will appear in the card statement. * Format: Alphanumeric * Maximum length: 22 characters
+	// Required for transactions performed by registered payment facilitators. The name of the sub-merchant. Based on scheme specifications, this value will overwrite the shopper statement that will appear in the card statement. Exception: for acquirers in Brazil, this value does not overwrite the shopper statement. * Format: Alphanumeric * Maximum length: 22 characters
 	Name *string `json:"name,omitempty"`
 	// Required for transactions performed by registered payment facilitators. The phone number associated with the sub-merchant's account.
 	PhoneNumber     *string `json:"phoneNumber,omitempty"`
