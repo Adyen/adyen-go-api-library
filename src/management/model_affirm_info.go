@@ -19,6 +19,8 @@ var _ common.MappedNullable = &AffirmInfo{}
 
 // AffirmInfo struct for AffirmInfo
 type AffirmInfo struct {
+	// Merchant price plan
+	PricePlan *string `json:"pricePlan,omitempty"`
 	// Merchant support email
 	SupportEmail string `json:"supportEmail"`
 }
@@ -39,6 +41,38 @@ func NewAffirmInfo(supportEmail string) *AffirmInfo {
 func NewAffirmInfoWithDefaults() *AffirmInfo {
 	this := AffirmInfo{}
 	return &this
+}
+
+// GetPricePlan returns the PricePlan field value if set, zero value otherwise.
+func (o *AffirmInfo) GetPricePlan() string {
+	if o == nil || common.IsNil(o.PricePlan) {
+		var ret string
+		return ret
+	}
+	return *o.PricePlan
+}
+
+// GetPricePlanOk returns a tuple with the PricePlan field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AffirmInfo) GetPricePlanOk() (*string, bool) {
+	if o == nil || common.IsNil(o.PricePlan) {
+		return nil, false
+	}
+	return o.PricePlan, true
+}
+
+// HasPricePlan returns a boolean if a field has been set.
+func (o *AffirmInfo) HasPricePlan() bool {
+	if o != nil && !common.IsNil(o.PricePlan) {
+		return true
+	}
+
+	return false
+}
+
+// SetPricePlan gets a reference to the given string and assigns it to the PricePlan field.
+func (o *AffirmInfo) SetPricePlan(v string) {
+	o.PricePlan = &v
 }
 
 // GetSupportEmail returns the SupportEmail field value
@@ -75,6 +109,9 @@ func (o AffirmInfo) MarshalJSON() ([]byte, error) {
 
 func (o AffirmInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.PricePlan) {
+		toSerialize["pricePlan"] = o.PricePlan
+	}
 	toSerialize["supportEmail"] = o.SupportEmail
 	return toSerialize, nil
 }
@@ -113,4 +150,14 @@ func (v NullableAffirmInfo) MarshalJSON() ([]byte, error) {
 func (v *NullableAffirmInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
+}
+
+func (o *AffirmInfo) isValidPricePlan() bool {
+	var allowedEnumValues = []string{"BRONZE", "SILVER", "GOLD"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetPricePlan() == allowed {
+			return true
+		}
+	}
+	return false
 }
