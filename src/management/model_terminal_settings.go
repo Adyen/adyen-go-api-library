@@ -24,7 +24,10 @@ type TerminalSettings struct {
 	// Settings for tipping with or without predefined options to choose from. The maximum number of predefined options is four, or three plus the option to enter a custom tip.
 	Gratuities           []Gratuity            `json:"gratuities,omitempty"`
 	Hardware             *Hardware             `json:"hardware,omitempty"`
+	HomeScreen           *HomeScreenSettings   `json:"homeScreen,omitempty"`
+	KioskMode            *KioskModeSettings    `json:"kioskMode,omitempty"`
 	Localization         *Localization         `json:"localization,omitempty"`
+	Moto                 *Moto                 `json:"moto,omitempty"`
 	Nexo                 *Nexo                 `json:"nexo,omitempty"`
 	OfflineProcessing    *OfflineProcessing    `json:"offlineProcessing,omitempty"`
 	Opi                  *Opi                  `json:"opi,omitempty"`
@@ -190,6 +193,70 @@ func (o *TerminalSettings) SetHardware(v Hardware) {
 	o.Hardware = &v
 }
 
+// GetHomeScreen returns the HomeScreen field value if set, zero value otherwise.
+func (o *TerminalSettings) GetHomeScreen() HomeScreenSettings {
+	if o == nil || common.IsNil(o.HomeScreen) {
+		var ret HomeScreenSettings
+		return ret
+	}
+	return *o.HomeScreen
+}
+
+// GetHomeScreenOk returns a tuple with the HomeScreen field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TerminalSettings) GetHomeScreenOk() (*HomeScreenSettings, bool) {
+	if o == nil || common.IsNil(o.HomeScreen) {
+		return nil, false
+	}
+	return o.HomeScreen, true
+}
+
+// HasHomeScreen returns a boolean if a field has been set.
+func (o *TerminalSettings) HasHomeScreen() bool {
+	if o != nil && !common.IsNil(o.HomeScreen) {
+		return true
+	}
+
+	return false
+}
+
+// SetHomeScreen gets a reference to the given HomeScreenSettings and assigns it to the HomeScreen field.
+func (o *TerminalSettings) SetHomeScreen(v HomeScreenSettings) {
+	o.HomeScreen = &v
+}
+
+// GetKioskMode returns the KioskMode field value if set, zero value otherwise.
+func (o *TerminalSettings) GetKioskMode() KioskModeSettings {
+	if o == nil || common.IsNil(o.KioskMode) {
+		var ret KioskModeSettings
+		return ret
+	}
+	return *o.KioskMode
+}
+
+// GetKioskModeOk returns a tuple with the KioskMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TerminalSettings) GetKioskModeOk() (*KioskModeSettings, bool) {
+	if o == nil || common.IsNil(o.KioskMode) {
+		return nil, false
+	}
+	return o.KioskMode, true
+}
+
+// HasKioskMode returns a boolean if a field has been set.
+func (o *TerminalSettings) HasKioskMode() bool {
+	if o != nil && !common.IsNil(o.KioskMode) {
+		return true
+	}
+
+	return false
+}
+
+// SetKioskMode gets a reference to the given KioskModeSettings and assigns it to the KioskMode field.
+func (o *TerminalSettings) SetKioskMode(v KioskModeSettings) {
+	o.KioskMode = &v
+}
+
 // GetLocalization returns the Localization field value if set, zero value otherwise.
 func (o *TerminalSettings) GetLocalization() Localization {
 	if o == nil || common.IsNil(o.Localization) {
@@ -220,6 +287,38 @@ func (o *TerminalSettings) HasLocalization() bool {
 // SetLocalization gets a reference to the given Localization and assigns it to the Localization field.
 func (o *TerminalSettings) SetLocalization(v Localization) {
 	o.Localization = &v
+}
+
+// GetMoto returns the Moto field value if set, zero value otherwise.
+func (o *TerminalSettings) GetMoto() Moto {
+	if o == nil || common.IsNil(o.Moto) {
+		var ret Moto
+		return ret
+	}
+	return *o.Moto
+}
+
+// GetMotoOk returns a tuple with the Moto field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TerminalSettings) GetMotoOk() (*Moto, bool) {
+	if o == nil || common.IsNil(o.Moto) {
+		return nil, false
+	}
+	return o.Moto, true
+}
+
+// HasMoto returns a boolean if a field has been set.
+func (o *TerminalSettings) HasMoto() bool {
+	if o != nil && !common.IsNil(o.Moto) {
+		return true
+	}
+
+	return false
+}
+
+// SetMoto gets a reference to the given Moto and assigns it to the Moto field.
+func (o *TerminalSettings) SetMoto(v Moto) {
+	o.Moto = &v
 }
 
 // GetNexo returns the Nexo field value if set, zero value otherwise.
@@ -788,8 +887,17 @@ func (o TerminalSettings) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Hardware) {
 		toSerialize["hardware"] = o.Hardware
 	}
+	if !common.IsNil(o.HomeScreen) {
+		toSerialize["homeScreen"] = o.HomeScreen
+	}
+	if !common.IsNil(o.KioskMode) {
+		toSerialize["kioskMode"] = o.KioskMode
+	}
 	if !common.IsNil(o.Localization) {
 		toSerialize["localization"] = o.Localization
+	}
+	if !common.IsNil(o.Moto) {
+		toSerialize["moto"] = o.Moto
 	}
 	if !common.IsNil(o.Nexo) {
 		toSerialize["nexo"] = o.Nexo
