@@ -21,6 +21,8 @@ var _ common.MappedNullable = &WeChatPayDetails{}
 type WeChatPayDetails struct {
 	// The checkout attempt identifier.
 	CheckoutAttemptId *string `json:"checkoutAttemptId,omitempty"`
+	// Base64-encoded JSON object containing SDK related parameters required by the SDK
+	SdkData *string `json:"sdkData,omitempty"`
 	// **wechatpay**
 	Type *string `json:"type,omitempty"`
 }
@@ -78,6 +80,38 @@ func (o *WeChatPayDetails) SetCheckoutAttemptId(v string) {
 	o.CheckoutAttemptId = &v
 }
 
+// GetSdkData returns the SdkData field value if set, zero value otherwise.
+func (o *WeChatPayDetails) GetSdkData() string {
+	if o == nil || common.IsNil(o.SdkData) {
+		var ret string
+		return ret
+	}
+	return *o.SdkData
+}
+
+// GetSdkDataOk returns a tuple with the SdkData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WeChatPayDetails) GetSdkDataOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SdkData) {
+		return nil, false
+	}
+	return o.SdkData, true
+}
+
+// HasSdkData returns a boolean if a field has been set.
+func (o *WeChatPayDetails) HasSdkData() bool {
+	if o != nil && !common.IsNil(o.SdkData) {
+		return true
+	}
+
+	return false
+}
+
+// SetSdkData gets a reference to the given string and assigns it to the SdkData field.
+func (o *WeChatPayDetails) SetSdkData(v string) {
+	o.SdkData = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *WeChatPayDetails) GetType() string {
 	if o == nil || common.IsNil(o.Type) {
@@ -122,6 +156,9 @@ func (o WeChatPayDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
+	}
+	if !common.IsNil(o.SdkData) {
+		toSerialize["sdkData"] = o.SdkData
 	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type
