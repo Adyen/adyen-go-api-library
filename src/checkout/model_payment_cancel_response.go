@@ -21,7 +21,7 @@ var _ common.MappedNullable = &PaymentCancelResponse{}
 type PaymentCancelResponse struct {
 	// The merchant account that is used to process the payment.
 	MerchantAccount string `json:"merchantAccount"`
-	// The [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference) of the payment to cancel.
+	// The [`pspReference`](https://docs.adyen.com/api-explorer/Checkout/latest/post/payments#responses-200-pspReference) of the payment to cancel.
 	PaymentPspReference string `json:"paymentPspReference"`
 	// Adyen's 16-character reference associated with the cancel request.
 	PspReference string `json:"pspReference"`

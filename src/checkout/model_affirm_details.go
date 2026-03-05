@@ -21,6 +21,8 @@ var _ common.MappedNullable = &AffirmDetails{}
 type AffirmDetails struct {
 	// The checkout attempt identifier.
 	CheckoutAttemptId *string `json:"checkoutAttemptId,omitempty"`
+	// Base64-encoded JSON object containing SDK related parameters required by the SDK
+	SdkData *string `json:"sdkData,omitempty"`
 	// **affirm**
 	Type *string `json:"type,omitempty"`
 }
@@ -78,6 +80,38 @@ func (o *AffirmDetails) SetCheckoutAttemptId(v string) {
 	o.CheckoutAttemptId = &v
 }
 
+// GetSdkData returns the SdkData field value if set, zero value otherwise.
+func (o *AffirmDetails) GetSdkData() string {
+	if o == nil || common.IsNil(o.SdkData) {
+		var ret string
+		return ret
+	}
+	return *o.SdkData
+}
+
+// GetSdkDataOk returns a tuple with the SdkData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AffirmDetails) GetSdkDataOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SdkData) {
+		return nil, false
+	}
+	return o.SdkData, true
+}
+
+// HasSdkData returns a boolean if a field has been set.
+func (o *AffirmDetails) HasSdkData() bool {
+	if o != nil && !common.IsNil(o.SdkData) {
+		return true
+	}
+
+	return false
+}
+
+// SetSdkData gets a reference to the given string and assigns it to the SdkData field.
+func (o *AffirmDetails) SetSdkData(v string) {
+	o.SdkData = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *AffirmDetails) GetType() string {
 	if o == nil || common.IsNil(o.Type) {
@@ -122,6 +156,9 @@ func (o AffirmDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
+	}
+	if !common.IsNil(o.SdkData) {
+		toSerialize["sdkData"] = o.SdkData
 	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type

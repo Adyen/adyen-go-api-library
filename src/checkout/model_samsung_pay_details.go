@@ -29,6 +29,8 @@ type SamsungPayDetails struct {
 	RecurringDetailReference *string `json:"recurringDetailReference,omitempty"`
 	// The payload you received from the Samsung Pay SDK response.
 	SamsungPayToken string `json:"samsungPayToken"`
+	// Base64-encoded JSON object containing SDK related parameters required by the SDK
+	SdkData *string `json:"sdkData,omitempty"`
 	// This is the `recurringDetailReference` returned in the response when you created the token.
 	StoredPaymentMethodId *string `json:"storedPaymentMethodId,omitempty"`
 	// **samsungpay**
@@ -183,6 +185,38 @@ func (o *SamsungPayDetails) SetSamsungPayToken(v string) {
 	o.SamsungPayToken = v
 }
 
+// GetSdkData returns the SdkData field value if set, zero value otherwise.
+func (o *SamsungPayDetails) GetSdkData() string {
+	if o == nil || common.IsNil(o.SdkData) {
+		var ret string
+		return ret
+	}
+	return *o.SdkData
+}
+
+// GetSdkDataOk returns a tuple with the SdkData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SamsungPayDetails) GetSdkDataOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SdkData) {
+		return nil, false
+	}
+	return o.SdkData, true
+}
+
+// HasSdkData returns a boolean if a field has been set.
+func (o *SamsungPayDetails) HasSdkData() bool {
+	if o != nil && !common.IsNil(o.SdkData) {
+		return true
+	}
+
+	return false
+}
+
+// SetSdkData gets a reference to the given string and assigns it to the SdkData field.
+func (o *SamsungPayDetails) SetSdkData(v string) {
+	o.SdkData = &v
+}
+
 // GetStoredPaymentMethodId returns the StoredPaymentMethodId field value if set, zero value otherwise.
 func (o *SamsungPayDetails) GetStoredPaymentMethodId() string {
 	if o == nil || common.IsNil(o.StoredPaymentMethodId) {
@@ -267,6 +301,9 @@ func (o SamsungPayDetails) ToMap() (map[string]interface{}, error) {
 		toSerialize["recurringDetailReference"] = o.RecurringDetailReference
 	}
 	toSerialize["samsungPayToken"] = o.SamsungPayToken
+	if !common.IsNil(o.SdkData) {
+		toSerialize["sdkData"] = o.SdkData
+	}
 	if !common.IsNil(o.StoredPaymentMethodId) {
 		toSerialize["storedPaymentMethodId"] = o.StoredPaymentMethodId
 	}
@@ -313,7 +350,7 @@ func (v *NullableSamsungPayDetails) UnmarshalJSON(src []byte) error {
 }
 
 func (o *SamsungPayDetails) isValidFundingSource() bool {
-	var allowedEnumValues = []string{"credit", "debit"}
+	var allowedEnumValues = []string{"credit", "debit", "prepaid"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetFundingSource() == allowed {
 			return true

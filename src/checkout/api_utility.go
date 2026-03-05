@@ -196,3 +196,50 @@ func (a *UtilityApi) UpdatesOrderForPaypalExpressCheckout(ctx context.Context, r
 
 	return *res, httpRes, err
 }
+
+// All parameters accepted by UtilityApi.ValidateShopperId
+type UtilityApiValidateShopperIdInput struct {
+	validateShopperIdRequest *ValidateShopperIdRequest
+}
+
+func (r UtilityApiValidateShopperIdInput) ValidateShopperIdRequest(validateShopperIdRequest ValidateShopperIdRequest) UtilityApiValidateShopperIdInput {
+	r.validateShopperIdRequest = &validateShopperIdRequest
+	return r
+}
+
+/*
+Prepare a request for ValidateShopperId
+
+@return UtilityApiValidateShopperIdInput
+*/
+func (a *UtilityApi) ValidateShopperIdInput() UtilityApiValidateShopperIdInput {
+	return UtilityApiValidateShopperIdInput{}
+}
+
+/*
+ValidateShopperId Validates shopper Id
+
+Validates the shopperId.
+
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r UtilityApiValidateShopperIdInput - Request parameters, see ValidateShopperIdInput
+@return ValidateShopperIdResponse, *http.Response, error
+*/
+func (a *UtilityApi) ValidateShopperId(ctx context.Context, r UtilityApiValidateShopperIdInput) (ValidateShopperIdResponse, *http.Response, error) {
+	res := &ValidateShopperIdResponse{}
+	path := "/validateShopperId"
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		r.validateShopperIdRequest,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	return *res, httpRes, err
+}
