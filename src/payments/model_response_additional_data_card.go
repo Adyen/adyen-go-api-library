@@ -19,6 +19,8 @@ var _ common.MappedNullable = &ResponseAdditionalDataCard{}
 
 // ResponseAdditionalDataCard struct for ResponseAdditionalDataCard
 type ResponseAdditionalDataCard struct {
+	// This is an ALT ID (alternate ID) mapped to the Card PAN.  > Returned only in case of Ecommerce Card Payment in India
+	CardAltID *string `json:"cardAltID,omitempty"`
 	// The first six digits of the card number.  This is the [Bank Identification Number (BIN)](https://docs.adyen.com/get-started-with-adyen/payment-glossary#bank-identification-number-bin) for card numbers with a six-digit BIN.  Example: 521234
 	CardBin *string `json:"cardBin,omitempty"`
 	// The cardholder name passed in the payment request.
@@ -54,6 +56,38 @@ func NewResponseAdditionalDataCard() *ResponseAdditionalDataCard {
 func NewResponseAdditionalDataCardWithDefaults() *ResponseAdditionalDataCard {
 	this := ResponseAdditionalDataCard{}
 	return &this
+}
+
+// GetCardAltID returns the CardAltID field value if set, zero value otherwise.
+func (o *ResponseAdditionalDataCard) GetCardAltID() string {
+	if o == nil || common.IsNil(o.CardAltID) {
+		var ret string
+		return ret
+	}
+	return *o.CardAltID
+}
+
+// GetCardAltIDOk returns a tuple with the CardAltID field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResponseAdditionalDataCard) GetCardAltIDOk() (*string, bool) {
+	if o == nil || common.IsNil(o.CardAltID) {
+		return nil, false
+	}
+	return o.CardAltID, true
+}
+
+// HasCardAltID returns a boolean if a field has been set.
+func (o *ResponseAdditionalDataCard) HasCardAltID() bool {
+	if o != nil && !common.IsNil(o.CardAltID) {
+		return true
+	}
+
+	return false
+}
+
+// SetCardAltID gets a reference to the given string and assigns it to the CardAltID field.
+func (o *ResponseAdditionalDataCard) SetCardAltID(v string) {
+	o.CardAltID = &v
 }
 
 // GetCardBin returns the CardBin field value if set, zero value otherwise.
@@ -354,6 +388,9 @@ func (o ResponseAdditionalDataCard) MarshalJSON() ([]byte, error) {
 
 func (o ResponseAdditionalDataCard) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.CardAltID) {
+		toSerialize["cardAltID"] = o.CardAltID
+	}
 	if !common.IsNil(o.CardBin) {
 		toSerialize["cardBin"] = o.CardBin
 	}
