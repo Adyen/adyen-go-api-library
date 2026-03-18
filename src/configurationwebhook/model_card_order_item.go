@@ -25,7 +25,7 @@ type CardOrderItem struct {
 	Card            *CardOrderItemDeliveryStatus `json:"card,omitempty"`
 	// The unique identifier of the card order item.
 	CardOrderItemId *string `json:"cardOrderItemId,omitempty"`
-	// The date and time when the event was triggered, in ISO 8601 extended format. For example, **2020-12-18T10:15:30+01:00**.
+	// The date and time when the event was triggered, in ISO 8601 extended format. For example, **2025-03-19T10:15:30+01:00**.
 	CreationDate *time.Time `json:"creationDate,omitempty"`
 	// The ID of the resource.
 	Id *string `json:"id,omitempty"`
