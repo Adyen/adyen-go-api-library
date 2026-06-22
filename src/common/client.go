@@ -877,15 +877,12 @@ var ctxKeyIdempotencyKey = 1
 WithIdempotencyKey returns a context with an Idempotency-Key added to the provided context.
 Pass this context as the first context to a call to Adyen, and the idempotency
 key will be added to the header
-Deprecated: Pass idempotency key via request parameter. This can be removed once all endpoints accepting it
-are declared explicitly in OpenAPI specs.
 */
 func WithIdempotencyKey(ctx context.Context, idempotencyKey string) context.Context {
 	return context.WithValue(ctx, ctxKeyIdempotencyKey, idempotencyKey)
 }
 
-// IdempotencyKey
-// Deprecated
+// IdempotencyKey returns the idempotency key associated with the context if present.
 func IdempotencyKey(ctx context.Context) (string, bool) {
 	if ctx == nil {
 		return "", false
