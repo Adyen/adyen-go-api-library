@@ -1,0 +1,8 @@
+{
+  "service": "recurring",
+  "project": "go",
+  "generatedAt": "2026-07-08T18:09:44Z",
+  "openapiCommitSha": "334900842b135eb9fc1a17afebd46a4f07793aec",
+  "automationCommitSha": "5f1d5ab9643886ef722a2626e23afef8db5d52a6",
+  "libraryCommitSha": "5b54aac2c3dd0a4a7587fe6de3077e5477a91bf9"
+}
