@@ -94,7 +94,7 @@ Disable Disable stored payment details
 
 Disables stored payment details to stop charging a shopper with this particular recurring detail ID.
 
-For more information, refer to [Disable stored details](https://docs.adyen.com/classic-integration/recurring-payments/disable-stored-details/).
+For more information, refer to [Disable stored details](https://docs.adyen.com/online-payments/classic-integrations/classic-api-integration/tokenization/disable-stored-details).
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r GeneralApiDisableInput - Request parameters, see DisableInput

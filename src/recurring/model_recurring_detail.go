@@ -47,6 +47,8 @@ type RecurringDetail struct {
 	// A shopper's social security number (only in countries where it is legal to collect).
 	SocialSecurityNumber *string       `json:"socialSecurityNumber,omitempty"`
 	TokenDetails         *TokenDetails `json:"tokenDetails,omitempty"`
+	// The unique identifier for the transaction link, used for Mastercard recurring transactions.
+	TransactionLinkId *string `json:"transactionLinkId,omitempty"`
 	// The payment method, such as “mc\", \"visa\", \"ideal\", \"paypal\".
 	Variant string `json:"variant"`
 }
@@ -574,6 +576,38 @@ func (o *RecurringDetail) SetTokenDetails(v TokenDetails) {
 	o.TokenDetails = &v
 }
 
+// GetTransactionLinkId returns the TransactionLinkId field value if set, zero value otherwise.
+func (o *RecurringDetail) GetTransactionLinkId() string {
+	if o == nil || common.IsNil(o.TransactionLinkId) {
+		var ret string
+		return ret
+	}
+	return *o.TransactionLinkId
+}
+
+// GetTransactionLinkIdOk returns a tuple with the TransactionLinkId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RecurringDetail) GetTransactionLinkIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.TransactionLinkId) {
+		return nil, false
+	}
+	return o.TransactionLinkId, true
+}
+
+// HasTransactionLinkId returns a boolean if a field has been set.
+func (o *RecurringDetail) HasTransactionLinkId() bool {
+	if o != nil && !common.IsNil(o.TransactionLinkId) {
+		return true
+	}
+
+	return false
+}
+
+// SetTransactionLinkId gets a reference to the given string and assigns it to the TransactionLinkId field.
+func (o *RecurringDetail) SetTransactionLinkId(v string) {
+	o.TransactionLinkId = &v
+}
+
 // GetVariant returns the Variant field value
 func (o *RecurringDetail) GetVariant() string {
 	if o == nil {
@@ -653,6 +687,9 @@ func (o RecurringDetail) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.TokenDetails) {
 		toSerialize["tokenDetails"] = o.TokenDetails
+	}
+	if !common.IsNil(o.TransactionLinkId) {
+		toSerialize["transactionLinkId"] = o.TransactionLinkId
 	}
 	toSerialize["variant"] = o.Variant
 	return toSerialize, nil
