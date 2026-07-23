@@ -7,7 +7,6 @@ import (
 	"context"
 	"io/ioutil"
 	"os"
-	"strings"
 	"testing"
 
 	"github.com/adyen/adyen-go-api-library/v21/src/adyen"
@@ -42,8 +41,14 @@ func TestCheckoutIntegration(t *testing.T) {
 			require.NotNil(t, res)
 			require.NotNil(t, httpRes)
 			require.NotNil(t, err)
-			assert.Equal(t, 403, httpRes.StatusCode)
-			assert.Equal(t, "403 Forbidden: Invalid Merchant Account (security: 901)", err.Error())
+			assert.Equal(t, 422, httpRes.StatusCode)
+
+			apiError := err.(common.APIError)
+			require.NotNil(t, apiError.RawBody)
+			assert.Equal(t, float64(422), apiError.Status)
+			assert.Equal(t, "Invalid Merchant Account", apiError.Message)
+			assert.Equal(t, "validation", apiError.Type)
+			assert.Equal(t, "901", apiError.Code)
 		})
 
 		t.Run("Create an API request that should pass", func(t *testing.T) {
@@ -132,10 +137,14 @@ func TestCheckoutIntegration(t *testing.T) {
 			res, httpRes, err := service.PaymentsApi.PaymentsDetails(context.Background(), req)
 
 			require.NotNil(t, err)
-			assert.Contains(t, err.Error(), "'paymentData' is not valid")
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 422, httpRes.StatusCode)
 			require.NotNil(t, res)
+
+			apiError := err.(common.APIError)
+			require.NotNil(t, apiError.RawBody)
+			assert.Equal(t, float64(422), apiError.Status)
+			assert.Equal(t, apiError.Message, "Field 'paymentData' is not valid.")
 			require.Nil(t, res.ResultCode)
 		})
 	})
@@ -153,9 +162,16 @@ func TestCheckoutIntegration(t *testing.T) {
 			res, httpRes, err := service.PaymentLinksApi.PaymentLinks(context.Background(), req)
 
 			require.NotNil(t, err)
-			assert.Contains(t, err.Error(), "'reference' is not provided")
 			require.NotNil(t, httpRes)
+			assert.Equal(t, 422, httpRes.StatusCode)
 			require.NotNil(t, res)
+
+			apiError := err.(common.APIError)
+			require.NotNil(t, apiError.RawBody)
+			assert.Equal(t, float64(422), apiError.Status)
+			assert.Equal(t, apiError.Message, "Required field 'reference' is not provided.")
+			assert.Equal(t, "validation", apiError.Type)
+			assert.Equal(t, "130", apiError.Code)
 		})
 
 		t.Run("Create an API request that should pass", func(t *testing.T) {
@@ -226,10 +242,16 @@ func TestCheckoutIntegration(t *testing.T) {
 			res, httpRes, err := service.OrdersApi.Orders(context.Background(), req)
 
 			require.NotNil(t, err)
-			assert.Equal(t, "validation", err.(common.APIError).Type)
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 422, httpRes.StatusCode)
 			require.NotNil(t, res)
+
+			apiError := err.(common.APIError)
+			require.NotNil(t, apiError.RawBody)
+			assert.Equal(t, float64(422), apiError.Status)
+			assert.Equal(t, apiError.Message, "Required field 'reference' is not provided.")
+			assert.Equal(t, "validation", apiError.Type)
+			assert.Equal(t, "130", apiError.Code)
 		})
 	})
 
@@ -274,10 +296,16 @@ func TestCheckoutIntegration(t *testing.T) {
 			res, httpRes, err := service.PaymentsApi.Sessions(context.Background(), req)
 
 			require.NotNil(t, err)
-			assert.Equal(t, true, strings.Contains(err.Error(), "Required field 'reference' is not provided. (validation: 130)"))
 			require.NotNil(t, httpRes)
 			assert.Equal(t, 422, httpRes.StatusCode)
 			require.NotNil(t, res)
+
+			apiError := err.(common.APIError)
+			require.NotNil(t, apiError.RawBody)
+			assert.Equal(t, float64(422), apiError.Status)
+			assert.Equal(t, "Required field 'reference' is not provided.", apiError.Message)
+			assert.Equal(t, "validation", apiError.Type)
+			assert.Equal(t, "130", apiError.Code)
 		})
 	})
 
@@ -314,14 +342,12 @@ func TestCheckoutIntegration(t *testing.T) {
 			assert.Equal(t, 422, httpRes.StatusCode)
 			require.NotNil(t, res)
 
-			// cast to API Error
-			e := err.(common.APIError)
+			apiError := err.(common.APIError)
 
-			require.NotNil(t, e.RawBody)
-
-			assert.Equal(t, float64(422), e.Status)
-			assert.Equal(t, "validation", e.Type)
-			assert.Equal(t, "208", e.Code)
+			require.NotNil(t, apiError.RawBody)
+			assert.Equal(t, float64(422), apiError.Status)
+			assert.Equal(t, "validation", apiError.Type)
+			assert.Equal(t, "208", apiError.Code)
 		})
 	})
 }
