@@ -41,8 +41,11 @@ func ValidateHmac(notificationRequestItem webhook.NotificationRequestItem, key s
 	if err != nil {
 		return false
 	}
-	merchantSign := (*notificationRequestItem.AdditionalData)["hmacSignature"]
-	return expectedSign == merchantSign
+	merchantSign, present := (*notificationRequestItem.AdditionalData)["hmacSignature"]
+	if !present {
+		return false
+	}
+	return hmac.Equal([]byte(expectedSign), []byte(merchantSign))
 }
 
 // ValidateHmacPayload validates the HMAC signature of a payload against an expected signature. Use for webhooks that provide the
@@ -57,7 +60,7 @@ func ValidateHmacPayload(hmacSignature string, key string, payload string) bool 
 	if err != nil {
 		return false
 	}
-	return expectedSign == hmacSignature
+	return hmac.Equal([]byte(expectedSign), []byte(hmacSignature))
 }
 
 // GetDataToSign converts a notificationRequestItem to string, which later on can be used for calculating a HMAC
