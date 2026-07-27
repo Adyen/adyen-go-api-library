@@ -61,6 +61,8 @@ type AdditionalDataCommon struct {
 	SubMerchantStreet *string `json:"subMerchantStreet,omitempty"`
 	// This field is required if the transaction is performed by a registered payment facilitator. This field must contain the tax ID of the actual merchant. * Format: alpha-numeric. * Fixed length: 11 or 14 characters.
 	SubMerchantTaxId *string `json:"subMerchantTaxId,omitempty"`
+	// Allows you to link the transaction to the original or previous one in a subscription/card-on-file chain For Mastercard payments. This field is required for token-based transactions where Adyen does not tokenize the card.  Transaction identifier from Mastercard.  Submit the original transaction ID of the contract in your payment request if you are not tokenizing card details with Adyen and are making a merchant-initiated transaction (MIT) for subsequent charges.  Make sure you are sending `shopperInteraction` **ContAuth** and `recurringProcessingModel` **Subscription** or **UnscheduledCardOnFile** to ensure that the transaction is classified as MIT.
+	TransactionLinkId *string `json:"transactionLinkId,omitempty"`
 }
 
 // NewAdditionalDataCommon instantiates a new AdditionalDataCommon object
@@ -752,6 +754,38 @@ func (o *AdditionalDataCommon) SetSubMerchantTaxId(v string) {
 	o.SubMerchantTaxId = &v
 }
 
+// GetTransactionLinkId returns the TransactionLinkId field value if set, zero value otherwise.
+func (o *AdditionalDataCommon) GetTransactionLinkId() string {
+	if o == nil || common.IsNil(o.TransactionLinkId) {
+		var ret string
+		return ret
+	}
+	return *o.TransactionLinkId
+}
+
+// GetTransactionLinkIdOk returns a tuple with the TransactionLinkId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AdditionalDataCommon) GetTransactionLinkIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.TransactionLinkId) {
+		return nil, false
+	}
+	return o.TransactionLinkId, true
+}
+
+// HasTransactionLinkId returns a boolean if a field has been set.
+func (o *AdditionalDataCommon) HasTransactionLinkId() bool {
+	if o != nil && !common.IsNil(o.TransactionLinkId) {
+		return true
+	}
+
+	return false
+}
+
+// SetTransactionLinkId gets a reference to the given string and assigns it to the TransactionLinkId field.
+func (o *AdditionalDataCommon) SetTransactionLinkId(v string) {
+	o.TransactionLinkId = &v
+}
+
 func (o AdditionalDataCommon) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -824,6 +858,9 @@ func (o AdditionalDataCommon) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.SubMerchantTaxId) {
 		toSerialize["subMerchantTaxId"] = o.SubMerchantTaxId
+	}
+	if !common.IsNil(o.TransactionLinkId) {
+		toSerialize["transactionLinkId"] = o.TransactionLinkId
 	}
 	return toSerialize, nil
 }
