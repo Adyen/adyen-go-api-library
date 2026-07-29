@@ -251,7 +251,7 @@ func TestCheckoutIntegration(t *testing.T) {
 			assert.Equal(t, float64(422), apiError.Status)
 			assert.Equal(t, apiError.Message, "Required field 'reference' is not provided.")
 			assert.Equal(t, "validation", apiError.Type)
-			assert.Equal(t, "130", apiError.Code)
+			assert.Equal(t, "158", apiError.Code)
 		})
 	})
 
