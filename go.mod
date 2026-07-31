@@ -2,6 +2,12 @@ module github.com/adyen/adyen-go-api-library/v21
 
 go 1.23.0
 
+retract v21.2.1 // Source-breaking change to webhook.NotificationRequestItem.AdditionalData. Use v21.2.2 or later.
+
+// Maintainers: keep the retract directive above in every subsequent release.
+// The go command reads retractions only from the go.mod of the highest
+// published version, so dropping it would make v21.2.1 selectable again.
+
 require (
 	github.com/google/uuid v1.6.0
 	github.com/joho/godotenv v1.5.1
