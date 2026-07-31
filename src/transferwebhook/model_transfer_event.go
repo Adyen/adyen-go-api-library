@@ -42,6 +42,7 @@ type TransferEvent struct {
 	Reason *string `json:"reason,omitempty"`
 	// The status of the transfer event.
 	Status       *string                    `json:"status,omitempty"`
+	TracingData  *TransferEventTracingData  `json:"tracingData,omitempty"`
 	TrackingData *TransferEventTrackingData `json:"trackingData,omitempty"`
 	// The id of the transaction that is related to this accounting event. Only sent for events of type **accounting** where the balance changes.
 	TransactionId *string `json:"transactionId,omitempty"`
@@ -486,6 +487,38 @@ func (o *TransferEvent) SetStatus(v string) {
 	o.Status = &v
 }
 
+// GetTracingData returns the TracingData field value if set, zero value otherwise.
+func (o *TransferEvent) GetTracingData() TransferEventTracingData {
+	if o == nil || common.IsNil(o.TracingData) {
+		var ret TransferEventTracingData
+		return ret
+	}
+	return *o.TracingData
+}
+
+// GetTracingDataOk returns a tuple with the TracingData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransferEvent) GetTracingDataOk() (*TransferEventTracingData, bool) {
+	if o == nil || common.IsNil(o.TracingData) {
+		return nil, false
+	}
+	return o.TracingData, true
+}
+
+// HasTracingData returns a boolean if a field has been set.
+func (o *TransferEvent) HasTracingData() bool {
+	if o != nil && !common.IsNil(o.TracingData) {
+		return true
+	}
+
+	return false
+}
+
+// SetTracingData gets a reference to the given TransferEventTracingData and assigns it to the TracingData field.
+func (o *TransferEvent) SetTracingData(v TransferEventTracingData) {
+	o.TracingData = &v
+}
+
 // GetTrackingData returns the TrackingData field value if set, zero value otherwise.
 func (o *TransferEvent) GetTrackingData() TransferEventTrackingData {
 	if o == nil || common.IsNil(o.TrackingData) {
@@ -695,6 +728,9 @@ func (o TransferEvent) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
+	if !common.IsNil(o.TracingData) {
+		toSerialize["tracingData"] = o.TracingData
+	}
 	if !common.IsNil(o.TrackingData) {
 		toSerialize["trackingData"] = o.TrackingData
 	}
@@ -759,7 +795,7 @@ func (o *TransferEvent) isValidReason() bool {
 	return false
 }
 func (o *TransferEvent) isValidStatus() bool {
-	var allowedEnumValues = []string{"approvalPending", "atmWithdrawal", "atmWithdrawalReversalPending", "atmWithdrawalReversed", "authAdjustmentAuthorised", "authAdjustmentError", "authAdjustmentRefused", "authorised", "bankTransfer", "bankTransferPending", "booked", "bookingPending", "cancelled", "capturePending", "captureReversalPending", "captureReversed", "captured", "capturedExternally", "chargeback", "chargebackExternally", "chargebackPending", "chargebackReversalPending", "chargebackReversed", "credited", "depositCorrection", "depositCorrectionPending", "dispute", "disputeClosed", "disputeExpired", "disputeNeedsReview", "error", "expired", "failed", "fee", "feePending", "interchangeAdjusted", "internalTransfer", "internalTransferPending", "invoiceDeduction", "invoiceDeductionPending", "manualCorrectionPending", "manuallyCorrected", "matchedStatement", "matchedStatementPending", "merchantPayin", "merchantPayinPending", "merchantPayinReversed", "merchantPayinReversedPending", "miscCost", "miscCostPending", "paymentCost", "paymentCostPending", "pendingApproval", "pendingExecution", "received", "refundPending", "refundReversalPending", "refundReversed", "refunded", "refundedExternally", "refused", "rejected", "reserveAdjustment", "reserveAdjustmentPending", "returned", "secondChargeback", "secondChargebackPending", "undefined"}
+	var allowedEnumValues = []string{"approvalPending", "atmWithdrawal", "atmWithdrawalReversalPending", "atmWithdrawalReversed", "authAdjustmentAuthorised", "authAdjustmentError", "authAdjustmentRefused", "authorised", "bankTransfer", "bankTransferPending", "booked", "bookingPending", "cancelled", "capturePending", "captureReversalPending", "captureReversed", "captured", "capturedExternally", "chargeback", "chargebackExternally", "chargebackPending", "chargebackReversalPending", "chargebackReversed", "credited", "depositCorrection", "depositCorrectionPending", "dispute", "disputeClosed", "disputeExpired", "disputeNeedsReview", "error", "expired", "failed", "fee", "feePending", "interchangeAdjusted", "internalTransfer", "internalTransferPending", "invoiceDeduction", "invoiceDeductionPending", "manualCorrectionPending", "manuallyCorrected", "matchedStatement", "matchedStatementPending", "merchantPayin", "merchantPayinPending", "merchantPayinReversed", "merchantPayinReversedPending", "miscCost", "miscCostPending", "paymentCost", "paymentCostPending", "pending", "pendingApproval", "pendingExecution", "received", "refundPending", "refundReversalPending", "refundReversed", "refunded", "refundedExternally", "refused", "rejected", "reserveAdjustment", "reserveAdjustmentPending", "returned", "reversed", "secondChargeback", "secondChargebackPending", "undefined"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetStatus() == allowed {
 			return true
