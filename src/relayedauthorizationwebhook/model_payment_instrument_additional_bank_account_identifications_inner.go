@@ -11,6 +11,8 @@ package relayedauthorizationwebhook
 import (
 	"encoding/json"
 	"fmt"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // PaymentInstrumentAdditionalBankAccountIdentificationsInner - struct for PaymentInstrumentAdditionalBankAccountIdentificationsInner
@@ -28,30 +30,38 @@ func IbanAccountIdentificationAsPaymentInstrumentAdditionalBankAccountIdentifica
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *PaymentInstrumentAdditionalBankAccountIdentificationsInner) UnmarshalJSON(data []byte) error {
 	var err error
-	match := 0
-	// try to unmarshal data into IbanAccountIdentification
-	err = json.Unmarshal(data, &dst.IbanAccountIdentification)
-	if err == nil {
-		jsonIbanAccountIdentification, _ := json.Marshal(dst.IbanAccountIdentification)
-		if string(jsonIbanAccountIdentification) == "{}" || !dst.IbanAccountIdentification.isValidType() { // empty struct
-			dst.IbanAccountIdentification = nil
+	// use discriminator value to speed up the lookup
+	var jsonDict map[string]interface{}
+	err = common.NewStrictDecoder(data).Decode(&jsonDict)
+	if err != nil {
+		return fmt.Errorf("failed to unmarshal JSON into map for the discriminator lookup")
+	}
+
+	// check if the discriminator value is 'IbanAccountIdentification'
+	if jsonDict["type"] == "IbanAccountIdentification" {
+		// try to unmarshal JSON data into IbanAccountIdentification
+		err = json.Unmarshal(data, &dst.IbanAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.IbanAccountIdentification, return on the first match
 		} else {
-			match++
+			dst.IbanAccountIdentification = nil
+			return fmt.Errorf("failed to unmarshal PaymentInstrumentAdditionalBankAccountIdentificationsInner as IbanAccountIdentification: %s", err.Error())
 		}
-	} else {
-		dst.IbanAccountIdentification = nil
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.IbanAccountIdentification = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(PaymentInstrumentAdditionalBankAccountIdentificationsInner)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match
-		return fmt.Errorf("data failed to match schemas in oneOf(PaymentInstrumentAdditionalBankAccountIdentificationsInner)")
+	// check if the discriminator value is 'iban'
+	if jsonDict["type"] == "iban" {
+		// try to unmarshal JSON data into IbanAccountIdentification
+		err = json.Unmarshal(data, &dst.IbanAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.IbanAccountIdentification, return on the first match
+		} else {
+			dst.IbanAccountIdentification = nil
+			return fmt.Errorf("failed to unmarshal PaymentInstrumentAdditionalBankAccountIdentificationsInner as IbanAccountIdentification: %s", err.Error())
+		}
 	}
+
+	return nil
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON

@@ -44,6 +44,8 @@ type CardConfiguration struct {
 	LogoImageId *string `json:"logoImageId,omitempty"`
 	// The letter on which the PIN of the card is printed.  This field overrides the PIN mailer design ID defined in the card configuration profile.
 	PinMailer *string `json:"pinMailer,omitempty"`
+	// Print Line.  Text printed on the physical card below the cardholder name. You provide the value, which can be up to 26 characters.
+	PrintLine *string `json:"printLine,omitempty"`
 	// The logistics company that ships the card.  This field overrides the logistics company defined in the card configuration profile.
 	ShipmentMethod *string `json:"shipmentMethod,omitempty"`
 }
@@ -474,6 +476,38 @@ func (o *CardConfiguration) SetPinMailer(v string) {
 	o.PinMailer = &v
 }
 
+// GetPrintLine returns the PrintLine field value if set, zero value otherwise.
+func (o *CardConfiguration) GetPrintLine() string {
+	if o == nil || common.IsNil(o.PrintLine) {
+		var ret string
+		return ret
+	}
+	return *o.PrintLine
+}
+
+// GetPrintLineOk returns a tuple with the PrintLine field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CardConfiguration) GetPrintLineOk() (*string, bool) {
+	if o == nil || common.IsNil(o.PrintLine) {
+		return nil, false
+	}
+	return o.PrintLine, true
+}
+
+// HasPrintLine returns a boolean if a field has been set.
+func (o *CardConfiguration) HasPrintLine() bool {
+	if o != nil && !common.IsNil(o.PrintLine) {
+		return true
+	}
+
+	return false
+}
+
+// SetPrintLine gets a reference to the given string and assigns it to the PrintLine field.
+func (o *CardConfiguration) SetPrintLine(v string) {
+	o.PrintLine = &v
+}
+
 // GetShipmentMethod returns the ShipmentMethod field value if set, zero value otherwise.
 func (o *CardConfiguration) GetShipmentMethod() string {
 	if o == nil || common.IsNil(o.ShipmentMethod) {
@@ -552,6 +586,9 @@ func (o CardConfiguration) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.PinMailer) {
 		toSerialize["pinMailer"] = o.PinMailer
+	}
+	if !common.IsNil(o.PrintLine) {
+		toSerialize["printLine"] = o.PrintLine
 	}
 	if !common.IsNil(o.ShipmentMethod) {
 		toSerialize["shipmentMethod"] = o.ShipmentMethod
