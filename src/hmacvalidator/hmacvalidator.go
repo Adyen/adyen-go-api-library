@@ -41,8 +41,12 @@ func ValidateHmac(notificationRequestItem webhook.NotificationRequestItem, key s
 	if err != nil {
 		return false
 	}
-	merchantSign, present := (*notificationRequestItem.AdditionalData)["hmacSignature"]
+	raw, present := (*notificationRequestItem.AdditionalData)["hmacSignature"]
 	if !present {
+		return false
+	}
+	merchantSign, ok := raw.(string)
+	if !ok {
 		return false
 	}
 	return hmac.Equal([]byte(expectedSign), []byte(merchantSign))
