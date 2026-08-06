@@ -33,6 +33,9 @@ func (r GeneralApiCreateCommunicationSessionInput) CreateSessionRequest(createSe
 Prepare a request for CreateCommunicationSession
 
 @return GeneralApiCreateCommunicationSessionInput
+
+Deprecated since POS Mobile API v68
+Use POST [/auth/certificate](https://docs.adyen.com/api-explorer/softpos-configuration-api/latest/post/auth/certificate) to establish secure communications.
 */
 func (a *GeneralApi) CreateCommunicationSessionInput() GeneralApiCreateCommunicationSessionInput {
 	return GeneralApiCreateCommunicationSessionInput{}
@@ -48,6 +51,9 @@ The request sends a setup token that identifies the SDK and the device. The resp
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r GeneralApiCreateCommunicationSessionInput - Request parameters, see CreateCommunicationSessionInput
 @return CreateSessionResponse, *http.Response, error
+
+Deprecated since POS Mobile API v68
+Use POST [/auth/certificate](https://docs.adyen.com/api-explorer/softpos-configuration-api/latest/post/auth/certificate) to establish secure communications.
 */
 func (a *GeneralApi) CreateCommunicationSession(ctx context.Context, r GeneralApiCreateCommunicationSessionInput) (CreateSessionResponse, *http.Response, error) {
 	res := &CreateSessionResponse{}

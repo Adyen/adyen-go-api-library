@@ -22,6 +22,8 @@ type PartyIdentification struct {
 	Address *Address `json:"address,omitempty"`
 	// The date of birth of the individual in [ISO-8601](https://www.w3.org/TR/NOTE-datetime) format. For example, **YYYY-MM-DD**.  Allowed only when `type` is **individual**.
 	DateOfBirth *string `json:"dateOfBirth,omitempty"`
+	// The email address of the organization or individual. Maximum length: 254 characters.
+	Email *string `json:"email,omitempty"`
 	// The first name of the individual.  Supported characters: [a-z] [A-Z] - . / — and space.  This parameter is: - Allowed only when `type` is **individual**. - Required when `category` is **card**.
 	FirstName *string `json:"firstName,omitempty"`
 	// The full name of the entity that owns the bank account or card.  Supported characters: [a-z] [A-Z] [0-9] , . ; : - — / \\ + & ! ? @ ( ) \" ' and space.  Required when `category` is **bank**.
@@ -32,6 +34,8 @@ type PartyIdentification struct {
 	Reference *string `json:"reference,omitempty"`
 	// The type of entity that owns the bank account or card.  Possible values: **individual**, **organization**, or **unknown**.  Required when `category` is **card**. In this case, the value must be **individual**.
 	Type *string `json:"type,omitempty"`
+	// The URL of the organization or individual. Maximum length: 255 characters.
+	Url *string `json:"url,omitempty"`
 }
 
 // NewPartyIdentification instantiates a new PartyIdentification object
@@ -117,6 +121,38 @@ func (o *PartyIdentification) HasDateOfBirth() bool {
 // SetDateOfBirth gets a reference to the given string and assigns it to the DateOfBirth field.
 func (o *PartyIdentification) SetDateOfBirth(v string) {
 	o.DateOfBirth = &v
+}
+
+// GetEmail returns the Email field value if set, zero value otherwise.
+func (o *PartyIdentification) GetEmail() string {
+	if o == nil || common.IsNil(o.Email) {
+		var ret string
+		return ret
+	}
+	return *o.Email
+}
+
+// GetEmailOk returns a tuple with the Email field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PartyIdentification) GetEmailOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Email) {
+		return nil, false
+	}
+	return o.Email, true
+}
+
+// HasEmail returns a boolean if a field has been set.
+func (o *PartyIdentification) HasEmail() bool {
+	if o != nil && !common.IsNil(o.Email) {
+		return true
+	}
+
+	return false
+}
+
+// SetEmail gets a reference to the given string and assigns it to the Email field.
+func (o *PartyIdentification) SetEmail(v string) {
+	o.Email = &v
 }
 
 // GetFirstName returns the FirstName field value if set, zero value otherwise.
@@ -279,6 +315,38 @@ func (o *PartyIdentification) SetType(v string) {
 	o.Type = &v
 }
 
+// GetUrl returns the Url field value if set, zero value otherwise.
+func (o *PartyIdentification) GetUrl() string {
+	if o == nil || common.IsNil(o.Url) {
+		var ret string
+		return ret
+	}
+	return *o.Url
+}
+
+// GetUrlOk returns a tuple with the Url field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PartyIdentification) GetUrlOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Url) {
+		return nil, false
+	}
+	return o.Url, true
+}
+
+// HasUrl returns a boolean if a field has been set.
+func (o *PartyIdentification) HasUrl() bool {
+	if o != nil && !common.IsNil(o.Url) {
+		return true
+	}
+
+	return false
+}
+
+// SetUrl gets a reference to the given string and assigns it to the Url field.
+func (o *PartyIdentification) SetUrl(v string) {
+	o.Url = &v
+}
+
 func (o PartyIdentification) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -295,6 +363,9 @@ func (o PartyIdentification) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.DateOfBirth) {
 		toSerialize["dateOfBirth"] = o.DateOfBirth
 	}
+	if !common.IsNil(o.Email) {
+		toSerialize["email"] = o.Email
+	}
 	if !common.IsNil(o.FirstName) {
 		toSerialize["firstName"] = o.FirstName
 	}
@@ -309,6 +380,9 @@ func (o PartyIdentification) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type
+	}
+	if !common.IsNil(o.Url) {
+		toSerialize["url"] = o.Url
 	}
 	return toSerialize, nil
 }

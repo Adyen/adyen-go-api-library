@@ -63,9 +63,9 @@ type ResponseAdditionalDataCommon struct {
 	FraudCheckItemNrFraudCheckname *string `json:"fraudCheck-[itemNr]-[FraudCheckname],omitempty"`
 	// Indicates if the payment is sent to manual review.
 	FraudManualReview *string `json:"fraudManualReview,omitempty"`
-	// The fraud result properties of the payment.
+	// The fraud result properties of the payment. Possible values: * AMBER * GREEN * RED
 	FraudResultType *string `json:"fraudResultType,omitempty"`
-	// The risk level of the transaction as classified by the [machine learning](https://docs.adyen.com/risk-management/configure-your-risk-profile/machine-learning-rules/) fraud risk rule. The risk level indicates the likelihood that a transaction will result in a fraudulent dispute. The possible return values are:\\n* veryLow\\n* low\\n* medium\\n* high\\n* veryHigh\\n\\n>
+	// The risk level of the transaction as classified by the [machine learning](https://docs.adyen.com/risk-management/configure-your-risk-profile/machine-learning-rules/) fraud risk rule. The risk level indicates the likelihood that a transaction will result in a fraudulent dispute. Possible values: * veryLow * low * medium * high * veryHigh
 	FraudRiskLevel *string `json:"fraudRiskLevel,omitempty"`
 	// Information regarding the funding type of the card. The possible return values are: * CHARGE * CREDIT * DEBIT * PREPAID * PREPAID_RELOADABLE  * PREPAID_NONRELOADABLE * DEFFERED_DEBIT  > This functionality requires additional configuration on Adyen's end. To enable it, contact the Support Team.  For receiving this field in the notification, enable **Include Funding Source** in **Notifications** > **Additional settings**.
 	FundingSource *string `json:"fundingSource,omitempty"`
@@ -85,6 +85,8 @@ type ResponseAdditionalDataCommon struct {
 	MerchantAdviceCode *string `json:"merchantAdviceCode,omitempty"`
 	// The reference provided for the transaction.
 	MerchantReference *string `json:"merchantReference,omitempty"`
+	// Indicates the processing flow.  Possible values: * **sale**: You do not need to separately capture the funds, because capture happens automatically as part of the transaction.  * **auth**: If you have not [configured automatic capture for the transaction](https://docs.adyen.com/online-payments/capture#types-of-capture), you must manually capture the funds.
+	NetworkProcessingMode *string `json:"networkProcessingMode,omitempty"`
 	// Returned in the response if you are not tokenizing with Adyen and are using the Merchant-initiated transactions (MIT) framework from Mastercard or Visa.  This contains either the Mastercard Trace ID or the Visa Transaction ID.
 	NetworkTxReference *string `json:"networkTxReference,omitempty"`
 	// The owner name of a bank account.  Only relevant for SEPA Direct Debit transactions.
@@ -107,11 +109,11 @@ type ResponseAdditionalDataCommon struct {
 	RecurringFirstPspReference *string `json:"recurring.firstPspReference,omitempty"`
 	// The reference that uniquely identifies the recurring transaction.
 	// Deprecated since Adyen Payment API v68
-	// Use tokenization.storedPaymentMethodId instead.
+	/* Use tokenization.storedPaymentMethodId instead. */
 	RecurringRecurringDetailReference *string `json:"recurring.recurringDetailReference,omitempty"`
 	// The provided reference of the shopper for a recurring transaction.
 	// Deprecated since Adyen Payment API v68
-	// Use tokenization.shopperReference instead.
+	/* Use tokenization.shopperReference instead. */
 	RecurringShopperReference *string `json:"recurring.shopperReference,omitempty"`
 	// The processing model used for the recurring transaction.
 	RecurringProcessingModel *string `json:"recurringProcessingModel,omitempty"`
@@ -145,6 +147,8 @@ type ResponseAdditionalDataCommon struct {
 	TokenizationStoreOperationType *string `json:"tokenization.store.operationType,omitempty"`
 	// The reference that uniquely identifies tokenized payment details.
 	TokenizationStoredPaymentMethodId *string `json:"tokenization.storedPaymentMethodId,omitempty"`
+	// Returned in the response for Mastercard payments.  This contains the Mastercard Transaction Link Identifier (TLID).
+	TransactionLinkId *string `json:"transactionLinkId,omitempty"`
 	// The `visaTransactionId`, has a fixed length of 15 numeric characters.  > Contact Support Team to enable this field.
 	VisaTransactionId *string `json:"visaTransactionId,omitempty"`
 	// The 3DS transaction ID of the 3DS session sent in notifications. The value is Base64-encoded and is returned for transactions with directoryResponse 'N' or 'Y'.   Example: ODgxNDc2MDg2MDExODk5MAAAAAA=
@@ -1224,6 +1228,38 @@ func (o *ResponseAdditionalDataCommon) SetMerchantReference(v string) {
 	o.MerchantReference = &v
 }
 
+// GetNetworkProcessingMode returns the NetworkProcessingMode field value if set, zero value otherwise.
+func (o *ResponseAdditionalDataCommon) GetNetworkProcessingMode() string {
+	if o == nil || common.IsNil(o.NetworkProcessingMode) {
+		var ret string
+		return ret
+	}
+	return *o.NetworkProcessingMode
+}
+
+// GetNetworkProcessingModeOk returns a tuple with the NetworkProcessingMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResponseAdditionalDataCommon) GetNetworkProcessingModeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.NetworkProcessingMode) {
+		return nil, false
+	}
+	return o.NetworkProcessingMode, true
+}
+
+// HasNetworkProcessingMode returns a boolean if a field has been set.
+func (o *ResponseAdditionalDataCommon) HasNetworkProcessingMode() bool {
+	if o != nil && !common.IsNil(o.NetworkProcessingMode) {
+		return true
+	}
+
+	return false
+}
+
+// SetNetworkProcessingMode gets a reference to the given string and assigns it to the NetworkProcessingMode field.
+func (o *ResponseAdditionalDataCommon) SetNetworkProcessingMode(v string) {
+	o.NetworkProcessingMode = &v
+}
+
 // GetNetworkTxReference returns the NetworkTxReference field value if set, zero value otherwise.
 func (o *ResponseAdditionalDataCommon) GetNetworkTxReference() string {
 	if o == nil || common.IsNil(o.NetworkTxReference) {
@@ -1546,7 +1582,7 @@ func (o *ResponseAdditionalDataCommon) SetRecurringFirstPspReference(v string) {
 
 // GetRecurringRecurringDetailReference returns the RecurringRecurringDetailReference field value if set, zero value otherwise.
 // Deprecated since Adyen Payment API v68
-// Use tokenization.storedPaymentMethodId instead.
+/* Use tokenization.storedPaymentMethodId instead. */
 func (o *ResponseAdditionalDataCommon) GetRecurringRecurringDetailReference() string {
 	if o == nil || common.IsNil(o.RecurringRecurringDetailReference) {
 		var ret string
@@ -1558,7 +1594,7 @@ func (o *ResponseAdditionalDataCommon) GetRecurringRecurringDetailReference() st
 // GetRecurringRecurringDetailReferenceOk returns a tuple with the RecurringRecurringDetailReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // Deprecated since Adyen Payment API v68
-// Use tokenization.storedPaymentMethodId instead.
+/* Use tokenization.storedPaymentMethodId instead. */
 func (o *ResponseAdditionalDataCommon) GetRecurringRecurringDetailReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.RecurringRecurringDetailReference) {
 		return nil, false
@@ -1577,14 +1613,14 @@ func (o *ResponseAdditionalDataCommon) HasRecurringRecurringDetailReference() bo
 
 // SetRecurringRecurringDetailReference gets a reference to the given string and assigns it to the RecurringRecurringDetailReference field.
 // Deprecated since Adyen Payment API v68
-// Use tokenization.storedPaymentMethodId instead.
+/* Use tokenization.storedPaymentMethodId instead. */
 func (o *ResponseAdditionalDataCommon) SetRecurringRecurringDetailReference(v string) {
 	o.RecurringRecurringDetailReference = &v
 }
 
 // GetRecurringShopperReference returns the RecurringShopperReference field value if set, zero value otherwise.
 // Deprecated since Adyen Payment API v68
-// Use tokenization.shopperReference instead.
+/* Use tokenization.shopperReference instead. */
 func (o *ResponseAdditionalDataCommon) GetRecurringShopperReference() string {
 	if o == nil || common.IsNil(o.RecurringShopperReference) {
 		var ret string
@@ -1596,7 +1632,7 @@ func (o *ResponseAdditionalDataCommon) GetRecurringShopperReference() string {
 // GetRecurringShopperReferenceOk returns a tuple with the RecurringShopperReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // Deprecated since Adyen Payment API v68
-// Use tokenization.shopperReference instead.
+/* Use tokenization.shopperReference instead. */
 func (o *ResponseAdditionalDataCommon) GetRecurringShopperReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.RecurringShopperReference) {
 		return nil, false
@@ -1615,7 +1651,7 @@ func (o *ResponseAdditionalDataCommon) HasRecurringShopperReference() bool {
 
 // SetRecurringShopperReference gets a reference to the given string and assigns it to the RecurringShopperReference field.
 // Deprecated since Adyen Payment API v68
-// Use tokenization.shopperReference instead.
+/* Use tokenization.shopperReference instead. */
 func (o *ResponseAdditionalDataCommon) SetRecurringShopperReference(v string) {
 	o.RecurringShopperReference = &v
 }
@@ -2132,6 +2168,38 @@ func (o *ResponseAdditionalDataCommon) SetTokenizationStoredPaymentMethodId(v st
 	o.TokenizationStoredPaymentMethodId = &v
 }
 
+// GetTransactionLinkId returns the TransactionLinkId field value if set, zero value otherwise.
+func (o *ResponseAdditionalDataCommon) GetTransactionLinkId() string {
+	if o == nil || common.IsNil(o.TransactionLinkId) {
+		var ret string
+		return ret
+	}
+	return *o.TransactionLinkId
+}
+
+// GetTransactionLinkIdOk returns a tuple with the TransactionLinkId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResponseAdditionalDataCommon) GetTransactionLinkIdOk() (*string, bool) {
+	if o == nil || common.IsNil(o.TransactionLinkId) {
+		return nil, false
+	}
+	return o.TransactionLinkId, true
+}
+
+// HasTransactionLinkId returns a boolean if a field has been set.
+func (o *ResponseAdditionalDataCommon) HasTransactionLinkId() bool {
+	if o != nil && !common.IsNil(o.TransactionLinkId) {
+		return true
+	}
+
+	return false
+}
+
+// SetTransactionLinkId gets a reference to the given string and assigns it to the TransactionLinkId field.
+func (o *ResponseAdditionalDataCommon) SetTransactionLinkId(v string) {
+	o.TransactionLinkId = &v
+}
+
 // GetVisaTransactionId returns the VisaTransactionId field value if set, zero value otherwise.
 func (o *ResponseAdditionalDataCommon) GetVisaTransactionId() string {
 	if o == nil || common.IsNil(o.VisaTransactionId) {
@@ -2305,6 +2373,9 @@ func (o ResponseAdditionalDataCommon) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.MerchantReference) {
 		toSerialize["merchantReference"] = o.MerchantReference
 	}
+	if !common.IsNil(o.NetworkProcessingMode) {
+		toSerialize["networkProcessingMode"] = o.NetworkProcessingMode
+	}
 	if !common.IsNil(o.NetworkTxReference) {
 		toSerialize["networkTxReference"] = o.NetworkTxReference
 	}
@@ -2389,6 +2460,9 @@ func (o ResponseAdditionalDataCommon) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.TokenizationStoredPaymentMethodId) {
 		toSerialize["tokenization.storedPaymentMethodId"] = o.TokenizationStoredPaymentMethodId
 	}
+	if !common.IsNil(o.TransactionLinkId) {
+		toSerialize["transactionLinkId"] = o.TransactionLinkId
+	}
 	if !common.IsNil(o.VisaTransactionId) {
 		toSerialize["visaTransactionId"] = o.VisaTransactionId
 	}
@@ -2435,7 +2509,7 @@ func (v *NullableResponseAdditionalDataCommon) UnmarshalJSON(src []byte) error {
 }
 
 func (o *ResponseAdditionalDataCommon) isValidFraudResultType() bool {
-	var allowedEnumValues = []string{"GREEN", "FRAUD"}
+	var allowedEnumValues = []string{"AMBER", "GREEN", "RED"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetFraudResultType() == allowed {
 			return true

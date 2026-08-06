@@ -24,7 +24,7 @@ type NegativeBalanceCompensationWarningNotificationData struct {
 	Amount        *Amount            `json:"amount,omitempty"`
 	// The unique identifier of the balance platform.
 	BalancePlatform *string `json:"balancePlatform,omitempty"`
-	// The date and time when the event was triggered, in ISO 8601 extended format. For example, **2020-12-18T10:15:30+01:00**.
+	// The date and time when the event was triggered, in ISO 8601 extended format. For example, **2025-03-19T10:15:30+01:00**.
 	CreationDate *time.Time `json:"creationDate,omitempty"`
 	// The ID of the resource.
 	Id *string `json:"id,omitempty"`

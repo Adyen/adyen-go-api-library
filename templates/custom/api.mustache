@@ -31,7 +31,7 @@ type {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{oper
 {{#isDeprecated}}
 //
 // Deprecated {{#vendorExtensions.x-deprecatedInVersion}}since {{#appName}}{{{.}}}{{/appName}} v{{.}}{{/vendorExtensions.x-deprecatedInVersion}}{{#vendorExtensions.x-deprecatedMessage}}
-// {{{.}}}{{/vendorExtensions.x-deprecatedMessage}}
+/* {{{.}}} */{{/vendorExtensions.x-deprecatedMessage}}
 {{/isDeprecated}}
 func (r {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Input) {{vendorExtensions.x-export-param-name}}({{paramName}} {{{dataType}}}) {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}Input {
 	r.{{paramName}} = {{^isFile}}&{{/isFile}}{{paramName}}

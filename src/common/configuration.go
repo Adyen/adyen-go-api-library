@@ -51,7 +51,7 @@ const (
 
 const (
 	LibName    = "adyen-go-api-library"
-	LibVersion = "21.1.0"
+	LibVersion = "21.2.2"
 )
 
 // Config stores the configuration of the API client
@@ -60,6 +60,7 @@ type Config struct {
 	Password                      string        `json:"password,omitempty"`
 	MerchantAccount               string        `json:"merchantAccount,omitempty"`
 	Environment                   Environment   `json:"environment,omitempty"`
+	ApplicationName               string        `json:"applicationName,omitempty"`
 	Endpoint                      string        `json:"endpoint,omitempty"`
 	ApiKey                        string        `json:"apiKey,omitempty"`
 	ConnectionTimeoutMillis       time.Duration `json:"connectionTimeoutMillis,omitempty"`

@@ -2,8 +2,9 @@ package tests
 
 import (
 	"encoding/json"
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
 	"testing"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 
 	"github.com/adyen/adyen-go-api-library/v21/src/checkout"
 	"github.com/stretchr/testify/assert"

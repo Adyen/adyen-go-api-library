@@ -11,6 +11,8 @@ package transferwebhook
 import (
 	"encoding/json"
 	"fmt"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // BankAccountV3AccountIdentification - Contains the bank account details. The fields required in this object depend on the country of the bank account and the currency of the transfer.
@@ -148,240 +150,398 @@ func USLocalAccountIdentificationAsBankAccountV3AccountIdentification(v *USLocal
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *BankAccountV3AccountIdentification) UnmarshalJSON(data []byte) error {
 	var err error
-	match := 0
-	// try to unmarshal data into AULocalAccountIdentification
-	err = json.Unmarshal(data, &dst.AULocalAccountIdentification)
-	if err == nil {
-		jsonAULocalAccountIdentification, _ := json.Marshal(dst.AULocalAccountIdentification)
-		if string(jsonAULocalAccountIdentification) == "{}" || !dst.AULocalAccountIdentification.isValidType() { // empty struct
+	// use discriminator value to speed up the lookup
+	var jsonDict map[string]interface{}
+	err = common.NewStrictDecoder(data).Decode(&jsonDict)
+	if err != nil {
+		return fmt.Errorf("failed to unmarshal JSON into map for the discriminator lookup")
+	}
+
+	// check if the discriminator value is 'AULocalAccountIdentification'
+	if jsonDict["type"] == "AULocalAccountIdentification" {
+		// try to unmarshal JSON data into AULocalAccountIdentification
+		err = json.Unmarshal(data, &dst.AULocalAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.AULocalAccountIdentification, return on the first match
+		} else {
 			dst.AULocalAccountIdentification = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal BankAccountV3AccountIdentification as AULocalAccountIdentification: %s", err.Error())
 		}
-	} else {
-		dst.AULocalAccountIdentification = nil
 	}
 
-	// try to unmarshal data into BRLocalAccountIdentification
-	err = json.Unmarshal(data, &dst.BRLocalAccountIdentification)
-	if err == nil {
-		jsonBRLocalAccountIdentification, _ := json.Marshal(dst.BRLocalAccountIdentification)
-		if string(jsonBRLocalAccountIdentification) == "{}" || !dst.BRLocalAccountIdentification.isValidType() { // empty struct
+	// check if the discriminator value is 'BRLocalAccountIdentification'
+	if jsonDict["type"] == "BRLocalAccountIdentification" {
+		// try to unmarshal JSON data into BRLocalAccountIdentification
+		err = json.Unmarshal(data, &dst.BRLocalAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.BRLocalAccountIdentification, return on the first match
+		} else {
 			dst.BRLocalAccountIdentification = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal BankAccountV3AccountIdentification as BRLocalAccountIdentification: %s", err.Error())
 		}
-	} else {
-		dst.BRLocalAccountIdentification = nil
 	}
 
-	// try to unmarshal data into CALocalAccountIdentification
-	err = json.Unmarshal(data, &dst.CALocalAccountIdentification)
-	if err == nil {
-		jsonCALocalAccountIdentification, _ := json.Marshal(dst.CALocalAccountIdentification)
-		if string(jsonCALocalAccountIdentification) == "{}" || !dst.CALocalAccountIdentification.isValidType() { // empty struct
+	// check if the discriminator value is 'CALocalAccountIdentification'
+	if jsonDict["type"] == "CALocalAccountIdentification" {
+		// try to unmarshal JSON data into CALocalAccountIdentification
+		err = json.Unmarshal(data, &dst.CALocalAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.CALocalAccountIdentification, return on the first match
+		} else {
 			dst.CALocalAccountIdentification = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal BankAccountV3AccountIdentification as CALocalAccountIdentification: %s", err.Error())
 		}
-	} else {
-		dst.CALocalAccountIdentification = nil
 	}
 
-	// try to unmarshal data into CZLocalAccountIdentification
-	err = json.Unmarshal(data, &dst.CZLocalAccountIdentification)
-	if err == nil {
-		jsonCZLocalAccountIdentification, _ := json.Marshal(dst.CZLocalAccountIdentification)
-		if string(jsonCZLocalAccountIdentification) == "{}" || !dst.CZLocalAccountIdentification.isValidType() { // empty struct
+	// check if the discriminator value is 'CZLocalAccountIdentification'
+	if jsonDict["type"] == "CZLocalAccountIdentification" {
+		// try to unmarshal JSON data into CZLocalAccountIdentification
+		err = json.Unmarshal(data, &dst.CZLocalAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.CZLocalAccountIdentification, return on the first match
+		} else {
 			dst.CZLocalAccountIdentification = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal BankAccountV3AccountIdentification as CZLocalAccountIdentification: %s", err.Error())
 		}
-	} else {
-		dst.CZLocalAccountIdentification = nil
 	}
 
-	// try to unmarshal data into DKLocalAccountIdentification
-	err = json.Unmarshal(data, &dst.DKLocalAccountIdentification)
-	if err == nil {
-		jsonDKLocalAccountIdentification, _ := json.Marshal(dst.DKLocalAccountIdentification)
-		if string(jsonDKLocalAccountIdentification) == "{}" || !dst.DKLocalAccountIdentification.isValidType() { // empty struct
+	// check if the discriminator value is 'DKLocalAccountIdentification'
+	if jsonDict["type"] == "DKLocalAccountIdentification" {
+		// try to unmarshal JSON data into DKLocalAccountIdentification
+		err = json.Unmarshal(data, &dst.DKLocalAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.DKLocalAccountIdentification, return on the first match
+		} else {
 			dst.DKLocalAccountIdentification = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal BankAccountV3AccountIdentification as DKLocalAccountIdentification: %s", err.Error())
 		}
-	} else {
-		dst.DKLocalAccountIdentification = nil
 	}
 
-	// try to unmarshal data into HKLocalAccountIdentification
-	err = json.Unmarshal(data, &dst.HKLocalAccountIdentification)
-	if err == nil {
-		jsonHKLocalAccountIdentification, _ := json.Marshal(dst.HKLocalAccountIdentification)
-		if string(jsonHKLocalAccountIdentification) == "{}" || !dst.HKLocalAccountIdentification.isValidType() { // empty struct
+	// check if the discriminator value is 'HKLocalAccountIdentification'
+	if jsonDict["type"] == "HKLocalAccountIdentification" {
+		// try to unmarshal JSON data into HKLocalAccountIdentification
+		err = json.Unmarshal(data, &dst.HKLocalAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.HKLocalAccountIdentification, return on the first match
+		} else {
 			dst.HKLocalAccountIdentification = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal BankAccountV3AccountIdentification as HKLocalAccountIdentification: %s", err.Error())
 		}
-	} else {
-		dst.HKLocalAccountIdentification = nil
 	}
 
-	// try to unmarshal data into HULocalAccountIdentification
-	err = json.Unmarshal(data, &dst.HULocalAccountIdentification)
-	if err == nil {
-		jsonHULocalAccountIdentification, _ := json.Marshal(dst.HULocalAccountIdentification)
-		if string(jsonHULocalAccountIdentification) == "{}" || !dst.HULocalAccountIdentification.isValidType() { // empty struct
+	// check if the discriminator value is 'HULocalAccountIdentification'
+	if jsonDict["type"] == "HULocalAccountIdentification" {
+		// try to unmarshal JSON data into HULocalAccountIdentification
+		err = json.Unmarshal(data, &dst.HULocalAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.HULocalAccountIdentification, return on the first match
+		} else {
 			dst.HULocalAccountIdentification = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal BankAccountV3AccountIdentification as HULocalAccountIdentification: %s", err.Error())
 		}
-	} else {
-		dst.HULocalAccountIdentification = nil
 	}
 
-	// try to unmarshal data into IbanAccountIdentification
-	err = json.Unmarshal(data, &dst.IbanAccountIdentification)
-	if err == nil {
-		jsonIbanAccountIdentification, _ := json.Marshal(dst.IbanAccountIdentification)
-		if string(jsonIbanAccountIdentification) == "{}" || !dst.IbanAccountIdentification.isValidType() { // empty struct
+	// check if the discriminator value is 'IbanAccountIdentification'
+	if jsonDict["type"] == "IbanAccountIdentification" {
+		// try to unmarshal JSON data into IbanAccountIdentification
+		err = json.Unmarshal(data, &dst.IbanAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.IbanAccountIdentification, return on the first match
+		} else {
 			dst.IbanAccountIdentification = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal BankAccountV3AccountIdentification as IbanAccountIdentification: %s", err.Error())
 		}
-	} else {
-		dst.IbanAccountIdentification = nil
 	}
 
-	// try to unmarshal data into NOLocalAccountIdentification
-	err = json.Unmarshal(data, &dst.NOLocalAccountIdentification)
-	if err == nil {
-		jsonNOLocalAccountIdentification, _ := json.Marshal(dst.NOLocalAccountIdentification)
-		if string(jsonNOLocalAccountIdentification) == "{}" || !dst.NOLocalAccountIdentification.isValidType() { // empty struct
+	// check if the discriminator value is 'NOLocalAccountIdentification'
+	if jsonDict["type"] == "NOLocalAccountIdentification" {
+		// try to unmarshal JSON data into NOLocalAccountIdentification
+		err = json.Unmarshal(data, &dst.NOLocalAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.NOLocalAccountIdentification, return on the first match
+		} else {
 			dst.NOLocalAccountIdentification = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal BankAccountV3AccountIdentification as NOLocalAccountIdentification: %s", err.Error())
 		}
-	} else {
-		dst.NOLocalAccountIdentification = nil
 	}
 
-	// try to unmarshal data into NZLocalAccountIdentification
-	err = json.Unmarshal(data, &dst.NZLocalAccountIdentification)
-	if err == nil {
-		jsonNZLocalAccountIdentification, _ := json.Marshal(dst.NZLocalAccountIdentification)
-		if string(jsonNZLocalAccountIdentification) == "{}" || !dst.NZLocalAccountIdentification.isValidType() { // empty struct
+	// check if the discriminator value is 'NZLocalAccountIdentification'
+	if jsonDict["type"] == "NZLocalAccountIdentification" {
+		// try to unmarshal JSON data into NZLocalAccountIdentification
+		err = json.Unmarshal(data, &dst.NZLocalAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.NZLocalAccountIdentification, return on the first match
+		} else {
 			dst.NZLocalAccountIdentification = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal BankAccountV3AccountIdentification as NZLocalAccountIdentification: %s", err.Error())
 		}
-	} else {
-		dst.NZLocalAccountIdentification = nil
 	}
 
-	// try to unmarshal data into NumberAndBicAccountIdentification
-	err = json.Unmarshal(data, &dst.NumberAndBicAccountIdentification)
-	if err == nil {
-		jsonNumberAndBicAccountIdentification, _ := json.Marshal(dst.NumberAndBicAccountIdentification)
-		if string(jsonNumberAndBicAccountIdentification) == "{}" || !dst.NumberAndBicAccountIdentification.isValidType() { // empty struct
+	// check if the discriminator value is 'NumberAndBicAccountIdentification'
+	if jsonDict["type"] == "NumberAndBicAccountIdentification" {
+		// try to unmarshal JSON data into NumberAndBicAccountIdentification
+		err = json.Unmarshal(data, &dst.NumberAndBicAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.NumberAndBicAccountIdentification, return on the first match
+		} else {
 			dst.NumberAndBicAccountIdentification = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal BankAccountV3AccountIdentification as NumberAndBicAccountIdentification: %s", err.Error())
 		}
-	} else {
-		dst.NumberAndBicAccountIdentification = nil
 	}
 
-	// try to unmarshal data into PLLocalAccountIdentification
-	err = json.Unmarshal(data, &dst.PLLocalAccountIdentification)
-	if err == nil {
-		jsonPLLocalAccountIdentification, _ := json.Marshal(dst.PLLocalAccountIdentification)
-		if string(jsonPLLocalAccountIdentification) == "{}" || !dst.PLLocalAccountIdentification.isValidType() { // empty struct
+	// check if the discriminator value is 'PLLocalAccountIdentification'
+	if jsonDict["type"] == "PLLocalAccountIdentification" {
+		// try to unmarshal JSON data into PLLocalAccountIdentification
+		err = json.Unmarshal(data, &dst.PLLocalAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.PLLocalAccountIdentification, return on the first match
+		} else {
 			dst.PLLocalAccountIdentification = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal BankAccountV3AccountIdentification as PLLocalAccountIdentification: %s", err.Error())
 		}
-	} else {
-		dst.PLLocalAccountIdentification = nil
 	}
 
-	// try to unmarshal data into SELocalAccountIdentification
-	err = json.Unmarshal(data, &dst.SELocalAccountIdentification)
-	if err == nil {
-		jsonSELocalAccountIdentification, _ := json.Marshal(dst.SELocalAccountIdentification)
-		if string(jsonSELocalAccountIdentification) == "{}" || !dst.SELocalAccountIdentification.isValidType() { // empty struct
+	// check if the discriminator value is 'SELocalAccountIdentification'
+	if jsonDict["type"] == "SELocalAccountIdentification" {
+		// try to unmarshal JSON data into SELocalAccountIdentification
+		err = json.Unmarshal(data, &dst.SELocalAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.SELocalAccountIdentification, return on the first match
+		} else {
 			dst.SELocalAccountIdentification = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal BankAccountV3AccountIdentification as SELocalAccountIdentification: %s", err.Error())
 		}
-	} else {
-		dst.SELocalAccountIdentification = nil
 	}
 
-	// try to unmarshal data into SGLocalAccountIdentification
-	err = json.Unmarshal(data, &dst.SGLocalAccountIdentification)
-	if err == nil {
-		jsonSGLocalAccountIdentification, _ := json.Marshal(dst.SGLocalAccountIdentification)
-		if string(jsonSGLocalAccountIdentification) == "{}" || !dst.SGLocalAccountIdentification.isValidType() { // empty struct
+	// check if the discriminator value is 'SGLocalAccountIdentification'
+	if jsonDict["type"] == "SGLocalAccountIdentification" {
+		// try to unmarshal JSON data into SGLocalAccountIdentification
+		err = json.Unmarshal(data, &dst.SGLocalAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.SGLocalAccountIdentification, return on the first match
+		} else {
 			dst.SGLocalAccountIdentification = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal BankAccountV3AccountIdentification as SGLocalAccountIdentification: %s", err.Error())
 		}
-	} else {
-		dst.SGLocalAccountIdentification = nil
 	}
 
-	// try to unmarshal data into UKLocalAccountIdentification
-	err = json.Unmarshal(data, &dst.UKLocalAccountIdentification)
-	if err == nil {
-		jsonUKLocalAccountIdentification, _ := json.Marshal(dst.UKLocalAccountIdentification)
-		if string(jsonUKLocalAccountIdentification) == "{}" || !dst.UKLocalAccountIdentification.isValidType() { // empty struct
+	// check if the discriminator value is 'UKLocalAccountIdentification'
+	if jsonDict["type"] == "UKLocalAccountIdentification" {
+		// try to unmarshal JSON data into UKLocalAccountIdentification
+		err = json.Unmarshal(data, &dst.UKLocalAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.UKLocalAccountIdentification, return on the first match
+		} else {
 			dst.UKLocalAccountIdentification = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal BankAccountV3AccountIdentification as UKLocalAccountIdentification: %s", err.Error())
 		}
-	} else {
-		dst.UKLocalAccountIdentification = nil
 	}
 
-	// try to unmarshal data into USLocalAccountIdentification
-	err = json.Unmarshal(data, &dst.USLocalAccountIdentification)
-	if err == nil {
-		jsonUSLocalAccountIdentification, _ := json.Marshal(dst.USLocalAccountIdentification)
-		if string(jsonUSLocalAccountIdentification) == "{}" || !dst.USLocalAccountIdentification.isValidType() { // empty struct
+	// check if the discriminator value is 'USLocalAccountIdentification'
+	if jsonDict["type"] == "USLocalAccountIdentification" {
+		// try to unmarshal JSON data into USLocalAccountIdentification
+		err = json.Unmarshal(data, &dst.USLocalAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.USLocalAccountIdentification, return on the first match
+		} else {
 			dst.USLocalAccountIdentification = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal BankAccountV3AccountIdentification as USLocalAccountIdentification: %s", err.Error())
 		}
-	} else {
-		dst.USLocalAccountIdentification = nil
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.AULocalAccountIdentification = nil
-		dst.BRLocalAccountIdentification = nil
-		dst.CALocalAccountIdentification = nil
-		dst.CZLocalAccountIdentification = nil
-		dst.DKLocalAccountIdentification = nil
-		dst.HKLocalAccountIdentification = nil
-		dst.HULocalAccountIdentification = nil
-		dst.IbanAccountIdentification = nil
-		dst.NOLocalAccountIdentification = nil
-		dst.NZLocalAccountIdentification = nil
-		dst.NumberAndBicAccountIdentification = nil
-		dst.PLLocalAccountIdentification = nil
-		dst.SELocalAccountIdentification = nil
-		dst.SGLocalAccountIdentification = nil
-		dst.UKLocalAccountIdentification = nil
-		dst.USLocalAccountIdentification = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(BankAccountV3AccountIdentification)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match
-		return fmt.Errorf("data failed to match schemas in oneOf(BankAccountV3AccountIdentification)")
+	// check if the discriminator value is 'auLocal'
+	if jsonDict["type"] == "auLocal" {
+		// try to unmarshal JSON data into AULocalAccountIdentification
+		err = json.Unmarshal(data, &dst.AULocalAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.AULocalAccountIdentification, return on the first match
+		} else {
+			dst.AULocalAccountIdentification = nil
+			return fmt.Errorf("failed to unmarshal BankAccountV3AccountIdentification as AULocalAccountIdentification: %s", err.Error())
+		}
 	}
+
+	// check if the discriminator value is 'brLocal'
+	if jsonDict["type"] == "brLocal" {
+		// try to unmarshal JSON data into BRLocalAccountIdentification
+		err = json.Unmarshal(data, &dst.BRLocalAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.BRLocalAccountIdentification, return on the first match
+		} else {
+			dst.BRLocalAccountIdentification = nil
+			return fmt.Errorf("failed to unmarshal BankAccountV3AccountIdentification as BRLocalAccountIdentification: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'caLocal'
+	if jsonDict["type"] == "caLocal" {
+		// try to unmarshal JSON data into CALocalAccountIdentification
+		err = json.Unmarshal(data, &dst.CALocalAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.CALocalAccountIdentification, return on the first match
+		} else {
+			dst.CALocalAccountIdentification = nil
+			return fmt.Errorf("failed to unmarshal BankAccountV3AccountIdentification as CALocalAccountIdentification: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'czLocal'
+	if jsonDict["type"] == "czLocal" {
+		// try to unmarshal JSON data into CZLocalAccountIdentification
+		err = json.Unmarshal(data, &dst.CZLocalAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.CZLocalAccountIdentification, return on the first match
+		} else {
+			dst.CZLocalAccountIdentification = nil
+			return fmt.Errorf("failed to unmarshal BankAccountV3AccountIdentification as CZLocalAccountIdentification: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'dkLocal'
+	if jsonDict["type"] == "dkLocal" {
+		// try to unmarshal JSON data into DKLocalAccountIdentification
+		err = json.Unmarshal(data, &dst.DKLocalAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.DKLocalAccountIdentification, return on the first match
+		} else {
+			dst.DKLocalAccountIdentification = nil
+			return fmt.Errorf("failed to unmarshal BankAccountV3AccountIdentification as DKLocalAccountIdentification: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'hkLocal'
+	if jsonDict["type"] == "hkLocal" {
+		// try to unmarshal JSON data into HKLocalAccountIdentification
+		err = json.Unmarshal(data, &dst.HKLocalAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.HKLocalAccountIdentification, return on the first match
+		} else {
+			dst.HKLocalAccountIdentification = nil
+			return fmt.Errorf("failed to unmarshal BankAccountV3AccountIdentification as HKLocalAccountIdentification: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'huLocal'
+	if jsonDict["type"] == "huLocal" {
+		// try to unmarshal JSON data into HULocalAccountIdentification
+		err = json.Unmarshal(data, &dst.HULocalAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.HULocalAccountIdentification, return on the first match
+		} else {
+			dst.HULocalAccountIdentification = nil
+			return fmt.Errorf("failed to unmarshal BankAccountV3AccountIdentification as HULocalAccountIdentification: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'iban'
+	if jsonDict["type"] == "iban" {
+		// try to unmarshal JSON data into IbanAccountIdentification
+		err = json.Unmarshal(data, &dst.IbanAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.IbanAccountIdentification, return on the first match
+		} else {
+			dst.IbanAccountIdentification = nil
+			return fmt.Errorf("failed to unmarshal BankAccountV3AccountIdentification as IbanAccountIdentification: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'noLocal'
+	if jsonDict["type"] == "noLocal" {
+		// try to unmarshal JSON data into NOLocalAccountIdentification
+		err = json.Unmarshal(data, &dst.NOLocalAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.NOLocalAccountIdentification, return on the first match
+		} else {
+			dst.NOLocalAccountIdentification = nil
+			return fmt.Errorf("failed to unmarshal BankAccountV3AccountIdentification as NOLocalAccountIdentification: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'numberAndBic'
+	if jsonDict["type"] == "numberAndBic" {
+		// try to unmarshal JSON data into NumberAndBicAccountIdentification
+		err = json.Unmarshal(data, &dst.NumberAndBicAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.NumberAndBicAccountIdentification, return on the first match
+		} else {
+			dst.NumberAndBicAccountIdentification = nil
+			return fmt.Errorf("failed to unmarshal BankAccountV3AccountIdentification as NumberAndBicAccountIdentification: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'nzLocal'
+	if jsonDict["type"] == "nzLocal" {
+		// try to unmarshal JSON data into NZLocalAccountIdentification
+		err = json.Unmarshal(data, &dst.NZLocalAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.NZLocalAccountIdentification, return on the first match
+		} else {
+			dst.NZLocalAccountIdentification = nil
+			return fmt.Errorf("failed to unmarshal BankAccountV3AccountIdentification as NZLocalAccountIdentification: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'plLocal'
+	if jsonDict["type"] == "plLocal" {
+		// try to unmarshal JSON data into PLLocalAccountIdentification
+		err = json.Unmarshal(data, &dst.PLLocalAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.PLLocalAccountIdentification, return on the first match
+		} else {
+			dst.PLLocalAccountIdentification = nil
+			return fmt.Errorf("failed to unmarshal BankAccountV3AccountIdentification as PLLocalAccountIdentification: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'seLocal'
+	if jsonDict["type"] == "seLocal" {
+		// try to unmarshal JSON data into SELocalAccountIdentification
+		err = json.Unmarshal(data, &dst.SELocalAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.SELocalAccountIdentification, return on the first match
+		} else {
+			dst.SELocalAccountIdentification = nil
+			return fmt.Errorf("failed to unmarshal BankAccountV3AccountIdentification as SELocalAccountIdentification: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'sgLocal'
+	if jsonDict["type"] == "sgLocal" {
+		// try to unmarshal JSON data into SGLocalAccountIdentification
+		err = json.Unmarshal(data, &dst.SGLocalAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.SGLocalAccountIdentification, return on the first match
+		} else {
+			dst.SGLocalAccountIdentification = nil
+			return fmt.Errorf("failed to unmarshal BankAccountV3AccountIdentification as SGLocalAccountIdentification: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'ukLocal'
+	if jsonDict["type"] == "ukLocal" {
+		// try to unmarshal JSON data into UKLocalAccountIdentification
+		err = json.Unmarshal(data, &dst.UKLocalAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.UKLocalAccountIdentification, return on the first match
+		} else {
+			dst.UKLocalAccountIdentification = nil
+			return fmt.Errorf("failed to unmarshal BankAccountV3AccountIdentification as UKLocalAccountIdentification: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'usLocal'
+	if jsonDict["type"] == "usLocal" {
+		// try to unmarshal JSON data into USLocalAccountIdentification
+		err = json.Unmarshal(data, &dst.USLocalAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.USLocalAccountIdentification, return on the first match
+		} else {
+			dst.USLocalAccountIdentification = nil
+			return fmt.Errorf("failed to unmarshal BankAccountV3AccountIdentification as USLocalAccountIdentification: %s", err.Error())
+		}
+	}
+
+	return nil
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON

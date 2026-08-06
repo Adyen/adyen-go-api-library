@@ -1,7 +1,6 @@
 package tests
 
 import (
-	"github.com/stretchr/testify/assert"
 	"io"
 	"log"
 	"net/http"
@@ -9,6 +8,8 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 type MockHandlerFunc func(status int, method, endpoint, fixture string)

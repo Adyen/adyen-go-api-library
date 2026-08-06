@@ -4,17 +4,18 @@ import (
 	"bytes"
 	"context"
 	"errors"
-	"github.com/adyen/adyen-go-api-library/v21/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
-	"github.com/adyen/adyen-go-api-library/v21/src/dataprotection"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 	"io"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"os"
 	"testing"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
+	"github.com/adyen/adyen-go-api-library/v21/src/dataprotection"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestDataProtection(t *testing.T) {

@@ -1,10 +1,20 @@
 package common
 
 import (
+	"bytes"
 	"encoding/json"
 	"reflect"
 	"time"
 )
+
+// NewStrictDecoder returns a JSON decoder that fails on fields which are not
+// present in the target type. Generated oneOf models use it to tell candidate
+// variants apart.
+func NewStrictDecoder(data []byte) *json.Decoder {
+	dec := json.NewDecoder(bytes.NewBuffer(data))
+	dec.DisallowUnknownFields()
+	return dec
+}
 
 // PtrBool is a helper routine that returns a pointer to given boolean value.
 func PtrBool(v bool) *bool { return &v }

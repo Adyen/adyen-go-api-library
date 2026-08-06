@@ -2,14 +2,15 @@ package legalentity
 
 import (
 	"context"
-	"github.com/adyen/adyen-go-api-library/v21/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
-	"github.com/adyen/adyen-go-api-library/v21/src/legalentity"
-	"github.com/stretchr/testify/assert"
 	"net/http"
 	"net/http/httptest"
 	"strings"
 	"testing"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
+	"github.com/adyen/adyen-go-api-library/v21/src/legalentity"
+	"github.com/stretchr/testify/assert"
 )
 
 func Test_LegalEntity(t *testing.T) {

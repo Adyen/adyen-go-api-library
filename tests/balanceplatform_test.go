@@ -67,11 +67,11 @@ func Test_BalancePlatform(t *testing.T) {
               "status": "active"
         }`)
 	})
-    // with additional attributes
-    mux.HandleFunc("/accountHolders/1002", func(w http.ResponseWriter, r *http.Request) {
-        require.Equal(t, "GET", r.Method)
-        w.Header().Set("Content-Type", "application/json")
-        io.WriteString(w, `{
+	// with additional attributes
+	mux.HandleFunc("/accountHolders/1002", func(w http.ResponseWriter, r *http.Request) {
+		require.Equal(t, "GET", r.Method)
+		w.Header().Set("Content-Type", "application/json")
+		io.WriteString(w, `{
               "balancePlatform": "YOUR_BALANCE_PLATFORM",
               "description": "Account holder used for international payments and payouts",
               "legalEntityId": "LE322JV223222D5GG42KN6869",
@@ -94,12 +94,12 @@ func Test_BalancePlatform(t *testing.T) {
               "id": "AH3227C223222C5GXQXF658WB",
               "status": "active"
         }`)
-    })
-    // with unknown enums
-    mux.HandleFunc("/accountHolders/1003", func(w http.ResponseWriter, r *http.Request) {
-        require.Equal(t, "GET", r.Method)
-        w.Header().Set("Content-Type", "application/json")
-        io.WriteString(w, `{
+	})
+	// with unknown enums
+	mux.HandleFunc("/accountHolders/1003", func(w http.ResponseWriter, r *http.Request) {
+		require.Equal(t, "GET", r.Method)
+		w.Header().Set("Content-Type", "application/json")
+		io.WriteString(w, `{
               "balancePlatform": "YOUR_BALANCE_PLATFORM",
               "description": "Account holder used for international payments and payouts",
               "legalEntityId": "LE322JV223222D5GG42KN6869",
@@ -121,7 +121,7 @@ func Test_BalancePlatform(t *testing.T) {
               "id": "AH3227C223222C5GXQXF658WB",
               "status": "active"
         }`)
-    })
+	})
 
 	mockServer := httptest.NewServer(mux)
 	defer mockServer.Close()
@@ -140,7 +140,7 @@ func Test_BalancePlatform(t *testing.T) {
 	})
 
 	t.Run("Get an account holder", func(t *testing.T) {
-        request := service.AccountHoldersApi.GetAccountHolderInput("1001")
+		request := service.AccountHoldersApi.GetAccountHolderInput("1001")
 		response, httpRes, err := service.AccountHoldersApi.GetAccountHolder(context.Background(), request)
 
 		require.NoError(t, err)
@@ -148,23 +148,23 @@ func Test_BalancePlatform(t *testing.T) {
 		assert.Equal(t, "AH3227C223222C5GXQXF658WB", response.GetId())
 	})
 
-    t.Run("Get an account holder with additional attributes", func(t *testing.T) {
-        request := service.AccountHoldersApi.GetAccountHolderInput("1002")
-        response, httpRes, err := service.AccountHoldersApi.GetAccountHolder(context.Background(), request)
+	t.Run("Get an account holder with additional attributes", func(t *testing.T) {
+		request := service.AccountHoldersApi.GetAccountHolderInput("1002")
+		response, httpRes, err := service.AccountHoldersApi.GetAccountHolder(context.Background(), request)
 
-        require.NoError(t, err)
-        assert.Equal(t, 200, httpRes.StatusCode)
-        assert.Equal(t, "AH3227C223222C5GXQXF658WB", response.GetId())
-    })
+		require.NoError(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+		assert.Equal(t, "AH3227C223222C5GXQXF658WB", response.GetId())
+	})
 
-    t.Run("Get an account holder with unknown enum", func(t *testing.T) {
-        request := service.AccountHoldersApi.GetAccountHolderInput("1003")
-        response, httpRes, err := service.AccountHoldersApi.GetAccountHolder(context.Background(), request)
+	t.Run("Get an account holder with unknown enum", func(t *testing.T) {
+		request := service.AccountHoldersApi.GetAccountHolderInput("1003")
+		response, httpRes, err := service.AccountHoldersApi.GetAccountHolder(context.Background(), request)
 
-        require.NoError(t, err)
-        assert.Equal(t, 200, httpRes.StatusCode)
-        assert.Equal(t, "AH3227C223222C5GXQXF658WB", response.GetId())
-        capability := response.GetCapabilities()["receiveFromPlatformPayments"]
-        assert.Equal(t, "this is unknown", capability.GetVerificationStatus())
-    })
+		require.NoError(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+		assert.Equal(t, "AH3227C223222C5GXQXF658WB", response.GetId())
+		capability := response.GetCapabilities()["receiveFromPlatformPayments"]
+		assert.Equal(t, "this is unknown", capability.GetVerificationStatus())
+	})
 }

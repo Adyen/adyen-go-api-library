@@ -21,7 +21,7 @@ var _ common.MappedNullable = &InternalReviewTrackingData{}
 type InternalReviewTrackingData struct {
 	// The reason why the transfer failed Adyen's internal review.   Possible values:  - **refusedForRegulatoryReasons**: the transfer does not comply with Adyen's risk policy. For more information, [contact the Support Team](https://www.adyen.help/hc/en-us/requests/new).
 	Reason *string `json:"reason,omitempty"`
-	// The status of the transfer.  Possible values:   - **pending**: the transfer is under internal review.  - **failed**: the transfer failed Adyen's internal review. For details, see `reason`.
+	// The status of the transfer.  Possible values:   - **pending**: the transfer is under internal review by Adyen.  - **failed**: the transfer failed Adyen's internal review. For details, see `reason`.
 	Status string `json:"status"`
 	// The type of tracking event.   Possible values:    - **internalReview**: the transfer was flagged because it does not comply with Adyen's risk policy.
 	Type string `json:"type"`

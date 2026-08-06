@@ -1,8 +1,9 @@
 package tests
 
 import (
-	"github.com/adyen/adyen-go-api-library/v21/src/managementwebhook"
 	"testing"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/managementwebhook"
 
 	"github.com/stretchr/testify/assert"
 )

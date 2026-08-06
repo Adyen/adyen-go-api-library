@@ -21,7 +21,7 @@ type {{classname}} struct {
 {{/description}}
 {{#deprecated}}
     // Deprecated {{#vendorExtensions.x-deprecatedInVersion}}since {{#appName}}{{{.}}}{{/appName}} v{{.}}{{/vendorExtensions.x-deprecatedInVersion}}{{#vendorExtensions.x-deprecatedMessage}}
-    // {{{.}}}{{/vendorExtensions.x-deprecatedMessage}}
+    /* {{{.}}} */{{/vendorExtensions.x-deprecatedMessage}}
 {{/deprecated}}
 	{{name}} {{^required}}{{^isNullable}}{{^isArray}}{{^isFreeFormObject}}*{{/isFreeFormObject}}{{/isArray}}{{/isNullable}}{{/required}}{{#isNullable}}{{#isPrimitiveType}}common.{{/isPrimitiveType}}{{/isNullable}}{{{dataType}}} `json:"{{baseName}}{{^required}},omitempty{{/required}}"{{#withXml}} xml:"{{baseName}}{{#isXmlAttribute}},attr{{/isXmlAttribute}}"{{/withXml}}{{#vendorExtensions.x-go-custom-tag}} {{{.}}}{{/vendorExtensions.x-go-custom-tag}}`
 {{/vars}}
@@ -97,7 +97,7 @@ func New{{classname}}WithDefaults() *{{classname}} {
 {{/isNullable}}
 {{#deprecated}}
 // Deprecated {{#vendorExtensions.x-deprecatedInVersion}}since {{#appName}}{{{.}}}{{/appName}} v{{.}}{{/vendorExtensions.x-deprecatedInVersion}}{{#vendorExtensions.x-deprecatedMessage}}
-// {{{.}}}{{/vendorExtensions.x-deprecatedMessage}}
+/* {{{.}}} */{{/vendorExtensions.x-deprecatedMessage}}
 {{/deprecated}}
 func (o *{{classname}}) Get{{name}}() {{vendorExtensions.x-go-base-type}} {
 	if o == nil{{#isNullable}}{{^vendorExtensions.x-golang-is-container}} || o.{{name}}.Get() == nil{{/vendorExtensions.x-golang-is-container}}{{/isNullable}} {
@@ -125,7 +125,7 @@ func (o *{{classname}}) Get{{name}}() {{vendorExtensions.x-go-base-type}} {
 {{/isNullable}}
 {{#deprecated}}
 // Deprecated {{#vendorExtensions.x-deprecatedInVersion}}since {{#appName}}{{{.}}}{{/appName}} v{{.}}{{/vendorExtensions.x-deprecatedInVersion}}{{#vendorExtensions.x-deprecatedMessage}}
-// {{{.}}}{{/vendorExtensions.x-deprecatedMessage}}
+/* {{{.}}} */{{/vendorExtensions.x-deprecatedMessage}}
 {{/deprecated}}
 func (o *{{classname}}) Get{{name}}Ok() ({{^isArray}}{{^isFreeFormObject}}*{{/isFreeFormObject}}{{/isArray}}{{vendorExtensions.x-go-base-type}}, bool) {
 	if o == nil{{#isNullable}}{{#vendorExtensions.x-golang-is-container}} || common.IsNil(o.{{name}}){{/vendorExtensions.x-golang-is-container}}{{/isNullable}} {
@@ -152,7 +152,7 @@ func (o *{{classname}}) Get{{name}}Ok() ({{^isArray}}{{^isFreeFormObject}}*{{/is
 // Set{{name}} sets field value
 {{#deprecated}}
 // Deprecated {{#vendorExtensions.x-deprecatedInVersion}}since {{#appName}}{{{.}}}{{/appName}} v{{.}}{{/vendorExtensions.x-deprecatedInVersion}}{{#vendorExtensions.x-deprecatedMessage}}
-// {{{.}}}{{/vendorExtensions.x-deprecatedMessage}}
+/* {{{.}}} */{{/vendorExtensions.x-deprecatedMessage}}
 {{/deprecated}}
 func (o *{{classname}}) Set{{name}}(v {{vendorExtensions.x-go-base-type}}) {
 {{#isNullable}}
@@ -173,7 +173,7 @@ func (o *{{classname}}) Set{{name}}(v {{vendorExtensions.x-go-base-type}}) {
 // Get{{name}} returns the {{name}} field value if set, zero value otherwise{{#isNullable}} (both if not set or set to explicit null){{/isNullable}}.
 {{#deprecated}}
 // Deprecated {{#vendorExtensions.x-deprecatedInVersion}}since {{#appName}}{{{.}}}{{/appName}} v{{.}}{{/vendorExtensions.x-deprecatedInVersion}}{{#vendorExtensions.x-deprecatedMessage}}
-// {{{.}}}{{/vendorExtensions.x-deprecatedMessage}}
+/* {{{.}}} */{{/vendorExtensions.x-deprecatedMessage}}
 {{/deprecated}}
 func (o *{{classname}}) Get{{name}}() {{vendorExtensions.x-go-base-type}} {
 	if o == nil{{^isNullable}} || common.IsNil(o.{{name}}){{/isNullable}}{{#isNullable}}{{^vendorExtensions.x-golang-is-container}} || common.IsNil(o.{{name}}.Get()){{/vendorExtensions.x-golang-is-container}}{{/isNullable}} {
@@ -200,7 +200,7 @@ func (o *{{classname}}) Get{{name}}() {{vendorExtensions.x-go-base-type}} {
 {{/isNullable}}
 {{#deprecated}}
 // Deprecated {{#vendorExtensions.x-deprecatedInVersion}}since {{#appName}}{{{.}}}{{/appName}} v{{.}}{{/vendorExtensions.x-deprecatedInVersion}}{{#vendorExtensions.x-deprecatedMessage}}
-// {{{.}}}{{/vendorExtensions.x-deprecatedMessage}}
+/* {{{.}}} */{{/vendorExtensions.x-deprecatedMessage}}
 {{/deprecated}}
 func (o *{{classname}}) Get{{name}}Ok() ({{^isArray}}{{^isFreeFormObject}}*{{/isFreeFormObject}}{{/isArray}}{{vendorExtensions.x-go-base-type}}, bool) {
 	if o == nil{{^isNullable}} || common.IsNil(o.{{name}}){{/isNullable}}{{#isNullable}}{{#vendorExtensions.x-golang-is-container}} || common.IsNil(o.{{name}}){{/vendorExtensions.x-golang-is-container}}{{/isNullable}} {
@@ -236,7 +236,7 @@ func (o *{{classname}}) Has{{name}}() bool {
 // Set{{name}} gets a reference to the given {{dataType}} and assigns it to the {{name}} field.
 {{#deprecated}}
 // Deprecated {{#vendorExtensions.x-deprecatedInVersion}}since {{#appName}}{{{.}}}{{/appName}} v{{.}}{{/vendorExtensions.x-deprecatedInVersion}}{{#vendorExtensions.x-deprecatedMessage}}
-// {{{.}}}{{/vendorExtensions.x-deprecatedMessage}}
+/* {{{.}}} */{{/vendorExtensions.x-deprecatedMessage}}
 {{/deprecated}}
 func (o *{{classname}}) Set{{name}}(v {{vendorExtensions.x-go-base-type}}) {
 {{#isNullable}}
@@ -351,7 +351,7 @@ func (o *{{{classname}}}) UnmarshalJSON(bytes []byte) (err error) {
 	{{/description}}
 	{{#deprecated}}
         // Deprecated {{#vendorExtensions.x-deprecatedInVersion}}since {{#appName}}{{{.}}}{{/appName}} v{{.}}{{/vendorExtensions.x-deprecatedInVersion}}{{#vendorExtensions.x-deprecatedMessage}}
-        // {{{.}}}{{/vendorExtensions.x-deprecatedMessage}}
+        /* {{{.}}} */{{/vendorExtensions.x-deprecatedMessage}}
 	{{/deprecated}}
 		{{name}} {{^required}}{{^isNullable}}{{^isArray}}{{^isFreeFormObject}}*{{/isFreeFormObject}}{{/isArray}}{{/isNullable}}{{/required}}{{{dataType}}} `json:"{{baseName}}{{^required}},omitempty{{/required}}"{{#withXml}} xml:"{{baseName}}{{#isXmlAttribute}},attr{{/isXmlAttribute}}"{{/withXml}}{{#vendorExtensions.x-go-custom-tag}} {{{.}}}{{/vendorExtensions.x-go-custom-tag}}`
 	{{/vars}}

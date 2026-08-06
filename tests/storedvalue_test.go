@@ -3,16 +3,17 @@ package tests
 import (
 	"context"
 	"errors"
-	"github.com/adyen/adyen-go-api-library/v21/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
-	"github.com/adyen/adyen-go-api-library/v21/src/storedvalue"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 	"io"
 	"net/http"
 	"net/http/httptest"
 	"os"
 	"testing"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
+	"github.com/adyen/adyen-go-api-library/v21/src/storedvalue"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func Test_StoredValue(t *testing.T) {

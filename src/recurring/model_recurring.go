@@ -20,7 +20,7 @@ var _ common.MappedNullable = &Recurring{}
 
 // Recurring struct for Recurring
 type Recurring struct {
-	// The type of recurring contract to be used. Possible values: * `ONECLICK` – Payment details can be used to initiate a one-click payment, where the shopper enters the [card security code (CVC/CVV)](https://docs.adyen.com/payments-fundamentals/payment-glossary#card-security-code-cvc-cvv-cid). * `RECURRING` – Payment details can be used without the card security code to initiate [card-not-present transactions](https://docs.adyen.com/payments-fundamentals/payment-glossary#card-not-present-cnp). * `ONECLICK,RECURRING` – Payment details can be used regardless of whether the shopper is on your site or not. * `PAYOUT` – Payment details can be used to [make a payout](https://docs.adyen.com/online-payments/online-payouts).
+	// The type of recurring contract to be used. Possible values: * `ONECLICK` – Payment details can be used to initiate a one-click payment, where the shopper enters the [card security code (CVC/CVV)](https://docs.adyen.com/payments-fundamentals/payment-glossary#card-security-code-cvc-cvv-cid). * `RECURRING` – Payment details can be used without the card security code to initiate [card-not-present transactions](https://docs.adyen.com/payments-fundamentals/payment-glossary#card-not-present-cnp). * `ONECLICK,RECURRING` – Payment details can be used regardless of whether the shopper is on your site or not. * `PAYOUT` – Payment details can be used to [make a payout](https://docs.adyen.com/online-payments/online-payouts). * `EXTERNAL` - Use this when you store payment details and send the raw card number or network token directly in your API request.
 	Contract *string `json:"contract,omitempty"`
 	// A descriptive name for this detail.
 	RecurringDetailName *string `json:"recurringDetailName,omitempty"`
@@ -274,7 +274,7 @@ func (v *NullableRecurring) UnmarshalJSON(src []byte) error {
 }
 
 func (o *Recurring) isValidContract() bool {
-	var allowedEnumValues = []string{"ONECLICK", "RECURRING", "PAYOUT"}
+	var allowedEnumValues = []string{"ONECLICK", "ONECLICK,RECURRING", "RECURRING", "PAYOUT", "EXTERNAL"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetContract() == allowed {
 			return true

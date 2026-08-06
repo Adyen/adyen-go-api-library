@@ -1,0 +1,8 @@
+{
+  "service": "payout",
+  "project": "go",
+  "generatedAt": "2026-07-27T10:29:14Z",
+  "openapiCommitSha": "2f7d0e1961772ee974be4ed268282cf2ba8f6e03",
+  "automationCommitSha": "0c108bd8050cf480d2710b78b770afdfbdd89397",
+  "libraryCommitSha": "770e5486c9466329699322894e5f93fe6a39684e"
+}

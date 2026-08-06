@@ -20,4 +20,7 @@ vendor/
 .env
 error.txt
 /schema
-src/*/.openapi-generator
+src/**/*/.openapi-generator/
+
+# Ignore generated binary
+/adyen-go-api-library

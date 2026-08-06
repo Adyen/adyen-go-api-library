@@ -27,11 +27,15 @@ type TransferData struct {
 	BalancePlatform *string `json:"balancePlatform,omitempty"`
 	// The list of the latest balance statuses in the transfer.
 	Balances []BalanceMutation `json:"balances,omitempty"`
-	// The category of the transfer.  Possible values:   - **bank**: a transfer involving a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id) or a bank account.  - **card**: a transfer involving a third-party card.  - **internal**: a transfer between [balance accounts](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id) within your platform.  - **issuedCard**: a transfer initiated by a Adyen-issued card.  - **platformPayment**: funds movements related to payments that are acquired for your users.  - **topUp**: an incoming transfer initiated by your user to top up their balance account.
+	// The category of the transfer.  Possible values:   - **bank**: A transfer involving a [transfer instrument](https://docs.adyen.com/api-explorer/legalentity/latest/post/transferInstruments#responses-200-id) or a bank account.  - **card**: A transfer involving a third-party card.  - **internal**: A transfer between [balance accounts](https://docs.adyen.com/api-explorer/balanceplatform/latest/post/balanceAccounts#responses-200-id) within your platform.  - **issuedCard**: A transfer initiated by an Adyen-issued card.  - **platformPayment**: Funds movements related to payments that are acquired for your users.  - **topUp**: An incoming transfer initiated by your user to top up their balance account.
 	Category     string                            `json:"category"`
 	CategoryData *TransferDataCategoryData         `json:"categoryData,omitempty"`
 	Counterparty *TransferNotificationCounterParty `json:"counterparty,omitempty"`
+	// The date and time when the transfer was created, in ISO 8601 extended format. For example, **2020-12-18T10:15:30+01:00**.
+	CreatedAt *time.Time `json:"createdAt,omitempty"`
 	// The date and time when the event was triggered, in ISO 8601 extended format. For example, **2020-12-18T10:15:30+01:00**.
+	// Deprecated since Transfer webhooks v3
+	/* Use createdAt or updatedAt */
 	CreationDate *time.Time `json:"creationDate,omitempty"`
 	// Your description for the transfer. It is used by most banks as the transfer description. We recommend sending a maximum of 140 characters, otherwise the description may be truncated.  Supported characters: **[a-z] [A-Z] [0-9] / - ?** **: ( ) . , ' + Space**  Supported characters for **regular** and **fast** transfers to a US counterparty: **[a-z] [A-Z] [0-9] & $ % # @** **~ = + - _ ' \" ! ?**
 	Description            *string                 `json:"description,omitempty"`
@@ -42,9 +46,11 @@ type TransferData struct {
 	EventId *string `json:"eventId,omitempty"`
 	// The list of events leading up to the current status of the transfer.
 	Events         []TransferEvent `json:"events,omitempty"`
+	ExecutionDate  *ExecutionDate  `json:"executionDate,omitempty"`
 	ExternalReason *ExternalReason `json:"externalReason,omitempty"`
 	// The ID of the resource.
 	Id                *string            `json:"id,omitempty"`
+	NetworkReason     *NetworkReason     `json:"networkReason,omitempty"`
 	PaymentInstrument *PaymentInstrument `json:"paymentInstrument,omitempty"`
 	// Additional information about the status of the transfer.
 	Reason *string `json:"reason,omitempty"`
@@ -55,12 +61,16 @@ type TransferData struct {
 	Review                  *TransferReview `json:"review,omitempty"`
 	// The sequence number of the transfer webhook. The numbers start from 1 and increase with each new webhook for a specific transfer.  The sequence number can help you restore the correct sequence of events even if they arrive out of order.
 	SequenceNumber *int32 `json:"sequenceNumber,omitempty"`
-	// The result of the transfer.   For example, **authorised**, **refused**, or **error**.
+	// The result of the transfer.  For example:  - **received**: an outgoing transfer request is created. - **refused**: the transfer request is rejected by Adyen for one of the following reasons:   - Transfer limit exceeded.   - Transaction rule requirements violated. - **authorised**: the transfer request is authorized and the funds are reserved. - **booked**: the funds are deducted from your user's balance account.  - **failed**: the transfer is rejected by the counterparty's bank. - **returned**: the transfer is returned by the counterparty's bank.
 	Status                 string                  `json:"status"`
+	Tracing                *TransferDataTracing    `json:"tracing,omitempty"`
 	Tracking               *TransferDataTracking   `json:"tracking,omitempty"`
 	TransactionRulesResult *TransactionRulesResult `json:"transactionRulesResult,omitempty"`
 	// The type of transfer or transaction. For example, **refund**, **payment**, **internalTransfer**, **bankTransfer**.
-	Type *string `json:"type,omitempty"`
+	Type          *string                      `json:"type,omitempty"`
+	UltimateParty *UltimatePartyIdentification `json:"ultimateParty,omitempty"`
+	// The date and time when the event was triggered, in ISO 8601 extended format. For example, **2020-12-18T10:15:30+01:00**.
+	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 }
 
 // NewTransferData instantiates a new TransferData object
@@ -323,7 +333,41 @@ func (o *TransferData) SetCounterparty(v TransferNotificationCounterParty) {
 	o.Counterparty = &v
 }
 
+// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+func (o *TransferData) GetCreatedAt() time.Time {
+	if o == nil || common.IsNil(o.CreatedAt) {
+		var ret time.Time
+		return ret
+	}
+	return *o.CreatedAt
+}
+
+// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransferData) GetCreatedAtOk() (*time.Time, bool) {
+	if o == nil || common.IsNil(o.CreatedAt) {
+		return nil, false
+	}
+	return o.CreatedAt, true
+}
+
+// HasCreatedAt returns a boolean if a field has been set.
+func (o *TransferData) HasCreatedAt() bool {
+	if o != nil && !common.IsNil(o.CreatedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
+func (o *TransferData) SetCreatedAt(v time.Time) {
+	o.CreatedAt = &v
+}
+
 // GetCreationDate returns the CreationDate field value if set, zero value otherwise.
+// Deprecated since Transfer webhooks v3
+/* Use createdAt or updatedAt */
 func (o *TransferData) GetCreationDate() time.Time {
 	if o == nil || common.IsNil(o.CreationDate) {
 		var ret time.Time
@@ -334,6 +378,8 @@ func (o *TransferData) GetCreationDate() time.Time {
 
 // GetCreationDateOk returns a tuple with the CreationDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated since Transfer webhooks v3
+/* Use createdAt or updatedAt */
 func (o *TransferData) GetCreationDateOk() (*time.Time, bool) {
 	if o == nil || common.IsNil(o.CreationDate) {
 		return nil, false
@@ -351,6 +397,8 @@ func (o *TransferData) HasCreationDate() bool {
 }
 
 // SetCreationDate gets a reference to the given time.Time and assigns it to the CreationDate field.
+// Deprecated since Transfer webhooks v3
+/* Use createdAt or updatedAt */
 func (o *TransferData) SetCreationDate(v time.Time) {
 	o.CreationDate = &v
 }
@@ -515,6 +563,38 @@ func (o *TransferData) SetEvents(v []TransferEvent) {
 	o.Events = v
 }
 
+// GetExecutionDate returns the ExecutionDate field value if set, zero value otherwise.
+func (o *TransferData) GetExecutionDate() ExecutionDate {
+	if o == nil || common.IsNil(o.ExecutionDate) {
+		var ret ExecutionDate
+		return ret
+	}
+	return *o.ExecutionDate
+}
+
+// GetExecutionDateOk returns a tuple with the ExecutionDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransferData) GetExecutionDateOk() (*ExecutionDate, bool) {
+	if o == nil || common.IsNil(o.ExecutionDate) {
+		return nil, false
+	}
+	return o.ExecutionDate, true
+}
+
+// HasExecutionDate returns a boolean if a field has been set.
+func (o *TransferData) HasExecutionDate() bool {
+	if o != nil && !common.IsNil(o.ExecutionDate) {
+		return true
+	}
+
+	return false
+}
+
+// SetExecutionDate gets a reference to the given ExecutionDate and assigns it to the ExecutionDate field.
+func (o *TransferData) SetExecutionDate(v ExecutionDate) {
+	o.ExecutionDate = &v
+}
+
 // GetExternalReason returns the ExternalReason field value if set, zero value otherwise.
 func (o *TransferData) GetExternalReason() ExternalReason {
 	if o == nil || common.IsNil(o.ExternalReason) {
@@ -577,6 +657,38 @@ func (o *TransferData) HasId() bool {
 // SetId gets a reference to the given string and assigns it to the Id field.
 func (o *TransferData) SetId(v string) {
 	o.Id = &v
+}
+
+// GetNetworkReason returns the NetworkReason field value if set, zero value otherwise.
+func (o *TransferData) GetNetworkReason() NetworkReason {
+	if o == nil || common.IsNil(o.NetworkReason) {
+		var ret NetworkReason
+		return ret
+	}
+	return *o.NetworkReason
+}
+
+// GetNetworkReasonOk returns a tuple with the NetworkReason field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransferData) GetNetworkReasonOk() (*NetworkReason, bool) {
+	if o == nil || common.IsNil(o.NetworkReason) {
+		return nil, false
+	}
+	return o.NetworkReason, true
+}
+
+// HasNetworkReason returns a boolean if a field has been set.
+func (o *TransferData) HasNetworkReason() bool {
+	if o != nil && !common.IsNil(o.NetworkReason) {
+		return true
+	}
+
+	return false
+}
+
+// SetNetworkReason gets a reference to the given NetworkReason and assigns it to the NetworkReason field.
+func (o *TransferData) SetNetworkReason(v NetworkReason) {
+	o.NetworkReason = &v
 }
 
 // GetPaymentInstrument returns the PaymentInstrument field value if set, zero value otherwise.
@@ -795,6 +907,38 @@ func (o *TransferData) SetStatus(v string) {
 	o.Status = v
 }
 
+// GetTracing returns the Tracing field value if set, zero value otherwise.
+func (o *TransferData) GetTracing() TransferDataTracing {
+	if o == nil || common.IsNil(o.Tracing) {
+		var ret TransferDataTracing
+		return ret
+	}
+	return *o.Tracing
+}
+
+// GetTracingOk returns a tuple with the Tracing field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransferData) GetTracingOk() (*TransferDataTracing, bool) {
+	if o == nil || common.IsNil(o.Tracing) {
+		return nil, false
+	}
+	return o.Tracing, true
+}
+
+// HasTracing returns a boolean if a field has been set.
+func (o *TransferData) HasTracing() bool {
+	if o != nil && !common.IsNil(o.Tracing) {
+		return true
+	}
+
+	return false
+}
+
+// SetTracing gets a reference to the given TransferDataTracing and assigns it to the Tracing field.
+func (o *TransferData) SetTracing(v TransferDataTracing) {
+	o.Tracing = &v
+}
+
 // GetTracking returns the Tracking field value if set, zero value otherwise.
 func (o *TransferData) GetTracking() TransferDataTracking {
 	if o == nil || common.IsNil(o.Tracking) {
@@ -891,6 +1035,70 @@ func (o *TransferData) SetType(v string) {
 	o.Type = &v
 }
 
+// GetUltimateParty returns the UltimateParty field value if set, zero value otherwise.
+func (o *TransferData) GetUltimateParty() UltimatePartyIdentification {
+	if o == nil || common.IsNil(o.UltimateParty) {
+		var ret UltimatePartyIdentification
+		return ret
+	}
+	return *o.UltimateParty
+}
+
+// GetUltimatePartyOk returns a tuple with the UltimateParty field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransferData) GetUltimatePartyOk() (*UltimatePartyIdentification, bool) {
+	if o == nil || common.IsNil(o.UltimateParty) {
+		return nil, false
+	}
+	return o.UltimateParty, true
+}
+
+// HasUltimateParty returns a boolean if a field has been set.
+func (o *TransferData) HasUltimateParty() bool {
+	if o != nil && !common.IsNil(o.UltimateParty) {
+		return true
+	}
+
+	return false
+}
+
+// SetUltimateParty gets a reference to the given UltimatePartyIdentification and assigns it to the UltimateParty field.
+func (o *TransferData) SetUltimateParty(v UltimatePartyIdentification) {
+	o.UltimateParty = &v
+}
+
+// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
+func (o *TransferData) GetUpdatedAt() time.Time {
+	if o == nil || common.IsNil(o.UpdatedAt) {
+		var ret time.Time
+		return ret
+	}
+	return *o.UpdatedAt
+}
+
+// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransferData) GetUpdatedAtOk() (*time.Time, bool) {
+	if o == nil || common.IsNil(o.UpdatedAt) {
+		return nil, false
+	}
+	return o.UpdatedAt, true
+}
+
+// HasUpdatedAt returns a boolean if a field has been set.
+func (o *TransferData) HasUpdatedAt() bool {
+	if o != nil && !common.IsNil(o.UpdatedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
+func (o *TransferData) SetUpdatedAt(v time.Time) {
+	o.UpdatedAt = &v
+}
+
 func (o TransferData) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -921,6 +1129,9 @@ func (o TransferData) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Counterparty) {
 		toSerialize["counterparty"] = o.Counterparty
 	}
+	if !common.IsNil(o.CreatedAt) {
+		toSerialize["createdAt"] = o.CreatedAt
+	}
 	if !common.IsNil(o.CreationDate) {
 		toSerialize["creationDate"] = o.CreationDate
 	}
@@ -939,11 +1150,17 @@ func (o TransferData) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Events) {
 		toSerialize["events"] = o.Events
 	}
+	if !common.IsNil(o.ExecutionDate) {
+		toSerialize["executionDate"] = o.ExecutionDate
+	}
 	if !common.IsNil(o.ExternalReason) {
 		toSerialize["externalReason"] = o.ExternalReason
 	}
 	if !common.IsNil(o.Id) {
 		toSerialize["id"] = o.Id
+	}
+	if !common.IsNil(o.NetworkReason) {
+		toSerialize["networkReason"] = o.NetworkReason
 	}
 	if !common.IsNil(o.PaymentInstrument) {
 		toSerialize["paymentInstrument"] = o.PaymentInstrument
@@ -964,6 +1181,9 @@ func (o TransferData) ToMap() (map[string]interface{}, error) {
 		toSerialize["sequenceNumber"] = o.SequenceNumber
 	}
 	toSerialize["status"] = o.Status
+	if !common.IsNil(o.Tracing) {
+		toSerialize["tracing"] = o.Tracing
+	}
 	if !common.IsNil(o.Tracking) {
 		toSerialize["tracking"] = o.Tracking
 	}
@@ -972,6 +1192,12 @@ func (o TransferData) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type
+	}
+	if !common.IsNil(o.UltimateParty) {
+		toSerialize["ultimateParty"] = o.UltimateParty
+	}
+	if !common.IsNil(o.UpdatedAt) {
+		toSerialize["updatedAt"] = o.UpdatedAt
 	}
 	return toSerialize, nil
 }
@@ -1031,7 +1257,7 @@ func (o *TransferData) isValidDirection() bool {
 	return false
 }
 func (o *TransferData) isValidReason() bool {
-	var allowedEnumValues = []string{"accountHierarchyNotActive", "amountLimitExceeded", "approved", "balanceAccountTemporarilyBlockedByTransactionRule", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "declined", "declinedByTransactionRule", "directDebitNotSupported", "error", "notEnoughBalance", "pending", "pendingApproval", "pendingExecution", "refusedByCounterpartyBank", "refusedByCustomer", "routeNotFound", "scaFailed", "transferInstrumentDoesNotExist", "unknown"}
+	var allowedEnumValues = []string{"accountHierarchyNotActive", "amountLimitExceeded", "approvalExpired", "approved", "avsDeclined", "balanceAccountTemporarilyBlockedByTransactionRule", "blockCard", "callReferral", "cancelled", "captureCard", "cardExpired", "cardholderAuthenticationRequired", "cashbackAmountExceedsLimit", "cavvDeclined", "contactlessFallback", "contactlessLimitReached", "counterpartyAccountBlocked", "counterpartyAccountClosed", "counterpartyAccountNotFound", "counterpartyAddressRequired", "counterpartyBankTimedOut", "counterpartyBankUnavailable", "cryptographicFailure", "cvcDeclined", "declined", "declinedByBapValidation", "declinedByTransactionRule", "declinedNonGeneric", "directDebitNotSupported", "doNotHonor", "domesticDebitTransactionNotAllowed", "duplicateTransmissionDetected", "error", "formatError", "fraud", "fraudCancelled", "honorWithId", "internalTimeout", "invalidAccount", "invalidAmount", "invalidAuthorizationLifeCycle", "invalidCard", "invalidExpiryDate", "invalidFromAccount", "invalidIssuer", "invalidMerchant", "invalidPin", "invalidToAccount", "invalidTransaction", "issuerSuspectedFraud", "lostCard", "mobilePinRequired", "noCheckingAccount", "noSavingsAccount", "not3dAuthenticated", "notEnoughBalance", "notSubmitted", "notSupported", "partiallyApproved", "pending", "pendingApproval", "pendingExecution", "pinNotChanged", "pinRequired", "pinTriesExceeded", "pinValidationNotPossible", "purchaseAmountOnlyNoCashBack", "refusedByCounterpartyBank", "refusedByCustomer", "restrictedCard", "revocationOfAuth", "routeNotFound", "scaAuthenticationRequired", "scaFailed", "schemeAdvice", "securityViolation", "shopperCancelled", "stolenCard", "threedsDynamicLinkingMismatch", "transactionNotPermitted", "transferInstrumentDoesNotExist", "unableToRouteTransaction", "unknown", "withdrawalAmountExceeded", "withdrawalCountExceeded"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetReason() == allowed {
 			return true
@@ -1040,7 +1266,7 @@ func (o *TransferData) isValidReason() bool {
 	return false
 }
 func (o *TransferData) isValidStatus() bool {
-	var allowedEnumValues = []string{"approvalPending", "atmWithdrawal", "atmWithdrawalReversalPending", "atmWithdrawalReversed", "authAdjustmentAuthorised", "authAdjustmentError", "authAdjustmentRefused", "authorised", "bankTransfer", "bankTransferPending", "booked", "bookingPending", "cancelled", "capturePending", "captureReversalPending", "captureReversed", "captured", "capturedExternally", "chargeback", "chargebackExternally", "chargebackPending", "chargebackReversalPending", "chargebackReversed", "credited", "depositCorrection", "depositCorrectionPending", "dispute", "disputeClosed", "disputeExpired", "disputeNeedsReview", "error", "expired", "failed", "fee", "feePending", "internalTransfer", "internalTransferPending", "invoiceDeduction", "invoiceDeductionPending", "manualCorrectionPending", "manuallyCorrected", "matchedStatement", "matchedStatementPending", "merchantPayin", "merchantPayinPending", "merchantPayinReversed", "merchantPayinReversedPending", "miscCost", "miscCostPending", "paymentCost", "paymentCostPending", "pendingApproval", "pendingExecution", "received", "refundPending", "refundReversalPending", "refundReversed", "refunded", "refundedExternally", "refused", "rejected", "reserveAdjustment", "reserveAdjustmentPending", "returned", "secondChargeback", "secondChargebackPending", "undefined"}
+	var allowedEnumValues = []string{"approvalPending", "atmWithdrawal", "atmWithdrawalReversalPending", "atmWithdrawalReversed", "authAdjustmentAuthorised", "authAdjustmentError", "authAdjustmentRefused", "authorised", "bankTransfer", "bankTransferPending", "booked", "bookingPending", "cancelled", "capturePending", "captureReversalPending", "captureReversed", "captured", "capturedExternally", "chargeback", "chargebackExternally", "chargebackPending", "chargebackReversalPending", "chargebackReversed", "credited", "depositCorrection", "depositCorrectionPending", "dispute", "disputeClosed", "disputeExpired", "disputeNeedsReview", "error", "expired", "failed", "fee", "feePending", "interchangeAdjusted", "internalTransfer", "internalTransferPending", "invoiceDeduction", "invoiceDeductionPending", "manualCorrectionPending", "manuallyCorrected", "matchedStatement", "matchedStatementPending", "merchantPayin", "merchantPayinPending", "merchantPayinReversed", "merchantPayinReversedPending", "miscCost", "miscCostPending", "paymentCost", "paymentCostPending", "pending", "pendingApproval", "pendingExecution", "received", "refundPending", "refundReversalPending", "refundReversed", "refunded", "refundedExternally", "refused", "rejected", "reserveAdjustment", "reserveAdjustmentPending", "returned", "reversed", "secondChargeback", "secondChargebackPending", "undefined"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetStatus() == allowed {
 			return true

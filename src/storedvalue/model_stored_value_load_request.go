@@ -20,7 +20,7 @@ var _ common.MappedNullable = &StoredValueLoadRequest{}
 // StoredValueLoadRequest struct for StoredValueLoadRequest
 type StoredValueLoadRequest struct {
 	Amount Amount `json:"amount"`
-	// The type of load you are trying to do, when absent we default to 'Load'
+	// The type of load you are trying to do, when absent we default to 'load'
 	LoadType *string `json:"loadType,omitempty"`
 	// The merchant account identifier, with which you want to process the transaction.
 	MerchantAccount string `json:"merchantAccount"`

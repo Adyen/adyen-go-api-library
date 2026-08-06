@@ -3,14 +3,15 @@ package tests
 import (
 	"context"
 	"fmt"
+	"net/http"
+	"net/url"
+	"time"
+
 	"github.com/adyen/adyen-go-api-library/v21/src/adyen"
 	"github.com/adyen/adyen-go-api-library/v21/src/checkout"
 	"github.com/adyen/adyen-go-api-library/v21/src/common"
 	"github.com/adyen/adyen-go-api-library/v21/src/recurring"
 	"github.com/adyen/adyen-go-api-library/v21/src/webhook"
-	"net/http"
-	"net/url"
-	"time"
 )
 
 func PaymentsApi_PaymentMethods() {

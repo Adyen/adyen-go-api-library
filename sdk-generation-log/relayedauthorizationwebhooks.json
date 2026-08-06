@@ -1,0 +1,8 @@
+{
+  "service": "relayedauthorizationwebhooks",
+  "project": "go",
+  "generatedAt": "2026-07-31T12:01:20Z",
+  "openapiCommitSha": "425d65d12163ebd4fe6fa6d2f859075817c81cba",
+  "automationCommitSha": "0c108bd8050cf480d2710b78b770afdfbdd89397",
+  "libraryCommitSha": "66c296511b73a9e872438467d1664eb370d34111"
+}

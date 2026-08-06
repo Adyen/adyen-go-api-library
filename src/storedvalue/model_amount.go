@@ -19,9 +19,9 @@ var _ common.MappedNullable = &Amount{}
 
 // Amount struct for Amount
 type Amount struct {
-	// The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes).
+	// The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes#currency-codes) of the amount.
 	Currency string `json:"currency"`
-	// The amount of the transaction, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
+	// The numeric value of the amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes#minor-units).
 	Value int64 `json:"value"`
 }
 

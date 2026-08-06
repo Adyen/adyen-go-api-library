@@ -19,7 +19,7 @@ var _ common.MappedNullable = &ConfirmationTrackingData{}
 
 // ConfirmationTrackingData struct for ConfirmationTrackingData
 type ConfirmationTrackingData struct {
-	// The status of the transfer.  Possible values:    - **credited**: the funds are credited to your user's transfer instrument or bank account.
+	// The status of the transfer.  Possible values:   - **credited**: the funds are credited to your user's transfer instrument or bank account.- **accepted**: the request is accepted by the integration.
 	Status string `json:"status"`
 	// The type of the tracking event.  Possible values:   - **confirmation**: the transfer passed Adyen's internal review.
 	Type string `json:"type"`
@@ -146,7 +146,7 @@ func (v *NullableConfirmationTrackingData) UnmarshalJSON(src []byte) error {
 }
 
 func (o *ConfirmationTrackingData) isValidStatus() bool {
-	var allowedEnumValues = []string{"credited"}
+	var allowedEnumValues = []string{"credited", "accepted"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetStatus() == allowed {
 			return true

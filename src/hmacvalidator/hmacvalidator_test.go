@@ -94,6 +94,16 @@ func Test_Hmacvalidator(t *testing.T) {
 			testItem.AdditionalData = nil
 			assert.False(t, ValidateHmac(testItem, key))
 		})
+		t.Run("Missing hmacSignature key", func(t *testing.T) {
+			testItem := notificationRequestItem
+			testItem.AdditionalData = &map[string]interface{}{"someOtherKey": "someValue"}
+			assert.False(t, ValidateHmac(testItem, key))
+		})
+		t.Run("Non-string hmacSignature", func(t *testing.T) {
+			testItem := notificationRequestItem
+			testItem.AdditionalData = &map[string]interface{}{"hmacSignature": 12345}
+			assert.False(t, ValidateHmac(testItem, key))
+		})
 	})
 	t.Run("ValidateHmacPayload", func(t *testing.T) {
 		t.Run("Validate HMAC from string payload", func(t *testing.T) {

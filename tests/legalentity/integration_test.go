@@ -5,16 +5,17 @@ package legalentity
 
 import (
 	"context"
-	"github.com/adyen/adyen-go-api-library/v21/src/adyen"
-	"github.com/adyen/adyen-go-api-library/v21/src/common"
-    "github.com/adyen/adyen-go-api-library/v21/src/legalentity"
-    "github.com/joho/godotenv"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 	"net/http"
 	"net/url"
 	"os"
 	"testing"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/adyen"
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
+	"github.com/adyen/adyen-go-api-library/v21/src/legalentity"
+	"github.com/joho/godotenv"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func Test_LegalEntity_Integration(t *testing.T) {
@@ -67,7 +68,7 @@ func Test_LegalEntity_Integration(t *testing.T) {
 		require.NotNil(t, err)
 		assert.Equal(t, 422, httpRes.StatusCode)
 
-        // cast to API Error
+		// cast to API Error
 		e := err.(common.APIError)
 
 		require.NotNil(t, e.RawBody)
@@ -94,41 +95,41 @@ func Test_LegalEntity_Integration(t *testing.T) {
 
 		res, httpRes, err := service.LegalEntitiesApi.CreateLegalEntity(context.Background(), req)
 
-        require.NoError(t, err)
-        assert.Equal(t, 200, httpRes.StatusCode)
-        assert.NotNil(t, res.GetId())
+		require.NoError(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+		assert.NotNil(t, res.GetId())
 
 	})
 
-    t.Run("Create a legal entity that fails", func(t *testing.T) {
+	t.Run("Create a legal entity that fails", func(t *testing.T) {
 
-        // log 4xx error
-        service.LegalEntitiesApi.Client.Cfg.Log4XXError = true
+		// log 4xx error
+		service.LegalEntitiesApi.Client.Cfg.Log4XXError = true
 
-        legalEntityInfoRequiredType := legalentity.LegalEntityInfoRequiredType{
-            Type: "individual",
-            Individual: legalentity.NewIndividual(legalentity.Name{
-                FirstName: "John",
-                LastName:  "Smith",
-            },
-                legalentity.Address{
-                    Country: "The Netherlands", // invalid: must pass country code
-                }),
-        }
+		legalEntityInfoRequiredType := legalentity.LegalEntityInfoRequiredType{
+			Type: "individual",
+			Individual: legalentity.NewIndividual(legalentity.Name{
+				FirstName: "John",
+				LastName:  "Smith",
+			},
+				legalentity.Address{
+					Country: "The Netherlands", // invalid: must pass country code
+				}),
+		}
 
-        req := service.LegalEntitiesApi.CreateLegalEntityInput().
-            LegalEntityInfoRequiredType(legalEntityInfoRequiredType)
+		req := service.LegalEntitiesApi.CreateLegalEntityInput().
+			LegalEntityInfoRequiredType(legalEntityInfoRequiredType)
 
-        _, httpRes, err := service.LegalEntitiesApi.CreateLegalEntity(context.Background(), req)
+		_, httpRes, err := service.LegalEntitiesApi.CreateLegalEntity(context.Background(), req)
 
-        assert.Equal(t, 422, httpRes.StatusCode)
+		assert.Equal(t, 422, httpRes.StatusCode)
 
-        // cast to API Error
-        e := err.(common.APIError)
+		// cast to API Error
+		e := err.(common.APIError)
 
-        require.NotNil(t, e.RawBody)
-        assert.Equal(t, float64(422), e.Status)
-        assert.Equal(t, "30_102", e.Code)
+		require.NotNil(t, e.RawBody)
+		assert.Equal(t, float64(422), e.Status)
+		assert.Equal(t, "30_102", e.Code)
 
-    })
+	})
 }

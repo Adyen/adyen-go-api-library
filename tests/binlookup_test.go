@@ -5,9 +5,10 @@ package tests
 
 import (
 	"context"
-	"github.com/adyen/adyen-go-api-library/v21/src/binlookup"
 	"os"
 	"testing"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/binlookup"
 
 	"github.com/adyen/adyen-go-api-library/v21/src/adyen"
 	"github.com/adyen/adyen-go-api-library/v21/src/common"
