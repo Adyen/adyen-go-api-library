@@ -19,7 +19,7 @@ var _ common.MappedNullable = &BalanceAccountInfo{}
 
 // BalanceAccountInfo struct for BalanceAccountInfo
 type BalanceAccountInfo struct {
-	// The unique identifier of the [account holder](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/accountHolders__resParam_id) associated with the balance account.
+	// The unique identifier of the [account holder](https://docs.adyen.com/api-explorer/balanceplatform/latest/post/accountHolders#responses-200-id) associated with the balance account.
 	AccountHolderId string `json:"accountHolderId"`
 	// The default three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes) of the balance account. This is the currency displayed on the Balance Account overview page in your Customer Area. The default value is **EUR**. > After a balance account is created, you cannot change its default currency.
 	DefaultCurrencyCode *string `json:"defaultCurrencyCode,omitempty"`
