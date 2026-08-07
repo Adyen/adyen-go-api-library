@@ -29,7 +29,7 @@ type Attachment struct {
 	Filename *string `json:"filename,omitempty"`
 	// The name of the file including the file extension.
 	PageName *string `json:"pageName,omitempty"`
-	// Specifies which side of the ID card is uploaded.  * If the `type` is **driversLicense** or **identityCard**, you must set this to **front** or **back**.  * For any other types, when this is omitted, we infer the page number based on the order of attachments.
+	// Specifies which side of the ID card is uploaded.  * If the `type` is **driversLicense** or **identityCard**, you must set this to **front** or **back** and include both sides in the same API request.  * For any other types, when this is omitted, we infer the page number based on the order of attachments.
 	PageType *string `json:"pageType,omitempty"`
 }
 
