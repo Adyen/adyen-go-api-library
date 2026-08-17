@@ -11,7 +11,7 @@ retract v21.2.1 // Source-breaking change to webhook.NotificationRequestItem.Add
 require (
 	github.com/google/uuid v1.6.0
 	github.com/joho/godotenv v1.5.1
-	github.com/stretchr/testify v1.11.1
+	github.com/stretchr/testify v1.12.0
 	golang.org/x/oauth2 v0.27.0
 )
 
