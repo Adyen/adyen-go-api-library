@@ -36,6 +36,8 @@ type CompanyApiCredential struct {
 	Id string `json:"id"`
 	// List of [roles](https://docs.adyen.com/development-resources/api-credentials#roles-1) for the API credential.
 	Roles []string `json:"roles"`
+	// The subject DN of the certificate issued by Adyen.
+	SubjectDN *string `json:"subjectDN,omitempty"`
 	// The name of the [API credential](https://docs.adyen.com/development-resources/api-credentials), for example **ws@Company.TestCompany**.
 	Username string `json:"username"`
 }
@@ -311,6 +313,38 @@ func (o *CompanyApiCredential) SetRoles(v []string) {
 	o.Roles = v
 }
 
+// GetSubjectDN returns the SubjectDN field value if set, zero value otherwise.
+func (o *CompanyApiCredential) GetSubjectDN() string {
+	if o == nil || common.IsNil(o.SubjectDN) {
+		var ret string
+		return ret
+	}
+	return *o.SubjectDN
+}
+
+// GetSubjectDNOk returns a tuple with the SubjectDN field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CompanyApiCredential) GetSubjectDNOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SubjectDN) {
+		return nil, false
+	}
+	return o.SubjectDN, true
+}
+
+// HasSubjectDN returns a boolean if a field has been set.
+func (o *CompanyApiCredential) HasSubjectDN() bool {
+	if o != nil && !common.IsNil(o.SubjectDN) {
+		return true
+	}
+
+	return false
+}
+
+// SetSubjectDN gets a reference to the given string and assigns it to the SubjectDN field.
+func (o *CompanyApiCredential) SetSubjectDN(v string) {
+	o.SubjectDN = &v
+}
+
 // GetUsername returns the Username field value
 func (o *CompanyApiCredential) GetUsername() string {
 	if o == nil {
@@ -362,6 +396,9 @@ func (o CompanyApiCredential) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["id"] = o.Id
 	toSerialize["roles"] = o.Roles
+	if !common.IsNil(o.SubjectDN) {
+		toSerialize["subjectDN"] = o.SubjectDN
+	}
 	toSerialize["username"] = o.Username
 	return toSerialize, nil
 }
