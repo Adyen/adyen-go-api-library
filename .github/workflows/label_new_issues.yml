@@ -5,6 +5,8 @@ on:
 
 jobs:
   add-label:
+    permissions:
+      issues: write
     runs-on: ubuntu-latest
     steps:
       - name: Add 'needs response' label to new issues
