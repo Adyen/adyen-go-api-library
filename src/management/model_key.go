@@ -21,7 +21,7 @@ var _ common.MappedNullable = &Key{}
 type Key struct {
 	// The unique identifier of the shared key.
 	Identifier *string `json:"identifier,omitempty"`
-	// The secure passphrase to protect the shared key.
+	// The secure passphrase to protect the shared key. Must consist of:   * At least 12 characters.  * At least 1 uppercase letter: `[A-Z]`.   * At least 1 lowercase letter: `[a-z]`.   * At least 1 digit: `[0-9]`.    * At least 1 special character. Limited to the following: `~`, `!`, `@`, `#`, `$`, `%`, `^`, `&`, `*`, `(`, `)`, `_`, `+`, `=`, `}`, `{`, `]`, `[`, `;`, `:`, `?`, `.`, `,`, `>`, `<`.
 	Passphrase *string `json:"passphrase,omitempty"`
 	// The version number of the shared key.
 	Version *int32 `json:"version,omitempty"`

@@ -25,7 +25,7 @@ type CreateCompanyUserRequest struct {
 	AssociatedMerchantAccounts []string `json:"associatedMerchantAccounts,omitempty"`
 	// The email address of the user.
 	Email string `json:"email"`
-	// The requested login method for the user. To use SSO, you must already have SSO configured with Adyen before creating the user.  Possible values: **Username & account**, **Email**, or **SSO**
+	// The requested login method for the user. To use SSO, you must already have SSO configured with Adyen before creating the user.  Possible values: **Email** or **SSO**
 	LoginMethod *string `json:"loginMethod,omitempty"`
 	Name        Name    `json:"name"`
 	// The list of [roles](https://docs.adyen.com/account/user-roles) for this user.
