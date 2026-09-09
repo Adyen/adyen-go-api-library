@@ -113,25 +113,33 @@ func Error() {
 }
 
 func CustomHTTPClientConfiguration() {
+	transport := http.DefaultTransport.(*http.Transport).Clone()
+	transport.MaxIdleConns = 100
+	transport.MaxIdleConnsPerHost = 20
+	transport.IdleConnTimeout = 30 * time.Second
+
 	client := adyen.NewClient(&common.Config{
 		HTTPClient: &http.Client{
-			Timeout: 512 * time.Millisecond,
+			Transport: transport,
+			Timeout:   60 * time.Second,
 		},
 		Environment: common.TestEnv,
 		ApiKey:      "your api key",
 	})
 
 	fmt.Println(client.BinLookup().Client.Cfg.HTTPClient.Timeout)
-	// Output: Custom http.Client is provided
-	// 512ms
+	// Output: 1m0s
 }
 
 func Proxy() {
-	// creating the proxyURL
-	proxyURL, _ := url.Parse("http://myproxy:7000")
-	transport := &http.Transport{
-		Proxy: http.ProxyURL(proxyURL),
+	proxyURL, err := url.Parse("http://myproxy:7000")
+	if err != nil {
+		// Handle the configuration error.
 	}
+
+	transport := http.DefaultTransport.(*http.Transport).Clone()
+	transport.Proxy = http.ProxyURL(proxyURL)
+
 	client := adyen.NewClient(&common.Config{
 		HTTPClient: &http.Client{
 			Transport: transport,
