@@ -19,7 +19,7 @@ var _ common.MappedNullable = &HKLocalAccountIdentification{}
 
 // HKLocalAccountIdentification struct for HKLocalAccountIdentification
 type HKLocalAccountIdentification struct {
-	// The 9- to 15-character bank account number (alphanumeric), without separators or whitespace. Starts with the 3-digit branch code.
+	// The 9- to 17-digit bank account number, without separators or whitespace. Starts with the 3-digit branch code.
 	AccountNumber string `json:"accountNumber"`
 	// The 3-digit clearing code, without separators or whitespace.
 	ClearingCode string `json:"clearingCode"`
