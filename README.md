@@ -218,32 +218,58 @@ Log5XXError: true,
 service := client.Checkout()
 ```
 
-### Custom HTTP Client Configuration
+### Configure the HTTP client
 
-By default, Go [`http.DefaultClient`](https://golang.org/pkg/net/http/) will be used to submit requests to the API. But you can change that by injecting your own HttpClient on your client instance.
+By default, the library uses Go's [`http.DefaultClient`](https://pkg.go.dev/net/http#DefaultClient). You can customize HTTP behavior by injecting a configured `*http.Client` through `common.Config.HTTPClient`. Create the client and its transport once, then share the resulting Adyen client across your application. Go HTTP clients and transports are safe for concurrent use.
 
 ```go
+transport := http.DefaultTransport.(*http.Transport).Clone()
+transport.MaxIdleConns = 100
+transport.MaxIdleConnsPerHost = 20
+transport.IdleConnTimeout = 30 * time.Second
+
+httpClient := &http.Client{
+    Transport: transport,
+    Timeout:   60 * time.Second,
+}
+
 client := adyen.NewClient(&common.Config{
-    HTTPClient: &http.Client{
-        Timeout: 512 * time.Millisecond,
-    },
+    HTTPClient:  httpClient,
     Environment: common.TestEnv,
     ApiKey:      "your api key",
 })
 ```
 
-### Proxy configuration
+Clone `http.DefaultTransport` before customizing it. This preserves Go's default proxy handling, connection and TLS timeouts, TCP keepalive, and HTTP/2 support. Do not modify `http.DefaultTransport` directly because it is shared by the process. Creating an empty `http.Transport` does not inherit these defaults.
 
-You can configure a proxy connection by injecting your own `http.Client` with a custom Transport on your client instance.
+You can configure the following settings on the client and transport:
 
-Example:
+- `http.Client.Timeout` sets the maximum duration for the complete request and response operation. It does not only control TCP connection establishment.
+- `MaxIdleConns` sets the maximum number of idle connections retained across all destinations.
+- `MaxIdleConnsPerHost` sets the maximum number of idle connections retained for one destination. Increasing it can reduce HTTP/1.1 connection churn under concurrent traffic.
+- `IdleConnTimeout` controls how long an unused pooled connection remains available. Consider setting it below relevant proxy, firewall, load balancer, or server idle limits.
+- `MaxConnsPerHost` limits dialing, active, and idle connections for one destination. Set it only when you intend to limit concurrency, because it can throttle requests.
+- `DisableKeepAlives` disables HTTP connection reuse. It increases TCP and TLS setup overhead, so use it for diagnosis rather than as the default solution.
+- `DialContext` and `net.Dialer.KeepAlive` configure low-level connection behavior. TCP keepalive probes are different from HTTP connection reuse.
+- `Proxy` and `TLSClientConfig` allow proxy and TLS configuration specific to your network.
+
+For high-volume traffic, keep HTTP connection reuse enabled and size the connection pool using observed concurrency and infrastructure limits. 
+Do not create a new client or transport per request, because doing so prevents effective connection reuse. 
+Use stable idempotency keys on supported POST operations when retries are possible. 
+
+#### Proxy configuration
+
+You can configure a proxy by setting `Proxy` on a cloned default transport.
 
 ```go
-// creating the proxyURL
-proxyURL, _ := url.Parse("http://myproxy:7000")
-transport := &http.Transport{
-    Proxy: http.ProxyURL(proxyURL),
+proxyURL, err := url.Parse("http://myproxy:7000")
+if err != nil {
+    // Handle the configuration error.
 }
+
+transport := http.DefaultTransport.(*http.Transport).Clone()
+transport.Proxy = http.ProxyURL(proxyURL)
+
 client := adyen.NewClient(&common.Config{
     HTTPClient: &http.Client{
         Transport: transport,
