@@ -23,7 +23,7 @@ type IssuedCard struct {
 	AuthorisationType *string `json:"authorisationType,omitempty"`
 	// Indicates the method used for entering the PAN to initiate a transaction.  Possible values: **manual**, **chip**, **magstripe**, **contactless**, **cof**, **ecommerce**, **token**.
 	PanEntryMode *string `json:"panEntryMode,omitempty"`
-	// Contains information about how the payment was processed. For example, **ecommerce** for online or **pos** for in-person payments.
+	// Contains information about how the payment was processed.  Possible values: **atmWithdraw**, **balanceInquiry**, **ecommerce**, **moto**, **pos**, **purchaseWithCashback**, **recurring**, **token**.
 	ProcessingType           *string                   `json:"processingType,omitempty"`
 	RelayedAuthorisationData *RelayedAuthorisationData `json:"relayedAuthorisationData,omitempty"`
 	// The identifier of the original payment. This ID is provided by the scheme and can be alphanumeric or numeric, depending on the scheme. The `schemeTraceID` should refer to an original `schemeUniqueTransactionID` provided in an earlier payment (not necessarily processed by Adyen). A `schemeTraceId` is typically available for authorization adjustments or recurring payments.
