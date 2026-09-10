@@ -25,6 +25,8 @@ type TransferNotificationMerchantData struct {
 	City *string `json:"city,omitempty"`
 	// The country where the merchant is located.
 	Country *string `json:"country,omitempty"`
+	// The two-character country code of the merchant's location, in [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format.
+	CountryCode *string `json:"countryCode,omitempty"`
 	// The merchant category code.
 	Mcc *string `json:"mcc,omitempty"`
 	// The unique identifier of the merchant.
@@ -146,6 +148,38 @@ func (o *TransferNotificationMerchantData) HasCountry() bool {
 // SetCountry gets a reference to the given string and assigns it to the Country field.
 func (o *TransferNotificationMerchantData) SetCountry(v string) {
 	o.Country = &v
+}
+
+// GetCountryCode returns the CountryCode field value if set, zero value otherwise.
+func (o *TransferNotificationMerchantData) GetCountryCode() string {
+	if o == nil || common.IsNil(o.CountryCode) {
+		var ret string
+		return ret
+	}
+	return *o.CountryCode
+}
+
+// GetCountryCodeOk returns a tuple with the CountryCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransferNotificationMerchantData) GetCountryCodeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.CountryCode) {
+		return nil, false
+	}
+	return o.CountryCode, true
+}
+
+// HasCountryCode returns a boolean if a field has been set.
+func (o *TransferNotificationMerchantData) HasCountryCode() bool {
+	if o != nil && !common.IsNil(o.CountryCode) {
+		return true
+	}
+
+	return false
+}
+
+// SetCountryCode gets a reference to the given string and assigns it to the CountryCode field.
+func (o *TransferNotificationMerchantData) SetCountryCode(v string) {
+	o.CountryCode = &v
 }
 
 // GetMcc returns the Mcc field value if set, zero value otherwise.
@@ -294,6 +328,9 @@ func (o TransferNotificationMerchantData) ToMap() (map[string]interface{}, error
 	}
 	if !common.IsNil(o.Country) {
 		toSerialize["country"] = o.Country
+	}
+	if !common.IsNil(o.CountryCode) {
+		toSerialize["countryCode"] = o.CountryCode
 	}
 	if !common.IsNil(o.Mcc) {
 		toSerialize["mcc"] = o.Mcc
