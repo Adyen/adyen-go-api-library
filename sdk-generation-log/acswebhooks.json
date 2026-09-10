@@ -1,0 +1,8 @@
+{
+  "service": "acswebhooks",
+  "project": "go",
+  "generatedAt": "2026-09-10T20:56:05Z",
+  "openapiCommitSha": "c4e0d44cf6c0f3dcdff65be8e250fdbfa9da1076",
+  "automationCommitSha": "d34376385296d6c542a454096b5081b467e00415",
+  "libraryCommitSha": "91a97e53ca75e4df4a7e3db346bd27d982e08965"
+}
