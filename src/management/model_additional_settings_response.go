@@ -23,7 +23,7 @@ type AdditionalSettingsResponse struct {
 	ExcludeEventCodes []string `json:"excludeEventCodes,omitempty"`
 	// Object containing list of event codes for which the notification will be sent.
 	IncludeEventCodes []string `json:"includeEventCodes,omitempty"`
-	// Object containing boolean key-value pairs. The key can be any [standard webhook additional setting](https://docs.adyen.com/development-resources/webhooks/additional-settings), and the value indicates if the setting is enabled. For example, `captureDelayHours`: **true** means the standard notifications you get will contain the number of hours remaining until the payment will be captured.
+	// Object containing boolean key-value pairs. The key can be any [standard webhook additional setting](https://docs.adyen.com/development-resources/webhooks/additional-settings), and the value indicates if the setting is enabled. For example, `includeCaptureDelayHours`: **true** means the standard notifications you get will contain the number of hours remaining until the payment will be captured.
 	Properties *map[string]bool `json:"properties,omitempty"`
 }
 

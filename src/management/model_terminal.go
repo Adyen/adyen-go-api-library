@@ -20,12 +20,18 @@ var _ common.MappedNullable = &Terminal{}
 
 // Terminal struct for Terminal
 type Terminal struct {
-	Assignment   *TerminalAssignment   `json:"assignment,omitempty"`
-	Connectivity *TerminalConnectivity `json:"connectivity,omitempty"`
+	Assignment *TerminalAssignment `json:"assignment,omitempty"`
+	// The [regional base URL](https://docs.adyen.com/api-explorer/terminal-api/1/overview#endpoints-for-cloud-communications) to use for sending Terminal API requests when using cloud communications.
+	CloudDeviceApiEndpoint *string               `json:"cloudDeviceApiEndpoint,omitempty"`
+	Connectivity           *TerminalConnectivity `json:"connectivity,omitempty"`
+	// The country code of the country where the terminal is located.
+	CountryCode *string `json:"countryCode,omitempty"`
 	// The software release currently in use on the terminal.
 	FirmwareVersion *string `json:"firmwareVersion,omitempty"`
 	// The unique identifier of the terminal.
 	Id *string `json:"id,omitempty"`
+	// A list of Android apps installed on the terminal.
+	InstalledAPKs []InstalledAPKs `json:"installedAPKs,omitempty"`
 	// Date and time of the last activity on the terminal. Not included when the last activity was more than 14 days ago.
 	LastActivityAt *time.Time `json:"lastActivityAt,omitempty"`
 	// Date and time of the last transaction on the terminal. Not included when the last transaction was more than 14 days ago.
@@ -87,6 +93,38 @@ func (o *Terminal) SetAssignment(v TerminalAssignment) {
 	o.Assignment = &v
 }
 
+// GetCloudDeviceApiEndpoint returns the CloudDeviceApiEndpoint field value if set, zero value otherwise.
+func (o *Terminal) GetCloudDeviceApiEndpoint() string {
+	if o == nil || common.IsNil(o.CloudDeviceApiEndpoint) {
+		var ret string
+		return ret
+	}
+	return *o.CloudDeviceApiEndpoint
+}
+
+// GetCloudDeviceApiEndpointOk returns a tuple with the CloudDeviceApiEndpoint field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Terminal) GetCloudDeviceApiEndpointOk() (*string, bool) {
+	if o == nil || common.IsNil(o.CloudDeviceApiEndpoint) {
+		return nil, false
+	}
+	return o.CloudDeviceApiEndpoint, true
+}
+
+// HasCloudDeviceApiEndpoint returns a boolean if a field has been set.
+func (o *Terminal) HasCloudDeviceApiEndpoint() bool {
+	if o != nil && !common.IsNil(o.CloudDeviceApiEndpoint) {
+		return true
+	}
+
+	return false
+}
+
+// SetCloudDeviceApiEndpoint gets a reference to the given string and assigns it to the CloudDeviceApiEndpoint field.
+func (o *Terminal) SetCloudDeviceApiEndpoint(v string) {
+	o.CloudDeviceApiEndpoint = &v
+}
+
 // GetConnectivity returns the Connectivity field value if set, zero value otherwise.
 func (o *Terminal) GetConnectivity() TerminalConnectivity {
 	if o == nil || common.IsNil(o.Connectivity) {
@@ -117,6 +155,38 @@ func (o *Terminal) HasConnectivity() bool {
 // SetConnectivity gets a reference to the given TerminalConnectivity and assigns it to the Connectivity field.
 func (o *Terminal) SetConnectivity(v TerminalConnectivity) {
 	o.Connectivity = &v
+}
+
+// GetCountryCode returns the CountryCode field value if set, zero value otherwise.
+func (o *Terminal) GetCountryCode() string {
+	if o == nil || common.IsNil(o.CountryCode) {
+		var ret string
+		return ret
+	}
+	return *o.CountryCode
+}
+
+// GetCountryCodeOk returns a tuple with the CountryCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Terminal) GetCountryCodeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.CountryCode) {
+		return nil, false
+	}
+	return o.CountryCode, true
+}
+
+// HasCountryCode returns a boolean if a field has been set.
+func (o *Terminal) HasCountryCode() bool {
+	if o != nil && !common.IsNil(o.CountryCode) {
+		return true
+	}
+
+	return false
+}
+
+// SetCountryCode gets a reference to the given string and assigns it to the CountryCode field.
+func (o *Terminal) SetCountryCode(v string) {
+	o.CountryCode = &v
 }
 
 // GetFirmwareVersion returns the FirmwareVersion field value if set, zero value otherwise.
@@ -181,6 +251,38 @@ func (o *Terminal) HasId() bool {
 // SetId gets a reference to the given string and assigns it to the Id field.
 func (o *Terminal) SetId(v string) {
 	o.Id = &v
+}
+
+// GetInstalledAPKs returns the InstalledAPKs field value if set, zero value otherwise.
+func (o *Terminal) GetInstalledAPKs() []InstalledAPKs {
+	if o == nil || common.IsNil(o.InstalledAPKs) {
+		var ret []InstalledAPKs
+		return ret
+	}
+	return o.InstalledAPKs
+}
+
+// GetInstalledAPKsOk returns a tuple with the InstalledAPKs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Terminal) GetInstalledAPKsOk() ([]InstalledAPKs, bool) {
+	if o == nil || common.IsNil(o.InstalledAPKs) {
+		return nil, false
+	}
+	return o.InstalledAPKs, true
+}
+
+// HasInstalledAPKs returns a boolean if a field has been set.
+func (o *Terminal) HasInstalledAPKs() bool {
+	if o != nil && !common.IsNil(o.InstalledAPKs) {
+		return true
+	}
+
+	return false
+}
+
+// SetInstalledAPKs gets a reference to the given []InstalledAPKs and assigns it to the InstalledAPKs field.
+func (o *Terminal) SetInstalledAPKs(v []InstalledAPKs) {
+	o.InstalledAPKs = v
 }
 
 // GetLastActivityAt returns the LastActivityAt field value if set, zero value otherwise.
@@ -356,14 +458,23 @@ func (o Terminal) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Assignment) {
 		toSerialize["assignment"] = o.Assignment
 	}
+	if !common.IsNil(o.CloudDeviceApiEndpoint) {
+		toSerialize["cloudDeviceApiEndpoint"] = o.CloudDeviceApiEndpoint
+	}
 	if !common.IsNil(o.Connectivity) {
 		toSerialize["connectivity"] = o.Connectivity
+	}
+	if !common.IsNil(o.CountryCode) {
+		toSerialize["countryCode"] = o.CountryCode
 	}
 	if !common.IsNil(o.FirmwareVersion) {
 		toSerialize["firmwareVersion"] = o.FirmwareVersion
 	}
 	if !common.IsNil(o.Id) {
 		toSerialize["id"] = o.Id
+	}
+	if !common.IsNil(o.InstalledAPKs) {
+		toSerialize["installedAPKs"] = o.InstalledAPKs
 	}
 	if !common.IsNil(o.LastActivityAt) {
 		toSerialize["lastActivityAt"] = o.LastActivityAt

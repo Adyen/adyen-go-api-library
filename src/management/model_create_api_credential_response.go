@@ -38,6 +38,8 @@ type CreateApiCredentialResponse struct {
 	Password string `json:"password"`
 	// List of [roles](https://docs.adyen.com/development-resources/api-credentials#roles-1) for the API credential.
 	Roles []string `json:"roles"`
+	// The subject DN of the certificate issued by Adyen.
+	SubjectDN *string `json:"subjectDN,omitempty"`
 	// The name of the [API credential](https://docs.adyen.com/development-resources/api-credentials), for example **ws@Company.TestCompany**.
 	Username string `json:"username"`
 }
@@ -331,6 +333,38 @@ func (o *CreateApiCredentialResponse) SetRoles(v []string) {
 	o.Roles = v
 }
 
+// GetSubjectDN returns the SubjectDN field value if set, zero value otherwise.
+func (o *CreateApiCredentialResponse) GetSubjectDN() string {
+	if o == nil || common.IsNil(o.SubjectDN) {
+		var ret string
+		return ret
+	}
+	return *o.SubjectDN
+}
+
+// GetSubjectDNOk returns a tuple with the SubjectDN field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateApiCredentialResponse) GetSubjectDNOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SubjectDN) {
+		return nil, false
+	}
+	return o.SubjectDN, true
+}
+
+// HasSubjectDN returns a boolean if a field has been set.
+func (o *CreateApiCredentialResponse) HasSubjectDN() bool {
+	if o != nil && !common.IsNil(o.SubjectDN) {
+		return true
+	}
+
+	return false
+}
+
+// SetSubjectDN gets a reference to the given string and assigns it to the SubjectDN field.
+func (o *CreateApiCredentialResponse) SetSubjectDN(v string) {
+	o.SubjectDN = &v
+}
+
 // GetUsername returns the Username field value
 func (o *CreateApiCredentialResponse) GetUsername() string {
 	if o == nil {
@@ -381,6 +415,9 @@ func (o CreateApiCredentialResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["password"] = o.Password
 	toSerialize["roles"] = o.Roles
+	if !common.IsNil(o.SubjectDN) {
+		toSerialize["subjectDN"] = o.SubjectDN
+	}
 	toSerialize["username"] = o.Username
 	return toSerialize, nil
 }
