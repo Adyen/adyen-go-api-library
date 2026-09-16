@@ -31,7 +31,7 @@ type Transfer struct {
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
 	// The date and time when the event was triggered, in ISO 8601 extended format. For example, **2020-12-18T10:15:30+01:00**.
 	// Deprecated since Transfers API v3
-	// Use createdAt or updatedAt
+	/* Use createdAt or updatedAt */
 	CreationDate *time.Time `json:"creationDate,omitempty"`
 	// Your description for the transfer. It is used by most banks as the transfer description. We recommend sending a maximum of 140 characters, otherwise the description may be truncated.  Supported characters: **[a-z] [A-Z] [0-9] / - ?** **: ( ) . , ' + Space**  Supported characters for **regular** and **fast** transfers to a US counterparty: **[a-z] [A-Z] [0-9] & $ % # @** **~ = + - _ ' \" ! ?**
 	Description            *string                 `json:"description,omitempty"`
@@ -49,10 +49,11 @@ type Transfer struct {
 	//  A reference that is sent to the recipient. This reference is also sent in all webhooks related to the transfer, so you can use it to track statuses for both the source and recipient of funds.   Supported characters: **a-z**, **A-Z**, **0-9**.The maximum length depends on the `category`.   - **internal**: 80 characters  - **bank**: 35 characters when transferring to an IBAN, 15 characters for others.
 	ReferenceForBeneficiary *string         `json:"referenceForBeneficiary,omitempty"`
 	Review                  *TransferReview `json:"review,omitempty"`
-	// The result of the transfer.  For example:  - **received**: an outgoing transfer request is created. - **refused**: the transfer request is rejected by Adyen for one of the following reasons:   - Lack of funds in the balance account.   - Transfer limit exceeded.   - Transaction rule requirements violated. - **authorised**: the transfer request is authorized and the funds are reserved. - **booked**: the funds are deducted from your user's balance account.  - **failed**: the transfer is rejected by the counterparty's bank. - **returned**: the transfer is returned by the counterparty's bank.
+	// The result of the transfer.  For example:  - **received**: an outgoing transfer request is created. - **refused**: the transfer request is rejected by Adyen for one of the following reasons:   - Transfer limit exceeded.   - Transaction rule requirements violated. - **authorised**: the transfer request is authorized and the funds are reserved. - **booked**: the funds are deducted from your user's balance account.  - **failed**: the transfer is rejected by the counterparty's bank. - **returned**: the transfer is returned by the counterparty's bank.
 	Status string `json:"status"`
 	// The type of transfer or transaction. For example, **refund**, **payment**, **internalTransfer**, **bankTransfer**.
-	Type *string `json:"type,omitempty"`
+	Type          *string                      `json:"type,omitempty"`
+	UltimateParty *UltimatePartyIdentification `json:"ultimateParty,omitempty"`
 }
 
 // NewTransfer instantiates a new Transfer object
@@ -278,7 +279,7 @@ func (o *Transfer) SetCreatedAt(v time.Time) {
 
 // GetCreationDate returns the CreationDate field value if set, zero value otherwise.
 // Deprecated since Transfers API v3
-// Use createdAt or updatedAt
+/* Use createdAt or updatedAt */
 func (o *Transfer) GetCreationDate() time.Time {
 	if o == nil || common.IsNil(o.CreationDate) {
 		var ret time.Time
@@ -290,7 +291,7 @@ func (o *Transfer) GetCreationDate() time.Time {
 // GetCreationDateOk returns a tuple with the CreationDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // Deprecated since Transfers API v3
-// Use createdAt or updatedAt
+/* Use createdAt or updatedAt */
 func (o *Transfer) GetCreationDateOk() (*time.Time, bool) {
 	if o == nil || common.IsNil(o.CreationDate) {
 		return nil, false
@@ -309,7 +310,7 @@ func (o *Transfer) HasCreationDate() bool {
 
 // SetCreationDate gets a reference to the given time.Time and assigns it to the CreationDate field.
 // Deprecated since Transfers API v3
-// Use createdAt or updatedAt
+/* Use createdAt or updatedAt */
 func (o *Transfer) SetCreationDate(v time.Time) {
 	o.CreationDate = &v
 }
@@ -690,6 +691,38 @@ func (o *Transfer) SetType(v string) {
 	o.Type = &v
 }
 
+// GetUltimateParty returns the UltimateParty field value if set, zero value otherwise.
+func (o *Transfer) GetUltimateParty() UltimatePartyIdentification {
+	if o == nil || common.IsNil(o.UltimateParty) {
+		var ret UltimatePartyIdentification
+		return ret
+	}
+	return *o.UltimateParty
+}
+
+// GetUltimatePartyOk returns a tuple with the UltimateParty field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Transfer) GetUltimatePartyOk() (*UltimatePartyIdentification, bool) {
+	if o == nil || common.IsNil(o.UltimateParty) {
+		return nil, false
+	}
+	return o.UltimateParty, true
+}
+
+// HasUltimateParty returns a boolean if a field has been set.
+func (o *Transfer) HasUltimateParty() bool {
+	if o != nil && !common.IsNil(o.UltimateParty) {
+		return true
+	}
+
+	return false
+}
+
+// SetUltimateParty gets a reference to the given UltimatePartyIdentification and assigns it to the UltimateParty field.
+func (o *Transfer) SetUltimateParty(v UltimatePartyIdentification) {
+	o.UltimateParty = &v
+}
+
 func (o Transfer) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -751,6 +784,9 @@ func (o Transfer) ToMap() (map[string]interface{}, error) {
 	toSerialize["status"] = o.Status
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type
+	}
+	if !common.IsNil(o.UltimateParty) {
+		toSerialize["ultimateParty"] = o.UltimateParty
 	}
 	return toSerialize, nil
 }
@@ -819,7 +855,7 @@ func (o *Transfer) isValidReason() bool {
 	return false
 }
 func (o *Transfer) isValidStatus() bool {
-	var allowedEnumValues = []string{"approvalPending", "atmWithdrawal", "atmWithdrawalReversalPending", "atmWithdrawalReversed", "authAdjustmentAuthorised", "authAdjustmentError", "authAdjustmentRefused", "authorised", "bankTransfer", "bankTransferPending", "booked", "bookingPending", "cancelled", "capturePending", "captureReversalPending", "captureReversed", "captured", "capturedExternally", "chargeback", "chargebackExternally", "chargebackPending", "chargebackReversalPending", "chargebackReversed", "credited", "depositCorrection", "depositCorrectionPending", "dispute", "disputeClosed", "disputeExpired", "disputeNeedsReview", "error", "expired", "failed", "fee", "feePending", "internalTransfer", "internalTransferPending", "invoiceDeduction", "invoiceDeductionPending", "manualCorrectionPending", "manuallyCorrected", "matchedStatement", "matchedStatementPending", "merchantPayin", "merchantPayinPending", "merchantPayinReversed", "merchantPayinReversedPending", "miscCost", "miscCostPending", "paymentCost", "paymentCostPending", "pendingApproval", "pendingExecution", "received", "refundPending", "refundReversalPending", "refundReversed", "refunded", "refundedExternally", "refused", "rejected", "reserveAdjustment", "reserveAdjustmentPending", "returned", "secondChargeback", "secondChargebackPending", "undefined"}
+	var allowedEnumValues = []string{"approvalPending", "atmWithdrawal", "atmWithdrawalReversalPending", "atmWithdrawalReversed", "authAdjustmentAuthorised", "authAdjustmentError", "authAdjustmentRefused", "authorised", "bankTransfer", "bankTransferPending", "booked", "bookingPending", "cancelled", "capturePending", "captureReversalPending", "captureReversed", "captured", "capturedExternally", "chargeback", "chargebackExternally", "chargebackPending", "chargebackReversalPending", "chargebackReversed", "credited", "depositCorrection", "depositCorrectionPending", "dispute", "disputeClosed", "disputeExpired", "disputeNeedsReview", "error", "expired", "failed", "fee", "feePending", "interchangeAdjusted", "internalTransfer", "internalTransferPending", "invoiceDeduction", "invoiceDeductionPending", "manualCorrectionPending", "manuallyCorrected", "matchedStatement", "matchedStatementPending", "merchantPayin", "merchantPayinPending", "merchantPayinReversed", "merchantPayinReversedPending", "miscCost", "miscCostPending", "paymentCost", "paymentCostPending", "pending", "pendingApproval", "pendingExecution", "received", "refundPending", "refundReversalPending", "refundReversed", "refunded", "refundedExternally", "refused", "rejected", "reserveAdjustment", "reserveAdjustmentPending", "returned", "reversed", "secondChargeback", "secondChargebackPending", "undefined"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetStatus() == allowed {
 			return true
