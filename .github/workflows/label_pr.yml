@@ -1,0 +1,26 @@
+name: Label PR
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+concurrency:
+  group: label-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: Adyen/adyen-sdk-pr-labeler-action@feat/separate-labels
+        with:
+          language: go
+          token: ${{ secrets.GITHUB_TOKEN }}
