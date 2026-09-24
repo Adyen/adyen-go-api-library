@@ -19,23 +19,23 @@ var _ common.MappedNullable = &InvalidField{}
 
 // InvalidField struct for InvalidField
 type InvalidField struct {
-	// Description of the validation error.
-	Message string `json:"message"`
 	// The field that has an invalid value.
 	Name string `json:"name"`
 	// The invalid value.
 	Value string `json:"value"`
+	// Description of the validation error.
+	Message string `json:"message"`
 }
 
 // NewInvalidField instantiates a new InvalidField object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInvalidField(message string, name string, value string) *InvalidField {
+func NewInvalidField(name string, value string, message string) *InvalidField {
 	this := InvalidField{}
-	this.Message = message
 	this.Name = name
 	this.Value = value
+	this.Message = message
 	return &this
 }
 
@@ -45,30 +45,6 @@ func NewInvalidField(message string, name string, value string) *InvalidField {
 func NewInvalidFieldWithDefaults() *InvalidField {
 	this := InvalidField{}
 	return &this
-}
-
-// GetMessage returns the Message field value
-func (o *InvalidField) GetMessage() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Message
-}
-
-// GetMessageOk returns a tuple with the Message field value
-// and a boolean to check if the value has been set.
-func (o *InvalidField) GetMessageOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Message, true
-}
-
-// SetMessage sets field value
-func (o *InvalidField) SetMessage(v string) {
-	o.Message = v
 }
 
 // GetName returns the Name field value
@@ -119,6 +95,30 @@ func (o *InvalidField) SetValue(v string) {
 	o.Value = v
 }
 
+// GetMessage returns the Message field value
+func (o *InvalidField) GetMessage() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Message
+}
+
+// GetMessageOk returns a tuple with the Message field value
+// and a boolean to check if the value has been set.
+func (o *InvalidField) GetMessageOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Message, true
+}
+
+// SetMessage sets field value
+func (o *InvalidField) SetMessage(v string) {
+	o.Message = v
+}
+
 func (o InvalidField) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -129,9 +129,9 @@ func (o InvalidField) MarshalJSON() ([]byte, error) {
 
 func (o InvalidField) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["message"] = o.Message
 	toSerialize["name"] = o.Name
 	toSerialize["value"] = o.Value
+	toSerialize["message"] = o.Message
 	return toSerialize, nil
 }
 
