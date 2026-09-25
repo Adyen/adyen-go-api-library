@@ -21,6 +21,8 @@ var _ common.MappedNullable = &IssuedCard{}
 type IssuedCard struct {
 	// The authorisation type. For example, **defaultAuthorisation**, **preAuthorisation**, **finalAuthorisation**
 	AuthorisationType *string `json:"authorisationType,omitempty"`
+	// The card variant associated with the payment network used to route or process the transaction. For single-network cards, this matches the `brandVariant`. For US dual-network cards routed over an alternate network, this value reflects the specific tier or sub-type under that processing network.
+	NetworkVariant *string `json:"networkVariant,omitempty"`
 	// Indicates the method used for entering the PAN to initiate a transaction.  Possible values: **manual**, **chip**, **magstripe**, **contactless**, **cof**, **ecommerce**, **token**.
 	PanEntryMode *string `json:"panEntryMode,omitempty"`
 	// Contains information about how the payment was processed.  Possible values: **atmWithdraw**, **balanceInquiry**, **ecommerce**, **moto**, **pos**, **purchaseWithCashback**, **recurring**, **token**.
@@ -88,6 +90,38 @@ func (o *IssuedCard) HasAuthorisationType() bool {
 // SetAuthorisationType gets a reference to the given string and assigns it to the AuthorisationType field.
 func (o *IssuedCard) SetAuthorisationType(v string) {
 	o.AuthorisationType = &v
+}
+
+// GetNetworkVariant returns the NetworkVariant field value if set, zero value otherwise.
+func (o *IssuedCard) GetNetworkVariant() string {
+	if o == nil || common.IsNil(o.NetworkVariant) {
+		var ret string
+		return ret
+	}
+	return *o.NetworkVariant
+}
+
+// GetNetworkVariantOk returns a tuple with the NetworkVariant field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IssuedCard) GetNetworkVariantOk() (*string, bool) {
+	if o == nil || common.IsNil(o.NetworkVariant) {
+		return nil, false
+	}
+	return o.NetworkVariant, true
+}
+
+// HasNetworkVariant returns a boolean if a field has been set.
+func (o *IssuedCard) HasNetworkVariant() bool {
+	if o != nil && !common.IsNil(o.NetworkVariant) {
+		return true
+	}
+
+	return false
+}
+
+// SetNetworkVariant gets a reference to the given string and assigns it to the NetworkVariant field.
+func (o *IssuedCard) SetNetworkVariant(v string) {
+	o.NetworkVariant = &v
 }
 
 // GetPanEntryMode returns the PanEntryMode field value if set, zero value otherwise.
@@ -359,6 +393,9 @@ func (o IssuedCard) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.AuthorisationType) {
 		toSerialize["authorisationType"] = o.AuthorisationType
 	}
+	if !common.IsNil(o.NetworkVariant) {
+		toSerialize["networkVariant"] = o.NetworkVariant
+	}
 	if !common.IsNil(o.PanEntryMode) {
 		toSerialize["panEntryMode"] = o.PanEntryMode
 	}
@@ -422,6 +459,15 @@ func (v *NullableIssuedCard) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+func (o *IssuedCard) isValidNetworkVariant() bool {
+	var allowedEnumValues = []string{"maestro_us", "mastercard", "visa"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetNetworkVariant() == allowed {
+			return true
+		}
+	}
+	return false
+}
 func (o *IssuedCard) isValidPanEntryMode() bool {
 	var allowedEnumValues = []string{"chip", "cof", "contactless", "ecommerce", "magstripe", "manual", "token"}
 	for _, allowed := range allowedEnumValues {
