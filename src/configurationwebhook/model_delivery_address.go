@@ -31,7 +31,7 @@ type DeliveryAddress struct {
 	Line3 *string `json:"line3,omitempty"`
 	// The postal code. Maximum length: * 5 digits for an address in the US. * 10 characters for an address in all other countries.
 	PostalCode *string `json:"postalCode,omitempty"`
-	// The two-letter ISO 3166-2 state or province code. For example, **CA** in the US or **ON** in Canada. > Required for the US and Canada.
+	// The state or province code, maximum 3 characters. For example, **CA** for California in the US or **ON** for Ontario in Canada. > Required for the US and Canada.
 	StateOrProvince *string `json:"stateOrProvince,omitempty"`
 }
 
