@@ -33,7 +33,7 @@ type MidServiceNotificationData struct {
 	Status string `json:"status"`
 	// The unique identifier of the [store](https://docs.adyen.com/api-explorer/#/ManagementService/latest/post/merchants/{id}/paymentMethodSettings__reqParam_storeId), if any.
 	StoreId *string `json:"storeId,omitempty"`
-	// Payment method [variant](https://docs.adyen.com/development-resources/paymentmethodvariant#management-api).
+	// Payment method [variant](https://docs.adyen.com/development-resources/paymentmethodvariant#management-api).  For payment method variant **cartebancaire**, method-specific details are returned in the [`cartesBancaires`](https://docs.adyen.com/api-explorer/Management/latest/post/merchants/(merchantId)/paymentMethodSettings#responses-200-cartesBancaires) object of the response.
 	Type string `json:"type"`
 	// Payment method status. Possible values: * **valid** * **pending** * **invalid** * **rejected**
 	VerificationStatus *string `json:"verificationStatus,omitempty"`
