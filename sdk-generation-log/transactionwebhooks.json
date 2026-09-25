@@ -1,8 +1,8 @@
 {
   "service": "transactionwebhooks",
   "project": "go",
-  "generatedAt": "2026-07-31T12:02:19Z",
-  "openapiCommitSha": "425d65d12163ebd4fe6fa6d2f859075817c81cba",
-  "automationCommitSha": "0c108bd8050cf480d2710b78b770afdfbdd89397",
-  "libraryCommitSha": "66c296511b73a9e872438467d1664eb370d34111"
+  "generatedAt": "2026-09-25T11:06:40Z",
+  "openapiCommitSha": "e96f4b3de219e3d82330dfd5864e621ffec3f86f",
+  "automationCommitSha": "db93bc35548c7c9d6aff97d76a513634967fd304",
+  "libraryCommitSha": "91a97e53ca75e4df4a7e3db346bd27d982e08965"
 }
