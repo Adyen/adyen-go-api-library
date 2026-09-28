@@ -23,7 +23,7 @@ type NetworkReason struct {
 	Code *string `json:"code,omitempty"`
 	// The description of the reason code.
 	Description *string `json:"description,omitempty"`
-	// The namespace that corresponds to the reason code.  Possible values: *  **ukFpsRejectionCode** *  **ukFpsReturnReasonCode** *  **usAchReturnReasonCode** *  **iso8583ResponseCode**
+	// The namespace that corresponds to the reason code.  Possible values: *  **ukFpsRejectionCode** *  **ukFpsReturnReasonCode** *  **usAchReturnReasonCode** *  **usAchCorrectionReasonCode** *  **iso8583ResponseCode**
 	Namespace *string `json:"namespace,omitempty"`
 }
 
@@ -199,7 +199,7 @@ func (v *NullableNetworkReason) UnmarshalJSON(src []byte) error {
 }
 
 func (o *NetworkReason) isValidNamespace() bool {
-	var allowedEnumValues = []string{"iso8583ResponseCode", "ukFpsRejectionCode", "ukFpsReturnReasonCode", "usAchReturnReasonCode"}
+	var allowedEnumValues = []string{"iso8583ResponseCode", "ukFpsRejectionCode", "ukFpsReturnReasonCode", "usAchReturnReasonCode", "usAchCorrectionReasonCode"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetNamespace() == allowed {
 			return true
