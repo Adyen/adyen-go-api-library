@@ -37,7 +37,7 @@ type Organization struct {
 	Email *string `json:"email,omitempty"`
 	// The financial report information of the organization.
 	FinancialReports []FinancialReport `json:"financialReports,omitempty"`
-	// The global legal entity identifier for the organization.
+	// The global legal entity identifier for the organization.  This field is not required if the `registrationNumber` for the organization has been provided.
 	GlobalLegalEntityIdentifier *string `json:"globalLegalEntityIdentifier,omitempty"`
 	// Indicates that the registered business address is also the company's headquarters.
 	HeadOfficeIndicator *bool `json:"headOfficeIndicator,omitempty"`
