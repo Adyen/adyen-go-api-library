@@ -23,13 +23,13 @@ type TransactionRule struct {
 	AggregationLevel *string `json:"aggregationLevel,omitempty"`
 	// Your description for the transaction rule.
 	Description string `json:"description"`
-	// The date when the rule will stop being evaluated, in ISO 8601 extended offset date-time format. For example, **2020-12-18T10:15:30+01:00**.  If not provided, the rule will be evaluated until the rule status is set to **inactive**.
+	// The date when the rule will stop being evaluated, in ISO 8601 extended offset date-time format. For example, **2025-03-19T10:15:30+01:00**.  If not provided, the rule will be evaluated until the rule status is set to **inactive**.
 	EndDate   *string                  `json:"endDate,omitempty"`
 	EntityKey TransactionRuleEntityKey `json:"entityKey"`
 	// The unique identifier of the transaction rule.
 	Id       *string                 `json:"id,omitempty"`
 	Interval TransactionRuleInterval `json:"interval"`
-	// The [outcome](https://docs.adyen.com/issuing/transaction-rules#outcome) that will be applied when a transaction meets the conditions of the rule.  Possible values: * **hardBlock**: the transaction is declined. * **scoreBased**: the transaction is assigned the `score` you specified. Adyen calculates the total score and if it exceeds 100, the transaction is declined.  Default value: **hardBlock**.  > **scoreBased** is not allowed when `requestType` is **bankTransfer**.
+	// The [outcome](https://docs.adyen.com/issuing/transaction-rules#outcome) that will be applied when a transaction meets the conditions of the rule.  Possible values: * **hardBlock** (default): the transaction is declined. * **scoreBased**: the transaction is assigned the `score` you specified. Adyen calculates the total score and if it exceeds 100, the transaction is declined. This value is not allowed when `requestType` is **bankTransfer**.  * **enforceSCA**: your user is prompted to verify their identity using [3D Secure authentication](https://docs.adyen.com/issuing/3d-secure/). If the authentication fails or times out, the transaction is declined. This value is only allowed when `requestType` is **authentication**.
 	OutcomeType *string `json:"outcomeType,omitempty"`
 	// Your reference for the transaction rule.
 	Reference string `json:"reference"`
@@ -38,7 +38,7 @@ type TransactionRule struct {
 	RuleRestrictions TransactionRuleRestrictions `json:"ruleRestrictions"`
 	// A positive or negative score applied to the transaction if it meets the conditions of the rule. Required when `outcomeType` is **scoreBased**.  The value must be between **-100** and **100**.
 	Score *int32 `json:"score,omitempty"`
-	// The date when the rule will start to be evaluated, in ISO 8601 extended offset date-time format. For example, **2020-12-18T10:15:30+01:00**.  If not provided when creating a transaction rule, the `startDate` is set to the date when the rule status is set to **active**.
+	// The date when the rule will start to be evaluated, in ISO 8601 extended offset date-time format. For example, **2025-03-19T10:15:30+01:00**.  If not provided when creating a transaction rule, the `startDate` is set to the date when the rule status is set to **active**.
 	StartDate *string `json:"startDate,omitempty"`
 	// The status of the transaction rule. If you provide a `startDate` in the request, the rule is automatically created  with an **active** status.   Possible values: **active**, **inactive**.
 	Status *string `json:"status,omitempty"`
