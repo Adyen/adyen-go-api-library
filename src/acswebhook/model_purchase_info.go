@@ -19,9 +19,9 @@ var _ common.MappedNullable = &PurchaseInfo{}
 
 // PurchaseInfo struct for PurchaseInfo
 type PurchaseInfo struct {
-	// Date of the purchase.
+	// The date of the purchase.
 	Date string `json:"date"`
-	// Name of the merchant.
+	// The name of the business that the cardholder purchased from.
 	MerchantName   string `json:"merchantName"`
 	OriginalAmount Amount `json:"originalAmount"`
 }
