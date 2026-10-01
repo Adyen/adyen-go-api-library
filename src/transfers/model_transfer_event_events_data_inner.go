@@ -11,12 +11,22 @@ package transfers
 import (
 	"encoding/json"
 	"fmt"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // TransferEventEventsDataInner - struct for TransferEventEventsDataInner
 type TransferEventEventsDataInner struct {
+	InterchangeData        *InterchangeData
 	IssuingTransactionData *IssuingTransactionData
 	MerchantPurchaseData   *MerchantPurchaseData
+}
+
+// InterchangeDataAsTransferEventEventsDataInner is a convenience function that returns InterchangeData wrapped in TransferEventEventsDataInner
+func InterchangeDataAsTransferEventEventsDataInner(v *InterchangeData) TransferEventEventsDataInner {
+	return TransferEventEventsDataInner{
+		InterchangeData: v,
+	}
 }
 
 // IssuingTransactionDataAsTransferEventEventsDataInner is a convenience function that returns IssuingTransactionData wrapped in TransferEventEventsDataInner
@@ -36,48 +46,94 @@ func MerchantPurchaseDataAsTransferEventEventsDataInner(v *MerchantPurchaseData)
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *TransferEventEventsDataInner) UnmarshalJSON(data []byte) error {
 	var err error
-	match := 0
-	// try to unmarshal data into IssuingTransactionData
-	err = json.Unmarshal(data, &dst.IssuingTransactionData)
-	if err == nil {
-		jsonIssuingTransactionData, _ := json.Marshal(dst.IssuingTransactionData)
-		if string(jsonIssuingTransactionData) == "{}" || !dst.IssuingTransactionData.isValidType() { // empty struct
+	// use discriminator value to speed up the lookup
+	var jsonDict map[string]interface{}
+	err = common.NewStrictDecoder(data).Decode(&jsonDict)
+	if err != nil {
+		return fmt.Errorf("failed to unmarshal JSON into map for the discriminator lookup")
+	}
+
+	// check if the discriminator value is 'InterchangeData'
+	if jsonDict["type"] == "InterchangeData" {
+		// try to unmarshal JSON data into InterchangeData
+		err = json.Unmarshal(data, &dst.InterchangeData)
+		if err == nil {
+			return nil // data stored in dst.InterchangeData, return on the first match
+		} else {
+			dst.InterchangeData = nil
+			return fmt.Errorf("failed to unmarshal TransferEventEventsDataInner as InterchangeData: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'IssuingTransactionData'
+	if jsonDict["type"] == "IssuingTransactionData" {
+		// try to unmarshal JSON data into IssuingTransactionData
+		err = json.Unmarshal(data, &dst.IssuingTransactionData)
+		if err == nil {
+			return nil // data stored in dst.IssuingTransactionData, return on the first match
+		} else {
 			dst.IssuingTransactionData = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal TransferEventEventsDataInner as IssuingTransactionData: %s", err.Error())
 		}
-	} else {
-		dst.IssuingTransactionData = nil
 	}
 
-	// try to unmarshal data into MerchantPurchaseData
-	err = json.Unmarshal(data, &dst.MerchantPurchaseData)
-	if err == nil {
-		jsonMerchantPurchaseData, _ := json.Marshal(dst.MerchantPurchaseData)
-		if string(jsonMerchantPurchaseData) == "{}" || !dst.MerchantPurchaseData.isValidType() { // empty struct
+	// check if the discriminator value is 'MerchantPurchaseData'
+	if jsonDict["type"] == "MerchantPurchaseData" {
+		// try to unmarshal JSON data into MerchantPurchaseData
+		err = json.Unmarshal(data, &dst.MerchantPurchaseData)
+		if err == nil {
+			return nil // data stored in dst.MerchantPurchaseData, return on the first match
+		} else {
 			dst.MerchantPurchaseData = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal TransferEventEventsDataInner as MerchantPurchaseData: %s", err.Error())
 		}
-	} else {
-		dst.MerchantPurchaseData = nil
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.IssuingTransactionData = nil
-		dst.MerchantPurchaseData = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(TransferEventEventsDataInner)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match
-		return fmt.Errorf("data failed to match schemas in oneOf(TransferEventEventsDataInner)")
+	// check if the discriminator value is 'interchangeData'
+	if jsonDict["type"] == "interchangeData" {
+		// try to unmarshal JSON data into InterchangeData
+		err = json.Unmarshal(data, &dst.InterchangeData)
+		if err == nil {
+			return nil // data stored in dst.InterchangeData, return on the first match
+		} else {
+			dst.InterchangeData = nil
+			return fmt.Errorf("failed to unmarshal TransferEventEventsDataInner as InterchangeData: %s", err.Error())
+		}
 	}
+
+	// check if the discriminator value is 'issuingTransactionData'
+	if jsonDict["type"] == "issuingTransactionData" {
+		// try to unmarshal JSON data into IssuingTransactionData
+		err = json.Unmarshal(data, &dst.IssuingTransactionData)
+		if err == nil {
+			return nil // data stored in dst.IssuingTransactionData, return on the first match
+		} else {
+			dst.IssuingTransactionData = nil
+			return fmt.Errorf("failed to unmarshal TransferEventEventsDataInner as IssuingTransactionData: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'merchantPurchaseData'
+	if jsonDict["type"] == "merchantPurchaseData" {
+		// try to unmarshal JSON data into MerchantPurchaseData
+		err = json.Unmarshal(data, &dst.MerchantPurchaseData)
+		if err == nil {
+			return nil // data stored in dst.MerchantPurchaseData, return on the first match
+		} else {
+			dst.MerchantPurchaseData = nil
+			return fmt.Errorf("failed to unmarshal TransferEventEventsDataInner as MerchantPurchaseData: %s", err.Error())
+		}
+	}
+
+	return nil
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src TransferEventEventsDataInner) MarshalJSON() ([]byte, error) {
+	if src.InterchangeData != nil {
+		return json.Marshal(&src.InterchangeData)
+	}
+
 	if src.IssuingTransactionData != nil {
 		return json.Marshal(&src.IssuingTransactionData)
 	}
@@ -94,6 +150,10 @@ func (obj *TransferEventEventsDataInner) GetActualInstance() interface{} {
 	if obj == nil {
 		return nil
 	}
+	if obj.InterchangeData != nil {
+		return obj.InterchangeData
+	}
+
 	if obj.IssuingTransactionData != nil {
 		return obj.IssuingTransactionData
 	}
