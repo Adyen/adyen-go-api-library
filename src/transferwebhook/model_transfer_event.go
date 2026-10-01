@@ -46,7 +46,7 @@ type TransferEvent struct {
 	TrackingData *TransferEventTrackingData `json:"trackingData,omitempty"`
 	// The id of the transaction that is related to this accounting event. Only sent for events of type **accounting** where the balance changes.
 	TransactionId *string `json:"transactionId,omitempty"`
-	// The type of the transfer event. Possible values: **accounting**, **tracking**.
+	// The type of the transfer event. Possible values: **accounting**, **tracing**, **tracking**.
 	Type *string `json:"type,omitempty"`
 	// The date when the tracking status was updated.
 	UpdateDate *time.Time `json:"updateDate,omitempty"`
