@@ -19,7 +19,7 @@ var _ common.MappedNullable = &CapitalGrantInfo{}
 
 // CapitalGrantInfo struct for CapitalGrantInfo
 type CapitalGrantInfo struct {
-	Counterparty *Counterparty `json:"counterparty,omitempty"`
+	Counterparty *GrantInfoCounterparty `json:"counterparty,omitempty"`
 	// The identifier of the grant account used for the grant.
 	GrantAccountId string `json:"grantAccountId"`
 	// The identifier of the grant offer that has been selected and from which the grant details will be used.
@@ -46,9 +46,9 @@ func NewCapitalGrantInfoWithDefaults() *CapitalGrantInfo {
 }
 
 // GetCounterparty returns the Counterparty field value if set, zero value otherwise.
-func (o *CapitalGrantInfo) GetCounterparty() Counterparty {
+func (o *CapitalGrantInfo) GetCounterparty() GrantInfoCounterparty {
 	if o == nil || common.IsNil(o.Counterparty) {
-		var ret Counterparty
+		var ret GrantInfoCounterparty
 		return ret
 	}
 	return *o.Counterparty
@@ -56,7 +56,7 @@ func (o *CapitalGrantInfo) GetCounterparty() Counterparty {
 
 // GetCounterpartyOk returns a tuple with the Counterparty field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CapitalGrantInfo) GetCounterpartyOk() (*Counterparty, bool) {
+func (o *CapitalGrantInfo) GetCounterpartyOk() (*GrantInfoCounterparty, bool) {
 	if o == nil || common.IsNil(o.Counterparty) {
 		return nil, false
 	}
@@ -72,8 +72,8 @@ func (o *CapitalGrantInfo) HasCounterparty() bool {
 	return false
 }
 
-// SetCounterparty gets a reference to the given Counterparty and assigns it to the Counterparty field.
-func (o *CapitalGrantInfo) SetCounterparty(v Counterparty) {
+// SetCounterparty gets a reference to the given GrantInfoCounterparty and assigns it to the Counterparty field.
+func (o *CapitalGrantInfo) SetCounterparty(v GrantInfoCounterparty) {
 	o.Counterparty = &v
 }
 
