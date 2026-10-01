@@ -20,7 +20,8 @@ var _ common.MappedNullable = &BoardingTokenRequest{}
 // BoardingTokenRequest struct for BoardingTokenRequest
 type BoardingTokenRequest struct {
 	// The boardingToken request token.
-	BoardingRequestToken string `json:"boardingRequestToken"`
+	BoardingRequestToken string           `json:"boardingRequestToken"`
+	SubMerchantData      *SubMerchantData `json:"subMerchantData,omitempty"`
 }
 
 // NewBoardingTokenRequest instantiates a new BoardingTokenRequest object
@@ -65,6 +66,38 @@ func (o *BoardingTokenRequest) SetBoardingRequestToken(v string) {
 	o.BoardingRequestToken = v
 }
 
+// GetSubMerchantData returns the SubMerchantData field value if set, zero value otherwise.
+func (o *BoardingTokenRequest) GetSubMerchantData() SubMerchantData {
+	if o == nil || common.IsNil(o.SubMerchantData) {
+		var ret SubMerchantData
+		return ret
+	}
+	return *o.SubMerchantData
+}
+
+// GetSubMerchantDataOk returns a tuple with the SubMerchantData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BoardingTokenRequest) GetSubMerchantDataOk() (*SubMerchantData, bool) {
+	if o == nil || common.IsNil(o.SubMerchantData) {
+		return nil, false
+	}
+	return o.SubMerchantData, true
+}
+
+// HasSubMerchantData returns a boolean if a field has been set.
+func (o *BoardingTokenRequest) HasSubMerchantData() bool {
+	if o != nil && !common.IsNil(o.SubMerchantData) {
+		return true
+	}
+
+	return false
+}
+
+// SetSubMerchantData gets a reference to the given SubMerchantData and assigns it to the SubMerchantData field.
+func (o *BoardingTokenRequest) SetSubMerchantData(v SubMerchantData) {
+	o.SubMerchantData = &v
+}
+
 func (o BoardingTokenRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -76,6 +109,9 @@ func (o BoardingTokenRequest) MarshalJSON() ([]byte, error) {
 func (o BoardingTokenRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["boardingRequestToken"] = o.BoardingRequestToken
+	if !common.IsNil(o.SubMerchantData) {
+		toSerialize["subMerchantData"] = o.SubMerchantData
+	}
 	return toSerialize, nil
 }
 
