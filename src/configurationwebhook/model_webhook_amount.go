@@ -14,38 +14,38 @@ import (
 	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
-// checks if the Amount type satisfies the MappedNullable interface at compile time
-var _ common.MappedNullable = &Amount{}
+// checks if the WebhookAmount type satisfies the MappedNullable interface at compile time
+var _ common.MappedNullable = &WebhookAmount{}
 
-// Amount struct for Amount
-type Amount struct {
-	// The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes#currency-codes) of the amount.
+// WebhookAmount struct for WebhookAmount
+type WebhookAmount struct {
+	// The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes).
 	Currency string `json:"currency"`
-	// The numeric value of the amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes#minor-units).
+	// The amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
 	Value int64 `json:"value"`
 }
 
-// NewAmount instantiates a new Amount object
+// NewWebhookAmount instantiates a new WebhookAmount object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAmount(currency string, value int64) *Amount {
-	this := Amount{}
+func NewWebhookAmount(currency string, value int64) *WebhookAmount {
+	this := WebhookAmount{}
 	this.Currency = currency
 	this.Value = value
 	return &this
 }
 
-// NewAmountWithDefaults instantiates a new Amount object
+// NewWebhookAmountWithDefaults instantiates a new WebhookAmount object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewAmountWithDefaults() *Amount {
-	this := Amount{}
+func NewWebhookAmountWithDefaults() *WebhookAmount {
+	this := WebhookAmount{}
 	return &this
 }
 
 // GetCurrency returns the Currency field value
-func (o *Amount) GetCurrency() string {
+func (o *WebhookAmount) GetCurrency() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -56,7 +56,7 @@ func (o *Amount) GetCurrency() string {
 
 // GetCurrencyOk returns a tuple with the Currency field value
 // and a boolean to check if the value has been set.
-func (o *Amount) GetCurrencyOk() (*string, bool) {
+func (o *WebhookAmount) GetCurrencyOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -64,12 +64,12 @@ func (o *Amount) GetCurrencyOk() (*string, bool) {
 }
 
 // SetCurrency sets field value
-func (o *Amount) SetCurrency(v string) {
+func (o *WebhookAmount) SetCurrency(v string) {
 	o.Currency = v
 }
 
 // GetValue returns the Value field value
-func (o *Amount) GetValue() int64 {
+func (o *WebhookAmount) GetValue() int64 {
 	if o == nil {
 		var ret int64
 		return ret
@@ -80,7 +80,7 @@ func (o *Amount) GetValue() int64 {
 
 // GetValueOk returns a tuple with the Value field value
 // and a boolean to check if the value has been set.
-func (o *Amount) GetValueOk() (*int64, bool) {
+func (o *WebhookAmount) GetValueOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -88,11 +88,11 @@ func (o *Amount) GetValueOk() (*int64, bool) {
 }
 
 // SetValue sets field value
-func (o *Amount) SetValue(v int64) {
+func (o *WebhookAmount) SetValue(v int64) {
 	o.Value = v
 }
 
-func (o Amount) MarshalJSON() ([]byte, error) {
+func (o WebhookAmount) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -100,45 +100,45 @@ func (o Amount) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Amount) ToMap() (map[string]interface{}, error) {
+func (o WebhookAmount) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["currency"] = o.Currency
 	toSerialize["value"] = o.Value
 	return toSerialize, nil
 }
 
-type NullableAmount struct {
-	value *Amount
+type NullableWebhookAmount struct {
+	value *WebhookAmount
 	isSet bool
 }
 
-func (v NullableAmount) Get() *Amount {
+func (v NullableWebhookAmount) Get() *WebhookAmount {
 	return v.value
 }
 
-func (v *NullableAmount) Set(val *Amount) {
+func (v *NullableWebhookAmount) Set(val *WebhookAmount) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAmount) IsSet() bool {
+func (v NullableWebhookAmount) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAmount) Unset() {
+func (v *NullableWebhookAmount) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAmount(val *Amount) *NullableAmount {
-	return &NullableAmount{value: val, isSet: true}
+func NewNullableWebhookAmount(val *WebhookAmount) *NullableWebhookAmount {
+	return &NullableWebhookAmount{value: val, isSet: true}
 }
 
-func (v NullableAmount) MarshalJSON() ([]byte, error) {
+func (v NullableWebhookAmount) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAmount) UnmarshalJSON(src []byte) error {
+func (v *NullableWebhookAmount) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
