@@ -19,6 +19,8 @@ var _ common.MappedNullable = &IbanAccountIdentification{}
 
 // IbanAccountIdentification struct for IbanAccountIdentification
 type IbanAccountIdentification struct {
+	// The bank's 8- or 11-character BIC or SWIFT code.
+	Bic *string `json:"bic,omitempty"`
 	// The international bank account number as defined in the [ISO-13616](https://www.iso.org/standard/81090.html) standard.
 	Iban string `json:"iban"`
 	// **iban**
@@ -44,6 +46,38 @@ func NewIbanAccountIdentificationWithDefaults() *IbanAccountIdentification {
 	var type_ string = "iban"
 	this.Type = type_
 	return &this
+}
+
+// GetBic returns the Bic field value if set, zero value otherwise.
+func (o *IbanAccountIdentification) GetBic() string {
+	if o == nil || common.IsNil(o.Bic) {
+		var ret string
+		return ret
+	}
+	return *o.Bic
+}
+
+// GetBicOk returns a tuple with the Bic field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IbanAccountIdentification) GetBicOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Bic) {
+		return nil, false
+	}
+	return o.Bic, true
+}
+
+// HasBic returns a boolean if a field has been set.
+func (o *IbanAccountIdentification) HasBic() bool {
+	if o != nil && !common.IsNil(o.Bic) {
+		return true
+	}
+
+	return false
+}
+
+// SetBic gets a reference to the given string and assigns it to the Bic field.
+func (o *IbanAccountIdentification) SetBic(v string) {
+	o.Bic = &v
 }
 
 // GetIban returns the Iban field value
@@ -104,6 +138,9 @@ func (o IbanAccountIdentification) MarshalJSON() ([]byte, error) {
 
 func (o IbanAccountIdentification) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.Bic) {
+		toSerialize["bic"] = o.Bic
+	}
 	toSerialize["iban"] = o.Iban
 	toSerialize["type"] = o.Type
 	return toSerialize, nil
