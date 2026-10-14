@@ -19,39 +19,43 @@ var _ common.MappedNullable = &UpdatePaymentMethodInfo{}
 
 // UpdatePaymentMethodInfo struct for UpdatePaymentMethodInfo
 type UpdatePaymentMethodInfo struct {
-	Accel           *AccelInfo           `json:"accel,omitempty"`
-	Bcmc            *BcmcInfo            `json:"bcmc,omitempty"`
-	CartesBancaires *CartesBancairesInfo `json:"cartesBancaires,omitempty"`
+	Accel           *AccelUpdateInfo            `json:"accel,omitempty"`
+	Affirm          *AffirmUpdateInfo           `json:"affirm,omitempty"`
+	Bcmc            *BcmcUpdateInfo             `json:"bcmc,omitempty"`
+	Carnet          *GenericPmWithTdiUpdateInfo `json:"carnet,omitempty"`
+	CartesBancaires *CartesBancairesUpdateInfo  `json:"cartesBancaires,omitempty"`
 	// The list of countries where a payment method is available. By default, all countries supported by the payment method.
-	Countries []string              `json:"countries,omitempty"`
-	Cup       *GenericPmWithTdiInfo `json:"cup,omitempty"`
+	Countries []string                    `json:"countries,omitempty"`
+	Cup       *GenericPmWithTdiUpdateInfo `json:"cup,omitempty"`
 	// The list of currencies that a payment method supports. By default, all currencies supported by the payment method.
 	Currencies []string `json:"currencies,omitempty"`
 	// Custom routing flags for acquirer routing.
-	CustomRoutingFlags []string              `json:"customRoutingFlags,omitempty"`
-	Diners             *GenericPmWithTdiInfo `json:"diners,omitempty"`
-	Discover           *GenericPmWithTdiInfo `json:"discover,omitempty"`
-	EftDirectdebitCA   *GenericPmWithTdiInfo `json:"eft_directdebit_CA,omitempty"`
-	EftposAustralia    *GenericPmWithTdiInfo `json:"eftpos_australia,omitempty"`
+	CustomRoutingFlags []string                    `json:"customRoutingFlags,omitempty"`
+	Diners             *GenericPmWithTdiUpdateInfo `json:"diners,omitempty"`
+	Discover           *GenericPmWithTdiUpdateInfo `json:"discover,omitempty"`
+	EftDirectdebitCA   *GenericPmWithTdiUpdateInfo `json:"eft_directdebit_CA,omitempty"`
+	EftposAustralia    *GenericPmWithTdiUpdateInfo `json:"eftpos_australia,omitempty"`
 	// Indicates whether the payment method is enabled (**true**) or disabled (**false**).
-	Enabled        *bool                 `json:"enabled,omitempty"`
-	Girocard       *GenericPmWithTdiInfo `json:"girocard,omitempty"`
-	Ideal          *GenericPmWithTdiInfo `json:"ideal,omitempty"`
-	InteracCard    *GenericPmWithTdiInfo `json:"interac_card,omitempty"`
-	Jcb            *GenericPmWithTdiInfo `json:"jcb,omitempty"`
-	Maestro        *GenericPmWithTdiInfo `json:"maestro,omitempty"`
-	Mc             *GenericPmWithTdiInfo `json:"mc,omitempty"`
-	Nyce           *NyceInfo             `json:"nyce,omitempty"`
-	PaybybankPlaid *PayByBankPlaidInfo   `json:"paybybank_plaid,omitempty"`
-	Pulse          *PulseInfo            `json:"pulse,omitempty"`
-	Star           *StarInfo             `json:"star,omitempty"`
+	Enabled         *bool                       `json:"enabled,omitempty"`
+	Girocard        *GenericPmWithTdiUpdateInfo `json:"girocard,omitempty"`
+	Ideal           *GenericPmWithTdiUpdateInfo `json:"ideal,omitempty"`
+	InteracCard     *GenericPmWithTdiUpdateInfo `json:"interac_card,omitempty"`
+	Jcb             *GenericPmWithTdiUpdateInfo `json:"jcb,omitempty"`
+	Maestro         *GenericPmWithTdiUpdateInfo `json:"maestro,omitempty"`
+	MaestroUsa      *GenericPmWithTdiUpdateInfo `json:"maestro_usa,omitempty"`
+	Mc              *GenericPmWithTdiUpdateInfo `json:"mc,omitempty"`
+	Nyce            *NyceUpdateInfo             `json:"nyce,omitempty"`
+	PaybybankPlaid  *PayByBankPlaidUpdateInfo   `json:"paybybank_plaid,omitempty"`
+	Pulse           *PulseUpdateInfo            `json:"pulse,omitempty"`
+	Sepadirectdebit *SepaDirectDebitUpdateInfo  `json:"sepadirectdebit,omitempty"`
+	Star            *StarUpdateInfo             `json:"star,omitempty"`
 	// The store for this payment method
 	StoreId *string `json:"storeId,omitempty"`
 	// The list of stores for this payment method
 	// Deprecated since Management API v3
-	// Use `storeId` instead. Only one store per payment method is allowed.
-	StoreIds []string              `json:"storeIds,omitempty"`
-	Visa     *GenericPmWithTdiInfo `json:"visa,omitempty"`
+	/* Use `storeId` instead. Only one store per payment method is allowed. */
+	StoreIds []string                    `json:"storeIds,omitempty"`
+	Visa     *GenericPmWithTdiUpdateInfo `json:"visa,omitempty"`
 }
 
 // NewUpdatePaymentMethodInfo instantiates a new UpdatePaymentMethodInfo object
@@ -72,9 +76,9 @@ func NewUpdatePaymentMethodInfoWithDefaults() *UpdatePaymentMethodInfo {
 }
 
 // GetAccel returns the Accel field value if set, zero value otherwise.
-func (o *UpdatePaymentMethodInfo) GetAccel() AccelInfo {
+func (o *UpdatePaymentMethodInfo) GetAccel() AccelUpdateInfo {
 	if o == nil || common.IsNil(o.Accel) {
-		var ret AccelInfo
+		var ret AccelUpdateInfo
 		return ret
 	}
 	return *o.Accel
@@ -82,7 +86,7 @@ func (o *UpdatePaymentMethodInfo) GetAccel() AccelInfo {
 
 // GetAccelOk returns a tuple with the Accel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdatePaymentMethodInfo) GetAccelOk() (*AccelInfo, bool) {
+func (o *UpdatePaymentMethodInfo) GetAccelOk() (*AccelUpdateInfo, bool) {
 	if o == nil || common.IsNil(o.Accel) {
 		return nil, false
 	}
@@ -98,15 +102,47 @@ func (o *UpdatePaymentMethodInfo) HasAccel() bool {
 	return false
 }
 
-// SetAccel gets a reference to the given AccelInfo and assigns it to the Accel field.
-func (o *UpdatePaymentMethodInfo) SetAccel(v AccelInfo) {
+// SetAccel gets a reference to the given AccelUpdateInfo and assigns it to the Accel field.
+func (o *UpdatePaymentMethodInfo) SetAccel(v AccelUpdateInfo) {
 	o.Accel = &v
 }
 
+// GetAffirm returns the Affirm field value if set, zero value otherwise.
+func (o *UpdatePaymentMethodInfo) GetAffirm() AffirmUpdateInfo {
+	if o == nil || common.IsNil(o.Affirm) {
+		var ret AffirmUpdateInfo
+		return ret
+	}
+	return *o.Affirm
+}
+
+// GetAffirmOk returns a tuple with the Affirm field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdatePaymentMethodInfo) GetAffirmOk() (*AffirmUpdateInfo, bool) {
+	if o == nil || common.IsNil(o.Affirm) {
+		return nil, false
+	}
+	return o.Affirm, true
+}
+
+// HasAffirm returns a boolean if a field has been set.
+func (o *UpdatePaymentMethodInfo) HasAffirm() bool {
+	if o != nil && !common.IsNil(o.Affirm) {
+		return true
+	}
+
+	return false
+}
+
+// SetAffirm gets a reference to the given AffirmUpdateInfo and assigns it to the Affirm field.
+func (o *UpdatePaymentMethodInfo) SetAffirm(v AffirmUpdateInfo) {
+	o.Affirm = &v
+}
+
 // GetBcmc returns the Bcmc field value if set, zero value otherwise.
-func (o *UpdatePaymentMethodInfo) GetBcmc() BcmcInfo {
+func (o *UpdatePaymentMethodInfo) GetBcmc() BcmcUpdateInfo {
 	if o == nil || common.IsNil(o.Bcmc) {
-		var ret BcmcInfo
+		var ret BcmcUpdateInfo
 		return ret
 	}
 	return *o.Bcmc
@@ -114,7 +150,7 @@ func (o *UpdatePaymentMethodInfo) GetBcmc() BcmcInfo {
 
 // GetBcmcOk returns a tuple with the Bcmc field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdatePaymentMethodInfo) GetBcmcOk() (*BcmcInfo, bool) {
+func (o *UpdatePaymentMethodInfo) GetBcmcOk() (*BcmcUpdateInfo, bool) {
 	if o == nil || common.IsNil(o.Bcmc) {
 		return nil, false
 	}
@@ -130,15 +166,47 @@ func (o *UpdatePaymentMethodInfo) HasBcmc() bool {
 	return false
 }
 
-// SetBcmc gets a reference to the given BcmcInfo and assigns it to the Bcmc field.
-func (o *UpdatePaymentMethodInfo) SetBcmc(v BcmcInfo) {
+// SetBcmc gets a reference to the given BcmcUpdateInfo and assigns it to the Bcmc field.
+func (o *UpdatePaymentMethodInfo) SetBcmc(v BcmcUpdateInfo) {
 	o.Bcmc = &v
 }
 
+// GetCarnet returns the Carnet field value if set, zero value otherwise.
+func (o *UpdatePaymentMethodInfo) GetCarnet() GenericPmWithTdiUpdateInfo {
+	if o == nil || common.IsNil(o.Carnet) {
+		var ret GenericPmWithTdiUpdateInfo
+		return ret
+	}
+	return *o.Carnet
+}
+
+// GetCarnetOk returns a tuple with the Carnet field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdatePaymentMethodInfo) GetCarnetOk() (*GenericPmWithTdiUpdateInfo, bool) {
+	if o == nil || common.IsNil(o.Carnet) {
+		return nil, false
+	}
+	return o.Carnet, true
+}
+
+// HasCarnet returns a boolean if a field has been set.
+func (o *UpdatePaymentMethodInfo) HasCarnet() bool {
+	if o != nil && !common.IsNil(o.Carnet) {
+		return true
+	}
+
+	return false
+}
+
+// SetCarnet gets a reference to the given GenericPmWithTdiUpdateInfo and assigns it to the Carnet field.
+func (o *UpdatePaymentMethodInfo) SetCarnet(v GenericPmWithTdiUpdateInfo) {
+	o.Carnet = &v
+}
+
 // GetCartesBancaires returns the CartesBancaires field value if set, zero value otherwise.
-func (o *UpdatePaymentMethodInfo) GetCartesBancaires() CartesBancairesInfo {
+func (o *UpdatePaymentMethodInfo) GetCartesBancaires() CartesBancairesUpdateInfo {
 	if o == nil || common.IsNil(o.CartesBancaires) {
-		var ret CartesBancairesInfo
+		var ret CartesBancairesUpdateInfo
 		return ret
 	}
 	return *o.CartesBancaires
@@ -146,7 +214,7 @@ func (o *UpdatePaymentMethodInfo) GetCartesBancaires() CartesBancairesInfo {
 
 // GetCartesBancairesOk returns a tuple with the CartesBancaires field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdatePaymentMethodInfo) GetCartesBancairesOk() (*CartesBancairesInfo, bool) {
+func (o *UpdatePaymentMethodInfo) GetCartesBancairesOk() (*CartesBancairesUpdateInfo, bool) {
 	if o == nil || common.IsNil(o.CartesBancaires) {
 		return nil, false
 	}
@@ -162,8 +230,8 @@ func (o *UpdatePaymentMethodInfo) HasCartesBancaires() bool {
 	return false
 }
 
-// SetCartesBancaires gets a reference to the given CartesBancairesInfo and assigns it to the CartesBancaires field.
-func (o *UpdatePaymentMethodInfo) SetCartesBancaires(v CartesBancairesInfo) {
+// SetCartesBancaires gets a reference to the given CartesBancairesUpdateInfo and assigns it to the CartesBancaires field.
+func (o *UpdatePaymentMethodInfo) SetCartesBancaires(v CartesBancairesUpdateInfo) {
 	o.CartesBancaires = &v
 }
 
@@ -200,9 +268,9 @@ func (o *UpdatePaymentMethodInfo) SetCountries(v []string) {
 }
 
 // GetCup returns the Cup field value if set, zero value otherwise.
-func (o *UpdatePaymentMethodInfo) GetCup() GenericPmWithTdiInfo {
+func (o *UpdatePaymentMethodInfo) GetCup() GenericPmWithTdiUpdateInfo {
 	if o == nil || common.IsNil(o.Cup) {
-		var ret GenericPmWithTdiInfo
+		var ret GenericPmWithTdiUpdateInfo
 		return ret
 	}
 	return *o.Cup
@@ -210,7 +278,7 @@ func (o *UpdatePaymentMethodInfo) GetCup() GenericPmWithTdiInfo {
 
 // GetCupOk returns a tuple with the Cup field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdatePaymentMethodInfo) GetCupOk() (*GenericPmWithTdiInfo, bool) {
+func (o *UpdatePaymentMethodInfo) GetCupOk() (*GenericPmWithTdiUpdateInfo, bool) {
 	if o == nil || common.IsNil(o.Cup) {
 		return nil, false
 	}
@@ -226,8 +294,8 @@ func (o *UpdatePaymentMethodInfo) HasCup() bool {
 	return false
 }
 
-// SetCup gets a reference to the given GenericPmWithTdiInfo and assigns it to the Cup field.
-func (o *UpdatePaymentMethodInfo) SetCup(v GenericPmWithTdiInfo) {
+// SetCup gets a reference to the given GenericPmWithTdiUpdateInfo and assigns it to the Cup field.
+func (o *UpdatePaymentMethodInfo) SetCup(v GenericPmWithTdiUpdateInfo) {
 	o.Cup = &v
 }
 
@@ -296,9 +364,9 @@ func (o *UpdatePaymentMethodInfo) SetCustomRoutingFlags(v []string) {
 }
 
 // GetDiners returns the Diners field value if set, zero value otherwise.
-func (o *UpdatePaymentMethodInfo) GetDiners() GenericPmWithTdiInfo {
+func (o *UpdatePaymentMethodInfo) GetDiners() GenericPmWithTdiUpdateInfo {
 	if o == nil || common.IsNil(o.Diners) {
-		var ret GenericPmWithTdiInfo
+		var ret GenericPmWithTdiUpdateInfo
 		return ret
 	}
 	return *o.Diners
@@ -306,7 +374,7 @@ func (o *UpdatePaymentMethodInfo) GetDiners() GenericPmWithTdiInfo {
 
 // GetDinersOk returns a tuple with the Diners field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdatePaymentMethodInfo) GetDinersOk() (*GenericPmWithTdiInfo, bool) {
+func (o *UpdatePaymentMethodInfo) GetDinersOk() (*GenericPmWithTdiUpdateInfo, bool) {
 	if o == nil || common.IsNil(o.Diners) {
 		return nil, false
 	}
@@ -322,15 +390,15 @@ func (o *UpdatePaymentMethodInfo) HasDiners() bool {
 	return false
 }
 
-// SetDiners gets a reference to the given GenericPmWithTdiInfo and assigns it to the Diners field.
-func (o *UpdatePaymentMethodInfo) SetDiners(v GenericPmWithTdiInfo) {
+// SetDiners gets a reference to the given GenericPmWithTdiUpdateInfo and assigns it to the Diners field.
+func (o *UpdatePaymentMethodInfo) SetDiners(v GenericPmWithTdiUpdateInfo) {
 	o.Diners = &v
 }
 
 // GetDiscover returns the Discover field value if set, zero value otherwise.
-func (o *UpdatePaymentMethodInfo) GetDiscover() GenericPmWithTdiInfo {
+func (o *UpdatePaymentMethodInfo) GetDiscover() GenericPmWithTdiUpdateInfo {
 	if o == nil || common.IsNil(o.Discover) {
-		var ret GenericPmWithTdiInfo
+		var ret GenericPmWithTdiUpdateInfo
 		return ret
 	}
 	return *o.Discover
@@ -338,7 +406,7 @@ func (o *UpdatePaymentMethodInfo) GetDiscover() GenericPmWithTdiInfo {
 
 // GetDiscoverOk returns a tuple with the Discover field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdatePaymentMethodInfo) GetDiscoverOk() (*GenericPmWithTdiInfo, bool) {
+func (o *UpdatePaymentMethodInfo) GetDiscoverOk() (*GenericPmWithTdiUpdateInfo, bool) {
 	if o == nil || common.IsNil(o.Discover) {
 		return nil, false
 	}
@@ -354,15 +422,15 @@ func (o *UpdatePaymentMethodInfo) HasDiscover() bool {
 	return false
 }
 
-// SetDiscover gets a reference to the given GenericPmWithTdiInfo and assigns it to the Discover field.
-func (o *UpdatePaymentMethodInfo) SetDiscover(v GenericPmWithTdiInfo) {
+// SetDiscover gets a reference to the given GenericPmWithTdiUpdateInfo and assigns it to the Discover field.
+func (o *UpdatePaymentMethodInfo) SetDiscover(v GenericPmWithTdiUpdateInfo) {
 	o.Discover = &v
 }
 
 // GetEftDirectdebitCA returns the EftDirectdebitCA field value if set, zero value otherwise.
-func (o *UpdatePaymentMethodInfo) GetEftDirectdebitCA() GenericPmWithTdiInfo {
+func (o *UpdatePaymentMethodInfo) GetEftDirectdebitCA() GenericPmWithTdiUpdateInfo {
 	if o == nil || common.IsNil(o.EftDirectdebitCA) {
-		var ret GenericPmWithTdiInfo
+		var ret GenericPmWithTdiUpdateInfo
 		return ret
 	}
 	return *o.EftDirectdebitCA
@@ -370,7 +438,7 @@ func (o *UpdatePaymentMethodInfo) GetEftDirectdebitCA() GenericPmWithTdiInfo {
 
 // GetEftDirectdebitCAOk returns a tuple with the EftDirectdebitCA field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdatePaymentMethodInfo) GetEftDirectdebitCAOk() (*GenericPmWithTdiInfo, bool) {
+func (o *UpdatePaymentMethodInfo) GetEftDirectdebitCAOk() (*GenericPmWithTdiUpdateInfo, bool) {
 	if o == nil || common.IsNil(o.EftDirectdebitCA) {
 		return nil, false
 	}
@@ -386,15 +454,15 @@ func (o *UpdatePaymentMethodInfo) HasEftDirectdebitCA() bool {
 	return false
 }
 
-// SetEftDirectdebitCA gets a reference to the given GenericPmWithTdiInfo and assigns it to the EftDirectdebitCA field.
-func (o *UpdatePaymentMethodInfo) SetEftDirectdebitCA(v GenericPmWithTdiInfo) {
+// SetEftDirectdebitCA gets a reference to the given GenericPmWithTdiUpdateInfo and assigns it to the EftDirectdebitCA field.
+func (o *UpdatePaymentMethodInfo) SetEftDirectdebitCA(v GenericPmWithTdiUpdateInfo) {
 	o.EftDirectdebitCA = &v
 }
 
 // GetEftposAustralia returns the EftposAustralia field value if set, zero value otherwise.
-func (o *UpdatePaymentMethodInfo) GetEftposAustralia() GenericPmWithTdiInfo {
+func (o *UpdatePaymentMethodInfo) GetEftposAustralia() GenericPmWithTdiUpdateInfo {
 	if o == nil || common.IsNil(o.EftposAustralia) {
-		var ret GenericPmWithTdiInfo
+		var ret GenericPmWithTdiUpdateInfo
 		return ret
 	}
 	return *o.EftposAustralia
@@ -402,7 +470,7 @@ func (o *UpdatePaymentMethodInfo) GetEftposAustralia() GenericPmWithTdiInfo {
 
 // GetEftposAustraliaOk returns a tuple with the EftposAustralia field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdatePaymentMethodInfo) GetEftposAustraliaOk() (*GenericPmWithTdiInfo, bool) {
+func (o *UpdatePaymentMethodInfo) GetEftposAustraliaOk() (*GenericPmWithTdiUpdateInfo, bool) {
 	if o == nil || common.IsNil(o.EftposAustralia) {
 		return nil, false
 	}
@@ -418,8 +486,8 @@ func (o *UpdatePaymentMethodInfo) HasEftposAustralia() bool {
 	return false
 }
 
-// SetEftposAustralia gets a reference to the given GenericPmWithTdiInfo and assigns it to the EftposAustralia field.
-func (o *UpdatePaymentMethodInfo) SetEftposAustralia(v GenericPmWithTdiInfo) {
+// SetEftposAustralia gets a reference to the given GenericPmWithTdiUpdateInfo and assigns it to the EftposAustralia field.
+func (o *UpdatePaymentMethodInfo) SetEftposAustralia(v GenericPmWithTdiUpdateInfo) {
 	o.EftposAustralia = &v
 }
 
@@ -456,9 +524,9 @@ func (o *UpdatePaymentMethodInfo) SetEnabled(v bool) {
 }
 
 // GetGirocard returns the Girocard field value if set, zero value otherwise.
-func (o *UpdatePaymentMethodInfo) GetGirocard() GenericPmWithTdiInfo {
+func (o *UpdatePaymentMethodInfo) GetGirocard() GenericPmWithTdiUpdateInfo {
 	if o == nil || common.IsNil(o.Girocard) {
-		var ret GenericPmWithTdiInfo
+		var ret GenericPmWithTdiUpdateInfo
 		return ret
 	}
 	return *o.Girocard
@@ -466,7 +534,7 @@ func (o *UpdatePaymentMethodInfo) GetGirocard() GenericPmWithTdiInfo {
 
 // GetGirocardOk returns a tuple with the Girocard field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdatePaymentMethodInfo) GetGirocardOk() (*GenericPmWithTdiInfo, bool) {
+func (o *UpdatePaymentMethodInfo) GetGirocardOk() (*GenericPmWithTdiUpdateInfo, bool) {
 	if o == nil || common.IsNil(o.Girocard) {
 		return nil, false
 	}
@@ -482,15 +550,15 @@ func (o *UpdatePaymentMethodInfo) HasGirocard() bool {
 	return false
 }
 
-// SetGirocard gets a reference to the given GenericPmWithTdiInfo and assigns it to the Girocard field.
-func (o *UpdatePaymentMethodInfo) SetGirocard(v GenericPmWithTdiInfo) {
+// SetGirocard gets a reference to the given GenericPmWithTdiUpdateInfo and assigns it to the Girocard field.
+func (o *UpdatePaymentMethodInfo) SetGirocard(v GenericPmWithTdiUpdateInfo) {
 	o.Girocard = &v
 }
 
 // GetIdeal returns the Ideal field value if set, zero value otherwise.
-func (o *UpdatePaymentMethodInfo) GetIdeal() GenericPmWithTdiInfo {
+func (o *UpdatePaymentMethodInfo) GetIdeal() GenericPmWithTdiUpdateInfo {
 	if o == nil || common.IsNil(o.Ideal) {
-		var ret GenericPmWithTdiInfo
+		var ret GenericPmWithTdiUpdateInfo
 		return ret
 	}
 	return *o.Ideal
@@ -498,7 +566,7 @@ func (o *UpdatePaymentMethodInfo) GetIdeal() GenericPmWithTdiInfo {
 
 // GetIdealOk returns a tuple with the Ideal field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdatePaymentMethodInfo) GetIdealOk() (*GenericPmWithTdiInfo, bool) {
+func (o *UpdatePaymentMethodInfo) GetIdealOk() (*GenericPmWithTdiUpdateInfo, bool) {
 	if o == nil || common.IsNil(o.Ideal) {
 		return nil, false
 	}
@@ -514,15 +582,15 @@ func (o *UpdatePaymentMethodInfo) HasIdeal() bool {
 	return false
 }
 
-// SetIdeal gets a reference to the given GenericPmWithTdiInfo and assigns it to the Ideal field.
-func (o *UpdatePaymentMethodInfo) SetIdeal(v GenericPmWithTdiInfo) {
+// SetIdeal gets a reference to the given GenericPmWithTdiUpdateInfo and assigns it to the Ideal field.
+func (o *UpdatePaymentMethodInfo) SetIdeal(v GenericPmWithTdiUpdateInfo) {
 	o.Ideal = &v
 }
 
 // GetInteracCard returns the InteracCard field value if set, zero value otherwise.
-func (o *UpdatePaymentMethodInfo) GetInteracCard() GenericPmWithTdiInfo {
+func (o *UpdatePaymentMethodInfo) GetInteracCard() GenericPmWithTdiUpdateInfo {
 	if o == nil || common.IsNil(o.InteracCard) {
-		var ret GenericPmWithTdiInfo
+		var ret GenericPmWithTdiUpdateInfo
 		return ret
 	}
 	return *o.InteracCard
@@ -530,7 +598,7 @@ func (o *UpdatePaymentMethodInfo) GetInteracCard() GenericPmWithTdiInfo {
 
 // GetInteracCardOk returns a tuple with the InteracCard field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdatePaymentMethodInfo) GetInteracCardOk() (*GenericPmWithTdiInfo, bool) {
+func (o *UpdatePaymentMethodInfo) GetInteracCardOk() (*GenericPmWithTdiUpdateInfo, bool) {
 	if o == nil || common.IsNil(o.InteracCard) {
 		return nil, false
 	}
@@ -546,15 +614,15 @@ func (o *UpdatePaymentMethodInfo) HasInteracCard() bool {
 	return false
 }
 
-// SetInteracCard gets a reference to the given GenericPmWithTdiInfo and assigns it to the InteracCard field.
-func (o *UpdatePaymentMethodInfo) SetInteracCard(v GenericPmWithTdiInfo) {
+// SetInteracCard gets a reference to the given GenericPmWithTdiUpdateInfo and assigns it to the InteracCard field.
+func (o *UpdatePaymentMethodInfo) SetInteracCard(v GenericPmWithTdiUpdateInfo) {
 	o.InteracCard = &v
 }
 
 // GetJcb returns the Jcb field value if set, zero value otherwise.
-func (o *UpdatePaymentMethodInfo) GetJcb() GenericPmWithTdiInfo {
+func (o *UpdatePaymentMethodInfo) GetJcb() GenericPmWithTdiUpdateInfo {
 	if o == nil || common.IsNil(o.Jcb) {
-		var ret GenericPmWithTdiInfo
+		var ret GenericPmWithTdiUpdateInfo
 		return ret
 	}
 	return *o.Jcb
@@ -562,7 +630,7 @@ func (o *UpdatePaymentMethodInfo) GetJcb() GenericPmWithTdiInfo {
 
 // GetJcbOk returns a tuple with the Jcb field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdatePaymentMethodInfo) GetJcbOk() (*GenericPmWithTdiInfo, bool) {
+func (o *UpdatePaymentMethodInfo) GetJcbOk() (*GenericPmWithTdiUpdateInfo, bool) {
 	if o == nil || common.IsNil(o.Jcb) {
 		return nil, false
 	}
@@ -578,15 +646,15 @@ func (o *UpdatePaymentMethodInfo) HasJcb() bool {
 	return false
 }
 
-// SetJcb gets a reference to the given GenericPmWithTdiInfo and assigns it to the Jcb field.
-func (o *UpdatePaymentMethodInfo) SetJcb(v GenericPmWithTdiInfo) {
+// SetJcb gets a reference to the given GenericPmWithTdiUpdateInfo and assigns it to the Jcb field.
+func (o *UpdatePaymentMethodInfo) SetJcb(v GenericPmWithTdiUpdateInfo) {
 	o.Jcb = &v
 }
 
 // GetMaestro returns the Maestro field value if set, zero value otherwise.
-func (o *UpdatePaymentMethodInfo) GetMaestro() GenericPmWithTdiInfo {
+func (o *UpdatePaymentMethodInfo) GetMaestro() GenericPmWithTdiUpdateInfo {
 	if o == nil || common.IsNil(o.Maestro) {
-		var ret GenericPmWithTdiInfo
+		var ret GenericPmWithTdiUpdateInfo
 		return ret
 	}
 	return *o.Maestro
@@ -594,7 +662,7 @@ func (o *UpdatePaymentMethodInfo) GetMaestro() GenericPmWithTdiInfo {
 
 // GetMaestroOk returns a tuple with the Maestro field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdatePaymentMethodInfo) GetMaestroOk() (*GenericPmWithTdiInfo, bool) {
+func (o *UpdatePaymentMethodInfo) GetMaestroOk() (*GenericPmWithTdiUpdateInfo, bool) {
 	if o == nil || common.IsNil(o.Maestro) {
 		return nil, false
 	}
@@ -610,15 +678,47 @@ func (o *UpdatePaymentMethodInfo) HasMaestro() bool {
 	return false
 }
 
-// SetMaestro gets a reference to the given GenericPmWithTdiInfo and assigns it to the Maestro field.
-func (o *UpdatePaymentMethodInfo) SetMaestro(v GenericPmWithTdiInfo) {
+// SetMaestro gets a reference to the given GenericPmWithTdiUpdateInfo and assigns it to the Maestro field.
+func (o *UpdatePaymentMethodInfo) SetMaestro(v GenericPmWithTdiUpdateInfo) {
 	o.Maestro = &v
 }
 
+// GetMaestroUsa returns the MaestroUsa field value if set, zero value otherwise.
+func (o *UpdatePaymentMethodInfo) GetMaestroUsa() GenericPmWithTdiUpdateInfo {
+	if o == nil || common.IsNil(o.MaestroUsa) {
+		var ret GenericPmWithTdiUpdateInfo
+		return ret
+	}
+	return *o.MaestroUsa
+}
+
+// GetMaestroUsaOk returns a tuple with the MaestroUsa field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdatePaymentMethodInfo) GetMaestroUsaOk() (*GenericPmWithTdiUpdateInfo, bool) {
+	if o == nil || common.IsNil(o.MaestroUsa) {
+		return nil, false
+	}
+	return o.MaestroUsa, true
+}
+
+// HasMaestroUsa returns a boolean if a field has been set.
+func (o *UpdatePaymentMethodInfo) HasMaestroUsa() bool {
+	if o != nil && !common.IsNil(o.MaestroUsa) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaestroUsa gets a reference to the given GenericPmWithTdiUpdateInfo and assigns it to the MaestroUsa field.
+func (o *UpdatePaymentMethodInfo) SetMaestroUsa(v GenericPmWithTdiUpdateInfo) {
+	o.MaestroUsa = &v
+}
+
 // GetMc returns the Mc field value if set, zero value otherwise.
-func (o *UpdatePaymentMethodInfo) GetMc() GenericPmWithTdiInfo {
+func (o *UpdatePaymentMethodInfo) GetMc() GenericPmWithTdiUpdateInfo {
 	if o == nil || common.IsNil(o.Mc) {
-		var ret GenericPmWithTdiInfo
+		var ret GenericPmWithTdiUpdateInfo
 		return ret
 	}
 	return *o.Mc
@@ -626,7 +726,7 @@ func (o *UpdatePaymentMethodInfo) GetMc() GenericPmWithTdiInfo {
 
 // GetMcOk returns a tuple with the Mc field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdatePaymentMethodInfo) GetMcOk() (*GenericPmWithTdiInfo, bool) {
+func (o *UpdatePaymentMethodInfo) GetMcOk() (*GenericPmWithTdiUpdateInfo, bool) {
 	if o == nil || common.IsNil(o.Mc) {
 		return nil, false
 	}
@@ -642,15 +742,15 @@ func (o *UpdatePaymentMethodInfo) HasMc() bool {
 	return false
 }
 
-// SetMc gets a reference to the given GenericPmWithTdiInfo and assigns it to the Mc field.
-func (o *UpdatePaymentMethodInfo) SetMc(v GenericPmWithTdiInfo) {
+// SetMc gets a reference to the given GenericPmWithTdiUpdateInfo and assigns it to the Mc field.
+func (o *UpdatePaymentMethodInfo) SetMc(v GenericPmWithTdiUpdateInfo) {
 	o.Mc = &v
 }
 
 // GetNyce returns the Nyce field value if set, zero value otherwise.
-func (o *UpdatePaymentMethodInfo) GetNyce() NyceInfo {
+func (o *UpdatePaymentMethodInfo) GetNyce() NyceUpdateInfo {
 	if o == nil || common.IsNil(o.Nyce) {
-		var ret NyceInfo
+		var ret NyceUpdateInfo
 		return ret
 	}
 	return *o.Nyce
@@ -658,7 +758,7 @@ func (o *UpdatePaymentMethodInfo) GetNyce() NyceInfo {
 
 // GetNyceOk returns a tuple with the Nyce field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdatePaymentMethodInfo) GetNyceOk() (*NyceInfo, bool) {
+func (o *UpdatePaymentMethodInfo) GetNyceOk() (*NyceUpdateInfo, bool) {
 	if o == nil || common.IsNil(o.Nyce) {
 		return nil, false
 	}
@@ -674,15 +774,15 @@ func (o *UpdatePaymentMethodInfo) HasNyce() bool {
 	return false
 }
 
-// SetNyce gets a reference to the given NyceInfo and assigns it to the Nyce field.
-func (o *UpdatePaymentMethodInfo) SetNyce(v NyceInfo) {
+// SetNyce gets a reference to the given NyceUpdateInfo and assigns it to the Nyce field.
+func (o *UpdatePaymentMethodInfo) SetNyce(v NyceUpdateInfo) {
 	o.Nyce = &v
 }
 
 // GetPaybybankPlaid returns the PaybybankPlaid field value if set, zero value otherwise.
-func (o *UpdatePaymentMethodInfo) GetPaybybankPlaid() PayByBankPlaidInfo {
+func (o *UpdatePaymentMethodInfo) GetPaybybankPlaid() PayByBankPlaidUpdateInfo {
 	if o == nil || common.IsNil(o.PaybybankPlaid) {
-		var ret PayByBankPlaidInfo
+		var ret PayByBankPlaidUpdateInfo
 		return ret
 	}
 	return *o.PaybybankPlaid
@@ -690,7 +790,7 @@ func (o *UpdatePaymentMethodInfo) GetPaybybankPlaid() PayByBankPlaidInfo {
 
 // GetPaybybankPlaidOk returns a tuple with the PaybybankPlaid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdatePaymentMethodInfo) GetPaybybankPlaidOk() (*PayByBankPlaidInfo, bool) {
+func (o *UpdatePaymentMethodInfo) GetPaybybankPlaidOk() (*PayByBankPlaidUpdateInfo, bool) {
 	if o == nil || common.IsNil(o.PaybybankPlaid) {
 		return nil, false
 	}
@@ -706,15 +806,15 @@ func (o *UpdatePaymentMethodInfo) HasPaybybankPlaid() bool {
 	return false
 }
 
-// SetPaybybankPlaid gets a reference to the given PayByBankPlaidInfo and assigns it to the PaybybankPlaid field.
-func (o *UpdatePaymentMethodInfo) SetPaybybankPlaid(v PayByBankPlaidInfo) {
+// SetPaybybankPlaid gets a reference to the given PayByBankPlaidUpdateInfo and assigns it to the PaybybankPlaid field.
+func (o *UpdatePaymentMethodInfo) SetPaybybankPlaid(v PayByBankPlaidUpdateInfo) {
 	o.PaybybankPlaid = &v
 }
 
 // GetPulse returns the Pulse field value if set, zero value otherwise.
-func (o *UpdatePaymentMethodInfo) GetPulse() PulseInfo {
+func (o *UpdatePaymentMethodInfo) GetPulse() PulseUpdateInfo {
 	if o == nil || common.IsNil(o.Pulse) {
-		var ret PulseInfo
+		var ret PulseUpdateInfo
 		return ret
 	}
 	return *o.Pulse
@@ -722,7 +822,7 @@ func (o *UpdatePaymentMethodInfo) GetPulse() PulseInfo {
 
 // GetPulseOk returns a tuple with the Pulse field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdatePaymentMethodInfo) GetPulseOk() (*PulseInfo, bool) {
+func (o *UpdatePaymentMethodInfo) GetPulseOk() (*PulseUpdateInfo, bool) {
 	if o == nil || common.IsNil(o.Pulse) {
 		return nil, false
 	}
@@ -738,15 +838,47 @@ func (o *UpdatePaymentMethodInfo) HasPulse() bool {
 	return false
 }
 
-// SetPulse gets a reference to the given PulseInfo and assigns it to the Pulse field.
-func (o *UpdatePaymentMethodInfo) SetPulse(v PulseInfo) {
+// SetPulse gets a reference to the given PulseUpdateInfo and assigns it to the Pulse field.
+func (o *UpdatePaymentMethodInfo) SetPulse(v PulseUpdateInfo) {
 	o.Pulse = &v
 }
 
+// GetSepadirectdebit returns the Sepadirectdebit field value if set, zero value otherwise.
+func (o *UpdatePaymentMethodInfo) GetSepadirectdebit() SepaDirectDebitUpdateInfo {
+	if o == nil || common.IsNil(o.Sepadirectdebit) {
+		var ret SepaDirectDebitUpdateInfo
+		return ret
+	}
+	return *o.Sepadirectdebit
+}
+
+// GetSepadirectdebitOk returns a tuple with the Sepadirectdebit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdatePaymentMethodInfo) GetSepadirectdebitOk() (*SepaDirectDebitUpdateInfo, bool) {
+	if o == nil || common.IsNil(o.Sepadirectdebit) {
+		return nil, false
+	}
+	return o.Sepadirectdebit, true
+}
+
+// HasSepadirectdebit returns a boolean if a field has been set.
+func (o *UpdatePaymentMethodInfo) HasSepadirectdebit() bool {
+	if o != nil && !common.IsNil(o.Sepadirectdebit) {
+		return true
+	}
+
+	return false
+}
+
+// SetSepadirectdebit gets a reference to the given SepaDirectDebitUpdateInfo and assigns it to the Sepadirectdebit field.
+func (o *UpdatePaymentMethodInfo) SetSepadirectdebit(v SepaDirectDebitUpdateInfo) {
+	o.Sepadirectdebit = &v
+}
+
 // GetStar returns the Star field value if set, zero value otherwise.
-func (o *UpdatePaymentMethodInfo) GetStar() StarInfo {
+func (o *UpdatePaymentMethodInfo) GetStar() StarUpdateInfo {
 	if o == nil || common.IsNil(o.Star) {
-		var ret StarInfo
+		var ret StarUpdateInfo
 		return ret
 	}
 	return *o.Star
@@ -754,7 +886,7 @@ func (o *UpdatePaymentMethodInfo) GetStar() StarInfo {
 
 // GetStarOk returns a tuple with the Star field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdatePaymentMethodInfo) GetStarOk() (*StarInfo, bool) {
+func (o *UpdatePaymentMethodInfo) GetStarOk() (*StarUpdateInfo, bool) {
 	if o == nil || common.IsNil(o.Star) {
 		return nil, false
 	}
@@ -770,8 +902,8 @@ func (o *UpdatePaymentMethodInfo) HasStar() bool {
 	return false
 }
 
-// SetStar gets a reference to the given StarInfo and assigns it to the Star field.
-func (o *UpdatePaymentMethodInfo) SetStar(v StarInfo) {
+// SetStar gets a reference to the given StarUpdateInfo and assigns it to the Star field.
+func (o *UpdatePaymentMethodInfo) SetStar(v StarUpdateInfo) {
 	o.Star = &v
 }
 
@@ -809,7 +941,7 @@ func (o *UpdatePaymentMethodInfo) SetStoreId(v string) {
 
 // GetStoreIds returns the StoreIds field value if set, zero value otherwise.
 // Deprecated since Management API v3
-// Use `storeId` instead. Only one store per payment method is allowed.
+/* Use `storeId` instead. Only one store per payment method is allowed. */
 func (o *UpdatePaymentMethodInfo) GetStoreIds() []string {
 	if o == nil || common.IsNil(o.StoreIds) {
 		var ret []string
@@ -821,7 +953,7 @@ func (o *UpdatePaymentMethodInfo) GetStoreIds() []string {
 // GetStoreIdsOk returns a tuple with the StoreIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // Deprecated since Management API v3
-// Use `storeId` instead. Only one store per payment method is allowed.
+/* Use `storeId` instead. Only one store per payment method is allowed. */
 func (o *UpdatePaymentMethodInfo) GetStoreIdsOk() ([]string, bool) {
 	if o == nil || common.IsNil(o.StoreIds) {
 		return nil, false
@@ -840,15 +972,15 @@ func (o *UpdatePaymentMethodInfo) HasStoreIds() bool {
 
 // SetStoreIds gets a reference to the given []string and assigns it to the StoreIds field.
 // Deprecated since Management API v3
-// Use `storeId` instead. Only one store per payment method is allowed.
+/* Use `storeId` instead. Only one store per payment method is allowed. */
 func (o *UpdatePaymentMethodInfo) SetStoreIds(v []string) {
 	o.StoreIds = v
 }
 
 // GetVisa returns the Visa field value if set, zero value otherwise.
-func (o *UpdatePaymentMethodInfo) GetVisa() GenericPmWithTdiInfo {
+func (o *UpdatePaymentMethodInfo) GetVisa() GenericPmWithTdiUpdateInfo {
 	if o == nil || common.IsNil(o.Visa) {
-		var ret GenericPmWithTdiInfo
+		var ret GenericPmWithTdiUpdateInfo
 		return ret
 	}
 	return *o.Visa
@@ -856,7 +988,7 @@ func (o *UpdatePaymentMethodInfo) GetVisa() GenericPmWithTdiInfo {
 
 // GetVisaOk returns a tuple with the Visa field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdatePaymentMethodInfo) GetVisaOk() (*GenericPmWithTdiInfo, bool) {
+func (o *UpdatePaymentMethodInfo) GetVisaOk() (*GenericPmWithTdiUpdateInfo, bool) {
 	if o == nil || common.IsNil(o.Visa) {
 		return nil, false
 	}
@@ -872,8 +1004,8 @@ func (o *UpdatePaymentMethodInfo) HasVisa() bool {
 	return false
 }
 
-// SetVisa gets a reference to the given GenericPmWithTdiInfo and assigns it to the Visa field.
-func (o *UpdatePaymentMethodInfo) SetVisa(v GenericPmWithTdiInfo) {
+// SetVisa gets a reference to the given GenericPmWithTdiUpdateInfo and assigns it to the Visa field.
+func (o *UpdatePaymentMethodInfo) SetVisa(v GenericPmWithTdiUpdateInfo) {
 	o.Visa = &v
 }
 
@@ -890,8 +1022,14 @@ func (o UpdatePaymentMethodInfo) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Accel) {
 		toSerialize["accel"] = o.Accel
 	}
+	if !common.IsNil(o.Affirm) {
+		toSerialize["affirm"] = o.Affirm
+	}
 	if !common.IsNil(o.Bcmc) {
 		toSerialize["bcmc"] = o.Bcmc
+	}
+	if !common.IsNil(o.Carnet) {
+		toSerialize["carnet"] = o.Carnet
 	}
 	if !common.IsNil(o.CartesBancaires) {
 		toSerialize["cartesBancaires"] = o.CartesBancaires
@@ -938,6 +1076,9 @@ func (o UpdatePaymentMethodInfo) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Maestro) {
 		toSerialize["maestro"] = o.Maestro
 	}
+	if !common.IsNil(o.MaestroUsa) {
+		toSerialize["maestro_usa"] = o.MaestroUsa
+	}
 	if !common.IsNil(o.Mc) {
 		toSerialize["mc"] = o.Mc
 	}
@@ -949,6 +1090,9 @@ func (o UpdatePaymentMethodInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Pulse) {
 		toSerialize["pulse"] = o.Pulse
+	}
+	if !common.IsNil(o.Sepadirectdebit) {
+		toSerialize["sepadirectdebit"] = o.Sepadirectdebit
 	}
 	if !common.IsNil(o.Star) {
 		toSerialize["star"] = o.Star

@@ -27,6 +27,8 @@ type UpdateMerchantApiCredentialRequest struct {
 	Description *string `json:"description,omitempty"`
 	// List of [roles](https://docs.adyen.com/development-resources/api-credentials#roles-1) for the API credential. Only roles assigned to 'ws@Company.<CompanyName>' can be assigned to other API credentials.
 	Roles []string `json:"roles,omitempty"`
+	// The subject DN of the certificate issued by Adyen.
+	SubjectDN *string `json:"subjectDN,omitempty"`
 }
 
 // NewUpdateMerchantApiCredentialRequest instantiates a new UpdateMerchantApiCredentialRequest object
@@ -174,6 +176,38 @@ func (o *UpdateMerchantApiCredentialRequest) SetRoles(v []string) {
 	o.Roles = v
 }
 
+// GetSubjectDN returns the SubjectDN field value if set, zero value otherwise.
+func (o *UpdateMerchantApiCredentialRequest) GetSubjectDN() string {
+	if o == nil || common.IsNil(o.SubjectDN) {
+		var ret string
+		return ret
+	}
+	return *o.SubjectDN
+}
+
+// GetSubjectDNOk returns a tuple with the SubjectDN field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateMerchantApiCredentialRequest) GetSubjectDNOk() (*string, bool) {
+	if o == nil || common.IsNil(o.SubjectDN) {
+		return nil, false
+	}
+	return o.SubjectDN, true
+}
+
+// HasSubjectDN returns a boolean if a field has been set.
+func (o *UpdateMerchantApiCredentialRequest) HasSubjectDN() bool {
+	if o != nil && !common.IsNil(o.SubjectDN) {
+		return true
+	}
+
+	return false
+}
+
+// SetSubjectDN gets a reference to the given string and assigns it to the SubjectDN field.
+func (o *UpdateMerchantApiCredentialRequest) SetSubjectDN(v string) {
+	o.SubjectDN = &v
+}
+
 func (o UpdateMerchantApiCredentialRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -195,6 +229,9 @@ func (o UpdateMerchantApiCredentialRequest) ToMap() (map[string]interface{}, err
 	}
 	if !common.IsNil(o.Roles) {
 		toSerialize["roles"] = o.Roles
+	}
+	if !common.IsNil(o.SubjectDN) {
+		toSerialize["subjectDN"] = o.SubjectDN
 	}
 	return toSerialize, nil
 }

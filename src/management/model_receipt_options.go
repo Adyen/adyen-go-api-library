@@ -19,6 +19,10 @@ var _ common.MappedNullable = &ReceiptOptions{}
 
 // ReceiptOptions struct for ReceiptOptions
 type ReceiptOptions struct {
+	// The text of the first header line to be shown on the receipt.
+	HeaderLine1 *string `json:"headerLine1,omitempty"`
+	// The text of the second header line to be shown on the receipt.
+	HeaderLine2 *string `json:"headerLine2,omitempty"`
 	// The receipt logo converted to a Base64-encoded string. The image must be a .bmp file of < 256 KB, dimensions 240 (H) x 384 (W) px.
 	Logo *string `json:"logo,omitempty"`
 	// Indicates whether a screen appears asking if you want to print the shopper receipt.
@@ -42,6 +46,70 @@ func NewReceiptOptions() *ReceiptOptions {
 func NewReceiptOptionsWithDefaults() *ReceiptOptions {
 	this := ReceiptOptions{}
 	return &this
+}
+
+// GetHeaderLine1 returns the HeaderLine1 field value if set, zero value otherwise.
+func (o *ReceiptOptions) GetHeaderLine1() string {
+	if o == nil || common.IsNil(o.HeaderLine1) {
+		var ret string
+		return ret
+	}
+	return *o.HeaderLine1
+}
+
+// GetHeaderLine1Ok returns a tuple with the HeaderLine1 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ReceiptOptions) GetHeaderLine1Ok() (*string, bool) {
+	if o == nil || common.IsNil(o.HeaderLine1) {
+		return nil, false
+	}
+	return o.HeaderLine1, true
+}
+
+// HasHeaderLine1 returns a boolean if a field has been set.
+func (o *ReceiptOptions) HasHeaderLine1() bool {
+	if o != nil && !common.IsNil(o.HeaderLine1) {
+		return true
+	}
+
+	return false
+}
+
+// SetHeaderLine1 gets a reference to the given string and assigns it to the HeaderLine1 field.
+func (o *ReceiptOptions) SetHeaderLine1(v string) {
+	o.HeaderLine1 = &v
+}
+
+// GetHeaderLine2 returns the HeaderLine2 field value if set, zero value otherwise.
+func (o *ReceiptOptions) GetHeaderLine2() string {
+	if o == nil || common.IsNil(o.HeaderLine2) {
+		var ret string
+		return ret
+	}
+	return *o.HeaderLine2
+}
+
+// GetHeaderLine2Ok returns a tuple with the HeaderLine2 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ReceiptOptions) GetHeaderLine2Ok() (*string, bool) {
+	if o == nil || common.IsNil(o.HeaderLine2) {
+		return nil, false
+	}
+	return o.HeaderLine2, true
+}
+
+// HasHeaderLine2 returns a boolean if a field has been set.
+func (o *ReceiptOptions) HasHeaderLine2() bool {
+	if o != nil && !common.IsNil(o.HeaderLine2) {
+		return true
+	}
+
+	return false
+}
+
+// SetHeaderLine2 gets a reference to the given string and assigns it to the HeaderLine2 field.
+func (o *ReceiptOptions) SetHeaderLine2(v string) {
+	o.HeaderLine2 = &v
 }
 
 // GetLogo returns the Logo field value if set, zero value otherwise.
@@ -150,6 +218,12 @@ func (o ReceiptOptions) MarshalJSON() ([]byte, error) {
 
 func (o ReceiptOptions) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !common.IsNil(o.HeaderLine1) {
+		toSerialize["headerLine1"] = o.HeaderLine1
+	}
+	if !common.IsNil(o.HeaderLine2) {
+		toSerialize["headerLine2"] = o.HeaderLine2
+	}
 	if !common.IsNil(o.Logo) {
 		toSerialize["logo"] = o.Logo
 	}
