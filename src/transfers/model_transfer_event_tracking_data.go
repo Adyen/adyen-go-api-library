@@ -11,6 +11,8 @@ package transfers
 import (
 	"encoding/json"
 	"fmt"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // TransferEventTrackingData - Additional information for the tracking event.
@@ -44,58 +46,86 @@ func InternalReviewTrackingDataAsTransferEventTrackingData(v *InternalReviewTrac
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *TransferEventTrackingData) UnmarshalJSON(data []byte) error {
 	var err error
-	match := 0
-	// try to unmarshal data into ConfirmationTrackingData
-	err = json.Unmarshal(data, &dst.ConfirmationTrackingData)
-	if err == nil {
-		jsonConfirmationTrackingData, _ := json.Marshal(dst.ConfirmationTrackingData)
-		if string(jsonConfirmationTrackingData) == "{}" || !dst.ConfirmationTrackingData.isValidType() { // empty struct
+	// use discriminator value to speed up the lookup
+	var jsonDict map[string]interface{}
+	err = common.NewStrictDecoder(data).Decode(&jsonDict)
+	if err != nil {
+		return fmt.Errorf("failed to unmarshal JSON into map for the discriminator lookup")
+	}
+
+	// check if the discriminator value is 'ConfirmationTrackingData'
+	if jsonDict["type"] == "ConfirmationTrackingData" {
+		// try to unmarshal JSON data into ConfirmationTrackingData
+		err = json.Unmarshal(data, &dst.ConfirmationTrackingData)
+		if err == nil {
+			return nil // data stored in dst.ConfirmationTrackingData, return on the first match
+		} else {
 			dst.ConfirmationTrackingData = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal TransferEventTrackingData as ConfirmationTrackingData: %s", err.Error())
 		}
-	} else {
-		dst.ConfirmationTrackingData = nil
 	}
 
-	// try to unmarshal data into EstimationTrackingData
-	err = json.Unmarshal(data, &dst.EstimationTrackingData)
-	if err == nil {
-		jsonEstimationTrackingData, _ := json.Marshal(dst.EstimationTrackingData)
-		if string(jsonEstimationTrackingData) == "{}" || !dst.EstimationTrackingData.isValidType() { // empty struct
+	// check if the discriminator value is 'EstimationTrackingData'
+	if jsonDict["type"] == "EstimationTrackingData" {
+		// try to unmarshal JSON data into EstimationTrackingData
+		err = json.Unmarshal(data, &dst.EstimationTrackingData)
+		if err == nil {
+			return nil // data stored in dst.EstimationTrackingData, return on the first match
+		} else {
 			dst.EstimationTrackingData = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal TransferEventTrackingData as EstimationTrackingData: %s", err.Error())
 		}
-	} else {
-		dst.EstimationTrackingData = nil
 	}
 
-	// try to unmarshal data into InternalReviewTrackingData
-	err = json.Unmarshal(data, &dst.InternalReviewTrackingData)
-	if err == nil {
-		jsonInternalReviewTrackingData, _ := json.Marshal(dst.InternalReviewTrackingData)
-		if string(jsonInternalReviewTrackingData) == "{}" || !dst.InternalReviewTrackingData.isValidType() { // empty struct
+	// check if the discriminator value is 'InternalReviewTrackingData'
+	if jsonDict["type"] == "InternalReviewTrackingData" {
+		// try to unmarshal JSON data into InternalReviewTrackingData
+		err = json.Unmarshal(data, &dst.InternalReviewTrackingData)
+		if err == nil {
+			return nil // data stored in dst.InternalReviewTrackingData, return on the first match
+		} else {
 			dst.InternalReviewTrackingData = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal TransferEventTrackingData as InternalReviewTrackingData: %s", err.Error())
 		}
-	} else {
-		dst.InternalReviewTrackingData = nil
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.ConfirmationTrackingData = nil
-		dst.EstimationTrackingData = nil
-		dst.InternalReviewTrackingData = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(TransferEventTrackingData)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match
-		return fmt.Errorf("data failed to match schemas in oneOf(TransferEventTrackingData)")
+	// check if the discriminator value is 'confirmation'
+	if jsonDict["type"] == "confirmation" {
+		// try to unmarshal JSON data into ConfirmationTrackingData
+		err = json.Unmarshal(data, &dst.ConfirmationTrackingData)
+		if err == nil {
+			return nil // data stored in dst.ConfirmationTrackingData, return on the first match
+		} else {
+			dst.ConfirmationTrackingData = nil
+			return fmt.Errorf("failed to unmarshal TransferEventTrackingData as ConfirmationTrackingData: %s", err.Error())
+		}
 	}
+
+	// check if the discriminator value is 'estimation'
+	if jsonDict["type"] == "estimation" {
+		// try to unmarshal JSON data into EstimationTrackingData
+		err = json.Unmarshal(data, &dst.EstimationTrackingData)
+		if err == nil {
+			return nil // data stored in dst.EstimationTrackingData, return on the first match
+		} else {
+			dst.EstimationTrackingData = nil
+			return fmt.Errorf("failed to unmarshal TransferEventTrackingData as EstimationTrackingData: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'internalReview'
+	if jsonDict["type"] == "internalReview" {
+		// try to unmarshal JSON data into InternalReviewTrackingData
+		err = json.Unmarshal(data, &dst.InternalReviewTrackingData)
+		if err == nil {
+			return nil // data stored in dst.InternalReviewTrackingData, return on the first match
+		} else {
+			dst.InternalReviewTrackingData = nil
+			return fmt.Errorf("failed to unmarshal TransferEventTrackingData as InternalReviewTrackingData: %s", err.Error())
+		}
+	}
+
+	return nil
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON
