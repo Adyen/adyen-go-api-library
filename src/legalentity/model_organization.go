@@ -37,7 +37,7 @@ type Organization struct {
 	Email *string `json:"email,omitempty"`
 	// The financial report information of the organization.
 	FinancialReports []FinancialReport `json:"financialReports,omitempty"`
-	// The global legal entity identifier for the organization.
+	// The global legal entity identifier for the organization.  This field is not required if the `registrationNumber` for the organization has been provided.
 	GlobalLegalEntityIdentifier *string `json:"globalLegalEntityIdentifier,omitempty"`
 	// Indicates that the registered business address is also the company's headquarters.
 	HeadOfficeIndicator *bool `json:"headOfficeIndicator,omitempty"`
@@ -45,7 +45,7 @@ type Organization struct {
 	InstitutionalSector *string `json:"institutionalSector,omitempty"`
 	// The type of business entity as defined in the national legal system. Use a legal form listed within the accepted legal forms compiled by the Central Bank of Europe.
 	LegalForm *string `json:"legalForm,omitempty"`
-	// The organization's legal name.
+	// The organization's legal name. Must be at least 3 characters.  Only the following special characters are allowed: **,**, **-**, **—**, **.**, **;**, **:**, **&**, **?**, **@**, **(**, **)**, **\"**, **'**, **!**, **\\**, **+**, **_/_**. Accents and non-Latin scripts are allowed.  The field cannot contain emojis, only one repeated character (unless two characters long), only symbols, only numbers, only spaces, or **fictitious names** such as **John Doe** or **N/A**.  For more information, see [validations on fields](https://docs.adyen.com/platforms/onboard-users/onboarding-versions/onboarding-v4/#validations).
 	LegalName                string       `json:"legalName"`
 	Phone                    *PhoneNumber `json:"phone,omitempty"`
 	PrincipalPlaceOfBusiness *Address     `json:"principalPlaceOfBusiness,omitempty"`
@@ -54,6 +54,8 @@ type Organization struct {
 	RegistrationNumber *string `json:"registrationNumber,omitempty"`
 	// Set this to **true** if the organization does not have a registration number available. Only applicable for organizations in New Zealand, and incorporated partnerships and government organizations in Australia.
 	RegistrationNumberAbsent common.NullableBool `json:"registrationNumberAbsent,omitempty"`
+	// Indicates if the `registeredAddress` is a place of residence, instead of a business address.  Set to **true** if the address is a place of residence. The default value is **false**.
+	ResidentialAddressIndicator common.NullableBool `json:"residentialAddressIndicator,omitempty"`
 	// The status of any current or past legal action taken against the legal entity.  Possible values: **noLegalActionsTaken**, **underJudicialAdministration**, **bankruptcyInsolvency**, **otherLegalMeasures**  If the value of this field is **noLegalActionsTaken**, then `dateOfInitiationOfLegalProceeding` is not required. Otherwise, it is required.
 	StatusOfLegalProceeding *string    `json:"statusOfLegalProceeding,omitempty"`
 	StockData               *StockData `json:"stockData,omitempty"`
@@ -703,6 +705,49 @@ func (o *Organization) UnsetRegistrationNumberAbsent() {
 	o.RegistrationNumberAbsent.Unset()
 }
 
+// GetResidentialAddressIndicator returns the ResidentialAddressIndicator field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Organization) GetResidentialAddressIndicator() bool {
+	if o == nil || common.IsNil(o.ResidentialAddressIndicator.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.ResidentialAddressIndicator.Get()
+}
+
+// GetResidentialAddressIndicatorOk returns a tuple with the ResidentialAddressIndicator field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Organization) GetResidentialAddressIndicatorOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ResidentialAddressIndicator.Get(), o.ResidentialAddressIndicator.IsSet()
+}
+
+// HasResidentialAddressIndicator returns a boolean if a field has been set.
+func (o *Organization) HasResidentialAddressIndicator() bool {
+	if o != nil && o.ResidentialAddressIndicator.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetResidentialAddressIndicator gets a reference to the given NullableBool and assigns it to the ResidentialAddressIndicator field.
+func (o *Organization) SetResidentialAddressIndicator(v bool) {
+	o.ResidentialAddressIndicator.Set(&v)
+}
+
+// SetResidentialAddressIndicatorNil sets the value for ResidentialAddressIndicator to be an explicit nil
+func (o *Organization) SetResidentialAddressIndicatorNil() {
+	o.ResidentialAddressIndicator.Set(nil)
+}
+
+// UnsetResidentialAddressIndicator ensures that no value is present for ResidentialAddressIndicator, not even an explicit nil
+func (o *Organization) UnsetResidentialAddressIndicator() {
+	o.ResidentialAddressIndicator.Unset()
+}
+
 // GetStatusOfLegalProceeding returns the StatusOfLegalProceeding field value if set, zero value otherwise.
 func (o *Organization) GetStatusOfLegalProceeding() string {
 	if o == nil || common.IsNil(o.StatusOfLegalProceeding) {
@@ -1053,6 +1098,9 @@ func (o Organization) ToMap() (map[string]interface{}, error) {
 	}
 	if o.RegistrationNumberAbsent.IsSet() {
 		toSerialize["registrationNumberAbsent"] = o.RegistrationNumberAbsent.Get()
+	}
+	if o.ResidentialAddressIndicator.IsSet() {
+		toSerialize["residentialAddressIndicator"] = o.ResidentialAddressIndicator.Get()
 	}
 	if !common.IsNil(o.StatusOfLegalProceeding) {
 		toSerialize["statusOfLegalProceeding"] = o.StatusOfLegalProceeding
