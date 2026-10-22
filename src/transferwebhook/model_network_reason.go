@@ -19,11 +19,11 @@ var _ common.MappedNullable = &NetworkReason{}
 
 // NetworkReason struct for NetworkReason
 type NetworkReason struct {
-	// The reason code provided by the network.
+	// The network-specific reason code. Use `namespace` to identify the code set.
 	Code *string `json:"code,omitempty"`
-	// The description of the reason code.
+	// A human-readable description of the reason code.
 	Description *string `json:"description,omitempty"`
-	// The namespace that corresponds to the reason code.  Possible values: *  **ukFpsRejectionCode** *  **ukFpsReturnReasonCode** *  **usAchReturnReasonCode** *  **usAchCorrectionReasonCode** *  **iso8583ResponseCode**
+	// The category of codes that `code` belongs to. The `namespace` identifies the payment network and the type of reason  Possible values: *  **ukFpsRejectionCode** : Reason code for a rejected Faster Payments transfer. *  **ukFpsReturnReasonCode** : Reason code for a returned Faster Payments transfer. *  **usAchReturnReasonCode** : Reason code for a returned ACH transfer. *  **usAchCorrectionReasonCode** : Reason code for an ACH Notification of Change. *  **iso8583ResponseCode** : ISO 8583 response code for a card transfer.
 	Namespace *string `json:"namespace,omitempty"`
 }
 
@@ -199,7 +199,7 @@ func (v *NullableNetworkReason) UnmarshalJSON(src []byte) error {
 }
 
 func (o *NetworkReason) isValidNamespace() bool {
-	var allowedEnumValues = []string{"iso8583ResponseCode", "ukFpsRejectionCode", "ukFpsReturnReasonCode", "usAchReturnReasonCode", "usAchCorrectionReasonCode"}
+	var allowedEnumValues = []string{"iso8583ResponseCode", "ukFpsRejectionCode", "ukFpsReturnReasonCode", "usAchCorrectionReasonCode", "usAchReturnReasonCode"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetNamespace() == allowed {
 			return true
