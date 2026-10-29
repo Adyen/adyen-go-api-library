@@ -11,6 +11,8 @@ package transfers
 import (
 	"encoding/json"
 	"fmt"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // TransferCategoryData - The relevant data according to the transfer category.
@@ -52,72 +54,110 @@ func PlatformPaymentAsTransferCategoryData(v *PlatformPayment) TransferCategoryD
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *TransferCategoryData) UnmarshalJSON(data []byte) error {
 	var err error
-	match := 0
-	// try to unmarshal data into BankCategoryData
-	err = json.Unmarshal(data, &dst.BankCategoryData)
-	if err == nil {
-		jsonBankCategoryData, _ := json.Marshal(dst.BankCategoryData)
-		if string(jsonBankCategoryData) == "{}" || !dst.BankCategoryData.isValidType() { // empty struct
+	// use discriminator value to speed up the lookup
+	var jsonDict map[string]interface{}
+	err = common.NewStrictDecoder(data).Decode(&jsonDict)
+	if err != nil {
+		return fmt.Errorf("failed to unmarshal JSON into map for the discriminator lookup")
+	}
+
+	// check if the discriminator value is 'BankCategoryData'
+	if jsonDict["type"] == "BankCategoryData" {
+		// try to unmarshal JSON data into BankCategoryData
+		err = json.Unmarshal(data, &dst.BankCategoryData)
+		if err == nil {
+			return nil // data stored in dst.BankCategoryData, return on the first match
+		} else {
 			dst.BankCategoryData = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal TransferCategoryData as BankCategoryData: %s", err.Error())
 		}
-	} else {
-		dst.BankCategoryData = nil
 	}
 
-	// try to unmarshal data into InternalCategoryData
-	err = json.Unmarshal(data, &dst.InternalCategoryData)
-	if err == nil {
-		jsonInternalCategoryData, _ := json.Marshal(dst.InternalCategoryData)
-		if string(jsonInternalCategoryData) == "{}" || !dst.InternalCategoryData.isValidType() { // empty struct
+	// check if the discriminator value is 'InternalCategoryData'
+	if jsonDict["type"] == "InternalCategoryData" {
+		// try to unmarshal JSON data into InternalCategoryData
+		err = json.Unmarshal(data, &dst.InternalCategoryData)
+		if err == nil {
+			return nil // data stored in dst.InternalCategoryData, return on the first match
+		} else {
 			dst.InternalCategoryData = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal TransferCategoryData as InternalCategoryData: %s", err.Error())
 		}
-	} else {
-		dst.InternalCategoryData = nil
 	}
 
-	// try to unmarshal data into IssuedCard
-	err = json.Unmarshal(data, &dst.IssuedCard)
-	if err == nil {
-		jsonIssuedCard, _ := json.Marshal(dst.IssuedCard)
-		if string(jsonIssuedCard) == "{}" || !dst.IssuedCard.isValidType() { // empty struct
+	// check if the discriminator value is 'IssuedCard'
+	if jsonDict["type"] == "IssuedCard" {
+		// try to unmarshal JSON data into IssuedCard
+		err = json.Unmarshal(data, &dst.IssuedCard)
+		if err == nil {
+			return nil // data stored in dst.IssuedCard, return on the first match
+		} else {
 			dst.IssuedCard = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal TransferCategoryData as IssuedCard: %s", err.Error())
 		}
-	} else {
-		dst.IssuedCard = nil
 	}
 
-	// try to unmarshal data into PlatformPayment
-	err = json.Unmarshal(data, &dst.PlatformPayment)
-	if err == nil {
-		jsonPlatformPayment, _ := json.Marshal(dst.PlatformPayment)
-		if string(jsonPlatformPayment) == "{}" || !dst.PlatformPayment.isValidType() { // empty struct
+	// check if the discriminator value is 'PlatformPayment'
+	if jsonDict["type"] == "PlatformPayment" {
+		// try to unmarshal JSON data into PlatformPayment
+		err = json.Unmarshal(data, &dst.PlatformPayment)
+		if err == nil {
+			return nil // data stored in dst.PlatformPayment, return on the first match
+		} else {
 			dst.PlatformPayment = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal TransferCategoryData as PlatformPayment: %s", err.Error())
 		}
-	} else {
-		dst.PlatformPayment = nil
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.BankCategoryData = nil
-		dst.InternalCategoryData = nil
-		dst.IssuedCard = nil
-		dst.PlatformPayment = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(TransferCategoryData)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match
-		return fmt.Errorf("data failed to match schemas in oneOf(TransferCategoryData)")
+	// check if the discriminator value is 'bank'
+	if jsonDict["type"] == "bank" {
+		// try to unmarshal JSON data into BankCategoryData
+		err = json.Unmarshal(data, &dst.BankCategoryData)
+		if err == nil {
+			return nil // data stored in dst.BankCategoryData, return on the first match
+		} else {
+			dst.BankCategoryData = nil
+			return fmt.Errorf("failed to unmarshal TransferCategoryData as BankCategoryData: %s", err.Error())
+		}
 	}
+
+	// check if the discriminator value is 'internal'
+	if jsonDict["type"] == "internal" {
+		// try to unmarshal JSON data into InternalCategoryData
+		err = json.Unmarshal(data, &dst.InternalCategoryData)
+		if err == nil {
+			return nil // data stored in dst.InternalCategoryData, return on the first match
+		} else {
+			dst.InternalCategoryData = nil
+			return fmt.Errorf("failed to unmarshal TransferCategoryData as InternalCategoryData: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'issuedCard'
+	if jsonDict["type"] == "issuedCard" {
+		// try to unmarshal JSON data into IssuedCard
+		err = json.Unmarshal(data, &dst.IssuedCard)
+		if err == nil {
+			return nil // data stored in dst.IssuedCard, return on the first match
+		} else {
+			dst.IssuedCard = nil
+			return fmt.Errorf("failed to unmarshal TransferCategoryData as IssuedCard: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'platformPayment'
+	if jsonDict["type"] == "platformPayment" {
+		// try to unmarshal JSON data into PlatformPayment
+		err = json.Unmarshal(data, &dst.PlatformPayment)
+		if err == nil {
+			return nil // data stored in dst.PlatformPayment, return on the first match
+		} else {
+			dst.PlatformPayment = nil
+			return fmt.Errorf("failed to unmarshal TransferCategoryData as PlatformPayment: %s", err.Error())
+		}
+	}
+
+	return nil
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON
