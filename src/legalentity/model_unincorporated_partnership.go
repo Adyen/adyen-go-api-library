@@ -29,12 +29,14 @@ type UnincorporatedPartnership struct {
 	DoingBusinessAs *string `json:"doingBusinessAs,omitempty"`
 	// Set this to **true** if the legal arrangement does not have a `Doing business as` name.
 	DoingBusinessAsAbsent common.NullableBool `json:"doingBusinessAsAbsent,omitempty"`
-	// The legal name.
+	// The legal name. Must be at least 3 characters.  Only the following special characters are allowed: **,**, **-**, **—**, **.**, **;**, **:**, **&**, **?**, **@**, **(**, **)**, **\"**, **'**, **!**, **\\**, **+**, **_/_**. Accents and non-Latin scripts are allowed.  The field cannot contain emojis, only one repeated character (unless two characters long), only symbols, only numbers, only spaces, or **fictitious names** such as **John Doe** or **N/A**.  For more information, see [validations on fields](https://docs.adyen.com/platforms/onboard-users/onboarding-versions/onboarding-v4/#validations).
 	Name                     string   `json:"name"`
 	PrincipalPlaceOfBusiness *Address `json:"principalPlaceOfBusiness,omitempty"`
 	RegisteredAddress        Address  `json:"registeredAddress"`
 	// The registration number.
 	RegistrationNumber *string `json:"registrationNumber,omitempty"`
+	// Indicates if the `registeredAddress` is a place of residence, instead of a business address.  Set to **true** if the address is a place of residence. The default value is **false**.
+	ResidentialAddressIndicator common.NullableBool `json:"residentialAddressIndicator,omitempty"`
 	// The tax information of the entity.
 	TaxInformation []TaxInformation `json:"taxInformation,omitempty"`
 	// Type of Partnership.  Possible values: *  **limitedPartnership** *  **generalPartnership** *  **familyPartnership** *  **commercialPartnership** *  **publicPartnership** *  **otherPartnership** *  **gbr** *  **gmbh** *  **kgaa** *  **cv** *  **vof** *  **maatschap** *  **privateFundLimitedPartnership** *  **businessTrustEntity** *  **businessPartnership** *  **limitedLiabilityPartnership** *  **eg** *  **cooperative** *  **vos** *  **comunidadDeBienes** *  **herenciaYacente** *  **comunidadDePropietarios** *  **sep** *  **sca** *  **bt** *  **kkt** *  **scs** *  **snc**
@@ -340,6 +342,49 @@ func (o *UnincorporatedPartnership) SetRegistrationNumber(v string) {
 	o.RegistrationNumber = &v
 }
 
+// GetResidentialAddressIndicator returns the ResidentialAddressIndicator field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *UnincorporatedPartnership) GetResidentialAddressIndicator() bool {
+	if o == nil || common.IsNil(o.ResidentialAddressIndicator.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.ResidentialAddressIndicator.Get()
+}
+
+// GetResidentialAddressIndicatorOk returns a tuple with the ResidentialAddressIndicator field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *UnincorporatedPartnership) GetResidentialAddressIndicatorOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ResidentialAddressIndicator.Get(), o.ResidentialAddressIndicator.IsSet()
+}
+
+// HasResidentialAddressIndicator returns a boolean if a field has been set.
+func (o *UnincorporatedPartnership) HasResidentialAddressIndicator() bool {
+	if o != nil && o.ResidentialAddressIndicator.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetResidentialAddressIndicator gets a reference to the given NullableBool and assigns it to the ResidentialAddressIndicator field.
+func (o *UnincorporatedPartnership) SetResidentialAddressIndicator(v bool) {
+	o.ResidentialAddressIndicator.Set(&v)
+}
+
+// SetResidentialAddressIndicatorNil sets the value for ResidentialAddressIndicator to be an explicit nil
+func (o *UnincorporatedPartnership) SetResidentialAddressIndicatorNil() {
+	o.ResidentialAddressIndicator.Set(nil)
+}
+
+// UnsetResidentialAddressIndicator ensures that no value is present for ResidentialAddressIndicator, not even an explicit nil
+func (o *UnincorporatedPartnership) UnsetResidentialAddressIndicator() {
+	o.ResidentialAddressIndicator.Unset()
+}
+
 // GetTaxInformation returns the TaxInformation field value if set, zero value otherwise.
 func (o *UnincorporatedPartnership) GetTaxInformation() []TaxInformation {
 	if o == nil || common.IsNil(o.TaxInformation) {
@@ -498,6 +543,9 @@ func (o UnincorporatedPartnership) ToMap() (map[string]interface{}, error) {
 	toSerialize["registeredAddress"] = o.RegisteredAddress
 	if !common.IsNil(o.RegistrationNumber) {
 		toSerialize["registrationNumber"] = o.RegistrationNumber
+	}
+	if o.ResidentialAddressIndicator.IsSet() {
+		toSerialize["residentialAddressIndicator"] = o.ResidentialAddressIndicator.Get()
 	}
 	if !common.IsNil(o.TaxInformation) {
 		toSerialize["taxInformation"] = o.TaxInformation

@@ -23,6 +23,8 @@ type BusinessLine struct {
 	Id string `json:"id"`
 	// A code that represents the industry of the legal entity for [marketplaces](https://docs.adyen.com/marketplaces/verification-requirements/reference-additional-products/#list-industry-codes) or [platforms](https://docs.adyen.com/platforms/verification-requirements/reference-additional-products/#list-industry-codes). For example, **4431A** for computer software stores.
 	IndustryCode string `json:"industryCode"`
+	// The description of the industry code.
+	IndustryCodeDescription *string `json:"industryCodeDescription,omitempty"`
 	// Unique identifier of the [legal entity](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/legalEntities__resParam_id) that owns the business line.
 	LegalEntityId string `json:"legalEntityId"`
 	// The verification errors related to capabilities for this supporting entity.
@@ -104,6 +106,38 @@ func (o *BusinessLine) GetIndustryCodeOk() (*string, bool) {
 // SetIndustryCode sets field value
 func (o *BusinessLine) SetIndustryCode(v string) {
 	o.IndustryCode = v
+}
+
+// GetIndustryCodeDescription returns the IndustryCodeDescription field value if set, zero value otherwise.
+func (o *BusinessLine) GetIndustryCodeDescription() string {
+	if o == nil || common.IsNil(o.IndustryCodeDescription) {
+		var ret string
+		return ret
+	}
+	return *o.IndustryCodeDescription
+}
+
+// GetIndustryCodeDescriptionOk returns a tuple with the IndustryCodeDescription field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BusinessLine) GetIndustryCodeDescriptionOk() (*string, bool) {
+	if o == nil || common.IsNil(o.IndustryCodeDescription) {
+		return nil, false
+	}
+	return o.IndustryCodeDescription, true
+}
+
+// HasIndustryCodeDescription returns a boolean if a field has been set.
+func (o *BusinessLine) HasIndustryCodeDescription() bool {
+	if o != nil && !common.IsNil(o.IndustryCodeDescription) {
+		return true
+	}
+
+	return false
+}
+
+// SetIndustryCodeDescription gets a reference to the given string and assigns it to the IndustryCodeDescription field.
+func (o *BusinessLine) SetIndustryCodeDescription(v string) {
+	o.IndustryCodeDescription = &v
 }
 
 // GetLegalEntityId returns the LegalEntityId field value
@@ -326,6 +360,9 @@ func (o BusinessLine) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["industryCode"] = o.IndustryCode
+	if !common.IsNil(o.IndustryCodeDescription) {
+		toSerialize["industryCodeDescription"] = o.IndustryCodeDescription
+	}
 	toSerialize["legalEntityId"] = o.LegalEntityId
 	if !common.IsNil(o.Problems) {
 		toSerialize["problems"] = o.Problems
