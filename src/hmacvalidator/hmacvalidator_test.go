@@ -125,6 +125,13 @@ func Test_Hmacvalidator(t *testing.T) {
 		_, err := CalculateHmac(payloadAsString, "")
 		assert.NotNil(t, err)
 		assert.False(t, ValidateHmacPayload(forged, "", payloadAsString))
-		assert.False(t, ValidateHmac(notificationRequestItem, ""))
+
+		itemMac := hmac.New(sha256.New, nil)
+		itemMac.Write([]byte(GetDataToSign(notificationRequestItem)))
+		forgedItem := notificationRequestItem
+		forgedItem.AdditionalData = &map[string]interface{}{
+			"hmacSignature": base64.StdEncoding.EncodeToString(itemMac.Sum(nil)),
+		}
+		assert.False(t, ValidateHmac(forgedItem, ""))
 	})
 }
