@@ -27,7 +27,7 @@ type TransferData struct {
 	BalancePlatform *string `json:"balancePlatform,omitempty"`
 	// The list of the latest balance statuses in the transfer.
 	Balances []BalanceMutation `json:"balances,omitempty"`
-	// The category of the transfer.  Possible values:   - **bank**: A transfer involving a [transfer instrument](https://docs.adyen.com/api-explorer/legalentity/latest/post/transferInstruments#responses-200-id) or a bank account.  - **card**: A transfer involving a third-party card.  - **internal**: A transfer between [balance accounts](https://docs.adyen.com/api-explorer/balanceplatform/latest/post/balanceAccounts#responses-200-id) within your platform.  - **issuedCard**: A transfer initiated by an Adyen-issued card.  - **platformPayment**: Funds movements related to payments that are acquired for your users.  - **topUp**: An incoming transfer initiated by your user to top up their balance account.
+	// The category of the transfer.  Possible values:   - **bank**: A transfer involving a [transfer instrument](https://docs.adyen.com/api-explorer/legalentity/latest/post/transferInstruments#responses-200-id) or a bank account.  - **card**: A transfer involving a third-party card.  - **interest**: A transfer that settles accrued [interest](https://docs.adyen.com/business-accounts/earn-returns) on a business account.  - **internal**: A transfer between [balance accounts](https://docs.adyen.com/api-explorer/balanceplatform/latest/post/balanceAccounts#responses-200-id) within your platform.  - **issuedCard**: A transfer initiated by an Adyen-issued card.  - **platformPayment**: Funds movements related to payments that are acquired for your users.  - **topUp**: An incoming transfer initiated by your user to top up their balance account.
 	Category     string                            `json:"category"`
 	CategoryData *TransferDataCategoryData         `json:"categoryData,omitempty"`
 	Counterparty *TransferNotificationCounterParty `json:"counterparty,omitempty"`
@@ -1239,7 +1239,7 @@ func (v *NullableTransferData) UnmarshalJSON(src []byte) error {
 }
 
 func (o *TransferData) isValidCategory() bool {
-	var allowedEnumValues = []string{"bank", "card", "internal", "issuedCard", "platformPayment", "topUp"}
+	var allowedEnumValues = []string{"bank", "card", "interest", "internal", "issuedCard", "platformPayment", "topUp"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetCategory() == allowed {
 			return true
@@ -1275,7 +1275,7 @@ func (o *TransferData) isValidStatus() bool {
 	return false
 }
 func (o *TransferData) isValidType() bool {
-	var allowedEnumValues = []string{"payment", "capture", "captureReversal", "refund", "refundReversal", "chargeback", "chargebackCorrection", "chargebackReversal", "chargebackReversalCorrection", "secondChargeback", "secondChargebackCorrection", "atmWithdrawal", "atmWithdrawalReversal", "internalTransfer", "internalDirectDebit", "manualCorrection", "invoiceDeduction", "depositCorrection", "reserveAdjustment", "bankTransfer", "bankDirectDebit", "cardTransfer", "miscCost", "paymentCost", "fee", "leftover", "grant", "capitalFundsCollection", "cashOutInstruction", "cashoutFee", "cashoutRepayment", "cashoutFunding", "repayment", "installment", "installmentReversal", "balanceAdjustment", "balanceRollover", "balanceMigration", "fxSell", "fxBuy"}
+	var allowedEnumValues = []string{"payment", "capture", "captureReversal", "refund", "refundReversal", "chargeback", "chargebackCorrection", "chargebackReversal", "chargebackReversalCorrection", "secondChargeback", "secondChargebackCorrection", "atmWithdrawal", "atmWithdrawalReversal", "internalTransfer", "internalDirectDebit", "manualCorrection", "invoiceDeduction", "depositCorrection", "reserveAdjustment", "bankTransfer", "bankDirectDebit", "cardTransfer", "miscCost", "paymentCost", "fee", "leftover", "grant", "capitalFundsCollection", "cashOutInstruction", "cashoutFee", "cashoutRepayment", "cashoutFunding", "repayment", "installment", "installmentReversal", "balanceAdjustment", "balanceRollover", "balanceMigration", "interestPayout", "fxSell", "fxBuy"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true
