@@ -1,6 +1,9 @@
 package hmacvalidator
 
 import (
+	"crypto/hmac"
+	"crypto/sha256"
+	"encoding/base64"
 	"testing"
 	"time"
 
@@ -112,5 +115,23 @@ func Test_Hmacvalidator(t *testing.T) {
 		t.Run("Test invalid HMAC from string payload", func(t *testing.T) {
 			assert.False(t, ValidateHmacPayload("MismatchingHmacKey=", key, payloadAsString))
 		})
+	})
+	t.Run("Empty key", func(t *testing.T) {
+		// a signature anyone can compute without knowing the key
+		mac := hmac.New(sha256.New, nil)
+		mac.Write([]byte(payloadAsString))
+		forged := base64.StdEncoding.EncodeToString(mac.Sum(nil))
+
+		_, err := CalculateHmac(payloadAsString, "")
+		assert.NotNil(t, err)
+		assert.False(t, ValidateHmacPayload(forged, "", payloadAsString))
+
+		itemMac := hmac.New(sha256.New, nil)
+		itemMac.Write([]byte(GetDataToSign(notificationRequestItem)))
+		forgedItem := notificationRequestItem
+		forgedItem.AdditionalData = &map[string]interface{}{
+			"hmacSignature": base64.StdEncoding.EncodeToString(itemMac.Sum(nil)),
+		}
+		assert.False(t, ValidateHmac(forgedItem, ""))
 	})
 }

@@ -105,6 +105,10 @@ func encode(data string, secret string) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("failed to generate HMAC: %s", err.Error())
 	}
+	// An empty key would produce a signature anyone can compute.
+	if len(key) == 0 {
+		return "", fmt.Errorf("failed to generate HMAC: empty HMAC key")
+	}
 	h := hmac.New(sha256.New, key)
 	h.Write([]byte(data))
 	return base64.StdEncoding.EncodeToString(h.Sum(nil)), nil
