@@ -1,8 +1,8 @@
 {
   "service": "disputewebhooks",
   "project": "go",
-  "generatedAt": "2026-07-27T10:29:16Z",
-  "openapiCommitSha": "2f7d0e1961772ee974be4ed268282cf2ba8f6e03",
-  "automationCommitSha": "0c108bd8050cf480d2710b78b770afdfbdd89397",
-  "libraryCommitSha": "770e5486c9466329699322894e5f93fe6a39684e"
+  "generatedAt": "2026-11-06T10:34:37Z",
+  "openapiCommitSha": "e7986c7dad1253fed107c4e7b90716497165b86d",
+  "automationCommitSha": "ae7e57613c3a29391a4adb4ff02e9ddda4611b16",
+  "libraryCommitSha": "f96755ef625d239477ff4a41940994aeb77f1cdc"
 }
