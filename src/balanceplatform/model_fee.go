@@ -19,6 +19,7 @@ var _ common.MappedNullable = &Fee{}
 
 // Fee struct for Fee
 type Fee struct {
+	// Contains the fee amount.
 	Amount Amount `json:"amount"`
 }
 

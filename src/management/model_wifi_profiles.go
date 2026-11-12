@@ -21,6 +21,7 @@ var _ common.MappedNullable = &WifiProfiles{}
 type WifiProfiles struct {
 	// List of remote Wi-Fi profiles.
 	Profiles []Profile `json:"profiles,omitempty"`
+	// General Wi-Fi settings.
 	Settings *Settings `json:"settings,omitempty"`
 }
 

@@ -20,9 +20,11 @@ var _ common.MappedNullable = &Repayment{}
 // Repayment struct for Repayment
 type Repayment struct {
 	// The repayment that is deducted daily from incoming net volume, in [basis points](https://www.investopedia.com/terms/b/basispoint.asp).
-	BasisPoints int32               `json:"basisPoints"`
-	Term        *RepaymentTerm      `json:"term,omitempty"`
-	Threshold   *ThresholdRepayment `json:"threshold,omitempty"`
+	BasisPoints int32 `json:"basisPoints"`
+	// An object containing the details of the configuration for repayment term.
+	Term *RepaymentTerm `json:"term,omitempty"`
+	// An object containing the details of the 30-day repayment threshold.
+	Threshold *ThresholdRepayment `json:"threshold,omitempty"`
 }
 
 // NewRepayment instantiates a new Repayment object

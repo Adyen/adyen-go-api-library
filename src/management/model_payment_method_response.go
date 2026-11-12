@@ -19,6 +19,7 @@ var _ common.MappedNullable = &PaymentMethodResponse{}
 
 // PaymentMethodResponse struct for PaymentMethodResponse
 type PaymentMethodResponse struct {
+	// Pagination references.
 	Links *PaginationLinks `json:"_links,omitempty"`
 	// The list of supported payment methods and their details.
 	Data []PaymentMethod `json:"data,omitempty"`
@@ -26,7 +27,7 @@ type PaymentMethodResponse struct {
 	ItemsTotal int32 `json:"itemsTotal"`
 	// Total number of pages.
 	PagesTotal int32 `json:"pagesTotal"`
-	// Payment method types with errors.
+	// The payment method types that were not successfully requested and their corresponding errors.
 	TypesWithErrors []string `json:"typesWithErrors,omitempty"`
 }
 

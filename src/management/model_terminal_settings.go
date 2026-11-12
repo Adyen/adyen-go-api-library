@@ -19,29 +19,62 @@ var _ common.MappedNullable = &TerminalSettings{}
 
 // TerminalSettings struct for TerminalSettings
 type TerminalSettings struct {
+	// Settings to define the header of the shopper receipt.
 	CardholderReceipt *CardholderReceipt `json:"cardholderReceipt,omitempty"`
-	Connectivity      *Connectivity      `json:"connectivity,omitempty"`
+	// Settings for terminal connectivity features.
+	Connectivity *Connectivity `json:"connectivity,omitempty"`
+	// Settings for Dynamic Currency Conversion (DCC).
+	Dcc *Dcc `json:"dcc,omitempty"`
 	// Settings for tipping with or without predefined options to choose from. The maximum number of predefined options is four, or three plus the option to enter a custom tip.
-	Gratuities           []Gratuity            `json:"gratuities,omitempty"`
-	Hardware             *Hardware             `json:"hardware,omitempty"`
-	Localization         *Localization         `json:"localization,omitempty"`
-	Nexo                 *Nexo                 `json:"nexo,omitempty"`
-	OfflineProcessing    *OfflineProcessing    `json:"offlineProcessing,omitempty"`
-	Opi                  *Opi                  `json:"opi,omitempty"`
-	Passcodes            *Passcodes            `json:"passcodes,omitempty"`
-	PayAtTable           *PayAtTable           `json:"payAtTable,omitempty"`
-	Payment              *Payment              `json:"payment,omitempty"`
-	ReceiptOptions       *ReceiptOptions       `json:"receiptOptions,omitempty"`
-	ReceiptPrinting      *ReceiptPrinting      `json:"receiptPrinting,omitempty"`
-	Refunds              *Refunds              `json:"refunds,omitempty"`
-	Signature            *Signature            `json:"signature,omitempty"`
-	Standalone           *Standalone           `json:"standalone,omitempty"`
-	StoreAndForward      *StoreAndForward      `json:"storeAndForward,omitempty"`
-	Surcharge            *Surcharge            `json:"surcharge,omitempty"`
-	TapToPay             *TapToPay             `json:"tapToPay,omitempty"`
+	Gratuities []Gratuity `json:"gratuities,omitempty"`
+	// Settings for terminal hardware features.
+	Hardware *Hardware `json:"hardware,omitempty"`
+	// Settings for the home screen.
+	HomeScreen *HomeScreenSettings `json:"homeScreen,omitempty"`
+	// Settings for kiosk mode.
+	KioskMode *KioskModeSettings `json:"kioskMode,omitempty"`
+	// Settings for localization.
+	Localization *Localization `json:"localization,omitempty"`
+	// Settings for Mail Order/Telephone Order transactions.
+	Moto *Moto `json:"moto,omitempty"`
+	// Settings for a Terminal API integration.
+	Nexo *Nexo `json:"nexo,omitempty"`
+	// Settings for EMV [offline payment](https://docs.adyen.com/point-of-sale/offline-payments) features.
+	OfflineProcessing *OfflineProcessing `json:"offlineProcessing,omitempty"`
+	// Settings for an Oracle Payment Interface (OPI) integration.
+	Opi *Opi `json:"opi,omitempty"`
+	// Settings for [passcodes](https://docs.adyen.com/point-of-sale/managing-terminals/menu-access?tab=manage_passcodes_with_an_api_call_2#manage-passcodes) features.
+	Passcodes *Passcodes `json:"passcodes,omitempty"`
+	// Settings for [Pay-at-table](https://docs.adyen.com/point-of-sale/pay-at-x) features.
+	PayAtTable *PayAtTable `json:"payAtTable,omitempty"`
+	// Settings for payment features.
+	Payment *Payment `json:"payment,omitempty"`
+	// Generic receipt settings.
+	ReceiptOptions *ReceiptOptions `json:"receiptOptions,omitempty"`
+	// Transaction outcomes that you want the terminal to print a merchant receipt or a shopper receipt for.
+	ReceiptPrinting *ReceiptPrinting `json:"receiptPrinting,omitempty"`
+	// Settings for refunds.
+	Refunds *Refunds `json:"refunds,omitempty"`
+	// Show the tipping amount calculated from the percentage next to each tipping percentage option on the terminal screen, for example `10 % | 10 EUR` for a 100 EUR payment.
+	ShowCalculatedPercentageTippingAmount common.NullableBool `json:"showCalculatedPercentageTippingAmount,omitempty"`
+	// Settings to skip signature, sign on display, or sign on receipt.
+	Signature *Signature `json:"signature,omitempty"`
+	// Skip the tip confirmation step of the Adyen payment app on the terminal. Set to **true** only if your own app that handles tipping is installed on the same terminal. If your app is not installed on the terminal, set to **false**.
+	SkipTipConfirmationOnTerminal common.NullableBool `json:"skipTipConfirmationOnTerminal,omitempty"`
+	// Settings for [standalone](https://docs.adyen.com/point-of-sale/standalone/standalone-build/set-up-standalone#set-up-standalone-using-an-api-call) features.
+	Standalone *Standalone `json:"standalone,omitempty"`
+	// Settings for store-and-forward offline payments. The `maxAmount`, `maxPayments`, and `supportedCardTypes` parameters must be configured, either in the request or inherited from a higher level in your account structure.
+	StoreAndForward *StoreAndForward `json:"storeAndForward,omitempty"`
+	// Settings for payment [surcharge](https://docs.adyen.com/point-of-sale/surcharge) features.
+	Surcharge *Surcharge `json:"surcharge,omitempty"`
+	// Settings for Tap to Pay.
+	TapToPay *TapToPay `json:"tapToPay,omitempty"`
+	// Settings to define the behaviour of the payment terminal.
 	TerminalInstructions *TerminalInstructions `json:"terminalInstructions,omitempty"`
-	Timeouts             *Timeouts             `json:"timeouts,omitempty"`
-	WifiProfiles         *WifiProfiles         `json:"wifiProfiles,omitempty"`
+	// Settings for device [time-outs](https://docs.adyen.com/point-of-sale/pos-timeouts#device-time-out).
+	Timeouts *Timeouts `json:"timeouts,omitempty"`
+	// Remote Wi-Fi profiles for WPA and WPA2 PSK and EAP Wi-Fi networks.
+	WifiProfiles *WifiProfiles `json:"wifiProfiles,omitempty"`
 }
 
 // NewTerminalSettings instantiates a new TerminalSettings object
@@ -125,6 +158,38 @@ func (o *TerminalSettings) SetConnectivity(v Connectivity) {
 	o.Connectivity = &v
 }
 
+// GetDcc returns the Dcc field value if set, zero value otherwise.
+func (o *TerminalSettings) GetDcc() Dcc {
+	if o == nil || common.IsNil(o.Dcc) {
+		var ret Dcc
+		return ret
+	}
+	return *o.Dcc
+}
+
+// GetDccOk returns a tuple with the Dcc field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TerminalSettings) GetDccOk() (*Dcc, bool) {
+	if o == nil || common.IsNil(o.Dcc) {
+		return nil, false
+	}
+	return o.Dcc, true
+}
+
+// HasDcc returns a boolean if a field has been set.
+func (o *TerminalSettings) HasDcc() bool {
+	if o != nil && !common.IsNil(o.Dcc) {
+		return true
+	}
+
+	return false
+}
+
+// SetDcc gets a reference to the given Dcc and assigns it to the Dcc field.
+func (o *TerminalSettings) SetDcc(v Dcc) {
+	o.Dcc = &v
+}
+
 // GetGratuities returns the Gratuities field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TerminalSettings) GetGratuities() []Gratuity {
 	if o == nil {
@@ -146,7 +211,7 @@ func (o *TerminalSettings) GetGratuitiesOk() ([]Gratuity, bool) {
 
 // HasGratuities returns a boolean if a field has been set.
 func (o *TerminalSettings) HasGratuities() bool {
-	if o != nil && common.IsNil(o.Gratuities) {
+	if o != nil && !common.IsNil(o.Gratuities) {
 		return true
 	}
 
@@ -190,6 +255,70 @@ func (o *TerminalSettings) SetHardware(v Hardware) {
 	o.Hardware = &v
 }
 
+// GetHomeScreen returns the HomeScreen field value if set, zero value otherwise.
+func (o *TerminalSettings) GetHomeScreen() HomeScreenSettings {
+	if o == nil || common.IsNil(o.HomeScreen) {
+		var ret HomeScreenSettings
+		return ret
+	}
+	return *o.HomeScreen
+}
+
+// GetHomeScreenOk returns a tuple with the HomeScreen field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TerminalSettings) GetHomeScreenOk() (*HomeScreenSettings, bool) {
+	if o == nil || common.IsNil(o.HomeScreen) {
+		return nil, false
+	}
+	return o.HomeScreen, true
+}
+
+// HasHomeScreen returns a boolean if a field has been set.
+func (o *TerminalSettings) HasHomeScreen() bool {
+	if o != nil && !common.IsNil(o.HomeScreen) {
+		return true
+	}
+
+	return false
+}
+
+// SetHomeScreen gets a reference to the given HomeScreenSettings and assigns it to the HomeScreen field.
+func (o *TerminalSettings) SetHomeScreen(v HomeScreenSettings) {
+	o.HomeScreen = &v
+}
+
+// GetKioskMode returns the KioskMode field value if set, zero value otherwise.
+func (o *TerminalSettings) GetKioskMode() KioskModeSettings {
+	if o == nil || common.IsNil(o.KioskMode) {
+		var ret KioskModeSettings
+		return ret
+	}
+	return *o.KioskMode
+}
+
+// GetKioskModeOk returns a tuple with the KioskMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TerminalSettings) GetKioskModeOk() (*KioskModeSettings, bool) {
+	if o == nil || common.IsNil(o.KioskMode) {
+		return nil, false
+	}
+	return o.KioskMode, true
+}
+
+// HasKioskMode returns a boolean if a field has been set.
+func (o *TerminalSettings) HasKioskMode() bool {
+	if o != nil && !common.IsNil(o.KioskMode) {
+		return true
+	}
+
+	return false
+}
+
+// SetKioskMode gets a reference to the given KioskModeSettings and assigns it to the KioskMode field.
+func (o *TerminalSettings) SetKioskMode(v KioskModeSettings) {
+	o.KioskMode = &v
+}
+
 // GetLocalization returns the Localization field value if set, zero value otherwise.
 func (o *TerminalSettings) GetLocalization() Localization {
 	if o == nil || common.IsNil(o.Localization) {
@@ -220,6 +349,38 @@ func (o *TerminalSettings) HasLocalization() bool {
 // SetLocalization gets a reference to the given Localization and assigns it to the Localization field.
 func (o *TerminalSettings) SetLocalization(v Localization) {
 	o.Localization = &v
+}
+
+// GetMoto returns the Moto field value if set, zero value otherwise.
+func (o *TerminalSettings) GetMoto() Moto {
+	if o == nil || common.IsNil(o.Moto) {
+		var ret Moto
+		return ret
+	}
+	return *o.Moto
+}
+
+// GetMotoOk returns a tuple with the Moto field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TerminalSettings) GetMotoOk() (*Moto, bool) {
+	if o == nil || common.IsNil(o.Moto) {
+		return nil, false
+	}
+	return o.Moto, true
+}
+
+// HasMoto returns a boolean if a field has been set.
+func (o *TerminalSettings) HasMoto() bool {
+	if o != nil && !common.IsNil(o.Moto) {
+		return true
+	}
+
+	return false
+}
+
+// SetMoto gets a reference to the given Moto and assigns it to the Moto field.
+func (o *TerminalSettings) SetMoto(v Moto) {
+	o.Moto = &v
 }
 
 // GetNexo returns the Nexo field value if set, zero value otherwise.
@@ -510,6 +671,49 @@ func (o *TerminalSettings) SetRefunds(v Refunds) {
 	o.Refunds = &v
 }
 
+// GetShowCalculatedPercentageTippingAmount returns the ShowCalculatedPercentageTippingAmount field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TerminalSettings) GetShowCalculatedPercentageTippingAmount() bool {
+	if o == nil || common.IsNil(o.ShowCalculatedPercentageTippingAmount.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.ShowCalculatedPercentageTippingAmount.Get()
+}
+
+// GetShowCalculatedPercentageTippingAmountOk returns a tuple with the ShowCalculatedPercentageTippingAmount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TerminalSettings) GetShowCalculatedPercentageTippingAmountOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ShowCalculatedPercentageTippingAmount.Get(), o.ShowCalculatedPercentageTippingAmount.IsSet()
+}
+
+// HasShowCalculatedPercentageTippingAmount returns a boolean if a field has been set.
+func (o *TerminalSettings) HasShowCalculatedPercentageTippingAmount() bool {
+	if o != nil && o.ShowCalculatedPercentageTippingAmount.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetShowCalculatedPercentageTippingAmount gets a reference to the given NullableBool and assigns it to the ShowCalculatedPercentageTippingAmount field.
+func (o *TerminalSettings) SetShowCalculatedPercentageTippingAmount(v bool) {
+	o.ShowCalculatedPercentageTippingAmount.Set(&v)
+}
+
+// SetShowCalculatedPercentageTippingAmountNil sets the value for ShowCalculatedPercentageTippingAmount to be an explicit nil
+func (o *TerminalSettings) SetShowCalculatedPercentageTippingAmountNil() {
+	o.ShowCalculatedPercentageTippingAmount.Set(nil)
+}
+
+// UnsetShowCalculatedPercentageTippingAmount ensures that no value is present for ShowCalculatedPercentageTippingAmount, not even an explicit nil
+func (o *TerminalSettings) UnsetShowCalculatedPercentageTippingAmount() {
+	o.ShowCalculatedPercentageTippingAmount.Unset()
+}
+
 // GetSignature returns the Signature field value if set, zero value otherwise.
 func (o *TerminalSettings) GetSignature() Signature {
 	if o == nil || common.IsNil(o.Signature) {
@@ -540,6 +744,49 @@ func (o *TerminalSettings) HasSignature() bool {
 // SetSignature gets a reference to the given Signature and assigns it to the Signature field.
 func (o *TerminalSettings) SetSignature(v Signature) {
 	o.Signature = &v
+}
+
+// GetSkipTipConfirmationOnTerminal returns the SkipTipConfirmationOnTerminal field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TerminalSettings) GetSkipTipConfirmationOnTerminal() bool {
+	if o == nil || common.IsNil(o.SkipTipConfirmationOnTerminal.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.SkipTipConfirmationOnTerminal.Get()
+}
+
+// GetSkipTipConfirmationOnTerminalOk returns a tuple with the SkipTipConfirmationOnTerminal field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TerminalSettings) GetSkipTipConfirmationOnTerminalOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SkipTipConfirmationOnTerminal.Get(), o.SkipTipConfirmationOnTerminal.IsSet()
+}
+
+// HasSkipTipConfirmationOnTerminal returns a boolean if a field has been set.
+func (o *TerminalSettings) HasSkipTipConfirmationOnTerminal() bool {
+	if o != nil && o.SkipTipConfirmationOnTerminal.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSkipTipConfirmationOnTerminal gets a reference to the given NullableBool and assigns it to the SkipTipConfirmationOnTerminal field.
+func (o *TerminalSettings) SetSkipTipConfirmationOnTerminal(v bool) {
+	o.SkipTipConfirmationOnTerminal.Set(&v)
+}
+
+// SetSkipTipConfirmationOnTerminalNil sets the value for SkipTipConfirmationOnTerminal to be an explicit nil
+func (o *TerminalSettings) SetSkipTipConfirmationOnTerminalNil() {
+	o.SkipTipConfirmationOnTerminal.Set(nil)
+}
+
+// UnsetSkipTipConfirmationOnTerminal ensures that no value is present for SkipTipConfirmationOnTerminal, not even an explicit nil
+func (o *TerminalSettings) UnsetSkipTipConfirmationOnTerminal() {
+	o.SkipTipConfirmationOnTerminal.Unset()
 }
 
 // GetStandalone returns the Standalone field value if set, zero value otherwise.
@@ -782,14 +1029,26 @@ func (o TerminalSettings) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Connectivity) {
 		toSerialize["connectivity"] = o.Connectivity
 	}
+	if !common.IsNil(o.Dcc) {
+		toSerialize["dcc"] = o.Dcc
+	}
 	if o.Gratuities != nil {
 		toSerialize["gratuities"] = o.Gratuities
 	}
 	if !common.IsNil(o.Hardware) {
 		toSerialize["hardware"] = o.Hardware
 	}
+	if !common.IsNil(o.HomeScreen) {
+		toSerialize["homeScreen"] = o.HomeScreen
+	}
+	if !common.IsNil(o.KioskMode) {
+		toSerialize["kioskMode"] = o.KioskMode
+	}
 	if !common.IsNil(o.Localization) {
 		toSerialize["localization"] = o.Localization
+	}
+	if !common.IsNil(o.Moto) {
+		toSerialize["moto"] = o.Moto
 	}
 	if !common.IsNil(o.Nexo) {
 		toSerialize["nexo"] = o.Nexo
@@ -818,8 +1077,14 @@ func (o TerminalSettings) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Refunds) {
 		toSerialize["refunds"] = o.Refunds
 	}
+	if o.ShowCalculatedPercentageTippingAmount.IsSet() {
+		toSerialize["showCalculatedPercentageTippingAmount"] = o.ShowCalculatedPercentageTippingAmount.Get()
+	}
 	if !common.IsNil(o.Signature) {
 		toSerialize["signature"] = o.Signature
+	}
+	if o.SkipTipConfirmationOnTerminal.IsSet() {
+		toSerialize["skipTipConfirmationOnTerminal"] = o.SkipTipConfirmationOnTerminal.Get()
 	}
 	if !common.IsNil(o.Standalone) {
 		toSerialize["standalone"] = o.Standalone

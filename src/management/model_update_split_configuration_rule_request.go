@@ -19,10 +19,12 @@ var _ common.MappedNullable = &UpdateSplitConfigurationRuleRequest{}
 
 // UpdateSplitConfigurationRuleRequest struct for UpdateSplitConfigurationRuleRequest
 type UpdateSplitConfigurationRuleRequest struct {
+	// The card usage type condition that determines whether the split logic applies to commercial cards, consumer cards, or all cards.  * **ANY** (default): The split logic applies to all cards, regardless of its usage type. * **commercial**: The split logic applies to commercial cards only. * **consumer**: The split logic applies to consumer cards only.
+	CardUsageType *string `json:"cardUsageType,omitempty"`
 	// The currency condition that defines whether the split logic applies. Its value must be a three-character [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217).
 	Currency string `json:"currency"`
-	// The funding source of the payment method. This only applies to card transactions.  Possible values: * **credit** * **debit** * **prepaid** * **deferred_debit** * **charged** * **ANY**
-	FundingSource *string `json:"fundingSource,omitempty"`
+	// The funding source of the payment method.  Possible values: * **credit** * **debit** * **prepaid** * **deferred_debit** * **charged** * **ANY**
+	FundingSource string `json:"fundingSource"`
 	// The payment method condition that defines whether the split logic applies.  Possible values: * [Payment method variant](https://docs.adyen.com/development-resources/paymentmethodvariant): Apply the split logic for a specific payment method. * **ANY**: Apply the split logic for all available payment methods.
 	PaymentMethod string `json:"paymentMethod"`
 	// The sales channel condition that defines whether the split logic applies.  Possible values: * **Ecommerce**: Online transactions where the cardholder is present. * **ContAuth**: Card on file and/or subscription transactions, where the cardholder is known to the merchant (returning customer). * **Moto**: Mail-order and telephone-order transactions where the customer is in contact with the merchant via email or telephone. * **POS**: Point-of-sale transactions where the customer is physically present to make a payment using a secure payment terminal. * **ANY**: All sales channels.
@@ -33,9 +35,10 @@ type UpdateSplitConfigurationRuleRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateSplitConfigurationRuleRequest(currency string, paymentMethod string, shopperInteraction string) *UpdateSplitConfigurationRuleRequest {
+func NewUpdateSplitConfigurationRuleRequest(currency string, fundingSource string, paymentMethod string, shopperInteraction string) *UpdateSplitConfigurationRuleRequest {
 	this := UpdateSplitConfigurationRuleRequest{}
 	this.Currency = currency
+	this.FundingSource = fundingSource
 	this.PaymentMethod = paymentMethod
 	this.ShopperInteraction = shopperInteraction
 	return &this
@@ -47,6 +50,38 @@ func NewUpdateSplitConfigurationRuleRequest(currency string, paymentMethod strin
 func NewUpdateSplitConfigurationRuleRequestWithDefaults() *UpdateSplitConfigurationRuleRequest {
 	this := UpdateSplitConfigurationRuleRequest{}
 	return &this
+}
+
+// GetCardUsageType returns the CardUsageType field value if set, zero value otherwise.
+func (o *UpdateSplitConfigurationRuleRequest) GetCardUsageType() string {
+	if o == nil || common.IsNil(o.CardUsageType) {
+		var ret string
+		return ret
+	}
+	return *o.CardUsageType
+}
+
+// GetCardUsageTypeOk returns a tuple with the CardUsageType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateSplitConfigurationRuleRequest) GetCardUsageTypeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.CardUsageType) {
+		return nil, false
+	}
+	return o.CardUsageType, true
+}
+
+// HasCardUsageType returns a boolean if a field has been set.
+func (o *UpdateSplitConfigurationRuleRequest) HasCardUsageType() bool {
+	if o != nil && !common.IsNil(o.CardUsageType) {
+		return true
+	}
+
+	return false
+}
+
+// SetCardUsageType gets a reference to the given string and assigns it to the CardUsageType field.
+func (o *UpdateSplitConfigurationRuleRequest) SetCardUsageType(v string) {
+	o.CardUsageType = &v
 }
 
 // GetCurrency returns the Currency field value
@@ -73,36 +108,28 @@ func (o *UpdateSplitConfigurationRuleRequest) SetCurrency(v string) {
 	o.Currency = v
 }
 
-// GetFundingSource returns the FundingSource field value if set, zero value otherwise.
+// GetFundingSource returns the FundingSource field value
 func (o *UpdateSplitConfigurationRuleRequest) GetFundingSource() string {
-	if o == nil || common.IsNil(o.FundingSource) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.FundingSource
+
+	return o.FundingSource
 }
 
-// GetFundingSourceOk returns a tuple with the FundingSource field value if set, nil otherwise
+// GetFundingSourceOk returns a tuple with the FundingSource field value
 // and a boolean to check if the value has been set.
 func (o *UpdateSplitConfigurationRuleRequest) GetFundingSourceOk() (*string, bool) {
-	if o == nil || common.IsNil(o.FundingSource) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FundingSource, true
+	return &o.FundingSource, true
 }
 
-// HasFundingSource returns a boolean if a field has been set.
-func (o *UpdateSplitConfigurationRuleRequest) HasFundingSource() bool {
-	if o != nil && !common.IsNil(o.FundingSource) {
-		return true
-	}
-
-	return false
-}
-
-// SetFundingSource gets a reference to the given string and assigns it to the FundingSource field.
+// SetFundingSource sets field value
 func (o *UpdateSplitConfigurationRuleRequest) SetFundingSource(v string) {
-	o.FundingSource = &v
+	o.FundingSource = v
 }
 
 // GetPaymentMethod returns the PaymentMethod field value
@@ -163,10 +190,11 @@ func (o UpdateSplitConfigurationRuleRequest) MarshalJSON() ([]byte, error) {
 
 func (o UpdateSplitConfigurationRuleRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["currency"] = o.Currency
-	if !common.IsNil(o.FundingSource) {
-		toSerialize["fundingSource"] = o.FundingSource
+	if !common.IsNil(o.CardUsageType) {
+		toSerialize["cardUsageType"] = o.CardUsageType
 	}
+	toSerialize["currency"] = o.Currency
+	toSerialize["fundingSource"] = o.FundingSource
 	toSerialize["paymentMethod"] = o.PaymentMethod
 	toSerialize["shopperInteraction"] = o.ShopperInteraction
 	return toSerialize, nil
@@ -206,4 +234,14 @@ func (v NullableUpdateSplitConfigurationRuleRequest) MarshalJSON() ([]byte, erro
 func (v *NullableUpdateSplitConfigurationRuleRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
+}
+
+func (o *UpdateSplitConfigurationRuleRequest) isValidCardUsageType() bool {
+	var allowedEnumValues = []string{"commercial", "consumer", "ANY"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetCardUsageType() == allowed {
+			return true
+		}
+	}
+	return false
 }

@@ -22,7 +22,8 @@ type StoreAndForward struct {
 	// The maximum amount that the terminal accepts for a single store-and-forward payment.
 	MaxAmount []MinorUnitsMonetaryValue `json:"maxAmount,omitempty"`
 	// The maximum number of store-and-forward transactions per terminal that you can process while offline.
-	MaxPayments        *int32              `json:"maxPayments,omitempty"`
+	MaxPayments *int32 `json:"maxPayments,omitempty"`
+	// The type of card for which the terminal accepts store-and-forward payments. You can specify multiple card types.
 	SupportedCardTypes *SupportedCardTypes `json:"supportedCardTypes,omitempty"`
 }
 

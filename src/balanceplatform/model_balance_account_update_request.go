@@ -19,12 +19,13 @@ var _ common.MappedNullable = &BalanceAccountUpdateRequest{}
 
 // BalanceAccountUpdateRequest struct for BalanceAccountUpdateRequest
 type BalanceAccountUpdateRequest struct {
-	// The unique identifier of the [account holder](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/accountHolders__resParam_id) associated with the balance account.
+	// The unique identifier of the [account holder](https://docs.adyen.com/api-explorer/balanceplatform/latest/post/accountHolders#responses-200-id) associated with the balance account.
 	AccountHolderId *string `json:"accountHolderId,omitempty"`
 	// A human-readable description of the balance account. You can use this parameter to distinguish between multiple balance accounts under an account holder.
 	Description *string `json:"description,omitempty"`
 	// A set of key and value pairs for general use. The keys do not have specific names and may be used for storing miscellaneous data as desired. > Note that during an update of metadata, the omission of existing key-value pairs will result in the deletion of those key-value pairs.
-	Metadata                     *map[string]string            `json:"metadata,omitempty"`
+	Metadata *map[string]string `json:"metadata,omitempty"`
+	// Contains key-value pairs to configure the sales day closing time and settlement delay for a balance account.
 	PlatformPaymentConfiguration *PlatformPaymentConfiguration `json:"platformPaymentConfiguration,omitempty"`
 	// Your reference to the balance account.
 	Reference *string `json:"reference,omitempty"`

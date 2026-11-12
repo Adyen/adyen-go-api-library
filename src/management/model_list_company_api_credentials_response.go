@@ -19,6 +19,7 @@ var _ common.MappedNullable = &ListCompanyApiCredentialsResponse{}
 
 // ListCompanyApiCredentialsResponse struct for ListCompanyApiCredentialsResponse
 type ListCompanyApiCredentialsResponse struct {
+	// Pagination references.
 	Links *PaginationLinks `json:"_links,omitempty"`
 	// The list of API credentials.
 	Data []CompanyApiCredential `json:"data,omitempty"`

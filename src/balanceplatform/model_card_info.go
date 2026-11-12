@@ -19,19 +19,24 @@ var _ common.MappedNullable = &CardInfo{}
 
 // CardInfo struct for CardInfo
 type CardInfo struct {
+	// Contains the card user's password and mobile phone number. This is required when you issue cards that can be used to make online payments within the EEA and the UK, or can be added to digital wallets. Refer to [3D Secure and digital wallets](https://docs.adyen.com/issuing/3d-secure-and-wallets) for more information.
 	Authentication *Authentication `json:"authentication,omitempty"`
 	// The brand of the physical or the virtual card. Possible values: **visa**, **mc**.
 	Brand string `json:"brand"`
 	// The brand variant of the physical or the virtual card. For example, **visadebit** or **mcprepaid**. >Reach out to your Adyen contact to get the values relevant for your integration.
 	BrandVariant string `json:"brandVariant"`
 	// The name of the cardholder.  Maximum length: 26 characters.
-	CardholderName  string             `json:"cardholderName"`
-	Configuration   *CardConfiguration `json:"configuration,omitempty"`
-	DeliveryContact *DeliveryContact   `json:"deliveryContact,omitempty"`
+	CardholderName string `json:"cardholderName"`
+	// Contains information about the configuration profile for your cards. The configuration profile consists of settings required when creating a physical or a virtual card. You identify a configuration profile with its `configurationProfileId`.  When you provide this field in a request, you can override the settings of an existing configuration profile.  Reach out to your Adyen contact to get the values that you can send in this object.
+	Configuration *CardConfiguration `json:"configuration,omitempty"`
+	// The delivery contact (name and address) for physical card delivery.
+	DeliveryContact *DeliveryContact `json:"deliveryContact,omitempty"`
 	// The form factor of the card. Possible values: **virtual**, **physical**.
 	FormFactor string `json:"formFactor"`
-	// Allocates a specific product range for either a physical or a virtual card. Possible values: **fullySupported**, **secureCorporate**. >Reach out to your Adyen contact to get the values relevant for your integration.
+	// The 3DS configuration of the physical or the virtual card. Possible values: **fullySupported**, **secureCorporate**. > Reach out to your Adyen contact to get the values relevant for your integration.
 	ThreeDSecure *string `json:"threeDSecure,omitempty"`
+	// Specifies how many times the card can be used. Possible values: **singleUse**, **multiUse**.  > Reach out to your Adyen contact to determine the value relevant for your integration.
+	Usage *string `json:"usage,omitempty"`
 }
 
 // NewCardInfo instantiates a new CardInfo object
@@ -279,6 +284,38 @@ func (o *CardInfo) SetThreeDSecure(v string) {
 	o.ThreeDSecure = &v
 }
 
+// GetUsage returns the Usage field value if set, zero value otherwise.
+func (o *CardInfo) GetUsage() string {
+	if o == nil || common.IsNil(o.Usage) {
+		var ret string
+		return ret
+	}
+	return *o.Usage
+}
+
+// GetUsageOk returns a tuple with the Usage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CardInfo) GetUsageOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Usage) {
+		return nil, false
+	}
+	return o.Usage, true
+}
+
+// HasUsage returns a boolean if a field has been set.
+func (o *CardInfo) HasUsage() bool {
+	if o != nil && !common.IsNil(o.Usage) {
+		return true
+	}
+
+	return false
+}
+
+// SetUsage gets a reference to the given string and assigns it to the Usage field.
+func (o *CardInfo) SetUsage(v string) {
+	o.Usage = &v
+}
+
 func (o CardInfo) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -304,6 +341,9 @@ func (o CardInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize["formFactor"] = o.FormFactor
 	if !common.IsNil(o.ThreeDSecure) {
 		toSerialize["threeDSecure"] = o.ThreeDSecure
+	}
+	if !common.IsNil(o.Usage) {
+		toSerialize["usage"] = o.Usage
 	}
 	return toSerialize, nil
 }

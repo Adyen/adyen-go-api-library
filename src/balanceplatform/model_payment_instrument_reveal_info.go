@@ -20,7 +20,8 @@ var _ common.MappedNullable = &PaymentInstrumentRevealInfo{}
 // PaymentInstrumentRevealInfo struct for PaymentInstrumentRevealInfo
 type PaymentInstrumentRevealInfo struct {
 	// The CVC2 value of the card.
-	Cvc        string `json:"cvc"`
+	Cvc string `json:"cvc"`
+	// The expiration date of the card.
 	Expiration Expiry `json:"expiration"`
 	// The primary account number (PAN) of the card.
 	Pan string `json:"pan"`

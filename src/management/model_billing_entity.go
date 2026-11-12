@@ -19,6 +19,7 @@ var _ common.MappedNullable = &BillingEntity{}
 
 // BillingEntity struct for BillingEntity
 type BillingEntity struct {
+	// The address details of the billing entity.
 	Address *Address `json:"address,omitempty"`
 	// The email address of the billing entity.
 	Email *string `json:"email,omitempty"`

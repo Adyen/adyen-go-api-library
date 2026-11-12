@@ -20,9 +20,10 @@ var _ common.MappedNullable = &MerchantLinks{}
 // MerchantLinks struct for MerchantLinks
 type MerchantLinks struct {
 	ApiCredentials *LinksElement `json:"apiCredentials,omitempty"`
-	Self           LinksElement  `json:"self"`
-	Users          *LinksElement `json:"users,omitempty"`
-	Webhooks       *LinksElement `json:"webhooks,omitempty"`
+	// Link to the resource itself.
+	Self     LinksElement  `json:"self"`
+	Users    *LinksElement `json:"users,omitempty"`
+	Webhooks *LinksElement `json:"webhooks,omitempty"`
 }
 
 // NewMerchantLinks instantiates a new MerchantLinks object

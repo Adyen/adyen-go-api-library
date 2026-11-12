@@ -19,6 +19,7 @@ var _ common.MappedNullable = &GrantLimit{}
 
 // GrantLimit struct for GrantLimit
 type GrantLimit struct {
+	// The amount available on the grant account.
 	Amount *Amount `json:"amount,omitempty"`
 }
 

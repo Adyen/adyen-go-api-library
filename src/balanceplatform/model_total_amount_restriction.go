@@ -20,8 +20,9 @@ var _ common.MappedNullable = &TotalAmountRestriction{}
 // TotalAmountRestriction struct for TotalAmountRestriction
 type TotalAmountRestriction struct {
 	// Defines how the condition must be evaluated.
-	Operation string  `json:"operation"`
-	Value     *Amount `json:"value,omitempty"`
+	Operation string `json:"operation"`
+	// The amount value and currency.
+	Value *Amount `json:"value,omitempty"`
 }
 
 // NewTotalAmountRestriction instantiates a new TotalAmountRestriction object

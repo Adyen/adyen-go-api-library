@@ -23,6 +23,9 @@ type Surcharge struct {
 	AskConfirmation *bool `json:"askConfirmation,omitempty"`
 	// Surcharge fees or percentages for specific cards, funding sources (credit or debit), and currencies.
 	Configurations []Configuration `json:"configurations,omitempty"`
+	// Show the maximum surcharge rate to the shopper on the present card screen before they tap.
+	// Deprecated since Management API v1
+	DisclosureOnPresentCard *bool `json:"disclosureOnPresentCard,omitempty"`
 	// Exclude the tip amount from the surcharge calculation.
 	ExcludeGratuityFromSurcharge *bool `json:"excludeGratuityFromSurcharge,omitempty"`
 }
@@ -108,6 +111,41 @@ func (o *Surcharge) SetConfigurations(v []Configuration) {
 	o.Configurations = v
 }
 
+// GetDisclosureOnPresentCard returns the DisclosureOnPresentCard field value if set, zero value otherwise.
+// Deprecated since Management API v1
+func (o *Surcharge) GetDisclosureOnPresentCard() bool {
+	if o == nil || common.IsNil(o.DisclosureOnPresentCard) {
+		var ret bool
+		return ret
+	}
+	return *o.DisclosureOnPresentCard
+}
+
+// GetDisclosureOnPresentCardOk returns a tuple with the DisclosureOnPresentCard field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// Deprecated since Management API v1
+func (o *Surcharge) GetDisclosureOnPresentCardOk() (*bool, bool) {
+	if o == nil || common.IsNil(o.DisclosureOnPresentCard) {
+		return nil, false
+	}
+	return o.DisclosureOnPresentCard, true
+}
+
+// HasDisclosureOnPresentCard returns a boolean if a field has been set.
+func (o *Surcharge) HasDisclosureOnPresentCard() bool {
+	if o != nil && !common.IsNil(o.DisclosureOnPresentCard) {
+		return true
+	}
+
+	return false
+}
+
+// SetDisclosureOnPresentCard gets a reference to the given bool and assigns it to the DisclosureOnPresentCard field.
+// Deprecated since Management API v1
+func (o *Surcharge) SetDisclosureOnPresentCard(v bool) {
+	o.DisclosureOnPresentCard = &v
+}
+
 // GetExcludeGratuityFromSurcharge returns the ExcludeGratuityFromSurcharge field value if set, zero value otherwise.
 func (o *Surcharge) GetExcludeGratuityFromSurcharge() bool {
 	if o == nil || common.IsNil(o.ExcludeGratuityFromSurcharge) {
@@ -155,6 +193,9 @@ func (o Surcharge) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Configurations) {
 		toSerialize["configurations"] = o.Configurations
+	}
+	if !common.IsNil(o.DisclosureOnPresentCard) {
+		toSerialize["disclosureOnPresentCard"] = o.DisclosureOnPresentCard
 	}
 	if !common.IsNil(o.ExcludeGratuityFromSurcharge) {
 		toSerialize["excludeGratuityFromSurcharge"] = o.ExcludeGratuityFromSurcharge

@@ -19,6 +19,7 @@ var _ common.MappedNullable = &ListWebhooksResponse{}
 
 // ListWebhooksResponse struct for ListWebhooksResponse
 type ListWebhooksResponse struct {
+	// Pagination references.
 	Links *PaginationLinks `json:"_links,omitempty"`
 	// Reference to the account.
 	AccountReference *string `json:"accountReference,omitempty"`

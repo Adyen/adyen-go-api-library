@@ -19,60 +19,123 @@ var _ common.MappedNullable = &PaymentMethodSetupInfo{}
 
 // PaymentMethodSetupInfo struct for PaymentMethodSetupInfo
 type PaymentMethodSetupInfo struct {
-	Accel         *AccelInfo         `json:"accel,omitempty"`
-	Affirm        *AffirmInfo        `json:"affirm,omitempty"`
+	// Details to provide if `type` is **accel**.
+	Accel *AccelInfo `json:"accel,omitempty"`
+	// Details to provide if `type` is **affirm**.
+	Affirm *AffirmInfo `json:"affirm,omitempty"`
+	// Details to provide if `type` is **afterpaytouch**.
 	AfterpayTouch *AfterpayTouchInfo `json:"afterpayTouch,omitempty"`
-	Amex          *AmexInfo          `json:"amex,omitempty"`
-	ApplePay      *ApplePayInfo      `json:"applePay,omitempty"`
-	Bcmc          *BcmcInfo          `json:"bcmc,omitempty"`
+	// Details to provide if `type` is **alipay_plus**.
+	AlipayPlus *AlipayPlusInfo `json:"alipayPlus,omitempty"`
+	// Details to provide if `type` is **amex**. For merchants operating in Australia, New Zealand & Canada, JCB and American Express are automatically requested together.
+	Amex *AmexInfo `json:"amex,omitempty"`
+	// Details to provide if `type` is **ancv**.
+	Ancv *AncvInfo `json:"ancv,omitempty"`
+	// Details to provide if `type` is **applepay**.
+	ApplePay *ApplePayInfo `json:"applePay,omitempty"`
+	// Details to provide if `type` is **bcmc** (Bancontact).
+	Bcmc *BcmcInfo `json:"bcmc,omitempty"`
+	// Details to provide if `type` is **boncard**.
+	Boncard *BoncardInfo `json:"boncard,omitempty"`
 	// The unique identifier of the business line. Required if you are a [platform model](https://docs.adyen.com/platforms).
-	BusinessLineId  *string              `json:"businessLineId,omitempty"`
+	BusinessLineId *string `json:"businessLineId,omitempty"`
+	// Details to provide if `type` is **carnet**.
+	Carnet *CarnetInfo `json:"carnet,omitempty"`
+	// Details to provide if `type` is **cartebancaire**.
 	CartesBancaires *CartesBancairesInfo `json:"cartesBancaires,omitempty"`
-	Clearpay        *ClearpayInfo        `json:"clearpay,omitempty"`
+	// Details to provide if `type` is **clearpay**.
+	Clearpay *ClearpayInfo `json:"clearpay,omitempty"`
 	// The list of countries where a payment method is available. By default, all countries supported by the payment method.
-	Countries []string              `json:"countries,omitempty"`
-	Cup       *GenericPmWithTdiInfo `json:"cup,omitempty"`
+	Countries []string `json:"countries,omitempty"`
+	// Details to provide if `type` is **cup** (China Union Pay).
+	Cup *GenericPmWithTdiInfo `json:"cup,omitempty"`
 	// The list of currencies that a payment method supports. By default, all currencies supported by the payment method.
 	Currencies []string `json:"currencies,omitempty"`
 	// The list of custom routing flags to route payment to the intended acquirer.
-	CustomRoutingFlags []string              `json:"customRoutingFlags,omitempty"`
-	Diners             *DinersInfo           `json:"diners,omitempty"`
-	Discover           *GenericPmWithTdiInfo `json:"discover,omitempty"`
-	EftDirectdebitCA   *GenericPmWithTdiInfo `json:"eft_directdebit_CA,omitempty"`
-	EftposAustralia    *GenericPmWithTdiInfo `json:"eftpos_australia,omitempty"`
-	Girocard           *GenericPmWithTdiInfo `json:"girocard,omitempty"`
-	GooglePay          *GooglePayInfo        `json:"googlePay,omitempty"`
-	Ideal              *GenericPmWithTdiInfo `json:"ideal,omitempty"`
-	InteracCard        *GenericPmWithTdiInfo `json:"interac_card,omitempty"`
-	Jcb                *JCBInfo              `json:"jcb,omitempty"`
-	Klarna             *KlarnaInfo           `json:"klarna,omitempty"`
-	Maestro            *GenericPmWithTdiInfo `json:"maestro,omitempty"`
-	Mc                 *GenericPmWithTdiInfo `json:"mc,omitempty"`
-	MealVoucherFR      *MealVoucherFRInfo    `json:"mealVoucher_FR,omitempty"`
-	Nyce               *NyceInfo             `json:"nyce,omitempty"`
-	PaybybankPlaid     *PayByBankPlaidInfo   `json:"paybybank_plaid,omitempty"`
-	Payme              *PayMeInfo            `json:"payme,omitempty"`
-	Paypal             *PayPalInfo           `json:"paypal,omitempty"`
-	Payto              *PayToInfo            `json:"payto,omitempty"`
-	Pulse              *PulseInfo            `json:"pulse,omitempty"`
+	CustomRoutingFlags []string `json:"customRoutingFlags,omitempty"`
+	// Details to provide if `type` is **diners**. For merchants operating in Japan, Diners payments are processed through the JCB network. This means that you must include [JCB-specific fields](https://docs.adyen.com/api-explorer/Management/latest/post/merchants/(merchantId)/paymentMethodSettings/(paymentMethodId)#request-jcb) in this object.
+	Diners *DinersInfo `json:"diners,omitempty"`
+	// Details to provide if `type` is **discover**. For merchants operating in Japan, request [Diners](https://docs.adyen.com/api-explorer/Management/latest/post/merchants/(merchantId)/paymentMethodSettings/(paymentMethodId)#request-diners) payment method instead. Discover is automatically requested, together with Diners.
+	Discover *GenericPmWithTdiInfo `json:"discover,omitempty"`
+	// Details to provide if `type` is **ebt**.
+	Ebt *EbtInfo `json:"ebt,omitempty"`
+	// Details to provide if `type` is **eft_directdebit_CA** (EFT PAD).
+	EftDirectdebitCA *GenericPmWithTdiInfo `json:"eft_directdebit_CA,omitempty"`
+	// Details to provide if `type` is **eftpos_australia**.
+	EftposAustralia *GenericPmWithTdiInfo `json:"eftpos_australia,omitempty"`
+	// Details to provide if `type` is **girocard**.
+	Girocard *GenericPmWithTdiInfo `json:"girocard,omitempty"`
+	// Details to provide if `type` is **givex**.
+	Givex *GivexInfo `json:"givex,omitempty"`
+	// Details to provide if `type` is **googlepay**.
+	GooglePay *GooglePayInfo `json:"googlePay,omitempty"`
+	// Details to provide if `type` is **ideal**.
+	Ideal *GenericPmWithTdiInfo `json:"ideal,omitempty"`
+	// Details to provide if `type` is **interac_card**.
+	InteracCard *GenericPmWithTdiInfo `json:"interac_card,omitempty"`
+	// Details to provide if `type` is **jcb**. For merchants operating in Japan, `midNumber`, `reuseMidNumber`, and `serviceLevel` fields are required. For merchants operating outside of Japan, these fields are not required. For merchants operating in Australia, New Zealand & Canada, JCB and American Express are automatically requested together.
+	Jcb *JCBInfo `json:"jcb,omitempty"`
+	// Details to provide if `type` is **klarna** or its variant.  You can use the following payment method `type` values for Klarna: * **klarna**: Klarna Pay Later * **klarna_account**: Klarna Pay over time * **klarna_paynow**: Klarna Pay now * **klarna_b2b**: [Billie via Klarna](https://docs.adyen.com/payment-methods/klarna/billie)
+	Klarna *KlarnaInfo `json:"klarna,omitempty"`
+	// Details to provide if `type` is **maestro**. In the US, `maestro` is not supported; use `maestro_usa` instead.
+	Maestro *GenericPmWithTdiInfo `json:"maestro,omitempty"`
+	// Details to provide if `type` is **maestro_usa**. Only for Maestro USA, otherwise use `maestro`.
+	MaestroUsa *GenericPmWithTdiInfo `json:"maestro_usa,omitempty"`
+	// Details to provide if `type` is **mc**.
+	Mc *GenericPmWithTdiInfo `json:"mc,omitempty"`
+	// Details to provide if `type` is **mealVoucher_FR**.
+	MealVoucherFR *MealVoucherFRInfo `json:"mealVoucher_FR,omitempty"`
+	// Details to provide if `type` is **nyce**.
+	Nyce *NyceInfo `json:"nyce,omitempty"`
+	// Details to provide if `type` is **paybybank_plaid**.
+	PaybybankPlaid *PayByBankPlaidInfo `json:"paybybank_plaid,omitempty"`
+	// Details to provide if `type` is **paybybank_plaid_ca**.
+	PaybybankPlaidCa *PayByBankPlaidInfo `json:"paybybank_plaid_ca,omitempty"`
+	// Details to provide if `type` is **payme**.
+	Payme *PayMeInfo `json:"payme,omitempty"`
+	// Details to provide if `type` is **paypal**.
+	Paypal *PayPalInfo `json:"paypal,omitempty"`
+	// Details to provide if `type` is **payto**.
+	Payto *PayToInfo `json:"payto,omitempty"`
+	// Details to provide if `type` is **pix**.
+	Pix *PixInfo `json:"pix,omitempty"`
+	// Details to provide if `type` is **pulse**.
+	Pulse *PulseInfo `json:"pulse,omitempty"`
 	// Your reference for the payment method. Supported characters a-z, A-Z, 0-9.
 	Reference *string `json:"reference,omitempty"`
-	// The sales channel. Required if the merchant account does not have a sales channel. When you provide this field, it overrides the default sales channel set on the merchant account.  Possible values: **eCommerce**, **pos**, **contAuth**, and **moto**.
-	ShopperInteraction *string     `json:"shopperInteraction,omitempty"`
-	Sodexo             *SodexoInfo `json:"sodexo,omitempty"`
-	Sofort             *SofortInfo `json:"sofort,omitempty"`
-	Star               *StarInfo   `json:"star,omitempty"`
+	// Details to provide if `type` is **sepadirectdebit**.
+	Sepadirectdebit *SepaDirectDebitInfo `json:"sepadirectdebit,omitempty"`
+	// The sales channel. Required if: - The merchant account does not have a sales channel. - `type` is **alipay**.  When you provide this field, it overrides the default sales channel set on the merchant account.  Possible values: **eCommerce**, **pos**, **contAuth**, and **moto**.
+	ShopperInteraction *string `json:"shopperInteraction,omitempty"`
+	// Details to provide if `type` is **sodexo**.
+	Sodexo *SodexoInfo `json:"sodexo,omitempty"`
+	// Sofort details.
+	// Deprecated since Management API v1
+	Sofort *SofortInfo `json:"sofort,omitempty"`
+	// Details to provide if `type` is **star**.
+	Star *StarInfo `json:"star,omitempty"`
 	// The unique identifier of the store for which to configure the payment method, if any.
-	StoreIds []string    `json:"storeIds,omitempty"`
-	Swish    *SwishInfo  `json:"swish,omitempty"`
-	Ticket   *TicketInfo `json:"ticket,omitempty"`
-	Twint    *TwintInfo  `json:"twint,omitempty"`
-	// Payment method [variant](https://docs.adyen.com/development-resources/paymentmethodvariant#management-api).
-	Type         string                `json:"type"`
-	Vipps        *VippsInfo            `json:"vipps,omitempty"`
-	Visa         *GenericPmWithTdiInfo `json:"visa,omitempty"`
-	Wechatpay    *WeChatPayInfo        `json:"wechatpay,omitempty"`
-	WechatpayPos *WeChatPayPosInfo     `json:"wechatpay_pos,omitempty"`
+	StoreIds []string `json:"storeIds,omitempty"`
+	// Details to provide if `type` is **svs**.
+	Svs *SvsInfo `json:"svs,omitempty"`
+	// Details to provide if `type` is **swish**.  - This field is required only if you have a contract with Swish. Swish handles settlement directly with you (not through Adyen).  - If not specified then it's assumed that you are using Adyen's contract with Swish.You don't have a direct relationship with Swish.
+	Swish *SwishInfo `json:"swish,omitempty"`
+	// Details to provide if `type` is **ticket** (Edenred Brazil).
+	Ticket *TicketInfo `json:"ticket,omitempty"`
+	// Details to provide if `type` is **twint**.
+	Twint *TwintInfo `json:"twint,omitempty"`
+	// Payment method [variant](https://docs.adyen.com/development-resources/paymentmethodvariant#management-api).  For payment method variant **cartebancaire**, method-specific details are returned in the [`cartesBancaires`](https://docs.adyen.com/api-explorer/Management/latest/post/merchants/(merchantId)/paymentMethodSettings#responses-200-cartesBancaires) object of the response.
+	Type string `json:"type"`
+	// Details to provide if `type` is **valuelink**.
+	Valuelink *ValuelinkInfo `json:"valuelink,omitempty"`
+	// Details to provide if `type` is **vipps**.
+	Vipps *VippsInfo `json:"vipps,omitempty"`
+	// Details to provide if `type` is **visa**.
+	Visa *GenericPmWithTdiInfo `json:"visa,omitempty"`
+	// Details to provide if `type` is **wechatpay**.
+	Wechatpay *WeChatPayInfo `json:"wechatpay,omitempty"`
+	// Details to provide if `type` is **wechatpay_pos**.
+	WechatpayPos *WeChatPayPosInfo `json:"wechatpay_pos,omitempty"`
 }
 
 // NewPaymentMethodSetupInfo instantiates a new PaymentMethodSetupInfo object
@@ -189,6 +252,38 @@ func (o *PaymentMethodSetupInfo) SetAfterpayTouch(v AfterpayTouchInfo) {
 	o.AfterpayTouch = &v
 }
 
+// GetAlipayPlus returns the AlipayPlus field value if set, zero value otherwise.
+func (o *PaymentMethodSetupInfo) GetAlipayPlus() AlipayPlusInfo {
+	if o == nil || common.IsNil(o.AlipayPlus) {
+		var ret AlipayPlusInfo
+		return ret
+	}
+	return *o.AlipayPlus
+}
+
+// GetAlipayPlusOk returns a tuple with the AlipayPlus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodSetupInfo) GetAlipayPlusOk() (*AlipayPlusInfo, bool) {
+	if o == nil || common.IsNil(o.AlipayPlus) {
+		return nil, false
+	}
+	return o.AlipayPlus, true
+}
+
+// HasAlipayPlus returns a boolean if a field has been set.
+func (o *PaymentMethodSetupInfo) HasAlipayPlus() bool {
+	if o != nil && !common.IsNil(o.AlipayPlus) {
+		return true
+	}
+
+	return false
+}
+
+// SetAlipayPlus gets a reference to the given AlipayPlusInfo and assigns it to the AlipayPlus field.
+func (o *PaymentMethodSetupInfo) SetAlipayPlus(v AlipayPlusInfo) {
+	o.AlipayPlus = &v
+}
+
 // GetAmex returns the Amex field value if set, zero value otherwise.
 func (o *PaymentMethodSetupInfo) GetAmex() AmexInfo {
 	if o == nil || common.IsNil(o.Amex) {
@@ -219,6 +314,38 @@ func (o *PaymentMethodSetupInfo) HasAmex() bool {
 // SetAmex gets a reference to the given AmexInfo and assigns it to the Amex field.
 func (o *PaymentMethodSetupInfo) SetAmex(v AmexInfo) {
 	o.Amex = &v
+}
+
+// GetAncv returns the Ancv field value if set, zero value otherwise.
+func (o *PaymentMethodSetupInfo) GetAncv() AncvInfo {
+	if o == nil || common.IsNil(o.Ancv) {
+		var ret AncvInfo
+		return ret
+	}
+	return *o.Ancv
+}
+
+// GetAncvOk returns a tuple with the Ancv field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodSetupInfo) GetAncvOk() (*AncvInfo, bool) {
+	if o == nil || common.IsNil(o.Ancv) {
+		return nil, false
+	}
+	return o.Ancv, true
+}
+
+// HasAncv returns a boolean if a field has been set.
+func (o *PaymentMethodSetupInfo) HasAncv() bool {
+	if o != nil && !common.IsNil(o.Ancv) {
+		return true
+	}
+
+	return false
+}
+
+// SetAncv gets a reference to the given AncvInfo and assigns it to the Ancv field.
+func (o *PaymentMethodSetupInfo) SetAncv(v AncvInfo) {
+	o.Ancv = &v
 }
 
 // GetApplePay returns the ApplePay field value if set, zero value otherwise.
@@ -285,6 +412,38 @@ func (o *PaymentMethodSetupInfo) SetBcmc(v BcmcInfo) {
 	o.Bcmc = &v
 }
 
+// GetBoncard returns the Boncard field value if set, zero value otherwise.
+func (o *PaymentMethodSetupInfo) GetBoncard() BoncardInfo {
+	if o == nil || common.IsNil(o.Boncard) {
+		var ret BoncardInfo
+		return ret
+	}
+	return *o.Boncard
+}
+
+// GetBoncardOk returns a tuple with the Boncard field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodSetupInfo) GetBoncardOk() (*BoncardInfo, bool) {
+	if o == nil || common.IsNil(o.Boncard) {
+		return nil, false
+	}
+	return o.Boncard, true
+}
+
+// HasBoncard returns a boolean if a field has been set.
+func (o *PaymentMethodSetupInfo) HasBoncard() bool {
+	if o != nil && !common.IsNil(o.Boncard) {
+		return true
+	}
+
+	return false
+}
+
+// SetBoncard gets a reference to the given BoncardInfo and assigns it to the Boncard field.
+func (o *PaymentMethodSetupInfo) SetBoncard(v BoncardInfo) {
+	o.Boncard = &v
+}
+
 // GetBusinessLineId returns the BusinessLineId field value if set, zero value otherwise.
 func (o *PaymentMethodSetupInfo) GetBusinessLineId() string {
 	if o == nil || common.IsNil(o.BusinessLineId) {
@@ -315,6 +474,38 @@ func (o *PaymentMethodSetupInfo) HasBusinessLineId() bool {
 // SetBusinessLineId gets a reference to the given string and assigns it to the BusinessLineId field.
 func (o *PaymentMethodSetupInfo) SetBusinessLineId(v string) {
 	o.BusinessLineId = &v
+}
+
+// GetCarnet returns the Carnet field value if set, zero value otherwise.
+func (o *PaymentMethodSetupInfo) GetCarnet() CarnetInfo {
+	if o == nil || common.IsNil(o.Carnet) {
+		var ret CarnetInfo
+		return ret
+	}
+	return *o.Carnet
+}
+
+// GetCarnetOk returns a tuple with the Carnet field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodSetupInfo) GetCarnetOk() (*CarnetInfo, bool) {
+	if o == nil || common.IsNil(o.Carnet) {
+		return nil, false
+	}
+	return o.Carnet, true
+}
+
+// HasCarnet returns a boolean if a field has been set.
+func (o *PaymentMethodSetupInfo) HasCarnet() bool {
+	if o != nil && !common.IsNil(o.Carnet) {
+		return true
+	}
+
+	return false
+}
+
+// SetCarnet gets a reference to the given CarnetInfo and assigns it to the Carnet field.
+func (o *PaymentMethodSetupInfo) SetCarnet(v CarnetInfo) {
+	o.Carnet = &v
 }
 
 // GetCartesBancaires returns the CartesBancaires field value if set, zero value otherwise.
@@ -573,6 +764,38 @@ func (o *PaymentMethodSetupInfo) SetDiscover(v GenericPmWithTdiInfo) {
 	o.Discover = &v
 }
 
+// GetEbt returns the Ebt field value if set, zero value otherwise.
+func (o *PaymentMethodSetupInfo) GetEbt() EbtInfo {
+	if o == nil || common.IsNil(o.Ebt) {
+		var ret EbtInfo
+		return ret
+	}
+	return *o.Ebt
+}
+
+// GetEbtOk returns a tuple with the Ebt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodSetupInfo) GetEbtOk() (*EbtInfo, bool) {
+	if o == nil || common.IsNil(o.Ebt) {
+		return nil, false
+	}
+	return o.Ebt, true
+}
+
+// HasEbt returns a boolean if a field has been set.
+func (o *PaymentMethodSetupInfo) HasEbt() bool {
+	if o != nil && !common.IsNil(o.Ebt) {
+		return true
+	}
+
+	return false
+}
+
+// SetEbt gets a reference to the given EbtInfo and assigns it to the Ebt field.
+func (o *PaymentMethodSetupInfo) SetEbt(v EbtInfo) {
+	o.Ebt = &v
+}
+
 // GetEftDirectdebitCA returns the EftDirectdebitCA field value if set, zero value otherwise.
 func (o *PaymentMethodSetupInfo) GetEftDirectdebitCA() GenericPmWithTdiInfo {
 	if o == nil || common.IsNil(o.EftDirectdebitCA) {
@@ -667,6 +890,38 @@ func (o *PaymentMethodSetupInfo) HasGirocard() bool {
 // SetGirocard gets a reference to the given GenericPmWithTdiInfo and assigns it to the Girocard field.
 func (o *PaymentMethodSetupInfo) SetGirocard(v GenericPmWithTdiInfo) {
 	o.Girocard = &v
+}
+
+// GetGivex returns the Givex field value if set, zero value otherwise.
+func (o *PaymentMethodSetupInfo) GetGivex() GivexInfo {
+	if o == nil || common.IsNil(o.Givex) {
+		var ret GivexInfo
+		return ret
+	}
+	return *o.Givex
+}
+
+// GetGivexOk returns a tuple with the Givex field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodSetupInfo) GetGivexOk() (*GivexInfo, bool) {
+	if o == nil || common.IsNil(o.Givex) {
+		return nil, false
+	}
+	return o.Givex, true
+}
+
+// HasGivex returns a boolean if a field has been set.
+func (o *PaymentMethodSetupInfo) HasGivex() bool {
+	if o != nil && !common.IsNil(o.Givex) {
+		return true
+	}
+
+	return false
+}
+
+// SetGivex gets a reference to the given GivexInfo and assigns it to the Givex field.
+func (o *PaymentMethodSetupInfo) SetGivex(v GivexInfo) {
+	o.Givex = &v
 }
 
 // GetGooglePay returns the GooglePay field value if set, zero value otherwise.
@@ -861,6 +1116,38 @@ func (o *PaymentMethodSetupInfo) SetMaestro(v GenericPmWithTdiInfo) {
 	o.Maestro = &v
 }
 
+// GetMaestroUsa returns the MaestroUsa field value if set, zero value otherwise.
+func (o *PaymentMethodSetupInfo) GetMaestroUsa() GenericPmWithTdiInfo {
+	if o == nil || common.IsNil(o.MaestroUsa) {
+		var ret GenericPmWithTdiInfo
+		return ret
+	}
+	return *o.MaestroUsa
+}
+
+// GetMaestroUsaOk returns a tuple with the MaestroUsa field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodSetupInfo) GetMaestroUsaOk() (*GenericPmWithTdiInfo, bool) {
+	if o == nil || common.IsNil(o.MaestroUsa) {
+		return nil, false
+	}
+	return o.MaestroUsa, true
+}
+
+// HasMaestroUsa returns a boolean if a field has been set.
+func (o *PaymentMethodSetupInfo) HasMaestroUsa() bool {
+	if o != nil && !common.IsNil(o.MaestroUsa) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaestroUsa gets a reference to the given GenericPmWithTdiInfo and assigns it to the MaestroUsa field.
+func (o *PaymentMethodSetupInfo) SetMaestroUsa(v GenericPmWithTdiInfo) {
+	o.MaestroUsa = &v
+}
+
 // GetMc returns the Mc field value if set, zero value otherwise.
 func (o *PaymentMethodSetupInfo) GetMc() GenericPmWithTdiInfo {
 	if o == nil || common.IsNil(o.Mc) {
@@ -989,6 +1276,38 @@ func (o *PaymentMethodSetupInfo) SetPaybybankPlaid(v PayByBankPlaidInfo) {
 	o.PaybybankPlaid = &v
 }
 
+// GetPaybybankPlaidCa returns the PaybybankPlaidCa field value if set, zero value otherwise.
+func (o *PaymentMethodSetupInfo) GetPaybybankPlaidCa() PayByBankPlaidInfo {
+	if o == nil || common.IsNil(o.PaybybankPlaidCa) {
+		var ret PayByBankPlaidInfo
+		return ret
+	}
+	return *o.PaybybankPlaidCa
+}
+
+// GetPaybybankPlaidCaOk returns a tuple with the PaybybankPlaidCa field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodSetupInfo) GetPaybybankPlaidCaOk() (*PayByBankPlaidInfo, bool) {
+	if o == nil || common.IsNil(o.PaybybankPlaidCa) {
+		return nil, false
+	}
+	return o.PaybybankPlaidCa, true
+}
+
+// HasPaybybankPlaidCa returns a boolean if a field has been set.
+func (o *PaymentMethodSetupInfo) HasPaybybankPlaidCa() bool {
+	if o != nil && !common.IsNil(o.PaybybankPlaidCa) {
+		return true
+	}
+
+	return false
+}
+
+// SetPaybybankPlaidCa gets a reference to the given PayByBankPlaidInfo and assigns it to the PaybybankPlaidCa field.
+func (o *PaymentMethodSetupInfo) SetPaybybankPlaidCa(v PayByBankPlaidInfo) {
+	o.PaybybankPlaidCa = &v
+}
+
 // GetPayme returns the Payme field value if set, zero value otherwise.
 func (o *PaymentMethodSetupInfo) GetPayme() PayMeInfo {
 	if o == nil || common.IsNil(o.Payme) {
@@ -1085,6 +1404,38 @@ func (o *PaymentMethodSetupInfo) SetPayto(v PayToInfo) {
 	o.Payto = &v
 }
 
+// GetPix returns the Pix field value if set, zero value otherwise.
+func (o *PaymentMethodSetupInfo) GetPix() PixInfo {
+	if o == nil || common.IsNil(o.Pix) {
+		var ret PixInfo
+		return ret
+	}
+	return *o.Pix
+}
+
+// GetPixOk returns a tuple with the Pix field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodSetupInfo) GetPixOk() (*PixInfo, bool) {
+	if o == nil || common.IsNil(o.Pix) {
+		return nil, false
+	}
+	return o.Pix, true
+}
+
+// HasPix returns a boolean if a field has been set.
+func (o *PaymentMethodSetupInfo) HasPix() bool {
+	if o != nil && !common.IsNil(o.Pix) {
+		return true
+	}
+
+	return false
+}
+
+// SetPix gets a reference to the given PixInfo and assigns it to the Pix field.
+func (o *PaymentMethodSetupInfo) SetPix(v PixInfo) {
+	o.Pix = &v
+}
+
 // GetPulse returns the Pulse field value if set, zero value otherwise.
 func (o *PaymentMethodSetupInfo) GetPulse() PulseInfo {
 	if o == nil || common.IsNil(o.Pulse) {
@@ -1147,6 +1498,38 @@ func (o *PaymentMethodSetupInfo) HasReference() bool {
 // SetReference gets a reference to the given string and assigns it to the Reference field.
 func (o *PaymentMethodSetupInfo) SetReference(v string) {
 	o.Reference = &v
+}
+
+// GetSepadirectdebit returns the Sepadirectdebit field value if set, zero value otherwise.
+func (o *PaymentMethodSetupInfo) GetSepadirectdebit() SepaDirectDebitInfo {
+	if o == nil || common.IsNil(o.Sepadirectdebit) {
+		var ret SepaDirectDebitInfo
+		return ret
+	}
+	return *o.Sepadirectdebit
+}
+
+// GetSepadirectdebitOk returns a tuple with the Sepadirectdebit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodSetupInfo) GetSepadirectdebitOk() (*SepaDirectDebitInfo, bool) {
+	if o == nil || common.IsNil(o.Sepadirectdebit) {
+		return nil, false
+	}
+	return o.Sepadirectdebit, true
+}
+
+// HasSepadirectdebit returns a boolean if a field has been set.
+func (o *PaymentMethodSetupInfo) HasSepadirectdebit() bool {
+	if o != nil && !common.IsNil(o.Sepadirectdebit) {
+		return true
+	}
+
+	return false
+}
+
+// SetSepadirectdebit gets a reference to the given SepaDirectDebitInfo and assigns it to the Sepadirectdebit field.
+func (o *PaymentMethodSetupInfo) SetSepadirectdebit(v SepaDirectDebitInfo) {
+	o.Sepadirectdebit = &v
 }
 
 // GetShopperInteraction returns the ShopperInteraction field value if set, zero value otherwise.
@@ -1214,6 +1597,7 @@ func (o *PaymentMethodSetupInfo) SetSodexo(v SodexoInfo) {
 }
 
 // GetSofort returns the Sofort field value if set, zero value otherwise.
+// Deprecated since Management API v1
 func (o *PaymentMethodSetupInfo) GetSofort() SofortInfo {
 	if o == nil || common.IsNil(o.Sofort) {
 		var ret SofortInfo
@@ -1224,6 +1608,7 @@ func (o *PaymentMethodSetupInfo) GetSofort() SofortInfo {
 
 // GetSofortOk returns a tuple with the Sofort field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated since Management API v1
 func (o *PaymentMethodSetupInfo) GetSofortOk() (*SofortInfo, bool) {
 	if o == nil || common.IsNil(o.Sofort) {
 		return nil, false
@@ -1241,6 +1626,7 @@ func (o *PaymentMethodSetupInfo) HasSofort() bool {
 }
 
 // SetSofort gets a reference to the given SofortInfo and assigns it to the Sofort field.
+// Deprecated since Management API v1
 func (o *PaymentMethodSetupInfo) SetSofort(v SofortInfo) {
 	o.Sofort = &v
 }
@@ -1307,6 +1693,38 @@ func (o *PaymentMethodSetupInfo) HasStoreIds() bool {
 // SetStoreIds gets a reference to the given []string and assigns it to the StoreIds field.
 func (o *PaymentMethodSetupInfo) SetStoreIds(v []string) {
 	o.StoreIds = v
+}
+
+// GetSvs returns the Svs field value if set, zero value otherwise.
+func (o *PaymentMethodSetupInfo) GetSvs() SvsInfo {
+	if o == nil || common.IsNil(o.Svs) {
+		var ret SvsInfo
+		return ret
+	}
+	return *o.Svs
+}
+
+// GetSvsOk returns a tuple with the Svs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodSetupInfo) GetSvsOk() (*SvsInfo, bool) {
+	if o == nil || common.IsNil(o.Svs) {
+		return nil, false
+	}
+	return o.Svs, true
+}
+
+// HasSvs returns a boolean if a field has been set.
+func (o *PaymentMethodSetupInfo) HasSvs() bool {
+	if o != nil && !common.IsNil(o.Svs) {
+		return true
+	}
+
+	return false
+}
+
+// SetSvs gets a reference to the given SvsInfo and assigns it to the Svs field.
+func (o *PaymentMethodSetupInfo) SetSvs(v SvsInfo) {
+	o.Svs = &v
 }
 
 // GetSwish returns the Swish field value if set, zero value otherwise.
@@ -1427,6 +1845,38 @@ func (o *PaymentMethodSetupInfo) GetTypeOk() (*string, bool) {
 // SetType sets field value
 func (o *PaymentMethodSetupInfo) SetType(v string) {
 	o.Type = v
+}
+
+// GetValuelink returns the Valuelink field value if set, zero value otherwise.
+func (o *PaymentMethodSetupInfo) GetValuelink() ValuelinkInfo {
+	if o == nil || common.IsNil(o.Valuelink) {
+		var ret ValuelinkInfo
+		return ret
+	}
+	return *o.Valuelink
+}
+
+// GetValuelinkOk returns a tuple with the Valuelink field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodSetupInfo) GetValuelinkOk() (*ValuelinkInfo, bool) {
+	if o == nil || common.IsNil(o.Valuelink) {
+		return nil, false
+	}
+	return o.Valuelink, true
+}
+
+// HasValuelink returns a boolean if a field has been set.
+func (o *PaymentMethodSetupInfo) HasValuelink() bool {
+	if o != nil && !common.IsNil(o.Valuelink) {
+		return true
+	}
+
+	return false
+}
+
+// SetValuelink gets a reference to the given ValuelinkInfo and assigns it to the Valuelink field.
+func (o *PaymentMethodSetupInfo) SetValuelink(v ValuelinkInfo) {
+	o.Valuelink = &v
 }
 
 // GetVipps returns the Vipps field value if set, zero value otherwise.
@@ -1576,8 +2026,14 @@ func (o PaymentMethodSetupInfo) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.AfterpayTouch) {
 		toSerialize["afterpayTouch"] = o.AfterpayTouch
 	}
+	if !common.IsNil(o.AlipayPlus) {
+		toSerialize["alipayPlus"] = o.AlipayPlus
+	}
 	if !common.IsNil(o.Amex) {
 		toSerialize["amex"] = o.Amex
+	}
+	if !common.IsNil(o.Ancv) {
+		toSerialize["ancv"] = o.Ancv
 	}
 	if !common.IsNil(o.ApplePay) {
 		toSerialize["applePay"] = o.ApplePay
@@ -1585,8 +2041,14 @@ func (o PaymentMethodSetupInfo) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Bcmc) {
 		toSerialize["bcmc"] = o.Bcmc
 	}
+	if !common.IsNil(o.Boncard) {
+		toSerialize["boncard"] = o.Boncard
+	}
 	if !common.IsNil(o.BusinessLineId) {
 		toSerialize["businessLineId"] = o.BusinessLineId
+	}
+	if !common.IsNil(o.Carnet) {
+		toSerialize["carnet"] = o.Carnet
 	}
 	if !common.IsNil(o.CartesBancaires) {
 		toSerialize["cartesBancaires"] = o.CartesBancaires
@@ -1612,6 +2074,9 @@ func (o PaymentMethodSetupInfo) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Discover) {
 		toSerialize["discover"] = o.Discover
 	}
+	if !common.IsNil(o.Ebt) {
+		toSerialize["ebt"] = o.Ebt
+	}
 	if !common.IsNil(o.EftDirectdebitCA) {
 		toSerialize["eft_directdebit_CA"] = o.EftDirectdebitCA
 	}
@@ -1620,6 +2085,9 @@ func (o PaymentMethodSetupInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Girocard) {
 		toSerialize["girocard"] = o.Girocard
+	}
+	if !common.IsNil(o.Givex) {
+		toSerialize["givex"] = o.Givex
 	}
 	if !common.IsNil(o.GooglePay) {
 		toSerialize["googlePay"] = o.GooglePay
@@ -1639,6 +2107,9 @@ func (o PaymentMethodSetupInfo) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Maestro) {
 		toSerialize["maestro"] = o.Maestro
 	}
+	if !common.IsNil(o.MaestroUsa) {
+		toSerialize["maestro_usa"] = o.MaestroUsa
+	}
 	if !common.IsNil(o.Mc) {
 		toSerialize["mc"] = o.Mc
 	}
@@ -1651,6 +2122,9 @@ func (o PaymentMethodSetupInfo) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.PaybybankPlaid) {
 		toSerialize["paybybank_plaid"] = o.PaybybankPlaid
 	}
+	if !common.IsNil(o.PaybybankPlaidCa) {
+		toSerialize["paybybank_plaid_ca"] = o.PaybybankPlaidCa
+	}
 	if !common.IsNil(o.Payme) {
 		toSerialize["payme"] = o.Payme
 	}
@@ -1660,11 +2134,17 @@ func (o PaymentMethodSetupInfo) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Payto) {
 		toSerialize["payto"] = o.Payto
 	}
+	if !common.IsNil(o.Pix) {
+		toSerialize["pix"] = o.Pix
+	}
 	if !common.IsNil(o.Pulse) {
 		toSerialize["pulse"] = o.Pulse
 	}
 	if !common.IsNil(o.Reference) {
 		toSerialize["reference"] = o.Reference
+	}
+	if !common.IsNil(o.Sepadirectdebit) {
+		toSerialize["sepadirectdebit"] = o.Sepadirectdebit
 	}
 	if !common.IsNil(o.ShopperInteraction) {
 		toSerialize["shopperInteraction"] = o.ShopperInteraction
@@ -1681,6 +2161,9 @@ func (o PaymentMethodSetupInfo) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.StoreIds) {
 		toSerialize["storeIds"] = o.StoreIds
 	}
+	if !common.IsNil(o.Svs) {
+		toSerialize["svs"] = o.Svs
+	}
 	if !common.IsNil(o.Swish) {
 		toSerialize["swish"] = o.Swish
 	}
@@ -1691,6 +2174,9 @@ func (o PaymentMethodSetupInfo) ToMap() (map[string]interface{}, error) {
 		toSerialize["twint"] = o.Twint
 	}
 	toSerialize["type"] = o.Type
+	if !common.IsNil(o.Valuelink) {
+		toSerialize["valuelink"] = o.Valuelink
+	}
 	if !common.IsNil(o.Vipps) {
 		toSerialize["vipps"] = o.Vipps
 	}
@@ -1752,7 +2238,7 @@ func (o *PaymentMethodSetupInfo) isValidShopperInteraction() bool {
 	return false
 }
 func (o *PaymentMethodSetupInfo) isValidType() bool {
-	var allowedEnumValues = []string{"accel", "ach", "affirm", "afterpaytouch", "alelo", "alipay", "alipay_hk", "alipay_wap", "amex", "applepay", "banese_card", "banese_card_credit", "banese_card_debit", "banese_card_prepaid", "bcmc", "blik", "cartebancaire", "clearpay", "clicktopay", "credtodos", "credtodos_private_credit", "credtodos_private_debit", "cup", "diners", "directdebit_GB", "discover", "ebanking_FI", "eft_directdebit_CA", "eftpos_australia", "elo", "elocredit", "elodebit", "girocard", "googlepay", "hiper", "hipercard", "ideal", "interac_card", "jcb", "klarna", "klarna_account", "klarna_paynow", "maestro", "mbway", "mc", "mcdebit", "mealVoucher_FR", "mobilepay", "multibanco", "nyce", "onlineBanking_PL", "paybybank", "paybybank_plaid", "payme", "payme_pos", "paynow", "paynow_pos", "paypal", "payto", "pulse", "sodexo", "star", "swish", "ticket", "todo_giftcard", "trustly", "twint", "twint_pos", "up_brazil_credit", "vale_refeicao", "vale_refeicao_prepaid", "vipps", "visa", "visadebit", "vpay", "wechatpay", "wechatpay_pos"}
+	var allowedEnumValues = []string{"abrapetite", "abrapetite_credit", "abrapetite_debit", "abrapetite_prepaid", "accel", "ach", "affirm", "afterpaytouch", "alelo", "alipay", "alipay_hk", "alipay_plus", "alipay_plus_alipay_cn", "alipay_plus_alipay_hk", "alipay_plus_dana", "alipay_plus_gcash", "alipay_plus_kakaopay", "alipay_plus_kplus", "alipay_plus_naverpay", "alipay_plus_rabbitlinepay", "alipay_plus_tosspay", "alipay_plus_touchngo", "alipay_plus_truemoney", "alipay_wap", "amex", "ancv", "applepay", "avancard", "avancard_credit", "avancard_debit", "banese_card", "banese_card_credit", "banese_card_debit", "banese_card_prepaid", "bcmc", "blik", "blik_pos", "boncard", "br_schemes", "carnet", "cartebancaire", "cashapp", "clearpay", "clicktopay", "cooper", "cooper_credit", "cooper_debit", "cooper_food_debit", "cooper_meal_debit", "cooper_prepaid", "cooper_private_credit", "cooper_retail_credit", "credtodos", "credtodos_private_credit", "credtodos_private_debit", "cup", "diners", "directdebit_GB", "discover", "ebanking_FI", "ebt", "eft_directdebit_CA", "eftpos_australia", "elo", "elocredit", "elodebit", "girocard", "givex", "googlepay", "green_card", "green_card_credit", "green_card_debit", "green_card_food_prepaid", "green_card_meal_prepaid", "green_card_prepaid", "hiper", "hipercard", "ideal", "interac_card", "jcb", "klarna", "klarna_account", "klarna_b2b", "klarna_paynow", "le_card", "le_card_credit", "le_card_debit", "maestro", "maestro_usa", "maxifrota", "maxifrota_prepaid", "mbway", "mc", "mcdebit", "mealVoucher_FR", "megaleve", "megaleve_credit", "megaleve_debit", "mobilepay", "multibanco", "nutricash", "nutricash_prepaid", "nyce", "onlineBanking_PL", "paybybank", "paybybank_plaid", "paybybank_plaid_ca", "payme", "payme_pos", "paynow", "paynow_pos", "paypal", "payto", "personal_card", "personal_card_credit", "personal_card_debit", "pix", "pulse", "romcard", "romcard_credit", "romcard_debit", "senff", "senff_credit", "sepadirectdebit", "sodexo", "star", "svs", "swish", "ticket", "todo_giftcard", "trustly", "twint", "twint_pos", "up_brazil", "up_brazil_credit", "up_brazil_debit", "up_brazil_prepaid", "vale_refeicao", "vale_refeicao_prepaid", "valuelink", "vegas_card", "vegas_card_credit", "vegas_card_debit", "vero_card", "vero_card_credit", "vero_card_debit", "vero_card_prepaid", "vipps", "visa", "visadebit", "vpay", "wechatpay", "wechatpay_pos", "wero"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

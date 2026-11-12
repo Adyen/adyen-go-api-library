@@ -19,11 +19,16 @@ var _ common.MappedNullable = &WebhookLinks{}
 
 // WebhookLinks struct for WebhookLinks
 type WebhookLinks struct {
-	Company      *LinksElement `json:"company,omitempty"`
-	GenerateHmac LinksElement  `json:"generateHmac"`
-	Merchant     *LinksElement `json:"merchant,omitempty"`
-	Self         LinksElement  `json:"self"`
-	TestWebhook  LinksElement  `json:"testWebhook"`
+	// The company account that the webhook is configured for. Only present for company-level webhooks.
+	Company *LinksElement `json:"company,omitempty"`
+	// Generate an HMAC key.
+	GenerateHmac LinksElement `json:"generateHmac"`
+	// The merchant account that the webhook is configured for. Only present for merchant-level webhooks.
+	Merchant *LinksElement `json:"merchant,omitempty"`
+	// Link to the resource itself.
+	Self LinksElement `json:"self"`
+	// Test the webhook setup.
+	TestWebhook LinksElement `json:"testWebhook"`
 }
 
 // NewWebhookLinks instantiates a new WebhookLinks object

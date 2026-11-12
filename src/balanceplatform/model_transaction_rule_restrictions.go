@@ -19,30 +19,56 @@ var _ common.MappedNullable = &TransactionRuleRestrictions{}
 
 // TransactionRuleRestrictions struct for TransactionRuleRestrictions
 type TransactionRuleRestrictions struct {
-	ActiveNetworkTokens         *ActiveNetworkTokensRestriction        `json:"activeNetworkTokens,omitempty"`
-	BrandVariants               *BrandVariantsRestriction              `json:"brandVariants,omitempty"`
-	CounterpartyBank            *CounterpartyBankRestriction           `json:"counterpartyBank,omitempty"`
-	CounterpartyTypes           *CounterpartyTypesRestriction          `json:"counterpartyTypes,omitempty"`
-	Countries                   *CountriesRestriction                  `json:"countries,omitempty"`
-	DayOfWeek                   *DayOfWeekRestriction                  `json:"dayOfWeek,omitempty"`
-	DifferentCurrencies         *DifferentCurrenciesRestriction        `json:"differentCurrencies,omitempty"`
-	EntryModes                  *EntryModesRestriction                 `json:"entryModes,omitempty"`
-	InternationalTransaction    *InternationalTransactionRestriction   `json:"internationalTransaction,omitempty"`
-	MatchingTransactions        *MatchingTransactionsRestriction       `json:"matchingTransactions,omitempty"`
-	MatchingValues              *MatchingValuesRestriction             `json:"matchingValues,omitempty"`
-	Mccs                        *MccsRestriction                       `json:"mccs,omitempty"`
-	MerchantNames               *MerchantNamesRestriction              `json:"merchantNames,omitempty"`
-	Merchants                   *MerchantsRestriction                  `json:"merchants,omitempty"`
-	ProcessingTypes             *ProcessingTypesRestriction            `json:"processingTypes,omitempty"`
-	RiskScores                  *RiskScoresRestriction                 `json:"riskScores,omitempty"`
-	SameAmountRestriction       *SameAmountRestriction                 `json:"sameAmountRestriction,omitempty"`
-	SameCounterpartyRestriction *SameCounterpartyRestriction           `json:"sameCounterpartyRestriction,omitempty"`
-	SourceAccountTypes          *SourceAccountTypesRestriction         `json:"sourceAccountTypes,omitempty"`
-	TimeOfDay                   *TimeOfDayRestriction                  `json:"timeOfDay,omitempty"`
-	TokenRequestors             *TokenRequestorsRestriction            `json:"tokenRequestors,omitempty"`
-	TotalAmount                 *TotalAmountRestriction                `json:"totalAmount,omitempty"`
-	WalletProviderAccountScore  *WalletProviderAccountScoreRestriction `json:"walletProviderAccountScore,omitempty"`
-	WalletProviderDeviceScore   *WalletProviderDeviceScore             `json:"walletProviderDeviceScore,omitempty"`
+	// The total number of tokens that a card can have across different kinds of digital wallets on the user's phones, watches, or other wearables.  Supported operations: **equals**, **notEquals**, **greaterThanOrEqualTo**, **greaterThan**, **lessThanOrEqualTo**, **lessThan**.
+	ActiveNetworkTokens *ActiveNetworkTokensRestriction `json:"activeNetworkTokens,omitempty"`
+	// List of card brand variants and the operation.  Supported operations: **anyMatch**, **noneMatch**.
+	BrandVariants *BrandVariantsRestriction `json:"brandVariants,omitempty"`
+	// Contains a list of counterparty financial institutions and how they must be evaluated.  Supported operations: **anyMatch**, **noneMatch**.
+	CounterpartyBank *CounterpartyBankRestriction `json:"counterpartyBank,omitempty"`
+	// Contains a list of counterparty types and how they must be evaluated.  Supported operations: **anyMatch**, **noneMatch**.  Supported value inputs: - **balanceAccount** - **bankAccount** - **card** - **transferInstrument**
+	CounterpartyTypes *CounterpartyTypesRestriction `json:"counterpartyTypes,omitempty"`
+	// List of countries and the operation.  Supported operations: **anyMatch**, **noneMatch**.
+	Countries *CountriesRestriction `json:"countries,omitempty"`
+	// List of week days and the operation. Supported operations: **anyMatch**, **noneMatch**.
+	DayOfWeek *DayOfWeekRestriction `json:"dayOfWeek,omitempty"`
+	// Compares the currency of the payment against the currency of the payment instrument, and specifies the operation.  Supported operations: **equals**, **notEquals**.
+	DifferentCurrencies *DifferentCurrenciesRestriction `json:"differentCurrencies,omitempty"`
+	// List of point-of-sale entry modes and the operation..  Supported operations: **anyMatch**, **noneMatch**.
+	EntryModes *EntryModesRestriction `json:"entryModes,omitempty"`
+	// Indicates whether transaction is an international transaction and specifies the operation.  Supported operations: **equals**, **notEquals**.
+	InternationalTransaction *InternationalTransactionRestriction `json:"internationalTransaction,omitempty"`
+	// The number of transactions and the operation.  Supported operations: **equals**, **notEquals**, **greaterThanOrEqualTo**, **greaterThan**, **lessThanOrEqualTo**, **lessThan**.
+	MatchingTransactions *MatchingTransactionsRestriction `json:"matchingTransactions,omitempty"`
+	// Checks if a user has recently made multiple transfers with the specified values.  To use this restriction, you must:  - Set the rule `type` to **velocity**.  - Specify a time `interval`.  - Specify a number of `matchingTransactions`.  Supported operation: **allMatch**.  Supported value inputs: - **merchantId** and **acquirerId** - **amount** and **currency** - **merchantName**.
+	MatchingValues *MatchingValuesRestriction `json:"matchingValues,omitempty"`
+	// List of merchant category codes (MCCs) and the operation.  Supported operations: **anyMatch**, **noneMatch**.
+	Mccs *MccsRestriction `json:"mccs,omitempty"`
+	// List of names that will be compared to the merchant name according to the matching type.  Supported operations: **anyMatch**, **noneMatch**.
+	MerchantNames *MerchantNamesRestriction `json:"merchantNames,omitempty"`
+	// List of merchant ID and acquirer ID pairs, and the operation.  Supported operations: **anyMatch**, **noneMatch**.
+	Merchants *MerchantsRestriction `json:"merchants,omitempty"`
+	// List of processing types and the operation.  Supported operations: **anyMatch**, **noneMatch**.
+	ProcessingTypes *ProcessingTypesRestriction `json:"processingTypes,omitempty"`
+	// Risk scores provided by specific sources. The same operation applies to all scores.  Current sources available: **visa**, **mastercard**  Supported operations: **equals**, **notEquals**, **greaterThanOrEqualTo**, **greaterThan**, **lessThanOrEqualTo**, **lessThan**.
+	RiskScores *RiskScoresRestriction `json:"riskScores,omitempty"`
+	// Checks if a user has recently sent the same amount of funds in multiple transfers.  To use this restriction, you must:  - Set the rule `type` to **velocity**.  - Specify a time `interval`.  - Specify a number of `matchingTransactions`.  Supported operation: **equals**.
+	SameAmountRestriction *SameAmountRestriction `json:"sameAmountRestriction,omitempty"`
+	// Checks if a user has recently made multiple transfers to the same counterparty.  To use this restriction, you must:  - Set the rule `type` to **velocity**.  - Specify a time `interval`.  - Specify a number of `matchingTransactions`.  Supported operations: **equals**.
+	SameCounterpartyRestriction *SameCounterpartyRestriction `json:"sameCounterpartyRestriction,omitempty"`
+	// Contains a list of source account types and how they must be evaluated.  Supported operations: **anyMatch**, **noneMatch**.  Supported value inputs: - **balanceAccount** - **businessAccount**.
+	SourceAccountTypes *SourceAccountTypesRestriction `json:"sourceAccountTypes,omitempty"`
+	// A start and end time in a time-only ISO-8601 extended offset format. Supported operations: **equals**, **notEquals**.
+	TimeOfDay *TimeOfDayRestriction `json:"timeOfDay,omitempty"`
+	// List of token requestor IDs and the operation.  Supported operations: **anyMatch**, **noneMatch**.
+	TokenRequestors *TokenRequestorsRestriction `json:"tokenRequestors,omitempty"`
+	// The total amount and the operation.  Supported operations: **equals**, **notEquals**, **greaterThanOrEqualTo**, **greaterThan**, **lessThanOrEqualTo**, **lessThan**.
+	TotalAmount *TotalAmountRestriction `json:"totalAmount,omitempty"`
+	// Checks the wallet account score.  Supported operations: **equals**, **notEquals**, **greaterThanOrEqualTo**, **greaterThan**, **lessThanOrEqualTo**, **lessThan**.
+	WalletProviderAccountScore *WalletProviderAccountScoreRestriction `json:"walletProviderAccountScore,omitempty"`
+	// Wallet Provider Device Score and the operation.  Supported operations: **equals**, **notEquals**, **greaterThanOrEqualTo**, **greaterThan**, **lessThanOrEqualTo**, **lessThan**.
+	WalletProviderDeviceScore *WalletProviderDeviceScore `json:"walletProviderDeviceScore,omitempty"`
+	// Wallet Provider Device Type and the operation.  Supported operations: **anyMatch**, **noneMatch**.  Supported value inputs: - **MOBILE_PHONE** - **TABLET_OR_EREADER** - **WATCH_OR_WRISTBAND** - **WEARABLE**  - **CARD** - **PC** - **OTHER** - **UNKNOWN**
+	WalletProviderDeviceType *WalletProviderDeviceType `json:"walletProviderDeviceType,omitempty"`
 }
 
 // NewTransactionRuleRestrictions instantiates a new TransactionRuleRestrictions object
@@ -830,6 +856,38 @@ func (o *TransactionRuleRestrictions) SetWalletProviderDeviceScore(v WalletProvi
 	o.WalletProviderDeviceScore = &v
 }
 
+// GetWalletProviderDeviceType returns the WalletProviderDeviceType field value if set, zero value otherwise.
+func (o *TransactionRuleRestrictions) GetWalletProviderDeviceType() WalletProviderDeviceType {
+	if o == nil || common.IsNil(o.WalletProviderDeviceType) {
+		var ret WalletProviderDeviceType
+		return ret
+	}
+	return *o.WalletProviderDeviceType
+}
+
+// GetWalletProviderDeviceTypeOk returns a tuple with the WalletProviderDeviceType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionRuleRestrictions) GetWalletProviderDeviceTypeOk() (*WalletProviderDeviceType, bool) {
+	if o == nil || common.IsNil(o.WalletProviderDeviceType) {
+		return nil, false
+	}
+	return o.WalletProviderDeviceType, true
+}
+
+// HasWalletProviderDeviceType returns a boolean if a field has been set.
+func (o *TransactionRuleRestrictions) HasWalletProviderDeviceType() bool {
+	if o != nil && !common.IsNil(o.WalletProviderDeviceType) {
+		return true
+	}
+
+	return false
+}
+
+// SetWalletProviderDeviceType gets a reference to the given WalletProviderDeviceType and assigns it to the WalletProviderDeviceType field.
+func (o *TransactionRuleRestrictions) SetWalletProviderDeviceType(v WalletProviderDeviceType) {
+	o.WalletProviderDeviceType = &v
+}
+
 func (o TransactionRuleRestrictions) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -911,6 +969,9 @@ func (o TransactionRuleRestrictions) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.WalletProviderDeviceScore) {
 		toSerialize["walletProviderDeviceScore"] = o.WalletProviderDeviceScore
+	}
+	if !common.IsNil(o.WalletProviderDeviceType) {
+		toSerialize["walletProviderDeviceType"] = o.WalletProviderDeviceType
 	}
 	return toSerialize, nil
 }

@@ -19,12 +19,18 @@ var _ common.MappedNullable = &ApiCredentialLinks{}
 
 // ApiCredentialLinks struct for ApiCredentialLinks
 type ApiCredentialLinks struct {
-	AllowedOrigins    *LinksElement `json:"allowedOrigins,omitempty"`
-	Company           *LinksElement `json:"company,omitempty"`
-	GenerateApiKey    *LinksElement `json:"generateApiKey,omitempty"`
+	// List of allowed origins.
+	AllowedOrigins *LinksElement `json:"allowedOrigins,omitempty"`
+	// Company account that the API credential is linked to. Only present for company-level webhooks.
+	Company *LinksElement `json:"company,omitempty"`
+	// Generates a new API key. When you generate a new one, the existing key remains valid for 24 hours.
+	GenerateApiKey *LinksElement `json:"generateApiKey,omitempty"`
+	// Generates a new client key, used to authenticate client-side requests. When you generate a new one, the existing key remains valid for 24 hours.
 	GenerateClientKey *LinksElement `json:"generateClientKey,omitempty"`
-	Merchant          *LinksElement `json:"merchant,omitempty"`
-	Self              LinksElement  `json:"self"`
+	// The merchant account that the API credential is linked to. Only present for merchant-level API credentials.
+	Merchant *LinksElement `json:"merchant,omitempty"`
+	// Link to the resource itself.
+	Self LinksElement `json:"self"`
 }
 
 // NewApiCredentialLinks instantiates a new ApiCredentialLinks object

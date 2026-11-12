@@ -26,7 +26,8 @@ type UpdateMerchantWebhookRequest struct {
 	// Indicates if untrusted SSL certificates are accepted. Default value: **false**.
 	AcceptsUntrustedRootCertificate *bool `json:"acceptsUntrustedRootCertificate,omitempty"`
 	// Indicates if the webhook configuration is active. The field must be **true** for us to send webhooks about events related an account.
-	Active             *bool               `json:"active,omitempty"`
+	Active *bool `json:"active,omitempty"`
+	// Additional shopper and transaction information to be included in your [standard webhooks](https://docs.adyen.com/development-resources/webhooks/webhook-types/#event-codes). Find out more about the available [additional settings](https://docs.adyen.com/development-resources/webhooks/additional-settings).
 	AdditionalSettings *AdditionalSettings `json:"additionalSettings,omitempty"`
 	// Format or protocol for receiving webhooks. Possible values: * **soap** * **http** * **json**
 	CommunicationFormat *string `json:"communicationFormat,omitempty"`

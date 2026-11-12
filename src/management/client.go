@@ -39,9 +39,13 @@ type APIClient struct {
 
 	AndroidFilesCompanyLevelApi *AndroidFilesCompanyLevelApi
 
+	ClientCertificatesCompanyLevelApi *ClientCertificatesCompanyLevelApi
+
 	ClientKeyCompanyLevelApi *ClientKeyCompanyLevelApi
 
 	ClientKeyMerchantLevelApi *ClientKeyMerchantLevelApi
+
+	DonationCampaignsApi *DonationCampaignsApi
 
 	MyAPICredentialApi *MyAPICredentialApi
 
@@ -66,6 +70,14 @@ type APIClient struct {
 	TerminalSettingsStoreLevelApi *TerminalSettingsStoreLevelApi
 
 	TerminalSettingsTerminalLevelApi *TerminalSettingsTerminalLevelApi
+
+	TerminalThemesCompanyLevelApi *TerminalThemesCompanyLevelApi
+
+	TerminalThemesMerchantLevelApi *TerminalThemesMerchantLevelApi
+
+	TerminalThemesStoreLevelApi *TerminalThemesStoreLevelApi
+
+	TerminalThemesTerminalLevelApi *TerminalThemesTerminalLevelApi
 
 	TerminalsTerminalLevelApi *TerminalsTerminalLevelApi
 
@@ -97,8 +109,10 @@ func NewAPIClient(client *common.Client) *APIClient {
 	c.AllowedOriginsCompanyLevelApi = (*AllowedOriginsCompanyLevelApi)(&c.common)
 	c.AllowedOriginsMerchantLevelApi = (*AllowedOriginsMerchantLevelApi)(&c.common)
 	c.AndroidFilesCompanyLevelApi = (*AndroidFilesCompanyLevelApi)(&c.common)
+	c.ClientCertificatesCompanyLevelApi = (*ClientCertificatesCompanyLevelApi)(&c.common)
 	c.ClientKeyCompanyLevelApi = (*ClientKeyCompanyLevelApi)(&c.common)
 	c.ClientKeyMerchantLevelApi = (*ClientKeyMerchantLevelApi)(&c.common)
+	c.DonationCampaignsApi = (*DonationCampaignsApi)(&c.common)
 	c.MyAPICredentialApi = (*MyAPICredentialApi)(&c.common)
 	c.PaymentMethodsMerchantLevelApi = (*PaymentMethodsMerchantLevelApi)(&c.common)
 	c.PayoutSettingsMerchantLevelApi = (*PayoutSettingsMerchantLevelApi)(&c.common)
@@ -111,6 +125,10 @@ func NewAPIClient(client *common.Client) *APIClient {
 	c.TerminalSettingsMerchantLevelApi = (*TerminalSettingsMerchantLevelApi)(&c.common)
 	c.TerminalSettingsStoreLevelApi = (*TerminalSettingsStoreLevelApi)(&c.common)
 	c.TerminalSettingsTerminalLevelApi = (*TerminalSettingsTerminalLevelApi)(&c.common)
+	c.TerminalThemesCompanyLevelApi = (*TerminalThemesCompanyLevelApi)(&c.common)
+	c.TerminalThemesMerchantLevelApi = (*TerminalThemesMerchantLevelApi)(&c.common)
+	c.TerminalThemesStoreLevelApi = (*TerminalThemesStoreLevelApi)(&c.common)
+	c.TerminalThemesTerminalLevelApi = (*TerminalThemesTerminalLevelApi)(&c.common)
 	c.TerminalsTerminalLevelApi = (*TerminalsTerminalLevelApi)(&c.common)
 	c.UsersCompanyLevelApi = (*UsersCompanyLevelApi)(&c.common)
 	c.UsersMerchantLevelApi = (*UsersMerchantLevelApi)(&c.common)

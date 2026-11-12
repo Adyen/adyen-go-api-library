@@ -89,8 +89,8 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalLogo(ctx context.Context, r T
 		return *res, httpRes, err
 	}
 
-	var serviceError common.RestServiceError
 	if httpRes.StatusCode == 400 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -99,6 +99,7 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalLogo(ctx context.Context, r T
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 401 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -107,6 +108,7 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalLogo(ctx context.Context, r T
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 403 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -115,6 +117,7 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalLogo(ctx context.Context, r T
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 422 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -123,6 +126,7 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalLogo(ctx context.Context, r T
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 500 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -198,8 +202,8 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalLogoByStoreId(ctx context.Con
 		return *res, httpRes, err
 	}
 
-	var serviceError common.RestServiceError
 	if httpRes.StatusCode == 400 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -208,6 +212,7 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalLogoByStoreId(ctx context.Con
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 401 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -216,6 +221,7 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalLogoByStoreId(ctx context.Con
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 403 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -224,6 +230,7 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalLogoByStoreId(ctx context.Con
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 422 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -232,6 +239,7 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalLogoByStoreId(ctx context.Con
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 500 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -301,8 +309,8 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalSettings(ctx context.Context,
 		return *res, httpRes, err
 	}
 
-	var serviceError common.RestServiceError
 	if httpRes.StatusCode == 400 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -311,6 +319,7 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalSettings(ctx context.Context,
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 401 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -319,6 +328,7 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalSettings(ctx context.Context,
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 403 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -327,6 +337,7 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalSettings(ctx context.Context,
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 422 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -335,6 +346,7 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalSettings(ctx context.Context,
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 500 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -401,8 +413,8 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalSettingsByStoreId(ctx context
 		return *res, httpRes, err
 	}
 
-	var serviceError common.RestServiceError
 	if httpRes.StatusCode == 400 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -411,6 +423,7 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalSettingsByStoreId(ctx context
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 401 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -419,6 +432,7 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalSettingsByStoreId(ctx context
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 403 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -427,6 +441,7 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalSettingsByStoreId(ctx context
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 422 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -435,6 +450,7 @@ func (a *TerminalSettingsStoreLevelApi) GetTerminalSettingsByStoreId(ctx context
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 500 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -520,8 +536,8 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalLogo(ctx context.Context, 
 		return *res, httpRes, err
 	}
 
-	var serviceError common.RestServiceError
 	if httpRes.StatusCode == 400 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -530,6 +546,7 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalLogo(ctx context.Context, 
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 401 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -538,6 +555,7 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalLogo(ctx context.Context, 
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 403 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -546,6 +564,7 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalLogo(ctx context.Context, 
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 422 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -554,6 +573,7 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalLogo(ctx context.Context, 
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 500 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -636,8 +656,8 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalLogoByStoreId(ctx context.
 		return *res, httpRes, err
 	}
 
-	var serviceError common.RestServiceError
 	if httpRes.StatusCode == 400 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -646,6 +666,7 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalLogoByStoreId(ctx context.
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 401 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -654,6 +675,7 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalLogoByStoreId(ctx context.
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 403 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -662,6 +684,7 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalLogoByStoreId(ctx context.
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 422 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -670,6 +693,7 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalLogoByStoreId(ctx context.
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 500 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -748,8 +772,8 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalSettings(ctx context.Conte
 		return *res, httpRes, err
 	}
 
-	var serviceError common.RestServiceError
 	if httpRes.StatusCode == 400 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -758,6 +782,7 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalSettings(ctx context.Conte
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 401 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -766,6 +791,7 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalSettings(ctx context.Conte
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 403 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -774,6 +800,7 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalSettings(ctx context.Conte
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 422 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -782,6 +809,7 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalSettings(ctx context.Conte
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 500 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -857,8 +885,8 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalSettingsByStoreId(ctx cont
 		return *res, httpRes, err
 	}
 
-	var serviceError common.RestServiceError
 	if httpRes.StatusCode == 400 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -867,6 +895,7 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalSettingsByStoreId(ctx cont
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 401 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -875,6 +904,7 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalSettingsByStoreId(ctx cont
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 403 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -883,6 +913,7 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalSettingsByStoreId(ctx cont
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 422 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -891,6 +922,7 @@ func (a *TerminalSettingsStoreLevelApi) UpdateTerminalSettingsByStoreId(ctx cont
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 500 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {

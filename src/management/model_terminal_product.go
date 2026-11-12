@@ -26,7 +26,8 @@ type TerminalProduct struct {
 	// A list of parts included in the terminal package.
 	ItemsIncluded []string `json:"itemsIncluded,omitempty"`
 	// The descriptive name of the product.
-	Name  *string               `json:"name,omitempty"`
+	Name *string `json:"name,omitempty"`
+	// The price of the product.
 	Price *TerminalProductPrice `json:"price,omitempty"`
 }
 

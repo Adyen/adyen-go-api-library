@@ -19,14 +19,16 @@ var _ common.MappedNullable = &Nexo{}
 
 // Nexo struct for Nexo
 type Nexo struct {
-	DisplayUrls   *NotificationUrl `json:"displayUrls,omitempty"`
-	EncryptionKey *Key             `json:"encryptionKey,omitempty"`
-	EventUrls     *EventUrl        `json:"eventUrls,omitempty"`
+	// The list of local and public URLs to send display notifications to when using Terminal API.
+	DisplayUrls *NotificationUrl `json:"displayUrls,omitempty"`
+	// The key you share with Adyen to secure local communications when using Terminal API.
+	EncryptionKey *Key `json:"encryptionKey,omitempty"`
+	// The list of local and public URLs to send event notifications to when using Terminal API.
+	EventUrls *EventUrl `json:"eventUrls,omitempty"`
 	// One or more URLs to send event messages to when using Terminal API.
-	// Deprecated since Management API v1
-	// Use `eventUrls` instead.
-	NexoEventUrls []string      `json:"nexoEventUrls,omitempty"`
-	Notification  *Notification `json:"notification,omitempty"`
+	NexoEventUrls []string `json:"nexoEventUrls,omitempty"`
+	// Configures sending event notifications by pressing a button on a terminal, for example used for pay-at-table.
+	Notification *Notification `json:"notification,omitempty"`
 }
 
 // NewNexo instantiates a new Nexo object
@@ -143,8 +145,6 @@ func (o *Nexo) SetEventUrls(v EventUrl) {
 }
 
 // GetNexoEventUrls returns the NexoEventUrls field value if set, zero value otherwise.
-// Deprecated since Management API v1
-// Use `eventUrls` instead.
 func (o *Nexo) GetNexoEventUrls() []string {
 	if o == nil || common.IsNil(o.NexoEventUrls) {
 		var ret []string
@@ -155,8 +155,6 @@ func (o *Nexo) GetNexoEventUrls() []string {
 
 // GetNexoEventUrlsOk returns a tuple with the NexoEventUrls field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated since Management API v1
-// Use `eventUrls` instead.
 func (o *Nexo) GetNexoEventUrlsOk() ([]string, bool) {
 	if o == nil || common.IsNil(o.NexoEventUrls) {
 		return nil, false
@@ -174,8 +172,6 @@ func (o *Nexo) HasNexoEventUrls() bool {
 }
 
 // SetNexoEventUrls gets a reference to the given []string and assigns it to the NexoEventUrls field.
-// Deprecated since Management API v1
-// Use `eventUrls` instead.
 func (o *Nexo) SetNexoEventUrls(v []string) {
 	o.NexoEventUrls = v
 }

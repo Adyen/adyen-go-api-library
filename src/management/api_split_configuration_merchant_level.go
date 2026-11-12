@@ -49,7 +49,7 @@ func (a *SplitConfigurationMerchantLevelApi) CreateRuleInput(merchantId string, 
 /*
 CreateRule Create a rule
 
-Creates a rule in the split configuration specified in the path.
+[Creates a rule](https://docs.adyen.com/platforms/automatic-split-configuration/manage-split-configurations/api/#create-rule) in the split configuration profile specified in the path.
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API - SplitConfiguration read and write
@@ -80,8 +80,8 @@ func (a *SplitConfigurationMerchantLevelApi) CreateRule(ctx context.Context, r S
 		return *res, httpRes, err
 	}
 
-	var serviceError common.RestServiceError
 	if httpRes.StatusCode == 400 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -90,6 +90,7 @@ func (a *SplitConfigurationMerchantLevelApi) CreateRule(ctx context.Context, r S
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 401 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -98,6 +99,7 @@ func (a *SplitConfigurationMerchantLevelApi) CreateRule(ctx context.Context, r S
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 403 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -106,6 +108,7 @@ func (a *SplitConfigurationMerchantLevelApi) CreateRule(ctx context.Context, r S
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 422 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -114,6 +117,7 @@ func (a *SplitConfigurationMerchantLevelApi) CreateRule(ctx context.Context, r S
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 500 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -148,9 +152,9 @@ func (a *SplitConfigurationMerchantLevelApi) CreateSplitConfigurationInput(merch
 }
 
 /*
-CreateSplitConfiguration Create a split configuration
+CreateSplitConfiguration Create a split configuration profile
 
-Creates a split configuration for the merchant account specified in the path.
+Creates a split configuration profile to [split payments automatically](https://docs.adyen.com/platforms/automatic-split-configuration/). After you [associate it with a store](https://docs.adyen.com/api-explorer/Management/latest/patch/merchants/(merchantId)/stores/(storeId)#request-splitConfiguration) in your merchant account, it splits the funds of all transactions processed through that store between your liable balance account and [your user's balance account](https://docs.adyen.com/api-explorer/Management/latest/patch/merchants/(merchantId)/stores/(storeId)#request-splitConfiguration-balanceAccountId).
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API - SplitConfiguration read and write
@@ -180,8 +184,8 @@ func (a *SplitConfigurationMerchantLevelApi) CreateSplitConfiguration(ctx contex
 		return *res, httpRes, err
 	}
 
-	var serviceError common.RestServiceError
 	if httpRes.StatusCode == 400 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -190,6 +194,7 @@ func (a *SplitConfigurationMerchantLevelApi) CreateSplitConfiguration(ctx contex
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 401 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -198,6 +203,7 @@ func (a *SplitConfigurationMerchantLevelApi) CreateSplitConfiguration(ctx contex
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 403 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -206,6 +212,7 @@ func (a *SplitConfigurationMerchantLevelApi) CreateSplitConfiguration(ctx contex
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 422 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -214,6 +221,7 @@ func (a *SplitConfigurationMerchantLevelApi) CreateSplitConfiguration(ctx contex
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 500 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -244,9 +252,9 @@ func (a *SplitConfigurationMerchantLevelApi) DeleteSplitConfigurationInput(merch
 }
 
 /*
-DeleteSplitConfiguration Delete a split configuration
+DeleteSplitConfiguration Delete a split configuration profile
 
-Deletes the split configuration specified in the path.
+Deletes the split configuration profile specified in the path.
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API - SplitConfiguration read and write
@@ -277,8 +285,8 @@ func (a *SplitConfigurationMerchantLevelApi) DeleteSplitConfiguration(ctx contex
 		return *res, httpRes, err
 	}
 
-	var serviceError common.RestServiceError
 	if httpRes.StatusCode == 400 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -287,6 +295,7 @@ func (a *SplitConfigurationMerchantLevelApi) DeleteSplitConfiguration(ctx contex
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 401 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -295,6 +304,7 @@ func (a *SplitConfigurationMerchantLevelApi) DeleteSplitConfiguration(ctx contex
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 403 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -303,6 +313,7 @@ func (a *SplitConfigurationMerchantLevelApi) DeleteSplitConfiguration(ctx contex
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 422 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -311,6 +322,7 @@ func (a *SplitConfigurationMerchantLevelApi) DeleteSplitConfiguration(ctx contex
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 500 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -343,9 +355,9 @@ func (a *SplitConfigurationMerchantLevelApi) DeleteSplitConfigurationRuleInput(m
 }
 
 /*
-DeleteSplitConfigurationRule Delete a split configuration rule
+DeleteSplitConfigurationRule Delete a rule
 
-Deletes the split configuration rule specified in the path.
+Deletes the rule specified in the path.
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API - SplitConfiguration read and write
@@ -377,8 +389,8 @@ func (a *SplitConfigurationMerchantLevelApi) DeleteSplitConfigurationRule(ctx co
 		return *res, httpRes, err
 	}
 
-	var serviceError common.RestServiceError
 	if httpRes.StatusCode == 400 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -387,6 +399,7 @@ func (a *SplitConfigurationMerchantLevelApi) DeleteSplitConfigurationRule(ctx co
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 401 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -395,6 +408,7 @@ func (a *SplitConfigurationMerchantLevelApi) DeleteSplitConfigurationRule(ctx co
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 403 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -403,6 +417,7 @@ func (a *SplitConfigurationMerchantLevelApi) DeleteSplitConfigurationRule(ctx co
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 422 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -411,6 +426,7 @@ func (a *SplitConfigurationMerchantLevelApi) DeleteSplitConfigurationRule(ctx co
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 500 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -441,9 +457,9 @@ func (a *SplitConfigurationMerchantLevelApi) GetSplitConfigurationInput(merchant
 }
 
 /*
-GetSplitConfiguration Get a split configuration
+GetSplitConfiguration Get a split configuration profile
 
-Returns the split configuration specified in the path.
+Returns the details of the split configuration profile specified in the path.
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API - SplitConfiguration read and write
@@ -474,8 +490,8 @@ func (a *SplitConfigurationMerchantLevelApi) GetSplitConfiguration(ctx context.C
 		return *res, httpRes, err
 	}
 
-	var serviceError common.RestServiceError
 	if httpRes.StatusCode == 400 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -484,6 +500,7 @@ func (a *SplitConfigurationMerchantLevelApi) GetSplitConfiguration(ctx context.C
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 401 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -492,6 +509,7 @@ func (a *SplitConfigurationMerchantLevelApi) GetSplitConfiguration(ctx context.C
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 403 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -500,6 +518,7 @@ func (a *SplitConfigurationMerchantLevelApi) GetSplitConfiguration(ctx context.C
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 422 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -508,6 +527,7 @@ func (a *SplitConfigurationMerchantLevelApi) GetSplitConfiguration(ctx context.C
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 500 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -536,9 +556,9 @@ func (a *SplitConfigurationMerchantLevelApi) ListSplitConfigurationsInput(mercha
 }
 
 /*
-ListSplitConfigurations Get a list of split configurations
+ListSplitConfigurations Get a list of split configuration profiles
 
-Returns the list of split configurations for the merchant account.
+Returns the list of split configuration profiles for the merchant account.
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API - SplitConfiguration read and write
@@ -568,8 +588,8 @@ func (a *SplitConfigurationMerchantLevelApi) ListSplitConfigurations(ctx context
 		return *res, httpRes, err
 	}
 
-	var serviceError common.RestServiceError
 	if httpRes.StatusCode == 400 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -578,6 +598,7 @@ func (a *SplitConfigurationMerchantLevelApi) ListSplitConfigurations(ctx context
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 401 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -586,6 +607,7 @@ func (a *SplitConfigurationMerchantLevelApi) ListSplitConfigurations(ctx context
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 403 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -594,6 +616,7 @@ func (a *SplitConfigurationMerchantLevelApi) ListSplitConfigurations(ctx context
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 422 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -602,6 +625,7 @@ func (a *SplitConfigurationMerchantLevelApi) ListSplitConfigurations(ctx context
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 500 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -640,9 +664,9 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitConditionsInput(merchant
 }
 
 /*
-UpdateSplitConditions Update split conditions
+UpdateSplitConditions Update the split conditions
 
-Changes the conditions of the split configuration rule specified in the path.
+Changes the [split conditions of the rule](https://docs.adyen.com/platforms/automatic-split-configuration/manage-split-configurations/api/#update-condition) specified in the path.
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API - SplitConfiguration read and write
@@ -674,8 +698,8 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitConditions(ctx context.C
 		return *res, httpRes, err
 	}
 
-	var serviceError common.RestServiceError
 	if httpRes.StatusCode == 400 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -684,6 +708,7 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitConditions(ctx context.C
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 401 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -692,6 +717,7 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitConditions(ctx context.C
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 403 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -700,6 +726,7 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitConditions(ctx context.C
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 422 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -708,6 +735,7 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitConditions(ctx context.C
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 500 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -744,9 +772,9 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitConfigurationDescription
 }
 
 /*
-UpdateSplitConfigurationDescription Update split configuration description
+UpdateSplitConfigurationDescription Update the description of the split configuration profile
 
-Changes the description of the split configuration specified in the path.
+Changes the description of the split configuration profile specified in the path.
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API - SplitConfiguration read and write
@@ -777,8 +805,8 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitConfigurationDescription
 		return *res, httpRes, err
 	}
 
-	var serviceError common.RestServiceError
 	if httpRes.StatusCode == 400 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -787,6 +815,7 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitConfigurationDescription
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 401 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -795,6 +824,7 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitConfigurationDescription
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 403 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -803,6 +833,7 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitConfigurationDescription
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 422 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -811,6 +842,7 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitConfigurationDescription
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 500 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -853,7 +885,7 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitLogicInput(merchantId st
 /*
 UpdateSplitLogic Update the split logic
 
-Changes the split logic specified in the path.
+Changes the [split logic](https://docs.adyen.com/platforms/automatic-split-configuration/manage-split-configurations/api/#update-split-logic) specified in the path.
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API - SplitConfiguration read and write
@@ -886,8 +918,8 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitLogic(ctx context.Contex
 		return *res, httpRes, err
 	}
 
-	var serviceError common.RestServiceError
 	if httpRes.StatusCode == 400 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -896,6 +928,7 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitLogic(ctx context.Contex
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 401 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -904,6 +937,7 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitLogic(ctx context.Contex
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 403 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -912,6 +946,7 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitLogic(ctx context.Contex
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 422 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -920,6 +955,7 @@ func (a *SplitConfigurationMerchantLevelApi) UpdateSplitLogic(ctx context.Contex
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 500 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {

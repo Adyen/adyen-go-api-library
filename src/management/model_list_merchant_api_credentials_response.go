@@ -19,6 +19,7 @@ var _ common.MappedNullable = &ListMerchantApiCredentialsResponse{}
 
 // ListMerchantApiCredentialsResponse struct for ListMerchantApiCredentialsResponse
 type ListMerchantApiCredentialsResponse struct {
+	// Pagination references.
 	Links *PaginationLinks `json:"_links,omitempty"`
 	// The list of API credentials.
 	Data []ApiCredential `json:"data,omitempty"`

@@ -32,15 +32,19 @@ type Profile struct {
 	// Specifies the server domain name for EAP-TLS and EAP-PEAP WiFi profiles on Android 11 and above.
 	DomainSuffix *string `json:"domainSuffix,omitempty"`
 	// For `authType` **wpa-eap** or **wpa2-eap**. Possible values: **tls**, **peap**, **leap**, **fast**
-	Eap           *string `json:"eap,omitempty"`
-	EapCaCert     *File   `json:"eapCaCert,omitempty"`
-	EapClientCert *File   `json:"eapClientCert,omitempty"`
-	EapClientKey  *File   `json:"eapClientKey,omitempty"`
+	Eap *string `json:"eap,omitempty"`
+	// For `authType` **wpa-eap** or **wpa2-eap**. The root certificate from the CA that signed the certificate of the RADIUS server that is part of your wireless network.
+	EapCaCert *File `json:"eapCaCert,omitempty"`
+	// For `eap` **tls**. The certificate chain for the terminals. All terminals in the same network will use the same EAP client certificate.
+	EapClientCert *File `json:"eapClientCert,omitempty"`
+	// For `eap` **tls**. The RSA private key for the client. Include the lines BEGIN RSA PRIVATE KEY and END RSA PRIVATE KEY.
+	EapClientKey *File `json:"eapClientKey,omitempty"`
 	// For `eap` **tls**. The password of the RSA key file, if that file is password-protected.
 	EapClientPwd *string `json:"eapClientPwd,omitempty"`
 	// For `authType` **wpa-eap** or **wpa2-eap**. The EAP-PEAP username from your MS-CHAP account. Must match the configuration of your RADIUS server.
-	EapIdentity         *string `json:"eapIdentity,omitempty"`
-	EapIntermediateCert *File   `json:"eapIntermediateCert,omitempty"`
+	EapIdentity *string `json:"eapIdentity,omitempty"`
+	// For `eap` **tls**. The EAP intermediate certificate.
+	EapIntermediateCert *File `json:"eapIntermediateCert,omitempty"`
 	// For `eap` **peap**. The EAP-PEAP password from your MS-CHAP account. Must match the configuration of your RADIUS server.
 	EapPwd *string `json:"eapPwd,omitempty"`
 	// Indicates if the network doesn't broadcast its SSID. Mandatory for Android terminals, because these terminals rely on this setting to be able to connect to any network.

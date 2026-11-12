@@ -25,6 +25,8 @@ type Standalone struct {
 	EnableGratuities *bool `json:"enableGratuities,omitempty"`
 	// Enable standalone mode.
 	EnableStandalone *bool `json:"enableStandalone,omitempty"`
+	// The merchant reference to be sent with every transaction when the terminal is in standalone mode. Used for reconciliation.  This property also accepts one or more variables as input, together with plain text. When this property reaches the terminal, the terminal replaces the variables with the values that apply to it. For the list of allowed variables, see [Configure the merchant reference](https://docs.adyen.com/point-of-sale/standalone/standalone-build/set-up-standalone#configure-merchant-reference).
+	MerchantReference *string `json:"merchantReference,omitempty"`
 }
 
 // NewStandalone instantiates a new Standalone object
@@ -140,6 +142,38 @@ func (o *Standalone) SetEnableStandalone(v bool) {
 	o.EnableStandalone = &v
 }
 
+// GetMerchantReference returns the MerchantReference field value if set, zero value otherwise.
+func (o *Standalone) GetMerchantReference() string {
+	if o == nil || common.IsNil(o.MerchantReference) {
+		var ret string
+		return ret
+	}
+	return *o.MerchantReference
+}
+
+// GetMerchantReferenceOk returns a tuple with the MerchantReference field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Standalone) GetMerchantReferenceOk() (*string, bool) {
+	if o == nil || common.IsNil(o.MerchantReference) {
+		return nil, false
+	}
+	return o.MerchantReference, true
+}
+
+// HasMerchantReference returns a boolean if a field has been set.
+func (o *Standalone) HasMerchantReference() bool {
+	if o != nil && !common.IsNil(o.MerchantReference) {
+		return true
+	}
+
+	return false
+}
+
+// SetMerchantReference gets a reference to the given string and assigns it to the MerchantReference field.
+func (o *Standalone) SetMerchantReference(v string) {
+	o.MerchantReference = &v
+}
+
 func (o Standalone) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -158,6 +192,9 @@ func (o Standalone) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.EnableStandalone) {
 		toSerialize["enableStandalone"] = o.EnableStandalone
+	}
+	if !common.IsNil(o.MerchantReference) {
+		toSerialize["merchantReference"] = o.MerchantReference
 	}
 	return toSerialize, nil
 }

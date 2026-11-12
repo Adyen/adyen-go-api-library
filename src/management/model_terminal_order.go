@@ -19,6 +19,7 @@ var _ common.MappedNullable = &TerminalOrder{}
 
 // TerminalOrder struct for TerminalOrder
 type TerminalOrder struct {
+	// The details of the entity that the order is billed to.
 	BillingEntity *BillingEntity `json:"billingEntity,omitempty"`
 	// The merchant-defined purchase order number. This will be printed on the packing list.
 	CustomerOrderReference *string `json:"customerOrderReference,omitempty"`
@@ -27,7 +28,8 @@ type TerminalOrder struct {
 	// The products included in the order.
 	Items []OrderItem `json:"items,omitempty"`
 	// The date and time that the order was placed, in UTC ISO 8601 format. For example, \"2011-12-03T10:15:30Z\".
-	OrderDate        *string           `json:"orderDate,omitempty"`
+	OrderDate *string `json:"orderDate,omitempty"`
+	// The details of the location where the order is shipped to.
 	ShippingLocation *ShippingLocation `json:"shippingLocation,omitempty"`
 	// The processing status of the order.
 	Status *string `json:"status,omitempty"`

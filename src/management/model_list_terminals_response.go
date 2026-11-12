@@ -19,6 +19,7 @@ var _ common.MappedNullable = &ListTerminalsResponse{}
 
 // ListTerminalsResponse struct for ListTerminalsResponse
 type ListTerminalsResponse struct {
+	// Pagination references.
 	Links *PaginationLinks `json:"_links,omitempty"`
 	// The list of terminals and their details.
 	Data []Terminal `json:"data,omitempty"`

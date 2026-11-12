@@ -20,9 +20,11 @@ var _ common.MappedNullable = &PaymentInstrumentInfo{}
 // PaymentInstrumentInfo struct for PaymentInstrumentInfo
 type PaymentInstrumentInfo struct {
 	// The unique identifier of the [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/v1/post/balanceAccounts__resParam_id) associated with the payment instrument.
-	BalanceAccountId string            `json:"balanceAccountId"`
-	BankAccount      *BankAccountModel `json:"bankAccount,omitempty"`
-	Card             *CardInfo         `json:"card,omitempty"`
+	BalanceAccountId string `json:"balanceAccountId"`
+	// Contains the business account details.
+	BankAccount *BankAccountModel `json:"bankAccount,omitempty"`
+	// Contains information about the card. Required when you create a payment instrument of `type` **card**.
+	Card *CardInfo `json:"card,omitempty"`
 	// Your description for the payment instrument, maximum 300 characters.
 	Description *string `json:"description,omitempty"`
 	// The two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code where the payment instrument is issued. For example, **NL** or **US**.

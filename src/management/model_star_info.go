@@ -19,8 +19,9 @@ var _ common.MappedNullable = &StarInfo{}
 
 // StarInfo struct for StarInfo
 type StarInfo struct {
-	// The type of transactions processed over this payment method.  Allowed values: - **pos** for in-person payments.  - **billpay** for subscription payments, both the initial payment and the later recurring payments. These transactions have `recurringProcessingModel` **Subscription**.  - **ecom** for all other card not present transactions. This includes non-recurring transactions and transactions with `recurringProcessingModel` **CardOnFile** or **UnscheduledCardOnFile**.
-	ProcessingType         string                      `json:"processingType"`
+	// The type of transactions processed over this payment method. The recommended usage is to not specify a processing type. We then set up the payment method to process all transaction types.   Allowed values: - **pos** for in-person payments.  - **billpay** for subscription payments, both the initial payment and the later recurring payments. These transactions have `recurringProcessingModel` **Subscription**.  - **ecom** for all other card not present transactions. This includes non-recurring transactions and transactions with `recurringProcessingModel` **CardOnFile** or **UnscheduledCardOnFile**.
+	ProcessingType *string `json:"processingType,omitempty"`
+	// Information regarding the transaction description. > You cannot configure the transaction description in the test environment.
 	TransactionDescription *TransactionDescriptionInfo `json:"transactionDescription,omitempty"`
 }
 
@@ -28,9 +29,8 @@ type StarInfo struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStarInfo(processingType string) *StarInfo {
+func NewStarInfo() *StarInfo {
 	this := StarInfo{}
-	this.ProcessingType = processingType
 	return &this
 }
 
@@ -42,28 +42,36 @@ func NewStarInfoWithDefaults() *StarInfo {
 	return &this
 }
 
-// GetProcessingType returns the ProcessingType field value
+// GetProcessingType returns the ProcessingType field value if set, zero value otherwise.
 func (o *StarInfo) GetProcessingType() string {
-	if o == nil {
+	if o == nil || common.IsNil(o.ProcessingType) {
 		var ret string
 		return ret
 	}
-
-	return o.ProcessingType
+	return *o.ProcessingType
 }
 
-// GetProcessingTypeOk returns a tuple with the ProcessingType field value
+// GetProcessingTypeOk returns a tuple with the ProcessingType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StarInfo) GetProcessingTypeOk() (*string, bool) {
-	if o == nil {
+	if o == nil || common.IsNil(o.ProcessingType) {
 		return nil, false
 	}
-	return &o.ProcessingType, true
+	return o.ProcessingType, true
 }
 
-// SetProcessingType sets field value
+// HasProcessingType returns a boolean if a field has been set.
+func (o *StarInfo) HasProcessingType() bool {
+	if o != nil && !common.IsNil(o.ProcessingType) {
+		return true
+	}
+
+	return false
+}
+
+// SetProcessingType gets a reference to the given string and assigns it to the ProcessingType field.
 func (o *StarInfo) SetProcessingType(v string) {
-	o.ProcessingType = v
+	o.ProcessingType = &v
 }
 
 // GetTransactionDescription returns the TransactionDescription field value if set, zero value otherwise.
@@ -108,7 +116,9 @@ func (o StarInfo) MarshalJSON() ([]byte, error) {
 
 func (o StarInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["processingType"] = o.ProcessingType
+	if !common.IsNil(o.ProcessingType) {
+		toSerialize["processingType"] = o.ProcessingType
+	}
 	if !common.IsNil(o.TransactionDescription) {
 		toSerialize["transactionDescription"] = o.TransactionDescription
 	}

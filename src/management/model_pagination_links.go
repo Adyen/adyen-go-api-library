@@ -19,11 +19,16 @@ var _ common.MappedNullable = &PaginationLinks{}
 
 // PaginationLinks struct for PaginationLinks
 type PaginationLinks struct {
-	First LinksElement  `json:"first"`
-	Last  LinksElement  `json:"last"`
-	Next  *LinksElement `json:"next,omitempty"`
-	Prev  *LinksElement `json:"prev,omitempty"`
-	Self  LinksElement  `json:"self"`
+	// The first page.
+	First LinksElement `json:"first"`
+	// The last page.
+	Last LinksElement `json:"last"`
+	// The next page. Only present if there is a next page.
+	Next *LinksElement `json:"next,omitempty"`
+	// The previous page. Only present if there is a previous page.
+	Prev *LinksElement `json:"prev,omitempty"`
+	// The current page.
+	Self LinksElement `json:"self"`
 }
 
 // NewPaginationLinks instantiates a new PaginationLinks object

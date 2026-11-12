@@ -19,6 +19,7 @@ var _ common.MappedNullable = &Merchant{}
 
 // Merchant struct for Merchant
 type Merchant struct {
+	// References to resources connected with this merchant.
 	Links *MerchantLinks `json:"_links,omitempty"`
 	// The [capture delay](https://docs.adyen.com/online-payments/capture#capture-delay) set for the merchant account.  Possible values: * **Immediate** * **Manual** * Number of days from **1** to **29**
 	CaptureDelay *string `json:"captureDelay,omitempty"`

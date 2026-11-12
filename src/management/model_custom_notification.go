@@ -20,6 +20,7 @@ var _ common.MappedNullable = &CustomNotification{}
 
 // CustomNotification struct for CustomNotification
 type CustomNotification struct {
+	// The amount of the payment that the notification is about. Set the value in [minor units](https://docs.adyen.com/development-resources/currency-codes).
 	Amount *Amount `json:"amount,omitempty"`
 	// The event that caused the notification to be sent.Currently supported values: * **AUTHORISATION** * **CANCELLATION** * **REFUND** * **CAPTURE** * **REPORT_AVAILABLE** * **CHARGEBACK** * **REQUEST_FOR_INFORMATION** * **NOTIFICATION_OF_CHARGEBACK** * **NOTIFICATIONTEST** * **ORDER_OPENED** * **ORDER_CLOSED** * **CHARGEBACK_REVERSED** * **REFUNDED_REVERSED** * **REFUND_WITH_DATA**
 	EventCode *string `json:"eventCode,omitempty"`

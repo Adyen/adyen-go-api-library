@@ -23,26 +23,33 @@ type TransactionRule struct {
 	AggregationLevel *string `json:"aggregationLevel,omitempty"`
 	// Your description for the transaction rule.
 	Description string `json:"description"`
-	// The date when the rule will stop being evaluated, in ISO 8601 extended offset date-time format. For example, **2020-12-18T10:15:30+01:00**.  If not provided, the rule will be evaluated until the rule status is set to **inactive**.
-	EndDate   *string                  `json:"endDate,omitempty"`
+	// The date when the rule will stop being evaluated, in ISO 8601 extended offset date-time format. For example, **2025-03-19T10:15:30+01:00**.  If not provided, the rule will be evaluated until the rule status is set to **inactive**.
+	EndDate *string `json:"endDate,omitempty"`
+	// The type and unique identifier of the resource to which the rule applies.
 	EntityKey TransactionRuleEntityKey `json:"entityKey"`
 	// The unique identifier of the transaction rule.
-	Id       *string                 `json:"id,omitempty"`
+	Id *string `json:"id,omitempty"`
+	// The [time interval](https://docs.adyen.com/issuing/transaction-rules#time-intervals) when the rule conditions apply.
 	Interval TransactionRuleInterval `json:"interval"`
-	// The [outcome](https://docs.adyen.com/issuing/transaction-rules#outcome) that will be applied when a transaction meets the conditions of the rule.  Possible values: * **hardBlock**: the transaction is declined. * **scoreBased**: the transaction is assigned the `score` you specified. Adyen calculates the total score and if it exceeds 100, the transaction is declined.  Default value: **hardBlock**.  > **scoreBased** is not allowed when `requestType` is **bankTransfer**.
+	// The [outcome](https://docs.adyen.com/issuing/transaction-rules#outcome) that will be applied when a transaction meets the conditions of the rule.  Possible values: * **hardBlock** (default): the transaction is declined. * **scoreBased**: the transaction is assigned the `score` you specified. Adyen calculates the total score and if it exceeds 100, the transaction is declined. This value is not allowed when `requestType` is **bankTransfer**.  * **enforceSCA**: your user is prompted to verify their identity using [3D Secure authentication](https://docs.adyen.com/issuing/3d-secure/). If the authentication fails or times out, the transaction is declined. This value is only allowed when `requestType` is **authentication**.
 	OutcomeType *string `json:"outcomeType,omitempty"`
+	// The `id` of the transaction rule you want to override or skip for the specified `entityKey`.
+	OverridesRule *string `json:"overridesRule,omitempty"`
+	// Specifies the reason for creating the rule.  Possible values: * **fraud**: the rule is created to regulate fraudulent activity. * **policy**: the rule is created to ensure that the transaction adheres to your business' policies. For example, if your business has policies about the Merchant Category Codes (MCCs) allowed on a transaction, you can create a rule to block transactions that have specific MCCs.
+	Purpose *string `json:"purpose,omitempty"`
 	// Your reference for the transaction rule.
 	Reference string `json:"reference"`
 	// Indicates the type of request to which the rule applies. If not provided, by default, this is set to **authorization**.  Possible values: **authorization**, **authentication**, **tokenization**, **bankTransfer**.
-	RequestType      *string                     `json:"requestType,omitempty"`
+	RequestType *string `json:"requestType,omitempty"`
+	// Contains one or more objects that define the [rule conditions](https://docs.adyen.com/issuing/transaction-rules#conditions). Each object must have a value and an operation which determines how the values must be evaluated.  For example, a `countries` object can have a list of country codes **[\"US\", \"CA\"]** in the `value` field and **anyMatch** in the `operation` field.
 	RuleRestrictions TransactionRuleRestrictions `json:"ruleRestrictions"`
 	// A positive or negative score applied to the transaction if it meets the conditions of the rule. Required when `outcomeType` is **scoreBased**.  The value must be between **-100** and **100**.
 	Score *int32 `json:"score,omitempty"`
-	// The date when the rule will start to be evaluated, in ISO 8601 extended offset date-time format. For example, **2020-12-18T10:15:30+01:00**.  If not provided when creating a transaction rule, the `startDate` is set to the date when the rule status is set to **active**.
+	// The date when the rule will start to be evaluated, in ISO 8601 extended offset date-time format. For example, **2025-03-19T10:15:30+01:00**.  If not provided when creating a transaction rule, the `startDate` is set to the date when the rule status is set to **active**.
 	StartDate *string `json:"startDate,omitempty"`
 	// The status of the transaction rule. If you provide a `startDate` in the request, the rule is automatically created  with an **active** status.   Possible values: **active**, **inactive**.
 	Status *string `json:"status,omitempty"`
-	// The [type of rule](https://docs.adyen.com/issuing/transaction-rules#rule-types), which defines if a rule blocks transactions based on individual characteristics or accumulates data.  Possible values:  * **blockList**: decline a transaction when the conditions are met.  * **maxUsage**: add the amount or number of transactions for the lifetime of a payment instrument, and then decline a transaction when the specified limits are met.  * **velocity**: add the amount or number of transactions based on a specified time interval, and then decline a transaction when the specified limits are met.
+	// The [type of rule](https://docs.adyen.com/issuing/transaction-rules#rule-types), which defines if a rule blocks transactions based on individual characteristics or accumulates data.  Possible values:  * **blockList**: decline a transaction when the conditions are met.  * **maxUsage**: add the amount or number of transactions for the lifetime of a payment instrument, and then decline a transaction when the specified limits are met.  * **velocity**: add the amount or number of transactions based on a specified time interval, and then decline a transaction when the specified limits are met.  * **bypass**: bypass or skip a rule for the specified `entityKey`. Transactions processed to that entity are no longer evaluated by the bypassed rule.  You must provide the `id` of the rule to bypass in `overridesRule` and leave the `ruleRestrictions` object empty.
 	Type string `json:"type"`
 }
 
@@ -267,6 +274,70 @@ func (o *TransactionRule) HasOutcomeType() bool {
 // SetOutcomeType gets a reference to the given string and assigns it to the OutcomeType field.
 func (o *TransactionRule) SetOutcomeType(v string) {
 	o.OutcomeType = &v
+}
+
+// GetOverridesRule returns the OverridesRule field value if set, zero value otherwise.
+func (o *TransactionRule) GetOverridesRule() string {
+	if o == nil || common.IsNil(o.OverridesRule) {
+		var ret string
+		return ret
+	}
+	return *o.OverridesRule
+}
+
+// GetOverridesRuleOk returns a tuple with the OverridesRule field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionRule) GetOverridesRuleOk() (*string, bool) {
+	if o == nil || common.IsNil(o.OverridesRule) {
+		return nil, false
+	}
+	return o.OverridesRule, true
+}
+
+// HasOverridesRule returns a boolean if a field has been set.
+func (o *TransactionRule) HasOverridesRule() bool {
+	if o != nil && !common.IsNil(o.OverridesRule) {
+		return true
+	}
+
+	return false
+}
+
+// SetOverridesRule gets a reference to the given string and assigns it to the OverridesRule field.
+func (o *TransactionRule) SetOverridesRule(v string) {
+	o.OverridesRule = &v
+}
+
+// GetPurpose returns the Purpose field value if set, zero value otherwise.
+func (o *TransactionRule) GetPurpose() string {
+	if o == nil || common.IsNil(o.Purpose) {
+		var ret string
+		return ret
+	}
+	return *o.Purpose
+}
+
+// GetPurposeOk returns a tuple with the Purpose field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionRule) GetPurposeOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Purpose) {
+		return nil, false
+	}
+	return o.Purpose, true
+}
+
+// HasPurpose returns a boolean if a field has been set.
+func (o *TransactionRule) HasPurpose() bool {
+	if o != nil && !common.IsNil(o.Purpose) {
+		return true
+	}
+
+	return false
+}
+
+// SetPurpose gets a reference to the given string and assigns it to the Purpose field.
+func (o *TransactionRule) SetPurpose(v string) {
+	o.Purpose = &v
 }
 
 // GetReference returns the Reference field value
@@ -494,6 +565,12 @@ func (o TransactionRule) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.OutcomeType) {
 		toSerialize["outcomeType"] = o.OutcomeType
 	}
+	if !common.IsNil(o.OverridesRule) {
+		toSerialize["overridesRule"] = o.OverridesRule
+	}
+	if !common.IsNil(o.Purpose) {
+		toSerialize["purpose"] = o.Purpose
+	}
 	toSerialize["reference"] = o.Reference
 	if !common.IsNil(o.RequestType) {
 		toSerialize["requestType"] = o.RequestType
@@ -557,6 +634,15 @@ func (o *TransactionRule) isValidOutcomeType() bool {
 	}
 	return false
 }
+func (o *TransactionRule) isValidPurpose() bool {
+	var allowedEnumValues = []string{"compliance", "fraud", "internalPolicy", "policy", "system"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetPurpose() == allowed {
+			return true
+		}
+	}
+	return false
+}
 func (o *TransactionRule) isValidRequestType() bool {
 	var allowedEnumValues = []string{"authentication", "authorization", "bankTransfer", "tokenization"}
 	for _, allowed := range allowedEnumValues {
@@ -576,7 +662,7 @@ func (o *TransactionRule) isValidStatus() bool {
 	return false
 }
 func (o *TransactionRule) isValidType() bool {
-	var allowedEnumValues = []string{"allowList", "blockList", "maxUsage", "velocity"}
+	var allowedEnumValues = []string{"allowList", "blockList", "bypass", "maxUsage", "velocity"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

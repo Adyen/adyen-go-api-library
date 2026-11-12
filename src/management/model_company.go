@@ -19,6 +19,7 @@ var _ common.MappedNullable = &Company{}
 
 // Company struct for Company
 type Company struct {
+	// References to resources connected with this company.
 	Links *CompanyLinks `json:"_links,omitempty"`
 	// List of available data centers.  Adyen has several data centers around the world.In the URL that you use for making API requests, we recommend you use the live URL prefix from the data center closest to your shoppers.
 	DataCenters []DataCenter `json:"dataCenters,omitempty"`

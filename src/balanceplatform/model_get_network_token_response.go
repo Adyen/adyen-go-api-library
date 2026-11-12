@@ -19,6 +19,7 @@ var _ common.MappedNullable = &GetNetworkTokenResponse{}
 
 // GetNetworkTokenResponse struct for GetNetworkTokenResponse
 type GetNetworkTokenResponse struct {
+	// The details of the network token.
 	Token NetworkToken `json:"token"`
 }
 

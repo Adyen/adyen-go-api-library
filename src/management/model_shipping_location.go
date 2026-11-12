@@ -19,7 +19,9 @@ var _ common.MappedNullable = &ShippingLocation{}
 
 // ShippingLocation struct for ShippingLocation
 type ShippingLocation struct {
+	// The address details of the shipping location.
 	Address *Address `json:"address,omitempty"`
+	// The contact details for the shipping location.
 	Contact *Contact `json:"contact,omitempty"`
 	// The unique identifier of the shipping location, for use as `shippingLocationId` when creating an order.
 	Id *string `json:"id,omitempty"`

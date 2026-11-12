@@ -11,15 +11,25 @@ package management
 import (
 	"encoding/json"
 	"fmt"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // ScheduleTerminalActionsRequestActionDetails - Information about the action to take.
 type ScheduleTerminalActionsRequestActionDetails struct {
+	ForceRebootDetails                 *ForceRebootDetails
 	InstallAndroidAppDetails           *InstallAndroidAppDetails
 	InstallAndroidCertificateDetails   *InstallAndroidCertificateDetails
 	ReleaseUpdateDetails               *ReleaseUpdateDetails
 	UninstallAndroidAppDetails         *UninstallAndroidAppDetails
 	UninstallAndroidCertificateDetails *UninstallAndroidCertificateDetails
+}
+
+// ForceRebootDetailsAsScheduleTerminalActionsRequestActionDetails is a convenience function that returns ForceRebootDetails wrapped in ScheduleTerminalActionsRequestActionDetails
+func ForceRebootDetailsAsScheduleTerminalActionsRequestActionDetails(v *ForceRebootDetails) ScheduleTerminalActionsRequestActionDetails {
+	return ScheduleTerminalActionsRequestActionDetails{
+		ForceRebootDetails: v,
+	}
 }
 
 // InstallAndroidAppDetailsAsScheduleTerminalActionsRequestActionDetails is a convenience function that returns InstallAndroidAppDetails wrapped in ScheduleTerminalActionsRequestActionDetails
@@ -60,90 +70,174 @@ func UninstallAndroidCertificateDetailsAsScheduleTerminalActionsRequestActionDet
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *ScheduleTerminalActionsRequestActionDetails) UnmarshalJSON(data []byte) error {
 	var err error
-	match := 0
-	// try to unmarshal data into InstallAndroidAppDetails
-	err = json.Unmarshal(data, &dst.InstallAndroidAppDetails)
-	if err == nil {
-		jsonInstallAndroidAppDetails, _ := json.Marshal(dst.InstallAndroidAppDetails)
-		if string(jsonInstallAndroidAppDetails) == "{}" || !dst.InstallAndroidAppDetails.isValidType() { // empty struct
+	// clear any variant left by a previous unmarshal into the same destination
+	dst.ForceRebootDetails = nil
+	dst.InstallAndroidAppDetails = nil
+	dst.InstallAndroidCertificateDetails = nil
+	dst.ReleaseUpdateDetails = nil
+	dst.UninstallAndroidAppDetails = nil
+	dst.UninstallAndroidCertificateDetails = nil
+
+	// use discriminator value to speed up the lookup
+	var jsonDict map[string]interface{}
+	err = common.NewStrictDecoder(data).Decode(&jsonDict)
+	if err != nil {
+		return fmt.Errorf("failed to unmarshal JSON into map for the discriminator lookup")
+	}
+
+	// check if the discriminator value is 'ForceReboot'
+	if jsonDict["type"] == "ForceReboot" {
+		// try to unmarshal JSON data into ForceRebootDetails
+		err = json.Unmarshal(data, &dst.ForceRebootDetails)
+		if err == nil {
+			return nil // data stored in dst.ForceRebootDetails, return on the first match
+		} else {
+			dst.ForceRebootDetails = nil
+			return fmt.Errorf("failed to unmarshal ScheduleTerminalActionsRequestActionDetails as ForceRebootDetails: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'InstallAndroidApp'
+	if jsonDict["type"] == "InstallAndroidApp" {
+		// try to unmarshal JSON data into InstallAndroidAppDetails
+		err = json.Unmarshal(data, &dst.InstallAndroidAppDetails)
+		if err == nil {
+			return nil // data stored in dst.InstallAndroidAppDetails, return on the first match
+		} else {
 			dst.InstallAndroidAppDetails = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal ScheduleTerminalActionsRequestActionDetails as InstallAndroidAppDetails: %s", err.Error())
 		}
-	} else {
-		dst.InstallAndroidAppDetails = nil
 	}
 
-	// try to unmarshal data into InstallAndroidCertificateDetails
-	err = json.Unmarshal(data, &dst.InstallAndroidCertificateDetails)
-	if err == nil {
-		jsonInstallAndroidCertificateDetails, _ := json.Marshal(dst.InstallAndroidCertificateDetails)
-		if string(jsonInstallAndroidCertificateDetails) == "{}" || !dst.InstallAndroidCertificateDetails.isValidType() { // empty struct
+	// check if the discriminator value is 'InstallAndroidCertificate'
+	if jsonDict["type"] == "InstallAndroidCertificate" {
+		// try to unmarshal JSON data into InstallAndroidCertificateDetails
+		err = json.Unmarshal(data, &dst.InstallAndroidCertificateDetails)
+		if err == nil {
+			return nil // data stored in dst.InstallAndroidCertificateDetails, return on the first match
+		} else {
 			dst.InstallAndroidCertificateDetails = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal ScheduleTerminalActionsRequestActionDetails as InstallAndroidCertificateDetails: %s", err.Error())
 		}
-	} else {
-		dst.InstallAndroidCertificateDetails = nil
 	}
 
-	// try to unmarshal data into ReleaseUpdateDetails
-	err = json.Unmarshal(data, &dst.ReleaseUpdateDetails)
-	if err == nil {
-		jsonReleaseUpdateDetails, _ := json.Marshal(dst.ReleaseUpdateDetails)
-		if string(jsonReleaseUpdateDetails) == "{}" || !dst.ReleaseUpdateDetails.isValidType() { // empty struct
+	// check if the discriminator value is 'ReleaseUpdate'
+	if jsonDict["type"] == "ReleaseUpdate" {
+		// try to unmarshal JSON data into ReleaseUpdateDetails
+		err = json.Unmarshal(data, &dst.ReleaseUpdateDetails)
+		if err == nil {
+			return nil // data stored in dst.ReleaseUpdateDetails, return on the first match
+		} else {
 			dst.ReleaseUpdateDetails = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal ScheduleTerminalActionsRequestActionDetails as ReleaseUpdateDetails: %s", err.Error())
 		}
-	} else {
-		dst.ReleaseUpdateDetails = nil
 	}
 
-	// try to unmarshal data into UninstallAndroidAppDetails
-	err = json.Unmarshal(data, &dst.UninstallAndroidAppDetails)
-	if err == nil {
-		jsonUninstallAndroidAppDetails, _ := json.Marshal(dst.UninstallAndroidAppDetails)
-		if string(jsonUninstallAndroidAppDetails) == "{}" || !dst.UninstallAndroidAppDetails.isValidType() { // empty struct
+	// check if the discriminator value is 'UninstallAndroidApp'
+	if jsonDict["type"] == "UninstallAndroidApp" {
+		// try to unmarshal JSON data into UninstallAndroidAppDetails
+		err = json.Unmarshal(data, &dst.UninstallAndroidAppDetails)
+		if err == nil {
+			return nil // data stored in dst.UninstallAndroidAppDetails, return on the first match
+		} else {
 			dst.UninstallAndroidAppDetails = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal ScheduleTerminalActionsRequestActionDetails as UninstallAndroidAppDetails: %s", err.Error())
 		}
-	} else {
-		dst.UninstallAndroidAppDetails = nil
 	}
 
-	// try to unmarshal data into UninstallAndroidCertificateDetails
-	err = json.Unmarshal(data, &dst.UninstallAndroidCertificateDetails)
-	if err == nil {
-		jsonUninstallAndroidCertificateDetails, _ := json.Marshal(dst.UninstallAndroidCertificateDetails)
-		if string(jsonUninstallAndroidCertificateDetails) == "{}" || !dst.UninstallAndroidCertificateDetails.isValidType() { // empty struct
+	// check if the discriminator value is 'UninstallAndroidCertificate'
+	if jsonDict["type"] == "UninstallAndroidCertificate" {
+		// try to unmarshal JSON data into UninstallAndroidCertificateDetails
+		err = json.Unmarshal(data, &dst.UninstallAndroidCertificateDetails)
+		if err == nil {
+			return nil // data stored in dst.UninstallAndroidCertificateDetails, return on the first match
+		} else {
 			dst.UninstallAndroidCertificateDetails = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal ScheduleTerminalActionsRequestActionDetails as UninstallAndroidCertificateDetails: %s", err.Error())
 		}
-	} else {
-		dst.UninstallAndroidCertificateDetails = nil
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.InstallAndroidAppDetails = nil
-		dst.InstallAndroidCertificateDetails = nil
-		dst.ReleaseUpdateDetails = nil
-		dst.UninstallAndroidAppDetails = nil
-		dst.UninstallAndroidCertificateDetails = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(ScheduleTerminalActionsRequestActionDetails)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match
-		return fmt.Errorf("data failed to match schemas in oneOf(ScheduleTerminalActionsRequestActionDetails)")
+	// check if the discriminator value is 'ForceRebootDetails'
+	if jsonDict["type"] == "ForceRebootDetails" {
+		// try to unmarshal JSON data into ForceRebootDetails
+		err = json.Unmarshal(data, &dst.ForceRebootDetails)
+		if err == nil {
+			return nil // data stored in dst.ForceRebootDetails, return on the first match
+		} else {
+			dst.ForceRebootDetails = nil
+			return fmt.Errorf("failed to unmarshal ScheduleTerminalActionsRequestActionDetails as ForceRebootDetails: %s", err.Error())
+		}
 	}
+
+	// check if the discriminator value is 'InstallAndroidAppDetails'
+	if jsonDict["type"] == "InstallAndroidAppDetails" {
+		// try to unmarshal JSON data into InstallAndroidAppDetails
+		err = json.Unmarshal(data, &dst.InstallAndroidAppDetails)
+		if err == nil {
+			return nil // data stored in dst.InstallAndroidAppDetails, return on the first match
+		} else {
+			dst.InstallAndroidAppDetails = nil
+			return fmt.Errorf("failed to unmarshal ScheduleTerminalActionsRequestActionDetails as InstallAndroidAppDetails: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'InstallAndroidCertificateDetails'
+	if jsonDict["type"] == "InstallAndroidCertificateDetails" {
+		// try to unmarshal JSON data into InstallAndroidCertificateDetails
+		err = json.Unmarshal(data, &dst.InstallAndroidCertificateDetails)
+		if err == nil {
+			return nil // data stored in dst.InstallAndroidCertificateDetails, return on the first match
+		} else {
+			dst.InstallAndroidCertificateDetails = nil
+			return fmt.Errorf("failed to unmarshal ScheduleTerminalActionsRequestActionDetails as InstallAndroidCertificateDetails: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'ReleaseUpdateDetails'
+	if jsonDict["type"] == "ReleaseUpdateDetails" {
+		// try to unmarshal JSON data into ReleaseUpdateDetails
+		err = json.Unmarshal(data, &dst.ReleaseUpdateDetails)
+		if err == nil {
+			return nil // data stored in dst.ReleaseUpdateDetails, return on the first match
+		} else {
+			dst.ReleaseUpdateDetails = nil
+			return fmt.Errorf("failed to unmarshal ScheduleTerminalActionsRequestActionDetails as ReleaseUpdateDetails: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'UninstallAndroidAppDetails'
+	if jsonDict["type"] == "UninstallAndroidAppDetails" {
+		// try to unmarshal JSON data into UninstallAndroidAppDetails
+		err = json.Unmarshal(data, &dst.UninstallAndroidAppDetails)
+		if err == nil {
+			return nil // data stored in dst.UninstallAndroidAppDetails, return on the first match
+		} else {
+			dst.UninstallAndroidAppDetails = nil
+			return fmt.Errorf("failed to unmarshal ScheduleTerminalActionsRequestActionDetails as UninstallAndroidAppDetails: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'UninstallAndroidCertificateDetails'
+	if jsonDict["type"] == "UninstallAndroidCertificateDetails" {
+		// try to unmarshal JSON data into UninstallAndroidCertificateDetails
+		err = json.Unmarshal(data, &dst.UninstallAndroidCertificateDetails)
+		if err == nil {
+			return nil // data stored in dst.UninstallAndroidCertificateDetails, return on the first match
+		} else {
+			dst.UninstallAndroidCertificateDetails = nil
+			return fmt.Errorf("failed to unmarshal ScheduleTerminalActionsRequestActionDetails as UninstallAndroidCertificateDetails: %s", err.Error())
+		}
+	}
+
+	return fmt.Errorf("data failed to match schemas in oneOf(ScheduleTerminalActionsRequestActionDetails)")
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src ScheduleTerminalActionsRequestActionDetails) MarshalJSON() ([]byte, error) {
+	if src.ForceRebootDetails != nil {
+		return json.Marshal(&src.ForceRebootDetails)
+	}
+
 	if src.InstallAndroidAppDetails != nil {
 		return json.Marshal(&src.InstallAndroidAppDetails)
 	}
@@ -172,6 +266,10 @@ func (obj *ScheduleTerminalActionsRequestActionDetails) GetActualInstance() inte
 	if obj == nil {
 		return nil
 	}
+	if obj.ForceRebootDetails != nil {
+		return obj.ForceRebootDetails
+	}
+
 	if obj.InstallAndroidAppDetails != nil {
 		return obj.InstallAndroidAppDetails
 	}

@@ -19,6 +19,7 @@ var _ common.MappedNullable = &GenericPmWithTdiInfo{}
 
 // GenericPmWithTdiInfo struct for GenericPmWithTdiInfo
 type GenericPmWithTdiInfo struct {
+	// Information regarding the transaction description. > You cannot configure the transaction description in the test environment.
 	TransactionDescription *TransactionDescriptionInfo `json:"transactionDescription,omitempty"`
 }
 

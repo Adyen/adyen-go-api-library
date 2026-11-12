@@ -19,6 +19,7 @@ var _ common.MappedNullable = &AllowedOrigin{}
 
 // AllowedOrigin struct for AllowedOrigin
 type AllowedOrigin struct {
+	// References to resources linked to the allowed origin.
 	Links *Links `json:"_links,omitempty"`
 	// Domain of the allowed origin.
 	Domain string `json:"domain"`

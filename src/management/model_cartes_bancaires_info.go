@@ -20,7 +20,8 @@ var _ common.MappedNullable = &CartesBancairesInfo{}
 // CartesBancairesInfo struct for CartesBancairesInfo
 type CartesBancairesInfo struct {
 	// Cartes Bancaires SIRET. Format: 14 digits.
-	Siret                  string                      `json:"siret"`
+	Siret string `json:"siret"`
+	// Information regarding the transaction description. > You cannot configure the transaction description in the test environment.
 	TransactionDescription *TransactionDescriptionInfo `json:"transactionDescription,omitempty"`
 }
 

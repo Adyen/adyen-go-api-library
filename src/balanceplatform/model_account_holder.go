@@ -23,6 +23,7 @@ type AccountHolder struct {
 	BalancePlatform *string `json:"balancePlatform,omitempty"`
 	// Contains key-value pairs that specify the actions that an account holder can do in your platform. The key is a capability required for your integration. For example, **issueCard** for Issuing. The value is an object containing the settings for the capability.
 	Capabilities *map[string]AccountHolderCapability `json:"capabilities,omitempty"`
+	// Contact details of the account holder.
 	// Deprecated
 	ContactDetails *ContactDetails `json:"contactDetails,omitempty"`
 	// Your description for the account holder.

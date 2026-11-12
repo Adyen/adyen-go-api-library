@@ -22,8 +22,9 @@ type TransactionRuleInterval struct {
 	// The day of month, used when the `duration.unit` is **months**. If not provided, by default, this is set to **1**, the first day of the month.
 	DayOfMonth *int32 `json:"dayOfMonth,omitempty"`
 	// The day of week, used when the `duration.unit` is **weeks**. If not provided, by default, this is set to **monday**.  Possible values: **sunday**, **monday**, **tuesday**, **wednesday**, **thursday**, **friday**.
-	DayOfWeek *string   `json:"dayOfWeek,omitempty"`
-	Duration  *Duration `json:"duration,omitempty"`
+	DayOfWeek *string `json:"dayOfWeek,omitempty"`
+	// The duration, which you can specify in hours, days, weeks, or months. The maximum duration is 90 days or an equivalent in other units. Required when the `type` is **rolling** or **sliding**.
+	Duration *Duration `json:"duration,omitempty"`
 	// The time of day, in **hh:mm:ss** format, used when the `duration.unit` is **hours**. If not provided, by default, this is set to **00:00:00**.
 	TimeOfDay *string `json:"timeOfDay,omitempty"`
 	// The [time zone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). For example, **Europe/Amsterdam**. By default, this is set to **UTC**.

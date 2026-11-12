@@ -22,7 +22,8 @@ type AccountHolderCapability struct {
 	// Indicates whether the capability is allowed. Adyen sets this to **true** if the verification is successful and the account holder is permitted to use the capability.
 	Allowed *bool `json:"allowed,omitempty"`
 	// The capability level that is allowed for the account holder.  Possible values: **notApplicable**, **low**, **medium**, **high**.
-	AllowedLevel    *string             `json:"allowedLevel,omitempty"`
+	AllowedLevel *string `json:"allowedLevel,omitempty"`
+	// A JSON object containing the settings that are allowed for the account holder.
 	AllowedSettings *CapabilitySettings `json:"allowedSettings,omitempty"`
 	// Indicates whether the capability is enabled. If **false**, the capability is temporarily disabled for the account holder.
 	Enabled *bool `json:"enabled,omitempty"`
@@ -31,7 +32,8 @@ type AccountHolderCapability struct {
 	// Indicates whether the capability is requested. To check whether the account holder is permitted to use the capability, refer to the `allowed` field.
 	Requested *bool `json:"requested,omitempty"`
 	// The requested level of the capability. Some capabilities, such as those used in [card issuing](https://docs.adyen.com/issuing/add-capabilities#capability-levels), have different levels. Levels increase the capability, but also require additional checks and increased monitoring.  Possible values: **notApplicable**, **low**, **medium**, **high**.
-	RequestedLevel    *string             `json:"requestedLevel,omitempty"`
+	RequestedLevel *string `json:"requestedLevel,omitempty"`
+	// A JSON object containing the settings that were requested for the account holder.
 	RequestedSettings *CapabilitySettings `json:"requestedSettings,omitempty"`
 	// Contains the status of the transfer instruments associated with this capability.
 	TransferInstruments []AccountSupportingEntityCapability `json:"transferInstruments,omitempty"`

@@ -19,6 +19,7 @@ var _ common.MappedNullable = &CompanyUser{}
 
 // CompanyUser struct for CompanyUser
 type CompanyUser struct {
+	// References to resources connected with this user.
 	Links *Links `json:"_links,omitempty"`
 	// The list of [account groups](https://docs.adyen.com/account/account-structure#account-groups) associated with this user.
 	AccountGroups []string `json:"accountGroups,omitempty"`
@@ -31,8 +32,9 @@ type CompanyUser struct {
 	// The email address of the user.
 	Email string `json:"email"`
 	// The unique identifier of the user.
-	Id   string `json:"id"`
-	Name *Name  `json:"name,omitempty"`
+	Id string `json:"id"`
+	// The user's full name.
+	Name *Name `json:"name,omitempty"`
 	// The list of [roles](https://docs.adyen.com/account/user-roles) for this user.
 	Roles []string `json:"roles"`
 	// The [tz database name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) of the time zone of the user. For example, **Europe/Amsterdam**.

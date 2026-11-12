@@ -19,11 +19,16 @@ var _ common.MappedNullable = &Link{}
 
 // Link struct for Link
 type Link struct {
-	First    *Href `json:"first,omitempty"`
-	Last     *Href `json:"last,omitempty"`
-	Next     *Href `json:"next,omitempty"`
+	// The link to the first page of the list.
+	First *Href `json:"first,omitempty"`
+	// The link to the last page of the list.
+	Last *Href `json:"last,omitempty"`
+	// The link to the next page of the list.
+	Next *Href `json:"next,omitempty"`
+	// The link to the previous page of the list.
 	Previous *Href `json:"previous,omitempty"`
-	Self     *Href `json:"self,omitempty"`
+	// The link to the list page you are currently viewing.
+	Self *Href `json:"self,omitempty"`
 }
 
 // NewLink instantiates a new Link object

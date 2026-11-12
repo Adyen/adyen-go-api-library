@@ -19,6 +19,7 @@ var _ common.MappedNullable = &Links{}
 
 // Links struct for Links
 type Links struct {
+	// Link to the resource itself.
 	Self LinksElement `json:"self"`
 }
 

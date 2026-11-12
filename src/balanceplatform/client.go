@@ -21,11 +21,19 @@ type APIClient struct {
 
 	AccountHoldersApi *AccountHoldersApi
 
+	AuthorizedCardUsersApi *AuthorizedCardUsersApi
+
 	BalanceAccountsApi *BalanceAccountsApi
+
+	BalancesApi *BalancesApi
 
 	BankAccountValidationApi *BankAccountValidationApi
 
 	CardOrdersApi *CardOrdersApi
+
+	CustomPayoutSchedulesSweepsApi *CustomPayoutSchedulesSweepsApi
+
+	DirectDebitMandatesApi *DirectDebitMandatesApi
 
 	GrantAccountsApi *GrantAccountsApi
 
@@ -35,6 +43,8 @@ type APIClient struct {
 
 	ManageSCADevicesApi *ManageSCADevicesApi
 
+	ManagedPayoutSchedulesApi *ManagedPayoutSchedulesApi
+
 	NetworkTokensApi *NetworkTokensApi
 
 	PaymentInstrumentGroupsApi *PaymentInstrumentGroupsApi
@@ -43,7 +53,17 @@ type APIClient struct {
 
 	PlatformApi *PlatformApi
 
+	RecurringTopUpsApi *RecurringTopUpsApi
+
+	SCAAssociationManagementApi *SCAAssociationManagementApi
+
+	SCADeviceManagementApi *SCADeviceManagementApi
+
 	TransactionRulesApi *TransactionRulesApi
+
+	TransferLimitsBalanceAccountLevelApi *TransferLimitsBalanceAccountLevelApi
+
+	TransferLimitsBalancePlatformLevelApi *TransferLimitsBalancePlatformLevelApi
 
 	TransferRoutesApi *TransferRoutesApi
 }
@@ -58,18 +78,28 @@ func NewAPIClient(client *common.Client) *APIClient {
 
 	// API Services
 	c.AccountHoldersApi = (*AccountHoldersApi)(&c.common)
+	c.AuthorizedCardUsersApi = (*AuthorizedCardUsersApi)(&c.common)
 	c.BalanceAccountsApi = (*BalanceAccountsApi)(&c.common)
+	c.BalancesApi = (*BalancesApi)(&c.common)
 	c.BankAccountValidationApi = (*BankAccountValidationApi)(&c.common)
 	c.CardOrdersApi = (*CardOrdersApi)(&c.common)
+	c.CustomPayoutSchedulesSweepsApi = (*CustomPayoutSchedulesSweepsApi)(&c.common)
+	c.DirectDebitMandatesApi = (*DirectDebitMandatesApi)(&c.common)
 	c.GrantAccountsApi = (*GrantAccountsApi)(&c.common)
 	c.GrantOffersApi = (*GrantOffersApi)(&c.common)
 	c.ManageCardPINApi = (*ManageCardPINApi)(&c.common)
 	c.ManageSCADevicesApi = (*ManageSCADevicesApi)(&c.common)
+	c.ManagedPayoutSchedulesApi = (*ManagedPayoutSchedulesApi)(&c.common)
 	c.NetworkTokensApi = (*NetworkTokensApi)(&c.common)
 	c.PaymentInstrumentGroupsApi = (*PaymentInstrumentGroupsApi)(&c.common)
 	c.PaymentInstrumentsApi = (*PaymentInstrumentsApi)(&c.common)
 	c.PlatformApi = (*PlatformApi)(&c.common)
+	c.RecurringTopUpsApi = (*RecurringTopUpsApi)(&c.common)
+	c.SCAAssociationManagementApi = (*SCAAssociationManagementApi)(&c.common)
+	c.SCADeviceManagementApi = (*SCADeviceManagementApi)(&c.common)
 	c.TransactionRulesApi = (*TransactionRulesApi)(&c.common)
+	c.TransferLimitsBalanceAccountLevelApi = (*TransferLimitsBalanceAccountLevelApi)(&c.common)
+	c.TransferLimitsBalancePlatformLevelApi = (*TransferLimitsBalancePlatformLevelApi)(&c.common)
 	c.TransferRoutesApi = (*TransferRoutesApi)(&c.common)
 
 	return c

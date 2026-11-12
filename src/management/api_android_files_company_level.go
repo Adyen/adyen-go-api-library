@@ -78,8 +78,8 @@ func (a *AndroidFilesCompanyLevelApi) GetAndroidApp(ctx context.Context, r Andro
 		return *res, httpRes, err
 	}
 
-	var serviceError common.RestServiceError
 	if httpRes.StatusCode == 400 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -88,6 +88,7 @@ func (a *AndroidFilesCompanyLevelApi) GetAndroidApp(ctx context.Context, r Andro
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 401 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -96,6 +97,7 @@ func (a *AndroidFilesCompanyLevelApi) GetAndroidApp(ctx context.Context, r Andro
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 403 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -104,6 +106,7 @@ func (a *AndroidFilesCompanyLevelApi) GetAndroidApp(ctx context.Context, r Andro
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 422 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -112,6 +115,7 @@ func (a *AndroidFilesCompanyLevelApi) GetAndroidApp(ctx context.Context, r Andro
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 500 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -218,8 +222,8 @@ func (a *AndroidFilesCompanyLevelApi) ListAndroidApps(ctx context.Context, r And
 		return *res, httpRes, err
 	}
 
-	var serviceError common.RestServiceError
 	if httpRes.StatusCode == 400 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -228,6 +232,7 @@ func (a *AndroidFilesCompanyLevelApi) ListAndroidApps(ctx context.Context, r And
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 401 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -236,6 +241,7 @@ func (a *AndroidFilesCompanyLevelApi) ListAndroidApps(ctx context.Context, r And
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 403 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -244,6 +250,7 @@ func (a *AndroidFilesCompanyLevelApi) ListAndroidApps(ctx context.Context, r And
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 422 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -252,6 +259,7 @@ func (a *AndroidFilesCompanyLevelApi) ListAndroidApps(ctx context.Context, r And
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 500 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -348,8 +356,8 @@ func (a *AndroidFilesCompanyLevelApi) ListAndroidCertificates(ctx context.Contex
 		return *res, httpRes, err
 	}
 
-	var serviceError common.RestServiceError
 	if httpRes.StatusCode == 400 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -358,6 +366,7 @@ func (a *AndroidFilesCompanyLevelApi) ListAndroidCertificates(ctx context.Contex
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 401 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -366,6 +375,7 @@ func (a *AndroidFilesCompanyLevelApi) ListAndroidCertificates(ctx context.Contex
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 403 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -374,6 +384,7 @@ func (a *AndroidFilesCompanyLevelApi) ListAndroidCertificates(ctx context.Contex
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 422 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -382,6 +393,7 @@ func (a *AndroidFilesCompanyLevelApi) ListAndroidCertificates(ctx context.Contex
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 500 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -447,8 +459,8 @@ func (a *AndroidFilesCompanyLevelApi) ReprocessAndroidApp(ctx context.Context, r
 		return *res, httpRes, err
 	}
 
-	var serviceError common.RestServiceError
 	if httpRes.StatusCode == 400 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -457,6 +469,7 @@ func (a *AndroidFilesCompanyLevelApi) ReprocessAndroidApp(ctx context.Context, r
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 401 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -465,6 +478,7 @@ func (a *AndroidFilesCompanyLevelApi) ReprocessAndroidApp(ctx context.Context, r
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 403 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -473,6 +487,7 @@ func (a *AndroidFilesCompanyLevelApi) ReprocessAndroidApp(ctx context.Context, r
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 422 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -481,6 +496,7 @@ func (a *AndroidFilesCompanyLevelApi) ReprocessAndroidApp(ctx context.Context, r
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 500 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -544,8 +560,8 @@ func (a *AndroidFilesCompanyLevelApi) UploadAndroidApp(ctx context.Context, r An
 		return *res, httpRes, err
 	}
 
-	var serviceError common.RestServiceError
 	if httpRes.StatusCode == 400 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -554,6 +570,7 @@ func (a *AndroidFilesCompanyLevelApi) UploadAndroidApp(ctx context.Context, r An
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 401 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -562,6 +579,7 @@ func (a *AndroidFilesCompanyLevelApi) UploadAndroidApp(ctx context.Context, r An
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 403 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -570,6 +588,7 @@ func (a *AndroidFilesCompanyLevelApi) UploadAndroidApp(ctx context.Context, r An
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 422 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -578,6 +597,7 @@ func (a *AndroidFilesCompanyLevelApi) UploadAndroidApp(ctx context.Context, r An
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 500 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -606,9 +626,12 @@ func (a *AndroidFilesCompanyLevelApi) UploadAndroidCertificateInput(companyId st
 }
 
 /*
-UploadAndroidCertificate Upload Android Certificate
+UploadAndroidCertificate Upload Android certificate
 
-Uploads an Android Certificate file to Adyen.
+Uploads an Android certificate file to Adyen.
+
+To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#manage-api-permissions):
+* Management API—Android files read and write
 
 In the live environment, requests to this endpoint are subject to [rate limits](https://docs.adyen.com/point-of-sale/automating-terminal-management#rate-limits-in-the-live-environment).
 
@@ -637,8 +660,8 @@ func (a *AndroidFilesCompanyLevelApi) UploadAndroidCertificate(ctx context.Conte
 		return *res, httpRes, err
 	}
 
-	var serviceError common.RestServiceError
 	if httpRes.StatusCode == 400 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -647,6 +670,7 @@ func (a *AndroidFilesCompanyLevelApi) UploadAndroidCertificate(ctx context.Conte
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 401 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -655,6 +679,7 @@ func (a *AndroidFilesCompanyLevelApi) UploadAndroidCertificate(ctx context.Conte
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 403 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -663,6 +688,7 @@ func (a *AndroidFilesCompanyLevelApi) UploadAndroidCertificate(ctx context.Conte
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 422 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -671,6 +697,7 @@ func (a *AndroidFilesCompanyLevelApi) UploadAndroidCertificate(ctx context.Conte
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 500 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {

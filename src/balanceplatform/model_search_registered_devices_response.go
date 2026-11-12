@@ -23,7 +23,8 @@ type SearchRegisteredDevicesResponse struct {
 	Data []Device `json:"data,omitempty"`
 	// The total amount of registered SCA devices that match the query parameters.
 	ItemsTotal *int32 `json:"itemsTotal,omitempty"`
-	Link       *Link  `json:"link,omitempty"`
+	// Contains links to the list pages.
+	Link *Link `json:"link,omitempty"`
 	// The total amount of list pages.
 	PagesTotal *int32 `json:"pagesTotal,omitempty"`
 }

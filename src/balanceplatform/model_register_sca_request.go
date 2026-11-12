@@ -22,7 +22,8 @@ type RegisterSCARequest struct {
 	// The name of the SCA device that you are registering. You can use it to help your users identify the device.  If you do not specify a `name`, Adyen automatically generates one.
 	Name *string `json:"name,omitempty"`
 	// The unique identifier of the payment instrument for which you are registering the SCA device.
-	PaymentInstrumentId          string                      `json:"paymentInstrumentId"`
+	PaymentInstrumentId string `json:"paymentInstrumentId"`
+	// Contains information required to register the SCA device.
 	StrongCustomerAuthentication DelegatedAuthenticationData `json:"strongCustomerAuthentication"`
 }
 

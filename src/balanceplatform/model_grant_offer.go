@@ -21,15 +21,18 @@ var _ common.MappedNullable = &GrantOffer{}
 // GrantOffer struct for GrantOffer
 type GrantOffer struct {
 	// The identifier of the account holder to which the grant is offered.
-	AccountHolderId string  `json:"accountHolderId"`
-	Amount          *Amount `json:"amount,omitempty"`
+	AccountHolderId string `json:"accountHolderId"`
+	// The principal amount of the grant.
+	Amount *Amount `json:"amount,omitempty"`
 	// The contract type of the grant offer. Possible value: **cashAdvance**, **loan**.
 	ContractType *string `json:"contractType,omitempty"`
 	// The end date of the grant offer validity period.
 	ExpiresAt *time.Time `json:"expiresAt,omitempty"`
-	Fee       *Fee       `json:"fee,omitempty"`
+	// Details of the fee configuration.
+	Fee *Fee `json:"fee,omitempty"`
 	// The unique identifier of the grant offer.
-	Id        *string    `json:"id,omitempty"`
+	Id *string `json:"id,omitempty"`
+	// Details of the repayment configuration.
 	Repayment *Repayment `json:"repayment,omitempty"`
 	// The starting date of the grant offer validity period.
 	StartsAt *time.Time `json:"startsAt,omitempty"`

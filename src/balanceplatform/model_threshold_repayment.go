@@ -19,6 +19,7 @@ var _ common.MappedNullable = &ThresholdRepayment{}
 
 // ThresholdRepayment struct for ThresholdRepayment
 type ThresholdRepayment struct {
+	// The amount to be repaid on a 30-day basis.
 	Amount Amount `json:"amount"`
 }
 

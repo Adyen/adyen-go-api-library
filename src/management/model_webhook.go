@@ -19,6 +19,7 @@ var _ common.MappedNullable = &Webhook{}
 
 // Webhook struct for Webhook
 type Webhook struct {
+	// References to resources connected with this webhook.
 	Links *WebhookLinks `json:"_links,omitempty"`
 	// Indicates if expired SSL certificates are accepted. Default value: **false**.
 	AcceptsExpiredCertificate *bool `json:"acceptsExpiredCertificate,omitempty"`
@@ -29,7 +30,8 @@ type Webhook struct {
 	// Reference to the account the webook is set on.
 	AccountReference *string `json:"accountReference,omitempty"`
 	// Indicates if the webhook configuration is active. The field must be **true** for you to receive webhooks about events related an account.
-	Active             bool                        `json:"active"`
+	Active bool `json:"active"`
+	// Additional shopper and transaction information to be included in your [standard webhooks](https://docs.adyen.com/development-resources/webhooks/webhook-types/#event-codes). Find out more about the available [additional settings](https://docs.adyen.com/development-resources/webhooks/additional-settings).
 	AdditionalSettings *AdditionalSettingsResponse `json:"additionalSettings,omitempty"`
 	// The alias of our SSL certificate. When you receive a notification from us, the alias from the HMAC signature will match this alias.
 	CertificateAlias *string `json:"certificateAlias,omitempty"`
@@ -55,7 +57,7 @@ type Webhook struct {
 	NetworkType *string `json:"networkType,omitempty"`
 	// Indicates if the SOAP action header needs to be populated. Default value: **false**.  Only applies if `communicationFormat`: **soap**.
 	PopulateSoapActionHeader *bool `json:"populateSoapActionHeader,omitempty"`
-	// The type of webhook. Possible values are:  - **standard** - **account-settings-notification** - **banktransfer-notification** - **boletobancario-notification** - **directdebit-notification** - **ach-notification-of-change-notification** - **direct-debit-notice-of-change-notification** - **pending-notification** - **ideal-notification** - **ideal-pending-notification** - **report-notification** - **terminal-api-notification** - **terminal-settings** - **terminal-boarding**  Find out more about [standard notification webhooks](https://docs.adyen.com/development-resources/webhooks/understand-notifications#event-codes) and [other types of notifications](https://docs.adyen.com/development-resources/webhooks/understand-notifications#other-notifications).
+	// The type of webhook. Possible values are:  - **standard** - **account-settings-notification** - **banktransfer-notification** - **boletobancario-notification** - **directdebit-notification** - **ach-notification-of-change-notification** - **direct-debit-notice-of-change-notification** - **pending-notification** - **ideal-notification** - **ideal-pending-notification** - **report-notification** - **terminal-api-notification** - **terminal-settings** - **terminal-boarding**  Find out more about [standard webhooks](https://docs.adyen.com/development-resources/webhooks/webhook-types/#event-codes) and [other types of webhooks](https://docs.adyen.com/development-resources/webhooks/webhook-types/#other-webhooks).
 	Type string `json:"type"`
 	// Public URL where webhooks will be sent, for example **https://www.domain.com/webhook-endpoint**.
 	Url string `json:"url"`

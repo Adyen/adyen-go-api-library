@@ -20,9 +20,10 @@ var _ common.MappedNullable = &CompanyLinks{}
 // CompanyLinks struct for CompanyLinks
 type CompanyLinks struct {
 	ApiCredentials *LinksElement `json:"apiCredentials,omitempty"`
-	Self           LinksElement  `json:"self"`
-	Users          *LinksElement `json:"users,omitempty"`
-	Webhooks       *LinksElement `json:"webhooks,omitempty"`
+	// Link to the resource itself.
+	Self     LinksElement  `json:"self"`
+	Users    *LinksElement `json:"users,omitempty"`
+	Webhooks *LinksElement `json:"webhooks,omitempty"`
 }
 
 // NewCompanyLinks instantiates a new CompanyLinks object

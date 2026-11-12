@@ -19,6 +19,7 @@ var _ common.MappedNullable = &TransactionRuleResponse{}
 
 // TransactionRuleResponse struct for TransactionRuleResponse
 type TransactionRuleResponse struct {
+	// The transaction rule.
 	TransactionRule *TransactionRule `json:"transactionRule,omitempty"`
 }
 

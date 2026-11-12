@@ -20,7 +20,8 @@ var _ common.MappedNullable = &UpdateSplitConfigurationLogicRequest{}
 // UpdateSplitConfigurationLogicRequest struct for UpdateSplitConfigurationLogicRequest
 type UpdateSplitConfigurationLogicRequest struct {
 	// Deducts the acquiring fees (the aggregated amount of interchange and scheme fee) from the specified balance account.  Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**.
-	AcquiringFees        *string               `json:"acquiringFees,omitempty"`
+	AcquiringFees *string `json:"acquiringFees,omitempty"`
+	// Defines whether to book an additional commission for payments to your user's balance account. The commission amount can be defined as a fixed amount (specified in minor units), a percentage (specified in basis points), or both.
 	AdditionalCommission *AdditionalCommission `json:"additionalCommission,omitempty"`
 	// Deducts the transaction fee due to Adyen under [blended rates](https://www.adyen.com/knowledge-hub/guides/payments-training-guide/get-the-best-from-your-card-processing) from the specified balance account.  Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**.
 	AdyenCommission *string `json:"adyenCommission,omitempty"`
@@ -31,8 +32,11 @@ type UpdateSplitConfigurationLogicRequest struct {
 	// Specifies how and from which balance account(s) to deduct the chargeback amount.  Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**, **deductAccordingToSplitRatio**.
 	Chargeback *string `json:"chargeback,omitempty"`
 	// Deducts the chargeback costs from the specified balance account.  Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**
-	ChargebackCostAllocation *string    `json:"chargebackCostAllocation,omitempty"`
-	Commission               Commission `json:"commission"`
+	ChargebackCostAllocation *string `json:"chargebackCostAllocation,omitempty"`
+	// Defines your platform's commission for the processed payments as a fixed amount (specified in minor units), a percentage (specified in basis points), or both. The commission is booked to your platform's liable balance account.
+	Commission Commission `json:"commission"`
+	// Defines the logic for booking the markup paid by the customer for Dynamic Currency Conversion (DCC).  > This field is in pilot phase, and not yet available for all platforms.
+	Dcc *SplitDcc `json:"dcc,omitempty"`
 	// Deducts the interchange fee from specified balance account.  Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**.
 	Interchange *string `json:"interchange,omitempty"`
 	// Deducts all transaction fees incurred by the payment from the specified balance account. The transaction fees include the acquiring fees (interchange and scheme fee), and the fees due to Adyen (markup or commission). You can book any and all these fees to different balance account by specifying other transaction fee parameters in your split configuration profile:  - [`adyenCommission`](https://docs.adyen.com/api-explorer/Management/latest/post/merchants/(merchantId)/splitConfigurations#request-rules-splitLogic-adyenCommission): The transaction fee due to Adyen under [blended rates](https://www.adyen.com/knowledge-hub/interchange-fees-explained#interchange-vs-blended). - [`adyenMarkup`](https://docs.adyen.com/api-explorer/Management/latest/post/merchants/(merchantId)/splitConfigurations#request-rules-splitLogic-adyenMarkup): The transaction fee due to Adyen under [Interchange ++ pricing](https://www.adyen.com/knowledge-hub/interchange-fees-explained#interchange-vs-blended). - [`schemeFee`](https://docs.adyen.com/api-explorer/Management/latest/post/merchants/(merchantId)/splitConfigurations#request-rules-splitLogic-schemeFee): The fee paid to the card scheme for using their network. - [`interchange`](https://docs.adyen.com/api-explorer/Management/latest/post/merchants/(merchantId)/splitConfigurations#request-rules-splitLogic-interchange): The fee paid to the issuer for each payment transaction made with the card network. - [`adyenFees`](https://docs.adyen.com/api-explorer/Management/latest/post/merchants/(merchantId)/splitConfigurations#request-rules-splitLogic-adyenFees): The aggregated amount of Adyen's commission and markup. - [`acquiringFees`](https://docs.adyen.com/api-explorer/Management/latest/post/merchants/(merchantId)/splitConfigurations#request-rules-splitLogic-acquiringFees): The aggregated amount of the interchange and scheme fees.  If you don't include at least one transaction fee type in the `splitLogic` object, Adyen updates the payment request with the `paymentFee` parameter, booking all transaction fees to your platform's liable balance account.  Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**.
@@ -317,6 +321,38 @@ func (o *UpdateSplitConfigurationLogicRequest) GetCommissionOk() (*Commission, b
 // SetCommission sets field value
 func (o *UpdateSplitConfigurationLogicRequest) SetCommission(v Commission) {
 	o.Commission = v
+}
+
+// GetDcc returns the Dcc field value if set, zero value otherwise.
+func (o *UpdateSplitConfigurationLogicRequest) GetDcc() SplitDcc {
+	if o == nil || common.IsNil(o.Dcc) {
+		var ret SplitDcc
+		return ret
+	}
+	return *o.Dcc
+}
+
+// GetDccOk returns a tuple with the Dcc field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateSplitConfigurationLogicRequest) GetDccOk() (*SplitDcc, bool) {
+	if o == nil || common.IsNil(o.Dcc) {
+		return nil, false
+	}
+	return o.Dcc, true
+}
+
+// HasDcc returns a boolean if a field has been set.
+func (o *UpdateSplitConfigurationLogicRequest) HasDcc() bool {
+	if o != nil && !common.IsNil(o.Dcc) {
+		return true
+	}
+
+	return false
+}
+
+// SetDcc gets a reference to the given SplitDcc and assigns it to the Dcc field.
+func (o *UpdateSplitConfigurationLogicRequest) SetDcc(v SplitDcc) {
+	o.Dcc = &v
 }
 
 // GetInterchange returns the Interchange field value if set, zero value otherwise.
@@ -639,6 +675,9 @@ func (o UpdateSplitConfigurationLogicRequest) ToMap() (map[string]interface{}, e
 		toSerialize["chargebackCostAllocation"] = o.ChargebackCostAllocation
 	}
 	toSerialize["commission"] = o.Commission
+	if !common.IsNil(o.Dcc) {
+		toSerialize["dcc"] = o.Dcc
+	}
 	if !common.IsNil(o.Interchange) {
 		toSerialize["interchange"] = o.Interchange
 	}

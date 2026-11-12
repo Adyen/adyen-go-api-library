@@ -19,6 +19,7 @@ var _ common.MappedNullable = &CapabilityProblem{}
 
 // CapabilityProblem struct for CapabilityProblem
 type CapabilityProblem struct {
+	// Contains the type of the entity and the corresponding ID.
 	Entity *CapabilityProblemEntity `json:"entity,omitempty"`
 	// Contains information about the verification error.
 	VerificationErrors []VerificationError `json:"verificationErrors,omitempty"`

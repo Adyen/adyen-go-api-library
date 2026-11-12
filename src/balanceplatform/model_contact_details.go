@@ -19,10 +19,12 @@ var _ common.MappedNullable = &ContactDetails{}
 
 // ContactDetails struct for ContactDetails
 type ContactDetails struct {
+	// The address of the account holder.
 	Address Address `json:"address"`
 	// The email address of the account holder.
 	Email string `json:"email"`
-	Phone Phone  `json:"phone"`
+	// The phone number of the account holder.
+	Phone Phone `json:"phone"`
 	// The URL of the account holder's website.
 	WebAddress *string `json:"webAddress,omitempty"`
 }

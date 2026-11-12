@@ -25,9 +25,10 @@ type UpdateMerchantUserRequest struct {
 	Active *bool `json:"active,omitempty"`
 	// The email address of the user.
 	Email *string `json:"email,omitempty"`
-	// The requested login method for the user. To use SSO, you must already have SSO configured with Adyen before creating the user.  Possible values: **Username & account**, **Email**, or **SSO**
+	// The requested login method for the user. To use SSO, you must already have SSO configured with Adyen before creating the user.  Possible values: **Email** or **SSO**
 	LoginMethod *string `json:"loginMethod,omitempty"`
-	Name        *Name2  `json:"name,omitempty"`
+	// The user's full name.
+	Name *Name2 `json:"name,omitempty"`
 	// The list of [roles](https://docs.adyen.com/account/user-roles) for this user.
 	Roles []string `json:"roles,omitempty"`
 	// The [tz database name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) of the time zone of the user. For example, **Europe/Amsterdam**.

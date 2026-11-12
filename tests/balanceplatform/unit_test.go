@@ -148,9 +148,9 @@ func TestBalancePlatform(t *testing.T) {
 	})
 
 	t.Run("Get a sweep", func(t *testing.T) {
-		req := service.BalanceAccountsApi.GetSweepInput("BA123", "SWPC123")
+		req := service.CustomPayoutSchedulesSweepsApi.GetSweepInput("BA123", "SWPC123")
 
-		res, httpRes, err := service.BalanceAccountsApi.GetSweep(context.Background(), req)
+		res, httpRes, err := service.CustomPayoutSchedulesSweepsApi.GetSweep(context.Background(), req)
 
 		assert.Equal(t, 200, httpRes.StatusCode)
 		assert.NoError(t, err)
@@ -158,7 +158,7 @@ func TestBalancePlatform(t *testing.T) {
 	})
 
 	t.Run("Update a sweep", func(t *testing.T) {
-		req := service.BalanceAccountsApi.UpdateSweepInput("BA123", "SWPC123")
+		req := service.CustomPayoutSchedulesSweepsApi.UpdateSweepInput("BA123", "SWPC123")
 
 		cron := balanceplatform.NewSweepSchedule("cron")
 		cron.SetCronExpression("6 6 6 6 6")
@@ -167,7 +167,7 @@ func TestBalancePlatform(t *testing.T) {
 			Description: common.PtrString("Let's Go!"),
 		})
 
-		res, httpRes, err := service.BalanceAccountsApi.UpdateSweep(context.Background(), req)
+		res, httpRes, err := service.CustomPayoutSchedulesSweepsApi.UpdateSweep(context.Background(), req)
 
 		assert.Equal(t, 200, httpRes.StatusCode)
 		assert.NoError(t, err)
@@ -176,8 +176,8 @@ func TestBalancePlatform(t *testing.T) {
 	})
 
 	t.Run("Delete a sweep", func(t *testing.T) {
-		req := service.BalanceAccountsApi.DeleteSweepInput("balanceAccountId", "sweepId")
-		httpRes, err := service.BalanceAccountsApi.DeleteSweep(context.Background(), req)
+		req := service.CustomPayoutSchedulesSweepsApi.DeleteSweepInput("balanceAccountId", "sweepId")
+		httpRes, err := service.CustomPayoutSchedulesSweepsApi.DeleteSweep(context.Background(), req)
 
 		assert.Equal(t, 204, httpRes.StatusCode)
 		require.Nil(t, err)

@@ -11,10 +11,13 @@ package balanceplatform
 import (
 	"encoding/json"
 	"fmt"
+
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 )
 
 // TransferRouteRequirementsInner - struct for TransferRouteRequirementsInner
 type TransferRouteRequirementsInner struct {
+	AdditionalBankIdentificationRequirement  *AdditionalBankIdentificationRequirement
 	AddressRequirement                       *AddressRequirement
 	AmountMinMaxRequirement                  *AmountMinMaxRequirement
 	AmountNonZeroDecimalsRequirement         *AmountNonZeroDecimalsRequirement
@@ -23,6 +26,14 @@ type TransferRouteRequirementsInner struct {
 	PaymentInstrumentRequirement             *PaymentInstrumentRequirement
 	USInstantPayoutAddressRequirement        *USInstantPayoutAddressRequirement
 	USInternationalAchAddressRequirement     *USInternationalAchAddressRequirement
+	USInternationalAchPriorityRequirement    *USInternationalAchPriorityRequirement
+}
+
+// AdditionalBankIdentificationRequirementAsTransferRouteRequirementsInner is a convenience function that returns AdditionalBankIdentificationRequirement wrapped in TransferRouteRequirementsInner
+func AdditionalBankIdentificationRequirementAsTransferRouteRequirementsInner(v *AdditionalBankIdentificationRequirement) TransferRouteRequirementsInner {
+	return TransferRouteRequirementsInner{
+		AdditionalBankIdentificationRequirement: v,
+	}
 }
 
 // AddressRequirementAsTransferRouteRequirementsInner is a convenience function that returns AddressRequirement wrapped in TransferRouteRequirementsInner
@@ -81,135 +92,284 @@ func USInternationalAchAddressRequirementAsTransferRouteRequirementsInner(v *USI
 	}
 }
 
+// USInternationalAchPriorityRequirementAsTransferRouteRequirementsInner is a convenience function that returns USInternationalAchPriorityRequirement wrapped in TransferRouteRequirementsInner
+func USInternationalAchPriorityRequirementAsTransferRouteRequirementsInner(v *USInternationalAchPriorityRequirement) TransferRouteRequirementsInner {
+	return TransferRouteRequirementsInner{
+		USInternationalAchPriorityRequirement: v,
+	}
+}
+
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *TransferRouteRequirementsInner) UnmarshalJSON(data []byte) error {
 	var err error
-	match := 0
-	// try to unmarshal data into AddressRequirement
-	err = json.Unmarshal(data, &dst.AddressRequirement)
-	if err == nil {
-		jsonAddressRequirement, _ := json.Marshal(dst.AddressRequirement)
-		if string(jsonAddressRequirement) == "{}" || !dst.AddressRequirement.isValidType() { // empty struct
+	// clear any variant left by a previous unmarshal into the same destination
+	dst.AdditionalBankIdentificationRequirement = nil
+	dst.AddressRequirement = nil
+	dst.AmountMinMaxRequirement = nil
+	dst.AmountNonZeroDecimalsRequirement = nil
+	dst.BankAccountIdentificationTypeRequirement = nil
+	dst.IbanAccountIdentificationRequirement = nil
+	dst.PaymentInstrumentRequirement = nil
+	dst.USInstantPayoutAddressRequirement = nil
+	dst.USInternationalAchAddressRequirement = nil
+	dst.USInternationalAchPriorityRequirement = nil
+
+	// use discriminator value to speed up the lookup
+	var jsonDict map[string]interface{}
+	err = common.NewStrictDecoder(data).Decode(&jsonDict)
+	if err != nil {
+		return fmt.Errorf("failed to unmarshal JSON into map for the discriminator lookup")
+	}
+
+	// check if the discriminator value is 'additionalBankIdentificationRequirement'
+	if jsonDict["type"] == "additionalBankIdentificationRequirement" {
+		// try to unmarshal JSON data into AdditionalBankIdentificationRequirement
+		err = json.Unmarshal(data, &dst.AdditionalBankIdentificationRequirement)
+		if err == nil {
+			return nil // data stored in dst.AdditionalBankIdentificationRequirement, return on the first match
+		} else {
+			dst.AdditionalBankIdentificationRequirement = nil
+			return fmt.Errorf("failed to unmarshal TransferRouteRequirementsInner as AdditionalBankIdentificationRequirement: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'addressRequirement'
+	if jsonDict["type"] == "addressRequirement" {
+		// try to unmarshal JSON data into AddressRequirement
+		err = json.Unmarshal(data, &dst.AddressRequirement)
+		if err == nil {
+			return nil // data stored in dst.AddressRequirement, return on the first match
+		} else {
 			dst.AddressRequirement = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal TransferRouteRequirementsInner as AddressRequirement: %s", err.Error())
 		}
-	} else {
-		dst.AddressRequirement = nil
 	}
 
-	// try to unmarshal data into AmountMinMaxRequirement
-	err = json.Unmarshal(data, &dst.AmountMinMaxRequirement)
-	if err == nil {
-		jsonAmountMinMaxRequirement, _ := json.Marshal(dst.AmountMinMaxRequirement)
-		if string(jsonAmountMinMaxRequirement) == "{}" || !dst.AmountMinMaxRequirement.isValidType() { // empty struct
+	// check if the discriminator value is 'amountMinMaxRequirement'
+	if jsonDict["type"] == "amountMinMaxRequirement" {
+		// try to unmarshal JSON data into AmountMinMaxRequirement
+		err = json.Unmarshal(data, &dst.AmountMinMaxRequirement)
+		if err == nil {
+			return nil // data stored in dst.AmountMinMaxRequirement, return on the first match
+		} else {
 			dst.AmountMinMaxRequirement = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal TransferRouteRequirementsInner as AmountMinMaxRequirement: %s", err.Error())
 		}
-	} else {
-		dst.AmountMinMaxRequirement = nil
 	}
 
-	// try to unmarshal data into AmountNonZeroDecimalsRequirement
-	err = json.Unmarshal(data, &dst.AmountNonZeroDecimalsRequirement)
-	if err == nil {
-		jsonAmountNonZeroDecimalsRequirement, _ := json.Marshal(dst.AmountNonZeroDecimalsRequirement)
-		if string(jsonAmountNonZeroDecimalsRequirement) == "{}" || !dst.AmountNonZeroDecimalsRequirement.isValidType() { // empty struct
+	// check if the discriminator value is 'amountNonZeroDecimalsRequirement'
+	if jsonDict["type"] == "amountNonZeroDecimalsRequirement" {
+		// try to unmarshal JSON data into AmountNonZeroDecimalsRequirement
+		err = json.Unmarshal(data, &dst.AmountNonZeroDecimalsRequirement)
+		if err == nil {
+			return nil // data stored in dst.AmountNonZeroDecimalsRequirement, return on the first match
+		} else {
 			dst.AmountNonZeroDecimalsRequirement = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal TransferRouteRequirementsInner as AmountNonZeroDecimalsRequirement: %s", err.Error())
 		}
-	} else {
-		dst.AmountNonZeroDecimalsRequirement = nil
 	}
 
-	// try to unmarshal data into BankAccountIdentificationTypeRequirement
-	err = json.Unmarshal(data, &dst.BankAccountIdentificationTypeRequirement)
-	if err == nil {
-		jsonBankAccountIdentificationTypeRequirement, _ := json.Marshal(dst.BankAccountIdentificationTypeRequirement)
-		if string(jsonBankAccountIdentificationTypeRequirement) == "{}" || !dst.BankAccountIdentificationTypeRequirement.isValidType() { // empty struct
+	// check if the discriminator value is 'bankAccountIdentificationTypeRequirement'
+	if jsonDict["type"] == "bankAccountIdentificationTypeRequirement" {
+		// try to unmarshal JSON data into BankAccountIdentificationTypeRequirement
+		err = json.Unmarshal(data, &dst.BankAccountIdentificationTypeRequirement)
+		if err == nil {
+			return nil // data stored in dst.BankAccountIdentificationTypeRequirement, return on the first match
+		} else {
 			dst.BankAccountIdentificationTypeRequirement = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal TransferRouteRequirementsInner as BankAccountIdentificationTypeRequirement: %s", err.Error())
 		}
-	} else {
-		dst.BankAccountIdentificationTypeRequirement = nil
 	}
 
-	// try to unmarshal data into IbanAccountIdentificationRequirement
-	err = json.Unmarshal(data, &dst.IbanAccountIdentificationRequirement)
-	if err == nil {
-		jsonIbanAccountIdentificationRequirement, _ := json.Marshal(dst.IbanAccountIdentificationRequirement)
-		if string(jsonIbanAccountIdentificationRequirement) == "{}" || !dst.IbanAccountIdentificationRequirement.isValidType() { // empty struct
+	// check if the discriminator value is 'ibanAccountIdentificationRequirement'
+	if jsonDict["type"] == "ibanAccountIdentificationRequirement" {
+		// try to unmarshal JSON data into IbanAccountIdentificationRequirement
+		err = json.Unmarshal(data, &dst.IbanAccountIdentificationRequirement)
+		if err == nil {
+			return nil // data stored in dst.IbanAccountIdentificationRequirement, return on the first match
+		} else {
 			dst.IbanAccountIdentificationRequirement = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal TransferRouteRequirementsInner as IbanAccountIdentificationRequirement: %s", err.Error())
 		}
-	} else {
-		dst.IbanAccountIdentificationRequirement = nil
 	}
 
-	// try to unmarshal data into PaymentInstrumentRequirement
-	err = json.Unmarshal(data, &dst.PaymentInstrumentRequirement)
-	if err == nil {
-		jsonPaymentInstrumentRequirement, _ := json.Marshal(dst.PaymentInstrumentRequirement)
-		if string(jsonPaymentInstrumentRequirement) == "{}" || !dst.PaymentInstrumentRequirement.isValidType() { // empty struct
+	// check if the discriminator value is 'paymentInstrumentRequirement'
+	if jsonDict["type"] == "paymentInstrumentRequirement" {
+		// try to unmarshal JSON data into PaymentInstrumentRequirement
+		err = json.Unmarshal(data, &dst.PaymentInstrumentRequirement)
+		if err == nil {
+			return nil // data stored in dst.PaymentInstrumentRequirement, return on the first match
+		} else {
 			dst.PaymentInstrumentRequirement = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal TransferRouteRequirementsInner as PaymentInstrumentRequirement: %s", err.Error())
 		}
-	} else {
-		dst.PaymentInstrumentRequirement = nil
 	}
 
-	// try to unmarshal data into USInstantPayoutAddressRequirement
-	err = json.Unmarshal(data, &dst.USInstantPayoutAddressRequirement)
-	if err == nil {
-		jsonUSInstantPayoutAddressRequirement, _ := json.Marshal(dst.USInstantPayoutAddressRequirement)
-		if string(jsonUSInstantPayoutAddressRequirement) == "{}" || !dst.USInstantPayoutAddressRequirement.isValidType() { // empty struct
+	// check if the discriminator value is 'usInstantPayoutAddressRequirement'
+	if jsonDict["type"] == "usInstantPayoutAddressRequirement" {
+		// try to unmarshal JSON data into USInstantPayoutAddressRequirement
+		err = json.Unmarshal(data, &dst.USInstantPayoutAddressRequirement)
+		if err == nil {
+			return nil // data stored in dst.USInstantPayoutAddressRequirement, return on the first match
+		} else {
 			dst.USInstantPayoutAddressRequirement = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal TransferRouteRequirementsInner as USInstantPayoutAddressRequirement: %s", err.Error())
 		}
-	} else {
-		dst.USInstantPayoutAddressRequirement = nil
 	}
 
-	// try to unmarshal data into USInternationalAchAddressRequirement
-	err = json.Unmarshal(data, &dst.USInternationalAchAddressRequirement)
-	if err == nil {
-		jsonUSInternationalAchAddressRequirement, _ := json.Marshal(dst.USInternationalAchAddressRequirement)
-		if string(jsonUSInternationalAchAddressRequirement) == "{}" || !dst.USInternationalAchAddressRequirement.isValidType() { // empty struct
+	// check if the discriminator value is 'usInternationalAchAddressRequirement'
+	if jsonDict["type"] == "usInternationalAchAddressRequirement" {
+		// try to unmarshal JSON data into USInternationalAchAddressRequirement
+		err = json.Unmarshal(data, &dst.USInternationalAchAddressRequirement)
+		if err == nil {
+			return nil // data stored in dst.USInternationalAchAddressRequirement, return on the first match
+		} else {
 			dst.USInternationalAchAddressRequirement = nil
-		} else {
-			match++
+			return fmt.Errorf("failed to unmarshal TransferRouteRequirementsInner as USInternationalAchAddressRequirement: %s", err.Error())
 		}
-	} else {
-		dst.USInternationalAchAddressRequirement = nil
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.AddressRequirement = nil
-		dst.AmountMinMaxRequirement = nil
-		dst.AmountNonZeroDecimalsRequirement = nil
-		dst.BankAccountIdentificationTypeRequirement = nil
-		dst.IbanAccountIdentificationRequirement = nil
-		dst.PaymentInstrumentRequirement = nil
-		dst.USInstantPayoutAddressRequirement = nil
-		dst.USInternationalAchAddressRequirement = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(TransferRouteRequirementsInner)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match
-		return fmt.Errorf("data failed to match schemas in oneOf(TransferRouteRequirementsInner)")
+	// check if the discriminator value is 'usInternationalAchPriorityRequirement'
+	if jsonDict["type"] == "usInternationalAchPriorityRequirement" {
+		// try to unmarshal JSON data into USInternationalAchPriorityRequirement
+		err = json.Unmarshal(data, &dst.USInternationalAchPriorityRequirement)
+		if err == nil {
+			return nil // data stored in dst.USInternationalAchPriorityRequirement, return on the first match
+		} else {
+			dst.USInternationalAchPriorityRequirement = nil
+			return fmt.Errorf("failed to unmarshal TransferRouteRequirementsInner as USInternationalAchPriorityRequirement: %s", err.Error())
+		}
 	}
+
+	// check if the discriminator value is 'AdditionalBankIdentificationRequirement'
+	if jsonDict["type"] == "AdditionalBankIdentificationRequirement" {
+		// try to unmarshal JSON data into AdditionalBankIdentificationRequirement
+		err = json.Unmarshal(data, &dst.AdditionalBankIdentificationRequirement)
+		if err == nil {
+			return nil // data stored in dst.AdditionalBankIdentificationRequirement, return on the first match
+		} else {
+			dst.AdditionalBankIdentificationRequirement = nil
+			return fmt.Errorf("failed to unmarshal TransferRouteRequirementsInner as AdditionalBankIdentificationRequirement: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'AddressRequirement'
+	if jsonDict["type"] == "AddressRequirement" {
+		// try to unmarshal JSON data into AddressRequirement
+		err = json.Unmarshal(data, &dst.AddressRequirement)
+		if err == nil {
+			return nil // data stored in dst.AddressRequirement, return on the first match
+		} else {
+			dst.AddressRequirement = nil
+			return fmt.Errorf("failed to unmarshal TransferRouteRequirementsInner as AddressRequirement: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'AmountMinMaxRequirement'
+	if jsonDict["type"] == "AmountMinMaxRequirement" {
+		// try to unmarshal JSON data into AmountMinMaxRequirement
+		err = json.Unmarshal(data, &dst.AmountMinMaxRequirement)
+		if err == nil {
+			return nil // data stored in dst.AmountMinMaxRequirement, return on the first match
+		} else {
+			dst.AmountMinMaxRequirement = nil
+			return fmt.Errorf("failed to unmarshal TransferRouteRequirementsInner as AmountMinMaxRequirement: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'AmountNonZeroDecimalsRequirement'
+	if jsonDict["type"] == "AmountNonZeroDecimalsRequirement" {
+		// try to unmarshal JSON data into AmountNonZeroDecimalsRequirement
+		err = json.Unmarshal(data, &dst.AmountNonZeroDecimalsRequirement)
+		if err == nil {
+			return nil // data stored in dst.AmountNonZeroDecimalsRequirement, return on the first match
+		} else {
+			dst.AmountNonZeroDecimalsRequirement = nil
+			return fmt.Errorf("failed to unmarshal TransferRouteRequirementsInner as AmountNonZeroDecimalsRequirement: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'BankAccountIdentificationTypeRequirement'
+	if jsonDict["type"] == "BankAccountIdentificationTypeRequirement" {
+		// try to unmarshal JSON data into BankAccountIdentificationTypeRequirement
+		err = json.Unmarshal(data, &dst.BankAccountIdentificationTypeRequirement)
+		if err == nil {
+			return nil // data stored in dst.BankAccountIdentificationTypeRequirement, return on the first match
+		} else {
+			dst.BankAccountIdentificationTypeRequirement = nil
+			return fmt.Errorf("failed to unmarshal TransferRouteRequirementsInner as BankAccountIdentificationTypeRequirement: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'IbanAccountIdentificationRequirement'
+	if jsonDict["type"] == "IbanAccountIdentificationRequirement" {
+		// try to unmarshal JSON data into IbanAccountIdentificationRequirement
+		err = json.Unmarshal(data, &dst.IbanAccountIdentificationRequirement)
+		if err == nil {
+			return nil // data stored in dst.IbanAccountIdentificationRequirement, return on the first match
+		} else {
+			dst.IbanAccountIdentificationRequirement = nil
+			return fmt.Errorf("failed to unmarshal TransferRouteRequirementsInner as IbanAccountIdentificationRequirement: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'PaymentInstrumentRequirement'
+	if jsonDict["type"] == "PaymentInstrumentRequirement" {
+		// try to unmarshal JSON data into PaymentInstrumentRequirement
+		err = json.Unmarshal(data, &dst.PaymentInstrumentRequirement)
+		if err == nil {
+			return nil // data stored in dst.PaymentInstrumentRequirement, return on the first match
+		} else {
+			dst.PaymentInstrumentRequirement = nil
+			return fmt.Errorf("failed to unmarshal TransferRouteRequirementsInner as PaymentInstrumentRequirement: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'USInstantPayoutAddressRequirement'
+	if jsonDict["type"] == "USInstantPayoutAddressRequirement" {
+		// try to unmarshal JSON data into USInstantPayoutAddressRequirement
+		err = json.Unmarshal(data, &dst.USInstantPayoutAddressRequirement)
+		if err == nil {
+			return nil // data stored in dst.USInstantPayoutAddressRequirement, return on the first match
+		} else {
+			dst.USInstantPayoutAddressRequirement = nil
+			return fmt.Errorf("failed to unmarshal TransferRouteRequirementsInner as USInstantPayoutAddressRequirement: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'USInternationalAchAddressRequirement'
+	if jsonDict["type"] == "USInternationalAchAddressRequirement" {
+		// try to unmarshal JSON data into USInternationalAchAddressRequirement
+		err = json.Unmarshal(data, &dst.USInternationalAchAddressRequirement)
+		if err == nil {
+			return nil // data stored in dst.USInternationalAchAddressRequirement, return on the first match
+		} else {
+			dst.USInternationalAchAddressRequirement = nil
+			return fmt.Errorf("failed to unmarshal TransferRouteRequirementsInner as USInternationalAchAddressRequirement: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'USInternationalAchPriorityRequirement'
+	if jsonDict["type"] == "USInternationalAchPriorityRequirement" {
+		// try to unmarshal JSON data into USInternationalAchPriorityRequirement
+		err = json.Unmarshal(data, &dst.USInternationalAchPriorityRequirement)
+		if err == nil {
+			return nil // data stored in dst.USInternationalAchPriorityRequirement, return on the first match
+		} else {
+			dst.USInternationalAchPriorityRequirement = nil
+			return fmt.Errorf("failed to unmarshal TransferRouteRequirementsInner as USInternationalAchPriorityRequirement: %s", err.Error())
+		}
+	}
+
+	return fmt.Errorf("data failed to match schemas in oneOf(TransferRouteRequirementsInner)")
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src TransferRouteRequirementsInner) MarshalJSON() ([]byte, error) {
+	if src.AdditionalBankIdentificationRequirement != nil {
+		return json.Marshal(&src.AdditionalBankIdentificationRequirement)
+	}
+
 	if src.AddressRequirement != nil {
 		return json.Marshal(&src.AddressRequirement)
 	}
@@ -242,6 +402,10 @@ func (src TransferRouteRequirementsInner) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.USInternationalAchAddressRequirement)
 	}
 
+	if src.USInternationalAchPriorityRequirement != nil {
+		return json.Marshal(&src.USInternationalAchPriorityRequirement)
+	}
+
 	return nil, nil // no data in oneOf schemas
 }
 
@@ -250,6 +414,10 @@ func (obj *TransferRouteRequirementsInner) GetActualInstance() interface{} {
 	if obj == nil {
 		return nil
 	}
+	if obj.AdditionalBankIdentificationRequirement != nil {
+		return obj.AdditionalBankIdentificationRequirement
+	}
+
 	if obj.AddressRequirement != nil {
 		return obj.AddressRequirement
 	}
@@ -280,6 +448,10 @@ func (obj *TransferRouteRequirementsInner) GetActualInstance() interface{} {
 
 	if obj.USInternationalAchAddressRequirement != nil {
 		return obj.USInternationalAchAddressRequirement
+	}
+
+	if obj.USInternationalAchPriorityRequirement != nil {
+		return obj.USInternationalAchPriorityRequirement
 	}
 
 	// all schemas are nil

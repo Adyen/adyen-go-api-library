@@ -49,7 +49,7 @@ func (a *PaymentMethodsMerchantLevelApi) AddApplePayDomainInput(merchantId strin
 /*
 AddApplePayDomain Add an Apple Pay domain
 
-Adds the new domain to the list of Apple Pay domains that are registered with the merchant account and the payment method identified in the path. For more information, see [Apple Pay documentation](https://docs.adyen.com/payment-methods/apple-pay/enable-apple-pay#register-merchant-domain).
+Adds the new domain to the list of Apple Pay domains that are registered with the merchant account and the payment method identified in the path. For more information, see [Apple Pay documentation](https://docs.adyen.com/payment-methods/apple-pay/web-drop-in/?tab=adyen-certificate-live_1#going-live).
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Payment methods read and write
@@ -80,8 +80,8 @@ func (a *PaymentMethodsMerchantLevelApi) AddApplePayDomain(ctx context.Context, 
 		return httpRes, err
 	}
 
-	var serviceError common.RestServiceError
 	if httpRes.StatusCode == 400 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -90,6 +90,7 @@ func (a *PaymentMethodsMerchantLevelApi) AddApplePayDomain(ctx context.Context, 
 		return httpRes, serviceError
 	}
 	if httpRes.StatusCode == 401 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -98,6 +99,7 @@ func (a *PaymentMethodsMerchantLevelApi) AddApplePayDomain(ctx context.Context, 
 		return httpRes, serviceError
 	}
 	if httpRes.StatusCode == 403 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -106,6 +108,7 @@ func (a *PaymentMethodsMerchantLevelApi) AddApplePayDomain(ctx context.Context, 
 		return httpRes, serviceError
 	}
 	if httpRes.StatusCode == 422 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -114,6 +117,7 @@ func (a *PaymentMethodsMerchantLevelApi) AddApplePayDomain(ctx context.Context, 
 		return httpRes, serviceError
 	}
 	if httpRes.StatusCode == 429 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -122,6 +126,7 @@ func (a *PaymentMethodsMerchantLevelApi) AddApplePayDomain(ctx context.Context, 
 		return httpRes, serviceError
 	}
 	if httpRes.StatusCode == 500 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -222,8 +227,8 @@ func (a *PaymentMethodsMerchantLevelApi) GetAllPaymentMethods(ctx context.Contex
 		return *res, httpRes, err
 	}
 
-	var serviceError common.RestServiceError
 	if httpRes.StatusCode == 400 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -232,6 +237,7 @@ func (a *PaymentMethodsMerchantLevelApi) GetAllPaymentMethods(ctx context.Contex
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 401 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -240,6 +246,7 @@ func (a *PaymentMethodsMerchantLevelApi) GetAllPaymentMethods(ctx context.Contex
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 403 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -248,6 +255,7 @@ func (a *PaymentMethodsMerchantLevelApi) GetAllPaymentMethods(ctx context.Contex
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 422 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -256,6 +264,7 @@ func (a *PaymentMethodsMerchantLevelApi) GetAllPaymentMethods(ctx context.Contex
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 429 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -264,6 +273,7 @@ func (a *PaymentMethodsMerchantLevelApi) GetAllPaymentMethods(ctx context.Contex
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 500 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -303,10 +313,10 @@ To make this request, your API credential must have the following [role](https:/
 
 @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @param r PaymentMethodsMerchantLevelApiGetApplePayDomainsInput - Request parameters, see GetApplePayDomainsInput
-@return ApplePayInfo, *http.Response, error
+@return ApplePayResponseInfo, *http.Response, error
 */
-func (a *PaymentMethodsMerchantLevelApi) GetApplePayDomains(ctx context.Context, r PaymentMethodsMerchantLevelApiGetApplePayDomainsInput) (ApplePayInfo, *http.Response, error) {
-	res := &ApplePayInfo{}
+func (a *PaymentMethodsMerchantLevelApi) GetApplePayDomains(ctx context.Context, r PaymentMethodsMerchantLevelApiGetApplePayDomainsInput) (ApplePayResponseInfo, *http.Response, error) {
+	res := &ApplePayResponseInfo{}
 	path := "/merchants/{merchantId}/paymentMethodSettings/{paymentMethodId}/getApplePayDomains"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"paymentMethodId"+"}", url.PathEscape(common.ParameterValueToString(r.paymentMethodId, "paymentMethodId")), -1)
@@ -327,8 +337,8 @@ func (a *PaymentMethodsMerchantLevelApi) GetApplePayDomains(ctx context.Context,
 		return *res, httpRes, err
 	}
 
-	var serviceError common.RestServiceError
 	if httpRes.StatusCode == 400 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -337,6 +347,7 @@ func (a *PaymentMethodsMerchantLevelApi) GetApplePayDomains(ctx context.Context,
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 401 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -345,6 +356,7 @@ func (a *PaymentMethodsMerchantLevelApi) GetApplePayDomains(ctx context.Context,
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 403 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -353,6 +365,7 @@ func (a *PaymentMethodsMerchantLevelApi) GetApplePayDomains(ctx context.Context,
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 422 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -361,6 +374,7 @@ func (a *PaymentMethodsMerchantLevelApi) GetApplePayDomains(ctx context.Context,
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 500 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -424,8 +438,8 @@ func (a *PaymentMethodsMerchantLevelApi) GetPaymentMethodDetails(ctx context.Con
 		return *res, httpRes, err
 	}
 
-	var serviceError common.RestServiceError
 	if httpRes.StatusCode == 400 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -434,6 +448,7 @@ func (a *PaymentMethodsMerchantLevelApi) GetPaymentMethodDetails(ctx context.Con
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 401 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -442,6 +457,7 @@ func (a *PaymentMethodsMerchantLevelApi) GetPaymentMethodDetails(ctx context.Con
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 403 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -450,6 +466,7 @@ func (a *PaymentMethodsMerchantLevelApi) GetPaymentMethodDetails(ctx context.Con
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 422 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -458,6 +475,7 @@ func (a *PaymentMethodsMerchantLevelApi) GetPaymentMethodDetails(ctx context.Con
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 429 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -466,6 +484,7 @@ func (a *PaymentMethodsMerchantLevelApi) GetPaymentMethodDetails(ctx context.Con
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 500 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -503,6 +522,7 @@ func (a *PaymentMethodsMerchantLevelApi) RequestPaymentMethodInput(merchantId st
 RequestPaymentMethod Request a payment method
 
 Sends a request to add a new payment method to the merchant account identified in the path.
+Depending the payment method [`type`](https://docs.adyen.com/api-explorer/Management/latest/post/merchants/_merchantId_/paymentMethodSettings#request-type), you may need to send an additional object required for the payment method.
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Payment methods read and write
@@ -532,8 +552,8 @@ func (a *PaymentMethodsMerchantLevelApi) RequestPaymentMethod(ctx context.Contex
 		return *res, httpRes, err
 	}
 
-	var serviceError common.RestServiceError
 	if httpRes.StatusCode == 400 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -542,6 +562,7 @@ func (a *PaymentMethodsMerchantLevelApi) RequestPaymentMethod(ctx context.Contex
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 401 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -550,6 +571,7 @@ func (a *PaymentMethodsMerchantLevelApi) RequestPaymentMethod(ctx context.Contex
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 403 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -558,6 +580,7 @@ func (a *PaymentMethodsMerchantLevelApi) RequestPaymentMethod(ctx context.Contex
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 422 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -566,6 +589,7 @@ func (a *PaymentMethodsMerchantLevelApi) RequestPaymentMethod(ctx context.Contex
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 429 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -574,6 +598,7 @@ func (a *PaymentMethodsMerchantLevelApi) RequestPaymentMethod(ctx context.Contex
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 500 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -613,6 +638,7 @@ func (a *PaymentMethodsMerchantLevelApi) UpdatePaymentMethodInput(merchantId str
 UpdatePaymentMethod Update a payment method
 
 Updates payment method details for the merchant account and the payment method identified in the path.
+Depending the payment method [`type`](https://docs.adyen.com/api-explorer/Management/latest/patch/merchants/_merchantId_/paymentMethodSettings#request-type), you may need to send an additional object required for the payment method.
 
 To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
 * Management API—Payment methods read and write
@@ -643,8 +669,8 @@ func (a *PaymentMethodsMerchantLevelApi) UpdatePaymentMethod(ctx context.Context
 		return *res, httpRes, err
 	}
 
-	var serviceError common.RestServiceError
 	if httpRes.StatusCode == 400 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -653,6 +679,7 @@ func (a *PaymentMethodsMerchantLevelApi) UpdatePaymentMethod(ctx context.Context
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 401 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -661,6 +688,7 @@ func (a *PaymentMethodsMerchantLevelApi) UpdatePaymentMethod(ctx context.Context
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 403 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -669,6 +697,7 @@ func (a *PaymentMethodsMerchantLevelApi) UpdatePaymentMethod(ctx context.Context
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 422 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -677,6 +706,7 @@ func (a *PaymentMethodsMerchantLevelApi) UpdatePaymentMethod(ctx context.Context
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 429 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
@@ -685,6 +715,7 @@ func (a *PaymentMethodsMerchantLevelApi) UpdatePaymentMethod(ctx context.Context
 		return *res, httpRes, serviceError
 	}
 	if httpRes.StatusCode == 500 {
+		var serviceError common.RestServiceError
 		body, _ := ioutil.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {

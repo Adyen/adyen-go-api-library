@@ -20,7 +20,8 @@ var _ common.MappedNullable = &Connectivity{}
 // Connectivity struct for Connectivity
 type Connectivity struct {
 	// Indicates the status of the SIM card in the payment terminal. Can be updated and received only at terminal level, and only for models that support cellular connectivity.  Possible values: * **ACTIVATED**: the SIM card is activated. Cellular connectivity may still need to be enabled on the terminal itself, in the **Network** settings. * **INVENTORY**: the SIM card is not activated. The terminal can't use cellular connectivity.
-	SimcardStatus        *string   `json:"simcardStatus,omitempty"`
+	SimcardStatus *string `json:"simcardStatus,omitempty"`
+	// The list of local and public URLs to send notifications to when using local integrations.
 	TerminalIPAddressURL *EventUrl `json:"terminalIPAddressURL,omitempty"`
 }
 

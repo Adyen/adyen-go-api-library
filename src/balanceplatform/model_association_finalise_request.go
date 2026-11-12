@@ -20,7 +20,8 @@ var _ common.MappedNullable = &AssociationFinaliseRequest{}
 // AssociationFinaliseRequest struct for AssociationFinaliseRequest
 type AssociationFinaliseRequest struct {
 	// The list of unique identifiers of the resources that you are associating with the SCA device.  Maximum: 5 strings.
-	Ids                          []string                               `json:"ids"`
+	Ids []string `json:"ids"`
+	// Contains authentication information required to associate the resource with the SCA device.
 	StrongCustomerAuthentication AssociationDelegatedAuthenticationData `json:"strongCustomerAuthentication"`
 	// The type of resource that you are associating with the SCA device.  Possible value: **PaymentInstrument**
 	Type string `json:"type"`
