@@ -19,6 +19,7 @@ var _ common.MappedNullable = &UltimatePartyIdentification{}
 
 // UltimatePartyIdentification struct for UltimatePartyIdentification
 type UltimatePartyIdentification struct {
+	// The address of the bank account or card owner.
 	Address *Address `json:"address,omitempty"`
 	// The date of birth of the individual in [ISO-8601](https://www.w3.org/TR/NOTE-datetime) format. For example, **YYYY-MM-DD**.  Allowed only when `type` is **individual**.
 	DateOfBirth *string `json:"dateOfBirth,omitempty"`
@@ -27,7 +28,8 @@ type UltimatePartyIdentification struct {
 	// The first name of the individual.  Supported characters: [a-z] [A-Z] - . / — and space.  This parameter is: - Allowed only when `type` is **individual**. - Required when `category` is **card**.
 	FirstName *string `json:"firstName,omitempty"`
 	// The full name of the entity that owns the bank account or card.  Supported characters: [a-z] [A-Z] [0-9] , . ; : - — / \\ + & ! ? @ ( ) \" ' and space.  Required when `category` is **bank**.
-	FullName          *string            `json:"fullName,omitempty"`
+	FullName *string `json:"fullName,omitempty"`
+	// Details of the card or token used to fund the pay-in transaction.
 	FundingInstrument *FundingInstrument `json:"fundingInstrument,omitempty"`
 	// The last name of the individual.  Supported characters: [a-z] [A-Z] - . / — and space.  This parameter is: - Allowed only when `type` is **individual**. - Required when `category` is **card**.
 	LastName *string `json:"lastName,omitempty"`

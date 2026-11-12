@@ -24,7 +24,8 @@ type MerchantData struct {
 	// The merchant category code.
 	Mcc *string `json:"mcc,omitempty"`
 	// The unique identifier of the merchant.
-	MerchantId   *string       `json:"merchantId,omitempty"`
+	MerchantId *string `json:"merchantId,omitempty"`
+	// Contains the name and location of the merchant.
 	NameLocation *NameLocation `json:"nameLocation,omitempty"`
 	// The postal code of the merchant.
 	PostalCode *string `json:"postalCode,omitempty"`

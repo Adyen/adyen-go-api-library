@@ -19,6 +19,7 @@ var _ common.MappedNullable = &FindTransfersResponse{}
 
 // FindTransfersResponse struct for FindTransfersResponse
 type FindTransfersResponse struct {
+	// Contains links to the next and previous page whenever applicable.
 	Links *Links `json:"_links,omitempty"`
 	// Contains the transfers that match the query parameters.
 	Data []TransferData `json:"data,omitempty"`

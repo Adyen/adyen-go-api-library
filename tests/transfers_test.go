@@ -169,8 +169,7 @@ func Test_Transfers(t *testing.T) {
 		request := service.CapitalApi.RequestGrantPayoutInput().CapitalGrantInfo(transfers.CapitalGrantInfo{
 			GrantAccountId: "CG00000000000000000000001",
 			GrantOfferId:   "0000000000000001",
-			Counterparty: &transfers.Counterparty{
-				AccountHolderId:  common.PtrString("AH00000000000000000000001"),
+			Counterparty: &transfers.GrantInfoCounterparty{
 				BalanceAccountId: common.PtrString("BA00000000000000000000001"),
 			},
 		})

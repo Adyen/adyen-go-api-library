@@ -19,7 +19,9 @@ var _ common.MappedNullable = &Links{}
 
 // Links struct for Links
 type Links struct {
+	// Contains a link to the next page.
 	Next *Link `json:"next,omitempty"`
+	// Contains a link to the previous page.
 	Prev *Link `json:"prev,omitempty"`
 }
 

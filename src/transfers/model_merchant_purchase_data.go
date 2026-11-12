@@ -19,6 +19,7 @@ var _ common.MappedNullable = &MerchantPurchaseData{}
 
 // MerchantPurchaseData struct for MerchantPurchaseData
 type MerchantPurchaseData struct {
+	// Airline information.
 	Airline *Airline `json:"airline,omitempty"`
 	// Lodging information.
 	Lodging []Lodging `json:"lodging,omitempty"`

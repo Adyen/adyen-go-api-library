@@ -19,14 +19,17 @@ var _ common.MappedNullable = &TransferInfo{}
 
 // TransferInfo struct for TransferInfo
 type TransferInfo struct {
+	// The amount of the transfer.
 	Amount Amount `json:"amount"`
 	// The unique identifier of the source [balance account](https://docs.adyen.com/api-explorer/balanceplatform/latest/post/balanceAccounts#responses-200-id).  If you want to make a transfer using a **virtual** **bankAccount** assigned to the balance account, you must specify the [payment instrument ID](https://docs.adyen.com/api-explorer/balanceplatform/latest/post/paymentInstruments#responses-200-id) of the **virtual** **bankAccount**. If you only specify a balance account ID, Adyen uses the default **physical** **bankAccount** payment instrument assigned to the balance account.
 	BalanceAccountId *string `json:"balanceAccountId,omitempty"`
 	// The category of the transfer.  Possible values:   - **bank**: A transfer involving a [transfer instrument](https://docs.adyen.com/api-explorer/legalentity/latest/post/transferInstruments#responses-200-id) or a bank account.  - **card**: A transfer involving a third-party card.  - **internal**: A transfer between [balance accounts](https://docs.adyen.com/api-explorer/balanceplatform/latest/post/balanceAccounts#responses-200-id) within your platform.  - **issuedCard**: A transfer initiated by an Adyen-issued card.  - **platformPayment**: Funds movements related to payments that are acquired for your users.  - **topUp**: An incoming transfer initiated by your user to top up their balance account.
-	Category     string             `json:"category"`
+	Category string `json:"category"`
+	// The other party involved in the funds transfer. A bank account, a balance account, a card, or a transfer instrument is required.
 	Counterparty CounterpartyInfoV3 `json:"counterparty"`
 	// Your description for the transfer. It is used by most banks as the transfer description. We recommend sending a maximum of 140 characters, otherwise the description may be truncated.  Supported characters: **[a-z] [A-Z] [0-9] / - ?** **: ( ) . , ' + Space**  Supported characters for **regular** and **fast** transfers to a US counterparty: **[a-z] [A-Z] [0-9] & $ % # @** **~ = + - _ ' \" ! ?**
-	Description   *string        `json:"description,omitempty"`
+	Description *string `json:"description,omitempty"`
+	// The date when the transfer will be processed. This date must be within 30 days of the current date.  Until the `executionDate`: - The `status` of the transfer remains as **received**. - The `reason` of the transfer remains as **pending**.
 	ExecutionDate *ExecutionDate `json:"executionDate,omitempty"`
 	// The unique identifier of the source [payment instrument](https://docs.adyen.com/api-explorer/balanceplatform/latest/post/paymentInstruments#responses-200-id).  If you want to make a transfer using a **virtual** **bankAccount**, you must specify the payment instrument ID of the **virtual** **bankAccount**. If you only specify a balance account ID, Adyen uses the default **physical** **bankAccount** payment instrument assigned to the balance account.
 	PaymentInstrumentId *string `json:"paymentInstrumentId,omitempty"`
@@ -37,10 +40,12 @@ type TransferInfo struct {
 	// Your reference for the transfer, used internally within your platform. If you don't provide this in the request, Adyen generates a unique reference.
 	Reference *string `json:"reference,omitempty"`
 	//  A reference that is sent to the recipient. This reference is also sent in all webhooks related to the transfer, so you can use it to track statuses for both parties involved in the funds movement.   Supported characters: **a-z**, **A-Z**, **0-9**. The maximum length depends on the `category`.  - **internal**: 80 characters  - **bank**: 35 characters when transferring to an IBAN, 15 characters for others.
-	ReferenceForBeneficiary *string                `json:"referenceForBeneficiary,omitempty"`
-	Review                  *TransferRequestReview `json:"review,omitempty"`
+	ReferenceForBeneficiary *string `json:"referenceForBeneficiary,omitempty"`
+	// Contains information required for triggering transfer reviews.
+	Review *TransferRequestReview `json:"review,omitempty"`
 	// The type of transfer.  Possible values:   - **bankTransfer**: for push transfers to a transfer instrument or a bank account. The `category` must be **bank**. - **internalTransfer**: for push transfers between balance accounts. The `category` must be **internal**. - **internalDirectDebit**: for pull transfers (direct debits) between balance accounts. The `category` must be **internal**.
-	Type          *string                      `json:"type,omitempty"`
+	Type *string `json:"type,omitempty"`
+	// The ultimate sender of the funds of the transfer (ultimate debtor).
 	UltimateParty *UltimatePartyIdentification `json:"ultimateParty,omitempty"`
 }
 

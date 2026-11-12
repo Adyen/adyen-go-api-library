@@ -19,16 +19,21 @@ var _ common.MappedNullable = &CapitalGrant{}
 
 // CapitalGrant struct for CapitalGrant
 type CapitalGrant struct {
-	Amount       *Amount        `json:"amount,omitempty"`
-	Balances     CapitalBalance `json:"balances"`
-	Counterparty *Counterparty  `json:"counterparty,omitempty"`
-	Fee          *Fee           `json:"fee,omitempty"`
+	// An object containing the amount of the grant, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
+	Amount *Amount `json:"amount,omitempty"`
+	// An object containing the details of the existing grant.
+	Balances CapitalBalance `json:"balances"`
+	// An object containing the details of the receiving party of the grant.
+	Counterparty *GrantCounterparty `json:"counterparty,omitempty"`
+	// An object containing the fee currency and value, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
+	Fee *Fee `json:"fee,omitempty"`
 	// The identifier of the grant account used for the grant.
 	GrantAccountId string `json:"grantAccountId"`
 	// The identifier of the grant offer that has been selected and from which the grant details will be used.
 	GrantOfferId string `json:"grantOfferId"`
 	// The identifier of the grant reference.
-	Id        string     `json:"id"`
+	Id string `json:"id"`
+	// An object containing the details of the 30-day repayment threshold.
 	Repayment *Repayment `json:"repayment,omitempty"`
 	// The current status of the grant. Possible values: **Pending**, **Active**, **Repaid**, **WrittenOff**, **Failed**, **Revoked**.
 	Status string `json:"status"`
@@ -113,9 +118,9 @@ func (o *CapitalGrant) SetBalances(v CapitalBalance) {
 }
 
 // GetCounterparty returns the Counterparty field value if set, zero value otherwise.
-func (o *CapitalGrant) GetCounterparty() Counterparty {
+func (o *CapitalGrant) GetCounterparty() GrantCounterparty {
 	if o == nil || common.IsNil(o.Counterparty) {
-		var ret Counterparty
+		var ret GrantCounterparty
 		return ret
 	}
 	return *o.Counterparty
@@ -123,7 +128,7 @@ func (o *CapitalGrant) GetCounterparty() Counterparty {
 
 // GetCounterpartyOk returns a tuple with the Counterparty field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CapitalGrant) GetCounterpartyOk() (*Counterparty, bool) {
+func (o *CapitalGrant) GetCounterpartyOk() (*GrantCounterparty, bool) {
 	if o == nil || common.IsNil(o.Counterparty) {
 		return nil, false
 	}
@@ -139,8 +144,8 @@ func (o *CapitalGrant) HasCounterparty() bool {
 	return false
 }
 
-// SetCounterparty gets a reference to the given Counterparty and assigns it to the Counterparty field.
-func (o *CapitalGrant) SetCounterparty(v Counterparty) {
+// SetCounterparty gets a reference to the given GrantCounterparty and assigns it to the Counterparty field.
+func (o *CapitalGrant) SetCounterparty(v GrantCounterparty) {
 	o.Counterparty = &v
 }
 

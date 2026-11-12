@@ -19,6 +19,7 @@ var _ common.MappedNullable = &TransactionSearchResponse{}
 
 // TransactionSearchResponse struct for TransactionSearchResponse
 type TransactionSearchResponse struct {
+	// Contains links to the next and previous page whenever applicable.
 	Links *Links `json:"_links,omitempty"`
 	// Contains the transactions that match the query parameters.
 	Data []Transaction `json:"data,omitempty"`
