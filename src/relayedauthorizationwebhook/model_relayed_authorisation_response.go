@@ -19,6 +19,7 @@ var _ common.MappedNullable = &RelayedAuthorisationResponse{}
 
 // RelayedAuthorisationResponse struct for RelayedAuthorisationResponse
 type RelayedAuthorisationResponse struct {
+	// Object representing the authorization decision.
 	AuthorisationDecision *AuthorisationDecisionResponse `json:"authorisationDecision,omitempty"`
 	// Object that contains key-value pairs that you can use in your reporting or other business process.
 	Metadata *map[string]string `json:"metadata,omitempty"`

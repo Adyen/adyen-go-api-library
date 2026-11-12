@@ -20,7 +20,8 @@ var _ common.MappedNullable = &StoredValueIssueResponse{}
 // StoredValueIssueResponse struct for StoredValueIssueResponse
 type StoredValueIssueResponse struct {
 	// Authorisation code: * When the payment is authorised, this field holds the authorisation code for the payment. * When the payment is not authorised, this field is empty.
-	AuthCode       *string `json:"authCode,omitempty"`
+	AuthCode *string `json:"authCode,omitempty"`
+	// The balance currently on the payment method.
 	CurrentBalance *Amount `json:"currentBalance,omitempty"`
 	// The collection that contains the type of the payment method and its specific information if available
 	PaymentMethod *map[string]string `json:"paymentMethod,omitempty"`

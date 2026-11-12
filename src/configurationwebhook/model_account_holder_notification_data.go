@@ -19,6 +19,7 @@ var _ common.MappedNullable = &AccountHolderNotificationData{}
 
 // AccountHolderNotificationData struct for AccountHolderNotificationData
 type AccountHolderNotificationData struct {
+	// Contains information about the account holder resource that triggered the event.
 	AccountHolder *AccountHolder `json:"accountHolder,omitempty"`
 	// The unique identifier of the balance platform.
 	BalancePlatform *string `json:"balancePlatform,omitempty"`

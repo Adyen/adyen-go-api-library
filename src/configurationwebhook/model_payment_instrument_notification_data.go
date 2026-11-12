@@ -20,7 +20,8 @@ var _ common.MappedNullable = &PaymentInstrumentNotificationData{}
 // PaymentInstrumentNotificationData struct for PaymentInstrumentNotificationData
 type PaymentInstrumentNotificationData struct {
 	// The unique identifier of the balance platform.
-	BalancePlatform   *string            `json:"balancePlatform,omitempty"`
+	BalancePlatform *string `json:"balancePlatform,omitempty"`
+	// Contains information about the payment instrument resource that triggered the event.
 	PaymentInstrument *PaymentInstrument `json:"paymentInstrument,omitempty"`
 }
 

@@ -20,6 +20,7 @@ var _ common.MappedNullable = &CardOrderNotificationRequest{}
 
 // CardOrderNotificationRequest struct for CardOrderNotificationRequest
 type CardOrderNotificationRequest struct {
+	// Contains event details.
 	Data CardOrderItem `json:"data"`
 	// The environment from which the webhook originated.  Possible values: **test**, **live**.
 	Environment string `json:"environment"`

@@ -20,7 +20,9 @@ var _ common.MappedNullable = &ReportNotificationData{}
 
 // ReportNotificationData struct for ReportNotificationData
 type ReportNotificationData struct {
-	AccountHolder  *ResourceReference `json:"accountHolder,omitempty"`
+	// The account holder related to the report.
+	AccountHolder *ResourceReference `json:"accountHolder,omitempty"`
+	// The balance account related to the report.
 	BalanceAccount *ResourceReference `json:"balanceAccount,omitempty"`
 	// The unique identifier of the balance platform.
 	BalancePlatform *string `json:"balancePlatform,omitempty"`

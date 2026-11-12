@@ -20,7 +20,8 @@ var _ common.MappedNullable = &StoredValueLoadResponse{}
 // StoredValueLoadResponse struct for StoredValueLoadResponse
 type StoredValueLoadResponse struct {
 	// Authorisation code: * When the payment is authorised, this field holds the authorisation code for the payment. * When the payment is not authorised, this field is empty.
-	AuthCode       *string `json:"authCode,omitempty"`
+	AuthCode *string `json:"authCode,omitempty"`
+	// The balance currently on the payment method.
 	CurrentBalance *Amount `json:"currentBalance,omitempty"`
 	// Adyen's 16-character string reference associated with the transaction/request. This value is globally unique; quote it when communicating with us about this request.
 	PspReference *string `json:"pspReference,omitempty"`

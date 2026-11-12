@@ -21,8 +21,9 @@ var _ common.MappedNullable = &AuthenticationInfo{}
 // AuthenticationInfo struct for AuthenticationInfo
 type AuthenticationInfo struct {
 	// Universally unique transaction identifier assigned by the Access Control Server (ACS) to identify a single transaction.
-	AcsTransId string         `json:"acsTransId"`
-	Challenge  *ChallengeInfo `json:"challenge,omitempty"`
+	AcsTransId string `json:"acsTransId"`
+	// Information about Strong Customer Authentication (SCA). Returned when `type` is **challenge**.
+	Challenge *ChallengeInfo `json:"challenge,omitempty"`
 	// Specifies a preference for receiving a challenge. Possible values:  * **01**: No preference * **02**: No challenge requested * **03**: Challenge requested (preference) * **04**: Challenge requested (mandate) * **05**: No challenge requested (transactional risk analysis is already performed) * **07**: No challenge requested (SCA is already performed) * **08**: No challenge requested (trusted beneficiaries exemption of no challenge required) * **09**: Challenge requested (trusted beneficiaries prompt requested if challenge required) * **80**: No challenge requested (secure corporate payment with Mastercard) * **82**: No challenge requested (secure corporate payment with Visa)
 	ChallengeIndicator string `json:"challengeIndicator"`
 	// Date and time in UTC of the cardholder authentication.   [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format: YYYY-MM-DDThh:mm:ss+TZD, for example, **2020-12-18T10:15:30+01:00**.

@@ -20,6 +20,7 @@ var _ common.MappedNullable = &PaymentNotificationRequest{}
 
 // PaymentNotificationRequest struct for PaymentNotificationRequest
 type PaymentNotificationRequest struct {
+	// Contains event details.
 	Data PaymentInstrumentNotificationData `json:"data"`
 	// The environment from which the webhook originated.  Possible values: **test**, **live**.
 	Environment string `json:"environment"`

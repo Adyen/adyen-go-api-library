@@ -19,6 +19,7 @@ var _ common.MappedNullable = &BankAccountV3{}
 
 // BankAccountV3 struct for BankAccountV3
 type BankAccountV3 struct {
+	// Information about the owner of the bank account.
 	AccountHolder         PartyIdentification                `json:"accountHolder"`
 	AccountIdentification BankAccountV3AccountIdentification `json:"accountIdentification"`
 	// The unique token that identifies the stored bank account details of the counterparty for a payout.

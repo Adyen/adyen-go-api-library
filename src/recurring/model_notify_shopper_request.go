@@ -19,6 +19,7 @@ var _ common.MappedNullable = &NotifyShopperRequest{}
 
 // NotifyShopperRequest struct for NotifyShopperRequest
 type NotifyShopperRequest struct {
+	// The amount of the upcoming payment.
 	Amount Amount `json:"amount"`
 	// Date on which the subscription amount will be debited from the shopper. In YYYY-MM-DD format
 	BillingDate *string `json:"billingDate,omitempty"`

@@ -19,6 +19,7 @@ var _ common.MappedNullable = &BalanceTransferRequest{}
 
 // BalanceTransferRequest struct for BalanceTransferRequest
 type BalanceTransferRequest struct {
+	// The amount of the transfer in [minor units](https://docs.adyen.com/development-resources/currency-codes).
 	Amount Amount `json:"amount"`
 	// A human-readable description for the transfer. You can use alphanumeric characters and hyphens. We recommend sending a maximum of 140 characters, otherwise the description may be truncated.
 	Description *string `json:"description,omitempty"`

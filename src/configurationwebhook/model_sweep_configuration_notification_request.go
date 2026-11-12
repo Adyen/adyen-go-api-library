@@ -20,6 +20,7 @@ var _ common.MappedNullable = &SweepConfigurationNotificationRequest{}
 
 // SweepConfigurationNotificationRequest struct for SweepConfigurationNotificationRequest
 type SweepConfigurationNotificationRequest struct {
+	// Contains event details.
 	Data SweepConfigurationNotificationData `json:"data"`
 	// The environment from which the webhook originated.  Possible values: **test**, **live**.
 	Environment string `json:"environment"`

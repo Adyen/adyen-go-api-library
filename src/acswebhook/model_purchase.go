@@ -23,7 +23,8 @@ type Purchase struct {
 	// The time of the purchase.
 	Date time.Time `json:"date"`
 	// The name of the merchant.
-	MerchantName   string `json:"merchantName"`
+	MerchantName string `json:"merchantName"`
+	// The amount of the purchase in the original currency.
 	OriginalAmount Amount `json:"originalAmount"`
 }
 

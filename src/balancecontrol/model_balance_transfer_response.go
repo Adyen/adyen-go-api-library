@@ -20,6 +20,7 @@ var _ common.MappedNullable = &BalanceTransferResponse{}
 
 // BalanceTransferResponse struct for BalanceTransferResponse
 type BalanceTransferResponse struct {
+	// The amount of the transfer in [minor units](https://docs.adyen.com/development-resources/currency-codes).
 	Amount Amount `json:"amount"`
 	// The date when the balance transfer was requested.
 	CreatedAt time.Time `json:"createdAt"`

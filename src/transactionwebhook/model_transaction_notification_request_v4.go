@@ -20,6 +20,7 @@ var _ common.MappedNullable = &TransactionNotificationRequestV4{}
 
 // TransactionNotificationRequestV4 struct for TransactionNotificationRequestV4
 type TransactionNotificationRequestV4 struct {
+	// Contains details about the event.
 	Data Transaction `json:"data"`
 	// The environment from which the webhook originated.  Possible values: **test**, **live**.
 	Environment string `json:"environment"`

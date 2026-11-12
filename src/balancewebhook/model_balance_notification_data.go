@@ -23,8 +23,9 @@ type BalanceNotificationData struct {
 	// The unique identifier of the balance account.
 	BalanceAccountId string `json:"balanceAccountId"`
 	// The unique identifier of the balance platform.
-	BalancePlatform *string  `json:"balancePlatform,omitempty"`
-	Balances        Balances `json:"balances"`
+	BalancePlatform *string `json:"balancePlatform,omitempty"`
+	// The list balance types.
+	Balances Balances `json:"balances"`
 	// The date and time when the event was triggered, in ISO 8601 extended format. For example, **2025-03-19T10:15:30+01:00**.
 	CreationDate *time.Time `json:"creationDate,omitempty"`
 	// The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes).

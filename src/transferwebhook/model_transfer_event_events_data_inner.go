@@ -46,47 +46,16 @@ func MerchantPurchaseDataAsTransferEventEventsDataInner(v *MerchantPurchaseData)
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *TransferEventEventsDataInner) UnmarshalJSON(data []byte) error {
 	var err error
+	// clear any variant left by a previous unmarshal into the same destination
+	dst.InterchangeData = nil
+	dst.IssuingTransactionData = nil
+	dst.MerchantPurchaseData = nil
+
 	// use discriminator value to speed up the lookup
 	var jsonDict map[string]interface{}
 	err = common.NewStrictDecoder(data).Decode(&jsonDict)
 	if err != nil {
 		return fmt.Errorf("failed to unmarshal JSON into map for the discriminator lookup")
-	}
-
-	// check if the discriminator value is 'InterchangeData'
-	if jsonDict["type"] == "InterchangeData" {
-		// try to unmarshal JSON data into InterchangeData
-		err = json.Unmarshal(data, &dst.InterchangeData)
-		if err == nil {
-			return nil // data stored in dst.InterchangeData, return on the first match
-		} else {
-			dst.InterchangeData = nil
-			return fmt.Errorf("failed to unmarshal TransferEventEventsDataInner as InterchangeData: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'IssuingTransactionData'
-	if jsonDict["type"] == "IssuingTransactionData" {
-		// try to unmarshal JSON data into IssuingTransactionData
-		err = json.Unmarshal(data, &dst.IssuingTransactionData)
-		if err == nil {
-			return nil // data stored in dst.IssuingTransactionData, return on the first match
-		} else {
-			dst.IssuingTransactionData = nil
-			return fmt.Errorf("failed to unmarshal TransferEventEventsDataInner as IssuingTransactionData: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'MerchantPurchaseData'
-	if jsonDict["type"] == "MerchantPurchaseData" {
-		// try to unmarshal JSON data into MerchantPurchaseData
-		err = json.Unmarshal(data, &dst.MerchantPurchaseData)
-		if err == nil {
-			return nil // data stored in dst.MerchantPurchaseData, return on the first match
-		} else {
-			dst.MerchantPurchaseData = nil
-			return fmt.Errorf("failed to unmarshal TransferEventEventsDataInner as MerchantPurchaseData: %s", err.Error())
-		}
 	}
 
 	// check if the discriminator value is 'interchangeData'
@@ -125,7 +94,43 @@ func (dst *TransferEventEventsDataInner) UnmarshalJSON(data []byte) error {
 		}
 	}
 
-	return nil
+	// check if the discriminator value is 'InterchangeData'
+	if jsonDict["type"] == "InterchangeData" {
+		// try to unmarshal JSON data into InterchangeData
+		err = json.Unmarshal(data, &dst.InterchangeData)
+		if err == nil {
+			return nil // data stored in dst.InterchangeData, return on the first match
+		} else {
+			dst.InterchangeData = nil
+			return fmt.Errorf("failed to unmarshal TransferEventEventsDataInner as InterchangeData: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'IssuingTransactionData'
+	if jsonDict["type"] == "IssuingTransactionData" {
+		// try to unmarshal JSON data into IssuingTransactionData
+		err = json.Unmarshal(data, &dst.IssuingTransactionData)
+		if err == nil {
+			return nil // data stored in dst.IssuingTransactionData, return on the first match
+		} else {
+			dst.IssuingTransactionData = nil
+			return fmt.Errorf("failed to unmarshal TransferEventEventsDataInner as IssuingTransactionData: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'MerchantPurchaseData'
+	if jsonDict["type"] == "MerchantPurchaseData" {
+		// try to unmarshal JSON data into MerchantPurchaseData
+		err = json.Unmarshal(data, &dst.MerchantPurchaseData)
+		if err == nil {
+			return nil // data stored in dst.MerchantPurchaseData, return on the first match
+		} else {
+			dst.MerchantPurchaseData = nil
+			return fmt.Errorf("failed to unmarshal TransferEventEventsDataInner as MerchantPurchaseData: %s", err.Error())
+		}
+	}
+
+	return fmt.Errorf("data failed to match schemas in oneOf(TransferEventEventsDataInner)")
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON

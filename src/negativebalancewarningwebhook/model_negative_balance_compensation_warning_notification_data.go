@@ -20,8 +20,10 @@ var _ common.MappedNullable = &NegativeBalanceCompensationWarningNotificationDat
 
 // NegativeBalanceCompensationWarningNotificationData struct for NegativeBalanceCompensationWarningNotificationData
 type NegativeBalanceCompensationWarningNotificationData struct {
+	// The details of the account holder who owns the balance account with a negative balance.
 	AccountHolder *ResourceReference `json:"accountHolder,omitempty"`
-	Amount        *Amount            `json:"amount,omitempty"`
+	// The negative balance amount of the balance account.
+	Amount *Amount `json:"amount,omitempty"`
 	// The unique identifier of the balance platform.
 	BalancePlatform *string `json:"balancePlatform,omitempty"`
 	// The date and time when the event was triggered, in ISO 8601 extended format. For example, **2025-03-19T10:15:30+01:00**.

@@ -20,6 +20,7 @@ var _ common.MappedNullable = &BalanceAccountBalanceNotificationRequest{}
 
 // BalanceAccountBalanceNotificationRequest struct for BalanceAccountBalanceNotificationRequest
 type BalanceAccountBalanceNotificationRequest struct {
+	// Contains event details.
 	Data BalanceNotificationData `json:"data"`
 	// The environment from which the webhook originated.  Possible values: **test**, **live**.
 	Environment string `json:"environment"`

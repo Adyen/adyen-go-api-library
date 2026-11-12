@@ -26,7 +26,8 @@ type CapabilitySettings struct {
 	//
 	FundingSource []string `json:"fundingSource,omitempty"`
 	//
-	Interval  *string `json:"interval,omitempty"`
+	Interval *string `json:"interval,omitempty"`
+	//
 	MaxAmount *Amount `json:"maxAmount,omitempty"`
 }
 

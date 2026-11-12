@@ -19,10 +19,13 @@ var _ common.MappedNullable = &BalanceMutation{}
 
 // BalanceMutation struct for BalanceMutation
 type BalanceMutation struct {
-	BalanceAfter  *Amount `json:"balanceAfter,omitempty"`
+	// The balance amount after the mutation.
+	BalanceAfter *Amount `json:"balanceAfter,omitempty"`
+	// The balance amount before the mutation.
 	BalanceBefore *Amount `json:"balanceBefore,omitempty"`
 	// The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes).
-	Currency       *string `json:"currency,omitempty"`
+	Currency *string `json:"currency,omitempty"`
+	// The amount of the mutation.
 	MutationAmount *Amount `json:"mutationAmount,omitempty"`
 	// The type of the mutation.
 	Type *string `json:"type,omitempty"`

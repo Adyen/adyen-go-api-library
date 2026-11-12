@@ -21,8 +21,9 @@ var _ common.MappedNullable = &TokenizationCreatedDetailsNotificationRequest{}
 // TokenizationCreatedDetailsNotificationRequest struct for TokenizationCreatedDetailsNotificationRequest
 type TokenizationCreatedDetailsNotificationRequest struct {
 	// The date and time when the event happened, in ISO 8601 extended format.
-	CreatedAt time.Time                    `json:"createdAt"`
-	Data      RecurringTokenStoreOperation `json:"data"`
+	CreatedAt time.Time `json:"createdAt"`
+	// Contains event details.
+	Data RecurringTokenStoreOperation `json:"data"`
 	// The environment from which the webhook originated.  Possible values: **test**, **live**.
 	Environment string `json:"environment"`
 	// The PSP reference of the event that triggered the webhook.

@@ -20,6 +20,7 @@ var _ common.MappedNullable = &ReportNotificationRequest{}
 
 // ReportNotificationRequest struct for ReportNotificationRequest
 type ReportNotificationRequest struct {
+	// Contains event details.
 	Data ReportNotificationData `json:"data"`
 	// The environment from which the webhook originated.  Possible values: **test**, **live**.
 	Environment string `json:"environment"`

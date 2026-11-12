@@ -19,6 +19,7 @@ var _ common.MappedNullable = &DeleteDefenseDocumentResponse{}
 
 // DeleteDefenseDocumentResponse struct for DeleteDefenseDocumentResponse
 type DeleteDefenseDocumentResponse struct {
+	// The result of the dispute service.
 	DisputeServiceResult DisputeServiceResult `json:"disputeServiceResult"`
 }
 

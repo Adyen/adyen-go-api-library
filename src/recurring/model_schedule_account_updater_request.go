@@ -21,7 +21,8 @@ var _ common.MappedNullable = &ScheduleAccountUpdaterRequest{}
 type ScheduleAccountUpdaterRequest struct {
 	// This field contains additional data, which may be required for a particular request.
 	AdditionalData *map[string]string `json:"additionalData,omitempty"`
-	Card           *Card              `json:"card,omitempty"`
+	// Credit card data.  Optional if `shopperReference` and `selectedRecurringDetailReference` are provided.
+	Card *Card `json:"card,omitempty"`
 	// Account of the merchant.
 	MerchantAccount string `json:"merchantAccount"`
 	// A reference that merchants can apply for the call.

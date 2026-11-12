@@ -19,13 +19,16 @@ var _ common.MappedNullable = &DeliveryContact{}
 
 // DeliveryContact struct for DeliveryContact
 type DeliveryContact struct {
+	// The address of the contact.
 	Address DeliveryAddress `json:"address"`
 	// The company name of the contact.
 	Company *string `json:"company,omitempty"`
 	// The email address of the contact.
 	Email *string `json:"email,omitempty"`
-	Name  Name    `json:"name"`
-	Phone *Phone  `json:"phone,omitempty"`
+	// The name of the contact.
+	Name Name `json:"name"`
+	// The phone of the contact.
+	Phone *Phone `json:"phone,omitempty"`
 	// The URL of the contact's website.
 	WebAddress *string `json:"webAddress,omitempty"`
 }

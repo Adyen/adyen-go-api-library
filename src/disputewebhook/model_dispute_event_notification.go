@@ -27,7 +27,8 @@ type DisputeEventNotification struct {
 	// The date and time when the event was triggered, in ISO 8601 extended format. For example, **2025-03-19T10:15:30+01:00**.
 	CreationDate *time.Time `json:"creationDate,omitempty"`
 	// Contains information about the dispute.
-	Description    *string `json:"description,omitempty"`
+	Description *string `json:"description,omitempty"`
+	// The amount for which the transaction is being disputed. The disputed amount cannot be greater than the transaction amount. If an amount was not provided, the entire transaction amount is disputed.
 	DisputedAmount *Amount `json:"disputedAmount,omitempty"`
 	// The ID of the resource.
 	Id *string `json:"id,omitempty"`
@@ -458,7 +459,7 @@ func (v *NullableDisputeEventNotification) UnmarshalJSON(src []byte) error {
 }
 
 func (o *DisputeEventNotification) isValidType() bool {
-	var allowedEnumValues = []string{"fraud", "notDelivered", "duplicate", "other"}
+	var allowedEnumValues = []string{"fraud", "notDelivered", "duplicate", "notAsDescribed", "cancelled", "other"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

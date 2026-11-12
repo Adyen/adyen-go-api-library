@@ -26,13 +26,15 @@ type IssuedCard struct {
 	// Indicates the method used for entering the PAN to initiate a transaction.  Possible values: **manual**, **chip**, **magstripe**, **contactless**, **cof**, **ecommerce**, **token**.
 	PanEntryMode *string `json:"panEntryMode,omitempty"`
 	// Contains information about how the payment was processed.  Possible values: **atmWithdraw**, **balanceInquiry**, **ecommerce**, **moto**, **pos**, **purchaseWithCashback**, **recurring**, **token**.
-	ProcessingType           *string                   `json:"processingType,omitempty"`
+	ProcessingType *string `json:"processingType,omitempty"`
+	// If you are using relayed authorisation, this object contains information from the relayed authorisation response from your server.
 	RelayedAuthorisationData *RelayedAuthorisationData `json:"relayedAuthorisationData,omitempty"`
 	// The identifier of the original payment. This ID is provided by the scheme and can be alphanumeric or numeric, depending on the scheme. The `schemeTraceID` should refer to an original `schemeUniqueTransactionID` provided in an earlier payment (not necessarily processed by Adyen). A `schemeTraceId` is typically available for authorization adjustments or recurring payments.
 	SchemeTraceId *string `json:"schemeTraceId,omitempty"`
 	// The unique identifier created by the scheme. This ID can be alphanumeric or numeric depending on the scheme.
-	SchemeUniqueTransactionId *string       `json:"schemeUniqueTransactionId,omitempty"`
-	ThreeDSecure              *ThreeDSecure `json:"threeDSecure,omitempty"`
+	SchemeUniqueTransactionId *string `json:"schemeUniqueTransactionId,omitempty"`
+	// The data of the result from the 3DS authentication.
+	ThreeDSecure *ThreeDSecure `json:"threeDSecure,omitempty"`
 	// **issuedCard**
 	Type *string `json:"type,omitempty"`
 	// The evaluation of the validation facts. See [validation checks](https://docs.adyen.com/issuing/validation-checks) for more information.

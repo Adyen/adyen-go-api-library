@@ -21,8 +21,9 @@ var _ common.MappedNullable = &TerminalSettingsNotificationRequest{}
 // TerminalSettingsNotificationRequest struct for TerminalSettingsNotificationRequest
 type TerminalSettingsNotificationRequest struct {
 	// Timestamp for when the webhook was created.
-	CreatedAt time.Time            `json:"createdAt"`
-	Data      TerminalSettingsData `json:"data"`
+	CreatedAt time.Time `json:"createdAt"`
+	// Contains event details.
+	Data TerminalSettingsData `json:"data"`
 	// The environment from which the webhook originated.  Possible values: **test**, **live**.
 	Environment string `json:"environment"`
 	// Type of notification.

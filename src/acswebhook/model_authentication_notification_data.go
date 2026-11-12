@@ -19,14 +19,16 @@ var _ common.MappedNullable = &AuthenticationNotificationData{}
 
 // AuthenticationNotificationData struct for AuthenticationNotificationData
 type AuthenticationNotificationData struct {
+	// Contains information about the authentication.
 	Authentication AuthenticationInfo `json:"authentication"`
 	// The unique identifier of the balance platform.
 	BalancePlatform *string `json:"balancePlatform,omitempty"`
-	// Unique identifier of the authentication.
+	// The unique identifier of the authentication.
 	Id string `json:"id"`
-	// Unique identifier of the payment instrument that was used for the authentication.
-	PaymentInstrumentId string       `json:"paymentInstrumentId"`
-	Purchase            PurchaseInfo `json:"purchase"`
+	// The unique identifier of the payment instrument that was used for the authentication.
+	PaymentInstrumentId string `json:"paymentInstrumentId"`
+	// Contains information about the purchase.
+	Purchase PurchaseInfo `json:"purchase"`
 	// Outcome of the authentication. Allowed values: * authenticated * rejected * error
 	Status string `json:"status"`
 }

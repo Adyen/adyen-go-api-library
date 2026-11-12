@@ -38,35 +38,15 @@ func USAchTracingDataAsTransferDataTracing(v *USAchTracingData) TransferDataTrac
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *TransferDataTracing) UnmarshalJSON(data []byte) error {
 	var err error
+	// clear any variant left by a previous unmarshal into the same destination
+	dst.UKFpsTracingData = nil
+	dst.USAchTracingData = nil
+
 	// use discriminator value to speed up the lookup
 	var jsonDict map[string]interface{}
 	err = common.NewStrictDecoder(data).Decode(&jsonDict)
 	if err != nil {
 		return fmt.Errorf("failed to unmarshal JSON into map for the discriminator lookup")
-	}
-
-	// check if the discriminator value is 'UKFpsTracingData'
-	if jsonDict["type"] == "UKFpsTracingData" {
-		// try to unmarshal JSON data into UKFpsTracingData
-		err = json.Unmarshal(data, &dst.UKFpsTracingData)
-		if err == nil {
-			return nil // data stored in dst.UKFpsTracingData, return on the first match
-		} else {
-			dst.UKFpsTracingData = nil
-			return fmt.Errorf("failed to unmarshal TransferDataTracing as UKFpsTracingData: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'USAchTracingData'
-	if jsonDict["type"] == "USAchTracingData" {
-		// try to unmarshal JSON data into USAchTracingData
-		err = json.Unmarshal(data, &dst.USAchTracingData)
-		if err == nil {
-			return nil // data stored in dst.USAchTracingData, return on the first match
-		} else {
-			dst.USAchTracingData = nil
-			return fmt.Errorf("failed to unmarshal TransferDataTracing as USAchTracingData: %s", err.Error())
-		}
 	}
 
 	// check if the discriminator value is 'ukFps'
@@ -93,7 +73,31 @@ func (dst *TransferDataTracing) UnmarshalJSON(data []byte) error {
 		}
 	}
 
-	return nil
+	// check if the discriminator value is 'UKFpsTracingData'
+	if jsonDict["type"] == "UKFpsTracingData" {
+		// try to unmarshal JSON data into UKFpsTracingData
+		err = json.Unmarshal(data, &dst.UKFpsTracingData)
+		if err == nil {
+			return nil // data stored in dst.UKFpsTracingData, return on the first match
+		} else {
+			dst.UKFpsTracingData = nil
+			return fmt.Errorf("failed to unmarshal TransferDataTracing as UKFpsTracingData: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'USAchTracingData'
+	if jsonDict["type"] == "USAchTracingData" {
+		// try to unmarshal JSON data into USAchTracingData
+		err = json.Unmarshal(data, &dst.USAchTracingData)
+		if err == nil {
+			return nil // data stored in dst.USAchTracingData, return on the first match
+		} else {
+			dst.USAchTracingData = nil
+			return fmt.Errorf("failed to unmarshal TransferDataTracing as USAchTracingData: %s", err.Error())
+		}
+	}
+
+	return fmt.Errorf("data failed to match schemas in oneOf(TransferDataTracing)")
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON

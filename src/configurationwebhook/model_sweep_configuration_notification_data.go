@@ -22,8 +22,9 @@ type SweepConfigurationNotificationData struct {
 	// The unique identifier of the balance account for which the sweep was configured.
 	AccountId *string `json:"accountId,omitempty"`
 	// The unique identifier of the balance platform.
-	BalancePlatform *string               `json:"balancePlatform,omitempty"`
-	Sweep           *SweepConfigurationV2 `json:"sweep,omitempty"`
+	BalancePlatform *string `json:"balancePlatform,omitempty"`
+	// Contains information about the sweep resource that triggered the event.
+	Sweep *SweepConfigurationV2 `json:"sweep,omitempty"`
 }
 
 // NewSweepConfigurationNotificationData instantiates a new SweepConfigurationNotificationData object

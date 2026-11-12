@@ -23,7 +23,8 @@ type Authentication struct {
 	Email *string `json:"email,omitempty"`
 	// The password used for 3D Secure password-based authentication. The value must be between 1 to 30 characters and must only contain the following supported characters.  * Characters between **a-z**, **A-Z**, and **0-9**  * Special characters: **äöüßÄÖÜ+-*_/ç%()=?!~#'\",;:$&àùòâôûáúó**
 	Password *string `json:"password,omitempty"`
-	Phone    *Phone  `json:"phone,omitempty"`
+	// The phone number where the one-time password (OTP) is sent.  This object must have:  * A `type` set to **mobile**.  * A `number` with a valid country code.  * A `number` with more than 4 digits, excluding the country code.  >Make sure to verify that the card user owns the phone number.
+	Phone *Phone `json:"phone,omitempty"`
 }
 
 // NewAuthentication instantiates a new Authentication object

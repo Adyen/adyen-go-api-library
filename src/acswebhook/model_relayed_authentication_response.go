@@ -19,6 +19,7 @@ var _ common.MappedNullable = &RelayedAuthenticationResponse{}
 
 // RelayedAuthenticationResponse struct for RelayedAuthenticationResponse
 type RelayedAuthenticationResponse struct {
+	// The decision regarding the authentication.
 	AuthenticationDecision AuthenticationDecision `json:"authenticationDecision"`
 }
 

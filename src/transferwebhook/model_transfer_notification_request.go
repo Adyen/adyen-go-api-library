@@ -20,6 +20,7 @@ var _ common.MappedNullable = &TransferNotificationRequest{}
 
 // TransferNotificationRequest struct for TransferNotificationRequest
 type TransferNotificationRequest struct {
+	// Contains details about the event.
 	Data TransferData `json:"data"`
 	// The environment from which the webhook originated.  Possible values: **test**, **live**.
 	Environment string `json:"environment"`

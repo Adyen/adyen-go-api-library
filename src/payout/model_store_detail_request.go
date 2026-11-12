@@ -21,9 +21,12 @@ var _ common.MappedNullable = &StoreDetailRequest{}
 type StoreDetailRequest struct {
 	// This field contains additional data, which may be required for a particular request.
 	AdditionalData *map[string]string `json:"additionalData,omitempty"`
-	Bank           *BankAccount       `json:"bank,omitempty"`
-	BillingAddress *Address           `json:"billingAddress,omitempty"`
-	Card           *Card              `json:"card,omitempty"`
+	// A container for bank account data. > This field is mandatory if `card` is not provided.
+	Bank *BankAccount `json:"bank,omitempty"`
+	// The billing address.  > The `billingAddress` object is required for cross-border payouts to and from Canada. Include all of the fields within this object.
+	BillingAddress *Address `json:"billingAddress,omitempty"`
+	// A container for card data. > This field is mandatory if `bank` is not provided.
+	Card *Card `json:"card,omitempty"`
 	// The date of birth. Format: [ISO-8601](https://www.w3.org/TR/NOTE-datetime); example: YYYY-MM-DD For Paysafecard it must be the same as used when registering the Paysafecard account. > This field is mandatory for natural persons.
 	DateOfBirth string `json:"dateOfBirth"`
 	// The type of the entity the payout is processed for.
@@ -33,13 +36,15 @@ type StoreDetailRequest struct {
 	// The merchant account identifier, with which you want to process the transaction.
 	MerchantAccount string `json:"merchantAccount"`
 	// The shopper's nationality.  A valid value is an ISO 2-character country code (e.g. 'NL').
-	Nationality string    `json:"nationality"`
-	Recurring   Recurring `json:"recurring"`
+	Nationality string `json:"nationality"`
+	// A container for the type of recurring contract to be retrieved.  The recurring.contract must be set to `PAYOUT`
+	Recurring Recurring `json:"recurring"`
 	// The name of the brand to make a payout to.  For Paysafecard it must be set to `paysafecard`.
 	SelectedBrand *string `json:"selectedBrand,omitempty"`
 	// The shopper's email address.
 	ShopperEmail string `json:"shopperEmail"`
-	ShopperName  *Name  `json:"shopperName,omitempty"`
+	// The shopper's name.  When the `entityType` is `Company`, the `shopperName.lastName` must contain the company name.
+	ShopperName *Name `json:"shopperName,omitempty"`
 	// The shopper's reference for the payment transaction.
 	ShopperReference string `json:"shopperReference"`
 	// The shopper's social security number.

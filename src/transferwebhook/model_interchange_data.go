@@ -19,6 +19,7 @@ var _ common.MappedNullable = &InterchangeData{}
 
 // InterchangeData struct for InterchangeData
 type InterchangeData struct {
+	// The currency and value of the adjusted interchange fee.
 	InterchangeAmount *Amount `json:"interchangeAmount,omitempty"`
 	// A 3-character alphanumeric code assigned by Visa that identifies the specific interchange reimbursement program a transaction qualified for. The code is assigned based on the card type, entry mode, and security data provided.
 	InterchangeRateIndicator *string `json:"interchangeRateIndicator,omitempty"`

@@ -19,6 +19,7 @@ var _ common.MappedNullable = &AcceptDisputeResponse{}
 
 // AcceptDisputeResponse struct for AcceptDisputeResponse
 type AcceptDisputeResponse struct {
+	// The result of the dispute service.
 	DisputeServiceResult DisputeServiceResult `json:"disputeServiceResult"`
 }
 

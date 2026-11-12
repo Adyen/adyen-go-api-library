@@ -19,6 +19,7 @@ var _ common.MappedNullable = &StoredValueBalanceCheckResponse{}
 
 // StoredValueBalanceCheckResponse struct for StoredValueBalanceCheckResponse
 type StoredValueBalanceCheckResponse struct {
+	// The balance currently on the payment method.
 	CurrentBalance *Amount `json:"currentBalance,omitempty"`
 	// Adyen's 16-character string reference associated with the transaction/request. This value is globally unique; quote it when communicating with us about this request.
 	PspReference *string `json:"pspReference,omitempty"`

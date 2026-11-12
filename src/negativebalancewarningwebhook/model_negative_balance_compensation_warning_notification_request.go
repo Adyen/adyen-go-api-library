@@ -20,6 +20,7 @@ var _ common.MappedNullable = &NegativeBalanceCompensationWarningNotificationReq
 
 // NegativeBalanceCompensationWarningNotificationRequest struct for NegativeBalanceCompensationWarningNotificationRequest
 type NegativeBalanceCompensationWarningNotificationRequest struct {
+	// Contains event details.
 	Data NegativeBalanceCompensationWarningNotificationData `json:"data"`
 	// The environment from which the webhook originated.  Possible values: **test**, **live**.
 	Environment string `json:"environment"`

@@ -54,59 +54,17 @@ func PlatformPaymentAsTransferViewCategoryData(v *PlatformPayment) TransferViewC
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *TransferViewCategoryData) UnmarshalJSON(data []byte) error {
 	var err error
+	// clear any variant left by a previous unmarshal into the same destination
+	dst.BankCategoryData = nil
+	dst.InternalCategoryData = nil
+	dst.IssuedCard = nil
+	dst.PlatformPayment = nil
+
 	// use discriminator value to speed up the lookup
 	var jsonDict map[string]interface{}
 	err = common.NewStrictDecoder(data).Decode(&jsonDict)
 	if err != nil {
 		return fmt.Errorf("failed to unmarshal JSON into map for the discriminator lookup")
-	}
-
-	// check if the discriminator value is 'BankCategoryData'
-	if jsonDict["type"] == "BankCategoryData" {
-		// try to unmarshal JSON data into BankCategoryData
-		err = json.Unmarshal(data, &dst.BankCategoryData)
-		if err == nil {
-			return nil // data stored in dst.BankCategoryData, return on the first match
-		} else {
-			dst.BankCategoryData = nil
-			return fmt.Errorf("failed to unmarshal TransferViewCategoryData as BankCategoryData: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'InternalCategoryData'
-	if jsonDict["type"] == "InternalCategoryData" {
-		// try to unmarshal JSON data into InternalCategoryData
-		err = json.Unmarshal(data, &dst.InternalCategoryData)
-		if err == nil {
-			return nil // data stored in dst.InternalCategoryData, return on the first match
-		} else {
-			dst.InternalCategoryData = nil
-			return fmt.Errorf("failed to unmarshal TransferViewCategoryData as InternalCategoryData: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'IssuedCard'
-	if jsonDict["type"] == "IssuedCard" {
-		// try to unmarshal JSON data into IssuedCard
-		err = json.Unmarshal(data, &dst.IssuedCard)
-		if err == nil {
-			return nil // data stored in dst.IssuedCard, return on the first match
-		} else {
-			dst.IssuedCard = nil
-			return fmt.Errorf("failed to unmarshal TransferViewCategoryData as IssuedCard: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'PlatformPayment'
-	if jsonDict["type"] == "PlatformPayment" {
-		// try to unmarshal JSON data into PlatformPayment
-		err = json.Unmarshal(data, &dst.PlatformPayment)
-		if err == nil {
-			return nil // data stored in dst.PlatformPayment, return on the first match
-		} else {
-			dst.PlatformPayment = nil
-			return fmt.Errorf("failed to unmarshal TransferViewCategoryData as PlatformPayment: %s", err.Error())
-		}
 	}
 
 	// check if the discriminator value is 'bank'
@@ -157,7 +115,55 @@ func (dst *TransferViewCategoryData) UnmarshalJSON(data []byte) error {
 		}
 	}
 
-	return nil
+	// check if the discriminator value is 'BankCategoryData'
+	if jsonDict["type"] == "BankCategoryData" {
+		// try to unmarshal JSON data into BankCategoryData
+		err = json.Unmarshal(data, &dst.BankCategoryData)
+		if err == nil {
+			return nil // data stored in dst.BankCategoryData, return on the first match
+		} else {
+			dst.BankCategoryData = nil
+			return fmt.Errorf("failed to unmarshal TransferViewCategoryData as BankCategoryData: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'InternalCategoryData'
+	if jsonDict["type"] == "InternalCategoryData" {
+		// try to unmarshal JSON data into InternalCategoryData
+		err = json.Unmarshal(data, &dst.InternalCategoryData)
+		if err == nil {
+			return nil // data stored in dst.InternalCategoryData, return on the first match
+		} else {
+			dst.InternalCategoryData = nil
+			return fmt.Errorf("failed to unmarshal TransferViewCategoryData as InternalCategoryData: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'IssuedCard'
+	if jsonDict["type"] == "IssuedCard" {
+		// try to unmarshal JSON data into IssuedCard
+		err = json.Unmarshal(data, &dst.IssuedCard)
+		if err == nil {
+			return nil // data stored in dst.IssuedCard, return on the first match
+		} else {
+			dst.IssuedCard = nil
+			return fmt.Errorf("failed to unmarshal TransferViewCategoryData as IssuedCard: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'PlatformPayment'
+	if jsonDict["type"] == "PlatformPayment" {
+		// try to unmarshal JSON data into PlatformPayment
+		err = json.Unmarshal(data, &dst.PlatformPayment)
+		if err == nil {
+			return nil // data stored in dst.PlatformPayment, return on the first match
+		} else {
+			dst.PlatformPayment = nil
+			return fmt.Errorf("failed to unmarshal TransferViewCategoryData as PlatformPayment: %s", err.Error())
+		}
+	}
+
+	return fmt.Errorf("data failed to match schemas in oneOf(TransferViewCategoryData)")
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON

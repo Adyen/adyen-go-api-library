@@ -19,6 +19,7 @@ var _ common.MappedNullable = &DisputeNotificationRequest{}
 
 // DisputeNotificationRequest struct for DisputeNotificationRequest
 type DisputeNotificationRequest struct {
+	// Contains event details.
 	Data DisputeEventNotification `json:"data"`
 	// Type of webhook.
 	Type string `json:"type"`

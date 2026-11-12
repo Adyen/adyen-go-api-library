@@ -20,6 +20,7 @@ var _ common.MappedNullable = &AuthenticationNotificationRequest{}
 
 // AuthenticationNotificationRequest struct for AuthenticationNotificationRequest
 type AuthenticationNotificationRequest struct {
+	// Contains event details.
 	Data AuthenticationNotificationData `json:"data"`
 	// The environment from which the webhook originated.  Possible values: **test**, **live**.
 	Environment string `json:"environment"`

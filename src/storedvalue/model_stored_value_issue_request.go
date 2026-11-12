@@ -19,6 +19,7 @@ var _ common.MappedNullable = &StoredValueIssueRequest{}
 
 // StoredValueIssueRequest struct for StoredValueIssueRequest
 type StoredValueIssueRequest struct {
+	// The amount information for the transaction.
 	Amount *Amount `json:"amount,omitempty"`
 	// The merchant account identifier, with which you want to process the transaction.
 	MerchantAccount string `json:"merchantAccount"`

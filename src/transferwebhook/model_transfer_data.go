@@ -20,16 +20,20 @@ var _ common.MappedNullable = &TransferData{}
 
 // TransferData struct for TransferData
 type TransferData struct {
-	AccountHolder  *ResourceReference `json:"accountHolder,omitempty"`
-	Amount         Amount             `json:"amount"`
+	// The account holder associated with the balance account involved in the transfer.
+	AccountHolder *ResourceReference `json:"accountHolder,omitempty"`
+	// The amount of the transfer.
+	Amount Amount `json:"amount"`
+	// Contains information about the balance account involved in the transfer.
 	BalanceAccount *ResourceReference `json:"balanceAccount,omitempty"`
 	// The unique identifier of the balance platform.
 	BalancePlatform *string `json:"balancePlatform,omitempty"`
 	// The list of the latest balance statuses in the transfer.
 	Balances []BalanceMutation `json:"balances,omitempty"`
-	// The category of the transfer.  Possible values:   - **bank**: A transfer involving a [transfer instrument](https://docs.adyen.com/api-explorer/legalentity/latest/post/transferInstruments#responses-200-id) or a bank account.  - **card**: A transfer involving a third-party card.  - **internal**: A transfer between [balance accounts](https://docs.adyen.com/api-explorer/balanceplatform/latest/post/balanceAccounts#responses-200-id) within your platform.  - **issuedCard**: A transfer initiated by an Adyen-issued card.  - **platformPayment**: Funds movements related to payments that are acquired for your users.  - **topUp**: An incoming transfer initiated by your user to top up their balance account.
-	Category     string                            `json:"category"`
-	CategoryData *TransferDataCategoryData         `json:"categoryData,omitempty"`
+	// The category of the transfer.  Possible values:   - **bank**: A transfer involving a [transfer instrument](https://docs.adyen.com/api-explorer/legalentity/latest/post/transferInstruments#responses-200-id) or a bank account.  - **card**: A transfer involving a third-party card.  - **grants**: A transfer related to a capital grant, such as a disbursement or a repayment.  - **interest**: A transfer that settles accrued [interest](https://docs.adyen.com/business-accounts/earn-returns) on a business account.  - **internal**: A transfer between [balance accounts](https://docs.adyen.com/api-explorer/balanceplatform/latest/post/balanceAccounts#responses-200-id) within your platform.  - **issuedCard**: A transfer initiated by an Adyen-issued card.  - **platformPayment**: Funds movements related to payments that are acquired for your users.  - **topUp**: An incoming transfer initiated by your user to top up their balance account.
+	Category     string                    `json:"category"`
+	CategoryData *TransferDataCategoryData `json:"categoryData,omitempty"`
+	// The other party in the transfer.
 	Counterparty *TransferNotificationCounterParty `json:"counterparty,omitempty"`
 	// The date and time when the transfer was created, in ISO 8601 extended format. For example, **2020-12-18T10:15:30+01:00**.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
@@ -38,36 +42,44 @@ type TransferData struct {
 	/* Use createdAt or updatedAt */
 	CreationDate *time.Time `json:"creationDate,omitempty"`
 	// Your description for the transfer. It is used by most banks as the transfer description. We recommend sending a maximum of 140 characters, otherwise the description may be truncated.  Supported characters: **[a-z] [A-Z] [0-9] / - ?** **: ( ) . , ' + Space**  Supported characters for **regular** and **fast** transfers to a US counterparty: **[a-z] [A-Z] [0-9] & $ % # @** **~ = + - _ ' \" ! ?**
-	Description            *string                 `json:"description,omitempty"`
+	Description *string `json:"description,omitempty"`
+	// The details of the direct debit.
 	DirectDebitInformation *DirectDebitInformation `json:"directDebitInformation,omitempty"`
 	// The direction of the transfer.  Possible values: **incoming**, **outgoing**.
 	Direction *string `json:"direction,omitempty"`
 	// The unique identifier of the latest transfer event. Included only when the `category` is **issuedCard**.
 	EventId *string `json:"eventId,omitempty"`
 	// The list of events leading up to the current status of the transfer.
-	Events         []TransferEvent `json:"events,omitempty"`
-	ExecutionDate  *ExecutionDate  `json:"executionDate,omitempty"`
+	Events []TransferEvent `json:"events,omitempty"`
+	// Contains information about the date when the transfer will be processed. The execution date must be within 30 days of the current date.  Until the execution date: - The `status` of the transfer remains as **received**. - The `reason` of the transfer remains as **pending**.
+	ExecutionDate *ExecutionDate `json:"executionDate,omitempty"`
+	// The external reason of this transfer.
 	ExternalReason *ExternalReason `json:"externalReason,omitempty"`
 	// The ID of the resource.
-	Id                *string            `json:"id,omitempty"`
-	NetworkReason     *NetworkReason     `json:"networkReason,omitempty"`
+	Id *string `json:"id,omitempty"`
+	// Contains information that explains why the transfer was rejected or returned by the network.
+	NetworkReason *NetworkReason `json:"networkReason,omitempty"`
+	// Contains information about the payment instrument used in the transfer.
 	PaymentInstrument *PaymentInstrument `json:"paymentInstrument,omitempty"`
 	// Additional information about the status of the transfer.
 	Reason *string `json:"reason,omitempty"`
 	// Your reference for the transfer, used internally within your platform. If you don't provide this in the request, Adyen generates a unique reference.
 	Reference *string `json:"reference,omitempty"`
 	//  A reference that is sent to the recipient. This reference is also sent in all webhooks related to the transfer, so you can use it to track statuses for both the source and recipient of funds.   Supported characters: **a-z**, **A-Z**, **0-9**.The maximum length depends on the `category`.   - **internal**: 80 characters  - **bank**: 35 characters when transferring to an IBAN, 15 characters for others.
-	ReferenceForBeneficiary *string         `json:"referenceForBeneficiary,omitempty"`
-	Review                  *TransferReview `json:"review,omitempty"`
+	ReferenceForBeneficiary *string `json:"referenceForBeneficiary,omitempty"`
+	// Contains status updates related to additional reviews.
+	Review *TransferReview `json:"review,omitempty"`
 	// The sequence number of the transfer webhook. The numbers start from 1 and increase with each new webhook for a specific transfer.  The sequence number can help you restore the correct sequence of events even if they arrive out of order.
 	SequenceNumber *int32 `json:"sequenceNumber,omitempty"`
 	// The result of the transfer.  For example:  - **received**: an outgoing transfer request is created. - **refused**: the transfer request is rejected by Adyen for one of the following reasons:   - Transfer limit exceeded.   - Transaction rule requirements violated. - **authorised**: the transfer request is authorized and the funds are reserved. - **booked**: the funds are deducted from your user's balance account.  - **failed**: the transfer is rejected by the counterparty's bank. - **returned**: the transfer is returned by the counterparty's bank.
-	Status                 string                  `json:"status"`
-	Tracing                *TransferDataTracing    `json:"tracing,omitempty"`
-	Tracking               *TransferDataTracking   `json:"tracking,omitempty"`
+	Status   string                `json:"status"`
+	Tracing  *TransferDataTracing  `json:"tracing,omitempty"`
+	Tracking *TransferDataTracking `json:"tracking,omitempty"`
+	// Contains the results of the evaluation of the transaction rules.
 	TransactionRulesResult *TransactionRulesResult `json:"transactionRulesResult,omitempty"`
 	// The type of transfer or transaction. For example, **refund**, **payment**, **internalTransfer**, **bankTransfer**.
-	Type          *string                      `json:"type,omitempty"`
+	Type *string `json:"type,omitempty"`
+	// The ultimate sender of the funds of the transfer (ultimate debtor).
 	UltimateParty *UltimatePartyIdentification `json:"ultimateParty,omitempty"`
 	// The date and time when the event was triggered, in ISO 8601 extended format. For example, **2020-12-18T10:15:30+01:00**.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
@@ -1239,7 +1251,7 @@ func (v *NullableTransferData) UnmarshalJSON(src []byte) error {
 }
 
 func (o *TransferData) isValidCategory() bool {
-	var allowedEnumValues = []string{"bank", "card", "internal", "issuedCard", "platformPayment", "topUp"}
+	var allowedEnumValues = []string{"bank", "card", "grants", "interest", "internal", "issuedCard", "platformPayment", "topUp"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetCategory() == allowed {
 			return true
@@ -1275,7 +1287,7 @@ func (o *TransferData) isValidStatus() bool {
 	return false
 }
 func (o *TransferData) isValidType() bool {
-	var allowedEnumValues = []string{"payment", "capture", "captureReversal", "refund", "refundReversal", "chargeback", "chargebackCorrection", "chargebackReversal", "chargebackReversalCorrection", "secondChargeback", "secondChargebackCorrection", "atmWithdrawal", "atmWithdrawalReversal", "internalTransfer", "internalDirectDebit", "manualCorrection", "invoiceDeduction", "depositCorrection", "reserveAdjustment", "bankTransfer", "bankDirectDebit", "cardTransfer", "miscCost", "paymentCost", "fee", "leftover", "grant", "capitalFundsCollection", "cashOutInstruction", "cashoutFee", "cashoutRepayment", "cashoutFunding", "repayment", "installment", "installmentReversal", "balanceAdjustment", "balanceRollover", "balanceMigration", "fxSell", "fxBuy"}
+	var allowedEnumValues = []string{"payment", "capture", "captureReversal", "refund", "refundReversal", "chargeback", "chargebackCorrection", "chargebackReversal", "chargebackReversalCorrection", "secondChargeback", "secondChargebackCorrection", "atmWithdrawal", "atmWithdrawalReversal", "internalTransfer", "internalDirectDebit", "manualCorrection", "invoiceDeduction", "depositCorrection", "reserveAdjustment", "bankTransfer", "bankDirectDebit", "cardTransfer", "miscCost", "paymentCost", "fee", "leftover", "grant", "capitalFundsCollection", "cashOutInstruction", "cashoutFee", "cashoutRepayment", "cashoutFunding", "repayment", "installment", "installmentReversal", "balanceAdjustment", "balanceRollover", "balanceMigration", "interestPayout", "fxSell", "fxBuy"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true

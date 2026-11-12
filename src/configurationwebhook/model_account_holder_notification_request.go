@@ -20,6 +20,7 @@ var _ common.MappedNullable = &AccountHolderNotificationRequest{}
 
 // AccountHolderNotificationRequest struct for AccountHolderNotificationRequest
 type AccountHolderNotificationRequest struct {
+	// Contains event details.
 	Data AccountHolderNotificationData `json:"data"`
 	// The environment from which the webhook originated.  Possible values: **test**, **live**.
 	Environment string `json:"environment"`

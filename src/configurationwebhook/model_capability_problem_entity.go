@@ -22,7 +22,8 @@ type CapabilityProblemEntity struct {
 	// List of document IDs to which the verification errors related to the capabilities correspond to.
 	Documents []string `json:"documents,omitempty"`
 	// The ID of the entity.
-	Id    *string                           `json:"id,omitempty"`
+	Id *string `json:"id,omitempty"`
+	// Contains details about the owner of the entity that has an error.
 	Owner *CapabilityProblemEntityRecursive `json:"owner,omitempty"`
 	// Type of entity.   Possible values: **LegalEntity**, **BankAccount**, **Document**.
 	Type *string `json:"type,omitempty"`

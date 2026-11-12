@@ -19,9 +19,9 @@ var _ common.MappedNullable = &MidServiceNotificationData{}
 
 // MidServiceNotificationData struct for MidServiceNotificationData
 type MidServiceNotificationData struct {
-	// Indicates whether receiving payments is allowed. This value is set to **true** by Adyen after screening your merchant account.
+	// Indicates whether receiving payments is allowed. This value is set to **true** by Adyen after screening your merchant account.  Only returned in webhooks that include the screening results for your merchant account.
 	Allowed *bool `json:"allowed,omitempty"`
-	// Indicates whether the payment method is enabled (**true**) or disabled (**false**).
+	// Indicates whether the payment method is enabled (**true**) or disabled (**false**).  Only reliable in webhooks that include the screening results for your merchant account.
 	Enabled *bool `json:"enabled,omitempty"`
 	// The unique identifier of the resource.
 	Id string `json:"id"`
@@ -29,13 +29,13 @@ type MidServiceNotificationData struct {
 	MerchantId string `json:"merchantId"`
 	// Your reference for the payment method.
 	Reference *string `json:"reference,omitempty"`
-	// The status of the request to add a payment method. Possible values:  * **success**: the payment method was added. * **failure**: the request failed. * **capabilityPending**: the **receivePayments** capability is not allowed.
+	// The status of the request to add a payment method. Possible values:  * **success**: the payment method was added. * **failure**: the request failed. * **capabilityPending**: the **receivePayments** capability is not allowed.  A webhook with `status` **success** is the last webhook for that payment method.
 	Status string `json:"status"`
 	// The unique identifier of the [store](https://docs.adyen.com/api-explorer/#/ManagementService/latest/post/merchants/{id}/paymentMethodSettings__reqParam_storeId), if any.
 	StoreId *string `json:"storeId,omitempty"`
 	// Payment method [variant](https://docs.adyen.com/development-resources/paymentmethodvariant#management-api).  For payment method variant **cartebancaire**, method-specific details are returned in the [`cartesBancaires`](https://docs.adyen.com/api-explorer/Management/latest/post/merchants/(merchantId)/paymentMethodSettings#responses-200-cartesBancaires) object of the response.
 	Type string `json:"type"`
-	// Payment method status. Possible values: * **valid** * **pending** * **invalid** * **rejected**
+	// Payment method status. Possible values: * **valid** * **pending** * **invalid** * **rejected**  Only returned in webhooks that include the screening results for your merchant account.
 	VerificationStatus *string `json:"verificationStatus,omitempty"`
 }
 

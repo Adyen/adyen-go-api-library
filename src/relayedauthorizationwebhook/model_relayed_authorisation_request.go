@@ -19,16 +19,20 @@ var _ common.MappedNullable = &RelayedAuthorisationRequest{}
 
 // RelayedAuthorisationRequest struct for RelayedAuthorisationRequest
 type RelayedAuthorisationRequest struct {
+	// The reference of the account holder.
 	AccountHolder *ResourceReference `json:"accountHolder,omitempty"`
-	Amount        *Amount            `json:"amount,omitempty"`
+	// The amount of the transaction.
+	Amount *Amount `json:"amount,omitempty"`
 	// The amount adjustments in the transaction.
 	AmountAdjustments []AmountAdjustment `json:"amountAdjustments,omitempty"`
 	// The authorization code for the payment.
-	AuthCode              *string                       `json:"authCode,omitempty"`
+	AuthCode *string `json:"authCode,omitempty"`
+	// The decision of the authorization.
 	AuthorisationDecision *AuthorisationDecisionRequest `json:"authorisationDecision,omitempty"`
 	// The authorization type.  Possible values: * **finalAuthorisation** * **preAuthorisation** * **defaultAuthorisation**
-	AuthorisationType *string            `json:"authorisationType,omitempty"`
-	BalanceAccount    *ResourceReference `json:"balanceAccount,omitempty"`
+	AuthorisationType *string `json:"authorisationType,omitempty"`
+	// The reference of the balance account.
+	BalanceAccount *ResourceReference `json:"balanceAccount,omitempty"`
 	// The list of balance mutations per event.
 	BalanceMutations []BalanceMutation `json:"balanceMutations,omitempty"`
 	// The unique identifier of the balance platform.
@@ -38,9 +42,12 @@ type RelayedAuthorisationRequest struct {
 	// The environment from which the webhook originated. Possible values: **test**, **live**.
 	Environment *string `json:"environment,omitempty"`
 	// The unique identifier of the transfer.
-	Id                *string            `json:"id,omitempty"`
-	MerchantData      *MerchantData      `json:"merchantData,omitempty"`
-	OriginalAmount    *Amount            `json:"originalAmount,omitempty"`
+	Id *string `json:"id,omitempty"`
+	// The information about the merchant.
+	MerchantData *MerchantData `json:"merchantData,omitempty"`
+	// The amount in the original currency.
+	OriginalAmount *Amount `json:"originalAmount,omitempty"`
+	// Contains information about the payment instrument.
 	PaymentInstrument *PaymentInstrument `json:"paymentInstrument,omitempty"`
 	// The processing type used for this payment. For example: **ecommerce**, **pos**, **moto**.
 	ProcessingType *string `json:"processingType,omitempty"`
@@ -53,8 +60,10 @@ type RelayedAuthorisationRequest struct {
 	// The unique identifier created by the scheme. This ID can be alphanumeric or numeric depending on the scheme.
 	SchemeUniqueTransactionId *string `json:"schemeUniqueTransactionId,omitempty"`
 	// The list of transaction scores.
-	Scores                 []TransactionScoring    `json:"scores,omitempty"`
-	ThreeDSecure           *ThreeDSecure           `json:"threeDSecure,omitempty"`
+	Scores []TransactionScoring `json:"scores,omitempty"`
+	// The data of the result from the 3DS authentication.
+	ThreeDSecure *ThreeDSecure `json:"threeDSecure,omitempty"`
+	// Contains the results of the evaluation of the transaction rules.
 	TransactionRulesResult *TransactionRulesResult `json:"transactionRulesResult,omitempty"`
 	// Type of notification.
 	Type *string `json:"type,omitempty"`

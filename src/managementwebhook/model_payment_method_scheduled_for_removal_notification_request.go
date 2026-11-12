@@ -21,8 +21,9 @@ var _ common.MappedNullable = &PaymentMethodScheduledForRemovalNotificationReque
 // PaymentMethodScheduledForRemovalNotificationRequest struct for PaymentMethodScheduledForRemovalNotificationRequest
 type PaymentMethodScheduledForRemovalNotificationRequest struct {
 	// Timestamp for when the webhook was created.
-	CreatedAt time.Time                  `json:"createdAt"`
-	Data      MidServiceNotificationData `json:"data"`
+	CreatedAt time.Time `json:"createdAt"`
+	// Contains event details.
+	Data MidServiceNotificationData `json:"data"`
 	// The environment from which the webhook originated.  Possible values: **test**, **live**.
 	Environment string `json:"environment"`
 	// Type of notification.

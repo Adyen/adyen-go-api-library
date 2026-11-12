@@ -23,8 +23,9 @@ type Permit struct {
 	// Partner ID (when using the permit-per-partner token sharing model).
 	PartnerId *string `json:"partnerId,omitempty"`
 	// The profile to apply to this permit (when using the shared permits model).
-	ProfileReference *string            `json:"profileReference,omitempty"`
-	Restriction      *PermitRestriction `json:"restriction,omitempty"`
+	ProfileReference *string `json:"profileReference,omitempty"`
+	// Permit level restriction overrides.
+	Restriction *PermitRestriction `json:"restriction,omitempty"`
 	// The key to link permit requests to permit results.
 	ResultKey *string `json:"resultKey,omitempty"`
 	// The expiry date for this permit.

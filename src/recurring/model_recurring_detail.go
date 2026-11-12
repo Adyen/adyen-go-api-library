@@ -25,10 +25,13 @@ type RecurringDetail struct {
 	// The alias of the credit card number.  Applies only to recurring contracts storing credit card details
 	Alias *string `json:"alias,omitempty"`
 	// The alias type of the credit card number.  Applies only to recurring contracts storing credit card details.
-	AliasType      *string      `json:"aliasType,omitempty"`
-	Bank           *BankAccount `json:"bank,omitempty"`
-	BillingAddress *Address     `json:"billingAddress,omitempty"`
-	Card           *Card        `json:"card,omitempty"`
+	AliasType *string `json:"aliasType,omitempty"`
+	// A container for bank account data.
+	Bank *BankAccount `json:"bank,omitempty"`
+	// The billing address.
+	BillingAddress *Address `json:"billingAddress,omitempty"`
+	// A container for card data.
+	Card *Card `json:"card,omitempty"`
 	// Types of recurring contracts.
 	ContractTypes []string `json:"contractTypes,omitempty"`
 	// The date when the recurring details were created.
@@ -43,7 +46,8 @@ type RecurringDetail struct {
 	PaymentMethodVariant *string `json:"paymentMethodVariant,omitempty"`
 	// The reference that uniquely identifies the recurring detail.
 	RecurringDetailReference string `json:"recurringDetailReference"`
-	ShopperName              *Name  `json:"shopperName,omitempty"`
+	// The name of the shopper.
+	ShopperName *Name `json:"shopperName,omitempty"`
 	// A shopper's social security number (only in countries where it is legal to collect).
 	SocialSecurityNumber *string       `json:"socialSecurityNumber,omitempty"`
 	TokenDetails         *TokenDetails `json:"tokenDetails,omitempty"`

@@ -19,8 +19,10 @@ var _ common.MappedNullable = &Card{}
 
 // Card struct for Card
 type Card struct {
-	CardHolder         PartyIdentification `json:"cardHolder"`
-	CardIdentification CardIdentification  `json:"cardIdentification"`
+	// Contains information about the cardholder.
+	CardHolder PartyIdentification `json:"cardHolder"`
+	// Contains the identification details of the card.
+	CardIdentification CardIdentification `json:"cardIdentification"`
 }
 
 // NewCard instantiates a new Card object

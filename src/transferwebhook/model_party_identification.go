@@ -19,6 +19,7 @@ var _ common.MappedNullable = &PartyIdentification{}
 
 // PartyIdentification struct for PartyIdentification
 type PartyIdentification struct {
+	// The address of the bank account or card owner.
 	Address *Address `json:"address,omitempty"`
 	// The date of birth of the individual in [ISO-8601](https://www.w3.org/TR/NOTE-datetime) format. For example, **YYYY-MM-DD**.  Allowed only when `type` is **individual**.
 	DateOfBirth *string `json:"dateOfBirth,omitempty"`

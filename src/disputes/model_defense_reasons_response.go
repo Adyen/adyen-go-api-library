@@ -20,7 +20,8 @@ var _ common.MappedNullable = &DefenseReasonsResponse{}
 // DefenseReasonsResponse struct for DefenseReasonsResponse
 type DefenseReasonsResponse struct {
 	// The defense reasons that can be used to defend the dispute.
-	DefenseReasons       []DefenseReason      `json:"defenseReasons,omitempty"`
+	DefenseReasons []DefenseReason `json:"defenseReasons,omitempty"`
+	// The result of the dispute service.
 	DisputeServiceResult DisputeServiceResult `json:"disputeServiceResult"`
 }
 

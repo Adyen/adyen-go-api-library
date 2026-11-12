@@ -30,23 +30,14 @@ func IbanAccountIdentificationAsPaymentInstrumentAdditionalBankAccountIdentifica
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *PaymentInstrumentAdditionalBankAccountIdentificationsInner) UnmarshalJSON(data []byte) error {
 	var err error
+	// clear any variant left by a previous unmarshal into the same destination
+	dst.IbanAccountIdentification = nil
+
 	// use discriminator value to speed up the lookup
 	var jsonDict map[string]interface{}
 	err = common.NewStrictDecoder(data).Decode(&jsonDict)
 	if err != nil {
 		return fmt.Errorf("failed to unmarshal JSON into map for the discriminator lookup")
-	}
-
-	// check if the discriminator value is 'IbanAccountIdentification'
-	if jsonDict["type"] == "IbanAccountIdentification" {
-		// try to unmarshal JSON data into IbanAccountIdentification
-		err = json.Unmarshal(data, &dst.IbanAccountIdentification)
-		if err == nil {
-			return nil // data stored in dst.IbanAccountIdentification, return on the first match
-		} else {
-			dst.IbanAccountIdentification = nil
-			return fmt.Errorf("failed to unmarshal PaymentInstrumentAdditionalBankAccountIdentificationsInner as IbanAccountIdentification: %s", err.Error())
-		}
 	}
 
 	// check if the discriminator value is 'iban'
@@ -61,7 +52,19 @@ func (dst *PaymentInstrumentAdditionalBankAccountIdentificationsInner) Unmarshal
 		}
 	}
 
-	return nil
+	// check if the discriminator value is 'IbanAccountIdentification'
+	if jsonDict["type"] == "IbanAccountIdentification" {
+		// try to unmarshal JSON data into IbanAccountIdentification
+		err = json.Unmarshal(data, &dst.IbanAccountIdentification)
+		if err == nil {
+			return nil // data stored in dst.IbanAccountIdentification, return on the first match
+		} else {
+			dst.IbanAccountIdentification = nil
+			return fmt.Errorf("failed to unmarshal PaymentInstrumentAdditionalBankAccountIdentificationsInner as IbanAccountIdentification: %s", err.Error())
+		}
+	}
+
+	return fmt.Errorf("data failed to match schemas in oneOf(PaymentInstrumentAdditionalBankAccountIdentificationsInner)")
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON

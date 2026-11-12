@@ -19,15 +19,18 @@ var _ common.MappedNullable = &DeliveryContact{}
 
 // DeliveryContact struct for DeliveryContact
 type DeliveryContact struct {
+	// The address of the contact.
 	Address DeliveryAddress `json:"address"`
 	// The company name of the contact.
 	Company *string `json:"company,omitempty"`
 	// The email address of the contact.
 	Email *string `json:"email,omitempty"`
 	// The full phone number of the contact provided as a single string. It will be handled as a landline phone. **Examples:** \"0031 6 11 22 33 44\", \"+316/1122-3344\", \"(0031) 611223344\"
-	FullPhoneNumber *string      `json:"fullPhoneNumber,omitempty"`
-	Name            Name         `json:"name"`
-	PhoneNumber     *PhoneNumber `json:"phoneNumber,omitempty"`
+	FullPhoneNumber *string `json:"fullPhoneNumber,omitempty"`
+	// The name of the contact.
+	Name Name `json:"name"`
+	// The phone number of the contact.
+	PhoneNumber *PhoneNumber `json:"phoneNumber,omitempty"`
 	// The URL of the contact's website.
 	WebAddress *string `json:"webAddress,omitempty"`
 }

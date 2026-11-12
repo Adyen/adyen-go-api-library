@@ -19,6 +19,7 @@ var _ common.MappedNullable = &SupplyDefenseDocumentResponse{}
 
 // SupplyDefenseDocumentResponse struct for SupplyDefenseDocumentResponse
 type SupplyDefenseDocumentResponse struct {
+	// The result of the dispute service.
 	DisputeServiceResult DisputeServiceResult `json:"disputeServiceResult"`
 }
 

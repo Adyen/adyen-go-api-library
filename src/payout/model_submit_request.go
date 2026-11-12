@@ -21,7 +21,8 @@ var _ common.MappedNullable = &SubmitRequest{}
 type SubmitRequest struct {
 	// This field contains additional data, which may be required for a particular request.
 	AdditionalData *map[string]string `json:"additionalData,omitempty"`
-	Amount         Amount             `json:"amount"`
+	// A container object for the payable amount information of the transaction.
+	Amount Amount `json:"amount"`
 	// The date of birth. Format: ISO-8601; example: YYYY-MM-DD  For Paysafecard it must be the same as used when registering the Paysafecard account.  > This field is mandatory for natural persons.  > This field is required to update the existing `dateOfBirth` that is associated with this recurring contract.
 	DateOfBirth *string `json:"dateOfBirth,omitempty"`
 	// The type of the entity the payout is processed for.  Allowed values: * NaturalPerson * Company > This field is required to update the existing `entityType` that is associated with this recurring contract.
@@ -31,15 +32,17 @@ type SubmitRequest struct {
 	// The merchant account identifier you want to process the transaction request with.
 	MerchantAccount string `json:"merchantAccount"`
 	// The shopper's nationality.  A valid value is an ISO 2-character country code (e.g. 'NL').  > This field is required to update the existing nationality that is associated with this recurring contract.
-	Nationality *string   `json:"nationality,omitempty"`
-	Recurring   Recurring `json:"recurring"`
+	Nationality *string `json:"nationality,omitempty"`
+	// A container for the type of recurring contract to be retrieved.  The `recurring.contract` must be set to \"PAYOUT\".
+	Recurring Recurring `json:"recurring"`
 	// The merchant reference for this payout. This reference will be used in all communication to the merchant about the status of the payout. Although it is a good idea to make sure it is unique, this is not a requirement.
 	Reference string `json:"reference"`
 	// This is the `recurringDetailReference` you want to use for this payout.  You can use the value LATEST to select the most recently used recurring detail.
 	SelectedRecurringDetailReference string `json:"selectedRecurringDetailReference"`
 	// The shopper's email address.
 	ShopperEmail string `json:"shopperEmail"`
-	ShopperName  *Name  `json:"shopperName,omitempty"`
+	// The shopper's name.  In case the `entityType` is `Company`, the `shopperName.lastName` must contain the company name.  > This field is required to update the existing `shopperName` associated with a recurring contract.
+	ShopperName *Name `json:"shopperName,omitempty"`
 	// The shopper's reference for the payout transaction.
 	ShopperReference string `json:"shopperReference"`
 	// The description of this payout. This description is shown on the bank statement of the shopper (if this is supported by the chosen payment method).

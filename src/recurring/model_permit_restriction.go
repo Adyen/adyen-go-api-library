@@ -19,7 +19,9 @@ var _ common.MappedNullable = &PermitRestriction{}
 
 // PermitRestriction struct for PermitRestriction
 type PermitRestriction struct {
-	MaxAmount              *Amount `json:"maxAmount,omitempty"`
+	// The total sum amount of one or more payments made using this permit may not exceed this amount if set.
+	MaxAmount *Amount `json:"maxAmount,omitempty"`
+	// The amount of any single payment using this permit may not exceed this amount if set.
 	SingleTransactionLimit *Amount `json:"singleTransactionLimit,omitempty"`
 	// Only a single payment can be made using this permit if set to true, otherwise multiple payments are allowed.
 	SingleUse *bool `json:"singleUse,omitempty"`

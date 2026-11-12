@@ -20,9 +20,11 @@ var _ common.MappedNullable = &TransactionEventViolation{}
 // TransactionEventViolation struct for TransactionEventViolation
 type TransactionEventViolation struct {
 	// An explanation about why the transaction rule failed.
-	Reason                *string                   `json:"reason,omitempty"`
-	TransactionRule       *TransactionRuleReference `json:"transactionRule,omitempty"`
-	TransactionRuleSource *TransactionRuleSource    `json:"transactionRuleSource,omitempty"`
+	Reason *string `json:"reason,omitempty"`
+	// Contains information about the transaction rule.
+	TransactionRule *TransactionRuleReference `json:"transactionRule,omitempty"`
+	// Contains information about the resource to which the transaction rule applies.
+	TransactionRuleSource *TransactionRuleSource `json:"transactionRuleSource,omitempty"`
 }
 
 // NewTransactionEventViolation instantiates a new TransactionEventViolation object

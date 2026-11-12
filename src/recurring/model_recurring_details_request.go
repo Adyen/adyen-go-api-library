@@ -20,8 +20,9 @@ var _ common.MappedNullable = &RecurringDetailsRequest{}
 // RecurringDetailsRequest struct for RecurringDetailsRequest
 type RecurringDetailsRequest struct {
 	// The merchant account identifier you want to process the (transaction) request with.
-	MerchantAccount string     `json:"merchantAccount"`
-	Recurring       *Recurring `json:"recurring,omitempty"`
+	MerchantAccount string `json:"merchantAccount"`
+	// A container for the type of a recurring contract to be retrieved.  The contract value needs to match the contract value submitted in the payment transaction used to create a recurring contract. However, if `ONECLICK,RECURRING` is the original contract definition in the initial payment, then `contract` should take either `ONECLICK` or `RECURRING`, depending on whether or not you want the shopper to enter their card's security code when they finalize their purchase.
+	Recurring *Recurring `json:"recurring,omitempty"`
 	// The reference you use to uniquely identify the shopper (e.g. user ID or account ID).
 	ShopperReference string `json:"shopperReference"`
 }

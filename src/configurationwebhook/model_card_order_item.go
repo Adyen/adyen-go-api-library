@@ -21,17 +21,19 @@ var _ common.MappedNullable = &CardOrderItem{}
 // CardOrderItem struct for CardOrderItem
 type CardOrderItem struct {
 	// The unique identifier of the balance platform.
-	BalancePlatform *string                      `json:"balancePlatform,omitempty"`
-	Card            *CardOrderItemDeliveryStatus `json:"card,omitempty"`
+	BalancePlatform *string `json:"balancePlatform,omitempty"`
+	// The status of the card delivery.  Possible values: **created**, **rejected**, **processing**, **produced**, **shipped**, **delivered**, **notApplicable**, **unknown**.
+	Card *CardOrderItemDeliveryStatus `json:"card,omitempty"`
 	// The unique identifier of the card order item.
 	CardOrderItemId *string `json:"cardOrderItemId,omitempty"`
-	// The date and time when the event was triggered, in ISO 8601 extended format. For example, **2020-12-18T10:15:30+01:00**.
+	// The date and time when the event was triggered, in ISO 8601 extended format. For example, **2025-03-19T10:15:30+01:00**.
 	CreationDate *time.Time `json:"creationDate,omitempty"`
 	// The ID of the resource.
 	Id *string `json:"id,omitempty"`
 	// The unique identifier of the payment instrument related to the card order item.
-	PaymentInstrumentId *string                      `json:"paymentInstrumentId,omitempty"`
-	Pin                 *CardOrderItemDeliveryStatus `json:"pin,omitempty"`
+	PaymentInstrumentId *string `json:"paymentInstrumentId,omitempty"`
+	// Contains information about the status of the PIN delivery.
+	Pin *CardOrderItemDeliveryStatus `json:"pin,omitempty"`
 	// The shipping method used to deliver the card or the PIN.
 	ShippingMethod *string `json:"shippingMethod,omitempty"`
 }

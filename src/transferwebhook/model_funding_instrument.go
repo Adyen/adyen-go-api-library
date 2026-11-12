@@ -19,6 +19,7 @@ var _ common.MappedNullable = &FundingInstrument{}
 
 // FundingInstrument struct for FundingInstrument
 type FundingInstrument struct {
+	// Card details used for the transfer, such as the Primary Account Number (PAN) or stored payment method ID. Required if `sourceOfFunds` is **DEBIT**. Provide either:  - `storedPaymentMethodId` or   - `expiryMonth`, `expiryYear`, and `number`.
 	CardIdentification *CardIdentification `json:"cardIdentification,omitempty"`
 	// The unique reference assigned by the card network for the pay-in transaction.
 	NetworkPaymentReference *string `json:"networkPaymentReference,omitempty"`

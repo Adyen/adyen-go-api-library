@@ -46,47 +46,16 @@ func InternalReviewTrackingDataAsTransferEventTrackingData(v *InternalReviewTrac
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *TransferEventTrackingData) UnmarshalJSON(data []byte) error {
 	var err error
+	// clear any variant left by a previous unmarshal into the same destination
+	dst.ConfirmationTrackingData = nil
+	dst.EstimationTrackingData = nil
+	dst.InternalReviewTrackingData = nil
+
 	// use discriminator value to speed up the lookup
 	var jsonDict map[string]interface{}
 	err = common.NewStrictDecoder(data).Decode(&jsonDict)
 	if err != nil {
 		return fmt.Errorf("failed to unmarshal JSON into map for the discriminator lookup")
-	}
-
-	// check if the discriminator value is 'ConfirmationTrackingData'
-	if jsonDict["type"] == "ConfirmationTrackingData" {
-		// try to unmarshal JSON data into ConfirmationTrackingData
-		err = json.Unmarshal(data, &dst.ConfirmationTrackingData)
-		if err == nil {
-			return nil // data stored in dst.ConfirmationTrackingData, return on the first match
-		} else {
-			dst.ConfirmationTrackingData = nil
-			return fmt.Errorf("failed to unmarshal TransferEventTrackingData as ConfirmationTrackingData: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'EstimationTrackingData'
-	if jsonDict["type"] == "EstimationTrackingData" {
-		// try to unmarshal JSON data into EstimationTrackingData
-		err = json.Unmarshal(data, &dst.EstimationTrackingData)
-		if err == nil {
-			return nil // data stored in dst.EstimationTrackingData, return on the first match
-		} else {
-			dst.EstimationTrackingData = nil
-			return fmt.Errorf("failed to unmarshal TransferEventTrackingData as EstimationTrackingData: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'InternalReviewTrackingData'
-	if jsonDict["type"] == "InternalReviewTrackingData" {
-		// try to unmarshal JSON data into InternalReviewTrackingData
-		err = json.Unmarshal(data, &dst.InternalReviewTrackingData)
-		if err == nil {
-			return nil // data stored in dst.InternalReviewTrackingData, return on the first match
-		} else {
-			dst.InternalReviewTrackingData = nil
-			return fmt.Errorf("failed to unmarshal TransferEventTrackingData as InternalReviewTrackingData: %s", err.Error())
-		}
 	}
 
 	// check if the discriminator value is 'confirmation'
@@ -125,7 +94,43 @@ func (dst *TransferEventTrackingData) UnmarshalJSON(data []byte) error {
 		}
 	}
 
-	return nil
+	// check if the discriminator value is 'ConfirmationTrackingData'
+	if jsonDict["type"] == "ConfirmationTrackingData" {
+		// try to unmarshal JSON data into ConfirmationTrackingData
+		err = json.Unmarshal(data, &dst.ConfirmationTrackingData)
+		if err == nil {
+			return nil // data stored in dst.ConfirmationTrackingData, return on the first match
+		} else {
+			dst.ConfirmationTrackingData = nil
+			return fmt.Errorf("failed to unmarshal TransferEventTrackingData as ConfirmationTrackingData: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'EstimationTrackingData'
+	if jsonDict["type"] == "EstimationTrackingData" {
+		// try to unmarshal JSON data into EstimationTrackingData
+		err = json.Unmarshal(data, &dst.EstimationTrackingData)
+		if err == nil {
+			return nil // data stored in dst.EstimationTrackingData, return on the first match
+		} else {
+			dst.EstimationTrackingData = nil
+			return fmt.Errorf("failed to unmarshal TransferEventTrackingData as EstimationTrackingData: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'InternalReviewTrackingData'
+	if jsonDict["type"] == "InternalReviewTrackingData" {
+		// try to unmarshal JSON data into InternalReviewTrackingData
+		err = json.Unmarshal(data, &dst.InternalReviewTrackingData)
+		if err == nil {
+			return nil // data stored in dst.InternalReviewTrackingData, return on the first match
+		} else {
+			dst.InternalReviewTrackingData = nil
+			return fmt.Errorf("failed to unmarshal TransferEventTrackingData as InternalReviewTrackingData: %s", err.Error())
+		}
+	}
+
+	return fmt.Errorf("data failed to match schemas in oneOf(TransferEventTrackingData)")
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON

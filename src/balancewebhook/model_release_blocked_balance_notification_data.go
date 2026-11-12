@@ -20,14 +20,19 @@ var _ common.MappedNullable = &ReleaseBlockedBalanceNotificationData{}
 
 // ReleaseBlockedBalanceNotificationData struct for ReleaseBlockedBalanceNotificationData
 type ReleaseBlockedBalanceNotificationData struct {
-	AccountHolder  ResourceReference `json:"accountHolder"`
-	Amount         Amount            `json:"amount"`
+	// Contains information about the account holder associated with the `balanceAccount`.
+	AccountHolder ResourceReference `json:"accountHolder"`
+	// The amount released.
+	Amount Amount `json:"amount"`
+	// Contains information about the associated balance account.
 	BalanceAccount ResourceReference `json:"balanceAccount"`
 	// The unique identifier of the balance platform.
 	BalancePlatform *string `json:"balancePlatform,omitempty"`
 	// The reference of the batch that was released.
-	BatchReference       *string `json:"batchReference,omitempty"`
-	BlockedBalanceAfter  *Amount `json:"blockedBalanceAfter,omitempty"`
+	BatchReference *string `json:"batchReference,omitempty"`
+	// The new blocked balance after the funds were released.
+	BlockedBalanceAfter *Amount `json:"blockedBalanceAfter,omitempty"`
+	// The blocked balance before the funds were released.
 	BlockedBalanceBefore *Amount `json:"blockedBalanceBefore,omitempty"`
 	// The date and time when the event was triggered, in ISO 8601 extended format. For example, **2025-03-19T10:15:30+01:00**.
 	CreationDate *time.Time `json:"creationDate,omitempty"`

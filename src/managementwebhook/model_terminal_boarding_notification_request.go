@@ -21,8 +21,9 @@ var _ common.MappedNullable = &TerminalBoardingNotificationRequest{}
 // TerminalBoardingNotificationRequest struct for TerminalBoardingNotificationRequest
 type TerminalBoardingNotificationRequest struct {
 	// Timestamp for when the webhook was created.
-	CreatedAt time.Time            `json:"createdAt"`
-	Data      TerminalBoardingData `json:"data"`
+	CreatedAt time.Time `json:"createdAt"`
+	// Contains event details.
+	Data TerminalBoardingData `json:"data"`
 	// The environment from which the webhook originated.  Possible values: **test**, **live**.
 	Environment string `json:"environment"`
 	// Type of notification.

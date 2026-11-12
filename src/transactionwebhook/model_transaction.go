@@ -20,8 +20,11 @@ var _ common.MappedNullable = &Transaction{}
 
 // Transaction struct for Transaction
 type Transaction struct {
-	AccountHolder  ResourceReference `json:"accountHolder"`
-	Amount         Amount            `json:"amount"`
+	// Contains information about the account holder associated with the `balanceAccount`.
+	AccountHolder ResourceReference `json:"accountHolder"`
+	// Contains information about the amount of the transaction.
+	Amount Amount `json:"amount"`
+	// Contains information about the balance account involved in the transaction.
 	BalanceAccount ResourceReference `json:"balanceAccount"`
 	// The unique identifier of the balance platform.
 	BalancePlatform string `json:"balancePlatform"`
@@ -32,12 +35,14 @@ type Transaction struct {
 	// The `description` from the `/transfers` request.
 	Description *string `json:"description,omitempty"`
 	// The unique identifier of the transaction.
-	Id                string             `json:"id"`
+	Id string `json:"id"`
+	// Contains information about the payment instrument that was used for the transaction.
 	PaymentInstrument *PaymentInstrument `json:"paymentInstrument,omitempty"`
 	// The reference sent to or received from the counterparty.  * For outgoing funds, this is the [`referenceForBeneficiary`](https://docs.adyen.com/api-explorer/#/transfers/latest/post/transfers__resParam_referenceForBeneficiary) from the  [`/transfers`](https://docs.adyen.com/api-explorer/#/transfers/latest/post/transfers__reqParam_referenceForBeneficiary) request.   * For incoming funds, this is the reference from the sender.
 	ReferenceForBeneficiary *string `json:"referenceForBeneficiary,omitempty"`
 	// The status of the transaction.   Possible values:  * **pending**: The transaction is still pending.  * **booked**: The transaction has been booked to the balance account.
-	Status   string        `json:"status"`
+	Status string `json:"status"`
+	// Contains information about the transfer related to the transaction.
 	Transfer *TransferView `json:"transfer,omitempty"`
 	// The date the transfer amount becomes available in the balance account.
 	ValueDate time.Time `json:"valueDate"`

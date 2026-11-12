@@ -19,6 +19,7 @@ var _ common.MappedNullable = &AmountAdjustment{}
 
 // AmountAdjustment struct for AmountAdjustment
 type AmountAdjustment struct {
+	// The adjustment amount.
 	Amount *Amount `json:"amount,omitempty"`
 	// The type of markup that is applied to an authorised payment.  Possible values: **exchange**, **forexMarkup**, **authHoldReserve**, **atmMarkup**.
 	AmountAdjustmentType *string `json:"amountAdjustmentType,omitempty"`

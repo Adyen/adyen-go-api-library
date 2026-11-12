@@ -20,6 +20,7 @@ var _ common.MappedNullable = &TransferEvent{}
 
 // TransferEvent struct for TransferEvent
 type TransferEvent struct {
+	// The original journal amount. Only applicable for [issuing](https://docs.adyen.com/issuing/) integrations.
 	Amount *Amount `json:"amount,omitempty"`
 	// The amount adjustments in this transfer. Only applicable for [issuing](https://docs.adyen.com/issuing/) integrations.
 	AmountAdjustments []AmountAdjustment `json:"amountAdjustments,omitempty"`
@@ -30,14 +31,17 @@ type TransferEvent struct {
 	// The estimated time when the beneficiary should have access to the funds.
 	EstimatedArrivalTime *time.Time `json:"estimatedArrivalTime,omitempty"`
 	// A list of event data.
-	EventsData     []TransferEventEventsDataInner `json:"eventsData,omitempty"`
-	ExternalReason *ExternalReason                `json:"externalReason,omitempty"`
+	EventsData []TransferEventEventsDataInner `json:"eventsData,omitempty"`
+	// The external reason for the transfer status.
+	ExternalReason *ExternalReason `json:"externalReason,omitempty"`
 	// The unique identifier of the transfer event.
-	Id           *string       `json:"id,omitempty"`
+	Id *string `json:"id,omitempty"`
+	// The payment modification. Only applicable for [returned internal transfers](https://docs.adyen.com/platforms/internal-fund-transfers/internal-transfer-webhooks/#returned-internal-transfer).
 	Modification *Modification `json:"modification,omitempty"`
 	// The list of balance mutations per event.
-	Mutations      []BalanceMutation `json:"mutations,omitempty"`
-	OriginalAmount *Amount           `json:"originalAmount,omitempty"`
+	Mutations []BalanceMutation `json:"mutations,omitempty"`
+	// The amount in the original currency. Only applicable for [issuing](https://docs.adyen.com/issuing/) integrations.
+	OriginalAmount *Amount `json:"originalAmount,omitempty"`
 	// The reason for the transfer status.
 	Reason *string `json:"reason,omitempty"`
 	// The status of the transfer event.

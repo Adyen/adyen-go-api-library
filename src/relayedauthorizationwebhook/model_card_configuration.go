@@ -22,8 +22,9 @@ type CardConfiguration struct {
 	// The activation label attached to the card that contains the activation instructions.  This field overrides the activation label design ID defined in the card configuration profile.
 	Activation *string `json:"activation,omitempty"`
 	// Your app's URL, if you want to activate cards through your app. For example, **my-app://ref1236a7d**. A QR code is created based on this URL, and is included in the carrier. Before you use this field, reach out to your Adyen contact to set up the QR code process.   Maximum length: 255 characters.
-	ActivationUrl *string      `json:"activationUrl,omitempty"`
-	BulkAddress   *BulkAddress `json:"bulkAddress,omitempty"`
+	ActivationUrl *string `json:"activationUrl,omitempty"`
+	// Overrides the shipment bulk address defined in the card configuration profile.
+	BulkAddress *BulkAddress `json:"bulkAddress,omitempty"`
 	// The unique identifier of the card image. This image is printed on the full front of the card.
 	CardImageId *string `json:"cardImageId,omitempty"`
 	// The letter or packaging to which the card is attached.  This field overrides the carrier design ID defined in the card configuration profile.
