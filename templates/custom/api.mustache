@@ -120,7 +120,6 @@ func (a *{{{classname}}}) {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecas
         return {{#returnType}}*res, {{/returnType}}httpRes, err
     }
 
-    var serviceError common.RestServiceError
     {{/-first}}
     {{#dataType}}
         {{^is1xx}}
@@ -141,6 +140,7 @@ func (a *{{{classname}}}) {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecas
                         if httpRes.StatusCode == {{{code}}} {
                     {{/wildcard}}
                 {{/range}}
+                            var serviceError common.RestServiceError
                             body, _ := ioutil.ReadAll(httpRes.Body)
                             decodeError := json.Unmarshal([]byte(body), &serviceError)
                             if decodeError != nil {

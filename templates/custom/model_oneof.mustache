@@ -27,6 +27,11 @@ func (dst *{{classname}}) UnmarshalJSON(data []byte) error {
 	{{/isNullable}}
 	{{#useOneOfDiscriminatorLookup}}
 	{{#discriminator}}
+	// clear any variant left by a previous unmarshal into the same destination
+	{{#oneOf}}
+	dst.{{#lambda.type-to-name}}{{{.}}}{{/lambda.type-to-name}} = nil
+	{{/oneOf}}
+
 	{{#mappedModels}}
 	{{#-first}}
 	// use discriminator value to speed up the lookup
@@ -50,7 +55,7 @@ func (dst *{{classname}}) UnmarshalJSON(data []byte) error {
 	}
 
 	{{/mappedModels}}
-	return nil
+	return fmt.Errorf("data failed to match schemas in oneOf({{classname}})")
 	{{/discriminator}}
 	{{^discriminator}}
 	match := 0
@@ -59,7 +64,12 @@ func (dst *{{classname}}) UnmarshalJSON(data []byte) error {
 	err = json.Unmarshal(data, &dst.{{#lambda.type-to-name}}{{{.}}}{{/lambda.type-to-name}})
 	if err == nil {
 		json{{{.}}}, _ := json.Marshal(dst.{{#lambda.type-to-name}}{{{.}}}{{/lambda.type-to-name}})
-		if string(json{{{.}}}) == "{}" || !dst.{{#lambda.type-to-name}}{{{.}}}{{/lambda.type-to-name}}.isValidType() { // empty struct
+		// members without a "type" enum have no isValidType and match on structure alone
+		validType := true
+		if v, ok := interface{}(dst.{{#lambda.type-to-name}}{{{.}}}{{/lambda.type-to-name}}).(interface{ isValidType() bool }); ok {
+			validType = v.isValidType()
+		}
+		if string(json{{{.}}}) == "{}" || !validType { // empty struct
 			dst.{{#lambda.type-to-name}}{{{.}}}{{/lambda.type-to-name}} = nil
         } else {
 			match++

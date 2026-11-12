@@ -4,3 +4,9 @@ structPrefix: true
 isGoSubmodule: true
 additionalProperties:
   useOneOfDiscriminatorLookup: true
+  # Keep the v21 service type names (generator 7 defaults to the "API" suffix).
+  apiNameSuffix: Api
+  # Avoid colliding constants when two enums in one package share values.
+  enumClassPrefix: true
+  # Absent additionalProperties means "not allowed", as with generator 6.
+  disallowAdditionalPropertiesIfNotPresent: true
