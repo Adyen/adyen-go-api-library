@@ -19,6 +19,7 @@ var _ common.MappedNullable = &ThreeDSAvailabilityResponse{}
 
 // ThreeDSAvailabilityResponse struct for ThreeDSAvailabilityResponse
 type ThreeDSAvailabilityResponse struct {
+	// Bin Group Details
 	BinDetails *BinDetail `json:"binDetails,omitempty"`
 	// List of Directory Server (DS) public keys.
 	DsPublicKeys []DSPublicKeyDetail `json:"dsPublicKeys,omitempty"`

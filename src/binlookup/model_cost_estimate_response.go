@@ -19,8 +19,10 @@ var _ common.MappedNullable = &CostEstimateResponse{}
 
 // CostEstimateResponse struct for CostEstimateResponse
 type CostEstimateResponse struct {
-	CardBin            *CardBin `json:"cardBin,omitempty"`
-	CostEstimateAmount *Amount  `json:"costEstimateAmount,omitempty"`
+	// Card BIN details.
+	CardBin *CardBin `json:"cardBin,omitempty"`
+	// The estimated cost (scheme fee + interchange) in the settlement currency. If the settlement currency cannot be determined, the fee in EUR is returned.
+	CostEstimateAmount *Amount `json:"costEstimateAmount,omitempty"`
 	// Adyen's 16-character reference associated with the request.
 	CostEstimateReference *string `json:"costEstimateReference,omitempty"`
 	// The result of the cost estimation.
