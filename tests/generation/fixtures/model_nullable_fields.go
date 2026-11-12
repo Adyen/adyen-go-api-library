@@ -22,7 +22,7 @@ type NullableFields struct {
 	LegacyBool   common.NullableBool     `json:"legacyBool,omitempty"`
 	LegacyString common.NullableString   `json:"legacyString,omitempty"`
 	LegacyArray  []string                `json:"legacyArray,omitempty"`
-	LegacyRef    NullableAmount          `json:"legacyRef,omitempty"`
+	LegacyRef    *Amount                 `json:"legacyRef,omitempty"`
 	UnionBool    common.NullableBool     `json:"unionBool,omitempty"`
 	UnionString  common.NullableString   `json:"unionString,omitempty"`
 	UnionDate    common.NullableString   `json:"unionDate,omitempty"`
@@ -172,47 +172,36 @@ func (o *NullableFields) SetLegacyArray(v []string) {
 	o.LegacyArray = v
 }
 
-// GetLegacyRef returns the LegacyRef field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetLegacyRef returns the LegacyRef field value if set, zero value otherwise.
 func (o *NullableFields) GetLegacyRef() Amount {
-	if o == nil || common.IsNil(o.LegacyRef.Get()) {
+	if o == nil || common.IsNil(o.LegacyRef) {
 		var ret Amount
 		return ret
 	}
-	return *o.LegacyRef.Get()
+	return *o.LegacyRef
 }
 
 // GetLegacyRefOk returns a tuple with the LegacyRef field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NullableFields) GetLegacyRefOk() (*Amount, bool) {
-	if o == nil {
+	if o == nil || common.IsNil(o.LegacyRef) {
 		return nil, false
 	}
-	return o.LegacyRef.Get(), o.LegacyRef.IsSet()
+	return o.LegacyRef, true
 }
 
 // HasLegacyRef returns a boolean if a field has been set.
 func (o *NullableFields) HasLegacyRef() bool {
-	if o != nil && o.LegacyRef.IsSet() {
+	if o != nil && !common.IsNil(o.LegacyRef) {
 		return true
 	}
 
 	return false
 }
 
-// SetLegacyRef gets a reference to the given NullableAmount and assigns it to the LegacyRef field.
+// SetLegacyRef gets a reference to the given Amount and assigns it to the LegacyRef field.
 func (o *NullableFields) SetLegacyRef(v Amount) {
-	o.LegacyRef.Set(&v)
-}
-
-// SetLegacyRefNil sets the value for LegacyRef to be an explicit nil
-func (o *NullableFields) SetLegacyRefNil() {
-	o.LegacyRef.Set(nil)
-}
-
-// UnsetLegacyRef ensures that no value is present for LegacyRef, not even an explicit nil
-func (o *NullableFields) UnsetLegacyRef() {
-	o.LegacyRef.Unset()
+	o.LegacyRef = &v
 }
 
 // GetUnionBool returns the UnionBool field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -665,8 +654,8 @@ func (o NullableFields) ToMap() (map[string]interface{}, error) {
 	if o.LegacyArray != nil {
 		toSerialize["legacyArray"] = o.LegacyArray
 	}
-	if o.LegacyRef.IsSet() {
-		toSerialize["legacyRef"] = o.LegacyRef.Get()
+	if !common.IsNil(o.LegacyRef) {
+		toSerialize["legacyRef"] = o.LegacyRef
 	}
 	if o.UnionBool.IsSet() {
 		toSerialize["unionBool"] = o.UnionBool.Get()

@@ -24,14 +24,12 @@ func TestNullableFieldsAbsentNullAndValue(t *testing.T) {
 	absent := roundTrip(t, `{}`, &NullableFields{})
 	assert.JSONEq(t, `{}`, absent)
 
-	allNull := `{"legacyBool":null,"legacyString":null,"legacyRef":null,
+	allNull := `{"legacyBool":null,"legacyString":null,
 		"unionBool":null,"unionString":null,"unionDate":null,"unionInt32":null,
 		"unionInt64":null,"unionEnum":null,"unionRef":null}`
 	var nulls NullableFields
 	assert.JSONEq(t, allNull, roundTrip(t, allNull, &nulls))
 	assert.True(t, nulls.HasLegacyBool())
-	assert.True(t, nulls.LegacyRef.IsSet())
-	assert.Nil(t, nulls.LegacyRef.Get())
 	assert.True(t, nulls.UnionRef.IsSet())
 	assert.Nil(t, nulls.UnionRef.Get())
 
@@ -45,6 +43,16 @@ func TestNullableFieldsAbsentNullAndValue(t *testing.T) {
 	assert.Equal(t, int64(9007199254740993), full.GetUnionInt64())
 	assert.Equal(t, "GBP", full.GetUnionRef().Currency)
 	assert.Equal(t, "EUR", full.GetLegacyRef().Currency)
+}
+
+// nullable: true next to a $ref is ignored, as in v21 and the other SDKs: the field is a plain
+// optional reference, so an explicit null decodes as absent.
+func TestLegacyNullableRefIsPlainPointer(t *testing.T) {
+	var m NullableFields
+	assert.JSONEq(t, `{}`, roundTrip(t, `{"legacyRef":null}`, &m))
+	var ref *Amount = m.LegacyRef
+	assert.Nil(t, ref)
+	assert.False(t, m.HasLegacyRef())
 }
 
 func TestNullableFieldsSetters(t *testing.T) {
