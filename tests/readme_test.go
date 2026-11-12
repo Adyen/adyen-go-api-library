@@ -49,6 +49,18 @@ func LiveEnv() {
 	// Output: [] <nil> https://1797a841fbb37ca7-AdyenDemo-checkout-live.adyenpayments.com/checkout/v72/paymentMethods
 }
 
+func SoftPOSConfigurationLiveRegion() {
+	client := adyen.NewClient(&common.Config{
+		ApiKey:      "your api key",
+		Environment: common.LiveEnv,
+	})
+	client.GetConfig().SoftPOSConfigurationEndpoint = adyen.SoftPOSConfigurationEndpointLiveUS + "/" + adyen.SoftPOSConfigurationAPIVersion
+	service := client.SoftPOSConfiguration().SessionAuthenticationApi
+
+	fmt.Println(service.BasePath())
+	// Output: https://softposconfig-live-us.adyen.com/softposconfig/v3
+}
+
 func BasicAuth() {
 	client := adyen.NewClient(&common.Config{
 		Username:    "your ws user",

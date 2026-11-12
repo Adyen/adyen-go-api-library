@@ -48,6 +48,12 @@ func TestEndpointRouting(t *testing.T) {
 	routes := map[string]route{
 		"BalanceControl":        {"https://pal-test.adyen.com/pal/servlet/BalanceControl/v1", "https://abc123-pal-live.adyenpayments.com/pal/servlet/BalanceControl/v1", ""},
 		"BalancePlatform":       {"https://balanceplatform-api-test.adyen.com/bcl/v2", "https://balanceplatform-api-live.adyen.com/bcl/v2", ""},
+		"Capital":               {"https://balanceplatform-api-test.adyen.com/capital/v1", "https://balanceplatform-api-live.adyen.com/capital/v1", ""},
+		"DocumentCollector":     {"https://document-collector-test.adyen.com/v1", "https://document-collector-live.adyen.com/v1", ""},
+		"ForeignExchange":       {"https://balanceplatform-api-test.adyen.com/fx/api/v1", "https://balanceplatform-api-live.adyen.com/fx/api/v1", ""},
+		"PosMobile":             {"https://checkout-test.adyen.com/checkout/possdk/v68", "https://abc123-checkout-live.adyenpayments.com/checkout/possdk/v68", ""},
+		"SessionAuthentication": {"https://test.adyen.com/authe/api/v1", "https://authe-live.adyen.com/authe/api/v1", ""},
+		"SoftPOSConfiguration":  {"https://softposconfig-test.adyen.com/softposconfig/v3", "https://softposconfig-live.adyen.com/softposconfig/v3", ""},
 		"BinLookup":             {"https://pal-test.adyen.com/pal/servlet/BinLookup/v54", "https://abc123-pal-live.adyenpayments.com/pal/servlet/BinLookup/v54", ""},
 		"Checkout":              {"https://checkout-test.adyen.com/checkout/v72", "https://abc123-checkout-live.adyenpayments.com/checkout/v72", ""},
 		"DataProtection":        {"https://ca-test.adyen.com/ca/services/DataProtectionService/v1", "https://ca-live.adyen.com/ca/services/DataProtectionService/v1", ""},

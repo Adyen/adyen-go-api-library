@@ -25,9 +25,14 @@ The Library supports all APIs under the following services:
 | [Configuration API](https://docs.adyen.com/api-explorer/balanceplatform/2/overview)                        | The Configuration API enables you to create a platform where you can onboard your users as account holders and create balance accounts, cards, and business accounts.                                                                                                                                                                    | client.BalancePlatform()                    | **v2**            |
 | [Transfers API](https://docs.adyen.com/api-explorer/transfers/4/overview)                                  | The Transfers API provides endpoints that can be used to get information about all your transactions, move funds within your balance platform or send funds from your balance platform to a transfer instrument.                                                                                                                         | client.Transfers()                          | **v4**            |
 | [Stored Value API](https://docs.adyen.com/payment-methods/gift-cards/stored-value-api)                     | Manage both online and point-of-sale gift cards and other stored-value cards.                                                                                                                                                                                                                                                            | client.StoredValue()                        | **v46**           |
-| [POS Mobile API](https://docs.adyen.com/api-explorer/possdk/68/overview)                                    | The POS Mobile API is used in the mutual authentication flow between an Adyen Android or iOS [POS Mobile SDK](https://docs.adyen.com/point-of-sale/ipp-mobile/) and the Adyen payments platform. The POS Mobile SDK for Android or iOS devices enables businesses to accept in-person payments using a commercial off-the-shelf (COTS) device like a phone. For example, Tap to Pay transactions, or transactions on a mobile device in combination with a card reader |  client.PosMobile()                        | **v68**                               |
+| [~~POS Mobile API~~](https://docs.adyen.com/api-explorer/possdk/68/overview) | ~~The POS Mobile API is used in the mutual authentication flow between an Adyen Android or iOS [POS Mobile SDK](https://docs.adyen.com/point-of-sale/ipp-mobile/) and the Adyen payments platform.~~ ‼️ **Deprecated**: use instead the [SoftPOS configuration API](https://docs.adyen.com/api-explorer/softpos-configuration-api/3/overview). | ~~client.PosMobile()~~ | ~~**v68**~~ |
 | [Payments App API](https://docs.adyen.com/api-explorer/payments-app/1/overview)                                    | The Payments App API is used to Board and manage the Adyen Payments App on your Android mobile devices | client.PaymentsApp()     | **v1**              | 
 | [Payments API](https://docs.adyen.com/api-explorer/Payment/68/overview)                                    | Our classic integration for online payments.                                                                                                                                                                                                                                                                                             | client.Payments()                           | **v68**           |
+| [Capital API](https://docs.adyen.com/api-explorer/capital/1/overview) | Provides endpoints for embedding Adyen Capital into your marketplace or platform. Replaces the deprecated Capital endpoints of the Transfers API (`client.Transfers().CapitalApi`). | client.Capital() | **v1** |
+| [Session Authentication API](https://docs.adyen.com/api-explorer/sessionauthentication/1/overview) | Create and manage the JSON Web Tokens (JWT) required for integrating [Onboarding](https://docs.adyen.com/platforms/onboard-users/components) and [Platform Experience](https://docs.adyen.com/platforms/build-user-dashboards) components. | client.SessionAuthentication() | **v1** |
+| [Foreign Exchange API](https://docs.adyen.com/api-explorer/) | Manage and convert the currencies that are enabled for your integration. | client.ForeignExchange() | **v1** |
+| [Document Collector API](https://docs.adyen.com/api-explorer/) | Upload supporting documentation required for payment processing, such as cross-border invoices. | client.DocumentCollector() | **v1** |
+| [SoftPOS Configuration API](https://docs.adyen.com/api-explorer/softpos-configuration-api/3/overview) | Mutual authentication between an Adyen Android or iOS Mobile SDK and the Adyen payments platform. In LIVE, the client uses the Europe endpoint; for another region, set `SoftPOSConfigurationEndpoint` (see below). | client.SoftPOSConfiguration() | **v3** |
 
 
 For more information, refer to our [documentation](https://docs.adyen.com/) or the [API Explorer](https://docs.adyen.com/api-explorer/).
@@ -45,6 +50,11 @@ The library supports all webhooks under the following model directories:
 | [Report Webhooks](https://docs.adyen.com/api-explorer/report-webhooks/1/overview)                 | You can download reports programmatically by making an HTTP GET request, or manually from your Balance Platform Customer Area                                                                                                                                                       | [reportwebhook](src/reportwebhook)                             | **v1**            |
 | [Management Webhooks](https://docs.adyen.com/api-explorer/ManagementNotification/3/overview)      | Adyen uses webhooks to inform your system about events that happen with your Adyen company and merchant accounts, stores, payment terminals, and payment methods when using Management API.                                                                                         | [managementwebhook](src/managementwebhook)                     | **v3**            |
 | [Transaction Webhooks](https://docs.adyen.com/api-explorer/transaction-webhooks/4/overview)       | Adyen sends webhooks to inform your system about incoming and outgoing transfers in your platform. You can use these webhooks to build your implementation. For example, you can use this information to update balances in your own dashboards or to keep track of incoming funds. | [transactionwebhook](src/transactionwebhook)                   | **v4**            |
+| [Balance Webhooks](https://docs.adyen.com/api-explorer/balance-webhooks/1/overview) | Adyen sends webhooks to inform you of balance changes in your balance platform. | [balancewebhook](src/balancewebhook) | **v1** |
+| [Dispute Webhooks](https://docs.adyen.com/api-explorer/) | Adyen sends webhooks to inform you about disputes in your balance platform. | [disputewebhook](src/disputewebhook) | **v1** |
+| [Negative Balance Warning Webhooks](https://docs.adyen.com/api-explorer/Webhooks/1/overview) | Adyen sends this webhook to inform you about a balance account whose balance has been negative for a given number of days. | [negativebalancewarningwebhook](src/negativebalancewarningwebhook) | **v1** |
+| [Relayed Authorization Webhooks](https://docs.adyen.com/api-explorer/relayed-authorisation-webhooks/4/overview) | Adyen sends webhooks to inform your system about events related to transaction authorizations. | [relayedauthorizationwebhook](src/relayedauthorizationwebhook) | **v4** |
+| [Tokenization Webhooks](https://docs.adyen.com/api-explorer/Tokenization-webhooks/1/overview) | Adyen sends webhooks to inform you about the creation and changes to the recurring tokens. | [tokenizationwebhook](src/tokenizationwebhook) | **v1** |
 
 ## Prerequisites
 
@@ -117,6 +127,23 @@ req = req.PaymentMethodsRequest(checkout.PaymentMethodsRequest{
 res, httpRes, err := service.PaymentsApi.PaymentMethods(context.Background(), req)
 ```
 
+### SoftPOS Configuration API in other LIVE regions
+
+The SoftPOS Configuration API has one LIVE endpoint per region. In LIVE the client uses the Europe
+endpoint; for another region, set the endpoint after creating the client (and after any later
+`SetEnvironment` call):
+
+```go
+client := adyen.NewClient(&common.Config{
+    ApiKey:      "your api key",
+    Environment: common.LiveEnv,
+})
+client.GetConfig().SoftPOSConfigurationEndpoint = adyen.SoftPOSConfigurationEndpointLiveUS + "/" + adyen.SoftPOSConfigurationAPIVersion
+service := client.SoftPOSConfiguration().SessionAuthenticationApi
+```
+
+The region endpoints are `SoftPOSConfigurationEndpointLiveAU`, `SoftPOSConfigurationEndpointLiveAPSE`,
+`SoftPOSConfigurationEndpointLiveNEA` and `SoftPOSConfigurationEndpointLiveUS`.
 ### Using API with Basic Auth
 
 ```go

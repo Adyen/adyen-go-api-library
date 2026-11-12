@@ -18,15 +18,21 @@ import (
 	"github.com/adyen/adyen-go-api-library/v21/src/balancecontrol"
 	"github.com/adyen/adyen-go-api-library/v21/src/balanceplatform"
 	"github.com/adyen/adyen-go-api-library/v21/src/binlookup"
+	"github.com/adyen/adyen-go-api-library/v21/src/capital"
 	"github.com/adyen/adyen-go-api-library/v21/src/checkout"
 	"github.com/adyen/adyen-go-api-library/v21/src/common"
 	"github.com/adyen/adyen-go-api-library/v21/src/disputes"
+	"github.com/adyen/adyen-go-api-library/v21/src/documentcollector"
+	"github.com/adyen/adyen-go-api-library/v21/src/foreignexchange"
 	"github.com/adyen/adyen-go-api-library/v21/src/legalentity"
 	"github.com/adyen/adyen-go-api-library/v21/src/management"
 	"github.com/adyen/adyen-go-api-library/v21/src/payments"
 	"github.com/adyen/adyen-go-api-library/v21/src/payout"
+	"github.com/adyen/adyen-go-api-library/v21/src/posmobile"
 	"github.com/adyen/adyen-go-api-library/v21/src/posterminalmanagement"
 	"github.com/adyen/adyen-go-api-library/v21/src/recurring"
+	"github.com/adyen/adyen-go-api-library/v21/src/sessionauthentication"
+	"github.com/adyen/adyen-go-api-library/v21/src/softposconfiguration"
 	"github.com/adyen/adyen-go-api-library/v21/src/storedvalue"
 	"github.com/adyen/adyen-go-api-library/v21/src/transfers"
 )
@@ -54,6 +60,23 @@ const (
 	PosTerminalManagementEndpointLive = "https://postfmapi-live.adyen.com/postfmapi/terminal"
 	DataProtectionEndpointTest        = "https://ca-test.adyen.com/ca/services/DataProtectionService"
 	DataProtectionEndpointLive        = "https://ca-live.adyen.com/ca/services/DataProtectionService"
+	PosMobileEndpointTest             = "https://checkout-test.adyen.com/checkout/possdk"
+	PosMobileEndpointLiveSuffix       = "-checkout-live.adyenpayments.com/checkout/possdk"
+	CapitalEndpointTest               = "https://balanceplatform-api-test.adyen.com/capital"
+	CapitalEndpointLive               = "https://balanceplatform-api-live.adyen.com/capital"
+	ForeignExchangeEndpointTest       = "https://balanceplatform-api-test.adyen.com/fx/api"
+	ForeignExchangeEndpointLive       = "https://balanceplatform-api-live.adyen.com/fx/api"
+	SessionAuthenticationEndpointTest = "https://test.adyen.com/authe/api"
+	SessionAuthenticationEndpointLive = "https://authe-live.adyen.com/authe/api"
+	DocumentCollectorEndpointTest     = "https://document-collector-test.adyen.com"
+	DocumentCollectorEndpointLive     = "https://document-collector-live.adyen.com"
+	// SoftPOS Configuration has one LIVE endpoint per region; SetEnvironment uses Europe.
+	SoftPOSConfigurationEndpointTest     = "https://softposconfig-test.adyen.com/softposconfig"
+	SoftPOSConfigurationEndpointLive     = "https://softposconfig-live.adyen.com/softposconfig"
+	SoftPOSConfigurationEndpointLiveAU   = "https://softposconfig-live-au.adyen.com/softposconfig"
+	SoftPOSConfigurationEndpointLiveAPSE = "https://softposconfig-live-apse.adyen.com/softposconfig"
+	SoftPOSConfigurationEndpointLiveNEA  = "https://softposconfig-live-nea.adyen.com/softposconfig"
+	SoftPOSConfigurationEndpointLiveUS   = "https://softposconfig-live-us.adyen.com/softposconfig"
 )
 
 // also update LibVersion in src/common/configuration.go when a version is updated and a major lib version is released
@@ -73,6 +96,12 @@ const (
 	LegalEntityAPIVersion           = "v4"
 	PosTerminalManagementAPIVersion = "v1"
 	DataProtectionAPIVersion        = "v1"
+	PosMobileAPIVersion             = "v68"
+	CapitalAPIVersion               = "v1"
+	ForeignExchangeAPIVersion       = "v1"
+	SessionAuthenticationAPIVersion = "v1"
+	DocumentCollectorAPIVersion     = "v1"
+	SoftPOSConfigurationAPIVersion  = "v3"
 )
 
 // APIClient Manages access to Adyen API services.
@@ -95,6 +124,12 @@ type APIClient struct {
 	management            *management.APIClient
 	legalEntity           *legalentity.APIClient
 	dataProtection        *dataprotection.GeneralApi
+	posMobile             *posmobile.GeneralApi
+	capital               *capital.APIClient
+	foreignExchange       *foreignexchange.APIClient
+	sessionAuthentication *sessionauthentication.APIClient
+	documentCollector     *documentcollector.APIClient
+	softPOSConfiguration  *softposconfiguration.APIClient
 }
 
 // NewClient optionally a custom http.Client can be passed via the Config allow for advanced features such as caching.
@@ -281,6 +316,54 @@ func (c *APIClient) DataProtection() *dataprotection.GeneralApi {
 	return c.dataProtection
 }
 
+func (c *APIClient) PosMobile() *posmobile.GeneralApi {
+	if c.posMobile == nil {
+		c.posMobile = &posmobile.GeneralApi{
+			Client: c.client,
+			BasePath: func() string {
+				// SetEnvironment already appends PosMobileAPIVersion to this endpoint
+				return c.client.Cfg.PosMobileEndpoint
+			},
+		}
+	}
+	return c.posMobile
+}
+
+func (c *APIClient) Capital() *capital.APIClient {
+	if c.capital == nil {
+		c.capital = capital.NewAPIClient(c.client)
+	}
+	return c.capital
+}
+
+func (c *APIClient) ForeignExchange() *foreignexchange.APIClient {
+	if c.foreignExchange == nil {
+		c.foreignExchange = foreignexchange.NewAPIClient(c.client)
+	}
+	return c.foreignExchange
+}
+
+func (c *APIClient) SessionAuthentication() *sessionauthentication.APIClient {
+	if c.sessionAuthentication == nil {
+		c.sessionAuthentication = sessionauthentication.NewAPIClient(c.client)
+	}
+	return c.sessionAuthentication
+}
+
+func (c *APIClient) DocumentCollector() *documentcollector.APIClient {
+	if c.documentCollector == nil {
+		c.documentCollector = documentcollector.NewAPIClient(c.client)
+	}
+	return c.documentCollector
+}
+
+func (c *APIClient) SoftPOSConfiguration() *softposconfiguration.APIClient {
+	if c.softPOSConfiguration == nil {
+		c.softPOSConfiguration = softposconfiguration.NewAPIClient(c.client)
+	}
+	return c.softPOSConfiguration
+}
+
 /*
 SetEnvironment This defines the payment environment for live or test
 
@@ -294,9 +377,12 @@ func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix
 		if liveEndpointURLPrefix != "" {
 			c.client.Cfg.Endpoint = EndpointProtocol + liveEndpointURLPrefix + EndpointLiveSuffix
 			c.client.Cfg.CheckoutEndpoint = EndpointProtocol + liveEndpointURLPrefix + CheckoutEndpointLiveSuffix
+			c.client.Cfg.PosMobileEndpoint = EndpointProtocol + liveEndpointURLPrefix + PosMobileEndpointLiveSuffix + "/" + PosMobileAPIVersion
 		} else {
 			c.client.Cfg.Endpoint = EndpointLive
 			c.client.Cfg.CheckoutEndpoint = ""
+			// POS Mobile has no LIVE endpoint without the live URL prefix.
+			c.client.Cfg.PosMobileEndpoint = ""
 		}
 		c.client.Cfg.TerminalApiCloudEndpoint = TerminalAPIEndpointLive
 		c.client.Cfg.BalancePlatformEndpoint = BalancePlatformEndpointLive
@@ -306,6 +392,11 @@ func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix
 		c.client.Cfg.LegalEntityEndpoint = LegalEntityEntityLive
 		c.client.Cfg.PosTerminalManagementEndpoint = PosTerminalManagementEndpointLive
 		c.client.Cfg.DataProtectionEndpoint = DataProtectionEndpointLive
+		c.client.Cfg.CapitalEndpoint = CapitalEndpointLive
+		c.client.Cfg.ForeignExchangeEndpoint = ForeignExchangeEndpointLive
+		c.client.Cfg.SessionAuthenticationEndpoint = SessionAuthenticationEndpointLive
+		c.client.Cfg.DocumentCollectorEndpoint = DocumentCollectorEndpointLive
+		c.client.Cfg.SoftPOSConfigurationEndpoint = SoftPOSConfigurationEndpointLive
 	} else {
 		c.client.Cfg.Environment = env
 		c.client.Cfg.Endpoint = EndpointTest
@@ -319,6 +410,12 @@ func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix
 		c.client.Cfg.LegalEntityEndpoint = LegalEntityEntityTest
 		c.client.Cfg.PosTerminalManagementEndpoint = PosTerminalManagementEndpointTest
 		c.client.Cfg.DataProtectionEndpoint = DataProtectionEndpointTest
+		c.client.Cfg.PosMobileEndpoint = PosMobileEndpointTest + "/" + PosMobileAPIVersion
+		c.client.Cfg.CapitalEndpoint = CapitalEndpointTest
+		c.client.Cfg.ForeignExchangeEndpoint = ForeignExchangeEndpointTest
+		c.client.Cfg.SessionAuthenticationEndpoint = SessionAuthenticationEndpointTest
+		c.client.Cfg.DocumentCollectorEndpoint = DocumentCollectorEndpointTest
+		c.client.Cfg.SoftPOSConfigurationEndpoint = SoftPOSConfigurationEndpointTest
 	}
 
 	c.client.Cfg.CheckoutEndpoint += "/" + CheckoutAPIVersion
@@ -326,6 +423,11 @@ func (c *APIClient) SetEnvironment(env common.Environment, liveEndpointURLPrefix
 	c.client.Cfg.ManagementEndpoint += "/" + ManagementAPIVersion
 	c.client.Cfg.PaymentsAppEndpoint += "/" + PaymentsAppAPIVersion
 	c.client.Cfg.LegalEntityEndpoint += "/" + LegalEntityAPIVersion
+	c.client.Cfg.CapitalEndpoint += "/" + CapitalAPIVersion
+	c.client.Cfg.ForeignExchangeEndpoint += "/" + ForeignExchangeAPIVersion
+	c.client.Cfg.SessionAuthenticationEndpoint += "/" + SessionAuthenticationAPIVersion
+	c.client.Cfg.DocumentCollectorEndpoint += "/" + DocumentCollectorAPIVersion
+	c.client.Cfg.SoftPOSConfigurationEndpoint += "/" + SoftPOSConfigurationAPIVersion
 }
 
 // GetConfig Allow modification of underlying config for alternate implementations and testing

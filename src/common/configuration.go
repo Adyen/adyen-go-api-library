@@ -73,6 +73,15 @@ type Config struct {
 	TransfersEndpoint             string        `json:"transfersEndpoint,omitempty"`
 	PosTerminalManagementEndpoint string        `json:"posTerminalManagementEndpoint,omitempty"`
 	DataProtectionEndpoint        string        `json:"dataProtectionEndpoint,omitempty"`
+	PosMobileEndpoint             string        `json:"posMobileEndpoint,omitempty"`
+	CapitalEndpoint               string        `json:"capitalEndpoint,omitempty"`
+	ForeignExchangeEndpoint       string        `json:"foreignExchangeEndpoint,omitempty"`
+	SessionAuthenticationEndpoint string        `json:"sessionAuthenticationEndpoint,omitempty"`
+	DocumentCollectorEndpoint     string        `json:"documentCollectorEndpoint,omitempty"`
+	// SoftPOSConfigurationEndpoint defaults to the Europe region in LIVE; to use another region,
+	// set it after SetEnvironment, for example to
+	// adyen.SoftPOSConfigurationEndpointLiveUS + "/" + adyen.SoftPOSConfigurationAPIVersion.
+	SoftPOSConfigurationEndpoint string `json:"softPOSConfigurationEndpoint,omitempty"`
 
 	//Checkout Specific
 	CheckoutEndpoint string `json:"checkoutEndpoint,omitempty"`
