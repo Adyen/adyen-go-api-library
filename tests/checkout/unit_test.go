@@ -92,7 +92,9 @@ func TestCheckout(t *testing.T) {
 			)
 
 			require.NotNil(t, err)
-			assert.Contains(t, err.Error(), "error calling MarshalJSON for type checkout.CheckoutPaymentMethod")
+			// Go 1.27+ reports the pointer type (*checkout.CheckoutPaymentMethod)
+			assert.Contains(t, err.Error(), "error calling MarshalJSON for type")
+			assert.Contains(t, err.Error(), "checkout.CheckoutPaymentMethod")
 			require.Nil(t, httpRes)
 			require.NotNil(t, res)
 		})
