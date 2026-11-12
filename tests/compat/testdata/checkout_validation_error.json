@@ -1,0 +1,7 @@
+{
+  "status": 422,
+  "errorCode": "14_030",
+  "message": "Return URL is missing.",
+  "errorType": "validation",
+  "pspReference": "8816178914079738"
+}

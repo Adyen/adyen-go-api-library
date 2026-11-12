@@ -1,0 +1,7 @@
+{
+  "additionalData": {"cardSummary": "1111", "paymentMethod": "visa"},
+  "pspReference": "8515131751004933",
+  "resultCode": "SomeFutureResultCode",
+  "merchantReference": "compat-reference",
+  "fieldAddedInAFutureApiVersion": {"anything": [1, "two", null]}
+}

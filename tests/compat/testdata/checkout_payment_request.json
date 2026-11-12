@@ -1,0 +1,15 @@
+{
+  "amount": {"currency": "EUR", "value": 1000},
+  "merchantAccount": "TestMerchant",
+  "paymentMethod": {
+    "type": "scheme",
+    "encryptedCardNumber": "test_4111111111111111",
+    "encryptedExpiryMonth": "test_03",
+    "encryptedExpiryYear": "test_2030",
+    "encryptedSecurityCode": "test_737"
+  },
+  "reference": "compat-reference",
+  "returnUrl": "https://example.org/return",
+  "shopperInteraction": "Ecommerce",
+  "threeDSAuthenticationOnly": false
+}

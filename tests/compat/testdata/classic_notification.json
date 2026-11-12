@@ -1,0 +1,26 @@
+{
+  "live": "false",
+  "notificationItems": [
+    {
+      "NotificationRequestItem": {
+        "additionalData": {
+          "hmacSignature": "jvaDtTfp2bNC25w587i21cMKu826o37u+v5ByRzuMrc=",
+          "recurring.enabled": true,
+          "installments.value": 3,
+          "nested": {"street": "Main"}
+        },
+        "amount": {"currency": "EUR", "value": 1130},
+        "eventCode": "AUTHORISATION",
+        "eventDate": "2024-01-01T01:00:00+01:00",
+        "merchantAccountCode": "TestMerchant",
+        "merchantReference": "TestPayment-1407325143704",
+        "operations": ["CANCEL", "CAPTURE", "REFUND"],
+        "paymentMethod": "visa",
+        "pspReference": "7914073381342284",
+        "reason": "1234:7777:12/2012",
+        "success": "true",
+        "unknownFutureField": "ignored"
+      }
+    }
+  ]
+}

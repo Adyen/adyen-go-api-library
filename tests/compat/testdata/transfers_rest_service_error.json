@@ -1,0 +1,11 @@
+{
+  "type": "https://docs.adyen.com/errors/validation",
+  "title": "Invalid transfer information provided",
+  "status": 422,
+  "detail": "The transfer information is invalid.",
+  "invalidFields": [
+    {"name": "amount.value", "value": "0", "message": "Amount must be greater than zero"}
+  ],
+  "requestId": "req-123",
+  "errorCode": "30_112"
+}
