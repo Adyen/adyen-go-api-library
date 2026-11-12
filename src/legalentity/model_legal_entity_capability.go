@@ -22,12 +22,14 @@ type LegalEntityCapability struct {
 	// Indicates whether the capability is allowed. Adyen sets this to **true** if the verification is successful.
 	Allowed *bool `json:"allowed,omitempty"`
 	// The capability level that is allowed for the legal entity.  Possible values: **notApplicable**, **low**, **medium**, **high**.
-	AllowedLevel    *string             `json:"allowedLevel,omitempty"`
+	AllowedLevel *string `json:"allowedLevel,omitempty"`
+	// The settings that are allowed for the legal entity.
 	AllowedSettings *CapabilitySettings `json:"allowedSettings,omitempty"`
 	// Indicates whether the capability is requested. To check whether the legal entity is permitted to use the capability, refer to the `allowed` field.
 	Requested *bool `json:"requested,omitempty"`
 	// The requested level of the capability. Some capabilities, such as those used in [card issuing](https://docs.adyen.com/issuing/add-capabilities#capability-levels), have different levels. Levels increase the capability, but also require additional checks and increased monitoring.  Possible values: **notApplicable**, **low**, **medium**, **high**.
-	RequestedLevel    *string             `json:"requestedLevel,omitempty"`
+	RequestedLevel *string `json:"requestedLevel,omitempty"`
+	// The settings that are requested for the legal entity.
 	RequestedSettings *CapabilitySettings `json:"requestedSettings,omitempty"`
 	// The capability status of transfer instruments associated with the legal entity.
 	TransferInstruments []SupportingEntityCapability `json:"transferInstruments,omitempty"`

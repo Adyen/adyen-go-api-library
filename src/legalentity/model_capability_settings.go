@@ -26,7 +26,8 @@ type CapabilitySettings struct {
 	// The funding source of the card, for example **debit**.
 	FundingSource []string `json:"fundingSource,omitempty"`
 	// The period when the rule conditions apply.
-	Interval  *string `json:"interval,omitempty"`
+	Interval *string `json:"interval,omitempty"`
+	// The maximum amount a card holder can withdraw per day.
 	MaxAmount *Amount `json:"maxAmount,omitempty"`
 }
 

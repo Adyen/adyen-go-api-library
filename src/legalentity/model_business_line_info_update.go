@@ -21,11 +21,15 @@ var _ common.MappedNullable = &BusinessLineInfoUpdate{}
 type BusinessLineInfoUpdate struct {
 	// A code that represents the industry of your legal entity. For example, **4431A** for computer software stores.
 	IndustryCode *string `json:"industryCode,omitempty"`
+	// The description of the industry code.
+	IndustryCodeDescription *string `json:"industryCodeDescription,omitempty"`
 	// A list of channels where goods or services are sold.  Possible values: **pos**, **posMoto**, **eCommerce**, **ecomMoto**, **payByLink**.  Required only in combination with the `service` **paymentProcessing**.
-	SalesChannels []string       `json:"salesChannels,omitempty"`
+	SalesChannels []string `json:"salesChannels,omitempty"`
+	// Contains information about the source of your user's funds. Required only if the `service` is **banking** or **issuing**.
 	SourceOfFunds *SourceOfFunds `json:"sourceOfFunds,omitempty"`
 	// List of website URLs where your user's goods or services are sold. When this is required for a service but your user does not have an online presence, provide the reason in the `webDataExemption` object.
-	WebData          []WebData         `json:"webData,omitempty"`
+	WebData []WebData `json:"webData,omitempty"`
+	// The reason why the web data is not provided.
 	WebDataExemption *WebDataExemption `json:"webDataExemption,omitempty"`
 }
 
@@ -76,6 +80,38 @@ func (o *BusinessLineInfoUpdate) HasIndustryCode() bool {
 // SetIndustryCode gets a reference to the given string and assigns it to the IndustryCode field.
 func (o *BusinessLineInfoUpdate) SetIndustryCode(v string) {
 	o.IndustryCode = &v
+}
+
+// GetIndustryCodeDescription returns the IndustryCodeDescription field value if set, zero value otherwise.
+func (o *BusinessLineInfoUpdate) GetIndustryCodeDescription() string {
+	if o == nil || common.IsNil(o.IndustryCodeDescription) {
+		var ret string
+		return ret
+	}
+	return *o.IndustryCodeDescription
+}
+
+// GetIndustryCodeDescriptionOk returns a tuple with the IndustryCodeDescription field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BusinessLineInfoUpdate) GetIndustryCodeDescriptionOk() (*string, bool) {
+	if o == nil || common.IsNil(o.IndustryCodeDescription) {
+		return nil, false
+	}
+	return o.IndustryCodeDescription, true
+}
+
+// HasIndustryCodeDescription returns a boolean if a field has been set.
+func (o *BusinessLineInfoUpdate) HasIndustryCodeDescription() bool {
+	if o != nil && !common.IsNil(o.IndustryCodeDescription) {
+		return true
+	}
+
+	return false
+}
+
+// SetIndustryCodeDescription gets a reference to the given string and assigns it to the IndustryCodeDescription field.
+func (o *BusinessLineInfoUpdate) SetIndustryCodeDescription(v string) {
+	o.IndustryCodeDescription = &v
 }
 
 // GetSalesChannels returns the SalesChannels field value if set, zero value otherwise.
@@ -218,6 +254,9 @@ func (o BusinessLineInfoUpdate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !common.IsNil(o.IndustryCode) {
 		toSerialize["industryCode"] = o.IndustryCode
+	}
+	if !common.IsNil(o.IndustryCodeDescription) {
+		toSerialize["industryCodeDescription"] = o.IndustryCodeDescription
 	}
 	if !common.IsNil(o.SalesChannels) {
 		toSerialize["salesChannels"] = o.SalesChannels

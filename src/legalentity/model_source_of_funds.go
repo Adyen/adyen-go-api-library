@@ -20,8 +20,9 @@ var _ common.MappedNullable = &SourceOfFunds{}
 // SourceOfFunds struct for SourceOfFunds
 type SourceOfFunds struct {
 	// Indicates whether the funds are coming from transactions processed by Adyen. If **false**, the `type` is required.
-	AdyenProcessedFunds bool    `json:"adyenProcessedFunds"`
-	Amount              *Amount `json:"amount,omitempty"`
+	AdyenProcessedFunds bool `json:"adyenProcessedFunds"`
+	// Required if `type` is **business**, **assetSale**, **gamblingWinnings** or **inheritance**.  For `type` **business**, provide the annual turn over of the business. For `type` **assetSale**, **gamblingWinnings** or **inheritance**, provide the amount of the funds.
+	Amount *Amount `json:"amount,omitempty"`
 	// The number of months that the asset has been in possession of the user.  For example, if the source of funds is of type **cryptocurrencyIncome** then `assetMonthsHeld` is the number of months the user has owned the cryptocurrency.
 	AssetMonthsHeld *int32 `json:"assetMonthsHeld,omitempty"`
 	// Required if `type` is **cryptocurrencyIncome**. The cryptocurrency exchange where the funds were acquired.

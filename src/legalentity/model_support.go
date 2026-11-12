@@ -19,8 +19,9 @@ var _ common.MappedNullable = &Support{}
 
 // Support struct for Support
 type Support struct {
-	// The support email address of the legal entity.
-	Email *string      `json:"email,omitempty"`
+	// The support email address of the legal entity. Required if you have a platform setup.
+	Email *string `json:"email,omitempty"`
+	// The support phone number of the legal entity. Required if you have a platform setup.
 	Phone *PhoneNumber `json:"phone,omitempty"`
 }
 

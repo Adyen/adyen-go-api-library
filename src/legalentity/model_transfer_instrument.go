@@ -19,6 +19,7 @@ var _ common.MappedNullable = &TransferInstrument{}
 
 // TransferInstrument struct for TransferInstrument
 type TransferInstrument struct {
+	// Contains information about the legal entity's bank account.
 	BankAccount BankAccountInfo `json:"bankAccount"`
 	// List of capabilities for this transfer instrument.
 	Capabilities *map[string]SupportingEntityCapability `json:"capabilities,omitempty"`

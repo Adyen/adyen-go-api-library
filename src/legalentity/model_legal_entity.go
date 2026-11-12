@@ -24,25 +24,28 @@ type LegalEntity struct {
 	// List of documents uploaded for the legal entity.
 	DocumentDetails []DocumentReference `json:"documentDetails,omitempty"`
 	// List of documents uploaded for the legal entity.
-	// Deprecated since Legal Entity Management API v1
-	// Use the `documentDetails` array instead.
 	Documents []EntityReference `json:"documents,omitempty"`
 	// List of legal entities associated with the current legal entity. For example, ultimate beneficial owners associated with an organization through ownership or control, or as signatories.
 	EntityAssociations []LegalEntityAssociation `json:"entityAssociations,omitempty"`
 	// The unique identifier of the legal entity.
-	Id           string        `json:"id"`
-	Individual   *Individual   `json:"individual,omitempty"`
+	Id string `json:"id"`
+	// Information about the individual. Required if `type` is **individual**.
+	Individual *Individual `json:"individual,omitempty"`
+	// Information about the organization. Required if `type` is **organization**.
 	Organization *Organization `json:"organization,omitempty"`
 	// List of verification errors related to capabilities for the legal entity.
 	Problems []CapabilityProblem `json:"problems,omitempty"`
 	// Your reference for the legal entity, maximum 150 characters.
-	Reference          *string             `json:"reference,omitempty"`
+	Reference *string `json:"reference,omitempty"`
+	// Information about the sole proprietorship. Required if `type` is **soleProprietorship**.
 	SoleProprietorship *SoleProprietorship `json:"soleProprietorship,omitempty"`
 	// List of transfer instruments that the legal entity owns.
 	TransferInstruments []TransferInstrumentReference `json:"transferInstruments,omitempty"`
-	Trust               *Trust                        `json:"trust,omitempty"`
+	// Information about the trust. Required if `type` is **trust**.
+	Trust *Trust `json:"trust,omitempty"`
 	// The type of legal entity.  Possible values: **individual**, **organization**, **soleProprietorship**, or **trust**.
-	Type                      *string                    `json:"type,omitempty"`
+	Type *string `json:"type,omitempty"`
+	// Information about the unincorporated partnership. Required if `type` is **unincorporatedPartnership**.
 	UnincorporatedPartnership *UnincorporatedPartnership `json:"unincorporatedPartnership,omitempty"`
 	// List of verification deadlines and the capabilities that will be disallowed if verification errors are not resolved.
 	VerificationDeadlines []VerificationDeadline `json:"verificationDeadlines,omitempty"`
@@ -133,8 +136,6 @@ func (o *LegalEntity) SetDocumentDetails(v []DocumentReference) {
 }
 
 // GetDocuments returns the Documents field value if set, zero value otherwise.
-// Deprecated since Legal Entity Management API v1
-// Use the `documentDetails` array instead.
 func (o *LegalEntity) GetDocuments() []EntityReference {
 	if o == nil || common.IsNil(o.Documents) {
 		var ret []EntityReference
@@ -145,8 +146,6 @@ func (o *LegalEntity) GetDocuments() []EntityReference {
 
 // GetDocumentsOk returns a tuple with the Documents field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated since Legal Entity Management API v1
-// Use the `documentDetails` array instead.
 func (o *LegalEntity) GetDocumentsOk() ([]EntityReference, bool) {
 	if o == nil || common.IsNil(o.Documents) {
 		return nil, false
@@ -164,8 +163,6 @@ func (o *LegalEntity) HasDocuments() bool {
 }
 
 // SetDocuments gets a reference to the given []EntityReference and assigns it to the Documents field.
-// Deprecated since Legal Entity Management API v1
-// Use the `documentDetails` array instead.
 func (o *LegalEntity) SetDocuments(v []EntityReference) {
 	o.Documents = v
 }

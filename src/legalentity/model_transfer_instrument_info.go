@@ -19,6 +19,7 @@ var _ common.MappedNullable = &TransferInstrumentInfo{}
 
 // TransferInstrumentInfo struct for TransferInstrumentInfo
 type TransferInstrumentInfo struct {
+	// Contains information about the legal entity's bank account.
 	BankAccount BankAccountInfo `json:"bankAccount"`
 	// The unique identifier of the [legal entity](https://docs.adyen.com/api-explorer/legalentity/latest/post/legalEntities#responses-200-id) that owns the transfer instrument.
 	LegalEntityId string `json:"legalEntityId"`

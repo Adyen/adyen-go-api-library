@@ -19,19 +19,27 @@ var _ common.MappedNullable = &Individual{}
 
 // Individual struct for Individual
 type Individual struct {
+	// The individual's birth information.
 	BirthData *BirthData `json:"birthData,omitempty"`
 	// The email address of the legal entity.
-	Email              *string             `json:"email,omitempty"`
+	Email *string `json:"email,omitempty"`
+	// Information about the individual's identification document.
 	IdentificationData *IdentificationData `json:"identificationData,omitempty"`
-	Name               Name                `json:"name"`
+	// The individual's name. The combined length of `firstName` and `lastName` must be at least 3 characters.  Only **-**, **—**, **.**, **_/_** are allowed as special characters.  For more information, see [validations on fields](https://docs.adyen.com/platforms/onboard-users/onboarding-versions/onboarding-v4/#validations).
+	Name Name `json:"name"`
 	// The individual's nationality.
-	Nationality        *string      `json:"nationality,omitempty"`
-	Phone              *PhoneNumber `json:"phone,omitempty"`
-	ResidentialAddress Address      `json:"residentialAddress"`
-	Support            *Support     `json:"support,omitempty"`
+	Nationality *string `json:"nationality,omitempty"`
+	// The phone number of the legal entity.
+	Phone *PhoneNumber `json:"phone,omitempty"`
+	// The residential address of the individual. Individuals cannot use a PO box as their residential address.  Address fields cannot contain emojis, only one repeated character (unless two characters long), only symbols, only numbers, only spaces, or **fictitious values** such as **John Doe** or **N/A**. All parts of the address must be different. For example, Spain, Spain, Spain is not allowed.  For more information, see [validations on fields](https://docs.adyen.com/platforms/onboard-users/onboarding-versions/onboarding-v4/#validations).
+	ResidentialAddress Address `json:"residentialAddress"`
+	// Support information for the legal entity. Required if you have a platform setup.
+	Support *Support `json:"support,omitempty"`
 	// The tax information of the individual.
 	TaxInformation []TaxInformation `json:"taxInformation,omitempty"`
-	WebData        *WebData         `json:"webData,omitempty"`
+	// The website and app URL of the legal entity.
+	// Deprecated since Legal Entity Management API v1
+	WebData *WebData `json:"webData,omitempty"`
 }
 
 // NewIndividual instantiates a new Individual object
@@ -326,6 +334,7 @@ func (o *Individual) SetTaxInformation(v []TaxInformation) {
 }
 
 // GetWebData returns the WebData field value if set, zero value otherwise.
+// Deprecated since Legal Entity Management API v1
 func (o *Individual) GetWebData() WebData {
 	if o == nil || common.IsNil(o.WebData) {
 		var ret WebData
@@ -336,6 +345,7 @@ func (o *Individual) GetWebData() WebData {
 
 // GetWebDataOk returns a tuple with the WebData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated since Legal Entity Management API v1
 func (o *Individual) GetWebDataOk() (*WebData, bool) {
 	if o == nil || common.IsNil(o.WebData) {
 		return nil, false
@@ -353,6 +363,7 @@ func (o *Individual) HasWebData() bool {
 }
 
 // SetWebData gets a reference to the given WebData and assigns it to the WebData field.
+// Deprecated since Legal Entity Management API v1
 func (o *Individual) SetWebData(v WebData) {
 	o.WebData = &v
 }

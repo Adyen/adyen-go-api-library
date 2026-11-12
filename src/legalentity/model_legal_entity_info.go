@@ -23,14 +23,19 @@ type LegalEntityInfo struct {
 	Capabilities *map[string]LegalEntityCapability `json:"capabilities,omitempty"`
 	// List of legal entities associated with the current legal entity. For example, ultimate beneficial owners associated with an organization through ownership or control, or as signatories.
 	EntityAssociations []LegalEntityAssociation `json:"entityAssociations,omitempty"`
-	Individual         *Individual              `json:"individual,omitempty"`
-	Organization       *Organization            `json:"organization,omitempty"`
+	// Information about the individual. Required if `type` is **individual**.
+	Individual *Individual `json:"individual,omitempty"`
+	// Information about the organization. Required if `type` is **organization**.
+	Organization *Organization `json:"organization,omitempty"`
 	// Your reference for the legal entity, maximum 150 characters.
-	Reference          *string             `json:"reference,omitempty"`
+	Reference *string `json:"reference,omitempty"`
+	// Information about the sole proprietorship. Required if `type` is **soleProprietorship**.
 	SoleProprietorship *SoleProprietorship `json:"soleProprietorship,omitempty"`
-	Trust              *Trust              `json:"trust,omitempty"`
+	// Information about the trust. Required if `type` is **trust**.
+	Trust *Trust `json:"trust,omitempty"`
 	// The type of legal entity.  Possible values: **individual**, **organization**, **soleProprietorship**, or **trust**.
-	Type                      *string                    `json:"type,omitempty"`
+	Type *string `json:"type,omitempty"`
+	// Information about the unincorporated partnership. Required if `type` is **unincorporatedPartnership**.
 	UnincorporatedPartnership *UnincorporatedPartnership `json:"unincorporatedPartnership,omitempty"`
 	// A key-value pair that specifies the verification process for a legal entity. Set to **upfront** for upfront verification for [marketplaces](https://docs.adyen.com/marketplaces/verification-overview/verification-types/#upfront-verification).
 	VerificationPlan *string `json:"verificationPlan,omitempty"`

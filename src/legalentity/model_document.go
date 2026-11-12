@@ -20,6 +20,9 @@ var _ common.MappedNullable = &Document{}
 
 // Document struct for Document
 type Document struct {
+	// Object that contains the document.
+	// Deprecated since Legal Entity Management API v1
+	/* Use the `attachments` array instead. */
 	Attachment *Attachment `json:"attachment,omitempty"`
 	// Array that contains the document. The array supports multiple attachments for uploading different sides or pages of a document.
 	Attachments []Attachment `json:"attachments,omitempty"`
@@ -43,8 +46,9 @@ type Document struct {
 	// The modification date of the document.
 	ModificationDate *time.Time `json:"modificationDate,omitempty"`
 	// The number in the document.
-	Number *string      `json:"number,omitempty"`
-	Owner  *OwnerEntity `json:"owner,omitempty"`
+	Number *string `json:"number,omitempty"`
+	// Contains information about the resource that owns the document.
+	Owner *OwnerEntity `json:"owner,omitempty"`
 	// Type of document, used when providing an ID number or uploading a document. The possible values depend on the legal entity type.  * For **organization**, the `type` values can be **proofOfAddress**, **registrationDocument**, **vatDocument**, **proofOfOrganizationTaxInfo**, **proofOfOwnership**, **proofOfIndustry**, **proofOfSignatory**, **proofOfDirector**, or **proofOfFundingOrWealthSource**.  * For **individual**, the `type` values can be **identityCard**, **driversLicense**, **passport**, **liveSelfie**, **proofOfNationalIdNumber**, **proofOfResidency**, **proofOfIndustry**, **proofOfIndividualTaxId**, **proofOfFundingOrWealthSource** or **proofOfRelationship**.  * For **soleProprietorship**, the `type` values can be **constitutionalDocument**, **proofOfAddress**, or **proofOfIndustry**.  * For **trust**, the `type` value is **constitutionalDocument**.  * For **unincorporatedPartnership**, the `type` value is **constitutionalDocument**.  * Use **bankStatement** to upload documents for a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id).
 	Type string `json:"type"`
 }
@@ -69,6 +73,8 @@ func NewDocumentWithDefaults() *Document {
 }
 
 // GetAttachment returns the Attachment field value if set, zero value otherwise.
+// Deprecated since Legal Entity Management API v1
+/* Use the `attachments` array instead. */
 func (o *Document) GetAttachment() Attachment {
 	if o == nil || common.IsNil(o.Attachment) {
 		var ret Attachment
@@ -79,6 +85,8 @@ func (o *Document) GetAttachment() Attachment {
 
 // GetAttachmentOk returns a tuple with the Attachment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated since Legal Entity Management API v1
+/* Use the `attachments` array instead. */
 func (o *Document) GetAttachmentOk() (*Attachment, bool) {
 	if o == nil || common.IsNil(o.Attachment) {
 		return nil, false
@@ -96,6 +104,8 @@ func (o *Document) HasAttachment() bool {
 }
 
 // SetAttachment gets a reference to the given Attachment and assigns it to the Attachment field.
+// Deprecated since Legal Entity Management API v1
+/* Use the `attachments` array instead. */
 func (o *Document) SetAttachment(v Attachment) {
 	o.Attachment = &v
 }

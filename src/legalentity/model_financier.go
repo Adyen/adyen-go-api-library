@@ -19,6 +19,7 @@ var _ common.MappedNullable = &Financier{}
 
 // Financier struct for Financier
 type Financier struct {
+	// The amount of the funds the financier provided.
 	Amount Amount `json:"amount"`
 	// The financier's first name.
 	FirstName string `json:"firstName"`
