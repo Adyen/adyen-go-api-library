@@ -54,9 +54,7 @@ func (o *ShopperIdPaymentMethod) GetType() string {
 // and a boolean to check if the value has been set.
 func (o *ShopperIdPaymentMethod) GetTypeOk() (*string, bool) {
 	if o == nil {
-
 		return nil, false
-
 	}
 	return &o.Type, true
 }

@@ -52,9 +52,7 @@ func (o *USLocalAccountIdentification) GetAccountType() USLocalBankAccountType {
 // and a boolean to check if the value has been set.
 func (o *USLocalAccountIdentification) GetAccountTypeOk() (*USLocalBankAccountType, bool) {
 	if o == nil || common.IsNil(o.AccountType) {
-
 		return nil, false
-
 	}
 	return o.AccountType, true
 }

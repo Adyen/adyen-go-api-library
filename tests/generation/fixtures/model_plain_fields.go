@@ -65,9 +65,7 @@ func (o *PlainFields) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *PlainFields) GetNameOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Name) {
-
 		return nil, false
-
 	}
 	return o.Name, true
 }
@@ -99,9 +97,7 @@ func (o *PlainFields) GetEnabled() bool {
 // and a boolean to check if the value has been set.
 func (o *PlainFields) GetEnabledOk() (*bool, bool) {
 	if o == nil || common.IsNil(o.Enabled) {
-
 		return nil, false
-
 	}
 	return o.Enabled, true
 }
@@ -133,9 +129,7 @@ func (o *PlainFields) GetCount() int32 {
 // and a boolean to check if the value has been set.
 func (o *PlainFields) GetCountOk() (*int32, bool) {
 	if o == nil || common.IsNil(o.Count) {
-
 		return nil, false
-
 	}
 	return o.Count, true
 }
@@ -167,9 +161,7 @@ func (o *PlainFields) GetAmount() Amount {
 // and a boolean to check if the value has been set.
 func (o *PlainFields) GetAmountOk() (*Amount, bool) {
 	if o == nil || common.IsNil(o.Amount) {
-
 		return nil, false
-
 	}
 	return o.Amount, true
 }
@@ -202,7 +194,6 @@ func (o *PlainFields) GetMetadata() map[string]string {
 func (o *PlainFields) GetMetadataOk() (*map[string]string, bool) {
 	if o == nil || common.IsNil(o.Metadata) {
 		return nil, false
-
 	}
 	return o.Metadata, true
 }
@@ -235,7 +226,6 @@ func (o *PlainFields) GetAmounts() map[string]Amount {
 func (o *PlainFields) GetAmountsOk() (*map[string]Amount, bool) {
 	if o == nil || common.IsNil(o.Amounts) {
 		return nil, false
-
 	}
 	return o.Amounts, true
 }
@@ -269,7 +259,6 @@ func (o *PlainFields) GetRequiredMap() map[string]string {
 func (o *PlainFields) GetRequiredMapOk() (*map[string]string, bool) {
 	if o == nil {
 		return nil, false
-
 	}
 	return &o.RequiredMap, true
 }
@@ -292,9 +281,7 @@ func (o *PlainFields) GetTags() []string {
 // and a boolean to check if the value has been set.
 func (o *PlainFields) GetTagsOk() ([]string, bool) {
 	if o == nil || common.IsNil(o.Tags) {
-
 		return nil, false
-
 	}
 	return o.Tags, true
 }
@@ -326,9 +313,7 @@ func (o *PlainFields) GetFreeForm() map[string]interface{} {
 // and a boolean to check if the value has been set.
 func (o *PlainFields) GetFreeFormOk() (map[string]interface{}, bool) {
 	if o == nil || common.IsNil(o.FreeForm) {
-
 		return map[string]interface{}{}, false
-
 	}
 	return o.FreeForm, true
 }

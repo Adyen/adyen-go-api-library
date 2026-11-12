@@ -55,9 +55,7 @@ func (o *WalletDetails) GetType() string {
 // and a boolean to check if the value has been set.
 func (o *WalletDetails) GetTypeOk() (*string, bool) {
 	if o == nil {
-
 		return nil, false
-
 	}
 	return &o.Type, true
 }
@@ -80,9 +78,7 @@ func (o *WalletDetails) GetToken() string {
 // and a boolean to check if the value has been set.
 func (o *WalletDetails) GetTokenOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Token) {
-
 		return nil, false
-
 	}
 	return o.Token, true
 }

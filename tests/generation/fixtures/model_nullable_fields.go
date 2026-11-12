@@ -67,9 +67,7 @@ func (o *NullableFields) GetLegacyBool() bool {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NullableFields) GetLegacyBoolOk() (*bool, bool) {
 	if o == nil {
-
 		return nil, false
-
 	}
 	return o.LegacyBool.Get(), o.LegacyBool.IsSet()
 }
@@ -112,9 +110,7 @@ func (o *NullableFields) GetLegacyString() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NullableFields) GetLegacyStringOk() (*string, bool) {
 	if o == nil {
-
 		return nil, false
-
 	}
 	return o.LegacyString.Get(), o.LegacyString.IsSet()
 }
@@ -157,9 +153,7 @@ func (o *NullableFields) GetLegacyArray() []string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NullableFields) GetLegacyArrayOk() ([]string, bool) {
 	if o == nil || common.IsNil(o.LegacyArray) {
-
 		return nil, false
-
 	}
 	return o.LegacyArray, true
 }
@@ -192,9 +186,7 @@ func (o *NullableFields) GetLegacyRef() Amount {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NullableFields) GetLegacyRefOk() (*Amount, bool) {
 	if o == nil {
-
 		return nil, false
-
 	}
 	return o.LegacyRef.Get(), o.LegacyRef.IsSet()
 }
@@ -237,9 +229,7 @@ func (o *NullableFields) GetUnionBool() bool {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NullableFields) GetUnionBoolOk() (*bool, bool) {
 	if o == nil {
-
 		return nil, false
-
 	}
 	return o.UnionBool.Get(), o.UnionBool.IsSet()
 }
@@ -282,9 +272,7 @@ func (o *NullableFields) GetUnionString() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NullableFields) GetUnionStringOk() (*string, bool) {
 	if o == nil {
-
 		return nil, false
-
 	}
 	return o.UnionString.Get(), o.UnionString.IsSet()
 }
@@ -327,9 +315,7 @@ func (o *NullableFields) GetUnionDate() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NullableFields) GetUnionDateOk() (*string, bool) {
 	if o == nil {
-
 		return nil, false
-
 	}
 	return o.UnionDate.Get(), o.UnionDate.IsSet()
 }
@@ -372,9 +358,7 @@ func (o *NullableFields) GetUnionInt32() int32 {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NullableFields) GetUnionInt32Ok() (*int32, bool) {
 	if o == nil {
-
 		return nil, false
-
 	}
 	return o.UnionInt32.Get(), o.UnionInt32.IsSet()
 }
@@ -417,9 +401,7 @@ func (o *NullableFields) GetUnionInt64() int64 {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NullableFields) GetUnionInt64Ok() (*int64, bool) {
 	if o == nil {
-
 		return nil, false
-
 	}
 	return o.UnionInt64.Get(), o.UnionInt64.IsSet()
 }
@@ -462,9 +444,7 @@ func (o *NullableFields) GetUnionArray() []Amount {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NullableFields) GetUnionArrayOk() ([]Amount, bool) {
 	if o == nil || common.IsNil(o.UnionArray) {
-
 		return nil, false
-
 	}
 	return o.UnionArray, true
 }
@@ -497,9 +477,7 @@ func (o *NullableFields) GetUnionEnum() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NullableFields) GetUnionEnumOk() (*string, bool) {
 	if o == nil {
-
 		return nil, false
-
 	}
 	return o.UnionEnum.Get(), o.UnionEnum.IsSet()
 }
@@ -542,9 +520,7 @@ func (o *NullableFields) GetUnionRef() Amount {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NullableFields) GetUnionRefOk() (*Amount, bool) {
 	if o == nil {
-
 		return nil, false
-
 	}
 	return o.UnionRef.Get(), o.UnionRef.IsSet()
 }
@@ -587,9 +563,7 @@ func (o *NullableFields) GetLegacyObject() map[string]interface{} {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NullableFields) GetLegacyObjectOk() (map[string]interface{}, bool) {
 	if o == nil || common.IsNil(o.LegacyObject) {
-
 		return map[string]interface{}{}, false
-
 	}
 	return o.LegacyObject, true
 }
@@ -622,7 +596,6 @@ func (o *NullableFields) GetUnionMap() map[string]string {
 func (o *NullableFields) GetUnionMapOk() (*map[string]string, bool) {
 	if o == nil || common.IsNil(o.UnionMap) {
 		return nil, false
-
 	}
 	return o.UnionMap, true
 }
@@ -655,7 +628,6 @@ func (o *NullableFields) GetUnionAny() map[string]interface{} {
 func (o *NullableFields) GetUnionAnyOk() (*map[string]interface{}, bool) {
 	if o == nil || common.IsNil(o.UnionAny) {
 		return nil, false
-
 	}
 	return o.UnionAny, true
 }

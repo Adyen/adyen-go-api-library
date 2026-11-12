@@ -62,9 +62,7 @@ func (o *PaymentRequest) GetAmount() Amount {
 // and a boolean to check if the value has been set.
 func (o *PaymentRequest) GetAmountOk() (*Amount, bool) {
 	if o == nil {
-
 		return nil, false
-
 	}
 	return &o.Amount, true
 }
@@ -88,9 +86,7 @@ func (o *PaymentRequest) GetPaymentMethod() PaymentMethod {
 // and a boolean to check if the value has been set.
 func (o *PaymentRequest) GetPaymentMethodOk() (*PaymentMethod, bool) {
 	if o == nil {
-
 		return nil, false
-
 	}
 	return &o.PaymentMethod, true
 }
@@ -113,9 +109,7 @@ func (o *PaymentRequest) GetThreeDSAuthenticationOnly() bool {
 // and a boolean to check if the value has been set.
 func (o *PaymentRequest) GetThreeDSAuthenticationOnlyOk() (*bool, bool) {
 	if o == nil || common.IsNil(o.ThreeDSAuthenticationOnly) {
-
 		return nil, false
-
 	}
 	return o.ThreeDSAuthenticationOnly, true
 }
@@ -147,9 +141,7 @@ func (o *PaymentRequest) GetAny() AnyOfValue {
 // and a boolean to check if the value has been set.
 func (o *PaymentRequest) GetAnyOk() (*AnyOfValue, bool) {
 	if o == nil || common.IsNil(o.Any) {
-
 		return nil, false
-
 	}
 	return o.Any, true
 }

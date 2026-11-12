@@ -55,9 +55,7 @@ func (o *UPIPaymentMethod) GetType() string {
 // and a boolean to check if the value has been set.
 func (o *UPIPaymentMethod) GetTypeOk() (*string, bool) {
 	if o == nil {
-
 		return nil, false
-
 	}
 	return &o.Type, true
 }
@@ -80,9 +78,7 @@ func (o *UPIPaymentMethod) GetVirtualPaymentAddress() string {
 // and a boolean to check if the value has been set.
 func (o *UPIPaymentMethod) GetVirtualPaymentAddressOk() (*string, bool) {
 	if o == nil || common.IsNil(o.VirtualPaymentAddress) {
-
 		return nil, false
-
 	}
 	return o.VirtualPaymentAddress, true
 }

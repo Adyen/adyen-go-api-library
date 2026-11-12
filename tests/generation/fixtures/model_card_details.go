@@ -57,9 +57,7 @@ func (o *CardDetails) GetType() string {
 // and a boolean to check if the value has been set.
 func (o *CardDetails) GetTypeOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Type) {
-
 		return nil, false
-
 	}
 	return o.Type, true
 }
@@ -91,9 +89,7 @@ func (o *CardDetails) GetNumber() string {
 // and a boolean to check if the value has been set.
 func (o *CardDetails) GetNumberOk() (*string, bool) {
 	if o == nil || common.IsNil(o.Number) {
-
 		return nil, false
-
 	}
 	return o.Number, true
 }

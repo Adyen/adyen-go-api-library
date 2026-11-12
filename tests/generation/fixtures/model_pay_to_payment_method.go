@@ -55,9 +55,7 @@ func (o *PayToPaymentMethod) GetType() string {
 // and a boolean to check if the value has been set.
 func (o *PayToPaymentMethod) GetTypeOk() (*string, bool) {
 	if o == nil {
-
 		return nil, false
-
 	}
 	return &o.Type, true
 }
@@ -80,9 +78,7 @@ func (o *PayToPaymentMethod) GetShopperReference() string {
 // and a boolean to check if the value has been set.
 func (o *PayToPaymentMethod) GetShopperReferenceOk() (*string, bool) {
 	if o == nil || common.IsNil(o.ShopperReference) {
-
 		return nil, false
-
 	}
 	return o.ShopperReference, true
 }
