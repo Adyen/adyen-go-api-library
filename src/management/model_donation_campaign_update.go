@@ -20,7 +20,7 @@ var _ common.MappedNullable = &DonationCampaignUpdate{}
 // DonationCampaignUpdate struct for DonationCampaignUpdate
 type DonationCampaignUpdate struct {
 	// The unique identifiers of the account holders associated with the donation campaign.
-	AccountHolderIds []string                               `json:"accountHolderIds,omitempty"`
+	AccountHolderIds common.NullableSlice[string]           `json:"accountHolderIds,omitempty"`
 	InPerson         NullableInPersonDonationSettingsUpdate `json:"inPerson,omitempty"`
 	// The name of the donation campaign.
 	Name   *string                              `json:"name,omitempty"`
@@ -50,22 +50,22 @@ func (o *DonationCampaignUpdate) GetAccountHolderIds() []string {
 		var ret []string
 		return ret
 	}
-	return o.AccountHolderIds
+	return o.AccountHolderIds.Get()
 }
 
 // GetAccountHolderIdsOk returns a tuple with the AccountHolderIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DonationCampaignUpdate) GetAccountHolderIdsOk() ([]string, bool) {
-	if o == nil || common.IsNil(o.AccountHolderIds) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AccountHolderIds, true
+	return o.AccountHolderIds.Get(), o.AccountHolderIds.IsSet()
 }
 
 // HasAccountHolderIds returns a boolean if a field has been set.
 func (o *DonationCampaignUpdate) HasAccountHolderIds() bool {
-	if o != nil && !common.IsNil(o.AccountHolderIds) {
+	if o != nil && o.AccountHolderIds.IsSet() {
 		return true
 	}
 
@@ -74,7 +74,17 @@ func (o *DonationCampaignUpdate) HasAccountHolderIds() bool {
 
 // SetAccountHolderIds gets a reference to the given []string and assigns it to the AccountHolderIds field.
 func (o *DonationCampaignUpdate) SetAccountHolderIds(v []string) {
-	o.AccountHolderIds = v
+	o.AccountHolderIds.Set(v)
+}
+
+// SetAccountHolderIdsNil sets the value for AccountHolderIds to be an explicit nil
+func (o *DonationCampaignUpdate) SetAccountHolderIdsNil() {
+	o.AccountHolderIds.Set(nil)
+}
+
+// UnsetAccountHolderIds ensures that no value is present for AccountHolderIds, not even an explicit nil
+func (o *DonationCampaignUpdate) UnsetAccountHolderIds() {
+	o.AccountHolderIds.Unset()
 }
 
 // GetInPerson returns the InPerson field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -205,8 +215,8 @@ func (o DonationCampaignUpdate) MarshalJSON() ([]byte, error) {
 
 func (o DonationCampaignUpdate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.AccountHolderIds != nil {
-		toSerialize["accountHolderIds"] = o.AccountHolderIds
+	if o.AccountHolderIds.IsSet() {
+		toSerialize["accountHolderIds"] = o.AccountHolderIds.Get()
 	}
 	if o.InPerson.IsSet() {
 		toSerialize["inPerson"] = o.InPerson.Get()

@@ -20,7 +20,7 @@ var _ common.MappedNullable = &BalanceWebhookSettingInfoUpdate{}
 // BalanceWebhookSettingInfoUpdate struct for BalanceWebhookSettingInfoUpdate
 type BalanceWebhookSettingInfoUpdate struct {
 	// The array of conditions a balance change must meet for Adyen to send the webhook.
-	Conditions []Condition `json:"conditions,omitempty"`
+	Conditions common.NullableSlice[Condition] `json:"conditions,omitempty"`
 	// The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes) of the balance.
 	Currency *string `json:"currency,omitempty"`
 	// The status of the webhook setting. Possible values:  * **active**: You receive a balance webhook if any of the conditions in this setting are met. * **inactive**: You do not receive a balance webhook even if the conditions in this settings are met.
@@ -54,22 +54,22 @@ func (o *BalanceWebhookSettingInfoUpdate) GetConditions() []Condition {
 		var ret []Condition
 		return ret
 	}
-	return o.Conditions
+	return o.Conditions.Get()
 }
 
 // GetConditionsOk returns a tuple with the Conditions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BalanceWebhookSettingInfoUpdate) GetConditionsOk() ([]Condition, bool) {
-	if o == nil || common.IsNil(o.Conditions) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Conditions, true
+	return o.Conditions.Get(), o.Conditions.IsSet()
 }
 
 // HasConditions returns a boolean if a field has been set.
 func (o *BalanceWebhookSettingInfoUpdate) HasConditions() bool {
-	if o != nil && !common.IsNil(o.Conditions) {
+	if o != nil && o.Conditions.IsSet() {
 		return true
 	}
 
@@ -78,7 +78,17 @@ func (o *BalanceWebhookSettingInfoUpdate) HasConditions() bool {
 
 // SetConditions gets a reference to the given []Condition and assigns it to the Conditions field.
 func (o *BalanceWebhookSettingInfoUpdate) SetConditions(v []Condition) {
-	o.Conditions = v
+	o.Conditions.Set(v)
+}
+
+// SetConditionsNil sets the value for Conditions to be an explicit nil
+func (o *BalanceWebhookSettingInfoUpdate) SetConditionsNil() {
+	o.Conditions.Set(nil)
+}
+
+// UnsetConditions ensures that no value is present for Conditions, not even an explicit nil
+func (o *BalanceWebhookSettingInfoUpdate) UnsetConditions() {
+	o.Conditions.Unset()
 }
 
 // GetCurrency returns the Currency field value if set, zero value otherwise.
@@ -219,8 +229,8 @@ func (o BalanceWebhookSettingInfoUpdate) MarshalJSON() ([]byte, error) {
 
 func (o BalanceWebhookSettingInfoUpdate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Conditions != nil {
-		toSerialize["conditions"] = o.Conditions
+	if o.Conditions.IsSet() {
+		toSerialize["conditions"] = o.Conditions.Get()
 	}
 	if !common.IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency

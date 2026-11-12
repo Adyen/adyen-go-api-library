@@ -26,13 +26,13 @@ type InPersonDonationSettingsUpdate struct {
 	DonationFlow *DonationFlow        `json:"donationFlow,omitempty"`
 	DonationType NullableDonationType `json:"donationType,omitempty"`
 	// The merchant accounts for this sales channel that are associated with the donation campaign.
-	MerchantAccounts []string `json:"merchantAccounts,omitempty"`
+	MerchantAccounts common.NullableSlice[string] `json:"merchantAccounts,omitempty"`
 	// Required if `donationFlow` is set to **twoStep**. The time, in milliseconds, that the terminal waits for the shopper to present their card. Defaults to **10000** (10 seconds). Range: 5000 to 15000.
 	PresentCardTimeoutMs common.NullableInt64 `json:"presentCardTimeoutMs,omitempty"`
 	// The time, in milliseconds, that the terminal waits for the shopper to make a selection on the donation screen. Defaults to **10000** (10 seconds). Range: 5000 to 15000.
 	PromptTimeoutMs common.NullableInt64 `json:"promptTimeoutMs,omitempty"`
 	// The Adyen-generated unique identifiers of stores for this sales channel that are associated with the donation campaign.
-	StoreIds []string `json:"storeIds,omitempty"`
+	StoreIds common.NullableSlice[string] `json:"storeIds,omitempty"`
 }
 
 // NewInPersonDonationSettingsUpdate instantiates a new InPersonDonationSettingsUpdate object
@@ -208,22 +208,22 @@ func (o *InPersonDonationSettingsUpdate) GetMerchantAccounts() []string {
 		var ret []string
 		return ret
 	}
-	return o.MerchantAccounts
+	return o.MerchantAccounts.Get()
 }
 
 // GetMerchantAccountsOk returns a tuple with the MerchantAccounts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InPersonDonationSettingsUpdate) GetMerchantAccountsOk() ([]string, bool) {
-	if o == nil || common.IsNil(o.MerchantAccounts) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MerchantAccounts, true
+	return o.MerchantAccounts.Get(), o.MerchantAccounts.IsSet()
 }
 
 // HasMerchantAccounts returns a boolean if a field has been set.
 func (o *InPersonDonationSettingsUpdate) HasMerchantAccounts() bool {
-	if o != nil && !common.IsNil(o.MerchantAccounts) {
+	if o != nil && o.MerchantAccounts.IsSet() {
 		return true
 	}
 
@@ -232,7 +232,17 @@ func (o *InPersonDonationSettingsUpdate) HasMerchantAccounts() bool {
 
 // SetMerchantAccounts gets a reference to the given []string and assigns it to the MerchantAccounts field.
 func (o *InPersonDonationSettingsUpdate) SetMerchantAccounts(v []string) {
-	o.MerchantAccounts = v
+	o.MerchantAccounts.Set(v)
+}
+
+// SetMerchantAccountsNil sets the value for MerchantAccounts to be an explicit nil
+func (o *InPersonDonationSettingsUpdate) SetMerchantAccountsNil() {
+	o.MerchantAccounts.Set(nil)
+}
+
+// UnsetMerchantAccounts ensures that no value is present for MerchantAccounts, not even an explicit nil
+func (o *InPersonDonationSettingsUpdate) UnsetMerchantAccounts() {
+	o.MerchantAccounts.Unset()
 }
 
 // GetPresentCardTimeoutMs returns the PresentCardTimeoutMs field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -327,22 +337,22 @@ func (o *InPersonDonationSettingsUpdate) GetStoreIds() []string {
 		var ret []string
 		return ret
 	}
-	return o.StoreIds
+	return o.StoreIds.Get()
 }
 
 // GetStoreIdsOk returns a tuple with the StoreIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InPersonDonationSettingsUpdate) GetStoreIdsOk() ([]string, bool) {
-	if o == nil || common.IsNil(o.StoreIds) {
+	if o == nil {
 		return nil, false
 	}
-	return o.StoreIds, true
+	return o.StoreIds.Get(), o.StoreIds.IsSet()
 }
 
 // HasStoreIds returns a boolean if a field has been set.
 func (o *InPersonDonationSettingsUpdate) HasStoreIds() bool {
-	if o != nil && !common.IsNil(o.StoreIds) {
+	if o != nil && o.StoreIds.IsSet() {
 		return true
 	}
 
@@ -351,7 +361,17 @@ func (o *InPersonDonationSettingsUpdate) HasStoreIds() bool {
 
 // SetStoreIds gets a reference to the given []string and assigns it to the StoreIds field.
 func (o *InPersonDonationSettingsUpdate) SetStoreIds(v []string) {
-	o.StoreIds = v
+	o.StoreIds.Set(v)
+}
+
+// SetStoreIdsNil sets the value for StoreIds to be an explicit nil
+func (o *InPersonDonationSettingsUpdate) SetStoreIdsNil() {
+	o.StoreIds.Set(nil)
+}
+
+// UnsetStoreIds ensures that no value is present for StoreIds, not even an explicit nil
+func (o *InPersonDonationSettingsUpdate) UnsetStoreIds() {
+	o.StoreIds.Unset()
 }
 
 func (o InPersonDonationSettingsUpdate) MarshalJSON() ([]byte, error) {
@@ -376,8 +396,8 @@ func (o InPersonDonationSettingsUpdate) ToMap() (map[string]interface{}, error) 
 	if o.DonationType.IsSet() {
 		toSerialize["donationType"] = o.DonationType.Get()
 	}
-	if o.MerchantAccounts != nil {
-		toSerialize["merchantAccounts"] = o.MerchantAccounts
+	if o.MerchantAccounts.IsSet() {
+		toSerialize["merchantAccounts"] = o.MerchantAccounts.Get()
 	}
 	if o.PresentCardTimeoutMs.IsSet() {
 		toSerialize["presentCardTimeoutMs"] = o.PresentCardTimeoutMs.Get()
@@ -385,8 +405,8 @@ func (o InPersonDonationSettingsUpdate) ToMap() (map[string]interface{}, error) 
 	if o.PromptTimeoutMs.IsSet() {
 		toSerialize["promptTimeoutMs"] = o.PromptTimeoutMs.Get()
 	}
-	if o.StoreIds != nil {
-		toSerialize["storeIds"] = o.StoreIds
+	if o.StoreIds.IsSet() {
+		toSerialize["storeIds"] = o.StoreIds.Get()
 	}
 	return toSerialize, nil
 }

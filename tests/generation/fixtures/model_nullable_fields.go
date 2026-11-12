@@ -19,21 +19,21 @@ var _ common.MappedNullable = &NullableFields{}
 
 // NullableFields struct for NullableFields
 type NullableFields struct {
-	LegacyBool   common.NullableBool     `json:"legacyBool,omitempty"`
-	LegacyString common.NullableString   `json:"legacyString,omitempty"`
-	LegacyArray  []string                `json:"legacyArray,omitempty"`
-	LegacyRef    *Amount                 `json:"legacyRef,omitempty"`
-	UnionBool    common.NullableBool     `json:"unionBool,omitempty"`
-	UnionString  common.NullableString   `json:"unionString,omitempty"`
-	UnionDate    common.NullableString   `json:"unionDate,omitempty"`
-	UnionInt32   common.NullableInt32    `json:"unionInt32,omitempty"`
-	UnionInt64   common.NullableInt64    `json:"unionInt64,omitempty"`
-	UnionArray   []Amount                `json:"unionArray,omitempty"`
-	UnionEnum    common.NullableString   `json:"unionEnum,omitempty"`
-	UnionRef     NullableAmount          `json:"unionRef,omitempty"`
-	LegacyObject map[string]interface{}  `json:"legacyObject,omitempty"`
-	UnionMap     *map[string]string      `json:"unionMap,omitempty"`
-	UnionAny     *map[string]interface{} `json:"unionAny,omitempty"`
+	LegacyBool   common.NullableBool          `json:"legacyBool,omitempty"`
+	LegacyString common.NullableString        `json:"legacyString,omitempty"`
+	LegacyArray  common.NullableSlice[string] `json:"legacyArray,omitempty"`
+	LegacyRef    *Amount                      `json:"legacyRef,omitempty"`
+	UnionBool    common.NullableBool          `json:"unionBool,omitempty"`
+	UnionString  common.NullableString        `json:"unionString,omitempty"`
+	UnionDate    common.NullableString        `json:"unionDate,omitempty"`
+	UnionInt32   common.NullableInt32         `json:"unionInt32,omitempty"`
+	UnionInt64   common.NullableInt64         `json:"unionInt64,omitempty"`
+	UnionArray   common.NullableSlice[Amount] `json:"unionArray,omitempty"`
+	UnionEnum    common.NullableString        `json:"unionEnum,omitempty"`
+	UnionRef     NullableAmount               `json:"unionRef,omitempty"`
+	LegacyObject map[string]interface{}       `json:"legacyObject,omitempty"`
+	UnionMap     *map[string]string           `json:"unionMap,omitempty"`
+	UnionAny     *map[string]interface{}      `json:"unionAny,omitempty"`
 }
 
 // NewNullableFields instantiates a new NullableFields object
@@ -145,22 +145,22 @@ func (o *NullableFields) GetLegacyArray() []string {
 		var ret []string
 		return ret
 	}
-	return o.LegacyArray
+	return o.LegacyArray.Get()
 }
 
 // GetLegacyArrayOk returns a tuple with the LegacyArray field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NullableFields) GetLegacyArrayOk() ([]string, bool) {
-	if o == nil || common.IsNil(o.LegacyArray) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LegacyArray, true
+	return o.LegacyArray.Get(), o.LegacyArray.IsSet()
 }
 
 // HasLegacyArray returns a boolean if a field has been set.
 func (o *NullableFields) HasLegacyArray() bool {
-	if o != nil && !common.IsNil(o.LegacyArray) {
+	if o != nil && o.LegacyArray.IsSet() {
 		return true
 	}
 
@@ -169,7 +169,17 @@ func (o *NullableFields) HasLegacyArray() bool {
 
 // SetLegacyArray gets a reference to the given []string and assigns it to the LegacyArray field.
 func (o *NullableFields) SetLegacyArray(v []string) {
-	o.LegacyArray = v
+	o.LegacyArray.Set(v)
+}
+
+// SetLegacyArrayNil sets the value for LegacyArray to be an explicit nil
+func (o *NullableFields) SetLegacyArrayNil() {
+	o.LegacyArray.Set(nil)
+}
+
+// UnsetLegacyArray ensures that no value is present for LegacyArray, not even an explicit nil
+func (o *NullableFields) UnsetLegacyArray() {
+	o.LegacyArray.Unset()
 }
 
 // GetLegacyRef returns the LegacyRef field value if set, zero value otherwise.
@@ -425,22 +435,22 @@ func (o *NullableFields) GetUnionArray() []Amount {
 		var ret []Amount
 		return ret
 	}
-	return o.UnionArray
+	return o.UnionArray.Get()
 }
 
 // GetUnionArrayOk returns a tuple with the UnionArray field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NullableFields) GetUnionArrayOk() ([]Amount, bool) {
-	if o == nil || common.IsNil(o.UnionArray) {
+	if o == nil {
 		return nil, false
 	}
-	return o.UnionArray, true
+	return o.UnionArray.Get(), o.UnionArray.IsSet()
 }
 
 // HasUnionArray returns a boolean if a field has been set.
 func (o *NullableFields) HasUnionArray() bool {
-	if o != nil && !common.IsNil(o.UnionArray) {
+	if o != nil && o.UnionArray.IsSet() {
 		return true
 	}
 
@@ -449,7 +459,17 @@ func (o *NullableFields) HasUnionArray() bool {
 
 // SetUnionArray gets a reference to the given []Amount and assigns it to the UnionArray field.
 func (o *NullableFields) SetUnionArray(v []Amount) {
-	o.UnionArray = v
+	o.UnionArray.Set(v)
+}
+
+// SetUnionArrayNil sets the value for UnionArray to be an explicit nil
+func (o *NullableFields) SetUnionArrayNil() {
+	o.UnionArray.Set(nil)
+}
+
+// UnsetUnionArray ensures that no value is present for UnionArray, not even an explicit nil
+func (o *NullableFields) UnsetUnionArray() {
+	o.UnionArray.Unset()
 }
 
 // GetUnionEnum returns the UnionEnum field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -651,8 +671,8 @@ func (o NullableFields) ToMap() (map[string]interface{}, error) {
 	if o.LegacyString.IsSet() {
 		toSerialize["legacyString"] = o.LegacyString.Get()
 	}
-	if o.LegacyArray != nil {
-		toSerialize["legacyArray"] = o.LegacyArray
+	if o.LegacyArray.IsSet() {
+		toSerialize["legacyArray"] = o.LegacyArray.Get()
 	}
 	if !common.IsNil(o.LegacyRef) {
 		toSerialize["legacyRef"] = o.LegacyRef
@@ -672,8 +692,8 @@ func (o NullableFields) ToMap() (map[string]interface{}, error) {
 	if o.UnionInt64.IsSet() {
 		toSerialize["unionInt64"] = o.UnionInt64.Get()
 	}
-	if o.UnionArray != nil {
-		toSerialize["unionArray"] = o.UnionArray
+	if o.UnionArray.IsSet() {
+		toSerialize["unionArray"] = o.UnionArray.Get()
 	}
 	if o.UnionEnum.IsSet() {
 		toSerialize["unionEnum"] = o.UnionEnum.Get()

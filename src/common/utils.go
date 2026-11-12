@@ -256,6 +256,44 @@ func (v *NullableFloat64) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
+// NullableSlice holds an array that is either absent, explicitly null, or set. Its zero value is
+// absent; Set(nil) makes it an explicit null.
+type NullableSlice[T any] struct {
+	value []T
+	isSet bool
+}
+
+func (v NullableSlice[T]) Get() []T {
+	return v.value
+}
+
+func (v *NullableSlice[T]) Set(val []T) {
+	v.value = val
+	v.isSet = true
+}
+
+func (v NullableSlice[T]) IsSet() bool {
+	return v.isSet
+}
+
+func (v *NullableSlice[T]) Unset() {
+	v.value = nil
+	v.isSet = false
+}
+
+func NewNullableSlice[T any](val []T) *NullableSlice[T] {
+	return &NullableSlice[T]{value: val, isSet: true}
+}
+
+func (v NullableSlice[T]) MarshalJSON() ([]byte, error) {
+	return json.Marshal(v.value)
+}
+
+func (v *NullableSlice[T]) UnmarshalJSON(src []byte) error {
+	v.isSet = true
+	return json.Unmarshal(src, &v.value)
+}
+
 type NullableString struct {
 	value *string
 	isSet bool

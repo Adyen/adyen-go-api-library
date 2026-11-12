@@ -26,7 +26,7 @@ type TerminalSettings struct {
 	// Settings for Dynamic Currency Conversion (DCC).
 	Dcc *Dcc `json:"dcc,omitempty"`
 	// Settings for tipping with or without predefined options to choose from. The maximum number of predefined options is four, or three plus the option to enter a custom tip.
-	Gratuities []Gratuity `json:"gratuities,omitempty"`
+	Gratuities common.NullableSlice[Gratuity] `json:"gratuities,omitempty"`
 	// Settings for terminal hardware features.
 	Hardware *Hardware `json:"hardware,omitempty"`
 	// Settings for the home screen.
@@ -196,22 +196,22 @@ func (o *TerminalSettings) GetGratuities() []Gratuity {
 		var ret []Gratuity
 		return ret
 	}
-	return o.Gratuities
+	return o.Gratuities.Get()
 }
 
 // GetGratuitiesOk returns a tuple with the Gratuities field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TerminalSettings) GetGratuitiesOk() ([]Gratuity, bool) {
-	if o == nil || common.IsNil(o.Gratuities) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Gratuities, true
+	return o.Gratuities.Get(), o.Gratuities.IsSet()
 }
 
 // HasGratuities returns a boolean if a field has been set.
 func (o *TerminalSettings) HasGratuities() bool {
-	if o != nil && !common.IsNil(o.Gratuities) {
+	if o != nil && o.Gratuities.IsSet() {
 		return true
 	}
 
@@ -220,7 +220,17 @@ func (o *TerminalSettings) HasGratuities() bool {
 
 // SetGratuities gets a reference to the given []Gratuity and assigns it to the Gratuities field.
 func (o *TerminalSettings) SetGratuities(v []Gratuity) {
-	o.Gratuities = v
+	o.Gratuities.Set(v)
+}
+
+// SetGratuitiesNil sets the value for Gratuities to be an explicit nil
+func (o *TerminalSettings) SetGratuitiesNil() {
+	o.Gratuities.Set(nil)
+}
+
+// UnsetGratuities ensures that no value is present for Gratuities, not even an explicit nil
+func (o *TerminalSettings) UnsetGratuities() {
+	o.Gratuities.Unset()
 }
 
 // GetHardware returns the Hardware field value if set, zero value otherwise.
@@ -1032,8 +1042,8 @@ func (o TerminalSettings) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.Dcc) {
 		toSerialize["dcc"] = o.Dcc
 	}
-	if o.Gratuities != nil {
-		toSerialize["gratuities"] = o.Gratuities
+	if o.Gratuities.IsSet() {
+		toSerialize["gratuities"] = o.Gratuities.Get()
 	}
 	if !common.IsNil(o.Hardware) {
 		toSerialize["hardware"] = o.Hardware

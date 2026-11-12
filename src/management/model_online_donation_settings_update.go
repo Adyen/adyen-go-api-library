@@ -22,9 +22,9 @@ type OnlineDonationSettingsUpdate struct {
 	DefaultAmount NullableDonationAmountUpdate `json:"defaultAmount,omitempty"`
 	DonationType  NullableDonationType         `json:"donationType,omitempty"`
 	// The merchant accounts for this sales channel that are associated with the donation campaign.
-	MerchantAccounts []string `json:"merchantAccounts,omitempty"`
+	MerchantAccounts common.NullableSlice[string] `json:"merchantAccounts,omitempty"`
 	// The Adyen-generated unique identifiers of stores for this sales channel that are associated with the donation campaign.
-	StoreIds []string `json:"storeIds,omitempty"`
+	StoreIds common.NullableSlice[string] `json:"storeIds,omitempty"`
 }
 
 // NewOnlineDonationSettingsUpdate instantiates a new OnlineDonationSettingsUpdate object
@@ -136,22 +136,22 @@ func (o *OnlineDonationSettingsUpdate) GetMerchantAccounts() []string {
 		var ret []string
 		return ret
 	}
-	return o.MerchantAccounts
+	return o.MerchantAccounts.Get()
 }
 
 // GetMerchantAccountsOk returns a tuple with the MerchantAccounts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OnlineDonationSettingsUpdate) GetMerchantAccountsOk() ([]string, bool) {
-	if o == nil || common.IsNil(o.MerchantAccounts) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MerchantAccounts, true
+	return o.MerchantAccounts.Get(), o.MerchantAccounts.IsSet()
 }
 
 // HasMerchantAccounts returns a boolean if a field has been set.
 func (o *OnlineDonationSettingsUpdate) HasMerchantAccounts() bool {
-	if o != nil && !common.IsNil(o.MerchantAccounts) {
+	if o != nil && o.MerchantAccounts.IsSet() {
 		return true
 	}
 
@@ -160,7 +160,17 @@ func (o *OnlineDonationSettingsUpdate) HasMerchantAccounts() bool {
 
 // SetMerchantAccounts gets a reference to the given []string and assigns it to the MerchantAccounts field.
 func (o *OnlineDonationSettingsUpdate) SetMerchantAccounts(v []string) {
-	o.MerchantAccounts = v
+	o.MerchantAccounts.Set(v)
+}
+
+// SetMerchantAccountsNil sets the value for MerchantAccounts to be an explicit nil
+func (o *OnlineDonationSettingsUpdate) SetMerchantAccountsNil() {
+	o.MerchantAccounts.Set(nil)
+}
+
+// UnsetMerchantAccounts ensures that no value is present for MerchantAccounts, not even an explicit nil
+func (o *OnlineDonationSettingsUpdate) UnsetMerchantAccounts() {
+	o.MerchantAccounts.Unset()
 }
 
 // GetStoreIds returns the StoreIds field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -169,22 +179,22 @@ func (o *OnlineDonationSettingsUpdate) GetStoreIds() []string {
 		var ret []string
 		return ret
 	}
-	return o.StoreIds
+	return o.StoreIds.Get()
 }
 
 // GetStoreIdsOk returns a tuple with the StoreIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OnlineDonationSettingsUpdate) GetStoreIdsOk() ([]string, bool) {
-	if o == nil || common.IsNil(o.StoreIds) {
+	if o == nil {
 		return nil, false
 	}
-	return o.StoreIds, true
+	return o.StoreIds.Get(), o.StoreIds.IsSet()
 }
 
 // HasStoreIds returns a boolean if a field has been set.
 func (o *OnlineDonationSettingsUpdate) HasStoreIds() bool {
-	if o != nil && !common.IsNil(o.StoreIds) {
+	if o != nil && o.StoreIds.IsSet() {
 		return true
 	}
 
@@ -193,7 +203,17 @@ func (o *OnlineDonationSettingsUpdate) HasStoreIds() bool {
 
 // SetStoreIds gets a reference to the given []string and assigns it to the StoreIds field.
 func (o *OnlineDonationSettingsUpdate) SetStoreIds(v []string) {
-	o.StoreIds = v
+	o.StoreIds.Set(v)
+}
+
+// SetStoreIdsNil sets the value for StoreIds to be an explicit nil
+func (o *OnlineDonationSettingsUpdate) SetStoreIdsNil() {
+	o.StoreIds.Set(nil)
+}
+
+// UnsetStoreIds ensures that no value is present for StoreIds, not even an explicit nil
+func (o *OnlineDonationSettingsUpdate) UnsetStoreIds() {
+	o.StoreIds.Unset()
 }
 
 func (o OnlineDonationSettingsUpdate) MarshalJSON() ([]byte, error) {
@@ -212,11 +232,11 @@ func (o OnlineDonationSettingsUpdate) ToMap() (map[string]interface{}, error) {
 	if o.DonationType.IsSet() {
 		toSerialize["donationType"] = o.DonationType.Get()
 	}
-	if o.MerchantAccounts != nil {
-		toSerialize["merchantAccounts"] = o.MerchantAccounts
+	if o.MerchantAccounts.IsSet() {
+		toSerialize["merchantAccounts"] = o.MerchantAccounts.Get()
 	}
-	if o.StoreIds != nil {
-		toSerialize["storeIds"] = o.StoreIds
+	if o.StoreIds.IsSet() {
+		toSerialize["storeIds"] = o.StoreIds.Get()
 	}
 	return toSerialize, nil
 }

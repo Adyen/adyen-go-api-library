@@ -24,7 +24,7 @@ func TestNullableFieldsAbsentNullAndValue(t *testing.T) {
 	absent := roundTrip(t, `{}`, &NullableFields{})
 	assert.JSONEq(t, `{}`, absent)
 
-	allNull := `{"legacyBool":null,"legacyString":null,
+	allNull := `{"legacyBool":null,"legacyString":null,"legacyArray":null,"unionArray":null,
 		"unionBool":null,"unionString":null,"unionDate":null,"unionInt32":null,
 		"unionInt64":null,"unionEnum":null,"unionRef":null}`
 	var nulls NullableFields
@@ -69,6 +69,48 @@ func TestNullableFieldsSetters(t *testing.T) {
 	out, err = json.Marshal(m)
 	require.NoError(t, err)
 	assert.JSONEq(t, `{"unionBool":false,"unionRef":null}`, string(out))
+}
+
+func TestNullableArraysAbsentNullEmptyAndValue(t *testing.T) {
+	var absent NullableFields
+	assert.JSONEq(t, `{}`, roundTrip(t, `{}`, &absent))
+	assert.False(t, absent.HasLegacyArray())
+	_, ok := absent.GetUnionArrayOk()
+	assert.False(t, ok)
+
+	var null NullableFields
+	assert.JSONEq(t, `{"legacyArray":null,"unionArray":null}`, roundTrip(t, `{"legacyArray":null,"unionArray":null}`, &null))
+	assert.True(t, null.HasUnionArray())
+	value, ok := null.GetUnionArrayOk()
+	assert.Nil(t, value)
+	assert.True(t, ok)
+
+	var empty NullableFields
+	assert.JSONEq(t, `{"legacyArray":[],"unionArray":[]}`, roundTrip(t, `{"legacyArray":[],"unionArray":[]}`, &empty))
+
+	var set NullableFields
+	assert.JSONEq(t, `{"unionArray":[{"currency":"EUR","value":1}]}`, roundTrip(t, `{"unionArray":[{"currency":"EUR","value":1}]}`, &set))
+	assert.Equal(t, "EUR", set.GetUnionArray()[0].Currency)
+}
+
+func TestNullableArraySetters(t *testing.T) {
+	m := NewNullableFields()
+	m.SetLegacyArray([]string{"a"})
+	m.SetUnionArrayNil()
+	out, err := json.Marshal(m)
+	require.NoError(t, err)
+	assert.JSONEq(t, `{"legacyArray":["a"],"unionArray":null}`, string(out))
+
+	m.SetLegacyArray([]string{})
+	m.UnsetUnionArray()
+	out, err = json.Marshal(m)
+	require.NoError(t, err)
+	assert.JSONEq(t, `{"legacyArray":[]}`, string(out))
+
+	// A struct literal that leaves the field out does not send it.
+	out, err = json.Marshal(NullableFields{})
+	require.NoError(t, err)
+	assert.JSONEq(t, `{}`, string(out))
 }
 
 func TestPlainFieldsTypes(t *testing.T) {
