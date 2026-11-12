@@ -97,10 +97,20 @@ func (a *TerminalThemesMerchantLevelApi) AddTerminalThemeAssetForMerchant(ctx co
 	if r.model != nil {
 		common.ParameterAddToQuery(queryParams, "model", r.model, "")
 	}
+	formFields := map[string]string{}
+	formFiles := map[string]*os.File{}
+	if r.file != nil {
+		formFiles["file"] = r.file
+	}
+	body, contentType, err := common.NewMultipartBody(formFields, formFiles)
+	if err != nil {
+		return *res, nil, err
+	}
+	headerParams["Content-Type"] = contentType
 	httpRes, err := common.SendAPIRequest(
 		ctx,
 		a.Client,
-		nil,
+		body,
 		res,
 		http.MethodPost,
 		a.BasePath()+path,
@@ -443,10 +453,20 @@ func (a *TerminalThemesMerchantLevelApi) EditTerminalThemeAssetForMerchant(ctx c
 	if r.model != nil {
 		common.ParameterAddToQuery(queryParams, "model", r.model, "")
 	}
+	formFields := map[string]string{}
+	formFiles := map[string]*os.File{}
+	if r.file != nil {
+		formFiles["file"] = r.file
+	}
+	body, contentType, err := common.NewMultipartBody(formFields, formFiles)
+	if err != nil {
+		return *res, nil, err
+	}
+	headerParams["Content-Type"] = contentType
 	httpRes, err := common.SendAPIRequest(
 		ctx,
 		a.Client,
-		nil,
+		body,
 		res,
 		http.MethodPost,
 		a.BasePath()+path,

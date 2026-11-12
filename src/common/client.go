@@ -24,6 +24,7 @@ import (
 	"path/filepath"
 	"reflect"
 	"regexp"
+	"sort"
 	"strconv"
 	"strings"
 	"time"
@@ -128,9 +129,9 @@ func SendAPIRequest(
 	// to determine the Content-Type header
 	contentTypes := []string{"application/json"}
 
-	// set Content-Type header
+	// set Content-Type header, unless the operation set it (multipart/form-data)
 	contentType := SelectHeaderContentType(contentTypes)
-	if contentType != "" {
+	if _, set := headerParams["Content-Type"]; !set && contentType != "" {
 		headerParams["Content-Type"] = contentType
 	}
 
@@ -712,6 +713,42 @@ func addFile(w *multipart.Writer, fieldName, path string) error {
 	_, err = io.Copy(part, file)
 
 	return err
+}
+
+// NewMultipartBody encodes form fields and files as multipart/form-data. It returns the body and
+// the Content-Type, which carries the generated boundary. Fields are written in name order so the
+// body is deterministic; each file part is named after the file's base name.
+func NewMultipartBody(fields map[string]string, files map[string]*os.File) (*bytes.Buffer, string, error) {
+	body := &bytes.Buffer{}
+	w := multipart.NewWriter(body)
+	for _, name := range sortedKeys(fields) {
+		if err := w.WriteField(name, fields[name]); err != nil {
+			return nil, "", err
+		}
+	}
+	for _, name := range sortedKeys(files) {
+		file := files[name]
+		part, err := w.CreateFormFile(name, filepath.Base(file.Name()))
+		if err != nil {
+			return nil, "", err
+		}
+		if _, err := io.Copy(part, file); err != nil {
+			return nil, "", err
+		}
+	}
+	if err := w.Close(); err != nil {
+		return nil, "", err
+	}
+	return body, w.FormDataContentType(), nil
+}
+
+func sortedKeys[V any](m map[string]V) []string {
+	keys := make([]string, 0, len(m))
+	for k := range m {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+	return keys
 }
 
 // Prevent trying to import "fmt"

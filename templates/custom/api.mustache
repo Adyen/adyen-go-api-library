@@ -102,10 +102,29 @@ func (a *{{{classname}}}) {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecas
     }
     {{/required}}
 {{/headerParams}}
+{{#isMultipart}}
+    formFields := map[string]string{}
+    formFiles := map[string]*os.File{}
+{{#formParams}}
+    if r.{{paramName}} != nil {
+{{#isFile}}
+        formFiles["{{baseName}}"] = r.{{paramName}}
+{{/isFile}}
+{{^isFile}}
+        formFields["{{baseName}}"] = common.ParameterValueToString(*r.{{paramName}}, "{{paramName}}")
+{{/isFile}}
+    }
+{{/formParams}}
+    body, contentType, err := common.NewMultipartBody(formFields, formFiles)
+    if err != nil {
+        return {{#returnType}}*res, {{/returnType}}nil, err
+    }
+    headerParams["Content-Type"] = contentType
+{{/isMultipart}}
     httpRes, err := common.SendAPIRequest(
         ctx,
         a.Client,
-        {{#bodyParams}}r.{{paramName}}{{/bodyParams}}{{^bodyParams}}nil{{/bodyParams}},
+        {{#bodyParams}}r.{{paramName}}{{/bodyParams}}{{#isMultipart}}body{{/isMultipart}}{{^bodyParams}}{{^isMultipart}}nil{{/isMultipart}}{{/bodyParams}},
         res,
         http.Method{{httpMethod}},
         a.BasePath()+path,
