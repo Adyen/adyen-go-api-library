@@ -174,7 +174,7 @@ func TestAPIVersionConstants(t *testing.T) {
 		"Payment":               "v68",
 		"PaymentsApp":           "v1",
 		"Recurring":             "v68",
-		"Checkout":              "v71",
+		"Checkout":              "v72",
 		"BinLookup":             "v54",
 		"BalanceControl":        "v1",
 		"Disputes":              "v30",

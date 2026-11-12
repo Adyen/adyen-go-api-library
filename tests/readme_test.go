@@ -46,7 +46,7 @@ func LiveEnv() {
 	res, httpRes, err := service.PaymentsApi.PaymentMethods(context.Background(), req)
 
 	fmt.Println(res.GetPaymentMethods(), httpRes, err.(*url.Error).URL)
-	// Output: [] <nil> https://1797a841fbb37ca7-AdyenDemo-checkout-live.adyenpayments.com/checkout/v71/paymentMethods
+	// Output: [] <nil> https://1797a841fbb37ca7-AdyenDemo-checkout-live.adyenpayments.com/checkout/v72/paymentMethods
 }
 
 func BasicAuth() {

@@ -61,7 +61,7 @@ const (
 	PaymentAPIVersion               = "v68"
 	PaymentsAppAPIVersion           = "v1"
 	RecurringAPIVersion             = "v68"
-	CheckoutAPIVersion              = "v71"
+	CheckoutAPIVersion              = "v72"
 	BinLookupAPIVersion             = "v54"
 	BalanceControlAPIVersion        = "v1"
 	EndpointProtocol                = "https://"

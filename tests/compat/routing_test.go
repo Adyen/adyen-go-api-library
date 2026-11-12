@@ -49,7 +49,7 @@ func TestEndpointRouting(t *testing.T) {
 		"BalanceControl":        {"https://pal-test.adyen.com/pal/servlet/BalanceControl/v1", "https://abc123-pal-live.adyenpayments.com/pal/servlet/BalanceControl/v1", ""},
 		"BalancePlatform":       {"https://balanceplatform-api-test.adyen.com/bcl/v2", "https://balanceplatform-api-live.adyen.com/bcl/v2", ""},
 		"BinLookup":             {"https://pal-test.adyen.com/pal/servlet/BinLookup/v54", "https://abc123-pal-live.adyenpayments.com/pal/servlet/BinLookup/v54", ""},
-		"Checkout":              {"https://checkout-test.adyen.com/checkout/v71", "https://abc123-checkout-live.adyenpayments.com/checkout/v71", ""},
+		"Checkout":              {"https://checkout-test.adyen.com/checkout/v72", "https://abc123-checkout-live.adyenpayments.com/checkout/v72", ""},
 		"DataProtection":        {"https://ca-test.adyen.com/ca/services/DataProtectionService/v1", "https://ca-live.adyen.com/ca/services/DataProtectionService/v1", ""},
 		"Disputes":              {"https://ca-test.adyen.com/ca/services/DisputeService/v30", "https://ca-live.adyen.com/ca/services/DisputeService/v30", ""},
 		"LegalEntity":           {"https://kyc-test.adyen.com/lem/v4", "https://kyc-live.adyen.com/lem/v4", ""},
@@ -96,9 +96,9 @@ func TestEndpointRouting(t *testing.T) {
 
 func TestSetEnvironmentSwitchesEndpoints(t *testing.T) {
 	client := adyen.NewClient(&common.Config{ApiKey: "key", Environment: common.TestEnv})
-	assert.Equal(t, "https://checkout-test.adyen.com/checkout/v71", client.Checkout().PaymentsApi.BasePath())
+	assert.Equal(t, "https://checkout-test.adyen.com/checkout/v72", client.Checkout().PaymentsApi.BasePath())
 
 	client.SetEnvironment(common.LiveEnv, "abc123")
-	assert.Equal(t, "https://abc123-checkout-live.adyenpayments.com/checkout/v71", client.Checkout().PaymentsApi.BasePath())
+	assert.Equal(t, "https://abc123-checkout-live.adyenpayments.com/checkout/v72", client.Checkout().PaymentsApi.BasePath())
 	assert.Equal(t, "https://abc123-pal-live.adyenpayments.com/pal/servlet/Payment/v68", client.Payments().PaymentsApi.BasePath())
 }
