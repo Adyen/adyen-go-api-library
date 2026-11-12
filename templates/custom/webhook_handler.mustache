@@ -1,0 +1,21 @@
+{{>partial_header}}
+package {{packageName}}
+
+import (
+	"encoding/json"
+)
+{{#models}}
+{{#model}}
+{{#vendorExtensions.x-webhook-root}}
+
+// Handle{{classname}} parses a webhook JSON body into {{classname}}.
+func Handle{{classname}}(req string) (*{{classname}}, error) {
+	res := {{classname}}{}
+	if err := json.Unmarshal([]byte(req), &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+{{/vendorExtensions.x-webhook-root}}
+{{/model}}
+{{/models}}
