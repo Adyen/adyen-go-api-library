@@ -22,11 +22,13 @@ type PaymentResult struct {
 	// Contains additional information about the payment. Some data fields are included only if you select them first: Go to **Customer Area** > **Developers** > **Additional data**.
 	AdditionalData *map[string]string `json:"additionalData,omitempty"`
 	// Authorisation code: * When the payment is authorised successfully, this field holds the authorisation code for the payment. * When the payment is not authorised, this field is empty.
-	AuthCode  *string `json:"authCode,omitempty"`
+	AuthCode *string `json:"authCode,omitempty"`
+	// Includes the currency of the conversion and the value of the transaction. > This value only applies if you have implemented Dynamic Currency Conversion. For more information, [contact Support](https://www.adyen.help/hc/en-us/requests/new).
 	DccAmount *Amount `json:"dccAmount,omitempty"`
 	// Cryptographic signature used to verify `dccQuote`. > This value only applies if you have implemented Dynamic Currency Conversion. For more information, [contact Support](https://www.adyen.help/hc/en-us/requests/new).
-	DccSignature *string      `json:"dccSignature,omitempty"`
-	FraudResult  *FraudResult `json:"fraudResult,omitempty"`
+	DccSignature *string `json:"dccSignature,omitempty"`
+	// The fraud result properties of the payment.
+	FraudResult *FraudResult `json:"fraudResult,omitempty"`
 	// The URL to direct the shopper to. > In case of SecurePlus, do not redirect a shopper to this URL.
 	IssuerUrl *string `json:"issuerUrl,omitempty"`
 	// The payment session.

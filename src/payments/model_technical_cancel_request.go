@@ -22,12 +22,15 @@ type TechnicalCancelRequest struct {
 	// This field contains additional data, which may be required for a particular modification request.  The additionalData object consists of entries, each of which includes the key and value.
 	AdditionalData *map[string]string `json:"additionalData,omitempty"`
 	// The merchant account that is used to process the payment.
-	MerchantAccount    string            `json:"merchantAccount"`
-	ModificationAmount *Amount           `json:"modificationAmount,omitempty"`
-	MpiData            *ThreeDSecureData `json:"mpiData,omitempty"`
+	MerchantAccount string `json:"merchantAccount"`
+	// The amount that needs to be captured/refunded. Required for `/capture` and `/refund`, not allowed for `/cancel`. The `currency` must match the currency used in authorisation, the `value` must be smaller than or equal to the authorised amount.
+	ModificationAmount *Amount `json:"modificationAmount,omitempty"`
+	// Authentication data produced by an MPI (Mastercard SecureCode, Visa Secure, or Cartes Bancaires).
+	MpiData *ThreeDSecureData `json:"mpiData,omitempty"`
 	// The original merchant reference to cancel.
-	OriginalMerchantReference string                   `json:"originalMerchantReference"`
-	PlatformChargebackLogic   *PlatformChargebackLogic `json:"platformChargebackLogic,omitempty"`
+	OriginalMerchantReference string `json:"originalMerchantReference"`
+	// Defines how to book chargebacks when using [Adyen for Platforms](https://docs.adyen.com/adyen-for-platforms-model).
+	PlatformChargebackLogic *PlatformChargebackLogic `json:"platformChargebackLogic,omitempty"`
 	// Your reference for the payment modification. This reference is visible in Customer Area and in reports. Maximum length: 80 characters.
 	Reference *string `json:"reference,omitempty"`
 	// An array of objects specifying how the amount should be split between accounts when using Adyen for Platforms. For more information, see how to split payments for [platforms](https://docs.adyen.com/platforms/automatic-split-configuration/).

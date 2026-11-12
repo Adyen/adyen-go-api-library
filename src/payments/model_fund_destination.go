@@ -23,16 +23,20 @@ type FundDestination struct {
 	IBAN *string `json:"IBAN,omitempty"`
 	// a map of name/value pairs for passing in additional/industry-specific data
 	AdditionalData *map[string]string `json:"additionalData,omitempty"`
-	BillingAddress *Address           `json:"billingAddress,omitempty"`
-	Card           *Card              `json:"card,omitempty"`
+	// The address where to send the invoice.
+	BillingAddress *Address `json:"billingAddress,omitempty"`
+	// Credit card data.  Optional if `shopperReference` and `selectedRecurringDetailReference` are provided.
+	Card *Card `json:"card,omitempty"`
 	// The `recurringDetailReference` you want to use for this payment. The value `LATEST` can be used to select the most recently stored recurring detail.
 	SelectedRecurringDetailReference *string `json:"selectedRecurringDetailReference,omitempty"`
 	// the email address of the person
 	ShopperEmail *string `json:"shopperEmail,omitempty"`
-	ShopperName  *Name   `json:"shopperName,omitempty"`
+	// the name of the person
+	ShopperName *Name `json:"shopperName,omitempty"`
 	// Required for recurring payments.  Your reference to uniquely identify this shopper, for example user ID or account ID. The value is case-sensitive and must be at least three characters. > Your reference must not include personally identifiable information (PII) such as name or email address.
-	ShopperReference *string      `json:"shopperReference,omitempty"`
-	SubMerchant      *SubMerchant `json:"subMerchant,omitempty"`
+	ShopperReference *string `json:"shopperReference,omitempty"`
+	// Required for Back-to-Back/ purchase driven load in Wallet transactions. Contains the final merchant who will be receiving the money, also known as subMerchant, information.
+	SubMerchant *SubMerchant `json:"subMerchant,omitempty"`
 	// the telephone number of the person
 	TelephoneNumber *string `json:"telephoneNumber,omitempty"`
 	// The purpose of a digital wallet transaction.

@@ -21,11 +21,14 @@ var _ common.MappedNullable = &FundSource{}
 type FundSource struct {
 	// A map of name-value pairs for passing additional or industry-specific data.
 	AdditionalData *map[string]string `json:"additionalData,omitempty"`
-	BillingAddress *Address           `json:"billingAddress,omitempty"`
-	Card           *Card              `json:"card,omitempty"`
+	// The address where to send the invoice.
+	BillingAddress *Address `json:"billingAddress,omitempty"`
+	// Credit card data.  Optional if `shopperReference` and `selectedRecurringDetailReference` are provided.
+	Card *Card `json:"card,omitempty"`
 	// Email address of the person.
 	ShopperEmail *string `json:"shopperEmail,omitempty"`
-	ShopperName  *Name   `json:"shopperName,omitempty"`
+	// Name of the person.
+	ShopperName *Name `json:"shopperName,omitempty"`
 	// Phone number of the person
 	TelephoneNumber *string `json:"telephoneNumber,omitempty"`
 }

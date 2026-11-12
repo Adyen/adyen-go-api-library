@@ -19,11 +19,17 @@ var _ common.MappedNullable = &ApplicationInfo{}
 
 // ApplicationInfo struct for ApplicationInfo
 type ApplicationInfo struct {
-	AdyenLibrary             *CommonField              `json:"adyenLibrary,omitempty"`
-	AdyenPaymentSource       *CommonField              `json:"adyenPaymentSource,omitempty"`
-	ExternalPlatform         *ExternalPlatform         `json:"externalPlatform,omitempty"`
-	MerchantApplication      *CommonField              `json:"merchantApplication,omitempty"`
-	MerchantDevice           *MerchantDevice           `json:"merchantDevice,omitempty"`
+	// Adyen-developed software, such as libraries and plugins, used to interact with the Adyen API. For example, Magento plugin, Java API library, etc.
+	AdyenLibrary *CommonField `json:"adyenLibrary,omitempty"`
+	// Adyen-developed software to get payment details. For example, Checkout SDK, Secured Fields SDK, etc.
+	AdyenPaymentSource *CommonField `json:"adyenPaymentSource,omitempty"`
+	// Third-party developed platform used to initiate payment requests. For example, Magento, Zuora, etc.
+	ExternalPlatform *ExternalPlatform `json:"externalPlatform,omitempty"`
+	// Merchant developed software, such as cashier application, used to interact with the Adyen API.
+	MerchantApplication *CommonField `json:"merchantApplication,omitempty"`
+	// Merchant device information.
+	MerchantDevice *MerchantDevice `json:"merchantDevice,omitempty"`
+	// Shopper interaction device, such as terminal, mobile device or web browser, to initiate payment requests.
 	ShopperInteractionDevice *ShopperInteractionDevice `json:"shopperInteractionDevice,omitempty"`
 }
 

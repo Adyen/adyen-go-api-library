@@ -22,13 +22,16 @@ type AdjustAuthorisationRequest struct {
 	// This field contains additional data, which may be required for a particular modification request.  The additionalData object consists of entries, each of which includes the key and value.
 	AdditionalData *map[string]string `json:"additionalData,omitempty"`
 	// The merchant account that is used to process the payment.
-	MerchantAccount    string            `json:"merchantAccount"`
-	ModificationAmount Amount            `json:"modificationAmount"`
-	MpiData            *ThreeDSecureData `json:"mpiData,omitempty"`
+	MerchantAccount string `json:"merchantAccount"`
+	// The currency and value of the new total amount in minor units. For example, to increase the amount, the value is the sum of the pre-authorized amount and the additional amount.
+	ModificationAmount Amount `json:"modificationAmount"`
+	// Authentication data produced by an MPI (Mastercard SecureCode, Visa Secure, or Cartes Bancaires).
+	MpiData *ThreeDSecureData `json:"mpiData,omitempty"`
 	// The original merchant reference to cancel.
 	OriginalMerchantReference *string `json:"originalMerchantReference,omitempty"`
 	// The original pspReference of the payment to modify. This reference is returned in: * authorisation response * authorisation notification
-	OriginalReference       string                   `json:"originalReference"`
+	OriginalReference string `json:"originalReference"`
+	// Defines how to book chargebacks when using [Adyen for Platforms](https://docs.adyen.com/adyen-for-platforms-model).
 	PlatformChargebackLogic *PlatformChargebackLogic `json:"platformChargebackLogic,omitempty"`
 	// Your reference for the payment modification. This reference is visible in Customer Area and in reports. Maximum length: 80 characters.
 	Reference *string `json:"reference,omitempty"`

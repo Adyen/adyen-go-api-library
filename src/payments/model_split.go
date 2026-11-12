@@ -20,8 +20,9 @@ var _ common.MappedNullable = &Split{}
 // Split struct for Split
 type Split struct {
 	// The unique identifier of the account to which the split amount is booked. Required if `type` is **MarketPlace** or **BalanceAccount**.  * [Classic Platforms integration](https://docs.adyen.com/classic-platforms): The [`accountCode`](https://docs.adyen.com/api-explorer/Account/latest/post/updateAccount#request-accountCode) of the account to which the split amount is booked. * [Balance Platform](https://docs.adyen.com/adyen-for-platforms-model): The [`balanceAccountId`](https://docs.adyen.com/api-explorer/balanceplatform/latest/get/balanceAccounts/_id_#path-id) of the account to which the split amount is booked.
-	Account *string      `json:"account,omitempty"`
-	Amount  *SplitAmount `json:"amount,omitempty"`
+	Account *string `json:"account,omitempty"`
+	// The amount of the split item.  * Required for all split types in the [Classic Platforms integration](https://docs.adyen.com/classic-platforms). * Required if `type` is **BalanceAccount**, **Commission**, **Surcharge**, **Default**, or **VAT** in your [Balance Platform](https://docs.adyen.com/adyen-for-platforms-model) integration.
+	Amount *SplitAmount `json:"amount,omitempty"`
 	// Your description for the split item.
 	Description *string `json:"description,omitempty"`
 	// Your unique reference for the part of the payment booked to the specified `account`.  This is required if `type` is **MarketPlace** ([Classic Platforms integration](https://docs.adyen.com/classic-platforms)) or **BalanceAccount** ([Balance Platform](https://docs.adyen.com/adyen-for-platforms-model)).  For the other types, we also recommend providing a **unique** reference so you can reconcile the split and the associated payment in the transaction overview and in the reports.

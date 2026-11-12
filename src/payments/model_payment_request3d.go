@@ -20,26 +20,35 @@ var _ common.MappedNullable = &PaymentRequest3d{}
 
 // PaymentRequest3d struct for PaymentRequest3d
 type PaymentRequest3d struct {
-	AccountInfo      *AccountInfo `json:"accountInfo,omitempty"`
-	AdditionalAmount *Amount      `json:"additionalAmount,omitempty"`
+	// Shopper account information for 3D Secure 2. > For 3D Secure 2 transactions, we recommend that you include this object to increase the chances of achieving a frictionless flow.
+	AccountInfo *AccountInfo `json:"accountInfo,omitempty"`
+	// If you want a [BIN or card verification](https://docs.adyen.com/payment-methods/cards/bin-data-and-card-verification) request to use a non-zero value, assign this value to `additionalAmount` (while the amount must be still set to 0 to trigger BIN or card verification). Required to be in the same currency as the `amount`.
+	AdditionalAmount *Amount `json:"additionalAmount,omitempty"`
 	// This field contains additional data, which may be required for a particular payment request.  The `additionalData` object consists of entries, each of which includes the key and value.
-	AdditionalData  *map[string]string `json:"additionalData,omitempty"`
-	Amount          *Amount            `json:"amount,omitempty"`
-	ApplicationInfo *ApplicationInfo   `json:"applicationInfo,omitempty"`
-	BillingAddress  *Address           `json:"billingAddress,omitempty"`
-	BrowserInfo     *BrowserInfo       `json:"browserInfo,omitempty"`
+	AdditionalData *map[string]string `json:"additionalData,omitempty"`
+	// The amount information for the transaction (in [minor units](https://docs.adyen.com/development-resources/currency-codes)). For [BIN or card verification](https://docs.adyen.com/payment-methods/cards/bin-data-and-card-verification) requests, set amount to 0 (zero).
+	Amount *Amount `json:"amount,omitempty"`
+	// Information about your application. For more details, see [Building Adyen solutions](https://docs.adyen.com/development-resources/building-adyen-solutions).
+	ApplicationInfo *ApplicationInfo `json:"applicationInfo,omitempty"`
+	// The address where to send the invoice. > The `billingAddress` object is required in the following scenarios. Include all of the fields within this object. >* For 3D Secure 2 transactions in all browser-based and mobile implementations. >* For cross-border payouts to and from Canada.
+	BillingAddress *Address `json:"billingAddress,omitempty"`
+	// The shopper's browser information. > For 3D Secure, the full object is required for web integrations. For mobile app integrations, include the `userAgent` and `acceptHeader` fields to indicate  that your integration can support a redirect in case a payment is routed to 3D Secure 2 redirect.
+	BrowserInfo *BrowserInfo `json:"browserInfo,omitempty"`
 	// The delay between the authorisation and scheduled auto-capture, specified in hours.
 	CaptureDelayHours *int32 `json:"captureDelayHours,omitempty"`
 	// The shopper's date of birth.  Format [ISO-8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DD
-	DateOfBirth     *string     `json:"dateOfBirth,omitempty"`
-	DccQuote        *ForexQuote `json:"dccQuote,omitempty"`
-	DeliveryAddress *Address    `json:"deliveryAddress,omitempty"`
+	DateOfBirth *string `json:"dateOfBirth,omitempty"`
+	// The forex quote as returned in the response of the forex service.
+	DccQuote *ForexQuote `json:"dccQuote,omitempty"`
+	// The address where the purchased goods should be delivered.
+	DeliveryAddress *Address `json:"deliveryAddress,omitempty"`
 	// The date and time the purchased goods should be delivered.  Format [ISO 8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DDThh:mm:ss.sssTZD  Example: 2017-07-17T13:42:40.428+01:00
 	DeliveryDate *time.Time `json:"deliveryDate,omitempty"`
 	// A string containing the shopper's device fingerprint. For more information, refer to [Device fingerprinting](https://docs.adyen.com/risk-management/device-fingerprinting).
 	DeviceFingerprint *string `json:"deviceFingerprint,omitempty"`
 	// An integer value that is added to the normal fraud score. The value can be either positive or negative.
-	FraudOffset  *int32        `json:"fraudOffset,omitempty"`
+	FraudOffset *int32 `json:"fraudOffset,omitempty"`
+	// Contains installment settings. For more information, refer to [Installments](https://docs.adyen.com/payment-methods/cards/credit-card-installments).
 	Installments *Installments `json:"installments,omitempty"`
 	// The `localizedShopperStatement` field lets you use dynamic values for your shopper statement in a local character set. If this parameter is left empty, not provided, or not applicable (in case of cross-border transactions), then **shopperStatement** is used.  Currently, `localizedShopperStatement` is only supported for payments with Visa, Mastercard, JCB, Diners, and Discover.  **Supported characters**: Hiragana, Katakana, Kanji, and alphanumeric.
 	LocalizedShopperStatement *map[string]string `json:"localizedShopperStatement,omitempty"`
@@ -50,15 +59,17 @@ type PaymentRequest3d struct {
 	// The merchant account identifier, with which you want to process the transaction.
 	MerchantAccount string `json:"merchantAccount"`
 	// This reference allows linking multiple transactions to each other for reporting purposes (i.e. order auth-rate). The reference should be unique per billing cycle. The same merchant order reference should never be reused after the first authorised attempt. If used, this field should be supplied for all incoming authorisations. > We strongly recommend you send the `merchantOrderReference` value to benefit from linking payment requests when authorisation retries take place. In addition, we recommend you provide `retry.orderAttemptNumber`, `retry.chainAttemptNumber`, and `retry.skipRetry` values in `PaymentRequest.additionalData`.
-	MerchantOrderReference *string                `json:"merchantOrderReference,omitempty"`
-	MerchantRiskIndicator  *MerchantRiskIndicator `json:"merchantRiskIndicator,omitempty"`
+	MerchantOrderReference *string `json:"merchantOrderReference,omitempty"`
+	// Additional risk fields for 3D Secure 2. > For 3D Secure 2 transactions, we recommend that you include this object to increase the chances of achieving a frictionless flow.
+	MerchantRiskIndicator *MerchantRiskIndicator `json:"merchantRiskIndicator,omitempty"`
 	// Metadata consists of entries, each of which includes a key and a value. Limits: * Maximum 20 key-value pairs per request. When exceeding, the \"177\" error occurs: \"Metadata size exceeds limit\". * Maximum 20 characters per key. * Maximum 80 characters per value.
 	Metadata *map[string]string `json:"metadata,omitempty"`
 	// When you are doing multiple partial (gift card) payments, this is the `pspReference` of the first payment. We use this to link the multiple payments to each other. As your own reference for linking multiple payments, use the `merchantOrderReference`instead.
 	OrderReference *string `json:"orderReference,omitempty"`
 	// Payment authorisation response returned by the card issuer. The `paResponse` field holds the PaRes value received from the card issuer.
-	PaResponse string     `json:"paResponse"`
-	Recurring  *Recurring `json:"recurring,omitempty"`
+	PaResponse string `json:"paResponse"`
+	// The recurring settings for the payment. Use this property when you want to enable [recurring payments](https://docs.adyen.com/classic-integration/recurring-payments).
+	Recurring *Recurring `json:"recurring,omitempty"`
 	// Defines a recurring payment type. Required when creating a token to store payment details or using stored payment details. Allowed values: * `Subscription` – A transaction for a fixed or variable amount, which follows a fixed schedule. * `CardOnFile` – With a card-on-file (CoF) transaction, card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction. * `UnscheduledCardOnFile` – An unscheduled card-on-file (UCoF) transaction is a transaction that occurs on a non-fixed schedule and/or have variable amounts. For example, automatic top-ups when a cardholder's balance drops below a certain amount.
 	RecurringProcessingModel *string `json:"recurringProcessingModel,omitempty"`
 	// The reference to uniquely identify a payment. This reference is used in all communication with you about the payment status. We recommend using a unique value per payment; however, it is not a requirement. If you need to provide multiple references for a transaction, separate them with hyphens (\"-\"). Maximum length: 80 characters.
@@ -77,7 +88,8 @@ type PaymentRequest3d struct {
 	ShopperInteraction *string `json:"shopperInteraction,omitempty"`
 	// The language for the payment. The value combines the two-letter [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) language code with the [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) country code. For example, **nl-NL**.  When using Drop-in/Components, the specified language appears if your front-end global configuration does not set the `locale`.
 	ShopperLocale *string `json:"shopperLocale,omitempty"`
-	ShopperName   *Name   `json:"shopperName,omitempty"`
+	// The shopper's full name.
+	ShopperName *Name `json:"shopperName,omitempty"`
 	// Required for recurring payments.  Your reference to uniquely identify this shopper, for example user ID or account ID. The value is case-sensitive and must be at least three characters. > Your reference must not include personally identifiable information (PII) such as name or email address.
 	ShopperReference *string `json:"shopperReference,omitempty"`
 	// The text to be shown on the shopper's bank statement.  We recommend sending a maximum of 22 characters, otherwise banks might truncate the string.  Allowed characters: **a-z**, **A-Z**, **0-9**, spaces, and special characters **. , ' _ - ? + * /_**.
@@ -89,7 +101,8 @@ type PaymentRequest3d struct {
 	// Required for Adyen for Platforms integrations if you are a platform model. This is your [reference](https://docs.adyen.com/api-explorer/Management/3/post/merchants/(merchantId)/stores#request-reference) (on [balance platform](https://docs.adyen.com/platforms)) or the [storeReference](https://docs.adyen.com/api-explorer/Account/latest/post/updateAccountHolder#request-accountHolderDetails-storeDetails-storeReference) (in the [classic integration](https://docs.adyen.com/classic-platforms/processing-payments/route-payment-to-store/#route-a-payment-to-a-store)) for the ecommerce or point-of-sale store that is processing the payment.
 	Store *string `json:"store,omitempty"`
 	// The shopper's telephone number.  The phone number must include a plus sign (+) and a country code (1-3 digits), followed by the number (4-15 digits). If the value you provide does not follow the guidelines, we do not submit it for authentication. > Required for Visa and JCB transactions that require 3D Secure 2 authentication, if you did not include the `shopperEmail`.
-	TelephoneNumber     *string              `json:"telephoneNumber,omitempty"`
+	TelephoneNumber *string `json:"telephoneNumber,omitempty"`
+	// Request fields for 3D Secure 2. To check if any of the following fields are required for your integration, refer to [Online payments](https://docs.adyen.com/online-payments) or [Classic integration](https://docs.adyen.com/classic-integration) documentation.
 	ThreeDS2RequestData *ThreeDS2RequestData `json:"threeDS2RequestData,omitempty"`
 	// Required to trigger the [authentication-only flow](https://docs.adyen.com/online-payments/3d-secure/authentication-only/). If set to **true**, you will only perform the 3D Secure 2 authentication, and will not proceed to the payment authorization.Default: **false**.
 	ThreeDSAuthenticationOnly *bool `json:"threeDSAuthenticationOnly,omitempty"`

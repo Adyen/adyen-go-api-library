@@ -22,10 +22,12 @@ type DonationRequest struct {
 	// The Adyen account name of the charity.
 	DonationAccount string `json:"donationAccount"`
 	// The merchant account that is used to process the payment.
-	MerchantAccount    string `json:"merchantAccount"`
+	MerchantAccount string `json:"merchantAccount"`
+	// The amount to be donated.The `currency` must match the currency used in authorisation, the `value` must be smaller than or equal to the authorised amount.
 	ModificationAmount Amount `json:"modificationAmount"`
 	// The original pspReference of the payment to modify. This reference is returned in: * authorisation response * authorisation notification
-	OriginalReference       *string                  `json:"originalReference,omitempty"`
+	OriginalReference *string `json:"originalReference,omitempty"`
+	// Defines how to book chargebacks when using [Adyen for Platforms](https://docs.adyen.com/adyen-for-platforms-model).
 	PlatformChargebackLogic *PlatformChargebackLogic `json:"platformChargebackLogic,omitempty"`
 	// Your reference for the payment modification. This reference is visible in Customer Area and in reports. Maximum length: 80 characters.
 	Reference *string `json:"reference,omitempty"`

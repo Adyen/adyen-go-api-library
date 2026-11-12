@@ -32,7 +32,8 @@ type MerchantRiskIndicator struct {
 	DeliveryEmailAddress *string `json:"deliveryEmailAddress,omitempty"`
 	// The estimated delivery time for the shopper to receive the goods. Allowed values: * `electronicDelivery` * `sameDayShipping` * `overnightShipping` * `twoOrMoreDaysShipping`
 	DeliveryTimeframe *string `json:"deliveryTimeframe,omitempty"`
-	GiftCardAmount    *Amount `json:"giftCardAmount,omitempty"`
+	// For prepaid or gift card purchase, the purchase amount total of prepaid or gift card(s).
+	GiftCardAmount *Amount `json:"giftCardAmount,omitempty"`
 	// For prepaid or gift card purchase, total count of individual prepaid or gift cards/codes purchased.
 	GiftCardCount *int32 `json:"giftCardCount,omitempty"`
 	// For prepaid or gift card purchase, [ISO 4217](https://www.iso.org/iso-4217-currency-codes.html) three-digit currency code of the gift card, other than those listed in Table A.5 of the EMVCo 3D Secure Protocol and Core Functions Specification.

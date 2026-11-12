@@ -19,6 +19,7 @@ var _ common.MappedNullable = &ThreeDS2RequestData{}
 
 // ThreeDS2RequestData struct for ThreeDS2RequestData
 type ThreeDS2RequestData struct {
+	// Additional information about the cardholder’s account provided by the 3DS Requestor.
 	AcctInfo *AcctInfo `json:"acctInfo,omitempty"`
 	// Indicates the type of account. For example, for a multi-account card product. Length: 2 characters. Allowed values: * **01** — Not applicable * **02** — Credit * **03** — Debit
 	AcctType *string `json:"acctType,omitempty"`
@@ -37,16 +38,19 @@ type ThreeDS2RequestData struct {
 	/* Use `threeDSRequestorChallengeInd` instead. */
 	ChallengeIndicator *string `json:"challengeIndicator,omitempty"`
 	// The environment of the shopper. Allowed values: * `app` * `browser`
-	DeviceChannel       string               `json:"deviceChannel"`
+	DeviceChannel string `json:"deviceChannel"`
+	// Display options for the 3D Secure 2 SDK. Optional and only for `deviceChannel` **app**.
 	DeviceRenderOptions *DeviceRenderOptions `json:"deviceRenderOptions,omitempty"`
-	HomePhone           *Phone               `json:"homePhone,omitempty"`
+	// The home phone number provided by the cardholder. The phone number must consist of a country code, followed by the number. If the value you provide does not follow the guidelines, we do not submit it for authentication. > Required for Visa and JCB transactions that require 3D Secure 2 authentication, if you did not include the `shopperEmail`, and did not send the shopper's phone number in `telephoneNumber`.
+	HomePhone *Phone `json:"homePhone,omitempty"`
 	// Required for merchants that have been enrolled for 3D Secure 2 by another party than Adyen, mostly [authentication-only integrations](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only). The `mcc` is a four-digit code with which the previously given `acquirerMerchantID` is registered at the scheme.
 	Mcc *string `json:"mcc,omitempty"`
 	// Required for [authentication-only integration](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only). The merchant name that the issuer presents to the shopper if they get a challenge. We recommend to use the same value that you will use in the authorization. Maximum length is 40 characters. > Optional for a [full 3D Secure 2 integration](https://docs.adyen.com/online-payments/3d-secure/native-3ds2/api-integration). Use this field if you are enrolled for 3D Secure 2 with us and want to override the merchant name already configured on your account.
 	MerchantName *string `json:"merchantName,omitempty"`
 	// The `messageVersion` value indicating the 3D Secure 2 protocol version.
 	MessageVersion *string `json:"messageVersion,omitempty"`
-	MobilePhone    *Phone  `json:"mobilePhone,omitempty"`
+	// The mobile phone number provided by the cardholder. The phone number must consist of a country code, followed by the number. If the value you provide does not follow the guidelines, we do not submit it for authentication. > Required for Visa and JCB transactions that require 3D Secure 2 authentication, if you did not include the `shopperEmail`, and did not send the shopper's phone number in `telephoneNumber`.
+	MobilePhone *Phone `json:"mobilePhone,omitempty"`
 	// URL to where the issuer should send the `CRes`. Required if you are not using components for `channel` **Web** or if you are using classic integration `deviceChannel` **browser**.
 	NotificationURL *string `json:"notificationURL,omitempty"`
 	// Value **true** indicates that the transaction was de-tokenised prior to being received by the ACS.
@@ -62,7 +66,8 @@ type ThreeDS2RequestData struct {
 	// The `sdkAppID` value as received from the 3D Secure 2 SDK. Required for `deviceChannel` set to **app**.
 	SdkAppID *string `json:"sdkAppID,omitempty"`
 	// The `sdkEncData` value as received from the 3D Secure 2 SDK. Required for `deviceChannel` set to **app**.
-	SdkEncData     *string         `json:"sdkEncData,omitempty"`
+	SdkEncData *string `json:"sdkEncData,omitempty"`
+	// The `sdkEphemPubKey` value as received from the 3D Secure 2 SDK. Required for `deviceChannel` set to **app**.
 	SdkEphemPubKey *SDKEphemPubKey `json:"sdkEphemPubKey,omitempty"`
 	// The maximum amount of time in minutes for the 3D Secure 2 authentication process. Optional and only for `deviceChannel` set to **app**. Defaults to **60** minutes.
 	SdkMaxTimeout *int32 `json:"sdkMaxTimeout,omitempty"`
@@ -75,14 +80,16 @@ type ThreeDS2RequestData struct {
 	// Completion indicator for the device fingerprinting.
 	ThreeDSCompInd *string `json:"threeDSCompInd,omitempty"`
 	// Indicates the type of Authentication request.
-	ThreeDSRequestorAuthenticationInd  *string                             `json:"threeDSRequestorAuthenticationInd,omitempty"`
+	ThreeDSRequestorAuthenticationInd *string `json:"threeDSRequestorAuthenticationInd,omitempty"`
+	// Information about how the 3DS Requestor authenticated the cardholder before or during the transaction
 	ThreeDSRequestorAuthenticationInfo *ThreeDSRequestorAuthenticationInfo `json:"threeDSRequestorAuthenticationInfo,omitempty"`
 	// Indicates whether a challenge is requested for this transaction. Possible values: * **01** — No preference * **02** — No challenge requested * **03** — Challenge requested (3DS Requestor preference) * **04** — Challenge requested (Mandate) * **05** — No challenge (transactional risk analysis is already performed) * **06** — Data Only
 	ThreeDSRequestorChallengeInd *string `json:"threeDSRequestorChallengeInd,omitempty"`
 	// Required for [authentication-only integration](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only) for Visa. Unique 3D Secure requestor identifier assigned by the Directory Server when you enrol for 3D Secure 2.
 	ThreeDSRequestorID *string `json:"threeDSRequestorID,omitempty"`
 	// Required for [authentication-only integration](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only) for Visa. Unique 3D Secure requestor name assigned by the Directory Server when you enrol for 3D Secure 2.
-	ThreeDSRequestorName                    *string                                  `json:"threeDSRequestorName,omitempty"`
+	ThreeDSRequestorName *string `json:"threeDSRequestorName,omitempty"`
+	// Information about how the 3DS Requestor authenticated the cardholder as part of a previous 3DS transaction.
 	ThreeDSRequestorPriorAuthenticationInfo *ThreeDSRequestorPriorAuthenticationInfo `json:"threeDSRequestorPriorAuthenticationInfo,omitempty"`
 	// URL of the (customer service) website that will be shown to the shopper in case of technical errors during the 3D Secure 2 process.
 	ThreeDSRequestorURL *string `json:"threeDSRequestorURL,omitempty"`
@@ -92,7 +99,8 @@ type ThreeDS2RequestData struct {
 	TransactionType *string `json:"transactionType,omitempty"`
 	// The `whiteListStatus` value returned from a previous 3D Secure 2 transaction, only applicable for 3D Secure 2 protocol version 2.2.0.
 	WhiteListStatus *string `json:"whiteListStatus,omitempty"`
-	WorkPhone       *Phone  `json:"workPhone,omitempty"`
+	// The work phone number provided by the cardholder. The phone number must consist of a country code, followed by the number. If the value you provide does not follow the guidelines, we do not submit it for authentication. > Required for Visa and JCB transactions that require 3D Secure 2 authentication, if you did not include the `shopperEmail`, and did not send the shopper's phone number in `telephoneNumber`.
+	WorkPhone *Phone `json:"workPhone,omitempty"`
 }
 
 // NewThreeDS2RequestData instantiates a new ThreeDS2RequestData object

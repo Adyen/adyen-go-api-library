@@ -19,7 +19,9 @@ var _ common.MappedNullable = &AuthenticationResultResponse{}
 
 // AuthenticationResultResponse struct for AuthenticationResultResponse
 type AuthenticationResultResponse struct {
+	// The result of the 3D Secure authentication.
 	ThreeDS1Result *ThreeDS1Result `json:"threeDS1Result,omitempty"`
+	// The result of the 3D Secure 2 authentication.
 	ThreeDS2Result *ThreeDS2Result `json:"threeDS2Result,omitempty"`
 }
 
