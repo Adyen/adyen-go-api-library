@@ -55,7 +55,7 @@ func TestEndpointRouting(t *testing.T) {
 		"LegalEntity":           {"https://kyc-test.adyen.com/lem/v4", "https://kyc-live.adyen.com/lem/v4", ""},
 		"Management":            {"https://management-test.adyen.com/v3", "https://management-live.adyen.com/v3", ""},
 		"Payments":              {"https://pal-test.adyen.com/pal/servlet/Payment/v68", "https://abc123-pal-live.adyenpayments.com/pal/servlet/Payment/v68", ""},
-		"PaymentsApp":           {"https://management-test.adyen.com/v1", "https://management-live.adyen.com/v1", "base path repeats the version segment (/v1/v1); see the baseline failure inventory"},
+		"PaymentsApp":           {"https://management-test.adyen.com/v1", "https://management-live.adyen.com/v1", ""},
 		"Payout":                {"https://pal-test.adyen.com/pal/servlet/Payout/v68", "https://abc123-pal-live.adyenpayments.com/pal/servlet/Payout/v68", ""},
 		"PosTerminalManagement": {"https://postfmapi-test.adyen.com/postfmapi/terminal/v1", "https://postfmapi-live.adyen.com/postfmapi/terminal/v1", ""},
 		"Recurring":             {"https://pal-test.adyen.com/pal/servlet/Recurring/v68", "https://abc123-pal-live.adyenpayments.com/pal/servlet/Recurring/v68", ""},

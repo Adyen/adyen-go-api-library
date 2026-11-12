@@ -131,8 +131,8 @@ func (c *APIClient) PaymentsApp() *paymentsapp.PaymentsAppApi {
 		c.paymentsApp = &paymentsapp.PaymentsAppApi{
 			Client: c.client,
 			BasePath: func() string {
-				// enpdoint has same base url as management
-				return fmt.Sprintf("%s/%s", c.client.Cfg.PaymentsAppEndpoint, PaymentsAppAPIVersion)
+				// SetEnvironment already appends PaymentsAppAPIVersion to this endpoint
+				return c.client.Cfg.PaymentsAppEndpoint
 			},
 		}
 	}
